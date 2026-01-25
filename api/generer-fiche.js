@@ -114,14 +114,3 @@ table{width:100%;border-collapse:collapse}th,td{border:1pt solid #000;padding:4p
         return res.status(500).json({ success: false, error: error.message });
     }
 };
-```
-
-4. Cliquez **Commit changes**
-
----
-
-### 🔄 Attendez 2 minutes puis testez
-
-Après le redéploiement, ouvrez :
-```
-https://profeps-mtd6626b2-abdelkhalekkacis-projects.vercel.app/api/generer-fiche
