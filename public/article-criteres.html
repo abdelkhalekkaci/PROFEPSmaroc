@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprendre la différence entre critères de réalisation et critères de réussite en EPS. Guide pratique avec exemples concrets.">
+    <meta name="keywords" content="critères de réalisation EPS, critères de réussite EPS, évaluation EPS Maroc, indicateurs EPS">
+    <title>Critères de réalisation vs critères de réussite - Prof EPS</title>
+    <link rel="icon" type="image/png" href="/images/prof_eps.png">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary: #c1272d; --secondary: #006233; --text-primary: #1a1a2e; --text-secondary: #4a4a68; --bg-primary: #ffffff; --bg-secondary: #f8f9fa; --border: #e2e8f0; --border-light: #f1f5f9; --shadow-md: 0 4px 6px rgba(0,0,0,0.07); --shadow-lg: 0 10px 15px rgba(0,0,0,0.1); --radius: 8px; --radius-lg: 12px; --radius-full: 9999px; --transition: all 0.3s ease; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.7; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1rem 2rem; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-light); }
+        .navbar.scrolled { padding: 0.5rem 2rem; box-shadow: var(--shadow-md); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo img { height: 40px; }
+        .nav-menu { display: flex; align-items: center; gap: 2rem; }
+        .nav-link { font-size: 0.9375rem; font-weight: 500; color: var(--text-secondary); }
+        .nav-link:hover { color: var(--primary); }
+        .nav-cta { padding: 0.5rem 1.5rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; font-weight: 600; border-radius: var(--radius-full); }
+        .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
+        .nav-toggle span { width: 25px; height: 2px; background: var(--text-primary); }
+        .article-header { padding: 140px 2rem 3rem; background: linear-gradient(135deg, rgba(193,39,45,0.05), rgba(0,98,51,0.05)); }
+        .article-header-content { max-width: 800px; margin: 0 auto; }
+        .article-category { display: inline-block; padding: 0.5rem 1rem; background: linear-gradient(135deg, rgba(193,39,45,0.1), rgba(0,98,51,0.1)); border-radius: var(--radius-full); font-size: 0.875rem; font-weight: 600; color: var(--primary); margin-bottom: 1rem; }
+        .article-title { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.2; margin-bottom: 1rem; }
+        .article-meta { display: flex; gap: 1.5rem; color: var(--text-secondary); font-size: 0.9rem; flex-wrap: wrap; }
+        .article-content { max-width: 800px; margin: 0 auto; padding: 3rem 2rem; }
+        .article-content h2 { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin: 2rem 0 1rem; padding-top: 1rem; border-top: 2px solid var(--border-light); }
+        .article-content h3 { font-size: 1.25rem; font-weight: 600; margin: 1.5rem 0 0.75rem; }
+        .article-content p { margin-bottom: 1rem; color: var(--text-secondary); }
+        .article-content ul, .article-content ol { margin: 1rem 0 1rem 1.5rem; color: var(--text-secondary); }
+        .article-content li { margin-bottom: 0.5rem; }
+        .article-content strong { color: var(--text-primary); }
+        .info-box { background: linear-gradient(135deg, rgba(193,39,45,0.05), rgba(0,98,51,0.05)); border-left: 4px solid var(--primary); padding: 1.5rem; border-radius: 0 var(--radius) var(--radius) 0; margin: 1.5rem 0; }
+        .info-box h4 { color: var(--primary); margin-bottom: 0.5rem; }
+        .success-box { background: rgba(0,98,51,0.05); border-left: 4px solid var(--secondary); padding: 1.5rem; border-radius: 0 var(--radius) var(--radius) 0; margin: 1.5rem 0; }
+        .success-box h4 { color: var(--secondary); margin-bottom: 0.5rem; }
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0; }
+        .comparison-card { background: var(--bg-secondary); border-radius: var(--radius-lg); padding: 1.5rem; }
+        .comparison-card.realisation { border-top: 4px solid var(--primary); }
+        .comparison-card.reussite { border-top: 4px solid var(--secondary); }
+        .comparison-card h4 { font-size: 1.1rem; margin-bottom: 1rem; }
+        .comparison-card ul { margin: 0; padding-left: 1.25rem; }
+        .table-container { overflow-x: auto; margin: 1.5rem 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        th, td { padding: 0.75rem 1rem; text-align: left; border: 1px solid var(--border); }
+        th { background: var(--bg-secondary); font-weight: 600; }
+        .footer { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; padding: 4rem 2rem 2rem; }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+        .footer-brand img { height: 50px; filter: brightness(0) invert(1); margin-bottom: 1rem; }
+        .footer-brand p { color: rgba(255,255,255,0.7); font-size: 0.9rem; }
+        .footer-title { font-weight: 600; margin-bottom: 1.5rem; }
+        .footer-links { display: flex; flex-direction: column; gap: 0.5rem; }
+        .footer-links a { color: rgba(255,255,255,0.7); font-size: 0.9rem; }
+        .footer-links a:hover { color: white; }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; }
+        .footer-copyright { color: rgba(255,255,255,0.5); font-size: 0.875rem; }
+        .footer-social { display: flex; gap: 1rem; font-size: 1.25rem; }
+        @media (max-width: 968px) { .nav-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 1.5rem; box-shadow: var(--shadow-lg); } .nav-menu.active { display: flex; } .nav-toggle { display: flex; } .footer-grid { grid-template-columns: 1fr 1fr; } .comparison-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 640px) { .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo"><img src="/images/prof_eps.png" alt="Prof EPS"></a>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="generateur.html" class="nav-link">Générateur</a>
+                <a href="blog.html" class="nav-link">Blog</a>
+                <a href="a-propos.html" class="nav-link">À propos</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="generateur.html" class="nav-cta">✨ Créer une fiche</a>
+            </div>
+            <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="article-header-content">
+            <span class="article-category">🎯 Pédagogie</span>
+            <h1 class="article-title">Critères de réalisation vs critères de réussite : quelle différence ?</h1>
+            <div class="article-meta"><span>📅 12 Jan 2025</span><span>⏱️ 5 min</span><span>👤 Prof EPS</span></div>
+        </div>
+    </header>
+
+    <article class="article-content">
+        <p>La distinction entre <strong>critères de réalisation</strong> et <strong>critères de réussite</strong> est fondamentale en EPS. Comprendre cette différence vous permettra de mieux construire vos situations d'apprentissage et d'évaluer plus efficacement vos élèves.</p>
+
+        <h2>1. Définitions</h2>
+
+        <div class="comparison-grid">
+            <div class="comparison-card realisation">
+                <h4>🔧 Critères de réalisation</h4>
+                <p><strong>Le "COMMENT"</strong></p>
+                <p>Ce sont les <strong>opérations à effectuer</strong> pour réussir la tâche. Ils décrivent les actions motrices, les procédures techniques.</p>
+                <ul>
+                    <li>Décrivent le geste technique</li>
+                    <li>Orientent l'action de l'élève</li>
+                    <li>Servent de repères pour l'apprentissage</li>
+                </ul>
+            </div>
+            <div class="comparison-card reussite">
+                <h4>✅ Critères de réussite</h4>
+                <p><strong>Le "QUOI"</strong></p>
+                <p>Ce sont les <strong>indicateurs observables</strong> qui permettent de dire si la tâche est réussie ou non. Ils sont mesurables.</p>
+                <ul>
+                    <li>Décrivent le résultat attendu</li>
+                    <li>Permettent l'évaluation</li>
+                    <li>Sont quantifiables ou observables</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <h4>📌 En résumé</h4>
+            <p><strong>Critères de réalisation</strong> = Comment faire ?<br>
+            <strong>Critères de réussite</strong> = C'est réussi quand... ?</p>
+        </div>
+
+        <h2>2. Exemples concrets</h2>
+
+        <h3>Exemple 1 : Passe en Handball</h3>
+        <div class="table-container">
+            <table>
+                <tr><th>Critères de réalisation</th><th>Critères de réussite</th></tr>
+                <tr>
+                    <td>
+                        <ul>
+                            <li>Armer le bras en arrière</li>
+                            <li>Pied opposé en avant</li>
+                            <li>Rotation du buste</li>
+                            <li>Extension du bras vers la cible</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>La balle arrive à hauteur de poitrine</li>
+                            <li>Le partenaire réceptionne sans se déplacer</li>
+                            <li>8 passes réussies sur 10</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <h3>Exemple 2 : Roulade avant en Gymnastique</h3>
+        <div class="table-container">
+            <table>
+                <tr><th>Critères de réalisation</th><th>Critères de réussite</th></tr>
+                <tr>
+                    <td>
+                        <ul>
+                            <li>Menton collé à la poitrine</li>
+                            <li>Dos arrondi</li>
+                            <li>Pousser sur les jambes</li>
+                            <li>Mains posées au sol</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>Rouler dans l'axe</li>
+                            <li>Se relever sans les mains</li>
+                            <li>Enchaîner 3 roulades consécutives</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <h3>Exemple 3 : Course de vitesse</h3>
+        <div class="table-container">
+            <table>
+                <tr><th>Critères de réalisation</th><th>Critères de réussite</th></tr>
+                <tr>
+                    <td>
+                        <ul>
+                            <li>Position de départ groupée</li>
+                            <li>Poussée explosive</li>
+                            <li>Regard vers l'avant</li>
+                            <li>Bras synchronisés avec les jambes</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>Réagir au signal en moins de 0.3s</li>
+                            <li>Atteindre sa vitesse max avant 20m</li>
+                            <li>Améliorer son temps de 0.5s</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <h2>3. Utilisation pédagogique</h2>
+
+        <h3>Pour l'enseignant</h3>
+        <ul>
+            <li>Les <strong>critères de réalisation</strong> servent à donner des consignes claires</li>
+            <li>Les <strong>critères de réussite</strong> servent à construire les barèmes d'évaluation</li>
+        </ul>
+
+        <h3>Pour l'élève</h3>
+        <ul>
+            <li>Les <strong>critères de réalisation</strong> lui indiquent comment s'améliorer</li>
+            <li>Les <strong>critères de réussite</strong> lui permettent de s'auto-évaluer</li>
+        </ul>
+
+        <div class="success-box">
+            <h4>💡 Conseil pratique</h4>
+            <p>Communiquez <strong>toujours les deux types de critères</strong> aux élèves avant une situation d'apprentissage. Cela leur permet de comprendre à la fois ce qu'ils doivent faire et comment savoir s'ils ont réussi.</p>
+        </div>
+
+        <h2>4. Erreurs à éviter</h2>
+        <ul>
+            <li>❌ Confondre les deux types de critères</li>
+            <li>❌ Donner uniquement des critères de réussite sans expliquer comment faire</li>
+            <li>❌ Formuler des critères trop vagues ou non observables</li>
+            <li>❌ Multiplier les critères (3-4 maximum de chaque type)</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+        <p>Maîtriser la distinction entre critères de réalisation et de réussite est essentiel pour tout professeur d'EPS. Ces deux outils sont complémentaires et permettent de guider efficacement l'apprentissage des élèves.</p>
+
+        <p>Notre <a href="generateur.html" style="color: var(--primary); font-weight: 600;">générateur de fiches</a> intègre automatiquement ces critères dans vos préparations !</p>
+    </article>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand"><a href="index.html"><img src="/images/prof_eps.png" alt="Prof EPS"></a><p>Le premier générateur intelligent de fiches pédagogiques pour les professeurs d'EPS au Maroc.</p></div>
+            <div><h4 class="footer-title">Navigation</h4><div class="footer-links"><a href="index.html">Accueil</a><a href="generateur.html">Générateur</a><a href="blog.html">Blog</a><a href="a-propos.html">À propos</a></div></div>
+            <div><h4 class="footer-title">Ressources</h4><div class="footer-links"><a href="article-op.html">Orientations Pédagogiques</a><a href="article-eval.html">Évaluation en EPS</a><a href="article-securite.html">Sécurité en EPS</a></div></div>
+            <div><h4 class="footer-title">Contact</h4><div class="footer-links"><a href="mailto:epsprof.assistance@gmail.com">📧 epsprof.assistance@gmail.com</a><a href="https://www.facebook.com/profepsma" target="_blank">📘 Facebook</a><a href="https://www.instagram.com/profepsma/" target="_blank">📸 Instagram</a></div></div>
+        </div>
+        <div class="footer-bottom"><p class="footer-copyright">© 2025 Prof EPS. Tous droits réservés.</p><div class="footer-social"><a href="https://www.facebook.com/profepsma" target="_blank">📘</a><a href="https://www.instagram.com/profepsma/" target="_blank">📸</a><a href="mailto:epsprof.assistance@gmail.com">📧</a></div></div>
+    </footer>
+    <script>
+        window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50); });
+        document.getElementById('navToggle').addEventListener('click', () => { document.getElementById('navMenu').classList.toggle('active'); });
+    </script>
+</body>
+</html>

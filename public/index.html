@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Prof EPS - Générateur de fiches pédagogiques EPS conformes aux Orientations Pédagogiques 2007-2009. Outil gratuit pour professeurs d'EPS au Maroc.">
+    <meta name="keywords" content="Prof EPS, EPS Maroc, fiche pédagogique EPS, générateur fiche EPS, orientations pédagogiques 2007, orientations pédagogiques 2009, collège Maroc, lycée Maroc">
+    
+    <title>Prof EPS | Générateur de fiches pédagogiques - Collège & Lycée Maroc</title>
+    
+    <link rel="icon" type="image/png" href="/images/prof_eps.png">
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Prof EPS - Générateur de fiches pédagogiques EPS">
+    <meta property="og:description" content="Créez gratuitement des fiches pédagogiques EPS conformes aux OP 2007-2009 du Maroc">
+    <meta property="og:image" content="/images/prof_eps.png">
+    <meta property="og:type" content="website">
+    
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #c1272d;
+            --secondary: #006233;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a68;
+            --text-light: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --border: #e2e8f0;
+            --border-light: #f1f5f9;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1);
+            --radius: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            --spacing-3xl: 4rem;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Plus Jakarta Sans', var(--font-sans);
+            --transition: all 0.3s ease;
+        }
+        
+        body { font-family: var(--font-sans); background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: var(--spacing-md) var(--spacing-xl); background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-light); transition: var(--transition); }
+        .navbar.scrolled { padding: var(--spacing-sm) var(--spacing-xl); box-shadow: var(--shadow-md); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo img { height: 60px; transition: var(--transition); }
+        .navbar.scrolled .nav-logo img { height: 50px; }
+        .nav-menu { display: flex; align-items: center; gap: var(--spacing-xl); }
+        .nav-link { font-size: 0.9375rem; font-weight: 500; color: var(--text-secondary); padding: var(--spacing-sm) 0; position: relative; }
+        .nav-link:hover, .nav-link.active { color: var(--primary); }
+        .nav-link.active::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--primary); border-radius: 2px; }
+        .nav-cta { display: inline-flex; align-items: center; gap: var(--spacing-sm); padding: var(--spacing-sm) var(--spacing-lg); background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; font-weight: 600; font-size: 0.9375rem; border-radius: var(--radius-full); box-shadow: var(--shadow-md); }
+        .nav-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+        .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
+        .nav-toggle span { width: 25px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: var(--transition); }
+        
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px var(--spacing-xl) var(--spacing-3xl); background: linear-gradient(135deg, rgba(193,39,45,0.03) 0%, rgba(0,98,51,0.03) 100%); position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 80%; height: 150%; background: radial-gradient(circle, rgba(193,39,45,0.05) 0%, transparent 70%); pointer-events: none; }
+        .hero-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-3xl); align-items: center; }
+        .hero-badge { display: inline-flex; align-items: center; gap: var(--spacing-sm); padding: var(--spacing-sm) var(--spacing-md); background: linear-gradient(135deg, rgba(193,39,45,0.1), rgba(0,98,51,0.1)); border-radius: var(--radius-full); font-size: 0.875rem; font-weight: 600; color: var(--primary); margin-bottom: var(--spacing-lg); }
+        .hero-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.1; color: var(--text-primary); margin-bottom: var(--spacing-lg); }
+        .hero-title span { background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-description { font-size: 1.125rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--spacing-xl); max-width: 540px; }
+        .hero-buttons { display: flex; gap: var(--spacing-md); flex-wrap: wrap; }
+        .btn { display: inline-flex; align-items: center; gap: var(--spacing-sm); padding: var(--spacing-md) var(--spacing-xl); font-weight: 600; font-size: 1rem; border-radius: var(--radius-full); transition: var(--transition); cursor: pointer; border: none; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; box-shadow: var(--shadow-lg); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: var(--shadow-xl); }
+        .btn-secondary { background: var(--bg-primary); color: var(--text-primary); border: 2px solid var(--border); }
+        .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
+        
+        .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
+        .hero-card { background: white; border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); padding: var(--spacing-xl); max-width: 450px; transform: rotate(2deg); position: relative; }
+        .hero-card::before { content: ''; position: absolute; inset: -3px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: var(--radius-xl); z-index: -1; opacity: 0.3; }
+        .hero-card-header { display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: var(--spacing-lg); padding-bottom: var(--spacing-md); border-bottom: 2px solid var(--border-light); }
+        .hero-card-icon { width: 50px; height: 50px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+        .hero-card-title { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; }
+        .hero-card-subtitle { font-size: 0.875rem; color: var(--text-light); }
+        .hero-card-content { display: flex; flex-direction: column; gap: var(--spacing-md); }
+        .hero-card-item { display: flex; align-items: center; gap: var(--spacing-md); padding: var(--spacing-sm); background: var(--bg-secondary); border-radius: var(--radius); }
+        .hero-card-item-icon { font-size: 1.25rem; }
+        .hero-card-item-text { font-size: 0.9rem; color: var(--text-secondary); }
+        
+        .features { padding: var(--spacing-3xl) var(--spacing-xl); background: var(--bg-secondary); }
+        .section-container { max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: var(--spacing-3xl); }
+        .section-badge { display: inline-flex; align-items: center; gap: var(--spacing-sm); padding: var(--spacing-sm) var(--spacing-md); background: linear-gradient(135deg, rgba(193,39,45,0.1), rgba(0,98,51,0.1)); border-radius: var(--radius-full); font-size: 0.875rem; font-weight: 600; color: var(--primary); margin-bottom: var(--spacing-md); }
+        .section-title { font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 700; color: var(--text-primary); margin-bottom: var(--spacing-md); }
+        .section-description { font-size: 1.125rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-xl); }
+        .feature-card { background: var(--bg-primary); border-radius: var(--radius-xl); padding: var(--spacing-xl); box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid var(--border-light); }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .feature-icon { width: 60px; height: 60px; background: linear-gradient(135deg, rgba(193,39,45,0.1), rgba(0,98,51,0.1)); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 1.75rem; margin-bottom: var(--spacing-lg); }
+        .feature-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: var(--spacing-sm); }
+        .feature-description { color: var(--text-secondary); line-height: 1.7; }
+        
+        .stats { padding: var(--spacing-3xl) var(--spacing-xl); background: linear-gradient(135deg, var(--primary), var(--secondary)); }
+        .stats-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--spacing-xl); text-align: center; }
+        .stat-item { color: white; }
+        .stat-number { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: var(--spacing-xs); }
+        .stat-label { font-size: 0.9375rem; opacity: 0.9; }
+        
+        .cta { padding: var(--spacing-3xl) var(--spacing-xl); text-align: center; background: var(--bg-secondary); }
+        .cta-box { max-width: 700px; margin: 0 auto; background: var(--bg-primary); border-radius: var(--radius-xl); padding: var(--spacing-3xl); box-shadow: var(--shadow-lg); border: 1px solid var(--border-light); }
+        .cta-title { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; margin-bottom: var(--spacing-md); }
+        .cta-description { color: var(--text-secondary); margin-bottom: var(--spacing-xl); }
+        
+        .footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: var(--spacing-3xl) var(--spacing-xl) var(--spacing-xl); }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--spacing-3xl); margin-bottom: var(--spacing-3xl); }
+        .footer-brand img { height: 50px; filter: brightness(0) invert(1); margin-bottom: var(--spacing-md); }
+        .footer-brand p { color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.7; }
+        .footer-title { font-size: 1rem; font-weight: 600; margin-bottom: var(--spacing-lg); }
+        .footer-links { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+        .footer-links a { color: rgba(255,255,255,0.7); font-size: 0.9rem; transition: var(--transition); }
+        .footer-links a:hover { color: white; }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: var(--spacing-xl); border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; }
+        .footer-copyright { color: rgba(255,255,255,0.5); font-size: 0.875rem; }
+        .footer-social { display: flex; gap: var(--spacing-md); }
+        .footer-social a { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; transition: var(--transition); }
+        .footer-social a:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
+        .footer-social svg { width: 20px; height: 20px; fill: white; }
+        .social-icon { display: inline-flex; align-items: center; gap: var(--spacing-sm); }
+        .social-icon svg { width: 18px; height: 18px; fill: currentColor; }
+        
+        @media (max-width: 968px) {
+            .nav-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: var(--spacing-lg); box-shadow: var(--shadow-lg); gap: var(--spacing-md); }
+            .nav-menu.active { display: flex; }
+            .nav-toggle { display: flex; }
+            .hero-container { grid-template-columns: 1fr; text-align: center; }
+            .hero-description { margin: 0 auto var(--spacing-xl); }
+            .hero-buttons { justify-content: center; }
+            .hero-visual { order: -1; }
+            .hero-card { transform: none; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        
+        @media (max-width: 640px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: var(--spacing-md); text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="/images/prof_eps.png" alt="Prof EPS">
+            </a>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link active">Accueil</a>
+                <a href="generateur.html" class="nav-link">Générateur</a>
+                <a href="blog.html" class="nav-link">Blog</a>
+                <a href="a-propos.html" class="nav-link">À propos</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="generateur.html" class="nav-cta"><span>✨</span> Créer une fiche</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <span class="hero-badge">Conforme aux OP 2007-2009</span>
+                <h1 class="hero-title">Créez vos <span>fiches pédagogiques</span> EPS en quelques clics</h1>
+                <p class="hero-description">Le premier générateur intelligent de fiches pédagogiques pour les professeurs d'éducation physique et sportive au Maroc. Gagnez du temps et concentrez-vous sur l'essentiel : vos élèves.</p>
+                <div class="hero-buttons">
+                    <a href="generateur.html" class="btn btn-primary"><span>🚀</span> Générer ma fiche</a>
+                    <a href="blog.html" class="btn btn-secondary"><span>📚</span> Lire le blog</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="hero-card-header">
+                        <div class="hero-card-icon">📋</div>
+                        <div>
+                            <div class="hero-card-title">Fiche de séance</div>
+                            <div class="hero-card-subtitle">Handball - 2ème AC</div>
+                        </div>
+                    </div>
+                    <div class="hero-card-content">
+                        <div class="hero-card-item"><span class="hero-card-item-icon">🎯</span><span class="hero-card-item-text">Objectif : Maîtriser la passe à 10</span></div>
+                        <div class="hero-card-item"><span class="hero-card-item-icon">⏱️</span><span class="hero-card-item-text">Durée : 55 minutes</span></div>
+                        <div class="hero-card-item"><span class="hero-card-item-icon">👥</span><span class="hero-card-item-text">Effectif : 35 élèves</span></div>
+                        <div class="hero-card-item"><span class="hero-card-item-icon">✅</span><span class="hero-card-item-text">Conforme OP 2009</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-badge">⚡ Fonctionnalités</span>
+                <h2 class="section-title">Tout ce dont vous avez besoin</h2>
+                <p class="section-description">Des outils pensés pour simplifier le quotidien des professeurs d'EPS au Maroc.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Conforme aux OP</h3>
+                    <p class="feature-description">Fiches alignées sur les Orientations Pédagogiques 2007-2009 du Ministère de l'Éducation Nationale.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Rapide & Simple</h3>
+                    <p class="feature-description">Générez une fiche complète en moins de 2 minutes. Sélectionnez, personnalisez, téléchargez.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Toutes les APS</h3>
+                    <p class="feature-description">Handball, Football, Basketball, Volleyball, Athlétisme, Gymnastique et bien plus.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Multi-supports</h3>
+                    <p class="feature-description">Accessible sur ordinateur, tablette et smartphone. Créez vos fiches où que vous soyez.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    <h3 class="feature-title">Collège & Lycée</h3>
+                    <p class="feature-description">Adapté à tous les niveaux : 1ère AC, 2ème AC, 3ème AC, Tronc Commun, 1ère Bac, 2ème Bac.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💾</div>
+                    <h3 class="feature-title">Export PDF</h3>
+                    <p class="feature-description">Téléchargez vos fiches au format PDF, prêtes à imprimer pour vos séances.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item"><div class="stat-number">500+</div><div class="stat-label">Fiches générées</div></div>
+            <div class="stat-item"><div class="stat-number">100+</div><div class="stat-label">Professeurs actifs</div></div>
+            <div class="stat-item"><div class="stat-number">10+</div><div class="stat-label">APS disponibles</div></div>
+            <div class="stat-item"><div class="stat-number">100%</div><div class="stat-label">Gratuit</div></div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="cta-box">
+            <h2 class="cta-title">Prêt à créer votre première fiche ?</h2>
+            <p class="cta-description">Rejoignez la communauté des professeurs d'EPS qui gagnent du temps grâce à Prof EPS.</p>
+            <a href="generateur.html" class="btn btn-primary"><span>🚀</span> Commencer maintenant</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html"><img src="/images/prof_eps.png" alt="Prof EPS"></a>
+                <p>Le premier générateur intelligent de fiches pédagogiques pour les professeurs d'éducation physique et sportive au Maroc.</p>
+            </div>
+            <div>
+                <h4 class="footer-title">Navigation</h4>
+                <div class="footer-links">
+                    <a href="index.html">Accueil</a>
+                    <a href="generateur.html">Générateur</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="a-propos.html">À propos</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer-title">Ressources</h4>
+                <div class="footer-links">
+                    <a href="blog.html">Articles</a>
+                    <a href="article-op.html">Orientations Pédagogiques</a>
+                    <a href="article-eval.html">Évaluation en EPS</a>
+                    <a href="article-securite.html">Sécurité en EPS</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer-title">Contact</h4>
+                <div class="footer-links">
+                    <a href="mailto:epsprof.assistance@gmail.com" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        epsprof.assistance@gmail.com
+                    </a>
+                    <a href="https://www.facebook.com/profepsma" target="_blank" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        Facebook
+                    </a>
+                    <a href="https://www.instagram.com/profepsma/" target="_blank" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        Instagram
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copyright">© 2025 Prof EPS. Tous droits réservés.</p>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/profepsma" target="_blank" aria-label="Facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/profepsma/" target="_blank" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                <a href="mailto:epsprof.assistance@gmail.com" aria-label="Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+        
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

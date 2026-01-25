@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog Prof EPS - Articles, conseils pédagogiques et actualités pour les professeurs d'éducation physique et sportive au Maroc.">
+    <meta name="keywords" content="Prof EPS, EPS Maroc, blog, articles, pédagogie, conseils, actualités, éducation physique">
+    
+    <title>Blog - Prof EPS | Articles et conseils pédagogiques</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="/images/prof_eps.png">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Blog Prof EPS - Articles pédagogiques">
+    <meta property="og:description" content="Découvrez nos articles sur l'enseignement de l'EPS au Maroc">
+    <meta property="og:image" content="/images/prof_eps.png">
+    <meta property="og:type" content="website">
+    
+    <style>
+        .blog-hero {
+            padding: 140px var(--spacing-xl) var(--spacing-2xl);
+            background: linear-gradient(135deg, rgba(193, 39, 45, 0.05) 0%, rgba(0, 98, 51, 0.05) 100%);
+            text-align: center;
+        }
+        
+        .blog-section {
+            padding: var(--spacing-3xl) var(--spacing-xl);
+        }
+        
+        .blog-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* Featured Article */
+        .featured-article {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: var(--spacing-2xl);
+            margin-bottom: var(--spacing-3xl);
+            background: var(--bg-card);
+            border-radius: var(--radius-2xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-light);
+        }
+        
+        .featured-image {
+            height: 100%;
+            min-height: 400px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .featured-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        
+        .featured-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(193, 39, 45, 0.6), rgba(0, 98, 51, 0.6));
+            z-index: 1;
+        }
+        
+        .featured-image span,
+        .featured-image .emoji-fallback {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .featured-content {
+            padding: var(--spacing-2xl);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .featured-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: var(--spacing-xs) var(--spacing-md);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: var(--radius-full);
+            text-transform: uppercase;
+            width: fit-content;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .featured-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.3;
+        }
+        
+        .featured-title a:hover {
+            color: var(--primary);
+        }
+        
+        .featured-excerpt {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .featured-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+            color: var(--text-light);
+            font-size: 0.875rem;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .featured-meta-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+        
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--spacing-xl);
+        }
+        
+        .blog-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .blog-card-image {
+            height: 200px;
+            background-color: #f0f4f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blog-card-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 2;
+        }
+        
+        .blog-card-image .emoji-fallback {
+            font-size: 3rem;
+            z-index: 1;
+            position: absolute;
+        }
+        
+        .blog-card-category {
+            position: absolute;
+            top: var(--spacing-md);
+            left: var(--spacing-md);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            background: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border-radius: var(--radius);
+            text-transform: uppercase;
+        }
+        
+        .blog-card-body {
+            padding: var(--spacing-lg);
+        }
+        
+        .blog-card-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.4;
+        }
+        
+        .blog-card-title a:hover {
+            color: var(--primary);
+        }
+        
+        .blog-card-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            line-height: 1.7;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .blog-card-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.8125rem;
+            color: var(--text-light);
+        }
+        
+        .blog-card-date {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+        
+        .blog-card-read {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+        
+        /* Categories */
+        .categories-section {
+            background: var(--bg-secondary);
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+        }
+        
+        .category-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            text-align: center;
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .category-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .category-count {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+        
+        /* Newsletter */
+        .newsletter-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: var(--spacing-md);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: var(--spacing-md) var(--spacing-lg);
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: 1rem;
+            font-family: var(--font-primary);
+        }
+        
+        .newsletter-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-3xl);
+        }
+        
+        .pagination-btn {
+            width: 45px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+        
+        .pagination-btn:hover,
+        .pagination-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+        
+        @media (max-width: 968px) {
+            .featured-article {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-image {
+                min-height: 250px;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+        /* Social Icons SVG */
+        .footer-social a { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; transition: all 0.3s ease; }
+        .footer-social a:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
+        .footer-social svg { width: 20px; height: 20px; fill: white; }
+        .footer-links .social-icon { display: inline-flex; align-items: center; gap: 0.5rem; }
+        .footer-links svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.7); }
+        .footer-links a:hover svg { fill: white; }
+
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+                        <a href="index.html" class="nav-logo">
+                <img src="/images/prof_eps.png" alt="Prof EPS" style="height: 60px;">
+            </a>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="generateur.html" class="nav-link">Générateur</a>
+                <a href="blog.html" class="nav-link active">Blog</a>
+                <a href="a-propos.html" class="nav-link">À propos</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="generateur.html" class="nav-cta">
+                    <span>✨</span> Créer une fiche
+                </a>
+            </div>
+            
+            <button class="nav-toggle" id="navToggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="blog-hero">
+        <span class="section-badge">📚 Blog</span>
+        <h1 class="hero-title" style="margin-bottom: var(--spacing-lg);">
+            Articles et <span>conseils</span> pédagogiques
+        </h1>
+        <p class="hero-description" style="max-width: 700px; margin: 0 auto;">
+            Découvrez nos articles sur l'enseignement de l'EPS, les méthodes pédagogiques, les actualités du sport scolaire au Maroc et bien plus encore.
+        </p>
+    </section>
+
+    <!-- Featured Article -->
+    <section class="blog-section">
+        <div class="blog-container">
+            <article class="featured-article">
+                <div class="featured-image">
+                    <img src="/images/op.jpg" alt="Orientations Pédagogiques" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <span class="emoji-fallback" style="display:none;">📖</span>
+                </div>
+                <div class="featured-content">
+                    <span class="featured-badge">⭐ Article à la une</span>
+                    <h2 class="featured-title">
+                        <a href="article-op.html">Guide complet des Orientations Pédagogiques 2007 et 2009</a>
+                    </h2>
+                    <p class="featured-excerpt">
+                        Tout ce que vous devez savoir sur les Orientations Pédagogiques officielles du Ministère de l'Éducation Nationale. OTI, OTC, compétences visées et mise en œuvre pratique pour chaque niveau scolaire.
+                    </p>
+                    <div class="featured-meta">
+                        <span class="featured-meta-item">📅 15 Janvier 2025</span>
+                        <span class="featured-meta-item">⏱️ 12 min de lecture</span>
+                        <span class="featured-meta-item">👁️ 2.4k vues</span>
+                    </div>
+                    <a href="article-op.html" class="btn btn-primary">
+                        Lire l'article →
+                    </a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="blog-section categories-section">
+        <div class="blog-container">
+            <div class="section-header">
+                <span class="section-badge">📂 Catégories</span>
+                <h2 class="section-title">Explorer par thème</h2>
+            </div>
+            
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">📋</div>
+                    <h3 class="category-name">Pédagogie</h3>
+                    <p class="category-count">8 articles</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">⚽</div>
+                    <h3 class="category-name">Sports collectifs</h3>
+                    <p class="category-count">12 articles</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">🏃</div>
+                    <h3 class="category-name">Athlétisme</h3>
+                    <p class="category-count">6 articles</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">🤸</div>
+                    <h3 class="category-name">Gymnastique</h3>
+                    <p class="category-count">5 articles</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">📊</div>
+                    <h3 class="category-name">Évaluation</h3>
+                    <p class="category-count">7 articles</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">📰</div>
+                    <h3 class="category-name">Actualités</h3>
+                    <p class="category-count">15 articles</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Grid -->
+    <section class="blog-section">
+        <div class="blog-container">
+            <div class="section-header">
+                <span class="section-badge">📝 Articles récents</span>
+                <h2 class="section-title">Dernières publications</h2>
+            </div>
+            
+            <div class="blog-grid">
+                <!-- Article 1 - Évaluation NOUVEAU -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="/images/eval.jpg" alt="" onerror="this.style.display='none'">
+                        <span class="blog-card-category">Évaluation</span>
+                        <span class="emoji-fallback">📊</span>
+                    </div>
+                    <div class="blog-card-body">
+                        <h3 class="blog-card-title">
+                            <a href="article-eval.html">L'évaluation en EPS : critères, outils et bonnes pratiques</a>
+                        </h3>
+                        <p class="blog-card-excerpt">
+                            Types d'évaluation, critères de réalisation et réussite, outils et erreurs à éviter. Guide complet.
+                        </p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date">📅 30 Jan 2025</span>
+                            <span class="blog-card-read">⏱️ 12 min</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Article 2 - Sécurité -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="/images/securite.jpg" alt="" onerror="this.style.display='none'">
+                        <span class="blog-card-category">Sécurité</span>
+                        <span class="emoji-fallback">🛡️</span>
+                    </div>
+                    <div class="blog-card-body">
+                        <h3 class="blog-card-title">
+                            <a href="article-securite.html">La sécurité en EPS : règles, responsabilités et bonnes pratiques</a>
+                        </h3>
+                        <p class="blog-card-excerpt">
+                            Guide complet : responsabilités du professeur, prévention des accidents et démarche en cas d'accident scolaire.
+                        </p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date">📅 28 Jan 2025</span>
+                            <span class="blog-card-read">⏱️ 15 min</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Article 3 - Approche par compétences -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="/images/competence.jpg" alt="" onerror="this.style.display='none'">
+                        <span class="blog-card-category">Pédagogie</span>
+                        <span class="emoji-fallback">📚</span>
+                    </div>
+                    <div class="blog-card-body">
+                        <h3 class="blog-card-title">
+                            <a href="article-approche-competences.html">L'approche par compétences en EPS au Maroc : comprendre et appliquer</a>
+                        </h3>
+                        <p class="blog-card-excerpt">
+                            Qu'est-ce qu'une compétence en EPS ? Comment l'appliquer concrètement ? Guide complet selon les OP 2007-2009.
+                        </p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date">📅 22 Jan 2025</span>
+                            <span class="blog-card-read">⏱️ 12 min</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Article 4 - Structure séance -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="/images/seance.jpg" alt="" onerror="this.style.display='none'">
+                        <span class="blog-card-category">Pédagogie</span>
+                        <span class="emoji-fallback">📋</span>
+                    </div>
+                    <div class="blog-card-body">
+                        <h3 class="blog-card-title">
+                            <a href="article-structure-seance.html">Comment structurer une séance d'EPS conforme aux OP 2007-2009</a>
+                        </h3>
+                        <p class="blog-card-excerpt">
+                            Guide complet pour organiser vos séances selon les orientations pédagogiques officielles du Maroc.
+                        </p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date">📅 20 Jan 2025</span>
+                            <span class="blog-card-read">⏱️ 10 min</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Article 5 - Critères -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="/images/criteres.jpg" alt="" onerror="this.style.display='none'">
+                        <span class="blog-card-category">Pédagogie</span>
+                        <span class="emoji-fallback">🎯</span>
+                    </div>
+                    <div class="blog-card-body">
+                        <h3 class="blog-card-title">
+                            <a href="article-criteres.html">Critères de réalisation vs critères de réussite : quelle différence ?</a>
+                        </h3>
+                        <p class="blog-card-excerpt">
+                            Comprendre la distinction fondamentale entre ces deux types de critères pour mieux évaluer vos élèves en EPS.
+                        </p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date">📅 12 Jan 2025</span>
+                            <span class="blog-card-read">⏱️ 5 min</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Article 6 - Orientations Pédagogiques -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="/images/op.jpg" alt="" onerror="this.style.display='none'">
+                        <span class="blog-card-category">Pédagogie</span>
+                        <span class="emoji-fallback">📖</span>
+                    </div>
+                    <div class="blog-card-body">
+                        <h3 class="blog-card-title">
+                            <a href="article-op.html">Guide complet des Orientations Pédagogiques 2007 et 2009</a>
+                        </h3>
+                        <p class="blog-card-excerpt">
+                            OTI, OTC, compétences visées et mise en œuvre pratique pour chaque niveau scolaire.
+                        </p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date">📅 15 Jan 2025</span>
+                            <span class="blog-card-read">⏱️ 12 min</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+                
+                <!-- Article 4 - Bientôt disponible -->
+                <article class="blog-card" style="opacity: 0.6;">
+                    <div class="blog-card-image">
+                        <span class="blog-card-category">Évaluation</span>
+                        📊
+                    </div>
+                    <div class="blog-card-body">
+                        <h3 class="blog-card-title">
+                            Comment construire une grille d'évaluation efficace en EPS ?
+                        </h3>
+                        <p class="blog-card-excerpt">
+                            Les étapes clés pour créer des grilles d'évaluation objectives et adaptées à chaque APS.
+                        </p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date">🔜 Bientôt disponible</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Article 5 - Bientôt disponible -->
+                <article class="blog-card" style="opacity: 0.6;">
+                    <div class="blog-card-image">
+                        <span class="blog-card-category">Athlétisme</span>
+                        🏃
+                    </div>
+                    <div class="blog-card-body">
+                        <h3 class="blog-card-title">
+                            Course de vitesse : améliorer le départ de vos élèves
+                        </h3>
+                        <p class="blog-card-excerpt">
+                            Techniques et exercices pour perfectionner la phase de départ en course de vitesse.
+                        </p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date">🔜 Bientôt disponible</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Article 6 - Bientôt disponible -->
+                <article class="blog-card" style="opacity: 0.6;">
+                    <div class="blog-card-image">
+                        <span class="blog-card-category">Actualités</span>
+                        📰
+                    </div>
+                    <div class="blog-card-body">
+                        <h3 class="blog-card-title">
+                            Rentrée 2025 : ce qui change pour les professeurs d'EPS
+                        </h3>
+                        <p class="blog-card-excerpt">
+                            Tour d'horizon des nouveautés et évolutions pour cette nouvelle année scolaire.
+                        </p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date">🔜 Bientôt disponible</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            
+            <!-- Pagination - masquée pour l'instant -->
+            <div class="pagination" style="display: none;">
+                <button class="pagination-btn">←</button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <button class="pagination-btn">...</button>
+                <button class="pagination-btn">10</button>
+                <button class="pagination-btn">→</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="blog-section newsletter-section">
+        <div class="container">
+            <h2 style="font-family: var(--font-display); font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: var(--spacing-md);">
+                Restez informé
+            </h2>
+            <p style="font-size: 1.125rem; opacity: 0.9; max-width: 600px; margin: 0 auto var(--spacing-xl);">
+                Recevez nos derniers articles et ressources pédagogiques directement dans votre boîte mail.
+            </p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Merci pour votre inscription !');">
+                <input type="email" class="newsletter-input" placeholder="Votre adresse email" required>
+                <button type="submit" class="btn btn-lg" style="background: white; color: var(--primary); font-weight: 700; white-space: nowrap;">
+                    S'inscrire
+                </button>
+            </form>
+            <p style="font-size: 0.875rem; opacity: 0.7; margin-top: var(--spacing-md);">
+                Pas de spam, uniquement du contenu de qualité. Désabonnement possible à tout moment.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="nav-logo" style="color: white;">
+                    <img src="/images/prof_eps.png" alt="Prof EPS" style="height: 60px; filter: brightness(0) invert(1);">
+                </a>
+                <p>
+                    Le premier générateur intelligent de fiches pédagogiques pour les professeurs d'éducation physique et sportive au Maroc.
+                </p>
+            </div>
+            
+            <div>
+                <h4 class="footer-title">Navigation</h4>
+                <div class="footer-links">
+                    <a href="index.html">Accueil</a>
+                    <a href="generateur.html">Générateur</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="a-propos.html">À propos</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="footer-title">Catégories</h4>
+                <div class="footer-links">
+                    <a href="#">Pédagogie</a>
+                    <a href="#">Sports collectifs</a>
+                    <a href="#">Athlétisme</a>
+                    <a href="#">Gymnastique</a>
+                    <a href="#">Évaluation</a>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="footer-title">Contact</h4>
+                <div class="footer-links">
+                    <a href="mailto:epsprof.assistance@gmail.com"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> epsprof.assistance@gmail.com</a>
+                    <a href="https://www.facebook.com/profepsma" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Facebook</a>
+                    <a href="https://www.instagram.com/profepsma/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg> Instagram</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p class="footer-copyright">
+                © 2025 Prof EPS. Tous droits réservés.
+            </p>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/profepsma" target="_blank" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                <a href="https://www.instagram.com/profepsma/" target="_blank" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                <a href="mailto:epsprof.assistance@gmail.com" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('

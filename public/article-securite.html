@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="La sécurité en EPS au Maroc : règles, responsabilités du professeur, prévention des blessures et démarche en cas d'accident scolaire.">
+    <meta name="keywords" content="sécurité EPS Maroc, responsabilité professeur EPS, prévention blessures EPS, règles de sécurité EPS lycée collège Maroc">
+    <title>La sécurité en EPS au Maroc - Prof EPS</title>
+    
+    <link rel="icon" type="image/png" href="/images/prof_eps.png">
+    
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #c1272d;
+            --secondary: #006233;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a68;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --border: #e2e8f0;
+            --border-light: #f1f5f9;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --radius: 8px;
+            --radius-lg: 12px;
+            --radius-full: 9999px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Plus Jakarta Sans', var(--font-sans);
+            --transition: all 0.3s ease;
+        }
+        
+        body { font-family: var(--font-sans); background: var(--bg-secondary); color: var(--text-primary); line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+        
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1rem 2rem; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-light); transition: var(--transition); }
+        .navbar.scrolled { padding: 0.75rem 2rem; box-shadow: var(--shadow-md); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--text-primary); }
+        .nav-menu { display: flex; align-items: center; gap: 2rem; }
+        .nav-link { font-size: 0.9375rem; font-weight: 500; color: var(--text-secondary); transition: var(--transition); padding: 0.5rem 0; position: relative; }
+        .nav-link:hover, .nav-link.active { color: var(--primary); }
+        .nav-link.active::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--primary); border-radius: 2px; }
+        .nav-cta { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; font-weight: 600; font-size: 0.9375rem; border-radius: var(--radius-full); transition: var(--transition); }
+        .nav-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+        .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
+        .nav-toggle span { width: 25px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: var(--transition); }
+        
+        .section-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: linear-gradient(135deg, rgba(193,39,45,0.1), rgba(0,98,51,0.1)); border-radius: var(--radius-full); font-size: 0.875rem; font-weight: 600; color: var(--primary); margin-bottom: 1rem; }
+        .article-hero { padding: 140px 2rem 3rem; background: linear-gradient(135deg, rgba(193,39,45,0.05) 0%, rgba(0,98,51,0.05) 100%); text-align: center; }
+        .article-title { font-family: var(--font-display); font-size: clamp(1.75rem, 4vw, 2.5rem); color: var(--text-primary); margin-bottom: 1rem; line-height: 1.3; }
+        .article-meta { display: flex; justify-content: center; gap: 1.5rem; color: var(--text-secondary); font-size: 0.9rem; }
+        .article-container { max-width: 800px; margin: 0 auto; padding: 3rem 2rem; }
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); font-weight: 500; margin-bottom: 2rem; }
+        .back-link:hover { text-decoration: underline; }
+        .article-content { line-height: 1.8; color: var(--text-secondary); }
+        .article-content h2 { font-size: 1.5rem; color: var(--text-primary); margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--primary); }
+        .article-content h3 { font-size: 1.25rem; color: var(--primary); margin-top: 2rem; margin-bottom: 0.75rem; }
+        .article-content p { margin-bottom: 1rem; }
+        .article-content ul, .article-content ol { margin: 1rem 0; padding-left: 2rem; }
+        .article-content li { margin-bottom: 0.5rem; }
+        .article-content strong { color: var(--text-primary); }
+        
+        .info-box { background: linear-gradient(135deg, rgba(193,39,45,0.1), rgba(0,98,51,0.1)); border-left: 4px solid var(--primary); padding: 1.5rem; border-radius: var(--radius-lg); margin: 2rem 0; }
+        .info-box h4 { color: var(--primary); margin-bottom: 0.5rem; }
+        
+        .warning-box { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 1.5rem; border-radius: var(--radius-lg); margin: 1.5rem 0; }
+        .warning-box h4 { color: #d97706; margin-bottom: 0.5rem; }
+        
+        .danger-box { background: #fee2e2; border-left: 4px solid #dc2626; padding: 1.5rem; border-radius: var(--radius-lg); margin: 1.5rem 0; }
+        .danger-box h4 { color: #dc2626; margin-bottom: 0.5rem; }
+        
+        .success-box { background: #d1fae5; border-left: 4px solid var(--secondary); padding: 1.5rem; border-radius: var(--radius-lg); margin: 1.5rem 0; }
+        .success-box h4 { color: var(--secondary); margin-bottom: 0.5rem; }
+        
+        .step-card { background: var(--bg-primary); border-radius: var(--radius-lg); padding: 1.5rem; margin: 1.5rem 0; border-left: 4px solid var(--secondary); box-shadow: var(--shadow-sm); }
+        .step-card h4 { color: var(--secondary); margin-bottom: 0.75rem; font-size: 1.1rem; }
+        
+        .step-card.danger { border-left-color: #dc2626; }
+        .step-card.danger h4 { color: #dc2626; }
+        
+        .step-card.warning { border-left-color: #f59e0b; }
+        .step-card.warning h4 { color: #d97706; }
+        
+        .step-card.info { border-left-color: #3b82f6; }
+        .step-card.info h4 { color: #3b82f6; }
+        
+        .checklist { background: var(--bg-primary); padding: 1.5rem; border-radius: var(--radius-lg); margin: 1.5rem 0; border: 1px solid var(--border); }
+        .checklist h4 { color: var(--text-primary); margin-bottom: 1rem; }
+        .checklist ul { list-style: none; padding-left: 0; }
+        .checklist li { padding: 0.5rem 0; padding-left: 2rem; position: relative; }
+        .checklist li::before { content: '✅'; position: absolute; left: 0; }
+        
+        .responsibility-card { background: var(--bg-primary); padding: 1.25rem; border-radius: var(--radius-lg); margin: 1rem 0; border: 1px solid var(--border); display: flex; align-items: flex-start; gap: 1rem; }
+        .responsibility-icon { font-size: 1.5rem; }
+        .responsibility-content h5 { color: var(--text-primary); margin-bottom: 0.25rem; }
+        .responsibility-content p { font-size: 0.9rem; margin: 0; }
+        
+        .accident-timeline { position: relative; padding-left: 2rem; margin: 2rem 0; }
+        .accident-timeline::before { content: ''; position: absolute; left: 0.5rem; top: 0; bottom: 0; width: 2px; background: var(--border); }
+        .timeline-step { position: relative; margin-bottom: 2rem; padding: 1.5rem; background: var(--bg-primary); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
+        .timeline-step::before { content: ''; position: absolute; left: -1.75rem; top: 1.5rem; width: 1rem; height: 1rem; background: var(--primary); border-radius: 50%; border: 3px solid white; box-shadow: var(--shadow-sm); }
+        .timeline-step h4 { color: var(--primary); margin-bottom: 0.75rem; }
+        
+        .read-also { background: var(--bg-primary); border: 2px dashed var(--primary); padding: 1.5rem; border-radius: var(--radius-lg); margin: 2rem 0; }
+        .read-also h4 { color: var(--primary); margin-bottom: 0.75rem; }
+        .read-also a { color: var(--primary); font-weight: 600; }
+        .read-also a:hover { text-decoration: underline; }
+        
+        .share-section { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center; }
+        .share-buttons { display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; }
+        .share-btn { padding: 0.5rem 1.5rem; border-radius: var(--radius-full); font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem; transition: var(--transition); }
+        .share-btn:hover { transform: translateY(-2px); }
+        .share-btn.facebook { background: #1877f2; color: white; }
+        .share-btn.whatsapp { background: #25d366; color: white; }
+        
+        .footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 4rem 2rem 2rem; }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom: 3rem; }
+        .footer-title { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; }
+        .footer-links { display: flex; flex-direction: column; gap: 0.75rem; }
+        .footer-links a { color: rgba(255,255,255,0.7); font-size: 0.9rem; transition: var(--transition); }
+        .footer-links a:hover { color: white; }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; }
+        .footer-copyright { color: rgba(255,255,255,0.5); font-size: 0.875rem; }
+        
+        @media (max-width: 768px) {
+            .nav-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 1.5rem; box-shadow: var(--shadow-lg); gap: 1rem; }
+            .nav-menu.active { display: flex; }
+            .nav-toggle { display: flex; }
+            .article-meta { flex-direction: column; gap: 0.5rem; }
+            .accident-timeline { padding-left: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo"><img src="/images/prof_eps.png" alt="Prof EPS" style="height: 40px;"></a>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="generateur.html" class="nav-link">Générateur</a>
+                <a href="blog.html" class="nav-link active">Blog</a>
+                <a href="a-propos.html" class="nav-link">À propos</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="generateur.html" class="nav-cta"><span>✨</span> Créer une fiche</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <section class="article-hero">
+        <span class="section-badge">🛡️ Sécurité</span>
+        <h1 class="article-title">La sécurité en EPS au Maroc : règles, responsabilités et bonnes pratiques</h1>
+        <div class="article-meta">
+            <span>📅 28 Janvier 2025</span>
+            <span>⏱️ 15 min de lecture</span>
+            <span>👁️ 1.8k vues</span>
+        </div>
+    </section>
+
+    <article class="article-container">
+        <a href="blog.html" class="back-link">← Retour au blog</a>
+        
+        <div class="article-content">
+            <p>
+                La sécurité en Éducation Physique et Sportive (EPS) est une <strong>obligation pédagogique, morale et réglementaire</strong> pour tout professeur au Maroc. Selon les <strong>Orientations pédagogiques 2007–2009</strong>, la pratique des APS doit impérativement se faire dans un cadre sécurisé, garantissant l'intégrité physique des élèves tout en favorisant les apprentissages moteurs.
+            </p>
+            
+            <p>Cet article propose un guide clair et pratique sur la sécurité en EPS :</p>
+            <ul>
+                <li>➡️ Responsabilités de l'enseignant</li>
+                <li>➡️ Règles essentielles à respecter</li>
+                <li>➡️ Prévention des accidents en salle couverte</li>
+                <li>➡️ Démarche en cas d'accident scolaire</li>
+            </ul>
+            
+            <h2>1. Pourquoi la sécurité est-elle centrale en EPS ?</h2>
+            
+            <p>L'EPS expose les élèves à :</p>
+            <ul>
+                <li>Des <strong>risques corporels</strong> (chutes, collisions, blessures)</li>
+                <li>Des <strong>situations d'opposition</strong> ou de vitesse</li>
+                <li>Des <strong>efforts physiques intenses</strong></li>
+            </ul>
+            
+            <div class="info-box">
+                <h4>👉 À retenir</h4>
+                <p>La sécurité n'est donc pas un frein à l'apprentissage, mais une <strong>condition indispensable</strong> à la réussite pédagogique.</p>
+            </div>
+            
+            <h2>2. Responsabilité du professeur d'EPS au Maroc</h2>
+            
+            <p>Le professeur d'EPS est <strong>responsable des élèves pendant toute la durée de la séance</strong>, y compris :</p>
+            <ul>
+                <li>L'entrée et la sortie de la salle couverte</li>
+                <li>La manipulation du matériel sportif</li>
+                <li>L'organisation des situations d'apprentissage</li>
+            </ul>
+            
+            <h3>Responsabilités principales</h3>
+            
+            <div class="responsibility-card">
+                <div class="responsibility-icon">🔧</div>
+                <div class="responsibility-content">
+                    <h5>Vérifier le matériel</h5>
+                    <p>Ballons, buts, tapis, plots - tout doit être en bon état</p>
+                </div>
+            </div>
+            
+            <div class="responsibility-card">
+                <div class="responsibility-icon">📊</div>
+                <div class="responsibility-content">
+                    <h5>Adapter les situations</h5>
+                    <p>Au niveau réel des élèves, pas au niveau théorique</p>
+                </div>
+            </div>
+            
+            <div class="responsibility-card">
+                <div class="responsibility-icon">📢</div>
+                <div class="responsibility-content">
+                    <h5>Consignes claires</h5>
+                    <p>Donner des consignes compréhensibles par tous</p>
+                </div>
+            </div>
+            
+            <div class="responsibility-card">
+                <div class="responsibility-icon">🛑</div>
+                <div class="responsibility-content">
+                    <h5>Interrompre si danger</h5>
+                    <p>Arrêter immédiatement toute situation dangereuse</p>
+                </div>
+            </div>
+            
+            <h2>3. Règles de sécurité AVANT la séance</h2>
+            
+            <div class="checklist">
+                <h4>✅ Check-list avant la séance</h4>
+                <ul>
+                    <li>Inspecter la salle couverte (sol sec, absence d'obstacles)</li>
+                    <li>Vérifier la stabilité des buts et installations</li>
+                    <li>Adapter la séance aux conditions climatiques (chaleur, fatigue)</li>
+                    <li>Exiger une tenue sportive adaptée</li>
+                    <li>Rappeler les règles de comportement</li>
+                </ul>
+            </div>
+            
+            <div class="success-box">
+                <h4>✅ Important</h4>
+                <p>Ces étapes font partie intégrante de la <strong>préparation pédagogique</strong>.</p>
+            </div>
+            
+            <h2>4. Sécurité PENDANT la phase fondamentale</h2>
+            
+            <p>La phase fondamentale est la plus risquée, car elle implique :</p>
+            <ul>
+                <li>Intensité physique</li>
+                <li>Opposition</li>
+                <li>Déplacements rapides</li>
+            </ul>
+            
+            <h3>Bonnes pratiques</h3>
+            
+            <div class="step-card">
+                <h4>👥 Groupes équilibrés</h4>
+                <p>Former des groupes de niveau homogène pour éviter les déséquilibres dangereux.</p>
+            </div>
+            
+            <div class="step-card">
+                <h4>📍 Espaces délimités</h4>
+                <p>Utiliser des plots pour bien délimiter les zones de jeu et éviter les collisions.</p>
+            </div>
+            
+            <div class="step-card">
+                <h4>📈 Progressivité</h4>
+                <p>Augmenter progressivement l'intensité des situations.</p>
+            </div>
+            
+            <div class="step-card">
+                <h4>👁️ Surveillance active</h4>
+                <p>Maintenir une surveillance continue et se déplacer pour avoir une vision globale.</p>
+            </div>
+            
+            <div class="info-box">
+                <h4>👉 À retenir</h4>
+                <p>Une situation <strong>bien organisée</strong> est une situation plus sûre et plus efficace.</p>
+            </div>
+            
+            <h2>5. Sécurité APRÈS la séance</h2>
+            
+            <p>En fin de séance :</p>
+            <ul>
+                <li>✅ <strong>Retour au calme</strong> obligatoire</li>
+                <li>✅ <strong>Étirements</strong> contrôlés</li>
+                <li>✅ <strong>Rangement collectif</strong> du matériel</li>
+                <li>✅ <strong>Observation</strong> d'éventuelles douleurs ou blessures</li>
+            </ul>
+            
+            <div class="info-box">
+                <h4>🧠 Rappel</h4>
+                <p>Cette phase participe à la <strong>prévention à long terme</strong>.</p>
+            </div>
+            
+            <h2>6. Sécurité et évaluation en EPS</h2>
+            
+            <p>L'évaluation ne doit <strong>jamais mettre l'élève en danger</strong> :</p>
+            <ul>
+                <li>Critères adaptés</li>
+                <li>Situations maîtrisées</li>
+                <li>Respect du rythme individuel</li>
+            </ul>
+            
+            <div class="warning-box">
+                <h4>⚠️ Attention</h4>
+                <p>Une performance n'est valable que si elle est réalisée <strong>en sécurité</strong>.</p>
+            </div>
+            
+            <h2>7. Démarche en cas d'accident scolaire en EPS</h2>
+            
+            <p>Malgré toutes les mesures de prévention, un accident peut survenir pendant une séance d'EPS (chute, fracture, entorse…). Dans ce cas, le professeur doit adopter une <strong>démarche précise, réglementaire et responsable</strong>.</p>
+            
+            <div class="danger-box">
+                <h4>🟥 Exemple : un élève tombe et se fracture la main</h4>
+                <p>Voici la démarche à suivre étape par étape.</p>
+            </div>
+            
+            <div class="accident-timeline">
+                <div class="timeline-step">
+                    <h4>1️⃣ Sécuriser immédiatement la situation</h4>
+                    <p>Le professeur doit :</p>
+                    <ul>
+                        <li>Arrêter immédiatement la séance</li>
+                        <li>Éloigner les autres élèves</li>
+                        <li>Interdire tout déplacement inutile de l'élève blessé</li>
+                        <li>Installer l'élève dans une position sécurisée</li>
+                    </ul>
+                    <div class="warning-box" style="margin-top: 1rem; margin-bottom: 0;">
+                        <h4>⚠️ Important</h4>
+                        <p>Ne jamais déplacer un élève gravement blessé sans nécessité.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-step">
+                    <h4>2️⃣ Donner les premiers gestes de secours</h4>
+                    <p>Selon la gravité :</p>
+                    <ul>
+                        <li>Immobiliser le membre blessé</li>
+                        <li>Rassurer l'élève</li>
+                        <li>Éviter toute manipulation dangereuse</li>
+                        <li>Ne jamais remettre un os en place</li>
+                    </ul>
+                    <p><strong>👉 Le professeur agit dans la limite de ses compétences, sans diagnostic médical.</strong></p>
+                </div>
+                
+                <div class="timeline-step">
+                    <h4>3️⃣ Alerter l'administration</h4>
+                    <p>Le professeur doit :</p>
+                    <ul>
+                        <li>Informer le surveillant général / censeur / directeur</li>
+                        <li>Ne jamais gérer seul la situation</li>
+                        <li>Suivre les instructions de la direction</li>
+                    </ul>
+                    <p><strong>📌 La responsabilité devient collective et institutionnelle.</strong></p>
+                </div>
+                
+                <div class="timeline-step">
+                    <h4>4️⃣ Contacter les secours et les parents</h4>
+                    <p>Selon la gravité :</p>
+                    <ul>
+                        <li>Appel du SAMU / ambulance / protection civile</li>
+                        <li>Information immédiate des parents ou tuteurs légaux</li>
+                        <li>Accompagnement de l'élève si nécessaire</li>
+                    </ul>
+                    <div class="warning-box" style="margin-top: 1rem; margin-bottom: 0;">
+                        <h4>⚠️ Règle absolue</h4>
+                        <p>L'élève ne doit jamais quitter l'établissement sans autorisation officielle.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-step">
+                    <h4>5️⃣ Rédiger le rapport d'accident</h4>
+                    <p>Après l'accident, le professeur doit <strong>obligatoirement</strong> :</p>
+                    <ul>
+                        <li>Rédiger un rapport détaillé</li>
+                        <li>Préciser : date, heure, lieu, activité, circonstances, témoins</li>
+                        <li>Transmettre le rapport à l'administration</li>
+                    </ul>
+                    <div class="info-box" style="margin-top: 1rem; margin-bottom: 0;">
+                        <h4>📄 Ce document est essentiel pour</h4>
+                        <p>• La protection juridique du professeur<br>
+                        • La prise en charge administrative et médicale de l'élève</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-step">
+                    <h4>6️⃣ Responsabilité pédagogique</h4>
+                    <p>La responsabilité du professeur est engagée <strong>uniquement</strong> s'il y a :</p>
+                    <ul>
+                        <li>Négligence</li>
+                        <li>Absence de surveillance</li>
+                        <li>Non-respect des consignes de sécurité</li>
+                        <li>Situation non adaptée au niveau des élèves</li>
+                    </ul>
+                    <p><strong>👉 Un accident n'est pas automatiquement une faute professionnelle si les règles ont été respectées.</strong></p>
+                </div>
+                
+                <div class="timeline-step">
+                    <h4>7️⃣ Reprise pédagogique après l'accident</h4>
+                    <p>Après l'incident :</p>
+                    <ul>
+                        <li>Analyse pédagogique de la situation</li>
+                        <li>Ajustement des séances suivantes</li>
+                        <li>Renforcement des règles de sécurité</li>
+                        <li>Sensibilisation des élèves</li>
+                    </ul>
+                    <p><strong>🧠 L'accident devient un moment d'apprentissage éducatif.</strong></p>
+                </div>
+            </div>
+            
+            <div class="danger-box">
+                <h4>📌 À retenir</h4>
+                <p>En cas d'accident en EPS dans les collèges et lycées marocains, le professeur doit <strong>sécuriser l'élève, alerter l'administration, contacter les secours si nécessaire et rédiger un rapport d'accident</strong>, conformément à ses responsabilités pédagogiques et réglementaires.</p>
+            </div>
+            
+            <h2>Conclusion</h2>
+            
+            <p>Au Maroc, la sécurité en EPS est :</p>
+            
+            <div class="success-box">
+                <h4>✅ Les 3 dimensions de la sécurité</h4>
+                <ul style="margin: 0; padding-left: 1.5rem;">
+                    <li>Une <strong>responsabilité professionnelle</strong></li>
+                    <li>Une <strong>exigence pédagogique</strong></li>
+                    <li>Un <strong>levier de réussite</strong> des apprentissages</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h4>💡 Conclusion</h4>
+                <p>Un professeur qui sécurise sa séance crée un <strong>climat de confiance</strong>, favorisant l'engagement, la progression et la réussite des élèves.</p>
+            </div>
+            
+            <div class="read-also">
+                <h4>📌 À lire aussi sur le blog EPS Maroc</h4>
+                <p>👉 <a href="article-structure-seance.html">Comment structurer une séance d'EPS conforme aux OP 2007-2009</a></p>
+                <p>👉 <a href="article-evaluation.html">L'évaluation en EPS au Maroc : méthodes, outils et critères</a></p>
+            </div>
+            
+            <div class="info-box">
+                <h4>🚀 Passez à la pratique !</h4>
+                <p>Utilisez notre <a href="generateur.html" style="color: var(--primary); font-weight: bold;">générateur de fiches</a> qui intègre automatiquement les consignes de sécurité adaptées à chaque APS !</p>
+            </div>
+        </div>
+        
+        <div class="share-section">
+            <p><strong>Partagez cet article</strong></p>
+            <div class="share-buttons">
+                <a href="#" class="share-btn facebook">📘 Facebook</a>
+                <a href="#" class="share-btn whatsapp">💬 WhatsApp</a>
+            </div>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <a href="index.html"><img src="/images/prof_eps.png" alt="Prof EPS" style="height: 50px; filter: brightness(0) invert(1);"></a>
+                <p style="margin-top: 1rem; color: rgba(255,255,255,0.7); font-size: 0.9rem;">Le premier générateur intelligent de fiches pédagogiques pour les professeurs d'EPS au Maroc.</p>
+            </div>
+            <div>
+                <h4 class="footer-title">Navigation</h4>
+                <div class="footer-links">
+                    <a href="index.html">Accueil</a>
+                    <a href="generateur.html">Générateur</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="a-propos.html">À propos</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer-title">Contact</h4>
+                <div class="footer-links">
+                    <a href="mailto:epsprof.assistance@gmail.com">📧 epsprof.assistance@gmail.com</a>
+                    <a href="https://www.facebook.com/profepsma" target="_blank">📘 Facebook</a>
+                    <a href="https://www.instagram.com/profepsma/" target="_blank">📸 Instagram</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copyright">© 2025 Prof EPS. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+        document.getElementById('navToggle').addEventListener('click', () => {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
