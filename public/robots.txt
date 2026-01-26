@@ -1,15 +1,22 @@
 # Robots.txt pour Prof EPS
-# https://www.profeps.ma/robots.txt
+# https://profeps-ma.vercel.app
 
 User-agent: *
 Allow: /
 
-# Fichiers à ne pas indexer
+# Sitemap
+Sitemap: https://profeps-ma.vercel.app/sitemap.xml
+
+# Bloquer les fichiers non essentiels
 Disallow: /api/
 Disallow: /*.json$
 
-# Sitemap
-Sitemap: https://www.profeps.ma/sitemap.xml
+# Permettre les crawlers de médias sociaux
+User-agent: facebookexternalhit
+Allow: /
 
-# Crawl-delay (optionnel)
-Crawl-delay: 1
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
