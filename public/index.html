@@ -24,12 +24,15 @@
         
         :root {
             --primary: #c1272d;
+            --primary-dark: #a01f24;
             --secondary: #006233;
+            --secondary-dark: #004d28;
             --text-primary: #1a1a2e;
             --text-secondary: #4a4a68;
             --text-light: #6b7280;
             --bg-primary: #ffffff;
             --bg-secondary: #f8f9fa;
+            --bg-card: #ffffff;
             --border: #e2e8f0;
             --border-light: #f1f5f9;
             --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
@@ -39,6 +42,7 @@
             --radius: 8px;
             --radius-lg: 12px;
             --radius-xl: 16px;
+            --radius-2xl: 24px;
             --radius-full: 9999px;
             --spacing-xs: 0.25rem;
             --spacing-sm: 0.5rem;
@@ -55,6 +59,7 @@
         body { font-family: var(--font-sans); background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
         a { text-decoration: none; color: inherit; transition: var(--transition); }
         
+        /* Navbar */
         .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: var(--spacing-md) var(--spacing-xl); background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-light); transition: var(--transition); }
         .navbar.scrolled { padding: var(--spacing-sm) var(--spacing-xl); box-shadow: var(--shadow-md); }
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
@@ -69,6 +74,7 @@
         .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
         .nav-toggle span { width: 25px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: var(--transition); }
         
+        /* Hero */
         .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px var(--spacing-xl) var(--spacing-3xl); background: linear-gradient(135deg, rgba(193,39,45,0.03) 0%, rgba(0,98,51,0.03) 100%); position: relative; overflow: hidden; }
         .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 80%; height: 150%; background: radial-gradient(circle, rgba(193,39,45,0.05) 0%, transparent 70%); pointer-events: none; }
         .hero-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-3xl); align-items: center; }
@@ -94,7 +100,204 @@
         .hero-card-item { display: flex; align-items: center; gap: var(--spacing-md); padding: var(--spacing-sm); background: var(--bg-secondary); border-radius: var(--radius); }
         .hero-card-item-icon { font-size: 1.25rem; }
         .hero-card-item-text { font-size: 0.9rem; color: var(--text-secondary); }
+
+        /* ============================================== */
+        /* NOUVELLE SECTION : FORMULAIRE GÉNÉRATEUR */
+        /* ============================================== */
+        .generator-section {
+            padding: var(--spacing-3xl) var(--spacing-xl);
+            background: var(--bg-primary);
+            position: relative;
+        }
+        .generator-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(180deg, rgba(193,39,45,0.03), transparent);
+        }
+        .generator-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .generator-box {
+            background: var(--bg-card);
+            border-radius: var(--radius-2xl);
+            padding: var(--spacing-2xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border-light);
+            position: relative;
+            overflow: hidden;
+        }
+        .generator-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        .generator-header {
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+        }
+        .generator-header .section-badge {
+            margin-bottom: var(--spacing-md);
+        }
+        .generator-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+        .generator-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
         
+        .quick-form {
+            display: grid;
+            gap: var(--spacing-lg);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+        }
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+        .form-label .required {
+            color: var(--primary);
+        }
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: var(--spacing-md);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+            transition: var(--transition);
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: var(--bg-card);
+            box-shadow: 0 0 0 4px rgba(193, 39, 45, 0.1);
+        }
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .form-select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 20px;
+            padding-right: 48px;
+        }
+        
+        .optional-fields {
+            padding-top: var(--spacing-lg);
+            border-top: 1px dashed var(--border);
+        }
+        .optional-toggle {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            cursor: pointer;
+            margin-bottom: var(--spacing-md);
+            user-select: none;
+        }
+        .optional-toggle:hover {
+            color: var(--primary);
+        }
+        .optional-toggle svg {
+            width: 20px;
+            height: 20px;
+            transition: var(--transition);
+        }
+        .optional-toggle.open svg {
+            transform: rotate(180deg);
+        }
+        .optional-content {
+            display: none;
+            gap: var(--spacing-md);
+        }
+        .optional-content.show {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        }
+        
+        .generate-btn-container {
+            margin-top: var(--spacing-xl);
+            text-align: center;
+        }
+        .generate-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-lg) var(--spacing-3xl);
+            font-size: 1.125rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 8px 30px rgba(193, 39, 45, 0.3);
+        }
+        .generate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(193, 39, 45, 0.4);
+        }
+        .generate-btn:active {
+            transform: translateY(-1px);
+        }
+        .generate-btn .icon {
+            font-size: 1.5rem;
+        }
+        
+        .form-note {
+            text-align: center;
+            margin-top: var(--spacing-md);
+            font-size: 0.8125rem;
+            color: var(--text-light);
+        }
+        .form-note a {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        .form-note a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Features */
         .features { padding: var(--spacing-3xl) var(--spacing-xl); background: var(--bg-secondary); }
         .section-container { max-width: 1200px; margin: 0 auto; }
         .section-header { text-align: center; margin-bottom: var(--spacing-3xl); }
@@ -108,17 +311,20 @@
         .feature-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: var(--spacing-sm); }
         .feature-description { color: var(--text-secondary); line-height: 1.7; }
         
+        /* Stats */
         .stats { padding: var(--spacing-3xl) var(--spacing-xl); background: linear-gradient(135deg, var(--primary), var(--secondary)); }
         .stats-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--spacing-xl); text-align: center; }
         .stat-item { color: white; }
         .stat-number { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: var(--spacing-xs); }
         .stat-label { font-size: 0.9375rem; opacity: 0.9; }
         
+        /* CTA */
         .cta { padding: var(--spacing-3xl) var(--spacing-xl); text-align: center; background: var(--bg-secondary); }
         .cta-box { max-width: 700px; margin: 0 auto; background: var(--bg-primary); border-radius: var(--radius-xl); padding: var(--spacing-3xl); box-shadow: var(--shadow-lg); border: 1px solid var(--border-light); }
         .cta-title { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; margin-bottom: var(--spacing-md); }
         .cta-description { color: var(--text-secondary); margin-bottom: var(--spacing-xl); }
         
+        /* Footer */
         .footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: var(--spacing-3xl) var(--spacing-xl) var(--spacing-xl); }
         .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--spacing-3xl); margin-bottom: var(--spacing-3xl); }
         .footer-brand img { height: 50px; filter: brightness(0) invert(1); margin-bottom: var(--spacing-md); }
@@ -136,6 +342,7 @@
         .social-icon { display: inline-flex; align-items: center; gap: var(--spacing-sm); }
         .social-icon svg { width: 18px; height: 18px; fill: currentColor; }
         
+        /* Responsive */
         @media (max-width: 968px) {
             .nav-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: var(--spacing-lg); box-shadow: var(--shadow-lg); gap: var(--spacing-md); }
             .nav-menu.active { display: flex; }
@@ -153,6 +360,8 @@
             .stats-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr; }
             .footer-bottom { flex-direction: column; gap: var(--spacing-md); text-align: center; }
+            .form-row { grid-template-columns: 1fr; }
+            .optional-content.show { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -181,7 +390,7 @@
                 <h1 class="hero-title">Créez vos <span>fiches pédagogiques</span> EPS en quelques clics</h1>
                 <p class="hero-description">Le premier générateur intelligent de fiches pédagogiques pour les professeurs d'éducation physique et sportive au Maroc. Gagnez du temps et concentrez-vous sur l'essentiel : vos élèves.</p>
                 <div class="hero-buttons">
-                    <a href="generateur.html" class="btn btn-primary"><span>🚀</span> Générer ma fiche</a>
+                    <a href="#generateur" class="btn btn-primary"><span>🚀</span> Générer ma fiche</a>
                     <a href="blog.html" class="btn btn-secondary"><span>📚</span> Lire le blog</a>
                 </div>
             </div>
@@ -201,6 +410,132 @@
                         <div class="hero-card-item"><span class="hero-card-item-icon">✅</span><span class="hero-card-item-text">Conforme OP 2009</span></div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- NOUVELLE SECTION : FORMULAIRE GÉNÉRATEUR -->
+    <!-- ============================================== -->
+    <section class="generator-section" id="generateur">
+        <div class="generator-container">
+            <div class="generator-box">
+                <div class="generator-header">
+                    <span class="section-badge">🚀 Génération rapide</span>
+                    <h2>Créez votre fiche en 2 minutes</h2>
+                    <p>Remplissez les champs ci-dessous et obtenez une fiche pédagogique complète</p>
+                </div>
+                
+                <form class="quick-form" id="quickForm">
+                    <!-- Champs obligatoires -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span>📊</span> Niveau scolaire <span class="required">*</span>
+                            </label>
+                            <select class="form-select" id="niveau" required>
+                                <option value="">-- Sélectionner --</option>
+                                <optgroup label="🏫 Collège (OP 2009)">
+                                    <option value="1AC">1ère Année Collège</option>
+                                    <option value="2AC">2ème Année Collège</option>
+                                    <option value="3AC">3ème Année Collège</option>
+                                </optgroup>
+                                <optgroup label="🎓 Lycée (OP 2007)">
+                                    <option value="TC">Tronc Commun</option>
+                                    <option value="1AB">1ère Année Bac</option>
+                                    <option value="2AB">2ème Année Bac</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span>⚽</span> Activité sportive (APS) <span class="required">*</span>
+                            </label>
+                            <select class="form-select" id="aps" required>
+                                <option value="">-- Sélectionner --</option>
+                                <optgroup label="🏆 Sports collectifs">
+                                    <option value="Handball">🤾 Handball</option>
+                                    <option value="Football">⚽ Football</option>
+                                    <option value="Basketball">🏀 Basketball</option>
+                                    <option value="Volleyball">🏐 Volleyball</option>
+                                </optgroup>
+                                <optgroup label="🏃 Athlétisme">
+                                    <option value="Course de vitesse">🏃 Course de vitesse</option>
+                                    <option value="Course de relais">🏃‍♂️ Course de relais</option>
+                                    <option value="Saut en longueur">🦘 Saut en longueur</option>
+                                    <option value="Saut en hauteur">⬆️ Saut en hauteur</option>
+                                    <option value="Lancer de poids">💪 Lancer de poids</option>
+                                    <option value="Course de durée">⏱️ Course de durée</option>
+                                </optgroup>
+                                <optgroup label="🤸 Gymnastique">
+                                    <option value="Gymnastique">🤸 Gymnastique au sol</option>
+                                </optgroup>
+                                <optgroup label="🏸 Sports de renvoi">
+                                    <option value="Tennis de table">🏓 Tennis de table</option>
+                                    <option value="Badminton">🏸 Badminton</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label class="form-label">
+                            <span>🎯</span> Objectif de la séance <span class="required">*</span>
+                        </label>
+                        <textarea class="form-textarea" id="objectif" required placeholder="Ex: Améliorer la capacité de l'élève à effectuer une passe précise à un partenaire en mouvement"></textarea>
+                    </div>
+                    
+                    <!-- Champs optionnels -->
+                    <div class="optional-fields">
+                        <div class="optional-toggle" id="optionalToggle">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                            <span>Afficher les options supplémentaires (facultatif)</span>
+                        </div>
+                        <div class="optional-content" id="optionalContent">
+                            <div class="form-group">
+                                <label class="form-label">👤 Nom du professeur</label>
+                                <input type="text" class="form-input" id="nomProf" placeholder="M. / Mme...">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">🏫 Établissement</label>
+                                <input type="text" class="form-input" id="etablissement" placeholder="Lycée / Collège...">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">📅 Année scolaire</label>
+                                <input type="text" class="form-input" id="anneeScolaire" value="2024-2025">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">🔢 N° de séance</label>
+                                <select class="form-select" id="numeroSeance">
+                                    <option value="1">Séance 1</option>
+                                    <option value="2">Séance 2</option>
+                                    <option value="3">Séance 3</option>
+                                    <option value="4">Séance 4</option>
+                                    <option value="5">Séance 5</option>
+                                    <option value="6">Séance 6</option>
+                                    <option value="7">Séance 7</option>
+                                    <option value="8">Séance 8</option>
+                                    <option value="9">Séance 9</option>
+                                    <option value="10">Séance 10</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="generate-btn-container">
+                        <button type="submit" class="generate-btn">
+                            <span class="icon">🚀</span>
+                            <span>Générer ma fiche</span>
+                        </button>
+                    </div>
+                    
+                    <p class="form-note">
+                        Vous serez redirigé vers la page de génération. 
+                        <a href="generateur.html">Accéder au générateur complet →</a>
+                    </p>
+                </form>
             </div>
         </div>
     </section>
@@ -260,7 +595,7 @@
         <div class="cta-box">
             <h2 class="cta-title">Prêt à créer votre première fiche ?</h2>
             <p class="cta-description">Rejoignez la communauté des professeurs d'EPS qui gagnent du temps grâce à Prof EPS.</p>
-            <a href="generateur.html" class="btn btn-primary"><span>🚀</span> Commencer maintenant</a>
+            <a href="#generateur" class="btn btn-primary"><span>🚀</span> Commencer maintenant</a>
         </div>
     </section>
 
@@ -324,6 +659,7 @@
     </footer>
 
     <script>
+        // Navbar scroll effect
         const navbar = document.getElementById('navbar');
         const navToggle = document.getElementById('navToggle');
         const navMenu = document.getElementById('navMenu');
@@ -334,6 +670,60 @@
         
         navToggle.addEventListener('click', () => {
             navMenu.classList.toggle('active');
+        });
+        
+        // Optional fields toggle
+        const optionalToggle = document.getElementById('optionalToggle');
+        const optionalContent = document.getElementById('optionalContent');
+        
+        optionalToggle.addEventListener('click', () => {
+            optionalToggle.classList.toggle('open');
+            optionalContent.classList.toggle('show');
+        });
+        
+        // Form submission - Store in localStorage and redirect
+        const quickForm = document.getElementById('quickForm');
+        
+        quickForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Récupérer les valeurs
+            const formData = {
+                niveau: document.getElementById('niveau').value,
+                aps: document.getElementById('aps').value,
+                objectif: document.getElementById('objectif').value,
+                nomProf: document.getElementById('nomProf').value,
+                etablissement: document.getElementById('etablissement').value,
+                anneeScolaire: document.getElementById('anneeScolaire').value,
+                numeroSeance: document.getElementById('numeroSeance').value,
+                autoGenerate: true // Flag pour lancer automatiquement
+            };
+            
+            // Validation
+            if (!formData.niveau || !formData.aps || !formData.objectif) {
+                alert('Veuillez remplir tous les champs obligatoires (*)');
+                return;
+            }
+            
+            // Stocker dans localStorage
+            localStorage.setItem('profeps_formData', JSON.stringify(formData));
+            
+            // Rediriger vers la page générateur
+            window.location.href = 'generateur.html';
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
     </script>
 </body>
