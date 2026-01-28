@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Générateur de fiches EPS | Créez votre fiche en 2 minutes - Prof EPS</title>
-    <meta name="description" content="Générez automatiquement des fiches de préparation EPS pour handball, football, gymnastique, athlétisme. Conforme aux OP 2007-2009 du Maroc.">
+    <meta name="description" content="Générateur de documents EPS - Fiches de séance, projets de cycle et grilles d'évaluation conformes aux OP 2007-2009 du Maroc.">
+    <title>Générateur de Documents EPS | Prof EPS Maroc</title>
     <link rel="icon" type="image/png" href="/images/prof_eps.png">
-    <link rel="stylesheet" href="css/style.css">
-    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TH0Z1SGNXH"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-TH0Z1SGNXH');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        
         :root {
             --primary: #c1272d;
             --primary-dark: #a01f24;
@@ -38,246 +41,131 @@
             --spacing-xl: 2rem;
             --spacing-2xl: 3rem;
             --spacing-3xl: 4rem;
-            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-display: 'Plus Jakarta Sans', var(--font-primary);
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Plus Jakarta Sans', var(--font-sans);
             --transition: all 0.3s ease;
         }
         
-        .generator-hero {
-            padding: 120px var(--spacing-xl) var(--spacing-xl);
-            background: linear-gradient(135deg, rgba(193, 39, 45, 0.05) 0%, rgba(0, 98, 51, 0.05) 100%);
-            text-align: center;
-        }
-        .generator-section { padding: var(--spacing-2xl) var(--spacing-xl) var(--spacing-3xl); }
-        .generator-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 400px 1fr;
-            gap: var(--spacing-2xl);
-            align-items: start;
-        }
-        .form-panel {
-            background: var(--bg-card);
-            border-radius: var(--radius-2xl);
-            padding: var(--spacing-xl);
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border-light);
-            position: sticky;
-            top: 100px;
-        }
-        .form-panel-header {
-            text-align: center;
-            margin-bottom: var(--spacing-xl);
-            padding-bottom: var(--spacing-lg);
-            border-bottom: 1px solid var(--border-light);
-        }
-        .form-panel-header h2 { font-family: var(--font-display); font-size: 1.5rem; color: var(--text-primary); margin-bottom: var(--spacing-xs); }
-        .form-panel-header p { color: var(--text-secondary); font-size: 0.9375rem; }
-        .form-section { margin-bottom: var(--spacing-lg); }
-        .form-section-title {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: var(--spacing-md);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-        }
-        .info-fields { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-sm); }
-        .form-group { margin-bottom: var(--spacing-md); }
-        .form-group.full-width { grid-column: 1 / -1; }
-        .form-label { display: block; font-size: 0.875rem; font-weight: 500; color: var(--text-primary); margin-bottom: var(--spacing-xs); }
-        .form-input, .form-select, .form-textarea {
-            width: 100%;
-            padding: var(--spacing-sm) var(--spacing-md);
-            font-family: var(--font-primary);
-            font-size: 0.9375rem;
-            color: var(--text-primary);
-            background: var(--bg-primary);
-            border: 2px solid var(--border);
-            border-radius: var(--radius-lg);
-            transition: var(--transition);
-        }
-        .form-input:focus, .form-select:focus, .form-textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: var(--bg-card);
-            box-shadow: 0 0 0 4px rgba(193, 39, 45, 0.1);
-        }
-        .form-textarea { min-height: 80px; resize: vertical; }
-        .generate-btn {
-            width: 100%;
-            padding: var(--spacing-md) var(--spacing-xl);
-            font-size: 1rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            border: none;
-            border-radius: var(--radius-lg);
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--spacing-sm);
-        }
-        .generate-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(193, 39, 45, 0.4); }
-        .generate-btn:disabled { opacity: 0.7; cursor: not-allowed; }
-        .generate-btn.loading { background: var(--text-light); }
+        body { font-family: var(--font-sans); background: var(--bg-secondary); color: var(--text-primary); line-height: 1.6; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
         
-        /* Bouton retour */
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            padding: var(--spacing-sm) var(--spacing-md);
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            cursor: pointer;
-            transition: var(--transition);
-            margin-bottom: var(--spacing-md);
-        }
-        .back-btn:hover {
-            color: var(--primary);
-            border-color: var(--primary);
-            background: rgba(193, 39, 45, 0.05);
-        }
-        
-        .result-panel {
-            background: var(--bg-card);
-            border-radius: var(--radius-2xl);
-            padding: var(--spacing-xl);
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border-light);
-            min-height: 600px;
-        }
-        .result-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: var(--spacing-lg);
-            padding-bottom: var(--spacing-lg);
-            border-bottom: 1px solid var(--border-light);
-        }
-        .result-title { font-family: var(--font-display); font-size: 1.25rem; color: var(--text-primary); }
-        .result-actions { display: flex; gap: var(--spacing-sm); }
-        .result-btn {
-            padding: var(--spacing-sm) var(--spacing-md);
-            font-size: 0.875rem;
-            font-weight: 500;
-            border-radius: var(--radius);
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-xs);
-            cursor: pointer;
-            border: none;
-        }
-        .result-btn-primary { background: var(--secondary); color: white; }
-        .result-btn-primary:hover { background: var(--secondary-dark); }
-        .result-btn-secondary { background: var(--bg-primary); color: var(--text-primary); border: 1px solid var(--border); }
-        .result-btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
-        .empty-state { text-align: center; padding: var(--spacing-3xl) var(--spacing-xl); }
-        .empty-state-icon { font-size: 5rem; margin-bottom: var(--spacing-lg); opacity: 0.5; }
-        .empty-state h3 { font-size: 1.5rem; color: var(--text-primary); margin-bottom: var(--spacing-sm); }
-        .empty-state p { color: var(--text-secondary); max-width: 400px; margin: 0 auto; }
-        .fiche-content { display: none; }
-        .fiche-content.show { display: block; }
-        .fiche-detail { line-height: 1.4; font-size: 0.875rem; }
-        .fiche-detail h2, .fiche-detail h3 { color: var(--text-primary); font-size: 1.1rem; margin-top: var(--spacing-md); margin-bottom: var(--spacing-sm); padding-bottom: var(--spacing-xs); border-bottom: 2px solid var(--primary); }
-        .fiche-detail h4 { color: var(--primary); font-size: 0.95rem; margin-top: var(--spacing-sm); margin-bottom: var(--spacing-xs); }
-        .fiche-detail p { margin: var(--spacing-xs) 0; color: var(--text-secondary); }
-        .fiche-detail ul, .fiche-detail ol { margin: var(--spacing-xs) 0; padding-left: var(--spacing-lg); }
-        .fiche-detail li { margin: 2px 0; color: var(--text-secondary); }
-        .fiche-detail strong { color: var(--text-primary); }
-        .fiche-detail hr { margin: var(--spacing-lg) 0; border: none; border-top: 2px solid var(--border-light); }
-        .fiche-detail pre { background: var(--bg-secondary); padding: var(--spacing-md); border-radius: var(--radius); overflow-x: auto; font-size: 0.75rem; line-height: 1.4; }
-        .fiche-detail table { width: 100%; border-collapse: collapse; margin: var(--spacing-sm) 0; }
-        .fiche-detail th, .fiche-detail td { border: 1px solid var(--border); padding: var(--spacing-sm); text-align: left; font-size: 0.8rem; }
-        .fiche-detail th { background: var(--bg-secondary); font-weight: 600; }
-        
-        .loading-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
+        /* Navbar - IDENTIQUE à la page d'accueil */
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: var(--spacing-md) var(--spacing-xl); background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-light); transition: var(--transition); }
+        .navbar.scrolled { padding: var(--spacing-sm) var(--spacing-xl); box-shadow: var(--shadow-md); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo img { height: 60px; transition: var(--transition); }
+        .navbar.scrolled .nav-logo img { height: 50px; }
+        .nav-menu { display: flex; align-items: center; gap: var(--spacing-xl); }
+        .nav-link { font-size: 0.9375rem; font-weight: 500; color: var(--text-secondary); padding: var(--spacing-sm) 0; position: relative; }
+        .nav-link:hover, .nav-link.active { color: var(--primary); }
+        .nav-link.active::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--primary); border-radius: 2px; }
+        .nav-cta { display: inline-flex; align-items: center; gap: var(--spacing-sm); padding: var(--spacing-sm) var(--spacing-lg); background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; font-weight: 600; font-size: 0.9375rem; border-radius: var(--radius-full); box-shadow: var(--shadow-md); }
+        .nav-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+        .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
+        .nav-toggle span { width: 25px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: var(--transition); }
+
+        /* Loading Overlay */
+        .loading-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, var(--primary), var(--secondary)); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; }
         .loading-overlay.show { display: flex; }
-        .loading-content { text-align: center; color: white; }
-        .loading-spinner { width: 80px; height: 80px; margin: 0 auto 20px; position: relative; }
-        .loading-spinner::before, .loading-spinner::after { content: ''; position: absolute; border-radius: 50%; }
-        .loading-spinner::before { width: 100%; height: 100%; border: 4px solid transparent; border-top-color: #006233; border-right-color: #006233; animation: spin 1s linear infinite; }
-        .loading-spinner::after { width: 60%; height: 60%; top: 20%; left: 20%; border: 4px solid transparent; border-bottom-color: #c1272d; border-left-color: #c1272d; animation: spin 0.8s linear infinite reverse; }
-        .loading-text { font-size: 1.25rem; font-weight: 600; margin-bottom: 10px; }
-        .loading-subtext { font-size: 0.9rem; opacity: 0.8; }
-        .loading-progress { width: 200px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; margin: 20px auto 0; overflow: hidden; }
-        .loading-progress-bar { height: 100%; background: linear-gradient(90deg, #c1272d, #006233, #c1272d); background-size: 200% 100%; animation: progress 2s ease-in-out infinite; }
-        @keyframes progress { 0% { width: 0%; } 50% { width: 70%; } 100% { width: 100%; } }
-        .spinner { width: 20px; height: 20px; border: 2px solid rgba(255, 255, 255, 0.3); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; }
+        .loading-spinner { width: 60px; height: 60px; border: 4px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        
-        /* Auto-generation notice */
-        .auto-notice {
-            background: linear-gradient(135deg, rgba(0, 98, 51, 0.1), rgba(193, 39, 45, 0.1));
-            border: 1px solid var(--secondary);
-            border-radius: var(--radius-lg);
-            padding: var(--spacing-md);
-            margin-bottom: var(--spacing-lg);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            font-size: 0.875rem;
-            color: var(--secondary);
-        }
-        .auto-notice.hidden { display: none; }
-        .auto-notice-icon { font-size: 1.5rem; }
-        
-        @media (max-width: 1024px) { .generator-container { grid-template-columns: 1fr; } .form-panel { position: static; } }
-        @media (max-width: 600px) { .info-fields { grid-template-columns: 1fr; } .result-header { flex-direction: column; gap: var(--spacing-md); align-items: flex-start; } .result-actions { width: 100%; } .result-btn { flex: 1; justify-content: center; } }
-        
-        .footer-social a { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; transition: all 0.3s ease; }
+        .loading-text { color: white; font-size: 1.25rem; font-weight: 600; margin-top: 20px; }
+        .loading-subtext { color: rgba(255,255,255,0.8); font-size: 0.95rem; margin-top: 8px; }
+
+        /* Main Content */
+        .main-content { padding-top: 100px; min-height: calc(100vh - 200px); }
+        .page-header { text-align: center; padding: var(--spacing-2xl) var(--spacing-xl) var(--spacing-xl); }
+        .page-header h1 { font-family: var(--font-display); font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: var(--text-primary); margin-bottom: var(--spacing-sm); }
+        .page-header h1 span { background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .page-header p { color: var(--text-secondary); font-size: 1.1rem; }
+
+        /* Generator Layout */
+        .generator-container { max-width: 1400px; margin: 0 auto; padding: 0 var(--spacing-xl) var(--spacing-3xl); display: grid; grid-template-columns: 420px 1fr; gap: var(--spacing-2xl); align-items: start; }
+
+        /* Cards */
+        .card { background: var(--bg-card); border-radius: var(--radius-2xl); box-shadow: var(--shadow-lg); overflow: hidden; border: 1px solid var(--border-light); }
+        .card::before { content: ''; display: block; height: 4px; background: linear-gradient(90deg, var(--primary), var(--secondary)); }
+
+        /* Tabs */
+        .tabs { display: flex; background: var(--bg-secondary); }
+        .tab { flex: 1; padding: var(--spacing-lg) var(--spacing-md); text-align: center; cursor: pointer; font-weight: 600; color: var(--text-light); background: none; border: none; transition: var(--transition); border-bottom: 3px solid transparent; }
+        .tab:hover { background: rgba(193,39,45,0.05); color: var(--primary); }
+        .tab.active { color: var(--primary); background: var(--bg-card); border-bottom-color: var(--primary); }
+        .tab-icon { display: block; font-size: 1.5rem; margin-bottom: 4px; }
+
+        /* Form */
+        .card-body { padding: var(--spacing-xl); }
+        .form-group { margin-bottom: var(--spacing-lg); }
+        .form-label { display: flex; align-items: center; gap: var(--spacing-xs); font-size: 0.875rem; font-weight: 600; color: var(--text-primary); margin-bottom: var(--spacing-sm); }
+        .form-label .required { color: var(--primary); }
+        .form-input, .form-select, .form-textarea { width: 100%; padding: var(--spacing-md); font-family: var(--font-sans); font-size: 1rem; color: var(--text-primary); background: var(--bg-secondary); border: 2px solid var(--border); border-radius: var(--radius-lg); transition: var(--transition); }
+        .form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--primary); background: var(--bg-card); box-shadow: 0 0 0 4px rgba(193,39,45,0.1); }
+        .form-textarea { min-height: 100px; resize: vertical; }
+        .form-select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-size: 20px; padding-right: 48px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md); }
+        .conditional { display: none; }
+        .conditional.show { display: block; }
+
+        .info-box { background: linear-gradient(135deg, rgba(193,39,45,0.05), rgba(0,98,51,0.05)); border-left: 4px solid var(--secondary); padding: var(--spacing-md); border-radius: 0 var(--radius) var(--radius) 0; margin-bottom: var(--spacing-lg); font-size: 0.875rem; color: var(--text-secondary); }
+
+        /* Optional Toggle */
+        .optional-toggle { display: flex; align-items: center; gap: var(--spacing-sm); color: var(--text-secondary); font-size: 0.875rem; cursor: pointer; padding: var(--spacing-md) 0; border-top: 1px dashed var(--border); margin-top: var(--spacing-md); }
+        .optional-toggle:hover { color: var(--primary); }
+        .optional-toggle svg { width: 20px; height: 20px; transition: var(--transition); }
+        .optional-toggle.open svg { transform: rotate(180deg); }
+        .optional-content { display: none; padding-top: var(--spacing-md); }
+        .optional-content.show { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md); }
+
+        /* Generate Button */
+        .generate-btn { width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: var(--spacing-sm); padding: var(--spacing-lg); font-size: 1.1rem; font-weight: 700; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border: none; border-radius: var(--radius-full); cursor: pointer; transition: var(--transition); box-shadow: 0 8px 30px rgba(193,39,45,0.3); margin-top: var(--spacing-lg); }
+        .generate-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(193,39,45,0.4); }
+        .generate-btn:disabled { background: var(--text-light); cursor: not-allowed; transform: none; box-shadow: none; }
+
+        /* Preview Card */
+        .preview-card { display: flex; flex-direction: column; min-height: 600px; }
+        .preview-header { display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-lg) var(--spacing-xl); border-bottom: 1px solid var(--border-light); }
+        .preview-header h2 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--text-primary); }
+        .preview-actions { display: none; gap: var(--spacing-sm); }
+        .preview-actions.show { display: flex; }
+        .btn { display: inline-flex; align-items: center; gap: var(--spacing-sm); padding: var(--spacing-sm) var(--spacing-lg); font-weight: 600; font-size: 0.9rem; border-radius: var(--radius-full); transition: var(--transition); cursor: pointer; border: none; }
+        .btn-success { background: var(--secondary); color: white; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+        .preview-content { flex: 1; padding: var(--spacing-xl); overflow: auto; background: var(--bg-secondary); }
+        .preview-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; min-height: 400px; color: var(--text-light); text-align: center; }
+        .preview-empty-icon { font-size: 4rem; opacity: 0.3; margin-bottom: var(--spacing-lg); }
+        .preview-empty h3 { font-size: 1.2rem; color: var(--text-primary); margin-bottom: var(--spacing-sm); }
+        .preview-document { background: var(--bg-card); padding: var(--spacing-xl); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
+
+        /* Footer - IDENTIQUE à la page d'accueil */
+        .footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: var(--spacing-3xl) var(--spacing-xl) var(--spacing-xl); }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--spacing-3xl); margin-bottom: var(--spacing-3xl); }
+        .footer-brand img { height: 50px; filter: brightness(0) invert(1); margin-bottom: var(--spacing-md); }
+        .footer-brand p { color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.7; }
+        .footer-title { font-size: 1rem; font-weight: 600; margin-bottom: var(--spacing-lg); }
+        .footer-links { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+        .footer-links a { color: rgba(255,255,255,0.7); font-size: 0.9rem; transition: var(--transition); }
+        .footer-links a:hover { color: white; }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: var(--spacing-xl); border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; }
+        .footer-copyright { color: rgba(255,255,255,0.5); font-size: 0.875rem; }
+        .footer-social { display: flex; gap: var(--spacing-md); }
+        .footer-social a { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; transition: var(--transition); }
         .footer-social a:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
         .footer-social svg { width: 20px; height: 20px; fill: white; }
-        .social-icon { display: inline-flex; align-items: center; gap: 0.5rem; }
-        .social-icon svg { width: 18px; height: 18px; fill: currentColor; }
 
-        /* Overrides requested for UI consistency */
-        .navbar { background-color: #c1272d !important; border-bottom: 1px solid rgba(255,255,255,0.1) !important; box-shadow: 0 4px 20px rgba(193, 39, 45, 0.2); }
-        .navbar .nav-link { color: rgba(255,255,255,0.9) !important; }
-        .navbar .nav-link:hover, .navbar .nav-link.active { color: #ffffff !important; opacity: 1; }
-        .navbar .nav-link.active::after { background: #ffffff !important; }
-        .navbar .nav-toggle span { background: #ffffff !important; }
-        .navbar .nav-logo img { filter: brightness(0) invert(1); }
-        
-        .footer { background: #006233 !important; }
-        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.2) !important; }
+        /* Responsive */
+        @media (max-width: 1100px) { .generator-container { grid-template-columns: 1fr; } .preview-card { min-height: auto; } }
+        @media (max-width: 968px) { .nav-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: var(--spacing-lg); box-shadow: var(--shadow-lg); gap: var(--spacing-md); } .nav-menu.active { display: flex; } .nav-toggle { display: flex; } .footer-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 640px) { .form-row, .optional-content.show { grid-template-columns: 1fr; } .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; gap: var(--spacing-md); text-align: center; } }
     </style>
 </head>
 <body>
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-content">
-            <div class="loading-spinner"></div>
-            <div class="loading-text">Génération en cours...</div>
-            <div class="loading-subtext" id="loadingStatus">Analyse des paramètres...</div>
-            <div class="loading-progress"><div class="loading-progress-bar"></div></div>
-        </div>
-    </div>
-
+    <!-- NAVBAR - Identique à la page d'accueil -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
-                <img src="/images/prof_eps.png" alt="Prof EPS" style="height: 60px;">
+                <img src="/images/prof_eps.png" alt="Prof EPS">
             </a>
             <div class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link">Accueil</a>
@@ -291,158 +179,191 @@
         </div>
     </nav>
 
-    <section class="generator-hero">
-        <span class="section-badge">✨ Générateur</span>
-        <h1 class="hero-title" style="margin-bottom: var(--spacing-md);">Créez votre <span>fiche EPS</span></h1>
-        <p class="hero-description" style="max-width: 700px; margin: 0 auto;">Remplissez le formulaire ci-dessous et laissez notre IA générer une fiche pédagogique complète.</p>
-    </section>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">⚡ Génération en cours...</div>
+        <div class="loading-subtext">Création de votre document personnalisé</div>
+    </div>
 
-    <section class="generator-section">
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1>📄 Générateur de <span>Documents EPS</span></h1>
+            <p>Créez vos fiches de séance, projets de cycle et grilles d'évaluation en quelques clics</p>
+        </div>
+
         <div class="generator-container">
-            <div class="form-panel">
-                <a href="index.html" class="back-btn">
-                    <span>←</span> Retour à l'accueil
-                </a>
-                
-                <div class="form-panel-header">
-                    <h2>📝 Paramètres</h2>
-                    <p>Configurez votre fiche de séance</p>
+            <!-- Formulaire -->
+            <div class="card">
+                <div class="tabs">
+                    <button class="tab active" data-type="fiche"><span class="tab-icon">📋</span>Fiche</button>
+                    <button class="tab" data-type="projet"><span class="tab-icon">📊</span>Projet</button>
+                    <button class="tab" data-type="grille"><span class="tab-icon">📝</span>Grille</button>
                 </div>
-                
-                <!-- Notice de génération automatique -->
-                <div class="auto-notice hidden" id="autoNotice">
-                    <span class="auto-notice-icon">⚡</span>
-                    <span>Génération automatique en cours depuis l'accueil...</span>
-                </div>
-                
-                <form id="generateForm">
-                    <div class="form-section">
-                        <div class="form-section-title"><span>👤</span> Informations professeur</div>
-                        <div class="info-fields">
+                <div class="card-body">
+                    <form id="form">
+                        <div class="form-row">
                             <div class="form-group">
-                                <label class="form-label">Nom du professeur</label>
+                                <label class="form-label"><span>📊</span> Niveau scolaire <span class="required">*</span></label>
+                                <select class="form-select" id="niveau" required>
+                                    <option value="">-- Sélectionner --</option>
+                                    <optgroup label="🏫 Collège (OP 2009)">
+                                        <option value="1AC">1ère Année Collège</option>
+                                        <option value="2AC">2ème Année Collège</option>
+                                        <option value="3AC">3ème Année Collège</option>
+                                    </optgroup>
+                                    <optgroup label="🎓 Lycée (OP 2007)">
+                                        <option value="TC">Tronc Commun</option>
+                                        <option value="1AB">1ère Année Bac</option>
+                                        <option value="2AB">2ème Année Bac</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label"><span>⚽</span> APS <span class="required">*</span></label>
+                                <select class="form-select" id="aps" required>
+                                    <option value="">-- Sélectionner --</option>
+                                    <optgroup label="🏆 Sports collectifs">
+                                        <option value="Handball">🤾 Handball</option>
+                                        <option value="Football">⚽ Football</option>
+                                        <option value="Basketball">🏀 Basketball</option>
+                                        <option value="Volleyball">🏐 Volleyball</option>
+                                    </optgroup>
+                                    <optgroup label="🏃 Athlétisme">
+                                        <option value="Course de vitesse">🏃 Course de vitesse</option>
+                                        <option value="Saut en longueur">🦘 Saut en longueur</option>
+                                        <option value="Saut en hauteur">⬆️ Saut en hauteur</option>
+                                        <option value="Lancer de poids">💪 Lancer de poids</option>
+                                        <option value="Course de durée">⏱️ Course de durée</option>
+                                    </optgroup>
+                                    <optgroup label="🤸 Gymnastique">
+                                        <option value="Gymnastique">🤸 Gymnastique au sol</option>
+                                    </optgroup>
+                                    <optgroup label="🏸 Sports de renvoi">
+                                        <option value="Tennis de table">🏓 Tennis de table</option>
+                                        <option value="Badminton">🏸 Badminton</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- FICHE Fields -->
+                        <div id="ficheFields" class="conditional show">
+                            <div class="form-group">
+                                <label class="form-label"><span>🎯</span> Objectif de la séance <span class="required">*</span></label>
+                                <textarea class="form-textarea" id="objectif" placeholder="Ex: Améliorer la qualité de la passe en mouvement vers un partenaire démarqué"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label"><span>🔢</span> N° de séance</label>
+                                <select class="form-select" id="numeroSeance">
+                                    <option value="1">Séance 1</option>
+                                    <option value="2">Séance 2</option>
+                                    <option value="3">Séance 3</option>
+                                    <option value="4">Séance 4</option>
+                                    <option value="5">Séance 5</option>
+                                    <option value="6">Séance 6</option>
+                                    <option value="7">Séance 7</option>
+                                    <option value="8">Séance 8</option>
+                                    <option value="9">Séance 9</option>
+                                    <option value="10">Séance 10</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- PROJET Fields -->
+                        <div id="projetFields" class="conditional">
+                            <div class="info-box">📌 <strong>Structure automatique :</strong> S1 = Évaluation diagnostique | S2 = Acquisition | Dernière = Évaluation terminale</div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label"><span>🎚️</span> Niveau des élèves</label>
+                                    <select class="form-select" id="niveauEleves">
+                                        <option value="debutant">🟢 Débutant</option>
+                                        <option value="moyen" selected>🟡 Moyen</option>
+                                        <option value="avance">🟠 Avancé</option>
+                                        <option value="elite">🔴 Élite</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label"><span>📅</span> Nombre de séances</label>
+                                    <select class="form-select" id="nombreSeances">
+                                        <option value="8">8 séances</option>
+                                        <option value="10" selected>10 séances</option>
+                                        <option value="12">12 séances</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- GRILLE Fields -->
+                        <div id="grilleFields" class="conditional">
+                            <div class="form-group">
+                                <label class="form-label"><span>📋</span> Type de grille</label>
+                                <select class="form-select" id="typeGrille">
+                                    <option value="observation">👁️ Grille d'observation</option>
+                                    <option value="evaluation">📊 Grille d'évaluation</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Options supplémentaires -->
+                        <div class="optional-toggle" id="optionalToggle">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            <span>Afficher les options supplémentaires</span>
+                        </div>
+                        <div class="optional-content" id="optionalContent">
+                            <div class="form-group">
+                                <label class="form-label">👤 Nom du professeur</label>
                                 <input type="text" class="form-input" id="nomProf" placeholder="M. / Mme...">
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Établissement</label>
+                                <label class="form-label">🏫 Établissement</label>
                                 <input type="text" class="form-input" id="etablissement" placeholder="Lycée / Collège...">
                             </div>
-                            <div class="form-group full-width">
-                                <label class="form-label">Année scolaire</label>
+                            <div class="form-group">
+                                <label class="form-label">📅 Année scolaire</label>
                                 <input type="text" class="form-input" id="anneeScolaire" value="2024-2025">
                             </div>
+                            <div class="form-group">
+                                <label class="form-label">🏷️ Classe</label>
+                                <input type="text" class="form-input" id="classe" placeholder="Ex: 3AC 1">
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="form-section">
-                        <div class="form-section-title"><span>⚙️</span> Paramètres de la séance</div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Niveau scolaire *</label>
-                            <select class="form-select" id="niveau" required>
-                                <option value="">-- Sélectionner --</option>
-                                <optgroup label="Collège (OP 2009)">
-                                    <option value="1AC">1ère Année Collège</option>
-                                    <option value="2AC">2ème Année Collège</option>
-                                    <option value="3AC">3ème Année Collège</option>
-                                </optgroup>
-                                <optgroup label="Lycée (OP 2007)">
-                                    <option value="TC">Tronc Commun</option>
-                                    <option value="1AB">1ère Année Bac</option>
-                                    <option value="2AB">2ème Année Bac</option>
-                                </optgroup>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Activité sportive (APS) *</label>
-                            <select class="form-select" id="aps" required>
-                                <option value="">-- Sélectionner --</option>
-                                <optgroup label="Sports collectifs">
-                                    <option value="Handball">🤾 Handball</option>
-                                    <option value="Football">⚽ Football</option>
-                                    <option value="Basketball">🏀 Basketball</option>
-                                    <option value="Volleyball">🏐 Volleyball</option>
-                                </optgroup>
-                                <optgroup label="Athlétisme">
-                                    <option value="Course de vitesse">🏃 Course de vitesse</option>
-                                    <option value="Course de relais">🏃‍♂️ Course de relais</option>
-                                    <option value="Saut en longueur">🦘 Saut en longueur</option>
-                                    <option value="Saut en hauteur">⬆️ Saut en hauteur</option>
-                                    <option value="Lancer de poids">💪 Lancer de poids</option>
-                                    <option value="Course de durée">⏱️ Course de durée</option>
-                                </optgroup>
-                                <optgroup label="Gymnastique">
-                                    <option value="Gymnastique">🤸 Gymnastique au sol</option>
-                                </optgroup>
-                                <optgroup label="Sports de renvoi">
-                                    <option value="Tennis de table">🏓 Tennis de table</option>
-                                    <option value="Badminton">🏸 Badminton</option>
-                                </optgroup>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Objectif de la séance *</label>
-                            <textarea class="form-textarea" id="objectif" required placeholder="Ex: Améliorer la capacité de l'élève à conserver le ballon"></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Numéro de la séance</label>
-                            <select class="form-select" id="numeroSeance">
-                                <option value="1">Séance 1</option>
-                                <option value="2">Séance 2</option>
-                                <option value="3">Séance 3</option>
-                                <option value="4">Séance 4</option>
-                                <option value="5">Séance 5</option>
-                                <option value="6">Séance 6</option>
-                                <option value="7">Séance 7</option>
-                                <option value="8">Séance 8</option>
-                                <option value="9">Séance 9</option>
-                                <option value="10">Séance 10</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <button type="submit" class="generate-btn" id="generateBtn">
-                        <span>🚀</span>
-                        <span>Générer la fiche</span>
-                    </button>
-                </form>
-            </div>
-            
-            <div class="result-panel">
-                <div class="empty-state" id="emptyState">
-                    <div class="empty-state-icon">📋</div>
-                    <h3>Votre fiche apparaîtra ici</h3>
-                    <p>Remplissez le formulaire et cliquez sur "Générer la fiche".</p>
+
+                        <button type="submit" class="generate-btn" id="submitBtn">
+                            <span>🚀</span> Générer le document
+                        </button>
+                    </form>
                 </div>
-                
-                <div class="fiche-content" id="ficheContent">
-                    <div class="result-header">
-                        <h2 class="result-title">📋 Fiche de préparation</h2>
-                        <div class="result-actions">
-                            <button class="result-btn result-btn-primary" id="downloadBtn" style="display: none;">
-                                <span>📥</span> Télécharger Word
-                            </button>
-                            <button class="result-btn result-btn-secondary" id="downloadPdfBtn" style="display: none;">
-                                <span>📄</span> Télécharger PDF
-                            </button>
-                        </div>
+            </div>
+
+            <!-- Aperçu -->
+            <div class="card preview-card">
+                <div class="preview-header">
+                    <h2>📄 Aperçu du document</h2>
+                    <div class="preview-actions" id="previewActions">
+                        <button class="btn btn-success" id="downloadWord">📥 Word</button>
+                        <button class="btn btn-primary" id="downloadPdf">📥 PDF</button>
                     </div>
-                    <div class="fiche-detail" id="ficheDetail"></div>
+                </div>
+                <div class="preview-content" id="previewContent">
+                    <div class="preview-empty" id="previewEmpty">
+                        <div class="preview-empty-icon">📄</div>
+                        <h3>Aucun document généré</h3>
+                        <p>Remplissez le formulaire et cliquez sur "Générer" pour voir l'aperçu ici.</p>
+                    </div>
+                    <div class="preview-document" id="previewDocument" style="display:none;"></div>
                 </div>
             </div>
         </div>
-    </section>
+    </main>
 
+    <!-- FOOTER - Identique à la page d'accueil -->
     <footer class="footer">
         <div class="footer-grid">
             <div class="footer-brand">
-                <a href="index.html" class="nav-logo">
-                    <img src="/images/prof_eps.png" alt="Prof EPS" style="height: 60px; filter: brightness(0) invert(1);">
-                </a>
-                <p>Le premier générateur intelligent de fiches pédagogiques pour les professeurs d'EPS au Maroc.</p>
+                <a href="index.html"><img src="/images/prof_eps.png" alt="Prof EPS"></a>
+                <p>Le premier générateur intelligent de fiches pédagogiques pour les professeurs d'éducation physique et sportive au Maroc.</p>
             </div>
             <div>
                 <h4 class="footer-title">Navigation</h4>
@@ -457,6 +378,7 @@
             <div>
                 <h4 class="footer-title">Ressources</h4>
                 <div class="footer-links">
+                    <a href="blog.html">Articles</a>
                     <a href="article-op.html">Orientations Pédagogiques</a>
                     <a href="article-eval.html">Évaluation en EPS</a>
                     <a href="article-securite.html">Sécurité en EPS</a>
@@ -465,7 +387,7 @@
             <div>
                 <h4 class="footer-title">Contact</h4>
                 <div class="footer-links">
-                    <a href="mailto:epsprof.assistance@gmail.com">epsprof.assistance@gmail.com</a>
+                    <a href="mailto:profepsma@gmail.com">profepsma@gmail.com</a>
                     <a href="https://www.facebook.com/profepsma" target="_blank">Facebook</a>
                     <a href="https://www.instagram.com/profepsma/" target="_blank">Instagram</a>
                 </div>
@@ -473,189 +395,168 @@
         </div>
         <div class="footer-bottom">
             <p class="footer-copyright">© 2025 Prof EPS. Tous droits réservés.</p>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/profepsma" target="_blank" aria-label="Facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/profepsma/" target="_blank" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                <a href="mailto:profepsma@gmail.com" aria-label="Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                </a>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Elements
-        const generateForm = document.getElementById('generateForm');
-        const generateBtn = document.getElementById('generateBtn');
-        const emptyState = document.getElementById('emptyState');
-        const ficheContent = document.getElementById('ficheContent');
-        const ficheDetail = document.getElementById('ficheDetail');
-        const downloadBtn = document.getElementById('downloadBtn');
-        const downloadPdfBtn = document.getElementById('downloadPdfBtn');
-        const loadingOverlay = document.getElementById('loadingOverlay');
-        const loadingStatus = document.getElementById('loadingStatus');
+        let currentType = 'fiche';
+        let currentHtml = '';
+        let currentHtmlDisplay = '';
+        let currentFilename = '';
+
+        // Navbar scroll
         const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+
+        // Mobile menu
         const navToggle = document.getElementById('navToggle');
         const navMenu = document.getElementById('navMenu');
-        const autoNotice = document.getElementById('autoNotice');
-
-        let currentHtml = null;
-        let currentFilename = null;
-
-        // Navbar
-        window.addEventListener('scroll', () => {
-            navbar.classList.toggle('scrolled', window.scrollY > 50);
-        });
         navToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
 
-        // Loading
-        const loadingMessages = ['Analyse des paramètres...', 'Consultation des OP...', 'Génération des situations...', 'Finalisation...'];
-        function showLoading() {
-            loadingOverlay.classList.add('show');
-            let i = 0;
-            return setInterval(() => {
-                if (i < loadingMessages.length) loadingStatus.textContent = loadingMessages[i++];
-            }, 2000);
-        }
-        function hideLoading(interval) {
-            clearInterval(interval);
-            loadingOverlay.classList.remove('show');
-        }
+        // Optional toggle
+        const optionalToggle = document.getElementById('optionalToggle');
+        const optionalContent = document.getElementById('optionalContent');
+        optionalToggle.addEventListener('click', () => {
+            optionalToggle.classList.toggle('open');
+            optionalContent.classList.toggle('show');
+        });
 
-        // ========================================
-        // VÉRIFIER SI DONNÉES VIENNENT DE L'ACCUEIL
-        // ========================================
-        function checkForAutoGenerate() {
-            const savedData = localStorage.getItem('profeps_formData');
-            
-            if (savedData) {
-                try {
-                    const formData = JSON.parse(savedData);
-                    
-                    // Pré-remplir le formulaire
-                    if (formData.niveau) document.getElementById('niveau').value = formData.niveau;
-                    if (formData.aps) document.getElementById('aps').value = formData.aps;
-                    if (formData.objectif) document.getElementById('objectif').value = formData.objectif;
-                    if (formData.nomProf) document.getElementById('nomProf').value = formData.nomProf;
-                    if (formData.etablissement) document.getElementById('etablissement').value = formData.etablissement;
-                    if (formData.anneeScolaire) document.getElementById('anneeScolaire').value = formData.anneeScolaire;
-                    if (formData.numeroSeance) document.getElementById('numeroSeance').value = formData.numeroSeance;
-                    
-                    // Supprimer les données de localStorage
-                    localStorage.removeItem('profeps_formData');
-                    
-                    // Si autoGenerate est true, lancer automatiquement
-                    if (formData.autoGenerate) {
-                        autoNotice.classList.remove('hidden');
-                        
-                        // Petit délai pour que l'utilisateur voie que tout est prêt
-                        setTimeout(() => {
-                            generateFiche();
-                        }, 500);
-                    }
-                    
-                } catch (e) {
-                    console.error('Erreur parsing localStorage:', e);
-                    localStorage.removeItem('profeps_formData');
-                }
-            }
+        // Tabs
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentType = tab.dataset.type;
+                document.querySelectorAll('.conditional').forEach(f => f.classList.remove('show'));
+                const fields = document.getElementById(currentType + 'Fields');
+                if (fields) fields.classList.add('show');
+                clearPreview();
+            });
+        });
+
+        function clearPreview() {
+            document.getElementById('previewEmpty').style.display = 'flex';
+            document.getElementById('previewDocument').style.display = 'none';
+            document.getElementById('previewActions').classList.remove('show');
+            currentHtml = '';
+            currentHtmlDisplay = '';
+            currentFilename = '';
         }
 
-        // Fonction de génération
-        async function generateFiche() {
-            const niveau = document.getElementById('niveau').value;
-            const aps = document.getElementById('aps').value;
-            const objectif = document.getElementById('objectif').value;
-            const numeroSeance = document.getElementById('numeroSeance').value;
-            const nomProf = document.getElementById('nomProf').value;
-            const etablissement = document.getElementById('etablissement').value;
-            const anneeScolaire = document.getElementById('anneeScolaire').value;
-
-            if (!niveau || !aps || !objectif) {
-                alert('Veuillez remplir tous les champs obligatoires (*)');
-                autoNotice.classList.add('hidden');
-                return;
-            }
-
-            generateBtn.disabled = true;
-            generateBtn.innerHTML = '<div class="spinner"></div><span>Génération...</span>';
-            const loadingInterval = showLoading();
-
-            try {
-                console.log('🚀 Envoi de la requête...');
-                const response = await fetch('/api/generer-fiche', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ niveau, aps, objectif, numeroSeance, nomProf, etablissement, anneeScolaire })
-                });
-
-                console.log('📥 Réponse:', response.status);
-                const data = await response.json();
-                console.log('📋 Données:', data);
-
-                hideLoading(loadingInterval);
-                autoNotice.classList.add('hidden');
-
-                if (data.success) {
-                    emptyState.style.display = 'none';
-                    ficheContent.classList.add('show');
-
-                    let htmlContent = data.ficheDetaillee
-                        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-                        .replace(/\n/g, '<br>')
-                        .replace(/---/g, '<hr>');
-
-                    ficheDetail.innerHTML = htmlContent;
-                    currentHtml = data.html;
-                    currentFilename = data.filename;
-
-                    downloadBtn.style.display = 'flex';
-                    downloadPdfBtn.style.display = 'flex';
-
-                    ficheContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                } else {
-                    throw new Error(data.error || 'Erreur lors de la génération');
-                }
-            } catch (error) {
-                console.error('Erreur:', error);
-                hideLoading(loadingInterval);
-                autoNotice.classList.add('hidden');
-                alert('Erreur: ' + error.message);
-            } finally {
-                generateBtn.disabled = false;
-                generateBtn.innerHTML = '<span>🚀</span><span>Générer la fiche</span>';
-            }
-        }
+        function showLoading() { document.getElementById('loadingOverlay').classList.add('show'); }
+        function hideLoading() { document.getElementById('loadingOverlay').classList.remove('show'); }
 
         // Form submit
-        generateForm.addEventListener('submit', (e) => {
+        document.getElementById('form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            generateFiche();
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            showLoading();
+
+            try {
+                const formData = {
+                    typeDocument: currentType,
+                    niveau: document.getElementById('niveau').value,
+                    aps: document.getElementById('aps').value,
+                    objectif: document.getElementById('objectif')?.value || '',
+                    numeroSeance: document.getElementById('numeroSeance')?.value || '1',
+                    niveauEleves: document.getElementById('niveauEleves')?.value || 'moyen',
+                    nombreSeances: document.getElementById('nombreSeances')?.value || '10',
+                    typeGrille: document.getElementById('typeGrille')?.value || 'observation',
+                    classe: document.getElementById('classe')?.value || '',
+                    nomProf: document.getElementById('nomProf')?.value || '',
+                    etablissement: document.getElementById('etablissement')?.value || '',
+                    anneeScolaire: document.getElementById('anneeScolaire')?.value || ''
+                };
+
+                const resp = await fetch('/api/generer-fiche', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await resp.json();
+
+                if (data.success) {
+                    currentHtml = data.html;
+                    currentHtmlDisplay = data.htmlDisplay || data.html;
+                    currentFilename = data.filename;
+
+                    document.getElementById('previewEmpty').style.display = 'none';
+                    document.getElementById('previewDocument').style.display = 'block';
+                    document.getElementById('previewDocument').innerHTML = currentHtmlDisplay;
+                    document.getElementById('previewActions').classList.add('show');
+                } else {
+                    alert('Erreur: ' + (data.error || 'Erreur inconnue'));
+                }
+            } catch (err) {
+                alert('Erreur de connexion: ' + err.message);
+            } finally {
+                btn.disabled = false;
+                hideLoading();
+            }
         });
 
         // Download Word
-        downloadBtn.addEventListener('click', () => {
-            if (currentHtml && currentFilename) {
-                const blob = new Blob([currentHtml], { type: 'application/msword' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = currentFilename;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            }
+        document.getElementById('downloadWord').addEventListener('click', () => {
+            if (!currentHtml) return;
+            const blob = new Blob([currentHtml], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = currentFilename;
+            a.click();
+            URL.revokeObjectURL(url);
         });
 
         // Download PDF
-        downloadPdfBtn.addEventListener('click', () => {
-            if (currentHtml) {
-                const printWindow = window.open('', '_blank');
-                printWindow.document.write(currentHtml);
-                printWindow.document.close();
-                printWindow.onload = () => printWindow.print();
-            }
+        document.getElementById('downloadPdf').addEventListener('click', () => {
+            if (!currentHtml) return;
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = currentHtml;
+            tempDiv.style.position = 'absolute';
+            tempDiv.style.left = '-9999px';
+            document.body.appendChild(tempDiv);
+
+            const opt = {
+                margin: 5,
+                filename: currentFilename.replace('.doc', '.pdf'),
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: currentType === 'grille' ? 'portrait' : 'landscape' }
+            };
+
+            html2pdf().set(opt).from(tempDiv).save().then(() => document.body.removeChild(tempDiv));
         });
 
-        // ========================================
-        // INITIALISATION AU CHARGEMENT
-        // ========================================
+        // Auto-fill from localStorage
         document.addEventListener('DOMContentLoaded', () => {
-            checkForAutoGenerate();
+            const saved = localStorage.getItem('profeps_formData');
+            if (saved) {
+                try {
+                    const d = JSON.parse(saved);
+                    if (d.niveau) document.getElementById('niveau').value = d.niveau;
+                    if (d.aps) document.getElementById('aps').value = d.aps;
+                    if (d.objectif) document.getElementById('objectif').value = d.objectif;
+                    if (d.nomProf) document.getElementById('nomProf').value = d.nomProf;
+                    if (d.etablissement) document.getElementById('etablissement').value = d.etablissement;
+                    if (d.anneeScolaire) document.getElementById('anneeScolaire').value = d.anneeScolaire;
+                    if (d.numeroSeance) document.getElementById('numeroSeance').value = d.numeroSeance;
+                    localStorage.removeItem('profeps_formData');
+                    if (d.autoGenerate) setTimeout(() => document.getElementById('form').dispatchEvent(new Event('submit')), 500);
+                } catch (e) { localStorage.removeItem('profeps_formData'); }
+            }
         });
     </script>
 </body>
