@@ -14,26 +14,25 @@
             --primary: #1a5c3a;
             --primary-light: #2e7d32;
             --primary-dark: #145a32;
-            --secondary: #f39c12;
-            --bg: #f5f7fa;
+            --accent: #f39c12;
+            --bg: #f8f9fa;
             --card: #ffffff;
             --text: #2c3e50;
-            --text-light: #7f8c8d;
-            --border: #e1e8ed;
-            --success: #27ae60;
-            --shadow: 0 4px 20px rgba(0,0,0,0.1);
+            --text-light: #6c757d;
+            --border: #dee2e6;
+            --success: #28a745;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); color: var(--text); }
 
-        /* NAVBAR */
+        /* ==================== NAVBAR (identique à home) ==================== */
         .navbar {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            padding: 12px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            padding: 15px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
         }
         .navbar .container {
             max-width: 1200px;
@@ -46,98 +45,181 @@
         .navbar-brand {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             text-decoration: none;
             color: white;
         }
         .navbar-brand img {
-            height: 40px;
-            border-radius: 8px;
+            height: 45px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
         .navbar-brand span {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 700;
         }
         .navbar-links {
             display: flex;
-            gap: 25px;
+            gap: 30px;
             list-style: none;
         }
         .navbar-links a {
             color: rgba(255,255,255,0.9);
             text-decoration: none;
             font-weight: 500;
+            font-size: 1rem;
             transition: 0.3s;
+            padding: 8px 0;
+            position: relative;
         }
-        .navbar-links a:hover, .navbar-links a.active {
-            color: var(--secondary);
+        .navbar-links a:hover,
+        .navbar-links a.active {
+            color: var(--accent);
         }
-        .mobile-menu { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+        .navbar-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
 
-        /* MAIN CONTENT */
+        /* ==================== LOADING OVERLAY ==================== */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .loading-overlay.show { display: flex; }
+        
+        .loading-container {
+            text-align: center;
+        }
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border: 5px solid rgba(255,255,255,0.2);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 25px;
+        }
+        .loading-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .loading-dots span {
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: bounce 1.4s ease-in-out infinite both;
+        }
+        .loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+        .loading-dots span:nth-child(3) { animation-delay: 0s; }
+        
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        .loading-text {
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .loading-subtext {
+            color: rgba(255,255,255,0.8);
+            font-size: 1rem;
+        }
+
+        /* ==================== MAIN CONTENT ==================== */
         .main-container {
             max-width: 1300px;
             margin: 0 auto;
-            padding: 25px 20px;
+            padding: 30px 20px;
         }
         .page-header {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
         .page-header h1 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--primary);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         .page-header p {
             color: var(--text-light);
+            font-size: 1.1rem;
         }
 
-        /* LAYOUT */
+        /* ==================== LAYOUT ==================== */
         .generator-layout {
             display: grid;
-            grid-template-columns: 400px 1fr;
-            gap: 25px;
+            grid-template-columns: 420px 1fr;
+            gap: 30px;
             align-items: start;
         }
-        @media (max-width: 1000px) {
-            .generator-layout { grid-template-columns: 1fr; }
-        }
 
-        /* CARDS */
+        /* ==================== CARDS ==================== */
         .card {
             background: var(--card);
             border-radius: 16px;
-            box-shadow: var(--shadow);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
             overflow: hidden;
         }
         .card-header {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
-            padding: 15px 20px;
+            padding: 18px 25px;
         }
         .card-header h2 {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             display: flex;
             align-items: center;
             gap: 10px;
         }
         .card-body {
-            padding: 20px;
+            padding: 25px;
         }
 
-        /* TABS */
+        /* ==================== TABS ==================== */
         .tabs {
             display: flex;
+            background: #f8f9fa;
             border-bottom: 3px solid var(--border);
         }
         .tab {
             flex: 1;
-            padding: 15px 10px;
+            padding: 18px 12px;
             text-align: center;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--text-light);
             background: none;
             border: none;
@@ -149,46 +231,50 @@
         }
         .tab.active {
             color: var(--primary);
+            background: white;
             border-bottom: 3px solid var(--primary);
             margin-bottom: -3px;
-            background: #e8f5e9;
         }
         .tab-icon {
             display: block;
-            font-size: 1.5rem;
-            margin-bottom: 5px;
+            font-size: 1.6rem;
+            margin-bottom: 6px;
         }
 
-        /* FORM */
+        /* ==================== FORM ==================== */
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
         .form-group label {
             display: block;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: var(--text);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
         .form-group label .req {
-            color: #e74c3c;
+            color: #dc3545;
         }
-        .form-group input, .form-group select, .form-group textarea {
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
             width: 100%;
-            padding: 12px 14px;
+            padding: 12px 15px;
             border: 2px solid var(--border);
             border-radius: 10px;
-            font-size: 0.95rem;
+            font-size: 1rem;
             transition: 0.3s;
             background: white;
         }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(26,92,58,0.1);
+            box-shadow: 0 0 0 4px rgba(26,92,58,0.1);
         }
         .form-group textarea {
-            min-height: 80px;
+            min-height: 90px;
             resize: vertical;
         }
         .form-row {
@@ -202,16 +288,16 @@
         .info-box {
             background: #e8f5e9;
             border-left: 4px solid var(--primary);
-            padding: 12px 15px;
+            padding: 15px 18px;
             border-radius: 0 10px 10px 0;
-            margin-bottom: 18px;
-            font-size: 0.85rem;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
             color: var(--primary-dark);
         }
 
-        /* BUTTONS */
+        /* ==================== BUTTONS ==================== */
         .btn {
-            padding: 14px 24px;
+            padding: 14px 25px;
             border: none;
             border-radius: 10px;
             font-weight: 600;
@@ -233,76 +319,60 @@
             box-shadow: 0 8px 25px rgba(26,92,58,0.4);
         }
         .btn-primary:disabled {
-            background: #bdc3c7;
+            background: #adb5bd;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
         }
         .btn-success { background: var(--success); color: white; }
-        .btn-secondary { background: var(--secondary); color: white; }
+        .btn-accent { background: var(--accent); color: white; }
         .btn-outline { background: white; border: 2px solid var(--primary); color: var(--primary); }
 
-        /* LOADING OVERLAY */
-        .loading-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(26,92,58,0.95);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        .loading-overlay.show { display: flex; }
-        .loading-spinner {
-            width: 80px;
-            height: 80px;
-            border: 6px solid rgba(255,255,255,0.2);
-            border-top-color: var(--secondary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        .loading-text {
-            color: white;
-            font-size: 1.3rem;
-            margin-top: 25px;
+        /* ==================== DETAILS TOGGLE ==================== */
+        .details-toggle {
+            cursor: pointer;
+            color: var(--primary);
             font-weight: 600;
-        }
-        .loading-subtext {
-            color: rgba(255,255,255,0.8);
             font-size: 0.95rem;
+            padding: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-top: 1px solid var(--border);
             margin-top: 10px;
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
+        .details-toggle:hover { color: var(--primary-dark); }
+        .details-content {
+            display: none;
+            padding-top: 15px;
+        }
+        .details-toggle.open + .details-content { display: block; }
 
-        /* PREVIEW */
+        /* ==================== PREVIEW ==================== */
         .preview-card {
             display: flex;
             flex-direction: column;
-            min-height: 600px;
+            min-height: 650px;
         }
         .preview-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
         }
         .preview-actions {
             display: none;
-            gap: 10px;
+            gap: 12px;
         }
         .preview-actions.show { display: flex; }
         .preview-actions .btn {
-            padding: 10px 18px;
-            font-size: 0.9rem;
+            padding: 12px 20px;
+            font-size: 0.95rem;
         }
         .preview-content {
             flex: 1;
-            padding: 20px;
+            padding: 25px;
             overflow: auto;
             background: #fafafa;
             border-top: 1px solid var(--border);
@@ -313,7 +383,7 @@
             align-items: center;
             justify-content: center;
             height: 100%;
-            min-height: 400px;
+            min-height: 450px;
             color: var(--text-light);
             text-align: center;
         }
@@ -323,90 +393,85 @@
             margin-bottom: 20px;
         }
         .preview-empty h3 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--text);
             margin-bottom: 10px;
         }
         .preview-document {
             background: white;
             padding: 25px;
-            border-radius: 10px;
+            border-radius: 12px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
-        /* DETAILS */
-        .details-toggle {
-            cursor: pointer;
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 0.9rem;
-            padding: 10px 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .details-toggle:hover { color: var(--primary-dark); }
-        .details-content {
-            display: none;
-            padding-top: 15px;
-            border-top: 1px solid var(--border);
-            margin-top: 10px;
-        }
-        .details-toggle.open + .details-content { display: block; }
-
-        /* FOOTER */
+        /* ==================== FOOTER (identique à home) ==================== */
         .footer {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             color: white;
-            padding: 30px 0;
-            margin-top: 50px;
+            padding: 40px 0 20px;
+            margin-top: 60px;
         }
         .footer .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+        .footer-content {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 30px;
+            margin-bottom: 30px;
         }
         .footer-brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
         .footer-brand img {
-            height: 45px;
-            border-radius: 8px;
+            height: 50px;
+            border-radius: 10px;
+        }
+        .footer-brand-text strong {
+            font-size: 1.3rem;
+            display: block;
+        }
+        .footer-brand-text span {
+            opacity: 0.8;
+            font-size: 0.9rem;
         }
         .footer-links {
             display: flex;
-            gap: 25px;
+            gap: 30px;
         }
         .footer-links a {
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.85);
             text-decoration: none;
             transition: 0.3s;
+            font-size: 0.95rem;
         }
-        .footer-links a:hover { color: var(--secondary); }
+        .footer-links a:hover { color: var(--accent); }
         .footer-copy {
-            width: 100%;
             text-align: center;
-            padding-top: 20px;
+            padding-top: 25px;
             border-top: 1px solid rgba(255,255,255,0.2);
-            margin-top: 20px;
             font-size: 0.9rem;
-            opacity: 0.8;
+            opacity: 0.85;
         }
 
-        /* RESPONSIVE */
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 1000px) {
+            .generator-layout { grid-template-columns: 1fr; }
+            .preview-card { min-height: auto; }
+        }
         @media (max-width: 768px) {
             .navbar-links { display: none; }
-            .mobile-menu { display: block; }
+            .mobile-menu-btn { display: block; }
             .form-row { grid-template-columns: 1fr; }
-            .footer .container { flex-direction: column; text-align: center; }
+            .footer-content { flex-direction: column; align-items: center; text-align: center; }
             .footer-links { flex-wrap: wrap; justify-content: center; }
+            .page-header h1 { font-size: 1.6rem; }
         }
     </style>
 </head>
@@ -425,22 +490,29 @@
                 <li><a href="a-propos.html">À propos</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            <button class="mobile-menu">☰</button>
+            <button class="mobile-menu-btn">☰</button>
         </div>
     </nav>
 
     <!-- LOADING OVERLAY -->
     <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">⚡ Génération en cours...</div>
-        <div class="loading-subtext">Veuillez patienter quelques secondes</div>
+        <div class="loading-container">
+            <div class="loading-spinner"></div>
+            <div class="loading-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="loading-text">⚡ Génération en cours...</div>
+            <div class="loading-subtext">Création de votre document personnalisé</div>
+        </div>
     </div>
 
-    <!-- MAIN CONTENT -->
+    <!-- MAIN -->
     <div class="main-container">
         <div class="page-header">
             <h1>📄 Générateur de Documents EPS</h1>
-            <p>Créez vos fiches de séance, projets de cycle et grilles d'évaluation</p>
+            <p>Créez vos fiches de séance, projets de cycle et grilles d'évaluation en quelques clics</p>
         </div>
 
         <div class="generator-layout">
@@ -502,7 +574,7 @@
                         <div id="ficheFields" class="conditional show">
                             <div class="form-group">
                                 <label>Objectif de la séance <span class="req">*</span></label>
-                                <textarea id="objectif" placeholder="Ex: Améliorer la qualité de la passe en mouvement"></textarea>
+                                <textarea id="objectif" placeholder="Ex: Améliorer la qualité de la passe en mouvement vers un partenaire démarqué"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Numéro de séance</label>
@@ -524,7 +596,7 @@
                         <!-- PROJET FIELDS -->
                         <div id="projetFields" class="conditional">
                             <div class="info-box">
-                                📌 <strong>Structure du cycle :</strong> S1 = Évaluation diagnostique | S2 = Acquisition | Dernière séance = Évaluation terminale
+                                📌 <strong>Structure automatique :</strong> S1 = Évaluation diagnostique | S2 = Acquisition | Dernière = Évaluation terminale
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
@@ -549,23 +621,17 @@
 
                         <!-- GRILLE FIELDS -->
                         <div id="grilleFields" class="conditional">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label>Type de grille</label>
-                                    <select id="typeGrille">
-                                        <option value="observation">👁️ Grille d'observation</option>
-                                        <option value="evaluation">📊 Grille d'évaluation</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Classe</label>
-                                    <input type="text" id="classe" placeholder="Ex: 3AC 1">
-                                </div>
+                            <div class="form-group">
+                                <label>Type de grille</label>
+                                <select id="typeGrille">
+                                    <option value="observation">👁️ Grille d'observation (critères techniques)</option>
+                                    <option value="evaluation">📊 Grille d'évaluation (notation /20)</option>
+                                </select>
                             </div>
                         </div>
 
-                        <!-- OPTIONAL FIELDS -->
-                        <div class="details-toggle" id="detailsToggle">➕ Informations complémentaires</div>
+                        <!-- INFOS SUPPLÉMENTAIRES -->
+                        <div class="details-toggle" id="detailsToggle">➕ Informations complémentaires (optionnel)</div>
                         <div class="details-content" id="detailsContent">
                             <div class="form-row">
                                 <div class="form-group">
@@ -577,9 +643,15 @@
                                     <input type="text" id="etablissement" placeholder="Nom de l'établissement">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label>Année scolaire</label>
-                                <input type="text" id="anneeScolaire" placeholder="2024-2025">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Année scolaire</label>
+                                    <input type="text" id="anneeScolaire" placeholder="2024-2025">
+                                </div>
+                                <div class="form-group">
+                                    <label>Classe (pour grille)</label>
+                                    <input type="text" id="classe" placeholder="Ex: 3AC 1">
+                                </div>
                             </div>
                         </div>
 
@@ -597,7 +669,7 @@
                         <h2>📄 Aperçu du document</h2>
                         <div class="preview-actions" id="previewActions">
                             <button class="btn btn-success" id="downloadWord">📥 Word</button>
-                            <button class="btn btn-secondary" id="downloadPdf">📥 PDF</button>
+                            <button class="btn btn-accent" id="downloadPdf">📥 PDF</button>
                         </div>
                     </div>
                 </div>
@@ -605,7 +677,7 @@
                     <div class="preview-empty" id="previewEmpty">
                         <div class="preview-empty-icon">📄</div>
                         <h3>Aucun document généré</h3>
-                        <p>Remplissez le formulaire à gauche et cliquez sur "Générer" pour voir l'aperçu ici.</p>
+                        <p>Remplissez le formulaire et cliquez sur "Générer" pour voir l'aperçu de votre document ici.</p>
                     </div>
                     <div class="preview-document" id="previewDocument" style="display:none;"></div>
                 </div>
@@ -616,22 +688,24 @@
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-brand">
-                <img src="/images/prof_eps.png" alt="Prof EPS" onerror="this.style.display='none'">
-                <div>
-                    <strong style="font-size:1.2rem;">Prof EPS</strong>
-                    <p style="opacity:0.8;font-size:0.9rem;">Votre assistant pédagogique</p>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="/images/prof_eps.png" alt="Prof EPS" onerror="this.style.display='none'">
+                    <div class="footer-brand-text">
+                        <strong>Prof EPS</strong>
+                        <span>Votre assistant pédagogique</span>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Accueil</a>
+                    <a href="generateur.html">Générateur</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="a-propos.html">À propos</a>
+                    <a href="contact.html">Contact</a>
                 </div>
             </div>
-            <div class="footer-links">
-                <a href="index.html">Accueil</a>
-                <a href="generateur.html">Générateur</a>
-                <a href="blog.html">Blog</a>
-                <a href="a-propos.html">À propos</a>
-                <a href="contact.html">Contact</a>
-            </div>
             <div class="footer-copy">
-                © 2024 Prof EPS - Tous droits réservés | Conforme aux Orientations Pédagogiques du Maroc
+                © 2024 Prof EPS - Tous droits réservés | Conforme aux Orientations Pédagogiques du Maroc (OP 2007-2009)
             </div>
         </div>
     </footer>
@@ -645,7 +719,6 @@
         // Toggle details
         document.getElementById('detailsToggle').addEventListener('click', function() {
             this.classList.toggle('open');
-            document.getElementById('detailsContent').style.display = this.classList.contains('open') ? 'block' : 'none';
         });
 
         // Tabs
@@ -659,7 +732,6 @@
                 const fields = document.getElementById(currentType + 'Fields');
                 if (fields) fields.classList.add('show');
                 
-                // Vider l'aperçu
                 clearPreview();
             });
         });
@@ -718,7 +790,6 @@
                     currentHtmlDisplay = data.htmlDisplay || data.html;
                     currentFilename = data.filename;
                     
-                    // Afficher l'aperçu
                     document.getElementById('previewEmpty').style.display = 'none';
                     document.getElementById('previewDocument').style.display = 'block';
                     document.getElementById('previewDocument').innerHTML = currentHtmlDisplay;
@@ -750,7 +821,6 @@
         document.getElementById('downloadPdf').addEventListener('click', () => {
             if (!currentHtml) return;
             
-            // Créer un élément temporaire pour le PDF
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = currentHtml;
             tempDiv.style.position = 'absolute';
@@ -774,7 +844,7 @@
             });
         });
 
-        // Auto-fill from localStorage
+        // Auto-fill
         document.addEventListener('DOMContentLoaded', () => {
             const saved = localStorage.getItem('profeps_formData');
             if (saved) {
