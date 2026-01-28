@@ -1,217 +1,341 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Générez des fiches de séance, projets de cycle et grilles d'évaluation EPS. Conforme aux OP Maroc.">
+    <meta name="description" content="Générez des fiches de séance, projets de cycle et grilles d'évaluation EPS conformes aux OP Maroc.">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TH0Z1SGNXH"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-TH0Z1SGNXH');</script>
-    <title>Générateur EPS | Fiches, Projets, Grilles - Prof EPS Maroc</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <title>Générateur EPS | Prof EPS Maroc</title>
     <style>
+        :root{--primary:#3498db;--primary-dark:#2980b9;--secondary:#2c3e50;--bg:#f5f7fa;--card:#fff;--text:#2c3e50;--border:#e1e8ed;--success:#27ae60;--shadow:0 4px 20px rgba(0,0,0,0.08)}
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#1a5c3a,#2e7d32);min-height:100vh}
-        .container{max-width:1000px;margin:0 auto;padding:20px}
-        .header{text-align:center;color:#fff;padding:15px 0}
-        .header h1{font-size:1.8rem}
-        .back-btn{display:inline-flex;align-items:center;gap:8px;color:#fff;text-decoration:none;padding:8px 16px;background:rgba(255,255,255,0.15);border-radius:20px;margin-bottom:15px;transition:0.3s}
-        .back-btn:hover{background:rgba(255,255,255,0.25)}
-        .main-card{background:#fff;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.3);overflow:hidden}
-        .type-selector{display:flex;border-bottom:3px solid #e0e0e0}
-        .type-btn{flex:1;padding:18px 10px;text-align:center;cursor:pointer;border:none;background:#f5f5f5;font-size:0.95rem;font-weight:600;color:#666;transition:0.3s}
-        .type-btn:hover{background:#e8f5e9}
-        .type-btn.active{background:#1a5c3a;color:#fff}
-        .type-btn .icon{font-size:1.4rem;display:block;margin-bottom:5px}
-        .form-section{padding:25px}
-        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:15px}
-        .form-row.full{grid-template-columns:1fr}
-        .form-group{display:flex;flex-direction:column}
-        .form-group label{font-weight:600;color:#333;margin-bottom:6px;font-size:0.85rem}
-        .form-group label span{color:#e53935}
-        .form-group input,.form-group select,.form-group textarea{padding:10px 12px;border:2px solid #e0e0e0;border-radius:8px;font-size:0.95rem;transition:0.3s}
-        .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#1a5c3a;outline:none}
+        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+        .container{max-width:1200px;margin:0 auto;padding:15px}
+        .header{display:flex;align-items:center;justify-content:space-between;padding:10px 0;margin-bottom:15px}
+        .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--secondary)}
+        .logo-icon{width:40px;height:40px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+        .logo-text{font-weight:700;font-size:1.2rem}
+        .back-btn{color:var(--primary);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:5px}
+        .main{display:grid;grid-template-columns:380px 1fr;gap:20px}
+        @media(max-width:900px){.main{grid-template-columns:1fr}}
+        .panel{background:var(--card);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+        .panel-header{padding:15px 20px;background:var(--secondary);color:#fff}
+        .panel-header h2{font-size:1rem;font-weight:600}
+        .tabs{display:flex;border-bottom:2px solid var(--border)}
+        .tab{flex:1;padding:12px 8px;text-align:center;cursor:pointer;font-weight:600;font-size:0.85rem;color:#7f8c8d;border:none;background:none;transition:0.2s}
+        .tab:hover{color:var(--primary);background:#f8f9fa}
+        .tab.active{color:var(--primary);border-bottom:2px solid var(--primary);margin-bottom:-2px}
+        .tab-icon{display:block;font-size:1.3rem;margin-bottom:3px}
+        .form-section{padding:20px}
+        .form-group{margin-bottom:15px}
+        .form-group label{display:block;font-weight:600;font-size:0.8rem;color:var(--text);margin-bottom:5px}
+        .form-group label .req{color:#e74c3c}
+        .form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 12px;border:2px solid var(--border);border-radius:8px;font-size:0.9rem;transition:0.2s}
+        .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--primary);outline:none}
         .form-group textarea{min-height:70px;resize:vertical}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
         .conditional{display:none}
-        .conditional.visible{display:block}
-        .info-box{background:#e3f2fd;border-left:4px solid #2196f3;padding:12px;border-radius:0 8px 8px 0;margin-bottom:15px}
-        .info-box p{color:#1565c0;font-size:0.85rem}
-        .submit-btn{width:100%;padding:16px;background:linear-gradient(135deg,#1a5c3a,#2e7d32);color:#fff;border:none;border-radius:10px;font-size:1.1rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:0.3s}
-        .submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(26,92,58,0.4)}
-        .submit-btn:disabled{background:#ccc;cursor:not-allowed;transform:none}
-        .loading{display:none;align-items:center;gap:10px}
-        .spinner{width:22px;height:22px;border:3px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite}
+        .conditional.show{display:block}
+        .info-box{background:#eaf6ff;border-left:3px solid var(--primary);padding:10px 12px;margin-bottom:15px;border-radius:0 8px 8px 0;font-size:0.8rem;color:var(--primary-dark)}
+        .btn{padding:12px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;transition:0.2s;display:inline-flex;align-items:center;gap:8px;font-size:0.9rem}
+        .btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;width:100%}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(52,152,219,0.4)}
+        .btn-primary:disabled{background:#bdc3c7;cursor:not-allowed;transform:none;box-shadow:none}
+        .btn-success{background:var(--success);color:#fff}
+        .btn-outline{background:#fff;border:2px solid var(--primary);color:var(--primary)}
+        .spinner{width:18px;height:18px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite}
         @keyframes spin{to{transform:rotate(360deg)}}
-        .results{padding:25px;display:none}
-        .results.visible{display:block}
-        .result-box{background:#e8f5e9;border-radius:12px;padding:20px;margin-bottom:15px}
-        .result-box h3{color:#1a5c3a;margin-bottom:12px;display:flex;align-items:center;gap:10px}
-        .download-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 25px;background:#1a5c3a;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;transition:0.3s;border:none;cursor:pointer;font-size:1rem}
-        .download-btn:hover{background:#145a32;transform:translateY(-2px)}
-        .preview{background:#fff;border-radius:8px;padding:15px;margin-top:15px;max-height:350px;overflow-y:auto;border:2px solid #e0e0e0;font-size:0.85rem}
-        .new-btn{background:#ff9800;margin-left:10px}
-        .new-btn:hover{background:#f57c00}
-        details summary{cursor:pointer;color:#1a5c3a;font-weight:600;padding:10px 0}
-        @media(max-width:768px){.form-row{grid-template-columns:1fr}.type-selector{flex-direction:column}.type-btn{padding:12px}}
+        .preview-panel{display:flex;flex-direction:column}
+        .preview-header{display:flex;align-items:center;justify-content:space-between;padding:15px 20px;background:var(--secondary);color:#fff}
+        .preview-header h2{font-size:1rem}
+        .preview-actions{display:flex;gap:8px}
+        .preview-actions .btn{padding:8px 14px;font-size:0.8rem}
+        .preview-content{flex:1;padding:20px;overflow:auto;background:#fff;min-height:500px}
+        .preview-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:#95a5a6;text-align:center;padding:40px}
+        .preview-empty-icon{font-size:4rem;margin-bottom:15px;opacity:0.5}
+        .preview-empty h3{font-size:1.1rem;margin-bottom:8px;color:var(--text)}
+        .preview-empty p{font-size:0.9rem}
+        .preview-document{background:#fff;padding:20px;font-size:9pt;line-height:1.4}
+        .preview-document table{width:100%;border-collapse:collapse;margin-bottom:8px}
+        .preview-document th,.preview-document td{border:1px solid #000;padding:4px 6px;vertical-align:top}
+        .details-toggle{cursor:pointer;color:var(--primary);font-weight:600;font-size:0.85rem;padding:8px 0}
+        .details-content{padding-top:10px;display:none}
+        .details-toggle.open+.details-content{display:block}
+        .toast{position:fixed;bottom:20px;right:20px;background:var(--success);color:#fff;padding:12px 20px;border-radius:8px;box-shadow:0 4px 15px rgba(0,0,0,0.2);display:none;animation:slideIn 0.3s}
+        @keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="index.html" class="back-btn">← Retour à l'accueil</a>
-        <div class="header">
-            <h1>🎯 Générateur de Documents EPS</h1>
-            <p>Fiches • Projets de cycle • Grilles</p>
-        </div>
-        <div class="main-card">
-            <div class="type-selector">
-                <button class="type-btn active" data-type="fiche"><span class="icon">📋</span>Fiche de séance</button>
-                <button class="type-btn" data-type="projet"><span class="icon">📊</span>Projet de cycle</button>
-                <button class="type-btn" data-type="grille"><span class="icon">📝</span>Grille obs./éval.</button>
+        <header class="header">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">📚</div>
+                <span class="logo-text">Prof EPS</span>
+            </a>
+            <a href="index.html" class="back-btn">← Retour</a>
+        </header>
+
+        <div class="main">
+            <!-- Panneau formulaire -->
+            <div class="panel">
+                <div class="tabs">
+                    <button class="tab active" data-type="fiche"><span class="tab-icon">📋</span>Fiche</button>
+                    <button class="tab" data-type="projet"><span class="tab-icon">📊</span>Projet</button>
+                    <button class="tab" data-type="grille"><span class="tab-icon">📝</span>Grille</button>
+                </div>
+
+                <form id="form" class="form-section">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Niveau <span class="req">*</span></label>
+                            <select id="niveau" required>
+                                <option value="">Sélectionner</option>
+                                <optgroup label="Collège"><option value="1AC">1AC</option><option value="2AC">2AC</option><option value="3AC">3AC</option></optgroup>
+                                <optgroup label="Lycée"><option value="TC">TC</option><option value="1AB">1AB</option><option value="2AB">2AB</option></optgroup>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>APS <span class="req">*</span></label>
+                            <select id="aps" required>
+                                <option value="">Sélectionner</option>
+                                <optgroup label="Sports collectifs"><option value="Handball">Handball</option><option value="Football">Football</option><option value="Basketball">Basketball</option><option value="Volleyball">Volleyball</option></optgroup>
+                                <optgroup label="Athlétisme"><option value="Course de vitesse">Course de vitesse</option><option value="Saut en longueur">Saut en longueur</option><option value="Saut en hauteur">Saut en hauteur</option><option value="Lancer de poids">Lancer de poids</option><option value="Course de durée">Course de durée</option></optgroup>
+                                <optgroup label="Gymnastique"><option value="Gymnastique">Gymnastique</option></optgroup>
+                                <optgroup label="Sports de renvoi"><option value="Tennis de table">Tennis de table</option><option value="Badminton">Badminton</option></optgroup>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Champs FICHE -->
+                    <div id="ficheFields" class="conditional show">
+                        <div class="form-group">
+                            <label>Objectif de la séance <span class="req">*</span></label>
+                            <textarea id="objectif" placeholder="Ex: Améliorer la qualité de la passe en mouvement"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>N° Séance</label>
+                            <select id="numeroSeance">
+                                <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+                                <option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Champs PROJET -->
+                    <div id="projetFields" class="conditional">
+                        <div class="info-box">
+                            📌 S1 = Évaluation diagnostique | S2 = Leçon théorique | Dernière = Évaluation terminale
+                        </div>
+                        <div class="form-group">
+                            <label>Nombre de séances</label>
+                            <select id="nombreSeances">
+                                <option value="8">8 séances</option><option value="10" selected>10 séances</option><option value="12">12 séances</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Champs GRILLE -->
+                    <div id="grilleFields" class="conditional">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Type de grille</label>
+                                <select id="typeGrille">
+                                    <option value="observation">Observation</option>
+                                    <option value="evaluation">Évaluation</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Classe</label>
+                                <input type="text" id="classe" placeholder="Ex: 3AC 1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Champs optionnels -->
+                    <div class="details-toggle" onclick="this.classList.toggle('open')">➕ Informations complémentaires</div>
+                    <div class="details-content">
+                        <div class="form-row">
+                            <div class="form-group"><label>Professeur</label><input type="text" id="nomProf" placeholder="Nom"></div>
+                            <div class="form-group"><label>Établissement</label><input type="text" id="etablissement" placeholder="Établissement"></div>
+                        </div>
+                        <div class="form-group"><label>Année scolaire</label><input type="text" id="anneeScolaire" placeholder="2024-2025"></div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <span id="btnText">🚀 Générer le document</span>
+                        <span id="btnLoading" style="display:none"><span class="spinner"></span> Génération...</span>
+                    </button>
+                </form>
             </div>
-            <form id="generatorForm" class="form-section">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>📊 Niveau <span>*</span></label>
-                        <select id="niveau" required>
-                            <option value="">-- Sélectionner --</option>
-                            <optgroup label="Collège"><option value="1AC">1AC</option><option value="2AC">2AC</option><option value="3AC">3AC</option></optgroup>
-                            <optgroup label="Lycée"><option value="TC">TC</option><option value="1AB">1AB</option><option value="2AB">2AB</option></optgroup>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>⚽ APS <span>*</span></label>
-                        <select id="aps" required>
-                            <option value="">-- Sélectionner --</option>
-                            <optgroup label="Sports collectifs"><option value="Handball">Handball</option><option value="Football">Football</option><option value="Basketball">Basketball</option><option value="Volleyball">Volleyball</option></optgroup>
-                            <optgroup label="Athlétisme"><option value="Course de vitesse">Course de vitesse</option><option value="Course de relais">Course de relais</option><option value="Saut en longueur">Saut en longueur</option><option value="Saut en hauteur">Saut en hauteur</option><option value="Lancer de poids">Lancer de poids</option><option value="Course de durée">Course de durée</option></optgroup>
-                            <optgroup label="Gymnastique"><option value="Gymnastique">Gymnastique</option></optgroup>
-                            <optgroup label="Sports de renvoi"><option value="Tennis de table">Tennis de table</option><option value="Badminton">Badminton</option></optgroup>
-                        </select>
+
+            <!-- Panneau aperçu -->
+            <div class="panel preview-panel">
+                <div class="preview-header">
+                    <h2>📄 Aperçu du document</h2>
+                    <div class="preview-actions" id="downloadBtns" style="display:none">
+                        <button class="btn btn-success" id="downloadWord">📥 Word</button>
+                        <button class="btn btn-outline" id="downloadPdf">📥 PDF</button>
                     </div>
                 </div>
-                <div id="ficheFields" class="conditional visible">
-                    <div class="form-row full">
-                        <div class="form-group">
-                            <label>🎯 Objectif de la séance <span>*</span></label>
-                            <textarea id="objectif" placeholder="Ex: Améliorer la passe en situation de jeu"></textarea>
-                        </div>
+                <div class="preview-content" id="previewContent">
+                    <div class="preview-empty" id="previewEmpty">
+                        <div class="preview-empty-icon">📄</div>
+                        <h3>Aucun document généré</h3>
+                        <p>Remplissez le formulaire et cliquez sur "Générer" pour voir l'aperçu ici.</p>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>🔢 N° Séance</label>
-                            <select id="numeroSeance"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>
-                        </div>
-                    </div>
+                    <div class="preview-document" id="previewDocument" style="display:none"></div>
                 </div>
-                <div id="projetFields" class="conditional">
-                    <div class="info-box">
-                        <p>📌 <b>Structure:</b> S1 = Test diagnostique | S2 = Leçon théorique | Dernière = Test bilan (même dispositif que S1)</p>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>📈 Niveau élèves</label>
-                            <select id="niveauEleves"><option value="debutant">🟢 Débutant</option><option value="moyen" selected>🟡 Moyen</option><option value="avance">🟠 Avancé</option><option value="elite">🔴 Élite</option></select>
-                        </div>
-                        <div class="form-group">
-                            <label>🔢 Nombre séances</label>
-                            <select id="nombreSeances"><option value="8">8</option><option value="10" selected>10</option><option value="12">12</option></select>
-                        </div>
-                    </div>
-                </div>
-                <div id="grilleFields" class="conditional">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>📋 Type de grille</label>
-                            <select id="typeGrille"><option value="observation">👁️ Observation</option><option value="evaluation">📊 Évaluation</option></select>
-                        </div>
-                        <div class="form-group">
-                            <label>🏫 Classe</label>
-                            <input type="text" id="classe" placeholder="Ex: 3AC 1">
-                        </div>
-                    </div>
-                </div>
-                <details style="margin:15px 0">
-                    <summary>➕ Infos supplémentaires</summary>
-                    <div style="padding-top:10px">
-                        <div class="form-row">
-                            <div class="form-group"><label>👤 Professeur</label><input type="text" id="nomProf" placeholder="Nom"></div>
-                            <div class="form-group"><label>🏫 Établissement</label><input type="text" id="etablissement" placeholder="Établissement"></div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group"><label>📅 Année</label><input type="text" id="anneeScolaire" placeholder="2024-2025"></div>
-                        </div>
-                    </div>
-                </details>
-                <button type="submit" class="submit-btn" id="submitBtn">
-                    <span id="btnText">🚀 Générer</span>
-                    <span class="loading" id="loading"><span class="spinner"></span> Génération...</span>
-                </button>
-            </form>
-            <div class="results" id="results">
-                <div class="result-box">
-                    <h3>✅ Document généré !</h3>
-                    <p id="resultInfo" style="margin-bottom:12px;color:#666"></p>
-                    <a href="#" class="download-btn" id="downloadBtn">📥 Télécharger Word</a>
-                    <button class="download-btn new-btn" id="newBtn">🔄 Nouveau</button>
-                </div>
-                <div class="preview" id="preview"></div>
             </div>
         </div>
     </div>
+
+    <div class="toast" id="toast">✅ Document téléchargé !</div>
+
     <script>
-        let currentType='fiche';
-        document.querySelectorAll('.type-btn').forEach(btn=>{
-            btn.addEventListener('click',()=>{
-                document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('active'));
-                btn.classList.add('active');
-                currentType=btn.dataset.type;
-                document.querySelectorAll('.conditional').forEach(f=>f.classList.remove('visible'));
-                document.getElementById(currentType+'Fields').classList.add('visible');
-                const t={fiche:'📋 Générer la fiche',projet:'📊 Générer le projet',grille:'📝 Générer la grille'};
-                document.getElementById('btnText').textContent=t[currentType];
+        let currentType = 'fiche';
+        let currentHtml = '';
+        let currentFilename = '';
+
+        // Tabs
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentType = tab.dataset.type;
+                
+                document.querySelectorAll('.conditional').forEach(f => f.classList.remove('show'));
+                document.getElementById(currentType + 'Fields')?.classList.add('show');
+                
+                // Vider l'aperçu quand on change de type
+                clearPreview();
+                
+                const texts = {fiche: '📋 Générer la fiche', projet: '📊 Générer le projet', grille: '📝 Générer la grille'};
+                document.getElementById('btnText').textContent = texts[currentType];
             });
         });
-        document.getElementById('generatorForm').addEventListener('submit',async(e)=>{
+
+        function clearPreview() {
+            document.getElementById('previewEmpty').style.display = 'flex';
+            document.getElementById('previewDocument').style.display = 'none';
+            document.getElementById('downloadBtns').style.display = 'none';
+            currentHtml = '';
+            currentFilename = '';
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => toast.style.display = 'none', 3000);
+        }
+
+        // Form submit
+        document.getElementById('form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn=document.getElementById('submitBtn'),btnText=document.getElementById('btnText'),loading=document.getElementById('loading');
-            btn.disabled=true;btnText.style.display='none';loading.style.display='flex';
-            try{
-                const fd={typeDocument:currentType,niveau:document.getElementById('niveau').value,aps:document.getElementById('aps').value,
-                    objectif:document.getElementById('objectif')?.value||'',numeroSeance:document.getElementById('numeroSeance')?.value||'1',
-                    niveauEleves:document.getElementById('niveauEleves')?.value||'moyen',nombreSeances:document.getElementById('nombreSeances')?.value||'10',
-                    typeGrille:document.getElementById('typeGrille')?.value||'observation',classe:document.getElementById('classe')?.value||'',
-                    nomProf:document.getElementById('nomProf')?.value||'',etablissement:document.getElementById('etablissement')?.value||'',
-                    anneeScolaire:document.getElementById('anneeScolaire')?.value||''};
-                const resp=await fetch('/api/generer-fiche',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(fd)});
-                const data=await resp.json();
-                if(data.success){
-                    const blob=new Blob([data.html],{type:'application/msword'}),url=URL.createObjectURL(blob);
-                    document.getElementById('downloadBtn').href=url;
-                    document.getElementById('downloadBtn').download=data.filename;
-                    const tn={fiche:'Fiche',projet:'Projet',grille:'Grille'};
-                    document.getElementById('resultInfo').textContent=`${tn[currentType]} - ${fd.aps} - ${fd.niveau}`;
-                    document.getElementById('preview').innerHTML=data.ficheDetaillee||'<p style="color:#888;text-align:center">Aperçu dans le fichier Word</p>';
-                    document.querySelector('.form-section').style.display='none';
-                    document.getElementById('results').classList.add('visible');
-                }else{alert('Erreur: '+(data.error||'Inconnue'));}
-            }catch(err){alert('Erreur: '+err.message);}
-            finally{btn.disabled=false;btnText.style.display='inline';loading.style.display='none';}
+            
+            const btn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnLoading = document.getElementById('btnLoading');
+            
+            btn.disabled = true;
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline-flex';
+            
+            try {
+                const formData = {
+                    typeDocument: currentType,
+                    niveau: document.getElementById('niveau').value,
+                    aps: document.getElementById('aps').value,
+                    objectif: document.getElementById('objectif')?.value || '',
+                    numeroSeance: document.getElementById('numeroSeance')?.value || '1',
+                    nombreSeances: document.getElementById('nombreSeances')?.value || '10',
+                    typeGrille: document.getElementById('typeGrille')?.value || 'observation',
+                    classe: document.getElementById('classe')?.value || '',
+                    nomProf: document.getElementById('nomProf')?.value || '',
+                    etablissement: document.getElementById('etablissement')?.value || '',
+                    anneeScolaire: document.getElementById('anneeScolaire')?.value || ''
+                };
+                
+                const resp = await fetch('/api/generer-fiche', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await resp.json();
+                
+                if (data.success) {
+                    currentHtml = data.html;
+                    currentFilename = data.filename;
+                    
+                    // Afficher l'aperçu
+                    document.getElementById('previewEmpty').style.display = 'none';
+                    document.getElementById('previewDocument').style.display = 'block';
+                    document.getElementById('previewDocument').innerHTML = data.html;
+                    document.getElementById('downloadBtns').style.display = 'flex';
+                    
+                    showToast('✅ Document généré avec succès !');
+                } else {
+                    alert('Erreur: ' + (data.error || 'Erreur inconnue'));
+                }
+            } catch (err) {
+                alert('Erreur de connexion: ' + err.message);
+            } finally {
+                btn.disabled = false;
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+            }
         });
-        document.getElementById('newBtn').addEventListener('click',()=>{
-            document.querySelector('.form-section').style.display='block';
-            document.getElementById('results').classList.remove('visible');
+
+        // Download Word
+        document.getElementById('downloadWord').addEventListener('click', () => {
+            if (!currentHtml) return;
+            const blob = new Blob([currentHtml], {type: 'application/msword'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = currentFilename;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('📥 Téléchargement Word lancé !');
         });
-        document.addEventListener('DOMContentLoaded',()=>{
-            const s=localStorage.getItem('profeps_formData');
-            if(s){try{const d=JSON.parse(s);
-                if(d.niveau)document.getElementById('niveau').value=d.niveau;
-                if(d.aps)document.getElementById('aps').value=d.aps;
-                if(d.objectif)document.getElementById('objectif').value=d.objectif;
-                if(d.nomProf)document.getElementById('nomProf').value=d.nomProf;
-                if(d.etablissement)document.getElementById('etablissement').value=d.etablissement;
-                if(d.anneeScolaire)document.getElementById('anneeScolaire').value=d.anneeScolaire;
-                if(d.numeroSeance)document.getElementById('numeroSeance').value=d.numeroSeance;
-                localStorage.removeItem('profeps_formData');
-                if(d.autoGenerate)setTimeout(()=>document.getElementById('generatorForm').dispatchEvent(new Event('submit')),500);
-            }catch(e){localStorage.removeItem('profeps_formData');}}
+
+        // Download PDF
+        document.getElementById('downloadPdf').addEventListener('click', () => {
+            if (!currentHtml) return;
+            
+            const element = document.getElementById('previewDocument');
+            const opt = {
+                margin: 5,
+                filename: currentFilename.replace('.doc', '.pdf'),
+                image: {type: 'jpeg', quality: 0.98},
+                html2canvas: {scale: 2, useCORS: true},
+                jsPDF: {unit: 'mm', format: currentType === 'grille' ? 'a4' : 'a4', orientation: currentType === 'grille' ? 'portrait' : 'landscape'}
+            };
+            
+            html2pdf().set(opt).from(element).save();
+            showToast('📥 Téléchargement PDF lancé !');
+        });
+
+        // Auto-fill from localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('profeps_formData');
+            if (saved) {
+                try {
+                    const d = JSON.parse(saved);
+                    if (d.niveau) document.getElementById('niveau').value = d.niveau;
+                    if (d.aps) document.getElementById('aps').value = d.aps;
+                    if (d.objectif) document.getElementById('objectif').value = d.objectif;
+                    if (d.nomProf) document.getElementById('nomProf').value = d.nomProf;
+                    if (d.etablissement) document.getElementById('etablissement').value = d.etablissement;
+                    if (d.anneeScolaire) document.getElementById('anneeScolaire').value = d.anneeScolaire;
+                    if (d.numeroSeance) document.getElementById('numeroSeance').value = d.numeroSeance;
+                    localStorage.removeItem('profeps_formData');
+                    if (d.autoGenerate) setTimeout(() => document.getElementById('form').dispatchEvent(new Event('submit')), 500);
+                } catch (e) { localStorage.removeItem('profeps_formData'); }
+            }
         });
     </script>
 </body>
