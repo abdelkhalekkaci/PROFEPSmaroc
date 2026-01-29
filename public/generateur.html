@@ -49,7 +49,7 @@
         body { font-family: var(--font-sans); background: var(--bg-secondary); color: var(--text-primary); line-height: 1.6; }
         a { text-decoration: none; color: inherit; transition: var(--transition); }
         
-        /* ========== NAVBAR - IDENTIQUE À INDEX.HTML ========== */
+        /* ========== NAVBAR ========== */
         .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: var(--spacing-md) var(--spacing-xl); background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-light); transition: var(--transition); }
         .navbar.scrolled { padding: var(--spacing-sm) var(--spacing-xl); box-shadow: var(--shadow-md); }
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
@@ -138,7 +138,7 @@
         .preview-empty h3 { font-size: 1.2rem; color: var(--text-primary); margin-bottom: var(--spacing-sm); }
         .preview-document { background: var(--bg-card); padding: var(--spacing-xl); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
 
-        /* ========== FOOTER - IDENTIQUE À INDEX.HTML ========== */
+        /* ========== FOOTER ========== */
         .footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: var(--spacing-3xl) var(--spacing-xl) var(--spacing-xl); }
         .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--spacing-3xl); margin-bottom: var(--spacing-3xl); }
         .footer-brand img { height: 50px; filter: brightness(0) invert(1); margin-bottom: var(--spacing-md); }
@@ -161,7 +161,7 @@
     </style>
 </head>
 <body>
-    <!-- NAVBAR - IDENTIQUE À INDEX.HTML -->
+    <!-- NAVBAR -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
@@ -358,7 +358,7 @@
         </div>
     </main>
 
-    <!-- FOOTER - IDENTIQUE À INDEX.HTML -->
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-grid">
             <div class="footer-brand">
@@ -410,6 +410,7 @@
     </footer>
 
     <script>
+        // Variables globales
         let currentType = 'fiche';
         let currentHtml = '';
         let currentHtmlDisplay = '';
@@ -457,6 +458,16 @@
         function showLoading() { document.getElementById('loadingOverlay').classList.add('show'); }
         function hideLoading() { document.getElementById('loadingOverlay').classList.remove('show'); }
 
+        // Déterminer l'endpoint selon le type de document
+        function getEndpoint(type) {
+            switch(type) {
+                case 'fiche': return '/api/generer-fiche';
+                case 'grille': return '/api/generer-grille';
+                case 'projet': return '/api/generer-projet';
+                default: return '/api/generer-fiche';
+            }
+        }
+
         // Form submit
         document.getElementById('form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -480,7 +491,10 @@
                     anneeScolaire: document.getElementById('anneeScolaire')?.value || ''
                 };
 
-                const resp = await fetch('/api/generer-fiche', {
+                // Appeler le bon endpoint selon le type
+                const endpoint = getEndpoint(currentType);
+                
+                const resp = await fetch(endpoint, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
