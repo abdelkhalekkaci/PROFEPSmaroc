@@ -148,8 +148,8 @@ const VOCABULAIRE_APS = {
 };
 
 const getGroupeAPS = (aps) => {
-    if (['Handball', 'Football', 'Basketball', 'Volleyball'].includes(aps)) return 'Sports collectifs';
-    if (['Tennis de table', 'Badminton'].includes(aps)) return 'Sports de renvoi';
+    if (['Handball', 'Football', 'Basketball'].includes(aps)) return 'Sports marquage et démarquage';
+    if (['Tennis de table', 'Badminton', 'Volleyball'].includes(aps)) return 'Sports de renvoi';
     if (['Course de vitesse', 'Saut en longueur', 'Saut en hauteur', 'Lancer de poids', 'Course de durée'].includes(aps)) return 'Athlétisme';
     if (aps === 'Gymnastique') return 'Gymnastique';
     return 'Activité';
@@ -341,7 +341,111 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
 
         // BUT de la partie fondamentale (lié à l'objectif)
         const butFonda = `Atteindre l'objectif: ${objectif}`;
-
+// ==================== FONCTION SCHÉMAS COLORÉS ====================
+const getSchema = (aps, numSit) => {
+    const schemas = {
+        'Handball': {
+            1: `<svg viewBox="0 0 200 120" style="width:100%;max-width:280px;height:auto;margin:10px auto;display:block;">
+                <rect x="5" y="5" width="190" height="110" fill="#90EE90" stroke="#228B22" stroke-width="2" rx="5"/>
+                <rect x="5" y="45" width="25" height="30" fill="none" stroke="#228B22" stroke-width="2"/>
+                <rect x="170" y="45" width="25" height="30" fill="none" stroke="#228B22" stroke-width="2"/>
+                <circle cx="60" cy="40" r="8" fill="#c1272d"/><text x="60" y="44" text-anchor="middle" fill="white" font-size="10">A</text>
+                <circle cx="60" cy="80" r="8" fill="#c1272d"/><text x="60" y="84" text-anchor="middle" fill="white" font-size="10">A</text>
+                <circle cx="100" cy="60" r="8" fill="#c1272d"/><text x="100" y="64" text-anchor="middle" fill="white" font-size="10">A</text>
+                <circle cx="80" cy="60" r="8" fill="#c1272d"/><text x="80" y="64" text-anchor="middle" fill="white" font-size="10">A</text>
+                <circle cx="130" cy="50" r="8" fill="#1565c0"/><text x="130" y="54" text-anchor="middle" fill="white" font-size="10">D</text>
+                <circle cx="130" cy="70" r="8" fill="#1565c0"/><text x="130" y="74" text-anchor="middle" fill="white" font-size="10">D</text>
+                <path d="M68 40 L92 58" stroke="#333" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+                <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#333"/></marker></defs>
+                <text x="100" y="115" text-anchor="middle" fill="#333" font-size="9">4 Att. vs 2 Déf.</text>
+            </svg>`,
+            2: `<svg viewBox="0 0 200 120" style="width:100%;max-width:280px;height:auto;margin:10px auto;display:block;">
+                <rect x="5" y="5" width="190" height="110" fill="#90EE90" stroke="#228B22" stroke-width="2" rx="5"/>
+                <rect x="5" y="45" width="25" height="30" fill="none" stroke="#228B22" stroke-width="2"/>
+                <rect x="170" y="45" width="25" height="30" fill="none" stroke="#228B22" stroke-width="2"/>
+                <circle cx="50" cy="35" r="7" fill="#c1272d"/><circle cx="50" cy="60" r="7" fill="#c1272d"/>
+                <circle cx="50" cy="85" r="7" fill="#c1272d"/><circle cx="80" cy="48" r="7" fill="#c1272d"/>
+                <circle cx="80" cy="72" r="7" fill="#c1272d"/>
+                <circle cx="120" cy="35" r="7" fill="#1565c0"/><circle cx="120" cy="60" r="7" fill="#1565c0"/>
+                <circle cx="120" cy="85" r="7" fill="#1565c0"/><circle cx="150" cy="48" r="7" fill="#1565c0"/>
+                <circle cx="150" cy="72" r="7" fill="#1565c0"/>
+                <text x="100" y="115" text-anchor="middle" fill="#333" font-size="9">Match 5 vs 5</text>
+            </svg>`
+        },
+        'Football': {
+            1: `<svg viewBox="0 0 200 120" style="width:100%;max-width:280px;height:auto;margin:10px auto;display:block;">
+                <rect x="5" y="5" width="190" height="110" fill="#90EE90" stroke="#228B22" stroke-width="2" rx="5"/>
+                <rect x="5" y="40" width="20" height="40" fill="none" stroke="#228B22" stroke-width="2"/>
+                <rect x="175" y="40" width="20" height="40" fill="none" stroke="#228B22" stroke-width="2"/>
+                <circle cx="100" cy="60" r="15" fill="none" stroke="#228B22" stroke-width="1"/>
+                <circle cx="55" cy="40" r="8" fill="#c1272d"/><circle cx="55" cy="80" r="8" fill="#c1272d"/>
+                <circle cx="85" cy="50" r="8" fill="#c1272d"/><circle cx="85" cy="70" r="8" fill="#c1272d"/>
+                <circle cx="130" cy="60" r="8" fill="#1565c0"/><circle cx="150" cy="60" r="8" fill="#1565c0"/>
+                <text x="100" y="115" text-anchor="middle" fill="#333" font-size="9">4 vs 2 - Progression</text>
+            </svg>`,
+            2: `<svg viewBox="0 0 200 120" style="width:100%;max-width:280px;height:auto;margin:10px auto;display:block;">
+                <rect x="5" y="5" width="190" height="110" fill="#90EE90" stroke="#228B22" stroke-width="2" rx="5"/>
+                <rect x="5" y="40" width="20" height="40" fill="none" stroke="#228B22" stroke-width="2"/>
+                <rect x="175" y="40" width="20" height="40" fill="none" stroke="#228B22" stroke-width="2"/>
+                <circle cx="40" cy="60" r="6" fill="#c1272d"/><circle cx="70" cy="35" r="6" fill="#c1272d"/>
+                <circle cx="70" cy="85" r="6" fill="#c1272d"/><circle cx="90" cy="50" r="6" fill="#c1272d"/>
+                <circle cx="90" cy="70" r="6" fill="#c1272d"/>
+                <circle cx="160" cy="60" r="6" fill="#1565c0"/><circle cx="130" cy="35" r="6" fill="#1565c0"/>
+                <circle cx="130" cy="85" r="6" fill="#1565c0"/><circle cx="110" cy="50" r="6" fill="#1565c0"/>
+                <circle cx="110" cy="70" r="6" fill="#1565c0"/>
+                <text x="100" y="115" text-anchor="middle" fill="#333" font-size="9">Match à thème</text>
+            </svg>`
+        },
+        'Basketball': {
+            1: `<svg viewBox="0 0 200 120" style="width:100%;max-width:280px;height:auto;margin:10px auto;display:block;">
+                <rect x="5" y="5" width="190" height="110" fill="#DEB887" stroke="#8B4513" stroke-width="2" rx="5"/>
+                <circle cx="175" cy="60" r="20" fill="none" stroke="#8B4513" stroke-width="2"/>
+                <rect x="170" y="50" width="25" height="20" fill="none" stroke="#8B4513" stroke-width="2"/>
+                <circle cx="60" cy="40" r="8" fill="#c1272d"/><circle cx="60" cy="80" r="8" fill="#c1272d"/>
+                <circle cx="90" cy="60" r="8" fill="#c1272d"/>
+                <circle cx="130" cy="50" r="8" fill="#1565c0"/><circle cx="130" cy="70" r="8" fill="#1565c0"/>
+                <text x="100" y="115" text-anchor="middle" fill="#333" font-size="9">3 vs 2 - Passe et va</text>
+            </svg>`,
+            2: `<svg viewBox="0 0 200 120" style="width:100%;max-width:280px;height:auto;margin:10px auto;display:block;">
+                <rect x="5" y="5" width="190" height="110" fill="#DEB887" stroke="#8B4513" stroke-width="2" rx="5"/>
+                <circle cx="175" cy="60" r="20" fill="none" stroke="#8B4513" stroke-width="2"/>
+                <circle cx="50" cy="40" r="6" fill="#c1272d"/><circle cx="50" cy="80" r="6" fill="#c1272d"/>
+                <circle cx="80" cy="50" r="6" fill="#c1272d"/><circle cx="80" cy="70" r="6" fill="#c1272d"/>
+                <circle cx="120" cy="40" r="6" fill="#1565c0"/><circle cx="120" cy="80" r="6" fill="#1565c0"/>
+                <circle cx="140" cy="50" r="6" fill="#1565c0"/><circle cx="140" cy="70" r="6" fill="#1565c0"/>
+                <text x="100" y="115" text-anchor="middle" fill="#333" font-size="9">4 vs 4 Match</text>
+            </svg>`
+        },
+        'Volleyball': {
+            1: `<svg viewBox="0 0 200 120" style="width:100%;max-width:280px;height:auto;margin:10px auto;display:block;">
+                <rect x="5" y="5" width="190" height="110" fill="#F0E68C" stroke="#DAA520" stroke-width="2" rx="5"/>
+                <line x1="100" y1="5" x2="100" y2="115" stroke="#333" stroke-width="3"/>
+                <circle cx="50" cy="40" r="8" fill="#c1272d"/><text x="50" y="44" text-anchor="middle" fill="white" font-size="8">R</text>
+                <circle cx="50" cy="80" r="8" fill="#c1272d"/><text x="50" y="84" text-anchor="middle" fill="white" font-size="8">P</text>
+                <circle cx="75" cy="60" r="8" fill="#c1272d"/><text x="75" y="64" text-anchor="middle" fill="white" font-size="8">A</text>
+                <circle cx="150" cy="40" r="8" fill="#1565c0"/><circle cx="150" cy="80" r="8" fill="#1565c0"/>
+                <circle cx="125" cy="60" r="8" fill="#1565c0"/>
+                <text x="100" y="115" text-anchor="middle" fill="#333" font-size="9">3 vs 3 - Construction</text>
+            </svg>`,
+            2: `<svg viewBox="0 0 200 120" style="width:100%;max-width:280px;height:auto;margin:10px auto;display:block;">
+                <rect x="5" y="5" width="190" height="110" fill="#F0E68C" stroke="#DAA520" stroke-width="2" rx="5"/>
+                <line x1="100" y1="5" x2="100" y2="115" stroke="#333" stroke-width="3"/>
+                <circle cx="35" cy="30" r="6" fill="#c1272d"/><circle cx="65" cy="30" r="6" fill="#c1272d"/>
+                <circle cx="35" cy="60" r="6" fill="#c1272d"/><circle cx="65" cy="60" r="6" fill="#c1272d"/>
+                <circle cx="135" cy="30" r="6" fill="#1565c0"/><circle cx="165" cy="30" r="6" fill="#1565c0"/>
+                <circle cx="135" cy="60" r="6" fill="#1565c0"/><circle cx="165" cy="60" r="6" fill="#1565c0"/>
+                <text x="100" y="115" text-anchor="middle" fill="#333" font-size="9">4 vs 4 Match</text>
+            </svg>`
+        }
+    };
+    // Schéma par défaut pour les autres APS
+    const defaultSchema = `<svg viewBox="0 0 200 100" style="width:100%;max-width:280px;height:auto;margin:10px auto;display:block;">
+        <rect x="5" y="5" width="190" height="90" fill="#E8E8E8" stroke="#666" stroke-width="2" rx="8"/>
+        <text x="100" y="55" text-anchor="middle" fill="#666" font-size="12">Zone de travail</text>
+    </svg>`;
+    
+    return schemas[aps]?.[numSit] || defaultSchema;
+};
         // ==================== HTML DISPLAY (SITE) ====================
         const htmlDisplay = `
 <div style="font-family:'Segoe UI',sans-serif;max-width:900px;margin:0 auto;line-height:1.5;">
@@ -387,9 +491,13 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
                 <p><strong>📋 Déroulement:</strong> ${s1Deroul}</p>
                 <p><strong>📢 Consignes:</strong></p>
                 <div style="margin-left:15px;">${s1Consignes.split('\n').map(c => '<div>' + c + '</div>').join('')}</div>
-                <p style="background:#fff8e1;padding:8px;border-radius:5px;margin-top:8px;"><strong>🔄 Variantes:</strong> ${s1Variantes.replace(/\n/g, ' | ')}</p>
-            </div>
-        </div>
+              <p style="background:#fff8e1;padding:8px;border-radius:5px;margin-top:8px;"><strong>🔄 Variantes:</strong> ${s1Variantes.replace(/\n/g, ' | ')}</p>
+<div style="margin-top:10px;padding:10px;background:#f5f5f5;border-radius:8px;">
+    <p style="text-align:center;font-weight:bold;color:#006233;margin-bottom:5px;font-size:0.8rem;">📐 Schéma d'organisation</p>
+    ${getSchema(aps, 1)}
+</div>
+</div>
+</div>
 
         <div style="background:#e3f2fd;border-radius:8px;padding:12px;margin-bottom:15px;border:1px solid #64b5f6;">
             <h3 style="color:#0d47a1;margin:0 0 10px 0;font-size:0.9rem;">
@@ -405,8 +513,12 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
                 <p><strong>📢 Consignes:</strong></p>
                 <div style="margin-left:15px;">${s2Consignes.split('\n').map(c => '<div>' + c + '</div>').join('')}</div>
                 <p style="background:#fff8e1;padding:8px;border-radius:5px;margin-top:8px;"><strong>🔄 Variantes:</strong> ${s2Variantes.replace(/\n/g, ' | ')}</p>
-            </div>
-        </div>
+<div style="margin-top:10px;padding:10px;background:#f5f5f5;border-radius:8px;">
+    <p style="text-align:center;font-weight:bold;color:#1565c0;margin-bottom:5px;font-size:0.8rem;">📐 Schéma d'organisation</p>
+    ${getSchema(aps, 2)}
+</div>
+</div>
+</div>
 
         <div style="background:#fff3e0;border-radius:8px;padding:10px 12px;border-left:3px solid #ff9800;">
             <h3 style="color:#e65100;margin:0 0 5px 0;font-size:0.85rem;">◆ SITUATION DE RÉFÉRENCE</h3>
@@ -443,6 +555,8 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
 <head><meta charset="UTF-8"><title>Fiche ${aps} ${niveau}</title>
 <style>
 @page{size:297mm 210mm;mso-page-orientation:landscape;margin:0.3cm}
+@page Section1 {size:297mm 210mm;mso-page-orientation:landscape;}
+div.Section1 {page:Section1;}
 body{font-family:Calibri,Arial,sans-serif;font-size:7pt;line-height:1.1;margin:0;padding:0}
 table{width:100%;border-collapse:collapse;table-layout:fixed}
 th,td{border:0.5pt solid #000;padding:2px 3px;vertical-align:top}
