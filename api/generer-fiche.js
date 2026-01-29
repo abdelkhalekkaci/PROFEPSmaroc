@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
 
         const isCollege = ['1AC', '2AC', '3AC'].includes(niveau);
 
-        // ==================== OTI COMPLETS (non résumés) ====================
+        // ==================== OTI COMPLETS ====================
         const OTI = {
             '1AC': "À la fin de la 1ère année du cycle secondaire collégial, l'élève doit être capable d'acquérir une motricité correcte lui permettant de s'adapter aux exigences des différentes situations motrices et de s'intégrer positivement dans le groupe classe tout en respectant les règles de sécurité et de fair-play.",
             '2AC': "À la fin de la 2ème année du cycle secondaire collégial, l'élève doit être capable d'ajuster et de maîtriser son énergie physique pour effectuer des réalisations motrices coordonnées et organisées, tout en développant ses capacités d'adaptation aux situations variées et en respectant les règles de jeu.",
@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
             '2AB': "À la fin de la 2ème année du Baccalauréat, l'élève doit être capable d'analyser finement les différentes situations motrices et de s'intégrer efficacement dans la réalisation de projets collectifs et individuels, en faisant preuve d'expertise technique et d'intelligence tactique."
         };
 
-        // ==================== OTC COMPLETS PAR APS (non résumés) ====================
+        // ==================== OTC COMPLETS PAR APS ====================
         const OTC = {
             'Handball': {
                 '1AC': "Conserver collectivement la balle et participer activement au jeu pour progresser vers la cible adverse et marquer en situation de jeu réduit, tout en respectant les règles fondamentales et en assurant la continuité du jeu.",
@@ -62,11 +62,11 @@ module.exports = async (req, res) => {
             },
             'Saut en longueur': {
                 '1AC': "Réaliser une course d'élan progressivement accélérée suivie d'une impulsion vers l'avant et le haut, et une réception équilibrée sur les deux pieds dans la fosse.",
-                '2AC': "Enchaîner une course d'élan régulière et accélérée, une impulsion active sur la planche d'appel et un saut avec une attitude aérienne simple (ramené ou extension).",
+                '2AC': "Enchaîner une course d'élan régulière et accélérée, une impulsion active sur la planche d'appel et un saut avec une attitude aérienne simple.",
                 '3AC': "Optimiser sa course d'élan étalonnée pour faire coïncider la vitesse maximale avec la planche d'appel, et améliorer l'efficacité de l'impulsion et de la suspension.",
                 'TC': "Maîtriser l'organisation de sa course d'élan et la qualité de son impulsion pour réaliser une performance optimale, en adoptant une technique aérienne efficace.",
-                '1AB': "Augmenter l'efficacité du saut par la maîtrise de la liaison course-impulsion et l'amélioration de la phase aérienne (ciseau ou hitch-kick).",
-                '2AB': "Optimiser sa performance en coordonnant les trois phases du saut (course, impulsion, suspension-réception) avec une technique aérienne maîtrisée."
+                '1AB': "Augmenter l'efficacité du saut par la maîtrise de la liaison course-impulsion et l'amélioration de la phase aérienne.",
+                '2AB': "Optimiser sa performance en coordonnant les trois phases du saut avec une technique aérienne maîtrisée."
             },
             'Saut en hauteur': {
                 '1AC': "Franchir une barre en utilisant une course d'élan et une impulsion vers le haut, avec une technique de franchissement ventral ou dorsal simplifié.",
@@ -79,8 +79,8 @@ module.exports = async (req, res) => {
             'Course de vitesse': {
                 '1AC': "Réagir rapidement au signal de départ et maintenir sa vitesse maximale sur une distance courte (40-60m), en courant dans son couloir.",
                 '2AC': "Améliorer sa technique de course (fréquence et amplitude des foulées) pour optimiser sa vitesse sur 60-80m, avec un départ réactif.",
-                '3AC': "Gérer sa course du départ à l'arrivée en optimisant l'accélération, le maintien de la vitesse maximale et la finition, sur 80m.",
-                'TC': "Maîtriser les différentes phases de la course de vitesse (réaction, mise en action, accélération, maintien) pour réaliser sa meilleure performance.",
+                '3AC': "Gérer sa course du départ à l'arrivée en optimisant l'accélération, le maintien de la vitesse maximale et la finition.",
+                'TC': "Maîtriser les différentes phases de la course de vitesse pour réaliser sa meilleure performance.",
                 '1AB': "Analyser et améliorer ses points faibles techniques et physiques pour progresser vers sa performance optimale.",
                 '2AB': "Atteindre son potentiel maximal par une préparation et une exécution optimales, en gérant le stress de la compétition."
             },
@@ -93,89 +93,68 @@ module.exports = async (req, res) => {
                 '2AB': "Atteindre ses objectifs personnels par une préparation et une stratégie de course adaptées à ses ressources."
             },
             'Lancer de poids': {
-                '1AC': "Lancer un engin (2-3 kg) en utilisant une poussée du bras depuis l'épaule, dans le respect des règles de sécurité et de l'aire de lancer.",
+                '1AC': "Lancer un engin en utilisant une poussée du bras depuis l'épaule, dans le respect des règles de sécurité et de l'aire de lancer.",
                 '2AC': "Coordonner la poussée des jambes et l'action du bras lanceur pour améliorer la distance de lancer, en respectant la technique en translation.",
-                '3AC': "Enchaîner les actions motrices du lancer (placement, élan, poussée, dégagé) en respectant la technique et les règles de la compétition.",
+                '3AC': "Enchaîner les actions motrices du lancer en respectant la technique et les règles de la compétition.",
                 'TC': "Réaliser un lancer en maîtrisant la coordination des différents segments corporels dans une technique en translation ou rotation.",
                 '1AB': "Améliorer sa performance par le perfectionnement technique et le développement de la puissance musculaire spécifique.",
                 '2AB': "Optimiser sa performance par une maîtrise complète de la chaîne de lancer et une gestion efficace de la compétition."
             },
             'Gymnastique': {
-                '1AC': "Réaliser un enchaînement simple au sol comprenant au minimum 3 éléments de la famille A et 2 de la famille B, présenté avec maîtrise devant la classe.",
-                '2AC': "Présenter un enchaînement gymnique varié comprenant 3 éléments A, 2 éléments B et 1 élément C, avec des liaisons fluides et une présentation soignée.",
-                '3AC': "Concevoir et réaliser un enchaînement individuel au sol comprenant 2 éléments A, 4 éléments B et 1 élément C, avec originalité et maîtrise.",
-                'TC': "Présenter un enchaînement gymnique au sol comprenant 2 éléments A, 3 éléments B et 2 éléments C, avec maîtrise technique et qualité de présentation.",
-                '1AB': "Composer et réaliser un enchaînement au sol comprenant 2 éléments B, 3 éléments C et 2 éléments D, avec continuité et expression personnelle.",
-                '2AB': "Concevoir, réaliser et évaluer un enchaînement gymnique varié comprenant 2 éléments C, 3 éléments D et 2 éléments E, avec expertise et créativité."
+                '1AC': "Réaliser un enchaînement simple au sol comprenant des éléments gymniques de base, présenté avec maîtrise devant la classe.",
+                '2AC': "Présenter un enchaînement gymnique varié avec des liaisons fluides et une présentation soignée.",
+                '3AC': "Concevoir et réaliser un enchaînement individuel au sol avec originalité et maîtrise.",
+                'TC': "Présenter un enchaînement gymnique au sol avec maîtrise technique et qualité de présentation.",
+                '1AB': "Composer et réaliser un enchaînement au sol avec continuité et expression personnelle.",
+                '2AB': "Concevoir, réaliser et évaluer un enchaînement gymnique varié avec expertise et créativité."
             },
             'Tennis de table': {
-                '1AC': "Maintenir un échange en renvoyant la balle sur la table adverse, en utilisant le coup droit et le revers, dans le respect des règles du service et du jeu.",
-                '2AC': "Diriger la balle dans différentes zones de la table pour mettre l'adversaire en difficulté, en variant les placements et les vitesses.",
-                '3AC': "Varier les trajectoires, les vitesses et les effets pour prendre l'initiative du point et déstabiliser l'adversaire.",
-                'TC': "Construire le point en utilisant des variations de placement, de vitesse et d'effet, en s'adaptant au jeu de l'adversaire.",
-                '1AB': "Élaborer des stratégies de jeu adaptées aux caractéristiques de l'adversaire, en exploitant ses points faibles.",
-                '2AB': "Mettre en œuvre un projet de jeu personnel et l'adapter en cours de match en fonction de l'évolution du rapport de force."
+                '1AC': "Maintenir un échange en renvoyant la balle sur la table adverse, en utilisant le coup droit et le revers, dans le respect des règles.",
+                '2AC': "Diriger la balle dans différentes zones de la table pour mettre l'adversaire en difficulté, en variant les placements.",
+                '3AC': "Varier les trajectoires, les vitesses et les effets pour prendre l'initiative du point.",
+                'TC': "Construire le point en utilisant des variations de placement, de vitesse et d'effet.",
+                '1AB': "Élaborer des stratégies de jeu adaptées aux caractéristiques de l'adversaire.",
+                '2AB': "Mettre en œuvre un projet de jeu personnel et l'adapter en cours de match."
             },
             'Badminton': {
-                '1AC': "Renvoyer le volant dans le terrain adverse en utilisant les frappes de base (dégagé, service), dans le respect des règles et des limites du terrain.",
-                '2AC': "Varier la longueur et la direction de ses frappes (dégagé, amorti) pour déplacer l'adversaire et créer des espaces.",
-                '3AC': "Alterner jeu long (dégagé) et jeu court (amorti, contre-amorti) pour créer des espaces libres et marquer le point.",
-                'TC': "Construire le point en exploitant les espaces libres du terrain adverse, en variant les trajectoires hautes et basses.",
-                '1AB': "Élaborer des séquences de jeu tactiquement cohérentes, en utilisant les feintes et les variations de rythme.",
-                '2AB': "Concevoir et appliquer une stratégie de jeu personnelle adaptée à l'adversaire, en optimisant ses points forts."
+                '1AC': "Renvoyer le volant dans le terrain adverse en utilisant les frappes de base, dans le respect des règles et des limites du terrain.",
+                '2AC': "Varier la longueur et la direction de ses frappes pour déplacer l'adversaire et créer des espaces.",
+                '3AC': "Alterner jeu long et jeu court pour créer des espaces libres et marquer le point.",
+                'TC': "Construire le point en exploitant les espaces libres du terrain adverse.",
+                '1AB': "Élaborer des séquences de jeu tactiquement cohérentes, en utilisant les feintes.",
+                '2AB': "Concevoir et appliquer une stratégie de jeu personnelle adaptée à l'adversaire."
             }
         };
 
         const SITUATIONS_REF = {
-            'Handball': '7 contre 7 sur terrain réglementaire',
-            'Football': '5 contre 5 sur terrain réduit',
-            'Basketball': '5 contre 5 sur demi-terrain',
+            'Handball': '7 contre 7 sur terrain réglementaire avec arbitrage',
+            'Football': '7 contre 7 sur terrain réduit avec 2 buts',
+            'Basketball': '5 contre 5 sur demi-terrain avec panier',
             'Volleyball': '6 contre 6 sur terrain réglementaire',
-            'Tennis de table': 'Match en simple (2 sets gagnants)',
-            'Badminton': 'Match en simple (2 sets gagnants)',
-            'Course de vitesse': isCollege ? '80 mètres chronométré' : '80m (G) / 60m (F)',
-            'Saut en longueur': '3 essais mesurés (meilleure performance)',
-            'Saut en hauteur': 'Concours à barres montantes',
-            'Lancer de poids': '3 essais mesurés (4kg G / 3kg F)',
-            'Course de durée': isCollege ? '1000m (G) / 600m (F)' : '12 minutes (distance)',
-            'Gymnastique': 'Enchaînement au sol noté'
+            'Tennis de table': 'Match en simple (2 sets gagnants de 11 points)',
+            'Badminton': 'Match en simple (2 sets gagnants de 21 points)',
+            'Course de vitesse': isCollege ? '60 mètres chronométré' : '80m chronométré',
+            'Saut en longueur': '3 essais mesurés (meilleure performance retenue)',
+            'Saut en hauteur': 'Concours à barres montantes (3 essais par hauteur)',
+            'Lancer de poids': '3 essais mesurés (meilleure performance retenue)',
+            'Course de durée': isCollege ? 'Course de 12 minutes (distance parcourue)' : '12 minutes (VMA)',
+            'Gymnastique': 'Enchaînement au sol noté sur 20 points'
         };
 
-        // Objectifs par niveau d'élèves pour projet
-        const getObjectifsParNiveau = (aps, niveauEleves, nbSeances) => {
-            const sitRef = SITUATIONS_REF[aps];
-            const obj = {
-                'debutant': [`Évaluation diagnostique : Observer les capacités initiales via la situation de référence (${sitRef}).`, `Découverte : Présenter les règles fondamentales, le vocabulaire spécifique et les consignes de sécurité.`, `Familiarisation : Découvrir les gestes de base à travers des situations ludiques et accessibles.`, `Acquisition : Maîtriser les techniques fondamentales dans des situations simplifiées.`, `Consolidation : Reproduire les gestes avec régularité et correction.`, `Application : Utiliser les acquis dans des situations aménagées.`, `Situation facilitée : Mettre en œuvre les apprentissages dans un contexte adapté.`, `Intégration guidée : Enchaîner les actions apprises avec repères.`, `Préparation : Répéter la situation de référence dans des conditions facilitées.`, `Évaluation terminale : Valider les acquis fondamentaux (${sitRef}).`],
-                'moyen': [`Évaluation diagnostique : Analyser les compétences initiales (${sitRef}).`, `Rappel : Consolider les connaissances réglementaires et tactiques.`, `Perfectionnement : Améliorer la qualité d'exécution des gestes.`, `Développement tactique : Appliquer les principes d'organisation.`, `Situations complexes : Mobiliser les acquis avec contraintes.`, `Adaptation : Ajuster ses réponses motrices aux configurations.`, `Enchaînement : Lier les phases techniques avec fluidité.`, `Autonomie : Prendre des initiatives et faire des choix pertinents.`, `Intégration : Mobiliser l'ensemble des acquis en situation.`, `Évaluation terminale : Valider les compétences (${sitRef}).`],
-                'avance': [`Évaluation diagnostique : Évaluer le niveau de maîtrise (${sitRef}).`, `Analyse tactique : Approfondir stratégies et systèmes.`, `Perfectionnement avancé : Affiner les détails techniques.`, `Lecture de jeu : Développer l'anticipation et l'adaptation.`, `Prise de décision : Optimiser pertinence et rapidité des choix.`, `Performance sous pression : Maintenir la qualité en conditions exigeantes.`, `Leadership : Organiser et guider le groupe.`, `Gestion de match : Maîtriser les aspects stratégiques.`, `Préparation intensive : Simuler les conditions d'évaluation.`, `Évaluation terminale : Valider niveau avancé (${sitRef}).`],
-                'elite': [`Évaluation diagnostique : Identifier axes de perfectionnement (${sitRef}).`, `Expertise tactique : Maîtriser stratégies avancées.`, `Excellence technique : Atteindre niveau optimal.`, `Créativité motrice : Développer réponses originales.`, `Gestion performance : Optimiser tous paramètres.`, `Transmission : Analyser et démontrer les techniques.`, `Arbitrage : Maîtriser règles et évaluer les pairs.`, `Compétition simulée : Performer en conditions officielles.`, `Optimisation finale : Peaufiner les derniers détails.`, `Évaluation terminale : Valider niveau expert (${sitRef}).`]
-            };
-            let o = obj[niveauEleves] || obj['moyen'];
-            while (o.length < nbSeances) o.splice(-1, 0, `Renforcement : Consolider et automatiser les compétences acquises.`);
-            return o.slice(0, nbSeances);
-        };
-
-        // Critères observation
-        const CRITERES_OBS = {
-            'Saut en longueur': { criteres: [{ nom: 'Course', sous: ['Accélérée', 'Irrégulière'] }, { nom: 'Appel', sous: ['Avant', 'Sur', 'Mordu'] }, { nom: 'Envol', sous: ['Groupé', 'Extension'] }, { nom: 'Réception', sous: ['2 pieds', 'Déséq.'] }], perf: true },
-            'Saut en hauteur': { criteres: [{ nom: 'Course', sous: ['Courbe', 'Droite'] }, { nom: 'Appel', sous: ['Pied ext.', 'Autre'] }, { nom: 'Franch.', sous: ['Dorsal', 'Autre'] }, { nom: 'Réception', sous: ['Dos', 'Danger'] }], perf: true },
-            'Course de vitesse': { criteres: [{ nom: 'Départ', sous: ['Réactif', 'Lent'] }, { nom: 'Accél.', sous: ['Progressive', 'Brutale'] }, { nom: 'Fréquence', sous: ['Haute', 'Basse'] }, { nom: 'Ligne', sous: ['Droite', 'Déviée'] }], perf: true },
-            'Lancer de poids': { criteres: [{ nom: 'Placement', sous: ['Correct', 'Incorrect'] }, { nom: 'Tenue', sous: ['Cou', 'Éloigné'] }, { nom: 'Poussée', sous: ['Complète', 'Partielle'] }, { nom: 'Équilibre', sous: ['Stable', 'Instable'] }], perf: true },
-            'Course de durée': { criteres: [{ nom: 'Régularité', sous: ['Constante', 'Variable'] }, { nom: 'Allure', sous: ['Adaptée', 'Inadaptée'] }, { nom: 'Posture', sous: ['Correcte', 'Incorrecte'] }, { nom: 'Finish', sous: ['Accéléré', 'Ralenti'] }], perf: true },
-            'Handball': { criteres: [{ nom: 'Passe', sous: ['Précise', 'Imprécise'] }, { nom: 'Récept.', sous: ['Assurée', 'Hésitante'] }, { nom: 'Tir', sous: ['Cadré', 'Non cadré'] }, { nom: 'Démarq.', sous: ['Efficace', 'Passif'] }], obs: true },
-            'Football': { criteres: [{ nom: 'Conduite', sous: ['Maîtrisée', 'Perdue'] }, { nom: 'Passe', sous: ['Précise', 'Imprécise'] }, { nom: 'Contrôle', sous: ['Orienté', 'Subi'] }, { nom: 'Placement', sous: ['Bon', 'Mauvais'] }], obs: true },
-            'Basketball': { criteres: [{ nom: 'Dribble', sous: ['Tête haute', 'Yeux balle'] }, { nom: 'Passe', sous: ['Précise', 'Imprécise'] }, { nom: 'Tir', sous: ['Équilibré', 'Déséq.'] }, { nom: 'Démarq.', sous: ['Actif', 'Passif'] }], obs: true },
-            'Volleyball': { criteres: [{ nom: 'Manchette', sous: ['Bras tendus', 'Pliés'] }, { nom: 'Touche', sous: ['Haute', 'Basse'] }, { nom: 'Service', sous: ['Réussi', 'Faute'] }, { nom: 'Déplact.', sous: ['Anticipé', 'Retard'] }], obs: true },
-            'Gymnastique': { criteres: [{ nom: 'Éléments A', sous: ['Réussi', 'Raté'] }, { nom: 'Éléments B', sous: ['Réussi', 'Raté'] }, { nom: 'Éléments C', sous: ['Réussi', 'Raté'] }, { nom: 'Liaison', sous: ['Fluide', 'Arrêts'] }], note: true },
-            'Tennis de table': { criteres: [{ nom: 'Coup droit', sous: ['Contrôlé', 'Aléatoire'] }, { nom: 'Revers', sous: ['Contrôlé', 'Aléatoire'] }, { nom: 'Service', sous: ['Réussi', 'Faute'] }, { nom: 'Déplact.', sous: ['Équilibré', 'Instable'] }], obs: true },
-            'Badminton': { criteres: [{ nom: 'Dégagé', sous: ['Fond', 'Court'] }, { nom: 'Amorti', sous: ['Près filet', 'Long'] }, { nom: 'Service', sous: ['Réussi', 'Faute'] }, { nom: 'Replace.', sous: ['Centre', 'Excentré'] }], obs: true }
-        };
-
-        const CRITERES_EVAL = {
-            'sports_collectifs': [{ nom: 'Technique', pts: 5 }, { nom: 'Tactique', pts: 5 }, { nom: 'Engagement', pts: 5 }, { nom: 'Fair-play', pts: 5 }],
-            'athletisme': [{ nom: 'Performance', pts: 10 }, { nom: 'Maîtrise tech.', pts: 6 }, { nom: 'Engagement', pts: 4 }],
-            'gymnastique': [{ nom: 'Difficulté', pts: 6 }, { nom: 'Exécution', pts: 8 }, { nom: 'Composition', pts: 6 }],
-            'sports_renvoi': [{ nom: 'Technique', pts: 6 }, { nom: 'Tactique', pts: 6 }, { nom: 'Efficacité', pts: 8 }]
+        // Vocabulaire spécifique par APS pour le prompt
+        const VOCABULAIRE_APS = {
+            'Handball': 'passe (à terre, en cloche, à rebond), réception à deux mains, dribble, tir en appui, tir en suspension, feinte de tir, feinte de passe, démarquage, appel de balle, pivot, ailier, arrière, demi-centre, gardien de but, zone des 6 mètres, ligne des 9 mètres, contre-attaque, repli défensif, défense individuelle, défense de zone',
+            'Football': 'conduite de balle, contrôle orienté, contrôle amorti, passe courte intérieur du pied, passe longue coup de pied, tir instep, tête, dribble, tacle, marquage, démarquage, appel en profondeur, remise, une-deux, hors-jeu, corner, coup franc, touche',
+            'Basketball': 'dribble de progression, dribble de protection, dribble croisé, passe à terre, passe à une main, passe baseball, tir en course lay-up, tir en suspension, rebond offensif, rebond défensif, écran, pick and roll, démarquage, pivot, menace triple, feinte de tir',
+            'Volleyball': 'manchette bras tendus, touche haute au-dessus du front, service cuillère, service tennis, attaque smash, bloc, réception basse, passe haute, passeur, attaquant central, libéro, rotation, zone avant 2-3-4, zone arrière 1-5-6, faute de filet, double touche',
+            'Course de vitesse': 'position de départ, réaction au signal, mise en action, phase d\'accélération, fréquence des appuis, amplitude de foulée, phase de maintien de vitesse, finish franchissement ligne, alignement segmentaire, relâchement',
+            'Course de durée': 'allure régulière, gestion de l\'effort, VMA vitesse maximale aérobie, fréquence cardiaque, zone cible, endurance fondamentale, récupération active, foulée économique, respiration ventrale, hydratation',
+            'Saut en longueur': 'course d\'élan étalonnée, marques de repère, accélération progressive, planche d\'appel, pied d\'impulsion, impulsion vers l\'avant-haut, phase d\'envol ramené, phase d\'envol extension, réception pieds joints, fosse de réception',
+            'Saut en hauteur': 'course d\'élan courbe, pied d\'appel extérieur, impulsion verticale, rotation dorsale, esquive des hanches, franchissement dorsal fosbury-flop, position cambrée, réception sur le dos, tapis de réception',
+            'Lancer de poids': 'position de départ dos à l\'aire, tenue de l\'engin au cou, translation, sursaut, poussée jambe arrière, rotation du tronc, extension du bras, fouetté du poignet, équilibre final, secteur de chute',
+            'Gymnastique': 'roulade avant groupée, roulade arrière, ATR appui tendu renversé, roue, pont, souplesse avant, souplesse arrière, équilibre, saut extension, saut groupé, liaison, amplitude, tenue du corps, gainage, alignement',
+            'Tennis de table': 'prise de raquette orthodoxe, coup droit lift, coup droit coupé, revers poussette, revers topspin, service court, service long, service coupé latéral, effet lift, effet coupé, placement, déplacement latéral, replacement',
+            'Badminton': 'prise universelle, dégagé fond de court, amorti au filet, contre-amorti, smash, drive, service court, service long, replacement au centre, déplacement en fente, déplacement en pas chassés, feinte de frappe'
         };
 
         let groupeAPS = 'Activité', typeEval = 'sports_collectifs';
@@ -187,8 +166,23 @@ module.exports = async (req, res) => {
         const oti = OTI[niveau] || '';
         const otc = OTC[aps]?.[niveau] || '';
         const sitRef = SITUATIONS_REF[aps] || 'Situation adaptée';
-        const critObs = CRITERES_OBS[aps] || CRITERES_OBS['Handball'];
-        const critEval = CRITERES_EVAL[typeEval];
+        const vocabAPS = VOCABULAIRE_APS[aps] || '';
+
+        // Critères d'observation par APS
+        const CRITERES_OBS = {
+            'Saut en longueur': { criteres: [{ nom: 'Course élan', sous: ['Accélérée', 'Irrégulière'] }, { nom: 'Impulsion', sous: ['Active', 'Passive'] }, { nom: 'Envol', sous: ['Groupé', 'Déséquilibré'] }, { nom: 'Réception', sous: ['Équilibrée', 'Chute'] }] },
+            'Saut en hauteur': { criteres: [{ nom: 'Course courbe', sous: ['Correcte', 'Droite'] }, { nom: 'Impulsion', sous: ['Pied ext.', 'Mauvais'] }, { nom: 'Franchissement', sous: ['Dorsal', 'Autre'] }, { nom: 'Réception', sous: ['Dos', 'Danger'] }] },
+            'Course de vitesse': { criteres: [{ nom: 'Départ', sous: ['Réactif', 'Lent'] }, { nom: 'Accélération', sous: ['Progressive', 'Brutale'] }, { nom: 'Maintien', sous: ['Stable', 'Décélère'] }, { nom: 'Finish', sous: ['Engagé', 'Relâché'] }] },
+            'Lancer de poids': { criteres: [{ nom: 'Position', sous: ['Dos aire', 'Face'] }, { nom: 'Tenue', sous: ['Au cou', 'Éloigné'] }, { nom: 'Poussée', sous: ['Complète', 'Partielle'] }, { nom: 'Équilibre', sous: ['Stable', 'Chute'] }] },
+            'Course de durée': { criteres: [{ nom: 'Régularité', sous: ['Constante', 'Variable'] }, { nom: 'Allure', sous: ['Adaptée', 'Inadaptée'] }, { nom: 'Posture', sous: ['Correcte', 'Effondrée'] }, { nom: 'Finish', sous: ['Accéléré', 'Ralenti'] }] },
+            'Handball': { criteres: [{ nom: 'Passe', sous: ['Précise', 'Imprécise'] }, { nom: 'Réception', sous: ['Assurée', 'Manquée'] }, { nom: 'Tir', sous: ['Cadré', 'Hors cadre'] }, { nom: 'Démarquage', sous: ['Efficace', 'Passif'] }] },
+            'Football': { criteres: [{ nom: 'Conduite', sous: ['Maîtrisée', 'Perdue'] }, { nom: 'Passe', sous: ['Précise', 'Imprécise'] }, { nom: 'Contrôle', sous: ['Orienté', 'Subi'] }, { nom: 'Placement', sous: ['Pertinent', 'Inadapté'] }] },
+            'Basketball': { criteres: [{ nom: 'Dribble', sous: ['Tête haute', 'Yeux balle'] }, { nom: 'Passe', sous: ['Précise', 'Interceptée'] }, { nom: 'Tir', sous: ['Équilibré', 'Déséquilibré'] }, { nom: 'Démarquage', sous: ['Actif', 'Statique'] }] },
+            'Volleyball': { criteres: [{ nom: 'Manchette', sous: ['Bras tendus', 'Pliés'] }, { nom: 'Touche', sous: ['Haute', 'Basse'] }, { nom: 'Service', sous: ['Réussi', 'Faute'] }, { nom: 'Déplacement', sous: ['Anticipé', 'Retard'] }] },
+            'Gymnastique': { criteres: [{ nom: 'Amplitude', sous: ['Suffisante', 'Insuffisante'] }, { nom: 'Tenue', sous: ['Gainé', 'Relâché'] }, { nom: 'Liaisons', sous: ['Fluides', 'Arrêts'] }, { nom: 'Réception', sous: ['Stabilisée', 'Déséquilibrée'] }] },
+            'Tennis de table': { criteres: [{ nom: 'Coup droit', sous: ['Contrôlé', 'Aléatoire'] }, { nom: 'Revers', sous: ['Contrôlé', 'Aléatoire'] }, { nom: 'Service', sous: ['Varié', 'Prévisible'] }, { nom: 'Déplacement', sous: ['Équilibré', 'Instable'] }] },
+            'Badminton': { criteres: [{ nom: 'Dégagé', sous: ['Fond court', 'Court'] }, { nom: 'Amorti', sous: ['Près filet', 'Long'] }, { nom: 'Service', sous: ['Réglementaire', 'Faute'] }, { nom: 'Replacement', sous: ['Centre', 'Excentré'] }] }
+        };
 
         let html = '', htmlDisplay = '', filename = '';
 
@@ -196,597 +190,490 @@ module.exports = async (req, res) => {
         if (typeDocument === 'fiche' || !typeDocument) {
             if (!objectif) return res.status(400).json({ success: false, error: 'Objectif requis' });
 
-            const prompt = `Tu es un expert en EPS au Maroc. Génère le contenu DÉTAILLÉ pour une fiche de séance.
-APS: ${aps} | Niveau: ${niveau} | Objectif: ${objectif}
+            // PROMPT AMÉLIORÉ - Très spécifique à l'APS et l'objectif
+            const prompt = `Tu es un expert en éducation physique et sportive au Maroc, spécialiste de ${aps}.
 
-GÉNÈRE EXACTEMENT CE FORMAT avec contenu SPÉCIFIQUE et DÉTAILLÉ:
+SÉANCE À PRÉPARER:
+- APS: ${aps}
+- Niveau scolaire: ${niveau} (${isCollege ? 'Collège - OP 2009' : 'Lycée - OP 2007'})
+- Objectif de la séance: "${objectif}"
+- Numéro de séance: ${numeroSeance || 1}
 
-ECHAUFFEMENT_SPECIFIQUE:
-[3 exercices spécifiques détaillés avec organisation et durée]
+VOCABULAIRE TECHNIQUE OBLIGATOIRE pour ${aps}:
+${vocabAPS}
 
-SITUATION1_TITRE: [titre court et descriptif]
-SITUATION1_ORGANISATION: [organisation détaillée: nombre joueurs, dimensions terrain, matériel nécessaire]
-SITUATION1_DEROULEMENT: [explication complète en 5-6 phrases détaillées du déroulement]
-SITUATION1_CONSIGNES:
-1. [consigne technique précise]
-2. [consigne tactique précise]
-3. [consigne comportementale]
-4. [consigne de sécurité si nécessaire]
-SITUATION1_VARIANTES:
-- Simplifier: [2 façons de simplifier]
-- Complexifier: [2 façons de complexifier]
+CONSIGNES STRICTES:
+1. TOUT le contenu doit être 100% spécifique à ${aps}
+2. Utilise le vocabulaire technique ci-dessus
+3. Les situations doivent permettre de travailler l'objectif: "${objectif}"
+4. Adapte au niveau ${niveau}
+5. Sois TRÈS CONCRET: nombre exact de joueurs, dimensions en mètres, durées en minutes
 
-SITUATION2_TITRE: [titre court et descriptif]
-SITUATION2_ORGANISATION: [organisation détaillée]
-SITUATION2_DEROULEMENT: [explication complète en 5-6 phrases]
-SITUATION2_CONSIGNES:
-1. [consigne technique]
-2. [consigne tactique]
-3. [consigne comportementale]
-4. [autre consigne]
-SITUATION2_VARIANTES:
-- Simplifier: [2 façons de simplifier]
-- Complexifier: [2 façons de complexifier]
+GÉNÈRE CE CONTENU (respecte exactement les labels):
 
-CRITERES_REALISATION:
-• [critère technique 1]
-• [critère technique 2]
-• [critère tactique]
-• [critère comportemental]
+ECHAUFFEMENT_SPECIFIQUE: [Décris 3 exercices spécifiques à ${aps} qui préparent à l'objectif "${objectif}". Pour chaque exercice: nom, organisation, durée]
 
-CRITERES_REUSSITE:
-• [critère mesurable 1 avec %]
-• [critère mesurable 2]
-• [critère qualitatif]
-• [critère de progression]`;
+SITUATION1_TITRE: [Titre court et descriptif lié à l'objectif]
+SITUATION1_ORGANISATION: [Nombre de joueurs par groupe, dimensions du terrain en mètres, matériel nécessaire, placement des joueurs]
+SITUATION1_DEROULEMENT: [Description détaillée en 4-5 phrases: ce que font les élèves, comment l'exercice se déroule, rotations]
+SITUATION1_CONSIGNES: [4 consignes techniques et tactiques précises pour ${aps}, liées à l'objectif]
+SITUATION1_VARIANTES: [2 façons de simplifier ET 2 façons de complexifier]
+
+SITUATION2_TITRE: [Titre - situation plus proche du jeu réel]
+SITUATION2_ORGANISATION: [Organisation détaillée]
+SITUATION2_DEROULEMENT: [Déroulement en 4-5 phrases]
+SITUATION2_CONSIGNES: [4 consignes]
+SITUATION2_VARIANTES: [Simplifier et complexifier]
+
+CRITERES_REALISATION: [4 critères techniques observables spécifiques à ${aps} et à l'objectif]
+CRITERES_REUSSITE: [4 critères mesurables avec chiffres: pourcentages ou nombres]`;
 
             const groqResp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GROQ_API_KEY}` },
-                body: JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'user', content: prompt }], max_tokens: 3000, temperature: 0.7 })
+                body: JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'user', content: prompt }], max_tokens: 3500, temperature: 0.7 })
             });
 
             const data = await groqResp.json();
             const contenu = data.choices?.[0]?.message?.content || '';
 
+            // Extraction améliorée
             const extract = (key) => {
-                const regex = new RegExp(key + ':\\s*([\\s\\S]*?)(?=\\n[A-Z_]+:|$)', 'i');
-                const match = contenu.match(regex);
-                return match ? match[1].trim() : '';
+                const patterns = [
+                    new RegExp(key + ':\\s*([\\s\\S]*?)(?=\\n[A-Z][A-Z0-9_]+:|$)', 'i'),
+                    new RegExp('\\*\\*' + key + '\\*\\*:?\\s*([\\s\\S]*?)(?=\\n\\*\\*[A-Z]|$)', 'i')
+                ];
+                for (const regex of patterns) {
+                    const match = contenu.match(regex);
+                    if (match && match[1].trim().length > 10) return match[1].trim();
+                }
+                return '';
             };
 
-            const echaufSpec = extract('ECHAUFFEMENT_SPECIFIQUE') || 'Manipulation de balle individuelle (1 min), passes en binômes sur place puis en déplacement (2 min), jeu des 10 passes sans opposition (2 min).';
-            const s1Titre = extract('SITUATION1_TITRE') || 'Conservation et progression';
-            const s1Orga = extract('SITUATION1_ORGANISATION') || 'Terrain de 20x15m, 2 équipes de 4-5 joueurs, 4 plots pour délimiter, 1 ballon par terrain.';
-            const s1Deroul = extract('SITUATION1_DEROULEMENT') || 'Les élèves sont répartis en deux équipes. L\'équipe en possession doit conserver le ballon et progresser vers la zone adverse. Les défenseurs tentent de récupérer la balle. Chaque passe réussie dans la zone de marque rapporte 1 point. Rotation des équipes toutes les 3 minutes.';
-            const s1Consignes = extract('SITUATION1_CONSIGNES') || '1. Regarder avant de passer (prise d\'information)\n2. Se démarquer dans les espaces libres\n3. Communiquer avec ses partenaires\n4. Respecter les limites du terrain';
-            const s1Variantes = extract('SITUATION1_VARIANTES') || '- Simplifier: Jouer en supériorité numérique (4c3), autoriser 3 touches de balle\n- Complexifier: Limiter à 2 touches, ajouter un défenseur, réduire le temps';
-            const s2Titre = extract('SITUATION2_TITRE') || 'Jeu en mouvement vers la cible';
-            const s2Orga = extract('SITUATION2_ORGANISATION') || 'Terrain de 25x20m avec 2 buts, 2 équipes de 5 joueurs, chasubles de 2 couleurs, 2 ballons.';
-            const s2Deroul = extract('SITUATION2_DEROULEMENT') || 'Match à thème avec obligation d\'appliquer l\'objectif de la séance. L\'équipe qui marque en appliquant l\'objectif gagne 2 points au lieu d\'1. Temps de jeu de 5 minutes par manche. L\'enseignant arrête le jeu pour corriger et faire des feedbacks.';
-            const s2Consignes = extract('SITUATION2_CONSIGNES') || '1. Appliquer l\'objectif travaillé en situation 1\n2. Enchaîner réception et passe rapidement\n3. S\'engager dans toutes les phases de jeu\n4. Respecter les règles et l\'arbitrage';
-            const s2Variantes = extract('SITUATION2_VARIANTES') || '- Simplifier: Supériorité numérique offensive, zone protégée devant le but\n- Complexifier: Nombre de passes minimum avant de tirer, temps limité pour marquer';
-            const critReal = extract('CRITERES_REALISATION') || '• Orientation du corps vers la cible avant la passe\n• Passe tendue à hauteur de poitrine\n• Appel de balle dans l\'espace libre\n• Enchaînement réception-passe sans temps d\'arrêt';
-            const critReuss = extract('CRITERES_REUSSITE') || '• 7 passes réussies sur 10 tentatives (70%)\n• Progression visible vers la cible adverse\n• Temps de conservation supérieur à 30 secondes\n• Application de l\'objectif en situation de jeu';
+            let echaufSpec = extract('ECHAUFFEMENT_SPECIFIQUE');
+            let s1Titre = extract('SITUATION1_TITRE');
+            let s1Orga = extract('SITUATION1_ORGANISATION');
+            let s1Deroul = extract('SITUATION1_DEROULEMENT');
+            let s1Consignes = extract('SITUATION1_CONSIGNES');
+            let s1Variantes = extract('SITUATION1_VARIANTES');
+            let s2Titre = extract('SITUATION2_TITRE');
+            let s2Orga = extract('SITUATION2_ORGANISATION');
+            let s2Deroul = extract('SITUATION2_DEROULEMENT');
+            let s2Consignes = extract('SITUATION2_CONSIGNES');
+            let s2Variantes = extract('SITUATION2_VARIANTES');
+            let critReal = extract('CRITERES_REALISATION');
+            let critReuss = extract('CRITERES_REUSSITE');
 
-            // Schémas colorés selon l'APS
+            // Fallbacks spécifiques si IA échoue
+            const fallbacks = {
+                'Handball': {
+                    echauf: 'Jonglerie main droite/gauche en déplacement (2 min). Passes en binômes: à terre puis en cloche à 6m (3 min). Jeu des 10 passes en mouvement 4c2 (3 min).',
+                    s1t: 'Conservation et progression collective',
+                    s1o: '4 attaquants vs 2 défenseurs sur terrain 20x15m, 4 plots aux coins, 2 ballons par terrain.',
+                    s1d: 'Les 4 attaquants doivent conserver la balle et progresser vers la zone de marque. Les 2 défenseurs essaient d\'intercepter. Chaque passe dans la zone adverse = 1 point. Rotation toutes les 2 minutes.',
+                    s1c: '1. Regarder avant de passer (prise d\'info)\n2. Passe à terre tendue pour la précision\n3. Se démarquer dans l\'espace libre\n4. Appeler la balle avec le bras levé',
+                    s1v: '- Simplifier: 4c1, 3 touches obligatoires\n- Complexifier: 4c3, limiter à 2 touches'
+                },
+                'Football': {
+                    echauf: 'Conduite de balle en slalom entre 6 plots (2 min). Passes intérieur du pied en binômes à 8m (3 min). Contrôle orienté + passe vers un 3ème joueur (3 min).',
+                    s1t: 'Conservation et progression vers le but',
+                    s1o: '4c2 sur terrain 25x20m avec 2 mini-buts, 1 ballon par terrain, chasubles.',
+                    s1d: 'Les 4 attaquants conservent le ballon et cherchent à marquer. Passe obligatoire avant de tirer. Les 2 défenseurs récupèrent et contre-attaquent. Rotation toutes les 3 min.',
+                    s1c: '1. Contrôle orienté vers l\'espace libre\n2. Passe courte avec l\'intérieur du pied\n3. Appel de balle en profondeur\n4. Lever la tête avant chaque passe',
+                    s1v: '- Simplifier: 4c1, ballon au sol\n- Complexifier: 4c3, 2 touches max'
+                },
+                'Basketball': {
+                    echauf: 'Dribble main faible slalom entre plots (2 min). Passes à terre en triangle avec déplacement (3 min). Lay-up sans opposition à droite puis gauche (3 min).',
+                    s1t: 'Passe et va vers le panier',
+                    s1o: '3c2 sur demi-terrain avec panier, 1 ballon, chasubles.',
+                    s1d: 'Les 3 attaquants appliquent le passe et va pour créer le décalage et aller au panier. Chaque panier marqué après un passe et va = 2 points. Rotation après chaque possession.',
+                    s1c: '1. Passer et couper immédiatement vers le panier\n2. Recevoir en course sans marcher\n3. Finir en lay-up main extérieure\n4. Écarter le jeu si le passe et va est défendu',
+                    s1v: '- Simplifier: 3c1, défenseur passif\n- Complexifier: 3c3, écran obligatoire'
+                },
+                'Volleyball': {
+                    echauf: 'Jonglage manchette individuel 20 touches (2 min). Échanges touche haute par 2 au-dessus du filet (3 min). Service cuillère + réception manchette (3 min).',
+                    s1t: 'Construction de l\'attaque en 3 touches',
+                    s1o: '3c3 sur terrain réduit 6x9m, filet à 2m, 1 ballon.',
+                    s1d: 'L\'équipe en réception doit construire en 3 touches: R1 réceptionne en manchette vers R2, R2 passe en touche haute vers R3, R3 attaque. Chaque construction réussie = 1 point bonus.',
+                    s1c: '1. Manchette de réception orientée vers le passeur\n2. Touche haute précise à 1m du filet\n3. Attaque vers le sol adverse\n4. Communiquer: annoncer "j\'ai!"',
+                    s1v: '- Simplifier: lancer au lieu de servir\n- Complexifier: attaque obligatoire smashée'
+                }
+            };
+
+            const fb = fallbacks[aps] || fallbacks['Handball'];
+            if (!echaufSpec || echaufSpec.length < 30) echaufSpec = fb.echauf;
+            if (!s1Titre || s1Titre.length < 5) s1Titre = fb.s1t;
+            if (!s1Orga || s1Orga.length < 20) s1Orga = fb.s1o;
+            if (!s1Deroul || s1Deroul.length < 50) s1Deroul = fb.s1d;
+            if (!s1Consignes || s1Consignes.length < 30) s1Consignes = fb.s1c;
+            if (!s1Variantes || s1Variantes.length < 20) s1Variantes = fb.s1v;
+
+            if (!s2Titre) s2Titre = 'Application en situation de match';
+            if (!s2Orga) s2Orga = '2 équipes de 4 joueurs, terrain adapté avec cibles.';
+            if (!s2Deroul) s2Deroul = 'Match à thème avec obligation d\'appliquer l\'objectif de la séance. Points bonus si l\'objectif est respecté (+1pt). L\'enseignant arrête le jeu pour feedbacks.';
+            if (!s2Consignes) s2Consignes = '1. Appliquer l\'objectif travaillé\n2. S\'engager offensivement et défensivement\n3. Respecter les règles\n4. Communiquer avec l\'équipe';
+            if (!s2Variantes) s2Variantes = '- Simplifier: supériorité numérique\n- Complexifier: contrainte de temps';
+
+            if (!critReal) critReal = `• Exécution technique correcte des gestes de ${aps}\n• Application de l'objectif: ${objectif.substring(0, 40)}\n• Placement et déplacement adaptés\n• Prise de décision rapide et pertinente`;
+            if (!critReuss) critReuss = `• 70% de réussite sur les actions ciblées\n• Progression visible dans la séance\n• Respect des consignes données\n• Engagement actif dans les situations`;
+
+            const butFonda = objectif;
+
+            // Schémas (code existant conservé - simplifié ici)
             let schema1 = '', schema2 = '';
             if (['Handball', 'Football', 'Basketball'].includes(aps)) {
-                schema1 = `<div style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:3px solid #2e7d32;border-radius:15px;padding:20px;margin:20px 0;">
-                    <div style="text-align:center;font-weight:bold;color:#1b5e20;margin-bottom:15px;font-size:15px;">📐 DISPOSITIF - SITUATION 1</div>
-                    <div style="background:#a5d6a7;border:2px solid #2e7d32;border-radius:12px;padding:25px;position:relative;min-height:200px;">
-                        <div style="position:absolute;left:5%;top:50%;transform:translateY(-50%);background:#ffd54f;border:3px solid #f57f17;border-radius:8px;width:50px;height:70px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:bold;">🥅</div>
-                        <div style="position:absolute;left:22%;top:18%;background:#1565c0;color:white;border-radius:50%;width:45px;height:45px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:14px;box-shadow:0 4px 10px rgba(0,0,0,0.3);">A1</div>
-                        <div style="position:absolute;left:22%;top:72%;background:#1565c0;color:white;border-radius:50%;width:45px;height:45px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:14px;box-shadow:0 4px 10px rgba(0,0,0,0.3);">A2</div>
-                        <div style="position:absolute;left:38%;top:45%;background:#1565c0;color:white;border-radius:50%;width:45px;height:45px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:14px;box-shadow:0 4px 10px rgba(0,0,0,0.3);">A3</div>
-                        <div style="position:absolute;left:48%;top:45%;background:#ff9800;border-radius:50%;width:30px;height:30px;box-shadow:0 4px 10px rgba(0,0,0,0.4);border:2px solid #e65100;"></div>
-                        <div style="position:absolute;right:22%;top:18%;background:#c62828;color:white;border-radius:50%;width:45px;height:45px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:14px;box-shadow:0 4px 10px rgba(0,0,0,0.3);">D1</div>
-                        <div style="position:absolute;right:22%;top:72%;background:#c62828;color:white;border-radius:50%;width:45px;height:45px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:14px;box-shadow:0 4px 10px rgba(0,0,0,0.3);">D2</div>
-                        <div style="position:absolute;right:5%;top:50%;transform:translateY(-50%);background:#ffd54f;border:3px solid #f57f17;border-radius:8px;width:50px;height:70px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:bold;">🥅</div>
-                        <div style="position:absolute;top:5px;left:50%;transform:translateX(-50%);background:white;padding:4px 12px;border-radius:6px;font-size:12px;font-weight:bold;box-shadow:0 2px 5px rgba(0,0,0,0.2);">→ Sens du jeu →</div>
+                schema1 = `<div style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:3px solid #2e7d32;border-radius:12px;padding:15px;margin:15px 0;">
+                    <div style="text-align:center;font-weight:bold;color:#1b5e20;margin-bottom:10px;">📐 DISPOSITIF</div>
+                    <div style="background:#a5d6a7;border:2px solid #2e7d32;border-radius:10px;padding:20px;position:relative;min-height:150px;">
+                        <div style="position:absolute;left:5%;top:50%;transform:translateY(-50%);background:#ffd54f;border:2px solid #f57f17;border-radius:6px;width:40px;height:55px;display:flex;align-items:center;justify-content:center;font-size:18px;">🥅</div>
+                        <div style="position:absolute;left:20%;top:20%;background:#1565c0;color:white;border-radius:50%;width:35px;height:35px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;">A1</div>
+                        <div style="position:absolute;left:20%;top:70%;background:#1565c0;color:white;border-radius:50%;width:35px;height:35px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;">A2</div>
+                        <div style="position:absolute;left:40%;top:45%;background:#1565c0;color:white;border-radius:50%;width:35px;height:35px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;">A3</div>
+                        <div style="position:absolute;left:50%;top:45%;background:#ff9800;border-radius:50%;width:22px;height:22px;border:2px solid #e65100;"></div>
+                        <div style="position:absolute;right:20%;top:35%;background:#c62828;color:white;border-radius:50%;width:35px;height:35px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;">D1</div>
+                        <div style="position:absolute;right:20%;top:65%;background:#c62828;color:white;border-radius:50%;width:35px;height:35px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;">D2</div>
+                        <div style="position:absolute;right:5%;top:50%;transform:translateY(-50%);background:#ffd54f;border:2px solid #f57f17;border-radius:6px;width:40px;height:55px;display:flex;align-items:center;justify-content:center;font-size:18px;">🥅</div>
                     </div>
-                    <div style="display:flex;justify-content:center;gap:25px;margin-top:18px;flex-wrap:wrap;">
-                        <span style="background:#1565c0;color:white;padding:6px 18px;border-radius:25px;font-size:13px;font-weight:bold;box-shadow:0 2px 5px rgba(0,0,0,0.2);">🔵 Attaquants (A)</span>
-                        <span style="background:#c62828;color:white;padding:6px 18px;border-radius:25px;font-size:13px;font-weight:bold;box-shadow:0 2px 5px rgba(0,0,0,0.2);">🔴 Défenseurs (D)</span>
-                        <span style="background:#ff9800;color:white;padding:6px 18px;border-radius:25px;font-size:13px;font-weight:bold;box-shadow:0 2px 5px rgba(0,0,0,0.2);">🟠 Ballon</span>
-                    </div>
-                </div>`;
-                schema2 = schema1.replace('SITUATION 1', 'SITUATION 2');
-            } else if (['Course de vitesse', 'Course de durée'].includes(aps)) {
-                schema1 = `<div style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);border:3px solid #e65100;border-radius:15px;padding:20px;margin:20px 0;">
-                    <div style="text-align:center;font-weight:bold;color:#bf360c;margin-bottom:15px;font-size:15px;">📐 DISPOSITIF - PISTE D'ATHLÉTISME</div>
-                    <div style="background:#ffcc80;border:2px solid #e65100;border-radius:12px;padding:25px;">
-                        <div style="display:flex;flex-direction:column;gap:15px;">
-                            <div style="display:flex;align-items:center;gap:12px;">
-                                <div style="background:#4caf50;color:white;padding:10px 18px;border-radius:10px;font-weight:bold;font-size:14px;box-shadow:0 3px 8px rgba(0,0,0,0.25);">🏁 DÉPART</div>
-                                <div style="flex:1;height:35px;background:repeating-linear-gradient(90deg,#d84315,#d84315 25px,#ff7043 25px,#ff7043 50px);border-radius:8px;position:relative;">
-                                    <span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:white;padding:3px 10px;border-radius:5px;font-size:11px;font-weight:bold;">Couloir 1 - 🏃</span>
-                                </div>
-                                <div style="background:#f44336;color:white;padding:10px 18px;border-radius:10px;font-weight:bold;font-size:14px;box-shadow:0 3px 8px rgba(0,0,0,0.25);">🏆 ARRIVÉE</div>
-                            </div>
-                            <div style="display:flex;align-items:center;gap:12px;">
-                                <div style="background:#4caf50;color:white;padding:10px 18px;border-radius:10px;font-weight:bold;font-size:14px;box-shadow:0 3px 8px rgba(0,0,0,0.25);">🏁 DÉPART</div>
-                                <div style="flex:1;height:35px;background:repeating-linear-gradient(90deg,#1565c0,#1565c0 25px,#42a5f5 25px,#42a5f5 50px);border-radius:8px;position:relative;">
-                                    <span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:white;padding:3px 10px;border-radius:5px;font-size:11px;font-weight:bold;">Couloir 2 - 🏃</span>
-                                </div>
-                                <div style="background:#f44336;color:white;padding:10px 18px;border-radius:10px;font-weight:bold;font-size:14px;box-shadow:0 3px 8px rgba(0,0,0,0.25);">🏆 ARRIVÉE</div>
-                            </div>
-                        </div>
+                    <div style="display:flex;justify-content:center;gap:15px;margin-top:12px;flex-wrap:wrap;font-size:11px;">
+                        <span style="background:#1565c0;color:white;padding:4px 12px;border-radius:15px;font-weight:bold;">🔵 Attaquants</span>
+                        <span style="background:#c62828;color:white;padding:4px 12px;border-radius:15px;font-weight:bold;">🔴 Défenseurs</span>
+                        <span style="background:#ff9800;color:white;padding:4px 12px;border-radius:15px;font-weight:bold;">🟠 Ballon</span>
                     </div>
                 </div>`;
                 schema2 = schema1;
-            } else if (['Saut en longueur', 'Saut en hauteur'].includes(aps)) {
-                schema1 = `<div style="background:linear-gradient(135deg,#f3e5f5,#e1bee7);border:3px solid #7b1fa2;border-radius:15px;padding:20px;margin:20px 0;">
-                    <div style="text-align:center;font-weight:bold;color:#4a148c;margin-bottom:15px;font-size:15px;">📐 DISPOSITIF - AIRE DE SAUT</div>
-                    <div style="background:#ce93d8;border:2px solid #7b1fa2;border-radius:12px;padding:25px;">
-                        <div style="display:flex;align-items:center;gap:15px;">
-                            <div style="background:#4caf50;color:white;padding:12px 22px;border-radius:10px;font-weight:bold;font-size:14px;box-shadow:0 3px 8px rgba(0,0,0,0.25);">🏃 ÉLAN</div>
-                            <div style="flex:1;height:40px;background:linear-gradient(90deg,#ef6c00,#ff9800,#ffb74d);border-radius:8px;display:flex;align-items:center;justify-content:center;">
-                                <span style="color:white;font-weight:bold;font-size:22px;text-shadow:1px 1px 2px rgba(0,0,0,0.3);">━━━➤━━━➤━━━➤</span>
-                            </div>
-                            <div style="background:#f44336;color:white;padding:12px 18px;border-radius:10px;font-weight:bold;font-size:14px;box-shadow:0 3px 8px rgba(0,0,0,0.25);">📍 APPEL</div>
-                            <div style="background:#ffd54f;color:#333;padding:12px 28px;border-radius:12px;font-weight:bold;font-size:15px;box-shadow:0 3px 8px rgba(0,0,0,0.25);">${aps.includes('longueur') ? '🏖️ FOSSE' : '📏 TAPIS'}</div>
+            } else if (['Course de vitesse', 'Course de durée'].includes(aps)) {
+                schema1 = `<div style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);border:3px solid #e65100;border-radius:12px;padding:15px;margin:15px 0;">
+                    <div style="text-align:center;font-weight:bold;color:#bf360c;margin-bottom:10px;">📐 PISTE</div>
+                    <div style="background:#ffcc80;border:2px solid #e65100;border-radius:10px;padding:15px;">
+                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                            <div style="background:#4caf50;color:white;padding:6px 12px;border-radius:6px;font-weight:bold;font-size:12px;">🏁 DÉPART</div>
+                            <div style="flex:1;height:25px;background:repeating-linear-gradient(90deg,#d84315,#d84315 15px,#ff7043 15px,#ff7043 30px);border-radius:5px;"></div>
+                            <div style="background:#f44336;color:white;padding:6px 12px;border-radius:6px;font-weight:bold;font-size:12px;">🏆 ARRIVÉE</div>
                         </div>
                     </div>
                 </div>`;
                 schema2 = schema1;
             } else if (aps === 'Volleyball') {
-                schema1 = `<div style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);border:3px solid #1565c0;border-radius:15px;padding:20px;margin:20px 0;">
-                    <div style="text-align:center;font-weight:bold;color:#0d47a1;margin-bottom:15px;font-size:15px;">📐 DISPOSITIF - TERRAIN VOLLEYBALL</div>
-                    <div style="background:#90caf9;border:2px solid #1565c0;border-radius:12px;padding:30px;position:relative;min-height:220px;">
-                        <div style="position:absolute;top:50%;left:0;right:0;height:5px;background:white;box-shadow:0 0 8px rgba(0,0,0,0.3);"></div>
-                        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;padding:5px 15px;border-radius:8px;font-size:13px;font-weight:bold;z-index:1;box-shadow:0 2px 5px rgba(0,0,0,0.2);">🏐 FILET</div>
-                        <div style="position:absolute;top:12%;left:12%;background:#1565c0;color:white;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:13px;">4</div>
-                        <div style="position:absolute;top:12%;left:42%;background:#1565c0;color:white;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:13px;">3</div>
-                        <div style="position:absolute;top:12%;right:12%;background:#1565c0;color:white;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:13px;">2</div>
-                        <div style="position:absolute;top:32%;left:27%;background:#1565c0;color:white;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:13px;">5</div>
-                        <div style="position:absolute;top:32%;right:27%;background:#1565c0;color:white;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:13px;">6</div>
-                        <div style="position:absolute;top:32%;left:50%;transform:translateX(-50%);background:#1565c0;color:white;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:13px;">1</div>
-                        <div style="position:absolute;bottom:12%;left:12%;background:#c62828;color:white;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:13px;">4</div>
-                        <div style="position:absolute;bottom:12%;left:42%;background:#c62828;color:white;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:13px;">3</div>
-                        <div style="position:absolute;bottom:12%;right:12%;background:#c62828;color:white;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:13px;">2</div>
-                    </div>
-                    <div style="display:flex;justify-content:center;gap:25px;margin-top:18px;">
-                        <span style="background:#1565c0;color:white;padding:6px 18px;border-radius:25px;font-size:13px;font-weight:bold;">🔵 Équipe A</span>
-                        <span style="background:#c62828;color:white;padding:6px 18px;border-radius:25px;font-size:13px;font-weight:bold;">🔴 Équipe B</span>
-                    </div>
-                </div>`;
-                schema2 = schema1;
-            } else if (aps === 'Gymnastique') {
-                schema1 = `<div style="background:linear-gradient(135deg,#fce4ec,#f8bbd9);border:3px solid #c2185b;border-radius:15px;padding:20px;margin:20px 0;">
-                    <div style="text-align:center;font-weight:bold;color:#880e4f;margin-bottom:15px;font-size:15px;">📐 DISPOSITIF - PRATICABLE GYMNASTIQUE</div>
-                    <div style="background:#f48fb1;border:2px solid #c2185b;border-radius:12px;padding:30px;position:relative;min-height:160px;">
-                        <div style="position:absolute;top:15%;left:8%;background:#4caf50;color:white;padding:10px 18px;border-radius:10px;font-weight:bold;font-size:14px;">🚩 DÉPART</div>
-                        <div style="position:absolute;top:40%;left:28%;font-size:40px;">🤸</div>
-                        <div style="position:absolute;top:30%;left:48%;font-size:40px;">🤸‍♀️</div>
-                        <div style="position:absolute;top:50%;left:68%;font-size:40px;">🤸</div>
-                        <div style="position:absolute;bottom:15%;right:8%;background:#f44336;color:white;padding:10px 18px;border-radius:10px;font-weight:bold;font-size:14px;">🏁 FIN</div>
-                        <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:white;padding:5px 15px;border-radius:8px;font-size:12px;font-weight:bold;">Direction de l'enchaînement →</div>
+                schema1 = `<div style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);border:3px solid #1565c0;border-radius:12px;padding:15px;margin:15px 0;">
+                    <div style="text-align:center;font-weight:bold;color:#0d47a1;margin-bottom:10px;">📐 TERRAIN VOLLEYBALL</div>
+                    <div style="background:#90caf9;border:2px solid #1565c0;border-radius:10px;padding:20px;position:relative;min-height:140px;">
+                        <div style="position:absolute;top:50%;left:0;right:0;height:3px;background:white;"></div>
+                        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;padding:3px 10px;border-radius:5px;font-size:11px;font-weight:bold;">🏐 FILET</div>
+                        <div style="position:absolute;top:15%;left:20%;background:#1565c0;color:white;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:11px;">1</div>
+                        <div style="position:absolute;top:15%;right:20%;background:#1565c0;color:white;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:11px;">2</div>
+                        <div style="position:absolute;bottom:15%;left:20%;background:#c62828;color:white;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:11px;">1</div>
+                        <div style="position:absolute;bottom:15%;right:20%;background:#c62828;color:white;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:11px;">2</div>
                     </div>
                 </div>`;
                 schema2 = schema1;
             } else {
-                schema1 = `<div style="background:linear-gradient(135deg,#e0f7fa,#b2ebf2);border:3px solid #00838f;border-radius:15px;padding:20px;margin:20px 0;">
-                    <div style="text-align:center;font-weight:bold;color:#006064;margin-bottom:15px;font-size:15px;">📐 DISPOSITIF D'APPRENTISSAGE</div>
-                    <div style="background:#80deea;border:2px solid #00838f;border-radius:12px;padding:35px;text-align:center;">
-                        <p style="font-size:16px;color:#006064;margin:0;font-weight:500;">Organisation adaptée à l'activité : ${aps}</p>
-                        <p style="font-size:14px;color:#00838f;margin-top:10px;">Disposition des élèves selon les consignes de l'enseignant</p>
+                schema1 = `<div style="background:linear-gradient(135deg,#f3e5f5,#e1bee7);border:3px solid #7b1fa2;border-radius:12px;padding:15px;margin:15px 0;">
+                    <div style="text-align:center;font-weight:bold;color:#4a148c;margin-bottom:10px;">📐 DISPOSITIF</div>
+                    <div style="background:#ce93d8;border:2px solid #7b1fa2;border-radius:10px;padding:25px;text-align:center;">
+                        <p style="font-size:14px;color:#4a148c;margin:0;">Organisation adaptée à ${aps}</p>
                     </div>
                 </div>`;
                 schema2 = schema1;
             }
 
-            // HTML DISPLAY (site) - Contenu détaillé, bien structuré, BUT AU-DESSUS DU SCHÉMA
+            // HTML DISPLAY (site)
             htmlDisplay = `
-            <div style="font-family:'Segoe UI',Tahoma,sans-serif;max-width:950px;margin:0 auto;line-height:1.6;">
-                <!-- En-tête -->
-                <div style="background:linear-gradient(135deg,#c1272d,#006233);color:white;padding:28px 30px;border-radius:18px;margin-bottom:25px;box-shadow:0 8px 25px rgba(0,0,0,0.15);">
-                    <h1 style="margin:0 0 12px 0;font-size:1.7rem;font-weight:700;">📋 Fiche de Séance - ${aps}</h1>
-                    <div style="display:flex;gap:25px;flex-wrap:wrap;font-size:0.95rem;opacity:0.95;">
-                        <span><strong>Niveau:</strong> ${niveau}</span>
-                        <span><strong>Séance:</strong> N°${numeroSeance || 1}</span>
-                        <span><strong>Groupe:</strong> ${groupeAPS}</span>
-                        <span><strong>Durée:</strong> 55 min</span>
+            <div style="font-family:'Segoe UI',sans-serif;max-width:900px;margin:0 auto;line-height:1.5;">
+                <div style="background:linear-gradient(135deg,#c1272d,#006233);color:white;padding:20px;border-radius:12px;margin-bottom:18px;">
+                    <h1 style="margin:0 0 8px 0;font-size:1.5rem;">📋 Fiche de Séance - ${aps}</h1>
+                    <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:0.85rem;opacity:0.95;">
+                        <span><strong>Niveau:</strong> ${niveau}</span><span><strong>Séance:</strong> N°${numeroSeance || 1}</span><span><strong>Groupe:</strong> ${groupeAPS}</span>
                     </div>
                 </div>
-
-                <!-- Objectif -->
-                <div style="background:linear-gradient(135deg,#ffebee,#fce4ec);border-left:6px solid #c1272d;padding:22px 25px;border-radius:0 15px 15px 0;margin-bottom:25px;box-shadow:0 4px 15px rgba(0,0,0,0.08);">
-                    <h2 style="color:#c1272d;margin:0 0 10px 0;font-size:1.2rem;font-weight:700;">🎯 OBJECTIF DE LA SÉANCE</h2>
-                    <p style="margin:0;font-size:1.1rem;color:#333;font-weight:500;">${objectif}</p>
+                <div style="background:#ffebee;border-left:4px solid #c1272d;padding:15px 18px;border-radius:0 10px 10px 0;margin-bottom:18px;">
+                    <h2 style="color:#c1272d;margin:0 0 6px 0;font-size:1rem;">🎯 OBJECTIF</h2>
+                    <p style="margin:0;font-size:1rem;color:#333;font-weight:500;">${objectif}</p>
                 </div>
-
-                <!-- Partie Introductive -->
-                <div style="background:white;border:2px solid #e0e0e0;border-radius:18px;padding:25px 28px;margin-bottom:25px;box-shadow:0 4px 15px rgba(0,0,0,0.06);">
-                    <h2 style="color:#c1272d;border-bottom:3px solid #c1272d;padding-bottom:12px;margin:0 0 20px 0;font-size:1.25rem;font-weight:700;">📌 PARTIE INTRODUCTIVE <span style="font-weight:normal;font-size:0.9rem;color:#666;">(15 min)</span></h2>
-                    <div style="display:grid;gap:15px;">
-                        <div style="background:#f8f9fa;padding:15px 18px;border-radius:12px;border-left:4px solid #c1272d;">
-                            <strong style="color:#c1272d;font-size:0.95rem;">• Prise en main (3 min)</strong>
-                            <p style="margin:8px 0 0 0;color:#555;">Rassemblement, appel, vérification des tenues. Présentation de l'objectif et rappel des consignes de sécurité.</p>
-                        </div>
-                        <div style="background:#f8f9fa;padding:15px 18px;border-radius:12px;border-left:4px solid #c1272d;">
-                            <strong style="color:#c1272d;font-size:0.95rem;">• Échauffement général (7 min)</strong>
-                            <p style="margin:8px 0 0 0;color:#555;">Course lente (3 tours), mobilisation articulaire progressive (chevilles → nuque), gammes athlétiques.</p>
-                        </div>
-                        <div style="background:#f8f9fa;padding:15px 18px;border-radius:12px;border-left:4px solid #c1272d;">
-                            <strong style="color:#c1272d;font-size:0.95rem;">• Échauffement spécifique (5 min)</strong>
-                            <p style="margin:8px 0 0 0;color:#555;">${echaufSpec}</p>
-                        </div>
+                <div style="background:white;border:2px solid #e0e0e0;border-radius:12px;padding:18px;margin-bottom:18px;">
+                    <h2 style="color:#c1272d;border-bottom:2px solid #c1272d;padding-bottom:8px;margin:0 0 15px 0;font-size:1.05rem;">📌 PARTIE INTRODUCTIVE (15 min)</h2>
+                    <div style="display:grid;gap:10px;">
+                        <div style="background:#f8f9fa;padding:10px 12px;border-radius:8px;border-left:3px solid #c1272d;"><strong style="color:#c1272d;">• Prise en main:</strong> Appel, tenues, objectif, sécurité</div>
+                        <div style="background:#f8f9fa;padding:10px 12px;border-radius:8px;border-left:3px solid #c1272d;"><strong style="color:#c1272d;">• Échauffement général:</strong> Course, mobilisation, gammes</div>
+                        <div style="background:#f8f9fa;padding:10px 12px;border-radius:8px;border-left:3px solid #c1272d;"><strong style="color:#c1272d;">• Échauffement spécifique:</strong> ${echaufSpec}</div>
                     </div>
                 </div>
-
-                <!-- Partie Fondamentale -->
-                <div style="background:white;border:2px solid #e0e0e0;border-radius:18px;padding:25px 28px;margin-bottom:25px;box-shadow:0 4px 15px rgba(0,0,0,0.06);">
-                    <h2 style="color:#006233;border-bottom:3px solid #006233;padding-bottom:12px;margin:0 0 25px 0;font-size:1.25rem;font-weight:700;">⚡ PARTIE FONDAMENTALE <span style="font-weight:normal;font-size:0.9rem;color:#666;">(35 min)</span></h2>
-
-                    <!-- Situation 1 -->
-                    <div style="background:linear-gradient(135deg,#f1f8e9,#dcedc8);border-radius:15px;padding:22px 25px;margin-bottom:25px;border:1px solid #aed581;">
-                        <h3 style="color:#33691e;margin:0 0 18px 0;font-size:1.15rem;font-weight:700;display:flex;align-items:center;gap:10px;">
-                            <span style="background:#006233;color:white;padding:5px 12px;border-radius:8px;font-size:0.85rem;">SITUATION 1</span>
-                            ${s1Titre} <span style="font-weight:normal;color:#666;font-size:0.9rem;">(12 min)</span>
-                        </h3>
-                        
-                        <!-- BUT AU-DESSUS DU SCHÉMA -->
-                        <div style="background:white;padding:15px 18px;border-radius:10px;margin-bottom:15px;border-left:4px solid #006233;">
-                            <strong style="color:#006233;font-size:1rem;">🎯 But de la situation</strong>
-                            <p style="margin:8px 0 0 0;color:#333;font-size:1rem;">Permettre aux élèves de ${objectif.toLowerCase()}</p>
-                        </div>
-                        
+                <div style="background:white;border:2px solid #e0e0e0;border-radius:12px;padding:18px;margin-bottom:18px;">
+                    <h2 style="color:#006233;border-bottom:2px solid #006233;padding-bottom:8px;margin:0 0 18px 0;font-size:1.05rem;">⚡ PARTIE FONDAMENTALE (30 min)</h2>
+                    <div style="background:linear-gradient(135deg,#f1f8e9,#dcedc8);border-radius:10px;padding:15px 18px;margin-bottom:18px;border:1px solid #aed581;">
+                        <h3 style="color:#33691e;margin:0 0 10px 0;font-size:0.95rem;"><span style="background:#006233;color:white;padding:3px 8px;border-radius:5px;font-size:0.75rem;margin-right:8px;">SIT 1</span>${s1Titre}</h3>
+                        <div style="background:white;padding:10px 12px;border-radius:6px;margin-bottom:10px;border-left:3px solid #006233;"><strong style="color:#006233;">🎯 But:</strong> ${objectif}</div>
                         ${schema1}
-                        
-                        <div style="display:grid;gap:15px;margin-top:18px;">
-                            <div style="background:white;padding:15px 18px;border-radius:10px;">
-                                <strong style="color:#006233;">📍 Organisation</strong>
-                                <p style="margin:8px 0 0 0;color:#444;">${s1Orga}</p>
-                            </div>
-                            <div style="background:white;padding:15px 18px;border-radius:10px;">
-                                <strong style="color:#006233;">📋 Déroulement</strong>
-                                <p style="margin:8px 0 0 0;color:#444;line-height:1.7;">${s1Deroul}</p>
-                            </div>
-                            <div style="background:white;padding:15px 18px;border-radius:10px;">
-                                <strong style="color:#006233;">📢 Consignes</strong>
-                                <div style="margin:10px 0 0 0;color:#444;line-height:1.8;">${s1Consignes.split('\n').map(c => `<div style="padding:5px 0;border-bottom:1px dashed #e0e0e0;">${c}</div>`).join('')}</div>
-                            </div>
-                            <div style="background:#fff8e1;padding:15px 18px;border-radius:10px;border-left:4px solid #ffc107;">
-                                <strong style="color:#f57c00;">🔄 Variantes</strong>
-                                <div style="margin:10px 0 0 0;color:#444;line-height:1.7;">${s1Variantes.replace(/\n/g, '<br>')}</div>
-                            </div>
+                        <div style="display:grid;gap:8px;margin-top:12px;">
+                            <div style="background:white;padding:10px 12px;border-radius:6px;"><strong style="color:#006233;">📍 Organisation:</strong> ${s1Orga}</div>
+                            <div style="background:white;padding:10px 12px;border-radius:6px;"><strong style="color:#006233;">📋 Déroulement:</strong> ${s1Deroul}</div>
+                            <div style="background:white;padding:10px 12px;border-radius:6px;"><strong style="color:#006233;">📢 Consignes:</strong><div style="margin-top:6px;">${s1Consignes.split('\n').map(c=>`<div style="padding:2px 0;">${c}</div>`).join('')}</div></div>
+                            <div style="background:#fff8e1;padding:10px 12px;border-radius:6px;border-left:3px solid #ffc107;"><strong style="color:#f57c00;">🔄 Variantes:</strong> ${s1Variantes.replace(/\n/g,'<br>')}</div>
                         </div>
                     </div>
-
-                    <!-- Situation 2 -->
-                    <div style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);border-radius:15px;padding:22px 25px;margin-bottom:25px;border:1px solid #64b5f6;">
-                        <h3 style="color:#0d47a1;margin:0 0 18px 0;font-size:1.15rem;font-weight:700;display:flex;align-items:center;gap:10px;">
-                            <span style="background:#1565c0;color:white;padding:5px 12px;border-radius:8px;font-size:0.85rem;">SITUATION 2</span>
-                            ${s2Titre} <span style="font-weight:normal;color:#666;font-size:0.9rem;">(13 min)</span>
-                        </h3>
-                        
-                        <!-- BUT AU-DESSUS DU SCHÉMA -->
-                        <div style="background:white;padding:15px 18px;border-radius:10px;margin-bottom:15px;border-left:4px solid #1565c0;">
-                            <strong style="color:#1565c0;font-size:1rem;">🎯 But de la situation</strong>
-                            <p style="margin:8px 0 0 0;color:#333;font-size:1rem;">Appliquer l'objectif en situation de jeu aménagé</p>
-                        </div>
-                        
+                    <div style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);border-radius:10px;padding:15px 18px;margin-bottom:18px;border:1px solid #64b5f6;">
+                        <h3 style="color:#0d47a1;margin:0 0 10px 0;font-size:0.95rem;"><span style="background:#1565c0;color:white;padding:3px 8px;border-radius:5px;font-size:0.75rem;margin-right:8px;">SIT 2</span>${s2Titre}</h3>
+                        <div style="background:white;padding:10px 12px;border-radius:6px;margin-bottom:10px;border-left:3px solid #1565c0;"><strong style="color:#1565c0;">🎯 But:</strong> Appliquer l'objectif en situation de jeu</div>
                         ${schema2}
-                        
-                        <div style="display:grid;gap:15px;margin-top:18px;">
-                            <div style="background:white;padding:15px 18px;border-radius:10px;">
-                                <strong style="color:#1565c0;">📍 Organisation</strong>
-                                <p style="margin:8px 0 0 0;color:#444;">${s2Orga}</p>
-                            </div>
-                            <div style="background:white;padding:15px 18px;border-radius:10px;">
-                                <strong style="color:#1565c0;">📋 Déroulement</strong>
-                                <p style="margin:8px 0 0 0;color:#444;line-height:1.7;">${s2Deroul}</p>
-                            </div>
-                            <div style="background:white;padding:15px 18px;border-radius:10px;">
-                                <strong style="color:#1565c0;">📢 Consignes</strong>
-                                <div style="margin:10px 0 0 0;color:#444;line-height:1.8;">${s2Consignes.split('\n').map(c => `<div style="padding:5px 0;border-bottom:1px dashed #e0e0e0;">${c}</div>`).join('')}</div>
-                            </div>
-                            <div style="background:#fff8e1;padding:15px 18px;border-radius:10px;border-left:4px solid #ffc107;">
-                                <strong style="color:#f57c00;">🔄 Variantes</strong>
-                                <div style="margin:10px 0 0 0;color:#444;line-height:1.7;">${s2Variantes.replace(/\n/g, '<br>')}</div>
-                            </div>
+                        <div style="display:grid;gap:8px;margin-top:12px;">
+                            <div style="background:white;padding:10px 12px;border-radius:6px;"><strong style="color:#1565c0;">📍 Organisation:</strong> ${s2Orga}</div>
+                            <div style="background:white;padding:10px 12px;border-radius:6px;"><strong style="color:#1565c0;">📋 Déroulement:</strong> ${s2Deroul}</div>
+                            <div style="background:white;padding:10px 12px;border-radius:6px;"><strong style="color:#1565c0;">📢 Consignes:</strong><div style="margin-top:6px;">${s2Consignes.split('\n').map(c=>`<div style="padding:2px 0;">${c}</div>`).join('')}</div></div>
+                            <div style="background:#fff8e1;padding:10px 12px;border-radius:6px;border-left:3px solid #ffc107;"><strong style="color:#f57c00;">🔄 Variantes:</strong> ${s2Variantes.replace(/\n/g,'<br>')}</div>
                         </div>
                     </div>
-
-                    <!-- Situation de référence -->
-                    <div style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);border-radius:15px;padding:18px 22px;border-left:5px solid #ff9800;">
-                        <h3 style="color:#e65100;margin:0 0 10px 0;font-size:1.05rem;font-weight:700;">◆ SITUATION DE RÉFÉRENCE <span style="font-weight:normal;color:#666;font-size:0.9rem;">(10 min)</span></h3>
-                        <p style="margin:0;color:#333;font-size:1rem;"><strong>Format :</strong> ${sitRef}</p>
+                    <div style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);border-radius:10px;padding:12px 15px;border-left:4px solid #ff9800;">
+                        <h3 style="color:#e65100;margin:0 0 6px 0;font-size:0.9rem;">◆ SITUATION DE RÉFÉRENCE</h3>
+                        <p style="margin:0;color:#333;"><strong>Format:</strong> ${sitRef}</p>
                     </div>
                 </div>
-
-                <!-- Critères -->
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:25px;">
-                    <div style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border-radius:15px;padding:22px 25px;border:1px solid #81c784;">
-                        <h3 style="color:#2e7d32;margin:0 0 15px 0;font-size:1.1rem;font-weight:700;">✅ Critères de Réalisation</h3>
-                        <div style="color:#333;line-height:1.9;">${critReal.split('\n').map(c => `<div style="padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.1);">${c.replace('•', '✓')}</div>`).join('')}</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;">
+                    <div style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border-radius:10px;padding:15px;border:1px solid #81c784;">
+                        <h3 style="color:#2e7d32;margin:0 0 10px 0;font-size:0.9rem;">✅ Critères de Réalisation</h3>
+                        <div style="color:#333;font-size:0.85rem;line-height:1.6;">${critReal.split('\n').map(c=>`<div style="padding:3px 0;">${c.replace('•','✓')}</div>`).join('')}</div>
                     </div>
-                    <div style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);border-radius:15px;padding:22px 25px;border:1px solid #64b5f6;">
-                        <h3 style="color:#1565c0;margin:0 0 15px 0;font-size:1.1rem;font-weight:700;">🎯 Critères de Réussite</h3>
-                        <div style="color:#333;line-height:1.9;">${critReuss.split('\n').map(c => `<div style="padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.1);">${c.replace('•', '✓')}</div>`).join('')}</div>
+                    <div style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);border-radius:10px;padding:15px;border:1px solid #64b5f6;">
+                        <h3 style="color:#1565c0;margin:0 0 10px 0;font-size:0.9rem;">🎯 Critères de Réussite</h3>
+                        <div style="color:#333;font-size:0.85rem;line-height:1.6;">${critReuss.split('\n').map(c=>`<div style="padding:3px 0;">${c.replace('•','✓')}</div>`).join('')}</div>
                     </div>
                 </div>
-
-                <!-- Partie Finale -->
-                <div style="background:white;border:2px solid #e0e0e0;border-radius:18px;padding:25px 28px;box-shadow:0 4px 15px rgba(0,0,0,0.06);">
-                    <h2 style="color:#c1272d;border-bottom:3px solid #c1272d;padding-bottom:12px;margin:0 0 20px 0;font-size:1.25rem;font-weight:700;">🧘 PARTIE FINALE <span style="font-weight:normal;font-size:0.9rem;color:#666;">(10 min)</span></h2>
-                    <div style="display:grid;gap:15px;">
-                        <div style="background:#f8f9fa;padding:15px 18px;border-radius:12px;border-left:4px solid #c1272d;">
-                            <strong style="color:#c1272d;">• Retour au calme (5 min)</strong>
-                            <p style="margin:8px 0 0 0;color:#555;">Marche lente, respiration profonde, étirements des groupes musculaires sollicités.</p>
-                        </div>
-                        <div style="background:#f8f9fa;padding:15px 18px;border-radius:12px;border-left:4px solid #c1272d;">
-                            <strong style="color:#c1272d;">• Bilan (5 min)</strong>
-                            <p style="margin:8px 0 0 0;color:#555;">Questionnement sur les apprentissages, feedback collectif et individuel, rangement du matériel.</p>
-                        </div>
+                <div style="background:white;border:2px solid #e0e0e0;border-radius:12px;padding:18px;">
+                    <h2 style="color:#c1272d;border-bottom:2px solid #c1272d;padding-bottom:8px;margin:0 0 15px 0;font-size:1.05rem;">🧘 PARTIE FINALE (10 min)</h2>
+                    <div style="display:grid;gap:10px;">
+                        <div style="background:#f8f9fa;padding:10px 12px;border-radius:8px;border-left:3px solid #c1272d;"><strong style="color:#c1272d;">• Retour au calme:</strong> Marche, respiration, étirements</div>
+                        <div style="background:#f8f9fa;padding:10px 12px;border-radius:8px;border-left:3px solid #c1272d;"><strong style="color:#c1272d;">• Bilan:</strong> Questionnement, feedback, rangement</div>
                     </div>
                 </div>
             </div>`;
 
-            // HTML WORD/PDF - Sans schémas, 1 seule page A4 paysage, BUT GLOBAL pour partie fonda
+            // HTML WORD/PDF - SANS colonne DURÉE, BUT rempli
             html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word">
-<head><meta charset="UTF-8"><title>Fiche ${aps} - ${niveau}</title>
+<head><meta charset="UTF-8"><title>Fiche ${aps} ${niveau}</title>
 <style>
-@page{size:297mm 210mm;mso-page-orientation:landscape;margin:0.4cm 0.5cm}
-body{font-family:Calibri,Arial,sans-serif;font-size:7pt;line-height:1.15;margin:0;padding:0}
+@page{size:297mm 210mm;mso-page-orientation:landscape;margin:0.3cm}
+body{font-family:Calibri,Arial,sans-serif;font-size:7pt;line-height:1.1;margin:0;padding:0}
 table{width:100%;border-collapse:collapse;table-layout:fixed}
-th,td{border:0.5pt solid #000;padding:2px 4px;vertical-align:top;word-wrap:break-word}
-.header-row td{border:none;padding:1px 4px;font-size:7pt}
-.main-title{text-align:center;font-size:11pt;font-weight:bold;background:linear-gradient(90deg,#c1272d,#006233);color:#fff;padding:4px;letter-spacing:0.5px}
-.section-header{background:#f0f0f0;font-weight:bold;font-size:6.5pt;text-align:center;padding:2px}
+th,td{border:0.5pt solid #000;padding:2px 3px;vertical-align:top}
+.header-row td{border:none;padding:1px 2px;font-size:6.5pt}
+.main-title{text-align:center;font-size:9pt;font-weight:bold;background:#006233;color:#fff;padding:2px}
+.section-header{background:#f0f0f0;font-weight:bold;font-size:6pt;text-align:center}
 .obj-row{background:#c1272d;color:#fff;font-weight:bold;font-size:7pt}
-.table-header{background:#006233;color:#fff;font-weight:bold;text-align:center;font-size:7pt;padding:3px}
-.partie-cell{font-weight:bold;text-align:center;background:#f5f5f5;font-size:7.5pt;writing-mode:vertical-rl;text-orientation:mixed}
-.content-cell{font-size:6.5pt;line-height:1.2}
-.sit-title{font-weight:bold;color:#006233;font-size:7pt}
-.footer-note{text-align:center;font-size:5.5pt;color:#666;margin-top:2px;border:none}
+.table-header{background:#006233;color:#fff;font-weight:bold;text-align:center;font-size:6pt;padding:2px}
+.partie-cell{font-weight:bold;text-align:center;background:#f5f5f5;font-size:7pt}
+.content-cell{font-size:6.5pt;line-height:1.15}
+.sit-title{font-weight:bold;color:#006233;font-size:6.5pt}
 </style></head>
 <body>
 <table class="header-row"><tr>
-<td style="width:25%"><b>Professeur:</b> ${nomProf || '________________'}</td>
-<td style="width:30%;text-align:center"><b>Établissement:</b> ${etablissement || '________________'}</td>
-<td style="width:20%;text-align:center"><b>Classe:</b> ${classe || '______'}</td>
-<td style="width:25%;text-align:right"><b>Année scolaire:</b> ${anneeScolaire || '2024-2025'}</td>
+<td style="width:22%"><b>Prof:</b> ${nomProf||'________'}</td>
+<td style="width:28%;text-align:center"><b>Établissement:</b> ${etablissement||'________'}</td>
+<td style="width:18%;text-align:center"><b>Classe:</b> ${classe||'____'}</td>
+<td style="width:32%;text-align:right"><b>Année:</b> ${anneeScolaire||'2024-2025'}</td>
 </tr></table>
-
-<table><tr><td class="main-title" colspan="6">FICHE DE PRÉPARATION D'UNE SÉANCE D'ÉDUCATION PHYSIQUE ET SPORTIVE</td></tr></table>
-
+<table><tr><td class="main-title">FICHE DE SÉANCE EPS - ${aps.toUpperCase()}</td></tr></table>
 <table>
 <tr>
-<td class="section-header" style="width:8%">Groupe d'APS</td>
-<td style="width:14%;font-size:7pt;text-align:center">${groupeAPS}</td>
-<td class="section-header" style="width:6%">APS</td>
-<td style="width:12%;font-size:7pt;text-align:center;font-weight:bold">${aps}</td>
-<td class="section-header" style="width:6%">Niveau</td>
-<td style="width:8%;font-size:7pt;text-align:center">${niveau}</td>
-<td class="section-header" style="width:6%">Séance</td>
-<td style="width:5%;font-size:7pt;text-align:center;font-weight:bold">${numeroSeance || 1}</td>
-<td class="section-header" style="width:6%">Durée</td>
-<td style="width:8%;font-size:7pt;text-align:center">55 min</td>
+<td class="section-header" style="width:7%">Groupe</td><td style="width:11%;font-size:6.5pt;text-align:center">${groupeAPS}</td>
+<td class="section-header" style="width:4%">APS</td><td style="width:9%;font-size:7pt;text-align:center;font-weight:bold">${aps}</td>
+<td class="section-header" style="width:5%">Niveau</td><td style="width:6%;font-size:6.5pt;text-align:center">${niveau}</td>
+<td class="section-header" style="width:5%">Séance</td><td style="width:4%;font-size:7pt;text-align:center;font-weight:bold">${numeroSeance||1}</td>
+<td class="section-header" style="width:5%">Durée</td><td style="width:5%;font-size:6.5pt;text-align:center">55min</td>
 </tr>
-<tr>
-<td class="section-header">OTI</td>
-<td colspan="9" style="font-size:6pt;line-height:1.15">${oti}</td>
-</tr>
-<tr>
-<td class="section-header">OTC</td>
-<td colspan="9" style="font-size:6pt;line-height:1.15">${otc}</td>
-</tr>
-<tr>
-<td class="obj-row" style="text-align:center">OBJECTIF</td>
-<td colspan="9" style="background:#ffebee;font-size:7.5pt;font-weight:bold;padding:4px">${objectif}</td>
-</tr>
+<tr><td class="section-header">OTI</td><td colspan="9" style="font-size:5.5pt">${oti}</td></tr>
+<tr><td class="section-header">OTC</td><td colspan="9" style="font-size:5.5pt">${otc}</td></tr>
+<tr><td class="obj-row" style="text-align:center">OBJECTIF</td><td colspan="9" style="background:#ffebee;font-size:7pt;font-weight:bold">${objectif}</td></tr>
 </table>
-
 <table>
 <tr>
-<th class="table-header" style="width:5%">PARTIES</th>
-<th class="table-header" style="width:4%">DURÉE</th>
+<th class="table-header" style="width:6%">PARTIES</th>
 <th class="table-header" style="width:52%">CONTENU / SITUATIONS D'APPRENTISSAGE</th>
-<th class="table-header" style="width:8%">BUT</th>
-<th class="table-header" style="width:15.5%">CRITÈRES DE RÉALISATION</th>
-<th class="table-header" style="width:15.5%">CRITÈRES DE RÉUSSITE</th>
+<th class="table-header" style="width:10%">BUT</th>
+<th class="table-header" style="width:16%">C. RÉALISATION</th>
+<th class="table-header" style="width:16%">C. RÉUSSITE</th>
 </tr>
 <tr>
-<td class="partie-cell" rowspan="1" style="height:45px">INTRO</td>
-<td style="text-align:center;font-weight:bold;font-size:8pt">15'</td>
-<td class="content-cell"><b>Prise en main:</b> Appel, tenues, objectif, sécurité<br><b>Échauff. général:</b> Course, mobilisation articulaire, gammes<br><b>Échauff. spécifique:</b> ${echaufSpec.substring(0, 120)}...</td>
-<td class="content-cell" style="text-align:center;vertical-align:middle">Préparer l'organisme à l'effort</td>
-<td class="content-cell" style="text-align:center;vertical-align:middle;font-style:italic;color:#666" colspan="2">Phase de préparation physique et mentale</td>
+<td class="partie-cell" style="height:38px">INTRO<br>15 min</td>
+<td class="content-cell"><b>• Prise en main:</b> Appel, tenues, objectif, sécurité | <b>• Échauffement général:</b> Course, mobilisation, gammes | <b>• Échauffement spécifique:</b> ${echaufSpec}</td>
+<td class="content-cell" style="text-align:center;vertical-align:middle;font-size:6pt">Préparer l'organisme</td>
+<td class="content-cell" style="text-align:center;vertical-align:middle;font-style:italic;color:#666;font-size:5.5pt" colspan="2">Préparation physique et mentale</td>
 </tr>
 <tr>
-<td class="partie-cell" rowspan="1" style="height:180px">FONDA.</td>
-<td style="text-align:center;font-weight:bold;font-size:8pt">35'</td>
+<td class="partie-cell" style="height:155px">FONDA<br>30 min</td>
 <td class="content-cell">
-<span class="sit-title">◆ SITUATION 1: ${s1Titre} (12')</span><br>
-<b>Organisation:</b> ${s1Orga}<br>
-<b>Déroulement:</b> ${s1Deroul}<br>
-<b>Consignes:</b> ${s1Consignes.replace(/\n/g, ' | ')}<br>
-<b>Variantes:</b> ${s1Variantes.replace(/\n/g, ' | ')}<br><br>
-<span class="sit-title">◆ SITUATION 2: ${s2Titre} (13')</span><br>
-<b>Organisation:</b> ${s2Orga}<br>
-<b>Déroulement:</b> ${s2Deroul}<br>
-<b>Consignes:</b> ${s2Consignes.replace(/\n/g, ' | ')}<br>
-<b>Variantes:</b> ${s2Variantes.replace(/\n/g, ' | ')}<br><br>
-<span class="sit-title">◆ SITUATION DE RÉFÉRENCE (10'):</span> ${sitRef}
+<span class="sit-title">◆ SIT.1: ${s1Titre}</span><br>
+<b>Org:</b> ${s1Orga}<br><b>Déroul:</b> ${s1Deroul}<br><b>Consignes:</b> ${s1Consignes.replace(/\n/g,' | ')}<br><b>Var:</b> ${s1Variantes.replace(/\n/g,' | ')}<br><br>
+<span class="sit-title">◆ SIT.2: ${s2Titre}</span><br>
+<b>Org:</b> ${s2Orga}<br><b>Déroul:</b> ${s2Deroul}<br><b>Consignes:</b> ${s2Consignes.replace(/\n/g,' | ')}<br><b>Var:</b> ${s2Variantes.replace(/\n/g,' | ')}<br><br>
+<span class="sit-title">◆ SIT.REF:</span> ${sitRef}
 </td>
-<td class="content-cell" style="text-align:center;vertical-align:middle;font-weight:bold;font-size:7pt;background:#f9f9f9">Atteindre l'objectif:<br><br>${objectif.substring(0, 80)}...</td>
-<td class="content-cell" style="font-size:6.5pt">${critReal.replace(/\n/g, '<br>')}</td>
-<td class="content-cell" style="font-size:6.5pt">${critReuss.replace(/\n/g, '<br>')}</td>
+<td class="content-cell" style="text-align:center;vertical-align:middle;font-weight:bold;font-size:6pt;background:#f9f9f9;padding:3px">${butFonda}</td>
+<td class="content-cell" style="font-size:6pt">${critReal.replace(/\n/g,'<br>')}</td>
+<td class="content-cell" style="font-size:6pt">${critReuss.replace(/\n/g,'<br>')}</td>
 </tr>
 <tr>
-<td class="partie-cell" rowspan="1" style="height:35px">FINALE</td>
-<td style="text-align:center;font-weight:bold;font-size:8pt">10'</td>
-<td class="content-cell"><b>Retour au calme:</b> Marche, respiration, étirements des groupes musculaires sollicités<br><b>Bilan:</b> Questionnement, feedback collectif et individuel, rangement du matériel</td>
-<td class="content-cell" style="text-align:center;vertical-align:middle">Récupération et bilan</td>
-<td class="content-cell" style="text-align:center;vertical-align:middle;font-style:italic;color:#666" colspan="2">Phase de récupération et d'analyse</td>
+<td class="partie-cell" style="height:28px">FINALE<br>10 min</td>
+<td class="content-cell"><b>• Retour au calme:</b> Marche, respiration, étirements | <b>• Bilan:</b> Questionnement, feedback, rangement</td>
+<td class="content-cell" style="text-align:center;vertical-align:middle;font-size:6pt">Récupération</td>
+<td class="content-cell" style="text-align:center;vertical-align:middle;font-style:italic;color:#666;font-size:5.5pt" colspan="2">Récupération et analyse</td>
 </tr>
 </table>
-
-<p class="footer-note">Document conforme aux Orientations Pédagogiques ${isCollege ? '2009 (Collège)' : '2007 (Lycée)'} - Ministère de l'Éducation Nationale - Royaume du Maroc</p>
+<p style="text-align:center;font-size:5pt;color:#666;margin-top:1px">OP ${isCollege?'2009 (Collège)':'2007 (Lycée)'} - MEN Maroc</p>
 </body></html>`;
 
-            filename = `Fiche_${aps.replace(/\s+/g, '_')}_${niveau}_S${numeroSeance || 1}.doc`;
+            filename = `Fiche_${aps.replace(/\s+/g,'_')}_${niveau}_S${numeroSeance||1}.doc`;
 
         // ==================== PROJET DE CYCLE ====================
         } else if (typeDocument === 'projet') {
             const nb = parseInt(nombreSeances) || 10;
             const nivEleves = niveauEleves || 'moyen';
-            const nivTxt = { 'debutant': 'Débutant (Initiation)', 'moyen': 'Moyen (Apprentissage)', 'avance': 'Avancé (Perfectionnement)', 'elite': 'Élite (Expertise)' }[nivEleves];
-            const objectifs = getObjectifsParNiveau(aps, nivEleves, nb);
+            const nivTxt = {'debutant':'Débutant','moyen':'Moyen','avance':'Avancé','elite':'Expert'}[nivEleves];
 
+            // Objectifs explicites 1-2 phrases
+            const getObjExplicites = (aps, niv, n) => {
+                const base = {
+                    'Handball': [
+                        `Évaluer le niveau initial des élèves via un match 4c4 pour identifier les acquis en passe, réception et démarquage.`,
+                        `Découvrir les règles fondamentales (marcher, reprise, zone) et manipuler le ballon avec aisance.`,
+                        `Améliorer la qualité de la passe à terre et de la réception en position statique puis en mouvement.`,
+                        `Apprendre à se démarquer efficacement pour recevoir le ballon dans un espace libre.`,
+                        `Enchaîner réception et passe rapidement pour maintenir la continuité du jeu collectif.`,
+                        `Découvrir le tir en appui et améliorer la précision vers les différentes zones du but.`,
+                        `Organiser le jeu: occupation de l'espace en largeur et profondeur, rôles des joueurs.`,
+                        `Appliquer les principes d'attaque (écartement, pénétration) en situation de surnombre 4c3.`,
+                        `Intégrer les acquis techniques et tactiques dans un match 5c5 avec arbitrage élève.`,
+                        `Évaluer les compétences via ${sitRef} en observant technique, tactique et engagement.`
+                    ],
+                    'Football': [
+                        `Évaluer le niveau initial via un match 4c4 pour observer conduite de balle, passes et placements.`,
+                        `Découvrir les règles (hors-jeu, fautes) et manipuler le ballon avec différentes surfaces du pied.`,
+                        `Améliorer la conduite de balle et le contrôle orienté pour enchaîner vers une action.`,
+                        `Travailler la passe courte intérieur du pied vers un partenaire fixe puis en mouvement.`,
+                        `Se démarquer efficacement pour offrir une solution de passe et progresser collectivement.`,
+                        `Découvrir le tir et améliorer la frappe de balle vers le but avec précision.`,
+                        `Organiser le jeu: circulation, appui-soutien, occupation des couloirs et du centre.`,
+                        `Appliquer le jeu en triangle et les combinaisons (une-deux) en situation de match réduit.`,
+                        `Intégrer les acquis dans un match avec respect des règles et des rôles.`,
+                        `Évaluer via ${sitRef} en observant efficacité technique, choix tactiques et fair-play.`
+                    ],
+                    'Basketball': [
+                        `Évaluer le niveau initial via un 3c3 pour observer dribble, passe, tir et déplacements.`,
+                        `Découvrir les règles (marcher, reprise, fautes) et manipuler le ballon des deux mains.`,
+                        `Améliorer le dribble de progression main droite et gauche face à un défenseur passif.`,
+                        `Travailler la passe à terre et à une main vers un partenaire en mouvement.`,
+                        `Se démarquer avec et sans ballon pour créer des espaces et recevoir en position de tir.`,
+                        `Découvrir le tir en course (lay-up) et améliorer la précision au panier.`,
+                        `Organiser le jeu: espacement, circulation joueurs et ballon, principes du pick and roll.`,
+                        `Appliquer les principes d'attaque placée et de contre-attaque en situation de jeu.`,
+                        `Intégrer les acquis dans un match 4c4 avec arbitrage et rotations.`,
+                        `Évaluer via ${sitRef} en observant efficacité offensive et défensive.`
+                    ],
+                    'Volleyball': [
+                        `Évaluer le niveau initial via des échanges 2c2 pour observer manchette, touche et service.`,
+                        `Découvrir les règles (3 touches, rotation, fautes) et s'initier à la manchette.`,
+                        `Améliorer la manchette de réception: placement sous le ballon, bras tendus.`,
+                        `Travailler la touche haute pour diriger une passe précise vers l'avant du terrain.`,
+                        `Découvrir le service par le bas et améliorer sa régularité et sa direction.`,
+                        `Construire une attaque en 3 touches: réception-passe-attaque avec rôles définis.`,
+                        `Organiser la défense: placement en réception, couverture et anticipation.`,
+                        `Appliquer l'alternance jeu court/jeu long pour déstabiliser l'adversaire.`,
+                        `Intégrer les acquis dans un match 4c4 puis 6c6 avec rotation.`,
+                        `Évaluer via ${sitRef} en observant construction du point et communication.`
+                    ]
+                };
+                let obj = base[aps] || base['Handball'];
+                if (niv==='debutant') obj = obj.map(o=>o.replace('améliorer','découvrir').replace('optimiser','initier'));
+                else if (niv==='avance'||niv==='elite') obj = obj.map(o=>o.replace('découvrir','perfectionner').replace('améliorer','optimiser'));
+                while (obj.length < n) obj.splice(-1,0,`Consolider les acquis techniques et tactiques par des situations de jeu variées.`);
+                return obj.slice(0,n);
+            };
+
+            const objectifs = getObjExplicites(aps, nivEleves, nb);
             let rows = '';
             for (let i = 0; i < nb; i++) {
-                let seq = i === 0 ? 'Éval. diagnostique' : i === 1 ? 'Acquisition' : i === nb - 1 ? 'Éval. terminale' : i === nb - 2 ? 'Intégration' : i < nb / 2 ? 'Apprentissage' : 'Consolidation';
-                rows += `<tr><td style="text-align:center;background:#f8f8f8;font-size:8pt">${seq}</td><td style="text-align:center;font-weight:bold;font-size:9pt">${i + 1}</td><td style="font-size:8pt;padding:4px 6px">${objectifs[i]}</td></tr>`;
+                let phase = i===0?'Éval. diag.':i===nb-1?'Éval. term.':i<nb/3?'Découverte':i<2*nb/3?'Apprentissage':'Consolidation';
+                rows += `<tr><td style="text-align:center;background:#f8f8f8;font-size:7pt">${phase}</td><td style="text-align:center;font-weight:bold;font-size:8pt">${i+1}</td><td style="font-size:7pt;padding:3px 5px">${objectifs[i]}</td></tr>`;
             }
 
-            html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word">
-<head><meta charset="UTF-8"><title>Projet de cycle - ${aps}</title>
-<style>
-@page{size:297mm 210mm;mso-page-orientation:landscape;margin:0.6cm}
-body{font-family:Calibri,Arial,sans-serif;font-size:9pt}
-table{width:100%;border-collapse:collapse;margin-bottom:8px}
-th,td{border:0.5pt solid #000;padding:4px 6px;vertical-align:top}
-.main-title{font-size:22pt;font-weight:bold;font-family:'Brush Script MT',cursive;text-align:center;color:#c1272d;border:none;padding:10px}
-.section-header{background:#e8e8e8;font-weight:bold;text-align:center;font-size:8pt}
-.cycle-header{background:linear-gradient(90deg,#c1272d,#006233);color:#fff;font-weight:bold;font-size:10pt;text-align:center;padding:6px}
-.label-cell{background:#f5f5f5;font-weight:bold;font-size:8pt}
-.level-highlight{background:#e8f5e9;font-weight:bold;color:#006233;text-align:center}
-</style></head>
+            html = `<html xmlns:o="urn:schemas-microsoft-com:office:office"><head><meta charset="UTF-8"><title>Projet ${aps}</title>
+<style>@page{size:297mm 210mm;mso-page-orientation:landscape;margin:0.5cm}body{font-family:Calibri;font-size:8pt}table{width:100%;border-collapse:collapse;margin-bottom:5px}th,td{border:0.5pt solid #000;padding:3px 4px}.main-title{font-size:16pt;font-weight:bold;text-align:center;color:#c1272d;border:none;padding:6px}.section-header{background:#e8e8e8;font-weight:bold;text-align:center;font-size:7pt}.cycle-header{background:#006233;color:#fff;font-weight:bold;font-size:8pt;text-align:center;padding:4px}.label-cell{background:#f5f5f5;font-weight:bold;font-size:7pt}</style></head>
 <body>
-<table style="border:none"><tr><td class="main-title" style="border:none">Projet Pédagogique de Cycle</td></tr></table>
-
+<p class="main-title">📊 Projet de Cycle - ${aps}</p>
+<table><tr>
+<td class="section-header" style="width:10%">GROUPE</td><td style="width:14%;text-align:center;font-size:8pt">${groupeAPS}</td>
+<td class="section-header" style="width:6%">APS</td><td style="width:10%;text-align:center;font-size:9pt;font-weight:bold">${aps}</td>
+<td class="section-header" style="width:8%">NIVEAU</td><td style="width:8%;text-align:center;font-size:8pt">${niveau}</td>
+<td class="section-header" style="width:10%">NIV.ÉLÈVES</td><td style="width:8%;text-align:center;font-weight:bold;color:#006233">${nivTxt}</td>
+<td class="section-header" style="width:8%">SÉANCES</td><td style="width:5%;text-align:center;font-size:9pt;font-weight:bold">${nb}</td>
+</tr></table>
 <table>
-<tr>
-<td class="section-header" style="width:12%">MODULE</td>
-<td class="section-header" style="width:15%">GROUPE D'APS</td>
-<td class="section-header" style="width:15%">APS</td>
-<td class="section-header" style="width:12%">NIVEAU SCOLAIRE</td>
-<td class="section-header" style="width:18%">NIVEAU DES ÉLÈVES</td>
-<td class="section-header" style="width:10%">SÉANCES</td>
-</tr>
-<tr>
-<td style="text-align:center;font-size:8pt">Adaptation des réponses motrices</td>
-<td style="text-align:center;font-size:9pt">${groupeAPS}</td>
-<td style="text-align:center;font-size:10pt;font-weight:bold">${aps}</td>
-<td style="text-align:center;font-size:9pt">${niveau}</td>
-<td class="level-highlight" style="font-size:9pt">${nivTxt}</td>
-<td style="text-align:center;font-size:10pt;font-weight:bold">${nb}</td>
-</tr>
+<tr><td class="label-cell" style="width:12%">OTI</td><td style="font-size:6.5pt">${oti}</td></tr>
+<tr><td class="label-cell">OTC</td><td style="font-size:6.5pt">${otc}</td></tr>
+<tr><td class="label-cell">Sit. Référence</td><td style="font-size:7pt;font-weight:bold">${sitRef}</td></tr>
 </table>
-
 <table>
-<tr><td class="label-cell" style="width:18%">Objectif Terminal d'Intégration (OTI)</td><td style="font-size:8pt">${oti}</td></tr>
-<tr><td class="label-cell">Objectif Terminal du Cycle (OTC)</td><td style="font-size:8pt">${otc}</td></tr>
-<tr><td class="label-cell">Compétences visées</td><td style="font-size:8pt">• Gestion efficace des ressources individuelles pour une meilleure réalisation motrice<br>• Application des règles de sécurité et respect du règlement de l'activité</td></tr>
-</table>
-
-<table>
-<tr>
-<td class="label-cell" rowspan="2" style="width:15%;vertical-align:middle;text-align:center">Acquisitions attendues</td>
-<td class="section-header" style="width:28%">Procédurales (savoir-faire)</td>
-<td class="section-header" style="width:28%">Conceptuelles (savoirs)</td>
-<td class="section-header" style="width:29%">Comportementales (savoir-être)</td>
-</tr>
-<tr>
-<td style="font-size:8pt">• Maîtriser les gestes techniques fondamentaux<br>• Enchaîner les actions avec fluidité</td>
-<td style="font-size:8pt">• Connaître les règles et le vocabulaire<br>• Comprendre les principes tactiques</td>
-<td style="font-size:8pt">• Assiduité et engagement dans l'effort<br>• Respect des règles et fair-play</td>
-</tr>
-</table>
-
-<table>
-<tr><td class="cycle-header" colspan="3">PROGRESSION PÉDAGOGIQUE DES SÉANCES</td></tr>
-<tr>
-<th class="section-header" style="width:18%">Séquences</th>
-<th class="section-header" style="width:8%">N°</th>
-<th class="section-header">Objectifs opérationnels de chaque séance</th>
-</tr>
+<tr><td class="cycle-header" colspan="3">PROGRESSION PÉDAGOGIQUE</td></tr>
+<tr><th class="section-header" style="width:12%">Phase</th><th class="section-header" style="width:5%">N°</th><th class="section-header">Objectif opérationnel</th></tr>
 ${rows}
 </table>
-
-<table style="border:none;margin-top:10px"><tr>
-<td style="border:none;font-size:8pt"><b>Professeur:</b> ${nomProf || '________________'}</td>
-<td style="border:none;text-align:right;font-size:8pt"><b>Établissement:</b> ${etablissement || '________________'}</td>
-</tr></table>
+<table style="border:none;margin-top:6px"><tr><td style="border:none;font-size:7pt"><b>Prof:</b> ${nomProf||'________'}</td><td style="border:none;text-align:right;font-size:7pt"><b>Établissement:</b> ${etablissement||'________'}</td></tr></table>
 </body></html>`;
-
             htmlDisplay = html;
-            filename = `Projet_Cycle_${aps.replace(/\s+/g, '_')}_${niveau}.doc`;
+            filename = `Projet_${aps.replace(/\s+/g,'_')}_${niveau}.doc`;
 
         // ==================== GRILLE ====================
         } else if (typeDocument === 'grille') {
             const isObs = typeGrille === 'observation';
             const titre = isObs ? "Grille d'Observation" : "Grille d'Évaluation";
+            const critObs = CRITERES_OBS[aps] || CRITERES_OBS['Handball'];
 
             let headMain = '', headSub = '', emptyCols = '';
+            critObs.criteres.forEach(c => {
+                headMain += `<th colspan="${c.sous.length}" style="background:#006233;color:#fff;font-size:6pt;text-align:center;padding:2px">${c.nom}</th>`;
+                c.sous.forEach(s => {
+                    headSub += `<td style="background:#e8e8e8;font-size:5pt;text-align:center;padding:1px">${s}</td>`;
+                    emptyCols += '<td style="width:3%"></td>';
+                });
+            });
 
-            if (isObs) {
-                critObs.criteres.forEach(c => {
-                    headMain += `<th colspan="${c.sous.length}" style="background:#006233;color:#fff;font-size:7pt;text-align:center;padding:3px">${c.nom}</th>`;
-                    c.sous.forEach(s => {
-                        headSub += `<td style="background:#e8e8e8;font-size:6pt;text-align:center;padding:2px">${s}</td>`;
-                        emptyCols += '<td style="width:4%"></td>';
-                    });
-                });
-                if (critObs.perf) { headMain += '<th rowspan="2" style="background:#c1272d;color:#fff;font-size:7pt;width:8%">Perf.</th>'; emptyCols += '<td></td>'; }
-                else if (critObs.obs) { headMain += '<th rowspan="2" style="background:#c1272d;color:#fff;font-size:7pt;width:8%">Obs.</th>'; emptyCols += '<td></td>'; }
-                else if (critObs.note) { headMain += '<th rowspan="2" style="background:#c1272d;color:#fff;font-size:7pt;width:8%">Note</th>'; emptyCols += '<td></td>'; }
+            // Pour grille d'évaluation: 4 colonnes notes sur même ligne
+            if (!isObs) {
+                headMain += `<th style="background:#1565c0;color:#fff;font-size:5.5pt;width:5%">Procéd.</th>`;
+                headMain += `<th style="background:#7b1fa2;color:#fff;font-size:5.5pt;width:5%">Concept.</th>`;
+                headMain += `<th style="background:#00838f;color:#fff;font-size:5.5pt;width:5%">Comport.</th>`;
+                headMain += `<th style="background:#c1272d;color:#fff;font-size:5.5pt;width:5%">FINALE</th>`;
+                emptyCols += '<td></td><td></td><td></td><td></td>';
             } else {
-                critEval.forEach(c => {
-                    headMain += `<th style="background:#006233;color:#fff;font-size:7pt;width:12%;padding:3px">${c.nom}<br><small style="font-weight:normal">/${c.pts} pts</small></th>`;
-                    emptyCols += '<td></td>';
-                });
-                headMain += '<th style="background:#c1272d;color:#fff;font-size:7pt;width:8%;padding:3px">NOTE<br><small style="font-weight:normal">/20</small></th>';
+                headMain += '<th rowspan="2" style="background:#c1272d;color:#fff;font-size:6pt;width:7%">Obs.</th>';
                 emptyCols += '<td></td>';
             }
 
             let rows = '';
-            for (let i = 1; i <= 40; i++) {
-                rows += `<tr style="height:14px"><td style="text-align:center;font-size:8pt;background:${i % 2 === 0 ? '#fafafa' : '#fff'}">${i}</td><td style="background:${i % 2 === 0 ? '#fafafa' : '#fff'}"></td><td style="background:${i % 2 === 0 ? '#fafafa' : '#fff'}"></td>${emptyCols.replace(/<td/g, `<td style="background:${i % 2 === 0 ? '#fafafa' : '#fff'};"`)}</tr>`;
+            for (let i = 1; i <= 35; i++) {
+                const bg = i%2===0?'#fafafa':'#fff';
+                rows += `<tr style="height:11px"><td style="text-align:center;font-size:7pt;background:${bg}">${i}</td><td colspan="2" style="background:${bg}"></td>${emptyCols.replace(/<td/g,`<td style="background:${bg};"`)}</tr>`;
             }
 
-            html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word">
-<head><meta charset="UTF-8"><title>${titre} - ${aps}</title>
-<style>
-@page{size:210mm 297mm;margin:0.5cm}
-body{font-family:Calibri,Arial,sans-serif;font-size:8pt}
-table{width:100%;border-collapse:collapse}
-th,td{border:0.5pt solid #000;padding:2px}
-.main-title{font-size:20pt;font-weight:bold;font-family:'Brush Script MT',cursive;text-align:center;color:#c1272d;margin:5px 0}
-.info-row{font-size:9pt;margin-bottom:8px}
-</style></head>
+            html = `<html><head><meta charset="UTF-8"><title>${titre} ${aps}</title>
+<style>@page{size:210mm 297mm;margin:0.4cm}body{font-family:Calibri;font-size:7pt}table{width:100%;border-collapse:collapse}th,td{border:0.5pt solid #000;padding:1px 2px}.main-title{font-size:14pt;font-weight:bold;text-align:center;color:#c1272d;margin:2px 0}</style></head>
 <body>
 <p class="main-title">${titre}</p>
-<table style="border:none;margin-bottom:8px" class="info-row">
-<tr>
-<td style="border:none;width:40%"><b>APS:</b> ${aps}</td>
-<td style="border:none;width:30%"><b>Classe:</b> ${classe || '____________'}</td>
-<td style="border:none;width:30%;text-align:right"><b>Date:</b> ____/____/________</td>
-</tr>
-<tr>
-<td style="border:none" colspan="2"><b>Professeur:</b> ${nomProf || '________________'}</td>
-<td style="border:none;text-align:right"><b>Établissement:</b> ${etablissement || '________________'}</td>
-</tr>
-</table>
-
+<table style="border:none;margin-bottom:4px;font-size:7pt"><tr>
+<td style="border:none;width:30%"><b>APS:</b> ${aps}</td>
+<td style="border:none;width:20%"><b>Classe:</b> ${classe||'______'}</td>
+<td style="border:none;width:15%"><b>Niveau:</b> ${niveau}</td>
+<td style="border:none;width:35%;text-align:right"><b>Date:</b> ___/___/______</td>
+</tr><tr>
+<td style="border:none" colspan="2"><b>Prof:</b> ${nomProf||'______'}</td>
+<td style="border:none" colspan="2"><b>Étab:</b> ${etablissement||'______'}</td>
+</tr></table>
 <table>
-<tr>
-<th rowspan="2" style="background:#c1272d;color:#fff;width:4%;font-size:7pt">N°</th>
-<th rowspan="2" colspan="2" style="background:#c1272d;color:#fff;width:20%;font-size:7pt">Nom et Prénom de l'élève</th>
-${headMain}
-</tr>
-${isObs ? `<tr>${headSub}</tr>` : ''}
+<tr><th rowspan="2" style="background:#c1272d;color:#fff;width:3%;font-size:5.5pt">N°</th><th rowspan="2" colspan="2" style="background:#c1272d;color:#fff;width:16%;font-size:5.5pt">Nom et Prénom</th>${headMain}</tr>
+<tr>${headSub}</tr>
 ${rows}
 </table>
-
-<p style="text-align:right;font-size:7pt;color:#666;margin-top:5px">Signature du professeur: ________________</p>
+<p style="text-align:right;font-size:6pt;color:#666;margin-top:2px">Signature: ________</p>
 </body></html>`;
-
             htmlDisplay = html;
-            filename = `Grille_${isObs ? 'Observation' : 'Evaluation'}_${aps.replace(/\s+/g, '_')}.doc`;
+            filename = `Grille_${isObs?'Obs':'Eval'}_${aps.replace(/\s+/g,'_')}.doc`;
         }
 
         return res.status(200).json({ success: true, html, htmlDisplay, filename, oti, otc, groupeAPS, situationReference: sitRef });
