@@ -1,6 +1,11 @@
-// ==================== API PROJETS DE CYCLE ====================
+// ============================================================================
+// API PROJETS DE CYCLE - generer-projet.js
+// ============================================================================
+// Format: A4 PAYSAGE (297x210mm)
+// Objectifs: 1-2 phrases explicites et claires par séance
+// Situation de référence: Phrase complète
+// ============================================================================
 
-// OTI et OTC intégrés
 const OTI = {
     '1AC': "À la fin de la 1ère année du cycle secondaire collégial, l'élève doit être capable d'acquérir une motricité correcte lui permettant de s'adapter aux exigences des différentes situations motrices et de s'intégrer positivement dans le groupe classe tout en respectant les règles de sécurité et de fair-play.",
     '2AC': "À la fin de la 2ème année du cycle secondaire collégial, l'élève doit être capable d'ajuster et de maîtriser son énergie physique pour effectuer des réalisations motrices coordonnées et organisées, tout en développant ses capacités d'adaptation aux situations variées et en respectant les règles de jeu.",
@@ -12,104 +17,103 @@ const OTI = {
 
 const OTC = {
     'Handball': {
-        '1AC': "Conserver collectivement la balle et participer activement au jeu pour progresser vers la cible adverse et marquer en situation de jeu réduit, tout en respectant les règles fondamentales et en assurant la continuité du jeu.",
-        '2AC': "Faire progresser la balle vers la cible par des déplacements variés et des passes adaptées, en s'inscrivant dans une organisation collective simple et en assumant les rôles d'attaquant et de défenseur.",
-        '3AC': "S'inscrire dans un projet collectif basé sur l'alternance rapide attaquant/défenseur, en utilisant des combinaisons simples et en exploitant les espaces libres pour créer le déséquilibre.",
-        'TC': "Utiliser des moyens techniques et tactiques adaptés pour créer des situations favorables au tir, en s'organisant collectivement en attaque et en défense selon des principes de jeu identifiés.",
-        '1AB': "Mettre en œuvre des choix tactiques collectifs pertinents avec vitesse d'exécution adaptée, en gérant le rapport de force et en coordonnant les actions individuelles au service du projet d'équipe.",
-        '2AB': "Élaborer une stratégie collective basée sur la maîtrise des rôles et l'occupation rationnelle de l'espace, en s'adaptant aux configurations de jeu et en optimisant l'efficacité collective."
+        '1AC': "Conserver collectivement la balle et participer activement au jeu pour progresser vers la cible adverse et marquer en situation de jeu réduit, tout en respectant les règles fondamentales.",
+        '2AC': "Faire progresser la balle vers la cible par des déplacements variés et des passes adaptées, en s'inscrivant dans une organisation collective simple.",
+        '3AC': "S'inscrire dans un projet collectif basé sur l'alternance rapide attaquant/défenseur, en utilisant des combinaisons simples et en exploitant les espaces libres.",
+        'TC': "Utiliser des moyens techniques et tactiques adaptés pour créer des situations favorables au tir, en s'organisant collectivement.",
+        '1AB': "Mettre en œuvre des choix tactiques collectifs pertinents avec vitesse d'exécution adaptée, en coordonnant les actions individuelles.",
+        '2AB': "Élaborer une stratégie collective basée sur la maîtrise des rôles et l'occupation rationnelle de l'espace."
     },
     'Football': {
-        '1AC': "Conserver le ballon individuellement et collectivement pour progresser vers le but adverse, en utilisant des conduites de balle et des passes simples, tout en respectant les règles et la sécurité.",
-        '2AC': "Faire progresser le ballon par des conduites maîtrisées et des passes précises vers des partenaires démarqués, en s'organisant pour attaquer et défendre collectivement.",
-        '3AC': "Participer à un projet de jeu collectif intégrant les transitions attaque-défense, en occupant rationnellement l'espace et en enchaînant les actions avec pertinence.",
-        'TC': "Organiser le jeu collectif en utilisant les fondamentaux techniques au service de la progression vers le but, en respectant les principes d'attaque et de défense.",
-        '1AB': "S'adapter aux configurations de jeu pour optimiser les choix tactiques individuels et collectifs, en gérant les transitions et en créant le surnombre offensif.",
-        '2AB': "Concevoir et appliquer des stratégies de jeu adaptées au rapport de force, en coordonnant les actions et en exploitant les points faibles adverses."
+        '1AC': "Conserver le ballon individuellement et collectivement pour progresser vers le but adverse, en utilisant des conduites de balle et des passes simples.",
+        '2AC': "Faire progresser le ballon par des conduites maîtrisées et des passes précises vers des partenaires démarqués.",
+        '3AC': "Participer à un projet de jeu collectif intégrant les transitions attaque-défense, en occupant rationnellement l'espace.",
+        'TC': "Organiser le jeu collectif en utilisant les fondamentaux techniques au service de la progression vers le but.",
+        '1AB': "S'adapter aux configurations de jeu pour optimiser les choix tactiques individuels et collectifs.",
+        '2AB': "Concevoir et appliquer des stratégies de jeu adaptées au rapport de force."
     },
     'Basketball': {
-        '1AC': "Conserver la balle et progresser vers la cible en utilisant le dribble et la passe, tout en respectant les règles du non-contact et du marcher, dans une organisation collective simple.",
-        '2AC': "Créer et exploiter des situations favorables au tir par le démarquage et la circulation de balle, en assumant les rôles offensifs et défensifs.",
-        '3AC': "S'inscrire dans une organisation collective offensive et défensive équilibrée, en utilisant les écrans et les appels de balle pour créer le déséquilibre.",
-        'TC': "Optimiser la circulation de balle pour créer le déséquilibre défensif, en utilisant des systèmes de jeu simples et en respectant l'espacement.",
-        '1AB': "Analyser le rapport de force et adapter ses choix tactiques en fonction des réactions adverses, en variant les formes d'attaque et de défense.",
-        '2AB': "Mettre en œuvre des systèmes de jeu élaborés en attaque et en défense, en s'adaptant aux stratégies adverses et en optimisant l'efficacité collective."
+        '1AC': "Conserver la balle et progresser vers la cible en utilisant le dribble et la passe, tout en respectant les règles.",
+        '2AC': "Créer et exploiter des situations favorables au tir par le démarquage et la circulation de balle.",
+        '3AC': "S'inscrire dans une organisation collective offensive et défensive équilibrée.",
+        'TC': "Optimiser la circulation de balle pour créer le déséquilibre défensif.",
+        '1AB': "Analyser le rapport de force et adapter ses choix tactiques en fonction des réactions adverses.",
+        '2AB': "Mettre en œuvre des systèmes de jeu élaborés en attaque et en défense."
     },
     'Volleyball': {
-        '1AC': "Se déplacer et se placer correctement pour renvoyer la balle dans le camp adverse, en utilisant la manchette et la touche haute, tout en respectant les règles et la rotation.",
-        '2AC': "Construire l'attaque par un renvoi indirect utilisant un relais, en s'organisant pour assurer la réception, la passe et l'attaque dans la limite des trois touches.",
-        '3AC': "Organiser la défense et orienter la construction offensive vers la zone avant, en différenciant les rôles de passeur et d'attaquant selon les positions.",
-        'TC': "S'organiser collectivement dans la limite des trois touches réglementaires, en optimisant la réception-passe-attaque et en assurant la couverture défensive.",
-        '1AB': "Optimiser la construction du point avec des rôles différenciés, en variant les formes d'attaque et en adaptant la défense aux configurations adverses.",
-        '2AB': "Mettre en place une organisation collective avec combinaisons offensives variées, en utilisant les feintes et en exploitant les faiblesses adverses."
-    },
-    'Saut en longueur': {
-        '1AC': "Réaliser une course d'élan progressivement accélérée suivie d'une impulsion vers l'avant et le haut, et une réception équilibrée sur les deux pieds dans la fosse.",
-        '2AC': "Enchaîner une course d'élan régulière et accélérée, une impulsion active sur la planche d'appel et un saut avec une attitude aérienne simple.",
-        '3AC': "Optimiser sa course d'élan étalonnée pour faire coïncider la vitesse maximale avec la planche d'appel, et améliorer l'efficacité de l'impulsion et de la suspension.",
-        'TC': "Maîtriser l'organisation de sa course d'élan et la qualité de son impulsion pour réaliser une performance optimale, en adoptant une technique aérienne efficace.",
-        '1AB': "Augmenter l'efficacité du saut par la maîtrise de la liaison course-impulsion et l'amélioration de la phase aérienne.",
-        '2AB': "Optimiser sa performance en coordonnant les trois phases du saut avec une technique aérienne maîtrisée."
-    },
-    'Saut en hauteur': {
-        '1AC': "Franchir une barre en utilisant une course d'élan et une impulsion vers le haut, avec une technique de franchissement ventral ou dorsal simplifié.",
-        '2AC': "Réaliser un franchissement dorsal (fosbury-flop) avec une course d'élan courbe adaptée et une impulsion sur le pied extérieur.",
-        '3AC': "Optimiser son franchissement par une meilleure coordination course courbe-impulsion-rotation dorsale, en améliorant la position du corps au-dessus de la barre.",
-        'TC': "Maîtriser la technique du fosbury-flop avec une course d'élan courbe efficace, une impulsion puissante et un franchissement dorsal économique.",
-        '1AB': "Améliorer sa performance par l'optimisation de chaque phase technique, en travaillant la vitesse d'entrée et la qualité de l'esquive dorsale.",
-        '2AB': "Réaliser une performance optimale en gérant les paramètres techniques, physiques et psychologiques de la compétition."
+        '1AC': "Se déplacer et se placer correctement pour renvoyer la balle dans le camp adverse, en utilisant la manchette et la touche haute.",
+        '2AC': "Construire l'attaque par un renvoi indirect utilisant un relais, en s'organisant pour la réception-passe-attaque.",
+        '3AC': "Organiser la défense et orienter la construction offensive vers la zone avant.",
+        'TC': "S'organiser collectivement dans la limite des trois touches réglementaires.",
+        '1AB': "Optimiser la construction du point avec des rôles différenciés.",
+        '2AB': "Mettre en place une organisation collective avec combinaisons offensives variées."
     },
     'Course de vitesse': {
-        '1AC': "Réagir rapidement au signal de départ et maintenir sa vitesse maximale sur une distance courte (40-60m), en courant dans son couloir.",
-        '2AC': "Améliorer sa technique de course (fréquence et amplitude des foulées) pour optimiser sa vitesse sur 60-80m, avec un départ réactif.",
-        '3AC': "Gérer sa course du départ à l'arrivée en optimisant l'accélération, le maintien de la vitesse maximale et la finition.",
+        '1AC': "Réagir rapidement au signal de départ et maintenir sa vitesse maximale sur une distance courte (40-60m).",
+        '2AC': "Améliorer sa technique de course (fréquence et amplitude) pour optimiser sa vitesse sur 60-80m.",
+        '3AC': "Gérer sa course du départ à l'arrivée en optimisant l'accélération et le maintien de vitesse.",
         'TC': "Maîtriser les différentes phases de la course de vitesse pour réaliser sa meilleure performance.",
-        '1AB': "Analyser et améliorer ses points faibles techniques et physiques pour progresser vers sa performance optimale.",
-        '2AB': "Atteindre son potentiel maximal par une préparation et une exécution optimales, en gérant le stress de la compétition."
+        '1AB': "Analyser et améliorer ses points faibles techniques et physiques.",
+        '2AB': "Atteindre son potentiel maximal par une préparation et une exécution optimales."
+    },
+    'Saut en longueur': {
+        '1AC': "Réaliser une course d'élan progressivement accélérée suivie d'une impulsion et une réception équilibrée.",
+        '2AC': "Enchaîner une course d'élan régulière, une impulsion active et un saut avec attitude aérienne simple.",
+        '3AC': "Optimiser sa course d'élan étalonnée pour faire coïncider vitesse maximale et planche d'appel.",
+        'TC': "Maîtriser l'organisation de sa course d'élan et la qualité de son impulsion.",
+        '1AB': "Augmenter l'efficacité du saut par la maîtrise de la liaison course-impulsion.",
+        '2AB': "Optimiser sa performance en coordonnant les trois phases du saut."
+    },
+    'Saut en hauteur': {
+        '1AC': "Franchir une barre en utilisant une course d'élan et une impulsion vers le haut.",
+        '2AC': "Réaliser un franchissement dorsal (fosbury-flop) avec course d'élan courbe adaptée.",
+        '3AC': "Optimiser son franchissement par une meilleure coordination course courbe-impulsion-rotation.",
+        'TC': "Maîtriser la technique du fosbury-flop avec course d'élan courbe efficace.",
+        '1AB': "Améliorer sa performance par l'optimisation de chaque phase technique.",
+        '2AB': "Réaliser une performance optimale en gérant les paramètres de la compétition."
     },
     'Course de durée': {
-        '1AC': "Courir de façon régulière sur une durée donnée (8-10 min) en gérant son effort et en maintenant une allure constante.",
-        '2AC': "Adapter son allure de course pour maintenir un effort prolongé (10-12 min), en utilisant des repères de temps et de distance.",
-        '3AC': "Construire et respecter un projet de course en fonction de ses capacités, sur une durée de 12-15 min, en régulant son allure.",
-        'TC': "Planifier et réaliser une performance en gérant efficacement ses ressources énergétiques, sur une distance ou durée définie.",
-        '1AB': "Optimiser sa performance par une gestion stratégique de l'allure, en s'appuyant sur la connaissance de ses capacités.",
-        '2AB': "Atteindre ses objectifs personnels par une préparation et une stratégie de course adaptées à ses ressources."
+        '1AC': "Courir de façon régulière sur une durée donnée (8-10 min) en gérant son effort.",
+        '2AC': "Adapter son allure de course pour maintenir un effort prolongé (10-12 min).",
+        '3AC': "Construire et respecter un projet de course en fonction de ses capacités (12-15 min).",
+        'TC': "Planifier et réaliser une performance en gérant efficacement ses ressources énergétiques.",
+        '1AB': "Optimiser sa performance par une gestion stratégique de l'allure.",
+        '2AB': "Atteindre ses objectifs personnels par une stratégie de course adaptée."
     },
     'Lancer de poids': {
-        '1AC': "Lancer un engin en utilisant une poussée du bras depuis l'épaule, dans le respect des règles de sécurité et de l'aire de lancer.",
-        '2AC': "Coordonner la poussée des jambes et l'action du bras lanceur pour améliorer la distance de lancer, en respectant la technique en translation.",
-        '3AC': "Enchaîner les actions motrices du lancer en respectant la technique et les règles de la compétition.",
-        'TC': "Réaliser un lancer en maîtrisant la coordination des différents segments corporels dans une technique en translation ou rotation.",
-        '1AB': "Améliorer sa performance par le perfectionnement technique et le développement de la puissance musculaire spécifique.",
-        '2AB': "Optimiser sa performance par une maîtrise complète de la chaîne de lancer et une gestion efficace de la compétition."
+        '1AC': "Lancer un engin en utilisant une poussée du bras depuis l'épaule, dans le respect des règles.",
+        '2AC': "Coordonner la poussée des jambes et l'action du bras lanceur pour améliorer la distance.",
+        '3AC': "Enchaîner les actions motrices du lancer en respectant la technique.",
+        'TC': "Réaliser un lancer en maîtrisant la coordination des segments corporels.",
+        '1AB': "Améliorer sa performance par le perfectionnement technique.",
+        '2AB': "Optimiser sa performance par une maîtrise complète de la chaîne de lancer."
     },
     'Gymnastique': {
-        '1AC': "Réaliser un enchaînement simple au sol comprenant des éléments gymniques de base, présenté avec maîtrise devant la classe.",
-        '2AC': "Présenter un enchaînement gymnique varié avec des liaisons fluides et une présentation soignée.",
-        '3AC': "Concevoir et réaliser un enchaînement individuel au sol avec originalité et maîtrise.",
-        'TC': "Présenter un enchaînement gymnique au sol avec maîtrise technique et qualité de présentation.",
-        '1AB': "Composer et réaliser un enchaînement au sol avec continuité et expression personnelle.",
-        '2AB': "Concevoir, réaliser et évaluer un enchaînement gymnique varié avec expertise et créativité."
+        '1AC': "Réaliser un enchaînement simple au sol comprenant des éléments gymniques de base.",
+        '2AC': "Présenter un enchaînement gymnique varié avec des liaisons fluides.",
+        '3AC': "Concevoir et réaliser un enchaînement individuel au sol avec originalité.",
+        'TC': "Présenter un enchaînement gymnique au sol avec maîtrise technique.",
+        '1AB': "Composer et réaliser un enchaînement avec continuité et expression personnelle.",
+        '2AB': "Concevoir, réaliser et évaluer un enchaînement gymnique avec expertise."
     },
     'Tennis de table': {
-        '1AC': "Maintenir un échange en renvoyant la balle sur la table adverse, en utilisant le coup droit et le revers, dans le respect des règles.",
-        '2AC': "Diriger la balle dans différentes zones de la table pour mettre l'adversaire en difficulté, en variant les placements.",
+        '1AC': "Maintenir un échange en renvoyant la balle sur la table adverse, en utilisant coup droit et revers.",
+        '2AC': "Diriger la balle dans différentes zones de la table pour mettre l'adversaire en difficulté.",
         '3AC': "Varier les trajectoires, les vitesses et les effets pour prendre l'initiative du point.",
-        'TC': "Construire le point en utilisant des variations de placement, de vitesse et d'effet.",
+        'TC': "Construire le point en utilisant des variations de placement, vitesse et effet.",
         '1AB': "Élaborer des stratégies de jeu adaptées aux caractéristiques de l'adversaire.",
         '2AB': "Mettre en œuvre un projet de jeu personnel et l'adapter en cours de match."
     },
     'Badminton': {
-        '1AC': "Renvoyer le volant dans le terrain adverse en utilisant les frappes de base, dans le respect des règles et des limites du terrain.",
-        '2AC': "Varier la longueur et la direction de ses frappes pour déplacer l'adversaire et créer des espaces.",
-        '3AC': "Alterner jeu long et jeu court pour créer des espaces libres et marquer le point.",
+        '1AC': "Renvoyer le volant dans le terrain adverse en utilisant les frappes de base.",
+        '2AC': "Varier la longueur et la direction de ses frappes pour déplacer l'adversaire.",
+        '3AC': "Alterner jeu long et jeu court pour créer des espaces libres.",
         'TC': "Construire le point en exploitant les espaces libres du terrain adverse.",
-        '1AB': "Élaborer des séquences de jeu tactiquement cohérentes, en utilisant les feintes.",
+        '1AB': "Élaborer des séquences de jeu tactiquement cohérentes.",
         '2AB': "Concevoir et appliquer une stratégie de jeu personnelle adaptée à l'adversaire."
     }
 };
 
-// Situations de référence complètes
 const getSituationReference = (aps, isCollege) => {
     const situations = {
         'Handball': 'Match 7 contre 7 sur terrain réglementaire (40x20m) avec application des règles officielles et arbitrage',
@@ -122,7 +126,7 @@ const getSituationReference = (aps, isCollege) => {
         'Saut en longueur': 'Concours de 3 essais mesurés avec course d\'élan libre, la meilleure performance est retenue',
         'Saut en hauteur': 'Concours à barres montantes avec 3 essais maximum par hauteur, technique libre',
         'Lancer de poids': 'Concours de 3 essais mesurés depuis le plateau de lancer, la meilleure performance est retenue',
-        'Course de durée': isCollege ? 'Course de 12 minutes en régulant son allure, la distance parcourue est mesurée' : 'Course de 12 minutes pour parcourir la plus grande distance en gérant son effort',
+        'Course de durée': 'Course de 12 minutes en régulant son allure, la distance parcourue est mesurée',
         'Gymnastique': 'Présentation d\'un enchaînement au sol de 1 minute minimum comprenant les éléments imposés du niveau'
     };
     return situations[aps] || 'Situation adaptée au niveau';
@@ -139,105 +143,105 @@ const getGroupeAPS = (aps) => {
 // ==================== OBJECTIFS EXPLICITES PAR APS (1-2 phrases) ====================
 const OBJECTIFS_CYCLE = {
     'Handball': [
-        "Évaluer le niveau initial des élèves en handball à travers une situation de jeu 4c4 pour identifier les acquis et les besoins en matière de passe, réception et démarquage.",
-        "Découvrir les règles fondamentales du handball (marcher, reprise de dribble, zone des 6m) et manipuler le ballon avec aisance dans des situations simples.",
-        "Améliorer la qualité de la passe à terre: orientation du corps vers la cible, passe tendue à hauteur de poitrine, bras accompagnant le ballon.",
-        "Apprendre à se démarquer efficacement en créant de l'espace par rapport au défenseur pour recevoir le ballon dans une position favorable.",
-        "Enchaîner réception et passe rapidement sans temps d'arrêt pour maintenir la continuité du jeu et déstabiliser la défense adverse.",
-        "Découvrir le tir en appui et améliorer la précision en visant les différentes zones du but (coins bas, coins hauts).",
-        "Organiser le jeu collectif en occupant rationnellement l'espace en largeur et profondeur, avec des rôles définis (pivot, ailier, arrière).",
-        "Appliquer les principes d'attaque (écartement, pénétration, fixation) en situation de surnombre 4c3 pour créer le déséquilibre défensif.",
-        "Intégrer les acquis techniques et tactiques dans un match 5c5 avec arbitrage par les élèves et rotation des rôles.",
-        "Évaluer les compétences acquises à travers la situation de référence en observant l'efficacité technique, les choix tactiques et l'engagement."
+        "Évaluer le niveau initial des élèves en handball à travers une situation de jeu 4c4 pour identifier les acquis et les besoins en passe, réception et démarquage.",
+        "Découvrir les règles fondamentales du handball (marcher, reprise de dribble, zone des 6m) et manipuler le ballon avec aisance.",
+        "Améliorer la qualité de la passe à terre: orientation du corps vers la cible, passe tendue à hauteur de poitrine.",
+        "Apprendre à se démarquer efficacement en créant de l'espace par rapport au défenseur pour recevoir dans une position favorable.",
+        "Enchaîner réception et passe rapidement sans temps d'arrêt pour maintenir la continuité du jeu collectif.",
+        "Découvrir le tir en appui et améliorer la précision en visant les différentes zones du but.",
+        "Organiser le jeu collectif en occupant l'espace en largeur et profondeur avec des rôles définis.",
+        "Appliquer les principes d'attaque (écartement, pénétration) en situation de surnombre 4c3.",
+        "Intégrer les acquis techniques et tactiques dans un match 5c5 avec arbitrage par les élèves.",
+        "Évaluer les compétences acquises à travers la situation de référence en observant l'efficacité technique et tactique."
     ],
     'Football': [
-        "Évaluer le niveau initial des élèves en football via un match 4c4 pour observer la conduite de balle, les passes et les placements sur le terrain.",
-        "Découvrir les règles du football (hors-jeu, fautes, remises en jeu) et manipuler le ballon avec différentes surfaces du pied.",
-        "Améliorer la conduite de balle en slalom et le contrôle orienté pour enchaîner immédiatement vers une passe ou un dribble.",
-        "Travailler la passe courte avec l'intérieur du pied: pied d'appui à côté du ballon, frappe au centre, accompagnement vers la cible.",
-        "Se démarquer efficacement en effectuant des appels de balle dans le dos du défenseur pour offrir une solution de passe.",
-        "Découvrir le tir et améliorer la frappe de balle vers le but avec précision en utilisant l'intérieur ou le cou-de-pied.",
-        "Organiser le jeu collectif: circulation de balle, appui-soutien, occupation des couloirs et du centre du terrain.",
-        "Appliquer le jeu en triangle et les combinaisons simples (une-deux, déviation) en situation de match réduit.",
-        "Intégrer les acquis dans un match 6c6 avec respect des règles, des postes et des transitions attaque-défense.",
-        "Évaluer les compétences via la situation de référence en observant l'efficacité technique, les choix tactiques et le fair-play."
+        "Évaluer le niveau initial des élèves via un match 4c4 pour observer la conduite de balle, les passes et les placements.",
+        "Découvrir les règles du football (hors-jeu, fautes, remises en jeu) et manipuler le ballon avec différentes surfaces.",
+        "Améliorer la conduite de balle en slalom et le contrôle orienté pour enchaîner vers une passe ou un dribble.",
+        "Travailler la passe courte avec l'intérieur du pied: pied d'appui à côté du ballon, frappe au centre.",
+        "Se démarquer efficacement en effectuant des appels de balle dans le dos du défenseur.",
+        "Découvrir le tir et améliorer la frappe de balle vers le but avec précision.",
+        "Organiser le jeu collectif: circulation de balle, appui-soutien, occupation des couloirs.",
+        "Appliquer le jeu en triangle et les combinaisons simples (une-deux) en situation réduite.",
+        "Intégrer les acquis dans un match 6c6 avec respect des règles et des postes.",
+        "Évaluer via la situation de référence en observant l'efficacité technique, tactique et le fair-play."
     ],
     'Basketball': [
-        "Évaluer le niveau initial des élèves en basketball via un 3c3 pour observer le dribble, la passe, le tir et les déplacements.",
+        "Évaluer le niveau initial des élèves en basketball via un 3c3 pour observer dribble, passe, tir et déplacements.",
         "Découvrir les règles du basketball (marcher, reprise de dribble, fautes) et manipuler le ballon des deux mains.",
-        "Améliorer le dribble de progression main droite puis main gauche face à un défenseur passif puis actif.",
-        "Travailler la passe à terre et la passe à une main vers un partenaire en mouvement avec précision.",
-        "Se démarquer avec et sans ballon en utilisant les changements de direction et les feintes pour créer des espaces.",
+        "Améliorer le dribble de progression main droite puis main gauche face à un défenseur.",
+        "Travailler la passe à terre et la passe à une main vers un partenaire en mouvement.",
+        "Se démarquer avec et sans ballon en utilisant les changements de direction et les feintes.",
         "Découvrir le tir en course (lay-up) et améliorer la coordination appuis-tir avec la main extérieure.",
-        "Organiser le jeu collectif: espacement entre joueurs, circulation joueurs et ballon, principes du pick and roll.",
-        "Appliquer les principes d'attaque placée et de contre-attaque rapide en situation de jeu 4c4.",
-        "Intégrer les acquis dans un match avec arbitrage, rotations et application des systèmes travaillés.",
+        "Organiser le jeu collectif: espacement entre joueurs, circulation joueurs et ballon.",
+        "Appliquer les principes d'attaque placée et de contre-attaque rapide en situation 4c4.",
+        "Intégrer les acquis dans un match avec arbitrage, rotations et systèmes travaillés.",
         "Évaluer les compétences via la situation de référence en observant l'efficacité offensive et défensive."
     ],
     'Volleyball': [
         "Évaluer le niveau initial via des échanges 2c2 pour observer la manchette, la touche haute et le service.",
-        "Découvrir les règles du volleyball (3 touches, rotation, fautes de filet) et s'initier à la manchette bras tendus.",
+        "Découvrir les règles du volleyball (3 touches, rotation, fautes) et s'initier à la manchette bras tendus.",
         "Améliorer la manchette de réception: se placer sous le ballon, bras tendus et joints, orienter vers le passeur.",
-        "Travailler la touche haute pour réaliser une passe précise: mains en coupe au-dessus du front, poussée des jambes.",
-        "Découvrir le service cuillère et améliorer sa régularité en visant différentes zones du terrain adverse.",
-        "Construire une attaque en 3 touches avec rôles définis: réceptionneur vers passeur, passeur vers attaquant.",
-        "Organiser la défense: placement en réception selon le serveur, couverture d'attaque, anticipation des trajectoires.",
+        "Travailler la touche haute pour réaliser une passe précise: mains en coupe au-dessus du front.",
+        "Découvrir le service cuillère et améliorer sa régularité en visant différentes zones.",
+        "Construire une attaque en 3 touches avec rôles définis: réceptionneur, passeur, attaquant.",
+        "Organiser la défense: placement en réception, couverture d'attaque, anticipation des trajectoires.",
         "Appliquer l'alternance jeu court (amorti) et jeu long (attaque puissante) pour déstabiliser l'adversaire.",
-        "Intégrer les acquis dans un match 4c4 puis 6c6 avec rotation obligatoire et communication entre joueurs.",
-        "Évaluer les compétences via la situation de référence en observant la construction du point et la communication."
+        "Intégrer les acquis dans un match 4c4 puis 6c6 avec rotation obligatoire et communication.",
+        "Évaluer les compétences via la situation de référence en observant la construction du point."
     ],
     'Course de vitesse': [
         "Évaluer le niveau initial sur 40m chronométré pour identifier les points forts et faibles de chaque élève.",
-        "Découvrir les différentes phases de la course de vitesse: réaction au signal, mise en action, accélération, maintien.",
+        "Découvrir les différentes phases de la course: réaction au signal, mise en action, accélération, maintien.",
         "Améliorer la réaction au signal de départ et la mise en action explosive sur les 10 premiers mètres.",
         "Travailler l'accélération progressive en augmentant la fréquence puis l'amplitude des foulées.",
         "Optimiser la fréquence et l'amplitude des foulées en phase de vitesse maximale (20-40m).",
         "Maintenir sa vitesse maximale sans décélération jusqu'à la ligne d'arrivée en restant relâché.",
-        "Améliorer l'alignement segmentaire (tête-tronc-bassin) et le relâchement des épaules pendant la course.",
-        "Travailler le finish: franchir la ligne sans ralentir ni anticiper, en projetant le buste vers l'avant.",
-        "Intégrer tous les éléments techniques dans des courses chronométrées avec analyse vidéo.",
-        "Évaluer la performance finale sur la distance de référence avec mesure du temps et analyse technique."
+        "Améliorer l'alignement segmentaire (tête-tronc-bassin) et le relâchement des épaules.",
+        "Travailler le finish: franchir la ligne sans ralentir, en projetant le buste vers l'avant.",
+        "Intégrer tous les éléments techniques dans des courses chronométrées avec analyse.",
+        "Évaluer la performance finale sur la distance de référence avec mesure du temps."
     ],
     'Saut en longueur': [
-        "Évaluer le niveau initial via 3 sauts libres pour observer la course d'élan, l'impulsion et la réception.",
-        "Découvrir les différentes phases du saut: course d'élan accélérée, impulsion sur la planche, envol, réception.",
-        "Étalonner sa course d'élan en plaçant des marques pour atteindre la planche avec une vitesse optimale.",
+        "Évaluer le niveau initial via 3 sauts libres pour observer course d'élan, impulsion et réception.",
+        "Découvrir les différentes phases du saut: course accélérée, impulsion sur planche, envol, réception.",
+        "Étalonner sa course d'élan en plaçant des marques pour atteindre la planche avec vitesse optimale.",
         "Améliorer l'impulsion: placement du pied d'appel à plat, poussée verticale et horizontale, genou libre haut.",
-        "Travailler la phase d'envol: maintien de l'équilibre, position groupée ou en extension selon le niveau.",
-        "Optimiser la réception: ramener les jambes vers l'avant, bras vers l'avant, tomber en avant dans la fosse.",
-        "Coordonner course-impulsion-envol dans un enchaînement fluide sans perte de vitesse à l'approche.",
-        "Augmenter progressivement la vitesse de course tout en conservant la précision sur la planche d'appel.",
+        "Travailler la phase d'envol: maintien de l'équilibre, position groupée ou en extension.",
+        "Optimiser la réception: ramener les jambes vers l'avant, bras vers l'avant, tomber en avant.",
+        "Coordonner course-impulsion-envol dans un enchaînement fluide sans perte de vitesse.",
+        "Augmenter progressivement la vitesse de course tout en conservant la précision sur la planche.",
         "Réaliser des sauts complets avec mesure des performances et analyse des points à améliorer.",
         "Évaluer la performance finale via le concours de 3 essais avec notation technique et mesure."
     ],
     'Saut en hauteur': [
         "Évaluer le niveau initial via des franchissements à hauteur basse pour observer la technique de base.",
-        "Découvrir les différentes phases: course d'élan courbe, impulsion sur le pied extérieur, franchissement dorsal.",
+        "Découvrir les différentes phases: course d'élan courbe, impulsion sur pied extérieur, franchissement dorsal.",
         "Travailler la course d'élan courbe: 5-7 foulées en arc de cercle avec accélération progressive.",
         "Améliorer l'impulsion: pied extérieur actif, bras et genou libre vers le haut, regard vers la barre.",
-        "Découvrir la rotation dorsale (fosbury-flop): basculer les épaules en arrière, cambrer le dos au-dessus de la barre.",
+        "Découvrir la rotation dorsale (fosbury-flop): basculer les épaules, cambrer le dos au-dessus de la barre.",
         "Optimiser l'esquive des hanches et des jambes pour franchir la barre sans la toucher.",
         "Coordonner course courbe-impulsion-rotation dans un enchaînement fluide et rythmé.",
-        "Augmenter progressivement la hauteur de la barre en conservant la qualité technique du franchissement.",
+        "Augmenter progressivement la hauteur de la barre en conservant la qualité technique.",
         "Réaliser des concours avec barres montantes pour développer la gestion du stress compétitif.",
         "Évaluer la performance finale via le concours à barres montantes avec analyse technique."
     ],
     'Course de durée': [
         "Évaluer le niveau initial via une course de 6 minutes pour estimer la VMA et les capacités d'endurance.",
         "Découvrir les principes de la gestion de l'effort: allure régulière, respiration, hydratation.",
-        "Apprendre à courir à une allure constante en utilisant des repères de temps (chronomètre, plots).",
+        "Apprendre à courir à une allure constante en utilisant des repères de temps (chrono, plots).",
         "Travailler la régularité de l'allure: maintenir le même temps de passage sur chaque tour.",
-        "Développer l'endurance fondamentale en augmentant progressivement la durée de course (8, 10, 12 min).",
+        "Développer l'endurance en augmentant progressivement la durée de course (8, 10, 12 min).",
         "Construire un projet de course personnel: définir une allure cible en fonction de ses capacités.",
         "Optimiser la foulée économique: amplitude modérée, pose du pied sous le centre de gravité.",
         "Gérer les variations de terrain et de rythme sans perdre sa régularité d'allure.",
         "Réaliser des courses avec contrat de distance: annoncer et respecter son objectif personnel.",
-        "Évaluer la performance via la course de 12 minutes avec mesure de la distance et analyse de la régularité."
+        "Évaluer via la course de 12 minutes avec mesure de la distance et analyse de la régularité."
     ],
     'Lancer de poids': [
-        "Évaluer le niveau initial via des lancers à bras cassé pour observer la coordination et la puissance.",
+        "Évaluer le niveau initial via des lancers à bras cassé pour observer coordination et puissance.",
         "Découvrir la tenue de l'engin au cou et la position de départ dos à l'aire de lancer.",
-        "Travailler le placement initial: poids au cou, coude haut, dos à l'aire, équilibre sur la jambe arrière.",
+        "Travailler le placement initial: poids au cou, coude haut, dos à l'aire, équilibre sur jambe arrière.",
         "Améliorer la poussée des jambes: transfert du poids du corps de l'arrière vers l'avant.",
         "Coordonner la rotation du tronc et l'extension du bras lanceur dans un mouvement explosif.",
         "Travailler le fouetté final du poignet pour optimiser la trajectoire de l'engin.",
@@ -248,30 +252,30 @@ const OBJECTIFS_CYCLE = {
     ],
     'Gymnastique': [
         "Évaluer le niveau initial via la présentation d'éléments simples (roulade avant, équilibre, saut).",
-        "Découvrir les familles d'éléments gymniques: rotations, renversements, sauts, maintiens, souplesses.",
+        "Découvrir les familles d'éléments: rotations, renversements, sauts, maintiens, souplesses.",
         "Maîtriser la roulade avant et arrière: départ et arrivée stabilisés, corps groupé, menton poitrine.",
         "Apprendre l'ATR (appui tendu renversé): placement des mains, alignement bras-tronc-jambes, gainage.",
         "Travailler la roue avec amplitude: impulsion jambe, passage par l'ATR, réception pieds décalés.",
         "Découvrir les éléments de souplesse: pont, souplesse avant, maintiens en équilibre.",
         "Lier les éléments entre eux: enchaîner 3-4 éléments avec fluidité et sans temps d'arrêt.",
-        "Composer un enchaînement personnel respectant les exigences du niveau (éléments imposés et libres).",
-        "Répéter et perfectionner son enchaînement en travaillant l'amplitude, la tenue et les liaisons.",
+        "Composer un enchaînement personnel respectant les exigences du niveau.",
+        "Répéter et perfectionner son enchaînement en travaillant amplitude, tenue et liaisons.",
         "Présenter son enchaînement devant la classe et être évalué selon les critères définis."
     ],
     'Tennis de table': [
-        "Évaluer le niveau initial via des échanges libres pour observer le coup droit, le revers et le service.",
-        "Découvrir les règles du tennis de table et la prise de raquette orthodoxe (coup droit et revers).",
+        "Évaluer le niveau initial via des échanges libres pour observer coup droit, revers et service.",
+        "Découvrir les règles du tennis de table et la prise de raquette orthodoxe.",
         "Améliorer le coup droit: placement latéral, rotation du tronc, accompagnement de la balle.",
         "Travailler le revers: coude près du corps, rotation des épaules, frappe devant soi.",
         "Découvrir le service réglementaire: balle visible, lancée verticalement, frappée derrière la table.",
         "Varier les placements pour déplacer l'adversaire: jouer long/court, droite/gauche.",
         "Découvrir les effets: coupé (balle qui flotte) et lifté (balle qui plonge) pour varier le jeu.",
-        "Construire le point en utilisant des séquences tactiques: service-3ème balle, préparation de l'attaque.",
+        "Construire le point en utilisant des séquences tactiques: service-3ème balle.",
         "Intégrer les acquis dans des matchs avec comptage des points et application des règles.",
         "Évaluer les compétences via des matchs en simple avec observation technique et tactique."
     ],
     'Badminton': [
-        "Évaluer le niveau initial via des échanges libres pour observer les frappes de base et les déplacements.",
+        "Évaluer le niveau initial via des échanges libres pour observer les frappes et les déplacements.",
         "Découvrir les règles du badminton et la prise universelle de la raquette.",
         "Améliorer le dégagé (fond de court): frappe haute, bras tendu, accompagnement vers la cible.",
         "Travailler l'amorti au filet: frappe douce, volant qui tombe près du filet adverse.",
@@ -279,12 +283,11 @@ const OBJECTIFS_CYCLE = {
         "Varier la longueur et la direction des frappes pour déplacer l'adversaire et créer des espaces.",
         "Alterner jeu long (dégagé) et jeu court (amorti) pour déstabiliser l'adversaire.",
         "Se replacer au centre du terrain après chaque frappe pour couvrir tout l'espace.",
-        "Intégrer les acquis dans des matchs en simple avec application des règles et du comptage.",
-        "Évaluer les compétences via des matchs en observant la construction du point et les déplacements."
+        "Intégrer les acquis dans des matchs en simple avec application des règles et comptage.",
+        "Évaluer les compétences via des matchs en observant construction du point et déplacements."
     ]
 };
 
-// ==================== API HANDLER ====================
 module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST');
@@ -310,19 +313,12 @@ module.exports = async (req, res) => {
         const sitRef = getSituationReference(aps, isCollege);
         const groupeAPS = getGroupeAPS(aps);
 
-        // Récupérer les objectifs explicites
+        // Récupérer les objectifs
         let objectifs = OBJECTIFS_CYCLE[aps] || OBJECTIFS_CYCLE['Handball'];
 
-        // Adapter au niveau des élèves
-        if (nivEleves === 'debutant') {
-            objectifs = objectifs.map(o => o.replace(/améliorer/gi, 'découvrir').replace(/optimiser/gi, 'initier').replace(/maîtriser/gi, 'découvrir'));
-        } else if (nivEleves === 'avance' || nivEleves === 'elite') {
-            objectifs = objectifs.map(o => o.replace(/découvrir/gi, 'perfectionner').replace(/améliorer/gi, 'optimiser').replace(/initier/gi, 'maîtriser'));
-        }
-
-        // Ajuster au nombre de séances
+        // Adapter au nombre de séances
         while (objectifs.length < nb) {
-            objectifs.splice(-1, 0, "Consolider les acquis techniques et tactiques à travers des situations de jeu variées et des exercices de renforcement.");
+            objectifs.splice(-1, 0, "Consolider les acquis techniques et tactiques à travers des situations variées.");
         }
         objectifs = objectifs.slice(0, nb);
 
@@ -330,22 +326,11 @@ module.exports = async (req, res) => {
         let rows = '';
         for (let i = 0; i < nb; i++) {
             let phase, phaseColor;
-            if (i === 0) {
-                phase = 'Évaluation diagnostique';
-                phaseColor = '#fff3e0';
-            } else if (i === nb - 1) {
-                phase = 'Évaluation terminale';
-                phaseColor = '#ffebee';
-            } else if (i < nb / 3) {
-                phase = 'Découverte';
-                phaseColor = '#e3f2fd';
-            } else if (i < 2 * nb / 3) {
-                phase = 'Apprentissage';
-                phaseColor = '#e8f5e9';
-            } else {
-                phase = 'Consolidation';
-                phaseColor = '#f3e5f5';
-            }
+            if (i === 0) { phase = 'Éval. diagnostique'; phaseColor = '#fff3e0'; }
+            else if (i === nb - 1) { phase = 'Éval. terminale'; phaseColor = '#ffebee'; }
+            else if (i < nb / 3) { phase = 'Découverte'; phaseColor = '#e3f2fd'; }
+            else if (i < 2 * nb / 3) { phase = 'Apprentissage'; phaseColor = '#e8f5e9'; }
+            else { phase = 'Consolidation'; phaseColor = '#f3e5f5'; }
 
             rows += `<tr>
                 <td style="text-align:center;background:${phaseColor};font-size:7pt;font-weight:bold;border:1px solid #000;">${phase}</td>
@@ -446,52 +431,52 @@ Document conforme aux Orientations Pédagogiques ${isCollege ? '2009 (Collège)'
 </body>
 </html>`;
 
-        // HTML Display (version site web)
+        // ==================== HTML DISPLAY (Site) ====================
         const htmlDisplay = `
-        <div style="font-family:'Segoe UI',sans-serif;max-width:950px;margin:0 auto;line-height:1.5;">
-            <div style="background:linear-gradient(135deg,#c1272d,#006233);color:white;padding:20px;border-radius:12px;margin-bottom:20px;">
-                <h1 style="margin:0 0 8px 0;font-size:1.5rem;">📊 Projet de Cycle - ${aps}</h1>
-                <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:0.9rem;opacity:0.95;">
-                    <span><strong>Niveau:</strong> ${niveau}</span>
-                    <span><strong>Niveau élèves:</strong> ${nivTxt}</span>
-                    <span><strong>Séances:</strong> ${nb}</span>
-                    <span><strong>Groupe:</strong> ${groupeAPS}</span>
-                </div>
-            </div>
+<div style="font-family:'Segoe UI',sans-serif;max-width:950px;margin:0 auto;line-height:1.5;">
+    <div style="background:linear-gradient(135deg,#c1272d,#006233);color:white;padding:20px;border-radius:12px;margin-bottom:20px;">
+        <h1 style="margin:0 0 8px 0;font-size:1.5rem;">📊 Projet de Cycle - ${aps}</h1>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:0.9rem;opacity:0.95;">
+            <span><strong>Niveau:</strong> ${niveau}</span>
+            <span><strong>Niveau élèves:</strong> ${nivTxt}</span>
+            <span><strong>Séances:</strong> ${nb}</span>
+            <span><strong>Groupe:</strong> ${groupeAPS}</span>
+        </div>
+    </div>
 
-            <div style="background:#f8f9fa;border:1px solid #e0e0e0;border-radius:10px;padding:15px;margin-bottom:15px;">
-                <h3 style="color:#006233;margin:0 0 10px 0;font-size:0.95rem;">📋 Références officielles</h3>
-                <p style="margin:0 0 8px 0;font-size:0.85rem;"><strong>OTI:</strong> ${oti}</p>
-                <p style="margin:0 0 8px 0;font-size:0.85rem;"><strong>OTC:</strong> ${otc}</p>
-                <p style="margin:0;font-size:0.85rem;"><strong>Situation de référence:</strong> <span style="color:#006233;font-weight:500;">${sitRef}</span></p>
-            </div>
+    <div style="background:#f8f9fa;border:1px solid #e0e0e0;border-radius:10px;padding:15px;margin-bottom:15px;">
+        <h3 style="color:#006233;margin:0 0 10px 0;font-size:0.95rem;">📋 Références officielles</h3>
+        <p style="margin:0 0 8px 0;font-size:0.85rem;"><strong>OTI:</strong> ${oti}</p>
+        <p style="margin:0 0 8px 0;font-size:0.85rem;"><strong>OTC:</strong> ${otc}</p>
+        <p style="margin:0;font-size:0.85rem;"><strong>Situation de référence:</strong> <span style="color:#006233;font-weight:500;">${sitRef}</span></p>
+    </div>
 
-            <div style="background:white;border:1px solid #e0e0e0;border-radius:10px;overflow:hidden;">
-                <div style="background:linear-gradient(90deg,#c1272d,#006233);color:white;padding:12px;text-align:center;font-weight:bold;">
-                    PROGRESSION PÉDAGOGIQUE
-                </div>
-                <table style="width:100%;border-collapse:collapse;">
-                    <tr style="background:#006233;color:white;">
-                        <th style="padding:10px;width:15%;font-size:0.8rem;">Phase</th>
-                        <th style="padding:10px;width:5%;font-size:0.8rem;">N°</th>
-                        <th style="padding:10px;font-size:0.8rem;">Objectif opérationnel</th>
-                    </tr>
-                    ${objectifs.map((obj, i) => {
-                        let phase, phaseColor, phaseBg;
-                        if (i === 0) { phase = 'Éval. diag.'; phaseBg = '#fff3e0'; phaseColor = '#e65100'; }
-                        else if (i === nb - 1) { phase = 'Éval. term.'; phaseBg = '#ffebee'; phaseColor = '#c62828'; }
-                        else if (i < nb / 3) { phase = 'Découverte'; phaseBg = '#e3f2fd'; phaseColor = '#1565c0'; }
-                        else if (i < 2 * nb / 3) { phase = 'Apprentissage'; phaseBg = '#e8f5e9'; phaseColor = '#2e7d32'; }
-                        else { phase = 'Consolidation'; phaseBg = '#f3e5f5'; phaseColor = '#7b1fa2'; }
-                        return `<tr style="border-bottom:1px solid #e0e0e0;">
-                            <td style="padding:10px;background:${phaseBg};text-align:center;font-weight:bold;color:${phaseColor};font-size:0.8rem;">${phase}</td>
-                            <td style="padding:10px;text-align:center;font-weight:bold;font-size:1rem;background:#f5f5f5;">${i + 1}</td>
-                            <td style="padding:10px;font-size:0.85rem;">${obj}</td>
-                        </tr>`;
-                    }).join('')}
-                </table>
-            </div>
-        </div>`;
+    <div style="background:white;border:1px solid #e0e0e0;border-radius:10px;overflow:hidden;">
+        <div style="background:linear-gradient(90deg,#c1272d,#006233);color:white;padding:12px;text-align:center;font-weight:bold;">
+            PROGRESSION PÉDAGOGIQUE
+        </div>
+        <table style="width:100%;border-collapse:collapse;">
+            <tr style="background:#006233;color:white;">
+                <th style="padding:10px;width:15%;font-size:0.8rem;">Phase</th>
+                <th style="padding:10px;width:5%;font-size:0.8rem;">N°</th>
+                <th style="padding:10px;font-size:0.8rem;">Objectif opérationnel</th>
+            </tr>
+            ${objectifs.map((obj, i) => {
+                let phase, phaseBg, phaseColor;
+                if (i === 0) { phase = 'Éval. diag.'; phaseBg = '#fff3e0'; phaseColor = '#e65100'; }
+                else if (i === nb - 1) { phase = 'Éval. term.'; phaseBg = '#ffebee'; phaseColor = '#c62828'; }
+                else if (i < nb / 3) { phase = 'Découverte'; phaseBg = '#e3f2fd'; phaseColor = '#1565c0'; }
+                else if (i < 2 * nb / 3) { phase = 'Apprentissage'; phaseBg = '#e8f5e9'; phaseColor = '#2e7d32'; }
+                else { phase = 'Consolidation'; phaseBg = '#f3e5f5'; phaseColor = '#7b1fa2'; }
+                return `<tr style="border-bottom:1px solid #e0e0e0;">
+                    <td style="padding:10px;background:${phaseBg};text-align:center;font-weight:bold;color:${phaseColor};font-size:0.8rem;">${phase}</td>
+                    <td style="padding:10px;text-align:center;font-weight:bold;font-size:1rem;background:#f5f5f5;">${i + 1}</td>
+                    <td style="padding:10px;font-size:0.85rem;">${obj}</td>
+                </tr>`;
+            }).join('')}
+        </table>
+    </div>
+</div>`;
 
         const filename = `Projet_Cycle_${aps.replace(/\s+/g, '_')}_${niveau}_${nb}seances.doc`;
 
