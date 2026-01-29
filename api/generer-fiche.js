@@ -10,8 +10,12 @@ module.exports = async (req, res) => {
         const GROQ_API_KEY = process.env.GROQ_API_KEY;
         if (!GROQ_API_KEY) return res.status(500).json({ success: false, error: 'GROQ_API_KEY non configurée' });
 
-        const { aps, objectif, niveau, nomProf, etablissement, anneeScolaire, numeroSeance } = req.body;
-        if (!aps || !objectif || !niveau) return res.status(400).json({ success: false, error: 'APS, objectif et niveau requis' });
+        const { aps, objectif, niveau, nomProf, etablissement, anneeScolaire, numeroSeance, typeDocument, nombreSeances, niveauEleves, typeGrille, classe } = req.body;
+        
+        // Validation de base
+        if (!aps || !niveau) {
+            return res.status(400).json({ success: false, error: 'APS et niveau requis' });
+        }
 
         // ==================== DONNÉES OFFICIELLES ====================
         
@@ -88,6 +92,24 @@ module.exports = async (req, res) => {
             'Gymnastique': { description: "Présenter un enchaînement devant la classe.", format: "Enchaînement" }
         };
 
+        // Critères pour grilles
+        const CRITERES_OBS = {
+            'Handball': {
+                criteres: [
+                    { nom: 'Technique', sous: ['Passe', 'Récept.', 'Tir', 'Dribble'] },
+                    { nom: 'Tactique', sous: ['Démaq.', 'Occup.', 'Choix'] },
+                    { nom: 'Comportement', sous: ['Engage.', 'Fair-play'] }
+                ]
+            },
+            'Football': {
+                criteres: [
+                    { nom: 'Technique', sous: ['Conduite', 'Passe', 'Contrôle', 'Tir'] },
+                    { nom: 'Tactique', sous: ['Placement', 'Appui', 'Choix'] },
+                    { nom: 'Comportement', sous: ['Engage.', 'Respect'] }
+                ]
+            }
+        };
+
         // Déterminer le groupe APS et type
         let groupeAPS, otc, situationRef, typeActivite;
 
@@ -125,32 +147,35 @@ module.exports = async (req, res) => {
 
         const oti = OTI[niveau];
 
-        // ==================== SCHÉMAS HTML COLORÉS ====================
-        
-        // Générer des schémas HTML selon le type d'activité
-        let schema1HTML = '';
-        let schema2HTML = '';
-        let schemaRefHTML = '';
+        // Variables pour HTML
+        let html = '';
+        let htmlDisplay = '';
+        let filename = '';
 
-        if (typeActivite === 'sport_collectif') {
-            schema1HTML = `
+        // ==================== FICHE DE SÉANCE ====================
+        if (!typeDocument || typeDocument === 'fiche') {
+            if (!objectif) {
+                return res.status(400).json({ success: false, error: 'Objectif requis pour une fiche de séance' });
+            }
+
+            // ==================== SCHÉMAS HTML COLORÉS ====================
+            
+            let schema1HTML = '';
+            let schema2HTML = '';
+
+            if (typeActivite === 'sport_collectif') {
+                schema1HTML = `
 <div style="background:linear-gradient(135deg,#e8f5e9,#fff);border:3px solid #2e7d32;border-radius:15px;padding:20px;margin:15px 0;font-family:Arial,sans-serif;">
     <div style="text-align:center;font-weight:bold;color:#1b5e20;margin-bottom:15px;font-size:16px;">📐 DISPOSITIF - Terrain ${aps} (20m × 15m)</div>
     <div style="background:#a5d6a7;border:2px solid #2e7d32;border-radius:10px;padding:20px;position:relative;min-height:200px;">
-        <!-- Ligne médiane -->
         <div style="position:absolute;top:0;bottom:0;left:50%;width:2px;background:#1b5e20;"></div>
-        <!-- Zone gauche -->
         <div style="position:absolute;left:5%;top:50%;transform:translateY(-50%);background:#ffeb3b;border:2px solid #f57f17;border-radius:50%;width:50px;height:50px;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 8px rgba(0,0,0,0.2);">🥅</div>
-        <!-- Attaquants -->
         <div style="position:absolute;left:25%;top:30%;background:#1976d2;color:white;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-weight:bold;box-shadow:0 3px 6px rgba(0,0,0,0.3);">A1</div>
         <div style="position:absolute;left:25%;top:60%;background:#1976d2;color:white;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-weight:bold;box-shadow:0 3px 6px rgba(0,0,0,0.3);">A2</div>
         <div style="position:absolute;left:40%;top:45%;background:#ff9800;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 3px 6px rgba(0,0,0,0.3);">⚽</div>
-        <!-- Flèches -->
         <div style="position:absolute;left:35%;top:45%;color:#c62828;font-size:24px;font-weight:bold;">➡️➡️➡️</div>
-        <!-- Défenseurs -->
         <div style="position:absolute;right:25%;top:30%;background:#c62828;color:white;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-weight:bold;box-shadow:0 3px 6px rgba(0,0,0,0.3);">D1</div>
         <div style="position:absolute;right:25%;top:60%;background:#c62828;color:white;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-weight:bold;box-shadow:0 3px 6px rgba(0,0,0,0.3);">D2</div>
-        <!-- Zone droite -->
         <div style="position:absolute;right:5%;top:50%;transform:translateY(-50%);background:#ffeb3b;border:2px solid #f57f17;border-radius:50%;width:50px;height:50px;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 8px rgba(0,0,0,0.2);">🥅</div>
     </div>
     <div style="display:flex;justify-content:center;gap:20px;margin-top:15px;flex-wrap:wrap;">
@@ -161,27 +186,22 @@ module.exports = async (req, res) => {
     </div>
 </div>`;
 
-            schema2HTML = `
+                schema2HTML = `
 <div style="background:linear-gradient(135deg,#e3f2fd,#fff);border:3px solid #1565c0;border-radius:15px;padding:20px;margin:15px 0;font-family:Arial,sans-serif;">
     <div style="text-align:center;font-weight:bold;color:#0d47a1;margin-bottom:15px;font-size:16px;">📐 JEU RÉDUIT - Situation de match (25m × 20m)</div>
     <div style="background:#90caf9;border:2px solid #1565c0;border-radius:10px;padding:20px;position:relative;min-height:220px;">
-        <!-- But gauche -->
         <div style="position:absolute;left:2%;top:40%;background:#4caf50;color:white;padding:10px 5px;border-radius:5px;font-size:12px;writing-mode:vertical-rl;">BUT</div>
-        <!-- Équipe bleue -->
         <div style="position:absolute;left:15%;top:20%;background:#1976d2;color:white;border-radius:50%;width:35px;height:35px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold;">1</div>
         <div style="position:absolute;left:15%;top:50%;background:#1976d2;color:white;border-radius:50%;width:35px;height:35px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold;">2</div>
         <div style="position:absolute;left:15%;top:75%;background:#1976d2;color:white;border-radius:50%;width:35px;height:35px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold;">3</div>
         <div style="position:absolute;left:35%;top:35%;background:#1976d2;color:white;border-radius:50%;width:35px;height:35px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold;">4</div>
         <div style="position:absolute;left:35%;top:60%;background:#1976d2;color:white;border-radius:50%;width:35px;height:35px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold;">5</div>
-        <!-- Ballon au centre -->
         <div style="position:absolute;left:48%;top:45%;background:#ff9800;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:16px;">⚽</div>
-        <!-- Équipe rouge -->
         <div style="position:absolute;right:35%;top:35%;background:#c62828;color:white;border-radius:50%;width:35px;height:35px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold;">1</div>
         <div style="position:absolute;right:35%;top:60%;background:#c62828;color:white;border-radius:50%;width:35px;height:35px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold;">2</div>
         <div style="position:absolute;right:15%;top:20%;background:#c62828;color:white;border-radius:50%;width:35px;height:35px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold;">3</div>
         <div style="position:absolute;right:15%;top:50%;background:#c62828;color:white;border-radius:50%;width:35px;height:35px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold;">4</div>
         <div style="position:absolute;right:15%;top:75%;background:#c62828;color:white;border-radius:50%;width:35px;height:35px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold;">5</div>
-        <!-- But droit -->
         <div style="position:absolute;right:2%;top:40%;background:#4caf50;color:white;padding:10px 5px;border-radius:5px;font-size:12px;writing-mode:vertical-rl;">BUT</div>
     </div>
     <div style="display:flex;justify-content:center;gap:20px;margin-top:15px;flex-wrap:wrap;">
@@ -189,13 +209,12 @@ module.exports = async (req, res) => {
         <span style="background:#c62828;color:white;padding:5px 15px;border-radius:20px;font-size:14px;">🔴 Équipe B</span>
     </div>
 </div>`;
-        } else if (typeActivite === 'athletisme') {
-            if (aps.includes('Course')) {
-                schema1HTML = `
+            } else if (typeActivite === 'athletisme') {
+                if (aps.includes('Course')) {
+                    schema1HTML = `
 <div style="background:linear-gradient(135deg,#fff3e0,#fff);border:3px solid #e65100;border-radius:15px;padding:20px;margin:15px 0;font-family:Arial,sans-serif;">
     <div style="text-align:center;font-weight:bold;color:#bf360c;margin-bottom:15px;font-size:16px;">📐 PISTE D'ATHLÉTISME - ${aps}</div>
     <div style="background:#ffcc80;border:2px solid #e65100;border-radius:10px;padding:20px;position:relative;min-height:150px;">
-        <!-- Couloirs -->
         <div style="display:flex;flex-direction:column;gap:8px;">
             <div style="display:flex;align-items:center;gap:10px;">
                 <div style="background:#4caf50;color:white;padding:8px 15px;border-radius:5px;font-weight:bold;">DÉPART</div>
@@ -220,8 +239,8 @@ module.exports = async (req, res) => {
         <span style="background:#ff9800;color:white;padding:5px 15px;border-radius:20px;font-size:14px;">➡️ Direction</span>
     </div>
 </div>`;
-            } else if (aps.includes('Saut')) {
-                schema1HTML = `
+                } else if (aps.includes('Saut')) {
+                    schema1HTML = `
 <div style="background:linear-gradient(135deg,#f3e5f5,#fff);border:3px solid #7b1fa2;border-radius:15px;padding:20px;margin:15px 0;font-family:Arial,sans-serif;">
     <div style="text-align:center;font-weight:bold;color:#4a148c;margin-bottom:15px;font-size:16px;">📐 AIRE DE ${aps.toUpperCase()}</div>
     <div style="background:#ce93d8;border:2px solid #7b1fa2;border-radius:10px;padding:20px;position:relative;min-height:120px;">
@@ -240,8 +259,8 @@ module.exports = async (req, res) => {
         <span style="background:#ffeb3b;color:#333;padding:5px 15px;border-radius:20px;font-size:14px;">🎯 Réception</span>
     </div>
 </div>`;
-            } else {
-                schema1HTML = `
+                } else {
+                    schema1HTML = `
 <div style="background:linear-gradient(135deg,#ffebee,#fff);border:3px solid #c62828;border-radius:15px;padding:20px;margin:15px 0;font-family:Arial,sans-serif;">
     <div style="text-align:center;font-weight:bold;color:#b71c1c;margin-bottom:15px;font-size:16px;">📐 AIRE DE ${aps.toUpperCase()}</div>
     <div style="background:#ef9a9a;border:2px solid #c62828;border-radius:10px;padding:20px;display:flex;align-items:center;justify-content:center;gap:30px;min-height:150px;">
@@ -260,14 +279,13 @@ module.exports = async (req, res) => {
         <span style="background:#4caf50;color:white;padding:5px 15px;border-radius:20px;font-size:14px;">🟢 Zone de chute</span>
     </div>
 </div>`;
-            }
-            schema2HTML = schema1HTML.replace('SITUATION 1', 'SITUATION 2');
-        } else if (typeActivite === 'gymnastique') {
-            schema1HTML = `
+                }
+                schema2HTML = schema1HTML;
+            } else if (typeActivite === 'gymnastique') {
+                schema1HTML = `
 <div style="background:linear-gradient(135deg,#fce4ec,#fff);border:3px solid #c2185b;border-radius:15px;padding:20px;margin:15px 0;font-family:Arial,sans-serif;">
     <div style="text-align:center;font-weight:bold;color:#880e4f;margin-bottom:15px;font-size:16px;">📐 PRATICABLE GYMNASTIQUE (12m × 12m)</div>
     <div style="background:#f8bbd9;border:2px solid #c2185b;border-radius:10px;padding:20px;position:relative;min-height:200px;">
-        <!-- Diagonale -->
         <div style="position:absolute;top:10%;left:5%;background:#4caf50;color:white;padding:8px 15px;border-radius:5px;font-weight:bold;">DÉPART</div>
         <div style="position:absolute;top:25%;left:15%;font-size:40px;">🤸</div>
         <div style="position:absolute;top:40%;left:35%;font-size:30px;color:#c2185b;">↘️</div>
@@ -275,7 +293,6 @@ module.exports = async (req, res) => {
         <div style="position:absolute;top:65%;left:65%;font-size:30px;color:#c2185b;">↘️</div>
         <div style="position:absolute;top:75%;left:75%;font-size:40px;">🤸</div>
         <div style="position:absolute;bottom:10%;right:5%;background:#f44336;color:white;padding:8px 15px;border-radius:5px;font-weight:bold;">FIN</div>
-        <!-- Pareur -->
         <div style="position:absolute;right:15%;top:30%;background:#ff9800;color:white;padding:10px;border-radius:50%;font-size:12px;text-align:center;">👤<br>Pareur</div>
     </div>
     <div style="display:flex;justify-content:center;gap:20px;margin-top:15px;flex-wrap:wrap;">
@@ -284,21 +301,21 @@ module.exports = async (req, res) => {
         <span style="background:#ff9800;color:white;padding:5px 15px;border-radius:20px;font-size:14px;">👤 Pareur</span>
     </div>
 </div>`;
-            schema2HTML = schema1HTML;
-        } else {
-            schema1HTML = `
+                schema2HTML = schema1HTML;
+            } else {
+                schema1HTML = `
 <div style="background:linear-gradient(135deg,#e0f7fa,#fff);border:3px solid #00838f;border-radius:15px;padding:20px;margin:15px 0;font-family:Arial,sans-serif;">
     <div style="text-align:center;font-weight:bold;color:#006064;margin-bottom:15px;font-size:16px;">📐 DISPOSITIF - ${aps}</div>
     <div style="background:#80deea;border:2px solid #00838f;border-radius:10px;padding:20px;text-align:center;min-height:150px;display:flex;align-items:center;justify-content:center;">
         <span style="font-size:18px;color:#00838f;">Schéma adapté à l'activité ${aps}</span>
     </div>
 </div>`;
-            schema2HTML = schema1HTML;
-        }
+                schema2HTML = schema1HTML;
+            }
 
-        // ==================== PROMPT AMÉLIORÉ ====================
+            // ==================== PROMPT AMÉLIORÉ ====================
 
-        const prompt = `Tu es un expert en EPS au Maroc. Génère une fiche de séance pour ${aps} niveau ${niveau}.
+            const prompt = `Tu es un expert en EPS au Maroc. Génère une fiche de séance pour ${aps} niveau ${niveau}.
 
 **INFORMATIONS:**
 - APS: ${aps}
@@ -383,75 +400,75 @@ ${typeActivite === 'gymnastique' ? '⚠️ PAS de matchs ou opposition. Utiliser
 <h3>🔹 Bilan (5 min)</h3>
 <p>Questions aux élèves, feedback, rangement matériel.</p>`;
 
-        // Appel API Groq
-        const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${GROQ_API_KEY}`
-            },
-            body: JSON.stringify({
-                model: 'llama-3.3-70b-versatile',
-                messages: [{ role: 'user', content: prompt }],
-                max_tokens: 6000,
-                temperature: 0.7
-            })
-        });
+            // Appel API Groq
+            const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${GROQ_API_KEY}`
+                },
+                body: JSON.stringify({
+                    model: 'llama-3.3-70b-versatile',
+                    messages: [{ role: 'user', content: prompt }],
+                    max_tokens: 6000,
+                    temperature: 0.7
+                })
+            });
 
-        if (!groqResponse.ok) {
-            const err = await groqResponse.json();
-            throw new Error(err.error?.message || 'Erreur Groq API');
-        }
+            if (!groqResponse.ok) {
+                const err = await groqResponse.json();
+                throw new Error(err.error?.message || 'Erreur Groq API');
+            }
 
-        const groqData = await groqResponse.json();
-        let ficheDetaillee = groqData.choices[0].message.content;
+            const groqData = await groqResponse.json();
+            let ficheDetaillee = groqData.choices[0].message.content;
 
-        // Insérer les schémas HTML colorés
-        ficheDetaillee = ficheDetaillee.replace(
-            /<h3>🎯 SITUATION 1:/,
-            schema1HTML + '<h3>🎯 SITUATION 1:'
-        );
-        ficheDetaillee = ficheDetaillee.replace(
-            /<h3>🎯 SITUATION 2:/,
-            schema2HTML + '<h3>🎯 SITUATION 2:'
-        );
+            // Insérer les schémas HTML colorés
+            ficheDetaillee = ficheDetaillee.replace(
+                /<h3>🎯 SITUATION 1:/,
+                schema1HTML + '<h3>🎯 SITUATION 1:'
+            );
+            ficheDetaillee = ficheDetaillee.replace(
+                /<h3>🎯 SITUATION 2:/,
+                schema2HTML + '<h3>🎯 SITUATION 2:'
+            );
 
-        // ==================== HTML WORD ====================
-        
-        let contenuIntro, contenuFonda, contenuFinale;
-        
-        if (typeActivite === 'athletisme') {
-            contenuIntro = `<b>• Prise en main (3'):</b> Appel, tenues, objectif, sécurité.<br><br>
+            // ==================== HTML WORD ====================
+            
+            let contenuIntro, contenuFonda, contenuFinale;
+            
+            if (typeActivite === 'athletisme') {
+                contenuIntro = `<b>• Prise en main (3'):</b> Appel, tenues, objectif, sécurité.<br><br>
 <b>• Échauffement général (7'):</b> Course légère, mobilisation articulaire, gammes athlétiques.<br><br>
 <b>• Échauffement spécifique (5'):</b> Exercices techniques adaptés à ${aps}.`;
-            contenuFonda = `<b>• SITUATION 1 (12'):</b> Exercice analytique par ateliers.<br>
+                contenuFonda = `<b>• SITUATION 1 (12'):</b> Exercice analytique par ateliers.<br>
 <i>Variantes:</i> ± distance, ± intensité.<br><br>
 <b>• SITUATION 2 (13'):</b> Exercice global avec mesure des performances.<br><br>
 <b>• SITUATION DE RÉFÉRENCE (10'):</b> ${situationRef.description}`;
-            contenuFinale = `<b>• Retour au calme (5'):</b> Marche, étirements.<br><br>
+                contenuFinale = `<b>• Retour au calme (5'):</b> Marche, étirements.<br><br>
 <b>• Bilan (5'):</b> Feedback, rangement.`;
-        } else if (typeActivite === 'gymnastique') {
-            contenuIntro = `<b>• Prise en main (3'):</b> Appel, tenues, sécurité (parade).<br><br>
+            } else if (typeActivite === 'gymnastique') {
+                contenuIntro = `<b>• Prise en main (3'):</b> Appel, tenues, sécurité (parade).<br><br>
 <b>• Échauffement général (7'):</b> Course, mobilisation, renforcement.<br><br>
 <b>• Échauffement spécifique (5'):</b> Exercices préparatoires aux éléments.`;
-            contenuFonda = `<b>• SITUATION 1 (12'):</b> Travail par ateliers en binômes.<br><br>
+                contenuFonda = `<b>• SITUATION 1 (12'):</b> Travail par ateliers en binômes.<br><br>
 <b>• SITUATION 2 (13'):</b> Construction de l'enchaînement.<br><br>
 <b>• SITUATION DE RÉFÉRENCE (10'):</b> ${situationRef.description}`;
-            contenuFinale = `<b>• Retour au calme (5'):</b> Étirements, souplesse.<br><br>
+                contenuFinale = `<b>• Retour au calme (5'):</b> Étirements, souplesse.<br><br>
 <b>• Bilan (5'):</b> Retour sur les enchaînements.`;
-        } else {
-            contenuIntro = `<b>• Prise en main (3'):</b> Appel, tenues, objectif, règles.<br><br>
+            } else {
+                contenuIntro = `<b>• Prise en main (3'):</b> Appel, tenues, objectif, règles.<br><br>
 <b>• Échauffement général (7'):</b> Course avec changements de direction, mobilisation, gammes.<br><br>
 <b>• Échauffement spécifique (5'):</b> Exercices avec ballon.`;
-            contenuFonda = `<b>• SITUATION 1 (12'):</b> Exercice analytique sur terrain réduit.<br>
+                contenuFonda = `<b>• SITUATION 1 (12'):</b> Exercice analytique sur terrain réduit.<br>
 <i>Variantes:</i> ± opposition, ± contraintes.<br><br>
 <b>• SITUATION 2 (13'):</b> Jeu réduit avec opposition réelle.<br><br>
 <b>• SITUATION DE RÉFÉRENCE (10'):</b> ${situationRef.description}`;
-            contenuFinale = `<b>• Retour au calme (5'):</b> Marche, étirements.<br><br>
+                contenuFinale = `<b>• Retour au calme (5'):</b> Marche, étirements.<br><br>
 <b>• Bilan (5'):</b> Questions, feedback, rangement.`;
-        }
+            }
 
-        const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word">
+            html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word">
 <head>
 <meta charset="UTF-8">
 <title>Fiche ${aps} - ${niveau}</title>
@@ -553,11 +570,27 @@ th,td{border:1.5pt solid #000;padding:4px 5px;vertical-align:top}
 </body>
 </html>`;
 
+            filename = `Fiche_${aps.replace(/\s+/g, '_')}_${niveau}_S${numeroSeance || 1}.doc`;
+            htmlDisplay = ficheDetaillee;
+
+            return res.status(200).json({
+                success: true,
+                ficheDetaillee,
+                html,
+                filename,
+                oti,
+                otc,
+                situationReference: situationRef,
+                groupeAPS,
+                opReference
+            });
+
         // ==================== PROJET DE CYCLE ====================
         } else if (typeDocument === 'projet') {
             const nb = parseInt(nombreSeances) || 10;
             const nivEleves = niveauEleves || 'moyen';
             const nivTxt = {'debutant':'Débutant','moyen':'Moyen','avance':'Avancé','elite':'Expert'}[nivEleves];
+            const sitRef = situationRef.description;
 
             const getObjExplicites = (aps, niv, n) => {
                 const base = {
@@ -621,8 +654,19 @@ ${rows}
 </table>
 <table style="border:none;margin-top:6px"><tr><td style="border:none;font-size:7pt"><b>Prof:</b> ${nomProf||'________'}</td><td style="border:none;text-align:right;font-size:7pt"><b>Établissement:</b> ${etablissement||'________'}</td></tr></table>
 </body></html>`;
-            htmlDisplay = html;
+            
             filename = `Projet_${aps.replace(/\s+/g,'_')}_${niveau}.doc`;
+
+            return res.status(200).json({
+                success: true,
+                html,
+                filename,
+                oti,
+                otc,
+                situationReference: situationRef,
+                groupeAPS,
+                opReference
+            });
 
         // ==================== GRILLE ====================
         } else if (typeDocument === 'grille') {
@@ -639,7 +683,6 @@ ${rows}
                 });
             });
 
-            // 4 colonnes NOTE avec couleurs cohérentes
             if (!isObs) {
                 headMain += `<th colspan="4" style="background:#c1272d;color:#fff;font-size:6pt;text-align:center;padding:2px">NOTE</th>`;
                 headSub += `<td style="background:#ffcdd2;font-size:5pt;text-align:center;padding:1px">Procéd.</td>`;
@@ -678,24 +721,32 @@ ${rows}
 </table>
 <p style="text-align:right;font-size:6pt;color:#666;margin-top:2px">Signature: ________</p>
 </body></html>`;
-            htmlDisplay = html;
+            
             filename = `Grille_${isObs?'Obs':'Eval'}_${aps.replace(/\s+/g,'_')}.doc`;
+
+            return res.status(200).json({
+                success: true,
+                html,
+                filename,
+                oti,
+                otc,
+                situationReference: situationRef,
+                groupeAPS,
+                opReference
+            });
         }
 
-        return res.status(200).json({
-            success: true,
-            ficheDetaillee,
-            html,
-            filename: `Fiche_${aps.replace(/\s+/g, '_')}_${niveau}_S${numeroSeance || 1}.doc`,
-            oti,
-            otc,
-            situationReference: situationRef,
-            groupeAPS,
-            opReference
+        // Si aucun type de document ne correspond
+        return res.status(400).json({ 
+            success: false, 
+            error: 'Type de document non reconnu' 
         });
 
     } catch (error) {
-        console.error('Erreur:', error);
-        return res.status(500).json({ success: false, error: error.message });
+        console.error('Erreur serveur:', error);
+        return res.status(500).json({ 
+            success: false, 
+            error: error.message || 'Erreur interne du serveur' 
+        });
     }
 };
