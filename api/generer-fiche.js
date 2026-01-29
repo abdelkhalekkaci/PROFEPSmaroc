@@ -129,16 +129,17 @@ module.exports = async (req, res) => {
         // SITUATIONS DE RÉFÉRENCE COMPLÈTES
         const SITUATIONS_REF = {
             'Handball': 'Match 7 contre 7 sur terrain réglementaire (40x20m) avec application des règles officielles et arbitrage',
-            'Football': 'Match 5 contre 5 sur terrain réduit (40x20m) avec 2 buts et application des règles simplifiées',
-            'Basketball': 'Match 5 contre 5 sur un terrain de basketball, application des règles officielles et arbitrage',
+            'Football': 'Match 7 contre 7 sur terrain réduit (50x30m) avec 2 buts et application des règles simplifiées',
+            'Basketball': 'Match 5 contre 5 sur demi-terrain avec panier, application des règles officielles et arbitrage',
             'Volleyball': 'Match 6 contre 6 sur terrain réglementaire (9x18m) avec filet à hauteur adaptée et rotation',
             'Tennis de table': 'Match en simple au meilleur des 3 sets de 11 points avec application des règles officielles',
             'Badminton': 'Match en simple au meilleur des 3 sets de 21 points avec application des règles officielles',
-            'Course de vitesse': isCollege ? 'Course chronométrée sur 80 mètres sur une piste avec départ au signal' : 'Course chronométrée sur 80 mètres Garcons et 60 métres filles sur une piste avec départ au signal',
+            'Course de vitesse': isCollege ? 'Course chronométrée sur 60 mètres en couloir individuel avec départ au signal' : 'Course chronométrée sur 80 mètres en couloir individuel avec départ au signal',
             'Saut en longueur': 'Concours de 3 essais mesurés avec course d\'élan libre, la meilleure performance est retenue',
             'Saut en hauteur': 'Concours à barres montantes avec 3 essais maximum par hauteur, technique libre',
             'Lancer de poids': 'Concours de 3 essais mesurés depuis le plateau de lancer, la meilleure performance est retenue',
-            'Course de durée': 'courir une distance de 1000m garçons et 600 fille en régulant son allure, le temps est chronométré'             'Gymnastique': 'Présentation d\'un enchaînement au sol de 1 minute minimum comprenant les éléments imposés du niveau'
+            'Course de durée': isCollege ? 'Course de 12 minutes en régulant son allure, la distance parcourue est mesurée' : 'Course de 12 minutes pour parcourir la plus grande distance en gérant son effort',
+            'Gymnastique': 'Présentation d\'un enchaînement au sol de 1 minute minimum comprenant les éléments imposés du niveau'
         };
 
         // Vocabulaire spécifique par APS
@@ -158,8 +159,8 @@ module.exports = async (req, res) => {
         };
 
         let groupeAPS = 'Activité';
-        if (['Handball', 'Football', 'Basketball'].includes(aps)) groupeAPS = 'Sports marquage et démarquage';
-        else if (['Tennis de table', 'Badminton', 'Volleyball'].includes(aps)) groupeAPS = 'Sports de renvoi';
+        if (['Handball', 'Football', 'Basketball', 'Volleyball'].includes(aps)) groupeAPS = 'Sports collectifs';
+        else if (['Tennis de table', 'Badminton'].includes(aps)) groupeAPS = 'Sports de renvoi';
         else if (['Course de vitesse', 'Saut en longueur', 'Saut en hauteur', 'Lancer de poids', 'Course de durée'].includes(aps)) groupeAPS = 'Athlétisme';
         else if (aps === 'Gymnastique') groupeAPS = 'Gymnastique';
 
