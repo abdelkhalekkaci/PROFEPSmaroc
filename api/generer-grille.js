@@ -91,6 +91,35 @@ module.exports = async (req, res) => {
         }
 
         // ==================== HTML DISPLAY (Site web) ====================
+        // Construire un aperçu réduit de la grille (premières lignes)
+        let previewRows = '';
+        for (let i = 1; i <= 5; i++) {
+            const bgColor = i % 2 === 0 ? '#fafafa' : '#ffffff';
+            previewRows += `<tr style="height:20px;">`;
+            previewRows += `<td style="text-align:center;font-size:8pt;background:${bgColor};border:1px solid #000;font-weight:bold;width:4%;">${i}</td>`;
+            previewRows += `<td colspan="2" style="background:${bgColor};border:1px solid #000;width:18%;"></td>`;
+            
+            // Cellules des critères
+            critObs.criteres.forEach(c => {
+                c.sous.forEach(() => {
+                    previewRows += `<td style="background:${bgColor};border:1px solid #000;"></td>`;
+                });
+            });
+            
+            // Cellules supplémentaires selon type
+            if (!isObs) {
+                previewRows += `<td style="background:${bgColor};border:1px solid #000;"></td>`.repeat(4);
+            } else {
+                previewRows += `<td style="background:${bgColor};border:1px solid #000;"></td>`;
+            }
+            previewRows += '</tr>';
+        }
+        
+        // Ligne indicatrice pour les lignes restantes
+        previewRows += `<tr style="height:20px;">`;
+        previewRows += `<td colspan="${3 + colCount + (isObs ? 1 : 4)}" style="text-align:center;font-size:8pt;background:#f5f5f5;border:1px solid #000;color:#666;">... ${35 - 5} lignes supplémentaires ...</td>`;
+        previewRows += '</tr>';
+        
         const htmlDisplay = `
 <div style="font-family:'Segoe UI',Arial,sans-serif;max-width:900px;margin:0 auto;">
     <!-- EN-TÊTE -->
@@ -104,9 +133,25 @@ module.exports = async (req, res) => {
         </div>
     </div>
 
+    <!-- TABLEAU DE LA GRILLE (Aperçu) -->
+    <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:18px 22px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);overflow-x:auto;">
+        <h3 style="color:#006233;margin:0 0 15px 0;font-size:1rem;">📊 Aperçu de la grille (5 premières lignes sur 35)</h3>
+        <table style="width:100%;border-collapse:collapse;font-size:8pt;">
+            <tr>
+                <th rowspan="2" style="background:#006233;color:#fff;width:4%;font-size:7pt;border:1px solid #000;text-align:center;font-weight:bold;">N°</th>
+                <th rowspan="2" colspan="2" style="background:#006233;color:#fff;width:18%;font-size:7pt;border:1px solid #000;text-align:center;font-weight:bold;">Nom et Prénom</th>
+                ${headMain}
+            </tr>
+            <tr>
+                ${headSub}
+            </tr>
+            ${previewRows}
+        </table>
+    </div>
+
     <!-- STRUCTURE DE LA GRILLE -->
     <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:18px 22px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-        <h3 style="color:#006233;margin:0 0 15px 0;font-size:1rem;">📊 Structure de la grille</h3>
+        <h3 style="color:#006233;margin:0 0 15px 0;font-size:1rem;">📋 Structure des critères</h3>
         <div style="display:flex;flex-wrap:wrap;gap:12px;">
             ${critObs.criteres.map(c => `
                 <div style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:1px solid #81c784;border-radius:8px;padding:10px 15px;min-width:120px;">
