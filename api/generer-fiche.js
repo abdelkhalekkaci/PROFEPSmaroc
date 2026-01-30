@@ -49,6 +49,11 @@ DISTINCTIONS PÉDAGOGIQUES IMPORTANTES:
 - CRITÈRES DE RÉALISATION = COMMENT bien faire (qualité technique du geste)
 - CRITÈRES DE RÉUSSITE = EST-CE RÉUSSI ? (indicateurs mesurables, chiffrés)
 
+🛑 IMPORTANT : FORMAT DE RÉPONSE STRICT 🛑
+- N'utilise PAS de markdown (gras **, titres ##) pour les CLÉS.
+- Écris CHAQUE CLÉ exactement comme demandé, suivie de deux points.
+- Ne mets pas de texte introductif ou conclusif.
+
 GÉNÈRE CE CONTENU 100% SPÉCIFIQUE à ${aps}:
 
 ECHAUFFEMENT_SPECIFIQUE: [3 exercices spécifiques à ${aps} avec durées, format: exercice1 (durée) | exercice2 (durée) | exercice3 (durée)]
@@ -57,7 +62,7 @@ SITUATION1_TITRE: [titre court et percutant lié à l'objectif]
 SITUATION1_BUT: [ce que l'élève doit FAIRE - UNE phrase d'action concrète et mesurable]
 SITUATION1_ORGANISATION: [nombre joueurs, dimensions terrain en mètres, matériel nécessaire]
 SITUATION1_DEROULEMENT: [4-5 phrases décrivant précisément le déroulement de la situation]
-SITUATION1_CONSIGNES: [4 consignes techniques spécifiques et précises, une par ligne]
+SITUATION1_CONSIGNES: [4 consignes techniques spécifiques et précises, une par ligne, sans astérisques]
 SITUATION1_VARIANTES: [Simplifier: 1-2 façons | Complexifier: 1-2 façons]
 
 SITUATION2_TITRE: [titre - situation plus proche du jeu réel ou de la performance]
@@ -85,11 +90,19 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
         const data = await groqResp.json();
         const contenu = data.choices?.[0]?.message?.content || '';
 
-        // Fonction d'extraction
+        // Fonction d'extraction robuste (tolère les ** et formats variés)
         const extract = (key) => {
-            const regex = new RegExp(key + ':?\\s*([\\s\\S]*?)(?=\\n[A-Z][A-Z0-9_]+:|$)', 'i');
+            // Cherche la clé, avec ou sans **, suivie de :
+            // Capture tout jusqu'à la prochaine clé (reconnue par saut de ligne + MAJUSCULES + :)
+            const regex = new RegExp(`(?:\\*\\*|##)?\\s*${key}(?:\\*\\*|##)?\\s*:?\\s*([\\s\\S]*?)(?=\\n\\s*(?:\\*\\*|##)?\\s*[A-Z][A-Z0-9_]+(?:\\*\\*|##)?\\s*:|$)`, 'i');
             const match = contenu.match(regex);
-            return match ? match[1].trim().replace(/^\[|\]$/g, '').trim() : '';
+            if (!match) return '';
+
+            // Nettoyage du contenu capturé (enlève les **, les sauts de ligne excessifs)
+            return match[1]
+                .replace(/^\*\*/, '')
+                .replace(/\*\*$/, '')
+                .trim();
         };
 
         // Extraction des données
