@@ -57,6 +57,7 @@ DISTINCTIONS PÉDAGOGIQUES IMPORTANTES:
 GÉNÈRE CE CONTENU 100% SPÉCIFIQUE à ${aps}:
 
 ECHAUFFEMENT_SPECIFIQUE: [3 exercices spécifiques à ${aps} avec durées, format: exercice1 (durée) | exercice2 (durée) | exercice3 (durée)]
+BUT_PHASE_FONDAMENTALE: [1-2 phrases complètes décrivant le but global de la partie principale en lien avec l'objectif "${objectif}"]
 
 SITUATION1_TITRE: [titre court et percutant lié à l'objectif]
 SITUATION1_BUT: [ce que l'élève doit FAIRE - UNE phrase d'action concrète et mesurable]
@@ -107,6 +108,7 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
 
         // Extraction des données
         let echaufSpec = extract('ECHAUFFEMENT_SPECIFIQUE');
+        let butFonda = extract('BUT_PHASE_FONDAMENTALE');
         let s1Titre = extract('SITUATION1_TITRE');
         let s1But = extract('SITUATION1_BUT');
         let s1Orga = extract('SITUATION1_ORGANISATION');
@@ -125,6 +127,7 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
         // Appliquer fallbacks si nécessaire
         const fb = FALLBACKS[aps] || FALLBACKS['Handball'];
         if (!echaufSpec || echaufSpec.length < 20) echaufSpec = fb.echauf;
+        if (!butFonda || butFonda.length < 10) butFonda = `Atteindre l'objectif: ${objectif}`;
         if (!s1Titre || s1Titre.length < 5) s1Titre = fb.s1t;
         if (!s1But || s1But.length < 10) s1But = fb.s1b;
         if (!s1Orga || s1Orga.length < 20) s1Orga = fb.s1o;
@@ -139,9 +142,6 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
         if (!s2Variantes || s2Variantes.length < 20) s2Variantes = fb.s2v;
         if (!critReal || critReal.length < 50) critReal = fb.cr;
         if (!critReuss || critReuss.length < 50) critReuss = fb.cs;
-
-        // BUT de la partie fondamentale (lié à l'objectif)
-        const butFonda = `Atteindre l'objectif: ${objectif}`;
 
         // Schémas SVG
         const schema1 = getSchema(aps, 1);
