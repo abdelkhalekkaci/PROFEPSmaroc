@@ -1104,18 +1104,96 @@
         });
 
         // Download PDF
-        document.getElementById('downloadPdf').addEventListener('click', () => {
+        document.getElementById('downloadPdf').addEventListener('click', async () => {
             if (!currentHtml) return;
 
-            // Extraire le contenu du body et les styles pour éviter les balises html/body imbriquées
-            const bodyContentMatch = currentHtml.match(/<body[^>]*>([\s\S]*)<\/body>/i);
-            const styleContentMatch = currentHtml.match(/<style[^>]*>([\s\S]*)<\/style>/i);
+            const btn = document.getElementById('downloadPdf');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '⏳ Génération...';
+            btn.disabled = true;
 
-            const bodyContent = bodyContentMatch ? bodyContentMatch[1] : currentHtml;
-            const styleContent = styleContentMatch ? styleContentMatch[1] : '';
+            try {
+                // Vérifier que html2pdf est chargé
+                if (typeof html2pdf === 'undefined') {
+                    alert('Erreur: La bibliothèque html2pdf n\'est pas chargée. Veuillez rafraîchir la page.');
+                    return;
+                }
 
-            const tempDiv = document.createElement('div');
-            // On injecte le style et le contenu
+                // Extraire le contenu du body et les styles
+                const bodyContentMatch = currentHtml.match(/<body[^>]*>([\s\S]*)<\/body>/i);
+                const styleContentMatch = currentHtml.match(/<style[^>]*>([\s\S]*)<\/style>/gi);
+
+                let bodyContent = bodyContentMatch ? bodyContentMatch[1] : currentHtml;
+                let styleContent = '';
+                
+                if (styleContentMatch) {
+                    styleContentMatch.forEach(match => {
+                        const styleExtract = match.match(/<style[^>]*>([\s\S]*)<\/style>/i);
+                        if (styleExtract) {
+                            styleContent += styleExtract[1];
+                        }
+                    });
+                }
+
+                // Créer un conteneur temporaire avec le HTML complet
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = `
+                    <style>
+                        ${styleContent}
+                        * { box-sizing: border-box; }
+                        table { border-collapse: collapse; }
+                        th, td { border: 1px solid #000; }
+                    </style>
+                    <div class="pdf-content" style="width:100%;background:white;">
+                        ${bodyContent}
+                    </div>
+                `;
+
+                // Positionnement pour le rendu
+                tempDiv.style.position = 'fixed';
+                tempDiv.style.left = '-9999px';
+                tempDiv.style.top = '0';
+                tempDiv.style.width = currentType === 'grille' ? '210mm' : '297mm';
+                tempDiv.style.background = 'white';
+                tempDiv.style.zIndex = '-9999';
+
+                document.body.appendChild(tempDiv);
+
+                // Attendre que le contenu soit rendu
+                await new Promise(resolve => setTimeout(resolve, 100));
+
+                const opt = {
+                    margin: [5, 5, 5, 5],
+                    filename: currentFilename.replace('.doc', '.pdf'),
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { 
+                        scale: 2, 
+                        useCORS: true, 
+                        logging: false,
+                        letterRendering: true,
+                        windowWidth: currentType === 'grille' ? 794 : 1123
+                    },
+                    jsPDF: { 
+                        unit: 'mm', 
+                        format: 'a4', 
+                        orientation: currentType === 'grille' ? 'portrait' : 'landscape',
+                        compress: true
+                    }
+                };
+
+                await html2pdf().set(opt).from(tempDiv).save();
+                
+                // Nettoyage
+                document.body.removeChild(tempDiv);
+                
+            } catch (err) {
+                console.error('Erreur PDF:', err);
+                alert('Erreur lors de la génération du PDF: ' + err.message);
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });enu
             tempDiv.innerHTML = `<style>${styleContent}</style>${bodyContent}`;
 
             // Positionnement fixe hors écran mais "visible" pour le moteur de rendu
