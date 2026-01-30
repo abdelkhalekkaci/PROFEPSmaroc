@@ -86,11 +86,119 @@ const FALLBACKS = {
 };
 
 const SCHEMAS = {
-    'Handball': { 1: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;"><rect x="5" y="5" width="190" height="110" fill="#90EE90" stroke="#228B22" stroke-width="2" rx="5"/><rect x="5" y="45" width="25" height="30" fill="none" stroke="#228B22" stroke-width="2"/><rect x="170" y="45" width="25" height="30" fill="none" stroke="#228B22" stroke-width="2"/><circle cx="60" cy="40" r="8" fill="#c1272d"/><text x="60" y="44" text-anchor="middle" fill="white" font-size="10" font-weight="bold">A</text><circle cx="60" cy="80" r="8" fill="#c1272d"/><text x="60" y="84" text-anchor="middle" fill="white" font-size="10" font-weight="bold">A</text><circle cx="100" cy="60" r="8" fill="#c1272d"/><text x="100" y="64" text-anchor="middle" fill="white" font-size="10" font-weight="bold">A</text><circle cx="80" cy="60" r="8" fill="#c1272d"/><text x="80" y="64" text-anchor="middle" fill="white" font-size="10" font-weight="bold">A</text><circle cx="130" cy="50" r="8" fill="#1565c0"/><text x="130" y="54" text-anchor="middle" fill="white" font-size="10" font-weight="bold">D</text><circle cx="130" cy="70" r="8" fill="#1565c0"/><text x="130" y="74" text-anchor="middle" fill="white" font-size="10" font-weight="bold">D</text><path d="M68 40 L92 58" stroke="#333" stroke-width="2" stroke-dasharray="5,3"/><text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">4 Att vs 2 Déf</text></svg>`, 2: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;"><rect x="5" y="5" width="190" height="110" fill="#90EE90" stroke="#228B22" stroke-width="2" rx="5"/><rect x="5" y="45" width="25" height="30" fill="none" stroke="#228B22" stroke-width="2"/><rect x="170" y="45" width="25" height="30" fill="none" stroke="#228B22" stroke-width="2"/><circle cx="50" cy="35" r="7" fill="#c1272d"/><circle cx="50" cy="60" r="7" fill="#c1272d"/><circle cx="50" cy="85" r="7" fill="#c1272d"/><circle cx="80" cy="48" r="7" fill="#c1272d"/><circle cx="80" cy="72" r="7" fill="#c1272d"/><circle cx="120" cy="35" r="7" fill="#1565c0"/><circle cx="120" cy="60" r="7" fill="#1565c0"/><circle cx="120" cy="85" r="7" fill="#1565c0"/><circle cx="150" cy="48" r="7" fill="#1565c0"/><circle cx="150" cy="72" r="7" fill="#1565c0"/><text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">Match 5 vs 5</text></svg>` },
-    'Football': { 1: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;"><rect x="5" y="5" width="190" height="110" fill="#90EE90" stroke="#228B22" stroke-width="2" rx="5"/><rect x="5" y="40" width="20" height="40" fill="none" stroke="#228B22" stroke-width="2"/><rect x="175" y="40" width="20" height="40" fill="none" stroke="#228B22" stroke-width="2"/><circle cx="55" cy="40" r="8" fill="#c1272d"/><circle cx="55" cy="80" r="8" fill="#c1272d"/><circle cx="85" cy="50" r="8" fill="#c1272d"/><circle cx="85" cy="70" r="8" fill="#c1272d"/><circle cx="130" cy="55" r="8" fill="#1565c0"/><circle cx="130" cy="75" r="8" fill="#1565c0"/><text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">4 vs 2 Progression</text></svg>`, 2: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;"><rect x="5" y="5" width="190" height="110" fill="#90EE90" stroke="#228B22" stroke-width="2" rx="5"/><rect x="5" y="40" width="20" height="40" fill="none" stroke="#228B22" stroke-width="2"/><rect x="175" y="40" width="20" height="40" fill="none" stroke="#228B22" stroke-width="2"/><circle cx="40" cy="60" r="6" fill="#c1272d"/><circle cx="70" cy="35" r="6" fill="#c1272d"/><circle cx="70" cy="85" r="6" fill="#c1272d"/><circle cx="90" cy="50" r="6" fill="#c1272d"/><circle cx="90" cy="70" r="6" fill="#c1272d"/><circle cx="160" cy="60" r="6" fill="#1565c0"/><circle cx="130" cy="35" r="6" fill="#1565c0"/><circle cx="130" cy="85" r="6" fill="#1565c0"/><circle cx="110" cy="50" r="6" fill="#1565c0"/><circle cx="110" cy="70" r="6" fill="#1565c0"/><text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">Match 5 vs 5</text></svg>` },
-    'Basketball': { 1: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;"><rect x="5" y="5" width="190" height="110" fill="#DEB887" stroke="#8B4513" stroke-width="2" rx="5"/><circle cx="175" cy="60" r="20" fill="none" stroke="#8B4513" stroke-width="2"/><circle cx="60" cy="40" r="8" fill="#c1272d"/><circle cx="60" cy="80" r="8" fill="#c1272d"/><circle cx="90" cy="60" r="8" fill="#c1272d"/><circle cx="130" cy="50" r="8" fill="#1565c0"/><circle cx="130" cy="70" r="8" fill="#1565c0"/><text x="95" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">3 vs 2 Passe et va</text></svg>`, 2: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;"><rect x="5" y="5" width="190" height="110" fill="#DEB887" stroke="#8B4513" stroke-width="2" rx="5"/><circle cx="175" cy="60" r="20" fill="none" stroke="#8B4513" stroke-width="2"/><circle cx="50" cy="40" r="6" fill="#c1272d"/><circle cx="50" cy="80" r="6" fill="#c1272d"/><circle cx="80" cy="50" r="6" fill="#c1272d"/><circle cx="80" cy="70" r="6" fill="#c1272d"/><circle cx="120" cy="40" r="6" fill="#1565c0"/><circle cx="120" cy="80" r="6" fill="#1565c0"/><circle cx="140" cy="50" r="6" fill="#1565c0"/><circle cx="140" cy="70" r="6" fill="#1565c0"/><text x="95" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">4 vs 4 Match</text></svg>` },
-    'Volleyball': { 1: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;"><rect x="5" y="5" width="190" height="110" fill="#F0E68C" stroke="#DAA520" stroke-width="2" rx="5"/><line x1="100" y1="5" x2="100" y2="115" stroke="#333" stroke-width="3"/><circle cx="50" cy="40" r="8" fill="#c1272d"/><text x="50" y="44" text-anchor="middle" fill="white" font-size="8" font-weight="bold">R</text><circle cx="50" cy="80" r="8" fill="#c1272d"/><text x="50" y="84" text-anchor="middle" fill="white" font-size="8" font-weight="bold">P</text><circle cx="75" cy="60" r="8" fill="#c1272d"/><text x="75" y="64" text-anchor="middle" fill="white" font-size="8" font-weight="bold">A</text><circle cx="150" cy="40" r="8" fill="#1565c0"/><circle cx="150" cy="80" r="8" fill="#1565c0"/><circle cx="125" cy="60" r="8" fill="#1565c0"/><text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">3 vs 3 Construction</text></svg>`, 2: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;"><rect x="5" y="5" width="190" height="110" fill="#F0E68C" stroke="#DAA520" stroke-width="2" rx="5"/><line x1="100" y1="5" x2="100" y2="115" stroke="#333" stroke-width="3"/><circle cx="35" cy="30" r="6" fill="#c1272d"/><circle cx="65" cy="30" r="6" fill="#c1272d"/><circle cx="35" cy="60" r="6" fill="#c1272d"/><circle cx="65" cy="60" r="6" fill="#c1272d"/><circle cx="135" cy="30" r="6" fill="#1565c0"/><circle cx="165" cy="30" r="6" fill="#1565c0"/><circle cx="135" cy="60" r="6" fill="#1565c0"/><circle cx="165" cy="60" r="6" fill="#1565c0"/><text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">4 vs 4 Match</text></svg>` },
-    'default': { 1: `<svg viewBox="0 0 200 100" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;"><rect x="5" y="5" width="190" height="90" fill="#E8E8E8" stroke="#666" stroke-width="2" rx="8"/><text x="100" y="55" text-anchor="middle" fill="#666" font-size="11">Zone de travail - Situation 1</text></svg>`, 2: `<svg viewBox="0 0 200 100" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;"><rect x="5" y="5" width="190" height="90" fill="#E8E8E8" stroke="#666" stroke-width="2" rx="8"/><text x="100" y="55" text-anchor="middle" fill="#666" font-size="11">Zone de travail - Situation 2</text></svg>` }
+    'Handball': {
+        1: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;background:#e8f5e9;border:2px solid #2e7d32;border-radius:4px;">
+            <rect x="10" y="10" width="180" height="100" fill="none" stroke="#2e7d32" stroke-width="2"/>
+            <path d="M10,45 L35,45 L35,75 L10,75" fill="none" stroke="#2e7d32" stroke-width="2"/>
+            <path d="M190,45 L165,45 L165,75 L190,75" fill="none" stroke="#2e7d32" stroke-width="2"/>
+            <path d="M35,10 Q60,60 35,110" fill="none" stroke="#2e7d32" stroke-width="2" stroke-dasharray="4"/>
+            <path d="M165,10 Q140,60 165,110" fill="none" stroke="#2e7d32" stroke-width="2" stroke-dasharray="4"/>
+            <circle cx="60" cy="40" r="6" fill="#c1272d"/><text x="60" y="44" text-anchor="middle" fill="white" font-size="8" font-weight="bold">A</text>
+            <circle cx="60" cy="80" r="6" fill="#c1272d"/><text x="60" y="84" text-anchor="middle" fill="white" font-size="8" font-weight="bold">A</text>
+            <circle cx="130" cy="50" r="6" fill="#1565c0"/><text x="130" y="54" text-anchor="middle" fill="white" font-size="8" font-weight="bold">D</text>
+            <circle cx="130" cy="70" r="6" fill="#1565c0"/><text x="130" y="74" text-anchor="middle" fill="white" font-size="8" font-weight="bold">D</text>
+            <text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">Situation 1</text>
+        </svg>`,
+        2: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;background:#e8f5e9;border:2px solid #2e7d32;border-radius:4px;">
+            <rect x="10" y="10" width="180" height="100" fill="none" stroke="#2e7d32" stroke-width="2"/>
+            <line x1="100" y1="10" x2="100" y2="110" stroke="#2e7d32" stroke-width="2"/>
+            <circle cx="100" cy="60" r="15" fill="none" stroke="#2e7d32" stroke-width="2"/>
+            <circle cx="50" cy="40" r="5" fill="#c1272d"/>
+            <circle cx="50" cy="80" r="5" fill="#c1272d"/>
+            <circle cx="80" cy="60" r="5" fill="#c1272d"/>
+            <circle cx="150" cy="40" r="5" fill="#1565c0"/>
+            <circle cx="150" cy="80" r="5" fill="#1565c0"/>
+            <circle cx="120" cy="60" r="5" fill="#1565c0"/>
+            <text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">Situation 2</text>
+        </svg>`
+    },
+    'Football': {
+        1: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;background:#81c784;border:2px solid #1b5e20;border-radius:4px;">
+            <rect x="10" y="10" width="180" height="100" fill="none" stroke="#white" stroke-width="2"/>
+            <rect x="10" y="35" width="25" height="50" fill="none" stroke="white" stroke-width="2"/>
+            <rect x="165" y="35" width="25" height="50" fill="none" stroke="white" stroke-width="2"/>
+            <line x1="100" y1="10" x2="100" y2="110" stroke="white" stroke-width="2"/>
+            <circle cx="100" cy="60" r="15" fill="none" stroke="white" stroke-width="2"/>
+            <circle cx="60" cy="40" r="6" fill="#c1272d"/>
+            <circle cx="60" cy="80" r="6" fill="#c1272d"/>
+            <circle cx="80" cy="60" r="6" fill="#c1272d"/>
+            <circle cx="140" cy="60" r="6" fill="#1565c0"/>
+            <circle cx="120" cy="40" r="6" fill="#1565c0"/>
+            <text x="100" y="115" text-anchor="middle" fill="#white" font-size="9" font-weight="bold">Situation 1</text>
+        </svg>`,
+        2: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;background:#81c784;border:2px solid #1b5e20;border-radius:4px;">
+            <rect x="10" y="10" width="180" height="100" fill="none" stroke="white" stroke-width="2"/>
+            <line x1="100" y1="10" x2="100" y2="110" stroke="white" stroke-width="2"/>
+            <circle cx="100" cy="60" r="15" fill="none" stroke="white" stroke-width="2"/>
+            <circle cx="40" cy="30" r="5" fill="#c1272d"/>
+            <circle cx="40" cy="90" r="5" fill="#c1272d"/>
+            <circle cx="70" cy="60" r="5" fill="#c1272d"/>
+            <circle cx="160" cy="30" r="5" fill="#1565c0"/>
+            <circle cx="160" cy="90" r="5" fill="#1565c0"/>
+            <circle cx="130" cy="60" r="5" fill="#1565c0"/>
+            <text x="100" y="115" text-anchor="middle" fill="#white" font-size="9" font-weight="bold">Situation 2</text>
+        </svg>`
+    },
+    'Basketball': {
+        1: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;background:#ffcc80;border:2px solid #e65100;border-radius:4px;">
+            <rect x="10" y="10" width="180" height="100" fill="none" stroke="#e65100" stroke-width="2"/>
+            <line x1="100" y1="10" x2="100" y2="110" stroke="#e65100" stroke-width="2"/>
+            <path d="M10,40 L40,40 L40,80 L10,80" fill="none" stroke="#e65100" stroke-width="2"/>
+            <path d="M10,25 Q60,60 10,95" fill="none" stroke="#e65100" stroke-width="2"/>
+            <path d="M190,40 L160,40 L160,80 L190,80" fill="none" stroke="#e65100" stroke-width="2"/>
+            <path d="M190,25 Q140,60 190,95" fill="none" stroke="#e65100" stroke-width="2"/>
+            <circle cx="30" cy="50" r="6" fill="#c1272d"/>
+            <circle cx="30" cy="70" r="6" fill="#c1272d"/>
+            <circle cx="50" cy="60" r="6" fill="#c1272d"/>
+            <circle cx="150" cy="50" r="6" fill="#1565c0"/>
+            <circle cx="150" cy="70" r="6" fill="#1565c0"/>
+            <text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">Situation 1</text>
+        </svg>`,
+        2: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;background:#ffcc80;border:2px solid #e65100;border-radius:4px;">
+            <rect x="10" y="10" width="180" height="100" fill="none" stroke="#e65100" stroke-width="2"/>
+            <line x1="100" y1="10" x2="100" y2="110" stroke="#e65100" stroke-width="2"/>
+            <circle cx="100" cy="60" r="15" fill="none" stroke="#e65100" stroke-width="2"/>
+            <circle cx="40" cy="40" r="5" fill="#c1272d"/>
+            <circle cx="40" cy="80" r="5" fill="#c1272d"/>
+            <circle cx="70" cy="60" r="5" fill="#c1272d"/>
+            <circle cx="160" cy="40" r="5" fill="#1565c0"/>
+            <circle cx="160" cy="80" r="5" fill="#1565c0"/>
+            <circle cx="130" cy="60" r="5" fill="#1565c0"/>
+            <text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">Situation 2</text>
+        </svg>`
+    },
+    'Volleyball': {
+        1: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;background:#fff9c4;border:2px solid #fbc02d;border-radius:4px;">
+            <rect x="20" y="20" width="160" height="80" fill="none" stroke="#fbc02d" stroke-width="2"/>
+            <line x1="100" y1="10" x2="100" y2="110" stroke="#333" stroke-width="3"/>
+            <line x1="60" y1="20" x2="60" y2="100" stroke="#fbc02d" stroke-width="1" stroke-dasharray="4"/>
+            <line x1="140" y1="20" x2="140" y2="100" stroke="#fbc02d" stroke-width="1" stroke-dasharray="4"/>
+            <circle cx="50" cy="40" r="6" fill="#c1272d"/>
+            <circle cx="50" cy="60" r="6" fill="#c1272d"/>
+            <circle cx="50" cy="80" r="6" fill="#c1272d"/>
+            <circle cx="150" cy="40" r="6" fill="#1565c0"/>
+            <circle cx="150" cy="60" r="6" fill="#1565c0"/>
+            <circle cx="150" cy="80" r="6" fill="#1565c0"/>
+            <text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">Situation 1</text>
+        </svg>`,
+        2: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;background:#fff9c4;border:2px solid #fbc02d;border-radius:4px;">
+            <rect x="20" y="20" width="160" height="80" fill="none" stroke="#fbc02d" stroke-width="2"/>
+            <line x1="100" y1="10" x2="100" y2="110" stroke="#333" stroke-width="3"/>
+            <circle cx="40" cy="40" r="5" fill="#c1272d"/>
+            <circle cx="40" cy="80" r="5" fill="#c1272d"/>
+            <circle cx="70" cy="60" r="5" fill="#c1272d"/>
+            <circle cx="160" cy="40" r="5" fill="#1565c0"/>
+            <circle cx="160" cy="80" r="5" fill="#1565c0"/>
+            <circle cx="130" cy="60" r="5" fill="#1565c0"/>
+            <text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">Situation 2</text>
+        </svg>`
+    },
+    'default': {
+        1: `<svg viewBox="0 0 200 100" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;background:#f5f5f5;border:2px solid #9e9e9e;border-radius:4px;">
+            <rect x="10" y="10" width="180" height="90" fill="#E8E8E8" stroke="#666" stroke-width="2" rx="8"/><text x="100" y="55" text-anchor="middle" fill="#666" font-size="11">Zone de travail - Situation 1</text></svg>`,
+        2: `<svg viewBox="0 0 200 100" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;background:#f5f5f5;border:2px solid #9e9e9e;border-radius:4px;">
+            <rect x="10" y="10" width="180" height="90" fill="#E8E8E8" stroke="#666" stroke-width="2" rx="8"/><text x="100" y="55" text-anchor="middle" fill="#666" font-size="11">Zone de travail - Situation 2</text></svg>`
+    }
 };
 
 const getSchema = (aps, numSit) => SCHEMAS[aps]?.[numSit] || SCHEMAS['default'][numSit];
