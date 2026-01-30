@@ -1193,28 +1193,6 @@
                 btn.innerHTML = originalText;
                 btn.disabled = false;
             }
-        });enu
-            tempDiv.innerHTML = `<style>${styleContent}</style>${bodyContent}`;
-
-            // Positionnement fixe hors écran mais "visible" pour le moteur de rendu
-            tempDiv.style.position = 'fixed';
-            tempDiv.style.left = '0';
-            tempDiv.style.top = '0';
-            tempDiv.style.width = currentType === 'grille' ? '210mm' : '297mm'; // Largeur forcée selon le format
-            tempDiv.style.zIndex = '-9999';
-            tempDiv.style.background = 'white';
-
-            document.body.appendChild(tempDiv);
-
-            const opt = {
-                margin: 5,
-                filename: currentFilename.replace('.doc', '.pdf'),
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true, logging: false, windowWidth: currentType === 'grille' ? 794 : 1123 }, // A4 px at 96dpi
-                jsPDF: { unit: 'mm', format: 'a4', orientation: currentType === 'grille' ? 'portrait' : 'landscape' }
-            };
-
-            html2pdf().set(opt).from(tempDiv).save().then(() => document.body.removeChild(tempDiv));
         });
 
         // Auto-fill from localStorage
