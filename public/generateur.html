@@ -1115,80 +1115,61 @@
             try {
                 // Vérifier que html2pdf est chargé
                 if (typeof html2pdf === 'undefined') {
-                    alert('Erreur: La bibliothèque html2pdf n\'est pas chargée. Veuillez rafraîchir la page.');
+                    alert('Erreur: La bibliothèque html2pdf n\'est pas chargée.');
                     return;
                 }
 
-                // Extraire le contenu du body et les styles
-                const bodyContentMatch = currentHtml.match(/<body[^>]*>([\s\S]*)<\/body>/i);
-                const styleContentMatch = currentHtml.match(/<style[^>]*>([\s\S]*)<\/style>/gi);
-
-                let bodyContent = bodyContentMatch ? bodyContentMatch[1] : currentHtml;
-                let styleContent = '';
-                
-                if (styleContentMatch) {
-                    styleContentMatch.forEach(match => {
-                        const styleExtract = match.match(/<style[^>]*>([\s\S]*)<\/style>/i);
-                        if (styleExtract) {
-                            styleContent += styleExtract[1];
-                        }
-                    });
-                }
-
-                // Créer un conteneur temporaire avec le HTML complet
+                // Créer un élément temporaire visible mais hors écran
                 const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = `
-                    <style>
-                        ${styleContent}
-                        * { box-sizing: border-box; }
-                        table { border-collapse: collapse; }
-                        th, td { border: 1px solid #000; }
-                    </style>
-                    <div class="pdf-content" style="width:100%;background:white;">
-                        ${bodyContent}
-                    </div>
+                tempDiv.innerHTML = currentHtml;
+                
+                // Styles pour assurer la visibilité
+                tempDiv.style.cssText = `
+                    position: fixed;
+                    left: 0;
+                    top: 0;
+                    width: ${currentType === 'grille' ? '210mm' : '297mm'};
+                    background: white;
+                    z-index: -1000;
+                    visibility: visible;
+                    opacity: 1;
                 `;
-
-                // Positionnement pour le rendu
-                tempDiv.style.position = 'fixed';
-                tempDiv.style.left = '-9999px';
-                tempDiv.style.top = '0';
-                tempDiv.style.width = currentType === 'grille' ? '210mm' : '297mm';
-                tempDiv.style.background = 'white';
-                tempDiv.style.zIndex = '-9999';
 
                 document.body.appendChild(tempDiv);
 
-                // Attendre que le contenu soit rendu
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Attendre le rendu
+                await new Promise(resolve => setTimeout(resolve, 300));
 
+                // Configuration optimisée
                 const opt = {
-                    margin: [5, 5, 5, 5],
+                    margin: 5,
                     filename: currentFilename.replace('.doc', '.pdf'),
-                    image: { type: 'jpeg', quality: 0.98 },
+                    image: { type: 'jpeg', quality: 0.95 },
                     html2canvas: { 
-                        scale: 2, 
-                        useCORS: true, 
+                        scale: 1.5,
+                        useCORS: true,
                         logging: false,
-                        letterRendering: true,
-                        windowWidth: currentType === 'grille' ? 794 : 1123
+                        allowTaint: true,
+                        backgroundColor: '#ffffff'
                     },
                     jsPDF: { 
                         unit: 'mm', 
                         format: 'a4', 
-                        orientation: currentType === 'grille' ? 'portrait' : 'landscape',
-                        compress: true
+                        orientation: currentType === 'grille' ? 'portrait' : 'landscape'
                     }
                 };
 
+                // Générer le PDF
                 await html2pdf().set(opt).from(tempDiv).save();
                 
                 // Nettoyage
-                document.body.removeChild(tempDiv);
+                if (document.body.contains(tempDiv)) {
+                    document.body.removeChild(tempDiv);
+                }
                 
             } catch (err) {
                 console.error('Erreur PDF:', err);
-                alert('Erreur lors de la génération du PDF: ' + err.message);
+                alert('Erreur lors de la génération du PDF. Veuillez réessayer.');
             } finally {
                 btn.innerHTML = originalText;
                 btn.disabled = false;
