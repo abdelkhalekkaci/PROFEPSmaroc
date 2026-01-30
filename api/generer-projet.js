@@ -141,151 +141,646 @@ const getGroupeAPS = (aps) => {
 };
 
 // ==================== OBJECTIFS EXPLICITES PAR APS (1-2 phrases) ====================
+// Structure: commun {S1, S2, S12} + niveaux {debutant, moyen, avance, elite, 1AC, 2AC, 3AC, TC, 1AB, 2AB}
 const OBJECTIFS_CYCLE = {
-    'Handball': [
-        "Évaluer le niveau initial des élèves en handball à travers une situation de jeu 4c4 pour identifier les acquis et les besoins en passe, réception et démarquage.",
-        "Découvrir les règles fondamentales du handball (marcher, reprise de dribble, zone des 6m) et manipuler le ballon avec aisance.",
-        "Améliorer la qualité de la passe à terre: orientation du corps vers la cible, passe tendue à hauteur de poitrine.",
-        "Apprendre à se démarquer efficacement en créant de l'espace par rapport au défenseur pour recevoir dans une position favorable.",
-        "Enchaîner réception et passe rapidement sans temps d'arrêt pour maintenir la continuité du jeu collectif.",
-        "Découvrir le tir en appui et améliorer la précision en visant les différentes zones du but.",
-        "Organiser le jeu collectif en occupant l'espace en largeur et profondeur avec des rôles définis.",
-        "Appliquer les principes d'attaque (écartement, pénétration) en situation de surnombre 4c3.",
-        "Intégrer les acquis techniques et tactiques dans un match 5c5 avec arbitrage par les élèves.",
-        "Évaluer les compétences acquises à travers la situation de référence en observant l'efficacité technique et tactique."
-    ],
-    'Football': [
-        "Évaluer le niveau initial des élèves via un match 4c4 pour observer la conduite de balle, les passes et les placements.",
-        "Découvrir les règles du football (hors-jeu, fautes, remises en jeu) et manipuler le ballon avec différentes surfaces.",
-        "Améliorer la conduite de balle en slalom et le contrôle orienté pour enchaîner vers une passe ou un dribble.",
-        "Travailler la passe courte avec l'intérieur du pied: pied d'appui à côté du ballon, frappe au centre.",
-        "Se démarquer efficacement en effectuant des appels de balle dans le dos du défenseur.",
-        "Découvrir le tir et améliorer la frappe de balle vers le but avec précision.",
-        "Organiser le jeu collectif: circulation de balle, appui-soutien, occupation des couloirs.",
-        "Appliquer le jeu en triangle et les combinaisons simples (une-deux) en situation réduite.",
-        "Intégrer les acquis dans un match 6c6 avec respect des règles et des postes.",
-        "Évaluer via la situation de référence en observant l'efficacité technique, tactique et le fair-play."
-    ],
-    'Basketball': [
-        "Évaluer le niveau initial des élèves en basketball via un 3c3 pour observer dribble, passe, tir et déplacements.",
-        "Découvrir les règles du basketball (marcher, reprise de dribble, fautes) et manipuler le ballon des deux mains.",
-        "Améliorer le dribble de progression main droite puis main gauche face à un défenseur.",
-        "Travailler la passe à terre et la passe à une main vers un partenaire en mouvement.",
-        "Se démarquer avec et sans ballon en utilisant les changements de direction et les feintes.",
-        "Découvrir le tir en course (lay-up) et améliorer la coordination appuis-tir avec la main extérieure.",
-        "Organiser le jeu collectif: espacement entre joueurs, circulation joueurs et ballon.",
-        "Appliquer les principes d'attaque placée et de contre-attaque rapide en situation 4c4.",
-        "Intégrer les acquis dans un match avec arbitrage, rotations et systèmes travaillés.",
-        "Évaluer les compétences via la situation de référence en observant l'efficacité offensive et défensive."
-    ],
-    'Volleyball': [
-        "Évaluer le niveau initial via des échanges 2c2 pour observer la manchette, la touche haute et le service.",
-        "Découvrir les règles du volleyball (3 touches, rotation, fautes) et s'initier à la manchette bras tendus.",
-        "Améliorer la manchette de réception: se placer sous le ballon, bras tendus et joints, orienter vers le passeur.",
-        "Travailler la touche haute pour réaliser une passe précise: mains en coupe au-dessus du front.",
-        "Découvrir le service cuillère et améliorer sa régularité en visant différentes zones.",
-        "Construire une attaque en 3 touches avec rôles définis: réceptionneur, passeur, attaquant.",
-        "Organiser la défense: placement en réception, couverture d'attaque, anticipation des trajectoires.",
-        "Appliquer l'alternance jeu court (amorti) et jeu long (attaque puissante) pour déstabiliser l'adversaire.",
-        "Intégrer les acquis dans un match 4c4 puis 6c6 avec rotation obligatoire et communication.",
-        "Évaluer les compétences via la situation de référence en observant la construction du point."
-    ],
-    'Course de vitesse': [
-        "Évaluer le niveau initial sur 40m chronométré pour identifier les points forts et faibles de chaque élève.",
-        "Découvrir les différentes phases de la course: réaction au signal, mise en action, accélération, maintien.",
-        "Améliorer la réaction au signal de départ et la mise en action explosive sur les 10 premiers mètres.",
-        "Travailler l'accélération progressive en augmentant la fréquence puis l'amplitude des foulées.",
-        "Optimiser la fréquence et l'amplitude des foulées en phase de vitesse maximale (20-40m).",
-        "Maintenir sa vitesse maximale sans décélération jusqu'à la ligne d'arrivée en restant relâché.",
-        "Améliorer l'alignement segmentaire (tête-tronc-bassin) et le relâchement des épaules.",
-        "Travailler le finish: franchir la ligne sans ralentir, en projetant le buste vers l'avant.",
-        "Intégrer tous les éléments techniques dans des courses chronométrées avec analyse.",
-        "Évaluer la performance finale sur la distance de référence avec mesure du temps."
-    ],
-    'Saut en longueur': [
-        "Évaluer le niveau initial via 3 sauts libres pour observer course d'élan, impulsion et réception.",
-        "Découvrir les différentes phases du saut: course accélérée, impulsion sur planche, envol, réception.",
-        "Étalonner sa course d'élan en plaçant des marques pour atteindre la planche avec vitesse optimale.",
-        "Améliorer l'impulsion: placement du pied d'appel à plat, poussée verticale et horizontale, genou libre haut.",
-        "Travailler la phase d'envol: maintien de l'équilibre, position groupée ou en extension.",
-        "Optimiser la réception: ramener les jambes vers l'avant, bras vers l'avant, tomber en avant.",
-        "Coordonner course-impulsion-envol dans un enchaînement fluide sans perte de vitesse.",
-        "Augmenter progressivement la vitesse de course tout en conservant la précision sur la planche.",
-        "Réaliser des sauts complets avec mesure des performances et analyse des points à améliorer.",
-        "Évaluer la performance finale via le concours de 3 essais avec notation technique et mesure."
-    ],
-    'Saut en hauteur': [
-        "Évaluer le niveau initial via des franchissements à hauteur basse pour observer la technique de base.",
-        "Découvrir les différentes phases: course d'élan courbe, impulsion sur pied extérieur, franchissement dorsal.",
-        "Travailler la course d'élan courbe: 5-7 foulées en arc de cercle avec accélération progressive.",
-        "Améliorer l'impulsion: pied extérieur actif, bras et genou libre vers le haut, regard vers la barre.",
-        "Découvrir la rotation dorsale (fosbury-flop): basculer les épaules, cambrer le dos au-dessus de la barre.",
-        "Optimiser l'esquive des hanches et des jambes pour franchir la barre sans la toucher.",
-        "Coordonner course courbe-impulsion-rotation dans un enchaînement fluide et rythmé.",
-        "Augmenter progressivement la hauteur de la barre en conservant la qualité technique.",
-        "Réaliser des concours avec barres montantes pour développer la gestion du stress compétitif.",
-        "Évaluer la performance finale via le concours à barres montantes avec analyse technique."
-    ],
-    'Course de durée': [
-        "Évaluer le niveau initial via une course de 6 minutes pour estimer la VMA et les capacités d'endurance.",
-        "Découvrir les principes de la gestion de l'effort: allure régulière, respiration, hydratation.",
-        "Apprendre à courir à une allure constante en utilisant des repères de temps (chrono, plots).",
-        "Travailler la régularité de l'allure: maintenir le même temps de passage sur chaque tour.",
-        "Développer l'endurance en augmentant progressivement la durée de course (8, 10, 12 min).",
-        "Construire un projet de course personnel: définir une allure cible en fonction de ses capacités.",
-        "Optimiser la foulée économique: amplitude modérée, pose du pied sous le centre de gravité.",
-        "Gérer les variations de terrain et de rythme sans perdre sa régularité d'allure.",
-        "Réaliser des courses avec contrat de distance: annoncer et respecter son objectif personnel.",
-        "Évaluer via la course de 12 minutes avec mesure de la distance et analyse de la régularité."
-    ],
-    'Lancer de poids': [
-        "Évaluer le niveau initial via des lancers à bras cassé pour observer coordination et puissance.",
-        "Découvrir la tenue de l'engin au cou et la position de départ dos à l'aire de lancer.",
-        "Travailler le placement initial: poids au cou, coude haut, dos à l'aire, équilibre sur jambe arrière.",
-        "Améliorer la poussée des jambes: transfert du poids du corps de l'arrière vers l'avant.",
-        "Coordonner la rotation du tronc et l'extension du bras lanceur dans un mouvement explosif.",
-        "Travailler le fouetté final du poignet pour optimiser la trajectoire de l'engin.",
-        "Enchaîner translation-rotation-poussée dans un geste fluide et équilibré.",
-        "Respecter l'équilibre final: rester dans le cercle après le lancer, ne pas mordre.",
-        "Réaliser des concours avec 3 essais mesurés et analyse technique de chaque lancer.",
-        "Évaluer la performance via le concours final avec mesure et notation technique."
-    ],
-    'Gymnastique': [
-        "Évaluer le niveau initial via la présentation d'éléments simples (roulade avant, équilibre, saut).",
-        "Découvrir les familles d'éléments: rotations, renversements, sauts, maintiens, souplesses.",
-        "Maîtriser la roulade avant et arrière: départ et arrivée stabilisés, corps groupé, menton poitrine.",
-        "Apprendre l'ATR (appui tendu renversé): placement des mains, alignement bras-tronc-jambes, gainage.",
-        "Travailler la roue avec amplitude: impulsion jambe, passage par l'ATR, réception pieds décalés.",
-        "Découvrir les éléments de souplesse: pont, souplesse avant, maintiens en équilibre.",
-        "Lier les éléments entre eux: enchaîner 3-4 éléments avec fluidité et sans temps d'arrêt.",
-        "Composer un enchaînement personnel respectant les exigences du niveau.",
-        "Répéter et perfectionner son enchaînement en travaillant amplitude, tenue et liaisons.",
-        "Présenter son enchaînement devant la classe et être évalué selon les critères définis."
-    ],
-    'Tennis de table': [
-        "Évaluer le niveau initial via des échanges libres pour observer coup droit, revers et service.",
-        "Découvrir les règles du tennis de table et la prise de raquette orthodoxe.",
-        "Améliorer le coup droit: placement latéral, rotation du tronc, accompagnement de la balle.",
-        "Travailler le revers: coude près du corps, rotation des épaules, frappe devant soi.",
-        "Découvrir le service réglementaire: balle visible, lancée verticalement, frappée derrière la table.",
-        "Varier les placements pour déplacer l'adversaire: jouer long/court, droite/gauche.",
-        "Découvrir les effets: coupé (balle qui flotte) et lifté (balle qui plonge) pour varier le jeu.",
-        "Construire le point en utilisant des séquences tactiques: service-3ème balle.",
-        "Intégrer les acquis dans des matchs avec comptage des points et application des règles.",
-        "Évaluer les compétences via des matchs en simple avec observation technique et tactique."
-    ],
-    'Badminton': [
-        "Évaluer le niveau initial via des échanges libres pour observer les frappes et les déplacements.",
-        "Découvrir les règles du badminton et la prise universelle de la raquette.",
-        "Améliorer le dégagé (fond de court): frappe haute, bras tendu, accompagnement vers la cible.",
-        "Travailler l'amorti au filet: frappe douce, volant qui tombe près du filet adverse.",
-        "Découvrir le service court et long: trajectoires différentes pour surprendre l'adversaire.",
-        "Varier la longueur et la direction des frappes pour déplacer l'adversaire et créer des espaces.",
-        "Alterner jeu long (dégagé) et jeu court (amorti) pour déstabiliser l'adversaire.",
-        "Se replacer au centre du terrain après chaque frappe pour couvrir tout l'espace.",
-        "Intégrer les acquis dans des matchs en simple avec application des règles et comptage.",
-        "Évaluer les compétences via des matchs en observant construction du point et déplacements."
-    ]
+    'Football': {
+        commun: {
+            S1: "Évaluer le niveau initial des élèves (capacités motrices, techniques et tactiques) afin de diagnostiquer les besoins et constituer des groupes de niveau.",
+            S2: "Maîtriser les lois du jeu (FIFA adaptées au milieu scolaire), comprendre les principes de l'occupation de l'espace (bloc équipe) et les valeurs du fair-play.",
+            S12: "Évaluer le degré d'atteinte des objectifs du cycle, mesurer la progression technique et tactique et valider les acquis en situation de match."
+        },
+        debutant: [
+            "Maîtriser la conduite de balle en variant les surfaces de contact (intérieur/coup de pied) sans perdre le contrôle.",
+            "Apprendre à réaliser une passe courte précise à l'intérieur du pied vers un partenaire immobile.",
+            "S'initier au contrôle de balle (amorti) pour enchaîner rapidement une action de jeu.",
+            "Comprendre le principe du dégrappage : s'écarter du porteur de balle pour occuper le terrain.",
+            "Apprendre la technique de frappe au but (armé de jambe et placement du pied d'appui).",
+            "Découvrir les rôles défensifs : se placer entre le ballon et son propre but.",
+            "Maîtriser les remises en jeu (touches et dégagements) en respectant le règlement.",
+            "S'initier à l'arbitrage : signaler une sortie, une faute de main ou un coup franc.",
+            "Match de pré-évaluation : appliquer les règles de base et maintenir sa position sur le terrain."
+        ],
+        moyen: [
+            "Améliorer la conduite de balle à vitesse supérieure avec prise d'information (lever la tête).",
+            "Réaliser des passes dans la course d'un partenaire (anticiper le déplacement).",
+            "Enchaîner contrôle orienté et passe ou tir en deux touches de balle maximum.",
+            "Travailler l'appui et le soutien : offrir des solutions de passe courtes et sécurisées.",
+            "Perfectionner la précision des tirs sur des cibles fixes ou mobiles (angles fermés).",
+            "Mettre en place une défense de zone simple : couvrir son partenaire et fermer les angles.",
+            "Utiliser les couloirs latéraux pour progresser vers le but adverse.",
+            "Arbitrage et gestion de match : gérer le hors-jeu et les fautes de comportement.",
+            "Tournoi réduit : privilégier la conservation du ballon avant de chercher la profondeur."
+        ],
+        avance: [
+            "Maîtriser la protection de balle sous pression adverse (utilisation du corps).",
+            "Développer le jeu long (transversales) pour changer d'aile et déséquilibrer le bloc adverse.",
+            "Perfectionner la finition devant le but sous contrainte temporelle ou d'opposition.",
+            "Apprendre les principes du Une-Deux et des combinaisons à trois pour percer une défense.",
+            "Travailler le pressing collectif : déclencher une récupération haute du ballon.",
+            "Transition rapide : passer de la phase défensive à l'attaque (contre-attaque fulgurante).",
+            "Organisation tactique : respecter un système de jeu choisi (ex: 4-4-2 ou 4-3-3).",
+            "Coaching et statistiques : analyser les points forts/faibles de l'adversaire.",
+            "Mise en situation réelle de compétition avec application rigoureuse des consignes tactiques."
+        ],
+        elite: [
+            "Optimisation de la vitesse de réaction avec ballon et réduction des temps de latence technique.",
+            "Maîtriser les coups de pied arrêtés (corners, coups francs) : placements et trajectoires spécifiques.",
+            "Travail spécifique par poste : défenseurs (alignement), milieux (orientation), attaquants (appels).",
+            "Maîtriser le bloc bas et le bloc haut selon les phases du match.",
+            "Développer l'intelligence de jeu : lecture des trajectoires d'interception et anticipation.",
+            "Gestion du rythme : alterner entre jeu de possession lent et accélérations verticales.",
+            "Simulation de situations de crise (jouer en infériorité numérique ou score à remonter).",
+            "Analyse vidéo ou théorique avancée sur les systèmes de jeu modernes.",
+            "Match de haute intensité avec focus sur le leadership et la communication sur le terrain."
+        ]
+    },
+    'Volleyball': {
+        commun: {
+            S1: "Évaluer le niveau initial des élèves (capacité à maintenir le ballon en l'air, respect des zones de jeu) pour établir un diagnostic et former des groupes homogènes.",
+            S2: "Étude du règlement officiel (FIVB adapté), compréhension du système de rotation, des fautes de filet, et des principes tactiques de base (réception-passe-attaque).",
+            S12: "Évaluer les progrès techniques individuels et l'efficacité de l'organisation collective en situation de match officiel."
+        },
+        debutant: [
+            "Maîtriser le service cuillère pour mettre le ballon en jeu de manière sécurisée.",
+            "Développer la réception en manchette (bras tendus, plan de frappe stable) sur des ballons faciles.",
+            "S'initier à la passe haute (en touche) pour s'auto-envoyer le ballon ou viser une zone.",
+            "Apprendre à renvoyer le ballon dans le camp adverse dès la première ou deuxième touche.",
+            "Comprendre l'organisation spatiale : ne pas se gêner et respecter sa zone de départ.",
+            "Travailler le déplacement court et l'arrêt (être sous le ballon) avant de frapper.",
+            "S'initier au renvoi offensif simple (chercher les zones vides du camp adverse).",
+            "Apprendre l'arbitrage de base : compter les points, signaler le ballon in ou out.",
+            "Match dirigé : focus sur la réduction des fautes directes (filet et hors-limites)."
+        ],
+        moyen: [
+            "Améliorer la précision du service (viser le fond du terrain ou les zones latérales).",
+            "Stabiliser la réception en manchette pour l'orienter vers la zone du passeur (zone 3).",
+            "Maîtriser la passe haute de précision pour offrir un ballon exploitable à l'attaquant.",
+            "Construire une attaque en trois touches (Réception – Passe – Renvoi).",
+            "S'initier au smash (attaque smashée) : coordination course d'élan et frappe haute.",
+            "Apprendre le placement défensif de base en lecture (attendre le ballon en position basse).",
+            "Utiliser la communication verbale (J'ai !, Moi !) pour éviter les collisions.",
+            "Arbitrage et score : gérer les rotations et les changements de camp.",
+            "Tournoi : privilégier la construction du jeu avant de chercher à marquer le point."
+        ],
+        avance: [
+            "Maîtriser le service tennis (bras haut) pour mettre l'adversaire en difficulté.",
+            "Perfectionner la manchette de précision même sur des services puissants.",
+            "Développer la passe arrière et la passe latérale pour varier les cibles d'attaque.",
+            "Optimiser la relation Passeur/Attaquant (timing de l'appel de balle).",
+            "S'initier au contre (block) individuel pour fermer les angles d'attaque.",
+            "Mise en place d'un système défensif en W pour couvrir tout le terrain en réception.",
+            "Apprendre à varier les attaques : smashes puissants, ballons placés (feintes).",
+            "Observation tactique : identifier le maillon faible adverse pour orienter le service.",
+            "Match de compétition : application de schémas tactiques simples (priorité au jeu placé)."
+        ],
+        elite: [
+            "Maîtriser le service smashé ou le service flottant agressif.",
+            "Spécialisation des postes : rôles fixes (Passeur, Pointu, Réceptionneur-Attaquant, Central).",
+            "Perfectionner les attaques rapides (la fixe) pour surprendre le contre adverse.",
+            "Organiser un contre collectif (à deux joueurs) et la couverture derrière le contre.",
+            "Transition Défense-Attaque : réorganisation rapide après une récupération difficile.",
+            "Mise en œuvre de systèmes tactiques complexes (système 5-1 ou 4-2).",
+            "Travail spécifique du Libero : réception haute exigence et sauvetages acrobatiques.",
+            "Analyse tactique sur tableau : gestion des permutations et des combinaisons.",
+            "Match de haut niveau avec contraintes : gérer la pression et les fins de sets serrées."
+        ]
+    },
+    'Basketball': {
+        commun: {
+            S1: "Évaluer la capacité à manipuler le ballon, à se déplacer et à viser la cible pour diagnostiquer le niveau moteur et technique.",
+            S2: "Apprentissage des règles fondamentales (marcher, reprise de dribble, fautes de contact, zone), et explication des rôles (meneur, ailier, pivot).",
+            S12: "Évaluation finale des compétences acquises en situation de match (efficacité au tir, respect des règles et choix tactiques)."
+        },
+        debutant: [
+            "Maîtriser le dribble de progression avec la main dominante sans regarder constamment le ballon.",
+            "Apprendre la passe de poitrine à deux mains avec une extension complète des bras.",
+            "S'initier au tir à l'arrêt : position des pieds, coude sous le ballon et cassé du poignet.",
+            "Apprendre le double-pas (lay-up) : coordination des appuis droite-gauche ou gauche-droite.",
+            "Comprendre la notion de non-contact : défendre sans toucher l'adversaire (bras levés).",
+            "Apprendre à s'arrêter en un ou deux temps pour éviter le marcher.",
+            "S'initier au pivotement pour protéger son ballon face à un défenseur.",
+            "S'initier à l'arbitrage : gestuelle de base pour le marcher et les sorties.",
+            "Match dirigé : focus sur la progression vers l'avant sans violation de règle."
+        ],
+        moyen: [
+            "Maîtriser le changement de main en dribble (devant soi) pour contourner un obstacle.",
+            "Développer la passe par-dessus la tête et la passe à terre pour varier les trajectoires.",
+            "Améliorer la réussite au tir à mi-distance après un seul dribble.",
+            "Perfectionner le lay-up en pleine course (vitesse d'exécution).",
+            "Mise en place d'une défense individuelle avec respect du triangle Ballon-Moi-Adversaire.",
+            "Apprendre à faire un écran simple pour libérer un partenaire porteur de balle.",
+            "Développer le rebond offensif et défensif (prise de position sous le panier).",
+            "Arbitrage et gestion de la table de marque (feuille de match simplifiée).",
+            "Tournoi : privilégier le jeu de passes avant le tir (règle des 3 passes minimum)."
+        ],
+        avance: [
+            "Maîtriser le dribble de protection et le changement de rythme pour éliminer un défenseur.",
+            "Développer la passe aveugle ou la passe après saut pour surprendre la défense.",
+            "Travailler le tir en suspension (Jump Shot) avec une forme stable.",
+            "Maîtriser le Give and Go (Passe et va) pour créer des brèches.",
+            "Mise en place d'une défense de zone (2-3 ou 3-2) et compréhension des coulissements.",
+            "Apprendre à gérer le Pick and Roll (Écran et rouler) en attaque.",
+            "Travailler la transition rapide (contre-attaque) après une récupération de balle.",
+            "Coaching : analyser les statistiques de réussite et ajuster la stratégie à la mi-temps.",
+            "Match de compétition : application rigoureuse des systèmes de jeu annoncés."
+        ],
+        elite: [
+            "Optimisation du dribble croisé (Crossover) et des appuis de décalage (Step-back).",
+            "Maîtriser la lecture de jeu sur défense de zone et défense presse.",
+            "Perfectionnement du tir à 3 points et des lancers-francs sous pression (fin de match).",
+            "Systèmes offensifs complexes avec multiples écrans et coupes.",
+            "Maîtriser la Presse tout terrain et le repli défensif organisé.",
+            "Travail spécifique du poste : lecture du jeu pour le meneur, jeu dos au panier pour le pivot.",
+            "Gestion des dernières possessions (stratégies sur 24 secondes).",
+            "Analyse vidéo des placements et des erreurs de communication défensive.",
+            "Match de haute intensité avec gestion des fautes et du temps mort tactique."
+        ]
+    },
+    'Handball': {
+        commun: {
+            S1: "Évaluer la qualité de la passe, du tir et l'engagement défensif pour identifier les besoins du groupe.",
+            S2: "Étude du règlement (zone, marcher, 3 secondes, fautes de bras) et des principes d'attaque placée.",
+            S12: "Validation des acquis techniques et tactiques en situation réelle de compétition."
+        },
+        debutant: [
+            "Maîtriser la manipulation du ballon (prise de balle à une main) et le dribble de base.",
+            "Apprendre la passe d'épaule précise vers un partenaire arrêté.",
+            "S'initier au tir en appui (pied opposé au bras lanceur devant).",
+            "Apprendre le cycle des 3 pas pour déclencher un tir ou une passe.",
+            "Comprendre l'interdiction d'entrer dans la zone du gardien.",
+            "S'initier au rôle de gardien de but : postures et parades de base.",
+            "Apprendre à défendre en restant face à l'attaquant sans commettre de faute grave.",
+            "Arbitrage : signaler le marcher et le jet de coin.",
+            "Match dirigé : focus sur la circulation de balle sans dribble excessif."
+        ],
+        moyen: [
+            "Améliorer la passe en course et la réception en mouvement.",
+            "Maîtriser le tir en suspension pour franchir la ligne des 6 mètres.",
+            "Apprendre à fixer un défenseur pour libérer un partenaire sur l'aile.",
+            "Mise en place d'une défense de zone alignée (6-0) simple.",
+            "Travailler le débordement individuel par la feinte de corps.",
+            "Apprendre le rôle du pivot : se placer entre les défenseurs et offrir une solution.",
+            "Développer la montée de balle rapide après un but encaissé ou une parade.",
+            "Arbitrage : identifier le passage en force et la défense à l'intérieur de la zone.",
+            "Tournoi : privilégier l'écartement des joueurs sur toute la largeur du terrain."
+        ],
+        avance: [
+            "Maîtriser les tirs variés (tirs à la hanche, tirs désaxés, tirs plongeants pour les ailiers).",
+            "Développer la relation Arrière-Pivot (passes cachées, blocs).",
+            "Mise en place d'une défense agressive (5-1) pour perturber le meneur adverse.",
+            "Travailler les croisements simples entre la base arrière pour créer des décalages.",
+            "Maîtriser l'interception de balle par la lecture des trajectoires de passe.",
+            "Utiliser le surnombre (3 contre 2) pour finir l'action sur l'aile.",
+            "Apprendre à gérer les exclusions temporaires (jouer à 5 contre 6).",
+            "Coaching : proposer des solutions tactiques face à une défense haute.",
+            "Match de compétition : focus sur la continuité du jeu et la fluidité des transitions."
+        ],
+        elite: [
+            "Perfectionnement du tir en appui long et du tir Kung-fu (en l'air).",
+            "Systèmes tactiques complexes (circulations de joueurs, doubles pivots).",
+            "Maîtriser la défense 3-2-1 ou 4-2 avec harcèlement constant.",
+            "Analyse des points faibles du gardien adverse et adaptation des tirs.",
+            "Travail de la puissance explosive (pliométrie) adaptée aux sauts de tir.",
+            "Spécialisation des postes : travail spécifique pour les demi-centres et ailiers.",
+            "Gestion tactique des fins de match (jeu sans gardien pour le surnombre).",
+            "Analyse vidéo : correction des alignements défensifs.",
+            "Match de haut niveau avec application de consignes de jeu placées."
+        ]
+    },
+    'Course de vitesse': {
+        commun: {
+            S1: "Évaluer le temps de réaction et la vitesse maximale sur 30m ou 60m (chronométrage de référence).",
+            S2: "Comprendre la physiologie de la vitesse (anaérobie alactique), les phases de la course (départ, accélération, maintien) et le règlement.",
+            S12: "Mesurer la performance finale et comparer avec le test initial pour valider la progression."
+        },
+        debutant: [
+            "Apprendre la posture de course : buste droit, regard vers l'horizon, bras en piston.",
+            "Développer la réactivité au signal sonore (varier les positions de départ : assis, couché, dos).",
+            "Maîtriser les appuis plante de pied (courir sur la pointe) pour réduire le temps de contact.",
+            "Apprendre le départ en appui-face (sans starting-blocks) : jambe de force devant.",
+            "Travailler la coordination bras/jambes par des exercices de montée de genoux et talons-fesses.",
+            "Apprendre à maintenir sa trajectoire droite dans son couloir.",
+            "S'initier à l'accélération progressive sur 10 à 20 mètres.",
+            "Apprendre à franchir la ligne d'arrivée sans ralentir (casser le buste).",
+            "Pré-test chronométré avec gestion du stress du départ."
+        ],
+        moyen: [
+            "Améliorer l'efficacité de la foulée (amplitude vs fréquence).",
+            "S'initier au réglage et à l'utilisation des starting-blocks (angles des cales).",
+            "Maîtriser le commandement de départ : À vos marques, Prêt, Partez.",
+            "Travailler la phase de poussée explosive lors des 10 premiers mètres (rester bas).",
+            "Développer la vitesse de réaction spécifique (signaux visuels ou tactiles).",
+            "Enchaîner la phase de mise en action et le passage à la course redressée.",
+            "Travailler le maintien de la vitesse maximale (résistance à la décélération sur 50m).",
+            "S'initier au rôle de starter et de chronométreur officiel.",
+            "Compétition interne : gestion des séries et des finales."
+        ],
+        avance: [
+            "Optimiser le placement dans les blocs pour une poussée maximale (poids du corps sur les bras).",
+            "Travailler la puissance du premier appui en sortie de blocs.",
+            "Développer la force explosive des membres inférieurs par des bonds horizontaux.",
+            "Améliorer la technique de bras (amplitude et dynamisme) pour équilibrer la foulée.",
+            "Maîtriser la transition entre la phase d'accélération et la phase de vitesse maximale.",
+            "Travailler la vitesse de pointe sur des distances de 30m lancés.",
+            "Apprendre à rester relâché (mâchoire, épaules) même à vitesse maximale.",
+            "Analyse technique : utiliser la vidéo pour corriger l'inclinaison du buste au départ.",
+            "Meeting d'athlétisme scolaire : recherche du record personnel."
+        ],
+        elite: [
+            "Travail spécifique de la puissance anaérobie alactique (efforts très courts, récupérations longues).",
+            "Optimisation biomécanique du cycle de jambe (griffé du sol).",
+            "Entraînement au départ avec pistolet ou signal électronique de compétition.",
+            "Travail de survitesse (course en légère descente ou avec élastique).",
+            "Renforcement musculaire spécifique (chaîne postérieure) pour la propulsion.",
+            "Analyse de la fréquence gestuelle (nombre d'appuis par seconde).",
+            "Gestion mentale de la course : concentration et visualisation du 100m.",
+            "Planification de l'affûtage avant les compétitions régionales/nationales.",
+            "Test de performance en conditions réelles (vent, opposants de même niveau)."
+        ]
+    },
+    'Lancer de poids': {
+        commun: {
+            S1: "Évaluer le niveau initial (force et coordination) et identifier les élèves qui lancent au lieu de pousser.",
+            S2: "Règles de sécurité (zone de jet), tenue de l'engin (embase des doigts), et distinction entre jet et lancer.",
+            S12: "Lancer un poids de 4kg (garçons) ou 3kg (filles) le plus loin possible et mesurer la performance."
+        },
+        debutant: [
+            "Apprendre à tenir le poids contre le cou et à réaliser une poussée directe vers l'avant.",
+            "Travailler l'appui au sol : pieds décalés, poids du corps sur la jambe arrière.",
+            "S'initier à l'extension complète du bras lanceur avec le coude haut.",
+            "Travailler la trajectoire (viser une zone en hauteur) pour éviter les jets rasants.",
+            "Apprendre à rester dans le cercle après le jet (équilibre statique).",
+            "Exercices de renforcement simple : lancers de medecine-ball à deux mains.",
+            "Intégrer une légère torsion du buste avant la poussée.",
+            "S'initier au rôle de juge : mesurer une performance avec un ruban.",
+            "Pré-évaluation : réaliser 3 jets corrects sans sortir du cercle."
+        ],
+        moyen: [
+            "Stabiliser la tenue du poids lors d'une mise en tension du buste.",
+            "Apprendre le placement de profil par rapport à la zone de chute.",
+            "Travailler la poussée de la jambe droite (pour les droitiers) vers l'avant.",
+            "Coordonner la fin de la poussée de jambe avec le départ du bras.",
+            "Améliorer l'angle d'envol (repères visuels à 45 degrés).",
+            "Travailler l'explosivité : enchaîner flexion de jambe et extension bras rapide.",
+            "S'initier au pas chassé très simple pour prendre de l'élan.",
+            "Apprendre à annoncer les résultats et gérer un concours de classe.",
+            "Pré-compétition : stabiliser le lancer de profil avec élan réduit."
+        ],
+        avance: [
+            "Maîtriser le placement en Power Position (position de force) de manière stable.",
+            "Apprendre le sursaut (glissement) arrière dans l'axe du jet.",
+            "Travailler la reprise d'appui après le sursaut pour ne pas s'arrêter.",
+            "Améliorer l'amplitude du mouvement : aller chercher le poids loin derrière.",
+            "Travailler le fouetté final du poignet pour donner de la vitesse.",
+            "Exercices de proprioception pour garder le poids collé au cou malgré l'élan.",
+            "S'initier au rattrapage (changement de pieds après le jet) pour rester dans le cercle.",
+            "Jugement : identifier les jets nuls (poids qui descend, sortie devant).",
+            "Concours blanc : enchaîner sursaut et jet fluide."
+        ],
+        elite: [
+            "Perfectionner la position de départ (dos à la zone de chute).",
+            "Travailler le déséquilibre arrière contrôlé pour amorcer le sursaut.",
+            "Maîtriser le rasé de sol lors du glissement pour rester bas.",
+            "Travailler la fermeture de l'épaule gauche (pour les droitiers) pour créer une torsion.",
+            "Accélérer la phase finale (la gifle au poids).",
+            "Travail de force explosive spécifique (pliométrie haute).",
+            "Gérer l'espace du cercle : utiliser toute la longueur disponible.",
+            "Organisation d'un meeting : chronométrage du temps de préparation (1 min).",
+            "Séance de réglage des appuis et de la direction du jet."
+        ]
+    },
+    'Saut en longueur': {
+        commun: {
+            S1: "Courir et sauter le plus loin possible. 3 essais mesurés pour chaque élève.",
+            S2: "Règlement (planche, mordu, mesure à la trace), biomécanique du saut (Vitesse + Impulsion = Distance), et sécurité.",
+            S12: "3 essais mesurés. Note basée sur la performance brute et l'évolution technique observée."
+        },
+        debutant: [
+            "Identifier son pied d'appel (pied de force) à travers des jeux de sauts variés.",
+            "Apprendre la coordination bras/jambes lors d'un saut sans élan.",
+            "S'initier à l'impulsion sur un pied et la réception équilibrée sur deux pieds dans le sable.",
+            "Travailler l'élan réduit (3 à 5 foulées) pour toucher la zone d'appel sans ralentir.",
+            "Apprendre à ramener les genoux vers la poitrine lors de la phase de suspension.",
+            "Exercices de proprioception : ne pas tomber en arrière lors de la réception.",
+            "S'initier au rôle de juge-mesureur (placer le décamètre correctement).",
+            "Stabiliser une course d'élan courte et régulière.",
+            "Pré-évaluation : enchaîner élan, appel et réception sans mordre."
+        ],
+        moyen: [
+            "Étalonner sa course d'élan (mesure en pieds ou foulées) pour arriver sur la planche.",
+            "Travailler le rythme des 3 dernières foulées (court-long-court) pour préparer l'impulsion.",
+            "Optimiser l'angle d'envol : sauter par-dessus un élastique placé à faible hauteur.",
+            "Travailler la vitesse de la course d'élan (progressive et non maximale immédiatement).",
+            "Améliorer la technique de suspension (style groupé).",
+            "Travailler l'extension complète de la jambe d'appel lors de l'impulsion.",
+            "Apprendre à projeter les talons le plus loin possible devant soi à l'atterrissage.",
+            "Arbitrage : gérer les drapeaux blanc (valide) et rouge (mordu).",
+            "Séance de réglage des marques d'élan sous pression de vitesse."
+        ],
+        avance: [
+            "Optimisation de la course d'élan : recherche de la vitesse maximale contrôlable.",
+            "Travail spécifique sur le griffé du dernier appui au sol.",
+            "S'initier à la technique de suspension en extension (cambré-regroupé).",
+            "Travailler la montée du genou de la jambe libre lors de l'impulsion.",
+            "Exercices de pliométrie (bonds horizontaux) pour augmenter l'explosion au sol.",
+            "Analyser la trajectoire : éviter les sauts trop plats ou trop clochés.",
+            "Travailler l'esquive latérale ou le basculement du bassin à la réception.",
+            "Analyse vidéo ou observation fine : détecter les ralentissements avant la planche.",
+            "Concours blanc : gestion des 3 essais comme en compétition officielle."
+        ],
+        elite: [
+            "Stabilisation millimétrée des marques d'élan à haute intensité.",
+            "Perfectionnement du Ciseau ou Double Ciseau durant la phase de vol.",
+            "Travail de survitesse (course avec vent arrière ou légère pente).",
+            "Optimisation du transfert d'énergie : synchronisation parfaite bras-jambes.",
+            "Travail de gainage dynamique pour maintenir la posture en l'air.",
+            "Travail psychologique : concentration et visualisation du saut parfait.",
+            "Analyse des statistiques personnelles (vitesse d'entrée vs distance réalisée).",
+            "Coaching : les élèves élites aident à corriger les débutants sur des détails techniques.",
+            "Séance d'affûtage : peu de sauts, mais à 100% de l'engagement."
+        ]
+    },
+    'Gymnastique': {
+        commun: {
+            S1: "Présenter l'enchaînement de référence pour évaluer la capacité de mémorisation, la sécurité et le niveau technique de départ.",
+            S2: "Analyse du barème de notation (Difficulté, Exécution, Composition). Apprentissage de la terminologie des éléments A, B, C, D, E. Règles de sécurité.",
+            S12: "Présentation finale de l'enchaînement devant le groupe classe. Évaluation sommative basée sur la réussite des éléments et la tenue corporelle."
+        },
+        '1AC': [
+            "Maîtriser les éléments de famille A : Roulade avant groupée et Planche (équilibre).",
+            "Consolider la Roulade arrière (A) et la Chandelle (A).",
+            "S'initier aux éléments de famille B : L'ATR (Appui Tendu Renversé) avec aide.",
+            "Apprendre la Roue (B) : alignement des segments et passage par la verticale.",
+            "Travailler les sauts de liaison (Saut groupé ou extension).",
+            "Travail spécifique sur la fixité des positions (maintenir 3 secondes).",
+            "Montage de l'enchaînement : organiser les 3A et 2B de manière fluide.",
+            "Répétition avec juge-élève : identifier les fautes de jambes pliées.",
+            "Séance de perfectionnement : travail sur l'entrée et la sortie du tapis."
+        ],
+        '2AC': [
+            "Révision des éléments A et B acquis en 1AC.",
+            "S'initier à l'élément de famille C : La Roulade arrière jambes tendues ou l'ATR-Roulade.",
+            "Perfectionner la Roue (B) et l'ATR libre (B).",
+            "Travailler la souplesse (C) : Le Pont ou la fente basse marquée.",
+            "Apprendre à lier un élément A avec un élément C sans arrêt marqué.",
+            "Travail de gainage pour améliorer l'exécution des éléments de renversement.",
+            "Montage de l'enchaînement incluant l'élément C comme point d'orgue.",
+            "Auto-évaluation : vidéo ou observation par les pairs sur l'élément C.",
+            "Répétition générale : focus sur l'amplitude des mouvements."
+        ],
+        '3AC': [
+            "Stabiliser les éléments B (Roue, ATR, Sissonne, Saut de chat).",
+            "Travailler l'élément C choisi (ex: Souplesse arrière ou Roulade plongée).",
+            "Améliorer la qualité des 2 éléments A pour qu'ils soient parfaits (Bonus d'exécution).",
+            "Apprendre la Rondade (B/C selon technique) : impulsion et réception deux pieds.",
+            "Travailler les liaisons acrobatiques : enchaîner deux éléments B.",
+            "Développement de l'expression : regard et port de tête pendant l'enchaînement.",
+            "Montage de l'enchaînement (2A, 4B, 1C) : équilibrer les familles d'activités.",
+            "Co-jugement : évaluation de la difficulté réelle par rapport au projet.",
+            "Séance de nettoyage : éliminer les petits pas de déséquilibre à la réception."
+        ],
+        'TC': [
+            "Réviser les fondamentaux et valider les éléments B (ATR, Roue, Rondade).",
+            "Travailler les deux éléments C : Souplesse avant/arrière et ATR-Roulade.",
+            "Maîtriser le saut de mains (C) avec parade sécurisée.",
+            "Travailler la force (C) : Équerre ou maintien de l'équilibre sur une main avec appui.",
+            "Optimiser les 2 éléments A : les utiliser comme transitions esthétiques.",
+            "Travail sur le rythme : alternance de phases lentes (souplesse) et rapides (acrobatie).",
+            "Montage du projet (2A, 3B, 2C) sur la diagonale du tapis.",
+            "Arbitrage expert : calcul de la note de difficulté (D) selon le quota.",
+            "Répétition finale : gestion du stress et présentation au public."
+        ],
+        '1AB': [
+            "Valider rapidement les éléments B et se concentrer sur les éléments C.",
+            "S'initier aux éléments de famille D : Le Saut de mains (renversement dynamique).",
+            "Travailler la Rondade-Saut extension (D) ou la Souplesse avant/arrière (C).",
+            "Maîtriser la planche ou l'équilibre en force (C).",
+            "Travailler la verticalité : l'ATR doit être parfaitement rectiligne.",
+            "Enchaîner des combinaisons complexes (C + B ou C + C).",
+            "Montage de l'enchaînement (2B, 3C, 2D) : recherche de la difficulté maximale.",
+            "Analyse critique : vidéo-analyse des angles d'ouverture d'épaules.",
+            "Mise en condition de concours : passage devant un jury d'élèves."
+        ],
+        '2AB': [
+            "Maîtriser les éléments C comme base de travail (Lune, Souplesses).",
+            "Travailler les éléments de famille D : Saut de mains, Rondade-Flic, ou Roue sans les mains.",
+            "S'initier ou perfectionner les éléments de famille E : Salto arrière/avant ou Flip-flap.",
+            "Travail de l'explosivité : maximiser la hauteur des envols.",
+            "Stabiliser les réceptions pilées : aucune tolérance pour les déséquilibres.",
+            "Travail chorégraphique : l'enchaînement doit être une prestation artistique.",
+            "Finalisation de l'enchaînement (2C, 3D, 2E) : optimisation du barème.",
+            "Jugement de haut niveau : déductions au dixième de point.",
+            "Répétition générale : focus sur la concentration et la maîtrise de soi."
+        ],
+        debutant: null,
+        moyen: null,
+        avance: null,
+        elite: null
+    },
+    'Course de durée': {
+        commun: {
+            S1: "Évaluer la capacité à maintenir un effort prolongé (test VMA ou course de 6-12 min) pour établir un profil d'endurance.",
+            S2: "Comprendre la physiologie de l'effort (aérobie), les signes de l'effort (fréquence cardiaque, dyspnée) et l'hydratation.",
+            S12: "Course de 12 minutes chronométrée. Comparaison avec le test initial et auto-évaluation de la gestion de l'allure."
+        },
+        debutant: [
+            "Apprendre à courir lentement sans s'arrêter pendant 5 à 8 minutes.",
+            "Découvrir la respiration nasale ou mixte pour éviter le essoufflement.",
+            "Travailler la posture de course : épaules basses, bras relâchés, regard au loin.",
+            "Comprendre le fractionné : alterner course lente et marche active.",
+            "Apprendre à évaluer son effort à l'aide de l'échelle de Borg (facile/difficile).",
+            "S'initier à l'échauffement spécifique (marche rapide puis course progressive).",
+            "Travailler la régularité : maintenir la même allure sur 400m.",
+            "Découvrir la récupération active (marche après l'effort).",
+            "Test de référence : course de 6 minutes en continu."
+        ],
+        moyen: [
+            "Développer l'endurance de base en courant 10 à 15 minutes sans interruption.",
+            "Apprendre à gérer son allure en fonction de la distance à parcourir.",
+            "Travailler le fractionné long : 2x5min avec 2min de récupération.",
+            "Maîtriser la respiration abdominale pour optimiser l'oxygenation.",
+            "Comprendre le rôle de la VMA et calculer ses zones d'entraînement.",
+            "S'initier à la course en côte (montée douce) pour renforcer les jambes.",
+            "Travailler la régularité sur des parcours avec virages et changements de direction.",
+            "Apprendre à se réhydrater pendant l'effort prolongé.",
+            "Test de mi-parcours : course de 9 minutes avec mesure de la distance."
+        ],
+        avance: [
+            "Courir 15 à 20 minutes à allure régulière en contrôlant sa fréquence cardiaque.",
+            "Travailler le seuil : maintenir une allure rapide mais soutenable (85% FCmax).",
+            "Fractionné spécifique : 4x4min à allure rapide avec récupération complète.",
+            "Gérer les variations de rythme : accélérations courtes en cours de course.",
+            "Travailler la résistance sur terrain varié (herbe, sable, côte).",
+            "Maîtriser la gestion mentale : se fixer des repères et des objectifs intermédiaires.",
+            "Analyser sa course : temps au tour, régularité, sensations.",
+            "S'initier à l'entraînement par intervalles courts (30s/30s).",
+            "Course-test de 12 minutes avec objectif de distance à atteindre."
+        ],
+        elite: [
+            "Optimiser la VMA par des séances de fractionné de haute intensité.",
+            "Travail de seuil et de résistance spécifique sur des durées de 20-30 min.",
+            "Maîtriser les différentes allures : endurance, seuil, VMA, sprint.",
+            "Gérer la fatigue et la douleur musculaire en fin d'effort.",
+            "Planification de l'entraînement : cycles de charge et de récupération.",
+            "Travail mental : visualisation et concentration sur la gestion de l'allure.",
+            "Course en compétition : tactique de dépassement et de relance.",
+            "Analyse des performances : courbe de vitesse et régularité.",
+            "Course finale de 12 minutes : recherche de la performance maximale."
+        ]
+    },
+    'Saut en hauteur': {
+        commun: {
+            S1: "Évaluer la technique de franchissement et la souplesse dorsale via des sauts à hauteur progressive.",
+            S2: "Biomécanique du saut (Vitesse d'approche + Impulsion = Hauteur), règlement (3 essais, barre montante) et sécurité.",
+            S12: "Concours à barres montantes. Validation de la progression technique et de la hauteur franchie."
+        },
+        debutant: [
+            "Découvrir la course d'élan courbe et l'impulsion sur le pied extérieur.",
+            "Travailler le franchissement ventral simple sans barre (saut sur plot).",
+            "S'initier à la rotation dorsale (Fosbury-flop) sur tapis épais.",
+            "Améliorer la souplesse du dos (pont, cambrures) pour faciliter le franchissement.",
+            "Apprendre à synchroniser la course et l'impulsion.",
+            "Travailler l'atterrissage sécurisé sur le dos dans le tapis.",
+            "Comprendre le règlement : 3 essais par hauteur, barre montante.",
+            "S'initier au rôle de juge : lever/baisser la barre et vérifier les touches.",
+            "Test initial : franchissement à hauteur du genou puis de la taille."
+        ],
+        moyen: [
+            "Stabiliser la course d'élan courbe avec 5-7 foulées régulières.",
+            "Améliorer l'impulsion : bras et genou libre montent simultanément.",
+            "Travailler la rotation dorsale complète : épaules, dos, hanches au-dessus de la barre.",
+            "Optimiser l'esquive : jambes ramenées après le franchissement du dos.",
+            "Travailler la concentration avant le départ (visualisation).",
+            "Gérer le stress de la barre montante et des échecs.",
+            "Analyser la technique : regarder la vidéo ou demander un retour.",
+            "S'initier à la stratégie de concours : quand passer une hauteur.",
+            "Concours blanc avec barres montantes de 5cm en 5cm."
+        ],
+        avance: [
+            "Optimiser la vitesse d'approche sans perte de contrôle.",
+            "Travailler l'impulsion explosive : griffé du sol et extension complète.",
+            "Perfectionner la technique de l'esquive : jambes en ciseaux ou groupées.",
+            "Maîtriser la réception enroulée pour amortir la chute.",
+            "Travail spécifique de souplesse et de gainage pour la position en arc.",
+            "Gestion mentale : rester concentré malgré les échecs.",
+            "Analyser les erreurs : mordu, manque de vitesse, impulsion trop tôt.",
+            "S'initier à la planification de la saison et aux cycles d'entraînement.",
+            "Concours avec objectif de hauteur personnel à atteindre."
+        ],
+        elite: [
+            "Maîtriser la course d'élan courbe à haute vitesse.",
+            "Optimisation de l'impulsion : angle et puissance maximale.",
+            "Technique avancée de l'esquive : rotation complète et rapide.",
+            "Travail de pliométrie pour augmenter la puissance au sol.",
+            "Gestion parfaite du stress compétitif et de la concentration.",
+            "Stratégie de concours : gestion des essais et des hauteurs.",
+            "Analyse vidéo détaillée et correction des micro-défauts.",
+            "Préparation mentale et visualisation avant chaque saut.",
+            "Compétition finale : recherche du record personnel."
+        ]
+    },
+    'Tennis de table': {
+        commun: {
+            S1: "Évaluer la capacité à maintenir un échange, la qualité des frappes et la connaissance des règles.",
+            S2: "Étude du règlement (service, comptage, fautes), prise de raquette et placement à la table.",
+            S12: "Matchs de compétition avec évaluation technique et tactique des échanges."
+        },
+        debutant: [
+            "Découvrir la prise de raquette orthodoxe (pouce et index en V).",
+            "Apprendre le coup droit : frappe devant soi, bras accompagnant la balle.",
+            "S'initier au revers : coude près du corps, frappe sur le côté gauche.",
+            "Maintenir un échange de 5 à 10 frappes avec un partenaire.",
+            "Découvrir le service : balle lancée verticalement, frappée derrière la table.",
+            "Travailler le placement latéral : se déplacer pour frapper la balle.",
+            "Comprendre le comptage des points et les changements de service.",
+            "S'initier à l'arbitrage : compter les points et signaler les fautes.",
+            "Matchs de découverte : focus sur la régularité des échanges."
+        ],
+        moyen: [
+            "Améliorer la régularité du coup droit : précision et contrôle.",
+            "Développer le revers : puissance et précision sur la table.",
+            "Varier les placements : jouer droite, gauche, court, long.",
+            "Travailler le service : variation de longueur et de trajectoire.",
+            "S'initier aux effets : balle coupée et balle liftée.",
+            "Apprendre le smash : frappe haute et puissante sur balle lobée.",
+            "Travailler le bloc : interception rapide près du filet.",
+            "Comprendre la tactique : déplacer l'adversaire pour créer l'espace.",
+            "Tournoi interne : matchs au meilleur des 3 sets."
+        ],
+        avance: [
+            "Maîtriser les effets : coupé, lifté, top-spin pour varier le jeu.",
+            "Développer le service avec effet : rotation et trajectoire variées.",
+            "Travailler le topspin : balle qui plonge après le rebond.",
+            "Construire le point : service, 3ème balle, attaque.",
+            "Maîtriser le contre-topspin sur balle attaquée.",
+            "Travailler la défense : balle coupée défensive et lob.",
+            "Gérer les changements de rythme : attaque/défense.",
+            "Analyse tactique : identifier les points faibles de l'adversaire.",
+            "Matchs compétitifs avec analyse des statistiques."
+        ],
+        elite: [
+            "Optimisation technique de toutes les frappes.",
+            "Maîtrise avancée des effets et des rotations.",
+            "Service agressif avec effets variés et trajectoires imprévisibles.",
+            "Jeu de pieds rapide et placement optimal à chaque frappe.",
+            "Construction tactique complète du point.",
+            "Gestion mentale : concentration et gestion du stress.",
+            "Adaptation au style de jeu adverse en cours de match.",
+            "Préparation physique spécifique (réflexes, déplacements).",
+            "Compétition de haut niveau avec objectif de victoire."
+        ]
+    },
+    'Badminton': {
+        commun: {
+            S1: "Évaluer la capacité à renvoyer le volant, les déplacements et la connaissance des règles.",
+            S2: "Étude du règlement (service, comptage, fautes), prise de raquette et déplacements sur le terrain.",
+            S12: "Matchs de compétition avec évaluation technique et tactique des échanges."
+        },
+        debutant: [
+            "Découvrir la prise de raquette universelle.",
+            "Apprendre le dégagé (clear) : frappe haute vers le fond du terrain.",
+            "S'initier à l'amorti (drop shot) : frappe douce près du filet.",
+            "Maintenir un échange de 5 à 10 frappes avec un partenaire.",
+            "Découvrir le service : court et long selon la situation.",
+            "Travailler les déplacements de base : pas chassés et fente.",
+            "Comprendre le comptage des points (21 points, 2 points d'écart).",
+            "S'initier à l'arbitrage : compter les points et signaler les fautes.",
+            "Matchs de découverte : focus sur la régularité des échanges."
+        ],
+        moyen: [
+            "Améliorer la précision du dégagé : fond de court et zones.",
+            "Développer l'amorti : variation de hauteur et de placement.",
+            "Apprendre le smash : frappe puissante et descendante.",
+            "Varier les services : court, long, droit, revers.",
+            "Travailler les déplacements : replacement rapide au centre.",
+            "S'initier au drive : frappe plate et rapide.",
+            "Comprendre la tactique : alterner jeu long et jeu court.",
+            "Travailler la coordination avec un partenaire en double.",
+            "Tournoi interne : matchs au meilleur des 3 sets."
+        ],
+        avance: [
+            "Maîtriser le smash : puissance, précision et angles.",
+            "Développer le smash sauté : saut et frappe simultanés.",
+            "Varier les amortis : dissimulation et trajectoire.",
+            "Travailler le service avec effet : trajectoire imprévisible.",
+            "Maîtriser les déplacements rapides dans tous les coins.",
+            "Construire le point : déplacer l'adversaire puis finir au smash.",
+            "Gérer le double : communication et couverture du terrain.",
+            "Analyse tactique : exploiter les faiblesses adverses.",
+            "Matchs compétitifs avec stratégie de jeu."
+        ],
+        elite: [
+            "Optimisation technique de toutes les frappes.",
+            "Maîtrise avancée des effets et des déceptions.",
+            "Smash explosif avec variation d'angles.",
+            "Jeu de pieds rapide et anticipation des trajectoires.",
+            "Construction tactique complète du point.",
+            "Gestion mentale : concentration et gestion du stress.",
+            "Adaptation au style de jeu adverse en cours de match.",
+            "Préparation physique spécifique (explosivité, endurance).",
+            "Compétition de haut niveau avec objectif de victoire."
+        ]
+    }
 };
 
 module.exports = async (req, res) => {
@@ -313,12 +808,56 @@ module.exports = async (req, res) => {
         const sitRef = getSituationReference(aps, isCollege);
         const groupeAPS = getGroupeAPS(aps);
 
-        // Récupérer les objectifs
-        let objectifs = OBJECTIFS_CYCLE[aps] || OBJECTIFS_CYCLE['Handball'];
-
-        // Adapter au nombre de séances
+        // Récupérer les objectifs depuis la structure complète avec commun + niveaux
+        const cycleData = OBJECTIFS_CYCLE[aps] || OBJECTIFS_CYCLE['Football'];
+        
+        // Construire le tableau d'objectifs selon la structure du cycle
+        let objectifs = [];
+        
+        // S1: Évaluation diagnostique
+        if (cycleData.commun && cycleData.commun.S1) {
+            objectifs.push(cycleData.commun.S1);
+        }
+        
+        // S2: Théorie/Règlement
+        if (cycleData.commun && cycleData.commun.S2) {
+            objectifs.push(cycleData.commun.S2);
+        }
+        
+        // Séances d'apprentissage selon le niveau des élèves
+        // Pour Gymnastique, utiliser le niveau scolaire (1AC, 2AC, etc.)
+        let niveauKey = nivEleves;
+        if (aps === 'Gymnastique' && ['1AC', '2AC', '3AC', 'TC', '1AB', '2AB'].includes(niveau)) {
+            niveauKey = niveau;
+        }
+        
+        const seancesNiveau = cycleData[niveauKey] || cycleData['moyen'] || cycleData['debutant'] || [];
+        
+        // Calculer combien de séances d'apprentissage on peut ajouter
+        // nb - 3 car on a déjà S1, S2 et on garde la dernière pour S12
+        const nbSeancesApprentissage = Math.max(0, nb - 3);
+        
+        if (seancesNiveau && seancesNiveau.length > 0) {
+            // Répartir les séances disponibles sur le nombre demandé
+            for (let i = 0; i < nbSeancesApprentissage; i++) {
+                const index = Math.floor(i * seancesNiveau.length / nbSeancesApprentissage);
+                objectifs.push(seancesNiveau[Math.min(index, seancesNiveau.length - 1)]);
+            }
+        } else {
+            // Fallback si pas de séances définies pour ce niveau
+            for (let i = 0; i < nbSeancesApprentissage; i++) {
+                objectifs.push("Consolider les acquis techniques et tactiques à travers des situations variées.");
+            }
+        }
+        
+        // S12: Évaluation terminale
+        if (cycleData.commun && cycleData.commun.S12) {
+            objectifs.push(cycleData.commun.S12);
+        }
+        
+        // S'assurer qu'on a exactement le nombre de séances demandé
         while (objectifs.length < nb) {
-            objectifs.splice(-1, 0, "Consolider les acquis techniques et tactiques à travers des situations variées.");
+            objectifs.push("Consolider les acquis techniques et tactiques à travers des situations variées.");
         }
         objectifs = objectifs.slice(0, nb);
 
