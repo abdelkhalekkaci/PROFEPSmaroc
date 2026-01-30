@@ -73,7 +73,7 @@ SITUATION2_ORGANISATION: [organisation détaillée avec dimensions et matériel]
 SITUATION2_DEROULEMENT: [4-5 phrases décrivant le déroulement]
 SITUATION2_CONSIGNES: [4 consignes techniques]
 SITUATION2_VARIANTES: [variantes de simplification et complexification]
-SITUATION2_SCHEMA: [Code SVG valide complet pour la situation 2 (dimensions 300x200).]
+SITUATION2_SCHEMA: [Code SVG valide complet pour la situation 2 (dimensions 300x200). Inclure les lignes et marquages standards du terrain pour l'APS concernée.]
 
 CRITERES_REALISATION: [4 critères décrivant COMMENT bien faire - qualité technique du geste, avec bullet points •]
 CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres, temps, distances]`;
