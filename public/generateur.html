@@ -1157,19 +1157,17 @@
                 }
             };
 
-            html2pdf().set(opt).from(tempDiv).save()
-                .then(() => {
-                    document.body.removeChild(tempDiv);
-                    btn.innerHTML = originalText;
-                    btn.disabled = false;
-                })
-                .catch(err => {
-                    console.error(err);
-                    alert('Erreur lors de la génération PDF');
-                    document.body.removeChild(tempDiv);
-                    btn.innerHTML = originalText;
-                    btn.disabled = false;
-                });
+            try {
+                const pdfBlobUrl = await html2pdf().set(opt).from(tempDiv).output('bloburl');
+                window.open(pdfBlobUrl, '_blank');
+            } catch (err) {
+                console.error(err);
+                alert('Erreur lors de la génération PDF');
+            } finally {
+                document.body.removeChild(tempDiv);
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
         });
 
         // Auto-fill from localStorage
