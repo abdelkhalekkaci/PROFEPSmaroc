@@ -1107,67 +1107,36 @@
         document.getElementById('downloadPdf').addEventListener('click', () => {
             if (!currentHtml) return;
 
-            const btn = document.getElementById('downloadPdf');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '⏳ Génération...';
-            btn.disabled = true;
-
-            // Extraire le contenu du body et les styles
+            // Extraire le contenu du body et les styles pour éviter les balises html/body imbriquées
             const bodyContentMatch = currentHtml.match(/<body[^>]*>([\s\S]*)<\/body>/i);
             const styleContentMatch = currentHtml.match(/<style[^>]*>([\s\S]*)<\/style>/i);
 
             const bodyContent = bodyContentMatch ? bodyContentMatch[1] : currentHtml;
             const styleContent = styleContentMatch ? styleContentMatch[1] : '';
 
-            // Créer un conteneur temporaire visible pour html2canvas
             const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = `<style>${styleContent}</style><div class="pdf-container">${bodyContent}</div>`;
+            // On injecte le style et le contenu
+            tempDiv.innerHTML = `<style>${styleContent}</style>${bodyContent}`;
 
-            // Styles critiques pour l'impression
-            // On le place en absolu par dessus tout, fond blanc
-            Object.assign(tempDiv.style, {
-                position: 'fixed',
-                top: '0',
-                left: '0',
-                width: currentType === 'grille' ? '210mm' : '297mm',
-                zIndex: '9999',
-                background: 'white',
-                visibility: 'visible',
-                overflow: 'hidden'
-            });
+            // Positionnement fixe hors écran mais "visible" pour le moteur de rendu
+            tempDiv.style.position = 'fixed';
+            tempDiv.style.left = '0';
+            tempDiv.style.top = '0';
+            tempDiv.style.width = currentType === 'grille' ? '210mm' : '297mm'; // Largeur forcée selon le format
+            tempDiv.style.zIndex = '-9999';
+            tempDiv.style.background = 'white';
 
             document.body.appendChild(tempDiv);
 
             const opt = {
-                margin: [5, 5, 5, 5],
+                margin: 5,
                 filename: currentFilename.replace('.doc', '.pdf'),
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: {
-                    scale: 2,
-                    useCORS: true,
-                    logging: false,
-                    letterRendering: true,
-                    windowWidth: currentType === 'grille' ? 794 : 1123,
-                    scrollY: 0
-                },
-                jsPDF: {
-                    unit: 'mm',
-                    format: 'a4',
-                    orientation: currentType === 'grille' ? 'portrait' : 'landscape'
-                }
+                html2canvas: { scale: 2, useCORS: true, logging: false, windowWidth: currentType === 'grille' ? 794 : 1123 }, // A4 px at 96dpi
+                jsPDF: { unit: 'mm', format: 'a4', orientation: currentType === 'grille' ? 'portrait' : 'landscape' }
             };
 
-            try {
-                const pdfBlobUrl = await html2pdf().set(opt).from(tempDiv).output('bloburl');
-                window.open(pdfBlobUrl, '_blank');
-            } catch (err) {
-                console.error(err);
-                alert('Erreur lors de la génération PDF');
-            } finally {
-                document.body.removeChild(tempDiv);
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-            }
+            html2pdf().set(opt).from(tempDiv).save().then(() => document.body.removeChild(tempDiv));
         });
 
         // Auto-fill from localStorage
