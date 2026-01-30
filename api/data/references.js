@@ -1,5 +1,7 @@
 // ============================================================================
 // RÉFÉRENCES PARTAGÉES - /api/data/references.js
+// OTI, OTC, Vocabulaire APS, Situations de référence, Critères d'observation
+// OBJECTIFS_CYCLE avec fonctions helpers
 // ============================================================================
 
 const OTI = {
@@ -12,41 +14,144 @@ const OTI = {
 };
 
 const OTC = {
-    'Handball': { '1AC': "Conserver collectivement la balle et participer activement au jeu pour progresser vers la cible adverse et marquer en situation de jeu réduit, tout en respectant les règles fondamentales.", '2AC': "Faire progresser la balle vers la cible par des déplacements variés et des passes adaptées, en s'inscrivant dans une organisation collective simple.", '3AC': "S'inscrire dans un projet collectif basé sur l'alternance rapide attaquant/défenseur, en utilisant des combinaisons simples et en exploitant les espaces libres.", 'TC': "Utiliser des moyens techniques et tactiques adaptés pour créer des situations favorables au tir, en s'organisant collectivement.", '1AB': "Mettre en œuvre des choix tactiques collectifs pertinents avec vitesse d'exécution adaptée, en coordonnant les actions individuelles.", '2AB': "Élaborer une stratégie collective basée sur la maîtrise des rôles et l'occupation rationnelle de l'espace." },
-    'Football': { '1AC': "Conserver le ballon individuellement et collectivement pour progresser vers le but adverse, en utilisant des conduites de balle et des passes simples.", '2AC': "Faire progresser le ballon par des conduites maîtrisées et des passes précises vers des partenaires démarqués.", '3AC': "Participer à un projet de jeu collectif intégrant les transitions attaque-défense, en occupant rationnellement l'espace.", 'TC': "Organiser le jeu collectif en utilisant les fondamentaux techniques au service de la progression vers le but.", '1AB': "S'adapter aux configurations de jeu pour optimiser les choix tactiques individuels et collectifs.", '2AB': "Concevoir et appliquer des stratégies de jeu adaptées au rapport de force." },
-    'Basketball': { '1AC': "Conserver la balle et progresser vers la cible en utilisant le dribble et la passe, tout en respectant les règles.", '2AC': "Créer et exploiter des situations favorables au tir par le démarquage et la circulation de balle.", '3AC': "S'inscrire dans une organisation collective offensive et défensive équilibrée.", 'TC': "Optimiser la circulation de balle pour créer le déséquilibre défensif.", '1AB': "Analyser le rapport de force et adapter ses choix tactiques en fonction des réactions adverses.", '2AB': "Mettre en œuvre des systèmes de jeu élaborés en attaque et en défense." },
-    'Volleyball': { '1AC': "Se déplacer et se placer correctement pour renvoyer la balle dans le camp adverse, en utilisant la manchette et la touche haute.", '2AC': "Construire l'attaque par un renvoi indirect utilisant un relais, en s'organisant pour la réception-passe-attaque.", '3AC': "Organiser la défense et orienter la construction offensive vers la zone avant.", 'TC': "S'organiser collectivement dans la limite des trois touches réglementaires.", '1AB': "Optimiser la construction du point avec des rôles différenciés.", '2AB': "Mettre en place une organisation collective avec combinaisons offensives variées." },
-    'Course de vitesse': { '1AC': "Réagir rapidement au signal de départ et maintenir sa vitesse maximale sur une distance courte (40-60m).", '2AC': "Améliorer sa technique de course (fréquence et amplitude) pour optimiser sa vitesse sur 60-80m.", '3AC': "Gérer sa course du départ à l'arrivée en optimisant l'accélération et le maintien de vitesse.", 'TC': "Maîtriser les différentes phases de la course de vitesse pour réaliser sa meilleure performance.", '1AB': "Analyser et améliorer ses points faibles techniques et physiques.", '2AB': "Atteindre son potentiel maximal par une préparation et une exécution optimales." },
-    'Saut en longueur': { '1AC': "Réaliser une course d'élan progressivement accélérée suivie d'une impulsion et une réception équilibrée.", '2AC': "Enchaîner une course d'élan régulière, une impulsion active et un saut avec attitude aérienne simple.", '3AC': "Optimiser sa course d'élan étalonnée pour faire coïncider vitesse maximale et planche d'appel.", 'TC': "Maîtriser l'organisation de sa course d'élan et la qualité de son impulsion.", '1AB': "Augmenter l'efficacité du saut par la maîtrise de la liaison course-impulsion.", '2AB': "Optimiser sa performance en coordonnant les trois phases du saut." },
-    'Saut en hauteur': { '1AC': "Franchir une barre en utilisant une course d'élan et une impulsion vers le haut.", '2AC': "Réaliser un franchissement dorsal (fosbury-flop) avec course d'élan courbe adaptée.", '3AC': "Optimiser son franchissement par une meilleure coordination course courbe-impulsion-rotation.", 'TC': "Maîtriser la technique du fosbury-flop avec course d'élan courbe efficace.", '1AB': "Améliorer sa performance par l'optimisation de chaque phase technique.", '2AB': "Réaliser une performance optimale en gérant les paramètres de la compétition." },
-    'Course de durée': { '1AC': "Courir de façon régulière sur une durée donnée (8-10 min) en gérant son effort.", '2AC': "Adapter son allure de course pour maintenir un effort prolongé (10-12 min).", '3AC': "Construire et respecter un projet de course en fonction de ses capacités (12-15 min).", 'TC': "Planifier et réaliser une performance en gérant efficacement ses ressources énergétiques.", '1AB': "Optimiser sa performance par une gestion stratégique de l'allure.", '2AB': "Atteindre ses objectifs personnels par une stratégie de course adaptée." },
-    'Lancer de poids': { '1AC': "Lancer un engin en utilisant une poussée du bras depuis l'épaule, dans le respect des règles.", '2AC': "Coordonner la poussée des jambes et l'action du bras lanceur pour améliorer la distance.", '3AC': "Enchaîner les actions motrices du lancer en respectant la technique.", 'TC': "Réaliser un lancer en maîtrisant la coordination des segments corporels.", '1AB': "Améliorer sa performance par le perfectionnement technique.", '2AB': "Optimiser sa performance par une maîtrise complète de la chaîne de lancer." },
-    'Gymnastique': { '1AC': "Réaliser un enchaînement simple au sol comprenant des éléments gymniques de base.", '2AC': "Présenter un enchaînement gymnique varié avec des liaisons fluides.", '3AC': "Concevoir et réaliser un enchaînement individuel au sol avec originalité.", 'TC': "Présenter un enchaînement gymnique au sol avec maîtrise technique.", '1AB': "Composer et réaliser un enchaînement avec continuité et expression personnelle.", '2AB': "Concevoir, réaliser et évaluer un enchaînement gymnique avec expertise." },
-    'Tennis de table': { '1AC': "Maintenir un échange en renvoyant la balle sur la table adverse, en utilisant coup droit et revers.", '2AC': "Diriger la balle dans différentes zones de la table pour mettre l'adversaire en difficulté.", '3AC': "Varier les trajectoires, les vitesses et les effets pour prendre l'initiative du point.", 'TC': "Construire le point en utilisant des variations de placement, vitesse et effet.", '1AB': "Élaborer des stratégies de jeu adaptées aux caractéristiques de l'adversaire.", '2AB': "Mettre en œuvre un projet de jeu personnel et l'adapter en cours de match." },
-    'Badminton': { '1AC': "Renvoyer le volant dans le terrain adverse en utilisant les frappes de base.", '2AC': "Varier la longueur et la direction de ses frappes pour déplacer l'adversaire.", '3AC': "Alterner jeu long et jeu court pour créer des espaces libres.", 'TC': "Construire le point en exploitant les espaces libres du terrain adverse.", '1AB': "Élaborer des séquences de jeu tactiquement cohérentes.", '2AB': "Concevoir et appliquer une stratégie de jeu personnelle adaptée à l'adversaire." }
+    'Handball': {
+        '1AC': "Conserver collectivement la balle et participer activement au jeu pour progresser vers la cible adverse et marquer en situation de jeu réduit, tout en respectant les règles fondamentales et en assurant la continuité du jeu.",
+        '2AC': "Faire progresser la balle vers la cible par des déplacements variés et des passes adaptées, en s'inscrivant dans une organisation collective simple et en assumant les rôles d'attaquant et de défenseur.",
+        '3AC': "S'inscrire dans un projet collectif basé sur l'alternance rapide attaquant/défenseur, en utilisant des combinaisons simples et en exploitant les espaces libres pour créer le déséquilibre.",
+        'TC': "Utiliser des moyens techniques et tactiques adaptés pour créer des situations favorables au tir, en s'organisant collectivement en attaque et en défense selon des principes de jeu identifiés.",
+        '1AB': "Mettre en œuvre des choix tactiques collectifs pertinents avec vitesse d'exécution adaptée, en gérant le rapport de force et en coordonnant les actions individuelles au service du projet d'équipe.",
+        '2AB': "Élaborer une stratégie collective basée sur la maîtrise des rôles et l'occupation rationnelle de l'espace, en s'adaptant aux configurations de jeu et en optimisant l'efficacité collective."
+    },
+    'Football': {
+        '1AC': "Conserver le ballon individuellement et collectivement pour progresser vers le but adverse, en utilisant des conduites de balle et des passes simples, tout en respectant les règles et la sécurité.",
+        '2AC': "Faire progresser le ballon par des conduites maîtrisées et des passes précises vers des partenaires démarqués, en s'organisant pour attaquer et défendre collectivement.",
+        '3AC': "Participer à un projet de jeu collectif intégrant les transitions attaque-défense, en occupant rationnellement l'espace et en enchaînant les actions avec pertinence.",
+        'TC': "Organiser le jeu collectif en utilisant les fondamentaux techniques au service de la progression vers le but, en respectant les principes d'attaque et de défense.",
+        '1AB': "S'adapter aux configurations de jeu pour optimiser les choix tactiques individuels et collectifs, en gérant les transitions et en créant le surnombre offensif.",
+        '2AB': "Concevoir et appliquer des stratégies de jeu adaptées au rapport de force, en coordonnant les actions et en exploitant les points faibles adverses."
+    },
+    'Basketball': {
+        '1AC': "Conserver la balle et progresser vers la cible en utilisant le dribble et la passe, tout en respectant les règles du non-contact et du marcher, dans une organisation collective simple.",
+        '2AC': "Créer et exploiter des situations favorables au tir par le démarquage et la circulation de balle, en assumant les rôles offensifs et défensifs.",
+        '3AC': "S'inscrire dans une organisation collective offensive et défensive équilibrée, en utilisant les écrans et les appels de balle pour créer le déséquilibre.",
+        'TC': "Optimiser la circulation de balle pour créer le déséquilibre défensif, en utilisant des systèmes de jeu simples et en respectant l'espacement.",
+        '1AB': "Analyser le rapport de force et adapter ses choix tactiques en fonction des réactions adverses, en variant les formes d'attaque et de défense.",
+        '2AB': "Mettre en œuvre des systèmes de jeu élaborés en attaque et en défense, en s'adaptant aux stratégies adverses et en optimisant l'efficacité collective."
+    },
+    'Volleyball': {
+        '1AC': "Se déplacer et se placer correctement pour renvoyer la balle dans le camp adverse, en utilisant la manchette et la touche haute, tout en respectant les règles et la rotation.",
+        '2AC': "Construire l'attaque par un renvoi indirect utilisant un relais, en s'organisant pour assurer la réception, la passe et l'attaque dans la limite des trois touches.",
+        '3AC': "Organiser la défense et orienter la construction offensive vers la zone avant, en différenciant les rôles de passeur et d'attaquant selon les positions.",
+        'TC': "S'organiser collectivement dans la limite des trois touches réglementaires, en optimisant la réception-passe-attaque et en assurant la couverture défensive.",
+        '1AB': "Optimiser la construction du point avec des rôles différenciés, en variant les formes d'attaque et en adaptant la défense aux configurations adverses.",
+        '2AB': "Mettre en place une organisation collective avec combinaisons offensives variées, en utilisant les feintes et en exploitant les faiblesses adverses."
+    },
+    'Course de vitesse': {
+        '1AC': "Réagir rapidement au signal de départ et maintenir sa vitesse maximale sur une distance courte (40-60m), en courant dans son couloir.",
+        '2AC': "Améliorer sa technique de course (fréquence et amplitude des foulées) pour optimiser sa vitesse sur 60-80m, avec un départ réactif.",
+        '3AC': "Gérer sa course du départ à l'arrivée en optimisant l'accélération, le maintien de la vitesse maximale et la finition.",
+        'TC': "Maîtriser les différentes phases de la course de vitesse pour réaliser sa meilleure performance.",
+        '1AB': "Analyser et améliorer ses points faibles techniques et physiques pour progresser vers sa performance optimale.",
+        '2AB': "Atteindre son potentiel maximal par une préparation et une exécution optimales, en gérant le stress de la compétition."
+    },
+    'Saut en longueur': {
+        '1AC': "Réaliser une course d'élan progressivement accélérée suivie d'une impulsion vers l'avant et le haut, et une réception équilibrée sur les deux pieds dans la fosse.",
+        '2AC': "Enchaîner une course d'élan régulière et accélérée, une impulsion active sur la planche d'appel et un saut avec une attitude aérienne simple.",
+        '3AC': "Optimiser sa course d'élan étalonnée pour faire coïncider la vitesse maximale avec la planche d'appel, et améliorer l'efficacité de l'impulsion et de la suspension.",
+        'TC': "Maîtriser l'organisation de sa course d'élan et la qualité de son impulsion pour réaliser une performance optimale, en adoptant une technique aérienne efficace.",
+        '1AB': "Augmenter l'efficacité du saut par la maîtrise de la liaison course-impulsion et l'amélioration de la phase aérienne.",
+        '2AB': "Optimiser sa performance en coordonnant les trois phases du saut avec une technique aérienne maîtrisée."
+    },
+    'Saut en hauteur': {
+        '1AC': "Franchir une barre en utilisant une course d'élan et une impulsion vers le haut, avec une technique de franchissement ventral ou dorsal simplifié.",
+        '2AC': "Réaliser un franchissement dorsal (fosbury-flop) avec une course d'élan courbe adaptée et une impulsion sur le pied extérieur.",
+        '3AC': "Optimiser son franchissement par une meilleure coordination course courbe-impulsion-rotation dorsale, en améliorant la position du corps au-dessus de la barre.",
+        'TC': "Maîtriser la technique du fosbury-flop avec une course d'élan courbe efficace, une impulsion puissante et un franchissement dorsal économique.",
+        '1AB': "Améliorer sa performance par l'optimisation de chaque phase technique, en travaillant la vitesse d'entrée et la qualité de l'esquive dorsale.",
+        '2AB': "Réaliser une performance optimale en gérant les paramètres techniques, physiques et psychologiques de la compétition."
+    },
+    'Course de durée': {
+        '1AC': "Courir de façon régulière sur une durée donnée (8-10 min) en gérant son effort et en maintenant une allure constante.",
+        '2AC': "Adapter son allure de course pour maintenir un effort prolongé (10-12 min), en utilisant des repères de temps et de distance.",
+        '3AC': "Construire et respecter un projet de course en fonction de ses capacités, sur une durée de 12-15 min, en régulant son allure.",
+        'TC': "Planifier et réaliser une performance en gérant efficacement ses ressources énergétiques, sur une distance ou durée définie.",
+        '1AB': "Optimiser sa performance par une gestion stratégique de l'allure, en s'appuyant sur la connaissance de ses capacités.",
+        '2AB': "Atteindre ses objectifs personnels par une préparation et une stratégie de course adaptées à ses ressources."
+    },
+    'Lancer de poids': {
+        '1AC': "Lancer un engin en utilisant une poussée du bras depuis l'épaule, dans le respect des règles de sécurité et de l'aire de lancer.",
+        '2AC': "Coordonner la poussée des jambes et l'action du bras lanceur pour améliorer la distance de lancer, en respectant la technique en translation.",
+        '3AC': "Enchaîner les actions motrices du lancer en respectant la technique et les règles de la compétition.",
+        'TC': "Réaliser un lancer en maîtrisant la coordination des différents segments corporels dans une technique en translation ou rotation.",
+        '1AB': "Améliorer sa performance par le perfectionnement technique et le développement de la puissance musculaire spécifique.",
+        '2AB': "Optimiser sa performance par une maîtrise complète de la chaîne de lancer et une gestion efficace de la compétition."
+    },
+    'Gymnastique': {
+        '1AC': "Réaliser un enchaînement simple au sol comprenant des éléments gymniques de base, présenté avec maîtrise devant la classe.",
+        '2AC': "Présenter un enchaînement gymnique varié avec des liaisons fluides et une présentation soignée.",
+        '3AC': "Concevoir et réaliser un enchaînement individuel au sol avec originalité et maîtrise.",
+        'TC': "Présenter un enchaînement gymnique au sol avec maîtrise technique et qualité de présentation.",
+        '1AB': "Composer et réaliser un enchaînement au sol avec continuité et expression personnelle.",
+        '2AB': "Concevoir, réaliser et évaluer un enchaînement gymnique varié avec expertise et créativité."
+    },
+    'Tennis de table': {
+        '1AC': "Maintenir un échange en renvoyant la balle sur la table adverse, en utilisant le coup droit et le revers, dans le respect des règles.",
+        '2AC': "Diriger la balle dans différentes zones de la table pour mettre l'adversaire en difficulté, en variant les placements.",
+        '3AC': "Varier les trajectoires, les vitesses et les effets pour prendre l'initiative du point.",
+        'TC': "Construire le point en utilisant des variations de placement, de vitesse et d'effet.",
+        '1AB': "Élaborer des stratégies de jeu adaptées aux caractéristiques de l'adversaire.",
+        '2AB': "Mettre en œuvre un projet de jeu personnel et l'adapter en cours de match."
+    },
+    'Badminton': {
+        '1AC': "Renvoyer le volant dans le terrain adverse en utilisant les frappes de base, dans le respect des règles et des limites du terrain.",
+        '2AC': "Varier la longueur et la direction de ses frappes pour déplacer l'adversaire et créer des espaces.",
+        '3AC': "Alterner jeu long et jeu court pour créer des espaces libres et marquer le point.",
+        'TC': "Construire le point en exploitant les espaces libres du terrain adverse.",
+        '1AB': "Élaborer des séquences de jeu tactiquement cohérentes, en utilisant les feintes.",
+        '2AB': "Concevoir et appliquer une stratégie de jeu personnelle adaptée à l'adversaire."
+    }
 };
 
 const VOCABULAIRE_APS = {
-    'Handball': 'passe à terre, passe en cloche, réception à deux mains, dribble, tir en appui, tir en suspension, feinte, démarquage, appel de balle, pivot, ailier, arrière, zone 6m, contre-attaque, repli défensif',
-    'Football': 'conduite de balle, contrôle orienté, passe courte intérieur du pied, passe longue, tir, dribble, tacle, marquage, démarquage, appel en profondeur, une-deux',
-    'Basketball': 'dribble de progression, dribble de protection, passe à terre, passe une main, lay-up, tir en suspension, rebond, écran, pick and roll, démarquage, pivot',
-    'Volleyball': 'manchette bras tendus, touche haute, service cuillère, service tennis, smash, bloc, réception, passe, passeur, attaquant, rotation',
-    'Course de vitesse': 'position de départ, réaction au signal, mise en action, accélération, fréquence, amplitude, maintien de vitesse, finish',
-    'Course de durée': 'allure régulière, gestion de l\'effort, fréquence cardiaque, endurance, récupération, foulée économique',
-    'Saut en longueur': 'course d\'élan, marques, planche d\'appel, impulsion, phase d\'envol, réception, fosse',
-    'Saut en hauteur': 'course d\'élan courbe, pied d\'appel extérieur, impulsion, rotation dorsale, fosbury-flop, réception',
-    'Lancer de poids': 'position dos à l\'aire, tenue au cou, translation, poussée, extension du bras, équilibre final',
-    'Gymnastique': 'roulade avant, roulade arrière, ATR, roue, pont, souplesse, équilibre, saut, liaison, amplitude, tenue',
-    'Tennis de table': 'coup droit, revers, service court, service long, effet coupé, effet lifté, placement, déplacement',
-    'Badminton': 'dégagé, amorti, smash, drive, service court, service long, replacement'
+    'Handball': 'passe à terre, passe en cloche, réception à deux mains, dribble, tir en appui, tir en suspension, feinte, démarquage, appel de balle, pivot, ailier, arrière, zone 6m, contre-attaque, repli défensif, engagement, jet franc, penalty',
+    'Football': 'conduite de balle, contrôle orienté, passe courte intérieur du pied, passe longue, tir, dribble, tacle, marquage, démarquage, appel en profondeur, une-deux, centre, corner, touche, hors-jeu',
+    'Basketball': 'dribble de progression, dribble de protection, passe à terre, passe une main, lay-up, tir en suspension, rebond offensif, rebond défensif, écran, pick and roll, démarquage, pivot, lancer franc',
+    'Volleyball': 'manchette bras tendus, touche haute, service cuillère, service tennis, smash, bloc, réception, passe, passeur, attaquant, libéro, rotation, filet, ligne des 3m',
+    'Course de vitesse': 'position de départ, réaction au signal, mise en action, phase d\'accélération, fréquence, amplitude, phase de maintien, finish, couloir, faux départ',
+    'Course de durée': 'allure régulière, gestion de l\'effort, fréquence cardiaque, VMA, endurance, récupération, foulée économique, respiration, hydratation',
+    'Saut en longueur': 'course d\'élan, marques, planche d\'appel, impulsion, phase d\'envol, ramené, ciseau, réception, fosse, mordre',
+    'Saut en hauteur': 'course d\'élan courbe, pied d\'appel extérieur, impulsion, rotation dorsale, fosbury-flop, esquive, franchissement, réception, barre, tapis',
+    'Lancer de poids': 'position de dos, tenue au cou, coude haut, translation, rotation, poussée, extension du bras, fouetté, équilibre final, cercle, butoir',
+    'Gymnastique': 'roulade avant, roulade arrière, ATR, roue, pont, souplesse avant, équilibre, saut extension, saut groupé, liaison, amplitude, tenue, réception',
+    'Tennis de table': 'coup droit, revers, service court, service long, effet coupé, effet lifté, top spin, bloc, placement, déplacement latéral, prise orthodoxe',
+    'Badminton': 'dégagé, amorti, smash, drive, lob, service court, service long, replacement, fente avant, pas chassés, prise universelle'
 };
 
 const getSituationReference = (aps, isCollege) => {
-    const situations = { 'Handball': 'Match 7 contre 7 sur terrain réglementaire (40m x 20m) avec application des règles officielles et arbitrage par les élèves', 'Football': 'Match 7 contre 7 sur terrain réduit (50m x 30m) avec 2 buts et application des règles simplifiées', 'Basketball': 'Match 5 contre 5 sur demi-terrain avec panier et application des règles officielles', 'Volleyball': 'Match 6 contre 6 sur terrain réglementaire (9m x 18m) avec filet à hauteur adaptée et rotation', 'Tennis de table': 'Match en simple au meilleur des 3 sets de 11 points avec application des règles officielles', 'Badminton': 'Match en simple au meilleur des 3 sets de 21 points avec application des règles officielles', 'Course de vitesse': isCollege ? 'Course chronométrée sur 60 mètres en couloir individuel avec départ au signal' : 'Course chronométrée sur 80 mètres en couloir individuel avec départ au signal', 'Saut en longueur': 'Concours de 3 essais mesurés avec course d\'élan libre, la meilleure performance est retenue', 'Saut en hauteur': 'Concours à barres montantes avec 3 essais maximum par hauteur, technique fosbury-flop', 'Lancer de poids': 'Concours de 3 essais mesurés depuis le plateau de lancer, la meilleure performance est retenue', 'Course de durée': 'Course de 12 minutes en régulant son allure pour parcourir la plus grande distance', 'Gymnastique': 'Présentation d\'un enchaînement au sol de 1 minute minimum comprenant les éléments imposés' };
+    const situations = {
+        'Handball': 'Match 7 contre 7 sur terrain réglementaire (40m x 20m) avec application des règles officielles, arbitrage par les élèves et rotation des équipes',
+        'Football': 'Match 7 contre 7 sur terrain réduit (50m x 30m) avec 2 buts réglementaires, application des règles simplifiées et arbitrage',
+        'Basketball': 'Match 5 contre 5 sur demi-terrain avec panier, application des règles officielles (marcher, reprise, fautes) et arbitrage par les élèves',
+        'Volleyball': 'Match 6 contre 6 sur terrain réglementaire (9m x 18m) avec filet à hauteur adaptée, rotation obligatoire et application des règles',
+        'Tennis de table': 'Match en simple au meilleur des 3 sets de 11 points avec application des règles officielles de service et comptage',
+        'Badminton': 'Match en simple au meilleur des 3 sets de 21 points avec application des règles officielles et arbitrage',
+        'Course de vitesse': isCollege ? 'Course chronométrée sur 60 mètres en couloir individuel avec départ au signal (sifflet ou claquoir)' : 'Course chronométrée sur 80 mètres en couloir individuel avec départ en starting-blocks',
+        'Saut en longueur': 'Concours de 3 essais mesurés avec course d\'élan libre (12-16 foulées), impulsion sur planche, la meilleure performance est retenue',
+        'Saut en hauteur': 'Concours à barres montantes (intervalles de 5cm) avec 3 essais maximum par hauteur, technique fosbury-flop',
+        'Lancer de poids': isCollege ? 'Concours de 3 essais mesurés avec poids de 3kg (filles) ou 4kg (garçons), technique en translation' : 'Concours de 3 essais mesurés avec poids de 4kg (filles) ou 5kg (garçons), la meilleure performance est retenue',
+        'Course de durée': 'Course de 12 minutes (test VMA) en régulant son allure pour parcourir la plus grande distance, mesure au plot le plus proche',
+        'Gymnastique': 'Présentation d\'un enchaînement au sol de 1 minute minimum comprenant les éléments imposés du niveau, évalué selon amplitude, tenue et liaisons'
+    };
     return situations[aps] || 'Situation adaptée au niveau des élèves';
 };
 
-const getGroupeAPS = (aps) => { if (['Handball', 'Football', 'Basketball', 'Volleyball'].includes(aps)) return 'Sports collectifs'; if (['Tennis de table', 'Badminton'].includes(aps)) return 'Sports de renvoi'; if (['Course de vitesse', 'Saut en longueur', 'Saut en hauteur', 'Lancer de poids', 'Course de durée'].includes(aps)) return 'Athlétisme'; if (aps === 'Gymnastique') return 'Gymnastique'; return 'Activité physique'; };
+const getGroupeAPS = (aps) => {
+    if (['Handball', 'Football', 'Basketball', 'Volleyball'].includes(aps)) return 'Sports collectifs';
+    if (['Tennis de table', 'Badminton'].includes(aps)) return 'Sports de renvoi';
+    if (['Course de vitesse', 'Saut en longueur', 'Saut en hauteur', 'Lancer de poids', 'Course de durée'].includes(aps)) return 'Athlétisme';
+    if (aps === 'Gymnastique') return 'Gymnastique';
+    return 'Activité physique';
+};
 
 const CRITERES_OBS = {
     'Handball': { criteres: [{ nom: 'Passe', sous: ['Précise', 'Imprécise'] }, { nom: 'Réception', sous: ['Assurée', 'Manquée'] }, { nom: 'Tir', sous: ['Cadré', 'Hors'] }, { nom: 'Démarquage', sous: ['Efficace', 'Passif'] }] },
@@ -63,10 +168,99 @@ const CRITERES_OBS = {
     'Badminton': { criteres: [{ nom: 'Dégagé', sous: ['Fond', 'Court'] }, { nom: 'Amorti', sous: ['Près filet', 'Long'] }, { nom: 'Service', sous: ['Réglem.', 'Faute'] }, { nom: 'Replacement', sous: ['Centre', 'Excentré'] }] }
 };
 
+const FALLBACKS = {
+    'Handball': {
+        echauf: 'Manipulation balle individuelle (2 min) | Passes en binômes à 6m (3 min) | Jeu des 10 passes 4c2 (3 min)',
+        s1t: 'Conservation et progression collective', s1b: 'Conserver la balle et atteindre la zone de marque',
+        s1o: '4 attaquants vs 2 défenseurs, terrain 20x15m, 4 plots délimitant la zone, 1 ballon',
+        s1d: 'Les 4 attaquants conservent le ballon face à 2 défenseurs. 1 point si la balle arrive dans la zone de marque. Rotation toutes les 2 min.',
+        s1c: '1. Regarder avant de passer\n2. Passe à terre tendue\n3. Se démarquer dans l\'espace libre\n4. Appeler la balle bras levé',
+        s1v: 'Simplifier: 4c1, 3 touches obligatoires | Complexifier: 4c3, 2 touches max',
+        s2t: 'Match à thème', s2b: 'Marquer un but en appliquant les techniques travaillées',
+        s2o: '2 équipes de 5 joueurs, terrain 30x20m avec 2 buts',
+        s2d: 'Match avec obligation d\'appliquer l\'objectif. Point bonus (+1) si objectif visible. Arrêts réguliers pour feedback.',
+        s2c: '1. Appliquer l\'objectif travaillé\n2. S\'engager en attaque et défense\n3. Respecter les règles\n4. Communiquer avec l\'équipe',
+        s2v: 'Simplifier: supériorité numérique offensive | Complexifier: infériorité numérique',
+        cr: '• Orientation du corps vers la cible avant la passe\n• Passe tendue à hauteur de poitrine du receveur\n• Déplacement immédiat dans l\'espace libre après la passe\n• Réception à deux mains, bras tendus vers le ballon',
+        cs: '• 7 passes réussies sur 10 tentatives\n• Atteindre la zone 3 fois sur 5 possessions\n• Temps de possession supérieur à 20 secondes\n• Marquer 2 buts minimum en 5 minutes de jeu'
+    },
+    'Football': {
+        echauf: 'Conduite de balle en slalom (2 min) | Passes intérieur du pied à 8m (3 min) | Contrôle orienté + passe (3 min)',
+        s1t: 'Conservation et progression vers le but', s1b: 'Conserver le ballon et marquer dans le mini-but adverse',
+        s1o: '4c2 sur terrain 25x20m, 2 mini-buts, chasubles, 1 ballon',
+        s1d: 'Les 4 attaquants conservent et progressent vers le but. Rotation après récupération défensive. 1 point par but.',
+        s1c: '1. Contrôle orienté vers l\'espace libre\n2. Passe avec l\'intérieur du pied\n3. Appel en profondeur\n4. Lever la tête avant de passer',
+        s1v: 'Simplifier: 4c1, ballon toujours au sol | Complexifier: 4c3, 2 touches max',
+        s2t: 'Match à thème', s2b: 'Marquer en utilisant les techniques travaillées',
+        s2o: '2 équipes de 5, terrain 40x25m avec 2 buts',
+        s2d: 'Match avec point bonus si application visible de l\'objectif. Arrêts pour corrections.',
+        s2c: '1. Appliquer l\'objectif\n2. Jouer vers l\'avant\n3. Se replacer défensivement\n4. Communiquer',
+        s2v: 'Simplifier: joker offensif | Complexifier: 2 touches maximum',
+        cr: '• Contrôle avec l\'intérieur du pied orienté vers la cible\n• Surface de contact au centre du ballon\n• Pied d\'appui placé à côté du ballon lors de la frappe\n• Regard sur le ballon puis sur la cible avant la passe',
+        cs: '• 8 contrôles réussis sur 10 tentatives\n• 7 passes arrivées au partenaire sur 10\n• Conserver le ballon 30 secondes minimum\n• Marquer 1 but par période de 5 minutes'
+    },
+    'Basketball': {
+        echauf: 'Dribble main droite/gauche slalom (2 min) | Passes à terre en triangle (3 min) | Lay-up sans opposition (3 min)',
+        s1t: 'Passe et va vers le panier', s1b: 'Réaliser un passe et va pour marquer un panier',
+        s1o: '3c2 sur demi-terrain avec panier, 1 ballon, chasubles',
+        s1d: 'Les 3 attaquants appliquent le passe et va pour créer le décalage. Panier après passe et va = 2 points. Rotation après possession.',
+        s1c: '1. Passer et couper immédiatement vers le panier\n2. Recevoir en course sans marcher\n3. Finir en lay-up main extérieure\n4. Écarter si passe et va défendu',
+        s1v: 'Simplifier: 3c1, défenseur passif | Complexifier: 3c3, écran obligatoire avant passe et va',
+        s2t: 'Match à thème', s2b: 'Marquer en utilisant le passe et va',
+        s2o: '2 équipes de 4, demi-terrain avec panier',
+        s2d: 'Match avec bonus pour chaque panier après passe et va réussi. Rotations toutes les 4 min.',
+        s2c: '1. Appliquer le passe et va\n2. Espacer le jeu\n3. Défendre son joueur direct\n4. Communiquer',
+        s2v: 'Simplifier: supériorité offensive | Complexifier: 2 dribbles max',
+        cr: '• Passe tendue à hauteur de poitrine vers le receveur\n• Coupe directe et rapide vers le panier après la passe\n• Réception en course avec regard vers le panier\n• Lay-up avec appui intérieur et main extérieure',
+        cs: '• 6 lay-up réussis sur 10 tentatives\n• 3 paniers après passe et va sur 5 possessions\n• 0 marcher sur 10 réceptions en mouvement\n• Équipe avec plus de 10 points en 5 minutes'
+    },
+    'Volleyball': {
+        echauf: 'Jonglage manchette individuel (2 min) | Échanges touche haute par 2 (3 min) | Service + réception (3 min)',
+        s1t: 'Construction en 3 touches', s1b: 'Construire une attaque en utilisant les 3 touches réglementaires',
+        s1o: '3c3 sur terrain réduit 6x9m, filet à 2m, 1 ballon',
+        s1d: 'L\'équipe en réception construit en 3 touches: R1 manchette vers passeur, passeur touche haute vers attaquant, attaque. Point bonus si 3 touches.',
+        s1c: '1. Manchette orientée vers le passeur (zone 3)\n2. Touche haute à 1m du filet vers l\'attaquant\n3. Attaque vers le sol adverse\n4. Annoncer "j\'ai!" avant chaque touche',
+        s1v: 'Simplifier: lancer au lieu de servir, 4 touches autorisées | Complexifier: attaque smashée obligatoire',
+        s2t: 'Match à thème', s2b: 'Marquer le point en construisant en 3 touches',
+        s2o: '2 équipes de 4, terrain 7x14m, filet à hauteur adaptée',
+        s2d: 'Match avec bonus pour chaque point marqué en 3 touches. Rotation obligatoire toutes les 5 points.',
+        s2c: '1. Construire systématiquement en 3 touches\n2. Communiquer les positions\n3. Couvrir l\'attaquant\n4. Assurer la rotation',
+        s2v: 'Simplifier: 2 touches minimum autorisées | Complexifier: zone d\'attaque imposée',
+        cr: '• Bras tendus et joints pour la manchette de réception\n• Mains en coupe au-dessus du front pour la touche\n• Déplacement sous le ballon avant chaque frappe\n• Orientation des appuis vers la cible visée',
+        cs: '• 7 manchettes vers zone passeur sur 10 réceptions\n• 6 touches hautes exploitables sur 10 passes\n• 3 attaques gagnantes sur 5 tentatives\n• 4 constructions complètes en 3 touches sur 5 réceptions'
+    }
+};
+
+// Schémas SVG colorés pour les situations
+const SCHEMAS = {
+    'Handball': {
+        1: '<svg viewBox="0 0 200 120" style="width:100%;max-width:280px;height:auto;margin:10px auto;display:block;"><rect x="5" y="5" width="190" height="110" fill="#90EE90" stroke="#228B22" stroke-width="2" rx="5"/><rect x="5" y="45" width="25" height="30" fill="none" stroke="#228B22" stroke-width="2"/><rect x="170" y="45" width="25" height="30" fill="none" stroke="#228B22" stroke-width="2"/><circle cx="60" cy="40" r="8" fill="#c1272d"/><text x="60" y="44" text-anchor="middle" fill="white" font-size="10" font-weight="bold">A</text><circle cx="60" cy="80" r="8" fill="#c1272d"/><text x="60" y="84" text-anchor="middle" fill="white" font-size="10" font-weight="bold">A</text><circle cx="100" cy="60" r="8" fill="#c1272d"/><text x="100" y="64" text-anchor="middle" fill="white" font-size="10" font-weight="bold">A</text><circle cx="80" cy="60" r="8" fill="#c1272d"/><text x="80" y="64" text-anchor="middle" fill="white" font-size="10" font-weight="bold">A</text><circle cx="130" cy="50" r="8" fill="#1565c0"/><text x="130" y="54" text-anchor="middle" fill="white" font-size="10" font-weight="bold">D</text><circle cx="130" cy="70" r="8" fill="#1565c0"/><text x="130" y="74" text-anchor="middle" fill="white" font-size="10" font-weight="bold">D</text><text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">4 Attaquants vs 2 Défenseurs</text></svg>',
+        2: '<svg viewBox="0 0 200 120" style="width:100%;max-width:280px;height:auto;margin:10px auto;display:block;"><rect x="5" y="5" width="190" height="110" fill="#90EE90" stroke="#228B22" stroke-width="2" rx="5"/><rect x="5" y="45" width="25" height="30" fill="none" stroke="#228B22" stroke-width="2"/><rect x="170" y="45" width="25" height="30" fill="none" stroke="#228B22" stroke-width="2"/><circle cx="50" cy="35" r="7" fill="#c1272d"/><circle cx="50" cy="60" r="7" fill="#c1272d"/><circle cx="50" cy="85" r="7" fill="#c1272d"/><circle cx="80" cy="48" r="7" fill="#c1272d"/><circle cx="80" cy="72" r="7" fill="#c1272d"/><circle cx="120" cy="35" r="7" fill="#1565c0"/><circle cx="120" cy="60" r="7" fill="#1565c0"/><circle cx="120" cy="85" r="7" fill="#1565c0"/><circle cx="150" cy="48" r="7" fill="#1565c0"/><circle cx="150" cy="72" r="7" fill="#1565c0"/><text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">Match 5 vs 5</text></svg>'
+    },
+    'Football': {
+        1: '<svg viewBox="0 0 200 120" style="width:100%;max-width:280px;height:auto;margin:10px auto;display:block;"><rect x="5" y="5" width="190" height="110" fill="#90EE90" stroke="#228B22" stroke-width="2" rx="5"/><rect x="5" y="40" width="20" height="40" fill="none" stroke="#228B22" stroke-width="2"/><rect x="175" y="40" width="20" height="40" fill="none" stroke="#228B22" stroke-width="2"/><circle cx="100" cy="60" r="15" fill="none" stroke="#228B22" stroke-width="1"/><circle cx="55" cy="40" r="8" fill="#c1272d"/><circle cx="55" cy="80" r="8" fill="#c1272d"/><circle cx="85" cy="50" r="8" fill="#c1272d"/><circle cx="85" cy="70" r="8" fill="#c1272d"/><circle cx="130" cy="55" r="8" fill="#1565c0"/><circle cx="130" cy="75" r="8" fill="#1565c0"/><text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">4 vs 2 - Progression</text></svg>',
+        2: '<svg viewBox="0 0 200 120" style="width:100%;max-width:280px;height:auto;margin:10px auto;display:block;"><rect x="5" y="5" width="190" height="110" fill="#90EE90" stroke="#228B22" stroke-width="2" rx="5"/><rect x="5" y="40" width="20" height="40" fill="none" stroke="#228B22" stroke-width="2"/><rect x="175" y="40" width="20" height="40" fill="none" stroke="#228B22" stroke-width="2"/><circle cx="40" cy="60" r="6" fill="#c1272d"/><circle cx="70" cy="35" r="6" fill="#c1272d"/><circle cx="70" cy="85" r="6" fill="#c1272d"/><circle cx="90" cy="50" r="6" fill="#c1272d"/><circle cx="90" cy="70" r="6" fill="#c1272d"/><circle cx="160" cy="60" r="6" fill="#1565c0"/><circle cx="130" cy="35" r="6" fill="#1565c0"/><circle cx="130" cy="85" r="6" fill="#1565c0"/><circle cx="110" cy="50" r="6" fill="#1565c0"/><circle cx="110" cy="70" r="6" fill="#1565c0"/><text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">Match 5 vs 5</text></svg>'
+    },
+    'Basketball': {
+        1: '<svg viewBox="0 0 200 120" style="width:100%;max-width:280px;height:auto;margin:10px auto;display:block;"><rect x="5" y="5" width="190" height="110" fill="#DEB887" stroke="#8B4513" stroke-width="2" rx="5"/><circle cx="175" cy="60" r="20" fill="none" stroke="#8B4513" stroke-width="2"/><rect x="170" y="50" width="25" height="20" fill="none" stroke="#8B4513" stroke-width="2"/><circle cx="60" cy="40" r="8" fill="#c1272d"/><circle cx="60" cy="80" r="8" fill="#c1272d"/><circle cx="90" cy="60" r="8" fill="#c1272d"/><circle cx="130" cy="50" r="8" fill="#1565c0"/><circle cx="130" cy="70" r="8" fill="#1565c0"/><text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">3 vs 2 - Passe et va</text></svg>',
+        2: '<svg viewBox="0 0 200 120" style="width:100%;max-width:280px;height:auto;margin:10px auto;display:block;"><rect x="5" y="5" width="190" height="110" fill="#DEB887" stroke="#8B4513" stroke-width="2" rx="5"/><circle cx="175" cy="60" r="20" fill="none" stroke="#8B4513" stroke-width="2"/><circle cx="50" cy="40" r="6" fill="#c1272d"/><circle cx="50" cy="80" r="6" fill="#c1272d"/><circle cx="80" cy="50" r="6" fill="#c1272d"/><circle cx="80" cy="70" r="6" fill="#c1272d"/><circle cx="120" cy="40" r="6" fill="#1565c0"/><circle cx="120" cy="80" r="6" fill="#1565c0"/><circle cx="140" cy="50" r="6" fill="#1565c0"/><circle cx="140" cy="70" r="6" fill="#1565c0"/><text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">4 vs 4 Match</text></svg>'
+    },
+    'Volleyball': {
+        1: '<svg viewBox="0 0 200 120" style="width:100%;max-width:280px;height:auto;margin:10px auto;display:block;"><rect x="5" y="5" width="190" height="110" fill="#F0E68C" stroke="#DAA520" stroke-width="2" rx="5"/><line x1="100" y1="5" x2="100" y2="115" stroke="#333" stroke-width="3"/><circle cx="50" cy="40" r="8" fill="#c1272d"/><text x="50" y="44" text-anchor="middle" fill="white" font-size="8" font-weight="bold">R</text><circle cx="50" cy="80" r="8" fill="#c1272d"/><text x="50" y="84" text-anchor="middle" fill="white" font-size="8" font-weight="bold">P</text><circle cx="75" cy="60" r="8" fill="#c1272d"/><text x="75" y="64" text-anchor="middle" fill="white" font-size="8" font-weight="bold">A</text><circle cx="150" cy="40" r="8" fill="#1565c0"/><circle cx="150" cy="80" r="8" fill="#1565c0"/><circle cx="125" cy="60" r="8" fill="#1565c0"/><text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">3 vs 3 - Construction</text></svg>',
+        2: '<svg viewBox="0 0 200 120" style="width:100%;max-width:280px;height:auto;margin:10px auto;display:block;"><rect x="5" y="5" width="190" height="110" fill="#F0E68C" stroke="#DAA520" stroke-width="2" rx="5"/><line x1="100" y1="5" x2="100" y2="115" stroke="#333" stroke-width="3"/><circle cx="35" cy="30" r="6" fill="#c1272d"/><circle cx="65" cy="30" r="6" fill="#c1272d"/><circle cx="35" cy="60" r="6" fill="#c1272d"/><circle cx="65" cy="60" r="6" fill="#c1272d"/><circle cx="135" cy="30" r="6" fill="#1565c0"/><circle cx="165" cy="30" r="6" fill="#1565c0"/><circle cx="135" cy="60" r="6" fill="#1565c0"/><circle cx="165" cy="60" r="6" fill="#1565c0"/><text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">4 vs 4 Match</text></svg>'
+    },
+    'default': {
+        1: '<svg viewBox="0 0 200 100" style="width:100%;max-width:280px;height:auto;margin:10px auto;display:block;"><rect x="5" y="5" width="190" height="90" fill="#E8E8E8" stroke="#666" stroke-width="2" rx="8"/><text x="100" y="50" text-anchor="middle" fill="#666" font-size="11">Zone de travail - Situation 1</text></svg>',
+        2: '<svg viewBox="0 0 200 100" style="width:100%;max-width:280px;height:auto;margin:10px auto;display:block;"><rect x="5" y="5" width="190" height="90" fill="#E8E8E8" stroke="#666" stroke-width="2" rx="8"/><text x="100" y="50" text-anchor="middle" fill="#666" font-size="11">Zone de travail - Situation 2</text></svg>'
+    }
+};
+
+const getSchema = (aps, numSit) => {
+    return SCHEMAS[aps] && SCHEMAS[aps][numSit] ? SCHEMAS[aps][numSit] : SCHEMAS['default'][numSit];
+};
+
 // ============================================================================
-// OBJECTIFS_CYCLE - À COPIER DANS /api/data/references.js
-// Structure: OBJECTIFS_CYCLE[aps].commun + OBJECTIFS_CYCLE[aps][niveau]
-// Niveaux: debutant, moyen, avance, elite (+ niveaux scolaires pour Gymnastique)
+// OBJECTIFS_CYCLE - Projets de cycle complets par APS et niveau
 // ============================================================================
 
 const OBJECTIFS_CYCLE = {
@@ -80,7 +274,7 @@ const OBJECTIFS_CYCLE = {
             "Maîtriser la conduite de balle en variant les surfaces de contact (intérieur/coup de pied) sans perdre le contrôle.",
             "Apprendre à réaliser une passe courte précise à l'intérieur du pied vers un partenaire immobile.",
             "S'initier au contrôle de balle (amorti) pour enchaîner rapidement une action de jeu.",
-            "Comprendre le principe du \"dégrappage\" : s'écarter du porteur de balle pour occuper le terrain.",
+            "Comprendre le principe du dégrappage : s'écarter du porteur de balle pour occuper le terrain.",
             "Apprendre la technique de frappe au but (armé de jambe et placement du pied d'appui).",
             "Découvrir les rôles défensifs : se placer entre le ballon et son propre but.",
             "Maîtriser les remises en jeu (touches et dégagements) en respectant le règlement.",
@@ -102,7 +296,7 @@ const OBJECTIFS_CYCLE = {
             "Maîtriser la protection de balle sous pression adverse (utilisation du corps).",
             "Développer le jeu long (transversales) pour changer d'aile et déséquilibrer le bloc adverse.",
             "Perfectionner la finition devant le but sous contrainte temporelle ou d'opposition.",
-            "Apprendre les principes du \"Une-Deux\" et des combinaisons à trois pour percer une défense.",
+            "Apprendre les principes du Une-Deux et des combinaisons à trois pour percer une défense.",
             "Travailler le pressing collectif : déclencher une récupération haute du ballon.",
             "Transition rapide : passer de la phase défensive à l'attaque (contre-attaque fulgurante).",
             "Organisation tactique : respecter un système de jeu choisi (ex: 4-4-2 ou 4-3-3).",
@@ -113,7 +307,7 @@ const OBJECTIFS_CYCLE = {
             "Optimisation de la vitesse de réaction avec ballon et réduction des temps de latence technique.",
             "Maîtriser les coups de pied arrêtés (corners, coups francs) : placements et trajectoires spécifiques.",
             "Travail spécifique par poste : défenseurs (alignement), milieux (orientation), attaquants (appels).",
-            "Maîtriser le \"bloc bas\" et le \"bloc haut\" selon les phases du match.",
+            "Maîtriser le bloc bas et le bloc haut selon les phases du match.",
             "Développer l'intelligence de jeu : lecture des trajectoires d'interception et anticipation.",
             "Gestion du rythme : alterner entre jeu de possession lent et accélérations verticales.",
             "Simulation de situations de crise (jouer en infériorité numérique ou score à remonter).",
@@ -121,7 +315,6 @@ const OBJECTIFS_CYCLE = {
             "Match de haute intensité avec focus sur le leadership et la communication sur le terrain."
         ]
     },
-
     'Volleyball': {
         commun: {
             S1: "Évaluer le niveau initial des élèves (capacité à maintenir le ballon en l'air, respect des zones de jeu) pour établir un diagnostic et former des groupes homogènes.",
@@ -129,14 +322,14 @@ const OBJECTIFS_CYCLE = {
             S12: "Évaluer les progrès techniques individuels et l'efficacité de l'organisation collective en situation de match officiel."
         },
         debutant: [
-            "Maîtriser le service \"cuillère\" pour mettre le ballon en jeu de manière sécurisée.",
+            "Maîtriser le service cuillère pour mettre le ballon en jeu de manière sécurisée.",
             "Développer la réception en manchette (bras tendus, plan de frappe stable) sur des ballons faciles.",
             "S'initier à la passe haute (en touche) pour s'auto-envoyer le ballon ou viser une zone.",
             "Apprendre à renvoyer le ballon dans le camp adverse dès la première ou deuxième touche.",
             "Comprendre l'organisation spatiale : ne pas se gêner et respecter sa zone de départ.",
-            "Travailler le déplacement court et l'arrêt (être \"sous le ballon\") avant de frapper.",
+            "Travailler le déplacement court et l'arrêt (être sous le ballon) avant de frapper.",
             "S'initier au renvoi offensif simple (chercher les zones vides du camp adverse).",
-            "Apprendre l'arbitrage de base : compter les points, signaler le ballon \"in\" ou \"out\".",
+            "Apprendre l'arbitrage de base : compter les points, signaler le ballon in ou out.",
             "Match dirigé : focus sur la réduction des fautes directes (filet et hors-limites)."
         ],
         moyen: [
@@ -146,17 +339,17 @@ const OBJECTIFS_CYCLE = {
             "Construire une attaque en trois touches (Réception – Passe – Renvoi).",
             "S'initier au smash (attaque smashée) : coordination course d'élan et frappe haute.",
             "Apprendre le placement défensif de base en lecture (attendre le ballon en position basse).",
-            "Utiliser la communication verbale (\"J'ai !\", \"Moi !\") pour éviter les collisions.",
+            "Utiliser la communication verbale (J'ai !, Moi !) pour éviter les collisions.",
             "Arbitrage et score : gérer les rotations et les changements de camp.",
             "Tournoi : privilégier la construction du jeu avant de chercher à marquer le point."
         ],
         avance: [
-            "Maîtriser le service \"tennis\" (bras haut) pour mettre l'adversaire en difficulté.",
+            "Maîtriser le service tennis (bras haut) pour mettre l'adversaire en difficulté.",
             "Perfectionner la manchette de précision même sur des services puissants.",
             "Développer la passe arrière et la passe latérale pour varier les cibles d'attaque.",
             "Optimiser la relation Passeur/Attaquant (timing de l'appel de balle).",
             "S'initier au contre (block) individuel pour fermer les angles d'attaque.",
-            "Mise en place d'un système défensif en \"W\" pour couvrir tout le terrain en réception.",
+            "Mise en place d'un système défensif en W pour couvrir tout le terrain en réception.",
             "Apprendre à varier les attaques : smashes puissants, ballons placés (feintes).",
             "Observation tactique : identifier le maillon faible adverse pour orienter le service.",
             "Match de compétition : application de schémas tactiques simples (priorité au jeu placé)."
@@ -164,7 +357,7 @@ const OBJECTIFS_CYCLE = {
         elite: [
             "Maîtriser le service smashé ou le service flottant agressif.",
             "Spécialisation des postes : rôles fixes (Passeur, Pointu, Réceptionneur-Attaquant, Central).",
-            "Perfectionner les attaques rapides (la \"fixe\") pour surprendre le contre adverse.",
+            "Perfectionner les attaques rapides (la fixe) pour surprendre le contre adverse.",
             "Organiser un contre collectif (à deux joueurs) et la couverture derrière le contre.",
             "Transition Défense-Attaque : réorganisation rapide après une récupération difficile.",
             "Mise en œuvre de systèmes tactiques complexes (système 5-1 ou 4-2).",
@@ -173,7 +366,6 @@ const OBJECTIFS_CYCLE = {
             "Match de haut niveau avec contraintes : gérer la pression et les fins de sets serrées."
         ]
     },
-
     'Basketball': {
         commun: {
             S1: "Évaluer la capacité à manipuler le ballon, à se déplacer et à viser la cible pour diagnostiquer le niveau moteur et technique.",
@@ -186,7 +378,7 @@ const OBJECTIFS_CYCLE = {
             "S'initier au tir à l'arrêt : position des pieds, coude sous le ballon et cassé du poignet.",
             "Apprendre le double-pas (lay-up) : coordination des appuis droite-gauche ou gauche-droite.",
             "Comprendre la notion de non-contact : défendre sans toucher l'adversaire (bras levés).",
-            "Apprendre à s'arrêter en un ou deux temps pour éviter le \"marcher\".",
+            "Apprendre à s'arrêter en un ou deux temps pour éviter le marcher.",
             "S'initier au pivotement pour protéger son ballon face à un défenseur.",
             "S'initier à l'arbitrage : gestuelle de base pour le marcher et les sorties.",
             "Match dirigé : focus sur la progression vers l'avant sans violation de règle."
@@ -196,7 +388,7 @@ const OBJECTIFS_CYCLE = {
             "Développer la passe par-dessus la tête et la passe à terre pour varier les trajectoires.",
             "Améliorer la réussite au tir à mi-distance après un seul dribble.",
             "Perfectionner le lay-up en pleine course (vitesse d'exécution).",
-            "Mise en place d'une défense individuelle avec respect du triangle \"Ballon-Moi-Adversaire\".",
+            "Mise en place d'une défense individuelle avec respect du triangle Ballon-Moi-Adversaire.",
             "Apprendre à faire un écran simple pour libérer un partenaire porteur de balle.",
             "Développer le rebond offensif et défensif (prise de position sous le panier).",
             "Arbitrage et gestion de la table de marque (feuille de match simplifiée).",
@@ -206,9 +398,9 @@ const OBJECTIFS_CYCLE = {
             "Maîtriser le dribble de protection et le changement de rythme pour éliminer un défenseur.",
             "Développer la passe aveugle ou la passe après saut pour surprendre la défense.",
             "Travailler le tir en suspension (Jump Shot) avec une forme stable.",
-            "Maîtriser le \"Give and Go\" (Passe et va) pour créer des brèches.",
+            "Maîtriser le Give and Go (Passe et va) pour créer des brèches.",
             "Mise en place d'une défense de zone (2-3 ou 3-2) et compréhension des coulissements.",
-            "Apprendre à gérer le \"Pick and Roll\" (Écran et rouler) en attaque.",
+            "Apprendre à gérer le Pick and Roll (Écran et rouler) en attaque.",
             "Travailler la transition rapide (contre-attaque) après une récupération de balle.",
             "Coaching : analyser les statistiques de réussite et ajuster la stratégie à la mi-temps.",
             "Match de compétition : application rigoureuse des systèmes de jeu annoncés."
@@ -218,14 +410,13 @@ const OBJECTIFS_CYCLE = {
             "Maîtriser la lecture de jeu sur défense de zone et défense presse.",
             "Perfectionnement du tir à 3 points et des lancers-francs sous pression (fin de match).",
             "Systèmes offensifs complexes avec multiples écrans et coupes.",
-            "Maîtriser la \"Presse tout terrain\" et le repli défensif organisé.",
+            "Maîtriser la Presse tout terrain et le repli défensif organisé.",
             "Travail spécifique du poste : lecture du jeu pour le meneur, jeu dos au panier pour le pivot.",
             "Gestion des dernières possessions (stratégies sur 24 secondes).",
             "Analyse vidéo des placements et des erreurs de communication défensive.",
             "Match de haute intensité avec gestion des fautes et du temps mort tactique."
         ]
     },
-
     'Handball': {
         commun: {
             S1: "Évaluer la qualité de la passe, du tir et l'engagement défensif pour identifier les besoins du groupe.",
@@ -240,7 +431,7 @@ const OBJECTIFS_CYCLE = {
             "Comprendre l'interdiction d'entrer dans la zone du gardien.",
             "S'initier au rôle de gardien de but : postures et parades de base.",
             "Apprendre à défendre en restant face à l'attaquant sans commettre de faute grave.",
-            "Arbitrage : signaler le \"marcher\" et le \"jet de coin\".",
+            "Arbitrage : signaler le marcher et le jet de coin.",
             "Match dirigé : focus sur la circulation de balle sans dribble excessif."
         ],
         moyen: [
@@ -266,7 +457,7 @@ const OBJECTIFS_CYCLE = {
             "Match de compétition : focus sur la continuité du jeu et la fluidité des transitions."
         ],
         elite: [
-            "Perfectionnement du tir en appui long et du tir \"Kung-fu\" (en l'air).",
+            "Perfectionnement du tir en appui long et du tir Kung-fu (en l'air).",
             "Systèmes tactiques complexes (circulations de joueurs, doubles pivots).",
             "Maîtriser la défense 3-2-1 ou 4-2 avec harcèlement constant.",
             "Analyse des points faibles du gardien adverse et adaptation des tirs.",
@@ -277,7 +468,6 @@ const OBJECTIFS_CYCLE = {
             "Match de haut niveau avec application de consignes de jeu placées."
         ]
     },
-
     'Course de vitesse': {
         commun: {
             S1: "Évaluer le temps de réaction et la vitesse maximale sur 30m ou 60m (chronométrage de référence).",
@@ -288,17 +478,17 @@ const OBJECTIFS_CYCLE = {
             "Apprendre la posture de course : buste droit, regard vers l'horizon, bras en piston.",
             "Développer la réactivité au signal sonore (varier les positions de départ : assis, couché, dos).",
             "Maîtriser les appuis plante de pied (courir sur la pointe) pour réduire le temps de contact.",
-            "Apprendre le départ en \"appui-face\" (sans starting-blocks) : jambe de force devant.",
+            "Apprendre le départ en appui-face (sans starting-blocks) : jambe de force devant.",
             "Travailler la coordination bras/jambes par des exercices de montée de genoux et talons-fesses.",
             "Apprendre à maintenir sa trajectoire droite dans son couloir.",
             "S'initier à l'accélération progressive sur 10 à 20 mètres.",
-            "Apprendre à franchir la ligne d'arrivée sans ralentir (\"casser\" le buste).",
+            "Apprendre à franchir la ligne d'arrivée sans ralentir (casser le buste).",
             "Pré-test chronométré avec gestion du stress du départ."
         ],
         moyen: [
             "Améliorer l'efficacité de la foulée (amplitude vs fréquence).",
             "S'initier au réglage et à l'utilisation des starting-blocks (angles des cales).",
-            "Maîtriser le commandement de départ : \"À vos marques\", \"Prêt\", \"Partez\".",
+            "Maîtriser le commandement de départ : À vos marques, Prêt, Partez.",
             "Travailler la phase de poussée explosive lors des 10 premiers mètres (rester bas).",
             "Développer la vitesse de réaction spécifique (signaux visuels ou tactiles).",
             "Enchaîner la phase de mise en action et le passage à la course redressée.",
@@ -329,10 +519,9 @@ const OBJECTIFS_CYCLE = {
             "Test de performance en conditions réelles (vent, opposants de même niveau)."
         ]
     },
-
     'Lancer de poids': {
         commun: {
-            S1: "Évaluer le niveau initial (force et coordination) et identifier les élèves qui \"lancent\" au lieu de \"pousser\".",
+            S1: "Évaluer le niveau initial (force et coordination) et identifier les élèves qui lancent au lieu de pousser.",
             S2: "Règles de sécurité (zone de jet), tenue de l'engin (embase des doigts), et distinction entre jet et lancer.",
             S12: "Lancer un poids de 4kg (garçons) ou 3kg (filles) le plus loin possible et mesurer la performance."
         },
@@ -349,39 +538,38 @@ const OBJECTIFS_CYCLE = {
         ],
         moyen: [
             "Stabiliser la tenue du poids lors d'une mise en tension du buste.",
-            "Apprendre le placement \"de profil\" par rapport à la zone de chute.",
+            "Apprendre le placement de profil par rapport à la zone de chute.",
             "Travailler la poussée de la jambe droite (pour les droitiers) vers l'avant.",
             "Coordonner la fin de la poussée de jambe avec le départ du bras.",
-            "Améliorer l'angle d'envol (repères visuels à 45°).",
+            "Améliorer l'angle d'envol (repères visuels à 45 degrés).",
             "Travailler l'explosivité : enchaîner flexion de jambe et extension bras rapide.",
-            "S'initier au \"pas chassé\" très simple pour prendre de l'élan.",
+            "S'initier au pas chassé très simple pour prendre de l'élan.",
             "Apprendre à annoncer les résultats et gérer un concours de classe.",
             "Pré-compétition : stabiliser le lancer de profil avec élan réduit."
         ],
         avance: [
-            "Maîtriser le placement en \"Power Position\" (position de force) de manière stable.",
+            "Maîtriser le placement en Power Position (position de force) de manière stable.",
             "Apprendre le sursaut (glissement) arrière dans l'axe du jet.",
             "Travailler la reprise d'appui après le sursaut pour ne pas s'arrêter.",
             "Améliorer l'amplitude du mouvement : aller chercher le poids loin derrière.",
-            "Travailler le \"fouetté\" final du poignet pour donner de la vitesse.",
+            "Travailler le fouetté final du poignet pour donner de la vitesse.",
             "Exercices de proprioception pour garder le poids collé au cou malgré l'élan.",
-            "S'initier au \"rattrapage\" (changement de pieds après le jet) pour rester dans le cercle.",
+            "S'initier au rattrapage (changement de pieds après le jet) pour rester dans le cercle.",
             "Jugement : identifier les jets nuls (poids qui descend, sortie devant).",
             "Concours blanc : enchaîner sursaut et jet fluide."
         ],
         elite: [
             "Perfectionner la position de départ (dos à la zone de chute).",
             "Travailler le déséquilibre arrière contrôlé pour amorcer le sursaut.",
-            "Maîtriser le \"rasé de sol\" lors du glissement pour rester bas.",
+            "Maîtriser le rasé de sol lors du glissement pour rester bas.",
             "Travailler la fermeture de l'épaule gauche (pour les droitiers) pour créer une torsion.",
-            "Accélérer la phase finale (la \"gifle\" au poids).",
+            "Accélérer la phase finale (la gifle au poids).",
             "Travail de force explosive spécifique (pliométrie haute).",
             "Gérer l'espace du cercle : utiliser toute la longueur disponible.",
             "Organisation d'un meeting : chronométrage du temps de préparation (1 min).",
             "Séance de réglage des appuis et de la direction du jet."
         ]
     },
-
     'Saut en longueur': {
         commun: {
             S1: "Courir et sauter le plus loin possible. 3 essais mesurés pour chaque élève.",
@@ -404,7 +592,7 @@ const OBJECTIFS_CYCLE = {
             "Travailler le rythme des 3 dernières foulées (court-long-court) pour préparer l'impulsion.",
             "Optimiser l'angle d'envol : sauter par-dessus un élastique placé à faible hauteur.",
             "Travailler la vitesse de la course d'élan (progressive et non maximale immédiate).",
-            "Améliorer la technique de suspension (style \"groupé\").",
+            "Améliorer la technique de suspension (style groupé).",
             "Travailler l'extension complète de la jambe d'appel lors de l'impulsion.",
             "Apprendre à projeter les talons le plus loin possible devant soi à l'atterrissage.",
             "Arbitrage : gérer les drapeaux blanc (valide) et rouge (mordu).",
@@ -412,18 +600,18 @@ const OBJECTIFS_CYCLE = {
         ],
         avance: [
             "Optimisation de la course d'élan : recherche de la vitesse maximale contrôlable.",
-            "Travail spécifique sur le \"griffé\" du dernier appui au sol.",
-            "S'initier à la technique de suspension en \"extension\" (cambré-regroupé).",
+            "Travail spécifique sur le griffé du dernier appui au sol.",
+            "S'initier à la technique de suspension en extension (cambré-regroupé).",
             "Travailler la montée du genou de la jambe libre lors de l'impulsion.",
             "Exercices de pliométrie (bonds horizontaux) pour augmenter l'explosion au sol.",
-            "Analyser la trajectoire : éviter les sauts trop \"plats\" ou trop \"clochés\".",
+            "Analyser la trajectoire : éviter les sauts trop plats ou trop clochés.",
             "Travailler l'esquive latérale ou le basculement du bassin à la réception.",
             "Analyse vidéo ou observation fine : détecter les ralentissements avant la planche.",
             "Concours blanc : gestion des 3 essais comme en compétition officielle."
         ],
         elite: [
             "Stabilisation millimétrée des marques d'élan à haute intensité.",
-            "Perfectionnement du \"Ciseau\" ou \"Double Ciseau\" durant la phase de vol.",
+            "Perfectionnement du Ciseau ou Double Ciseau durant la phase de vol.",
             "Travail de survitesse (course avec vent arrière ou légère pente).",
             "Optimisation du transfert d'énergie : synchronisation parfaite bras-jambes.",
             "Travail de gainage dynamique pour maintenir la posture en l'air.",
@@ -433,7 +621,6 @@ const OBJECTIFS_CYCLE = {
             "Séance d'affûtage : peu de sauts, mais à 100% de l'engagement."
         ]
     },
-
     'Gymnastique': {
         commun: {
             S1: "Présenter l'enchaînement de référence pour évaluer la capacité de mémorisation, la sécurité et le niveau technique de départ.",
@@ -446,7 +633,7 @@ const OBJECTIFS_CYCLE = {
             "S'initier aux éléments de famille B : L'ATR (Appui Tendu Renversé) avec aide.",
             "Apprendre la Roue (B) : alignement des segments et passage par la verticale.",
             "Travailler les sauts de liaison (Saut groupé ou extension).",
-            "Travail spécifique sur la \"fixité\" des positions (maintenir 3 secondes).",
+            "Travail spécifique sur la fixité des positions (maintenir 3 secondes).",
             "Montage de l'enchaînement : organiser les 3A et 2B de manière fluide.",
             "Répétition avec juge-élève : identifier les fautes de jambes pliées.",
             "Séance de perfectionnement : travail sur l'entrée et la sortie du tapis."
@@ -471,7 +658,7 @@ const OBJECTIFS_CYCLE = {
             "Développement de l'expression : regard et port de tête pendant l'enchaînement.",
             "Montage de l'enchaînement (2A, 4B, 1C) : équilibrer les familles d'activités.",
             "Co-jugement : évaluation de la difficulté réelle par rapport au projet.",
-            "Séance de \"nettoyage\" : éliminer les petits pas de déséquilibre à la réception."
+            "Séance de nettoyage : éliminer les petits pas de déséquilibre à la réception."
         ],
         'TC': [
             "Réviser les fondamentaux et valider les éléments B (ATR, Roue, Rondade).",
@@ -482,9 +669,9 @@ const OBJECTIFS_CYCLE = {
             "Travail sur le rythme : alternance de phases lentes (souplesse) et rapides (acrobatie).",
             "Montage du projet (2A, 3B, 2C) sur la diagonale du tapis.",
             "Arbitrage expert : calcul de la note de difficulté (D) selon le quota.",
-            "Répétition finale : gestion du stress et présentation au \"public\"."
+            "Répétition finale : gestion du stress et présentation au public."
         ],
-        '1BAC': [
+        '1AB': [
             "Valider rapidement les éléments B et se concentrer sur les éléments C.",
             "S'initier aux éléments de famille D : Le Saut de mains (renversement dynamique).",
             "Travailler la Rondade-Saut extension (D) ou la Souplesse avant/arrière (C).",
@@ -495,25 +682,30 @@ const OBJECTIFS_CYCLE = {
             "Analyse critique : vidéo-analyse des angles d'ouverture d'épaules.",
             "Mise en condition de concours : passage devant un jury d'élèves."
         ],
-        '2BAC': [
+        '2AB': [
             "Maîtriser les éléments C comme base de travail (Lune, Souplesses).",
             "Travailler les éléments de famille D : Saut de mains, Rondade-Flic, ou Roue sans les mains.",
             "S'initier ou perfectionner les éléments de famille E : Salto arrière/avant ou Flip-flap.",
             "Travail de l'explosivité : maximiser la hauteur des envols.",
-            "Stabiliser les réceptions \"pilées\" : aucune tolérance pour les déséquilibres.",
+            "Stabiliser les réceptions pilées : aucune tolérance pour les déséquilibres.",
             "Travail chorégraphique : l'enchaînement doit être une prestation artistique.",
             "Finalisation de l'enchaînement (2C, 3D, 2E) : optimisation du barème.",
             "Jugement de haut niveau : déductions au dixième de point.",
             "Répétition générale : focus sur la concentration et la maîtrise de soi."
-        ]
+        ],
+        debutant: null,
+        moyen: null,
+        avance: null,
+        elite: null
     }
 };
 
 // ============================================================================
-// FONCTIONS HELPERS
+// FONCTIONS HELPERS POUR OBJECTIFS_CYCLE
 // ============================================================================
 
-const getObjectifSeance = (aps, niveau, numeroSeance, nombreTotalSeances = 10) => {
+const getObjectifSeance = (aps, niveau, numeroSeance, nombreTotalSeances) => {
+    nombreTotalSeances = nombreTotalSeances || 10;
     const cycle = OBJECTIFS_CYCLE[aps];
     if (!cycle) return null;
     
@@ -521,7 +713,10 @@ const getObjectifSeance = (aps, niveau, numeroSeance, nombreTotalSeances = 10) =
     if (numeroSeance === 2) return cycle.commun.S2;
     if (numeroSeance === nombreTotalSeances) return cycle.commun.S12;
     
-    const seances = cycle[niveau] || cycle.debutant || cycle['1AC'];
+    let seances = cycle[niveau];
+    if (!seances) {
+        seances = cycle.debutant || cycle['1AC'];
+    }
     if (!seances) return null;
     
     const indexApprentissage = numeroSeance - 3;
@@ -531,15 +726,20 @@ const getObjectifSeance = (aps, niveau, numeroSeance, nombreTotalSeances = 10) =
     return seances[seances.length - 1];
 };
 
-const buildProjetCycle = (aps, niveau, nombreSeances = 10) => {
+const buildProjetCycle = (aps, niveau, nombreSeances) => {
+    nombreSeances = nombreSeances || 10;
     const cycle = OBJECTIFS_CYCLE[aps];
     if (!cycle) return null;
     
     const projet = [];
-    const seances = cycle[niveau] || cycle.debutant || cycle['1AC'];
+    let seances = cycle[niveau];
+    if (!seances) {
+        seances = cycle.debutant || cycle['1AC'];
+    }
+    if (!seances) return null;
     
-    for (let i = 1; i <= nombreSeances; i++) {
-        let phase, objectif;
+    for (var i = 1; i <= nombreSeances; i++) {
+        var phase, objectif;
         
         if (i === 1) {
             phase = 'Évaluation diagnostique';
@@ -551,10 +751,10 @@ const buildProjetCycle = (aps, niveau, nombreSeances = 10) => {
             phase = 'Évaluation terminale';
             objectif = cycle.commun.S12;
         } else {
-            const indexMax = seances.length;
-            const seancesDisponibles = nombreSeances - 3;
-            const indexApprentissage = Math.floor((i - 3) * indexMax / seancesDisponibles);
-            const indexFinal = Math.min(indexApprentissage, indexMax - 1);
+            var indexMax = seances.length;
+            var seancesDisponibles = nombreSeances - 3;
+            var indexApprentissage = Math.floor((i - 3) * indexMax / seancesDisponibles);
+            var indexFinal = Math.min(indexApprentissage, indexMax - 1);
             
             if (i <= 4) phase = 'Découverte';
             else if (i <= nombreSeances - 3) phase = 'Apprentissage';
@@ -563,141 +763,27 @@ const buildProjetCycle = (aps, niveau, nombreSeances = 10) => {
             objectif = seances[indexFinal];
         }
         
-        projet.push({ seance: i, phase, objectif });
+        projet.push({ seance: i, phase: phase, objectif: objectif });
     }
     
     return projet;
 };
 
-module.exports = { OBJECTIFS_CYCLE, getObjectifSeance, buildProjetCycle };
+// ============================================================================
+// EXPORTS
+// ============================================================================
 
-const FALLBACKS = {
-    'Handball': { echauf: 'Manipulation balle individuelle (2 min) | Passes en binômes à 6m (3 min) | Jeu des 10 passes 4c2 (3 min)', s1t: 'Conservation et progression collective', s1b: 'Conserver la balle et atteindre la zone de marque', s1o: '4 attaquants vs 2 défenseurs, terrain 20x15m, 4 plots, 1 ballon', s1d: 'Les 4 attaquants conservent le ballon face à 2 défenseurs. 1 point si la balle arrive dans la zone. Rotation toutes les 2 min.', s1c: '1. Regarder avant de passer\n2. Passe à terre tendue\n3. Se démarquer dans l\'espace libre\n4. Appeler la balle bras levé', s1v: 'Simplifier: 4c1, 3 touches obligatoires | Complexifier: 4c3, 2 touches max', s2t: 'Match à thème', s2b: 'Marquer un but en appliquant les techniques travaillées', s2o: '2 équipes de 5 joueurs, terrain 30x20m avec 2 buts', s2d: 'Match avec obligation d\'appliquer l\'objectif. Point bonus (+1) si objectif visible.', s2c: '1. Appliquer l\'objectif travaillé\n2. S\'engager en attaque et défense\n3. Respecter les règles\n4. Communiquer', s2v: 'Simplifier: supériorité numérique | Complexifier: infériorité numérique', cr: '• Orientation du corps vers la cible avant la passe\n• Passe tendue à hauteur de poitrine\n• Déplacement dans l\'espace libre après la passe\n• Réception à deux mains bras tendus', cs: '• 7 passes réussies sur 10 tentatives\n• Atteindre la zone 3 fois sur 5 possessions\n• Temps de possession supérieur à 20 secondes\n• Marquer 2 buts minimum en 5 minutes' },
-    'Football': { echauf: 'Conduite slalom (2 min) | Passes intérieur pied 8m (3 min) | Contrôle orienté + passe (3 min)', s1t: 'Conservation et progression', s1b: 'Conserver le ballon et marquer dans le mini-but', s1o: '4c2 sur terrain 25x20m, 2 mini-buts, chasubles, 1 ballon', s1d: 'Les 4 attaquants conservent et progressent vers le but. Rotation après récupération.', s1c: '1. Contrôle orienté vers l\'espace\n2. Passe intérieur du pied\n3. Appel en profondeur\n4. Lever la tête', s1v: 'Simplifier: 4c1 | Complexifier: 4c3, 2 touches', s2t: 'Match à thème', s2b: 'Marquer en utilisant les techniques travaillées', s2o: '2 équipes de 5, terrain 40x25m avec 2 buts', s2d: 'Match avec point bonus si objectif visible.', s2c: '1. Appliquer l\'objectif\n2. Jouer vers l\'avant\n3. Se replacer\n4. Communiquer', s2v: 'Simplifier: joker offensif | Complexifier: 2 touches max', cr: '• Contrôle intérieur pied orienté vers cible\n• Surface de contact au centre du ballon\n• Pied d\'appui à côté du ballon\n• Regard ballon puis cible', cs: '• 8 contrôles réussis sur 10\n• 7 passes arrivées sur 10\n• Conservation 30 secondes minimum\n• 1 but par période de 5 min' },
-    'Basketball': { echauf: 'Dribble slalom (2 min) | Passes triangle (3 min) | Lay-up sans opposition (3 min)', s1t: 'Passe et va', s1b: 'Réaliser un passe et va pour marquer', s1o: '3c2 sur demi-terrain avec panier, 1 ballon, chasubles', s1d: 'Les 3 attaquants appliquent le passe et va. Panier = 2 points. Rotation après possession.', s1c: '1. Passer et couper vers le panier\n2. Recevoir en course sans marcher\n3. Finir en lay-up main extérieure\n4. Écarter si défendu', s1v: 'Simplifier: 3c1 | Complexifier: 3c3, écran obligatoire', s2t: 'Match à thème', s2b: 'Marquer en utilisant le passe et va', s2o: '2 équipes de 4, demi-terrain', s2d: 'Match avec bonus pour panier après passe et va.', s2c: '1. Appliquer le passe et va\n2. Espacer le jeu\n3. Défendre son joueur\n4. Communiquer', s2v: 'Simplifier: supériorité | Complexifier: 2 dribbles max', cr: '• Passe tendue hauteur poitrine\n• Coupe directe vers le panier\n• Réception en course regard panier\n• Lay-up appui intérieur main extérieure', cs: '• 6 lay-up réussis sur 10\n• 3 paniers passe et va sur 5\n• 0 marcher sur 10 réceptions\n• Plus de 10 points en 5 min' },
-    'Volleyball': { echauf: 'Jonglage manchette (2 min) | Échanges touche haute (3 min) | Service + réception (3 min)', s1t: 'Construction 3 touches', s1b: 'Construire une attaque en 3 touches', s1o: '3c3 terrain réduit 6x9m, filet 2m, 1 ballon', s1d: 'L\'équipe construit en 3 touches. Point bonus si respecté.', s1c: '1. Manchette vers passeur\n2. Touche haute à 1m du filet\n3. Attaque vers sol adverse\n4. Annoncer "j\'ai!"', s1v: 'Simplifier: lancer au lieu de servir | Complexifier: smash obligatoire', s2t: 'Match à thème', s2b: 'Marquer en construisant en 3 touches', s2o: '2 équipes de 4, terrain 7x14m', s2d: 'Match avec bonus point en 3 touches. Rotation toutes les 5 points.', s2c: '1. Construction 3 touches\n2. Communiquer positions\n3. Couvrir attaquant\n4. Rotation', s2v: 'Simplifier: 2 touches autorisées | Complexifier: zone imposée', cr: '• Bras tendus joints pour manchette\n• Mains coupe au-dessus front pour touche\n• Déplacement sous ballon\n• Orientation appuis vers cible', cs: '• 7 manchettes vers passeur sur 10\n• 6 touches exploitables sur 10\n• 3 attaques gagnantes sur 5\n• 4 constructions 3 touches sur 5' }
+module.exports = {
+    OTI,
+    OTC,
+    VOCABULAIRE_APS,
+    getSituationReference,
+    getGroupeAPS,
+    CRITERES_OBS,
+    FALLBACKS,
+    SCHEMAS,
+    getSchema,
+    OBJECTIFS_CYCLE,
+    getObjectifSeance,
+    buildProjetCycle
 };
-
-const SCHEMAS = {
-    'Handball': {
-        1: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;background:#e8f5e9;border:2px solid #2e7d32;border-radius:4px;">
-            <rect x="10" y="10" width="180" height="100" fill="none" stroke="#2e7d32" stroke-width="2"/>
-            <path d="M10,45 L35,45 L35,75 L10,75" fill="none" stroke="#2e7d32" stroke-width="2"/>
-            <path d="M190,45 L165,45 L165,75 L190,75" fill="none" stroke="#2e7d32" stroke-width="2"/>
-            <path d="M35,10 Q60,60 35,110" fill="none" stroke="#2e7d32" stroke-width="2" stroke-dasharray="4"/>
-            <path d="M165,10 Q140,60 165,110" fill="none" stroke="#2e7d32" stroke-width="2" stroke-dasharray="4"/>
-            <circle cx="60" cy="40" r="6" fill="#c1272d"/><text x="60" y="44" text-anchor="middle" fill="white" font-size="8" font-weight="bold">A</text>
-            <circle cx="60" cy="80" r="6" fill="#c1272d"/><text x="60" y="84" text-anchor="middle" fill="white" font-size="8" font-weight="bold">A</text>
-            <circle cx="130" cy="50" r="6" fill="#1565c0"/><text x="130" y="54" text-anchor="middle" fill="white" font-size="8" font-weight="bold">D</text>
-            <circle cx="130" cy="70" r="6" fill="#1565c0"/><text x="130" y="74" text-anchor="middle" fill="white" font-size="8" font-weight="bold">D</text>
-            <text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">Situation 1</text>
-        </svg>`,
-        2: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;background:#e8f5e9;border:2px solid #2e7d32;border-radius:4px;">
-            <rect x="10" y="10" width="180" height="100" fill="none" stroke="#2e7d32" stroke-width="2"/>
-            <line x1="100" y1="10" x2="100" y2="110" stroke="#2e7d32" stroke-width="2"/>
-            <circle cx="100" cy="60" r="15" fill="none" stroke="#2e7d32" stroke-width="2"/>
-            <circle cx="50" cy="40" r="5" fill="#c1272d"/>
-            <circle cx="50" cy="80" r="5" fill="#c1272d"/>
-            <circle cx="80" cy="60" r="5" fill="#c1272d"/>
-            <circle cx="150" cy="40" r="5" fill="#1565c0"/>
-            <circle cx="150" cy="80" r="5" fill="#1565c0"/>
-            <circle cx="120" cy="60" r="5" fill="#1565c0"/>
-            <text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">Situation 2</text>
-        </svg>`
-    },
-    'Football': {
-        1: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;background:#81c784;border:2px solid #1b5e20;border-radius:4px;">
-            <rect x="10" y="10" width="180" height="100" fill="none" stroke="#white" stroke-width="2"/>
-            <rect x="10" y="35" width="25" height="50" fill="none" stroke="white" stroke-width="2"/>
-            <rect x="165" y="35" width="25" height="50" fill="none" stroke="white" stroke-width="2"/>
-            <line x1="100" y1="10" x2="100" y2="110" stroke="white" stroke-width="2"/>
-            <circle cx="100" cy="60" r="15" fill="none" stroke="white" stroke-width="2"/>
-            <circle cx="60" cy="40" r="6" fill="#c1272d"/>
-            <circle cx="60" cy="80" r="6" fill="#c1272d"/>
-            <circle cx="80" cy="60" r="6" fill="#c1272d"/>
-            <circle cx="140" cy="60" r="6" fill="#1565c0"/>
-            <circle cx="120" cy="40" r="6" fill="#1565c0"/>
-            <text x="100" y="115" text-anchor="middle" fill="#white" font-size="9" font-weight="bold">Situation 1</text>
-        </svg>`,
-        2: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;background:#81c784;border:2px solid #1b5e20;border-radius:4px;">
-            <rect x="10" y="10" width="180" height="100" fill="none" stroke="white" stroke-width="2"/>
-            <line x1="100" y1="10" x2="100" y2="110" stroke="white" stroke-width="2"/>
-            <circle cx="100" cy="60" r="15" fill="none" stroke="white" stroke-width="2"/>
-            <circle cx="40" cy="30" r="5" fill="#c1272d"/>
-            <circle cx="40" cy="90" r="5" fill="#c1272d"/>
-            <circle cx="70" cy="60" r="5" fill="#c1272d"/>
-            <circle cx="160" cy="30" r="5" fill="#1565c0"/>
-            <circle cx="160" cy="90" r="5" fill="#1565c0"/>
-            <circle cx="130" cy="60" r="5" fill="#1565c0"/>
-            <text x="100" y="115" text-anchor="middle" fill="#white" font-size="9" font-weight="bold">Situation 2</text>
-        </svg>`
-    },
-    'Basketball': {
-        1: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;background:#ffcc80;border:2px solid #e65100;border-radius:4px;">
-            <rect x="10" y="10" width="180" height="100" fill="none" stroke="#e65100" stroke-width="2"/>
-            <line x1="100" y1="10" x2="100" y2="110" stroke="#e65100" stroke-width="2"/>
-            <path d="M10,40 L40,40 L40,80 L10,80" fill="none" stroke="#e65100" stroke-width="2"/>
-            <path d="M10,25 Q60,60 10,95" fill="none" stroke="#e65100" stroke-width="2"/>
-            <path d="M190,40 L160,40 L160,80 L190,80" fill="none" stroke="#e65100" stroke-width="2"/>
-            <path d="M190,25 Q140,60 190,95" fill="none" stroke="#e65100" stroke-width="2"/>
-            <circle cx="30" cy="50" r="6" fill="#c1272d"/>
-            <circle cx="30" cy="70" r="6" fill="#c1272d"/>
-            <circle cx="50" cy="60" r="6" fill="#c1272d"/>
-            <circle cx="150" cy="50" r="6" fill="#1565c0"/>
-            <circle cx="150" cy="70" r="6" fill="#1565c0"/>
-            <text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">Situation 1</text>
-        </svg>`,
-        2: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;background:#ffcc80;border:2px solid #e65100;border-radius:4px;">
-            <rect x="10" y="10" width="180" height="100" fill="none" stroke="#e65100" stroke-width="2"/>
-            <line x1="100" y1="10" x2="100" y2="110" stroke="#e65100" stroke-width="2"/>
-            <circle cx="100" cy="60" r="15" fill="none" stroke="#e65100" stroke-width="2"/>
-            <circle cx="40" cy="40" r="5" fill="#c1272d"/>
-            <circle cx="40" cy="80" r="5" fill="#c1272d"/>
-            <circle cx="70" cy="60" r="5" fill="#c1272d"/>
-            <circle cx="160" cy="40" r="5" fill="#1565c0"/>
-            <circle cx="160" cy="80" r="5" fill="#1565c0"/>
-            <circle cx="130" cy="60" r="5" fill="#1565c0"/>
-            <text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">Situation 2</text>
-        </svg>`
-    },
-    'Volleyball': {
-        1: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;background:#fff9c4;border:2px solid #fbc02d;border-radius:4px;">
-            <rect x="20" y="20" width="160" height="80" fill="none" stroke="#fbc02d" stroke-width="2"/>
-            <line x1="100" y1="10" x2="100" y2="110" stroke="#333" stroke-width="3"/>
-            <line x1="60" y1="20" x2="60" y2="100" stroke="#fbc02d" stroke-width="1" stroke-dasharray="4"/>
-            <line x1="140" y1="20" x2="140" y2="100" stroke="#fbc02d" stroke-width="1" stroke-dasharray="4"/>
-            <circle cx="50" cy="40" r="6" fill="#c1272d"/>
-            <circle cx="50" cy="60" r="6" fill="#c1272d"/>
-            <circle cx="50" cy="80" r="6" fill="#c1272d"/>
-            <circle cx="150" cy="40" r="6" fill="#1565c0"/>
-            <circle cx="150" cy="60" r="6" fill="#1565c0"/>
-            <circle cx="150" cy="80" r="6" fill="#1565c0"/>
-            <text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">Situation 1</text>
-        </svg>`,
-        2: `<svg viewBox="0 0 200 120" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;background:#fff9c4;border:2px solid #fbc02d;border-radius:4px;">
-            <rect x="20" y="20" width="160" height="80" fill="none" stroke="#fbc02d" stroke-width="2"/>
-            <line x1="100" y1="10" x2="100" y2="110" stroke="#333" stroke-width="3"/>
-            <circle cx="40" cy="40" r="5" fill="#c1272d"/>
-            <circle cx="40" cy="80" r="5" fill="#c1272d"/>
-            <circle cx="70" cy="60" r="5" fill="#c1272d"/>
-            <circle cx="160" cy="40" r="5" fill="#1565c0"/>
-            <circle cx="160" cy="80" r="5" fill="#1565c0"/>
-            <circle cx="130" cy="60" r="5" fill="#1565c0"/>
-            <text x="100" y="115" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">Situation 2</text>
-        </svg>`
-    },
-    'default': {
-        1: `<svg viewBox="0 0 200 100" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;background:#f5f5f5;border:2px solid #9e9e9e;border-radius:4px;">
-            <rect x="10" y="10" width="180" height="90" fill="#E8E8E8" stroke="#666" stroke-width="2" rx="8"/><text x="100" y="55" text-anchor="middle" fill="#666" font-size="11">Zone de travail - Situation 1</text></svg>`,
-        2: `<svg viewBox="0 0 200 100" style="width:100%;max-width:260px;height:auto;margin:8px auto;display:block;background:#f5f5f5;border:2px solid #9e9e9e;border-radius:4px;">
-            <rect x="10" y="10" width="180" height="90" fill="#E8E8E8" stroke="#666" stroke-width="2" rx="8"/><text x="100" y="55" text-anchor="middle" fill="#666" font-size="11">Zone de travail - Situation 2</text></svg>`
-    }
-};
-
-const getSchema = (aps, numSit) => SCHEMAS[aps]?.[numSit] || SCHEMAS['default'][numSit];
-
-module.exports = { OTI, OTC, VOCABULAIRE_APS, getSituationReference, getGroupeAPS, CRITERES_OBS, OBJECTIFS_CYCLE, FALLBACKS, SCHEMAS, getSchema, // Obtenir l'objectif d'une séance spécifique
-getObjectifSeance(aps, niveau, numeroSeance, nombreTotalSeances)
-
-// Construire le tableau complet du projet de cycle
-buildProjetCycle(aps, niveau, nombreSeances) };
