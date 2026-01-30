@@ -697,6 +697,159 @@ const OBJECTIFS_CYCLE = {
         moyen: null,
         avance: null,
         elite: null
+    },
+    'Saut en hauteur': {
+        commun: {
+            S1: "Situation de référence : franchir une barre à différentes hauteurs. 3 essais par hauteur. Diagnostic sur : le pied d'appel, la direction de la course et la technique de franchissement naturelle (Ciseau ou autre).",
+            S2: "Règlement (appel un pied obligatoire, 3 échecs consécutifs = élimination, ne pas toucher les montants), sécurité (chute sur les épaules/dos dans la zone de réception), et principes mécaniques (vitesse d'approche et angle d'envol).",
+            S12: "Concours final officiel. Mesure de la meilleure performance (Record Personnel). Note basée sur la performance brute et l'évolution de la maîtrise technique."
+        },
+        debutant: [
+            "Identifier son pied d'appel et s'initier au saut en 'Ciseau' (jambe d'attaque tendue, puis jambe d'esquive).",
+            "Travailler l'impulsion verticale près de la barre sans course d'élan (sauter 'haut' et non 'loin').",
+            "Apprendre la course d'élan rectiligne (5 à 7 pas) et l'arrêt dynamique sur le pied d'appel.",
+            "Travailler la réception sur les deux pieds ou sur la jambe d'esquive en toute sécurité.",
+            "Améliorer l'élévation des bras lors de l'impulsion pour gagner en hauteur.",
+            "Franchir des obstacles bas avec une trajectoire en 'cloche'.",
+            "S'initier au rôle de juge (monter la barre, vérifier le taquet).",
+            "Stabiliser la course d'élan pour éviter de piétiner avant l'appel.",
+            "Pré-évaluation : concours interne sur des hauteurs de base."
+        ],
+        moyen: [
+            "Introduction à la course en courbe (trajectoire en 'J') : 5 pas droits, 3 pas courbes.",
+            "S'initier au 'Fosbury Flop' : franchissement de dos avec chute sur les épaules.",
+            "Travailler l'inclinaison du corps vers l'intérieur de la courbe pour créer de la force centrifuge.",
+            "Apprendre à impulser dos à la barre après le dernier appui en courbe.",
+            "Coordination : synchroniser la montée du genou libre avec l'impulsion.",
+            "Travailler la phase de suspension : regarder le plafond pour favoriser l'extension.",
+            "Apprendre à mesurer ses marques (mesure de la perpendiculaire à la barre).",
+            "Gérer l'entrée dans la courbe sans perdre de vitesse.",
+            "Séance de réglage des hauteurs de départ pour le concours bilan."
+        ],
+        avance: [
+            "Optimiser la vitesse de la course d'élan (accélération sur les 3 derniers appuis).",
+            "Perfectionner le 'pontage' : cambrer le dos au-dessus de la barre pour dégager les hanches.",
+            "Travailler le 'regroupé' final : ramener les pieds vers le haut pour éviter de toucher la barre avec les talons.",
+            "Exercices de pliométrie : sauts de haie suivis d'une impulsion verticale.",
+            "Travailler l'appel 'actif' (griffé du sol) pour transformer la vitesse en hauteur.",
+            "Analyser le point culminant du saut : il doit se situer au-dessus de la barre.",
+            "Gérer l'échec : technique de respiration entre deux essais manqués.",
+            "Analyse vidéo : corriger l'alignement tête-épaules lors du franchissement.",
+            "Concours blanc avec gestion des montées de barres par palier de 3 ou 5 cm."
+        ],
+        elite: [
+            "Stabilisation de la course d'élan à intensité maximale (marques fixes).",
+            "Travail spécifique du 'double bras' à l'impulsion pour une poussée explosive.",
+            "Optimisation du timing du 'coup de reins' (pontage dynamique).",
+            "Travail de survitesse sur la courbe d'élan.",
+            "Renforcement de la chaîne postérieure (lombaires/fessiers) pour le maintien en l'air.",
+            "Gestion psychologique : sauter devant un public ou contre des adversaires de haut niveau.",
+            "Stratégie de concours : choisir quand passer ses tours pour économiser de l'énergie.",
+            "Séance d'auto-analyse : ajuster son point d'appel selon les sensations.",
+            "Séance de 'fraîcheur' : peu de sauts, focus sur la qualité technique parfaite."
+        ]
+    },
+    'Course de haies': {
+        commun: {
+            S1: "Situation de référence : course chronométrée sur la distance officielle (ex: 40m ou 60m haies). Diagnostic sur : le nombre d'appuis entre les haies, l'hésitation au franchissement et la jambe d'attaque.",
+            S2: "Règlement (hauteur des haies, couloirs, franchissement licite), sécurité (ne pas sauter de biais), et vocabulaire technique (jambe d'attaque, jambe d'esquive, intervalle).",
+            S12: "Compétition finale. Chronométrage des 3 essais. Note basée sur la performance (vitesse) et l'efficacité du franchissement (maintien de la vitesse horizontale)."
+        },
+        debutant: [
+            "Identifier sa jambe d'attaque et s'initier au franchissement de lattes ou de haies très basses.",
+            "Apprendre à courir 'par-dessus' la haie sans faire un saut en hauteur (rester rasant).",
+            "Stabiliser un rythme régulier de 5 appuis entre les haies sur une distance courte.",
+            "Travailler la jambe d'attaque : genou haut et jambe qui se tend vers l'obstacle.",
+            "Travailler la jambe d'esquive (jambe arrière) : ouverture sur le côté pour éviter de toucher la haie.",
+            "Apprendre à ne pas ralentir avant l'obstacle (course engagée).",
+            "S'initier aux rôles de starter et de chronométreur.",
+            "Enchaîner 3 à 4 haies sans rupture de rythme.",
+            "Pré-test chronométré pour ajuster les intervalles si besoin."
+        ],
+        moyen: [
+            "S'initier au rythme de 3 pas entre les haies (haies rapprochées et basses).",
+            "Travailler la reprise d'appui active : le pied d'attaque doit 'griffer' le sol dès la réception.",
+            "Améliorer la coordination bras/jambes pour équilibrer le corps pendant le vol.",
+            "Travailler la course d'élan jusqu'à la première haie (8 pas fixes).",
+            "Développer l'agressivité face à l'obstacle : attaquer la haie loin devant.",
+            "Maintenir le rythme de 3 pas sur une série plus longue (5 à 6 haies).",
+            "Apprendre à gérer le couloir voisin (ne pas être perturbé par l'adversaire).",
+            "Travail de vitesse : courir entre les haies à intensité maximale.",
+            "Séance de réglage des marques pour optimiser le temps de réaction au départ."
+        ],
+        avance: [
+            "Optimiser la 'rasance' de la haie : minimiser le temps passé en l'air.",
+            "Travailler l'alignement du buste : plonger vers l'avant lors de l'attaque.",
+            "Automatiser le rythme de 3 pas sur les hauteurs officielles.",
+            "Exercices de pliométrie : enchaînements de bonds horizontaux et franchissements.",
+            "Travailler la 'reprise de course' immédiate après la dernière haie (le cassé final).",
+            "Analyse de la trajectoire : le centre de gravité doit rester le plus stable possible.",
+            "Gestion des départs en starting-blocks avec la première haie très proche.",
+            "Analyse vidéo : identifier les temps de freinage à la réception.",
+            "Simulation de compétition (séries et finales)."
+        ],
+        elite: [
+            "Stabilisation de la vitesse maximale entre les haies (cycle de jambes rapide).",
+            "Travail spécifique sur la jambe d'esquive : retour rapide vers l'avant pour la reprise d'appui.",
+            "Optimisation de la force explosive au départ (sortir des blocs).",
+            "Travail de 'survitesse' sur des haies plus basses pour augmenter la fréquence.",
+            "Gestion de la fatigue : maintenir la technique sur la fin de course (résistance).",
+            "Travail de concentration : focalisation sur le rythme interne ('un-deux-TROIS-saute').",
+            "Analyse biomécanique : angle d'attaque et de réception.",
+            "Coaching : analyse des performances des adversaires.",
+            "Séance de fraîcheur et réglages mentaux avant le test bilan."
+        ]
+    },
+    'Course de relais': {
+        commun: {
+            S1: "Test sur 2x30m. Diagnostic : Le receveur attend-il à l'arrêt ? Le donneur ralentit-il avant de donner ? Y a-t-il une chute du témoin ?",
+            S2: "Règlement spécifique : La zone de transmission (souvent située entre le 20ème et le 40ème mètre sur les 60m totaux). Notion de 'donneur' (vitesse de maintien) et 'receveur' (accélération).",
+            S12: "Compétition 'Duo-Sprint'. Mesure de la performance chronométrée. Note sur le gain de temps par rapport à la somme des temps individuels (l'efficacité du gain au passage)."
+        },
+        debutant: [
+            "Tenue du témoin en pleine course (bras équilibrés) et transmission à l'arrêt.",
+            "Apprendre la transmission 'visuelle' : le receveur regarde le donneur et prend le témoin en trottinant.",
+            "Coordination des couloirs : le donneur court à l'intérieur du couloir, le receveur à l'extérieur pour éviter le choc.",
+            "Travailler l'appel sonore : le donneur crie 'HOP' pour prévenir le partenaire.",
+            "Initiation au départ du 1er relayeur : départ sans blocs mais avec témoin.",
+            "Exercices de réaction : partir au signal visuel du partenaire qui franchit une ligne.",
+            "Rôle de juge : vérifier si le témoin est bien donné à l'intérieur des 20m de la zone centrale.",
+            "Enchaînement complet à 80% de la vitesse.",
+            "Pré-test : stabiliser un passage sans chute sur 60m."
+        ],
+        moyen: [
+            "Apprendre à ne plus regarder derrière (transmission non-visuelle) : faire confiance au signal du partenaire.",
+            "Mise en place d'une marque (repère au sol) à environ 5-6 mètres derrière le receveur.",
+            "Travailler l'accélération du receveur : il doit 'fuir' son partenaire pour recevoir le témoin lancé.",
+            "Technique 'par le bas' : le receveur tend la main en arrière, paume vers le bas, formant un V.",
+            "Optimisation de la course du 1er relayeur (30m de sprint pur).",
+            "Travail de synchronisation : le donneur doit tendre le bras au maximum pour 'gagner' de la distance.",
+            "Arbitrage : mesurer précisément si la transmission a eu lieu dans les limites.",
+            "Séries de 2x30m à vitesse maximale avec récupération complète.",
+            "Séance de réglage des marques (avancer ou reculer la marque de départ du receveur)."
+        ],
+        avance: [
+            "Spécialisation des mains : Donneur (Main Droite) -> Receveur (Main Gauche) pour éviter de changer le témoin de main.",
+            "Travail du départ en starting-blocks pour le 1er coureur (avec témoin).",
+            "Analyse de la 'zone de transmission optimale' : le passage doit se faire dans les 5 derniers mètres de la zone.",
+            "Exercices de survitesse : le donneur arrive lancé à 100%, le receveur doit s'adapter.",
+            "Travail de l'appui au sol : rester sur l'avant-pied pendant toute la durée du sprint.",
+            "Stratégie de binôme : qui est le meilleur au départ ? Qui est le meilleur finisseur ?",
+            "Analyse vidéo (si possible) : mesurer le temps mort (le moment où personne ne tient le témoin).",
+            "Simulation de 'demi-finale' avec opposition latérale (couloirs occupés).",
+            "Répétition mentale et physique des 3 dernières foulées avant le passage."
+        ],
+        elite: [
+            "Stabilisation des marques au centimètre près selon la forme du jour.",
+            "Travail du 'bras tendu' : le passage se fait à distance maximale entre les deux corps (bras du donneur + bras du receveur).",
+            "Optimisation de la transmission 'par le haut' (plus rapide mais plus risquée).",
+            "Travail de puissance : départs explosifs sur 10m pour le receveur.",
+            "Analyse du 'cycle de jambes' : maintenir une fréquence élevée pendant la transmission.",
+            "Gestion du vent : ajuster la marque de départ selon que le vent est de face ou de dos.",
+            "Coaching : le binôme analyse ses propres erreurs de synchronisation.",
+            "Séance de 'Full Speed' : 3 passages à 100% avec 10 minutes de repos.",
+            "Mise en confiance : visualisation de la réussite du passage."
+        ]
     }
 };
 
