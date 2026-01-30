@@ -6,7 +6,7 @@
 // Critères RÉALISATION = COMMENT faire | Critères RÉUSSITE = MESURABLE
 // ============================================================================
 
-const { OTI, OTC, VOCABULAIRE_APS, getSituationReference, getGroupeAPS, FALLBACKS } = require('./data/references.js');
+const { OTI, OTC, VOCABULAIRE_APS, getSituationReference, getGroupeAPS, FALLBACKS, getSchema } = require('./data/references.js');
 
 module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -65,7 +65,6 @@ SITUATION1_ORGANISATION: [nombre joueurs, dimensions terrain en mètres, matéri
 SITUATION1_DEROULEMENT: [4-5 phrases décrivant précisément le déroulement de la situation]
 SITUATION1_CONSIGNES: [4 consignes techniques spécifiques et précises, une par ligne, sans astérisques]
 SITUATION1_VARIANTES: [Simplifier: 1-2 façons | Complexifier: 1-2 façons]
-SITUATION1_SCHEMA: [Code SVG valide complet pour illuminer cette situation spécifique (dimensions 300x200), avec lignes, joueurs (cercles) et trajectoires (flèches). Fond transparent ou blanc. Ne pas utiliser d'images externes.]
 
 SITUATION2_TITRE: [titre - situation plus proche du jeu réel ou de la performance]
 SITUATION2_BUT: [ce que l'élève doit FAIRE - UNE phrase d'action]
@@ -73,7 +72,6 @@ SITUATION2_ORGANISATION: [organisation détaillée avec dimensions et matériel]
 SITUATION2_DEROULEMENT: [4-5 phrases décrivant le déroulement]
 SITUATION2_CONSIGNES: [4 consignes techniques]
 SITUATION2_VARIANTES: [variantes de simplification et complexification]
-SITUATION2_SCHEMA: [Code SVG valide complet pour la situation 2 (dimensions 300x200). Inclure les lignes et marquages standards du terrain pour l'APS concernée.]
 
 CRITERES_REALISATION: [4 critères décrivant COMMENT bien faire - qualité technique du geste, avec bullet points •]
 CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres, temps, distances]`;
@@ -117,14 +115,12 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
         let s1Deroul = extract('SITUATION1_DEROULEMENT');
         let s1Consignes = extract('SITUATION1_CONSIGNES');
         let s1Variantes = extract('SITUATION1_VARIANTES');
-        let s1Schema = extract('SITUATION1_SCHEMA');
         let s2Titre = extract('SITUATION2_TITRE');
         let s2But = extract('SITUATION2_BUT');
         let s2Orga = extract('SITUATION2_ORGANISATION');
         let s2Deroul = extract('SITUATION2_DEROULEMENT');
         let s2Consignes = extract('SITUATION2_CONSIGNES');
         let s2Variantes = extract('SITUATION2_VARIANTES');
-        let s2Schema = extract('SITUATION2_SCHEMA');
         let critReal = extract('CRITERES_REALISATION');
         let critReuss = extract('CRITERES_REUSSITE');
 
@@ -147,16 +143,9 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
         if (!critReal || critReal.length < 50) critReal = fb.cr;
         if (!critReuss || critReuss.length < 50) critReuss = fb.cs;
 
-        // Schémas SVG (nettoyage si nécessaire)
-        const cleanSvg = (svg) => {
-            if (!svg) return '';
-            // Extraire seulement la balise <svg>...</svg> si le modèle a bavardé autour
-            const match = svg.match(/<svg[\s\S]*?<\/svg>/i);
-            return match ? match[0] : svg;
-        };
-
-        const schema1 = cleanSvg(s1Schema) || `<svg viewBox="0 0 200 100" style="width:100%;"><rect x="10" y="10" width="180" height="80" fill="#eee" stroke="#ccc"/><text x="100" y="50" text-anchor="middle" fill="#999">Schéma non généré</text></svg>`;
-        const schema2 = cleanSvg(s2Schema) || `<svg viewBox="0 0 200 100" style="width:100%;"><rect x="10" y="10" width="180" height="80" fill="#eee" stroke="#ccc"/><text x="100" y="50" text-anchor="middle" fill="#999">Schéma non généré</text></svg>`;
+        // Schémas SVG
+        const schema1 = getSchema(aps, 1);
+        const schema2 = getSchema(aps, 2);
 
         // ==================== HTML DISPLAY (SITE WEB) ====================
         const htmlDisplay = `
