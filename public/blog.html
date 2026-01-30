@@ -11,14 +11,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TH0Z1SGNXH"></script>
     <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-TH0Z1SGNXH');</script>
     <style>
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* CORE VARIABLES & RESET */
         :root {
             --primary: #c1272d;
             --primary-dark: #a01f24;
@@ -34,26 +27,24 @@
             --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            --radius: 8px;
             --radius-lg: 12px;
             --radius-xl: 16px;
-            --radius-2xl: 24px;
-            --radius-full: 9999px;
-            --spacing-xs: 0.25rem;
-            --spacing-sm: 0.5rem;
-            --spacing-md: 1rem;
-            --spacing-lg: 1.5rem;
-            --spacing-xl: 2rem;
-            --spacing-2xl: 3rem;
-            --spacing-3xl: 4rem;
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-display: 'Plus Jakarta Sans', var(--font-sans);
             --transition: all 0.3s ease;
         }
 
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: var(--font-sans);
-            background: var(--bg-primary);
+            background: var(--bg-secondary);
             color: var(--text-primary);
             line-height: 1.6;
         }
@@ -64,22 +55,24 @@
             transition: var(--transition);
         }
 
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--font-display);
+        }
+
+        /* NAVBAR */
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            padding: var(--spacing-md) var(--spacing-xl);
+            padding: 1rem 2rem;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-light);
-            transition: var(--transition);
-        }
-
-        .navbar.scrolled {
-            padding: var(--spacing-sm) var(--spacing-xl);
-            box-shadow: var(--shadow-md);
         }
 
         .nav-container {
@@ -91,25 +84,19 @@
         }
 
         .nav-logo img {
-            height: 60px;
-            transition: var(--transition);
-        }
-
-        .navbar.scrolled .nav-logo img {
             height: 50px;
         }
 
         .nav-menu {
             display: flex;
+            gap: 2rem;
             align-items: center;
-            gap: var(--spacing-xl);
         }
 
         .nav-link {
-            font-size: 0.9375rem;
             font-weight: 500;
             color: var(--text-secondary);
-            padding: var(--spacing-sm) 0;
+            padding: 0.5rem 0;
             position: relative;
         }
 
@@ -123,22 +110,20 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            right: 0;
+            width: 100%;
             height: 2px;
             background: var(--primary);
-            border-radius: 2px;
         }
 
         .nav-cta {
             display: inline-flex;
             align-items: center;
-            gap: var(--spacing-sm);
-            padding: var(--spacing-sm) var(--spacing-lg);
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
+            border-radius: 99px;
             font-weight: 600;
-            font-size: 0.9375rem;
-            border-radius: var(--radius-full);
             box-shadow: var(--shadow-md);
         }
 
@@ -154,68 +139,253 @@
             background: none;
             border: none;
             cursor: pointer;
-            padding: 5px;
         }
 
         .nav-toggle span {
             width: 25px;
             height: 2px;
             background: var(--text-primary);
-            border-radius: 2px;
+        }
+
+        /* HERO CAROUSEL */
+        .carousel-section {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .carousel-slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
+        }
+
+        .carousel-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+            max-width: 800px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .carousel-badge {
+            background: var(--primary);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .carousel-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .carousel-desc {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-hero {
+            background: white;
+            color: var(--text-primary);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
             transition: var(--transition);
+            display: inline-block;
         }
 
-        .main-content {
-            padding-top: 120px;
-            padding-bottom: var(--spacing-3xl);
-            min-height: calc(100vh - 200px);
+        .btn-hero:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
+        .carousel-nav {
+            position: absolute;
+            bottom: 2rem;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .carousel-btn:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        .prev-btn {
+            left: 2rem;
+        }
+
+        .next-btn {
+            right: 2rem;
+        }
+
+        /* MAIN LAYOUT */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 var(--spacing-xl);
+            padding: 4rem 1.5rem;
         }
 
-        .page-header {
+        /* COLLECTIONS */
+        .section-header {
             text-align: center;
-            margin-bottom: var(--spacing-3xl);
+            margin-bottom: 3rem;
         }
 
-        .page-header h1 {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 800;
-            margin-bottom: var(--spacing-md);
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--text-primary);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
         }
 
-        .page-header h1 span {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .page-header p {
+        .section-header p {
             color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
         }
 
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .collection-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-xl);
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .collection-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .collection-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--bg-secondary);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .collection-card:hover .collection-icon {
+            background: var(--primary);
+            color: white;
+        }
+
+        .collection-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .collection-card p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* BLOG GRID */
         .articles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: var(--spacing-2xl);
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
         }
 
         .article-card {
-            background: var(--bg-primary);
+            background: white;
             border-radius: var(--radius-xl);
             overflow: hidden;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
             border: 1px solid var(--border-light);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .article-card:hover {
@@ -223,107 +393,123 @@
             box-shadow: var(--shadow-lg);
         }
 
-        .article-image {
-            height: 200px;
-            background: linear-gradient(135deg, rgba(193, 39, 45, 0.1), rgba(0, 98, 51, 0.1));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
+        /* IMAGE FIX */
+        .article-image-wrapper {
+            position: relative;
+            padding-top: 60%;
+            /* 16:9 Aspect Ratio */
+            overflow: hidden;
+        }
+
+        .article-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .article-card:hover .article-img {
+            transform: scale(1.05);
+        }
+
+        .category-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .article-content {
-            padding: var(--spacing-xl);
-        }
-
-        .article-category {
-            display: inline-block;
-            padding: var(--spacing-xs) var(--spacing-md);
-            background: linear-gradient(135deg, rgba(193, 39, 45, 0.1), rgba(0, 98, 51, 0.1));
-            color: var(--primary);
-            font-size: 0.75rem;
-            font-weight: 600;
-            border-radius: var(--radius-full);
-            margin-bottom: var(--spacing-md);
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .article-title {
-            font-family: var(--font-display);
             font-size: 1.25rem;
             font-weight: 700;
-            margin-bottom: var(--spacing-sm);
+            line-height: 1.4;
+            margin-bottom: 0.75rem;
             color: var(--text-primary);
         }
 
         .article-excerpt {
+            font-size: 0.95rem;
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.7;
-            margin-bottom: var(--spacing-lg);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
-        .article-meta {
+        .article-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.8rem;
+            border-top: 1px solid var(--border-light);
+            padding-top: 1rem;
+            margin-top: auto;
+        }
+
+        .article-date {
+            font-size: 0.85rem;
             color: var(--text-light);
         }
 
         .read-more {
             color: var(--primary);
             font-weight: 600;
-            display: inline-flex;
+            font-size: 0.9rem;
+            display: flex;
             align-items: center;
-            gap: var(--spacing-xs);
+            gap: 4px;
         }
 
         .read-more:hover {
-            gap: var(--spacing-sm);
+            gap: 8px;
         }
 
+        /* FOOTER */
         .footer {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: #1a1a2e;
             color: white;
-            padding: var(--spacing-3xl) var(--spacing-xl) var(--spacing-xl);
+            padding: 4rem 2rem 2rem;
+            margin-top: 4rem;
         }
 
-        .footer-grid {
+        .footer-content {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: var(--spacing-3xl);
-            margin-bottom: var(--spacing-3xl);
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
         }
 
-        .footer-brand img {
-            height: 50px;
-            filter: brightness(0) invert(1);
-            margin-bottom: var(--spacing-md);
-        }
-
-        .footer-brand p {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-            line-height: 1.7;
-        }
-
-        .footer-title {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .footer-links {
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-sm);
+        .footer-col h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
         }
 
         .footer-links a {
+            display: block;
             color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
         }
 
         .footer-links a:hover {
@@ -331,46 +517,27 @@
         }
 
         .footer-bottom {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-top: var(--spacing-xl);
+            text-align: center;
+            padding-top: 2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-copyright {
+            font-size: 0.9rem;
             color: rgba(255, 255, 255, 0.5);
-            font-size: 0.875rem;
         }
 
-        .footer-social {
-            display: flex;
-            gap: var(--spacing-md);
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .footer-social a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-        }
-
-        .footer-social a:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.1);
-        }
-
-        .footer-social svg {
-            width: 20px;
-            height: 20px;
-            fill: white;
-        }
-
+        /* RESPONSIVE */
         @media (max-width: 968px) {
             .nav-menu {
                 display: none;
@@ -380,9 +547,9 @@
                 right: 0;
                 background: white;
                 flex-direction: column;
-                padding: var(--spacing-lg);
-                box-shadow: var(--shadow-lg);
-                gap: var(--spacing-md);
+                padding: 2rem;
+                box-shadow: var(--shadow-xl);
+                border-top: 1px solid var(--border);
             }
 
             .nav-menu.active {
@@ -393,25 +560,25 @@
                 display: flex;
             }
 
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
+            .carousel-section {
+                height: 400px;
+            }
+
+            .carousel-title {
+                font-size: 2rem;
             }
         }
 
-        @media (max-width: 640px) {
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: var(--spacing-md);
-                text-align: center;
-            }
-
+        @media (max-width: 600px) {
             .articles-grid {
                 grid-template-columns: 1fr;
             }
+
+            .carousel-btn {
+                display: none;
+            }
+
+            /* Hide arrows on mobile, keep dots if added */
         }
     </style>
 </head>
@@ -434,149 +601,169 @@
 
     <main class="main-content">
         <!-- HERO CAROUSEL -->
-        <div class="carousel-container">
+        <div class="carousel-section">
             <div class="carousel-slide active" style="background-image: url('/images/seance.jpg');">
                 <div class="carousel-content">
-                    <span class="carousel-tag">À la une</span>
-                    <h2>Réussir sa séance d'EPS à coup sûr</h2>
-                    <p>Les secrets d'une planification efficace et d'une gestion de classe maîtrisée.</p>
-                    <a href="#" class="btn-carousel">Lire l'article</a>
+                    <span class="carousel-badge">À la une</span>
+                    <h2 class="carousel-title">Réussir sa séance d'EPS</h2>
+                    <p class="carousel-desc">Les secrets d'une planification efficace et d'une gestion de classe
+                        maîtrisée pour tous les niveaux.</p>
+                    <a href="#" class="btn-hero">Lire l'article</a>
                 </div>
             </div>
             <div class="carousel-slide" style="background-image: url('/images/competence.jpg');">
                 <div class="carousel-content">
-                    <span class="carousel-tag">Pédagogie</span>
-                    <h2>L'Approche Par Compétences</h2>
-                    <p>Comprendre les fondements de l'APC dans le système éducatif marocain.</p>
-                    <a href="#" class="btn-carousel">Découvrir</a>
+                    <span class="carousel-badge">Pédagogie</span>
+                    <h2 class="carousel-title">L'Approche Par Compétences</h2>
+                    <p class="carousel-desc">Comprendre et appliquer l'APC dans le contexte éducatif marocain actuel.
+                    </p>
+                    <a href="#" class="btn-hero">Découvrir</a>
                 </div>
             </div>
-            <div class="carousel-controls">
-                <button class="carousel-btn prev">❮</button>
-                <button class="carousel-btn next">❯</button>
+
+            <button class="carousel-btn prev-btn">❮</button>
+            <button class="carousel-btn next-btn">❯</button>
+
+            <div class="carousel-nav">
+                <div class="nav-dot active" onclick="showSlide(0)"></div>
+                <div class="nav-dot" onclick="showSlide(1)"></div>
             </div>
         </div>
 
         <div class="container">
             <!-- COLLECTIONS -->
-            <div class="collections-section">
-                <h3 class="section-title">Nos Collections</h3>
-                <div class="collections-grid">
-                    <div class="collection-card">
-                        <div class="collection-icon">📚</div>
-                        <h4>Pédagogie</h4>
-                        <p>OP, Didactique, APC</p>
-                    </div>
-                    <div class="collection-card">
-                        <div class="collection-icon">📊</div>
-                        <h4>Évaluation</h4>
-                        <p>Grilles, Critères, Notes</p>
-                    </div>
-                    <div class="collection-card">
-                        <div class="collection-icon">⚽</div>
-                        <h4>Sports Co</h4>
-                        <p>HB, FB, BB, VB</p>
-                    </div>
-                    <div class="collection-card">
-                        <div class="collection-icon">🏃</div>
-                        <h4>Athlétisme</h4>
-                        <p>Vitesse, Endurance, Sauts</p>
-                    </div>
+            <div class="section-header">
+                <h2>Explorer par thématique</h2>
+                <p>Trouvez rapidement les ressources dont vous avez besoin</p>
+            </div>
+
+            <div class="collections-grid">
+                <div class="collection-card">
+                    <div class="collection-icon">📚</div>
+                    <h3>Pédagogie</h3>
+                    <p>Didactique & Orientations</p>
+                </div>
+                <div class="collection-card">
+                    <div class="collection-icon">📊</div>
+                    <h3>Évaluation</h3>
+                    <p>Grilles & Barèmes</p>
+                </div>
+                <div class="collection-card">
+                    <div class="collection-icon">⚽</div>
+                    <h3>Sports Co</h3>
+                    <p>Cycles complets</p>
+                </div>
+                <div class="collection-card">
+                    <div class="collection-icon">🏃</div>
+                    <h3>Athlétisme</h3>
+                    <p>Fiches techniques</p>
                 </div>
             </div>
 
-            <div class="page-header">
-                <h1>📚 Tous nos <span>Articles</span></h1>
-                <p>Découvrez nos ressources sur l'éducation physique et sportive au Maroc.</p>
+            <!-- ARTICLES -->
+            <div class="section-header">
+                <h2>Derniers Articles</h2>
+                <p>L'actualité et les dossiers de fond</p>
             </div>
 
             <div class="articles-grid">
+                <!-- Article 1 -->
                 <article class="article-card">
-                    <div class="article-image-container">
+                    <div class="article-image-wrapper">
+                        <span class="category-badge">Pédagogie</span>
                         <img src="/images/op.jpg" alt="Orientations Pédagogiques" class="article-img">
                     </div>
                     <div class="article-content">
-                        <span class="article-category">Pédagogie</span>
-                        <h2 class="article-title">Les Orientations Pédagogiques</h2>
-                        <p class="article-excerpt">Comprendre les objectifs terminaux d'intégration (OTI) et les
-                            compétences visées par niveau pour mieux planifier.</p>
-                        <div class="article-meta">
-                            <span>15 Jan 2025</span>
+                        <h3 class="article-title">Les Orientations Pédagogiques</h3>
+                        <p class="article-excerpt">Analyse complète des instructions officielles pour le collège et le
+                            lycée. Comprendre les OTI et les compétences visées.</p>
+                        <div class="article-footer">
+                            <span class="article-date">15 Jan 2025</span>
                             <a href="article-op.html" class="read-more">Lire la suite →</a>
                         </div>
                     </div>
                 </article>
+
+                <!-- Article 2 -->
                 <article class="article-card">
-                    <div class="article-image-container">
-                        <img src="/images/eval.jpg" alt="Évaluation" class="article-img">
+                    <div class="article-image-wrapper">
+                        <span class="category-badge">Évaluation</span>
+                        <img src="/images/eval.jpg" alt="Évaluation en EPS" class="article-img">
                     </div>
                     <div class="article-content">
-                        <span class="article-category">Évaluation</span>
-                        <h2 class="article-title">L'évaluation en EPS : Guide partique</h2>
-                        <p class="article-excerpt">Découvrez les formes d'évaluation (diagnostique, formative,
-                            sommative) et comment construire vos grilles.</p>
-                        <div class="article-meta">
-                            <span>10 Jan 2025</span>
+                        <h3 class="article-title">L'évaluation en EPS</h3>
+                        <p class="article-excerpt">Guide pratique pour construire vos grilles d'évaluation :
+                            diagnostique, formative et sommative.</p>
+                        <div class="article-footer">
+                            <span class="article-date">10 Jan 2025</span>
                             <a href="article-eval.html" class="read-more">Lire la suite →</a>
                         </div>
                     </div>
                 </article>
+
+                <!-- Article 3 -->
                 <article class="article-card">
-                    <div class="article-image-container">
+                    <div class="article-image-wrapper">
+                        <span class="category-badge">Sécurité</span>
                         <img src="/images/securite.jpg" alt="Sécurité" class="article-img">
                     </div>
                     <div class="article-content">
-                        <span class="article-category">Sécurité</span>
-                        <h2 class="article-title">La sécurité en cours d'EPS</h2>
-                        <p class="article-excerpt">Les règles essentielles de sécurité à respecter dans vos séances pour
-                            protéger vos élèves et vous-même.</p>
-                        <div class="article-meta">
-                            <span>5 Jan 2025</span>
+                        <h3 class="article-title">La sécurité en cours d'EPS</h3>
+                        <p class="article-excerpt">Les principes fondamentaux pour assurer la sécurité active et passive
+                            de vos élèves lors des séances.</p>
+                        <div class="article-footer">
+                            <span class="article-date">5 Jan 2025</span>
                             <a href="article-securite.html" class="read-more">Lire la suite →</a>
                         </div>
                     </div>
                 </article>
+
+                <!-- Article 4 -->
                 <article class="article-card">
-                    <div class="article-image-container">
-                        <img src="/images/criteres.jpg" alt="Criteres" class="article-img">
+                    <div class="article-image-wrapper">
+                        <span class="category-badge">Didactique</span>
+                        <img src="/images/criteres.jpg" alt="Critères de réussite" class="article-img">
                     </div>
                     <div class="article-content">
-                        <span class="article-category">Didactique</span>
-                        <h2 class="article-title">Formuler des critères de réussite</h2>
-                        <p class="article-excerpt">Comment passer d'un objectif général à des critères observables et
-                            mesurables pour les élèves.</p>
-                        <div class="article-meta">
-                            <span>28 Déc 2024</span>
+                        <h3 class="article-title">Formuler des critères de réussite</h3>
+                        <p class="article-excerpt">Comment définir des indicateurs observables et mesurables pour
+                            permettre à l'élève de s'auto-évaluer.</p>
+                        <div class="article-footer">
+                            <span class="article-date">28 Déc 2024</span>
                             <a href="#" class="read-more">Lire la suite →</a>
                         </div>
                     </div>
                 </article>
+
+                <!-- Article 5 -->
                 <article class="article-card">
-                    <div class="article-image-container">
-                        <img src="/images/competence.jpg" alt="Compétences" class="article-img">
+                    <div class="article-image-wrapper">
+                        <span class="category-badge">Compétences</span>
+                        <img src="/images/competence.jpg" alt="Soft Skills" class="article-img">
                     </div>
                     <div class="article-content">
-                        <span class="article-category">Compétences</span>
-                        <h2 class="article-title">Développer les soft skills</h2>
-                        <p class="article-excerpt">L'EPS ne sert pas qu'à muscler le corps : focus sur l'autonomie, la
-                            responsabilité et l'entraide.</p>
-                        <div class="article-meta">
-                            <span>20 Déc 2024</span>
+                        <h3 class="article-title">Développer les soft skills</h3>
+                        <p class="article-excerpt">L'impact de l'EPS sur le développement personnel : autonomie,
+                            responsabilité, entraide et leadership.</p>
+                        <div class="article-footer">
+                            <span class="article-date">20 Déc 2024</span>
                             <a href="#" class="read-more">Lire la suite →</a>
                         </div>
                     </div>
                 </article>
+
+                <!-- Article 6 -->
                 <article class="article-card">
-                    <div class="article-image-container">
+                    <div class="article-image-wrapper">
+                        <span class="category-badge">Pratique</span>
                         <img src="/images/seance.jpg" alt="Séance type" class="article-img">
                     </div>
                     <div class="article-content">
-                        <span class="article-category">Pratique</span>
-                        <h2 class="article-title">Structure d'une séance type</h2>
-                        <p class="article-excerpt">Échauffement, corps de séance, retour au calme : comment équilibrer
-                            les temps de pratique.</p>
-                        <div class="article-meta">
-                            <span>15 Déc 2024</span>
+                        <h3 class="article-title">Structure d'une séance type</h3>
+                        <p class="article-excerpt">Les différentes phases d'une leçon d'EPS : de la prise en main au
+                            bilan, comment gérer le temps.</p>
+                        <div class="article-footer">
+                            <span class="article-date">15 Déc 2024</span>
                             <a href="#" class="read-more">Lire la suite →</a>
                         </div>
                     </div>
@@ -586,55 +773,48 @@
     </main>
 
     <footer class="footer">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <a href="index.html"><img src="/images/prof_eps.png" alt="Prof EPS"></a>
-                <p>Le premier générateur intelligent de fiches pédagogiques pour les professeurs d'EPS au Maroc.</p>
-            </div>
-            <div>
-                <h4 class="footer-title">Navigation</h4>
-                <div class="footer-links">
-                    <a href="index.html">Accueil</a>
-                    <a href="generateur.html">Générateur</a>
-                    <a href="blog.html">Blog</a>
-                    <a href="a-propos.html">À propos</a>
-                    <a href="contact.html">Contact</a>
+        <div class="nav-container" style="flex-direction: column; align-items: flex-start;">
+            <div class="footer-content">
+                <div class="footer-col" style="max-width: 300px;">
+                    <img src="/images/prof_eps.png" alt="Prof EPS"
+                        style="height: 50px; filter: brightness(0) invert(1); margin-bottom: 1rem;">
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">Le 1er générateur intelligent de fiches
+                        pédagogiques pour les professeurs d'EPS au Maroc.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <div class="footer-links">
+                        <a href="index.html">Accueil</a>
+                        <a href="generateur.html">Générateur</a>
+                        <a href="blog.html">Blog</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Ressources</h4>
+                    <div class="footer-links">
+                        <a href="#">Fiches Pédagogiques</a>
+                        <a href="#">Grilles d'évaluation</a>
+                        <a href="#">Projets de Cycle</a>
+                        <a href="#">Documents Officiels</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Suivez-nous</h4>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24">
+                                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                            </svg></a>
+                        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg></a>
+                    </div>
                 </div>
             </div>
-            <div>
-                <h4 class="footer-title">Ressources</h4>
-                <div class="footer-links">
-                    <a href="blog.html">Articles</a>
-                    <a href="article-op.html">Orientations Pédagogiques</a>
-                    <a href="article-eval.html">Évaluation en EPS</a>
-                </div>
-            </div>
-            <div>
-                <h4 class="footer-title">Contact</h4>
-                <div class="footer-links">
-                    <a href="mailto:profepsma@gmail.com">profepsma@gmail.com</a>
-                    <a href="https://www.facebook.com/profepsma" target="_blank">Facebook</a>
-                    <a href="https://www.instagram.com/profepsma/" target="_blank">Instagram</a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p class="footer-copyright">© 2025 Prof EPS. Tous droits réservés.</p>
-            <div class="footer-social">
-                <a href="https://www.facebook.com/profepsma" target="_blank"><svg xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24">
-                        <path
-                            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                    </svg></a>
-                <a href="https://www.instagram.com/profepsma/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24">
-                        <path
-                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                    </svg></a>
-                <a href="mailto:profepsma@gmail.com"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path
-                            d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                    </svg></a>
+            <div class="footer-bottom" style="width: 100%;">
+                <p>&copy; 2025 Prof EPS Maroc. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
@@ -648,29 +828,34 @@
 
         // CAROUSEL LOGIC
         const slides = document.querySelectorAll('.carousel-slide');
-        const prevBtn = document.querySelector('.carousel-btn.prev');
-        const nextBtn = document.querySelector('.carousel-btn.next');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const dots = document.querySelectorAll('.nav-dot');
         let currentSlide = 0;
 
         function showSlide(index) {
             slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
             slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
         }
 
         function nextSlide() {
-            currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
+            let next = (currentSlide + 1) % slides.length;
+            showSlide(next);
         }
 
         function prevSlide() {
-            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            showSlide(currentSlide);
+            let prev = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(prev);
         }
 
         if (slides.length > 0) {
             nextBtn.addEventListener('click', nextSlide);
             prevBtn.addEventListener('click', prevSlide);
-            setInterval(nextSlide, 5000); // Auto-play
+            setInterval(nextSlide, 6000); // 6s Auto-play
         }
     </script>
 </body>
