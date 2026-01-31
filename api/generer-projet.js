@@ -80,6 +80,14 @@ const OTC = {
         '1AB': "Optimiser sa performance par une gestion stratégique de l'allure.",
         '2AB': "Atteindre ses objectifs personnels par une stratégie de course adaptée."
     },
+    'Course en durée': {
+        '1AC': "Courir de façon régulière sur une durée donnée (8-10 min) en gérant son effort et en maintenant une allure constante.",
+        '2AC': "Adapter son allure de course pour maintenir un effort prolongé (10-12 min), en utilisant des repères de temps et de distance.",
+        '3AC': "Construire et respecter un projet de course en fonction de ses capacités, sur une durée de 12-15 min, en régulant son allure.",
+        'TC': "Planifier et réaliser une performance en gérant efficacement ses ressources énergétiques, sur une distance ou durée définie.",
+        '1AB': "Optimiser sa performance par une gestion stratégique de l'allure, en s'appuyant sur la connaissance de ses capacités.",
+        '2AB': "Atteindre ses objectifs personnels par une préparation et une stratégie de course adaptées à ses ressources."
+    },
     'Lancer de poids': {
         '1AC': "Lancer un engin en utilisant une poussée du bras depuis l'épaule, dans le respect des règles.",
         '2AC': "Coordonner la poussée des jambes et l'action du bras lanceur pour améliorer la distance.",
@@ -127,6 +135,7 @@ const getSituationReference = (aps, isCollege) => {
         'Saut en hauteur': 'Concours à barres montantes avec 3 essais maximum par hauteur, technique libre',
         'Lancer de poids': 'Concours de 3 essais mesurés depuis le plateau de lancer, la meilleure performance est retenue',
         'Course de durée': 'Course de 12 minutes en régulant son allure, la distance parcourue est mesurée',
+        'Course en durée': 'Course de 1000m (Garçons) / 600m (Filles) en régulant son allure pour mesurer le temps de passage',
         'Gymnastique': 'Présentation d\'un enchaînement au sol de 1 minute minimum comprenant les éléments imposés du niveau'
     };
     return situations[aps] || 'Situation adaptée au niveau';
@@ -135,7 +144,7 @@ const getSituationReference = (aps, isCollege) => {
 const getGroupeAPS = (aps) => {
     if (['Handball', 'Football', 'Basketball', 'Volleyball'].includes(aps)) return 'Sports collectifs';
     if (['Tennis de table', 'Badminton'].includes(aps)) return 'Sports de renvoi';
-    if (['Course de vitesse', 'Saut en longueur', 'Saut en hauteur', 'Lancer de poids', 'Course de durée'].includes(aps)) return 'Athlétisme';
+    if (['Course de vitesse', 'Saut en longueur', 'Saut en hauteur', 'Lancer de poids', 'Course de durée', 'Course en durée'].includes(aps)) return 'Athlétisme';
     if (aps === 'Gymnastique') return 'Gymnastique';
     return 'Activité';
 };
@@ -577,55 +586,56 @@ const OBJECTIFS_CYCLE = {
         avance: null,
         elite: null
     },
-    'Course de durée': {
+    'Course en durée': {
         commun: {
-            S1: "Évaluer la capacité à maintenir un effort prolongé (test VMA ou course de 6-12 min) pour établir un profil d'endurance.",
-            S2: "Comprendre la physiologie de l'effort (aérobie), les signes de l'effort (fréquence cardiaque, dyspnée) et l'hydratation.",
-            S12: "Course de 12 minutes chronométrée. Comparaison avec le test initial et auto-évaluation de la gestion de l'allure."
+            S1: "Situation de référence (1000m G / 600m F) pour mesurer le temps de base et observer la gestion spontanée de l'effort.",
+            S2: "Test Navette (Luc Léger) pour déterminer la VMA et constituer les groupes physiologiques. Partie théorique : analyse des résultats, explication des zones d'entraînement (Capacité vs Puissance) et remise des fiches de suivi.",
+            S3: "Partie Pratique (La Posture) : Travail technique sur la 'foulée économique' (regard à l'horizon, buste droit, relâchement des épaules, mouvement des bras en piston, attaque médio-pied). Exercices de gammes (montées de genoux, talons-fesses) axés sur le placement.",
+            S12: "Test Bilan : courir (1000m G / 600m F) pour mesurer le temps de passage et observer la gestion de l'effort."
         },
         debutant: [
-            "Apprendre à courir lentement sans s'arrêter pendant 5 à 8 minutes.",
-            "Découvrir la respiration nasale ou mixte pour éviter le essoufflement.",
-            "Travailler la posture de course : épaules basses, bras relâchés, regard au loin.",
-            "Comprendre le fractionné : alterner course lente et marche active.",
-            "Apprendre à évaluer son effort à l'aide de l'échelle de Borg (facile/difficile).",
-            "S'initier à l'échauffement spécifique (marche rapide puis course progressive).",
-            "Travailler la régularité : maintenir la même allure sur 400m.",
-            "Découvrir la récupération active (marche après l'effort).",
-            "Test de référence : course de 6 minutes en continu."
+            "S4 (Capacité Aérobie) : 10 min de course continue en aisance respiratoire (pouvoir parler en courant).",
+            "S5 (Capacité Aérobie) : 12 min de course continue en aisance respiratoire.",
+            "S6 (Capacité Aérobie) : 15 min de course continue en aisance respiratoire.",
+            "S7 (Capacité Aérobie) : Alterner 4 min course / 1 min marche (3 séries) en aisance respiratoire.",
+            "S8 (Puissance Aérobie) : Initiation au fractionné très doux : 45\" course rapide / 45\" marche (2 séries de 5).",
+            "S9 (Puissance Aérobie) : Travail de vitesse sur 100m pour dynamiser la foulée.",
+            "S10 (Puissance Aérobie) : Travail de vitesse sur 100m pour dynamiser la foulée.",
+            "S11 (Puissance Aérobie) : Test sur 500m (G) / 300m (F) pour valider l'allure cible de la S12.",
+            "S12 (Évaluation) : Test Bilan final sur 1000m (G) / 600m (F)."
         ],
         moyen: [
-            "Développer l'endurance de base en courant 10 à 15 minutes sans interruption.",
-            "Apprendre à gérer son allure en fonction de la distance à parcourir.",
-            "Travailler le fractionné long : 2x5min avec 2min de récupération.",
-            "Maîtriser la respiration abdominale pour optimiser l'oxygenation.",
-            "Comprendre le rôle de la VMA et calculer ses zones d'entraînement.",
-            "S'initier à la course en côte (montée douce) pour renforcer les jambes.",
-            "Travailler la régularité sur des parcours avec virages et changements de direction.",
-            "Apprendre à se réhydrater pendant l'effort prolongé.",
-            "Test de mi-parcours : course de 9 minutes avec mesure de la distance."
+            "S4 (Capacité Aérobie) : 15 min à 75% VMA.",
+            "S5 (Capacité Aérobie) : 2 x 8 min à 80% VMA (repos 2 min).",
+            "S6 (Capacité Aérobie) : Travail de régularité avec passage aux plots à intervalles réguliers (allure métronome).",
+            "S7 (Capacité Aérobie) : Travail de régularité avec passage aux plots à intervalles réguliers (allure métronome).",
+            "S8 (Puissance Aérobie) : Séance de 30\"/30\" à 100% VMA (2 séries de 8 répétitions).",
+            "S9 (Puissance Aérobie) : Séance de 30\"/30\" à 100% VMA (2 séries de 8 répétitions).",
+            "S10 (Puissance Aérobie) : Intervalles de 200m à 100% VMA (récupération égale au temps de course).",
+            "S11 (Puissance Aérobie) : Simulation de course sur 800m (G) / 500m (F) à l'allure du test bilan.",
+            "S12 (Évaluation) : Test Bilan final sur 1000m (G) / 600m (F)."
         ],
         avance: [
-            "Courir 15 à 20 minutes à allure régulière en contrôlant sa fréquence cardiaque.",
-            "Travailler le seuil : maintenir une allure rapide mais soutenable (85% FCmax).",
-            "Fractionné spécifique : 4x4min à allure rapide avec récupération complète.",
-            "Gérer les variations de rythme : accélérations courtes en cours de course.",
-            "Travailler la résistance sur terrain varié (herbe, sable, côte).",
-            "Maîtriser la gestion mentale : se fixer des repères et des objectifs intermédiaires.",
-            "Analyser sa course : temps au tour, régularité, sensations.",
-            "S'initier à l'entraînement par intervalles courts (30s/30s).",
-            "Course-test de 12 minutes avec objectif de distance à atteindre."
+            "S4 (Capacité Aérobie) : 20 min en variation d'allure (allure 1, 2, 3).",
+            "S5 (Capacité Aérobie) : Intervalles longs 3 x 1000m à 85% VMA (repos 3 min). Travail sur le maintien de la posture malgré la fatigue.",
+            "S6 (Capacité Aérobie) : Intervalles longs 3 x 1000m à 85% VMA (repos 3 min). Travail sur le maintien de la posture malgré la fatigue.",
+            "S7 (Capacité Aérobie) : Intervalles longs 3 x 1000m à 85% VMA (repos 3 min). Travail sur le maintien de la posture malgré la fatigue.",
+            "S8 (Puissance Aérobie) : Séance de 45\"/30\" à 105% VMA.",
+            "S9 (Puissance Aérobie) : Répétitions de 400m à 100% VMA (repos 1'30\"). Focus sur l'efficacité des bras dans le dernier virage.",
+            "S10 (Puissance Aérobie) : Répétitions de 400m à 100% VMA (repos 1'30\"). Focus sur l'efficacité des bras dans le dernier virage.",
+            "S11 (Puissance Aérobie) : Travail spécifique sur le 'Sprint final' : 600m à allure test + 200m accélération maximale.",
+            "S12 (Évaluation) : Test Bilan final sur 1000m (G) / 600m (F)."
         ],
         elite: [
-            "Optimiser la VMA par des séances de fractionné de haute intensité.",
-            "Travail de seuil et de résistance spécifique sur des durées de 20-30 min.",
-            "Maîtriser les différentes allures : endurance, seuil, VMA, sprint.",
-            "Gérer la fatigue et la douleur musculaire en fin d'effort.",
-            "Planification de l'entraînement : cycles de charge et de récupération.",
-            "Travail mental : visualisation et concentration sur la gestion de l'allure.",
-            "Course en compétition : tactique de dépassement et de relance.",
-            "Analyse des performances : courbe de vitesse et régularité.",
-            "Course finale de 12 minutes : recherche de la performance maximale."
+            "S4 (Capacité Aérobie) : Travail au seuil 2 x 10 min à 90% VMA.",
+            "S5 (Capacité Aérobie) : Travail au seuil 2 x 10 min à 90% VMA.",
+            "S6 (Capacité Aérobie) : Pyramide de capacité (400m - 800m - 1200m - 800m - 400m) à 90% VMA.",
+            "S7 (Capacité Aérobie) : Pyramide de capacité (400m - 800m - 1200m - 800m - 400m) à 90% VMA.",
+            "S8 (Puissance Aérobie) : Fractionné court intense : 200m à 110% VMA avec récupération très courte (45\").",
+            "S9 (Puissance Aérobie) : Fractionné court intense : 200m à 110% VMA avec récupération très courte (45\").",
+            "S10 (Puissance Aérobie) : Séance spécifique : 3 x 600m à 105% VMA (récupération complète).",
+            "S11 (Puissance Aérobie) : Préparation mentale et tactique : simulation de départ rapide et gestion des dépassements.",
+            "S12 (Évaluation) : Test Bilan final sur 1000m (G) / 600m (F)."
         ]
     },
     'Saut en hauteur': {
