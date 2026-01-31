@@ -850,6 +850,58 @@ const OBJECTIFS_CYCLE = {
             "Séance de 'Full Speed' : 3 passages à 100% avec 10 minutes de repos.",
             "Mise en confiance : visualisation de la réussite du passage."
         ]
+    },
+    'Course en durée': {
+        commun: {
+            S1: "Situation de référence (1000m G / 600m F) pour mesurer le temps de base et observer la gestion spontanée de l'effort.",
+            S2: "Test Navette (Luc Léger) pour déterminer la VMA et constituer les groupes physiologiques. Partie théorique : analyse des résultats, explication des zones d'entraînement (Capacité vs Puissance) et remise des fiches de suivi.",
+            S3: "Partie Pratique (La Posture) : Travail technique sur la 'foulée économique' (regard à l'horizon, buste droit, relâchement des épaules, mouvement des bras en piston, attaque médio-pied). Exercices de gammes (montées de genoux, talons-fesses) axés sur le placement.",
+            S12: "Test Bilan : courir (1000m G / 600m F) pour mesurer le temps de passage et observer la gestion de l'effort."
+        },
+        debutant: [
+            "S4 (Capacité Aérobie) : 10 min de course continue en aisance respiratoire (pouvoir parler en courant).",
+            "S5 (Capacité Aérobie) : 12 min de course continue en aisance respiratoire.",
+            "S6 (Capacité Aérobie) : 15 min de course continue en aisance respiratoire.",
+            "S7 (Capacité Aérobie) : Alterner 4 min course / 1 min marche (3 séries) en aisance respiratoire.",
+            "S8 (Puissance Aérobie) : Initiation au fractionné très doux : 45\" course rapide / 45\" marche (2 séries de 5).",
+            "S9 (Puissance Aérobie) : Travail de vitesse sur 100m pour dynamiser la foulée.",
+            "S10 (Puissance Aérobie) : Travail de vitesse sur 100m pour dynamiser la foulée.",
+            "S11 (Puissance Aérobie) : Test sur 500m (G) / 300m (F) pour valider l'allure cible de la S12.",
+            "S12 (Évaluation) : Test Bilan final sur 1000m (G) / 600m (F)."
+        ],
+        moyen: [
+            "S4 (Capacité Aérobie) : 15 min à 75% VMA.",
+            "S5 (Capacité Aérobie) : 2 x 8 min à 80% VMA (repos 2 min).",
+            "S6 (Capacité Aérobie) : Travail de régularité avec passage aux plots à intervalles réguliers (allure métronome).",
+            "S7 (Capacité Aérobie) : Travail de régularité avec passage aux plots à intervalles réguliers (allure métronome).",
+            "S8 (Puissance Aérobie) : Séance de 30\"/30\" à 100% VMA (2 séries de 8 répétitions).",
+            "S9 (Puissance Aérobie) : Séance de 30\"/30\" à 100% VMA (2 séries de 8 répétitions).",
+            "S10 (Puissance Aérobie) : Intervalles de 200m à 100% VMA (récupération égale au temps de course).",
+            "S11 (Puissance Aérobie) : Simulation de course sur 800m (G) / 500m (F) à l'allure du test bilan.",
+            "S12 (Évaluation) : Test Bilan final sur 1000m (G) / 600m (F)."
+        ],
+        avance: [
+            "S4 (Capacité Aérobie) : 20 min en variation d'allure (allure 1, 2, 3).",
+            "S5 (Capacité Aérobie) : Intervalles longs 3 x 1000m à 85% VMA (repos 3 min). Travail sur le maintien de la posture malgré la fatigue.",
+            "S6 (Capacité Aérobie) : Intervalles longs 3 x 1000m à 85% VMA (repos 3 min). Travail sur le maintien de la posture malgré la fatigue.",
+            "S7 (Capacité Aérobie) : Intervalles longs 3 x 1000m à 85% VMA (repos 3 min). Travail sur le maintien de la posture malgré la fatigue.",
+            "S8 (Puissance Aérobie) : Séance de 45\"/30\" à 105% VMA.",
+            "S9 (Puissance Aérobie) : Répétitions de 400m à 100% VMA (repos 1'30\"). Focus sur l'efficacité des bras dans le dernier virage.",
+            "S10 (Puissance Aérobie) : Répétitions de 400m à 100% VMA (repos 1'30\"). Focus sur l'efficacité des bras dans le dernier virage.",
+            "S11 (Puissance Aérobie) : Travail spécifique sur le 'Sprint final' : 600m à allure test + 200m accélération maximale.",
+            "S12 (Évaluation) : Test Bilan final sur 1000m (G) / 600m (F)."
+        ],
+        elite: [
+            "S4 (Capacité Aérobie) : Travail au seuil 2 x 10 min à 90% VMA.",
+            "S5 (Capacité Aérobie) : Travail au seuil 2 x 10 min à 90% VMA.",
+            "S6 (Capacité Aérobie) : Pyramide de capacité (400m - 800m - 1200m - 800m - 400m) à 90% VMA.",
+            "S7 (Capacité Aérobie) : Pyramide de capacité (400m - 800m - 1200m - 800m - 400m) à 90% VMA.",
+            "S8 (Puissance Aérobie) : Fractionné court intense : 200m à 110% VMA avec récupération très courte (45\").",
+            "S9 (Puissance Aérobie) : Fractionné court intense : 200m à 110% VMA avec récupération très courte (45\").",
+            "S10 (Puissance Aérobie) : Séance spécifique : 3 x 600m à 105% VMA (récupération complète).",
+            "S11 (Puissance Aérobie) : Préparation mentale et tactique : simulation de départ rapide et gestion des dépassements.",
+            "S12 (Évaluation) : Test Bilan final sur 1000m (G) / 600m (F)."
+        ]
     }
 };
 
