@@ -35,13 +35,13 @@ module.exports = async (req, res) => {
         let emptyCols = '';
         let colCount = 0;
 
-        // Couleurs unifiées - Vert professionnel
-        const COLOR_PRIMARY = '#006233';
-        const COLOR_PRIMARY_LIGHT = '#c8e6c9';
-        const COLOR_SECONDARY = '#2e7d32';
-        const COLOR_ACCENT = '#004d28';
+        // Couleurs sobres et professionnelles - Bleu marine
+        const COLOR_PRIMARY = '#1e3a5f';
+        const COLOR_PRIMARY_LIGHT = '#e8eef4';
+        const COLOR_SECONDARY = '#4a6fa5';
+        const COLOR_ACCENT = '#2c4a6e';
         
-        // Colonnes des critères (fond vert unifié)
+        // Colonnes des critères (fond bleu marine unifié)
         critObs.criteres.forEach(c => {
             headMain += `<th colspan="${c.sous.length}" style="background:${COLOR_PRIMARY};color:#fff;font-size:7pt;text-align:center;padding:5px;border:1px solid #000;font-weight:bold;">${c.nom}</th>`;
             c.sous.forEach(s => {
@@ -53,11 +53,11 @@ module.exports = async (req, res) => {
 
         // Colonnes spécifiques selon le type de grille
         if (!isObs) {
-            // GRILLE ÉVALUATION: 4 colonnes NOTE (fond vert dégradé)
+            // GRILLE ÉVALUATION: 4 colonnes NOTE
             headMain += `<th colspan="4" style="background:${COLOR_ACCENT};color:#fff;font-size:8pt;text-align:center;padding:5px;border:1px solid #000;font-weight:bold;">NOTE</th>`;
-            headSub += `<td style="background:#e8f5e9;font-size:6pt;text-align:center;padding:4px;border:1px solid #000;font-weight:600;width:5%;">Procéd.</td>`;
-            headSub += `<td style="background:#e8f5e9;font-size:6pt;text-align:center;padding:4px;border:1px solid #000;font-weight:600;width:5%;">Concept.</td>`;
-            headSub += `<td style="background:#e8f5e9;font-size:6pt;text-align:center;padding:4px;border:1px solid #000;font-weight:600;width:5%;">Comport.</td>`;
+            headSub += `<td style="background:#f5f5f5;font-size:6pt;text-align:center;padding:4px;border:1px solid #000;font-weight:600;width:5%;">Procéd.</td>`;
+            headSub += `<td style="background:#f5f5f5;font-size:6pt;text-align:center;padding:4px;border:1px solid #000;font-weight:600;width:5%;">Concept.</td>`;
+            headSub += `<td style="background:#f5f5f5;font-size:6pt;text-align:center;padding:4px;border:1px solid #000;font-weight:600;width:5%;">Comport.</td>`;
             headSub += `<td style="background:${COLOR_PRIMARY_LIGHT};font-size:7pt;text-align:center;padding:4px;border:1px solid #000;font-weight:bold;width:5%;">FINALE</td>`;
             emptyCols += '<td style="border:1px solid #000;width:5%;"></td>'.repeat(4);
         } else {
@@ -123,7 +123,7 @@ module.exports = async (req, res) => {
         const htmlDisplay = `
 <div style="font-family:'Segoe UI',Arial,sans-serif;max-width:900px;margin:0 auto;">
     <!-- EN-TÊTE -->
-    <div style="background:linear-gradient(135deg,#006233 0%,#2e7d32 100%);color:white;padding:20px 25px;border-radius:12px;margin-bottom:20px;box-shadow:0 4px 15px rgba(0,0,0,0.2);">
+    <div style="background:${COLOR_PRIMARY};color:white;padding:20px 25px;border-radius:12px;margin-bottom:20px;box-shadow:0 4px 15px rgba(0,0,0,0.2);">
         <h1 style="margin:0 0 8px 0;font-size:1.4rem;font-weight:700;">📋 ${titre}</h1>
         <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:0.9rem;opacity:0.95;">
             <span><strong>⚽ APS:</strong> ${aps}</span>
@@ -135,7 +135,7 @@ module.exports = async (req, res) => {
 
     <!-- TABLEAU DE LA GRILLE (Aperçu) -->
     <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:18px 22px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);overflow-x:auto;">
-        <h3 style="color:#006233;margin:0 0 15px 0;font-size:1rem;">📊 Aperçu de la grille (5 premières lignes sur 35)</h3>
+        <h3 style="color:${COLOR_PRIMARY};margin:0 0 15px 0;font-size:1rem;">📊 Aperçu de la grille (5 premières lignes sur 35)</h3>
         <table style="width:100%;border-collapse:collapse;font-size:8pt;">
             <tr>
                 <th rowspan="2" style="background:#006233;color:#fff;width:4%;font-size:7pt;border:1px solid #000;text-align:center;font-weight:bold;">N°</th>
@@ -151,22 +151,22 @@ module.exports = async (req, res) => {
 
     <!-- STRUCTURE DE LA GRILLE -->
     <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:18px 22px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-        <h3 style="color:#006233;margin:0 0 15px 0;font-size:1rem;">📋 Structure des critères</h3>
+        <h3 style="color:${COLOR_PRIMARY};margin:0 0 15px 0;font-size:1rem;">📋 Structure des critères</h3>
         <div style="display:flex;flex-wrap:wrap;gap:12px;">
             ${critObs.criteres.map(c => `
-                <div style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:1px solid #81c784;border-radius:8px;padding:10px 15px;min-width:120px;">
-                    <strong style="color:#2e7d32;font-size:0.9rem;">${c.nom}</strong><br>
+                <div style="background:#f5f5f5;border:1px solid #d0d0d0;border-radius:8px;padding:10px 15px;min-width:120px;">
+                    <strong style="color:${COLOR_PRIMARY};font-size:0.9rem;">${c.nom}</strong><br>
                     <span style="font-size:0.8rem;color:#555;">${c.sous.join(' | ')}</span>
                 </div>
             `).join('')}
             ${!isObs ? `
-                <div style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:1px solid #81c784;border-radius:8px;padding:10px 15px;min-width:180px;">
-                    <strong style="color:#2e7d32;font-size:0.9rem;">NOTE</strong><br>
+                <div style="background:#f5f5f5;border:1px solid #d0d0d0;border-radius:8px;padding:10px 15px;min-width:180px;">
+                    <strong style="color:${COLOR_PRIMARY};font-size:0.9rem;">NOTE</strong><br>
                     <span style="font-size:0.8rem;color:#555;">Procéd. | Concept. | Comport. | FINALE</span>
                 </div>
             ` : `
-                <div style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:1px solid #81c784;border-radius:8px;padding:10px 15px;">
-                    <strong style="color:#2e7d32;font-size:0.9rem;">Observations</strong><br>
+                <div style="background:#f5f5f5;border:1px solid #d0d0d0;border-radius:8px;padding:10px 15px;">
+                    <strong style="color:${COLOR_PRIMARY};font-size:0.9rem;">Observations</strong><br>
                     <span style="font-size:0.8rem;color:#555;">Remarques libres</span>
                 </div>
             `}
@@ -175,7 +175,7 @@ module.exports = async (req, res) => {
 
     <!-- INFORMATIONS -->
     <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:18px 22px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-        <h3 style="color:#006233;margin:0 0 12px 0;font-size:1rem;">📝 Informations</h3>
+        <h3 style="color:${COLOR_PRIMARY};margin:0 0 12px 0;font-size:1rem;">📝 Informations</h3>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:0.9rem;">
             <p style="margin:5px 0;"><strong>Type:</strong> ${isObs ? 'Grille d\'observation (pendant la séance)' : 'Grille d\'évaluation (fin de cycle)'}</p>
             <p style="margin:5px 0;"><strong>Nombre de lignes:</strong> 35 élèves</p>
@@ -183,21 +183,21 @@ module.exports = async (req, res) => {
             <p style="margin:5px 0;"><strong>Format:</strong> A4 Portrait</p>
         </div>
         ${!isObs ? `
-            <div style="margin-top:15px;padding:12px 15px;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border-radius:8px;border-left:4px solid #006233;">
-                <strong style="color:#006233;">📌 Signification des notes:</strong><br>
+            <div style="margin-top:15px;padding:12px 15px;background:#f5f5f5;border-radius:8px;border-left:4px solid ${COLOR_PRIMARY};">
+                <strong style="color:${COLOR_PRIMARY};">📌 Signification des notes:</strong><br>
                 <div style="font-size:0.85rem;margin-top:8px;line-height:1.6;">
-                    <span style="display:inline-block;background:#e8f5e9;padding:2px 8px;border-radius:4px;margin:2px;"><b>Procédurale</b></span> = Savoir-faire (technique gestuelle, exécution)<br>
-                    <span style="display:inline-block;background:#e8f5e9;padding:2px 8px;border-radius:4px;margin:2px;"><b>Conceptuelle</b></span> = Savoirs (connaissance des règles, vocabulaire)<br>
-                    <span style="display:inline-block;background:#e8f5e9;padding:2px 8px;border-radius:4px;margin:2px;"><b>Comportementale</b></span> = Savoir-être (engagement, fair-play, coopération)<br>
-                    <span style="display:inline-block;background:#c8e6c9;padding:2px 8px;border-radius:4px;margin:2px;"><b>FINALE</b></span> = Moyenne pondérée /20 selon barème établi
+                    <span style="display:inline-block;background:#e8eef4;padding:2px 8px;border-radius:4px;margin:2px;"><b>Procédurale</b></span> = Savoir-faire (technique gestuelle, exécution)<br>
+                    <span style="display:inline-block;background:#e8eef4;padding:2px 8px;border-radius:4px;margin:2px;"><b>Conceptuelle</b></span> = Savoirs (connaissance des règles, vocabulaire)<br>
+                    <span style="display:inline-block;background:#e8eef4;padding:2px 8px;border-radius:4px;margin:2px;"><b>Comportementale</b></span> = Savoir-être (engagement, fair-play, coopération)<br>
+                    <span style="display:inline-block;background:${COLOR_PRIMARY_LIGHT};padding:2px 8px;border-radius:4px;margin:2px;"><b>FINALE</b></span> = Moyenne pondérée /20 selon barème établi
                 </div>
             </div>
         ` : `
-            <div style="margin-top:15px;padding:12px 15px;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border-radius:8px;border-left:4px solid #006233;">
-                <strong style="color:#006233;">📌 Légende d'observation:</strong><br>
+            <div style="margin-top:15px;padding:12px 15px;background:#f5f5f5;border-radius:8px;border-left:4px solid ${COLOR_PRIMARY};">
+                <strong style="color:${COLOR_PRIMARY};">📌 Légende d'observation:</strong><br>
                 <div style="font-size:0.85rem;margin-top:8px;">
-                    <span style="display:inline-block;background:#c8e6c9;padding:2px 10px;border-radius:4px;margin:3px;">✓</span> Critère observé / maîtrisé<br>
-                    <span style="display:inline-block;background:#e8f5e9;padding:2px 10px;border-radius:4px;margin:3px;">○</span> Partiellement observé / en cours d'acquisition<br>
+                    <span style="display:inline-block;background:${COLOR_PRIMARY_LIGHT};padding:2px 10px;border-radius:4px;margin:3px;">✓</span> Critère observé / maîtrisé<br>
+                    <span style="display:inline-block;background:#e8eef4;padding:2px 10px;border-radius:4px;margin:3px;">○</span> Partiellement observé / en cours d'acquisition<br>
                     <span style="display:inline-block;background:#fff;padding:2px 10px;border-radius:4px;margin:3px;border:1px solid #ccc;">✗</span> Critère non observé / non maîtrisé
                 </div>
             </div>
@@ -251,13 +251,13 @@ th, td {
     font-size: 16pt;
     font-weight: bold;
     text-align: center;
-    color: #006233;
+    color: #1e3a5f;
     margin: 10px 0;
 }
 .sub-title {
     font-size: 11pt;
     text-align: center;
-    color: #006233;
+    color: #1e3a5f;
     margin: 0 0 15px 0;
 }
 .info-table {
