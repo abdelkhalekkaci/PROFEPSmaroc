@@ -7,6 +7,7 @@
 // ============================================================================
 
 const { OTI, OTC, VOCABULAIRE_APS, getSituationReference, getGroupeAPS, FALLBACKS, getSchema } = require('./data/references.js');
+const { getSituations } = require('./data/situations_fiches.js');
 
 module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -33,6 +34,36 @@ module.exports = async (req, res) => {
         const groupeAPS = getGroupeAPS(aps);
         const vocabAPS = VOCABULAIRE_APS[aps] || '';
 
+        // Récupération des situations de référence si disponibles
+        const situationsRef = getSituations(aps, objectif);
+        const situationsContext = situationsRef ? `
+SITUATIONS DE RÉFÉRENCE PÉDAGOGIQUES (utilise-les comme base et adapte selon l'objectif):
+
+ÉCHAUFFEMENT SPÉCIFIQUE DE RÉFÉRENCE:
+${situationsRef.echauffement}
+
+SITUATION 1 (Apprentissage structuré) - "${situationsRef.situation1.titre}":
+- But: ${situationsRef.situation1.but}
+- Organisation: ${situationsRef.situation1.organisation}
+- Déroulement: ${situationsRef.situation1.deroulement}
+- Consignes: ${situationsRef.situation1.consignes}
+- Variantes: ${situationsRef.situation1.variantes}
+
+SITUATION 2 (Transfert/Jeu) - "${situationsRef.situation2.titre}":
+- But: ${situationsRef.situation2.but}
+- Organisation: ${situationsRef.situation2.organisation}
+- Déroulement: ${situationsRef.situation2.deroulement}
+- Consignes: ${situationsRef.situation2.consignes}
+- Variantes: ${situationsRef.situation2.variantes}
+
+CRITÈRES DE RÉALISATION (Comment bien faire):
+${situationsRef.criteresRealisation}
+
+CRITÈRES DE RÉUSSITE (Mesurable):
+${situationsRef.criteresReussite}
+
+⚠️ INSTRUCTION: Utilise ces situations comme BASE et ADAPTE-LES pour correspondre EXACTEMENT à l'objectif "${objectif}". Conserve la structure pédagogique (S1 apprentissage → S2 transfert) mais personnalise le contenu.` : '';
+
         // ==================== PROMPT IA ====================
         const prompt = `Tu es un expert en EPS au Maroc, spécialiste de ${aps}.
 
@@ -49,10 +80,13 @@ DISTINCTIONS PÉDAGOGIQUES IMPORTANTES:
 - CRITÈRES DE RÉALISATION = COMMENT bien faire (qualité technique du geste)
 - CRITÈRES DE RÉUSSITE = EST-CE RÉUSSI ? (indicateurs mesurables, chiffrés)
 
+${situationsContext}
+
 🛑 IMPORTANT : FORMAT DE RÉPONSE STRICT 🛑
 - N'utilise PAS de markdown (gras **, titres ##) pour les CLÉS.
 - Écris CHAQUE CLÉ exactement comme demandé, suivie de deux points.
 - Ne mets pas de texte introductif ou conclusif.
+${situationsRef ? '- ADAPTE les situations de référence ci-dessus pour qu\'elles correspondent PARFAITEMENT à l\'objectif.' : ''}
 
 GÉNÈRE CE CONTENU 100% SPÉCIFIQUE à ${aps}:
 
@@ -124,24 +158,58 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
         let critReal = extract('CRITERES_REALISATION');
         let critReuss = extract('CRITERES_REUSSITE');
 
-        // Appliquer fallbacks si nécessaire
+        // Appliquer fallbacks si nécessaire - Priorité aux situations de référence, puis FALLBACKS
         const fb = FALLBACKS[aps] || FALLBACKS['Handball'];
-        if (!echaufSpec || echaufSpec.length < 20) echaufSpec = fb.echauf;
-        if (!butFonda || butFonda.length < 10) butFonda = `Atteindre l'objectif: ${objectif}`;
-        if (!s1Titre || s1Titre.length < 5) s1Titre = fb.s1t;
-        if (!s1But || s1But.length < 10) s1But = fb.s1b;
-        if (!s1Orga || s1Orga.length < 20) s1Orga = fb.s1o;
-        if (!s1Deroul || s1Deroul.length < 50) s1Deroul = fb.s1d;
-        if (!s1Consignes || s1Consignes.length < 30) s1Consignes = fb.s1c;
-        if (!s1Variantes || s1Variantes.length < 20) s1Variantes = fb.s1v;
-        if (!s2Titre || s2Titre.length < 5) s2Titre = fb.s2t;
-        if (!s2But || s2But.length < 10) s2But = fb.s2b;
-        if (!s2Orga || s2Orga.length < 20) s2Orga = fb.s2o;
-        if (!s2Deroul || s2Deroul.length < 30) s2Deroul = fb.s2d;
-        if (!s2Consignes || s2Consignes.length < 30) s2Consignes = fb.s2c;
-        if (!s2Variantes || s2Variantes.length < 20) s2Variantes = fb.s2v;
-        if (!critReal || critReal.length < 50) critReal = fb.cr;
-        if (!critReuss || critReuss.length < 50) critReuss = fb.cs;
+        const sitRefData = situationsRef; // Utiliser les situations de référence si disponibles
+        
+        if (!echaufSpec || echaufSpec.length < 20) {
+            echaufSpec = sitRefData ? sitRefData.echauffement : fb.echauf;
+        }
+        if (!butFonda || butFonda.length < 10) {
+            butFonda = `Atteindre l'objectif: ${objectif}`;
+        }
+        if (!s1Titre || s1Titre.length < 5) {
+            s1Titre = sitRefData ? sitRefData.situation1.titre : fb.s1t;
+        }
+        if (!s1But || s1But.length < 10) {
+            s1But = sitRefData ? sitRefData.situation1.but : fb.s1b;
+        }
+        if (!s1Orga || s1Orga.length < 20) {
+            s1Orga = sitRefData ? sitRefData.situation1.organisation : fb.s1o;
+        }
+        if (!s1Deroul || s1Deroul.length < 50) {
+            s1Deroul = sitRefData ? sitRefData.situation1.deroulement : fb.s1d;
+        }
+        if (!s1Consignes || s1Consignes.length < 30) {
+            s1Consignes = sitRefData ? sitRefData.situation1.consignes : fb.s1c;
+        }
+        if (!s1Variantes || s1Variantes.length < 20) {
+            s1Variantes = sitRefData ? sitRefData.situation1.variantes : fb.s1v;
+        }
+        if (!s2Titre || s2Titre.length < 5) {
+            s2Titre = sitRefData ? sitRefData.situation2.titre : fb.s2t;
+        }
+        if (!s2But || s2But.length < 10) {
+            s2But = sitRefData ? sitRefData.situation2.but : fb.s2b;
+        }
+        if (!s2Orga || s2Orga.length < 20) {
+            s2Orga = sitRefData ? sitRefData.situation2.organisation : fb.s2o;
+        }
+        if (!s2Deroul || s2Deroul.length < 30) {
+            s2Deroul = sitRefData ? sitRefData.situation2.deroulement : fb.s2d;
+        }
+        if (!s2Consignes || s2Consignes.length < 30) {
+            s2Consignes = sitRefData ? sitRefData.situation2.consignes : fb.s2c;
+        }
+        if (!s2Variantes || s2Variantes.length < 20) {
+            s2Variantes = sitRefData ? sitRefData.situation2.variantes : fb.s2v;
+        }
+        if (!critReal || critReal.length < 50) {
+            critReal = sitRefData ? sitRefData.criteresRealisation : fb.cr;
+        }
+        if (!critReuss || critReuss.length < 50) {
+            critReuss = sitRefData ? sitRefData.criteresReussite : fb.cs;
+        }
 
         // Schémas SVG
         const schema1 = getSchema(aps, 1);
