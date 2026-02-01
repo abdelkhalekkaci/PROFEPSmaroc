@@ -1186,13 +1186,34 @@
             if (saved) {
                 try {
                     const d = JSON.parse(saved);
+                    
+                    // Switch to the correct tab based on type
+                    if (d.type) {
+                        const tab = document.querySelector(`.tab[data-type="${d.type}"]`);
+                        if (tab) tab.click();
+                    }
+                    
+                    // Fill common fields
                     if (d.niveau) document.getElementById('niveau').value = d.niveau;
                     if (d.aps) document.getElementById('aps').value = d.aps;
-                    if (d.objectif) document.getElementById('objectif').value = d.objectif;
                     if (d.nomProf) document.getElementById('nomProf').value = d.nomProf;
                     if (d.etablissement) document.getElementById('etablissement').value = d.etablissement;
                     if (d.anneeScolaire) document.getElementById('anneeScolaire').value = d.anneeScolaire;
-                    if (d.numeroSeance) document.getElementById('numeroSeance').value = d.numeroSeance;
+                    
+                    // Fill type-specific fields
+                    if (d.type === 'fiche') {
+                        if (d.objectif) document.getElementById('objectif').value = d.objectif;
+                        if (d.numeroSeance) document.getElementById('numeroSeance').value = d.numeroSeance;
+                    } else if (d.type === 'projet') {
+                        if (d.niveauEleves) document.getElementById('niveauEleves').value = d.niveauEleves;
+                        if (d.nombreSeances) document.getElementById('nombreSeances').value = d.nombreSeances;
+                    } else if (d.type === 'grille') {
+                        if (d.typeGrille) {
+                            const radio = document.querySelector(`input[name="typeGrille"][value="${d.typeGrille}"]`);
+                            if (radio) radio.checked = true;
+                        }
+                    }
+                    
                     localStorage.removeItem('profeps_formData');
                     if (d.autoGenerate) setTimeout(() => document.getElementById('form').dispatchEvent(new Event('submit')), 500);
                 } catch (e) { localStorage.removeItem('profeps_formData'); }
