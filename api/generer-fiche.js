@@ -215,11 +215,17 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
         const schema1 = getSchema(aps, 1);
         const schema2 = getSchema(aps, 2);
 
+        // Couleurs sobres et professionnelles
+        const COLOR_PRIMARY = '#1e3a5f'; // Bleu marine
+        const COLOR_PRIMARY_LIGHT = '#e8eef4'; // Bleu marine très clair
+        const COLOR_SECONDARY = '#4a6fa5'; // Bleu plus clair
+        const COLOR_ACCENT = '#f5f5f5'; // Gris clair
+
         // ==================== HTML DISPLAY (SITE WEB) ====================
         const htmlDisplay = `
 <div style="font-family:'Segoe UI',Arial,sans-serif;max-width:950px;margin:0 auto;line-height:1.5;">
     <!-- EN-TÊTE -->
-    <div style="background:linear-gradient(135deg,#c1272d 0%,#006233 100%);color:white;padding:20px 25px;border-radius:12px;margin-bottom:20px;box-shadow:0 4px 15px rgba(0,0,0,0.2);">
+    <div style="background:${COLOR_PRIMARY};color:white;padding:20px 25px;border-radius:12px;margin-bottom:20px;box-shadow:0 4px 15px rgba(0,0,0,0.2);">
         <h1 style="margin:0 0 8px 0;font-size:1.5rem;font-weight:700;">📋 Fiche de Séance - ${aps}</h1>
         <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:0.9rem;opacity:0.95;">
             <span><strong>📊 Niveau:</strong> ${niveau}</span>
@@ -230,8 +236,8 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
     </div>
 
     <!-- OBJECTIF DE LA SÉANCE -->
-    <div style="background:linear-gradient(135deg,#ffebee,#fce4ec);border-left:5px solid #c1272d;padding:15px 20px;border-radius:0 12px 12px 0;margin-bottom:20px;box-shadow:0 2px 8px rgba(193,39,45,0.15);">
-        <h2 style="color:#c1272d;margin:0 0 5px 0;font-size:1rem;display:flex;align-items:center;gap:8px;">
+    <div style="background:${COLOR_PRIMARY_LIGHT};border-left:5px solid ${COLOR_PRIMARY};padding:15px 20px;border-radius:0 12px 12px 0;margin-bottom:20px;box-shadow:0 2px 8px rgba(30,58,95,0.15);">
+        <h2 style="color:${COLOR_PRIMARY};margin:0 0 5px 0;font-size:1rem;display:flex;align-items:center;gap:8px;">
             🎯 OBJECTIF DE LA SÉANCE
             <span style="font-size:0.75rem;font-weight:normal;color:#666;font-style:italic;">(Ce que l'élève va APPRENDRE)</span>
         </h2>
@@ -240,12 +246,12 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
 
     <!-- PARTIE INTRODUCTIVE -->
     <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:18px 22px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-        <h2 style="color:#c1272d;border-bottom:3px solid #c1272d;padding-bottom:8px;margin:0 0 15px 0;font-size:1rem;display:flex;align-items:center;gap:8px;">
+        <h2 style="color:${COLOR_PRIMARY};border-bottom:3px solid ${COLOR_PRIMARY};padding-bottom:8px;margin:0 0 15px 0;font-size:1rem;display:flex;align-items:center;gap:8px;">
             📌 PARTIE INTRODUCTIVE
-            <span style="background:#c1272d;color:white;padding:2px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">15 min</span>
+            <span style="background:${COLOR_PRIMARY};color:white;padding:2px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">15 min</span>
         </h2>
-        <div style="background:#fff3e0;padding:10px 15px;border-radius:8px;border-left:4px solid #ff9800;margin-bottom:12px;">
-            <strong style="color:#e65100;">🎯 But:</strong> <span style="font-weight:500;">Préparer le corps à l'effort</span>
+        <div style="background:${COLOR_PRIMARY_LIGHT};padding:10px 15px;border-radius:8px;border-left:4px solid ${COLOR_PRIMARY};margin-bottom:12px;">
+            <strong style="color:${COLOR_PRIMARY};">🎯 But:</strong> <span style="font-weight:500;">Préparer le corps à l'effort</span>
         </div>
         <div style="background:#f8f9fa;padding:12px 15px;border-radius:8px;font-size:0.9rem;line-height:1.7;">
             <div style="margin-bottom:6px;">• <strong>Prise en main:</strong> Appel, vérification des tenues, présentation de l'objectif, consignes de sécurité</div>
@@ -256,88 +262,88 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
 
     <!-- PARTIE FONDAMENTALE -->
     <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:18px 22px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-        <h2 style="color:#006233;border-bottom:3px solid #006233;padding-bottom:8px;margin:0 0 15px 0;font-size:1rem;display:flex;align-items:center;gap:8px;">
+        <h2 style="color:${COLOR_PRIMARY};border-bottom:3px solid ${COLOR_PRIMARY};padding-bottom:8px;margin:0 0 15px 0;font-size:1rem;display:flex;align-items:center;gap:8px;">
             ⚡ PARTIE FONDAMENTALE
-            <span style="background:#006233;color:white;padding:2px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">30 min</span>
+            <span style="background:${COLOR_PRIMARY};color:white;padding:2px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">30 min</span>
         </h2>
-        <div style="background:#e8f5e9;padding:10px 15px;border-radius:8px;border-left:4px solid #006233;margin-bottom:18px;">
-            <strong style="color:#2e7d32;">🎯 But:</strong> <span style="font-weight:500;">${butFonda}</span>
+        <div style="background:${COLOR_PRIMARY_LIGHT};padding:10px 15px;border-radius:8px;border-left:4px solid ${COLOR_PRIMARY};margin-bottom:18px;">
+            <strong style="color:${COLOR_PRIMARY};">🎯 But:</strong> <span style="font-weight:500;">${butFonda}</span>
         </div>
 
         <!-- SITUATION 1 -->
-        <div style="background:linear-gradient(135deg,#f1f8e9,#e8f5e9);border-radius:10px;padding:15px 18px;margin-bottom:18px;border:1px solid #aed581;">
-            <h3 style="color:#33691e;margin:0 0 12px 0;font-size:0.95rem;display:flex;align-items:center;gap:8px;">
-                <span style="background:#006233;color:white;padding:3px 10px;border-radius:6px;font-size:0.7rem;font-weight:700;">SIT 1</span>
+        <div style="background:#f8f9fa;border-radius:10px;padding:15px 18px;margin-bottom:18px;border:1px solid #d0d0d0;">
+            <h3 style="color:${COLOR_PRIMARY};margin:0 0 12px 0;font-size:0.95rem;display:flex;align-items:center;gap:8px;">
+                <span style="background:${COLOR_PRIMARY};color:white;padding:3px 10px;border-radius:6px;font-size:0.7rem;font-weight:700;">SIT 1</span>
                 ${s1Titre}
             </h3>
-            <div style="background:white;padding:10px 15px;border-radius:8px;border-left:4px solid #006233;margin-bottom:12px;">
-                <strong style="color:#006233;">🎯 But:</strong> <em style="color:#666;font-size:0.85rem;">(Ce que l'élève doit FAIRE)</em><br>
+            <div style="background:white;padding:10px 15px;border-radius:8px;border-left:4px solid ${COLOR_PRIMARY};margin-bottom:12px;">
+                <strong style="color:${COLOR_PRIMARY};">🎯 But:</strong> <em style="color:#666;font-size:0.85rem;">(Ce que l'élève doit FAIRE)</em><br>
                 <span style="font-weight:600;font-size:1rem;">${s1But}</span>
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:0.85rem;">
                 <div>
-                    <p style="margin:0 0 8px 0;"><strong style="color:#33691e;">📍 Organisation:</strong> ${s1Orga}</p>
-                    <p style="margin:0 0 8px 0;"><strong style="color:#33691e;">📋 Déroulement:</strong> ${s1Deroul}</p>
+                    <p style="margin:0 0 8px 0;"><strong style="color:${COLOR_PRIMARY};">📍 Organisation:</strong> ${s1Orga}</p>
+                    <p style="margin:0 0 8px 0;"><strong style="color:${COLOR_PRIMARY};">📋 Déroulement:</strong> ${s1Deroul}</p>
                 </div>
                 <div>
-                    <p style="margin:0 0 8px 0;"><strong style="color:#33691e;">📢 Consignes:</strong></p>
+                    <p style="margin:0 0 8px 0;"><strong style="color:${COLOR_PRIMARY};">📢 Consignes:</strong></p>
                     <div style="margin-left:10px;line-height:1.6;">${s1Consignes.split('\n').map(c => '<div>→ ' + c.replace(/^\d+\.\s*/, '').replace(/^-\s*/, '') + '</div>').join('')}</div>
                 </div>
             </div>
-            <div style="background:#fff8e1;padding:8px 12px;border-radius:6px;margin-top:10px;font-size:0.85rem;">
-                <strong style="color:#f57c00;">🔄 Variantes:</strong> ${s1Variantes.replace(/\n/g, ' | ')}
+            <div style="background:${COLOR_ACCENT};padding:8px 12px;border-radius:6px;margin-top:10px;font-size:0.85rem;">
+                <strong style="color:${COLOR_PRIMARY};">🔄 Variantes:</strong> ${s1Variantes.replace(/\n/g, ' | ')}
             </div>
-            <div style="margin-top:12px;padding:12px;background:#f5f5f5;border-radius:8px;text-align:center;">
-                <p style="font-weight:bold;color:#006233;margin:0 0 8px 0;font-size:0.85rem;">📐 Schéma d'organisation</p>
+            <div style="margin-top:12px;padding:12px;background:${COLOR_ACCENT};border-radius:8px;text-align:center;">
+                <p style="font-weight:bold;color:${COLOR_PRIMARY};margin:0 0 8px 0;font-size:0.85rem;">📐 Schéma d'organisation</p>
                 ${schema1}
             </div>
         </div>
 
         <!-- SITUATION 2 -->
-        <div style="background:linear-gradient(135deg,#e3f2fd,#e1f5fe);border-radius:10px;padding:15px 18px;margin-bottom:18px;border:1px solid #64b5f6;">
-            <h3 style="color:#0d47a1;margin:0 0 12px 0;font-size:0.95rem;display:flex;align-items:center;gap:8px;">
-                <span style="background:#1565c0;color:white;padding:3px 10px;border-radius:6px;font-size:0.7rem;font-weight:700;">SIT 2</span>
+        <div style="background:#f8f9fa;border-radius:10px;padding:15px 18px;margin-bottom:18px;border:1px solid #d0d0d0;">
+            <h3 style="color:${COLOR_SECONDARY};margin:0 0 12px 0;font-size:0.95rem;display:flex;align-items:center;gap:8px;">
+                <span style="background:${COLOR_SECONDARY};color:white;padding:3px 10px;border-radius:6px;font-size:0.7rem;font-weight:700;">SIT 2</span>
                 ${s2Titre}
             </h3>
-            <div style="background:white;padding:10px 15px;border-radius:8px;border-left:4px solid #1565c0;margin-bottom:12px;">
-                <strong style="color:#1565c0;">🎯 But:</strong> <em style="color:#666;font-size:0.85rem;">(Ce que l'élève doit FAIRE)</em><br>
+            <div style="background:white;padding:10px 15px;border-radius:8px;border-left:4px solid ${COLOR_SECONDARY};margin-bottom:12px;">
+                <strong style="color:${COLOR_SECONDARY};">🎯 But:</strong> <em style="color:#666;font-size:0.85rem;">(Ce que l'élève doit FAIRE)</em><br>
                 <span style="font-weight:600;font-size:1rem;">${s2But}</span>
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:0.85rem;">
                 <div>
-                    <p style="margin:0 0 8px 0;"><strong style="color:#0d47a1;">📍 Organisation:</strong> ${s2Orga}</p>
-                    <p style="margin:0 0 8px 0;"><strong style="color:#0d47a1;">📋 Déroulement:</strong> ${s2Deroul}</p>
+                    <p style="margin:0 0 8px 0;"><strong style="color:${COLOR_SECONDARY};">📍 Organisation:</strong> ${s2Orga}</p>
+                    <p style="margin:0 0 8px 0;"><strong style="color:${COLOR_SECONDARY};">📋 Déroulement:</strong> ${s2Deroul}</p>
                 </div>
                 <div>
-                    <p style="margin:0 0 8px 0;"><strong style="color:#0d47a1;">📢 Consignes:</strong></p>
+                    <p style="margin:0 0 8px 0;"><strong style="color:${COLOR_SECONDARY};">📢 Consignes:</strong></p>
                     <div style="margin-left:10px;line-height:1.6;">${s2Consignes.split('\n').map(c => '<div>→ ' + c.replace(/^\d+\.\s*/, '').replace(/^-\s*/, '') + '</div>').join('')}</div>
                 </div>
             </div>
-            <div style="background:#fff8e1;padding:8px 12px;border-radius:6px;margin-top:10px;font-size:0.85rem;">
-                <strong style="color:#f57c00;">🔄 Variantes:</strong> ${s2Variantes.replace(/\n/g, ' | ')}
+            <div style="background:${COLOR_ACCENT};padding:8px 12px;border-radius:6px;margin-top:10px;font-size:0.85rem;">
+                <strong style="color:${COLOR_PRIMARY};">🔄 Variantes:</strong> ${s2Variantes.replace(/\n/g, ' | ')}
             </div>
-            <div style="margin-top:12px;padding:12px;background:#f5f5f5;border-radius:8px;text-align:center;">
-                <p style="font-weight:bold;color:#1565c0;margin:0 0 8px 0;font-size:0.85rem;">📐 Schéma d'organisation</p>
+            <div style="margin-top:12px;padding:12px;background:${COLOR_ACCENT};border-radius:8px;text-align:center;">
+                <p style="font-weight:bold;color:${COLOR_SECONDARY};margin:0 0 8px 0;font-size:0.85rem;">📐 Schéma d'organisation</p>
                 ${schema2}
             </div>
         </div>
 
         <!-- SITUATION DE RÉFÉRENCE -->
-        <div style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);border-radius:10px;padding:12px 18px;border:1px solid #ffb74d;">
-            <h3 style="color:#e65100;margin:0 0 8px 0;font-size:0.9rem;">◆ SITUATION DE RÉFÉRENCE</h3>
+        <div style="background:${COLOR_ACCENT};border-radius:10px;padding:12px 18px;border:1px solid #d0d0d0;">
+            <h3 style="color:${COLOR_PRIMARY};margin:0 0 8px 0;font-size:0.9rem;">◆ SITUATION DE RÉFÉRENCE</h3>
             <p style="margin:0;font-size:0.9rem;font-weight:500;">${sitRef}</p>
         </div>
     </div>
 
     <!-- CRITÈRES -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:20px;">
-        <div style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border-radius:10px;padding:15px 18px;border:1px solid #81c784;">
-            <h3 style="color:#2e7d32;margin:0 0 5px 0;font-size:0.9rem;">✅ Critères de RÉALISATION</h3>
+        <div style="background:${COLOR_ACCENT};border-radius:10px;padding:15px 18px;border:1px solid #d0d0d0;">
+            <h3 style="color:${COLOR_PRIMARY};margin:0 0 5px 0;font-size:0.9rem;">✅ Critères de RÉALISATION</h3>
             <p style="font-size:0.75rem;color:#666;margin:0 0 10px 0;font-style:italic;">COMMENT bien faire (qualité du geste)</p>
             <div style="font-size:0.85rem;line-height:1.7;">${critReal.split('\n').map(c => '<div>✓ ' + c.replace(/^[•\-]\s*/, '') + '</div>').join('')}</div>
         </div>
-        <div style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);border-radius:10px;padding:15px 18px;border:1px solid #64b5f6;">
-            <h3 style="color:#1565c0;margin:0 0 5px 0;font-size:0.9rem;">🎯 Critères de RÉUSSITE</h3>
+        <div style="background:${COLOR_ACCENT};border-radius:10px;padding:15px 18px;border:1px solid #d0d0d0;">
+            <h3 style="color:${COLOR_SECONDARY};margin:0 0 5px 0;font-size:0.9rem;">🎯 Critères de RÉUSSITE</h3>
             <p style="font-size:0.75rem;color:#666;margin:0 0 10px 0;font-style:italic;">EST-CE RÉUSSI ? (mesurable, chiffré)</p>
             <div style="font-size:0.85rem;line-height:1.7;">${critReuss.split('\n').map(c => '<div>✓ ' + c.replace(/^[•\-]\s*/, '') + '</div>').join('')}</div>
         </div>
@@ -345,12 +351,12 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
 
     <!-- PARTIE FINALE -->
     <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:18px 22px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-        <h2 style="color:#c1272d;border-bottom:3px solid #c1272d;padding-bottom:8px;margin:0 0 15px 0;font-size:1rem;display:flex;align-items:center;gap:8px;">
+        <h2 style="color:${COLOR_PRIMARY};border-bottom:3px solid ${COLOR_PRIMARY};padding-bottom:8px;margin:0 0 15px 0;font-size:1rem;display:flex;align-items:center;gap:8px;">
             🧘 PARTIE FINALE
-            <span style="background:#c1272d;color:white;padding:2px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">10 min</span>
+            <span style="background:${COLOR_PRIMARY};color:white;padding:2px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">10 min</span>
         </h2>
-        <div style="background:#fff3e0;padding:10px 15px;border-radius:8px;border-left:4px solid #ff9800;margin-bottom:12px;">
-            <strong style="color:#e65100;">🎯 But:</strong> <span style="font-weight:500;">Retour au calme</span>
+        <div style="background:${COLOR_PRIMARY_LIGHT};padding:10px 15px;border-radius:8px;border-left:4px solid ${COLOR_PRIMARY};margin-bottom:12px;">
+            <strong style="color:${COLOR_PRIMARY};">🎯 But:</strong> <span style="font-weight:500;">Retour au calme</span>
         </div>
         <div style="background:#f8f9fa;padding:12px 15px;border-radius:8px;font-size:0.9rem;line-height:1.7;">
             <div style="margin-bottom:6px;">• Marche lente avec respiration profonde (inspiration nasale, expiration buccale)</div>
@@ -414,7 +420,7 @@ th, td {
     text-align: center;
     font-size: 11pt;
     font-weight: bold;
-    background: #006233;
+    background: #1e3a5f;
     color: #fff;
     padding: 4px;
 }
@@ -425,13 +431,13 @@ th, td {
     text-align: center;
 }
 .obj-row {
-    background: #c1272d;
+    background: #1e3a5f;
     color: #fff;
     font-weight: bold;
     font-size: 8pt;
 }
 .table-header {
-    background: #006233;
+    background: #1e3a5f;
     color: #fff;
     font-weight: bold;
     text-align: center;
@@ -452,12 +458,12 @@ th, td {
 }
 .sit-title {
     font-weight: bold;
-    color: #006233;
+    color: #1e3a5f;
     font-size: 7.5pt;
     margin-bottom: 2px;
 }
 .but-cell {
-    background: #fff8e1;
+    background: #f5f5f5;
     font-size: 7pt;
     text-align: center;
     vertical-align: middle;
@@ -489,7 +495,7 @@ th, td {
 <td class="section-header" style="width:8%">Groupe APS</td>
 <td style="width:12%;font-size:7.5pt;text-align:center">${groupeAPS}</td>
 <td class="section-header" style="width:5%">APS</td>
-<td style="width:10%;font-size:8pt;text-align:center;font-weight:bold;color:#006233">${aps}</td>
+<td style="width:10%;font-size:8pt;text-align:center;font-weight:bold;color:#1e3a5f">${aps}</td>
 <td class="section-header" style="width:6%">Niveau</td>
 <td style="width:6%;font-size:7.5pt;text-align:center">${niveau}</td>
 <td class="section-header" style="width:6%">Séance</td>
@@ -505,7 +511,7 @@ th, td {
 </tr>
 <tr>
 <td class="obj-row" style="text-align:center">OBJECTIF</td>
-<td colspan="7" style="background:#ffebee;font-size:8pt;font-weight:bold;padding:5px">${objectif}</td>
+<td colspan="7" style="background:#e8eef4;font-size:8pt;font-weight:bold;padding:5px">${objectif}</td>
 </tr>
 </table>
 
