@@ -1126,92 +1126,54 @@
                     return;
                 }
 
-                // Cloner le contenu de la prévisualisation
-                const previewContent = document.getElementById('previewContent');
-                if (!previewContent) {
-                    alert('Erreur: Contenu de prévisualisation non trouvé.');
-                    return;
-                }
-
-                // Créer un élément temporaire avec le contenu
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = previewContent.innerHTML;
-                
-                // Styles pour assurer la visibilité et le bon rendu
-                tempDiv.style.cssText = `
-                    position: fixed;
-                    left: -9999px;
+                // Utiliser currentHtml qui contient le HTML complet du document
+                // Créer un wrapper avec les styles nécessaires
+                const wrapper = document.createElement('div');
+                wrapper.innerHTML = currentHtml;
+                wrapper.style.cssText = `
+                    position: absolute;
+                    left: -10000px;
                     top: 0;
-                    width: ${currentType === 'grille' ? '210mm' : '297mm'};
-                    min-height: 297mm;
+                    width: 297mm;
                     background: white;
                     padding: 10mm;
-                    z-index: 9999;
-                    visibility: visible;
-                    opacity: 1;
-                    overflow: visible;
                 `;
 
-                document.body.appendChild(tempDiv);
+                document.body.appendChild(wrapper);
 
-                // Attendre que les images et le rendu soient complets
-                await new Promise(resolve => setTimeout(resolve, 500));
+                // Attendre le rendu
+                await new Promise(resolve => setTimeout(resolve, 300));
 
-                // Forcer le rendu des schémas SVG
-                const svgs = tempDiv.querySelectorAll('svg');
-                svgs.forEach(svg => {
-                    svg.style.display = 'block';
-                    svg.style.margin = '10px auto';
-                    svg.style.maxWidth = '100%';
-                });
-
-                // Attendre encore un peu pour le rendu SVG
-                await new Promise(resolve => setTimeout(resolve, 200));
-
-                // Configuration optimisée pour html2pdf
+                // Configuration pour html2pdf
                 const opt = {
-                    margin: [5, 5, 5, 5],
+                    margin: 5,
                     filename: currentFilename.replace('.doc', '.pdf'),
-                    image: { type: 'jpeg', quality: 0.98 },
+                    image: { type: 'jpeg', quality: 0.95 },
                     html2canvas: {
-                        scale: 2,
+                        scale: 1.5,
                         useCORS: true,
                         logging: false,
                         allowTaint: true,
                         backgroundColor: '#ffffff',
-                        windowWidth: 1200,
-                        onclone: (clonedDoc) => {
-                            // Forcer les styles sur le clone
-                            const clonedTemp = clonedDoc.body.querySelector('div[style*="position: fixed"]');
-                            if (clonedTemp) {
-                                clonedTemp.style.position = 'absolute';
-                                clonedTemp.style.left = '0';
-                                clonedTemp.style.transform = 'none';
-                            }
-                        }
+                        width: 1123 // A4 landscape width in pixels at 96 DPI
                     },
                     jsPDF: {
                         unit: 'mm',
                         format: 'a4',
-                        orientation: currentType === 'grille' ? 'portrait' : 'landscape',
-                        putOnlyUsedFonts: true
+                        orientation: 'landscape'
                     }
                 };
 
-                // Générer le PDF
-                await html2pdf().set(opt).from(tempDiv).save();
+                // Générer le PDF depuis le wrapper
+                await html2pdf().set(opt).from(wrapper).save();
+                
+                // Nettoyage
+                document.body.removeChild(wrapper);
                 
             } catch (err) {
                 console.error('Erreur PDF:', err);
                 alert('Erreur lors de la génération du PDF: ' + err.message);
             } finally {
-                // Nettoyage
-                const tempDivs = document.querySelectorAll('div[style*="left: -9999px"]');
-                tempDivs.forEach(div => {
-                    if (document.body.contains(div)) {
-                        document.body.removeChild(div);
-                    }
-                });
                 btn.innerHTML = originalText;
                 btn.disabled = false;
             }
