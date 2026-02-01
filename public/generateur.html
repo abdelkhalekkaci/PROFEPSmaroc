@@ -1126,49 +1126,71 @@
                     return;
                 }
 
-                // Utiliser currentHtml qui contient le HTML complet du document
-                // Créer un wrapper avec les styles nécessaires
-                const wrapper = document.createElement('div');
-                wrapper.innerHTML = currentHtml;
-                wrapper.style.cssText = `
-                    position: absolute;
-                    left: -10000px;
-                    top: 0;
-                    width: 297mm;
+                // Utiliser le contenu du previewDocument qui est déjà rendu
+                const previewDoc = document.getElementById('previewDocument');
+                if (!previewDoc || previewDoc.style.display === 'none') {
+                    alert('Erreur: Aucun document à exporter. Veuillez générer un document d\'abord.');
+                    return;
+                }
+
+                // Cloner le contenu pour le PDF
+                const clone = previewDoc.cloneNode(true);
+                clone.style.cssText = `
+                    width: 100%;
+                    max-width: 950px;
+                    margin: 0 auto;
                     background: white;
-                    padding: 10mm;
+                    padding: 20px;
+                    font-family: 'Segoe UI', Arial, sans-serif;
                 `;
 
-                document.body.appendChild(wrapper);
+                // Créer un conteneur temporaire
+                const container = document.createElement('div');
+                container.style.cssText = `
+                    position: fixed;
+                    left: -9999px;
+                    top: 0;
+                    width: 950px;
+                    background: white;
+                    z-index: -1;
+                `;
+                container.appendChild(clone);
+                document.body.appendChild(container);
 
-                // Attendre le rendu
-                await new Promise(resolve => setTimeout(resolve, 300));
+                // Attendre que le contenu soit rendu
+                await new Promise(resolve => setTimeout(resolve, 500));
+
+                // Déterminer l'orientation selon le type de document
+                const isLandscape = currentType === 'fiche' || currentType === 'projet';
 
                 // Configuration pour html2pdf
                 const opt = {
-                    margin: 5,
+                    margin: [10, 10, 10, 10],
                     filename: currentFilename.replace('.doc', '.pdf'),
-                    image: { type: 'jpeg', quality: 0.95 },
+                    image: { type: 'jpeg', quality: 0.98 },
                     html2canvas: {
-                        scale: 1.5,
+                        scale: 2,
                         useCORS: true,
                         logging: false,
                         allowTaint: true,
                         backgroundColor: '#ffffff',
-                        width: 1123 // A4 landscape width in pixels at 96 DPI
+                        width: isLandscape ? 1123 : 794,
+                        height: isLandscape ? 794 : 1123,
+                        windowWidth: isLandscape ? 1123 : 794
                     },
                     jsPDF: {
-                        unit: 'mm',
+                        unit: 'pt',
                         format: 'a4',
-                        orientation: 'landscape'
+                        orientation: isLandscape ? 'landscape' : 'portrait',
+                        compress: true
                     }
                 };
 
-                // Générer le PDF depuis le wrapper
-                await html2pdf().set(opt).from(wrapper).save();
+                // Générer le PDF depuis le clone
+                await html2pdf().set(opt).from(clone).save();
                 
                 // Nettoyage
-                document.body.removeChild(wrapper);
+                document.body.removeChild(container);
                 
             } catch (err) {
                 console.error('Erreur PDF:', err);
