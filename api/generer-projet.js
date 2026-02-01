@@ -875,11 +875,11 @@ module.exports = async (req, res) => {
         let rows = '';
         for (let i = 0; i < nb; i++) {
             let phase, phaseColor;
-            if (i === 0) { phase = 'Éval. diagnostique'; phaseColor = '#fff3e0'; }
-            else if (i === nb - 1) { phase = 'Éval. terminale'; phaseColor = '#ffebee'; }
-            else if (i < nb / 3) { phase = 'Découverte'; phaseColor = '#e3f2fd'; }
-            else if (i < 2 * nb / 3) { phase = 'Apprentissage'; phaseColor = '#e8f5e9'; }
-            else { phase = 'Consolidation'; phaseColor = '#f3e5f5'; }
+            if (i === 0) { phase = 'Éval. diagnostique'; phaseColor = '#f5f5f5'; }
+            else if (i === nb - 1) { phase = 'Éval. terminale'; phaseColor = '#e8eef4'; }
+            else if (i < nb / 3) { phase = 'Découverte'; phaseColor = '#fafafa'; }
+            else if (i < 2 * nb / 3) { phase = 'Apprentissage'; phaseColor = '#f5f5f5'; }
+            else { phase = 'Consolidation'; phaseColor = '#fafafa'; }
 
             rows += `<tr>
                 <td style="text-align:center;background:${phaseColor};font-size:7pt;font-weight:bold;border:1px solid #000;">${phase}</td>
@@ -887,6 +887,12 @@ module.exports = async (req, res) => {
                 <td style="font-size:7.5pt;padding:4px 6px;border:1px solid #000;line-height:1.3;">${objectifs[i]}</td>
             </tr>`;
         }
+
+        // Couleurs sobres et professionnelles
+        const COLOR_PRIMARY = '#1e3a5f';
+        const COLOR_PRIMARY_LIGHT = '#e8eef4';
+        const COLOR_SECONDARY = '#4a6fa5';
+        const COLOR_ACCENT = '#f5f5f5';
 
         // ==================== HTML WORD/PDF - A4 PAYSAGE ====================
         const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word">
@@ -898,12 +904,13 @@ module.exports = async (req, res) => {
 body{font-family:Calibri,Arial,sans-serif;font-size:8pt;margin:0;padding:0}
 table{width:100%;border-collapse:collapse;margin-bottom:8px}
 th,td{border:1px solid #000;padding:3px 5px;vertical-align:top}
-.main-title{font-size:18pt;font-weight:bold;text-align:center;color:#c1272d;margin:5px 0;border:none}
-.sub-title{font-size:11pt;text-align:center;color:#006233;margin:0 0 10px 0;border:none}
+.main-title{font-size:18pt;font-weight:bold;text-align:center;color:${COLOR_PRIMARY};margin:5px 0;border:none}
+.sub-title{font-size:11pt;text-align:center;color:${COLOR_SECONDARY};margin:0 0 10px 0;border:none}
 .section-header{background:#e8e8e8;font-weight:bold;text-align:center;font-size:7pt}
-.cycle-header{background:linear-gradient(90deg,#c1272d,#006233);color:#fff;font-weight:bold;font-size:9pt;text-align:center;padding:6px}
+.cycle-header{background:${COLOR_PRIMARY};color:#fff;font-weight:bold;font-size:9pt;text-align:center;padding:6px}
 .label-cell{background:#f5f5f5;font-weight:bold;font-size:7pt;width:12%}
 .info-row td{border:none;font-size:8pt;padding:2px 5px}
+.competences-cell{background:${COLOR_PRIMARY_LIGHT};font-size:6.5pt;line-height:1.3;padding:8px;border:1px solid ${COLOR_PRIMARY}}
 </style>
 </head>
 <body>
@@ -924,11 +931,11 @@ th,td{border:1px solid #000;padding:3px 5px;vertical-align:top}
 <td class="section-header" style="width:8%">GROUPE APS</td>
 <td style="width:12%;text-align:center;font-size:8pt">${groupeAPS}</td>
 <td class="section-header" style="width:5%">APS</td>
-<td style="width:10%;text-align:center;font-size:9pt;font-weight:bold;color:#006233">${aps}</td>
+<td style="width:10%;text-align:center;font-size:9pt;font-weight:bold;color:${COLOR_PRIMARY}">${aps}</td>
 <td class="section-header" style="width:6%">NIVEAU</td>
 <td style="width:6%;text-align:center;font-size:8pt">${niveau}</td>
 <td class="section-header" style="width:8%">NIV. ÉLÈVES</td>
-<td style="width:8%;text-align:center;font-weight:bold;color:#c1272d">${nivTxt}</td>
+<td style="width:8%;text-align:center;font-weight:bold;color:${COLOR_PRIMARY}">${nivTxt}</td>
 <td class="section-header" style="width:7%">SÉANCES</td>
 <td style="width:5%;text-align:center;font-size:10pt;font-weight:bold">${nb}</td>
 </tr>
@@ -944,8 +951,18 @@ th,td{border:1px solid #000;padding:3px 5px;vertical-align:top}
 <td style="font-size:6.5pt;line-height:1.2">${otc}</td>
 </tr>
 <tr>
+<td class="label-cell">COMPÉTENCES VISÉES</td>
+<td class="competences-cell">
+<b>Compétences visées par l'APS ${aps}:</b><br>
+• Maîtriser les gestes techniques fondamentaux de l'APS<br>
+• S'adapter aux différentes situations motrices proposées<br>
+• Respecter les règles et faire preuve d'esprit sportif<br>
+• Concevoir et réaliser des projets collectifs ou individuels
+</td>
+</tr>
+<tr>
 <td class="label-cell">SITUATION DE RÉFÉRENCE</td>
-<td style="font-size:7.5pt;font-weight:bold;color:#006233">${sitRef}</td>
+<td style="font-size:7.5pt;font-weight:bold;color:${COLOR_PRIMARY}">${sitRef}</td>
 </tr>
 </table>
 
@@ -954,9 +971,9 @@ th,td{border:1px solid #000;padding:3px 5px;vertical-align:top}
 <td class="cycle-header" colspan="3">PROGRESSION PÉDAGOGIQUE DU CYCLE</td>
 </tr>
 <tr>
-<th style="background:#006233;color:#fff;width:15%;font-size:7pt;text-align:center">PHASE</th>
-<th style="background:#006233;color:#fff;width:5%;font-size:7pt;text-align:center">N°</th>
-<th style="background:#006233;color:#fff;font-size:7pt;text-align:center">OBJECTIF OPÉRATIONNEL DE LA SÉANCE</th>
+<th style="background:${COLOR_PRIMARY};color:#fff;width:15%;font-size:7pt;text-align:center">PHASE</th>
+<th style="background:${COLOR_PRIMARY};color:#fff;width:5%;font-size:7pt;text-align:center">N°</th>
+<th style="background:${COLOR_PRIMARY};color:#fff;font-size:7pt;text-align:center">OBJECTIF OPÉRATIONNEL DE LA SÉANCE</th>
 </tr>
 ${rows}
 </table>
@@ -983,7 +1000,7 @@ Document conforme aux Orientations Pédagogiques ${isCollege ? '2009 (Collège)'
         // ==================== HTML DISPLAY (Site) ====================
         const htmlDisplay = `
 <div style="font-family:'Segoe UI',sans-serif;max-width:950px;margin:0 auto;line-height:1.5;">
-    <div style="background:linear-gradient(135deg,#c1272d,#006233);color:white;padding:20px;border-radius:12px;margin-bottom:20px;">
+    <div style="background:${COLOR_PRIMARY};color:white;padding:20px;border-radius:12px;margin-bottom:20px;">
         <h1 style="margin:0 0 8px 0;font-size:1.5rem;">📊 Projet de Cycle - ${aps}</h1>
         <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:0.9rem;opacity:0.95;">
             <span><strong>Niveau:</strong> ${niveau}</span>
@@ -994,29 +1011,38 @@ Document conforme aux Orientations Pédagogiques ${isCollege ? '2009 (Collège)'
     </div>
 
     <div style="background:#f8f9fa;border:1px solid #e0e0e0;border-radius:10px;padding:15px;margin-bottom:15px;">
-        <h3 style="color:#006233;margin:0 0 10px 0;font-size:0.95rem;">📋 Références officielles</h3>
+        <h3 style="color:${COLOR_PRIMARY};margin:0 0 10px 0;font-size:0.95rem;">📋 Références officielles</h3>
         <p style="margin:0 0 8px 0;font-size:0.85rem;"><strong>OTI:</strong> ${oti}</p>
         <p style="margin:0 0 8px 0;font-size:0.85rem;"><strong>OTC:</strong> ${otc}</p>
-        <p style="margin:0;font-size:0.85rem;"><strong>Situation de référence:</strong> <span style="color:#006233;font-weight:500;">${sitRef}</span></p>
+        <div style="background:${COLOR_PRIMARY_LIGHT};padding:10px;border-radius:6px;margin:10px 0;border-left:3px solid ${COLOR_PRIMARY};">
+            <p style="margin:0 0 5px 0;font-size:0.85rem;font-weight:bold;color:${COLOR_PRIMARY};">🎯 Compétences visées:</p>
+            <p style="margin:0;font-size:0.8rem;line-height:1.4;">
+                • Maîtriser les gestes techniques fondamentaux de l'APS ${aps}<br>
+                • S'adapter aux différentes situations motrices proposées<br>
+                • Respecter les règles et faire preuve d'esprit sportif<br>
+                • Concevoir et réaliser des projets collectifs ou individuels
+            </p>
+        </div>
+        <p style="margin:0;font-size:0.85rem;"><strong>Situation de référence:</strong> <span style="color:${COLOR_PRIMARY};font-weight:500;">${sitRef}</span></p>
     </div>
 
     <div style="background:white;border:1px solid #e0e0e0;border-radius:10px;overflow:hidden;">
-        <div style="background:linear-gradient(90deg,#c1272d,#006233);color:white;padding:12px;text-align:center;font-weight:bold;">
+        <div style="background:${COLOR_PRIMARY};color:white;padding:12px;text-align:center;font-weight:bold;">
             PROGRESSION PÉDAGOGIQUE
         </div>
         <table style="width:100%;border-collapse:collapse;">
-            <tr style="background:#006233;color:white;">
+            <tr style="background:${COLOR_PRIMARY};color:white;">
                 <th style="padding:10px;width:15%;font-size:0.8rem;">Phase</th>
                 <th style="padding:10px;width:5%;font-size:0.8rem;">N°</th>
                 <th style="padding:10px;font-size:0.8rem;">Objectif opérationnel</th>
             </tr>
             ${objectifs.map((obj, i) => {
                 let phase, phaseBg, phaseColor;
-                if (i === 0) { phase = 'Éval. diag.'; phaseBg = '#fff3e0'; phaseColor = '#e65100'; }
-                else if (i === nb - 1) { phase = 'Éval. term.'; phaseBg = '#ffebee'; phaseColor = '#c62828'; }
-                else if (i < nb / 3) { phase = 'Découverte'; phaseBg = '#e3f2fd'; phaseColor = '#1565c0'; }
-                else if (i < 2 * nb / 3) { phase = 'Apprentissage'; phaseBg = '#e8f5e9'; phaseColor = '#2e7d32'; }
-                else { phase = 'Consolidation'; phaseBg = '#f3e5f5'; phaseColor = '#7b1fa2'; }
+                if (i === 0) { phase = 'Éval. diag.'; phaseBg = '#f5f5f5'; phaseColor = COLOR_PRIMARY; }
+                else if (i === nb - 1) { phase = 'Éval. term.'; phaseBg = '#e8eef4'; phaseColor = COLOR_PRIMARY; }
+                else if (i < nb / 3) { phase = 'Découverte'; phaseBg = '#fafafa'; phaseColor = COLOR_SECONDARY; }
+                else if (i < 2 * nb / 3) { phase = 'Apprentissage'; phaseBg = '#f5f5f5'; phaseColor = COLOR_PRIMARY; }
+                else { phase = 'Consolidation'; phaseBg = '#fafafa'; phaseColor = COLOR_SECONDARY; }
                 return `<tr style="border-bottom:1px solid #e0e0e0;">
                     <td style="padding:10px;background:${phaseBg};text-align:center;font-weight:bold;color:${phaseColor};font-size:0.8rem;">${phase}</td>
                     <td style="padding:10px;text-align:center;font-weight:bold;font-size:1rem;background:#f5f5f5;">${i + 1}</td>
