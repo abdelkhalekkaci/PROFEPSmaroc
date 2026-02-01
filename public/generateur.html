@@ -1109,7 +1109,10 @@
 
         // Download PDF
         document.getElementById('downloadPdf').addEventListener('click', async () => {
-            if (!currentHtml) return;
+            if (!currentHtml) {
+                alert('Veuillez d\'abord générer un document.');
+                return;
+            }
 
             const btn = document.getElementById('downloadPdf');
             const originalText = btn.innerHTML;
@@ -1119,62 +1122,96 @@
             try {
                 // Vérifier que html2pdf est chargé
                 if (typeof html2pdf === 'undefined') {
-                    alert('Erreur: La bibliothèque html2pdf n\'est pas chargée.');
+                    alert('Erreur: La bibliothèque html2pdf n\'est pas chargée. Veuillez rafraîchir la page.');
                     return;
                 }
 
-                // Créer un élément temporaire visible mais hors écran
+                // Cloner le contenu de la prévisualisation
+                const previewContent = document.getElementById('previewContent');
+                if (!previewContent) {
+                    alert('Erreur: Contenu de prévisualisation non trouvé.');
+                    return;
+                }
+
+                // Créer un élément temporaire avec le contenu
                 const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = currentHtml;
+                tempDiv.innerHTML = previewContent.innerHTML;
                 
-                // Styles pour assurer la visibilité
+                // Styles pour assurer la visibilité et le bon rendu
                 tempDiv.style.cssText = `
                     position: fixed;
-                    left: 0;
+                    left: -9999px;
                     top: 0;
                     width: ${currentType === 'grille' ? '210mm' : '297mm'};
+                    min-height: 297mm;
                     background: white;
-                    z-index: -1000;
+                    padding: 10mm;
+                    z-index: 9999;
                     visibility: visible;
                     opacity: 1;
+                    overflow: visible;
                 `;
 
                 document.body.appendChild(tempDiv);
 
-                // Attendre le rendu
-                await new Promise(resolve => setTimeout(resolve, 300));
+                // Attendre que les images et le rendu soient complets
+                await new Promise(resolve => setTimeout(resolve, 500));
 
-                // Configuration optimisée
+                // Forcer le rendu des schémas SVG
+                const svgs = tempDiv.querySelectorAll('svg');
+                svgs.forEach(svg => {
+                    svg.style.display = 'block';
+                    svg.style.margin = '10px auto';
+                    svg.style.maxWidth = '100%';
+                });
+
+                // Attendre encore un peu pour le rendu SVG
+                await new Promise(resolve => setTimeout(resolve, 200));
+
+                // Configuration optimisée pour html2pdf
                 const opt = {
-                    margin: 5,
+                    margin: [5, 5, 5, 5],
                     filename: currentFilename.replace('.doc', '.pdf'),
-                    image: { type: 'jpeg', quality: 0.95 },
-                    html2canvas: { 
-                        scale: 1.5,
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: {
+                        scale: 2,
                         useCORS: true,
                         logging: false,
                         allowTaint: true,
-                        backgroundColor: '#ffffff'
+                        backgroundColor: '#ffffff',
+                        windowWidth: 1200,
+                        onclone: (clonedDoc) => {
+                            // Forcer les styles sur le clone
+                            const clonedTemp = clonedDoc.body.querySelector('div[style*="position: fixed"]');
+                            if (clonedTemp) {
+                                clonedTemp.style.position = 'absolute';
+                                clonedTemp.style.left = '0';
+                                clonedTemp.style.transform = 'none';
+                            }
+                        }
                     },
-                    jsPDF: { 
-                        unit: 'mm', 
-                        format: 'a4', 
-                        orientation: currentType === 'grille' ? 'portrait' : 'landscape'
+                    jsPDF: {
+                        unit: 'mm',
+                        format: 'a4',
+                        orientation: currentType === 'grille' ? 'portrait' : 'landscape',
+                        putOnlyUsedFonts: true
                     }
                 };
 
                 // Générer le PDF
                 await html2pdf().set(opt).from(tempDiv).save();
                 
-                // Nettoyage
-                if (document.body.contains(tempDiv)) {
-                    document.body.removeChild(tempDiv);
-                }
-                
             } catch (err) {
                 console.error('Erreur PDF:', err);
-                alert('Erreur lors de la génération du PDF. Veuillez réessayer.');
+                alert('Erreur lors de la génération du PDF: ' + err.message);
             } finally {
+                // Nettoyage
+                const tempDivs = document.querySelectorAll('div[style*="left: -9999px"]');
+                tempDivs.forEach(div => {
+                    if (document.body.contains(div)) {
+                        document.body.removeChild(div);
+                    }
+                });
                 btn.innerHTML = originalText;
                 btn.disabled = false;
             }
