@@ -374,20 +374,20 @@ const SITUATIONS_FICHES = {
         'départ': {
             echauffement: 'Course au ralenti 50m (2 min) : technique de course | Montées de genoux 30m (2 min) : amplitude | Talons-fesses 30m (2 min) : fréquence | Accélérations progressives 40m (4 min) : mise en vitesse',
             situation1: {
-                titre: 'Parcours d\'habiletés motrices',
-                but: 'Enchaîner les différentes stations du parcours en maîtrisant les habiletés de base',
-                organisation: '4 stations (course, impulsion, suspension, réception), par groupe de 4 élèves',
-                deroulement: 'Rotation sur les stations : 1) Course d\'élan marquée (5-7 pas), 2) Impulsion sur planche sans élan, 3) Exercices de réactivité au signal, 4) Franchissement ligne d\'arrivée. Chaque station = 3 min. Objectif : maîtriser les habiletés liées à la course de vitesse.',
-                consignes: 'Respecter le temps à chaque station\nÉcouter les consignes spécifiques\nSe concentrer sur la qualité du geste\nPasser à la station suivante au signal',
-                variantes: 'Simplifier : 2 stations seulement, pas de chronométrage | Complexifier : Ajout d\'un relais par équipe'
+                titre: 'Réaction au signal',
+                but: 'Développer la réactivité au signal de départ',
+                organisation: 'Par couloir de 1m de large, lignes de départ et d\'arrivée à 10m, sifflet ou claquoir',
+                deroulement: 'Les élèves sont en position de départ (debout ou starting-blocks selon niveau). Au signal sonore (sifflet, claquoir) ou visuel (geste), ils doivent partir le plus vite possible et parcourir les 10m. Focus sur le temps de réaction (départ immédiat). Variantes : départs sur différents signaux (son, visuel, verbal). 6-8 essais par élève avec récupération.',
+                consignes: 'Position de départ : un pied devant, genoux fléchis\nPoids du corps vers l\'avant\nRéaction immédiate au signal (pas d\'anticipation)\nPremiers pas puissants et courts',
+                variantes: 'Simplifier : Position debout, départ au compte à rebours | Complexifier : Starting-blocks, faux départ sanctionné, différents types de signaux'
             },
             situation2: {
-                titre: 'Départ réactif au signal',
-                but: 'Partir en moins de 0.3 seconde après le signal sonore',
-                organisation: 'Par couloir de 1m de large, lignes de départ et d\'arrivée à 20m, sifflet ou claquoir',
-                deroulement: 'Les élèves sont en position de départ (debout ou starting-blocks selon niveau). Au signal, ils doivent partir le plus vite possible et parcourir les 20m. Chronométrage du temps de réaction (départ au signal) et du temps sur 20m. 5 essais par élève, meilleur temps retenu.',
-                consignes: 'Position de départ : un pied devant, genoux fléchis\nPoids du corps vers l\'avant\nRéaction immédiate au signal\nPremiers pas puissants et courts',
-                variantes: 'Simplifier : Position debout, départ au compte à rebours | Complexifier : Starting-blocks, départ au pistolet, faux départ sanctionné'
+                titre: 'Départ en position',
+                but: 'Maîtriser la position de départ et les premiers pas',
+                organisation: 'Par couloir de 1m de large, lignes de départ et d\'arrivée à 20m, plots de repère',
+                deroulement: 'Travail de la position de départ (starting-blocks ou position debout) et des premiers pas (5-7 pas). Focus sur la poussée explosive, l\'angle de départ, la progression de la foulée. Chronométrage sur 20m avec analyse de la technique de départ. 5 essais par élève avec correction entre chaque essai.',
+                consignes: 'Position stable et équilibrée\nPoussée explosive sur les premiers pas\nCorps penché progressivement\nNe pas se redresser trop vite',
+                variantes: 'Simplifier : Position debout, focus sur la réaction | Complexifier : Starting-blocks, analyse vidéo du départ'
             },
             situation3: {
                 titre: 'Course complète avec chronométrage',
@@ -403,12 +403,12 @@ const SITUATIONS_FICHES = {
         'technique': {
             echauffement: 'Course au ralenti avec focus bras (2 min) : amplitude | Course au ralenti avec focus jambes (2 min) : griffé | Montées de genoux (2 min) : fréquence et amplitude | Accélérations 30-30-30 (4 min) : technique en vitesse',
             situation1: {
-                titre: 'Parcours d\'habiletés motrices',
-                but: 'Enchaîner les différentes stations du parcours en maîtrisant les habiletés de base',
-                organisation: '4 stations (bras, jambes, posture, foulée), par groupe de 4 élèves',
-                deroulement: 'Rotation sur les stations : 1) Exercices de bras (piston, amplitude), 2) Exercices de jambes (montées genoux, talons-fesses), 3) Travail de la posture (buste, regard), 4) Exercices de foulée (fréquence, amplitude). Chaque station = 3 min.',
-                consignes: 'Respecter le temps à chaque station\nÉcouter les consignes spécifiques\nSe concentrer sur la qualité du geste\nPasser à la station suivante au signal',
-                variantes: 'Simplifier : 2 stations seulement | Complexifier : Ajout d\'une station vidéo-feedback'
+                titre: 'Exercices de sauts et impulsions',
+                but: 'Développer la puissance des jambes et la coordination bras-jambes',
+                organisation: '4 stations (sauts sans élan, montées genoux, bondissements, impulsions), par groupe de 4 élèves',
+                deroulement: 'Rotation sur les stations : 1) Sauts en place sans élan (impulsion verticale), 2) Montées de genoux avec amplitude maximale, 3) Bondissements alternés (puissance), 4) Impulsions sur place (griffé du sol). Chaque station = 3 min. Focus sur la qualité du geste et la puissance.',
+                consignes: 'Pousser fort dans le sol pour s\'élever\nCoordination bras-jambes (bras montés lors de l\'impulsion)\nAmplitude maximale dans les mouvements\nAtterrir sur la pointe puis talon',
+                variantes: 'Simplifier : 2 stations seulement, moins d\'intensité | Complexifier : Ajout d\'obstacles à franchir, chronométrage'
             },
             situation2: {
                 titre: 'Analyse et correction technique',
@@ -432,12 +432,12 @@ const SITUATIONS_FICHES = {
         'fréquence': {
             echauffement: 'Course sur place rapide (2 min) : fréquence maximale | Montées de genoux rapides (2 min) : hauteur moyenne, vitesse élevée | Exercices de réactivité (2 min) : réaction au signal | Accélérations courtes (4 min) : 10-15m',
             situation1: {
-                titre: 'Parcours d\'habiletés motrices',
-                but: 'Enchaîner les différentes stations du parcours en maîtrisant les habiletés de base',
-                organisation: '4 stations (course sur place, montées genoux, talons-fesses rapides, sprints courts), par groupe de 4',
-                deroulement: 'Rotation sur les stations : 1) Course sur place rapide (fréquence max), 2) Montées de genoux rapides, 3) Talons-fesses rapides, 4) Sprints courts de 15m. Chaque station = 3 min. Focus sur la fréquence des appuis.',
-                consignes: 'Respecter le temps à chaque station\nPrivilégier la fréquence à l\'amplitude\nGarder une cadence régulière\nPasser à la station suivante au signal',
-                variantes: 'Simplifier : 2 stations seulement | Complexifier : Ajout d\'un tempo sonore'
+                titre: 'Exercices de réactivité et fréquence',
+                but: 'Développer la rapidité d\'appui et la réactivité',
+                organisation: '4 stations (course sur place rapide, sauts à cloche-pied, talons-fesses rapides, réaction au sol), par groupe de 4',
+                deroulement: 'Rotation sur les stations : 1) Course sur place rapide (fréquence max, 30 sec), 2) Sauts à cloche-pied alternés (rapidité), 3) Talons-fesses rapides (fréquence élevée), 4) Exercices de réactivité au sol (sifflet = toucher le sol). Chaque station = 3 min. Focus sur la fréquence des appuis et la réactivité.',
+                consignes: 'Contacts rapides avec le sol\nPas de saut vertical inutile\nBras actifs et synchronisés\nRéaction immédiate au signal',
+                variantes: 'Simplifier : 2 stations seulement, rythme plus lent | Complexifier : Ajout d\'un tempo sonore, exercices avec résistance'
             },
             situation2: {
                 titre: 'Travail de la fréquence de foulée',
@@ -461,12 +461,12 @@ const SITUATIONS_FICHES = {
         'amplitude': {
             echauffement: 'Grands enjambements (2 min) : amplitude maximale | Exercices d\'extension (2 min) : grandissement du geste | Accélérations progressives (3 min) : mise en amplitude | Bondissements (3 min) : élévation',
             situation1: {
-                titre: 'Parcours d\'habiletés motrices',
-                but: 'Enchaîner les différentes stations du parcours en maîtrisant les habiletés de base',
-                organisation: '4 stations (enjambements, bondissements, exercices d\'extension, sprints amplitude), par groupe de 4',
-                deroulement: 'Rotation sur les stations : 1) Grands enjambements sur 20m, 2) Bondissements alternés, 3) Exercices d\'extension de jambe, 4) Sprints avec focus amplitude. Chaque station = 3 min.',
-                consignes: 'Respecter le temps à chaque station\nPrivilégier l\'amplitude à la vitesse\nOuvrir au maximum l\'angle de jambe\nPasser à la station suivante au signal',
-                variantes: 'Simplifier : 2 stations seulement | Complexifier : Ajout d\'obstacles à franchir'
+                titre: 'Exercices de sauts et extensions',
+                but: 'Développer l\'amplitude et la puissance des jambes',
+                organisation: '4 stations (sauts en extension, grands enjambements, bondissements, fentes sautées), par groupe de 4',
+                deroulement: 'Rotation sur les stations : 1) Sauts en extension (bras et jambes tendues), 2) Grands enjambements sur 20m (amplitude max), 3) Bondissements alternés (élévation), 4) Fentes sautées (extension complète). Chaque station = 3 min. Focus sur l\'amplitude maximale.',
+                consignes: 'Extension complète des jambes\nAmplitude des bras synchronisée\nOuvrir au maximum l\'angle de jambe\nAtterrir en contrôlant l\'amplitude',
+                variantes: 'Simplifier : 2 stations seulement, amplitude réduite | Complexifier : Ajout d\'obstacles à franchir, haies basses'
             },
             situation2: {
                 titre: 'Travail de l\'amplitude de foulée',
@@ -496,12 +496,12 @@ const SITUATIONS_FICHES = {
         'franchissement': {
             echauffement: 'Course au ralenti avec haies basses (2 min) : franchissement | Exercices de jambes (2 min) : jambe d\'attaque, jambe d\'esquive | Franchissements lents (3 min) : technique sans vitesse | Accélérations entre 2 haies (3 min) : reprise d\'appui',
             situation1: {
-                titre: 'Parcours d\'habiletés motrices',
-                but: 'Enchaîner les différentes stations du parcours en maîtrisant les habiletés de base',
-                organisation: '4 stations (jambe d\'attaque, jambe d\'esquive, franchissement ralenti, reprise d\'appui), par groupe de 4',
-                deroulement: 'Rotation sur les stations : 1) Exercices de jambe d\'attaque (genou haut, extension), 2) Exercices de jambe d\'esquive (ouverture latérale), 3) Franchissements ralentis sur haie basse, 4) Reprises d\'appui actives. Chaque station = 3 min.',
-                consignes: 'Respecter le temps à chaque station\nÉcouter les consignes spécifiques\nSe concentrer sur la qualité du geste\nPasser à la station suivante au signal',
-                variantes: 'Simplifier : 2 stations seulement | Complexifier : Ajout d\'une station timing'
+                titre: 'Exercices de franchissement sans haie',
+                but: 'Maîtriser les mouvements de franchissement au sol',
+                organisation: '4 stations (jambe d\'attaque au sol, jambe d\'esquive, sauts de réaction, reprise d\'appui), par groupe de 4',
+                deroulement: 'Rotation sur les stations : 1) Exercices de jambe d\'attaque au sol (genou haut, extension), 2) Exercices de jambe d\'esquive (ouverture latérale), 3) Sauts de réaction au signal (franchissement imaginaire), 4) Reprises d\'appui actives avec griffé. Chaque station = 3 min. Focus sur la qualité du geste sans obstacle.',
+                consignes: 'Genou haut puis extension complète\nOuverture latérale rapide de la jambe d\'esquive\nRéaction immédiate au signal\nReprise d\'appui immédiate et active',
+                variantes: 'Simplifier : 2 stations seulement, mouvements au ralenti | Complexifier : Ajout de barres basses, réaction à différents signaux'
             },
             situation2: {
                 titre: 'Circuit technique de franchissement',
@@ -525,12 +525,12 @@ const SITUATIONS_FICHES = {
         'rythme': {
             echauffement: 'Course au ralenti avec haies (2 min) : régularité | Exercices de pas (2 min) : compter les appuis | Accélérations avec haies (3 min) : rythme régulier | Franchissements rapides (3 min) : vitesse',
             situation1: {
-                titre: 'Parcours d\'habiletés motrices',
-                but: 'Enchaîner les différentes stations du parcours en maîtrisant les habiletés de base',
-                organisation: '4 stations (comptage des pas, franchissement rythmé, accélération entre haies, sprint final), par groupe de 4',
-                deroulement: 'Rotation sur les stations : 1) Compter les pas entre 2 haies, 2) Franchissement avec rythme imposé (3 pas), 3) Accélération entre 2 haies, 4) Sprint final après dernière haie. Chaque station = 3 min.',
-                consignes: 'Respecter le temps à chaque station\nCompter les pas à voix haute\nMaintenir un rythme régulier\nPasser à la station suivante au signal',
-                variantes: 'Simplifier : 2 stations seulement | Complexifier : Ajout d\'un métronome'
+                titre: 'Exercices de réaction et synchronisation',
+                but: 'Développer la réactivité et le timing du franchissement',
+                organisation: '4 stations (réaction au signal, comptage rythmé, sauts de précision, accélération sur appel), par groupe de 4',
+                deroulement: 'Rotation sur les stations : 1) Réaction au signal pour départ (sifflet = départ immédiat), 2) Comptage rythmé à voix haute (1-2-3-saut), 3) Sauts de précision sur marque (atterrir sur une cible), 4) Accélération sur appel vocal entre 2 lignes. Chaque station = 3 min.',
+                consignes: 'Réaction immédiate au signal\nCompter à voix haute le rythme\nAtterrir précisément sur les cibles\nAccélérer dès l\'appel entendu',
+                variantes: 'Simplifier : 2 stations seulement, rythme lent | Complexifier : Ajout d\'un métronome, signaux variés'
             },
             situation2: {
                 titre: 'Travail du rythme de 3 pas',
@@ -560,12 +560,12 @@ const SITUATIONS_FICHES = {
         'transmission': {
             echauffement: 'Course avec témoin individuelle (2 min) : tenue du témoin | Transmission à l\'arrêt (2 min) : technique de passage | Transmission en mouvement lent (3 min) : synchronisation | Accélérations 30m (3 min) : vitesse',
             situation1: {
-                titre: 'Parcours d\'habiletés motrices',
-                but: 'Enchaîner les différentes stations du parcours en maîtrisant les habiletés de base',
-                organisation: '4 stations (tenue du témoin, transmission à l\'arrêt, synchronisation, accélération), par groupe de 4',
-                deroulement: 'Rotation sur les stations : 1) Tenue du témoin en course, 2) Transmission à l\'arrêt (technique), 3) Synchronisation donneur/receveur, 4) Accélération sur 20m. Chaque station = 3 min.',
-                consignes: 'Respecter le temps à chaque station\nÉcouter les consignes spécifiques\nSe concentrer sur la qualité du geste\nPasser à la station suivante au signal',
-                variantes: 'Simplifier : 2 stations seulement | Complexifier : Ajout d\'une station timing'
+                titre: 'Exercices de réaction et synchronisation',
+                but: 'Développer la réactivité et la coordination pour la transmission',
+                organisation: '4 stations (réaction au signal, synchronisation pas, appel vocal, départ explosif), par groupe de 4',
+                deroulement: 'Rotation sur les stations : 1) Réaction au signal de départ (sifflet = départ immédiat), 2) Synchronisation des pas (donneur et receveur marchent en rythme), 3) Appel vocal "hand!" et réaction, 4) Départ explosif sur appel. Chaque station = 3 min. Focus sur la réactivité et la synchronisation.',
+                consignes: 'Réaction immédiate au signal\nSynchronisation des mouvements avec le partenaire\nAppel vocal clair et timing parfait\nDépart explosif dès l\'appel entendu',
+                variantes: 'Simplifier : 2 stations seulement, sans pression | Complexifier : Ajout d\'un chronométrage, distractions'
             },
             situation2: {
                 titre: 'Travail de la transmission',
@@ -589,12 +589,12 @@ const SITUATIONS_FICHES = {
         'synchronisation': {
             echauffement: 'Course avec témoin (2 min) : tenue en course | Exercices de départ (2 min) : réaction au signal | Travail des marques (2 min) : placement du receveur | Accélérations (4 min) : vitesse',
             situation1: {
-                titre: 'Parcours d\'habiletés motrices',
-                but: 'Enchaîner les différentes stations du parcours en maîtrisant les habiletés de base',
-                organisation: '4 stations (tenue du témoin, départ, placement receveur, accélération), par groupe de 4',
-                deroulement: 'Rotation sur les stations : 1) Tenue du témoin en course, 2) Départ réactif au signal, 3) Placement du receveur (marque au sol), 4) Accélération sur 20m. Chaque station = 3 min.',
-                consignes: 'Respecter le temps à chaque station\nÉcouter les consignes spécifiques\nSe concentrer sur la qualité du geste\nPasser à la station suivante au signal',
-                variantes: 'Simplifier : 2 stations seulement | Complexifier : Ajout d\'un chronométrage'
+                titre: 'Exercices de réaction et timing',
+                but: 'Développer la réactivité et le timing de départ du receveur',
+                organisation: '4 stations (réaction au signal, timing de départ, appel-réponse, accélération sur marque), par groupe de 4',
+                deroulement: 'Rotation sur les stations : 1) Réaction au signal (sifflet = départ immédiat), 2) Timing de départ (partir quand le donneur franchit la marque), 3) Appel-réponse ("hand!" = réaction), 4) Accélération sur marque au sol. Chaque station = 3 min. Focus sur la réactivité et le timing.',
+                consignes: 'Réaction immédiate au signal visuel ou sonore\nPartir au bon moment (ni trop tôt ni trop tard)\nRépondre immédiatement à l\'appel\nAccélérer dès le départ',
+                variantes: 'Simplifier : 2 stations seulement, marques fixes | Complexifier : Marques ajustables, différents types de signaux'
             },
             situation2: {
                 titre: 'Travail de la synchronisation',
@@ -624,12 +624,12 @@ const SITUATIONS_FICHES = {
         'impulsion': {
             echauffement: 'Course d\'élan marquée (2 min) : régularité des foulées | Sauts sans élan (3 min) : impulsion verticale | Sauts avec élan réduit (3 min) : coordination course-impulsion | Sauts complets (2 min) : technique globale',
             situation1: {
-                titre: 'Parcours d\'habiletés motrices',
-                but: 'Enchaîner les différentes stations du parcours en maîtrisant les habiletés de base',
-                organisation: '4 stations (course d\'élan, impulsion, suspension, réception), par groupe de 4',
-                deroulement: 'Rotation sur les stations : 1) Course d\'élan marquée (5-7 pas), 2) Impulsion sur planche sans élan, 3) Exercices de suspension (ramené), 4) Réception dans le sable. Chaque station = 3 min.',
-                consignes: 'Respecter le temps à chaque station\nÉcouter les consignes spécifiques\nSe concentrer sur la qualité du geste\nPasser à la station suivante au signal',
-                variantes: 'Simplifier : 2 stations seulement | Complexifier : Ajout d\'une station vidéo'
+                titre: 'Sauts sans élan',
+                but: 'Développer la puissance d\'impulsion verticale et horizontale sans course',
+                organisation: '4 stations (sauts en place, impulsion sur planche, sauts en longueur sans élan, exercices de bras), par groupe de 4',
+                deroulement: 'Rotation sur les stations : 1) Sauts en place (impulsion verticale maximale), 2) Impulsion sur planche sans élan (focus technique), 3) Sauts en longueur depuis une position fixe (sans course d\'élan), 4) Exercices de coordination bras-jambes. Chaque station = 3 min. Focus sur la qualité de l\'impulsion sans élan.',
+                consignes: 'Griffer fort dans le sol\nExtension complète de la jambe d\'appel\nBras montés vers le haut simultanément\nBassin projeté vers l\'avant et le haut',
+                variantes: 'Simplifier : 2 stations seulement, sauts sur tapis | Complexifier : Ajout d\'obstacles à franchir, mesure des distances'
             },
             situation2: {
                 titre: 'Travail de l\'impulsion',
@@ -653,12 +653,12 @@ const SITUATIONS_FICHES = {
         'course élan': {
             echauffement: 'Course d\'élan marquée (3 min) : régularité | Accélérations progressives (3 min) : mise en vitesse | Exercices de marques (2 min) : placement | Sauts complets (2 min) : technique',
             situation1: {
-                titre: 'Parcours d\'habiletés motrices',
-                but: 'Enchaîner les différentes stations du parcours en maîtrisant les habiletés de base',
-                organisation: '4 stations (course marquée, accélération, placement marques, enchaînement), par groupe de 4',
-                deroulement: 'Rotation sur les stations : 1) Course d\'élan avec marques au sol, 2) Accélération progressive, 3) Placement des marques personnelles, 4) Enchaînement course-impulsion sans saut. Chaque station = 3 min.',
-                consignes: 'Respecter le temps à chaque station\nCompter ses foulées\nPlacer ses marques précisément\nPasser à la station suivante au signal',
-                variantes: 'Simplifier : 2 stations seulement | Complexifier : Ajout d\'un chronométrage de la course'
+                titre: 'Exercices d\'impulsion et sauts courts',
+                but: 'Développer la puissance et la technique d\'impulsion sans élan complet',
+                organisation: '4 stations (impulsion verticale, impulsion horizontale, sauts depuis marche, exercices de jambes), par groupe de 4',
+                deroulement: 'Rotation sur les stations : 1) Impulsion verticale maximale (sauts en place), 2) Impulsion horizontale (sauts en longueur sans élan), 3) Sauts depuis une marche basse (élévation), 4) Exercices de renforcement des jambes. Chaque station = 3 min. Focus sur la qualité de l\'impulsion.',
+                consignes: 'Pousser fort dans le sol\nExtension complète de la jambe\nCoordination bras-jambes\nAmplitude maximale du mouvement',
+                variantes: 'Simplifier : 2 stations seulement, exercices au sol | Complexifier : Ajout de résistance, haies à franchir'
             },
             situation2: {
                 titre: 'Travail de la course d\'élan',
@@ -682,12 +682,12 @@ const SITUATIONS_FICHES = {
         'suspension': {
             echauffement: 'Sauts sans élan (2 min) : impulsion | Exercices de ramené (3 min) : technique | Sauts avec élan réduit (3 min) : coordination | Sauts complets (2 min) : technique globale',
             situation1: {
-                titre: 'Parcours d\'habiletés motrices',
-                but: 'Enchaîner les différentes stations du parcours en maîtrisant les habiletés de base',
-                organisation: '4 stations (impulsion, ramené, extension, réception), par groupe de 4',
-                deroulement: 'Rotation sur les stations : 1) Impulsion verticale, 2) Exercices de ramené (genoux-poitrine), 3) Exercices d\'extension, 4) Réception dans le sable. Chaque station = 3 min.',
-                consignes: 'Respecter le temps à chaque station\nÉcouter les consignes spécifiques\nSe concentrer sur la qualité du geste\nPasser à la station suivante au signal',
-                variantes: 'Simplifier : 2 stations seulement | Complexifier : Ajout d\'obstacles à franchir'
+                titre: 'Exercices de suspension au sol',
+                but: 'Maîtriser la technique de suspension sans élan',
+                organisation: '4 stations (ramené au sol, extension, sauts sur place, équilibre), par groupe de 4',
+                deroulement: 'Rotation sur les stations : 1) Ramené au sol (genoux vers poitrine au sol), 2) Exercices d\'extension de jambes, 3) Sauts sur place avec suspension (figé en l\'air), 4) Exercices d\'équilibre sur une jambe. Chaque station = 3 min. Focus sur la position aérienne sans élan.',
+                consignes: 'Genoux montés vers la poitrine\nBuste penché vers l\'avant\nPosition figée en l\'air\nContrôle de la posture',
+                variantes: 'Simplifier : 2 stations seulement, exercices au sol | Complexifier : Ajout de barres à franchir, tapis de réception'
             },
             situation2: {
                 titre: 'Travail de la suspension',
@@ -711,12 +711,12 @@ const SITUATIONS_FICHES = {
         'réception': {
             echauffement: 'Exercices de réception (3 min) : chute avant | Exercices de souplesse (2 min) : grandissement | Sauts avec élan réduit (3 min) : réception | Sauts complets (2 min) : technique globale',
             situation1: {
-                titre: 'Parcours d\'habiletés motrices',
-                but: 'Enchaîner les différentes stations du parcours en maîtrisant les habiletés de base',
-                organisation: '4 stations (chute avant, souplesse, réception deux pieds, roulé), par groupe de 4',
-                deroulement: 'Rotation sur les stations : 1) Exercices de chute avant, 2) Exercices de souplesse, 3) Réception sur deux pieds, 4) Technique du roulé. Chaque station = 3 min.',
-                consignes: 'Respecter le temps à chaque station\nÉcouter les consignes spécifiques\nSe concentrer sur la qualité du geste\nPasser à la station suivante au signal',
-                variantes: 'Simplifier : 2 stations seulement | Complexifier : Ajout d\'un tapis de réception'
+                titre: 'Exercices de réception sans saut',
+                but: 'Maîtriser la technique de réception au sol',
+                organisation: '4 stations (chute avant, roulé, équilibre sur pieds, souplesse), par groupe de 4',
+                deroulement: 'Rotation sur les stations : 1) Exercices de chute avant contrôlée, 2) Technique du roulé au sol, 3) Exercices d\'équilibre sur les pieds, 4) Exercices de souplesse (fentes, grandissement). Chaque station = 3 min. Focus sur la réception sans élan préalable.',
+                consignes: 'Jambes fléchies à l\'atterrissage\nPoids du corps vers l\'avant\nBras tendus vers l\'avant\nContrôle de la chute',
+                variantes: 'Simplifier : 2 stations seulement, exercices au sol | Complexifier : Ajout d\'un tapis de réception, hauteurs variées'
             },
             situation2: {
                 titre: 'Travail de la réception',
@@ -746,12 +746,12 @@ const SITUATIONS_FICHES = {
         'franchissement': {
             echauffement: 'Course d\'élan courbe lentement (2 min) : trajectoire en J | Sauts sans barre (2 min) : impulsion verticale | Sauts sur barre basse (3 min) : technique de franchissement | Sauts complets (3 min) : coordination globale',
             situation1: {
-                titre: 'Parcours d\'habiletés motrices',
-                but: 'Enchaîner les différentes stations du parcours en maîtrisant les habiletés de base',
-                organisation: '4 stations (course courbe, impulsion, rotation dorsale, réception), par groupe de 4',
-                deroulement: 'Rotation sur les stations : 1) Course courbe sans barre (trajectoire en J), 2) Impulsion verticale sur place, 3) Exercices de rotation dorsale au sol, 4) Réception sur le dos. Chaque station = 3 min.',
-                consignes: 'Respecter le temps à chaque station\nÉcouter les consignes spécifiques\nSe concentrer sur la qualité du geste\nPasser à la station suivante au signal',
-                variantes: 'Simplifier : 2 stations seulement | Complexifier : Ajout d\'une station vidéo'
+                titre: 'Sauts de réaction et franchissement sans barre',
+                but: 'Développer la réactivité et la technique de franchissement sans obstacle',
+                organisation: '4 stations (sauts verticaux, franchissement sans barre, rotation au sol, réaction au signal), par groupe de 4',
+                deroulement: 'Rotation sur les stations : 1) Sauts verticaux sur place (impulsion maximale), 2) Franchissement imaginaire sans barre (mouvement complet), 3) Exercices de rotation dorsale au sol, 4) Sauts de réaction au signal (sifflet = saut immédiat). Chaque station = 3 min. Focus sur la réactivité et la technique sans barre.',
+                consignes: 'Impulsion verticale maximale\nRotation dorsale complète au sol\nRéaction immédiate au signal\nPosition de réception sur le dos',
+                variantes: 'Simplifier : 2 stations seulement, sans rotation | Complexifier : Ajout d\'une corde à franchir, barres très basses'
             },
             situation2: {
                 titre: 'Travail de la technique de franchissement',
@@ -775,12 +775,12 @@ const SITUATIONS_FICHES = {
         'course élan courbe': {
             echauffement: 'Course courbe lente (2 min) : trajectoire | Exercices de courbe (3 min) : accélération en courbe | Placement des marques (2 min) : repères au sol | Sauts complets (3 min) : technique',
             situation1: {
-                titre: 'Parcours d\'habiletés motrices',
-                but: 'Enchaîner les différentes stations du parcours en maîtrisant les habiletés de base',
-                organisation: '4 stations (courbe lente, accélération courbe, placement marques, enchaînement), par groupe de 4',
-                deroulement: 'Rotation sur les stations : 1) Course courbe lente (trajectoire en J), 2) Accélération en courbe, 3) Placement des marques au sol, 4) Enchaînement course-impulsion sans saut. Chaque station = 3 min.',
-                consignes: 'Respecter le temps à chaque station\nTracer une courbe régulière\nPlacer ses marques précisément\nPasser à la station suivante au signal',
-                variantes: 'Simplifier : 2 stations seulement | Complexifier : Ajout d\'un chronométrage'
+                titre: 'Exercices de sauts et impulsion verticale',
+                but: 'Développer la puissance verticale et la coordination sans élan courbe',
+                organisation: '4 stations (sauts verticaux, impulsion sur place, double bras, réception au sol), par groupe de 4',
+                deroulement: 'Rotation sur les stations : 1) Sauts verticaux maximaux (contre un mur ou sans), 2) Impulsion sur place avec focus extension, 3) Exercices de double bras (coordination), 4) Réception au sol sur le dos. Chaque station = 3 min. Focus sur la puissance d\'impulsion sans élan.',
+                consignes: 'Pousser fort dans le sol\nExtension complète de la jambe d\'appel\nDouble bras actif vers le haut\nChute contrôlée sur le dos',
+                variantes: 'Simplifier : 2 stations seulement, exercices au sol | Complexifier : Ajout d\'élastique de résistance, tapis épais'
             },
             situation2: {
                 titre: 'Travail de la course d\'élan courbe',
@@ -804,12 +804,12 @@ const SITUATIONS_FICHES = {
         'impulsion': {
             echauffement: 'Sauts sans élan (2 min) : impulsion verticale | Exercices de jambes (3 min) : genou haut | Exercices de bras (2 min) : double bras | Sauts avec élan réduit (3 min) : coordination',
             situation1: {
-                titre: 'Parcours d\'habiletés motrices',
-                but: 'Enchaîner les différentes stations du parcours en maîtrisant les habiletés de base',
-                organisation: '4 stations (impulsion verticale, genou haut, double bras, coordination), par groupe de 4',
-                deroulement: 'Rotation sur les stations : 1) Impulsion verticale sur place, 2) Exercices de genou haut, 3) Exercices de double bras, 4) Coordination bras-jambes. Chaque station = 3 min.',
-                consignes: 'Respecter le temps à chaque station\nÉcouter les consignes spécifiques\nSe concentrer sur la qualité du geste\nPasser à la station suivante au signal',
-                variantes: 'Simplifier : 2 stations seulement | Complexifier : Ajout d\'obstacles'
+                titre: 'Sauts verticaux et exercices de poussée',
+                but: 'Développer la puissance d\'impulsion verticale sans élan',
+                organisation: '4 stations (sauts verticaux, exercices de poussée, genou haut, double bras), par groupe de 4',
+                deroulement: 'Rotation sur les stations : 1) Sauts verticaux maximaux (série de 5), 2) Exercices de poussée (squat sautés), 3) Exercices de genou haut (amplitude), 4) Exercices de double bras (coordination). Chaque station = 3 min. Focus sur la puissance et la réactivité.',
+                consignes: 'Pousser fort dans le sol\nExtension complète de la jambe\nGenou haut après l\'impulsion\nDouble bras actif vers le haut',
+                variantes: 'Simplifier : 2 stations seulement, exercices au sol | Complexifier : Ajout d\'élastique de résistance, mesure de hauteur'
             },
             situation2: {
                 titre: 'Travail de l\'impulsion',
@@ -839,12 +839,12 @@ const SITUATIONS_FICHES = {
         'technique': {
             echauffement: 'Échauffement articulaire (2 min) : épaules, poignets, hanches | Mouvements sans poids (2 min) : geste du lancer | Lancers légers (3 min) : medecine-ball 1kg | Lancers avec poids (3 min) : technique progressive',
             situation1: {
-                titre: 'Parcours d\'habiletés motrices',
-                but: 'Enchaîner les différentes stations du parcours en maîtrisant les habiletés de base',
-                organisation: '4 stations (position départ, translation, poussée, équilibre), par groupe de 4',
-                deroulement: 'Rotation sur les stations : 1) Position de départ (dos à la zone, poids au cou), 2) Translation/sursaut (glissement arrière), 3) Poussée (extension jambes + bras), 4) Équilibre final. Chaque station = 3 min.',
-                consignes: 'Respecter le temps à chaque station\nÉcouter les consignes spécifiques\nSe concentrer sur la qualité du geste\nPasser à la station suivante au signal',
-                variantes: 'Simplifier : 2 stations seulement, sans poids | Complexifier : Ajout d\'un chronométrage'
+                titre: 'Exercices de poussée et lancers légers',
+                but: 'Développer la puissance de poussée et la technique avec charges légères',
+                organisation: '4 stations (poussée sans poids, lancers légers, extension de bras, équilibre), par groupe de 4',
+                deroulement: 'Rotation sur les stations : 1) Exercices de poussée sans poids (extension jambes-bras), 2) Lancers légers avec medecine-ball (1kg), 3) Exercices d\'extension de bras (fouetté), 4) Équilibre final sans déplacement. Chaque station = 3 min. Focus sur la poussée et la technique sans charge lourde.',
+                consignes: 'Poussée des jambes avant le bras\nExtension complète du bras\nFouetté du poignet à la fin\nÉquilibre stable après le geste',
+                variantes: 'Simplifier : 2 stations seulement, sans poids | Complexifier : Ajout de résistance élastique, cibles'
             },
             situation2: {
                 titre: 'Circuit technique de lancer',
@@ -868,12 +868,12 @@ const SITUATIONS_FICHES = {
         'translation': {
             echauffement: 'Mouvements sans poids (2 min) : translation | Exercices de jambes (3 min) : sursaut | Exercices avec poids léger (3 min) : coordination | Lancers complets (2 min) : technique',
             situation1: {
-                titre: 'Parcours d\'habiletés motrices',
-                but: 'Enchaîner les différentes stations du parcours en maîtrisant les habiletés de base',
-                organisation: '4 stations (position, sursaut, poussée jambes, équilibre), par groupe de 4',
-                deroulement: 'Rotation sur les stations : 1) Position de départ, 2) Sursaut/glissement arrière, 3) Poussée des jambes, 4) Équilibre final. Chaque station = 3 min.',
-                consignes: 'Respecter le temps à chaque station\nÉcouter les consignes spécifiques\nSe concentrer sur la qualité du geste\nPasser à la station suivante au signal',
-                variantes: 'Simplifier : 2 stations seulement | Complexifier : Ajout d\'une station timing'
+                titre: 'Exercices de poussée et translation sans poids',
+                but: 'Maîtriser la poussée et la translation sans charge lourde',
+                organisation: '4 stations (poussée au mur, translation sans poids, extension de jambes, équilibre), par groupe de 4',
+                deroulement: 'Rotation sur les stations : 1) Poussée au mur (extension jambes-bras), 2) Translation/sursaut sans poids (glissement arrière), 3) Exercices d\'extension de jambes (sursauts), 4) Équilibre final sans déplacement. Chaque station = 3 min. Focus sur la technique sans charge.',
+                consignes: 'Poussée des jambes avant le bras\nGlissement arrière contrôlé\nExtension complète\nÉquilibre stable',
+                variantes: 'Simplifier : 2 stations seulement, exercices statiques | Complexifier : Ajout de poids léger, cibles de précision'
             },
             situation2: {
                 titre: 'Travail de la translation',
@@ -897,12 +897,12 @@ const SITUATIONS_FICHES = {
         'poussée': {
             echauffement: 'Mouvements sans poids (2 min) : poussée | Exercices de bras (3 min) : extension | Exercices avec poids léger (3 min) : coordination | Lancers complets (2 min) : technique',
             situation1: {
-                titre: 'Parcours d\'habiletés motrices',
-                but: 'Enchaîner les différentes stations du parcours en maîtrisant les habiletés de base',
-                organisation: '4 stations (coude haut, extension, fouetté, équilibre), par groupe de 4',
-                deroulement: 'Rotation sur les stations : 1) Position coude haut, 2) Extension du bras, 3) Fouetté du poignet, 4) Équilibre final. Chaque station = 3 min.',
-                consignes: 'Respecter le temps à chaque station\nÉcouter les consignes spécifiques\nSe concentrer sur la qualité du geste\nPasser à la station suivante au signal',
-                variantes: 'Simplifier : 2 stations seulement | Complexifier : Ajout d\'obstacles'
+                titre: 'Exercices de poussée sans charge',
+                but: 'Développer la technique de poussée sans poids lourd',
+                organisation: '4 stations (poussée au mur, extension de bras, fouetté, lancers légers), par groupe de 4',
+                deroulement: 'Rotation sur les stations : 1) Poussée au mur (jambes puis bras), 2) Extension du bras avec élastique ou sans, 3) Fouetté du poignet avec balle légère, 4) Lancers légers avec medecine-ball. Chaque station = 3 min. Focus sur la poussée et l\'extension.',
+                consignes: 'Poussée des jambes avant le bras\nExtension complète du bras\nFouetté actif du poignet\nDirection vers le haut (45°)',
+                variantes: 'Simplifier : 2 stations seulement, sans matériel | Complexifier : Ajout de cibles, mesure des distances'
             },
             situation2: {
                 titre: 'Travail de la poussée',
@@ -932,12 +932,12 @@ const SITUATIONS_FICHES = {
         'endurance': {
             echauffement: 'Course lente 5 min (2 min) : échauffement progressif | Exercices de technique (3 min) : posture, bras, foulée | Accélérations courtes (3 min) : 50m rapide/50m lent | Course spécifique (2 min) : allure de course',
             situation1: {
-                titre: 'Parcours d\'habiletés motrices',
-                but: 'Enchaîner les différentes stations du parcours en maîtrisant les habiletés de base',
-                organisation: '4 stations (posture, bras, foulée, respiration), par groupe de 4',
-                deroulement: 'Rotation sur les stations : 1) Travail de la posture (buste droit), 2) Mouvement des bras (piston), 3) Foulée économique, 4) Respiration (ventrale). Chaque station = 3 min.',
-                consignes: 'Respecter le temps à chaque station\nÉcouter les consignes spécifiques\nSe concentrer sur la qualité du geste\nPasser à la station suivante au signal',
-                variantes: 'Simplifier : 2 stations seulement | Complexifier : Ajout d\'un cardio-fréquencemètre'
+                titre: 'Exercices d\'allure et régularité',
+                but: 'Apprendre à contrôler et moduler son allure',
+                organisation: '4 stations (allure lente, allure moyenne, allure rapide, récupération), par groupe de 4',
+                deroulement: 'Rotation sur les stations : 1) Course allure lente (peut parler), 2) Course allure moyenne (respiration modérée), 3) Course allure rapide (essoufflé), 4) Récupération active (marche rapide). Chaque station = 3 min. Focus sur la sensation et le contrôle de l\'allure.',
+                consignes: 'Adapter son effort à l\'allure demandée\nRessentir la différence entre les allures\nRespiration régulière\nRécupérer activement',
+                variantes: 'Simplifier : 2 allures seulement (lente/rapide) | Complexifier : Ajout d\'un cardio-fréquencemètre, chronométrage des passages'
             },
             situation2: {
                 titre: 'Course à allure régulière',
@@ -961,12 +961,12 @@ const SITUATIONS_FICHES = {
         'allure': {
             echauffement: 'Course lente (2 min) : échauffement | Exercices de technique (3 min) : posture, bras | Travail d\'allure (3 min) : différentes vitesses | Course spécifique (2 min) : allure cible',
             situation1: {
-                titre: 'Parcours d\'habiletés motrices',
-                but: 'Enchaîner les différentes stations du parcours en maîtrisant les habiletés de base',
-                organisation: '4 stations (allure lente, allure moyenne, allure rapide, récupération), par groupe de 4',
-                deroulement: 'Rotation sur les stations : 1) Course allure lente (peut parler), 2) Course allure moyenne (respiration modérée), 3) Course allure rapide (essoufflé), 4) Récupération active. Chaque station = 3 min.',
-                consignes: 'Respecter le temps à chaque station\nAdapter son effort à l\'allure demandée\nRessentir la différence entre les allures\nPasser à la station suivante au signal',
-                variantes: 'Simplifier : 2 allures seulement | Complexifier : Ajout d\'un cardio-fréquencemètre'
+                titre: 'Exercices d\'allure progressive',
+                but: 'Apprendre à moduler son allure de façon progressive',
+                organisation: '4 stations (démarrage progressif, maintien d\'allure, accélération, régularité), par groupe de 4',
+                deroulement: 'Rotation sur les stations : 1) Démarrage progressif (accélération sur 50m), 2) Maintien d\'allure constante (rythme régulier), 3) Accélération contrôlée (augmentation progressive), 4) Régularité des appuis (cadence stable). Chaque station = 3 min. Focus sur le contrôle de l\'allure.',
+                consignes: 'Accélérer progressivement\nMaintenir une cadence régulière\nContrôler sa respiration\nAdapter l\'effort à la consigne',
+                variantes: 'Simplifier : 2 stations seulement, allures moins contrastées | Complexifier : Ajout d\'un cardio-fréquencemètre, chronométrage'
             },
             situation2: {
                 titre: 'Travail des différentes allures',
@@ -990,12 +990,12 @@ const SITUATIONS_FICHES = {
         'gestion effort': {
             echauffement: 'Course lente (2 min) : échauffement | Exercices de respiration (3 min) : ventrale | Travail de pacing (3 min) : régularité | Course spécifique (2 min) : gestion',
             situation1: {
-                titre: 'Parcours d\'habiletés motrices',
-                but: 'Enchaîner les différentes stations du parcours en maîtrisant les habiletés de base',
-                organisation: '4 stations (respiration, posture, régularité, mental), par groupe de 4',
-                deroulement: 'Rotation sur les stations : 1) Respiration ventrale, 2) Posture économique, 3) Régularité des appuis, 4) Concentration mentale. Chaque station = 3 min.',
-                consignes: 'Respecter le temps à chaque station\nÉcouter les consignes spécifiques\nSe concentrer sur la qualité du geste\nPasser à la station suivante au signal',
-                variantes: 'Simplifier : 2 stations seulement | Complexifier : Ajout d\'un cardio-fréquencemètre'
+                titre: 'Exercices d\'allure et de régularité',
+                but: 'Apprendre à gérer son effort par le contrôle de l\'allure',
+                organisation: '4 stations (allure contrôlée, régularité, respiration rythmée, pacing), par groupe de 4',
+                deroulement: 'Rotation sur les stations : 1) Allure contrôlée (effort modéré constant), 2) Régularité des appuis (cadence stable), 3) Respiration rythmée (synchronisée avec la course), 4) Pacing (gestion de l\'effort sur le temps). Chaque station = 3 min. Focus sur la régularité et le contrôle.',
+                consignes: 'Maintenir un effort constant\nRespirer de façon régulière\nContrôler sa cadence\nGérer son énergie sur la durée',
+                variantes: 'Simplifier : 2 stations seulement, sans contraintes | Complexifier : Ajout d\'un cardio-fréquencemètre, objectifs de FC'
             },
             situation2: {
                 titre: 'Travail de la gestion de l\'effort',
