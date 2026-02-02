@@ -906,7 +906,6 @@
                     <h2>📄 Aperçu du document</h2>
                     <div class="preview-actions" id="previewActions">
                         <button class="btn btn-success" id="downloadWord">📥 Word</button>
-                        <button class="btn btn-primary" id="downloadPdf">📥 PDF</button>
                     </div>
                 </div>
                 <div class="preview-content" id="previewContent">
@@ -1105,79 +1104,6 @@
             a.download = currentFilename;
             a.click();
             URL.revokeObjectURL(url);
-        });
-
-        // Download PDF
-        document.getElementById('downloadPdf').addEventListener('click', async () => {
-            if (!currentHtml) return;
-
-            const btn = document.getElementById('downloadPdf');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '⏳ Génération...';
-            btn.disabled = true;
-
-            try {
-                // Vérifier que html2pdf est chargé
-                if (typeof html2pdf === 'undefined') {
-                    alert('Erreur: La bibliothèque html2pdf n\'est pas chargée.');
-                    return;
-                }
-
-                // Créer un élément temporaire visible mais hors écran
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = currentHtml;
-                
-                // Styles pour assurer la visibilité
-                tempDiv.style.cssText = `
-                    position: fixed;
-                    left: 0;
-                    top: 0;
-                    width: ${currentType === 'grille' ? '210mm' : '297mm'};
-                    background: white;
-                    z-index: -1000;
-                    visibility: visible;
-                    opacity: 1;
-                `;
-
-                document.body.appendChild(tempDiv);
-
-                // Attendre le rendu
-                await new Promise(resolve => setTimeout(resolve, 300));
-
-                // Configuration optimisée
-                const opt = {
-                    margin: 5,
-                    filename: currentFilename.replace('.doc', '.pdf'),
-                    image: { type: 'jpeg', quality: 0.95 },
-                    html2canvas: {
-                        scale: 1.5,
-                        useCORS: true,
-                        logging: false,
-                        allowTaint: true,
-                        backgroundColor: '#ffffff'
-                    },
-                    jsPDF: {
-                        unit: 'mm',
-                        format: 'a4',
-                        orientation: currentType === 'grille' ? 'portrait' : 'landscape'
-                    }
-                };
-
-                // Générer le PDF
-                await html2pdf().set(opt).from(tempDiv).save();
-                
-                // Nettoyage
-                if (document.body.contains(tempDiv)) {
-                    document.body.removeChild(tempDiv);
-                }
-                
-            } catch (err) {
-                console.error('Erreur PDF:', err);
-                alert('Erreur lors de la génération du PDF. Veuillez réessayer.');
-            } finally {
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-            }
         });
 
         // Auto-fill from localStorage
