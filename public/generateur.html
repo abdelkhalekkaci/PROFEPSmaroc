@@ -100,6 +100,11 @@
             margin: -10px 0;
         }
 
+        .navbar.scrolled .nav-logo img {
+            height: 65px;
+            margin: -8px 0;
+        }
+
         .nav-menu {
             display: flex;
             align-items: center;
@@ -107,8 +112,10 @@
         }
 
         .nav-link {
+            font-size: 0.9375rem;
             font-weight: 500;
             color: var(--text-secondary);
+            padding: var(--spacing-sm) 0;
             position: relative;
         }
 
@@ -120,40 +127,63 @@
         .nav-link.active::after {
             content: '';
             position: absolute;
-            bottom: -4px;
+            bottom: 0;
             left: 0;
             right: 0;
             height: 2px;
             background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            border-radius: var(--radius-full);
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
         .nav-toggle {
             display: none;
             flex-direction: column;
-            gap: 4px;
+            gap: 5px;
+            background: none;
+            border: none;
             cursor: pointer;
-            padding: 8px;
+            padding: 5px;
         }
 
         .nav-toggle span {
-            width: 24px;
+            width: 25px;
             height: 2px;
             background: var(--text-primary);
+            border-radius: 2px;
             transition: var(--transition);
         }
 
         /* ========== LOADING OVERLAY ========== */
         .loading-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(4px);
             display: none;
-            align-items: center;
-            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             z-index: 9999;
+            justify-content: center;
+            align-items: center;
             flex-direction: column;
-            gap: 20px;
         }
 
         .loading-overlay.show {
@@ -161,8 +191,8 @@
         }
 
         .loading-spinner {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border: 4px solid rgba(255, 255, 255, 0.3);
             border-top-color: white;
             border-radius: 50%;
@@ -418,41 +448,43 @@
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             border: none;
-            border-radius: var(--radius-lg);
+            border-radius: var(--radius-full);
             cursor: pointer;
             transition: var(--transition);
-            box-shadow: 0 4px 15px rgba(193, 39, 45, 0.3);
+            box-shadow: 0 8px 30px rgba(193, 39, 45, 0.3);
+            margin-top: var(--spacing-lg);
         }
 
         .generate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(193, 39, 45, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(193, 39, 45, 0.4);
         }
 
         .generate-btn:disabled {
-            opacity: 0.7;
+            background: var(--text-light);
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
         }
 
         /* ========== PREVIEW CARD ========== */
         .preview-card {
+            display: flex;
+            flex-direction: column;
             min-height: 600px;
-            position: sticky;
-            top: 100px;
         }
 
         .preview-header {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
             padding: var(--spacing-lg) var(--spacing-xl);
             border-bottom: 1px solid var(--border-light);
         }
 
         .preview-header h2 {
             font-family: var(--font-display);
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--text-primary);
         }
@@ -467,12 +499,15 @@
         }
 
         .btn {
-            padding: var(--spacing-sm) var(--spacing-md);
-            border-radius: var(--radius);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-lg);
             font-weight: 600;
-            font-size: 0.875rem;
-            cursor: pointer;
+            font-size: 0.9rem;
+            border-radius: var(--radius-full);
             transition: var(--transition);
+            cursor: pointer;
             border: none;
         }
 
@@ -481,22 +516,21 @@
             color: white;
         }
 
-        .btn-success:hover {
-            background: var(--secondary-dark);
-        }
-
         .btn-primary {
             background: var(--primary);
             color: white;
         }
 
-        .btn-primary:hover {
-            background: var(--primary-dark);
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         .preview-content {
+            flex: 1;
             padding: var(--spacing-xl);
-            min-height: 500px;
+            overflow: auto;
+            background: var(--bg-secondary);
         }
 
         .preview-empty {
@@ -504,15 +538,16 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 400px;
+            height: 100%;
+            min-height: 400px;
             color: var(--text-light);
             text-align: center;
         }
 
         .preview-empty-icon {
             font-size: 4rem;
-            margin-bottom: var(--spacing-md);
-            opacity: 0.5;
+            opacity: 0.3;
+            margin-bottom: var(--spacing-lg);
         }
 
         .preview-empty h3 {
@@ -691,20 +726,17 @@
                 <a href="blog.html" class="nav-link">Blog</a>
                 <a href="a-propos.html" class="nav-link">À propos</a>
                 <a href="contact.html" class="nav-link">Contact</a>
+                <a href="generateur.html" class="nav-cta"><span>✨</span> Créer une fiche</a>
             </div>
-            <div class="nav-toggle" id="navToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
         </div>
     </nav>
 
     <!-- LOADING OVERLAY -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-spinner"></div>
-        <div class="loading-text">Génération en cours...</div>
-        <div class="loading-subtext">Veuillez patienter quelques instants</div>
+        <div class="loading-text">⚡ Génération en cours...</div>
+        <div class="loading-subtext">Création de votre document personnalisé</div>
     </div>
 
     <!-- MAIN CONTENT -->
@@ -824,28 +856,22 @@
 
                         <!-- GRILLE Fields -->
                         <div id="grilleFields" class="conditional">
-                            <label class="form-label"><span>📋</span> Type de grille <span
-                                    class="required">*</span></label>
-                            <div class="radio-group" style="display: flex; gap: var(--spacing-md); margin-top: var(--spacing-sm);">
-                                <label class="radio-option" style="flex: 1; padding: var(--spacing-md); border: 2px solid var(--border); border-radius: var(--radius-lg); cursor: pointer; transition: all 0.3s ease; text-align: center;">
-                                    <input type="radio" name="typeGrille" value="observation" checked style="margin-bottom: var(--spacing-xs);">
-                                    <div style="font-weight: 600; color: var(--text-primary);">Observation</div>
-                                    <div style="font-size: 0.85rem; color: var(--text-light);">Critères + observations</div>
-                                </label>
-                                <label class="radio-option" style="flex: 1; padding: var(--spacing-md); border: 2px solid var(--border); border-radius: var(--radius-lg); cursor: pointer; transition: all 0.3s ease; text-align: center;">
-                                    <input type="radio" name="typeGrille" value="evaluation" style="margin-bottom: var(--spacing-xs);">
-                                    <div style="font-weight: 600; color: var(--text-primary);">Évaluation</div>
-                                    <div style="font-size: 0.85rem; color: var(--text-light);">Avec notes (P/C/C/F)</div>
-                                </label>
+                            <div class="form-group">
+                                <label class="form-label"><span>📋</span> Type de grille</label>
+                                <select class="form-select" id="typeGrille">
+                                    <option value="observation">👁️ Grille d'observation</option>
+                                    <option value="evaluation">📊 Grille d'évaluation</option>
+                                </select>
                             </div>
                         </div>
 
-                        <!-- Optional fields toggle -->
+                        <!-- OPTIONS SUPPLÉMENTAIRES -->
                         <div class="optional-toggle" id="optionalToggle">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
                                 <polyline points="6 9 12 15 18 9"></polyline>
                             </svg>
-                            <span>Options supplémentaires (facultatif)</span>
+                            <span>Afficher les options supplémentaires</span>
                         </div>
                         <div class="optional-content" id="optionalContent">
                             <div class="form-group">
@@ -854,7 +880,8 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label">🏫 Établissement</label>
-                                <input type="text" class="form-input" id="etablissement" placeholder="Lycée / Collège...">
+                                <input type="text" class="form-input" id="etablissement"
+                                    placeholder="Lycée / Collège...">
                             </div>
                             <div class="form-group">
                                 <label class="form-label">📅 Année scolaire</label>
@@ -902,27 +929,29 @@
                 <p>Le premier générateur intelligent de fiches pédagogiques pour les professeurs d'éducation physique et
                     sportive au Maroc.</p>
             </div>
-            <div class="footer-links-column">
+            <div>
                 <h4 class="footer-title">Navigation</h4>
                 <div class="footer-links">
                     <a href="index.html">Accueil</a>
                     <a href="generateur.html">Générateur</a>
                     <a href="blog.html">Blog</a>
                     <a href="a-propos.html">À propos</a>
-                </div>
-            </div>
-            <div class="footer-links-column">
-                <h4 class="footer-title">Ressources</h4>
-                <div class="footer-links">
-                    <a href="blog.html">Articles</a>
-                    <a href="generateur.html">Générateur</a>
                     <a href="contact.html">Contact</a>
                 </div>
             </div>
-            <div class="footer-links-column">
+            <div>
+                <h4 class="footer-title">Ressources</h4>
+                <div class="footer-links">
+                    <a href="blog.html">Articles</a>
+                    <a href="article-op.html">Orientations Pédagogiques</a>
+                    <a href="article-eval.html">Évaluation en EPS</a>
+                    <a href="article-securite.html">Sécurité en EPS</a>
+                </div>
+            </div>
+            <div>
                 <h4 class="footer-title">Contact</h4>
                 <div class="footer-links">
-                    <a href="mailto:epsprof.assistance@gmail.com">epsprof.assistance@gmail.com</a>
+                    <a href="mailto:profepsma@gmail.com">profepsma@gmail.com</a>
                     <a href="https://www.facebook.com/profepsma" target="_blank">Facebook</a>
                     <a href="https://www.instagram.com/profepsma/" target="_blank">Instagram</a>
                 </div>
@@ -932,120 +961,136 @@
             <p class="footer-copyright">© 2025 Prof EPS. Tous droits réservés.</p>
             <div class="footer-social">
                 <a href="https://www.facebook.com/profepsma" target="_blank" aria-label="Facebook">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                    </svg>
                 </a>
                 <a href="https://www.instagram.com/profepsma/" target="_blank" aria-label="Instagram">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                    </svg>
                 </a>
-                <a href="mailto:epsprof.assistance@gmail.com" aria-label="Email">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                <a href="mailto:profepsma@gmail.com" aria-label="Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                    </svg>
                 </a>
             </div>
         </div>
     </footer>
 
     <script>
-        // Navbar scroll effect
+        // Variables globales
+        let currentType = 'fiche';
+        let currentHtml = '';
+        let currentHtmlDisplay = '';
+        let currentFilename = '';
+
+        // Navbar scroll
         const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+
+        // Mobile menu
         const navToggle = document.getElementById('navToggle');
         const navMenu = document.getElementById('navMenu');
+        navToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
 
-        window.addEventListener('scroll', () => {
-            navbar.classList.toggle('scrolled', window.scrollY > 50);
-        });
-
-        navToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-
-        // Tab switching
-        const tabs = document.querySelectorAll('.tab');
-        const ficheFields = document.getElementById('ficheFields');
-        const projetFields = document.getElementById('projetFields');
-        const grilleFields = document.getElementById('grilleFields');
-        let currentType = 'fiche';
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                currentType = tab.dataset.type;
-
-                ficheFields.classList.toggle('show', currentType === 'fiche');
-                projetFields.classList.toggle('show', currentType === 'projet');
-                grilleFields.classList.toggle('show', currentType === 'grille');
-            });
-        });
-
-        // Optional fields toggle
+        // Optional toggle
         const optionalToggle = document.getElementById('optionalToggle');
         const optionalContent = document.getElementById('optionalContent');
-
         optionalToggle.addEventListener('click', () => {
             optionalToggle.classList.toggle('open');
             optionalContent.classList.toggle('show');
         });
 
-        // Loading overlay
-        const loadingOverlay = document.getElementById('loadingOverlay');
-        function showLoading() {
-            loadingOverlay.classList.add('show');
-        }
-        function hideLoading() {
-            loadingOverlay.classList.remove('show');
+        // Tabs
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentType = tab.dataset.type;
+                document.querySelectorAll('.conditional').forEach(f => f.classList.remove('show'));
+                const fields = document.getElementById(currentType + 'Fields');
+                if (fields) fields.classList.add('show');
+                clearPreview();
+            });
+        });
+
+        function clearPreview() {
+            document.getElementById('previewEmpty').style.display = 'flex';
+            document.getElementById('previewDocument').style.display = 'none';
+            document.getElementById('previewActions').classList.remove('show');
+            currentHtml = '';
+            currentHtmlDisplay = '';
+            currentFilename = '';
         }
 
-        // Form submission
-        const form = document.getElementById('form');
-        let currentHtml = '';
-        let currentFilename = '';
+        function showLoading() { document.getElementById('loadingOverlay').classList.add('show'); }
+        function hideLoading() { document.getElementById('loadingOverlay').classList.remove('show'); }
 
-        form.addEventListener('submit', async (e) => {
+        // Déterminer l'endpoint selon le type de document
+        function getEndpoint(type) {
+            switch (type) {
+                case 'fiche': return '/api/generer-fiche';
+                case 'grille': return '/api/generer-grille';
+                case 'projet': return '/api/generer-projet';
+                default: return '/api/generer-fiche';
+            }
+        }
+
+        // Form submit
+        document.getElementById('form').addEventListener('submit', async (e) => {
             e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
             showLoading();
 
-            const formData = {
-                type: currentType,
-                niveau: document.getElementById('niveau').value,
-                aps: document.getElementById('aps').value,
-                nomProf: document.getElementById('nomProf').value,
-                etablissement: document.getElementById('etablissement').value,
-                anneeScolaire: document.getElementById('anneeScolaire').value,
-                classe: document.getElementById('classe').value
-            };
-
-            if (currentType === 'fiche') {
-                formData.objectif = document.getElementById('objectif').value;
-                formData.numeroSeance = document.getElementById('numeroSeance').value;
-            } else if (currentType === 'projet') {
-                formData.niveauEleves = document.getElementById('niveauEleves').value;
-                formData.nombreSeances = document.getElementById('nombreSeances').value;
-            } else if (currentType === 'grille') {
-                formData.typeGrille = document.querySelector('input[name="typeGrille"]:checked').value;
-            }
-
             try {
-                const response = await fetch(`/api/generer-${currentType}`, {
+                const formData = {
+                    typeDocument: currentType,
+                    niveau: document.getElementById('niveau').value,
+                    aps: document.getElementById('aps').value,
+                    objectif: document.getElementById('objectif')?.value || '',
+                    numeroSeance: document.getElementById('numeroSeance')?.value || '1',
+                    niveauEleves: document.getElementById('niveauEleves')?.value || 'moyen',
+                    nombreSeances: document.getElementById('nombreSeances')?.value || '10',
+                    typeGrille: document.getElementById('typeGrille')?.value || 'observation',
+                    classe: document.getElementById('classe')?.value || '',
+                    nomProf: document.getElementById('nomProf')?.value || '',
+                    etablissement: document.getElementById('etablissement')?.value || '',
+                    anneeScolaire: document.getElementById('anneeScolaire')?.value || ''
+                };
+
+                // Appeler le bon endpoint selon le type
+                const endpoint = getEndpoint(currentType);
+
+                const resp = await fetch(endpoint, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
                 });
 
-                const data = await response.json();
+                const data = await resp.json();
 
                 if (data.success) {
                     currentHtml = data.html;
+                    currentHtmlDisplay = data.htmlDisplay || data.html;
                     currentFilename = data.filename;
+
                     document.getElementById('previewEmpty').style.display = 'none';
                     document.getElementById('previewDocument').style.display = 'block';
-                    document.getElementById('previewDocument').innerHTML = currentHtml;
+                    document.getElementById('previewDocument').innerHTML = currentHtmlDisplay;
                     document.getElementById('previewActions').classList.add('show');
                 } else {
-                    alert('Erreur: ' + data.error);
+                    alert('Erreur: ' + (data.error || 'Erreur inconnue'));
                 }
             } catch (err) {
                 alert('Erreur de connexion: ' + err.message);
             } finally {
+                btn.disabled = false;
                 hideLoading();
             }
         });
@@ -1062,12 +1107,9 @@
             URL.revokeObjectURL(url);
         });
 
-        // Download PDF - Version corrigée
+        // Download PDF
         document.getElementById('downloadPdf').addEventListener('click', async () => {
-            if (!currentHtml) {
-                alert('Veuillez d\'abord générer un document.');
-                return;
-            }
+            if (!currentHtml) return;
 
             const btn = document.getElementById('downloadPdf');
             const originalText = btn.innerHTML;
@@ -1077,29 +1119,32 @@
             try {
                 // Vérifier que html2pdf est chargé
                 if (typeof html2pdf === 'undefined') {
-                    alert('Erreur: La bibliothèque html2pdf n\'est pas chargée. Veuillez rafraîchir la page.');
+                    alert('Erreur: La bibliothèque html2pdf n\'est pas chargée.');
                     return;
                 }
 
-                // Créer un élément temporaire avec le HTML complet
+                // Créer un élément temporaire visible mais hors écran
                 const tempDiv = document.createElement('div');
                 tempDiv.innerHTML = currentHtml;
+                
+                // Styles pour assurer la visibilité
                 tempDiv.style.cssText = `
-                    position: absolute;
-                    left: -9999px;
+                    position: fixed;
+                    left: 0;
                     top: 0;
-                    width: 297mm;
-                    min-height: 210mm;
+                    width: ${currentType === 'grille' ? '210mm' : '297mm'};
                     background: white;
-                    padding: 10mm;
-                    font-family: "Segoe UI", Arial, sans-serif;
+                    z-index: -1000;
+                    visibility: visible;
+                    opacity: 1;
                 `;
+
                 document.body.appendChild(tempDiv);
 
                 // Attendre le rendu
-                await new Promise(resolve => setTimeout(resolve, 500));
+                await new Promise(resolve => setTimeout(resolve, 300));
 
-                // Configuration pour html2pdf
+                // Configuration optimisée
                 const opt = {
                     margin: 5,
                     filename: currentFilename.replace('.doc', '.pdf'),
@@ -1114,7 +1159,7 @@
                     jsPDF: {
                         unit: 'mm',
                         format: 'a4',
-                        orientation: 'landscape'
+                        orientation: currentType === 'grille' ? 'portrait' : 'landscape'
                     }
                 };
 
@@ -1128,7 +1173,7 @@
                 
             } catch (err) {
                 console.error('Erreur PDF:', err);
-                alert('Erreur lors de la génération du PDF: ' + err.message);
+                alert('Erreur lors de la génération du PDF. Veuillez réessayer.');
             } finally {
                 btn.innerHTML = originalText;
                 btn.disabled = false;
@@ -1170,7 +1215,7 @@
                     }
                     
                     localStorage.removeItem('profeps_formData');
-                    if (d.autoGenerate) setTimeout(() => form.dispatchEvent(new Event('submit')), 500);
+                    if (d.autoGenerate) setTimeout(() => document.getElementById('form').dispatchEvent(new Event('submit')), 500);
                 } catch (e) { localStorage.removeItem('profeps_formData'); }
             }
         });
