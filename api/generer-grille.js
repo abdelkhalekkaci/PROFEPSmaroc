@@ -35,11 +35,19 @@ module.exports = async (req, res) => {
         let emptyCols = '';
         let colCount = 0;
 
-        // Couleurs sobres et professionnelles - Bleu marine
-        const COLOR_PRIMARY = '#1e3a5f';
-        const COLOR_PRIMARY_LIGHT = '#e8eef4';
-        const COLOR_SECONDARY = '#4a6fa5';
-        const COLOR_ACCENT = '#2c4a6e';
+        // Couleurs pour le document Word/PDF (bleu marine)
+        const WORD_COLOR_PRIMARY = '#1e3a5f';
+        const WORD_COLOR_PRIMARY_LIGHT = '#e8eef4';
+        const WORD_COLOR_SECONDARY = '#4a6fa5';
+        const WORD_COLOR_ACCENT = '#2c4a6e';
+
+        // Couleurs pour l'affichage site web (vert marocain)
+        const COLOR_PRIMARY = '#006233'; // Vert principal
+        const COLOR_PRIMARY_LIGHT = '#e8f5e9'; // Vert très clair
+        const COLOR_SECONDARY = '#4a8b5c'; // Vert secondaire
+        const COLOR_ACCENT = '#2c5f3e'; // Vert foncé
+        const COLOR_BEIGE = '#f5f5dc'; // Beige clair
+        const COLOR_WHITE = '#ffffff'; // Blanc
         
         // Colonnes des critères (fond bleu marine unifié)
         critObs.criteres.forEach(c => {
@@ -51,12 +59,24 @@ module.exports = async (req, res) => {
             });
         });
 
+        // Déterminer si c'est un sport collectif
+        const sportsCollectifs = ['Handball', 'Football', 'Basketball', 'Volleyball'];
+        const isSportCollectif = sportsCollectifs.includes(aps);
+
         // Colonnes spécifiques selon le type de grille
         if (!isObs) {
             // GRILLE ÉVALUATION: 4 colonnes NOTE
             headMain += `<th colspan="4" style="background:${COLOR_ACCENT};color:#fff;font-size:8pt;text-align:center;padding:5px;border:1px solid #000;font-weight:bold;">NOTE</th>`;
-            headSub += `<td style="background:#f5f5f5;font-size:6pt;text-align:center;padding:4px;border:1px solid #000;font-weight:600;width:5%;">Procéd.</td>`;
-            headSub += `<td style="background:#f5f5f5;font-size:6pt;text-align:center;padding:4px;border:1px solid #000;font-weight:600;width:5%;">Concept.</td>`;
+            // Adapter les libellés selon le type de sport
+            if (isSportCollectif) {
+                // Sports collectifs: Individuel / Équipe
+                headSub += `<td style="background:#f5f5f5;font-size:6pt;text-align:center;padding:4px;border:1px solid #000;font-weight:600;width:5%;">Individ.</td>`;
+                headSub += `<td style="background:#f5f5f5;font-size:6pt;text-align:center;padding:4px;border:1px solid #000;font-weight:600;width:5%;">Équipe</td>`;
+            } else {
+                // Autres sports: Produit / Processus
+                headSub += `<td style="background:#f5f5f5;font-size:6pt;text-align:center;padding:4px;border:1px solid #000;font-weight:600;width:5%;">Produit</td>`;
+                headSub += `<td style="background:#f5f5f5;font-size:6pt;text-align:center;padding:4px;border:1px solid #000;font-weight:600;width:5%;">Process.</td>`;
+            }
             headSub += `<td style="background:#f5f5f5;font-size:6pt;text-align:center;padding:4px;border:1px solid #000;font-weight:600;width:5%;">Comport.</td>`;
             headSub += `<td style="background:${COLOR_PRIMARY_LIGHT};font-size:7pt;text-align:center;padding:4px;border:1px solid #000;font-weight:bold;width:5%;">FINALE</td>`;
             emptyCols += '<td style="border:1px solid #000;width:5%;"></td>'.repeat(4);
@@ -162,7 +182,7 @@ module.exports = async (req, res) => {
             ${!isObs ? `
                 <div style="background:#f5f5f5;border:1px solid #d0d0d0;border-radius:8px;padding:10px 15px;min-width:180px;">
                     <strong style="color:${COLOR_PRIMARY};font-size:0.9rem;">NOTE</strong><br>
-                    <span style="font-size:0.8rem;color:#555;">Procéd. | Concept. | Comport. | FINALE</span>
+                    <span style="font-size:0.8rem;color:#555;">${isSportCollectif ? 'Individ. | Équipe | Comport. | FINALE' : 'Produit | Process. | Comport. | FINALE'}</span>
                 </div>
             ` : `
                 <div style="background:#f5f5f5;border:1px solid #d0d0d0;border-radius:8px;padding:10px 15px;">
@@ -186,8 +206,13 @@ module.exports = async (req, res) => {
             <div style="margin-top:15px;padding:12px 15px;background:#f5f5f5;border-radius:8px;border-left:4px solid ${COLOR_PRIMARY};">
                 <strong style="color:${COLOR_PRIMARY};">📌 Signification des notes:</strong><br>
                 <div style="font-size:0.85rem;margin-top:8px;line-height:1.6;">
-                    <span style="display:inline-block;background:#e8eef4;padding:2px 8px;border-radius:4px;margin:2px;"><b>Procédurale</b></span> = Savoir-faire (technique gestuelle, exécution)<br>
-                    <span style="display:inline-block;background:#e8eef4;padding:2px 8px;border-radius:4px;margin:2px;"><b>Conceptuelle</b></span> = Savoirs (connaissance des règles, vocabulaire)<br>
+                    ${isSportCollectif ? `
+                    <span style="display:inline-block;background:#e8eef4;padding:2px 8px;border-radius:4px;margin:2px;"><b>Individuel</b></span> = Performance personnelle (technique, réussite)<br>
+                    <span style="display:inline-block;background:#e8eef4;padding:2px 8px;border-radius:4px;margin:2px;"><b>Équipe</b></span> = Contribution collective (coopération, organisation)
+                    ` : `
+                    <span style="display:inline-block;background:#e8eef4;padding:2px 8px;border-radius:4px;margin:2px;"><b>Produit</b></span> = Résultat atteint (performance, réussite)<br>
+                    <span style="display:inline-block;background:#e8eef4;padding:2px 8px;border-radius:4px;margin:2px;"><b>Processus</b></span> = Démarche suivie (technique, organisation)
+                    `}<br>
                     <span style="display:inline-block;background:#e8eef4;padding:2px 8px;border-radius:4px;margin:2px;"><b>Comportementale</b></span> = Savoir-être (engagement, fair-play, coopération)<br>
                     <span style="display:inline-block;background:${COLOR_PRIMARY_LIGHT};padding:2px 8px;border-radius:4px;margin:2px;"><b>FINALE</b></span> = Moyenne pondérée /20 selon barème établi
                 </div>
@@ -307,7 +332,9 @@ ${rows}
 <b>Légende:</b><br>
 ${isObs 
     ? '<span style="background:#c8e6c9;padding:1px 6px;">✓</span> Critère observé &nbsp;&nbsp; <span style="background:#ffcdd2;padding:1px 6px;">✗</span> Non observé &nbsp;&nbsp; <span style="background:#fff9c4;padding:1px 6px;">○</span> Partiellement' 
-    : '<b>Procéd.</b> = Note Procédurale (savoir-faire technique)<br><b>Concept.</b> = Note Conceptuelle (savoirs, règles)<br><b>Comport.</b> = Note Comportementale (savoir-être)<br><b>FINALE</b> = Note finale /20 (moyenne pondérée)'}
+    : isSportCollectif
+        ? '<b>Individ.</b> = Performance personnelle (technique, réussite)<br><b>Équipe</b> = Contribution collective (coopération, organisation)<br><b>Comport.</b> = Note Comportementale (savoir-être)<br><b>FINALE</b> = Note finale /20 (moyenne pondérée)'
+        : '<b>Produit</b> = Résultat atteint (performance, réussite)<br><b>Process.</b> = Démarche suivie (technique, organisation)<br><b>Comport.</b> = Note Comportementale (savoir-être)<br><b>FINALE</b> = Note finale /20 (moyenne pondérée)'}
 </td>
 <td style="border:none;text-align:right;font-size:9pt;vertical-align:bottom;">
 <b>Signature du professeur:</b><br><br>
