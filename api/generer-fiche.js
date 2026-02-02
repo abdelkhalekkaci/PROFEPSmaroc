@@ -215,11 +215,19 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
         const schema1 = getSchema(aps, 1);
         const schema2 = getSchema(aps, 2);
 
-        // Couleurs sobres et professionnelles
-        const COLOR_PRIMARY = '#1e3a5f'; // Bleu marine
-        const COLOR_PRIMARY_LIGHT = '#e8eef4'; // Bleu marine très clair
-        const COLOR_SECONDARY = '#4a6fa5'; // Bleu plus clair
+        // Couleurs pour le document Word/PDF (bleu marine)
+        const WORD_COLOR_PRIMARY = '#1e3a5f';
+        const WORD_COLOR_PRIMARY_LIGHT = '#e8eef4';
+        const WORD_COLOR_SECONDARY = '#4a6fa5';
+        const WORD_COLOR_ACCENT = '#f5f5f5';
+
+        // Couleurs pour l'affichage site web (vert marocain)
+        const COLOR_PRIMARY = '#006233'; // Vert principal
+        const COLOR_PRIMARY_LIGHT = '#e8f5e9'; // Vert très clair
+        const COLOR_SECONDARY = '#4a8b5c'; // Vert secondaire
         const COLOR_ACCENT = '#f5f5f5'; // Gris clair
+        const COLOR_BEIGE = '#f5f5dc'; // Beige clair
+        const COLOR_WHITE = '#ffffff'; // Blanc
 
         // ==================== HTML DISPLAY (SITE WEB) ====================
         const htmlDisplay = `
