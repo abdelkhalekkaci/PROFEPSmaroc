@@ -65,21 +65,22 @@ module.exports = async (req, res) => {
 
         // Colonnes spécifiques selon le type de grille
         if (!isObs) {
-            // GRILLE ÉVALUATION: 4 colonnes NOTE
-            headMain += `<th colspan="4" style="background:${COLOR_ACCENT};color:#fff;font-size:8pt;text-align:center;padding:5px;border:1px solid #000;font-weight:bold;">NOTE</th>`;
+            // GRILLE ÉVALUATION: 5 colonnes NOTE
+            headMain += `<th colspan="5" style="background:${COLOR_ACCENT};color:#fff;font-size:8pt;text-align:center;padding:5px;border:1px solid #000;font-weight:bold;">NOTE</th>`;
             // Adapter les libellés selon le type de sport
             if (isSportCollectif) {
-                // Sports collectifs: Individuel / Équipe
+                // Sports collectifs: Individuel / Équipe / Conceptuel / Comportemental / Finale
                 headSub += `<td style="background:#f5f5f5;font-size:6pt;text-align:center;padding:4px;border:1px solid #000;font-weight:600;width:5%;">Individ.</td>`;
                 headSub += `<td style="background:#f5f5f5;font-size:6pt;text-align:center;padding:4px;border:1px solid #000;font-weight:600;width:5%;">Équipe</td>`;
             } else {
-                // Autres sports: Produit / Processus
+                // Autres sports: Produit / Processus / Conceptuel / Comportemental / Finale
                 headSub += `<td style="background:#f5f5f5;font-size:6pt;text-align:center;padding:4px;border:1px solid #000;font-weight:600;width:5%;">Produit</td>`;
                 headSub += `<td style="background:#f5f5f5;font-size:6pt;text-align:center;padding:4px;border:1px solid #000;font-weight:600;width:5%;">Process.</td>`;
             }
+            headSub += `<td style="background:#f5f5f5;font-size:6pt;text-align:center;padding:4px;border:1px solid #000;font-weight:600;width:5%;">Concept.</td>`;
             headSub += `<td style="background:#f5f5f5;font-size:6pt;text-align:center;padding:4px;border:1px solid #000;font-weight:600;width:5%;">Comport.</td>`;
             headSub += `<td style="background:${COLOR_PRIMARY_LIGHT};font-size:7pt;text-align:center;padding:4px;border:1px solid #000;font-weight:bold;width:5%;">FINALE</td>`;
-            emptyCols += '<td style="border:1px solid #000;width:5%;"></td>'.repeat(4);
+            emptyCols += '<td style="border:1px solid #000;width:5%;"></td>'.repeat(5);
         } else {
             // GRILLE OBSERVATION: colonne Observations
             headMain += `<th rowspan="2" style="background:${COLOR_ACCENT};color:#fff;font-size:7pt;width:15%;border:1px solid #000;text-align:center;font-weight:bold;">Observations</th>`;
@@ -103,7 +104,7 @@ module.exports = async (req, res) => {
             
             // Cellules supplémentaires selon type
             if (!isObs) {
-                rows += `<td style="background:${bgColor};border:1px solid #000;"></td>`.repeat(4);
+                rows += `<td style="background:${bgColor};border:1px solid #000;"></td>`.repeat(5);
             } else {
                 rows += `<td style="background:${bgColor};border:1px solid #000;"></td>`;
             }
@@ -128,7 +129,7 @@ module.exports = async (req, res) => {
             
             // Cellules supplémentaires selon type
             if (!isObs) {
-                previewRows += `<td style="background:${bgColor};border:1px solid #000;"></td>`.repeat(4);
+                previewRows += `<td style="background:${bgColor};border:1px solid #000;"></td>`.repeat(5);
             } else {
                 previewRows += `<td style="background:${bgColor};border:1px solid #000;"></td>`;
             }
@@ -137,7 +138,7 @@ module.exports = async (req, res) => {
         
         // Ligne indicatrice pour les lignes restantes
         previewRows += `<tr style="height:20px;">`;
-        previewRows += `<td colspan="${3 + colCount + (isObs ? 1 : 4)}" style="text-align:center;font-size:8pt;background:#f5f5f5;border:1px solid #000;color:#666;">... ${35 - 5} lignes supplémentaires ...</td>`;
+        previewRows += `<td colspan="${3 + colCount + (isObs ? 1 : 5)}" style="text-align:center;font-size:8pt;background:#f5f5f5;border:1px solid #000;color:#666;">... ${35 - 5} lignes supplémentaires ...</td>`;
         previewRows += '</tr>';
         
         const htmlDisplay = `
@@ -182,7 +183,7 @@ module.exports = async (req, res) => {
             ${!isObs ? `
                 <div style="background:#f5f5f5;border:1px solid #d0d0d0;border-radius:8px;padding:10px 15px;min-width:180px;">
                     <strong style="color:${COLOR_PRIMARY};font-size:0.9rem;">NOTE</strong><br>
-                    <span style="font-size:0.8rem;color:#555;">${isSportCollectif ? 'Individ. | Équipe | Comport. | FINALE' : 'Produit | Process. | Comport. | FINALE'}</span>
+                    <span style="font-size:0.8rem;color:#555;">${isSportCollectif ? 'Individ. | Équipe | Concept. | Comport. | FINALE' : 'Produit | Process. | Concept. | Comport. | FINALE'}</span>
                 </div>
             ` : `
                 <div style="background:#f5f5f5;border:1px solid #d0d0d0;border-radius:8px;padding:10px 15px;">
