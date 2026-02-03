@@ -119,6 +119,22 @@ const OTC = {
         'TC': "Construire le point en exploitant les espaces libres du terrain adverse.",
         '1AB': "Élaborer des séquences de jeu tactiquement cohérentes.",
         '2AB': "Concevoir et appliquer une stratégie de jeu personnelle adaptée à l'adversaire."
+    },
+    'Course de haies': {
+        '1AC': "Franchir des haies basses en maintenant une course régulière avec une technique de franchissement de base.",
+        '2AC': "Améliorer sa coordination et son rythme pour franchir des haies à hauteur réglementaire.",
+        '3AC': "Optimiser sa technique de franchissement et maintenir sa vitesse à travers les haies.",
+        'TC': "Maîtriser la technique de franchissement et gérer sa course de haies avec efficacité.",
+        '1AB': "Analyser et améliorer ses points faibles techniques pour progresser vers sa performance optimale.",
+        '2AB': "Atteindre son potentiel maximal en course de haies par une préparation et une exécution optimales."
+    },
+    'Course de relais': {
+        '1AC': "Transmettre le témoin à un partenaire en mouvement sans perdre le témoin.",
+        '2AC': "Améliorer la synchronisation et la vitesse de transmission du témoin.",
+        '3AC': "Optimiser la transmission du témoin à vitesse maximale sans perte.",
+        'TC': "Maîtriser les techniques de transmission et la gestion collective du relais.",
+        '1AB': "Analyser et améliorer les transmissions pour maximiser les performances collectives.",
+        '2AB': "Coordonner efficacement un équipe de relais pour atteindre des performances optimales."
     }
 };
 
@@ -131,6 +147,8 @@ const getSituationReference = (aps, isCollege) => {
         'Tennis de table': 'Match en simple au meilleur des 3 sets de 11 points avec application des règles officielles',
         'Badminton': 'Match en simple au meilleur des 3 sets de 21 points avec application des règles officielles',
         'Course de vitesse': isCollege ? 'Course chronométrée sur 60 mètres en couloir individuel avec départ au signal' : 'Course chronométrée sur 80 mètres en couloir individuel avec départ au signal',
+        'Course de haies': isCollege ? 'Course chronométrée sur 40m haies (hauteur adaptée) en couloir individuel' : 'Course chronométrée sur 60m haies (hauteur 84cm G / 76cm F) en couloir individuel',
+        'Course de relais': 'Course en binôme 2x30m avec transmission du témoin dans la zone de passage',
         'Saut en longueur': 'Concours de 3 essais mesurés avec course d\'élan libre, la meilleure performance est retenue',
         'Saut en hauteur': 'Concours à barres montantes avec 3 essais maximum par hauteur, technique libre',
         'Lancer de poids': 'Concours de 3 essais mesurés depuis le plateau de lancer, la meilleure performance est retenue',
@@ -144,7 +162,7 @@ const getSituationReference = (aps, isCollege) => {
 const getGroupeAPS = (aps) => {
     if (['Handball', 'Football', 'Basketball', 'Volleyball'].includes(aps)) return 'Sports collectifs';
     if (['Tennis de table', 'Badminton'].includes(aps)) return 'Sports de renvoi';
-    if (['Course de vitesse', 'Saut en longueur', 'Saut en hauteur', 'Lancer de poids', 'Course de durée', 'Course en durée'].includes(aps)) return 'Athlétisme';
+    if (['Course de vitesse', 'Course de haies', 'Course de relais', 'Saut en longueur', 'Saut en hauteur', 'Lancer de poids', 'Course de durée', 'Course en durée'].includes(aps)) return 'Athlétisme';
     if (aps === 'Gymnastique') return 'Gymnastique';
     return 'Activité';
 };
@@ -789,6 +807,108 @@ const OBJECTIFS_CYCLE = {
             "Adaptation au style de jeu adverse en cours de match.",
             "Préparation physique spécifique (explosivité, endurance).",
             "Compétition de haut niveau avec objectif de victoire."
+        ]
+    },
+    'Course de haies': {
+        commun: {
+            S1: "Évaluer le niveau initial des élèves (coordination, rythme et confiance) pour diagnostiquer les besoins et constituer des groupes homogènes.",
+            S2: "Comprendre la technique de franchissement des haies (jambe d'attaque, jambe d'esquive) et les règles de la course avec obstacles.",
+            S12: "Mesurer la performance finale et comparer avec le test initial pour valider la progression technique."
+        },
+        debutant: [
+            "Apprendre la posture de course : buste légèrement penché vers l'avant, bras en piston.",
+            "Développer la coordination bras/jambes par des exercices de montée de genoux et talons-fesses.",
+            "S'initier au franchissement de haies basses (30-40cm) sans crainte.",
+            "Apprendre la technique de base : jambe d'attaque tendue, jambe d'esquive pliée vers l'arrière.",
+            "Travailler le placement des appuis avant et après la haie.",
+            "Améliorer le rythme de course entre les haies (3-5 foulées).",
+            "S'initier au départ en position basse et à l'accélération vers la première haie.",
+            "Apprendre à franchir la ligne d'arrivée sans ralentir.",
+            "Pré-test chronométré avec gestion du stress du franchissement."
+        ],
+        moyen: [
+            "Perfectionner la technique de franchissement (jambe d'attaque haute, jambe d'esquive rapide).",
+            "Augmenter progressivement la hauteur des haies (50-60cm).",
+            "Développer le rythme régulier entre les haies (3-5 foulées selon la distance).",
+            "Améliorer la fluidité de la course enchaînant haies et phases de course.",
+            "Travailler la vitesse d'approche et l'accélération après le franchissement.",
+            "S'initier au réglage des haies selon la taille de l'élève.",
+            "Apprendre à maintenir sa trajectoire droite dans son couloir.",
+            "Chronométrage de sections : 1ère haie, entre haies, finish.",
+            "Compétition interne : course chronométrée avec focus technique."
+        ],
+        avance: [
+            "Optimiser la technique de franchissement pour maintenir la vitesse.",
+            "Travailler la puissance du contact au sol avant et après la haie.",
+            "Améliorer la fluidité de la transition haie-course-haie.",
+            "Développer la vitesse de pointe entre les haies (résistance à la décélération).",
+            "Apprendre à ajuster sa distance de prise d'appel selon la haie.",
+            "Perfectionner le timing de la jambe d'esquive (rapidité du ramené).",
+            "Analyse technique : utiliser la vidéo pour corriger les erreurs de franchissement.",
+            "Gestion de la fatigue sur les dernières haies.",
+            "Meeting d'athlétisme scolaire : recherche du record personnel."
+        ],
+        elite: [
+            "Perfectionnement biomécanique du cycle de franchissement.",
+            "Travail spécifique de la puissance explosive des membres inférieurs.",
+            "Optimisation de la vitesse de franchissement (minimisation du temps de vol).",
+            "Entraînement au départ avec pistolet et haies réglementaires.",
+            "Travail de survitesse : course avec haies espacées ou en légère descente.",
+            "Analyse de la fréquence gestuelle et de l'amplitude des foulées.",
+            "Gestion mentale de la course : concentration sur chaque franchissement.",
+            "Planification de l'affûtage avant les compétitions régionales/nationales.",
+            "Test de performance en conditions réelles (vent, opposants de même niveau)."
+        ]
+    },
+    'Course de relais': {
+        commun: {
+            S1: "Évaluer le niveau initial des élèves (réactivité, vitesse et coordination) pour diagnostiquer les besoins et constituer des groupes homogènes.",
+            S2: "Comprendre les techniques de transmission du témoin (main à main), les règles de la zone de passage et les principes de travail collectif.",
+            S12: "Mesurer la performance finale du relais et comparer avec le test initial pour valider la progression collective."
+        },
+        debutant: [
+            "Apprendre la prise correcte du témoin (doigts fermement autour du tube).",
+            "Développer la course avec témoin sans le faire tomber (bras tendu vers l'arrière).",
+            "S'initier à la transmission stationnaire (récepteur immobile, transmetteur en course).",
+            "Travailler la communication verbale (Maintenant !, Vas-y !).",
+            "Améliorer la course en ligne droite sans oscillation du témoin.",
+            "Apprendre à accélérer progressivement dans la zone de transmission.",
+            "S'initier au rôle de chronométreur et d'observateur.",
+            "Transmission en binôme sans perte du témoin sur 20m.",
+            "Pré-test chronométré avec gestion du stress de la transmission."
+        ],
+        moyen: [
+            "Perfectionner la transmission en mouvement (récepteur en course à vitesse réduite).",
+            "Maîtriser la transmission sans ralentir (zone de passage optimisée).",
+            "Développer la synchronisation entre les deux relayeurs.",
+            "Travailler la course d'approche et la sortie de zone de transmission.",
+            "Améliorer le maintien de la vitesse pendant la transmission.",
+            "Apprendre à ajuster sa vitesse pour arriver au bon moment dans la zone.",
+            "S'initier au relais en ligne avec 4 athletes.",
+            "Transmission avec changement de main (gauche/droite).",
+            "Compétition interne : relais 4x30m chronométrés."
+        ],
+        avance: [
+            "Maîtriser la transmission à vitesse maximale sans perte du témoin.",
+            "Optimiser le placement des mains pour une prise optimale du témoin.",
+            "Développer la communication non-verbale (signes, regards) pour la synchronisation.",
+            "Travailler le passage de relais sur distances variables (20m, 30m, 50m).",
+            "Améliorer la transition entre les différentes zones de transmission.",
+            "Perfectionner la sortie de zone pour maintenir la vitesse acquise.",
+            "Apprendre à courir sa portion de relais à vitesse optimale.",
+            "Gestion des relais en compétition : placement et préparation mentale.",
+            "Meeting d'athlétisme scolaire : relais 4x60m avec chronométrage officiel."
+        ],
+        elite: [
+            "Perfectionnement de la transmission express (moins de 0.1s de perte).",
+            "Optimisation de la vitesse de passage dans la zone de transmission.",
+            "Travail spécifique du premier et dernier relayeur (départ et finish).",
+            "Analyse vidéo pour corriger les erreurs de synchronisation.",
+            "Gestion mentale de la pression de compétition en relais.",
+            "Entraînement au départ avec blocs et signaux de compétition.",
+            "Planification stratégique des ordres de passage selon les profils.",
+            "Relayage en conditions réelles (opposants, vent, stress).",
+            "Test de performance en relais avec chronométrage précis."
         ]
     }
 };
