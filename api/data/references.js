@@ -137,12 +137,12 @@ const getSituationReference = (aps, isCollege) => {
         'Volleyball': 'Match 6 contre 6 sur terrain réglementaire (9m x 18m) avec filet à hauteur adaptée, rotation obligatoire et application des règles',
         'Tennis de table': 'Match en simple au meilleur des 3 sets de 11 points avec application des règles officielles de service et comptage',
         'Badminton': 'Match en simple au meilleur des 3 sets de 21 points avec application des règles officielles et arbitrage',
-        'Course de vitesse': isCollege ? 'Course chronométrée sur 60 mètres en couloir individuel avec départ au signal (sifflet ou claquoir)' : 'Course chronométrée sur 80 mètres en couloir individuel avec départ en starting-blocks',
-        'Course de haies': isCollege ? 'Course chronométrée sur 40m haies (hauteur adaptée) en couloir individuel' : 'Course chronométrée sur 60m haies (hauteur 84cm G / 76cm F) en couloir individuel',
-        'Course de relais': 'Course en binôme 2x30m avec transmission du témoin dans la zone de passage',
-        'Saut en longueur': 'Concours de 3 essais mesurés avec course d\'élan libre (12-16 foulées), impulsion sur planche, la meilleure performance est retenue',
+        'Course de vitesse': isCollege ? 'Course chronométrée sur 80 mètres en couloir individuel avec départ au signal (sifflet ou claquoir)' : 'Course chronométrée sur 80 mètres garçons/60 mètres filles en couloir individuel avec départ en starting-blocks',
+        'Course de haies': isCollege ? 'Course chronométrée sur 60m haies (hauteur adaptée) en couloir individuel' : 'Course chronométrée sur 60m haies (hauteur adaptée) en couloir individuel',
+        'Course de relais': 'Course en binôme 2x40m avec transmission du témoin dans la zone de passage',
+        'Saut en longueur': 'Concours de 3 essais mesurés avec course d\'élan libre , impulsion sur planche, la meilleure performance est retenue',
         'Saut en hauteur': 'Concours à barres montantes (intervalles de 5cm) avec 3 essais maximum par hauteur, technique fosbury-flop',
-        'Lancer de poids': isCollege ? 'Concours de 3 essais mesurés avec poids de 3kg (filles) ou 4kg (garçons), technique en translation' : 'Concours de 3 essais mesurés avec poids de 4kg (filles) ou 5kg (garçons), la meilleure performance est retenue',
+        'Lancer de poids': isCollege ? 'Concours de 3 essais mesurés avec poids de 3kg (filles) ou 4kg (garçons), technique en translation' : 'Concours de 3 essais mesurés avec poids de 3kg (filles) ou 4kg (garçons), la meilleure performance est retenue',
         'Course de durée': 'Courir 1000m G / 600m F pour mesurer le temps de passage et observer la gestion de l\'effort',
         'Gymnastique': 'Présentation d\'un enchaînement au sol de 1 minute minimum comprenant les éléments imposés du niveau, évalué selon amplitude, tenue et liaisons'
     };
