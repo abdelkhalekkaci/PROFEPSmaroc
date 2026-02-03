@@ -132,17 +132,17 @@ const VOCABULAIRE_APS = {
 const getSituationReference = (aps, isCollege) => {
     const situations = {
         'Handball': 'Match 7 contre 7 sur terrain réglementaire (40m x 20m) avec application des règles officielles, arbitrage par les élèves et rotation des équipes',
-        'Football': 'Match 7 contre 7 sur terrain réduit (50m x 30m) avec 2 buts réglementaires, application des règles simplifiées et arbitrage',
+        'Football': 'Match 5 contre 5 sur terrain réduit (40m x 20m) avec 2 buts réglementaires, application des règles simplifiées et arbitrage',
         'Basketball': 'Match 5 contre 5 sur demi-terrain avec panier, application des règles officielles (marcher, reprise, fautes) et arbitrage par les élèves',
         'Volleyball': 'Match 6 contre 6 sur terrain réglementaire (9m x 18m) avec filet à hauteur adaptée, rotation obligatoire et application des règles',
         'Tennis de table': 'Match en simple au meilleur des 3 sets de 11 points avec application des règles officielles de service et comptage',
         'Badminton': 'Match en simple au meilleur des 3 sets de 21 points avec application des règles officielles et arbitrage',
-        'Course de vitesse': isCollege ? 'Course chronométrée sur 60 mètres en couloir individuel avec départ au signal (sifflet ou claquoir)' : 'Course chronométrée sur 80 mètres en couloir individuel avec départ en starting-blocks',
-        'Course de haies': isCollege ? 'Course chronométrée sur 40m haies (hauteur adaptée) en couloir individuel' : 'Course chronométrée sur 60m haies (hauteur 84cm G / 76cm F) en couloir individuel',
-        'Course de relais': 'Course en binôme 2x30m avec transmission du témoin dans la zone de passage',
-        'Saut en longueur': 'Concours de 3 essais mesurés avec course d\'élan libre (12-16 foulées), impulsion sur planche, la meilleure performance est retenue',
+        'Course de vitesse': isCollege ? 'Course chronométrée sur 80 mètres en couloir individuel avec départ au signal (sifflet ou claquoir)' : 'Course chronométrée sur 80 mètres Garçons/60 mètres Filles en couloir individuel avec départ en starting-blocks',
+        'Course de haies': isCollege ? 'Course chronométrée sur 60m haies (hauteur adaptée) en couloir individuel' : 'Course chronométrée sur 60m haies (hauteur 60cm G / 50cm F) en couloir individuel',
+        'Course de relais': 'Course en binôme 2x40m avec transmission du témoin dans la zone de transmission',
+        'Saut en longueur': 'Concours de 3 essais mesurés avec course d\'élan libre , impulsion sur planche, la meilleure performance est retenue',
         'Saut en hauteur': 'Concours à barres montantes (intervalles de 5cm) avec 3 essais maximum par hauteur, technique fosbury-flop',
-        'Lancer de poids': isCollege ? 'Concours de 3 essais mesurés avec poids de 3kg (filles) ou 4kg (garçons), technique en translation' : 'Concours de 3 essais mesurés avec poids de 4kg (filles) ou 5kg (garçons), la meilleure performance est retenue',
+        'Lancer de poids': isCollege ? 'Concours de 3 essais mesurés avec poids de 3kg (filles) ou 4kg (garçons), technique en translation' : 'Concours de 3 essais mesurés avec poids de 3kg (filles) ou 4kg (garçons), la meilleure performance est retenue',
         'Course de durée': 'Courir 1000m G / 600m F pour mesurer le temps de passage et observer la gestion de l\'effort',
         'Gymnastique': 'Présentation d\'un enchaînement au sol de 1 minute minimum comprenant les éléments imposés du niveau, évalué selon amplitude, tenue et liaisons'
     };
@@ -150,8 +150,8 @@ const getSituationReference = (aps, isCollege) => {
 };
 
 const getGroupeAPS = (aps) => {
-    if (['Handball', 'Football', 'Basketball', 'Volleyball'].includes(aps)) return 'Sports collectifs';
-    if (['Tennis de table', 'Badminton'].includes(aps)) return 'Sports de renvoi';
+    if (['Handball', 'Football', 'Basketball'].includes(aps)) return 'Sports collectifs';
+    if (['Tennis de table', 'Badminton', 'Volleyball'].includes(aps)) return 'Sports de renvoi';
     if (['Course de vitesse', 'Course de haies', 'Course de relais', 'Saut en longueur', 'Saut en hauteur', 'Lancer de poids', 'Course de durée', 'Course en durée'].includes(aps)) return 'Athlétisme';
     if (aps === 'Gymnastique') return 'Gymnastique';
     return 'Activité physique';
@@ -163,8 +163,8 @@ const CRITERES_OBS = {
     'Basketball': { criteres: [{ nom: 'Dribble', sous: ['Tête haute', 'Yeux balle'] }, { nom: 'Passe', sous: ['Précise', 'Interceptée'] }, { nom: 'Tir', sous: ['Équilibré', 'Déséquil.'] }, { nom: 'Démarquage', sous: ['Actif', 'Statique'] }] },
     'Volleyball': { criteres: [{ nom: 'Manchette', sous: ['Bras tendus', 'Pliés'] }, { nom: 'Touche', sous: ['Haute', 'Basse'] }, { nom: 'Service', sous: ['Réussi', 'Faute'] }, { nom: 'Placement', sous: ['Anticipé', 'Retard'] }] },
     'Course de vitesse': { criteres: [{ nom: 'Départ', sous: ['Réactif', 'Lent'] }, { nom: 'Accélération', sous: ['Progress.', 'Brutale'] }, { nom: 'Course', sous: ['Axée', 'Désaxée'] }, { nom: 'Finish', sous: ['Engagé', 'Relâché'] }] },
-    'Course de haies': { criteres: [{ nom: 'Départ', sous: ['Réactif', 'Lent'] }, { nom: 'Rythme', sous: ['Régulier', 'Irrégulier'] }, { nom: 'Franchiss.', sous: ['Efficient', 'Ralentit'] }, { nom: 'Finish', sous: ['Engagé', 'Relâché'] }] },
-    'Course de relais': { criteres: [{ nom: 'Départ', sous: ['Réactif', 'Lent'] }, { nom: 'Course', sous: ['Rapide', 'Lente'] }, { nom: 'Transmission', sous: ['Réussie', 'Ratée'] }, { nom: 'Zone', sous: ['Respectée', 'Faute'] }] },
+   'Course de haies': { criteres: [{ nom: 'Départ', sous: ['Réactif', 'Lent'] }, { nom: 'Rythme', sous: ['Régulier', 'Irrégulier'] }, { nom: 'Franchiss.', sous: ['Efficient', 'Ralentit'] }, { nom: 'Finish', sous: ['Engagé', 'Relâché'] }, { nom: 'Performance', sous: ['Efficacité technique', '$temps = Réel - Théorique$'] }
+    'Course de relais': { criteres: [{ nom: 'Départ', sous: ['Réactif', 'Lent'] }, { nom: 'Course', sous: ['Rapide', 'Lente'] }, { nom: 'Transmission', sous: ['Réussie', 'Ratée'] }, { nom: 'Zone', sous: ['Respectée', 'Faute'] }, { nom: 'Performance', sous: ['Gain au passage', '$temps = Réel - Théorique$'] }],
     'Saut en longueur': { criteres: [{ nom: 'Course', sous: ['Accélérée', 'Irrégulière'] }, { nom: 'Impulsion', sous: ['sur', 'avant', 'mordu'] }, { nom: 'Envol', sous: ['Équilibré', 'Déséquil.'] }, { nom: 'Réception', sous: ['Stable', 'Chute'] }] },
     'Saut en hauteur': { criteres: [{ nom: 'Course', sous: ['Courbe', 'Droite'] }, { nom: 'Impulsion', sous: ['Pied ext.', 'Autre'] }, { nom: 'Franchis.', sous: ['Dorsal', 'Autre'] }, { nom: 'Réception', sous: ['Dos', 'Danger'] }] },
     'Course de durée': { criteres: [{ nom: 'Régularité', sous: ['Constante', 'Variable'] }, { nom: 'Allure', sous: ['Adaptée', 'Inadaptée'] }, { nom: 'Posture', sous: ['Correcte', 'Effondrée'] }, { nom: 'Finish', sous: ['Accéléré', 'Ralenti'] }] },
