@@ -386,65 +386,177 @@ const FALLBACKS = {
         cs: '• Performance : Différence = Réel (Hauteur sautée) - Théorique (Taille - 40cm)\n• Réussir 2 franchissements sur 3 à sa hauteur maximale\n• 0 refus de saut (arrêt devant la barre)\n• Réception sécurisée au centre du tapis'
     }
 };
-// Schémas SVG colorés pour les situations - Taille augmentée avec légende
+/* =========================================================
+   SCHEMA SVG – VERSION PRO UNIQUE
+   Copier / Coller TEL QUEL
+   ========================================================= */
+
+/* ---------- Base SVG commune ---------- */
+const svgWrapper = (content, title, legend) => `
+<div style="text-align:center;margin:15px 0;">
+<svg viewBox="0 0 300 180" style="width:100%;max-width:480px">
+
+<defs>
+  <filter id="shadow">
+    <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.3"/>
+  </filter>
+  <marker id="arrow" markerWidth="8" markerHeight="8"
+          refX="6" refY="3" orient="auto">
+    <path d="M0,0 L6,3 L0,6 Z" fill="#333"/>
+  </marker>
+</defs>
+
+${content}
+
+<text x="150" y="170" text-anchor="middle"
+      font-size="11" font-weight="bold">${title}</text>
+
+</svg>
+
+<p style="font-size:0.85rem;color:#555;font-style:italic">
+${legend}
+</p>
+</div>
+`;
+
+/* ---------- Outils graphiques ---------- */
+const terrain = (color) =>
+  `<rect x="10" y="10" width="280" height="160"
+    fill="${color}" stroke="#2E7D32" stroke-width="3" rx="8"/>`;
+
+const zone = (x,y,w,h,label) => `
+<rect x="${x}" y="${y}" width="${w}" height="${h}"
+ fill="#FFD54F" opacity="0.25"
+ stroke="#F9A825" stroke-dasharray="6,4"/>
+<text x="${x + w/2}" y="${y - 5}" font-size="10"
+ text-anchor="middle">${label}</text>`;
+
+const joueur = (x,y,color,label) => `
+<g filter="url(#shadow)">
+  <circle cx="${x}" cy="${y}" r="13" fill="${color}"/>
+  <text x="${x}" y="${y+4}" fill="#fff"
+   font-size="10" text-anchor="middle">${label}</text>
+</g>`;
+
+const fleche = (d) =>
+  `<path d="${d}" stroke="#333"
+   stroke-width="2.5" fill="none"
+   marker-end="url(#arrow)"/>`;
+
+/* =========================================================
+   SCHEMAS – TOUS LES SPORTS
+   ========================================================= */
+
 const SCHEMAS = {
-    'Handball': {
-        1: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#90EE90" stroke="#228B22" stroke-width="3" rx="8"/><rect x="10" y="65" width="35" height="45" fill="none" stroke="#228B22" stroke-width="3"/><rect x="255" y="65" width="35" height="45" fill="none" stroke="#228B22" stroke-width="3"/><circle cx="90" cy="55" r="12" fill="#c1272d"/><text x="90" y="60" text-anchor="middle" fill="white" font-size="12" font-weight="bold">A</text><circle cx="90" cy="120" r="12" fill="#c1272d"/><text x="90" y="125" text-anchor="middle" fill="white" font-size="12" font-weight="bold">A</text><circle cx="150" cy="88" r="12" fill="#c1272d"/><text x="150" y="93" text-anchor="middle" fill="white" font-size="12" font-weight="bold">A</text><circle cx="120" cy="88" r="12" fill="#c1272d"/><text x="120" y="93" text-anchor="middle" fill="white" font-size="12" font-weight="bold">A</text><circle cx="195" cy="72" r="12" fill="#1565c0"/><text x="195" y="77" text-anchor="middle" fill="white" font-size="12" font-weight="bold">D</text><circle cx="195" cy="105" r="12" fill="#1565c0"/><text x="195" y="110" text-anchor="middle" fill="white" font-size="12" font-weight="bold">D</text><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">4 Attaquants vs 2 Défenseurs</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">🔴 Attaquants (A) | 🔵 Défenseurs (D) | Zone de buts en blanc</p></div>',
-        2: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#90EE90" stroke="#228B22" stroke-width="3" rx="8"/><rect x="10" y="65" width="35" height="45" fill="none" stroke="#228B22" stroke-width="3"/><rect x="255" y="65" width="35" height="45" fill="none" stroke="#228B22" stroke-width="3"/><circle cx="75" cy="50" r="10" fill="#c1272d"/><circle cx="75" cy="88" r="10" fill="#c1272d"/><circle cx="75" cy="126" r="10" fill="#c1272d"/><circle cx="120" cy="69" r="10" fill="#c1272d"/><circle cx="120" cy="107" r="10" fill="#c1272d"/><circle cx="180" cy="50" r="10" fill="#1565c0"/><circle cx="180" cy="88" r="10" fill="#1565c0"/><circle cx="180" cy="126" r="10" fill="#1565c0"/><circle cx="225" cy="69" r="10" fill="#1565c0"/><circle cx="225" cy="107" r="10" fill="#1565c0"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Match 5 vs 5</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">🔴 Équipe attaquante | 🔵 Équipe défensive | Terrain 40m x 20m</p></div>'
-    },
-    'Football': {
-        1: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#90EE90" stroke="#228B22" stroke-width="3" rx="8"/><rect x="10" y="55" width="30" height="60" fill="none" stroke="#228B22" stroke-width="3"/><rect x="260" y="55" width="30" height="60" fill="none" stroke="#228B22" stroke-width="3"/><circle cx="150" cy="90" r="22" fill="none" stroke="#228B22" stroke-width="2"/><circle cx="82" cy="55" r="12" fill="#c1272d"/><circle cx="82" cy="125" r="12" fill="#c1272d"/><circle cx="127" cy="72" r="12" fill="#c1272d"/><circle cx="127" cy="108" r="12" fill="#c1272d"/><circle cx="195" cy="80" r="12" fill="#1565c0"/><circle cx="195" cy="110" r="12" fill="#1565c0"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">4 vs 2 - Progression vers le but</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">🔴 Attaquants (4) | 🔵 Défenseurs (2) | Cercle central et surfaces</p></div>',
-        2: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#90EE90" stroke="#228B22" stroke-width="3" rx="8"/><rect x="10" y="55" width="30" height="60" fill="none" stroke="#228B22" stroke-width="3"/><rect x="260" y="55" width="30" height="60" fill="none" stroke="#228B22" stroke-width="3"/><circle cx="60" cy="90" r="9" fill="#c1272d"/><circle cx="105" cy="50" r="9" fill="#c1272d"/><circle cx="105" cy="130" r="9" fill="#c1272d"/><circle cx="135" cy="72" r="9" fill="#c1272d"/><circle cx="135" cy="108" r="9" fill="#c1272d"/><circle cx="240" cy="90" r="9" fill="#1565c0"/><circle cx="195" cy="50" r="9" fill="#1565c0"/><circle cx="195" cy="130" r="9" fill="#1565c0"/><circle cx="165" cy="72" r="9" fill="#1565c0"/><circle cx="165" cy="108" r="9" fill="#1565c0"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Match 5 vs 5</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">🔴 Équipe 1 | 🔵 Équipe 2 | Terrain réduit 50m x 30m</p></div>'
-    },
-    'Basketball': {
-        1: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#DEB887" stroke="#8B4513" stroke-width="3" rx="8"/><circle cx="262" cy="90" r="30" fill="none" stroke="#8B4513" stroke-width="3"/><rect x="255" y="75" width="35" height="30" fill="none" stroke="#8B4513" stroke-width="3"/><circle cx="90" cy="55" r="12" fill="#c1272d"/><circle cx="90" cy="125" r="12" fill="#c1272d"/><circle cx="135" cy="90" r="12" fill="#c1272d"/><circle cx="195" cy="72" r="12" fill="#1565c0"/><circle cx="195" cy="108" r="12" fill="#1565c0"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">3 vs 2 - Passe et va</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">🔴 Attaquants (3) | 🔵 Défenseurs (2) | Panier et cercle de tir</p></div>',
-        2: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#DEB887" stroke="#8B4513" stroke-width="3" rx="8"/><circle cx="262" cy="90" r="30" fill="none" stroke="#8B4513" stroke-width="3"/><circle cx="75" cy="55" r="9" fill="#c1272d"/><circle cx="75" cy="125" r="9" fill="#c1272d"/><circle cx="120" cy="72" r="9" fill="#c1272d"/><circle cx="120" cy="108" r="9" fill="#c1272d"/><circle cx="180" cy="55" r="9" fill="#1565c0"/><circle cx="180" cy="125" r="9" fill="#1565c0"/><circle cx="210" cy="72" r="9" fill="#1565c0"/><circle cx="210" cy="108" r="9" fill="#1565c0"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">4 vs 4 Match</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">🔴 Équipe 1 | 🔵 Équipe 2 | Demi-terrain avec panier</p></div>'
-    },
-    'Volleyball': {
-        1: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#F0E68C" stroke="#DAA520" stroke-width="3" rx="8"/><line x1="150" y1="10" x2="150" y2="170" stroke="#333" stroke-width="4"/><circle cx="75" cy="55" r="12" fill="#c1272d"/><text x="75" y="60" text-anchor="middle" fill="white" font-size="10" font-weight="bold">R</text><circle cx="75" cy="125" r="12" fill="#c1272d"/><text x="75" y="130" text-anchor="middle" fill="white" font-size="10" font-weight="bold">P</text><circle cx="112" cy="90" r="12" fill="#c1272d"/><text x="112" y="95" text-anchor="middle" fill="white" font-size="10" font-weight="bold">A</text><circle cx="225" cy="55" r="12" fill="#1565c0"/><circle cx="225" cy="125" r="12" fill="#1565c0"/><circle cx="187" cy="90" r="12" fill="#1565c0"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">3 vs 3 - Construction en 3 touches</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">🔴 Équipe 1 (R=Réception, P=Passe, A=Attaque) | 🔵 Équipe 2 | Filet central</p></div>',
-        2: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#F0E68C" stroke="#DAA520" stroke-width="3" rx="8"/><line x1="150" y1="10" x2="150" y2="170" stroke="#333" stroke-width="4"/><circle cx="52" cy="42" r="9" fill="#c1272d"/><circle cx="97" cy="42" r="9" fill="#c1272d"/><circle cx="52" cy="90" r="9" fill="#c1272d"/><circle cx="97" cy="90" r="9" fill="#c1272d"/><circle cx="202" cy="42" r="9" fill="#1565c0"/><circle cx="247" cy="42" r="9" fill="#1565c0"/><circle cx="202" cy="90" r="9" fill="#1565c0"/><circle cx="247" cy="90" r="9" fill="#1565c0"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">4 vs 4 Match</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">🔴 Équipe 1 | 🔵 Équipe 2 | Terrain 9m x 18m avec filet</p></div>'
-    },
-    'Course de vitesse': {
-        1: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#E8D5B7" stroke="#8B4513" stroke-width="3" rx="8"/><line x1="30" y1="150" x2="270" y2="150" stroke="#333" stroke-width="4"/><line x1="30" y1="30" x2="30" y2="150" stroke="#c1272d" stroke-width="3" stroke-dasharray="6,6"/><line x1="90" y1="30" x2="90" y2="150" stroke="#666" stroke-width="2"/><line x1="150" y1="30" x2="150" y2="150" stroke="#666" stroke-width="2"/><line x1="210" y1="30" x2="210" y2="150" stroke="#666" stroke-width="2"/><circle cx="37" cy="127" r="9" fill="#1565c0"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Parcours d\'habiletés - 4 stations</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">🔵 Coureur | Lignes de couloirs | Départ signalé en rouge</p></div>',
-        2: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#E8D5B7" stroke="#8B4513" stroke-width="3" rx="8"/><line x1="30" y1="150" x2="270" y2="150" stroke="#333" stroke-width="4"/><line x1="30" y1="30" x2="30" y2="150" stroke="#c1272d" stroke-width="3"/><rect x="22" y="22" width="16" height="16" fill="#c1272d"/><circle cx="120" cy="127" r="9" fill="#1565c0"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Départ réactif - 20m</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">🔵 Coureur | Ligne de départ (rouge) | Distance 20m</p></div>',
-        3: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#E8D5B7" stroke="#8B4513" stroke-width="3" rx="8"/><line x1="30" y1="150" x2="270" y2="150" stroke="#333" stroke-width="4"/><line x1="30" y1="30" x2="30" y2="150" stroke="#c1272d" stroke-width="3"/><line x1="255" y1="30" x2="255" y2="150" stroke="#c1272d" stroke-width="3"/><rect x="22" y="22" width="16" height="16" fill="#c1272d"/><rect x="247" y="22" width="16" height="16" fill="#c1272d"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Course complète - 60m</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">Départ (rouge) | Arrivée (rouge) | Distance 60m</p></div>'
-    },
-    'Course de haies': {
-        1: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#E8D5B7" stroke="#8B4513" stroke-width="3" rx="8"/><line x1="30" y1="150" x2="270" y2="150" stroke="#333" stroke-width="4"/><rect x="60" y="105" width="6" height="38" fill="#c1272d"/><rect x="120" y="105" width="6" height="38" fill="#c1272d"/><rect x="180" y="105" width="6" height="38" fill="#c1272d"/><rect x="240" y="105" width="6" height="38" fill="#c1272d"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Parcours d\'habiletés - Haies basses</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">Haies basses (rouge) | 4 obstacles à franchir</p></div>',
-        2: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#E8D5B7" stroke="#8B4513" stroke-width="3" rx="8"/><line x1="30" y1="150" x2="270" y2="150" stroke="#333" stroke-width="4"/><rect x="75" y="98" width="6" height="45" fill="#c1272d"/><rect x="135" y="98" width="6" height="45" fill="#c1272d"/><rect x="195" y="98" width="6" height="45" fill="#c1272d"/><circle cx="108" cy="120" r="7" fill="#1565c0"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Circuit technique - 5 haies</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">🔵 Coureur | Haies (rouge) | Technique de franchissement</p></div>',
-        3: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#E8D5B7" stroke="#8B4513" stroke-width="3" rx="8"/><line x1="30" y1="150" x2="270" y2="150" stroke="#333" stroke-width="4"/><rect x="45" y="90" width="6" height="53" fill="#c1272d"/><rect x="90" y="90" width="6" height="53" fill="#c1272d"/><rect x="135" y="90" width="6" height="53" fill="#c1272d"/><rect x="180" y="90" width="6" height="53" fill="#c1272d"/><rect x="225" y="90" width="6" height="53" fill="#c1272d"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Course complète - 40/60m haies</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">5 haies à franchir | Distance intermédiaire</p></div>'
-    },
-    'Course de relais': {
-        1: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#E8D5B7" stroke="#8B4513" stroke-width="3" rx="8"/><line x1="30" y1="150" x2="270" y2="150" stroke="#333" stroke-width="4"/><rect x="75" y="112" width="60" height="30" fill="#FFD700" stroke="#FFA500" stroke-width="2"/><circle cx="60" cy="127" r="7" fill="#1565c0"/><circle cx="150" cy="127" r="7" fill="#c1272d"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Parcours d\'habiletés - Transmission</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">🔵 Coureur 1 | 🔴 Coureur 2 | Zone de transmission (jaune)</p></div>',
-        2: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#E8D5B7" stroke="#8B4513" stroke-width="3" rx="8"/><line x1="30" y1="150" x2="270" y2="150" stroke="#333" stroke-width="4"/><rect x="90" y="112" width="60" height="30" fill="#FFD700" stroke="#FFA500" stroke-width="2"/><circle cx="75" cy="127" r="7" fill="#1565c0"/><circle cx="165" cy="127" r="7" fill="#c1272d"/><line x1="90" y1="30" x2="90" y2="150" stroke="#666" stroke-dasharray="4,4"/><line x1="150" y1="30" x2="150" y2="150" stroke="#666" stroke-dasharray="4,4"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Zone de transmission - 20m</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">🔵 Coureur 1 | 🔴 Coureur 2 | Zone de passage (jaune)</p></div>',
-        3: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#E8D5B7" stroke="#8B4513" stroke-width="3" rx="8"/><line x1="30" y1="150" x2="270" y2="150" stroke="#333" stroke-width="4"/><rect x="75" y="112" width="60" height="30" fill="#FFD700" stroke="#FFA500" stroke-width="2"/><circle cx="37" cy="127" r="7" fill="#1565c0"/><circle cx="142" cy="127" r="7" fill="#c1272d"/><circle cx="247" cy="127" r="7" fill="#c1272d"/><line x1="75" y1="30" x2="75" y2="150" stroke="#666" stroke-dasharray="4,4"/><line x1="135" y1="30" x2="135" y2="150" stroke="#666" stroke-dasharray="4,4"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Relais complet - 2x30m</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">🔵 Départ | 🔴 Relais | 🔴 Arrivée | 2x30m avec témoin</p></div>'
-    },
-    'Saut en longueur': {
-        1: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#E8D5B7" stroke="#8B4513" stroke-width="3" rx="8"/><line x1="30" y1="150" x2="270" y2="150" stroke="#333" stroke-width="4"/><rect x="75" y="127" width="30" height="8" fill="#c1272d"/><rect x="120" y="105" width="120" height="45" fill="#F4A460" stroke="#8B4513" stroke-width="2"/><circle cx="60" cy="135" r="7" fill="#1565c0"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Parcours d\'habiletés - 4 stations</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">🔵 Coureur | Planche d\'appel (rouge) | Fosse de réception (beige)</p></div>',
-        2: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#E8D5B7" stroke="#8B4513" stroke-width="3" rx="8"/><line x1="30" y1="150" x2="270" y2="150" stroke="#333" stroke-width="4"/><rect x="120" y="127" width="30" height="8" fill="#c1272d"/><rect x="165" y="105" width="90" height="45" fill="#F4A460" stroke="#8B4513" stroke-width="2"/><circle cx="90" cy="120" r="7" fill="#1565c0"/><path d="M 90 120 Q 105 90 127 112" stroke="#1565c0" stroke-width="3" fill="none"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Travail de l\'impulsion</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">🔵 Coureur | Trajectoire de saut | Planche et fosse</p></div>',
-        3: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#E8D5B7" stroke="#8B4513" stroke-width="3" rx="8"/><line x1="30" y1="150" x2="270" y2="150" stroke="#333" stroke-width="4"/><rect x="150" y="127" width="30" height="8" fill="#c1272d"/><rect x="195" y="90" width="75" height="60" fill="#F4A460" stroke="#8B4513" stroke-width="2"/><circle cx="45" cy="135" r="7" fill="#1565c0"/><path d="M 45 135 Q 90 75 150 112 Q 165 120 180 105" stroke="#1565c0" stroke-width="3" fill="none"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Concours complet - 3 essais</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">🔵 Coureur | Course d\'élan complète | 3 essais mesurés</p></div>'
-    },
-    'Saut en hauteur': {
-        1: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#E8D5B7" stroke="#8B4513" stroke-width="3" rx="8"/><rect x="120" y="105" width="60" height="6" fill="#c1272d"/><rect x="112" y="60" width="6" height="51" fill="#666"/><rect x="182" y="60" width="6" height="51" fill="#666"/><rect x="135" y="127" width="90" height="30" fill="#87CEEB" stroke="#4682B4" stroke-width="2"/><circle cx="75" cy="127" r="7" fill="#1565c0"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Parcours d\'habiletés - 4 stations</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">🔵 Coureur | Barre (rouge) | Supports (gris) | Tapis (bleu)</p></div>',
-        2: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#E8D5B7" stroke="#8B4513" stroke-width="3" rx="8"/><rect x="135" y="90" width="60" height="6" fill="#c1272d"/><rect x="127" y="45" width="6" height="51" fill="#666"/><rect x="197" y="45" width="6" height="51" fill="#666"/><rect x="150" y="120" width="90" height="30" fill="#87CEEB" stroke="#4682B4" stroke-width="2"/><path d="M 75 127 Q 105 75 150 82 Q 165 85 165 93" stroke="#1565c0" stroke-width="3" fill="none"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Technique Fosbury-Flop</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">Trajectoire courbe | Impulsion | Rotation dorsale | Réception</p></div>',
-        3: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#E8D5B7" stroke="#8B4513" stroke-width="3" rx="8"/><rect x="135" y="75" width="60" height="6" fill="#c1272d"/><rect x="127" y="30" width="6" height="51" fill="#666"/><rect x="197" y="30" width="6" height="51" fill="#666"/><rect x="150" y="120" width="90" height="30" fill="#87CEEB" stroke="#4682B4" stroke-width="2"/><path d="M 60 135 Q 90 60 150 52 Q 165 75 165 78" stroke="#1565c0" stroke-width="3" fill="none"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Concours - Barres montantes</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">Barres montantes par paliers de 5cm | 3 essais par hauteur</p></div>'
-    },
-    'Lancer de poids': {
-        1: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#E8D5B7" stroke="#8B4513" stroke-width="3" rx="8"/><circle cx="150" cy="127" r="30" fill="none" stroke="#333" stroke-width="3"/><circle cx="150" cy="127" r="5" fill="#c1272d"/><circle cx="90" cy="127" r="7" fill="#1565c0"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Parcours d\'habiletés - 4 stations</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">🔵 Lancer | Cercle de lancer | Zone de chute</p></div>',
-        2: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#E8D5B7" stroke="#8B4513" stroke-width="3" rx="8"/><circle cx="150" cy="127" r="30" fill="none" stroke="#333" stroke-width="3"/><circle cx="150" cy="127" r="5" fill="#c1272d"/><circle cx="105" cy="127" r="7" fill="#1565c0"/><path d="M 105 127 L 127 112 L 150 127" stroke="#1565c0" stroke-width="3" fill="none"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Circuit technique - Translation</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">🔵 Lancer | Position de poussée | Translation dans le cercle</p></div>',
-        3: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#E8D5B7" stroke="#8B4513" stroke-width="3" rx="8"/><circle cx="150" cy="127" r="30" fill="none" stroke="#333" stroke-width="3"/><circle cx="150" cy="127" r="5" fill="#c1272d"/><path d="M 90 127 L 120 105 L 150 127" stroke="#1565c0" stroke-width="3" fill="none"/><line x1="195" y1="127" x2="255" y2="105" stroke="#FFD700" stroke-width="4"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Concours - 3 essais mesurés</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">Lancer | Trajectoire | Mesure de la distance (jaune)</p></div>'
-    },
-    'Course de durée': {
-        1: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#E8D5B7" stroke="#8B4513" stroke-width="3" rx="8"/><ellipse cx="150" cy="90" rx="120" ry="60" fill="none" stroke="#333" stroke-width="3"/><circle cx="45" cy="90" r="6" fill="#c1272d"/><circle cx="150" cy="30" r="6" fill="#c1272d"/><circle cx="255" cy="90" r="6" fill="#c1272d"/><circle cx="150" cy="150" r="6" fill="#c1272d"/><circle cx="90" cy="127" r="7" fill="#1565c0"/><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Parcours d\'habiletés - 4 stations</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">🔵 Coureur | Circuit en boucle | 4 stations de travail</p></div>',
-        2: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#E8D5B7" stroke="#8B4513" stroke-width="3" rx="8"/><ellipse cx="150" cy="90" rx="120" ry="60" fill="none" stroke="#333" stroke-width="3"/><circle cx="150" cy="90" r="7" fill="#1565c0"/><path d="M 150 90 L 150 45" stroke="#c1272d" stroke-width="3"/><text x="150" y="30" text-anchor="middle" fill="#c1272d" font-size="12" font-weight="bold">12-15 min</text><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Allure régulière</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">🔵 Coureur | Durée 12-15 min | Allure contrôlée</p></div>',
-        3: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 180" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="160" fill="#E8D5B7" stroke="#8B4513" stroke-width="3" rx="8"/><ellipse cx="150" cy="90" rx="120" ry="60" fill="none" stroke="#333" stroke-width="3"/><line x1="30" y1="90" x2="60" y2="90" stroke="#c1272d" stroke-width="4"/><line x1="240" y1="90" x2="270" y2="90" stroke="#c1272d" stroke-width="4"/><circle cx="150" cy="90" r="7" fill="#1565c0"/><text x="150" y="30" text-anchor="middle" fill="#c1272d" font-size="12" font-weight="bold">1000m G / 600m F</text><text x="150" y="170" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Test chronométré</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">Départ et arrivée (rouge) | Distance selon le genre</p></div>'
-    },
-    'default': {
-        1: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 150" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="130" fill="#E8E8E8" stroke="#666" stroke-width="3" rx="10"/><text x="150" y="80" text-anchor="middle" fill="#666" font-size="14">Zone de travail - Situation 1</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">Illustration schématique de la situation</p></div>',
-        2: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 150" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="130" fill="#E8E8E8" stroke="#666" stroke-width="3" rx="10"/><text x="150" y="80" text-anchor="middle" fill="#666" font-size="14">Zone de travail - Situation 2</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">Illustration schématique de la situation</p></div>',
-        3: '<div style="text-align:center;margin:15px 0;"><svg viewBox="0 0 300 150" style="width:100%;max-width:450px;height:auto;display:block;margin:0 auto;"><rect x="10" y="10" width="280" height="130" fill="#E8E8E8" stroke="#666" stroke-width="3" rx="10"/><text x="150" y="80" text-anchor="middle" fill="#666" font-size="14">Zone de travail - Situation 3</text></svg><p style="font-size:0.85rem;color:#555;margin-top:8px;font-style:italic;">Illustration schématique de la situation</p></div>'
-    }
+
+  Handball: {
+    1: svgWrapper(
+      `
+      ${terrain('#9CCC65')}
+      ${zone(190,35,70,110,'Zone de tir')}
+
+      ${joueur(90,55,'#c1272d','A1')}
+      ${joueur(90,120,'#c1272d','A2')}
+      ${joueur(120,90,'#c1272d','A3')}
+      ${joueur(140,90,'#c1272d','A4')}
+
+      ${joueur(195,75,'#1565c0','D1')}
+      ${joueur(195,105,'#1565c0','D2')}
+
+      ${fleche('M 90 55 Q 120 35 140 90')}
+      `,
+      '4 Attaquants vs 2 Défenseurs',
+      '🔴 Attaque | 🔵 Défense | Fixer / Donner'
+    )
+  },
+
+  Football: {
+    1: svgWrapper(
+      `
+      ${terrain('#81C784')}
+      ${zone(200,40,70,100,'Zone cible')}
+
+      ${joueur(80,70,'#c1272d','A1')}
+      ${joueur(80,110,'#c1272d','A2')}
+      ${joueur(120,90,'#c1272d','A3')}
+      ${joueur(150,90,'#c1272d','A4')}
+
+      ${joueur(195,80,'#1565c0','D1')}
+      ${joueur(195,100,'#1565c0','D2')}
+
+      ${fleche('M 120 90 L 150 90')}
+      `,
+      '4 vs 2 – Conservation et progression',
+      '🔴 Attaque | 🔵 Défense | Passe'
+    )
+  },
+
+  Basketball: {
+    1: svgWrapper(
+      `
+      ${terrain('#FFECB3')}
+
+      ${joueur(90,70,'#c1272d','A1')}
+      ${joueur(90,110,'#c1272d','A2')}
+      ${joueur(120,90,'#c1272d','A3')}
+
+      ${joueur(180,90,'#1565c0','D1')}
+
+      ${fleche('M 120 90 Q 150 60 180 90')}
+      `,
+      '3 vs 1 – Création de surnombre',
+      '🔴 Attaque | 🔵 Défense | Démarquage'
+    )
+  },
+
+  Volleyball: {
+    1: svgWrapper(
+      `
+      ${terrain('#BBDEFB')}
+
+      ${joueur(80,70,'#c1272d','J1')}
+      ${joueur(80,110,'#c1272d','J2')}
+      ${joueur(120,90,'#c1272d','J3')}
+
+      ${fleche('M 80 70 L 120 90')}
+      `,
+      'Passe – Attaque placée',
+      'Organisation offensive'
+    )
+  },
+
+  Athletisme: {
+    1: svgWrapper(
+      `
+      ${terrain('#E0E0E0')}
+
+      ${joueur(80,90,'#c1272d','C1')}
+      ${joueur(120,90,'#c1272d','C2')}
+      ${joueur(160,90,'#c1272d','C3')}
+      `,
+      'Course de vitesse – Départ',
+      'Alignement et réaction'
+    )
+  },
+
+  default: {
+    1: svgWrapper(
+      `
+      ${terrain('#ECECEC')}
+      `,
+      'Situation non définie',
+      ''
+    )
+  }
+
 };
+
+/* =========================================================
+   FONCTION UNIQUE – NE PAS TOUCHER
+   ========================================================= */
+
+const getSchema = (aps, numSit) =>
+  SCHEMAS[aps]?.[numSit] || SCHEMAS.default[1];
 
 const getSchema = (aps, numSit) => {
     return SCHEMAS[aps] && SCHEMAS[aps][numSit] ? SCHEMAS[aps][numSit] : SCHEMAS['default'][numSit];
