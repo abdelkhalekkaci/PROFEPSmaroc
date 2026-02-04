@@ -370,6 +370,21 @@ const FALLBACKS = {
         cr: '• Course d\'élan en accélération constante\n• Avant-dernier appui plus long que le dernier\n• Buste droit à l\'impulsion\n• Suspension équilibrée',
         cs: '• 0 saut mordu sur 3 tentatives\n• Performance > 3m (F) / 3m50 (G)\n• Réception avec les deux pieds simultanés\n• Précision d\'appel à moins de 10cm de la planche'
     }
+    'Saut en hauteur': {
+    echauf: 'Mobilisation des chevilles et genoux (2 min) | Sauts en extension sur place (3 min) | Course en courbe (8 de chiffres) (3 min)',
+    s1t: 'Course en courbe et impulsion', s1b: 'Transformer la vitesse horizontale en élévation verticale',
+    s1o: 'Sautoir, élastique (pour la sécurité), marques au sol pour le "J"',
+    s1d: 'Apprentissage de la course d\'élan en "J" (5 pas droits, 3 pas en courbe). L\'élève doit déclencher l\'appel sur le pied extérieur à la barre.',
+    s1c: '1. Accélérer sur les 3 derniers appuis\n2. Pencher le corps à l\'opposé de la barre dans la courbe\n3. Appel vertical (ne pas plonger vers le tapis)\n4. Montée du genou libre vers le haut',
+    s1v: 'Simplifier: Saut en ciseau sans courbe | Complexifier: Franchissement en Fosbury-Flop complet',
+    s2t: 'Concours de performance', s2b: 'Franchir la barre la plus haute possible',
+    s2o: 'Sautoir officiel, barre rigide, 3 essais par hauteur',
+    s2d: 'Compétition par montées de barre. L\'élève gère ses essais et ses marques. Analyse de la trajectoire au-dessus de la barre.',
+    s2c: '1. Regard porté au-dessus de la barre\n2. Rotation des épaules lors du franchissement\n3. Esquive des talons (relever les pieds à la fin)\n4. Réception sur le haut du dos (épaules)',
+    s2v: 'Simplifier: Hauteur fixe pour stabiliser la technique | Complexifier: Concours avec nombre d\'essais limité',
+    cr: '• Rythme d\'élan accéléré (lent-vif)\n• Impulsion verticale et non longitudinale\n• Alignement segmentaire à l\'appel\n• Franchissement rasant (corps en arc)',
+    cs: '• Performance : Différence = Réel (Hauteur sautée) - Théorique (Taille - 40cm)\n• Réussir 2 franchissements sur 3 à sa hauteur maximale\n• 0 refus de saut (arrêt devant la barre)\n• Réception sécurisée au centre du tapis'
+}
 };
 // Schémas SVG colorés pour les situations - Taille augmentée avec légende
 const SCHEMAS = {
