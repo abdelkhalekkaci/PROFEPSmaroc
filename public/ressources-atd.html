@@ -3,10 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Télécharger les analyses et traitements didactiques (ATD) des APSA au Maroc : Football, Basketball, Handball, Volley, Athlétisme et Gymnastique.">
-    <title>Analyses et Traitements Didactiques (PDF) - Prof EPS</title>
+    
+    <title>Analyses et Traitement Didactique EPS Maroc (PDF) - Prof EPS</title>
+    <meta name="description" content="Téléchargez gratuitement les analyses et traitements didactiques (ATD) des APS au Maroc : Football, Basketball, Handball, Volley-ball, Gymnastique et Athlétisme pour professeurs et étudiants CRMEF.">
+    <meta name="keywords" content="ATD EPS Maroc, Analyse didactique football, Traitement didactique basketball, EPS Maroc PDF, préparation concours CRMEF, examen professionnel EPS, dytactique EPS">
+    <meta name="author" content="Prof EPS">
+    
     <link rel="icon" type="image/png" href="/images/prof_eps.png">
+    
     <style>
+        /* --- Styles de base et Variables --- */
         :root {
             --primary: #c1272d;
             --secondary: #006233;
@@ -15,87 +21,74 @@
             --bg-primary: #ffffff;
             --bg-secondary: #f8f9fa;
             --border: #e2e8f0;
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
             --radius-lg: 12px;
             --transition: all 0.3s ease;
         }
 
-        body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; margin: 0; }
-        
-        /* Layout */
-        .container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
-        .header { text-align: center; padding: 120px 2rem 3rem; background: linear-gradient(135deg, rgba(193,39,45,0.05), rgba(0,98,51,0.05)); }
-        .header h1 { font-size: 2.5rem; margin-bottom: 1rem; color: var(--text-primary); }
-        .rtl-title { direction: rtl; font-size: 1.5rem; color: var(--primary); display: block; margin-top: 10px; }
+        body { font-family: 'Inter', sans-serif; margin: 0; color: var(--text-primary); background: var(--bg-primary); }
+        a { text-decoration: none; color: inherit; }
 
-        /* Grid System */
-        .atd-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+        /* --- Navbar (Identique aux autres pages) --- */
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1rem 2rem; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo img { height: 40px; }
+        .nav-menu { display: flex; align-items: center; gap: 2rem; }
+        .nav-link { font-size: 0.9375rem; font-weight: 500; color: var(--text-secondary); }
+        .nav-link:hover { color: var(--primary); }
+        .nav-cta { padding: 0.5rem 1.5rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; font-weight: 600; border-radius: 50px; }
 
-        /* APS Card Styles */
-        .aps-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
+        /* --- Header & Intro --- */
+        .article-header { padding: 140px 2rem 3rem; background: linear-gradient(135deg, rgba(193,39,45,0.05), rgba(0,98,51,0.05)); text-align: center; }
+        .header-content { max-width: 800px; margin: 0 auto; }
+        .header-content h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .rtl-text { direction: rtl; text-align: center; font-family: 'Segoe UI', Tahoma, sans-serif; }
+
+        /* --- Grid & Cards --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
+        .atd-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
+        .aps-card { 
+            background: white; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; 
+            transition: var(--transition); border-top: 5px solid var(--primary);
         }
-
-        .aps-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-            border-color: var(--primary);
+        .aps-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--primary); }
+        .aps-card h3 { margin: 0 0 10px 0; display: flex; align-items: center; gap: 10px; }
+        .aps-card p { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem; }
+        .btn-download { 
+            display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0.8rem; 
+            background: var(--bg-secondary); border-radius: 8px; font-weight: 600; transition: var(--transition); 
         }
+        .btn-download:hover { background: var(--primary); color: white; }
 
-        .aps-card::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-        }
+        /* --- Footer --- */
+        .footer { background: #1a1a2e; color: white; padding: 4rem 2rem 2rem; margin-top: 4rem; }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; }
+        .footer-logo img { height: 40px; filter: brightness(0) invert(1); margin-bottom: 1rem; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 3rem; padding-top: 2rem; text-align: center; font-size: 0.8rem; color: rgba(255,255,255,0.5); }
 
-        .aps-info h3 { margin: 0 0 0.5rem 0; font-size: 1.25rem; display: flex; align-items: center; gap: 10px; }
-        .aps-info p { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem; }
-
-        .btn-download {
-            margin-top: auto;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 0.75rem;
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            font-weight: 600;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: var(--transition);
-            border: 1px solid var(--border);
-        }
-
-        .btn-download:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        .badge { font-size: 0.75rem; padding: 4px 8px; background: #eee; border-radius: 4px; font-weight: bold; }
-
-        /* Footer simple */
-        footer { text-align: center; padding: 4rem 2rem; color: var(--text-secondary); border-top: 1px solid var(--border); margin-top: 4rem; }
-
-        @media (max-width: 768px) { .header h1 { font-size: 1.8rem; } }
+        @media (max-width: 768px) { .nav-menu { display: none; } .footer-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <header class="header">
-        <div class="container">
-            <h1>Analyses et Traitements Didactiques (ATD)</h1>
-            <span class="rtl-title">تحليل ومعالجة الأنشطة البدنية والرياضية</span>
-            <p style="max-width: 600px; margin: 1.5rem auto;">Téléchargez les fiches théoriques complètes pour chaque activité. Indispensable pour la préparation des concours et des examens professionnels.</p>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo"><img src="/images/prof_eps.png" alt="Prof EPS Logo"></a>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="blog.html" class="nav-link">Blog</a>
+                <a href="generateur.html" class="nav-cta">✨ Créer une fiche</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="header-content">
+            <h1>Analyses & Traitement Didactique</h1>
+            <h2 class="rtl-text" style="color: var(--primary);">تحليل ومعالجة الأنشطة البدنية والرياضية</h2>
+            <p style="color: var(--text-secondary); margin-top: 20px;">
+                Une base de données complète pour les professeurs d'EPS au Maroc. Téléchargez les fiches théoriques (ATD) indispensables pour la planification de vos cycles et la préparation des concours (CRMEF) et examens professionnels.
+            </p>
         </div>
     </header>
 
@@ -103,64 +96,65 @@
         <div class="atd-grid">
             
             <div class="aps-card">
-                <div class="aps-info">
-                    <h3>⚽ Football</h3>
-                    <span class="badge">Sports Collectifs</span>
-                    <p>Analyse de la logique interne, problèmes fondamentaux et thèmes d'étude du 1er au 3ème niveau.</p>
-                </div>
-                <a href="https://drive.google.com/drive/u/1/folders/1ImXqrYiOR6nh0cXNQ8cU05nc2UK8z-j3" class="btn-download">📥 Télécharger PDF</a>
+                <h3>⚽ Football</h3>
+                <p>Logique interne, problèmes fondamentaux, thèmes d'étude et situations de référence pour les 3 niveaux du collège.</p>
+                <a href="https://drive.google.com/drive/u/1/folders/1ImXqrYiOR6nh0cXNQ8cU05nc2UK8z-j3" class="btn-download">📥 Télécharger l'ATD</a>
+            </div>
+
+            <div class="aps-card" style="border-top-color: var(--secondary);">
+                <h3>🏀 Basketball</h3>
+                <p>Analyse didactique complète orientée vers les compétences visées par les OP 2007/2009 au Maroc.</p>
+                <a href="https://drive.google.com/drive/u/1/folders/1ImXqrYiOR6nh0cXNQ8cU05nc2UK8z-j3" class="btn-download">📥 Télécharger l'ATD</a>
             </div>
 
             <div class="aps-card">
-                <div class="aps-info">
-                    <h3>🏀 Basketball</h3>
-                    <span class="badge">Sports Collectifs</span>
-                    <p>Fiche complète sur le traitement didactique du Basketball selon les Orientations Pédagogiques.</p>
-                </div>
-                <a href="https://drive.google.com/drive/u/1/folders/1ImXqrYiOR6nh0cXNQ8cU05nc2UK8z-j3" class="btn-download">📥 Télécharger PDF</a>
+                <h3>🤸 Gymnastique au sol</h3>
+                <p>Traitement didactique incluant la sécurité, les familles d'éléments et les grilles d'évaluation par niveau.</p>
+                <a href="https://drive.google.com/drive/u/1/folders/1ImXqrYiOR6nh0cXNQ8cU05nc2UK8z-j3" class="btn-download">📥 Télécharger l'ATD</a>
+            </div>
+
+            <div class="aps-card" style="border-top-color: var(--secondary);">
+                <h3>🏃 Athlétisme (Vitesse)</h3>
+                <p>Analyse des phases de la course de vitesse et principes d'entraînement scolaire.</p>
+                <a href="https://drive.google.com/drive/u/1/folders/1ImXqrYiOR6nh0cXNQ8cU05nc2UK8z-j3" class="btn-download">📥 Télécharger l'ATD</a>
             </div>
 
             <div class="aps-card">
-                <div class="aps-info">
-                    <h3>🤾 Handball</h3>
-                    <span class="badge">Sports Collectifs</span>
-                    <p>Analyse technique, tactique et situations de référence pour le Handball scolaire.</p>
-                </div>
-                <a href="https://drive.google.com/drive/u/1/folders/1ImXqrYiOR6nh0cXNQ8cU05nc2UK8z-j3" class="btn-download">📥 Télécharger PDF</a>
+                <h3>🤾 Handball</h3>
+                <p>Principes d'attaque et de défense, gestion du porteur et non-porteur de balle en milieu scolaire.</p>
+                <a href="https://drive.google.com/drive/u/1/folders/1ImXqrYiOR6nh0cXNQ8cU05nc2UK8z-j3" class="btn-download">📥 Télécharger l'ATD</a>
             </div>
 
-            <div class="aps-card">
-                <div class="aps-info">
-                    <h3>🏐 Volleyball</h3>
-                    <span class="badge">Sports Collectifs</span>
-                    <p>Traitement didactique : de la réception à l'attaque. Modélisation des niveaux d'apprentissage.</p>
-                </div>
-                <a href="https://drive.google.com/drive/u/1/folders/1ImXqrYiOR6nh0cXNQ8cU05nc2UK8z-j3" class="btn-download">📥 Télécharger PDF</a>
-            </div>
-
-            <div class="aps-card">
-                <div class="aps-info">
-                    <h3>🏃 Athlétisme</h3>
-                    <span class="badge">Sports de Performance</span>
-                    <p>Vitesse, Hauteur, Longueur et Lancer de poids. Analyse des principes biomécaniques.</p>
-                </div>
-                <a href="https://drive.google.com/drive/u/1/folders/1ImXqrYiOR6nh0cXNQ8cU05nc2UK8z-j3" class="btn-download">📥 Télécharger PDF</a>
-            </div>
-
-            <div class="aps-card">
-                <div class="aps-info">
-                    <h3>🤸 Gymnastique au sol</h3>
-                    <span class="badge">Sports Artistiques</span>
-                    <p>Logique interne, sécurité (aide et parade) et classification des éléments par difficulté.</p>
-                </div>
-                <a href="https://drive.google.com/drive/u/1/folders/1ImXqrYiOR6nh0cXNQ8cU05nc2UK8z-j3" class="btn-download">📥 Télécharger PDF</a>
+            <div class="aps-card" style="border-top-color: var(--secondary);">
+                <h3>🏐 Volleyball</h3>
+                <p>Traitement didactique centré sur la construction du joueur et la lecture des trajectoires de balle.</p>
+                <a href="https://drive.google.com/drive/u/1/folders/1ImXqrYiOR6nh0cXNQ8cU05nc2UK8z-j3" class="btn-download">📥 Télécharger l'ATD</a>
             </div>
 
         </div>
     </main>
 
-    <footer>
-        <p>© 2025 Prof EPS Maroc - Plateforme de ressources pédagogiques.</p>
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-logo">
+                <img src="/images/prof_eps.png" alt="Prof EPS">
+                <p style="opacity: 0.7; font-size: 0.9rem;">Accompagner les enseignants d'EPS au Maroc avec des outils numériques innovants.</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1.5rem;">Ressources</h4>
+                <ul style="list-style: none; padding: 0; opacity: 0.7; font-size: 0.9rem; line-height: 2;">
+                    <li><a href="blog.html">Derniers articles</a></li>
+                    <li><a href="generateur.html">Générateur de fiches</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1.5rem;">Contact</h4>
+                <p style="opacity: 0.7; font-size: 0.9rem;">📧 epsprof.assistance@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Prof EPS. Tous droits réservés.</p>
+        </div>
     </footer>
 
 </body>
