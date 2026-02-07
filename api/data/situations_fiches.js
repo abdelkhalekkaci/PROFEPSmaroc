@@ -1168,7 +1168,6 @@ const SITUATIONS_TESTS = {
     consignes: 'COUREURS : Engagement maximal, respecter le rythme, finir la course\nOBSERVATEURS : Noter la technique, compter les appuis\nORGANISATEURS : Chronométrage précis, départs équitables\nTous : Rotation rapide, encourager, sécurité',
     variantes: 'Simplifier : Haies basses, 40m | Complexifier : Haies officielles, 80m'
 },
-
 'Course de relais': {
     titre: 'Course de relais 2x30m - Situation de référence',
     but: 'Réaliser un relais chronométré pour observer la transmission',
@@ -1177,7 +1176,6 @@ const SITUATIONS_TESTS = {
     consignes: 'RELAYEURS : Coordination maximale, transmission propre, ne pas ralentir\nOBSERVATEURS : Noter transmission, chute témoin, vitesse\nORGANISATEURS : Chronométrage, gestion zone transmission\nTous : Rotation rapide, encourager, sécurité',
     variantes: 'Simplifier : Transmission arrêt | Complexifier : Transmission non-visuelle'
 },
-
 'Lancer de poids': {
     titre: 'Concours de lancer - Situation de référence',
     but: 'Lancer le poids le plus loin possible pour mesurer force et coordination',
@@ -1241,22 +1239,18 @@ const CRITERES_OBSERVATION_TESTS = {
     criteresRealisation: '• Attaque de la haie jambe tendue\n• Jambe d\'esquive ouverte sur le côté\n• Reprise d\'appui active après la haie\n• Rythme d\'appuis régulier entre obstacles',
     criteresReussite: '• Temps réalisé sur 60m haies\n• Nombre d\'appuis entre haies (3 ou 5)\n• Nombre de haies touchées / 6 haies\n• Maintien de la vitesse (écart temps plat vs haies)'
 },
-
 'Course de relais': {
     criteresRealisation: '• Transmission dans la zone réglementaire\n• Coordination donneur/receveur\n• Aucune chute du témoin\n• Vitesse maintenue pendant transmission',
     criteresReussite: '• Temps réalisé sur 2x30m\n• Transmission réussie (oui/non)\n• Chute témoin (nombre)\n• Gain de temps vs somme temps individuels'
 },
-
 'Lancer de poids': {
     criteresRealisation: '• Pousser (pas jeter) le poids\n• Tenue du poids au cou\n• Extension complète du bras\n• Rester dans le cercle après le lancer',
     criteresReussite: '• Distance réalisée (en mètres)\n• Technique correcte (pousser vs jeter)\n• Nombre de lancers dans cercle / 3 essais\n• Progression entre essai 1 et essai 3'
 },
-
 'Course de durée': {
     criteresRealisation: '• Régularité de l\'allure de course\n• Posture droite et regard horizontal\n• Respiration contrôlée\n• Accélération en fin de course',
     criteresReussite: '• Temps réalisé sur la distance\n• Écart de temps entre chaque tour\n• Fréquence cardiaque à l\'arrivée\n• Capacité à parler à l\'arrivée'
 },
-
 'Course en durée': {
     criteresRealisation: '• Régularité de l\'allure de course\n• Posture droite et regard horizontal\n• Respiration contrôlée\n• Accélération en fin de course',
     criteresReussite: '• Temps réalisé sur la distance\n• Écart de temps entre chaque tour\n• Fréquence cardiaque à l\'arrivée\n• Capacité à parler à l\'arrivée'
