@@ -601,14 +601,14 @@ th, td {
 <tr style="height:180px;">
 <td class="partie-cell">FONDA<br>30 min</td>
 <td class="content-cell">
-<div class="sit-title">◆ ${skipSituation2 ? 'SITUATION DE RÉFÉRENCE' : 'SITUATION 1'}: ${s1Titre}</div>
+${isTest ? `<div class="sit-title">◆ SITUATION DE RÉFÉRENCE: ${s1Titre}</div>` : `<div class="sit-title">◆ SITUATION 1: ${s1Titre}</div>`}
 <b>But:</b> ${s1But}<br>
 <b>Organisation:</b> ${s1Orga}<br>
 <b>Déroulement:</b> ${s1Deroul}<br>
 <b>Consignes:</b> ${s1Consignes.replace(/\n/g, ' | ')}<br>
-<b>Variantes:</b> ${s1Variantes.replace(/\n/g, ' | ')}<br>${!skipSituation2 ? '<br><br>' : ''}
+<b>Variantes:</b> ${s1Variantes.replace(/\n/g, ' | ')}<br>
 
-${!skipSituation2 ? `<div class="sit-title" style="color:#1565c0">◆ SITUATION 2: ${s2Titre}</div>
+${!isTest ? `<br><br><div class="sit-title" style="color:#1565c0">◆ SITUATION 2: ${s2Titre}</div>
 <b>But:</b> ${s2But}<br>
 <b>Organisation:</b> ${s2Orga}<br>
 <b>Déroulement:</b> ${s2Deroul}<br>
