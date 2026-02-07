@@ -1144,7 +1144,7 @@ const SITUATIONS_TESTS = {
         consignes: 'SAUTEURS : Technique Fosbury-Flop, concentration\nOBSERVATEURS : Noter course courbe, impulsion, rotation\nORGANISATEURS : Régler la barre, mesurer, sécurité\nTous : Rotation efficace, encouragements, fair-play',
         variantes: 'Simplifier : Paliers 10cm, 4 essais | Complexifier : Paliers 3cm, 2 essais'
     },
-   'Course de durée': {
+   'Course en durée': {
     titre: 'Course 1000m (G) / 600m (F) - Situation de référence',
     but: 'Courir sur une distance donnée pour mesurer la gestion de l\'effort',
     organisation: 'Piste d\'athlétisme ou parcours mesuré, chronomètres, plots. Organisation en 3 groupes : COUREURS (réalisent la course), OBSERVATEURS (grilles sur allure et régularité), ORGANISATEURS (chronométrage, tours). Rotation après chaque course.',
