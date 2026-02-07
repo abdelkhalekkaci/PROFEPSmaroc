@@ -601,22 +601,22 @@ th, td {
 <tr style="height:180px;">
 <td class="partie-cell">FONDA<br>30 min</td>
 <td class="content-cell">
-<div class="sit-title">◆ SITUATION 1: ${s1Titre}</div>
+<div class="sit-title">◆ ${skipSituation2 ? 'SITUATION DE RÉFÉRENCE' : 'SITUATION 1'}: ${s1Titre}</div>
 <b>But:</b> ${s1But}<br>
 <b>Organisation:</b> ${s1Orga}<br>
 <b>Déroulement:</b> ${s1Deroul}<br>
 <b>Consignes:</b> ${s1Consignes.replace(/\n/g, ' | ')}<br>
-<b>Variantes:</b> ${s1Variantes.replace(/\n/g, ' | ')}<br><br>
+<b>Variantes:</b> ${s1Variantes.replace(/\n/g, ' | ')}<br>${!skipSituation2 ? '<br><br>' : ''}
 
 ${!skipSituation2 ? `<div class="sit-title" style="color:#1565c0">◆ SITUATION 2: ${s2Titre}</div>
 <b>But:</b> ${s2But}<br>
 <b>Organisation:</b> ${s2Orga}<br>
 <b>Déroulement:</b> ${s2Deroul}<br>
 <b>Consignes:</b> ${s2Consignes.replace(/\n/g, ' | ')}<br>
-<b>Variantes:</b> ${s2Variantes.replace(/\n/g, ' | ')}<br><br>` : ''}
+<b>Variantes:</b> ${s2Variantes.replace(/\n/g, ' | ')}<br><br>
 
 <div class="sit-title" style="color:#e65100">◆ SITUATION DE RÉFÉRENCE:</div>
-${sitRef}
+${sitRef}` : ''}
 </td>
 <td class="but-cell" style="font-size:6.5pt;padding:4px">${butFonda}</td>
 <td class="crit-cell">${critReal.replace(/\n/g, '<br>')}</td>
