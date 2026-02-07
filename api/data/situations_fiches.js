@@ -1151,7 +1151,7 @@ const SITUATIONS_TESTS = {
     deroulement: 'Course chronométrée avec départ groupé. Les COUREURS gèrent leur allure sur la distance. Les OBSERVATEURS notent régularité, posture, finish. Les ORGANISATEURS chronométrent et comptent les tours. Le professeur observe la gestion de l\'effort. Une seule course par élève avec rotation ensuite.',
     consignes: 'COUREURS : Gérer son allure, maintenir une course régulière, finir en accélérant\nOBSERVATEURS : Noter la régularité d\'allure, la posture, la gestion de l\'effort\nORGANISATEURS : Chronométrage précis, comptage des tours, annonce des temps\nTous : Encouragements, respect du rythme de chacun, sécurité',
     variantes: 'Simplifier : 600m pour tous, allure libre | Complexifier : 1200m, allure cible imposée'
-},
+         },
     'Gymnastique': {
         titre: 'Présentation d\'enchaînement - Situation de référence',
         but: 'Présenter un enchaînement au sol pour évaluer le niveau technique',
@@ -1254,7 +1254,7 @@ const CRITERES_OBSERVATION_TESTS = {
 'Course en durée': {
     criteresRealisation: '• Régularité de l\'allure de course\n• Posture droite et regard horizontal\n• Respiration contrôlée\n• Accélération en fin de course',
     criteresReussite: '• Temps réalisé sur la distance\n• Écart de temps entre chaque tour\n• Fréquence cardiaque à l\'arrivée\n• Capacité à parler à l\'arrivée'
-}
+},
     'Gymnastique': {
         criteresRealisation: '• Amplitude maximale dans les mouvements\n• Tenue corporelle gainée\n• Liaisons fluides entre les éléments\n• Réceptions contrôlées et stabilisées',
         criteresReussite: '• Nombre d\'éléments réussis / imposés\n• Note d\'exécution sur 10\n• Nombre de déséquilibres\n• Durée de l\'enchaînement'
