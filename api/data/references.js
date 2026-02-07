@@ -458,9 +458,9 @@ const getSchema = (aps, numSit) => {
 const OBJECTIFS_CYCLE = {
     'Football': {
         commun: {
-            S1: "Évaluer le niveau initial des élèves (capacités motrices, techniques et tactiques) afin de diagnostiquer les besoins et constituer des groupes de niveau.",
+            S1: "Test d'observation - Évaluation diagnostique : Évaluer le niveau initial des élèves (capacités motrices, techniques et tactiques) afin de diagnostiquer les besoins et constituer des groupes de niveau.",
             S2: "Maîtriser les lois du jeu (FIFA adaptées au milieu scolaire), comprendre les principes de l'occupation de l'espace (bloc équipe) et les valeurs du fair-play.",
-            S12: "Évaluer le degré d'atteinte des objectifs du cycle, mesurer la progression technique et tactique et valider les acquis en situation de match."
+            S12: "Test bilan - Évaluation finale : Évaluer le degré d'atteinte des objectifs du cycle, mesurer la progression technique et tactique et valider les acquis en situation de match."
         },
         debutant: [
             "Maîtriser la conduite de balle en variant les surfaces de contact (intérieur/coup de pied) sans perdre le contrôle.",
@@ -509,9 +509,9 @@ const OBJECTIFS_CYCLE = {
     },
     'Volleyball': {
         commun: {
-            S1: "Évaluer le niveau initial des élèves (capacité à maintenir le ballon en l'air, respect des zones de jeu) pour établir un diagnostic et former des groupes homogènes.",
+            S1: "Test d'observation - Évaluation diagnostique : Évaluer le niveau initial des élèves (capacité à maintenir le ballon en l'air, respect des zones de jeu) pour établir un diagnostic et former des groupes homogènes.",
             S2: "Étude du règlement officiel (FIVB adapté), compréhension du système de rotation, des fautes de filet, et des principes tactiques de base (réception-passe-attaque).",
-            S12: "Évaluer les progrès techniques individuels et l'efficacité de l'organisation collective en situation de match officiel."
+            S12: "Test bilan - Évaluation finale : Évaluer les progrès techniques individuels et l'efficacité de l'organisation collective en situation de match officiel."
         },
         debutant: [
             "Maîtriser le service cuillère pour mettre le ballon en jeu de manière sécurisée.",
@@ -560,9 +560,9 @@ const OBJECTIFS_CYCLE = {
     },
     'Basketball': {
         commun: {
-            S1: "Évaluer la capacité à manipuler le ballon, à se déplacer et à viser la cible pour diagnostiquer le niveau moteur et technique.",
+            S1: "Test d'observation - Évaluation diagnostique : Évaluer la capacité à manipuler le ballon, à se déplacer et à viser la cible pour diagnostiquer le niveau moteur et technique.",
             S2: "Apprentissage des règles fondamentales (marcher, reprise de dribble, fautes de contact, zone), et explication des rôles (meneur, ailier, pivot).",
-            S12: "Évaluation finale des compétences acquises en situation de match (efficacité au tir, respect des règles et choix tactiques)."
+            S12: "Test bilan - Évaluation finale : Évaluation finale des compétences acquises en situation de match (efficacité au tir, respect des règles et choix tactiques)."
         },
         debutant: [
             "Maîtriser le dribble de progression avec la main dominante sans regarder constamment le ballon.",
@@ -611,9 +611,9 @@ const OBJECTIFS_CYCLE = {
     },
     'Handball': {
         commun: {
-            S1: "Évaluer la qualité de la passe, du tir et l'engagement défensif pour identifier les besoins du groupe.",
+            S1: "Test d'observation - Évaluation diagnostique : Évaluer la qualité de la passe, du tir et l'engagement défensif pour identifier les besoins du groupe.",
             S2: "Étude du règlement (zone, marcher, 3 secondes, fautes de bras) et des principes d'attaque placée.",
-            S12: "Validation des acquis techniques et tactiques en situation réelle de compétition."
+            S12: "Test bilan - Évaluation finale : Validation des acquis techniques et tactiques en situation réelle de compétition."
         },
         debutant: [
             "Maîtriser la manipulation du ballon (prise de balle à une main) et le dribble de base.",
@@ -660,11 +660,11 @@ const OBJECTIFS_CYCLE = {
             "Match de haut niveau avec application de consignes de jeu placées."
         ]
     },
-    'Course de vitesse': {
+  'Course de vitesse': {
         commun: {
-            S1: "Évaluer le temps de réaction et la vitesse maximale sur 60m ou 80m (chronométrage de référence).",
+            S1: "Test d'observation - Évaluation diagnostique : Évaluer le temps de réaction et la vitesse maximale sur 60m ou 80m (chronométrage de référence).",
             S2: "Comprendre la physiologie de la vitesse (anaérobie alactique), les phases de la course (départ, accélération, maintien) et le règlement.",
-            S12: "Mesurer la performance finale et comparer avec le test initial pour valider la progression."
+            S12: "Test bilan - Évaluation finale : Mesurer la performance finale et comparer avec le test initial pour valider la progression."
         },
         debutant: [
             "Apprendre la posture de course : buste droit, regard vers l'horizon, bras en piston.",
@@ -713,9 +713,9 @@ const OBJECTIFS_CYCLE = {
     },
     'Lancer de poids': {
         commun: {
-            S1: "Évaluer le niveau initial (force et coordination) et identifier les élèves qui lancent au lieu de pousser.",
+            S1: "Test d'observation - Évaluation diagnostique : Évaluer le niveau initial (force et coordination) et identifier les élèves qui lancent au lieu de pousser.",
             S2: "Règles de sécurité (zone de jet), tenue de l'engin (embase des doigts), et distinction entre jet et lancer.",
-            S12: "Lancer un poids de 4kg (garçons) ou 3kg (filles) le plus loin possible et mesurer la performance."
+            S12: "Test bilan - Évaluation finale : Lancer un poids de 4kg (garçons) ou 3kg (filles) le plus loin possible et mesurer la performance."
         },
         debutant: [
             "Apprendre à tenir le poids contre le cou et à réaliser une poussée directe vers l'avant.",
@@ -764,9 +764,9 @@ const OBJECTIFS_CYCLE = {
     },
     'Saut en longueur': {
         commun: {
-            S1: "Courir et sauter le plus loin possible. 3 essais mesurés pour chaque élève.",
+            S1: "Test d'observation - Évaluation diagnostique : Courir et sauter le plus loin possible. 3 essais mesurés pour chaque élève.",
             S2: "Règlement (planche, mordu, mesure à la trace), biomécanique du saut (Vitesse + Impulsion = Distance), et sécurité.",
-            S12: "3 essais mesurés. Note basée sur la performance brute et l'évolution technique observée."
+            S12: "Test bilan - Évaluation finale : 3 essais mesurés. Note basée sur la performance brute et l'évolution technique observée."
         },
         debutant: [
             "Identifier son pied d'appel (pied de force) à travers des jeux de sauts variés.",
@@ -813,11 +813,216 @@ const OBJECTIFS_CYCLE = {
             "Séance d'affûtage : peu de sauts, mais à 100% de l'engagement."
         ]
     },
-    'Gymnastique': {
+   'Saut en hauteur': {
         commun: {
-            S1: "Présenter l'enchaînement de référence pour évaluer la capacité de mémorisation, la sécurité et le niveau technique de départ.",
+            S1: "Test d'observation - Situation de référence : Franchir une barre à différentes hauteurs. 3 essais par hauteur. Diagnostic sur : le pied d'appel, la direction de la course et la technique de franchissement naturelle (Ciseau ou autre).",
+            S2: "Règlement (appel un pied obligatoire, 3 échecs consécutifs = élimination, ne pas toucher les montants), sécurité (chute sur les épaules/dos dans la zone de réception), et principes mécaniques (vitesse d'approche et angle d'envol).",
+            S12: "Test bilan - Concours final officiel : Mesure de la meilleure performance (Record Personnel). Note basée sur la performance brute et l'évolution de la maîtrise technique."
+        },
+        debutant: [
+            "Identifier son pied d'appel et s'initier au saut en 'Ciseau' (jambe d'attaque tendue, puis jambe d'esquive).",
+            "Travailler l'impulsion verticale près de la barre sans course d'élan (sauter 'haut' et non 'loin').",
+            "Apprendre la course d'élan rectiligne (5 à 7 pas) et l'arrêt dynamique sur le pied d'appel.",
+            "Travailler la réception sur les deux pieds ou sur la jambe d'esquive en toute sécurité.",
+            "Améliorer l'élévation des bras lors de l'impulsion pour gagner en hauteur.",
+            "Franchir des obstacles bas avec une trajectoire en 'cloche'.",
+            "S'initier au rôle de juge (monter la barre, vérifier le taquet).",
+            "Stabiliser la course d'élan pour éviter de piétiner avant l'appel.",
+            "Pré-évaluation : concours interne sur des hauteurs de base."
+        ],
+        moyen: [
+            "Introduction à la course en courbe (trajectoire en 'J') : 5 pas droits, 3 pas courbes.",
+            "S'initier au 'Fosbury Flop' : franchissement de dos avec chute sur les épaules.",
+            "Travailler l'inclinaison du corps vers l'intérieur de la courbe pour créer de la force centrifuge.",
+            "Apprendre à impulser dos à la barre après le dernier appui en courbe.",
+            "Coordination : synchroniser la montée du genou libre avec l'impulsion.",
+            "Travailler la phase de suspension : regarder le plafond pour favoriser l'extension.",
+            "Apprendre à mesurer ses marques (mesure de la perpendiculaire à la barre).",
+            "Gérer l'entrée dans la courbe sans perdre de vitesse.",
+            "Séance de réglage des hauteurs de départ pour le concours bilan."
+        ],
+        avance: [
+            "Optimiser la vitesse de la course d'élan (accélération sur les 3 derniers appuis).",
+            "Perfectionner le 'pontage' : cambrer le dos au-dessus de la barre pour dégager les hanches.",
+            "Travailler le 'regroupé' final : ramener les pieds vers le haut pour éviter de toucher la barre avec les talons.",
+            "Exercices de pliométrie : sauts de haie suivis d'une impulsion verticale.",
+            "Travailler l'appel 'actif' (griffé du sol) pour transformer la vitesse en hauteur.",
+            "Analyser le point culminant du saut : il doit se situer au-dessus de la barre.",
+            "Gérer l'échec : technique de respiration entre deux essais manqués.",
+            "Analyse vidéo : corriger l'alignement tête-épaules lors du franchissement.",
+            "Concours blanc avec gestion des montées de barres par palier de 3 ou 5 cm."
+        ],
+        elite: [
+            "Stabilisation de la course d'élan à intensité maximale (marques fixes).",
+            "Travail spécifique du 'double bras' à l'impulsion pour une poussée explosive.",
+            "Optimisation du timing du 'coup de reins' (pontage dynamique).",
+            "Travail de survitesse sur la courbe d'élan.",
+            "Renforcement de la chaîne postérieure (lombaires/fessiers) pour le maintien en l'air.",
+            "Gestion psychologique : sauter devant un public ou contre des adversaires de haut niveau.",
+            "Stratégie de concours : choisir quand passer ses tours pour économiser de l'énergie.",
+            "Séance d'auto-analyse : ajuster son point d'appel selon les sensations.",
+            "Séance de 'fraîcheur' : peu de sauts, focus sur la qualité technique parfaite."
+        ]
+    },
+    'Course de haies': {
+        commun: {
+            S1: "Test d'observation - Situation de référence : Course chronométrée sur la distance officielle (ex: 40m ou 60m haies). Diagnostic sur : le nombre d'appuis entre les haies, l'hésitation au franchissement et la jambe d'attaque.",
+            S2: "Règlement (hauteur des haies, couloirs, franchissement licite), sécurité (ne pas sauter de biais), et vocabulaire technique (jambe d'attaque, jambe d'esquive, intervalle).",
+            S12: "Test bilan - Compétition finale : Chronométrage des 3 essais. Note basée sur la performance (vitesse) et l'efficacité du franchissement (maintien de la vitesse horizontale)."
+        },
+        debutant: [
+            "Identifier sa jambe d'attaque et s'initier au franchissement de lattes ou de haies très basses.",
+            "Apprendre à courir 'par-dessus' la haie sans faire un saut en hauteur (rester rasant).",
+            "Stabiliser un rythme régulier de 5 appuis entre les haies sur une distance courte.",
+            "Travailler la jambe d'attaque : genou haut et jambe qui se tend vers l'obstacle.",
+            "Travailler la jambe d'esquive (jambe arrière) : ouverture sur le côté pour éviter de toucher la haie.",
+            "Apprendre à ne pas ralentir avant l'obstacle (course engagée).",
+            "S'initier aux rôles de starter et de chronométreur.",
+            "Enchaîner 3 à 4 haies sans rupture de rythme.",
+            "Pré-test chronométré pour ajuster les intervalles si besoin."
+        ],
+        moyen: [
+            "S'initier au rythme de 3 pas entre les haies (haies rapprochées et basses).",
+            "Travailler la reprise d'appui active : le pied d'attaque doit 'griffer' le sol dès la réception.",
+            "Améliorer la coordination bras/jambes pour équilibrer le corps pendant le vol.",
+            "Travailler la course d'élan jusqu'à la première haie (8 pas fixes).",
+            "Développer l'agressivité face à l'obstacle : attaquer la haie loin devant.",
+            "Maintenir le rythme de 3 pas sur une série plus longue (5 à 6 haies).",
+            "Apprendre à gérer le couloir voisin (ne pas être perturbé par l'adversaire).",
+            "Travail de vitesse : courir entre les haies à intensité maximale.",
+            "Séance de réglage des marques pour optimiser le temps de réaction au départ."
+        ],
+        avance: [
+            "Optimiser la 'rasance' de la haie : minimiser le temps passé en l'air.",
+            "Travailler l'alignement du buste : plonger vers l'avant lors de l'attaque.",
+            "Automatiser le rythme de 3 pas sur les hauteurs officielles.",
+            "Exercices de pliométrie : enchaînements de bonds horizontaux et franchissements.",
+            "Travailler la 'reprise de course' immédiate après la dernière haie (le cassé final).",
+            "Analyse de la trajectoire : le centre de gravité doit rester le plus stable possible.",
+            "Gestion des départs en starting-blocks avec la première haie très proche.",
+            "Analyse vidéo : identifier les temps de freinage à la réception.",
+            "Simulation de compétition (séries et finales)."
+        ],
+        elite: [
+            "Stabilisation de la vitesse maximale entre les haies (cycle de jambes rapide).",
+            "Travail spécifique sur la jambe d'esquive : retour rapide vers l'avant pour la reprise d'appui.",
+            "Optimisation de la force explosive au départ (sortir des blocs).",
+            "Travail de 'survitesse' sur des haies plus basses pour augmenter la fréquence.",
+            "Gestion de la fatigue : maintenir la technique sur la fin de course (résistance).",
+            "Travail de concentration : focalisation sur le rythme interne ('un-deux-TROIS-saute').",
+            "Analyse biomécanique : angle d'attaque et de réception.",
+            "Coaching : analyse des performances des adversaires.",
+            "Séance de fraîcheur et réglages mentaux avant le test bilan."
+        ]
+    },
+    'Course de relais': {
+        commun: {
+            S1: "Test d'observation - Diagnostic : Test sur 2x30m. Diagnostic : Le receveur attend-il à l'arrêt ? Le donneur ralentit-il avant de donner ? Y a-t-il une chute du témoin ?",
+            S2: "Règlement spécifique : La zone de transmission (souvent située entre le 20ème et le 40ème mètre sur les 60m totaux). Notion de 'donneur' (vitesse de maintien) et 'receveur' (accélération).",
+            S12: "Test bilan - Compétition 'Duo-Sprint' : Mesure de la performance chronométrée. Note sur le gain de temps par rapport à la somme des temps individuels (l'efficacité du gain au passage)."
+        },
+        debutant: [
+            "Tenue du témoin en pleine course (bras équilibrés) et transmission à l'arrêt.",
+            "Apprendre la transmission 'visuelle' : le receveur regarde le donneur et prend le témoin en trottinant.",
+            "Coordination des couloirs : le donneur court à l'intérieur du couloir, le receveur à l'extérieur pour éviter le choc.",
+            "Travailler l'appel sonore : le donneur crie 'HOP' pour prévenir le partenaire.",
+            "Initiation au départ du 1er relayeur : départ sans blocs mais avec témoin.",
+            "Exercices de réaction : partir au signal visuel du partenaire qui franchit une ligne.",
+            "Rôle de juge : vérifier si le témoin est bien donné à l'intérieur des 20m de la zone centrale.",
+            "Enchaînement complet à 80% de la vitesse.",
+            "Pré-test : stabiliser un passage sans chute sur 60m."
+        ],
+        moyen: [
+            "Apprendre à ne plus regarder derrière (transmission non-visuelle) : faire confiance au signal du partenaire.",
+            "Mise en place d'une marque (repère au sol) à environ 5-6 mètres derrière le receveur.",
+            "Travailler l'accélération du receveur : il doit 'fuir' son partenaire pour recevoir le témoin lancé.",
+            "Technique 'par le bas' : le receveur tend la main en arrière, paume vers le bas, formant un V.",
+            "Optimisation de la course du 1er relayeur (30m de sprint pur).",
+            "Travail de synchronisation : le donneur doit tendre le bras au maximum pour 'gagner' de la distance.",
+            "Arbitrage : mesurer précisément si la transmission a eu lieu dans les limites.",
+            "Séries de 2x30m à vitesse maximale avec récupération complète.",
+            "Séance de réglage des marques (avancer ou reculer la marque de départ du receveur)."
+        ],
+        avance: [
+            "Spécialisation des mains : Donneur (Main Droite) -> Receveur (Main Gauche) pour éviter de changer le témoin de main.",
+            "Travail du départ en starting-blocks pour le 1er coureur (avec témoin).",
+            "Analyse de la 'zone de transmission optimale' : le passage doit se faire dans les 5 derniers mètres de la zone.",
+            "Exercices de survitesse : le donneur arrive lancé à 100%, le receveur doit s'adapter.",
+            "Travail de l'appui au sol : rester sur l'avant-pied pendant toute la durée du sprint.",
+            "Stratégie de binôme : qui est le meilleur au départ ? Qui est le meilleur finisseur ?",
+            "Analyse vidéo (si possible) : mesurer le temps mort (le moment où personne ne tient le témoin).",
+            "Simulation de 'demi-finale' avec opposition latérale (couloirs occupés).",
+            "Répétition mentale et physique des 3 dernières foulées avant le passage."
+        ],
+        elite: [
+            "Stabilisation des marques au centimètre près selon la forme du jour.",
+            "Travail du 'bras tendu' : le passage se fait à distance maximale entre les deux corps (bras du donneur + bras du receveur).",
+            "Optimisation de la transmission 'par le haut' (plus rapide mais plus risquée).",
+            "Travail de puissance : départs explosifs sur 10m pour le receveur.",
+            "Analyse du 'cycle de jambes' : maintenir une fréquence élevée pendant la transmission.",
+            "Gestion du vent : ajuster la marque de départ selon que le vent est de face ou de dos.",
+            "Coaching : le binôme analyse ses propres erreurs de synchronisation.",
+            "Séance de 'Full Speed' : 3 passages à 100% avec 10 minutes de repos.",
+            "Mise en confiance : visualisation de la réussite du passage."
+        ]
+    },
+    'Course de durée': {
+        commun: {
+            S1: "Test d'observation - Situation de référence : Course de 1000m (garçons) / 600m (filles) pour mesurer le temps de base et observer la gestion spontanée de l'effort.",
+            S2: "Test Navette (Luc Léger) pour déterminer la VMA et constituer les groupes physiologiques. Partie théorique : analyse des résultats, explication des zones d'entraînement (Capacité vs Puissance) et remise des fiches de suivi.",
+            S3: "Partie Pratique (La Posture) : Travail technique sur la 'foulée économique' (regard à l'horizon, buste droit, relâchement des épaules, mouvement des bras en piston, attaque médio-pied). Exercices de gammes (montées de genoux, talons-fesses) axés sur le placement.",
+            S12: "Test bilan - Évaluation finale : Course de 1000m (garçons) / 600m (filles) pour mesurer le temps de passage et observer la gestion de l'effort."
+        },
+        debutant: [
+            "S4 (Capacité Aérobie) : 10 min de course continue en aisance respiratoire (pouvoir parler en courant).",
+            "S5 (Capacité Aérobie) : 12 min de course continue en aisance respiratoire.",
+            "S6 (Capacité Aérobie) : 15 min de course continue en aisance respiratoire.",
+            "S7 (Capacité Aérobie) : Alterner 4 min course / 1 min marche (3 séries) en aisance respiratoire.",
+            "S8 (Puissance Aérobie) : Initiation au fractionné très doux : 45s course rapide / 45s marche (2 séries de 5).",
+            "S9 (Puissance Aérobie) : Travail de vitesse sur 100m pour dynamiser la foulée.",
+            "S10 (Puissance Aérobie) : Travail de vitesse sur 100m pour dynamiser la foulée.",
+            "S11 (Puissance Aérobie) : Test sur 500m (G) / 300m (F) pour valider l'allure cible de la S12.",
+            "S12 (Évaluation) : Test Bilan final sur 1000m (G) / 600m (F)."
+        ],
+        moyen: [
+            "S4 (Capacité Aérobie) : 15 min à 75% VMA.",
+            "S5 (Capacité Aérobie) : 2 x 8 min à 80% VMA (repos 2 min).",
+            "S6 (Capacité Aérobie) : Travail de régularité avec passage aux plots à intervalles réguliers (allure métronome).",
+            "S7 (Capacité Aérobie) : Travail de régularité avec passage aux plots à intervalles réguliers (allure métronome).",
+            "S8 (Puissance Aérobie) : Séance de 30s/30s à 100% VMA (2 séries de 8 répétitions).",
+            "S9 (Puissance Aérobie) : Séance de 30s/30s à 100% VMA (2 séries de 8 répétitions).",
+            "S10 (Puissance Aérobie) : Intervalles de 200m à 100% VMA (récupération égale au temps de course).",
+            "S11 (Puissance Aérobie) : Simulation de course sur 800m (G) / 500m (F) à l'allure du test bilan.",
+            "S12 (Évaluation) : Test Bilan final sur 1000m (G) / 600m (F)."
+        ],
+        avance: [
+            "S4 (Capacité Aérobie) : 20 min en variation d'allure (allure 1, 2, 3).",
+            "S5 (Capacité Aérobie) : Intervalles longs 3 x 1000m à 85% VMA (repos 3 min). Travail sur le maintien de la posture malgré la fatigue.",
+            "S6 (Capacité Aérobie) : Intervalles longs 3 x 1000m à 85% VMA (repos 3 min). Travail sur le maintien de la posture malgré la fatigue.",
+            "S7 (Capacité Aérobie) : Intervalles longs 3 x 1000m à 85% VMA (repos 3 min). Travail sur le maintien de la posture malgré la fatigue.",
+            "S8 (Puissance Aérobie) : Séance de 45s/30s à 105% VMA.",
+            "S9 (Puissance Aérobie) : Répétitions de 400m à 100% VMA (repos 1min30). Focus sur l'efficacité des bras dans le dernier virage.",
+            "S10 (Puissance Aérobie) : Répétitions de 400m à 100% VMA (repos 1min30). Focus sur l'efficacité des bras dans le dernier virage.",
+            "S11 (Puissance Aérobie) : Travail spécifique sur le 'Sprint final' : 600m à allure test + 200m accélération maximale.",
+            "S12 (Évaluation) : Test Bilan final sur 1000m (G) / 600m (F)."
+        ],
+        elite: [
+            "S4 (Capacité Aérobie) : Travail au seuil 2 x 10 min à 90% VMA.",
+            "S5 (Capacité Aérobie) : Travail au seuil 2 x 10 min à 90% VMA.",
+            "S6 (Capacité Aérobie) : Pyramide de capacité (400m - 800m - 1200m - 800m - 400m) à 90% VMA.",
+            "S7 (Capacité Aérobie) : Pyramide de capacité (400m - 800m - 1200m - 800m - 400m) à 90% VMA.",
+            "S8 (Puissance Aérobie) : Fractionné court intense : 200m à 110% VMA avec récupération très courte (45s).",
+            "S9 (Puissance Aérobie) : Fractionné court intense : 200m à 110% VMA avec récupération très courte (45s).",
+            "S10 (Puissance Aérobie) : Séance spécifique : 3 x 600m à 105% VMA (récupération complète).",
+            "S11 (Puissance Aérobie) : Préparation mentale et tactique : simulation de départ rapide et gestion des dépassements.",
+            "S12 (Évaluation) : Test Bilan final sur 1000m (G) / 600m (F)."
+        ]
+    },
+'Gymnastique': {
+        commun: {
+            S1: "Test d'observation - Présentation de l'enchaînement de référence : Présenter l'enchaînement de référence pour évaluer la capacité de mémorisation, la sécurité et le niveau technique de départ.",
             S2: "Analyse du barème de notation (Difficulté, Exécution, Composition). Apprentissage de la terminologie des éléments A, B, C, D, E. Règles de sécurité.",
-            S12: "Présentation finale de l'enchaînement devant le groupe classe. Évaluation sommative basée sur la réussite des éléments et la tenue corporelle."
+            S12: "Test bilan - Présentation finale : Présentation finale de l'enchaînement devant le groupe classe. Évaluation sommative basée sur la réussite des éléments et la tenue corporelle."
         },
         '1AC': [
             "Maîtriser les éléments de famille A : Roulade avant groupée et Planche (équilibre).",
@@ -889,211 +1094,6 @@ const OBJECTIFS_CYCLE = {
         moyen: null,
         avance: null,
         elite: null
-    },
-    'Saut en hauteur': {
-        commun: {
-            S1: "Situation de référence : franchir une barre à différentes hauteurs. 3 essais par hauteur. Diagnostic sur : le pied d'appel, la direction de la course et la technique de franchissement naturelle (Ciseau ou autre).",
-            S2: "Règlement (appel un pied obligatoire, 3 échecs consécutifs = élimination, ne pas toucher les montants), sécurité (chute sur les épaules/dos dans la zone de réception), et principes mécaniques (vitesse d'approche et angle d'envol).",
-            S12: "Concours final officiel. Mesure de la meilleure performance (Record Personnel). Note basée sur la performance brute et l'évolution de la maîtrise technique."
-        },
-        debutant: [
-            "Identifier son pied d'appel et s'initier au saut en 'Ciseau' (jambe d'attaque tendue, puis jambe d'esquive).",
-            "Travailler l'impulsion verticale près de la barre sans course d'élan (sauter 'haut' et non 'loin').",
-            "Apprendre la course d'élan rectiligne (5 à 7 pas) et l'arrêt dynamique sur le pied d'appel.",
-            "Travailler la réception sur les deux pieds ou sur la jambe d'esquive en toute sécurité.",
-            "Améliorer l'élévation des bras lors de l'impulsion pour gagner en hauteur.",
-            "Franchir des obstacles bas avec une trajectoire en 'cloche'.",
-            "S'initier au rôle de juge (monter la barre, vérifier le taquet).",
-            "Stabiliser la course d'élan pour éviter de piétiner avant l'appel.",
-            "Pré-évaluation : concours interne sur des hauteurs de base."
-        ],
-        moyen: [
-            "Introduction à la course en courbe (trajectoire en 'J') : 5 pas droits, 3 pas courbes.",
-            "S'initier au 'Fosbury Flop' : franchissement de dos avec chute sur les épaules.",
-            "Travailler l'inclinaison du corps vers l'intérieur de la courbe pour créer de la force centrifuge.",
-            "Apprendre à impulser dos à la barre après le dernier appui en courbe.",
-            "Coordination : synchroniser la montée du genou libre avec l'impulsion.",
-            "Travailler la phase de suspension : regarder le plafond pour favoriser l'extension.",
-            "Apprendre à mesurer ses marques (mesure de la perpendiculaire à la barre).",
-            "Gérer l'entrée dans la courbe sans perdre de vitesse.",
-            "Séance de réglage des hauteurs de départ pour le concours bilan."
-        ],
-        avance: [
-            "Optimiser la vitesse de la course d'élan (accélération sur les 3 derniers appuis).",
-            "Perfectionner le 'pontage' : cambrer le dos au-dessus de la barre pour dégager les hanches.",
-            "Travailler le 'regroupé' final : ramener les pieds vers le haut pour éviter de toucher la barre avec les talons.",
-            "Exercices de pliométrie : sauts de haie suivis d'une impulsion verticale.",
-            "Travailler l'appel 'actif' (griffé du sol) pour transformer la vitesse en hauteur.",
-            "Analyser le point culminant du saut : il doit se situer au-dessus de la barre.",
-            "Gérer l'échec : technique de respiration entre deux essais manqués.",
-            "Analyse vidéo : corriger l'alignement tête-épaules lors du franchissement.",
-            "Concours blanc avec gestion des montées de barres par palier de 3 ou 5 cm."
-        ],
-        elite: [
-            "Stabilisation de la course d'élan à intensité maximale (marques fixes).",
-            "Travail spécifique du 'double bras' à l'impulsion pour une poussée explosive.",
-            "Optimisation du timing du 'coup de reins' (pontage dynamique).",
-            "Travail de survitesse sur la courbe d'élan.",
-            "Renforcement de la chaîne postérieure (lombaires/fessiers) pour le maintien en l'air.",
-            "Gestion psychologique : sauter devant un public ou contre des adversaires de haut niveau.",
-            "Stratégie de concours : choisir quand passer ses tours pour économiser de l'énergie.",
-            "Séance d'auto-analyse : ajuster son point d'appel selon les sensations.",
-            "Séance de 'fraîcheur' : peu de sauts, focus sur la qualité technique parfaite."
-        ]
-    },
-    'Course de haies': {
-        commun: {
-            S1: "Situation de référence : course chronométrée sur la distance officielle (ex: 40m ou 60m haies). Diagnostic sur : le nombre d'appuis entre les haies, l'hésitation au franchissement et la jambe d'attaque.",
-            S2: "Règlement (hauteur des haies, couloirs, franchissement licite), sécurité (ne pas sauter de biais), et vocabulaire technique (jambe d'attaque, jambe d'esquive, intervalle).",
-            S12: "Compétition finale. Chronométrage des 3 essais. Note basée sur la performance (vitesse) et l'efficacité du franchissement (maintien de la vitesse horizontale)."
-        },
-        debutant: [
-            "Identifier sa jambe d'attaque et s'initier au franchissement de lattes ou de haies très basses.",
-            "Apprendre à courir 'par-dessus' la haie sans faire un saut en hauteur (rester rasant).",
-            "Stabiliser un rythme régulier de 5 appuis entre les haies sur une distance courte.",
-            "Travailler la jambe d'attaque : genou haut et jambe qui se tend vers l'obstacle.",
-            "Travailler la jambe d'esquive (jambe arrière) : ouverture sur le côté pour éviter de toucher la haie.",
-            "Apprendre à ne pas ralentir avant l'obstacle (course engagée).",
-            "S'initier aux rôles de starter et de chronométreur.",
-            "Enchaîner 3 à 4 haies sans rupture de rythme.",
-            "Pré-test chronométré pour ajuster les intervalles si besoin."
-        ],
-        moyen: [
-            "S'initier au rythme de 3 pas entre les haies (haies rapprochées et basses).",
-            "Travailler la reprise d'appui active : le pied d'attaque doit 'griffer' le sol dès la réception.",
-            "Améliorer la coordination bras/jambes pour équilibrer le corps pendant le vol.",
-            "Travailler la course d'élan jusqu'à la première haie (8 pas fixes).",
-            "Développer l'agressivité face à l'obstacle : attaquer la haie loin devant.",
-            "Maintenir le rythme de 3 pas sur une série plus longue (5 à 6 haies).",
-            "Apprendre à gérer le couloir voisin (ne pas être perturbé par l'adversaire).",
-            "Travail de vitesse : courir entre les haies à intensité maximale.",
-            "Séance de réglage des marques pour optimiser le temps de réaction au départ."
-        ],
-        avance: [
-            "Optimiser la 'rasance' de la haie : minimiser le temps passé en l'air.",
-            "Travailler l'alignement du buste : plonger vers l'avant lors de l'attaque.",
-            "Automatiser le rythme de 3 pas sur les hauteurs officielles.",
-            "Exercices de pliométrie : enchaînements de bonds horizontaux et franchissements.",
-            "Travailler la 'reprise de course' immédiate après la dernière haie (le cassé final).",
-            "Analyse de la trajectoire : le centre de gravité doit rester le plus stable possible.",
-            "Gestion des départs en starting-blocks avec la première haie très proche.",
-            "Analyse vidéo : identifier les temps de freinage à la réception.",
-            "Simulation de compétition (séries et finales)."
-        ],
-        elite: [
-            "Stabilisation de la vitesse maximale entre les haies (cycle de jambes rapide).",
-            "Travail spécifique sur la jambe d'esquive : retour rapide vers l'avant pour la reprise d'appui.",
-            "Optimisation de la force explosive au départ (sortir des blocs).",
-            "Travail de 'survitesse' sur des haies plus basses pour augmenter la fréquence.",
-            "Gestion de la fatigue : maintenir la technique sur la fin de course (résistance).",
-            "Travail de concentration : focalisation sur le rythme interne ('un-deux-TROIS-saute').",
-            "Analyse biomécanique : angle d'attaque et de réception.",
-            "Coaching : analyse des performances des adversaires.",
-            "Séance de fraîcheur et réglages mentaux avant le test bilan."
-        ]
-    },
-    'Course de relais': {
-        commun: {
-            S1: "Test sur 2x30m. Diagnostic : Le receveur attend-il à l'arrêt ? Le donneur ralentit-il avant de donner ? Y a-t-il une chute du témoin ?",
-            S2: "Règlement spécifique : La zone de transmission (souvent située entre le 20ème et le 40ème mètre sur les 60m totaux). Notion de 'donneur' (vitesse de maintien) et 'receveur' (accélération).",
-            S12: "Compétition 'Duo-Sprint'. Mesure de la performance chronométrée. Note sur le gain de temps par rapport à la somme des temps individuels (l'efficacité du gain au passage)."
-        },
-        debutant: [
-            "Tenue du témoin en pleine course (bras équilibrés) et transmission à l'arrêt.",
-            "Apprendre la transmission 'visuelle' : le receveur regarde le donneur et prend le témoin en trottinant.",
-            "Coordination des couloirs : le donneur court à l'intérieur du couloir, le receveur à l'extérieur pour éviter le choc.",
-            "Travailler l'appel sonore : le donneur crie 'HOP' pour prévenir le partenaire.",
-            "Initiation au départ du 1er relayeur : départ sans blocs mais avec témoin.",
-            "Exercices de réaction : partir au signal visuel du partenaire qui franchit une ligne.",
-            "Rôle de juge : vérifier si le témoin est bien donné à l'intérieur des 20m de la zone centrale.",
-            "Enchaînement complet à 80% de la vitesse.",
-            "Pré-test : stabiliser un passage sans chute sur 60m."
-        ],
-        moyen: [
-            "Apprendre à ne plus regarder derrière (transmission non-visuelle) : faire confiance au signal du partenaire.",
-            "Mise en place d'une marque (repère au sol) à environ 5-6 mètres derrière le receveur.",
-            "Travailler l'accélération du receveur : il doit 'fuir' son partenaire pour recevoir le témoin lancé.",
-            "Technique 'par le bas' : le receveur tend la main en arrière, paume vers le bas, formant un V.",
-            "Optimisation de la course du 1er relayeur (30m de sprint pur).",
-            "Travail de synchronisation : le donneur doit tendre le bras au maximum pour 'gagner' de la distance.",
-            "Arbitrage : mesurer précisément si la transmission a eu lieu dans les limites.",
-            "Séries de 2x30m à vitesse maximale avec récupération complète.",
-            "Séance de réglage des marques (avancer ou reculer la marque de départ du receveur)."
-        ],
-        avance: [
-            "Spécialisation des mains : Donneur (Main Droite) -> Receveur (Main Gauche) pour éviter de changer le témoin de main.",
-            "Travail du départ en starting-blocks pour le 1er coureur (avec témoin).",
-            "Analyse de la 'zone de transmission optimale' : le passage doit se faire dans les 5 derniers mètres de la zone.",
-            "Exercices de survitesse : le donneur arrive lancé à 100%, le receveur doit s'adapter.",
-            "Travail de l'appui au sol : rester sur l'avant-pied pendant toute la durée du sprint.",
-            "Stratégie de binôme : qui est le meilleur au départ ? Qui est le meilleur finisseur ?",
-            "Analyse vidéo (si possible) : mesurer le temps mort (le moment où personne ne tient le témoin).",
-            "Simulation de 'demi-finale' avec opposition latérale (couloirs occupés).",
-            "Répétition mentale et physique des 3 dernières foulées avant le passage."
-        ],
-        elite: [
-            "Stabilisation des marques au centimètre près selon la forme du jour.",
-            "Travail du 'bras tendu' : le passage se fait à distance maximale entre les deux corps (bras du donneur + bras du receveur).",
-            "Optimisation de la transmission 'par le haut' (plus rapide mais plus risquée).",
-            "Travail de puissance : départs explosifs sur 10m pour le receveur.",
-            "Analyse du 'cycle de jambes' : maintenir une fréquence élevée pendant la transmission.",
-            "Gestion du vent : ajuster la marque de départ selon que le vent est de face ou de dos.",
-            "Coaching : le binôme analyse ses propres erreurs de synchronisation.",
-            "Séance de 'Full Speed' : 3 passages à 100% avec 10 minutes de repos.",
-            "Mise en confiance : visualisation de la réussite du passage."
-        ]
-    },
-    'Course en durée': {
-        commun: {
-            S1: "Situation de référence (1000m G / 600m F) pour mesurer le temps de base et observer la gestion spontanée de l'effort.",
-            S2: "Test Navette (Luc Léger) pour déterminer la VMA et constituer les groupes physiologiques. Partie théorique : analyse des résultats, explication des zones d'entraînement (Capacité vs Puissance) et remise des fiches de suivi.",
-            S3: "Partie Pratique (La Posture) : Travail technique sur la 'foulée économique' (regard à l'horizon, buste droit, relâchement des épaules, mouvement des bras en piston, attaque médio-pied). Exercices de gammes (montées de genoux, talons-fesses) axés sur le placement.",
-            S12: "Test Bilan : courir (1000m G / 600m F) pour mesurer le temps de passage et observer la gestion de l'effort."
-        },
-        debutant: [
-            "S4 (Capacité Aérobie) : 10 min de course continue en aisance respiratoire (pouvoir parler en courant).",
-            "S5 (Capacité Aérobie) : 12 min de course continue en aisance respiratoire.",
-            "S6 (Capacité Aérobie) : 15 min de course continue en aisance respiratoire.",
-            "S7 (Capacité Aérobie) : Alterner 4 min course / 1 min marche (3 séries) en aisance respiratoire.",
-            "S8 (Puissance Aérobie) : Initiation au fractionné très doux : 45\" course rapide / 45\" marche (2 séries de 5).",
-            "S9 (Puissance Aérobie) : Travail de vitesse sur 100m pour dynamiser la foulée.",
-            "S10 (Puissance Aérobie) : Travail de vitesse sur 100m pour dynamiser la foulée.",
-            "S11 (Puissance Aérobie) : Test sur 500m (G) / 300m (F) pour valider l'allure cible de la S12.",
-            "S12 (Évaluation) : Test Bilan final sur 1000m (G) / 600m (F)."
-        ],
-        moyen: [
-            "S4 (Capacité Aérobie) : 15 min à 75% VMA.",
-            "S5 (Capacité Aérobie) : 2 x 8 min à 80% VMA (repos 2 min).",
-            "S6 (Capacité Aérobie) : Travail de régularité avec passage aux plots à intervalles réguliers (allure métronome).",
-            "S7 (Capacité Aérobie) : Travail de régularité avec passage aux plots à intervalles réguliers (allure métronome).",
-            "S8 (Puissance Aérobie) : Séance de 30\"/30\" à 100% VMA (2 séries de 8 répétitions).",
-            "S9 (Puissance Aérobie) : Séance de 30\"/30\" à 100% VMA (2 séries de 8 répétitions).",
-            "S10 (Puissance Aérobie) : Intervalles de 200m à 100% VMA (récupération égale au temps de course).",
-            "S11 (Puissance Aérobie) : Simulation de course sur 800m (G) / 500m (F) à l'allure du test bilan.",
-            "S12 (Évaluation) : Test Bilan final sur 1000m (G) / 600m (F)."
-        ],
-        avance: [
-            "S4 (Capacité Aérobie) : 20 min en variation d'allure (allure 1, 2, 3).",
-            "S5 (Capacité Aérobie) : Intervalles longs 3 x 1000m à 85% VMA (repos 3 min). Travail sur le maintien de la posture malgré la fatigue.",
-            "S6 (Capacité Aérobie) : Intervalles longs 3 x 1000m à 85% VMA (repos 3 min). Travail sur le maintien de la posture malgré la fatigue.",
-            "S7 (Capacité Aérobie) : Intervalles longs 3 x 1000m à 85% VMA (repos 3 min). Travail sur le maintien de la posture malgré la fatigue.",
-            "S8 (Puissance Aérobie) : Séance de 45\"/30\" à 105% VMA.",
-            "S9 (Puissance Aérobie) : Répétitions de 400m à 100% VMA (repos 1'30\"). Focus sur l'efficacité des bras dans le dernier virage.",
-            "S10 (Puissance Aérobie) : Répétitions de 400m à 100% VMA (repos 1'30\"). Focus sur l'efficacité des bras dans le dernier virage.",
-            "S11 (Puissance Aérobie) : Travail spécifique sur le 'Sprint final' : 600m à allure test + 200m accélération maximale.",
-            "S12 (Évaluation) : Test Bilan final sur 1000m (G) / 600m (F)."
-        ],
-        elite: [
-            "S4 (Capacité Aérobie) : Travail au seuil 2 x 10 min à 90% VMA.",
-            "S5 (Capacité Aérobie) : Travail au seuil 2 x 10 min à 90% VMA.",
-            "S6 (Capacité Aérobie) : Pyramide de capacité (400m - 800m - 1200m - 800m - 400m) à 90% VMA.",
-            "S7 (Capacité Aérobie) : Pyramide de capacité (400m - 800m - 1200m - 800m - 400m) à 90% VMA.",
-            "S8 (Puissance Aérobie) : Fractionné court intense : 200m à 110% VMA avec récupération très courte (45\").",
-            "S9 (Puissance Aérobie) : Fractionné court intense : 200m à 110% VMA avec récupération très courte (45\").",
-            "S10 (Puissance Aérobie) : Séance spécifique : 3 x 600m à 105% VMA (récupération complète).",
-            "S11 (Puissance Aérobie) : Préparation mentale et tactique : simulation de départ rapide et gestion des dépassements.",
-            "S12 (Évaluation) : Test Bilan final sur 1000m (G) / 600m (F)."
-        ]
     }
 };
 
@@ -1110,13 +1110,13 @@ const getObjectifSeance = (aps, niveau, numeroSeance, nombreTotalSeances) => {
     if (numeroSeance === 2) return cycle.commun.S2;
     if (numeroSeance === nombreTotalSeances) return cycle.commun.S12;
     
-    let seances = cycle[niveau];
+    var seances = cycle[niveau];
     if (!seances) {
         seances = cycle.debutant || cycle['1AC'];
     }
     if (!seances) return null;
     
-    const indexApprentissage = numeroSeance - 3;
+    var indexApprentissage = numeroSeance - 3;
     if (indexApprentissage >= 0 && indexApprentissage < seances.length) {
         return seances[indexApprentissage];
     }
@@ -1129,7 +1129,7 @@ const buildProjetCycle = (aps, niveau, nombreSeances) => {
     if (!cycle) return null;
     
     const projet = [];
-    let seances = cycle[niveau];
+    var seances = cycle[niveau];
     if (!seances) {
         seances = cycle.debutant || cycle['1AC'];
     }
