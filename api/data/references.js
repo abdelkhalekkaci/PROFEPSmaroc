@@ -458,10 +458,11 @@ const getSchema = (aps, numSit) => {
 const OBJECTIFS_CYCLE = {
     'Football': {
         commun: {
-            S1: "Évaluer le niveau initial des élèves (capacités motrices, techniques et tactiques) afin de diagnostiquer les besoins et constituer des groupes de niveau.",
+            S1: "Test d'observation - Évaluation diagnostique : Évaluer le niveau initial des élèves (capacités motrices, techniques et tactiques) afin de diagnostiquer les besoins et constituer des groupes de niveau.",
             S2: "Maîtriser les lois du jeu (FIFA adaptées au milieu scolaire), comprendre les principes de l'occupation de l'espace (bloc équipe) et les valeurs du fair-play.",
-            S12: "Évaluer le degré d'atteinte des objectifs du cycle, mesurer la progression technique et tactique et valider les acquis en situation de match."
-        },
+            S12: "Test bilan - Évaluation finale : Évaluer le degré d'atteinte des objectifs du cycle, mesurer la progression technique et tactique et valider les acquis en situation de match."
+        }
+    },
         debutant: [
             "Maîtriser la conduite de balle en variant les surfaces de contact (intérieur/coup de pied) sans perdre le contrôle.",
             "Apprendre à réaliser une passe courte précise à l'intérieur du pied vers un partenaire immobile.",
@@ -508,11 +509,11 @@ const OBJECTIFS_CYCLE = {
         ]
     },
     'Volleyball': {
-        commun: {
-            S1: "Évaluer le niveau initial des élèves (capacité à maintenir le ballon en l'air, respect des zones de jeu) pour établir un diagnostic et former des groupes homogènes.",
+     commun: {
+            S1: "Test d'observation - Évaluation diagnostique : Évaluer le niveau initial des élèves (capacité à maintenir le ballon en l'air, respect des zones de jeu) pour établir un diagnostic et former des groupes homogènes.",
             S2: "Étude du règlement officiel (FIVB adapté), compréhension du système de rotation, des fautes de filet, et des principes tactiques de base (réception-passe-attaque).",
-            S12: "Évaluer les progrès techniques individuels et l'efficacité de l'organisation collective en situation de match officiel."
-        },
+            S12: "Test bilan - Évaluation finale : Évaluer les progrès techniques individuels et l'efficacité de l'organisation collective en situation de match officiel."
+        }
         debutant: [
             "Maîtriser le service cuillère pour mettre le ballon en jeu de manière sécurisée.",
             "Développer la réception en manchette (bras tendus, plan de frappe stable) sur des ballons faciles.",
@@ -559,11 +560,11 @@ const OBJECTIFS_CYCLE = {
         ]
     },
     'Basketball': {
-        commun: {
-            S1: "Évaluer la capacité à manipuler le ballon, à se déplacer et à viser la cible pour diagnostiquer le niveau moteur et technique.",
+      commun: {
+            S1: "Test d'observation - Évaluation diagnostique : Évaluer la capacité à manipuler le ballon, à se déplacer et à viser la cible pour diagnostiquer le niveau moteur et technique.",
             S2: "Apprentissage des règles fondamentales (marcher, reprise de dribble, fautes de contact, zone), et explication des rôles (meneur, ailier, pivot).",
-            S12: "Évaluation finale des compétences acquises en situation de match (efficacité au tir, respect des règles et choix tactiques)."
-        },
+            S12: "Test bilan - Évaluation finale : Évaluation finale des compétences acquises en situation de match (efficacité au tir, respect des règles et choix tactiques)."
+        }
         debutant: [
             "Maîtriser le dribble de progression avec la main dominante sans regarder constamment le ballon.",
             "Apprendre la passe de poitrine à deux mains avec une extension complète des bras.",
@@ -610,10 +611,10 @@ const OBJECTIFS_CYCLE = {
         ]
     },
     'Handball': {
-        commun: {
-            S1: "Évaluer la qualité de la passe, du tir et l'engagement défensif pour identifier les besoins du groupe.",
+             commun: {
+            S1: "Test d'observation - Évaluation diagnostique : Évaluer la qualité de la passe, du tir et l'engagement défensif pour identifier les besoins du groupe.",
             S2: "Étude du règlement (zone, marcher, 3 secondes, fautes de bras) et des principes d'attaque placée.",
-            S12: "Validation des acquis techniques et tactiques en situation réelle de compétition."
+            S12: "Test bilan - Évaluation finale : Validation des acquis techniques et tactiques en situation réelle de compétition."
         },
         debutant: [
             "Maîtriser la manipulation du ballon (prise de balle à une main) et le dribble de base.",
@@ -661,11 +662,11 @@ const OBJECTIFS_CYCLE = {
         ]
     },
     'Course de vitesse': {
-        commun: {
-            S1: "Évaluer le temps de réaction et la vitesse maximale sur 60m ou 80m (chronométrage de référence).",
+            commun: {
+            S1: "Test d'observation - Évaluation diagnostique : Évaluer le temps de réaction et la vitesse maximale sur 60m ou 80m (chronométrage de référence).",
             S2: "Comprendre la physiologie de la vitesse (anaérobie alactique), les phases de la course (départ, accélération, maintien) et le règlement.",
-            S12: "Mesurer la performance finale et comparer avec le test initial pour valider la progression."
-        },
+            S12: "Test bilan - Évaluation finale : Mesurer la performance finale et comparer avec le test initial pour valider la progression."
+        }
         debutant: [
             "Apprendre la posture de course : buste droit, regard vers l'horizon, bras en piston.",
             "Développer la réactivité au signal sonore (varier les positions de départ : assis, couché, dos).",
@@ -713,10 +714,10 @@ const OBJECTIFS_CYCLE = {
     },
     'Lancer de poids': {
         commun: {
-            S1: "Évaluer le niveau initial (force et coordination) et identifier les élèves qui lancent au lieu de pousser.",
+            S1: "Test d'observation - Évaluation diagnostique : Évaluer le niveau initial (force et coordination) et identifier les élèves qui lancent au lieu de pousser.",
             S2: "Règles de sécurité (zone de jet), tenue de l'engin (embase des doigts), et distinction entre jet et lancer.",
-            S12: "Lancer un poids de 4kg (garçons) ou 3kg (filles) le plus loin possible et mesurer la performance."
-        },
+            S12: "Test bilan - Évaluation finale : Lancer un poids de 4kg (garçons) ou 3kg (filles) le plus loin possible et mesurer la performance."
+        }
         debutant: [
             "Apprendre à tenir le poids contre le cou et à réaliser une poussée directe vers l'avant.",
             "Travailler l'appui au sol : pieds décalés, poids du corps sur la jambe arrière.",
@@ -763,11 +764,10 @@ const OBJECTIFS_CYCLE = {
         ]
     },
     'Saut en longueur': {
-        commun: {
-            S1: "Courir et sauter le plus loin possible. 3 essais mesurés pour chaque élève.",
+           S1: "Test d'observation - Évaluation diagnostique : Courir et sauter le plus loin possible. 3 essais mesurés pour chaque élève.",
             S2: "Règlement (planche, mordu, mesure à la trace), biomécanique du saut (Vitesse + Impulsion = Distance), et sécurité.",
-            S12: "3 essais mesurés. Note basée sur la performance brute et l'évolution technique observée."
-        },
+            S12: "Test bilan - Évaluation finale : 3 essais mesurés. Note basée sur la performance brute et l'évolution technique observée."
+        }
         debutant: [
             "Identifier son pied d'appel (pied de force) à travers des jeux de sauts variés.",
             "Apprendre la coordination bras/jambes lors d'un saut sans élan.",
@@ -814,11 +814,11 @@ const OBJECTIFS_CYCLE = {
         ]
     },
     'Gymnastique': {
-        commun: {
-            S1: "Présenter l'enchaînement de référence pour évaluer la capacité de mémorisation, la sécurité et le niveau technique de départ.",
+       commun: {
+            S1: "Test d'observation - Présentation de l'enchaînement de référence : Présenter l'enchaînement de référence pour évaluer la capacité de mémorisation, la sécurité et le niveau technique de départ.",
             S2: "Analyse du barème de notation (Difficulté, Exécution, Composition). Apprentissage de la terminologie des éléments A, B, C, D, E. Règles de sécurité.",
-            S12: "Présentation finale de l'enchaînement devant le groupe classe. Évaluation sommative basée sur la réussite des éléments et la tenue corporelle."
-        },
+            S12: "Test bilan - Présentation finale : Présentation finale de l'enchaînement devant le groupe classe. Évaluation sommative basée sur la réussite des éléments et la tenue corporelle."
+        }
         '1AC': [
             "Maîtriser les éléments de famille A : Roulade avant groupée et Planche (équilibre).",
             "Consolider la Roulade arrière (A) et la Chandelle (A).",
@@ -891,11 +891,11 @@ const OBJECTIFS_CYCLE = {
         elite: null
     },
     'Saut en hauteur': {
-        commun: {
-            S1: "Situation de référence : franchir une barre à différentes hauteurs. 3 essais par hauteur. Diagnostic sur : le pied d'appel, la direction de la course et la technique de franchissement naturelle (Ciseau ou autre).",
+         commun: {
+            S1: "Test d'observation - Situation de référence : Franchir une barre à différentes hauteurs. 3 essais par hauteur. Diagnostic sur : le pied d'appel, la direction de la course et la technique de franchissement naturelle (Ciseau ou autre).",
             S2: "Règlement (appel un pied obligatoire, 3 échecs consécutifs = élimination, ne pas toucher les montants), sécurité (chute sur les épaules/dos dans la zone de réception), et principes mécaniques (vitesse d'approche et angle d'envol).",
-            S12: "Concours final officiel. Mesure de la meilleure performance (Record Personnel). Note basée sur la performance brute et l'évolution de la maîtrise technique."
-        },
+            S12: "Test bilan - Concours final officiel : Mesure de la meilleure performance (Record Personnel). Note basée sur la performance brute et l'évolution de la maîtrise technique."
+        }
         debutant: [
             "Identifier son pied d'appel et s'initier au saut en 'Ciseau' (jambe d'attaque tendue, puis jambe d'esquive).",
             "Travailler l'impulsion verticale près de la barre sans course d'élan (sauter 'haut' et non 'loin').",
@@ -942,11 +942,11 @@ const OBJECTIFS_CYCLE = {
         ]
     },
     'Course de haies': {
-        commun: {
-            S1: "Situation de référence : course chronométrée sur la distance officielle (ex: 40m ou 60m haies). Diagnostic sur : le nombre d'appuis entre les haies, l'hésitation au franchissement et la jambe d'attaque.",
+            commun: {
+            S1: "Test d'observation - Situation de référence : Course chronométrée sur la distance officielle (ex: 40m ou 60m haies). Diagnostic sur : le nombre d'appuis entre les haies, l'hésitation au franchissement et la jambe d'attaque.",
             S2: "Règlement (hauteur des haies, couloirs, franchissement licite), sécurité (ne pas sauter de biais), et vocabulaire technique (jambe d'attaque, jambe d'esquive, intervalle).",
-            S12: "Compétition finale. Chronométrage des 3 essais. Note basée sur la performance (vitesse) et l'efficacité du franchissement (maintien de la vitesse horizontale)."
-        },
+            S12: "Test bilan - Compétition finale : Chronométrage des 3 essais. Note basée sur la performance (vitesse) et l'efficacité du franchissement (maintien de la vitesse horizontale)."
+        }
         debutant: [
             "Identifier sa jambe d'attaque et s'initier au franchissement de lattes ou de haies très basses.",
             "Apprendre à courir 'par-dessus' la haie sans faire un saut en hauteur (rester rasant).",
@@ -993,11 +993,11 @@ const OBJECTIFS_CYCLE = {
         ]
     },
     'Course de relais': {
-        commun: {
-            S1: "Test sur 2x30m. Diagnostic : Le receveur attend-il à l'arrêt ? Le donneur ralentit-il avant de donner ? Y a-t-il une chute du témoin ?",
+          commun: {
+            S1: "Test d'observation - Diagnostic : Test sur 2x30m. Diagnostic : Le receveur attend-il à l'arrêt ? Le donneur ralentit-il avant de donner ? Y a-t-il une chute du témoin ?",
             S2: "Règlement spécifique : La zone de transmission (souvent située entre le 20ème et le 40ème mètre sur les 60m totaux). Notion de 'donneur' (vitesse de maintien) et 'receveur' (accélération).",
-            S12: "Compétition 'Duo-Sprint'. Mesure de la performance chronométrée. Note sur le gain de temps par rapport à la somme des temps individuels (l'efficacité du gain au passage)."
-        },
+            S12: "Test bilan - Compétition 'Duo-Sprint' : Mesure de la performance chronométrée. Note sur le gain de temps par rapport à la somme des temps individuels (l'efficacité du gain au passage)."
+        }
         debutant: [
             "Tenue du témoin en pleine course (bras équilibrés) et transmission à l'arrêt.",
             "Apprendre la transmission 'visuelle' : le receveur regarde le donneur et prend le témoin en trottinant.",
@@ -1045,11 +1045,11 @@ const OBJECTIFS_CYCLE = {
     },
     'Course en durée': {
         commun: {
-            S1: "Situation de référence (1000m G / 600m F) pour mesurer le temps de base et observer la gestion spontanée de l'effort.",
+            S1: "Test d'observation - Situation de référence : Course de 1000m (garçons) / 600m (filles) pour mesurer le temps de base et observer la gestion spontanée de l'effort.",
             S2: "Test Navette (Luc Léger) pour déterminer la VMA et constituer les groupes physiologiques. Partie théorique : analyse des résultats, explication des zones d'entraînement (Capacité vs Puissance) et remise des fiches de suivi.",
             S3: "Partie Pratique (La Posture) : Travail technique sur la 'foulée économique' (regard à l'horizon, buste droit, relâchement des épaules, mouvement des bras en piston, attaque médio-pied). Exercices de gammes (montées de genoux, talons-fesses) axés sur le placement.",
-            S12: "Test Bilan : courir (1000m G / 600m F) pour mesurer le temps de passage et observer la gestion de l'effort."
-        },
+            S12: "Test bilan - Évaluation finale : Course de 1000m (garçons) / 600m (filles) pour mesurer le temps de passage et observer la gestion de l'effort."
+        }
         debutant: [
             "S4 (Capacité Aérobie) : 10 min de course continue en aisance respiratoire (pouvoir parler en courant).",
             "S5 (Capacité Aérobie) : 12 min de course continue en aisance respiratoire.",
