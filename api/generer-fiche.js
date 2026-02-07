@@ -35,8 +35,42 @@ module.exports = async (req, res) => {
         const vocabAPS = VOCABULAIRE_APS[aps] || '';
 
         // Récupération des situations de référence si disponibles
-        const situationsRef = getSituations(aps, objectif);
-        const situationsContext = situationsRef ? `
+        // IMPORTANT: Passer numeroSeance pour détecter les tests d'observation et bilans
+        const situationsRef = getSituations(aps, objectif, numeroSeance);
+        
+        // Vérifier si c'est un test d'observation ou un test bilan
+        const isTest = situationsRef && (situationsRef.isTestObservation || situationsRef.isTestBilan);
+        
+        const situationsContext = situationsRef ? (isTest ? `
+🎯 SÉANCE SPÉCIALE ${situationsRef.isTestObservation ? 'TEST D\'OBSERVATION (Séance 1)' : 'TEST BILAN (Dernière séance)'}
+
+Cette séance utilise la SITUATION DE RÉFÉRENCE avec organisation en 3 groupes :
+- JOUEURS : disputent le match/réalisent la performance
+- OBSERVATEURS : utilisent des grilles d'observation
+- ORGANISATEURS : gèrent l'arbitrage, le chronométrage, le matériel
+
+ÉCHAUFFEMENT SPÉCIFIQUE:
+${situationsRef.echauffement}
+
+SITUATION UNIQUE - "${situationsRef.situation1.titre}":
+- But: ${situationsRef.situation1.but}
+- Organisation: ${situationsRef.situation1.organisation}
+- Déroulement: ${situationsRef.situation1.deroulement}
+- Consignes: ${situationsRef.situation1.consignes}
+- Variantes: ${situationsRef.situation1.variantes}
+
+CRITÈRES DE RÉALISATION (Comment bien faire):
+${situationsRef.criteresRealisation}
+
+CRITÈRES DE RÉUSSITE (Mesurable):
+${situationsRef.criteresReussite}
+
+⚠️ INSTRUCTION SPÉCIALE POUR ${situationsRef.isTestObservation ? 'TEST D\'OBSERVATION' : 'TEST BILAN'}:
+- N'invente PAS de situation 2, il y a UNE SEULE situation : la situation de référence
+- Respecte STRICTEMENT l'organisation en 3 groupes (JOUEURS, OBSERVATEURS, ORGANISATEURS)
+- Le professeur utilise des grilles d'observation pour ${situationsRef.isTestObservation ? 'identifier le niveau initial' : 'mesurer les progrès réalisés'}
+- Insiste sur l'importance de la rotation entre les 3 rôles
+- Le but de la phase fondamentale est : ${situationsRef.isTestObservation ? 'Identifier le niveau initial des élèves dans l\'activité' : 'Évaluer les progrès réalisés et le niveau final des élèves'}` : `
 SITUATIONS DE RÉFÉRENCE PÉDAGOGIQUES (utilise-les comme base et adapte selon l'objectif):
 
 ÉCHAUFFEMENT SPÉCIFIQUE DE RÉFÉRENCE:
@@ -62,7 +96,7 @@ ${situationsRef.criteresRealisation}
 CRITÈRES DE RÉUSSITE (Mesurable):
 ${situationsRef.criteresReussite}
 
-⚠️ INSTRUCTION: Utilise ces situations comme BASE et ADAPTE-LES pour correspondre EXACTEMENT à l'objectif "${objectif}". Conserve la structure pédagogique (S1 apprentissage → S2 transfert) mais personnalise le contenu.` : '';
+⚠️ INSTRUCTION: Utilise ces situations comme BASE et ADAPTE-LES pour correspondre EXACTEMENT à l'objectif "${objectif}". Conserve la structure pédagogique (S1 apprentissage → S2 transfert) mais personnalise le contenu.`) : '';
 
         // ==================== PROMPT IA ====================
         const prompt = `Tu es un expert en EPS au Maroc, spécialiste de ${aps}.
@@ -86,7 +120,7 @@ ${situationsContext}
 - N'utilise PAS de markdown (gras **, titres ##) pour les CLÉS.
 - Écris CHAQUE CLÉ exactement comme demandé, suivie de deux points.
 - Ne mets pas de texte introductif ou conclusif.
-${situationsRef ? '- ADAPTE les situations de référence ci-dessus pour qu\'elles correspondent PARFAITEMENT à l\'objectif.' : ''}
+${situationsRef ? (isTest ? '- UTILISE STRICTEMENT la situation de référence ci-dessus SANS modification.' : '- ADAPTE les situations de référence ci-dessus pour qu\'elles correspondent PARFAITEMENT à l\'objectif.') : ''}
 
 GÉNÈRE CE CONTENU 100% SPÉCIFIQUE à ${aps}:
 
@@ -100,14 +134,14 @@ SITUATION1_DEROULEMENT: [4-5 phrases décrivant précisément le déroulement de
 SITUATION1_CONSIGNES: [4 consignes techniques spécifiques et précises, une par ligne, sans astérisques]
 SITUATION1_VARIANTES: [Simplifier: 1-2 façons | Complexifier: 1-2 façons]
 
-SITUATION2_TITRE: [titre - situation plus proche du jeu réel ou de la performance]
+${!isTest ? `SITUATION2_TITRE: [titre - situation plus proche du jeu réel ou de la performance]
 SITUATION2_BUT: [ce que l'élève doit FAIRE - UNE phrase d'action]
 SITUATION2_ORGANISATION: [organisation détaillée avec dimensions et matériel]
 SITUATION2_DEROULEMENT: [4-5 phrases décrivant le déroulement]
 SITUATION2_CONSIGNES: [4 consignes techniques]
 SITUATION2_VARIANTES: [variantes de simplification et complexification]
 
-CRITERES_REALISATION: [4 critères décrivant COMMENT bien faire - qualité technique du geste, avec bullet points •]
+` : ''}CRITERES_REALISATION: [4 critères décrivant COMMENT bien faire - qualité technique du geste, avec bullet points •]
 CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres, temps, distances]`;
 
         // Appel API Groq
@@ -162,11 +196,18 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
         const fb = FALLBACKS[aps] || FALLBACKS['Handball'];
         const sitRefData = situationsRef; // Utiliser les situations de référence si disponibles
         
+        // Pour les tests, situation2 est null donc on ne doit pas générer de situation 2
+        const skipSituation2 = isTest;
+        
         if (!echaufSpec || echaufSpec.length < 20) {
             echaufSpec = sitRefData ? sitRefData.echauffement : fb.echauf;
         }
         if (!butFonda || butFonda.length < 10) {
-            butFonda = `Atteindre l'objectif: ${objectif}`;
+            butFonda = isTest ? 
+                (situationsRef.isTestObservation ? 
+                    'Identifier le niveau initial des élèves dans l\'activité par l\'observation' : 
+                    'Évaluer les progrès réalisés et le niveau final des élèves') :
+                `Atteindre l'objectif: ${objectif}`;
         }
         if (!s1Titre || s1Titre.length < 5) {
             s1Titre = sitRefData ? sitRefData.situation1.titre : fb.s1t;
@@ -186,24 +227,37 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
         if (!s1Variantes || s1Variantes.length < 20) {
             s1Variantes = sitRefData ? sitRefData.situation1.variantes : fb.s1v;
         }
-        if (!s2Titre || s2Titre.length < 5) {
-            s2Titre = sitRefData ? sitRefData.situation2.titre : fb.s2t;
+        
+        // NE PAS APPLIQUER de fallbacks pour situation2 si c'est un test
+        if (!skipSituation2) {
+            if (!s2Titre || s2Titre.length < 5) {
+                s2Titre = sitRefData && sitRefData.situation2 ? sitRefData.situation2.titre : fb.s2t;
+            }
+            if (!s2But || s2But.length < 10) {
+                s2But = sitRefData && sitRefData.situation2 ? sitRefData.situation2.but : fb.s2b;
+            }
+            if (!s2Orga || s2Orga.length < 20) {
+                s2Orga = sitRefData && sitRefData.situation2 ? sitRefData.situation2.organisation : fb.s2o;
+            }
+            if (!s2Deroul || s2Deroul.length < 30) {
+                s2Deroul = sitRefData && sitRefData.situation2 ? sitRefData.situation2.deroulement : fb.s2d;
+            }
+            if (!s2Consignes || s2Consignes.length < 30) {
+                s2Consignes = sitRefData && sitRefData.situation2 ? sitRefData.situation2.consignes : fb.s2c;
+            }
+            if (!s2Variantes || s2Variantes.length < 20) {
+                s2Variantes = sitRefData && sitRefData.situation2 ? sitRefData.situation2.variantes : fb.s2v;
+            }
+        } else {
+            // Pour les tests, on met des valeurs vides pour situation2
+            s2Titre = '';
+            s2But = '';
+            s2Orga = '';
+            s2Deroul = '';
+            s2Consignes = '';
+            s2Variantes = '';
         }
-        if (!s2But || s2But.length < 10) {
-            s2But = sitRefData ? sitRefData.situation2.but : fb.s2b;
-        }
-        if (!s2Orga || s2Orga.length < 20) {
-            s2Orga = sitRefData ? sitRefData.situation2.organisation : fb.s2o;
-        }
-        if (!s2Deroul || s2Deroul.length < 30) {
-            s2Deroul = sitRefData ? sitRefData.situation2.deroulement : fb.s2d;
-        }
-        if (!s2Consignes || s2Consignes.length < 30) {
-            s2Consignes = sitRefData ? sitRefData.situation2.consignes : fb.s2c;
-        }
-        if (!s2Variantes || s2Variantes.length < 20) {
-            s2Variantes = sitRefData ? sitRefData.situation2.variantes : fb.s2v;
-        }
+        
         if (!critReal || critReal.length < 50) {
             critReal = sitRefData ? sitRefData.criteresRealisation : fb.cr;
         }
@@ -554,12 +608,12 @@ th, td {
 <b>Consignes:</b> ${s1Consignes.replace(/\n/g, ' | ')}<br>
 <b>Variantes:</b> ${s1Variantes.replace(/\n/g, ' | ')}<br><br>
 
-<div class="sit-title" style="color:#1565c0">◆ SITUATION 2: ${s2Titre}</div>
+${!skipSituation2 ? `<div class="sit-title" style="color:#1565c0">◆ SITUATION 2: ${s2Titre}</div>
 <b>But:</b> ${s2But}<br>
 <b>Organisation:</b> ${s2Orga}<br>
 <b>Déroulement:</b> ${s2Deroul}<br>
 <b>Consignes:</b> ${s2Consignes.replace(/\n/g, ' | ')}<br>
-<b>Variantes:</b> ${s2Variantes.replace(/\n/g, ' | ')}<br><br>
+<b>Variantes:</b> ${s2Variantes.replace(/\n/g, ' | ')}<br><br>` : ''}
 
 <div class="sit-title" style="color:#e65100">◆ SITUATION DE RÉFÉRENCE:</div>
 ${sitRef}
