@@ -1068,12 +1068,254 @@ const SITUATIONS_FICHES = {
 };
 
 // ============================================================================
-// FONCTION HELPER : Récupérer les situations pour un sport et un objectif
+// SITUATIONS DE RÉFÉRENCE POUR TESTS D'OBSERVATION ET BILANS
 // ============================================================================
 
-const getSituations = (sport, objectif) => {
+const SITUATIONS_TESTS = {
+    'Handball': {
+        titre: 'Match 7 contre 7 - Situation de référence',
+        but: 'Jouer un match en appliquant les règles officielles et observer le niveau des élèves',
+        organisation: 'Terrain réglementaire 40m x 20m, 2 équipes de 7 joueurs (dont gardien), 2 buts, ballon officiel, chasubles, chronomètre. Organisation en 3 groupes tournants : JOUEURS (14 élèves jouent), OBSERVATEURS (utilisent grilles d\'observation), ORGANISATEURS (arbitrage, chronométrage, gestion du matériel). Rotation toutes les 10 minutes.',
+        deroulement: 'Match officiel avec application des règles du handball : zone, marcher, reprise de dribble, contact. Les JOUEURS s\'affrontent en match réel. Les OBSERVATEURS remplissent des grilles d\'observation sur les critères techniques et tactiques. Les ORGANISATEURS gèrent l\'arbitrage (sifflet, gestion des fautes) et le score. Rotation systématique des groupes pour que chaque élève passe par les 3 rôles. Le professeur circule avec ses grilles d\'observation pour identifier le niveau initial/final de chaque élève.',
+        consignes: 'JOUEURS : Jouer collectivement, respecter les règles, s\'engager en attaque et défense\nOBSERVATEURS : Remplir la grille avec précision, noter les réussites et difficultés\nORGANISATEURS : Arbitrer avec équité, gérer le temps, compter les buts\nTous : Rotation rapide entre les rôles, entraide, fair-play',
+        variantes: 'Simplifier : Terrain réduit 30x20m, règles simplifiées, match 5c5 | Complexifier : Terrain officiel, règles complètes, gardiens spécialisés'
+    },
+    'Football': {
+        titre: 'Match 5 contre 5 - Situation de référence',
+        but: 'Jouer un match et observer le niveau technique et tactique des élèves',
+        organisation: 'Terrain réduit 40m x 20m, 2 équipes de 5 joueurs, 2 buts, ballon, chasubles, chronomètre. Organisation en 3 groupes tournants : JOUEURS (10 élèves jouent), OBSERVATEURS (grilles d\'observation), ORGANISATEURS (arbitrage, score). Rotation toutes les 10 minutes.',
+        deroulement: 'Match avec règles simplifiées du football : hors-jeu allégé, contacts limités. Les JOUEURS disputent le match. Les OBSERVATEURS notent les actions techniques (passes, tirs, contrôles, dribbles) et les comportements tactiques. Les ORGANISATEURS arbitrent et gèrent le temps. Le professeur observe avec ses grilles pour évaluer le niveau individuel et collectif. Rotation des groupes toutes les 10 minutes.',
+        consignes: 'JOUEURS : S\'engager dans le jeu, respecter les règles, jouer collectivement\nOBSERVATEURS : Observer et noter avec précision les critères techniques\nORGANISATEURS : Arbitrage équitable, gestion du temps et du score\nTous : Respecter les rotations, fair-play, entraide',
+        variantes: 'Simplifier : Terrain 30x15m, match 4c4, règles très simplifiées | Complexifier : Terrain 50x30m, match 7c7, règles complètes'
+    },
+    'Basketball': {
+        titre: 'Match 5 contre 5 - Situation de référence',
+        but: 'Jouer un match et identifier le niveau de jeu des élèves',
+        organisation: 'Demi-terrain avec panier, 2 équipes de 5 joueurs, ballon, chasubles, chronomètre. Organisation en 3 groupes : JOUEURS (10 élèves), OBSERVATEURS (grilles), ORGANISATEURS (arbitrage). Rotation toutes les 8 minutes.',
+        deroulement: 'Match avec règles officielles : marcher, reprise de dribble, fautes de contact. Les JOUEURS disputent le match en 5c5. Les OBSERVATEURS remplissent les grilles sur les passes, tirs, dribbles, démarquages. Les ORGANISATEURS arbitrent et comptent les points. Le professeur observe pour évaluer le niveau. Rotations toutes les 8 minutes pour passer par les 3 rôles.',
+        consignes: 'JOUEURS : Respecter les règles, jouer collectivement, s\'engager en défense\nOBSERVATEURS : Noter les actions techniques et tactiques avec précision\nORGANISATEURS : Arbitrage rigoureux des règles, gestion du temps\nTous : Rotation rapide, esprit sportif, concentration',
+        variantes: 'Simplifier : Match 4c4, règles allégées, panier bas | Complexifier : Match 5c5 terrain complet, règles strictes'
+    },
+    'Volleyball': {
+        titre: 'Match 6 contre 6 - Situation de référence',
+        but: 'Jouer un match et observer les compétences techniques des élèves',
+        organisation: 'Terrain réglementaire 9m x 18m, filet hauteur adaptée, 2 équipes de 6 joueurs, ballon, chronomètre. Organisation en 3 groupes : JOUEURS (12 élèves), OBSERVATEURS (grilles), ORGANISATEURS (arbitrage, score). Rotation toutes les 10 minutes.',
+        deroulement: 'Match avec règles officielles : 3 touches max, rotation obligatoire, service réglementaire. Les JOUEURS s\'affrontent en 6c6. Les OBSERVATEURS notent les manchettes, touches, services, smashs. Les ORGANISATEURS arbitrent (filet, lignes, touches) et gèrent les rotations. Le professeur évalue le niveau avec ses grilles. Rotation des groupes toutes les 10 minutes.',
+        consignes: 'JOUEURS : Respecter les 3 touches, communiquer ("j\'ai!"), assurer les rotations\nOBSERVATEURS : Noter la qualité technique des gestes, les réussites et échecs\nORGANISATEURS : Arbitrage strict, gestion rotations, comptage points\nTous : Rotation rapide entre rôles, fair-play, encouragements',
+        variantes: 'Simplifier : Match 4c4, 4 touches autorisées, lancer au lieu de servir | Complexifier : Match 6c6, règles strictes, smash obligatoire'
+    },
+    'Badminton': {
+        titre: 'Match en simple - Situation de référence',
+        but: 'Disputer des matchs et observer le niveau technique des élèves',
+        organisation: 'Terrains de badminton réglementaires, raquettes, volants. Organisation en 3 groupes : JOUEURS (disputent des matchs en simple), OBSERVATEURS (grilles d\'observation), ORGANISATEURS (arbitrage, comptage). Rotation toutes les 8 minutes.',
+        deroulement: 'Matchs en simple au meilleur des 3 sets de 11 points avec règles officielles (service, zone, fautes). Les JOUEURS disputent leurs matchs. Les OBSERVATEURS notent les services, dégagés, amortis, smashs, déplacements. Les ORGANISATEURS arbitrent et comptent les points. Le professeur circule pour évaluer. Rotation des groupes.',
+        consignes: 'JOUEURS : Respecter les règles de service et de zone, jouer fair-play\nOBSERVATEURS : Noter la technique, la précision, les placements\nORGANISATEURS : Arbitrage rigoureux, annonce claire du score\nTous : Rotation efficace, respect de l\'adversaire, concentration',
+        variantes: 'Simplifier : Match libre sans comptage strict | Complexifier : Match officiel avec set décisif à 15'
+    },
+    'Tennis de table': {
+        titre: 'Match en simple - Situation de référence',
+        but: 'Jouer des matchs et identifier les compétences techniques',
+        organisation: 'Tables de tennis de table, raquettes, balles. Organisation en 3 groupes : JOUEURS (matchs en simple), OBSERVATEURS (grilles), ORGANISATEURS (arbitrage). Rotation toutes les 8 minutes.',
+        deroulement: 'Matchs en simple au meilleur des 3 sets de 11 points avec règles officielles. Les JOUEURS disputent leurs matchs. Les OBSERVATEURS notent coup droit, revers, service, placement. Les ORGANISATEURS arbitrent et comptent. Le professeur évalue le niveau. Rotation toutes les 8 minutes.',
+        consignes: 'JOUEURS : Respecter les règles de service, jouer les points complètement\nOBSERVATEURS : Noter la qualité technique et les tactiques utilisées\nORGANISATEURS : Arbitrage précis, gestion du score et du temps\nTous : Fair-play, rotation rapide, concentration',
+        variantes: 'Simplifier : Match libre sans comptage | Complexifier : Match officiel avec règles strictes'
+    },
+    'Course de vitesse': {
+        titre: 'Course chronométrée 80m - Situation de référence',
+        but: 'Réaliser une course chronométrée pour mesurer le niveau de performance',
+        organisation: 'Piste d\'athlétisme avec couloirs, chronomètres, plots de départ et d\'arrivée. Organisation en 3 groupes : COUREURS (réalisent la course), OBSERVATEURS (grilles d\'observation technique), ORGANISATEURS (chronométrage, placement). Rotation après chaque série.',
+        deroulement: 'Course de 80m en couloirs individuels avec départ au signal. Les COUREURS réalisent leur course (2 essais). Les OBSERVATEURS notent départ, accélération, course, finish. Les ORGANISATEURS chronométrent avec précision et gèrent les départs. Le professeur note les temps et observe la technique. Rotation après chaque série de courses.',
+        consignes: 'COUREURS : Engagement maximal, respecter son couloir, finir la course\nOBSERVATEURS : Noter la technique de course, le départ, le finish\nORGANISATEURS : Chronométrage précis, départs équitables, sécurité\nTous : Respecter les rotations, encourager, noter les temps',
+        variantes: 'Simplifier : 60m, départ debout | Complexifier : 100m, départ en starting-blocks'
+    },
+    'Saut en longueur': {
+        titre: 'Concours de saut - Situation de référence',
+        but: 'Réaliser 3 sauts mesurés pour identifier le niveau de performance',
+        organisation: 'Sautoir avec fosse, planche d\'appel, décamètre, râteau. Organisation en 3 groupes : SAUTEURS (réalisent les sauts), OBSERVATEURS (grilles d\'observation), ORGANISATEURS (mesures, râteau, sécurité). Rotation après chaque série.',
+        deroulement: 'Concours officiel : 3 essais par élève, course d\'élan libre, impulsion sur la planche. Les SAUTEURS réalisent leurs sauts. Les OBSERVATEURS notent course d\'élan, impulsion, envol, réception. Les ORGANISATEURS mesurent et notent les performances, ratissent le sable. Le professeur évalue. Rotation après chaque série de 3 élèves.',
+        consignes: 'SAUTEURS : Course d\'élan accélérée, impulsion sur la planche, réception stable\nOBSERVATEURS : Noter la technique (course, impulsion, envol, réception)\nORGANISATEURS : Mesurer avec précision, ratisser entre chaque saut, noter les performances\nTous : Sécurité dans la fosse, rotation efficace, encouragements',
+        variantes: 'Simplifier : Zone d\'appel élargie, mesure approximative | Complexifier : Planche stricte, élan étalonné'
+    },
+    'Saut en hauteur': {
+        titre: 'Concours de saut - Situation de référence',
+        but: 'Franchir des hauteurs croissantes pour mesurer le niveau',
+        organisation: 'Sautoir avec barre, tapis, décamètre. Organisation en 3 groupes : SAUTEURS, OBSERVATEURS, ORGANISATEURS. Rotation après chaque série.',
+        deroulement: 'Concours avec barres montantes (paliers 5cm). Les SAUTEURS réalisent leurs sauts (3 essais/hauteur). Les OBSERVATEURS notent course, impulsion, franchissement. Les ORGANISATEURS gèrent la barre et mesurent. Le professeur évalue. Rotation après série.',
+        consignes: 'SAUTEURS : Technique Fosbury-Flop, concentration\nOBSERVATEURS : Noter course courbe, impulsion, rotation\nORGANISATEURS : Régler la barre, mesurer, sécurité\nTous : Rotation efficace, encouragements, fair-play',
+        variantes: 'Simplifier : Paliers 10cm, 4 essais | Complexifier : Paliers 3cm, 2 essais'
+    },
+    'Course de durée': {
+        titre: 'Course 1000m (G) / 600m (F) - Situation de référence',
+        but: 'Courir sur une distance donnée pour mesurer la gestion de l\'effort',
+        organisation: 'Piste d\'athlétisme ou parcours mesuré, chronomètres, plots. Organisation en 3 groupes : COUREURS (réalisent la course), OBSERVATEURS (grilles sur allure et régularité), ORGANISATEURS (chronométrage, tours). Rotation après chaque course.',
+        deroulement: 'Course chronométrée avec départ groupé. Les COUREURS gèrent leur allure sur la distance. Les OBSERVATEURS notent régularité, posture, finish. Les ORGANISATEURS chronométrent et comptent les tours. Le professeur observe la gestion de l\'effort. Une seule course par élève avec rotation ensuite.',
+        consignes: 'COUREURS : Gérer son allure, maintenir une course régulière, finir en accélérant\nOBSERVATEURS : Noter la régularité d\'allure, la posture, la gestion de l\'effort\nORGANISATEURS : Chronométrage précis, comptage des tours, annonce des temps\nTous : Encouragements, respect du rythme de chacun, sécurité',
+        variantes: 'Simplifier : 600m pour tous, allure libre | Complexifier : 1200m, allure cible imposée'
+    },
+    'Gymnastique': {
+        titre: 'Présentation d\'enchaînement - Situation de référence',
+        but: 'Présenter un enchaînement au sol pour évaluer le niveau technique',
+        organisation: 'Tapis de gymnastique, espace de présentation, grilles d\'évaluation. Organisation en 3 groupes : GYMNASTES (présentent leur enchaînement), OBSERVATEURS (grilles d\'observation), ORGANISATEURS (gestion du temps, ordre de passage). Rotation après chaque passage.',
+        deroulement: 'Présentation individuelle d\'un enchaînement au sol (45-60 secondes) comprenant les éléments du niveau. Les GYMNASTES présentent leur enchaînement. Les OBSERVATEURS notent amplitude, tenue, liaisons, réceptions. Les ORGANISATEURS gèrent l\'ordre de passage et le temps. Le professeur évalue avec sa grille. Rotation après 3-4 passages.',
+        consignes: 'GYMNASTES : Présenter avec assurance, respecter les éléments imposés, liaisons fluides\nOBSERVATEURS : Noter amplitude, tenue corporelle, qualité des liaisons\nORGANISATEURS : Gérer l\'ordre, chronométrer, assurer le silence pendant les passages\nTous : Respect et concentration pendant les présentations, applaudissements',
+        variantes: 'Simplifier : Enchaînement court, éléments simplifiés | Complexifier : Enchaînement long, éléments complexes'
+    },
+    'Acrosport': {
+        titre: 'Présentation de pyramides - Situation de référence',
+        but: 'Présenter des pyramides pour évaluer la maîtrise technique et la coopération',
+        organisation: 'Tapis de gymnastique, groupes de 3-4 élèves, grilles d\'évaluation. Organisation en 3 groupes : ACROBATES (présentent les pyramides), OBSERVATEURS (grilles), ORGANISATEURS (sécurité, temps). Rotation après chaque présentation.',
+        deroulement: 'Présentation de 3 pyramides par groupe avec tenue de 3 secondes minimum. Les ACROBATES présentent leurs figures. Les OBSERVATEURS notent stabilité, parade, synchronisation. Les ORGANISATEURS assurent la sécurité et gèrent le temps. Le professeur évalue. Rotation après chaque groupe.',
+        consignes: 'ACROBATES : Construire avec sécurité, tenir 3 secondes, parade active\nOBSERVATEURS : Noter la stabilité, la synchronisation, la sécurité\nORGANISATEURS : Assurer la sécurité, gérer le temps, ordre de passage\nTous : Coopération, sécurité prioritaire, encouragements',
+        variantes: 'Simplifier : Pyramides simples, tenue 2 secondes | Complexifier : Pyramides complexes, enchaînement fluide'
+    }
+};
+
+// ============================================================================
+// CRITÈRES D'OBSERVATION POUR LES TESTS (SÉANCE 1 ET DERNIÈRE SÉANCE)
+// ============================================================================
+
+const CRITERES_OBSERVATION_TESTS = {
+    'Handball': {
+        criteresRealisation: '• Orientation du corps vers la cible avant la passe\n• Bras lanceur avec coude au-dessus de l\'épaule au tir\n• Déplacements sans ballon pour se démarquer\n• Position défensive entre le ballon et le but',
+        criteresReussite: '• Nombre de passes réussies / tentées\n• Nombre de tirs cadrés / tentés\n• Nombre de buts marqués\n• Nombre de récupérations défensives'
+    },
+    'Football': {
+        criteresRealisation: '• Contrôle orienté du ballon vers l\'espace libre\n• Passe avec l\'intérieur du pied vers le partenaire\n• Conduite du ballon tête haute\n• Position défensive pour intercepter',
+        criteresReussite: '• Nombre de passes réussies / tentées\n• Nombre de tirs cadrés / tentés\n• Nombre de buts marqués\n• Temps de possession du ballon'
+    },
+    'Basketball': {
+        criteresRealisation: '• Passe à deux mains vers la poitrine du receveur\n• Tir avec extension complète du bras\n• Dribble tête haute\n• Démarquage actif sans ballon',
+        criteresReussite: '• Nombre de passes réussies / tentées\n• Nombre de tirs réussis / tentés\n• Nombre de dribbles sans perte / total\n• Nombre de paniers marqués'
+    },
+    'Volleyball': {
+        criteresRealisation: '• Manchette bras tendus et joints\n• Touche haute mains en coupe au-dessus du front\n• Service par en-dessous ou par en-haut\n• Placement sous le ballon avant la frappe',
+        criteresReussite: '• Nombre de manchettes réussies / tentées\n• Nombre de touches hautes exploitables / tentées\n• Nombre de services dans le terrain / tentés\n• Nombre de points marqués'
+    },
+    'Badminton': {
+        criteresRealisation: '• Service réglementaire en diagonale\n• Dégagement vers le fond de court\n• Amorti près du filet\n• Replacement au centre après la frappe',
+        criteresReussite: '• Nombre de services réussis / tentés\n• Nombre de dégagés au fond / tentés\n• Nombre d\'amortis près du filet / tentés\n• Nombre de points marqués'
+    },
+    'Tennis de table': {
+        criteresRealisation: '• Coup droit avec rotation de bassin\n• Revers avec buste face à la table\n• Service avec rebond sur sa table puis adverse\n• Placement équilibré pieds largeur épaules',
+        criteresReussite: '• Nombre d\'échanges > 5 frappes\n• Nombre de services réussis / tentés\n• Nombre de points gagnés sur coup droit\n• Nombre de points gagnés sur revers'
+    },
+    'Course de vitesse': {
+        criteresRealisation: '• Départ réactif au signal\n• Accélération progressive les 30 premiers mètres\n• Course sur l\'avant du pied\n• Finish avec engagement complet',
+        criteresReussite: '• Temps réalisé sur 80m\n• Différence entre temps réel et temps théorique\n• Nombre de foulées sur 30m\n• Écart entre 1er et 2ème essai'
+    },
+    'Saut en longueur': {
+        criteresRealisation: '• Course d\'élan accélérée jusqu\'à la planche\n• Impulsion active sur un pied\n• Envol avec élévation du bassin\n• Réception sur les deux pieds dans le sable',
+        criteresReussite: '• Distance réalisée (en mètres)\n• Nombre de sauts sans mordre / 3 essais\n• Différence entre meilleur et moins bon saut\n• Performance / taille de l\'élève'
+    },
+    'Saut en hauteur': {
+        criteresRealisation: '• Course d\'élan courbe (trajectoire en J)\n• Impulsion sur pied extérieur\n• Franchissement dorsal (Fosbury-Flop)\n• Réception sur les épaules',
+        criteresReussite: '• Hauteur franchie (en cm)\n• Nombre de franchissements réussis / tentés\n• Respect de la technique Fosbury\n• Performance / taille de l\'élève'
+    },
+    'Course de durée': {
+        criteresRealisation: '• Régularité de l\'allure de course\n• Posture droite et regard horizontal\n• Respiration contrôlée\n• Accélération en fin de course',
+        criteresReussite: '• Temps réalisé sur la distance\n• Écart de temps entre chaque tour\n• Fréquence cardiaque à l\'arrivée\n• Capacité à parler à l\'arrivée'
+    },
+    'Gymnastique': {
+        criteresRealisation: '• Amplitude maximale dans les mouvements\n• Tenue corporelle gainée\n• Liaisons fluides entre les éléments\n• Réceptions contrôlées et stabilisées',
+        criteresReussite: '• Nombre d\'éléments réussis / imposés\n• Note d\'exécution sur 10\n• Nombre de déséquilibres\n• Durée de l\'enchaînement'
+    },
+    'Acrosport': {
+        criteresRealisation: '• Construction sécurisée des pyramides\n• Maintien de la tenue 3 secondes minimum\n• Parade active des pareurs\n• Synchronisation des entrées et sorties',
+        criteresReussite: '• Nombre de pyramides réussies / tentées\n• Durée de tenue (secondes)\n• Nombre de chutes / total\n• Niveau de difficulté réalisé'
+    }
+};
+
+// ============================================================================
+// FONCTION HELPER AMÉLIORÉE : Détecte les séances spéciales et retourne la structure adaptée
+// ============================================================================
+
+const getSituations = (sport, objectif, numeroSeance) => {
     const sportData = SITUATIONS_FICHES[sport];
     if (!sportData) return null;
+    
+    // ============================================================
+    // DÉTECTION SÉANCE 1 : TEST D'OBSERVATION (Évaluation diagnostique)
+    // ============================================================
+    const motsClesSeance1 = [
+        'test d\'observation',
+        "test d'observation",
+        'identifier le niveau initial',
+        'évaluation diagnostique',
+        'niveau initial',
+        'diagnostic',
+        'observation initiale',
+        'évaluation initiale'
+    ];
+    
+    const estSeance1 = numeroSeance === 1 || 
+                       motsClesSeance1.some(mot => objectif.toLowerCase().includes(mot));
+    
+    if (estSeance1) {
+        const situationRef = SITUATIONS_TESTS[sport];
+        const criteresObs = CRITERES_OBSERVATION_TESTS[sport];
+        
+        if (!situationRef || !criteresObs) return null;
+        
+        return {
+            echauffement: 'Échauffement général (5 min) : Course lente, montées de genoux, talons-fesses, mobilisation articulaire | Échauffement spécifique (5 min) : Manipulation de balle/engin spécifique à l\'APS, passes ou déplacements simples | Présentation de l\'objectif et du dispositif d\'observation (5 min)',
+            situation1: {
+                titre: situationRef.titre,
+                but: situationRef.but,
+                organisation: situationRef.organisation,
+                deroulement: situationRef.deroulement,
+                consignes: situationRef.consignes,
+                variantes: situationRef.variantes
+            },
+            situation2: null, // Pas de situation 2 pour les tests
+            criteresRealisation: criteresObs.criteresRealisation,
+            criteresReussite: criteresObs.criteresReussite,
+            isTestObservation: true
+        };
+    }
+    
+    // ============================================================
+    // DÉTECTION DERNIÈRE SÉANCE : TEST BILAN (Évaluation terminale)
+    // ============================================================
+    const motsClesDerniereSeance = [
+        'test bilan',
+        'évaluation',
+        'évaluer le niveau',
+        'évaluation finale',
+        'évaluation terminale',
+        'bilan',
+        'évaluation sommative',
+        'test final'
+    ];
+    
+    const estDerniereSeance = (numeroSeance === 8 || numeroSeance === 10 || numeroSeance === 12) ||
+                               motsClesDerniereSeance.some(mot => objectif.toLowerCase().includes(mot));
+    
+    if (estDerniereSeance) {
+        const situationRef = SITUATIONS_TESTS[sport];
+        const criteresObs = CRITERES_OBSERVATION_TESTS[sport];
+        
+        if (!situationRef || !criteresObs) return null;
+        
+        return {
+            echauffement: 'Échauffement général (5 min) : Course lente, montées de genoux, talons-fesses, mobilisation articulaire | Échauffement spécifique (5 min) : Révision des gestes techniques du cycle | Rappel des consignes d\'évaluation (5 min)',
+            situation1: {
+                titre: situationRef.titre,
+                but: situationRef.but,
+                organisation: situationRef.organisation,
+                deroulement: situationRef.deroulement,
+                consignes: situationRef.consignes,
+                variantes: situationRef.variantes
+            },
+            situation2: null, // Pas de situation 2 pour les tests
+            criteresRealisation: criteresObs.criteresRealisation,
+            criteresReussite: criteresObs.criteresReussite,
+            isTestBilan: true
+        };
+    }
+    
+    // ============================================================
+    // SÉANCES NORMALES : Recherche de l'objectif dans SITUATIONS_FICHES
+    // ============================================================
     
     // Recherche exacte
     if (sportData[objectif]) {
@@ -1108,6 +1350,8 @@ const getObjectifsDisponibles = (sport) => {
 
 module.exports = {
     SITUATIONS_FICHES,
+    SITUATIONS_TESTS,
+    CRITERES_OBSERVATION_TESTS,
     getSituations,
     getObjectifsDisponibles
 };
