@@ -513,7 +513,6 @@ const OBJECTIFS_CYCLE = {
             S1: "Test d'observation - Évaluation diagnostique : Évaluer le niveau initial des élèves (capacité à maintenir le ballon en l'air, respect des zones de jeu) pour établir un diagnostic et former des groupes homogènes.",
             S2: "Étude du règlement officiel (FIVB adapté), compréhension du système de rotation, des fautes de filet, et des principes tactiques de base (réception-passe-attaque).",
             S12: "Test bilan - Évaluation finale : Évaluer les progrès techniques individuels et l'efficacité de l'organisation collective en situation de match officiel.",
-         }
           },
         debutant: [
             "Maîtriser le service cuillère pour mettre le ballon en jeu de manière sécurisée.",
@@ -565,7 +564,7 @@ const OBJECTIFS_CYCLE = {
             S1: "Test d'observation - Évaluation diagnostique : Évaluer la capacité à manipuler le ballon, à se déplacer et à viser la cible pour diagnostiquer le niveau moteur et technique.",
             S2: "Apprentissage des règles fondamentales (marcher, reprise de dribble, fautes de contact, zone), et explication des rôles (meneur, ailier, pivot).",
             S12: "Test bilan - Évaluation finale : Évaluation finale des compétences acquises en situation de match (efficacité au tir, respect des règles et choix tactiques)."
-        }
+        },
         debutant: [
             "Maîtriser le dribble de progression avec la main dominante sans regarder constamment le ballon.",
             "Apprendre la passe de poitrine à deux mains avec une extension complète des bras.",
