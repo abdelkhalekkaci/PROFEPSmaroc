@@ -41,45 +41,37 @@ module.exports = async (req, res) => {
         // Vérifier si c'est un test d'observation ou un test bilan
         const isTest = situationsRef && (situationsRef.isTestObservation || situationsRef.isTestBilan);
         
-        const situationsContext = situationsRef ? (isTest ? `
-🎯 SÉANCE SPÉCIALE ${situationsRef.isTestObservation ? 'TEST D\'OBSERVATION (Séance 1)' : 'TEST BILAN (Dernière séance)'}
-const isTest = situationsRef && (situationsRef.isTestObservation || situationsRef.isTestBilan);
-console.log('=== DEBUG ===');
-console.log('Sport:', aps);
-console.log('Objectif:', objectif);
-console.log('Numéro séance:', numeroSeance);
-console.log('situationsRef:', situationsRef);
-console.log('isTest:', isTest);
-console.log('isTestObservation:', situationsRef?.isTestObservation);
-console.log('isTestBilan:', situationsRef?.isTestBilan);
-console.log('=============');
-Cette séance utilise la SITUATION DE RÉFÉRENCE avec organisation en 3 groupes :
-- JOUEURS : disputent le match/réalisent la performance
-- OBSERVATEURS : utilisent des grilles d'observation
-- ORGANISATEURS : gèrent l'arbitrage, le chronométrage, le matériel
-
-ÉCHAUFFEMENT SPÉCIFIQUE:
-${situationsRef.echauffement}
-
-SITUATION UNIQUE - "${situationsRef.situation1.titre}":
-- But: ${situationsRef.situation1.but}
-- Organisation: ${situationsRef.situation1.organisation}
-- Déroulement: ${situationsRef.situation1.deroulement}
-- Consignes: ${situationsRef.situation1.consignes}
-- Variantes: ${situationsRef.situation1.variantes}
-
-CRITÈRES DE RÉALISATION (Comment bien faire):
-${situationsRef.criteresRealisation}
-
-CRITÈRES DE RÉUSSITE (Mesurable):
-${situationsRef.criteresReussite}
-
-⚠️ INSTRUCTION SPÉCIALE POUR ${situationsRef.isTestObservation ? 'TEST D\'OBSERVATION' : 'TEST BILAN'}:
-- N'invente PAS de situation 2, il y a UNE SEULE situation : la situation de référence
-- Respecte STRICTEMENT l'organisation en 3 groupes (JOUEURS, OBSERVATEURS, ORGANISATEURS)
-- Le professeur utilise des grilles d'observation pour ${situationsRef.isTestObservation ? 'identifier le niveau initial' : 'mesurer les progrès réalisés'}
-- Insiste sur l'importance de la rotation entre les 3 rôles
-- Le but de la phase fondamentale est : ${situationsRef.isTestObservation ? 'Identifier le niveau initial des élèves dans l\'activité' : 'Évaluer les progrès réalisés et le niveau final des élèves'}` : `
+        // ==================== SI C'EST UN TEST, UTILISER DIRECTEMENT LES DONNÉES SANS APPELER L'IA ====================
+        if (isTest) {
+            // Pour les tests, on utilise directement les situations de référence sans passer par l'IA
+            echaufSpec = situationsRef.echauffement;
+            butFonda = situationsRef.isTestObservation ? 
+                'Identifier le niveau initial des élèves dans l\'activité par l\'observation' : 
+                'Évaluer les progrès réalisés et le niveau final des élèves';
+            
+            s1Titre = situationsRef.situation1.titre;
+            s1But = situationsRef.situation1.but;
+            s1Orga = situationsRef.situation1.organisation;
+            s1Deroul = situationsRef.situation1.deroulement;
+            s1Consignes = situationsRef.situation1.consignes;
+            s1Variantes = situationsRef.situation1.variantes;
+            
+            // Pas de situation 2 pour les tests
+            s2Titre = '';
+            s2But = '';
+            s2Orga = '';
+            s2Deroul = '';
+            s2Consignes = '';
+            s2Variantes = '';
+            
+            critReal = situationsRef.criteresRealisation;
+            critReuss = situationsRef.criteresReussite;
+            
+            sitRef = ''; // Pas de situation de référence en bas pour les tests
+        } else {
+            // ==================== POUR LES SÉANCES NORMALES, APPELER L'IA ====================
+        
+        const situationsContext = situationsRef ? `
 SITUATIONS DE RÉFÉRENCE PÉDAGOGIQUES (utilise-les comme base et adapte selon l'objectif):
 
 ÉCHAUFFEMENT SPÉCIFIQUE DE RÉFÉRENCE:
@@ -105,7 +97,7 @@ ${situationsRef.criteresRealisation}
 CRITÈRES DE RÉUSSITE (Mesurable):
 ${situationsRef.criteresReussite}
 
-⚠️ INSTRUCTION: Utilise ces situations comme BASE et ADAPTE-LES pour correspondre EXACTEMENT à l'objectif "${objectif}". Conserve la structure pédagogique (S1 apprentissage → S2 transfert) mais personnalise le contenu.`) : '';
+⚠️ INSTRUCTION: Utilise ces situations comme BASE et ADAPTE-LES pour correspondre EXACTEMENT à l'objectif "${objectif}". Conserve la structure pédagogique (S1 apprentissage → S2 transfert) mais personnalise le contenu.` : '';
 
         // ==================== PROMPT IA ====================
         const prompt = `Tu es un expert en EPS au Maroc, spécialiste de ${aps}.
@@ -129,7 +121,7 @@ ${situationsContext}
 - N'utilise PAS de markdown (gras **, titres ##) pour les CLÉS.
 - Écris CHAQUE CLÉ exactement comme demandé, suivie de deux points.
 - Ne mets pas de texte introductif ou conclusif.
-${situationsRef ? (isTest ? '- UTILISE STRICTEMENT la situation de référence ci-dessus SANS modification.' : '- ADAPTE les situations de référence ci-dessus pour qu\'elles correspondent PARFAITEMENT à l\'objectif.') : ''}
+${situationsRef ? '- ADAPTE les situations de référence ci-dessus pour qu\'elles correspondent PARFAITEMENT à l\'objectif.' : ''}
 
 GÉNÈRE CE CONTENU 100% SPÉCIFIQUE à ${aps}:
 
@@ -183,30 +175,39 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
                 .trim();
         };
 
-        // Extraction des données
-        let echaufSpec = extract('ECHAUFFEMENT_SPECIFIQUE');
-        let butFonda = extract('BUT_PHASE_FONDAMENTALE');
-        let s1Titre = extract('SITUATION1_TITRE');
-        let s1But = extract('SITUATION1_BUT');
-        let s1Orga = extract('SITUATION1_ORGANISATION');
-        let s1Deroul = extract('SITUATION1_DEROULEMENT');
-        let s1Consignes = extract('SITUATION1_CONSIGNES');
-        let s1Variantes = extract('SITUATION1_VARIANTES');
-        let s2Titre = extract('SITUATION2_TITRE');
-        let s2But = extract('SITUATION2_BUT');
-        let s2Orga = extract('SITUATION2_ORGANISATION');
-        let s2Deroul = extract('SITUATION2_DEROULEMENT');
-        let s2Consignes = extract('SITUATION2_CONSIGNES');
-        let s2Variantes = extract('SITUATION2_VARIANTES');
-        let critReal = extract('CRITERES_REALISATION');
-        let critReuss = extract('CRITERES_REUSSITE');
+        // Extraction des données (uniquement pour séances normales, les tests ont déjà leurs données)
+        let echaufSpec, butFonda, s1Titre, s1But, s1Orga, s1Deroul, s1Consignes, s1Variantes;
+        let s2Titre, s2But, s2Orga, s2Deroul, s2Consignes, s2Variantes;
+        let critReal, critReuss;
+        
+        if (!isTest) {
+            // Pour séances normales : extraire depuis la réponse IA
+            echaufSpec = extract('ECHAUFFEMENT_SPECIFIQUE');
+            butFonda = extract('BUT_PHASE_FONDAMENTALE');
+            s1Titre = extract('SITUATION1_TITRE');
+            s1But = extract('SITUATION1_BUT');
+            s1Orga = extract('SITUATION1_ORGANISATION');
+            s1Deroul = extract('SITUATION1_DEROULEMENT');
+            s1Consignes = extract('SITUATION1_CONSIGNES');
+            s1Variantes = extract('SITUATION1_VARIANTES');
+            s2Titre = extract('SITUATION2_TITRE');
+            s2But = extract('SITUATION2_BUT');
+            s2Orga = extract('SITUATION2_ORGANISATION');
+            s2Deroul = extract('SITUATION2_DEROULEMENT');
+            s2Consignes = extract('SITUATION2_CONSIGNES');
+            s2Variantes = extract('SITUATION2_VARIANTES');
+            critReal = extract('CRITERES_REALISATION');
+            critReuss = extract('CRITERES_REUSSITE');
+        }
+        // Les tests ont déjà leurs variables définies plus haut
+        
+        } // FIN du bloc else - Séances normales ont maintenant leurs données de l'IA
 
-        // Appliquer fallbacks si nécessaire - Priorité aux situations de référence, puis FALLBACKS
+        // Appliquer fallbacks si nécessaire - UNIQUEMENT pour les séances normales
+        // Les tests ont déjà toutes leurs valeurs définies et ne doivent PAS utiliser de fallbacks
+        if (!isTest) {
         const fb = FALLBACKS[aps] || FALLBACKS['Handball'];
         const sitRefData = situationsRef; // Utiliser les situations de référence si disponibles
-        
-        // Pour les tests, situation2 est null donc on ne doit pas générer de situation 2
-        const skipSituation2 = isTest;
         
         if (!echaufSpec || echaufSpec.length < 20) {
             echaufSpec = sitRefData ? sitRefData.echauffement : fb.echauf;
@@ -273,6 +274,11 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
         if (!critReuss || critReuss.length < 50) {
             critReuss = sitRefData ? sitRefData.criteresReussite : fb.cs;
         }
+        
+        } // FIN du bloc if (!isTest) - Fallbacks appliqués uniquement pour séances normales
+        
+        // skipSituation2 doit être défini pour tous (tests et séances normales)
+        const skipSituation2 = isTest;
 
         // Schémas SVG
         const schema1 = getSchema(aps, 1);
@@ -610,14 +616,14 @@ th, td {
 <tr style="height:180px;">
 <td class="partie-cell">FONDA<br>30 min</td>
 <td class="content-cell">
-${isTest ? `<div class="sit-title">◆ SITUATION DE RÉFÉRENCE: ${s1Titre}</div>` : `<div class="sit-title">◆ SITUATION 1: ${s1Titre}</div>`}
+<div class="sit-title">◆ ${skipSituation2 ? 'SITUATION DE RÉFÉRENCE' : 'SITUATION 1'}: ${s1Titre}</div>
 <b>But:</b> ${s1But}<br>
 <b>Organisation:</b> ${s1Orga}<br>
 <b>Déroulement:</b> ${s1Deroul}<br>
 <b>Consignes:</b> ${s1Consignes.replace(/\n/g, ' | ')}<br>
-<b>Variantes:</b> ${s1Variantes.replace(/\n/g, ' | ')}<br>
+<b>Variantes:</b> ${s1Variantes.replace(/\n/g, ' | ')}<br>${!skipSituation2 ? '<br><br>' : ''}
 
-${!isTest ? `<br><br><div class="sit-title" style="color:#1565c0">◆ SITUATION 2: ${s2Titre}</div>
+${!skipSituation2 ? `<div class="sit-title" style="color:#1565c0">◆ SITUATION 2: ${s2Titre}</div>
 <b>But:</b> ${s2But}<br>
 <b>Organisation:</b> ${s2Orga}<br>
 <b>Déroulement:</b> ${s2Deroul}<br>
