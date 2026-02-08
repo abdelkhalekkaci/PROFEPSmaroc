@@ -485,9 +485,9 @@ var getSchema = function(aps, numSit) {
 const OBJECTIFS_CYCLE = {
     'Football': {
         commun: {
-            S1: "Test d'observation - Évaluation diagnostique : Test d'observation, Évaluer le niveau initial des élèves (capacités motrices, techniques et tactiques) afin de diagnostiquer les besoins et constituer des groupes de niveau.",
+            S1: "Test d'observation - Évaluation diagnostique : Test d'observation Évaluer le niveau initial des élèves (capacités motrices, techniques et tactiques) afin de diagnostiquer les besoins et constituer des groupes de niveau.",
             S2: "Maîtriser les lois du jeu (FIFA adaptées au milieu scolaire), comprendre les principes de l'occupation de l'espace (bloc équipe) et les valeurs du fair-play.",
-            S12: "Test bilan - Évaluation finale : Test bilan, Évaluer le degré d'atteinte des objectifs du cycle, mesurer la progression technique et tactique et valider les acquis en situation de match."
+            S12: "Test bilan - Évaluation finale : Test bilan Évaluer le degré d'atteinte des objectifs du cycle, mesurer la progression technique et tactique et valider les acquis en situation de match."
         },
         debutant: [
             "Maîtriser la conduite de balle en variant les surfaces de contact (intérieur/coup de pied) sans perdre le contrôle.",
@@ -536,9 +536,9 @@ const OBJECTIFS_CYCLE = {
     },
     'Volleyball': {
         commun: {
-            S1: "Test d'observation - Évaluation diagnostique : Évaluer le niveau initial des élèves (capacité à maintenir le ballon en l'air, respect des zones de jeu) pour établir un diagnostic et former des groupes homogènes.",
+            S1: "Test d'observation - Évaluation diagnostique : Test d'observation Évaluer le niveau initial des élèves (capacité à maintenir le ballon en l'air, respect des zones de jeu) pour établir un diagnostic et former des groupes homogènes.",
             S2: "Étude du règlement officiel (FIVB adapté), compréhension du système de rotation, des fautes de filet, et des principes tactiques de base (réception-passe-attaque).",
-            S12: "Test bilan - Évaluation finale : Évaluer les progrès techniques individuels et l'efficacité de l'organisation collective en situation de match officiel."
+            S12: "Test bilan - Évaluation finale : Test bilan Évaluer les progrès techniques individuels et l'efficacité de l'organisation collective en situation de match officiel."
         },
         debutant: [
             "Maîtriser le service cuillère pour mettre le ballon en jeu de manière sécurisée.",
