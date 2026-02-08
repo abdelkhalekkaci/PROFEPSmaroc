@@ -150,9 +150,9 @@ const getSituationReference = (aps, isCollege) => {
 };
 
 const getGroupeAPS = (aps) => {
-    if (['Handball', 'Football', 'Basketball', 'Volleyball'].includes(aps)) return 'Sports collectifs';
-    if (['Tennis de table', 'Badminton'].includes(aps)) return 'Sports de renvoi';
-    if (['Course de vitesse', 'Course de haies', 'Course de relais', 'Saut en longueur', 'Saut en hauteur', 'Lancer de poids', 'Course de durée', 'Course en durée'].includes(aps)) return 'Athlétisme';
+    if (['Handball', 'Football', 'Basketball'].includes(aps)) return 'Sports collectifs';
+    if (['Tennis de table', 'Badminton', 'Volleyball'].includes(aps)) return 'Sports de renvoi';
+    if (['Course de vitesse', 'Course de haies', 'Course de relais', 'Saut en longueur', 'Saut en hauteur', 'Lancer de poids', 'Course de durée'].includes(aps)) return 'Athlétisme';
     if (aps === 'Gymnastique') return 'Gymnastique';
     return 'Activité physique';
 };
