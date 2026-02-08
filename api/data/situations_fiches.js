@@ -1144,14 +1144,6 @@ const SITUATIONS_TESTS = {
         consignes: 'SAUTEURS : Technique Fosbury-Flop, concentration\nOBSERVATEURS : Noter course courbe, impulsion, rotation\nORGANISATEURS : Régler la barre, mesurer, sécurité\nTous : Rotation efficace, encouragements, fair-play',
         variantes: 'Simplifier : Paliers 10cm, 4 essais | Complexifier : Paliers 3cm, 2 essais'
     },
-   'Course en durée': {
-    titre: 'Course 1000m (G) / 600m (F) - Situation de référence',
-    but: 'Courir sur une distance donnée pour mesurer la gestion de l\'effort',
-    organisation: 'Piste d\'athlétisme ou parcours mesuré, chronomètres, plots. Organisation en 3 groupes : COUREURS (réalisent la course), OBSERVATEURS (grilles sur allure et régularité), ORGANISATEURS (chronométrage, tours). Rotation après chaque course.',
-    deroulement: 'Course chronométrée avec départ groupé. Les COUREURS gèrent leur allure sur la distance. Les OBSERVATEURS notent régularité, posture, finish. Les ORGANISATEURS chronométrent et comptent les tours. Le professeur observe la gestion de l\'effort. Une seule course par élève avec rotation ensuite.',
-    consignes: 'COUREURS : Gérer son allure, maintenir une course régulière, finir en accélérant\nOBSERVATEURS : Noter la régularité d\'allure, la posture, la gestion de l\'effort\nORGANISATEURS : Chronométrage précis, comptage des tours, annonce des temps\nTous : Encouragements, respect du rythme de chacun, sécurité',
-    variantes: 'Simplifier : 600m pour tous, allure libre | Complexifier : 1200m, allure cible imposée'
-         },
      'Course de durée': {
     titre: 'Course 1000m (G) / 600m (F) - Situation de référence',
     but: 'Courir sur une distance donnée pour mesurer la gestion de l\'effort',
@@ -1256,10 +1248,6 @@ const CRITERES_OBSERVATION_TESTS = {
     criteresReussite: '• Distance réalisée (en mètres)\n• Technique correcte (pousser vs jeter)\n• Nombre de lancers dans cercle / 3 essais\n• Progression entre essai 1 et essai 3'
 },
 'Course de durée': {
-    criteresRealisation: '• Régularité de l\'allure de course\n• Posture droite et regard horizontal\n• Respiration contrôlée\n• Accélération en fin de course',
-    criteresReussite: '• Temps réalisé sur la distance\n• Écart de temps entre chaque tour\n• Fréquence cardiaque à l\'arrivée\n• Capacité à parler à l\'arrivée'
-},
-'Course en durée': {
     criteresRealisation: '• Régularité de l\'allure de course\n• Posture droite et regard horizontal\n• Respiration contrôlée\n• Accélération en fin de course',
     criteresReussite: '• Temps réalisé sur la distance\n• Écart de temps entre chaque tour\n• Fréquence cardiaque à l\'arrivée\n• Capacité à parler à l\'arrivée'
 },
