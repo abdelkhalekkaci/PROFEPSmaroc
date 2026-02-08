@@ -73,14 +73,6 @@ const OTC = {
         '2AB': "Réaliser une performance optimale en gérant les paramètres de la compétition."
     },
     'Course de durée': {
-        '1AC': "Courir de façon régulière sur une durée donnée (8-10 min) en gérant son effort.",
-        '2AC': "Adapter son allure de course pour maintenir un effort prolongé (10-12 min).",
-        '3AC': "Construire et respecter un projet de course en fonction de ses capacités (12-15 min).",
-        'TC': "Planifier et réaliser une performance en gérant efficacement ses ressources énergétiques.",
-        '1AB': "Optimiser sa performance par une gestion stratégique de l'allure.",
-        '2AB': "Atteindre ses objectifs personnels par une stratégie de course adaptée."
-    },
-    'Course en durée': {
         '1AC': "Courir de façon régulière sur une durée donnée (8-10 min) en gérant son effort et en maintenant une allure constante.",
         '2AC': "Adapter son allure de course pour maintenir un effort prolongé (10-12 min), en utilisant des repères de temps et de distance.",
         '3AC': "Construire et respecter un projet de course en fonction de ses capacités, sur une durée de 12-15 min, en régulant son allure.",
@@ -152,8 +144,7 @@ const getSituationReference = (aps, isCollege) => {
         'Saut en longueur': 'Concours de 3 essais mesurés avec course d\'élan libre, la meilleure performance est retenue',
         'Saut en hauteur': 'Concours à barres montantes avec 3 essais maximum par hauteur, technique libre',
         'Lancer de poids': 'Concours de 3 essais mesurés depuis le plateau de lancer, la meilleure performance est retenue',
-        'Course de durée': 'Course de 12 minutes en régulant son allure, la distance parcourue est mesurée',
-        'Course en durée': 'Course de 1000m (Garçons) / 600m (Filles) en régulant son allure pour mesurer le temps de passage',
+        'Course de durée': 'Course de 1000m (Garçons) / 600m (Filles) en régulant son allure pour mesurer le temps de passage',
         'Gymnastique': 'Présentation d\'un enchaînement au sol de 1 minute minimum comprenant les éléments imposés du niveau'
     };
     return situations[aps] || 'Situation adaptée au niveau';
@@ -162,7 +153,7 @@ const getSituationReference = (aps, isCollege) => {
 const getGroupeAPS = (aps) => {
     if (['Handball', 'Football', 'Basketball', 'Volleyball'].includes(aps)) return 'Sports collectifs';
     if (['Tennis de table', 'Badminton'].includes(aps)) return 'Sports de renvoi';
-    if (['Course de vitesse', 'Course de haies', 'Course de relais', 'Saut en longueur', 'Saut en hauteur', 'Lancer de poids', 'Course de durée', 'Course en durée'].includes(aps)) return 'Athlétisme';
+    if (['Course de vitesse', 'Course de haies', 'Course de relais', 'Saut en longueur', 'Saut en hauteur', 'Lancer de poids', 'Course de durée'].includes(aps)) return 'Athlétisme';
     if (aps === 'Gymnastique') return 'Gymnastique';
     return 'Activité';
 };
@@ -604,7 +595,7 @@ const OBJECTIFS_CYCLE = {
         avance: null,
         elite: null
     },
-    'Course en durée': {
+    'Course de durée': {
         commun: {
             S1: "Test d'observation - Situation de référence (1000m G / 600m F) pour mesurer le temps de base et observer la gestion spontanée de l'effort.",
             S2: "Test Navette (Luc Léger) pour déterminer la VMA et constituer les groupes physiologiques. Partie théorique : analyse des résultats, explication des zones d'entraînement (Capacité vs Puissance) et remise des fiches de suivi.",
