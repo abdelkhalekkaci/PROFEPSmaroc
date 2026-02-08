@@ -1144,22 +1144,22 @@ const SITUATIONS_TESTS = {
         consignes: 'SAUTEURS : Technique Fosbury-Flop, concentration\nOBSERVATEURS : Noter course courbe, impulsion, rotation\nORGANISATEURS : Régler la barre, mesurer, sécurité\nTous : Rotation efficace, encouragements, fair-play',
         variantes: 'Simplifier : Paliers 10cm, 4 essais | Complexifier : Paliers 3cm, 2 essais'
     },
-    'Course de durée': {
-        titre: 'Course 1000m (G) / 600m (F) - Situation de référence',
-        but: 'Courir sur une distance donnée pour mesurer la gestion de l\'effort',
-        organisation: 'Piste d\'athlétisme ou parcours mesuré, chronomètres, plots. Organisation en 3 groupes : COUREURS (réalisent la course), OBSERVATEURS (grilles sur allure et régularité), ORGANISATEURS (chronométrage, tours). Rotation après chaque course.',
-        deroulement: 'Course chronométrée avec départ groupé. Les COUREURS gèrent leur allure sur la distance. Les OBSERVATEURS notent régularité, posture, finish. Les ORGANISATEURS chronométrent et comptent les tours. Le professeur observe la gestion de l\'effort. Une seule course par élève avec rotation ensuite.',
-        consignes: 'COUREURS : Gérer son allure, maintenir une course régulière, finir en accélérant\nOBSERVATEURS : Noter la régularité d\'allure, la posture, la gestion de l\'effort\nORGANISATEURS : Chronométrage précis, comptage des tours, annonce des temps\nTous : Encouragements, respect du rythme de chacun, sécurité',
-        variantes: 'Simplifier : 600m pour tous, allure libre | Complexifier : 1200m, allure cible imposée'
-    },
-    'Course en durée': {
-        titre: 'Course 1000m (G) / 600m (F) - Situation de référence',
-        but: 'Courir sur une distance donnée pour mesurer la gestion de l\'effort',
-        organisation: 'Piste d\'athlétisme ou parcours mesuré, chronomètres, plots. Organisation en 3 groupes : COUREURS (réalisent la course), OBSERVATEURS (grilles sur allure et régularité), ORGANISATEURS (chronométrage, tours). Rotation après chaque course.',
-        deroulement: 'Course chronométrée avec départ groupé. Les COUREURS gèrent leur allure sur la distance. Les OBSERVATEURS notent régularité, posture, finish. Les ORGANISATEURS chronométrent et comptent les tours. Le professeur observe la gestion de l\'effort. Une seule course par élève avec rotation ensuite.',
-        consignes: 'COUREURS : Gérer son allure, maintenir une course régulière, finir en accélérant\nOBSERVATEURS : Noter la régularité d\'allure, la posture, la gestion de l\'effort\nORGANISATEURS : Chronométrage précis, comptage des tours, annonce des temps\nTous : Encouragements, respect du rythme de chacun, sécurité',
-        variantes: 'Simplifier : 600m pour tous, allure libre | Complexifier : 1200m, allure cible imposée'
-    },
+   'Course en durée': {
+    titre: 'Course 1000m (G) / 600m (F) - Situation de référence',
+    but: 'Courir sur une distance donnée pour mesurer la gestion de l\'effort',
+    organisation: 'Piste d\'athlétisme ou parcours mesuré, chronomètres, plots. Organisation en 3 groupes : COUREURS (réalisent la course), OBSERVATEURS (grilles sur allure et régularité), ORGANISATEURS (chronométrage, tours). Rotation après chaque course.',
+    deroulement: 'Course chronométrée avec départ groupé. Les COUREURS gèrent leur allure sur la distance. Les OBSERVATEURS notent régularité, posture, finish. Les ORGANISATEURS chronométrent et comptent les tours. Le professeur observe la gestion de l\'effort. Une seule course par élève avec rotation ensuite.',
+    consignes: 'COUREURS : Gérer son allure, maintenir une course régulière, finir en accélérant\nOBSERVATEURS : Noter la régularité d\'allure, la posture, la gestion de l\'effort\nORGANISATEURS : Chronométrage précis, comptage des tours, annonce des temps\nTous : Encouragements, respect du rythme de chacun, sécurité',
+    variantes: 'Simplifier : 600m pour tous, allure libre | Complexifier : 1200m, allure cible imposée'
+         },
+     'Course de durée': {
+    titre: 'Course 1000m (G) / 600m (F) - Situation de référence',
+    but: 'Courir sur une distance donnée pour mesurer la gestion de l\'effort',
+    organisation: 'Piste d\'athlétisme ou parcours mesuré, chronomètres, plots. Organisation en 3 groupes : COUREURS (réalisent la course), OBSERVATEURS (grilles sur allure et régularité), ORGANISATEURS (chronométrage, tours). Rotation après chaque course.',
+    deroulement: 'Course chronométrée avec départ groupé. Les COUREURS gèrent leur allure sur la distance. Les OBSERVATEURS notent régularité, posture, finish. Les ORGANISATEURS chronométrent et comptent les tours. Le professeur observe la gestion de l\'effort. Une seule course par élève avec rotation ensuite.',
+    consignes: 'COUREURS : Gérer son allure, maintenir une course régulière, finir en accélérant\nOBSERVATEURS : Noter la régularité d\'allure, la posture, la gestion de l\'effort\nORGANISATEURS : Chronométrage précis, comptage des tours, annonce des temps\nTous : Encouragements, respect du rythme de chacun, sécurité',
+    variantes: 'Simplifier : 600m pour tous, allure libre | Complexifier : 1200m, allure cible imposée'
+         },
     'Gymnastique': {
         titre: 'Présentation d\'enchaînement - Situation de référence',
         but: 'Présenter un enchaînement au sol pour évaluer le niveau technique',
@@ -1168,6 +1168,30 @@ const SITUATIONS_TESTS = {
         consignes: 'GYMNASTES : Présenter avec assurance, respecter les éléments imposés, liaisons fluides\nOBSERVATEURS : Noter amplitude, tenue corporelle, qualité des liaisons\nORGANISATEURS : Gérer l\'ordre, chronométrer, assurer le silence pendant les passages\nTous : Respect et concentration pendant les présentations, applaudissements',
         variantes: 'Simplifier : Enchaînement court, éléments simplifiés | Complexifier : Enchaînement long, éléments complexes'
     },
+    'Course de haies': {
+    titre: 'Course chronométrée 60m haies - Situation de référence',
+    but: 'Courir 60m haies en respectant le rythme d\'appuis pour mesurer le niveau technique',
+    organisation: 'Piste d\'athlétisme avec 4-6 haies, couloirs individuels, chronomètres, plots. Organisation en 3 groupes : COUREURS (réalisent la course), OBSERVATEURS (grilles d\'observation), ORGANISATEURS (chronométrage, placement haies). Rotation après chaque série.',
+    deroulement: 'Course de 60m haies en couloirs individuels avec départ au signal. Les COUREURS réalisent leur course (2 essais). Les OBSERVATEURS notent : nombre d\'appuis entre haies, technique de franchissement, jambe d\'attaque. Les ORGANISATEURS chronométrent et gèrent les départs. Le professeur note les temps et observe. Rotation après chaque série de courses.',
+    consignes: 'COUREURS : Engagement maximal, respecter le rythme, finir la course\nOBSERVATEURS : Noter la technique, compter les appuis\nORGANISATEURS : Chronométrage précis, départs équitables\nTous : Rotation rapide, encourager, sécurité',
+    variantes: 'Simplifier : Haies basses, 40m | Complexifier : Haies officielles, 80m'
+},
+'Course de relais': {
+    titre: 'Course de relais 2x30m - Situation de référence',
+    but: 'Réaliser un relais chronométré pour observer la transmission',
+    organisation: 'Piste avec zone de transmission, chronomètres, témoins. Organisation en 3 groupes : RELAYEURS (courent en binôme), OBSERVATEURS (grilles d\'observation), ORGANISATEURS (chronométrage, gestion). Rotation après chaque série.',
+    deroulement: 'Course de relais 2x30m avec transmission dans la zone. Les RELAYEURS réalisent leur course en binôme. Les OBSERVATEURS notent la qualité de la transmission, la vitesse, la coordination. Les ORGANISATEURS chronométrent et gèrent les départs. Le professeur observe. Rotation après chaque série.',
+    consignes: 'RELAYEURS : Coordination maximale, transmission propre, ne pas ralentir\nOBSERVATEURS : Noter transmission, chute témoin, vitesse\nORGANISATEURS : Chronométrage, gestion zone transmission\nTous : Rotation rapide, encourager, sécurité',
+    variantes: 'Simplifier : Transmission arrêt | Complexifier : Transmission non-visuelle'
+},
+'Lancer de poids': {
+    titre: 'Concours de lancer - Situation de référence',
+    but: 'Lancer le poids le plus loin possible pour mesurer force et coordination',
+    organisation: 'Aire de lancer avec cercle, zone de chute, décamètre, poids (3-4kg). Organisation en 3 groupes : LANCEURS (réalisent les lancers), OBSERVATEURS (grilles d\'observation), ORGANISATEURS (mesures, sécurité). Rotation après chaque série.',
+    deroulement: 'Concours officiel : 3 essais par élève. Les LANCEURS réalisent leurs lancers. Les OBSERVATEURS notent technique (jet vs pousser), position, équilibre. Les ORGANISATEURS mesurent et notent les performances, assurent sécurité. Le professeur évalue. Rotation après série de 3 élèves.',
+    consignes: 'LANCEURS : Pousser (pas jeter), rester dans cercle, sécurité\nOBSERVATEURS : Noter technique, position, équilibre\nORGANISATEURS : Mesurer précis, sécurité zone, noter performances\nTous : Sécurité absolue, rotation, encouragements',
+    variantes: 'Simplifier : Poids léger, zone large | Complexifier : Poids officiel, technique rotation'
+},
     'Acrosport': {
         titre: 'Présentation de pyramides - Situation de référence',
         but: 'Présenter des pyramides pour évaluer la maîtrise technique et la coopération',
@@ -1219,14 +1243,26 @@ const CRITERES_OBSERVATION_TESTS = {
         criteresRealisation: '• Course d\'élan courbe (trajectoire en J)\n• Impulsion sur pied extérieur\n• Franchissement dorsal (Fosbury-Flop)\n• Réception sur les épaules',
         criteresReussite: '• Hauteur franchie (en cm)\n• Nombre de franchissements réussis / tentés\n• Respect de la technique Fosbury\n• Performance / taille de l\'élève'
     },
-    'Course de durée': {
-        criteresRealisation: '• Régularité de l\'allure de course\n• Posture droite et regard horizontal\n• Respiration contrôlée\n• Accélération en fin de course',
-        criteresReussite: '• Temps réalisé sur la distance\n• Écart de temps entre chaque tour\n• Fréquence cardiaque à l\'arrivée\n• Capacité à parler à l\'arrivée'
-    },
-    'Course en durée': {
-        criteresRealisation: '• Régularité de l\'allure de course\n• Posture droite et regard horizontal\n• Respiration contrôlée\n• Accélération en fin de course',
-        criteresReussite: '• Temps réalisé sur la distance\n• Écart de temps entre chaque tour\n• Fréquence cardiaque à l\'arrivée\n• Capacité à parler à l\'arrivée'
-    },
+'Course de haies': {
+    criteresRealisation: '• Attaque de la haie jambe tendue\n• Jambe d\'esquive ouverte sur le côté\n• Reprise d\'appui active après la haie\n• Rythme d\'appuis régulier entre obstacles',
+    criteresReussite: '• Temps réalisé sur 60m haies\n• Nombre d\'appuis entre haies (3 ou 5)\n• Nombre de haies touchées / 6 haies\n• Maintien de la vitesse (écart temps plat vs haies)'
+},
+'Course de relais': {
+    criteresRealisation: '• Transmission dans la zone réglementaire\n• Coordination donneur/receveur\n• Aucune chute du témoin\n• Vitesse maintenue pendant transmission',
+    criteresReussite: '• Temps réalisé sur 2x30m\n• Transmission réussie (oui/non)\n• Chute témoin (nombre)\n• Gain de temps vs somme temps individuels'
+},
+'Lancer de poids': {
+    criteresRealisation: '• Pousser (pas jeter) le poids\n• Tenue du poids au cou\n• Extension complète du bras\n• Rester dans le cercle après le lancer',
+    criteresReussite: '• Distance réalisée (en mètres)\n• Technique correcte (pousser vs jeter)\n• Nombre de lancers dans cercle / 3 essais\n• Progression entre essai 1 et essai 3'
+},
+'Course de durée': {
+    criteresRealisation: '• Régularité de l\'allure de course\n• Posture droite et regard horizontal\n• Respiration contrôlée\n• Accélération en fin de course',
+    criteresReussite: '• Temps réalisé sur la distance\n• Écart de temps entre chaque tour\n• Fréquence cardiaque à l\'arrivée\n• Capacité à parler à l\'arrivée'
+},
+'Course en durée': {
+    criteresRealisation: '• Régularité de l\'allure de course\n• Posture droite et regard horizontal\n• Respiration contrôlée\n• Accélération en fin de course',
+    criteresReussite: '• Temps réalisé sur la distance\n• Écart de temps entre chaque tour\n• Fréquence cardiaque à l\'arrivée\n• Capacité à parler à l\'arrivée'
+},
     'Gymnastique': {
         criteresRealisation: '• Amplitude maximale dans les mouvements\n• Tenue corporelle gainée\n• Liaisons fluides entre les éléments\n• Réceptions contrôlées et stabilisées',
         criteresReussite: '• Nombre d\'éléments réussis / imposés\n• Note d\'exécution sur 10\n• Nombre de déséquilibres\n• Durée de l\'enchaînement'
@@ -1291,7 +1327,6 @@ const getSituations = (sport, objectif, numeroSeance) => {
     const motsClesDerniereSeance = [
         'test bilan',
         'évaluation',
-        'évaluer le niveau',
         'évaluation finale',
         'évaluation terminale',
         'bilan',
