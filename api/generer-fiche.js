@@ -43,16 +43,7 @@ module.exports = async (req, res) => {
         
         const situationsContext = situationsRef ? (isTest ? `
 🎯 SÉANCE SPÉCIALE ${situationsRef.isTestObservation ? 'TEST D\'OBSERVATION (Séance 1)' : 'TEST BILAN (Dernière séance)'}
-const isTest = situationsRef && (situationsRef.isTestObservation || situationsRef.isTestBilan);
-console.log('=== DEBUG ===');
-console.log('Sport:', aps);
-console.log('Objectif:', objectif);
-console.log('Numéro séance:', numeroSeance);
-console.log('situationsRef:', situationsRef);
-console.log('isTest:', isTest);
-console.log('isTestObservation:', situationsRef?.isTestObservation);
-console.log('isTestBilan:', situationsRef?.isTestBilan);
-console.log('=============');
+
 Cette séance utilise la SITUATION DE RÉFÉRENCE avec organisation en 3 groupes :
 - JOUEURS : disputent le match/réalisent la performance
 - OBSERVATEURS : utilisent des grilles d'observation
@@ -344,7 +335,7 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
         <!-- SITUATION 1 -->
         <div style="background:#f8f9fa;border-radius:10px;padding:15px 18px;margin-bottom:18px;border:1px solid #d0d0d0;">
             <h3 style="color:${COLOR_PRIMARY};margin:0 0 12px 0;font-size:0.95rem;display:flex;align-items:center;gap:8px;">
-                <span style="background:${COLOR_PRIMARY};color:white;padding:3px 10px;border-radius:6px;font-size:0.7rem;font-weight:700;">SIT 1</span>
+                <span style="background:${COLOR_PRIMARY};color:white;padding:3px 10px;border-radius:6px;font-size:0.7rem;font-weight:700;">${isTest ? 'SITUATION DE RÉFÉRENCE' : 'SIT 1'}</span>
                 ${s1Titre}
             </h3>
             <div style="background:white;padding:10px 15px;border-radius:8px;border-left:4px solid ${COLOR_PRIMARY};margin-bottom:12px;">
@@ -370,7 +361,7 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
             </div>
         </div>
 
-        <!-- SITUATION 2 -->
+        ${!isTest ? `<!-- SITUATION 2 -->
         <div style="background:#f8f9fa;border-radius:10px;padding:15px 18px;margin-bottom:18px;border:1px solid #d0d0d0;">
             <h3 style="color:${COLOR_SECONDARY};margin:0 0 12px 0;font-size:0.95rem;display:flex;align-items:center;gap:8px;">
                 <span style="background:${COLOR_SECONDARY};color:white;padding:3px 10px;border-radius:6px;font-size:0.7rem;font-weight:700;">SIT 2</span>
@@ -403,7 +394,7 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
         <div style="background:${COLOR_ACCENT};border-radius:10px;padding:12px 18px;border:1px solid #d0d0d0;">
             <h3 style="color:${COLOR_PRIMARY};margin:0 0 8px 0;font-size:0.9rem;">◆ SITUATION DE RÉFÉRENCE</h3>
             <p style="margin:0;font-size:0.9rem;font-weight:500;">${sitRef}</p>
-        </div>
+        </div>` : ''}
     </div>
 
     <!-- CRITÈRES -->
