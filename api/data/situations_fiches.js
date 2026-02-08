@@ -1121,7 +1121,7 @@ const SITUATIONS_TESTS = {
         variantes: 'Simplifier : Match libre sans comptage | Complexifier : Match officiel avec règles strictes'
     },
     'Course de vitesse': {
-        titre: 'Course chronométrée 80m - Situation de référence',
+        titre: 'Course chronométrée 80m/60m - Situation de référence',
         but: 'Réaliser une course chronométrée pour mesurer le niveau de performance',
         organisation: 'Piste d\'athlétisme avec couloirs, chronomètres, plots de départ et d\'arrivée. Organisation en 3 groupes : COUREURS (réalisent la course), OBSERVATEURS (grilles d\'observation technique), ORGANISATEURS (chronométrage, placement). Rotation après chaque série.',
         deroulement: 'Course de 80m en couloirs individuels avec départ au signal. Les COUREURS réalisent leur course (2 essais). Les OBSERVATEURS notent départ, accélération, course, finish. Les ORGANISATEURS chronométrent avec précision et gèrent les départs. Le professeur note les temps et observe la technique. Rotation après chaque série de courses.',
@@ -1326,7 +1326,6 @@ const getSituations = (sport, objectif, numeroSeance) => {
     // ============================================================
     const motsClesDerniereSeance = [
         'test bilan',
-        'évaluation',
         'évaluation finale',
         'évaluation terminale',
         'bilan',
