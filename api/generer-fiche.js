@@ -43,7 +43,16 @@ module.exports = async (req, res) => {
         
         const situationsContext = situationsRef ? (isTest ? `
 🎯 SÉANCE SPÉCIALE ${situationsRef.isTestObservation ? 'TEST D\'OBSERVATION (Séance 1)' : 'TEST BILAN (Dernière séance)'}
-
+const isTest = situationsRef && (situationsRef.isTestObservation || situationsRef.isTestBilan);
+console.log('=== DEBUG ===');
+console.log('Sport:', aps);
+console.log('Objectif:', objectif);
+console.log('Numéro séance:', numeroSeance);
+console.log('situationsRef:', situationsRef);
+console.log('isTest:', isTest);
+console.log('isTestObservation:', situationsRef?.isTestObservation);
+console.log('isTestBilan:', situationsRef?.isTestBilan);
+console.log('=============');
 Cette séance utilise la SITUATION DE RÉFÉRENCE avec organisation en 3 groupes :
 - JOUEURS : disputent le match/réalisent la performance
 - OBSERVATEURS : utilisent des grilles d'observation
