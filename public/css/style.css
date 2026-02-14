@@ -193,16 +193,18 @@ button {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 0;
-    width: 0;
+    left: 50%;
+    right: 50%;
     height: 2px;
     background: linear-gradient(90deg, var(--primary), var(--secondary));
-    transition: var(--transition);
+    border-radius: 2px;
+    transition: left 0.3s ease, right 0.3s ease;
 }
 
 .nav-link:hover::after,
 .nav-link.active::after {
-    width: 100%;
+    left: 0;
+    right: 0;
 }
 
 .nav-cta {
@@ -228,15 +230,45 @@ button {
     display: none;
     flex-direction: column;
     gap: 5px;
-    padding: var(--spacing-sm);
+    padding: 8px;
+    width: 36px;
+    height: 36px;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--radius);
+    transition: background 0.3s ease;
+}
+
+.nav-toggle:hover {
+    background: rgba(193,39,45,0.05);
 }
 
 .nav-toggle span {
-    width: 25px;
+    display: block;
+    width: 22px;
     height: 2px;
     background: var(--text-primary);
-    transition: var(--transition);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
+
+.nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 99;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.nav-backdrop.active { display: block; opacity: 1; }
 
 /* ============================================
    HERO SECTION
@@ -909,25 +941,28 @@ button {
     }
     
     .nav-menu {
-        position: fixed;
-        top: 80px;
-        left: 0;
-        right: 0;
+        position: absolute;
+        top: 100%;
+        left: var(--spacing-md);
+        right: var(--spacing-md);
         background: var(--bg-card);
         flex-direction: column;
         padding: var(--spacing-xl);
-        gap: var(--spacing-md);
-        box-shadow: var(--shadow-lg);
-        transform: translateY(-100%);
+        gap: var(--spacing-xs);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+        border-radius: var(--radius-xl);
+        border: 1px solid var(--border-light);
+        transform: translateY(-10px);
         opacity: 0;
-        visibility: hidden;
-        transition: var(--transition);
+        pointer-events: none;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        z-index: 100;
     }
-    
+
     .nav-menu.active {
         transform: translateY(0);
         opacity: 1;
-        visibility: visible;
+        pointer-events: auto;
     }
 
     .nav-toggle {
@@ -936,11 +971,12 @@ button {
 
     .nav-link {
         padding: var(--spacing-sm) var(--spacing-md);
-        border-radius: var(--radius-lg);
+        border-radius: var(--radius);
+        font-size: 0.95rem;
     }
 
     .nav-link:hover, .nav-link.active {
-        background: rgba(193, 39, 45, 0.05);
+        background: linear-gradient(135deg, rgba(193,39,45,0.05), rgba(0,98,51,0.05));
     }
 
     .nav-link::after, .nav-link.active::after {
@@ -951,6 +987,8 @@ button {
         text-align: center;
         justify-content: center;
         margin-top: var(--spacing-sm);
+        padding: var(--spacing-md);
+        border-radius: var(--radius-lg);
     }
 
     .hero {
