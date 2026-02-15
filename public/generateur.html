@@ -112,8 +112,13 @@
         .nav-menu {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: var(--spacing-lg);
+            flex: 1;
         }
+
+        .nav-cta-mobile { display: none; }
+        .nav-cta-desktop { display: inline-flex; }
 
         .nav-link {
             font-size: 0.9375rem;
@@ -905,6 +910,8 @@
                 transition: transform 0.3s ease, opacity 0.3s ease;
                 z-index: 100;
                 border: 1px solid var(--border-light);
+                flex: unset;
+                justify-content: flex-start;
             }
 
             .nav-menu.active {
@@ -916,6 +923,9 @@
             .nav-toggle {
                 display: flex;
             }
+
+            .nav-cta-mobile { display: inline-flex; }
+            .nav-cta-desktop { display: none; }
 
             .nav-link {
                 padding: var(--spacing-sm) var(--spacing-md);
@@ -930,7 +940,7 @@
                 color: var(--primary);
             }
 
-            .nav-cta {
+            .nav-cta-mobile {
                 text-align: center;
                 justify-content: center;
                 margin-top: var(--spacing-sm);
@@ -1134,8 +1144,9 @@
                 <a href="index.html" class="nav-link">Accueil</a>
                 <a href="generateur.html" class="nav-link active">Générateur</a>
                 <a href="blog.html" class="nav-link">Blog</a>
-                <a href="generateur.html" class="nav-cta"><span>✨</span> Créer un document</a>
+                <a href="generateur.html" class="nav-cta nav-cta-mobile"><span>✨</span> Créer un document</a>
             </div>
+            <a href="generateur.html" class="nav-cta nav-cta-desktop"><span>✨</span> Créer un document</a>
             <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
         </div>
     </nav>

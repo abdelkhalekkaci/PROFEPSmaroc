@@ -173,8 +173,13 @@ button {
 .nav-menu {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: var(--spacing-xl);
+    flex: 1;
 }
+
+.nav-cta-mobile { display: none; }
+.nav-cta-desktop { display: inline-flex; }
 
 .nav-link {
     position: relative;
@@ -957,6 +962,8 @@ button {
         pointer-events: none;
         transition: transform 0.3s ease, opacity 0.3s ease;
         z-index: 100;
+        flex: unset;
+        justify-content: flex-start;
     }
 
     .nav-menu.active {
@@ -968,6 +975,9 @@ button {
     .nav-toggle {
         display: flex;
     }
+
+    .nav-cta-mobile { display: inline-flex; }
+    .nav-cta-desktop { display: none; }
 
     .nav-link {
         padding: var(--spacing-sm) var(--spacing-md);
@@ -983,7 +993,7 @@ button {
         display: none;
     }
 
-    .nav-cta {
+    .nav-cta-mobile {
         text-align: center;
         justify-content: center;
         margin-top: var(--spacing-sm);
