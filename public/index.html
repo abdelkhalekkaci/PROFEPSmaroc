@@ -72,10 +72,12 @@
         /* Navbar */
         .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: var(--spacing-md) var(--spacing-xl); background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(226,232,240,0.6); transition: var(--transition); }
         .navbar.scrolled { padding: var(--spacing-sm) var(--spacing-xl); box-shadow: 0 4px 20px rgba(0,0,0,0.08); background: rgba(255,255,255,0.97); }
-        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+        .nav-logo { justify-self: start; }
         .nav-logo img { height: 75px; transition: var(--transition); margin: -10px 0; }
         .navbar.scrolled .nav-logo img { height: 65px; margin: -8px 0; }
-        .nav-menu { display: flex; align-items: center; justify-content: center; gap: var(--spacing-lg); flex: 1; }
+        .nav-menu { display: flex; align-items: center; justify-content: center; gap: var(--spacing-lg); }
+        .nav-right { justify-self: end; display: flex; align-items: center; gap: var(--spacing-md); }
         .nav-link { font-size: 0.9375rem; font-weight: 500; color: var(--text-secondary); padding: var(--spacing-sm) var(--spacing-sm); position: relative; transition: color 0.3s ease; }
         .nav-link::after { content: ''; position: absolute; bottom: 0; left: 50%; right: 50%; height: 2px; background: linear-gradient(90deg, var(--primary), var(--secondary)); border-radius: 2px; transition: left 0.3s ease, right 0.3s ease; }
         .nav-link:hover::after, .nav-link.active::after { left: 0; right: 0; }
@@ -431,7 +433,7 @@
         .articles-carousel-container { max-width: 1200px; margin: 0 auto; position: relative; padding: 0 60px; }
         .articles-carousel { display: flex; gap: var(--spacing-xl); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; padding: 10px 0; }
         .articles-carousel::-webkit-scrollbar { display: none; }
-        .articles-carousel .article-card { min-width: calc(33.333% - 16px); scroll-snap-align: start; flex-shrink: 0; }
+        .articles-carousel .article-card { min-width: 100%; scroll-snap-align: start; flex-shrink: 0; }
         .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; background: white; border: 2px solid var(--border); color: var(--primary); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-md); transition: var(--transition); z-index: 10; }
         .carousel-btn:hover { background: var(--primary); color: white; border-color: var(--primary); transform: translateY(-50%) scale(1.1); }
         .carousel-prev { left: 0; }
@@ -439,8 +441,7 @@
         .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: var(--spacing-lg); }
         .carousel-dots .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); cursor: pointer; transition: var(--transition); }
         .carousel-dots .dot.active { background: var(--primary); transform: scale(1.2); }
-        @media (max-width: 968px) { .articles-carousel .article-card { min-width: calc(50% - 12px); } }
-        @media (max-width: 768px) { .articles-carousel .article-card { min-width: 100%; } .articles-carousel-container { padding: 0 35px; } .carousel-btn { width: 32px; height: 32px; font-size: 0.8rem; } }
+        @media (max-width: 768px) { .articles-carousel-container { padding: 0 35px; } .carousel-btn { width: 32px; height: 32px; font-size: 0.8rem; } }
         @media (max-width: 480px) { .articles-carousel-container { padding: 0 28px; } .carousel-btn { width: 28px; height: 28px; } }
         .article-card { background: var(--bg-card); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-md); transition: var(--transition); border: 1px solid var(--border-light); display: flex; flex-direction: column; }
         .article-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-xl); }
@@ -477,7 +478,9 @@
         
         /* Responsive */
         @media (max-width: 968px) {
-            .nav-menu { position: absolute; top: 100%; left: var(--spacing-md); right: var(--spacing-md); background: white; flex-direction: column; padding: var(--spacing-lg); box-shadow: 0 10px 40px rgba(0,0,0,0.12); border-radius: var(--radius-xl); gap: var(--spacing-xs); transform: translateY(-10px); opacity: 0; pointer-events: none; transition: transform 0.3s ease, opacity 0.3s ease; z-index: 100; border: 1px solid var(--border-light); flex: unset; justify-content: flex-start; }
+            .nav-container { display: flex; }
+            .nav-right { justify-self: unset; }
+            .nav-menu { position: absolute; top: 100%; left: var(--spacing-md); right: var(--spacing-md); background: white; flex-direction: column; padding: var(--spacing-lg); box-shadow: 0 10px 40px rgba(0,0,0,0.12); border-radius: var(--radius-xl); gap: var(--spacing-xs); transform: translateY(-10px); opacity: 0; pointer-events: none; transition: transform 0.3s ease, opacity 0.3s ease; z-index: 100; border: 1px solid var(--border-light); justify-content: flex-start; }
             .nav-menu.active { transform: translateY(0); opacity: 1; pointer-events: auto; }
             .nav-toggle { display: flex; }
             .nav-cta.nav-cta-mobile { display: inline-flex; }
@@ -545,8 +548,10 @@
                 <a href="blog.html" class="nav-link">Blog</a>
                 <a href="generateur.html" class="nav-cta nav-cta-mobile"><span>✨</span> Créer un document</a>
             </div>
-            <a href="generateur.html" class="nav-cta nav-cta-desktop"><span>✨</span> Créer un document</a>
-            <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+            <div class="nav-right">
+                <a href="generateur.html" class="nav-cta nav-cta-desktop"><span>✨</span> Créer un document</a>
+                <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+            </div>
         </div>
     </nav>
 
@@ -558,7 +563,7 @@
                 <p class="hero-description">La plateforme complète pour les professeurs d'éducation physique et sportive au Maroc. Générez en 2 minutes : fiches pédagogiques, projets de cycle et grilles d'observation/évaluation. 100% conforme aux Orientations Pédagogiques 2007-2009.</p>
                 <div class="hero-buttons">
                     <a href="#generateur" class="btn btn-primary"><span>🚀</span> Générer mes documents</a>
-                    <a href="blog.html" class="btn btn-secondary"><span>📚</span> Lire le blog</a>
+                    <a href="blog.html" class="btn btn-primary"><span>📚</span> Lire le blog</a>
                 </div>
             </div>
             <div class="hero-visual">
@@ -1207,11 +1212,7 @@
             dot.addEventListener('click', () => scrollToIndex(index));
         });
 
-        // Auto-scroll every 5 seconds
-        setInterval(() => {
-            const nextIndex = (currentIndex + 1) % dots.length;
-            scrollToIndex(nextIndex);
-        }, 5000);
+        // No auto-scroll - manual navigation only
     </script>
 </body>
 </html>
