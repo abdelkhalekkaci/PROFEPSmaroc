@@ -51,6 +51,8 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap"></noscript>
     <link rel="stylesheet" href="css/style.min.css">
     
     <style>
@@ -566,7 +568,7 @@
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
-                <img src="/images/prof_eps.png" alt="Prof EPS">
+                <img src="/images/prof_eps.png" alt="Prof EPS" width="500" height="500">
             </a>
             <div class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link active">Accueil</a>
@@ -576,10 +578,12 @@
             </div>
             <div class="nav-right">
                 <a href="generateur.html" class="nav-cta nav-cta-desktop"><span>✨</span> Créer un document</a>
-                <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+                <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
             </div>
         </div>
     </nav>
+
+    <main id="main-content">
 
     <section class="hero">
         <div class="hero-container">
@@ -983,14 +987,16 @@
     </section>
 
 
+    </main>
+
     <footer class="footer">
         <div class="footer-grid">
             <div class="footer-brand">
-                <a href="index.html"><img src="/images/prof_eps.png" alt="Prof EPS"></a>
+                <a href="index.html"><img src="/images/prof_eps.png" alt="Prof EPS" width="500" height="500"></a>
                 <p>Le premier générateur intelligent de fiches pédagogiques pour les professeurs d'EPS au Maroc.</p>
             </div>
             <div>
-                <h4 class="footer-title">Navigation</h4>
+                <h3 class="footer-title">Navigation</h3>
                 <div class="footer-links">
                     <a href="index.html">Accueil</a>
                     <a href="generateur.html">Générateur</a>
@@ -1000,7 +1006,7 @@
                 </div>
             </div>
             <div>
-                <h4 class="footer-title">Ressources</h4>
+                <h3 class="footer-title">Ressources</h3>
                 <div class="footer-links">
                     <a href="blog.html">Articles</a>
                     <a href="article-op.html">Orientations Pédagogiques</a>
@@ -1009,7 +1015,7 @@
                 </div>
             </div>
             <div>
-                <h4 class="footer-title">Contact</h4>
+                <h3 class="footer-title">Contact</h3>
                 <div class="footer-links">
                     <a href="mailto:epsprof.assistance@gmail.com" class="social-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
@@ -1063,6 +1069,7 @@
             navToggle.classList.toggle('active');
             navBackdrop.classList.toggle('active');
             document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+            navToggle.setAttribute('aria-expanded', navMenu.classList.contains('active'));
         }
 
         function closeMenu() {
@@ -1070,6 +1077,7 @@
             navToggle.classList.remove('active');
             navBackdrop.classList.remove('active');
             document.body.style.overflow = '';
+            navToggle.setAttribute('aria-expanded', 'false');
         }
 
         navToggle.addEventListener('click', (e) => { e.stopPropagation(); toggleMenu(); });
