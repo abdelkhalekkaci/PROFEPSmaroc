@@ -453,31 +453,28 @@
 
         /* Articles Section */
         .articles-section { padding: var(--spacing-3xl) var(--spacing-xl); background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%); }
-        /* Carousel Styles */
-        .articles-carousel-container { max-width: 1200px; margin: 0 auto; position: relative; padding: 0 60px; }
-        .articles-carousel { display: flex; gap: var(--spacing-xl); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; padding: 10px 0; }
-        .articles-carousel::-webkit-scrollbar { display: none; }
-        .articles-carousel .article-card { min-width: 100%; scroll-snap-align: start; flex-shrink: 0; }
-        .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; background: white; border: 2px solid var(--border); color: var(--primary); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-md); transition: var(--transition); z-index: 10; }
-        .carousel-btn:hover { background: var(--primary); color: white; border-color: var(--primary); transform: translateY(-50%) scale(1.1); }
-        .carousel-prev { left: 0; }
-        .carousel-next { right: 0; }
-        .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: var(--spacing-lg); }
-        .carousel-dots .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); cursor: pointer; transition: var(--transition); }
-        .carousel-dots .dot.active { background: var(--primary); transform: scale(1.2); }
-        @media (max-width: 768px) { .articles-carousel-container { padding: 0 35px; } .carousel-btn { width: 32px; height: 32px; font-size: 0.8rem; } }
-        @media (max-width: 480px) { .articles-carousel-container { padding: 0 28px; } .carousel-btn { width: 28px; height: 28px; } }
-        .article-card { background: var(--bg-card); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-md); transition: var(--transition); border: 1px solid var(--border-light); display: flex; flex-direction: column; }
+        /* Articles Grid */
+        .articles-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        @media (max-width: 1024px) { .articles-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .articles-grid { grid-template-columns: 1fr; } }
+        .article-card { background: white; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid var(--border-light); display: flex; flex-direction: column; height: 100%; }
         .article-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-xl); }
-        .article-image { height: 140px; background: linear-gradient(135deg, rgba(193,39,45,0.1), rgba(0,98,51,0.1)); display: flex; align-items: center; justify-content: center; }
-        .article-icon { font-size: 3rem; }
-        .article-content { padding: var(--spacing-lg); flex: 1; display: flex; flex-direction: column; }
-        .article-tags { display: flex; gap: var(--spacing-sm); margin-bottom: var(--spacing-sm); flex-wrap: wrap; }
-        .tag { display: inline-flex; align-items: center; padding: 4px 10px; background: linear-gradient(135deg, rgba(193,39,45,0.1), rgba(0,98,51,0.1)); border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 600; color: var(--primary); }
-        .article-title { font-family: var(--font-display); font-size: 1.125rem; font-weight: 600; color: var(--text-primary); margin-bottom: var(--spacing-sm); line-height: 1.4; }
-        .article-excerpt { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; margin-bottom: var(--spacing-md); flex: 1; }
-        .article-link { display: inline-flex; align-items: center; color: var(--primary); font-weight: 600; text-decoration: none; transition: var(--transition); }
-        .article-link:hover { color: var(--primary-dark); transform: translateX(5px); }
+        .article-visual { position: relative; height: 140px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .article-documents { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); }
+        .article-aps { background: linear-gradient(135deg, #7f1d1d 0%, #dc2626 100%); }
+        .article-visual::before { content: ''; position: absolute; width: 130px; height: 130px; border-radius: 50%; background: rgba(255,255,255,0.07); top: -40px; right: -30px; pointer-events: none; }
+        .article-visual::after { content: ''; position: absolute; width: 70px; height: 70px; border-radius: 50%; background: rgba(255,255,255,0.05); bottom: -15px; left: 20px; pointer-events: none; }
+        .article-icon { width: 72px; height: 72px; background: rgba(255,255,255,0.96); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0,0,0,0.18), 0 2px 6px rgba(0,0,0,0.08); position: relative; z-index: 1; flex-shrink: 0; }
+        .article-icon svg { width: 40px; height: 40px; transition: transform 0.3s ease; }
+        .article-card:hover .article-icon svg { transform: scale(1.15) rotate(-5deg); }
+        .category-badge { position: absolute; top: 0.75rem; right: 0.75rem; background: rgba(0,0,0,0.28); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.35); color: white; padding: 0.3rem 0.7rem; border-radius: 99px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.02em; text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
+        .article-content { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
+        .article-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; line-height: 1.4; margin-bottom: 0.5rem; color: var(--text-primary); }
+        .article-excerpt { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem; flex: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .article-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-light); padding-top: 1rem; margin-top: auto; }
+        .article-date { font-size: 0.8rem; color: var(--text-light); }
+        .read-more { color: var(--primary); font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 4px; }
+        .read-more:hover { gap: 8px; }
         .articles-footer { text-align: center; margin-top: var(--spacing-xl); }
         .btn-secondary { display: inline-flex; align-items: center; gap: var(--spacing-sm); padding: var(--spacing-md) var(--spacing-xl); background: var(--bg-primary); color: var(--primary); border: 2px solid var(--primary); border-radius: var(--radius-lg); font-weight: 600; text-decoration: none; transition: var(--transition); }
         .btn-secondary:hover { background: var(--primary); color: white; transform: translateY(-2px); }
@@ -816,89 +813,79 @@
                 <p class="section-description">Découvrez nos articles experts pour améliorer vos pratiques pédagogiques et réussir votre carrière d'enseignant EPS.</p>
             </div>
 
-            <!-- CAROUSEL ARTICLES -->
-            <div class="articles-carousel-container">
-                <div class="articles-carousel" id="articlesCarousel">
-                    <!-- Article 1 -->
-                    <article class="article-card">
-                        <div class="article-image">
-                            <span class="article-icon">📚</span>
+            <!-- GRILLE 4 ARTICLES LES PLUS VUS -->
+            <div class="articles-grid">
+                <!-- Article 1 : Guide OP -->
+                <article class="article-card">
+                    <div class="article-visual article-documents">
+                        <span class="category-badge">Documents</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" stroke-linejoin="round"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" fill="#93c5fd" stroke="#2563eb" stroke-width="1.5" stroke-linejoin="round"/><line x1="6" y1="8" x2="8" y2="8" stroke="#1d4ed8" stroke-width="1.5" stroke-linecap="round"/><line x1="6" y1="11" x2="9" y2="11" stroke="#1d4ed8" stroke-width="1.5" stroke-linecap="round"/></svg>
                         </div>
-                        <div class="article-content">
-                            <div class="article-tags">
-                                <span class="tag">OP 2007-2009</span>
-                            </div>
-                            <h3 class="article-title">Comprendre les Orientations Pédagogiques</h3>
-                            <p class="article-excerpt">Guide complet sur les Orientations Pédagogiques 2007 et 2009 pour l'EPS au Maroc.</p>
-                            <a href="article-op.html" class="article-link">Lire l'article →</a>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Guide complet des Orientations Pédagogiques 2007 et 2009</h3>
+                        <p class="article-excerpt">Analyse complète des instructions officielles pour le collège et le lycée. Comprendre les OTI et les compétences visées.</p>
+                        <div class="article-footer">
+                            <span class="article-date">15 Jan 2025</span>
+                            <a href="article-op.html" class="read-more">Lire →</a>
                         </div>
-                    </article>
+                    </div>
+                </article>
 
-                    <!-- Article 2 -->
-                    <article class="article-card">
-                        <div class="article-image">
-                            <span class="article-icon">🎯</span>
+                <!-- Article 2 : Handball -->
+                <article class="article-card">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge">Handball</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="7" cy="4" r="2" fill="#fecdd3" stroke="#dc2626" stroke-width="1.5"/><path d="M4 8h6l2 8H4z" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5" stroke-linejoin="round"/><path d="M4 16l-1.5 5M12 16l1.5 5" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round"/><path d="M10 12l3.5-4" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round"/><circle cx="16" cy="6" r="3" fill="#fca5a5" stroke="#dc2626" stroke-width="1.5"/></svg>
                         </div>
-                        <div class="article-content">
-                            <div class="article-tags">
-                                <span class="tag">Approche compétences</span>
-                            </div>
-                            <h3 class="article-title">Approche par Compétences</h3>
-                            <p class="article-excerpt">Comment mettre en œuvre l'approche par compétences dans vos séances d'EPS.</p>
-                            <a href="article-approche-competences.html" class="article-link">Lire l'article →</a>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Séance de Handball en EPS : Guide Complet Collège et Lycée</h3>
+                        <p class="article-excerpt">Structure de séance, situations d'apprentissage, progression sur 10 séances et grille d'évaluation conformes aux OP 2007-2009.</p>
+                        <div class="article-footer">
+                            <span class="article-date">20 Fév 2026</span>
+                            <a href="article-handball-eps.html" class="read-more">Lire →</a>
                         </div>
-                    </article>
+                    </div>
+                </article>
 
-                    <!-- Article 3 -->
-                    <article class="article-card">
-                        <div class="article-image">
-                            <span class="article-icon">🏆</span>
+                <!-- Article 3 : Basketball -->
+                <article class="article-card">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge">Basketball</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/><path d="M5 4.5C7.5 7 9 9.5 9 12s-1.5 5-4 7.5" stroke="#ea580c" stroke-width="1.5" stroke-linecap="round"/><path d="M19 4.5C16.5 7 15 9.5 15 12s1.5 5 4 7.5" stroke="#ea580c" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="12" x2="22" y2="12" stroke="#fb923c" stroke-width="1.5" stroke-linecap="round"/></svg>
                         </div>
-                        <div class="article-content">
-                            <div class="article-tags">
-                                <span class="tag">Concours</span>
-                            </div>
-                            <h3 class="article-title">Préparation aux Concours</h3>
-                            <p class="article-excerpt">Tout ce qu'il faut savoir pour réussir les concours de l'enseignement EPS.</p>
-                            <a href="article-concours.html" class="article-link">Lire l'article →</a>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Séance de Basketball en EPS : Guide Complet Collège et Lycée</h3>
+                        <p class="article-excerpt">Fondamentaux techniques, situations d'apprentissage progressives, cycle sur 10 séances et grille d'évaluation conformes aux OP 2007-2009.</p>
+                        <div class="article-footer">
+                            <span class="article-date">20 Fév 2026</span>
+                            <a href="article-basketball-eps.html" class="read-more">Lire →</a>
                         </div>
-                    </article>
+                    </div>
+                </article>
 
-                    <!-- Article 4 -->
-                    <article class="article-card">
-                        <div class="article-image">
-                            <span class="article-icon">🛡️</span>
+                <!-- Article 4 : Volleyball -->
+                <article class="article-card">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge">Volleyball</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/><path d="M3 8c4 0 7 2 9 6s5 6 9 6" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/><path d="M3 16c4 0 7-2 9-6s5-6 9-6" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="12" x2="22" y2="12" stroke="#93c5fd" stroke-width="1" stroke-linecap="round"/></svg>
                         </div>
-                        <div class="article-content">
-                            <div class="article-tags">
-                                <span class="tag">Sécurité</span>
-                            </div>
-                            <h3 class="article-title">Sécurité en EPS</h3>
-                            <p class="article-excerpt">Les règles essentielles pour garantir la sécurité de vos élèves.</p>
-                            <a href="article-securite.html" class="article-link">Lire l'article →</a>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Séance de Volleyball en EPS : Guide Complet Collège et Lycée</h3>
+                        <p class="article-excerpt">Techniques de base, situations d'apprentissage progressives, gestion du filet et évaluation pour le volleyball scolaire au Maroc.</p>
+                        <div class="article-footer">
+                            <span class="article-date">20 Fév 2026</span>
+                            <a href="article-volleyball-eps.html" class="read-more">Lire →</a>
                         </div>
-                    </article>
-                </div>
-                
-                <!-- Carousel Controls -->
-                <button class="carousel-btn carousel-prev" id="carouselPrev" aria-label="Article précédent">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
-                </button>
-                <button class="carousel-btn carousel-next" id="carouselNext" aria-label="Article suivant">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                    </svg>
-                </button>
-                
-                <!-- Carousel Dots -->
-                <div class="carousel-dots" id="carouselDots">
-                    <span class="dot active" data-index="0"></span>
-                    <span class="dot" data-index="1"></span>
-                    <span class="dot" data-index="2"></span>
-                    <span class="dot" data-index="3"></span>
-                </div>
+                    </div>
+                </article>
             </div>
 
             <div class="articles-footer">
@@ -1194,55 +1181,7 @@
             });
         });
 
-        // Carousel Logic
-        const carousel = document.getElementById('articlesCarousel');
-        const prevBtn = document.getElementById('carouselPrev');
-        const nextBtn = document.getElementById('carouselNext');
-        const dots = document.querySelectorAll('.carousel-dots .dot');
-        let currentIndex = 0;
-
-        function getCardWidth() {
-            const card = carousel.querySelector('.article-card');
-            return card ? card.offsetWidth + 24 : 400; // 24px gap
-        }
-
-        function updateDots(index) {
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
-            });
-        }
-
-        function scrollToIndex(index) {
-            const cardWidth = getCardWidth();
-            carousel.scrollTo({
-                left: index * cardWidth,
-                behavior: 'smooth'
-            });
-            currentIndex = index;
-            updateDots(index);
-        }
-
-        prevBtn.addEventListener('click', () => {
-            if (currentIndex > 0) {
-                scrollToIndex(currentIndex - 1);
-            } else {
-                scrollToIndex(dots.length - 1);
-            }
-        });
-
-        nextBtn.addEventListener('click', () => {
-            if (currentIndex < dots.length - 1) {
-                scrollToIndex(currentIndex + 1);
-            } else {
-                scrollToIndex(0);
-            }
-        });
-
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => scrollToIndex(index));
-        });
-
-        // No auto-scroll - manual navigation only
+        // No carousel — static grid
     </script>
 </body>
 </html>
