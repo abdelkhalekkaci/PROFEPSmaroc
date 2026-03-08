@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Connectez-vous à ProfEPS pour accéder à votre espace personnel, historique de generation et favoris.">
+    <title>Connexion | ProfEPS Maroc</title>
+    <link rel="icon" type="image/png" href="/images/prof_eps.png">
+    <link rel="canonical" href="https://www.profeps.ma/login.html">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #c1272d;
+            --primary-dark: #a01f24;
+            --secondary: #006233;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a68;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --border: #e2e8f0;
+            --radius: 8px;
+            --radius-lg: 12px;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: linear-gradient(135deg, rgba(193,39,45,0.05) 0%, rgba(0,98,51,0.05) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .login-container {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 420px;
+            padding: 2.5rem;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .logo img {
+            height: 60px;
+            margin-bottom: 1rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .logo p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+        
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn-social {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            background: white;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+        }
+        
+        .btn-social:hover {
+            border-color: var(--text-secondary);
+            background: var(--bg-secondary);
+        }
+        
+        .btn-social.google::before {
+            content: "G";
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #4285f4, #ea4335, #fbbc05, #34a853);
+            color: white;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        .btn-social.facebook {
+            background: #1877f2;
+            color: white;
+            border-color: #1877f2;
+        }
+        
+        .btn-social.facebook:hover {
+            background: #166fe5;
+            border-color: #166fe5;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+        
+        .divider span {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .btn-primary {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 0.5rem;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(193,39,45,0.3);
+        }
+        
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .forgot-password {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .forgot-password a {
+            color: var(--primary);
+            font-size: 0.875rem;
+            text-decoration: none;
+        }
+        
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+        
+        .signup-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .signup-link a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        .success-message {
+            background: #dcfce7;
+            color: #16a34a;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .success-message.show {
+            display: block;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.8s linear infinite;
+            margin-right: 0.5rem;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <img src="/images/prof_eps.png" alt="ProfEPS">
+            <h1>Bienvenue sur ProfEPS</h1>
+            <p>Connectez-vous pour accéder à votre espace personnel</p>
+        </div>
+        
+        <div id="errorMessage" class="error-message"></div>
+        <div id="successMessage" class="success-message"></div>
+        
+        <!-- Connexion sociale -->
+        <div class="social-login">
+            <button class="btn-social google" onclick="loginWithGoogle()">
+                Continuer avec Google
+            </button>
+            <button class="btn-social facebook" onclick="loginWithFacebook()">
+                Continuer avec Facebook
+            </button>
+        </div>
+        
+        <div class="divider">
+            <span>ou</span>
+        </div>
+        
+        <!-- Formulaire email -->
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="votre@email.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" required placeholder="••••••••">
+            </div>
+            
+            <button type="submit" class="btn-primary" id="loginBtn">
+                Se connecter
+            </button>
+            
+            <div class="forgot-password">
+                <a href="#" onclick="showForgotPassword()">Mot de passe oublié ?</a>
+            </div>
+        </form>
+        
+        <div class="signup-link">
+            Pas encore de compte ? <a href="#" onclick="showSignup()">Créer un compte</a>
+        </div>
+    </div>
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/js/supabase-client.js"></script>
+    
+    <script>
+        // Gestion de la connexion
+        async function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const btn = document.getElementById('loginBtn');
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+            
+            // Reset messages
+            errorDiv.classList.remove('show');
+            successDiv.classList.remove('show');
+            
+            // Show loading
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span> Connexion...';
+            
+            try {
+                const { data, error } = await Auth.signIn(email, password);
+                
+                if (error) {
+                    throw error;
+                }
+                
+                // Connexion réussie
+                successDiv.textContent = 'Connexion réussie ! Redirection...';
+                successDiv.classList.add('show');
+                
+                // Redirection vers le dashboard
+                setTimeout(() => {
+                    window.location.href = '/dashboard.html';
+                }, 1000);
+                
+            } catch (error) {
+                errorDiv.textContent = error.message || 'Erreur lors de la connexion';
+                errorDiv.classList.add('show');
+                btn.disabled = false;
+                btn.textContent = 'Se connecter';
+            }
+        }
+        
+        // Connexion Google
+        async function loginWithGoogle() {
+            try {
+                const { data, error } = await Auth.signInWithGoogle();
+                if (error) throw error;
+            } catch (error) {
+                const errorDiv = document.getElementById('errorMessage');
+                errorDiv.textContent = 'Erreur avec Google: ' + error.message;
+                errorDiv.classList.add('show');
+            }
+        }
+        
+        // Connexion Facebook
+        async function loginWithFacebook() {
+            try {
+                const { data, error } = await Auth.signInWithFacebook();
+                if (error) throw error;
+            } catch (error) {
+                const errorDiv = document.getElementById('errorMessage');
+                errorDiv.textContent = 'Erreur avec Facebook: ' + error.message;
+                errorDiv.classList.add('show');
+            }
+        }
+        
+        // Afficher inscription
+        function showSignup() {
+            const form = document.getElementById('loginForm');
+            form.innerHTML = `
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" name="email" required placeholder="votre@email.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="signupPassword">Mot de passe</label>
+                    <input type="password" id="signupPassword" name="password" required placeholder="Minimum 6 caractères" minlength="6">
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">Confirmer le mot de passe</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="••••••••">
+                </div>
+                
+                <button type="submit" class="btn-primary" id="signupBtn">
+                    Créer mon compte
+                </button>
+            `;
+            
+            form.onsubmit = handleSignup;
+            document.querySelector('.signup-link').innerHTML = 'Déjà un compte ? <a href="#" onclick="location.reload()">Se connecter</a>';
+        }
+        
+        // Inscription
+        async function handleSignup(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const btn = document.getElementById('signupBtn');
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+            
+            if (password !== confirmPassword) {
+                errorDiv.textContent = 'Les mots de passe ne correspondent pas';
+                errorDiv.classList.add('show');
+                return;
+            }
+            
+            errorDiv.classList.remove('show');
+            successDiv.classList.remove('show');
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span> Création du compte...';
+            
+            try {
+                const { data, error } = await Auth.signUp(email, password);
+                
+                if (error) {
+                    throw error;
+                }
+                
+                successDiv.textContent = 'Compte créé ! Vérifiez votre email pour confirmer.';
+                successDiv.classList.add('show');
+                btn.disabled = false;
+                btn.textContent = 'Créer mon compte';
+                
+            } catch (error) {
+                errorDiv.textContent = error.message || 'Erreur lors de l\'inscription';
+                errorDiv.classList.add('show');
+                btn.disabled = false;
+                btn.textContent = 'Créer mon compte';
+            }
+        }
+        
+        // Mot de passe oublié
+        function showForgotPassword() {
+            const email = prompt('Entrez votre email:');
+            if (email) {
+                // TODO: Implémenter la récupération de mot de passe
+                alert('Fonctionnalité à venir !');
+            }
+        }
+        
+        // Vérifier si déjà connecté
+        Auth.getSession().then(({ session }) => {
+            if (session) {
+                window.location.href = '/dashboard.html';
+            }
+        });
+    </script>
+</body>
+</html>

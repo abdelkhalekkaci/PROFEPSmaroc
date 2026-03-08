@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Votre espace personnel ProfEPS - Historique de generation et favoris.">
+    <title>Mon Espace | ProfEPS Maroc</title>
+    <link rel="icon" type="image/png" href="/images/prof_eps.png">
+    <link rel="canonical" href="https://www.profeps.ma/dashboard.html">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #c1272d;
+            --primary-dark: #a01f24;
+            --secondary: #006233;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a68;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --border: #e2e8f0;
+            --radius: 8px;
+            --radius-lg: 12px;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-secondary);
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+        
+        .header-logo img {
+            height: 40px;
+        }
+        
+        .header-logo span {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+        }
+        
+        .header-user {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .user-name {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        
+        .user-email {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        .btn-logout {
+            padding: 0.5rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+        
+        .btn-logout:hover {
+            background: #fee2e2;
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        /* Main Content */
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .welcome-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+        }
+        
+        .welcome-section h1 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .welcome-section p {
+            opacity: 0.9;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            position: relative;
+            transition: color 0.2s;
+        }
+        
+        .tab:hover {
+            color: var(--primary);
+        }
+        
+        .tab.active {
+            color: var(--primary);
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        /* Content */
+        .content-section {
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .card-type {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--bg-secondary);
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+        
+        .card-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .btn-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .btn-icon.delete {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        
+        .btn-icon.delete:hover {
+            background: #fecaca;
+        }
+        
+        .card-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-date {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        .card-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .card-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+        
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .empty-state h3 {
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Loading */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .header-user {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .main {
+                padding: 1rem;
+            }
+            
+            .tabs {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="/" class="header-logo">
+            <img src="/images/prof_eps.png" alt="ProfEPS">
+            <span>ProfEPS</span>
+        </a>
+        
+        <div class="header-user">
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar">?</div>
+                <div>
+                    <div class="user-name" id="userName">Chargement...</div>
+                    <div class="user-email" id="userEmail"></div>
+                </div>
+            </div>
+            <button class="btn-logout" onclick="handleLogout()">Déconnexion</button>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main">
+        <div class="welcome-section">
+            <h1>Bienvenue sur votre espace personnel</h1>
+            <p>Gérez vos favoris et consultez votre historique de générations</p>
+        </div>
+        
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="statGenerations">0</div>
+                <div class="stat-label">Documents générés</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="statFavoris">0</div>
+                <div class="stat-label">Articles favoris</div>
+            </div>
+        </div>
+        
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('generations')">Historique</button>
+            <button class="tab" onclick="showTab('favoris')">Favoris</button>
+            <button class="tab" onclick="showTab('profile')">Profil</button>
+        </div>
+        
+        <!-- Historique -->
+        <div class="content-section active" id="generations">
+            <div class="loading" id="loadingGenerations">
+                <div class="spinner"></div>
+            </div>
+            <div class="cards-grid" id="generationsList"></div>
+        </div>
+        
+        <!-- Favoris -->
+        <div class="content-section" id="favoris">
+            <div class="loading" id="loadingFavoris">
+                <div class="spinner"></div>
+            </div>
+            <div class="cards-grid" id="favorisList"></div>
+        </div>
+        
+        <!-- Profil -->
+        <div class="content-section" id="profile">
+            <div class="card">
+                <h3 style="margin-bottom: 1rem;">Modifier votre profil</h3>
+                <form id="profileForm">
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Nom</label>
+                        <input type="text" id="profileName" style="width: 100%; padding: 0.75rem; border: 2px solid var(--border); border-radius: var(--radius);">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Établissement</label>
+                        <input type="text" id="profileEtablissement" style="width: 100%; padding: 0.75rem; border: 2px solid var(--border); border-radius: var(--radius);">
+                    </div>
+                    <button type="submit" class="btn-primary" style="padding: 0.75rem 1.5rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border: none; border-radius: var(--radius); font-weight: 600; cursor: pointer;">
+                        Enregistrer
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/js/supabase-client.js"></script>
+    
+    <script>
+        let currentUser = null;
+        
+        // Vérifier l'authentification
+        async function checkAuth() {
+            const { session, error } = await Auth.getSession();
+            
+            if (error || !session) {
+                window.location.href = '/login.html';
+                return null;
+            }
+            
+            currentUser = session.user;
+            return currentUser;
+        }
+        
+        // Charger les données utilisateur
+        async function loadUserData() {
+            await checkAuth();
+            
+            if (!currentUser) return;
+            
+            // Mettre à jour l'interface utilisateur
+            const initial = currentUser.email ? currentUser.email.charAt(0).toUpperCase() : 'U';
+            document.getElementById('userAvatar').textContent = initial;
+            document.getElementById('userName').textContent = currentUser.email.split('@')[0];
+            document.getElementById('userEmail').textContent = currentUser.email;
+            
+            // Charger les données
+            loadGenerations();
+            loadFavoris();
+        }
+        
+        // Charger l'historique des générations
+        async function loadGenerations() {
+            const container = document.getElementById('generationsList');
+            const loading = document.getElementById('loadingGenerations');
+            
+            // Simuler des données pour l'exemple
+            // Dans la réalité, remplacer par: const { historique } = await Historique.getByUser(currentUser.id);
+            const mockData = [];
+            
+            loading.style.display = 'none';
+            
+            if (mockData.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <div class="empty-state-icon">📄</div>
+                        <h3>Aucun document généré</h3>
+                        <p>Commencez par utiliser le générateur de fiches EPS !</p>
+                        <a href="/generateur.html" class="card-link">Aller au générateur</a>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = mockData.map(item => `
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-type">${item.type}</span>
+                            <button class="btn-icon delete" onclick="deleteGeneration('${item.id}')">🗑️</button>
+                        </div>
+                        <div class="card-title">${item.titre}</div>
+                        <div class="card-date">${new Date(item.date).toLocaleDateString('fr-FR')}</div>
+                    </div>
+                `).join('');
+            }
+            
+            document.getElementById('statGenerations').textContent = mockData.length;
+        }
+        
+        // Charger les favoris
+        async function loadFavoris() {
+            const container = document.getElementById('favorisList');
+            const loading = document.getElementById('loadingFavoris');
+            
+            // Simuler des données pour l'exemple
+            const mockFavoris = [
+                { id: '1', title: 'Fiche pédagogique Basketball EPS', url: '/article-basketball-eps.html', date: '2026-03-01' },
+                { id: '2', title: 'Critères de réalisation EPS', url: '/article-criteres.html', date: '2026-02-28' }
+            ];
+            
+            loading.style.display = 'none';
+            
+            if (mockFavoris.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <div class="empty-state-icon">❤️</div>
+                        <h3>Aucun favori</h3>
+                        <p>Ajoutez des articles à vos favoris pour les retrouver ici !</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = mockFavoris.map(item => `
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-type">Article</span>
+                            <button class="btn-icon delete" onclick="removeFavori('${item.id}')">🗑️</button>
+                        </div>
+                        <div class="card-title">${item.title}</div>
+                        <div class="card-date">Ajouté le ${new Date(item.date).toLocaleDateString('fr-FR')}</div>
+                        <a href="${item.url}" class="card-link">Voir l'article →</a>
+                    </div>
+                `).join('');
+            }
+            
+            document.getElementById('statFavoris').textContent = mockFavoris.length;
+        }
+        
+        // Basculer entre les onglets
+        function showTab(tabName) {
+            // Masquer tous les contenus
+            document.querySelectorAll('.content-section').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Désactiver tous les onglets
+            document.querySelectorAll('.tab').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Activer l'onglet sélectionné
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        // Déconnexion
+        async function handleLogout() {
+            const { error } = await Auth.signOut();
+            
+            if (error) {
+                alert('Erreur lors de la déconnexion');
+                return;
+            }
+            
+            window.location.href = '/login.html';
+        }
+        
+        // Supprimer une génération
+        function deleteGeneration(id) {
+            if (confirm('Voulez-vous vraiment supprimer cet élément ?')) {
+                loadGenerations(); // Recharger
+            }
+        }
+        
+        // Retirer un favori
+        function removeFavori(id) {
+            if (confirm('Voulez-vous vraiment retirer cet article de vos favoris ?')) {
+                loadFavoris(); // Recharger
+            }
+        }
+        
+        // Initialiser
+        document.addEventListener('DOMContentLoaded', loadUserData);
+        
+        // Écouter les changements d'authentification
+        Auth.onAuthStateChange((event, session) => {
+            if (event === 'SIGNED_OUT') {
+                window.location.href = '/login.html';
+            }
+        });
+    </script>
+</body>
+</html>
