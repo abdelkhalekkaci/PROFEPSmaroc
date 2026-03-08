@@ -215,6 +215,13 @@
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdiYnF4YWxlYm1lZXFnZG91bnRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4OTQ1NjYsImV4cCI6MjA4ODQ3MDU2Nn0.HRM35OtgfLv52jDwiqF155bCGf85ynWIw0LXJDhimQk'
         );
         
+        // Debug: Tester la connexion
+        supabase.auth.getSession().then(({ data, error }) => {
+            console.log('Session check:', data, error);
+        }).catch(err => {
+            console.error('Erreur de connexion Supabase:', err);
+        });
+        
         let isLogin = true;
         let loading = false;
         
