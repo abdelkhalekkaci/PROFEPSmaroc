@@ -8,15 +8,10 @@
     <link rel="icon" type="image/png" href="/images/prof_eps.png">
     <link rel="canonical" href="https://www.profeps.ma/dashboard.html">
     
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
             --primary: #c1272d;
@@ -57,27 +52,12 @@
             text-decoration: none;
         }
         
-        .header-logo img {
-            height: 40px;
-        }
+        .header-logo img { height: 40px; }
+        .header-logo span { font-weight: 700; font-size: 1.25rem; color: var(--text-primary); }
         
-        .header-logo span {
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: var(--text-primary);
-        }
+        .header-user { display: flex; align-items: center; gap: 1rem; }
         
-        .header-user {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
+        .user-info { display: flex; align-items: center; gap: 0.75rem; }
         
         .user-avatar {
             width: 40px;
@@ -91,15 +71,8 @@
             font-weight: 600;
         }
         
-        .user-name {
-            font-weight: 500;
-            color: var(--text-primary);
-        }
-        
-        .user-email {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-        }
+        .user-name { font-weight: 500; color: var(--text-primary); }
+        .user-email { font-size: 0.75rem; color: var(--text-secondary); }
         
         .btn-logout {
             padding: 0.5rem 1rem;
@@ -118,11 +91,7 @@
         }
         
         /* Main Content */
-        .main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+        .main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
         
         .welcome-section {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -132,14 +101,8 @@
             margin-bottom: 2rem;
         }
         
-        .welcome-section h1 {
-            font-size: 1.75rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .welcome-section p {
-            opacity: 0.9;
-        }
+        .welcome-section h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+        .welcome-section p { opacity: 0.9; }
         
         /* Tabs */
         .tabs {
@@ -161,14 +124,8 @@
             transition: color 0.2s;
         }
         
-        .tab:hover {
-            color: var(--primary);
-        }
-        
-        .tab.active {
-            color: var(--primary);
-        }
-        
+        .tab:hover { color: var(--primary); }
+        .tab.active { color: var(--primary); }
         .tab.active::after {
             content: '';
             position: absolute;
@@ -179,14 +136,8 @@
             background: var(--primary);
         }
         
-        /* Content */
-        .content-section {
-            display: none;
-        }
-        
-        .content-section.active {
-            display: block;
-        }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
         
         /* Cards */
         .cards-grid {
@@ -225,10 +176,7 @@
             color: var(--text-secondary);
         }
         
-        .card-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
+        .card-actions { display: flex; gap: 0.5rem; }
         
         .btn-icon {
             width: 32px;
@@ -247,20 +195,10 @@
             color: #dc2626;
         }
         
-        .btn-icon.delete:hover {
-            background: #fecaca;
-        }
+        .btn-icon.delete:hover { background: #fecaca; }
         
-        .card-title {
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .card-date {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-        }
+        .card-title { font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .card-date { font-size: 0.75rem; color: var(--text-secondary); }
         
         .card-link {
             display: inline-block;
@@ -270,27 +208,18 @@
             font-weight: 500;
         }
         
-        .card-link:hover {
-            text-decoration: underline;
-        }
+        .card-link:hover { text-decoration: underline; }
         
         /* Empty State */
         .empty-state {
             text-align: center;
             padding: 4rem 2rem;
             color: var(--text-secondary);
+            grid-column: 1 / -1;
         }
         
-        .empty-state-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-        
-        .empty-state h3 {
-            font-size: 1.25rem;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
+        .empty-state-icon { font-size: 4rem; margin-bottom: 1rem; }
+        .empty-state h3 { font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.5rem; }
         
         /* Stats */
         .stats-grid {
@@ -307,16 +236,8 @@
             text-align: center;
         }
         
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-        
-        .stat-label {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-        }
+        .stat-number { font-size: 2rem; font-weight: 700; color: var(--primary); }
+        .stat-label { font-size: 0.875rem; color: var(--text-secondary); }
         
         /* Loading */
         .loading {
@@ -335,29 +256,13 @@
             animation: spin 0.8s linear infinite;
         }
         
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
         
-        /* Responsive */
         @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .header-user {
-                width: 100%;
-                justify-content: space-between;
-            }
-            
-            .main {
-                padding: 1rem;
-            }
-            
-            .tabs {
-                overflow-x: auto;
-            }
+            .header { flex-direction: column; gap: 1rem; }
+            .header-user { width: 100%; justify-content: space-between; }
+            .main { padding: 1rem; }
+            .tabs { overflow-x: auto; }
         }
     </style>
 </head>
@@ -404,7 +309,6 @@
         <div class="tabs">
             <button class="tab active" onclick="showTab('generations')">Historique</button>
             <button class="tab" onclick="showTab('favoris')">Favoris</button>
-            <button class="tab" onclick="showTab('profile')">Profil</button>
         </div>
         
         <!-- Historique -->
@@ -422,45 +326,30 @@
             </div>
             <div class="cards-grid" id="favorisList"></div>
         </div>
-        
-        <!-- Profil -->
-        <div class="content-section" id="profile">
-            <div class="card">
-                <h3 style="margin-bottom: 1rem;">Modifier votre profil</h3>
-                <form id="profileForm">
-                    <div style="margin-bottom: 1rem;">
-                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Nom</label>
-                        <input type="text" id="profileName" style="width: 100%; padding: 0.75rem; border: 2px solid var(--border); border-radius: var(--radius);">
-                    </div>
-                    <div style="margin-bottom: 1rem;">
-                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Établissement</label>
-                        <input type="text" id="profileEtablissement" style="width: 100%; padding: 0.75rem; border: 2px solid var(--border); border-radius: var(--radius);">
-                    </div>
-                    <button type="submit" class="btn-primary" style="padding: 0.75rem 1.5rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border: none; border-radius: var(--radius); font-weight: 600; cursor: pointer;">
-                        Enregistrer
-                    </button>
-                </form>
-            </div>
-        </div>
     </main>
 
     <!-- Supabase SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="/js/supabase-client.js"></script>
     
     <script>
+        // Configuration Supabase avec les clés intégrées
+        const supabase = window.supabase.createClient(
+            'https://gbbqxalebmeeqgdountd.supabase.co',
+            'sb_publishable_swUFy4rDoQZmugKkV4TkAw_MWGQLMSb'
+        );
+        
         let currentUser = null;
         
         // Vérifier l'authentification
         async function checkAuth() {
-            const { session, error } = await Auth.getSession();
+            const { data, error } = await supabase.auth.getSession();
             
-            if (error || !session) {
+            if (error || !data.session) {
                 window.location.href = '/login.html';
                 return null;
             }
             
-            currentUser = session.user;
+            currentUser = data.session.user;
             return currentUser;
         }
         
@@ -486,15 +375,29 @@
             const container = document.getElementById('generationsList');
             const loading = document.getElementById('loadingGenerations');
             
-            // Simuler des données pour l'exemple
-            // Dans la réalité, remplacer par: const { historique } = await Historique.getByUser(currentUser.id);
-            const mockData = [];
+            // Essayer de charger depuis Supabase
+            let mockData = [];
+            
+            try {
+                const { data, error } = await supabase
+                    .from('historique')
+                    .select('*')
+                    .eq('user_id', currentUser.id)
+                    .order('created_at', { ascending: false })
+                    .limit(50);
+                
+                if (data && !error) {
+                    mockData = data;
+                }
+            } catch (e) {
+                console.log('Table historique non disponible');
+            }
             
             loading.style.display = 'none';
             
             if (mockData.length === 0) {
                 container.innerHTML = `
-                    <div class="empty-state" style="grid-column: 1 / -1;">
+                    <div class="empty-state">
                         <div class="empty-state-icon">📄</div>
                         <h3>Aucun document généré</h3>
                         <p>Commencez par utiliser le générateur de fiches EPS !</p>
@@ -505,11 +408,11 @@
                 container.innerHTML = mockData.map(item => `
                     <div class="card">
                         <div class="card-header">
-                            <span class="card-type">${item.type}</span>
+                            <span class="card-type">${item.type_document || 'Document'}</span>
                             <button class="btn-icon delete" onclick="deleteGeneration('${item.id}')">🗑️</button>
                         </div>
                         <div class="card-title">${item.titre}</div>
-                        <div class="card-date">${new Date(item.date).toLocaleDateString('fr-FR')}</div>
+                        <div class="card-date">${new Date(item.created_at).toLocaleDateString('fr-FR')}</div>
                     </div>
                 `).join('');
             }
@@ -522,17 +425,28 @@
             const container = document.getElementById('favorisList');
             const loading = document.getElementById('loadingFavoris');
             
-            // Simuler des données pour l'exemple
-            const mockFavoris = [
-                { id: '1', title: 'Fiche pédagogique Basketball EPS', url: '/article-basketball-eps.html', date: '2026-03-01' },
-                { id: '2', title: 'Critères de réalisation EPS', url: '/article-criteres.html', date: '2026-02-28' }
-            ];
+            // Essayer de charger depuis Supabase
+            let mockFavoris = [];
+            
+            try {
+                const { data, error } = await supabase
+                    .from('favoris')
+                    .select('*')
+                    .eq('user_id', currentUser.id)
+                    .order('created_at', { ascending: false });
+                
+                if (data && !error) {
+                    mockFavoris = data;
+                }
+            } catch (e) {
+                console.log('Table favoris non disponible');
+            }
             
             loading.style.display = 'none';
             
             if (mockFavoris.length === 0) {
                 container.innerHTML = `
-                    <div class="empty-state" style="grid-column: 1 / -1;">
+                    <div class="empty-state">
                         <div class="empty-state-icon">❤️</div>
                         <h3>Aucun favori</h3>
                         <p>Ajoutez des articles à vos favoris pour les retrouver ici !</p>
@@ -545,9 +459,9 @@
                             <span class="card-type">Article</span>
                             <button class="btn-icon delete" onclick="removeFavori('${item.id}')">🗑️</button>
                         </div>
-                        <div class="card-title">${item.title}</div>
-                        <div class="card-date">Ajouté le ${new Date(item.date).toLocaleDateString('fr-FR')}</div>
-                        <a href="${item.url}" class="card-link">Voir l'article →</a>
+                        <div class="card-title">${item.article_title}</div>
+                        <div class="card-date">Ajouté le ${new Date(item.created_at).toLocaleDateString('fr-FR')}</div>
+                        <a href="${item.article_url}" class="card-link">Voir l'article →</a>
                     </div>
                 `).join('');
             }
@@ -557,44 +471,36 @@
         
         // Basculer entre les onglets
         function showTab(tabName) {
-            // Masquer tous les contenus
-            document.querySelectorAll('.content-section').forEach(el => {
-                el.classList.remove('active');
-            });
+            document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
             
-            // Désactiver tous les onglets
-            document.querySelectorAll('.tab').forEach(el => {
-                el.classList.remove('active');
-            });
-            
-            // Activer l'onglet sélectionné
             document.getElementById(tabName).classList.add('active');
             event.target.classList.add('active');
         }
         
         // Déconnexion
         async function handleLogout() {
-            const { error } = await Auth.signOut();
-            
-            if (error) {
-                alert('Erreur lors de la déconnexion');
-                return;
-            }
-            
+            const { error } = await supabase.auth.signOut();
             window.location.href = '/login.html';
         }
         
         // Supprimer une génération
-        function deleteGeneration(id) {
+        async function deleteGeneration(id) {
             if (confirm('Voulez-vous vraiment supprimer cet élément ?')) {
-                loadGenerations(); // Recharger
+                try {
+                    await supabase.from('historique').delete().eq('id', id);
+                } catch (e) {}
+                loadGenerations();
             }
         }
         
         // Retirer un favori
-        function removeFavori(id) {
+        async function removeFavori(id) {
             if (confirm('Voulez-vous vraiment retirer cet article de vos favoris ?')) {
-                loadFavoris(); // Recharger
+                try {
+                    await supabase.from('favoris').delete().eq('id', id);
+                } catch (e) {}
+                loadFavoris();
             }
         }
         
@@ -602,7 +508,7 @@
         document.addEventListener('DOMContentLoaded', loadUserData);
         
         // Écouter les changements d'authentification
-        Auth.onAuthStateChange((event, session) => {
+        supabase.auth.onAuthStateChange((event) => {
             if (event === 'SIGNED_OUT') {
                 window.location.href = '/login.html';
             }
