@@ -8,258 +8,386 @@
     <link rel="icon" type="image/png" href="/images/prof_eps.png">
     <link rel="canonical" href="https://www.profeps.ma/dashboard.html">
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
     
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="css/style.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --primary: #c1272d;
-            --primary-dark: #a01f24;
+            --primary-dark: #9a1f24;
+            --primary-light: #e85a5f;
             --secondary: #006233;
+            --secondary-dark: #004d28;
+            --secondary-light: #00894a;
+            --accent: #c49a3d;
             --text-primary: #1a1a2e;
             --text-secondary: #4a4a68;
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8f9fa;
+            --text-light: #6b7280;
+            --bg-primary: #f8fafc;
+            --bg-secondary: #f1f5f9;
+            --bg-card: #ffffff;
             --border: #e2e8f0;
-            --radius: 8px;
-            --radius-lg: 12px;
+            --border-light: #f1f5f9;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+            --shadow-xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+            --transition: all 0.3s ease;
         }
-        
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--bg-secondary);
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg-primary);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
-        
-        /* Dashboard main content - adjust for navbar */
+
         .dashboard-main {
             flex: 1;
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
-            padding-top: 100px; /* Account for fixed navbar */
+            padding-top: 120px;
             width: 100%;
         }
-        
-        /* Header */
-        .header {
-            background: white;
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 2rem;
+
+        .dashboard-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            position: sticky;
-            top: 70px;
-            z-index: 99;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
-        
-        .header-logo {
+
+        .dashboard-welcome {
             display: flex;
             align-items: center;
             gap: 1rem;
-            text-decoration: none;
         }
-        
-        .header-logo img { height: 40px; }
-        .header-logo span { font-weight: 700; font-size: 1.25rem; color: var(--text-primary); }
-        
-        .header-user { display: flex; align-items: center; gap: 1rem; }
-        
-        .user-info { display: flex; align-items: center; gap: 0.75rem; }
-        
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+
+        .dashboard-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-lg);
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
+            font-weight: 700;
+            font-size: 1.25rem;
+            box-shadow: 0 8px 25px rgba(193, 39, 45, 0.25);
+        }
+
+        .dashboard-welcome-text h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .dashboard-welcome-text p {
+            color: var(--text-light);
+            font-size: 0.9375rem;
+        }
+
+        .dashboard-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            font-size: 0.9375rem;
             font-weight: 600;
-        }
-        
-        .user-name { font-weight: 500; color: var(--text-primary); }
-        .user-email { font-size: 0.75rem; color: var(--text-secondary); }
-        
-        .btn-logout {
-            padding: 0.5rem 1rem;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
+            border-radius: var(--radius-lg);
             cursor: pointer;
-            font-size: 0.875rem;
-            transition: all 0.2s;
-            color: var(--text-secondary);
+            transition: var(--transition);
             text-decoration: none;
+            font-family: inherit;
         }
-        
-        .btn-logout:hover {
-            background: #fee2e2;
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(193, 39, 45, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(193, 39, 45, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
             border-color: var(--primary);
             color: var(--primary);
         }
-        
-        /* Main Content */
-        .welcome-section {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 2rem;
-            border-radius: var(--radius-lg);
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.25rem;
             margin-bottom: 2rem;
         }
-        
-        .welcome-section h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
-        .welcome-section p { opacity: 0.9; }
-        
-        /* Tabs */
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .stat-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .stat-icon.documents {
+            background: linear-gradient(135deg, rgba(193, 39, 45, 0.1), rgba(193, 39, 45, 0.05));
+            color: var(--primary);
+        }
+
+        .stat-icon.favorites {
+            background: linear-gradient(135deg, rgba(0, 98, 51, 0.1), rgba(0, 98, 51, 0.05));
+            color: var(--secondary);
+        }
+
+        .stat-info h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+
+        .stat-info p {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-top: 0.25rem;
+        }
+
         .tabs {
             display: flex;
             gap: 0.5rem;
             margin-bottom: 1.5rem;
-            border-bottom: 2px solid var(--border);
+            background: var(--bg-card);
+            padding: 0.5rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-light);
+            width: fit-content;
         }
-        
+
         .tab {
             padding: 0.75rem 1.5rem;
             background: none;
             border: none;
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--text-light);
             cursor: pointer;
-            position: relative;
-            transition: color 0.2s;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .tab:hover { 
+            color: var(--text-secondary); 
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 4px 15px rgba(193, 39, 45, 0.3);
+        }
+
+        .content-section { 
+            display: none; 
         }
         
-        .tab:hover { color: var(--primary); }
-        .tab.active { color: var(--primary); }
-        .tab.active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--primary);
+        .content-section.active { 
+            display: block; 
+            animation: fadeIn 0.3s ease;
         }
-        
-        .content-section { display: none; }
-        .content-section.active { display: block; }
-        
-        /* Cards */
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
+            gap: 1.25rem;
         }
-        
+
         .card {
-            background: white;
-            border-radius: var(--radius-lg);
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
             padding: 1.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
-        
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
         .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
         }
-        
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
         .card-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 1rem;
         }
-        
+
         .card-type {
             display: inline-block;
-            padding: 0.25rem 0.75rem;
+            padding: 0.375rem 0.875rem;
             background: var(--bg-secondary);
-            border-radius: 9999px;
+            border-radius: var(--radius-full);
             font-size: 0.75rem;
-            font-weight: 500;
+            font-weight: 600;
             color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        
-        .card-actions { display: flex; gap: 0.5rem; }
-        
+
+        .card-actions { 
+            display: flex; 
+            gap: 0.5rem; 
+        }
+
         .btn-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: var(--radius);
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-lg);
             border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
+            transition: var(--transition);
+            background: var(--bg-secondary);
+            color: var(--text-light);
         }
-        
-        .btn-icon.delete {
+
+        .btn-icon:hover {
             background: #fee2e2;
             color: #dc2626;
         }
-        
-        .btn-icon.delete:hover { background: #fecaca; }
-        
-        .card-title { font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
-        .card-date { font-size: 0.75rem; color: var(--text-secondary); }
-        
+
+        .card-title { 
+            font-weight: 600; 
+            color: var(--text-primary); 
+            margin-bottom: 0.5rem;
+            font-size: 1.0625rem;
+        }
+
+        .card-date { 
+            font-size: 0.8125rem; 
+            color: var(--text-light); 
+        }
+
         .card-link {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
             margin-top: 1rem;
             color: var(--primary);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 0.9375rem;
         }
-        
-        .card-link:hover { text-decoration: underline; }
-        
-        /* Empty State */
+
+        .card-link:hover {
+            gap: 0.75rem;
+        }
+
         .empty-state {
             text-align: center;
             padding: 4rem 2rem;
             color: var(--text-secondary);
             grid-column: 1 / -1;
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            border: 1px dashed var(--border);
         }
-        
-        .empty-state-icon { font-size: 4rem; margin-bottom: 1rem; }
-        .empty-state h3 { font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.5rem; }
-        
-        /* Stats */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
+
+        .empty-state-icon { 
+            font-size: 3.5rem; 
+            margin-bottom: 1rem; 
         }
-        
-        .stat-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: var(--radius-lg);
-            text-align: center;
+
+        .empty-state h3 { 
+            font-size: 1.25rem; 
+            color: var(--text-primary); 
+            margin-bottom: 0.5rem; 
         }
-        
-        .stat-number { font-size: 2rem; font-weight: 700; color: var(--primary); }
-        .stat-label { font-size: 0.875rem; color: var(--text-secondary); }
-        
-        /* Loading */
+
+        .empty-state p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
         .loading {
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 4rem;
         }
-        
+
         .spinner {
             width: 40px;
             height: 40px;
@@ -268,24 +396,41 @@
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
-        
-        @keyframes spin { to { transform: rotate(360deg); } }
-        
+
+        @keyframes spin { 
+            to { transform: rotate(360deg); } 
+        }
+
         @media (max-width: 768px) {
-            .header { flex-direction: column; gap: 1rem; }
-            .header-user { width: 100%; justify-content: space-between; }
-            .dashboard-main { padding: 1rem; padding-top: 90px; }
-            .tabs { overflow-x: auto; }
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .dashboard-actions {
+                width: 100%;
+            }
+            .dashboard-actions .btn {
+                flex: 1;
+            }
+            .dashboard-main { 
+                padding: 1rem; 
+                padding-top: 100px; 
+            }
+            .tabs { 
+                width: 100%; 
+                overflow-x: auto; 
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <div class="nav-backdrop" id="navBackdrop"></div>
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
-                <img src="/images/prof_eps.png" alt="Prof EPS" width="500" height="500">
+                <img src="/images/prof_eps.png" alt="Prof EPS">
             </a>
             <div class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link">Accueil</a>
@@ -294,77 +439,93 @@
             </div>
             <div class="nav-right">
                 <div class="user-info" id="userInfo" style="display: none;">
-                    <div class="user-avatar" id="userAvatar" style="width: 32px; height: 32px; font-size: 0.875rem;">?</div>
-                    <span class="user-name" id="userName" style="font-size: 0.875rem;">Utilisateur</span>
+                    <div class="user-avatar" id="userAvatar">?</div>
+                    <span class="user-name" id="userName">Utilisateur</span>
                 </div>
-                <a href="generateur.html" class="nav-link" id="dashboardLink" style="display: none;">Mon Espace</a>
-                <a href="generateur.html" class="nav-cta nav-cta-desktop"><span>✨</span> Créer un document</a>
-                <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+                <a href="dashboard.html" class="nav-link nav-link-active">Mon Espace</a>
+                <a href="generateur.html" class="nav-cta">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                    Créer un document
+                </a>
+                <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navMenu">
+                    <span></span><span></span><span></span>
+                </button>
             </div>
         </div>
     </nav>
 
     <div class="dashboard-main">
-        <!-- User Header -->
-        <header class="header">
-            <div class="user-info">
-                <div class="user-avatar" id="headerAvatar">?</div>
-                <div>
-                    <div class="user-name" id="headerName">Chargement...</div>
-                    <div class="user-email" id="headerEmail"></div>
+        <header class="dashboard-header">
+            <div class="dashboard-welcome">
+                <div class="dashboard-avatar" id="headerAvatar">?</div>
+                <div class="dashboard-welcome-text">
+                    <h1>Bienvenue, <span id="headerName">Chargement...</span></h1>
+                    <p id="headerEmail">Chargement...</p>
                 </div>
             </div>
-            <a href="login.html" class="btn-logout" onclick="handleLogout()">Déconnexion</a>
+            <div class="dashboard-actions">
+                <a href="generateur.html" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                    Nouveau document
+                </a>
+                <button class="btn btn-secondary" onclick="handleLogout()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                    Déconnexion
+                </button>
+            </div>
         </header>
         
-        <!-- Main Content -->
-        <main>
-            <div class="welcome-section">
-                <h1>Bienvenue sur votre espace personnel</h1>
-                <p>Gérez vos favoris et consultez votre historique de générations</p>
-            </div>
-            
-            <!-- Stats -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number" id="statGenerations">0</div>
-                    <div class="stat-label">Documents générés</div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon documents">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="statFavoris">0</div>
-                    <div class="stat-label">Articles favoris</div>
+                <div class="stat-info">
+                    <h3 id="statGenerations">0</h3>
+                    <p>Documents générés</p>
                 </div>
             </div>
-            
-            <!-- Tabs -->
-            <div class="tabs">
-                <button class="tab active" onclick="showTab('generations')">Historique</button>
-                <button class="tab" onclick="showTab('favoris')">Favoris</button>
-            </div>
-            
-            <!-- Historique -->
-            <div class="content-section active" id="generations">
-                <div class="loading" id="loadingGenerations">
-                    <div class="spinner"></div>
+            <div class="stat-card">
+                <div class="stat-icon favorites">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                 </div>
-                <div class="cards-grid" id="generationsList"></div>
-            </div>
-            
-            <!-- Favoris -->
-            <div class="content-section" id="favoris">
-                <div class="loading" id="loadingFavoris">
-                    <div class="spinner"></div>
+                <div class="stat-info">
+                    <h3 id="statFavoris">0</h3>
+                    <p>Articles favoris</p>
                 </div>
-                <div class="cards-grid" id="favorisList"></div>
             </div>
-        </main>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('generations')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Historique
+            </button>
+            <button class="tab" onclick="showTab('favoris')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                Favoris
+            </button>
+        </div>
+        
+        <div class="content-section active" id="generations">
+            <div class="loading" id="loadingGenerations">
+                <div class="spinner"></div>
+            </div>
+            <div class="cards-grid" id="generationsList"></div>
+        </div>
+        
+        <div class="content-section" id="favoris">
+            <div class="loading" id="loadingFavoris">
+                <div class="spinner"></div>
+            </div>
+            <div class="cards-grid" id="favorisList"></div>
+        </div>
     </div>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-grid">
             <div class="footer-brand">
-                <a href="index.html"><img src="/images/prof_eps.png" alt="Prof EPS" width="500" height="500"></a>
+                <a href="index.html"><img src="/images/prof_eps.png" alt="Prof EPS" width="60"></a>
                 <p>Le premier générateur intelligent de fiches pédagogiques pour les professeurs d'EPS au Maroc.</p>
             </div>
             <div>
@@ -389,44 +550,19 @@
             <div>
                 <h3 class="footer-title">Contact</h3>
                 <div class="footer-links">
-                    <a href="mailto:epsprof.assistance@gmail.com" class="social-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <a href="mailto:epsprof.assistance@gmail.com">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                         epsprof.assistance@gmail.com
-                    </a>
-                    <a href="https://www.facebook.com/profile.php?id=61586684012757" target="_blank" class="social-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                        Facebook
-                    </a>
-                    <a href="https://www.instagram.com/profeps.ma/" target="_blank" class="social-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s.644-1.44-1.439-1.44z"/></svg>
-                        Instagram
-                    </a>
-                    <a href="https://www.linkedin.com/in/eps-prof-maroc-814590190/" target="_blank" class="social-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                        LinkedIn
                     </a>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
             <p class="footer-copyright">© 2025 Prof EPS. Tous droits réservés.</p>
-            <div class="footer-social">
-                <a href="https://www.facebook.com/profile.php?id=61586684012757" target="_blank" aria-label="Facebook">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                </a>
-                <a href="https://www.instagram.com/profeps.ma/" target="_blank" aria-label="Instagram">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s.644-1.44-1.439-1.44z"/></svg>
-                </a>
-                <a href="https://www.linkedin.com/in/eps-prof-maroc-814590190/" target="_blank" aria-label="LinkedIn">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                </a>
-            </div>
         </div>
     </footer>
 
-    <!-- Navbar JavaScript -->
     <script>
-        // Navbar scroll effect
         const navbar = document.getElementById('navbar');
         const navToggle = document.getElementById('navToggle');
         const navMenu = document.getElementById('navMenu');
@@ -435,7 +571,9 @@
             navbar.classList.toggle('scrolled', window.scrollY > 50);
         });
         
-        const navBackdrop = document.getElementById('navBackdrop');
+        const navBackdrop = document.createElement('div');
+        navBackdrop.className = 'nav-backdrop';
+        document.body.appendChild(navBackdrop);
 
         function toggleMenu() {
             navMenu.classList.toggle('active');
@@ -458,11 +596,9 @@
         document.addEventListener('click', (e) => { if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) closeMenu(); });
     </script>
 
-    <!-- Supabase SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <script>
-        // Configuration Supabase avec les clés intégrées
         const supabaseClient = window.supabase.createClient(
             'https://gbbqxalebmeeqgdountd.supabase.co',
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdiYnF4YWxlYm1lZXFnZG91bnRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4OTQ1NjYsImV4cCI6MjA4ODQ3MDU2Nn0.HRM35OtgfLv52jDwiqF155bCGf85ynWIw0LXJDhimQk'
@@ -470,7 +606,6 @@
         
         let currentUser = null;
         
-        // Vérifier l'authentification
         async function checkAuth() {
             const { data, error } = await supabaseClient.auth.getSession();
             
@@ -483,35 +618,30 @@
             return currentUser;
         }
         
-        // Charger les données utilisateur
         async function loadUserData() {
             await checkAuth();
             
             if (!currentUser) return;
             
-            // Mettre à jour l'interface utilisateur - header
             const initial = currentUser.email ? currentUser.email.charAt(0).toUpperCase() : 'U';
+            const name = currentUser.email ? currentUser.email.split('@')[0] : 'Utilisateur';
+            
             document.getElementById('headerAvatar').textContent = initial;
-            document.getElementById('headerName').textContent = currentUser.email.split('@')[0];
+            document.getElementById('headerName').textContent = name;
             document.getElementById('headerEmail').textContent = currentUser.email;
             
-            // Mettre à jour la navbar
             document.getElementById('userInfo').style.display = 'flex';
-            document.getElementById('dashboardLink').style.display = 'block';
             document.getElementById('userAvatar').textContent = initial;
-            document.getElementById('userName').textContent = currentUser.email.split('@')[0];
+            document.getElementById('userName').textContent = name;
             
-            // Charger les données
             loadGenerations();
             loadFavoris();
         }
         
-        // Charger l'historique des générations
         async function loadGenerations() {
             const container = document.getElementById('generationsList');
             const loading = document.getElementById('loadingGenerations');
             
-            // Essayer de charger depuis Supabase
             let mockData = [];
             
             try {
@@ -537,7 +667,7 @@
                         <div class="empty-state-icon">📄</div>
                         <h3>Aucun document généré</h3>
                         <p>Commencez par utiliser le générateur de fiches EPS !</p>
-                        <a href="/generateur.html" class="card-link">Aller au générateur</a>
+                        <a href="/generateur.html" class="btn btn-primary">Aller au générateur</a>
                     </div>
                 `;
             } else {
@@ -545,10 +675,12 @@
                     <div class="card">
                         <div class="card-header">
                             <span class="card-type">${item.type_document || 'Document'}</span>
-                            <button class="btn-icon delete" onclick="deleteGeneration('${item.id}')">🗑️</button>
+                            <button class="btn-icon" onclick="deleteGeneration('${item.id}')" title="Supprimer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                            </button>
                         </div>
                         <div class="card-title">${item.titre}</div>
-                        <div class="card-date">${new Date(item.created_at).toLocaleDateString('fr-FR')}</div>
+                        <div class="card-date">${new Date(item.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</div>
                     </div>
                 `).join('');
             }
@@ -556,12 +688,10 @@
             document.getElementById('statGenerations').textContent = mockData.length;
         }
         
-        // Charger les favoris
         async function loadFavoris() {
             const container = document.getElementById('favorisList');
             const loading = document.getElementById('loadingFavoris');
             
-            // Essayer de charger depuis Supabase
             let mockFavoris = [];
             
             try {
@@ -586,6 +716,7 @@
                         <div class="empty-state-icon">❤️</div>
                         <h3>Aucun favori</h3>
                         <p>Ajoutez des articles à vos favoris pour les retrouver ici !</p>
+                        <a href="/blog.html" class="btn btn-primary">Parcourir les articles</a>
                     </div>
                 `;
             } else {
@@ -593,11 +724,13 @@
                     <div class="card">
                         <div class="card-header">
                             <span class="card-type">Article</span>
-                            <button class="btn-icon delete" onclick="removeFavori('${item.id}')">🗑️</button>
+                            <button class="btn-icon" onclick="removeFavori('${item.id}')" title="Retirer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                            </button>
                         </div>
                         <div class="card-title">${item.article_title}</div>
-                        <div class="card-date">Ajouté le ${new Date(item.created_at).toLocaleDateString('fr-FR')}</div>
-                        <a href="${item.article_url}" class="card-link">Voir l'article →</a>
+                        <div class="card-date">Ajouté le ${new Date(item.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</div>
+                        <a href="${item.article_url}" class="card-link">Voir l'article <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
                     </div>
                 `).join('');
             }
@@ -605,7 +738,6 @@
             document.getElementById('statFavoris').textContent = mockFavoris.length;
         }
         
-        // Basculer entre les onglets
         function showTab(tabName) {
             document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
@@ -614,13 +746,11 @@
             event.target.classList.add('active');
         }
         
-        // Déconnexion
         async function handleLogout() {
             const { error } = await supabaseClient.auth.signOut();
             window.location.href = '/login.html';
         }
         
-        // Supprimer une génération
         async function deleteGeneration(id) {
             if (confirm('Voulez-vous vraiment supprimer cet élément ?')) {
                 try {
@@ -630,7 +760,6 @@
             }
         }
         
-        // Retirer un favori
         async function removeFavori(id) {
             if (confirm('Voulez-vous vraiment retirer cet article de vos favoris ?')) {
                 try {
@@ -640,7 +769,6 @@
             }
         }
         
-        // Charger les données au démarrage
         loadUserData();
     </script>
 </body>

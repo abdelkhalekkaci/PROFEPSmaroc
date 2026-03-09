@@ -8,176 +8,324 @@
     <link rel="icon" type="image/png" href="/images/prof_eps.png">
     <link rel="canonical" href="https://www.profeps.ma/login.html">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
     
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="css/style.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* Override styles for login page - keep centered layout */
+        :root {
+            --primary: #c1272d;
+            --primary-dark: #9a1f24;
+            --secondary: #006233;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a68;
+            --text-light: #6b7280;
+            --bg-primary: #f8fafc;
+            --bg-card: #ffffff;
+            --border: #e2e8f0;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+            --shadow-xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background: linear-gradient(135deg, rgba(193,39,45,0.05) 0%, rgba(0,98,51,0.05) 100%);
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
         }
-        
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(193, 39, 45, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 98, 51, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(196, 154, 61, 0.05) 0%, transparent 40%);
+            animation: bgFloat 20s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes bgFloat {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-2%, -2%); }
+        }
+
         .login-main {
             flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 2rem;
-            padding-top: 100px; /* Account for fixed navbar */
+            padding-top: 120px;
+            position: relative;
+            z-index: 1;
         }
-        
+
         .login-container {
-            background: white;
-            border-radius: var(--radius-lg);
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
             width: 100%;
-            max-width: 400px;
-            padding: 30px;
+            max-width: 420px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            animation: slideUp 0.6s ease-out;
         }
-        
-        h2 {
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-header {
             text-align: center;
-            margin-bottom: 24px;
-            color: var(--text-primary);
+            margin-bottom: 2rem;
         }
-        
+
+        .login-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: var(--radius-lg);
+            margin-bottom: 1.25rem;
+            box-shadow: 0 8px 30px rgba(193, 39, 45, 0.25);
+        }
+
+        .login-logo img {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+        }
+
+        .login-header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: var(--text-light);
+            font-size: 0.9375rem;
+        }
+
         .btn-social {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 16px;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            padding: 0.875rem 1.25rem;
+            margin-bottom: 1rem;
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
             cursor: pointer;
-            font-size: 15px;
+            font-size: 0.9375rem;
+            font-weight: 600;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            transition: all 0.2s;
+            gap: 0.75rem;
+            transition: var(--transition);
+            color: var(--text-primary);
         }
-        
+
         .btn-social:hover {
-            background: var(--bg-secondary);
+            border-color: var(--primary);
+            background: #fff5f5;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
-        
+
         .btn-social.google::before {
-            content: "G";
+            content: '';
             display: inline-flex;
             align-items: center;
             justify-content: center;
             width: 20px;
             height: 20px;
-            background: linear-gradient(135deg, #4285f4, #ea4335, #fbbc05, #34a853);
-            color: white;
+            background: linear-gradient(135deg, #4285f4 25%, #ea4335 25% 50%, #fbbc05 50% 75%, #34a853 75%);
             border-radius: 4px;
-            font-weight: 700;
-            font-size: 14px;
         }
-        
+
         .divider {
-            text-align: center;
-            color: #999;
-            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-light);
+            margin: 1.5rem 0;
+            font-size: 0.875rem;
         }
-        
-        input {
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
             display: block;
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            box-sizing: border-box;
-            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
         }
-        
-        input:focus {
+
+        .form-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+            font-size: 0.9375rem;
+            font-family: inherit;
+            transition: var(--transition);
+            background: var(--bg-card);
+        }
+
+        .form-input:focus {
             outline: none;
             border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(193, 39, 45, 0.1);
         }
-        
+
+        .form-input::placeholder {
+            color: var(--text-light);
+        }
+
         .btn-primary {
             width: 100%;
-            padding: 12px;
-            background: #0070f3;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: var(--radius-lg);
             cursor: pointer;
-            font-size: 15px;
-            font-weight: bold;
-            transition: all 0.2s;
+            font-size: 1rem;
+            font-weight: 700;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
         }
-        
+
         .btn-primary:hover {
-            background: #0051a2;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(193, 39, 45, 0.35);
         }
-        
+
         .btn-primary:disabled {
             opacity: 0.7;
             cursor: not-allowed;
+            transform: none;
         }
-        
+
         .switcher {
             text-align: center;
-            cursor: pointer;
-            color: #0070f3;
-            margin-top: 16px;
+            margin-top: 1.5rem;
+            font-size: 0.9375rem;
+            color: var(--text-light);
         }
-        
-        .switcher:hover {
+
+        .switcher a {
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .switcher a:hover {
             text-decoration: underline;
         }
-        
+
         .message {
             text-align: center;
-            margin-top: 12px;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 14px;
+            padding: 0.875rem 1rem;
+            border-radius: var(--radius-lg);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            display: none;
         }
-        
+
         .message.error {
-            background: #fee2e2;
+            background: #fef2f2;
             color: #dc2626;
+            border: 1px solid #fecaca;
         }
-        
+
         .message.success {
-            background: #dcfce7;
+            background: #f0fdf4;
             color: #16a34a;
+            border: 1px solid #bbf7d0;
         }
-        
+
         .loading {
             display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid #ffffff;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
             border-radius: 50%;
-            border-top-color: transparent;
+            border-top-color: white;
             animation: spin 0.8s linear infinite;
-            margin-right: 8px;
         }
-        
+
         @keyframes spin {
             to { transform: rotate(360deg); }
+        }
+
+        .login-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+        }
+
+        .login-back:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 1.75rem;
+                margin: 1rem;
+            }
+            .login-main {
+                padding: 1rem;
+                padding-top: 100px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <div class="nav-backdrop" id="navBackdrop"></div>
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
-                <img src="/images/prof_eps.png" alt="Prof EPS" width="500" height="500">
+                <img src="/images/prof_eps.png" alt="Prof EPS">
             </a>
             <div class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link">Accueil</a>
@@ -185,49 +333,67 @@
                 <a href="blog.html" class="nav-link">Blog</a>
             </div>
             <div class="nav-right">
-                <a href="generateur.html" class="nav-link" style="font-weight: 500;">Connexion</a>
-                <a href="generateur.html" class="nav-cta nav-cta-desktop"><span>✨</span> Créer un document</a>
-                <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+                <a href="login.html" class="nav-link nav-link-active">Connexion</a>
+                <a href="generateur.html" class="nav-cta">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                    Créer un document
+                </a>
+                <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navMenu">
+                    <span></span><span></span><span></span>
+                </button>
             </div>
         </div>
     </nav>
 
     <div class="login-main">
         <div class="login-container">
-            <h2 id="formTitle">🔑 Connexion</h2>
+            <a href="index.html" class="login-back">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Retour à l'accueil
+            </a>
             
-            <div id="message" class="message" style="display: none;"></div>
+            <div class="login-header">
+                <div class="login-logo">
+                    <img src="/images/prof_eps.png" alt="Prof EPS">
+                </div>
+                <h1 id="formTitle">Bienvenue</h1>
+                <p id="formSubtitle">Connectez-vous pour accéder à votre espace</p>
+            </div>
             
-            <!-- Bouton Google -->
+            <div id="message" class="message"></div>
+            
             <button class="btn-social google" id="googleBtn" onclick="handleGoogle()">
-                🔵 Continuer avec Google
+                <span class="btn-social google::before"></span>
+                Continuer avec Google
             </button>
             
-            <div class="divider">— ou —</div>
+            <div class="divider">ou</div>
             
-            <!-- Email -->
-            <input type="email" id="email" placeholder="Email" required>
+            <div class="form-group">
+                <label class="form-label" for="email">Email</label>
+                <input type="email" id="email" class="form-input" placeholder="vous@exemple.com" required>
+            </div>
             
-            <!-- Mot de passe -->
-            <input type="password" id="password" placeholder="Mot de passe" required>
+            <div class="form-group">
+                <label class="form-label" for="password">Mot de passe</label>
+                <input type="password" id="password" class="form-input" placeholder="••••••••" required>
+            </div>
             
-            <!-- Bouton principal -->
             <button class="btn-primary" id="submitBtn" onclick="handleEmail()">
-                🔑 Se connecter
+                <span>Se connecter</span>
             </button>
             
-            <!-- Switcher -->
-            <p class="switcher" onclick="toggleMode()">
-                <span id="switchText">Pas encore de compte ? S'inscrire</span>
+            <p class="switcher">
+                <span id="switchText">Pas encore de compte ? </span>
+                <a onclick="toggleMode()">Créer un compte</a>
             </p>
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-grid">
             <div class="footer-brand">
-                <a href="index.html"><img src="/images/prof_eps.png" alt="Prof EPS" width="500" height="500"></a>
+                <a href="index.html"><img src="/images/prof_eps.png" alt="Prof EPS" width="60"></a>
                 <p>Le premier générateur intelligent de fiches pédagogiques pour les professeurs d'EPS au Maroc.</p>
             </div>
             <div>
@@ -252,44 +418,19 @@
             <div>
                 <h3 class="footer-title">Contact</h3>
                 <div class="footer-links">
-                    <a href="mailto:epsprof.assistance@gmail.com" class="social-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <a href="mailto:epsprof.assistance@gmail.com">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                         epsprof.assistance@gmail.com
-                    </a>
-                    <a href="https://www.facebook.com/profile.php?id=61586684012757" target="_blank" class="social-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                        Facebook
-                    </a>
-                    <a href="https://www.instagram.com/profeps.ma/" target="_blank" class="social-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s.644-1.44-1.439-1.44z"/></svg>
-                        Instagram
-                    </a>
-                    <a href="https://www.linkedin.com/in/eps-prof-maroc-814590190/" target="_blank" class="social-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                        LinkedIn
                     </a>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
             <p class="footer-copyright">© 2025 Prof EPS. Tous droits réservés.</p>
-            <div class="footer-social">
-                <a href="https://www.facebook.com/profile.php?id=61586684012757" target="_blank" aria-label="Facebook">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                </a>
-                <a href="https://www.instagram.com/profeps.ma/" target="_blank" aria-label="Instagram">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s.644-1.44-1.439-1.44z"/></svg>
-                </a>
-                <a href="https://www.linkedin.com/in/eps-prof-maroc-814590190/" target="_blank" aria-label="LinkedIn">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                </a>
-            </div>
         </div>
     </footer>
 
-    <!-- Navbar JavaScript -->
     <script>
-        // Navbar scroll effect
         const navbar = document.getElementById('navbar');
         const navToggle = document.getElementById('navToggle');
         const navMenu = document.getElementById('navMenu');
@@ -298,7 +439,9 @@
             navbar.classList.toggle('scrolled', window.scrollY > 50);
         });
         
-        const navBackdrop = document.getElementById('navBackdrop');
+        const navBackdrop = document.createElement('div');
+        navBackdrop.className = 'nav-backdrop';
+        document.body.appendChild(navBackdrop);
 
         function toggleMenu() {
             navMenu.classList.toggle('active');
@@ -321,36 +464,26 @@
         document.addEventListener('click', (e) => { if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) closeMenu(); });
     </script>
 
-    <!-- Supabase SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <script>
-        // Configuration Supabase avec les clés intégrées
         const supabaseClient = window.supabase.createClient(
             'https://gbbqxalebmeeqgdountd.supabase.co',
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdiYnF4YWxlYm1lZXFnZG91bnRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4OTQ1NjYsImV4cCI6MjA4ODQ3MDU2Nn0.HRM35OtgfLv52jDwiqF155bCGf85ynWIw0LXJDhimQk'
         );
         
-        // Debug: Tester la connexion
-        supabaseClient.auth.getSession().then(({ data, error }) => {
-            console.log('Session check:', data, error);
-        }).catch(err => {
-            console.error('Erreur de connexion Supabase:', err);
-        });
-        
         let isLogin = true;
         let loading = false;
         
-        // Basculer entre connexion et inscription
         function toggleMode() {
             isLogin = !isLogin;
-            document.getElementById('formTitle').textContent = isLogin ? '🔑 Connexion' : '📝 Inscription';
-            document.getElementById('submitBtn').textContent = isLogin ? '🔑 Se connecter' : '📝 S\'inscrire';
-            document.getElementById('switchText').textContent = isLogin ? 'Pas encore de compte ? S\'inscrire' : 'Déjà un compte ? Se connecter';
+            document.getElementById('formTitle').textContent = isLogin ? 'Bienvenue' : 'Créer un compte';
+            document.getElementById('formSubtitle').textContent = isLogin ? 'Connectez-vous pour accéder à votre espace' : 'Rejoignez ProfEPS gratuitement';
+            document.getElementById('submitBtn').querySelector('span').textContent = isLogin ? 'Se connecter' : 'Créer mon compte';
+            document.getElementById('switchText').textContent = isLogin ? 'Pas encore de compte ? ' : 'Déjà un compte ? ';
             hideMessage();
         }
         
-        // Afficher les messages
         function showMessage(text, type) {
             const msg = document.getElementById('message');
             msg.textContent = text;
@@ -362,7 +495,6 @@
             document.getElementById('message').style.display = 'none';
         }
         
-        // Connexion Google
         async function handleGoogle() {
             if (loading) return;
             loading = true;
@@ -374,14 +506,13 @@
             });
             
             if (error) {
-                showMessage('❌ ' + error.message, 'error');
+                showMessage(error.message, 'error');
             }
             
             loading = false;
             updateButton(false);
         }
         
-        // Connexion/Inscription email
         async function handleEmail() {
             if (loading) return;
             
@@ -399,46 +530,40 @@
             
             try {
                 if (isLogin) {
-                    // Connexion
                     const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
                     if (error) throw error;
                     
-                    showMessage('✅ Connecté avec succès !', 'success');
-                    setTimeout(() => {
-                        window.location.href = '/dashboard.html';
-                    }, 1000);
+                    showMessage('Connexion réussie !', 'success');
+                    setTimeout(() => { window.location.href = '/dashboard.html'; }, 800);
                 } else {
-                    // Inscription
                     const { error } = await supabaseClient.auth.signUp({ email, password });
                     if (error) throw error;
                     
-                    showMessage('✅ Vérifiez votre email pour confirmer !', 'success');
+                    showMessage('Compte créé ! Vérifiez votre email.', 'success');
                 }
             } catch (error) {
-                showMessage('❌ ' + error.message, 'error');
+                showMessage(error.message, 'error');
             }
             
             loading = false;
             updateButton(false);
         }
         
-        // Mettre à jour le bouton
         function updateButton(isLoading) {
             const btn = document.getElementById('submitBtn');
             const googleBtn = document.getElementById('googleBtn');
             
             if (isLoading) {
                 btn.disabled = true;
-                btn.innerHTML = '<span class="loading"></span> Chargement...';
+                btn.innerHTML = '<span class="loading"></span>';
                 googleBtn.disabled = true;
             } else {
                 btn.disabled = false;
-                btn.textContent = isLogin ? '🔑 Se connecter' : '📝 S\'inscrire';
+                btn.innerHTML = `<span>${isLogin ? 'Se connecter' : 'Créer mon compte'}</span>`;
                 googleBtn.disabled = false;
             }
         }
         
-        // Vérifier si déjà connecté
         supabaseClient.auth.getSession().then(({ data }) => {
             if (data.session) {
                 window.location.href = '/dashboard.html';
