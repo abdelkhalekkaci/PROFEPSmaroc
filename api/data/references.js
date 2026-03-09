@@ -14,7 +14,7 @@ const OTI = {
 };
 
 const OTC = {
-    'Sports Collectifs (Marquage - démarquage)': {
+    'Handball': {
         '1AC': "L'élève la lere année doit pouvoir conserver la balle et participer au jeu collectif pour gagner la rencontre.",
         '2AC': "L'élève de la 2eme année doit pouvoir gagner la rencontre par la réalisation de déplacements varies pour une progression avec la balle Et un change ment de rôle enfonction des situations",
         '3AC': "L'élève de la 3eme année doit pouvoir participer dans la réalisation du projet collectif basé sur le passage rapide et adéquat de l'attaque à la défense pour gagner la rencontre.",
@@ -22,7 +22,111 @@ const OTC = {
         '1AB': "Rechercher le gain de la rencontre par la mise en œuvre de choix tactiques collectifs, fondés sur la vitesse d'exécution. (trouver le moyen d'arriver le plut tôt possible a la cible adverse (entre 2 ou plusieurs joueurs) avec une bonne gestion des ressources devant une défense qui réduit l'espace de jeu.",
         '2AB': "Rechercher le gain de la rencontre par la mise en place d'une attaque basée sur la maîtrise des rôles et l'occupation permanente et raisonnée de l'espace par un projet collectif devant une défense organisée qui cherche à récupérer la balle et défendre sa cible."
     },
-    'Athlétisme': {
+    'Football': {
+        '1AC': "L'élève la lere année doit pouvoir conserver la balle et participer au jeu collectif pour gagner la rencontre.",
+        '2AC': "L'élève de la 2eme année doit pouvoir gagner la rencontre par la réalisation de déplacements varies pour une progression avec la balle Et un change ment de rôle enfonction des situations",
+        '3AC': "L'élève de la 3eme année doit pouvoir participer dans la réalisation du projet collectif basé sur le passage rapide et adéquat de l'attaque à la défense pour gagner la rencontre.",
+        'TC': "Rechercher le gain de la rencontre par l'utilisation de moyens adaptes pour conserver la balle jusqu'à la zone adverse devant une défense organisée qui cherche à récupérer la balle et défendre sa cible.",
+        '1AB': "Rechercher le gain de la rencontre par la mise en œuvre de choix tactiques collectifs, fondés sur la vitesse d'exécution. (trouver le moyen d'arriver le plut tôt possible a la cible adverse (entre 2 ou plusieurs joueurs) avec une bonne gestion des ressources devant une défense qui réduit l'espace de jeu.",
+        '2AB': "Rechercher le gain de la rencontre par la mise en place d'une attaque basée sur la maîtrise des rôles et l'occupation permanente et raisonnée de l'espace par un projet collectif devant une défense organisée qui cherche à récupérer la balle et défendre sa cible."
+    },
+    'Basketball': {
+        '1AC': "L'élève la lere année doit pouvoir conserver la balle et participer au jeu collectif pour gagner la rencontre.",
+        '2AC': "L'élève de la 2eme année doit pouvoir gagner la rencontre par la réalisation de déplacements varies pour une progression avec la balle Et un change ment de rôle enfonction des situations",
+        '3AC': "L'élève de la 3eme année doit pouvoir participer dans la réalisation du projet collectif basé sur le passage rapide et adéquat de l'attaque à la défense pour gagner la rencontre.",
+        'TC': "Rechercher le gain de la rencontre par l'utilisation de moyens adaptes pour conserver la balle jusqu'à la zone adverse devant une défense organisée qui cherche à récupérer la balle et défendre sa cible.",
+        '1AB': "Rechercher le gain de la rencontre par la mise en œuvre de choix tactiques collectifs, fondés sur la vitesse d'exécution. (trouver le moyen d'arriver le plut tôt possible a la cible adverse (entre 2 ou plusieurs joueurs) avec une bonne gestion des ressources devant une défense qui réduit l'espace de jeu.",
+        '2AB': "Rechercher le gain de la rencontre par la mise en place d'une attaque basée sur la maîtrise des rôles et l'occupation permanente et raisonnée de l'espace par un projet collectif devant une défense organisée qui cherche à récupérer la balle et défendre sa cible."
+    },
+    'Volleyball': {
+        '1AC': "Rechercher le gain de la rencontre par un déplacement et un placement adéquats pour défendre son camp et renvoyer la balle vers le camp adverse.",
+        '2AC': "Rechercher le gain de la rencontre par un déplacement et un placement adéquats pour un renvoi indirect de la balle vers le camp adverse et gagner le point.",
+        '3AC': "Rechercher le gain de la rencontre par une défense de terrain et l'orientation de la balle vers la zone avant, avant de la renvoyer.",
+        'TC': "Rechercher le gain de la rencontre par la mise en œuvre d'un jeu basée sur l'organisation collective pour défendre la cible pour faciliter la progression de la balle vers la zone avant et la renvoyer dans la limite de 2 ou 3 touches de balle.",
+        '1AB': "Rechercher le gain de la rencontre par la mise en œuvre d'un jeu basée sur l'organisation collective pour récupérer la balle la faire progresser et la renvoyer dans la limite de 3 touches de balles.",
+        '2AB': "Rechercher le gain de la rencontre par la mise en œuvre d'un jeu basée sur l'organisation collective pour récupérer la balle la conserver et organiser les conditions adéquates pour marquer des points dans la limite de 3 touches de balle."
+    },
+    'Tennis de table': {
+        '1AC': "Rechercher le gain de la rencontre par un déplacement et un placement adéquats pour défendre son camp et renvoyer la balle vers le camp adverse.",
+        '2AC': "Rechercher le gain de la rencontre par un déplacement et un placement adéquats pour un renvoi indirect de la balle vers le camp adverse et gagner le point.",
+        '3AC': "Rechercher le gain de la rencontre par une défense de terrain et l'orientation de la balle vers la zone avant, avant de la renvoyer.",
+        'TC': "Rechercher le gain de la rencontre par la mise en œuvre d'un jeu basée sur l'organisation collective pour défendre la cible pour faciliter la progression de la balle vers la zone avant et la renvoyer dans la limite de 2 ou 3 touches de balle.",
+        '1AB': "Rechercher le gain de la rencontre par la mise en œuvre d'un jeu basée sur l'organisation collective pour récupérer la balle la faire progresser et la renvoyer dans la limite de 3 touches de balles.",
+        '2AB': "Rechercher le gain de la rencontre par la mise en œuvre d'un jeu basée sur l'organisation collective pour récupérer la balle la conserver et organiser les conditions adéquates pour marquer des points dans la limite de 3 touches de balle."
+    },
+    'Badminton': {
+        '1AC': "Rechercher le gain de la rencontre par un déplacement et un placement adéquats pour défendre son camp et renvoyer la balle vers le camp adverse.",
+        '2AC': "Rechercher le gain de la rencontre par un déplacement et un placement adéquats pour un renvoi indirect de la balle vers le camp adverse et gagner le point.",
+        '3AC': "Rechercher le gain de la rencontre par une défense de terrain et l'orientation de la balle vers la zone avant, avant de la renvoyer.",
+        'TC': "Rechercher le gain de la rencontre par la mise en œuvre d'un jeu basée sur l'organisation collective pour défendre la cible pour faciliter la progression de la balle vers la zone avant et la renvoyer dans la limite de 2 ou 3 touches de balle.",
+        '1AB': "Rechercher le gain de la rencontre par la mise en œuvre d'un jeu basée sur l'organisation collective pour récupérer la balle la faire progresser et la renvoyer dans la limite de 3 touches de balles.",
+        '2AB': "Rechercher le gain de la rencontre par la mise en œuvre d'un jeu basée sur l'organisation collective pour récupérer la balle la conserver et organiser les conditions adéquates pour marquer des points dans la limite de 3 touches de balle."
+    },
+    'Basketball 3x3': {
+        '1AC': "L'élève la lere année doit pouvoir conserver la balle et participer au jeu collectif pour gagner la rencontre.",
+        '2AC': "L'élève de la 2eme année doit pouvoir gagner la rencontre par la réalisation de déplacements varies pour une progression avec la balle Et un change ment de rôle enfonction des situations",
+        '3AC': "L'élève de la 3eme année doit pouvoir participer dans la réalisation du projet collectif basé sur le passage rapide et adéquat de l'attaque à la défense pour gagner la rencontre.",
+        'TC': "Rechercher le gain de la rencontre par l'utilisation de moyens adaptes pour conserver la balle jusqu'à la zone adverse devant une défense organisée qui cherche à récupérer la balle et défendre sa cible.",
+        '1AB': "Rechercher le gain de la rencontre par la mise en œuvre de choix tactiques collectifs, fondés sur la vitesse d'exécution. (trouver le moyen d'arriver le plut tôt possible a la cible adverse (entre 2 ou plusieurs joueurs) avec une bonne gestion des ressources devant une défense qui réduit l'espace de jeu.",
+        '2AB': "Rechercher le gain de la rencontre par la mise en place d'une attaque basée sur la maîtrise des rôles et l'occupation permanente et raisonnée de l'espace par un projet collectif devant une défense organisée qui cherche à récupérer la balle et défendre sa cible."
+    },
+    'Rugby': {
+        '1AC': "L'élève la lere année doit pouvoir conserver la balle et participer au jeu collectif pour gagner la rencontre.",
+        '2AC': "L'élève de la 2eme année doit pouvoir gagner la rencontre par la réalisation de déplacements varies pour une progression avec la balle Et un change ment de rôle enfonction des situations",
+        '3AC': "L'élève de la 3eme année doit pouvoir participer dans la réalisation du projet collectif basé sur le passage rapide et adéquat de l'attaque à la défense pour gagner la rencontre.",
+        'TC': "Rechercher le gain de la rencontre par l'utilisation de moyens adaptes pour conserver la balle jusqu'à la zone adverse devant une défense organisée qui cherche à récupérer la balle et défend sa cible.",
+        '1AB': "Rechercher le gain de la rencontre par la mise en œuvre de choix tactiques collectifs, fondés sur la vitesse d'exécution. (trouver le moyen d'arriver le plut tôt possible a la cible adverse (entre 2 ou plusieurs joueurs) avec une bonne gestion des ressources devant une défense qui réduit l'espace de jeu.",
+        '2AB': "Rechercher le gain de la rencontre par la mise en place d'une attaque basée sur la maîtrise des rôles et l'occupation permanente et raisonnée de l'espace par un projet collectif devant une défense organisée qui cherche à récupérer la balle et défendre sa cible."
+    },
+    'Course de vitesse': {
+        '1AC': "L'élève de lere année doit pouvoir organiser les mouvements du corps et adapter les efforts pour construire de nouveaux repères afin de réaliser des performances individuelles et collectives générales et correctes.",
+        '2AC': "L'élève de 2eme année doit pouvoir organiser les mouvements du corps et adapter les efforts pour consolider les habiletés et améliore r un niveau de performance.",
+        '3AC': "L'élève de 3eme année doit pouvoir gérer l'effort physique pour réaliser des prestations correctes et efficaces suivant ses exigences organisationnelles et réglementaires et réaliser un niveau de performance individuel et collectif.",
+        'TC': "L'élève du T.C doit maîtriser l'organisation de son corps et la gestion de l'effort et l'adéquation de la réalisation d'une façon globale et correcte pour mobiliser un certain niveau d'habileté ou de performance pour réduire le temps ou élargir l'espace",
+        '1AB': "L'élève de 1ere année doit maîtriser l'organisation de son corps et la gestion de l'effort et l'adéquation de la réalisation pour mobiliser un certain niveau d'habileté et augmenter l'efficacité de la performance",
+        '2AB': "L'élève de 2eme année doit maîtriser l'organisation des conditions de défi par l'utilisation de moyens et de méthodes stratégiques pour mobiliser un certain niveau de performance suivant un projet collectif ou individuel."
+    },
+    'Course de haies': {
+        '1AC': "L'élève de lere année doit pouvoir organiser les mouvements du corps et adapter les efforts pour construire de nouveaux repères afin de réaliser des performances individuelles et collectives générales et correctes.",
+        '2AC': "L'élève de 2eme année doit pouvoir organiser les mouvements du corps et adapter les efforts pour consolider les habiletés et améliore r un niveau de performance.",
+        '3AC': "L'élève de 3eme année doit pouvoir gérer l'effort physique pour réaliser des prestations correctes et efficaces suivant ses exigences organisationnelles et réglementaires et réaliser un niveau de performance individuel et collectif.",
+        'TC': "L'élève du T.C doit maîtriser l'organisation de son corps et la gestion de l'effort et l'adéquation de la réalisation d'une façon globale et correcte pour mobiliser un certain niveau d'habileté ou de performance pour réduire le temps ou élargir l'espace",
+        '1AB': "L'élève de 1ere année doit maîtriser l'organisation de son corps et la gestion de l'effort et l'adéquation de la réalisation pour mobiliser un certain niveau d'habileté et augmenter l'efficacité de la performance",
+        '2AB': "L'élève de 2eme année doit maîtriser l'organisation des conditions de défi par l'utilisation de moyens et de méthodes stratégiques pour mobiliser un certain niveau de performance suivant un projet collectif ou individuel."
+    },
+    'Course de relais': {
+        '1AC': "L'élève de lere année doit pouvoir organiser les mouvements du corps et adapter les efforts pour construire de nouveaux repères afin de réaliser des performances individuelles et collectives générales et correctes.",
+        '2AC': "L'élève de 2eme année doit pouvoir organiser les mouvements du corps et adapter les efforts pour consolider les habiletés et améliore r un niveau de performance.",
+        '3AC': "L'élève de 3eme année doit pouvoir gérer l'effort physique pour réaliser des prestations correctes et efficaces suivant ses exigences organisationnelles et réglementaires et réaliser un niveau de performance individuel et collectif.",
+        'TC': "L'élève du T.C doit maîtriser l'organisation de son corps et la gestion de l'effort et l'adéquation de la réalisation d'une façon globale et correcte pour mobiliser un certain niveau d'habileté ou de performance pour réduire le temps ou élargir l'espace",
+        '1AB': "L'élève de 1ere année doit maîtriser l'organisation de son corps et la gestion de l'effort et l'adéquation de la réalisation pour mobiliser un certain niveau d'habileté et augmenter l'efficacité de la performance",
+        '2AB': "L'élève de 2eme année doit maîtriser l'organisation des conditions de défi par l'utilisation de moyens et de méthodes stratégiques pour mobiliser un certain niveau de performance suivant un projet collectif ou individuel."
+    },
+    'Saut en longueur': {
+        '1AC': "L'élève de lere année doit pouvoir organiser les mouvements du corps et adapter les efforts pour construire de nouveaux repères afin de réaliser des performances individuelles et collectives générales et correctes.",
+        '2AC': "L'élève de 2eme année doit pouvoir organiser les mouvements du corps et adapter les efforts pour consolider les habiletés et améliore r un niveau de performance.",
+        '3AC': "L'élève de 3eme année doit pouvoir gérer l'effort physique pour réaliser des prestations correctes et efficaces suivant ses exigences organisationnelles et réglementaires et réaliser un niveau de performance individuel et collectif.",
+        'TC': "L'élève du T.C doit maîtriser l'organisation de son corps et la gestion de l'effort et l'adéquation de la réalisation d'une façon globale et correcte pour mobiliser un certain niveau d'habileté ou de performance pour réduire le temps ou élargir l'espace",
+        '1AB': "L'élève de 1ere année doit maîtriser l'organisation de son corps et la gestion de l'effort et l'adéquation de la réalisation pour mobiliser un certain niveau d'habileté et augmenter l'efficacité de la performance",
+        '2AB': "L'élève de 2eme année doit maîtriser l'organisation des conditions de défi par l'utilisation de moyens et de méthodes stratégiques pour mobiliser un certain niveau de performance suivant un projet collectif ou individuel."
+    },
+    'Saut en hauteur': {
+        '1AC': "L'élève de lere année doit pouvoir organiser les mouvements du corps et adapter les efforts pour construire de nouveaux repères afin de réaliser des performances individuelles et collectives générales et correctes.",
+        '2AC': "L'élève de 2eme année doit pouvoir organiser les mouvements du corps et adapter les efforts pour consolider les habiletés et améliore r un niveau de performance.",
+        '3AC': "L'élève de 3eme année doit pouvoir gérer l'effort physique pour réaliser des prestations correctes et efficaces suivant ses exigences organisationnelles et réglementaires et réaliser un niveau de performance individuel et collectif.",
+        'TC': "L'élève du T.C doit maîtriser l'organisation de son corps et la gestion de l'effort et l'adéquation de la réalisation d'une façon globale et correcte pour mobiliser un certain niveau d'habileté ou de performance pour réduire le temps ou élargir l'espace",
+        '1AB': "L'élève de 1ere année doit maîtriser l'organisation de son corps et la gestion de l'effort et l'adéquation de la réalisation pour mobiliser un certain niveau d'habileté et augmenter l'efficacité de la performance",
+        '2AB': "L'élève de 2eme année doit maîtriser l'organisation des conditions de défi par l'utilisation de moyens et de méthodes stratégiques pour mobiliser un certain niveau de performance suivant un projet collectif ou individuel."
+    },
+    'Course de durée': {
+        '1AC': "L'élève de lere année doit pouvoir organiser les mouvements du corps et adapter les efforts pour construire de nouveaux repères afin de réaliser des performances individuelles et collectives générales et correctes.",
+        '2AC': "L'élève de 2eme année doit pouvoir organiser les mouvements du corps et adapter les efforts pour consolider les habiletés et améliore r un niveau de performance.",
+        '3AC': "L'élève de 3eme année doit pouvoir gérer l'effort physique pour réaliser des prestations correctes et efficaces suivant ses exigences organisationnelles et réglementaires et réaliser un niveau de performance individuel et collectif.",
+        'TC': "L'élève du T.C doit maîtriser l'organisation de son corps et la gestion de l'effort et l'adéquation de la réalisation d'une façon globale et correcte pour mobiliser un certain niveau d'habileté ou de performance pour réduire le temps ou élargir l'espace",
+        '1AB': "L'élève de 1ere année doit maîtriser l'organisation de son corps et la gestion de l'effort et l'adéquation de la réalisation pour mobiliser un certain niveau d'habileté et augmenter l'efficacité de la performance",
+        '2AB': "L'élève de 2eme année doit maîtriser l'organisation des conditions de défi par l'utilisation de moyens et de méthodes stratégiques pour mobiliser un certain niveau de performance suivant un projet collectif ou individuel."
+    },
+    'Lancer de poids': {
         '1AC': "L'élève de lere année doit pouvoir organiser les mouvements du corps et adapter les efforts pour construire de nouveaux repères afin de réaliser des performances individuelles et collectives générales et correctes.",
         '2AC': "L'élève de 2eme année doit pouvoir organiser les mouvements du corps et adapter les efforts pour consolider les habiletés et améliore r un niveau de performance.",
         '3AC': "L'élève de 3eme année doit pouvoir gérer l'effort physique pour réaliser des prestations correctes et efficaces suivant ses exigences organisationnelles et réglementaires et réaliser un niveau de performance individuel et collectif.",
@@ -37,14 +141,6 @@ const OTC = {
         'TC': "L'élève du T.C doit pouvoir présenter un projet individuel ou collectif d'expression motrice sous forme d'enchaînement d'éléments gymniques devant le groupe classe .compose de: 2A+3B+2C",
         '1AB': "L'élève de 1ere année doit pouvoir organiser présenter et réaliser un projet individuel ou collectif d'expression motrice sous forme d'enchaînement d'éléments gymniques devant le groupe classe .compose de: 2B+3C+2D",
         '2AB': "L'élève de 2eme année doit pouvoir concevoir et réaliser et juger un projet individuel ou collectif d'expression motrice sous forme d'enchaînement d'éléments Varies en figure et en rythme devant le groupe classe .compose de: 2C 3D 2E"
-    },
-    'Sports Collectifs de Renvoi': {
-        '1AC': "Rechercher le gain de la rencontre par un déplacement et un placement adéquats pour défendre son camp et renvoyer la balle vers le camp adverse.",
-        '2AC': "Rechercher le gain de la rencontre par un déplacement et un placement adéquats pour un renvoi indirect de la balle vers le camp adverse et gagner le point.",
-        '3AC': "Rechercher le gain de la rencontre par une défense de terrain et l'orientation de la balle vers la zone avant, avant de la renvoyer.",
-        'TC': "Rechercher le gain de la rencontre par la mise en œuvre d'un jeu basée sur l'organisation collective pour défendre la cible pour faciliter la progression de la balle vers la zone avant et la renvoyer dans la limite de 2 ou 3 touches de balle.",
-        '1AB': "Rechercher le gain de la rencontre par la mise en œuvre d'un jeu basée sur l'organisation collective pour récupérer la balle la faire progresser et la renvoyer dans la limite de 3 touches de balles.",
-        '2AB': "Rechercher le gain de la rencontre par la mise en œuvre d'un jeu basée sur l'organisation collective pour récupérer la balle la conserver et organiser les conditions adéquates pour marquer des points dans la limite de 3 touches de balle."
     }
 };
 
