@@ -5,142 +5,46 @@
 // ============================================================================
 
 const OTI = {
-    '1AC': "À la fin de la 1ère année du cycle secondaire collégial, l'élève doit être capable d'acquérir une motricité correcte lui permettant de s'adapter aux exigences des différentes situations motrices et de s'intégrer positivement dans le groupe classe tout en respectant les règles de sécurité et de fair-play.",
-    '2AC': "À la fin de la 2ème année du cycle secondaire collégial, l'élève doit être capable d'ajuster et de maîtriser son énergie physique pour effectuer des réalisations motrices coordonnées et organisées, tout en développant ses capacités d'adaptation aux situations variées et en respectant les règles de jeu.",
-    '3AC': "À la fin de la 3ème année du cycle secondaire collégial, l'élève doit être capable d'ajuster les éléments de l'acte moteur et de s'adapter aux différentes situations en fonction de leurs exigences organisationnelles et réglementaires, tout en faisant preuve d'autonomie et de responsabilité.",
-    'TC': "À la fin du Tronc Commun, l'élève doit être capable de maîtriser les composantes du comportement moteur et de s'adapter aux différentes situations motrices tout en développant son sens critique et sa capacité à gérer efficacement ses ressources physiques et mentales.",
-    '1AB': "À la fin de la 1ère année du Baccalauréat, l'élève doit être capable de confronter et d'analyser différentes situations motrices complexes et d'améliorer ses réalisations par une gestion efficace de ses ressources, tout en s'inscrivant dans une démarche de projet individuel ou collectif.",
-    '2AB': "À la fin de la 2ème année du Baccalauréat, l'élève doit être capable d'analyser finement les différentes situations motrices et de s'intégrer efficacement dans la réalisation de projets collectifs et individuels, en faisant preuve d'expertise technique et d'intelligence tactique."
+    '1AC': "L'élève de la 1ere année doit acquérir une motricité correcte lui permettant de s'adapter aux exigences situations (forme et rythme) et s'intégrer dans le groupe.",
+    '2AC': "L'élève de la 2eme année doit pouvoir ajuster l'énergie physique et la maîtriser et fournir l'effort et l'orienter pour effectuer des réalisations coordonnées et organisées, et s'accoutumer à commander et à être commandé pour réaliser différents rôles.",
+    '3AC': "L'élève de la 3eme année doit pouvoir ajuster les éléments de l'acte moteur et l'adaptation aux différentes situations en fonction de ses exigences organisationnelles et réglementaires, et s'exercer sur la pratique des droits et devoirs pour réaliser un projet sportif individuel ou collectif.",
+    'TC': "l'élève du T.C doit pouvoir maîtriser les composantes du comportement moteur et pouvoir s'adapter aux différentes situations et faire face a ses défis et accepter l'intégration dans le groupe.",
+    '1AB': "l'élève de la 1ere année doit pouvoir confronter et analyser différentes situations motrices et améliorer ses realizations et faire progresser son efficacité motrice et sa performance sportive.",
+    '2AB': "l'élève de la 2eme année doit pouvoir analyser différentes situations et interactions motrices et s'intégrer volontairement dans la planification et la réalisation de projets individuels et collectifs."
 };
 
 const OTC = {
-    'Handball': {
-        '1AC': "Conserver collectivement la balle et participer activement au jeu pour progresser vers la cible adverse et marquer en situation de jeu réduit, tout en respectant les règles fondamentales et en assurant la continuité du jeu.",
-        '2AC': "Faire progresser la balle vers la cible par des déplacements variés et des passes adaptées, en s'inscrivant dans une organisation collective simple et en assumant les rôles d'attaquant et de défenseur.",
-        '3AC': "S'inscrire dans un projet collectif basé sur l'alternance rapide attaquant/défenseur, en utilisant des combinaisons simples et en exploitant les espaces libres pour créer le déséquilibre.",
-        'TC': "Utiliser des moyens techniques et tactiques adaptés pour créer des situations favorables au tir, en s'organisant collectivement en attaque et en défense selon des principes de jeu identifiés.",
-        '1AB': "Mettre en œuvre des choix tactiques collectifs pertinents avec vitesse d'exécution adaptée, en gérant le rapport de force et en coordonnant les actions individuelles au service du projet d'équipe.",
-        '2AB': "Élaborer une stratégie collective basée sur la maîtrise des rôles et l'occupation rationnelle de l'espace, en s'adaptant aux configurations de jeu et en optimisant l'efficacité collective."
+    'Sports Collectifs (Marquage - démarquage)': {
+        '1AC': "L'élève la lere année doit pouvoir conserver la balle et participer au jeu collectif pour gagner la rencontre.",
+        '2AC': "L'élève de la 2eme année doit pouvoir gagner la rencontre par la réalisation de déplacements varies pour une progression avec la balle Et un change ment de rôle enfonction des situations",
+        '3AC': "L'élève de la 3eme année doit pouvoir participer dans la réalisation du projet collectif basé sur le passage rapide et adéquat de l'attaque à la défense pour gagner la rencontre.",
+        'TC': "Rechercher le gain de la rencontre par l'utilisation de moyens adaptes pour conserver la balle jusqu'à la zone adverse devant une défense organisée qui cherche à récupérer la balle et défendre sa cible.",
+        '1AB': "Rechercher le gain de la rencontre par la mise en œuvre de choix tactiques collectifs, fondés sur la vitesse d'exécution. (trouver le moyen d'arriver le plut tôt possible a la cible adverse (entre 2 ou plusieurs joueurs) avec une bonne gestion des ressources devant une défense qui réduit l'espace de jeu.",
+        '2AB': "Rechercher le gain de la rencontre par la mise en place d'une attaque basée sur la maîtrise des rôles et l'occupation permanente et raisonnée de l'espace par un projet collectif devant une défense organisée qui cherche à récupérer la balle et défendre sa cible."
     },
-    'Football': {
-        '1AC': "Conserver le ballon individuellement et collectivement pour progresser vers le but adverse, en utilisant des conduites de balle et des passes simples, tout en respectant les règles et la sécurité.",
-        '2AC': "Faire progresser le ballon par des conduites maîtrisées et des passes précises vers des partenaires démarqués, en s'organisant pour attaquer et défendre collectivement.",
-        '3AC': "Participer à un projet de jeu collectif intégrant les transitions attaque-défense, en occupant rationnellement l'espace et en enchaînant les actions avec pertinence.",
-        'TC': "Organiser le jeu collectif en utilisant les fondamentaux techniques au service de la progression vers le but, en respectant les principes d'attaque et de défense.",
-        '1AB': "S'adapter aux configurations de jeu pour optimiser les choix tactiques individuels et collectifs, en gérant les transitions et en créant le surnombre offensif.",
-        '2AB': "Concevoir et appliquer des stratégies de jeu adaptées au rapport de force, en coordonnant les actions et en exploitant les points faibles adverses."
-    },
-    'Basketball': {
-        '1AC': "Conserver la balle et progresser vers la cible en utilisant le dribble et la passe, tout en respectant les règles du non-contact et du marcher, dans une organisation collective simple.",
-        '2AC': "Créer et exploiter des situations favorables au tir par le démarquage et la circulation de balle, en assumant les rôles offensifs et défensifs.",
-        '3AC': "S'inscrire dans une organisation collective offensive et défensive équilibrée, en utilisant les écrans et les appels de balle pour créer le déséquilibre.",
-        'TC': "Optimiser la circulation de balle pour créer le déséquilibre défensif, en utilisant des systèmes de jeu simples et en respectant l'espacement.",
-        '1AB': "Analyser le rapport de force et adapter ses choix tactiques en fonction des réactions adverses, en variant les formes d'attaque et de défense.",
-        '2AB': "Mettre en œuvre des systèmes de jeu élaborés en attaque et en défense, en s'adaptant aux stratégies adverses et en optimisant l'efficacité collective."
-    },
-    'Volleyball': {
-        '1AC': "Se déplacer et se placer correctement pour renvoyer la balle dans le camp adverse, en utilisant la manchette et la touche haute, tout en respectant les règles et la rotation.",
-        '2AC': "Construire l'attaque par un renvoi indirect utilisant un relais, en s'organisant pour assurer la réception, la passe et l'attaque dans la limite des trois touches.",
-        '3AC': "Organiser la défense et orienter la construction offensive vers la zone avant, en différenciant les rôles de passeur et d'attaquant selon les positions.",
-        'TC': "S'organiser collectivement dans la limite des trois touches réglementaires, en optimisant la réception-passe-attaque et en assurant la couverture défensive.",
-        '1AB': "Optimiser la construction du point avec des rôles différenciés, en variant les formes d'attaque et en adaptant la défense aux configurations adverses.",
-        '2AB': "Mettre en place une organisation collective avec combinaisons offensives variées, en utilisant les feintes et en exploitant les faiblesses adverses."
-    },
-    'Course de vitesse': {
-        '1AC': "Réagir rapidement au signal de départ et maintenir sa vitesse maximale sur une distance courte (40-60m), en courant dans son couloir.",
-        '2AC': "Améliorer sa technique de course (fréquence et amplitude des foulées) pour optimiser sa vitesse sur 60-80m, avec un départ réactif.",
-        '3AC': "Gérer sa course du départ à l'arrivée en optimisant l'accélération, le maintien de la vitesse maximale et la finition.",
-        'TC': "Maîtriser les différentes phases de la course de vitesse pour réaliser sa meilleure performance.",
-        '1AB': "Analyser et améliorer ses points faibles techniques et physiques pour progresser vers sa performance optimale.",
-        '2AB': "Atteindre son potentiel maximal par une préparation et une exécution optimales, en gérant le stress de la compétition."
-    },
-    'Saut en longueur': {
-        '1AC': "Réaliser une course d'élan progressivement accélérée suivie d'une impulsion vers l'avant et le haut, et une réception équilibrée sur les deux pieds dans la fosse.",
-        '2AC': "Enchaîner une course d'élan régulière et accélérée, une impulsion active sur la planche d'appel et un saut avec une attitude aérienne simple.",
-        '3AC': "Optimiser sa course d'élan étalonnée pour faire coïncider la vitesse maximale avec la planche d'appel, et améliorer l'efficacité de l'impulsion et de la suspension.",
-        'TC': "Maîtriser l'organisation de sa course d'élan et la qualité de son impulsion pour réaliser une performance optimale, en adoptant une technique aérienne efficace.",
-        '1AB': "Augmenter l'efficacité du saut par la maîtrise de la liaison course-impulsion et l'amélioration de la phase aérienne.",
-        '2AB': "Optimiser sa performance en coordonnant les trois phases du saut avec une technique aérienne maîtrisée."
-    },
-    'Saut en hauteur': {
-        '1AC': "Franchir une barre en utilisant une course d'élan et une impulsion vers le haut, avec une technique de franchissement ventral ou dorsal simplifié.",
-        '2AC': "Réaliser un franchissement dorsal (fosbury-flop) avec une course d'élan courbe adaptée et une impulsion sur le pied extérieur.",
-        '3AC': "Optimiser son franchissement par une meilleure coordination course courbe-impulsion-rotation dorsale, en améliorant la position du corps au-dessus de la barre.",
-        'TC': "Maîtriser la technique du fosbury-flop avec une course d'élan courbe efficace, une impulsion puissante et un franchissement dorsal économique.",
-        '1AB': "Améliorer sa performance par l'optimisation de chaque phase technique, en travaillant la vitesse d'entrée et la qualité de l'esquive dorsale.",
-        '2AB': "Réaliser une performance optimale en gérant les paramètres techniques, physiques et psychologiques de la compétition."
-    },
-    'Course de durée': {
-        '1AC': "Courir de façon régulière sur une durée donnée (8-10 min) en gérant son effort et en maintenant une allure constante.",
-        '2AC': "Adapter son allure de course pour maintenir un effort prolongé (10-12 min), en utilisant des repères de temps et de distance.",
-        '3AC': "Construire et respecter un projet de course en fonction de ses capacités, sur une durée de 12-15 min, en régulant son allure.",
-        'TC': "Planifier et réaliser une performance en gérant efficacement ses ressources énergétiques, sur une distance ou durée définie.",
-        '1AB': "Optimiser sa performance par une gestion stratégique de l'allure, en s'appuyant sur la connaissance de ses capacités.",
-        '2AB': "Atteindre ses objectifs personnels par une préparation et une stratégie de course adaptées à ses ressources."
-    },
-    'Lancer de poids': {
-        '1AC': "Lancer un engin en utilisant une poussée du bras depuis l'épaule, dans le respect des règles de sécurité et de l'aire de lancer.",
-        '2AC': "Coordonner la poussée des jambes et l'action du bras lanceur pour améliorer la distance de lancer, en respectant la technique en translation.",
-        '3AC': "Enchaîner les actions motrices du lancer en respectant la technique et les règles de la compétition.",
-        'TC': "Réaliser un lancer en maîtrisant la coordination des différents segments corporels dans une technique en translation ou rotation.",
-        '1AB': "Améliorer sa performance par le perfectionnement technique et le développement de la puissance musculaire spécifique.",
-        '2AB': "Optimiser sa performance par une maîtrise complète de la chaîne de lancer et une gestion efficace de la compétition."
+    'Athlétisme': {
+        '1AC': "L'élève de lere année doit pouvoir organiser les mouvements du corps et adapter les efforts pour construire de nouveaux repères afin de réaliser des performances individuelles et collectives générales et correctes.",
+        '2AC': "L'élève de 2eme année doit pouvoir organiser les mouvements du corps et adapter les efforts pour consolider les habiletés et améliore r un niveau de performance.",
+        '3AC': "L'élève de 3eme année doit pouvoir gérer l'effort physique pour réaliser des prestations correctes et efficaces suivant ses exigences organisationnelles et réglementaires et réaliser un niveau de performance individuel et collectif.",
+        'TC': "L'élève du T.C doit maîtriser l'organisation de son corps et la gestion de l'effort et l'adéquation de la réalisation d'une façon globale et correcte pour mobiliser un certain niveau d'habileté ou de performance pour réduire le temps ou élargir l'espace",
+        '1AB': "L'élève de 1ere année doit maîtriser l'organisation de son corps et la gestion de l'effort et l'adéquation de la réalisation pour mobiliser un certain niveau d'habileté et augmenter l'efficacité de la performance",
+        '2AB': "L'élève de 2eme année doit maîtriser l'organisation des conditions de défi par l'utilisation de moyens et de méthodes stratégiques pour mobiliser un certain niveau de performance suivant un projet collectif ou individuel."
     },
     'Gymnastique': {
-        '1AC': "Réaliser un enchaînement simple au sol comprenant des éléments gymniques de base, présenté avec maîtrise devant la classe.",
-        '2AC': "Présenter un enchaînement gymnique varié avec des liaisons fluides et une présentation soignée.",
-        '3AC': "Concevoir et réaliser un enchaînement individuel au sol avec originalité et maîtrise.",
-        'TC': "Présenter un enchaînement gymnique au sol avec maîtrise technique et qualité de présentation.",
-        '1AB': "Composer et réaliser un enchaînement au sol avec continuité et expression personnelle.",
-        '2AB': "Concevoir, réaliser et évaluer un enchaînement gymnique varié avec expertise et créativité."
+        '1AC': "L'élève de lere année doit pouvoir se confirmer et s'adapter a des mouvements inhabituelles pour réaliser un enchaînement simples d'éléments gymniques devant le groupe classe, compose de: 3A 2B OC",
+        '2AC': "L'élève de 2eme année doit pouvoir maîtriser, organiser son corps et prendre le risque pour présenter un enchaîne ment gymnique varie en éléments et en rythme devant le groupe classe. compose de : 3A 2B 1C",
+        '3AC': "L'élève de 3eme année doit pouvoir concevoir et réaliser un projet individuel sous forme sous forme d'enchaînement d'éléments gymniques devant le groupe classe, comprendre, expliquer et développer ses composantes en fonction de ses exigences organisationnelles techniques et réglementaires compose de: 2A 4B 1C.",
+        'TC': "L'élève du T.C doit pouvoir présenter un projet individuel ou collectif d'expression motrice sous forme d'enchaînement d'éléments gymniques devant le groupe classe .compose de: 2A+3B+2C",
+        '1AB': "L'élève de 1ere année doit pouvoir organiser présenter et réaliser un projet individuel ou collectif d'expression motrice sous forme d'enchaînement d'éléments gymniques devant le groupe classe .compose de: 2B+3C+2D",
+        '2AB': "L'élève de 2eme année doit pouvoir concevoir et réaliser et juger un projet individuel ou collectif d'expression motrice sous forme d'enchaînement d'éléments Varies en figure et en rythme devant le groupe classe .compose de: 2C 3D 2E"
     },
-    'Tennis de table': {
-        '1AC': "Maintenir un échange en renvoyant la balle sur la table adverse, en utilisant le coup droit et le revers, dans le respect des règles.",
-        '2AC': "Diriger la balle dans différentes zones de la table pour mettre l'adversaire en difficulté, en variant les placements.",
-        '3AC': "Varier les trajectoires, les vitesses et les effets pour prendre l'initiative du point.",
-        'TC': "Construire le point en utilisant des variations de placement, de vitesse et d'effet.",
-        '1AB': "Élaborer des stratégies de jeu adaptées aux caractéristiques de l'adversaire.",
-        '2AB': "Mettre en œuvre un projet de jeu personnel et l'adapter en cours de match."
-    },
-    'Badminton': {
-        '1AC': "Renvoyer le volant dans le terrain adverse en utilisant les frappes de base, dans le respect des règles et des limites du terrain.",
-        '2AC': "Varier la longueur et la direction de ses frappes pour déplacer l'adversaire et créer des espaces.",
-        '3AC': "Alterner jeu long et jeu court pour créer des espaces libres et marquer le point.",
-        'TC': "Construire le point en exploitant les espaces libres du terrain adverse.",
-        '1AB': "Élaborer des séquences de jeu tactiquement cohérentes, en utilisant les feintes.",
-        '2AB': "Concevoir et appliquer une stratégie de jeu personnelle adaptée à l'adversaire."
-    },
-    'Basketball 3x3': {
-        '1AC': "Conserver la balle et progresser vers le panier en utilisant le dribble et la passe, tout en respectant les règles du terrain réduit.",
-        '2AC': "Créer des situations favorables au tir par le démarquage et la circulation rapide de balle, en assumant les rôles offensifs et défensifs.",
-        '3AC': "S'inscrire dans une organisation collective offensive et défensive équilibrée sur terrain réduit, en utilisant les écrans et les appels de balle.",
-        'TC': "Optimiser la circulation de balle et la transition attaque-défense sur terrain 3x3, en respectant les contraintes temporelles.",
-        '1AB': "Analyser le rapport de force et adapter ses choix tactiques en fonction des réactions adverses sur terrain réduit.",
-        '2AB': "Mettre en œuvre des systèmes de jeu élaborés en attaque et en défense sur terrain 3x3, en s'adaptant aux stratégies adverses."
-    },
-    'Rugby': {
-        '1AC': "Conserver le ballon et progresser par des passes arrière, tout en respectant les règles de sécurité et de fair-play.",
-        '2AC': "Faire progresser le ballon par des passes et des plaquages maîtrisés, en s'organisant pour attaquer et défendre collectivement.",
-        '3AC': "Participer à un projet de jeu collectif intégrant les phases de conquête et de continuité, en occupant rationnellement l'espace.",
-        'TC': "Organiser le jeu collectif en utilisant les fondamentaux techniques au service de la progression vers l'en-but, en respectant les principes d'attaque et de défense.",
-        '1AB': "S'adapter aux configurations de jeu pour optimiser les choix tactiques individuels et collectifs, en gérant les phases de jeu.",
-        '2AB': "Concevoir et appliquer des stratégies de jeu adaptées au rapport de force, en coordonnant les actions et en exploitant les points faibles adverses."
-    },
-    'Course de haies': {
-        '1AC': "Franchir des obstacles à rythme régulier sur une distance courte (50-60m), en maintenant la vitesse entre les haies et en respectant le couloir.",
-        '2AC': "Améliorer la technique de franchissement (jambe d'attaque tendue, jambe d'esquive repliée) pour maintenir la vitesse et régulariser le rythme de course.",
-        '3AC': "Gérer l'ensemble de la course (départ, rythme inter-haies, franchissement, finish) pour optimiser sa performance personnelle.",
-        'TC': "Maîtriser les différentes phases de la course de haies pour réaliser une performance équilibrée entre vitesse et technique de franchissement.",
-        '1AB': "Analyser ses points faibles techniques pour progresser vers son potentiel maximal en adaptant la longueur de la foulée d'élan.",
-        '2AB': "Atteindre son potentiel maximal par une préparation technique et mentale optimale, en gérant la pression de la compétition."
-    },
-    'Course de relais': {
-        '1AC': "Transmettre et recevoir le témoin dans la zone de passage tout en maintenant sa vitesse, en coopérant avec ses partenaires.",
-        '2AC': "Optimiser la transmission du témoin (signal vocal, geste bras tendu) et synchroniser les vitesses passeur/receveur dans la zone de passage.",
-        '3AC': "Coordonner les transitions passeur/receveur avec précision pour minimiser les pertes de vitesse et réaliser une performance d'équipe cohérente.",
-        'TC': "Maîtriser les rôles de passeur et de receveur dans la course de relais, en gérant l'ordre de passage selon les caractéristiques de chaque coureur.",
-        '1AB': "Analyser et optimiser la stratégie de relais (ordre des coureurs, technique de passage) en tenant compte des profils athlétiques individuels.",
-        '2AB': "Concevoir et appliquer une tactique de relais élaborée, en maximisant l'efficacité de chaque transmission pour viser la meilleure performance d'équipe."
+    'Sports Collectifs de Renvoi': {
+        '1AC': "Rechercher le gain de la rencontre par un déplacement et un placement adéquats pour défendre son camp et renvoyer la balle vers le camp adverse.",
+        '2AC': "Rechercher le gain de la rencontre par un déplacement et un placement adéquats pour un renvoi indirect de la balle vers le camp adverse et gagner le point.",
+        '3AC': "Rechercher le gain de la rencontre par une défense de terrain et l'orientation de la balle vers la zone avant, avant de la renvoyer.",
+        'TC': "Rechercher le gain de la rencontre par la mise en œuvre d'un jeu basée sur l'organisation collective pour défendre la cible pour faciliter la progression de la balle vers la zone avant et la renvoyer dans la limite de 2 ou 3 touches de balle.",
+        '1AB': "Rechercher le gain de la rencontre par la mise en œuvre d'un jeu basée sur l'organisation collective pour récupérer la balle la faire progresser et la renvoyer dans la limite de 3 touches de balles.",
+        '2AB': "Rechercher le gain de la rencontre par la mise en œuvre d'un jeu basée sur l'organisation collective pour récupérer la balle la conserver et organiser les conditions adéquates pour marquer des points dans la limite de 3 touches de balle."
     }
 };
 
