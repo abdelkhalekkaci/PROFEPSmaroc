@@ -83,6 +83,79 @@
         .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
         .nav-backdrop { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.3); z-index: 99; opacity: 0; transition: opacity 0.3s ease; }
         .nav-backdrop.active { display: block; opacity: 1; }
+        
+        /* Login Button */
+        .nav-btn-login {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.9375rem;
+            border-radius: var(--radius-full);
+            border: 2px solid var(--border);
+            transition: var(--transition);
+        }
+        .nav-btn-login:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: #fff5f5;
+        }
+        
+        /* User Menu */
+        .nav-user-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .nav-user-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.375rem 0.75rem 0.375rem 0.375rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-full);
+            transition: var(--transition);
+        }
+        .nav-user-info:hover {
+            background: var(--border-light);
+        }
+        .nav-user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.8125rem;
+        }
+        .nav-user-name {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--text-primary);
+        }
+        .nav-btn-logout {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+        .nav-btn-logout:hover {
+            background: #fee2e2;
+            color: var(--primary);
+        }
 
         /* HERO CAROUSEL */
         .hero-carousel {
@@ -555,6 +628,21 @@
                 <a href="generateur.html" class="nav-cta nav-cta-mobile"><span>✨</span> Créer un document</a>
             </div>
             <div class="nav-right">
+                <!-- Guest: Login Button -->
+                <a href="login.html" class="nav-btn-login" id="navLoginBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                    Connexion
+                </a>
+                <!-- Logged in: User Menu -->
+                <div class="nav-user-menu" id="navUserMenu" style="display: none;">
+                    <a href="dashboard.html" class="nav-user-info">
+                        <div class="nav-user-avatar" id="navUserAvatar">?</div>
+                        <span class="nav-user-name" id="navUserName">User</span>
+                    </a>
+                    <button class="nav-btn-logout" onclick="handleNavLogout()" title="Déconnexion">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                    </button>
+                </div>
                 <a href="generateur.html" class="nav-cta nav-cta-desktop"><span>✨</span> Créer un document</a>
                 <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
             </div>
@@ -670,7 +758,7 @@
             <!-- ALL ARTICLES -->
             <div class="articles-header">
                 <h2>Tous les articles</h2>
-                <span class="articles-count" id="articlesCount">29 articles</span>
+                <span class="articles-count" id="articlesCount">34 articles</span>
             </div>
 
             <div class="articles-grid" id="articlesGrid">
@@ -722,6 +810,23 @@
                         <div class="article-footer">
                             <span class="article-date">06 Fév 2026</span>
                             <a href="ressources-atd.html" class="read-more">Voir les PDF →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="documents">
+                    <div class="article-visual article-documents">
+                        <span class="category-badge category-documents">Bibliothèque</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><line x1="8" y1="6" x2="16" y2="6" stroke="#1d4ed8" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="10" x2="14" y2="10" stroke="#93c5fd" stroke-width="1.5" stroke-linecap="round"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Bibliothèque Numérique EPS</h3>
+                        <p class="article-excerpt">Accédez à une collection complète de ressources pédagogiques numériques : fiches, grilles, plans de séance et guides gratuits.</p>
+                        <div class="article-footer">
+                            <span class="article-date">21 Mar 2026</span>
+                            <a href="article-bibliotheque-numerique-eps.html" class="read-more">Explorer →</a>
                         </div>
                     </div>
                 </article>
@@ -945,6 +1050,74 @@
                         <div class="article-footer">
                             <span class="article-date">01 Fév 2025</span>
                             <a href="article-examen-pro.html" class="read-more">Accéder →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="carriere">
+                    <div class="article-visual article-carriere">
+                        <span class="category-badge category-carriere">التوجيه والتخطيط</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5z" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#d97706" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" fill="#fbbf24"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Préparer le concours – التوجيه والتخطيط التربوي</h3>
+                        <p class="article-excerpt">Pack complet pour réussir le concours d'orientation et planification éducative : QCM, Didactique et Sciences de l'éducation.</p>
+                        <div class="article-footer">
+                            <span class="article-date">21 Mar 2026</span>
+                            <a href="article-concours-orientation-planification.html" class="read-more">Télécharger →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="carriere">
+                    <div class="article-visual article-carriere">
+                        <span class="category-badge category-carriere">التفتيش</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="#d97706" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="8" x2="11" y2="14" stroke="#d97706" stroke-width="2" stroke-linecap="round"/><line x1="8" y1="11" x2="14" y2="11" stroke="#d97706" stroke-width="2" stroke-linecap="round"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Préparer le concours – التفتيش التربوي (Primaire)</h3>
+                        <p class="article-excerpt">Guide complet pour réussir le concours d'inspection pédagogique cycle primaire : Techniques d'inspection, Didactique et Législation.</p>
+                        <div class="article-footer">
+                            <span class="article-date">21 Mar 2026</span>
+                            <a href="article-concours-inspection-primaire.html" class="read-more">Télécharger →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="carriere">
+                    <div class="article-visual article-carriere">
+                        <span class="category-badge category-carriere">CRMEF Primaire</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 12v5c3 3 9 3 12 0v-5" stroke="#d97706" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="7" r="2" fill="#fbbf24"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Préparer le concours – الامتحان المهني / CRMEF Primaire</h3>
+                        <p class="article-excerpt">Pack complet pour réussir l'examen professionnel d'accès aux CRMEF cycle primaire : Didactique, Sciences de l'éducation et Programmes.</p>
+                        <div class="article-footer">
+                            <span class="article-date">21 Mar 2026</span>
+                            <a href="article-concours-examen-professionnel-crmef-primaire.html" class="read-more">Télécharger →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="carriere">
+                    <div class="article-visual article-carriere">
+                        <span class="category-badge category-carriere">الإدارة التربوية</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/><path d="M9 9h6M9 12h6M9 15h4" stroke="#d97706" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="6" r="1.5" fill="#fbbf24"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Préparer le concours – الإدارة التربوية</h3>
+                        <p class="article-excerpt">Guide complet pour réussir le concours d'administration éducative : Législation scolaire, Gestion administrative et Projet d'établissement.</p>
+                        <div class="article-footer">
+                            <span class="article-date">21 Mar 2026</span>
+                            <a href="article-concours-administration-educative.html" class="read-more">Télécharger →</a>
                         </div>
                     </div>
                 </article>
@@ -1368,6 +1541,45 @@
             articleCards.forEach(card => card.classList.remove('hidden'));
             updateCount();
         });
+    </script>
+    
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <script>
+        const supabaseClient = window.supabase.createClient(
+            'https://gbbqxalebmeeqgdountd.supabase.co',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdiYnF4YWxlYm1lZXFnZG91bnRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4OTQ1NjYsImV4cCI6MjA4ODQ3MDU2Nn0.HRM35OtgfLv52jDwiqF155bCGf85ynWIw0LXJDhimQk'
+        );
+        
+        async function updateNavAuth() {
+            try {
+                const { data } = await supabaseClient.auth.getSession();
+                
+                if (data.session && data.session.user) {
+                    const user = data.session.user;
+                    const initial = user.email ? user.email.charAt(0).toUpperCase() : 'U';
+                    const name = user.email ? user.email.split('@')[0] : 'User';
+                    
+                    document.getElementById('navLoginBtn').style.display = 'none';
+                    document.getElementById('navUserMenu').style.display = 'flex';
+                    document.getElementById('navUserAvatar').textContent = initial;
+                    document.getElementById('navUserName').textContent = name;
+                } else {
+                    document.getElementById('navLoginBtn').style.display = 'inline-flex';
+                    document.getElementById('navUserMenu').style.display = 'none';
+                }
+            } catch (e) {
+                console.log('Auth check failed:', e);
+            }
+        }
+        
+        async function handleNavLogout() {
+            await supabaseClient.auth.signOut();
+            window.location.href = '/login.html';
+        }
+        
+        updateNavAuth();
     </script>
 </body>
 </html>
