@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="La plus grande bibliothèque numérique pour professeurs d'EPS au Maroc. Livres, articles scientifiques, manuels de didactique, sciences du sport et sciences de l'éducation en PDF. مكتبة الأستاذ الرقمية.">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TH0Z1SGNXH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-TH0Z1SGNXH');
+    </script>
+    <title>Bibliothèque Numérique EPS – المكتبة الرقمية لأستاذ التربية البدنية</title>
+    <link rel="icon" type="image/png" href="/images/prof_eps.png">
+    <link rel="canonical" href="https://www.profeps.ma/bibliotheque-numerique-eps.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Bibliothèque Numérique EPS – المكتبة الرقمية لأستاذ التربية البدنية">
+    <meta property="og:description" content="La plus grande bibliothèque numérique pour professeurs d'EPS au Maroc. Livres, articles, manuels, sciences du sport en PDF.">
+    <meta property="og:image" content="https://www.profeps.ma/images/prof_eps.png">
+    <meta property="og:url" content="https://www.profeps.ma/bibliotheque-numerique-eps.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Prof EPS Maroc">
+    <meta property="og:locale" content="fr_FR">
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Bibliothèque Numérique EPS – المكتبة الرقمية لأستاذ التربية البدنية",
+        "description": "La plus grande bibliothèque numérique pour professeurs d'EPS au Maroc. Livres, articles scientifiques, manuels de didactique, sciences du sport en PDF.",
+        "author": {"@type": "Organization", "name": "Prof EPS Maroc"},
+        "publisher": {"@type": "Organization", "name": "Prof EPS", "logo": {"@type": "ImageObject", "url": "https://www.profeps.ma/images/prof_eps.png"}},
+        "datePublished": "2025-01-15",
+        "dateModified": "2025-01-15",
+        "mainEntityOfPage": {"@type": "WebPage", "@id": "https://www.profeps.ma/bibliotheque-numerique-eps.html"}
+    }
+    </script>
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #c1272d;
+            --secondary: #006233;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a68;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --border: #e2e8f0;
+            --border-light: #f1f5f9;
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --radius: 8px;
+            --radius-lg: 12px;
+            --radius-full: 9999px;
+            --transition: all 0.3s ease;
+        }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.7; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+
+        /* NAVBAR */
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1rem 2rem; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-light); }
+        .navbar.scrolled { padding: 0.5rem 2rem; box-shadow: var(--shadow-md); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo img { height: 40px; }
+        .nav-menu { display: flex; align-items: center; gap: 2rem; }
+        .nav-link { font-size: 0.9375rem; font-weight: 500; color: var(--text-secondary); }
+        .nav-link:hover { color: var(--primary); }
+        .nav-cta { padding: 0.5rem 1.5rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; font-weight: 600; border-radius: var(--radius-full); }
+        .nav-btn-login { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; color: var(--text-primary); font-weight: 600; font-size: 0.9375rem; border-radius: var(--radius-full); border: 2px solid var(--border); transition: var(--transition); }
+        .nav-btn-login:hover { border-color: var(--primary); color: var(--primary); background: #fff5f5; }
+        .nav-user-menu { display: flex; align-items: center; gap: 0.5rem; }
+        .nav-user-info { display: flex; align-items: center; gap: 0.5rem; padding: 0.375rem 0.75rem 0.375rem 0.375rem; background: var(--bg-secondary); border-radius: var(--radius-full); transition: var(--transition); }
+        .nav-user-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.8125rem; }
+        .nav-user-name { font-weight: 600; font-size: 0.875rem; color: var(--text-primary); }
+        .nav-btn-logout { width: 36px; height: 36px; border-radius: 50%; background: var(--bg-secondary); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+        .nav-btn-logout:hover { background: #fee2e2; color: var(--primary); }
+        .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
+        .nav-toggle span { width: 25px; height: 2px; background: var(--text-primary); }
+
+        /* HERO HEADER – special library style */
+        .article-header {
+            padding: 140px 2rem 4rem;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .article-header::before {
+            content: '📚';
+            position: absolute;
+            font-size: 20rem;
+            opacity: 0.04;
+            right: -2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+        .article-header-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+        .article-category {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(193,39,45,0.2);
+            border: 1px solid rgba(193,39,45,0.4);
+            border-radius: var(--radius-full);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #ff8a8a;
+            margin-bottom: 1.25rem;
+        }
+        .article-title {
+            font-size: clamp(1.75rem, 4vw, 2.75rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+        .article-title .arabic-subtitle {
+            display: block;
+            font-size: 0.65em;
+            color: rgba(255,255,255,0.6);
+            margin-top: 0.5rem;
+            direction: rtl;
+            text-align: right;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .article-meta { display: flex; gap: 1.5rem; color: rgba(255,255,255,0.6); font-size: 0.9rem; flex-wrap: wrap; margin-top: 1rem; }
+        .article-meta span { display: flex; align-items: center; gap: 0.35rem; }
+
+        /* STATS BAR */
+        .stats-bar {
+            background: linear-gradient(135deg, var(--primary), #8b0000);
+            padding: 1.25rem 2rem;
+        }
+        .stats-bar-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .stat-item { text-align: center; color: white; }
+        .stat-number { font-size: 1.75rem; font-weight: 800; display: block; line-height: 1; }
+        .stat-label { font-size: 0.8rem; opacity: 0.85; margin-top: 0.2rem; }
+
+        /* CONTENT */
+        .article-content { max-width: 800px; margin: 0 auto; padding: 3rem 2rem; }
+        .article-content h2 { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin: 2.5rem 0 1rem; padding-top: 1rem; border-top: 2px solid var(--border-light); }
+        .article-content p { margin-bottom: 1rem; color: var(--text-secondary); }
+        .article-content ul { margin: 1rem 0 1rem 1.5rem; color: var(--text-secondary); }
+        .article-content li { margin-bottom: 0.5rem; }
+
+        /* ARABIC INTRO */
+        .rtl-text { direction: rtl; text-align: right; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .arabic-intro { background: #fcfcfc; border: 1px solid #eee; border-right: 4px solid var(--primary); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; }
+        .arabic-intro h3 { color: var(--primary); margin-top: 0; font-size: 1.3rem; margin-bottom: 1rem; }
+
+        /* CATEGORY GRID */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .category-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            transition: var(--transition);
+            border-top: 3px solid transparent;
+        }
+        .category-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .category-card.red { border-top-color: var(--primary); }
+        .category-card.green { border-top-color: var(--secondary); }
+        .category-card.blue { border-top-color: #2563eb; }
+        .category-card.orange { border-top-color: #ea580c; }
+        .category-card.purple { border-top-color: #7c3aed; }
+        .category-card.teal { border-top-color: #0d9488; }
+        .category-card .cat-icon { font-size: 1.75rem; margin-bottom: 0.5rem; display: block; }
+        .category-card h4 { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem; }
+        .category-card p { font-size: 0.8rem; color: var(--text-secondary); margin: 0; }
+
+        /* MAIN DOWNLOAD */
+        .main-download-card {
+            background: linear-gradient(135deg, #1a1a2e, #0f3460);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            margin: 1.5rem 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .main-download-card::before {
+            content: '🗄️';
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.06;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .main-download-card h4 { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .main-download-card .arabic-label { direction: rtl; text-align: right; font-size: 1rem; color: rgba(255,255,255,0.75); margin-bottom: 1.25rem; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .main-download-card .desc { font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; }
+        .main-download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 2rem;
+            background: linear-gradient(135deg, var(--primary), #8b0000);
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: var(--radius-full);
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(193,39,45,0.4);
+        }
+        .main-download-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(193,39,45,0.5); color: white; }
+
+        /* BOXES */
+        .info-box { background: linear-gradient(135deg, rgba(193,39,45,0.05), rgba(0,98,51,0.05)); border-left: 4px solid var(--primary); padding: 1.5rem; border-radius: 0 var(--radius) var(--radius) 0; margin: 1.5rem 0; }
+        .success-box { background: rgba(0,98,51,0.05); border-left: 4px solid var(--secondary); padding: 1.5rem; border-radius: 0 var(--radius) var(--radius) 0; margin: 1.5rem 0; }
+        .info-box h4, .success-box h4 { font-size: 1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.75rem; }
+        .info-box p, .success-box p { margin-bottom: 0.5rem; }
+
+        /* FOOTER */
+        .footer { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; padding: 4rem 2rem 2rem; }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+        .footer-brand img { height: 50px; filter: brightness(0) invert(1); margin-bottom: 1rem; }
+        .footer-brand p { color: rgba(255,255,255,0.7); font-size: 0.9rem; }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; }
+        .footer-copyright { color: rgba(255,255,255,0.5); font-size: 0.875rem; }
+
+        @media (max-width: 968px) {
+            .nav-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 1.5rem; box-shadow: var(--shadow-lg); }
+            .nav-menu.active { display: flex; }
+            .nav-toggle { display: flex; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .stats-bar-inner { justify-content: center; }
+        }
+        @media (max-width: 640px) {
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+            .main-download-card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo"><img src="/images/prof_eps.png" alt="Prof EPS"></a>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="generateur.html" class="nav-link">Générateur</a>
+                <a href="blog.html" class="nav-link">Blog</a>
+                <a href="login.html" class="nav-btn-login" id="navLoginBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                    Connexion
+                </a>
+                <div class="nav-user-menu" id="navUserMenu" style="display: none;">
+                    <a href="dashboard.html" class="nav-user-info">
+                        <div class="nav-user-avatar" id="navUserAvatar">?</div>
+                        <span class="nav-user-name" id="navUserName">User</span>
+                    </a>
+                    <button class="nav-btn-logout" onclick="handleNavLogout()" title="Déconnexion">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                    </button>
+                </div>
+                <a href="generateur.html" class="nav-cta">✨ Créer un document</a>
+            </div>
+            <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="article-header-content">
+            <span class="article-category">📚 Bibliothèque Numérique</span>
+            <h1 class="article-title">
+                La Grande Bibliothèque du Prof EPS
+                <span class="arabic-subtitle">المكتبة الرقمية الكبرى لأستاذ التربية البدنية والرياضية</span>
+            </h1>
+            <div class="article-meta">
+                <span>🇲🇦 Maroc</span>
+                <span>📖 Livres & Articles</span>
+                <span>🆓 Accès Libre</span>
+                <span>🔄 Mis à jour 2025</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Stats bar -->
+    <div class="stats-bar">
+        <div class="stats-bar-inner">
+            <div class="stat-item">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">Documents PDF</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">12</span>
+                <span class="stat-label">Catégories</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">3</span>
+                <span class="stat-label">Langues (AR / FR / EN)</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Gratuit</span>
+            </div>
+        </div>
+    </div>
+
+    <article class="article-content">
+
+        <div class="arabic-intro rtl-text">
+            <h3>المكتبة الرقمية الكبرى – كل ما يحتاجه أستاذ التربية البدنية</h3>
+            <p>هذه المكتبة الرقمية هي الأشمل من نوعها في المغرب لأساتذة التربية البدنية والرياضية.<br>
+            تضم <strong>أكثر من 500 وثيقة</strong> مصنفة بعناية في مجالات:</p>
+            <ul style="margin-right: 20px; margin-top: 10px;">
+                <li>📗 كتب ومراجع في علوم التربية والديداكتيك.</li>
+                <li>📘 مقالات علمية في علم وظائف الأعضاء وعلم الحركة.</li>
+                <li>📙 وثائق التخطيط والتقويم التربوي.</li>
+                <li>📕 بطاقات تقنية للأنشطة البدنية والرياضية (APSA).</li>
+                <li>📓 مراجع في علم النفس الرياضي والتدريب الرياضي.</li>
+                <li>📒 نصوص تشريعية ومستجدات المنظومة التربوية المغربية.</li>
+            </ul>
+        </div>
+
+        <p>Chaque professeur d'EPS sérieux doit disposer d'une base documentaire solide pour construire ses cours, préparer ses concours, rédiger ses rapports et se former en continu. Cette bibliothèque numérique rassemble <strong>les ouvrages et articles de référence</strong> indispensables, soigneusement classés pour une consultation rapide.</p>
+
+        <h2>1. Catégories de la Bibliothèque</h2>
+        <div class="category-grid">
+            <div class="category-card red">
+                <span class="cat-icon">🏃</span>
+                <h4>Didactique des APSA</h4>
+                <p>Fiches techniques, situations d'apprentissage, progressions par discipline sportive.</p>
+            </div>
+            <div class="category-card green">
+                <span class="cat-icon">🧠</span>
+                <h4>Sciences de l'éducation</h4>
+                <p>Pédagogie, théories d'apprentissage, évaluation, approche par compétences.</p>
+            </div>
+            <div class="category-card blue">
+                <span class="cat-icon">🫀</span>
+                <h4>Sciences biologiques & sport</h4>
+                <p>Physiologie de l'effort, anatomie fonctionnelle, biochimie et nutrition sportive.</p>
+            </div>
+            <div class="category-card orange">
+                <span class="cat-icon">📋</span>
+                <h4>Planification & Évaluation</h4>
+                <p>Outils de planification, grilles d'évaluation, projets pédagogiques annuels.</p>
+            </div>
+            <div class="category-card purple">
+                <span class="cat-icon">🧘</span>
+                <h4>Psychologie du sport</h4>
+                <p>Motivation, gestion du stress, psychologie de la performance et de l'enfant.</p>
+            </div>
+            <div class="category-card teal">
+                <span class="cat-icon">⚖️</span>
+                <h4>Législation & Textes officiels</h4>
+                <p>Orientations pédagogiques, circulaires, loi-cadre, statuts des enseignants.</p>
+            </div>
+            <div class="category-card red">
+                <span class="cat-icon">🏋️</span>
+                <h4>Entraînement sportif</h4>
+                <p>Méthodes d'entraînement, préparation physique, programmation des charges.</p>
+            </div>
+            <div class="category-card green">
+                <span class="cat-icon">📊</span>
+                <h4>Recherche en STAPS</h4>
+                <p>Articles scientifiques, thèses et mémoires en sciences et techniques des APS.</p>
+            </div>
+            <div class="category-card blue">
+                <span class="cat-icon">🌍</span>
+                <h4>EPS Comparée & Internationale</h4>
+                <p>Systèmes éducatifs, réformes EPS en France, Belgique, pays arabes.</p>
+            </div>
+            <div class="category-card orange">
+                <span class="cat-icon">🩺</span>
+                <h4>Santé & EPS Adaptée</h4>
+                <p>EPS et bien-être, activité physique adaptée, prévention des blessures.</p>
+            </div>
+            <div class="category-card purple">
+                <span class="cat-icon">📝</span>
+                <h4>Concours & Examens</h4>
+                <p>Anciens sujets, QCM corrigés, guides de préparation aux concours.</p>
+            </div>
+            <div class="category-card teal">
+                <span class="cat-icon">🎓</span>
+                <h4>Formation initiale & continue</h4>
+                <p>Manuels CRMEF, modules de formation, ressources ATD et GUPS.</p>
+            </div>
+        </div>
+
+        <h2>2. Accéder à la Bibliothèque / الدخول إلى المكتبة</h2>
+
+        <div class="main-download-card">
+            <h4>📚 Bibliothèque Numérique Complète – Prof EPS Maroc</h4>
+            <p class="arabic-label">المكتبة الرقمية الكبرى لأستاذ التربية البدنية – جميع الكتب والمقالات</p>
+            <p class="desc">Plus de 500 documents soigneusement organisés : livres, articles scientifiques, manuels pédagogiques, fiches techniques APSA, textes officiels et ressources de préparation aux concours.</p>
+            <a href="https://drive.google.com/drive/folders/1XBzUEoIDvYpQxiXwB0uOkCuXvyoStNvi?usp=sharing" target="_blank" class="main-download-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                Accéder à la Bibliothèque / دخول المكتبة
+            </a>
+        </div>
+
+        <h2>3. Ouvrages de Référence Incontournables</h2>
+        <div class="info-box">
+            <h4>📖 Les livres qu'ogni prof EPS doit avoir lus</h4>
+            <ul>
+                <li><strong>Didactique de l'EPS :</strong> Meirieu, Famose, Bayer – les fondements de l'enseignement des APSA.</li>
+                <li><strong>Sciences de l'éducation :</strong> Bloom, Piaget, Vygotsky – théories de l'apprentissage applicables en EPS.</li>
+                <li><strong>Physiologie :</strong> Weineck (Manuel d'entraînement), McArdle & Katch (Exercise Physiology).</li>
+                <li><strong>Psychologie du sport :</strong> Weinberg & Gould (Foundations of Sport and Exercise Psychology).</li>
+                <li><strong>EPS au Maroc :</strong> Orientations pédagogiques EPS 2007-2009, curricula du primaire et secondaire.</li>
+                <li><strong>Évaluation :</strong> De Ketele, Roegiers – Méthodologie du recueil d'informations.</li>
+                <li><strong>Entraînement :</strong> Platonov (La préparation sportive), Bompa (Périodisation).</li>
+            </ul>
+        </div>
+
+        <h2>4. Comment utiliser la bibliothèque ?</h2>
+        <div class="success-box">
+            <h4>💡 Conseils d'utilisation</h4>
+            <p><strong>1. Navigation par dossier :</strong> La bibliothèque est organisée en sous-dossiers thématiques. Naviguez directement vers la catégorie dont vous avez besoin.</p>
+            <p><strong>2. Recherche rapide :</strong> Utilisez la barre de recherche Google Drive en tapant le titre ou la discipline (ex : "physiologie", "basketball didactique").</p>
+            <p><strong>3. Téléchargement :</strong> Cliquez droit sur un fichier PDF et choisissez "Télécharger" pour le sauvegarder sur votre appareil.</p>
+            <p><strong>4. Ajout à votre Drive :</strong> Cliquez sur "Ajouter un raccourci à Drive" pour retrouver facilement la bibliothèque depuis votre propre Google Drive.</p>
+            <p><strong>5. Mise à jour :</strong> La bibliothèque est enrichie régulièrement. Revenez sur cette page pour accéder aux nouvelles ressources ajoutées.</p>
+        </div>
+
+        <h2>5. Pour les candidats aux concours</h2>
+        <div class="info-box">
+            <h4>🎓 Ressources spéciales concours incluses dans la bibliothèque</h4>
+            <p>Un dossier dédié "Concours & Examens" est disponible dans la bibliothèque et contient :</p>
+            <ul>
+                <li>✅ Anciens QCM et sujets écrits (EPS, Inspection, Administration, CRMEF).</li>
+                <li>✅ Résumés condensés de sciences de l'éducation pour révision rapide.</li>
+                <li>✅ Fiches récapitulatives des textes officiels marocains.</li>
+                <li>✅ Guides méthodologiques pour la rédaction des épreuves écrites.</li>
+                <li>✅ Modèles de plans de cours et de fiches de séance pour l'épreuve pratique.</li>
+            </ul>
+        </div>
+
+    </article>
+
+    <div class="similar-articles" style="background: #f8f9fa; padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+        <h3 style="font-size: 1.25rem; margin-bottom: 1rem; color: #1a1a2e;">🎓 Préparer vos Concours</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+            <a href="/article-concours.html" style="display: block; padding: 1rem; background: white; border-radius: 8px; border: 1px solid #e2e8f0; text-decoration: none; color: inherit;">
+                <strong>🏃 Concours EPS</strong>
+                <p style="font-size: 0.875rem; color: #6b7280; margin-top: 0.25rem;">CRMEF – مباراة EPS</p>
+            </a>
+            <a href="/article-concours-orientation-planification.html" style="display: block; padding: 1rem; background: white; border-radius: 8px; border: 1px solid #e2e8f0; text-decoration: none; color: inherit;">
+                <strong>🗺️ Orientation & Planification</strong>
+                <p style="font-size: 0.875rem; color: #6b7280; margin-top: 0.25rem;">التوجيه التربوي</p>
+            </a>
+            <a href="/article-concours-administration-educative.html" style="display: block; padding: 1rem; background: white; border-radius: 8px; border: 1px solid #e2e8f0; text-decoration: none; color: inherit;">
+                <strong>🏫 Administration Éducative</strong>
+                <p style="font-size: 0.875rem; color: #6b7280; margin-top: 0.25rem;">الإدارة التربوية</p>
+            </a>
+            <a href="/article-concours-inspection-primaire.html" style="display: block; padding: 1rem; background: white; border-radius: 8px; border: 1px solid #e2e8f0; text-decoration: none; color: inherit;">
+                <strong>🔍 Inspection Primaire</strong>
+                <p style="font-size: 0.875rem; color: #6b7280; margin-top: 0.25rem;">التفتيش التربوي</p>
+            </a>
+            <a href="/generateur.html" style="display: block; padding: 1rem; background: linear-gradient(135deg, #c1272d, #006233); border-radius: 8px; border: none; text-decoration: none; color: white;">
+                <strong>⚡ Générateur IA</strong>
+                <p style="font-size: 0.875rem; opacity: 0.9; margin-top: 0.25rem;">Créez vos fiches</p>
+            </a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html"><img src="/images/prof_eps.png" alt="Prof EPS"></a>
+                <p>Le premier générateur intelligent de documents EPS pour les professeurs d'éducation physique et sportive au Maroc.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copyright">© 2025 Prof EPS. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50); });
+        document.getElementById('navToggle').addEventListener('click', () => { document.getElementById('navMenu').classList.toggle('active'); });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const supabaseClient = window.supabase.createClient(
+            'https://gbbqxalebmeeqgdountd.supabase.co',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdiYnF4YWxlYm1lZXFnZG91bnRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4OTQ1NjYsImV4cCI6MjA4ODQ3MDU2Nn0.HRM35OtgfLv52jDwiqF155bCGf85ynWIw0LXJDhimQk'
+        );
+        async function updateNavAuth() {
+            try {
+                const { data } = await supabaseClient.auth.getSession();
+                if (data.session && data.session.user) {
+                    const user = data.session.user;
+                    const initial = user.email ? user.email.charAt(0).toUpperCase() : 'U';
+                    const name = user.email ? user.email.split('@')[0] : 'User';
+                    document.getElementById('navLoginBtn').style.display = 'none';
+                    document.getElementById('navUserMenu').style.display = 'flex';
+                    document.getElementById('navUserAvatar').textContent = initial;
+                    document.getElementById('navUserName').textContent = name;
+                } else {
+                    document.getElementById('navLoginBtn').style.display = 'inline-flex';
+                    document.getElementById('navUserMenu').style.display = 'none';
+                }
+            } catch (e) { console.log('Auth check failed:', e); }
+        }
+        async function handleNavLogout() {
+            await supabaseClient.auth.signOut();
+            window.location.href = '/login.html';
+        }
+        updateNavAuth();
+    </script>
+</body>
+</html>
