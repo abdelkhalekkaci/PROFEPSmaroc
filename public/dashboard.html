@@ -1129,6 +1129,15 @@
         }
 
         loadUserData();
+
+        // Handle hash navigation (e.g., #modeles from dropdown link)
+        if (window.location.hash) {
+            const tabName = window.location.hash.replace('#', '');
+            const tabBtn = document.querySelector('[data-tab="' + tabName + '"]');
+            if (tabBtn) {
+                setTimeout(() => showTab(tabName, tabBtn), 300);
+            }
+        }
     </script>
 </body>
 </html>

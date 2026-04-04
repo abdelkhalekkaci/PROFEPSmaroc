@@ -15,6 +15,184 @@ function getSupabase() {
     return _supabaseClient;
 }
 
+// ── Inject dropdown CSS once ───────────────────────────────────────
+(function injectDropdownCSS() {
+    if (document.getElementById('profeps-dropdown-css')) return;
+    const style = document.createElement('style');
+    style.id = 'profeps-dropdown-css';
+    style.textContent = `
+        .nav-user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .nav-avatar-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #c1272d, #006233);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.9375rem;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+            user-select: none;
+            position: relative;
+        }
+        .nav-avatar-btn:hover,
+        .nav-avatar-btn.active {
+            border-color: #c1272d;
+            box-shadow: 0 0 0 3px rgba(193, 39, 45, 0.15);
+        }
+        .nav-avatar-btn.active {
+            box-shadow: 0 0 0 3px rgba(193, 39, 45, 0.25);
+        }
+
+        /* Dropdown */
+        .nav-dropdown {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            width: 280px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px) scale(0.97);
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+            z-index: 2000;
+            overflow: hidden;
+        }
+        .nav-dropdown.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Arrow */
+        .nav-dropdown::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            right: 14px;
+            width: 12px;
+            height: 12px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-bottom: none;
+            border-right: none;
+            transform: rotate(45deg);
+            z-index: 1;
+        }
+
+        /* Header */
+        .nav-dropdown-header {
+            padding: 1rem 1rem 0.75rem;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .nav-dropdown-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #c1272d, #006233);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .nav-dropdown-info {
+            overflow: hidden;
+        }
+        .nav-dropdown-name {
+            font-weight: 700;
+            font-size: 0.9375rem;
+            color: #1a1a2e;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .nav-dropdown-email {
+            font-size: 0.8125rem;
+            color: #6b7280;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Links */
+        .nav-dropdown-links {
+            padding: 0.375rem 0;
+        }
+        .nav-dropdown-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.625rem 1rem;
+            color: #1a1a2e;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            transition: background 0.15s ease;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-family: inherit;
+        }
+        .nav-dropdown-link:hover {
+            background: #f8fafc;
+        }
+        .nav-dropdown-link svg {
+            width: 20px;
+            height: 20px;
+            color: #6b7280;
+            flex-shrink: 0;
+        }
+        .nav-dropdown-link:hover svg {
+            color: #c1272d;
+        }
+        .nav-dropdown-divider {
+            height: 1px;
+            background: #f1f5f9;
+            margin: 0.25rem 0;
+        }
+        .nav-dropdown-link.logout {
+            color: #dc2626;
+        }
+        .nav-dropdown-link.logout svg {
+            color: #dc2626;
+        }
+        .nav-dropdown-link.logout:hover {
+            background: #fef2f2;
+        }
+
+        /* Backdrop for closing */
+        .nav-dropdown-backdrop {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 1999;
+        }
+        .nav-dropdown-backdrop.open {
+            display: block;
+        }
+    `;
+    document.head.appendChild(style);
+})();
+
 // ── Navbar Auth State ──────────────────────────────────────────────
 async function updateNavAuth() {
     try {
@@ -22,21 +200,82 @@ async function updateNavAuth() {
 
         const loginBtn = document.getElementById('navLoginBtn');
         const userMenu = document.getElementById('navUserMenu');
-        const avatarEl = document.getElementById('navUserAvatar');
-        const nameEl = document.getElementById('navUserName');
 
-        if (!loginBtn || !userMenu) return; // page has no nav auth elements
+        if (!loginBtn || !userMenu) return;
 
         if (data.session && data.session.user) {
             const user = data.session.user;
             const meta = user.user_metadata || {};
             const displayName = meta.nom || meta.full_name || (user.email ? user.email.split('@')[0] : 'User');
             const initial = displayName.charAt(0).toUpperCase();
+            const email = user.email || '';
 
             loginBtn.style.display = 'none';
             userMenu.style.display = 'flex';
-            if (avatarEl) avatarEl.textContent = initial;
-            if (nameEl) nameEl.textContent = displayName;
+
+            // Build the dropdown HTML (replaces old content)
+            userMenu.innerHTML = `
+                <div class="nav-dropdown-backdrop" id="navDropdownBackdrop"></div>
+                <button class="nav-avatar-btn" id="navAvatarBtn" title="${displayName}">${initial}</button>
+                <div class="nav-dropdown" id="navDropdown">
+                    <div class="nav-dropdown-header">
+                        <div class="nav-dropdown-avatar">${initial}</div>
+                        <div class="nav-dropdown-info">
+                            <div class="nav-dropdown-name">${displayName}</div>
+                            <div class="nav-dropdown-email">${email}</div>
+                        </div>
+                    </div>
+                    <div class="nav-dropdown-links">
+                        <a href="/dashboard.html" class="nav-dropdown-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                            Mon Espace
+                        </a>
+                        <a href="/dashboard.html#modeles" class="nav-dropdown-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                            Mes Mod\u00e8les
+                        </a>
+                        <a href="/generateur.html" class="nav-dropdown-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                            Nouveau document
+                        </a>
+                        <div class="nav-dropdown-divider"></div>
+                        <button class="nav-dropdown-link logout" id="navDropdownLogout">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                            D\u00e9connexion
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            // Wire up toggle
+            const avatarBtn = document.getElementById('navAvatarBtn');
+            const dropdown = document.getElementById('navDropdown');
+            const backdrop = document.getElementById('navDropdownBackdrop');
+            const logoutBtn = document.getElementById('navDropdownLogout');
+
+            function openDropdown() {
+                dropdown.classList.add('open');
+                backdrop.classList.add('open');
+                avatarBtn.classList.add('active');
+            }
+            function closeDropdown() {
+                dropdown.classList.remove('open');
+                backdrop.classList.remove('open');
+                avatarBtn.classList.remove('active');
+            }
+
+            avatarBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                dropdown.classList.contains('open') ? closeDropdown() : openDropdown();
+            });
+            backdrop.addEventListener('click', closeDropdown);
+            logoutBtn.addEventListener('click', handleNavLogout);
+
+            // Close on Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeDropdown();
+            });
+
         } else {
             loginBtn.style.display = 'inline-flex';
             userMenu.style.display = 'none';
