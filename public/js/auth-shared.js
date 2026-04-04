@@ -193,6 +193,49 @@ function getSupabase() {
     document.head.appendChild(style);
 })();
 
+// ── Avatar helpers ─────────────────────────────────────────────────
+function avatarImgHtml(avatarUrl, initial, size) {
+    if (avatarUrl) {
+        return `<img src="${avatarUrl}" alt="Photo de profil" style="width:${size}px;height:${size}px;border-radius:50%;object-fit:cover;display:block;">`;
+    }
+    return initial;
+}
+
+async function getAvatarUrl(userId) {
+    try {
+        const { data } = await getSupabase()
+            .from('profiles')
+            .select('avatar_url')
+            .eq('user_id', userId)
+            .single();
+        return data && data.avatar_url ? data.avatar_url : null;
+    } catch (e) {
+        return null;
+    }
+}
+
+async function uploadAvatar(file, userId) {
+    const sb = getSupabase();
+    const ext = file.name.split('.').pop();
+    const path = `${userId}/avatar.${ext}`;
+
+    const { error: uploadError } = await sb.storage
+        .from('avatars')
+        .upload(path, file, { upsert: true, contentType: file.type });
+
+    if (uploadError) throw uploadError;
+
+    const { data: urlData } = sb.storage.from('avatars').getPublicUrl(path);
+    const avatarUrl = urlData.publicUrl + '?t=' + Date.now(); // cache-bust
+
+    await sb.from('profiles').upsert({
+        user_id: userId,
+        avatar_url: avatarUrl
+    }, { onConflict: 'user_id' });
+
+    return avatarUrl;
+}
+
 // ── Navbar Auth State ──────────────────────────────────────────────
 async function updateNavAuth() {
     try {
@@ -210,16 +253,25 @@ async function updateNavAuth() {
             const initial = displayName.charAt(0).toUpperCase();
             const email = user.email || '';
 
+            // Fetch profile photo
+            const avatarUrl = await getAvatarUrl(user.id);
+            const btnContent = avatarUrl
+                ? `<img src="${avatarUrl}" alt="Photo" style="width:40px;height:40px;border-radius:50%;object-fit:cover;display:block;">`
+                : initial;
+            const dropdownAvatarContent = avatarUrl
+                ? `<img src="${avatarUrl}" alt="Photo" style="width:44px;height:44px;border-radius:50%;object-fit:cover;display:block;">`
+                : initial;
+
             loginBtn.style.display = 'none';
             userMenu.style.display = 'flex';
 
-            // Build the dropdown HTML (replaces old content)
+            // Build the dropdown HTML
             userMenu.innerHTML = `
                 <div class="nav-dropdown-backdrop" id="navDropdownBackdrop"></div>
-                <button class="nav-avatar-btn" id="navAvatarBtn" title="${displayName}">${initial}</button>
+                <button class="nav-avatar-btn" id="navAvatarBtn" title="${displayName}">${btnContent}</button>
                 <div class="nav-dropdown" id="navDropdown">
                     <div class="nav-dropdown-header">
-                        <div class="nav-dropdown-avatar">${initial}</div>
+                        <div class="nav-dropdown-avatar">${dropdownAvatarContent}</div>
                         <div class="nav-dropdown-info">
                             <div class="nav-dropdown-name">${displayName}</div>
                             <div class="nav-dropdown-email">${email}</div>
@@ -271,7 +323,6 @@ async function updateNavAuth() {
             backdrop.addEventListener('click', closeDropdown);
             logoutBtn.addEventListener('click', handleNavLogout);
 
-            // Close on Escape
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') closeDropdown();
             });
@@ -430,7 +481,9 @@ window.ProfEPS = {
     saveGeneration,
     toggleFavorite,
     isFavorited,
-    createFavoriteButton
+    createFavoriteButton,
+    uploadAvatar,
+    getAvatarUrl
 };
 // Keep handleNavLogout global for onclick handlers in HTML
 window.handleNavLogout = handleNavLogout;
