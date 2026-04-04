@@ -175,6 +175,37 @@
             .nav-toggle { display: flex; }
             .article-meta { flex-direction: column; gap: 0.5rem; }
         }
+    
+        /* FAVORITE BUTTON */
+        .btn-favorite {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(255,255,255,0.3);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .btn-favorite .heart-icon {
+            color: rgba(255,255,255,0.8);
+            transition: all 0.3s ease;
+        }
+        .btn-favorite:hover .heart-icon {
+            color: #ef4444;
+            transform: scale(1.15);
+        }
+        .btn-favorite.favorited .heart-icon {
+            color: #ef4444;
+            fill: #ef4444;
+        }
+        .btn-favorite:disabled {
+            opacity: 0.5;
+            cursor: wait;
+        }
     </style>
 </head>
 <body>
@@ -619,6 +650,25 @@
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); });
         document.getElementById('navToggle').addEventListener('click', () => { document.getElementById('navMenu').classList.toggle('active'); });
+    </script>
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/js/auth-shared.js"></script>
+
+    <script>
+        // Add favorite button to article hero
+        (function() {
+            var slug = window.location.pathname.replace('.html', '').replace(/^\//, '');
+            var title = document.querySelector('.article-title, h1')?.textContent || document.title;
+            var url = window.location.pathname;
+
+            var heroMeta = document.querySelector('.article-meta');
+            if (heroMeta) {
+                var favBtn = ProfEPS.createFavoriteButton(slug, title, url, false);
+                heroMeta.appendChild(favBtn);
+            }
+        })();
     </script>
 </body>
 </html>

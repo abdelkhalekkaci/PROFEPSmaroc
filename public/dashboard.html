@@ -401,6 +401,134 @@
             to { transform: rotate(360deg); } 
         }
 
+        .profile-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+        }
+
+        .profile-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .profile-label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .profile-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+            font-size: 0.9375rem;
+            font-family: inherit;
+            transition: var(--transition);
+            background: var(--bg-card);
+        }
+
+        .profile-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(193, 39, 45, 0.1);
+        }
+
+        .profile-input:disabled {
+            background: var(--bg-secondary);
+            color: var(--text-light);
+        }
+
+        .profile-input:is(select) {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+
+        .profile-message {
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-lg);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .profile-message.success {
+            background: #f0fdf4;
+            color: #16a34a;
+            border: 1px solid #bbf7d0;
+        }
+
+        .profile-message.error {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+
+        .card-meta {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-tag {
+            display: inline-block;
+            padding: 0.25rem 0.625rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .card-tag.aps {
+            background: rgba(0, 98, 51, 0.1);
+            color: var(--secondary);
+        }
+
+        .card-tag.niveau {
+            background: rgba(193, 39, 45, 0.1);
+            color: var(--primary);
+        }
+
+        .stat-icon.templates {
+            background: linear-gradient(135deg, rgba(196, 154, 61, 0.1), rgba(196, 154, 61, 0.05));
+            color: #c49a3d;
+        }
+
+        .btn-icon-save:hover {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.375rem;
+        }
+
+        .template-name {
+            font-size: 0.8125rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
         @media (max-width: 768px) {
             .dashboard-header {
                 flex-direction: column;
@@ -421,6 +549,9 @@
                 overflow-x: auto; 
             }
             .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            .profile-row {
                 grid-template-columns: 1fr;
             }
         }
@@ -494,16 +625,33 @@
                     <p>Articles favoris</p>
                 </div>
             </div>
+            <div class="stat-card">
+                <div class="stat-icon templates">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                </div>
+                <div class="stat-info">
+                    <h3 id="statTemplates">0</h3>
+                    <p>Mod\u00e8les sauvegard\u00e9s</p>
+                </div>
+            </div>
         </div>
         
         <div class="tabs">
-            <button class="tab active" onclick="showTab('generations')">
+            <button class="tab active" data-tab="generations" onclick="showTab('generations', this)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 Historique
             </button>
-            <button class="tab" onclick="showTab('favoris')">
+            <button class="tab" data-tab="favoris" onclick="showTab('favoris', this)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                 Favoris
+            </button>
+            <button class="tab" data-tab="modeles" onclick="showTab('modeles', this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                Mes Mod\u00e8les
+            </button>
+            <button class="tab" data-tab="profil" onclick="showTab('profil', this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Profil
             </button>
         </div>
         
@@ -519,6 +667,58 @@
                 <div class="spinner"></div>
             </div>
             <div class="cards-grid" id="favorisList"></div>
+        </div>
+
+        <div class="content-section" id="modeles">
+            <div class="loading" id="loadingModeles">
+                <div class="spinner"></div>
+            </div>
+            <div class="cards-grid" id="modelesList"></div>
+        </div>
+
+        <div class="content-section" id="profil">
+            <div class="profile-card">
+                <h2 class="profile-title">Mon Profil</h2>
+                <div id="profileMessage" class="profile-message" style="display:none;"></div>
+                <div class="profile-form">
+                    <div class="profile-row">
+                        <div class="profile-field">
+                            <label class="profile-label">Email</label>
+                            <input type="email" id="profileEmail" class="profile-input" disabled>
+                        </div>
+                    </div>
+                    <div class="profile-row">
+                        <div class="profile-field">
+                            <label class="profile-label">Nom complet</label>
+                            <input type="text" id="profileNom" class="profile-input" placeholder="Votre nom">
+                        </div>
+                        <div class="profile-field">
+                            <label class="profile-label">Ville</label>
+                            <input type="text" id="profileVille" class="profile-input" placeholder="Votre ville">
+                        </div>
+                    </div>
+                    <div class="profile-row">
+                        <div class="profile-field">
+                            <label class="profile-label">Établissement</label>
+                            <input type="text" id="profileEtablissement" class="profile-input" placeholder="Nom de votre établissement">
+                        </div>
+                        <div class="profile-field">
+                            <label class="profile-label">Niveau enseigné</label>
+                            <select id="profileNiveau" class="profile-input">
+                                <option value="">— Sélectionnez —</option>
+                                <option value="college">Collège</option>
+                                <option value="lycee">Lycée</option>
+                                <option value="college_lycee">Collège & Lycée</option>
+                                <option value="primaire">Primaire</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="saveProfile()" id="saveProfileBtn" style="margin-top: 1rem; width: auto;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                        Enregistrer
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -597,53 +797,53 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
+    <script src="/js/auth-shared.js"></script>
+
     <script>
-        const supabaseClient = window.supabase.createClient(
-            'https://gbbqxalebmeeqgdountd.supabase.co',
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdiYnF4YWxlYm1lZXFnZG91bnRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4OTQ1NjYsImV4cCI6MjA4ODQ3MDU2Nn0.HRM35OtgfLv52jDwiqF155bCGf85ynWIw0LXJDhimQk'
-        );
-        
+        const supabaseClient = ProfEPS.getSupabase();
         let currentUser = null;
-        
+
         async function checkAuth() {
             const { data, error } = await supabaseClient.auth.getSession();
-            
             if (error || !data.session) {
                 window.location.href = '/login.html';
                 return null;
             }
-            
             currentUser = data.session.user;
             return currentUser;
         }
-        
+
         async function loadUserData() {
             await checkAuth();
-            
             if (!currentUser) return;
-            
-            const initial = currentUser.email ? currentUser.email.charAt(0).toUpperCase() : 'U';
-            const name = currentUser.email ? currentUser.email.split('@')[0] : 'Utilisateur';
-            
+
+            const meta = currentUser.user_metadata || {};
+            const displayName = meta.nom || meta.full_name || (currentUser.email ? currentUser.email.split('@')[0] : 'Utilisateur');
+            const initial = displayName.charAt(0).toUpperCase();
+
             document.getElementById('headerAvatar').textContent = initial;
-            document.getElementById('headerName').textContent = name;
+            document.getElementById('headerName').textContent = displayName;
             document.getElementById('headerEmail').textContent = currentUser.email;
-            
+
             document.getElementById('userInfo').style.display = 'flex';
             document.getElementById('userAvatar').textContent = initial;
-            document.getElementById('userName').textContent = name;
-            
+            document.getElementById('userName').textContent = displayName;
+
+            // Ensure profile exists
+            ProfEPS.ensureProfile(currentUser);
+
             loadGenerations();
             loadFavoris();
+            loadModeles();
+            loadProfile();
         }
-        
+
+        // ── Historique ─────────────────────────────────────
         async function loadGenerations() {
             const container = document.getElementById('generationsList');
             const loading = document.getElementById('loadingGenerations');
-            
-            let mockData = [];
-            
+            let items = [];
+
             try {
                 const { data, error } = await supabaseClient
                     .from('historique')
@@ -651,115 +851,274 @@
                     .eq('user_id', currentUser.id)
                     .order('created_at', { ascending: false })
                     .limit(50);
-                
-                if (data && !error) {
-                    mockData = data;
-                }
+                if (data && !error) items = data;
             } catch (e) {
                 console.log('Table historique non disponible');
             }
-            
+
             loading.style.display = 'none';
-            
-            if (mockData.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📄</div>
-                        <h3>Aucun document généré</h3>
-                        <p>Commencez par utiliser le générateur de fiches EPS !</p>
-                        <a href="/generateur.html" class="btn btn-primary">Aller au générateur</a>
-                    </div>
-                `;
+
+            if (items.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">&#128196;</div><h3>Aucun document g\u00e9n\u00e9r\u00e9</h3><p>Commencez par utiliser le g\u00e9n\u00e9rateur de fiches EPS !</p><a href="/generateur.html" class="btn btn-primary">Aller au g\u00e9n\u00e9rateur</a></div>';
             } else {
-                container.innerHTML = mockData.map(item => `
-                    <div class="card">
-                        <div class="card-header">
-                            <span class="card-type">${item.type_document || 'Document'}</span>
-                            <button class="btn-icon" onclick="deleteGeneration('${item.id}')" title="Supprimer">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                            </button>
-                        </div>
-                        <div class="card-title">${item.titre}</div>
-                        <div class="card-date">${new Date(item.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</div>
-                    </div>
-                `).join('');
+                container.innerHTML = items.map(item => {
+                    const typeLabel = {'fiche': 'Fiche de S\u00e9ance', 'grille': 'Grille', 'projet': 'Projet de Cycle'}[item.type_document] || item.type_document || 'Document';
+                    const apsLabel = item.aps || '';
+                    const niveauLabel = item.niveau || '';
+                    const prefillData = encodeURIComponent(JSON.stringify(item.params || {}));
+                    return '<div class="card">' +
+                        '<div class="card-header">' +
+                            '<span class="card-type">' + typeLabel + '</span>' +
+                            '<div class="card-actions">' +
+                                '<button class="btn-icon btn-icon-save" onclick="saveAsTemplate(\'' + item.id + '\')" title="Sauver comme mod\u00e8le">' +
+                                    '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>' +
+                                '</button>' +
+                                '<button class="btn-icon" onclick="deleteGeneration(\'' + item.id + '\')" title="Supprimer">' +
+                                    '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>' +
+                                '</button>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="card-meta">' +
+                            (apsLabel ? '<span class="card-tag aps">' + apsLabel + '</span>' : '') +
+                            (niveauLabel ? '<span class="card-tag niveau">' + niveauLabel + '</span>' : '') +
+                        '</div>' +
+                        '<div class="card-title">' + (item.titre || 'Document') + '</div>' +
+                        '<div class="card-date">' + new Date(item.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }) + '</div>' +
+                        '<a href="/generateur.html?prefill=' + prefillData + '" class="card-link">Reg\u00e9n\u00e9rer <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></a>' +
+                    '</div>';
+                }).join('');
             }
-            
-            document.getElementById('statGenerations').textContent = mockData.length;
+
+            document.getElementById('statGenerations').textContent = items.length;
         }
-        
+
+        // ── Favoris ───────────────��────────────────────────
         async function loadFavoris() {
             const container = document.getElementById('favorisList');
             const loading = document.getElementById('loadingFavoris');
-            
-            let mockFavoris = [];
-            
+            let items = [];
+
             try {
                 const { data, error } = await supabaseClient
                     .from('favoris')
                     .select('*')
                     .eq('user_id', currentUser.id)
                     .order('created_at', { ascending: false });
-                
-                if (data && !error) {
-                    mockFavoris = data;
-                }
+                if (data && !error) items = data;
             } catch (e) {
                 console.log('Table favoris non disponible');
             }
-            
+
             loading.style.display = 'none';
-            
-            if (mockFavoris.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">❤️</div>
-                        <h3>Aucun favori</h3>
-                        <p>Ajoutez des articles à vos favoris pour les retrouver ici !</p>
-                        <a href="/blog.html" class="btn btn-primary">Parcourir les articles</a>
-                    </div>
-                `;
+
+            if (items.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">&#10084;&#65039;</div><h3>Aucun favori</h3><p>Ajoutez des articles \u00e0 vos favoris pour les retrouver ici !</p><a href="/blog.html" class="btn btn-primary">Parcourir les articles</a></div>';
             } else {
-                container.innerHTML = mockFavoris.map(item => `
-                    <div class="card">
-                        <div class="card-header">
-                            <span class="card-type">Article</span>
-                            <button class="btn-icon" onclick="removeFavori('${item.id}')" title="Retirer">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                            </button>
-                        </div>
-                        <div class="card-title">${item.article_title}</div>
-                        <div class="card-date">Ajouté le ${new Date(item.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</div>
-                        <a href="${item.article_url}" class="card-link">Voir l'article <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-                    </div>
-                `).join('');
+                container.innerHTML = items.map(item => {
+                    return '<div class="card">' +
+                        '<div class="card-header">' +
+                            '<span class="card-type">Article</span>' +
+                            '<button class="btn-icon" onclick="removeFavori(\'' + item.id + '\')" title="Retirer des favoris">' +
+                                '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>' +
+                            '</button>' +
+                        '</div>' +
+                        '<div class="card-title">' + (item.article_title || 'Article') + '</div>' +
+                        '<div class="card-date">Ajout\u00e9 le ' + new Date(item.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) + '</div>' +
+                        '<a href="' + (item.article_url || '#') + '" class="card-link">Voir l\'article <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>' +
+                    '</div>';
+                }).join('');
             }
-            
-            document.getElementById('statFavoris').textContent = mockFavoris.length;
+
+            document.getElementById('statFavoris').textContent = items.length;
         }
-        
-        function showTab(tabName) {
+
+        // ── Mod\u00e8les ───────────────────────────────────────
+        async function loadModeles() {
+            const container = document.getElementById('modelesList');
+            const loading = document.getElementById('loadingModeles');
+            let items = [];
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('modeles')
+                    .select('*')
+                    .eq('user_id', currentUser.id)
+                    .order('created_at', { ascending: false });
+                if (data && !error) items = data;
+            } catch (e) {
+                console.log('Table modeles non disponible');
+            }
+
+            loading.style.display = 'none';
+
+            if (items.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">&#128190;</div><h3>Aucun mod\u00e8le</h3><p>Sauvegardez une configuration depuis votre historique pour la r\u00e9utiliser en un clic !</p><a href="/generateur.html" class="btn btn-primary">Aller au g\u00e9n\u00e9rateur</a></div>';
+            } else {
+                container.innerHTML = items.map(item => {
+                    const typeLabel = {'fiche': 'Fiche de S\u00e9ance', 'grille': 'Grille', 'projet': 'Projet de Cycle'}[item.type_document] || item.type_document || 'Document';
+                    const prefillData = encodeURIComponent(JSON.stringify(item.params || {}));
+                    return '<div class="card">' +
+                        '<div class="card-header">' +
+                            '<span class="card-type">' + typeLabel + '</span>' +
+                            '<button class="btn-icon" onclick="deleteModele(\'' + item.id + '\')" title="Supprimer le mod\u00e8le">' +
+                                '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>' +
+                            '</button>' +
+                        '</div>' +
+                        '<div class="template-name">' + (item.nom || '') + '</div>' +
+                        '<div class="card-meta">' +
+                            (item.aps ? '<span class="card-tag aps">' + item.aps + '</span>' : '') +
+                            (item.niveau ? '<span class="card-tag niveau">' + item.niveau + '</span>' : '') +
+                        '</div>' +
+                        '<div class="card-title">' + (item.titre || 'Mod\u00e8le') + '</div>' +
+                        '<div class="card-date">Cr\u00e9\u00e9 le ' + new Date(item.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) + '</div>' +
+                        '<a href="/generateur.html?prefill=' + prefillData + '" class="card-link">Utiliser ce mod\u00e8le <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>' +
+                    '</div>';
+                }).join('');
+            }
+
+            document.getElementById('statTemplates').textContent = items.length;
+        }
+
+        async function saveAsTemplate(historiqueId) {
+            // Get the historique item data
+            try {
+                const { data: item, error } = await supabaseClient
+                    .from('historique')
+                    .select('*')
+                    .eq('id', historiqueId)
+                    .single();
+
+                if (error || !item) {
+                    alert('Impossible de r\u00e9cup\u00e9rer les donn\u00e9es.');
+                    return;
+                }
+
+                const nom = prompt('Nom du mod\u00e8le :', item.titre || '');
+                if (nom === null) return; // user cancelled
+
+                await supabaseClient.from('modeles').insert({
+                    user_id: currentUser.id,
+                    type_document: item.type_document,
+                    aps: item.aps,
+                    niveau: item.niveau,
+                    titre: item.titre || '',
+                    nom: nom || item.titre || 'Mon mod\u00e8le',
+                    params: item.params || {}
+                });
+
+                alert('Mod\u00e8le sauvegard\u00e9 !');
+                loadModeles();
+            } catch (e) {
+                alert('Erreur: ' + e.message);
+            }
+        }
+
+        async function deleteModele(id) {
+            if (confirm('Voulez-vous vraiment supprimer ce mod\u00e8le ?')) {
+                try {
+                    await supabaseClient.from('modeles').delete().eq('id', id);
+                } catch (e) {}
+                loadModeles();
+            }
+        }
+
+        // ── Profil ─────────────────────────────────────────
+        async function loadProfile() {
+            document.getElementById('profileEmail').value = currentUser.email || '';
+
+            try {
+                const { data } = await supabaseClient
+                    .from('profiles')
+                    .select('*')
+                    .eq('user_id', currentUser.id)
+                    .single();
+
+                if (data) {
+                    document.getElementById('profileNom').value = data.nom || '';
+                    document.getElementById('profileEtablissement').value = data.etablissement || '';
+                    document.getElementById('profileVille').value = data.ville || '';
+                    document.getElementById('profileNiveau').value = data.niveau_enseigne || '';
+                }
+            } catch (e) {
+                // Use metadata as fallback
+                const meta = currentUser.user_metadata || {};
+                document.getElementById('profileNom').value = meta.nom || meta.full_name || '';
+                document.getElementById('profileEtablissement').value = meta.etablissement || '';
+                document.getElementById('profileVille').value = meta.ville || '';
+                document.getElementById('profileNiveau').value = meta.niveau_enseigne || '';
+            }
+        }
+
+        async function saveProfile() {
+            const btn = document.getElementById('saveProfileBtn');
+            btn.disabled = true;
+            const msgEl = document.getElementById('profileMessage');
+
+            const profileData = {
+                nom: document.getElementById('profileNom').value.trim(),
+                etablissement: document.getElementById('profileEtablissement').value.trim(),
+                ville: document.getElementById('profileVille').value.trim(),
+                niveau_enseigne: document.getElementById('profileNiveau').value
+            };
+
+            try {
+                // Upsert profile
+                const { error } = await supabaseClient
+                    .from('profiles')
+                    .upsert({
+                        user_id: currentUser.id,
+                        email: currentUser.email,
+                        ...profileData
+                    }, { onConflict: 'user_id' });
+
+                if (error) throw error;
+
+                // Also update user metadata for navbar display
+                await supabaseClient.auth.updateUser({
+                    data: profileData
+                });
+
+                // Update header name
+                if (profileData.nom) {
+                    document.getElementById('headerName').textContent = profileData.nom;
+                    document.getElementById('headerAvatar').textContent = profileData.nom.charAt(0).toUpperCase();
+                }
+
+                msgEl.textContent = 'Profil enregistr\u00e9 avec succ\u00e8s !';
+                msgEl.className = 'profile-message success';
+                msgEl.style.display = 'block';
+                setTimeout(() => { msgEl.style.display = 'none'; }, 3000);
+            } catch (e) {
+                msgEl.textContent = 'Erreur: ' + e.message;
+                msgEl.className = 'profile-message error';
+                msgEl.style.display = 'block';
+            }
+
+            btn.disabled = false;
+        }
+
+        // ── Tabs ────────────���──────────────────────────────
+        function showTab(tabName, btnEl) {
             document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
-            
             document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
+            if (btnEl) btnEl.classList.add('active');
         }
-        
+
         async function handleLogout() {
-            const { error } = await supabaseClient.auth.signOut();
+            await supabaseClient.auth.signOut();
             window.location.href = '/login.html';
         }
-        
+
         async function deleteGeneration(id) {
-            if (confirm('Voulez-vous vraiment supprimer cet élément ?')) {
+            if (confirm('Voulez-vous vraiment supprimer cet \u00e9l\u00e9ment ?')) {
                 try {
                     await supabaseClient.from('historique').delete().eq('id', id);
                 } catch (e) {}
                 loadGenerations();
             }
         }
-        
+
         async function removeFavori(id) {
             if (confirm('Voulez-vous vraiment retirer cet article de vos favoris ?')) {
                 try {
@@ -768,7 +1127,7 @@
                 loadFavoris();
             }
         }
-        
+
         loadUserData();
     </script>
 </body>

@@ -309,6 +309,23 @@
             color: var(--primary);
         }
 
+        #signupFields {
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; max-height: 0; overflow: hidden; }
+            to { opacity: 1; max-height: 500px; overflow: visible; }
+        }
+
+        .form-input:is(select) {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+
         @media (max-width: 480px) {
             .login-container {
                 padding: 1.75rem;
@@ -361,31 +378,59 @@
             </div>
             
             <div id="message" class="message"></div>
-            
-            <button class="btn-social google" id="googleBtn" onclick="handleGoogle()">
+
+            <button class="btn-social google" id="googleBtn" onclick="handleGoogle()" type="button">
                 <span class="btn-social google::before"></span>
                 Continuer avec Google
             </button>
-            
+
             <div class="divider">ou</div>
-            
-            <div class="form-group">
-                <label class="form-label" for="email">Email</label>
-                <input type="email" id="email" class="form-input" placeholder="vous@exemple.com" required>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="password">Mot de passe</label>
-                <input type="password" id="password" class="form-input" placeholder="••••••••" required>
-            </div>
-            
-            <button class="btn-primary" id="submitBtn" onclick="handleEmail()">
-                <span>Se connecter</span>
-            </button>
-            
+
+            <form id="authForm" autocomplete="on" method="post" action="javascript:void(0)">
+                <div class="form-group">
+                    <label class="form-label" for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-input" placeholder="vous@exemple.com" autocomplete="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" class="form-input" placeholder="••••••••" autocomplete="current-password" required minlength="6">
+                </div>
+
+                <!-- Profile fields shown only during signup -->
+                <div id="signupFields" style="display: none;">
+                    <div class="form-group">
+                        <label class="form-label" for="nom">Nom complet</label>
+                        <input type="text" id="nom" name="name" class="form-input" placeholder="Ex: Ahmed Benali" autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="etablissement">Établissement</label>
+                        <input type="text" id="etablissement" name="organization" class="form-input" placeholder="Ex: Collège Ibn Sina" autocomplete="organization">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="ville">Ville</label>
+                        <input type="text" id="ville" name="city" class="form-input" placeholder="Ex: Casablanca" autocomplete="address-level2">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="niveauEnseigne">Niveau enseigné</label>
+                        <select id="niveauEnseigne" name="niveauEnseigne" class="form-input">
+                            <option value="">— Sélectionnez —</option>
+                            <option value="college">Collège</option>
+                            <option value="lycee">Lycée</option>
+                            <option value="college_lycee">Collège & Lycée</option>
+                            <option value="primaire">Primaire</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="btn-primary" id="submitBtn" type="submit">
+                    <span>Se connecter</span>
+                </button>
+            </form>
+
             <p class="switcher">
                 <span id="switchText">Pas encore de compte ? </span>
-                <a onclick="toggleMode()">Créer un compte</a>
+                <a onclick="toggleMode()" style="cursor:pointer">Créer un compte</a>
             </p>
         </div>
     </div>
@@ -465,110 +510,182 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
+    <script src="/js/auth-shared.js"></script>
+
     <script>
-        const supabaseClient = window.supabase.createClient(
-            'https://gbbqxalebmeeqgdountd.supabase.co',
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdiYnF4YWxlYm1lZXFnZG91bnRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4OTQ1NjYsImV4cCI6MjA4ODQ3MDU2Nn0.HRM35OtgfLv52jDwiqF155bCGf85ynWIw0LXJDhimQk'
-        );
-        
+        const supabaseClient = ProfEPS.getSupabase();
+
         let isLogin = true;
         let loading = false;
-        
+
+        // Get redirect URL from query params (for redirect after login from favorite clicks)
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirectUrl = urlParams.get('redirect') || '/dashboard.html';
+
         function toggleMode() {
             isLogin = !isLogin;
             document.getElementById('formTitle').textContent = isLogin ? 'Bienvenue' : 'Créer un compte';
             document.getElementById('formSubtitle').textContent = isLogin ? 'Connectez-vous pour accéder à votre espace' : 'Rejoignez ProfEPS gratuitement';
             document.getElementById('submitBtn').querySelector('span').textContent = isLogin ? 'Se connecter' : 'Créer mon compte';
             document.getElementById('switchText').textContent = isLogin ? 'Pas encore de compte ? ' : 'Déjà un compte ? ';
+            // Toggle profile fields visibility
+            document.getElementById('signupFields').style.display = isLogin ? 'none' : 'block';
+            // Update password autocomplete hint for the browser
+            document.getElementById('password').autocomplete = isLogin ? 'current-password' : 'new-password';
             hideMessage();
         }
-        
+
         function showMessage(text, type) {
             const msg = document.getElementById('message');
             msg.textContent = text;
             msg.className = 'message ' + type;
             msg.style.display = 'block';
         }
-        
+
         function hideMessage() {
             document.getElementById('message').style.display = 'none';
         }
-        
+
         async function handleGoogle() {
             if (loading) return;
             loading = true;
             updateButton(true);
-            
+
             const { error } = await supabaseClient.auth.signInWithOAuth({
                 provider: 'google',
-                options: { redirectTo: `${window.location.origin}/dashboard.html` }
+                options: { redirectTo: window.location.origin + redirectUrl }
             });
-            
+
             if (error) {
                 showMessage(error.message, 'error');
             }
-            
+
             loading = false;
             updateButton(false);
         }
-        
-        async function handleEmail() {
+
+        // Form submit handler (triggers browser credential save)
+        document.getElementById('authForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
             if (loading) return;
-            
-            const email = document.getElementById('email').value;
+
+            const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
-            
+
             if (!email || !password) {
                 showMessage('Veuillez remplir tous les champs', 'error');
                 return;
             }
-            
+
+            if (!isLogin && password.length < 6) {
+                showMessage('Le mot de passe doit contenir au moins 6 caractères', 'error');
+                return;
+            }
+
             loading = true;
             updateButton(true);
             hideMessage();
-            
+
             try {
                 if (isLogin) {
-                    const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+                    const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
                     if (error) throw error;
-                    
+
+                    // Store credential for browser password manager
+                    if (window.PasswordCredential) {
+                        try {
+                            const cred = new PasswordCredential({ id: email, password: password, name: email });
+                            await navigator.credentials.store(cred);
+                        } catch (credErr) { /* browser may not support */ }
+                    }
+
                     showMessage('Connexion réussie !', 'success');
-                    setTimeout(() => { window.location.href = '/dashboard.html'; }, 800);
+                    setTimeout(() => { window.location.href = redirectUrl; }, 800);
                 } else {
-                    const { error } = await supabaseClient.auth.signUp({ email, password });
+                    // Signup with profile metadata
+                    const nom = document.getElementById('nom').value.trim();
+                    const etablissement = document.getElementById('etablissement').value.trim();
+                    const ville = document.getElementById('ville').value.trim();
+                    const niveauEnseigne = document.getElementById('niveauEnseigne').value;
+
+                    const { data, error } = await supabaseClient.auth.signUp({
+                        email,
+                        password,
+                        options: {
+                            data: {
+                                nom: nom,
+                                etablissement: etablissement,
+                                ville: ville,
+                                niveau_enseigne: niveauEnseigne
+                            }
+                        }
+                    });
                     if (error) throw error;
-                    
-                    showMessage('Compte créé ! Vérifiez votre email.', 'success');
+
+                    // Store credential for browser password manager
+                    if (window.PasswordCredential) {
+                        try {
+                            const cred = new PasswordCredential({ id: email, password: password, name: nom || email });
+                            await navigator.credentials.store(cred);
+                        } catch (credErr) { /* browser may not support */ }
+                    }
+
+                    // Create profile row
+                    if (data.user) {
+                        ProfEPS.ensureProfile(data.user);
+                    }
+
+                    showMessage('Compte créé ! Vérifiez votre email pour confirmer.', 'success');
                 }
             } catch (error) {
-                showMessage(error.message, 'error');
+                const msg = error.message === 'Invalid login credentials'
+                    ? 'Email ou mot de passe incorrect'
+                    : error.message;
+                showMessage(msg, 'error');
             }
-            
+
             loading = false;
             updateButton(false);
-        }
-        
+        });
+
         function updateButton(isLoading) {
             const btn = document.getElementById('submitBtn');
             const googleBtn = document.getElementById('googleBtn');
-            
+
             if (isLoading) {
                 btn.disabled = true;
                 btn.innerHTML = '<span class="loading"></span>';
                 googleBtn.disabled = true;
             } else {
                 btn.disabled = false;
-                btn.innerHTML = `<span>${isLogin ? 'Se connecter' : 'Créer mon compte'}</span>`;
+                btn.innerHTML = '<span>' + (isLogin ? 'Se connecter' : 'Créer mon compte') + '</span>';
                 googleBtn.disabled = false;
             }
         }
-        
-        supabaseClient.auth.getSession().then(({ data }) => {
+
+        // Auto-fill from browser credential manager on load
+        (async function() {
+            // Check if already logged in
+            const { data } = await supabaseClient.auth.getSession();
             if (data.session) {
-                window.location.href = '/dashboard.html';
+                window.location.href = redirectUrl;
+                return;
             }
-        });
+
+            // Request stored credentials from browser
+            if (window.PasswordCredential && navigator.credentials) {
+                try {
+                    const cred = await navigator.credentials.get({
+                        password: true,
+                        mediation: 'optional'
+                    });
+                    if (cred && cred.type === 'password') {
+                        document.getElementById('email').value = cred.id;
+                        document.getElementById('password').value = cred.password;
+                    }
+                } catch (e) { /* browser may not support or user dismissed */ }
+            }
+        })();
     </script>
 </body>
 </html>
