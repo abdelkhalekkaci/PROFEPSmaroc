@@ -21,6 +21,12 @@ function getSupabase() {
     const style = document.createElement('style');
     style.id = 'profeps-dropdown-css';
     style.textContent = `
+        /* Hide login button by default — auth-shared.js reveals it only when not logged in.
+           Prevents the flash of "Connexion" button before session is checked. */
+        #navLoginBtn {
+            display: none !important;
+            visibility: hidden;
+        }
         .nav-user-menu {
             position: relative;
             display: flex;
@@ -328,7 +334,8 @@ async function updateNavAuth() {
             });
 
         } else {
-            loginBtn.style.display = 'inline-flex';
+            // Override the !important hide so login button shows
+            loginBtn.setAttribute('style', 'display: inline-flex !important; visibility: visible !important;');
             userMenu.style.display = 'none';
         }
     } catch (e) {
