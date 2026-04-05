@@ -23,6 +23,7 @@ app.use('/images', express.static(path.join(__dirname, 'public', 'images')));
 const genererFiche = require('./api/generer-fiche');
 const genererGrille = require('./api/generer-grille');
 const genererProjet = require('./api/generer-projet');
+const genererProjetComplet = require('./api/generer-projet-complet');
 
 // Route principale
 app.get('/', (req, res) => {
@@ -33,6 +34,7 @@ app.get('/', (req, res) => {
 app.post('/api/generer-fiche', genererFiche);
 app.post('/api/generer-grille', genererGrille);
 app.post('/api/generer-projet', genererProjet);
+app.post('/api/generer-projet-complet', genererProjetComplet);
 
 app.listen(PORT, () => {
     console.log(`🚀 Serveur EPS: http://localhost:${PORT}`);
