@@ -36,7 +36,11 @@ app.post('/api/generer-grille', genererGrille);
 app.post('/api/generer-projet', genererProjet);
 app.post('/api/generer-projet-complet', genererProjetComplet);
 
-app.listen(PORT, () => {
-    console.log(`🚀 Serveur EPS: http://localhost:${PORT}`);
-    console.log('⚠️ Configurez GROQ_API_KEY dans les variables d\'environnement');
-});
+if (process.env.VERCEL) {
+    module.exports = app;
+} else {
+    app.listen(PORT, () => {
+        console.log(`🚀 Serveur EPS: http://localhost:${PORT}`);
+        console.log('⚠️ Configurez GROQ_API_KEY dans les variables d\'environnement');
+    });
+}
