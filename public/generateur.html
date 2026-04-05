@@ -1459,7 +1459,12 @@
         // Form submit
         document.getElementById('form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            if (!validateForm()) return;
+            console.log('Form submit triggered, currentType:', currentType);
+            if (!validateForm()) {
+                console.log('Validation failed');
+                return;
+            }
+            console.log('Validation passed, calling API...');
             
             const btn = document.getElementById('submitBtn');
             btn.disabled = true;
@@ -1517,7 +1522,7 @@
                         formData.niveau,
                         (typeLabels[currentType] || 'Document') + ' — ' + formData.aps + ' ' + formData.niveau,
                         formData
-                    );
+                    ).catch(err => console.log('Save generation error:', err));
 
                     showSuccess('Document généré avec succès !');
                 } else {
@@ -1533,6 +1538,7 @@
 
         // Download Word (document simple)
         document.getElementById('downloadWord').addEventListener('click', () => {
+            console.log('downloadWord clicked, currentHtml:', !!currentHtml);
             if (!currentHtml) return;
             const blob = new Blob([currentHtml], { type: 'application/msword' });
             const url = URL.createObjectURL(blob);
@@ -1665,9 +1671,10 @@
 
                     clearInterval(progressInterval);
 
-                    const data = await resp.json();
+                const data = await resp.json();
+                console.log('API response:', resp.status, data);
 
-                    if (data.success) {
+                if (data.success) {
                         projetCompletHtml = data.html;
                         projetCompletFilename = data.filename;
                     } else {
