@@ -9,15 +9,18 @@ const PORT = process.env.PORT || 3000;
 // ✅ CLÉ API GROQ - Utilise UNIQUEMENT la variable d'environnement (PAS de clé en dur!)
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 
+// Path resolution compatible Vercel
+const rootDir = process.env.VERCEL ? '/var/task' : __dirname;
+
 // Middleware
 app.use(cors());
 app.use(express.json());
 
 // Servir les fichiers statiques du dossier public
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(rootDir, 'public')));
 
 // Servir explicitement le dossier images
-app.use('/images', express.static(path.join(__dirname, 'public', 'images')));
+app.use('/images', express.static(path.join(rootDir, 'public', 'images')));
 
 // Routes API modulaire
 const genererFiche = require('./api/generer-fiche');
@@ -27,7 +30,7 @@ const genererProjetComplet = require('./api/generer-projet-complet');
 
 // Route principale
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(rootDir, 'public', 'index.html'));
 });
 
 // Montage des routes API
