@@ -99,90 +99,8 @@
         }
         body { font-family: var(--font-sans); background: var(--bg-secondary); color: var(--text-primary); line-height: 1.6; }
         a { text-decoration: none; color: inherit; }
-        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1rem 2rem; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-light); transition: var(--transition); }
-        .navbar.scrolled { padding: 0.75rem 2rem; box-shadow: var(--shadow-md); }
-        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-        .nav-menu { display: flex; align-items: center; gap: 2rem; }
-        .nav-link { font-size: 0.9375rem; font-weight: 500; color: var(--text-secondary); transition: var(--transition); padding: 0.5rem 0; position: relative; }
-        .nav-link:hover, .nav-link.active { color: var(--primary); }
-        .nav-link.active::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--primary); border-radius: 2px; }
-        .nav-cta { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; font-weight: 600; font-size: 0.9375rem; border-radius: var(--radius-full); transition: var(--transition); }
-        .nav-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
         /* Login Button */
-        .nav-btn-login {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: transparent;
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 0.9375rem;
-            border-radius: var(--radius-full);
-            border: 2px solid var(--primary);
-            transition: var(--transition);
-        }
-        .nav-btn-login:hover {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 14px rgba(193,39,45,0.3);
-            transform: translateY(-1px);
-        }
-
         /* User Menu */
-        .nav-user-menu {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .nav-user-info {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.375rem 0.75rem 0.375rem 0.375rem;
-            background: var(--bg-secondary);
-            border-radius: var(--radius-full);
-            transition: var(--transition);
-        }
-        .nav-user-info:hover {
-            background: var(--border-light);
-        }
-        .nav-user-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 0.8125rem;
-        }
-        .nav-user-name {
-            font-weight: 600;
-            font-size: 0.875rem;
-            color: var(--text-primary);
-        }
-        .nav-btn-logout {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: var(--bg-secondary);
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-light);
-            transition: var(--transition);
-        }
-        .nav-btn-logout:hover {
-            background: #fee2e2;
-            color: var(--primary);
-        }
-        .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
-        .nav-toggle span { width: 25px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: var(--transition); }
         .section-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: linear-gradient(135deg, rgba(193,39,45,0.1), rgba(0,98,51,0.1)); border-radius: var(--radius-full); font-size: 0.875rem; font-weight: 600; color: var(--primary); margin-bottom: 1rem; }
         .article-hero { padding: 140px 2rem 3rem; background: linear-gradient(135deg, rgba(193,39,45,0.05) 0%, rgba(0,98,51,0.05) 100%); text-align: center; }
         .article-title { font-family: var(--font-display); font-size: clamp(1.75rem, 4vw, 2.5rem); color: var(--text-primary); margin-bottom: 1rem; line-height: 1.3; }
@@ -280,9 +198,7 @@
         .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; }
         .footer-copyright { color: rgba(255,255,255,0.5); font-size: 0.875rem; }
         @media (max-width: 768px) {
-            .nav-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 1.5rem; box-shadow: var(--shadow-lg); gap: 1rem; }
             .nav-menu.active { display: flex; }
-            .nav-toggle { display: flex; }
             .article-meta { flex-direction: column; gap: 0.5rem; }
             .impact-card { flex-direction: column; }
             .borg-scale { grid-template-columns: auto 1fr; }
@@ -319,26 +235,79 @@
             opacity: 0.5;
             cursor: wait;
         }
-    </style>
+            /* ═══ NAVBAR CANONIQUE ═══ */
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1rem 2rem; background: rgba(255,255,255,0.96); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(226,232,240,0.7); transition: all 0.3s ease; }
+        .navbar.scrolled { padding: 0.5rem 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); background: rgba(255,255,255,0.99); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+        .nav-logo { justify-self: start; display: flex; align-items: center; }
+        .nav-logo img { height: 56px; transition: all 0.3s ease; }
+        .navbar.scrolled .nav-logo img { height: 46px; }
+        .nav-menu { display: flex; align-items: center; justify-content: center; gap: 1.5rem; }
+        .nav-right { justify-self: end; display: flex; align-items: center; gap: 0.75rem; }
+        .nav-link { font-size: 0.9375rem; font-weight: 500; color: #4a4a68; padding: 0.5rem; position: relative; transition: color 0.3s ease; text-decoration: none; }
+        .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 50%; right: 50%; height: 2px; background: linear-gradient(90deg, #c1272d, #006233); border-radius: 2px; transition: left 0.3s ease, right 0.3s ease; }
+        .nav-link:hover::after, .nav-link.active::after { left: 0; right: 0; }
+        .nav-link:hover, .nav-link.active { color: #c1272d; }
+        .nav-btn-login { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1.25rem; background: transparent; color: #c1272d; font-weight: 600; font-size: 0.9375rem; border-radius: 9999px; border: 2px solid #c1272d; transition: all 0.3s ease; text-decoration: none; white-space: nowrap; line-height: 1.4; }
+        .nav-btn-login:hover { background: #c1272d; color: white; box-shadow: 0 4px 14px rgba(193,39,45,0.3); transform: translateY(-1px); }
+        .nav-cta { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1.25rem; background: linear-gradient(135deg, #c1272d, #006233); color: white; font-weight: 600; font-size: 0.9375rem; border-radius: 9999px; border: 2px solid transparent; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; text-decoration: none; white-space: nowrap; line-height: 1.4; }
+        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(193,39,45,0.3); }
+        .nav-cta.nav-cta-mobile { display: none; }
+        .nav-cta.nav-cta-desktop { display: inline-flex; }
+        .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; width: 36px; height: 36px; justify-content: center; align-items: center; border-radius: 8px; transition: background 0.3s ease; }
+        .nav-toggle:hover { background: rgba(193,39,45,0.06); }
+        .nav-toggle span { display: block; width: 22px; height: 2px; background: #1a1a2e; border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; }
+        .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .nav-toggle.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        .nav-backdrop { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.3); z-index: 99; opacity: 0; transition: opacity 0.3s ease; }
+        .nav-backdrop.active { display: block; opacity: 1; }
+        .nav-user-menu { display: flex; align-items: center; gap: 0.5rem; }
+        .nav-user-info { display: flex; align-items: center; gap: 0.5rem; padding: 0.375rem 0.75rem 0.375rem 0.375rem; background: #f8f9fa; border-radius: 9999px; transition: all 0.3s ease; text-decoration: none; cursor: pointer; }
+        .nav-user-info:hover { background: #f1f5f9; }
+        .nav-user-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #c1272d, #006233); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.8125rem; flex-shrink: 0; }
+        .nav-user-name { font-weight: 600; font-size: 0.875rem; color: #1a1a2e; }
+        .nav-btn-logout { width: 36px; height: 36px; border-radius: 50%; background: #f8f9fa; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #6b7280; transition: all 0.3s ease; }
+        .nav-btn-logout:hover { background: #fee2e2; color: #c1272d; }
+        @media (max-width: 768px) {
+            .nav-container { display: flex; justify-content: space-between; }
+            .nav-right { gap: 0.5rem; }
+            .nav-menu { position: absolute; top: 100%; left: 1rem; right: 1rem; background: white; flex-direction: column; padding: 1.5rem; box-shadow: 0 10px 40px rgba(0,0,0,0.12); border-radius: 16px; gap: 0.5rem; transform: translateY(-10px); opacity: 0; pointer-events: none; transition: transform 0.3s ease, opacity 0.3s ease; z-index: 100; border: 1px solid #f1f5f9; justify-content: flex-start; align-items: flex-start; }
+            .nav-menu.active { transform: translateY(0); opacity: 1; pointer-events: auto; }
+            .nav-link { padding: 0.5rem 0; width: 100%; }
+            .nav-link::after { bottom: 0; }
+            .nav-toggle { display: flex; }
+            .nav-cta.nav-cta-mobile { display: inline-flex; }
+            .nav-cta.nav-cta-desktop { display: none; }
+            .nav-btn-login { display: none; }
+        }
+        @media (max-width: 480px) {
+            .navbar { padding: 0.75rem 1rem; }
+            .navbar.scrolled { padding: 0.375rem 1rem; }
+        }
+        </style>
 </head>
 <body>
-    <nav class="navbar" id="navbar">
+        <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo"><img src="/images/prof_eps.png" alt="Prof EPS" style="height: 40px;"></a>
+            <a href="index.html" class="nav-logo">
+                <img src="/images/prof_eps.png" alt="Prof EPS">
+            </a>
             <div class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link">Accueil</a>
                 <a href="generateur.html" class="nav-link">Générateur</a>
                 <a href="blog.html" class="nav-link active">Blog</a>
-                <!-- Guest: Login Button -->
+                <a href="generateur.html" class="nav-cta nav-cta-mobile"><span>✨</span> Créer un document</a>
+            </div>
+            <div class="nav-right">
                 <a href="login.html" class="nav-btn-login" id="navLoginBtn" style="display:none">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
                     Connexion
                 </a>
-                <a href="generateur.html" class="nav-cta"><span>✨</span> Créer un document</a>
-                <!-- Logged in: User Dropdown (after CTA) -->
+                <a href="generateur.html" class="nav-cta nav-cta-desktop"><span>✨</span> Créer un document</a>
                 <div class="nav-user-menu" id="navUserMenu" style="display: none;"></div>
+                <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
             </div>
-            <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
         </div>
     </nav>
 
@@ -973,10 +942,32 @@
         </div>
     </footer>
 
-    <script>
+        <script>
         const navbar = document.getElementById('navbar');
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
         window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); });
-        document.getElementById('navToggle').addEventListener('click', () => { document.getElementById('navMenu').classList.toggle('active'); });
+        const navBackdrop = document.createElement('div');
+        navBackdrop.className = 'nav-backdrop';
+        document.body.appendChild(navBackdrop);
+        function toggleMenu() {
+            const open = navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active', open);
+            navBackdrop.classList.toggle('active', open);
+            document.body.style.overflow = open ? 'hidden' : '';
+            navToggle.setAttribute('aria-expanded', open);
+        }
+        function closeMenu() {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            navBackdrop.classList.remove('active');
+            document.body.style.overflow = '';
+            navToggle.setAttribute('aria-expanded', 'false');
+        }
+        navToggle.addEventListener('click', e => { e.stopPropagation(); toggleMenu(); });
+        navBackdrop.addEventListener('click', closeMenu);
+        document.addEventListener('click', e => { if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) closeMenu(); });
+        navMenu.querySelectorAll('.nav-link, .nav-cta').forEach(l => l.addEventListener('click', closeMenu));
     </script>
     <!-- Supabase SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
