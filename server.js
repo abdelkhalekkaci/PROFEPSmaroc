@@ -16,6 +16,20 @@ const rootDir = process.env.VERCEL ? '/var/task' : __dirname;
 app.use(cors());
 app.use(express.json());
 
+// Redirection 301 : non-www → www
+app.use((req, res, next) => {
+    const host = req.headers.host || '';
+    if (!host.startsWith('www.') && !host.includes('localhost') && !host.includes('vercel.app')) {
+        return res.redirect(301, `https://www.${host}${req.url}`);
+    }
+    next();
+});
+
+// Redirection 301 : /index.html → /
+app.get('/index.html', (req, res) => {
+    res.redirect(301, '/');
+});
+
 // Servir les fichiers statiques du dossier public
 app.use(express.static(path.join(rootDir, 'public')));
 
