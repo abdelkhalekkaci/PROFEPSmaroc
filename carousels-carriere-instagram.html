@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Carousels Instagram — Section Carrière | ProfEPS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1a1a1a;font-family:'Plus Jakarta Sans',sans-serif;padding:40px 20px;display:flex;flex-direction:column;align-items:center;gap:0}
+
+/* ─── PAGE HEADER ─── */
+.page-title{color:white;font-size:22px;font-weight:800;text-align:center;margin-bottom:8px}
+.page-sub{color:#888;font-size:13px;text-align:center;margin-bottom:40px;line-height:1.6}
+.page-sub strong{color:#ccc}
+
+/* ─── CAROUSEL SECTION ─── */
+.carousel-section{margin-bottom:50px;width:100%;max-width:600px}
+.carousel-label{color:#555;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.carousel-label::after{content:'';flex:1;height:1px;background:#333}
+
+/* ─── SLIDE BASE ─── */
+.slide{
+  width:540px;height:540px;
+  position:relative;overflow:hidden;
+  border-radius:3px;
+  margin-bottom:6px;
+  flex-shrink:0;
+}
+
+/* ══════════════════════════════════════════
+   SLIDE 1 — COVER (dark, dramatic)
+══════════════════════════════════════════ */
+.cover{background:linear-gradient(145deg,#0a1520 0%,#13222f 55%,#0a1520 100%)}
+.cover .top-stripe{position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#c1272d,#006233)}
+.cover .logo-bar{position:absolute;top:28px;left:30px;display:flex;align-items:center;gap:9px}
+.cover .logo-bar img{height:30px;filter:brightness(0) invert(1);opacity:.7}
+.cover .logo-bar span{font-size:11px;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:.1em;text-transform:uppercase}
+.cover .slide-num{position:absolute;top:28px;right:30px;font-size:11px;font-weight:700;color:rgba(255,255,255,.25);letter-spacing:.08em}
+.cover .center{position:absolute;top:50%;left:50%;transform:translate(-50%,-54%);width:88%;text-align:center}
+.cover .cat-pill{display:inline-block;background:rgba(193,39,45,.15);border:1px solid rgba(193,39,45,.35);color:#e07070;font-size:11px;font-weight:700;padding:5px 16px;border-radius:99px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px}
+.cover .main-title{font-size:28px;font-weight:900;color:white;line-height:1.25;margin-bottom:18px}
+.cover .main-title.ar{font-family:'Cairo',sans-serif;font-size:26px;direction:rtl}
+.cover .divider{width:48px;height:3px;background:linear-gradient(90deg,#c1272d,#006233);border-radius:2px;margin:0 auto 18px}
+.cover .hook{font-family:'Cairo',sans-serif;font-size:16px;color:rgba(255,255,255,.6);direction:rtl;line-height:1.7}
+.cover .hook em{color:rgba(255,255,255,.35);font-style:normal;font-size:13px;display:block;margin-top:4px;direction:ltr;font-family:'Plus Jakarta Sans',sans-serif}
+.cover .swipe-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.25);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.cover .dots{display:flex;gap:5px}
+.cover .dots span{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.15)}
+.cover .dots .d1{background:#c1272d;width:14px;border-radius:3px}
+
+/* ══════════════════════════════════════════
+   SLIDE 2 — FEATURES (light, clean)
+══════════════════════════════════════════ */
+.features{background:#f7f8fa}
+.features .top-stripe{position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#c1272d,#006233)}
+.features .f-header{padding:30px 36px 20px}
+.features .f-tag{font-size:11px;font-weight:700;color:#c1272d;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.features .f-title{font-size:20px;font-weight:800;color:#1a1a2e;line-height:1.25}
+.features .f-title-ar{font-family:'Cairo',sans-serif;font-size:14px;color:#888;direction:rtl;text-align:right;margin-top:4px}
+.features .items{padding:0 28px;display:flex;flex-direction:column;gap:9px}
+.features .item{display:flex;align-items:flex-start;gap:12px;background:white;border-radius:12px;padding:13px 16px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-left:3px solid #c1272d}
+.features .item.green{border-left-color:#006233}
+.features .item.gold{border-left-color:#d97706}
+.features .item-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.features .item-text{}
+.features .item-fr{font-size:13px;font-weight:700;color:#1a1a2e}
+.features .item-ar{font-family:'Cairo',sans-serif;font-size:11px;color:#aaa;direction:rtl;text-align:right;margin-top:2px}
+.features .bio-note{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,rgba(193,39,45,.08),rgba(0,98,51,.08));border:1px solid rgba(193,39,45,.2);border-radius:99px;padding:8px 20px;font-size:12px;font-weight:700;color:#c1272d;white-space:nowrap}
+.features .brand{position:absolute;top:28px;right:30px;font-size:10px;font-weight:700;color:rgba(0,0,0,.15);letter-spacing:.08em;text-transform:uppercase}
+
+/* ══════════════════════════════════════════
+   SLIDE 3 — CTA / SHARE (dark, warm)
+══════════════════════════════════════════ */
+.cta-slide{background:linear-gradient(145deg,#0a1520 0%,#13222f 55%,#0a1520 100%)}
+.cta-slide .top-stripe{position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#c1272d,#006233)}
+.cta-slide .center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:82%;text-align:center}
+.cta-slide .logo-wrap{margin-bottom:18px}
+.cta-slide .logo-wrap img{height:52px;filter:brightness(0) invert(1);opacity:.85}
+.cta-slide .divider{width:40px;height:2px;background:linear-gradient(90deg,#c1272d,#006233);border-radius:2px;margin:0 auto 20px}
+.cta-slide .msg-ar{font-family:'Cairo',sans-serif;font-size:22px;font-weight:900;color:white;direction:rtl;line-height:1.4;margin-bottom:8px}
+.cta-slide .msg-fr{font-size:13px;color:rgba(255,255,255,.45);margin-bottom:24px;line-height:1.5}
+.cta-slide .bio-box{background:linear-gradient(135deg,#c1272d,#006233);border-radius:14px;padding:14px 24px;margin-bottom:16px}
+.cta-slide .bio-line1{font-size:13px;font-weight:700;color:rgba(255,255,255,.7);font-family:'Cairo',sans-serif;direction:rtl;margin-bottom:3px}
+.cta-slide .bio-line2{font-size:17px;font-weight:800;color:white;letter-spacing:.03em}
+.cta-slide .share-text{font-family:'Cairo',sans-serif;font-size:14px;color:rgba(255,255,255,.4);direction:rtl;line-height:1.6}
+.cta-slide .handle{color:#c1272d;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;direction:ltr;display:block;margin-top:6px}
+</style>
+</head>
+<body>
+
+<div class="page-title">Carousels Instagram — Section Carrière</div>
+<div class="page-sub">
+  7 carousels × 3 slides = 21 slides<br>
+  <strong>Export :</strong> F12 → Clic droit sur .slide → "Capture du nœud" dans Chrome DevTools
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     CAROUSEL 1 — Examens de Sortie CRMEF — Spécialité EPS
+══════════════════════════════════════════════════════════ -->
+<div class="carousel-section">
+<div class="carousel-label">Carousel 1 — Examens de Sortie CRMEF — Spécialité EPS</div>
+
+<!-- Slide 1 -->
+<div class="slide cover">
+  <div class="top-stripe"></div>
+  <div class="logo-bar"><img src="public/images/prof_eps.png" alt="ProfEPS"><span>profeps.ma</span></div>
+  <div class="slide-num">1 / 3</div>
+  <div class="center">
+    <div class="cat-pill">🎓 Carrière & Formation</div>
+    <div class="main-title">Examens de Sortie CRMEF<br>— Spécialité EPS</div>
+    <div class="divider"></div>
+    <div class="hook">
+      الفارق الحقيقي بين الأستاذ المتدرب والأستاذ المرسَّم 🏆<br>هل أنت مستعد لاجتياز امتحان الخروج؟
+      <em>La clé pour décrocher ta titularisation — swipe →</em>
+    </div>
+  </div>
+  <div class="swipe-hint">SWIPE <div class="dots"><span class="d1"></span><span></span><span></span></div></div>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide features">
+  <div class="top-stripe"></div>
+  <div class="brand">profeps.ma</div>
+  <div class="f-header">
+    <div class="f-tag">📦 Ce que tu trouves dans l'article</div>
+    <div class="f-title">Tout ce qu'il faut pour réussir<br>ton examen de sortie</div>
+    <div class="f-title-ar">كل ما تحتاجه للنجاح في امتحان الخروج</div>
+  </div>
+  <div class="items">
+    <div class="item">
+      <div class="item-icon">📄</div>
+      <div class="item-text"><div class="item-fr">Sujets d'examens de sortie CRMEF EPS</div><div class="item-ar">نماذج مواضيع امتحان الخروج — تخصص التربية البدنية</div></div>
+    </div>
+    <div class="item green">
+      <div class="item-icon">🏃</div>
+      <div class="item-text"><div class="item-fr">Conseils pour réussir la MSP (Mise en Situation)</div><div class="item-ar">نصائح المرحلة العملية قدام لجنة التحكيم</div></div>
+    </div>
+    <div class="item">
+      <div class="item-icon">📝</div>
+      <div class="item-text"><div class="item-fr">Plan type du Rapport de Stage / Mémoire</div><div class="item-ar">هيكل تقرير التدريب الميداني جاهز</div></div>
+    </div>
+    <div class="item gold">
+      <div class="item-icon">🎤</div>
+      <div class="item-text"><div class="item-fr">Questions fréquentes à la soutenance orale</div><div class="item-ar">الأسئلة المتكررة في لجنة التحكيم</div></div>
+    </div>
+  </div>
+  <div class="bio-note">🔗 Lien complet en bio — الرابط في البيو</div>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide cta-slide">
+  <div class="top-stripe"></div>
+  <div class="center">
+    <div class="logo-wrap"><img src="public/images/prof_eps.png" alt="ProfEPS"></div>
+    <div class="divider"></div>
+    <div class="msg-ar">شارك مع كل أستاذ متدرب تعرفه 🤝</div>
+    <div class="msg-fr">Partage avec tous tes collègues stagiaires EPS — ça peut changer leur avenir !</div>
+    <div class="bio-box">
+      <div class="bio-line1">🔗 الرابط الكامل في البيو</div>
+      <div class="bio-line2">profeps.ma</div>
+    </div>
+    <div class="share-text">أرسلها إلى كل زميل يستعد لامتحان الخروج 👇<span class="handle">@profeps.ma</span></div>
+  </div>
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     CAROUSEL 2 — Préparer le concours EPS (CRMEF)
+══════════════════════════════════════════════════════════ -->
+<div class="carousel-section">
+<div class="carousel-label">Carousel 2 — Préparer le concours EPS (CRMEF)</div>
+
+<!-- Slide 1 -->
+<div class="slide cover">
+  <div class="top-stripe"></div>
+  <div class="logo-bar"><img src="public/images/prof_eps.png" alt="ProfEPS"><span>profeps.ma</span></div>
+  <div class="slide-num">1 / 3</div>
+  <div class="center">
+    <div class="cat-pill">🏆 Carrière & Concours</div>
+    <div class="main-title">Préparer le concours<br>EPS (CRMEF)</div>
+    <div class="divider"></div>
+    <div class="hook">
+      هل تطمح إلى أن تصبح أستاذاً للتربية البدنية؟ هذه الحزمة ستساعدك على النجاح 💪<br>QCM + الديداكتيك + نماذج حقيقية
+      <em>Pack complet — téléchargement gratuit — swipe →</em>
+    </div>
+  </div>
+  <div class="swipe-hint">SWIPE <div class="dots"><span class="d1"></span><span></span><span></span></div></div>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide features">
+  <div class="top-stripe"></div>
+  <div class="brand">profeps.ma</div>
+  <div class="f-header">
+    <div class="f-tag">📦 Contenu du Pack — Google Drive Gratuit</div>
+    <div class="f-title">Tout pour réussir l'écrit et l'oral<br>du concours CRMEF EPS</div>
+    <div class="f-title-ar">كل ما تحتاجه للنجاح في الكتابي والشفهي للمباراة</div>
+  </div>
+  <div class="items">
+    <div class="item">
+      <div class="item-icon">📋</div>
+      <div class="item-text"><div class="item-fr">Anciens examens CRMEF avec correction</div><div class="item-ar">نماذج امتحانات المباراة مع عناصر الإجابة</div></div>
+    </div>
+    <div class="item green">
+      <div class="item-icon">✅</div>
+      <div class="item-text"><div class="item-fr">QCM Didactique EPS corrigés — PDF</div><div class="item-ar">QCM ديداكتيك التربية البدنية مع التصحيح PDF</div></div>
+    </div>
+    <div class="item">
+      <div class="item-icon">📚</div>
+      <div class="item-text"><div class="item-fr">Sciences de l'éducation — Résumés PDF</div><div class="item-ar">ملخصات علوم التربية جاهزة للمراجعة</div></div>
+    </div>
+    <div class="item gold">
+      <div class="item-icon">🎯</div>
+      <div class="item-text"><div class="item-fr">Préparation MSP — Examen oral CRMEF</div><div class="item-ar">تحضير الشفهي والوضعية المهنية</div></div>
+    </div>
+  </div>
+  <div class="bio-note">🔗 Lien complet en bio — الرابط في البيو</div>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide cta-slide">
+  <div class="top-stripe"></div>
+  <div class="center">
+    <div class="logo-wrap"><img src="public/images/prof_eps.png" alt="ProfEPS"></div>
+    <div class="divider"></div>
+    <div class="msg-ar">شارك مع كل من يستعد لمباراة التعليم 📢</div>
+    <div class="msg-fr">Partage avec tous tes amis qui préparent le concours CRMEF EPS !</div>
+    <div class="bio-box">
+      <div class="bio-line1">🔗 الرابط الكامل في البيو</div>
+      <div class="bio-line2">profeps.ma</div>
+    </div>
+    <div class="share-text">أرسلها إلى زميلك الذي يستعد للمباراة 👇<span class="handle">@profeps.ma</span></div>
+  </div>
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     CAROUSEL 3 — Préparer l'Examen Professionnel EPS (Kafa'a)
+══════════════════════════════════════════════════════════ -->
+<div class="carousel-section">
+<div class="carousel-label">Carousel 3 — Préparer l'Examen Professionnel EPS (Kafa'a)</div>
+
+<!-- Slide 1 -->
+<div class="slide cover">
+  <div class="top-stripe"></div>
+  <div class="logo-bar"><img src="public/images/prof_eps.png" alt="ProfEPS"><span>profeps.ma</span></div>
+  <div class="slide-num">1 / 3</div>
+  <div class="center">
+    <div class="cat-pill">📈 Promotion Interne — Kafa'a</div>
+    <div class="main-title">Préparer l'Examen<br>Professionnel EPS (Kafa'a)</div>
+    <div class="divider"></div>
+    <div class="hook">
+      هل تسعى إلى الترقي المهني؟ امتحان الكفاءة المهنية هو بوابتك للتميز 📈<br>احصل على كل ما تحتاجه هنا مجاناً
+      <em>Législation + Didactique + Anciens sujets — swipe →</em>
+    </div>
+  </div>
+  <div class="swipe-hint">SWIPE <div class="dots"><span class="d1"></span><span></span><span></span></div></div>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide features">
+  <div class="top-stripe"></div>
+  <div class="brand">profeps.ma</div>
+  <div class="f-header">
+    <div class="f-tag">📦 Dossier Complet — Google Drive Gratuit</div>
+    <div class="f-title">Tout pour réussir la Kafa'a EPS<br>— Promotion Interne</div>
+    <div class="f-title-ar">حقيبة الكفاءة المهنية الكاملة — تحميل مجاني</div>
+  </div>
+  <div class="items">
+    <div class="item">
+      <div class="item-icon">⚖️</div>
+      <div class="item-text"><div class="item-fr">Législation scolaire marocaine — PDF complet</div><div class="item-ar">التشريع التربوي المغربي — وثائق رسمية كاملة</div></div>
+    </div>
+    <div class="item green">
+      <div class="item-icon">📋</div>
+      <div class="item-text"><div class="item-fr">Anciens examens Kafa'a avec correction</div><div class="item-ar">نماذج امتحانات الكفاءة المهنية مع التصحيح</div></div>
+    </div>
+    <div class="item">
+      <div class="item-icon">🎓</div>
+      <div class="item-text"><div class="item-fr">Didactique EPS — Fiches APSA corrigées</div><div class="item-ar">ديداكتيك المواد — جذاذات جاهزة PDF</div></div>
+    </div>
+    <div class="item gold">
+      <div class="item-icon">📖</div>
+      <div class="item-text"><div class="item-fr">Pédagogie & Sciences de l'éducation</div><div class="item-ar">التربية وعلوم التكوين — ملخصات شاملة</div></div>
+    </div>
+  </div>
+  <div class="bio-note">🔗 Lien complet en bio — الرابط في البيو</div>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide cta-slide">
+  <div class="top-stripe"></div>
+  <div class="center">
+    <div class="logo-wrap"><img src="public/images/prof_eps.png" alt="ProfEPS"></div>
+    <div class="divider"></div>
+    <div class="msg-ar">شارك مع كل أستاذ يستعد لامتحان الكفاءة المهنية 🙌</div>
+    <div class="msg-fr">Partage avec tes collègues qui préparent la promotion interne !</div>
+    <div class="bio-box">
+      <div class="bio-line1">🔗 الرابط الكامل في البيو</div>
+      <div class="bio-line2">profeps.ma</div>
+    </div>
+    <div class="share-text">أرسلها إلى زميلك الأستاذ — الترقية حق للجميع 👇<span class="handle">@profeps.ma</span></div>
+  </div>
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     CAROUSEL 4 — Préparer le concours – التوجيه والتخطيط التربوي
+══════════════════════════════════════════════════════════ -->
+<div class="carousel-section">
+<div class="carousel-label">Carousel 4 — Préparer le concours – التوجيه والتخطيط التربوي</div>
+
+<!-- Slide 1 -->
+<div class="slide cover">
+  <div class="top-stripe"></div>
+  <div class="logo-bar"><img src="public/images/prof_eps.png" alt="ProfEPS"><span>profeps.ma</span></div>
+  <div class="slide-num">1 / 3</div>
+  <div class="center">
+    <div class="cat-pill">🗺️ COPE — التوجيه والتخطيط</div>
+    <div class="main-title ar">Préparer le concours<br>— التوجيه والتخطيط التربوي</div>
+    <div class="divider"></div>
+    <div class="hook">
+      هل تستعد لمباراة التوجيه والتخطيط التربوي؟ تدرَّب بالنماذج الحقيقية 🎯<br>QCM + علم النفس + علوم التربية — كل شيء هنا
+      <em>Pack COPE complet — téléchargement gratuit — swipe →</em>
+    </div>
+  </div>
+  <div class="swipe-hint">SWIPE <div class="dots"><span class="d1"></span><span></span><span></span></div></div>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide features">
+  <div class="top-stripe"></div>
+  <div class="brand">profeps.ma</div>
+  <div class="f-header">
+    <div class="f-tag">📦 Pack COPE — Google Drive Gratuit</div>
+    <div class="f-title">Tout pour réussir le concours<br>التوجيه والتخطيط التربوي</div>
+    <div class="f-title-ar">حزمة شاملة للنجاح في مباراة التوجيه والتخطيط</div>
+  </div>
+  <div class="items">
+    <div class="item">
+      <div class="item-icon">📋</div>
+      <div class="item-text"><div class="item-fr">Anciens examens COPE avec correction — PDF</div><div class="item-ar">نماذج امتحانات مركز COPE مع عناصر الإجابة</div></div>
+    </div>
+    <div class="item green">
+      <div class="item-icon">✅</div>
+      <div class="item-text"><div class="item-fr">QCM corrigés — Didactique & Sciences éducation</div><div class="item-ar">QCM مع التصحيح — ديداكتيك وعلوم التربية</div></div>
+    </div>
+    <div class="item">
+      <div class="item-icon">🧠</div>
+      <div class="item-text"><div class="item-fr">Psychologie du développement — Résumés PDF</div><div class="item-ar">سيكولوجية المراهق والطفل — ملخصات PDF</div></div>
+    </div>
+    <div class="item gold">
+      <div class="item-icon">📊</div>
+      <div class="item-text"><div class="item-fr">Mises à jour Éducation Nationale — MEN 2026</div><div class="item-ar">مستجدات التربية والتكوين — وزارة التربية الوطنية</div></div>
+    </div>
+  </div>
+  <div class="bio-note">🔗 Lien complet en bio — الرابط في البيو</div>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide cta-slide">
+  <div class="top-stripe"></div>
+  <div class="center">
+    <div class="logo-wrap"><img src="public/images/prof_eps.png" alt="ProfEPS"></div>
+    <div class="divider"></div>
+    <div class="msg-ar">شارك مع كل من يستعد لمباراة COPE 🎯</div>
+    <div class="msg-fr">Partage avec tous tes amis qui préparent le concours d'orientation !</div>
+    <div class="bio-box">
+      <div class="bio-line1">🔗 الرابط الكامل في البيو</div>
+      <div class="bio-line2">profeps.ma</div>
+    </div>
+    <div class="share-text">أرسلها إلى زميلك — النجاح مشترك 👇<span class="handle">@profeps.ma</span></div>
+  </div>
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     CAROUSEL 5 — Préparer le concours – التفتيش التربوي (Primaire)
+══════════════════════════════════════════════════════════ -->
+<div class="carousel-section">
+<div class="carousel-label">Carousel 5 — Préparer le concours – التفتيش التربوي (Primaire)</div>
+
+<!-- Slide 1 -->
+<div class="slide cover">
+  <div class="top-stripe"></div>
+  <div class="logo-bar"><img src="public/images/prof_eps.png" alt="ProfEPS"><span>profeps.ma</span></div>
+  <div class="slide-num">1 / 3</div>
+  <div class="center">
+    <div class="cat-pill">🔍 CNIE — التفتيش التربوي</div>
+    <div class="main-title">Préparer le concours<br>— التفتيش التربوي (Primaire)</div>
+    <div class="divider"></div>
+    <div class="hook">
+      هل تحلم بأن تصبح مفتشاً تربوياً؟ هذا الدليل الشامل هو نقطة انطلاقك 🔍<br>التقنيات + الديداكتيك + التشريع — كل شيء في Drive واحد
+      <em>Pack CNIE complet — téléchargement gratuit — swipe →</em>
+    </div>
+  </div>
+  <div class="swipe-hint">SWIPE <div class="dots"><span class="d1"></span><span></span><span></span></div></div>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide features">
+  <div class="top-stripe"></div>
+  <div class="brand">profeps.ma</div>
+  <div class="f-header">
+    <div class="f-tag">📦 Pack CNIE — Google Drive Gratuit</div>
+    <div class="f-title">Tout pour réussir le concours<br>التفتيش التربوي Primaire</div>
+    <div class="f-title-ar">كل ما تحتاجه لاجتياز مباراة مفتش التعليم الابتدائي</div>
+  </div>
+  <div class="items">
+    <div class="item">
+      <div class="item-icon">📋</div>
+      <div class="item-text"><div class="item-fr">Anciens examens CNIE avec correction — PDF</div><div class="item-ar">نماذج امتحانات مفتش التعليم مع عناصر الإجابة</div></div>
+    </div>
+    <div class="item green">
+      <div class="item-icon">🔍</div>
+      <div class="item-text"><div class="item-fr">Techniques d'inspection pédagogique</div><div class="item-ar">تقنيات التفتيش التربوي ودليل المفتش PDF</div></div>
+    </div>
+    <div class="item">
+      <div class="item-icon">✅</div>
+      <div class="item-text"><div class="item-fr">QCM Didactique corrigés — Cycle Primaire</div><div class="item-ar">QCM ديداكتيك السلك الابتدائي مع التصحيح</div></div>
+    </div>
+    <div class="item gold">
+      <div class="item-icon">⚖️</div>
+      <div class="item-text"><div class="item-fr">Législation scolaire & Cadre de référence</div><div class="item-ar">التشريع التربوي والإطار المرجعي للمباراة</div></div>
+    </div>
+  </div>
+  <div class="bio-note">🔗 Lien complet en bio — الرابط في البيو</div>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide cta-slide">
+  <div class="top-stripe"></div>
+  <div class="center">
+    <div class="logo-wrap"><img src="public/images/prof_eps.png" alt="ProfEPS"></div>
+    <div class="divider"></div>
+    <div class="msg-ar">شارك مع كل أستاذ يحلم بأن يصبح مفتشاً تربوياً 🔍</div>
+    <div class="msg-fr">Partage avec tes collègues qui préparent le concours d'inspection !</div>
+    <div class="bio-box">
+      <div class="bio-line1">🔗 الرابط الكامل في البيو</div>
+      <div class="bio-line2">profeps.ma</div>
+    </div>
+    <div class="share-text">أرسلها إلى زميلك — الطريق أيسر حين نسير معاً 👇<span class="handle">@profeps.ma</span></div>
+  </div>
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     CAROUSEL 6 — دورة الاستعداد للامتحان المهني ومباراة ولوج المراكز الجهوية لأطر التدريس السلك الابتدائي
+══════════════════════════════════════════════════════════ -->
+<div class="carousel-section">
+<div class="carousel-label">Carousel 6 — CRMEF Primaire — الامتحان المهني</div>
+
+<!-- Slide 1 -->
+<div class="slide cover">
+  <div class="top-stripe"></div>
+  <div class="logo-bar"><img src="public/images/prof_eps.png" alt="ProfEPS"><span>profeps.ma</span></div>
+  <div class="slide-num">1 / 3</div>
+  <div class="center">
+    <div class="cat-pill">📚 CRMEF — السلك الابتدائي</div>
+    <div class="main-title ar" style="font-family:'Cairo',sans-serif;font-size:21px;direction:rtl">دورة الاستعداد للامتحان المهني<br>ومباراة ولوج المراكز الجهوية<br>لأطر التدريس السلك الابتدائي</div>
+    <div class="divider"></div>
+    <div class="hook">
+      الامتحان المهني للسلك الابتدائي — نماذج حقيقية في متناولك 📚<br>QCM + الديداكتيك + البرامج الرسمية مجاناً
+      <em>Pack complet CRMEF Primaire — swipe →</em>
+    </div>
+  </div>
+  <div class="swipe-hint">SWIPE <div class="dots"><span class="d1"></span><span></span><span></span></div></div>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide features">
+  <div class="top-stripe"></div>
+  <div class="brand">profeps.ma</div>
+  <div class="f-header">
+    <div class="f-tag">📦 Pack CRMEF Primaire — Google Drive Gratuit</div>
+    <div class="f-title">Tout pour l'Examen Professionnel<br>& l'Accès CRMEF Primaire</div>
+    <div class="f-title-ar">حزمة كاملة للامتحان المهني ومباراة ولوج CRMEF الابتدائي</div>
+  </div>
+  <div class="items">
+    <div class="item">
+      <div class="item-icon">📋</div>
+      <div class="item-text"><div class="item-fr">Anciens examens avec correction — PDF</div><div class="item-ar">نماذج امتحانات حقيقية مع عناصر الإجابة PDF</div></div>
+    </div>
+    <div class="item green">
+      <div class="item-icon">✅</div>
+      <div class="item-text"><div class="item-fr">QCM Didactique des matières — Primaire</div><div class="item-ar">QCM ديداكتيك المواد الابتدائية مع التصحيح</div></div>
+    </div>
+    <div class="item">
+      <div class="item-icon">📖</div>
+      <div class="item-text"><div class="item-fr">Sciences de l'éducation — Résumés complets</div><div class="item-ar">ملخصات شاملة في علوم التربية والتكوين</div></div>
+    </div>
+    <div class="item gold">
+      <div class="item-icon">📜</div>
+      <div class="item-text"><div class="item-fr">Programmes officiels & Mises à jour MEN</div><div class="item-ar">البرامج الرسمية ومستجدات نظام التربية والتكوين</div></div>
+    </div>
+  </div>
+  <div class="bio-note">🔗 Lien complet en bio — الرابط في البيو</div>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide cta-slide">
+  <div class="top-stripe"></div>
+  <div class="center">
+    <div class="logo-wrap"><img src="public/images/prof_eps.png" alt="ProfEPS"></div>
+    <div class="divider"></div>
+    <div class="msg-ar">شارك مع كل أستاذ يستعد للامتحان المهني 📢</div>
+    <div class="msg-fr">Partage avec tes collègues du primaire qui préparent leur examen !</div>
+    <div class="bio-box">
+      <div class="bio-line1">🔗 الرابط الكامل في البيو</div>
+      <div class="bio-line2">profeps.ma</div>
+    </div>
+    <div class="share-text">أرسلها إلى زميلك المعلم — هذه الحزمة ستوفر عليه الوقت 👇<span class="handle">@profeps.ma</span></div>
+  </div>
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     CAROUSEL 7 — Préparer le concours – الإدارة التربوية
+══════════════════════════════════════════════════════════ -->
+<div class="carousel-section">
+<div class="carousel-label">Carousel 7 — Préparer le concours – الإدارة التربوية</div>
+
+<!-- Slide 1 -->
+<div class="slide cover">
+  <div class="top-stripe"></div>
+  <div class="logo-bar"><img src="public/images/prof_eps.png" alt="ProfEPS"><span>profeps.ma</span></div>
+  <div class="slide-num">1 / 3</div>
+  <div class="center">
+    <div class="cat-pill">🏫 الإدارة التربوية — Direction</div>
+    <div class="main-title">Préparer le concours<br>— الإدارة التربوية</div>
+    <div class="divider"></div>
+    <div class="hook">
+      هل تطمح إلى أن تصبح مديراً للمؤسسة؟ طريقك يبدأ من هنا 🏫<br>نماذج + التشريع + التدبير الإداري — كل شيء مجاناً
+      <em>Pack Administration Pédagogique — swipe →</em>
+    </div>
+  </div>
+  <div class="swipe-hint">SWIPE <div class="dots"><span class="d1"></span><span></span><span></span></div></div>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide features">
+  <div class="top-stripe"></div>
+  <div class="brand">profeps.ma</div>
+  <div class="f-header">
+    <div class="f-tag">📦 Pack Administration — Google Drive Gratuit</div>
+    <div class="f-title">Tout pour réussir le concours<br>الإدارة التربوية</div>
+    <div class="f-title-ar">حزمة شاملة لمباراة الإدارة التربوية — تحميل مجاني</div>
+  </div>
+  <div class="items">
+    <div class="item">
+      <div class="item-icon">📋</div>
+      <div class="item-text"><div class="item-fr">Anciens examens avec correction — PDF</div><div class="item-ar">نماذج امتحانات الإدارة التربوية مع التصحيح PDF</div></div>
+    </div>
+    <div class="item green">
+      <div class="item-icon">⚖️</div>
+      <div class="item-text"><div class="item-fr">Législation scolaire — Droits & Devoirs</div><div class="item-ar">التشريع التربوي — الحقوق والواجبات والنصوص الرسمية</div></div>
+    </div>
+    <div class="item">
+      <div class="item-icon">🏛️</div>
+      <div class="item-text"><div class="item-fr">Gestion administrative & Projet d'établissement</div><div class="item-ar">التدبير الإداري والمشروع التربوي للمؤسسة</div></div>
+    </div>
+    <div class="item gold">
+      <div class="item-icon">✅</div>
+      <div class="item-text"><div class="item-fr">QCM corrigés + Modules CRMEF Administration</div><div class="item-ar">QCM مع التصحيح + مجزوءات الإدارة التربوية</div></div>
+    </div>
+  </div>
+  <div class="bio-note">🔗 Lien complet en bio — الرابط في البيو</div>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide cta-slide">
+  <div class="top-stripe"></div>
+  <div class="center">
+    <div class="logo-wrap"><img src="public/images/prof_eps.png" alt="ProfEPS"></div>
+    <div class="divider"></div>
+    <div class="msg-ar">شارك مع كل أستاذ يطمح إلى الإدارة التربوية 🏫</div>
+    <div class="msg-fr">Partage avec tes collègues qui préparent le concours de direction !</div>
+    <div class="bio-box">
+      <div class="bio-line1">🔗 الرابط الكامل في البيو</div>
+      <div class="bio-line2">profeps.ma</div>
+    </div>
+    <div class="share-text">أرسلها إلى زميلك — المدير الذي سيكون ممتناً لك 👇<span class="handle">@profeps.ma</span></div>
+  </div>
+</div>
+</div>
+
+</body>
+</html>

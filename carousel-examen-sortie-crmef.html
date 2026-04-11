@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carousel Instagram — Examen de Sortie CRMEF EPS</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #111;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 40px 20px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .instructions {
+    color: #aaa;
+    font-size: 14px;
+    text-align: center;
+    max-width: 600px;
+    line-height: 1.6;
+  }
+  .instructions strong { color: white; }
+
+  /* Each slide is 1080x1080 - displayed at 540x540 (50%) */
+  .slide-wrapper {
+    position: relative;
+  }
+  .slide-label {
+    color: #666;
+    font-size: 12px;
+    margin-bottom: 6px;
+    text-align: center;
+  }
+
+  .slide {
+    width: 540px;
+    height: 540px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    /* This represents 1080x1080 at 50% zoom */
+  }
+
+  /* ═══════════════════════════════════════════
+     SLIDE 1 — COVER
+  ═══════════════════════════════════════════ */
+  .s1 {
+    background: linear-gradient(145deg, #0f1923 0%, #1a2d3a 50%, #0d1e28 100%);
+  }
+  .s1 .accent-line {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #c1272d, #006233);
+  }
+  .s1 .badge {
+    position: absolute;
+    top: 40px; left: 40px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .s1 .badge img {
+    height: 36px;
+    filter: brightness(0) invert(1);
+  }
+  .s1 .badge-text {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .s1 .slide-num {
+    position: absolute;
+    top: 40px; right: 40px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+    font-weight: 600;
+  }
+  .s1 .main-content {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 85%;
+  }
+  .s1 .tag {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(193,39,45,0.2), rgba(0,98,51,0.2));
+    border: 1px solid rgba(193,39,45,0.4);
+    color: #e88;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 18px;
+    border-radius: 99px;
+    margin-bottom: 22px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .s1 .arabic-title {
+    font-family: 'Cairo', sans-serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    direction: rtl;
+  }
+  .s1 .fr-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 28px;
+    letter-spacing: 0.03em;
+  }
+  .s1 .divider {
+    width: 60px; height: 3px;
+    background: linear-gradient(90deg, #c1272d, #006233);
+    margin: 0 auto 24px;
+    border-radius: 2px;
+  }
+  .s1 .subtitle {
+    font-family: 'Cairo', sans-serif;
+    font-size: 17px;
+    color: rgba(255,255,255,0.65);
+    direction: rtl;
+    line-height: 1.7;
+  }
+  .s1 .swipe {
+    position: absolute;
+    bottom: 36px;
+    left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.35);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .s1 .swipe-dots { display: flex; gap: 5px; }
+  .s1 .swipe-dots span {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+  }
+  .s1 .swipe-dots span.active { background: #c1272d; width: 16px; border-radius: 3px; }
+
+  /* ═══════════════════════════════════════════
+     SHARED CARD STYLES
+  ═══════════════════════════════════════════ */
+  .card-base {
+    background: #f8f9fa;
+  }
+  .card-header {
+    height: 160px;
+    display: flex;
+    align-items: flex-end;
+    padding: 24px 36px;
+    position: relative;
+  }
+  .card-header-red { background: linear-gradient(135deg, #c1272d 0%, #8b1a1e 100%); }
+  .card-header-green { background: linear-gradient(135deg, #006233 0%, #004a26 100%); }
+  .card-header-dark { background: linear-gradient(135deg, #1a2d3a 0%, #0d1e28 100%); }
+  .card-header-gold { background: linear-gradient(135deg, #92400e 0%, #d97706 100%); }
+
+  .card-num {
+    font-size: 80px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.1);
+    position: absolute;
+    top: 10px; right: 24px;
+    line-height: 1;
+  }
+  .card-header-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: white;
+    line-height: 1.25;
+    max-width: 80%;
+  }
+  .card-header-ar {
+    font-family: 'Cairo', sans-serif;
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    margin-top: 4px;
+    direction: rtl;
+    text-align: right;
+  }
+  .card-body {
+    padding: 28px 36px;
+  }
+  .card-footer-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #c1272d, #006233);
+  }
+  .card-brand {
+    position: absolute;
+    bottom: 18px; right: 28px;
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(0,0,0,0.2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .card-brand-white {
+    position: absolute;
+    bottom: 18px; right: 28px;
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .slide-indicator {
+    position: absolute;
+    top: 20px; right: 28px;
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.05em;
+  }
+
+  /* ═══════════════════════════════════════════
+     SLIDE 2 — DEFINITION
+  ═══════════════════════════════════════════ */
+  .s2 { background: #f8f9fa; position: relative; }
+  .s2 .top-bar {
+    height: 6px;
+    background: linear-gradient(90deg, #c1272d, #006233);
+  }
+  .s2 .content {
+    padding: 36px 40px;
+  }
+  .s2 .question {
+    font-family: 'Cairo', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #1a1a2e;
+    direction: rtl;
+    text-align: right;
+    margin-bottom: 6px;
+  }
+  .s2 .question-fr {
+    font-size: 14px;
+    font-weight: 600;
+    color: #c1272d;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .s2 .answer-box {
+    background: white;
+    border-left: 4px solid #c1272d;
+    border-radius: 0 10px 10px 0;
+    padding: 18px 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .s2 .answer-ar {
+    font-family: 'Cairo', sans-serif;
+    font-size: 16px;
+    color: #1a1a2e;
+    direction: rtl;
+    text-align: right;
+    line-height: 1.7;
+    font-weight: 700;
+  }
+  .s2 .answer-fr {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+    margin-top: 8px;
+  }
+  .s2 .stats-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .s2 .stat {
+    flex: 1;
+    background: white;
+    border-radius: 12px;
+    padding: 14px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-top: 3px solid #c1272d;
+  }
+  .s2 .stat-num {
+    font-size: 28px;
+    font-weight: 900;
+    color: #c1272d;
+    line-height: 1;
+  }
+  .s2 .stat-label {
+    font-size: 11px;
+    color: #666;
+    margin-top: 4px;
+    font-weight: 600;
+  }
+  .s2 .stat-ar {
+    font-family: 'Cairo', sans-serif;
+    font-size: 12px;
+    color: #999;
+    direction: rtl;
+  }
+
+  /* ═══════════════════════════════════════════
+     SLIDE 3 — 4 ÉPREUVES
+  ═══════════════════════════════════════════ */
+  .s3 { background: #1a2d3a; position: relative; }
+  .s3 .top-bar {
+    height: 5px;
+    background: linear-gradient(90deg, #c1272d, #006233);
+  }
+  .s3 .title-area {
+    padding: 28px 36px 20px;
+  }
+  .s3 .title-ar {
+    font-family: 'Cairo', sans-serif;
+    font-size: 26px;
+    font-weight: 900;
+    color: white;
+    direction: rtl;
+    text-align: right;
+  }
+  .s3 .title-fr {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 2px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+  .s3 .steps {
+    padding: 0 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .s3 .step {
+    background: rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: all 0.2s;
+  }
+  .s3 .step-num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c1272d, #8b1a1e);
+    color: white;
+    font-weight: 900;
+    font-size: 15px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .s3 .step-text { flex: 1; }
+  .s3 .step-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+  }
+  .s3 .step-ar {
+    font-family: 'Cairo', sans-serif;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    direction: rtl;
+    text-align: right;
+    margin-top: 2px;
+  }
+
+  /* ═══════════════════════════════════════════
+     SLIDE 4 — MSP
+  ═══════════════════════════════════════════ */
+  .s4 { background: white; position: relative; }
+  .s4 .header {
+    background: linear-gradient(135deg, #c1272d 0%, #8b1a1e 100%);
+    padding: 30px 36px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .s4 .header::before {
+    content: 'MSP';
+    position: absolute;
+    right: 20px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 72px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.08);
+    letter-spacing: -2px;
+  }
+  .s4 .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.9);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 99px;
+    margin-bottom: 10px;
+    letter-spacing: 0.08em;
+  }
+  .s4 .header-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: white;
+    line-height: 1.2;
+  }
+  .s4 .header-ar {
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    direction: rtl;
+    text-align: right;
+    margin-top: 4px;
+  }
+  .s4 .criteria {
+    padding: 20px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .s4 .crit {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border-left: 3px solid #c1272d;
+  }
+  .s4 .crit-icon {
+    width: 28px; height: 28px;
+    background: rgba(193,39,45,0.1);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .s4 .crit-text { flex: 1; }
+  .s4 .crit-fr {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a2e;
+  }
+  .s4 .crit-ar {
+    font-family: 'Cairo', sans-serif;
+    font-size: 11px;
+    color: #999;
+    direction: rtl;
+    text-align: right;
+    margin-top: 1px;
+  }
+
+  /* ═══════════════════════════════════════════
+     SLIDE 5 — CONSEIL FICHE
+  ═══════════════════════════════════════════ */
+  .s5 { background: #f0faf4; position: relative; }
+  .s5 .accent {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #006233, #00a855);
+  }
+  .s5 .conseil-num {
+    position: absolute;
+    top: 28px; left: 36px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .s5 .num-badge {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: #006233;
+    color: white;
+    font-weight: 900;
+    font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .s5 .num-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #006233;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .s5 .main {
+    padding: 100px 36px 28px;
+  }
+  .s5 .tip-ar {
+    font-family: 'Cairo', sans-serif;
+    font-size: 30px;
+    font-weight: 900;
+    color: #1a1a2e;
+    direction: rtl;
+    text-align: right;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .s5 .tip-fr {
+    font-size: 16px;
+    font-weight: 700;
+    color: #006233;
+    margin-bottom: 24px;
+  }
+  .s5 .tip-body {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0,98,51,0.1);
+    margin-bottom: 16px;
+  }
+  .s5 .tip-body-ar {
+    font-family: 'Cairo', sans-serif;
+    font-size: 15px;
+    color: #333;
+    direction: rtl;
+    text-align: right;
+    line-height: 1.8;
+  }
+  .s5 .tip-body-fr {
+    font-size: 13px;
+    color: #888;
+    line-height: 1.6;
+    margin-top: 8px;
+  }
+  .s5 .cta-mini {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #006233;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 8px 16px;
+    border-radius: 99px;
+  }
+
+  /* ═══════════════════════════════════════════
+     SLIDE 6 — CONSEIL OP
+  ═══════════════════════════════════════════ */
+  .s6 { background: #1a1a2e; position: relative; }
+  .s6 .accent {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #c1272d, #006233);
+  }
+  .s6 .conseil-num {
+    position: absolute;
+    top: 28px; left: 36px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .s6 .num-badge {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c1272d, #8b1a1e);
+    color: white;
+    font-weight: 900;
+    font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .s6 .num-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .s6 .main {
+    padding: 100px 36px 28px;
+  }
+  .s6 .tip-ar {
+    font-family: 'Cairo', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: white;
+    direction: rtl;
+    text-align: right;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .s6 .tip-fr {
+    font-size: 15px;
+    font-weight: 700;
+    color: #c1272d;
+    margin-bottom: 22px;
+  }
+  .s6 .op-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+    justify-content: flex-end;
+    direction: rtl;
+  }
+  .s6 .pill {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: white;
+    font-family: 'Cairo', sans-serif;
+    font-size: 12px;
+    padding: 6px 14px;
+    border-radius: 99px;
+    font-weight: 600;
+  }
+  .s6 .pill-red { border-color: rgba(193,39,45,0.5); color: #e88; }
+  .s6 .quote {
+    background: rgba(193,39,45,0.1);
+    border-left: 3px solid #c1272d;
+    border-radius: 0 10px 10px 0;
+    padding: 16px 18px;
+    margin-bottom: 18px;
+  }
+  .s6 .quote-text {
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    direction: rtl;
+    text-align: right;
+    line-height: 1.8;
+  }
+  .s6 .quote-fr {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  /* ═══════════════════════════════════════════
+     SLIDE 7 — RAPPORT DE STAGE
+  ═══════════════════════════════════════════ */
+  .s7 { background: white; position: relative; }
+  .s7 .header {
+    background: linear-gradient(135deg, #006233 0%, #004a26 100%);
+    padding: 28px 36px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .s7 .header::before {
+    content: '📄';
+    position: absolute;
+    right: 24px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 60px;
+    opacity: 0.15;
+  }
+  .s7 .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.9);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 99px;
+    margin-bottom: 8px;
+    letter-spacing: 0.08em;
+  }
+  .s7 .header-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: white;
+  }
+  .s7 .header-ar {
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    direction: rtl;
+    text-align: right;
+    margin-top: 4px;
+  }
+  .s7 .plan {
+    padding: 22px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .s7 .plan-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #f0f0f0;
+    background: #fafafa;
+  }
+  .s7 .plan-bullet {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #006233, #004a26);
+    color: white;
+    font-size: 10px;
+    font-weight: 900;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .s7 .plan-fr {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a2e;
+  }
+  .s7 .plan-ar {
+    font-family: 'Cairo', sans-serif;
+    font-size: 11px;
+    color: #999;
+    direction: rtl;
+    text-align: right;
+    margin-top: 1px;
+  }
+
+  /* ═══════════════════════════════════════════
+     SLIDE 8 — QUESTIONS JURY
+  ═══════════════════════════════════════════ */
+  .s8 { background: #fff8f8; position: relative; }
+  .s8 .top-bar { height: 5px; background: linear-gradient(90deg, #c1272d, #8b1a1e); }
+  .s8 .title-zone {
+    padding: 24px 36px 16px;
+  }
+  .s8 .title-ar {
+    font-family: 'Cairo', sans-serif;
+    font-size: 24px;
+    font-weight: 900;
+    color: #1a1a2e;
+    direction: rtl;
+    text-align: right;
+  }
+  .s8 .title-fr {
+    font-size: 12px;
+    font-weight: 700;
+    color: #c1272d;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 2px;
+  }
+  .s8 .questions {
+    padding: 0 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .s8 .q {
+    background: white;
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    box-shadow: 0 2px 8px rgba(193,39,45,0.07);
+    border-left: 3px solid #c1272d;
+  }
+  .s8 .q-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .s8 .q-text { flex: 1; }
+  .s8 .q-ar {
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a2e;
+    direction: rtl;
+    text-align: right;
+    line-height: 1.5;
+  }
+  .s8 .q-fr {
+    font-size: 11px;
+    color: #999;
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+
+  /* ═══════════════════════════════════════════
+     SLIDE 9 — CONSEIL SÉCURITÉ
+  ═══════════════════════════════════════════ */
+  .s9 { background: #fffbf0; position: relative; }
+  .s9 .accent {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #d97706, #f59e0b);
+  }
+  .s9 .warning-zone {
+    background: linear-gradient(135deg, #92400e, #d97706);
+    padding: 26px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .s9 .warning-zone::after {
+    content: '⚠️';
+    position: absolute;
+    right: 20px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 56px;
+    opacity: 0.2;
+  }
+  .s9 .warning-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 99px;
+    margin-bottom: 8px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .s9 .warning-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: white;
+  }
+  .s9 .warning-ar {
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    direction: rtl;
+    text-align: right;
+    margin-top: 4px;
+  }
+  .s9 .body {
+    padding: 22px 36px;
+  }
+  .s9 .warn-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .s9 .warn-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .s9 .warn-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #d97706;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .s9 .warn-text-ar {
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a2e;
+    direction: rtl;
+    text-align: right;
+    line-height: 1.6;
+  }
+  .s9 .warn-text-fr {
+    font-size: 12px;
+    color: #888;
+    margin-top: 2px;
+  }
+  .s9 .elim-tag {
+    display: inline-block;
+    background: #fee2e2;
+    color: #c1272d;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* ═══════════════════════════════════════════
+     SLIDE 10 — CTA FINAL
+  ═══════════════════════════════════════════ */
+  .s10 {
+    background: linear-gradient(145deg, #0f1923 0%, #1a2d3a 60%, #0d1e28 100%);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .s10 .accent-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #c1272d, #006233);
+  }
+  .s10 .content {
+    text-align: center;
+    padding: 0 50px;
+  }
+  .s10 .flag-emoji {
+    font-size: 40px;
+    margin-bottom: 16px;
+  }
+  .s10 .main-ar {
+    font-family: 'Cairo', sans-serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: white;
+    direction: rtl;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .s10 .sub-ar {
+    font-family: 'Cairo', sans-serif;
+    font-size: 16px;
+    color: rgba(255,255,255,0.55);
+    direction: rtl;
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+  .s10 .divider-line {
+    width: 50px; height: 2px;
+    background: linear-gradient(90deg, #c1272d, #006233);
+    margin: 0 auto 24px;
+    border-radius: 2px;
+  }
+  .s10 .cta-box {
+    background: linear-gradient(135deg, #c1272d, #006233);
+    border-radius: 16px;
+    padding: 18px 30px;
+    margin-bottom: 22px;
+  }
+  .s10 .cta-url {
+    font-size: 18px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 0.03em;
+  }
+  .s10 .cta-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    margin-top: 4px;
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+  }
+  .s10 .follow-text {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.05em;
+  }
+  .s10 .follow-handle {
+    color: #c1272d;
+    font-weight: 700;
+  }
+  .s10 .bottom-logo {
+    position: absolute;
+    bottom: 24px;
+    left: 50%; transform: translateX(-50%);
+    height: 32px;
+    filter: brightness(0) invert(0.3);
+  }
+
+</style>
+</head>
+<body>
+
+<div class="instructions">
+  <strong>Carousel Instagram — Examen de Sortie CRMEF EPS</strong><br>
+  10 slides · 1080×1080px (affichées à 50%)<br><br>
+  Pour exporter : clic droit sur chaque slide → "Inspecter" → Capture du nœud (.slide) dans DevTools<br>
+  Ou faites un screenshot de chaque slide directement à l'écran.
+</div>
+
+<!-- ═══════ SLIDE 1 — COVER ═══════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">Slide 1 / 10 — Cover</div>
+  <div class="slide s1">
+    <div class="accent-line"></div>
+    <div class="badge">
+      <img src="public/images/prof_eps.png" alt="ProfEPS">
+      <span class="badge-text">profeps.ma</span>
+    </div>
+    <div class="slide-num">1 / 10</div>
+    <div class="main-content">
+      <div class="tag">🎓 Carrière & Formation</div>
+      <div class="arabic-title">امتحان الخروج من CRMEF<br>تخصص التربية البدنية</div>
+      <div class="fr-title">Examen de Sortie CRMEF — Spécialité EPS</div>
+      <div class="divider"></div>
+      <div class="subtitle">كل شي خاصك تعرفه باش تنجح 🏆<br><span style="font-size:14px; color: rgba(255,255,255,0.4);">Tout ce qu'il faut savoir pour réussir</span></div>
+    </div>
+    <div class="swipe">
+      SWIPE
+      <div class="swipe-dots">
+        <span class="active"></span>
+        <span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ SLIDE 2 — DÉFINITION ═══════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">Slide 2 / 10 — Définition</div>
+  <div class="slide s2">
+    <div class="top-bar"></div>
+    <div class="content">
+      <div class="question">شنو هو امتحان الخروج؟ 🤔</div>
+      <div class="question-fr">C'est quoi exactement ?</div>
+      <div class="answer-box">
+        <div class="answer-ar">هو الامتحان النهائي لي كيأخذ فيه الأستاذ المتدرب شهادة التخرج من المركز الجهوي — تخصص التربية البدنية</div>
+        <div class="answer-fr">L'examen final qui certifie l'aptitude professionnelle du stagiaire EPS et conditionne son intégration définitive dans le corps enseignant.</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Épreuves</div>
+          <div class="stat-ar">مراحل</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" style="color:#006233;">1</div>
+          <div class="stat-label">Année de stage</div>
+          <div class="stat-ar">سنة تدريب</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" style="font-size:20px;">🎯</div>
+          <div class="stat-label">Intégration</div>
+          <div class="stat-ar">التثبيت</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-brand">profeps.ma</div>
+  </div>
+</div>
+
+<!-- ═══════ SLIDE 3 — 4 ÉPREUVES ═══════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">Slide 3 / 10 — Les 4 épreuves</div>
+  <div class="slide s3">
+    <div class="top-bar"></div>
+    <div class="title-area">
+      <div class="title-ar">امتحان الخروج فيه 4 مراحل 📋</div>
+      <div class="title-fr">L'examen de sortie en 4 épreuves</div>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <div class="step-title">✍️ Épreuve Écrite — Didactique & Pédagogie</div>
+          <div class="step-ar">امتحان كتابي في الديداكتيك وعلوم التربية</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <div class="step-title">🏃 MSP — Mise en Situation Professionnelle</div>
+          <div class="step-ar">حصة عملية قدام لجنة التحكيم والمفتش</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <div class="step-title">📄 Rapport de Stage / Mémoire Professionnel</div>
+          <div class="step-ar">تقرير التدريب الميداني أو بحث التدخل التربوي</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text">
+          <div class="step-title">🗣️ Soutenance Orale devant le Jury</div>
+          <div class="step-ar">المناقشة الشفهية أمام لجنة التحكيم</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-brand-white">profeps.ma</div>
+  </div>
+</div>
+
+<!-- ═══════ SLIDE 4 — MSP ═══════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">Slide 4 / 10 — La MSP</div>
+  <div class="slide s4">
+    <div class="header card-header-red">
+      <div>
+        <div class="header-badge">⭐ ÉPREUVE CLÉ</div>
+        <div class="header-title">La MSP — La plus importante<br>des 4 épreuves !</div>
+        <div class="header-ar">المرحلة لي كتخوف الزاف... راها مهمة بزاف 😅</div>
+      </div>
+      <div class="slide-indicator">4/10</div>
+    </div>
+    <div class="criteria">
+      <div class="crit">
+        <div class="crit-icon">📝</div>
+        <div class="crit-text">
+          <div class="crit-fr">Qualité de la fiche de séance</div>
+          <div class="crit-ar">جودة الجذاذة — واضحة ومفصلة ومرتبة</div>
+        </div>
+      </div>
+      <div class="crit">
+        <div class="crit-icon">👀</div>
+        <div class="crit-text">
+          <div class="crit-fr">Observation et régulation des élèves</div>
+          <div class="crit-ar">كتشوف المتعلمين وكتدخل باش تصحح</div>
+        </div>
+      </div>
+      <div class="crit">
+        <div class="crit-icon">⏱️</div>
+        <div class="crit-text">
+          <div class="crit-fr">Gestion du temps et de l'espace</div>
+          <div class="crit-ar">تنظيم الوقت والفضاء — لا تطول ولا تقصر</div>
+        </div>
+      </div>
+      <div class="crit">
+        <div class="crit-icon">🛡️</div>
+        <div class="crit-text">
+          <div class="crit-fr">Sécurité active & passive (CRITIQUE !)</div>
+          <div class="crit-ar">الأمن والسلامة — معيار إقصائي ⛔</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-brand">profeps.ma</div>
+  </div>
+</div>
+
+<!-- ═══════ SLIDE 5 — CONSEIL FICHE ═══════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">Slide 5 / 10 — Conseil : la fiche de séance</div>
+  <div class="slide s5">
+    <div class="accent"></div>
+    <div class="conseil-num">
+      <div class="num-badge">1</div>
+      <div class="num-label">Conseil #1</div>
+    </div>
+    <div class="main">
+      <div class="tip-ar">الجذاذة ديالك لازم تكون perfect 💯</div>
+      <div class="tip-fr">Ta fiche de séance doit être irréprochable</div>
+      <div class="tip-body">
+        <div class="tip-body-ar">اللجنة كتبدا بالجذاذة قبل ما تشوف الحصة. إلا كانت مرتبة ومكتوبة مزيان، كتعطي انطباع بداوي إيجابي. استخدم التوجيهات البيداغوجية 2007-2009 كمرجع أساسي.</div>
+        <div class="tip-body-fr">Le jury évalue d'abord votre fiche avant même de voir la séance. Une fiche structurée et conforme aux OP 2007-2009 donne une première impression positive.</div>
+      </div>
+      <div class="cta-mini">
+        ✨ Génère ta fiche sur profeps.ma →
+      </div>
+    </div>
+    <div class="card-brand" style="color: rgba(0,98,51,0.3);">profeps.ma</div>
+  </div>
+</div>
+
+<!-- ═══════ SLIDE 6 — CONSEIL OP ═══════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">Slide 6 / 10 — Conseil : les OP</div>
+  <div class="slide s6">
+    <div class="accent"></div>
+    <div class="conseil-num">
+      <div class="num-badge">2</div>
+      <div class="num-label">Conseil #2</div>
+    </div>
+    <div class="main">
+      <div class="tip-ar">التوجيهات البيداغوجية — مرجعك الأساسي 📖</div>
+      <div class="tip-fr">Les OP 2007-2009 : ton arme secrète</div>
+      <div class="op-pills">
+        <span class="pill">OTI 🎯</span>
+        <span class="pill">OTC</span>
+        <span class="pill pill-red">OP 2007</span>
+        <span class="pill pill-red">OP 2009</span>
+        <span class="pill">Compétences</span>
+      </div>
+      <div class="quote">
+        <div class="quote-text">كل ما قلت شي في الشفهي، ربطو بالتوجيهات البيداغوجية. اللجنة كتبحث على هاد الشي بالضبط. قول "حسب التوجيهات البيداغوجية 2007-2009..."</div>
+        <div class="quote-fr">Citez systématiquement les OP lors de l'oral. C'est le signal que vous êtes un enseignant professionnel.</div>
+      </div>
+    </div>
+    <div class="card-brand-white">profeps.ma</div>
+  </div>
+</div>
+
+<!-- ═══════ SLIDE 7 — RAPPORT DE STAGE ═══════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">Slide 7 / 10 — Rapport de stage</div>
+  <div class="slide s7">
+    <div class="header card-header-green">
+      <div>
+        <div class="header-badge">📄 MÉMOIRE PROFESSIONNEL</div>
+        <div class="header-title">Plan type du Rapport de Stage</div>
+        <div class="header-ar">كيفاش تكتب تقرير التدريب ديالك ✍️</div>
+      </div>
+      <div class="slide-indicator" style="color: rgba(255,255,255,0.4);">7/10</div>
+    </div>
+    <div class="plan">
+      <div class="plan-item">
+        <div class="plan-bullet">1</div>
+        <div>
+          <div class="plan-fr">Introduction — Contexte & Problématique</div>
+          <div class="plan-ar">المقدمة — السياق والإشكالية</div>
+        </div>
+      </div>
+      <div class="plan-item">
+        <div class="plan-bullet">2</div>
+        <div>
+          <div class="plan-fr">Cadre théorique — OP + Théories d'apprentissage</div>
+          <div class="plan-ar">الإطار النظري — التوجيهات البيداغوجية ونظريات التعلم</div>
+        </div>
+      </div>
+      <div class="plan-item">
+        <div class="plan-bullet">3</div>
+        <div>
+          <div class="plan-fr">Description de la pratique — Cycle enseigné</div>
+          <div class="plan-ar">وصف الممارسة — الوحدة التعليمية المنجزة</div>
+        </div>
+      </div>
+      <div class="plan-item">
+        <div class="plan-bullet">4</div>
+        <div>
+          <div class="plan-fr">Analyse & Évaluation — Résultats & Régulations</div>
+          <div class="plan-ar">التحليل والتقييم — النتائج والتعديلات</div>
+        </div>
+      </div>
+      <div class="plan-item">
+        <div class="plan-bullet">5</div>
+        <div>
+          <div class="plan-fr">Conclusion — Bilan réflexif & Perspectives</div>
+          <div class="plan-ar">الخاتمة — التأمل المهني والآفاق</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-brand">profeps.ma</div>
+  </div>
+</div>
+
+<!-- ═══════ SLIDE 8 — QUESTIONS JURY ═══════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">Slide 8 / 10 — Questions du jury</div>
+  <div class="slide s8">
+    <div class="top-bar"></div>
+    <div class="title-zone">
+      <div class="title-ar">أسئلة كتكرر عند لجنة التحكيم 🎤</div>
+      <div class="title-fr">Questions fréquentes lors de la soutenance</div>
+    </div>
+    <div class="questions">
+      <div class="q">
+        <div class="q-icon">❓</div>
+        <div class="q-text">
+          <div class="q-ar">علاش خترتي هاد النشاط الرياضي للوحدة ديالك؟</div>
+          <div class="q-fr">Pourquoi avez-vous choisi cette APSA pour votre cycle ?</div>
+        </div>
+      </div>
+      <div class="q">
+        <div class="q-icon">❓</div>
+        <div class="q-text">
+          <div class="q-ar">شنو الفرق بين معيار الإنجاز ومعيار النجاح؟</div>
+          <div class="q-fr">Différence entre critère de réalisation et critère de réussite ?</div>
+        </div>
+      </div>
+      <div class="q">
+        <div class="q-icon">❓</div>
+        <div class="q-text">
+          <div class="q-ar">كيفاش دبرتي التمييز البيداغوجي مع المتعلمين؟</div>
+          <div class="q-fr">Comment avez-vous géré la différenciation pédagogique ?</div>
+        </div>
+      </div>
+      <div class="q">
+        <div class="q-icon">❓</div>
+        <div class="q-text">
+          <div class="q-ar">شنو هي الكفايات المستهدفة حسب OP 2007-2009؟</div>
+          <div class="q-fr">Quelles sont les compétences visées selon les OP ?</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-brand">profeps.ma</div>
+  </div>
+</div>
+
+<!-- ═══════ SLIDE 9 — SÉCURITÉ ═══════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">Slide 9 / 10 — La sécurité (critique)</div>
+  <div class="slide s9">
+    <div class="accent"></div>
+    <div class="warning-zone">
+      <div class="warning-badge">⛔ CRITÈRE ÉLIMINATOIRE</div>
+      <div class="warning-title">La Sécurité — Ne l'oublie JAMAIS !</div>
+      <div class="warning-ar">الأمن والسلامة — معيار إقصائي ما تنساهوش أبدا</div>
+    </div>
+    <div class="body">
+      <div class="warn-items">
+        <div class="warn-item">
+          <div class="warn-dot"></div>
+          <div>
+            <div class="warn-text-ar">تحقق من الأدوات والفضاء قبل بداية الحصة</div>
+            <div class="warn-text-fr">Vérifiez le matériel et l'espace avant la séance</div>
+          </div>
+        </div>
+        <div class="warn-item">
+          <div class="warn-dot"></div>
+          <div>
+            <div class="warn-text-ar">ذكّر المتعلمين بقواعد الأمن في كل وضعية</div>
+            <div class="warn-text-fr">Rappelez les règles de sécurité dans chaque situation</div>
+            <div class="elim-tag">Non-respect = Élimination</div>
+          </div>
+        </div>
+        <div class="warn-item">
+          <div class="warn-dot"></div>
+          <div>
+            <div class="warn-text-ar">اللجنة كتشوف هاد النقطة بالتدقيق — ما تتهاونش</div>
+            <div class="warn-text-fr">Le jury surveille ce point attentivement — soyez vigilant</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-brand" style="color: rgba(0,0,0,0.2);">profeps.ma</div>
+  </div>
+</div>
+
+<!-- ═══════ SLIDE 10 — CTA ═══════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">Slide 10 / 10 — CTA Final</div>
+  <div class="slide s10">
+    <div class="accent-top"></div>
+    <div class="content">
+      <div class="flag-emoji">🇲🇦</div>
+      <div class="main-ar">تحضر مزيان وتنجح 🏆</div>
+      <div class="sub-ar">الجذاذة المثالية كتبداوها على<br>profeps.ma — مجانية وكاملة</div>
+      <div class="divider-line"></div>
+      <div class="cta-box">
+        <div class="cta-url">profeps.ma</div>
+        <div class="cta-sub">جذاذات جاهزة + نماذج امتحانات مجانية</div>
+      </div>
+      <div class="follow-text">Suivez-nous <span class="follow-handle">@profeps.ma</span></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
