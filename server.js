@@ -16,18 +16,24 @@ const rootDir = process.env.VERCEL ? '/var/task' : __dirname;
 app.use(cors());
 app.use(express.json());
 
-// Redirection 301 : non-www → www
+// Redirection 301 fusionnée : non-www → www ET /index.html → /
+// Les deux cas sont combinés en un seul hop pour éviter les chaînes 301→301
+// qui dégradent le crawl budget et sont reportées en "Page avec redirection" dans GSC.
 app.use((req, res, next) => {
     const host = req.headers.host || '';
-    if (!host.startsWith('www.') && !host.includes('localhost') && !host.includes('vercel.app')) {
-        return res.redirect(301, `https://www.${host}${req.url}`);
+    const isLocal = host.includes('localhost') || host.includes('vercel.app');
+    if (isLocal) return next();
+
+    const needsWww = !host.startsWith('www.');
+    const needsIndexStrip = req.path === '/index.html';
+
+    if (needsWww || needsIndexStrip) {
+        const targetHost = needsWww ? `www.${host}` : host;
+        const targetPath = needsIndexStrip ? '/' : req.path;
+        const qs = req.url.slice(req.path.length);
+        return res.redirect(301, `https://${targetHost}${targetPath}${qs}`);
     }
     next();
-});
-
-// Redirection 301 : /index.html → /
-app.get('/index.html', (req, res) => {
-    res.redirect(301, '/');
 });
 
 // Servir les fichiers statiques du dossier public
