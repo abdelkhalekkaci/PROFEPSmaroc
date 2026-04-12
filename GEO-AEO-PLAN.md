@@ -46,13 +46,13 @@ Les LLM aspirent directement le JSON-LD comme source de vérité structurée. Le
 - [ ] **2.13** `HowTo` sur `article-seance-gymnastique.html`
 
 ### 2.C — BreadcrumbList
-- [ ] **2.14** `BreadcrumbList` sur tous les articles de blog (Accueil > Blog > Catégorie > Article)
+- [~] **2.14** `BreadcrumbList` sur tous les articles de blog (Accueil > Blog > Article) — 8 articles piliers ✓ (orientation, concours, op, bareme-bac, sport-etudes, examen-pro, examen-sortie-crmef, structure-seance) ; reste à propager au reste du blog
 
 ### 2.D — Organization / EducationalOrganization
-- [ ] **2.15** `Organization` schema complet sur `a-propos.html` (logo, sameAs, contactPoint)
-- [ ] **2.16** `EducationalOrganization` sur `index.html` (homepage)
-- [ ] **2.17** `sameAs` vers réseaux sociaux ProfEPS (Instagram, Facebook, YouTube, LinkedIn…)
-- [ ] **2.18** `WebSite` schema avec `SearchAction` (sitelinks searchbox) sur homepage
+- [x] **2.15** `Organization` / `EducationalOrganization` schema sur `a-propos.html` ✓ (logo, sameAs Facebook/Instagram/LinkedIn, contactPoint profepsma@gmail.com, AboutPage wrapper)
+- [x] **2.16** `EducationalOrganization` sur `index.html` ✓ (bloc séparé avec knowsAbout, areaServed Maroc, contactPoint)
+- [x] **2.17** `sameAs` vers réseaux sociaux ProfEPS ✓ (Facebook, Instagram, LinkedIn — YouTube non présent sur le site)
+- [x] **2.18** `WebSite` schema avec `SearchAction` ✓ (target blog.html?q=, inLanguage fr-MA)
 
 ### 2.E — Article schema — enrichissement
 - [ ] **2.19** Ajouter `speakable` property sur articles piliers (Google Assistant / voice)
@@ -298,3 +298,5 @@ Objectif : fournir aux LLM une réponse directe et extractible dans les 2-3 prem
 | 2026-04-12 | 6 | IndexNow configuré + 48 URLs soumises | Clé `90ce54bb…`, 202 Accepted, commit `01799f4` |
 | 2026-04-12 | 6 | Bing Webmaster Tools : domaine vérifié + sitemap soumis | Côté utilisateur |
 | 2026-04-12 | 2.A + 3 | Session 2 : FAQPage JSON-LD + blocs "En bref" sur 8 articles piliers | orientation, sport-etudes, examen-sortie-CRMEF, bareme-bac, op, structure-seance (FAQPage + En bref) ; concours, examen-pro (En bref only). Règle stricte : contenu verbatim uniquement, zéro invention. Fix bonus : description JSON-LD inversée collège/lycée sur article-op.html corrigée. |
+| 2026-04-12 | 2.D | Session 3 : Organization / EducationalOrganization schemas | index.html : WebSite enrichi (SearchAction, sameAs, inLanguage fr-MA) + bloc EducationalOrganization séparé avec `@id`, knowsAbout, areaServed, contactPoint. a-propos.html : AboutPage wrapper avec EducationalOrganization identique. sameAs = Facebook, Instagram, LinkedIn. |
+| 2026-04-12 | 2.C | Session 3 : BreadcrumbList JSON-LD sur 8 articles piliers | Accueil > Blog EPS > Article. 8 articles : orientation, concours, op, bareme-bac, sport-etudes, examen-pro, examen-sortie-crmef, structure-seance. Reste à propager au reste du blog. |
