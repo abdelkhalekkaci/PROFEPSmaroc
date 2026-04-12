@@ -28,14 +28,15 @@ Sans ça, tout le reste est invisible pour les LLM. À attaquer en premier.
 Les LLM aspirent directement le JSON-LD comme source de vérité structurée. Levier le plus rentable.
 
 ### 2.A — FAQPage schema
-- [ ] **2.1** `FAQPage` JSON-LD sur `article-orientation-prof-eps.html`
-- [ ] **2.2** `FAQPage` JSON-LD sur `article-sport-etudes-maroc.html`
-- [ ] **2.3** `FAQPage` JSON-LD sur `article-examen-sortie-crmef-eps.html`
-- [ ] **2.4** `FAQPage` JSON-LD sur `article-concours.html`
-- [ ] **2.5** `FAQPage` JSON-LD sur `article-bareme-eps-bac-maroc.html`
-- [ ] **2.6** `FAQPage` JSON-LD sur `article-op.html` (Orientations Pédagogiques)
+- [x] **2.1** `FAQPage` JSON-LD sur `article-orientation-prof-eps.html` ✓ (9 Q&A verbatim)
+- [x] **2.2** `FAQPage` JSON-LD sur `article-sport-etudes-maroc.html` ✓ (9 Q&A verbatim)
+- [x] **2.3** `FAQPage` JSON-LD sur `article-examen-sortie-crmef-eps.html` ✓ (6 Q&A verbatim)
+- [ ] **2.4** `FAQPage` JSON-LD sur `article-concours.html` — SKIP : pas de FAQ à extraire verbatim (article court)
+- [x] **2.5** `FAQPage` JSON-LD sur `article-bareme-eps-bac-maroc.html` ✓ (5 Q&A verbatim)
+- [x] **2.6** `FAQPage` JSON-LD sur `article-op.html` (Orientations Pédagogiques) ✓ (6 Q&A verbatim + fix description inversée collège/lycée)
 - [ ] **2.7** `FAQPage` JSON-LD sur `article-difference-op-2007-2009-eps.html`
 - [ ] **2.8** `FAQPage` JSON-LD sur `faq.html`
+- [x] **2.A.bonus** `FAQPage` JSON-LD sur `article-structure-seance.html` ✓ (5 Q&A verbatim — 4 phases + timing)
 
 ### 2.B — HowTo schema
 - [ ] **2.9** `HowTo` sur `article-structure-seance.html` (structurer une séance EPS)
@@ -62,17 +63,17 @@ Les LLM aspirent directement le JSON-LD comme source de vérité structurée. Le
 
 Les LLM préfèrent extraire les 2-3 premières phrases. Il faut y placer **la** réponse à la question titre.
 
-- [ ] **3.1** Créer un composant visuel `.answer-box` / `.tldr-box` standardisé (CSS commun)
-- [ ] **3.2** Bloc "En bref" sur `article-orientation-prof-eps.html`
-- [ ] **3.3** Bloc "En bref" sur `article-sport-etudes-maroc.html`
-- [ ] **3.4** Bloc "En bref" sur `article-examen-sortie-crmef-eps.html`
-- [ ] **3.5** Bloc "En bref" sur `article-concours.html`
-- [ ] **3.6** Bloc "En bref" sur `article-examen-pro.html`
-- [ ] **3.7** Bloc "En bref" sur `article-bareme-eps-bac-maroc.html`
-- [ ] **3.8** Bloc "En bref" sur `article-op.html`
+- [x] **3.1** Créer un composant visuel `.answer-box` / `.tldr-box` standardisé (CSS commun) ✓ (snippet canonique ci-dessous)
+- [x] **3.2** Bloc "En bref" sur `article-orientation-prof-eps.html` ✓
+- [x] **3.3** Bloc "En bref" sur `article-sport-etudes-maroc.html` ✓
+- [x] **3.4** Bloc "En bref" sur `article-examen-sortie-crmef-eps.html` ✓
+- [x] **3.5** Bloc "En bref" sur `article-concours.html` ✓
+- [x] **3.6** Bloc "En bref" sur `article-examen-pro.html` ✓
+- [x] **3.7** Bloc "En bref" sur `article-bareme-eps-bac-maroc.html` ✓
+- [x] **3.8** Bloc "En bref" sur `article-op.html` ✓
 - [ ] **3.9** Bloc "En bref" sur `article-eval.html`
 - [ ] **3.10** Bloc "En bref" sur `article-approche-competences.html`
-- [ ] **3.11** Bloc "En bref" sur `article-structure-seance.html`
+- [x] **3.11** Bloc "En bref" sur `article-structure-seance.html` ✓
 - [ ] **3.12** Audit H1 + H2 : chaque H2 doit être formulé comme une **question** quand c'est naturel
 
 ## PHASE 4 — Densité factuelle & citations
@@ -102,8 +103,8 @@ Perplexity = Bing. Copilot = Bing. Ne pas oublier Bing.
 
 - [x] **6.1** Créer compte **Bing Webmaster Tools** ✓
 - [x] **6.1b** Ajouter `<meta name="msvalidate.01">` sur la homepage ✓ (commit `a4a5308`)
-- [ ] **6.2** Soumettre `sitemap.xml` à Bing (dans l'interface Bing Webmaster Tools)
-- [ ] **6.3** Vérifier couverture Bing (Perplexity + Copilot dépendent de ça)
+- [x] **6.2** Soumettre `sitemap.xml` à Bing ✓ (2026-04-12)
+- [ ] **6.3** Vérifier couverture Bing dans 48-72h (Perplexity + Copilot dépendent de ça)
 - [x] **6.4** Configurer **IndexNow** ✓ (clé : `90ce54bb05e24a9b87d11903ac01fc8b`)
 - [x] **6.4a** Fichier de clé servi à la racine ✓ ([/90ce54bb05e24a9b87d11903ac01fc8b.txt](https://www.profeps.ma/90ce54bb05e24a9b87d11903ac01fc8b.txt))
 - [x] **6.4b** Script `scripts/indexnow-submit.js` créé et fonctionnel ✓
@@ -295,3 +296,5 @@ Objectif : fournir aux LLM une réponse directe et extractible dans les 2-3 prem
 | 2026-04-12 | 3 | Snippet `.answer-box` documenté | Source de vérité dans ce fichier |
 | 2026-04-12 | 6 | Bing `msvalidate.01` sur homepage | Commit `a4a5308` |
 | 2026-04-12 | 6 | IndexNow configuré + 48 URLs soumises | Clé `90ce54bb…`, 202 Accepted, commit `01799f4` |
+| 2026-04-12 | 6 | Bing Webmaster Tools : domaine vérifié + sitemap soumis | Côté utilisateur |
+| 2026-04-12 | 2.A + 3 | Session 2 : FAQPage JSON-LD + blocs "En bref" sur 8 articles piliers | orientation, sport-etudes, examen-sortie-CRMEF, bareme-bac, op, structure-seance (FAQPage + En bref) ; concours, examen-pro (En bref only). Règle stricte : contenu verbatim uniquement, zéro invention. Fix bonus : description JSON-LD inversée collège/lycée sur article-op.html corrigée. |
