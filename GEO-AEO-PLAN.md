@@ -100,10 +100,14 @@ Les LLM adorent les tableaux comparatifs et les listes.
 
 Perplexity = Bing. Copilot = Bing. Ne pas oublier Bing.
 
-- [ ] **6.1** Créer compte **Bing Webmaster Tools**
-- [ ] **6.2** Soumettre `sitemap.xml` à Bing
+- [x] **6.1** Créer compte **Bing Webmaster Tools** ✓
+- [x] **6.1b** Ajouter `<meta name="msvalidate.01">` sur la homepage ✓ (commit `a4a5308`)
+- [ ] **6.2** Soumettre `sitemap.xml` à Bing (dans l'interface Bing Webmaster Tools)
 - [ ] **6.3** Vérifier couverture Bing (Perplexity + Copilot dépendent de ça)
-- [ ] **6.4** Configurer **IndexNow** (publication instantanée chez Bing/Yandex)
+- [x] **6.4** Configurer **IndexNow** ✓ (clé : `90ce54bb05e24a9b87d11903ac01fc8b`)
+- [x] **6.4a** Fichier de clé servi à la racine ✓ ([/90ce54bb05e24a9b87d11903ac01fc8b.txt](https://www.profeps.ma/90ce54bb05e24a9b87d11903ac01fc8b.txt))
+- [x] **6.4b** Script `scripts/indexnow-submit.js` créé et fonctionnel ✓
+- [x] **6.4c** Premier batch soumis (48 URLs) — réponse `202 Accepted` ✓
 - [ ] **6.5** Google Search Console — surveiller "Google AI Overviews" quand dispo au Maroc
 - [ ] **6.6** Soumettre à **Yandex Webmaster** (certains LLM pullent Yandex)
 - [ ] **6.7** Soumettre flux RSS (si existe) aux agrégateurs
@@ -289,3 +293,5 @@ Objectif : fournir aux LLM une réponse directe et extractible dans les 2-3 prem
 | 2026-04-12 | 1 | `public/llms.txt` créé | Index Markdown de tous les articles (standard llmstxt.org) |
 | 2026-04-12 | 1 | `public/llms-full.txt` créé | Version étendue avec connaissances structurées (métier, voies, CRMEF, Sport-Études, OP, glossaire) |
 | 2026-04-12 | 3 | Snippet `.answer-box` documenté | Source de vérité dans ce fichier |
+| 2026-04-12 | 6 | Bing `msvalidate.01` sur homepage | Commit `a4a5308` |
+| 2026-04-12 | 6 | IndexNow configuré + 48 URLs soumises | Clé `90ce54bb…`, 202 Accepted, commit `01799f4` |
