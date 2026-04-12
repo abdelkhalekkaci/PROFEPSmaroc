@@ -1,14 +1,158 @@
-# robots.txt pour profeps.ma
-# Autoriser tous les robots à explorer le site
+# robots.txt — profeps.ma
+# Politique : site ouvert à l'indexation classique ET aux crawlers LLM (GEO/AEO)
 
+# ============================================================
+# 1. Règle par défaut — tous robots autorisés
+# ============================================================
 User-agent: *
 Allow: /
-
-# Sitemap
-Sitemap: https://www.profeps.ma/sitemap.xml
-
-# Interdire les répertoires sensibles (si existants)
 Disallow: /api/
 Disallow: /admin/
 Disallow: /*.json$
 Disallow: /login.html
+
+# ============================================================
+# 2. Crawlers LLM / IA génératives — autorisés explicitement
+# Raison : visibilité dans ChatGPT, Claude, Perplexity, Gemini,
+# Copilot, Apple Intelligence, etc.
+# ============================================================
+
+# OpenAI — ChatGPT training + browsing + search
+User-agent: GPTBot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login.html
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login.html
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login.html
+
+# Anthropic — Claude
+User-agent: ClaudeBot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login.html
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login.html
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login.html
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login.html
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login.html
+
+# Google — IA générative (distinct de Googlebot)
+# Contrôle l'inclusion dans Gemini et Google AI Overviews
+User-agent: Google-Extended
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login.html
+
+# Apple Intelligence
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login.html
+
+# Common Crawl — base d'entraînement de nombreux LLM open source
+User-agent: CCBot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login.html
+
+# ByteDance / Doubao
+User-agent: Bytespider
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login.html
+
+# Meta AI
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login.html
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login.html
+
+# DuckDuckGo AI
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login.html
+
+# You.com
+User-agent: YouBot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login.html
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login.html
+
+# Mistral
+User-agent: MistralAI-User
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login.html
+
+# Diffbot (utilisé par plusieurs LLM pour extraction structurée)
+User-agent: Diffbot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login.html
+
+# Timpi
+User-agent: Timpibot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login.html
+
+# ============================================================
+# 3. Sitemaps
+# ============================================================
+Sitemap: https://www.profeps.ma/sitemap.xml
