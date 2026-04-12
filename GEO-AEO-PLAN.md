@@ -34,8 +34,8 @@ Les LLM aspirent directement le JSON-LD comme source de vérité structurée. Le
 - [ ] **2.4** `FAQPage` JSON-LD sur `article-concours.html` — SKIP : pas de FAQ à extraire verbatim (article court)
 - [x] **2.5** `FAQPage` JSON-LD sur `article-bareme-eps-bac-maroc.html` ✓ (5 Q&A verbatim)
 - [x] **2.6** `FAQPage` JSON-LD sur `article-op.html` (Orientations Pédagogiques) ✓ (6 Q&A verbatim + fix description inversée collège/lycée)
-- [ ] **2.7** `FAQPage` JSON-LD sur `article-difference-op-2007-2009-eps.html`
-- [ ] **2.8** `FAQPage` JSON-LD sur `faq.html`
+- [x] **2.7** `FAQPage` JSON-LD sur `article-difference-op-2007-2009-eps.html` ✓ (7 Q&A verbatim : différence OP, OTI collège, OTI lycée, volume horaire, éval collège, éval lycée, nb APS)
+- [x] **2.8** `FAQPage` JSON-LD sur `faq.html` ✓ (remplace ancien bloc outdated — 7 Q&A alignés verbatim sur le contenu visible)
 - [x] **2.A.bonus** `FAQPage` JSON-LD sur `article-structure-seance.html` ✓ (5 Q&A verbatim — 4 phases + timing)
 
 ### 2.B — HowTo schema
@@ -46,7 +46,7 @@ Les LLM aspirent directement le JSON-LD comme source de vérité structurée. Le
 - [ ] **2.13** `HowTo` sur `article-seance-gymnastique.html`
 
 ### 2.C — BreadcrumbList
-- [~] **2.14** `BreadcrumbList` sur tous les articles de blog (Accueil > Blog > Article) — 8 articles piliers ✓ (orientation, concours, op, bareme-bac, sport-etudes, examen-pro, examen-sortie-crmef, structure-seance) ; reste à propager au reste du blog
+- [~] **2.14** `BreadcrumbList` sur tous les articles de blog (Accueil > Blog > Article) — 12 pages ✓ (8 piliers + article-difference-op-2007-2009-eps + faq.html + article-eval + article-approche-competences) ; reste à propager au reste du blog
 
 ### 2.D — Organization / EducationalOrganization
 - [x] **2.15** `Organization` / `EducationalOrganization` schema sur `a-propos.html` ✓ (logo, sameAs Facebook/Instagram/LinkedIn, contactPoint profepsma@gmail.com, AboutPage wrapper)
@@ -71,8 +71,8 @@ Les LLM préfèrent extraire les 2-3 premières phrases. Il faut y placer **la**
 - [x] **3.6** Bloc "En bref" sur `article-examen-pro.html` ✓
 - [x] **3.7** Bloc "En bref" sur `article-bareme-eps-bac-maroc.html` ✓
 - [x] **3.8** Bloc "En bref" sur `article-op.html` ✓
-- [ ] **3.9** Bloc "En bref" sur `article-eval.html`
-- [ ] **3.10** Bloc "En bref" sur `article-approche-competences.html`
+- [x] **3.9** Bloc "En bref" sur `article-eval.html` ✓ (3 types évaluation + 2 critères + outils + règle "juste, objective, progressive")
+- [x] **3.10** Bloc "En bref" sur `article-approche-competences.html` ✓ (définition compétence + 3 types + OTI/OTC)
 - [x] **3.11** Bloc "En bref" sur `article-structure-seance.html` ✓
 - [ ] **3.12** Audit H1 + H2 : chaque H2 doit être formulé comme une **question** quand c'est naturel
 
@@ -300,3 +300,4 @@ Objectif : fournir aux LLM une réponse directe et extractible dans les 2-3 prem
 | 2026-04-12 | 2.A + 3 | Session 2 : FAQPage JSON-LD + blocs "En bref" sur 8 articles piliers | orientation, sport-etudes, examen-sortie-CRMEF, bareme-bac, op, structure-seance (FAQPage + En bref) ; concours, examen-pro (En bref only). Règle stricte : contenu verbatim uniquement, zéro invention. Fix bonus : description JSON-LD inversée collège/lycée sur article-op.html corrigée. |
 | 2026-04-12 | 2.D | Session 3 : Organization / EducationalOrganization schemas | index.html : WebSite enrichi (SearchAction, sameAs, inLanguage fr-MA) + bloc EducationalOrganization séparé avec `@id`, knowsAbout, areaServed, contactPoint. a-propos.html : AboutPage wrapper avec EducationalOrganization identique. sameAs = Facebook, Instagram, LinkedIn. |
 | 2026-04-12 | 2.C | Session 3 : BreadcrumbList JSON-LD sur 8 articles piliers | Accueil > Blog EPS > Article. 8 articles : orientation, concours, op, bareme-bac, sport-etudes, examen-pro, examen-sortie-crmef, structure-seance. Reste à propager au reste du blog. |
+| 2026-04-12 | 2.A + 3 + 2.C | Session 4 : complétion Phase 2.A et Phase 3 + BreadcrumbList étendue | article-difference-op-2007-2009-eps : FAQPage (7 Q&A verbatim) + En bref + BreadcrumbList. faq.html : FAQPage réécrit (7 Q&A verbatim alignés sur contenu visible, au lieu des 2 Q&A outdated) + BreadcrumbList. article-eval : En bref (3 types + 2 critères) + BreadcrumbList. article-approche-competences : En bref (def compétence + 3 types + OTI/OTC) + BreadcrumbList. |
