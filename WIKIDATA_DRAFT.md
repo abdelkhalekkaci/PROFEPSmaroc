@@ -61,7 +61,7 @@ Il te faut un compte Wikidata (gratuit, autoconfirmed après quelques modifs min
 | `P407` (language of work or name) | `Q13955` (Arabic) | |
 | `P17` (country) | `Q1028` (Morocco) | |
 | `P2002` (X/Twitter username) | *(omettre — pas de compte)* | |
-| `P2013` (Facebook username) | `profile.php?id=61586684012757` | Complexe — tu peux mettre le username si tu en crées un plus tard |
+| `P2013` (Facebook username) | `profile.php?id=61559954402311` | Complexe — tu peux mettre le username si tu en crées un plus tard |
 | `P2003` (Instagram username) | `profeps.ma` | |
 | `P6634` (LinkedIn personal profile ID) | `eps-prof-maroc-814590190` | |
 | `P921` (main subject) | `Q8block` (Physical education) — vérifier l'ID exact | Ou `Q2057958` (physical education in school) |
@@ -80,7 +80,7 @@ Il te faut un compte Wikidata (gratuit, autoconfirmed après quelques modifs min
 
 À ajouter dans la section « Identifiers » de l'entité :
 
-- **Facebook Page ID** (`P4003`) : `61586684012757`
+- **Facebook Page ID** (`P4003`) : `61559954402311`
 - **Instagram username** (`P2003`) : `profeps.ma`
 - **LinkedIn personal profile ID** (`P6634`) : `eps-prof-maroc-814590190`
 
