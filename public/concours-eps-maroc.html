@@ -108,8 +108,51 @@
     }
     </script>
 
-    
-    <link rel="stylesheet" href="css/style.min.css">
+    <style>
+        :root { --primary: #c1272d; --secondary: #006233; --bg: #f8fafc; --text: #1a1a2e; --text-sec: #4a4a68; --border: #e5e7eb; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        a { color: var(--primary); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .navbar { position: sticky; top: 0; background: white; border-bottom: 1px solid var(--border); padding: 1rem 2rem; z-index: 100; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo img { height: 40px; }
+        .nav-menu { display: flex; gap: 1.5rem; }
+        .nav-link { color: var(--text); font-weight: 500; }
+        .nav-cta { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white !important; padding: 0.5rem 1.25rem; border-radius: 9999px; font-weight: 600; }
+        .hero { max-width: 960px; margin: 3rem auto 2rem; padding: 0 2rem; }
+        .breadcrumb { font-size: 0.875rem; color: var(--text-sec); margin-bottom: 1rem; }
+        .breadcrumb a { color: var(--text-sec); }
+        .badge { display: inline-block; background: rgba(193,39,45,0.08); color: var(--primary); padding: 0.375rem 0.875rem; border-radius: 9999px; font-size: 0.8125rem; font-weight: 600; margin-bottom: 1rem; }
+        h1 { font-size: 2.25rem; font-weight: 800; line-height: 1.25; margin-bottom: 0.75rem; }
+        .lede { font-size: 1.125rem; color: var(--text-sec); max-width: 760px; }
+        .content { max-width: 960px; margin: 0 auto 3rem; padding: 0 2rem; }
+        h2 { font-size: 1.5rem; font-weight: 700; margin: 2.5rem 0 1rem; }
+        h3 { font-size: 1.125rem; font-weight: 700; margin: 0 0 0.5rem; }
+        .intro { background: linear-gradient(135deg, rgba(193,39,45,0.05), rgba(0,98,51,0.05)); border-left: 4px solid var(--primary); padding: 1.5rem 2rem; border-radius: 12px; font-size: 1.0625rem; margin-bottom: 2rem; }
+        .intro p { margin-bottom: 0.5rem; }
+        .intro p:last-child { margin-bottom: 0; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin: 1.5rem 0; }
+        .card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: all 0.2s; display: flex; flex-direction: column; }
+        .card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.06); }
+        .card .tag { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--secondary); font-weight: 600; margin-bottom: 0.5rem; }
+        .card p { color: var(--text-sec); font-size: 0.9375rem; flex: 1; margin-bottom: 1rem; }
+        .card a.cta { color: var(--primary); font-weight: 600; font-size: 0.9375rem; }
+        .callout { background: rgba(0,98,51,0.06); border-left: 4px solid var(--secondary); padding: 1rem 1.25rem; border-radius: 8px; margin: 1.5rem 0; font-size: 0.9375rem; }
+        .faq-item { border-bottom: 1px solid var(--border); padding: 1rem 0; }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-item h3 { font-size: 1.0625rem; color: var(--text); margin-bottom: 0.5rem; }
+        .faq-item p { color: var(--text-sec); font-size: 0.9375rem; }
+        .footer { background: #1a1a2e; color: white; padding: 2.5rem 2rem 1.5rem; margin-top: 3rem; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; padding-bottom: 1.5rem; }
+        .footer-brand img { height: 40px; filter: brightness(0) invert(1); margin-bottom: 0.75rem; }
+        .footer-brand p { color: rgba(255,255,255,0.65); font-size: 0.875rem; }
+        .footer-col h4 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); margin-bottom: 0.75rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+        .footer-col a { color: rgba(255,255,255,0.7); font-size: 0.875rem; }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.35); font-size: 0.8125rem; text-align: center; }
+        @media (max-width: 640px) { h1 { font-size: 1.625rem; } .footer-inner { grid-template-columns: 1fr; } }
+    </style>
 </head>
 <body>
     <nav class="navbar">
