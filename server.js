@@ -16,15 +16,8 @@ const rootDir = process.env.VERCEL ? '/var/task' : __dirname;
 app.use(cors());
 app.use(express.json());
 
-// Redirection /index.html → / (301)
+// Redirection /index.html → / est gérée au niveau Vercel edge (vercel.json) — supprimée du serveur Node.
 // La redirection non-www → www est gérée au niveau Vercel edge (vercel.json)
-app.use((req, res, next) => {
-    if (req.path === '/index.html') {
-        const qs = req.url.slice(req.path.length);
-        return res.redirect(301, `/${qs}`);
-    }
-    next();
-});
 
 // Servir les fichiers statiques du dossier public
 app.use(express.static(path.join(rootDir, 'public')));
