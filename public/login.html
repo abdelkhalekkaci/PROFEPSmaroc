@@ -20,9 +20,11 @@
     <title>Connexion | ProfEPS Maroc</title>
     <link rel="icon" type="image/png" href="/images/prof_eps.png">
     
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="css/style.min.css"></noscript>
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
     
     <style>
         :root {
@@ -604,8 +606,8 @@
         document.addEventListener('click', (e) => { if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) closeMenu(); });
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="/js/auth-shared.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/js/auth-shared.js" defer></script>
 
     <script>
         const supabaseClient = ProfEPS.getSupabase();
@@ -814,6 +816,6 @@
             }
         })();
     </script>
-        <script src="/js/consent.js"></script>
+        <script src="/js/consent.js" defer></script>
 </body>
 </html>

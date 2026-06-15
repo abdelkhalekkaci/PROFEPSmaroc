@@ -30,7 +30,7 @@
     <link rel="icon" type="image/png" href="/images/prof_eps.png">
 
     <!-- Core Web Vitals — LCP preload + preconnect to third parties -->
-    <link rel="preload" as="image" href="/images/prof_eps.png" fetchpriority="high">
+    <link rel="preload" as="image" href="/images/prof_eps.webp" fetchpriority="high" type="image/webp">
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
     <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
@@ -38,6 +38,7 @@
     <link rel="dns-prefetch" href="https://www.google-analytics.com">
     <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
     <link rel="canonical" href="https://www.profeps.ma/ressources-atd.html">
+    <link rel="alternate" hreflang="fr-MA" href="https://www.profeps.ma/ressources-atd.html">
     <!-- Open Graph -->
     <meta property="og:title" content="Ressources ATD EPS : Analyses Didactiques Gratuites">
     <meta property="og:description" content="ATD gratuits pour football, handball, basketball, volleyball. Conformes aux OP 2007-2009.">
@@ -98,8 +99,8 @@
         .download-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.6rem; background: white; color: var(--primary); border: 1px solid var(--primary); border-radius: var(--radius); font-weight: 600; font-size: 0.85rem; transition: var(--transition); width: 100%; }
         .download-btn:hover { background: var(--primary); color: white; }
         
-        .rtl-text { direction: rtl; text-align: right; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .arabic-intro { background: #fcfcfc; border-right: 4px solid var(--secondary); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; border: 1px solid #eee; }
+        .intro-atd { background: #fcfcfc; border-left: 4px solid var(--secondary); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; border: 1px solid #eee; }
+        .intro-atd h3 { color: var(--secondary); margin-top: 0; }
 
         /* Footer conservé */
 
@@ -190,7 +191,7 @@
         <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="/" class="nav-logo">
-                <img src="/images/prof_eps.png" alt="Prof EPS" width="140" height="40" fetchpriority="high" decoding="async">
+                <picture><source srcset="/images/prof_eps.webp" type="image/webp"><img src="/images/prof_eps.png" alt="Prof EPS" width="140" height="40" fetchpriority="high" decoding="async"></picture>
             </a>
             <div class="nav-menu" id="navMenu">
                 <a href="/" class="nav-link">Accueil</a>
@@ -216,8 +217,8 @@
             <h1 class="article-title">
                 Analyses et Traitement Didactique des APS
                 <br>
-                <span class="rtl-text" style="display: block; font-size: 0.7em; color: var(--secondary); margin-top: 10px;">
-                    التحليل والمعالجة الديداكتيكية للأنشطة البدنية والرياضية
+                <span style="display: block; font-size: 0.7em; color: var(--secondary); margin-top: 10px;">
+                    Analyse et Traitement Didactique des activités physiques et sportives
                 </span>
             </h1>
             <div class="article-meta"><span>📂 Documents PDF</span><span>📖 Théorie EPS</span><span>🇲🇦 Programmes Marocains</span></div>
@@ -225,9 +226,9 @@
     </header>
 
     <article class="article-content">
-        <div class="arabic-intro rtl-text">
-            <h3>الأساس الديداكتيكي لبناء الحصص الدراسية</h3>
-            <p>يعتبر التحليل والمعالجة الديداكتيكية (ATD) الخطوة الأولى والأساسية لكل مدرس لبناء مشروع بيداغوجي ناجح. نوفر لكم هنا حقيبة شاملة تضم ملفات جميع الأنشطة الرياضية.</p>
+        <div class="intro-atd">
+            <h3>Le fondement didactique pour la construction des séances</h3>
+            <p>L'Analyse et le Traitement Didactique (ATD) constitue la première étape fondamentale pour tout enseignant souhaitant construire un projet pédagogique réussi. Nous vous proposons ici une mallette complète comprenant les fichiers de toutes les activités sportives.</p>
         </div>
 
         <p>L'Analyse et le Traitement Didactique (ATD) permettent à l'enseignant de définir la logique interne de l'activité, les problèmes fondamentaux rencontrés par les élèves et les enjeux de formation. Accédez aux ressources complètes via notre dossier Google Drive :</p>
@@ -357,7 +358,16 @@
         </div>
     </article>
 
-    
+    <div class="read-also">
+        <h3>📖 À lire aussi</h3>
+        <ul>
+            <li><a href="article-fiche-seance-athletisme-eps.html">Fiche de séance athlétisme EPS 60 min conforme aux OP</a></li>
+            <li><a href="article-séance.html">Comment structurer une séance d'EPS — guide pratique</a></li>
+            <li><a href="article-structure-seance.html">Structure détaillée d'une séance d'EPS</a></li>
+            <li><a href="bibliotheque-numerique-eps.html">Bibliothèque numérique EPS — 500+ documents PDF</a></li>
+        </ul>
+    </div>
+
         <div class="ad-unit">
             <p class="ad-label">Publicité</p>
             <ins class="adsbygoogle"
@@ -449,8 +459,8 @@
         document.addEventListener('click', e => { if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) closeMenu(); });
         navMenu.querySelectorAll('.nav-link, .nav-cta').forEach(l => l.addEventListener('click', closeMenu));
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="/js/auth-shared.js"></script>
-        <script src="/js/consent.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/js/auth-shared.js" defer></script>
+        <script src="/js/consent.js" defer></script>
 </body>
 </html>
