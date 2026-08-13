@@ -17,7 +17,7 @@ const path = require('path');
 const https = require('https');
 
 // ───────── Config ─────────
-const HOST = 'www.profeps.ma';
+const HOST = 'profeps.ma';
 const KEY = '90ce54bb05e24a9b87d11903ac01fc8b';
 const KEY_LOCATION = `https://${HOST}/${KEY}.txt`;
 const SITEMAP_PATH = path.join(__dirname, '..', 'public', 'sitemap.xml');
