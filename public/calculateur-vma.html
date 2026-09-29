@@ -3,13 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculateur VMA & Allures de Course | Test Cooper, Demi-Cooper, Luc Léger, VAMEVAL</title>
-     <link rel="icon" type="image/png" href="/images/prof_eps.png">
-    <meta name="description" content="Calculateur universel de VMA et VO2max pour enseignants d'EPS, entraîneurs et coureurs : Demi-Cooper (6'), Cooper (12'), Luc Léger, VAMEVAL, allures d'entraînement, temps de passage et nombre de tours.">
-    <meta name="keywords" content="calculateur VMA, calcul VO2max, test Cooper 12 min, test demi-cooper 6 min, test Luc Léger, VAMEVAL, allures de course, temps au tour, calcul vitesse course a pied, fractionne demi fond">
+    
+    <!-- ═══ SEO TITLE & META ═══ -->
+    <title>Calculateur VMA & Allures de Course EPS — Demi-Cooper, Luc Léger, VAMEVAL | Prof EPS</title>
+    <meta name="description" content="Calculateur gratuit de VMA et VO2max pour professeurs d'EPS et coureurs : Demi-Cooper (6'), Cooper (12'), Luc Léger, VAMEVAL, temps de passage et tours de piste.">
+    <meta name="keywords" content="calculateur VMA, calcul VO2max, test Cooper 12 min, test demi-cooper 6 min, test Luc Léger, VAMEVAL, allures de course, temps au tour, calcul vitesse course a pied, fractionne demi fond EPS Maroc">
     <link rel="canonical" href="https://profeps.ma/calculateur-vma.html">
     <link rel="alternate" hreflang="fr" href="https://profeps.ma/calculateur-vma.html">
-    
+    <link rel="icon" type="image/png" href="/images/prof_eps.png">
+
+    <!-- ═══ OPEN GRAPH (Facebook, WhatsApp, LinkedIn) ═══ -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Prof EPS Maroc">
+    <meta property="og:url" content="https://profeps.ma/calculateur-vma.html">
+    <meta property="og:title" content="Calculateur VMA & Allures de Course EPS — Demi-Cooper, Luc Léger, VAMEVAL">
+    <meta property="og:description" content="Calculez la VMA, la VO2max, les allures de fractionné et les temps de passage par tour de piste pour vos séances d'EPS en 1 clic.">
+    <meta property="og:image" content="https://profeps.ma/images/prof_eps.png">
+    <meta property="og:locale" content="fr_MA">
+
+    <!-- ═══ TWITTER CARD ═══ -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Calculateur VMA & Allures de Course EPS | Prof EPS Maroc">
+    <meta name="twitter:description" content="Outil universel d'estimation de la VMA et de calcul des temps de passage par tour de piste pour enseignants d'EPS et coureurs.">
+    <meta name="twitter:image" content="https://profeps.ma/images/prof_eps.png">
+
+    <!-- ═══ DONNÉES STRUCTURÉES GOOGLE (JSON-LD WebApplication) ═══ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Calculateur VMA et Allures de Course EPS",
+      "url": "https://profeps.ma/calculateur-vma.html",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "MAD"
+      },
+      "description": "Calculateur officiel de VMA et VO2max pour professeurs d'EPS, éducateurs et coureurs : Demi-Cooper (6'), Cooper (12'), Luc Léger, VAMEVAL, allures d'entraînement et temps au tour."
+    }
+    </script>
+
+    <!-- ═══ DONNÉES STRUCTURÉES FAQ (Google Rich Snippets FAQ) ═══ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Comment calculer la VMA avec le test Demi-Cooper (6 minutes) ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le test Demi-Cooper consiste à parcourir la plus grande distance possible en 6 minutes. La formule est directe : VMA (km/h) = Distance parcourue en mètres / 100. Par exemple, 1 400 mètres parcourus correspondent exactement à une VMA de 14,0 km/h."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quelle est la formule pour convertir la VMA en VO2max ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La relation physiologique standard admise est : VO2max (en ml/kg/min) = VMA (en km/h) × 3,5. Ainsi, une VMA de 14 km/h correspond à une VO2max estimée de 49,0 ml/kg/min."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Comment calculer son temps de passage par tour de piste en EPS ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pour une piste donnée (ex: 200m ou 250m) et une vitesse cible en km/h : Temps au tour (secondes) = (Longueur de la piste en mètres / Vitesse en km/h) × 3,6. Notre calculateur effectue cette conversion instantanément pour toutes les allures de 60% à 110% de VMA."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Preloads & Polices -->
     <link rel="preload" as="image" href="/images/prof_eps.png" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,416 +114,119 @@
         body { font-family: var(--font-sans); background: #f8fafc; color: var(--text-primary); line-height: 1.5; font-size: 0.9375rem; }
         a { text-decoration: none; color: inherit; transition: var(--transition); }
 
-        /* ═══ NAVBAR ═══ */
-        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 0.65rem 1.5rem; background: rgba(255,255,255,0.98); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); transition: var(--transition); }
-        .navbar.scrolled { box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-        .nav-logo { display: flex; align-items: center; gap: 0.5rem; }
-        .nav-logo img { height: 42px; width: auto; max-width: 155px; object-fit: contain; }
-        .nav-menu { display: flex; align-items: center; gap: 1.25rem; }
-        .nav-link { font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); padding: 0.4rem 0.2rem; position: relative; }
-        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 50%; right: 50%; height: 2px; background: linear-gradient(90deg, #c1272d, #006233); border-radius: 2px; transition: left 0.25s ease, right 0.25s ease; }
-        .nav-link:hover::after, .nav-link.active::after { left: 0; right: 0; }
-        .nav-link:hover, .nav-link.active { color: var(--primary); }
-        .nav-right { display: flex; align-items: center; gap: 0.75rem; }
-        .nav-cta { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.45rem 1.1rem; background: linear-gradient(135deg, #c1272d, #006233); color: white; font-weight: 600; font-size: 0.875rem; border-radius: 9999px; box-shadow: 0 2px 6px rgba(193,39,45,0.25); }
-        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(193,39,45,0.35); }
-        .nav-cta.nav-cta-mobile { display: none; }
-        .nav-cta.nav-cta-desktop { display: inline-flex; }
-        .nav-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 6px; width: 34px; height: 34px; justify-content: center; align-items: center; border-radius: 6px; }
-        .nav-toggle span { display: block; width: 20px; height: 2px; background: #1e293b; border-radius: 2px; }
+        /* ═══ NAVBAR UNIFIÉE ═══ */
+        .navbar { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 1000 !important; padding: 1rem 2rem !important; background: rgba(255,255,255,0.96) !important; backdrop-filter: blur(20px) !important; -webkit-backdrop-filter: blur(20px) !important; border-bottom: 1px solid rgba(226,232,240,0.7) !important; transition: all 0.3s ease !important; }
+        .navbar.scrolled { padding: 0.5rem 2rem !important; box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important; background: rgba(255,255,255,0.99) !important; }
+        .nav-container { max-width: 1400px !important; margin: 0 auto !important; display: grid !important; grid-template-columns: 1fr auto 1fr !important; align-items: center !important; }
+        .nav-logo { justify-self: start !important; display: flex !important; align-items: center !important; }
+        .nav-logo img { height: 56px !important; transition: all 0.3s ease !important; }
+        .navbar.scrolled .nav-logo img { height: 46px !important; }
+        .nav-menu { display: flex !important; align-items: center !important; justify-content: center !important; text-align: center !important; gap: 1.75rem !important; }
+        .nav-right { justify-self: end !important; display: flex !important; align-items: center !important; gap: 0.75rem !important; }
+        .nav-link { font-size: 0.95rem !important; font-weight: 600 !important; color: #1a1a2e !important; padding: 0.5rem 0.75rem !important; text-align: center !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; position: relative !important; transition: color 0.3s ease !important; text-decoration: none !important; letter-spacing: -0.01em !important; }
+        .nav-link::after { content: '' !important; position: absolute !important; bottom: -2px !important; left: 50% !important; right: 50% !important; height: 3px !important; background: linear-gradient(90deg, #c1272d, #006233) !important; border-radius: 2px !important; transition: left 0.3s ease, right 0.3s ease !important; }
+        .nav-link:hover::after, .nav-link.active::after { left: 0.4rem !important; right: 0.4rem !important; }
+        .nav-link:hover, .nav-link.active { color: #c1272d !important; }
+        .nav-cta { display: inline-flex !important; align-items: center !important; gap: 0.5rem !important; padding: 0.5rem 1.25rem !important; background: linear-gradient(135deg, #c1272d, #006233) !important; color: white !important; font-weight: 600 !important; font-size: 0.9375rem !important; border-radius: 9999px !important; border: 2px solid transparent !important; box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important; transition: transform 0.3s ease, box-shadow 0.3s ease !important; text-decoration: none !important; white-space: nowrap !important; }
+        .nav-cta:hover { transform: translateY(-2px) !important; box-shadow: 0 8px 25px rgba(193,39,45,0.3) !important; }
+        .nav-cta.nav-cta-mobile { display: none !important; }
+        .nav-cta.nav-cta-desktop { display: inline-flex !important; }
+        .nav-toggle { display: none !important; flex-direction: column !important; gap: 5px !important; background: none !important; border: none !important; cursor: pointer !important; padding: 8px !important; width: 36px !important; height: 36px !important; justify-content: center !important; align-items: center !important; border-radius: 8px !important; }
+        .nav-toggle span { display: block !important; width: 22px !important; height: 2px !important; background: #1a1a2e !important; border-radius: 2px !important; transition: transform 0.3s ease, opacity 0.3s ease !important; }
+        .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg) !important; }
+        .nav-toggle.active span:nth-child(2) { opacity: 0 !important; transform: scaleX(0) !important; }
+        .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg) !important; }
+        .nav-backdrop { display: none; position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; background: rgba(0,0,0,0.3) !important; z-index: 99 !important; opacity: 0; transition: opacity 0.3s ease !important; }
+        .nav-backdrop.active { display: block !important; opacity: 1 !important; }
 
-        @media (max-width: 868px) {
-            .nav-menu { display: none; position: fixed; top: 58px; left: 0; right: 0; background: white; flex-direction: column; padding: 1.25rem; border-bottom: 1px solid var(--border); box-shadow: 0 8px 20px rgba(0,0,0,0.08); gap: 0.75rem; }
-            .nav-menu.active { display: flex; }
-            .nav-toggle { display: flex; }
-            .nav-cta.nav-cta-mobile { display: inline-flex; }
-            .nav-cta.nav-cta-desktop { display: none; }
+        @media (max-width: 768px) {
+            .nav-container { display: flex !important; justify-content: space-between !important; }
+            .nav-right { gap: 0.5rem !important; }
+            .nav-menu { position: absolute !important; top: 100% !important; left: 1rem !important; right: 1rem !important; background: white !important; flex-direction: column !important; padding: 1.5rem !important; box-shadow: 0 10px 40px rgba(0,0,0,0.12) !important; border-radius: 16px !important; gap: 0.75rem !important; transform: translateY(-10px) !important; opacity: 0 !important; pointer-events: none !important; transition: transform 0.3s ease, opacity 0.3s ease !important; z-index: 100 !important; border: 1px solid #f1f5f9 !important; justify-content: center !important; align-items: center !important; text-align: center !important; }
+            .nav-menu.active { transform: translateY(0) !important; opacity: 1 !important; pointer-events: auto !important; }
+            .nav-link { padding: 0.6rem 0 !important; width: 100% !important; text-align: center !important; justify-content: center !important; font-weight: 600 !important; }
+            .nav-toggle { display: flex !important; }
+            .nav-cta.nav-cta-mobile { display: inline-flex !important; width: 100% !important; justify-content: center !important; margin-top: 0.5rem !important; }
+            .nav-cta.nav-cta-desktop { display: none !important; }
+        }
+        @media (max-width: 480px) {
+            .navbar { padding: 0.75rem 1rem !important; }
         }
 
         /* ═══ HERO COMPACT & ÉPURÉ ═══ */
-        .vma-hero {
-            margin-top: 60px;
-            padding: 2.25rem 1.25rem 1.75rem;
-            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-            border-bottom: 1px solid var(--border);
-            text-align: center;
-        }
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            background: rgba(193,39,45,0.08);
-            color: var(--primary);
-            padding: 0.25rem 0.85rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            margin-bottom: 0.75rem;
-            border: 1px solid rgba(193,39,45,0.18);
-        }
-        .vma-hero h1 {
-            font-family: var(--font-display);
-            font-size: clamp(1.45rem, 2.8vw, 2rem);
-            font-weight: 600;
-            color: #0f172a;
-            margin-bottom: 0.4rem;
-            line-height: 1.25;
-            letter-spacing: -0.02em;
-        }
-        .vma-hero h1 span {
-            background: linear-gradient(135deg, #c1272d 0%, #006233 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .vma-hero p {
-            font-size: 0.95rem;
-            color: var(--text-light);
-            max-width: 680px;
-            margin: 0 auto 1rem;
-            line-height: 1.5;
-        }
-        .hero-features {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 0.45rem;
-        }
-        .hero-feature-tag {
-            background: white;
-            border: 1px solid var(--border);
-            padding: 0.3rem 0.75rem;
-            border-radius: 99px;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            font-weight: 600;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-        }
+        .vma-hero { margin-top: 80px; padding: 2.5rem 1.25rem 2rem; background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%); border-bottom: 1px solid var(--border); text-align: center; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(193,39,45,0.08); color: var(--primary); padding: 0.3rem 0.95rem; border-radius: 9999px; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.75rem; border: 1px solid rgba(193,39,45,0.18); }
+        .vma-hero h1 { font-family: var(--font-display); font-size: clamp(1.6rem, 3.2vw, 2.3rem); font-weight: 800; color: #0f172a; margin-bottom: 0.5rem; line-height: 1.25; letter-spacing: -0.02em; }
+        .vma-hero h1 span { background: linear-gradient(135deg, #c1272d 0%, #006233 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .vma-hero p { font-size: 0.98rem; color: var(--text-light); max-width: 720px; margin: 0 auto 1.25rem; line-height: 1.6; }
+        .hero-features { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem; }
+        .hero-feature-tag { background: white; border: 1px solid var(--border); padding: 0.35rem 0.85rem; border-radius: 99px; font-size: 0.82rem; color: var(--text-secondary); font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,0.03); display: inline-flex; align-items: center; gap: 0.35rem; }
 
         /* ═══ APPLICATION CONTAINER ═══ */
-        .calc-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 1.75rem 1rem 3.5rem;
-        }
-
-        /* Grille Formulaire */
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.25rem;
-            margin-bottom: 1.5rem;
-        }
-        @media (max-width: 868px) {
-            .form-grid { grid-template-columns: 1fr; }
-        }
-
-        /* Cards */
-        .card {
-            background: white;
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-sm);
-            padding: 1.4rem;
-        }
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 0.65rem;
-            margin-bottom: 1.15rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 1px solid var(--border-light);
-        }
-        .step-icon {
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            font-weight: 600;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.85rem;
-            flex-shrink: 0;
-        }
-        .card-header h2 {
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: #0f172a;
-        }
-        .card-header p {
-            font-size: 0.8rem;
-            color: var(--text-light);
-            margin-top: 0.1rem;
-        }
-
-        /* Test Type Switcher */
-        .test-type-nav {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 0.3rem;
-            background: #f1f5f9;
-            padding: 0.3rem;
-            border-radius: 10px;
-            margin-bottom: 1.15rem;
-        }
-        @media (max-width: 600px) {
-            .test-type-nav { grid-template-columns: repeat(3, 1fr); }
-        }
-        @media (max-width: 420px) {
-            .test-type-nav { grid-template-columns: repeat(2, 1fr); }
-        }
-        .test-type-btn {
-            background: none;
-            border: none;
-            padding: 0.5rem 0.3rem;
-            font-size: 0.78rem;
-            font-weight: 600;
-            color: #64748b;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: var(--transition);
-            text-align: center;
-            white-space: nowrap;
-        }
-        .test-type-btn.active {
-            background: white;
-            color: var(--primary);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-            font-weight: 600;
-        }
-
-        /* Form Controls */
+        .calc-container { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem 3.5rem; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.5rem; }
+        @media (max-width: 868px) { .form-grid { grid-template-columns: 1fr; } }
+        .card { background: white; border-radius: var(--radius-lg); border: 1px solid var(--border); box-shadow: var(--shadow-sm); padding: 1.4rem; }
+        .card-header { display: flex; align-items: center; gap: 0.65rem; margin-bottom: 1.15rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-light); }
+        .step-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; font-weight: 700; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
+        .card-header h2 { font-size: 1.1rem; font-weight: 700; color: #0f172a; }
+        .card-header p { font-size: 0.8rem; color: var(--text-light); margin-top: 0.1rem; }
+        .test-type-nav { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.3rem; background: #f1f5f9; padding: 0.3rem; border-radius: 10px; margin-bottom: 1.15rem; }
+        @media (max-width: 600px) { .test-type-nav { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 420px) { .test-type-nav { grid-template-columns: repeat(2, 1fr); } }
+        .test-type-btn { background: none; border: none; padding: 0.55rem 0.3rem; font-size: 0.78rem; font-weight: 600; color: #64748b; border-radius: 6px; cursor: pointer; transition: var(--transition); text-align: center; white-space: nowrap; }
+        .test-type-btn.active { background: white; color: var(--primary); box-shadow: 0 1px 3px rgba(0,0,0,0.08); font-weight: 700; }
         .form-group { margin-bottom: 1rem; }
         .form-group:last-child { margin-bottom: 0; }
-        label {
-            display: block;
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: #334155;
-            margin-bottom: 0.35rem;
-        }
-        .form-hint {
-            font-size: 0.77rem;
-            color: var(--text-light);
-            margin-top: 0.3rem;
-            line-height: 1.4;
-        }
-        input[type="number"], select {
-            width: 100%;
-            padding: 0.55rem 0.8rem;
-            border: 1px solid #cbd5e1;
-            border-radius: var(--radius-md);
-            font-size: 0.9rem;
-            font-family: inherit;
-            color: #0f172a;
-            background: white;
-            transition: var(--transition);
-        }
-        input:focus, select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(193, 39, 45, 0.12);
-        }
+        label { display: block; font-weight: 600; font-size: 0.85rem; color: #334155; margin-bottom: 0.35rem; }
+        .form-hint { font-size: 0.77rem; color: var(--text-light); margin-top: 0.3rem; line-height: 1.4; }
+        input[type="number"], select { width: 100%; padding: 0.6rem 0.85rem; border: 1px solid #cbd5e1; border-radius: var(--radius-md); font-size: 0.92rem; font-family: inherit; color: #0f172a; background: white; transition: var(--transition); }
+        input:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(193, 39, 45, 0.12); }
+        .btn-quick-chip { background: white; border: 1px solid var(--border); border-radius: 6px; padding: 0.2rem 0.5rem; font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: var(--transition); }
+        .btn-quick-chip:hover { background: #f1f5f9; color: var(--primary); border-color: #cbd5e1; }
+        .btn-quick-chip.active { background: rgba(193,39,45,0.08); color: var(--primary); border-color: var(--primary); font-weight: 700; }
+        .btn-calc-main { width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.9rem 1.75rem; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; font-weight: 700; font-size: 1.05rem; border: none; border-radius: var(--radius-md); cursor: pointer; transition: var(--transition); box-shadow: 0 4px 14px rgba(193,39,45,0.25); margin: 0.5rem 0 1.5rem; }
+        .btn-calc-main:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(193,39,45,0.35); }
 
-        /* Quick chips */
-        .btn-quick-chip {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 0.2rem 0.5rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .btn-quick-chip:hover {
-            background: #f1f5f9;
-            color: var(--primary);
-            border-color: #cbd5e1;
-        }
-        .btn-quick-chip.active {
-            background: rgba(193,39,45,0.08);
-            color: var(--primary);
-            border-color: var(--primary);
-            font-weight: 600;
-        }
-
-        /* Bouton Calculer */
-        .btn-calc-main {
-            width: 100%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.85rem 1.75rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            font-weight: 600;
-            font-size: 1.05rem;
-            border: none;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 4px 14px rgba(193,39,45,0.25);
-            margin: 0.5rem 0 1.5rem;
-        }
-        .btn-calc-main:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(193,39,45,0.35);
-        }
-
-        /* ═══ SECTION RÉSULTATS (MASQUÉE PAR DÉFAUT) ═══ */
-        #results-wrapper {
-            display: none; /* Ne s'affiche qu'après le clic */
-            animation: fadeIn 0.3s ease;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Bannière VMA & VO2max */
-        .vma-banner {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            color: white;
-            border-radius: var(--radius-lg);
-            padding: 1.35rem 1.6rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.25rem;
-            box-shadow: var(--shadow-md);
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .vma-banner-label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-        .vma-banner-val {
-            font-size: 2.25rem;
-            font-weight: 600;
-            color: #38bdf8;
-            line-height: 1;
-            margin-top: 0.25rem;
-        }
-        .vma-banner-vo2 {
-            font-size: 0.85rem;
-            color: #cbd5e1;
-            text-align: right;
-        }
-        .vma-banner-vo2 strong {
-            font-size: 1.4rem;
-            color: #4ade80;
-            display: block;
-            margin-top: 0.15rem;
-        }
-
-        /* Grille des 4 indicateurs personnalisés */
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0.85rem;
-            margin-bottom: 1.5rem;
-        }
-        @media (max-width: 868px) {
-            .stat-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 480px) {
-            .stat-grid { grid-template-columns: 1fr; }
-        }
-        .stat-pill {
-            background: #ffffff;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            padding: 0.9rem 1.1rem;
-            box-shadow: var(--shadow-sm);
-        }
-        .stat-pill-label {
-            font-size: 0.74rem;
-            color: var(--text-light);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-        }
-        .stat-pill-val {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #0f172a;
-            margin-top: 0.25rem;
-        }
-        .stat-pill-sub {
-            font-size: 0.75rem;
-            color: var(--text-light);
-            margin-top: 0.15rem;
-        }
-
-        /* ═══ TABLEAU D'ENTRAÎNEMENT ═══ */
-        .table-card {
-            background: white;
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-sm);
-            padding: 1.25rem;
-        }
-        .table-header-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-        .table-responsive {
-            overflow-x: auto;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-        }
-        table.custom-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.85rem;
-            text-align: left;
-        }
-        table.custom-table th {
-            background: #f8fafc;
-            padding: 0.65rem 0.8rem;
-            font-weight: 600;
-            color: #475569;
-            border-bottom: 1px solid var(--border);
-            white-space: nowrap;
-        }
-        table.custom-table td {
-            padding: 0.6rem 0.8rem;
-            border-bottom: 1px solid var(--border-light);
-            color: #1e293b;
-            white-space: nowrap;
-        }
+        /* ═══ RÉSULTATS ═══ */
+        #results-wrapper { display: none; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .vma-banner { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: white; border-radius: var(--radius-lg); padding: 1.35rem 1.6rem; display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; box-shadow: var(--shadow-md); flex-wrap: wrap; gap: 1rem; }
+        .vma-banner-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 700; }
+        .vma-banner-val { font-size: 2.35rem; font-weight: 800; color: #38bdf8; line-height: 1; margin-top: 0.25rem; }
+        .vma-banner-vo2 { font-size: 0.85rem; color: #cbd5e1; text-align: right; }
+        .vma-banner-vo2 strong { font-size: 1.4rem; color: #4ade80; display: block; margin-top: 0.15rem; }
+        .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.85rem; margin-bottom: 1.5rem; }
+        @media (max-width: 868px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 480px) { .stat-grid { grid-template-columns: 1fr; } }
+        .stat-pill { background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.9rem 1.1rem; box-shadow: var(--shadow-sm); }
+        .stat-pill-label { font-size: 0.74rem; color: var(--text-light); font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; }
+        .stat-pill-val { font-size: 1.25rem; font-weight: 800; color: #0f172a; margin-top: 0.25rem; }
+        .stat-pill-sub { font-size: 0.75rem; color: var(--text-light); margin-top: 0.15rem; }
+        .table-card { background: white; border-radius: var(--radius-lg); border: 1px solid var(--border); box-shadow: var(--shadow-sm); padding: 1.25rem; }
+        .table-header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+        .table-responsive { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-md); }
+        table.custom-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; }
+        table.custom-table th { background: #f8fafc; padding: 0.65rem 0.8rem; font-weight: 700; color: #475569; border-bottom: 1px solid var(--border); white-space: nowrap; }
+        table.custom-table td { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border-light); color: #1e293b; white-space: nowrap; }
         table.custom-table tr:hover { background: #f8fafc; }
-        table.custom-table tr.selected-row {
-            background: rgba(193,39,45,0.06);
-            font-weight: 600;
-        }
-        .zone-pill {
-            display: inline-block;
-            padding: 0.18rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.72rem;
-            font-weight: 600;
-        }
+        table.custom-table tr.selected-row { background: rgba(193,39,45,0.06); font-weight: 700; }
+        .zone-pill { display: inline-block; padding: 0.18rem 0.5rem; border-radius: 4px; font-size: 0.72rem; font-weight: 700; }
 
-        /* ═══ FOOTER CANONIQUE DU SITE ═══ */
+        .btn-print { background: #f1f5f9; border: 1px solid #cbd5e1; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.8rem; font-weight: 600; color: #334155; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem; transition: var(--transition); }
+        .btn-print:hover { background: #e2e8f0; color: #0f172a; }
+
+        /* ═══ SECTION SEO DIDACTIQUE & FAQ (Invisible pour le layout, ultra-puissant pour Google) ═══ */
+        .seo-guide-section { margin-top: 3.5rem; background: white; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-sm); }
+        .seo-guide-section h2 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; }
+        .seo-guide-section p { color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.25rem; }
+        .seo-faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+        @media (max-width: 768px) { .seo-faq-grid { grid-template-columns: 1fr; } }
+        .faq-item { background: #f8fafc; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 1.25rem; }
+        .faq-item h3 { font-size: 0.98rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; }
+        .faq-item p { font-size: 0.875rem; color: #475569; line-height: 1.6; margin: 0; }
+
+        /* ═══ FOOTER ═══ */
         .footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 3rem 1.5rem 0; margin-top: 3.5rem; }
         .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.5rem; }
         .footer-brand { display: flex; flex-direction: column; gap: 0.85rem; }
@@ -462,7 +236,7 @@
         .footer-social a { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 50%; transition: all 0.25s ease; }
         .footer-social a:hover { background: rgba(255,255,255,0.18); transform: translateY(-2px); }
         .footer-social svg { width: 15px; height: 15px; fill: rgba(255,255,255,0.85); }
-        .footer-col h4 { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.45); margin-bottom: 1rem; }
+        .footer-col h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.45); margin-bottom: 1rem; }
         .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
         .footer-col ul li a { color: rgba(255,255,255,0.7); font-size: 0.84rem; display: inline-flex; align-items: center; gap: 0.35rem; }
         .footer-col ul li a:hover { color: white; }
@@ -472,238 +246,18 @@
         .footer-copyright, .footer-tagline { color: rgba(255,255,255,0.4); font-size: 0.8rem; }
         @media (max-width: 900px) { .footer-inner { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
         @media (max-width: 600px) { .footer-inner { grid-template-columns: 1fr; gap: 2rem; } .footer-bottom { flex-direction: column; text-align: center; } }
-    </style>
 
-<style id="profeps-navbar-600">
-/* Force Navbar 600 + Centrage */
-.navbar .nav-link {
-    font-weight: 600 !important;
-    text-align: center !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-.navbar .nav-menu {
-    justify-content: center !important;
-    text-align: center !important;
-}
-.navbar .nav-cta, .navbar .nav-btn-login {
-    font-weight: 600 !important;
-}
-</style>
-<style id="profeps-navbar-styles">
-/* ═══ NAVBAR CANONIQUE UNIFIÉE ═══ */
-.navbar { 
-    position: fixed !important; 
-    top: 0 !important; 
-    left: 0 !important; 
-    right: 0 !important; 
-    z-index: 1000 !important; 
-    padding: 1rem 2rem !important; 
-    background: rgba(255,255,255,0.96) !important; 
-    backdrop-filter: blur(20px) !important; 
-    -webkit-backdrop-filter: blur(20px) !important; 
-    border-bottom: 1px solid rgba(226,232,240,0.7) !important; 
-    transition: all 0.3s ease !important; 
-}
-.navbar.scrolled { 
-    padding: 0.5rem 2rem !important; 
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important; 
-    background: rgba(255,255,255,0.99) !important; 
-}
-.nav-container { 
-    max-width: 1400px !important; 
-    margin: 0 auto !important; 
-    display: grid !important; 
-    grid-template-columns: 1fr auto 1fr !important; 
-    align-items: center !important; 
-}
-.nav-logo { 
-    justify-self: start !important; 
-    display: flex !important; 
-    align-items: center !important; 
-}
-.nav-logo img { 
-    height: 56px !important; 
-    transition: all 0.3s ease !important; 
-}
-.navbar.scrolled .nav-logo img { 
-    height: 46px !important; 
-}
-.nav-menu { 
-    display: flex !important; 
-    align-items: center !important; 
-    justify-content: center !important; 
-    text-align: center !important; 
-    gap: 1.75rem !important; 
-}
-.nav-right { 
-    justify-self: end !important; 
-    display: flex !important; 
-    align-items: center !important; 
-    gap: 0.75rem !important; 
-}
-.nav-link { 
-    font-size: 0.95rem !important; 
-    font-weight: 600 !important; /* TITRES BIEN PLUS GRAS */
-    color: #1a1a2e !important; 
-    padding: 0.5rem 0.75rem !important; 
-    text-align: center !important; 
-    display: inline-flex !important; 
-    align-items: center !important; 
-    justify-content: center !important; 
-    position: relative !important; 
-    transition: color 0.3s ease !important; 
-    text-decoration: none !important; 
-    letter-spacing: -0.01em !important;
-}
-.nav-link::after { 
-    content: '' !important; 
-    position: absolute !important; 
-    bottom: -2px !important; 
-    left: 50% !important; 
-    right: 50% !important; 
-    height: 3px !important; 
-    background: linear-gradient(90deg, #c1272d, #006233) !important; 
-    border-radius: 2px !important; 
-    transition: left 0.3s ease, right 0.3s ease !important; 
-}
-.nav-link:hover::after, 
-.nav-link.active::after { 
-    left: 0.4rem !important; 
-    right: 0.4rem !important; 
-}
-.nav-link:hover, 
-.nav-link.active { 
-    color: #c1272d !important; 
-}
-.nav-btn-login { 
-    display: inline-flex !important; 
-    align-items: center !important; 
-    gap: 0.5rem !important; 
-    padding: 0.5rem 1.25rem !important; 
-    background: transparent !important; 
-    color: #c1272d !important; 
-    font-weight: 600 !important; 
-    font-size: 0.9375rem !important; 
-    border-radius: 9999px !important; 
-    border: 2px solid #c1272d !important; 
-    transition: all 0.3s ease !important; 
-    text-decoration: none !important; 
-    white-space: nowrap !important; 
-}
-.nav-cta { 
-    display: inline-flex !important; 
-    align-items: center !important; 
-    gap: 0.5rem !important; 
-    padding: 0.5rem 1.25rem !important; 
-    background: linear-gradient(135deg, #c1272d, #006233) !important; 
-    color: white !important; 
-    font-weight: 600 !important; 
-    font-size: 0.9375rem !important; 
-    border-radius: 9999px !important; 
-    border: 2px solid transparent !important; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important; 
-    transition: transform 0.3s ease, box-shadow 0.3s ease !important; 
-    text-decoration: none !important; 
-    white-space: nowrap !important; 
-}
-.nav-cta:hover { 
-    transform: translateY(-2px) !important; 
-    box-shadow: 0 8px 25px rgba(193,39,45,0.3) !important; 
-}
-.nav-cta.nav-cta-mobile { display: none !important; }
-.nav-cta.nav-cta-desktop { display: inline-flex !important; }
-.nav-toggle { 
-    display: none !important; 
-    flex-direction: column !important; 
-    gap: 5px !important; 
-    background: none !important; 
-    border: none !important; 
-    cursor: pointer !important; 
-    padding: 8px !important; 
-    width: 36px !important; 
-    height: 36px !important; 
-    justify-content: center !important; 
-    align-items: center !important; 
-    border-radius: 8px !important; 
-}
-.nav-toggle span { 
-    display: block !important; 
-    width: 22px !important; 
-    height: 2px !important; 
-    background: #1a1a2e !important; 
-    border-radius: 2px !important; 
-    transition: transform 0.3s ease, opacity 0.3s ease !important; 
-}
-.nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg) !important; }
-.nav-toggle.active span:nth-child(2) { opacity: 0 !important; transform: scaleX(0) !important; }
-.nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg) !important; }
-.nav-backdrop { 
-    display: none; 
-    position: fixed !important; 
-    top: 0 !important; 
-    left: 0 !important; 
-    right: 0 !important; 
-    bottom: 0 !important; 
-    background: rgba(0,0,0,0.3) !important; 
-    z-index: 99 !important; 
-    opacity: 0; 
-    transition: opacity 0.3s ease !important; 
-}
-.nav-backdrop.active { 
-    display: block !important; 
-    opacity: 1 !important; 
-}
-@media (max-width: 768px) {
-    .nav-container { display: flex !important; justify-content: space-between !important; }
-    .nav-right { gap: 0.5rem !important; }
-    .nav-menu { 
-        position: absolute !important; 
-        top: 100% !important; 
-        left: 1rem !important; 
-        right: 1rem !important; 
-        background: white !important; 
-        flex-direction: column !important; 
-        padding: 1.5rem !important; 
-        box-shadow: 0 10px 40px rgba(0,0,0,0.12) !important; 
-        border-radius: 16px !important; 
-        gap: 0.75rem !important; 
-        transform: translateY(-10px) !important; 
-        opacity: 0 !important; 
-        pointer-events: none !important; 
-        transition: transform 0.3s ease, opacity 0.3s ease !important; 
-        z-index: 100 !important; 
-        border: 1px solid #f1f5f9 !important; 
-        justify-content: center !important; 
-        align-items: center !important; 
-        text-align: center !important; 
-    }
-    .nav-menu.active { 
-        transform: translateY(0) !important; 
-        opacity: 1 !important; 
-        pointer-events: auto !important; 
-    }
-    .nav-link { 
-        padding: 0.6rem 0 !important; 
-        width: 100% !important; 
-        text-align: center !important; 
-        justify-content: center !important; 
-        font-weight: 600 !important; 
-    }
-    .nav-toggle { display: flex !important; }
-    .nav-cta.nav-cta-mobile { display: inline-flex !important; width: 100% !important; justify-content: center !important; margin-top: 0.5rem !important; }
-    .nav-cta.nav-cta-desktop { display: none !important; }
-}
-@media (max-width: 480px) {
-    .navbar { padding: 0.75rem 1rem !important; }
-}
-</style>
+        @media print {
+            .navbar, .vma-hero, .form-grid, .btn-calc-main, .seo-guide-section, .footer, .btn-print { display: none !important; }
+            #results-wrapper { display: block !important; margin: 0; }
+            body { background: white; color: black; font-size: 11pt; }
+            .card, .table-card { border: 1px solid #000; box-shadow: none; }
+        }
+    </style>
 </head>
 
 <body>
-    <!-- ═══ NAVBAR ═══ -->
-    
+    <!-- ═══ NAVBAR CANONIQUE ═══ -->
     <div class="nav-backdrop" id="navBackdrop"></div>
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -911,7 +465,7 @@
         </button>
 
         <!-- ══════════════════════════════════════════════════════════════
-             BLOC RÉSULTATS (AFFICHÉ UNIQUEMENT APRÈS CLIC SUR LE BOUTON)
+             BLOC RÉSULTATS
         ══════════════════════════════════════════════════════════════ -->
         <div id="results-wrapper">
             
@@ -927,30 +481,26 @@
                 </div>
             </div>
 
-            <!-- 2. Indicateurs clés pour l'allure choisie (% VMA) -->
+            <!-- 2. Indicateurs clés -->
             <div class="stat-grid">
-                <!-- Vitesse -->
                 <div class="stat-pill">
                     <div class="stat-pill-label">Vitesse Ciblée</div>
                     <div class="stat-pill-val" id="resTargetSpeed">12.2 km/h</div>
                     <div class="stat-pill-sub" id="resTargetPct">à 90% de VMA</div>
                 </div>
 
-                <!-- Allure au kilomètre -->
                 <div class="stat-pill">
                     <div class="stat-pill-label">Allure au Kilomètre</div>
                     <div class="stat-pill-val" id="resTargetPace">4:56 min/km</div>
                     <div class="stat-pill-sub" id="resTarget100">29.6s au 100m</div>
                 </div>
 
-                <!-- Temps au tour de piste -->
                 <div class="stat-pill">
                     <div class="stat-pill-label">Temps au Tour de Piste</div>
                     <div class="stat-pill-val" id="resTargetLap">1m 14s</div>
                     <div class="stat-pill-sub" id="resTrackDistSub">Piste de 250 m</div>
                 </div>
 
-                <!-- Distance Totale & Tours sur la durée -->
                 <div class="stat-pill" style="border-left: 3px solid var(--secondary);">
                     <div class="stat-pill-label" id="resLabelDuration">Bilan (12 min)</div>
                     <div class="stat-pill-val" style="color:var(--secondary);" id="resTargetDist">2 430 m</div>
@@ -967,9 +517,14 @@
                             Repères pour calibrer vos séances de fractionné, d'endurance et de régulation d'allure.
                         </p>
                     </div>
-                    <span style="font-size:0.78rem; font-weight:700; background:#f1f5f9; padding:0.35rem 0.75rem; border-radius:6px; color:#475569;" id="resTableBadge">
-                        Piste : 250m &middot; Durée : 12 min
-                    </span>
+                    <div style="display:flex; align-items:center; gap:0.5rem;">
+                        <button type="button" class="btn-print" onclick="window.print()">
+                            🖨️ Imprimer la grille
+                        </button>
+                        <span style="font-size:0.78rem; font-weight:700; background:#f1f5f9; padding:0.35rem 0.75rem; border-radius:6px; color:#475569;" id="resTableBadge">
+                            Piste : 250m &middot; Durée : 12 min
+                        </span>
+                    </div>
                 </div>
 
                 <div class="table-responsive">
@@ -993,9 +548,39 @@
 
         </div>
 
+        <!-- ══════════════════════════════════════════════════════════════
+             SECTION DIDACTIQUE & FAQ (BOOSTER SEO GOOGLE #1)
+        ══════════════════════════════════════════════════════════════ -->
+        <section class="seo-guide-section">
+            <h2>Guide Didactique : Comprendre et Utiliser la VMA en EPS</h2>
+            <p>La <strong>Vitesse Maximale Aérobie (VMA)</strong> constitue la vitesse de course à partir de laquelle une personne consomme la quantité maximale d'oxygène (VO₂max). Dans le système éducatif marocain (conforme aux <em>Orientations Pédagogiques 2007 pour le lycée</em> et <em>2009 pour le collège</em>), la VMA est le paramètre de référence indispensable pour concevoir des situations d'apprentissage individualisées et préparer l'épreuve de demi-fond au Baccalauréat EPS (coefficient 4).</p>
+
+            <div class="seo-faq-grid">
+                <div class="faq-item">
+                    <h3>Comment évaluer la VMA avec le Demi-Cooper (6 min) ?</h3>
+                    <p>Le test du Demi-Cooper est le plus employé en milieu scolaire en raison de sa simplicité logistique. L'élève court pendant 6 minutes à intensité constante. La formule de calcul est : <strong>VMA (km/h) = Distance totale parcourue (m) / 100</strong>. Par exemple, un élève qui parcourt 1 350 mètres possède une VMA de 13,5 km/h.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Pourquoi individualiser les temps de passage par tour ?</h3>
+                    <p>Donner une vitesse en km/h à un élève est abstrait sur le terrain. En calculant le <strong>temps au tour de piste</strong> (ex: 200m ou 250m) et au 100m, l'élève développe sa capacité de régulation d'allure (sensibilité kinesthésique) et évite le piège du départ trop rapide.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Quelles sont les allures d'entraînement en course de durée ?</h3>
+                    <p>L'échauffement et la récupération s'effectuent entre <strong>60% et 70%</strong> de VMA. Le travail en capacité aérobie et seuil s'échelonne entre <strong>75% et 85%</strong>. Les séries de fractionné court (ex: 30/30) sont travaillées à <strong>100% - 105%</strong> de VMA.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Quelle relation entre VMA et VO₂max ?</h3>
+                    <p>La formule physiologique classique de Léger et Mercier établit : <strong>VO₂max (ml/kg/min) = VMA × 3,5</strong>. Cela permet d'estimer la cylindrée aérobie du coureur sans matériel de laboratoire coûteux.</p>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <!-- ═══ FOOTER CANONIQUE DU SITE ═══ -->
+    <!-- ═══ FOOTER ═══ -->
     <footer class="footer">
         <div class="footer-inner">
             <div class="footer-brand">
@@ -1049,15 +634,35 @@
         </div>
     </footer>
 
-    <!-- ═══ LOGIQUE JAVASCRIPT CLAIRE ET ÉPURÉE ═══ -->
+    <!-- ═══ LOGIQUE JAVASCRIPT ═══ -->
     <script>
         // Menu mobile & Navbar scroll
         const navbar = document.getElementById("navbar");
         const navToggle = document.getElementById("navToggle");
         const navMenu = document.getElementById("navMenu");
+        const navBackdrop = document.getElementById("navBackdrop");
+
         window.addEventListener("scroll", () => { navbar.classList.toggle("scrolled", window.scrollY > 40); });
-        if (navToggle && navMenu) {
-            navToggle.addEventListener("click", () => { navMenu.classList.toggle("active"); });
+
+        if (navToggle && navMenu && navBackdrop) {
+            function toggleNav() {
+                const isOpen = navMenu.classList.toggle("active");
+                navToggle.classList.toggle("active", isOpen);
+                navBackdrop.classList.toggle("active", isOpen);
+                document.body.style.overflow = isOpen ? "hidden" : "";
+            }
+            function closeNav() {
+                navMenu.classList.remove("active");
+                navToggle.classList.remove("active");
+                navBackdrop.classList.remove("active");
+                document.body.style.overflow = "";
+            }
+            navToggle.addEventListener("click", (e) => { e.stopPropagation(); toggleNav(); });
+            navBackdrop.addEventListener("click", closeNav);
+            document.addEventListener("click", (e) => {
+                if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) closeNav();
+            });
+            navMenu.querySelectorAll(".nav-link, .nav-cta").forEach(l => l.addEventListener("click", closeNav));
         }
 
         // Gestion des sous-onglets de tests
@@ -1262,60 +867,5 @@
             resultsWrapper.scrollIntoView({ behavior: "smooth", block: "start" });
         }
     </script>
-
-<script id="profeps-navbar-script">
-(() => {
-    const navbar = document.getElementById('navbar');
-    const navToggle = document.getElementById('navToggle');
-    const navMenu = document.getElementById('navMenu');
-    let backdrop = document.getElementById('navBackdrop');
-
-    if (!backdrop) {
-        backdrop = document.createElement('div');
-        backdrop.id = 'navBackdrop';
-        backdrop.className = 'nav-backdrop';
-        document.body.prepend(backdrop);
-    }
-
-    if (navbar) {
-        window.addEventListener('scroll', () => {
-            navbar.classList.toggle('scrolled', window.scrollY > 40);
-        });
-    }
-
-    if (navToggle && navMenu) {
-        function toggleNav() {
-            const isOpen = navMenu.classList.toggle('active');
-            navToggle.classList.toggle('active', isOpen);
-            if (backdrop) backdrop.classList.toggle('active', isOpen);
-            document.body.style.overflow = isOpen ? 'hidden' : '';
-        }
-
-        function closeNav() {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
-            if (backdrop) backdrop.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        navToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleNav();
-        });
-
-        if (backdrop) backdrop.addEventListener('click', closeNav);
-
-        document.addEventListener('click', (e) => {
-            if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
-                closeNav();
-            }
-        });
-
-        navMenu.querySelectorAll('.nav-link, .nav-cta').forEach(link => {
-            link.addEventListener('click', closeNav);
-        });
-    }
-})();
-</script>
 </body>
 </html>
