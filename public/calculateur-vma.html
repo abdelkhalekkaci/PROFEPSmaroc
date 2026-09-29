@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculateur VMA & Allures de Course EPS Maroc | ProfEPS</title>
-    <meta name="description" content="Calculateur VMA EPS Maroc : Déterminez la VMA (Demi-Cooper, Luc Léger, VAMEVAL), calculez les allures de course et temps de passage au tour de piste selon les OP 2007-2009.">
-    <meta name="keywords" content="calculateur VMA EPS, calcul allure course demi-fond, test demi-cooper EPS, test Luc Léger, VAMEVAL, barème VMA bac EPS Maroc, contrat allure demi fond">
+    <meta name="description" content="Calculateur VMA et allures de course EPS Maroc officiel : Demi-Cooper (6 min), Cooper (12 min), Luc Léger, VAMEVAL, barème Bac EPS, temps de passage au tour de piste et fiche contrat d'allure selon les OP 2007-2009.">
+    <meta name="keywords" content="calculateur VMA EPS Maroc, allures de course demi-fond, test Demi-Cooper EPS, test Cooper 12 min, test Luc Léger navette, VAMEVAL EPS, barème bac EPS Maroc course demi-fond, fiche contrat allure EPS, orientations pédagogiques 2007 EPS maroc">
     <link rel="canonical" href="https://profeps.ma/calculateur-vma.html">
     <link rel="alternate" hreflang="fr-MA" href="https://profeps.ma/calculateur-vma.html">
     
     <link rel="preload" as="image" href="/images/prof_eps.png" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -20,32 +20,34 @@
             --primary-dark: #a01f24;
             --secondary: #006233;
             --secondary-dark: #004d28;
-            --text-primary: #1e293b;
-            --text-secondary: #475569;
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
             --text-light: #64748b;
             --bg-primary: #ffffff;
             --bg-secondary: #f8fafc;
             --border: #e2e8f0;
             --border-light: #f1f5f9;
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07);
-            --radius-md: 8px;
-            --radius-lg: 12px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 10px -2px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 25px -4px rgba(0,0,0,0.1);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-display: 'Plus Jakarta Sans', var(--font-sans);
-            --transition: all 0.25s ease;
+            --transition: all 0.2s ease;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: var(--font-sans); background: var(--bg-secondary); color: var(--text-primary); line-height: 1.5; font-size: 0.9375rem; }
+        body { font-family: var(--font-sans); background: #f8fafc; color: var(--text-primary); line-height: 1.5; font-size: 0.9375rem; }
         a { text-decoration: none; color: inherit; transition: var(--transition); }
 
-        /* ═══ NAVBAR (IDENTIQUE AU SITE) ═══ */
+        /* ═══ NAVBAR OFFICIELLE DU SITE ═══ */
         .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 0.65rem 1.5rem; background: rgba(255,255,255,0.98); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); transition: var(--transition); }
         .navbar.scrolled { box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
         .nav-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
         .nav-logo { display: flex; align-items: center; gap: 0.5rem; }
-        .nav-logo img { height: 44px; width: auto; max-width: 160px; object-fit: contain; }
+        .nav-logo img { height: 42px; width: auto; max-width: 155px; object-fit: contain; }
         .nav-menu { display: flex; align-items: center; gap: 1.25rem; }
         .nav-link { font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); padding: 0.4rem 0.2rem; position: relative; }
         .nav-link::after { content: ''; position: absolute; bottom: 0; left: 50%; right: 50%; height: 2px; background: linear-gradient(90deg, #c1272d, #006233); border-radius: 2px; transition: left 0.25s ease, right 0.25s ease; }
@@ -67,11 +69,11 @@
             .nav-cta.nav-cta-desktop { display: none; }
         }
 
-        /* ═══ HERO COMPACT & REPOSANT ═══ */
+        /* ═══ HERO SECTION ═══ */
         .vma-hero {
             margin-top: 60px;
-            padding: 2.25rem 1.25rem 1.75rem;
-            background: #ffffff;
+            padding: 2.5rem 1.25rem 2rem;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
             border-bottom: 1px solid var(--border);
             text-align: center;
         }
@@ -81,157 +83,218 @@
             gap: 0.4rem;
             background: rgba(193,39,45,0.08);
             color: var(--primary);
-            padding: 0.25rem 0.85rem;
+            padding: 0.3rem 0.9rem;
             border-radius: 9999px;
             font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.04em;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.85rem;
             border: 1px solid rgba(193,39,45,0.18);
         }
         .vma-hero h1 {
             font-family: var(--font-display);
-            font-size: clamp(1.4rem, 2.5vw, 1.85rem);
-            font-weight: 700;
+            font-size: clamp(1.5rem, 3vw, 2.15rem);
+            font-weight: 800;
             color: #0f172a;
-            margin-bottom: 0.4rem;
-            line-height: 1.3;
+            margin-bottom: 0.5rem;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
         }
         .vma-hero h1 span {
-            color: var(--primary);
+            background: linear-gradient(135deg, #c1272d 0%, #006233 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .vma-hero p {
-            font-size: 0.95rem;
+            font-size: 0.98rem;
             color: var(--text-light);
-            max-width: 680px;
-            margin: 0 auto 1rem;
-            line-height: 1.5;
+            max-width: 720px;
+            margin: 0 auto 1.25rem;
+            line-height: 1.55;
         }
-        .hero-tags {
+        .hero-features {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 0.5rem;
         }
-        .hero-tag {
-            background: var(--bg-secondary);
+        .hero-feature-tag {
+            background: white;
             border: 1px solid var(--border);
-            padding: 0.25rem 0.7rem;
+            padding: 0.35rem 0.8rem;
             border-radius: 99px;
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             color: var(--text-secondary);
-            font-weight: 500;
+            font-weight: 600;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
         }
 
-        /* ═══ APP CONTAINER ═══ */
-        .calc-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 1.5rem 1rem 3rem;
+        /* ═══ NAVIGATION DES ONGLETS DE CALCUL ═══ */
+        .calc-tabs-bar {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 58px;
+            z-index: 100;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
         }
-        .calc-grid {
+        .calc-tabs-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            overflow-x: auto;
+        }
+        .main-tab-btn {
+            background: none;
+            border: none;
+            padding: 0.6rem 1rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .main-tab-btn:hover { background: #f1f5f9; color: var(--primary); }
+        .main-tab-btn.active {
+            background: rgba(193, 39, 45, 0.08);
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* ═══ CONTAINER PRINCIPAL ═══ */
+        .calc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.75rem 1rem 3.5rem;
+        }
+        .calc-section { display: none; }
+        .calc-section.active { display: block; }
+
+        /* Grid */
+        .grid-2col {
             display: grid;
-            grid-template-columns: 1.15fr 1fr;
+            grid-template-columns: 1.1fr 1fr;
             gap: 1.5rem;
             align-items: start;
         }
         @media (max-width: 960px) {
-            .calc-grid { grid-template-columns: 1fr; }
+            .grid-2col { grid-template-columns: 1fr; }
         }
 
-        /* ═══ CARDS ═══ */
+        /* Cards */
         .card {
             background: white;
             border-radius: var(--radius-lg);
             border: 1px solid var(--border);
             box-shadow: var(--shadow-sm);
-            padding: 1.35rem 1.5rem;
+            padding: 1.5rem;
             margin-bottom: 1.25rem;
         }
         .card-header {
             display: flex;
             align-items: center;
-            gap: 0.65rem;
-            margin-bottom: 1.1rem;
-            padding-bottom: 0.75rem;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.85rem;
             border-bottom: 1px solid var(--border-light);
         }
-        .step-num {
-            width: 28px;
-            height: 28px;
-            background: var(--primary);
+        .step-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             font-weight: 700;
-            border-radius: 50%;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             flex-shrink: 0;
         }
-        .card-header h2 {
+        .card-header h2, .card-header h3 {
             font-size: 1.05rem;
             font-weight: 700;
             color: #0f172a;
         }
         .card-header p {
-            font-size: 0.8125rem;
+            font-size: 0.8rem;
             color: var(--text-light);
-            margin: 0;
+            margin-top: 0.1rem;
         }
 
-        /* Form elements */
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        .form-group:last-child {
-            margin-bottom: 0;
-        }
+        /* Forms */
+        .form-group { margin-bottom: 1.1rem; }
+        .form-group:last-child { margin-bottom: 0; }
         label {
             display: block;
             font-weight: 600;
-            font-size: 0.84rem;
+            font-size: 0.85rem;
             color: #334155;
             margin-bottom: 0.35rem;
         }
         .form-hint {
             font-size: 0.78rem;
             color: var(--text-light);
-            margin-top: 0.25rem;
+            margin-top: 0.3rem;
+            line-height: 1.4;
         }
-        input[type="number"], select {
+        input[type="number"], input[type="text"], select {
             width: 100%;
-            padding: 0.55rem 0.75rem;
+            padding: 0.6rem 0.85rem;
             border: 1px solid #cbd5e1;
             border-radius: var(--radius-md);
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             font-family: inherit;
             color: #0f172a;
             background: white;
             transition: var(--transition);
         }
-        input[type="number"]:focus, select:focus {
+        input:focus, select:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(193, 39, 45, 0.12);
         }
-
-        /* Test tabs */
-        .test-tabs {
+        .form-row {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.4rem;
-            background: #f1f5f9;
-            padding: 0.25rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
         }
-        .test-tab-btn {
+        @media (max-width: 500px) {
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        /* Test Type Switcher */
+        .test-type-nav {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.35rem;
+            background: #f1f5f9;
+            padding: 0.3rem;
+            border-radius: 10px;
+            margin-bottom: 1.25rem;
+        }
+        @media (max-width: 768px) {
+            .test-type-nav { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .test-type-nav { grid-template-columns: repeat(2, 1fr); }
+        }
+        .test-type-btn {
             background: none;
             border: none;
-            padding: 0.5rem 0.3rem;
-            font-size: 0.82rem;
+            padding: 0.55rem 0.4rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: #64748b;
             border-radius: 6px;
@@ -239,21 +302,46 @@
             transition: var(--transition);
             text-align: center;
         }
-        .test-tab-btn.active {
+        .test-type-btn.active {
             background: white;
             color: var(--primary);
             box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            font-weight: 700;
         }
 
-        /* Run button */
+        /* Quick chips for track and duration */
+        .btn-quick-chip {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.22rem 0.55rem;
+            font-size: 0.76rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-quick-chip:hover {
+            background: #f1f5f9;
+            color: var(--primary);
+            border-color: #cbd5e1;
+        }
+        .btn-quick-chip.active {
+            background: rgba(193,39,45,0.08);
+            color: var(--primary);
+            border-color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Boutons d'action */
         .btn-calc {
             width: 100%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            padding: 0.65rem 1.25rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             font-weight: 700;
             font-size: 0.95rem;
@@ -261,23 +349,40 @@
             border-radius: var(--radius-md);
             cursor: pointer;
             transition: var(--transition);
-            box-shadow: 0 2px 8px rgba(193,39,45,0.25);
-            margin-top: 0.5rem;
+            box-shadow: 0 3px 10px rgba(193,39,45,0.25);
+            margin-top: 0.75rem;
         }
         .btn-calc:hover {
             transform: translateY(-1px);
-            box-shadow: 0 4px 14px rgba(193,39,45,0.35);
+            box-shadow: 0 5px 15px rgba(193,39,45,0.35);
+        }
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1rem;
+            background: white;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-outline:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+            color: var(--primary);
         }
 
-        /* Results section */
-        #results-container {
-            display: none;
-        }
+        /* ═══ Bannières & Statistiques ═══ */
         .vma-banner {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             color: white;
             border-radius: var(--radius-lg);
-            padding: 1.15rem 1.5rem;
+            padding: 1.25rem 1.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -285,18 +390,18 @@
             box-shadow: var(--shadow-md);
         }
         .vma-banner-label {
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             color: #94a3b8;
-            font-weight: 600;
+            font-weight: 700;
         }
         .vma-banner-val {
-            font-size: 2rem;
+            font-size: 2.15rem;
             font-weight: 800;
             color: #38bdf8;
             line-height: 1;
-            margin-top: 0.2rem;
+            margin-top: 0.25rem;
         }
         .vma-banner-vo2 {
             font-size: 0.82rem;
@@ -304,54 +409,11 @@
             text-align: right;
         }
         .vma-banner-vo2 strong {
-            font-size: 1.15rem;
+            font-size: 1.25rem;
             color: #4ade80;
             display: block;
         }
 
-        /* Results table */
-        .table-responsive {
-            overflow-x: auto;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-        }
-        table.allures-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.82rem;
-            text-align: left;
-            background: white;
-        }
-        table.allures-table th {
-            background: #f8fafc;
-            padding: 0.55rem 0.65rem;
-            font-weight: 700;
-            color: #475569;
-            border-bottom: 1px solid var(--border);
-            white-space: nowrap;
-        }
-        table.allures-table td {
-            padding: 0.5rem 0.65rem;
-            border-bottom: 1px solid var(--border-light);
-            color: #1e293b;
-            white-space: nowrap;
-        }
-        table.allures-table tr:hover {
-            background: #f1f5f9;
-        }
-        table.allures-table tr.selected-row {
-            background: rgba(193,39,45,0.06);
-            font-weight: 600;
-        }
-        .zone-pill {
-            display: inline-block;
-            padding: 0.15rem 0.45rem;
-            border-radius: 4px;
-            font-size: 0.72rem;
-            font-weight: 700;
-        }
-
-        /* Quick stat pills */
         .stat-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -359,26 +421,155 @@
             margin-bottom: 1.25rem;
         }
         .stat-pill {
-            background: var(--bg-secondary);
+            background: #ffffff;
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
-            padding: 0.75rem 1rem;
+            padding: 0.85rem 1rem;
+            box-shadow: var(--shadow-sm);
         }
         .stat-pill-label {
-            font-size: 0.75rem;
+            font-size: 0.74rem;
             color: var(--text-light);
             font-weight: 600;
             text-transform: uppercase;
+            letter-spacing: 0.03em;
         }
         .stat-pill-val {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-weight: 800;
             color: #0f172a;
-            margin-top: 0.15rem;
+            margin-top: 0.2rem;
+        }
+
+        /* ═══ TABLEAU DES ALLURES ═══ */
+        .table-responsive {
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            background: white;
+        }
+        table.custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.84rem;
+            text-align: left;
+        }
+        table.custom-table th {
+            background: #f8fafc;
+            padding: 0.65rem 0.75rem;
+            font-weight: 700;
+            color: #475569;
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+        }
+        table.custom-table td {
+            padding: 0.55rem 0.75rem;
+            border-bottom: 1px solid var(--border-light);
+            color: #1e293b;
+            white-space: nowrap;
+        }
+        table.custom-table tr:hover { background: #f8fafc; }
+        table.custom-table tr.selected-row {
+            background: rgba(193,39,45,0.06);
+            font-weight: 600;
+        }
+        .zone-pill {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+
+        /* ═══ BAREME & CONTRAT BAC EPS ═══ */
+        .bareme-box {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            margin-top: 1rem;
+        }
+        .bareme-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .bareme-note-tag {
+            background: rgba(0,98,51,0.1);
+            color: var(--secondary);
+            font-size: 1.15rem;
+            font-weight: 800;
+            padding: 0.35rem 0.85rem;
+            border-radius: 8px;
+        }
+
+        /* ═══ FICHE IMPRIMABLE CONTRAT ÉLÈVE ═══ */
+        .printable-sheet {
+            background: white;
+            border: 2px dashed #cbd5e1;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .sheet-title {
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .sheet-title h4 { font-size: 1.15rem; color: #0f172a; text-transform: uppercase; }
+        .sheet-title p { font-size: 0.82rem; color: var(--text-light); }
+        .sheet-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        @media (max-width: 600px) {
+            .sheet-grid { grid-template-columns: 1fr; }
+        }
+        .sheet-field {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.84rem;
+        }
+        .sheet-field span { font-weight: 700; color: #334155; }
+
+        /* ═══ GUIDE PÉDAGOGIQUE ACCORDION ═══ */
+        .pedago-guide {
+            background: white;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        .guide-item {
+            border-bottom: 1px solid var(--border-light);
+            padding: 0.9rem 0;
+        }
+        .guide-item:last-child { border-bottom: none; }
+        .guide-question {
+            font-weight: 700;
+            color: #0f172a;
+            font-size: 0.95rem;
+            margin-bottom: 0.35rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .guide-answer {
+            color: #475569;
+            font-size: 0.88rem;
+            line-height: 1.55;
         }
 
         /* ═══ FOOTER CANONIQUE DU SITE ═══ */
-        .footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 3rem 1.5rem 0; margin-top: 3rem; }
+        .footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 3rem 1.5rem 0; margin-top: 3.5rem; }
         .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.5rem; }
         .footer-brand { display: flex; flex-direction: column; gap: 0.85rem; }
         .footer-brand img { height: 42px; width: auto; max-width: 160px; object-fit: contain; filter: brightness(0) invert(1); }
@@ -397,11 +588,18 @@
         .footer-copyright, .footer-tagline { color: rgba(255,255,255,0.4); font-size: 0.8rem; }
         @media (max-width: 900px) { .footer-inner { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
         @media (max-width: 600px) { .footer-inner { grid-template-columns: 1fr; gap: 2rem; } .footer-bottom { flex-direction: column; text-align: center; } }
+
+        /* Print Mode */
+        @media print {
+            .navbar, .calc-tabs-bar, .vma-hero, .btn-calc, .btn-outline, .footer, .test-type-nav { display: none !important; }
+            body, .calc-container { background: white !important; padding: 0 !important; }
+            .card, .printable-sheet { border: 1px solid #000 !important; box-shadow: none !important; }
+        }
     </style>
 </head>
 
 <body>
-    <!-- Navigation (100% Identique au site profeps.ma) -->
+    <!-- ═══ NAVBAR OFFICIELLE DU SITE ═══ -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo" aria-label="Prof EPS Maroc - Accueil">
@@ -421,182 +619,504 @@
         </div>
     </nav>
 
-    <!-- Header Reposant et Lisible -->
+    <!-- ═══ HERO SECTION ═══ -->
     <header class="vma-hero">
-        <div class="hero-badge">🇲🇦 Outil Officiel ProfEPS · Conforme OP 2007-2009</div>
-        <h1>Calculateur VMA & Allures <span>Demi-Fond EPS</span></h1>
-        <p>Estimez la VMA de vos élèves, déterminez leurs allures de travail (en % VMA et km/h) et calculez les temps de passage au tour de piste pour vos cycles de course.</p>
-        <div class="hero-tags">
-            <span class="hero-tag">⏱️ Demi-Cooper (6 min)</span>
-            <span class="hero-tag">🏃 Luc Léger (Navette)</span>
-            <span class="hero-tag">🔄 VAMEVAL (Piste)</span>
-            <span class="hero-tag">🎯 Contrats Bac EPS</span>
+        <div class="hero-badge">🇲🇦 Outil Pédagogique Officiel ProfEPS · Conforme OP 2007 (Lycée) & 2009 (Collège)</div>
+        <h1>Calculateur VMA & <span>Allures de Course EPS</span></h1>
+        <p>Déterminez la VMA de vos élèves, planifiez les allures d'entraînement (km/h & % VMA), calculez les temps de passage au tour de piste et générez les contrats de performance pour les épreuves de demi-fond au Maroc.</p>
+        
+        <div class="hero-features">
+            <span class="hero-feature-tag">⏱️ Demi-Cooper (6 min)</span>
+            <span class="hero-feature-tag">⏱️ Test Cooper (12 min)</span>
+            <span class="hero-feature-tag">🏃 Luc Léger (Navette 20m)</span>
+            <span class="hero-feature-tag">🔄 Test VAMEVAL (Piste)</span>
+            <span class="hero-feature-tag">🎯 Barème Demi-Fond Bac EPS</span>
+            <span class="hero-feature-tag">📋 Fiche Contrat Imprimable</span>
         </div>
     </header>
 
-    <!-- Container Principal -->
+    <!-- ═══ BARRE D'ONGLETS ═══ -->
+    <div class="calc-tabs-bar">
+        <div class="calc-tabs-inner">
+            <button type="button" class="main-tab-btn active" data-section="sec-vma-calc">
+                <span>⚡</span> 1. Calcul VMA & Allures
+            </button>
+            <button type="button" class="main-tab-btn" data-section="sec-bac-bareme">
+                <span>🎯</span> 2. Simulateur Épreuve Bac EPS (3x500m & Continu)
+            </button>
+            <button type="button" class="main-tab-btn" data-section="sec-contrat-fiche">
+                <span>📋</span> 3. Fiche Contrat & Projet de Course
+            </button>
+            <button type="button" class="main-tab-btn" data-section="sec-guide-op">
+                <span>📖</span> 4. Référentiel OP 2007-2009
+            </button>
+        </div>
+    </div>
+
+    <!-- ═══ CONTAINER PRINCIPAL ═══ -->
     <main class="calc-container">
-        <div class="calc-grid">
-            <!-- Colonne Gauche: Saisie & Configuration -->
-            <div>
-                <!-- Etape 1: Choix du Test ou VMA Directe -->
-                <div class="card">
-                    <div class="card-header">
-                        <div class="step-num">1</div>
-                        <div>
-                            <h2>Test VMA ou Valeur Directe</h2>
-                            <p>Choisissez comment déterminer la VMA de l'élève</p>
+
+        <!-- ══════════════════════════════════════════════════════════════
+             SECTION 1 : CALCUL VMA & TABLEAU DES ALLURES
+        ══════════════════════════════════════════════════════════════ -->
+        <div id="sec-vma-calc" class="calc-section active">
+            <div class="grid-2col">
+                <!-- Colonne Gauche : Paramètres -->
+                <div>
+                    <!-- Étape 1 : Choix du Test -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="step-icon">1</div>
+                            <div>
+                                <h2>Choix du Test ou Saisie Directe</h2>
+                                <p>Déterminez la Vitesse Maximale Aérobie (km/h)</p>
+                            </div>
+                        </div>
+
+                        <div class="test-type-nav">
+                            <button type="button" class="test-type-btn active" data-test="direct">Saisie Directe</button>
+                            <button type="button" class="test-type-btn" data-test="cooper">Demi-Cooper (6')</button>
+                            <button type="button" class="test-type-btn" data-test="cooper-12">Cooper (12')</button>
+                            <button type="button" class="test-type-btn" data-test="luc-leger">Luc Léger</button>
+                            <button type="button" class="test-type-btn" data-test="vameval">VAMEVAL</button>
+                        </div>
+
+                        <!-- Direct -->
+                        <div id="pane-direct" class="test-pane">
+                            <div class="form-group">
+                                <label for="directVmaInput">VMA connue (en km/h) *</label>
+                                <input type="number" id="directVmaInput" min="6" max="25" step="0.1" value="13.5">
+                                <div class="form-hint">Moyenne observée au Maroc : 10 - 13 km/h (filles) / 12 - 16 km/h (garçons).</div>
+                            </div>
+                        </div>
+
+                        <!-- Demi-Cooper (6 min) -->
+                        <div id="pane-cooper" class="test-pane" style="display:none;">
+                            <div class="form-group">
+                                <label for="cooperDistInput">Distance parcourue en 6 minutes (en mètres) *</label>
+                                <input type="number" id="cooperDistInput" min="600" max="3000" step="10" value="1350" placeholder="Ex: 1400">
+                                <div class="form-hint">Formule officielle : <strong>VMA = Distance (m) / 100</strong>. Ex : 1350 m = 13.5 km/h.</div>
+                            </div>
+                        </div>
+
+                        <!-- Test de Cooper (12 min) -->
+                        <div id="pane-cooper-12" class="test-pane" style="display:none;">
+                            <div class="form-group">
+                                <label for="cooper12DistInput">Distance parcourue en 12 minutes (en mètres) *</label>
+                                <input type="number" id="cooper12DistInput" min="1000" max="4500" step="10" value="2700" placeholder="Ex: 2700">
+                                <div class="form-hint">
+                                    <strong>Formule de Cooper :</strong> VO₂max = (Distance - 504.9) / 44.73 &middot; 
+                                    <strong>VMA estimée :</strong> VO₂max / 3.5 &middot; 
+                                    <strong>Vitesse moyenne 12' :</strong> Distance / 200 km/h.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Luc Léger -->
+                        <div id="pane-luc-leger" class="test-pane" style="display:none;">
+                            <div class="form-group">
+                                <label for="lucPalierInput">Palier atteint (navette de 20m) *</label>
+                                <select id="lucPalierInput">
+                                    <option value="4">Palier 4 (10.0 km/h)</option>
+                                    <option value="5">Palier 5 (10.5 km/h)</option>
+                                    <option value="6">Palier 6 (11.0 km/h)</option>
+                                    <option value="7">Palier 7 (11.5 km/h)</option>
+                                    <option value="8" selected>Palier 8 (12.0 km/h)</option>
+                                    <option value="9">Palier 9 (12.5 km/h)</option>
+                                    <option value="10">Palier 10 (13.0 km/h)</option>
+                                    <option value="11">Palier 11 (13.5 km/h)</option>
+                                    <option value="12">Palier 12 (14.0 km/h)</option>
+                                    <option value="13">Palier 13 (14.5 km/h)</option>
+                                    <option value="14">Palier 14 (15.0 km/h)</option>
+                                    <option value="15">Palier 15 (15.5 km/h)</option>
+                                    <option value="16">Palier 16 (16.0 km/h)</option>
+                                </select>
+                                <div class="form-hint">Test navette aller-retour 20 mètres avec bips sonores.</div>
+                            </div>
+                        </div>
+
+                        <!-- VAMEVAL -->
+                        <div id="pane-vameval" class="test-pane" style="display:none;">
+                            <div class="form-group">
+                                <label for="vamevalPalierInput">Palier VAMEVAL atteint (sur piste) *</label>
+                                <select id="vamevalPalierInput">
+                                    <option value="8.5">Palier 1 (8.5 km/h)</option>
+                                    <option value="9.0">Palier 2 (9.0 km/h)</option>
+                                    <option value="9.5">Palier 3 (9.5 km/h)</option>
+                                    <option value="10.0">Palier 4 (10.0 km/h)</option>
+                                    <option value="10.5">Palier 5 (10.5 km/h)</option>
+                                    <option value="11.0">Palier 6 (11.0 km/h)</option>
+                                    <option value="11.5">Palier 7 (11.5 km/h)</option>
+                                    <option value="12.0">Palier 8 (12.0 km/h)</option>
+                                    <option value="12.5">Palier 9 (12.5 km/h)</option>
+                                    <option value="13.0">Palier 10 (13.0 km/h)</option>
+                                    <option value="13.5" selected>Palier 11 (13.5 km/h)</option>
+                                    <option value="14.0">Palier 12 (14.0 km/h)</option>
+                                    <option value="14.5">Palier 13 (14.5 km/h)</option>
+                                    <option value="15.0">Palier 14 (15.0 km/h)</option>
+                                    <option value="15.5">Palier 15 (15.5 km/h)</option>
+                                    <option value="16.0">Palier 16 (16.0 km/h)</option>
+                                    <option value="16.5">Palier 17 (16.5 km/h)</option>
+                                    <option value="17.0">Palier 18 (17.0 km/h)</option>
+                                </select>
+                                <div class="form-hint">Test continu sur piste balisée par des plots tous les 20 mètres.</div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="test-tabs">
-                        <button type="button" class="test-tab-btn active" data-test="direct">Saisie Directe</button>
-                        <button type="button" class="test-tab-btn" data-test="demi-cooper">Demi-Cooper (6')</button>
-                        <button type="button" class="test-tab-btn" data-test="luc-leger">Luc Léger</button>
-                    </div>
-
-                    <!-- Direct -->
-                    <div id="test-pane-direct">
-                        <div class="form-group">
-                            <label for="directVma">VMA connue (km/h) *</label>
-                            <input type="number" id="directVma" min="6" max="25" step="0.1" value="13.5">
-                            <div class="form-hint">Exemple : 12.5, 14.0, 15.5 km/h</div>
+                    <!-- Étape 2 : Installations et Objectifs -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="step-icon">2</div>
+                            <div>
+                                <h2>Configuration de la Piste & Séance</h2>
+                                <p>Écrivez la distance exacte et la durée de la course</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Demi-Cooper -->
-                    <div id="test-pane-demi-cooper" style="display:none;">
-                        <div class="form-group">
-                            <label for="cooperDist">Distance parcourue en 6 minutes (mètres) *</label>
-                            <input type="number" id="cooperDist" min="600" max="3000" step="10" value="1400" placeholder="Ex: 1350">
-                            <div class="form-hint">Formule : VMA = Distance (m) / 100</div>
+                        <div class="form-row">
+                            <!-- Distance libre de la piste -->
+                            <div class="form-group">
+                                <label for="trackLengthInput">Longueur du tour de piste (mètres) *</label>
+                                <div style="display:flex; align-items:center; gap:0.5rem;">
+                                    <input type="number" id="trackLengthInput" min="40" max="2000" step="5" value="250" placeholder="Ex: 250">
+                                    <span style="font-weight:700; color:var(--text-light); font-size:0.9rem;">m</span>
+                                </div>
+                                <div style="display:flex; gap:0.3rem; margin-top:0.4rem; flex-wrap:wrap;">
+                                    <button type="button" class="btn-quick-chip" data-track-val="150">150m</button>
+                                    <button type="button" class="btn-quick-chip" data-track-val="200">200m</button>
+                                    <button type="button" class="btn-quick-chip active" data-track-val="250">250m</button>
+                                    <button type="button" class="btn-quick-chip" data-track-val="300">300m</button>
+                                    <button type="button" class="btn-quick-chip" data-track-val="400">400m</button>
+                                </div>
+                                <div class="form-hint">Saisissez librement n'importe quelle distance (ex: 180, 225, 260m...).</div>
+                            </div>
+
+                            <!-- Durée libre de la course -->
+                            <div class="form-group">
+                                <label for="durationInput">Durée de l'effort / séance (minutes) *</label>
+                                <div style="display:flex; align-items:center; gap:0.5rem;">
+                                    <input type="number" id="durationInput" min="1" max="180" step="0.5" value="12" placeholder="Ex: 12">
+                                    <span style="font-weight:700; color:var(--text-light); font-size:0.9rem;">min</span>
+                                </div>
+                                <div style="display:flex; gap:0.3rem; margin-top:0.4rem; flex-wrap:wrap;">
+                                    <button type="button" class="btn-quick-chip" data-dur-val="6">6 min</button>
+                                    <button type="button" class="btn-quick-chip" data-dur-val="10">10 min</button>
+                                    <button type="button" class="btn-quick-chip active" data-dur-val="12">12 min (Bac F)</button>
+                                    <button type="button" class="btn-quick-chip" data-dur-val="15">15 min (Bac G)</button>
+                                    <button type="button" class="btn-quick-chip" data-dur-val="20">20 min</button>
+                                </div>
+                                <div class="form-hint">Saisissez librement n'importe quelle durée (ex: 8, 12, 14.5 min...).</div>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Luc Léger -->
-                    <div id="test-pane-luc-leger" style="display:none;">
-                        <div class="form-group">
-                            <label for="lucPalier">Palier atteint *</label>
-                            <select id="lucPalier">
-                                <option value="4">Palier 4 (10.0 km/h)</option>
-                                <option value="5">Palier 5 (10.5 km/h)</option>
-                                <option value="6">Palier 6 (11.0 km/h)</option>
-                                <option value="7">Palier 7 (11.5 km/h)</option>
-                                <option value="8" selected>Palier 8 (12.0 km/h)</option>
-                                <option value="9">Palier 9 (12.5 km/h)</option>
-                                <option value="10">Palier 10 (13.0 km/h)</option>
-                                <option value="11">Palier 11 (13.5 km/h)</option>
-                                <option value="12">Palier 12 (14.0 km/h)</option>
-                                <option value="13">Palier 13 (14.5 km/h)</option>
-                                <option value="14">Palier 14 (15.0 km/h)</option>
-                                <option value="15">Palier 15 (15.5 km/h)</option>
-                                <option value="16">Palier 16 (16.0 km/h)</option>
+                        <div class="form-group" style="margin-top:0.85rem;">
+                            <label for="intensityInput">Allure ciblée (% VMA)</label>
+                            <select id="intensityInput">
+                                <option value="70">70% — Échauffement / Régénération</option>
+                                <option value="75">75% — Capacité Aérobie fondamentale</option>
+                                <option value="80">80% — Endurance active</option>
+                                <option value="85">85% — Course longue continue</option>
+                                <option value="90" selected>90% — Allure 3x500m (Intensif)</option>
+                                <option value="95">95% — Seuil anaérobie / Intermittent long</option>
+                                <option value="100">100% — VMA (Intermittent 30/30)</option>
+                                <option value="105">105% — Sur-VMA (Intermittent 15/15)</option>
                             </select>
                         </div>
+
+                        <button type="button" class="btn-calc" id="btnCalculateVma">
+                            <span>⚡ Calculer les Allures, Tours & Distances</span>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Etape 2: Paramètres de la Séance -->
-                <div class="card">
-                    <div class="card-header">
-                        <div class="step-num">2</div>
-                        <div>
-                            <h2>Paramètres du Cycle / Piste</h2>
-                            <p>Adaptez aux installations de votre établissement</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="trackLength">Longueur du tour de piste (mètres)</label>
-                        <select id="trackLength">
-                            <option value="200">200 m (Terrain de handball / petit plateau)</option>
-                            <option value="250" selected>250 m (Plateau EPS standard collège/lycée)</option>
-                            <option value="300">300 m</option>
-                            <option value="400">400 m (Piste d'athlétisme officielle)</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="targetIntensity">Intensité ciblée pour la séance (% VMA)</label>
-                        <select id="targetIntensity">
-                            <option value="70">70% — Aérobie Fondamentale (Échauffement / Récupération)</option>
-                            <option value="80">80% — Aérobie Capacité (Endurance)</option>
-                            <option value="85">85% — Allure Bac EPS (Course longue 12-15 min)</option>
-                            <option value="90" selected>90% — Allure Évaluation 3x500m (Intensif)</option>
-                            <option value="95">95% — Puissance Aérobie (Intermittent long)</option>
-                            <option value="100">100% — VMA (Intermittent 30/30)</option>
-                            <option value="105">105% — Supramaximale (Intermittent court 15/15)</option>
-                        </select>
-                    </div>
-
-                    <button type="button" class="btn-calc" id="btnCalculate">
-                        <span>⚡ Calculer les Allures & Passages</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Colonne Droite: Résultats -->
-            <div>
-                <div id="results-placeholder" class="card" style="text-align:center; padding:3rem 1.5rem; color:#64748b;">
-                    <div style="font-size:2.5rem; margin-bottom:0.75rem;">📊</div>
-                    <h3 style="color:#0f172a; font-size:1.15rem; margin-bottom:0.4rem;">Vos résultats s'afficheront ici</h3>
-                    <p style="font-size:0.875rem;">Sélectionnez vos options et cliquez sur <strong>« Calculer les Allures »</strong> pour obtenir les tableaux de passage au tour.</p>
-                </div>
-
-                <div id="results-container">
+                <!-- Colonne Droite : Résultats Visuels -->
+                <div>
                     <!-- Bannière VMA -->
                     <div class="vma-banner">
                         <div>
-                            <div class="vma-banner-label">VMA Estimée</div>
-                            <div class="vma-banner-val" id="resVma">13.5 km/h</div>
+                            <div class="vma-banner-label">Vitesse Maximale Aérobie</div>
+                            <div class="vma-banner-val" id="dispVma">13.5 km/h</div>
                         </div>
                         <div class="vma-banner-vo2">
                             VO2max estimée
-                            <strong id="resVo2">47.3 ml/kg/min</strong>
+                            <strong id="dispVo2">47.3 ml/kg/min</strong>
                         </div>
                     </div>
 
-                    <!-- Statistiques rapides -->
-                    <div class="stat-grid">
+                    <!-- Statistiques rapides (4 indicateurs clés) -->
+                    <div class="stat-grid" style="grid-template-columns: repeat(2, 1fr);">
                         <div class="stat-pill">
-                            <div class="stat-pill-label">Vitesse à l'intensité choisie</div>
-                            <div class="stat-pill-val" id="resSpeedTarget">12.2 km/h</div>
+                            <div class="stat-pill-label">Vitesse Allure Ciblée</div>
+                            <div class="stat-pill-val" id="dispTargetSpeed">12.2 km/h</div>
                         </div>
                         <div class="stat-pill">
-                            <div class="stat-pill-label">Temps au tour de piste</div>
-                            <div class="stat-pill-val" id="resLapTarget">1m 14s</div>
+                            <div class="stat-pill-label">Temps au Tour de Piste</div>
+                            <div class="stat-pill-val" id="dispTargetLap">1m 14s</div>
+                        </div>
+                        <div class="stat-pill">
+                            <div class="stat-pill-label" id="dispDurLabelDist">Distance Totale (12 min)</div>
+                            <div class="stat-pill-val" style="color:var(--secondary);" id="dispTargetDist">2 430 m</div>
+                        </div>
+                        <div class="stat-pill">
+                            <div class="stat-pill-label" id="dispDurLabelLaps">Tours Réalisés (12 min)</div>
+                            <div class="stat-pill-val" style="color:#0284c7;" id="dispTargetLapsCount">9 tours + 180m</div>
                         </div>
                     </div>
 
-                    <!-- Tableau d'allures -->
+                    <!-- Tableau complet des allures -->
                     <div class="card" style="padding:1rem;">
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
-                            <h3 style="font-size:0.95rem; font-weight:700; color:#0f172a;">Tableau des Allures & Passages</h3>
-                            <span style="font-size:0.75rem; color:#64748b;" id="resTrackDistLabel">Piste de 250m</span>
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.4rem;">
+                            <h3 style="font-size:0.95rem; font-weight:700; color:#0f172a;">Tableau d'entraînement & Passages</h3>
+                            <span style="font-size:0.75rem; color:#64748b;" id="dispTrackInfo">Piste de 250m · Durée 12 min</span>
                         </div>
                         <div class="table-responsive">
-                            <table class="allures-table">
+                            <table class="custom-table" id="tableAllures">
                                 <thead>
                                     <tr>
                                         <th>% VMA</th>
-                                        <th>Zone</th>
+                                        <th>Zone d'effort</th>
                                         <th>Vitesse</th>
                                         <th>Allure / km</th>
-                                        <th>Temps 100m</th>
-                                        <th>Tour de Piste</th>
-                                        <th>Dist. 10 min</th>
+                                        <th>100m</th>
+                                        <th>Tour</th>
+                                        <th id="thColDist">Dist. (12 min)</th>
+                                        <th id="thColTours">Tours</th>
                                     </tr>
                                 </thead>
-                                <tbody id="alluresTbody"></tbody>
+                                <tbody id="tbodyAllures"></tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- ══════════════════════════════════════════════════════════════
+             SECTION 2 : SIMULATEUR BAREME BAC EPS (MAROC)
+        ══════════════════════════════════════════════════════════════ -->
+        <div id="sec-bac-bareme" class="calc-section">
+            <div class="grid-2col">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="step-icon">🎯</div>
+                        <div>
+                            <h2>Simulateur Épreuve Demi-Fond Bac EPS</h2>
+                            <p>Calcul de la note selon les Orientations Pédagogiques 2007 (Lycée)</p>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bacSexe">Sexe de l'élève</label>
+                            <select id="bacSexe">
+                                <option value="G">Garçon</option>
+                                <option value="F">Fille</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bacVma">VMA de l'élève (km/h)</label>
+                            <input type="number" id="bacVma" min="8" max="22" step="0.1" value="14.0">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bacEpreuve">Épreuve choisie</label>
+                        <select id="bacEpreuve">
+                            <option value="3x500">3 x 500 mètres avec récupération (Intermittent)</option>
+                            <option value="continu">Course en continu (15 minutes garçons / 12 minutes filles)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bacContrat">Contrat d'allure annoncé (% VMA)</label>
+                            <select id="bacContrat">
+                                <option value="85">85% VMA (Course sécurisée)</option>
+                                <option value="90" selected>90% VMA (Allure recommandée)</option>
+                                <option value="95">95% VMA (Allure performance)</option>
+                                <option value="100">100% VMA (Performance maximale)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bacEcart">Écart de régularité constaté (secondes)</label>
+                            <select id="bacEcart">
+                                <option value="0">0 à 2s (Régularité parfaite = Max points)</option>
+                                <option value="3">3 à 5s (Bonne gestion de l'allure)</option>
+                                <option value="6">6 à 8s (Écart moyen)</option>
+                                <option value="10">&gt; 8s (Irrégulier)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn-calc" id="btnSimulerBac">
+                        <span>📊 Simuler la Note & Objectifs Temps</span>
+                    </button>
+                </div>
+
+                <!-- Résultats Simulation Bac -->
+                <div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="step-icon">🏆</div>
+                            <div>
+                                <h3>Résultats Prévisionnels Bac EPS</h3>
+                                <p>Détail de la note sur 20 points (Performance / Projet / Régularité)</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-grid">
+                            <div class="stat-pill">
+                                <div class="stat-pill-label">Temps Cible / 500m</div>
+                                <div class="stat-pill-val" id="dispTemps500">2m 23s</div>
+                            </div>
+                            <div class="stat-pill">
+                                <div class="stat-pill-label">Estimation Note Globale</div>
+                                <div class="stat-pill-val" style="color:var(--secondary);" id="dispNoteBac">16.5 / 20</div>
+                            </div>
+                        </div>
+
+                        <div class="bareme-box">
+                            <div class="bareme-header">
+                                <strong>Détail de l'évaluation (OP 2007)</strong>
+                                <span class="bareme-note-tag" id="dispNoteTag">Très Bon</span>
+                            </div>
+                            <ul style="font-size:0.86rem; color:#475569; padding-left:1.2rem; line-height:1.7;">
+                                <li><strong>Performance motrice (Vitesse & % VMA) :</strong> <span id="dispNotePerf">10/12</span></li>
+                                <li><strong>Maîtrise du projet & Contrat d'allure :</strong> <span id="dispNoteContrat">4/4</span></li>
+                                <li><strong>Régularité des séries / courses :</strong> <span id="dispNoteRegul">3.5/4</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════════════════
+             SECTION 3 : FICHE CONTRAT DE COURSE IMPRIMABLE
+        ══════════════════════════════════════════════════════════════ -->
+        <div id="sec-contrat-fiche" class="calc-section">
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1rem;">
+                    <div>
+                        <h2>Fiche d'Évaluation & Contrat Coureur / Observateur</h2>
+                        <p style="color:var(--text-light); font-size:0.85rem;">Prête à être imprimée pour vos élèves lors des séances et de l'évaluation finale.</p>
+                    </div>
+                    <button type="button" class="btn-outline" onclick="window.print()">
+                        <span>🖨️ Imprimer cette Fiche</span>
+                    </button>
+                </div>
+
+                <div class="printable-sheet">
+                    <div class="sheet-title">
+                        <h4>Fiche de Course de Demi-Fond · Contrat d'Allure</h4>
+                        <p>Établissement : .......................................... · Classe : ................... · Date : ...../...../2026</p>
+                    </div>
+
+                    <div class="sheet-grid">
+                        <div class="sheet-field"><span>Coureur :</span> ............................................</div>
+                        <div class="sheet-field"><span>Observateur :</span> ............................................</div>
+                        <div class="sheet-field"><span>VMA de départ :</span> ........ km/h</div>
+                    </div>
+
+                    <div class="sheet-grid">
+                        <div class="sheet-field"><span>Épreuve :</span> 3 x 500m / Continu</div>
+                        <div class="sheet-field"><span>Allure choisie :</span> ........ % VMA</div>
+                        <div class="sheet-field"><span>Temps visé / 500m :</span> ........ min ........ s</div>
+                    </div>
+
+                    <div class="table-responsive" style="margin-top:1rem;">
+                        <table class="custom-table" style="text-align:center;">
+                            <thead>
+                                <tr>
+                                    <th>Course</th>
+                                    <th>Temps Visé (Contrat)</th>
+                                    <th>Temps Réellement Réalisé</th>
+                                    <th>Écart (+/- secondes)</th>
+                                    <th>Observation Rythme / Foulée</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Série 1</strong></td>
+                                    <td>....... min ....... s</td>
+                                    <td>....... min ....... s</td>
+                                    <td>....... s</td>
+                                    <td>Régulier / Trop rapide / Fléchissement</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Série 2</strong></td>
+                                    <td>....... min ....... s</td>
+                                    <td>....... min ....... s</td>
+                                    <td>....... s</td>
+                                    <td>Régulier / Trop rapide / Fléchissement</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Série 3</strong></td>
+                                    <td>....... min ....... s</td>
+                                    <td>....... min ....... s</td>
+                                    <td>....... s</td>
+                                    <td>Régulier / Trop rapide / Fléchissement</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div style="margin-top:1.25rem; display:flex; justify-content:space-between; font-size:0.85rem; color:#475569;">
+                        <div>Signature de l'observateur :</div>
+                        <div>Visa du professeur d'EPS :</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════════════════
+             SECTION 4 : RÉFÉRENTIEL OP 2007-2009
+        ══════════════════════════════════════════════════════════════ -->
+        <div id="sec-guide-op" class="calc-section">
+            <div class="pedago-guide">
+                <div class="card-header" style="margin-bottom:1rem;">
+                    <div class="step-icon">📖</div>
+                    <div>
+                        <h2>Repères Didactiques & Orientations Pédagogiques EPS Maroc</h2>
+                        <p>Textes officiels régissant l'enseignement du demi-fond et de la course de durée</p>
+                    </div>
+                </div>
+
+                <div class="guide-item">
+                    <div class="guide-question">📌 Quel test choisir en début de cycle EPS ?</div>
+                    <div class="guide-answer">
+                        Le <strong>Demi-Cooper (6 minutes)</strong> est le plus facile à mettre en place avec de grands effectifs (35 à 45 élèves) sur un terrain classique de collège ou lycée au Maroc. Pour des élèves plus âgés ou sportifs, le <strong>Test de Cooper (12 minutes)</strong> offre une excellente corrélation avec la VO₂max.
+                    </div>
+                </div>
+
+                <div class="guide-item">
+                    <div class="guide-question">📌 Quelles sont les VMA moyennes observées au Maroc ?</div>
+                    <div class="guide-answer">
+                        * <strong>Collège (1ère à 3ème AC) :</strong> Filles : 10.0 à 12.5 km/h · Garçons : 11.5 à 14.5 km/h.<br>
+                        * <strong>Lycée (Tronc Commun & Bac) :</strong> Filles : 10.5 à 13.5 km/h · Garçons : 13.0 à 16.5 km/h.
+                    </div>
+                </div>
+
+                <div class="guide-item">
+                    <div class="guide-question">📌 Comment construire un contrat d'allure efficace ?</div>
+                    <div class="guide-answer">
+                        Pour l'épreuve de 3 x 500m au Bac EPS, l'allure optimale se situe généralement entre <strong>88% et 92% de la VMA</strong>. Travailler à 100% de la VMA dès le premier 500m entraîne une accumulation rapide d'acide lactique et un effondrement sur la 2ème et 3ème série.
+                    </div>
+                </div>
+
+                <div class="guide-item">
+                    <div class="guide-question">📌 Comment baliser la piste pour aider les élèves ?</div>
+                    <div class="guide-answer">
+                        Posez des plots tous les <strong>50 mètres</strong> (ex: 5 plots pour un plateau de 250m). Donnez aux observateurs le tableau des temps de passage par plot pour qu'ils indiquent au coureur s'il est en avance, à l'heure ou en retard à chaque passage.
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
 
-    <!-- Footer Officiel du Site (100% Identique au site profeps.ma) -->
+    <!-- ═══ FOOTER CANONIQUE DU SITE (IDENTIQUE À profeps.ma) ═══ -->
     <footer class="footer">
         <div class="footer-inner">
             <div class="footer-brand">
@@ -655,99 +1175,174 @@
         </div>
     </footer>
 
-    <!-- Logique Interactive -->
+    <!-- ═══ LOGIQUE JAVASCRIPT ULTRA-COMPLÈTE ═══ -->
     <script>
-        // Menu mobile
+        // Navbar scroll & mobile menu
         const navbar = document.getElementById("navbar");
         const navToggle = document.getElementById("navToggle");
         const navMenu = document.getElementById("navMenu");
         window.addEventListener("scroll", () => { navbar.classList.toggle("scrolled", window.scrollY > 40); });
         if (navToggle && navMenu) {
-            navToggle.addEventListener("click", () => {
-                navMenu.classList.toggle("active");
-            });
+            navToggle.addEventListener("click", () => { navMenu.classList.toggle("active"); });
         }
 
-        // Onglets de test
-        let currentTest = "direct";
-        const tabBtns = document.querySelectorAll(".test-tab-btn");
-        const paneDirect = document.getElementById("test-pane-direct");
-        const paneCooper = document.getElementById("test-pane-demi-cooper");
-        const paneLuc = document.getElementById("test-pane-luc-leger");
-
-        tabBtns.forEach(btn => {
+        // Gestion des grandes sections d'onglets
+        const mainTabBtns = document.querySelectorAll(".main-tab-btn");
+        const sections = document.querySelectorAll(".calc-section");
+        mainTabBtns.forEach(btn => {
             btn.addEventListener("click", () => {
-                tabBtns.forEach(b => b.classList.remove("active"));
+                mainTabBtns.forEach(b => b.classList.remove("active"));
+                sections.forEach(s => s.classList.remove("active"));
                 btn.classList.add("active");
-                currentTest = btn.dataset.test;
-
-                paneDirect.style.display = currentTest === "direct" ? "block" : "none";
-                paneCooper.style.display = currentTest === "demi-cooper" ? "block" : "none";
-                paneLuc.style.display = currentTest === "luc-leger" ? "block" : "none";
+                const targetSec = document.getElementById(btn.dataset.section);
+                if (targetSec) targetSec.classList.add("active");
             });
         });
 
-        // Calcul
-        const btnCalc = document.getElementById("btnCalculate");
-        btnCalc.addEventListener("click", triggerCalculate);
+        // Gestion des sous-onglets de test VMA
+        let activeTest = "direct";
+        const testTypeBtns = document.querySelectorAll(".test-type-btn");
+        const testPanes = {
+            direct: document.getElementById("pane-direct"),
+            cooper: document.getElementById("pane-cooper"),
+            "cooper-12": document.getElementById("pane-cooper-12"),
+            "luc-leger": document.getElementById("pane-luc-leger"),
+            vameval: document.getElementById("pane-vameval")
+        };
 
-        function triggerCalculate() {
+        testTypeBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                testTypeBtns.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                activeTest = btn.dataset.test;
+                Object.keys(testPanes).forEach(k => {
+                    if (testPanes[k]) testPanes[k].style.display = k === activeTest ? "block" : "none";
+                });
+            });
+        });
+
+        // Puces rapides de distance de piste
+        document.querySelectorAll("[data-track-val]").forEach(chip => {
+            chip.addEventListener("click", () => {
+                document.querySelectorAll("[data-track-val]").forEach(c => c.classList.remove("active"));
+                chip.classList.add("active");
+                document.getElementById("trackLengthInput").value = chip.dataset.trackVal;
+                calculateVmaAndAllures();
+            });
+        });
+
+        // Puces rapides de durée de course
+        document.querySelectorAll("[data-dur-val]").forEach(chip => {
+            chip.addEventListener("click", () => {
+                document.querySelectorAll("[data-dur-val]").forEach(c => c.classList.remove("active"));
+                chip.classList.add("active");
+                document.getElementById("durationInput").value = chip.dataset.durVal;
+                calculateVmaAndAllures();
+            });
+        });
+
+        // Écoute de la saisie libre pour mettre à jour les puces
+        document.getElementById("trackLengthInput").addEventListener("input", () => {
+            const val = document.getElementById("trackLengthInput").value;
+            document.querySelectorAll("[data-track-val]").forEach(c => {
+                c.classList.toggle("active", c.dataset.trackVal === val);
+            });
+        });
+        document.getElementById("durationInput").addEventListener("input", () => {
+            const val = document.getElementById("durationInput").value;
+            document.querySelectorAll("[data-dur-val]").forEach(c => {
+                c.classList.toggle("active", c.dataset.durVal === val);
+            });
+        });
+
+        // Calcul VMA & Allures
+        const btnCalcVma = document.getElementById("btnCalculateVma");
+        if (btnCalcVma) {
+            btnCalcVma.addEventListener("click", calculateVmaAndAllures);
+        }
+
+        function calculateVmaAndAllures() {
             let vma = 0;
-            if (currentTest === "direct") {
-                vma = parseFloat(document.getElementById("directVma").value) || 0;
-            } else if (currentTest === "demi-cooper") {
-                const dist = parseFloat(document.getElementById("cooperDist").value) || 0;
+            if (activeTest === "direct") {
+                vma = parseFloat(document.getElementById("directVmaInput").value) || 0;
+            } else if (activeTest === "cooper") {
+                const dist = parseFloat(document.getElementById("cooperDistInput").value) || 0;
                 vma = dist / 100;
-            } else if (currentTest === "luc-leger") {
-                const palier = parseFloat(document.getElementById("lucPalier").value) || 8;
+            } else if (activeTest === "cooper-12") {
+                const dist12 = parseFloat(document.getElementById("cooper12DistInput").value) || 0;
+                if (dist12 > 505) {
+                    const vo2 = (dist12 - 504.9) / 44.73;
+                    vma = vo2 / 3.5;
+                } else {
+                    vma = dist12 / 180;
+                }
+            } else if (activeTest === "luc-leger") {
+                const palier = parseFloat(document.getElementById("lucPalierInput").value) || 8;
                 vma = 8 + (palier * 0.5);
+            } else if (activeTest === "vameval") {
+                vma = parseFloat(document.getElementById("vamevalPalierInput").value) || 13.5;
             }
 
             if (vma <= 0 || isNaN(vma)) {
-                alert("Veuillez saisir une valeur valide.");
+                alert("Veuillez saisir une valeur de test valide.");
                 return;
             }
 
-            const trackDist = parseFloat(document.getElementById("trackLength").value) || 250;
-            const targetIntensity = parseFloat(document.getElementById("targetIntensity").value) || 90;
+            const trackDist = parseFloat(document.getElementById("trackLengthInput").value) || 250;
+            const durationMin = parseFloat(document.getElementById("durationInput").value) || 12;
+            const targetIntensity = parseFloat(document.getElementById("intensityInput").value) || 90;
+            const durationSec = durationMin * 60;
 
-            // Affichage résultats
-            document.getElementById("results-placeholder").style.display = "none";
-            const resContainer = document.getElementById("results-container");
-            resContainer.style.display = "block";
-
-            document.getElementById("resVma").textContent = vma.toFixed(1) + " km/h";
-            document.getElementById("resVo2").textContent = (vma * 3.5).toFixed(1) + " ml/kg/min";
-            document.getElementById("resTrackDistLabel").textContent = "Piste de " + trackDist + "m";
+            // Remplir la bannière et statistiques
+            document.getElementById("dispVma").textContent = vma.toFixed(1) + " km/h";
+            document.getElementById("dispVo2").textContent = (vma * 3.5).toFixed(1) + " ml/kg/min";
+            document.getElementById("dispTrackInfo").textContent = `Piste de ${trackDist}m · Durée ${durationMin} min`;
+            document.getElementById("thColDist").textContent = `Dist. (${durationMin} min)`;
 
             const targetSpeedKmh = vma * (targetIntensity / 100);
             const targetSpeedMs = targetSpeedKmh / 3.6;
-            document.getElementById("resSpeedTarget").textContent = targetSpeedKmh.toFixed(1) + " km/h (" + targetIntensity + "%)";
+            document.getElementById("dispTargetSpeed").textContent = targetSpeedKmh.toFixed(1) + " km/h (" + targetIntensity + "%)";
 
+            // Calcul temps au tour
             const lapSec = trackDist / targetSpeedMs;
             const lapMin = Math.floor(lapSec / 60);
             const lapRestSec = Math.round(lapSec % 60);
-            document.getElementById("resLapTarget").textContent = (lapMin > 0 ? lapMin + "m " : "") + (lapRestSec < 10 ? "0" : "") + lapRestSec + "s";
+            document.getElementById("dispTargetLap").textContent = (lapMin > 0 ? lapMin + "m " : "") + (lapRestSec < 10 ? "0" : "") + lapRestSec + "s";
+
+            // Calcul distance totale et nombre de tours sur la durée choisie
+            const targetTotalDist = Math.round(targetSpeedMs * durationSec);
+            const totalLaps = targetTotalDist / trackDist;
+            const fullLaps = Math.floor(totalLaps);
+            const remMeters = Math.round(targetTotalDist % trackDist);
+
+            document.getElementById("dispDurLabelDist").textContent = `Distance Totale (${durationMin} min)`;
+            document.getElementById("dispDurLabelLaps").textContent = `Tours Réalisés (${durationMin} min)`;
+            document.getElementById("dispTargetDist").textContent = targetTotalDist.toLocaleString("fr-FR") + " m";
+            document.getElementById("dispTargetLapsCount").textContent = `${fullLaps} tours` + (remMeters > 0 ? ` + ${remMeters}m` : "");
+
+            // Synchroniser avec le simulateur Bac
+            const bacVmaInput = document.getElementById("bacVma");
+            if (bacVmaInput) bacVmaInput.value = vma.toFixed(1);
 
             // Tableau des allures
-            const intensities = [
+            const zones = [
                 { pct: 60, name: "Récupération", color: "#64748b" },
                 { pct: 70, name: "Aérobie Basse", color: "#0284c7" },
-                { pct: 75, name: "Endurance", color: "#0ea5e9" },
+                { pct: 75, name: "Capacité Aérobie", color: "#0ea5e9" },
                 { pct: 80, name: "Endurance Active", color: "#10b981" },
-                { pct: 85, name: "Bac EPS (Long)", color: "#059669" },
+                { pct: 85, name: "Bac EPS (Continu)", color: "#059669" },
                 { pct: 90, name: "Allure 3x500m", color: "#eab308" },
-                { pct: 95, name: "Seuil Lactique", color: "#f97316" },
-                { pct: 100, name: "VMA (100%)", color: "#ef4444" },
+                { pct: 95, name: "Seuil Anaérobie", color: "#f97316" },
+                { pct: 100, name: "100% VMA", color: "#ef4444" },
                 { pct: 105, name: "Sur-VMA (Court)", color: "#dc2626" },
-                { pct: 110, name: "Sprint Intermittent", color: "#991b1b" }
+                { pct: 110, name: "Vitesse Lactique", color: "#991b1b" }
             ];
 
-            const tbody = document.getElementById("alluresTbody");
+            const tbody = document.getElementById("tbodyAllures");
             tbody.innerHTML = "";
 
-            intensities.forEach(item => {
-                const spdKmh = vma * (item.pct / 100);
+            zones.forEach(z => {
+                const spdKmh = vma * (z.pct / 100);
                 const spdMs = spdKmh / 3.6;
                 const secKm = 3600 / spdKmh;
                 const pMin = Math.floor(secKm / 60);
@@ -759,21 +1354,74 @@
                 const tMin = Math.floor(tourSec / 60);
                 const tSec = Math.round(tourSec % 60);
                 const tourStr = (tMin > 0 ? tMin + "m " : "") + (tSec < 10 ? "0" : "") + tSec + "s";
-                const dist10 = Math.round(spdMs * 600) + "m";
+                
+                // Calcul distance et tours pour la durée choisie
+                const distCustom = Math.round(spdMs * durationSec);
+                const lapsCustom = (distCustom / trackDist).toFixed(1);
 
-                const isSel = Math.abs(targetIntensity - item.pct) <= 2;
+                const isSel = Math.abs(targetIntensity - z.pct) <= 2;
                 const tr = document.createElement("tr");
                 if (isSel) tr.className = "selected-row";
-                tr.innerHTML = `<td><strong>${item.pct}%</strong></td>
-                                <td><span class="zone-pill" style="background:${item.color}18; color:${item.color};">${item.name}</span></td>
+                tr.innerHTML = `<td><strong>${z.pct}%</strong></td>
+                                <td><span class="zone-pill" style="background:${z.color}18; color:${z.color};">${z.name}</span></td>
                                 <td><strong>${spdKmh.toFixed(1)}</strong> km/h</td>
                                 <td>${paceStr}</td>
                                 <td>${time100}</td>
                                 <td><strong>${tourStr}</strong></td>
-                                <td>${dist10}</td>`;
+                                <td><strong>${distCustom.toLocaleString("fr-FR")}m</strong></td>
+                                <td>${lapsCustom} trs</td>`;
                 tbody.appendChild(tr);
             });
         }
+
+        // Simulateur Bac EPS
+        const btnSimulerBac = document.getElementById("btnSimulerBac");
+        if (btnSimulerBac) {
+            btnSimulerBac.addEventListener("click", simulerNoteBac);
+        }
+
+        function simulerNoteBac() {
+            const sexe = document.getElementById("bacSexe").value;
+            const vma = parseFloat(document.getElementById("bacVma").value) || 14.0;
+            const contratPct = parseFloat(document.getElementById("bacContrat").value) || 90;
+            const ecart = parseFloat(document.getElementById("bacEcart").value) || 0;
+
+            const speedKmh = vma * (contratPct / 100);
+            const speedMs = speedKmh / 3.6;
+            const time500Sec = 500 / speedMs;
+            const tMin = Math.floor(time500Sec / 60);
+            const tSec = Math.round(time500Sec % 60);
+            document.getElementById("dispTemps500").textContent = tMin + "m " + (tSec < 10 ? "0" : "") + tSec + "s";
+
+            // Calcul barème OP 2007 : Performance (12 pts) + Contrat (4 pts) + Régularité (4 pts)
+            let notePerf = 0;
+            const baremeRef = sexe === "G" ? 15.0 : 12.5; // VMA de référence pour 12/12
+            notePerf = Math.min(12, Math.max(3, (speedKmh / baremeRef) * 11));
+
+            let noteContrat = 4;
+            if (contratPct < 85) noteContrat = 2.5;
+
+            let noteRegul = 4;
+            if (ecart > 2 && ecart <= 5) noteRegul = 3;
+            else if (ecart > 5 && ecart <= 8) noteRegul = 2;
+            else if (ecart > 8) noteRegul = 1;
+
+            const noteTotale = Math.min(20, (notePerf + noteContrat + noteRegul)).toFixed(1);
+            document.getElementById("dispNoteBac").textContent = noteTotale + " / 20";
+            document.getElementById("dispNotePerf").textContent = notePerf.toFixed(1) + " / 12";
+            document.getElementById("dispNoteContrat").textContent = noteContrat + " / 4";
+            document.getElementById("dispNoteRegul").textContent = noteRegul + " / 4";
+
+            const noteTag = document.getElementById("dispNoteTag");
+            if (noteTotale >= 16) { noteTag.textContent = "Très Bon (Excellent)"; noteTag.style.color = "#006233"; }
+            else if (noteTotale >= 13) { noteTag.textContent = "Bon travail"; noteTag.style.color = "#0284c7"; }
+            else if (noteTotale >= 10) { noteTag.textContent = "Moyen (Acquis)"; noteTag.style.color = "#eab308"; }
+            else { noteTag.textContent = "À consolider"; noteTag.style.color = "#c1272d"; }
+        }
+
+        // Lancer le calcul par défaut à l'ouverture
+        calculateVmaAndAllures();
+        simulerNoteBac();
     </script>
 </body>
 </html>
