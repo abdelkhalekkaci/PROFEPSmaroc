@@ -597,57 +597,68 @@
             .cta-box { padding: var(--spacing-xl); }
             .section-header { margin-bottom: var(--spacing-xl); }
         }
-            /* ═══ NAVBAR CANONIQUE ═══ */
-        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1rem 2rem; background: rgba(255,255,255,0.96); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(226,232,240,0.7); transition: all 0.3s ease; }
-        .navbar.scrolled { padding: 0.5rem 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); background: rgba(255,255,255,0.99); }
-        .nav-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
-        .nav-logo { justify-self: start; display: flex; align-items: center; }
-        .nav-logo img { height: 56px; transition: all 0.3s ease; }
-        .navbar.scrolled .nav-logo img { height: 46px; }
-        .nav-menu { display: flex; align-items: center; justify-content: center; gap: 1.5rem; }
-        .nav-right { justify-self: end; display: flex; align-items: center; gap: 0.75rem; }
-        .nav-link { font-size: 0.9375rem; font-weight: 500; color: #4a4a68; padding: 0.5rem; position: relative; transition: color 0.3s ease; text-decoration: none; }
-        .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 50%; right: 50%; height: 2px; background: linear-gradient(90deg, #c1272d, #006233); border-radius: 2px; transition: left 0.3s ease, right 0.3s ease; }
+
+        /* ═══ MINI CALCULATEUR VMA ACCUEIL ═══ */
+        .vma-quick-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            background: #f1f5f9;
+            padding: 0.35rem;
+            border-radius: var(--radius-lg);
+        }
+        .vma-quick-tab {
+            flex: 1;
+            min-width: 120px;
+            padding: 0.65rem 0.75rem;
+            border: none;
+            background: transparent;
+            color: #475569;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        .vma-quick-tab:hover {
+            color: #0f172a;
+        }
+        .vma-quick-tab.active {
+            background: white;
+            color: #006233;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            font-weight: 700;
+        }
+
+                /* ═══ NAVBAR UNIFIÉE (IDENTIQUE SUR TOUT LE SITE) ═══ */
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 0.65rem 1.5rem; background: rgba(255,255,255,0.98); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid #e2e8f0; transition: all 0.25s ease; }
+        .navbar.scrolled { box-shadow: 0 2px 10px rgba(0,0,0,0.06); padding: 0.5rem 1.5rem; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { display: flex; align-items: center; gap: 0.5rem; }
+        .nav-logo img { height: 44px; width: auto; max-width: 160px; object-fit: contain; display: block; }
+        .nav-menu { display: flex; align-items: center; gap: 1.25rem; }
+        .nav-link { font-size: 0.9rem; font-weight: 600; color: #475569; padding: 0.4rem 0.2rem; position: relative; text-decoration: none; transition: all 0.25s ease; }
+        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 50%; right: 50%; height: 2px; background: linear-gradient(90deg, #c1272d, #006233); border-radius: 2px; transition: left 0.25s ease, right 0.25s ease; }
         .nav-link:hover::after, .nav-link.active::after { left: 0; right: 0; }
         .nav-link:hover, .nav-link.active { color: #c1272d; }
-        .nav-btn-login { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1.25rem; background: transparent; color: #c1272d; font-weight: 600; font-size: 0.9375rem; border-radius: 9999px; border: 2px solid #c1272d; transition: all 0.3s ease; text-decoration: none; white-space: nowrap; line-height: 1.4; }
-        .nav-btn-login:hover { background: #c1272d; color: white; box-shadow: 0 4px 14px rgba(193,39,45,0.3); transform: translateY(-1px); }
-        .nav-cta { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1.25rem; background: linear-gradient(135deg, #c1272d, #006233); color: white; font-weight: 600; font-size: 0.9375rem; border-radius: 9999px; border: 2px solid transparent; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; text-decoration: none; white-space: nowrap; line-height: 1.4; }
-        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(193,39,45,0.3); }
+        .nav-right { display: flex; align-items: center; gap: 0.75rem; }
+        .nav-cta { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.45rem 1.15rem; background: linear-gradient(135deg, #c1272d, #006233); color: white; font-weight: 600; font-size: 0.875rem; border-radius: 9999px; box-shadow: 0 2px 6px rgba(193,39,45,0.25); text-decoration: none; transition: all 0.25s ease; }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(193,39,45,0.35); }
         .nav-cta.nav-cta-mobile { display: none; }
         .nav-cta.nav-cta-desktop { display: inline-flex; }
-        .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; width: 36px; height: 36px; justify-content: center; align-items: center; border-radius: 8px; transition: background 0.3s ease; }
-        .nav-toggle:hover { background: rgba(193,39,45,0.06); }
-        .nav-toggle span { display: block; width: 22px; height: 2px; background: #1a1a2e; border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; }
-        .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-        .nav-toggle.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-        .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-        .nav-backdrop { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.3); z-index: 99; opacity: 0; transition: opacity 0.3s ease; }
-        .nav-backdrop.active { display: block; opacity: 1; }
-        .nav-user-menu { display: flex; align-items: center; gap: 0.5rem; }
-        .nav-user-info { display: flex; align-items: center; gap: 0.5rem; padding: 0.375rem 0.75rem 0.375rem 0.375rem; background: #f8f9fa; border-radius: 9999px; transition: all 0.3s ease; text-decoration: none; cursor: pointer; }
-        .nav-user-info:hover { background: #f1f5f9; }
-        .nav-user-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #c1272d, #006233); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.8125rem; flex-shrink: 0; }
-        .nav-user-name { font-weight: 600; font-size: 0.875rem; color: #1a1a2e; }
-        .nav-btn-logout { width: 36px; height: 36px; border-radius: 50%; background: #f8f9fa; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #6b7280; transition: all 0.3s ease; }
-        .nav-btn-logout:hover { background: #fee2e2; color: #c1272d; }
-        @media (max-width: 768px) {
-            .nav-container { display: flex; justify-content: space-between; }
-            .nav-right { gap: 0.5rem; }
-            .nav-menu { position: absolute; top: 100%; left: 1rem; right: 1rem; background: white; flex-direction: column; padding: 1.5rem; box-shadow: 0 10px 40px rgba(0,0,0,0.12); border-radius: 16px; gap: 0.5rem; transform: translateY(-10px); opacity: 0; pointer-events: none; transition: transform 0.3s ease, opacity 0.3s ease; z-index: 100; border: 1px solid #f1f5f9; justify-content: flex-start; align-items: flex-start; }
-            .nav-menu.active { transform: translateY(0); opacity: 1; pointer-events: auto; }
-            .nav-link { padding: 0.5rem 0; width: 100%; }
-            .nav-link::after { bottom: 0; }
+        .nav-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 6px; width: 34px; height: 34px; justify-content: center; align-items: center; border-radius: 6px; }
+        .nav-toggle span { display: block; width: 20px; height: 2px; background: #1e293b; border-radius: 2px; }
+
+        @media (max-width: 868px) {
+            .nav-menu { display: none; position: fixed; top: 58px; left: 0; right: 0; background: white; flex-direction: column; padding: 1.25rem; border-bottom: 1px solid #e2e8f0; box-shadow: 0 8px 20px rgba(0,0,0,0.08); gap: 0.75rem; }
+            .nav-menu.active { display: flex; }
             .nav-toggle { display: flex; }
             .nav-cta.nav-cta-mobile { display: inline-flex; }
             .nav-cta.nav-cta-desktop { display: none; }
-            .nav-btn-login { display: none; }
         }
-        @media (max-width: 480px) {
-            .navbar { padding: 0.75rem 1rem; }
-            .navbar.scrolled { padding: 0.375rem 1rem; }
-        }
-                /* ═══ FOOTER CANONIQUE ═══ */
+        /* ═══ FOOTER CANONIQUE ═══ */
         .footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 3.5rem 2rem 0; }
         .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; }
         .footer-brand { display: flex; flex-direction: column; gap: 1rem; }
@@ -683,13 +694,13 @@
 </head>
 <body>
     <div class="nav-backdrop" id="navBackdrop"></div>
-            <nav class="navbar" id="navbar">
+        <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="/" class="nav-logo" aria-label="Prof EPS Maroc - Accueil">
-                <img src="/images/prof_eps.png" alt="Prof EPS Maroc" width="140" height="40" fetchpriority="high" decoding="async" style="height:56px; width:auto; max-width:180px; object-fit:contain; display:block;">
+            <a href="index.html" class="nav-logo" aria-label="Prof EPS - Accueil">
+                <img src="/images/prof_eps.png" onerror="this.onerror=null; this.src='images/prof_eps.png'; if(!this.complete || this.naturalWidth === 0) { this.src='https://profeps.ma/images/prof_eps.png'; }" alt="Prof EPS" width="140" height="40" fetchpriority="high" decoding="async">
             </a>
             <div class="nav-menu" id="navMenu">
-                <a href="/" class="nav-link active">Accueil</a>
+                <a href="index.html" class="nav-link active">Accueil</a>
                 <a href="generateur.html" class="nav-link">Générateur</a>
                 <a href="calculateur-vma.html" class="nav-link">Calculateur VMA</a>
                 <a href="blog.html" class="nav-link">Blog</a>
@@ -712,7 +723,7 @@
                 <p class="hero-description">Prof EPS Maroc (profeps.ma) est la plateforme marocaine des professeurs d'EPS : générez fiches de séance, projets de cycle et grilles d'évaluation conformes aux OP 2007 & 2009. Plus de copier-coller, plus de mise en forme à la main.</p>
                 <div class="hero-buttons">
                     <a href="#generateur" class="btn btn-primary"><span>🚀</span> Générer mes documents</a>
-                    <a href="calculateur-vma.html" class="nav-link">Calculateur VMA</a>                <a href="blog.html" class="btn btn-outline"><span>📚</span> Lire le blog</a>
+                    <a href="calculateur-vma.html" class="btn btn-outline"><span>⚡</span> Calculateur VMA</a>
                 </div>
             </div>
             <div class="hero-visual">
@@ -925,6 +936,95 @@
             </div>
         </div>
     </section>
+
+    <!-- ============================================== -->
+    <!-- MINI CALCULATEUR VMA & ALLURES EXPRESS -->
+    <!-- ============================================== -->
+    <section class="generator-section" id="calculateur-vma-express" style="padding-top: 1.5rem; background: linear-gradient(180deg, var(--bg-secondary) 0%, #ffffff 100%);">
+        <div class="generator-container">
+            <div class="generator-box" style="border: 2px solid #e2e8f0; box-shadow: 0 10px 30px -5px rgba(0,0,0,0.06);">
+                <div class="generator-header">
+                    <span class="section-badge" style="background: rgba(0, 98, 51, 0.1); color: #006233;">⚡ Outil Universel EPS & Athlétisme</span>
+                    <h2>Calculateur VMA & Allures Express</h2>
+                    <p>Sélectionnez votre test de terrain, entrez votre performance et obtenez immédiatement vos résultats complets avec tableau d'entraînement.</p>
+                </div>
+
+                <form class="quick-form" id="quickVmaForm">
+                    <!-- Sélection du test -->
+                    <div class="vma-quick-tabs">
+                        <button type="button" class="vma-quick-tab active" data-vma-test="cooper-6">⏱️ Demi-Cooper (6')</button>
+                        <button type="button" class="vma-quick-tab" data-vma-test="cooper-12">🏃 Cooper (12')</button>
+                        <button type="button" class="vma-quick-tab" data-vma-test="luc-leger">🔊 Luc Léger</button>
+                        <button type="button" class="vma-quick-tab" data-vma-test="vameval">🏁 VAMEVAL</button>
+                        <button type="button" class="vma-quick-tab" data-vma-test="direct">⚡ Saisie VMA</button>
+                    </div>
+
+                    <!-- Champs de saisie -->
+                    <div class="form-row">
+                        <!-- Champ spécifique au test -->
+                        <div class="form-group" id="homeTestValGroup">
+                            <label class="form-label" id="homeTestValLabel">
+                                <span>🎯</span> Distance courue en 6 minutes (m) <span class="required">*</span>
+                            </label>
+                            <input type="number" class="form-input" id="homeTestVal" placeholder="1450" value="1450" required min="100" max="6000" step="10">
+                            <div class="form-hint" id="homeTestValHint" style="font-size: 0.78rem; color: #64748b; margin-top: 0.25rem;">Distance totale parcourue en 6 minutes (ex: 1 450 m)</div>
+                        </div>
+
+                        <!-- Distance de la piste -->
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span>🏟️</span> Longueur de la piste (m)
+                            </label>
+                            <input type="number" class="form-input" id="homePisteVal" placeholder="250" value="250" min="50" max="1000" step="10">
+                            <div class="form-hint" style="font-size: 0.78rem; color: #64748b; margin-top: 0.25rem;">Piste d'établissement (200m, 250m) ou officielle (400m)</div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <!-- Durée ciblée -->
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span>⏱️</span> Durée de course ciblée (min)
+                            </label>
+                            <input type="number" class="form-input" id="homeDureeVal" placeholder="12" value="12" min="1" max="120" step="1">
+                            <div class="form-hint" style="font-size: 0.78rem; color: #64748b; margin-top: 0.25rem;">Ex: 12 min (Bac), 6 min, 10 min, 15 min...</div>
+                        </div>
+
+                        <!-- % VMA -->
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span>🔥</span> Intensité ciblée (% VMA)
+                            </label>
+                            <select class="form-select" id="homeAllureVal">
+                                <option value="60">60% VMA — Échauffement & Récupération</option>
+                                <option value="70">70% VMA — Endurance fondamentale</option>
+                                <option value="80" selected>80% VMA — Allure continue cible (Bac / Course)</option>
+                                <option value="85">85% VMA — Seuil aérobie supérieur</option>
+                                <option value="90">90% VMA — Seuil anaérobie</option>
+                                <option value="95">95% VMA — Spécifique 10 km</option>
+                                <option value="100">100% VMA — Vitesse Maximale Aérobie</option>
+                                <option value="105">105% VMA — Intermittent court 30"/30"</option>
+                                <option value="110">110% VMA — Puissance Max Aérobie (PMA)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="generate-btn-container" style="margin-top: 1.5rem;">
+                        <button type="submit" class="generate-btn" style="background: linear-gradient(135deg, #006233 0%, #c1272d 100%);">
+                            <span class="icon">⚡</span>
+                            <span>Calculer ma VMA & Allures</span>
+                        </button>
+                    </div>
+
+                    <p class="form-note">
+                        Vous serez instantanément redirigé vers le calculateur avec vos résultats et votre tableau d'allures calculés.
+                        <a href="calculateur-vma.html">Accéder au calculateur complet →</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <!-- Section Articles -->
     <section class="articles-section" id="articles">
         <div class="section-container">
@@ -1296,6 +1396,93 @@
             // Rediriger vers la page générateur
             window.location.href = 'generateur.html';
         });
+
+        // ═══ LOGIQUE MINI-CALCULATEUR VMA ACCUEIL ═══
+        let selectedHomeTest = 'cooper-6';
+        const homeTestConfig = {
+            'cooper-6': {
+                label: '<span>🎯</span> Distance courue en 6 minutes (m) <span class="required">*</span>',
+                placeholder: '1450',
+                val: '1450',
+                min: '100',
+                max: '5000',
+                step: '10',
+                hint: 'Distance totale parcourue en 6 minutes (ex: 1 450 m)'
+            },
+            'cooper-12': {
+                label: '<span>🏃</span> Distance courue en 12 minutes (m) <span class="required">*</span>',
+                placeholder: '2700',
+                val: '2700',
+                min: '200',
+                max: '6000',
+                step: '10',
+                hint: 'Distance totale parcourue en 12 minutes (ex: 2 700 m)'
+            },
+            'luc-leger': {
+                label: '<span>🔊</span> Palier atteint au Test Navette <span class="required">*</span>',
+                placeholder: '9.5',
+                val: '9.5',
+                min: '1',
+                max: '20',
+                step: '0.5',
+                hint: 'Dernier palier ou demi-palier franchi (ex: 9.5)'
+            },
+            'vameval': {
+                label: '<span>🏁</span> Palier atteint au Test VAMEVAL <span class="required">*</span>',
+                placeholder: '12.5',
+                val: '12.5',
+                min: '1',
+                max: '25',
+                step: '0.5',
+                hint: 'Dernier palier atteint sur piste (plots tous les 20m)'
+            },
+            'direct': {
+                label: '<span>⚡</span> VMA connue (km/h) <span class="required">*</span>',
+                placeholder: '14.5',
+                val: '14.5',
+                min: '5',
+                max: '26',
+                step: '0.1',
+                hint: 'Entrez directement votre vitesse maximale aérobie'
+            }
+        };
+
+        const homeTabs = document.querySelectorAll('.vma-quick-tab');
+        const homeLabel = document.getElementById('homeTestValLabel');
+        const homeInput = document.getElementById('homeTestVal');
+        const homeHint = document.getElementById('homeTestValHint');
+
+        homeTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                homeTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                selectedHomeTest = tab.dataset.vmaTest;
+                const conf = homeTestConfig[selectedHomeTest];
+                if (conf && homeInput && homeLabel) {
+                    homeLabel.innerHTML = conf.label;
+                    homeInput.placeholder = conf.placeholder;
+                    homeInput.value = conf.val;
+                    homeInput.min = conf.min;
+                    homeInput.max = conf.max;
+                    homeInput.step = conf.step;
+                    if (homeHint) homeHint.textContent = conf.hint;
+                }
+            });
+        });
+
+        const quickVmaForm = document.getElementById('quickVmaForm');
+        if (quickVmaForm) {
+            quickVmaForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const val = document.getElementById('homeTestVal').value;
+                const piste = document.getElementById('homePisteVal').value || '250';
+                const duree = document.getElementById('homeDureeVal').value || '12';
+                const allure = document.getElementById('homeAllureVal').value || '80';
+
+                const targetUrl = `calculateur-vma.html?test=${encodeURIComponent(selectedHomeTest)}&val=${encodeURIComponent(val)}&piste=${encodeURIComponent(piste)}&duree=${encodeURIComponent(duree)}&allure=${encodeURIComponent(allure)}&auto=1`;
+                window.location.href = targetUrl;
+            });
+        }
         
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1317,34 +1504,7 @@
     <!-- Supabase SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="/js/auth-shared.js"></script>
-    <script>
-        const navbar = document.getElementById('navbar');
-        const navToggle = document.getElementById('navToggle');
-        const navMenu = document.getElementById('navMenu');
-        window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); });
-        const navBackdrop = document.createElement('div');
-        navBackdrop.className = 'nav-backdrop';
-        document.body.appendChild(navBackdrop);
-        function toggleMenu() {
-            const open = navMenu.classList.toggle('active');
-            navToggle.classList.toggle('active', open);
-            navBackdrop.classList.toggle('active', open);
-            document.body.style.overflow = open ? 'hidden' : '';
-            navToggle.setAttribute('aria-expanded', open);
-        }
-        function closeMenu() {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
-            navBackdrop.classList.remove('active');
-            document.body.style.overflow = '';
-            navToggle.setAttribute('aria-expanded', 'false');
-        }
-        navToggle.addEventListener('click', e => { e.stopPropagation(); toggleMenu(); });
-        navBackdrop.addEventListener('click', closeMenu);
-        document.addEventListener('click', e => { if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) closeMenu(); });
-        navMenu.querySelectorAll('.nav-link, .nav-cta').forEach(l => l.addEventListener('click', closeMenu));
-    </script>
-        <script src="/js/consent.js"></script>
+    <script src="/js/consent.js"></script>
 </body>
 </html>
 
