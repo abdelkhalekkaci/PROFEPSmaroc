@@ -18,7 +18,14 @@ app.use(express.json());
 
 // Redirection /index.html → / est gérée au niveau Vercel edge (vercel.json) — supprimée du serveur Node.
 // La redirection non-www → www est gérée au niveau Vercel edge (vercel.json)
-
+// Redirection automatique des domaines VMA
+app.use((req, res, next) => {
+  const host = req.headers.host || '';
+  if (host.includes('vmacalculateur.com') || host.includes('mascalculator.com')) {
+    return res.redirect(301, 'https://profeps.ma/calculateur-vma.html');
+  }
+  next();
+});
 // Servir les fichiers statiques du dossier public
 app.use(express.static(path.join(rootDir, 'public')));
 
