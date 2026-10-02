@@ -21,7 +21,7 @@
     <meta property="og:description" id="ogDesc" content="Calculez la VMA (MAS), la VO2max, les allures de fractionné et les temps de passage par tour de piste en 1 clic.">
     <meta property="og:image" content="https://profeps.ma/images/prof_eps.png">
 
-    <!-- ═══ SCHEMA.ORG JSON-LD ═══ -->
+    <!-- ═══ SCHEMA.ORG JSON-LD (POUR GOOGLE RICH SNIPPETS) ═══ -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -33,6 +33,38 @@
       "browserRequirements": "Requires JavaScript",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "MAD" },
       "description": "Calculateur officiel de VMA et VO2max pour enseignants d'EPS et coureurs : Demi-Cooper 6', Cooper 12', Luc Léger, VAMEVAL."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Comment calculer sa VMA facilement ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le moyen le plus accessible est le test Demi-Cooper (courir la plus grande distance possible pendant 6 minutes). Multipliez la distance en mètres par 0,01 pour obtenir directement votre VMA en km/h."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quelle est la différence entre VMA et VO2max ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La VMA est la vitesse de course à laquelle vous atteignez votre consommation maximale d'oxygène (VO2max). On estime la VO2max avec la formule : VO2max = VMA × 3.5 ml/kg/min."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How to calculate MAS (Maximal Aerobic Speed)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The simplest method is the 6-minute Demi-Cooper test: cover the greatest distance possible in 6 minutes. Multiply the distance in meters by 0.01 to get your MAS in km/h."
+          }
+        }
+      ]
     }
     </script>
 
@@ -151,6 +183,24 @@
         .btn-quick-chip.active { background: rgba(193,39,45,0.08); color: var(--primary); border-color: var(--primary); font-weight: 700; }
         .btn-calc-main { width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.9rem 1.75rem; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; font-weight: 700; font-size: 1.05rem; border: none; border-radius: var(--radius-md); cursor: pointer; transition: var(--transition); box-shadow: 0 4px 14px rgba(193,39,45,0.25); margin: 0.5rem 0 1.5rem; }
         .btn-calc-main:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(193,39,45,0.35); }
+
+        /* ═══ NOUVEAUX ÉLÉMENTS : CARTES DE PRÉDICTION & JAUGE ═══ */
+        .race-predict-section { margin-top: 1.5rem; margin-bottom: 1.5rem; }
+        .race-predict-title { font-size: 1.05rem; font-weight: 700; color: #0f172a; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+        .race-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+        @media (max-width: 768px) { .race-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 480px) { .race-grid { grid-template-columns: 1fr; } }
+        .race-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1rem; text-align: center; box-shadow: var(--shadow-sm); transition: transform 0.2s ease, box-shadow 0.2s ease; border-top: 4px solid #0284c7; }
+        .race-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .race-dist-name { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: #64748b; letter-spacing: 0.05em; }
+        .race-time-val { font-size: 1.6rem; font-weight: 800; color: #0f172a; margin: 0.25rem 0; font-family: var(--font-display); }
+        .race-pace-sub { font-size: 0.76rem; color: #0284c7; font-weight: 600; }
+
+        .vma-gauge-box { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; box-shadow: var(--shadow-sm); }
+        .vma-gauge-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+        .vma-gauge-bar { height: 12px; border-radius: 9999px; background: linear-gradient(90deg, #64748b 0%, #0284c7 25%, #10b981 50%, #f97316 75%, #ef4444 100%); position: relative; }
+        .vma-gauge-needle { position: absolute; top: -6px; width: 4px; height: 24px; background: #0f172a; border-radius: 2px; box-shadow: 0 0 6px rgba(0,0,0,0.5); transform: translateX(-50%); transition: left 0.4s ease; }
+        .vma-gauge-labels { display: flex; justify-content: space-between; font-size: 0.7rem; color: #64748b; font-weight: 600; margin-top: 0.4rem; }
 
         /* ═══ RÉSULTATS ═══ */
         #results-wrapper { display: none; animation: fadeIn 0.3s ease; }
@@ -423,7 +473,7 @@
         </button>
 
         <!-- ══════════════════════════════════════════════════════════════
-             BLOC RÉSULTATS
+             BLOC RÉSULTATS (AVEC CARTES PRÉDICTIONS & JAUGE)
         ══════════════════════════════════════════════════════════════ -->
         <div id="results-wrapper">
             
@@ -436,6 +486,54 @@
                 <div class="vma-banner-vo2">
                     <span data-i18n="resVo2Label">Capacité Aérobie Estimée</span>
                     <strong id="resVo2">47.3 ml/kg/min (VO₂max)</strong>
+                </div>
+            </div>
+
+            <!-- JAUGE VISUELLE PHYSIOLOGIQUE -->
+            <div class="vma-gauge-box">
+                <div class="vma-gauge-header">
+                    <span style="font-size:0.85rem; font-weight:700; color:#0f172a;">Spectre Physiologique & Intensité</span>
+                    <span id="gaugeLevelBadge" style="font-size:0.75rem; font-weight:700; background:#e0f2fe; color:#0369a1; padding:2px 8px; border-radius:9999px;">Niveau Intermédiaire</span>
+                </div>
+                <div class="vma-gauge-bar">
+                    <div class="vma-gauge-needle" id="gaugeNeedle" style="left: 50%;"></div>
+                </div>
+                <div class="vma-gauge-labels">
+                    <span>Récup (60%)</span>
+                    <span>Endurance (75%)</span>
+                    <span>Seuil (88%)</span>
+                    <span>100% VMA</span>
+                    <span>Sprint (>110%)</span>
+                </div>
+            </div>
+
+            <!-- CARTES DE PRÉDICTION CHRONOMÉTRIQUE -->
+            <div class="race-predict-section">
+                <div class="race-predict-title">
+                    <span>🎯</span>
+                    <span data-i18n="racePredictTitle">Estimations Chronométriques de Course (Selon votre VMA)</span>
+                </div>
+                <div class="race-grid">
+                    <div class="race-card" style="border-top-color: #0284c7;">
+                        <div class="race-dist-name">5 Kilomètres</div>
+                        <div class="race-time-val" id="pred5k">25:12</div>
+                        <div class="race-pace-sub" id="pace5k">5:02 /km (~88% VMA)</div>
+                    </div>
+                    <div class="race-card" style="border-top-color: #10b981;">
+                        <div class="race-dist-name">10 Kilomètres</div>
+                        <div class="race-time-val" id="pred10k">52:18</div>
+                        <div class="race-pace-sub" id="pace10k">5:14 /km (~85% VMA)</div>
+                    </div>
+                    <div class="race-card" style="border-top-color: #f59e0b;">
+                        <div class="race-dist-name">Semi-Marathon</div>
+                        <div class="race-time-val" id="predSemi">1h 57m</div>
+                        <div class="race-pace-sub" id="paceSemi">5:33 /km (~80% VMA)</div>
+                    </div>
+                    <div class="race-card" style="border-top-color: #ef4444;">
+                        <div class="race-dist-name">Marathon</div>
+                        <div class="race-time-val" id="predMarathon">4h 09m</div>
+                        <div class="race-pace-sub" id="paceMarathon">5:55 /km (~75% VMA)</div>
+                    </div>
                 </div>
             </div>
 
@@ -670,6 +768,7 @@
                 footerTerms: "Conditions d'utilisation",
                 footerRights: "Tous droits réservés.",
                 footerTagline: "Conçu pour les enseignants d'EPS et coureurs du monde entier",
+                racePredictTitle: "Estimations Chronométriques de Course (Selon votre VMA)",
                 intensityOptions: [
                     { val: "60", text: "60% — Récupération active / Échauffement doux" },
                     { val: "70", text: "70% — Aérobie Fondamentale (Endurance de base)" },
@@ -772,6 +871,7 @@
                 footerTerms: "Terms of Use",
                 footerRights: "All rights reserved.",
                 footerTagline: "Designed for PE teachers, athletics coaches & runners worldwide",
+                racePredictTitle: "Estimated Race Times (Based on your MAS)",
                 intensityOptions: [
                     { val: "60", text: "60% — Active Recovery / Gentle Warm-up" },
                     { val: "70", text: "70% — Base Aerobic Endurance (Easy pace)" },
@@ -833,7 +933,7 @@
             // Si les résultats sont actuellement affichés, rafraîchir le calcul
             const resultsWrapper = document.getElementById("results-wrapper");
             if (resultsWrapper && resultsWrapper.style.display === "block") {
-                performCalculation();
+                performCalculation(false);
             }
         }
 
@@ -851,16 +951,108 @@
             });
         }
 
-        // Détection initiale de la langue
+        function formatRaceTime(totalMinutes) {
+            if (!totalMinutes || totalMinutes <= 0 || isNaN(totalMinutes)) return '--:--';
+            const h = Math.floor(totalMinutes / 60);
+            const m = Math.floor(totalMinutes % 60);
+            const s = Math.round((totalMinutes * 60) % 60);
+            if (h > 0) {
+                return h + 'h ' + (m < 10 ? '0' + m : m) + 'm';
+            }
+            return (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
+        }
+
+        function formatPace(speedKmh) {
+            if (!speedKmh || speedKmh <= 0) return '--:--';
+            const paceMin = 60 / speedKmh;
+            const m = Math.floor(paceMin);
+            const s = Math.round((paceMin - m) * 60);
+            return m + ':' + (s < 10 ? '0' + s : s) + ' /km';
+        }
+
+        function updateRacePredictions(vma) {
+            if (!vma || vma <= 0) return;
+            const speed5k = vma * 0.88;
+            const time5k = (5 / speed5k) * 60;
+            const p5 = document.getElementById('pred5k');
+            const pc5 = document.getElementById('pace5k');
+            if (p5) p5.textContent = formatRaceTime(time5k);
+            if (pc5) pc5.textContent = formatPace(speed5k) + ' (~88% VMA)';
+
+            const speed10k = vma * 0.85;
+            const time10k = (10 / speed10k) * 60;
+            const p10 = document.getElementById('pred10k');
+            const pc10 = document.getElementById('pace10k');
+            if (p10) p10.textContent = formatRaceTime(time10k);
+            if (pc10) pc10.textContent = formatPace(speed10k) + ' (~85% VMA)';
+
+            const speedSemi = vma * 0.80;
+            const timeSemi = (21.0975 / speedSemi) * 60;
+            const pSemi = document.getElementById('predSemi');
+            const pcSemi = document.getElementById('paceSemi');
+            if (pSemi) pSemi.textContent = formatRaceTime(timeSemi);
+            if (pcSemi) pcSemi.textContent = formatPace(speedSemi) + ' (~80% VMA)';
+
+            const speedMara = vma * 0.75;
+            const timeMara = (42.195 / speedMara) * 60;
+            const pMara = document.getElementById('predMarathon');
+            const pcMara = document.getElementById('paceMara') || document.getElementById('paceMarathon');
+            if (pMara) pMara.textContent = formatRaceTime(timeMara);
+            if (pcMara) pcMara.textContent = formatPace(speedMara) + ' (~75% VMA)';
+        }
+
+        function updateVmaGauge(vma) {
+            const needle = document.getElementById('gaugeNeedle');
+            const badge = document.getElementById('gaugeLevelBadge');
+            if (!needle || !badge) return;
+            const minV = 8;
+            const maxV = 24;
+            let pct = ((vma - minV) / (maxV - minV)) * 100;
+            pct = Math.max(0, Math.min(100, pct));
+            needle.style.left = pct + '%';
+
+            if (vma < 12) {
+                badge.textContent = currentLang === 'en' ? 'Beginner / Fitness' : 'Débutant / Santé';
+                badge.style.background = '#f1f5f9';
+                badge.style.color = '#475569';
+            } else if (vma < 15) {
+                badge.textContent = currentLang === 'en' ? 'Intermediate / Recreational' : 'Intermédiaire / Récréatif';
+                badge.style.background = '#e0f2fe';
+                badge.style.color = '#0284c7';
+            } else if (vma < 18) {
+                badge.textContent = currentLang === 'en' ? 'Advanced / Club Runner' : 'Confirmé / Club';
+                badge.style.background = '#dcfce7';
+                badge.style.color = '#15803d';
+            } else if (vma < 21) {
+                badge.textContent = currentLang === 'en' ? 'Performance / Semi-Pro' : 'Performance / Compétition';
+                badge.style.background = '#ffedd5';
+                badge.style.color = '#c2410c';
+            } else {
+                badge.textContent = currentLang === 'en' ? 'Elite Athlete' : 'Élite / Haut Niveau';
+                badge.style.background = '#fee2e2';
+                badge.style.color = '#b91c1c';
+            }
+        }
+
+        // Détection initiale de la langue et du domaine
         window.addEventListener('DOMContentLoaded', () => {
+            const host = window.location.hostname.toLowerCase();
             const savedLang = localStorage.getItem('profeps_lang');
-            if (savedLang) {
+
+            if (host.includes('mascalculator')) {
+                switchLanguage('en');
+            } else if (host.includes('vmacalculateur')) {
+                switchLanguage('fr');
+            } else if (savedLang) {
                 switchLanguage(savedLang);
             } else if (navigator.language && navigator.language.startsWith('en')) {
                 switchLanguage('en');
             } else {
                 switchLanguage('fr');
             }
+
+            // Calcul initial automatique pour afficher les cartes dès le chargement de la page
+            performCalculation(false);
         });
 
         // ═══ NAVIGATION ET CALCUL ═══
@@ -943,9 +1135,9 @@
         });
 
         const btnTrigger = document.getElementById("btnTriggerCalc");
-        btnTrigger.addEventListener("click", performCalculation);
+        btnTrigger.addEventListener("click", () => performCalculation(true));
 
-        function performCalculation() {
+        function performCalculation(shouldScroll = true) {
             let vma = 0;
             let vo2max = 0;
 
@@ -991,7 +1183,11 @@
             document.getElementById("resVma").textContent = vma.toFixed(1) + " km/h";
             document.getElementById("resVo2").textContent = vo2max.toFixed(1) + " ml/kg/min (VO₂max)";
 
-            // 2. Indicateurs ciblés
+            // 2. Mettre à jour les Cartes de Prédiction Chrono et la Jauge
+            updateRacePredictions(vma);
+            updateVmaGauge(vma);
+
+            // 3. Indicateurs ciblés
             const targetSpeedKmh = vma * (targetIntensity / 100);
             const targetSpeedMs = targetSpeedKmh / 3.6;
 
@@ -1023,7 +1219,7 @@
             document.getElementById("thDynDist").textContent = (currentLang === 'en' ? "Dist. (" : "Dist. (") + durationMin + " min)";
             document.getElementById("thDynLaps").textContent = (currentLang === 'en' ? "Track Laps" : "Nombre de Tours");
 
-            // 3. Tableau
+            // 4. Tableau
             const zones = i18n[currentLang].zones;
             const tbody = document.getElementById("tbodyTraining");
             tbody.innerHTML = "";
@@ -1064,7 +1260,9 @@
                 tbody.appendChild(tr);
             });
 
-            resultsWrapper.scrollIntoView({ behavior: "smooth", block: "start" });
+            if (shouldScroll) {
+                resultsWrapper.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
         }
     </script>
 </body>
