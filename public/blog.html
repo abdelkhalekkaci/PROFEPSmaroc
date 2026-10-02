@@ -168,7 +168,9 @@
         .theme-card .theme-icon { width: 60px; height: 60px; margin: 0 auto 1rem; background: currentColor; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease; }
         .theme-card:hover .theme-icon, .theme-card.active .theme-icon { transform: scale(1.1) rotate(5deg); }
         .theme-card .theme-icon svg { width: 30px; height: 30px; stroke: white; stroke-width: 2; fill: none; }
-        .theme-card h3 { font-size: 1.1rem; margin-bottom: 0.25rem; color: var(--text-primary); }
+        .theme-card h3 { font-size: 1.1rem; margin-bottom: 0.25rem; color: var(--text-primary); display: flex; align-items: center; justify-content: center; gap: 0.35rem; }
+        .theme-count { display: inline-flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 9999px; background: #f1f5f9; color: var(--text-secondary); border: 1px solid var(--border); }
+        .theme-card.active .theme-count { background: currentColor; color: white; border-color: transparent; }
         .theme-card p { font-size: 0.85rem; color: var(--text-secondary); }
 
         /* ARTICLES GRID */
@@ -339,7 +341,7 @@
                         <div class="theme-icon">
                             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="12" y1="8" x2="12" y2="16"/></svg>
                         </div>
-                        <h3>Tous les articles</h3>
+                        <h3>Tous les articles <span class="theme-count">82</span></h3>
                         <p>Voir tout le contenu</p>
                     </div>
 
@@ -348,7 +350,7 @@
                         <div class="theme-icon">
                             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                         </div>
-                        <h3>VMA & Demi-Fond</h3>
+                        <h3>VMA & Demi-Fond <span class="theme-count">15</span></h3>
                         <p>Tests, Allures & Calculs (FR & EN)</p>
                     </div>
 
@@ -356,7 +358,7 @@
                         <div class="theme-icon">
                             <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                         </div>
-                        <h3>Documents Officiels</h3>
+                        <h3>Documents Officiels <span class="theme-count">8</span></h3>
                         <p>OP 2007-2009 & Référentiels</p>
                     </div>
 
@@ -364,7 +366,7 @@
                         <div class="theme-icon">
                             <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
                         </div>
-                        <h3>Didactique</h3>
+                        <h3>Didactique <span class="theme-count">12</span></h3>
                         <p>Pédagogie & Méthodes</p>
                     </div>
 
@@ -372,7 +374,7 @@
                         <div class="theme-icon">
                             <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                         </div>
-                        <h3>Carrière</h3>
+                        <h3>Carrière <span class="theme-count">11</span></h3>
                         <p>Concours & Examens</p>
                     </div>
 
@@ -380,7 +382,7 @@
                         <div class="theme-icon">
                             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                         </div>
-                        <h3>Pratique</h3>
+                        <h3>Pratique <span class="theme-count">16</span></h3>
                         <p>Sécurité & Gestion</p>
                     </div>
 
@@ -388,28 +390,23 @@
                         <div class="theme-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M5 4.5C7.5 7 9 9.5 9 12s-1.5 5-4 7.5"/><path d="M19 4.5C16.5 7 15 9.5 15 12s1.5 5 4 7.5"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
                         </div>
-                        <h3>APS</h3>
+                        <h3>APS <span class="theme-count">20</span></h3>
                         <p>Sports & Activités</p>
                     </div>
                 </div>
             </section>
 
-            <!-- ALL ARTICLES (COMPTEUR MIS À JOUR : 61 ARTICLES) -->
+            <!-- ALL ARTICLES (82 ARTICLES DYNAMIQUES) -->
             <div class="articles-header">
                 <h2>Tous les articles</h2>
-                <span class="articles-count" id="articlesCount">61 articles</span>
+                <span class="articles-count" id="articlesCount">82 articles</span>
             </div>
 
             <div class="articles-grid" id="articlesGrid">
 
-                <!-- ════════════════════════════════════════════ -->
-                <!-- ARTICLES VMA EN FRANÇAIS (ORIGINAUX) -->
-                <!-- ════════════════════════════════════════════ -->
-
-                <!-- Card 1 : Test Demi-Cooper -->
                 <article class="article-card" data-category="vma">
                     <div class="article-visual article-vma">
-                        <span class="category-badge">Demi-Cooper (6')</span>
+                        <span class="category-badge category-vma">Demi-Cooper (6')</span>
                         <div class="article-icon">
                             <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#0284c7" stroke-width="1.5"/><polyline points="12 6 12 12 16 14" stroke="#0284c7" stroke-width="2" stroke-linecap="round"/></svg>
                         </div>
@@ -424,10 +421,9 @@
                     </div>
                 </article>
 
-                <!-- Card 2 : Test de Cooper 12 minutes -->
                 <article class="article-card" data-category="vma">
                     <div class="article-visual article-vma">
-                        <span class="category-badge">Cooper (12')</span>
+                        <span class="category-badge category-vma">Cooper (12')</span>
                         <div class="article-icon">
                             <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#0284c7" stroke-width="1.5"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="#0284c7" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="4" fill="#bae6fd"/></svg>
                         </div>
@@ -442,17 +438,16 @@
                     </div>
                 </article>
 
-                <!-- Card 3 : Test VAMEVAL -->
                 <article class="article-card" data-category="vma">
                     <div class="article-visual article-vma">
-                        <span class="category-badge">VAMEVAL (Piste)</span>
+                        <span class="category-badge category-vma">VAMEVAL (Piste)</span>
                         <div class="article-icon">
                             <svg viewBox="0 0 24 24" fill="none"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" fill="#bae6fd" stroke="#0284c7" stroke-width="1.5"/><line x1="4" y1="22" x2="4" y2="15" stroke="#0284c7" stroke-width="2" stroke-linecap="round"/></svg>
                         </div>
                     </div>
                     <div class="article-content">
-                        <h3 class="article-title">Test VAMEVAL : Protocole, Calcul et Paliers de la VMA</h3>
-                        <p class="article-excerpt">Protocole scientifique sur piste balisée tous les 20 mètres, tableau officiel des paliers de 8,5 à 22 km/h et grand comparatif des 4 tests.</p>
+                        <h3 class="article-title">Test VAMEVAL : Protocole Piste, Paliers et Calcul VMA</h3>
+                        <p class="article-excerpt">Paliers de 8.5 à 20 km/h avec plots tous les 20m, bande sonore, tableau de conversion officiel Cazorla et gestion sur piste.</p>
                         <div class="article-footer">
                             <span class="article-date">29 Sept 2026</span>
                             <a href="article-test-vameval-vma.html" class="read-more">Lire le guide →</a>
@@ -460,57 +455,50 @@
                     </div>
                 </article>
 
-                <!-- Card 4 : Calculer ses Allures d'Entraînement -->
                 <article class="article-card" data-category="vma">
                     <div class="article-visual article-vma">
-                        <span class="category-badge">Allures VMA</span>
+                        <span class="category-badge category-vma">Luc Léger (Navette)</span>
                         <div class="article-icon">
-                            <svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M17 3l4 4-4 4" stroke="#0284c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 7H3" stroke="#0284c7" stroke-width="2" stroke-linecap="round"/><path d="M7 21l-4-4 4-4" stroke="#0284c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 17h18" stroke="#0284c7" stroke-width="2" stroke-linecap="round"/></svg>
                         </div>
                     </div>
                     <div class="article-content">
-                        <h3 class="article-title">Calculer ses allures d'entraînement à partir de sa VMA</h3>
-                        <p class="article-excerpt">Formule de pourcentage VMA, conversion automatique de vitesse (km/h) en allure (min/km), temps aux 100m et séances types de fractionné.</p>
+                        <h3 class="article-title">Test Luc Léger (Navette 20m) : Paliers, Bips et VMA</h3>
+                        <p class="article-excerpt">Protocole aller-retour de 20 mètres, tableau des paliers de 1 à 18, conversion VMA et astuces pour réussir les concours.</p>
                         <div class="article-footer">
                             <span class="article-date">29 Sept 2026</span>
-                            <a href="article-calcul-allures-vma.html" class="read-more">Lire le guide →</a>
+                            <a href="article-test-luc-leger-navette.html" class="read-more">Lire le guide →</a>
                         </div>
                     </div>
                 </article>
 
-                <!-- Card 5 : Test VMA en EPS -->
                 <article class="article-card" data-category="vma">
                     <div class="article-visual article-vma">
-                        <span class="category-badge">Pédagogie EPS</span>
+                        <span class="category-badge category-vma">Outil Interactif</span>
                         <div class="article-icon">
-                            <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="2" width="16" height="20" rx="2" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/><path d="M8 12l2 2 4-4" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="2" width="16" height="20" rx="2" stroke="#0284c7" stroke-width="2" fill="none"/><line x1="8" y1="6" x2="16" y2="6" stroke="#0284c7" stroke-width="2"/><line x1="16" y1="14" x2="16" y2="18" stroke="#0284c7" stroke-width="2"/><path d="M16 10h.01M12 10h.01M8 10h.01M12 14h.01M8 14h.01M12 18h.01M8 18h.01" stroke="#0284c7" stroke-width="2" stroke-linecap="round"/></svg>
                         </div>
                     </div>
                     <div class="article-content">
-                        <h3 class="article-title">Test VMA en EPS : Protocole, Calcul et Évaluation des Élèves</h3>
-                        <p class="article-excerpt">Organisation d'une classe de 35 élèves en binômes, fiche d'observation et de pointage, respect des OP 2007-2009 et barème pour le Bac EPS.</p>
+                        <h3 class="article-title">Calculateur VMA & Allures de Course Interactif</h3>
+                        <p class="article-excerpt">Estimez la VMA et le VO₂max via 5 tests, personnalisez la longueur du tour de piste (200m, 250m, 400m) et générez vos temps de passage.</p>
                         <div class="article-footer">
-                            <span class="article-date">29 Sept 2026</span>
-                            <a href="article-test-vma-eps.html" class="read-more">Lire le guide →</a>
+                            <span class="article-date">02 Oct 2026</span>
+                            <a href="calculateur-vma.html" class="read-more">Ouvrir l'outil →</a>
                         </div>
                     </div>
                 </article>
 
-                <!-- ════════════════════════════════════════════ -->
-                <!-- 10 NOUVELLES CARDS : VMA / MAS EN ANGLAIS -->
-                <!-- ════════════════════════════════════════════ -->
-
-                <!-- Card 6 (EN 1) : What is Maximal Aerobic Speed (MAS) -->
                 <article class="article-card" data-category="vma">
                     <div class="article-visual article-vma">
-                        <span class="category-badge">MAS Guide (EN)</span>
+                        <span class="category-badge category-vma">Pillar MAS (EN)</span>
                         <div class="article-icon">
-                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#0284c7" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="#0284c7" stroke-width="2" stroke-linecap="round"/><path d="M16 3.13a10 10 0 0 1 5 8.87" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#0284c7" stroke-width="2" fill="none"/><path d="M12 7v5l3 3" stroke="#0284c7" stroke-width="2" stroke-linecap="round"/><path d="M5 3l2 2M19 3l-2 2" stroke="#0284c7" stroke-width="2" stroke-linecap="round"/></svg>
                         </div>
                     </div>
                     <div class="article-content">
-                        <h3 class="article-title">What is Maximal Aerobic Speed (MAS)? The Complete Training &amp; Testing Guide</h3>
-                        <p class="article-excerpt">Master the science of MAS: physiological definitions, aerobic vs anaerobic pathways, velocity at VO₂max, and individual training speed zones.</p>
+                        <h3 class="article-title">What is Maximal Aerobic Speed (MAS)? The Complete Runner & Coach Guide</h3>
+                        <p class="article-excerpt">Master Maximal Aerobic Speed (MAS / VMA): physiological definition, difference with VO₂max, field testing protocols, and training zones from 70% to 140%.</p>
                         <div class="article-footer">
                             <span class="article-date">02 Oct 2026</span>
                             <a href="article-what-is-maximal-aerobic-speed-mas.html" class="read-more">Read Guide →</a>
@@ -518,173 +506,159 @@
                     </div>
                 </article>
 
-                <!-- Card 7 (EN 2) : 6-Minute MAS Test Protocol -->
                 <article class="article-card" data-category="vma">
                     <div class="article-visual article-vma">
-                        <span class="category-badge">6-Min Test (EN)</span>
+                        <span class="category-badge category-vma">Testing Protocol (EN)</span>
                         <div class="article-icon">
-                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="13" r="8" stroke="#0284c7" stroke-width="1.5"/><path d="M12 9v4l2.5 2.5" stroke="#0284c7" stroke-width="2" stroke-linecap="round"/><path d="M12 5V2M10 2h4" stroke="#0284c7" stroke-width="1.8" stroke-linecap="round"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="#0284c7" stroke-width="2" fill="none"/><line x1="16" y1="2" x2="16" y2="6" stroke="#0284c7" stroke-width="2"/><line x1="8" y1="2" x2="8" y2="6" stroke="#0284c7" stroke-width="2"/><line x1="3" y1="10" x2="21" y2="10" stroke="#0284c7" stroke-width="2"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01" stroke="#0284c7" stroke-width="2" stroke-linecap="round"/></svg>
                         </div>
                     </div>
                     <div class="article-content">
-                        <h3 class="article-title">The 6-Minute MAS Running Test: Protocol, Formula &amp; Coaching Norms</h3>
-                        <p class="article-excerpt">Step-by-step continuous track protocol, Distance/100 formula, pacing guidelines, buddy recording charts, and normative MAS tables for athletes.</p>
+                        <h3 class="article-title">The 6-Minute MAS Running Test: Protocol, Formula, Norms & Coaching Guide</h3>
+                        <p class="article-excerpt">Everything you need to execute the 6-Minute MAS field test (Demi-Cooper): pacing strategies, track cone setups, sex & age norms, and interval workout calibration.</p>
                         <div class="article-footer">
                             <span class="article-date">02 Oct 2026</span>
-                            <a href="article-6-minute-mas-test-protocol.html" class="read-more">Read Protocol →</a>
+                            <a href="article-6-minute-mas-test-protocol.html" class="read-more">Read Guide →</a>
                         </div>
                     </div>
                 </article>
 
-                <!-- Card 8 (EN 3) : Convert Beep Test to MAS & VO2max -->
                 <article class="article-card" data-category="vma">
                     <div class="article-visual article-vma">
-                        <span class="category-badge">Beep Test (EN)</span>
+                        <span class="category-badge category-vma">Conversion Math (EN)</span>
                         <div class="article-icon">
-                            <svg viewBox="0 0 24 24" fill="none"><path d="M11 5L6 9H2v6h4l5 4V5z" fill="#bae6fd" stroke="#0284c7" stroke-width="1.5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" stroke="#0284c7" stroke-width="1.8" stroke-linecap="round"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M3 12h4l3 8 4-16 3 8h4" stroke="#0284c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
                         </div>
                     </div>
                     <div class="article-content">
-                        <h3 class="article-title">How to Convert Beep Test Scores to MAS &amp; VO₂max: Conversion Chart</h3>
-                        <p class="article-excerpt">Master conversion tables from 20m shuttle stages to continuous track MAS, including the 15-20% turn penalty correction for field athletes.</p>
+                        <h3 class="article-title">How to Convert Beep Test Scores to MAS & VO₂max: Conversion Chart & Formulas</h3>
+                        <p class="article-excerpt">Step-by-step mathematical conversion of 20m Multi-Stage Fitness Test (MSFT) and Léger shuttle stages to true MAS (km/h & mph) and VO₂max.</p>
                         <div class="article-footer">
                             <span class="article-date">02 Oct 2026</span>
-                            <a href="article-convert-beep-test-to-mas.html" class="read-more">View Chart →</a>
+                            <a href="article-convert-beep-test-to-mas.html" class="read-more">Read Guide →</a>
                         </div>
                     </div>
                 </article>
 
-                <!-- Card 9 (EN 4) : MAS Interval Training & HIIT Prescriptions -->
                 <article class="article-card" data-category="vma">
                     <div class="article-visual article-vma">
-                        <span class="category-badge">HIIT &amp; Intervals (EN)</span>
+                        <span class="category-badge category-vma">HIIT Workouts (EN)</span>
                         <div class="article-icon">
-                            <svg viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="#0284c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke="#0284c7" stroke-width="2" stroke-linejoin="round" fill="#e0f2fe"/></svg>
                         </div>
                     </div>
                     <div class="article-content">
-                        <h3 class="article-title">MAS Interval Training &amp; HIIT Prescriptions: Long, Short &amp; Tabata Protocols</h3>
-                        <p class="article-excerpt">Evidence-based high-intensity interval conditioning: long intervals (90-95%), short intermittents (100-110%), Eurofit grids, and Tabata sets.</p>
+                        <h3 class="article-title">MAS Interval Training: How to Prescribe HIIT Workouts (90% to 130% MAS)</h3>
+                        <p class="article-excerpt">Scientific prescriptions for long intervals, short intervals (15s:15s, 30s:30s), supramaximal grids, and work-to-rest ratios by Martin Buchheit & Dan Baker.</p>
                         <div class="article-footer">
                             <span class="article-date">02 Oct 2026</span>
-                            <a href="article-mas-interval-training-hiit-prescriptions.html" class="read-more">Explore HIIT →</a>
+                            <a href="article-mas-interval-training-hiit-prescriptions.html" class="read-more">Read Guide →</a>
                         </div>
                     </div>
                 </article>
 
-                <!-- Card 10 (EN 5) : MAS Pace Chart & 400m Track Splits -->
                 <article class="article-card" data-category="vma">
                     <div class="article-visual article-vma">
-                        <span class="category-badge">Pace Chart (EN)</span>
+                        <span class="category-badge category-vma">Pace Chart (EN)</span>
                         <div class="article-icon">
-                            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="3" stroke="#0284c7" stroke-width="1.5"/><line x1="3" y1="10" x2="21" y2="10" stroke="#0284c7" stroke-width="1.5"/><line x1="9" y1="4" x2="9" y2="20" stroke="#0284c7" stroke-width="1.5"/><circle cx="15" cy="15" r="2" fill="#0284c7"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="12" rx="9" ry="6" stroke="#0284c7" stroke-width="2" fill="none"/><line x1="12" y1="6" x2="12" y2="18" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="2 2"/></svg>
                         </div>
                     </div>
                     <div class="article-content">
-                        <h3 class="article-title">MAS Pace Chart: Converting Speeds (km/h &amp; mph) to 400m Lap Splits</h3>
-                        <p class="article-excerpt">Stopwatch lookup table converting running speeds (10 to 22 km/h) into exact 100m, 200m, 400m lap splits and kilometer paces via the 1440 rule.</p>
+                        <h3 class="article-title">MAS Pace Chart: Converting Speeds (km/h & mph) to 400m Lap Splits & Target Times</h3>
+                        <p class="article-excerpt">Master track running split times from 8.0 km/h to 22.0 km/h: 400m, 200m, and 100m interval splits across 80% to 140% MAS training zones.</p>
                         <div class="article-footer">
                             <span class="article-date">02 Oct 2026</span>
-                            <a href="article-mas-pace-chart-track-lap-splits.html" class="read-more">View Table →</a>
+                            <a href="article-mas-pace-chart-track-lap-splits.html" class="read-more">Read Guide →</a>
                         </div>
                     </div>
                 </article>
 
-                <!-- Card 11 (EN 6) : MAS Conditioning for Team Sports -->
                 <article class="article-card" data-category="vma">
                     <div class="article-visual article-vma">
-                        <span class="category-badge">Team Sports (EN)</span>
+                        <span class="category-badge category-vma">Team Sports S&C (EN)</span>
                         <div class="article-icon">
-                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#0284c7" stroke-width="1.5"/><line x1="12" y1="3" x2="12" y2="21" stroke="#0284c7" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="#0284c7" stroke-width="1.5"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#0284c7" stroke-width="2" fill="none"/><path d="M12 3a9 9 0 0 0 0 18" stroke="#0284c7" stroke-width="2"/><path d="M3 12h18" stroke="#0284c7" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#0284c7"/></svg>
                         </div>
                     </div>
                     <div class="article-content">
-                        <h3 class="article-title">MAS Conditioning for Team Sports: Soccer, Rugby &amp; Field Athlete Grids</h3>
-                        <p class="article-excerpt">Field setups on pitch grass: Eurofit grids (15s:15s), shuttle change-of-direction (COD) energy penalties, and position-specific microcycles.</p>
+                        <h3 class="article-title">MAS Conditioning for Team Sports: Soccer, Rugby & Field Athlete Grids</h3>
+                        <p class="article-excerpt">Field conditioning grids without track laps: Eurofit rectangular grids, TABATA 20:10, and change-of-direction (COD) penalties for soccer and rugby athletes.</p>
                         <div class="article-footer">
                             <span class="article-date">02 Oct 2026</span>
-                            <a href="article-mas-team-sports-conditioning-soccer-rugby.html" class="read-more">See Field Grids →</a>
+                            <a href="article-mas-team-sports-conditioning-soccer-rugby.html" class="read-more">Read Guide →</a>
                         </div>
                     </div>
                 </article>
 
-                <!-- Card 12 (EN 7) : Predict Race Times from MAS (VMA) -->
                 <article class="article-card" data-category="vma">
                     <div class="article-visual article-vma">
-                        <span class="category-badge">Race Predictor (EN)</span>
+                        <span class="category-badge category-vma">Race Predictor (EN)</span>
                         <div class="article-icon">
-                            <svg viewBox="0 0 24 24" fill="none"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" fill="#bae6fd" stroke="#0284c7" stroke-width="1.5"/><line x1="4" y1="22" x2="4" y2="15" stroke="#0284c7" stroke-width="2" stroke-linecap="round"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" stroke="#0284c7" stroke-width="2" fill="none"/><line x1="4" y1="22" x2="4" y2="15" stroke="#0284c7" stroke-width="2"/><circle cx="15" cy="9" r="2" fill="#0284c7"/></svg>
                         </div>
                     </div>
                     <div class="article-content">
-                        <h3 class="article-title">Predict 5K, 10K, Half &amp; Marathon Times from MAS (VMA)</h3>
-                        <p class="article-excerpt">Scientific road race performance projections: fractional utilization by distance, the Péronnet-Thibault endurance index, and marathon fueling.</p>
+                        <h3 class="article-title">Predict 5K, 10K, Half & Marathon Times from MAS (VMA): Complete Race Predictor</h3>
+                        <p class="article-excerpt">Calculate target race times from MAS: fractional MAS utilization (95% for 5K down to 78% for marathon), endurance index, and negative split pacing tables.</p>
                         <div class="article-footer">
                             <span class="article-date">02 Oct 2026</span>
-                            <a href="article-predict-race-times-from-mas-vma.html" class="read-more">See Race Times →</a>
+                            <a href="article-predict-race-times-from-mas-vma.html" class="read-more">Read Guide →</a>
                         </div>
                     </div>
                 </article>
 
-                <!-- Card 13 (EN 8) : MAS vs VO2max & Running Economy -->
                 <article class="article-card" data-category="vma">
                     <div class="article-visual article-vma">
-                        <span class="category-badge">Physiology (EN)</span>
+                        <span class="category-badge category-vma">Physiology Science (EN)</span>
                         <div class="article-icon">
-                            <svg viewBox="0 0 24 24" fill="none"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#bae6fd" stroke="#0284c7" stroke-width="1.5"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M18 20V10M12 20V4M6 20v-6" stroke="#0284c7" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="4" r="1.5" fill="#0284c7"/></svg>
                         </div>
                     </div>
                     <div class="article-content">
-                        <h3 class="article-title">MAS vs VO₂max: The Critical Difference &amp; Léger Conversion Formula</h3>
-                        <p class="article-excerpt">Understand why VO₂max is engine size while MAS is true cruising speed. The 3.5 conversion rule, running economy (Cr), and tendon elasticity.</p>
+                        <h3 class="article-title">MAS vs VO₂max: The Critical Difference, Conversion Formula & Running Economy</h3>
+                        <p class="article-excerpt">Clarifying the physiological engine (VO₂max) vs locomotive output (MAS): Léger multiplier (3.5), caloric cost of running (Cr), and why two runners differ.</p>
                         <div class="article-footer">
                             <span class="article-date">02 Oct 2026</span>
-                            <a href="article-mas-vs-vo2max-running-economy.html" class="read-more">Compare Metrics →</a>
+                            <a href="article-mas-vs-vo2max-running-economy.html" class="read-more">Read Guide →</a>
                         </div>
                     </div>
                 </article>
 
-                <!-- Card 14 (EN 9) : Anaerobic Speed Reserve (ASR) -->
                 <article class="article-card" data-category="vma">
                     <div class="article-visual article-vma">
-                        <span class="category-badge">ASR &amp; S&amp;C (EN)</span>
+                        <span class="category-badge category-vma">ASR Conditioning (EN)</span>
                         <div class="article-icon">
-                            <svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="#bae6fd" stroke="#0284c7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#0284c7" stroke-width="2" stroke-linejoin="round" fill="#e0f2fe"/></svg>
                         </div>
                     </div>
                     <div class="article-content">
                         <h3 class="article-title">Anaerobic Speed Reserve (ASR): The Key to High-Speed Conditioning</h3>
-                        <p class="article-excerpt">Why 120% MAS intervals break sprinters. Master the ASR formula (MSS - MAS), sprinter vs diesel athlete typologies, and hamstring injury safety.</p>
+                        <p class="article-excerpt">Why 120% MAS fails sprint athletes: calculate Maximal Sprinting Speed (MSS), Anaerobic Speed Reserve (ASR), and prescribe individualized %ASR intervals.</p>
                         <div class="article-footer">
                             <span class="article-date">02 Oct 2026</span>
-                            <a href="article-anaerobic-speed-reserve-asr-mas.html" class="read-more">Explore ASR →</a>
+                            <a href="article-anaerobic-speed-reserve-asr-mas.html" class="read-more">Read Guide →</a>
                         </div>
                     </div>
                 </article>
 
-                <!-- Card 15 (EN 10) : Youth MAS Testing in Physical Education -->
                 <article class="article-card" data-category="vma">
                     <div class="article-visual article-vma">
-                        <span class="category-badge">School PE (EN)</span>
+                        <span class="category-badge category-vma">School PE (EN)</span>
                         <div class="article-icon">
-                            <svg viewBox="0 0 24 24" fill="none"><path d="M22 10v6M2 10l10-5 10 5-10 5z" fill="#bae6fd" stroke="#0284c7" stroke-width="1.5"/><path d="M6 12v5c3 3 9 3 12 0v-5" stroke="#0284c7" stroke-width="1.5"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M22 10v6M2 10l10-5 10 5-10 5z" stroke="#0284c7" stroke-width="2" stroke-linejoin="round" fill="none"/><path d="M6 12v5c3 3 9 3 12 0v-5" stroke="#0284c7" stroke-width="2" fill="none"/></svg>
                         </div>
                     </div>
                     <div class="article-content">
-                        <h3 class="article-title">Youth MAS Testing in Physical Education: Age Norms &amp; Lesson Plans</h3>
-                        <p class="article-excerpt">Secondary school guide for PE teachers: adolescent norms (ages 11-18) for boys and girls, peak height velocity (PHV), and differentiated equal-time running grids.</p>
+                        <h3 class="article-title">Youth MAS Testing in Physical Education: Age Norms (11-18), Growth Spurts & Plans</h3>
+                        <p class="article-excerpt">Comprehensive guide for PE teachers: adolescent MAS norms (11-18 years), peak height velocity (PHV) aerobic lag, and 30+ student group pacing games.</p>
                         <div class="article-footer">
                             <span class="article-date">02 Oct 2026</span>
-                            <a href="article-youth-mas-testing-physical-education.html" class="read-more">Read PE Guide →</a>
+                            <a href="article-youth-mas-testing-physical-education.html" class="read-more">Read Guide →</a>
                         </div>
                     </div>
                 </article>
 
-                <!-- ════════════════════════════════════════════ -->
-                <!-- ARTICLES PRÉCÉDENTS (EXISTANTS) -->
-                <!-- ════════════════════════════════════════════ -->
-
-                <!-- Documents -->
                 <article class="article-card" data-category="documents">
                     <div class="article-visual article-documents">
                         <span class="category-badge category-documents">Documents</span>
@@ -704,7 +678,7 @@
 
                 <article class="article-card" data-category="documents">
                     <div class="article-visual article-documents">
-                        <span class="category-badge category-documents">PDF</span>
+                        <span class="category-badge category-documents">PDF Officiel</span>
                         <div class="article-icon">
                             <svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5" stroke-linejoin="round"/><polyline points="14 2 14 8 20 8" fill="#fca5a5" stroke="#dc2626" stroke-width="1.5" stroke-linejoin="round"/><line x1="12" y1="12" x2="12" y2="17" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round"/><polyline points="9 15 12 18 15 15" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
@@ -721,7 +695,24 @@
 
                 <article class="article-card" data-category="documents">
                     <div class="article-visual article-documents">
-                        <span class="category-badge category-documents">ATD</span>
+                        <span class="category-badge category-documents">OP Lycée vs Collège</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="#2563eb" stroke-width="2" fill="none"/><line x1="12" y1="4" x2="12" y2="20" stroke="#2563eb" stroke-width="2" stroke-dasharray="2 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Différence OP 2007 et OP 2009 EPS Maroc : Lycée vs Collège</h3>
+                        <p class="article-excerpt">Comparatif détaillé entre les OP 2007 (lycée qualifiant) et 2009 (collège) : compétences visées, OTI, OTD et modules pédagogiques.</p>
+                        <div class="article-footer">
+                            <span class="article-date">20 Jan 2026</span>
+                            <a href="article-difference-op-2007-2009-eps.html" class="read-more">Lire le comparatif →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="documents">
+                    <div class="article-visual article-documents">
+                        <span class="category-badge category-documents">Fiches ATD</span>
                         <div class="article-icon">
                             <svg viewBox="0 0 24 24" fill="none"><rect x="6" y="7" width="13" height="14" rx="2" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><rect x="3" y="3" width="13" height="14" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/><line x1="6.5" y1="8.5" x2="12" y2="8.5" stroke="#1d4ed8" stroke-width="1.5" stroke-linecap="round"/><line x1="6.5" y1="11.5" x2="13.5" y2="11.5" stroke="#1d4ed8" stroke-width="1.5" stroke-linecap="round"/><line x1="6.5" y1="14.5" x2="10" y2="14.5" stroke="#93c5fd" stroke-width="1.5" stroke-linecap="round"/></svg>
                         </div>
@@ -744,7 +735,7 @@
                         </div>
                     </div>
                     <div class="article-content">
-                        <h3 class="article-title">Bibliothèque Numérique EPS</h3>
+                        <h3 class="article-title">Bibliothèque Numérique EPS : Ressources et Documents pour Profs</h3>
                         <p class="article-excerpt">Accédez à une collection complète de ressources pédagogiques numériques : fiches, grilles, plans de séance et guides gratuits.</p>
                         <div class="article-footer">
                             <span class="article-date">21 Mar 2026</span>
@@ -753,7 +744,57 @@
                     </div>
                 </article>
 
-                <!-- Didactique -->
+                <article class="article-card" data-category="documents">
+                    <div class="article-visual article-documents">
+                        <span class="category-badge category-documents">Q&R Officielle</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2563eb" stroke-width="2" fill="none"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" stroke="#2563eb" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="#2563eb" stroke-width="2" stroke-linecap="round"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Quelle est la différence entre les OP 2007 et OP 2009 EPS ?</h3>
+                        <p class="article-excerpt">Réponse synthétique et claire sur l'articulation entre collège et lycée marocain, l'approche par compétences et la taxonomie des objectifs.</p>
+                        <div class="article-footer">
+                            <span class="article-date">26 Avr 2026</span>
+                            <a href="qa-difference-op-2007-2009.html" class="read-more">Lire la réponse →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="documents">
+                    <div class="article-visual article-documents">
+                        <span class="category-badge category-documents">Cadre Légal</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2563eb" stroke-width="2" fill="none"/><polyline points="12 6 12 12 16 14" stroke="#2563eb" stroke-width="2" stroke-linecap="round"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Volume horaire de l'EPS au Maroc : Collège, Lycée et Séances</h3>
+                        <p class="article-excerpt">Horaires réglementaires hebdomadaires en EPS au Maroc, répartition des cours de 2 heures consécutives et décharges administratives.</p>
+                        <div class="article-footer">
+                            <span class="article-date">26 Avr 2026</span>
+                            <a href="qa-volume-horaire-eps-maroc.html" class="read-more">Consulter →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="documents">
+                    <div class="article-visual article-documents">
+                        <span class="category-badge category-documents">Projet Établissement</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="#2563eb" stroke-width="2" fill="none"/><polyline points="9 22 9 12 15 12 15 22" stroke="#2563eb" stroke-width="2"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Projet d'Établissement et EPS au Maroc : Intégration et Démarche</h3>
+                        <p class="article-excerpt">Comment inscrire le projet pédagogique d'EPS dans le projet d'établissement PE : contractualisation, objectifs opérationnels et indicateurs.</p>
+                        <div class="article-footer">
+                            <span class="article-date">12 Mai 2026</span>
+                            <a href="article-projet-etablissement-eps.html" class="read-more">Lire le guide →</a>
+                        </div>
+                    </div>
+                </article>
+
                 <article class="article-card" data-category="didactique">
                     <div class="article-visual article-didactique">
                         <span class="category-badge category-didactique">APC</span>
@@ -775,12 +816,12 @@
                     <div class="article-visual article-didactique">
                         <span class="category-badge category-didactique">Critères</span>
                         <div class="article-icon">
-                            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" fill="#d1fae5" stroke="#059669" stroke-width="1.5"/><path d="M7 9l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 16l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="16" y1="9" x2="18.5" y2="9" stroke="#6ee7b7" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="16" x2="18.5" y2="16" stroke="#6ee7b7" stroke-width="1.5" stroke-linecap="round"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" fill="#d1fae5" stroke="#059669" stroke-width="1.5"/><path d="M7 9l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 16l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
                     </div>
                     <div class="article-content">
-                        <h3 class="article-title">Critères de réalisation vs critères de réussite</h3>
-                        <p class="article-excerpt">Comment définir des indicateurs observables et mesurables pour permettre à l'élève de s'auto-évaluer.</p>
+                        <h3 class="article-title">Critères de réalisation vs critères de réussite en EPS</h3>
+                        <p class="article-excerpt">Comment définir des indicateurs observables et mesurables pour permettre à l'élève de s'auto-évaluer avec précision.</p>
                         <div class="article-footer">
                             <span class="article-date">28 Déc 2025</span>
                             <a href="article-criteres.html" class="read-more">Lire →</a>
@@ -792,12 +833,12 @@
                     <div class="article-visual article-didactique">
                         <span class="category-badge category-didactique">Évaluation</span>
                         <div class="article-icon">
-                            <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="3" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/><rect x="5" y="15" width="3" height="4" rx="1" fill="#c4b5fd"/><rect x="10" y="11" width="3" height="8" rx="1" fill="#a78bfa"/><rect x="15" y="7" width="3" height="12" rx="1" fill="#7c3aed"/><polyline points="5.5,13 11.5,9 17.5,6" stroke="#4c1d95" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="3" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/><rect x="5" y="15" width="3" height="4" rx="1" fill="#c4b5fd"/><rect x="10" y="11" width="3" height="8" rx="1" fill="#a78bfa"/><rect x="15" y="7" width="3" height="12" rx="1" fill="#7c3aed"/></svg>
                         </div>
                     </div>
                     <div class="article-content">
                         <h3 class="article-title">L'évaluation en EPS : critères, outils et bonnes pratiques</h3>
-                        <p class="article-excerpt">Guide pratique pour construire vos grilles d'évaluation : diagnostique, formative et sommative.</p>
+                        <p class="article-excerpt">Guide pratique pour construire vos grilles d'évaluation : diagnostique, formative et sommative selon les orientations officielles.</p>
                         <div class="article-footer">
                             <span class="article-date">10 Jan 2026</span>
                             <a href="article-eval.html" class="read-more">Lire →</a>
@@ -809,12 +850,12 @@
                     <div class="article-visual article-didactique">
                         <span class="category-badge category-didactique">Structure</span>
                         <div class="article-icon">
-                            <svg viewBox="0 0 24 24" fill="none"><circle cx="5" cy="6" r="3" fill="#7c3aed"/><circle cx="5" cy="13" r="3" fill="#a78bfa"/><circle cx="5" cy="20" r="3" fill="#c4b5fd"/><line x1="5" y1="9" x2="5" y2="10" stroke="#a78bfa" stroke-width="1.5"/><line x1="5" y1="16" x2="5" y2="17" stroke="#c4b5fd" stroke-width="1.5"/><line x1="10" y1="6" x2="21" y2="6" stroke="#7c3aed" stroke-width="1.5" stroke-linecap="round"/><line x1="10" y1="13" x2="19" y2="13" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round"/><line x1="10" y1="20" x2="16" y2="20" stroke="#c4b5fd" stroke-width="1.5" stroke-linecap="round"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="5" cy="6" r="3" fill="#7c3aed"/><circle cx="5" cy="13" r="3" fill="#a78bfa"/><circle cx="5" cy="20" r="3" fill="#c4b5fd"/><line x1="10" y1="6" x2="21" y2="6" stroke="#7c3aed" stroke-width="1.5" stroke-linecap="round"/><line x1="10" y1="13" x2="19" y2="13" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round"/></svg>
                         </div>
                     </div>
                     <div class="article-content">
                         <h3 class="article-title">Comment structurer une séance d'EPS conforme aux OP</h3>
-                        <p class="article-excerpt">Les différentes phases d'une leçon d'EPS : de la prise en main au bilan, comment gérer le temps.</p>
+                        <p class="article-excerpt">Les différentes phases d'une leçon d'EPS : de la prise en main au bilan, comment gérer le temps et les transitions.</p>
                         <div class="article-footer">
                             <span class="article-date">15 Déc 2025</span>
                             <a href="article-structure-seance.html" class="read-more">Lire →</a>
@@ -822,17 +863,152 @@
                     </div>
                 </article>
 
-                <!-- Carrière -->
+                <article class="article-card" data-category="didactique">
+                    <div class="article-visual article-didactique">
+                        <span class="category-badge category-didactique">Organisation</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#7c3aed" stroke-width="2" fill="none"/><polyline points="12 6 12 12 14 14" stroke="#7c3aed" stroke-width="2" stroke-linecap="round"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">La gestion du temps et du matériel en cours d'EPS</h3>
+                        <p class="article-excerpt">Conseils pratiques et organisationnels pour optimiser les temps d'apprentissage moteur et gérer le matériel efficacement.</p>
+                        <div class="article-footer">
+                            <span class="article-date">18 Jan 2026</span>
+                            <a href="article-séance.html" class="read-more">Lire le guide →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="didactique">
+                    <div class="article-visual article-didactique">
+                        <span class="category-badge category-didactique">Débutants</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><polygon points="12 2 2 22 22 22" stroke="#7c3aed" stroke-width="2" stroke-linejoin="round" fill="#ede9fe"/><line x1="12" y1="9" x2="12" y2="13" stroke="#7c3aed" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17" r="1" fill="#7c3aed"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Les 10 erreurs fréquentes des professeurs débutants en EPS</h3>
+                        <p class="article-excerpt">Découvrez les pièges classiques lors des premières années d'enseignement en collège/lycée et les solutions concrètes pour s'affirmer.</p>
+                        <div class="article-footer">
+                            <span class="article-date">02 Fév 2026</span>
+                            <a href="article-erreurs-debutants.html" class="read-more">Découvrir →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="didactique">
+                    <div class="article-visual article-didactique">
+                        <span class="category-badge category-didactique">Échauffement</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">L'Échauffement en EPS : Protocoles généraux et spécifiques</h3>
+                        <p class="article-excerpt">Structure optimale de 15 minutes : mise en train cardio-pulmonaire, mobilisation articulaire dynamique et activation neuro-musculaire spécifique.</p>
+                        <div class="article-footer">
+                            <span class="article-date">12 Mai 2026</span>
+                            <a href="article-echauffement-eps.html" class="read-more">Voir le protocole →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="didactique">
+                    <div class="article-visual article-didactique">
+                        <span class="category-badge category-didactique">ATD Démarche</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="#7c3aed" stroke-width="2" fill="none"/><path d="M8 12h8M12 8v8" stroke="#7c3aed" stroke-width="2" stroke-linecap="round"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Qu'est-ce que l'ATD en EPS ? Définition, démarche et exemple</h3>
+                        <p class="article-excerpt">Explication méthodologique claire de l'Analyse et Traitement Didactique : logique interne, enjeux de formation et transposition scolaire.</p>
+                        <div class="article-footer">
+                            <span class="article-date">20 Avr 2026</span>
+                            <a href="qa-atd-eps.html" class="read-more">Consulter →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="didactique">
+                    <div class="article-visual article-didactique">
+                        <span class="category-badge category-didactique">Situation Apprentissage</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#7c3aed" stroke-width="2" fill="none"/><path d="M12 8v4l3 3" stroke="#7c3aed" stroke-width="2" stroke-linecap="round"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Construire une situation d'apprentissage motivante en EPS</h3>
+                        <p class="article-excerpt">Les 6 composantes indispensables : but, aménagement matériel, consignes, critères de réussite, variables didactiques et régulations.</p>
+                        <div class="article-footer">
+                            <span class="article-date">20 Avr 2026</span>
+                            <a href="qa-situation-apprentissage-eps.html" class="read-more">Lire la fiche →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="didactique">
+                    <div class="article-visual article-didactique">
+                        <span class="category-badge category-didactique">Fiche de Séance</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#7c3aed" stroke-width="2" fill="none"/><polyline points="14 2 14 8 20 8" stroke="#7c3aed" stroke-width="2"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Comment faire une fiche de séance EPS ? Modèle et structure</h3>
+                        <p class="article-excerpt">Modèle opérationnel prêt à l'emploi conforme aux inspecteurs : objectif de séance, situations d'apprentissage et bilan réflexif.</p>
+                        <div class="article-footer">
+                            <span class="article-date">20 Avr 2026</span>
+                            <a href="qa-fiche-seance-eps.html" class="read-more">Voir le modèle →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="didactique">
+                    <div class="article-visual article-didactique">
+                        <span class="category-badge category-didactique">Durée de Séance</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#7c3aed" stroke-width="2" fill="none"/><line x1="12" y1="6" x2="12" y2="12" stroke="#7c3aed" stroke-width="2"/><line x1="12" y1="12" x2="15" y2="15" stroke="#7c3aed" stroke-width="2"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Combien de temps dure une séance d'EPS au Maroc ?</h3>
+                        <p class="article-excerpt">Découpage d'une tranche de 2h au Maroc : vestiaires, échauffement, situations motrices effectives et retour au calme.</p>
+                        <div class="article-footer">
+                            <span class="article-date">26 Avr 2026</span>
+                            <a href="qa-duree-seance-eps.html" class="read-more">Lire les détails →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="didactique">
+                    <div class="article-visual article-didactique">
+                        <span class="category-badge category-didactique">EPS Inclusive</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="4" stroke="#7c3aed" stroke-width="2" fill="none"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" stroke="#7c3aed" stroke-width="2" stroke-linecap="round"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">EPS Inclusive au Maroc : Accueillir et faire progresser tous les élèves</h3>
+                        <p class="article-excerpt">Stratégies pédagogiques pour adapter les séances aux élèves à besoins éducatifs spécifiques ou présentant des inaptitudes partielles.</p>
+                        <div class="article-footer">
+                            <span class="article-date">12 Mai 2026</span>
+                            <a href="article-eps-inclusive-maroc.html" class="read-more">Découvrir le guide →</a>
+                        </div>
+                    </div>
+                </article>
+
                 <article class="article-card" data-category="carriere">
                     <div class="article-visual article-carriere">
                         <span class="category-badge category-carriere">Sport-Études</span>
                         <div class="article-icon">
-                            <svg viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="#d97706" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" stroke-linejoin="round"/><circle cx="14" cy="11" r="3" fill="#fbbf24" stroke="#d97706" stroke-width="1.2"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="#d97706" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/><circle cx="14" cy="11" r="3" fill="#fbbf24" stroke="#d97706" stroke-width="1.2"/></svg>
                         </div>
                     </div>
                     <div class="article-content">
                         <h3 class="article-title">Le Parcours Sport-Études au Maroc — Guide Complet 2026</h3>
-                        <p class="article-excerpt">Conditions d'admission, établissements (Lydex-SE Rabat, Lycées sportifs Casablanca & Tanger), disciplines, coefficient bac et débouchés post-bac.</p>
+                        <p class="article-excerpt">Conditions d'admission, établissements (Lydex-SE Rabat, Lycées sportifs Casablanca & Tanger), disciplines et débouchés.</p>
                         <div class="article-footer">
                             <span class="article-date">12 Avr 2026</span>
                             <a href="article-sport-etudes-maroc.html" class="read-more">Lire le guide →</a>
@@ -842,14 +1018,31 @@
 
                 <article class="article-card" data-category="carriere">
                     <div class="article-visual article-carriere">
-                        <span class="category-badge category-carriere">CRMEF</span>
+                        <span class="category-badge category-carriere">Orientation</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#d97706" stroke-width="2" fill="none"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" stroke="#d97706" stroke-width="2" fill="#fef3c7"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Comment devenir Professeur d'EPS au Maroc 2026 : Guide d'Orientation</h3>
+                        <p class="article-excerpt">Parcours complet : de la licence STAPS / Éducation aux épreuves du concours CRMEF et à l'année de formation qualifiante.</p>
+                        <div class="article-footer">
+                            <span class="article-date">15 Avr 2026</span>
+                            <a href="article-orientation-prof-eps.html" class="read-more">Consulter →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="carriere">
+                    <div class="article-visual article-carriere">
+                        <span class="category-badge category-carriere">CRMEF Écrit</span>
                         <div class="article-icon">
                             <svg viewBox="0 0 24 24" fill="none"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M18 2H6v7a6 6 0 0 0 12 0V2z" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" stroke-linejoin="round"/></svg>
                         </div>
                     </div>
                     <div class="article-content">
-                        <h3 class="article-title">Préparer le concours EPS (CRMEF)</h3>
-                        <p class="article-excerpt">Pack complet pour réussir l'écrit et l'oral : Anciens examens QCM, Didactique et Sciences de l'éducation.</p>
+                        <h3 class="article-title">Préparer le concours EPS (CRMEF) : Pack Écrit et Annales</h3>
+                        <p class="article-excerpt">Pack complet pour réussir l'écrit : QCM didactique, sciences de l'éducation, physiologie de l'effort et méthodologie.</p>
                         <div class="article-footer">
                             <span class="article-date">25 Jan 2026</span>
                             <a href="article-concours.html" class="read-more">Télécharger →</a>
@@ -857,24 +1050,550 @@
                     </div>
                 </article>
 
-                <article class="article-card" data-category="documents">
-                    <div class="article-visual article-documents">
-                        <span class="category-badge category-documents">Barème Bac</span>
+                <article class="article-card" data-category="carriere">
+                    <div class="article-visual article-carriere">
+                        <span class="category-badge category-carriere">Hub Concours</span>
                         <div class="article-icon">
-                            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="5" y="8" font-size="3.5" fill="#1e40af" font-weight="bold">20</text><text x="11" y="15" font-size="3.5" fill="#059669" font-weight="bold">BAC</text></svg>
+                            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#d97706" stroke-width="2" fill="none"/><line x1="3" y1="9" x2="21" y2="9" stroke="#d97706" stroke-width="2"/><line x1="9" y1="21" x2="9" y2="9" stroke="#d97706" stroke-width="2"/></svg>
                         </div>
                     </div>
                     <div class="article-content">
-                        <h3 class="article-title">Coefficient EPS au Bac Marocain — Coef 4, 3 épreuves par session</h3>
-                        <p class="article-excerpt">Coefficient 4 dans toutes les filières, pour bac normal et bac libre. Évaluation en 3 épreuves APS par session (OP 2007).</p>
+                        <h3 class="article-title">Concours EPS Maroc : Portail CRMEF, Examen Pro & Inspection</h3>
+                        <p class="article-excerpt">Hub centralisant tous les concours du ministère de l'Éducation Nationale pour les enseignants d'EPS au Maroc.</p>
                         <div class="article-footer">
-                            <span class="article-date">21 Avr 2026</span>
-                            <a href="qa-coefficient-eps-bac-maroc.html" class="read-more">Lire →</a>
+                            <span class="article-date">20 Avr 2026</span>
+                            <a href="concours-eps-maroc.html" class="read-more">Accéder au portail →</a>
                         </div>
                     </div>
                 </article>
 
-                <!-- APS -->
+                <article class="article-card" data-category="carriere">
+                    <div class="article-visual article-carriere">
+                        <span class="category-badge category-carriere">CRMEF Oral</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#d97706" stroke-width="2" fill="none"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Oral CRMEF EPS : Guide Complet MSP (Mise en Situation Professionnelle)</h3>
+                        <p class="article-excerpt">Comment briller devant le jury lors de l'épreuve orale : exposé didactique, analyse de cas d'élève et réponses aux questions pièges.</p>
+                        <div class="article-footer">
+                            <span class="article-date">12 Mai 2026</span>
+                            <a href="article-oral-crmef-eps.html" class="read-more">Préparer l'oral →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="carriere">
+                    <div class="article-visual article-carriere">
+                        <span class="category-badge category-carriere">Examen de Sortie</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="#d97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Examen de Sortie CRMEF EPS 2026 : Sujets et Conseils de Réussite</h3>
+                        <p class="article-excerpt">Modalités de titularisation, soutenance du mémoire professionnel, épreuve pratique sur le terrain et grille d'inspection.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-examen-sortie-crmef-eps.html" class="read-more">Consulter →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="carriere">
+                    <div class="article-visual article-carriere">
+                        <span class="category-badge category-carriere">Kafa'a Pro</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="7" stroke="#d97706" stroke-width="2" fill="none"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" stroke="#d97706" stroke-width="2" fill="none"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Examen Professionnel EPS (Kafa'a) : Sujets Corrigés PDF</h3>
+                        <p class="article-excerpt">Préparez l'examen d'avancement de grade pour les professeurs d'EPS du collège et du lycée marocain.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-examen-pro.html" class="read-more">Voir les sujets →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="carriere">
+                    <div class="article-visual article-carriere">
+                        <span class="category-badge category-carriere">Administration</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v4M12 14v4M16 14v4" stroke="#d97706" stroke-width="2" fill="none"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Concours Cadres d'Administration Éducative 2026 pour Profs EPS</h3>
+                        <p class="article-excerpt">Guide complet pour devenir proviseur, directeur de collège ou censeur : épreuves, gestion administrative et législation scolaire.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-concours-administration-educative.html" class="read-more">Préparer →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="carriere">
+                    <div class="article-visual article-carriere">
+                        <span class="category-badge category-carriere">CRMEF Primaire</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" stroke="#d97706" stroke-width="2" fill="none"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" stroke="#d97706" stroke-width="2" fill="none"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Examen Professionnel CRMEF Primaire : Préparation Complète</h3>
+                        <p class="article-excerpt">Ressources didactiques et méthodologiques pour les professeurs de l'enseignement primaire enseignant l'EPS.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-concours-examen-professionnel-crmef-primaire.html" class="read-more">Consulter →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="carriere">
+                    <div class="article-visual article-carriere">
+                        <span class="category-badge category-carriere">Inspection</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="#d97706" stroke-width="2" fill="none"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="#d97706" stroke-width="2"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Concours de l'Inspection Pédagogique EPS : Modèles & Préparation</h3>
+                        <p class="article-excerpt">Comment intégrer le corps des inspecteurs pédagogiques : épreuves théoriques, ingénierie de formation et encadrement.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-concours-inspection-primaire.html" class="read-more">Découvrir →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="carriere">
+                    <div class="article-visual article-carriere">
+                        <span class="category-badge category-carriere">COPE Orientation</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#d97706" stroke-width="2" fill="none"/><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="#d97706" stroke-width="2" fill="#fef3c7"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Concours Conseillers en Orientation et Planification (COPE)</h3>
+                        <p class="article-excerpt">Conditions d'accès au centre d'orientation et de planification de l'éducation pour les enseignants souhaitant changer de cadre.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-concours-orientation-planification.html" class="read-more">Voir le programme →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="pratique">
+                    <div class="article-visual article-pratique">
+                        <span class="category-badge category-pratique">Sécurité Juridique</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#059669" stroke-width="2" fill="#d1fae5"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Sécurité en EPS : Prévention des Accidents et Responsabilité Juridique</h3>
+                        <p class="article-excerpt">Règles impératives de sécurité, obligation de surveillance, protocoles d'urgence en cas de blessure et cadre pénal au Maroc.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-securite.html" class="read-more">Consulter →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="pratique">
+                    <div class="article-visual article-pratique">
+                        <span class="category-badge category-pratique">Sport Scolaire</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#059669" stroke-width="2" fill="none"/><path d="M8 12h8M12 8v8" stroke="#059669" stroke-width="2"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">L'Association Sportive Scolaire (ASS) au Maroc : Statuts et Organisation</h3>
+                        <p class="article-excerpt">Rôle de l'association sportive scolaire, affiliation à la FRMSS, assemblée générale et animation des mercredis après-midi.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-association-sportive.html" class="read-more">Lire le guide →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="pratique">
+                    <div class="article-visual article-pratique">
+                        <span class="category-badge category-pratique">Création ASS</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#059669" stroke-width="2" fill="none"/><circle cx="8.5" cy="7" r="4" stroke="#059669" stroke-width="2" fill="none"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Comment créer une Association Sportive Scolaire efficace au Maroc</h3>
+                        <p class="article-excerpt">Étapes administratives pour monter le bureau de l'ASS, ouvrir un compte bancaire, solliciter les cotisations et motiver les élèves.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-creer-ass.html" class="read-more">Suivre les étapes →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="pratique">
+                    <div class="article-visual article-pratique">
+                        <span class="category-badge category-pratique">Compétition</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="6" stroke="#059669" stroke-width="2" fill="none"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" stroke="#059669" stroke-width="2" fill="none"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Organiser une compétition scolaire en EPS au Maroc : Guide Pratique</h3>
+                        <p class="article-excerpt">Formules de tournois (poules, élimination directe, championnat), logistique des terrains, feuilles de match et arbitrage par les élèves.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-competition-scolaire.html" class="read-more">Voir le guide →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="pratique">
+                    <div class="article-visual article-pratique">
+                        <span class="category-badge category-pratique">Projet Annuel ASS</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="#059669" stroke-width="2" fill="none"/><line x1="16" y1="2" x2="16" y2="6" stroke="#059669" stroke-width="2"/><line x1="8" y1="2" x2="8" y2="6" stroke="#059669" stroke-width="2"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Projet annuel Association Sportive Scolaire (ASS) : Modèle Clé en Main</h3>
+                        <p class="article-excerpt">Document type à présenter au conseil de gestion : calendrier des rencontres, budget prévisionnel, objectifs sportifs et éducatifs.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-projet-annuel-ass.html" class="read-more">Télécharger le modèle →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="pratique">
+                    <div class="article-visual article-pratique">
+                        <span class="category-badge category-pratique">Santé & Prévention</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#059669" stroke-width="2" fill="none"/><line x1="12" y1="8" x2="12" y2="16" stroke="#059669" stroke-width="2" stroke-linecap="round"/><line x1="8" y1="12" x2="16" y2="12" stroke="#059669" stroke-width="2" stroke-linecap="round"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Prévention des Blessures en EPS au Maroc : Bonnes pratiques et gestes d'urgence</h3>
+                        <p class="article-excerpt">Entorses, déchirures et malaises : protocole RICE, trousse de premier secours indispensable et aménagement sécuritaire des plateaux.</p>
+                        <div class="article-footer">
+                            <span class="article-date">12 Mai 2026</span>
+                            <a href="article-prevention-blessures-eps.html" class="read-more">Consulter →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="pratique">
+                    <div class="article-visual article-pratique">
+                        <span class="category-badge category-pratique">Nutrition Sportive</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M18 8h1a4 4 0 0 1 0 8h-1" stroke="#059669" stroke-width="2" fill="none"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" stroke="#059669" stroke-width="2" fill="none"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Nutrition et Sport en EPS au Maroc : Guide pour Élèves et Enseignants</h3>
+                        <p class="article-excerpt">Ration énergétique du jeune sportif, hydratation par forte chaleur, collation avant l'effort et déconstruction des mythes alimentaires.</p>
+                        <div class="article-footer">
+                            <span class="article-date">12 Mai 2026</span>
+                            <a href="article-nutrition-sport-eps.html" class="read-more">Lire le guide →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="pratique">
+                    <div class="article-visual article-pratique">
+                        <span class="category-badge category-pratique">Dynamique Nationale</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#059669" stroke-width="2" fill="none"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" stroke="#059669" stroke-width="2"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Sport Scolaire au Maroc : Organisation, Championnats et Cadre MENPS</h3>
+                        <p class="article-excerpt">Fonctionnement des championnats provinciaux, régionaux et nationaux scolaires, détection des talents et conventions fédérales.</p>
+                        <div class="article-footer">
+                            <span class="article-date">12 Mai 2026</span>
+                            <a href="article-sport-scolaire-maroc.html" class="read-more">Découvrir →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="pratique">
+                    <div class="article-visual article-pratique">
+                        <span class="category-badge category-pratique">Gestion Élèves</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#059669" stroke-width="2" fill="none"/><path d="M8 14s1.5 2 4 2 4-2 4-2" stroke="#059669" stroke-width="2" stroke-linecap="round"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Gérer les élèves timides, dispensés ou en retrait en EPS au Maroc</h3>
+                        <p class="article-excerpt">Astuces didactiques pour intégrer les élèves en manque d'estime motrice et responsabiliser les dispensés (arbitrage, observation, chronométrie).</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-eleves-timides.html" class="read-more">Lire les conseils →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="pratique">
+                    <div class="article-visual article-pratique">
+                        <span class="category-badge category-pratique">Psychologie & Neuro</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">EPS et Réussite Scolaire au Maroc : Bienfaits Prouvés & Impact Cognitif</h3>
+                        <p class="article-excerpt">Comment l'activité physique régulière stimule la concentration, diminue le stress des examens et booste les résultats académiques globaux.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-eps-reussite-scolaire.html" class="read-more">Consulter l'étude →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="pratique">
+                    <div class="article-visual article-pratique">
+                        <span class="category-badge category-pratique">Confiance en Soi</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="#059669" stroke-width="2" fill="#d1fae5"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">L'EPS au Maroc : Une École de la Confiance en Soi et du Dépassement</h3>
+                        <p class="article-excerpt">Valoriser le progrès individuel par rapport à la performance absolue, climat de maîtrise et climat motivationnel en cours d'EPS.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-eps-confiance-en-soi.html" class="read-more">Lire l'article →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="pratique">
+                    <div class="article-visual article-pratique">
+                        <span class="category-badge category-pratique">Ramadan EPS</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="#059669" stroke-width="2" fill="#d1fae5"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Guide de l'EPS durant le Ramadan au Maroc : Plan d'Action Complet</h3>
+                        <p class="article-excerpt">Adapter l'intensité des séances, gérer la déshydratation, privilégier les activités à dominante tactique et veiller à la sécurité des élèves.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-eps-ramadan.html" class="read-more">Voir le plan →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="pratique">
+                    <div class="article-visual article-pratique">
+                        <span class="category-badge category-pratique">Mondial 2030</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#059669" stroke-width="2" fill="none"/><line x1="2" y1="12" x2="22" y2="12" stroke="#059669" stroke-width="2"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">EPS et Coupe du Monde 2030 au Maroc : Opportunités et Projets d'Élèves</h3>
+                        <p class="article-excerpt">Exploiter l'engouement du Mondial 2030 Maroc-Espagne-Portugal pour développer des projets transversaux d'arbitrage et de fair-play.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-eps-coupe-du-monde-2030.html" class="read-more">Découvrir →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="pratique">
+                    <div class="article-visual article-pratique">
+                        <span class="category-badge category-pratique">Bac Coef 4</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#059669" stroke-width="2" fill="none"/><text x="7" y="15" font-size="8" font-weight="bold" fill="#059669">4</text></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Quel est le coefficient de l'EPS au bac marocain ? (Coef 4)</h3>
+                        <p class="article-excerpt">Coefficient 4 dans toutes les filières, pour bac normal et bac libre. Modalités d'évaluation en 3 épreuves APS selon les OP 2007.</p>
+                        <div class="article-footer">
+                            <span class="article-date">21 Avr 2026</span>
+                            <a href="qa-coefficient-eps-bac-maroc.html" class="read-more">Consulter →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="pratique">
+                    <div class="article-visual article-pratique">
+                        <span class="category-badge category-pratique">Évaluation Bac</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#059669" stroke-width="2" fill="none"/><polyline points="14 2 14 8 20 8" stroke="#059669" stroke-width="2"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Comment est évaluée l'EPS au baccalauréat au Maroc ?</h3>
+                        <p class="article-excerpt">Barèmes officiels, répartition des points entre performance mesurée, maîtrise technique et comportement citoyen.</p>
+                        <div class="article-footer">
+                            <span class="article-date">21 Avr 2026</span>
+                            <a href="qa-evaluation-eps-bac.html" class="read-more">Voir le barème →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="pratique">
+                    <div class="article-visual article-pratique">
+                        <span class="category-badge category-pratique">Guide Révision Bac</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><polyline points="9 11 12 14 22 4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="#059669" stroke-width="2" fill="none"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Comment préparer le bac EPS au Maroc : Guide en 7 étapes (OP 2007)</h3>
+                        <p class="article-excerpt">Méthodologie complète pour réussir les épreuves pratiques du baccalauréat en demi-fond, gymnastique au sol et sports collectifs.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="howto-preparer-bac-eps-maroc.html" class="read-more">Suivre les 7 étapes →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">Football</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#dc2626" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="3" fill="#dc2626"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Football & Futsal EPS Maroc : Cycle Collège & Lycée, ATD et Séances</h3>
+                        <p class="article-excerpt">Guide complet du football et futsal en EPS : analyse didactique, cycle de 10-12 séances, situations de démarquage et arbitrage.</p>
+                        <div class="article-footer">
+                            <span class="article-date">12 Mai 2026</span>
+                            <a href="article-football-eps.html" class="read-more">Voir le cycle →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">Basketball</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#dc2626" stroke-width="2" fill="none"/><line x1="2" y1="12" x2="22" y2="12" stroke="#dc2626" stroke-width="1.5"/><line x1="12" y1="2" x2="12" y2="22" stroke="#dc2626" stroke-width="1.5"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Basketball EPS Maroc : Cycle Collège & Lycée, ATD et Situations</h3>
+                        <p class="article-excerpt">Guide complet du basketball en EPS au Maroc : analyse didactique, tirs en course, jeu de transition rapide et grilles de critères.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-basketball-eps.html" class="read-more">Voir le cycle →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">Volleyball</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#dc2626" stroke-width="2" fill="none"/><path d="M4.93 4.93 12 12m7.07 7.07L12 12" stroke="#dc2626" stroke-width="1.5"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Cycle Volleyball EPS Maroc : Séances, Grille d'Évaluation & Arbitrage</h3>
+                        <p class="article-excerpt">Cycle complet de volleyball au Maroc : 10-12 séances progressives, passe haute, manchette, attaque smashée et tournoi interne.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-volleyball-eps.html" class="read-more">Voir le cycle →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">Handball</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#dc2626" stroke-width="2" fill="none"/><path d="M12 2a10 10 0 0 1 10 10" stroke="#dc2626" stroke-width="2"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Handball EPS Maroc : Cycle Collège & Lycée, ATD, Situations & Grilles</h3>
+                        <p class="article-excerpt">Guide complet du handball en EPS : circulation de balle, montées de balle en surnombre, tir en suspension et défense étagée.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-handball-eps.html" class="read-more">Voir le cycle →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">Badminton</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="5" stroke="#dc2626" stroke-width="2" fill="none"/><line x1="12" y1="12" x2="12" y2="22" stroke="#dc2626" stroke-width="2"/><line x1="9" y1="18" x2="15" y2="18" stroke="#dc2626" stroke-width="2"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Séance de Badminton en EPS : Guide Complet Collège et Lycée</h3>
+                        <p class="article-excerpt">Techniques de base, service court/long, amortis, smashs et organisation de montantes-descendantes sur terrains scolaires.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-badminton-eps.html" class="read-more">Consulter →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">Tennis de Table</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="10" cy="10" r="7" stroke="#dc2626" stroke-width="2" fill="none"/><line x1="15" y1="15" x2="21" y2="21" stroke="#dc2626" stroke-width="3" stroke-linecap="round"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Tennis de Table EPS Maroc : Cycle Collège & Lycée, ATD et Tournois</h3>
+                        <p class="article-excerpt">Cycle de 10 séances en ping-pong : prise de raquette, régularité coup droit/revers, services à effets et gestion par poules.</p>
+                        <div class="article-footer">
+                            <span class="article-date">12 Mai 2026</span>
+                            <a href="article-tennis-de-table-eps.html" class="read-more">Voir le cycle →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">Rugby Scolaire</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="12" rx="10" ry="6" transform="rotate(45 12 12)" stroke="#dc2626" stroke-width="2" fill="none"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Rugby en EPS au Maroc : Cycle Collège & Lycée, ATD et Sécurité</h3>
+                        <p class="article-excerpt">Du toucher 2 secondes au plaquage sécurisé : règles d'avancée, continuité du jeu, respect de l'adversaire et fiches de séance.</p>
+                        <div class="article-footer">
+                            <span class="article-date">12 Mai 2026</span>
+                            <a href="article-rugby-eps-maroc.html" class="read-more">Consulter le cycle →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">Course de Durée</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#dc2626" stroke-width="2" fill="none"/><polyline points="12 6 12 12 14 14" stroke="#dc2626" stroke-width="2"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Course de Durée EPS Maroc : Fiche Pédagogique Collège & Lycée</h3>
+                        <p class="article-excerpt">Course de durée en EPS : mesure de la VMA, contrat d'allure, régularité des temps au tour et barèmes conformes aux OP.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-course-duree-eps.html" class="read-more">Consulter la fiche →</a>
+                        </div>
+                    </div>
+                </article>
+
                 <article class="article-card" data-category="aps">
                     <div class="article-visual article-aps">
                         <span class="category-badge category-aps">Athlétisme</span>
@@ -884,10 +1603,197 @@
                     </div>
                     <div class="article-content">
                         <h3 class="article-title">Fiche de Séance Athlétisme EPS — Tronc Commun et Lycée</h3>
-                        <p class="article-excerpt">Exemples complets : course de vitesse, saut en longueur, lancer du poids conformes aux OP.</p>
+                        <p class="article-excerpt">Exemples complets : course de vitesse avec starting-blocks, saut en longueur avec élan étalonné et lancer du poids en translation.</p>
                         <div class="article-footer">
-                            <span class="article-date">4 Avr 2026</span>
-                            <a href="article-fiche-seance-athletisme-eps.html" class="read-more">Lire →</a>
+                            <span class="article-date">04 Avr 2026</span>
+                            <a href="article-fiche-seance-athletisme-eps.html" class="read-more">Lire la fiche →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">Gymnastique</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="5" r="3" stroke="#dc2626" stroke-width="2" fill="none"/><path d="M5 12l7-3 7 3M12 9v12" stroke="#dc2626" stroke-width="2"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Séance complète de gymnastique pour débutants en EPS</h3>
+                        <p class="article-excerpt">Découvrez une séance complète de gymnastique au sol : roulade avant/arrière, ATR, roue et sécurité des parades.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-seance-gymnastique.html" class="read-more">Voir la séance →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">Beach Volley</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#dc2626" stroke-width="2" fill="none"/><path d="M12 2a14.5 14.5 0 0 0 0 20" stroke="#dc2626" stroke-width="2"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Beach Volley en EPS : Guide Complet Collège et Lycée Maroc</h3>
+                        <p class="article-excerpt">Adaptation du jeu en plein air sur sable : déplacement spécifique, 2 contre 2, lecture de trajectoires sous le vent.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-beach-volley-eps.html" class="read-more">Consulter le guide →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">Basket 3x3</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#dc2626" stroke-width="2" fill="none"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20" stroke="#dc2626" stroke-width="2"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Basket 3x3 en EPS au Maroc : Guide Didactique et Règlement</h3>
+                        <p class="article-excerpt">Règlement olympique simplifié, 1 seul demi-terrain, dynamisme des attaques en 12 secondes et inclusion motrice maximale.</p>
+                        <div class="article-footer">
+                            <span class="article-date">23 Avr 2026</span>
+                            <a href="article-basket-3x3-eps.html" class="read-more">Lire le guide →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">Cycle Volley Collège</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#dc2626" stroke-width="2" fill="none"/><line x1="3" y1="12" x2="21" y2="12" stroke="#dc2626" stroke-width="2"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Cycle Volleyball Collège EPS Maroc — 10 Séances & Grille (OP 2009)</h3>
+                        <p class="article-excerpt">Plan de cycle complet pour le collège : de la découverte du renvoi direct à l'attaque smasher, avec grilles d'évaluation formative.</p>
+                        <div class="article-footer">
+                            <span class="article-date">21 Avr 2026</span>
+                            <a href="cycle-volleyball-college-eps-maroc.html" class="read-more">Accéder au cycle →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">Cycle Hand Collège</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#dc2626" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="4" stroke="#dc2626" stroke-width="1.5" fill="none"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Cycle Handball Collège EPS Maroc — 10 Séances & Grille (OP 2009)</h3>
+                        <p class="article-excerpt">Cycle de 10 leçons collège : circulation de balle, montées de balle en surnombre, tir en suspension et barème officiel.</p>
+                        <div class="article-footer">
+                            <span class="article-date">21 Avr 2026</span>
+                            <a href="cycle-handball-college-eps-maroc.html" class="read-more">Accéder au cycle →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">Cycle Basket Collège</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="12" rx="9" ry="9" stroke="#dc2626" stroke-width="2" fill="none"/><path d="M12 3v18M3 12h18" stroke="#dc2626" stroke-width="1.5"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Cycle Basketball Collège EPS Maroc — 10 Séances & Grille (OP 2009)</h3>
+                        <p class="article-excerpt">Cycle de basketball adapté aux collégiens : conservation du ballon, non-marcher, démarquage vers l'avant et arbitrage.</p>
+                        <div class="article-footer">
+                            <span class="article-date">21 Avr 2026</span>
+                            <a href="cycle-basketball-college-eps-maroc.html" class="read-more">Accéder au cycle →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">Cycle Badminton Collège</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2v10M9 7l6 0M8 12l8 0" stroke="#dc2626" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17" r="4" stroke="#dc2626" stroke-width="2" fill="none"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Cycle Badminton Collège EPS Maroc — 10 Séances & Grille (OP 2009)</h3>
+                        <p class="article-excerpt">Apprentissage du jeu en fond de court et à la table, service réglementaire et grille d'observation co-évaluée entre élèves.</p>
+                        <div class="article-footer">
+                            <span class="article-date">21 Avr 2026</span>
+                            <a href="cycle-badminton-college-eps-maroc.html" class="read-more">Accéder au cycle →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">Cycle Volley Lycée</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#dc2626" stroke-width="2" fill="none"/><line x1="12" y1="3" x2="12" y2="21" stroke="#dc2626" stroke-width="2"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Cycle Volleyball Lycée EPS Maroc — 10 Séances & Grille (OP 2007)</h3>
+                        <p class="article-excerpt">Perfectionnement tactique en lycée : système 4-2, fixation au centre, combinaisons d'attaque et gestion du contre.</p>
+                        <div class="article-footer">
+                            <span class="article-date">21 Avr 2026</span>
+                            <a href="cycle-volleyball-lycee-eps-maroc.html" class="read-more">Accéder au cycle →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">Cycle Hand Lycée</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#dc2626" stroke-width="2" fill="none"/><path d="M12 2a10 10 0 0 0 0 20" stroke="#dc2626" stroke-width="2"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Cycle Handball Lycée EPS Maroc — 10 Séances & Grille (OP 2007)</h3>
+                        <p class="article-excerpt">Cycle lycée avec défense 0-6 et 1-5, jeu avec pivot, croisés arrières/ailiers et critères d'évaluation baccalauréat.</p>
+                        <div class="article-footer">
+                            <span class="article-date">21 Avr 2026</span>
+                            <a href="cycle-handball-lycee-eps-maroc.html" class="read-more">Accéder au cycle →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">Cycle Basket Lycée</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#dc2626" stroke-width="2" fill="none"/><path d="M5 5l14 14M5 19l14-14" stroke="#dc2626" stroke-width="1.5"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Cycle Basketball Lycée EPS Maroc — 10 Séances & Grille (OP 2007)</h3>
+                        <p class="article-excerpt">Attaque placée contre défense de zone ou individuelle, pick and roll, jeu rapide en contre-attaque et fiche bac.</p>
+                        <div class="article-footer">
+                            <span class="article-date">21 Avr 2026</span>
+                            <a href="cycle-basketball-lycee-eps-maroc.html" class="read-more">Accéder au cycle →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">Cycle Badminton Lycée</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="6" r="4" stroke="#dc2626" stroke-width="2" fill="none"/><path d="M12 10v11M8 15h8" stroke="#dc2626" stroke-width="2" stroke-linecap="round"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Cycle Badminton Lycée EPS Maroc — 10 Séances & Grille (OP 2007)</h3>
+                        <p class="article-excerpt">Rupture de rythme, frappes d'attaque smashées, amortis masqués et gestion des points décisifs pour l'épreuve bac EPS.</p>
+                        <div class="article-footer">
+                            <span class="article-date">21 Avr 2026</span>
+                            <a href="cycle-badminton-lycee-eps-maroc.html" class="read-more">Accéder au cycle →</a>
                         </div>
                     </div>
                 </article>
