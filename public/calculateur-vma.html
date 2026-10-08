@@ -734,6 +734,208 @@
         <p style="margin-bottom:1rem;">Dans les établissements scolaires au Maroc comme en France, les pistes d'athlétisme mesurent rarement 400 mètres : on rencontre très souvent des anneaux de <strong>200 mètres, 250 mètres ou 300 mètres</strong> tracés autour des terrains de sport collectif. C'est pourquoi notre calculateur vous permet de personnaliser la longueur exacte de votre tour de piste ainsi que l'espacement de vos plots (20m, 25m ou 50m).</p>
         <p style="margin-bottom:0.5rem;">Lors d'un cycle de course en durée ou de demi-fond, cette table de passage permet à chaque binôme d'élèves (un coureur et un observateur-chronométreur) de vérifier la régularité de l'allure à chaque plot, développant ainsi la compétence méthodologique d'auto-régulation de l'effort exigée aux examens du Baccalauréat. Retrouvez toutes nos fiches d'observation dans l'article <a href="article-test-vma-eps.html" style="color:#0284c7; font-weight:600; text-decoration:underline;">Test VMA en EPS : protocole, calcul et évaluation des élèves</a>.</p>
     </section>
+<!-- =========================================================================== -->
+<!-- PROFEPS - TABLEAU RÉCAPITULATIF COMPLET DES PALIERS 1 À 20 (DYNAMIQUE)      -->
+<!-- =========================================================================== -->
+<div id="profeps-recap-section" style="margin-top: 45px; background: #ffffff; border-radius: 12px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08); border: 1px solid #e2e8f0; overflow: hidden; font-family: system-ui, -apple-system, sans-serif;">
+  
+  <!-- En-tête du tableau avec contrôles rapides -->
+  <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff; padding: 22px 25px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px;">
+    <div>
+      <h3 style="margin: 0; font-size: 1.35rem; font-weight: 700; color: #38bdf8; display: flex; align-items: center; gap: 10px;">
+        📊 Tableau Récapitulatif des Paliers 1 à 20 & Allures
+      </h3>
+      <p style="margin: 6px 0 0 0; font-size: 0.9rem; color: #94a3b8;">
+        Grille complète d'entraînement et repères chronométriques pour le terrain d'EPS
+      </p>
+    </div>
+
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <button type="button" onclick="window.print()" style="background: #0284c7; hover:background: #0369a1; color: #ffffff; border: none; padding: 9px 16px; border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+        🖨️ Imprimer la Grille A4
+      </button>
+    </div>
+  </div>
+
+  <!-- Barre de filtres dynamiques (Intensité, Piste, Durée) -->
+  <div style="background: #f8fafc; padding: 16px 24px; border-bottom: 1px solid #e2e8f0; display: flex; flex-wrap: wrap; gap: 20px; align-items: center;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <label style="font-size: 0.85rem; font-weight: 600; color: #334155;">⚡ Intensité :</label>
+      <select id="recap-filter-intensity" onchange="updateRecapTable()" style="padding: 6px 12px; border-radius: 6px; border: 1px solid #cbd5e1; font-weight: 600; color: #0f172a; background: #fff;">
+        <option value="80">80% (Aérobie douce)</option>
+        <option value="85">85% (Endurance fondamentale)</option>
+        <option value="90">90% (Allure spécifique demi-fond)</option>
+        <option value="95">95% (Seuil anaérobie)</option>
+        <option value="100" selected>100% VMA (Vitesse Maximale)</option>
+        <option value="105">105% (Sur-VMA courte)</option>
+        <option value="110">110% (Fractionné intermittent 30/30)</option>
+        <option value="120">120% (Fractionné court 15/15)</option>
+      </select>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <label style="font-size: 0.85rem; font-weight: 600; color: #334155;">🏟️ Tour de Piste :</label>
+      <select id="recap-filter-track" onchange="updateRecapTable()" style="padding: 6px 12px; border-radius: 6px; border: 1px solid #cbd5e1; font-weight: 600; color: #0f172a; background: #fff;">
+        <option value="100">100 mètres</option>
+        <option value="200" selected>200 mètres (Piste standard collège)</option>
+        <option value="250">250 mètres</option>
+        <option value="300">300 mètres</option>
+        <option value="400">400 mètres (Piste officielle)</option>
+      </select>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <label style="font-size: 0.85rem; font-weight: 600; color: #334155;">⏱️ Durée d'Effort :</label>
+      <select id="recap-filter-duration" onchange="updateRecapTable()" style="padding: 6px 12px; border-radius: 6px; border: 1px solid #cbd5e1; font-weight: 600; color: #0f172a; background: #fff;">
+        <option value="30">30 secondes (Intermittent court)</option>
+        <option value="60">1 minute</option>
+        <option value="180">3 minutes</option>
+        <option value="360" selected>6 minutes (Test Demi-Cooper)</option>
+        <option value="720">12 minutes (Test Cooper)</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Tableau Responsive avec Défilement Horizontal -->
+  <div style="overflow-x: auto; max-height: 650px;">
+    <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 0.9rem;">
+      <thead style="position: sticky; top: 0; background: #f1f5f9; z-index: 2; border-bottom: 2px solid #cbd5e1;">
+        <tr>
+          <th style="padding: 12px 14px; color: #1e293b; font-weight: 700; border-right: 1px solid #e2e8f0;">Palier</th>
+          <th style="padding: 12px 14px; color: #1e293b; font-weight: 700;">VMA Base</th>
+          <th style="padding: 12px 14px; color: #0284c7; font-weight: 700;">Vitesse Cible</th>
+          <th style="padding: 12px 14px; color: #475569; font-weight: 700;">Allure / km</th>
+          <th style="padding: 12px 14px; color: #16a34a; font-weight: 700;" id="th-track-label">Temps / Tour (200m)</th>
+          <th style="padding: 12px 14px; color: #d97706; font-weight: 700;">Temps / Plot (50m)</th>
+          <th style="padding: 12px 14px; color: #7c3aed; font-weight: 700;" id="th-dist-label">Distance (6 min)</th>
+        </tr>
+      </thead>
+      <tbody id="recap-table-body">
+        <!-- Rempli dynamiquement en JavaScript -->
+      </tbody>
+    </table>
+  </div>
+
+  <div style="padding: 14px 20px; background: #f8fafc; border-top: 1px solid #e2e8f0; font-size: 0.82rem; color: #64748b; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+    <span>💡 <em>Astuce pédagogique EPS : La ligne surlignée en vert correspond au résultat sélectionné.</em></span>
+    <span style="font-weight: 600; color: #0f172a;">ProfEPS.ma © Référence Pédagogique EPS</span>
+  </div>
+</div>
+
+<script>
+// Paliers officiels du Test Navette Luc Léger & VAMEVAL (Paliers 1 à 20)
+const PALIERS_DATA = [
+  { palier: 1,  vma: 8.5 },
+  { palier: 2,  vma: 9.0 },
+  { palier: 3,  vma: 9.5 },
+  { palier: 4,  vma: 10.0 },
+  { palier: 5,  vma: 10.5 },
+  { palier: 6,  vma: 11.0 },
+  { palier: 7,  vma: 11.5 },
+  { palier: 8,  vma: 12.0 },
+  { palier: 9,  vma: 12.5 },
+  { palier: 10, vma: 13.0 },
+  { palier: 11, vma: 13.5 },
+  { palier: 12, vma: 14.0 },
+  { palier: 13, vma: 14.5 },
+  { palier: 14, vma: 15.0 },
+  { palier: 15, vma: 15.5 },
+  { palier: 16, vma: 16.0 },
+  { palier: 17, vma: 16.5 },
+  { palier: 18, vma: 17.0 },
+  { palier: 19, vma: 17.5 },
+  { palier: 20, vma: 18.0 }
+];
+
+function formatTimeSeconds(totalSeconds) {
+  if (!isFinite(totalSeconds) || totalSeconds <= 0) return "-";
+  const mins = Math.floor(totalSeconds / 60);
+  const secs = Math.round(totalSeconds % 60);
+  if (mins === 0) return secs + "s";
+  return mins + "'" + (secs < 10 ? "0" : "") + secs + '"';
+}
+
+function updateRecapTable(activePalier = null, activeVma = null) {
+  const tbody = document.getElementById('recap-table-body');
+  if (!tbody) return;
+
+  const intensityPercent = parseFloat(document.getElementById('recap-filter-intensity')?.value || 100);
+  const trackDistance = parseFloat(document.getElementById('recap-filter-track')?.value || 200);
+  const durationSeconds = parseFloat(document.getElementById('recap-filter-duration')?.value || 360);
+
+  // Mettre à jour les labels des en-têtes
+  const thTrack = document.getElementById('th-track-label');
+  if (thTrack) thTrack.innerText = "Temps / Tour (" + trackDistance + "m)";
+  
+  const thDist = document.getElementById('th-dist-label');
+  if (thDist) {
+    const mins = Math.round(durationSeconds / 60);
+    thDist.innerText = "Distance (" + (mins >= 1 ? mins + " min" : durationSeconds + " s") + ")";
+  }
+
+  let html = '';
+
+  PALIERS_DATA.forEach(row => {
+    // Vitesse à l'intensité voulue (km/h)
+    const targetSpeedKmH = (row.vma * intensityPercent) / 100;
+    const speedMs = (targetSpeedKmH * 1000) / 3600; // m/s
+
+    // Temps au tour sur la piste
+    const lapTimeSec = trackDistance / speedMs;
+
+    // Temps au plot de 50m
+    const plotTimeSec = 50 / speedMs;
+
+    // Distance totale sur la durée
+    const distanceMeters = Math.round(speedMs * durationSeconds);
+
+    // Allure au kilomètre (sec pour 1000m)
+    const paceSeconds = 1000 / speedMs;
+    const paceMin = Math.floor(paceSeconds / 60);
+    const paceSec = Math.round(paceSeconds % 60);
+    const paceFormatted = paceMin + "'" + (paceSec < 10 ? "0" : "") + paceSec + '"';
+
+    // Détection de surbrillance
+    const isCurrent = (activePalier && row.palier === parseInt(activePalier)) || 
+                      (activeVma && Math.abs(row.vma - parseFloat(activeVma)) < 0.25);
+
+    const rowBg = isCurrent ? "#ecfdf5" : (row.palier % 2 === 0 ? "#ffffff" : "#f8fafc");
+    const borderStyle = isCurrent ? "border-left: 5px solid #10b981; font-weight: bold;" : "";
+
+    html += 
+      <tr style="background: \; \ border-bottom: 1px solid #e2e8f0; transition: background 0.15s;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='\'">
+        <td style="padding: 10px 14px; font-weight: 700; color: #0f172a; border-right: 1px solid #e2e8f0;">
+          \
+        </td>
+        <td style="padding: 10px 14px; font-weight: 600; color: #334155;">\ km/h</td>
+        <td style="padding: 10px 14px; font-weight: 700; color: #0284c7;">\ km/h</td>
+        <td style="padding: 10px 14px; color: #475569; font-family: monospace; font-size: 0.95rem;">\</td>
+        <td style="padding: 10px 14px; font-weight: 700; color: #16a34a; font-family: monospace; font-size: 0.95rem;">\</td>
+        <td style="padding: 10px 14px; color: #d97706; font-family: monospace; font-size: 0.9rem;">\</td>
+        <td style="padding: 10px 14px; font-weight: 700; color: #7c3aed;">\ m</td>
+      </tr>
+    ;
+  });
+
+  tbody.innerHTML = html;
+}
+
+// Initialisation au chargement de la page
+document.addEventListener('DOMContentLoaded', () => {
+  updateRecapTable();
+
+  // Écouteur automatique sur les champs du formulaire existant pour synchronisation instantanée
+  const existingInputs = document.querySelectorAll('input, select');
+  existingInputs.forEach(el => {
+    el.addEventListener('input', () => {
+      // Détection de la VMA saisie
+      const vmaInput = document.querySelector('input[name*="vma"], input[id*="vma"], input[type="number"]');
+      const val = vmaInput ? parseFloat(vmaInput.value) : null;
+      updateRecapTable(null, val);
+    });
+  });
+});
+</script>
 </main>
 
     <!-- ═══ FOOTER ═══ -->
