@@ -646,10 +646,11 @@
         </div>
 
         <!-- ═══ GUIDE DIDACTIQUE & FAQ SEO BILINGUE ═══ -->
-        <!-- =========================================================================== -->
-<!-- PROFEPS - TABLEAU RÉCAPITULATIF DES PALIERS 1 À 20 (AU-DESSUS DU GUIDE)     -->
+        
 <!-- =========================================================================== -->
-<div id="profeps-recap-section" style="margin: 40px auto; max-width: 1100px; background: #ffffff; border-radius: 12px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08); border: 1px solid #e2e8f0; overflow: hidden; font-family: system-ui, -apple-system, sans-serif;">
+<!-- PROFEPS - TABLEAU RÉCAPITULATIF (CACHÉ AU DÉPART, AFFICHÉ APRÈS CALCUL)     -->
+<!-- =========================================================================== -->
+<div id="profeps-recap-section" style="display: none; margin: 40px auto; max-width: 1100px; background: #ffffff; border-radius: 12px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08); border: 1px solid #e2e8f0; overflow: hidden; font-family: system-ui, -apple-system, sans-serif;">
   
   <!-- En-tête -->
   <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff; padding: 22px 25px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px;">
@@ -658,7 +659,7 @@
         📊 Tableau Récapitulatif des Paliers 1 à 20 & Allures
       </h3>
       <p style="margin: 6px 0 0 0; font-size: 0.9rem; color: #94a3b8;">
-        Grille complète d'entraînement et repères chronométriques pour le terrain d'EPS
+        Repères chronométriques personnalisés pour la séance d'EPS sur la piste
       </p>
     </div>
 
@@ -669,7 +670,7 @@
     </div>
   </div>
 
-  <!-- Filtres Dynamiques -->
+  <!-- Filtres Dynamiques (SANS le sélecteur Durée) -->
   <div style="background: #f8fafc; padding: 16px 24px; border-bottom: 1px solid #e2e8f0; display: flex; flex-wrap: wrap; gap: 20px; align-items: center;">
     <div style="display: flex; align-items: center; gap: 8px;">
       <label style="font-size: 0.85rem; font-weight: 600; color: #334155;">⚡ Intensité :</label>
@@ -695,20 +696,9 @@
         <option value="400">400 mètres (Piste officielle)</option>
       </select>
     </div>
-
-    <div style="display: flex; align-items: center; gap: 8px;">
-      <label style="font-size: 0.85rem; font-weight: 600; color: #334155;">⏱️ Durée :</label>
-      <select id="recap-filter-duration" onchange="applyRecapFilters()" style="padding: 6px 12px; border-radius: 6px; border: 1px solid #cbd5e1; font-weight: 600; color: #0f172a; background: #fff;">
-        <option value="30">30 secondes</option>
-        <option value="60">1 minute</option>
-        <option value="180">3 minutes</option>
-        <option value="360" selected>6 minutes (Demi-Cooper)</option>
-        <option value="720">12 minutes (Cooper)</option>
-      </select>
-    </div>
   </div>
 
-  <!-- Tableau avec 20 lignes pré-remplies -->
+  <!-- Tableau -->
   <div style="overflow-x: auto; max-height: 580px;">
     <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 0.9rem;">
       <thead style="position: sticky; top: 0; background: #f1f5f9; z-index: 2; border-bottom: 2px solid #cbd5e1;">
@@ -719,199 +709,199 @@
           <th style="padding: 12px 14px; color: #475569; font-weight: 700;">Allure / km</th>
           <th id="th-track-label" style="padding: 12px 14px; color: #16a34a; font-weight: 700;">Temps / Tour (200m)</th>
           <th style="padding: 12px 14px; color: #d97706; font-weight: 700;">Temps / Plot (50m)</th>
-          <th id="th-dist-label" style="padding: 12px 14px; color: #7c3aed; font-weight: 700;">Distance (6 min)</th>
         </tr>
       </thead>
       <tbody id="recap-table-body">
-      <tr id="row-palier-1" data-palier="1" data-vma="8.5" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+      <tr id="row-palier-1" data-palier="1" data-vma="8.5" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; transition: background 0.2s;">
         <td style="padding: 10px 14px; font-weight: 700; color: #0f172a; border-right: 1px solid #e2e8f0;">Palier 1</td>
         <td style="padding: 10px 14px; font-weight: 600; color: #334155;">8,5 km/h</td>
         <td class="col-speed" style="padding: 10px 14px; font-weight: 700; color: #0284c7;">8,50 km/h</td>
         <td class="col-pace" style="padding: 10px 14px; color: #475569; font-family: monospace;"></td>
         <td class="col-lap" style="padding: 10px 14px; font-weight: 700; color: #16a34a; font-family: monospace;"></td>
         <td class="col-plot" style="padding: 10px 14px; color: #d97706; font-family: monospace;">21.2 s</td>
-        <td class="col-dist" style="padding: 10px 14px; font-weight: 700; color: #7c3aed;">850 m</td>
-      </tr>      <tr id="row-palier-2" data-palier="2" data-vma="9" style="background: #ffffff; border-bottom: 1px solid #e2e8f0;">
+      </tr>      <tr id="row-palier-2" data-palier="2" data-vma="9" style="background: #ffffff; border-bottom: 1px solid #e2e8f0; transition: background 0.2s;">
         <td style="padding: 10px 14px; font-weight: 700; color: #0f172a; border-right: 1px solid #e2e8f0;">Palier 2</td>
         <td style="padding: 10px 14px; font-weight: 600; color: #334155;">9,0 km/h</td>
         <td class="col-speed" style="padding: 10px 14px; font-weight: 700; color: #0284c7;">9,00 km/h</td>
         <td class="col-pace" style="padding: 10px 14px; color: #475569; font-family: monospace;"></td>
         <td class="col-lap" style="padding: 10px 14px; font-weight: 700; color: #16a34a; font-family: monospace;"></td>
         <td class="col-plot" style="padding: 10px 14px; color: #d97706; font-family: monospace;">20 s</td>
-        <td class="col-dist" style="padding: 10px 14px; font-weight: 700; color: #7c3aed;">900 m</td>
-      </tr>      <tr id="row-palier-3" data-palier="3" data-vma="9.5" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+      </tr>      <tr id="row-palier-3" data-palier="3" data-vma="9.5" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; transition: background 0.2s;">
         <td style="padding: 10px 14px; font-weight: 700; color: #0f172a; border-right: 1px solid #e2e8f0;">Palier 3</td>
         <td style="padding: 10px 14px; font-weight: 600; color: #334155;">9,5 km/h</td>
         <td class="col-speed" style="padding: 10px 14px; font-weight: 700; color: #0284c7;">9,50 km/h</td>
         <td class="col-pace" style="padding: 10px 14px; color: #475569; font-family: monospace;"></td>
         <td class="col-lap" style="padding: 10px 14px; font-weight: 700; color: #16a34a; font-family: monospace;"></td>
         <td class="col-plot" style="padding: 10px 14px; color: #d97706; font-family: monospace;">18.9 s</td>
-        <td class="col-dist" style="padding: 10px 14px; font-weight: 700; color: #7c3aed;">950 m</td>
-      </tr>      <tr id="row-palier-4" data-palier="4" data-vma="10" style="background: #ffffff; border-bottom: 1px solid #e2e8f0;">
+      </tr>      <tr id="row-palier-4" data-palier="4" data-vma="10" style="background: #ffffff; border-bottom: 1px solid #e2e8f0; transition: background 0.2s;">
         <td style="padding: 10px 14px; font-weight: 700; color: #0f172a; border-right: 1px solid #e2e8f0;">Palier 4</td>
         <td style="padding: 10px 14px; font-weight: 600; color: #334155;">10,0 km/h</td>
         <td class="col-speed" style="padding: 10px 14px; font-weight: 700; color: #0284c7;">10,00 km/h</td>
         <td class="col-pace" style="padding: 10px 14px; color: #475569; font-family: monospace;"></td>
         <td class="col-lap" style="padding: 10px 14px; font-weight: 700; color: #16a34a; font-family: monospace;"></td>
         <td class="col-plot" style="padding: 10px 14px; color: #d97706; font-family: monospace;">18 s</td>
-        <td class="col-dist" style="padding: 10px 14px; font-weight: 700; color: #7c3aed;">1000 m</td>
-      </tr>      <tr id="row-palier-5" data-palier="5" data-vma="10.5" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+      </tr>      <tr id="row-palier-5" data-palier="5" data-vma="10.5" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; transition: background 0.2s;">
         <td style="padding: 10px 14px; font-weight: 700; color: #0f172a; border-right: 1px solid #e2e8f0;">Palier 5</td>
         <td style="padding: 10px 14px; font-weight: 600; color: #334155;">10,5 km/h</td>
         <td class="col-speed" style="padding: 10px 14px; font-weight: 700; color: #0284c7;">10,50 km/h</td>
         <td class="col-pace" style="padding: 10px 14px; color: #475569; font-family: monospace;"></td>
         <td class="col-lap" style="padding: 10px 14px; font-weight: 700; color: #16a34a; font-family: monospace;"></td>
         <td class="col-plot" style="padding: 10px 14px; color: #d97706; font-family: monospace;">17.1 s</td>
-        <td class="col-dist" style="padding: 10px 14px; font-weight: 700; color: #7c3aed;">1050 m</td>
-      </tr>      <tr id="row-palier-6" data-palier="6" data-vma="11" style="background: #ffffff; border-bottom: 1px solid #e2e8f0;">
+      </tr>      <tr id="row-palier-6" data-palier="6" data-vma="11" style="background: #ffffff; border-bottom: 1px solid #e2e8f0; transition: background 0.2s;">
         <td style="padding: 10px 14px; font-weight: 700; color: #0f172a; border-right: 1px solid #e2e8f0;">Palier 6</td>
         <td style="padding: 10px 14px; font-weight: 600; color: #334155;">11,0 km/h</td>
         <td class="col-speed" style="padding: 10px 14px; font-weight: 700; color: #0284c7;">11,00 km/h</td>
         <td class="col-pace" style="padding: 10px 14px; color: #475569; font-family: monospace;"></td>
         <td class="col-lap" style="padding: 10px 14px; font-weight: 700; color: #16a34a; font-family: monospace;"></td>
         <td class="col-plot" style="padding: 10px 14px; color: #d97706; font-family: monospace;">16.4 s</td>
-        <td class="col-dist" style="padding: 10px 14px; font-weight: 700; color: #7c3aed;">1100 m</td>
-      </tr>      <tr id="row-palier-7" data-palier="7" data-vma="11.5" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+      </tr>      <tr id="row-palier-7" data-palier="7" data-vma="11.5" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; transition: background 0.2s;">
         <td style="padding: 10px 14px; font-weight: 700; color: #0f172a; border-right: 1px solid #e2e8f0;">Palier 7</td>
         <td style="padding: 10px 14px; font-weight: 600; color: #334155;">11,5 km/h</td>
         <td class="col-speed" style="padding: 10px 14px; font-weight: 700; color: #0284c7;">11,50 km/h</td>
         <td class="col-pace" style="padding: 10px 14px; color: #475569; font-family: monospace;"></td>
         <td class="col-lap" style="padding: 10px 14px; font-weight: 700; color: #16a34a; font-family: monospace;"></td>
         <td class="col-plot" style="padding: 10px 14px; color: #d97706; font-family: monospace;">15.7 s</td>
-        <td class="col-dist" style="padding: 10px 14px; font-weight: 700; color: #7c3aed;">1150 m</td>
-      </tr>      <tr id="row-palier-8" data-palier="8" data-vma="12" style="background: #ffffff; border-bottom: 1px solid #e2e8f0;">
+      </tr>      <tr id="row-palier-8" data-palier="8" data-vma="12" style="background: #ffffff; border-bottom: 1px solid #e2e8f0; transition: background 0.2s;">
         <td style="padding: 10px 14px; font-weight: 700; color: #0f172a; border-right: 1px solid #e2e8f0;">Palier 8</td>
         <td style="padding: 10px 14px; font-weight: 600; color: #334155;">12,0 km/h</td>
         <td class="col-speed" style="padding: 10px 14px; font-weight: 700; color: #0284c7;">12,00 km/h</td>
         <td class="col-pace" style="padding: 10px 14px; color: #475569; font-family: monospace;"></td>
         <td class="col-lap" style="padding: 10px 14px; font-weight: 700; color: #16a34a; font-family: monospace;"></td>
         <td class="col-plot" style="padding: 10px 14px; color: #d97706; font-family: monospace;">15 s</td>
-        <td class="col-dist" style="padding: 10px 14px; font-weight: 700; color: #7c3aed;">1200 m</td>
-      </tr>      <tr id="row-palier-9" data-palier="9" data-vma="12.5" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+      </tr>      <tr id="row-palier-9" data-palier="9" data-vma="12.5" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; transition: background 0.2s;">
         <td style="padding: 10px 14px; font-weight: 700; color: #0f172a; border-right: 1px solid #e2e8f0;">Palier 9</td>
         <td style="padding: 10px 14px; font-weight: 600; color: #334155;">12,5 km/h</td>
         <td class="col-speed" style="padding: 10px 14px; font-weight: 700; color: #0284c7;">12,50 km/h</td>
         <td class="col-pace" style="padding: 10px 14px; color: #475569; font-family: monospace;"></td>
         <td class="col-lap" style="padding: 10px 14px; font-weight: 700; color: #16a34a; font-family: monospace;">58 s</td>
         <td class="col-plot" style="padding: 10px 14px; color: #d97706; font-family: monospace;">14.4 s</td>
-        <td class="col-dist" style="padding: 10px 14px; font-weight: 700; color: #7c3aed;">1250 m</td>
-      </tr>      <tr id="row-palier-10" data-palier="10" data-vma="13" style="background: #ffffff; border-bottom: 1px solid #e2e8f0;">
+      </tr>      <tr id="row-palier-10" data-palier="10" data-vma="13" style="background: #ffffff; border-bottom: 1px solid #e2e8f0; transition: background 0.2s;">
         <td style="padding: 10px 14px; font-weight: 700; color: #0f172a; border-right: 1px solid #e2e8f0;">Palier 10</td>
         <td style="padding: 10px 14px; font-weight: 600; color: #334155;">13,0 km/h</td>
         <td class="col-speed" style="padding: 10px 14px; font-weight: 700; color: #0284c7;">13,00 km/h</td>
         <td class="col-pace" style="padding: 10px 14px; color: #475569; font-family: monospace;"></td>
         <td class="col-lap" style="padding: 10px 14px; font-weight: 700; color: #16a34a; font-family: monospace;">55 s</td>
         <td class="col-plot" style="padding: 10px 14px; color: #d97706; font-family: monospace;">13.8 s</td>
-        <td class="col-dist" style="padding: 10px 14px; font-weight: 700; color: #7c3aed;">1300 m</td>
-      </tr>      <tr id="row-palier-11" data-palier="11" data-vma="13.5" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+      </tr>      <tr id="row-palier-11" data-palier="11" data-vma="13.5" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; transition: background 0.2s;">
         <td style="padding: 10px 14px; font-weight: 700; color: #0f172a; border-right: 1px solid #e2e8f0;">Palier 11</td>
         <td style="padding: 10px 14px; font-weight: 600; color: #334155;">13,5 km/h</td>
         <td class="col-speed" style="padding: 10px 14px; font-weight: 700; color: #0284c7;">13,50 km/h</td>
         <td class="col-pace" style="padding: 10px 14px; color: #475569; font-family: monospace;"></td>
         <td class="col-lap" style="padding: 10px 14px; font-weight: 700; color: #16a34a; font-family: monospace;">53 s</td>
         <td class="col-plot" style="padding: 10px 14px; color: #d97706; font-family: monospace;">13.3 s</td>
-        <td class="col-dist" style="padding: 10px 14px; font-weight: 700; color: #7c3aed;">1350 m</td>
-      </tr>      <tr id="row-palier-12" data-palier="12" data-vma="14" style="background: #ffffff; border-bottom: 1px solid #e2e8f0;">
+      </tr>      <tr id="row-palier-12" data-palier="12" data-vma="14" style="background: #ffffff; border-bottom: 1px solid #e2e8f0; transition: background 0.2s;">
         <td style="padding: 10px 14px; font-weight: 700; color: #0f172a; border-right: 1px solid #e2e8f0;">Palier 12</td>
         <td style="padding: 10px 14px; font-weight: 600; color: #334155;">14,0 km/h</td>
         <td class="col-speed" style="padding: 10px 14px; font-weight: 700; color: #0284c7;">14,00 km/h</td>
         <td class="col-pace" style="padding: 10px 14px; color: #475569; font-family: monospace;"></td>
         <td class="col-lap" style="padding: 10px 14px; font-weight: 700; color: #16a34a; font-family: monospace;">51 s</td>
         <td class="col-plot" style="padding: 10px 14px; color: #d97706; font-family: monospace;">12.9 s</td>
-        <td class="col-dist" style="padding: 10px 14px; font-weight: 700; color: #7c3aed;">1400 m</td>
-      </tr>      <tr id="row-palier-13" data-palier="13" data-vma="14.5" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+      </tr>      <tr id="row-palier-13" data-palier="13" data-vma="14.5" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; transition: background 0.2s;">
         <td style="padding: 10px 14px; font-weight: 700; color: #0f172a; border-right: 1px solid #e2e8f0;">Palier 13</td>
         <td style="padding: 10px 14px; font-weight: 600; color: #334155;">14,5 km/h</td>
         <td class="col-speed" style="padding: 10px 14px; font-weight: 700; color: #0284c7;">14,50 km/h</td>
         <td class="col-pace" style="padding: 10px 14px; color: #475569; font-family: monospace;"></td>
         <td class="col-lap" style="padding: 10px 14px; font-weight: 700; color: #16a34a; font-family: monospace;">50 s</td>
         <td class="col-plot" style="padding: 10px 14px; color: #d97706; font-family: monospace;">12.4 s</td>
-        <td class="col-dist" style="padding: 10px 14px; font-weight: 700; color: #7c3aed;">1450 m</td>
-      </tr>      <tr id="row-palier-14" data-palier="14" data-vma="15" style="background: #ffffff; border-bottom: 1px solid #e2e8f0;">
+      </tr>      <tr id="row-palier-14" data-palier="14" data-vma="15" style="background: #ffffff; border-bottom: 1px solid #e2e8f0; transition: background 0.2s;">
         <td style="padding: 10px 14px; font-weight: 700; color: #0f172a; border-right: 1px solid #e2e8f0;">Palier 14</td>
         <td style="padding: 10px 14px; font-weight: 600; color: #334155;">15,0 km/h</td>
         <td class="col-speed" style="padding: 10px 14px; font-weight: 700; color: #0284c7;">15,00 km/h</td>
         <td class="col-pace" style="padding: 10px 14px; color: #475569; font-family: monospace;"></td>
         <td class="col-lap" style="padding: 10px 14px; font-weight: 700; color: #16a34a; font-family: monospace;">48 s</td>
         <td class="col-plot" style="padding: 10px 14px; color: #d97706; font-family: monospace;">12 s</td>
-        <td class="col-dist" style="padding: 10px 14px; font-weight: 700; color: #7c3aed;">1500 m</td>
-      </tr>      <tr id="row-palier-15" data-palier="15" data-vma="15.5" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+      </tr>      <tr id="row-palier-15" data-palier="15" data-vma="15.5" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; transition: background 0.2s;">
         <td style="padding: 10px 14px; font-weight: 700; color: #0f172a; border-right: 1px solid #e2e8f0;">Palier 15</td>
         <td style="padding: 10px 14px; font-weight: 600; color: #334155;">15,5 km/h</td>
         <td class="col-speed" style="padding: 10px 14px; font-weight: 700; color: #0284c7;">15,50 km/h</td>
         <td class="col-pace" style="padding: 10px 14px; color: #475569; font-family: monospace;"></td>
         <td class="col-lap" style="padding: 10px 14px; font-weight: 700; color: #16a34a; font-family: monospace;">46 s</td>
         <td class="col-plot" style="padding: 10px 14px; color: #d97706; font-family: monospace;">11.6 s</td>
-        <td class="col-dist" style="padding: 10px 14px; font-weight: 700; color: #7c3aed;">1550 m</td>
-      </tr>      <tr id="row-palier-16" data-palier="16" data-vma="16" style="background: #ffffff; border-bottom: 1px solid #e2e8f0;">
+      </tr>      <tr id="row-palier-16" data-palier="16" data-vma="16" style="background: #ffffff; border-bottom: 1px solid #e2e8f0; transition: background 0.2s;">
         <td style="padding: 10px 14px; font-weight: 700; color: #0f172a; border-right: 1px solid #e2e8f0;">Palier 16</td>
         <td style="padding: 10px 14px; font-weight: 600; color: #334155;">16,0 km/h</td>
         <td class="col-speed" style="padding: 10px 14px; font-weight: 700; color: #0284c7;">16,00 km/h</td>
         <td class="col-pace" style="padding: 10px 14px; color: #475569; font-family: monospace;"></td>
         <td class="col-lap" style="padding: 10px 14px; font-weight: 700; color: #16a34a; font-family: monospace;">45 s</td>
         <td class="col-plot" style="padding: 10px 14px; color: #d97706; font-family: monospace;">11.2 s</td>
-        <td class="col-dist" style="padding: 10px 14px; font-weight: 700; color: #7c3aed;">1600 m</td>
-      </tr>      <tr id="row-palier-17" data-palier="17" data-vma="16.5" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+      </tr>      <tr id="row-palier-17" data-palier="17" data-vma="16.5" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; transition: background 0.2s;">
         <td style="padding: 10px 14px; font-weight: 700; color: #0f172a; border-right: 1px solid #e2e8f0;">Palier 17</td>
         <td style="padding: 10px 14px; font-weight: 600; color: #334155;">16,5 km/h</td>
         <td class="col-speed" style="padding: 10px 14px; font-weight: 700; color: #0284c7;">16,50 km/h</td>
         <td class="col-pace" style="padding: 10px 14px; color: #475569; font-family: monospace;"></td>
         <td class="col-lap" style="padding: 10px 14px; font-weight: 700; color: #16a34a; font-family: monospace;">44 s</td>
         <td class="col-plot" style="padding: 10px 14px; color: #d97706; font-family: monospace;">10.9 s</td>
-        <td class="col-dist" style="padding: 10px 14px; font-weight: 700; color: #7c3aed;">1650 m</td>
-      </tr>      <tr id="row-palier-18" data-palier="18" data-vma="17" style="background: #ffffff; border-bottom: 1px solid #e2e8f0;">
+      </tr>      <tr id="row-palier-18" data-palier="18" data-vma="17" style="background: #ffffff; border-bottom: 1px solid #e2e8f0; transition: background 0.2s;">
         <td style="padding: 10px 14px; font-weight: 700; color: #0f172a; border-right: 1px solid #e2e8f0;">Palier 18</td>
         <td style="padding: 10px 14px; font-weight: 600; color: #334155;">17,0 km/h</td>
         <td class="col-speed" style="padding: 10px 14px; font-weight: 700; color: #0284c7;">17,00 km/h</td>
         <td class="col-pace" style="padding: 10px 14px; color: #475569; font-family: monospace;"></td>
         <td class="col-lap" style="padding: 10px 14px; font-weight: 700; color: #16a34a; font-family: monospace;">42 s</td>
         <td class="col-plot" style="padding: 10px 14px; color: #d97706; font-family: monospace;">10.6 s</td>
-        <td class="col-dist" style="padding: 10px 14px; font-weight: 700; color: #7c3aed;">1700 m</td>
-      </tr>      <tr id="row-palier-19" data-palier="19" data-vma="17.5" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+      </tr>      <tr id="row-palier-19" data-palier="19" data-vma="17.5" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; transition: background 0.2s;">
         <td style="padding: 10px 14px; font-weight: 700; color: #0f172a; border-right: 1px solid #e2e8f0;">Palier 19</td>
         <td style="padding: 10px 14px; font-weight: 600; color: #334155;">17,5 km/h</td>
         <td class="col-speed" style="padding: 10px 14px; font-weight: 700; color: #0284c7;">17,50 km/h</td>
         <td class="col-pace" style="padding: 10px 14px; color: #475569; font-family: monospace;"></td>
         <td class="col-lap" style="padding: 10px 14px; font-weight: 700; color: #16a34a; font-family: monospace;">41 s</td>
         <td class="col-plot" style="padding: 10px 14px; color: #d97706; font-family: monospace;">10.3 s</td>
-        <td class="col-dist" style="padding: 10px 14px; font-weight: 700; color: #7c3aed;">1750 m</td>
-      </tr>      <tr id="row-palier-20" data-palier="20" data-vma="18" style="background: #ffffff; border-bottom: 1px solid #e2e8f0;">
+      </tr>      <tr id="row-palier-20" data-palier="20" data-vma="18" style="background: #ffffff; border-bottom: 1px solid #e2e8f0; transition: background 0.2s;">
         <td style="padding: 10px 14px; font-weight: 700; color: #0f172a; border-right: 1px solid #e2e8f0;">Palier 20</td>
         <td style="padding: 10px 14px; font-weight: 600; color: #334155;">18,0 km/h</td>
         <td class="col-speed" style="padding: 10px 14px; font-weight: 700; color: #0284c7;">18,00 km/h</td>
         <td class="col-pace" style="padding: 10px 14px; color: #475569; font-family: monospace;"></td>
         <td class="col-lap" style="padding: 10px 14px; font-weight: 700; color: #16a34a; font-family: monospace;">40 s</td>
         <td class="col-plot" style="padding: 10px 14px; color: #d97706; font-family: monospace;">10 s</td>
-        <td class="col-dist" style="padding: 10px 14px; font-weight: 700; color: #7c3aed;">1800 m</td>
       </tr>
       </tbody>
     </table>
   </div>
 
   <div style="padding: 14px 20px; background: #f8fafc; border-top: 1px solid #e2e8f0; font-size: 0.82rem; color: #64748b; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-    <span>💡 <em>Astuce EPS : Changez l'intensité ou la piste ci-dessus pour recalculer les 20 paliers en direct.</em></span>
+    <span>💡 <em>Astuce EPS : La ligne correspondant à l'élève recherché est surlignée en vert.</em></span>
     <span style="font-weight: 600; color: #0f172a;">ProfEPS.ma</span>
   </div>
 </div>
 
 <script>
-function applyRecapFilters() {
+function revealAndHighlightRecap() {
+  var recap = document.getElementById('profeps-recap-section');
+  if (!recap) return;
+  
+  // Afficher le tableau
+  recap.style.display = 'block';
+
+  // Récupérer la VMA saisie dans le calculateur
+  var vmaInput = document.querySelector('input[type="number"], input[name*="vma"], input[id*="vma"]');
+  var currentVma = vmaInput ? parseFloat(vmaInput.value) : null;
+
+  // Récupérer l'intensité choisie dans le formulaire principal si elle existe
+  var mainIntensity = document.querySelector('select[name*="intensite"], select[id*="intensite"]');
+  if (mainIntensity && mainIntensity.value) {
+    var recapInt = document.getElementById('recap-filter-intensity');
+    if (recapInt) recapInt.value = mainIntensity.value;
+  }
+
+  // Appliquer les calculs et surligner
+  applyRecapFilters(currentVma);
+
+  // Faire défiler doucement vers le tableau
+  setTimeout(function() {
+    recap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 100);
+}
+
+function applyRecapFilters(highlightVma) {
   var intensity = parseFloat(document.getElementById('recap-filter-intensity').value) || 100;
   var track = parseFloat(document.getElementById('recap-filter-track').value) || 200;
-  var duration = parseFloat(document.getElementById('recap-filter-duration').value) || 360;
 
   var thTrack = document.getElementById('th-track-label');
   if (thTrack) thTrack.innerText = "Temps / Tour (" + track + "m)";
-  
-  var thDist = document.getElementById('th-dist-label');
-  if (thDist) {
-    var m = Math.round(duration / 60);
-    thDist.innerText = "Distance (" + (m >= 1 ? m + " min" : duration + " s") + ")";
-  }
 
   var rows = document.querySelectorAll('#recap-table-body tr');
   rows.forEach(function(row) {
     var vmaBase = parseFloat(row.getAttribute('data-vma'));
+    var palierNum = parseInt(row.getAttribute('data-palier'));
     if (!vmaBase) return;
 
     var speedKmH = (vmaBase * intensity) / 100.0;
@@ -929,8 +919,6 @@ function applyRecapFilters() {
     var paceS = Math.round(paceSec % 60);
     var paceText = paceM + "'" + (paceS < 10 ? "0" : "") + paceS + '"';
 
-    var distMeters = Math.round(speedMs * duration) + " m";
-
     var colSpeed = row.querySelector('.col-speed');
     if (colSpeed) colSpeed.innerText = speedKmH.toFixed(2) + " km/h";
 
@@ -943,10 +931,38 @@ function applyRecapFilters() {
     var colPlot = row.querySelector('.col-plot');
     if (colPlot) colPlot.innerText = plotSec;
 
-    var colDist = row.querySelector('.col-dist');
-    if (colDist) colDist.innerText = distMeters;
+    // Surbrillance si correspond à la VMA entrée
+    if (highlightVma && Math.abs(vmaBase - highlightVma) < 0.26) {
+      row.style.background = "#dcfce7"; // Vert clair d'accentuation
+      row.style.fontWeight = "bold";
+    } else {
+      row.style.background = (palierNum % 2 === 0) ? "#ffffff" : "#f8fafc";
+      row.style.fontWeight = "normal";
+    }
   });
 }
+
+// Attacher automatiquement la révélation du tableau au bouton "Calculer"
+document.addEventListener('DOMContentLoaded', function() {
+  // Détection des boutons de calcul
+  var calcButtons = document.querySelectorAll('button[type="submit"], input[type="submit"], button');
+  calcButtons.forEach(function(btn) {
+    var text = (btn.innerText || btn.value || '').toLowerCase();
+    if (text.includes('calculer') || text.includes('calcul') || btn.type === 'submit') {
+      btn.addEventListener('click', function() {
+        setTimeout(revealAndHighlightRecap, 50);
+      });
+    }
+  });
+
+  // Détection de la soumission de formulaire
+  var forms = document.querySelectorAll('form');
+  forms.forEach(function(f) {
+    f.addEventListener('submit', function() {
+      setTimeout(revealAndHighlightRecap, 50);
+    });
+  });
+});
 </script>
 <section class="seo-guide-section">
             <h2 data-i18n="guideHeading">Guide Didactique : Comprendre et Utiliser la VMA en EPS</h2>
