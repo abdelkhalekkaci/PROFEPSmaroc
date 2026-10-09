@@ -1634,50 +1634,64 @@ document.addEventListener('DOMContentLoaded', function() {
                 tbody.appendChild(tr);
             });
 
-                        // 4. Génération automatique du Tableau Récapitulatif des Paliers 1 à 20 (8 colonnes identiques)
+                        // 4. Génération synchronisée du Tableau des Paliers 1 à 20 avec les paramètres choisis
             const recapSection = document.getElementById("profeps-recap-section");
             const tbodyRecap = document.getElementById("tbodyPaliersRecap");
             if (recapSection && tbodyRecap) {
                 recapSection.style.display = "block";
                 tbodyRecap.innerHTML = "";
+
+                // Mise à jour synchronisée des badges et en-têtes
+                const badgePaliers = document.getElementById("resPaliersBadge");
+                if (badgePaliers) {
+                    badgePaliers.textContent = (currentLang === 'en' ? "Track: " : "Piste : ") + trackDist + "m · " + 
+                                               (currentLang === 'en' ? "Duration: " : "Durée : ") + durationMin + " min · " + targetIntensity + "% VMA";
+                }
                 const thRDist = document.getElementById("thRecapDist");
-                if (thRDist) thRDist.textContent = "Dist. (" + durationMin + " min)";
+                if (thRDist) thRDist.textContent = (currentLang === 'en' ? "Dist. (" : "Dist. (") + durationMin + " min)";
                 const thRLaps = document.getElementById("thRecapLaps");
-                if (thRLaps) thRLaps.textContent = "Nombre de Tours";
+                if (thRLaps) thRLaps.textContent = (currentLang === 'en' ? "Track Laps" : "Nombre de Tours");
 
                 for (let p = 1; p <= 20; p++) {
                     const pVma = 8.0 + (p * 0.5); // Palier 1 = 8.5 km/h ... Palier 20 = 18.0 km/h
-                    const pSpeedKmh = pVma * (targetIntensity / 100);
-                    const pSpeedMs = pSpeedKmh / 3.6;
+                    const pTargetSpeedKmh = pVma * (targetIntensity / 100);
+                    const pTargetSpeedMs = pTargetSpeedKmh / 3.6;
 
-                    const pPaceSec = 3600 / pSpeedKmh;
-                    const pPaceMin = Math.floor(pPaceSec / 60);
-                    const pPaceRest = Math.round(pPaceSec % 60);
-                    const pPaceStr = pPaceMin + ":" + (pPaceRest < 10 ? "0" : "") + pPaceRest;
+                    // Allure / km
+                    const pPaceSecTotal = 3600 / pTargetSpeedKmh;
+                    const pPaceMin = Math.floor(pPaceSecTotal / 60);
+                    const pPaceSec = Math.round(pPaceSecTotal % 60);
+                    const pPaceStr = pPaceMin + ":" + (pPaceSec < 10 ? "0" : "") + pPaceSec;
 
-                    const pTime100 = (100 / pSpeedMs).toFixed(1) + "s";
+                    // Temps 100m
+                    const pTime100 = (100 / pTargetSpeedMs).toFixed(1) + "s";
 
-                    const pTourSec = trackDist / pSpeedMs;
-                    const pTMin = Math.floor(pTourSec / 60);
-                    const pTSec = Math.round(pTourSec % 60);
-                    const pTourStr = (pTMin > 0 ? pTMin + "m " : "") + (pTSec < 10 ? "0" : "") + pTSec + "s";
+                    // Tour de piste
+                    const pLapSecTotal = trackDist / pTargetSpeedMs;
+                    const pLapMin = Math.floor(pLapSecTotal / 60);
+                    const pLapSec = Math.round(pLapSecTotal % 60);
+                    const pLapStr = (pLapMin > 0 ? pLapMin + "m " : "") + (pLapSec < 10 ? "0" : "") + pLapSec + "s";
 
-                    const pDist = Math.round(pSpeedMs * durationSec);
-                    const pLaps = (pDist / trackDist).toFixed(1);
+                    // Distance totale sur la durée choisie
+                    const pTotalDistMeters = Math.round(pTargetSpeedMs * durationSec);
 
-                    const isCurrentStudent = Math.abs(pVma - vma) < 0.26;
+                    // Nombre de tours sur la piste choisie
+                    const pLaps = (pTotalDistMeters / trackDist).toFixed(1);
+
+                    // Surbrillance si le palier correspond à la VMA de l'élève
+                    const isSelectedPupil = Math.abs(pVma - vma) < 0.26;
                     const trP = document.createElement("tr");
-                    if (isCurrentStudent) trP.className = "selected-row";
+                    if (isSelectedPupil) trP.className = "selected-row";
 
                     trP.innerHTML = `
-                        <td><strong>Palier ${p}</strong> <span style="font-size:0.78rem; color:#64748b;">(${pVma.toFixed(1)} km/h)</span></td>
-                        <td><span class="zone-pill" style="background:#0284c718; color:#0284c7;">Palier ${p}</span></td>
-                        <td><strong>${pSpeedKmh.toFixed(1)}</strong> km/h</td>
+                        <td><strong>Palier ${p}</strong></td>
+                        <td><strong>${pVma.toFixed(1)}</strong> km/h</td>
+                        <td><strong style="color:#0284c7;">${pTargetSpeedKmh.toFixed(1)}</strong> km/h</td>
                         <td>${pPaceStr}</td>
                         <td>${pTime100}</td>
-                        <td><strong>${pTourStr}</strong></td>
-                        <td><strong>${pDist.toLocaleString("fr-FR")} m</strong></td>
-                        <td>${pLaps} trs</td>
+                        <td><strong>${pLapStr}</strong></td>
+                        <td><strong>${pTotalDistMeters.toLocaleString(currentLang === 'en' ? "en-US" : "fr-FR")} m</strong></td>
+                        <td>${pLaps} ${currentLang === 'en' ? 'laps' : 'trs'}</td>
                     `;
                     tbodyRecap.appendChild(trP);
                 }
@@ -1687,3 +1701,4 @@ resultsWrapper.scrollIntoView({ behavior: "smooth", block: "start" });
     </script>
 </body>
 </html>
+
