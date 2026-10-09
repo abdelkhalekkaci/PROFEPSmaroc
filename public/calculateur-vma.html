@@ -643,6 +643,47 @@
                 </div>
             </div>
 
+            <!-- ══════════════════════════════════════════════════════════════
+                 TABLEAU 2 : RÉCAPITULATIF DES PALIERS 1 À 20 (8 COLONNES)
+            ══════════════════════════════════════════════════════════════ -->
+            <div class="table-card" id="cardPaliersRecap" style="margin-top: 2rem;">
+                <div class="table-header-flex">
+                    <div>
+                        <h3 style="font-size:1.05rem; font-weight:700; color:#0f172a;">📊 Tableau Récapitulatif des Paliers 1 à 20 & Temps de Passage</h3>
+                        <p style="font-size:0.8rem; color:var(--text-light); margin-top:0.15rem;">
+                            Repères pour les 20 paliers étalonnés sur votre piste, votre durée et l'intensité choisie.
+                        </p>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:0.5rem;">
+                        <button type="button" class="btn-print" onclick="window.print()">
+                            <span>🖨️ Imprimer la grille des Paliers</span>
+                        </button>
+                        <span style="font-size:0.78rem; font-weight:700; background:#f1f5f9; padding:0.35rem 0.75rem; border-radius:6px; color:#475569;" id="resPaliersBadge">
+                            Piste : 250m · Durée : 12 min · Allure : 90%
+                        </span>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Palier (1-20)</th>
+                                <th>VMA Base</th>
+                                <th>Vitesse Ciblée</th>
+                                <th>Allure / km</th>
+                                <th>Temps 100m</th>
+                                <th>Tour de Piste</th>
+                                <th id="thPaliersDist">Distance Totale</th>
+                                <th id="thPaliersLaps">Nombre de Tours</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyPaliersRecap"></tbody>
+                    </table>
+                </div>
+            </div>
+
+
         </div>
 
         <!-- ═══ GUIDE DIDACTIQUE & FAQ SEO BILINGUE ═══ -->
@@ -1371,7 +1412,10 @@
                 }
             }
 
-            // Génération synchronisée du Tableau des Paliers 1 à 20
+            
+
+            
+            // Remplissage synchronisé du Tableau des Paliers 1 à 20
             const tbodyPaliers = document.getElementById("tbodyPaliersRecap");
             if (tbodyPaliers) {
                 tbodyPaliers.innerHTML = "";
@@ -1403,7 +1447,7 @@
                     const pTSec = Math.round(pTourSec % 60);
                     const pTourStr = (pTMin > 0 ? pTMin + "m " : "") + (pTSec < 10 ? "0" : "") + pTSec + "s";
 
-                    const pTotalDistMeters = Math.round(pTargetSpeedMs * durationSec);
+                    const pTotalDistMeters = Math.round(pSpeedMs * durationSec);
                     const pLaps = (pTotalDistMeters / trackDist).toFixed(1);
 
                     const isCurrentStudent = Math.abs(pVma - vma) < 0.26;
