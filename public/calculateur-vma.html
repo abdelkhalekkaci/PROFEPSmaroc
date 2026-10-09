@@ -356,6 +356,126 @@
         }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8253776880916865" crossorigin="anonymous"></script>
+
+    <!-- ═══ STYLES HAUTE DÉFINITION POUR LES TABLEAUX CALCULATEUR ═══ -->
+    <style id="profeps-table-pro-styles">
+        .table-card {
+            background: #ffffff !important;
+            border-radius: 16px !important;
+            border: 1px solid #e2e8f0 !important;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01) !important;
+            padding: 1.5rem !important;
+            position: relative !important;
+            overflow: hidden !important;
+            margin-bottom: 2rem !important;
+        }
+        .table-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #c1272d 0%, #006233 100%);
+        }
+        #cardPaliersRecap::before {
+            background: linear-gradient(90deg, #0284c7 0%, #38bdf8 100%) !important;
+        }
+        .table-responsive {
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 12px !important;
+            overflow-x: auto !important;
+            background: #ffffff !important;
+        }
+        table.custom-table {
+            width: 100% !important;
+            border-collapse: separate !important;
+            border-spacing: 0 !important;
+            font-size: 0.88rem !important;
+            text-align: center !important;
+        }
+        table.custom-table th {
+            background: #f8fafc !important;
+            color: #475569 !important;
+            font-size: 0.75rem !important;
+            font-weight: 700 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.05em !important;
+            padding: 12px 14px !important;
+            border-bottom: 2px solid #e2e8f0 !important;
+            white-space: nowrap !important;
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 10 !important;
+        }
+        table.custom-table td {
+            padding: 11px 12px !important;
+            border-bottom: 1px solid #f1f5f9 !important;
+            color: #1e293b !important;
+            vertical-align: middle !important;
+            font-variant-numeric: tabular-nums !important;
+            transition: background 0.15s ease !important;
+        }
+        table.custom-table tbody tr:nth-child(even) {
+            background-color: #fafbfc;
+        }
+        table.custom-table tbody tr:hover {
+            background-color: #f1f5f9 !important;
+        }
+        table.custom-table tr.selected-row {
+            background: #eff6ff !important;
+            border-left: 4px solid #0284c7 !important;
+            font-weight: 700 !important;
+        }
+        table.custom-table tr.selected-row td {
+            color: #0c4a6e !important;
+        }
+        .zone-pill {
+            display: inline-block !important;
+            padding: 4px 10px !important;
+            border-radius: 9999px !important;
+            font-size: 0.75rem !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.02em !important;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.04) !important;
+        }
+        .badge-lap {
+            color: #16a34a !important;
+            font-weight: 700 !important;
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
+        }
+        .badge-dist {
+            color: #4338ca !important;
+            font-weight: 700 !important;
+        }
+        .badge-trs {
+            background: #f1f5f9;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: #334155;
+            font-weight: 600;
+        }
+        .btn-print {
+            background: #0284c7 !important;
+            color: #ffffff !important;
+            border: none !important;
+            padding: 7px 14px !important;
+            border-radius: 8px !important;
+            font-size: 0.82rem !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+            transition: all 0.2s ease !important;
+            box-shadow: 0 2px 4px rgba(2, 132, 199, 0.2) !important;
+        }
+        .btn-print:hover {
+            background: #0369a1 !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 4px 8px rgba(2, 132, 199, 0.3) !important;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -1336,16 +1456,15 @@
                 const tr = document.createElement("tr");
                 if (isSelected) tr.className = "selected-row";
 
-                tr.innerHTML = `
-                    <td><strong>${z.pct}%</strong></td>
-                    <td><span class="zone-pill" style="background:${z.color}18; color:${z.color};">${z.name}</span></td>
-                    <td><strong>${zSpeedKmh.toFixed(1)}</strong> km/h</td>
-                    <td>${zPaceStr}</td>
-                    <td>${zTime100}</td>
-                    <td><strong>${zTourStr}</strong></td>
-                    <td><strong>${zDist.toLocaleString(currentLang === 'en' ? "en-US" : "fr-FR")} m</strong></td>
-                    <td>${zLaps} ${currentLang === 'en' ? 'laps' : 'trs'}</td>
-                `;
+                tr.innerHTML = 
+                    '<td><strong style="font-size:0.95rem;">' + z.pct + '%</strong></td>' +
+                    '<td><span class="zone-pill" style="background:' + z.color + '15; color:' + z.color + '; border: 1px solid ' + z.color + '30;">' + z.name + '</span></td>' +
+                    '<td><strong style="color:#0f172a;">' + zSpeedKmh.toFixed(1) + '</strong> <span style="font-size:0.75rem; color:#94a3b8;">km/h</span></td>' +
+                    '<td><span style="font-family:ui-monospace, monospace; color:#475569;">' + zPaceStr + '</span></td>' +
+                    '<td><span style="font-family:ui-monospace, monospace; color:#64748b;">' + zTime100 + '</span></td>' +
+                    '<td><span class="badge-lap">' + zTourStr + '</span></td>' +
+                    '<td><span class="badge-dist">' + zDist.toLocaleString(currentLang === 'en' ? "en-US" : "fr-FR") + ' m</span></td>' +
+                    '<td><span class="badge-trs">' + zLaps + (currentLang === 'en' ? ' trs' : ' trs') + '</span></td>';
                 tbody.appendChild(tr);
             });
 
@@ -1450,18 +1569,21 @@
                     const pTotalDistMeters = Math.round(pSpeedMs * durationSec);
                     const pLaps = (pTotalDistMeters / trackDist).toFixed(1);
 
+                    // Style enrichi pour le tableau des 20 paliers
                     const isCurrentStudent = Math.abs(pVma - vma) < 0.26;
                     const trP = document.createElement("tr");
                     if (isCurrentStudent) trP.className = "selected-row";
 
-                    trP.innerHTML = '<td><strong>Palier ' + p + '</strong></td>' +
-                        '<td><strong>' + pVma.toFixed(1) + '</strong> km/h</td>' +
-                        '<td><strong style="color:#0284c7;">' + pSpeedKmh.toFixed(1) + '</strong> km/h</td>' +
-                        '<td>' + pPaceStr + '</td>' +
-                        '<td>' + pTime100 + '</td>' +
-                        '<td><strong>' + pTourStr + '</strong></td>' +
-                        '<td><strong>' + pTotalDistMeters.toLocaleString(currentLang === 'en' ? "en-US" : "fr-FR") + ' m</strong></td>' +
-                        '<td>' + pLaps + (currentLang === 'en' ? ' laps' : ' trs') + '</td>';
+                    const highlightBadge = isCurrentStudent ? ' <span style="font-size:0.7rem; background:#0284c7; color:#fff; padding:2px 6px; border-radius:4px; margin-left:4px;">Élève</span>' : '';
+
+                    trP.innerHTML = '<td><strong>Palier ' + p + '</strong>' + highlightBadge + '</td>' +
+                        '<td><span style="font-weight:600; color:#334155;">' + pVma.toFixed(1) + '</span> <span style="font-size:0.75rem; color:#94a3b8;">km/h</span></td>' +
+                        '<td><strong style="color:#0284c7; font-size:0.95rem;">' + pTargetSpeedKmh.toFixed(1) + '</strong> <span style="font-size:0.75rem; color:#94a3b8;">km/h</span></td>' +
+                        '<td><span style="font-family:ui-monospace, monospace; color:#475569;">' + pPaceStr + '</span></td>' +
+                        '<td><span style="font-family:ui-monospace, monospace; color:#64748b;">' + pTime100 + '</span></td>' +
+                        '<td><span class="badge-lap">' + pTourStr + '</span></td>' +
+                        '<td><span class="badge-dist">' + pTotalDistMeters.toLocaleString(currentLang === 'en' ? "en-US" : "fr-FR") + ' m</span></td>' +
+                        '<td><span class="badge-trs">' + pLaps + (currentLang === 'en' ? ' trs' : ' trs') + '</span></td>';
 
                     tbodyPaliers.appendChild(trP);
                 }
