@@ -476,6 +476,66 @@
         }
     </style>
 
+
+<style id="profeps-pro-design">
+    .table-card {
+        background: #ffffff !important;
+        border-radius: 16px !important;
+        border: 1px solid #e2e8f0 !important;
+        box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06) !important;
+        padding: 1.5rem !important;
+        margin-bottom: 2rem !important;
+        overflow: hidden !important;
+    }
+    .table-card-training { border-top: 4px solid #c1272d !important; }
+    .table-card-paliers  { border-top: 4px solid #0284c7 !important; }
+    .table-responsive {
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 12px !important;
+        overflow-x: auto !important;
+    }
+    table.custom-table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        font-size: 0.88rem !important;
+        text-align: center !important;
+    }
+    table.custom-table th {
+        background: #f8fafc !important;
+        color: #475569 !important;
+        font-size: 0.76rem !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+        padding: 12px 14px !important;
+        border-bottom: 2px solid #e2e8f0 !important;
+        white-space: nowrap !important;
+    }
+    table.custom-table td {
+        padding: 11px 12px !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+        color: #1e293b !important;
+        vertical-align: middle !important;
+    }
+    table.custom-table tr:nth-child(even) { background-color: #fafbfc; }
+    table.custom-table tr:hover { background-color: #f1f5f9 !important; }
+    table.custom-table tr.selected-row {
+        background: #eff6ff !important;
+        outline: 2px solid #38bdf8 !important;
+        font-weight: bold !important;
+    }
+    .zone-pill {
+        display: inline-block !important;
+        padding: 3px 10px !important;
+        border-radius: 9999px !important;
+        font-size: 0.75rem !important;
+        font-weight: 700 !important;
+    }
+    .badge-lap { color: #16a34a !important; font-weight: 700; font-family: monospace; font-size: 0.95rem; }
+    .badge-dist { color: #4f46e5 !important; font-weight: 700; }
+    .badge-trs { background: #f1f5f9; padding: 3px 8px; border-radius: 6px; font-weight: 600; font-size: 0.8rem; }
+</style>
+
 </head>
 
 <body>
@@ -726,10 +786,11 @@
             </div>
 
             <!-- 3. Tableau d'entraînement complet -->
-            <div class="table-card">
+            <!-- TABLEAU 1 : ENTRAÎNEMENT & ALLURES -->
+            <div class="table-card table-card-training">
                 <div class="table-header-flex">
                     <div>
-                        <h3 style="font-size:1.05rem; font-weight:700; color:#0f172a;" data-i18n="tableTitle">Tableau d'Entraînement & Temps de Passage</h3>
+                        <h3 style="font-size:1.05rem; font-weight:700; color:#0f172a;" data-i18n="tableTitle">🏃 Tableau d'Entraînement & Temps de Passage</h3>
                         <p style="font-size:0.8rem; color:var(--text-light); margin-top:0.15rem;" data-i18n="tableSubtitle">
                             Repères pour calibrer vos séances de fractionné, d'endurance et de régulation d'allure.
                         </p>
@@ -739,7 +800,7 @@
                             <span data-i18n="btnPrint">🖨️ Imprimer la grille</span>
                         </button>
                         <span style="font-size:0.78rem; font-weight:700; background:#f1f5f9; padding:0.35rem 0.75rem; border-radius:6px; color:#475569;" id="resTableBadge">
-                            Piste : 250m &middot; Durée : 12 min
+                            Piste : 250m · Durée : 12 min
                         </span>
                     </div>
                 </div>
@@ -763,23 +824,21 @@
                 </div>
             </div>
 
-            <!-- ══════════════════════════════════════════════════════════════
-                 TABLEAU 2 : RÉCAPITULATIF DES PALIERS 1 À 20 (8 COLONNES)
-            ══════════════════════════════════════════════════════════════ -->
-            <div class="table-card" id="cardPaliersRecap" style="margin-top: 2rem;">
+            <!-- TABLEAU 2 : RÉCAPITULATIF DES PALIERS 1 À 20 (MÊMES 8 COLONNES) -->
+            <div class="table-card table-card-paliers" id="cardPaliersRecap">
                 <div class="table-header-flex">
                     <div>
-                        <h3 style="font-size:1.05rem; font-weight:700; color:#0f172a;">📊 Tableau Récapitulatif des Paliers 1 à 20 & Temps de Passage</h3>
+                        <h3 style="font-size:1.05rem; font-weight:700; color:#0284c7;">📊 Tableau Récapitulatif des Paliers 1 à 20 & Temps de Passage</h3>
                         <p style="font-size:0.8rem; color:var(--text-light); margin-top:0.15rem;">
                             Repères pour les 20 paliers étalonnés sur votre piste, votre durée et l'intensité choisie.
                         </p>
                     </div>
                     <div style="display:flex; align-items:center; gap:0.5rem;">
                         <button type="button" class="btn-print" onclick="window.print()">
-                            <span>🖨️ Imprimer la grille des Paliers</span>
+                            <span>🖨️ Imprimer les 20 Paliers</span>
                         </button>
-                        <span style="font-size:0.78rem; font-weight:700; background:#f1f5f9; padding:0.35rem 0.75rem; border-radius:6px; color:#475569;" id="resPaliersBadge">
-                            Piste : 250m · Durée : 12 min · Allure : 90%
+                        <span style="font-size:0.78rem; font-weight:700; background:#f0f9ff; border:1px solid #bae6fd; padding:0.35rem 0.75rem; border-radius:6px; color:#0369a1;" id="resPaliersBadge">
+                            Piste : 250m · Durée : 12 min · Allure : 90% VMA
                         </span>
                     </div>
                 </div>
@@ -789,8 +848,8 @@
                         <thead>
                             <tr>
                                 <th>Palier (1-20)</th>
-                                <th>VMA Base</th>
-                                <th>Vitesse Ciblée</th>
+                                <th>Zone d'effort</th>
+                                <th>Vitesse</th>
                                 <th>Allure / km</th>
                                 <th>Temps 100m</th>
                                 <th>Tour de Piste</th>
@@ -802,6 +861,11 @@
                     </table>
                 </div>
             </div>
+
+            <!-- ══════════════════════════════════════════════════════════════
+                 TABLEAU 2 : RÉCAPITULATIF DES PALIERS 1 À 20 (8 COLONNES)
+            ══════════════════════════════════════════════════════════════ -->
+            
 
 
         </div>
@@ -1380,7 +1444,7 @@
             }
 
             if (vma <= 0 || isNaN(vma)) {
-                alert(currentLang === 'en' ? "Please enter a valid value for the chosen test." : "Veuillez saisir une valeur valide pour le test choisi.");
+                alert(currentLang === 'en' ? "Please enter a valid value." : "Veuillez saisir une valeur valide.");
                 return;
             }
 
@@ -1392,16 +1456,16 @@
             const resultsWrapper = document.getElementById("results-wrapper");
             resultsWrapper.style.display = "block";
 
-            // 1. Bannière
+            // Bannière
             document.getElementById("resVma").textContent = vma.toFixed(1) + " km/h";
             document.getElementById("resVo2").textContent = vo2max.toFixed(1) + " ml/kg/min (VO₂max)";
 
-            // 2. Indicateurs ciblés
+            // Indicateurs
             const targetSpeedKmh = vma * (targetIntensity / 100);
             const targetSpeedMs = targetSpeedKmh / 3.6;
 
             document.getElementById("resTargetSpeed").textContent = targetSpeedKmh.toFixed(1) + " km/h";
-            document.getElementById("resTargetPct").textContent = (currentLang === 'en' ? "at " : "à ") + targetIntensity + "% " + (currentLang === 'en' ? "MAS" : "VMA");
+            document.getElementById("resTargetPct").textContent = (currentLang === 'en' ? "at " : "à ") + targetIntensity + "% VMA";
 
             const paceSecTotal = 3600 / targetSpeedKmh;
             const paceMin = Math.floor(paceSecTotal / 60);
@@ -1424,11 +1488,21 @@
             document.getElementById("resTargetDist").textContent = totalDistMeters.toLocaleString(currentLang === 'en' ? "en-US" : "fr-FR") + " m";
             document.getElementById("resTargetLaps").textContent = fullLaps + (currentLang === 'en' ? " laps" : " tours") + (remMeters > 0 ? " + " + remMeters + " m" : "");
 
+            // Badges et en-têtes
             document.getElementById("resTableBadge").textContent = (currentLang === 'en' ? "Track: " : "Piste : ") + trackDist + "m · " + (currentLang === 'en' ? "Duration: " : "Durée : ") + durationMin + " min";
             document.getElementById("thDynDist").textContent = (currentLang === 'en' ? "Dist. (" : "Dist. (") + durationMin + " min)";
             document.getElementById("thDynLaps").textContent = (currentLang === 'en' ? "Track Laps" : "Nombre de Tours");
 
-            // 3. Tableau
+            const badgePaliers = document.getElementById("resPaliersBadge");
+            if (badgePaliers) {
+                badgePaliers.textContent = (currentLang === 'en' ? "Track: " : "Piste : ") + trackDist + "m · " + (currentLang === 'en' ? "Duration: " : "Durée : ") + durationMin + " min · " + targetIntensity + "% VMA";
+            }
+            const thPld = document.getElementById("thPaliersDist");
+            if (thPld) thPld.textContent = (currentLang === 'en' ? "Dist. (" : "Dist. (") + durationMin + " min)";
+            const thPll = document.getElementById("thPaliersLaps");
+            if (thPll) thPll.textContent = (currentLang === 'en' ? "Track Laps" : "Nombre de Tours");
+
+            // 1. Remplir Tableau d'entraînement (50% à 130%)
             const zones = i18n[currentLang].zones;
             const tbody = document.getElementById("tbodyTraining");
             tbody.innerHTML = "";
@@ -1456,98 +1530,22 @@
                 const tr = document.createElement("tr");
                 if (isSelected) tr.className = "selected-row";
 
-                tr.innerHTML = 
-                    '<td><strong style="font-size:0.95rem;">' + z.pct + '%</strong></td>' +
-                    '<td><span class="zone-pill" style="background:' + z.color + '15; color:' + z.color + '; border: 1px solid ' + z.color + '30;">' + z.name + '</span></td>' +
-                    '<td><strong style="color:#0f172a;">' + zSpeedKmh.toFixed(1) + '</strong> <span style="font-size:0.75rem; color:#94a3b8;">km/h</span></td>' +
-                    '<td><span style="font-family:ui-monospace, monospace; color:#475569;">' + zPaceStr + '</span></td>' +
-                    '<td><span style="font-family:ui-monospace, monospace; color:#64748b;">' + zTime100 + '</span></td>' +
+                tr.innerHTML = '<td><strong>' + z.pct + '%</strong></td>' +
+                    '<td><span class="zone-pill" style="background:' + z.color + '18; color:' + z.color + ';">' + z.name + '</span></td>' +
+                    '<td><strong>' + zSpeedKmh.toFixed(1) + '</strong> <span style="font-size:0.75rem; color:#94a3b8;">km/h</span></td>' +
+                    '<td><span style="font-family:monospace; color:#334155;">' + zPaceStr + '</span></td>' +
+                    '<td><span style="font-family:monospace; color:#64748b;">' + zTime100 + '</span></td>' +
                     '<td><span class="badge-lap">' + zTourStr + '</span></td>' +
-                    '<td><span class="badge-dist">' + zDist.toLocaleString(currentLang === 'en' ? "en-US" : "fr-FR") + ' m</span></td>' +
-                    '<td><span class="badge-trs">' + zLaps + (currentLang === 'en' ? ' trs' : ' trs') + '</span></td>';
+                    '<td><span class="badge-dist">' + zDist.toLocaleString(currentLang === 'en' ? 'en-US' : 'fr-FR') + ' m</span></td>' +
+                    '<td><span class="badge-trs">' + zLaps + (currentLang === 'en' ? ' laps' : ' trs') + '</span></td>';
+
                 tbody.appendChild(tr);
             });
 
-                        // 4. Génération synchronisée du Tableau des Paliers 1 à 20 avec les paramètres choisis
-            const recapSection = document.getElementById("profeps-recap-section");
-            const tbodyRecap = document.getElementById("tbodyPaliersRecap");
-            if (recapSection && tbodyRecap) {
-                recapSection.style.display = "block";
-                tbodyRecap.innerHTML = "";
-
-                // Mise à jour synchronisée des badges et en-têtes
-                const badgePaliers = document.getElementById("resPaliersBadge");
-                if (badgePaliers) {
-                    badgePaliers.textContent = (currentLang === 'en' ? "Track: " : "Piste : ") + trackDist + "m · " + 
-                                               (currentLang === 'en' ? "Duration: " : "Durée : ") + durationMin + " min · " + targetIntensity + "% VMA";
-                }
-                const thRDist = document.getElementById("thRecapDist");
-                if (thRDist) thRDist.textContent = (currentLang === 'en' ? "Dist. (" : "Dist. (") + durationMin + " min)";
-                const thRLaps = document.getElementById("thRecapLaps");
-                if (thRLaps) thRLaps.textContent = (currentLang === 'en' ? "Track Laps" : "Nombre de Tours");
-
-                for (let p = 1; p <= 20; p++) {
-                    const pVma = 8.0 + (p * 0.5); // Palier 1 = 8.5 km/h ... Palier 20 = 18.0 km/h
-                    const pTargetSpeedKmh = pVma * (targetIntensity / 100);
-                    const pTargetSpeedMs = pTargetSpeedKmh / 3.6;
-
-                    // Allure / km
-                    const pPaceSecTotal = 3600 / pTargetSpeedKmh;
-                    const pPaceMin = Math.floor(pPaceSecTotal / 60);
-                    const pPaceSec = Math.round(pPaceSecTotal % 60);
-                    const pPaceStr = pPaceMin + ":" + (pPaceSec < 10 ? "0" : "") + pPaceSec;
-
-                    // Temps 100m
-                    const pTime100 = (100 / pTargetSpeedMs).toFixed(1) + "s";
-
-                    // Tour de piste
-                    const pLapSecTotal = trackDist / pTargetSpeedMs;
-                    const pLapMin = Math.floor(pLapSecTotal / 60);
-                    const pLapSec = Math.round(pLapSecTotal % 60);
-                    const pLapStr = (pLapMin > 0 ? pLapMin + "m " : "") + (pLapSec < 10 ? "0" : "") + pLapSec + "s";
-
-                    // Distance totale sur la durée choisie
-                    const pTotalDistMeters = Math.round(pTargetSpeedMs * durationSec);
-
-                    // Nombre de tours sur la piste choisie
-                    const pLaps = (pTotalDistMeters / trackDist).toFixed(1);
-
-                    // Surbrillance si le palier correspond à la VMA de l'élève
-                    const isSelectedPupil = Math.abs(pVma - vma) < 0.26;
-                    const trP = document.createElement("tr");
-                    if (isSelectedPupil) trP.className = "selected-row";
-
-                    trP.innerHTML = `
-                        <td><strong>Palier ${p}</strong></td>
-                        <td><strong>${pVma.toFixed(1)}</strong> km/h</td>
-                        <td><strong style="color:#0284c7;">${pTargetSpeedKmh.toFixed(1)}</strong> km/h</td>
-                        <td>${pPaceStr}</td>
-                        <td>${pTime100}</td>
-                        <td><strong>${pLapStr}</strong></td>
-                        <td><strong>${pTotalDistMeters.toLocaleString(currentLang === 'en' ? "en-US" : "fr-FR")} m</strong></td>
-                        <td>${pLaps} ${currentLang === 'en' ? 'laps' : 'trs'}</td>
-                    `;
-                    tbodyRecap.appendChild(trP);
-                }
-            }
-
-            
-
-            
-            // Remplissage synchronisé du Tableau des Paliers 1 à 20
+            // 2. Remplir Tableau des 20 Paliers (Synchronisé)
             const tbodyPaliers = document.getElementById("tbodyPaliersRecap");
             if (tbodyPaliers) {
                 tbodyPaliers.innerHTML = "";
-                const thPld = document.getElementById("thPaliersDist");
-                if (thPld) thPld.textContent = (currentLang === 'en' ? "Dist. (" : "Dist. (") + durationMin + " min)";
-                const thPll = document.getElementById("thPaliersLaps");
-                if (thPll) thPll.textContent = (currentLang === 'en' ? "Track Laps" : "Nombre de Tours");
-                const badgePal = document.getElementById("resPaliersBadge");
-                if (badgePal) {
-                    badgePal.textContent = (currentLang === 'en' ? "Track: " : "Piste : ") + trackDist + "m · " + 
-                                           (currentLang === 'en' ? "Duration: " : "Durée : ") + durationMin + " min · " + 
-                                           (currentLang === 'en' ? "Pace: " : "Allure : ") + targetIntensity + "% VMA";
-                }
 
                 for (let p = 1; p <= 20; p++) {
                     const pVma = 8.0 + (p * 0.5); // Palier 1 = 8.5 km/h ... Palier 20 = 18.0 km/h
@@ -1569,27 +1567,27 @@
                     const pTotalDistMeters = Math.round(pSpeedMs * durationSec);
                     const pLaps = (pTotalDistMeters / trackDist).toFixed(1);
 
-                    // Style enrichi pour le tableau des 20 paliers
                     const isCurrentStudent = Math.abs(pVma - vma) < 0.26;
                     const trP = document.createElement("tr");
                     if (isCurrentStudent) trP.className = "selected-row";
 
-                    const highlightBadge = isCurrentStudent ? ' <span style="font-size:0.7rem; background:#0284c7; color:#fff; padding:2px 6px; border-radius:4px; margin-left:4px;">Élève</span>' : '';
+                    const badgeEleve = isCurrentStudent ? ' <span style="font-size:0.7rem; background:#0284c7; color:#fff; padding:2px 6px; border-radius:4px; margin-left:4px;">Élève</span>' : '';
 
-                    trP.innerHTML = '<td><strong>Palier ' + p + '</strong>' + highlightBadge + '</td>' +
-                        '<td><span style="font-weight:600; color:#334155;">' + pVma.toFixed(1) + '</span> <span style="font-size:0.75rem; color:#94a3b8;">km/h</span></td>' +
-                        '<td><strong style="color:#0284c7; font-size:0.95rem;">' + pTargetSpeedKmh.toFixed(1) + '</strong> <span style="font-size:0.75rem; color:#94a3b8;">km/h</span></td>' +
-                        '<td><span style="font-family:ui-monospace, monospace; color:#475569;">' + pPaceStr + '</span></td>' +
-                        '<td><span style="font-family:ui-monospace, monospace; color:#64748b;">' + pTime100 + '</span></td>' +
+                    trP.innerHTML = '<td><strong>Palier ' + p + '</strong>' + badgeEleve + '</td>' +
+                        '<td><span class="zone-pill" style="background:#e0f2fe; color:#0284c7;">Palier ' + p + ' (' + pVma.toFixed(1) + ' km/h)</span></td>' +
+                        '<td><strong style="color:#0284c7;">' + pSpeedKmh.toFixed(1) + '</strong> <span style="font-size:0.75rem; color:#94a3b8;">km/h</span></td>' +
+                        '<td><span style="font-family:monospace; color:#334155;">' + pPaceStr + '</span></td>' +
+                        '<td><span style="font-family:monospace; color:#64748b;">' + pTime100 + '</span></td>' +
                         '<td><span class="badge-lap">' + pTourStr + '</span></td>' +
-                        '<td><span class="badge-dist">' + pTotalDistMeters.toLocaleString(currentLang === 'en' ? "en-US" : "fr-FR") + ' m</span></td>' +
-                        '<td><span class="badge-trs">' + pLaps + (currentLang === 'en' ? ' trs' : ' trs') + '</span></td>';
+                        '<td><span class="badge-dist">' + pTotalDistMeters.toLocaleString(currentLang === 'en' ? 'en-US' : 'fr-FR') + ' m</span></td>' +
+                        '<td><span class="badge-trs">' + pLaps + (currentLang === 'en' ? ' laps' : ' trs') + '</span></td>';
 
                     tbodyPaliers.appendChild(trP);
                 }
             }
 
             resultsWrapper.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
         }
     </script>
 </body>
