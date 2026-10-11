@@ -1,3 +1,5 @@
+/* [PROFEPS UNIFIER] Navbar & Footer verrouillés par unifier-navbar-footer.js */
+if (typeof window !== 'undefined') { window.__PROFEPS_SKIP_OLD_NAVBAR = true; }
 /**
  * ProfEPS - Shared Authentication Module
  * Handles auth state, navbar updates, generation saving, and favorites across all pages.
