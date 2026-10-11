@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" id="html-root">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculateur Chaleur, Humidité, Point de Rosée & Altitude Course à Pied | ProfEPS.ma</title>
+  <meta name="description" content="Ajustez scientifiquement vos allures de course selon la température, l'humidité (Point de Rosée), le vent et l'altitude avec protocole d'hydratation et sodium." />
+  <link rel="canonical" href="https://profeps.ma/calculateur-chaleur-meteo-altitude.html" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: #F8FAFC; color: #0F172A; }
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+  </style>
+  <link rel="icon" type="image/png" href="/images/prof_eps.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style id="profeps-unified-theme">
+    :root {
+      --primary: #c1272d;
+      --primary-dark: #a01f24;
+      --secondary: #006233;
+      --secondary-dark: #004d28;
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Plus Jakarta Sans', var(--font-sans);
+    }
+    body { font-family: var(--font-sans) !important; background: #f8fafc !important; color: var(--text-primary) !important; padding-top: 82px !important; }
+    .navbar { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 1000 !important; padding: 0.85rem 2rem !important; background: rgba(255,255,255,0.96) !important; backdrop-filter: blur(20px) !important; border-bottom: 1px solid rgba(226,232,240,0.7) !important; }
+    .nav-container { max-width: 1400px !important; margin: 0 auto !important; display: grid !important; grid-template-columns: 1fr auto 1fr !important; align-items: center !important; }
+    .nav-logo { justify-self: start !important; display: flex !important; align-items: center !important; }
+    .nav-logo img { height: 52px !important; width: auto !important; object-fit: contain !important; }
+    .nav-menu { display: flex !important; align-items: center !important; justify-content: center !important; gap: 1.5rem !important; }
+    .nav-right { justify-self: end !important; display: flex !important; align-items: center !important; gap: 0.65rem !important; }
+    .nav-link { font-size: 0.92rem !important; font-weight: 600 !important; color: #1a1a2e !important; padding: 0.45rem 0.65rem !important; position: relative !important; text-decoration: none !important; }
+    .nav-link::after { content: '' !important; position: absolute !important; bottom: -2px !important; left: 50% !important; right: 50% !important; height: 3px !important; background: linear-gradient(90deg, #c1272d, #006233) !important; border-radius: 2px !important; transition: left 0.3s ease, right 0.3s ease !important; }
+    .nav-link:hover::after, .nav-link.active::after { left: 0.4rem !important; right: 0.4rem !important; }
+    .nav-link:hover, .nav-link.active { color: #c1272d !important; }
+    .lang-switch { display: inline-flex; align-items: center; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 9999px; padding: 2px; }
+    .lang-btn { background: none; border: none; cursor: pointer; padding: 4px 8px; font-size: 0.75rem; font-weight: 700; color: #64748b; border-radius: 9999px; transition: all 0.2s ease; }
+    .lang-btn.active { background: white; color: #0f172a; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+    .lang-btn:hover:not(.active) { color: #c1272d; }
+    .lang-sep { font-size: 0.75rem; color: #cbd5e1; user-select: none; }
+    .nav-cta { display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; padding: 0.48rem 1.15rem !important; background: linear-gradient(135deg, #c1272d, #006233) !important; color: white !important; font-weight: 600 !important; font-size: 0.88rem !important; border-radius: 9999px !important; box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important; text-decoration: none !important; white-space: nowrap !important; }
+    #ui-badge { display: inline-flex; align-items: center; background: rgba(193,39,45,0.08) !important; color: #c1272d !important; padding: 0.28rem 0.85rem !important; border-radius: 9999px !important; border: 1px solid rgba(193,39,45,0.18) !important; }
+    .profeps-footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important; color: white !important; padding: 3rem 1.5rem 0 !important; margin-top: 3.5rem !important; text-align: left !important; }
+    .profeps-footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.25rem; padding-bottom: 2.25rem; }
+    .profeps-footer-brand img { height: 42px; filter: brightness(0) invert(1); margin-bottom: 0.75rem; }
+    .profeps-footer-brand p { color: rgba(255,255,255,0.65); font-size: 0.84rem; line-height: 1.6; }
+    .profeps-footer-col h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.45); margin-bottom: 0.9rem; }
+    .profeps-footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+    .profeps-footer-col ul li a { color: rgba(255,255,255,0.72); font-size: 0.84rem; text-decoration: none; }
+    .profeps-footer-col ul li a:hover { color: white; }
+    .profeps-footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.25rem 0; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; color: rgba(255,255,255,0.45); font-size: 0.8rem; flex-wrap: wrap; gap: 0.5rem; }
+    @media (max-width: 868px) { .nav-container { display: flex !important; justify-content: space-between !important; } .nav-menu { display: none !important; } .profeps-footer-inner { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+  <!-- Header ProfEPS.ma -->
+    <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo" aria-label="Prof EPS Maroc - Accueil">
+        <img src="/images/prof_eps.png" onerror="this.onerror=null;this.src='https://profeps.ma/images/prof_eps.png';" alt="Prof EPS Maroc" />
+      </a>
+      <div class="nav-menu">
+        <a href="/" class="nav-link">Accueil</a>
+        <a href="generateur.html" class="nav-link">Générateur</a>
+        <a href="calculateur-vma.html" class="nav-link">Calculateur VMA</a>
+        <a href="hub-outils-sport-performance.html" class="nav-link active">Hub Outils Sport</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+      </div>
+      <div class="nav-right">
+        <div dir="ltr" class="lang-switch" aria-label="Language selection"><button type="button" class="lang-btn active" id="btn-lang-fr" onclick="setToolLang('fr')">FR</button><span class="lang-sep">/</span><button type="button" class="lang-btn" id="btn-lang-en" onclick="setToolLang('en')">EN</button><span class="lang-sep">/</span><button type="button" class="lang-btn" id="btn-lang-ar" onclick="setToolLang('ar')">AR</button></div>
+        <a href="generateur.html" class="nav-cta"><span>✨ Créer un document</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-6">
+    <!-- En-tête de l'outil avec bouton Toggle Traducteur FR | EN | AR en haut à droite -->
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+      <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
+        <div class="space-y-1.5 max-w-2xl">
+          <div id="ui-badge" class="text-xs font-bold uppercase tracking-wider text-emerald-600">Cluster 2 · Thermorégulation Mondiale, Humidité & Altitude</div>
+          <h1 id="ui-title" class="text-2xl sm:text-3xl font-extrabold text-slate-900">Calculateur d’Ajustement Chaleur, Humidité, Vent & Altitude</h1>
+          <p id="ui-sub" class="text-sm text-slate-600 leading-relaxed">Calculez le point de rosée, la perte d’allure (%), la dérive cardiaque et vos besoins hydriques/sodium par heure partout dans le monde.</p>
+        </div>
+
+        <!-- Bouton Toggle Traducteur en haut à droite -->
+        <div dir="ltr" class="inline-flex items-center gap-1 p-1 bg-slate-100 border border-slate-200 rounded-lg shrink-0 self-start">
+          <button type="button" onclick="setToolLang('fr')" id="btn-lang-fr" class="px-2.5 py-1 text-xs font-bold rounded-md bg-blue-600 text-white">FR</button>
+          <button type="button" onclick="setToolLang('en')" id="btn-lang-en" class="px-2.5 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900">EN</button>
+          <button type="button" onclick="setToolLang('ar')" id="btn-lang-ar" class="px-2.5 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900">AR عربي</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Corps du Calculateur -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      <!-- Paramètres Météo & Allure -->
+      <div class="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label id="lbl-temp" class="text-xs font-bold text-slate-700 block mb-1">Température (°C)</label>
+            <input id="inp-temp" type="number" value="28" min="-10" max="48" step="1" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold tabular-nums" />
+          </div>
+          <div>
+            <label id="lbl-hum" class="text-xs font-bold text-slate-700 block mb-1">Humidité (%)</label>
+            <input id="inp-hum" type="number" value="65" min="5" max="100" step="5" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold tabular-nums" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label id="lbl-alt" class="text-xs font-bold text-slate-700 block mb-1">Altitude (mètres)</label>
+            <input id="inp-alt" type="number" value="200" min="0" max="4000" step="100" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold tabular-nums" />
+          </div>
+          <div>
+            <label id="lbl-wind" class="text-xs font-bold text-slate-700 block mb-1">Vent face (+) km/h</label>
+            <input id="inp-wind" type="number" value="10" min="-30" max="60" step="5" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold tabular-nums" />
+          </div>
+        </div>
+
+        <div>
+          <label id="lbl-pace" class="text-xs font-bold text-slate-700 block mb-1">Allure de base au frais (Min : Sec /km)</label>
+          <div dir="ltr" class="grid grid-cols-2 gap-2">
+            <input id="inp-pmin" type="number" value="4" min="2" max="10" oninput="computeTool()" class="bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-center text-sm font-mono font-bold tabular-nums" placeholder="Min" />
+            <input id="inp-psec" type="number" value="30" min="0" max="59" oninput="computeTool()" class="bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-center text-sm font-mono font-bold tabular-nums" placeholder="Sec" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Résultats & Protocole d'Hydratation -->
+      <div class="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-5">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+          <div class="p-4 bg-blue-50 border border-blue-200 rounded-xl">
+            <div id="lbl-res-slow" class="text-[11px] font-bold text-blue-800">Impact Total</div>
+            <div id="out-slow" dir="ltr" class="text-3xl font-black font-mono text-blue-700 tabular-nums my-1">--</div>
+            <div id="out-drift" dir="ltr" class="text-[11px] font-mono text-blue-700">--</div>
+          </div>
+
+          <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl">
+            <div id="lbl-res-pace" class="text-[11px] font-bold text-emerald-800">Allure Ajustée</div>
+            <div id="out-pace" dir="ltr" class="text-3xl font-black font-mono text-emerald-700 tabular-nums my-1">--</div>
+            <div id="out-base" dir="ltr" class="text-[11px] font-mono text-emerald-700">--</div>
+          </div>
+
+          <div class="p-4 bg-slate-100 border border-slate-200 rounded-xl">
+            <div id="lbl-res-hyd" class="text-[11px] font-bold text-slate-700">Hydratation & Sodium</div>
+            <div id="out-hyd" dir="ltr" class="text-2xl font-black font-mono text-slate-900 tabular-nums my-1">--</div>
+            <div id="out-sod" dir="ltr" class="text-[11px] font-mono text-slate-600">--</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3 p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-center text-xs">
+          <div>
+            <span id="lbl-dew" class="text-slate-500 block">Point de Rosée</span>
+            <strong id="out-dew" dir="ltr" class="font-mono text-slate-900 tabular-nums">--</strong>
+          </div>
+          <div>
+            <span id="lbl-heat-part" class="text-slate-500 block">Chaleur + Hum.</span>
+            <strong id="out-heat-part" dir="ltr" class="font-mono text-slate-900 tabular-nums">--</strong>
+          </div>
+          <div>
+            <span id="lbl-alt-part" class="text-slate-500 block">Altitude + Vent</span>
+            <strong id="out-alt-part" dir="ltr" class="font-mono text-slate-900 tabular-nums">--</strong>
+          </div>
+        </div>
+
+        <div id="box-weather-interp" class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 leading-relaxed"></div>
+      </div>
+    </div>
+  </main>
+
+    <footer class="profeps-footer">
+    <div class="profeps-footer-inner">
+      <div class="profeps-footer-brand">
+        <a href="/"><img src="/images/prof_eps.png" onerror="this.onerror=null;this.src='https://profeps.ma/images/prof_eps.png';" alt="Prof EPS" /></a>
+        <p><strong>Prof EPS (profeps.ma)</strong> — la plateforme intelligente d'outils et de ressources pédagogiques pour les professeurs d'EPS, les éducateurs sportifs et les passionnés de course à pied.</p>
+      </div>
+      <div class="profeps-footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="/">Accueil</a></li>
+          <li><a href="generateur.html">Générateur</a></li>
+          <li><a href="calculateur-vma.html">Calculateur VMA</a></li>
+          <li><a href="hub-outils-sport-performance.html">Hub 3 Clusters</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="profeps-footer-col">
+        <h4>Clusters Sport</h4>
+        <ul>
+          <li><a href="calculateur-vdot-asr-endurance.html">Calculateur VDOT</a></li>
+          <li><a href="calculateur-asr-reserve-vitesse.html">Réserve ASR</a></li>
+          <li><a href="calculateur-indice-endurance.html">Indice d'Endurance</a></li>
+          <li><a href="calculateur-frequence-cardiaque-karvonen.html">Fréquence Cardiaque</a></li>
+          <li><a href="calculateur-imc-sportif-masse-grasse.html">IMC Sportif</a></li>
+        </ul>
+      </div>
+      <div class="profeps-footer-col">
+        <h4>Terrain & Charge</h4>
+        <ul>
+          <li><a href="calculateur-chaleur-meteo-altitude.html">Chaleur & Altitude</a></li>
+          <li><a href="calculateur-gap-pente-nutrition.html">Pente GAP & Nutrition</a></li>
+          <li><a href="generateur-intermittent-hiit-cod.html">HIIT & COD 180°</a></li>
+          <li><a href="calculateur-charge-rpe-foster-acwr.html">Charge RPE & ACWR</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="profeps-footer-bottom">
+      <span>© 2026 Prof EPS (profeps.ma). Tous droits réservés.</span>
+      <span>Conçu pour les enseignants d'EPS et coureurs du monde entier</span>
+    </div>
+  </footer>
+
+  <script>
+    const I18N = {
+      fr: {
+        badge: "Cluster 2 · Thermorégulation Mondiale, Humidité & Altitude",
+        title: "Calculateur d’Ajustement Chaleur, Humidité, Vent & Altitude",
+        sub: "Calculez le point de rosée, la perte d’allure (%), la dérive cardiaque et vos besoins hydriques/sodium par heure partout dans le monde.",
+        temp: "Température (°C)", hum: "Humidité relative (%)", alt: "Altitude (mètres)", wind: "Vent de face (+) km/h",
+        pace: "Allure de base au frais (Min : Sec /km)",
+        resSlow: "Impact Physiologique", resPace: "Allure Ajustée", resHyd: "Hydratation / Heure",
+        dew: "Point de Rosée", heatPart: "Chaleur + Hum.", altPart: "Altitude + Vent",
+        interpTitle: "Interprétation Physiologique & Protocole Thermique :",
+        opt: "Conditions Optimales : Stress thermique minime. Maintenez vos allures cibles habituelles.",
+        mod: "Stress Thermique Modéré : Dérive cardiaque progressive par vasodilatation cutanée. Hydratez-vous toutes les 15–20 minutes.",
+        high: "Stress Thermique Élevé : Ralentissez votre allure dès le premier kilomètre pour éviter l’hyperthermie précoce.",
+        sev: "Alerte Stress Thermique Sévère : Risque élevé de coup de chaleur. Privilégiez l’entraînement à la Fréquence Cardiaque plutôt qu’à l’allure."
+      },
+      en: {
+        badge: "Cluster 2 · Global Heat, Humidity & Altitude Calculator",
+        title: "Heat, Humidity, Wind & Altitude Running Pace Calculator",
+        sub: "Compute dew point, pace slowdown (%), cardiac drift, and hourly fluid/sodium replacement needs worldwide.",
+        temp: "Temperature (°C)", hum: "Relative Humidity (%)", alt: "Altitude (meters)", wind: "Headwind (+) km/h",
+        pace: "Cool-Weather Base Pace (Min : Sec /km)",
+        resSlow: "Total Slowdown", resPace: "Adjusted Pace", resHyd: "Fluid Intake / Hour",
+        dew: "Dew Point", heatPart: "Heat + Humidity", altPart: "Altitude + Wind",
+        interpTitle: "Physiological Interpretation & Heat Protocol:",
+        opt: "Optimal Conditions: Minimal thermal strain. Run your normal target paces.",
+        mod: "Moderate Thermal Stress: Gradual cardiac drift due to skin blood flow. Drink every 15–20 minutes.",
+        high: "High Thermal Stress: Adjust your target pace from kilometer 1 to prevent core temperature spike.",
+        sev: "Severe Heat Stress Warning: High risk of heat exhaustion. Guide intensity by Heart Rate rather than pace."
+      },
+      ar: {
+        badge: "القطب 2 · تعديل الإيقاع حسب الحرارة والرطوبة والارتفاع عالمياً",
+        title: "حاسبة تعديل إيقاع الجري حسب الحرارة، الرطوبة، الرياح والارتفاع",
+        sub: "حساب نقطة الندى، التباطؤ الفيزيولوجي، انحراف نبض القلب واحتياجات الماء والصوديوم في الساعة.",
+        temp: "درجة الحرارة (°C)", hum: "الرطوبة النسبية (%)", alt: "الارتفاع عن البحر (متر)", wind: "الرياح المعاكسة (+) كم/س",
+        pace: "الإيقاع المرجعي في الطقس المعتدل (دقيقة : ثانية /كم)",
+        resSlow: "التباطؤ الإجمالي", resPace: "الإيقاع المعدل", resHyd: "الترطيب في الساعة",
+        dew: "نقطة الندى", heatPart: "الحرارة + الرطوبة", altPart: "الارتفاع + الرياح",
+        interpTitle: "التفسير الفيزيولوجي وبروتوكول الوقاية من الإجهاد الحراري:",
+        opt: "ظروف مثالية: إجهاد حراري منخفض جداً، يمكنك الحفاظ على إيقاعك المعتاد.",
+        mod: "إجهاد حراري متوسط: ارتفاع تدريجي في نبض القلب؛ يُنصح بشرب الماء كل 15–20 دقيقة.",
+        high: "إجهاد حراري مرتفع: خفّض سرعة الجري منذ الكيلومتر الأول لتفادي ارتفاع حرارة الجسم.",
+        sev: "تحذير إجهاد حراري شديد: اعتمد على مراقبة نبض القلب بدلاً من السرعة مع تعويض الأملاح المعدنية."
+      }
+    };
+
+    let currentLang = 'fr';
+
+    function fmtPace(sec) {
+      const m = Math.floor(sec / 60);
+      const s = Math.round(sec % 60);
+      return m + ':' + String(s === 60 ? 0 : s).padStart(2, '0') + ' /km';
+    }
+
+    function setToolLang(lang) {
+      currentLang = lang;
+      const root = document.getElementById('html-root');
+      root.lang = lang;
+      root.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      ['fr', 'en', 'ar'].forEach(c => {
+        document.getElementById('btn-lang-' + c).className = c === lang
+          ? 'px-2.5 py-1 text-xs font-bold rounded-md bg-blue-600 text-white'
+          : 'px-2.5 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900';
+      });
+      const t = I18N[lang];
+      document.getElementById('ui-badge').textContent = t.badge;
+      document.getElementById('ui-title').textContent = t.title;
+      document.getElementById('ui-sub').textContent = t.sub;
+      document.getElementById('lbl-temp').textContent = t.temp;
+      document.getElementById('lbl-hum').textContent = t.hum;
+      document.getElementById('lbl-alt').textContent = t.alt;
+      document.getElementById('lbl-wind').textContent = t.wind;
+      document.getElementById('lbl-pace').textContent = t.pace;
+      document.getElementById('lbl-res-slow').textContent = t.resSlow;
+      document.getElementById('lbl-res-pace').textContent = t.resPace;
+      document.getElementById('lbl-res-hyd').textContent = t.resHyd;
+      document.getElementById('lbl-dew').textContent = t.dew;
+      document.getElementById('lbl-heat-part').textContent = t.heatPart;
+      document.getElementById('lbl-alt-part').textContent = t.altPart;
+      computeTool();
+    }
+
+    function computeTool() {
+      const tempC = parseFloat(document.getElementById('inp-temp').value) || 28;
+      const hum = Math.max(5, Math.min(100, parseFloat(document.getElementById('inp-hum').value) || 65));
+      const alt = Math.max(0, parseFloat(document.getElementById('inp-alt').value) || 0);
+      const wind = parseFloat(document.getElementById('inp-wind').value) || 0;
+      const pMin = Math.max(2, parseFloat(document.getElementById('inp-pmin').value) || 4);
+      const pSec = Math.max(0, Math.min(59, parseFloat(document.getElementById('inp-psec').value) || 30));
+
+      const baseSec = pMin * 60 + pSec;
+      const alpha = (17.27 * tempC) / (237.7 + tempC) + Math.log(hum / 100);
+      const dewC = (237.7 * alpha) / (17.27 - alpha);
+      const tempF = (tempC * 9) / 5 + 32;
+      const dewF = (dewC * 9) / 5 + 32;
+      const hsi = tempF + dewF;
+
+      let heatPct = 0, sweat = 500, sod = 300, drift = 0, level = 'opt';
+      if (hsi <= 105) {
+        heatPct = 0; sweat = 500; sod = 300; drift = 0; level = 'opt';
+      } else if (hsi <= 120) {
+        heatPct = ((hsi - 105) / 15) * 1.5; sweat = 750; sod = 500; drift = 5; level = 'mod';
+      } else if (hsi <= 140) {
+        heatPct = 1.5 + ((hsi - 120) / 20) * 3.0; sweat = 1000; sod = 700; drift = 10; level = 'high';
+      } else {
+        heatPct = 4.5 + ((hsi - 140) / 20) * 4.5; sweat = 1300; sod = 950; drift = 16; level = 'sev';
+      }
+
+      const altPct = alt > 1000 ? ((alt - 1000) / 300) * 1.8 : 0;
+      const windPct = wind > 10 ? (wind - 10) * 0.18 : (wind < 0 ? Math.max(-2.0, wind * 0.07) : 0);
+      const totalPct = Math.max(-2, heatPct + altPct + windPct);
+      const adjSec = Math.round(baseSec * (1 + totalPct / 100));
+
+      document.getElementById('out-slow').textContent = (totalPct >= 0 ? '+' : '') + totalPct.toFixed(1) + '%';
+      document.getElementById('out-drift').textContent = '+' + drift + ' bpm FC';
+      document.getElementById('out-pace').textContent = fmtPace(adjSec);
+      document.getElementById('out-base').textContent = 'Base: ' + fmtPace(baseSec);
+      document.getElementById('out-hyd').textContent = sweat + ' ml/h';
+      document.getElementById('out-sod').textContent = 'Sodium: ' + sod + ' mg/h';
+      document.getElementById('out-dew').textContent = dewC.toFixed(1) + ' °C';
+      document.getElementById('out-heat-part').textContent = '+' + heatPct.toFixed(1) + '%';
+      document.getElementById('out-alt-part').textContent = '+' + (altPct + windPct).toFixed(1) + '%';
+
+      const t = I18N[currentLang];
+      document.getElementById('box-weather-interp').innerHTML =
+        '<div class="font-bold text-slate-900 mb-1">' + t.interpTitle + '</div><p>' + t[level] + '</p>';
+    }
+
+    window.addEventListener('DOMContentLoaded', () => setToolLang('fr'));
+  </script>
+</body>
+</html>
+

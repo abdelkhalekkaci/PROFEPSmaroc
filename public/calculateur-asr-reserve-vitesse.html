@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" id="html-root">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculateur ASR (Réserve de Vitesse Anaérobie) & Barème Supramaximal | ProfEPS.ma</title>
+  <meta name="description" content="Calculez votre Réserve de Vitesse Anaérobie (ASR = Vmax Sprint - VMA), votre profil neuromusculaire (Sprinteur vs Endurant) et vos distances d'intermittent en % ASR." />
+  <link rel="canonical" href="https://profeps.ma/calculateur-asr-reserve-vitesse.html" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: #F8FAFC; color: #0F172A; }
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+  </style>
+  <link rel="icon" type="image/png" href="/images/prof_eps.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style id="profeps-unified-theme">
+    :root {
+      --primary: #c1272d;
+      --primary-dark: #a01f24;
+      --secondary: #006233;
+      --secondary-dark: #004d28;
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Plus Jakarta Sans', var(--font-sans);
+    }
+    body { font-family: var(--font-sans) !important; background: #f8fafc !important; color: var(--text-primary) !important; padding-top: 82px !important; }
+    .navbar { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 1000 !important; padding: 0.85rem 2rem !important; background: rgba(255,255,255,0.96) !important; backdrop-filter: blur(20px) !important; border-bottom: 1px solid rgba(226,232,240,0.7) !important; }
+    .nav-container { max-width: 1400px !important; margin: 0 auto !important; display: grid !important; grid-template-columns: 1fr auto 1fr !important; align-items: center !important; }
+    .nav-logo { justify-self: start !important; display: flex !important; align-items: center !important; }
+    .nav-logo img { height: 52px !important; width: auto !important; object-fit: contain !important; }
+    .nav-menu { display: flex !important; align-items: center !important; justify-content: center !important; gap: 1.5rem !important; }
+    .nav-right { justify-self: end !important; display: flex !important; align-items: center !important; gap: 0.65rem !important; }
+    .nav-link { font-size: 0.92rem !important; font-weight: 600 !important; color: #1a1a2e !important; padding: 0.45rem 0.65rem !important; position: relative !important; text-decoration: none !important; }
+    .nav-link::after { content: '' !important; position: absolute !important; bottom: -2px !important; left: 50% !important; right: 50% !important; height: 3px !important; background: linear-gradient(90deg, #c1272d, #006233) !important; border-radius: 2px !important; transition: left 0.3s ease, right 0.3s ease !important; }
+    .nav-link:hover::after, .nav-link.active::after { left: 0.4rem !important; right: 0.4rem !important; }
+    .nav-link:hover, .nav-link.active { color: #c1272d !important; }
+    .lang-switch { display: inline-flex; align-items: center; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 9999px; padding: 2px; }
+    .lang-btn { background: none; border: none; cursor: pointer; padding: 4px 8px; font-size: 0.75rem; font-weight: 700; color: #64748b; border-radius: 9999px; transition: all 0.2s ease; }
+    .lang-btn.active { background: white; color: #0f172a; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+    .lang-btn:hover:not(.active) { color: #c1272d; }
+    .lang-sep { font-size: 0.75rem; color: #cbd5e1; user-select: none; }
+    .nav-cta { display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; padding: 0.48rem 1.15rem !important; background: linear-gradient(135deg, #c1272d, #006233) !important; color: white !important; font-weight: 600 !important; font-size: 0.88rem !important; border-radius: 9999px !important; box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important; text-decoration: none !important; white-space: nowrap !important; }
+    #ui-badge { display: inline-flex; align-items: center; background: rgba(193,39,45,0.08) !important; color: #c1272d !important; padding: 0.28rem 0.85rem !important; border-radius: 9999px !important; border: 1px solid rgba(193,39,45,0.18) !important; }
+    .profeps-footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important; color: white !important; padding: 3rem 1.5rem 0 !important; margin-top: 3.5rem !important; text-align: left !important; }
+    .profeps-footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.25rem; padding-bottom: 2.25rem; }
+    .profeps-footer-brand img { height: 42px; filter: brightness(0) invert(1); margin-bottom: 0.75rem; }
+    .profeps-footer-brand p { color: rgba(255,255,255,0.65); font-size: 0.84rem; line-height: 1.6; }
+    .profeps-footer-col h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.45); margin-bottom: 0.9rem; }
+    .profeps-footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+    .profeps-footer-col ul li a { color: rgba(255,255,255,0.72); font-size: 0.84rem; text-decoration: none; }
+    .profeps-footer-col ul li a:hover { color: white; }
+    .profeps-footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.25rem 0; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; color: rgba(255,255,255,0.45); font-size: 0.8rem; flex-wrap: wrap; gap: 0.5rem; }
+    @media (max-width: 868px) { .nav-container { display: flex !important; justify-content: space-between !important; } .nav-menu { display: none !important; } .profeps-footer-inner { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+  <!-- Header ProfEPS.ma -->
+    <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo" aria-label="Prof EPS Maroc - Accueil">
+        <img src="/images/prof_eps.png" onerror="this.onerror=null;this.src='https://profeps.ma/images/prof_eps.png';" alt="Prof EPS Maroc" />
+      </a>
+      <div class="nav-menu">
+        <a href="/" class="nav-link">Accueil</a>
+        <a href="generateur.html" class="nav-link">Générateur</a>
+        <a href="calculateur-vma.html" class="nav-link">Calculateur VMA</a>
+        <a href="hub-outils-sport-performance.html" class="nav-link active">Hub Outils Sport</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+      </div>
+      <div class="nav-right">
+        <div dir="ltr" class="lang-switch" aria-label="Language selection"><button type="button" class="lang-btn active" id="btn-lang-fr" onclick="setToolLang('fr')">FR</button><span class="lang-sep">/</span><button type="button" class="lang-btn" id="btn-lang-en" onclick="setToolLang('en')">EN</button><span class="lang-sep">/</span><button type="button" class="lang-btn" id="btn-lang-ar" onclick="setToolLang('ar')">AR</button></div>
+        <a href="generateur.html" class="nav-cta"><span>✨ Créer un document</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-6">
+    <!-- En-tête avec bouton Toggle Traducteur FR | EN | AR en haut à droite -->
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+      <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
+        <div class="space-y-1.5 max-w-2xl">
+          <div id="ui-badge" class="text-xs font-bold uppercase tracking-wider text-blue-600">Cluster 1B · Réserve de Vitesse Anaérobie (ASR = MSS − VMA)</div>
+          <h1 id="ui-title" class="text-2xl sm:text-3xl font-extrabold text-slate-900">Calculateur de Réserve de Vitesse Anaérobie (ASR) & Profilage Neuromusculaire</h1>
+          <p id="ui-sub" class="text-sm text-slate-600 leading-relaxed">Au-delà de 100% VMA, prescrire en % de VMA crée des inégalités entre un profil sprinteur et un profil endurant. L’ASR (Vitesse Max Sprint − VMA) égalise la charge anaérobie.</p>
+        </div>
+
+        <!-- Bouton Toggle Traducteur en haut à droite -->
+        <div dir="ltr" class="inline-flex items-center gap-1 p-1 bg-slate-100 border border-slate-200 rounded-lg shrink-0 self-start">
+          <button type="button" onclick="setToolLang('fr')" id="btn-lang-fr" class="px-2.5 py-1 text-xs font-bold rounded-md bg-blue-600 text-white">FR</button>
+          <button type="button" onclick="setToolLang('en')" id="btn-lang-en" class="px-2.5 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900">EN</button>
+          <button type="button" onclick="setToolLang('ar')" id="btn-lang-ar" class="px-2.5 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900">AR عربي</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Corps du Calculateur ASR -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      <div class="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+        <div>
+          <label id="lbl-vma" class="text-xs font-bold text-slate-700 block mb-1">VMA / MAS (km/h)</label>
+          <input id="inp-vma" type="number" value="16.0" min="8" max="25" step="0.5" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold tabular-nums" />
+        </div>
+
+        <div>
+          <label id="lbl-mss" class="text-xs font-bold text-slate-700 block mb-1">Vitesse Maximale de Sprint — MSS (km/h)</label>
+          <input id="inp-mss" type="number" value="29.5" min="15" max="40" step="0.5" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold tabular-nums" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 text-center pt-2">
+          <div class="p-3.5 bg-blue-50 border border-blue-200 rounded-xl">
+            <div id="lbl-res-asr" class="text-[11px] font-bold text-blue-800">Réserve ASR</div>
+            <div id="out-asr" dir="ltr" class="text-2xl font-black font-mono text-blue-700 tabular-nums mt-1">--</div>
+            <div id="out-asr-ms" dir="ltr" class="text-[11px] font-mono text-blue-600">--</div>
+          </div>
+          <div class="p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl">
+            <div id="lbl-res-ratio" class="text-[11px] font-bold text-emerald-800">Ratio (MSS / VMA)</div>
+            <div id="out-ratio" dir="ltr" class="text-2xl font-black font-mono text-emerald-700 tabular-nums mt-1">--</div>
+            <div id="out-profile-tag" class="text-[11px] font-bold text-emerald-700 uppercase">--</div>
+          </div>
+        </div>
+
+        <!-- Interprétation du profil -->
+        <div id="box-asr-interp" class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 leading-relaxed"></div>
+      </div>
+
+      <!-- Tableau des intensités supramaximales en % ASR -->
+      <div class="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+        <h2 id="ui-table-title" class="text-base font-bold text-slate-900">Prescription Supramaximale en % ASR (Plots 10s, 15s & 30s)</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead>
+              <tr class="border-b border-slate-200 text-slate-500 uppercase font-bold">
+                <th class="py-2.5 px-2">% ASR</th>
+                <th id="th-spd" class="py-2.5 px-2 text-right">Vitesse Cible</th>
+                <th id="th-eq" class="py-2.5 px-2 text-right">Équiv. % VMA</th>
+                <th class="py-2.5 px-2 text-right">10 sec</th>
+                <th class="py-2.5 px-2 text-right">15 sec</th>
+                <th class="py-2.5 px-2 text-right">30 sec</th>
+              </tr>
+            </thead>
+            <tbody id="asr-tbody" class="divide-y divide-slate-100"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+    <footer class="profeps-footer">
+    <div class="profeps-footer-inner">
+      <div class="profeps-footer-brand">
+        <a href="/"><img src="/images/prof_eps.png" onerror="this.onerror=null;this.src='https://profeps.ma/images/prof_eps.png';" alt="Prof EPS" /></a>
+        <p><strong>Prof EPS (profeps.ma)</strong> — la plateforme intelligente d'outils et de ressources pédagogiques pour les professeurs d'EPS, les éducateurs sportifs et les passionnés de course à pied.</p>
+      </div>
+      <div class="profeps-footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="/">Accueil</a></li>
+          <li><a href="generateur.html">Générateur</a></li>
+          <li><a href="calculateur-vma.html">Calculateur VMA</a></li>
+          <li><a href="hub-outils-sport-performance.html">Hub 3 Clusters</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="profeps-footer-col">
+        <h4>Clusters Sport</h4>
+        <ul>
+          <li><a href="calculateur-vdot-asr-endurance.html">Calculateur VDOT</a></li>
+          <li><a href="calculateur-asr-reserve-vitesse.html">Réserve ASR</a></li>
+          <li><a href="calculateur-indice-endurance.html">Indice d'Endurance</a></li>
+          <li><a href="calculateur-frequence-cardiaque-karvonen.html">Fréquence Cardiaque</a></li>
+          <li><a href="calculateur-imc-sportif-masse-grasse.html">IMC Sportif</a></li>
+        </ul>
+      </div>
+      <div class="profeps-footer-col">
+        <h4>Terrain & Charge</h4>
+        <ul>
+          <li><a href="calculateur-chaleur-meteo-altitude.html">Chaleur & Altitude</a></li>
+          <li><a href="calculateur-gap-pente-nutrition.html">Pente GAP & Nutrition</a></li>
+          <li><a href="generateur-intermittent-hiit-cod.html">HIIT & COD 180°</a></li>
+          <li><a href="calculateur-charge-rpe-foster-acwr.html">Charge RPE & ACWR</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="profeps-footer-bottom">
+      <span>© 2026 Prof EPS (profeps.ma). Tous droits réservés.</span>
+      <span>Conçu pour les enseignants d'EPS et coureurs du monde entier</span>
+    </div>
+  </footer>
+
+  <script>
+    const I18N = {
+      fr: {
+        badge: "Cluster 1B · Réserve de Vitesse Anaérobie (ASR = MSS − VMA)",
+        title: "Calculateur de Réserve de Vitesse Anaérobie (ASR) & Profilage Neuromusculaire",
+        sub: "Au-delà de 100% VMA, prescrire en % de VMA crée des inégalités entre un profil sprinteur et un profil endurant. L’ASR (Vitesse Max Sprint − VMA) égalise la charge anaérobie.",
+        vma: "VMA / MAS (km/h)", mss: "Vitesse Maximale de Sprint — MSS (km/h)",
+        resAsr: "Réserve ASR", resRatio: "Ratio (MSS / VMA)",
+        tableTitle: "Prescription Supramaximale en % ASR (Plots 10s, 15s & 30s)",
+        thSpd: "Vitesse Cible", thEq: "Équiv. % VMA",
+        diagTitle: "Interprétation du Profil Neuromusculaire :",
+        endurant: "Profil Endurant (Ratio < 1.80) : Haute économie aérobie mais réserve anaérobie étroite. Priorisez le développement de la vitesse maximale (sprints courts, pliométrie).",
+        hybrid: "Profil Hybride / Complet (Ratio 1.80 – 1.95) : Équilibre optimal entre puissance aérobie (VMA) et réserve de vitesse anaérobie.",
+        sprinter: "Profil Explosif / Sprinteur (Ratio > 1.95) : Grande réserve anaérobie mais accumulation lactique rapide. Calibrez vos intermittents courts en % ASR (20–30% ASR)."
+      },
+      en: {
+        badge: "Cluster 1B · Anaerobic Speed Reserve (ASR = MSS − MAS)",
+        title: "Anaerobic Speed Reserve (ASR) & Neuromuscular Profile Calculator",
+        sub: "Above 100% MAS, prescribing by % MAS creates unequal strain between sprinters and endurance runners. ASR (Max Sprint Speed − MAS) equalizes supramaximal load.",
+        vma: "MAS / VMA (km/h)", mss: "Maximal Sprint Speed — MSS (km/h)",
+        resAsr: "ASR Reserve", resRatio: "Speed Ratio (MSS / MAS)",
+        tableTitle: "Supramaximal Prescription by % ASR (10s, 15s & 30s Cones)",
+        thSpd: "Target Speed", thEq: "Equiv. % MAS",
+        diagTitle: "Neuromuscular Profile Interpretation:",
+        endurant: "Endurance Profile (Ratio < 1.80): High aerobic economy, narrow anaerobic reserve. Prioritize max velocity sprints and plyometrics.",
+        hybrid: "Hybrid / All-Round Profile (Ratio 1.80 – 1.95): Optimal balance between aerobic power (MAS) and anaerobic speed reserve.",
+        sprinter: "Explosive / Sprinter Profile (Ratio > 1.95): Large anaerobic reserve with rapid acidosis onset. Prescribe short intervals using 20–30% ASR."
+      },
+      ar: {
+        badge: "القطب 1B · احتياطي السرعة اللاهوائية (ASR = أقصى سرعة − VMA)",
+        title: "حاسبة احتياطي السرعة اللاهوائية (ASR) والتصنيف العصبي العضلي",
+        sub: "فوق 100% من السرعة الهوائية القصوى (VMA)، يتيح حساب ASR (أقصى سرعة انطلاق − VMA) توحيد الحمل اللاهوائي بين العداء السريع وعداء التحمل.",
+        vma: "السرعة الهوائية القصوى VMA (كم/س)", mss: "أقصى سرعة انطلاق MSS (كم/س)",
+        resAsr: "احتياطي السرعة ASR", resRatio: "نسبة السرعة (MSS / VMA)",
+        tableTitle: "جدول السرعات والمسافات فوق القصوى حسب % ASR (أقماع 10 و15 و30 ثانية)",
+        thSpd: "السرعة المستهدفة", thEq: "المكافئ % VMA",
+        diagTitle: "التفسير الفيزيولوجي ونوع العداء:",
+        endurant: "نمط التحمل (النسبة < 1.80): كفاءة هوائية عالية واحتياطي لاهوائي محدود؛ يُنصح بتطوير السرعة القصوى والانفجارية.",
+        hybrid: "نمط متوازن / شامل (1.80 – 1.95): توازن مثالي بين القوة الهوائية (VMA) واحتياطي السرعة اللاهوائية.",
+        sprinter: "نمط انفجاري / سريع (النسبة > 1.95): احتياطي لاهوائي كبير؛ يُنصح بضبط التمارين المتقطعة القصيرة وفق 20–30% ASR."
+      }
+    };
+
+    let currentLang = 'fr';
+
+    function setToolLang(lang) {
+      currentLang = lang;
+      const root = document.getElementById('html-root');
+      root.lang = lang;
+      root.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      ['fr', 'en', 'ar'].forEach(c => {
+        document.getElementById('btn-lang-' + c).className = c === lang
+          ? 'px-2.5 py-1 text-xs font-bold rounded-md bg-blue-600 text-white'
+          : 'px-2.5 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900';
+      });
+      const t = I18N[lang];
+      document.getElementById('ui-badge').textContent = t.badge;
+      document.getElementById('ui-title').textContent = t.title;
+      document.getElementById('ui-sub').textContent = t.sub;
+      document.getElementById('lbl-vma').textContent = t.vma;
+      document.getElementById('lbl-mss').textContent = t.mss;
+      document.getElementById('lbl-res-asr').textContent = t.resAsr;
+      document.getElementById('lbl-res-ratio').textContent = t.resRatio;
+      document.getElementById('ui-table-title').textContent = t.tableTitle;
+      document.getElementById('th-spd').textContent = t.thSpd;
+      document.getElementById('th-eq').textContent = t.thEq;
+      computeTool();
+    }
+
+    function computeTool() {
+      const vma = Math.max(8, parseFloat(document.getElementById('inp-vma').value) || 16);
+      const mss = Math.max(vma + 2, parseFloat(document.getElementById('inp-mss').value) || 29.5);
+      const asr = mss - vma;
+      const asrMs = asr / 3.6;
+      const ratio = mss / vma;
+
+      document.getElementById('out-asr').textContent = asr.toFixed(1) + ' km/h';
+      document.getElementById('out-asr-ms').textContent = '(' + asrMs.toFixed(2) + ' m/s)';
+      document.getElementById('out-ratio').textContent = ratio.toFixed(2);
+
+      const t = I18N[currentLang];
+      let profKey = 'hybrid', tag = 'Hybrid';
+      if (ratio < 1.80) { profKey = 'endurant'; tag = 'Endurant'; }
+      else if (ratio > 1.95) { profKey = 'sprinter'; tag = 'Sprinter'; }
+      document.getElementById('out-profile-tag').textContent = tag;
+      document.getElementById('box-asr-interp').innerHTML =
+        '<div class="font-bold text-slate-900 mb-1">' + t.diagTitle + '</div><p>' + t[profKey] + '</p>';
+
+      const pcts = [10, 15, 20, 25, 30, 40, 50];
+      document.getElementById('asr-tbody').innerHTML = pcts.map(p => {
+        const spdKmh = vma + (asr * p) / 100;
+        const spdMs = spdKmh / 3.6;
+        const eqVma = Math.round((spdKmh / vma) * 100);
+        return '<tr class="hover:bg-slate-50">' +
+          '<td dir="ltr" class="py-2.5 px-2 font-mono font-bold text-blue-600 tabular-nums">+' + p + '% ASR</td>' +
+          '<td dir="ltr" class="py-2.5 px-2 text-right font-mono font-bold text-slate-900 tabular-nums">' + spdKmh.toFixed(1) + ' km/h</td>' +
+          '<td dir="ltr" class="py-2.5 px-2 text-right font-mono text-emerald-700 tabular-nums">' + eqVma + '% VMA</td>' +
+          '<td dir="ltr" class="py-2.5 px-2 text-right font-mono font-bold text-slate-800 tabular-nums">' + Math.round(spdMs * 10) + ' m</td>' +
+          '<td dir="ltr" class="py-2.5 px-2 text-right font-mono font-bold text-slate-800 tabular-nums">' + Math.round(spdMs * 15) + ' m</td>' +
+          '<td dir="ltr" class="py-2.5 px-2 text-right font-mono font-bold text-slate-800 tabular-nums">' + Math.round(spdMs * 30) + ' m</td>' +
+        '</tr>';
+      }).join('');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => setToolLang('fr'));
+  </script>
+</body>
+</html>
+

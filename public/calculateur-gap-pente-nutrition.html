@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" id="html-root">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculateur Allure Pente (GAP Trail) & Nutrition Course Glucides | ProfEPS.ma</title>
+  <meta name="description" content="Calculez votre allure ajustée à la pente (GAP Trail & Côtes) selon le modèle de Minetti et planifiez votre ravitaillement en glucides (g/h), eau et sodium." />
+  <link rel="canonical" href="https://profeps.ma/calculateur-gap-pente-nutrition.html" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: #F8FAFC; color: #0F172A; }
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+  </style>
+  <link rel="icon" type="image/png" href="/images/prof_eps.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style id="profeps-unified-theme">
+    :root {
+      --primary: #c1272d;
+      --primary-dark: #a01f24;
+      --secondary: #006233;
+      --secondary-dark: #004d28;
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Plus Jakarta Sans', var(--font-sans);
+    }
+    body { font-family: var(--font-sans) !important; background: #f8fafc !important; color: var(--text-primary) !important; padding-top: 82px !important; }
+    .navbar { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 1000 !important; padding: 0.85rem 2rem !important; background: rgba(255,255,255,0.96) !important; backdrop-filter: blur(20px) !important; border-bottom: 1px solid rgba(226,232,240,0.7) !important; }
+    .nav-container { max-width: 1400px !important; margin: 0 auto !important; display: grid !important; grid-template-columns: 1fr auto 1fr !important; align-items: center !important; }
+    .nav-logo { justify-self: start !important; display: flex !important; align-items: center !important; }
+    .nav-logo img { height: 52px !important; width: auto !important; object-fit: contain !important; }
+    .nav-menu { display: flex !important; align-items: center !important; justify-content: center !important; gap: 1.5rem !important; }
+    .nav-right { justify-self: end !important; display: flex !important; align-items: center !important; gap: 0.65rem !important; }
+    .nav-link { font-size: 0.92rem !important; font-weight: 600 !important; color: #1a1a2e !important; padding: 0.45rem 0.65rem !important; position: relative !important; text-decoration: none !important; }
+    .nav-link::after { content: '' !important; position: absolute !important; bottom: -2px !important; left: 50% !important; right: 50% !important; height: 3px !important; background: linear-gradient(90deg, #c1272d, #006233) !important; border-radius: 2px !important; transition: left 0.3s ease, right 0.3s ease !important; }
+    .nav-link:hover::after, .nav-link.active::after { left: 0.4rem !important; right: 0.4rem !important; }
+    .nav-link:hover, .nav-link.active { color: #c1272d !important; }
+    .lang-switch { display: inline-flex; align-items: center; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 9999px; padding: 2px; }
+    .lang-btn { background: none; border: none; cursor: pointer; padding: 4px 8px; font-size: 0.75rem; font-weight: 700; color: #64748b; border-radius: 9999px; transition: all 0.2s ease; }
+    .lang-btn.active { background: white; color: #0f172a; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+    .lang-btn:hover:not(.active) { color: #c1272d; }
+    .lang-sep { font-size: 0.75rem; color: #cbd5e1; user-select: none; }
+    .nav-cta { display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; padding: 0.48rem 1.15rem !important; background: linear-gradient(135deg, #c1272d, #006233) !important; color: white !important; font-weight: 600 !important; font-size: 0.88rem !important; border-radius: 9999px !important; box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important; text-decoration: none !important; white-space: nowrap !important; }
+    #ui-badge { display: inline-flex; align-items: center; background: rgba(193,39,45,0.08) !important; color: #c1272d !important; padding: 0.28rem 0.85rem !important; border-radius: 9999px !important; border: 1px solid rgba(193,39,45,0.18) !important; }
+    .profeps-footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important; color: white !important; padding: 3rem 1.5rem 0 !important; margin-top: 3.5rem !important; text-align: left !important; }
+    .profeps-footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.25rem; padding-bottom: 2.25rem; }
+    .profeps-footer-brand img { height: 42px; filter: brightness(0) invert(1); margin-bottom: 0.75rem; }
+    .profeps-footer-brand p { color: rgba(255,255,255,0.65); font-size: 0.84rem; line-height: 1.6; }
+    .profeps-footer-col h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.45); margin-bottom: 0.9rem; }
+    .profeps-footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+    .profeps-footer-col ul li a { color: rgba(255,255,255,0.72); font-size: 0.84rem; text-decoration: none; }
+    .profeps-footer-col ul li a:hover { color: white; }
+    .profeps-footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.25rem 0; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; color: rgba(255,255,255,0.45); font-size: 0.8rem; flex-wrap: wrap; gap: 0.5rem; }
+    @media (max-width: 868px) { .nav-container { display: flex !important; justify-content: space-between !important; } .nav-menu { display: none !important; } .profeps-footer-inner { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+  <!-- Header ProfEPS.ma -->
+    <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo" aria-label="Prof EPS Maroc - Accueil">
+        <img src="/images/prof_eps.png" onerror="this.onerror=null;this.src='https://profeps.ma/images/prof_eps.png';" alt="Prof EPS Maroc" />
+      </a>
+      <div class="nav-menu">
+        <a href="/" class="nav-link">Accueil</a>
+        <a href="generateur.html" class="nav-link">Générateur</a>
+        <a href="calculateur-vma.html" class="nav-link">Calculateur VMA</a>
+        <a href="hub-outils-sport-performance.html" class="nav-link active">Hub Outils Sport</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+      </div>
+      <div class="nav-right">
+        <div dir="ltr" class="lang-switch" aria-label="Language selection"><button type="button" class="lang-btn active" id="btn-lang-fr" onclick="setToolLang('fr')">FR</button><span class="lang-sep">/</span><button type="button" class="lang-btn" id="btn-lang-en" onclick="setToolLang('en')">EN</button><span class="lang-sep">/</span><button type="button" class="lang-btn" id="btn-lang-ar" onclick="setToolLang('ar')">AR</button></div>
+        <a href="generateur.html" class="nav-cta"><span>✨ Créer un document</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-6">
+    <!-- En-tête avec bouton Toggle Traducteur FR | EN | AR en haut à droite -->
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+      <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
+        <div class="space-y-1.5 max-w-2xl">
+          <div id="ui-badge" class="text-xs font-bold uppercase tracking-wider text-emerald-600">Cluster 2D · Biomécanique de la Pente (GAP) & Nutrition d’Endurance</div>
+          <h1 id="ui-title" class="text-2xl sm:text-3xl font-extrabold text-slate-900">Calculateur d’Allure Ajustée à la Pente (GAP) & Ravitaillement Glucides</h1>
+          <p id="ui-sub" class="text-sm text-slate-600 leading-relaxed">Convertissez votre allure sur pente positive ou négative (%) en effort équivalent sur le plat (modèle Minetti) et planifiez vos apports glucidiques et hydriques.</p>
+        </div>
+
+        <!-- Bouton Toggle Traducteur en haut à droite -->
+        <div dir="ltr" class="inline-flex items-center gap-1 p-1 bg-slate-100 border border-slate-200 rounded-lg shrink-0 self-start">
+          <button type="button" onclick="setToolLang('fr')" id="btn-lang-fr" class="px-2.5 py-1 text-xs font-bold rounded-md bg-blue-600 text-white">FR</button>
+          <button type="button" onclick="setToolLang('en')" id="btn-lang-en" class="px-2.5 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900">EN</button>
+          <button type="button" onclick="setToolLang('ar')" id="btn-lang-ar" class="px-2.5 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900">AR عربي</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Corps du Calculateur -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      <div class="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label id="lbl-slope" class="text-xs font-bold text-slate-700 block mb-1">Pente (% + ou −)</label>
+            <input id="inp-slope" type="number" value="6" min="-25" max="35" step="1" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold tabular-nums" />
+          </div>
+          <div>
+            <label id="lbl-weight" class="text-xs font-bold text-slate-700 block mb-1">Poids Athlète (kg)</label>
+            <input id="inp-weight" type="number" value="68" min="35" max="150" step="1" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold tabular-nums" />
+          </div>
+        </div>
+
+        <div>
+          <label id="lbl-pace" class="text-xs font-bold text-slate-700 block mb-1">Allure de référence sur le plat (Min : Sec /km)</label>
+          <div dir="ltr" class="grid grid-cols-2 gap-2">
+            <input id="inp-pmin" type="number" value="4" min="2" max="10" oninput="computeTool()" class="bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-center text-sm font-mono font-bold tabular-nums" />
+            <input id="inp-psec" type="number" value="30" min="0" max="59" oninput="computeTool()" class="bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-center text-sm font-mono font-bold tabular-nums" />
+          </div>
+        </div>
+
+        <div>
+          <label id="lbl-dur" class="text-xs font-bold text-slate-700 block mb-1">Durée prévue de l’effort (minutes)</label>
+          <input id="inp-dur" type="number" value="120" min="20" max="600" step="10" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold tabular-nums" />
+        </div>
+      </div>
+
+      <div class="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-5">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+          <div class="p-4 bg-blue-50 border border-blue-200 rounded-xl">
+            <div id="lbl-res-gap" class="text-[11px] font-bold text-blue-800">Allure Cible en Pente</div>
+            <div id="out-gap" dir="ltr" class="text-3xl font-black font-mono text-blue-700 tabular-nums my-1">--</div>
+            <div id="out-cost" dir="ltr" class="text-[11px] font-mono text-blue-700">--</div>
+          </div>
+
+          <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl">
+            <div id="lbl-res-carbs" class="text-[11px] font-bold text-emerald-800">Glucides / Heure</div>
+            <div id="out-carbs" dir="ltr" class="text-3xl font-black font-mono text-emerald-700 tabular-nums my-1">--</div>
+            <div id="out-total-carbs" dir="ltr" class="text-[11px] font-mono text-emerald-700">--</div>
+          </div>
+
+          <div class="p-4 bg-slate-100 border border-slate-200 rounded-xl">
+            <div id="lbl-res-kcal" class="text-[11px] font-bold text-slate-700">Dépense Énergétique</div>
+            <div id="out-kcal" dir="ltr" class="text-2xl font-black font-mono text-slate-900 tabular-nums my-1">--</div>
+            <div id="out-gels" dir="ltr" class="text-[11px] font-mono text-slate-600">--</div>
+          </div>
+        </div>
+
+        <div id="box-gap-interp" class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 leading-relaxed space-y-1.5"></div>
+      </div>
+    </div>
+  </main>
+
+    <footer class="profeps-footer">
+    <div class="profeps-footer-inner">
+      <div class="profeps-footer-brand">
+        <a href="/"><img src="/images/prof_eps.png" onerror="this.onerror=null;this.src='https://profeps.ma/images/prof_eps.png';" alt="Prof EPS" /></a>
+        <p><strong>Prof EPS (profeps.ma)</strong> — la plateforme intelligente d'outils et de ressources pédagogiques pour les professeurs d'EPS, les éducateurs sportifs et les passionnés de course à pied.</p>
+      </div>
+      <div class="profeps-footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="/">Accueil</a></li>
+          <li><a href="generateur.html">Générateur</a></li>
+          <li><a href="calculateur-vma.html">Calculateur VMA</a></li>
+          <li><a href="hub-outils-sport-performance.html">Hub 3 Clusters</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="profeps-footer-col">
+        <h4>Clusters Sport</h4>
+        <ul>
+          <li><a href="calculateur-vdot-asr-endurance.html">Calculateur VDOT</a></li>
+          <li><a href="calculateur-asr-reserve-vitesse.html">Réserve ASR</a></li>
+          <li><a href="calculateur-indice-endurance.html">Indice d'Endurance</a></li>
+          <li><a href="calculateur-frequence-cardiaque-karvonen.html">Fréquence Cardiaque</a></li>
+          <li><a href="calculateur-imc-sportif-masse-grasse.html">IMC Sportif</a></li>
+        </ul>
+      </div>
+      <div class="profeps-footer-col">
+        <h4>Terrain & Charge</h4>
+        <ul>
+          <li><a href="calculateur-chaleur-meteo-altitude.html">Chaleur & Altitude</a></li>
+          <li><a href="calculateur-gap-pente-nutrition.html">Pente GAP & Nutrition</a></li>
+          <li><a href="generateur-intermittent-hiit-cod.html">HIIT & COD 180°</a></li>
+          <li><a href="calculateur-charge-rpe-foster-acwr.html">Charge RPE & ACWR</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="profeps-footer-bottom">
+      <span>© 2026 Prof EPS (profeps.ma). Tous droits réservés.</span>
+      <span>Conçu pour les enseignants d'EPS et coureurs du monde entier</span>
+    </div>
+  </footer>
+
+  <script>
+    const I18N = {
+      fr: {
+        badge: "Cluster 2D · Biomécanique de la Pente (GAP) & Nutrition d’Endurance",
+        title: "Calculateur d’Allure Ajustée à la Pente (GAP) & Ravitaillement Glucides",
+        sub: "Convertissez votre allure sur pente positive ou négative (%) en effort équivalent sur le plat (modèle Minetti) et planifiez vos apports glucidiques et hydriques.",
+        slope: "Pente (% + ou −)", weight: "Poids Athlète (kg)", pace: "Allure de référence sur le plat (Min : Sec /km)", dur: "Durée prévue de l’effort (minutes)",
+        resGap: "Allure Cible en Pente", resCarbs: "Glucides / Heure", resKcal: "Dépense Énergétique",
+        interpTitle: "Recommandations Biomécaniques & Nutritionnelles (ACSM / Jeukendrup) :",
+        shortFuel: "Effort ≤ 75 min : Rinçage buccal glucidique ou 30 g/h suffisent (Glucose simple).",
+        medFuel: "Effort 1h15 à 2h30 : Ciblez 60 g/h de glucides (limite maximale du transporteur intestinal SGLT1).",
+        longFuel: "Ultra / Effort > 2h30 : Ciblez 75 à 90 g/h en combinant Glucose + Fructose (ratio 2:1 ou 1:0.8 via transporteurs SGLT1 + GLUT5)."
+      },
+      en: {
+        badge: "Cluster 2D · Grade Adjusted Pace (GAP) & Endurance Fueling",
+        title: "Grade Adjusted Pace (GAP) & Race Carbohydrate Calculator",
+        sub: "Convert uphill/downhill gradient (%) into flat-equivalent effort (Minetti model) and plan your hourly carbohydrate and calorie intake.",
+        slope: "Slope Gradient (% + or −)", weight: "Athlete Weight (kg)", pace: "Flat Reference Pace (Min : Sec /km)", dur: "Planned Duration (minutes)",
+        resGap: "Slope Target Pace", resCarbs: "Carbs / Hour", resKcal: "Energy Expenditure",
+        interpTitle: "Biomechanical & Nutritional Guidelines (ACSM / Jeukendrup):",
+        shortFuel: "Duration ≤ 75 min: Carbohydrate mouth rinse or 30 g/h is sufficient.",
+        medFuel: "Duration 1h15 to 2h30: Target 60 g/h of carbohydrates (SGLT1 transporter saturation limit).",
+        longFuel: "Duration > 2h30: Target 75–90 g/h using dual-source Glucose + Fructose (2:1 or 1:0.8 ratio via SGLT1 + GLUT5)."
+      },
+      ar: {
+        badge: "القطب 2D · تعديل الإيقاع حسب الانحدار (GAP) والتغذية الرياضية",
+        title: "حاسبة تعديل الإيقاع حسب المرتفعات والانحدار (GAP) وخطة التغذية",
+        sub: "حساب الإيقاع المكافئ في الصعود والهبوط (%) وفق نموذج Minetti، وتخطيط احتياجات الكربوهيدرات والسعرات الحرارية.",
+        slope: "نسبة الانحدار (% + أو −)", weight: "وزن الرياضي (كغ)", pace: "الإيقاع المرجعي على أرض مستوية (دقيقة : ثانية /كم)", dur: "مدة الجهد المتوقعة (دقائق)",
+        resGap: "الإيقاع المستهدف في المنحدر", resCarbs: "الكربوهيدرات / ساعة", resKcal: "الطاقة المستهلكة",
+        interpTitle: "التوصيات البيوميكانيكية والغذائية (ACSM / Jeukendrup):",
+        shortFuel: "جهد أقل من 75 دقيقة: 30 غرام/ساعة من الكربوهيدرات كافية للحفاظ على الأداء.",
+        medFuel: "جهد من ساعة وربع إلى ساعتين ونصف: استهدف 60 غرام/ساعة من الكربوهيدرات.",
+        longFuel: "جهد أكثر من ساعتين ونصف: استهدف 75 إلى 90 غرام/ساعة بمزج الجلوكوز والفركتوز (نسبة 2:1)."
+      }
+    };
+
+    let currentLang = 'fr';
+
+    function fmtPace(sec) {
+      const m = Math.floor(sec / 60);
+      const s = Math.round(sec % 60);
+      return m + ':' + String(s === 60 ? 0 : s).padStart(2, '0') + ' /km';
+    }
+
+    function setToolLang(lang) {
+      currentLang = lang;
+      const root = document.getElementById('html-root');
+      root.lang = lang;
+      root.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      ['fr', 'en', 'ar'].forEach(c => {
+        document.getElementById('btn-lang-' + c).className = c === lang
+          ? 'px-2.5 py-1 text-xs font-bold rounded-md bg-blue-600 text-white'
+          : 'px-2.5 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900';
+      });
+      const t = I18N[lang];
+      document.getElementById('ui-badge').textContent = t.badge;
+      document.getElementById('ui-title').textContent = t.title;
+      document.getElementById('ui-sub').textContent = t.sub;
+      document.getElementById('lbl-slope').textContent = t.slope;
+      document.getElementById('lbl-weight').textContent = t.weight;
+      document.getElementById('lbl-pace').textContent = t.pace;
+      document.getElementById('lbl-dur').textContent = t.dur;
+      document.getElementById('lbl-res-gap').textContent = t.resGap;
+      document.getElementById('lbl-res-carbs').textContent = t.resCarbs;
+      document.getElementById('lbl-res-kcal').textContent = t.resKcal;
+      computeTool();
+    }
+
+    function computeTool() {
+      const slope = Math.max(-25, Math.min(35, parseFloat(document.getElementById('inp-slope').value) || 0));
+      const w = Math.max(35, parseFloat(document.getElementById('inp-weight').value) || 68);
+      const pMin = Math.max(2, parseFloat(document.getElementById('inp-pmin').value) || 4);
+      const pSec = Math.max(0, Math.min(59, parseFloat(document.getElementById('inp-psec').value) || 30));
+      const dur = Math.max(20, parseFloat(document.getElementById('inp-dur').value) || 120);
+
+      const baseSec = pMin * 60 + pSec;
+      const factor = slope >= 0
+        ? (1 + slope * 0.033 + slope * slope * 0.0012)
+        : Math.max(0.84, 1 + slope * 0.018 + Math.abs(slope) * 0.0006);
+      const adjSec = Math.round(baseSec * factor);
+      const deltaPct = Math.round((factor - 1) * 1000) / 10;
+
+      const distKm = (dur * 60) / adjSec;
+      const kcal = Math.round(distKm * w * 1.036 * factor);
+      const carbsPerHr = dur <= 75 ? 30 : (dur <= 150 ? 60 : 85);
+      const totalCarbs = Math.round((carbsPerHr * dur) / 60);
+      const gels = Math.ceil(totalCarbs / 25);
+
+      document.getElementById('out-gap').textContent = fmtPace(adjSec);
+      document.getElementById('out-cost').textContent = (deltaPct >= 0 ? '+' : '') + deltaPct + '% effort';
+      document.getElementById('out-carbs').textContent = carbsPerHr + ' g/h';
+      document.getElementById('out-total-carbs').textContent = 'Total: ' + totalCarbs + ' g';
+      document.getElementById('out-kcal').textContent = kcal + ' kcal';
+      document.getElementById('out-gels').textContent = '~' + gels + ' gels (25g)';
+
+      const t = I18N[currentLang];
+      const fuelText = dur <= 75 ? t.shortFuel : (dur <= 150 ? t.medFuel : t.longFuel);
+      document.getElementById('box-gap-interp').innerHTML =
+        '<div class="font-bold text-slate-900">' + t.interpTitle + '</div><p>' + fuelText + '</p>';
+    }
+
+    window.addEventListener('DOMContentLoaded', () => setToolLang('fr'));
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" id="html-root">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculateur IMC Sportif, Masse Grasse (IMG) & Interprétation Athlète | ProfEPS.ma</title>
+  <meta name="description" content="Calculez votre Indice de Masse Corporelle (IMC), votre taux de masse grasse (IMG) et votre masse maigre avec double interprétation OMS et Performance Sportive." />
+  <link rel="canonical" href="https://profeps.ma/calculateur-imc-sportif-masse-grasse.html" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: #F8FAFC; color: #0F172A; }
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+  </style>
+  <link rel="icon" type="image/png" href="/images/prof_eps.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style id="profeps-unified-theme">
+    :root {
+      --primary: #c1272d;
+      --primary-dark: #a01f24;
+      --secondary: #006233;
+      --secondary-dark: #004d28;
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Plus Jakarta Sans', var(--font-sans);
+    }
+    body { font-family: var(--font-sans) !important; background: #f8fafc !important; color: var(--text-primary) !important; padding-top: 82px !important; }
+    .navbar { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 1000 !important; padding: 0.85rem 2rem !important; background: rgba(255,255,255,0.96) !important; backdrop-filter: blur(20px) !important; border-bottom: 1px solid rgba(226,232,240,0.7) !important; }
+    .nav-container { max-width: 1400px !important; margin: 0 auto !important; display: grid !important; grid-template-columns: 1fr auto 1fr !important; align-items: center !important; }
+    .nav-logo { justify-self: start !important; display: flex !important; align-items: center !important; }
+    .nav-logo img { height: 52px !important; width: auto !important; object-fit: contain !important; }
+    .nav-menu { display: flex !important; align-items: center !important; justify-content: center !important; gap: 1.5rem !important; }
+    .nav-right { justify-self: end !important; display: flex !important; align-items: center !important; gap: 0.65rem !important; }
+    .nav-link { font-size: 0.92rem !important; font-weight: 600 !important; color: #1a1a2e !important; padding: 0.45rem 0.65rem !important; position: relative !important; text-decoration: none !important; }
+    .nav-link::after { content: '' !important; position: absolute !important; bottom: -2px !important; left: 50% !important; right: 50% !important; height: 3px !important; background: linear-gradient(90deg, #c1272d, #006233) !important; border-radius: 2px !important; transition: left 0.3s ease, right 0.3s ease !important; }
+    .nav-link:hover::after, .nav-link.active::after { left: 0.4rem !important; right: 0.4rem !important; }
+    .nav-link:hover, .nav-link.active { color: #c1272d !important; }
+    .lang-switch { display: inline-flex; align-items: center; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 9999px; padding: 2px; }
+    .lang-btn { background: none; border: none; cursor: pointer; padding: 4px 8px; font-size: 0.75rem; font-weight: 700; color: #64748b; border-radius: 9999px; transition: all 0.2s ease; }
+    .lang-btn.active { background: white; color: #0f172a; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+    .lang-btn:hover:not(.active) { color: #c1272d; }
+    .lang-sep { font-size: 0.75rem; color: #cbd5e1; user-select: none; }
+    .nav-cta { display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; padding: 0.48rem 1.15rem !important; background: linear-gradient(135deg, #c1272d, #006233) !important; color: white !important; font-weight: 600 !important; font-size: 0.88rem !important; border-radius: 9999px !important; box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important; text-decoration: none !important; white-space: nowrap !important; }
+    #ui-badge { display: inline-flex; align-items: center; background: rgba(193,39,45,0.08) !important; color: #c1272d !important; padding: 0.28rem 0.85rem !important; border-radius: 9999px !important; border: 1px solid rgba(193,39,45,0.18) !important; }
+    .profeps-footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important; color: white !important; padding: 3rem 1.5rem 0 !important; margin-top: 3.5rem !important; text-align: left !important; }
+    .profeps-footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.25rem; padding-bottom: 2.25rem; }
+    .profeps-footer-brand img { height: 42px; filter: brightness(0) invert(1); margin-bottom: 0.75rem; }
+    .profeps-footer-brand p { color: rgba(255,255,255,0.65); font-size: 0.84rem; line-height: 1.6; }
+    .profeps-footer-col h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.45); margin-bottom: 0.9rem; }
+    .profeps-footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+    .profeps-footer-col ul li a { color: rgba(255,255,255,0.72); font-size: 0.84rem; text-decoration: none; }
+    .profeps-footer-col ul li a:hover { color: white; }
+    .profeps-footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.25rem 0; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; color: rgba(255,255,255,0.45); font-size: 0.8rem; flex-wrap: wrap; gap: 0.5rem; }
+    @media (max-width: 868px) { .nav-container { display: flex !important; justify-content: space-between !important; } .nav-menu { display: none !important; } .profeps-footer-inner { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+  <!-- Header ProfEPS.ma -->
+    <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo" aria-label="Prof EPS Maroc - Accueil">
+        <img src="/images/prof_eps.png" onerror="this.onerror=null;this.src='https://profeps.ma/images/prof_eps.png';" alt="Prof EPS Maroc" />
+      </a>
+      <div class="nav-menu">
+        <a href="/" class="nav-link">Accueil</a>
+        <a href="generateur.html" class="nav-link">Générateur</a>
+        <a href="calculateur-vma.html" class="nav-link">Calculateur VMA</a>
+        <a href="hub-outils-sport-performance.html" class="nav-link active">Hub Outils Sport</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+      </div>
+      <div class="nav-right">
+        <div dir="ltr" class="lang-switch" aria-label="Language selection"><button type="button" class="lang-btn active" id="btn-lang-fr" onclick="setToolLang('fr')">FR</button><span class="lang-sep">/</span><button type="button" class="lang-btn" id="btn-lang-en" onclick="setToolLang('en')">EN</button><span class="lang-sep">/</span><button type="button" class="lang-btn" id="btn-lang-ar" onclick="setToolLang('ar')">AR</button></div>
+        <a href="generateur.html" class="nav-cta"><span>✨ Créer un document</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-6">
+    <!-- En-tête de l'outil avec bouton Toggle Traducteur FR | EN | AR en haut à droite -->
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+      <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
+        <div class="space-y-1.5 max-w-2xl">
+          <div id="ui-badge" class="text-xs font-bold uppercase tracking-wider text-emerald-600">Cluster 2 · Composition Corporelle, IMC & Économie de Course</div>
+          <h1 id="ui-title" class="text-2xl sm:text-3xl font-extrabold text-slate-900">Calculateur d’IMC Sportif, Masse Grasse (IMG) & Interprétation Complète</h1>
+          <p id="ui-sub" class="text-sm text-slate-600 leading-relaxed">Analysez votre Indice de Masse Corporelle selon l’OMS et selon votre profil athlétique (masse musculaire vs masse grasse et impact sur vos chronos).</p>
+        </div>
+
+        <!-- Bouton Toggle Traducteur en haut à droite -->
+        <div dir="ltr" class="inline-flex items-center gap-1 p-1 bg-slate-100 border border-slate-200 rounded-lg shrink-0 self-start">
+          <button type="button" onclick="setToolLang('fr')" id="btn-lang-fr" class="px-2.5 py-1 text-xs font-bold rounded-md bg-blue-600 text-white">FR</button>
+          <button type="button" onclick="setToolLang('en')" id="btn-lang-en" class="px-2.5 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900">EN</button>
+          <button type="button" onclick="setToolLang('ar')" id="btn-lang-ar" class="px-2.5 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900">AR عربي</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Corps du Calculateur -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      <!-- Formulaire de Saisie -->
+      <div class="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+        <div>
+          <label id="lbl-sex" class="text-xs font-bold text-slate-700 block mb-1">Sexe biologique</label>
+          <select id="inp-sex" onchange="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs font-semibold">
+            <option value="male" id="opt-male" selected>Homme</option>
+            <option value="female" id="opt-female">Femme</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label id="lbl-weight" class="text-xs font-bold text-slate-700 block mb-1">Poids (kg)</label>
+            <input id="inp-weight" type="number" value="68" min="30" max="200" step="0.5" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold tabular-nums" />
+          </div>
+          <div>
+            <label id="lbl-height" class="text-xs font-bold text-slate-700 block mb-1">Taille (cm)</label>
+            <input id="inp-height" type="number" value="175" min="130" max="225" step="1" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold tabular-nums" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label id="lbl-age" class="text-xs font-bold text-slate-700 block mb-1">Âge (ans)</label>
+            <input id="inp-age" type="number" value="28" min="12" max="90" step="1" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold tabular-nums" />
+          </div>
+          <div>
+            <label id="lbl-hours" class="text-xs font-bold text-slate-700 block mb-1">Entraînement (h/sem)</label>
+            <input id="inp-hours" type="number" value="6" min="0" max="25" step="1" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold tabular-nums" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Résultats & Double Interprétation -->
+      <div class="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-5">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+          <div class="p-4 bg-blue-50 border border-blue-200 rounded-xl">
+            <div id="lbl-res-bmi" class="text-[11px] font-bold text-blue-800">Indice IMC (kg/m²)</div>
+            <div id="out-bmi" dir="ltr" class="text-3xl font-black font-mono text-blue-700 tabular-nums my-1">--</div>
+            <div id="out-who-range" dir="ltr" class="text-[11px] font-mono text-blue-700">--</div>
+          </div>
+
+          <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl">
+            <div id="lbl-res-img" class="text-[11px] font-bold text-emerald-800">Masse Grasse (IMG)</div>
+            <div id="out-img" dir="ltr" class="text-3xl font-black font-mono text-emerald-700 tabular-nums my-1">--</div>
+            <div id="out-fat-kg" dir="ltr" class="text-[11px] font-mono text-emerald-700">--</div>
+          </div>
+
+          <div class="p-4 bg-slate-100 border border-slate-200 rounded-xl">
+            <div id="lbl-res-lean" class="text-[11px] font-bold text-slate-700">Masse Maigre</div>
+            <div id="out-lean" dir="ltr" class="text-3xl font-black font-mono text-slate-900 tabular-nums my-1">--</div>
+            <div id="out-run-range" dir="ltr" class="text-[11px] font-mono text-slate-600">--</div>
+          </div>
+        </div>
+
+        <!-- Jauge Visuelle IMC -->
+        <div class="space-y-1.5">
+          <div class="h-3 w-full rounded-full overflow-hidden flex">
+            <div class="w-1/4 bg-sky-400" title="< 18.5"></div>
+            <div class="w-1/3 bg-emerald-500" title="18.5 - 24.9"></div>
+            <div class="w-1/4 bg-amber-400" title="25.0 - 29.9"></div>
+            <div class="w-1/6 bg-rose-500" title=">= 30.0"></div>
+          </div>
+          <div dir="ltr" class="flex justify-between text-[10px] font-mono text-slate-500">
+            <span>15.0</span>
+            <span>18.5 (OMS)</span>
+            <span>25.0</span>
+            <span>30.0+</span>
+          </div>
+        </div>
+
+        <!-- Cartes d'Interprétation -->
+        <div class="space-y-3">
+          <div id="box-who" class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 leading-relaxed"></div>
+          <div id="box-ath" class="p-4 bg-emerald-50/70 border border-emerald-200 rounded-xl text-xs text-emerald-950 leading-relaxed"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+    <footer class="profeps-footer">
+    <div class="profeps-footer-inner">
+      <div class="profeps-footer-brand">
+        <a href="/"><img src="/images/prof_eps.png" onerror="this.onerror=null;this.src='https://profeps.ma/images/prof_eps.png';" alt="Prof EPS" /></a>
+        <p><strong>Prof EPS (profeps.ma)</strong> — la plateforme intelligente d'outils et de ressources pédagogiques pour les professeurs d'EPS, les éducateurs sportifs et les passionnés de course à pied.</p>
+      </div>
+      <div class="profeps-footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="/">Accueil</a></li>
+          <li><a href="generateur.html">Générateur</a></li>
+          <li><a href="calculateur-vma.html">Calculateur VMA</a></li>
+          <li><a href="hub-outils-sport-performance.html">Hub 3 Clusters</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="profeps-footer-col">
+        <h4>Clusters Sport</h4>
+        <ul>
+          <li><a href="calculateur-vdot-asr-endurance.html">Calculateur VDOT</a></li>
+          <li><a href="calculateur-asr-reserve-vitesse.html">Réserve ASR</a></li>
+          <li><a href="calculateur-indice-endurance.html">Indice d'Endurance</a></li>
+          <li><a href="calculateur-frequence-cardiaque-karvonen.html">Fréquence Cardiaque</a></li>
+          <li><a href="calculateur-imc-sportif-masse-grasse.html">IMC Sportif</a></li>
+        </ul>
+      </div>
+      <div class="profeps-footer-col">
+        <h4>Terrain & Charge</h4>
+        <ul>
+          <li><a href="calculateur-chaleur-meteo-altitude.html">Chaleur & Altitude</a></li>
+          <li><a href="calculateur-gap-pente-nutrition.html">Pente GAP & Nutrition</a></li>
+          <li><a href="generateur-intermittent-hiit-cod.html">HIIT & COD 180°</a></li>
+          <li><a href="calculateur-charge-rpe-foster-acwr.html">Charge RPE & ACWR</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="profeps-footer-bottom">
+      <span>© 2026 Prof EPS (profeps.ma). Tous droits réservés.</span>
+      <span>Conçu pour les enseignants d'EPS et coureurs du monde entier</span>
+    </div>
+  </footer>
+
+  <script>
+    const I18N = {
+      fr: {
+        badge: "Cluster 2 · Composition Corporelle, IMC & Économie de Course",
+        title: "Calculateur d’IMC Sportif, Masse Grasse (IMG) & Interprétation Complète",
+        sub: "Analysez votre Indice de Masse Corporelle selon l’OMS et selon votre profil athlétique (masse musculaire vs masse grasse et impact sur vos chronos).",
+        sex: "Sexe biologique", male: "Homme", female: "Femme",
+        weight: "Poids corporel (kg)", height: "Taille (cm)", age: "Âge (ans)", hours: "Entraînement (h/sem)",
+        resBmi: "Indice IMC (kg/m²)", resImg: "Masse Grasse (IMG)", resLean: "Masse Maigre Estimée",
+        whoTitle: "1. Interprétation Santé Générale (Norme OMS) :",
+        whoUnder: "Insuffisance pondérale (< 18.5) : Risque de déficit énergétique relatif dans le sport (RED-S), baisse immunitaire et risque de fracture de fatigue.",
+        whoNorm: "Corpulence Normale (18.5 – 24.9) : Plage de poids santé optimale associée au plus faible stress métabolique et articulaire.",
+        whoOver: "Surpoids selon l’échelle OMS (25.0 – 29.9) : Attention, chez le sportif régulier, un IMC > 25 traduit souvent un développement musculaire dense et non un excès adipeux.",
+        whoObese: "Obésité (≥ 30.0) : Charge mécanique accrue sur les tendons et articulations porteuses. Privilégier la progressivité et le renforcement.",
+        athTitle: "2. Interprétation Spécifique Athlète & Impact Performance :",
+        athEndurance: "Profil Optimisé Endurance : Rapport poids/puissance idéal pour la course de fond et l’économie d’oxygène.",
+        athMuscular: "Profil Puissance / Masse Musculaire Dense : Votre IMC dépasse 25 mais votre taux de masse grasse est bas grâce à votre volume d’entraînement. Vous êtes athlétique, non en surpoids.",
+        athWarn: "Alerte Disponibilité Énergétique : Masse corporelle basse. Veillez à sécuriser vos apports glucidiques et protéiques.",
+        athGen: "Profil Sportif Équilibré : En course à pied, chaque kg non fonctionnel supplémentaire coûte environ ~2,1 sec/km sur 10 km et Marathon."
+      },
+      en: {
+        badge: "Cluster 2 · Body Mass Index (BMI), Body Fat & Running Economy",
+        title: "Athletic BMI, Body Fat Percentage (IMG) & Dual Interpretation Calculator",
+        sub: "Evaluate your BMI under both World Health Organization (WHO) standards and athletic body composition models.",
+        sex: "Biological Sex", male: "Male", female: "Female",
+        weight: "Body Weight (kg)", height: "Height (cm)", age: "Age (years)", hours: "Training (hrs/week)",
+        resBmi: "BMI Score (kg/m²)", resImg: "Estimated Body Fat %", resLean: "Estimated Lean Mass",
+        whoTitle: "1. World Health Organization (WHO) Standard Interpretation:",
+        whoUnder: "Underweight (< 18.5): Risk of Relative Energy Deficiency in Sport (RED-S), hormonal suppression, and bone stress injuries.",
+        whoNorm: "Normal Weight (18.5 – 24.9): Optimal health weight range with minimal metabolic and joint load.",
+        whoOver: "Overweight on WHO scale (25.0 – 29.9): In trained athletes, BMI > 25 frequently reflects dense skeletal muscle mass rather than excess fat.",
+        whoObese: "Obesity (≥ 30.0): Increased mechanical load on lower-limb joints. Prioritize progressive low-impact volume.",
+        athTitle: "2. Athletic Body Composition & Running Economy Interpretation:",
+        athEndurance: "Optimal Endurance Profile: High power-to-weight ratio for distance running economy.",
+        athMuscular: "Muscular / Power Athlete Profile: Your BMI is ≥ 25 but estimated body fat is low due to training volume. High functional lean mass.",
+        athWarn: "Low Energy Availability Warning: Ensure adequate carbohydrate and caloric intake to protect lean tissue.",
+        athGen: "Balanced Athletic Profile: In distance running, every 1 kg of excess non-functional weight costs ~2.1 sec/km over 10K to Marathon."
+      },
+      ar: {
+        badge: "القطب 2 · مؤشر كتلة الجسم (IMC)، نسبة الدهون والوزن المثالي للرياضي",
+        title: "حاسبة مؤشر كتلة الجسم (IMC) ونسبة الدهون مع التفسير الصحي والرياضي",
+        sub: "تحليل شامل لمؤشر كتلة الجسم وفق معيار منظمة الصحة العالمية ووفق الكتلة العضلية للرياضي وتأثيرها على الأداء.",
+        sex: "الجنس", male: "ذكر", female: "أنثى",
+        weight: "الوزن (كغ)", height: "الطول (سم)", age: "العمر (سنوات)", hours: "ساعات التدريب أسبوعياً",
+        resBmi: "مؤشر كتلة الجسم (kg/m²)", resImg: "نسبة الدهون المقدرة (IMG)", resLean: "الكتلة العضلية الصافية",
+        whoTitle: "1. التفسير الصحي العام (معيار منظمة الصحة العالمية OMS):",
+        whoUnder: "نقص الوزن (< 18.5): خطر نقص الطاقة النسبي في الرياضة (RED-S) وإجهاد العظام.",
+        whoNorm: "وزن طبيعي وصحي (18.5 – 24.9): توازن صحي مثالي للمفاصل والتمثيل الغذائي.",
+        whoOver: "زيادة وزن حسب معيار OMS (25.0 – 29.9): تنبيه: لدى الرياضيين، غالباً ما يعكس المؤشر فوق 25 كثافة عضلية عالية وليس دهوناً زائدة.",
+        whoObese: "سمنة (≥ 30.0): عبء ميكانيكي إضافي على المفاصل والأوتار؛ يُنصح بالتدرج في الحمل التدريبي.",
+        athTitle: "2. التفسير الخاص بالرياضيين وتأثير الوزن على الأداء:",
+        athEndurance: "نمط مثالي لرياضات التحمل: نسبة القوة إلى الوزن ممتازة لاقتصاد الجري.",
+        athMuscular: "نمط عضلي / رياضي القوة: مؤشر كتلة الجسم فوق 25 لكن نسبة الدهون منخفضة بفضل التدريب والكتلة العضلية.",
+        athWarn: "تنبيه نقص الطاقة: احرص على تغذية كافية بالكربوهيدرات والبروتينات.",
+        athGen: "وزن رياضي متوازن: كل 1 كغ إضافي غير عضلي يكلف حوالي ~2.1 ثانية/كم في سباقات 10 كم والماراثون."
+      }
+    };
+
+    let currentLang = 'fr';
+
+    function setToolLang(lang) {
+      currentLang = lang;
+      const root = document.getElementById('html-root');
+      root.lang = lang;
+      root.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      ['fr', 'en', 'ar'].forEach(c => {
+        document.getElementById('btn-lang-' + c).className = c === lang
+          ? 'px-2.5 py-1 text-xs font-bold rounded-md bg-blue-600 text-white'
+          : 'px-2.5 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900';
+      });
+      const t = I18N[lang];
+      document.getElementById('ui-badge').textContent = t.badge;
+      document.getElementById('ui-title').textContent = t.title;
+      document.getElementById('ui-sub').textContent = t.sub;
+      document.getElementById('lbl-sex').textContent = t.sex;
+      document.getElementById('opt-male').textContent = t.male;
+      document.getElementById('opt-female').textContent = t.female;
+      document.getElementById('lbl-weight').textContent = t.weight;
+      document.getElementById('lbl-height').textContent = t.height;
+      document.getElementById('lbl-age').textContent = t.age;
+      document.getElementById('lbl-hours').textContent = t.hours;
+      document.getElementById('lbl-res-bmi').textContent = t.resBmi;
+      document.getElementById('lbl-res-img').textContent = t.resImg;
+      document.getElementById('lbl-res-lean').textContent = t.resLean;
+      computeTool();
+    }
+
+    function computeTool() {
+      const sex = document.getElementById('inp-sex').value;
+      const w = Math.max(30, Math.min(200, parseFloat(document.getElementById('inp-weight').value) || 68));
+      const hCm = Math.max(130, Math.min(225, parseFloat(document.getElementById('inp-height').value) || 175));
+      const age = Math.max(12, Math.min(90, parseFloat(document.getElementById('inp-age').value) || 28));
+      const hrs = Math.max(0, Math.min(25, parseFloat(document.getElementById('inp-hours').value) || 6));
+
+      const hM = hCm / 100;
+      const bmi = w / (hM * hM);
+      const sexFactor = sex === 'male' ? 1 : 0;
+      const trainCorr = Math.min(3.5, hrs * 0.35);
+      const minFat = sex === 'male' ? 5.0 : 11.0;
+      const img = Math.max(minFat, Math.min(50, 1.2 * bmi + 0.23 * age - 10.8 * sexFactor - 5.4 - trainCorr));
+      const fatKg = (w * img) / 100;
+      const leanKg = w - fatKg;
+
+      const whoMin = (18.5 * hM * hM).toFixed(1);
+      const whoMax = (24.9 * hM * hM).toFixed(1);
+      const runMin = (19.5 * hM * hM).toFixed(1);
+      const runMax = (22.5 * hM * hM).toFixed(1);
+
+      document.getElementById('out-bmi').textContent = bmi.toFixed(1);
+      document.getElementById('out-who-range').textContent = 'OMS: ' + whoMin + '–' + whoMax + ' kg';
+      document.getElementById('out-img').textContent = img.toFixed(1) + '%';
+      document.getElementById('out-fat-kg').textContent = fatKg.toFixed(1) + ' kg fat';
+      document.getElementById('out-lean').textContent = leanKg.toFixed(1) + ' kg';
+      document.getElementById('out-run-range').textContent = 'Opt: ' + runMin + '–' + runMax + ' kg';
+
+      const t = I18N[currentLang];
+      let whoText = t.whoNorm;
+      if (bmi < 18.5) whoText = t.whoUnder;
+      else if (bmi >= 30.0) whoText = t.whoObese;
+      else if (bmi >= 25.0) whoText = t.whoOver;
+
+      const lowFatLimit = sex === 'male' ? 16.5 : 23.5;
+      let athText = t.athGen;
+      if (bmi < 18.5) athText = t.athWarn;
+      else if (bmi >= 19.0 && bmi <= 22.8 && hrs >= 4) athText = t.athEndurance;
+      else if (bmi >= 25.0 && img <= lowFatLimit && hrs >= 5) athText = t.athMuscular;
+
+      document.getElementById('box-who').innerHTML =
+        '<div class="font-bold text-slate-900 mb-1">' + t.whoTitle + '</div><p>' + whoText + '</p>';
+      document.getElementById('box-ath').innerHTML =
+        '<div class="font-bold text-emerald-950 mb-1">' + t.athTitle + '</div><p>' + athText + '</p>';
+    }
+
+    window.addEventListener('DOMContentLoaded', () => setToolLang('fr'));
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" id="html-root">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculateur d'Indice d'Endurance (Péronnet & Thibault) & Seuil VMA | ProfEPS.ma</title>
+  <meta name="description" content="Calculez votre Indice d'Endurance (IE de Péronnet & Thibault), le pourcentage de VMA soutenu en course et orientez votre entraînement entre Seuil et VMA." />
+  <link rel="canonical" href="https://profeps.ma/calculateur-indice-endurance.html" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: #F8FAFC; color: #0F172A; }
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+  </style>
+  <link rel="icon" type="image/png" href="/images/prof_eps.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style id="profeps-unified-theme">
+    :root {
+      --primary: #c1272d;
+      --primary-dark: #a01f24;
+      --secondary: #006233;
+      --secondary-dark: #004d28;
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Plus Jakarta Sans', var(--font-sans);
+    }
+    body { font-family: var(--font-sans) !important; background: #f8fafc !important; color: var(--text-primary) !important; padding-top: 82px !important; }
+    .navbar { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 1000 !important; padding: 0.85rem 2rem !important; background: rgba(255,255,255,0.96) !important; backdrop-filter: blur(20px) !important; border-bottom: 1px solid rgba(226,232,240,0.7) !important; }
+    .nav-container { max-width: 1400px !important; margin: 0 auto !important; display: grid !important; grid-template-columns: 1fr auto 1fr !important; align-items: center !important; }
+    .nav-logo { justify-self: start !important; display: flex !important; align-items: center !important; }
+    .nav-logo img { height: 52px !important; width: auto !important; object-fit: contain !important; }
+    .nav-menu { display: flex !important; align-items: center !important; justify-content: center !important; gap: 1.5rem !important; }
+    .nav-right { justify-self: end !important; display: flex !important; align-items: center !important; gap: 0.65rem !important; }
+    .nav-link { font-size: 0.92rem !important; font-weight: 600 !important; color: #1a1a2e !important; padding: 0.45rem 0.65rem !important; position: relative !important; text-decoration: none !important; }
+    .nav-link::after { content: '' !important; position: absolute !important; bottom: -2px !important; left: 50% !important; right: 50% !important; height: 3px !important; background: linear-gradient(90deg, #c1272d, #006233) !important; border-radius: 2px !important; transition: left 0.3s ease, right 0.3s ease !important; }
+    .nav-link:hover::after, .nav-link.active::after { left: 0.4rem !important; right: 0.4rem !important; }
+    .nav-link:hover, .nav-link.active { color: #c1272d !important; }
+    .lang-switch { display: inline-flex; align-items: center; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 9999px; padding: 2px; }
+    .lang-btn { background: none; border: none; cursor: pointer; padding: 4px 8px; font-size: 0.75rem; font-weight: 700; color: #64748b; border-radius: 9999px; transition: all 0.2s ease; }
+    .lang-btn.active { background: white; color: #0f172a; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+    .lang-btn:hover:not(.active) { color: #c1272d; }
+    .lang-sep { font-size: 0.75rem; color: #cbd5e1; user-select: none; }
+    .nav-cta { display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; padding: 0.48rem 1.15rem !important; background: linear-gradient(135deg, #c1272d, #006233) !important; color: white !important; font-weight: 600 !important; font-size: 0.88rem !important; border-radius: 9999px !important; box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important; text-decoration: none !important; white-space: nowrap !important; }
+    #ui-badge { display: inline-flex; align-items: center; background: rgba(193,39,45,0.08) !important; color: #c1272d !important; padding: 0.28rem 0.85rem !important; border-radius: 9999px !important; border: 1px solid rgba(193,39,45,0.18) !important; }
+    .profeps-footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important; color: white !important; padding: 3rem 1.5rem 0 !important; margin-top: 3.5rem !important; text-align: left !important; }
+    .profeps-footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.25rem; padding-bottom: 2.25rem; }
+    .profeps-footer-brand img { height: 42px; filter: brightness(0) invert(1); margin-bottom: 0.75rem; }
+    .profeps-footer-brand p { color: rgba(255,255,255,0.65); font-size: 0.84rem; line-height: 1.6; }
+    .profeps-footer-col h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.45); margin-bottom: 0.9rem; }
+    .profeps-footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+    .profeps-footer-col ul li a { color: rgba(255,255,255,0.72); font-size: 0.84rem; text-decoration: none; }
+    .profeps-footer-col ul li a:hover { color: white; }
+    .profeps-footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.25rem 0; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; color: rgba(255,255,255,0.45); font-size: 0.8rem; flex-wrap: wrap; gap: 0.5rem; }
+    @media (max-width: 868px) { .nav-container { display: flex !important; justify-content: space-between !important; } .nav-menu { display: none !important; } .profeps-footer-inner { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+  <!-- Header ProfEPS.ma -->
+    <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo" aria-label="Prof EPS Maroc - Accueil">
+        <img src="/images/prof_eps.png" onerror="this.onerror=null;this.src='https://profeps.ma/images/prof_eps.png';" alt="Prof EPS Maroc" />
+      </a>
+      <div class="nav-menu">
+        <a href="/" class="nav-link">Accueil</a>
+        <a href="generateur.html" class="nav-link">Générateur</a>
+        <a href="calculateur-vma.html" class="nav-link">Calculateur VMA</a>
+        <a href="hub-outils-sport-performance.html" class="nav-link active">Hub Outils Sport</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+      </div>
+      <div class="nav-right">
+        <div dir="ltr" class="lang-switch" aria-label="Language selection"><button type="button" class="lang-btn active" id="btn-lang-fr" onclick="setToolLang('fr')">FR</button><span class="lang-sep">/</span><button type="button" class="lang-btn" id="btn-lang-en" onclick="setToolLang('en')">EN</button><span class="lang-sep">/</span><button type="button" class="lang-btn" id="btn-lang-ar" onclick="setToolLang('ar')">AR</button></div>
+        <a href="generateur.html" class="nav-cta"><span>✨ Créer un document</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-6">
+    <!-- En-tête avec bouton Toggle Traducteur FR | EN | AR en haut à droite -->
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+      <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
+        <div class="space-y-1.5 max-w-2xl">
+          <div id="ui-badge" class="text-xs font-bold uppercase tracking-wider text-blue-600">Cluster 1C · Modèle Physiologique de Péronnet & Thibault</div>
+          <h1 id="ui-title" class="text-2xl sm:text-3xl font-extrabold text-slate-900">Calculateur d’Indice d’Endurance (IE) & Capacité de Soutien VMA</h1>
+          <p id="ui-sub" class="text-sm text-slate-600 leading-relaxed">L’Indice d’Endurance mesure la pente de décroissance du % de VMA maintenu lorsque la durée de course s’allonge (échelle de −4 élite à −12 faible).</p>
+        </div>
+
+        <!-- Bouton Toggle Traducteur en haut à droite -->
+        <div dir="ltr" class="inline-flex items-center gap-1 p-1 bg-slate-100 border border-slate-200 rounded-lg shrink-0 self-start">
+          <button type="button" onclick="setToolLang('fr')" id="btn-lang-fr" class="px-2.5 py-1 text-xs font-bold rounded-md bg-blue-600 text-white">FR</button>
+          <button type="button" onclick="setToolLang('en')" id="btn-lang-en" class="px-2.5 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900">EN</button>
+          <button type="button" onclick="setToolLang('ar')" id="btn-lang-ar" class="px-2.5 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900">AR عربي</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Corps du Calculateur IE -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      <div class="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+        <div>
+          <label id="lbl-vma" class="text-xs font-bold text-slate-700 block mb-1">VMA / MAS actuelle (km/h)</label>
+          <input id="inp-vma" type="number" value="16.5" min="8" max="26" step="0.5" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold tabular-nums" />
+        </div>
+
+        <div>
+          <label id="lbl-dist" class="text-xs font-bold text-slate-700 block mb-1">Distance de course réalisée</label>
+          <select id="inp-dist" onchange="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs font-semibold">
+            <option value="3000">3 000 m</option>
+            <option value="5000">5 km (5 000 m)</option>
+            <option value="10000" selected>10 km (10 000 m)</option>
+            <option value="21097.5">Semi-Marathon (21,097 km)</option>
+            <option value="42195">Marathon (42,195 km)</option>
+          </select>
+        </div>
+
+        <div>
+          <label id="lbl-time" class="text-xs font-bold text-slate-700 block mb-1">Temps réalisé (Heures : Min : Sec)</label>
+          <div dir="ltr" class="grid grid-cols-3 gap-2">
+            <input id="inp-h" type="number" value="0" min="0" max="10" oninput="computeTool()" class="bg-slate-50 border border-slate-300 rounded-lg px-2 py-2 text-center text-sm font-mono font-bold tabular-nums" placeholder="HH" />
+            <input id="inp-m" type="number" value="41" min="0" max="59" oninput="computeTool()" class="bg-slate-50 border border-slate-300 rounded-lg px-2 py-2 text-center text-sm font-mono font-bold tabular-nums" placeholder="MM" />
+            <input id="inp-s" type="number" value="30" min="0" max="59" oninput="computeTool()" class="bg-slate-50 border border-slate-300 rounded-lg px-2 py-2 text-center text-sm font-mono font-bold tabular-nums" placeholder="SS" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 text-center pt-2">
+          <div class="p-3.5 bg-blue-50 border border-blue-200 rounded-xl">
+            <div id="lbl-res-ie" class="text-[11px] font-bold text-blue-800">Indice d’Endurance</div>
+            <div id="out-ie" dir="ltr" class="text-3xl font-black font-mono text-blue-700 tabular-nums mt-1">--</div>
+          </div>
+          <div class="p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl">
+            <div id="lbl-res-pct" class="text-[11px] font-bold text-emerald-800">% VMA Soutenu</div>
+            <div id="out-pct" dir="ltr" class="text-3xl font-black font-mono text-emerald-700 tabular-nums mt-1">--</div>
+          </div>
+        </div>
+
+        <div id="box-ie-interp" class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 leading-relaxed"></div>
+      </div>
+
+      <!-- Tableau Prédictif selon le couple (VMA + IE) -->
+      <div class="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+        <h2 id="ui-table-title" class="text-base font-bold text-slate-900">Projection de vos Chronos selon votre VMA & votre Indice d’Endurance</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead>
+              <tr class="border-b border-slate-200 text-slate-500 uppercase font-bold">
+                <th id="th-d" class="py-2.5 px-3">Distance</th>
+                <th id="th-p" class="py-2.5 px-3 text-right">% VMA Soutenable</th>
+                <th id="th-v" class="py-2.5 px-3 text-right">Vitesse</th>
+                <th id="th-t" class="py-2.5 px-3 text-right">Temps Projeté</th>
+              </tr>
+            </thead>
+            <tbody id="ie-tbody" class="divide-y divide-slate-100"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+    <footer class="profeps-footer">
+    <div class="profeps-footer-inner">
+      <div class="profeps-footer-brand">
+        <a href="/"><img src="/images/prof_eps.png" onerror="this.onerror=null;this.src='https://profeps.ma/images/prof_eps.png';" alt="Prof EPS" /></a>
+        <p><strong>Prof EPS (profeps.ma)</strong> — la plateforme intelligente d'outils et de ressources pédagogiques pour les professeurs d'EPS, les éducateurs sportifs et les passionnés de course à pied.</p>
+      </div>
+      <div class="profeps-footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="/">Accueil</a></li>
+          <li><a href="generateur.html">Générateur</a></li>
+          <li><a href="calculateur-vma.html">Calculateur VMA</a></li>
+          <li><a href="hub-outils-sport-performance.html">Hub 3 Clusters</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="profeps-footer-col">
+        <h4>Clusters Sport</h4>
+        <ul>
+          <li><a href="calculateur-vdot-asr-endurance.html">Calculateur VDOT</a></li>
+          <li><a href="calculateur-asr-reserve-vitesse.html">Réserve ASR</a></li>
+          <li><a href="calculateur-indice-endurance.html">Indice d'Endurance</a></li>
+          <li><a href="calculateur-frequence-cardiaque-karvonen.html">Fréquence Cardiaque</a></li>
+          <li><a href="calculateur-imc-sportif-masse-grasse.html">IMC Sportif</a></li>
+        </ul>
+      </div>
+      <div class="profeps-footer-col">
+        <h4>Terrain & Charge</h4>
+        <ul>
+          <li><a href="calculateur-chaleur-meteo-altitude.html">Chaleur & Altitude</a></li>
+          <li><a href="calculateur-gap-pente-nutrition.html">Pente GAP & Nutrition</a></li>
+          <li><a href="generateur-intermittent-hiit-cod.html">HIIT & COD 180°</a></li>
+          <li><a href="calculateur-charge-rpe-foster-acwr.html">Charge RPE & ACWR</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="profeps-footer-bottom">
+      <span>© 2026 Prof EPS (profeps.ma). Tous droits réservés.</span>
+      <span>Conçu pour les enseignants d'EPS et coureurs du monde entier</span>
+    </div>
+  </footer>
+
+  <script>
+    const I18N = {
+      fr: {
+        badge: "Cluster 1C · Modèle Physiologique de Péronnet & Thibault",
+        title: "Calculateur d’Indice d’Endurance (IE) & Capacité de Soutien VMA",
+        sub: "L’Indice d’Endurance mesure la pente de décroissance du % de VMA maintenu lorsque la durée de course s’allonge (échelle de −4 élite à −12 faible).",
+        vma: "VMA / MAS actuelle (km/h)", dist: "Distance de course réalisée", time: "Temps réalisé (Heures : Min : Sec)",
+        resIe: "Indice d’Endurance", resPct: "% VMA Soutenu",
+        tableTitle: "Projection de vos Chronos selon votre VMA & votre Indice d’Endurance",
+        thD: "Distance", thP: "% VMA Soutenable", thV: "Vitesse", thT: "Temps Projeté",
+        diagTitle: "Interprétation Physiologique & Axe d’Entraînement :",
+        elite: "Endurance Exceptionnelle (IE ≥ −5.5) : Capacité remarquable à maintenir un très haut % de VMA (Seuil lactique SV2 élevé). Priorité : développer votre plafond de VMA.",
+        good: "Bonne Endurance Aérobie (−7.5 ≤ IE < −5.5) : Profil équilibré entre puissance aérobie (VMA) et capacité de soutien.",
+        avg: "Endurance Moyenne (−9.5 ≤ IE < −7.5) : Décroissance standard avec la distance. Ajoutez des séances au Seuil Anaérobie (85–88% VMA).",
+        low: "Endurance Faible / Profil Vitesse (IE < −9.5) : Votre VMA est sous-exploitée sur le long. Priorité absolue : travail au Seuil, Tempo et sorties longues en Zone 2."
+      },
+      en: {
+        badge: "Cluster 1C · Péronnet & Thibault Endurance Index Model",
+        title: "Endurance Index (EI) & Fractional MAS Utilization Calculator",
+        sub: "The Endurance Index quantifies the rate of decline in sustainable % MAS as race duration increases (scale from −4 elite to −12 low).",
+        vma: "Current MAS / VMA (km/h)", dist: "Completed Race Distance", time: "Finish Time (Hours : Min : Sec)",
+        resIe: "Endurance Index (EI)", resPct: "% MAS Sustained",
+        tableTitle: "Projected Race Times Based on Your MAS & Endurance Index",
+        thD: "Distance", thP: "Sustainable % MAS", thV: "Speed", thT: "Projected Time",
+        diagTitle: "Physiological Interpretation & Training Focus:",
+        elite: "Exceptional Endurance (EI ≥ −5.5): Outstanding fractional utilization of MAS (high LT2 threshold). Focus on raising your ceiling MAS/VO₂max.",
+        good: "Good Aerobic Endurance (−7.5 ≤ EI < −5.5): Well-balanced relationship between MAS and submaximal stamina.",
+        avg: "Moderate Endurance (−9.5 ≤ EI < −7.5): Standard pace decay over distance. Add lactate threshold intervals (85–88% MAS).",
+        low: "Low Endurance / Speed Profile (EI < −9.5): High MAS relative to race times. Priority: threshold blocks, tempo runs, and Zone 2 volume."
+      },
+      ar: {
+        badge: "القطب 1C · حاسبة مؤشر التحمل (نموذج Péronnet & Thibault)",
+        title: "حاسبة مؤشر التحمل (IE) والقدرة على الحفاظ على نسبة VMA",
+        sub: "يقيس مؤشر التحمل (IE) قدرة العداء على الحفاظ على نسبة عالية من VMA مع زيادة مسافة السباق (من −4 ممتاز إلى −12 ضعيف).",
+        vma: "السرعة الهوائية القصوى VMA (كم/س)", dist: "مسافة السباق المنجز", time: "الزمن المحقق (ساعة : دقيقة : ثانية)",
+        resIe: "مؤشر التحمل (IE)", resPct: "نسبة % VMA المحققة",
+        tableTitle: "توقعات أزمنة السباقات بناءً على VMA ومؤشر التحمل الخاص بك",
+        thD: "المسافة", thP: "نسبة % VMA المتوقعة", thV: "السرعة", thT: "الزمن المتوقع",
+        diagTitle: "التفسير الفيزيولوجي وتوجيه التدريب:",
+        elite: "تحمل ممتاز جداً (IE ≥ −5.5): قدرة فائقة على الحفاظ على نسبة عالية من VMA. الأولوية: رفع سقف السرعة الهوائية القصوى VMA.",
+        good: "تحمل هوائي جيد (−7.5 ≤ IE < −5.5): توازن جيد بين القوة الهوائية والقدرة على التحمل.",
+        avg: "تحمل متوسط (−9.5 ≤ IE < −7.5): يُنصح بزيادة حصص العتبة اللاهوائية (85%–88% VMA).",
+        low: "تحمل منخفض / نمط سرعة (IE < −9.5): سرعة VMA عالية مقارنة بزمن السباق. الأولوية القصوى: تمارين العتبة والتحمل الأساسي (Z2)."
+      }
+    };
+
+    let currentLang = 'fr';
+
+    function fmtTime(sec) {
+      const h = Math.floor(sec / 3600);
+      const m = Math.floor((sec % 3600) / 60);
+      const s = Math.round(sec % 60);
+      if (h > 0) return h + 'h ' + String(m).padStart(2, '0') + 'm ' + String(s).padStart(2, '0') + 's';
+      return m + 'm ' + String(s).padStart(2, '0') + 's';
+    }
+
+    function setToolLang(lang) {
+      currentLang = lang;
+      const root = document.getElementById('html-root');
+      root.lang = lang;
+      root.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      ['fr', 'en', 'ar'].forEach(c => {
+        document.getElementById('btn-lang-' + c).className = c === lang
+          ? 'px-2.5 py-1 text-xs font-bold rounded-md bg-blue-600 text-white'
+          : 'px-2.5 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900';
+      });
+      const t = I18N[lang];
+      document.getElementById('ui-badge').textContent = t.badge;
+      document.getElementById('ui-title').textContent = t.title;
+      document.getElementById('ui-sub').textContent = t.sub;
+      document.getElementById('lbl-vma').textContent = t.vma;
+      document.getElementById('lbl-dist').textContent = t.dist;
+      document.getElementById('lbl-time').textContent = t.time;
+      document.getElementById('lbl-res-ie').textContent = t.resIe;
+      document.getElementById('lbl-res-pct').textContent = t.resPct;
+      document.getElementById('ui-table-title').textContent = t.tableTitle;
+      document.getElementById('th-d').textContent = t.thD;
+      document.getElementById('th-p').textContent = t.thP;
+      document.getElementById('th-v').textContent = t.thV;
+      document.getElementById('th-t').textContent = t.thT;
+      computeTool();
+    }
+
+    function computeTool() {
+      const vma = Math.max(8, parseFloat(document.getElementById('inp-vma').value) || 16.5);
+      const dist = parseFloat(document.getElementById('inp-dist').value) || 10000;
+      const h = Math.max(0, parseFloat(document.getElementById('inp-h').value) || 0);
+      const m = Math.max(0, parseFloat(document.getElementById('inp-m').value) || 41);
+      const s = Math.max(0, parseFloat(document.getElementById('inp-s').value) || 30);
+
+      const totalSec = Math.max(400, h * 3600 + m * 60 + s);
+      const raceKmh = (dist / totalSec) * 3.6;
+      const pctVma = (raceKmh / vma) * 100;
+      const rawIe = (pctVma - 100) / Math.log(Math.max(1.1, totalSec / 360));
+      const ie = Math.max(-16, Math.min(-2, rawIe));
+
+      document.getElementById('out-ie').textContent = ie.toFixed(1);
+      document.getElementById('out-pct').textContent = pctVma.toFixed(1) + '%';
+
+      const t = I18N[currentLang];
+      let diagKey = 'avg';
+      if (ie >= -5.5) diagKey = 'elite';
+      else if (ie >= -7.5) diagKey = 'good';
+      else if (ie < -9.5) diagKey = 'low';
+
+      document.getElementById('box-ie-interp').innerHTML =
+        '<div class="font-bold text-slate-900 mb-1">' + t.diagTitle + '</div><p>' + t[diagKey] + '</p>';
+
+      const targets = [
+        { name: "3 000 m", m: 3000 },
+        { name: "5 km", m: 5000 },
+        { name: "10 km", m: 10000 },
+        { name: "15 km", m: 15000 },
+        { name: "Semi-Marathon (21,1 km)", m: 21097.5 },
+        { name: "Marathon (42,195 km)", m: 42195 }
+      ];
+
+      document.getElementById('ie-tbody').innerHTML = targets.map(row => {
+        // Iterative solve for time T using %VMA = 100 + IE * ln(T / 360)
+        let estSec = row.m / ((vma * 0.85) / 3.6);
+        for (let i = 0; i < 8; i++) {
+          const p = Math.max(55, Math.min(98, 100 + ie * Math.log(Math.max(1.05, estSec / 360))));
+          const vMs = ((vma * (p / 100)) / 3.6);
+          estSec = row.m / vMs;
+        }
+        const finalPct = Math.max(55, Math.min(98, 100 + ie * Math.log(Math.max(1.05, estSec / 360))));
+        const finalKmh = vma * (finalPct / 100);
+        return '<tr class="hover:bg-slate-50">' +
+          '<td class="py-2.5 px-3 font-semibold text-slate-900">' + row.name + '</td>' +
+          '<td dir="ltr" class="py-2.5 px-3 text-right font-mono font-bold text-emerald-700 tabular-nums">' + finalPct.toFixed(1) + '% VMA</td>' +
+          '<td dir="ltr" class="py-2.5 px-3 text-right font-mono text-slate-700 tabular-nums">' + finalKmh.toFixed(1) + ' km/h</td>' +
+          '<td dir="ltr" class="py-2.5 px-3 text-right font-mono font-bold text-blue-600 tabular-nums">' + fmtTime(estSec) + '</td>' +
+        '</tr>';
+      }).join('');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => setToolLang('fr'));
+  </script>
+</body>
+</html>
+

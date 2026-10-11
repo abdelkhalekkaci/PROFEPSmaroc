@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" id="html-root">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculateur Charge RPE Foster, Monotonie & Ratio ACWR Blessures | ProfEPS.ma</title>
+  <meta name="description" content="Calculez votre charge d'entraînement interne sRPE (Foster), l'indice de monotonie, la contrainte et le ratio Aigu:Chronique (ACWR) pour prévenir les blessures." />
+  <link rel="canonical" href="https://profeps.ma/calculateur-charge-rpe-foster-acwr.html" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: #F8FAFC; color: #0F172A; }
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+  </style>
+  <link rel="icon" type="image/png" href="/images/prof_eps.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style id="profeps-unified-theme">
+    :root {
+      --primary: #c1272d;
+      --primary-dark: #a01f24;
+      --secondary: #006233;
+      --secondary-dark: #004d28;
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Plus Jakarta Sans', var(--font-sans);
+    }
+    body { font-family: var(--font-sans) !important; background: #f8fafc !important; color: var(--text-primary) !important; padding-top: 82px !important; }
+    .navbar { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 1000 !important; padding: 0.85rem 2rem !important; background: rgba(255,255,255,0.96) !important; backdrop-filter: blur(20px) !important; border-bottom: 1px solid rgba(226,232,240,0.7) !important; }
+    .nav-container { max-width: 1400px !important; margin: 0 auto !important; display: grid !important; grid-template-columns: 1fr auto 1fr !important; align-items: center !important; }
+    .nav-logo { justify-self: start !important; display: flex !important; align-items: center !important; }
+    .nav-logo img { height: 52px !important; width: auto !important; object-fit: contain !important; }
+    .nav-menu { display: flex !important; align-items: center !important; justify-content: center !important; gap: 1.5rem !important; }
+    .nav-right { justify-self: end !important; display: flex !important; align-items: center !important; gap: 0.65rem !important; }
+    .nav-link { font-size: 0.92rem !important; font-weight: 600 !important; color: #1a1a2e !important; padding: 0.45rem 0.65rem !important; position: relative !important; text-decoration: none !important; }
+    .nav-link::after { content: '' !important; position: absolute !important; bottom: -2px !important; left: 50% !important; right: 50% !important; height: 3px !important; background: linear-gradient(90deg, #c1272d, #006233) !important; border-radius: 2px !important; transition: left 0.3s ease, right 0.3s ease !important; }
+    .nav-link:hover::after, .nav-link.active::after { left: 0.4rem !important; right: 0.4rem !important; }
+    .nav-link:hover, .nav-link.active { color: #c1272d !important; }
+    .lang-switch { display: inline-flex; align-items: center; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 9999px; padding: 2px; }
+    .lang-btn { background: none; border: none; cursor: pointer; padding: 4px 8px; font-size: 0.75rem; font-weight: 700; color: #64748b; border-radius: 9999px; transition: all 0.2s ease; }
+    .lang-btn.active { background: white; color: #0f172a; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+    .lang-btn:hover:not(.active) { color: #c1272d; }
+    .lang-sep { font-size: 0.75rem; color: #cbd5e1; user-select: none; }
+    .nav-cta { display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; padding: 0.48rem 1.15rem !important; background: linear-gradient(135deg, #c1272d, #006233) !important; color: white !important; font-weight: 600 !important; font-size: 0.88rem !important; border-radius: 9999px !important; box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important; text-decoration: none !important; white-space: nowrap !important; }
+    #ui-badge { display: inline-flex; align-items: center; background: rgba(193,39,45,0.08) !important; color: #c1272d !important; padding: 0.28rem 0.85rem !important; border-radius: 9999px !important; border: 1px solid rgba(193,39,45,0.18) !important; }
+    .profeps-footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important; color: white !important; padding: 3rem 1.5rem 0 !important; margin-top: 3.5rem !important; text-align: left !important; }
+    .profeps-footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.25rem; padding-bottom: 2.25rem; }
+    .profeps-footer-brand img { height: 42px; filter: brightness(0) invert(1); margin-bottom: 0.75rem; }
+    .profeps-footer-brand p { color: rgba(255,255,255,0.65); font-size: 0.84rem; line-height: 1.6; }
+    .profeps-footer-col h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.45); margin-bottom: 0.9rem; }
+    .profeps-footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+    .profeps-footer-col ul li a { color: rgba(255,255,255,0.72); font-size: 0.84rem; text-decoration: none; }
+    .profeps-footer-col ul li a:hover { color: white; }
+    .profeps-footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.25rem 0; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; color: rgba(255,255,255,0.45); font-size: 0.8rem; flex-wrap: wrap; gap: 0.5rem; }
+    @media (max-width: 868px) { .nav-container { display: flex !important; justify-content: space-between !important; } .nav-menu { display: none !important; } .profeps-footer-inner { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+  <!-- Header ProfEPS.ma -->
+    <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo" aria-label="Prof EPS Maroc - Accueil">
+        <img src="/images/prof_eps.png" onerror="this.onerror=null;this.src='https://profeps.ma/images/prof_eps.png';" alt="Prof EPS Maroc" />
+      </a>
+      <div class="nav-menu">
+        <a href="/" class="nav-link">Accueil</a>
+        <a href="generateur.html" class="nav-link">Générateur</a>
+        <a href="calculateur-vma.html" class="nav-link">Calculateur VMA</a>
+        <a href="hub-outils-sport-performance.html" class="nav-link active">Hub Outils Sport</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+      </div>
+      <div class="nav-right">
+        <div dir="ltr" class="lang-switch" aria-label="Language selection"><button type="button" class="lang-btn active" id="btn-lang-fr" onclick="setToolLang('fr')">FR</button><span class="lang-sep">/</span><button type="button" class="lang-btn" id="btn-lang-en" onclick="setToolLang('en')">EN</button><span class="lang-sep">/</span><button type="button" class="lang-btn" id="btn-lang-ar" onclick="setToolLang('ar')">AR</button></div>
+        <a href="generateur.html" class="nav-cta"><span>✨ Créer un document</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-6">
+    <!-- En-tête de l'outil avec bouton Toggle Traducteur FR | EN | AR en haut à droite -->
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+      <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
+        <div class="space-y-1.5 max-w-2xl">
+          <div id="ui-badge" class="text-xs font-bold uppercase tracking-wider text-blue-600">Cluster 3 · Monitoring de la Charge Interne (Foster sRPE & ACWR)</div>
+          <h1 id="ui-title" class="text-2xl sm:text-3xl font-extrabold text-slate-900">Calculateur de Charge RPE Foster, Monotonie & Prévention Blessures (ACWR)</h1>
+          <p id="ui-sub" class="text-sm text-slate-600 leading-relaxed">Pilotez la charge hebdomadaire (Durée × RPE), la monotonie, la contrainte et maintenez votre ratio Aigu:Chronique (ACWR) dans la zone optimale (0.80–1.30).</p>
+        </div>
+
+        <!-- Bouton Toggle Traducteur en haut à droite -->
+        <div dir="ltr" class="inline-flex items-center gap-1 p-1 bg-slate-100 border border-slate-200 rounded-lg shrink-0 self-start">
+          <button type="button" onclick="setToolLang('fr')" id="btn-lang-fr" class="px-2.5 py-1 text-xs font-bold rounded-md bg-blue-600 text-white">FR</button>
+          <button type="button" onclick="setToolLang('en')" id="btn-lang-en" class="px-2.5 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900">EN</button>
+          <button type="button" onclick="setToolLang('ar')" id="btn-lang-ar" class="px-2.5 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900">AR عربي</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Corps du Calculateur -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      <!-- Tableau des 7 jours + Charge Chronique -->
+      <div class="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+        <div>
+          <label id="lbl-chronic" class="text-xs font-bold text-slate-700 block mb-1">Charge Chronique Moyenne (Moyenne des 4 dernières semaines en UA)</label>
+          <input id="inp-chronic" type="number" value="1850" min="200" max="6000" step="50" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold text-blue-600 tabular-nums" />
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead>
+              <tr class="border-b border-slate-200 text-slate-500 uppercase font-bold">
+                <th id="th-day" class="py-2 px-2">Jour</th>
+                <th id="th-dur" class="py-2 px-2 text-center">Durée (min)</th>
+                <th id="th-rpe" class="py-2 px-2 text-center">RPE (0–10)</th>
+                <th id="th-load" class="py-2 px-2 text-right">Charge (UA)</th>
+              </tr>
+            </thead>
+            <tbody id="days-tbody" class="divide-y divide-slate-100"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Résultats & Diagnostic ACWR -->
+      <div class="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+        <div class="grid grid-cols-2 gap-3 text-center">
+          <div class="p-4 bg-blue-50 border border-blue-200 rounded-xl">
+            <div id="lbl-res-acute" class="text-[11px] font-bold text-blue-800">Charge Hebdo Aiguë</div>
+            <div id="out-acute" dir="ltr" class="text-2xl font-black font-mono text-blue-700 tabular-nums mt-1">--</div>
+          </div>
+
+          <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl">
+            <div id="lbl-res-acwr" class="text-[11px] font-bold text-emerald-800">Ratio ACWR</div>
+            <div id="out-acwr" dir="ltr" class="text-2xl font-black font-mono text-emerald-700 tabular-nums mt-1">--</div>
+          </div>
+
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+            <div id="lbl-res-mono" class="text-[11px] font-bold text-slate-700">Monotonie</div>
+            <div id="out-mono" dir="ltr" class="text-2xl font-black font-mono text-slate-900 tabular-nums mt-1">--</div>
+            <span class="text-[10px] text-slate-500">Seuil &lt; 2.0</span>
+          </div>
+
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+            <div id="lbl-res-strain" class="text-[11px] font-bold text-slate-700">Contrainte (Strain)</div>
+            <div id="out-strain" dir="ltr" class="text-2xl font-black font-mono text-slate-900 tabular-nums mt-1">--</div>
+            <span class="text-[10px] text-slate-500">Charge × Monotonie</span>
+          </div>
+        </div>
+
+        <!-- Barre Visuelle ACWR -->
+        <div class="space-y-1">
+          <div class="h-3 w-full rounded-full overflow-hidden flex">
+            <div class="w-1/4 bg-sky-400" title="< 0.80"></div>
+            <div class="w-2/5 bg-emerald-500" title="0.80 - 1.30 Sweet Spot"></div>
+            <div class="w-1/6 bg-amber-400" title="1.31 - 1.50"></div>
+            <div class="w-1/5 bg-rose-500" title="> 1.50 Danger"></div>
+          </div>
+          <div dir="ltr" class="flex justify-between text-[10px] font-mono text-slate-500">
+            <span>0.50</span>
+            <span>0.80 (Optimal)</span>
+            <span>1.30</span>
+            <span>1.50+</span>
+          </div>
+        </div>
+
+        <!-- Boîte d'Interprétation -->
+        <div id="box-foster-interp" class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 leading-relaxed space-y-1.5"></div>
+      </div>
+    </div>
+  </main>
+
+    <footer class="profeps-footer">
+    <div class="profeps-footer-inner">
+      <div class="profeps-footer-brand">
+        <a href="/"><img src="/images/prof_eps.png" onerror="this.onerror=null;this.src='https://profeps.ma/images/prof_eps.png';" alt="Prof EPS" /></a>
+        <p><strong>Prof EPS (profeps.ma)</strong> — la plateforme intelligente d'outils et de ressources pédagogiques pour les professeurs d'EPS, les éducateurs sportifs et les passionnés de course à pied.</p>
+      </div>
+      <div class="profeps-footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="/">Accueil</a></li>
+          <li><a href="generateur.html">Générateur</a></li>
+          <li><a href="calculateur-vma.html">Calculateur VMA</a></li>
+          <li><a href="hub-outils-sport-performance.html">Hub 3 Clusters</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="profeps-footer-col">
+        <h4>Clusters Sport</h4>
+        <ul>
+          <li><a href="calculateur-vdot-asr-endurance.html">Calculateur VDOT</a></li>
+          <li><a href="calculateur-asr-reserve-vitesse.html">Réserve ASR</a></li>
+          <li><a href="calculateur-indice-endurance.html">Indice d'Endurance</a></li>
+          <li><a href="calculateur-frequence-cardiaque-karvonen.html">Fréquence Cardiaque</a></li>
+          <li><a href="calculateur-imc-sportif-masse-grasse.html">IMC Sportif</a></li>
+        </ul>
+      </div>
+      <div class="profeps-footer-col">
+        <h4>Terrain & Charge</h4>
+        <ul>
+          <li><a href="calculateur-chaleur-meteo-altitude.html">Chaleur & Altitude</a></li>
+          <li><a href="calculateur-gap-pente-nutrition.html">Pente GAP & Nutrition</a></li>
+          <li><a href="generateur-intermittent-hiit-cod.html">HIIT & COD 180°</a></li>
+          <li><a href="calculateur-charge-rpe-foster-acwr.html">Charge RPE & ACWR</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="profeps-footer-bottom">
+      <span>© 2026 Prof EPS (profeps.ma). Tous droits réservés.</span>
+      <span>Conçu pour les enseignants d'EPS et coureurs du monde entier</span>
+    </div>
+  </footer>
+
+  <script>
+    const DAYS = [
+      { fr: "Lundi", en: "Monday", ar: "الإثنين", dur: 60, rpe: 6 },
+      { fr: "Mardi", en: "Tuesday", ar: "الثلاثاء", dur: 75, rpe: 7 },
+      { fr: "Mercredi", en: "Wednesday", ar: "الأربعاء", dur: 40, rpe: 3 },
+      { fr: "Jeudi", en: "Thursday", ar: "الخميس", dur: 70, rpe: 8 },
+      { fr: "Vendredi", en: "Friday", ar: "الجمعة", dur: 0, rpe: 0 },
+      { fr: "Samedi", en: "Saturday", ar: "السبت", dur: 85, rpe: 7 },
+      { fr: "Dimanche", en: "Sunday", ar: "الأحد", dur: 45, rpe: 4 }
+    ];
+
+    const I18N = {
+      fr: {
+        badge: "Cluster 3 · Monitoring de la Charge Interne (Foster sRPE & ACWR)",
+        title: "Calculateur de Charge RPE Foster, Monotonie & Prévention Blessures (ACWR)",
+        sub: "Pilotez la charge hebdomadaire (Durée × RPE), la monotonie, la contrainte et maintenez votre ratio Aigu:Chronique (ACWR) dans la zone optimale (0.80–1.30).",
+        chronic: "Charge Chronique Moyenne (4 dernières semaines en UA)",
+        day: "Jour", dur: "Durée (min)", rpe: "RPE (0–10)", load: "Charge (UA)",
+        resAcute: "Charge Hebdo Aiguë", resAcwr: "Ratio ACWR", resMono: "Monotonie", resStrain: "Contrainte (Strain)",
+        diagTitle: "Diagnostic Prévention des Blessures & Interprétation :",
+        under: "Sous-entraînement / Affûtage (ACWR < 0.80) : Charge aiguë inférieure à votre habitude. Idéal en semaine pré-compétitive, sinon risque de désadaptation.",
+        opt: "Zone Optimale « Sweet Spot » (0.80 ≤ ACWR ≤ 1.30) : Progression idéale de la charge avec un risque statistique minimal de blessure musculaire ou tendineuse.",
+        warn: "Zone de Vigilance Surcharge (1.31 ≤ ACWR ≤ 1.50) : Augmentation rapide de la charge. Surveillez le sommeil et évitez une monotonie > 2.0.",
+        high: "Zone Critique / Risque Élevé de Blessure (ACWR > 1.50) : Pic de charge excessif (+50%). Intégrez immédiatement 1 à 2 jours de repos ou récupération active (Z1)."
+      },
+      en: {
+        badge: "Cluster 3 · Internal Training Load (Foster sRPE & ACWR Ratio)",
+        title: "Foster sRPE Training Load, Monotony & ACWR Injury Risk Calculator",
+        sub: "Monitor weekly internal load (Duration × RPE), monotony, strain, and keep your Acute:Chronic Workload Ratio (ACWR) within the 0.80–1.30 sweet spot.",
+        chronic: "Chronic Weekly Load Baseline (4-week average in AU)",
+        day: "Day", dur: "Duration (min)", rpe: "RPE (0–10)", load: "Load (AU)",
+        resAcute: "Acute Weekly Load", resAcwr: "ACWR Ratio", resMono: "Monotony", resStrain: "Training Strain",
+        diagTitle: "Injury Prevention Diagnostic & Coaching Interpretation:",
+        under: "Undertraining / Tapering Zone (ACWR < 0.80): Acute load is below chronic baseline. Ideal for race-week tapering, otherwise risk of detraining.",
+        opt: "Optimal 'Sweet Spot' (0.80 ≤ ACWR ≤ 1.30): Progressive overload with lowest statistical risk of non-contact soft-tissue injury.",
+        warn: "Overload Caution Zone (1.31 ≤ ACWR ≤ 1.50): Rapid workload spike. Monitor fatigue and keep monotony below 2.0.",
+        high: "High Injury Risk Spike (ACWR > 1.50): Excessive weekly load spike (>50%). Schedule immediate recovery or rest days."
+      },
+      ar: {
+        badge: "القطب 3 · مراقبة الحمل التدريبي (Foster sRPE) والوقاية من الإصابات (ACWR)",
+        title: "حاسبة الحمل التدريبي Foster sRPE، الرتابة ونسبة الوقاية من الإصابات ACWR",
+        sub: "حساب الحمل الأسبوعي (المدة × شدة الجهد RPE)، مؤشر الرتابة والإجهاد، والحفاظ على نسبة ACWR في المنطقة الآمنة (0.80–1.30).",
+        chronic: "متوسط الحمل الأسبوعي المزمن (لآخر 4 أسابيع)",
+        day: "اليوم", dur: "المدة (دقيقة)", rpe: "الشدة RPE (0–10)", load: "الحمل (وحدة)",
+        resAcute: "الحمل الأسبوعي الحاد", resAcwr: "نسبة ACWR", resMono: "الرتابة (Monotony)", resStrain: "الإجهاد (Strain)",
+        diagTitle: "تشخيص الوقاية من الإصابات وتفسير الحمل التدريبي:",
+        under: "حمل منخفض / فترة استشفاء (ACWR < 0.80): مناسب للأسبوع الذي يسبق المنافسة، أو يشير إلى نقص التحفيز التدريبي.",
+        opt: "المنطقة المثالية الآمنة (0.80 ≤ ACWR ≤ 1.30): تدرج مثالي في الحمل التدريبي مع أقل خطر للإصابات العضلية والمفصلية.",
+        warn: "منطقة الحذر (1.31 ≤ ACWR ≤ 1.50): ارتفاع سريع في الحمل التدريبي؛ يُنصح بمراقبة الاستشفاء وتجنب الرتابة العالية.",
+        high: "خطر إصابة مرتفع جداً (ACWR > 1.50): قفزة مفرطة في الحمل التدريبي؛ يجب إدراج أيام راحة أو استشفاء نشط فوراً."
+      }
+    };
+
+    let currentLang = 'fr';
+
+    function renderDaysTable() {
+      const tbody = document.getElementById('days-tbody');
+      tbody.innerHTML = DAYS.map((d, i) =>
+        '<tr class="hover:bg-slate-50">' +
+          '<td class="py-2 px-2 font-semibold text-slate-900">' + d[currentLang] + '</td>' +
+          '<td class="py-2 px-2 text-center"><input type="number" min="0" max="300" value="' + d.dur + '" oninput="updateDay(' + i + ', \'dur\', this.value)" class="w-20 bg-slate-50 border border-slate-300 rounded px-2 py-1 text-center font-mono font-bold tabular-nums" /></td>' +
+          '<td class="py-2 px-2 text-center"><input type="number" min="0" max="10" value="' + d.rpe + '" oninput="updateDay(' + i + ', \'rpe\', this.value)" class="w-16 bg-slate-50 border border-slate-300 rounded px-2 py-1 text-center font-mono font-bold tabular-nums" /></td>' +
+          '<td id="row-load-' + i + '" dir="ltr" class="py-2 px-2 text-right font-mono font-bold text-blue-600 tabular-nums">' + (d.dur * d.rpe) + ' UA</td>' +
+        '</tr>'
+      ).join('');
+    }
+
+    function updateDay(idx, field, val) {
+      const num = Math.max(0, parseFloat(val) || 0);
+      DAYS[idx][field] = field === 'rpe' ? Math.min(10, num) : num;
+      document.getElementById('row-load-' + idx).textContent = Math.round(DAYS[idx].dur * DAYS[idx].rpe) + ' UA';
+      computeTool();
+    }
+
+    function setToolLang(lang) {
+      currentLang = lang;
+      const root = document.getElementById('html-root');
+      root.lang = lang;
+      root.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      ['fr', 'en', 'ar'].forEach(c => {
+        document.getElementById('btn-lang-' + c).className = c === lang
+          ? 'px-2.5 py-1 text-xs font-bold rounded-md bg-blue-600 text-white'
+          : 'px-2.5 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900';
+      });
+      const t = I18N[lang];
+      document.getElementById('ui-badge').textContent = t.badge;
+      document.getElementById('ui-title').textContent = t.title;
+      document.getElementById('ui-sub').textContent = t.sub;
+      document.getElementById('lbl-chronic').textContent = t.chronic;
+      document.getElementById('th-day').textContent = t.day;
+      document.getElementById('th-dur').textContent = t.dur;
+      document.getElementById('th-rpe').textContent = t.rpe;
+      document.getElementById('th-load').textContent = t.load;
+      document.getElementById('lbl-res-acute').textContent = t.resAcute;
+      document.getElementById('lbl-res-acwr').textContent = t.resAcwr;
+      document.getElementById('lbl-res-mono').textContent = t.resMono;
+      document.getElementById('lbl-res-strain').textContent = t.resStrain;
+      renderDaysTable();
+      computeTool();
+    }
+
+    function computeTool() {
+      const chronic = Math.max(200, parseFloat(document.getElementById('inp-chronic').value) || 1850);
+      const loads = DAYS.map(d => d.dur * d.rpe);
+      const acute = loads.reduce((a, b) => a + b, 0);
+      const mean = acute / 7;
+      const variance = loads.reduce((acc, v) => acc + Math.pow(v - mean, 2), 0) / 7;
+      const stdDev = Math.sqrt(variance);
+      const mono = stdDev > 0 ? mean / stdDev : 1.0;
+      const strain = Math.round(acute * mono);
+      const acwr = acute / chronic;
+
+      document.getElementById('out-acute').textContent = Math.round(acute) + ' UA';
+      document.getElementById('out-acwr').textContent = acwr.toFixed(2);
+      document.getElementById('out-mono').textContent = mono.toFixed(2);
+      document.getElementById('out-strain').textContent = strain;
+
+      const t = I18N[currentLang];
+      let diag = t.opt;
+      if (acwr < 0.80) diag = t.under;
+      else if (acwr > 1.50) diag = t.high;
+      else if (acwr > 1.30) diag = t.warn;
+
+      document.getElementById('box-foster-interp').innerHTML =
+        '<div class="font-bold text-slate-900">' + t.diagTitle + '</div><p>' + diag + '</p>';
+    }
+
+    window.addEventListener('DOMContentLoaded', () => setToolLang('fr'));
+  </script>
+</body>
+</html>
+
