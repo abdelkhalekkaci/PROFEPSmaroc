@@ -456,55 +456,165 @@ nav.navbar, #navbar, .navbar-decoy {
   background: #1a1a2e !important; border-radius: 2px !important;
 }
 
-/* ═══ 4. HERO & BOUTON CTA CALCULER (STYLE VMA) ═══ */
+/* ═══ 4. HERO, CARTES ALIGNÉES & BOUTON CTA CALCULER (STYLE VMA PREMIUM) ═══ */
 .vma-hero {
   margin-top: 80px !important;
-  padding: 2.5rem 1.25rem 2rem !important;
-  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+  padding: 2.85rem 1.25rem 2.35rem !important;
+  background: radial-gradient(circle at 18% 20%, rgba(193, 39, 45, 0.07) 0%, transparent 45%),
+              radial-gradient(circle at 82% 80%, rgba(0, 98, 51, 0.07) 0%, transparent 45%),
+              linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
   border-bottom: 1px solid #e2e8f0 !important;
   text-align: center !important;
+  position: relative !important;
 }
 .hero-badge {
-  display: inline-flex !important; align-items: center !important; gap: 0.4rem !important;
-  background: rgba(193, 39, 45, 0.08) !important; color: #c1272d !important;
-  padding: 0.35rem 1rem !important; border-radius: 9999px !important;
-  font-size: 0.76rem !important; font-weight: 700 !important; text-transform: uppercase !important;
-  letter-spacing: 0.04em !important; margin-bottom: 0.75rem !important;
-  border: 1px solid rgba(193, 39, 45, 0.18) !important;
+  display: inline-flex !important; align-items: center !important; gap: 0.45rem !important;
+  background: linear-gradient(135deg, rgba(193, 39, 45, 0.1), rgba(0, 98, 51, 0.08)) !important;
+  color: #c1272d !important;
+  padding: 0.4rem 1.1rem !important; border-radius: 9999px !important;
+  font-size: 0.76rem !important; font-weight: 800 !important; text-transform: uppercase !important;
+  letter-spacing: 0.05em !important; margin-bottom: 0.85rem !important;
+  border: 1px solid rgba(193, 39, 45, 0.22) !important;
+  box-shadow: 0 2px 8px rgba(193, 39, 45, 0.08) !important;
 }
 .vma-hero h1 {
   font-family: var(--font-display) !important;
-  font-size: clamp(1.55rem, 3vw, 2.2rem) !important;
-  font-weight: 800 !important; color: #0f172a !important; margin: 0 0 0.55rem 0 !important;
+  font-size: clamp(1.6rem, 3.1vw, 2.3rem) !important;
+  font-weight: 800 !important; color: #0f172a !important; margin: 0 auto 0.65rem auto !important;
+  max-width: 880px !important; line-height: 1.22 !important; letter-spacing: -0.02em !important;
 }
 .vma-hero p {
-  font-size: 0.96rem !important; color: #64748b !important; max-width: 760px !important; margin: 0 auto !important;
+  font-size: 0.96rem !important; color: #475569 !important; max-width: 760px !important;
+  margin: 0 auto !important; line-height: 1.6 !important;
 }
+.peps-hero-pills {
+  display: flex !important; flex-wrap: wrap !important; justify-content: center !important;
+  gap: 0.55rem !important; margin-top: 1.15rem !important;
+}
+.peps-hero-pill {
+  display: inline-flex !important; align-items: center !important; gap: 0.35rem !important;
+  background: #ffffff !important; border: 1px solid #e2e8f0 !important; border-radius: 9999px !important;
+  padding: 0.3rem 0.8rem !important; font-size: 0.74rem !important; font-weight: 700 !important;
+  color: #334155 !important; box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+
+/* Cartes calculateurs avec barre supérieure bicolore Maroc et alignement strict des cases */
+main > div.max-w-3xl,
+#tool-results-panel > div,
+.peps-seo-guide-card {
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(203, 213, 225, 0.85) !important;
+  box-shadow: 0 12px 32px -8px rgba(15, 23, 42, 0.07), 0 2px 6px rgba(15, 23, 42, 0.03) !important;
+  background: #ffffff !important;
+}
+main > div.max-w-3xl::before {
+  content: '' !important;
+  position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important;
+  height: 4px !important;
+  background: linear-gradient(90deg, #c1272d 0%, #e11d48 50%, #006233 100%) !important;
+}
+
+/* Alignement parfait des grilles de champs (input / select) même si un label fait 2 lignes */
+main .grid {
+  align-items: stretch !important;
+}
+main .grid > div {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+}
+main .grid > div > label {
+  margin-bottom: 0.45rem !important;
+  line-height: 1.3 !important;
+  min-height: 2.1rem !important;
+  display: flex !important;
+  align-items: flex-end !important;
+}
+main input[type="number"],
+main select {
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  border-radius: 12px !important;
+  border: 1.5px solid #cbd5e1 !important;
+  background-color: #f8fafc !important;
+  padding: 0 0.9rem !important;
+  font-size: 0.95rem !important;
+  color: #0f172a !important;
+  transition: all 0.18s ease !important;
+  margin-top: auto !important;
+}
+main input[type="number"]:focus,
+main select:focus {
+  outline: none !important;
+  border-color: #c1272d !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 0 0 4px rgba(193, 39, 45, 0.12) !important;
+}
+
+/* Cartes de résultats KPI alignées en hauteur */
+#tool-results-panel .grid > div {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+}
+
+/* Bouton Call-To-Action (CTA) ultra-attrayant style Calculateur VMA */
 .peps-cta-btn {
   width: 100% !important;
-  padding: 0.95rem 1.5rem !important;
-  background: linear-gradient(135deg, #c1272d 0%, #a01f24 100%) !important;
+  padding: 1.05rem 1.6rem !important;
+  margin-top: 0.5rem !important;
+  background: linear-gradient(135deg, #c1272d 0%, #991b1b 55%, #006233 100%) !important;
+  background-size: 160% 160% !important;
   color: #ffffff !important;
   font-family: var(--font-display) !important;
-  font-size: 0.98rem !important;
+  font-size: 1.02rem !important;
   font-weight: 800 !important;
-  border: none !important;
+  letter-spacing: 0.01em !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
   border-radius: 14px !important;
   cursor: pointer !important;
-  box-shadow: 0 8px 20px -4px rgba(193, 39, 45, 0.4) !important;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease !important;
+  box-shadow: 0 10px 25px -4px rgba(193, 39, 45, 0.45), 0 4px 10px -2px rgba(0, 98, 51, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, filter 0.2s ease !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 0.55rem !important;
+  gap: 0.65rem !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+.peps-cta-btn::after {
+  content: '→' !important;
+  font-size: 1.15rem !important;
+  font-weight: 900 !important;
+  margin-left: 0.25rem !important;
+  transition: transform 0.2s ease !important;
+}
+html[dir="rtl"] .peps-cta-btn::after {
+  content: '←' !important;
+  margin-left: 0 !important;
+  margin-right: 0.25rem !important;
 }
 .peps-cta-btn:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 12px 26px -4px rgba(193, 39, 45, 0.5) !important;
-  filter: brightness(1.05) !important;
+  transform: translateY(-2.5px) scale(1.005) !important;
+  box-shadow: 0 16px 32px -5px rgba(193, 39, 45, 0.55), 0 6px 14px -2px rgba(0, 98, 51, 0.3) !important;
+  filter: brightness(1.07) !important;
+}
+.peps-cta-btn:hover::after {
+  transform: translateX(4px) !important;
+}
+html[dir="rtl"] .peps-cta-btn:hover::after {
+  transform: translateX(-4px) !important;
 }
 .peps-cta-btn:active {
-  transform: translateY(0) !important;
+  transform: translateY(0) scale(0.995) !important;
 }
 @keyframes pepsFadeSlideUp {
   from { opacity: 0; transform: translateY(14px); }
@@ -754,20 +864,202 @@ const SHARED_NAV_JS = `(function() {
   }
 })();`;
 
+const SEO_GUIDES = {
+  'calculateur-vdot-asr-endurance.html': {
+    howFr: "1. Choisissez votre mode d'entrée : soit un chrono récent sur course étalonnée (1 500 m, 3 000 m, 5 km, 10 km, Semi-Marathon ou Marathon), soit directement votre VMA (km/h) mesurée lors d'un test terrain (Luc Léger, Vameval, Demi-Cooper). 2. Indiquez votre âge et votre sexe biologique pour situer votre VO2 Max dans les barèmes officiels de l'ACSM. 3. Cliquez sur le bouton Calculer pour afficher votre VO2 Max en ml/kg/min, votre score VDOT (Jack Daniels), vos 5 zones d'allures d'entraînement et vos chronos prédits.",
+    howEn: "1. Select your input mode: either a recent race time (1500m to Marathon) or your field-tested MAS/VMA (km/h). 2. Enter your age and biological sex for ACSM percentile ranking. 3. Click Calculate to unlock your VO2 Max (ml/kg/min), Jack Daniels VDOT score, 5 training pace zones, and equivalent race predictions.",
+    howAr: "1. اختر طريقة الحساب: إما انطلاقاً من توقيت سباق رسمي (من 1500 متر إلى الماراثون) أو من سرعة VMA المقاسة في اختبار ميداني. 2. أدخل عمرك وجنسك لمقارنة نتيجتك بمعايير الكلية الأمريكية للطب الرياضي (ACSM). 3. اضغط على زر الحساب لإظهار قيمة VO2 Max ومناطق التدريب الخمس وتوقعات السباقات.",
+    inputsFr: "Chrono de course (Heures, Minutes, Secondes) : permet d'évaluer le coût énergétique réel et la fraction d'oxygène soutenue. VMA (km/h) : Vitesse Maximale Aérobie convertie via l'équation de Léger & Mercier (VO2 Max = 3,5 × VMA). Âge & Sexe : indispensables pour interpréter votre plafond aérobie selon les normes physiologiques par tranche d'âge.",
+    inputsEn: "Race Time (h/m/s): computes oxygen cost and fractional utilization. MAS / VMA (km/h): Maximal Aerobic Speed converted via Léger & Mercier (VO2 Max = 3.5 × MAS). Age & Sex: required to classify your aerobic ceiling against ACSM normative tables.",
+    inputsAr: "توقيت السباق: يحسب التكلفة الطاقية ونسبة استغلال الأكسجين. سرعة VMA (كم/س): تحول وفق معادلة ليجير ومرسييه (VO2 Max = 3.5 × VMA). العمر والجنس: ضروريان لتصنيف مستواك مقارنة بالمعايير العالمية.",
+    faqQFr: "Quelle est la différence entre VO2 Max, VMA et VDOT en course à pied ?",
+    faqAFr: "Le VO2 Max (en ml/kg/min) mesure le débit maximal d'oxygène que votre organisme peut consommer par minute. La VMA (en km/h) est la vitesse de course atteinte à 100 % du VO2 Max. Le VDOT (Jack Daniels) intègre à la fois votre VO2 Max et votre économie de course (coût énergétique de la foulée) pour prédire vos chronos du 1 500 m au marathon."
+  },
+  'calculateur-frequence-cardiaque-karvonen.html': {
+    howFr: "1. Renseignez votre âge en années. 2. Mesurez et indiquez votre Fréquence Cardiaque de Repos (FC Repos) prise le matin au réveil allongé pendant 1 minute. 3. Si vous connaissez votre FC Maximale réelle mesurée sur le terrain ou sur tapis, saisissez-la ; sinon laissez le champ vide pour appliquer la formule scientifique de Tanaka (208 − 0,7 × Âge). 4. Cliquez sur Calculer pour obtenir vos 5 zones cardiaques de Karvonen (Z1 à Z5).",
+    howEn: "1. Enter your age. 2. Input your morning Resting Heart Rate (bpm). 3. Optionally enter your field-measured Max HR, or leave blank to use the validated Tanaka formula (208 − 0.7 × Age). 4. Click Calculate to display your 5 Karvonen Heart Rate Reserve zones (Z1–Z5).",
+    howAr: "1. أدخل عمرك بالسنوات. 2. أدخل نبض القلب في وقت الراحة صباحاً عند الاستيقاظ (bpm). 3. يمكنك إدخال أقصى نبض مقاس ميدانياً أو تركه فارغاً لتطبيق معادلة تاناكا الدقيقة (208 − 0.7 × العمر). 4. اضغط على زر الحساب للحصول على مناطق التدريب الخمس.",
+    inputsFr: "Âge : détermine la baisse physiologique naturelle de la FC Max avec le temps. FC de Repos (bpm) : indicateur clé du tonus vagal parasympathique et du volume d'éjection systolique (plus elle est basse chez l'athlète, plus le cœur est endurant). FC de Réserve (FCR = FC Max − FC Repos) : amplitude cardiaque utile utilisée par la formule de Karvonen.",
+    inputsEn: "Age: estimates chronological Max HR decline. Resting HR (bpm): reflects parasympathetic vagal tone and stroke volume efficiency. Heart Rate Reserve (HRR = Max HR − Rest HR): usable cardiac range matched to % VO2 Max.",
+    inputsAr: "العمر: يحدد الانخفاض الطبيعي لأقصى نبض مع التقدم في السن. نبض الراحة (bpm): يعكس كفاءة عضلة القلب وحجم الضخ القلبي. احتياطي النبض (HRR = الأقصى − الراحة): المدى الفعلي المعتمد في معادلة كارفونين.",
+    faqQFr: "Pourquoi utiliser la méthode de Karvonen plutôt que le simple pourcentage de FC Max ?",
+    faqAFr: "Le calcul classique en % de FC Max ignore votre fréquence cardiaque de repos et sous-estime vos zones d'entraînement. En prenant en compte la Fréquence Cardiaque de Réserve (FC Max − FC Repos), la formule de Karvonen aligne exactement vos zones Z1 à Z5 sur votre pourcentage de réserve d'oxygène (% VO2 Max)."
+  },
+  'calculateur-imc-sportif-masse-grasse.html': {
+    howFr: "1. Entrez votre poids corporel en kilogrammes (kg) pesé le matin à jeun. 2. Indiquez votre taille exacte en centimètres (cm). 3. Précisez votre âge et votre sexe biologique (Homme ou Femme). 4. Cliquez sur Calculer pour obtenir votre Indice de Masse Corporelle (IMC), votre taux de masse grasse estimé (IMG %), votre masse maigre active et votre positionnement dans le barème de référence officiel (Normal vs Anormal).",
+    howEn: "1. Enter your morning body weight in kilograms (kg). 2. Enter your height in centimeters (cm). 3. Select your age and biological sex. 4. Click Calculate to get your BMI, estimated Body Fat % (IMG), active lean body mass, and your exact classification on the official WHO & Athletic reference scale.",
+    howAr: "1. أدخل وزنك بالكيلوغرام (كغ) صباحاً. 2. أدخل طولك بالسنتيمتر (سم). 3. حدد عمرك وجنسك (ذكر أو أنثى). 4. اضغط على زر الحساب لمعرفة مؤشر كتلة الجسم (IMC)، نسبة الدهون (IMG)، الكتلة العضلية الصافية وموقعك في جدول المعايير الصحية والرياضية.",
+    inputsFr: "Poids (kg) & Taille (cm) : permettent de calculer l'IMC selon la formule officielle d'Adolphe Quetelet (Poids / Taille² en mètres) ainsi que la plage de poids normal (18,5 à 24,9 kg/m²). Âge & Sexe : indispensables pour estimer l'Indice de Masse Grasse (IMG selon l'équation de Deurenberg) car la répartition physiologique entre masse musculaire et tissu adipeux diffère entre l'homme et la femme.",
+    inputsEn: "Weight (kg) & Height (cm): compute BMI (Weight / Height²) and your healthy weight range in kg. Age & Sex: required by Deurenberg's equation to estimate body fat percentage (IMG) and Fat-Free Mass Index (FFMI).",
+    inputsAr: "الوزن (كغ) والطول (سم): لحساب مؤشر كتلة الجسم (الوزن ÷ مربع الطول بالمتر) ونطاق الوزن الطبيعي. العمر والجنس: ضروريان لحساب نسبة الدهون في الجسم (IMG) حسب معادلة دورينبيرغ والتمييز بين الكتلة العضلية والدهون.",
+    faqQFr: "Quel est l'IMC normal et pourquoi le barème IMC classique peut-il tromper un sportif ?",
+    faqAFr: "Selon l'OMS, un IMC normal se situe entre 18,5 et 24,9 kg/m². En dessous de 18,5 on parle d'insuffisance pondérale (maigreur), entre 25,0 et 29,9 de surpoids, et à partir de 30,0 d'obésité. Toutefois, chez un sportif musclé, l'IMC peut dépasser 25 kg/m² tout en ayant un faible taux de masse grasse (IMG < 15 % chez l'homme, < 22 % chez la femme) : c'est pourquoi notre calculateur croise le barème IMC avec l'IMG et l'indice musculaire FFMI."
+  },
+  'calculateur-chaleur-meteo-altitude.html': {
+    howFr: "1. Renseignez la température de l'air à l'ombre (°C) et le taux d'humidité relative (%). 2. Indiquez l'altitude du lieu d'entraînement ou de compétition en mètres (0 m pour le niveau de la mer, 1 600 m pour Ifrane, etc.). 3. Entrez votre allure habituelle en secondes par kilomètre (ex : 270 s = 4:30/km). 4. Cliquez sur Calculer pour obtenir votre ralentissement physiologique, votre allure cible ajustée et votre besoin hydrique.",
+    howEn: "1. Enter ambient shade temperature (°C) and relative humidity (%). 2. Input altitude in meters. 3. Enter your normal cool-weather pace in seconds per km (e.g., 270 = 4:30/km). 4. Click Calculate to get your dew point, pace slowdown %, adjusted pace, and hourly hydration/sodium targets.",
+    howAr: "1. أدخل درجة الحرارة في الظل (°C) ونسبة الرطوبة (%). 2. حدد الارتفاع عن سطح البحر بالمتر (مثلاً 1650م بمدينة إفران). 3. أدخل إيقاعك المعتاد بالثواني لكل كم (270 ثانية = 4:30/كم). 4. اضغط على زر الحساب لمعرفة الإيقاع المعدل وخطة شرب الماء والأملاح.",
+    inputsFr: "Température (°C) & Humidité (%) : déterminent le Point de Rosée (Dew Point), véritable juge de l'efficacité d'évaporation de la sueur. Altitude (m) : mesure la baisse de pression partielle d'oxygène (hypoxie) qui réduit le VO2 Max au-delà de 900 m. Allure de base (sec/km) : vitesse de référence par temps frais (10–14 °C) servant à calculer l'allure corrigée.",
+    inputsEn: "Temperature (°C) & Humidity (%): compute the Dew Point and evaporative cooling efficiency. Altitude (m): accounts for hypoxia above 900m. Base Pace (sec/km): cool-weather reference pace adjusted for cardiac drift.",
+    inputsAr: "درجة الحرارة والرطوبة: تحددان نقطة الندى وكفاءة تبخر العرق لتبريد الجسم. الارتفاع (متر): يقيس نقص ضغط الأكسجين فوق 900 متر. الإيقاع المرجعي: سرعتك في الطقس المعتدل لتعديلها بدقة.",
+    faqQFr: "Comment la chaleur, l'humidité et l'altitude ralentissent-elles votre allure de course ?",
+    faqAFr: "Lorsque la température et le point de rosée grimpent, une partie importante du débit sanguin est détournée vers la peau pour refroidir le corps (dérive cardiaque), réduisant l'oxygène disponible pour les muscles. En altitude (> 1 000 m), la baisse de pression barométrique diminue le VO2 Max d'environ 1,5 à 2 % tous les 300 mètres."
+  },
+  'generateur-intermittent-hiit-cod.html': {
+    howFr: "1. Indiquez la VMA (km/h) de l'élève, du joueur ou du groupe homogène. 2. Choisissez la durée de la fraction d'effort en secondes (ex : 10 s, 15 s ou 30 s) et le pourcentage de VMA visé (ex : 100 % à 115 % VMA). 3. Indiquez la longueur maximale disponible sur votre terrain ou gymnase (ex : 20 m ou 40 m ; mettez 0 pour une piste d'athlétisme sans demi-tour). 4. Cliquez sur Calculer pour obtenir la distance exacte où placer vos plots.",
+    howEn: "1. Enter athlete or group MAS/VMA (km/h). 2. Set work interval duration in seconds (10s, 15s, 30s) and target % MAS (100%–120%). 3. Enter court shuttle length in meters (e.g., 20m or 40m; set 0 for a linear track). 4. Click Calculate to get linear and 180° COD-adjusted cone distances.",
+    howAr: "1. أدخل سرعة VMA للتلميذ أو المجموعة (كم/س). 2. حدد مدة الجهد بالثواني (15 أو 30 ثانية) ونسبة الشدة المستهدفة (% من VMA). 3. أدخل طول الملعب المتاح بالمتر (مثلاً 20م أو 40م؛ ضع 0 للمضمار المستقيم). 4. اضغط على زر الحساب لمعرفة مسافة وضع الأقماع بدقة.",
+    inputsFr: "VMA (km/h) & Intensité (% VMA) : fixent la vitesse mécanique cible en mètres par seconde (m/s). Durée d'effort (s) : temps de course entre deux coups de sifflet. Longueur Navette Terrain (m) : applique l'équation biomécanique de Martin Buchheit (~0,72 s perdue par demi-tour à 180°) pour corriger la distance de plots en sports collectifs et EPS.",
+    inputsEn: "MAS (km/h) & Intensity (%): set mechanical target speed (m/s). Work Duration (s): interval duration. Shuttle Length (m): applies Buchheit's 180° change-of-direction time penalty (~0.72s per turn) for court sports and PE.",
+    inputsAr: "سرعة VMA ونسبة الشدة: تحددان السرعة بالمتر في الثانية. مدة الجهد: زمن الجري بين الصافرتين. طول المكوك بالمتر: يطبق معادلة بوخيت لتعويض الوقت الضائع في الفرملة والدوران 180° (~0.72 ثانية لكل دوران).",
+    faqQFr: "Pourquoi faut-il réduire la distance des plots lors d'un 15/15 en navette avec demi-tours (COD 180°) ?",
+    faqAFr: "Sur un terrain de handball, de basket ou une cour d'établissement scolaire, chaque demi-tour à 180° oblige à freiner puis relancer, ce qui coûte environ 0,72 seconde et un surplus d'énergie musculaire excentrique. Sans réduction de la distance des plots, l'élève est en surcharge lactique précoce."
+  },
+  'calculateur-charge-rpe-foster-acwr.html': {
+    howFr: "1. Calculez la charge de chaque séance selon la méthode de Carl Foster : Durée de la séance (en minutes) × RPE ressenti (de 1 à 10 sur l'échelle de Borg CR10). 2. Additionnez vos charges des 7 derniers jours pour obtenir la Charge Aiguë (en Unités Arbitraires UA). 3. Indiquez votre Charge Chronique (moyenne hebdomadaire des 4 dernières semaines). 4. Cliquez sur Calculer pour obtenir votre ratio ACWR et votre plafond sécuritaire.",
+    howEn: "1. Multiply session duration (minutes) by Borg CR10 RPE (1–10) for each workout. 2. Sum the last 7 days to enter your Acute Load (AU). 3. Enter your 4-week rolling average Weekly Chronic Load (AU). 4. Click Calculate to check your ACWR injury risk ratio and next week's safe ceiling.",
+    howAr: "1. احسب حمل كل حصة بضرب المدة (بالدقائق) في شدة الجهد المدرك RPE (من 1 إلى 10). 2. اجمع حمل آخر 7 أيام لإدخال الحمل الحاد (UA). 3. أدخل المتوسط الأسبوعي لآخر 4 أسابيع (الحمل المزمن). 4. اضغط على زر الحساب لمعرفة نسبة ACWR ومستوى الوقاية من الإصابات.",
+    inputsFr: "Charge Aiguë 7 jours (UA) : reflète la fatigue récente accumulée sur la semaine en cours. Charge Chronique 28 jours (UA) : représente l'état de préparation physique (« fitness ») construit sur le dernier mois. Ratio ACWR (Aigu / Chronique) : indicateur de Tim Gabbett identifiant la zone optimale (« Sweet Spot » entre 0,80 et 1,30) et la zone de danger (> 1,50).",
+    inputsEn: "Acute Load (7d AU): recent weekly fatigue. Chronic Load (28d AU): 4-week rolling fitness baseline. ACWR Ratio: Gabbett's workload index identifying the 0.80–1.30 sweet spot vs >1.50 injury danger zone.",
+    inputsAr: "الحمل الحاد (7 أيام): يعبر عن الإجهاد الحديث للأسبوع الحالي. الحمل المزمن (4 أسابيع): يعكس مستوى الجاهزية البدنية التراكمي. نسبة ACWR: مؤشر غابيت لتحديد المنطقة الآمنة (0.80 إلى 1.30) وتفادي منطقة الخطر (> 1.50).",
+    faqQFr: "Quel est le ratio ACWR idéal pour progresser sans se blesser ?",
+    faqAFr: "Selon les travaux de Tim Gabbett et Carl Foster, le ratio ACWR optimal (« Sweet Spot ») se situe entre 0,80 et 1,30. Lorsque le ratio dépasse 1,50 (hausse brutale de plus de 50 % de la charge hebdomadaire), le risque de blessure musculaire ou tendineuse double dans les 7 à 14 jours suivants."
+  },
+  'calculateur-asr-reserve-vitesse.html': {
+    howFr: "1. Indiquez votre VMA / MAS (en km/h) obtenue lors d'un test aérobie progressif. 2. Renseignez votre Vitesse Maximale de Sprint (MSS en km/h), mesurée par exemple sur un sprint de 20 m ou 30 m lancé à vitesse maximale. 3. Cliquez sur Calculer pour obtenir votre Réserve de Vitesse Anaérobie (ASR = MSS − VMA), votre ratio de vitesse (profilage fibres lentes vs rapides) et vos vitesses cibles de +10 % à +50 % ASR.",
+    howEn: "1. Enter your MAS / VMA (km/h). 2. Input your Maximal Sprint Speed (MSS in km/h) measured over a flying 20–30m sprint. 3. Click Calculate to unlock your Anaerobic Speed Reserve (ASR = MSS − MAS), speed ratio fiber profile, and 10%–50% ASR supramaximal HIIT targets.",
+    howAr: "1. أدخل سرعة VMA الخاصة بك (كم/س). 2. أدخل أقصى سرعة انطلاق في السبرينت (MSS بالكم/س) مقاسة في مسافة 20 أو 30 متر مع انطلاق مسبق. 3. اضغط على زر الحساب لمعرفة احتياطي السرعة اللاهوائية (ASR) وتصنيف أليافك العضلية.",
+    inputsFr: "VMA (km/h) : limite supérieure du système aérobie (100 % VO2 Max). Vitesse Max Sprint — MSS (km/h) : plafond locomoteur neuromusculaire et alactique. Réserve Anaérobie (ASR = MSS − VMA) : marge de vitesse disponible au-dessus de la VMA (modèle de Buchheit & Sandford) permettant d'individualiser les séances intermittentes supramaximales.",
+    inputsEn: "MAS (km/h): aerobic ceiling. Max Sprint Speed — MSS (km/h): neuromuscular speed ceiling. Anaerobic Speed Reserve (ASR = MSS − MAS): supramaximal speed bandwidth used to equalize HIIT strain across athletes.",
+    inputsAr: "سرعة VMA (كم/س): السقف الهوائي. أقصى سرعة سبرينت MSS (كم/س): السقف العصبي العضلي اللاهوائي. احتياطي السرعة (ASR = MSS − VMA): الهامش الفاصل لتخصيص شدة التمارين فوق القصوى بدقة.",
+    faqQFr: "Pourquoi prescrire le fractionné court en % d'ASR plutôt qu'en % de VMA au-delà de 100 % VMA ?",
+    faqAFr: "Deux coureurs ou joueurs ayant la même VMA (ex : 16 km/h) peuvent avoir une vitesse de sprint maximal très différente (27 km/h vs 34 km/h). À 115 % de VMA (18,4 km/h), le profil endurant puise à 22 % de sa réserve anaérobie tandis que le sprinteur n'utilise que 13 % de son ASR : calibrer à +25 % d'ASR garantit une fatigue physiologique équivalente."
+  },
+  'calculateur-indice-endurance.html': {
+    howFr: "1. Saisissez votre VMA (en km/h). 2. Indiquez la distance exacte d'une course officielle ou d'un test chronométré (en mètres, ex : 3 000 m, 5 000 m, 10 000 m, 21 097 m). 3. Entrez le temps total réalisé exprimé en minutes (ex : 42,5 min pour 42 min 30 s). 4. Cliquez sur Calculer pour obtenir votre Indice d'Endurance de Péronnet & Thibault (IE), le % de VMA soutenu et votre axe prioritaire d'entraînement.",
+    howEn: "1. Enter your MAS / VMA (km/h). 2. Input the race distance in meters (e.g., 5000m, 10000m). 3. Enter your finish time in decimal minutes (e.g., 42.5 for 42m30s). 4. Click Calculate to get your Péronnet & Thibault Endurance Index (EI), sustained % MAS, and training priority.",
+    howAr: "1. أدخل سرعة VMA (كم/س). 2. أدخل مسافة السباق بالمتر (مثلاً 5000م أو 10000م). 3. أدخل الزمن المحقق بالدقائق (مثلاً 42.5 دقيقة). 4. اضغط على زر الحساب لمعرفة مؤشر التحمل (IE) ونسبة VMA المحافظ عليها وأولوية تدريبك.",
+    inputsFr: "VMA (km/h) : vitesse soutenable pendant ~6 minutes (100 % VMA). Distance (m) & Temps réalisé (min) : permettent de calculer le pourcentage de VMA maintenu sur la durée et la pente logarithmique de baisse de vitesse (formule : IE = (%VMA − 100) / ln(Temps / 6 min)).",
+    inputsEn: "MAS (km/h): 6-minute reference aerobic speed. Distance (m) & Finish Time (min): compute fractional MAS utilization and logarithmic decay slope (EI = (%MAS − 100) / ln(Time / 6 min)).",
+    inputsAr: "سرعة VMA (كم/س): السرعة المرجعية لمدة 6 دقائق. المسافة (متر) والزمن (دقائق): لحساب النسبة المئوية من VMA المحافظ عليها وميل انخفاض السرعة اللوغاريتمي (نموذج بيروني وتيبو).",
+    faqQFr: "Comment interpréter son Indice d'Endurance (IE) entre -4 et -12 ?",
+    faqAFr: "Plus l'Indice d'Endurance est proche de -4 (ex : -5,0 à -6,0), plus votre capacité à maintenir un haut pourcentage de VMA longtemps est exceptionnelle (seuil lactique très élevé). S'il est inférieur à -8,0, votre VMA est sous-exploitée sur le long : vous devez prioriser le travail au seuil anaérobie (Tempo / Zone T) et l'endurance fondamentale."
+  },
+  'calculateur-gap-pente-nutrition.html': {
+    howFr: "1. Indiquez le pourcentage de pente moyen de la section (+6 % pour une montée, -5 % pour une descente). 2. Entrez votre allure de référence sur le plat en secondes par kilomètre (ex : 270 s = 4:30/km). 3. Précisez la durée totale prévue de votre sortie, trail ou marathon en minutes. 4. Cliquez sur Calculer pour obtenir votre Allure Ajustée à la Pente (GAP selon Minetti) et votre plan de ravitaillement glucidique (g/h).",
+    howEn: "1. Enter slope gradient percentage (+% uphill, -% downhill). 2. Input your flat-ground reference pace in seconds per km (e.g., 270 = 4:30/km). 3. Enter total workout or race duration in minutes. 4. Click Calculate to get your Minetti Grade Adjusted Pace (GAP) and hourly carbohydrate fueling plan.",
+    howAr: "1. أدخل نسبة انحدار الطريق بالمئة (+% للصعود، -% للهبوط). 2. أدخل إيقاعك على الأرض المنبسطة بالثواني لكل كم (270 = 4:30/كم). 3. حدد المدة الإجمالية للسباق بالدقائق. 4. اضغط على زر الحساب لمعرفة الإيقاع المعدل للمنحدر وخطة الكربوهيدرات.",
+    inputsFr: "Pente (%) : dénivelé vertical divisé par la distance horizontale (ex : +60 m sur 1 km = +6 %). Allure sur le plat (sec/km) : vitesse étalon convertie via l'équation polynomiale du coût énergétique de Minetti (2002). Durée totale (min) : détermine la cible d'oxydation exogène de glucides (30, 60 ou 90 g/h) selon les recommandations de l'ACSM et d'Asker Jeukendrup.",
+    inputsEn: "Slope (%): vertical gain/loss per 100m horizontal distance. Flat Pace (sec/km): converted via Minetti's (2002) locomotion energy cost equation. Duration (min): sets exogenous carbohydrate intake (30–90 g/h).",
+    inputsAr: "نسبة الانحدار (%): الارتفاع العمودي لكل 100 متر أفقي. الإيقاع المنبسط: يحول وفق معادلة مينيتي للتكلفة الطاقية في الصعود والهبوط. مدة الجهد: تحدد حاجيات الكربوهيدرات في الساعة (30 إلى 90 غ/ساعة).",
+    faqQFr: "Qu'est-ce que l'Allure Ajustée à la Pente (GAP) en course sur route et en trail ?",
+    faqAFr: "L'Allure Ajustée à la Pente (Grade Adjusted Pace ou GAP) calcule l'allure en montée ou en descente qui exige exactement la même dépense métabolique (VO2) que votre allure sur terrain plat. Chaque +1 % de pente en montée augmente le coût énergétique d'environ 3,3 à 3,5 %."
+  },
+  'hub-outils-sport-performance.html': {
+    howFr: "1. Identifiez votre besoin pédagogique ou sportif parmi nos 3 pôles scientifiques : Cluster 1 (Performance Aérobie : VMA, VO2 Max VDOT, Réserve ASR, Indice d'Endurance), Cluster 2 (Physiologie & Environnement : Fréquence Cardiaque Karvonen, IMC & Masse Grasse, Chaleur/Altitude, Allure Pente GAP) et Cluster 3 (Terrain EPS & Charge : Intermittent HIIT COD 180°, Charge RPE Foster & ACWR). 2. Cliquez sur l'outil souhaité, renseignez vos mesures et cliquez sur Calculer.",
+    howEn: "1. Choose the calculator matching your goal across our 3 sports science clusters: Cluster 1 (MAS, VO2 Max VDOT, ASR, Endurance Index), Cluster 2 (Karvonen HR, BMI & Body Fat, Heat/Altitude, GAP & Nutrition), and Cluster 3 (HIIT 180° COD, Foster RPE & ACWR). 2. Open the tool, enter your data, and click Calculate.",
+    howAr: "1. اختر الأداة المناسبة لهدفك التربوي أو التدريبي ضمن الأقطاب العلمية الثلاثة: القطب 1 (القدرات الهوائية VMA و VO2 Max و ASR ومؤشر التحمل)، القطب 2 (نبضات القلب كارفونين، مؤشر كتلة الجسم IMC، الحرارة والارتفاع، والمنحدرات)، والقطب 3 (التدريب المتقطع HIIT وحمل التدريب RPE ACWR). 2. افتح الحاسبة وأدخل معطياتك ثم اضغط على احسب.",
+    inputsFr: "Tests de terrain EPS (Luc Léger, Demi-Cooper, Vameval), chronos de course (1 500 m au Marathon), paramètres anthropométriques (Poids, Taille, Âge, Sexe), données cardio (FC Repos, FC Max), météo (Température, Humidité, Altitude) et suivi de charge (Durée × RPE).",
+    inputsEn: "Field test scores (Beep test, Cooper, Vameval), race times, anthropometric measurements (Weight, Height, Age, Sex), heart rate metrics, weather/altitude inputs, and sRPE training loads.",
+    inputsAr: "نتائج الاختبارات الميدانية (لوك ليجير، نصف كوبر، فاميفال)، أزمنة السباقات، القياسات الجسمية (الوزن، الطول، العمر، الجنس)، نبض القلب، بيانات الطقس والارتفاع، وحمل التدريب.",
+    faqQFr: "Pourquoi utiliser les calculateurs scientifiques Prof EPS Maroc pour l'EPS et la course à pied ?",
+    faqAFr: "Tous nos outils reposent sur les équations de référence internationale (Léger & Mercier, Jack Daniels VDOT, Karvonen, Tanaka, Deurenberg, Buchheit COD 180°, Péronnet & Thibault, Minetti, Foster & Gabbett) et fournissent une interprétation immédiate en Français, Anglais et Arabe conforme aux orientations pédagogiques d'EPS."
+  }
+};
+
+function buildSeoGuideSection(config) {
+  const g = SEO_GUIDES[config.filename] || SEO_GUIDES['hub-outils-sport-performance.html'];
+  const kwList = (config.keywordsFr || 'calculateur sport, vma, vo2 max, eps maroc').split(',').map((k) => k.trim()).filter(Boolean);
+  const kwBadges = kwList.map((kw) => `<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200"># ${kw}</span>`).join('\n          ');
+
+  return `
+    <!-- GUIDE D'UTILISATION, EXPLICATION DES PARAMÈTRES & SEO -->
+    <section class="peps-seo-guide-card max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 mt-8" aria-labelledby="seo-guide-title">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4">
+        <div class="flex items-center gap-2.5">
+          <span class="w-8 h-8 rounded-lg bg-red-50 border border-red-200 text-red-700 flex items-center justify-center font-black text-sm shrink-0">📘</span>
+          <h2 id="seo-guide-title" class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight" data-i18n-fr="Guide d'Utilisation & Explication Scientifique des Paramètres" data-i18n-en="User Guide & Scientific Explanation of Input Parameters" data-i18n-ar="دليل الاستخدام والتفسير العلمي للمعطيات المطلوبة">Guide d'Utilisation & Explication Scientifique des Paramètres</h2>
+        </div>
+        <span class="text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full self-start sm:self-auto" data-i18n-fr="Référentiel Sport & EPS" data-i18n-en="Sports Science & PE Standard" data-i18n-ar="مرجع علوم الرياضة والتربية البدنية">Référentiel Sport & EPS</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+          <h3 class="text-xs font-extrabold uppercase tracking-wider text-red-700" data-i18n-fr="1. Comment utiliser ce calculateur étape par étape ?" data-i18n-en="1. Step-by-Step Calculator Guide" data-i18n-ar="1. كيفية استخدام هذه الحاسبة خطوة بخطوة">1. Comment utiliser ce calculateur étape par étape ?</h3>
+          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed" data-i18n-fr="${g.howFr.replace(/"/g, '&quot;')}" data-i18n-en="${g.howEn.replace(/"/g, '&quot;')}" data-i18n-ar="${g.howAr.replace(/"/g, '&quot;')}">${g.howFr}</p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+          <h3 class="text-xs font-extrabold uppercase tracking-wider text-emerald-800" data-i18n-fr="2. Comprendre les informations demandées" data-i18n-en="2. Understanding the Requested Inputs" data-i18n-ar="2. شرح المعلومات والمعطيات المطلوبة">2. Comprendre les informations demandées</h3>
+          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed" data-i18n-fr="${g.inputsFr.replace(/"/g, '&quot;')}" data-i18n-en="${g.inputsEn.replace(/"/g, '&quot;')}" data-i18n-ar="${g.inputsAr.replace(/"/g, '&quot;')}">${g.inputsFr}</p>
+        </div>
+      </div>
+
+      <div class="p-4 rounded-xl bg-amber-50/60 border border-amber-200/80 space-y-1.5">
+        <h3 class="text-xs font-extrabold uppercase tracking-wider text-amber-900" data-i18n-fr="💡 Question Fréquente & Point Clé Scientifique" data-i18n-en="💡 Frequently Asked Question & Key Takeaway" data-i18n-ar="💡 سؤال شائع وخلاصة علمية">${g.faqQFr}</h3>
+        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">${g.faqAFr}</p>
+      </div>
+
+      <div class="pt-2 border-t border-slate-100 space-y-2">
+        <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400" data-i18n-fr="Recherches fréquentes & Thématiques associées (SEO)" data-i18n-en="Related Search Topics & Keywords" data-i18n-ar="الكلمات المفتاحية والمواضيع المرتبطة">Recherches fréquentes & Thématiques associées (SEO)</div>
+        <div class="flex flex-wrap gap-1.5">
+          ${kwBadges}
+        </div>
+      </div>
+    </section>`;
+}
+
 function buildPageHtml(config) {
+  const g = SEO_GUIDES[config.filename] || SEO_GUIDES['hub-outils-sport-performance.html'];
+  const schemaJson = JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": config.titleFr,
+        "url": "https://profeps.ma/" + config.filename,
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "All",
+        "inLanguage": ["fr", "en", "ar"],
+        "description": config.subFr,
+        "keywords": config.keywordsFr,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "MAD" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": g.faqQFr,
+            "acceptedAnswer": { "@type": "Answer", "text": g.faqAFr }
+          }
+        ]
+      }
+    ]
+  });
+
   return `<!DOCTYPE html>
 <html lang="fr" dir="ltr" id="html-root">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${config.titleFr} | Prof EPS</title>
+  <title>${config.titleFr} | Prof EPS Maroc</title>
   <meta name="description" id="metaDesc" content="${config.subFr.replace(/"/g, '&quot;')}" />
   <meta name="keywords" content="${(config.keywordsFr || 'calculateur vma, calculateur vo2 max, préparation physique, prof eps maroc').replace(/"/g, '&quot;')}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="${config.titleFr.replace(/"/g, '&quot;')} | Prof EPS Maroc" />
+  <meta property="og:description" content="${config.subFr.replace(/"/g, '&quot;')}" />
+  <meta property="og:url" content="https://profeps.ma/${config.filename}" />
+  <meta property="og:site_name" content="Prof EPS Maroc" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="${config.titleFr.replace(/"/g, '&quot;')} | Prof EPS Maroc" />
+  <meta name="twitter:description" content="${config.subFr.replace(/"/g, '&quot;')}" />
   <link rel="canonical" href="https://profeps.ma/${config.filename}" />
   <link rel="icon" type="image/png" href="images/prof_eps.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">${schemaJson}</script>
   <script src="https://cdn.tailwindcss.com"></script>
   ${SHARED_MASTER_CSS}
 </head>
@@ -782,10 +1074,16 @@ ${SHARED_NAV_JS}
     <div id="ui-badge" class="hero-badge" data-i18n-fr="⚡ ${config.clusterBadgeFr.replace(/"/g, '&quot;')}" data-i18n-en="⚡ ${config.clusterBadgeEn.replace(/"/g, '&quot;')}" data-i18n-ar="⚡ ${config.clusterBadgeAr.replace(/"/g, '&quot;')}">⚡ ${config.clusterBadgeFr}</div>
     <h1 id="ui-title" data-i18n-fr="${config.titleFr.replace(/"/g, '&quot;')}" data-i18n-en="${config.titleEn.replace(/"/g, '&quot;')}" data-i18n-ar="${config.titleAr.replace(/"/g, '&quot;')}">${config.titleFr}</h1>
     <p id="ui-sub" data-i18n-fr="${config.subFr.replace(/"/g, '&quot;')}" data-i18n-en="${config.subEn.replace(/"/g, '&quot;')}" data-i18n-ar="${config.subAr.replace(/"/g, '&quot;')}">${config.subFr}</p>
+    <div class="peps-hero-pills">
+      <span class="peps-hero-pill" data-i18n-fr="✓ Formules Scientifiques Validées" data-i18n-en="✓ Peer-Reviewed Formulas" data-i18n-ar="✓ معادلات علمية معتمدة">✓ Formules Scientifiques Validées</span>
+      <span class="peps-hero-pill" data-i18n-fr="📊 Barèmes & Interprétation Complète" data-i18n-en="📊 Full Norms & Interpretation" data-i18n-ar="📊 جداول معيارية وتفسير شامل">📊 Barèmes & Interprétation Complète</span>
+      <span class="peps-hero-pill" data-i18n-fr="🇲🇦 Conforme EPS & Sport" data-i18n-en="🇲🇦 PE & Coaching Ready" data-i18n-ar="🇲🇦 مطابق للتربية البدنية والرياضة">🇲🇦 Conforme EPS & Sport</span>
+    </div>
   </header>
 
   <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-6">
     ${config.bodyHtml}
+    ${buildSeoGuideSection(config)}
   </main>
 
   ${buildFooterHtml()}
@@ -1210,57 +1508,56 @@ const PAGES = [
   // 3. IMC Sportif & Masse Grasse
   {
     filename: 'calculateur-imc-sportif-masse-grasse.html',
-    keywordsFr: 'calculateur imc sportif, indice masse grasse img, calculer masse maigre sportif, poids de forme course à pied, imc homme femme sportif',
-    clusterBadgeFr: 'Cluster 2B · Composition Corporelle, IMC & Économie de Course',
-    clusterBadgeEn: 'Cluster 2B · Athletic BMI, Body Fat % & Running Economy',
-    clusterBadgeAr: 'القطب 2B · مؤشر كتلة الجسم الرياضي، نسبة الدهون والكتلة العضلية',
-    titleFr: 'Calculateur d’IMC Sportif, Masse Grasse (IMG) & Interprétation Complète',
-    titleEn: 'Athletic BMI, Body Fat Percentage & Dual Health/Sport Interpretation',
-    titleAr: 'حاسبة مؤشر كتلة الجسم (IMC) ونسبة الدهون مع التفسير الصحي والرياضي',
-    subFr: 'Renseignez vos mensurations et votre volume d’entraînement puis cliquez sur Calculer pour obtenir votre IMC, votre taux de masse grasse athlétique et votre masse maigre interprétés.',
-    subEn: 'Enter your body measurements and weekly training volume, then click Calculate to get your BMI, athletic body fat %, and lean mass interpretation.',
-    subAr: 'أدخل الوزن والطول وساعات التدريب ثم اضغط على "احسب" لتحليل مؤشر كتلة الجسم ونسبة الدهون والكتلة العضلية الصافية.',
+    keywordsFr: 'calculateur imc, calcul imc homme femme, barème imc normal anormal oms, indice masse corporelle, indice masse grasse img, poids idéal selon taille, imc sportif masse maigre',
+    clusterBadgeFr: 'Cluster 2B · Indice de Masse Corporelle (IMC), Barème OMS & Masse Grasse (IMG)',
+    clusterBadgeEn: 'Cluster 2B · Body Mass Index (BMI), WHO Reference Scale & Body Fat %',
+    clusterBadgeAr: 'القطب 2B · مؤشر كتلة الجسم (IMC)، سلم المعايير ونسبة الدهون (IMG)',
+    titleFr: 'Calculateur d’IMC, Barème de Référence (Normal / Anormal) & Masse Grasse',
+    titleEn: 'BMI Calculator, Official WHO Reference Scale (Normal vs Abnormal) & Body Fat %',
+    titleAr: 'حاسبة مؤشر كتلة الجسم (IMC) وجدول المعايير الصحية (طبيعي / غير طبيعي) ونسبة الدهون',
+    subFr: 'Renseignez votre poids, votre taille, votre âge et votre sexe puis cliquez sur Calculer pour obtenir votre IMC, votre taux de masse grasse (IMG) et votre position exacte sur le barème officiel (ce qui est normal et ce qui est anormal).',
+    subEn: 'Enter your weight, height, age, and sex, then click Calculate to get your BMI, body fat % (IMG), and your exact position on the official normal vs abnormal reference scale.',
+    subAr: 'أدخل الوزن والطول والعمر والجنس ثم اضغط على "احسب" لمعرفة مؤشر كتلة الجسم ونسبة الدهون وموقعك الدقيق في سلم المعايير (الطبيعي وغير الطبيعي).',
     bodyHtml: `<div class="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-5">
       <div class="flex items-center justify-between border-b border-slate-100 pb-3.5">
-        <h2 class="text-base font-extrabold text-slate-900 uppercase tracking-wider" data-i18n-fr="1. Vos Paramètres Anthropométriques & Activité" data-i18n-en="1. Your Anthropometric & Training Parameters" data-i18n-ar="1. القياسات الجسمية وحجم النشاط الرياضي">1. Vos Paramètres Anthropométriques & Activité</h2>
-        <span class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">IMC · IMG · FFMI</span>
+        <h2 class="text-base font-extrabold text-slate-900 uppercase tracking-wider" data-i18n-fr="1. Vos Mensurations Corporelles" data-i18n-en="1. Your Body Measurements" data-i18n-ar="1. قياساتك الجسمية">1. Vos Mensurations Corporelles</h2>
+        <span class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">IMC · IMG · Barème OMS</span>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3.5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         <div>
-          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Poids (kg)" data-i18n-en="Weight (kg)" data-i18n-ar="الوزن (كغ)">Poids (kg)</label>
-          <input id="inp-w" type="number" value="68" min="30" max="180" step="0.5" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-base font-mono font-bold" />
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Poids corporel (kg)" data-i18n-en="Body Weight (kg)" data-i18n-ar="الوزن (كغ)">Poids corporel (kg)</label>
+          <input id="inp-w" type="number" value="68" min="30" max="200" step="0.5" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-base font-mono font-bold" />
         </div>
         <div>
           <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Taille (cm)" data-i18n-en="Height (cm)" data-i18n-ar="الطول (سم)">Taille (cm)</label>
-          <input id="inp-h" type="number" value="175" min="120" max="230" step="1" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-base font-mono font-bold" />
+          <input id="inp-h" type="number" value="175" min="120" max="230" step="1" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-base font-mono font-bold" />
         </div>
         <div>
-          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Âge (ans)" data-i18n-en="Age (yrs)" data-i18n-ar="العمر">Âge (ans)</label>
-          <input id="inp-age" type="number" value="28" min="12" max="85" step="1" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-base font-mono font-bold" />
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Âge (années)" data-i18n-en="Age (years)" data-i18n-ar="العمر (سنوات)">Âge (années)</label>
+          <input id="inp-age" type="number" value="28" min="12" max="90" step="1" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-base font-mono font-bold" />
         </div>
         <div>
-          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Sexe" data-i18n-en="Sex" data-i18n-ar="الجنس">Sexe</label>
-          <select id="inp-sex" onchange="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-sm font-semibold">
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Sexe biologique" data-i18n-en="Biological Sex" data-i18n-ar="الجنس">Sexe biologique</label>
+          <select id="inp-sex" onchange="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-semibold">
             <option value="1" selected data-i18n-fr="Homme" data-i18n-en="Male" data-i18n-ar="ذكر">Homme</option>
             <option value="0" data-i18n-fr="Femme" data-i18n-en="Female" data-i18n-ar="أنثى">Femme</option>
           </select>
-        </div>
-        <div>
-          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Sport (h/sem)" data-i18n-en="Training (h/wk)" data-i18n-ar="ساعات التدريب/أسبوع">Sport (h/sem)</label>
-          <input id="inp-hrs" type="number" value="6" min="0" max="30" step="1" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-base font-mono font-bold" />
         </div>
       </div>
 
       <button type="button" id="btn-calc-main" onclick="triggerCalculation()" class="peps-cta-btn">
         <span>⚖️</span>
-        <span data-i18n-fr="Calculer mon IMC, ma Masse Grasse & mon Bilan Athlétique" data-i18n-en="Calculate My BMI, Body Fat % & Athletic Assessment" data-i18n-ar="احسب مؤشر كتلة الجسم ونسبة الدهون والتقييم الرياضي">Calculer mon IMC, ma Masse Grasse & mon Bilan Athlétique</span>
+        <span data-i18n-fr="Calculer mon IMC, ma Masse Grasse & Voir le Barème de Référence" data-i18n-en="Calculate My BMI, Body Fat % & View Reference Scale" data-i18n-ar="احسب مؤشر كتلة الجسم ونسبة الدهون واعرض جدول المعايير">Calculer mon IMC, ma Masse Grasse & Voir le Barème de Référence</span>
       </button>
     </div>
 
     <div id="tool-results-panel" class="hidden space-y-6">
       <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
-        <h3 class="text-base font-extrabold text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-3" data-i18n-fr="2. Résultats Anthropométriques & Lecture Scientifique par Chiffre" data-i18n-en="2. Anthropometric Results & Per-Metric Interpretation" data-i18n-ar="2. نتائج القياسات الجسمية وتفسير كل مؤشر">2. Résultats Anthropométriques & Lecture Scientifique par Chiffre</h3>
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="text-base font-extrabold text-slate-900 uppercase tracking-wider" data-i18n-fr="2. Vos Résultats Anthropométriques & Diagnostic" data-i18n-en="2. Your Anthropometric Results & Diagnosis" data-i18n-ar="2. نتائج القياسات الجسمية والتشخيص">2. Vos Résultats Anthropométriques & Diagnostic</h3>
+          <span id="out-bmi-status-pill" class="text-xs font-extrabold px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">--</span>
+        </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
           <div class="p-4 bg-blue-50 border border-blue-200 rounded-2xl space-y-1">
@@ -1274,25 +1571,41 @@ const PAGES = [
             <div id="out-fat-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 border border-emerald-100"></div>
           </div>
           <div class="p-4 bg-red-50 border border-red-200 rounded-2xl space-y-1">
-            <div class="text-xs font-extrabold uppercase text-red-900" data-i18n-fr="Masse Maigre Active" data-i18n-en="Active Lean Body Mass" data-i18n-ar="الكتلة العضلية الصافية">Masse Maigre Active</div>
+            <div class="text-xs font-extrabold uppercase text-red-900" data-i18n-fr="Masse Maigre & Poids Santé" data-i18n-en="Lean Mass & Healthy Weight" data-i18n-ar="الكتلة العضلية والوزن الصحي">Masse Maigre & Poids Santé</div>
             <div id="out-lean" dir="ltr" class="text-3xl font-black font-mono text-red-700 tabular-nums">--</div>
             <div id="out-lean-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 border border-red-100"></div>
           </div>
         </div>
 
         <div id="out-bmi-interp" class="p-5 bg-slate-50 border-l-4 border-blue-600 rounded-xl text-xs sm:text-sm text-slate-700 space-y-2.5 leading-relaxed"></div>
+
+        <!-- BARÈME OFFICIEL DE RÉFÉRENCE DE L'IMC (NORMAL VS ANORMAL) -->
+        <div class="space-y-3 pt-2">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <h4 class="text-sm font-extrabold uppercase tracking-wider text-slate-900" data-i18n-fr="3. Barème Officiel de Référence de l'IMC (Ce qui est Normal vs Anormal — Normes OMS)" data-i18n-en="3. Official WHO BMI Reference Scale (What is Normal vs Abnormal)" data-i18n-ar="3. جدول المعايير المرجعي لمؤشر كتلة الجسم (ما هو طبيعي وما هو غير طبيعي - منظمة الصحة العالمية)">3. Barème Officiel de Référence de l'IMC (Ce qui est Normal vs Anormal — Normes OMS)</h4>
+            <span id="out-ideal-range-badge" class="text-xs font-bold text-blue-800 bg-blue-50 border border-blue-200 px-3 py-1 rounded-full"></span>
+          </div>
+          <p class="text-xs text-slate-600" data-i18n-fr="Le tableau ci-dessous vous permet d'avoir une opinion claire et objective sur votre IMC : la zone verte (18,5 à 24,9 kg/m²) correspond à l'IMC normal de référence pour la santé, tandis que les zones inférieures ou supérieures signalent un écart à interpréter selon votre masse musculaire." data-i18n-en="The reference scale below shows where your BMI stands: the green zone (18.5 to 24.9 kg/m²) represents the normal healthy reference range, while values outside require interpretation alongside muscle mass." data-i18n-ar="يوضح الجدول المرجعي أدناه موقعك بدقة: المنطقة الخضراء (18.5 إلى 24.9 كغ/م²) تمثل المعدل الطبيعي والصحي، بينما تشير الفئات الأخرى إلى نقص أو زيادة في الوزن.">Le tableau ci-dessous vous permet d'avoir une opinion claire et objective sur votre IMC : la zone verte (18,5 à 24,9 kg/m²) correspond à l'IMC normal de référence pour la santé, tandis que les zones inférieures ou supérieures signalent un écart à interpréter selon votre masse musculaire.</p>
+          <div id="out-bmi-scale-rows" class="space-y-2"></div>
+        </div>
+
+        <!-- BARÈME DE RÉFÉRENCE DU TAUX DE MASSE GRASSE (IMG %) -->
+        <div class="space-y-2.5 pt-2 border-t border-slate-100">
+          <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-800" data-i18n-fr="4. Barème de Référence de l'Indice de Masse Grasse (IMG % — Homme vs Femme)" data-i18n-en="4. Body Fat Percentage (IMG %) Reference Norms (Male vs Female)" data-i18n-ar="4. المعايير المرجعية لنسبة الدهون في الجسم (IMG % — الرجال والنساء)">4. Barème de Référence de l'Indice de Masse Grasse (IMG % — Homme vs Femme)</h4>
+          <div id="out-img-scale-grid" class="grid grid-cols-1 sm:grid-cols-4 gap-2.5 text-xs"></div>
+        </div>
       </div>
     </div>`,
     scriptJs: `function computeTool() {
       var w = parseFloat(document.getElementById('inp-w').value) || 68;
-      var h = (parseFloat(document.getElementById('inp-h').value) || 175) / 100;
+      var hCm = parseFloat(document.getElementById('inp-h').value) || 175;
+      var h = hCm / 100;
       var age = parseFloat(document.getElementById('inp-age').value) || 28;
       var sex = parseFloat(document.getElementById('inp-sex').value);
       if (isNaN(sex)) sex = 1;
-      var hrs = parseFloat(document.getElementById('inp-hrs').value) || 6;
 
       var bmi = w / (h * h);
-      var img = Math.max(sex === 1 ? 5.5 : 12.0, 1.2 * bmi + 0.23 * age - 10.8 * sex - 5.4 - Math.min(4.2, hrs * 0.4));
+      var img = Math.max(sex === 1 ? 5.5 : 12.0, 1.2 * bmi + 0.23 * age - 10.8 * sex - 5.4);
       var lean = w * (1 - img / 100);
       var ffmi = lean / (h * h);
       var minW = (18.5 * h * h).toFixed(1);
@@ -1302,35 +1615,156 @@ const PAGES = [
       document.getElementById('out-fat').textContent = img.toFixed(1) + ' %';
       document.getElementById('out-lean').textContent = lean.toFixed(1) + ' kg';
 
-      var whoFr = bmi < 18.5 ? 'Insuffisance pondérale (OMS)' : bmi < 25 ? 'Corpulence normale (OMS)' : bmi < 30 ? 'Surpoids OMS (ou profil musclé)' : 'Obésité OMS';
-      var whoEn = bmi < 18.5 ? 'Underweight (WHO)' : bmi < 25 ? 'Normal weight (WHO)' : bmi < 30 ? 'Overweight WHO (or muscular)' : 'Obesity (WHO)';
-      var whoAr = bmi < 18.5 ? 'نقص في الوزن (منظمة الصحة)' : bmi < 25 ? 'وزن طبيعي وصحي (منظمة الصحة)' : bmi < 30 ? 'زيادة وزن (أو كثافة عضلية للرياضي)' : 'سمنة حسب معيار منظمة الصحة';
-
-      var fatTierFr = (sex === 1 ? (img < 12 ? 'Athlète affûté (Course/Elite)' : img < 17 ? 'Profil Fitness / Sportif' : 'Standard') : (img < 19 ? 'Athlète affûtée' : img < 24 ? 'Profil Fitness / Sportive' : 'Standard'));
-      var fatTierEn = (sex === 1 ? (img < 12 ? 'Lean Endurance Athlete' : img < 17 ? 'Fit / Athletic' : 'Standard') : (img < 19 ? 'Lean Female Athlete' : img < 24 ? 'Fit / Athletic' : 'Standard'));
-      var fatTierAr = (sex === 1 ? (img < 12 ? 'رياضي رشيق جداً (تحمل/نخبة)' : img < 17 ? 'لياقة رياضية جيدة' : 'نسبة عادية') : (img < 19 ? 'رياضية رشيقة' : img < 24 ? 'لياقة رياضية جيدة' : 'نسبة عادية'));
-
-      if (currentLang === 'fr') {
-        document.getElementById('out-bmi-meaning').textContent = whoFr + ' · Plage : ' + minW + '–' + maxW + ' kg';
-        document.getElementById('out-fat-meaning').textContent = fatTierFr + ' (Deurenberg ajusté sport)';
-        document.getElementById('out-lean-meaning').textContent = 'Indice musculaire FFMI : ' + ffmi.toFixed(1) + ' kg/m²';
-      } else if (currentLang === 'en') {
-        document.getElementById('out-bmi-meaning').textContent = whoEn + ' · Range: ' + minW + '–' + maxW + ' kg';
-        document.getElementById('out-fat-meaning').textContent = fatTierEn + ' (Sport-adjusted Deurenberg)';
-        document.getElementById('out-lean-meaning').textContent = 'Lean Mass Index (FFMI): ' + ffmi.toFixed(1) + ' kg/m²';
-      } else {
-        document.getElementById('out-bmi-meaning').textContent = whoAr + ' · النطاق: ' + minW + '–' + maxW + ' كغ';
-        document.getElementById('out-fat-meaning').textContent = fatTierAr;
-        document.getElementById('out-lean-meaning').textContent = 'مؤشر الكتلة العضلية FFMI: ' + ffmi.toFixed(1) + ' كغ/م²';
+      var isNormal = (bmi >= 18.5 && bmi < 25);
+      var pill = document.getElementById('out-bmi-status-pill');
+      if (pill) {
+        if (isNormal) {
+          pill.className = 'text-xs font-extrabold px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-300';
+          pill.textContent = currentLang === 'fr' ? '✓ IMC Normal (Zone Santé Optimale)' : currentLang === 'en' ? '✓ Normal BMI (Optimal Health Zone)' : '✓ مؤشر طبيعي وصحي';
+        } else if (bmi < 18.5) {
+          pill.className = 'text-xs font-extrabold px-3 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-300';
+          pill.textContent = currentLang === 'fr' ? '⚠️ IMC Bas (< 18,5 · Insuffisance pondérale)' : currentLang === 'en' ? '⚠️ Low BMI (< 18.5 · Underweight)' : '⚠️ مؤشر منخفض (< 18.5 · نقص الوزن)';
+        } else if (bmi < 30) {
+          pill.className = 'text-xs font-extrabold px-3 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-300';
+          pill.textContent = currentLang === 'fr' ? 'ℹ️ IMC > 25 (Surpoids OMS ou Profil Musclé)' : currentLang === 'en' ? 'ℹ️ BMI > 25 (Overweight or Muscular)' : 'ℹ️ مؤشر فوق 25 (زيادة وزن أو كثافة عضلية)';
+        } else {
+          pill.className = 'text-xs font-extrabold px-3 py-1 rounded-full bg-red-100 text-red-900 border border-red-300';
+          pill.textContent = currentLang === 'fr' ? '❗ IMC Élevé (≥ 30 · Zone Obésité OMS)' : currentLang === 'en' ? '❗ High BMI (≥ 30 · WHO Obesity Zone)' : '❗ مؤشر مرتفع (≥ 30 · سمنة حسب OMS)';
+        }
       }
 
+      var idealBadge = document.getElementById('out-ideal-range-badge');
+      if (idealBadge) {
+        idealBadge.textContent = currentLang === 'fr'
+          ? 'Poids normal pour ' + hCm + ' cm : ' + minW + ' kg à ' + maxW + ' kg'
+          : currentLang === 'en'
+          ? 'Normal weight for ' + hCm + ' cm: ' + minW + ' kg to ' + maxW + ' kg'
+          : 'الوزن الطبيعي لطول ' + hCm + ' سم: من ' + minW + ' إلى ' + maxW + ' كغ';
+      }
+
+      var whoFr = bmi < 18.5 ? 'Anormal (Bas) · Insuffisance pondérale' : bmi < 25 ? 'Normal · Corpulence santé idéale' : bmi < 30 ? 'Au-dessus de la norme · Surpoids ou Musclé' : 'Anormal (Élevé) · Obésité OMS';
+      var whoEn = bmi < 18.5 ? 'Abnormal (Low) · Underweight' : bmi < 25 ? 'Normal · Healthy weight range' : bmi < 30 ? 'Above norm · Overweight or Muscular' : 'Abnormal (High) · WHO Obesity';
+      var whoAr = bmi < 18.5 ? 'غير طبيعي (منخفض) · نقص الوزن' : bmi < 25 ? 'طبيعي · وزن صحي مثالي' : bmi < 30 ? 'فوق المعدل · زيادة وزن أو عضلات' : 'غير طبيعي (مرتفع) · سمنة';
+
+      var fatTierFr = (sex === 1 ? (img < 13 ? 'Athlète affûté (6–13%)' : img < 18 ? 'Normal / Fitness (14–17%)' : img < 25 ? 'Moyen / Standard (18–24%)' : 'Élevé (≥ 25% — Excès adipeux)') : (img < 20 ? 'Athlète affûtée (14–20%)' : img < 25 ? 'Normal / Fitness (21–24%)' : img < 32 ? 'Moyen / Standard (25–31%)' : 'Élevé (≥ 32% — Excès adipeux)'));
+      var fatTierEn = (sex === 1 ? (img < 13 ? 'Lean Athlete (6–13%)' : img < 18 ? 'Normal / Fit (14–17%)' : img < 25 ? 'Average (18–24%)' : 'High (≥ 25% — Excess fat)') : (img < 20 ? 'Lean Athlete (14–20%)' : img < 25 ? 'Normal / Fit (21–24%)' : img < 32 ? 'Average (25–31%)' : 'High (≥ 32% — Excess fat)'));
+      var fatTierAr = (sex === 1 ? (img < 13 ? 'رياضي رشيق (6–13%)' : img < 18 ? 'طبيعي / لياقة جيدة (14–17%)' : img < 25 ? 'متوسط / عادي (18–24%)' : 'مرتفع (≥ 25% — دهون زائدة)') : (img < 20 ? 'رياضية رشيقة (14–20%)' : img < 25 ? 'طبيعي / لياقة جيدة (21–24%)' : img < 32 ? 'متوسط / عادي (25–31%)' : 'مرتفع (≥ 32% — دهون زائدة)'));
+
+      if (currentLang === 'fr') {
+        document.getElementById('out-bmi-meaning').textContent = whoFr;
+        document.getElementById('out-fat-meaning').textContent = fatTierFr + ' (Formule Deurenberg)';
+        document.getElementById('out-lean-meaning').textContent = 'Poids normal : ' + minW + '–' + maxW + ' kg (FFMI ' + ffmi.toFixed(1) + ')';
+      } else if (currentLang === 'en') {
+        document.getElementById('out-bmi-meaning').textContent = whoEn;
+        document.getElementById('out-fat-meaning').textContent = fatTierEn + ' (Deurenberg formula)';
+        document.getElementById('out-lean-meaning').textContent = 'Normal weight: ' + minW + '–' + maxW + ' kg (FFMI ' + ffmi.toFixed(1) + ')';
+      } else {
+        document.getElementById('out-bmi-meaning').textContent = whoAr;
+        document.getElementById('out-fat-meaning').textContent = fatTierAr;
+        document.getElementById('out-lean-meaning').textContent = 'الوزن الطبيعي: ' + minW + '–' + maxW + ' كغ (FFMI ' + ffmi.toFixed(1) + ')';
+      }
+
+      var scaleBrackets = [
+        {
+          active: bmi < 18.5,
+          range: '< 18,5 kg/m²',
+          wRange: '< ' + minW + ' kg',
+          statusFr: 'ANORMAL (BAS) · Insuffisance pondérale (Maigreur)',
+          statusEn: 'ABNORMAL (LOW) · Underweight',
+          statusAr: 'غير طبيعي (منخفض) · نقص الوزن (نحافة)',
+          descFr: 'Poids inférieur à la référence santé. Risque de fatigue chronique, carence énergétique (RED-S) et baisse d’immunité.',
+          descEn: 'Below healthy weight reference. Risk of low energy availability (RED-S), fatigue, and bone stress.',
+          descAr: 'أقل من الوزن الصحي المرجعي. قد يؤدي إلى إجهاد مبكر ونقص في الطاقة والمناعة.',
+          cls: 'border-amber-300 bg-amber-50/70 text-amber-950'
+        },
+        {
+          active: bmi >= 18.5 && bmi < 25.0,
+          range: '18,5 – 24,9 kg/m²',
+          wRange: minW + ' – ' + maxW + ' kg',
+          statusFr: 'NORMAL (RÉFÉRENCE SANTÉ) · Corpulence normale idéale',
+          statusEn: 'NORMAL (HEALTHY REFERENCE) · Ideal Normal Weight',
+          statusAr: 'طبيعي (المرجع الصحي المثالي) · وزن طبيعي ومتوازن',
+          descFr: 'Zone normale officielle de l’OMS. Équilibre métabolique, cardiovasculaire et articulaire optimal pour la santé et l’endurance.',
+          descEn: 'Official WHO normal reference bracket. Optimal metabolic, cardiovascular, and joint health.',
+          descAr: 'النطاق الطبيعي الرسمي لمنظمة الصحة العالمية. توازن مثالي للصحة والمفاصل واللياقة البدنية.',
+          cls: 'border-emerald-300 bg-emerald-50/80 text-emerald-950'
+        },
+        {
+          active: bmi >= 25.0 && bmi < 30.0,
+          range: '25,0 – 29,9 kg/m²',
+          wRange: (25.0 * h * h).toFixed(1) + ' – ' + (29.9 * h * h).toFixed(1) + ' kg',
+          statusFr: 'AU-DESSUS DE LA NORME · Surpoids OMS (ou Sportif Musclé)',
+          statusEn: 'ABOVE NORMAL · WHO Overweight (or Muscular Athlete)',
+          statusAr: 'فوق المعدل الطبيعي · زيادة وزن (أو بنية عضلية قوية)',
+          descFr: 'Anormal chez le sédentaire (surpoids modéré), mais fréquent et normal chez le sportif ayant une forte masse musculaire (vérifiez votre IMG ci-dessus).',
+          descEn: 'Overweight in sedentary adults, but common in strength/team-sport athletes with high lean muscle mass.',
+          descAr: 'يعتبر زيادة وزن لدى غير الممارسين، لكنه شائع لدى الرياضيين ذوي الكتلة العضلية العالية.',
+          cls: 'border-amber-300 bg-amber-50/70 text-amber-950'
+        },
+        {
+          active: bmi >= 30.0 && bmi < 35.0,
+          range: '30,0 – 34,9 kg/m²',
+          wRange: (30.0 * h * h).toFixed(1) + ' – ' + (34.9 * h * h).toFixed(1) + ' kg',
+          statusFr: 'ANORMAL (ÉLEVÉ) · Obésité modérée (Classe I OMS)',
+          statusEn: 'ABNORMAL (HIGH) · Moderate Obesity (WHO Class I)',
+          statusAr: 'غير طبيعي (مرتفع) · سمنة متوسطة (الدرجة الأولى)',
+          descFr: 'Excès pondéral augmentant la contrainte mécanique sur les genoux/chevilles et le coût énergétique de course (~2,1 s/km par kg).',
+          descEn: 'Elevated mechanical load on lower-limb joints and higher cardiorespiratory cost.',
+          descAr: 'زيادة العبء الميكانيكي على المفاصل والركبتين؛ ينصح بالتدرج في الأنشطة الهوائية.',
+          cls: 'border-orange-300 bg-orange-50/80 text-orange-950'
+        },
+        {
+          active: bmi >= 35.0,
+          range: '≥ 35,0 kg/m²',
+          wRange: '≥ ' + (35.0 * h * h).toFixed(1) + ' kg',
+          statusFr: 'ANORMAL (CRITIQUE) · Obésité sévère à massive (Classes II & III)',
+          statusEn: 'ABNORMAL (SEVERE) · Severe Obesity (WHO Class II & III)',
+          statusAr: 'غير طبيعي (مرتفع جداً) · سمنة مفرطة (الدرجة الثانية والثالثة)',
+          descFr: 'Nécessite un accompagnement médical et la priorité aux activités portées (marche active, vélo, natation) pour protéger les articulations.',
+          descEn: 'Prioritize low-impact non-weight-bearing endurance activities and medical guidance.',
+          descAr: 'ينصح بالأنشطة الخفيفة على المفاصل (المشي السريع، السباحة، الدراجة) والمتابعة الصحية.',
+          cls: 'border-red-300 bg-red-50/80 text-red-950'
+        }
+      ];
+
+      document.getElementById('out-bmi-scale-rows').innerHTML = scaleBrackets.map(function(b) {
+        var st = currentLang === 'fr' ? b.statusFr : currentLang === 'en' ? b.statusEn : b.statusAr;
+        var ds = currentLang === 'fr' ? b.descFr : currentLang === 'en' ? b.descEn : b.descAr;
+        var youBadge = b.active
+          ? '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-black bg-slate-900 text-white">' + (currentLang === 'fr' ? '👈 VOTRE IMC (' + bmi.toFixed(1) + ')' : currentLang === 'en' ? '👈 YOUR BMI (' + bmi.toFixed(1) + ')' : '👈 مؤشرك الحالي (' + bmi.toFixed(1) + ')') + '</span>'
+          : '';
+        var ring = b.active ? 'ring-2 ring-slate-900 shadow-md ' : 'opacity-85 ';
+        return '<div class="p-3.5 rounded-xl border ' + ring + b.cls + ' flex flex-col sm:flex-row sm:items-center justify-between gap-2 transition-all"><div class="space-y-0.5"><div class="flex flex-wrap items-center gap-2"><span class="text-xs font-extrabold">' + st + '</span>' + youBadge + '</div><div class="text-[11px] opacity-90">' + ds + '</div></div><div dir="ltr" class="text-right shrink-0 font-mono"><div class="text-xs font-black px-2.5 py-1 rounded bg-white/90 border border-current/15">' + b.range + '</div><div class="text-[10px] font-bold mt-0.5 opacity-80">' + b.wRange + '</div></div></div>';
+      }).join('');
+
+      var imgNorms = sex === 1
+        ? [
+            { tFr: 'Athlète (Homme)', tEn: 'Athlete (Male)', tAr: 'رياضي (رجل)', r: '6% – 13%', act: img < 14 },
+            { tFr: 'Normal / Fitness', tEn: 'Normal / Fit', tAr: 'طبيعي / لياقة', r: '14% – 17%', act: img >= 14 && img < 18 },
+            { tFr: 'Standard Acceptable', tEn: 'Acceptable Average', tAr: 'متوسط مقبول', r: '18% – 24%', act: img >= 18 && img < 25 },
+            { tFr: 'Anormal (Excès Grasse)', tEn: 'High Body Fat', tAr: 'غير طبيعي (دهون زائدة)', r: '≥ 25%', act: img >= 25 }
+          ]
+        : [
+            { tFr: 'Athlète (Femme)', tEn: 'Athlete (Female)', tAr: 'رياضية (امرأة)', r: '14% – 20%', act: img < 21 },
+            { tFr: 'Normal / Fitness', tEn: 'Normal / Fit', tAr: 'طبيعي / لياقة', r: '21% – 24%', act: img >= 21 && img < 25 },
+            { tFr: 'Standard Acceptable', tEn: 'Acceptable Average', tAr: 'متوسط مقبول', r: '25% – 31%', act: img >= 25 && img < 32 },
+            { tFr: 'Anormal (Excès Grasse)', tEn: 'High Body Fat', tAr: 'غير طبيعي (دهون زائدة)', r: '≥ 32%', act: img >= 32 }
+          ];
+
+      document.getElementById('out-img-scale-grid').innerHTML = imgNorms.map(function(n) {
+        var lbl = currentLang === 'fr' ? n.tFr : currentLang === 'en' ? n.tEn : n.tAr;
+        var cls = n.act ? 'bg-emerald-50 border-2 border-emerald-600 text-emerald-950 font-bold shadow-xs' : 'bg-slate-50 border border-slate-200 text-slate-700';
+        return '<div class="p-3 rounded-xl text-center ' + cls + '"><div class="text-[11px] font-bold">' + lbl + '</div><div dir="ltr" class="text-sm font-black font-mono mt-0.5">' + n.r + '</div></div>';
+      }).join('');
+
+      var diffIdeal = w - parseFloat(maxW);
       var box = document.getElementById('out-bmi-interp');
       if (currentLang === 'fr') {
-        box.innerHTML = '<p><strong>1. Double Lecture OMS vs Sportif :</strong> Votre IMC est de <strong>' + bmi.toFixed(1) + ' kg/m²</strong> (' + whoFr + '), mais grâce à vos <strong>' + hrs + ' h/semaine</strong> d’entraînement, votre taux de masse grasse réel est estimé à <strong>' + img.toFixed(1) + ' %</strong> (' + fatTierFr + ') pour une masse maigre active de <strong>' + lean.toFixed(1) + ' kg</strong>.</p><p><strong>2. Impact sur l’Économie de Course & EPS :</strong> En course à pied, chaque kilogramme adipeux non fonctionnel augmente le coût énergétique d’environ <strong>~2,1 secondes par kilomètre</strong> (soit ~21 s sur 10 km), tandis que la masse maigre (' + lean.toFixed(1) + ' kg) assure la propulsion et la prévention des blessures.</p>';
+        box.innerHTML = '<p><strong>1. Votre Avis Objectif (Normal vs Anormal) :</strong> Avec <strong>' + w + ' kg</strong> pour <strong>' + hCm + ' cm</strong>, votre IMC est de <strong>' + bmi.toFixed(1) + ' kg/m²</strong>. La zone normale de référence OMS se situe entre <strong>18,5 et 24,9 kg/m²</strong>, ce qui correspond pour votre taille à un poids normal compris entre <strong>' + minW + ' kg et ' + maxW + ' kg</strong>.</p><p><strong>2. Analyse Masse Grasse (' + img.toFixed(1) + ' %) & Course à Pied :</strong> ' + (isNormal ? 'Votre IMC est parfaitement dans la norme santé. Votre masse maigre active est estimée à <strong>' + lean.toFixed(1) + ' kg</strong>.' : bmi < 18.5 ? 'Votre IMC est en dessous du seuil normal (18,5). Il vous manque environ <strong>' + (parseFloat(minW) - w).toFixed(1) + ' kg</strong> pour atteindre la zone de poids santé minimale.' : 'Votre IMC dépasse 25,0 kg/m² (+' + diffIdeal.toFixed(1) + ' kg au-dessus du plafond OMS de ' + maxW + ' kg). En course à pied, chaque kg adipeux superflu coûte environ <strong>~2,1 sec/km</strong>.') + '</p>';
       } else if (currentLang === 'en') {
-        box.innerHTML = '<p><strong>1. Dual WHO vs Athletic Reading:</strong> Your BMI is <strong>' + bmi.toFixed(1) + ' kg/m²</strong> (' + whoEn + '), while your <strong>' + hrs + ' h/week</strong> training load yields an estimated body fat of <strong>' + img.toFixed(1) + '%</strong> (' + fatTierEn + ') and <strong>' + lean.toFixed(1) + ' kg</strong> of functional lean mass.</p><p><strong>2. Running Economy Impact:</strong> Each non-functional kg costs roughly <strong>~2.1 sec/km</strong> in distance running, whereas lean muscle mass supports power output and joint stability.</p>';
+        box.innerHTML = '<p><strong>1. Objective Assessment (Normal vs Abnormal):</strong> At <strong>' + w + ' kg</strong> and <strong>' + hCm + ' cm</strong>, your BMI is <strong>' + bmi.toFixed(1) + ' kg/m²</strong>. The normal WHO reference range is <strong>18.5 to 24.9 kg/m²</strong>, which corresponds to <strong>' + minW + ' kg – ' + maxW + ' kg</strong> for your height.</p><p><strong>2. Body Fat (' + img.toFixed(1) + '%) & Running Economy:</strong> ' + (isNormal ? 'Your BMI is squarely within the healthy normal range, with <strong>' + lean.toFixed(1) + ' kg</strong> of lean mass.' : bmi < 18.5 ? 'Your BMI is below the 18.5 normal threshold (about <strong>' + (parseFloat(minW) - w).toFixed(1) + ' kg</strong> below minimum normal weight).' : 'Your BMI is above 25.0 (+' + diffIdeal.toFixed(1) + ' kg above the ' + maxW + ' kg WHO ceiling). Each excess non-functional kg costs ~2.1 sec/km.') + '</p>';
       } else {
-        box.innerHTML = '<p><strong>1. القراءة المزدوجة (منظمة الصحة مقابل الرياضي):</strong> يبلغ مؤشر كتلة الجسم لديك <strong>' + bmi.toFixed(1) + ' كغ/م²</strong> (' + whoAr + ')، وبفضل تدريبك (<strong>' + hrs + ' ساعات/أسبوع</strong>) فإن نسبة الدهون تقدر بـ <strong>' + img.toFixed(1) + '%</strong> (' + fatTierAr + ') مع كتلة عضلية صافية قدرها <strong>' + lean.toFixed(1) + ' كغ</strong>.</p><p><strong>2. التأثير على اقتصاد الجري والتربية البدنية:</strong> كل كيلوغرام إضافي غير وظيفي يكلف حوالي <strong>2.1 ثانية لكل كيلومتر</strong> في سباقات التحمل.</p>';
+        box.innerHTML = '<p><strong>1. التقييم الموضوعي (الطبيعي مقابل غير الطبيعي):</strong> بوزن <strong>' + w + ' كغ</strong> وطول <strong>' + hCm + ' سم</strong>، يبلغ مؤشر كتلة الجسم لديك <strong>' + bmi.toFixed(1) + ' كغ/م²</strong>. المعدل الطبيعي الصحي يتراوح بين <strong>18.5 و 24.9 كغ/م²</strong>، وهو ما يعادل وزناً طبيعياً بين <strong>' + minW + ' كغ و ' + maxW + ' كغ</strong> لطولك.</p><p><strong>2. تحليل نسبة الدهون (' + img.toFixed(1) + '%) والأداء الرياضي:</strong> ' + (isNormal ? 'مؤشرك يقع في المنطقة الطبيعية المثالية للصحة، مع كتلة عضلية صافية تقدر بـ <strong>' + lean.toFixed(1) + ' كغ</strong>.' : bmi < 18.5 ? 'مؤشرك أقل من الحد الطبيعي (18.5)، وتحتاج إلى حوالي <strong>' + (parseFloat(minW) - w).toFixed(1) + ' كغ</strong> للوصول إلى النطاق الصحي.' : 'مؤشرك يتجاوز 25.0 كغ/م² (+' + diffIdeal.toFixed(1) + ' كغ فوق الحد الأعلى الطبيعي ' + maxW + ' كغ).') + '</p>';
       }
     }`,
   },
