@@ -1,91 +1,127 @@
 /**
  * update-navbar.js
  * Script Node.js ciblant le dossier "public"
- * Titres très gras (font-weight: 800) et tous parfaitement centrés.
+ * Unifie la Navbar + Menu Déroulant des 10 Calculateurs Sport + Titre actif dynamique sur toutes les pages.
  */
 
 const fs = require('fs');
 const path = require('path');
 
 const rootDir = process.cwd();
-// Cible automatiquement le dossier public s'il existe, sinon le dossier courant
-const targetDir = fs.existsSync(path.join(rootDir, 'public')) 
-    ? path.join(rootDir, 'public') 
+const targetDir = fs.existsSync(path.join(rootDir, 'public'))
+    ? path.join(rootDir, 'public')
     : rootDir;
 
 console.log('\n======================================================');
-console.log('🚀 UNIFICATEUR DE NAVBAR — PROF EPS MAROC');
+console.log('🚀 UNIFICATEUR DE NAVBAR + MENU DÉROULANT — PROF EPS MAROC');
 console.log('📂 Dossier scanné :', targetDir);
 console.log('======================================================\n');
 
-// ═══ 1. CSS Canonique (Titres 800 très gras + Centrage garanti) ═══
+// Table des noms courts affichés sur le bouton du menu déroulant selon la page active
+const TOOL_NAV_LABELS = {
+    'calculateur-vma.html': 'Calculateur VMA',
+    'hub-outils-sport-performance.html': 'Hub Calculateurs Sport',
+    'calculateur-vdot-asr-endurance.html': 'Calculateur VO2 Max',
+    'calculateur-asr-reserve-vitesse.html': 'Calculateur ASR',
+    'calculateur-indice-endurance.html': "Indice d'Endurance",
+    'calculateur-frequence-cardiaque-karvonen.html': 'Fréquence Cardiaque',
+    'calculateur-imc-sportif-masse-grasse.html': 'Calculateur IMC Sport',
+    'calculateur-chaleur-meteo-altitude.html': 'Chaleur & Altitude',
+    'calculateur-gap-pente-nutrition.html': 'Allure Pente (GAP)',
+    'generateur-intermittent-hiit-cod.html': 'Intermittent HIIT & COD',
+    'calculateur-charge-rpe-foster-acwr.html': 'Charge RPE & ACWR'
+};
+
+// Liste complète des outils dans le menu déroulant
+const DROPDOWN_ITEMS = [
+    { href: 'hub-outils-sport-performance.html', label: '🧭 Hub de Tous les Calculateurs Sport', isHub: true },
+    { href: 'calculateur-vma.html', label: '⚡ Calculateur VMA & Allures' },
+    { href: 'calculateur-vdot-asr-endurance.html', label: '🫁 Calculateur VO2 Max & VDOT' },
+    { href: 'calculateur-asr-reserve-vitesse.html', label: '🚀 Réserve de Vitesse Anaérobie (ASR)' },
+    { href: 'calculateur-indice-endurance.html', label: "📈 Indice d'Endurance (Péronnet)" },
+    { href: 'calculateur-frequence-cardiaque-karvonen.html', label: '❤️ Fréquence Cardiaque (Karvonen)' },
+    { href: 'calculateur-imc-sportif-masse-grasse.html', label: '⚖️ Calculateur IMC & Masse Grasse' },
+    { href: 'calculateur-chaleur-meteo-altitude.html', label: '☀️ Chaleur, Humidité & Altitude' },
+    { href: 'calculateur-gap-pente-nutrition.html', label: '⛰️ Allure Pente (GAP) & Nutrition' },
+    { href: 'generateur-intermittent-hiit-cod.html', label: '🔄 Intermittent HIIT & COD 180°' },
+    { href: 'calculateur-charge-rpe-foster-acwr.html', label: '🛡️ Charge RPE Foster & ACWR' }
+];
+
+// ═══ 1. CSS Canonique (Navbar + Menu Déroulant blindé contre la boîte blanche) ═══
 const NAVBAR_CSS_BLOCK = `
-/* ═══ NAVBAR CANONIQUE UNIFIÉE ═══ */
-.navbar { 
+/* ═══ NAVBAR CANONIQUE UNIFIÉE + DROPDOWN ═══ */
+.navbar, #navbar { 
     position: fixed !important; 
     top: 0 !important; 
     left: 0 !important; 
     right: 0 !important; 
-    z-index: 1000 !important; 
-    padding: 1rem 2rem !important; 
-    background: rgba(255,255,255,0.96) !important; 
+    z-index: 10000 !important; 
+    padding: 0.9rem 2rem !important; 
+    background: rgba(255,255,255,0.97) !important; 
     backdrop-filter: blur(20px) !important; 
     -webkit-backdrop-filter: blur(20px) !important; 
-    border-bottom: 1px solid rgba(226,232,240,0.7) !important; 
-    transition: all 0.3s ease !important; 
+    border-bottom: 1px solid rgba(226,232,240,0.8) !important; 
+    transition: all 0.3s ease !important;
+    overflow: visible !important;
+    height: auto !important;
 }
-.navbar.scrolled { 
-    padding: 0.5rem 2rem !important; 
+.navbar.scrolled, #navbar.scrolled { 
+    padding: 0.55rem 2rem !important; 
     box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important; 
     background: rgba(255,255,255,0.99) !important; 
 }
-.nav-container { 
+.nav-container, #navbar .nav-container { 
     max-width: 1400px !important; 
     margin: 0 auto !important; 
     display: grid !important; 
     grid-template-columns: 1fr auto 1fr !important; 
-    align-items: center !important; 
+    align-items: center !important;
+    overflow: visible !important;
 }
-.nav-logo { 
+.nav-logo, #navbar .nav-logo { 
     justify-self: start !important; 
     display: flex !important; 
     align-items: center !important; 
 }
-.nav-logo img { 
-    height: 56px !important; 
+.nav-logo img, #navbar .nav-logo img { 
+    height: 54px !important; 
+    width: auto !important;
     transition: all 0.3s ease !important; 
 }
 .navbar.scrolled .nav-logo img { 
     height: 46px !important; 
 }
-.nav-menu { 
+.nav-menu, #navbar #navMenu { 
     display: flex !important; 
     align-items: center !important; 
     justify-content: center !important; 
     text-align: center !important; 
-    gap: 1.75rem !important; 
+    gap: 1.75rem !important;
+    overflow: visible !important;
 }
-.nav-right { 
+.nav-right, #navbar .nav-right { 
     justify-self: end !important; 
     display: flex !important; 
     align-items: center !important; 
     gap: 0.75rem !important; 
 }
-.nav-link { 
+.nav-link, #navbar .nav-link { 
     font-size: 0.95rem !important; 
-    font-weight: 800 !important; /* TITRES BIEN PLUS GRAS */
+    font-weight: 800 !important;
     color: #1a1a2e !important; 
     padding: 0.5rem 0.75rem !important; 
     text-align: center !important; 
     display: inline-flex !important; 
     align-items: center !important; 
-    justify-content: center !important; 
+    justify-content: center !important;
+    gap: 0.35rem !important;
     position: relative !important; 
     transition: color 0.3s ease !important; 
     text-decoration: none !important; 
     letter-spacing: -0.01em !important;
+    white-space: nowrap !important;
 }
-.nav-link::after { 
+.nav-link::after, #navbar .nav-link::after { 
     content: '' !important; 
     position: absolute !important; 
     bottom: -2px !important; 
@@ -97,36 +133,167 @@ const NAVBAR_CSS_BLOCK = `
     transition: left 0.3s ease, right 0.3s ease !important; 
 }
 .nav-link:hover::after, 
-.nav-link.active::after { 
+.nav-link.active::after,
+#navbar .nav-link:hover::after,
+#navbar .nav-link.active::after { 
     left: 0.4rem !important; 
     right: 0.4rem !important; 
 }
 .nav-link:hover, 
-.nav-link.active { 
+.nav-link.active,
+#navbar .nav-link:hover,
+#navbar .nav-link.active { 
     color: #c1272d !important; 
 }
-.nav-btn-login { 
-    display: inline-flex !important; 
-    align-items: center !important; 
-    gap: 0.5rem !important; 
-    padding: 0.5rem 1.25rem !important; 
-    background: transparent !important; 
-    color: #c1272d !important; 
-    font-weight: 800 !important; 
-    font-size: 0.9375rem !important; 
-    border-radius: 9999px !important; 
-    border: 2px solid #c1272d !important; 
-    transition: all 0.3s ease !important; 
-    text-decoration: none !important; 
-    white-space: nowrap !important; 
+
+/* ═══ MENU DÉROULANT CALCULATEURS SPORT (ANTI-BOÎTE BLANCHE) ═══ */
+#navbar .nav-dropdown, .nav-dropdown {
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: visible !important;
 }
+#navbar .nav-dropdown-caret, .nav-dropdown-caret {
+    font-size: 0.72rem !important;
+    line-height: 1 !important;
+    display: inline-block !important;
+    margin-left: 0.2rem !important;
+    transition: transform 0.22s ease !important;
+    color: inherit !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+#navbar .nav-dropdown:hover .nav-dropdown-caret,
+#navbar .nav-dropdown.open .nav-dropdown-caret {
+    transform: rotate(180deg) !important;
+    color: #c1272d !important;
+}
+#navbar .nav-dropdown::after, .nav-dropdown::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 14px !important;
+    background: transparent !important;
+}
+#navbar #navMenu .nav-dropdown-menu,
+#navbar .nav-dropdown-menu,
+.nav-dropdown-menu {
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    left: 50% !important;
+    transform: translateX(-50%) translateY(8px) !important;
+    width: 330px !important;
+    min-width: 310px !important;
+    max-width: 92vw !important;
+    height: auto !important;
+    max-height: 80vh !important;
+    overflow-y: auto !important;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 14px !important;
+    box-shadow: 0 20px 40px -8px rgba(15, 23, 42, 0.22), 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    padding: 0.55rem !important;
+    margin: 0 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease !important;
+    z-index: 99999 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: 3px !important;
+    text-align: left !important;
+    box-sizing: border-box !important;
+}
+#navbar #navMenu .nav-dropdown:hover > .nav-dropdown-menu,
+#navbar #navMenu .nav-dropdown.open > .nav-dropdown-menu,
+#navbar .nav-dropdown:hover > .nav-dropdown-menu,
+#navbar .nav-dropdown.open > .nav-dropdown-menu,
+.nav-dropdown:hover > .nav-dropdown-menu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translateX(-50%) translateY(0) !important;
+}
+#navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item,
+#navbar .nav-dropdown-menu a.nav-dropdown-item,
+.nav-dropdown-menu a.nav-dropdown-item {
+    all: unset !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 0.55rem !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 36px !important;
+    padding: 0.5rem 0.75rem !important;
+    margin: 0 !important;
+    border-radius: 9px !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 0.84rem !important;
+    font-weight: 700 !important;
+    line-height: 1.35 !important;
+    color: #0f172a !important;
+    -webkit-text-fill-color: #0f172a !important;
+    background: transparent !important;
+    text-align: left !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    cursor: pointer !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: relative !important;
+    transform: none !important;
+    transition: background 0.15s ease, color 0.15s ease !important;
+}
+#navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item::before,
+#navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item::after {
+    display: none !important;
+    content: none !important;
+}
+#navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item:hover {
+    background: #fef2f2 !important;
+    color: #c1272d !important;
+    -webkit-text-fill-color: #c1272d !important;
+}
+#navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item.active-tool {
+    background: #fef2f2 !important;
+    color: #c1272d !important;
+    -webkit-text-fill-color: #c1272d !important;
+    font-weight: 800 !important;
+}
+#navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item.nav-dropdown-hub {
+    background: linear-gradient(135deg, rgba(193, 39, 45, 0.1), rgba(0, 98, 51, 0.1)) !important;
+    color: #c1272d !important;
+    -webkit-text-fill-color: #c1272d !important;
+    font-weight: 800 !important;
+    border: 1px solid rgba(193, 39, 45, 0.25) !important;
+    margin-bottom: 4px !important;
+}
+#navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item.nav-dropdown-hub:hover {
+    background: linear-gradient(135deg, rgba(193, 39, 45, 0.18), rgba(0, 98, 51, 0.18)) !important;
+}
+
+/* ═══ BOUTON TRADUCTEUR DANS LA NAVBAR (PAGES OUTILS) ═══ */
+.lang-switcher { display: inline-flex !important; align-items: center !important; background: #f1f5f9 !important; padding: 3px !important; border-radius: 9999px !important; border: 1px solid #e2e8f0 !important; gap: 2px !important; }
+.lang-btn { border: none !important; background: transparent !important; padding: 0.28rem 0.6rem !important; border-radius: 9999px !important; font-size: 0.73rem !important; font-weight: 700 !important; color: #475569 !important; cursor: pointer !important; transition: all 0.2s ease !important; }
+.lang-btn.active { background: #ffffff !important; color: #c1272d !important; box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important; }
+
 .nav-cta { 
     display: inline-flex !important; 
     align-items: center !important; 
     gap: 0.5rem !important; 
     padding: 0.5rem 1.25rem !important; 
     background: linear-gradient(135deg, #c1272d, #006233) !important; 
-    color: white !important; 
+    color: white !important;
+    -webkit-text-fill-color: white !important;
     font-weight: 800 !important; 
     font-size: 0.9375rem !important; 
     border-radius: 9999px !important; 
@@ -184,9 +351,9 @@ const NAVBAR_CSS_BLOCK = `
     opacity: 1 !important; 
 }
 @media (max-width: 768px) {
-    .nav-container { display: flex !important; justify-content: space-between !important; }
-    .nav-right { gap: 0.5rem !important; }
-    .nav-menu { 
+    .nav-container, #navbar .nav-container { display: flex !important; justify-content: space-between !important; }
+    .nav-right, #navbar .nav-right { gap: 0.5rem !important; }
+    .nav-menu, #navbar #navMenu { 
         position: absolute !important; 
         top: 100% !important; 
         left: 1rem !important; 
@@ -207,34 +374,55 @@ const NAVBAR_CSS_BLOCK = `
         align-items: center !important; 
         text-align: center !important; 
     }
-    .nav-menu.active { 
+    .nav-menu.active, #navbar #navMenu.active { 
         transform: translateY(0) !important; 
         opacity: 1 !important; 
         pointer-events: auto !important; 
     }
-    .nav-link { 
+    .nav-link, #navbar .nav-link { 
         padding: 0.6rem 0 !important; 
         width: 100% !important; 
         text-align: center !important; 
         justify-content: center !important; 
         font-weight: 800 !important; 
     }
+    #navbar .nav-dropdown {
+        width: 100% !important;
+        flex-direction: column !important;
+    }
+    #navbar #navMenu .nav-dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        width: 100% !important;
+        box-shadow: none !important;
+        border: 1px solid #e2e8f0 !important;
+        margin-top: 0.35rem !important;
+        display: none !important;
+    }
+    #navbar #navMenu .nav-dropdown:hover > .nav-dropdown-menu,
+    #navbar #navMenu .nav-dropdown.open > .nav-dropdown-menu {
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+    }
     .nav-toggle { display: flex !important; }
     .nav-cta.nav-cta-mobile { display: inline-flex !important; width: 100% !important; justify-content: center !important; margin-top: 0.5rem !important; }
     .nav-cta.nav-cta-desktop { display: none !important; }
 }
 @media (max-width: 480px) {
-    .navbar { padding: 0.75rem 1rem !important; }
+    .navbar, #navbar { padding: 0.75rem 1rem !important; }
 }
 `;
 
-// ═══ 2. Script JavaScript unique pour le menu ═══
+// ═══ 2. Script JavaScript unique pour le menu + hover dropdown ═══
 const NAVBAR_SCRIPT_TAG = `
 <script id="profeps-navbar-script">
 (() => {
     const navbar = document.getElementById('navbar');
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
+    const navDropdown = document.querySelector('#navbar .nav-dropdown');
     let backdrop = document.getElementById('navBackdrop');
 
     if (!backdrop) {
@@ -248,6 +436,11 @@ const NAVBAR_SCRIPT_TAG = `
         window.addEventListener('scroll', () => {
             navbar.classList.toggle('scrolled', window.scrollY > 40);
         });
+    }
+
+    if (navDropdown) {
+        navDropdown.addEventListener('mouseenter', () => navDropdown.classList.add('open'));
+        navDropdown.addEventListener('mouseleave', () => navDropdown.classList.remove('open'));
     }
 
     if (navToggle && navMenu) {
@@ -278,7 +471,7 @@ const NAVBAR_SCRIPT_TAG = `
             }
         });
 
-        navMenu.querySelectorAll('.nav-link, .nav-cta').forEach(link => {
+        navMenu.querySelectorAll('.nav-dropdown-item, .nav-cta').forEach(link => {
             link.addEventListener('click', closeNav);
         });
     }
@@ -288,6 +481,7 @@ const NAVBAR_SCRIPT_TAG = `
 
 function getActiveKey(filename) {
     const b = path.basename(filename).toLowerCase();
+    if (TOOL_NAV_LABELS[b]) return 'vma';
     if (b === 'index.html' || b === 'home.html') return 'accueil';
     if (b.includes('generateur')) return 'generateur';
     if (b.includes('calculateur') || b.includes('vma')) return 'vma';
@@ -297,25 +491,44 @@ function getActiveKey(filename) {
     return '';
 }
 
-function buildNavbarHTML(filePath) {
+function buildNavbarHTML(filePath, existingLangSwitcherHtml = '') {
+    const baseName = path.basename(filePath).toLowerCase();
     const key = getActiveKey(filePath);
     const act = (k) => (key === k ? ' active' : '');
+
+    // Nom affiché sur le bouton du menu déroulant (page actuelle si outil, sinon "Calculateur VMA")
+    const currentDropdownLabel = TOOL_NAV_LABELS[baseName] || 'Calculateur VMA';
+    const currentDropdownHref = TOOL_NAV_LABELS[baseName] ? baseName : 'calculateur-vma.html';
+
+    const dropdownLinksHtml = DROPDOWN_ITEMS.map(item => {
+        const isCurrent = item.href.toLowerCase() === baseName;
+        const cls = item.isHub
+            ? `nav-dropdown-item nav-dropdown-hub${isCurrent ? ' active-tool' : ''}`
+            : `nav-dropdown-item${isCurrent ? ' active-tool' : ''}`;
+        return `                        <a href="${item.href}" class="${cls}">${item.label}</a>`;
+    }).join('\n');
 
     return `
     <div class="nav-backdrop" id="navBackdrop"></div>
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="/" class="nav-logo" aria-label="Prof EPS Maroc - Accueil">
-                <img src="/images/prof_eps.png" alt="Prof EPS Maroc" width="140" height="40" fetchpriority="high" decoding="async" style="height:56px; width:auto; max-width:180px; object-fit:contain; display:block;">
+                <img src="/images/prof_eps.png" onerror="this.onerror=null;this.src='https://profeps.ma/images/prof_eps.png';" alt="Prof EPS Maroc" width="140" height="40" fetchpriority="high" decoding="async" style="height:54px; width:auto; max-width:180px; object-fit:contain; display:block;">
             </a>
             <div class="nav-menu" id="navMenu">
                 <a href="/" class="nav-link${act('accueil')}">Accueil</a>
                 <a href="generateur.html" class="nav-link${act('generateur')}">Générateur</a>
-                <a href="calculateur-vma.html" class="nav-link${act('vma')}">Calculateur VMA</a>
+                <div class="nav-dropdown">
+                    <a href="${currentDropdownHref}" class="nav-link${act('vma')}"><span id="nav-current-tool-label">${currentDropdownLabel}</span> <span class="nav-dropdown-caret">▾</span></a>
+                    <div class="nav-dropdown-menu">
+${dropdownLinksHtml}
+                    </div>
+                </div>
                 <a href="blog.html" class="nav-link${act('blog')}">Blog</a>
                 <a href="generateur.html" class="nav-cta nav-cta-mobile"><span>✨</span> Créer un document</a>
             </div>
             <div class="nav-right">
+                ${existingLangSwitcherHtml}
                 <a href="generateur.html" class="nav-cta nav-cta-desktop"><span>✨</span> Créer un document</a>
                 <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
             </div>
@@ -354,19 +567,37 @@ let count = 0;
 files.forEach(file => {
     let html = fs.readFileSync(file, 'utf8');
     const oldHtml = html;
+    const baseName = path.basename(file).toLowerCase();
 
-    // 1. Style dédié injecté
+    // 0. Nettoyer les anciens blocs CSS dropdown injectés dans d'autres balises <style>
+    html = html.replace(/\/\* === PROFEPS DROPDOWN[\s\S]*?(?=<\/style>)/g, '');
+    html = html.replace(/\/\* === DROPDOWN MENU[\s\S]*?(?=<\/style>)/g, '');
+
+    // Préserver le sélecteur de langue dans .nav-right s'il s'agit d'une page calculateur
+    let langSwitcherHtml = '';
+    const existingNavMatch = html.match(/<nav[\s\S]*?<\/nav>/i);
+    if (existingNavMatch) {
+        const langMatch = existingNavMatch[0].match(/<div[^>]*class="[^"]*lang-switcher[^"]*"[^>]*>[\s\S]*?<\/div>/i);
+        if (langMatch) {
+            langSwitcherHtml = langMatch[0];
+        }
+    }
+    if (!langSwitcherHtml && TOOL_NAV_LABELS[baseName] && baseName !== 'calculateur-vma.html') {
+        langSwitcherHtml = `<div class="lang-switcher"><button id="btn-fr" onclick="setLang('fr')" class="lang-btn active">FR</button><button id="btn-en" onclick="setLang('en')" class="lang-btn">EN</button><button id="btn-ar" onclick="setLang('ar')" class="lang-btn">العربية</button></div>`;
+    }
+
+    // 1. Style dédié injecté juste avant </head>
     const customStyleTag = `<style id="profeps-navbar-styles">\n${NAVBAR_CSS_BLOCK.trim()}\n</style>`;
     html = html.replace(/<style id="profeps-navbar-styles">[\s\S]*?<\/style>/g, '');
-    
+
     if (html.includes('</head>')) {
         html = html.replace('</head>', `${customStyleTag}\n</head>`);
     } else {
         html = customStyleTag + html;
     }
 
-    // 2. Remplacer la Navbar
-    const newNav = buildNavbarHTML(file);
+    // 2. Remplacer la Navbar complète
+    const newNav = buildNavbarHTML(file, langSwitcherHtml);
     html = html.replace(/<div class="nav-backdrop"[^>]*><\/div>/g, '');
 
     const navMatch = /<nav[\s\S]*?<\/nav>/i;
@@ -376,7 +607,7 @@ files.forEach(file => {
         html = html.replace(/(<body[^>]*>)/i, `$1\n${newNav.trim()}`);
     }
 
-    // 3. Remplacer le script JS
+    // 3. Remplacer le script JS de la Navbar
     html = html.replace(/<script id="profeps-navbar-script">[\s\S]*?<\/script>/g, '');
     if (html.includes('</body>')) {
         html = html.replace('</body>', `${NAVBAR_SCRIPT_TAG.trim()}\n</body>`);
@@ -396,5 +627,5 @@ files.forEach(file => {
 
 console.log('\n======================================================');
 console.log(`🎉 SUCCÈS : ${count} / ${files.length} fichier(s) HTML mis à jour !`);
-console.log('Les titres sont désormais plus gras (800) et tous centrés.');
+console.log('Menu déroulant unifié et actif sur toutes les pages.');
 console.log('======================================================\n');
