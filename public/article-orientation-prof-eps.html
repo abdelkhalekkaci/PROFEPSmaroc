@@ -376,6 +376,7 @@
 html {
   overflow-y: scroll !important;
 }
+/* Masquer tout ancien <nav class="navbar"> ou leurre #navbar pour éviter toute superposition */
 nav.navbar, #navbar, .navbar-decoy {
   display: none !important;
   visibility: hidden !important;
@@ -386,6 +387,29 @@ nav.navbar, #navbar, .navbar-decoy {
   overflow: hidden !important;
   position: absolute !important;
   z-index: -9999 !important;
+}
+/* Masquer tout bouton traducteur en doublon dans le contenu des pages (hors #pepsNavbar) */
+.lang-switch:not(.peps-lang-switch),
+.in-page-lang-switch,
+header .lang-switch,
+main .lang-switch,
+.vma-hero .lang-switch,
+#btn-lang-fr,
+#btn-lang-en,
+#btn-lang-ar,
+button[onclick*="setToolLang"],
+button[onclick*="changeLang"],
+button.lang-btn:not(.peps-lang-btn) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  overflow: hidden !important;
 }
 #pepsNavbar.peps-navbar {
   position: fixed !important;
@@ -470,9 +494,9 @@ nav.navbar, #navbar, .navbar-decoy {
   padding-right: 0.25rem !important;
 }
 #pepsNavbar .peps-nav-link {
-  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  font-size: 0.96rem !important;
-  font-weight: 800 !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 0.9375rem !important;
+  font-weight: 500 !important;
   color: #1a1a2e !important;
   -webkit-text-fill-color: #1a1a2e !important;
   padding: 0.5rem 0.65rem !important;
@@ -485,7 +509,7 @@ nav.navbar, #navbar, .navbar-decoy {
   position: relative !important;
   white-space: nowrap !important;
   line-height: 1.2 !important;
-  letter-spacing: -0.01em !important;
+  letter-spacing: 0 !important;
   background: transparent !important;
   border: none !important;
   cursor: pointer !important;
@@ -499,7 +523,7 @@ nav.navbar, #navbar, .navbar-decoy {
   bottom: -2px !important;
   left: 50% !important;
   right: 50% !important;
-  height: 3px !important;
+  height: 2.5px !important;
   background: linear-gradient(90deg, #c1272d, #006233) !important;
   border-radius: 2px !important;
   transition: left 0.25s ease, right 0.25s ease !important;
@@ -530,7 +554,7 @@ nav.navbar, #navbar, .navbar-decoy {
   opacity: 1 !important;
 }
 #pepsNavbar .peps-dropdown-caret {
-  font-size: 0.78rem !important;
+  font-size: 0.75rem !important;
   line-height: 1 !important;
   display: inline-block !important;
   margin-left: 0.25rem !important;
@@ -542,6 +566,7 @@ nav.navbar, #navbar, .navbar-decoy {
   transform: rotate(180deg) !important;
   color: #c1272d !important;
 }
+/* Pont invisible sous le bouton pour garder le hover actif en descendant vers la liste */
 #pepsNavbar .peps-dropdown::after {
   content: '' !important;
   position: absolute !important;
@@ -604,7 +629,7 @@ nav.navbar, #navbar, .navbar-decoy {
   border-radius: 9px !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-size: 0.83rem !important;
-  font-weight: 600 !important;
+  font-weight: 500 !important;
   line-height: 1.35 !important;
   color: #0f172a !important;
   -webkit-text-fill-color: #0f172a !important;
@@ -633,13 +658,13 @@ nav.navbar, #navbar, .navbar-decoy {
   background: rgba(193, 39, 45, 0.09) !important;
   color: #c1272d !important;
   -webkit-text-fill-color: #c1272d !important;
-  font-weight: 800 !important;
+  font-weight: 600 !important;
 }
 #pepsNavbar .peps-dropdown-menu a.peps-dropdown-item.peps-dropdown-hub {
   background: linear-gradient(135deg, rgba(193, 39, 45, 0.1), rgba(0, 98, 51, 0.1)) !important;
   color: #c1272d !important;
   -webkit-text-fill-color: #c1272d !important;
-  font-weight: 800 !important;
+  font-weight: 600 !important;
   border: 1px solid rgba(193, 39, 45, 0.24) !important;
   margin-bottom: 0.3rem !important;
 }
@@ -669,7 +694,7 @@ nav.navbar, #navbar, .navbar-decoy {
   padding: 5px 11px !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-size: 0.78rem !important;
-  font-weight: 800 !important;
+  font-weight: 600 !important;
   color: #475569 !important;
   border-radius: 9999px !important;
   line-height: 1.2 !important;
@@ -678,6 +703,7 @@ nav.navbar, #navbar, .navbar-decoy {
 #pepsNavbar .peps-lang-btn.active {
   background: #ffffff !important;
   color: #0f172a !important;
+  font-weight: 600 !important;
   box-shadow: 0 1px 4px rgba(15, 23, 42, 0.14) !important;
 }
 #pepsNavbar .peps-lang-btn:hover:not(.active) {
@@ -918,11 +944,11 @@ footer.footer, #profeps-unified-footer {
       </div>
       <div class="peps-nav-right">
         <div dir="ltr" class="peps-lang-switch" aria-label="Sélecteur de langue">
-          <button type="button" class="peps-lang-btn active" id="btn-lang-fr" data-lang="fr" onclick="window.profepsSetLang('fr')">FR</button>
+          <button type="button" class="peps-lang-btn active" id="peps-btn-lang-fr" data-lang="fr" onclick="window.profepsSetLang('fr')">FR</button>
           <span class="peps-lang-sep">/</span>
-          <button type="button" class="peps-lang-btn" id="btn-lang-en" data-lang="en" onclick="window.profepsSetLang('en')">EN</button>
+          <button type="button" class="peps-lang-btn" id="peps-btn-lang-en" data-lang="en" onclick="window.profepsSetLang('en')">EN</button>
           <span class="peps-lang-sep">/</span>
-          <button type="button" class="peps-lang-btn" id="btn-lang-ar" data-lang="ar" onclick="window.profepsSetLang('ar')">عربي</button>
+          <button type="button" class="peps-lang-btn" id="peps-btn-lang-ar" data-lang="ar" onclick="window.profepsSetLang('ar')">عربي</button>
         </div>
         <button type="button" class="peps-nav-toggle" id="pepsNavToggle" aria-label="Menu">
           <span></span><span></span><span></span>
@@ -997,6 +1023,7 @@ footer.footer, #profeps-unified-footer {
     dropdownMenu.addEventListener('mouseleave', closeDropdownDelayed);
   }
 
+  // Délégation globale en renfort pour garantir l'ouverture au survol sur 100 % des pages
   document.addEventListener('mouseover', function(e) {
     var t = e.target;
     if (t && t.closest && (t.closest('#pepsCalcDropdown') || t.closest('#pepsDropdownMenu'))) {
@@ -1013,15 +1040,31 @@ footer.footer, #profeps-unified-footer {
     }
   });
 
-  function removeLegacyNavbars() {
+  // Supprimer tout ancien <nav class="navbar"> résiduel ET tout bouton traducteur en doublon dans le contenu
+  function cleanPageDuplicates() {
     document.querySelectorAll('nav.navbar:not(.navbar-decoy), .navbar:not(.navbar-decoy)').forEach(function(oldNav) {
       if (oldNav.id !== 'pepsNavbar') {
         if (oldNav.parentNode) oldNav.parentNode.removeChild(oldNav);
       }
     });
+    document.querySelectorAll('.lang-switch:not(.peps-lang-switch), .in-page-lang-switch, #btn-lang-fr, #btn-lang-en, #btn-lang-ar, button[onclick*="setToolLang"], button[onclick*="changeLang"], button.lang-btn:not(.peps-lang-btn)').forEach(function(el) {
+      if (!el.closest || !el.closest('#pepsNavbar')) {
+        var wrapper = el.closest ? (el.closest('.lang-switch, .in-page-lang-switch, [aria-label="Language selection"], [title*="Traduction"]') || el) : el;
+        if (wrapper === el && el.parentNode && el.parentNode.tagName === 'DIV') {
+          var parentTxt = (el.parentNode.textContent || '').trim();
+          if (parentTxt.length <= 50 && (!el.parentNode.closest || !el.parentNode.closest('#pepsNavbar'))) {
+            wrapper = el.parentNode;
+          }
+        }
+        if (wrapper && wrapper.parentNode && (!wrapper.closest || !wrapper.closest('#pepsNavbar'))) {
+          wrapper.parentNode.removeChild(wrapper);
+        }
+      }
+    });
   }
-  removeLegacyNavbars();
-  var obs = new MutationObserver(removeLegacyNavbars);
+  cleanPageDuplicates();
+  window.addEventListener('DOMContentLoaded', cleanPageDuplicates);
+  var obs = new MutationObserver(cleanPageDuplicates);
   obs.observe(document.documentElement, { childList: true, subtree: true });
 
   window.addEventListener('scroll', function() {
@@ -1044,7 +1087,7 @@ footer.footer, #profeps-unified-footer {
   window.profepsSetLang = function(lang) {
     try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
     ['fr', 'en', 'ar'].forEach(function(code) {
-      var btn = document.getElementById('btn-lang-' + code);
+      var btn = document.getElementById('peps-btn-lang-' + code);
       if (btn) btn.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
       document.querySelectorAll('.peps-lang-btn[data-lang="' + code + '"]').forEach(function(b) {
         b.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
@@ -1073,10 +1116,7 @@ footer.footer, #profeps-unified-footer {
 })();
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->
-        
-    
-    
-    <header class="article-header">
+<header class="article-header">
         <div class="article-header-content">
             <span class="article-category">&#127891; Orientation & Carriere</span>
             <h1 class="article-title">

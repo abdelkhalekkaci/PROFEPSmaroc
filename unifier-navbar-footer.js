@@ -2,9 +2,9 @@
  * unifier-navbar-footer.js
  * Script maître unique pour ProfEPS.ma :
  * 1. Supprime définitivement les pages login/dashboard, auth-shared.js et Supabase (fichiers + code dans tout le projet)
- * 2. Unifie la Navbar fixe (80px, classes isolées .peps-* impossibles à écraser par d'anciens scripts/CSS)
+ * 2. Unifie la Navbar fixe (80px, texte équilibré font-weight: 500, classes isolées .peps-*)
  * 3. Active le menu déroulant des 11 outils sur 100 % des pages (CSS :hover + JS fluide, affiche l'outil actif)
- * 4. Intègre le bouton traducteur universel (FR / EN / عربي) à droite dans la Navbar et supprime les doublons
+ * 4. Intègre le bouton traducteur universel (FR / EN / عربي) uniquement dans la Navbar et supprime tous les doublons dans le contenu des nouvelles pages
  * 5. Unifie le Footer à 5 colonnes sans doublons avec logo au bon format
  */
 
@@ -273,6 +273,7 @@ const MASTER_CSS = `<style id="profeps-master-unifier-css">
 html {
   overflow-y: scroll !important;
 }
+/* Masquer tout ancien <nav class="navbar"> ou leurre #navbar pour éviter toute superposition */
 nav.navbar, #navbar, .navbar-decoy {
   display: none !important;
   visibility: hidden !important;
@@ -283,6 +284,29 @@ nav.navbar, #navbar, .navbar-decoy {
   overflow: hidden !important;
   position: absolute !important;
   z-index: -9999 !important;
+}
+/* Masquer tout bouton traducteur en doublon dans le contenu des pages (hors #pepsNavbar) */
+.lang-switch:not(.peps-lang-switch),
+.in-page-lang-switch,
+header .lang-switch,
+main .lang-switch,
+.vma-hero .lang-switch,
+#btn-lang-fr,
+#btn-lang-en,
+#btn-lang-ar,
+button[onclick*="setToolLang"],
+button[onclick*="changeLang"],
+button.lang-btn:not(.peps-lang-btn) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  overflow: hidden !important;
 }
 #pepsNavbar.peps-navbar {
   position: fixed !important;
@@ -367,9 +391,9 @@ nav.navbar, #navbar, .navbar-decoy {
   padding-right: 0.25rem !important;
 }
 #pepsNavbar .peps-nav-link {
-  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  font-size: 0.96rem !important;
-  font-weight: 800 !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 0.9375rem !important;
+  font-weight: 500 !important;
   color: #1a1a2e !important;
   -webkit-text-fill-color: #1a1a2e !important;
   padding: 0.5rem 0.65rem !important;
@@ -382,7 +406,7 @@ nav.navbar, #navbar, .navbar-decoy {
   position: relative !important;
   white-space: nowrap !important;
   line-height: 1.2 !important;
-  letter-spacing: -0.01em !important;
+  letter-spacing: 0 !important;
   background: transparent !important;
   border: none !important;
   cursor: pointer !important;
@@ -396,7 +420,7 @@ nav.navbar, #navbar, .navbar-decoy {
   bottom: -2px !important;
   left: 50% !important;
   right: 50% !important;
-  height: 3px !important;
+  height: 2.5px !important;
   background: linear-gradient(90deg, #c1272d, #006233) !important;
   border-radius: 2px !important;
   transition: left 0.25s ease, right 0.25s ease !important;
@@ -427,7 +451,7 @@ nav.navbar, #navbar, .navbar-decoy {
   opacity: 1 !important;
 }
 #pepsNavbar .peps-dropdown-caret {
-  font-size: 0.78rem !important;
+  font-size: 0.75rem !important;
   line-height: 1 !important;
   display: inline-block !important;
   margin-left: 0.25rem !important;
@@ -439,6 +463,7 @@ nav.navbar, #navbar, .navbar-decoy {
   transform: rotate(180deg) !important;
   color: #c1272d !important;
 }
+/* Pont invisible sous le bouton pour garder le hover actif en descendant vers la liste */
 #pepsNavbar .peps-dropdown::after {
   content: '' !important;
   position: absolute !important;
@@ -501,7 +526,7 @@ nav.navbar, #navbar, .navbar-decoy {
   border-radius: 9px !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-size: 0.83rem !important;
-  font-weight: 600 !important;
+  font-weight: 500 !important;
   line-height: 1.35 !important;
   color: #0f172a !important;
   -webkit-text-fill-color: #0f172a !important;
@@ -530,13 +555,13 @@ nav.navbar, #navbar, .navbar-decoy {
   background: rgba(193, 39, 45, 0.09) !important;
   color: #c1272d !important;
   -webkit-text-fill-color: #c1272d !important;
-  font-weight: 800 !important;
+  font-weight: 600 !important;
 }
 #pepsNavbar .peps-dropdown-menu a.peps-dropdown-item.peps-dropdown-hub {
   background: linear-gradient(135deg, rgba(193, 39, 45, 0.1), rgba(0, 98, 51, 0.1)) !important;
   color: #c1272d !important;
   -webkit-text-fill-color: #c1272d !important;
-  font-weight: 800 !important;
+  font-weight: 600 !important;
   border: 1px solid rgba(193, 39, 45, 0.24) !important;
   margin-bottom: 0.3rem !important;
 }
@@ -566,7 +591,7 @@ nav.navbar, #navbar, .navbar-decoy {
   padding: 5px 11px !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-size: 0.78rem !important;
-  font-weight: 800 !important;
+  font-weight: 600 !important;
   color: #475569 !important;
   border-radius: 9999px !important;
   line-height: 1.2 !important;
@@ -575,6 +600,7 @@ nav.navbar, #navbar, .navbar-decoy {
 #pepsNavbar .peps-lang-btn.active {
   background: #ffffff !important;
   color: #0f172a !important;
+  font-weight: 600 !important;
   box-shadow: 0 1px 4px rgba(15, 23, 42, 0.14) !important;
 }
 #pepsNavbar .peps-lang-btn:hover:not(.active) {
@@ -826,11 +852,11 @@ ${dropdownLinks}
       </div>
       <div class="peps-nav-right">
         <div dir="ltr" class="peps-lang-switch" aria-label="Sélecteur de langue">
-          <button type="button" class="peps-lang-btn active" id="btn-lang-fr" data-lang="fr" onclick="window.profepsSetLang('fr')">FR</button>
+          <button type="button" class="peps-lang-btn active" id="peps-btn-lang-fr" data-lang="fr" onclick="window.profepsSetLang('fr')">FR</button>
           <span class="peps-lang-sep">/</span>
-          <button type="button" class="peps-lang-btn" id="btn-lang-en" data-lang="en" onclick="window.profepsSetLang('en')">EN</button>
+          <button type="button" class="peps-lang-btn" id="peps-btn-lang-en" data-lang="en" onclick="window.profepsSetLang('en')">EN</button>
           <span class="peps-lang-sep">/</span>
-          <button type="button" class="peps-lang-btn" id="btn-lang-ar" data-lang="ar" onclick="window.profepsSetLang('ar')">عربي</button>
+          <button type="button" class="peps-lang-btn" id="peps-btn-lang-ar" data-lang="ar" onclick="window.profepsSetLang('ar')">عربي</button>
         </div>
         <button type="button" class="peps-nav-toggle" id="pepsNavToggle" aria-label="Menu">
           <span></span><span></span><span></span>
@@ -987,6 +1013,7 @@ const MASTER_JS_BODY = `(function() {
     dropdownMenu.addEventListener('mouseleave', closeDropdownDelayed);
   }
 
+  // Délégation globale en renfort pour garantir l'ouverture au survol sur 100 % des pages
   document.addEventListener('mouseover', function(e) {
     var t = e.target;
     if (t && t.closest && (t.closest('#pepsCalcDropdown') || t.closest('#pepsDropdownMenu'))) {
@@ -1003,15 +1030,31 @@ const MASTER_JS_BODY = `(function() {
     }
   });
 
-  function removeLegacyNavbars() {
+  // Supprimer tout ancien <nav class="navbar"> résiduel ET tout bouton traducteur en doublon dans le contenu
+  function cleanPageDuplicates() {
     document.querySelectorAll('nav.navbar:not(.navbar-decoy), .navbar:not(.navbar-decoy)').forEach(function(oldNav) {
       if (oldNav.id !== 'pepsNavbar') {
         if (oldNav.parentNode) oldNav.parentNode.removeChild(oldNav);
       }
     });
+    document.querySelectorAll('.lang-switch:not(.peps-lang-switch), .in-page-lang-switch, #btn-lang-fr, #btn-lang-en, #btn-lang-ar, button[onclick*="setToolLang"], button[onclick*="changeLang"], button.lang-btn:not(.peps-lang-btn)').forEach(function(el) {
+      if (!el.closest || !el.closest('#pepsNavbar')) {
+        var wrapper = el.closest ? (el.closest('.lang-switch, .in-page-lang-switch, [aria-label="Language selection"], [title*="Traduction"]') || el) : el;
+        if (wrapper === el && el.parentNode && el.parentNode.tagName === 'DIV') {
+          var parentTxt = (el.parentNode.textContent || '').trim();
+          if (parentTxt.length <= 50 && (!el.parentNode.closest || !el.parentNode.closest('#pepsNavbar'))) {
+            wrapper = el.parentNode;
+          }
+        }
+        if (wrapper && wrapper.parentNode && (!wrapper.closest || !wrapper.closest('#pepsNavbar'))) {
+          wrapper.parentNode.removeChild(wrapper);
+        }
+      }
+    });
   }
-  removeLegacyNavbars();
-  var obs = new MutationObserver(removeLegacyNavbars);
+  cleanPageDuplicates();
+  window.addEventListener('DOMContentLoaded', cleanPageDuplicates);
+  var obs = new MutationObserver(cleanPageDuplicates);
   obs.observe(document.documentElement, { childList: true, subtree: true });
 
   window.addEventListener('scroll', function() {
@@ -1034,7 +1077,7 @@ const MASTER_JS_BODY = `(function() {
   window.profepsSetLang = function(lang) {
     try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
     ['fr', 'en', 'ar'].forEach(function(code) {
-      var btn = document.getElementById('btn-lang-' + code);
+      var btn = document.getElementById('peps-btn-lang-' + code);
       if (btn) btn.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
       document.querySelectorAll('.peps-lang-btn[data-lang="' + code + '"]').forEach(function(b) {
         b.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
@@ -1062,6 +1105,14 @@ const MASTER_JS_BODY = `(function() {
   }
 })();`;
 
+// Vérification syntaxique automatique du JS maître avant injection
+try {
+  new Function(MASTER_JS_BODY);
+} catch (syntaxErr) {
+  console.error('❌ Erreur de syntaxe dans MASTER_JS_BODY :', syntaxErr);
+  process.exit(1);
+}
+
 const MASTER_JS = `<script id="profeps-master-unifier-js">\n${MASTER_JS_BODY}\n</script>\n<!-- PROFEPS_UNIFIED_NAVBAR_END -->`;
 
 // ═══ ÉTAPE 5 : MISE À JOUR ET NETTOYAGE DE TOUTES LES PAGES HTML DU PROJET ═══
@@ -1077,6 +1128,11 @@ dirsToScan.forEach((dir) => {
   htmlFiles.forEach((file) => {
     const filePath = path.join(dir, file);
     let html = fs.readFileSync(filePath, 'utf8');
+
+    // Ignorer le point d'entrée Vite SPA s'il contient uniquement <div id="root"></div>
+    if (file === 'index.html' && html.includes('<div id="root"></div>') && html.includes('/src/main.tsx')) {
+      return;
+    }
 
     // 1. Supprimer toutes les balises <script> Supabase / auth-shared / login / dashboard / navbar.js
     html = html.replace(/<script[^>]*src=["'][^"']*(?:supabase|auth-shared|auth\.js|login\.js|dashboard\.js|navbar\.js)[^"']*["'][^>]*>\s*<\/script>\s*/gi, '');
@@ -1107,10 +1163,15 @@ dirsToScan.forEach((dir) => {
     html = html.replace(/<script id="profeps-navbar-script">[\s\S]*?<\/script>\s*/g, '');
     html = html.replace(/<script id="profeps-master-unifier-js">[\s\S]*?<\/script>\s*/g, '');
     html = html.replace(/\/\*\s*═══\s*NAVBAR CANONIQUE UNIFIÉE\s*═══\s*\*\/[\s\S]*?(?=<\/style>)/g, '');
-    html = html.replace(/<div[^>]*class="[^"]*in-page-lang-switch[^"]*"[^>]*>[\s\S]*?<\/div>/gi, '');
 
     // Supprimer TOUTES les anciennes balises <nav class="navbar"> ou <nav id="navbar">
     html = html.replace(/<nav[^>]*(?:id=["']navbar["']|class=["'][^"']*navbar[^"']*["'])[^>]*>[\s\S]*?<\/nav>\s*/gi, '');
+
+    // Supprimer TOUT bouton traducteur en doublon dans le contenu des nouvelles pages (hors navbar)
+    html = html.replace(/<div\b[^>]*class=["'][^"']*in-page-lang-switch[^"']*["'][^>]*>[\s\S]*?<\/div>\s*/gi, '');
+    html = html.replace(/<div\b[^>]*class=["'][^"']*lang-switch[^"']*["'][^>]*>[\s\S]*?<\/div>\s*/gi, '');
+    html = html.replace(/<div\b[^>]*>(?:(?!<div\b|<h1\b|<main\b|<header\b)[\s\S])*?(?:setToolLang|btn-lang-fr|in-page-lang-switch)[\s\S]*?<\/div>\s*/gi, '');
+    html = html.replace(/<button\b[^>]*(?:setToolLang|btn-lang-(?:fr|en|ar))[^>]*>[\s\S]*?<\/button>\s*/gi, '');
 
     // 5. Injecter le CSS maître juste avant </head>
     if (/<\/head>/i.test(html)) {
@@ -1142,9 +1203,9 @@ dirsToScan.forEach((dir) => {
     }
 
     fs.writeFileSync(filePath, html, 'utf8');
-    console.log(`✅ [UNIFIÉ & NETTOYÉ DE SUPABASE] -> ${path.relative(rootDir, filePath)}`);
+    console.log(`✅ [UNIFIÉ & SANS DOUBLON TRADUCTEUR] -> ${path.relative(rootDir, filePath)}`);
     updatedCount++;
   });
 });
 
-console.log(`\n🎉 SUCCÈS TOTAL : ${updatedCount} pages HTML unifiées, login/dashboard/Supabase supprimés définitivement !`);
+console.log(`\n🎉 SUCCÈS TOTAL : ${updatedCount} pages HTML mises à jour (texte Navbar affiné + doublons traducteur supprimés) !`);

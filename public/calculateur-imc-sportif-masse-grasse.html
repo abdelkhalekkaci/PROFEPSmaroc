@@ -67,6 +67,7 @@
 html {
   overflow-y: scroll !important;
 }
+/* Masquer tout ancien <nav class="navbar"> ou leurre #navbar pour éviter toute superposition */
 nav.navbar, #navbar, .navbar-decoy {
   display: none !important;
   visibility: hidden !important;
@@ -77,6 +78,29 @@ nav.navbar, #navbar, .navbar-decoy {
   overflow: hidden !important;
   position: absolute !important;
   z-index: -9999 !important;
+}
+/* Masquer tout bouton traducteur en doublon dans le contenu des pages (hors #pepsNavbar) */
+.lang-switch:not(.peps-lang-switch),
+.in-page-lang-switch,
+header .lang-switch,
+main .lang-switch,
+.vma-hero .lang-switch,
+#btn-lang-fr,
+#btn-lang-en,
+#btn-lang-ar,
+button[onclick*="setToolLang"],
+button[onclick*="changeLang"],
+button.lang-btn:not(.peps-lang-btn) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  overflow: hidden !important;
 }
 #pepsNavbar.peps-navbar {
   position: fixed !important;
@@ -161,9 +185,9 @@ nav.navbar, #navbar, .navbar-decoy {
   padding-right: 0.25rem !important;
 }
 #pepsNavbar .peps-nav-link {
-  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  font-size: 0.96rem !important;
-  font-weight: 800 !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 0.9375rem !important;
+  font-weight: 500 !important;
   color: #1a1a2e !important;
   -webkit-text-fill-color: #1a1a2e !important;
   padding: 0.5rem 0.65rem !important;
@@ -176,7 +200,7 @@ nav.navbar, #navbar, .navbar-decoy {
   position: relative !important;
   white-space: nowrap !important;
   line-height: 1.2 !important;
-  letter-spacing: -0.01em !important;
+  letter-spacing: 0 !important;
   background: transparent !important;
   border: none !important;
   cursor: pointer !important;
@@ -190,7 +214,7 @@ nav.navbar, #navbar, .navbar-decoy {
   bottom: -2px !important;
   left: 50% !important;
   right: 50% !important;
-  height: 3px !important;
+  height: 2.5px !important;
   background: linear-gradient(90deg, #c1272d, #006233) !important;
   border-radius: 2px !important;
   transition: left 0.25s ease, right 0.25s ease !important;
@@ -221,7 +245,7 @@ nav.navbar, #navbar, .navbar-decoy {
   opacity: 1 !important;
 }
 #pepsNavbar .peps-dropdown-caret {
-  font-size: 0.78rem !important;
+  font-size: 0.75rem !important;
   line-height: 1 !important;
   display: inline-block !important;
   margin-left: 0.25rem !important;
@@ -233,6 +257,7 @@ nav.navbar, #navbar, .navbar-decoy {
   transform: rotate(180deg) !important;
   color: #c1272d !important;
 }
+/* Pont invisible sous le bouton pour garder le hover actif en descendant vers la liste */
 #pepsNavbar .peps-dropdown::after {
   content: '' !important;
   position: absolute !important;
@@ -295,7 +320,7 @@ nav.navbar, #navbar, .navbar-decoy {
   border-radius: 9px !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-size: 0.83rem !important;
-  font-weight: 600 !important;
+  font-weight: 500 !important;
   line-height: 1.35 !important;
   color: #0f172a !important;
   -webkit-text-fill-color: #0f172a !important;
@@ -324,13 +349,13 @@ nav.navbar, #navbar, .navbar-decoy {
   background: rgba(193, 39, 45, 0.09) !important;
   color: #c1272d !important;
   -webkit-text-fill-color: #c1272d !important;
-  font-weight: 800 !important;
+  font-weight: 600 !important;
 }
 #pepsNavbar .peps-dropdown-menu a.peps-dropdown-item.peps-dropdown-hub {
   background: linear-gradient(135deg, rgba(193, 39, 45, 0.1), rgba(0, 98, 51, 0.1)) !important;
   color: #c1272d !important;
   -webkit-text-fill-color: #c1272d !important;
-  font-weight: 800 !important;
+  font-weight: 600 !important;
   border: 1px solid rgba(193, 39, 45, 0.24) !important;
   margin-bottom: 0.3rem !important;
 }
@@ -360,7 +385,7 @@ nav.navbar, #navbar, .navbar-decoy {
   padding: 5px 11px !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-size: 0.78rem !important;
-  font-weight: 800 !important;
+  font-weight: 600 !important;
   color: #475569 !important;
   border-radius: 9999px !important;
   line-height: 1.2 !important;
@@ -369,6 +394,7 @@ nav.navbar, #navbar, .navbar-decoy {
 #pepsNavbar .peps-lang-btn.active {
   background: #ffffff !important;
   color: #0f172a !important;
+  font-weight: 600 !important;
   box-shadow: 0 1px 4px rgba(15, 23, 42, 0.14) !important;
 }
 #pepsNavbar .peps-lang-btn:hover:not(.active) {
@@ -609,11 +635,11 @@ footer.footer, #profeps-unified-footer {
       </div>
       <div class="peps-nav-right">
         <div dir="ltr" class="peps-lang-switch" aria-label="Sélecteur de langue">
-          <button type="button" class="peps-lang-btn active" id="btn-lang-fr" data-lang="fr" onclick="window.profepsSetLang('fr')">FR</button>
+          <button type="button" class="peps-lang-btn active" id="peps-btn-lang-fr" data-lang="fr" onclick="window.profepsSetLang('fr')">FR</button>
           <span class="peps-lang-sep">/</span>
-          <button type="button" class="peps-lang-btn" id="btn-lang-en" data-lang="en" onclick="window.profepsSetLang('en')">EN</button>
+          <button type="button" class="peps-lang-btn" id="peps-btn-lang-en" data-lang="en" onclick="window.profepsSetLang('en')">EN</button>
           <span class="peps-lang-sep">/</span>
-          <button type="button" class="peps-lang-btn" id="btn-lang-ar" data-lang="ar" onclick="window.profepsSetLang('ar')">عربي</button>
+          <button type="button" class="peps-lang-btn" id="peps-btn-lang-ar" data-lang="ar" onclick="window.profepsSetLang('ar')">عربي</button>
         </div>
         <button type="button" class="peps-nav-toggle" id="pepsNavToggle" aria-label="Menu">
           <span></span><span></span><span></span>
@@ -688,6 +714,7 @@ footer.footer, #profeps-unified-footer {
     dropdownMenu.addEventListener('mouseleave', closeDropdownDelayed);
   }
 
+  // Délégation globale en renfort pour garantir l'ouverture au survol sur 100 % des pages
   document.addEventListener('mouseover', function(e) {
     var t = e.target;
     if (t && t.closest && (t.closest('#pepsCalcDropdown') || t.closest('#pepsDropdownMenu'))) {
@@ -704,15 +731,31 @@ footer.footer, #profeps-unified-footer {
     }
   });
 
-  function removeLegacyNavbars() {
+  // Supprimer tout ancien <nav class="navbar"> résiduel ET tout bouton traducteur en doublon dans le contenu
+  function cleanPageDuplicates() {
     document.querySelectorAll('nav.navbar:not(.navbar-decoy), .navbar:not(.navbar-decoy)').forEach(function(oldNav) {
       if (oldNav.id !== 'pepsNavbar') {
         if (oldNav.parentNode) oldNav.parentNode.removeChild(oldNav);
       }
     });
+    document.querySelectorAll('.lang-switch:not(.peps-lang-switch), .in-page-lang-switch, #btn-lang-fr, #btn-lang-en, #btn-lang-ar, button[onclick*="setToolLang"], button[onclick*="changeLang"], button.lang-btn:not(.peps-lang-btn)').forEach(function(el) {
+      if (!el.closest || !el.closest('#pepsNavbar')) {
+        var wrapper = el.closest ? (el.closest('.lang-switch, .in-page-lang-switch, [aria-label="Language selection"], [title*="Traduction"]') || el) : el;
+        if (wrapper === el && el.parentNode && el.parentNode.tagName === 'DIV') {
+          var parentTxt = (el.parentNode.textContent || '').trim();
+          if (parentTxt.length <= 50 && (!el.parentNode.closest || !el.parentNode.closest('#pepsNavbar'))) {
+            wrapper = el.parentNode;
+          }
+        }
+        if (wrapper && wrapper.parentNode && (!wrapper.closest || !wrapper.closest('#pepsNavbar'))) {
+          wrapper.parentNode.removeChild(wrapper);
+        }
+      }
+    });
   }
-  removeLegacyNavbars();
-  var obs = new MutationObserver(removeLegacyNavbars);
+  cleanPageDuplicates();
+  window.addEventListener('DOMContentLoaded', cleanPageDuplicates);
+  var obs = new MutationObserver(cleanPageDuplicates);
   obs.observe(document.documentElement, { childList: true, subtree: true });
 
   window.addEventListener('scroll', function() {
@@ -735,7 +778,7 @@ footer.footer, #profeps-unified-footer {
   window.profepsSetLang = function(lang) {
     try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
     ['fr', 'en', 'ar'].forEach(function(code) {
-      var btn = document.getElementById('btn-lang-' + code);
+      var btn = document.getElementById('peps-btn-lang-' + code);
       if (btn) btn.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
       document.querySelectorAll('.peps-lang-btn[data-lang="' + code + '"]').forEach(function(b) {
         b.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
@@ -764,7 +807,7 @@ footer.footer, #profeps-unified-footer {
 })();
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->
-  <!-- Header ProfEPS.ma -->
+<!-- Header ProfEPS.ma -->
     
     <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-6">
     <!-- En-tête de l'outil avec bouton Toggle Traducteur FR | EN | AR en haut à droite -->
@@ -777,12 +820,7 @@ footer.footer, #profeps-unified-footer {
         </div>
 
         <!-- Bouton Toggle Traducteur en haut à droite -->
-        <div dir="ltr" class="inline-flex items-center gap-1 p-1 bg-slate-100 border border-slate-200 rounded-lg shrink-0 self-start">
-          <button type="button" onclick="setToolLang('fr')" id="btn-lang-fr" class="px-2.5 py-1 text-xs font-bold rounded-md bg-blue-600 text-white">FR</button>
-          <button type="button" onclick="setToolLang('en')" id="btn-lang-en" class="px-2.5 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900">EN</button>
-          <button type="button" onclick="setToolLang('ar')" id="btn-lang-ar" class="px-2.5 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900">AR عربي</button>
         </div>
-      </div>
     </div>
 
     <!-- Corps du Calculateur -->
@@ -938,142 +976,7 @@ footer.footer, #profeps-unified-footer {
         </div>
       </div>
 
-      <div class="footer-bottom">
-        <span data-i18n-fr="© 2026 Prof EPS Maroc (profeps.ma). Tous droits réservés." data-i18n-en="© 2026 Prof EPS Morocco (profeps.ma). All rights reserved." data-i18n-ar="© 2026 أستاذ التربية البدنية المغرب (profeps.ma). جميع الحقوق محفوظة.">© 2026 Prof EPS Maroc (profeps.ma). Tous droits réservés.</span>
-        <span data-i18n-fr="Fait avec ❤️ pour les enseignants d'EPS au Maroc" data-i18n-en="Made with ❤️ for PE teachers &amp; runners" data-i18n-ar="صنع بـ ❤️ لأساتذة التربية البدنية والعدائين">Fait avec ❤️ pour les enseignants d'EPS au Maroc</span>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    const I18N = {
-      fr: {
-        badge: "Cluster 2 · Composition Corporelle, IMC & Économie de Course",
-        title: "Calculateur d’IMC Sportif, Masse Grasse (IMG) & Interprétation Complète",
-        sub: "Analysez votre Indice de Masse Corporelle selon l’OMS et selon votre profil athlétique (masse musculaire vs masse grasse et impact sur vos chronos).",
-        sex: "Sexe biologique", male: "Homme", female: "Femme",
-        weight: "Poids corporel (kg)", height: "Taille (cm)", age: "Âge (ans)", hours: "Entraînement (h/sem)",
-        resBmi: "Indice IMC (kg/m²)", resImg: "Masse Grasse (IMG)", resLean: "Masse Maigre Estimée",
-        whoTitle: "1. Interprétation Santé Générale (Norme OMS) :",
-        whoUnder: "Insuffisance pondérale (< 18.5) : Risque de déficit énergétique relatif dans le sport (RED-S), baisse immunitaire et risque de fracture de fatigue.",
-        whoNorm: "Corpulence Normale (18.5 – 24.9) : Plage de poids santé optimale associée au plus faible stress métabolique et articulaire.",
-        whoOver: "Surpoids selon l’échelle OMS (25.0 – 29.9) : Attention, chez le sportif régulier, un IMC > 25 traduit souvent un développement musculaire dense et non un excès adipeux.",
-        whoObese: "Obésité (≥ 30.0) : Charge mécanique accrue sur les tendons et articulations porteuses. Privilégier la progressivité et le renforcement.",
-        athTitle: "2. Interprétation Spécifique Athlète & Impact Performance :",
-        athEndurance: "Profil Optimisé Endurance : Rapport poids/puissance idéal pour la course de fond et l’économie d’oxygène.",
-        athMuscular: "Profil Puissance / Masse Musculaire Dense : Votre IMC dépasse 25 mais votre taux de masse grasse est bas grâce à votre volume d’entraînement. Vous êtes athlétique, non en surpoids.",
-        athWarn: "Alerte Disponibilité Énergétique : Masse corporelle basse. Veillez à sécuriser vos apports glucidiques et protéiques.",
-        athGen: "Profil Sportif Équilibré : En course à pied, chaque kg non fonctionnel supplémentaire coûte environ ~2,1 sec/km sur 10 km et Marathon."
-      },
-      en: {
-        badge: "Cluster 2 · Body Mass Index (BMI), Body Fat & Running Economy",
-        title: "Athletic BMI, Body Fat Percentage (IMG) & Dual Interpretation Calculator",
-        sub: "Evaluate your BMI under both World Health Organization (WHO) standards and athletic body composition models.",
-        sex: "Biological Sex", male: "Male", female: "Female",
-        weight: "Body Weight (kg)", height: "Height (cm)", age: "Age (years)", hours: "Training (hrs/week)",
-        resBmi: "BMI Score (kg/m²)", resImg: "Estimated Body Fat %", resLean: "Estimated Lean Mass",
-        whoTitle: "1. World Health Organization (WHO) Standard Interpretation:",
-        whoUnder: "Underweight (< 18.5): Risk of Relative Energy Deficiency in Sport (RED-S), hormonal suppression, and bone stress injuries.",
-        whoNorm: "Normal Weight (18.5 – 24.9): Optimal health weight range with minimal metabolic and joint load.",
-        whoOver: "Overweight on WHO scale (25.0 – 29.9): In trained athletes, BMI > 25 frequently reflects dense skeletal muscle mass rather than excess fat.",
-        whoObese: "Obesity (≥ 30.0): Increased mechanical load on lower-limb joints. Prioritize progressive low-impact volume.",
-        athTitle: "2. Athletic Body Composition & Running Economy Interpretation:",
-        athEndurance: "Optimal Endurance Profile: High power-to-weight ratio for distance running economy.",
-        athMuscular: "Muscular / Power Athlete Profile: Your BMI is ≥ 25 but estimated body fat is low due to training volume. High functional lean mass.",
-        athWarn: "Low Energy Availability Warning: Ensure adequate carbohydrate and caloric intake to protect lean tissue.",
-        athGen: "Balanced Athletic Profile: In distance running, every 1 kg of excess non-functional weight costs ~2.1 sec/km over 10K to Marathon."
-      },
-      ar: {
-        badge: "القطب 2 · مؤشر كتلة الجسم (IMC)، نسبة الدهون والوزن المثالي للرياضي",
-        title: "حاسبة مؤشر كتلة الجسم (IMC) ونسبة الدهون مع التفسير الصحي والرياضي",
-        sub: "تحليل شامل لمؤشر كتلة الجسم وفق معيار منظمة الصحة العالمية ووفق الكتلة العضلية للرياضي وتأثيرها على الأداء.",
-        sex: "الجنس", male: "ذكر", female: "أنثى",
-        weight: "الوزن (كغ)", height: "الطول (سم)", age: "العمر (سنوات)", hours: "ساعات التدريب أسبوعياً",
-        resBmi: "مؤشر كتلة الجسم (kg/m²)", resImg: "نسبة الدهون المقدرة (IMG)", resLean: "الكتلة العضلية الصافية",
-        whoTitle: "1. التفسير الصحي العام (معيار منظمة الصحة العالمية OMS):",
-        whoUnder: "نقص الوزن (< 18.5): خطر نقص الطاقة النسبي في الرياضة (RED-S) وإجهاد العظام.",
-        whoNorm: "وزن طبيعي وصحي (18.5 – 24.9): توازن صحي مثالي للمفاصل والتمثيل الغذائي.",
-        whoOver: "زيادة وزن حسب معيار OMS (25.0 – 29.9): تنبيه: لدى الرياضيين، غالباً ما يعكس المؤشر فوق 25 كثافة عضلية عالية وليس دهوناً زائدة.",
-        whoObese: "سمنة (≥ 30.0): عبء ميكانيكي إضافي على المفاصل والأوتار؛ يُنصح بالتدرج في الحمل التدريبي.",
-        athTitle: "2. التفسير الخاص بالرياضيين وتأثير الوزن على الأداء:",
-        athEndurance: "نمط مثالي لرياضات التحمل: نسبة القوة إلى الوزن ممتازة لاقتصاد الجري.",
-        athMuscular: "نمط عضلي / رياضي القوة: مؤشر كتلة الجسم فوق 25 لكن نسبة الدهون منخفضة بفضل التدريب والكتلة العضلية.",
-        athWarn: "تنبيه نقص الطاقة: احرص على تغذية كافية بالكربوهيدرات والبروتينات.",
-        athGen: "وزن رياضي متوازن: كل 1 كغ إضافي غير عضلي يكلف حوالي ~2.1 ثانية/كم في سباقات 10 كم والماراثون."
-      }
-    };
-
-    let currentLang = 'fr';
-
-    function setToolLang(lang) {
-      currentLang = lang;
-      const root = document.getElementById('html-root');
-      root.lang = lang;
-      root.dir = lang === 'ar' ? 'rtl' : 'ltr';
-      ['fr', 'en', 'ar'].forEach(c => {
-        document.getElementById('btn-lang-' + c).className = c === lang
-          ? 'px-2.5 py-1 text-xs font-bold rounded-md bg-blue-600 text-white'
-          : 'px-2.5 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900';
-      });
-      const t = I18N[lang];
-      document.getElementById('ui-badge').textContent = t.badge;
-      document.getElementById('ui-title').textContent = t.title;
-      document.getElementById('ui-sub').textContent = t.sub;
-      document.getElementById('lbl-sex').textContent = t.sex;
-      document.getElementById('opt-male').textContent = t.male;
-      document.getElementById('opt-female').textContent = t.female;
-      document.getElementById('lbl-weight').textContent = t.weight;
-      document.getElementById('lbl-height').textContent = t.height;
-      document.getElementById('lbl-age').textContent = t.age;
-      document.getElementById('lbl-hours').textContent = t.hours;
-      document.getElementById('lbl-res-bmi').textContent = t.resBmi;
-      document.getElementById('lbl-res-img').textContent = t.resImg;
-      document.getElementById('lbl-res-lean').textContent = t.resLean;
-      computeTool();
-    }
-
-    function computeTool() {
-      const sex = document.getElementById('inp-sex').value;
-      const w = Math.max(30, Math.min(200, parseFloat(document.getElementById('inp-weight').value) || 68));
-      const hCm = Math.max(130, Math.min(225, parseFloat(document.getElementById('inp-height').value) || 175));
-      const age = Math.max(12, Math.min(90, parseFloat(document.getElementById('inp-age').value) || 28));
-      const hrs = Math.max(0, Math.min(25, parseFloat(document.getElementById('inp-hours').value) || 6));
-
-      const hM = hCm / 100;
-      const bmi = w / (hM * hM);
-      const sexFactor = sex === 'male' ? 1 : 0;
-      const trainCorr = Math.min(3.5, hrs * 0.35);
-      const minFat = sex === 'male' ? 5.0 : 11.0;
-      const img = Math.max(minFat, Math.min(50, 1.2 * bmi + 0.23 * age - 10.8 * sexFactor - 5.4 - trainCorr));
-      const fatKg = (w * img) / 100;
-      const leanKg = w - fatKg;
-
-      const whoMin = (18.5 * hM * hM).toFixed(1);
-      const whoMax = (24.9 * hM * hM).toFixed(1);
-      const runMin = (19.5 * hM * hM).toFixed(1);
-      const runMax = (22.5 * hM * hM).toFixed(1);
-
-      document.getElementById('out-bmi').textContent = bmi.toFixed(1);
-      document.getElementById('out-who-range').textContent = 'OMS: ' + whoMin + '–' + whoMax + ' kg';
-      document.getElementById('out-img').textContent = img.toFixed(1) + '%';
-      document.getElementById('out-fat-kg').textContent = fatKg.toFixed(1) + ' kg fat';
-      document.getElementById('out-lean').textContent = leanKg.toFixed(1) + ' kg';
-      document.getElementById('out-run-range').textContent = 'Opt: ' + runMin + '–' + runMax + ' kg';
-
-      const t = I18N[currentLang];
-      let whoText = t.whoNorm;
-      if (bmi < 18.5) whoText = t.whoUnder;
-      else if (bmi >= 30.0) whoText = t.whoObese;
-      else if (bmi >= 25.0) whoText = t.whoOver;
-
-      const lowFatLimit = sex === 'male' ? 16.5 : 23.5;
-      let athText = t.athGen;
-      if (bmi < 18.5) athText = t.athWarn;
-      else if (bmi >= 19.0 && bmi <= 22.8 && hrs >= 4) athText = t.athEndurance;
-      else if (bmi >= 25.0 && img <= lowFatLimit && hrs >= 5) athText = t.athMuscular;
-
-      document.getElementById('box-who').innerHTML =
-        '<div class="font-bold text-slate-900 mb-1">' + t.whoTitle + '</div><p>' + whoText + '</p>';
+      <p>' + whoText + '</p>';
       document.getElementById('box-ath').innerHTML =
         '<div class="font-bold text-emerald-950 mb-1">' + t.athTitle + '</div><p>' + athText + '</p>';
     }
@@ -1082,6 +985,84 @@ footer.footer, #profeps-unified-footer {
   </script>
 
 
+
+<footer class="footer" id="profeps-unified-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-brand" style="display:flex !important;flex-direction:column !important;align-items:flex-start !important;">
+          <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:48px !important;max-height:48px !important;width:auto !important;max-width:155px !important;object-fit:contain !important;align-self:flex-start !important;filter:none !important;border-radius:8px !important;margin:0 0 0.9rem 0 !important;display:block !important;">
+          <p data-i18n-fr="La plateforme de référence pour les professeurs d'EPS au Maroc. Générateur de documents pédagogiques gratuit, conforme aux orientations pédagogiques officielles (MEN)." data-i18n-en="The reference platform for PE teachers in Morocco. Free educational document generator & sports science calculators aligned with official MEN guidelines." data-i18n-ar="المنصة المرجعية لأساتذة التربية البدنية بالمغرب. مولد وثائق تربوية مجاني وحاسبات علمية للرياضة وفق التوجيهات التربوية الرسمية.">La plateforme de référence pour les professeurs d'EPS au Maroc. Générateur de documents pédagogiques gratuit, conforme aux orientations pédagogiques officielles (MEN).</p>
+          <div class="footer-stats">
+            <div class="footer-stat-item">
+              <span class="footer-stat-num">16+</span>
+              <span class="footer-stat-lbl" data-i18n-fr="APS couvertes" data-i18n-en="Sports covered" data-i18n-ar="نشاط رياضي">APS couvertes</span>
+            </div>
+            <div class="footer-stat-item">
+              <span class="footer-stat-num">6</span>
+              <span class="footer-stat-lbl" data-i18n-fr="Niveaux scolaires" data-i18n-en="School levels" data-i18n-ar="مستويات دراسية">Niveaux scolaires</span>
+            </div>
+            <div class="footer-stat-item">
+              <span class="footer-stat-num">100%</span>
+              <span class="footer-stat-lbl" data-i18n-fr="Gratuit" data-i18n-en="Free" data-i18n-ar="مجاني">Gratuit</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</h4>
+          <ul>
+            <li><a href="index.html" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a></li>
+            <li><a href="generateur.html" data-i18n-fr="Générateur PDF" data-i18n-en="PDF Generator" data-i18n-ar="مولد ملفات PDF">Générateur PDF</a></li>
+            <li><a href="blog.html" data-i18n-fr="Articles &amp; Blog" data-i18n-en="Articles &amp; Blog" data-i18n-ar="المقالات والمدونة">Articles &amp; Blog</a></li>
+            <li><a href="a-propos.html" data-i18n-fr="À propos" data-i18n-en="About Us" data-i18n-ar="من نحن">À propos</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n-fr="RESSOURCES EPS" data-i18n-en="PE RESOURCES" data-i18n-ar="موارد التربية البدنية">RESSOURCES EPS</h4>
+          <ul>
+            <li><a href="cycles-eps-maroc.html" data-i18n-fr="Cycles d'EPS au Maroc" data-i18n-en="PE Cycles in Morocco" data-i18n-ar="أسلاك التربية البدنية بالمغرب">Cycles d'EPS au Maroc</a></li>
+            <li><a href="programme-eps-maroc.html" data-i18n-fr="Programme EPS Maroc" data-i18n-en="Morocco PE Curriculum" data-i18n-ar="برنامج التربية البدنية بالمغرب">Programme EPS Maroc</a></li>
+            <li><a href="evaluation-eps.html" data-i18n-fr="Évaluation en EPS" data-i18n-en="PE Assessment" data-i18n-ar="التقويم في التربية البدنية">Évaluation en EPS</a></li>
+            <li><a href="securite-eps.html" data-i18n-fr="Sécurité en EPS" data-i18n-en="Safety in PE" data-i18n-ar="السلامة في التربية البدنية">Sécurité en EPS</a></li>
+            <li><a href="bibliotheque-numerique-eps.html" data-i18n-fr="Bibliothèque numérique" data-i18n-en="Digital Library" data-i18n-ar="المكتبة الرقمية">Bibliothèque numérique</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col" id="footer-col-calculators">
+          <h4 data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</h4>
+          <ul>
+            <li><a href="hub-outils-sport-performance.html" class="footer-hub-highlight" data-i18n-fr="★ Hub des Calculateurs Sport" data-i18n-en="★ All Sports Calculators Hub" data-i18n-ar="★ بوابة جميع الحاسبات الرياضية">★ Hub des Calculateurs Sport</a></li>
+            <li><a href="calculateur-vma.html" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS (VMA) Calculator" data-i18n-ar="حاسبة السرعة الهوائية VMA">Calculateur VMA</a></li>
+            <li><a href="calculateur-vdot-asr-endurance.html" data-i18n-fr="Calculateur VO2 Max &amp; VDOT" data-i18n-en="VO2 Max &amp; VDOT Calculator" data-i18n-ar="حاسبة VO2 Max و VDOT">Calculateur VO2 Max &amp; VDOT</a></li>
+            <li><a href="calculateur-asr-reserve-vitesse.html" data-i18n-fr="Réserve Anaérobie (ASR)" data-i18n-en="Anaerobic Speed Reserve (ASR)" data-i18n-ar="احتياطي السرعة اللاهوائية ASR">Réserve Anaérobie (ASR)</a></li>
+            <li><a href="calculateur-indice-endurance.html" data-i18n-fr="Indice d'Endurance (IE)" data-i18n-en="Endurance Index (Péronnet)" data-i18n-ar="مؤشر التحمل (IE)">Indice d'Endurance (IE)</a></li>
+            <li><a href="calculateur-frequence-cardiaque-karvonen.html" data-i18n-fr="Fréquence Cardiaque Karvonen" data-i18n-en="Heart Rate (Karvonen)" data-i18n-ar="نبضات القلب Karvonen">Fréquence Cardiaque Karvonen</a></li>
+            <li><a href="calculateur-imc-sportif-masse-grasse.html" data-i18n-fr="Calculateur IMC &amp; IMG Sport" data-i18n-en="Athletic BMI &amp; Body Fat" data-i18n-ar="حاسبة كتلة الجسم والدهون">Calculateur IMC &amp; IMG Sport</a></li>
+            <li><a href="calculateur-chaleur-meteo-altitude.html" data-i18n-fr="Chaleur, Humidité &amp; Altitude" data-i18n-en="Heat, Humidity &amp; Altitude" data-i18n-ar="الحرارة والرطوبة والارتفاع">Chaleur, Humidité &amp; Altitude</a></li>
+            <li><a href="calculateur-gap-pente-nutrition.html" data-i18n-fr="Allure Pente (GAP) &amp; Nutrition" data-i18n-en="Grade Pace (GAP) &amp; Nutrition" data-i18n-ar="إيقاع المنحدرات والتغذية">Allure Pente (GAP) &amp; Nutrition</a></li>
+            <li><a href="generateur-intermittent-hiit-cod.html" data-i18n-fr="Intermittent HIIT &amp; COD 180°" data-i18n-en="HIIT Intermittent &amp; 180° COD" data-i18n-ar="التدريب المتقطع HIIT و COD">Intermittent HIIT &amp; COD 180°</a></li>
+            <li><a href="calculateur-charge-rpe-foster-acwr.html" data-i18n-fr="Charge RPE Foster &amp; ACWR" data-i18n-en="Foster RPE Load &amp; ACWR" data-i18n-ar="حمل التدريب RPE و ACWR">Charge RPE Foster &amp; ACWR</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</h4>
+          <ul>
+            <li><a href="politique-confidentialite.html" data-i18n-fr="Politique de confidentialité" data-i18n-en="Privacy Policy" data-i18n-ar="سياسة الخصوصية">Politique de confidentialité</a></li>
+            <li><a href="cgu.html" data-i18n-fr="Conditions d'utilisation" data-i18n-en="Terms of Use" data-i18n-ar="شروط الاستخدام">Conditions d'utilisation</a></li>
+            <li><a href="contact.html" data-i18n-fr="Nous contacter" data-i18n-en="Contact Us" data-i18n-ar="اتصل بنا">Nous contacter</a></li>
+            <li><a href="mailto:profepsma@gmail.com">✉️ profepsma@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span data-i18n-fr="© 2026 Prof EPS Maroc (profeps.ma). Tous droits réservés." data-i18n-en="© 2026 Prof EPS Morocco (profeps.ma). All rights reserved." data-i18n-ar="© 2026 أستاذ التربية البدنية المغرب (profeps.ma). جميع الحقوق محفوظة.">© 2026 Prof EPS Maroc (profeps.ma). Tous droits réservés.</span>
+        <span data-i18n-fr="Fait avec ❤️ pour les enseignants d'EPS au Maroc" data-i18n-en="Made with ❤️ for PE teachers &amp; runners" data-i18n-ar="صنع بـ ❤️ لأساتذة التربية البدنية والعدائين">Fait avec ❤️ pour les enseignants d'EPS au Maroc</span>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
 
