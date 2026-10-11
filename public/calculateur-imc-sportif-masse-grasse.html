@@ -57,6 +57,70 @@
     .profeps-footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.25rem 0; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; color: rgba(255,255,255,0.45); font-size: 0.8rem; flex-wrap: wrap; gap: 0.5rem; }
     @media (max-width: 868px) { .nav-container { display: flex !important; justify-content: space-between !important; } .nav-menu { display: none !important; } .profeps-footer-inner { grid-template-columns: 1fr 1fr; } }
   </style>
+  <style id="profeps-vma-dropdown-footer-css">
+    /* ═══ DROPDOWN HOVER SOUS CALCULATEUR VMA (TOUTES LES PAGES) ═══ */
+    .nav-dropdown { position: relative !important; display: inline-flex !important; align-items: center !important; }
+    .nav-dropdown-caret { font-size: 0.72rem !important; margin-left: 4px !important; transition: transform 0.25s ease !important; opacity: 0.75 !important; }
+    .nav-dropdown:hover .nav-dropdown-caret { transform: rotate(180deg) !important; color: #c1272d !important; }
+    .nav-dropdown-menu {
+      position: absolute !important;
+      top: calc(100% + 6px) !important;
+      left: 50% !important;
+      transform: translateX(-50%) translateY(8px) !important;
+      width: 320px !important;
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 14px !important;
+      box-shadow: 0 15px 35px -5px rgba(15,23,42,0.14), 0 4px 12px rgba(0,0,0,0.06) !important;
+      padding: 0.55rem !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      transition: all 0.22s ease !important;
+      z-index: 1200 !important;
+      text-align: left !important;
+    }
+    .nav-dropdown::after { content: '' !important; position: absolute !important; top: 100% !important; left: 0 !important; right: 0 !important; height: 14px !important; }
+    .nav-dropdown:hover .nav-dropdown-menu { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; transform: translateX(-50%) translateY(0) !important; }
+    .nav-dropdown-item {
+      display: flex !important;
+      align-items: center !important;
+      gap: 0.55rem !important;
+      padding: 0.48rem 0.7rem !important;
+      border-radius: 9px !important;
+      font-size: 0.82rem !important;
+      font-weight: 600 !important;
+      color: #1e293b !important;
+      text-decoration: none !important;
+      transition: background 0.15s ease, color 0.15s ease !important;
+      white-space: nowrap !important;
+    }
+    .nav-dropdown-item:hover { background: #f8fafc !important; color: #c1272d !important; }
+    .nav-dropdown-hub {
+      background: linear-gradient(135deg, rgba(193,39,45,0.08), rgba(0,98,51,0.08)) !important;
+      color: #c1272d !important;
+      font-weight: 800 !important;
+      border: 1px solid rgba(193,39,45,0.2) !important;
+      margin-bottom: 0.35rem !important;
+    }
+    .nav-dropdown-hub:hover { background: linear-gradient(135deg, #c1272d, #006233) !important; color: #ffffff !important; }
+    .nav-dropdown-divider { height: 1px !important; background: #f1f5f9 !important; margin: 0.3rem 0 !important; }
+
+    /* ═══ GRILLE FOOTER 5 COLONNES AVEC COLONNE DÉDIÉE AUX OUTILS + HUB ═══ */
+    .footer-inner, .profeps-footer-inner {
+      max-width: 1260px !important;
+      grid-template-columns: 1.7fr 0.9fr 1fr 1.35fr 0.85fr !important;
+      gap: 2rem !important;
+    }
+    @media (max-width: 960px) {
+      .footer-inner, .profeps-footer-inner { grid-template-columns: 1fr 1fr !important; }
+      .nav-dropdown { flex-direction: column !important; width: 100% !important; }
+      .nav-dropdown-menu { position: static !important; transform: none !important; width: 100% !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; box-shadow: none !important; border: none !important; background: #f8fafc !important; margin-top: 0.25rem !important; }
+    }
+    @media (max-width: 600px) {
+      .footer-inner, .profeps-footer-inner { grid-template-columns: 1fr !important; }
+    }
+  </style>
 </head>
 <body class="min-h-screen flex flex-col bg-slate-50 text-slate-900">
   <!-- Header ProfEPS.ma -->
@@ -68,8 +132,23 @@
       <div class="nav-menu">
         <a href="/" class="nav-link">Accueil</a>
         <a href="generateur.html" class="nav-link">Générateur</a>
-        <a href="calculateur-vma.html" class="nav-link">Calculateur VMA</a>
-        <a href="hub-outils-sport-performance.html" class="nav-link active">Hub Outils Sport</a>
+                        <div class="nav-dropdown">
+                    <a href="calculateur-vma.html" class="nav-link active"><span data-i18n="navCalc">Calculateur VMA</span> <span class="nav-dropdown-caret">▾</span></a>
+                    <div class="nav-dropdown-menu">
+                        <a href="hub-outils-sport-performance.html" class="nav-dropdown-item nav-dropdown-hub">🧭 Hub de Tous les Calculateurs Sport</a>
+                        <div class="nav-dropdown-divider"></div>
+                        <a href="calculateur-vma.html" class="nav-dropdown-item">⚡ Calculateur VMA &amp; Allures</a>
+                        <a href="calculateur-vdot-asr-endurance.html" class="nav-dropdown-item">🫁 Calculateur VO2 Max &amp; VDOT</a>
+                        <a href="calculateur-asr-reserve-vitesse.html" class="nav-dropdown-item">🚀 Réserve de Vitesse Anaérobie (ASR)</a>
+                        <a href="calculateur-indice-endurance.html" class="nav-dropdown-item">📈 Indice d'Endurance (Péronnet)</a>
+                        <a href="calculateur-frequence-cardiaque-karvonen.html" class="nav-dropdown-item">❤️ Fréquence Cardiaque (Karvonen)</a>
+                        <a href="calculateur-imc-sportif-masse-grasse.html" class="nav-dropdown-item">⚖️ Calculateur IMC &amp; Masse Grasse</a>
+                        <a href="calculateur-chaleur-meteo-altitude.html" class="nav-dropdown-item">☀️ Chaleur, Humidité &amp; Altitude</a>
+                        <a href="calculateur-gap-pente-nutrition.html" class="nav-dropdown-item">⛰️ Allure Pente (GAP) &amp; Nutrition</a>
+                        <a href="generateur-intermittent-hiit-cod.html" class="nav-dropdown-item">🔄 Intermittent HIIT &amp; COD 180°</a>
+                        <a href="calculateur-charge-rpe-foster-acwr.html" class="nav-dropdown-item">🛡️ Charge RPE Foster &amp; ACWR</a>
+                    </div>
+                </div>
         <a href="blog.html" class="nav-link">Blog</a>
       </div>
       <div class="nav-right">
@@ -196,23 +275,36 @@
           <li><a href="blog.html">Blog</a></li>
         </ul>
       </div>
-      <div class="profeps-footer-col">
-        <h4>Clusters Sport</h4>
+            <div class="profeps-footer-col">
+        <h4>Outils &amp; Guides</h4>
         <ul>
-          <li><a href="calculateur-vdot-asr-endurance.html">Calculateur VDOT</a></li>
-          <li><a href="calculateur-asr-reserve-vitesse.html">Réserve ASR</a></li>
-          <li><a href="calculateur-indice-endurance.html">Indice d'Endurance</a></li>
-          <li><a href="calculateur-frequence-cardiaque-karvonen.html">Fréquence Cardiaque</a></li>
-          <li><a href="calculateur-imc-sportif-masse-grasse.html">IMC Sportif</a></li>
+          <li><a href="calculateur-vma.html">Calculateur VMA Universel</a></li>
+          <li><a href="blog.html">Articles Pédagogiques</a></li>
+          <li><a href="bibliotheque-numerique-eps.html">Bibliothèque EPS</a></li>
         </ul>
       </div>
+            <div class="footer-col profeps-footer-col" id="footer-col-cluster-tools">
+                <h4>Calculateurs Sport &amp; Hub</h4>
+                <ul>
+                    <li><a href="hub-outils-sport-performance.html" style="color:#4ade80;font-weight:700;"><span class="dot"></span>★ Hub de Tous les Outils</a></li>
+                    <li><a href="calculateur-vma.html"><span class="dot"></span>Calculateur VMA &amp; Piste</a></li>
+                    <li><a href="calculateur-vdot-asr-endurance.html"><span class="dot"></span>Calculateur VO2 Max &amp; VDOT</a></li>
+                    <li><a href="calculateur-asr-reserve-vitesse.html"><span class="dot"></span>Réserve Anaérobie (ASR)</a></li>
+                    <li><a href="calculateur-indice-endurance.html"><span class="dot"></span>Indice d'Endurance (IE)</a></li>
+                    <li><a href="calculateur-frequence-cardiaque-karvonen.html"><span class="dot"></span>Fréquence Cardiaque (Karvonen)</a></li>
+                    <li><a href="calculateur-imc-sportif-masse-grasse.html"><span class="dot"></span>Calculateur IMC &amp; IMG Sport</a></li>
+                    <li><a href="calculateur-chaleur-meteo-altitude.html"><span class="dot"></span>Chaleur, Humidité &amp; Altitude</a></li>
+                    <li><a href="calculateur-gap-pente-nutrition.html"><span class="dot"></span>Allure Pente (GAP) &amp; Nutrition</a></li>
+                    <li><a href="generateur-intermittent-hiit-cod.html"><span class="dot"></span>Intermittent HIIT &amp; COD 180°</a></li>
+                    <li><a href="calculateur-charge-rpe-foster-acwr.html"><span class="dot"></span>Charge RPE Foster &amp; ACWR</a></li>
+                </ul>
+            </div>
       <div class="profeps-footer-col">
-        <h4>Terrain & Charge</h4>
+        <h4>Légal</h4>
         <ul>
-          <li><a href="calculateur-chaleur-meteo-altitude.html">Chaleur & Altitude</a></li>
-          <li><a href="calculateur-gap-pente-nutrition.html">Pente GAP & Nutrition</a></li>
-          <li><a href="generateur-intermittent-hiit-cod.html">HIIT & COD 180°</a></li>
-          <li><a href="calculateur-charge-rpe-foster-acwr.html">Charge RPE & ACWR</a></li>
+          <li><a href="politique-confidentialite.html">Confidentialité</a></li>
+          <li><a href="cgu.html">Conditions d'utilisation</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
     </div>
@@ -359,4 +451,6 @@
   </script>
 </body>
 </html>
+
+
 

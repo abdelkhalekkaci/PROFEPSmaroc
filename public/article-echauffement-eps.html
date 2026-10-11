@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
     <meta charset="UTF-8">
@@ -541,6 +541,70 @@
     .navbar { padding: 0.75rem 1rem !important; }
 }
 </style>
+  <style id="profeps-vma-dropdown-footer-css">
+    /* ═══ DROPDOWN HOVER SOUS CALCULATEUR VMA (TOUTES LES PAGES) ═══ */
+    .nav-dropdown { position: relative !important; display: inline-flex !important; align-items: center !important; }
+    .nav-dropdown-caret { font-size: 0.72rem !important; margin-left: 4px !important; transition: transform 0.25s ease !important; opacity: 0.75 !important; }
+    .nav-dropdown:hover .nav-dropdown-caret { transform: rotate(180deg) !important; color: #c1272d !important; }
+    .nav-dropdown-menu {
+      position: absolute !important;
+      top: calc(100% + 6px) !important;
+      left: 50% !important;
+      transform: translateX(-50%) translateY(8px) !important;
+      width: 320px !important;
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 14px !important;
+      box-shadow: 0 15px 35px -5px rgba(15,23,42,0.14), 0 4px 12px rgba(0,0,0,0.06) !important;
+      padding: 0.55rem !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      transition: all 0.22s ease !important;
+      z-index: 1200 !important;
+      text-align: left !important;
+    }
+    .nav-dropdown::after { content: '' !important; position: absolute !important; top: 100% !important; left: 0 !important; right: 0 !important; height: 14px !important; }
+    .nav-dropdown:hover .nav-dropdown-menu { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; transform: translateX(-50%) translateY(0) !important; }
+    .nav-dropdown-item {
+      display: flex !important;
+      align-items: center !important;
+      gap: 0.55rem !important;
+      padding: 0.48rem 0.7rem !important;
+      border-radius: 9px !important;
+      font-size: 0.82rem !important;
+      font-weight: 600 !important;
+      color: #1e293b !important;
+      text-decoration: none !important;
+      transition: background 0.15s ease, color 0.15s ease !important;
+      white-space: nowrap !important;
+    }
+    .nav-dropdown-item:hover { background: #f8fafc !important; color: #c1272d !important; }
+    .nav-dropdown-hub {
+      background: linear-gradient(135deg, rgba(193,39,45,0.08), rgba(0,98,51,0.08)) !important;
+      color: #c1272d !important;
+      font-weight: 800 !important;
+      border: 1px solid rgba(193,39,45,0.2) !important;
+      margin-bottom: 0.35rem !important;
+    }
+    .nav-dropdown-hub:hover { background: linear-gradient(135deg, #c1272d, #006233) !important; color: #ffffff !important; }
+    .nav-dropdown-divider { height: 1px !important; background: #f1f5f9 !important; margin: 0.3rem 0 !important; }
+
+    /* ═══ GRILLE FOOTER 5 COLONNES AVEC COLONNE DÉDIÉE AUX OUTILS + HUB ═══ */
+    .footer-inner, .profeps-footer-inner {
+      max-width: 1260px !important;
+      grid-template-columns: 1.7fr 0.9fr 1fr 1.35fr 0.85fr !important;
+      gap: 2rem !important;
+    }
+    @media (max-width: 960px) {
+      .footer-inner, .profeps-footer-inner { grid-template-columns: 1fr 1fr !important; }
+      .nav-dropdown { flex-direction: column !important; width: 100% !important; }
+      .nav-dropdown-menu { position: static !important; transform: none !important; width: 100% !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; box-shadow: none !important; border: none !important; background: #f8fafc !important; margin-top: 0.25rem !important; }
+    }
+    @media (max-width: 600px) {
+      .footer-inner, .profeps-footer-inner { grid-template-columns: 1fr !important; }
+    }
+  </style>
 </head>
 <body>
         
@@ -553,7 +617,23 @@
             <div class="nav-menu" id="navMenu">
                 <a href="/" class="nav-link">Accueil</a>
                 <a href="generateur.html" class="nav-link">Générateur</a>
-                <a href="calculateur-vma.html" class="nav-link">Calculateur VMA</a>
+                                <div class="nav-dropdown">
+                    <a href="calculateur-vma.html" class="nav-link"><span data-i18n="navCalc">Calculateur VMA</span> <span class="nav-dropdown-caret">▾</span></a>
+                    <div class="nav-dropdown-menu">
+                        <a href="hub-outils-sport-performance.html" class="nav-dropdown-item nav-dropdown-hub">🧭 Hub de Tous les Calculateurs Sport</a>
+                        <div class="nav-dropdown-divider"></div>
+                        <a href="calculateur-vma.html" class="nav-dropdown-item">⚡ Calculateur VMA &amp; Allures</a>
+                        <a href="calculateur-vdot-asr-endurance.html" class="nav-dropdown-item">🫁 Calculateur VO2 Max &amp; VDOT</a>
+                        <a href="calculateur-asr-reserve-vitesse.html" class="nav-dropdown-item">🚀 Réserve de Vitesse Anaérobie (ASR)</a>
+                        <a href="calculateur-indice-endurance.html" class="nav-dropdown-item">📈 Indice d'Endurance (Péronnet)</a>
+                        <a href="calculateur-frequence-cardiaque-karvonen.html" class="nav-dropdown-item">❤️ Fréquence Cardiaque (Karvonen)</a>
+                        <a href="calculateur-imc-sportif-masse-grasse.html" class="nav-dropdown-item">⚖️ Calculateur IMC &amp; Masse Grasse</a>
+                        <a href="calculateur-chaleur-meteo-altitude.html" class="nav-dropdown-item">☀️ Chaleur, Humidité &amp; Altitude</a>
+                        <a href="calculateur-gap-pente-nutrition.html" class="nav-dropdown-item">⛰️ Allure Pente (GAP) &amp; Nutrition</a>
+                        <a href="generateur-intermittent-hiit-cod.html" class="nav-dropdown-item">🔄 Intermittent HIIT &amp; COD 180°</a>
+                        <a href="calculateur-charge-rpe-foster-acwr.html" class="nav-dropdown-item">🛡️ Charge RPE Foster &amp; ACWR</a>
+                    </div>
+                </div>
                 <a href="blog.html" class="nav-link active">Blog</a>
                 <a href="generateur.html" class="nav-cta nav-cta-mobile"><span>✨</span> Créer un document</a>
             </div>
@@ -1180,5 +1260,7 @@
 </script>
 </body>
 </html>
+
+
 
 
