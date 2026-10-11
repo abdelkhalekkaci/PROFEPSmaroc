@@ -1,6 +1,11 @@
 /**
  * unifier-navbar-footer.js
- * Script maître unique pour ProfEPS.ma (remplace définitivement update-navbar.js)
+ * Script maître unique pour ProfEPS.ma :
+ * 1. Supprime définitivement les pages login/dashboard, auth-shared.js et Supabase (fichiers + code dans tout le projet)
+ * 2. Unifie la Navbar fixe (80px, classes isolées .peps-* impossibles à écraser par d'anciens scripts/CSS)
+ * 3. Active le menu déroulant des 11 outils sur 100 % des pages (CSS :hover + JS fluide, affiche l'outil actif)
+ * 4. Intègre le bouton traducteur universel (FR / EN / عربي) à droite dans la Navbar et supprime les doublons
+ * 5. Unifie le Footer à 5 colonnes sans doublons avec logo au bon format
  */
 
 const fs = require('fs');
@@ -8,16 +13,132 @@ const path = require('path');
 
 const rootDir = process.cwd();
 
-['update-navbar.js', path.join('public', 'update-navbar.js')].forEach((oldFile) => {
-  const fullOldPath = path.join(rootDir, oldFile);
-  if (fs.existsSync(fullOldPath)) {
-    try {
-      fs.unlinkSync(fullOldPath);
-      console.log(`🗑️  Ancien script supprimé : ${oldFile}`);
-    } catch (e) {}
-  }
-});
+console.log('\n======================================================');
+console.log('🚀 NETTOYAGE SUPABASE/LOGIN/DASHBOARD & UNIFICATION NAVBAR/FOOTER');
+console.log('📂 Dossier racine :', rootDir);
+console.log('======================================================\n');
 
+// ═══ ÉTAPE 1 : SUPPRESSION DÉFINITIVE DES FICHIERS LOGIN, DASHBOARD & SUPABASE ═══
+const OBSOLETE_FILE_PATTERNS = [
+  /^login\.html$/i,
+  /^dashboard\.html$/i,
+  /^connexion\.html$/i,
+  /^inscription\.html$/i,
+  /^register\.html$/i,
+  /^signup\.html$/i,
+  /^auth\.html$/i,
+  /^auth-shared\.js$/i,
+  /^auth\.js$/i,
+  /^login\.js$/i,
+  /^dashboard\.js$/i,
+  /^supabase.*\.js$/i,
+  /^supabase.*\.ts$/i,
+  /^login\.css$/i,
+  /^dashboard\.css$/i,
+  /^auth\.css$/i,
+  /^update-navbar\.js$/i,
+  /^navbar\.js$/i,
+];
+
+function cleanObsoleteFilesRecursively(dir) {
+  if (!fs.existsSync(dir)) return;
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    if (
+      entry.name === 'node_modules' ||
+      entry.name === '.git' ||
+      entry.name === '.next' ||
+      entry.name === 'dist' ||
+      entry.name === '.aistudio'
+    ) {
+      continue;
+    }
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      cleanObsoleteFilesRecursively(fullPath);
+    } else if (entry.isFile()) {
+      if (OBSOLETE_FILE_PATTERNS.some((rx) => rx.test(entry.name))) {
+        try {
+          fs.unlinkSync(fullPath);
+          console.log(`🗑️  [FICHIER SUPPRIMÉ] -> ${path.relative(rootDir, fullPath)}`);
+        } catch (e) {
+          // ignore
+        }
+      }
+    }
+  }
+}
+
+cleanObsoleteFilesRecursively(rootDir);
+
+// Nettoyer package.json de toute dépendance @supabase/*
+const pkgPath = path.join(rootDir, 'package.json');
+if (fs.existsSync(pkgPath)) {
+  try {
+    const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+    let pkgChanged = false;
+    ['dependencies', 'devDependencies'].forEach((depKey) => {
+      if (pkg[depKey]) {
+        Object.keys(pkg[depKey]).forEach((k) => {
+          if (k.toLowerCase().includes('supabase')) {
+            delete pkg[depKey][k];
+            pkgChanged = true;
+            console.log(`🗑️  [PACKAGE.JSON] Dépendance supprimée : ${k}`);
+          }
+        });
+      }
+    });
+    if (pkgChanged) {
+      fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n', 'utf8');
+    }
+  } catch (e) {
+    // ignore
+  }
+}
+
+// Nettoyer les références Supabase / login / dashboard dans tous les fichiers .js / .ts / .tsx restants
+function cleanCodeFilesRecursively(dir) {
+  if (!fs.existsSync(dir)) return;
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    if (
+      entry.name === 'node_modules' ||
+      entry.name === '.git' ||
+      entry.name === 'dist' ||
+      entry.name === '.aistudio' ||
+      entry.name === 'unifier-navbar-footer.js'
+    ) {
+      continue;
+    }
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      cleanCodeFilesRecursively(fullPath);
+    } else if (/\.(js|ts|tsx)$/i.test(entry.name)) {
+      try {
+        const original = fs.readFileSync(fullPath, 'utf8');
+        let cleaned = original
+          .replace(/^\s*import\s+.*from\s+['"][^'"]*supabase[^'"]*['"];?\s*$/gm, '')
+          .replace(/^\s*const\s+.*=\s*require\(['"][^'"]*supabase[^'"]*['"]\);?\s*$/gm, '')
+          .replace(/(?:window\.)?location\.(?:href|replace|assign)\s*=?\s*\(?['"][^'"]*(?:login|dashboard)\.html[^'"]*['"]\)?/gi, 'void 0')
+          .replace(/document\.querySelector\(['"]\.navbar['"]\)/g, "document.getElementById('navbar')")
+          .replace(/document\.querySelector\(['"]nav\.navbar['"]\)/g, "document.getElementById('navbar')")
+          .replace(/document\.querySelector\(['"]\.nav-menu['"]\)/g, "document.getElementById('navMenu')")
+          .replace(/document\.querySelector\(['"]\.nav-right['"]\)/g, "document.getElementById('navRightDecoy')");
+
+        if (cleaned !== original) {
+          fs.writeFileSync(fullPath, cleaned, 'utf8');
+          console.log(`🧹 [CODE NETTOYÉ] -> ${path.relative(rootDir, fullPath)}`);
+        }
+      } catch (e) {
+        // ignore
+      }
+    }
+  }
+}
+
+cleanCodeFilesRecursively(rootDir);
+
+// ═══ ÉTAPE 2 : DONNÉES DES 11 OUTILS & DU MENU DÉROULANT ═══
 const TOOL_INFO = {
   'calculateur-vma.html': {
     fr: 'Calculateur VMA',
@@ -146,12 +267,24 @@ const DROPDOWN_ITEMS = [
   },
 ];
 
-const MASTER_CSS = `
-<style id="profeps-master-unifier-css">
+// ═══ ÉTAPE 3 : CSS MAÎTRE ISOLÉ (.peps-*) INVISIBLE AUX ANCIENS SCRIPTS/CSS ═══
+const MASTER_CSS = `<style id="profeps-master-unifier-css">
+/* ═══ 1. NAVBAR FIXE ISOLÉE (.peps-*) — 80PX VERROUILLÉ SUR TOUTES LES PAGES ═══ */
 html {
   overflow-y: scroll !important;
 }
-nav.navbar, #navbar.navbar, .navbar {
+nav.navbar, #navbar, .navbar-decoy {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  z-index: -9999 !important;
+}
+#pepsNavbar.peps-navbar {
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
@@ -161,7 +294,7 @@ nav.navbar, #navbar.navbar, .navbar {
   max-height: 80px !important;
   padding: 0 2rem !important;
   margin: 0 !important;
-  z-index: 99999 !important;
+  z-index: 2147483000 !important;
   background: rgba(255, 255, 255, 0.97) !important;
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
@@ -170,19 +303,16 @@ nav.navbar, #navbar.navbar, .navbar {
   box-sizing: border-box !important;
   display: flex !important;
   align-items: center !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   overflow: visible !important;
-  transition: box-shadow 0.25s ease, background 0.25s ease !important;
   direction: ltr !important;
 }
-nav.navbar.scrolled, #navbar.navbar.scrolled, .navbar.scrolled {
-  height: 80px !important;
-  min-height: 80px !important;
-  max-height: 80px !important;
-  padding: 0 2rem !important;
+#pepsNavbar.peps-navbar.scrolled {
   box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08) !important;
   background: rgba(255, 255, 255, 0.99) !important;
 }
-#navbar .nav-container, nav.navbar .nav-container, .nav-container {
+#pepsNavbar .peps-nav-container {
   width: 100% !important;
   max-width: 1400px !important;
   height: 80px !important;
@@ -195,7 +325,7 @@ nav.navbar.scrolled, #navbar.navbar.scrolled, .navbar.scrolled {
   overflow: visible !important;
   direction: ltr !important;
 }
-#navbar .nav-logo, nav.navbar .nav-logo, .nav-logo {
+#pepsNavbar .peps-nav-logo {
   justify-self: start !important;
   display: inline-flex !important;
   align-items: center !important;
@@ -204,15 +334,16 @@ nav.navbar.scrolled, #navbar.navbar.scrolled, .navbar.scrolled {
   margin: 0 !important;
   padding: 0 !important;
 }
-#navbar .nav-logo img, nav.navbar .nav-logo img, .navbar.scrolled .nav-logo img, .nav-logo img {
+#pepsNavbar .peps-nav-logo img {
   height: 52px !important;
   max-height: 52px !important;
   width: auto !important;
+  max-width: 160px !important;
   object-fit: contain !important;
   display: block !important;
   margin: 0 !important;
 }
-#navbar #navMenu.nav-menu, nav.navbar .nav-menu, .nav-menu {
+#pepsNavbar .peps-nav-menu {
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
@@ -223,8 +354,10 @@ nav.navbar.scrolled, #navbar.navbar.scrolled, .navbar.scrolled {
   list-style: none !important;
   height: 80px !important;
   overflow: visible !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
-#navbar .nav-right, nav.navbar .nav-right, .nav-right {
+#pepsNavbar .peps-nav-right {
   justify-self: end !important;
   display: flex !important;
   align-items: center !important;
@@ -233,11 +366,12 @@ nav.navbar.scrolled, #navbar.navbar.scrolled, .navbar.scrolled {
   margin: 0 !important;
   padding-right: 0.25rem !important;
 }
-#navbar .nav-link, nav.navbar .nav-link, .nav-link {
+#pepsNavbar .peps-nav-link {
   font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-size: 0.96rem !important;
   font-weight: 800 !important;
   color: #1a1a2e !important;
+  -webkit-text-fill-color: #1a1a2e !important;
   padding: 0.5rem 0.65rem !important;
   margin: 0 !important;
   text-decoration: none !important;
@@ -252,9 +386,11 @@ nav.navbar.scrolled, #navbar.navbar.scrolled, .navbar.scrolled {
   background: transparent !important;
   border: none !important;
   cursor: pointer !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   transition: color 0.2s ease !important;
 }
-#navbar .nav-link::after, nav.navbar .nav-link::after, .nav-link::after {
+#pepsNavbar .peps-nav-link::after {
   content: '' !important;
   position: absolute !important;
   bottom: -2px !important;
@@ -265,69 +401,93 @@ nav.navbar.scrolled, #navbar.navbar.scrolled, .navbar.scrolled {
   border-radius: 2px !important;
   transition: left 0.25s ease, right 0.25s ease !important;
 }
-#navbar .nav-link:hover::after,
-#navbar .nav-link.active::after,
-.nav-dropdown:hover > .nav-link::after,
-.nav-link:hover::after,
-.nav-link.active::after {
+#pepsNavbar .peps-nav-link:hover::after,
+#pepsNavbar .peps-nav-link.active::after,
+#pepsNavbar .peps-dropdown:hover > .peps-nav-link::after,
+#pepsNavbar .peps-dropdown.open > .peps-nav-link::after {
   left: 0.35rem !important;
   right: 0.35rem !important;
 }
-#navbar .nav-link:hover,
-#navbar .nav-link.active,
-.nav-dropdown:hover > .nav-link,
-.nav-link:hover,
-.nav-link.active {
+#pepsNavbar .peps-nav-link:hover,
+#pepsNavbar .peps-nav-link.active,
+#pepsNavbar .peps-dropdown:hover > .peps-nav-link,
+#pepsNavbar .peps-dropdown.open > .peps-nav-link {
   color: #c1272d !important;
+  -webkit-text-fill-color: #c1272d !important;
 }
-#navbar .nav-dropdown, nav.navbar .nav-dropdown, .nav-dropdown {
+
+/* ═══ 2. MENU DÉROULANT (.peps-dropdown) — HOVER CSS + JS SUR 100 % DES PAGES ═══ */
+#pepsNavbar .peps-dropdown {
   position: relative !important;
   display: inline-flex !important;
   align-items: center !important;
-  height: auto !important;
+  height: 80px !important;
   overflow: visible !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
-.nav-dropdown-caret {
-  font-size: 0.75rem !important;
+#pepsNavbar .peps-dropdown-caret {
+  font-size: 0.78rem !important;
   line-height: 1 !important;
   display: inline-block !important;
-  transition: transform 0.25s ease !important;
+  margin-left: 0.25rem !important;
+  transition: transform 0.22s ease !important;
+  color: inherit !important;
 }
-.nav-dropdown:hover .nav-dropdown-caret,
-.nav-dropdown.open .nav-dropdown-caret {
+#pepsNavbar .peps-dropdown:hover .peps-dropdown-caret,
+#pepsNavbar .peps-dropdown.open .peps-dropdown-caret {
   transform: rotate(180deg) !important;
   color: #c1272d !important;
 }
-#navbar #navMenu .nav-dropdown .nav-dropdown-menu,
-nav.navbar .nav-dropdown .nav-dropdown-menu,
-.nav-dropdown-menu {
-  display: none !important;
+#pepsNavbar .peps-dropdown::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 100% !important;
+  left: -20px !important;
+  right: -20px !important;
+  height: 18px !important;
+  background: transparent !important;
+  pointer-events: auto !important;
 }
-@media (max-width: 900px) {
-  #navbar #navMenu .nav-dropdown .nav-dropdown-menu,
-  nav.navbar .nav-dropdown .nav-dropdown-menu,
-  .nav-dropdown-menu {
-    position: static !important;
-    transform: none !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    background: #f8fafc !important;
-    border: 1px solid #e2e8f0 !important;
-    border-radius: 12px !important;
-    box-shadow: none !important;
-    padding: 0.45rem !important;
-    margin-top: 0.35rem !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 2px !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
-  }
+#pepsNavbar .peps-dropdown .peps-dropdown-menu {
+  position: absolute !important;
+  top: calc(100% - 6px) !important;
+  left: 50% !important;
+  transform: translateX(-50%) translateY(8px) !important;
+  width: 340px !important;
+  min-width: 340px !important;
+  height: auto !important;
+  max-height: none !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 20px 45px -6px rgba(15, 23, 42, 0.22), 0 4px 14px rgba(0, 0, 0, 0.08) !important;
+  padding: 0.55rem !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  gap: 3px !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease !important;
+  z-index: 2147483647 !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+  text-align: left !important;
+  direction: ltr !important;
 }
-#navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item,
-nav.navbar .nav-dropdown-menu a.nav-dropdown-item,
-.nav-dropdown-menu a.nav-dropdown-item {
+#pepsNavbar .peps-dropdown:hover .peps-dropdown-menu,
+#pepsNavbar .peps-dropdown.open .peps-dropdown-menu,
+#pepsNavbar .peps-dropdown:focus-within .peps-dropdown-menu {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: translateX(-50%) translateY(0) !important;
+}
+#pepsNavbar .peps-dropdown-menu a.peps-dropdown-item {
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
@@ -356,14 +516,38 @@ nav.navbar .nav-dropdown-menu a.nav-dropdown-item,
   border: 1px solid transparent !important;
   transition: background 0.15s ease, color 0.15s ease !important;
 }
-#navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item::after,
-#navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item::before,
-.nav-dropdown-menu a.nav-dropdown-item::after,
-.nav-dropdown-menu a.nav-dropdown-item::before {
+#pepsNavbar .peps-dropdown-menu a.peps-dropdown-item::after,
+#pepsNavbar .peps-dropdown-menu a.peps-dropdown-item::before {
   display: none !important;
   content: none !important;
 }
-#navbar .lang-switch, nav.navbar .lang-switch, .lang-switch {
+#pepsNavbar .peps-dropdown-menu a.peps-dropdown-item:hover {
+  background: #f1f5f9 !important;
+  color: #c1272d !important;
+  -webkit-text-fill-color: #c1272d !important;
+}
+#pepsNavbar .peps-dropdown-menu a.peps-dropdown-item.active-tool {
+  background: rgba(193, 39, 45, 0.09) !important;
+  color: #c1272d !important;
+  -webkit-text-fill-color: #c1272d !important;
+  font-weight: 800 !important;
+}
+#pepsNavbar .peps-dropdown-menu a.peps-dropdown-item.peps-dropdown-hub {
+  background: linear-gradient(135deg, rgba(193, 39, 45, 0.1), rgba(0, 98, 51, 0.1)) !important;
+  color: #c1272d !important;
+  -webkit-text-fill-color: #c1272d !important;
+  font-weight: 800 !important;
+  border: 1px solid rgba(193, 39, 45, 0.24) !important;
+  margin-bottom: 0.3rem !important;
+}
+#pepsNavbar .peps-dropdown-menu a.peps-dropdown-item.peps-dropdown-hub:hover {
+  background: linear-gradient(135deg, #c1272d, #006233) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* ═══ 3. BOUTON TRADUCTEUR UNIVERSEL (FR / EN / عربي) À DROITE ═══ */
+#pepsNavbar .peps-lang-switch {
   display: inline-flex !important;
   align-items: center !important;
   background: #f1f5f9 !important;
@@ -375,7 +559,7 @@ nav.navbar .nav-dropdown-menu a.nav-dropdown-item,
   direction: ltr !important;
   box-sizing: border-box !important;
 }
-#navbar .lang-btn, nav.navbar .lang-btn, .lang-btn {
+#pepsNavbar .peps-lang-btn {
   background: transparent !important;
   border: none !important;
   cursor: pointer !important;
@@ -385,69 +569,58 @@ nav.navbar .nav-dropdown-menu a.nav-dropdown-item,
   font-weight: 800 !important;
   color: #475569 !important;
   border-radius: 9999px !important;
+  line-height: 1.2 !important;
   transition: all 0.2s ease !important;
-  line-height: 1.1 !important;
 }
-#navbar .lang-btn:hover, nav.navbar .lang-btn:hover, .lang-btn:hover {
+#pepsNavbar .peps-lang-btn.active {
+  background: #ffffff !important;
   color: #0f172a !important;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.14) !important;
 }
-#navbar .lang-btn.active, nav.navbar .lang-btn.active, .lang-btn.active {
-  background: #c1272d !important;
-  color: #ffffff !important;
-  box-shadow: 0 2px 6px rgba(193, 39, 45, 0.28) !important;
+#pepsNavbar .peps-lang-btn:hover:not(.active) {
+  color: #c1272d !important;
 }
-#navbar .lang-sep, nav.navbar .lang-sep, .lang-sep {
+#pepsNavbar .peps-lang-sep {
+  font-size: 0.75rem !important;
   color: #cbd5e1 !important;
-  font-size: 0.72rem !important;
-  font-weight: 700 !important;
   user-select: none !important;
+  padding: 0 1px !important;
 }
-#navbar .nav-cta, #navbar .nav-btn-login, .navbar .nav-cta, .navbar .nav-btn-login {
-  display: none !important;
-}
-.in-page-lang-switch, #tool-lang-bar {
-  display: none !important;
-}
-.nav-toggle {
+#pepsNavbar .peps-nav-toggle {
   display: none !important;
   flex-direction: column !important;
   gap: 5px !important;
   background: none !important;
   border: none !important;
   cursor: pointer !important;
-  padding: 8px !important;
-  width: 36px !important;
-  height: 36px !important;
-  justify-content: center !important;
-  align-items: center !important;
-  border-radius: 8px !important;
+  padding: 0.5rem !important;
 }
-.nav-toggle span {
+#pepsNavbar .peps-nav-toggle span {
   display: block !important;
-  width: 22px !important;
-  height: 2px !important;
+  width: 24px !important;
+  height: 2.5px !important;
   background: #1a1a2e !important;
   border-radius: 2px !important;
-  transition: transform 0.3s ease, opacity 0.3s ease !important;
 }
+
+/* ═══ 4. FOOTER UNIFIÉ À 5 COLONNES SANS DOUBLONS ═══ */
 footer.footer, #profeps-unified-footer {
-  background: #0f172a !important;
-  color: rgba(255, 255, 255, 0.78) !important;
-  padding: 4rem 2rem 1.75rem !important;
+  background: linear-gradient(135deg, #15192b 0%, #162038 100%) !important;
+  color: #ffffff !important;
+  padding: 3.5rem 2rem 0 !important;
   margin-top: 4rem !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  border-top: 4px solid #c1272d !important;
   box-sizing: border-box !important;
-  width: 100% !important;
 }
-.footer .footer-container {
-  max-width: 1380px !important;
+.footer .footer-container, .footer .footer-inner {
+  max-width: 1360px !important;
   margin: 0 auto !important;
   padding: 0 !important;
 }
 .footer .footer-grid {
   display: grid !important;
-  grid-template-columns: 1.55fr 0.85fr 1fr 1.45fr 0.95fr !important;
+  grid-template-columns: 1.65fr 0.9fr 1.1fr 1.45fr 1fr !important;
   gap: 2.25rem !important;
   padding-bottom: 2.75rem !important;
   align-items: start !important;
@@ -463,52 +636,46 @@ footer.footer, #profeps-unified-footer {
   width: auto !important;
   max-width: 155px !important;
   object-fit: contain !important;
-  object-position: left center !important;
   align-self: flex-start !important;
   filter: none !important;
+  border-radius: 8px !important;
   margin: 0 0 0.9rem 0 !important;
   padding: 0 !important;
   display: block !important;
-  border-radius: 8px !important;
 }
 .footer .footer-brand p {
-  color: rgba(255, 255, 255, 0.68) !important;
-  font-size: 0.86rem !important;
+  color: rgba(255, 255, 255, 0.72) !important;
+  font-size: 0.84rem !important;
   line-height: 1.65 !important;
   margin: 0 0 1.25rem 0 !important;
-  max-width: 330px !important;
 }
 .footer .footer-stats {
   display: flex !important;
-  gap: 1.35rem !important;
+  align-items: center !important;
+  gap: 1.25rem !important;
   flex-wrap: wrap !important;
-  margin-top: 0.5rem !important;
+  padding-top: 0.5rem !important;
 }
 .footer .footer-stat-item {
   display: flex !important;
   flex-direction: column !important;
 }
 .footer .footer-stat-num {
-  font-size: 1.2rem !important;
-  font-weight: 900 !important;
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
   color: #ffffff !important;
-  line-height: 1.1 !important;
 }
 .footer .footer-stat-lbl {
   font-size: 0.7rem !important;
   color: rgba(255, 255, 255, 0.55) !important;
-  margin-top: 2px !important;
 }
 .footer .footer-col h4 {
-  color: #ffffff !important;
-  font-size: 0.8rem !important;
+  font-size: 0.76rem !important;
   font-weight: 800 !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.07em !important;
-  margin: 0 0 1.05rem 0 !important;
-  padding-bottom: 0.5rem !important;
-  border-bottom: 2px solid rgba(193, 39, 45, 0.65) !important;
-  display: inline-block !important;
+  letter-spacing: 0.08em !important;
+  color: rgba(255, 255, 255, 0.48) !important;
+  margin: 0 0 1rem 0 !important;
 }
 .footer .footer-col ul {
   list-style: none !important;
@@ -516,20 +683,20 @@ footer.footer, #profeps-unified-footer {
   margin: 0 !important;
   display: flex !important;
   flex-direction: column !important;
-  gap: 0.48rem !important;
+  gap: 0.52rem !important;
 }
 .footer .footer-col ul li {
   margin: 0 !important;
   padding: 0 !important;
 }
 .footer .footer-col ul li a {
-  color: rgba(255, 255, 255, 0.68) !important;
-  text-decoration: none !important;
-  font-size: 0.82rem !important;
+  color: rgba(255, 255, 255, 0.76) !important;
+  font-size: 0.83rem !important;
   font-weight: 500 !important;
-  line-height: 1.4 !important;
+  text-decoration: none !important;
   transition: color 0.2s ease, transform 0.2s ease !important;
   display: inline-block !important;
+  line-height: 1.35 !important;
 }
 .footer .footer-col ul li a:hover {
   color: #ffffff !important;
@@ -553,20 +720,22 @@ footer.footer, #profeps-unified-footer {
   font-size: 0.79rem !important;
   color: rgba(255, 255, 255, 0.48) !important;
 }
+
+/* ═══ 5. RESPONSIVE MOBILE & TABLETTE ═══ */
 @media (max-width: 1024px) {
   .footer .footer-grid {
     grid-template-columns: 1fr 1fr !important;
   }
 }
 @media (max-width: 900px) {
-  #navbar .nav-container, nav.navbar .nav-container, .nav-container {
+  #pepsNavbar .peps-nav-container {
     display: flex !important;
     justify-content: space-between !important;
   }
-  .nav-toggle {
+  #pepsNavbar .peps-nav-toggle {
     display: flex !important;
   }
-  #navbar #navMenu.nav-menu, nav.navbar .nav-menu, .nav-menu {
+  #pepsNavbar .peps-nav-menu {
     position: fixed !important;
     top: 80px !important;
     left: 0 !important;
@@ -578,11 +747,28 @@ footer.footer, #profeps-unified-footer {
     flex-direction: column !important;
     padding: 1.25rem !important;
     gap: 0.75rem !important;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.12) !important;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12) !important;
     display: none !important;
   }
-  #navbar #navMenu.nav-menu.active, nav.navbar .nav-menu.active, .nav-menu.active {
+  #pepsNavbar .peps-nav-menu.active {
     display: flex !important;
+  }
+  #pepsNavbar .peps-dropdown {
+    flex-direction: column !important;
+    height: auto !important;
+    width: 100% !important;
+  }
+  #pepsNavbar .peps-dropdown .peps-dropdown-menu {
+    position: static !important;
+    transform: none !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    box-shadow: none !important;
+    border: 1px solid #e2e8f0 !important;
+    margin-top: 0.5rem !important;
   }
 }
 @media (max-width: 640px) {
@@ -590,8 +776,7 @@ footer.footer, #profeps-unified-footer {
     grid-template-columns: 1fr !important;
   }
 }
-</style>
-`;
+</style>`;
 
 function buildNavbarHtml(fileName) {
   const isHome = fileName === 'index.html';
@@ -608,43 +793,51 @@ function buildNavbarHtml(fileName) {
   const dropdownLinks = DROPDOWN_ITEMS.map((item) => {
     const isCurrent = item.href === fileName;
     const cls = item.isHub
-      ? 'nav-dropdown-item nav-dropdown-hub'
+      ? 'peps-dropdown-item peps-dropdown-hub'
       : isCurrent
-      ? 'nav-dropdown-item active-tool'
-      : 'nav-dropdown-item';
+      ? 'peps-dropdown-item active-tool'
+      : 'peps-dropdown-item';
     return `            <a href="${item.href}" class="${cls}" data-i18n-fr="${item.fr.replace(/"/g, '&quot;')}" data-i18n-en="${item.en.replace(/"/g, '&quot;')}" data-i18n-ar="${item.ar.replace(/"/g, '&quot;')}">${item.fr}</a>`;
   }).join('\n');
 
-  return `<nav class="navbar" id="navbar" data-current-file="${fileName}">
+  return `<!-- PROFEPS_UNIFIED_NAVBAR_START -->
+  <nav id="navbar" class="navbar navbar-decoy" style="display:none !important;visibility:hidden !important;opacity:0 !important;width:0 !important;height:0 !important;overflow:hidden !important;position:absolute !important;pointer-events:none !important;z-index:-9999 !important;" aria-hidden="true">
     <div class="nav-container">
-      <a href="index.html" class="nav-logo" aria-label="Prof EPS Maroc - Accueil">
+      <div id="navMenu" class="nav-menu"></div>
+      <div id="navRightDecoy" class="nav-right"></div>
+      <button id="navToggle" class="nav-toggle" type="button"></button>
+    </div>
+  </nav>
+  <div class="peps-navbar" id="pepsNavbar" role="navigation" aria-label="Navigation principale" data-current-file="${fileName}">
+    <div class="peps-nav-container">
+      <a href="index.html" class="peps-nav-logo" aria-label="Prof EPS Maroc - Accueil">
         <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:52px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
       </a>
-      <div class="nav-menu" id="navMenu">
-        <a href="index.html" class="nav-link${isHome ? ' active' : ''}" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
-        <a href="generateur.html" class="nav-link${isGen ? ' active' : ''}" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
-        <!-- PROFEPS_DROPDOWN_START --><div class="nav-dropdown" id="navCalcDropdown" style="position:relative !important;display:inline-flex !important;align-items:center !important;">
-          <a href="${triggerHref}" class="nav-link${isTool ? ' active' : ''}" id="navDropdownTrigger"><span id="navDropdownTriggerText" data-i18n-fr="${currentTool.fr.replace(/"/g, '&quot;')}" data-i18n-en="${currentTool.en.replace(/"/g, '&quot;')}" data-i18n-ar="${currentTool.ar.replace(/"/g, '&quot;')}">${currentTool.fr}</span> <span class="nav-dropdown-caret">▾</span></a>
-          <div class="nav-dropdown-menu" id="navInlineDropdownMenu" style="display:none;">
+      <div class="peps-nav-menu" id="pepsNavMenu">
+        <a href="index.html" class="peps-nav-link${isHome ? ' active' : ''}" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
+        <a href="generateur.html" class="peps-nav-link${isGen ? ' active' : ''}" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
+        <div class="peps-dropdown" id="pepsCalcDropdown">
+          <a href="${triggerHref}" class="peps-nav-link${isTool ? ' active' : ''}" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="${currentTool.fr.replace(/"/g, '&quot;')}" data-i18n-en="${currentTool.en.replace(/"/g, '&quot;')}" data-i18n-ar="${currentTool.ar.replace(/"/g, '&quot;')}">${currentTool.fr}</span><span class="peps-dropdown-caret">▾</span></a>
+          <div class="peps-dropdown-menu" id="pepsDropdownMenu">
 ${dropdownLinks}
           </div>
-        </div><!-- PROFEPS_DROPDOWN_END -->
-        <a href="blog.html" class="nav-link${isBlog ? ' active' : ''}" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
-      </div>
-      <div class="nav-right">
-        <div dir="ltr" class="lang-switch" aria-label="Sélecteur de langue">
-          <button type="button" class="lang-btn active" id="btn-lang-fr" data-lang="fr" onclick="window.profepsSetLang('fr')">FR</button>
-          <span class="lang-sep">/</span>
-          <button type="button" class="lang-btn" id="btn-lang-en" data-lang="en" onclick="window.profepsSetLang('en')">EN</button>
-          <span class="lang-sep">/</span>
-          <button type="button" class="lang-btn" id="btn-lang-ar" data-lang="ar" onclick="window.profepsSetLang('ar')">عربي</button>
         </div>
-        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <a href="blog.html" class="peps-nav-link${isBlog ? ' active' : ''}" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
+      </div>
+      <div class="peps-nav-right">
+        <div dir="ltr" class="peps-lang-switch" aria-label="Sélecteur de langue">
+          <button type="button" class="peps-lang-btn active" id="btn-lang-fr" data-lang="fr" onclick="window.profepsSetLang('fr')">FR</button>
+          <span class="peps-lang-sep">/</span>
+          <button type="button" class="peps-lang-btn" id="btn-lang-en" data-lang="en" onclick="window.profepsSetLang('en')">EN</button>
+          <span class="peps-lang-sep">/</span>
+          <button type="button" class="peps-lang-btn" id="btn-lang-ar" data-lang="ar" onclick="window.profepsSetLang('ar')">عربي</button>
+        </div>
+        <button type="button" class="peps-nav-toggle" id="pepsNavToggle" aria-label="Menu">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
-  </nav>`;
+  </div>`;
 }
 
 function buildFooterHtml() {
@@ -727,280 +920,110 @@ function buildFooterHtml() {
   </footer>`;
 }
 
-const MASTER_JS = `
-<script id="profeps-master-unifier-js">
-(function() {
-  var DROPDOWN_DATA = ${JSON.stringify(DROPDOWN_ITEMS)};
-  var TOOL_MAP = ${JSON.stringify(TOOL_INFO)};
-  var nav = document.getElementById('navbar') || document.querySelector('nav.navbar, nav');
-  var currentFile = (nav && nav.getAttribute('data-current-file')) || (window.location.pathname.split('/').pop() || 'index.html');
-  if (!currentFile || currentFile === '' || currentFile === '/') currentFile = 'index.html';
-
-  var CANONICAL_NAV_HTML = nav ? nav.innerHTML : '';
-  var innerHtmlDesc = Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML');
-  var outerHtmlDesc = Object.getOwnPropertyDescriptor(Element.prototype, 'outerHTML');
-
-  function lockElement(el) {
-    if (!el || el.__profepsLocked) return;
-    el.__profepsLocked = true;
-    try {
-      el.replaceWith = function() {};
-      el.remove = function() {};
-      if (innerHtmlDesc && innerHtmlDesc.get && innerHtmlDesc.set) {
-        Object.defineProperty(el, 'innerHTML', {
-          get: function() { return innerHtmlDesc.get.call(this); },
-          set: function(val) {
-            if (window.__profepsAllowInnerHtml) {
-              return innerHtmlDesc.set.call(this, val);
-            }
-            return val;
-          },
-          configurable: true
-        });
-      }
-      if (outerHtmlDesc && outerHtmlDesc.get && outerHtmlDesc.set) {
-        Object.defineProperty(el, 'outerHTML', {
-          get: function() { return outerHtmlDesc.get.call(this); },
-          set: function(val) { return val; },
-          configurable: true
-        });
-      }
-    } catch (e) {}
-  }
-
-  function protectNavbarDom() {
-    var n = document.getElementById('navbar') || document.querySelector('nav.navbar, nav');
-    if (!n) return;
-    var triggerEl = document.getElementById('navDropdownTrigger');
-    var inlineMenu = document.getElementById('navInlineDropdownMenu');
-    var needsRestore =
-      !document.getElementById('navCalcDropdown') ||
-      !triggerEl ||
-      !triggerEl.querySelector('.nav-dropdown-caret') ||
-      !inlineMenu ||
-      inlineMenu.querySelectorAll('a.nav-dropdown-item').length < 10 ||
-      !n.querySelector('.lang-switch');
-
-    if (needsRestore && CANONICAL_NAV_HTML) {
-      window.__profepsAllowInnerHtml = true;
-      if (innerHtmlDesc && innerHtmlDesc.set) {
-        innerHtmlDesc.set.call(n, CANONICAL_NAV_HTML);
-      } else {
-        n.innerHTML = CANONICAL_NAV_HTML;
-      }
-      window.__profepsAllowInnerHtml = false;
+// ═══ ÉTAPE 4 : JS MAÎTRE (SANS AUCUNE SÉQUENCE D'ÉCHAPPEMENT FRAGILE) ═══
+const MASTER_JS_BODY = `(function() {
+  // Stub silencieux au cas où un ancien script de page appelle encore window.supabase
+  var dummyAuth = {
+    getSession: function() { return Promise.resolve({ data: { session: null }, error: null }); },
+    getUser: function() { return Promise.resolve({ data: { user: null }, error: null }); },
+    onAuthStateChange: function() { return { data: { subscription: { unsubscribe: function() {} } } }; },
+    signOut: function() { return Promise.resolve({ error: null }); }
+  };
+  var dummyClient = {
+    auth: dummyAuth,
+    from: function() {
+      return {
+        select: function() { return Promise.resolve({ data: [], error: null }); },
+        insert: function() { return Promise.resolve({ data: null, error: null }); },
+        update: function() { return Promise.resolve({ data: null, error: null }); },
+        delete: function() { return Promise.resolve({ data: null, error: null }); }
+      };
     }
+  };
+  window.supabase = { createClient: function() { return dummyClient; } };
+  window.supabaseClient = dummyClient;
 
-    n.querySelectorAll('.nav-cta, .nav-btn-login, #authBtn, #loginBtn, #userMenu, .auth-btn, .user-menu').forEach(function(bad) {
-      if (bad && bad.parentNode) bad.parentNode.removeChild(bad);
-    });
-    lockElement(n);
-    lockElement(n.querySelector('.nav-container'));
-    lockElement(document.getElementById('navMenu'));
-    lockElement(n.querySelector('.nav-right'));
-    lockElement(document.getElementById('navCalcDropdown'));
-    lockElement(document.getElementById('navDropdownTrigger'));
-  }
-
-  protectNavbarDom();
-
-  var existingHost = document.getElementById('profeps-shadow-dropdown-host');
-  if (existingHost && existingHost.parentNode) {
-    existingHost.parentNode.removeChild(existingHost);
-  }
-
-  var host = document.createElement('div');
-  host.id = 'profeps-shadow-dropdown-host';
-  host.style.cssText = 'position:fixed !important;top:0 !important;left:0 !important;width:0 !important;height:0 !important;z-index:2147483647 !important;pointer-events:none !important;overflow:visible !important;';
-  if (document.body) {
-    document.body.appendChild(host);
-  } else {
-    window.addEventListener('DOMContentLoaded', function() { document.body.appendChild(host); });
-  }
-
-  var shadow = host.attachShadow ? host.attachShadow({ mode: 'open' }) : host;
-  var shadowStyle = document.createElement('style');
-  shadowStyle.textContent = [
-    ':host { all: initial; }',
-    '.portal-menu {',
-    '  position: fixed;',
-    '  width: 340px;',
-    '  background: #ffffff;',
-    '  border: 1px solid #e2e8f0;',
-    '  border-radius: 14px;',
-    '  box-shadow: 0 20px 45px -6px rgba(15, 23, 42, 0.22), 0 4px 14px rgba(0, 0, 0, 0.08);',
-    '  padding: 9px;',
-    '  box-sizing: border-box;',
-    '  display: flex;',
-    '  flex-direction: column;',
-    '  gap: 3px;',
-    '  opacity: 0;',
-    '  visibility: hidden;',
-    '  pointer-events: none;',
-    '  transform: translateX(-50%) translateY(6px);',
-    '  transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s ease;',
-    '  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;',
-    '  text-align: left;',
-    '  direction: ltr;',
-    '  z-index: 2147483647;',
-    '}',
-    '.portal-menu.open {',
-    '  opacity: 1;',
-    '  visibility: visible;',
-    '  pointer-events: auto;',
-    '  transform: translateX(-50%) translateY(0);',
-    '}',
-    '.portal-item {',
-    '  display: flex;',
-    '  align-items: center;',
-    '  gap: 8px;',
-    '  padding: 8px 12px;',
-    '  border-radius: 9px;',
-    '  font-size: 13.5px;',
-    '  font-weight: 600;',
-    '  line-height: 1.35;',
-    '  color: #0f172a;',
-    '  text-decoration: none;',
-    '  white-space: nowrap;',
-    '  transition: background 0.15s ease, color 0.15s ease;',
-    '  border: 1px solid transparent;',
-    '  box-sizing: border-box;',
-    '}',
-    '.portal-item:hover {',
-    '  background: #f1f5f9;',
-    '  color: #c1272d;',
-    '}',
-    '.portal-item.active-tool {',
-    '  background: rgba(193, 39, 45, 0.09);',
-    '  color: #c1272d;',
-    '  font-weight: 800;',
-    '}',
-    '.portal-item.hub {',
-    '  background: linear-gradient(135deg, rgba(193, 39, 45, 0.1), rgba(0, 98, 51, 0.1));',
-    '  color: #c1272d;',
-    '  font-weight: 800;',
-    '  border: 1px solid rgba(193, 39, 45, 0.24);',
-    '  margin-bottom: 4px;',
-    '}',
-    '.portal-item.hub:hover {',
-    '  background: linear-gradient(135deg, #c1272d, #006233);',
-    '  color: #ffffff;',
-    '}'
-  ].join('\n');
-
-  var portalMenu = document.createElement('div');
-  portalMenu.className = 'portal-menu';
-
-  function renderPortalLinks(lang) {
-    var l = lang || 'fr';
-    portalMenu.innerHTML = '';
-    DROPDOWN_DATA.forEach(function(item) {
-      var a = document.createElement('a');
-      a.href = item.href;
-      var cls = 'portal-item';
-      if (item.isHub) cls += ' hub';
-      else if (item.href === currentFile) cls += ' active-tool';
-      a.className = cls;
-      a.textContent = item[l] || item.fr;
-      portalMenu.appendChild(a);
-    });
-  }
-
-  renderPortalLinks('fr');
-  shadow.appendChild(shadowStyle);
-  shadow.appendChild(portalMenu);
-
-  var observer = new MutationObserver(function() {
-    protectNavbarDom();
-    if (document.body && host.parentNode !== document.body) {
-      document.body.appendChild(host);
-    }
-  });
-  observer.observe(document.documentElement, { childList: true, subtree: true });
-  setInterval(function() {
-    protectNavbarDom();
-    if (document.body && host.parentNode !== document.body) {
-      document.body.appendChild(host);
-    }
-  }, 150);
-
+  var dropdown = document.getElementById('pepsCalcDropdown');
+  var dropdownMenu = document.getElementById('pepsDropdownMenu');
   var closeTimer = null;
-  function positionAndOpenPortal() {
-    if (window.innerWidth <= 900) return;
-    var currentTrigger = document.getElementById('navDropdownTrigger') || document.getElementById('navCalcDropdown');
-    var currentDropdown = document.getElementById('navCalcDropdown');
-    if (!currentTrigger) return;
-    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
-    var rect = currentTrigger.getBoundingClientRect();
-    var centerX = Math.max(180, Math.min(window.innerWidth - 180, rect.left + rect.width / 2));
-    portalMenu.style.top = (rect.bottom + 6) + 'px';
-    portalMenu.style.left = centerX + 'px';
-    portalMenu.classList.add('open');
-    if (currentDropdown) currentDropdown.classList.add('open');
+
+  function openDropdown() {
+    if (closeTimer) {
+      clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+    var dd = document.getElementById('pepsCalcDropdown');
+    var dm = document.getElementById('pepsDropdownMenu');
+    if (dd) dd.classList.add('open');
+    if (dm) {
+      dm.style.setProperty('opacity', '1', 'important');
+      dm.style.setProperty('visibility', 'visible', 'important');
+      dm.style.setProperty('pointer-events', 'auto', 'important');
+      dm.style.setProperty('transform', 'translateX(-50%) translateY(0)', 'important');
+    }
   }
 
-  function scheduleClosePortal() {
+  function closeDropdownDelayed() {
     if (closeTimer) clearTimeout(closeTimer);
     closeTimer = setTimeout(function() {
-      portalMenu.classList.remove('open');
-      var currentDropdown = document.getElementById('navCalcDropdown');
-      if (currentDropdown) currentDropdown.classList.remove('open');
-    }, 200);
+      var dd = document.getElementById('pepsCalcDropdown');
+      var dm = document.getElementById('pepsDropdownMenu');
+      if (dd) dd.classList.remove('open');
+      if (dm) {
+        dm.style.removeProperty('opacity');
+        dm.style.removeProperty('visibility');
+        dm.style.removeProperty('pointer-events');
+        dm.style.removeProperty('transform');
+      }
+    }, 180);
   }
 
-  document.addEventListener('mousemove', function(e) {
-    if (window.innerWidth <= 900) return;
-    var triggerEl = document.getElementById('navCalcDropdown') || document.getElementById('navDropdownTrigger');
-    if (!triggerEl) return;
-    var tr = triggerEl.getBoundingClientRect();
-    var x = e.clientX;
-    var y = e.clientY;
-    var inTrigger = (x >= tr.left - 8 && x <= tr.right + 8 && y >= tr.top - 8 && y <= tr.bottom + 14);
-    var inPortal = false;
-    if (portalMenu.classList.contains('open')) {
-      var pr = portalMenu.getBoundingClientRect();
-      inPortal = (x >= pr.left - 10 && x <= pr.right + 10 && y >= tr.bottom - 4 && y <= pr.bottom + 10);
-    }
-    if (inTrigger || inPortal) {
-      positionAndOpenPortal();
-    } else if (portalMenu.classList.contains('open')) {
-      scheduleClosePortal();
-    }
-  });
+  if (dropdown) {
+    dropdown.addEventListener('mouseenter', openDropdown);
+    dropdown.addEventListener('mouseleave', closeDropdownDelayed);
+  }
+  if (dropdownMenu) {
+    dropdownMenu.addEventListener('mouseenter', openDropdown);
+    dropdownMenu.addEventListener('mouseleave', closeDropdownDelayed);
+  }
 
   document.addEventListener('mouseover', function(e) {
     var t = e.target;
-    if (t && t.closest && (t.closest('#navCalcDropdown') || t.closest('#navDropdownTrigger'))) {
-      positionAndOpenPortal();
+    if (t && t.closest && (t.closest('#pepsCalcDropdown') || t.closest('#pepsDropdownMenu'))) {
+      openDropdown();
     }
   });
   document.addEventListener('mouseout', function(e) {
     var t = e.target;
-    if (t && t.closest && (t.closest('#navCalcDropdown') || t.closest('#navDropdownTrigger'))) {
-      scheduleClosePortal();
+    if (t && t.closest && (t.closest('#pepsCalcDropdown') || t.closest('#pepsDropdownMenu'))) {
+      var rel = e.relatedTarget;
+      if (!rel || !rel.closest || (!rel.closest('#pepsCalcDropdown') && !rel.closest('#pepsDropdownMenu'))) {
+        closeDropdownDelayed();
+      }
     }
   });
 
-  portalMenu.addEventListener('mouseenter', function() {
-    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
-  });
-  portalMenu.addEventListener('mouseleave', scheduleClosePortal);
+  function removeLegacyNavbars() {
+    document.querySelectorAll('nav.navbar:not(.navbar-decoy), .navbar:not(.navbar-decoy)').forEach(function(oldNav) {
+      if (oldNav.id !== 'pepsNavbar') {
+        if (oldNav.parentNode) oldNav.parentNode.removeChild(oldNav);
+      }
+    });
+  }
+  removeLegacyNavbars();
+  var obs = new MutationObserver(removeLegacyNavbars);
+  obs.observe(document.documentElement, { childList: true, subtree: true });
 
   window.addEventListener('scroll', function() {
-    var n = document.getElementById('navbar');
+    var n = document.getElementById('pepsNavbar');
     if (n) n.classList.toggle('scrolled', window.scrollY > 40);
-    var currentTrigger = document.getElementById('navDropdownTrigger');
-    if (portalMenu.classList.contains('open') && currentTrigger) {
-      var rect = currentTrigger.getBoundingClientRect();
-      portalMenu.style.top = (rect.bottom + 6) + 'px';
-    }
   });
 
   document.addEventListener('click', function(e) {
     var t = e.target;
-    if (t && t.closest && t.closest('#navToggle')) {
-      var toggleBtn = document.getElementById('navToggle');
-      var navMenuEl = document.getElementById('navMenu');
+    if (t && t.closest && t.closest('#pepsNavToggle')) {
+      var toggleBtn = document.getElementById('pepsNavToggle');
+      var navMenuEl = document.getElementById('pepsNavMenu');
       if (toggleBtn && navMenuEl) {
         toggleBtn.classList.toggle('active');
         navMenuEl.classList.toggle('active');
@@ -1012,16 +1035,15 @@ const MASTER_JS = `
     try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
     ['fr', 'en', 'ar'].forEach(function(code) {
       var btn = document.getElementById('btn-lang-' + code);
-      if (btn) btn.className = (code === lang) ? 'lang-btn active' : 'lang-btn';
-      document.querySelectorAll('.lang-btn[data-lang="' + code + '"]').forEach(function(b) {
-        b.className = (code === lang) ? 'lang-btn active' : 'lang-btn';
+      if (btn) btn.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
+      document.querySelectorAll('.peps-lang-btn[data-lang="' + code + '"]').forEach(function(b) {
+        b.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
       });
     });
     document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function(el) {
       var val = el.getAttribute('data-i18n-' + lang);
       if (val) el.textContent = val;
     });
-    renderPortalLinks(lang);
     if (typeof window.setToolLang === 'function') window.setToolLang(lang);
     if (typeof window.changeLang === 'function') window.changeLang(lang);
     if (typeof window.setLanguage === 'function') window.setLanguage(lang);
@@ -1038,43 +1060,15 @@ const MASTER_JS = `
       window.profepsSetLang(saved);
     }
   }
-})();
-</script>
-`;
+})();`;
 
+const MASTER_JS = `<script id="profeps-master-unifier-js">\n${MASTER_JS_BODY}\n</script>\n<!-- PROFEPS_UNIFIED_NAVBAR_END -->`;
+
+// ═══ ÉTAPE 5 : MISE À JOUR ET NETTOYAGE DE TOUTES LES PAGES HTML DU PROJET ═══
 const dirsToScan = [rootDir];
 if (fs.existsSync(path.join(rootDir, 'public'))) {
   dirsToScan.push(path.join(rootDir, 'public'));
 }
-
-// Neutraliser l'écrasement de la navbar dans js/auth-shared.js sans casser Supabase
-dirsToScan.forEach((dir) => {
-  const jsDir = path.join(dir, 'js');
-  if (fs.existsSync(jsDir)) {
-    fs.readdirSync(jsDir).filter((f) => f.endsWith('.js')).forEach((jsFile) => {
-      const jsPath = path.join(jsDir, jsFile);
-      let jsContent = fs.readFileSync(jsPath, 'utf8');
-      if (jsFile === 'auth-shared.js' || jsContent.includes('nav-menu') || jsContent.includes('navMenu') || jsContent.includes('calculateur-vma.html')) {
-        const safeHeader = `/* [PROFEPS UNIFIER] Navbar & Footer verrouillés par unifier-navbar-footer.js */\nif (typeof window !== 'undefined') { window.__PROFEPS_SKIP_OLD_NAVBAR = true; }\n`;
-        jsContent = jsContent
-          .replace(/document\.querySelector\(['"]\.navbar['"]\)/g, "document.createElement('div')")
-          .replace(/document\.querySelector\(['"]nav\.navbar['"]\)/g, "document.createElement('div')")
-          .replace(/document\.querySelector\(['"]#navbar['"]\)/g, "document.createElement('div')")
-          .replace(/document\.getElementById\(['"]navbar['"]\)/g, "document.createElement('div')")
-          .replace(/document\.getElementById\(['"]navMenu['"]\)/g, "document.createElement('div')")
-          .replace(/document\.querySelector\(['"]#navMenu['"]\)/g, "document.createElement('div')")
-          .replace(/document\.querySelector\(['"]\.nav-menu['"]\)/g, "document.createElement('div')")
-          .replace(/document\.querySelector\(['"]\.nav-right['"]\)/g, "document.createElement('div')")
-          .replace(/document\.querySelector\(['"]\.nav-container['"]\)/g, "document.createElement('div')");
-        if (!jsContent.includes('__PROFEPS_SKIP_OLD_NAVBAR')) {
-          jsContent = safeHeader + jsContent;
-        }
-        fs.writeFileSync(jsPath, jsContent, 'utf8');
-        console.log(`🛡️ [PROTÉGÉ CONTRE ÉCRASEMENT NAVBAR] -> ${path.relative(rootDir, jsPath)}`);
-      }
-    });
-  }
-});
 
 let updatedCount = 0;
 
@@ -1084,6 +1078,29 @@ dirsToScan.forEach((dir) => {
     const filePath = path.join(dir, file);
     let html = fs.readFileSync(filePath, 'utf8');
 
+    // 1. Supprimer toutes les balises <script> Supabase / auth-shared / login / dashboard / navbar.js
+    html = html.replace(/<script[^>]*src=["'][^"']*(?:supabase|auth-shared|auth\.js|login\.js|dashboard\.js|navbar\.js)[^"']*["'][^>]*>\s*<\/script>\s*/gi, '');
+    html = html.replace(/<link[^>]*href=["'][^"']*(?:login|dashboard|auth)\.css[^"']*["'][^>]*>\s*/gi, '');
+
+    // 2. Supprimer tout bloc <script> inline qui ne sert qu'à initialiser Supabase / auth-shared
+    html = html.replace(/<script(?![^>]*id=["']profeps-master-unifier-js["'])[^>]*>([\s\S]*?)<\/script>/gi, (fullMatch, scriptContent) => {
+      const hasSupabaseOrAuth = /(?:supabase\.co|createClient|auth-shared|initAuth|updateAuthUI)/i.test(scriptContent);
+      const hasImportantPageLogic = /(?:jspdf|html2pdf|generatePDF|calculateVMA|calculateVDOT|calculateKarvonen|Chart\b)/i.test(scriptContent);
+      if (hasSupabaseOrAuth && !hasImportantPageLogic && scriptContent.length < 6000) {
+        return '';
+      }
+      return fullMatch
+        .replace(/(?:window\.)?location\.(?:href|replace|assign)\s*=?\s*\(?['"][^'"]*(?:login|dashboard)\.html[^'"]*['"]\)?/gi, 'void 0');
+    });
+
+    // 3. Supprimer tous les liens <a> vers login.html ou dashboard.html
+    html = html.replace(/<a[^>]*href=["'][^"']*(?:login|dashboard)\.html[^"']*["'][^>]*>[\s\S]*?<\/a>\s*/gi, '');
+
+    // 4. Nettoyer tous les anciens styles/scripts d'unification et anciennes navbars
+    html = html.replace(/<!-- PROFEPS_UNIFIED_NAVBAR_START -->[\s\S]*?<!-- PROFEPS_UNIFIED_NAVBAR_END -->\s*/g, '');
+    html = html.replace(/<nav id="navbar" class="navbar navbar-decoy"[\s\S]*?<\/nav>\s*/g, '');
+    html = html.replace(/<div id="navbar" class="navbar-decoy"[\s\S]*?<\/div>\s*<\/div>\s*/g, '');
+    html = html.replace(/<div[^>]*class=["'][^"']*nav-backdrop[^"']*["'][^>]*>\s*<\/div>\s*/gi, '');
     html = html.replace(/<style id="profeps-navbar-styles">[\s\S]*?<\/style>\s*/g, '');
     html = html.replace(/<style id="profeps-vma-dropdown-footer-css">[\s\S]*?<\/style>\s*/g, '');
     html = html.replace(/<style id="profeps-master-unifier-css">[\s\S]*?<\/style>\s*/g, '');
@@ -1092,20 +1109,23 @@ dirsToScan.forEach((dir) => {
     html = html.replace(/\/\*\s*═══\s*NAVBAR CANONIQUE UNIFIÉE\s*═══\s*\*\/[\s\S]*?(?=<\/style>)/g, '');
     html = html.replace(/<div[^>]*class="[^"]*in-page-lang-switch[^"]*"[^>]*>[\s\S]*?<\/div>/gi, '');
 
-    // Forcer le rafraîchissement du cache navigateur sur /js/auth-shared.js
-    html = html.replace(/src=(["'])(\/?js\/auth-shared\.js)(?:\?[^"']*)?\1/gi, 'src=$1$2?v=profeps_unified$1');
+    // Supprimer TOUTES les anciennes balises <nav class="navbar"> ou <nav id="navbar">
+    html = html.replace(/<nav[^>]*(?:id=["']navbar["']|class=["'][^"']*navbar[^"']*["'])[^>]*>[\s\S]*?<\/nav>\s*/gi, '');
 
+    // 5. Injecter le CSS maître juste avant </head>
     if (/<\/head>/i.test(html)) {
       html = html.replace(/<\/head>/i, `${MASTER_CSS}\n</head>`);
     }
 
+    // 6. Injecter la nouvelle Navbar isolée (#pepsNavbar) + le JS maître juste après <body...>
     const newNavWithJs = `${buildNavbarHtml(file)}\n${MASTER_JS}`;
-    if (/<nav[\s\S]*?<\/nav>/i.test(html)) {
-      html = html.replace(/<nav[\s\S]*?<\/nav>/i, newNavWithJs);
-    } else {
+    if (/<body[^>]*>/i.test(html)) {
       html = html.replace(/<body[^>]*>/i, (match) => `${match}\n${newNavWithJs}`);
+    } else if (/<nav[\s\S]*?<\/nav>/i.test(html)) {
+      html = html.replace(/<nav[\s\S]*?<\/nav>/i, newNavWithJs);
     }
 
+    // 7. Remplacer le <footer> par le Footer à 5 colonnes sans doublons
     const newFooter = buildFooterHtml();
     const lastFooterStart = html.lastIndexOf('<footer');
     const lastFooterEnd = html.lastIndexOf('</footer>');
@@ -1122,9 +1142,9 @@ dirsToScan.forEach((dir) => {
     }
 
     fs.writeFileSync(filePath, html, 'utf8');
-    console.log(`✅ [UNIFIÉ & VERROUILLÉ] -> ${path.relative(rootDir, filePath)}`);
+    console.log(`✅ [UNIFIÉ & NETTOYÉ DE SUPABASE] -> ${path.relative(rootDir, filePath)}`);
     updatedCount++;
   });
 });
 
-console.log(`\n🎉 SUCCÈS : ${updatedCount} fichiers HTML mis à jour et verrouillés !`);
+console.log(`\n🎉 SUCCÈS TOTAL : ${updatedCount} pages HTML unifiées, login/dashboard/Supabase supprimés définitivement !`);
