@@ -1,7 +1,7 @@
 /**
  * update-navbar.js
- * Script Node.js ciblant le dossier "public"
- * Unifie la Navbar + Menu Déroulant des 10 Calculateurs Sport + Titre actif dynamique sur toutes les pages.
+ * Script Node.js ciblant le dossier "public" (et la racine si des HTML y sont présents)
+ * Corrige l'injection sur le dernier </body>, nettoie les anciens styles et affiche le menu déroulant sur 100% des pages.
  */
 
 const fs = require('fs');
@@ -17,7 +17,6 @@ console.log('🚀 UNIFICATEUR DE NAVBAR + MENU DÉROULANT — PROF EPS MAROC');
 console.log('📂 Dossier scanné :', targetDir);
 console.log('======================================================\n');
 
-// Table des noms courts affichés sur le bouton du menu déroulant selon la page active
 const TOOL_NAV_LABELS = {
     'calculateur-vma.html': 'Calculateur VMA',
     'hub-outils-sport-performance.html': 'Hub Calculateurs Sport',
@@ -32,7 +31,6 @@ const TOOL_NAV_LABELS = {
     'calculateur-charge-rpe-foster-acwr.html': 'Charge RPE & ACWR'
 };
 
-// Liste complète des outils dans le menu déroulant
 const DROPDOWN_ITEMS = [
     { href: 'hub-outils-sport-performance.html', label: '🧭 Hub de Tous les Calculateurs Sport', isHub: true },
     { href: 'calculateur-vma.html', label: '⚡ Calculateur VMA & Allures' },
@@ -47,7 +45,6 @@ const DROPDOWN_ITEMS = [
     { href: 'calculateur-charge-rpe-foster-acwr.html', label: '🛡️ Charge RPE Foster & ACWR' }
 ];
 
-// ═══ 1. CSS Canonique (Navbar + Menu Déroulant blindé contre la boîte blanche) ═══
 const NAVBAR_CSS_BLOCK = `
 /* ═══ NAVBAR CANONIQUE UNIFIÉE + DROPDOWN ═══ */
 .navbar, #navbar { 
@@ -146,7 +143,7 @@ const NAVBAR_CSS_BLOCK = `
     color: #c1272d !important; 
 }
 
-/* ═══ MENU DÉROULANT CALCULATEURS SPORT (ANTI-BOÎTE BLANCHE) ═══ */
+/* ═══ MENU DÉROULANT CALCULATEURS SPORT (100% COMPATIBLE SANS TAILWIND) ═══ */
 #navbar .nav-dropdown, .nav-dropdown {
     position: relative !important;
     display: inline-flex !important;
@@ -161,7 +158,6 @@ const NAVBAR_CSS_BLOCK = `
     margin-left: 0.2rem !important;
     transition: transform 0.22s ease !important;
     color: inherit !important;
-    -webkit-text-fill-color: currentColor !important;
 }
 #navbar .nav-dropdown:hover .nav-dropdown-caret,
 #navbar .nav-dropdown.open .nav-dropdown-caret {
@@ -181,20 +177,17 @@ const NAVBAR_CSS_BLOCK = `
 #navbar .nav-dropdown-menu,
 .nav-dropdown-menu {
     position: absolute !important;
-    top: calc(100% + 8px) !important;
+    top: calc(100% + 6px) !important;
     left: 50% !important;
     transform: translateX(-50%) translateY(8px) !important;
-    width: 330px !important;
-    min-width: 310px !important;
-    max-width: 92vw !important;
+    width: 325px !important;
     height: auto !important;
-    max-height: 80vh !important;
-    overflow-y: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
     background: #ffffff !important;
-    background-color: #ffffff !important;
-    border: 1px solid #cbd5e1 !important;
+    border: 1px solid #e2e8f0 !important;
     border-radius: 14px !important;
-    box-shadow: 0 20px 40px -8px rgba(15, 23, 42, 0.22), 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 18px 38px -5px rgba(15, 23, 42, 0.18), 0 4px 12px rgba(0, 0, 0, 0.08) !important;
     padding: 0.55rem !important;
     margin: 0 !important;
     opacity: 0 !important;
@@ -202,11 +195,7 @@ const NAVBAR_CSS_BLOCK = `
     pointer-events: none !important;
     transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease !important;
     z-index: 99999 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    justify-content: flex-start !important;
-    gap: 3px !important;
+    display: block !important;
     text-align: left !important;
     box-sizing: border-box !important;
 }
@@ -223,7 +212,6 @@ const NAVBAR_CSS_BLOCK = `
 #navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item,
 #navbar .nav-dropdown-menu a.nav-dropdown-item,
 .nav-dropdown-menu a.nav-dropdown-item {
-    all: unset !important;
     box-sizing: border-box !important;
     display: flex !important;
     flex-direction: row !important;
@@ -232,14 +220,13 @@ const NAVBAR_CSS_BLOCK = `
     gap: 0.55rem !important;
     width: 100% !important;
     height: auto !important;
-    min-height: 36px !important;
     padding: 0.5rem 0.75rem !important;
-    margin: 0 !important;
+    margin: 0 0 2px 0 !important;
     border-radius: 9px !important;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    font-size: 0.84rem !important;
+    font-size: 0.83rem !important;
     font-weight: 700 !important;
-    line-height: 1.35 !important;
+    line-height: 1.4 !important;
     color: #0f172a !important;
     -webkit-text-fill-color: #0f172a !important;
     background: transparent !important;
@@ -275,7 +262,7 @@ const NAVBAR_CSS_BLOCK = `
     -webkit-text-fill-color: #c1272d !important;
     font-weight: 800 !important;
     border: 1px solid rgba(193, 39, 45, 0.25) !important;
-    margin-bottom: 4px !important;
+    margin-bottom: 6px !important;
 }
 #navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item.nav-dropdown-hub:hover {
     background: linear-gradient(135deg, rgba(193, 39, 45, 0.18), rgba(0, 98, 51, 0.18)) !important;
@@ -401,7 +388,7 @@ const NAVBAR_CSS_BLOCK = `
     }
     #navbar #navMenu .nav-dropdown:hover > .nav-dropdown-menu,
     #navbar #navMenu .nav-dropdown.open > .nav-dropdown-menu {
-        display: flex !important;
+        display: block !important;
         opacity: 1 !important;
         visibility: visible !important;
         pointer-events: auto !important;
@@ -415,7 +402,6 @@ const NAVBAR_CSS_BLOCK = `
 }
 `;
 
-// ═══ 2. Script JavaScript unique pour le menu + hover dropdown ═══
 const NAVBAR_SCRIPT_TAG = `
 <script id="profeps-navbar-script">
 (() => {
@@ -496,7 +482,6 @@ function buildNavbarHTML(filePath, existingLangSwitcherHtml = '') {
     const key = getActiveKey(filePath);
     const act = (k) => (key === k ? ' active' : '');
 
-    // Nom affiché sur le bouton du menu déroulant (page actuelle si outil, sinon "Calculateur VMA")
     const currentDropdownLabel = TOOL_NAV_LABELS[baseName] || 'Calculateur VMA';
     const currentDropdownHref = TOOL_NAV_LABELS[baseName] ? baseName : 'calculateur-vma.html';
 
@@ -552,15 +537,14 @@ function findHtmlFiles(dir, list = []) {
     return list;
 }
 
-// ═══ Exécution ═══
-const files = findHtmlFiles(targetDir);
+const files = findHtmlFiles(rootDir);
 
 if (files.length === 0) {
-    console.log('⚠️ Aucun fichier .html trouvé dans :', targetDir);
+    console.log('⚠️ Aucun fichier .html trouvé.');
     process.exit(0);
 }
 
-console.log(`✅ ${files.length} fichier(s) HTML détecté(s) dans ${targetDir}.\nTraitement en cours...\n`);
+console.log(`✅ ${files.length} fichier(s) HTML détecté(s).\nTraitement en cours...\n`);
 
 let count = 0;
 
@@ -569,9 +553,16 @@ files.forEach(file => {
     const oldHtml = html;
     const baseName = path.basename(file).toLowerCase();
 
-    // 0. Nettoyer les anciens blocs CSS dropdown injectés dans d'autres balises <style>
+    // 0. Supprimer tous les anciens styles dropdown parasites (y compris profeps-vma-dropdown-footer-css)
+    html = html.replace(/<style id="profeps-vma-dropdown-footer-css">[\s\S]*?<\/style>/gi, '');
     html = html.replace(/\/\* === PROFEPS DROPDOWN[\s\S]*?(?=<\/style>)/g, '');
     html = html.replace(/\/\* === DROPDOWN MENU[\s\S]*?(?=<\/style>)/g, '');
+
+    // Réparer spécifiquement la chaîne template pageHtml dans generateur.html si un script y avait été injecté
+    html = html.replace(
+        /<\/head><body>\$\{pagesToRender\[i\]\}[\s\S]*?<\/body><\/html>`;/g,
+        '</head><body>${pagesToRender[i]}</body></html>`;'
+    );
 
     // Préserver le sélecteur de langue dans .nav-right s'il s'agit d'une page calculateur
     let langSwitcherHtml = '';
@@ -586,19 +577,20 @@ files.forEach(file => {
         langSwitcherHtml = `<div class="lang-switcher"><button id="btn-fr" onclick="setLang('fr')" class="lang-btn active">FR</button><button id="btn-en" onclick="setLang('en')" class="lang-btn">EN</button><button id="btn-ar" onclick="setLang('ar')" class="lang-btn">العربية</button></div>`;
     }
 
-    // 1. Style dédié injecté juste avant </head>
+    // 1. Style dédié injecté sur le PREMIER </head> uniquement
     const customStyleTag = `<style id="profeps-navbar-styles">\n${NAVBAR_CSS_BLOCK.trim()}\n</style>`;
-    html = html.replace(/<style id="profeps-navbar-styles">[\s\S]*?<\/style>/g, '');
+    html = html.replace(/<style id="profeps-navbar-styles">[\s\S]*?<\/style>/gi, '');
 
-    if (html.includes('</head>')) {
-        html = html.replace('</head>', `${customStyleTag}\n</head>`);
+    const firstHeadClose = html.toLowerCase().indexOf('</head>');
+    if (firstHeadClose !== -1) {
+        html = html.slice(0, firstHeadClose) + `${customStyleTag}\n` + html.slice(firstHeadClose);
     } else {
         html = customStyleTag + html;
     }
 
     // 2. Remplacer la Navbar complète
     const newNav = buildNavbarHTML(file, langSwitcherHtml);
-    html = html.replace(/<div class="nav-backdrop"[^>]*><\/div>/g, '');
+    html = html.replace(/<div class="nav-backdrop"[^>]*><\/div>/gi, '');
 
     const navMatch = /<nav[\s\S]*?<\/nav>/i;
     if (navMatch.test(html)) {
@@ -607,10 +599,11 @@ files.forEach(file => {
         html = html.replace(/(<body[^>]*>)/i, `$1\n${newNav.trim()}`);
     }
 
-    // 3. Remplacer le script JS de la Navbar
-    html = html.replace(/<script id="profeps-navbar-script">[\s\S]*?<\/script>/g, '');
-    if (html.includes('</body>')) {
-        html = html.replace('</body>', `${NAVBAR_SCRIPT_TAG.trim()}\n</body>`);
+    // 3. Remplacer le script JS de la Navbar uniquement avant le DERNIER </body> du fichier
+    html = html.replace(/<script id="profeps-navbar-script">[\s\S]*?<\/script>/gi, '');
+    const lastBodyClose = html.toLowerCase().lastIndexOf('</body>');
+    if (lastBodyClose !== -1) {
+        html = html.slice(0, lastBodyClose) + `${NAVBAR_SCRIPT_TAG.trim()}\n` + html.slice(lastBodyClose);
     } else {
         html += NAVBAR_SCRIPT_TAG.trim();
     }
@@ -627,5 +620,4 @@ files.forEach(file => {
 
 console.log('\n======================================================');
 console.log(`🎉 SUCCÈS : ${count} / ${files.length} fichier(s) HTML mis à jour !`);
-console.log('Menu déroulant unifié et actif sur toutes les pages.');
 console.log('======================================================\n');
