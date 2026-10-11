@@ -1,67 +1,18 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="ltr" id="html-root">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hub des Calculateurs Sportifs : VMA, VDOT, Fréquence Cardiaque, IMC & HIIT | ProfEPS.ma</title>
-  <meta name="description" content="Portail complet d'outils scientifiques pour coureurs, entraîneurs, préparateurs physiques et professeurs d'EPS : VMA, VDOT Daniels, Réserve ASR, Fréquence Cardiaque Karvonen, IMC Sportif, Chaleur et Charge RPE." />
+  <title>Tous les Calculateurs VO2 Max, VMA, Physiologie & Préparation Physique | Prof EPS</title>
+  <meta name="description" id="metaDesc" content="Accédez directement à chaque calculateur interactif avec interprétation scientifique par indicateur et conseils pédagogiques pour l’EPS et l’entraînement." />
+  <meta name="keywords" content="calculateur vo2 max, calculateur vma, calculer vo2max course à pied, vdot jack daniels, fréquence cardiaque karvonen, imc sportif, préparation physique eps" />
   <link rel="canonical" href="https://profeps.ma/hub-outils-sport-performance.html" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: #F8FAFC; color: #0F172A; }
-  </style>
-  <link rel="icon" type="image/png" href="/images/prof_eps.png" />
+  <link rel="icon" type="image/png" href="images/prof_eps.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
-  <style id="profeps-unified-theme">
-    :root {
-      --primary: #c1272d;
-      --primary-dark: #a01f24;
-      --secondary: #006233;
-      --secondary-dark: #004d28;
-      --text-primary: #0f172a;
-      --text-secondary: #334155;
-      --text-light: #64748b;
-      --border: #e2e8f0;
-      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-display: 'Plus Jakarta Sans', var(--font-sans);
-    }
-    body { font-family: var(--font-sans) !important; background: #f8fafc !important; color: var(--text-primary) !important; padding-top: 82px !important; }
-    .navbar { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 1000 !important; padding: 0.85rem 2rem !important; background: rgba(255,255,255,0.96) !important; backdrop-filter: blur(20px) !important; border-bottom: 1px solid rgba(226,232,240,0.7) !important; }
-    .nav-container { max-width: 1400px !important; margin: 0 auto !important; display: grid !important; grid-template-columns: 1fr auto 1fr !important; align-items: center !important; }
-    .nav-logo { justify-self: start !important; display: flex !important; align-items: center !important; }
-    .nav-logo img { height: 52px !important; width: auto !important; object-fit: contain !important; }
-    .nav-menu { display: flex !important; align-items: center !important; justify-content: center !important; gap: 1.5rem !important; }
-    .nav-right { justify-self: end !important; display: flex !important; align-items: center !important; gap: 0.65rem !important; }
-    .nav-link { font-size: 0.92rem !important; font-weight: 600 !important; color: #1a1a2e !important; padding: 0.45rem 0.65rem !important; position: relative !important; text-decoration: none !important; }
-    .nav-link::after { content: '' !important; position: absolute !important; bottom: -2px !important; left: 50% !important; right: 50% !important; height: 3px !important; background: linear-gradient(90deg, #c1272d, #006233) !important; border-radius: 2px !important; transition: left 0.3s ease, right 0.3s ease !important; }
-    .nav-link:hover::after, .nav-link.active::after { left: 0.4rem !important; right: 0.4rem !important; }
-    .nav-link:hover, .nav-link.active { color: #c1272d !important; }
-    .lang-switch { display: inline-flex; align-items: center; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 9999px; padding: 2px; }
-    .lang-btn { background: none; border: none; cursor: pointer; padding: 4px 8px; font-size: 0.75rem; font-weight: 700; color: #64748b; border-radius: 9999px; transition: all 0.2s ease; }
-    .lang-btn.active { background: white; color: #0f172a; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
-    .lang-btn:hover:not(.active) { color: #c1272d; }
-    .lang-sep { font-size: 0.75rem; color: #cbd5e1; user-select: none; }
-    .nav-cta { display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; padding: 0.48rem 1.15rem !important; background: linear-gradient(135deg, #c1272d, #006233) !important; color: white !important; font-weight: 600 !important; font-size: 0.88rem !important; border-radius: 9999px !important; box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important; text-decoration: none !important; white-space: nowrap !important; }
-    #ui-badge { display: inline-flex; align-items: center; background: rgba(193,39,45,0.08) !important; color: #c1272d !important; padding: 0.28rem 0.85rem !important; border-radius: 9999px !important; border: 1px solid rgba(193,39,45,0.18) !important; }
-    .profeps-footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important; color: white !important; padding: 3rem 1.5rem 0 !important; margin-top: 3.5rem !important; text-align: left !important; }
-    .profeps-footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.25rem; padding-bottom: 2.25rem; }
-    .profeps-footer-brand img { height: 42px; filter: brightness(0) invert(1); margin-bottom: 0.75rem; }
-    .profeps-footer-brand p { color: rgba(255,255,255,0.65); font-size: 0.84rem; line-height: 1.6; }
-    .profeps-footer-col h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.45); margin-bottom: 0.9rem; }
-    .profeps-footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
-    .profeps-footer-col ul li a { color: rgba(255,255,255,0.72); font-size: 0.84rem; text-decoration: none; }
-    .profeps-footer-col ul li a:hover { color: white; }
-    .profeps-footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.25rem 0; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; color: rgba(255,255,255,0.45); font-size: 0.8rem; flex-wrap: wrap; gap: 0.5rem; }
-    @media (max-width: 868px) { .nav-container { display: flex !important; justify-content: space-between !important; } .nav-menu { display: none !important; } .profeps-footer-inner { grid-template-columns: 1fr 1fr; } }
-  </style>
-  
-
-
-
-
-<style id="profeps-master-unifier-css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style id="profeps-master-unifier-css">
 /* ═══ 1. NAVBAR FIXE ISOLÉE (.peps-*) — 80PX VERROUILLÉ SUR TOUTES LES PAGES ═══ */
 html {
   overflow-y: scroll !important;
@@ -422,7 +373,7 @@ button.lang-btn:not(.peps-lang-btn) {
   border-radius: 2px !important;
 }
 
-/* ═══ 4. FOOTER UNIFIÉ À 5 COLONNES SANS DOUBLONS ═══ */
+/* ═══ 4. FOOTER UNIFIÉ À 5 COLONNES SANS DOUBLONS (BLINDÉ CONTRE TAILWIND CDN) ═══ */
 footer.footer, #profeps-unified-footer {
   background: linear-gradient(135deg, #15192b 0%, #162038 100%) !important;
   color: #ffffff !important;
@@ -431,27 +382,35 @@ footer.footer, #profeps-unified-footer {
   border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   box-sizing: border-box !important;
+  width: 100% !important;
+  display: block !important;
 }
-.footer .footer-container, .footer .footer-inner {
+#profeps-unified-footer .footer-container,
+footer.footer .footer-container,
+.footer .footer-inner {
   max-width: 1360px !important;
   margin: 0 auto !important;
   padding: 0 !important;
+  box-sizing: border-box !important;
 }
-.footer .footer-grid {
+#profeps-unified-footer .footer-grid,
+footer.footer .footer-grid {
   display: grid !important;
   grid-template-columns: 1.65fr 0.9fr 1.1fr 1.45fr 1fr !important;
   gap: 2.25rem !important;
   padding-bottom: 2.75rem !important;
   align-items: start !important;
 }
-.footer .footer-brand {
+#profeps-unified-footer .footer-brand,
+footer.footer .footer-brand {
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-start !important;
 }
-.footer .footer-brand img {
-  height: 48px !important;
-  max-height: 48px !important;
+#profeps-unified-footer .footer-brand img,
+footer.footer .footer-brand img {
+  height: 46px !important;
+  max-height: 46px !important;
   width: auto !important;
   max-width: 155px !important;
   object-fit: contain !important;
@@ -462,41 +421,50 @@ footer.footer, #profeps-unified-footer {
   padding: 0 !important;
   display: block !important;
 }
-.footer .footer-brand p {
+#profeps-unified-footer .footer-brand p,
+footer.footer .footer-brand p {
   color: rgba(255, 255, 255, 0.72) !important;
   font-size: 0.84rem !important;
   line-height: 1.65 !important;
   margin: 0 0 1.25rem 0 !important;
 }
-.footer .footer-stats {
+#profeps-unified-footer .footer-stats,
+footer.footer .footer-stats {
   display: flex !important;
   align-items: center !important;
   gap: 1.25rem !important;
   flex-wrap: wrap !important;
   padding-top: 0.5rem !important;
 }
-.footer .footer-stat-item {
+#profeps-unified-footer .footer-stat-item,
+footer.footer .footer-stat-item {
   display: flex !important;
   flex-direction: column !important;
 }
-.footer .footer-stat-num {
+#profeps-unified-footer .footer-stat-num,
+footer.footer .footer-stat-num {
   font-size: 1.05rem !important;
   font-weight: 800 !important;
   color: #ffffff !important;
+  line-height: 1.2 !important;
 }
-.footer .footer-stat-lbl {
+#profeps-unified-footer .footer-stat-lbl,
+footer.footer .footer-stat-lbl {
   font-size: 0.7rem !important;
   color: rgba(255, 255, 255, 0.55) !important;
 }
-.footer .footer-col h4 {
+#profeps-unified-footer .footer-col h4,
+footer.footer .footer-col h4 {
   font-size: 0.76rem !important;
   font-weight: 800 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.08em !important;
   color: rgba(255, 255, 255, 0.48) !important;
   margin: 0 0 1rem 0 !important;
+  line-height: 1.3 !important;
 }
-.footer .footer-col ul {
+#profeps-unified-footer .footer-col ul,
+footer.footer .footer-col ul {
   list-style: none !important;
   padding: 0 !important;
   margin: 0 !important;
@@ -504,11 +472,13 @@ footer.footer, #profeps-unified-footer {
   flex-direction: column !important;
   gap: 0.52rem !important;
 }
-.footer .footer-col ul li {
+#profeps-unified-footer .footer-col ul li,
+footer.footer .footer-col ul li {
   margin: 0 !important;
   padding: 0 !important;
 }
-.footer .footer-col ul li a {
+#profeps-unified-footer .footer-col ul li a,
+footer.footer .footer-col ul li a {
   color: rgba(255, 255, 255, 0.76) !important;
   font-size: 0.83rem !important;
   font-weight: 500 !important;
@@ -517,18 +487,22 @@ footer.footer, #profeps-unified-footer {
   display: inline-block !important;
   line-height: 1.35 !important;
 }
-.footer .footer-col ul li a:hover {
+#profeps-unified-footer .footer-col ul li a:hover,
+footer.footer .footer-col ul li a:hover {
   color: #ffffff !important;
   transform: translateX(2px) !important;
 }
-.footer .footer-col ul li a.footer-hub-highlight {
+#profeps-unified-footer .footer-col ul li a.footer-hub-highlight,
+footer.footer .footer-col ul li a.footer-hub-highlight {
   color: #4ade80 !important;
   font-weight: 800 !important;
 }
-.footer .footer-col ul li a.footer-hub-highlight:hover {
+#profeps-unified-footer .footer-col ul li a.footer-hub-highlight:hover,
+footer.footer .footer-col ul li a.footer-hub-highlight:hover {
   color: #86efac !important;
 }
-.footer .footer-bottom {
+#profeps-unified-footer .footer-bottom,
+footer.footer .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.09) !important;
   padding: 1.25rem 0 !important;
   display: flex !important;
@@ -597,7 +571,7 @@ footer.footer, #profeps-unified-footer {
 }
 </style>
 </head>
-<body class="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+<body class="min-h-screen flex flex-col">
 <!-- PROFEPS_UNIFIED_NAVBAR_START -->
   <nav id="navbar" class="navbar navbar-decoy" style="display:none !important;visibility:hidden !important;opacity:0 !important;width:0 !important;height:0 !important;overflow:hidden !important;position:absolute !important;pointer-events:none !important;z-index:-9999 !important;" aria-hidden="true">
     <div class="nav-container">
@@ -806,152 +780,77 @@ footer.footer, #profeps-unified-footer {
 })();
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->
-<!-- Header ProfEPS.ma -->
-    
-    <main class="flex-1 max-w-6xl w-full mx-auto px-4 py-10 space-y-10">
-    <!-- Hero Banner + Passerelles Outils Existants ProfEPS.ma -->
-    <section class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <div class="lg:col-span-7 space-y-3">
-          <span class="text-xs font-extrabold uppercase tracking-wider text-blue-600">Hub International · Sciences du Sport & EPS</span>
-          <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
-            Tous les Calculateurs de Performance, Physiologie & Préparation Physique
-          </h1>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            Un écosystème complet structuré en <strong>3 Clusters scientifiques</strong> pour les coureurs, entraîneurs, préparateurs physiques et enseignants d’EPS. Chaque outil dispose d’une interface trilingue (FR / EN / AR) et d’une interprétation physiologique détaillée.
-          </p>
-        </div>
+  <header class="vma-hero">
+    <div id="ui-badge" class="hero-badge" data-i18n-fr="⚡ 🧭 Hub Scientifique · 3 Clusters Sport & EPS" data-i18n-en="⚡ 🧭 Scientific Hub · 3 Sports & PE Calculator Clusters" data-i18n-ar="⚡ 🧭 البوابة العلمية · 3 أقطاب لحاسبات الرياضة والتربية البدنية">⚡ 🧭 Hub Scientifique · 3 Clusters Sport & EPS</div>
+    <h1 id="ui-title" data-i18n-fr="Tous les Calculateurs VO2 Max, VMA, Physiologie & Préparation Physique" data-i18n-en="All VO2 Max, MAS, Physiology & Physical Conditioning Calculators" data-i18n-ar="جميع حاسبات VO2 Max و VMA والفسيولوجيا والإعداد البدني">Tous les Calculateurs VO2 Max, VMA, Physiologie & Préparation Physique</h1>
+    <p id="ui-sub" data-i18n-fr="Accédez directement à chaque calculateur interactif avec interprétation scientifique par indicateur et conseils pédagogiques pour l’EPS et l’entraînement." data-i18n-en="Access every interactive calculator with per-metric scientific interpretation and coaching advice for PE and endurance training." data-i18n-ar="انتقل مباشرة إلى كل حاسبة تفاعلية مع تفسير علمي لكل رقم ونصائح تطبيقية لحصص التربية البدنية والتدريب الرياضي.">Accédez directement à chaque calculateur interactif avec interprétation scientifique par indicateur et conseils pédagogiques pour l’EPS et l’entraînement.</p>
+  </header>
 
-        <!-- Passerelles Directes Outils Historiques (Sans Duplication) -->
-        <div class="lg:col-span-5 bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3">
-          <div class="text-xs font-extrabold uppercase tracking-wider text-slate-500">
-            Outils Piliers Existants sur ProfEPS.ma
-          </div>
-          <a href="calculateur-vma.html" class="block p-3.5 bg-white hover:bg-blue-50/60 border border-slate-200 hover:border-blue-400 rounded-xl transition">
-            <div class="text-sm font-extrabold text-blue-600">1. Calculateur de VMA & Allures →</div>
-            <p class="text-xs text-slate-600 mt-0.5">Évaluation de la Vitesse Maximale Aérobie et temps de passage sur piste.</p>
-          </a>
-          <a href="https://profeps.ma" class="block p-3.5 bg-white hover:bg-emerald-50/60 border border-slate-200 hover:border-emerald-400 rounded-xl transition">
-            <div class="text-sm font-extrabold text-emerald-600">2. Générateur de Fiches de Séances & Cycles EPS →</div>
-            <p class="text-xs text-slate-600 mt-0.5">Conception pédagogique officielle pour les professeurs d’EPS.</p>
-          </a>
-        </div>
-      </div>
-    </section>
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <a href="calculateur-vma.html" class="bg-white border-2 border-red-600 rounded-2xl p-5 shadow-sm transition hover:shadow-md block">
+        <span class="text-[11px] font-bold text-white bg-red-600 px-2.5 py-1 rounded-full" data-i18n-fr="Outil Phare · VMA" data-i18n-en="Flagship Tool · MAS" data-i18n-ar="الأداة الرئيسية · VMA">Outil Phare · VMA</span>
+        <h2 class="text-base font-extrabold text-slate-900 mt-2.5" data-i18n-fr="⚡ Calculateur de VMA, Tests Terrain & Allures" data-i18n-en="⚡ MAS (VMA) Field Tests & Paces Calculator" data-i18n-ar="⚡ حاسبة السرعة الهوائية القصوى (VMA) والاختبارات الميدانية">⚡ Calculateur de VMA, Tests Terrain & Allures</h2>
+        <p class="text-xs text-slate-600 mt-1.5" data-i18n-fr="Luc Léger, Demi-Cooper, Vameval, 5 zones d'allures et programmation de séances EPS." data-i18n-en="Beep test, 6-min Cooper, Vameval, 5 pace zones and PE session builder." data-i18n-ar="اختبارات لوك ليجير ونصف كوبر وفاميفال مع حساب الإيقاعات والحصص التدريبية.">Luc Léger, Demi-Cooper, Vameval, 5 zones d'allures et programmation de séances EPS.</p>
+      </a>
 
-    <!-- CLUSTER 1 : PERFORMANCE, VDOT, ASR & ENDURANCE -->
-    <section id="cluster-1" class="space-y-4">
-      <div class="border-b border-slate-200 pb-2">
-        <span class="text-xs font-extrabold uppercase tracking-wider text-blue-600">Cluster 1 · Performance, Profilage & Prédiction</span>
-        <h2 class="text-2xl font-extrabold text-slate-900">Allures VDOT, Réserve Anaérobie (ASR) & Indice d’Endurance</h2>
-      </div>
+      <a href="calculateur-vdot-asr-endurance.html" class="bg-white border border-slate-200 hover:border-red-600 rounded-2xl p-5 shadow-sm transition hover:shadow-md block">
+        <span class="text-[11px] font-bold text-red-700 bg-red-50 px-2.5 py-1 rounded-full">Cluster 1A · VO2 Max</span>
+        <h2 class="text-base font-extrabold text-slate-900 mt-2.5" data-i18n-fr="🫁 Calculateur de VO2 Max (ml/kg/min) & VDOT" data-i18n-en="🫁 VO2 Max (ml/kg/min) & VDOT Calculator" data-i18n-ar="🫁 حاسبة VO2 Max (مل/كغ/دقيقة) ومؤشر VDOT">🫁 Calculateur de VO2 Max (ml/kg/min) & VDOT</h2>
+        <p class="text-xs text-slate-600 mt-1.5" data-i18n-fr="Consommation maximale d'oxygène, barème ACSM par âge/sexe, 5 zones VDOT et chronos prédits." data-i18n-en="Maximal oxygen uptake, ACSM age/sex norms, 5 VDOT pace zones and race predictions." data-i18n-ar="الحد الأقصى لاستهلاك الأكسجين، تصنيف ACSM حسب العمر والجنس وتوقعات السباقات.">Consommation maximale d'oxygène, barème ACSM par âge/sexe, 5 zones VDOT et chronos prédits.</p>
+      </a>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <a href="calculateur-vdot-asr-endurance.html" class="bg-white border border-slate-200 hover:border-blue-500 rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4 transition">
-          <div class="space-y-2">
-            <span class="text-[11px] font-bold px-2.5 py-0.5 bg-blue-50 text-blue-700 rounded-md">Cluster 1A · VO2 Max (ml/kg/min)</span>
-            <h3 class="text-lg font-extrabold text-slate-900">Calculateur VDOT & Équivalences de Course</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">Prédicteur de chronos du 800m au Marathon et calibrage des 5 allures d’entraînement (E, M, T, I, R).</p>
-          </div>
-          <span class="text-xs font-bold text-blue-600">Ouvrir le calculateur VDOT →</span>
-        </a>
+      <a href="calculateur-asr-reserve-vitesse.html" class="bg-white border border-slate-200 hover:border-red-600 rounded-2xl p-5 shadow-sm transition hover:shadow-md block">
+        <span class="text-[11px] font-bold text-red-700 bg-red-50 px-2.5 py-1 rounded-full">Cluster 1B · Réserve ASR</span>
+        <h2 class="text-base font-extrabold text-slate-900 mt-2.5" data-i18n-fr="🚀 Calculateur de Réserve Anaérobie (ASR)" data-i18n-en="🚀 Anaerobic Speed Reserve (ASR) Calculator" data-i18n-ar="🚀 حاسبة احتياطي السرعة اللاهوائية (ASR)">🚀 Calculateur de Réserve Anaérobie (ASR)</h2>
+        <p class="text-xs text-slate-600 mt-1.5" data-i18n-fr="Écart entre Sprint Max (MSS) et VMA pour individualiser le travail supramaximal (10% à 50% ASR)." data-i18n-en="Gap between Max Sprint Speed (MSS) and MAS to individualize supramaximal HIIT." data-i18n-ar="الفارق بين أقصى سرعة سبرينت و VMA لتخصيص التمارين فوق القصوى.">Écart entre Sprint Max (MSS) et VMA pour individualiser le travail supramaximal (10% à 50% ASR).</p>
+      </a>
 
-        <a href="calculateur-asr-reserve-vitesse.html" class="bg-white border border-slate-200 hover:border-blue-500 rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4 transition">
-          <div class="space-y-2">
-            <span class="text-[11px] font-bold px-2.5 py-0.5 bg-blue-50 text-blue-700 rounded-md">Cluster 1B · Supramaximal</span>
-            <h3 class="text-lg font-extrabold text-slate-900">Calculateur de Réserve de Vitesse Anaérobie (ASR)</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">Profilage Sprinteur vs Endurant (Ratio MSS/VMA) et barème supramaximal de +10% à +50% ASR.</p>
-          </div>
-          <span class="text-xs font-bold text-blue-600">Ouvrir le calculateur ASR →</span>
-        </a>
+      <a href="calculateur-indice-endurance.html" class="bg-white border border-slate-200 hover:border-red-600 rounded-2xl p-5 shadow-sm transition hover:shadow-md block">
+        <span class="text-[11px] font-bold text-red-700 bg-red-50 px-2.5 py-1 rounded-full">Cluster 1C · Modèle Péronnet</span>
+        <h2 class="text-base font-extrabold text-slate-900 mt-2.5" data-i18n-fr="📈 Calculateur d'Indice d'Endurance (IE)" data-i18n-en="📈 Endurance Index (EI - Péronnet) Calculator" data-i18n-ar="📈 حاسبة مؤشر التحمل (IE - بيروني)">📈 Calculateur d'Indice d'Endurance (IE)</h2>
+        <p class="text-xs text-slate-600 mt-1.5" data-i18n-fr="Mesurez le % de VMA soutenu sur la durée et diagnostiquez votre profil Seuil Anaérobie vs VMA." data-i18n-en="Measure fractional MAS utilization and diagnose Threshold vs MAS priority." data-i18n-ar="قياس نسبة VMA المحافظ عليها وتشخيص أولوية العتبة اللاهوائية مقابل VMA.">Mesurez le % de VMA soutenu sur la durée et diagnostiquez votre profil Seuil Anaérobie vs VMA.</p>
+      </a>
 
-        <a href="calculateur-indice-endurance.html" class="bg-white border border-slate-200 hover:border-blue-500 rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4 transition">
-          <div class="space-y-2">
-            <span class="text-[11px] font-bold px-2.5 py-0.5 bg-blue-50 text-blue-700 rounded-md">Cluster 1C · Péronnet & Thibault</span>
-            <h3 class="text-lg font-extrabold text-slate-900">Calculateur d’Indice d’Endurance (IE)</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">Mesurez votre capacité à soutenir un haut % de VMA sur la durée et orientez votre travail Seuil/VMA.</p>
-          </div>
-          <span class="text-xs font-bold text-blue-600">Ouvrir l’Indice d’Endurance →</span>
-        </a>
-      </div>
-    </section>
+      <a href="calculateur-frequence-cardiaque-karvonen.html" class="bg-white border border-slate-200 hover:border-emerald-700 rounded-2xl p-5 shadow-sm transition hover:shadow-md block">
+        <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-full">Cluster 2A · Cardiologie</span>
+        <h2 class="text-base font-extrabold text-slate-900 mt-2.5" data-i18n-fr="❤️ Fréquence Cardiaque & Zones Karvonen" data-i18n-en="❤️ Heart Rate Reserve & Karvonen Zones" data-i18n-ar="❤️ نبضات القلب ومناطق التدريب (Karvonen)">❤️ Fréquence Cardiaque & Zones Karvonen</h2>
+        <p class="text-xs text-slate-600 mt-1.5" data-i18n-fr="FC Max (Tanaka), FC de Réserve (HRR), tonus vagal et les 5 zones cardiaques Z1 à Z5 expliquées." data-i18n-en="Tanaka Max HR, Heart Rate Reserve (HRR), vagal tone and explained Z1–Z5 zones." data-i18n-ar="أقصى نبض للقلب، احتياطي النبض، وتفسير مناطق التدريب القلبية من Z1 إلى Z5.">FC Max (Tanaka), FC de Réserve (HRR), tonus vagal et les 5 zones cardiaques Z1 à Z5 expliquées.</p>
+      </a>
 
-    <!-- CLUSTER 2 : PHYSIOLOGIE, IMC, METEO & PENTE GAP -->
-    <section id="cluster-2" class="space-y-4">
-      <div class="border-b border-slate-200 pb-2">
-        <span class="text-xs font-extrabold uppercase tracking-wider text-emerald-600">Cluster 2 · Physiologie, Anthropométrie & Environnement</span>
-        <h2 class="text-2xl font-extrabold text-slate-900">Fréquence Cardiaque, IMC Sportif, Chaleur/Altitude & Pente GAP</h2>
-      </div>
+      <a href="calculateur-imc-sportif-masse-grasse.html" class="bg-white border border-slate-200 hover:border-emerald-700 rounded-2xl p-5 shadow-sm transition hover:shadow-md block">
+        <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-full">Cluster 2B · Anthropométrie</span>
+        <h2 class="text-base font-extrabold text-slate-900 mt-2.5" data-i18n-fr="⚖️ Calculateur IMC Sportif & Masse Grasse (IMG)" data-i18n-en="⚖️ Athletic BMI, Body Fat % & Lean Mass" data-i18n-ar="⚖️ حاسبة مؤشر كتلة الجسم ونسبة الدهون للرياضي">⚖️ Calculateur IMC Sportif & Masse Grasse (IMG)</h2>
+        <p class="text-xs text-slate-600 mt-1.5" data-i18n-fr="Double lecture OMS + Athlète (distinction masse musculaire active vs masse adipeuse)." data-i18n-en="Dual WHO + Athletic reading (active lean mass vs body fat and running economy)." data-i18n-ar="قراءة مزدوجة وفق منظمة الصحة العالمية والملف العضلي للرياضي.">Double lecture OMS + Athlète (distinction masse musculaire active vs masse adipeuse).</p>
+      </a>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-        <a href="calculateur-frequence-cardiaque-karvonen.html" class="bg-white border border-slate-200 hover:border-emerald-500 rounded-2xl p-5 shadow-sm flex flex-col justify-between space-y-4 transition">
-          <div class="space-y-2">
-            <span class="text-[11px] font-bold px-2.5 py-0.5 bg-emerald-50 text-emerald-700 rounded-md">Cluster 2A · Karvonen</span>
-            <h3 class="text-base font-extrabold text-slate-900">Fréquence Cardiaque & Interprétation 5 Zones</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">FC Max (Tanaka/Gellish), FC de réserve, substrats énergétiques et diagnostic du pouls de repos.</p>
-          </div>
-          <span class="text-xs font-bold text-emerald-600">Ouvrir le calculateur FC →</span>
-        </a>
+      <a href="calculateur-chaleur-meteo-altitude.html" class="bg-white border border-slate-200 hover:border-emerald-700 rounded-2xl p-5 shadow-sm transition hover:shadow-md block">
+        <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-full">Cluster 2C · Thermorégulation</span>
+        <h2 class="text-base font-extrabold text-slate-900 mt-2.5" data-i18n-fr="☀️ Chaleur, Humidité (Rosée) & Altitude" data-i18n-en="☀️ Heat, Dew Point & Altitude Calculator" data-i18n-ar="☀️ تأثير الحرارة والرطوبة والارتفاع عن البحر">☀️ Chaleur, Humidité (Rosée) & Altitude</h2>
+        <p class="text-xs text-slate-600 mt-1.5" data-i18n-fr="Point de rosée, ralentissement d'allure (%) et plan d'hydratation / sodium par heure." data-i18n-en="Dew point, pace slowdown (%) and hourly fluid/sodium replacement plan." data-i18n-ar="نقطة الندى، نسبة تباطؤ الإيقاع، وخطة شرب الماء والصوديوم في الساعة.">Point de rosée, ralentissement d'allure (%) et plan d'hydratation / sodium par heure.</p>
+      </a>
 
-        <a href="calculateur-imc-sportif-masse-grasse.html" class="bg-white border border-slate-200 hover:border-emerald-500 rounded-2xl p-5 shadow-sm flex flex-col justify-between space-y-4 transition">
-          <div class="space-y-2">
-            <span class="text-[11px] font-bold px-2.5 py-0.5 bg-emerald-50 text-emerald-700 rounded-md">Cluster 2B · Anthropométrie</span>
-            <h3 class="text-base font-extrabold text-slate-900">Calculateur IMC Sportif & Masse Grasse (IMG)</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">Double interprétation Norme OMS + Composition Corporelle Athlète (Masse maigre & économie).</p>
-          </div>
-          <span class="text-xs font-bold text-emerald-600">Ouvrir le calculateur IMC →</span>
-        </a>
+      <a href="calculateur-gap-pente-nutrition.html" class="bg-white border border-slate-200 hover:border-emerald-700 rounded-2xl p-5 shadow-sm transition hover:shadow-md block">
+        <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-full">Cluster 2D · Trail & Nutrition</span>
+        <h2 class="text-base font-extrabold text-slate-900 mt-2.5" data-i18n-fr="⛰️ Allure Ajustée à la Pente (GAP) & Glucides" data-i18n-en="⛰️ Grade Adjusted Pace (GAP) & Carb Fueling" data-i18n-ar="⛰️ إيقاع المنحدرات (GAP) والتغذية الرياضية">⛰️ Allure Ajustée à la Pente (GAP) & Glucides</h2>
+        <p class="text-xs text-slate-600 mt-1.5" data-i18n-fr="Conversion des pentes positives/négatives (%) en effort plat (Minetti) et glucides (g/h)." data-i18n-en="Uphill/downhill grade conversion (Minetti) and hourly carbohydrate intake." data-i18n-ar="تحويل الصعود والهبوط (%) إلى إيقاع مكافئ وخطة الكربوهيدرات في الساعة.">Conversion des pentes positives/négatives (%) en effort plat (Minetti) et glucides (g/h).</p>
+      </a>
 
-        <a href="calculateur-chaleur-meteo-altitude.html" class="bg-white border border-slate-200 hover:border-emerald-500 rounded-2xl p-5 shadow-sm flex flex-col justify-between space-y-4 transition">
-          <div class="space-y-2">
-            <span class="text-[11px] font-bold px-2.5 py-0.5 bg-emerald-50 text-emerald-700 rounded-md">Cluster 2C · McMillan Météo</span>
-            <h3 class="text-base font-extrabold text-slate-900">Chaleur, Humidité, Vent & Altitude</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">Point de rosée, ralentissement d’allure (%), dérive cardiaque et besoins hydriques/sodium.</p>
-          </div>
-          <span class="text-xs font-bold text-emerald-600">Ouvrir l’outil Météo →</span>
-        </a>
+      <a href="generateur-intermittent-hiit-cod.html" class="bg-white border border-slate-200 hover:border-blue-600 rounded-2xl p-5 shadow-sm transition hover:shadow-md block">
+        <span class="text-[11px] font-bold text-blue-800 bg-blue-50 px-2.5 py-1 rounded-full">Cluster 3A/B · Terrain & EPS</span>
+        <h2 class="text-base font-extrabold text-slate-900 mt-2.5" data-i18n-fr="🔄 Intermittent HIIT & Navettes COD 180°" data-i18n-en="🔄 HIIT Intervals & 180° Shuttle COD" data-i18n-ar="🔄 التمارين المتقطعة HIIT ومكوك 180°">🔄 Intermittent HIIT & Navettes COD 180°</h2>
+        <p class="text-xs text-slate-600 mt-1.5" data-i18n-fr="Distances de plots pour 15s/15s, 30s/30s sur piste ou avec relances 180° (modèle Buchheit)." data-i18n-en="Cone distances for 15s/15s, 30s/30s on track or with 180° shuttle turns (Buchheit)." data-i18n-ar="مسافات الأقماع لتمارين 15/15 و 30/30 على المضمار أو مع تغيير الاتجاه 180°.">Distances de plots pour 15s/15s, 30s/30s sur piste ou avec relances 180° (modèle Buchheit).</p>
+      </a>
 
-        <a href="calculateur-gap-pente-nutrition.html" class="bg-white border border-slate-200 hover:border-emerald-500 rounded-2xl p-5 shadow-sm flex flex-col justify-between space-y-4 transition">
-          <div class="space-y-2">
-            <span class="text-[11px] font-bold px-2.5 py-0.5 bg-emerald-50 text-emerald-700 rounded-md">Cluster 2D · Trail & Fueling</span>
-            <h3 class="text-base font-extrabold text-slate-900">Allure Pente (GAP) & Nutrition Glucides</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">Équivalence d’effort en côte/descente (Minetti) et planification glucidique (g/h et gels).</p>
-          </div>
-          <span class="text-xs font-bold text-emerald-600">Ouvrir GAP & Nutrition →</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- CLUSTER 3 : PROGRAMMATION TERRAIN, COD 180° & CHARGE RPE FOSTER -->
-    <section id="cluster-3" class="space-y-4">
-      <div class="border-b border-slate-200 pb-2">
-        <span class="text-xs font-extrabold uppercase tracking-wider text-blue-600">Cluster 3 · Terrain, Sports Collectifs & Prévention</span>
-        <h2 class="text-2xl font-extrabold text-slate-900">Intermittent HIIT, Navettes COD 180° & Charge sRPE Foster</h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-        <a href="generateur-intermittent-hiit-cod.html" class="bg-white border border-slate-200 hover:border-blue-500 rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4 transition">
-          <div class="space-y-2">
-            <span class="text-[11px] font-bold px-2.5 py-0.5 bg-blue-50 text-blue-700 rounded-md">Cluster 3A/B · Piste & Sports Co</span>
-            <h3 class="text-lg font-extrabold text-slate-900">Générateur d’Intermittent HIIT & Navettes COD 180°</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">Distances exactes au plot pour le 15"/15", 30"/30" sur piste ou avec pénalité de changement de direction 180° (20m, 25m, 30m, 40m).</p>
-          </div>
-          <span class="text-xs font-bold text-blue-600">Ouvrir le générateur HIIT & COD →</span>
-        </a>
-
-        <a href="calculateur-charge-rpe-foster-acwr.html" class="bg-white border border-slate-200 hover:border-blue-500 rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4 transition">
-          <div class="space-y-2">
-            <span class="text-[11px] font-bold px-2.5 py-0.5 bg-blue-50 text-blue-700 rounded-md">Cluster 3C · Foster & Gabbett</span>
-            <h3 class="text-lg font-extrabold text-slate-900">Calculateur de Charge RPE Foster, Monotonie & Ratio ACWR</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">Monitoring hebdomadaire (Durée × RPE), calcul de la Monotonie, de la Contrainte et prévention des blessures (Sweet Spot 0.80–1.30).</p>
-          </div>
-          <span class="text-xs font-bold text-blue-600">Ouvrir le calculateur RPE & ACWR →</span>
-        </a>
-      </div>
-    </section>
+      <a href="calculateur-charge-rpe-foster-acwr.html" class="bg-white border border-slate-200 hover:border-blue-600 rounded-2xl p-5 shadow-sm transition hover:shadow-md block">
+        <span class="text-[11px] font-bold text-blue-800 bg-blue-50 px-2.5 py-1 rounded-full">Cluster 3C · Monitoring</span>
+        <h2 class="text-base font-extrabold text-slate-900 mt-2.5" data-i18n-fr="🛡️ Charge RPE Foster & Ratio ACWR Blessures" data-i18n-en="🛡️ Foster sRPE Load & ACWR Injury Ratio" data-i18n-ar="🛡️ حمل التدريب (Foster RPE) ونسبة ACWR">🛡️ Charge RPE Foster & Ratio ACWR Blessures</h2>
+        <p class="text-xs text-slate-600 mt-1.5" data-i18n-fr="Charge aiguë (7j) vs chronique (28j) et maintien dans la zone optimale (ACWR 0.80–1.30)." data-i18n-en="Acute (7d) vs chronic (28d) workload ratio to stay inside the 0.80–1.30 sweet spot." data-i18n-ar="مقارنة الحمل الحاد بالمزمن للبقاء في المنطقة الآمنة للوقاية من الإصابات (0.80–1.30).">Charge aiguë (7j) vs chronique (28j) et maintien dans la zone optimale (ACWR 0.80–1.30).</p>
+      </a>
+    </div>
   </main>
 
-    <footer class="footer" id="profeps-unified-footer">
+  <footer class="footer" id="profeps-unified-footer">
     <div class="footer-container">
       <div class="footer-grid">
         <div class="footer-brand" style="display:flex !important;flex-direction:column !important;align-items:flex-start !important;">
@@ -1029,10 +928,49 @@ footer.footer, #profeps-unified-footer {
     </div>
   </footer>
 
+  <script id="profeps-tool-engine-js">
+    var currentLang = 'fr';
+    var hasCalculated = false;
 
+    function setToolLang(lang) {
+      currentLang = lang;
+      var root = document.getElementById('html-root');
+      if (root) {
+        root.lang = lang;
+        root.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+      }
+      document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function(el) {
+        var val = el.getAttribute('data-i18n-' + lang);
+        if (val) el.textContent = val;
+      });
+      if (typeof applyToolTranslations === 'function') applyToolTranslations(lang);
+      if (hasCalculated && typeof computeTool === 'function') computeTool();
+    }
+
+    function triggerCalculation() {
+      hasCalculated = true;
+      var panel = document.getElementById('tool-results-panel');
+      if (panel) {
+        panel.classList.remove('hidden');
+        panel.classList.remove('peps-results-reveal');
+        void panel.offsetWidth;
+        panel.classList.add('peps-results-reveal');
+      }
+      if (typeof computeTool === 'function') computeTool();
+      if (panel && window.innerWidth < 768) {
+        setTimeout(function() {
+          panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 80);
+      }
+    }
+
+    function onInputUpdated() {
+      if (hasCalculated && typeof computeTool === 'function') {
+        computeTool();
+      }
+    }
+
+    function computeTool() {}
+  </script>
 </body>
 </html>
-
-
-
-

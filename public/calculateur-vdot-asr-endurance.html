@@ -4,83 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calculateur de VO2 Max (ml/kg/min) & Allures VDOT Course à Pied | Prof EPS</title>
-  <meta name="description" id="metaDesc" content="Calculez précisément votre VO2 Max (ml/kg/min) à partir d’un chrono de course (5 km, 10 km, Semi, Marathon) ou de votre VMA, découvrez votre niveau cardiorespiratoire (normes ACSM) et vos 5 allures d’entraînement." />
-  <meta name="keywords" content="calculateur vo2 max, calculer vo2max, vo2 max course à pied, estimation vo2 max ml/kg/min, tableau vo2 max age homme femme, vdot jack daniels, calculer sa vo2max avec vma, consommation maximale oxygène" />
+  <meta name="description" id="metaDesc" content="Entrez votre chrono de course ou votre VMA puis cliquez sur Calculer pour obtenir votre VO2 Max (ml/kg/min), votre classement ACSM par âge/sexe, vos 5 zones d’allures et vos chronos prédits." />
+  <meta name="keywords" content="calculateur vo2 max, calculer vo2max, vo2 max course à pied, estimation vo2 max ml/kg/min, tableau vo2 max age homme femme, vdot jack daniels, calculer sa vo2max avec vma" />
   <link rel="canonical" href="https://profeps.ma/calculateur-vdot-asr-endurance.html" />
-  <link rel="icon" type="image/png" href="/images/prof_eps.png" />
+  <link rel="icon" type="image/png" href="images/prof_eps.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    :root {
-      --primary: #c1272d;
-      --primary-dark: #a01f24;
-      --secondary: #006233;
-      --secondary-dark: #004d28;
-      --text-primary: #0f172a;
-      --text-secondary: #334155;
-      --text-light: #64748b;
-      --bg-primary: #ffffff;
-      --bg-secondary: #f8fafc;
-      --border: #e2e8f0;
-      --border-light: #f1f5f9;
-      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-display: 'Plus Jakarta Sans', var(--font-sans);
-    }
-    body { font-family: var(--font-sans); background: #f8fafc; color: var(--text-primary); line-height: 1.5; }
-    .tabular-nums { font-variant-numeric: tabular-nums; }
-    .navbar { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 1000 !important; padding: 0.85rem 2rem !important; background: rgba(255,255,255,0.96) !important; backdrop-filter: blur(20px) !important; border-bottom: 1px solid rgba(226,232,240,0.7) !important; }
-    .nav-container { max-width: 1400px !important; margin: 0 auto !important; display: grid !important; grid-template-columns: 1fr auto 1fr !important; align-items: center !important; }
-    .nav-logo { justify-self: start !important; display: flex !important; align-items: center !important; }
-    .nav-logo img { height: 52px !important; width: auto !important; object-fit: contain !important; }
-    .nav-menu { display: flex !important; align-items: center !important; justify-content: center !important; gap: 1.75rem !important; }
-    .nav-right { justify-self: end !important; display: flex !important; align-items: center !important; gap: 0.65rem !important; }
-    .nav-link { font-size: 0.95rem !important; font-weight: 600 !important; color: #1a1a2e !important; padding: 0.5rem 0.75rem !important; position: relative !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 0.35rem !important; }
-    .nav-link::after { content: '' !important; position: absolute !important; bottom: -2px !important; left: 50% !important; right: 50% !important; height: 3px !important; background: linear-gradient(90deg, #c1272d, #006233) !important; border-radius: 2px !important; transition: left 0.3s ease, right 0.3s ease !important; }
-    .nav-link:hover::after, .nav-link.active::after { left: 0.4rem !important; right: 0.4rem !important; }
-    .nav-link:hover, .nav-link.active { color: #c1272d !important; }
-    .nav-dropdown { position: relative !important; display: inline-flex !important; align-items: center !important; }
-    .nav-dropdown-caret { font-size: 0.7rem !important; transition: transform 0.25s ease !important; opacity: 0.75 !important; }
-    .nav-dropdown:hover .nav-dropdown-caret { transform: rotate(180deg) !important; color: #c1272d !important; }
-    .nav-dropdown-menu { position: absolute !important; top: calc(100% + 6px) !important; left: 50% !important; transform: translateX(-50%) translateY(8px) !important; width: 320px !important; background: #ffffff !important; border: 1px solid #e2e8f0 !important; border-radius: 14px !important; box-shadow: 0 15px 35px -5px rgba(15,23,42,0.14), 0 4px 12px rgba(0,0,0,0.06) !important; padding: 0.55rem !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; transition: all 0.22s ease !important; z-index: 1100 !important; text-align: left !important; }
-    .nav-dropdown::after { content: '' !important; position: absolute !important; top: 100% !important; left: 0 !important; right: 0 !important; height: 12px !important; }
-    .nav-dropdown:hover .nav-dropdown-menu { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; transform: translateX(-50%) translateY(0) !important; }
-    .nav-dropdown-item { display: flex !important; align-items: center !important; gap: 0.55rem !important; padding: 0.5rem 0.7rem !important; border-radius: 9px !important; font-size: 0.82rem !important; font-weight: 600 !important; color: #1e293b !important; text-decoration: none !important; transition: background 0.15s ease, color 0.15s ease !important; }
-    .nav-dropdown-item:hover { background: #f8fafc !important; color: #c1272d !important; }
-    .nav-dropdown-hub { background: linear-gradient(135deg, rgba(193,39,45,0.08), rgba(0,98,51,0.08)) !important; color: #c1272d !important; font-weight: 800 !important; border: 1px solid rgba(193,39,45,0.2) !important; margin-bottom: 0.35rem !important; }
-    .nav-dropdown-hub:hover { background: linear-gradient(135deg, #c1272d, #006233) !important; color: #ffffff !important; }
-    .nav-dropdown-divider { height: 1px !important; background: #f1f5f9 !important; margin: 0.3rem 0 !important; }
-    .lang-switch { display: inline-flex; align-items: center; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 9999px; padding: 2px; }
-    .lang-btn { background: none; border: none; cursor: pointer; padding: 4px 8px; font-size: 0.75rem; font-weight: 700; color: #64748b; border-radius: 9999px; transition: all 0.2s ease; }
-    .lang-btn.active { background: white; color: #0f172a; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
-    .lang-btn:hover:not(.active) { color: #c1272d; }
-    .lang-sep { font-size: 0.75rem; color: #cbd5e1; user-select: none; }
-    .nav-cta { display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; padding: 0.48rem 1.15rem !important; background: linear-gradient(135deg, #c1272d, #006233) !important; color: white !important; font-weight: 600 !important; font-size: 0.88rem !important; border-radius: 9999px !important; box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important; text-decoration: none !important; white-space: nowrap !important; }
-    .vma-hero { margin-top: 76px; padding: 2.25rem 1.25rem 1.75rem; background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%); border-bottom: 1px solid var(--border); text-align: center; }
-    .hero-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(193,39,45,0.08); color: var(--primary); padding: 0.3rem 0.95rem; border-radius: 9999px; font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.65rem; border: 1px solid rgba(193,39,45,0.18); }
-    .vma-hero h1 { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.15rem); font-weight: 800; color: #0f172a; margin-bottom: 0.5rem; }
-    .vma-hero p { font-size: 0.95rem; color: var(--text-light); max-width: 740px; margin: 0 auto; }
-    .footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 2.75rem 1.5rem 0; margin-top: 3.5rem; }
-    .footer-inner { max-width: 1250px; margin: 0 auto; display: grid; grid-template-columns: 1.8fr 1fr 1fr 1.3fr 0.9fr; gap: 2rem; padding-bottom: 2rem; }
-    .footer-brand img { height: 40px; filter: brightness(0) invert(1); margin-bottom: 0.65rem; }
-    .footer-brand p { color: rgba(255,255,255,0.65); font-size: 0.82rem; line-height: 1.6; }
-    .footer-col h4 { font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.45); margin-bottom: 0.85rem; }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
-    .footer-col ul li a { color: rgba(255,255,255,0.72); font-size: 0.82rem; text-decoration: none; }
-    .footer-col ul li a:hover { color: white; }
-    .footer-bottom { max-width: 1250px; margin: 0 auto; padding: 1.15rem 0; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; font-size: 0.78rem; color: rgba(255,255,255,0.45); flex-wrap: wrap; gap: 0.5rem; }
-    @media (max-width: 960px) {
-      .nav-container { display: flex !important; justify-content: space-between !important; }
-      .nav-menu { display: none !important; }
-      .footer-inner { grid-template-columns: 1fr 1fr; }
-    }
-  </style>
-
-
-
-
-<style id="profeps-master-unifier-css">
+  <style id="profeps-master-unifier-css">
 /* ═══ 1. NAVBAR FIXE ISOLÉE (.peps-*) — 80PX VERROUILLÉ SUR TOUTES LES PAGES ═══ */
 html {
   overflow-y: scroll !important;
@@ -441,7 +373,7 @@ button.lang-btn:not(.peps-lang-btn) {
   border-radius: 2px !important;
 }
 
-/* ═══ 4. FOOTER UNIFIÉ À 5 COLONNES SANS DOUBLONS ═══ */
+/* ═══ 4. FOOTER UNIFIÉ À 5 COLONNES SANS DOUBLONS (BLINDÉ CONTRE TAILWIND CDN) ═══ */
 footer.footer, #profeps-unified-footer {
   background: linear-gradient(135deg, #15192b 0%, #162038 100%) !important;
   color: #ffffff !important;
@@ -450,27 +382,35 @@ footer.footer, #profeps-unified-footer {
   border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   box-sizing: border-box !important;
+  width: 100% !important;
+  display: block !important;
 }
-.footer .footer-container, .footer .footer-inner {
+#profeps-unified-footer .footer-container,
+footer.footer .footer-container,
+.footer .footer-inner {
   max-width: 1360px !important;
   margin: 0 auto !important;
   padding: 0 !important;
+  box-sizing: border-box !important;
 }
-.footer .footer-grid {
+#profeps-unified-footer .footer-grid,
+footer.footer .footer-grid {
   display: grid !important;
   grid-template-columns: 1.65fr 0.9fr 1.1fr 1.45fr 1fr !important;
   gap: 2.25rem !important;
   padding-bottom: 2.75rem !important;
   align-items: start !important;
 }
-.footer .footer-brand {
+#profeps-unified-footer .footer-brand,
+footer.footer .footer-brand {
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-start !important;
 }
-.footer .footer-brand img {
-  height: 48px !important;
-  max-height: 48px !important;
+#profeps-unified-footer .footer-brand img,
+footer.footer .footer-brand img {
+  height: 46px !important;
+  max-height: 46px !important;
   width: auto !important;
   max-width: 155px !important;
   object-fit: contain !important;
@@ -481,41 +421,50 @@ footer.footer, #profeps-unified-footer {
   padding: 0 !important;
   display: block !important;
 }
-.footer .footer-brand p {
+#profeps-unified-footer .footer-brand p,
+footer.footer .footer-brand p {
   color: rgba(255, 255, 255, 0.72) !important;
   font-size: 0.84rem !important;
   line-height: 1.65 !important;
   margin: 0 0 1.25rem 0 !important;
 }
-.footer .footer-stats {
+#profeps-unified-footer .footer-stats,
+footer.footer .footer-stats {
   display: flex !important;
   align-items: center !important;
   gap: 1.25rem !important;
   flex-wrap: wrap !important;
   padding-top: 0.5rem !important;
 }
-.footer .footer-stat-item {
+#profeps-unified-footer .footer-stat-item,
+footer.footer .footer-stat-item {
   display: flex !important;
   flex-direction: column !important;
 }
-.footer .footer-stat-num {
+#profeps-unified-footer .footer-stat-num,
+footer.footer .footer-stat-num {
   font-size: 1.05rem !important;
   font-weight: 800 !important;
   color: #ffffff !important;
+  line-height: 1.2 !important;
 }
-.footer .footer-stat-lbl {
+#profeps-unified-footer .footer-stat-lbl,
+footer.footer .footer-stat-lbl {
   font-size: 0.7rem !important;
   color: rgba(255, 255, 255, 0.55) !important;
 }
-.footer .footer-col h4 {
+#profeps-unified-footer .footer-col h4,
+footer.footer .footer-col h4 {
   font-size: 0.76rem !important;
   font-weight: 800 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.08em !important;
   color: rgba(255, 255, 255, 0.48) !important;
   margin: 0 0 1rem 0 !important;
+  line-height: 1.3 !important;
 }
-.footer .footer-col ul {
+#profeps-unified-footer .footer-col ul,
+footer.footer .footer-col ul {
   list-style: none !important;
   padding: 0 !important;
   margin: 0 !important;
@@ -523,11 +472,13 @@ footer.footer, #profeps-unified-footer {
   flex-direction: column !important;
   gap: 0.52rem !important;
 }
-.footer .footer-col ul li {
+#profeps-unified-footer .footer-col ul li,
+footer.footer .footer-col ul li {
   margin: 0 !important;
   padding: 0 !important;
 }
-.footer .footer-col ul li a {
+#profeps-unified-footer .footer-col ul li a,
+footer.footer .footer-col ul li a {
   color: rgba(255, 255, 255, 0.76) !important;
   font-size: 0.83rem !important;
   font-weight: 500 !important;
@@ -536,18 +487,22 @@ footer.footer, #profeps-unified-footer {
   display: inline-block !important;
   line-height: 1.35 !important;
 }
-.footer .footer-col ul li a:hover {
+#profeps-unified-footer .footer-col ul li a:hover,
+footer.footer .footer-col ul li a:hover {
   color: #ffffff !important;
   transform: translateX(2px) !important;
 }
-.footer .footer-col ul li a.footer-hub-highlight {
+#profeps-unified-footer .footer-col ul li a.footer-hub-highlight,
+footer.footer .footer-col ul li a.footer-hub-highlight {
   color: #4ade80 !important;
   font-weight: 800 !important;
 }
-.footer .footer-col ul li a.footer-hub-highlight:hover {
+#profeps-unified-footer .footer-col ul li a.footer-hub-highlight:hover,
+footer.footer .footer-col ul li a.footer-hub-highlight:hover {
   color: #86efac !important;
 }
-.footer .footer-bottom {
+#profeps-unified-footer .footer-bottom,
+footer.footer .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.09) !important;
   padding: 1.25rem 0 !important;
   display: flex !important;
@@ -825,219 +780,129 @@ footer.footer, #profeps-unified-footer {
 })();
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->
-<header class="vma-hero">
-    <div id="ui-badge" class="hero-badge">⚡ Cluster 1A · Consommation Maximale d’Oxygène (VO2 Max) &amp; VDOT</div>
-    <h1 id="ui-title">Calculateur de VO2 Max (ml/kg/min) &amp; Allures VDOT Course à Pied</h1>
-    <p id="ui-sub">Calculez précisément votre VO2 Max (ml/kg/min) à partir d’un chrono de course (5 km, 10 km, Semi, Marathon) ou de votre VMA, découvrez votre niveau cardiorespiratoire (normes ACSM) et vos 5 allures d’entraînement.</p>
+  <header class="vma-hero">
+    <div id="ui-badge" class="hero-badge" data-i18n-fr="⚡ Cluster 1A · Consommation Maximale d’Oxygène (VO2 Max) & VDOT" data-i18n-en="⚡ Cluster 1A · Maximal Oxygen Uptake (VO2 Max) & Jack Daniels VDOT" data-i18n-ar="⚡ القطب 1A · حاسبة الحد الأقصى لاستهلاك الأكسجين (VO2 Max) ومؤشر VDOT">⚡ Cluster 1A · Consommation Maximale d’Oxygène (VO2 Max) & VDOT</div>
+    <h1 id="ui-title" data-i18n-fr="Calculateur de VO2 Max (ml/kg/min) & Allures VDOT Course à Pied" data-i18n-en="VO2 Max Calculator (ml/kg/min), Fitness Norms & VDOT Running Paces" data-i18n-ar="حاسبة VO2 Max (مل/كغ/دقيقة) وإيقاعات الجري وتوقع نتائج السباقات">Calculateur de VO2 Max (ml/kg/min) & Allures VDOT Course à Pied</h1>
+    <p id="ui-sub" data-i18n-fr="Entrez votre chrono de course ou votre VMA puis cliquez sur Calculer pour obtenir votre VO2 Max (ml/kg/min), votre classement ACSM par âge/sexe, vos 5 zones d’allures et vos chronos prédits." data-i18n-en="Enter your race time or MAS and click Calculate to unlock your VO2 Max (ml/kg/min), ACSM fitness tier, 5 training zones, and race predictions." data-i18n-ar="أدخل توقيت سباقك أو سرعة VMA ثم اضغط على &quot;احسب&quot; لاكتشاف قيمة VO2 Max، تصنيفك الصحي، مناطق التدريب الخمس وتوقعات السباقات.">Entrez votre chrono de course ou votre VMA puis cliquez sur Calculer pour obtenir votre VO2 Max (ml/kg/min), votre classement ACSM par âge/sexe, vos 5 zones d’allures et vos chronos prédits.</p>
   </header>
 
   <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-6">
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-      <!-- Panneau de saisie 100% dédié VO2 Max -->
-      <div class="md:col-span-5 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-          <h2 id="lbl-panel-title" class="text-sm font-extrabold text-slate-900 uppercase tracking-wider">Paramètres de calcul VO2 Max</h2>
-          <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-red-50 text-red-700 border border-red-200">ml/kg/min</span>
-        </div>
-
-        <div>
-          <label id="lbl-mode" class="text-xs font-bold text-slate-700 block mb-1">Méthode de calcul du VO2 Max</label>
-          <select id="inp-mode" onchange="toggleVo2Mode(); computeTool();" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-semibold">
-            <option value="race" selected>1. À partir d'un Chrono de Course (1500m à Marathon)</option>
-            <option value="vma">2. À partir de ma VMA (km/h) ou Test Terrain</option>
-          </select>
-        </div>
-
-        <div id="box-race-inputs" class="space-y-3">
-          <div>
-            <label id="lbl-dist" class="text-xs font-bold text-slate-700 block mb-1">Distance de course de référence</label>
-            <select id="inp-dist" onchange="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-semibold">
-              <option value="1500">1 500 m</option>
-              <option value="3000">3 000 m</option>
-              <option value="5000">5 km (5 000 m)</option>
-              <option value="10000" selected>10 km (10 000 m)</option>
-              <option value="21097.5">Semi-Marathon (21,097 km)</option>
-              <option value="42195">Marathon (42,195 km)</option>
-            </select>
-          </div>
-          <div class="grid grid-cols-3 gap-2">
-            <div>
-              <label id="lbl-h" class="text-[11px] font-bold text-slate-600 block mb-1">Heures</label>
-              <input id="inp-h" type="number" value="0" min="0" max="10" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold text-center" />
-            </div>
-            <div>
-              <label id="lbl-m" class="text-[11px] font-bold text-slate-600 block mb-1">Minutes</label>
-              <input id="inp-m" type="number" value="42" min="0" max="59" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold text-center" />
-            </div>
-            <div>
-              <label id="lbl-s" class="text-[11px] font-bold text-slate-600 block mb-1">Secondes</label>
-              <input id="inp-s" type="number" value="30" min="0" max="59" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold text-center" />
-            </div>
-          </div>
-        </div>
-
-        <div id="box-vma-inputs" class="hidden space-y-3">
-          <div>
-            <label id="lbl-vma-direct" class="text-xs font-bold text-slate-700 block mb-1">Votre VMA (km/h) — Formule Léger &amp; Mercier (VO2 Max = 3,5 × VMA)</label>
-            <input id="inp-vma-direct" type="number" value="16.0" min="7" max="26" step="0.2" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold" />
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-3 pt-1">
-          <div>
-            <label id="lbl-age" class="text-xs font-bold text-slate-700 block mb-1">Âge (Norme VO2 Max)</label>
-            <input id="inp-age" type="number" value="28" min="12" max="85" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold" />
-          </div>
-          <div>
-            <label id="lbl-sex" class="text-xs font-bold text-slate-700 block mb-1">Sexe</label>
-            <select id="inp-sex" onchange="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-semibold">
-              <option value="M" selected>Homme</option>
-              <option value="F">Femme</option>
-            </select>
-          </div>
-        </div>
-
-        <div id="out-vo2-interp" class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 leading-relaxed space-y-1.5"></div>
+    <div class="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-5">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3.5">
+        <h2 class="text-base font-extrabold text-slate-900 uppercase tracking-wider" data-i18n-fr="1. Vos Paramètres Physiologiques & Chrono" data-i18n-en="1. Your Physiological & Race Parameters" data-i18n-ar="1. معطياتك الفيزيولوجية وتوقيت السباق">1. Vos Paramètres Physiologiques & Chrono</h2>
+        <span class="text-xs font-bold px-3 py-1 rounded-full bg-red-50 text-red-700 border border-red-200">ml/kg/min · VDOT</span>
       </div>
 
-      <!-- Résultats 100% dédiés au VO2 Max -->
-      <div class="md:col-span-7 space-y-5">
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
-            <div class="p-4 bg-red-50 border border-red-200 rounded-xl">
-              <div id="kpi-vo2-title" class="text-[11px] font-extrabold uppercase text-red-800">VO2 Max Estimé</div>
-              <div id="out-vo2max" dir="ltr" class="text-3xl font-black font-mono text-red-700 tabular-nums my-0.5">--</div>
-              <div class="text-[11px] font-semibold text-red-700">ml / kg / min</div>
-            </div>
-            <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl">
-              <div id="kpi-vma-title" class="text-[11px] font-extrabold uppercase text-emerald-800">VMA Équivalente</div>
-              <div id="out-vma-eq" dir="ltr" class="text-3xl font-black font-mono text-emerald-700 tabular-nums my-0.5">--</div>
-              <div id="out-norm-badge" class="text-[11px] font-bold text-emerald-800">--</div>
-            </div>
-            <div class="p-4 bg-blue-50 border border-blue-200 rounded-xl">
-              <div id="kpi-vdot-title" class="text-[11px] font-extrabold uppercase text-blue-800">Indice VDOT (Daniels)</div>
-              <div id="out-vdot" dir="ltr" class="text-3xl font-black font-mono text-blue-700 tabular-nums my-0.5">--</div>
-              <div class="text-[11px] font-semibold text-blue-700">Score d'efficience</div>
-            </div>
-          </div>
+      <div>
+        <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Méthode d'estimation du VO2 Max" data-i18n-en="VO2 Max Estimation Method" data-i18n-ar="طريقة حساب VO2 Max">Méthode d'estimation du VO2 Max</label>
+        <select id="inp-mode" onchange="toggleVo2Mode(); onInputUpdated();" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-900">
+          <option value="race" selected data-i18n-fr="À partir d'un Chrono de Course (1 500 m à Marathon)" data-i18n-en="From a Recent Race Time (1500m to Marathon)" data-i18n-ar="انطلاقاً من توقيت سباق (1500م إلى الماراثون)">À partir d'un Chrono de Course (1 500 m à Marathon)</option>
+          <option value="vma" data-i18n-fr="À partir de ma VMA (km/h) issue d'un test terrain (Luc Léger, Demi-Cooper)" data-i18n-en="From my MAS / VMA (km/h) field test" data-i18n-ar="انطلاقاً من سرعة VMA (كم/س) عبر اختبار ميداني">À partir de ma VMA (km/h) issue d'un test terrain (Luc Léger, Demi-Cooper)</option>
+        </select>
+      </div>
 
+      <div id="box-race-inputs" class="space-y-4">
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Distance de course de référence" data-i18n-en="Reference Race Distance" data-i18n-ar="مسافة السباق المرجعية">Distance de course de référence</label>
+          <select id="inp-dist" onchange="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-900">
+            <option value="1500">1 500 m</option>
+            <option value="3000">3 000 m</option>
+            <option value="5000">5 km (5 000 m)</option>
+            <option value="10000" selected>10 km (10 000 m)</option>
+            <option value="21097.5" data-i18n-fr="Semi-Marathon (21,097 km)" data-i18n-en="Half-Marathon (21.097 km)" data-i18n-ar="نصف ماراثون (21.097 كم)">Semi-Marathon (21,097 km)</option>
+            <option value="42195" data-i18n-fr="Marathon (42,195 km)" data-i18n-en="Marathon (42.195 km)" data-i18n-ar="ماراثون (42.195 كم)">Marathon (42,195 km)</option>
+          </select>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
           <div>
-            <h3 id="lbl-zones-title" class="text-xs font-extrabold uppercase tracking-wider text-slate-800 mb-2.5">Les 5 Zones d'Allures d'Entraînement selon votre VO2 Max</h3>
-            <div id="out-zones-list" class="space-y-2"></div>
+            <label class="text-xs font-bold text-slate-600 block mb-1" data-i18n-fr="Heures (h)" data-i18n-en="Hours (h)" data-i18n-ar="ساعات">Heures (h)</label>
+            <input id="inp-h" type="number" value="0" min="0" max="10" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-base font-mono font-bold text-center" />
+          </div>
+          <div>
+            <label class="text-xs font-bold text-slate-600 block mb-1" data-i18n-fr="Minutes (min)" data-i18n-en="Minutes (min)" data-i18n-ar="دقائق">Minutes (min)</label>
+            <input id="inp-m" type="number" value="42" min="0" max="59" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-base font-mono font-bold text-center" />
+          </div>
+          <div>
+            <label class="text-xs font-bold text-slate-600 block mb-1" data-i18n-fr="Secondes (s)" data-i18n-en="Seconds (s)" data-i18n-ar="ثواني">Secondes (s)</label>
+            <input id="inp-s" type="number" value="30" min="0" max="59" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-base font-mono font-bold text-center" />
+          </div>
+        </div>
+      </div>
+
+      <div id="box-vma-inputs" class="hidden space-y-3">
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Votre VMA (km/h) — Relation Léger & Mercier (VO2 Max = 3,5 × VMA)" data-i18n-en="Your MAS / VMA (km/h) — Léger & Mercier equation (VO2 Max = 3.5 × MAS)" data-i18n-ar="سرعة VMA (كم/س) — معادلة ليجير ومرسييه (VO2 Max = 3.5 × VMA)">Votre VMA (km/h) — Relation Léger & Mercier (VO2 Max = 3,5 × VMA)</label>
+          <input id="inp-vma-direct" type="number" value="16.0" min="7" max="26" step="0.2" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-base font-mono font-bold" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Âge (années — pour le barème ACSM)" data-i18n-en="Age (years — for ACSM percentile)" data-i18n-ar="العمر (بالسنوات — لتصنيف ACSM)">Âge (années — pour le barème ACSM)</label>
+          <input id="inp-age" type="number" value="28" min="12" max="85" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-base font-mono font-bold" />
+        </div>
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Sexe biologique (normes VO2 Max)" data-i18n-en="Biological Sex (VO2 Max norms)" data-i18n-ar="الجنس (لمعايير VO2 Max)">Sexe biologique (normes VO2 Max)</label>
+          <select id="inp-sex" onchange="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-900">
+            <option value="M" selected data-i18n-fr="Homme" data-i18n-en="Male" data-i18n-ar="ذكر">Homme</option>
+            <option value="F" data-i18n-fr="Femme" data-i18n-en="Female" data-i18n-ar="أنثى">Femme</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="button" id="btn-calc-main" onclick="triggerCalculation()" class="peps-cta-btn">
+        <span>⚡</span>
+        <span data-i18n-fr="Calculer mon VO2 Max, mes Allures & Interprétations" data-i18n-en="Calculate My VO2 Max, Paces & Interpretations" data-i18n-ar="احسب قيمة VO2 Max وإيقاعات التدريب والتفسير العلمي">Calculer mon VO2 Max, mes Allures & Interprétations</span>
+      </button>
+    </div>
+
+    <!-- PANNEAU DE RÉSULTATS MASQUÉ AVANT LE CLIC SUR CALCULER -->
+    <div id="tool-results-panel" class="hidden space-y-6">
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="text-base font-extrabold text-slate-900 uppercase tracking-wider" data-i18n-fr="2. Vos Résultats Chiffrés & Interprétation par Indicateur" data-i18n-en="2. Your Calculated Metrics & Per-Indicator Interpretation" data-i18n-ar="2. نتائجك الرقمية وتفسير كل مؤشر">2. Vos Résultats Chiffrés & Interprétation par Indicateur</h3>
+          <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200" data-i18n-fr="✓ Calcul validé" data-i18n-en="✓ Calculation complete" data-i18n-ar="✓ تم الحساب بنجاح">✓ Calcul validé</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+          <div class="p-4 bg-red-50 border border-red-200 rounded-2xl space-y-1">
+            <div class="text-xs font-extrabold uppercase text-red-900" data-i18n-fr="VO2 Max Estimé" data-i18n-en="Estimated VO2 Max" data-i18n-ar="الحد الأقصى لاستهلاك الأكسجين">VO2 Max Estimé</div>
+            <div id="out-vo2max" dir="ltr" class="text-3xl font-black font-mono text-red-700 tabular-nums">--</div>
+            <div class="text-[11px] font-bold text-red-800">ml / kg / min</div>
+            <div id="out-vo2-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 mt-1 border border-red-100"></div>
+          </div>
+
+          <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl space-y-1">
+            <div class="text-xs font-extrabold uppercase text-emerald-900" data-i18n-fr="VMA Équivalente" data-i18n-en="Equivalent MAS (VMA)" data-i18n-ar="السرعة الهوائية القصوى المكافئة">VMA Équivalente</div>
+            <div id="out-vma-eq" dir="ltr" class="text-3xl font-black font-mono text-emerald-700 tabular-nums">--</div>
+            <div id="out-norm-badge" class="text-xs font-extrabold text-emerald-900">--</div>
+            <div id="out-vma-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 mt-1 border border-emerald-100"></div>
+          </div>
+
+          <div class="p-4 bg-blue-50 border border-blue-200 rounded-2xl space-y-1">
+            <div class="text-xs font-extrabold uppercase text-blue-900" data-i18n-fr="Score VDOT (Jack Daniels)" data-i18n-en="VDOT Score (Jack Daniels)" data-i18n-ar="مؤشر الكفاءة VDOT">Score VDOT (Jack Daniels)</div>
+            <div id="out-vdot" dir="ltr" class="text-3xl font-black font-mono text-blue-700 tabular-nums">--</div>
+            <div class="text-[11px] font-bold text-blue-800" data-i18n-fr="Puissance & Économie" data-i18n-en="Power & Running Economy" data-i18n-ar="القوة واقتصاد الجري">Puissance & Économie</div>
+            <div id="out-vdot-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 mt-1 border border-blue-100"></div>
           </div>
         </div>
 
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-3">
-          <h3 id="lbl-pred-title" class="text-xs font-extrabold uppercase tracking-wider text-slate-800">Chronos de Course Équivalents selon votre VO2 Max</h3>
-          <div id="out-pred-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5"></div>
+        <div id="out-vo2-interp" class="p-5 bg-slate-50 border-l-4 border-red-600 rounded-xl text-xs sm:text-sm text-slate-700 leading-relaxed space-y-2"></div>
+
+        <div>
+          <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-800 mb-3" data-i18n-fr="Les 5 Zones d'Allures d'Entraînement (Modèle VDOT Daniels)" data-i18n-en="Your 5 VDOT Training Pace Zones (Daniels)" data-i18n-ar="مناطق إيقاعات التدريب الخمسة حسب مؤشر VDOT">Les 5 Zones d'Allures d'Entraînement (Modèle VDOT Daniels)</h3>
+          <div id="out-zones-list" class="space-y-2.5"></div>
         </div>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-3">
+        <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-800" data-i18n-fr="Potentiel Chronométrique Équivalent (1 500 m au Marathon)" data-i18n-en="Equivalent Race Time Potential (1500m to Marathon)" data-i18n-ar="الأزمنة المتوقعة والمكافئة في السباقات (من 1500م إلى الماراثون)">Potentiel Chronométrique Équivalent (1 500 m au Marathon)</h3>
+        <div id="out-pred-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
       </div>
     </div>
   </main>
 
   <footer class="footer" id="profeps-unified-footer">
-    <div class="footer-container">
-      <div class="footer-grid">
-        <div class="footer-brand" style="display:flex !important;flex-direction:column !important;align-items:flex-start !important;">
-          <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:48px !important;max-height:48px !important;width:auto !important;max-width:155px !important;object-fit:contain !important;align-self:flex-start !important;filter:none !important;border-radius:8px !important;margin:0 0 0.9rem 0 !important;display:block !important;">
-          <p data-i18n-fr="La plateforme de référence pour les professeurs d'EPS au Maroc. Générateur de documents pédagogiques gratuit, conforme aux orientations pédagogiques officielles (MEN)." data-i18n-en="The reference platform for PE teachers in Morocco. Free educational document generator & sports science calculators aligned with official MEN guidelines." data-i18n-ar="المنصة المرجعية لأساتذة التربية البدنية بالمغرب. مولد وثائق تربوية مجاني وحاسبات علمية للرياضة وفق التوجيهات التربوية الرسمية.">La plateforme de référence pour les professeurs d'EPS au Maroc. Générateur de documents pédagogiques gratuit, conforme aux orientations pédagogiques officielles (MEN).</p>
-          <div class="footer-stats">
-            <div class="footer-stat-item">
-              <span class="footer-stat-num">16+</span>
-              <span class="footer-stat-lbl" data-i18n-fr="APS couvertes" data-i18n-en="Sports covered" data-i18n-ar="نشاط رياضي">APS couvertes</span>
-            </div>
-            <div class="footer-stat-item">
-              <span class="footer-stat-num">6</span>
-              <span class="footer-stat-lbl" data-i18n-fr="Niveaux scolaires" data-i18n-en="School levels" data-i18n-ar="مستويات دراسية">Niveaux scolaires</span>
-            </div>
-            <div class="footer-stat-item">
-              <span class="footer-stat-num">100%</span>
-              <span class="footer-stat-lbl" data-i18n-fr="Gratuit" data-i18n-en="Free" data-i18n-ar="مجاني">Gratuit</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="footer-col">
-          <h4 data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</h4>
-          <ul>
-            <li><a href="index.html" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a></li>
-            <li><a href="generateur.html" data-i18n-fr="Générateur PDF" data-i18n-en="PDF Generator" data-i18n-ar="مولد ملفات PDF">Générateur PDF</a></li>
-            <li><a href="blog.html" data-i18n-fr="Articles &amp; Blog" data-i18n-en="Articles &amp; Blog" data-i18n-ar="المقالات والمدونة">Articles &amp; Blog</a></li>
-            <li><a href="a-propos.html" data-i18n-fr="À propos" data-i18n-en="About Us" data-i18n-ar="من نحن">À propos</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4 data-i18n-fr="RESSOURCES EPS" data-i18n-en="PE RESOURCES" data-i18n-ar="موارد التربية البدنية">RESSOURCES EPS</h4>
-          <ul>
-            <li><a href="cycles-eps-maroc.html" data-i18n-fr="Cycles d'EPS au Maroc" data-i18n-en="PE Cycles in Morocco" data-i18n-ar="أسلاك التربية البدنية بالمغرب">Cycles d'EPS au Maroc</a></li>
-            <li><a href="programme-eps-maroc.html" data-i18n-fr="Programme EPS Maroc" data-i18n-en="Morocco PE Curriculum" data-i18n-ar="برنامج التربية البدنية بالمغرب">Programme EPS Maroc</a></li>
-            <li><a href="evaluation-eps.html" data-i18n-fr="Évaluation en EPS" data-i18n-en="PE Assessment" data-i18n-ar="التقويم في التربية البدنية">Évaluation en EPS</a></li>
-            <li><a href="securite-eps.html" data-i18n-fr="Sécurité en EPS" data-i18n-en="Safety in PE" data-i18n-ar="السلامة في التربية البدنية">Sécurité en EPS</a></li>
-            <li><a href="bibliotheque-numerique-eps.html" data-i18n-fr="Bibliothèque numérique" data-i18n-en="Digital Library" data-i18n-ar="المكتبة الرقمية">Bibliothèque numérique</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col" id="footer-col-calculators">
-          <h4 data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</h4>
-          <ul>
-            <li><a href="hub-outils-sport-performance.html" class="footer-hub-highlight" data-i18n-fr="★ Hub des Calculateurs Sport" data-i18n-en="★ All Sports Calculators Hub" data-i18n-ar="★ بوابة جميع الحاسبات الرياضية">★ Hub des Calculateurs Sport</a></li>
-            <li><a href="calculateur-vma.html" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS (VMA) Calculator" data-i18n-ar="حاسبة السرعة الهوائية VMA">Calculateur VMA</a></li>
-            <li><a href="calculateur-vdot-asr-endurance.html" data-i18n-fr="Calculateur VO2 Max &amp; VDOT" data-i18n-en="VO2 Max &amp; VDOT Calculator" data-i18n-ar="حاسبة VO2 Max و VDOT">Calculateur VO2 Max &amp; VDOT</a></li>
-            <li><a href="calculateur-asr-reserve-vitesse.html" data-i18n-fr="Réserve Anaérobie (ASR)" data-i18n-en="Anaerobic Speed Reserve (ASR)" data-i18n-ar="احتياطي السرعة اللاهوائية ASR">Réserve Anaérobie (ASR)</a></li>
-            <li><a href="calculateur-indice-endurance.html" data-i18n-fr="Indice d'Endurance (IE)" data-i18n-en="Endurance Index (Péronnet)" data-i18n-ar="مؤشر التحمل (IE)">Indice d'Endurance (IE)</a></li>
-            <li><a href="calculateur-frequence-cardiaque-karvonen.html" data-i18n-fr="Fréquence Cardiaque Karvonen" data-i18n-en="Heart Rate (Karvonen)" data-i18n-ar="نبضات القلب Karvonen">Fréquence Cardiaque Karvonen</a></li>
-            <li><a href="calculateur-imc-sportif-masse-grasse.html" data-i18n-fr="Calculateur IMC &amp; IMG Sport" data-i18n-en="Athletic BMI &amp; Body Fat" data-i18n-ar="حاسبة كتلة الجسم والدهون">Calculateur IMC &amp; IMG Sport</a></li>
-            <li><a href="calculateur-chaleur-meteo-altitude.html" data-i18n-fr="Chaleur, Humidité &amp; Altitude" data-i18n-en="Heat, Humidity &amp; Altitude" data-i18n-ar="الحرارة والرطوبة والارتفاع">Chaleur, Humidité &amp; Altitude</a></li>
-            <li><a href="calculateur-gap-pente-nutrition.html" data-i18n-fr="Allure Pente (GAP) &amp; Nutrition" data-i18n-en="Grade Pace (GAP) &amp; Nutrition" data-i18n-ar="إيقاع المنحدرات والتغذية">Allure Pente (GAP) &amp; Nutrition</a></li>
-            <li><a href="generateur-intermittent-hiit-cod.html" data-i18n-fr="Intermittent HIIT &amp; COD 180°" data-i18n-en="HIIT Intermittent &amp; 180° COD" data-i18n-ar="التدريب المتقطع HIIT و COD">Intermittent HIIT &amp; COD 180°</a></li>
-            <li><a href="calculateur-charge-rpe-foster-acwr.html" data-i18n-fr="Charge RPE Foster &amp; ACWR" data-i18n-en="Foster RPE Load &amp; ACWR" data-i18n-ar="حمل التدريب RPE و ACWR">Charge RPE Foster &amp; ACWR</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4 data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</h4>
-          <ul>
-            <li><a href="politique-confidentialite.html" data-i18n-fr="Politique de confidentialité" data-i18n-en="Privacy Policy" data-i18n-ar="سياسة الخصوصية">Politique de confidentialité</a></li>
-            <li><a href="cgu.html" data-i18n-fr="Conditions d'utilisation" data-i18n-en="Terms of Use" data-i18n-ar="شروط الاستخدام">Conditions d'utilisation</a></li>
-            <li><a href="contact.html" data-i18n-fr="Nous contacter" data-i18n-en="Contact Us" data-i18n-ar="اتصل بنا">Nous contacter</a></li>
-            <li><a href="mailto:profepsma@gmail.com">✉️ profepsma@gmail.com</a></li>
-          </ul>
-        </div>
-      </div>
-
-      ';
-      }).join('');
-
-      const preds = [
-        { d: '1 500 m', dist: 1500, pct: 1.01 },
-        { d: '3 000 m', dist: 3000, pct: 0.96 },
-        { d: '5 km', dist: 5000, pct: 0.925 },
-        { d: '10 km', dist: 10000, pct: 0.885 },
-        { d: 'Semi-Marathon', dist: 21097.5, pct: 0.835 },
-        { d: 'Marathon', dist: 42195, pct: 0.785 }
-      ];
-      document.getElementById('out-pred-grid').innerHTML = preds.map(p => {
-        const spdKmh = vmaEq * p.pct;
-        const sec = (p.dist / 1000) * (3600 / spdKmh);
-        return '<div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-center"><div class="text-[11px] font-bold text-slate-500">' + p.d + '</div><div dir="ltr" class="text-sm font-black font-mono text-slate-900 my-0.5">' + fmtRaceTime(sec) + '</div><div dir="ltr" class="text-[11px] font-mono text-blue-600 font-semibold">' + fmtPace(3600 / spdKmh) + '</div></div>';
-      }).join('');
-
-      const interp = document.getElementById('out-vo2-interp');
-      if (currentLang === 'fr') {
-        interp.innerHTML = '<p><strong>Qu’est-ce que le VO2 Max ?</strong> Votre consommation maximale d’oxygène est estimée à <strong>' + vo2max.toFixed(1) + ' ml/kg/min</strong> (niveau <strong>' + normFr + '</strong> pour votre tranche d’âge).</p><p><strong>Conseil clé pour augmenter votre VO2 Max :</strong> Combinez 80% de volume en Endurance Fondamentale (Zone E) avec 1 séance hebdomadaire en Zone I (ex: 5 × 1000m ou 10 × 400m entre 97% et 100% du VO2 Max).</p>';
-      } else if (currentLang === 'en') {
-        interp.innerHTML = '<p><strong>What is VO2 Max?</strong> Your maximal oxygen uptake is estimated at <strong>' + vo2max.toFixed(1) + ' ml/kg/min</strong> (<strong>' + normEn + '</strong> tier for your age group).</p><p><strong>How to boost VO2 Max:</strong> Pair 80% easy aerobic volume (Zone E) with 1 weekly Zone I session (e.g., 5 × 1000m at 97–100% VO2 Max).</p>';
-      } else {
-        interp.innerHTML = '<p><strong>ما هو VO2 Max؟</strong> يقدر الحد الأقصى لاستهلاك الأكسجين لديك بـ <strong>' + vo2max.toFixed(1) + ' مل/كغ/دقيقة</strong> (المستوى: <strong>' + normAr + '</strong> بالنسبة لفئتك العمرية).</p><p><strong>نصيحة لتطوير VO2 Max:</strong> اجمع بين الجري المريح في المنطقة E وحصة أسبوعية في المنطقة I (97% إلى 100% من VO2 Max).</p>';
-      }
-    }
-    window.addEventListener('DOMContentLoaded', () => { setToolLang('fr'); });
-  </script>
-
-
-
-<footer class="footer" id="profeps-unified-footer">
     <div class="footer-container">
       <div class="footer-grid">
         <div class="footer-brand" style="display:flex !important;flex-direction:column !important;align-items:flex-start !important;">
@@ -1114,7 +979,161 @@ footer.footer, #profeps-unified-footer {
       </div>
     </div>
   </footer>
+
+  <script id="profeps-tool-engine-js">
+    var currentLang = 'fr';
+    var hasCalculated = false;
+
+    function setToolLang(lang) {
+      currentLang = lang;
+      var root = document.getElementById('html-root');
+      if (root) {
+        root.lang = lang;
+        root.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+      }
+      document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function(el) {
+        var val = el.getAttribute('data-i18n-' + lang);
+        if (val) el.textContent = val;
+      });
+      if (typeof applyToolTranslations === 'function') applyToolTranslations(lang);
+      if (hasCalculated && typeof computeTool === 'function') computeTool();
+    }
+
+    function triggerCalculation() {
+      hasCalculated = true;
+      var panel = document.getElementById('tool-results-panel');
+      if (panel) {
+        panel.classList.remove('hidden');
+        panel.classList.remove('peps-results-reveal');
+        void panel.offsetWidth;
+        panel.classList.add('peps-results-reveal');
+      }
+      if (typeof computeTool === 'function') computeTool();
+      if (panel && window.innerWidth < 768) {
+        setTimeout(function() {
+          panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 80);
+      }
+    }
+
+    function onInputUpdated() {
+      if (hasCalculated && typeof computeTool === 'function') {
+        computeTool();
+      }
+    }
+
+    function toggleVo2Mode() {
+      var mode = document.getElementById('inp-mode').value;
+      document.getElementById('box-race-inputs').className = (mode === 'race') ? 'space-y-4' : 'hidden';
+      document.getElementById('box-vma-inputs').className = (mode === 'vma') ? 'space-y-3' : 'hidden';
+    }
+    function fmtPace(secPerKm) {
+      var s = Math.max(120, Math.round(secPerKm));
+      var m = Math.floor(s / 60);
+      var r = String(s % 60).padStart(2, '0');
+      return m + ':' + r + ' /km';
+    }
+    function fmtRaceTime(totalSec) {
+      var s = Math.round(totalSec);
+      var h = Math.floor(s / 3600);
+      var m = Math.floor((s % 3600) / 60);
+      var sec = String(s % 60).padStart(2, '0');
+      return h > 0 ? h + 'h ' + String(m).padStart(2, '0') + 'm ' + sec + 's' : m + 'm ' + sec + 's';
+    }
+    function computeTool() {
+      var mode = document.getElementById('inp-mode').value;
+      var age = parseFloat(document.getElementById('inp-age').value) || 28;
+      var sex = document.getElementById('inp-sex').value || 'M';
+      var vo2max = 56.0;
+      var vmaEq = 16.0;
+
+      if (mode === 'race') {
+        var dist = parseFloat(document.getElementById('inp-dist').value) || 10000;
+        var h = parseFloat(document.getElementById('inp-h').value) || 0;
+        var m = parseFloat(document.getElementById('inp-m').value) || 0;
+        var s = parseFloat(document.getElementById('inp-s').value) || 0;
+        var tMin = Math.max(3, h * 60 + m + s / 60);
+        var v = dist / tMin;
+        var vo2Cost = -4.60 + 0.182258 * v + 0.000104 * v * v;
+        var pctVo2 = 0.8 + 0.1894393 * Math.exp(-0.012778 * tMin) + 0.2989558 * Math.exp(-0.1932605 * tMin);
+        vo2max = Math.max(22, Math.min(92, vo2Cost / pctVo2));
+        vmaEq = vo2max / 3.5;
+      } else {
+        vmaEq = Math.max(7, Math.min(26, parseFloat(document.getElementById('inp-vma-direct').value) || 16));
+        vo2max = vmaEq * 3.5;
+      }
+
+      var baseRef = (sex === 'M' ? 50 : 42) - Math.max(0, age - 25) * 0.35;
+      var normFr = 'Bon / Actif', normEn = 'Good / Active', normAr = 'مستوى جيد ونشط';
+      var vmaTierFr = 'Coureur régulier', vmaTierEn = 'Regular runner', vmaTierAr = 'عداء منتظم';
+      if (vo2max >= baseRef + 12) {
+        normFr = 'Athlète Élite (Top 5% ACSM)'; normEn = 'Superior / Elite (Top 5% ACSM)'; normAr = 'مستوى نخبة ممتاز (أعلى 5%)';
+        vmaTierFr = 'Haut niveau régional/national'; vmaTierEn = 'Competitive athlete'; vmaTierAr = 'مستوى تنافسي عالٍ';
+      } else if (vo2max >= baseRef + 5) {
+        normFr = 'Excellent (Top 15% ACSM)'; normEn = 'Excellent (Top 15% ACSM)'; normAr = 'ممتاز (أعلى 15%)';
+        vmaTierFr = 'Coureur entraîné performant'; vmaTierEn = 'Well-trained runner'; vmaTierAr = 'عداء متمرس';
+      } else if (vo2max < baseRef - 3) {
+        normFr = 'En développement aérobie'; normEn = 'Developing Aerobic Base'; normAr = 'قاعدة هوائية قيد التطوير';
+        vmaTierFr = 'Marge de progression élevée'; vmaTierEn = 'High improvement margin'; vmaTierAr = 'هامش تطور كبير';
+      }
+
+      document.getElementById('out-vo2max').textContent = vo2max.toFixed(1);
+      document.getElementById('out-vdot').textContent = vo2max.toFixed(1);
+      document.getElementById('out-vma-eq').textContent = vmaEq.toFixed(1) + ' km/h';
+      document.getElementById('out-norm-badge').textContent = currentLang === 'fr' ? normFr : currentLang === 'en' ? normEn : normAr;
+
+      var vmaSecPerKm = 3600 / vmaEq;
+      if (currentLang === 'fr') {
+        document.getElementById('out-vo2-meaning').textContent = 'Plafond d’oxygène : ' + normFr;
+        document.getElementById('out-vma-meaning').textContent = 'Allure 100% VMA : ' + fmtPace(vmaSecPerKm) + ' (' + vmaTierFr + ')';
+        document.getElementById('out-vdot-meaning').textContent = 'Indice combinant VO2 Max et économie de foulée';
+      } else if (currentLang === 'en') {
+        document.getElementById('out-vo2-meaning').textContent = 'Oxygen ceiling: ' + normEn;
+        document.getElementById('out-vma-meaning').textContent = '100% MAS Pace: ' + fmtPace(vmaSecPerKm) + ' (' + vmaTierEn + ')';
+        document.getElementById('out-vdot-meaning').textContent = 'Combines VO2 Max & running economy';
+      } else {
+        document.getElementById('out-vo2-meaning').textContent = 'سقف الأكسجين: ' + normAr;
+        document.getElementById('out-vma-meaning').textContent = 'إيقاع 100% VMA: ' + fmtPace(vmaSecPerKm) + ' (' + vmaTierAr + ')';
+        document.getElementById('out-vdot-meaning').textContent = 'يجمع بين استهلاك الأكسجين واقتصاد الجري';
+      }
+
+      var zones = [
+        { code: 'Zone E · Endurance Fondamentale (65–74% VO2 Max)', descFr: 'Développement mitochondrial & capillaire (75–80% du volume hebdo)', en: 'Zone E · Easy Aerobic (65–74% VO2 Max)', descEn: 'Mitochondrial & capillary base (75–80% of weekly volume)', ar: 'منطقة E · التحمل الأساسي (65–74% VO2 Max)', descAr: 'بناء القاعدة الهوائية والشعيرات الدموية (80% من حجم التدريب)', f1: 1.36, f2: 1.24, color: 'text-emerald-700 bg-emerald-50 border-emerald-200' },
+        { code: 'Zone M · Allure Spécifique Marathon (78–83% VO2 Max)', descFr: 'Économie énergétique & oxydation mixte lipides/glucides', en: 'Zone M · Marathon Pace (78–83% VO2 Max)', descEn: 'Aerobic running economy & glycogen sparing', ar: 'منطقة M · إيقاع الماراثون (78–83% VO2 Max)', descAr: 'تحسين الاقتصاد الطاقي على المسافات الطويلة', f1: 1.19, f2: 1.15, color: 'text-blue-700 bg-blue-50 border-blue-200' },
+        { code: 'Zone T · Seuil Anaérobie Lactique / Tempo (86–88% VO2 Max)', descFr: 'Repousse l’accumulation des lactates (allure tenable ~45-60 min)', en: 'Zone T · Lactate Threshold (86–88% VO2 Max)', descEn: 'Raises lactate clearance ceiling (~45-60 min effort)', ar: 'منطقة T · العتبة اللاهوائية (86–88% VO2 Max)', descAr: 'رفع عتبة تراكم اللاكتات في العضلات', f1: 1.12, f2: 1.09, color: 'text-amber-800 bg-amber-50 border-amber-200' },
+        { code: 'Zone I · Intervalle VO2 Max / PMA (97–100% VO2 Max)', descFr: 'Sollicitation maximale du débit cardiaque (fractions de 2 à 5 min)', en: 'Zone I · VO2 Max Intervals (97–100% VO2 Max)', descEn: 'Maximal stroke volume & VO2 stimulus (2–5 min reps)', ar: 'منطقة I · تطوير VO2 Max القصوى (97–100%)', descAr: 'تحفيز أقصى ضخ للقلب واستهلاك للأكسجين', f1: 1.02, f2: 0.99, color: 'text-red-700 bg-red-50 border-red-200' },
+        { code: 'Zone R · Répétitions / Économie Neuromusculaire (105–110%)', descFr: 'Vitesse gestuelle et raideur élastique avec récupération complète', en: 'Zone R · Economy Repetitions (105–110% VO2 Max)', descEn: 'Neuromuscular speed & stride mechanics with full recovery', ar: 'منطقة R · السرعة والاقتصاد العصبي العضلي (105–110%)', descAr: 'تحسين كفاءة الخطوة والسرعة مع راحة كاملة', f1: 0.95, f2: 0.91, color: 'text-purple-800 bg-purple-50 border-purple-200' }
+      ];
+      document.getElementById('out-zones-list').innerHTML = zones.map(function(z) {
+        var label = currentLang === 'fr' ? z.code : currentLang === 'en' ? z.en : z.ar;
+        var sub = currentLang === 'fr' ? z.descFr : currentLang === 'en' ? z.descEn : z.descAr;
+        return '<div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-2"><div><div class="text-xs font-extrabold text-slate-900">' + label + '</div><div class="text-[11px] text-slate-600">' + sub + '</div></div><span dir="ltr" class="font-mono text-xs font-black px-3 py-1.5 rounded-lg border shrink-0 ' + z.color + '">' + fmtPace(vmaSecPerKm * z.f2) + ' – ' + fmtPace(vmaSecPerKm * z.f1) + '</span></div>';
+      }).join('');
+
+      var preds = [
+        { d: '1 500 m', dist: 1500, pct: 1.01, noteFr: '101% VMA', noteEn: '101% MAS', noteAr: '101% VMA' },
+        { d: '3 000 m', dist: 3000, pct: 0.96, noteFr: '96% VMA', noteEn: '96% MAS', noteAr: '96% VMA' },
+        { d: '5 km', dist: 5000, pct: 0.925, noteFr: '92,5% VMA', noteEn: '92.5% MAS', noteAr: '92.5% VMA' },
+        { d: '10 km', dist: 10000, pct: 0.885, noteFr: '88,5% VMA', noteEn: '88.5% MAS', noteAr: '88.5% VMA' },
+        { d: 'Semi-Marathon', dist: 21097.5, pct: 0.835, noteFr: '83,5% VMA', noteEn: '83.5% MAS', noteAr: '83.5% VMA' },
+        { d: 'Marathon', dist: 42195, pct: 0.785, noteFr: '78,5% VMA', noteEn: '78.5% MAS', noteAr: '78.5% VMA' }
+      ];
+      document.getElementById('out-pred-grid').innerHTML = preds.map(function(p) {
+        var spdKmh = vmaEq * p.pct;
+        var sec = (p.dist / 1000) * (3600 / spdKmh);
+        var n = currentLang === 'fr' ? p.noteFr : currentLang === 'en' ? p.noteEn : p.noteAr;
+        return '<div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center space-y-0.5"><div class="text-xs font-extrabold text-slate-700">' + p.d + '</div><div dir="ltr" class="text-base font-black font-mono text-slate-900">' + fmtRaceTime(sec) + '</div><div dir="ltr" class="text-xs font-mono text-red-700 font-bold">' + fmtPace(3600 / spdKmh) + '</div><div class="text-[10px] font-semibold text-slate-500">' + n + '</div></div>';
+      }).join('');
+
+      var interp = document.getElementById('out-vo2-interp');
+      if (currentLang === 'fr') {
+        interp.innerHTML = '<p><strong>📊 Bilan Physiologique :</strong> Votre consommation maximale d’oxygène est évaluée à <strong>' + vo2max.toFixed(1) + ' ml/kg/min</strong>, ce qui correspond à une VMA fonctionnelle de <strong>' + vmaEq.toFixed(1) + ' km/h</strong> et vous situe dans la catégorie <strong>« ' + normFr + ' »</strong> selon les normes ACSM pour votre âge (' + age + ' ans).</p><p><strong>🏃‍♂️ Recommandation Entraînement & EPS :</strong> Pour faire progresser ce plafond aérobie, respectez la polarisation 80/20 : 80 % de votre volume en <strong>Zone E (' + fmtPace(vmaSecPerKm * 1.24) + ' à ' + fmtPace(vmaSecPerKm * 1.36) + ')</strong> et 1 séance clé hebdomadaire en <strong>Zone I (' + fmtPace(vmaSecPerKm * 0.99) + ' à ' + fmtPace(vmaSecPerKm * 1.02) + ')</strong> sous forme de 5 × 1 000 m (récup 2 min) ou 12 × 300 m (récup 45 s).</p>';
+      } else if (currentLang === 'en') {
+        interp.innerHTML = '<p><strong>📊 Physiological Assessment:</strong> Your maximal oxygen uptake is <strong>' + vo2max.toFixed(1) + ' ml/kg/min</strong>, matching an equivalent MAS of <strong>' + vmaEq.toFixed(1) + ' km/h</strong> and placing you in the <strong>"' + normEn + '"</strong> ACSM category for age ' + age + '.</p><p><strong>🏃‍♂️ Coaching & PE Prescription:</strong> Follow an 80/20 polarized distribution: 80% of weekly mileage in <strong>Zone E (' + fmtPace(vmaSecPerKm * 1.24) + '–' + fmtPace(vmaSecPerKm * 1.36) + ')</strong> and 1 weekly interval session in <strong>Zone I (' + fmtPace(vmaSecPerKm * 0.99) + '–' + fmtPace(vmaSecPerKm * 1.02) + ')</strong> such as 5 × 1000m (2 min rest).</p>';
+      } else {
+        interp.innerHTML = '<p><strong>📊 التقييم الفيزيولوجي الشامل:</strong> يبلغ الحد الأقصى لاستهلاك الأكسجين لديك <strong>' + vo2max.toFixed(1) + ' مل/كغ/دقيقة</strong>، أي ما يعادل سرعة هوائية قصوى (VMA) قدرها <strong>' + vmaEq.toFixed(1) + ' كم/س</strong>، مما يضعك في فئة <strong>« ' + normAr + ' »</strong> حسب معايير ACSM لعمر ' + age + ' سنة.</p><p><strong>🏃‍♂️ نصيحة التدريب والتربية البدنية:</strong> لتطوير هذا السقف الهوائي، اعتمد قاعدة 80/20: 80% من الجري في <strong>المنطقة E (' + fmtPace(vmaSecPerKm * 1.24) + ' إلى ' + fmtPace(vmaSecPerKm * 1.36) + ')</strong> مع حصة أسبوعية في <strong>المنطقة I (' + fmtPace(vmaSecPerKm * 0.99) + ' إلى ' + fmtPace(vmaSecPerKm * 1.02) + ')</strong> مثل 5 × 1000م.</p>';
+      }
+    }
+  </script>
 </body>
 </html>
-
-

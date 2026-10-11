@@ -3,66 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calculateur de Fréquence Cardiaque (Karvonen) & Interprétation des 5 Zones | ProfEPS.ma</title>
-  <meta name="description" content="Calculez votre Fréquence Cardiaque Maximale (Tanaka, Gellish, Astrand), votre FC de Réserve (Karvonen) et vos 5 zones d'entraînement avec interprétation physiologique complète." />
+  <title>Calculateur de Fréquence Cardiaque, Zones Karvonen & Interprétation | Prof EPS</title>
+  <meta name="description" id="metaDesc" content="Saisissez votre âge et votre fréquence cardiaque de repos puis cliquez sur Calculer pour obtenir votre FC Max (Tanaka), votre Réserve Cardiaque (HRR) et vos 5 zones Z1 à Z5 expliquées." />
+  <meta name="keywords" content="calculateur fréquence cardiaque karvonen, zone cardiaque course à pied, fc max tanaka, fréquence cardiaque de réserve, zones entrainement cardiaque eps" />
   <link rel="canonical" href="https://profeps.ma/calculateur-frequence-cardiaque-karvonen.html" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: #F8FAFC; color: #0F172A; }
-    .tabular-nums { font-variant-numeric: tabular-nums; }
-  </style>
-  <link rel="icon" type="image/png" href="/images/prof_eps.png" />
+  <link rel="icon" type="image/png" href="images/prof_eps.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
-  <style id="profeps-unified-theme">
-    :root {
-      --primary: #c1272d;
-      --primary-dark: #a01f24;
-      --secondary: #006233;
-      --secondary-dark: #004d28;
-      --text-primary: #0f172a;
-      --text-secondary: #334155;
-      --text-light: #64748b;
-      --border: #e2e8f0;
-      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-display: 'Plus Jakarta Sans', var(--font-sans);
-    }
-    body { font-family: var(--font-sans) !important; background: #f8fafc !important; color: var(--text-primary) !important; padding-top: 82px !important; }
-    .navbar { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 1000 !important; padding: 0.85rem 2rem !important; background: rgba(255,255,255,0.96) !important; backdrop-filter: blur(20px) !important; border-bottom: 1px solid rgba(226,232,240,0.7) !important; }
-    .nav-container { max-width: 1400px !important; margin: 0 auto !important; display: grid !important; grid-template-columns: 1fr auto 1fr !important; align-items: center !important; }
-    .nav-logo { justify-self: start !important; display: flex !important; align-items: center !important; }
-    .nav-logo img { height: 52px !important; width: auto !important; object-fit: contain !important; }
-    .nav-menu { display: flex !important; align-items: center !important; justify-content: center !important; gap: 1.5rem !important; }
-    .nav-right { justify-self: end !important; display: flex !important; align-items: center !important; gap: 0.65rem !important; }
-    .nav-link { font-size: 0.92rem !important; font-weight: 600 !important; color: #1a1a2e !important; padding: 0.45rem 0.65rem !important; position: relative !important; text-decoration: none !important; }
-    .nav-link::after { content: '' !important; position: absolute !important; bottom: -2px !important; left: 50% !important; right: 50% !important; height: 3px !important; background: linear-gradient(90deg, #c1272d, #006233) !important; border-radius: 2px !important; transition: left 0.3s ease, right 0.3s ease !important; }
-    .nav-link:hover::after, .nav-link.active::after { left: 0.4rem !important; right: 0.4rem !important; }
-    .nav-link:hover, .nav-link.active { color: #c1272d !important; }
-    .lang-switch { display: inline-flex; align-items: center; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 9999px; padding: 2px; }
-    .lang-btn { background: none; border: none; cursor: pointer; padding: 4px 8px; font-size: 0.75rem; font-weight: 700; color: #64748b; border-radius: 9999px; transition: all 0.2s ease; }
-    .lang-btn.active { background: white; color: #0f172a; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
-    .lang-btn:hover:not(.active) { color: #c1272d; }
-    .lang-sep { font-size: 0.75rem; color: #cbd5e1; user-select: none; }
-    .nav-cta { display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; padding: 0.48rem 1.15rem !important; background: linear-gradient(135deg, #c1272d, #006233) !important; color: white !important; font-weight: 600 !important; font-size: 0.88rem !important; border-radius: 9999px !important; box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important; text-decoration: none !important; white-space: nowrap !important; }
-    #ui-badge { display: inline-flex; align-items: center; background: rgba(193,39,45,0.08) !important; color: #c1272d !important; padding: 0.28rem 0.85rem !important; border-radius: 9999px !important; border: 1px solid rgba(193,39,45,0.18) !important; }
-    .profeps-footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important; color: white !important; padding: 3rem 1.5rem 0 !important; margin-top: 3.5rem !important; text-align: left !important; }
-    .profeps-footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.25rem; padding-bottom: 2.25rem; }
-    .profeps-footer-brand img { height: 42px; filter: brightness(0) invert(1); margin-bottom: 0.75rem; }
-    .profeps-footer-brand p { color: rgba(255,255,255,0.65); font-size: 0.84rem; line-height: 1.6; }
-    .profeps-footer-col h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.45); margin-bottom: 0.9rem; }
-    .profeps-footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
-    .profeps-footer-col ul li a { color: rgba(255,255,255,0.72); font-size: 0.84rem; text-decoration: none; }
-    .profeps-footer-col ul li a:hover { color: white; }
-    .profeps-footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.25rem 0; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; color: rgba(255,255,255,0.45); font-size: 0.8rem; flex-wrap: wrap; gap: 0.5rem; }
-    @media (max-width: 868px) { .nav-container { display: flex !important; justify-content: space-between !important; } .nav-menu { display: none !important; } .profeps-footer-inner { grid-template-columns: 1fr 1fr; } }
-  </style>
-  
-
-
-
-
-<style id="profeps-master-unifier-css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style id="profeps-master-unifier-css">
 /* ═══ 1. NAVBAR FIXE ISOLÉE (.peps-*) — 80PX VERROUILLÉ SUR TOUTES LES PAGES ═══ */
 html {
   overflow-y: scroll !important;
@@ -423,7 +373,7 @@ button.lang-btn:not(.peps-lang-btn) {
   border-radius: 2px !important;
 }
 
-/* ═══ 4. FOOTER UNIFIÉ À 5 COLONNES SANS DOUBLONS ═══ */
+/* ═══ 4. FOOTER UNIFIÉ À 5 COLONNES SANS DOUBLONS (BLINDÉ CONTRE TAILWIND CDN) ═══ */
 footer.footer, #profeps-unified-footer {
   background: linear-gradient(135deg, #15192b 0%, #162038 100%) !important;
   color: #ffffff !important;
@@ -432,27 +382,35 @@ footer.footer, #profeps-unified-footer {
   border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   box-sizing: border-box !important;
+  width: 100% !important;
+  display: block !important;
 }
-.footer .footer-container, .footer .footer-inner {
+#profeps-unified-footer .footer-container,
+footer.footer .footer-container,
+.footer .footer-inner {
   max-width: 1360px !important;
   margin: 0 auto !important;
   padding: 0 !important;
+  box-sizing: border-box !important;
 }
-.footer .footer-grid {
+#profeps-unified-footer .footer-grid,
+footer.footer .footer-grid {
   display: grid !important;
   grid-template-columns: 1.65fr 0.9fr 1.1fr 1.45fr 1fr !important;
   gap: 2.25rem !important;
   padding-bottom: 2.75rem !important;
   align-items: start !important;
 }
-.footer .footer-brand {
+#profeps-unified-footer .footer-brand,
+footer.footer .footer-brand {
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-start !important;
 }
-.footer .footer-brand img {
-  height: 48px !important;
-  max-height: 48px !important;
+#profeps-unified-footer .footer-brand img,
+footer.footer .footer-brand img {
+  height: 46px !important;
+  max-height: 46px !important;
   width: auto !important;
   max-width: 155px !important;
   object-fit: contain !important;
@@ -463,41 +421,50 @@ footer.footer, #profeps-unified-footer {
   padding: 0 !important;
   display: block !important;
 }
-.footer .footer-brand p {
+#profeps-unified-footer .footer-brand p,
+footer.footer .footer-brand p {
   color: rgba(255, 255, 255, 0.72) !important;
   font-size: 0.84rem !important;
   line-height: 1.65 !important;
   margin: 0 0 1.25rem 0 !important;
 }
-.footer .footer-stats {
+#profeps-unified-footer .footer-stats,
+footer.footer .footer-stats {
   display: flex !important;
   align-items: center !important;
   gap: 1.25rem !important;
   flex-wrap: wrap !important;
   padding-top: 0.5rem !important;
 }
-.footer .footer-stat-item {
+#profeps-unified-footer .footer-stat-item,
+footer.footer .footer-stat-item {
   display: flex !important;
   flex-direction: column !important;
 }
-.footer .footer-stat-num {
+#profeps-unified-footer .footer-stat-num,
+footer.footer .footer-stat-num {
   font-size: 1.05rem !important;
   font-weight: 800 !important;
   color: #ffffff !important;
+  line-height: 1.2 !important;
 }
-.footer .footer-stat-lbl {
+#profeps-unified-footer .footer-stat-lbl,
+footer.footer .footer-stat-lbl {
   font-size: 0.7rem !important;
   color: rgba(255, 255, 255, 0.55) !important;
 }
-.footer .footer-col h4 {
+#profeps-unified-footer .footer-col h4,
+footer.footer .footer-col h4 {
   font-size: 0.76rem !important;
   font-weight: 800 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.08em !important;
   color: rgba(255, 255, 255, 0.48) !important;
   margin: 0 0 1rem 0 !important;
+  line-height: 1.3 !important;
 }
-.footer .footer-col ul {
+#profeps-unified-footer .footer-col ul,
+footer.footer .footer-col ul {
   list-style: none !important;
   padding: 0 !important;
   margin: 0 !important;
@@ -505,11 +472,13 @@ footer.footer, #profeps-unified-footer {
   flex-direction: column !important;
   gap: 0.52rem !important;
 }
-.footer .footer-col ul li {
+#profeps-unified-footer .footer-col ul li,
+footer.footer .footer-col ul li {
   margin: 0 !important;
   padding: 0 !important;
 }
-.footer .footer-col ul li a {
+#profeps-unified-footer .footer-col ul li a,
+footer.footer .footer-col ul li a {
   color: rgba(255, 255, 255, 0.76) !important;
   font-size: 0.83rem !important;
   font-weight: 500 !important;
@@ -518,18 +487,22 @@ footer.footer, #profeps-unified-footer {
   display: inline-block !important;
   line-height: 1.35 !important;
 }
-.footer .footer-col ul li a:hover {
+#profeps-unified-footer .footer-col ul li a:hover,
+footer.footer .footer-col ul li a:hover {
   color: #ffffff !important;
   transform: translateX(2px) !important;
 }
-.footer .footer-col ul li a.footer-hub-highlight {
+#profeps-unified-footer .footer-col ul li a.footer-hub-highlight,
+footer.footer .footer-col ul li a.footer-hub-highlight {
   color: #4ade80 !important;
   font-weight: 800 !important;
 }
-.footer .footer-col ul li a.footer-hub-highlight:hover {
+#profeps-unified-footer .footer-col ul li a.footer-hub-highlight:hover,
+footer.footer .footer-col ul li a.footer-hub-highlight:hover {
   color: #86efac !important;
 }
-.footer .footer-bottom {
+#profeps-unified-footer .footer-bottom,
+footer.footer .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.09) !important;
   padding: 1.25rem 0 !important;
   display: flex !important;
@@ -598,7 +571,7 @@ footer.footer, #profeps-unified-footer {
 }
 </style>
 </head>
-<body class="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+<body class="min-h-screen flex flex-col">
 <!-- PROFEPS_UNIFIED_NAVBAR_START -->
   <nav id="navbar" class="navbar navbar-decoy" style="display:none !important;visibility:hidden !important;opacity:0 !important;width:0 !important;height:0 !important;overflow:hidden !important;position:absolute !important;pointer-events:none !important;z-index:-9999 !important;" aria-hidden="true">
     <div class="nav-container">
@@ -807,176 +780,73 @@ footer.footer, #profeps-unified-footer {
 })();
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->
-<!-- Header ProfEPS.ma -->
-    
-    <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-6">
-    <!-- En-tête de l'outil avec bouton Toggle Traducteur FR | EN | AR en haut à droite -->
-    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-      <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
-        <div class="space-y-1.5 max-w-2xl">
-          <div id="ui-badge" class="text-xs font-bold uppercase tracking-wider text-emerald-600">Cluster 2 · Cardiologie Sportive & Méthode de Karvonen</div>
-          <h1 id="ui-title" class="text-2xl sm:text-3xl font-extrabold text-slate-900">Calculateur de Fréquence Cardiaque, Zones Karvonen & Interprétation</h1>
-          <p id="ui-sub" class="text-sm text-slate-600 leading-relaxed">Déterminez votre FC Maximale, votre FC de Réserve (Karvonen) et vos 5 zones d’entraînement avec interprétation physiologique et substrats énergétiques.</p>
-        </div>
+  <header class="vma-hero">
+    <div id="ui-badge" class="hero-badge" data-i18n-fr="⚡ Cluster 2A · Cardiologie Sportive & Méthode de Karvonen" data-i18n-en="⚡ Cluster 2A · Sports Cardiology & Karvonen HR Reserve" data-i18n-ar="⚡ القطب 2A · نبضات القلب للرياضيين وطريقة كارفونين (Karvonen)">⚡ Cluster 2A · Cardiologie Sportive & Méthode de Karvonen</div>
+    <h1 id="ui-title" data-i18n-fr="Calculateur de Fréquence Cardiaque, Zones Karvonen & Interprétation" data-i18n-en="Heart Rate Zones Calculator (Karvonen) & Physiological Interpretation" data-i18n-ar="حاسبة نبضات القلب (Karvonen) والتفسير الفيزيولوجي للنطاقات التدريبية">Calculateur de Fréquence Cardiaque, Zones Karvonen & Interprétation</h1>
+    <p id="ui-sub" data-i18n-fr="Saisissez votre âge et votre fréquence cardiaque de repos puis cliquez sur Calculer pour obtenir votre FC Max (Tanaka), votre Réserve Cardiaque (HRR) et vos 5 zones Z1 à Z5 expliquées." data-i18n-en="Enter your age and resting heart rate, then click Calculate to get your Tanaka Max HR, Heart Rate Reserve (HRR), and 5 explained training zones." data-i18n-ar="أدخل عمرك ونبض الراحة ثم اضغط على &quot;احسب&quot; لمعرفة أقصى نبض للقلب، احتياطي النبض (HRR) ومناطق التدريب الخمس بالتفصيل.">Saisissez votre âge et votre fréquence cardiaque de repos puis cliquez sur Calculer pour obtenir votre FC Max (Tanaka), votre Réserve Cardiaque (HRR) et vos 5 zones Z1 à Z5 expliquées.</p>
+  </header>
 
-        <!-- Bouton Toggle Traducteur en haut à droite -->
-        </div>
-    </div>
-
-    <!-- Corps du Calculateur -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-      <!-- Colonne Paramètres & Diagnostic Repos -->
-      <div class="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
-        <div>
-          <label id="lbl-age" class="text-xs font-bold text-slate-700 block mb-1">Âge (années)</label>
-          <input id="inp-age" type="number" value="28" min="10" max="90" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold tabular-nums" />
-        </div>
-
-        <div>
-          <label id="lbl-rest" class="text-xs font-bold text-slate-700 block mb-1">FC de Repos au réveil (bpm)</label>
-          <input id="inp-rest" type="number" value="54" min="32" max="110" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold tabular-nums" />
-        </div>
-
-        <div>
-          <label id="lbl-formula" class="text-xs font-bold text-slate-700 block mb-1">Formule de FC Maximale</label>
-          <select id="inp-formula" onchange="toggleCustomMax(); computeTool();" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs font-semibold">
-            <option value="tanaka" selected>Tanaka (208 − 0.7 × Âge) — Recommandé</option>
-            <option value="gellish">Gellish (207 − 0.7 × Âge)</option>
-            <option value="astrand">Astrand (220 − Âge)</option>
-            <option value="custom">FC Max mesurée sur le terrain</option>
-          </select>
-        </div>
-
-        <div id="custom-max-wrap" class="hidden">
-          <label id="lbl-custom" class="text-xs font-bold text-slate-700 block mb-1">FC Max mesurée (bpm)</label>
-          <input id="inp-custom" type="number" value="192" min="130" max="230" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold tabular-nums" />
-        </div>
-
-        <div class="grid grid-cols-2 gap-3 text-center pt-2">
-          <div class="p-3.5 bg-blue-50 border border-blue-200 rounded-xl">
-            <div id="lbl-res-max" class="text-[11px] font-bold text-blue-800">FC Maximale</div>
-            <div id="out-fcmax" dir="ltr" class="text-2xl font-black font-mono text-blue-700 tabular-nums mt-1">--</div>
-          </div>
-          <div class="p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl">
-            <div id="lbl-res-hrr" class="text-[11px] font-bold text-emerald-800">FC Réserve (Karvonen)</div>
-            <div id="out-hrr" dir="ltr" class="text-2xl font-black font-mono text-emerald-700 tabular-nums mt-1">--</div>
-          </div>
-        </div>
-
-        <!-- Boîte d'interprétation de la FC de Repos -->
-        <div id="out-rest-diag" class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 leading-relaxed"></div>
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-6">
+    <div class="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-5">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3.5">
+        <h2 class="text-base font-extrabold text-slate-900 uppercase tracking-wider" data-i18n-fr="1. Vos Paramètres Cardiaques" data-i18n-en="1. Your Heart Rate Parameters" data-i18n-ar="1. معطيات نبضات القلب">1. Vos Paramètres Cardiaques</h2>
+        <span class="text-xs font-bold px-3 py-1 rounded-full bg-red-50 text-red-700 border border-red-200">Karvonen · BPM</span>
       </div>
 
-      <!-- Colonne des 5 Zones Cardiaques & Interprétation -->
-      <div class="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
-        <h2 id="ui-zones-title" class="text-base font-bold text-slate-900">Les 5 Zones Cardiaques (Karvonen) & Interprétation Physiologique</h2>
-        <div id="zones-container" class="space-y-3"></div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Âge (années)" data-i18n-en="Age (years)" data-i18n-ar="العمر (بالسنوات)">Âge (années)</label>
+          <input id="inp-age" type="number" value="28" min="10" max="90" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-base font-mono font-bold" />
+        </div>
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="FC de Repos au réveil (bpm)" data-i18n-en="Morning Resting HR (bpm)" data-i18n-ar="نبض القلب في الراحة صباحاً (bpm)">FC de Repos au réveil (bpm)</label>
+          <input id="inp-rest" type="number" value="54" min="32" max="110" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-base font-mono font-bold" />
+        </div>
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="FC Max Réelle (optionnel, bpm)" data-i18n-en="Measured Max HR (optional, bpm)" data-i18n-ar="أقصى نبض مقاس ميدانياً (اختياري)">FC Max Réelle (optionnel, bpm)</label>
+          <input id="inp-fcmax-custom" type="number" placeholder="Auto (Tanaka)" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-base font-mono font-bold" />
+        </div>
+      </div>
+
+      <button type="button" id="btn-calc-main" onclick="triggerCalculation()" class="peps-cta-btn">
+        <span>❤️</span>
+        <span data-i18n-fr="Calculer mes Zones Cardiaques Karvonen & mon Diagnostic" data-i18n-en="Calculate My Karvonen Heart Rate Zones & Diagnosis" data-i18n-ar="احسب مناطق نبضات القلب (Karvonen) والتشخيص الفيزيولوجي">Calculer mes Zones Cardiaques Karvonen & mon Diagnostic</span>
+      </button>
+    </div>
+
+    <div id="tool-results-panel" class="hidden space-y-6">
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+        <h3 class="text-base font-extrabold text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-3" data-i18n-fr="2. Vos Indicateurs Cardiaques & Interprétation Individuelle" data-i18n-en="2. Your Cardiac Metrics & Individual Interpretation" data-i18n-ar="2. مؤشرات القلب وتفسير كل رقم">2. Vos Indicateurs Cardiaques & Interprétation Individuelle</h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+          <div class="p-4 bg-red-50 border border-red-200 rounded-2xl space-y-1">
+            <div class="text-xs font-extrabold uppercase text-red-900" data-i18n-fr="FC Maximale (Plafond)" data-i18n-en="Max Heart Rate (Ceiling)" data-i18n-ar="أقصى نبض للقلب (FC Max)">FC Maximale (Plafond)</div>
+            <div id="out-fcmax" dir="ltr" class="text-3xl font-black font-mono text-red-700 tabular-nums">--</div>
+            <div id="out-fcmax-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 border border-red-100"></div>
+          </div>
+          <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl space-y-1">
+            <div class="text-xs font-extrabold uppercase text-emerald-900" data-i18n-fr="FC de Réserve (Karvonen)" data-i18n-en="Heart Rate Reserve (HRR)" data-i18n-ar="احتياطي نبض القلب (HRR)">FC de Réserve (Karvonen)</div>
+            <div id="out-hrr" dir="ltr" class="text-3xl font-black font-mono text-emerald-700 tabular-nums">--</div>
+            <div id="out-hrr-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 border border-emerald-100"></div>
+          </div>
+          <div class="p-4 bg-blue-50 border border-blue-200 rounded-2xl space-y-1">
+            <div class="text-xs font-extrabold uppercase text-blue-900" data-i18n-fr="FC de Repos & Tonus Vagal" data-i18n-en="Resting HR & Vagal Tone" data-i18n-ar="نبض الراحة والكفاءة القلبية">FC de Repos & Tonus Vagal</div>
+            <div id="out-rest-val" dir="ltr" class="text-3xl font-black font-mono text-blue-700 tabular-nums">--</div>
+            <div id="out-rest-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 border border-blue-100"></div>
+          </div>
+        </div>
+
+        <div id="out-rest-diag" class="p-5 bg-slate-50 border-l-4 border-emerald-600 rounded-xl text-xs sm:text-sm text-slate-700 leading-relaxed space-y-2"></div>
+
+        <div>
+          <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-800 mb-3" data-i18n-fr="Vos 5 Zones d'Entraînement Cardiaque (Formule Karvonen : FCR × % + FC Repos)" data-i18n-en="Your 5 Karvonen Heart Rate Zones (HRR × % + Resting HR)" data-i18n-ar="مناطق التدريب الخمس حسب طريقة كارفونين (HRR × % + نبض الراحة)">Vos 5 Zones d'Entraînement Cardiaque (Formule Karvonen : FCR × % + FC Repos)</h4>
+          <div id="zones-container" class="space-y-2.5"></div>
+        </div>
       </div>
     </div>
   </main>
 
-    <footer class="footer" id="profeps-unified-footer">
-    <div class="footer-container">
-      <div class="footer-grid">
-        <div class="footer-brand" style="display:flex !important;flex-direction:column !important;align-items:flex-start !important;">
-          <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:48px !important;max-height:48px !important;width:auto !important;max-width:155px !important;object-fit:contain !important;align-self:flex-start !important;filter:none !important;border-radius:8px !important;margin:0 0 0.9rem 0 !important;display:block !important;">
-          <p data-i18n-fr="La plateforme de référence pour les professeurs d'EPS au Maroc. Générateur de documents pédagogiques gratuit, conforme aux orientations pédagogiques officielles (MEN)." data-i18n-en="The reference platform for PE teachers in Morocco. Free educational document generator & sports science calculators aligned with official MEN guidelines." data-i18n-ar="المنصة المرجعية لأساتذة التربية البدنية بالمغرب. مولد وثائق تربوية مجاني وحاسبات علمية للرياضة وفق التوجيهات التربوية الرسمية.">La plateforme de référence pour les professeurs d'EPS au Maroc. Générateur de documents pédagogiques gratuit, conforme aux orientations pédagogiques officielles (MEN).</p>
-          <div class="footer-stats">
-            <div class="footer-stat-item">
-              <span class="footer-stat-num">16+</span>
-              <span class="footer-stat-lbl" data-i18n-fr="APS couvertes" data-i18n-en="Sports covered" data-i18n-ar="نشاط رياضي">APS couvertes</span>
-            </div>
-            <div class="footer-stat-item">
-              <span class="footer-stat-num">6</span>
-              <span class="footer-stat-lbl" data-i18n-fr="Niveaux scolaires" data-i18n-en="School levels" data-i18n-ar="مستويات دراسية">Niveaux scolaires</span>
-            </div>
-            <div class="footer-stat-item">
-              <span class="footer-stat-num">100%</span>
-              <span class="footer-stat-lbl" data-i18n-fr="Gratuit" data-i18n-en="Free" data-i18n-ar="مجاني">Gratuit</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="footer-col">
-          <h4 data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</h4>
-          <ul>
-            <li><a href="index.html" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a></li>
-            <li><a href="generateur.html" data-i18n-fr="Générateur PDF" data-i18n-en="PDF Generator" data-i18n-ar="مولد ملفات PDF">Générateur PDF</a></li>
-            <li><a href="blog.html" data-i18n-fr="Articles &amp; Blog" data-i18n-en="Articles &amp; Blog" data-i18n-ar="المقالات والمدونة">Articles &amp; Blog</a></li>
-            <li><a href="a-propos.html" data-i18n-fr="À propos" data-i18n-en="About Us" data-i18n-ar="من نحن">À propos</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4 data-i18n-fr="RESSOURCES EPS" data-i18n-en="PE RESOURCES" data-i18n-ar="موارد التربية البدنية">RESSOURCES EPS</h4>
-          <ul>
-            <li><a href="cycles-eps-maroc.html" data-i18n-fr="Cycles d'EPS au Maroc" data-i18n-en="PE Cycles in Morocco" data-i18n-ar="أسلاك التربية البدنية بالمغرب">Cycles d'EPS au Maroc</a></li>
-            <li><a href="programme-eps-maroc.html" data-i18n-fr="Programme EPS Maroc" data-i18n-en="Morocco PE Curriculum" data-i18n-ar="برنامج التربية البدنية بالمغرب">Programme EPS Maroc</a></li>
-            <li><a href="evaluation-eps.html" data-i18n-fr="Évaluation en EPS" data-i18n-en="PE Assessment" data-i18n-ar="التقويم في التربية البدنية">Évaluation en EPS</a></li>
-            <li><a href="securite-eps.html" data-i18n-fr="Sécurité en EPS" data-i18n-en="Safety in PE" data-i18n-ar="السلامة في التربية البدنية">Sécurité en EPS</a></li>
-            <li><a href="bibliotheque-numerique-eps.html" data-i18n-fr="Bibliothèque numérique" data-i18n-en="Digital Library" data-i18n-ar="المكتبة الرقمية">Bibliothèque numérique</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col" id="footer-col-calculators">
-          <h4 data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</h4>
-          <ul>
-            <li><a href="hub-outils-sport-performance.html" class="footer-hub-highlight" data-i18n-fr="★ Hub des Calculateurs Sport" data-i18n-en="★ All Sports Calculators Hub" data-i18n-ar="★ بوابة جميع الحاسبات الرياضية">★ Hub des Calculateurs Sport</a></li>
-            <li><a href="calculateur-vma.html" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS (VMA) Calculator" data-i18n-ar="حاسبة السرعة الهوائية VMA">Calculateur VMA</a></li>
-            <li><a href="calculateur-vdot-asr-endurance.html" data-i18n-fr="Calculateur VO2 Max &amp; VDOT" data-i18n-en="VO2 Max &amp; VDOT Calculator" data-i18n-ar="حاسبة VO2 Max و VDOT">Calculateur VO2 Max &amp; VDOT</a></li>
-            <li><a href="calculateur-asr-reserve-vitesse.html" data-i18n-fr="Réserve Anaérobie (ASR)" data-i18n-en="Anaerobic Speed Reserve (ASR)" data-i18n-ar="احتياطي السرعة اللاهوائية ASR">Réserve Anaérobie (ASR)</a></li>
-            <li><a href="calculateur-indice-endurance.html" data-i18n-fr="Indice d'Endurance (IE)" data-i18n-en="Endurance Index (Péronnet)" data-i18n-ar="مؤشر التحمل (IE)">Indice d'Endurance (IE)</a></li>
-            <li><a href="calculateur-frequence-cardiaque-karvonen.html" data-i18n-fr="Fréquence Cardiaque Karvonen" data-i18n-en="Heart Rate (Karvonen)" data-i18n-ar="نبضات القلب Karvonen">Fréquence Cardiaque Karvonen</a></li>
-            <li><a href="calculateur-imc-sportif-masse-grasse.html" data-i18n-fr="Calculateur IMC &amp; IMG Sport" data-i18n-en="Athletic BMI &amp; Body Fat" data-i18n-ar="حاسبة كتلة الجسم والدهون">Calculateur IMC &amp; IMG Sport</a></li>
-            <li><a href="calculateur-chaleur-meteo-altitude.html" data-i18n-fr="Chaleur, Humidité &amp; Altitude" data-i18n-en="Heat, Humidity &amp; Altitude" data-i18n-ar="الحرارة والرطوبة والارتفاع">Chaleur, Humidité &amp; Altitude</a></li>
-            <li><a href="calculateur-gap-pente-nutrition.html" data-i18n-fr="Allure Pente (GAP) &amp; Nutrition" data-i18n-en="Grade Pace (GAP) &amp; Nutrition" data-i18n-ar="إيقاع المنحدرات والتغذية">Allure Pente (GAP) &amp; Nutrition</a></li>
-            <li><a href="generateur-intermittent-hiit-cod.html" data-i18n-fr="Intermittent HIIT &amp; COD 180°" data-i18n-en="HIIT Intermittent &amp; 180° COD" data-i18n-ar="التدريب المتقطع HIIT و COD">Intermittent HIIT &amp; COD 180°</a></li>
-            <li><a href="calculateur-charge-rpe-foster-acwr.html" data-i18n-fr="Charge RPE Foster &amp; ACWR" data-i18n-en="Foster RPE Load &amp; ACWR" data-i18n-ar="حمل التدريب RPE و ACWR">Charge RPE Foster &amp; ACWR</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4 data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</h4>
-          <ul>
-            <li><a href="politique-confidentialite.html" data-i18n-fr="Politique de confidentialité" data-i18n-en="Privacy Policy" data-i18n-ar="سياسة الخصوصية">Politique de confidentialité</a></li>
-            <li><a href="cgu.html" data-i18n-fr="Conditions d'utilisation" data-i18n-en="Terms of Use" data-i18n-ar="شروط الاستخدام">Conditions d'utilisation</a></li>
-            <li><a href="contact.html" data-i18n-fr="Nous contacter" data-i18n-en="Contact Us" data-i18n-ar="اتصل بنا">Nous contacter</a></li>
-            <li><a href="mailto:profepsma@gmail.com">✉️ profepsma@gmail.com</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <p>' + diagText + '</p>';
-
-      document.getElementById('zones-container').innerHTML = ZONES_DATA.map(z => {
-        const zMin = Math.round(rest + (hrr * z.min) / 100);
-        const zMax = Math.round(rest + (hrr * z.max) / 100);
-        const pctMin = Math.round((zMin / fcMax) * 100);
-        const pctMax = Math.round((zMax / fcMax) * 100);
-        const loc = z[currentLang];
-        return '<div class="p-4 rounded-xl border ' + z.cls + ' flex flex-col sm:flex-row sm:items-center justify-between gap-3">' +
-          '<div class="space-y-1 max-w-lg">' +
-            '<div class="flex items-center gap-2">' +
-              '<span class="text-xs font-black px-2 py-0.5 bg-white/80 rounded border border-slate-300">' + z.code + ' (' + z.min + '–' + z.max + '% FCR)</span>' +
-              '<span class="text-sm font-bold">' + loc.name + '</span>' +
-            '</div>' +
-            '<p class="text-xs opacity-90">' + loc.eff + '</p>' +
-            '<div class="text-[11px] font-semibold opacity-75">' + loc.sub + '</div>' +
-          '</div>' +
-          '<div dir="ltr" class="text-right bg-white/90 px-3.5 py-2 rounded-lg border border-slate-200 shrink-0">' +
-            '<div class="text-lg font-black font-mono tabular-nums">' + zMin + ' – ' + zMax + ' <span class="text-xs font-normal">bpm</span></div>' +
-            '<div class="text-[11px] font-mono text-slate-500">(' + pctMin + '–' + pctMax + '% FCmax)</div>' +
-          '</div>' +
-        '</div>';
-      }).join('');
-    }
-
-    window.addEventListener('DOMContentLoaded', () => setToolLang('fr'));
-  </script>
-
-
-
-<footer class="footer" id="profeps-unified-footer">
+  <footer class="footer" id="profeps-unified-footer">
     <div class="footer-container">
       <div class="footer-grid">
         <div class="footer-brand" style="display:flex !important;flex-direction:column !important;align-items:flex-start !important;">
@@ -1053,9 +923,104 @@ footer.footer, #profeps-unified-footer {
       </div>
     </div>
   </footer>
+
+  <script id="profeps-tool-engine-js">
+    var currentLang = 'fr';
+    var hasCalculated = false;
+
+    function setToolLang(lang) {
+      currentLang = lang;
+      var root = document.getElementById('html-root');
+      if (root) {
+        root.lang = lang;
+        root.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+      }
+      document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function(el) {
+        var val = el.getAttribute('data-i18n-' + lang);
+        if (val) el.textContent = val;
+      });
+      if (typeof applyToolTranslations === 'function') applyToolTranslations(lang);
+      if (hasCalculated && typeof computeTool === 'function') computeTool();
+    }
+
+    function triggerCalculation() {
+      hasCalculated = true;
+      var panel = document.getElementById('tool-results-panel');
+      if (panel) {
+        panel.classList.remove('hidden');
+        panel.classList.remove('peps-results-reveal');
+        void panel.offsetWidth;
+        panel.classList.add('peps-results-reveal');
+      }
+      if (typeof computeTool === 'function') computeTool();
+      if (panel && window.innerWidth < 768) {
+        setTimeout(function() {
+          panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 80);
+      }
+    }
+
+    function onInputUpdated() {
+      if (hasCalculated && typeof computeTool === 'function') {
+        computeTool();
+      }
+    }
+
+    function computeTool() {
+      var age = parseFloat(document.getElementById('inp-age').value) || 28;
+      var rest = parseFloat(document.getElementById('inp-rest').value) || 54;
+      var customMax = parseFloat(document.getElementById('inp-fcmax-custom').value);
+      var fcMax = (customMax && customMax > 120) ? Math.round(customMax) : Math.round(208 - 0.7 * age);
+      var hrr = Math.max(40, fcMax - rest);
+
+      document.getElementById('out-fcmax').textContent = fcMax + ' bpm';
+      document.getElementById('out-hrr').textContent = hrr + ' bpm';
+      document.getElementById('out-rest-val').textContent = rest + ' bpm';
+
+      var restBadgeFr = rest < 52 ? 'Bradycardie sportive (Athlète endurant)' : rest <= 65 ? 'Tonus vagal actif & sain' : 'Marge d’amélioration aérobie';
+      var restBadgeEn = rest < 52 ? 'Athletic bradycardia (Endurance trained)' : rest <= 65 ? 'Healthy active vagal tone' : 'Room for aerobic conditioning';
+      var restBadgeAr = rest < 52 ? 'نبض رياضي منخفض ممتاز (تحمل عالٍ)' : rest <= 65 ? 'نبض راحة صحي ونشط' : 'قابل للتحسن عبر تمارين التحمل';
+
+      if (currentLang === 'fr') {
+        document.getElementById('out-fcmax-meaning').textContent = customMax ? 'Valeur mesurée sur le terrain' : 'Formule scientifique Tanaka (208 − 0,7 × âge)';
+        document.getElementById('out-hrr-meaning').textContent = 'Amplitude cardiaque utile (FC Max − FC Repos)';
+        document.getElementById('out-rest-meaning').textContent = restBadgeFr;
+      } else if (currentLang === 'en') {
+        document.getElementById('out-fcmax-meaning').textContent = customMax ? 'Field-measured value' : 'Tanaka equation (208 − 0.7 × age)';
+        document.getElementById('out-hrr-meaning').textContent = 'Usable cardiac range (Max HR − Rest HR)';
+        document.getElementById('out-rest-meaning').textContent = restBadgeEn;
+      } else {
+        document.getElementById('out-fcmax-meaning').textContent = customMax ? 'قيمة مقاسة ميدانياً' : 'معادلة تاناكا الدقيقة (208 − 0.7 × العمر)';
+        document.getElementById('out-hrr-meaning').textContent = 'المدى القلبي المتاح للمجهود (الأقصى − الراحة)';
+        document.getElementById('out-rest-meaning').textContent = restBadgeAr;
+      }
+
+      var diag = document.getElementById('out-rest-diag');
+      var z2Min = Math.round(rest + hrr * 0.60), z2Max = Math.round(rest + hrr * 0.70);
+      var z4Min = Math.round(rest + hrr * 0.80), z4Max = Math.round(rest + hrr * 0.90);
+      if (currentLang === 'fr') {
+        diag.innerHTML = '<p><strong>📊 Pourquoi la méthode de Karvonen est supérieure au % FC Max classique :</strong> En intégrant votre réserve cardiaque (<strong>' + hrr + ' bpm</strong>), Karvonen aligne vos zones sur votre véritable consommation d’oxygène (% VO2 Max).</p><p><strong>🏃‍♂️ Conseils EPS & Entraînement :</strong> Effectuez vos footings de récupération et d’endurance fondamentale entre <strong>' + z2Min + ' et ' + z2Max + ' bpm (Zone 2)</strong> pour stimuler le volume d’éjection systolique sans fatigue nerveuse, et ciblez <strong>' + z4Min + ' à ' + z4Max + ' bpm (Zone 4)</strong> lors de vos blocs au seuil anaérobie.</p>';
+      } else if (currentLang === 'en') {
+        diag.innerHTML = '<p><strong>📊 Why Karvonen HR Reserve beats simple % Max HR:</strong> By factoring in your <strong>' + hrr + ' bpm</strong> Heart Rate Reserve, Karvonen zones match your actual % VO2 Reserve.</p><p><strong>🏃‍♂️ Coaching & PE Advice:</strong> Keep base aerobic runs inside <strong>' + z2Min + '–' + z2Max + ' bpm (Zone 2)</strong> to maximize stroke volume, and target <strong>' + z4Min + '–' + z4Max + ' bpm (Zone 4)</strong> for threshold intervals.</p>';
+      } else {
+        diag.innerHTML = '<p><strong>📊 لماذا تعتبر طريقة كارفونين أدق علمياً؟</strong> لأنها تعتمد على احتياطي النبض (<strong>' + hrr + ' نبضة/دقيقة</strong>) مما يطابق نسبة استهلاك الأكسجين الفعلية.</p><p><strong>🏃‍♂️ نصيحة التدريب والتربية البدنية:</strong> حافظ على الجري الأساسي بين <strong>' + z2Min + ' و ' + z2Max + ' نبضة/دقيقة (المنطقة 2)</strong>، واستهدف <strong>' + z4Min + ' إلى ' + z4Max + ' نبضة/دقيقة (المنطقة 4)</strong> لتطوير العتبة اللاهوائية.</p>';
+      }
+
+      var zones = [
+        { z: 'Z1 (50–60% FCR)', min: 0.5, max: 0.6, fr: 'Récupération Active & Échauffement', subFr: 'Élimination des déchets métaboliques, footing très souple', en: 'Active Recovery & Warm-Up', subEn: 'Metabolic recovery & blood flow', ar: 'الاستشفاء النشط والإحماء', subAr: 'إزالة الفضلات الاستقلابية واسترجاع الطراوة', cls: 'bg-slate-100 text-slate-800 border-slate-300' },
+        { z: 'Z2 (60–70% FCR)', min: 0.6, max: 0.7, fr: 'Endurance Fondamentale & Lipolyse (SV1)', subFr: 'Oxydation maximale des graisses, base aérobie (conversations aisées)', en: 'Aerobic Base & Fat Oxidation (VT1)', subEn: 'Mitochondrial density & fat metabolism', ar: 'التحمل الأساسي وأكسدة الدهون (SV1)', subAr: 'تطوير القاعدة الهوائية وحرق الدهون', cls: 'bg-emerald-50 text-emerald-800 border-emerald-200' },
+        { z: 'Z3 (70–80% FCR)', min: 0.7, max: 0.8, fr: 'Endurance Active / Allure Tempo & Marathon', subFr: 'Développement du glycogène musculaire et efficacité cardiaque', en: 'Tempo / Aerobic Power & Marathon Pace', subEn: 'Sustained aerobic pace & glycogen efficiency', ar: 'التحمل النشط / إيقاع الماراثون (Tempo)', subAr: 'تحمل السرعة المتوسطة وكفاءة عضلة القلب', cls: 'bg-blue-50 text-blue-800 border-blue-200' },
+        { z: 'Z4 (80–90% FCR)', min: 0.8, max: 0.9, fr: 'Seuil Anaérobie Lactique (SV2 / Allure 10 km)', subFr: 'Élévation du seuil de tolérance aux ions H+ et au lactate', en: 'Lactate Threshold (VT2 / 10K Pace)', subEn: 'Raises anaerobic threshold & lactate clearance', ar: 'العتبة اللاهوائية (SV2 / إيقاع 10 كم)', subAr: 'رفع قدرة العضلات على تحمل وتصريف اللاكتات', cls: 'bg-amber-50 text-amber-900 border-amber-200' },
+        { z: 'Z5 (90–100% FCR)', min: 0.9, max: 1.0, fr: 'Puissance Aérobie Maximale (VO2 Max / VMA)', subFr: 'Effort maximal par intervalles courts (30"/30" à 3 min)', en: 'Maximal Aerobic Power (VO2 Max / MAS)', subEn: 'High-intensity intervals (30s to 3 min)', ar: 'القوة الهوائية القصوى (VO2 Max / VMA)', subAr: 'تمارين متقطعة عالية الشدة لتطوير السقف الهوائي', cls: 'bg-red-50 text-red-800 border-red-200' }
+      ];
+      document.getElementById('zones-container').innerHTML = zones.map(function(item) {
+        var zMin = Math.round(rest + hrr * item.min);
+        var zMax = Math.round(rest + hrr * item.max);
+        var label = currentLang === 'fr' ? item.fr : currentLang === 'en' ? item.en : item.ar;
+        var sub = currentLang === 'fr' ? item.subFr : currentLang === 'en' ? item.subEn : item.subAr;
+        return '<div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-2"><div><div class="text-xs font-extrabold text-slate-900">' + item.z + ' · ' + label + '</div><div class="text-[11px] text-slate-600">' + sub + '</div></div><strong dir="ltr" class="font-mono text-sm font-black px-3 py-1.5 rounded-lg border shrink-0 ' + item.cls + '">' + zMin + ' – ' + zMax + ' bpm</strong></div>';
+      }).join('');
+    }
+  </script>
 </body>
 </html>
-
-
-
-

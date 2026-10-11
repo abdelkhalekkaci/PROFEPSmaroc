@@ -3,66 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calculateur IMC Sportif, Masse Grasse (IMG) & Interprétation Athlète | ProfEPS.ma</title>
-  <meta name="description" content="Calculez votre Indice de Masse Corporelle (IMC), votre taux de masse grasse (IMG) et votre masse maigre avec double interprétation OMS et Performance Sportive." />
+  <title>Calculateur d’IMC Sportif, Masse Grasse (IMG) & Interprétation Complète | Prof EPS</title>
+  <meta name="description" id="metaDesc" content="Renseignez vos mensurations et votre volume d’entraînement puis cliquez sur Calculer pour obtenir votre IMC, votre taux de masse grasse athlétique et votre masse maigre interprétés." />
+  <meta name="keywords" content="calculateur imc sportif, indice masse grasse img, calculer masse maigre sportif, poids de forme course à pied, imc homme femme sportif" />
   <link rel="canonical" href="https://profeps.ma/calculateur-imc-sportif-masse-grasse.html" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: #F8FAFC; color: #0F172A; }
-    .tabular-nums { font-variant-numeric: tabular-nums; }
-  </style>
-  <link rel="icon" type="image/png" href="/images/prof_eps.png" />
+  <link rel="icon" type="image/png" href="images/prof_eps.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
-  <style id="profeps-unified-theme">
-    :root {
-      --primary: #c1272d;
-      --primary-dark: #a01f24;
-      --secondary: #006233;
-      --secondary-dark: #004d28;
-      --text-primary: #0f172a;
-      --text-secondary: #334155;
-      --text-light: #64748b;
-      --border: #e2e8f0;
-      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-display: 'Plus Jakarta Sans', var(--font-sans);
-    }
-    body { font-family: var(--font-sans) !important; background: #f8fafc !important; color: var(--text-primary) !important; padding-top: 82px !important; }
-    .navbar { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 1000 !important; padding: 0.85rem 2rem !important; background: rgba(255,255,255,0.96) !important; backdrop-filter: blur(20px) !important; border-bottom: 1px solid rgba(226,232,240,0.7) !important; }
-    .nav-container { max-width: 1400px !important; margin: 0 auto !important; display: grid !important; grid-template-columns: 1fr auto 1fr !important; align-items: center !important; }
-    .nav-logo { justify-self: start !important; display: flex !important; align-items: center !important; }
-    .nav-logo img { height: 52px !important; width: auto !important; object-fit: contain !important; }
-    .nav-menu { display: flex !important; align-items: center !important; justify-content: center !important; gap: 1.5rem !important; }
-    .nav-right { justify-self: end !important; display: flex !important; align-items: center !important; gap: 0.65rem !important; }
-    .nav-link { font-size: 0.92rem !important; font-weight: 600 !important; color: #1a1a2e !important; padding: 0.45rem 0.65rem !important; position: relative !important; text-decoration: none !important; }
-    .nav-link::after { content: '' !important; position: absolute !important; bottom: -2px !important; left: 50% !important; right: 50% !important; height: 3px !important; background: linear-gradient(90deg, #c1272d, #006233) !important; border-radius: 2px !important; transition: left 0.3s ease, right 0.3s ease !important; }
-    .nav-link:hover::after, .nav-link.active::after { left: 0.4rem !important; right: 0.4rem !important; }
-    .nav-link:hover, .nav-link.active { color: #c1272d !important; }
-    .lang-switch { display: inline-flex; align-items: center; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 9999px; padding: 2px; }
-    .lang-btn { background: none; border: none; cursor: pointer; padding: 4px 8px; font-size: 0.75rem; font-weight: 700; color: #64748b; border-radius: 9999px; transition: all 0.2s ease; }
-    .lang-btn.active { background: white; color: #0f172a; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
-    .lang-btn:hover:not(.active) { color: #c1272d; }
-    .lang-sep { font-size: 0.75rem; color: #cbd5e1; user-select: none; }
-    .nav-cta { display: inline-flex !important; align-items: center !important; gap: 0.4rem !important; padding: 0.48rem 1.15rem !important; background: linear-gradient(135deg, #c1272d, #006233) !important; color: white !important; font-weight: 600 !important; font-size: 0.88rem !important; border-radius: 9999px !important; box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important; text-decoration: none !important; white-space: nowrap !important; }
-    #ui-badge { display: inline-flex; align-items: center; background: rgba(193,39,45,0.08) !important; color: #c1272d !important; padding: 0.28rem 0.85rem !important; border-radius: 9999px !important; border: 1px solid rgba(193,39,45,0.18) !important; }
-    .profeps-footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important; color: white !important; padding: 3rem 1.5rem 0 !important; margin-top: 3.5rem !important; text-align: left !important; }
-    .profeps-footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.25rem; padding-bottom: 2.25rem; }
-    .profeps-footer-brand img { height: 42px; filter: brightness(0) invert(1); margin-bottom: 0.75rem; }
-    .profeps-footer-brand p { color: rgba(255,255,255,0.65); font-size: 0.84rem; line-height: 1.6; }
-    .profeps-footer-col h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.45); margin-bottom: 0.9rem; }
-    .profeps-footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
-    .profeps-footer-col ul li a { color: rgba(255,255,255,0.72); font-size: 0.84rem; text-decoration: none; }
-    .profeps-footer-col ul li a:hover { color: white; }
-    .profeps-footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.25rem 0; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; color: rgba(255,255,255,0.45); font-size: 0.8rem; flex-wrap: wrap; gap: 0.5rem; }
-    @media (max-width: 868px) { .nav-container { display: flex !important; justify-content: space-between !important; } .nav-menu { display: none !important; } .profeps-footer-inner { grid-template-columns: 1fr 1fr; } }
-  </style>
-  
-
-
-
-
-<style id="profeps-master-unifier-css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style id="profeps-master-unifier-css">
 /* ═══ 1. NAVBAR FIXE ISOLÉE (.peps-*) — 80PX VERROUILLÉ SUR TOUTES LES PAGES ═══ */
 html {
   overflow-y: scroll !important;
@@ -423,7 +373,7 @@ button.lang-btn:not(.peps-lang-btn) {
   border-radius: 2px !important;
 }
 
-/* ═══ 4. FOOTER UNIFIÉ À 5 COLONNES SANS DOUBLONS ═══ */
+/* ═══ 4. FOOTER UNIFIÉ À 5 COLONNES SANS DOUBLONS (BLINDÉ CONTRE TAILWIND CDN) ═══ */
 footer.footer, #profeps-unified-footer {
   background: linear-gradient(135deg, #15192b 0%, #162038 100%) !important;
   color: #ffffff !important;
@@ -432,27 +382,35 @@ footer.footer, #profeps-unified-footer {
   border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   box-sizing: border-box !important;
+  width: 100% !important;
+  display: block !important;
 }
-.footer .footer-container, .footer .footer-inner {
+#profeps-unified-footer .footer-container,
+footer.footer .footer-container,
+.footer .footer-inner {
   max-width: 1360px !important;
   margin: 0 auto !important;
   padding: 0 !important;
+  box-sizing: border-box !important;
 }
-.footer .footer-grid {
+#profeps-unified-footer .footer-grid,
+footer.footer .footer-grid {
   display: grid !important;
   grid-template-columns: 1.65fr 0.9fr 1.1fr 1.45fr 1fr !important;
   gap: 2.25rem !important;
   padding-bottom: 2.75rem !important;
   align-items: start !important;
 }
-.footer .footer-brand {
+#profeps-unified-footer .footer-brand,
+footer.footer .footer-brand {
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-start !important;
 }
-.footer .footer-brand img {
-  height: 48px !important;
-  max-height: 48px !important;
+#profeps-unified-footer .footer-brand img,
+footer.footer .footer-brand img {
+  height: 46px !important;
+  max-height: 46px !important;
   width: auto !important;
   max-width: 155px !important;
   object-fit: contain !important;
@@ -463,41 +421,50 @@ footer.footer, #profeps-unified-footer {
   padding: 0 !important;
   display: block !important;
 }
-.footer .footer-brand p {
+#profeps-unified-footer .footer-brand p,
+footer.footer .footer-brand p {
   color: rgba(255, 255, 255, 0.72) !important;
   font-size: 0.84rem !important;
   line-height: 1.65 !important;
   margin: 0 0 1.25rem 0 !important;
 }
-.footer .footer-stats {
+#profeps-unified-footer .footer-stats,
+footer.footer .footer-stats {
   display: flex !important;
   align-items: center !important;
   gap: 1.25rem !important;
   flex-wrap: wrap !important;
   padding-top: 0.5rem !important;
 }
-.footer .footer-stat-item {
+#profeps-unified-footer .footer-stat-item,
+footer.footer .footer-stat-item {
   display: flex !important;
   flex-direction: column !important;
 }
-.footer .footer-stat-num {
+#profeps-unified-footer .footer-stat-num,
+footer.footer .footer-stat-num {
   font-size: 1.05rem !important;
   font-weight: 800 !important;
   color: #ffffff !important;
+  line-height: 1.2 !important;
 }
-.footer .footer-stat-lbl {
+#profeps-unified-footer .footer-stat-lbl,
+footer.footer .footer-stat-lbl {
   font-size: 0.7rem !important;
   color: rgba(255, 255, 255, 0.55) !important;
 }
-.footer .footer-col h4 {
+#profeps-unified-footer .footer-col h4,
+footer.footer .footer-col h4 {
   font-size: 0.76rem !important;
   font-weight: 800 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.08em !important;
   color: rgba(255, 255, 255, 0.48) !important;
   margin: 0 0 1rem 0 !important;
+  line-height: 1.3 !important;
 }
-.footer .footer-col ul {
+#profeps-unified-footer .footer-col ul,
+footer.footer .footer-col ul {
   list-style: none !important;
   padding: 0 !important;
   margin: 0 !important;
@@ -505,11 +472,13 @@ footer.footer, #profeps-unified-footer {
   flex-direction: column !important;
   gap: 0.52rem !important;
 }
-.footer .footer-col ul li {
+#profeps-unified-footer .footer-col ul li,
+footer.footer .footer-col ul li {
   margin: 0 !important;
   padding: 0 !important;
 }
-.footer .footer-col ul li a {
+#profeps-unified-footer .footer-col ul li a,
+footer.footer .footer-col ul li a {
   color: rgba(255, 255, 255, 0.76) !important;
   font-size: 0.83rem !important;
   font-weight: 500 !important;
@@ -518,18 +487,22 @@ footer.footer, #profeps-unified-footer {
   display: inline-block !important;
   line-height: 1.35 !important;
 }
-.footer .footer-col ul li a:hover {
+#profeps-unified-footer .footer-col ul li a:hover,
+footer.footer .footer-col ul li a:hover {
   color: #ffffff !important;
   transform: translateX(2px) !important;
 }
-.footer .footer-col ul li a.footer-hub-highlight {
+#profeps-unified-footer .footer-col ul li a.footer-hub-highlight,
+footer.footer .footer-col ul li a.footer-hub-highlight {
   color: #4ade80 !important;
   font-weight: 800 !important;
 }
-.footer .footer-col ul li a.footer-hub-highlight:hover {
+#profeps-unified-footer .footer-col ul li a.footer-hub-highlight:hover,
+footer.footer .footer-col ul li a.footer-hub-highlight:hover {
   color: #86efac !important;
 }
-.footer .footer-bottom {
+#profeps-unified-footer .footer-bottom,
+footer.footer .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.09) !important;
   padding: 1.25rem 0 !important;
   display: flex !important;
@@ -598,7 +571,7 @@ footer.footer, #profeps-unified-footer {
 }
 </style>
 </head>
-<body class="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+<body class="min-h-screen flex flex-col">
 <!-- PROFEPS_UNIFIED_NAVBAR_START -->
   <nav id="navbar" class="navbar navbar-decoy" style="display:none !important;visibility:hidden !important;opacity:0 !important;width:0 !important;height:0 !important;overflow:hidden !important;position:absolute !important;pointer-events:none !important;z-index:-9999 !important;" aria-hidden="true">
     <div class="nav-container">
@@ -807,186 +780,79 @@ footer.footer, #profeps-unified-footer {
 })();
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->
-<!-- Header ProfEPS.ma -->
-    
-    <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-6">
-    <!-- En-tête de l'outil avec bouton Toggle Traducteur FR | EN | AR en haut à droite -->
-    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-      <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
-        <div class="space-y-1.5 max-w-2xl">
-          <div id="ui-badge" class="text-xs font-bold uppercase tracking-wider text-emerald-600">Cluster 2 · Composition Corporelle, IMC & Économie de Course</div>
-          <h1 id="ui-title" class="text-2xl sm:text-3xl font-extrabold text-slate-900">Calculateur d’IMC Sportif, Masse Grasse (IMG) & Interprétation Complète</h1>
-          <p id="ui-sub" class="text-sm text-slate-600 leading-relaxed">Analysez votre Indice de Masse Corporelle selon l’OMS et selon votre profil athlétique (masse musculaire vs masse grasse et impact sur vos chronos).</p>
-        </div>
+  <header class="vma-hero">
+    <div id="ui-badge" class="hero-badge" data-i18n-fr="⚡ Cluster 2B · Composition Corporelle, IMC & Économie de Course" data-i18n-en="⚡ Cluster 2B · Athletic BMI, Body Fat % & Running Economy" data-i18n-ar="⚡ القطب 2B · مؤشر كتلة الجسم الرياضي، نسبة الدهون والكتلة العضلية">⚡ Cluster 2B · Composition Corporelle, IMC & Économie de Course</div>
+    <h1 id="ui-title" data-i18n-fr="Calculateur d’IMC Sportif, Masse Grasse (IMG) & Interprétation Complète" data-i18n-en="Athletic BMI, Body Fat Percentage & Dual Health/Sport Interpretation" data-i18n-ar="حاسبة مؤشر كتلة الجسم (IMC) ونسبة الدهون مع التفسير الصحي والرياضي">Calculateur d’IMC Sportif, Masse Grasse (IMG) & Interprétation Complète</h1>
+    <p id="ui-sub" data-i18n-fr="Renseignez vos mensurations et votre volume d’entraînement puis cliquez sur Calculer pour obtenir votre IMC, votre taux de masse grasse athlétique et votre masse maigre interprétés." data-i18n-en="Enter your body measurements and weekly training volume, then click Calculate to get your BMI, athletic body fat %, and lean mass interpretation." data-i18n-ar="أدخل الوزن والطول وساعات التدريب ثم اضغط على &quot;احسب&quot; لتحليل مؤشر كتلة الجسم ونسبة الدهون والكتلة العضلية الصافية.">Renseignez vos mensurations et votre volume d’entraînement puis cliquez sur Calculer pour obtenir votre IMC, votre taux de masse grasse athlétique et votre masse maigre interprétés.</p>
+  </header>
 
-        <!-- Bouton Toggle Traducteur en haut à droite -->
-        </div>
-    </div>
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-6">
+    <div class="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-5">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3.5">
+        <h2 class="text-base font-extrabold text-slate-900 uppercase tracking-wider" data-i18n-fr="1. Vos Paramètres Anthropométriques & Activité" data-i18n-en="1. Your Anthropometric & Training Parameters" data-i18n-ar="1. القياسات الجسمية وحجم النشاط الرياضي">1. Vos Paramètres Anthropométriques & Activité</h2>
+        <span class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">IMC · IMG · FFMI</span>
+      </div>
 
-    <!-- Corps du Calculateur -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-      <!-- Formulaire de Saisie -->
-      <div class="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3.5">
         <div>
-          <label id="lbl-sex" class="text-xs font-bold text-slate-700 block mb-1">Sexe biologique</label>
-          <select id="inp-sex" onchange="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs font-semibold">
-            <option value="male" id="opt-male" selected>Homme</option>
-            <option value="female" id="opt-female">Femme</option>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Poids (kg)" data-i18n-en="Weight (kg)" data-i18n-ar="الوزن (كغ)">Poids (kg)</label>
+          <input id="inp-w" type="number" value="68" min="30" max="180" step="0.5" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-base font-mono font-bold" />
+        </div>
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Taille (cm)" data-i18n-en="Height (cm)" data-i18n-ar="الطول (سم)">Taille (cm)</label>
+          <input id="inp-h" type="number" value="175" min="120" max="230" step="1" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-base font-mono font-bold" />
+        </div>
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Âge (ans)" data-i18n-en="Age (yrs)" data-i18n-ar="العمر">Âge (ans)</label>
+          <input id="inp-age" type="number" value="28" min="12" max="85" step="1" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-base font-mono font-bold" />
+        </div>
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Sexe" data-i18n-en="Sex" data-i18n-ar="الجنس">Sexe</label>
+          <select id="inp-sex" onchange="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-sm font-semibold">
+            <option value="1" selected data-i18n-fr="Homme" data-i18n-en="Male" data-i18n-ar="ذكر">Homme</option>
+            <option value="0" data-i18n-fr="Femme" data-i18n-en="Female" data-i18n-ar="أنثى">Femme</option>
           </select>
         </div>
-
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label id="lbl-weight" class="text-xs font-bold text-slate-700 block mb-1">Poids (kg)</label>
-            <input id="inp-weight" type="number" value="68" min="30" max="200" step="0.5" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold tabular-nums" />
-          </div>
-          <div>
-            <label id="lbl-height" class="text-xs font-bold text-slate-700 block mb-1">Taille (cm)</label>
-            <input id="inp-height" type="number" value="175" min="130" max="225" step="1" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold tabular-nums" />
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label id="lbl-age" class="text-xs font-bold text-slate-700 block mb-1">Âge (ans)</label>
-            <input id="inp-age" type="number" value="28" min="12" max="90" step="1" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold tabular-nums" />
-          </div>
-          <div>
-            <label id="lbl-hours" class="text-xs font-bold text-slate-700 block mb-1">Entraînement (h/sem)</label>
-            <input id="inp-hours" type="number" value="6" min="0" max="25" step="1" oninput="computeTool()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono font-bold tabular-nums" />
-          </div>
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Sport (h/sem)" data-i18n-en="Training (h/wk)" data-i18n-ar="ساعات التدريب/أسبوع">Sport (h/sem)</label>
+          <input id="inp-hrs" type="number" value="6" min="0" max="30" step="1" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-base font-mono font-bold" />
         </div>
       </div>
 
-      <!-- Résultats & Double Interprétation -->
-      <div class="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-5">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
-          <div class="p-4 bg-blue-50 border border-blue-200 rounded-xl">
-            <div id="lbl-res-bmi" class="text-[11px] font-bold text-blue-800">Indice IMC (kg/m²)</div>
-            <div id="out-bmi" dir="ltr" class="text-3xl font-black font-mono text-blue-700 tabular-nums my-1">--</div>
-            <div id="out-who-range" dir="ltr" class="text-[11px] font-mono text-blue-700">--</div>
-          </div>
+      <button type="button" id="btn-calc-main" onclick="triggerCalculation()" class="peps-cta-btn">
+        <span>⚖️</span>
+        <span data-i18n-fr="Calculer mon IMC, ma Masse Grasse & mon Bilan Athlétique" data-i18n-en="Calculate My BMI, Body Fat % & Athletic Assessment" data-i18n-ar="احسب مؤشر كتلة الجسم ونسبة الدهون والتقييم الرياضي">Calculer mon IMC, ma Masse Grasse & mon Bilan Athlétique</span>
+      </button>
+    </div>
 
-          <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl">
-            <div id="lbl-res-img" class="text-[11px] font-bold text-emerald-800">Masse Grasse (IMG)</div>
-            <div id="out-img" dir="ltr" class="text-3xl font-black font-mono text-emerald-700 tabular-nums my-1">--</div>
-            <div id="out-fat-kg" dir="ltr" class="text-[11px] font-mono text-emerald-700">--</div>
-          </div>
+    <div id="tool-results-panel" class="hidden space-y-6">
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+        <h3 class="text-base font-extrabold text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-3" data-i18n-fr="2. Résultats Anthropométriques & Lecture Scientifique par Chiffre" data-i18n-en="2. Anthropometric Results & Per-Metric Interpretation" data-i18n-ar="2. نتائج القياسات الجسمية وتفسير كل مؤشر">2. Résultats Anthropométriques & Lecture Scientifique par Chiffre</h3>
 
-          <div class="p-4 bg-slate-100 border border-slate-200 rounded-xl">
-            <div id="lbl-res-lean" class="text-[11px] font-bold text-slate-700">Masse Maigre</div>
-            <div id="out-lean" dir="ltr" class="text-3xl font-black font-mono text-slate-900 tabular-nums my-1">--</div>
-            <div id="out-run-range" dir="ltr" class="text-[11px] font-mono text-slate-600">--</div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+          <div class="p-4 bg-blue-50 border border-blue-200 rounded-2xl space-y-1">
+            <div class="text-xs font-extrabold uppercase text-blue-900" data-i18n-fr="Indice IMC (kg/m²)" data-i18n-en="BMI Index (kg/m²)" data-i18n-ar="مؤشر كتلة الجسم (IMC)">Indice IMC (kg/m²)</div>
+            <div id="out-bmi" dir="ltr" class="text-3xl font-black font-mono text-blue-700 tabular-nums">--</div>
+            <div id="out-bmi-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 border border-blue-100"></div>
+          </div>
+          <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl space-y-1">
+            <div class="text-xs font-extrabold uppercase text-emerald-900" data-i18n-fr="Masse Grasse Estimée (IMG)" data-i18n-en="Estimated Body Fat %" data-i18n-ar="نسبة الدهون المقدرة (IMG)">Masse Grasse Estimée (IMG)</div>
+            <div id="out-fat" dir="ltr" class="text-3xl font-black font-mono text-emerald-700 tabular-nums">--</div>
+            <div id="out-fat-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 border border-emerald-100"></div>
+          </div>
+          <div class="p-4 bg-red-50 border border-red-200 rounded-2xl space-y-1">
+            <div class="text-xs font-extrabold uppercase text-red-900" data-i18n-fr="Masse Maigre Active" data-i18n-en="Active Lean Body Mass" data-i18n-ar="الكتلة العضلية الصافية">Masse Maigre Active</div>
+            <div id="out-lean" dir="ltr" class="text-3xl font-black font-mono text-red-700 tabular-nums">--</div>
+            <div id="out-lean-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 border border-red-100"></div>
           </div>
         </div>
 
-        <!-- Jauge Visuelle IMC -->
-        <div class="space-y-1.5">
-          <div class="h-3 w-full rounded-full overflow-hidden flex">
-            <div class="w-1/4 bg-sky-400" title="< 18.5"></div>
-            <div class="w-1/3 bg-emerald-500" title="18.5 - 24.9"></div>
-            <div class="w-1/4 bg-amber-400" title="25.0 - 29.9"></div>
-            <div class="w-1/6 bg-rose-500" title=">= 30.0"></div>
-          </div>
-          <div dir="ltr" class="flex justify-between text-[10px] font-mono text-slate-500">
-            <span>15.0</span>
-            <span>18.5 (OMS)</span>
-            <span>25.0</span>
-            <span>30.0+</span>
-          </div>
-        </div>
-
-        <!-- Cartes d'Interprétation -->
-        <div class="space-y-3">
-          <div id="box-who" class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 leading-relaxed"></div>
-          <div id="box-ath" class="p-4 bg-emerald-50/70 border border-emerald-200 rounded-xl text-xs text-emerald-950 leading-relaxed"></div>
-        </div>
+        <div id="out-bmi-interp" class="p-5 bg-slate-50 border-l-4 border-blue-600 rounded-xl text-xs sm:text-sm text-slate-700 space-y-2.5 leading-relaxed"></div>
       </div>
     </div>
   </main>
 
-    <footer class="footer" id="profeps-unified-footer">
-    <div class="footer-container">
-      <div class="footer-grid">
-        <div class="footer-brand" style="display:flex !important;flex-direction:column !important;align-items:flex-start !important;">
-          <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:48px !important;max-height:48px !important;width:auto !important;max-width:155px !important;object-fit:contain !important;align-self:flex-start !important;filter:none !important;border-radius:8px !important;margin:0 0 0.9rem 0 !important;display:block !important;">
-          <p data-i18n-fr="La plateforme de référence pour les professeurs d'EPS au Maroc. Générateur de documents pédagogiques gratuit, conforme aux orientations pédagogiques officielles (MEN)." data-i18n-en="The reference platform for PE teachers in Morocco. Free educational document generator & sports science calculators aligned with official MEN guidelines." data-i18n-ar="المنصة المرجعية لأساتذة التربية البدنية بالمغرب. مولد وثائق تربوية مجاني وحاسبات علمية للرياضة وفق التوجيهات التربوية الرسمية.">La plateforme de référence pour les professeurs d'EPS au Maroc. Générateur de documents pédagogiques gratuit, conforme aux orientations pédagogiques officielles (MEN).</p>
-          <div class="footer-stats">
-            <div class="footer-stat-item">
-              <span class="footer-stat-num">16+</span>
-              <span class="footer-stat-lbl" data-i18n-fr="APS couvertes" data-i18n-en="Sports covered" data-i18n-ar="نشاط رياضي">APS couvertes</span>
-            </div>
-            <div class="footer-stat-item">
-              <span class="footer-stat-num">6</span>
-              <span class="footer-stat-lbl" data-i18n-fr="Niveaux scolaires" data-i18n-en="School levels" data-i18n-ar="مستويات دراسية">Niveaux scolaires</span>
-            </div>
-            <div class="footer-stat-item">
-              <span class="footer-stat-num">100%</span>
-              <span class="footer-stat-lbl" data-i18n-fr="Gratuit" data-i18n-en="Free" data-i18n-ar="مجاني">Gratuit</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="footer-col">
-          <h4 data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</h4>
-          <ul>
-            <li><a href="index.html" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a></li>
-            <li><a href="generateur.html" data-i18n-fr="Générateur PDF" data-i18n-en="PDF Generator" data-i18n-ar="مولد ملفات PDF">Générateur PDF</a></li>
-            <li><a href="blog.html" data-i18n-fr="Articles &amp; Blog" data-i18n-en="Articles &amp; Blog" data-i18n-ar="المقالات والمدونة">Articles &amp; Blog</a></li>
-            <li><a href="a-propos.html" data-i18n-fr="À propos" data-i18n-en="About Us" data-i18n-ar="من نحن">À propos</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4 data-i18n-fr="RESSOURCES EPS" data-i18n-en="PE RESOURCES" data-i18n-ar="موارد التربية البدنية">RESSOURCES EPS</h4>
-          <ul>
-            <li><a href="cycles-eps-maroc.html" data-i18n-fr="Cycles d'EPS au Maroc" data-i18n-en="PE Cycles in Morocco" data-i18n-ar="أسلاك التربية البدنية بالمغرب">Cycles d'EPS au Maroc</a></li>
-            <li><a href="programme-eps-maroc.html" data-i18n-fr="Programme EPS Maroc" data-i18n-en="Morocco PE Curriculum" data-i18n-ar="برنامج التربية البدنية بالمغرب">Programme EPS Maroc</a></li>
-            <li><a href="evaluation-eps.html" data-i18n-fr="Évaluation en EPS" data-i18n-en="PE Assessment" data-i18n-ar="التقويم في التربية البدنية">Évaluation en EPS</a></li>
-            <li><a href="securite-eps.html" data-i18n-fr="Sécurité en EPS" data-i18n-en="Safety in PE" data-i18n-ar="السلامة في التربية البدنية">Sécurité en EPS</a></li>
-            <li><a href="bibliotheque-numerique-eps.html" data-i18n-fr="Bibliothèque numérique" data-i18n-en="Digital Library" data-i18n-ar="المكتبة الرقمية">Bibliothèque numérique</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col" id="footer-col-calculators">
-          <h4 data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</h4>
-          <ul>
-            <li><a href="hub-outils-sport-performance.html" class="footer-hub-highlight" data-i18n-fr="★ Hub des Calculateurs Sport" data-i18n-en="★ All Sports Calculators Hub" data-i18n-ar="★ بوابة جميع الحاسبات الرياضية">★ Hub des Calculateurs Sport</a></li>
-            <li><a href="calculateur-vma.html" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS (VMA) Calculator" data-i18n-ar="حاسبة السرعة الهوائية VMA">Calculateur VMA</a></li>
-            <li><a href="calculateur-vdot-asr-endurance.html" data-i18n-fr="Calculateur VO2 Max &amp; VDOT" data-i18n-en="VO2 Max &amp; VDOT Calculator" data-i18n-ar="حاسبة VO2 Max و VDOT">Calculateur VO2 Max &amp; VDOT</a></li>
-            <li><a href="calculateur-asr-reserve-vitesse.html" data-i18n-fr="Réserve Anaérobie (ASR)" data-i18n-en="Anaerobic Speed Reserve (ASR)" data-i18n-ar="احتياطي السرعة اللاهوائية ASR">Réserve Anaérobie (ASR)</a></li>
-            <li><a href="calculateur-indice-endurance.html" data-i18n-fr="Indice d'Endurance (IE)" data-i18n-en="Endurance Index (Péronnet)" data-i18n-ar="مؤشر التحمل (IE)">Indice d'Endurance (IE)</a></li>
-            <li><a href="calculateur-frequence-cardiaque-karvonen.html" data-i18n-fr="Fréquence Cardiaque Karvonen" data-i18n-en="Heart Rate (Karvonen)" data-i18n-ar="نبضات القلب Karvonen">Fréquence Cardiaque Karvonen</a></li>
-            <li><a href="calculateur-imc-sportif-masse-grasse.html" data-i18n-fr="Calculateur IMC &amp; IMG Sport" data-i18n-en="Athletic BMI &amp; Body Fat" data-i18n-ar="حاسبة كتلة الجسم والدهون">Calculateur IMC &amp; IMG Sport</a></li>
-            <li><a href="calculateur-chaleur-meteo-altitude.html" data-i18n-fr="Chaleur, Humidité &amp; Altitude" data-i18n-en="Heat, Humidity &amp; Altitude" data-i18n-ar="الحرارة والرطوبة والارتفاع">Chaleur, Humidité &amp; Altitude</a></li>
-            <li><a href="calculateur-gap-pente-nutrition.html" data-i18n-fr="Allure Pente (GAP) &amp; Nutrition" data-i18n-en="Grade Pace (GAP) &amp; Nutrition" data-i18n-ar="إيقاع المنحدرات والتغذية">Allure Pente (GAP) &amp; Nutrition</a></li>
-            <li><a href="generateur-intermittent-hiit-cod.html" data-i18n-fr="Intermittent HIIT &amp; COD 180°" data-i18n-en="HIIT Intermittent &amp; 180° COD" data-i18n-ar="التدريب المتقطع HIIT و COD">Intermittent HIIT &amp; COD 180°</a></li>
-            <li><a href="calculateur-charge-rpe-foster-acwr.html" data-i18n-fr="Charge RPE Foster &amp; ACWR" data-i18n-en="Foster RPE Load &amp; ACWR" data-i18n-ar="حمل التدريب RPE و ACWR">Charge RPE Foster &amp; ACWR</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4 data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</h4>
-          <ul>
-            <li><a href="politique-confidentialite.html" data-i18n-fr="Politique de confidentialité" data-i18n-en="Privacy Policy" data-i18n-ar="سياسة الخصوصية">Politique de confidentialité</a></li>
-            <li><a href="cgu.html" data-i18n-fr="Conditions d'utilisation" data-i18n-en="Terms of Use" data-i18n-ar="شروط الاستخدام">Conditions d'utilisation</a></li>
-            <li><a href="contact.html" data-i18n-fr="Nous contacter" data-i18n-en="Contact Us" data-i18n-ar="اتصل بنا">Nous contacter</a></li>
-            <li><a href="mailto:profepsma@gmail.com">✉️ profepsma@gmail.com</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <p>' + whoText + '</p>';
-      document.getElementById('box-ath').innerHTML =
-        '<div class="font-bold text-emerald-950 mb-1">' + t.athTitle + '</div><p>' + athText + '</p>';
-    }
-
-    window.addEventListener('DOMContentLoaded', () => setToolLang('fr'));
-  </script>
-
-
-
-<footer class="footer" id="profeps-unified-footer">
+  <footer class="footer" id="profeps-unified-footer">
     <div class="footer-container">
       <div class="footer-grid">
         <div class="footer-brand" style="display:flex !important;flex-direction:column !important;align-items:flex-start !important;">
@@ -1063,9 +929,99 @@ footer.footer, #profeps-unified-footer {
       </div>
     </div>
   </footer>
+
+  <script id="profeps-tool-engine-js">
+    var currentLang = 'fr';
+    var hasCalculated = false;
+
+    function setToolLang(lang) {
+      currentLang = lang;
+      var root = document.getElementById('html-root');
+      if (root) {
+        root.lang = lang;
+        root.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+      }
+      document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function(el) {
+        var val = el.getAttribute('data-i18n-' + lang);
+        if (val) el.textContent = val;
+      });
+      if (typeof applyToolTranslations === 'function') applyToolTranslations(lang);
+      if (hasCalculated && typeof computeTool === 'function') computeTool();
+    }
+
+    function triggerCalculation() {
+      hasCalculated = true;
+      var panel = document.getElementById('tool-results-panel');
+      if (panel) {
+        panel.classList.remove('hidden');
+        panel.classList.remove('peps-results-reveal');
+        void panel.offsetWidth;
+        panel.classList.add('peps-results-reveal');
+      }
+      if (typeof computeTool === 'function') computeTool();
+      if (panel && window.innerWidth < 768) {
+        setTimeout(function() {
+          panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 80);
+      }
+    }
+
+    function onInputUpdated() {
+      if (hasCalculated && typeof computeTool === 'function') {
+        computeTool();
+      }
+    }
+
+    function computeTool() {
+      var w = parseFloat(document.getElementById('inp-w').value) || 68;
+      var h = (parseFloat(document.getElementById('inp-h').value) || 175) / 100;
+      var age = parseFloat(document.getElementById('inp-age').value) || 28;
+      var sex = parseFloat(document.getElementById('inp-sex').value);
+      if (isNaN(sex)) sex = 1;
+      var hrs = parseFloat(document.getElementById('inp-hrs').value) || 6;
+
+      var bmi = w / (h * h);
+      var img = Math.max(sex === 1 ? 5.5 : 12.0, 1.2 * bmi + 0.23 * age - 10.8 * sex - 5.4 - Math.min(4.2, hrs * 0.4));
+      var lean = w * (1 - img / 100);
+      var ffmi = lean / (h * h);
+      var minW = (18.5 * h * h).toFixed(1);
+      var maxW = (24.9 * h * h).toFixed(1);
+
+      document.getElementById('out-bmi').textContent = bmi.toFixed(1);
+      document.getElementById('out-fat').textContent = img.toFixed(1) + ' %';
+      document.getElementById('out-lean').textContent = lean.toFixed(1) + ' kg';
+
+      var whoFr = bmi < 18.5 ? 'Insuffisance pondérale (OMS)' : bmi < 25 ? 'Corpulence normale (OMS)' : bmi < 30 ? 'Surpoids OMS (ou profil musclé)' : 'Obésité OMS';
+      var whoEn = bmi < 18.5 ? 'Underweight (WHO)' : bmi < 25 ? 'Normal weight (WHO)' : bmi < 30 ? 'Overweight WHO (or muscular)' : 'Obesity (WHO)';
+      var whoAr = bmi < 18.5 ? 'نقص في الوزن (منظمة الصحة)' : bmi < 25 ? 'وزن طبيعي وصحي (منظمة الصحة)' : bmi < 30 ? 'زيادة وزن (أو كثافة عضلية للرياضي)' : 'سمنة حسب معيار منظمة الصحة';
+
+      var fatTierFr = (sex === 1 ? (img < 12 ? 'Athlète affûté (Course/Elite)' : img < 17 ? 'Profil Fitness / Sportif' : 'Standard') : (img < 19 ? 'Athlète affûtée' : img < 24 ? 'Profil Fitness / Sportive' : 'Standard'));
+      var fatTierEn = (sex === 1 ? (img < 12 ? 'Lean Endurance Athlete' : img < 17 ? 'Fit / Athletic' : 'Standard') : (img < 19 ? 'Lean Female Athlete' : img < 24 ? 'Fit / Athletic' : 'Standard'));
+      var fatTierAr = (sex === 1 ? (img < 12 ? 'رياضي رشيق جداً (تحمل/نخبة)' : img < 17 ? 'لياقة رياضية جيدة' : 'نسبة عادية') : (img < 19 ? 'رياضية رشيقة' : img < 24 ? 'لياقة رياضية جيدة' : 'نسبة عادية'));
+
+      if (currentLang === 'fr') {
+        document.getElementById('out-bmi-meaning').textContent = whoFr + ' · Plage : ' + minW + '–' + maxW + ' kg';
+        document.getElementById('out-fat-meaning').textContent = fatTierFr + ' (Deurenberg ajusté sport)';
+        document.getElementById('out-lean-meaning').textContent = 'Indice musculaire FFMI : ' + ffmi.toFixed(1) + ' kg/m²';
+      } else if (currentLang === 'en') {
+        document.getElementById('out-bmi-meaning').textContent = whoEn + ' · Range: ' + minW + '–' + maxW + ' kg';
+        document.getElementById('out-fat-meaning').textContent = fatTierEn + ' (Sport-adjusted Deurenberg)';
+        document.getElementById('out-lean-meaning').textContent = 'Lean Mass Index (FFMI): ' + ffmi.toFixed(1) + ' kg/m²';
+      } else {
+        document.getElementById('out-bmi-meaning').textContent = whoAr + ' · النطاق: ' + minW + '–' + maxW + ' كغ';
+        document.getElementById('out-fat-meaning').textContent = fatTierAr;
+        document.getElementById('out-lean-meaning').textContent = 'مؤشر الكتلة العضلية FFMI: ' + ffmi.toFixed(1) + ' كغ/م²';
+      }
+
+      var box = document.getElementById('out-bmi-interp');
+      if (currentLang === 'fr') {
+        box.innerHTML = '<p><strong>1. Double Lecture OMS vs Sportif :</strong> Votre IMC est de <strong>' + bmi.toFixed(1) + ' kg/m²</strong> (' + whoFr + '), mais grâce à vos <strong>' + hrs + ' h/semaine</strong> d’entraînement, votre taux de masse grasse réel est estimé à <strong>' + img.toFixed(1) + ' %</strong> (' + fatTierFr + ') pour une masse maigre active de <strong>' + lean.toFixed(1) + ' kg</strong>.</p><p><strong>2. Impact sur l’Économie de Course & EPS :</strong> En course à pied, chaque kilogramme adipeux non fonctionnel augmente le coût énergétique d’environ <strong>~2,1 secondes par kilomètre</strong> (soit ~21 s sur 10 km), tandis que la masse maigre (' + lean.toFixed(1) + ' kg) assure la propulsion et la prévention des blessures.</p>';
+      } else if (currentLang === 'en') {
+        box.innerHTML = '<p><strong>1. Dual WHO vs Athletic Reading:</strong> Your BMI is <strong>' + bmi.toFixed(1) + ' kg/m²</strong> (' + whoEn + '), while your <strong>' + hrs + ' h/week</strong> training load yields an estimated body fat of <strong>' + img.toFixed(1) + '%</strong> (' + fatTierEn + ') and <strong>' + lean.toFixed(1) + ' kg</strong> of functional lean mass.</p><p><strong>2. Running Economy Impact:</strong> Each non-functional kg costs roughly <strong>~2.1 sec/km</strong> in distance running, whereas lean muscle mass supports power output and joint stability.</p>';
+      } else {
+        box.innerHTML = '<p><strong>1. القراءة المزدوجة (منظمة الصحة مقابل الرياضي):</strong> يبلغ مؤشر كتلة الجسم لديك <strong>' + bmi.toFixed(1) + ' كغ/م²</strong> (' + whoAr + ')، وبفضل تدريبك (<strong>' + hrs + ' ساعات/أسبوع</strong>) فإن نسبة الدهون تقدر بـ <strong>' + img.toFixed(1) + '%</strong> (' + fatTierAr + ') مع كتلة عضلية صافية قدرها <strong>' + lean.toFixed(1) + ' كغ</strong>.</p><p><strong>2. التأثير على اقتصاد الجري والتربية البدنية:</strong> كل كيلوغرام إضافي غير وظيفي يكلف حوالي <strong>2.1 ثانية لكل كيلومتر</strong> في سباقات التحمل.</p>';
+      }
+    }
+  </script>
 </body>
 </html>
-
-
-
-

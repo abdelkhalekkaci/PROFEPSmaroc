@@ -2,14 +2,15 @@
  * unifier-navbar-footer.js
  * Script maître unique pour ProfEPS.ma :
  * 1. Supprime définitivement les pages login/dashboard, auth-shared.js et Supabase (fichiers + code dans tout le projet)
- * 2. Unifie la Navbar fixe (80px, texte équilibré font-weight: 500, classes isolées .peps-*)
+ * 2. Unifie la Navbar fixe (80px, classes isolées .peps-* impossibles à écraser par d'anciens scripts/CSS)
  * 3. Active le menu déroulant des 11 outils sur 100 % des pages (CSS :hover + JS fluide, affiche l'outil actif)
- * 4. Intègre le bouton traducteur universel (FR / EN / عربي) uniquement dans la Navbar et supprime tous les doublons dans le contenu des nouvelles pages
+ * 4. Intègre le bouton traducteur universel (FR / EN / عربي) à droite dans la Navbar et supprime les doublons
  * 5. Unifie le Footer à 5 colonnes sans doublons avec logo au bon format
  */
 
-const fs = require('fs');
-const path = require('path');
+(async () => {
+const fs = await import('fs');
+const path = await import('path');
 
 const rootDir = process.cwd();
 
@@ -106,7 +107,8 @@ function cleanCodeFilesRecursively(dir) {
       entry.name === '.git' ||
       entry.name === 'dist' ||
       entry.name === '.aistudio' ||
-      entry.name === 'unifier-navbar-footer.js'
+      entry.name === 'unifier-navbar-footer.js' ||
+      entry.name === 'generer-10-outils.js'
     ) {
       continue;
     }
@@ -117,9 +119,12 @@ function cleanCodeFilesRecursively(dir) {
       try {
         const original = fs.readFileSync(fullPath, 'utf8');
         let cleaned = original
+          // Supprimer les imports Supabase
           .replace(/^\s*import\s+.*from\s+['"][^'"]*supabase[^'"]*['"];?\s*$/gm, '')
           .replace(/^\s*const\s+.*=\s*require\(['"][^'"]*supabase[^'"]*['"]\);?\s*$/gm, '')
+          // Neutraliser toute redirection forcée vers login.html ou dashboard.html
           .replace(/(?:window\.)?location\.(?:href|replace|assign)\s*=?\s*\(?['"][^'"]*(?:login|dashboard)\.html[^'"]*['"]\)?/gi, 'void 0')
+          // Neutraliser toute manipulation de l'ancienne navbar dans les scripts JS restants
           .replace(/document\.querySelector\(['"]\.navbar['"]\)/g, "document.getElementById('navbar')")
           .replace(/document\.querySelector\(['"]nav\.navbar['"]\)/g, "document.getElementById('navbar')")
           .replace(/document\.querySelector\(['"]\.nav-menu['"]\)/g, "document.getElementById('navMenu')")
@@ -629,7 +634,7 @@ button.lang-btn:not(.peps-lang-btn) {
   border-radius: 2px !important;
 }
 
-/* ═══ 4. FOOTER UNIFIÉ À 5 COLONNES SANS DOUBLONS ═══ */
+/* ═══ 4. FOOTER UNIFIÉ À 5 COLONNES SANS DOUBLONS (BLINDÉ CONTRE TAILWIND CDN) ═══ */
 footer.footer, #profeps-unified-footer {
   background: linear-gradient(135deg, #15192b 0%, #162038 100%) !important;
   color: #ffffff !important;
@@ -638,27 +643,35 @@ footer.footer, #profeps-unified-footer {
   border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   box-sizing: border-box !important;
+  width: 100% !important;
+  display: block !important;
 }
-.footer .footer-container, .footer .footer-inner {
+#profeps-unified-footer .footer-container,
+footer.footer .footer-container,
+.footer .footer-inner {
   max-width: 1360px !important;
   margin: 0 auto !important;
   padding: 0 !important;
+  box-sizing: border-box !important;
 }
-.footer .footer-grid {
+#profeps-unified-footer .footer-grid,
+footer.footer .footer-grid {
   display: grid !important;
   grid-template-columns: 1.65fr 0.9fr 1.1fr 1.45fr 1fr !important;
   gap: 2.25rem !important;
   padding-bottom: 2.75rem !important;
   align-items: start !important;
 }
-.footer .footer-brand {
+#profeps-unified-footer .footer-brand,
+footer.footer .footer-brand {
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-start !important;
 }
-.footer .footer-brand img {
-  height: 48px !important;
-  max-height: 48px !important;
+#profeps-unified-footer .footer-brand img,
+footer.footer .footer-brand img {
+  height: 46px !important;
+  max-height: 46px !important;
   width: auto !important;
   max-width: 155px !important;
   object-fit: contain !important;
@@ -669,41 +682,50 @@ footer.footer, #profeps-unified-footer {
   padding: 0 !important;
   display: block !important;
 }
-.footer .footer-brand p {
+#profeps-unified-footer .footer-brand p,
+footer.footer .footer-brand p {
   color: rgba(255, 255, 255, 0.72) !important;
   font-size: 0.84rem !important;
   line-height: 1.65 !important;
   margin: 0 0 1.25rem 0 !important;
 }
-.footer .footer-stats {
+#profeps-unified-footer .footer-stats,
+footer.footer .footer-stats {
   display: flex !important;
   align-items: center !important;
   gap: 1.25rem !important;
   flex-wrap: wrap !important;
   padding-top: 0.5rem !important;
 }
-.footer .footer-stat-item {
+#profeps-unified-footer .footer-stat-item,
+footer.footer .footer-stat-item {
   display: flex !important;
   flex-direction: column !important;
 }
-.footer .footer-stat-num {
+#profeps-unified-footer .footer-stat-num,
+footer.footer .footer-stat-num {
   font-size: 1.05rem !important;
   font-weight: 800 !important;
   color: #ffffff !important;
+  line-height: 1.2 !important;
 }
-.footer .footer-stat-lbl {
+#profeps-unified-footer .footer-stat-lbl,
+footer.footer .footer-stat-lbl {
   font-size: 0.7rem !important;
   color: rgba(255, 255, 255, 0.55) !important;
 }
-.footer .footer-col h4 {
+#profeps-unified-footer .footer-col h4,
+footer.footer .footer-col h4 {
   font-size: 0.76rem !important;
   font-weight: 800 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.08em !important;
   color: rgba(255, 255, 255, 0.48) !important;
   margin: 0 0 1rem 0 !important;
+  line-height: 1.3 !important;
 }
-.footer .footer-col ul {
+#profeps-unified-footer .footer-col ul,
+footer.footer .footer-col ul {
   list-style: none !important;
   padding: 0 !important;
   margin: 0 !important;
@@ -711,11 +733,13 @@ footer.footer, #profeps-unified-footer {
   flex-direction: column !important;
   gap: 0.52rem !important;
 }
-.footer .footer-col ul li {
+#profeps-unified-footer .footer-col ul li,
+footer.footer .footer-col ul li {
   margin: 0 !important;
   padding: 0 !important;
 }
-.footer .footer-col ul li a {
+#profeps-unified-footer .footer-col ul li a,
+footer.footer .footer-col ul li a {
   color: rgba(255, 255, 255, 0.76) !important;
   font-size: 0.83rem !important;
   font-weight: 500 !important;
@@ -724,18 +748,22 @@ footer.footer, #profeps-unified-footer {
   display: inline-block !important;
   line-height: 1.35 !important;
 }
-.footer .footer-col ul li a:hover {
+#profeps-unified-footer .footer-col ul li a:hover,
+footer.footer .footer-col ul li a:hover {
   color: #ffffff !important;
   transform: translateX(2px) !important;
 }
-.footer .footer-col ul li a.footer-hub-highlight {
+#profeps-unified-footer .footer-col ul li a.footer-hub-highlight,
+footer.footer .footer-col ul li a.footer-hub-highlight {
   color: #4ade80 !important;
   font-weight: 800 !important;
 }
-.footer .footer-col ul li a.footer-hub-highlight:hover {
+#profeps-unified-footer .footer-col ul li a.footer-hub-highlight:hover,
+footer.footer .footer-col ul li a.footer-hub-highlight:hover {
   color: #86efac !important;
 }
-.footer .footer-bottom {
+#profeps-unified-footer .footer-bottom,
+footer.footer .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.09) !important;
   padding: 1.25rem 0 !important;
   display: flex !important;
@@ -1167,11 +1195,9 @@ dirsToScan.forEach((dir) => {
     // Supprimer TOUTES les anciennes balises <nav class="navbar"> ou <nav id="navbar">
     html = html.replace(/<nav[^>]*(?:id=["']navbar["']|class=["'][^"']*navbar[^"']*["'])[^>]*>[\s\S]*?<\/nav>\s*/gi, '');
 
-    // Supprimer TOUT bouton traducteur en doublon dans le contenu des nouvelles pages (hors navbar)
+    // Supprimer uniquement les conteneurs explicites de sélecteurs de langue en doublon (sans jamais toucher aux balises <footer ou <script)
     html = html.replace(/<div\b[^>]*class=["'][^"']*in-page-lang-switch[^"']*["'][^>]*>[\s\S]*?<\/div>\s*/gi, '');
-    html = html.replace(/<div\b[^>]*class=["'][^"']*lang-switch[^"']*["'][^>]*>[\s\S]*?<\/div>\s*/gi, '');
-    html = html.replace(/<div\b[^>]*>(?:(?!<div\b|<h1\b|<main\b|<header\b)[\s\S])*?(?:setToolLang|btn-lang-fr|in-page-lang-switch)[\s\S]*?<\/div>\s*/gi, '');
-    html = html.replace(/<button\b[^>]*(?:setToolLang|btn-lang-(?:fr|en|ar))[^>]*>[\s\S]*?<\/button>\s*/gi, '');
+    html = html.replace(/<div\b[^>]*class=["'][^"']*\blang-switch\b[^"']*["'][^>]*>[\s\S]*?<\/div>\s*/gi, '');
 
     // 5. Injecter le CSS maître juste avant </head>
     if (/<\/head>/i.test(html)) {
@@ -1203,9 +1229,10 @@ dirsToScan.forEach((dir) => {
     }
 
     fs.writeFileSync(filePath, html, 'utf8');
-    console.log(`✅ [UNIFIÉ & SANS DOUBLON TRADUCTEUR] -> ${path.relative(rootDir, filePath)}`);
+    console.log(`✅ [UNIFIÉ & NETTOYÉ DE SUPABASE] -> ${path.relative(rootDir, filePath)}`);
     updatedCount++;
   });
 });
 
-console.log(`\n🎉 SUCCÈS TOTAL : ${updatedCount} pages HTML mises à jour (texte Navbar affiné + doublons traducteur supprimés) !`);
+console.log(`\n🎉 SUCCÈS TOTAL : ${updatedCount} pages HTML unifiées, login/dashboard/Supabase supprimés définitivement !`);
+})();
