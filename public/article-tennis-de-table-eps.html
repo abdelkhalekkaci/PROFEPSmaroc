@@ -23,362 +23,463 @@ body{font-family:var(--font-sans);background:var(--bg-secondary);color:var(--tex
 
   
 
-<style id="profeps-navbar-styles">
-/* ═══ NAVBAR CANONIQUE UNIFIÉE + DROPDOWN ═══ */
-.navbar, #navbar { 
-    position: fixed !important; 
-    top: 0 !important; 
-    left: 0 !important; 
-    right: 0 !important; 
-    z-index: 10000 !important; 
-    padding: 0.9rem 2rem !important; 
-    background: rgba(255,255,255,0.97) !important; 
-    backdrop-filter: blur(20px) !important; 
-    -webkit-backdrop-filter: blur(20px) !important; 
-    border-bottom: 1px solid rgba(226,232,240,0.8) !important; 
-    transition: all 0.3s ease !important;
-    overflow: visible !important;
-    height: auto !important;
-}
-.navbar.scrolled, #navbar.scrolled { 
-    padding: 0.55rem 2rem !important; 
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important; 
-    background: rgba(255,255,255,0.99) !important; 
-}
-.nav-container, #navbar .nav-container { 
-    max-width: 1400px !important; 
-    margin: 0 auto !important; 
-    display: grid !important; 
-    grid-template-columns: 1fr auto 1fr !important; 
-    align-items: center !important;
-    overflow: visible !important;
-}
-.nav-logo, #navbar .nav-logo { 
-    justify-self: start !important; 
-    display: flex !important; 
-    align-items: center !important; 
-}
-.nav-logo img, #navbar .nav-logo img { 
-    height: 54px !important; 
-    width: auto !important;
-    transition: all 0.3s ease !important; 
-}
-.navbar.scrolled .nav-logo img { 
-    height: 46px !important; 
-}
-.nav-menu, #navbar #navMenu { 
-    display: flex !important; 
-    align-items: center !important; 
-    justify-content: center !important; 
-    text-align: center !important; 
-    gap: 1.75rem !important;
-    overflow: visible !important;
-}
-.nav-right, #navbar .nav-right { 
-    justify-self: end !important; 
-    display: flex !important; 
-    align-items: center !important; 
-    gap: 0.75rem !important; 
-}
-.nav-link, #navbar .nav-link { 
-    font-size: 0.95rem !important; 
-    font-weight: 800 !important;
-    color: #1a1a2e !important; 
-    padding: 0.5rem 0.75rem !important; 
-    text-align: center !important; 
-    display: inline-flex !important; 
-    align-items: center !important; 
-    justify-content: center !important;
-    gap: 0.35rem !important;
-    position: relative !important; 
-    transition: color 0.3s ease !important; 
-    text-decoration: none !important; 
-    letter-spacing: -0.01em !important;
-    white-space: nowrap !important;
-}
-.nav-link::after, #navbar .nav-link::after { 
-    content: '' !important; 
-    position: absolute !important; 
-    bottom: -2px !important; 
-    left: 50% !important; 
-    right: 50% !important; 
-    height: 3px !important; 
-    background: linear-gradient(90deg, #c1272d, #006233) !important; 
-    border-radius: 2px !important; 
-    transition: left 0.3s ease, right 0.3s ease !important; 
-}
-.nav-link:hover::after, 
-.nav-link.active::after,
-#navbar .nav-link:hover::after,
-#navbar .nav-link.active::after { 
-    left: 0.4rem !important; 
-    right: 0.4rem !important; 
-}
-.nav-link:hover, 
-.nav-link.active,
-#navbar .nav-link:hover,
-#navbar .nav-link.active { 
-    color: #c1272d !important; 
-}
 
-/* ═══ MENU DÉROULANT CALCULATEURS SPORT (100% COMPATIBLE SANS TAILWIND) ═══ */
-#navbar .nav-dropdown, .nav-dropdown {
-    position: relative !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    overflow: visible !important;
+<style id="profeps-master-unifier-css">
+html { overflow-y: scroll !important; }
+nav.navbar, #navbar.navbar, .navbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 80px !important;
+  min-height: 80px !important;
+  max-height: 80px !important;
+  padding: 0 2rem !important;
+  margin: 0 !important;
+  z-index: 99999 !important;
+  background: rgba(255, 255, 255, 0.97) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.85) !important;
+  box-shadow: 0 2px 14px rgba(15, 23, 42, 0.04) !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  overflow: visible !important;
+  transition: box-shadow 0.25s ease, background 0.25s ease !important;
+  direction: ltr !important;
 }
-#navbar .nav-dropdown-caret, .nav-dropdown-caret {
-    font-size: 0.72rem !important;
-    line-height: 1 !important;
-    display: inline-block !important;
-    margin-left: 0.2rem !important;
-    transition: transform 0.22s ease !important;
-    color: inherit !important;
+nav.navbar.scrolled, #navbar.navbar.scrolled, .navbar.scrolled {
+  height: 80px !important;
+  min-height: 80px !important;
+  max-height: 80px !important;
+  padding: 0 2rem !important;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08) !important;
+  background: rgba(255, 255, 255, 0.99) !important;
 }
-#navbar .nav-dropdown:hover .nav-dropdown-caret,
-#navbar .nav-dropdown.open .nav-dropdown-caret {
-    transform: rotate(180deg) !important;
-    color: #c1272d !important;
+#navbar .nav-container, nav.navbar .nav-container, .nav-container {
+  width: 100% !important;
+  max-width: 1400px !important;
+  height: 80px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  display: grid !important;
+  grid-template-columns: 1fr auto 1fr !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+  direction: ltr !important;
 }
-#navbar .nav-dropdown::after, .nav-dropdown::after {
-    content: '' !important;
-    position: absolute !important;
-    top: 100% !important;
-    left: 0 !important;
-    right: 0 !important;
-    height: 14px !important;
-    background: transparent !important;
+#navbar .nav-logo, nav.navbar .nav-logo, .nav-logo {
+  justify-self: start !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  height: 54px !important;
+  text-decoration: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
-#navbar #navMenu .nav-dropdown-menu,
-#navbar .nav-dropdown-menu,
+#navbar .nav-logo img, nav.navbar .nav-logo img, .navbar.scrolled .nav-logo img, .nav-logo img {
+  height: 52px !important;
+  max-height: 52px !important;
+  width: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 0 !important;
+}
+#navbar #navMenu.nav-menu, nav.navbar .nav-menu, .nav-menu {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  height: 80px !important;
+  overflow: visible !important;
+}
+#navbar .nav-right, nav.navbar .nav-right, .nav-right {
+  justify-self: end !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 0.75rem !important;
+  margin: 0 !important;
+  padding-right: 0.25rem !important;
+}
+#navbar .nav-link, nav.navbar .nav-link, .nav-link {
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 0.96rem !important;
+  font-weight: 800 !important;
+  color: #1a1a2e !important;
+  padding: 0.5rem 0.65rem !important;
+  margin: 0 !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.35rem !important;
+  position: relative !important;
+  white-space: nowrap !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.01em !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: color 0.2s ease !important;
+}
+#navbar .nav-link::after, nav.navbar .nav-link::after, .nav-link::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -2px !important;
+  left: 50% !important;
+  right: 50% !important;
+  height: 3px !important;
+  background: linear-gradient(90deg, #c1272d, #006233) !important;
+  border-radius: 2px !important;
+  transition: left 0.25s ease, right 0.25s ease !important;
+}
+#navbar .nav-link:hover::after,
+#navbar .nav-link.active::after,
+.nav-dropdown:hover > .nav-link::after,
+.nav-link:hover::after,
+.nav-link.active::after {
+  left: 0.35rem !important;
+  right: 0.35rem !important;
+}
+#navbar .nav-link:hover,
+#navbar .nav-link.active,
+.nav-dropdown:hover > .nav-link,
+.nav-link:hover,
+.nav-link.active {
+  color: #c1272d !important;
+}
+#navbar .nav-dropdown, nav.navbar .nav-dropdown, .nav-dropdown {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+.nav-dropdown-caret {
+  font-size: 0.75rem !important;
+  line-height: 1 !important;
+  display: inline-block !important;
+  transition: transform 0.25s ease !important;
+}
+.nav-dropdown:hover .nav-dropdown-caret,
+.nav-dropdown.open .nav-dropdown-caret {
+  transform: rotate(180deg) !important;
+  color: #c1272d !important;
+}
+#navbar #navMenu .nav-dropdown .nav-dropdown-menu,
+nav.navbar .nav-dropdown .nav-dropdown-menu,
 .nav-dropdown-menu {
-    position: absolute !important;
-    top: calc(100% + 6px) !important;
-    left: 50% !important;
-    transform: translateX(-50%) translateY(8px) !important;
-    width: 325px !important;
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
-    background: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
-    border-radius: 14px !important;
-    box-shadow: 0 18px 38px -5px rgba(15, 23, 42, 0.18), 0 4px 12px rgba(0, 0, 0, 0.08) !important;
-    padding: 0.55rem !important;
-    margin: 0 !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease !important;
-    z-index: 99999 !important;
-    display: block !important;
-    text-align: left !important;
-    box-sizing: border-box !important;
+  position: absolute !important;
+  top: calc(100% + 8px) !important;
+  left: 50% !important;
+  transform: translateX(-50%) translateY(8px) !important;
+  width: 335px !important;
+  min-width: 335px !important;
+  height: auto !important;
+  max-height: none !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 20px 42px -6px rgba(15, 23, 42, 0.18), 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+  padding: 0.55rem !important;
+  margin: 0 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease !important;
+  z-index: 999999 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  gap: 2px !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+  text-align: left !important;
 }
-#navbar #navMenu .nav-dropdown:hover > .nav-dropdown-menu,
-#navbar #navMenu .nav-dropdown.open > .nav-dropdown-menu,
-#navbar .nav-dropdown:hover > .nav-dropdown-menu,
-#navbar .nav-dropdown.open > .nav-dropdown-menu,
-.nav-dropdown:hover > .nav-dropdown-menu {
-    opacity: 1 !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
-    transform: translateX(-50%) translateY(0) !important;
+.nav-dropdown::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 100% !important;
+  left: -10px !important;
+  right: -10px !important;
+  height: 16px !important;
+  background: transparent !important;
+}
+#navbar #navMenu .nav-dropdown:hover .nav-dropdown-menu,
+#navbar #navMenu .nav-dropdown.open .nav-dropdown-menu,
+nav.navbar .nav-dropdown:hover .nav-dropdown-menu,
+nav.navbar .nav-dropdown.open .nav-dropdown-menu,
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown.open .nav-dropdown-menu {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: translateX(-50%) translateY(0) !important;
 }
 #navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item,
-#navbar .nav-dropdown-menu a.nav-dropdown-item,
+nav.navbar .nav-dropdown-menu a.nav-dropdown-item,
 .nav-dropdown-menu a.nav-dropdown-item {
-    box-sizing: border-box !important;
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    gap: 0.55rem !important;
-    width: 100% !important;
-    height: auto !important;
-    padding: 0.5rem 0.75rem !important;
-    margin: 0 0 2px 0 !important;
-    border-radius: 9px !important;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    font-size: 0.83rem !important;
-    font-weight: 700 !important;
-    line-height: 1.4 !important;
-    color: #0f172a !important;
-    -webkit-text-fill-color: #0f172a !important;
-    background: transparent !important;
-    text-align: left !important;
-    text-decoration: none !important;
-    white-space: nowrap !important;
-    cursor: pointer !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    position: relative !important;
-    transform: none !important;
-    transition: background 0.15s ease, color 0.15s ease !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 0.55rem !important;
+  width: 100% !important;
+  min-height: 36px !important;
+  height: auto !important;
+  padding: 0.5rem 0.75rem !important;
+  margin: 0 !important;
+  border-radius: 9px !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 0.83rem !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+  background: transparent !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  position: relative !important;
+  transform: none !important;
+  border: 1px solid transparent !important;
+  transition: background 0.15s ease, color 0.15s ease !important;
 }
+#navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item::after,
 #navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item::before,
-#navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item::after {
+.nav-dropdown-menu a.nav-dropdown-item::after,
+.nav-dropdown-menu a.nav-dropdown-item::before {
+  display: none !important;
+  content: none !important;
+}
+#navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item:hover,
+.nav-dropdown-menu a.nav-dropdown-item:hover {
+  background: #f1f5f9 !important;
+  color: #c1272d !important;
+  -webkit-text-fill-color: #c1272d !important;
+}
+#navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item.active-tool,
+.nav-dropdown-menu a.nav-dropdown-item.active-tool {
+  background: rgba(193, 39, 45, 0.09) !important;
+  color: #c1272d !important;
+  -webkit-text-fill-color: #c1272d !important;
+  font-weight: 800 !important;
+}
+#navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item.nav-dropdown-hub,
+.nav-dropdown-menu a.nav-dropdown-item.nav-dropdown-hub {
+  background: linear-gradient(135deg, rgba(193, 39, 45, 0.09), rgba(0, 98, 51, 0.09)) !important;
+  color: #c1272d !important;
+  -webkit-text-fill-color: #c1272d !important;
+  font-weight: 800 !important;
+  border: 1px solid rgba(193, 39, 45, 0.22) !important;
+  margin-bottom: 0.35rem !important;
+}
+#navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item.nav-dropdown-hub:hover,
+.nav-dropdown-menu a.nav-dropdown-item.nav-dropdown-hub:hover {
+  background: linear-gradient(135deg, #c1272d, #006233) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+#navbar .lang-switch, nav.navbar .lang-switch, .lang-switch {
+  display: inline-flex !important;
+  align-items: center !important;
+  background: #f1f5f9 !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 9999px !important;
+  padding: 3px 4px !important;
+  gap: 2px !important;
+  margin-left: 0.5rem !important;
+  direction: ltr !important;
+  box-sizing: border-box !important;
+}
+#navbar .lang-btn, nav.navbar .lang-btn, .lang-btn {
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  padding: 5px 11px !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 0.78rem !important;
+  font-weight: 800 !important;
+  color: #475569 !important;
+  border-radius: 9999px !important;
+  line-height: 1.2 !important;
+  transition: all 0.2s ease !important;
+}
+#navbar .lang-btn.active, nav.navbar .lang-btn.active, .lang-btn.active {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.14) !important;
+}
+#navbar .lang-btn:hover:not(.active), .lang-btn:hover:not(.active) {
+  color: #c1272d !important;
+}
+#navbar .lang-sep, .lang-sep {
+  font-size: 0.75rem !important;
+  color: #cbd5e1 !important;
+  user-select: none !important;
+  padding: 0 1px !important;
+}
+.nav-toggle {
+  display: none !important;
+  flex-direction: column !important;
+  gap: 5px !important;
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  padding: 0.5rem !important;
+}
+.nav-toggle span {
+  display: block !important;
+  width: 24px !important;
+  height: 2.5px !important;
+  background: #1a1a2e !important;
+  border-radius: 2px !important;
+}
+footer.footer, .footer {
+  background: linear-gradient(135deg, #15192b 0%, #162038 100%) !important;
+  color: #ffffff !important;
+  padding: 3.5rem 2rem 0 !important;
+  margin-top: 4rem !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  box-sizing: border-box !important;
+}
+.footer .footer-container, .footer .footer-inner {
+  max-width: 1360px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+.footer .footer-grid {
+  display: grid !important;
+  grid-template-columns: 1.65fr 0.9fr 1.1fr 1.45fr 1fr !important;
+  gap: 2.25rem !important;
+  padding-bottom: 2.75rem !important;
+  align-items: start !important;
+}
+.footer .footer-brand img {
+  height: 44px !important;
+  width: auto !important;
+  filter: brightness(0) invert(1) !important;
+  margin-bottom: 0.9rem !important;
+  display: block !important;
+}
+.footer .footer-brand p {
+  color: rgba(255, 255, 255, 0.72) !important;
+  font-size: 0.84rem !important;
+  line-height: 1.65 !important;
+  margin: 0 0 1.25rem 0 !important;
+}
+.footer .footer-stats {
+  display: flex !important;
+  align-items: center !important;
+  gap: 1.25rem !important;
+  flex-wrap: wrap !important;
+  padding-top: 0.5rem !important;
+}
+.footer .footer-stat-item {
+  display: flex !important;
+  flex-direction: column !important;
+}
+.footer .footer-stat-num {
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+}
+.footer .footer-stat-lbl {
+  font-size: 0.7rem !important;
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+.footer .footer-col h4 {
+  font-size: 0.76rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  color: rgba(255, 255, 255, 0.48) !important;
+  margin: 0 0 1rem 0 !important;
+}
+.footer .footer-col ul {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.52rem !important;
+}
+.footer .footer-col ul li { margin: 0 !important; padding: 0 !important; }
+.footer .footer-col ul li a {
+  color: rgba(255, 255, 255, 0.76) !important;
+  font-size: 0.83rem !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease, transform 0.2s ease !important;
+  display: inline-block !important;
+  line-height: 1.35 !important;
+}
+.footer .footer-col ul li a:hover {
+  color: #ffffff !important;
+  transform: translateX(2px) !important;
+}
+.footer .footer-col ul li a.footer-hub-highlight {
+  color: #4ade80 !important;
+  font-weight: 800 !important;
+}
+.footer .footer-col ul li a.footer-hub-highlight:hover {
+  color: #86efac !important;
+}
+.footer .footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.09) !important;
+  padding: 1.25rem 0 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 0.75rem !important;
+  font-size: 0.79rem !important;
+  color: rgba(255, 255, 255, 0.48) !important;
+}
+@media (max-width: 1024px) {
+  .footer .footer-grid { grid-template-columns: 1fr 1fr !important; }
+}
+@media (max-width: 900px) {
+  #navbar .nav-container, nav.navbar .nav-container, .nav-container {
+    display: flex !important;
+    justify-content: space-between !important;
+  }
+  .nav-toggle { display: flex !important; }
+  #navbar #navMenu.nav-menu, nav.navbar .nav-menu, .nav-menu {
+    position: fixed !important;
+    top: 80px !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: auto !important;
+    max-height: calc(100vh - 80px) !important;
+    overflow-y: auto !important;
+    background: #ffffff !important;
+    flex-direction: column !important;
+    padding: 1.25rem !important;
+    gap: 0.75rem !important;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12) !important;
     display: none !important;
-    content: none !important;
+  }
+  #navbar #navMenu.nav-menu.active, nav.navbar .nav-menu.active, .nav-menu.active {
+    display: flex !important;
+  }
 }
-#navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item:hover {
-    background: #fef2f2 !important;
-    color: #c1272d !important;
-    -webkit-text-fill-color: #c1272d !important;
-}
-#navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item.active-tool {
-    background: #fef2f2 !important;
-    color: #c1272d !important;
-    -webkit-text-fill-color: #c1272d !important;
-    font-weight: 800 !important;
-}
-#navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item.nav-dropdown-hub {
-    background: linear-gradient(135deg, rgba(193, 39, 45, 0.1), rgba(0, 98, 51, 0.1)) !important;
-    color: #c1272d !important;
-    -webkit-text-fill-color: #c1272d !important;
-    font-weight: 800 !important;
-    border: 1px solid rgba(193, 39, 45, 0.25) !important;
-    margin-bottom: 6px !important;
-}
-#navbar #navMenu .nav-dropdown-menu a.nav-dropdown-item.nav-dropdown-hub:hover {
-    background: linear-gradient(135deg, rgba(193, 39, 45, 0.18), rgba(0, 98, 51, 0.18)) !important;
-}
-
-/* ═══ BOUTON TRADUCTEUR DANS LA NAVBAR (PAGES OUTILS) ═══ */
-.lang-switcher { display: inline-flex !important; align-items: center !important; background: #f1f5f9 !important; padding: 3px !important; border-radius: 9999px !important; border: 1px solid #e2e8f0 !important; gap: 2px !important; }
-.lang-btn { border: none !important; background: transparent !important; padding: 0.28rem 0.6rem !important; border-radius: 9999px !important; font-size: 0.73rem !important; font-weight: 700 !important; color: #475569 !important; cursor: pointer !important; transition: all 0.2s ease !important; }
-.lang-btn.active { background: #ffffff !important; color: #c1272d !important; box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important; }
-
-.nav-cta { 
-    display: inline-flex !important; 
-    align-items: center !important; 
-    gap: 0.5rem !important; 
-    padding: 0.5rem 1.25rem !important; 
-    background: linear-gradient(135deg, #c1272d, #006233) !important; 
-    color: white !important;
-    -webkit-text-fill-color: white !important;
-    font-weight: 800 !important; 
-    font-size: 0.9375rem !important; 
-    border-radius: 9999px !important; 
-    border: 2px solid transparent !important; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important; 
-    transition: transform 0.3s ease, box-shadow 0.3s ease !important; 
-    text-decoration: none !important; 
-    white-space: nowrap !important; 
-}
-.nav-cta:hover { 
-    transform: translateY(-2px) !important; 
-    box-shadow: 0 8px 25px rgba(193,39,45,0.3) !important; 
-}
-.nav-cta.nav-cta-mobile { display: none !important; }
-.nav-cta.nav-cta-desktop { display: inline-flex !important; }
-.nav-toggle { 
-    display: none !important; 
-    flex-direction: column !important; 
-    gap: 5px !important; 
-    background: none !important; 
-    border: none !important; 
-    cursor: pointer !important; 
-    padding: 8px !important; 
-    width: 36px !important; 
-    height: 36px !important; 
-    justify-content: center !important; 
-    align-items: center !important; 
-    border-radius: 8px !important; 
-}
-.nav-toggle span { 
-    display: block !important; 
-    width: 22px !important; 
-    height: 2px !important; 
-    background: #1a1a2e !important; 
-    border-radius: 2px !important; 
-    transition: transform 0.3s ease, opacity 0.3s ease !important; 
-}
-.nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg) !important; }
-.nav-toggle.active span:nth-child(2) { opacity: 0 !important; transform: scaleX(0) !important; }
-.nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg) !important; }
-.nav-backdrop { 
-    display: none; 
-    position: fixed !important; 
-    top: 0 !important; 
-    left: 0 !important; 
-    right: 0 !important; 
-    bottom: 0 !important; 
-    background: rgba(0,0,0,0.3) !important; 
-    z-index: 99 !important; 
-    opacity: 0; 
-    transition: opacity 0.3s ease !important; 
-}
-.nav-backdrop.active { 
-    display: block !important; 
-    opacity: 1 !important; 
-}
-@media (max-width: 768px) {
-    .nav-container, #navbar .nav-container { display: flex !important; justify-content: space-between !important; }
-    .nav-right, #navbar .nav-right { gap: 0.5rem !important; }
-    .nav-menu, #navbar #navMenu { 
-        position: absolute !important; 
-        top: 100% !important; 
-        left: 1rem !important; 
-        right: 1rem !important; 
-        background: white !important; 
-        flex-direction: column !important; 
-        padding: 1.5rem !important; 
-        box-shadow: 0 10px 40px rgba(0,0,0,0.12) !important; 
-        border-radius: 16px !important; 
-        gap: 0.75rem !important; 
-        transform: translateY(-10px) !important; 
-        opacity: 0 !important; 
-        pointer-events: none !important; 
-        transition: transform 0.3s ease, opacity 0.3s ease !important; 
-        z-index: 100 !important; 
-        border: 1px solid #f1f5f9 !important; 
-        justify-content: center !important; 
-        align-items: center !important; 
-        text-align: center !important; 
-    }
-    .nav-menu.active, #navbar #navMenu.active { 
-        transform: translateY(0) !important; 
-        opacity: 1 !important; 
-        pointer-events: auto !important; 
-    }
-    .nav-link, #navbar .nav-link { 
-        padding: 0.6rem 0 !important; 
-        width: 100% !important; 
-        text-align: center !important; 
-        justify-content: center !important; 
-        font-weight: 800 !important; 
-    }
-    #navbar .nav-dropdown {
-        width: 100% !important;
-        flex-direction: column !important;
-    }
-    #navbar #navMenu .nav-dropdown-menu {
-        position: static !important;
-        transform: none !important;
-        width: 100% !important;
-        box-shadow: none !important;
-        border: 1px solid #e2e8f0 !important;
-        margin-top: 0.35rem !important;
-        display: none !important;
-    }
-    #navbar #navMenu .nav-dropdown:hover > .nav-dropdown-menu,
-    #navbar #navMenu .nav-dropdown.open > .nav-dropdown-menu {
-        display: block !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        pointer-events: auto !important;
-    }
-    .nav-toggle { display: flex !important; }
-    .nav-cta.nav-cta-mobile { display: inline-flex !important; width: 100% !important; justify-content: center !important; margin-top: 0.5rem !important; }
-    .nav-cta.nav-cta-desktop { display: none !important; }
-}
-@media (max-width: 480px) {
-    .navbar, #navbar { padding: 0.75rem 1rem !important; }
+@media (max-width: 640px) {
+  .footer .footer-grid { grid-template-columns: 1fr !important; }
 }
 </style>
+
 </head>
 <body>
     
@@ -386,39 +487,45 @@ body{font-family:var(--font-sans);background:var(--bg-secondary);color:var(--tex
     
     <div class="nav-backdrop" id="navBackdrop"></div>
     <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="/" class="nav-logo" aria-label="Prof EPS Maroc - Accueil">
-                <img src="/images/prof_eps.png" onerror="this.onerror=null;this.src='https://profeps.ma/images/prof_eps.png';" alt="Prof EPS Maroc" width="140" height="40" fetchpriority="high" decoding="async" style="height:54px; width:auto; max-width:180px; object-fit:contain; display:block;">
-            </a>
-            <div class="nav-menu" id="navMenu">
-                <a href="/" class="nav-link">Accueil</a>
-                <a href="generateur.html" class="nav-link">Générateur</a>
-                <div class="nav-dropdown">
-                    <a href="calculateur-vma.html" class="nav-link"><span id="nav-current-tool-label">Calculateur VMA</span> <span class="nav-dropdown-caret">▾</span></a>
-                    <div class="nav-dropdown-menu">
-                        <a href="hub-outils-sport-performance.html" class="nav-dropdown-item nav-dropdown-hub">🧭 Hub de Tous les Calculateurs Sport</a>
-                        <a href="calculateur-vma.html" class="nav-dropdown-item">⚡ Calculateur VMA & Allures</a>
-                        <a href="calculateur-vdot-asr-endurance.html" class="nav-dropdown-item">🫁 Calculateur VO2 Max & VDOT</a>
-                        <a href="calculateur-asr-reserve-vitesse.html" class="nav-dropdown-item">🚀 Réserve de Vitesse Anaérobie (ASR)</a>
-                        <a href="calculateur-indice-endurance.html" class="nav-dropdown-item">📈 Indice d'Endurance (Péronnet)</a>
-                        <a href="calculateur-frequence-cardiaque-karvonen.html" class="nav-dropdown-item">❤️ Fréquence Cardiaque (Karvonen)</a>
-                        <a href="calculateur-imc-sportif-masse-grasse.html" class="nav-dropdown-item">⚖️ Calculateur IMC & Masse Grasse</a>
-                        <a href="calculateur-chaleur-meteo-altitude.html" class="nav-dropdown-item">☀️ Chaleur, Humidité & Altitude</a>
-                        <a href="calculateur-gap-pente-nutrition.html" class="nav-dropdown-item">⛰️ Allure Pente (GAP) & Nutrition</a>
-                        <a href="generateur-intermittent-hiit-cod.html" class="nav-dropdown-item">🔄 Intermittent HIIT & COD 180°</a>
-                        <a href="calculateur-charge-rpe-foster-acwr.html" class="nav-dropdown-item">🛡️ Charge RPE Foster & ACWR</a>
-                    </div>
-                </div>
-                <a href="blog.html" class="nav-link active">Blog</a>
-                <a href="generateur.html" class="nav-cta nav-cta-mobile"><span>✨</span> Créer un document</a>
-            </div>
-            <div class="nav-right">
-                
-                <a href="generateur.html" class="nav-cta nav-cta-desktop"><span>✨</span> Créer un document</a>
-                <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
-            </div>
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" aria-label="Prof EPS Maroc - Accueil">
+        <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc">
+      </a>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
+        <a href="generateur.html" class="nav-link" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
+        <!-- PROFEPS_DROPDOWN_START --><div class="nav-dropdown" id="navCalcDropdown">
+          <a href="calculateur-vma.html" class="nav-link" id="navDropdownTrigger"><span id="navDropdownTriggerText" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS Calculator" data-i18n-ar="حاسبة السرعة الهوائية VMA">Calculateur VMA</span> <span class="nav-dropdown-caret">▾</span></a>
+          <div class="nav-dropdown-menu">
+            <a href="hub-outils-sport-performance.html" class="nav-dropdown-item nav-dropdown-hub" data-i18n-fr="🧭 Hub de Tous les Calculateurs Sport" data-i18n-en="🧭 All Sports Calculators Hub" data-i18n-ar="🧭 بوابة جميع الحاسبات الرياضية">🧭 Hub de Tous les Calculateurs Sport</a>
+            <a href="calculateur-vma.html" class="nav-dropdown-item" data-i18n-fr="⚡ Calculateur VMA & Allures" data-i18n-en="⚡ MAS (VMA) & Paces Calculator" data-i18n-ar="⚡ حاسبة السرعة الهوائية القصوى (VMA)">⚡ Calculateur VMA & Allures</a>
+            <a href="calculateur-vdot-asr-endurance.html" class="nav-dropdown-item" data-i18n-fr="🫁 Calculateur VO2 Max & VDOT" data-i18n-en="🫁 VO2 Max & VDOT Calculator" data-i18n-ar="🫁 حاسبة VO2 Max ومؤشر VDOT">🫁 Calculateur VO2 Max & VDOT</a>
+            <a href="calculateur-asr-reserve-vitesse.html" class="nav-dropdown-item" data-i18n-fr="🚀 Réserve de Vitesse Anaérobie (ASR)" data-i18n-en="🚀 Anaerobic Speed Reserve (ASR)" data-i18n-ar="🚀 احتياطي السرعة اللاهوائية (ASR)">🚀 Réserve de Vitesse Anaérobie (ASR)</a>
+            <a href="calculateur-indice-endurance.html" class="nav-dropdown-item" data-i18n-fr="📈 Indice d'Endurance (Péronnet)" data-i18n-en="📈 Endurance Index (Péronnet)" data-i18n-ar="📈 مؤشر التحمل (نموذج بيروني)">📈 Indice d'Endurance (Péronnet)</a>
+            <a href="calculateur-frequence-cardiaque-karvonen.html" class="nav-dropdown-item" data-i18n-fr="❤️ Fréquence Cardiaque (Karvonen)" data-i18n-en="❤️ Heart Rate Zones (Karvonen)" data-i18n-ar="❤️ نبضات القلب ومناطق التدريب (Karvonen)">❤️ Fréquence Cardiaque (Karvonen)</a>
+            <a href="calculateur-imc-sportif-masse-grasse.html" class="nav-dropdown-item" data-i18n-fr="⚖️ Calculateur IMC & Masse Grasse" data-i18n-en="⚖️ Athletic BMI & Body Fat %" data-i18n-ar="⚖️ حاسبة مؤشر كتلة الجسم ونسبة الدهون">⚖️ Calculateur IMC & Masse Grasse</a>
+            <a href="calculateur-chaleur-meteo-altitude.html" class="nav-dropdown-item" data-i18n-fr="☀️ Chaleur, Humidité & Altitude" data-i18n-en="☀️ Heat, Humidity & Altitude" data-i18n-ar="☀️ تأثير الحرارة والرطوبة والارتفاع">☀️ Chaleur, Humidité & Altitude</a>
+            <a href="calculateur-gap-pente-nutrition.html" class="nav-dropdown-item" data-i18n-fr="⛰️ Allure Pente (GAP) & Nutrition" data-i18n-en="⛰️ Grade Adjusted Pace & Nutrition" data-i18n-ar="⛰️ إيقاع المنحدرات (GAP) والتغذية">⛰️ Allure Pente (GAP) & Nutrition</a>
+            <a href="generateur-intermittent-hiit-cod.html" class="nav-dropdown-item" data-i18n-fr="🔄 Intermittent HIIT & COD 180°" data-i18n-en="🔄 HIIT Intermittent & 180° COD" data-i18n-ar="🔄 مولد التدريب المتقطع HIIT وتغيير الاتجاه">🔄 Intermittent HIIT & COD 180°</a>
+            <a href="calculateur-charge-rpe-foster-acwr.html" class="nav-dropdown-item" data-i18n-fr="🛡️ Charge RPE Foster & ACWR" data-i18n-en="🛡️ Foster sRPE Load & ACWR Ratio" data-i18n-ar="🛡️ حمل التدريب (RPE Foster) ونسبة ACWR">🛡️ Charge RPE Foster & ACWR</a>
+          </div>
+        </div><!-- PROFEPS_DROPDOWN_END -->
+        <a href="blog.html" class="nav-link active" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
+      </div>
+      <div class="nav-right">
+        <div dir="ltr" class="lang-switch" aria-label="Sélecteur de langue">
+          <button type="button" class="lang-btn active" id="btn-lang-fr" data-lang="fr" onclick="window.profepsSetLang('fr')">FR</button>
+          <span class="lang-sep">/</span>
+          <button type="button" class="lang-btn" id="btn-lang-en" data-lang="en" onclick="window.profepsSetLang('en')">EN</button>
+          <span class="lang-sep">/</span>
+          <button type="button" class="lang-btn" id="btn-lang-ar" data-lang="ar" onclick="window.profepsSetLang('ar')">عربي</button>
         </div>
-    </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
 
 <section class="article-hero"><span class="section-badge">🏓 Sports de Raquette & Pédagogie</span><h1 class="article-title">Tennis de Table en EPS au Maroc : Guide Complet pour Collège et Lycée</h1><div class="article-meta"><span>📅 12 Mai 2026</span><span>⏱️ 20 min de lecture</span><span>👁️ Nouveau</span></div></section>
 
@@ -508,61 +615,83 @@ body{font-family:var(--font-sans);background:var(--bg-secondary);color:var(--tex
 
 
 
-    <footer class="footer">
-        <div class="footer-inner">
-            <div class="footer-brand">
-                <a href="/" aria-label="Prof EPS Maroc"><img src="/images/prof_eps.png" alt="Prof EPS Maroc" width="140" height="40" loading="lazy" decoding="async" style="height:48px; width:auto; object-fit:contain; filter:brightness(0) invert(1); margin-bottom:1rem;"></a>
-                <p><strong>Prof EPS Maroc (profeps.ma)</strong> — le premier générateur intelligent de fiches pédagogiques pour les professeurs d'EPS au Maroc, conforme aux Orientations Pédagogiques 2007 (lycée) et 2009 (collège).</p>
-                <div class="footer-social">
-                    <a href="https://www.facebook.com/profile.php?id=61559954402311" target="_blank" rel="noopener" aria-label="Facebook">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                    </a>
-                    <a href="https://www.instagram.com/profeps.ma/" target="_blank" rel="noopener" aria-label="Instagram">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                    </a>
-                    <a href="https://www.linkedin.com/in/eps-prof-maroc-814590190/" target="_blank" rel="noopener" aria-label="LinkedIn">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                    </a>
-                </div>
+    <footer class="footer" id="profeps-unified-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc">
+          <p data-i18n-fr="La plateforme de référence pour les professeurs d'EPS au Maroc. Générateur de documents pédagogiques gratuit, conforme aux orientations pédagogiques officielles (MEN)." data-i18n-en="The reference platform for PE teachers in Morocco. Free educational document generator & sports science calculators aligned with official MEN guidelines." data-i18n-ar="المنصة المرجعية لأساتذة التربية البدنية بالمغرب. مولد وثائق تربوية مجاني وحاسبات علمية للرياضة وفق التوجيهات التربوية الرسمية.">La plateforme de référence pour les professeurs d'EPS au Maroc. Générateur de documents pédagogiques gratuit, conforme aux orientations pédagogiques officielles (MEN).</p>
+          <div class="footer-stats">
+            <div class="footer-stat-item">
+              <span class="footer-stat-num">16+</span>
+              <span class="footer-stat-lbl" data-i18n-fr="APS couvertes" data-i18n-en="Sports covered" data-i18n-ar="نشاط رياضي">APS couvertes</span>
             </div>
-            <div class="footer-col">
-                <h3>Navigation</h3>
-                <ul>
-                    <li><a href="/"><span class="dot"></span>Accueil</a></li>
-                    <li><a href="generateur.html"><span class="dot"></span>Générateur</a></li>
-                    <li><a href="calculateur-vma.html"><span class="dot"></span>Calculateur VMA</a></li>
-                    <li><a href="blog.html"><span class="dot"></span>Blog</a></li>
-                    <li><a href="a-propos.html"><span class="dot"></span>À propos</a></li>
-                    <li><a href="contact.html"><span class="dot"></span>Contact</a></li>
-                    <li><a href="faq.html"><span class="dot"></span>FAQ</a></li>
-                </ul>
+            <div class="footer-stat-item">
+              <span class="footer-stat-num">6</span>
+              <span class="footer-stat-lbl" data-i18n-fr="Niveaux scolaires" data-i18n-en="School levels" data-i18n-ar="مستويات دراسية">Niveaux scolaires</span>
             </div>
-            <div class="footer-col">
-                <h4>Ressources</h4>
-                <ul>
-                    <li><a href="calculateur-vma.html"><span class="dot"></span>Calculateur VMA</a></li>
-                    <li><a href="blog.html"><span class="dot"></span>Articles</a></li>
-                    <li><a href="article-op.html"><span class="dot"></span>Orientations Pédagogiques</a></li>
-                    <li><a href="article-eval.html"><span class="dot"></span>Évaluation en EPS</a></li>
-                    <li><a href="article-securite.html"><span class="dot"></span>Sécurité en EPS</a></li>
-                    <li><a href="bibliotheque-numerique-eps.html"><span class="dot"></span>Bibliothèque numérique</a></li>
-                </ul>
+            <div class="footer-stat-item">
+              <span class="footer-stat-num">100%</span>
+              <span class="footer-stat-lbl" data-i18n-fr="Gratuit" data-i18n-en="Free" data-i18n-ar="مجاني">Gratuit</span>
             </div>
-            <div class="footer-col">
-                <h4>Légal &amp; Contact</h4>
-                <ul>
-                    <li><a href="politique-confidentialite.html"><span class="dot"></span>Politique de confidentialité</a></li>
-                    <li><a href="cgu.html"><span class="dot"></span>CGU</a></li>
-                    <li><a href="contact.html"><span class="dot"></span>Nous contacter</a></li>
-                    <li><a href="mailto:profepsma@gmail.com"><span class="dot"></span>profepsma@gmail.com</a></li>
-                </ul>
-            </div>
+          </div>
         </div>
-        <div class="footer-bottom">
-            <p class="footer-copyright">© 2026 Prof EPS Maroc (profeps.ma). Tous droits réservés.</p>
-            <p class="footer-tagline">Fait avec ❤️ pour les profs d'EPS au Maroc</p>
+
+        <div class="footer-col">
+          <h4 data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</h4>
+          <ul>
+            <li><a href="index.html" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a></li>
+            <li><a href="generateur.html" data-i18n-fr="Générateur PDF" data-i18n-en="PDF Generator" data-i18n-ar="مولد ملفات PDF">Générateur PDF</a></li>
+            <li><a href="blog.html" data-i18n-fr="Articles &amp; Blog" data-i18n-en="Articles &amp; Blog" data-i18n-ar="المقالات والمدونة">Articles &amp; Blog</a></li>
+            <li><a href="a-propos.html" data-i18n-fr="À propos" data-i18n-en="About Us" data-i18n-ar="من نحن">À propos</a></li>
+          </ul>
         </div>
-    </footer>
+
+        <div class="footer-col">
+          <h4 data-i18n-fr="RESSOURCES EPS" data-i18n-en="PE RESOURCES" data-i18n-ar="موارد التربية البدنية">RESSOURCES EPS</h4>
+          <ul>
+            <li><a href="cycles-eps-maroc.html" data-i18n-fr="Cycles d'EPS au Maroc" data-i18n-en="PE Cycles in Morocco" data-i18n-ar="أسلاك التربية البدنية بالمغرب">Cycles d'EPS au Maroc</a></li>
+            <li><a href="programme-eps-maroc.html" data-i18n-fr="Programme EPS Maroc" data-i18n-en="Morocco PE Curriculum" data-i18n-ar="برنامج التربية البدنية بالمغرب">Programme EPS Maroc</a></li>
+            <li><a href="evaluation-eps.html" data-i18n-fr="Évaluation en EPS" data-i18n-en="PE Assessment" data-i18n-ar="التقويم في التربية البدنية">Évaluation en EPS</a></li>
+            <li><a href="securite-eps.html" data-i18n-fr="Sécurité en EPS" data-i18n-en="Safety in PE" data-i18n-ar="السلامة في التربية البدنية">Sécurité en EPS</a></li>
+            <li><a href="bibliotheque-numerique-eps.html" data-i18n-fr="Bibliothèque numérique" data-i18n-en="Digital Library" data-i18n-ar="المكتبة الرقمية">Bibliothèque numérique</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col" id="footer-col-calculators">
+          <h4 data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</h4>
+          <ul>
+            <li><a href="hub-outils-sport-performance.html" class="footer-hub-highlight" data-i18n-fr="★ Hub des Calculateurs Sport" data-i18n-en="★ All Sports Calculators Hub" data-i18n-ar="★ بوابة جميع الحاسبات الرياضية">★ Hub des Calculateurs Sport</a></li>
+            <li><a href="calculateur-vma.html" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS (VMA) Calculator" data-i18n-ar="حاسبة السرعة الهوائية VMA">Calculateur VMA</a></li>
+            <li><a href="calculateur-vdot-asr-endurance.html" data-i18n-fr="Calculateur VO2 Max &amp; VDOT" data-i18n-en="VO2 Max &amp; VDOT Calculator" data-i18n-ar="حاسبة VO2 Max و VDOT">Calculateur VO2 Max &amp; VDOT</a></li>
+            <li><a href="calculateur-asr-reserve-vitesse.html" data-i18n-fr="Réserve Anaérobie (ASR)" data-i18n-en="Anaerobic Speed Reserve (ASR)" data-i18n-ar="احتياطي السرعة اللاهوائية ASR">Réserve Anaérobie (ASR)</a></li>
+            <li><a href="calculateur-indice-endurance.html" data-i18n-fr="Indice d'Endurance (IE)" data-i18n-en="Endurance Index (Péronnet)" data-i18n-ar="مؤشر التحمل (IE)">Indice d'Endurance (IE)</a></li>
+            <li><a href="calculateur-frequence-cardiaque-karvonen.html" data-i18n-fr="Fréquence Cardiaque Karvonen" data-i18n-en="Heart Rate (Karvonen)" data-i18n-ar="نبضات القلب Karvonen">Fréquence Cardiaque Karvonen</a></li>
+            <li><a href="calculateur-imc-sportif-masse-grasse.html" data-i18n-fr="Calculateur IMC &amp; IMG Sport" data-i18n-en="Athletic BMI &amp; Body Fat" data-i18n-ar="حاسبة كتلة الجسم والدهون">Calculateur IMC &amp; IMG Sport</a></li>
+            <li><a href="calculateur-chaleur-meteo-altitude.html" data-i18n-fr="Chaleur, Humidité &amp; Altitude" data-i18n-en="Heat, Humidity &amp; Altitude" data-i18n-ar="الحرارة والرطوبة والارتفاع">Chaleur, Humidité &amp; Altitude</a></li>
+            <li><a href="calculateur-gap-pente-nutrition.html" data-i18n-fr="Allure Pente (GAP) &amp; Nutrition" data-i18n-en="Grade Pace (GAP) &amp; Nutrition" data-i18n-ar="إيقاع المنحدرات والتغذية">Allure Pente (GAP) &amp; Nutrition</a></li>
+            <li><a href="generateur-intermittent-hiit-cod.html" data-i18n-fr="Intermittent HIIT &amp; COD 180°" data-i18n-en="HIIT Intermittent &amp; 180° COD" data-i18n-ar="التدريب المتقطع HIIT و COD">Intermittent HIIT &amp; COD 180°</a></li>
+            <li><a href="calculateur-charge-rpe-foster-acwr.html" data-i18n-fr="Charge RPE Foster &amp; ACWR" data-i18n-en="Foster RPE Load &amp; ACWR" data-i18n-ar="حمل التدريب RPE و ACWR">Charge RPE Foster &amp; ACWR</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</h4>
+          <ul>
+            <li><a href="politique-confidentialite.html" data-i18n-fr="Politique de confidentialité" data-i18n-en="Privacy Policy" data-i18n-ar="سياسة الخصوصية">Politique de confidentialité</a></li>
+            <li><a href="cgu.html" data-i18n-fr="Conditions d'utilisation" data-i18n-en="Terms of Use" data-i18n-ar="شروط الاستخدام">Conditions d'utilisation</a></li>
+            <li><a href="contact.html" data-i18n-fr="Nous contacter" data-i18n-en="Contact Us" data-i18n-ar="اتصل بنا">Nous contacter</a></li>
+            <li><a href="mailto:profepsma@gmail.com">✉️ profepsma@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span data-i18n-fr="© 2026 Prof EPS Maroc (profeps.ma). Tous droits réservés." data-i18n-en="© 2026 Prof EPS Morocco (profeps.ma). All rights reserved." data-i18n-ar="© 2026 أستاذ التربية البدنية المغرب (profeps.ma). جميع الحقوق محفوظة.">© 2026 Prof EPS Maroc (profeps.ma). Tous droits réservés.</span>
+        <span data-i18n-fr="Fait avec ❤️ pour les enseignants d'EPS au Maroc" data-i18n-en="Made with ❤️ for PE teachers &amp; runners" data-i18n-ar="صنع بـ ❤️ لأساتذة التربية البدنية والعدائين">Fait avec ❤️ pour les enseignants d'EPS au Maroc</span>
+      </div>
+    </div>
+  </footer>
 <script>const navbar=document.getElementById('navbar');const navToggle=document.getElementById('navToggle');const navMenu=document.getElementById('navMenu');window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>50);});const navBackdrop=document.createElement('div');navBackdrop.className='nav-backdrop';document.body.appendChild(navBackdrop);function toggleMenu(){const open=navMenu.classList.toggle('active');navToggle.classList.toggle('active',open);navBackdrop.classList.toggle('active',open);document.body.style.overflow=open?'hidden':'';navToggle.setAttribute('aria-expanded',open);}function closeMenu(){navMenu.classList.remove('active');navToggle.classList.remove('active');navBackdrop.classList.remove('active');document.body.style.overflow='';navToggle.setAttribute('aria-expanded','false');}navToggle.addEventListener('click',e=>{e.stopPropagation();toggleMenu();});navBackdrop.addEventListener('click',closeMenu);document.addEventListener('click',e=>{if(!navMenu.contains(e.target)&&!navToggle.contains(e.target))closeMenu();});navMenu.querySelectorAll('.nav-link,.nav-cta').forEach(l=>l.addEventListener('click',closeMenu));</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="/js/auth-shared.js"></script>
 <script>(function(){var slug=window.location.pathname.replace('.html','').replace(/^\//,'');var title=document.querySelector('.article-title,h1')?.textContent||document.title;var url=window.location.pathname;var heroMeta=document.querySelector('.article-meta');if(heroMeta){var favBtn=ProfEPS.createFavoriteButton(slug,title,url,false);heroMeta.appendChild(favBtn);}})();</script>
@@ -570,66 +699,90 @@ body{font-family:var(--font-sans);background:var(--bg-secondary);color:var(--tex
 
 
 
-<script id="profeps-navbar-script">
-(() => {
-    const navbar = document.getElementById('navbar');
-    const navToggle = document.getElementById('navToggle');
-    const navMenu = document.getElementById('navMenu');
-    const navDropdown = document.querySelector('#navbar .nav-dropdown');
-    let backdrop = document.getElementById('navBackdrop');
 
-    if (!backdrop) {
-        backdrop = document.createElement('div');
-        backdrop.id = 'navBackdrop';
-        backdrop.className = 'nav-backdrop';
-        document.body.prepend(backdrop);
-    }
+<script id="profeps-master-unifier-js">
+(function() {
+  var nav = document.getElementById('navbar');
+  var toggle = document.getElementById('navToggle');
+  var menu = document.getElementById('navMenu');
+  var dropdown = document.getElementById('navCalcDropdown');
 
-    if (navbar) {
-        window.addEventListener('scroll', () => {
-            navbar.classList.toggle('scrolled', window.scrollY > 40);
-        });
-    }
+  if (nav) {
+    window.addEventListener('scroll', function() {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+  }
+  if (toggle && menu) {
+    toggle.addEventListener('click', function() {
+      toggle.classList.toggle('active');
+      menu.classList.toggle('active');
+    });
+  }
+  if (dropdown) {
+    dropdown.addEventListener('mouseenter', function() { dropdown.classList.add('open'); });
+    dropdown.addEventListener('mouseleave', function() { dropdown.classList.remove('open'); });
+  }
 
-    if (navDropdown) {
-        navDropdown.addEventListener('mouseenter', () => navDropdown.classList.add('open'));
-        navDropdown.addEventListener('mouseleave', () => navDropdown.classList.remove('open'));
-    }
+  var PAGE_PHRASES = [
+    { fr: "Générateur de Documents Pédagogiques EPS", en: "PE Educational Document Generator", ar: "مولد الوثائق التربوية للتربية البدنية" },
+    { fr: "Créez vos fiches de cycle et de séance en quelques clics", en: "Create your unit and lesson plans in a few clicks", ar: "أنشئ جذاذات الأسلاك والحصص التربوية في بضع نقرات" },
+    { fr: "Générer mon document", en: "Generate my document", ar: "إنشاء وثيقتي" },
+    { fr: "Télécharger en PDF", en: "Download PDF", ar: "تحميل بصيغة PDF" },
+    { fr: "Informations générales", en: "General Information", ar: "معلومات عامة" },
+    { fr: "Niveau scolaire", en: "School Level", ar: "المستوى الدراسي" },
+    { fr: "Activité physique et sportive", en: "Physical & Sports Activity", ar: "النشاط البدني والرياضي" },
+    { fr: "Compétence visée", en: "Target Competency", ar: "الكفاية المستهدفة" },
+    { fr: "Objectif terminal d'intégration", en: "Terminal Integration Objective", ar: "هدف الإدماج النهائي" },
+    { fr: "Blog & Ressources Pédagogiques EPS", en: "PE Blog & Educational Resources", ar: "مدونة وموارد التربية البدنية والرياضية" },
+    { fr: "Lire l'article", en: "Read article", ar: "اقرأ المقال" },
+    { fr: "Calculer ma VMA", en: "Calculate my MAS", ar: "احسب سرعة VMA" }
+  ];
 
-    if (navToggle && navMenu) {
-        function toggleNav() {
-            const isOpen = navMenu.classList.toggle('active');
-            navToggle.classList.toggle('active', isOpen);
-            if (backdrop) backdrop.classList.toggle('active', isOpen);
-            document.body.style.overflow = isOpen ? 'hidden' : '';
+  window.profepsSetLang = function(lang) {
+    try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
+
+    ['fr', 'en', 'ar'].forEach(function(code) {
+      var btn = document.getElementById('btn-lang-' + code);
+      if (btn) btn.className = (code === lang) ? 'lang-btn active' : 'lang-btn';
+      document.querySelectorAll('.lang-btn[data-lang="' + code + '"]').forEach(function(b) {
+        b.className = (code === lang) ? 'lang-btn active' : 'lang-btn';
+      });
+    });
+
+    document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function(el) {
+      var val = el.getAttribute('data-i18n-' + lang);
+      if (val) el.textContent = val;
+    });
+
+    if (typeof window.setToolLang === 'function') window.setToolLang(lang);
+    if (typeof window.changeLang === 'function') window.changeLang(lang);
+    if (typeof window.setLanguage === 'function') window.setLanguage(lang);
+
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+    PAGE_PHRASES.forEach(function(item) {
+      document.querySelectorAll('h1, h2, h3, p, button, label, span, a').forEach(function(node) {
+        if (node.children.length === 0 && node.textContent) {
+          var t = node.textContent.trim();
+          if (t === item.fr || t === item.en || t === item.ar) {
+            node.textContent = item[lang];
+          }
         }
+      });
+    });
+  };
 
-        function closeNav() {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
-            if (backdrop) backdrop.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        navToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleNav();
-        });
-
-        if (backdrop) backdrop.addEventListener('click', closeNav);
-
-        document.addEventListener('click', (e) => {
-            if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
-                closeNav();
-            }
-        });
-
-        navMenu.querySelectorAll('.nav-dropdown-item, .nav-cta').forEach(link => {
-            link.addEventListener('click', closeNav);
-        });
+  window.addEventListener('DOMContentLoaded', function() {
+    var saved = 'fr';
+    try { saved = localStorage.getItem('profeps_lang') || 'fr'; } catch(e) {}
+    if (saved && saved !== 'fr') {
+      window.profepsSetLang(saved);
     }
+  });
 })();
 </script>
+
 </body>
 </html>
 
