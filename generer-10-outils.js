@@ -517,25 +517,25 @@ main > div.max-w-3xl::before {
 }
 
 /* Alignement parfait des grilles de champs (input / select) même si un label fait 2 lignes */
-main .grid {
+main > div.max-w-3xl .grid {
   align-items: stretch !important;
 }
-main .grid > div {
+main > div.max-w-3xl .grid > div {
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
   height: 100% !important;
   box-sizing: border-box !important;
 }
-main .grid > div > label {
+main > div.max-w-3xl .grid > div > label {
   margin-bottom: 0.45rem !important;
   line-height: 1.3 !important;
   min-height: 2.1rem !important;
   display: flex !important;
   align-items: flex-end !important;
 }
-main input[type="number"],
-main select {
+main > div.max-w-3xl input[type="number"],
+main > div.max-w-3xl select {
   height: 48px !important;
   min-height: 48px !important;
   max-height: 48px !important;
@@ -550,8 +550,8 @@ main select {
   transition: all 0.18s ease !important;
   margin-top: auto !important;
 }
-main input[type="number"]:focus,
-main select:focus {
+main > div.max-w-3xl input[type="number"]:focus,
+main > div.max-w-3xl select:focus {
   outline: none !important;
   border-color: #c1272d !important;
   background-color: #ffffff !important;
@@ -967,46 +967,239 @@ const SEO_GUIDES = {
   }
 };
 
+function escapeAttr(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function escapeHtmlText(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
 function buildSeoGuideSection(config) {
-  const g = SEO_GUIDES[config.filename] || SEO_GUIDES['hub-outils-sport-performance.html'];
+  if (config.filename === 'hub-outils-sport-performance.html') {
+    return '';
+  }
+  const g = SEO_GUIDES[config.filename];
+  if (!g) return '';
+
+  const stepsFr = g.howFr.split(/\s*(?=[1-4]\.\s)/).map((s) => s.replace(/^[1-4]\.\s*/, '').trim()).filter(Boolean);
+  const stepsEn = g.howEn.split(/\s*(?=[1-4]\.\s)/).map((s) => s.replace(/^[1-4]\.\s*/, '').trim()).filter(Boolean);
+  const stepsAr = g.howAr.split(/\s*(?=[1-4]\.\s)/).map((s) => s.replace(/^[1-4]\.\s*/, '').trim()).filter(Boolean);
+
+  const stepCardsHtml = stepsFr.map((stFr, idx) => {
+    const stEn = stepsEn[idx] || stFr;
+    const stAr = stepsAr[idx] || stFr;
+    const num = idx + 1;
+    return `
+          <div class="flex items-start gap-3.5 p-4 rounded-xl bg-slate-50/90 border border-slate-200/90 shadow-xs hover:border-red-200 transition-all" style="display:flex;align-items:flex-start;gap:0.85rem;padding:1rem;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;">
+            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:linear-gradient(135deg,#c1272d,#991b1b);color:#ffffff;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 8px rgba(193,39,45,0.28);">${num}</span>
+            <p class="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed m-0" style="font-size:0.84rem;line-height:1.55;color:#334155;margin:0;" data-i18n-fr="${escapeAttr(stFr)}" data-i18n-en="${escapeAttr(stEn)}" data-i18n-ar="${escapeAttr(stAr)}">${escapeHtmlText(stFr)}</p>
+          </div>`;
+  }).join('');
+
+  const partsFr = g.inputsFr.split(/\.\s+(?=[A-ZÉÀÂÎÔÛÇ0-9])/).map((s) => s.trim().replace(/\.$/, '')).filter(Boolean);
+  const partsEn = g.inputsEn.split(/\.\s+(?=[A-Z0-9])/).map((s) => s.trim().replace(/\.$/, '')).filter(Boolean);
+  const partsAr = g.inputsAr.split(/\.\s+/).map((s) => s.trim().replace(/\.$/, '')).filter(Boolean);
+
+  const inputCardsHtml = partsFr.map((pFr, idx) => {
+    const pEn = (partsEn[idx] || pFr) + '.';
+    const pAr = (partsAr[idx] || pFr) + '.';
+    const fullFr = pFr + '.';
+    return `
+          <div class="flex items-start gap-3 p-3.5 rounded-xl bg-emerald-50/50 border border-emerald-200/80" style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.9rem 1rem;border-radius:12px;background:rgba(236,253,245,0.55);border:1px solid rgba(167,243,208,0.85);">
+            <span class="w-6 h-6 rounded-lg bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0 mt-0.5" style="width:24px;height:24px;border-radius:8px;background:#006233;color:#ffffff;font-size:0.72rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">✓</span>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed m-0" style="font-size:0.83rem;line-height:1.55;color:#1e293b;margin:0;" data-i18n-fr="${escapeAttr(fullFr)}" data-i18n-en="${escapeAttr(pEn)}" data-i18n-ar="${escapeAttr(pAr)}">${escapeHtmlText(fullFr)}</p>
+          </div>`;
+  }).join('');
+
   const kwList = (config.keywordsFr || 'calculateur sport, vma, vo2 max, eps maroc').split(',').map((k) => k.trim()).filter(Boolean);
-  const kwBadges = kwList.map((kw) => `<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200"># ${kw}</span>`).join('\n          ');
+  const kwBadges = kwList.map((kw) => `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600 border border-slate-200" style="display:inline-flex;align-items:center;padding:0.22rem 0.65rem;border-radius:9999px;font-size:0.72rem;font-weight:600;background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;">${escapeHtmlText(kw)}</span>`).join('\n            ');
 
   return `
-    <!-- GUIDE D'UTILISATION, EXPLICATION DES PARAMÈTRES & SEO -->
-    <section class="peps-seo-guide-card max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 mt-8" aria-labelledby="seo-guide-title">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4">
-        <div class="flex items-center gap-2.5">
-          <span class="w-8 h-8 rounded-lg bg-red-50 border border-red-200 text-red-700 flex items-center justify-center font-black text-sm shrink-0">📘</span>
-          <h2 id="seo-guide-title" class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight" data-i18n-fr="Guide d'Utilisation & Explication Scientifique des Paramètres" data-i18n-en="User Guide & Scientific Explanation of Input Parameters" data-i18n-ar="دليل الاستخدام والتفسير العلمي للمعطيات المطلوبة">Guide d'Utilisation & Explication Scientifique des Paramètres</h2>
+    <!-- GUIDE D'UTILISATION VISUEL & EXPLICATION DES PARAMÈTRES (SEO) -->
+    <section class="peps-seo-guide-card max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 mt-8" style="max-width:48rem;margin:2rem auto 0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:20px;padding:1.75rem;box-shadow:0 10px 28px -8px rgba(15,23,42,0.06);" aria-labelledby="seo-guide-title">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.5rem;border-bottom:1px solid #f1f5f9;padding-bottom:1rem;">
+        <div class="flex items-center gap-2.5" style="display:flex;align-items:center;gap:0.65rem;">
+          <span class="w-9 h-9 rounded-xl bg-red-50 border border-red-200 text-red-700 flex items-center justify-center font-black text-base shrink-0" style="width:36px;height:36px;border-radius:10px;background:#fef2f2;border:1px solid #fecaca;display:inline-flex;align-items:center;justify-content:center;font-size:1rem;">📘</span>
+          <div>
+            <h2 id="seo-guide-title" class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight m-0" style="font-size:1.05rem;font-weight:800;color:#0f172a;margin:0;" data-i18n-fr="Mode d'Emploi & Signification des Paramètres" data-i18n-en="How It Works & Input Parameter Guide" data-i18n-ar="طريقة الاستخدام وشرح المعطيات المطلوبة">Mode d'Emploi & Signification des Paramètres</h2>
+          </div>
         </div>
-        <span class="text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full self-start sm:self-auto" data-i18n-fr="Référentiel Sport & EPS" data-i18n-en="Sports Science & PE Standard" data-i18n-ar="مرجع علوم الرياضة والتربية البدنية">Référentiel Sport & EPS</span>
+        <span class="text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full self-start sm:self-auto" style="font-size:0.74rem;font-weight:700;color:#065f46;background:#ecfdf5;border:1px solid #a7f3d0;padding:0.25rem 0.75rem;border-radius:9999px;" data-i18n-fr="Guide Scientifique & EPS" data-i18n-en="Sports Science & PE Guide" data-i18n-ar="دليل علمي وتربوي">Guide Scientifique & EPS</span>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
-          <h3 class="text-xs font-extrabold uppercase tracking-wider text-red-700" data-i18n-fr="1. Comment utiliser ce calculateur étape par étape ?" data-i18n-en="1. Step-by-Step Calculator Guide" data-i18n-ar="1. كيفية استخدام هذه الحاسبة خطوة بخطوة">1. Comment utiliser ce calculateur étape par étape ?</h3>
-          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed" data-i18n-fr="${g.howFr.replace(/"/g, '&quot;')}" data-i18n-en="${g.howEn.replace(/"/g, '&quot;')}" data-i18n-ar="${g.howAr.replace(/"/g, '&quot;')}">${g.howFr}</p>
-        </div>
-
-        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
-          <h3 class="text-xs font-extrabold uppercase tracking-wider text-emerald-800" data-i18n-fr="2. Comprendre les informations demandées" data-i18n-en="2. Understanding the Requested Inputs" data-i18n-ar="2. شرح المعلومات والمعطيات المطلوبة">2. Comprendre les informations demandées</h3>
-          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed" data-i18n-fr="${g.inputsFr.replace(/"/g, '&quot;')}" data-i18n-en="${g.inputsEn.replace(/"/g, '&quot;')}" data-i18n-ar="${g.inputsAr.replace(/"/g, '&quot;')}">${g.inputsFr}</p>
+      <div class="space-y-2.5">
+        <h3 class="text-xs font-extrabold uppercase tracking-wider text-red-700 m-0" style="font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:#b91c1c;margin:0 0 0.5rem 0;" data-i18n-fr="1. Étapes d'utilisation du calculateur" data-i18n-en="1. Step-by-Step Instructions" data-i18n-ar="1. خطوات استخدام الحاسبة">1. Étapes d'utilisation du calculateur</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          ${stepCardsHtml}
         </div>
       </div>
 
-      <div class="p-4 rounded-xl bg-amber-50/60 border border-amber-200/80 space-y-1.5">
-        <h3 class="text-xs font-extrabold uppercase tracking-wider text-amber-900" data-i18n-fr="💡 Question Fréquente & Point Clé Scientifique" data-i18n-en="💡 Frequently Asked Question & Key Takeaway" data-i18n-ar="💡 سؤال شائع وخلاصة علمية">${g.faqQFr}</h3>
-        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">${g.faqAFr}</p>
+      <div class="space-y-2.5 pt-2">
+        <h3 class="text-xs font-extrabold uppercase tracking-wider text-emerald-800 m-0" style="font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:#065f46;margin:0 0 0.5rem 0;" data-i18n-fr="2. Explication des informations demandées" data-i18n-en="2. Explanation of Requested Inputs" data-i18n-ar="2. شرح المعلومات والمعطيات المطلوبة">2. Explication des informations demandées</h3>
+        <div class="grid grid-cols-1 gap-2.5">
+          ${inputCardsHtml}
+        </div>
       </div>
 
-      <div class="pt-2 border-t border-slate-100 space-y-2">
-        <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400" data-i18n-fr="Recherches fréquentes & Thématiques associées (SEO)" data-i18n-en="Related Search Topics & Keywords" data-i18n-ar="الكلمات المفتاحية والمواضيع المرتبطة">Recherches fréquentes & Thématiques associées (SEO)</div>
-        <div class="flex flex-wrap gap-1.5">
-          ${kwBadges}
-        </div>
+      <div class="p-4 rounded-xl bg-amber-50/70 border border-amber-200/80 space-y-1.5" style="padding:1rem 1.15rem;border-radius:14px;background:#fffbeb;border:1px solid #fde68a;">
+        <h3 class="text-xs font-extrabold uppercase tracking-wider text-amber-900 m-0" style="font-size:0.76rem;font-weight:800;color:#78350f;margin:0 0 0.35rem 0;">💡 ${escapeHtmlText(g.faqQFr)}</h3>
+        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed m-0" style="font-size:0.83rem;line-height:1.55;color:#334155;margin:0;">${escapeHtmlText(g.faqAFr)}</p>
+      </div>
+
+      <div class="pt-3 border-t border-slate-100 flex flex-wrap items-center gap-1.5" style="padding-top:0.75rem;border-top:1px solid #f1f5f9;display:flex;flex-wrap:wrap;align-items:center;gap:0.4rem;">
+        <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mr-1" style="font-size:0.68rem;font-weight:700;text-transform:uppercase;color:#94a3b8;margin-right:0.35rem;" data-i18n-fr="Thématiques :" data-i18n-en="Topics:" data-i18n-ar="مواضيع ذات صلة:">Thématiques :</span>
+        ${kwBadges}
       </div>
     </section>`;
+}
+
+const CALCULATOR_UI_STANDALONE_CSS = `<style id="profeps-calculator-ui-css">
+/* Styles dédiés aux pages Calculateurs (Hero, Alignement des cases & Bouton CTA VMA) */
+.vma-hero {
+  margin-top: 80px !important;
+  padding: 2.75rem 1.25rem 2.25rem !important;
+  background: radial-gradient(circle at 18% 20%, rgba(193, 39, 45, 0.07) 0%, transparent 45%),
+              radial-gradient(circle at 82% 80%, rgba(0, 98, 51, 0.07) 0%, transparent 45%),
+              linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  text-align: center !important;
+  position: relative !important;
+}
+.hero-badge {
+  display: inline-flex !important; align-items: center !important; gap: 0.45rem !important;
+  background: linear-gradient(135deg, rgba(193, 39, 45, 0.1), rgba(0, 98, 51, 0.08)) !important;
+  color: #c1272d !important;
+  padding: 0.4rem 1.1rem !important; border-radius: 9999px !important;
+  font-size: 0.76rem !important; font-weight: 800 !important; text-transform: uppercase !important;
+  letter-spacing: 0.05em !important; margin-bottom: 0.85rem !important;
+  border: 1px solid rgba(193, 39, 45, 0.22) !important;
+  box-shadow: 0 2px 8px rgba(193, 39, 45, 0.08) !important;
+}
+.vma-hero h1 {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
+  font-size: clamp(1.55rem, 3vw, 2.25rem) !important;
+  font-weight: 800 !important; color: #0f172a !important; margin: 0 auto 0.65rem auto !important;
+  max-width: 880px !important; line-height: 1.22 !important; letter-spacing: -0.02em !important;
+}
+.vma-hero p {
+  font-size: 0.95rem !important; color: #475569 !important; max-width: 760px !important;
+  margin: 0 auto !important; line-height: 1.6 !important;
+}
+main > div.max-w-3xl,
+#tool-results-panel > div,
+.peps-seo-guide-card {
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(203, 213, 225, 0.85) !important;
+  box-shadow: 0 12px 32px -8px rgba(15, 23, 42, 0.07), 0 2px 6px rgba(15, 23, 42, 0.03) !important;
+  background: #ffffff !important;
+}
+main > div.max-w-3xl::before {
+  content: '' !important;
+  position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important;
+  height: 4px !important;
+  background: linear-gradient(90deg, #c1272d 0%, #e11d48 50%, #006233 100%) !important;
+}
+main > div.max-w-3xl .grid {
+  align-items: stretch !important;
+}
+main > div.max-w-3xl .grid > div {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+}
+main > div.max-w-3xl .grid > div > label {
+  margin-bottom: 0.45rem !important;
+  line-height: 1.3 !important;
+  min-height: 2.1rem !important;
+  display: flex !important;
+  align-items: flex-end !important;
+}
+main > div.max-w-3xl input[type="number"],
+main > div.max-w-3xl select {
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  border-radius: 12px !important;
+  border: 1.5px solid #cbd5e1 !important;
+  background-color: #f8fafc !important;
+  padding: 0 0.9rem !important;
+  font-size: 0.95rem !important;
+  color: #0f172a !important;
+  transition: all 0.18s ease !important;
+  margin-top: auto !important;
+}
+main > div.max-w-3xl input[type="number"]:focus,
+main > div.max-w-3xl select:focus {
+  outline: none !important;
+  border-color: #c1272d !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 0 0 4px rgba(193, 39, 45, 0.12) !important;
+}
+#tool-results-panel .grid > div {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+}
+button.peps-cta-btn,
+#btn-calc-main {
+  width: 100% !important;
+  padding: 1.05rem 1.6rem !important;
+  margin-top: 0.65rem !important;
+  background: linear-gradient(135deg, #c1272d 0%, #991b1b 52%, #006233 100%) !important;
+  background-color: #c1272d !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
+  font-size: 1.02rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.01em !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border-radius: 14px !important;
+  cursor: pointer !important;
+  box-shadow: 0 12px 28px -5px rgba(193, 39, 45, 0.48), 0 4px 12px -2px rgba(0, 98, 51, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.28) !important;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, filter 0.2s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.75rem !important;
+  position: relative !important;
+  overflow: hidden !important;
+  text-align: center !important;
+}
+button.peps-cta-btn:hover,
+#btn-calc-main:hover {
+  transform: translateY(-2px) scale(1.005) !important;
+  box-shadow: 0 16px 34px -5px rgba(193, 39, 45, 0.58), 0 6px 16px -2px rgba(0, 98, 51, 0.34) !important;
+  filter: brightness(1.07) !important;
+}
+button.peps-cta-btn:active,
+#btn-calc-main:active {
+  transform: translateY(0) scale(0.995) !important;
+}
+</style>`;
+
+function upgradeCtaButtonsInHtml(bodyHtml) {
+  return bodyHtml.replace(
+    /<button([^>]*id="btn-calc-main"[^>]*)>([\s\S]*?)<\/button>/g,
+    function(_, attrs, inner) {
+      return `<button type="button" id="btn-calc-main" onclick="triggerCalculation()" class="peps-cta-btn w-full mt-3 py-4 px-6 rounded-2xl font-extrabold text-base sm:text-lg text-white shadow-xl transition-all duration-200 flex items-center justify-center gap-3 cursor-pointer select-none" style="width:100% !important;margin-top:0.7rem !important;padding:1.05rem 1.6rem !important;border-radius:14px !important;background:linear-gradient(135deg,#c1272d 0%,#991b1b 52%,#006233 100%) !important;background-color:#c1272d !important;color:#ffffff !important;-webkit-text-fill-color:#ffffff !important;font-weight:800 !important;font-size:1.02rem !important;letter-spacing:0.01em !important;border:1px solid rgba(255,255,255,0.26) !important;box-shadow:0 12px 28px -5px rgba(193,39,45,0.48),0 4px 12px -2px rgba(0,98,51,0.28),inset 0 1px 0 rgba(255,255,255,0.28) !important;display:flex !important;align-items:center !important;justify-content:center !important;gap:0.75rem !important;cursor:pointer !important;text-align:center !important;">${inner.trim()}<span class="peps-cta-arrow" aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:9999px;background:rgba(255,255,255,0.2);font-size:1rem;font-weight:900;line-height:1;flex-shrink:0;margin-left:0.25rem;">→</span></button>`;
+    }
+  );
 }
 
 function buildPageHtml(config) {
@@ -1038,22 +1231,24 @@ function buildPageHtml(config) {
     ]
   });
 
+  const upgradedBodyHtml = upgradeCtaButtonsInHtml(config.bodyHtml);
+
   return `<!DOCTYPE html>
 <html lang="fr" dir="ltr" id="html-root">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${config.titleFr} | Prof EPS Maroc</title>
-  <meta name="description" id="metaDesc" content="${config.subFr.replace(/"/g, '&quot;')}" />
-  <meta name="keywords" content="${(config.keywordsFr || 'calculateur vma, calculateur vo2 max, préparation physique, prof eps maroc').replace(/"/g, '&quot;')}" />
+  <title>${escapeHtmlText(config.titleFr)} | Prof EPS Maroc</title>
+  <meta name="description" id="metaDesc" content="${escapeAttr(config.subFr)}" />
+  <meta name="keywords" content="${escapeAttr(config.keywordsFr || 'calculateur vma, calculateur vo2 max, préparation physique, prof eps maroc')}" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="${config.titleFr.replace(/"/g, '&quot;')} | Prof EPS Maroc" />
-  <meta property="og:description" content="${config.subFr.replace(/"/g, '&quot;')}" />
+  <meta property="og:title" content="${escapeAttr(config.titleFr)} | Prof EPS Maroc" />
+  <meta property="og:description" content="${escapeAttr(config.subFr)}" />
   <meta property="og:url" content="https://profeps.ma/${config.filename}" />
   <meta property="og:site_name" content="Prof EPS Maroc" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="${config.titleFr.replace(/"/g, '&quot;')} | Prof EPS Maroc" />
-  <meta name="twitter:description" content="${config.subFr.replace(/"/g, '&quot;')}" />
+  <meta name="twitter:title" content="${escapeAttr(config.titleFr)} | Prof EPS Maroc" />
+  <meta name="twitter:description" content="${escapeAttr(config.subFr)}" />
   <link rel="canonical" href="https://profeps.ma/${config.filename}" />
   <link rel="icon" type="image/png" href="images/prof_eps.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1061,28 +1256,24 @@ function buildPageHtml(config) {
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
   <script type="application/ld+json">${schemaJson}</script>
   <script src="https://cdn.tailwindcss.com"></script>
+  ${CALCULATOR_UI_STANDALONE_CSS}
   ${SHARED_MASTER_CSS}
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col bg-slate-50">
   ${buildNavbarHtml(config.filename)}
   <script id="profeps-master-unifier-js">
 ${SHARED_NAV_JS}
   </script>
   <!-- PROFEPS_UNIFIED_NAVBAR_END -->
 
-  <header class="vma-hero">
-    <div id="ui-badge" class="hero-badge" data-i18n-fr="⚡ ${config.clusterBadgeFr.replace(/"/g, '&quot;')}" data-i18n-en="⚡ ${config.clusterBadgeEn.replace(/"/g, '&quot;')}" data-i18n-ar="⚡ ${config.clusterBadgeAr.replace(/"/g, '&quot;')}">⚡ ${config.clusterBadgeFr}</div>
-    <h1 id="ui-title" data-i18n-fr="${config.titleFr.replace(/"/g, '&quot;')}" data-i18n-en="${config.titleEn.replace(/"/g, '&quot;')}" data-i18n-ar="${config.titleAr.replace(/"/g, '&quot;')}">${config.titleFr}</h1>
-    <p id="ui-sub" data-i18n-fr="${config.subFr.replace(/"/g, '&quot;')}" data-i18n-en="${config.subEn.replace(/"/g, '&quot;')}" data-i18n-ar="${config.subAr.replace(/"/g, '&quot;')}">${config.subFr}</p>
-    <div class="peps-hero-pills">
-      <span class="peps-hero-pill" data-i18n-fr="✓ Formules Scientifiques Validées" data-i18n-en="✓ Peer-Reviewed Formulas" data-i18n-ar="✓ معادلات علمية معتمدة">✓ Formules Scientifiques Validées</span>
-      <span class="peps-hero-pill" data-i18n-fr="📊 Barèmes & Interprétation Complète" data-i18n-en="📊 Full Norms & Interpretation" data-i18n-ar="📊 جداول معيارية وتفسير شامل">📊 Barèmes & Interprétation Complète</span>
-      <span class="peps-hero-pill" data-i18n-fr="🇲🇦 Conforme EPS & Sport" data-i18n-en="🇲🇦 PE & Coaching Ready" data-i18n-ar="🇲🇦 مطابق للتربية البدنية والرياضة">🇲🇦 Conforme EPS & Sport</span>
-    </div>
+  <header class="vma-hero" style="margin-top:80px;padding:2.75rem 1.25rem 2.25rem;text-align:center;border-bottom:1px solid #e2e8f0;background:radial-gradient(circle at 18% 20%,rgba(193,39,45,0.07) 0%,transparent 45%),radial-gradient(circle at 82% 80%,rgba(0,98,51,0.07) 0%,transparent 45%),linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);">
+    <div id="ui-badge" class="hero-badge" style="display:inline-flex;align-items:center;gap:0.45rem;background:linear-gradient(135deg,rgba(193,39,45,0.1),rgba(0,98,51,0.08));color:#c1272d;padding:0.4rem 1.1rem;border-radius:9999px;font-size:0.76rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.85rem;border:1px solid rgba(193,39,45,0.22);" data-i18n-fr="⚡ ${escapeAttr(config.clusterBadgeFr)}" data-i18n-en="⚡ ${escapeAttr(config.clusterBadgeEn)}" data-i18n-ar="⚡ ${escapeAttr(config.clusterBadgeAr)}">⚡ ${escapeHtmlText(config.clusterBadgeFr)}</div>
+    <h1 id="ui-title" style="font-size:clamp(1.55rem,3vw,2.25rem);font-weight:800;color:#0f172a;margin:0 auto 0.65rem auto;max-width:880px;line-height:1.22;" data-i18n-fr="${escapeAttr(config.titleFr)}" data-i18n-en="${escapeAttr(config.titleEn)}" data-i18n-ar="${escapeAttr(config.titleAr)}">${escapeHtmlText(config.titleFr)}</h1>
+    <p id="ui-sub" style="font-size:0.95rem;color:#475569;max-width:760px;margin:0 auto;line-height:1.6;" data-i18n-fr="${escapeAttr(config.subFr)}" data-i18n-en="${escapeAttr(config.subEn)}" data-i18n-ar="${escapeAttr(config.subAr)}">${escapeHtmlText(config.subFr)}</p>
   </header>
 
   <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-6">
-    ${config.bodyHtml}
+    ${upgradedBodyHtml}
     ${buildSeoGuideSection(config)}
   </main>
 
