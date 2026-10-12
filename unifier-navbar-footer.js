@@ -1054,7 +1054,8 @@ ${dropdownLinks}
   </div>`;
 }
 
-function buildFooterHtml() {
+function buildFooterHtml(isPublicDir = false) {
+  const pfx = "";
   return `<footer class="footer" id="profeps-unified-footer">
     <div class="footer-container">
       <div class="footer-grid">
