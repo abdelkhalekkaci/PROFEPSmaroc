@@ -1238,17 +1238,17 @@ function buildPageHtml(config) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${escapeHtmlText(config.titleFr)} | Prof EPS Maroc</title>
-  <meta name="description" id="metaDesc" content="${escapeAttr(config.subFr)}" />
+  <title>${escapeHtmlText(config.seoTitle || (config.titleFr + " | Prof EPS Maroc"))}</title>
+  <meta name="description" id="metaDesc" content="${escapeAttr(config.seoDesc || config.subFr)}" />
   <meta name="keywords" content="${escapeAttr(config.keywordsFr || 'calculateur vma, calculateur vo2 max, préparation physique, prof eps maroc')}" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="${escapeAttr(config.titleFr)} | Prof EPS Maroc" />
-  <meta property="og:description" content="${escapeAttr(config.subFr)}" />
+  <meta property="og:title" content="${escapeAttr(config.seoTitle || (config.titleFr + " | Prof EPS Maroc"))}" />
+  <meta property="og:description" content="${escapeAttr(config.seoDesc || config.subFr)}" />
   <meta property="og:url" content="https://profeps.ma/${config.filename}" />
   <meta property="og:site_name" content="Prof EPS Maroc" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="${escapeAttr(config.titleFr)} | Prof EPS Maroc" />
-  <meta name="twitter:description" content="${escapeAttr(config.subFr)}" />
+  <meta name="twitter:title" content="${escapeAttr(config.seoTitle || (config.titleFr + " | Prof EPS Maroc"))}" />
+  <meta name="twitter:description" content="${escapeAttr(config.seoDesc || config.subFr)}" />
   <link rel="canonical" href="https://profeps.ma/${config.filename}" />
   <link rel="icon" type="image/png" href="images/prof_eps.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1332,6 +1332,8 @@ const PAGES = [
   // 1. VO2 Max & VDOT
   {
     filename: 'calculateur-vdot-asr-endurance.html',
+    seoTitle: "Calculateur VO2 Max & VDOT Course | Prof EPS",
+    seoDesc: "Calculez votre VO2 Max, vos allures d’entraînement VDOT et vos chronos prédits selon votre niveau. Barème ACSM et repères EPS.",
     keywordsFr: 'calculateur vo2 max, calculer vo2max, vo2 max course à pied, estimation vo2 max ml/kg/min, tableau vo2 max age homme femme, vdot jack daniels, calculer sa vo2max avec vma',
     clusterBadgeFr: 'Cluster 1A · Consommation Maximale d’Oxygène (VO2 Max) & VDOT',
     clusterBadgeEn: 'Cluster 1A · Maximal Oxygen Uptake (VO2 Max) & Jack Daniels VDOT',
@@ -1572,6 +1574,8 @@ const PAGES = [
   // 2. Fréquence Cardiaque Karvonen
   {
     filename: 'calculateur-frequence-cardiaque-karvonen.html',
+    seoTitle: "Calculateur Fréquence Cardiaque Karvonen | Prof EPS",
+    seoDesc: "Déterminez votre FC Max, FC de réserve et vos 5 zones cibles d’entraînement avec la méthode Karvonen. Repères pour l’EPS.",
     keywordsFr: 'calculateur fréquence cardiaque karvonen, zone cardiaque course à pied, fc max tanaka, fréquence cardiaque de réserve, zones entrainement cardiaque eps',
     clusterBadgeFr: 'Cluster 2A · Cardiologie Sportive & Méthode de Karvonen',
     clusterBadgeEn: 'Cluster 2A · Sports Cardiology & Karvonen HR Reserve',
@@ -1699,6 +1703,8 @@ const PAGES = [
   // 3. IMC Sportif & Masse Grasse
   {
     filename: 'calculateur-imc-sportif-masse-grasse.html',
+    seoTitle: "Calculateur IMC Sportif & Masse Grasse | Prof EPS",
+    seoDesc: "Estimez votre IMC, taux de masse grasse et masse maigre active. Interprétation athlétique et repères officiels pour l’EPS.",
     keywordsFr: 'calculateur imc, calcul imc homme femme, barème imc normal anormal oms, indice masse corporelle, indice masse grasse img, poids idéal selon taille, imc sportif masse maigre',
     clusterBadgeFr: 'Cluster 2B · Indice de Masse Corporelle (IMC), Barème OMS & Masse Grasse (IMG)',
     clusterBadgeEn: 'Cluster 2B · Body Mass Index (BMI), WHO Reference Scale & Body Fat %',
@@ -1963,6 +1969,8 @@ const PAGES = [
   // 4. Chaleur, Humidité & Altitude
   {
     filename: 'calculateur-chaleur-meteo-altitude.html',
+    seoTitle: "Ajustement Chaleur, Météo & Altitude | Prof EPS",
+    seoDesc: "Ajustez vos allures de course selon la météo et l’altitude. Point de rosée, hydratation et consignes de sécurité thermique.",
     keywordsFr: 'calculateur chaleur course à pied, humidité point de rosée running, entrainement altitude hypoxie, hydratation course à pied chaleur',
     clusterBadgeFr: 'Cluster 2C · Thermorégulation, Humidité & Altitude',
     clusterBadgeEn: 'Cluster 2C · Heat, Dew Point & Altitude Pace Adjustment',
@@ -2085,6 +2093,8 @@ const PAGES = [
   // 5. Intermittent HIIT & COD 180°
   {
     filename: 'generateur-intermittent-hiit-cod.html',
+    seoTitle: "Calculateur HIIT & Navettes COD 180° | Prof EPS",
+    seoDesc: "Calculez vos distances d’intermittent HIIT avec ou sans demi-tours 180°. Modèle Buchheit pour sports collectifs et cours d’EPS.",
     keywordsFr: 'calculateur intermittent 15/15 30/30, distance plots vma eps, navette cod 180 buchheit, entrainement fractionné sports collectifs',
     clusterBadgeFr: 'Cluster 3A/B · Intermittent HIIT & Changement de Direction (COD 180°)',
     clusterBadgeEn: 'Cluster 3A/B · HIIT Intervals & 180° Shuttle COD Calculator',
@@ -2195,6 +2205,8 @@ const PAGES = [
   // 6. Charge RPE Foster & ACWR
   {
     filename: 'calculateur-charge-rpe-foster-acwr.html',
+    seoTitle: "Calculateur Charge RPE & Ratio ACWR | Prof EPS",
+    seoDesc: "Suivez votre charge d’entraînement aiguë/chronique et évaluez votre ratio ACWR pour prévenir les blessures selon Gabbett.",
     keywordsFr: 'calculateur charge rpe foster, ratio acwr blessure, charge aigue chronique sport, calcul sRPE entrainement',
     clusterBadgeFr: 'Cluster 3C · Monitoring de la Charge Interne (Foster sRPE & ACWR)',
     clusterBadgeEn: 'Cluster 3C · Internal Training Load (Foster sRPE & ACWR Ratio)',
@@ -2297,6 +2309,8 @@ const PAGES = [
   // 7. Réserve Anaérobie de Vitesse (ASR)
   {
     filename: 'calculateur-asr-reserve-vitesse.html',
+    seoTitle: "Calculateur Réserve de Vitesse ASR | Prof EPS",
+    seoDesc: "Analysez votre profil neuromusculaire (endurant, hybride, sprinteur) et personnalisez vos séances intermittentes avec l’ASR.",
     keywordsFr: 'calculateur asr reserve vitesse anaerobie, vitesse maximale sprint vma, profilage sprinteur endurant, hiit supramaximal asr',
     clusterBadgeFr: 'Cluster 1B · Réserve de Vitesse Anaérobie (ASR = MSS − VMA)',
     clusterBadgeEn: 'Cluster 1B · Anaerobic Speed Reserve (ASR = MSS − MAS)',
@@ -2415,6 +2429,8 @@ const PAGES = [
   // 8. Indice d'Endurance (Péronnet & Thibault)
   {
     filename: 'calculateur-indice-endurance.html',
+    seoTitle: "Calculateur Indice d’Endurance (IE) | Prof EPS",
+    seoDesc: "Mesurez votre maintien de VMA sur la distance (modèle Péronnet). Diagnostic précis entre travail du seuil et de la VMA.",
     keywordsFr: 'calculateur indice endurance peronnet, pourcentage vma soutenu, diagnostic seuil lactique vma, calculer son indice endurance course',
     clusterBadgeFr: 'Cluster 1C · Modèle Physiologique de Péronnet & Thibault',
     clusterBadgeEn: 'Cluster 1C · Péronnet & Thibault Endurance Index Model',
@@ -2523,6 +2539,8 @@ const PAGES = [
   // 9. Allure Pente (GAP) & Nutrition
   {
     filename: 'calculateur-gap-pente-nutrition.html',
+    seoTitle: "Calculateur Allure Pente GAP & Glucides | Prof EPS",
+    seoDesc: "Convertissez votre effort en dénivelé en allure équivalente sur le plat (Minetti) et planifiez vos apports glucidiques.",
     keywordsFr: 'calculateur gap allure pente trail, cout energetique pente minetti, glucides par heure marathon trail, nutrition course à pied',
     clusterBadgeFr: 'Cluster 2D · Biomécanique de la Pente (GAP) & Nutrition d’Endurance',
     clusterBadgeEn: 'Cluster 2D · Grade Adjusted Pace (GAP) & Race Fueling Strategy',
@@ -2630,6 +2648,8 @@ const PAGES = [
   // 10. Hub Central des 3 Clusters
   {
     filename: 'hub-outils-sport-performance.html',
+    seoTitle: "Calculateurs Sport & Physiologie EPS | Prof EPS",
+    seoDesc: "Accédez aux 9 calculateurs sportifs interactifs : VO2 Max, Karvonen, ACWR, HIIT, VDOT, ASR et nutrition pour l’EPS et le running.",
     keywordsFr: 'calculateur vo2 max, calculateur vma, calculer vo2max course à pied, vdot jack daniels, fréquence cardiaque karvonen, imc sportif, préparation physique eps',
     clusterBadgeFr: '🧭 Hub Scientifique · 3 Clusters Sport & EPS',
     clusterBadgeEn: '🧭 Scientific Hub · 3 Sports & PE Calculator Clusters',

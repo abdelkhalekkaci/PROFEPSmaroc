@@ -1,7 +1,56 @@
-# Redirections Canoniques ProfEPS.ma
+# ==============================================================================
+# ProfEPS.ma - Configuration Apache, Redirections 301 & Vitesse (PageSpeed)
+# ==============================================================================
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  RewriteBase /
+
+  # 1. Redirection 301 /index.html vers la racine /
   RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
   RewriteRule ^index\.html$ https://profeps.ma/ [R=301,L]
-  RewriteRule ^orientations-pedagogiques-2007-2009\.html$ https://profeps.ma/orientations-pedagogiques-eps-2007-2009.html [R=301,L]
+
+  # 2. Redirection 301 de l'ancienne variante OP sans "eps" vers la page canonique
+  RewriteRule ^orientations-pedagogiques-2007-2009\.html$ /orientations-pedagogiques-eps-2007-2009.html [R=301,L]
+
+  # 3. Redirections des anciennes URLs / doublons vers les pages canoniques
+  RewriteRule ^evaluation-eps-baremes\.html$ /evaluation-eps.html [R=301,L]
+  RewriteRule ^programme-eps\.html$ /programme-eps-maroc.html [R=301,L]
+  RewriteRule ^cycles-eps\.html$ /cycles-eps-maroc.html [R=301,L]
+  RewriteRule ^securite\.html$ /securite-eps.html [R=301,L]
+
+  # 4. Redirection vers HTTPS canonique
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP_HOST} ^(?:www\.)?profeps\.ma$ [NC]
+  RewriteRule ^(.*)$ https://profeps.ma/$1 [R=301,L]
+</IfModule>
+
+# En-têtes robots
+<IfModule mod_headers.c>
+  Header always unset X-Robots-Tag
+</IfModule>
+
+# 5. Compression Gzip / Deflate pour la vitesse
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# 6. Mise en cache prolongée des médias statiques (PageSpeed)
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/html "access plus 1 hour"
 </IfModule>
