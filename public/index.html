@@ -1,726 +1,72 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
+<html lang="fr" dir="ltr" id="html-root">
 <head>
-    <script>
-      // Nettoyage immédiat de l'URL dans la barre d'adresse si index.html est présent
-      if (window.location.pathname.endsWith('/index.html') || window.location.pathname === '/index.html') {
-        window.history.replaceState(null, '', '/' + window.location.search + window.location.hash);
-      }
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portail pour les enseignants d'EPS au Maroc : fiches de séance, cycles d'apprentissage, préparation aux concours et calculateurs VMA.">
-    <link rel="canonical" href="https://profeps.ma/" />
-    <meta name="keywords" content="fiches de préparation EPS Maroc, fiche de séance EPS, fiche de cycle EPS collège, fiche de cycle EPS lycée, générateur fiche EPS, grille d'évaluation EPS Maroc, grille d'observation EPS, projet de cycle EPS, OTI OTC EPS Maroc, orientations pédagogiques EPS 2007, orientations pédagogiques EPS 2009, répartition annuelle EPS Maroc, CRMEF EPS, didactique EPS Maroc, barème EPS bac Maroc">
-    <meta name="google-site-verification" content="uXUhFeQs5AuyT7wwS5Spt5vgnmGmEJduxKFapnVIbq8" />
-    <meta name="msvalidate.01" content="31273E961EC2BC5D994FA67ECDD9F8C9" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProfEPS Maroc : Portail Didactique, OP 2007-2009 & Calculateurs EPS</title>
+  <meta name="description" content="Plateforme de référence des professeurs d'EPS au Maroc : Orientations Pédagogiques 2007 & 2009 (MENPS), bibliothèque numérique didactique et 11 calculateurs scientifiques de performance sportive." />
+  <meta name="keywords" content="prof eps maroc, orientations pedagogiques eps 2007 2009, didactique eps maroc, crmef eps, calculateur vma, vdot daniels, test 6 minutes, projet pedagogique eps" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="ProfEPS Maroc : Portail Didactique, OP 2007-2009 & Calculateurs EPS" />
+  <meta property="og:description" content="Plateforme de référence des professeurs d'EPS au Maroc : Orientations Pédagogiques 2007 & 2009 (MENPS), bibliothèque numérique didactique et 11 calculateurs scientifiques de performance sportive." />
+  <meta property="og:url" content="https://profeps.ma/" />
+  <meta property="og:site_name" content="ProfEPS Maroc" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ProfEPS Maroc : Portail Didactique, OP 2007-2009 & Calculateurs EPS" />
+  <meta name="twitter:description" content="Plateforme de référence des professeurs d'EPS au Maroc : Orientations Pédagogiques 2007 & 2009 (MENPS), bibliothèque numérique didactique et 11 calculateurs scientifiques de performance sportive." />
+  <link rel="canonical" href="https://profeps.ma/" />
+  <link rel="icon" type="image/png" href="images/prof_eps.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="profeps-cmp.js" defer></script>
 
-    <!-- Core Web Vitals — LCP preload + preconnect to third parties -->
-    <link rel="preload" as="image" href="/images/prof_eps.png" fetchpriority="high">
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
-    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-    <link rel="dns-prefetch" href="https://www.google-analytics.com">
-    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-    <!-- Google tag (gtag.js) -->
-    <!-- Google Consent Mode v2 — defaults AVANT gtag -->
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('consent', 'default', {
-            'ad_storage': 'denied',
-            'ad_user_data': 'denied',
-            'ad_personalization': 'denied',
-            'analytics_storage': 'denied',
-            'wait_for_update': 500
-        });
-    </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TH0Z1SGNXH"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-TH0Z1SGNXH');
-</script>
-    <title>ProfEPS : Ressources, Outils & Guides EPS au Maroc</title>
-    
-    <link rel="icon" type="image/png" href="/images/prof_eps.png">
-    <link rel="manifest" href="/manifest.json">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Prof EPS Maroc (ProfEPS.ma) — Ressources EPS, Fiches & Générateur">
-    <meta property="og:description" content="Plateforme marocaine dédiée aux professeurs d'EPS. Générateur gratuit de fiches de séance, grilles d'évaluation et projets de cycle conformes aux OP 2007-2009.">
-    <meta property="og:image" content="https://profeps.ma/images/prof_eps.png">
-    <meta property="og:url" content="https://profeps.ma/">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Prof EPS Maroc">
-    <meta property="og:locale" content="fr_MA">
-    <meta name="geo.region" content="MA">
-    <meta name="geo.placename" content="Maroc">
-    <meta name="author" content="Prof EPS Maroc">
-
-    <!-- JSON-LD WebSite -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
         "@type": "WebSite",
-        "name": "Prof EPS Maroc",
-        "alternateName": "ProfEPS",
+        "name": "ProfEPS Maroc",
         "url": "https://profeps.ma/",
-        "description": "Générateur intelligent de documents EPS : fiches pédagogiques, grilles d'évaluation et projets de cycle. 100% gratuit et conforme aux OP 2007-2009.",
-        "inLanguage": "fr-MA",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": {
-                "@type": "EntryPoint",
-                "urlTemplate": "https://profeps.ma/blog.html?q={search_term_string}"
-            },
-            "query-input": "required name=search_term_string"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "Prof EPS Maroc",
-            "url": "https://profeps.ma/",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://profeps.ma/images/prof_eps.png"
-            },
-            "sameAs": [
-                "https://www.facebook.com/profile.php?id=61559954402311",
-                "https://www.instagram.com/profeps.ma/",
-                "https://www.linkedin.com/in/eps-prof-maroc-814590190/"
-            ]
-        }
-    }
-    </script>
-
-    <!-- JSON-LD EducationalOrganization -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
+        "description": "Portail didactique et scientifique des professeurs d'EPS au Maroc.",
+        "inLanguage": "fr"
+      },
+      {
         "@type": "EducationalOrganization",
-        "@id": "https://profeps.ma/#organization",
-        "name": "Prof EPS Maroc",
-        "alternateName": ["ProfEPS", "ProfEPS.ma", "ProfEPS Maroc", "Prof EPS"],
+        "name": "ProfEPS Maroc",
         "url": "https://profeps.ma/",
         "logo": "https://profeps.ma/images/prof_eps.png",
-        "image": "https://profeps.ma/images/prof_eps.png",
-        "slogan": "La plateforme marocaine des professeurs d'Éducation Physique et Sportive",
-        "description": "Plateforme marocaine (profeps.ma) dédiée aux professeurs d'Éducation Physique et Sportive au Maroc : générateur gratuit de documents pédagogiques (fiches, grilles, projets de cycle), ressources conformes aux Orientations Pédagogiques 2007 (lycée qualifiant) et 2009 (collège), et blog spécialisé CRMEF, concours et didactique EPS. Prof EPS Maroc est une initiative indépendante distincte de tout autre site homonyme.",
-        "inLanguage": "fr-MA",
-        "knowsLanguage": "fr",
-        "areaServed": {
-            "@type": "Country",
-            "name": "Maroc",
-            "alternateName": ["Morocco"]
-        },
-        "address": {
-            "@type": "PostalAddress",
-            "addressCountry": "MA"
-        },
-        "knowsAbout": [
-            "Éducation Physique et Sportive",
-            "Orientations Pédagogiques EPS 2007",
-            "Orientations Pédagogiques EPS 2009",
-            "CRMEF",
-            "Concours de recrutement des enseignants EPS",
-            "Didactique des APSA",
-            "Sport-études au Maroc",
-            "Évaluation EPS au baccalauréat"
-        ],
-        "audience": {
-            "@type": "EducationalAudience",
-            "educationalRole": "teacher",
-            "audienceType": "Professeurs d'Éducation Physique et Sportive (EPS) au Maroc"
-        },
         "sameAs": [
-            "https://www.facebook.com/profile.php?id=61559954402311",
-            "https://www.instagram.com/profeps.ma/",
-            "https://www.linkedin.com/in/eps-prof-maroc-814590190/"
-        ],
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "email": "profepsma@gmail.com",
-            "contactType": "customer support",
-            "availableLanguage": ["French", "Arabic"]
-        }
+          "https://www.facebook.com/profile.php?id=61559954402311",
+          "https://www.instagram.com/profeps.ma"
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
     }
-    </script>
-    
-    <link rel="stylesheet" href="css/style.min.css">
-    
-    <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        :root {
-            --primary: #c1272d;
-            --primary-dark: #a01f24;
-            --secondary: #006233;
-            --secondary-dark: #004d28;
-            --text-primary: #1a1a2e;
-            --text-secondary: #4a4a68;
-            --text-light: #6b7280;
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8f9fa;
-            --bg-card: #ffffff;
-            --border: #e2e8f0;
-            --border-light: #f1f5f9;
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
-            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1);
-            --radius: 8px;
-            --radius-lg: 12px;
-            --radius-xl: 16px;
-            --radius-2xl: 24px;
-            --radius-full: 9999px;
-            --spacing-xs: 0.25rem;
-            --spacing-sm: 0.5rem;
-            --spacing-md: 1rem;
-            --spacing-lg: 1.5rem;
-            --spacing-xl: 2rem;
-            --spacing-2xl: 3rem;
-            --spacing-3xl: 4rem;
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-display: 'Plus Jakarta Sans', var(--font-sans);
-            --transition: all 0.3s ease;
-        }
-        
-        body { font-family: var(--font-sans); background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
-        a { text-decoration: none; color: inherit; transition: var(--transition); }
-        /* Login Button */
-        /* User Menu */
-        /* Hero */
-        .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px var(--spacing-xl) var(--spacing-3xl); background: linear-gradient(135deg, rgba(193,39,45,0.03) 0%, rgba(0,98,51,0.03) 100%); position: relative; overflow: hidden; }
-        .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 80%; height: 150%; background: radial-gradient(circle, rgba(193,39,45,0.05) 0%, transparent 70%); pointer-events: none; }
-        .hero-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-3xl); align-items: center; }
-        .hero-badge { display: inline-flex; align-items: center; gap: var(--spacing-sm); padding: var(--spacing-sm) var(--spacing-md); background: linear-gradient(135deg, rgba(193,39,45,0.1), rgba(0,98,51,0.1)); border-radius: var(--radius-full); font-size: 0.875rem; font-weight: 600; color: var(--primary); margin-bottom: var(--spacing-lg); }
-        .hero-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 600; line-height: 1.1; color: var(--text-primary); margin-bottom: var(--spacing-lg); }
-        .hero-title span { background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .hero-description { font-size: 1.125rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--spacing-xl); max-width: 540px; }
-        .hero-buttons { display: flex; gap: var(--spacing-md); flex-wrap: wrap; }
-        .btn { display: inline-flex; align-items: center; gap: var(--spacing-sm); padding: var(--spacing-md) var(--spacing-xl); font-weight: 600; font-size: 1rem; border-radius: var(--radius-full); transition: var(--transition); cursor: pointer; border: none; }
-        .btn-primary { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; box-shadow: var(--shadow-lg); }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: var(--shadow-xl); }
-        .btn-secondary { background: var(--bg-primary); color: var(--text-primary); border: 2px solid var(--border); }
-        .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
-        .btn-outline { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
-        .btn-outline:hover { background: var(--primary); color: white; transform: translateY(-3px); box-shadow: var(--shadow-lg); }
-        
-        .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
-        .hero-card { background: white; border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); padding: var(--spacing-xl); max-width: 450px; transform: rotate(2deg); position: relative; }
-        .hero-card::before { content: ''; position: absolute; inset: -3px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: var(--radius-xl); z-index: -1; opacity: 0.3; }
-        .hero-card-header { display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: var(--spacing-lg); padding-bottom: var(--spacing-md); border-bottom: 2px solid var(--border-light); }
-        .hero-card-icon { width: 50px; height: 50px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
-        .hero-card-title { font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; }
-        .hero-card-subtitle { font-size: 0.875rem; color: var(--text-light); }
-        .hero-card-content { display: flex; flex-direction: column; gap: var(--spacing-md); }
-        .hero-card-item { display: flex; align-items: center; gap: var(--spacing-md); padding: var(--spacing-sm); background: var(--bg-secondary); border-radius: var(--radius); }
-        .hero-card-item-icon { font-size: 1.25rem; }
-        .hero-card-item-text { font-size: 0.9rem; color: var(--text-secondary); }
-
-        /* ============================================== */
-        /* NOUVELLE SECTION : FORMULAIRE GÉNÉRATEUR */
-        /* ============================================== */
-        .generator-section {
-            padding: var(--spacing-3xl) var(--spacing-xl);
-            background: var(--bg-primary);
-            position: relative;
-        }
-        .generator-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100px;
-            background: linear-gradient(180deg, rgba(193,39,45,0.03), transparent);
-        }
-        .generator-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .generator-box {
-            background: var(--bg-card);
-            border-radius: var(--radius-2xl);
-            padding: var(--spacing-2xl);
-            box-shadow: var(--shadow-xl);
-            border: 1px solid var(--border-light);
-            position: relative;
-            overflow: hidden;
-        }
-        .generator-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-        }
-        .generator-header {
-            text-align: center;
-            margin-bottom: var(--spacing-2xl);
-        }
-        .generator-header .section-badge {
-            margin-bottom: var(--spacing-md);
-        }
-        .generator-header h2 {
-            font-family: var(--font-display);
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: var(--spacing-sm);
-        }
-        .generator-header p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-        }
-        
-        .quick-form {
-            display: grid;
-            gap: var(--spacing-lg);
-        }
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--spacing-md);
-        }
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-xs);
-        }
-        .form-group.full-width {
-            grid-column: 1 / -1;
-        }
-        .form-label {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-xs);
-        }
-        .form-label .required {
-            color: var(--primary);
-        }
-        .form-input, .form-select, .form-textarea {
-            width: 100%;
-            padding: var(--spacing-md);
-            font-family: var(--font-sans);
-            font-size: 1rem;
-            color: var(--text-primary);
-            background: var(--bg-secondary);
-            border: 2px solid var(--border);
-            border-radius: var(--radius-lg);
-            transition: var(--transition);
-        }
-        .form-input:focus, .form-select:focus, .form-textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: var(--bg-card);
-            box-shadow: 0 0 0 4px rgba(193, 39, 45, 0.1);
-        }
-        .form-textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-        .form-select {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 12px center;
-            background-size: 20px;
-            padding-right: 48px;
-        }
-        
-        .optional-fields {
-            padding-top: var(--spacing-lg);
-            border-top: 1px dashed var(--border);
-        }
-        .optional-toggle {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            cursor: pointer;
-            margin-bottom: var(--spacing-md);
-            user-select: none;
-        }
-        .optional-toggle:hover {
-            color: var(--primary);
-        }
-        .optional-toggle svg {
-            width: 20px;
-            height: 20px;
-            transition: var(--transition);
-        }
-        .optional-toggle.open svg {
-            transform: rotate(180deg);
-        }
-        .optional-content {
-            display: none;
-            gap: var(--spacing-md);
-        }
-        .optional-content.show {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        }
-        
-        .generate-btn-container {
-            margin-top: var(--spacing-xl);
-            text-align: center;
-        }
-        .generate-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--spacing-sm);
-            padding: var(--spacing-lg) var(--spacing-3xl);
-            font-size: 1.125rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            border-radius: var(--radius-full);
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 8px 30px rgba(193, 39, 45, 0.3);
-        }
-        .generate-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(193, 39, 45, 0.4);
-        }
-        .generate-btn:active {
-            transform: translateY(-1px);
-        }
-        .generate-btn .icon {
-            font-size: 1.5rem;
-        }
-        
-        .form-note {
-            text-align: center;
-            margin-top: var(--spacing-md);
-            font-size: 0.8125rem;
-            color: var(--text-light);
-        }
-        .form-note a {
-            color: var(--primary);
-            font-weight: 500;
-        }
-        .form-note a:hover {
-            text-decoration: underline;
-        }
-        
-        /* Features */
-        .features { padding: var(--spacing-3xl) var(--spacing-xl); background: var(--bg-secondary); }
-        .section-container { max-width: 1200px; margin: 0 auto; }
-        .section-header { text-align: center; margin-bottom: var(--spacing-3xl); }
-        .section-badge { display: inline-flex; align-items: center; gap: var(--spacing-sm); padding: var(--spacing-sm) var(--spacing-md); background: linear-gradient(135deg, rgba(193,39,45,0.1), rgba(0,98,51,0.1)); border-radius: var(--radius-full); font-size: 0.875rem; font-weight: 600; color: var(--primary); margin-bottom: var(--spacing-md); }
-        .section-title { font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 600; color: var(--text-primary); margin-bottom: var(--spacing-md); }
-        .section-description { font-size: 1.125rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-xl); }
-        .feature-card { background: var(--bg-primary); border-radius: var(--radius-xl); padding: var(--spacing-xl); box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid var(--border-light); }
-        .feature-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-        .feature-icon { width: 60px; height: 60px; background: linear-gradient(135deg, rgba(193,39,45,0.1), rgba(0,98,51,0.1)); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 1.75rem; margin-bottom: var(--spacing-lg); }
-        .feature-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--text-primary); margin-bottom: var(--spacing-sm); }
-        .feature-description { color: var(--text-secondary); line-height: 1.7; }
-        
-        /* Stats Modernisées */
-        .stats { 
-            padding: var(--spacing-3xl) var(--spacing-xl); 
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f172a 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        .stats::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.5;
-        }
-        .stats-grid { 
-            max-width: 1100px; 
-            margin: 0 auto; 
-            display: grid; 
-            grid-template-columns: repeat(4, 1fr); 
-            gap: var(--spacing-xl); 
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-        .stat-item { 
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius-xl);
-            padding: var(--spacing-xl);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-        .stat-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-        .stat-item:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-        .stat-item:hover::before {
-            transform: scaleX(1);
-        }
-        .stat-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto var(--spacing-md);
-            font-size: 1.5rem;
-            box-shadow: 0 10px 20px rgba(193, 39, 45, 0.3);
-        }
-        .stat-number { 
-            font-family: var(--font-display); 
-            font-size: clamp(2.5rem, 4vw, 3.5rem); 
-            font-weight: 600; 
-            margin-bottom: var(--spacing-sm);
-            background: linear-gradient(135deg, #ffffff, #e2e8f0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .stat-label { 
-            font-size: 0.9375rem; 
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 500;
-        }
-        .stat-suffix {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary);
-        }
-        
-        /* CTA */
-        .cta { padding: var(--spacing-3xl) var(--spacing-xl); text-align: center; background: var(--bg-secondary); }
-        .cta-box { max-width: 700px; margin: 0 auto; background: var(--bg-primary); border-radius: var(--radius-xl); padding: var(--spacing-3xl); box-shadow: var(--shadow-lg); border: 1px solid var(--border-light); }
-        .cta-title { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; margin-bottom: var(--spacing-md); }
-        .cta-description { color: var(--text-secondary); margin-bottom: var(--spacing-xl); }
-
-        /* Articles Section */
-        .articles-section { padding: var(--spacing-3xl) var(--spacing-xl); background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%); }
-        /* Articles Grid */
-        .articles-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-        @media (max-width: 1024px) { .articles-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { .articles-grid { grid-template-columns: 1fr; } }
-        .article-card { background: white; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid var(--border-light); display: flex; flex-direction: column; height: 100%; }
-        .article-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-xl); }
-        .article-visual { position: relative; height: 140px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .article-documents { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); }
-        .article-aps { background: linear-gradient(135deg, #7f1d1d 0%, #dc2626 100%); }
-        .article-visual::before { content: ''; position: absolute; width: 130px; height: 130px; border-radius: 50%; background: rgba(255,255,255,0.07); top: -40px; right: -30px; pointer-events: none; }
-        .article-visual::after { content: ''; position: absolute; width: 70px; height: 70px; border-radius: 50%; background: rgba(255,255,255,0.05); bottom: -15px; left: 20px; pointer-events: none; }
-        .article-icon { width: 72px; height: 72px; background: rgba(255,255,255,0.96); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0,0,0,0.18), 0 2px 6px rgba(0,0,0,0.08); position: relative; z-index: 1; flex-shrink: 0; }
-        .article-icon svg { width: 40px; height: 40px; transition: transform 0.3s ease; }
-        .article-card:hover .article-icon svg { transform: scale(1.15) rotate(-5deg); }
-        .category-badge { position: absolute; top: 0.75rem; right: 0.75rem; background: rgba(0,0,0,0.28); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.35); color: white; padding: 0.3rem 0.7rem; border-radius: 99px; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.02em; text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
-        .article-content { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
-        .article-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; line-height: 1.4; margin-bottom: 0.5rem; color: var(--text-primary); }
-        .article-excerpt { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem; flex: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-
-        .article-date { font-size: 0.8rem; color: var(--text-light); }
-        .read-more { color: var(--primary); font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 4px; }
-        .read-more:hover { gap: 8px; }
-
-        .btn-secondary { display: inline-flex; align-items: center; gap: var(--spacing-sm); padding: var(--spacing-md) var(--spacing-xl); background: var(--bg-primary); color: var(--primary); border: 2px solid var(--primary); border-radius: var(--radius-lg); font-weight: 600; text-decoration: none; transition: var(--transition); }
-        .btn-secondary:hover { background: var(--primary); color: white; transform: translateY(-2px); }
-        
-        /* Footer */
-
-        .social-icon { display: inline-flex; align-items: center; gap: var(--spacing-sm); }
-        .social-icon svg { width: 18px; height: 18px; fill: currentColor; }
-        
-        /* Responsive */
-        @media (max-width: 968px) {
-            .nav-menu.active { transform: translateY(0); opacity: 1; pointer-events: auto; }
-            .generator-tabs { flex-direction: column !important; }
-            .generator-tab { padding: var(--spacing-sm) !important; font-size: 0.85rem; }
-            .hero-container { grid-template-columns: 1fr; text-align: center; }
-            .hero-description { margin: 0 auto var(--spacing-xl); }
-            .hero-buttons { justify-content: center; }
-            .hero-visual { order: 1; }
-            .hero-content { order: 0; }
-            .hero-card { transform: none; max-width: 400px; margin: 0 auto; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-
-        }
-
-        @media (max-width: 640px) {
-            .hero { padding: 120px var(--spacing-md) var(--spacing-xl); min-height: auto; }
-            .hero-buttons { flex-direction: column; align-items: stretch; }
-            .hero-buttons .btn { width: 100%; justify-content: center; padding: var(--spacing-sm) var(--spacing-md); font-size: 0.9rem; }
-            .stats-grid { grid-template-columns: 1fr 1fr; }
-
-            .form-row { grid-template-columns: 1fr; }
-            .optional-content.show { grid-template-columns: 1fr; }
-            .generator-box { padding: var(--spacing-lg); }
-            .generate-btn { padding: var(--spacing-md) var(--spacing-xl); font-size: 1rem; width: 100%; }
-            .radio-group { flex-direction: column !important; }
-        }
-
-        @media (max-width: 480px) {
-            .hero { padding: 100px var(--spacing-sm) var(--spacing-lg); }
-            .hero-title { font-size: clamp(1.5rem, 5vw, 2rem); }
-            .hero-description { font-size: 0.9rem; }
-            .hero-card { padding: var(--spacing-md); }
-            .hero-card-title { font-size: 0.95rem; }
-            .hero-card-item-text { font-size: 0.8rem; }
-            .btn { font-size: 0.85rem; padding: var(--spacing-sm) var(--spacing-md); }
-            .generator-box { padding: var(--spacing-md); }
-            .generator-header h2 { font-size: 1.25rem; }
-            .generate-btn { font-size: 0.9rem; padding: var(--spacing-sm) var(--spacing-lg); }
-            .stat-item { padding: var(--spacing-md); }
-            .stat-number { font-size: clamp(2rem, 4vw, 2.5rem); }
-            .cta-box { padding: var(--spacing-xl); }
-            .section-header { margin-bottom: var(--spacing-xl); }
-        }
-
-        /* ═══ MINI CALCULATEUR VMA ACCUEIL ═══ */
-        .vma-quick-tabs {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            background: #f1f5f9;
-            padding: 0.35rem;
-            border-radius: var(--radius-lg);
-        }
-        .vma-quick-tab {
-            flex: 1;
-            min-width: 120px;
-            padding: 0.65rem 0.75rem;
-            border: none;
-            background: transparent;
-            color: #475569;
-            font-weight: 600;
-            font-size: 0.85rem;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: center;
-        }
-        .vma-quick-tab:hover {
-            color: #0f172a;
-        }
-        .vma-quick-tab.active {
-            background: white;
-            color: #006233;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-            font-weight: 600;
-        }
-
-                /* ═══ NAVBAR UNIFIÉE (IDENTIQUE SUR TOUT LE SITE) ═══ */
-        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 0.65rem 1.5rem; background: rgba(255,255,255,0.98); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid #e2e8f0; transition: all 0.25s ease; }
-        .navbar.scrolled { box-shadow: 0 2px 10px rgba(0,0,0,0.06); padding: 0.5rem 1.5rem; }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-        .nav-logo { display: flex; align-items: center; gap: 0.5rem; }
-        .nav-logo img { height: 44px; width: auto; max-width: 160px; object-fit: contain; display: block; }
-        .nav-menu { display: flex; align-items: center; gap: 1.25rem; }
-        .nav-link { font-size: 0.9rem; font-weight: 600; color: #475569; padding: 0.4rem 0.2rem; position: relative; text-decoration: none; transition: all 0.25s ease; }
-        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 50%; right: 50%; height: 2px; background: linear-gradient(90deg, #c1272d, #006233); border-radius: 2px; transition: left 0.25s ease, right 0.25s ease; }
-        .nav-link:hover::after, .nav-link.active::after { left: 0; right: 0; }
-        .nav-link:hover, .nav-link.active { color: #c1272d; }
-        .nav-right { display: flex; align-items: center; gap: 0.75rem; }
-        .nav-cta { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.45rem 1.15rem; background: linear-gradient(135deg, #c1272d, #006233); color: white; font-weight: 600; font-size: 0.875rem; border-radius: 9999px; box-shadow: 0 2px 6px rgba(193,39,45,0.25); text-decoration: none; transition: all 0.25s ease; }
-        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(193,39,45,0.35); }
-        .nav-cta.nav-cta-mobile { display: none; }
-        .nav-cta.nav-cta-desktop { display: inline-flex; }
-        .nav-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 6px; width: 34px; height: 34px; justify-content: center; align-items: center; border-radius: 6px; }
-        .nav-toggle span { display: block; width: 20px; height: 2px; background: #1e293b; border-radius: 2px; }
-
-        @media (max-width: 868px) {
-            .nav-menu { display: none; position: fixed; top: 58px; left: 0; right: 0; background: white; flex-direction: column; padding: 1.25rem; border-bottom: 1px solid #e2e8f0; box-shadow: 0 8px 20px rgba(0,0,0,0.08); gap: 0.75rem; }
-            .nav-menu.active { display: flex; }
-            .nav-toggle { display: flex; }
-            .nav-cta.nav-cta-mobile { display: inline-flex; }
-            .nav-cta.nav-cta-desktop { display: none; }
-        }
-        /* ═══ FOOTER CANONIQUE ═══ */
-        .footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 3.5rem 2rem 0; }
-        .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; }
-        .footer-brand { display: flex; flex-direction: column; gap: 1rem; }
-        .footer-brand img { height: 48px; filter: brightness(0) invert(1); }
-        .footer-brand p { color: rgba(255,255,255,0.65); font-size: 0.875rem; line-height: 1.75; }
-        .footer-social { display: flex; gap: 0.625rem; margin-top: 0.25rem; }
-        .footer-social a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 50%; transition: all 0.3s ease; }
-        .footer-social a:hover { background: rgba(255,255,255,0.18); transform: translateY(-2px); }
-        .footer-social svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.8); }
-        .footer-col h4 { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); margin-bottom: 1.125rem; }
-        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.625rem; }
-        .footer-col ul li a { color: rgba(255,255,255,0.7); font-size: 0.875rem; transition: color 0.2s ease; display: inline-flex; align-items: center; gap: 0.375rem; }
-        .footer-col ul li a:hover { color: white; }
-        .footer-col ul li a .dot { width: 4px; height: 4px; border-radius: 50%; background: #c1272d; flex-shrink: 0; opacity: 0; transition: opacity 0.2s ease; }
-        .footer-col ul li a:hover .dot { opacity: 1; }
-        .footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.5rem 0; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
-        .footer-copyright { color: rgba(255,255,255,0.35); font-size: 0.8125rem; }
-        .footer-tagline { color: rgba(255,255,255,0.35); font-size: 0.8125rem; font-style: italic; }
-        @media (max-width: 968px) { .footer-inner { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
-        @media (max-width: 640px) { .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; } .footer-brand { grid-column: 1 / -1; } .footer-bottom { flex-direction: column; text-align: center; } }
-        
-        /* ═══ BLOCS PUBLICITAIRES ═══ */
-        .ad-unit { width: 100%; overflow: hidden; margin: 2rem auto; text-align: center; max-width: 1200px; padding: 0 2rem; }
-        .ad-unit ins { display: block; }
-        .ad-label { font-size: 0.6875rem; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.375rem; }
-        
-        /* ═══ ARTICLES FOOTER (BUTTON CENTERING) ═══ */
-        .articles-footer { text-align: center; padding: 1rem 0 2rem; }
-        </style>
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8253776880916865"
-         crossorigin="anonymous"></script>
-
-<style id="profeps-navbar-600">
-/* Force Navbar 600 + Centrage */
-.navbar .nav-link {
-    font-weight: 600 !important;
-    text-align: center !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-.navbar .nav-menu {
-    justify-content: center !important;
-    text-align: center !important;
-}
-.navbar .nav-cta, .navbar .nav-btn-login {
-    font-weight: 600 !important;
-}
-</style>
-
-  
-
-
-
-
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    }
+    .glass-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 1rem;
+      transition: all 0.25s ease;
+    }
+    .glass-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.06);
+    }
+  </style>
 <style id="profeps-master-unifier-css">
 /* ═══ 1. NAVBAR FIXE ISOLÉE (.peps-*) — 80PX VERROUILLÉ SUR TOUTES LES PAGES ═══ */
 html {
@@ -1439,9 +785,8 @@ footer.footer .footer-bottom {
   }
 }
 </style>
-  <script src="profeps-cmp.js" defer></script>
 </head>
-<body>
+<body class="antialiased">
 <!-- PROFEPS_UNIFIED_NAVBAR_START -->
   <nav id="navbar" class="navbar navbar-decoy" style="display:none !important;visibility:hidden !important;opacity:0 !important;width:0 !important;height:0 !important;overflow:hidden !important;position:absolute !important;pointer-events:none !important;z-index:-9999 !important;" aria-hidden="true">
     <div class="nav-container">
@@ -1650,494 +995,477 @@ footer.footer .footer-bottom {
 })();
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->
-<main id="main-content">
 
-    <section class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <span class="hero-badge">🇲🇦 Prof EPS Maroc · profeps.ma · 100% Gratuit</span>
-                <h1 class="hero-title">Prof EPS Maroc — Vos fiches EPS<br><span>prêtes en 2 minutes.</span></h1>
-                <p class="hero-description">Prof EPS Maroc (profeps.ma) est la plateforme marocaine des professeurs d'EPS : générez fiches de séance, projets de cycle et grilles d'évaluation conformes aux OP 2007 & 2009. Plus de copier-coller, plus de mise en forme à la main.</p>
-                <div class="hero-buttons">
-                    <a href="#generateur" class="btn btn-primary"><span>🚀</span> Générer mes documents</a>
-                    <a href="calculateur-vma.html" class="btn btn-outline"><span>⚡</span> Calculateur VMA</a>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <div class="hero-card">
-                    <div class="hero-card-header">
-                        <div class="hero-card-icon">📚</div>
-                        <div>
-                            <div class="hero-card-title">3 Documents Essentiels</div>
-                            <div class="hero-card-subtitle">100% Conforme OP 2007-2009</div>
-                        </div>
-                    </div>
-                    <div class="hero-card-content">
-                        <div class="hero-card-item"><span class="hero-card-item-icon">📋</span><span class="hero-card-item-text"><strong>Fiches pédagogiques</strong> - Séances détaillées</span></div>
-                        <div class="hero-card-item"><span class="hero-card-item-icon">📊</span><span class="hero-card-item-text"><strong>Projets de cycle</strong> - Progression sur 12 séances</span></div>
-                        <div class="hero-card-item"><span class="hero-card-item-icon">✓</span><span class="hero-card-item-text"><strong>Grilles d'évaluation</strong> - Observation & notation</span></div>
-                        <div class="hero-card-item"><span class="hero-card-item-icon">⚡</span><span class="hero-card-item-text">Génération en 2 minutes</span></div>
-                    </div>
-                </div>
-            </div>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12" style="margin-top: 80px;">
+
+    <!-- ═══ 1. HERO SECTION AVEC CURSEUR VMA INTERACTIF ═══ -->
+    <section class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-xs relative overflow-hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div class="lg:col-span-7 space-y-5">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 border border-blue-200 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700">
+            <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+            <span>Portail Officiel Didactique · ProfEPS Maroc</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+            Écosystème Didactique de l’EPS, Textes Officiels & Calculateurs Sportifs
+          </h1>
+
+          <p class="text-base sm:text-lg text-slate-600 leading-relaxed">
+            La plateforme de référence pour les enseignants d’EPS au Maroc : Orientations Pédagogiques ministérielles (2007 & 2009), bibliothèque numérique didactique et 11 calculateurs physiologiques pour réguler vos séances.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a href="#bloc-calculateurs" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-bold flex items-center gap-2 shadow-md hover:shadow-lg transition-all">
+              <span>Accéder aux Calculateurs</span>
+              <span>↓</span>
+            </a>
+            <a href="#bloc-op" class="px-5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-sm font-bold flex items-center gap-2 transition-all">
+              <span>Orientations (OP 2007/2009)</span>
+            </a>
+            <a href="#bloc-biblio" class="px-5 py-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 rounded-xl text-sm font-bold flex items-center gap-2 transition-all">
+              <span>Bibliothèque Numérique</span>
+            </a>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-5 pt-4 border-t border-slate-100 text-xs text-slate-600 font-semibold">
+            <span class="flex items-center gap-1.5 text-slate-700">
+              <span class="text-emerald-600 font-black">✔</span> Conforme Approche par Compétences (APC)
+            </span>
+            <span class="flex items-center gap-1.5 text-slate-700">
+              <span class="text-emerald-600 font-black">✔</span> Direction des Curricula (MENPS)
+            </span>
+            <span class="flex items-center gap-1.5 text-slate-700">
+              <span class="text-emerald-600 font-black">✔</span> 100% Gratuit & Libre d’accès
+            </span>
+          </div>
         </div>
+
+        <!-- Carte VMA Interactive Dynamique -->
+        <div class="lg:col-span-5 bg-gradient-to-br from-slate-50 to-blue-50/40 border border-slate-200 rounded-2xl p-6 space-y-5 shadow-xs">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="text-lg">⚡</span>
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-700">Curseur VMA Éducative</span>
+            </div>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 bg-blue-600 text-white rounded-md">
+              Temps Réel
+            </span>
+          </div>
+
+          <div class="text-center py-1">
+            <span id="hero-vma-val" class="text-5xl font-black text-slate-900 tracking-tight font-mono">16.0</span>
+            <span class="text-lg font-bold text-slate-500 ml-1">km/h</span>
+            <p class="text-xs text-slate-500 mt-1">Vitesse Maximale Aérobie de référence</p>
+          </div>
+
+          <div class="space-y-2">
+            <div class="flex justify-between text-xs font-bold text-slate-700">
+              <span>Ajuster la VMA :</span>
+              <span id="hero-vma-label" class="font-mono text-blue-600">16.0 km/h</span>
+            </div>
+            <input
+              id="hero-vma-range"
+              type="range"
+              min="8.0"
+              max="24.0"
+              step="0.1"
+              value="16.0"
+              class="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+              oninput="updateHeroVma(this.value)"
+            />
+            <div class="flex justify-between text-[11px] text-slate-600 font-mono">
+              <span>8 km/h (Collège)</span>
+              <span>15 km/h (Lycée)</span>
+              <span>24 km/h (Élite)</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2.5 pt-3 border-t border-slate-200 text-center">
+            <div class="bg-white p-2.5 rounded-xl border border-slate-200 shadow-2xs">
+              <div class="text-[10px] font-bold uppercase tracking-wider text-slate-600">Allure 100%</div>
+              <div id="hero-pace-100" class="text-sm font-black font-mono text-slate-900 mt-1">3'45"/km</div>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-slate-200 shadow-2xs">
+              <div class="text-[10px] font-bold uppercase tracking-wider text-slate-600">Seuil (85%)</div>
+              <div id="hero-speed-85" class="text-sm font-black font-mono text-blue-600 mt-1">13.6 km/h</div>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-slate-200 shadow-2xs">
+              <div class="text-[10px] font-bold uppercase tracking-wider text-slate-600">Endurance (65%)</div>
+              <div id="hero-speed-65" class="text-sm font-black font-mono text-emerald-600 mt-1">10.4 km/h</div>
+            </div>
+          </div>
+
+          <a href="calculateur-vma.html" class="w-full py-2.5 px-4 bg-slate-900 hover:bg-blue-600 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-colors">
+            <span>Ouvrir le Calculateur VMA Complet</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
     </section>
 
-    <!-- ============================================== -->
-    <!-- NOUVELLE SECTION : FORMULAIRE GÉNÉRATEUR -->
-    <!-- ============================================== -->
-    <section class="generator-section" id="generateur">
-        <div class="generator-container">
-            <div class="generator-box">
-                <div class="generator-header">
-                    <span class="section-badge">🚀 Génération rapide</span>
-                    <h2>Créez votre document en 2 minutes</h2>
-                    <p>Remplissez les champs ci-dessous et obtenez un document EPS complet</p>
-                </div>
-                
-                <form class="quick-form" id="quickForm">
-                    <!-- Type de document -->
-                    <div class="generator-tabs" style="display: flex; margin-bottom: var(--spacing-lg); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;">
-                        <button type="button" class="generator-tab active" data-type="fiche" style="flex: 1; padding: var(--spacing-md); border: none; background: var(--primary); color: white; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">
-                            <span style="display: block; font-size: 1.25rem; margin-bottom: 2px;">📋</span>
-                            Fiche
-                        </button>
-                        <button type="button" class="generator-tab" data-type="projet" style="flex: 1; padding: var(--spacing-md); border: none; background: var(--bg-secondary); color: var(--text-secondary); font-weight: 600; cursor: pointer; transition: all 0.3s ease;">
-                            <span style="display: block; font-size: 1.25rem; margin-bottom: 2px;">📊</span>
-                            Projet
-                        </button>
-                        <button type="button" class="generator-tab" data-type="grille" style="flex: 1; padding: var(--spacing-md); border: none; background: var(--bg-secondary); color: var(--text-secondary); font-weight: 600; cursor: pointer; transition: all 0.3s ease;">
-                            <span style="display: block; font-size: 1.25rem; margin-bottom: 2px;">✓</span>
-                            Grille
-                        </button>
-                    </div>
-                    
-                    <!-- Champs obligatoires -->
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">
-                                <span>📊</span> Niveau scolaire <span class="required">*</span>
-                            </label>
-                            <select class="form-select" id="niveau" required>
-                                <option value="">-- Sélectionner --</option>
-                                <optgroup label="🏫 Collège (OP 2009)">
-                                    <option value="1AC">1ère Année Collège</option>
-                                    <option value="2AC">2ème Année Collège</option>
-                                    <option value="3AC">3ème Année Collège</option>
-                                </optgroup>
-                                <optgroup label="🎓 Lycée (OP 2007)">
-                                    <option value="TC">Tronc Commun</option>
-                                    <option value="1AB">1ère Année Bac</option>
-                                    <option value="2AB">2ème Année Bac</option>
-                                </optgroup>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">
-                                <span>⚽</span> Activité sportive (APS) <span class="required">*</span>
-                            </label>
-                            <select class="form-select" id="aps" required>
-                                <option value="">-- Sélectionner --</option>
-                                <optgroup label="🏆 Sports collectifs">
-                                    <option value="Handball">🤾 Handball</option>
-                                    <option value="Football">⚽ Football</option>
-                                    <option value="Basketball">🏀 Basketball</option>
-                                    <option value="Volleyball">🏐 Volleyball</option>
-                                    <option value="Rugby">🏉 Rugby</option>
-                                    <option value="Basketball 3x3">🏀 Basketball 3x3</option>
-                                </optgroup>
-                                <optgroup label="🏃 Athlétisme">
-                                    <option value="Course de vitesse">🏃 Course de vitesse</option>
-                                    <option value="Course de haies">🏃‍♂️ Course de haies</option>
-                                    <option value="Course de relais">🏃‍♂️ Course de relais</option>
-                                    <option value="Saut en longueur">🦘 Saut en longueur</option>
-                                    <option value="Saut en hauteur">⬆️ Saut en hauteur</option>
-                                    <option value="Lancer de poids">💪 Lancer de poids</option>
-                                    <option value="Course de durée">⏱️ Course de durée</option>
-                                </optgroup>
-                                <optgroup label="🤸 Gymnastique">
-                                    <option value="Gymnastique">🤸 Gymnastique au sol</option>
-                                </optgroup>
-                                <optgroup label="🏸 Sports de renvoi">
-                                    <option value="Tennis de table">🏓 Tennis de table</option>
-                                    <option value="Badminton">🏸 Badminton</option>
-                                </optgroup>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <!-- FICHE Fields -->
-                    <div id="ficheFields" class="conditional-fields">
-                        <div class="form-group full-width">
-                            <label class="form-label">
-                                <span>🎯</span> Objectif de la séance <span class="required">*</span>
-                            </label>
-                            <textarea class="form-textarea" id="objectifFiche" placeholder="Ex: Améliorer la capacité de l'élève à effectuer une passe précise à un partenaire en mouvement"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label"><span>🔢</span> N° de séance</label>
-                            <select class="form-select" id="numeroSeanceFiche">
-                                <option value="1">Séance 1</option>
-                                <option value="2">Séance 2</option>
-                                <option value="3">Séance 3</option>
-                                <option value="4">Séance 4</option>
-                                <option value="5">Séance 5</option>
-                                <option value="6">Séance 6</option>
-                                <option value="7">Séance 7</option>
-                                <option value="8">Séance 8</option>
-                                <option value="9">Séance 9</option>
-                                <option value="10">Séance 10</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <!-- PROJET Fields -->
-                    <div id="projetFields" class="conditional-fields" style="display: none;">
-                        <div class="info-box" style="background: rgba(193, 39, 45, 0.05); border-left: 3px solid var(--primary); padding: var(--spacing-md); margin-bottom: var(--spacing-md); border-radius: var(--radius);">
-                            📌 <strong>Structure automatique :</strong> S1 = Évaluation diagnostique | S2 = Acquisition | Dernière = Évaluation terminale
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label"><span>🎚️</span> Niveau des élèves</label>
-                                <select class="form-select" id="niveauEleves">
-                                    <option value="debutant">🟢 Débutant</option>
-                                    <option value="moyen" selected>🟡 Moyen</option>
-                                    <option value="avance">🟠 Avancé</option>
-                                    <option value="elite">🔴 Élite</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label"><span>📅</span> Nombre de séances</label>
-                                <select class="form-select" id="nombreSeances">
-                                    <option value="8">8 séances</option>
-                                    <option value="10" selected>10 séances</option>
-                                    <option value="12">12 séances</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- GRILLE Fields -->
-                    <div id="grilleFields" class="conditional-fields" style="display: none;">
-                        <label class="form-label"><span>📋</span> Type de grille <span class="required">*</span></label>
-                        <div class="radio-group" style="display: flex; gap: var(--spacing-md); margin-top: var(--spacing-sm);">
-                            <label class="radio-option" style="flex: 1; padding: var(--spacing-md); border: 2px solid var(--border); border-radius: var(--radius-lg); cursor: pointer; transition: all 0.3s ease; text-align: center;">
-                                <input type="radio" name="typeGrille" value="observation" checked style="margin-bottom: var(--spacing-xs);">
-                                <div style="font-weight: 600; color: var(--text-primary);">Observation</div>
-                                <div style="font-size: 0.85rem; color: var(--text-light);">Critères + observations</div>
-                            </label>
-                            <label class="radio-option" style="flex: 1; padding: var(--spacing-md); border: 2px solid var(--border); border-radius: var(--radius-lg); cursor: pointer; transition: all 0.3s ease; text-align: center;">
-                                <input type="radio" name="typeGrille" value="evaluation" style="margin-bottom: var(--spacing-xs);">
-                                <div style="font-weight: 600; color: var(--text-primary);">Évaluation</div>
-                                <div style="font-size: 0.85rem; color: var(--text-light);">Avec notes (P/C/C/F)</div>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <!-- Champs optionnels communs -->
-                    <div class="optional-fields">
-                        <div class="optional-toggle" id="optionalToggle">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                            <span>Afficher les options supplémentaires (facultatif)</span>
-                        </div>
-                        <div class="optional-content" id="optionalContent">
-                            <div class="form-group">
-                                <label class="form-label">👤 Nom du professeur</label>
-                                <input type="text" class="form-input" id="nomProf" placeholder="M. / Mme...">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">🏫 Établissement</label>
-                                <input type="text" class="form-input" id="etablissement" placeholder="Lycée / Collège...">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">📅 Année scolaire</label>
-                                <input type="text" class="form-input" id="anneeScolaire" value="2025-2026">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="generate-btn-container">
-                        <button type="submit" class="generate-btn">
-                            <span class="icon">🚀</span>
-                            <span id="btnText">Générer ma fiche</span>
-                        </button>
-                    </div>
-                    
-                    <p class="form-note">
-                        Vous serez redirigé vers la page de génération. 
-                        <a href="generateur.html">Accéder au générateur complet →</a>
-                    </p>
-                </form>
-            </div>
+    <!-- ═══ 2. SECTION CALCULATEURS & GÉNÉRATEUR (PLACÉE DIRECTEMENT SOUS LE HERO) ═══ -->
+    <section id="bloc-calculateurs" class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-600 mb-1">
+            <span>⚡</span>
+            <span>Suite Scientifique Didactique</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            Calculateurs Scientifiques & Générateur d’EPS
+          </h2>
+          <p class="text-sm text-slate-600 mt-1 max-w-2xl leading-relaxed">
+            11 outils physiologiques calibrés selon les modèles scientifiques de référence (Billat, Cazorla, Péronnet, Karvonen, Foster) pour concevoir et réguler vos séances.
+          </p>
         </div>
+
+        <a href="hub-outils-sport-performance.html" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1.5 shrink-0">
+          <span>Voir le Hub des 11 outils</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Cluster 1 -->
+        <div class="glass-card p-6 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100 font-black text-xl">
+              ⚡
+            </div>
+            <div>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-blue-600">Cluster 1</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-0.5">VMA, VO2 Max & Allures</h3>
+              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                Calculs physiologiques complets du profil aérobie de l’élève et du coureur de demi-fond.
+              </p>
+            </div>
+            <ul class="space-y-2 text-xs text-slate-700 pt-3 border-t border-slate-100">
+              <li><a href="calculateur-vma.html" class="hover:text-blue-600 font-semibold">• Calculateur VMA & Allures (km/h & min/km)</a></li>
+              <li><a href="calculateur-vdot-asr-endurance.html" class="hover:text-blue-600 font-semibold">• VO2 Max & VDOT (Jack Daniels)</a></li>
+              <li><a href="calculateur-asr-reserve-vitesse.html" class="hover:text-blue-600 font-semibold">• Réserve de Vitesse Anaérobie (ASR Buchheit)</a></li>
+              <li><a href="calculateur-indice-endurance.html" class="hover:text-blue-600 font-semibold">• Indice d’Endurance (Péronnet & Thibault)</a></li>
+            </ul>
+          </div>
+          <div class="pt-6">
+            <a href="calculateur-vma.html" class="w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-colors">
+              <span>Lancer les Calculateurs Cluster 1</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Cluster 2 -->
+        <div class="glass-card p-6 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 font-black text-xl">
+              ❤️
+            </div>
+            <div>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-600">Cluster 2</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-0.5">Cardio, Santé & Météo</h3>
+              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                Zones de fréquence cardiaque, composition corporelle et facteurs thermiques.
+              </p>
+            </div>
+            <ul class="space-y-2 text-xs text-slate-700 pt-3 border-t border-slate-100">
+              <li><a href="calculateur-frequence-cardiaque-karvonen.html" class="hover:text-emerald-600 font-semibold">• FC Karvonen & 5 Zones Cardiaques Cibles</a></li>
+              <li><a href="calculateur-imc-sportif-masse-grasse.html" class="hover:text-emerald-600 font-semibold">• IMC & Masse Grasse Athlétique (Deurenberg)</a></li>
+              <li><a href="calculateur-chaleur-meteo-altitude.html" class="hover:text-emerald-600 font-semibold">• Dérive Thermique, Chaleur & Altitude</a></li>
+              <li><a href="calculateur-gap-pente-nutrition.html" class="hover:text-emerald-600 font-semibold">• Allure Pente (GAP) & Besoins Hydriques</a></li>
+            </ul>
+          </div>
+          <div class="pt-6">
+            <a href="calculateur-frequence-cardiaque-karvonen.html" class="w-full py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-colors">
+              <span>Lancer les Calculateurs Cluster 2</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Cluster 3 -->
+        <div class="glass-card p-6 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center border border-slate-200 font-black text-xl">
+              ⏱️
+            </div>
+            <div>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-slate-600">Cluster 3</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-0.5">HIIT, Relances & Charge</h3>
+              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                Planification des séances de course intermittente et quantification de l’effort.
+              </p>
+            </div>
+            <ul class="space-y-2 text-xs text-slate-700 pt-3 border-t border-slate-100">
+              <li><a href="generateur-intermittent-hiit-cod.html" class="hover:text-blue-600 font-semibold">• Générateur Intermittent HIIT (15s-15s, 30s-30s)</a></li>
+              <li><a href="generateur-intermittent-hiit-cod.html" class="hover:text-blue-600 font-semibold">• Navettes COD 180° Sports Collectifs</a></li>
+              <li><a href="calculateur-charge-rpe-foster-acwr.html" class="hover:text-blue-600 font-semibold">• Charge sRPE Foster, Monotonie & ACWR</a></li>
+              <li><a href="generateur.html" class="hover:text-blue-600 font-semibold">• Générateur de Fiches de Séances EPS</a></li>
+            </ul>
+          </div>
+          <div class="pt-6">
+            <a href="generateur-intermittent-hiit-cod.html" class="w-full py-2.5 px-4 bg-slate-900 hover:bg-blue-600 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-colors">
+              <span>Lancer les Outils Cluster 3</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- ============================================== -->
-    <!-- MINI CALCULATEUR VMA & ALLURES EXPRESS -->
-    <!-- ============================================== -->
-    <section class="generator-section" id="calculateur-vma-express" style="padding-top: 1.5rem; background: linear-gradient(180deg, var(--bg-secondary) 0%, #ffffff 100%);">
-        <div class="generator-container">
-            <div class="generator-box" style="border: 2px solid #e2e8f0; box-shadow: 0 10px 30px -5px rgba(0,0,0,0.06);">
-                <div class="generator-header">
-                    <span class="section-badge" style="background: rgba(0, 98, 51, 0.1); color: #006233;">⚡ Outil Universel EPS & Athlétisme</span>
-                    <h2>Calculateur VMA & Allures Express</h2>
-                    <p>Sélectionnez votre test de terrain, entrez votre performance et obtenez immédiatement vos résultats complets avec tableau d'entraînement.</p>
-                </div>
-
-                <form class="quick-form" id="quickVmaForm">
-                    <!-- Sélection du test -->
-                    <div class="vma-quick-tabs">
-                        <button type="button" class="vma-quick-tab active" data-vma-test="cooper-6">⏱️ Demi-Cooper (6')</button>
-                        <button type="button" class="vma-quick-tab" data-vma-test="cooper-12">🏃 Cooper (12')</button>
-                        <button type="button" class="vma-quick-tab" data-vma-test="luc-leger">🔊 Luc Léger</button>
-                        <button type="button" class="vma-quick-tab" data-vma-test="vameval">🏁 VAMEVAL</button>
-                        <button type="button" class="vma-quick-tab" data-vma-test="direct">⚡ Saisie VMA</button>
-                    </div>
-
-                    <!-- Champs de saisie -->
-                    <div class="form-row">
-                        <!-- Champ spécifique au test -->
-                        <div class="form-group" id="homeTestValGroup">
-                            <label class="form-label" id="homeTestValLabel">
-                                <span>🎯</span> Distance courue en 6 minutes (m) <span class="required">*</span>
-                            </label>
-                            <input type="number" class="form-input" id="homeTestVal" placeholder="1450" value="1450" required min="100" max="6000" step="10">
-                            <div class="form-hint" id="homeTestValHint" style="font-size: 0.78rem; color: #64748b; margin-top: 0.25rem;">Distance totale parcourue en 6 minutes (ex: 1 450 m)</div>
-                        </div>
-
-                        <!-- Distance de la piste -->
-                        <div class="form-group">
-                            <label class="form-label">
-                                <span>🏟️</span> Longueur de la piste (m)
-                            </label>
-                            <input type="number" class="form-input" id="homePisteVal" placeholder="250" value="250" min="50" max="1000" step="10">
-                            <div class="form-hint" style="font-size: 0.78rem; color: #64748b; margin-top: 0.25rem;">Piste d'établissement (200m, 250m) ou officielle (400m)</div>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <!-- Durée ciblée -->
-                        <div class="form-group">
-                            <label class="form-label">
-                                <span>⏱️</span> Durée de course ciblée (min)
-                            </label>
-                            <input type="number" class="form-input" id="homeDureeVal" placeholder="12" value="12" min="1" max="120" step="1">
-                            <div class="form-hint" style="font-size: 0.78rem; color: #64748b; margin-top: 0.25rem;">Ex: 12 min (Bac), 6 min, 10 min, 15 min...</div>
-                        </div>
-
-                        <!-- % VMA -->
-                        <div class="form-group">
-                            <label class="form-label">
-                                <span>🔥</span> Intensité ciblée (% VMA)
-                            </label>
-                            <select class="form-select" id="homeAllureVal">
-                                <option value="60">60% VMA — Échauffement & Récupération</option>
-                                <option value="70">70% VMA — Endurance fondamentale</option>
-                                <option value="80" selected>80% VMA — Allure continue cible (Bac / Course)</option>
-                                <option value="85">85% VMA — Seuil aérobie supérieur</option>
-                                <option value="90">90% VMA — Seuil anaérobie</option>
-                                <option value="95">95% VMA — Spécifique 10 km</option>
-                                <option value="100">100% VMA — Vitesse Maximale Aérobie</option>
-                                <option value="105">105% VMA — Intermittent court 30"/30"</option>
-                                <option value="110">110% VMA — Puissance Max Aérobie (PMA)</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="generate-btn-container" style="margin-top: 1.5rem;">
-                        <button type="submit" class="generate-btn" style="background: linear-gradient(135deg, #006233 0%, #c1272d 100%);">
-                            <span class="icon">⚡</span>
-                            <span>Calculer ma VMA & Allures</span>
-                        </button>
-                    </div>
-
-                    <p class="form-note">
-                        Vous serez instantanément redirigé vers le calculateur avec vos résultats et votre tableau d'allures calculés.
-                        <a href="calculateur-vma.html">Accéder au calculateur complet →</a>
-                    </p>
-                </form>
-            </div>
+    <!-- ═══ 3. SECTION ORIENTATIONS PÉDAGOGIQUES (OP 2007 & OP 2009) ═══ -->
+    <section id="bloc-op" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-600 mb-1">
+            <span>📖</span>
+            <span>Cadre Didactique & Textes Ministériels</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            Orientations Pédagogiques EPS Maroc (2007 · 2009)
+          </h2>
+          <p class="text-sm text-slate-600 mt-1 max-w-2xl leading-relaxed">
+            Consultez les référentiels officiels de la Direction des Curricula (MENPS) pour structurer vos cycles d’enseignement, compétences cibles et grilles d’évaluation certificatives.
+          </p>
         </div>
+
+        <div class="flex items-center gap-1.5 p-1 bg-slate-100 rounded-xl border border-slate-200 shrink-0">
+          <button type="button" onclick="filterOpCards('all')" id="btn-op-all" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-900 shadow-2xs">Tous les Cycles</button>
+          <button type="button" onclick="filterOpCards('college')" id="btn-op-college" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-900">Collège (2009)</button>
+          <button type="button" onclick="filterOpCards('lycee')" id="btn-op-lycee" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-900">Lycée (2007)</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Carte Lycée 2007 -->
+        <div id="card-op-lycee" class="glass-card p-6 border-blue-200 hover:border-blue-300">
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 border border-blue-100 flex items-center justify-center text-2xl font-black">
+                🎓
+              </div>
+              <div>
+                <span class="inline-block px-2 py-0.5 rounded text-[11px] font-bold bg-blue-50 text-blue-700 border border-blue-200">Texte Officiel MENPS 2007</span>
+                <h3 class="text-lg font-bold text-slate-900 mt-1">Secondaire Qualifiant (Lycée)</h3>
+              </div>
+            </div>
+            <span class="text-xs font-mono font-bold px-2 py-1 bg-slate-100 text-slate-700 rounded-md">2007</span>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-5">
+            Texte fondateur régissant l'EPS au lycée au Maroc : approche par compétences (APC), modules didactiques par tronc commun et filières du baccalauréat, fiches d'évaluation certificative.
+          </p>
+
+          <div class="space-y-2 mb-5">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-slate-700">Compétences Piliers Visées :</div>
+            <ul class="space-y-1.5 text-xs text-slate-700">
+              <li class="p-2 bg-slate-50 rounded-lg border border-slate-100">• Gestion et régulation de l'effort physique en course de durée</li>
+              <li class="p-2 bg-slate-50 rounded-lg border border-slate-100">• Efficience motrice et choix tactiques en sports collectifs</li>
+              <li class="p-2 bg-slate-50 rounded-lg border border-slate-100">• Construction de projets d'action individuelle et collective</li>
+            </ul>
+          </div>
+
+          <div class="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+            <a href="orientations-pedagogiques-eps-2007-2009.html#lycee" class="text-xs font-bold text-blue-600 hover:underline">
+              Lire l'Analyse Didactique Complète →
+            </a>
+            <a href="orientations-pedagogiques-eps-2007-2009.html" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow-xs transition-colors">
+              Consulter OP Lycée PDF
+            </a>
+          </div>
+        </div>
+
+        <!-- Carte Collège 2009 -->
+        <div id="card-op-college" class="glass-card p-6 border-emerald-200 hover:border-emerald-300">
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center text-2xl font-black">
+                🏅
+              </div>
+              <div>
+                <span class="inline-block px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">Texte Officiel MENPS 2009</span>
+                <h3 class="text-lg font-bold text-slate-900 mt-1">Secondaire Collégial (Collège)</h3>
+              </div>
+            </div>
+            <span class="text-xs font-mono font-bold px-2 py-1 bg-slate-100 text-slate-700 rounded-md">2009</span>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-5">
+            Référentiel pour le cycle collégial articulant développement des capacités motrices fondamentales, acquisition des rôles sociaux (arbitre, juge, capitaine) et respect des règles communes.
+          </p>
+
+          <div class="space-y-2 mb-5">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-slate-700">Compétences Cibles Collège :</div>
+            <ul class="space-y-1.5 text-xs text-slate-700">
+              <li class="p-2 bg-slate-50 rounded-lg border border-slate-100">• Motricités polyvalentes et maîtrise spatio-temporelle</li>
+              <li class="p-2 bg-slate-50 rounded-lg border border-slate-100">• Coopération solidaire et respect des règles en opposition</li>
+              <li class="p-2 bg-slate-50 rounded-lg border border-slate-100">• Éducation à la santé et régulation du rythme respiratoire</li>
+            </ul>
+          </div>
+
+          <div class="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+            <a href="orientations-pedagogiques-eps-2007-2009.html#college" class="text-xs font-bold text-emerald-600 hover:underline">
+              Lire l'Analyse Didactique Complète →
+            </a>
+            <a href="orientations-pedagogiques-eps-2007-2009.html" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-xs transition-colors">
+              Consulter OP Collège PDF
+            </a>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Section Articles -->
-    <section class="articles-section" id="articles">
-        <div class="section-container">
-            <div class="section-header">
-                <div class="section-badge">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                    </svg>
-                    <span>Ressources Pédagogiques</span>
-                </div>
-                <h2 class="section-title">Articles et Guides EPS</h2>
-                <p class="section-description">Découvrez nos articles experts pour améliorer vos pratiques pédagogiques et réussir votre carrière d'enseignant EPS.</p>
-            </div>
-
-            <!-- GRILLE 4 ARTICLES LES PLUS VUS -->
-            <div class="articles-grid">
-                <!-- Article 1 : Guide OP -->
-                <article class="article-card">
-                    <div class="article-visual article-documents">
-                        <span class="category-badge">Documents</span>
-                        <div class="article-icon">
-                            <svg viewBox="0 0 24 24" fill="none"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" stroke-linejoin="round"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" fill="#93c5fd" stroke="#2563eb" stroke-width="1.5" stroke-linejoin="round"/><line x1="6" y1="8" x2="8" y2="8" stroke="#1d4ed8" stroke-width="1.5" stroke-linecap="round"/><line x1="6" y1="11" x2="9" y2="11" stroke="#1d4ed8" stroke-width="1.5" stroke-linecap="round"/></svg>
-                        </div>
-                    </div>
-                    <div class="article-content">
-                        <h3 class="article-title">Guide complet des Orientations Pédagogiques 2007 et 2009</h3>
-                        <p class="article-excerpt">Analyse complète des instructions officielles pour le collège et le lycée. Comprendre les OTI et les compétences visées.</p>
-                        <div class="article-footer">
-                            <span class="article-date">15 Jan 2025</span>
-                            <a href="article-op.html" class="read-more">Lire →</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Article 2 : Handball -->
-                <article class="article-card">
-                    <div class="article-visual article-aps">
-                        <span class="category-badge">Handball</span>
-                        <div class="article-icon">
-                            <svg viewBox="0 0 24 24" fill="none"><circle cx="7" cy="4" r="2" fill="#fecdd3" stroke="#dc2626" stroke-width="1.5"/><path d="M4 8h6l2 8H4z" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5" stroke-linejoin="round"/><path d="M4 16l-1.5 5M12 16l1.5 5" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round"/><path d="M10 12l3.5-4" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round"/><circle cx="16" cy="6" r="3" fill="#fca5a5" stroke="#dc2626" stroke-width="1.5"/></svg>
-                        </div>
-                    </div>
-                    <div class="article-content">
-                        <h3 class="article-title">Séance de Handball en EPS : Guide Complet Collège et Lycée</h3>
-                        <p class="article-excerpt">Structure de séance, situations d'apprentissage, progression sur 10 séances et grille d'évaluation conformes aux OP 2007-2009.</p>
-                        <div class="article-footer">
-                            <span class="article-date">20 Fév 2026</span>
-                            <a href="article-handball-eps.html" class="read-more">Lire →</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Article 3 : Basketball -->
-                <article class="article-card">
-                    <div class="article-visual article-aps">
-                        <span class="category-badge">Basketball</span>
-                        <div class="article-icon">
-                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/><path d="M5 4.5C7.5 7 9 9.5 9 12s-1.5 5-4 7.5" stroke="#ea580c" stroke-width="1.5" stroke-linecap="round"/><path d="M19 4.5C16.5 7 15 9.5 15 12s1.5 5 4 7.5" stroke="#ea580c" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="12" x2="22" y2="12" stroke="#fb923c" stroke-width="1.5" stroke-linecap="round"/></svg>
-                        </div>
-                    </div>
-                    <div class="article-content">
-                        <h3 class="article-title">Séance de Basketball en EPS : Guide Complet Collège et Lycée</h3>
-                        <p class="article-excerpt">Fondamentaux techniques, situations d'apprentissage progressives, cycle sur 10 séances et grille d'évaluation conformes aux OP 2007-2009.</p>
-                        <div class="article-footer">
-                            <span class="article-date">20 Fév 2026</span>
-                            <a href="article-basketball-eps.html" class="read-more">Lire →</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Article 4 : Volleyball -->
-                <article class="article-card">
-                    <div class="article-visual article-aps">
-                        <span class="category-badge">Volleyball</span>
-                        <div class="article-icon">
-                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/><path d="M3 8c4 0 7 2 9 6s5 6 9 6" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/><path d="M3 16c4 0 7-2 9-6s5-6 9-6" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="12" x2="22" y2="12" stroke="#93c5fd" stroke-width="1" stroke-linecap="round"/></svg>
-                        </div>
-                    </div>
-                    <div class="article-content">
-                        <h3 class="article-title">Séance de Volleyball en EPS : Guide Complet Collège et Lycée</h3>
-                        <p class="article-excerpt">Techniques de base, situations d'apprentissage progressives, gestion du filet et évaluation pour le volleyball scolaire au Maroc.</p>
-                        <div class="article-footer">
-                            <span class="article-date">20 Fév 2026</span>
-                            <a href="article-volleyball-eps.html" class="read-more">Lire →</a>
-                        </div>
-                    </div>
-                </article>
-            </div>
-
-            <div class="articles-footer">
-                <a href="calculateur-vma.html" class="nav-link">Calculateur VMA</a>                <a href="blog.html" class="btn btn-secondary">Voir tous les articles</a>
-            </div>
+    <!-- ═══ 4. SECTION BIBLIOTHÈQUE NUMÉRIQUE EPS ═══ -->
+    <section id="bloc-biblio" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-600 mb-1">
+            <span>📚</span>
+            <span>Fonds Documentaire Téléchargeable</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            Bibliothèque Numérique Didactique EPS
+          </h2>
+          <p class="text-sm text-slate-600 mt-1 max-w-2xl leading-relaxed">
+            Téléchargez fiches de séance, annales de concours CRMEF, guides de sécurité ministériels et protocoles de tests de VMA.
+          </p>
         </div>
+
+        <div class="w-full md:w-72">
+          <input
+            id="biblio-search-input"
+            type="text"
+            oninput="filterBiblioResources()"
+            placeholder="Rechercher (VMA, Basket, CRMEF)..."
+            class="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 shadow-2xs"
+          />
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
+        <button type="button" onclick="setBiblioCat('all')" id="bcat-all" class="px-3.5 py-1.5 rounded-lg font-bold bg-slate-900 text-white border border-slate-900 shadow-2xs">Toutes les Ressources</button>
+        <button type="button" onclick="setBiblioCat('guides')" id="bcat-guides" class="px-3.5 py-1.5 rounded-lg font-bold bg-white text-slate-700 hover:text-slate-900 border border-slate-200">Guides Ministériels</button>
+        <button type="button" onclick="setBiblioCat('concours')" id="bcat-concours" class="px-3.5 py-1.5 rounded-lg font-bold bg-white text-slate-700 hover:text-slate-900 border border-slate-200">Concours CRMEF</button>
+        <button type="button" onclick="setBiblioCat('aps')" id="bcat-aps" class="px-3.5 py-1.5 rounded-lg font-bold bg-white text-slate-700 hover:text-slate-900 border border-slate-200">Fiches APSA</button>
+        <button type="button" onclick="setBiblioCat('fiches')" id="bcat-fiches" class="px-3.5 py-1.5 rounded-lg font-bold bg-white text-slate-700 hover:text-slate-900 border border-slate-200">Séances & Tests</button>
+      </div>
+
+      <div id="biblio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Ressource 1 -->
+        <div class="glass-card p-5 flex flex-col justify-between biblio-item" data-cat="fiches" data-search="vma demi-fond 6 minutes protocole bareme">
+          <div class="space-y-3">
+            <div class="flex justify-between items-center text-[10px] font-bold">
+              <span class="px-2 py-0.5 bg-red-50 text-red-700 border border-red-200 rounded font-mono">PDF · 420 Ko</span>
+              <span class="text-slate-600">2026</span>
+            </div>
+            <h4 class="text-sm font-bold text-slate-900 leading-snug">Protocole Test VMA 6 Minutes & Barème Éducatif</h4>
+            <p class="text-xs text-slate-500 line-clamp-2">Fiche prête pour piste de 200m/400m avec cônes et calculs d'allures cibles.</p>
+          </div>
+          <div class="pt-4 mt-4 border-t border-slate-100">
+            <a href="calculateur-vma.html" class="w-full py-2 bg-slate-900 hover:bg-blue-600 text-white rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
+              <span>Télécharger / Ouvrir</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Ressource 2 -->
+        <div class="glass-card p-5 flex flex-col justify-between biblio-item" data-cat="concours" data-search="crmef concours annales didactique sciences education">
+          <div class="space-y-3">
+            <div class="flex justify-between items-center text-[10px] font-bold">
+              <span class="px-2 py-0.5 bg-red-50 text-red-700 border border-red-200 rounded font-mono">PDF · 2.4 Mo</span>
+              <span class="text-slate-600">2024-2025</span>
+            </div>
+            <h4 class="text-sm font-bold text-slate-900 leading-snug">Annales Corrigées CRMEF EPS · Didactique & Écrit</h4>
+            <p class="text-xs text-slate-500 line-clamp-2">Sujets officiels et éléments de correction pour le concours de recrutement des enseignants.</p>
+          </div>
+          <div class="pt-4 mt-4 border-t border-slate-100">
+            <a href="orientations-pedagogiques-eps-2007-2009.html" class="w-full py-2 bg-slate-900 hover:bg-blue-600 text-white rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
+              <span>Télécharger / Ouvrir</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Ressource 3 -->
+        <div class="glass-card p-5 flex flex-col justify-between biblio-item" data-cat="aps" data-search="basket basketball sports collectifs arbitrage observation">
+          <div class="space-y-3">
+            <div class="flex justify-between items-center text-[10px] font-bold">
+              <span class="px-2 py-0.5 bg-red-50 text-red-700 border border-red-200 rounded font-mono">PDF · 1.8 Mo</span>
+              <span class="text-slate-600">2025</span>
+            </div>
+            <h4 class="text-sm font-bold text-slate-900 leading-snug">Guide Pédagogique Basketball · Collège & Lycée</h4>
+            <p class="text-xs text-slate-500 line-clamp-2">Situations d'apprentissage, grilles d'évaluation et fiches d'arbitrage scolaire.</p>
+          </div>
+          <div class="pt-4 mt-4 border-t border-slate-100">
+            <a href="cycles-eps-maroc.html" class="w-full py-2 bg-slate-900 hover:bg-blue-600 text-white rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
+              <span>Télécharger / Ouvrir</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Ressource 4 -->
+        <div class="glass-card p-5 flex flex-col justify-between biblio-item" data-cat="guides" data-search="securite prevention risques installations reglementation">
+          <div class="space-y-3">
+            <div class="flex justify-between items-center text-[10px] font-bold">
+              <span class="px-2 py-0.5 bg-red-50 text-red-700 border border-red-200 rounded font-mono">PDF · 950 Ko</span>
+              <span class="text-slate-600">2024</span>
+            </div>
+            <h4 class="text-sm font-bold text-slate-900 leading-snug">Référentiel National de Sécurité en EPS (MENPS)</h4>
+            <p class="text-xs text-slate-500 line-clamp-2">Consignes officielles sur le matériel, la pharmacie d'urgence et la responsabilité civile.</p>
+          </div>
+          <div class="pt-4 mt-4 border-t border-slate-100">
+            <a href="securite-eps.html" class="w-full py-2 bg-slate-900 hover:bg-blue-600 text-white rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
+              <span>Télécharger / Ouvrir</span>
+            </a>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section class="features">
-        <div class="section-container">
-            <div class="section-header">
-                <span class="section-badge">⚡ Fonctionnalités</span>
-                <h2 class="section-title">Tout ce dont vous avez besoin</h2>
-                <p class="section-description">Des outils pensés pour simplifier le quotidien des professeurs d'EPS au Maroc.</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3 class="feature-title">Conforme aux OP</h3>
-                    <p class="feature-description">Fiches alignées sur les Orientations Pédagogiques 2007-2009 du Ministère de l'Éducation Nationale.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3 class="feature-title">Rapide & Simple</h3>
-                    <p class="feature-description">Générez une fiche complète en moins de 2 minutes. Sélectionnez, personnalisez, téléchargez.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3 class="feature-title">Toutes les APS</h3>
-                    <p class="feature-description">Handball, Football, Basketball, Volleyball, Rugby, Basketball 3x3, Athlétisme, Gymnastique et bien plus.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h3 class="feature-title">Multi-supports</h3>
-                    <p class="feature-description">Accessible sur ordinateur, tablette et smartphone. Créez vos fiches où que vous soyez.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎓</div>
-                    <h3 class="feature-title">Collège & Lycée</h3>
-                    <p class="feature-description">Adapté à tous les niveaux : 1ère AC, 2ème AC, 3ème AC, Tronc Commun, 1ère Bac, 2ème Bac.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💾</div>
-                    <h3 class="feature-title">Export PDF</h3>
-                    <p class="feature-description">Téléchargez vos fiches au format PDF, prêtes à imprimer pour vos séances.</p>
-                </div>
-            </div>
+    <!-- ═══ 5. SECTION COMMUNAUTÉ — FACEBOOK & INSTAGRAM OFFICIELS UNIQUEMENT (SANS WHATSAPP NI TELEGRAM) ═══ -->
+    <section class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div class="space-y-2 max-w-xl">
+        <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-600">
+          <span>👥</span>
+          <span>Communauté & Réseaux Sociaux</span>
         </div>
+        <h3 class="text-xl font-bold text-slate-900">
+          Suivez ProfEPS Maroc sur les Réseaux Officiels
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          Rejoignez la communauté active des enseignants d’EPS et étudiants CRMEF pour suivre les actualités ministérielles, les nouvelles fiches didactiques et les partages d’expériences pédagogiques.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3 shrink-0">
+        <!-- Bouton Page Facebook Officielle -->
+        <a
+          href="https://www.facebook.com/profile.php?id=61559954402311"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="px-5 py-3 bg-[#1877F2] hover:bg-[#166fe5] text-white rounded-xl text-xs font-bold flex items-center gap-2.5 shadow-xs transition-all hover:scale-102"
+        >
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <span>Page Facebook ProfEPS</span>
+          <span class="text-white/80">↗</span>
+        </a>
+
+        <!-- Bouton Compte Instagram Officiel -->
+        <a
+          href="https://www.instagram.com/profeps.ma"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="px-5 py-3 bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F77737] hover:opacity-95 text-white rounded-xl text-xs font-bold flex items-center gap-2.5 shadow-xs transition-all hover:scale-102"
+        >
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <span>Instagram @profeps.ma</span>
+          <span class="text-white/80">↗</span>
+        </a>
+      </div>
     </section>
 
-    <section class="stats">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <div class="stat-icon">📋</div>
-                <div class="stat-number">500<span class="stat-suffix">+</span></div>
-                <div class="stat-label">Fiches générées</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-icon">👨‍🏫</div>
-                <div class="stat-number">100<span class="stat-suffix">+</span></div>
-                <div class="stat-label">Professeurs actifs</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-icon">⚽</div>
-                <div class="stat-number">10<span class="stat-suffix">+</span></div>
-                <div class="stat-label">APS disponibles</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-icon">🎁</div>
-                <div class="stat-number">100<span class="stat-suffix">%</span></div>
-                <div class="stat-label">Gratuit</div>
-            </div>
-        </div>
-    </section>
+  </main>
 
-    <section class="cta">
-        <div class="cta-box">
-            <h2 class="cta-title">Prêt à créer votre première fiche ?</h2>
-            <p class="cta-description">Rejoignez la communauté des professeurs d'EPS qui gagnent du temps grâce à Prof EPS Maroc.</p>
-            <a href="#generateur" class="btn btn-primary"><span>🚀</span> Commencer maintenant</a>
-        </div>
-    </section>
-
-
-    </main>
-
-    
-        
-        <footer class="footer" id="profeps-unified-footer">
+  <footer class="footer" id="profeps-unified-footer">
     <div class="footer-container">
       <div class="footer-grid">
         <div class="footer-brand" style="display:flex !important;flex-direction:column !important;align-items:flex-start !important;">
@@ -2200,11 +1528,9 @@ footer.footer .footer-bottom {
         <div class="footer-col">
           <h4 data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</h4>
           <ul>
-            <li><a href="mentions-legales.html">Mentions légales</a></li>
             <li><a href="politique-confidentialite.html" data-i18n-fr="Politique de confidentialité" data-i18n-en="Privacy Policy" data-i18n-ar="سياسة الخصوصية">Politique de confidentialité</a></li>
             <li><a href="cgu.html" data-i18n-fr="Conditions d'utilisation" data-i18n-en="Terms of Use" data-i18n-ar="شروط الاستخدام">Conditions d'utilisation</a></li>
-            <li><a href="contact.html">Nous contacter</a></li>
-            <li><a href="javascript:void(0)" onclick="window.ProfEPS_CMP ? window.ProfEPS_CMP.open() : null">🍪 Gestion des cookies</a></li>
+            <li><a href="contact.html" data-i18n-fr="Nous contacter" data-i18n-en="Contact Us" data-i18n-ar="اتصل بنا">Nous contacter</a></li>
             <li><a href="mailto:profepsma@gmail.com">✉️ profepsma@gmail.com</a></li>
           </ul>
         </div>
@@ -2217,290 +1543,73 @@ footer.footer .footer-bottom {
     </div>
   </footer>
 
-    <script>
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
-        const navToggle = document.getElementById('navToggle');
-        const navMenu = document.getElementById('navMenu');
-        
-        window.addEventListener('scroll', () => {
-            navbar.classList.toggle('scrolled', window.scrollY > 50);
-        });
-        
-        const navBackdrop = document.getElementById('navBackdrop');
+  <script>
+    function updateHeroVma(val) {
+      var vma = parseFloat(val);
+      document.getElementById('hero-vma-val').textContent = vma.toFixed(1);
+      document.getElementById('hero-vma-label').textContent = vma.toFixed(1) + ' km/h';
 
-        function toggleMenu() {
-            navMenu.classList.toggle('active');
-            navToggle.classList.toggle('active');
-            navBackdrop.classList.toggle('active');
-            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-            navToggle.setAttribute('aria-expanded', navMenu.classList.contains('active'));
+      var paceSec = Math.round(3600 / vma);
+      var m = Math.floor(paceSec / 60);
+      var s = paceSec % 60;
+      document.getElementById('hero-pace-100').textContent = m + "'" + (s < 10 ? '0' : '') + s + '"/km';
+      document.getElementById('hero-speed-85').textContent = (vma * 0.85).toFixed(1) + ' km/h';
+      document.getElementById('hero-speed-65').textContent = (vma * 0.65).toFixed(1) + ' km/h';
+    }
+
+    function filterOpCards(cycle) {
+      var cardLycee = document.getElementById('card-op-lycee');
+      var cardCollege = document.getElementById('card-op-college');
+      var btnAll = document.getElementById('btn-op-all');
+      var btnCol = document.getElementById('btn-op-college');
+      var btnLyc = document.getElementById('btn-op-lycee');
+
+      [btnAll, btnCol, btnLyc].forEach(function(b) {
+        b.className = 'px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-900';
+      });
+
+      if (cycle === 'college') {
+        cardLycee.style.display = 'none';
+        cardCollege.style.display = 'block';
+        btnCol.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 text-white shadow-2xs';
+      } else if (cycle === 'lycee') {
+        cardLycee.style.display = 'block';
+        cardCollege.style.display = 'none';
+        btnLyc.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white shadow-2xs';
+      } else {
+        cardLycee.style.display = 'block';
+        cardCollege.style.display = 'block';
+        btnAll.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-900 shadow-2xs';
+      }
+    }
+
+    var currentBiblioCat = 'all';
+    function setBiblioCat(cat) {
+      currentBiblioCat = cat;
+      ['all', 'guides', 'concours', 'aps', 'fiches'].forEach(function(c) {
+        var btn = document.getElementById('bcat-' + c);
+        if (btn) {
+          btn.className = (c === cat)
+            ? 'px-3.5 py-1.5 rounded-lg font-bold bg-slate-900 text-white border border-slate-900 shadow-2xs'
+            : 'px-3.5 py-1.5 rounded-lg font-bold bg-white text-slate-700 hover:text-slate-900 border border-slate-200';
         }
+      });
+      filterBiblioResources();
+    }
 
-        function closeMenu() {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
-            navBackdrop.classList.remove('active');
-            document.body.style.overflow = '';
-            navToggle.setAttribute('aria-expanded', 'false');
-        }
+    function filterBiblioResources() {
+      var q = (document.getElementById('biblio-search-input').value || '').toLowerCase().trim();
+      var items = document.querySelectorAll('.biblio-item');
+      items.forEach(function(el) {
+        var cat = el.getAttribute('data-cat');
+        var txt = (el.getAttribute('data-search') + ' ' + el.textContent).toLowerCase();
+        var matchCat = (currentBiblioCat === 'all' || cat === currentBiblioCat);
+        var matchQ = (q === '' || txt.indexOf(q) !== -1);
+        el.style.display = (matchCat && matchQ) ? 'flex' : 'none';
+      });
+    }
+  </script>
 
-        navToggle.addEventListener('click', (e) => { e.stopPropagation(); toggleMenu(); });
-        navBackdrop.addEventListener('click', closeMenu);
-        document.addEventListener('click', (e) => { if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) closeMenu(); });
-        navMenu.querySelectorAll('.nav-link, .nav-cta').forEach(link => link.addEventListener('click', closeMenu));
-        
-        // Optional fields toggle
-        const optionalToggle = document.getElementById('optionalToggle');
-        const optionalContent = document.getElementById('optionalContent');
-        
-        optionalToggle.addEventListener('click', () => {
-            optionalToggle.classList.toggle('open');
-            optionalContent.classList.toggle('show');
-        });
-        
-        // Tab switching functionality
-        const tabs = document.querySelectorAll('.generator-tab');
-        const ficheFields = document.getElementById('ficheFields');
-        const projetFields = document.getElementById('projetFields');
-        const grilleFields = document.getElementById('grilleFields');
-        const btnText = document.getElementById('btnText');
-        let currentType = 'fiche';
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Remove active class from all tabs
-                tabs.forEach(t => {
-                    t.classList.remove('active');
-                    t.style.background = 'var(--bg-secondary)';
-                    t.style.color = 'var(--text-secondary)';
-                });
-                
-                // Add active class to clicked tab
-                tab.classList.add('active');
-                tab.style.background = 'var(--primary)';
-                tab.style.color = 'white';
-                
-                // Update current type
-                currentType = tab.dataset.type;
-                
-                // Show/hide appropriate fields
-                ficheFields.style.display = currentType === 'fiche' ? 'block' : 'none';
-                projetFields.style.display = currentType === 'projet' ? 'block' : 'none';
-                grilleFields.style.display = currentType === 'grille' ? 'block' : 'none';
-                
-                // Update button text
-                const texts = {
-                    fiche: 'Générer ma fiche',
-                    projet: 'Générer le projet',
-                    grille: 'Générer la grille'
-                };
-                btnText.textContent = texts[currentType];
-            });
-        });
-
-        // Form submission - Store in localStorage and redirect
-        const quickForm = document.getElementById('quickForm');
-        
-        quickForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Récupérer les valeurs communes
-            const formData = {
-                type: currentType,
-                niveau: document.getElementById('niveau').value,
-                aps: document.getElementById('aps').value,
-                nomProf: document.getElementById('nomProf').value,
-                etablissement: document.getElementById('etablissement').value,
-                anneeScolaire: document.getElementById('anneeScolaire').value,
-                autoGenerate: true // Flag pour lancer automatiquement
-            };
-            
-            // Ajouter les champs spécifiques selon le type
-            if (currentType === 'fiche') {
-                formData.objectif = document.getElementById('objectifFiche').value;
-                formData.numeroSeance = document.getElementById('numeroSeanceFiche').value;
-                
-                if (!formData.niveau || !formData.aps || !formData.objectif) {
-                    alert('Veuillez remplir tous les champs obligatoires (*)');
-                    return;
-                }
-            } else if (currentType === 'projet') {
-                formData.niveauEleves = document.getElementById('niveauEleves').value;
-                formData.nombreSeances = document.getElementById('nombreSeances').value;
-                
-                if (!formData.niveau || !formData.aps) {
-                    alert('Veuillez remplir tous les champs obligatoires (*)');
-                    return;
-                }
-            } else if (currentType === 'grille') {
-                formData.typeGrille = document.querySelector('input[name="typeGrille"]:checked').value;
-                
-                if (!formData.niveau || !formData.aps) {
-                    alert('Veuillez remplir tous les champs obligatoires (*)');
-                    return;
-                }
-            }
-            
-            // Stocker dans localStorage
-            localStorage.setItem('profeps_formData', JSON.stringify(formData));
-            
-            // Rediriger vers la page générateur
-            window.location.href = 'generateur.html';
-        });
-
-        // ═══ LOGIQUE MINI-CALCULATEUR VMA ACCUEIL ═══
-        let selectedHomeTest = 'cooper-6';
-        const homeTestConfig = {
-            'cooper-6': {
-                label: '<span>🎯</span> Distance courue en 6 minutes (m) <span class="required">*</span>',
-                placeholder: '1450',
-                val: '1450',
-                min: '100',
-                max: '5000',
-                step: '10',
-                hint: 'Distance totale parcourue en 6 minutes (ex: 1 450 m)'
-            },
-            'cooper-12': {
-                label: '<span>🏃</span> Distance courue en 12 minutes (m) <span class="required">*</span>',
-                placeholder: '2700',
-                val: '2700',
-                min: '200',
-                max: '6000',
-                step: '10',
-                hint: 'Distance totale parcourue en 12 minutes (ex: 2 700 m)'
-            },
-            'luc-leger': {
-                label: '<span>🔊</span> Palier atteint au Test Navette <span class="required">*</span>',
-                placeholder: '9.5',
-                val: '9.5',
-                min: '1',
-                max: '20',
-                step: '0.5',
-                hint: 'Dernier palier ou demi-palier franchi (ex: 9.5)'
-            },
-            'vameval': {
-                label: '<span>🏁</span> Palier atteint au Test VAMEVAL <span class="required">*</span>',
-                placeholder: '12.5',
-                val: '12.5',
-                min: '1',
-                max: '25',
-                step: '0.5',
-                hint: 'Dernier palier atteint sur piste (plots tous les 20m)'
-            },
-            'direct': {
-                label: '<span>⚡</span> VMA connue (km/h) <span class="required">*</span>',
-                placeholder: '14.5',
-                val: '14.5',
-                min: '5',
-                max: '26',
-                step: '0.1',
-                hint: 'Entrez directement votre vitesse maximale aérobie'
-            }
-        };
-
-        const homeTabs = document.querySelectorAll('.vma-quick-tab');
-        const homeLabel = document.getElementById('homeTestValLabel');
-        const homeInput = document.getElementById('homeTestVal');
-        const homeHint = document.getElementById('homeTestValHint');
-
-        homeTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                homeTabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                selectedHomeTest = tab.dataset.vmaTest;
-                const conf = homeTestConfig[selectedHomeTest];
-                if (conf && homeInput && homeLabel) {
-                    homeLabel.innerHTML = conf.label;
-                    homeInput.placeholder = conf.placeholder;
-                    homeInput.value = conf.val;
-                    homeInput.min = conf.min;
-                    homeInput.max = conf.max;
-                    homeInput.step = conf.step;
-                    if (homeHint) homeHint.textContent = conf.hint;
-                }
-            });
-        });
-
-        const quickVmaForm = document.getElementById('quickVmaForm');
-        if (quickVmaForm) {
-            quickVmaForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const val = document.getElementById('homeTestVal').value;
-                const piste = document.getElementById('homePisteVal').value || '250';
-                const duree = document.getElementById('homeDureeVal').value || '12';
-                const allure = document.getElementById('homeAllureVal').value || '80';
-
-                const targetUrl = `calculateur-vma.html?test=${encodeURIComponent(selectedHomeTest)}&val=${encodeURIComponent(val)}&piste=${encodeURIComponent(piste)}&duree=${encodeURIComponent(duree)}&allure=${encodeURIComponent(allure)}&auto=1`;
-                window.location.href = targetUrl;
-            });
-        }
-        
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // No carousel — static grid
-    </script>
-    
-    <!-- Supabase SDK -->
-    <script src="/js/consent.js"></script>
-
-
-
-
-
-<!-- PROFEPS CMP BANNER -->
-<div id="profeps-cmp-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#f8fafc;padding:16px 22px;border-top:1px solid #334155;z-index:999999;box-shadow:0 -10px 25px rgba(0,0,0,0.5);font-family:system-ui,-apple-system,sans-serif;">
-  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;">
-    <div style="flex:1 1 500px;font-size:13px;line-height:1.5;">
-      <strong style="color:#38bdf8;">🍪 Respect de votre vie privée</strong><br>
-      ProfEPS utilise des cookies essentiels au site ainsi que des cookies de mesure d'audience et Google AdSense pour maintenir nos outils gratuits. Vous pouvez personnaliser ou refuser à tout moment. <a href="politique-confidentialite.html" style="color:#38bdf8;text-decoration:underline;">Politique de confidentialité</a>.
-    </div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-      <button onclick="window.ProfEPS_CMP.open()" type="button" style="padding:7px 12px;background:#1e293b;color:#cbd5e1;border:1px solid #475569;border-radius:6px;font-size:12.5px;font-weight:600;cursor:pointer;">Personnaliser</button>
-      <button onclick="window.ProfEPS_CMP.rejectAll()" type="button" style="padding:7px 12px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:12.5px;font-weight:600;cursor:pointer;">Refuser</button>
-      <button onclick="window.ProfEPS_CMP.acceptAll()" type="button" style="padding:7px 16px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:12.5px;font-weight:700;cursor:pointer;">Tout accepter</button>
-    </div>
-  </div>
-</div>
-<!-- PROFEPS CMP MODAL -->
-<div id="profeps-cmp-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.85);backdrop-filter:blur(4px);z-index:1000000;align-items:center;justify-content:center;padding:16px;font-family:system-ui,-apple-system,sans-serif;">
-  <div style="background:#0f172a;border:1px solid #334155;border-radius:12px;max-width:540px;width:100%;padding:22px;color:#f8fafc;box-shadow:0 20px 40px rgba(0,0,0,0.6);">
-    <h3 style="margin-top:0;font-size:17px;color:#38bdf8;">⚙️ Préférences de Confidentialité & Cookies</h3>
-    <p style="font-size:12.5px;color:#94a3b8;line-height:1.5;">Gérez vos préférences. Les cookies techniques sont obligatoires pour les calculs.</p>
-    <div style="margin:12px 0;padding:10px;background:#1e293b;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
-      <span style="font-weight:600;font-size:13px;">Cookies techniques essentiels</span>
-      <span style="font-size:11px;color:#10b981;font-weight:bold;">Toujours actif</span>
-    </div>
-    <div style="margin:12px 0;padding:10px;background:#1e293b;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
-      <label for="cmp-opt-analytics" style="font-weight:600;font-size:13px;cursor:pointer;">Mesure d'audience anonyme (Analytics)</label>
-      <input type="checkbox" id="cmp-opt-analytics" checked style="width:17px;height:17px;cursor:pointer;">
-    </div>
-    <div style="margin:12px 0;padding:10px;background:#1e293b;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
-      <label for="cmp-opt-ads" style="font-weight:600;font-size:13px;cursor:pointer;">Publicités personnalisées (Google AdSense)</label>
-      <input type="checkbox" id="cmp-opt-ads" checked style="width:17px;height:17px;cursor:pointer;">
-    </div>
-    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:18px;">
-      <button onclick="document.getElementById('profeps-cmp-modal').style.display='none'" type="button" style="padding:7px 12px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:12px;cursor:pointer;">Fermer</button>
-      <button onclick="window.ProfEPS_CMP.saveCustom()" type="button" style="padding:7px 16px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:12.5px;font-weight:700;cursor:pointer;">Enregistrer mes choix</button>
-    </div>
-  </div>
-</div>
+  <script src="unifier-navbar-footer.js"></script>
 </body>
 </html>
-
-
-
-
-
