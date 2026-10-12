@@ -22,7 +22,32 @@
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Calculateur d’Intermittent HIIT & Navettes Sports Collectifs (COD 180°)","url":"https://profeps.ma/generateur-intermittent-hiit-cod.html","applicationCategory":"HealthApplication","operatingSystem":"All","inLanguage":["fr","en","ar"],"description":"Paramétrez votre VMA, la durée d’effort, le % VMA et la longueur du terrain puis cliquez sur Calculer pour obtenir vos distances de plots sur piste et avec relances à 180° (modèle Buchheit).","keywords":"calculateur intermittent 15/15 30/30, distance plots vma eps, navette cod 180 buchheit, entrainement fractionné sports collectifs","offers":{"@type":"Offer","price":"0","priceCurrency":"MAD"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Pourquoi faut-il réduire la distance des plots lors d'un 15/15 en navette avec demi-tours (COD 180°) ?","acceptedAnswer":{"@type":"Answer","text":"Sur un terrain de handball, de basket ou une cour d'établissement scolaire, chaque demi-tour à 180° oblige à freiner puis relancer, ce qui coûte environ 0,72 seconde et un surplus d'énergie musculaire excentrique. Sans réduction de la distance des plots, l'élève est en surcharge lactique précoce."}}]}]}</script>
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <style id="profeps-master-unifier-css">
+  <style id="profeps-calculator-ui-css">
+.vma-hero { margin-top: 80px !important; padding: 38px 20px 30px !important; text-align: center !important; background: linear-gradient(135deg, rgba(193,39,45,0.09) 0%, rgba(15,23,42,0.96) 50%, rgba(0,98,51,0.09) 100%) !important; border-bottom: 2px solid #c1272d !important; }
+.vma-hero h1 { font-size: clamp(1.55rem, 3.2vw, 2.35rem) !important; font-weight: 900 !important; color: #f8fafc !important; margin: 0 auto 10px !important; max-width: 900px !important; line-height: 1.2 !important; }
+.vma-hero p { color: #94a3b8 !important; max-width: 680px !important; margin: 0 auto !important; font-size: 0.96rem !important; line-height: 1.55 !important; }
+.peps-hero-pills { display: none !important; }
+.peps-cta-btn, button.peps-cta-btn, #btn-calc-main {
+  width: 100% !important; margin-top: 10px !important; padding: 17px 26px !important;
+  border-radius: 14px !important; border: 2px solid rgba(255,255,255,0.22) !important;
+  background: linear-gradient(135deg, #c1272d 0%, #991b1b 52%, #006233 100%) !important;
+  color: #ffffff !important; font-weight: 900 !important; font-size: 1.06rem !important;
+  letter-spacing: 0.04em !important; text-transform: uppercase !important; cursor: pointer !important;
+  box-shadow: 0 12px 28px rgba(193,39,45,0.42), 0 4px 12px rgba(0,98,51,0.30) !important;
+  display: flex !important; align-items: center !important; justify-content: center !important; gap: 12px !important;
+}
+.peps-cta-btn:hover, button.peps-cta-btn:hover, #btn-calc-main:hover {
+  transform: translateY(-2px) scale(1.005) !important;
+  background: linear-gradient(135deg, #e11d48 0%, #c1272d 50%, #059669 100%) !important;
+  box-shadow: 0 16px 34px rgba(193,39,45,0.55), 0 6px 16px rgba(0,98,51,0.40) !important;
+}
+.peps-cta-arrow {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  width: 28px !important; height: 28px !important; border-radius: 999px !important;
+  background: rgba(255,255,255,0.22) !important; font-size: 1rem !important; font-weight: 900 !important;
+}
+</style>
+<style id="profeps-master-unifier-css">
 /* ═══ 1. NAVBAR FIXE ISOLÉE (.peps-*) — 80PX VERROUILLÉ SUR TOUTES LES PAGES ═══ */
 html {
   overflow-y: scroll !important;
@@ -740,32 +765,6 @@ footer.footer .footer-bottom {
   }
 }
 </style>
-
-<style id="profeps-calculator-ui-css">
-.vma-hero { margin-top: 80px !important; padding: 38px 20px 30px !important; text-align: center !important; background: linear-gradient(135deg, rgba(193,39,45,0.09) 0%, rgba(15,23,42,0.96) 50%, rgba(0,98,51,0.09) 100%) !important; border-bottom: 2px solid #c1272d !important; }
-.vma-hero h1 { font-size: clamp(1.55rem, 3.2vw, 2.35rem) !important; font-weight: 900 !important; color: #f8fafc !important; margin: 0 auto 10px !important; max-width: 900px !important; line-height: 1.2 !important; }
-.vma-hero p { color: #94a3b8 !important; max-width: 680px !important; margin: 0 auto !important; font-size: 0.96rem !important; line-height: 1.55 !important; }
-.peps-hero-pills { display: none !important; }
-.peps-cta-btn, button.peps-cta-btn, #btn-calc-main {
-  width: 100% !important; margin-top: 10px !important; padding: 17px 26px !important;
-  border-radius: 14px !important; border: 2px solid rgba(255,255,255,0.22) !important;
-  background: linear-gradient(135deg, #c1272d 0%, #991b1b 52%, #006233 100%) !important;
-  color: #ffffff !important; font-weight: 900 !important; font-size: 1.06rem !important;
-  letter-spacing: 0.04em !important; text-transform: uppercase !important; cursor: pointer !important;
-  box-shadow: 0 12px 28px rgba(193,39,45,0.42), 0 4px 12px rgba(0,98,51,0.30) !important;
-  display: flex !important; align-items: center !important; justify-content: center !important; gap: 12px !important;
-}
-.peps-cta-btn:hover, button.peps-cta-btn:hover, #btn-calc-main:hover {
-  transform: translateY(-2px) scale(1.005) !important;
-  background: linear-gradient(135deg, #e11d48 0%, #c1272d 50%, #059669 100%) !important;
-  box-shadow: 0 16px 34px rgba(193,39,45,0.55), 0 6px 16px rgba(0,98,51,0.40) !important;
-}
-.peps-cta-arrow {
-  display: inline-flex !important; align-items: center !important; justify-content: center !important;
-  width: 28px !important; height: 28px !important; border-radius: 999px !important;
-  background: rgba(255,255,255,0.22) !important; font-size: 1rem !important; font-weight: 900 !important;
-}
-</style>
 </head>
 <body class="min-h-screen flex flex-col bg-slate-50">
 <!-- PROFEPS_UNIFIED_NAVBAR_START -->
@@ -976,7 +975,7 @@ footer.footer .footer-bottom {
 })();
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->
-  <header class="vma-hero" style="margin-top:80px;padding:38px 20px 30px;text-align:center;background:linear-gradient(135deg,rgba(193,39,45,0.09) 0%,rgba(15,23,42,0.96) 50%,rgba(0,98,51,0.09) 100%);border-bottom:2px solid #c1272d;">
+<header class="vma-hero" style="margin-top:80px;padding:38px 20px 30px;text-align:center;background:linear-gradient(135deg,rgba(193,39,45,0.09) 0%,rgba(15,23,42,0.96) 50%,rgba(0,98,51,0.09) 100%);border-bottom:2px solid #c1272d;">
     <div id="ui-badge" class="hero-badge" style="display:inline-flex;align-items:center;gap:0.45rem;background:linear-gradient(135deg,rgba(193,39,45,0.1),rgba(0,98,51,0.08));color:#c1272d;padding:0.4rem 1.1rem;border-radius:9999px;font-size:0.76rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.85rem;border:1px solid rgba(193,39,45,0.22);" data-i18n-fr="⚡ Cluster 3A/B · Intermittent HIIT &amp; Changement de Direction (COD 180°)" data-i18n-en="⚡ Cluster 3A/B · HIIT Intervals &amp; 180° Shuttle COD Calculator" data-i18n-ar="⚡ القطب 3A/B · التمارين المتقطعة HIIT وتغيير الاتجاه 180° للملاعب الجماعية">⚡ Cluster 3A/B · Intermittent HIIT &amp; Changement de Direction (COD 180°)</div>
     <h1 id="ui-title" style="font-size:clamp(1.55rem,3vw,2.25rem);font-weight:800;color:#0f172a;margin:0 auto 0.65rem auto;max-width:880px;line-height:1.22;" data-i18n-fr="Calculateur d’Intermittent HIIT &amp; Navettes Sports Collectifs (COD 180°)" data-i18n-en="HIIT Interval &amp; Team Sports 180° Shuttle Cone Distance Calculator" data-i18n-ar="حاسبة مسافات التمارين المتقطعة والمكوك (COD 180°) للرياضات الجماعية">Calculateur d’Intermittent HIIT &amp; Navettes Sports Collectifs (COD 180°)</h1>
     <p id="ui-sub" style="font-size:0.95rem;color:#475569;max-width:760px;margin:0 auto;line-height:1.6;" data-i18n-fr="Paramétrez votre VMA, la durée d’effort, le % VMA et la longueur du terrain puis cliquez sur Calculer pour obtenir vos distances de plots sur piste et avec relances à 180° (modèle Buchheit)." data-i18n-en="Set your MAS, interval duration, % MAS, and court shuttle length, then click Calculate to get linear track and 180° COD-adjusted cone distances." data-i18n-ar="حدد سرعة VMA ومدة الجهد ونسبة الشدة وطول الملعب ثم اضغط على &quot;احسب&quot; لمعرفة المسافات الدقيقة للأقماع على المضمار أو مع تغيير الاتجاه 180°.">Paramétrez votre VMA, la durée d’effort, le % VMA et la longueur du terrain puis cliquez sur Calculer pour obtenir vos distances de plots sur piste et avec relances à 180° (modèle Buchheit).</p>
@@ -1008,7 +1007,7 @@ footer.footer .footer-bottom {
         </div>
       </div>
 
-      <button type="button" id="btn-calc-main" onclick="triggerCalculation()" class="peps-cta-btn w-full mt-3 py-4 px-6 rounded-2xl font-extrabold text-base sm:text-lg text-white shadow-xl transition-all duration-200 flex items-center justify-center gap-3 cursor-pointer select-none" style="width:100%;margin-top:10px;padding:17px 26px;border-radius:14px;border:2px solid rgba(255,255,255,0.22);background:linear-gradient(135deg,#c1272d 0%,#991b1b 52%,#006233 100%);color:#ffffff;font-weight:900;font-size:1.06rem;letter-spacing:0.04em;text-transform:uppercase;cursor:pointer;box-shadow:0 12px 28px rgba(193,39,45,0.42),0 4px 12px rgba(0,98,51,0.30);display:flex;align-items:center;justify-content:center;gap:12px;"><span>🔄</span>
+      <button type="button" id="btn-calc-main" onclick="triggerCalculation()" class="peps-cta-btn w-full mt-3 py-4 px-6 rounded-2xl font-extrabold text-base sm:text-lg text-white shadow-xl transition-all duration-200 flex items-center justify-center gap-3 cursor-pointer select-none" style="width:100% !important;margin-top:0.7rem !important;padding:1.05rem 1.6rem !important;border-radius:14px !important;background:linear-gradient(135deg,#c1272d 0%,#991b1b 52%,#006233 100%) !important;background-color:#c1272d !important;color:#ffffff !important;-webkit-text-fill-color:#ffffff !important;font-weight:800 !important;font-size:1.02rem !important;letter-spacing:0.01em !important;border:1px solid rgba(255,255,255,0.26) !important;box-shadow:0 12px 28px -5px rgba(193,39,45,0.48),0 4px 12px -2px rgba(0,98,51,0.28),inset 0 1px 0 rgba(255,255,255,0.28) !important;display:flex !important;align-items:center !important;justify-content:center !important;gap:0.75rem !important;cursor:pointer !important;text-align:center !important;"><span>🔄</span>
         <span data-i18n-fr="Calculer les Distances de Plots (Piste & Navettes COD 180°)" data-i18n-en="Calculate Cone Distances (Linear Track & 180° Shuttles)" data-i18n-ar="احسب مسافات الأقماع (على المضمار ومع تغيير الاتجاه 180°)">Calculer les Distances de Plots (Piste & Navettes COD 180°)</span><span class="peps-cta-arrow" aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:9999px;background:rgba(255,255,255,0.2);font-size:1rem;font-weight:900;line-height:1;flex-shrink:0;margin-left:0.25rem;">→</span></button>
     </div>
 
