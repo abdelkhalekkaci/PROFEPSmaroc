@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Widget Calculateur VMA | ProfEPS Maroc</title>
+  <meta name="description" content="Widget intégrable du calculateur de Vitesse Maximale Aérobie (VMA) pour blogs sportifs, CRMEF et clubs scolaires.">
+  <link rel="canonical" href="https://profeps.ma/widget-vma.html">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-white p-4 antialiased min-h-screen flex items-center justify-center">
+  <div class="w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-2xl">
+    <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+      <div class="flex items-center gap-2">
+        <span class="text-xl">🏃‍♂️</span>
+        <h2 class="font-bold text-sm text-white">Calculateur VMA & Allures</h2>
+      </div>
+      <a href="https://profeps.ma/calculateur-vma.html" target="_blank" class="text-xs text-sky-400 hover:underline font-semibold">ProfEPS.ma ↗</a>
+    </div>
+    <div class="space-y-3">
+      <div>
+        <label class="block text-xs text-slate-400 mb-1">Test Demi-Cooper (Distance en mètres courue en 6 min) :</label>
+        <div class="flex gap-2">
+          <input type="number" id="w-distance" value="1500" min="600" max="2600" step="10" class="flex-1 bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white font-mono focus:outline-none focus:border-sky-500">
+          <button onclick="calculateWidgetVma()" type="button" class="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs rounded-lg transition">Calculer</button>
+        </div>
+      </div>
+      <div id="w-results" class="p-3 bg-slate-950 border border-slate-800 rounded-xl space-y-2 mt-3">
+        <div class="flex justify-between items-center">
+          <span class="text-xs text-slate-400">VMA Estimée :</span>
+          <span id="w-vma-val" class="text-lg font-black text-sky-400 font-mono">15.0 km/h</span>
+        </div>
+        <div class="grid grid-cols-3 gap-2 text-center text-xs pt-2 border-t border-slate-800/80">
+          <div class="p-1.5 bg-slate-900 rounded border border-slate-800">
+            <div class="text-[10px] text-slate-500">Allure 100m</div>
+            <div id="w-s100" class="font-bold text-emerald-400 font-mono">24.0s</div>
+          </div>
+          <div class="p-1.5 bg-slate-900 rounded border border-slate-800">
+            <div class="text-[10px] text-slate-500">Allure 200m</div>
+            <div id="w-s200" class="font-bold text-amber-400 font-mono">48.0s</div>
+          </div>
+          <div class="p-1.5 bg-slate-900 rounded border border-slate-800">
+            <div class="text-[10px] text-slate-500">Allure 400m</div>
+            <div id="w-s400" class="font-bold text-rose-400 font-mono">1m 36s</div>
+          </div>
+        </div>
+      </div>
+      <div class="pt-2 flex justify-between items-center text-[11px] text-slate-500">
+        <span>Précision Demi-Cooper (Brouha)</span>
+        <button onclick="copyWidgetCode()" type="button" class="text-sky-400 hover:underline">📋 Intégrer ce widget</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    function calculateWidgetVma() {
+      var d = parseFloat(document.getElementById('w-distance').value);
+      if (isNaN(d) || d <= 0) return;
+      var vma = (d / 100).toFixed(1);
+      document.getElementById('w-vma-val').innerText = vma + ' km/h';
+      var speedMs = (vma * 1000) / 3600;
+      document.getElementById('w-s100').innerText = (100 / speedMs).toFixed(1) + 's';
+      document.getElementById('w-s200').innerText = (200 / speedMs).toFixed(1) + 's';
+      var t400 = (400 / speedMs);
+      var min400 = Math.floor(t400 / 60);
+      var sec400 = Math.round(t400 % 60);
+      document.getElementById('w-s400').innerText = min400 + 'm ' + (sec400 < 10 ? '0' : '') + sec400 + 's';
+    }
+    function copyWidgetCode() {
+      var code = '<iframe src="https://profeps.ma/widget-vma.html" width="100%" height="280" frameborder="0" style="border:none;border-radius:16px;max-width:440px;" title="Calculateur VMA ProfEPS Maroc"></iframe>';
+      navigator.clipboard.writeText(code).then(function() {
+        alert('Code iframe copié ! Vous pouvez l\'intégrer sur votre site ou intranet CRMEF.');
+      });
+    }
+  </script>
+</body>
+</html>
