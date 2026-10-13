@@ -16,7 +16,7 @@
     <link rel="alternate" hreflang="x-default" href="https://profeps.ma/calculateur-vma.html">
     <link rel="icon" type="image/png" href="/images/prof_eps.png">
 
-    <!-- ═══ OPEN GRAPH (FACEBOOK, LINKEDIN, WHATSAPP) ═══ -->
+    <!-- ═══ OPEN GRAPH ═══ -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Prof EPS Maroc">
     <meta property="og:url" content="https://profeps.ma/calculateur-vma.html">
@@ -68,7 +68,7 @@
     }
     </script>
 
-    <!-- ═══ SCHEMA.ORG HOWTO (GOOGLE RICH SNIPPETS) ═══ -->
+    <!-- ═══ SCHEMA.ORG HOWTO ═══ -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -101,7 +101,7 @@
     }
     </script>
 
-    <!-- ═══ SCHEMA.ORG FAQPAGE (GOOGLE PAA & RICH SNIPPETS) ═══ -->
+    <!-- ═══ SCHEMA.ORG FAQPAGE ═══ -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -138,14 +138,6 @@
             "@type": "Answer",
             "text": "La formule classique admise de Léger et Mercier établit : VO₂max (ml/kg/min) = VMA (km/h) × 3,5. Cela permet d'estimer la cylindrée aérobie sans matériel de laboratoire."
           }
-        },
-        {
-          "@type": "Question",
-          "name": "How to calculate Maximal Aerobic Speed (MAS) with the 6-minute test?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Run at a steady maximum pace for 6 minutes on a measured track. Formula: MAS (km/h) = Distance (m) / 100. For instance, running 1,400 meters yields a MAS of 14.0 km/h."
-          }
         }
       ]
     }
@@ -155,6 +147,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- ═══ TAILWIND CSS CDN (RENDU PARFAIT DES COMPOSANTS & GUIDES) ═══ -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
         :root {
@@ -184,60 +179,57 @@
         body { font-family: var(--font-sans); background: #f8fafc; color: var(--text-primary); line-height: 1.5; font-size: 0.9375rem; }
         a { text-decoration: none; color: inherit; transition: var(--transition); }
 
-        /* ═══ NAVBAR UNIFIÉE AVEC SWITCHER DE LANGUE ═══ */
-        .navbar { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 1000 !important; padding: 1rem 2rem !important; background: rgba(255,255,255,0.96) !important; backdrop-filter: blur(20px) !important; -webkit-backdrop-filter: blur(20px) !important; border-bottom: 1px solid rgba(226,232,240,0.7) !important; transition: all 0.3s ease !important; }
-        .navbar.scrolled { padding: 0.5rem 2rem !important; box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important; background: rgba(255,255,255,0.99) !important; }
-        .nav-container { max-width: 1400px !important; margin: 0 auto !important; display: grid !important; grid-template-columns: 1fr auto 1fr !important; align-items: center !important; }
-        .nav-logo { justify-self: start !important; display: flex !important; align-items: center !important; }
-        .nav-logo img { height: 56px !important; transition: all 0.3s ease !important; }
-        .navbar.scrolled .nav-logo img { height: 46px !important; }
-        .nav-menu { display: flex !important; align-items: center !important; justify-content: center !important; text-align: center !important; gap: 1.75rem !important; }
-        .nav-right { justify-self: end !important; display: flex !important; align-items: center !important; gap: 0.65rem !important; }
-        .nav-link { font-size: 0.95rem !important; font-weight: 600 !important; color: #1a1a2e !important; padding: 0.5rem 0.75rem !important; text-align: center !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; position: relative !important; transition: color 0.3s ease !important; text-decoration: none !important; letter-spacing: -0.01em !important; }
-        .nav-link::after { content: '' !important; position: absolute !important; bottom: -2px !important; left: 50% !important; right: 50% !important; height: 3px !important; background: linear-gradient(90deg, #c1272d, #006233) !important; border-radius: 2px !important; transition: left 0.3s ease, right 0.3s ease !important; }
-        .nav-link:hover::after, .nav-link.active::after { left: 0.4rem !important; right: 0.4rem !important; }
-        .nav-link:hover, .nav-link.active { color: #c1272d !important; }
-        
-        /* ═══ SÉLECTEUR DE LANGUE (FR / EN) ═══ */
-        .lang-switch { display: inline-flex; align-items: center; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 9999px; padding: 2px; }
-        .lang-btn { background: none; border: none; cursor: pointer; padding: 4px 8px; font-size: 0.75rem; font-weight: 700; color: #64748b; border-radius: 9999px; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 3px; }
-        .lang-btn.active { background: white; color: #0f172a; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
-        .lang-btn:hover:not(.active) { color: #c1272d; }
-        .lang-sep { font-size: 0.75rem; color: #cbd5e1; user-select: none; }
-
-        .nav-cta { display: inline-flex !important; align-items: center !important; gap: 0.5rem !important; padding: 0.5rem 1.25rem !important; background: linear-gradient(135deg, #c1272d, #006233) !important; color: white !important; font-weight: 600 !important; font-size: 0.9375rem !important; border-radius: 9999px !important; border: 2px solid transparent !important; box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important; transition: transform 0.3s ease, box-shadow 0.3s ease !important; text-decoration: none !important; white-space: nowrap !important; }
-        .nav-cta:hover { transform: translateY(-2px) !important; box-shadow: 0 8px 25px rgba(193,39,45,0.3) !important; }
-        .nav-cta.nav-cta-mobile { display: none !important; }
-        .nav-cta.nav-cta-desktop { display: inline-flex !important; }
-        .nav-toggle { display: none !important; flex-direction: column !important; gap: 5px !important; background: none !important; border: none !important; cursor: pointer !important; padding: 8px !important; width: 36px !important; height: 36px !important; justify-content: center !important; align-items: center !important; border-radius: 8px !important; }
-        .nav-toggle span { display: block !important; width: 22px !important; height: 2px !important; background: #1a1a2e !important; border-radius: 2px !important; transition: transform 0.3s ease, opacity 0.3s ease !important; }
-        .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg) !important; }
-        .nav-toggle.active span:nth-child(2) { opacity: 0 !important; transform: scaleX(0) !important; }
-        .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg) !important; }
-        .nav-backdrop { display: none; position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; background: rgba(0,0,0,0.3) !important; z-index: 99 !important; opacity: 0; transition: opacity 0.3s ease !important; }
-        .nav-backdrop.active { display: block !important; opacity: 1 !important; }
-
-        @media (max-width: 768px) {
-            .nav-container { display: flex !important; justify-content: space-between !important; }
-            .nav-right { gap: 0.4rem !important; }
-            .nav-menu { position: absolute !important; top: 100% !important; left: 1rem !important; right: 1rem !important; background: white !important; flex-direction: column !important; padding: 1.5rem !important; box-shadow: 0 10px 40px rgba(0,0,0,0.12) !important; border-radius: 16px !important; gap: 0.75rem !important; transform: translateY(-10px) !important; opacity: 0 !important; pointer-events: none !important; transition: transform 0.3s ease, opacity 0.3s ease !important; z-index: 100 !important; border: 1px solid #f1f5f9 !important; justify-content: center !important; align-items: center !important; text-align: center !important; }
-            .nav-menu.active { transform: translateY(0) !important; opacity: 1 !important; pointer-events: auto !important; }
-            .nav-link { padding: 0.6rem 0 !important; width: 100% !important; text-align: center !important; justify-content: center !important; font-weight: 600 !important; }
-            .nav-toggle { display: flex !important; }
-            .nav-cta.nav-cta-mobile { display: inline-flex !important; width: 100% !important; justify-content: center !important; margin-top: 0.5rem !important; }
-            .nav-cta.nav-cta-desktop { display: none !important; }
-        }
-        @media (max-width: 480px) {
-            .navbar { padding: 0.75rem 1rem !important; }
-            .lang-btn { padding: 3px 6px; font-size: 0.7rem; }
-        }
+        /* SÉCURITÉ CSS FALLBACK (MÊME HORS CDN OU AVEC BOUCLIER BRAVE) */
+        .hidden { display: none !important; }
 
         /* ═══ HERO ═══ */
-        .vma-hero { margin-top: 80px; padding: 2.5rem 1.25rem 2rem; background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%); border-bottom: 1px solid var(--border); text-align: center; }
-        .hero-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(193,39,45,0.08); color: var(--primary); padding: 0.3rem 0.95rem; border-radius: 9999px; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.75rem; border: 1px solid rgba(193,39,45,0.18); }
-        .vma-hero h1 { font-family: var(--font-display); font-size: clamp(1.6rem, 3.2vw, 2.3rem); font-weight: 800; color: #0f172a; margin-bottom: 0.5rem; line-height: 1.25; letter-spacing: -0.02em; }
-        .vma-hero h1 span { background: linear-gradient(135deg, #c1272d 0%, #006233 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .vma-hero p { font-size: 0.98rem; color: var(--text-light); max-width: 720px; margin: 0 auto 1.25rem; line-height: 1.6; }
+        .vma-hero {
+            margin-top: 80px !important;
+            padding: 2.75rem 1.25rem 2.25rem !important;
+            background: radial-gradient(circle at 18% 20%, rgba(193, 39, 45, 0.07) 0%, transparent 45%),
+                        radial-gradient(circle at 82% 80%, rgba(0, 98, 51, 0.07) 0%, transparent 45%),
+                        linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+            border-bottom: 1px solid var(--border) !important;
+            text-align: center !important;
+        }
+        .hero-badge {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 0.45rem !important;
+            background: linear-gradient(135deg, rgba(193, 39, 45, 0.1), rgba(0, 98, 51, 0.08)) !important;
+            color: var(--primary) !important;
+            padding: 0.4rem 1.1rem !important;
+            border-radius: 9999px !important;
+            font-size: 0.76rem !important;
+            font-weight: 800 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.05em !important;
+            margin-bottom: 0.85rem !important;
+            border: 1px solid rgba(193, 39, 45, 0.22) !important;
+            box-shadow: 0 2px 8px rgba(193, 39, 45, 0.08) !important;
+        }
+        .vma-hero h1 {
+            font-family: var(--font-display) !important;
+            font-size: clamp(1.6rem, 3.2vw, 2.3rem) !important;
+            font-weight: 800 !important;
+            color: #0f172a !important;
+            margin: 0 auto 0.65rem auto !important;
+            max-width: 880px !important;
+            line-height: 1.25 !important;
+            letter-spacing: -0.02em !important;
+        }
+        .vma-hero h1 span {
+            background: linear-gradient(135deg, #c1272d 0%, #006233 100%) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+        }
+        .vma-hero p {
+            font-size: 0.96rem !important;
+            color: var(--text-light) !important;
+            max-width: 760px !important;
+            margin: 0 auto 1.25rem !important;
+            line-height: 1.6 !important;
+        }
         .hero-features { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem; }
         .hero-feature-tag { background: white; border: 1px solid var(--border); padding: 0.35rem 0.85rem; border-radius: 99px; font-size: 0.82rem; color: var(--text-secondary); font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,0.03); display: inline-flex; align-items: center; gap: 0.35rem; }
 
@@ -264,8 +256,32 @@
         .btn-quick-chip { background: white; border: 1px solid var(--border); border-radius: 6px; padding: 0.2rem 0.5rem; font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: var(--transition); }
         .btn-quick-chip:hover { background: #f1f5f9; color: var(--primary); border-color: #cbd5e1; }
         .btn-quick-chip.active { background: rgba(193,39,45,0.08); color: var(--primary); border-color: var(--primary); font-weight: 700; }
-        .btn-calc-main { width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.9rem 1.75rem; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; font-weight: 700; font-size: 1.05rem; border: none; border-radius: var(--radius-md); cursor: pointer; transition: var(--transition); box-shadow: 0 4px 14px rgba(193,39,45,0.25); margin: 0.5rem 0 1.5rem; }
-        .btn-calc-main:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(193,39,45,0.35); }
+        
+        .btn-calc-main {
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.65rem;
+            padding: 1.05rem 1.6rem;
+            background: linear-gradient(135deg, #c1272d 0%, #991b1b 55%, #006233 100%);
+            color: #ffffff;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.05rem;
+            letter-spacing: 0.01em;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px -4px rgba(193, 39, 45, 0.45), 0 4px 10px -2px rgba(0, 98, 51, 0.25);
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, filter 0.2s ease;
+            margin: 0.5rem 0 1.5rem;
+        }
+        .btn-calc-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 32px -5px rgba(193, 39, 45, 0.55), 0 6px 14px -2px rgba(0, 98, 51, 0.3);
+            filter: brightness(1.05);
+        }
 
         /* ═══ RÉSULTATS ═══ */
         #results-wrapper { display: none; animation: fadeIn 0.3s ease; }
@@ -282,17 +298,22 @@
         .stat-pill-label { font-size: 0.74rem; color: var(--text-light); font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; }
         .stat-pill-val { font-size: 1.25rem; font-weight: 800; color: #0f172a; margin-top: 0.25rem; }
         .stat-pill-sub { font-size: 0.75rem; color: var(--text-light); margin-top: 0.15rem; }
-        .table-card { background: white; border-radius: var(--radius-lg); border: 1px solid var(--border); box-shadow: var(--shadow-sm); padding: 1.25rem; }
+        .table-card { background: white; border-radius: var(--radius-lg); border: 1px solid var(--border); box-shadow: var(--shadow-sm); padding: 1.25rem; margin-bottom: 2rem; }
+        .table-card-training { border-top: 4px solid #c1272d !important; }
+        .table-card-paliers { border-top: 4px solid #0284c7 !important; }
         .table-header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
         .table-responsive { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-md); }
         table.custom-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; }
         table.custom-table th { background: #f8fafc; padding: 0.65rem 0.8rem; font-weight: 700; color: #475569; border-bottom: 1px solid var(--border); white-space: nowrap; }
         table.custom-table td { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border-light); color: #1e293b; white-space: nowrap; }
         table.custom-table tr:hover { background: #f8fafc; }
-        table.custom-table tr.selected-row { background: rgba(193,39,45,0.06); font-weight: 700; }
+        table.custom-table tr.selected-row { background: #eff6ff !important; font-weight: 700; border-left: 4px solid #0284c7; }
         .zone-pill { display: inline-block; padding: 0.18rem 0.5rem; border-radius: 4px; font-size: 0.72rem; font-weight: 700; }
-        .btn-print { background: #f1f5f9; border: 1px solid #cbd5e1; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.8rem; font-weight: 600; color: #334155; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem; transition: var(--transition); }
-        .btn-print:hover { background: #e2e8f0; color: #0f172a; }
+        .badge-lap { color: #16a34a !important; font-weight: 700; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+        .badge-dist { color: #4338ca !important; font-weight: 700; }
+        .badge-trs { background: #f1f5f9; padding: 3px 8px; border-radius: 6px; font-size: 0.8rem; color: #334155; font-weight: 600; }
+        .btn-print { background: #0284c7; color: #ffffff; border: none; padding: 7px 14px; border-radius: 8px; font-size: 0.82rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s ease; box-shadow: 0 2px 4px rgba(2, 132, 199, 0.2); }
+        .btn-print:hover { background: #0369a1; transform: translateY(-1px); }
 
         /* ═══ GUIDE DIDACTIQUE & FAQ SEO ═══ */
         .seo-guide-section { margin-top: 3.5rem; background: white; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-sm); }
@@ -304,29 +325,8 @@
         .faq-item h3 { font-size: 0.98rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; }
         .faq-item p { font-size: 0.875rem; color: #475569; line-height: 1.6; margin: 0; }
 
-        /* ═══ FOOTER ═══ */
-        .footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 3rem 1.5rem 0; margin-top: 3.5rem; }
-        .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.5rem; }
-        .footer-brand { display: flex; flex-direction: column; gap: 0.85rem; }
-        .footer-brand img { height: 42px; width: auto; max-width: 160px; object-fit: contain; filter: brightness(0) invert(1); }
-        .footer-brand p { color: rgba(255,255,255,0.65); font-size: 0.84rem; line-height: 1.6; }
-        .footer-social { display: flex; gap: 0.5rem; margin-top: 0.25rem; }
-        .footer-social a { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 50%; transition: all 0.25s ease; }
-        .footer-social a:hover { background: rgba(255,255,255,0.18); transform: translateY(-2px); }
-        .footer-social svg { width: 15px; height: 15px; fill: rgba(255,255,255,0.85); }
-        .footer-col h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.45); margin-bottom: 1rem; }
-        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-        .footer-col ul li a { color: rgba(255,255,255,0.7); font-size: 0.84rem; display: inline-flex; align-items: center; gap: 0.35rem; }
-        .footer-col ul li a:hover { color: white; }
-        .footer-col ul li a .dot { width: 4px; height: 4px; border-radius: 50%; background: #c1272d; flex-shrink: 0; opacity: 0; }
-        .footer-col ul li a:hover .dot { opacity: 1; }
-        .footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.25rem 0; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
-        .footer-copyright, .footer-tagline { color: rgba(255,255,255,0.4); font-size: 0.8rem; }
-        @media (max-width: 900px) { .footer-inner { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
-        @media (max-width: 600px) { .footer-inner { grid-template-columns: 1fr; gap: 2rem; } .footer-bottom { flex-direction: column; text-align: center; } }
-
         @media print {
-            .navbar, .vma-hero, .form-grid, .btn-calc-main, .seo-guide-section, .footer, .btn-print, .lang-switch { display: none !important; }
+            .navbar, .vma-hero, .form-grid, .btn-calc-main, .seo-guide-section, .footer, .btn-print, .lang-switch, #pepsNavbar { display: none !important; }
             #results-wrapper { display: block !important; margin: 0; }
             body { background: white; color: black; font-size: 11pt; }
             .card, .table-card { border: 1px solid #000; box-shadow: none; }
@@ -334,198 +334,11 @@
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8253776880916865" crossorigin="anonymous"></script>
 
-    <!-- ═══ STYLES HAUTE DÉFINITION POUR LES TABLEAUX CALCULATEUR ═══ -->
-    <style id="profeps-table-pro-styles">
-        .table-card {
-            background: #ffffff !important;
-            border-radius: 16px !important;
-            border: 1px solid #e2e8f0 !important;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01) !important;
-            padding: 1.5rem !important;
-            position: relative !important;
-            overflow: hidden !important;
-            margin-bottom: 2rem !important;
-        }
-        .table-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #c1272d 0%, #006233 100%);
-        }
-        #cardPaliersRecap::before {
-            background: linear-gradient(90deg, #0284c7 0%, #38bdf8 100%) !important;
-        }
-        .table-responsive {
-            border: 1px solid #e2e8f0 !important;
-            border-radius: 12px !important;
-            overflow-x: auto !important;
-            background: #ffffff !important;
-        }
-        table.custom-table {
-            width: 100% !important;
-            border-collapse: separate !important;
-            border-spacing: 0 !important;
-            font-size: 0.88rem !important;
-            text-align: center !important;
-        }
-        table.custom-table th {
-            background: #f8fafc !important;
-            color: #475569 !important;
-            font-size: 0.75rem !important;
-            font-weight: 700 !important;
-            text-transform: uppercase !important;
-            letter-spacing: 0.05em !important;
-            padding: 12px 14px !important;
-            border-bottom: 2px solid #e2e8f0 !important;
-            white-space: nowrap !important;
-            position: sticky !important;
-            top: 0 !important;
-            z-index: 10 !important;
-        }
-        table.custom-table td {
-            padding: 11px 12px !important;
-            border-bottom: 1px solid #f1f5f9 !important;
-            color: #1e293b !important;
-            vertical-align: middle !important;
-            font-variant-numeric: tabular-nums !important;
-            transition: background 0.15s ease !important;
-        }
-        table.custom-table tbody tr:nth-child(even) {
-            background-color: #fafbfc;
-        }
-        table.custom-table tbody tr:hover {
-            background-color: #f1f5f9 !important;
-        }
-        table.custom-table tr.selected-row {
-            background: #eff6ff !important;
-            border-left: 4px solid #0284c7 !important;
-            font-weight: 700 !important;
-        }
-        table.custom-table tr.selected-row td {
-            color: #0c4a6e !important;
-        }
-        .zone-pill {
-            display: inline-block !important;
-            padding: 4px 10px !important;
-            border-radius: 9999px !important;
-            font-size: 0.75rem !important;
-            font-weight: 700 !important;
-            letter-spacing: 0.02em !important;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.04) !important;
-        }
-        .badge-lap {
-            color: #16a34a !important;
-            font-weight: 700 !important;
-            font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
-        }
-        .badge-dist {
-            color: #4338ca !important;
-            font-weight: 700 !important;
-        }
-        .badge-trs {
-            background: #f1f5f9;
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            color: #334155;
-            font-weight: 600;
-        }
-        .btn-print {
-            background: #0284c7 !important;
-            color: #ffffff !important;
-            border: none !important;
-            padding: 7px 14px !important;
-            border-radius: 8px !important;
-            font-size: 0.82rem !important;
-            font-weight: 600 !important;
-            cursor: pointer !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            gap: 6px !important;
-            transition: all 0.2s ease !important;
-            box-shadow: 0 2px 4px rgba(2, 132, 199, 0.2) !important;
-        }
-        .btn-print:hover {
-            background: #0369a1 !important;
-            transform: translateY(-1px) !important;
-            box-shadow: 0 4px 8px rgba(2, 132, 199, 0.3) !important;
-        }
-    </style>
-
-
-<style id="profeps-pro-design">
-    .table-card {
-        background: #ffffff !important;
-        border-radius: 16px !important;
-        border: 1px solid #e2e8f0 !important;
-        box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06) !important;
-        padding: 1.5rem !important;
-        margin-bottom: 2rem !important;
-        overflow: hidden !important;
-    }
-    .table-card-training { border-top: 4px solid #c1272d !important; }
-    .table-card-paliers  { border-top: 4px solid #0284c7 !important; }
-    .table-responsive {
-        border: 1px solid #e2e8f0 !important;
-        border-radius: 12px !important;
-        overflow-x: auto !important;
-    }
-    table.custom-table {
-        width: 100% !important;
-        border-collapse: collapse !important;
-        font-size: 0.88rem !important;
-        text-align: center !important;
-    }
-    table.custom-table th {
-        background: #f8fafc !important;
-        color: #475569 !important;
-        font-size: 0.76rem !important;
-        font-weight: 700 !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.05em !important;
-        padding: 12px 14px !important;
-        border-bottom: 2px solid #e2e8f0 !important;
-        white-space: nowrap !important;
-    }
-    table.custom-table td {
-        padding: 11px 12px !important;
-        border-bottom: 1px solid #f1f5f9 !important;
-        color: #1e293b !important;
-        vertical-align: middle !important;
-    }
-    table.custom-table tr:nth-child(even) { background-color: #fafbfc; }
-    table.custom-table tr:hover { background-color: #f1f5f9 !important; }
-    table.custom-table tr.selected-row {
-        background: #eff6ff !important;
-        outline: 2px solid #38bdf8 !important;
-        font-weight: bold !important;
-    }
-    .zone-pill {
-        display: inline-block !important;
-        padding: 3px 10px !important;
-        border-radius: 9999px !important;
-        font-size: 0.75rem !important;
-        font-weight: 700 !important;
-    }
-    .badge-lap { color: #16a34a !important; font-weight: 700; font-family: monospace; font-size: 0.95rem; }
-    .badge-dist { color: #4f46e5 !important; font-weight: 700; }
-    .badge-trs { background: #f1f5f9; padding: 3px 8px; border-radius: 6px; font-weight: 600; font-size: 0.8rem; }
-</style>
-
-  
-
-
-
-
-<script src="profeps-cmp.js" defer></script>
-  <script src="profeps-communaute.js" defer></script>
 <style id="profeps-master-unifier-css">
 /* ═══ 1. NAVBAR FIXE ISOLÉE (.peps-*) — 80PX VERROUILLÉ SUR TOUTES LES PAGES ═══ */
 html {
   overflow-y: scroll !important;
 }
-/* Masquer tout ancien <nav class="navbar"> ou leurre #navbar pour éviter toute superposition */
 nav.navbar, #navbar, .navbar-decoy {
   display: none !important;
   visibility: hidden !important;
@@ -536,29 +349,6 @@ nav.navbar, #navbar, .navbar-decoy {
   overflow: hidden !important;
   position: absolute !important;
   z-index: -9999 !important;
-}
-/* Masquer tout bouton traducteur en doublon dans le contenu des pages (hors #pepsNavbar) */
-.lang-switch:not(.peps-lang-switch),
-.in-page-lang-switch,
-header .lang-switch,
-main .lang-switch,
-.vma-hero .lang-switch,
-#btn-lang-fr,
-#btn-lang-en,
-#btn-lang-ar,
-button[onclick*="setToolLang"],
-button[onclick*="changeLang"],
-button.lang-btn:not(.peps-lang-btn) {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  width: 0 !important;
-  height: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: none !important;
-  overflow: hidden !important;
 }
 #pepsNavbar.peps-navbar {
   position: fixed !important;
@@ -692,7 +482,7 @@ button.lang-btn:not(.peps-lang-btn) {
   -webkit-text-fill-color: #c1272d !important;
 }
 
-/* ═══ 2. MENU DÉROULANT (.peps-dropdown) — HOVER CSS + JS SUR 100 % DES PAGES ═══ */
+/* ═══ 2. MENU DÉROULANT (.peps-dropdown) — HOVER CSS + JS ═══ */
 #pepsNavbar .peps-dropdown {
   position: relative !important;
   display: inline-flex !important;
@@ -715,7 +505,6 @@ button.lang-btn:not(.peps-lang-btn) {
   transform: rotate(180deg) !important;
   color: #c1272d !important;
 }
-/* Pont invisible sous le bouton pour garder le hover actif en descendant vers la liste */
 #pepsNavbar .peps-dropdown::after {
   content: '' !important;
   position: absolute !important;
@@ -734,7 +523,6 @@ button.lang-btn:not(.peps-lang-btn) {
   width: 340px !important;
   min-width: 340px !important;
   height: auto !important;
-  max-height: none !important;
   background: #ffffff !important;
   border: 1px solid #e2e8f0 !important;
   border-radius: 14px !important;
@@ -743,15 +531,12 @@ button.lang-btn:not(.peps-lang-btn) {
   margin: 0 !important;
   display: flex !important;
   flex-direction: column !important;
-  align-items: stretch !important;
-  justify-content: flex-start !important;
   gap: 3px !important;
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
   transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease !important;
   z-index: 2147483647 !important;
-  overflow: visible !important;
   box-sizing: border-box !important;
   text-align: left !important;
   direction: ltr !important;
@@ -766,37 +551,22 @@ button.lang-btn:not(.peps-lang-btn) {
 }
 #pepsNavbar .peps-dropdown-menu a.peps-dropdown-item {
   display: flex !important;
-  flex-direction: row !important;
   align-items: center !important;
-  justify-content: flex-start !important;
   gap: 0.55rem !important;
   width: 100% !important;
   min-height: 36px !important;
-  height: auto !important;
   padding: 0.5rem 0.75rem !important;
-  margin: 0 !important;
   border-radius: 9px !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-size: 0.83rem !important;
   font-weight: 500 !important;
-  line-height: 1.35 !important;
   color: #0f172a !important;
   -webkit-text-fill-color: #0f172a !important;
   background: transparent !important;
   text-decoration: none !important;
   white-space: nowrap !important;
   box-sizing: border-box !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-  position: relative !important;
-  transform: none !important;
-  border: 1px solid transparent !important;
   transition: background 0.15s ease, color 0.15s ease !important;
-}
-#pepsNavbar .peps-dropdown-menu a.peps-dropdown-item::after,
-#pepsNavbar .peps-dropdown-menu a.peps-dropdown-item::before {
-  display: none !important;
-  content: none !important;
 }
 #pepsNavbar .peps-dropdown-menu a.peps-dropdown-item:hover {
   background: #f1f5f9 !important;
@@ -817,13 +587,8 @@ button.lang-btn:not(.peps-lang-btn) {
   border: 1px solid rgba(193, 39, 45, 0.24) !important;
   margin-bottom: 0.3rem !important;
 }
-#pepsNavbar .peps-dropdown-menu a.peps-dropdown-item.peps-dropdown-hub:hover {
-  background: linear-gradient(135deg, #c1272d, #006233) !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-}
 
-/* ═══ 3. BOUTON TRADUCTEUR UNIVERSEL (FR / EN / عربي) À DROITE ═══ */
+/* ═══ 3. BOUTON TRADUCTEUR UNIVERSEL (FR / EN / عربي) ═══ */
 #pepsNavbar .peps-lang-switch {
   display: inline-flex !important;
   align-items: center !important;
@@ -834,7 +599,6 @@ button.lang-btn:not(.peps-lang-btn) {
   gap: 2px !important;
   margin-left: 0.5rem !important;
   direction: ltr !important;
-  box-sizing: border-box !important;
 }
 #pepsNavbar .peps-lang-btn {
   background: transparent !important;
@@ -852,7 +616,7 @@ button.lang-btn:not(.peps-lang-btn) {
 #pepsNavbar .peps-lang-btn.active {
   background: #ffffff !important;
   color: #0f172a !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
   box-shadow: 0 1px 4px rgba(15, 23, 42, 0.14) !important;
 }
 #pepsNavbar .peps-lang-btn:hover:not(.active) {
@@ -881,167 +645,7 @@ button.lang-btn:not(.peps-lang-btn) {
   border-radius: 2px !important;
 }
 
-/* ═══ 3B. HERO, CARTES ALIGNÉES & BOUTON CTA CALCULER (STYLE VMA PREMIUM) ═══ */
-.vma-hero {
-  margin-top: 80px !important;
-  padding: 2.85rem 1.25rem 2.35rem !important;
-  background: radial-gradient(circle at 18% 20%, rgba(193, 39, 45, 0.07) 0%, transparent 45%),
-              radial-gradient(circle at 82% 80%, rgba(0, 98, 51, 0.07) 0%, transparent 45%),
-              linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
-  border-bottom: 1px solid #e2e8f0 !important;
-  text-align: center !important;
-  position: relative !important;
-}
-.hero-badge {
-  display: inline-flex !important; align-items: center !important; gap: 0.45rem !important;
-  background: linear-gradient(135deg, rgba(193, 39, 45, 0.1), rgba(0, 98, 51, 0.08)) !important;
-  color: #c1272d !important;
-  padding: 0.4rem 1.1rem !important; border-radius: 9999px !important;
-  font-size: 0.76rem !important; font-weight: 800 !important; text-transform: uppercase !important;
-  letter-spacing: 0.05em !important; margin-bottom: 0.85rem !important;
-  border: 1px solid rgba(193, 39, 45, 0.22) !important;
-  box-shadow: 0 2px 8px rgba(193, 39, 45, 0.08) !important;
-}
-.vma-hero h1 {
-  font-family: var(--font-display) !important;
-  font-size: clamp(1.6rem, 3.1vw, 2.3rem) !important;
-  font-weight: 800 !important; color: #0f172a !important; margin: 0 auto 0.65rem auto !important;
-  max-width: 880px !important; line-height: 1.22 !important; letter-spacing: -0.02em !important;
-}
-.vma-hero p {
-  font-size: 0.96rem !important; color: #475569 !important; max-width: 760px !important;
-  margin: 0 auto !important; line-height: 1.6 !important;
-}
-.peps-hero-pills {
-  display: flex !important; flex-wrap: wrap !important; justify-content: center !important;
-  gap: 0.55rem !important; margin-top: 1.15rem !important;
-}
-.peps-hero-pill {
-  display: inline-flex !important; align-items: center !important; gap: 0.35rem !important;
-  background: #ffffff !important; border: 1px solid #e2e8f0 !important; border-radius: 9999px !important;
-  padding: 0.3rem 0.8rem !important; font-size: 0.74rem !important; font-weight: 700 !important;
-  color: #334155 !important; box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
-}
-main > div.max-w-3xl,
-#tool-results-panel > div,
-.peps-seo-guide-card {
-  position: relative !important;
-  overflow: hidden !important;
-  border-radius: 20px !important;
-  border: 1px solid rgba(203, 213, 225, 0.85) !important;
-  box-shadow: 0 12px 32px -8px rgba(15, 23, 42, 0.07), 0 2px 6px rgba(15, 23, 42, 0.03) !important;
-  background: #ffffff !important;
-}
-main > div.max-w-3xl::before {
-  content: '' !important;
-  position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important;
-  height: 4px !important;
-  background: linear-gradient(90deg, #c1272d 0%, #e11d48 50%, #006233 100%) !important;
-}
-main > div.max-w-3xl .grid {
-  align-items: stretch !important;
-}
-main > div.max-w-3xl .grid > div {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: space-between !important;
-  height: 100% !important;
-  box-sizing: border-box !important;
-}
-main > div.max-w-3xl .grid > div > label {
-  margin-bottom: 0.45rem !important;
-  line-height: 1.3 !important;
-  min-height: 2.1rem !important;
-  display: flex !important;
-  align-items: flex-end !important;
-}
-main > div.max-w-3xl input[type="number"],
-main > div.max-w-3xl select {
-  height: 48px !important;
-  min-height: 48px !important;
-  max-height: 48px !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-  border-radius: 12px !important;
-  border: 1.5px solid #cbd5e1 !important;
-  background-color: #f8fafc !important;
-  padding: 0 0.9rem !important;
-  font-size: 0.95rem !important;
-  color: #0f172a !important;
-  transition: all 0.18s ease !important;
-  margin-top: auto !important;
-}
-main > div.max-w-3xl input[type="number"]:focus,
-main > div.max-w-3xl select:focus {
-  outline: none !important;
-  border-color: #c1272d !important;
-  background-color: #ffffff !important;
-  box-shadow: 0 0 0 4px rgba(193, 39, 45, 0.12) !important;
-}
-#tool-results-panel .grid > div {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: space-between !important;
-  height: 100% !important;
-}
-.peps-cta-btn {
-  width: 100% !important;
-  padding: 1.05rem 1.6rem !important;
-  margin-top: 0.5rem !important;
-  background: linear-gradient(135deg, #c1272d 0%, #991b1b 55%, #006233 100%) !important;
-  background-size: 160% 160% !important;
-  color: #ffffff !important;
-  font-family: var(--font-display) !important;
-  font-size: 1.02rem !important;
-  font-weight: 800 !important;
-  letter-spacing: 0.01em !important;
-  border: 1px solid rgba(255, 255, 255, 0.22) !important;
-  border-radius: 14px !important;
-  cursor: pointer !important;
-  box-shadow: 0 10px 25px -4px rgba(193, 39, 45, 0.45), 0 4px 10px -2px rgba(0, 98, 51, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, filter 0.2s ease !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 0.65rem !important;
-  position: relative !important;
-  overflow: hidden !important;
-}
-.peps-cta-btn::after {
-  content: '→' !important;
-  font-size: 1.15rem !important;
-  font-weight: 900 !important;
-  margin-left: 0.25rem !important;
-  transition: transform 0.2s ease !important;
-}
-html[dir="rtl"] .peps-cta-btn::after {
-  content: '←' !important;
-  margin-left: 0 !important;
-  margin-right: 0.25rem !important;
-}
-.peps-cta-btn:hover {
-  transform: translateY(-2.5px) scale(1.005) !important;
-  box-shadow: 0 16px 32px -5px rgba(193, 39, 45, 0.55), 0 6px 14px -2px rgba(0, 98, 51, 0.3) !important;
-  filter: brightness(1.07) !important;
-}
-.peps-cta-btn:hover::after {
-  transform: translateX(4px) !important;
-}
-html[dir="rtl"] .peps-cta-btn:hover::after {
-  transform: translateX(-4px) !important;
-}
-.peps-cta-btn:active {
-  transform: translateY(0) scale(0.995) !important;
-}
-@keyframes pepsFadeSlideUp {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.peps-results-reveal {
-  animation: pepsFadeSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* ═══ 4. FOOTER UNIFIÉ À 5 COLONNES SANS DOUBLONS (BLINDÉ CONTRE TAILWIND CDN) ═══ */
+/* ═══ FOOTER UNIFIÉ À 5 COLONNES ═══ */
 footer.footer, #profeps-unified-footer {
   background: linear-gradient(135deg, #15192b 0%, #162038 100%) !important;
   color: #ffffff !important;
@@ -1053,76 +657,59 @@ footer.footer, #profeps-unified-footer {
   width: 100% !important;
   display: block !important;
 }
-#profeps-unified-footer .footer-container,
-footer.footer .footer-container,
-.footer .footer-inner {
+#profeps-unified-footer .footer-container {
   max-width: 1360px !important;
   margin: 0 auto !important;
-  padding: 0 !important;
-  box-sizing: border-box !important;
 }
-#profeps-unified-footer .footer-grid,
-footer.footer .footer-grid {
+#profeps-unified-footer .footer-grid {
   display: grid !important;
   grid-template-columns: 1.65fr 0.9fr 1.1fr 1.45fr 1fr !important;
   gap: 2.25rem !important;
   padding-bottom: 2.75rem !important;
   align-items: start !important;
 }
-#profeps-unified-footer .footer-brand,
-footer.footer .footer-brand {
+#profeps-unified-footer .footer-brand {
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-start !important;
 }
-#profeps-unified-footer .footer-brand img,
-footer.footer .footer-brand img {
+#profeps-unified-footer .footer-brand img {
   height: 46px !important;
   max-height: 46px !important;
   width: auto !important;
   max-width: 155px !important;
   object-fit: contain !important;
-  align-self: flex-start !important;
-  filter: none !important;
   border-radius: 8px !important;
   margin: 0 0 0.9rem 0 !important;
-  padding: 0 !important;
-  display: block !important;
 }
-#profeps-unified-footer .footer-brand p,
-footer.footer .footer-brand p {
+#profeps-unified-footer .footer-brand p {
   color: rgba(255, 255, 255, 0.72) !important;
   font-size: 0.84rem !important;
   line-height: 1.65 !important;
   margin: 0 0 1.25rem 0 !important;
 }
-#profeps-unified-footer .footer-stats,
-footer.footer .footer-stats {
+#profeps-unified-footer .footer-stats {
   display: flex !important;
   align-items: center !important;
   gap: 1.25rem !important;
   flex-wrap: wrap !important;
   padding-top: 0.5rem !important;
 }
-#profeps-unified-footer .footer-stat-item,
-footer.footer .footer-stat-item {
+#profeps-unified-footer .footer-stat-item {
   display: flex !important;
   flex-direction: column !important;
 }
-#profeps-unified-footer .footer-stat-num,
-footer.footer .footer-stat-num {
+#profeps-unified-footer .footer-stat-num {
   font-size: 1.05rem !important;
   font-weight: 800 !important;
   color: #ffffff !important;
   line-height: 1.2 !important;
 }
-#profeps-unified-footer .footer-stat-lbl,
-footer.footer .footer-stat-lbl {
+#profeps-unified-footer .footer-stat-lbl {
   font-size: 0.7rem !important;
   color: rgba(255, 255, 255, 0.55) !important;
 }
-#profeps-unified-footer .footer-col h4,
-footer.footer .footer-col h4 {
+#profeps-unified-footer .footer-col h4 {
   font-size: 0.76rem !important;
   font-weight: 800 !important;
   text-transform: uppercase !important;
@@ -1131,8 +718,7 @@ footer.footer .footer-col h4 {
   margin: 0 0 1rem 0 !important;
   line-height: 1.3 !important;
 }
-#profeps-unified-footer .footer-col ul,
-footer.footer .footer-col ul {
+#profeps-unified-footer .footer-col ul {
   list-style: none !important;
   padding: 0 !important;
   margin: 0 !important;
@@ -1140,13 +726,7 @@ footer.footer .footer-col ul {
   flex-direction: column !important;
   gap: 0.52rem !important;
 }
-#profeps-unified-footer .footer-col ul li,
-footer.footer .footer-col ul li {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-#profeps-unified-footer .footer-col ul li a,
-footer.footer .footer-col ul li a {
+#profeps-unified-footer .footer-col ul li a {
   color: rgba(255, 255, 255, 0.76) !important;
   font-size: 0.83rem !important;
   font-weight: 500 !important;
@@ -1155,22 +735,15 @@ footer.footer .footer-col ul li a {
   display: inline-block !important;
   line-height: 1.35 !important;
 }
-#profeps-unified-footer .footer-col ul li a:hover,
-footer.footer .footer-col ul li a:hover {
+#profeps-unified-footer .footer-col ul li a:hover {
   color: #ffffff !important;
   transform: translateX(2px) !important;
 }
-#profeps-unified-footer .footer-col ul li a.footer-hub-highlight,
-footer.footer .footer-col ul li a.footer-hub-highlight {
+#profeps-unified-footer .footer-col ul li a.footer-hub-highlight {
   color: #4ade80 !important;
   font-weight: 800 !important;
 }
-#profeps-unified-footer .footer-col ul li a.footer-hub-highlight:hover,
-footer.footer .footer-col ul li a.footer-hub-highlight:hover {
-  color: #86efac !important;
-}
-#profeps-unified-footer .footer-bottom,
-footer.footer .footer-bottom {
+#profeps-unified-footer .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.09) !important;
   padding: 1.25rem 0 !important;
   display: flex !important;
@@ -1182,20 +755,12 @@ footer.footer .footer-bottom {
   color: rgba(255, 255, 255, 0.48) !important;
 }
 
-/* ═══ 5. RESPONSIVE MOBILE & TABLETTE ═══ */
 @media (max-width: 1024px) {
-  .footer .footer-grid {
-    grid-template-columns: 1fr 1fr !important;
-  }
+  #profeps-unified-footer .footer-grid { grid-template-columns: 1fr 1fr !important; }
 }
 @media (max-width: 900px) {
-  #pepsNavbar .peps-nav-container {
-    display: flex !important;
-    justify-content: space-between !important;
-  }
-  #pepsNavbar .peps-nav-toggle {
-    display: flex !important;
-  }
+  #pepsNavbar .peps-nav-container { display: flex !important; justify-content: space-between !important; }
+  #pepsNavbar .peps-nav-toggle { display: flex !important; }
   #pepsNavbar .peps-nav-menu {
     position: fixed !important;
     top: 80px !important;
@@ -1211,14 +776,8 @@ footer.footer .footer-bottom {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12) !important;
     display: none !important;
   }
-  #pepsNavbar .peps-nav-menu.active {
-    display: flex !important;
-  }
-  #pepsNavbar .peps-dropdown {
-    flex-direction: column !important;
-    height: auto !important;
-    width: 100% !important;
-  }
+  #pepsNavbar .peps-nav-menu.active { display: flex !important; }
+  #pepsNavbar .peps-dropdown { flex-direction: column !important; height: auto !important; width: 100% !important; }
   #pepsNavbar .peps-dropdown .peps-dropdown-menu {
     position: static !important;
     transform: none !important;
@@ -1233,26 +792,17 @@ footer.footer .footer-bottom {
   }
 }
 @media (max-width: 640px) {
-  .footer .footer-grid {
-    grid-template-columns: 1fr !important;
-  }
+  #profeps-unified-footer .footer-grid { grid-template-columns: 1fr !important; }
 }
 </style>
 </head>
 
 <body>
 <!-- PROFEPS_UNIFIED_NAVBAR_START -->
-  <nav id="navbar" class="navbar navbar-decoy" style="display:none !important;visibility:hidden !important;opacity:0 !important;width:0 !important;height:0 !important;overflow:hidden !important;position:absolute !important;pointer-events:none !important;z-index:-9999 !important;" aria-hidden="true">
-    <div class="nav-container">
-      <div id="navMenu" class="nav-menu"></div>
-      <div id="navRightDecoy" class="nav-right"></div>
-      <button id="navToggle" class="nav-toggle" type="button"></button>
-    </div>
-  </nav>
   <div class="peps-navbar" id="pepsNavbar" role="navigation" aria-label="Navigation principale" data-current-file="calculateur-vma.html">
     <div class="peps-nav-container">
       <a href="index.html" class="peps-nav-logo" aria-label="Prof EPS Maroc - Accueil">
-        <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:52px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
+        <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc">
       </a>
       <div class="peps-nav-menu" id="pepsNavMenu">
         <a href="index.html" class="peps-nav-link" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
@@ -1291,36 +841,12 @@ footer.footer .footer-bottom {
   </div>
 <script id="profeps-master-unifier-js">
 (function() {
-  // Stub silencieux au cas où un ancien script de page appelle encore window.supabase
-  var dummyAuth = {
-    getSession: function() { return Promise.resolve({ data: { session: null }, error: null }); },
-    getUser: function() { return Promise.resolve({ data: { user: null }, error: null }); },
-    onAuthStateChange: function() { return { data: { subscription: { unsubscribe: function() {} } } }; },
-    signOut: function() { return Promise.resolve({ error: null }); }
-  };
-  var dummyClient = {
-    auth: dummyAuth,
-    from: function() {
-      return {
-        select: function() { return Promise.resolve({ data: [], error: null }); },
-        insert: function() { return Promise.resolve({ data: null, error: null }); },
-        update: function() { return Promise.resolve({ data: null, error: null }); },
-        delete: function() { return Promise.resolve({ data: null, error: null }); }
-      };
-    }
-  };
-  window.supabase = { createClient: function() { return dummyClient; } };
-  window.supabaseClient = dummyClient;
-
   var dropdown = document.getElementById('pepsCalcDropdown');
   var dropdownMenu = document.getElementById('pepsDropdownMenu');
   var closeTimer = null;
 
   function openDropdown() {
-    if (closeTimer) {
-      clearTimeout(closeTimer);
-      closeTimer = null;
-    }
+    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
     var dd = document.getElementById('pepsCalcDropdown');
     var dm = document.getElementById('pepsDropdownMenu');
     if (dd) dd.classList.add('open');
@@ -1356,50 +882,6 @@ footer.footer .footer-bottom {
     dropdownMenu.addEventListener('mouseleave', closeDropdownDelayed);
   }
 
-  // Délégation globale en renfort pour garantir l'ouverture au survol sur 100 % des pages
-  document.addEventListener('mouseover', function(e) {
-    var t = e.target;
-    if (t && t.closest && (t.closest('#pepsCalcDropdown') || t.closest('#pepsDropdownMenu'))) {
-      openDropdown();
-    }
-  });
-  document.addEventListener('mouseout', function(e) {
-    var t = e.target;
-    if (t && t.closest && (t.closest('#pepsCalcDropdown') || t.closest('#pepsDropdownMenu'))) {
-      var rel = e.relatedTarget;
-      if (!rel || !rel.closest || (!rel.closest('#pepsCalcDropdown') && !rel.closest('#pepsDropdownMenu'))) {
-        closeDropdownDelayed();
-      }
-    }
-  });
-
-  // Supprimer tout ancien <nav class="navbar"> résiduel ET tout bouton traducteur en doublon dans le contenu
-  function cleanPageDuplicates() {
-    document.querySelectorAll('nav.navbar:not(.navbar-decoy), .navbar:not(.navbar-decoy)').forEach(function(oldNav) {
-      if (oldNav.id !== 'pepsNavbar') {
-        if (oldNav.parentNode) oldNav.parentNode.removeChild(oldNav);
-      }
-    });
-    document.querySelectorAll('.lang-switch:not(.peps-lang-switch), .in-page-lang-switch, #btn-lang-fr, #btn-lang-en, #btn-lang-ar, button[onclick*="setToolLang"], button[onclick*="changeLang"], button.lang-btn:not(.peps-lang-btn)').forEach(function(el) {
-      if (!el.closest || !el.closest('#pepsNavbar')) {
-        var wrapper = el.closest ? (el.closest('.lang-switch, .in-page-lang-switch, [aria-label="Language selection"], [title*="Traduction"]') || el) : el;
-        if (wrapper === el && el.parentNode && el.parentNode.tagName === 'DIV') {
-          var parentTxt = (el.parentNode.textContent || '').trim();
-          if (parentTxt.length <= 50 && (!el.parentNode.closest || !el.parentNode.closest('#pepsNavbar'))) {
-            wrapper = el.parentNode;
-          }
-        }
-        if (wrapper && wrapper.parentNode && (!wrapper.closest || !wrapper.closest('#pepsNavbar'))) {
-          wrapper.parentNode.removeChild(wrapper);
-        }
-      }
-    });
-  }
-  cleanPageDuplicates();
-  window.addEventListener('DOMContentLoaded', cleanPageDuplicates);
-  var obs = new MutationObserver(cleanPageDuplicates);
-  obs.observe(document.documentElement, { childList: true, subtree: true });
-
   window.addEventListener('scroll', function() {
     var n = document.getElementById('pepsNavbar');
     if (n) n.classList.toggle('scrolled', window.scrollY > 40);
@@ -1422,17 +904,12 @@ footer.footer .footer-bottom {
     ['fr', 'en', 'ar'].forEach(function(code) {
       var btn = document.getElementById('peps-btn-lang-' + code);
       if (btn) btn.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
-      document.querySelectorAll('.peps-lang-btn[data-lang="' + code + '"]').forEach(function(b) {
-        b.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
-      });
     });
     document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function(el) {
       var val = el.getAttribute('data-i18n-' + lang);
       if (val) el.textContent = val;
     });
-    if (typeof window.setToolLang === 'function') window.setToolLang(lang);
-    if (typeof window.changeLang === 'function') window.changeLang(lang);
-    if (typeof window.setLanguage === 'function') window.setLanguage(lang);
+    if (typeof window.switchLanguage === 'function') window.switchLanguage(lang);
     document.documentElement.lang = lang;
     document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
   };
@@ -1449,9 +926,7 @@ footer.footer .footer-bottom {
 })();
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->
-<!-- ═══ NAVBAR UNIFIÉE ═══ -->
-    
-    
+
     <!-- ═══ HERO SECTION ═══ -->
     <header class="vma-hero">
         <div class="hero-badge" data-i18n="heroBadge">⚡ Calculateur Universel VMA & VO₂max</div>
@@ -1671,7 +1146,6 @@ footer.footer .footer-bottom {
                 </div>
             </div>
 
-            <!-- 3. Tableau d'entraînement complet -->
             <!-- TABLEAU 1 : ENTRAÎNEMENT & ALLURES -->
             <div class="table-card table-card-training">
                 <div class="table-header-flex">
@@ -1710,7 +1184,7 @@ footer.footer .footer-bottom {
                 </div>
             </div>
 
-            <!-- TABLEAU 2 : RÉCAPITULATIF DES PALIERS 1 À 20 (MÊMES 8 COLONNES) -->
+            <!-- TABLEAU 2 : RÉCAPITULATIF DES PALIERS 1 À 20 -->
             <div class="table-card table-card-paliers" id="cardPaliersRecap">
                 <div class="table-header-flex">
                     <div>
@@ -1747,18 +1221,10 @@ footer.footer .footer-bottom {
                     </table>
                 </div>
             </div>
-
-            <!-- ══════════════════════════════════════════════════════════════
-                 TABLEAU 2 : RÉCAPITULATIF DES PALIERS 1 À 20 (8 COLONNES)
-            ══════════════════════════════════════════════════════════════ -->
-            
-
-
         </div>
 
         <!-- ═══ GUIDE DIDACTIQUE & FAQ SEO BILINGUE ═══ -->
-        
-<section class="seo-guide-section">
+        <section class="seo-guide-section">
             <h2 data-i18n="guideHeading">Guide Didactique : Comprendre et Utiliser la VMA en EPS</h2>
             <p data-i18n="guideLead">La <strong>Vitesse Maximale Aérobie (VMA / Maximal Aerobic Speed)</strong> constitue la vitesse de course à partir de laquelle un coureur consomme la quantité maximale d'oxygène (VO₂max). En éducation physique et sportive et en athlétisme, la VMA est le paramètre de référence indispensable pour calibrer des situations d'apprentissage individualisées et préparer les épreuves de demi-fond.</p>
 
@@ -1785,225 +1251,146 @@ footer.footer .footer-bottom {
             </div>
         </section>
 
-    
-    <section id="guide-scientifique-vma-eps" style="max-width:1050px; margin:3.5rem auto; padding:2.5rem; background:#ffffff; border-radius:20px; border:1px solid #e2e8f0; box-shadow:0 4px 20px rgba(0,0,0,0.04); line-height:1.8; color:#1a1a2e;">
-        <h2 style="font-size:1.75rem; font-weight:800; margin-bottom:1rem; color:#0284c7;">Guide Complet : Comment Calculer sa VMA, son VO₂max et ses Allures d'Entraînement ?</h2>
-        <p style="margin-bottom:1.25rem;">La <strong>Vitesse Maximale Aérobie (VMA)</strong> — appelée <em>Maximal Aerobic Speed (MAS)</em> dans la littérature scientifique internationale — correspond à la plus petite vitesse de course à partir de laquelle un élève ou un athlète atteint sa consommation maximale d'oxygène (<strong>VO₂max</strong>). En Éducation Physique et Sportive (EPS) comme en préparation physique, calculer sa VMA gratuitement et avec précision constitue l'étape indispensable pour individualiser les séances de demi-fond, calibrer le travail intermittent (fractionné 30/30, 15/15 ou courses par paliers) et éviter le surentraînement.</p>
-
-        <h3 style="font-size:1.35rem; font-weight:700; margin-top:2rem; margin-bottom:0.75rem; color:#0f172a;">1. Les Formules Scientifiques des 5 Tests d'Évaluation de la VMA</h3>
-        <p style="margin-bottom:1rem;">Notre calculateur VMA interactif intègre les protocoles de terrain les plus reconnus par les Orientations Pédagogiques (OP 2007 au lycée et OP 2009 au collège) ainsi que par les fédérations d'athlétisme :</p>
-        <ul style="margin:1rem 0 1.5rem 1.5rem;">
-            <li style="margin-bottom:0.75rem;"><strong>Le Test Demi-Cooper (6 minutes) :</strong> C'est le test de référence en milieu scolaire car sa durée de 6 minutes correspond exactement au temps moyen de maintien de 100 % de la VMA. La formule est directe : <code>VMA (km/h) = Distance parcourue en mètres ÷ 100</code>. Par exemple, un élève parcourant 1 350 mètres en 6 minutes possède une VMA de 13,5 km/h. Consultez notre <a href="article-test-demi-cooper-vma.html" style="color:#0284c7; font-weight:600; text-decoration:underline;">guide complet du test Demi-Cooper en 6 minutes</a>.</li>
-            <li style="margin-bottom:0.75rem;"><strong>Le Test de Cooper (12 minutes) :</strong> Conçu par le Dr Kenneth Cooper, cet effort continu de 12 minutes sollicite environ 90 % de la VMA et évalue l'endurance aérobie. La consommation maximale d'oxygène est estimée par l'équation officielle <code>VO₂max = (Distance en mètres - 504,9) ÷ 44,73</code>. Retrouvez les barèmes détaillés dans notre dossier sur le <a href="article-test-cooper-12-minutes.html" style="color:#0284c7; font-weight:600; text-decoration:underline;">test de Cooper 12 minutes (VMA et VO₂max)</a>.</li>
-            <li style="margin-bottom:0.75rem;"><strong>Le Test VAMEVAL (Cazorla) :</strong> Test progressif continu sur piste balisée de plots tous les 20 mètres, rythmé par des bips sonores. Le coureur débute à 8,5 km/h et la vitesse augmente de 0,5 km/h chaque minute. Il offre une précision remarquable sans blocages liés aux demi-tours. Découvrez le <a href="article-test-vameval-vma.html" style="color:#0284c7; font-weight:600; text-decoration:underline;">protocole complet et tableau des paliers VAMEVAL</a>.</li>
-            <li style="margin-bottom:0.75rem;"><strong>Le Test Navette 20m de Luc Léger (Beep Test) :</strong> Idéal lorsque l'établissement ne dispose que d'un gymnase ou d'un terrain de handball de 40×20 mètres. Les allers-retours de 20 mètres avec blocages et relances sollicitent fortement les qualités neuromusculaires ; notre outil applique la correction biomécanique officielle pour convertir le palier atteint en VMA piste équivalente.</li>
-            <li style="margin-bottom:0.75rem;"><strong>Relation Physiologique VMA et VO₂max :</strong> Selon l'équation métabolique de Léger et Mercier, le coût énergétique moyen de la course à pied sur terrain plat est d'environ 3,5 ml d'oxygène par kilogramme de poids corporel par minute et par km/h, soit : <code>VO₂max (ml/kg/min) = VMA × 3,5</code>.</li>
-        </ul>
-
-        <h3 style="font-size:1.35rem; font-weight:700; margin-top:2rem; margin-bottom:0.75rem; color:#0f172a;">2. Comment Convertir sa VMA en Allures (min/km) et Temps de Passage sur Piste ?</h3>
-        <p style="margin-bottom:1rem;">Une fois la VMA déterminée, l'enseignant d'EPS ou l'entraîneur ne fait jamais courir ses élèves à la même vitesse. Il prescrit des <strong>pourcentages de VMA (% VMA)</strong> adaptés à la filière énergétique visée :</p>
-        <div style="overflow-x:auto; margin:1.25rem 0;">
-            <table style="width:100%; border-collapse:collapse; font-size:0.92rem; text-align:left;">
-                <thead>
-                    <tr style="background:#f1f5f9; border-bottom:2px solid #cbd5e1;">
-                        <th style="padding:10px 12px;">Zone Physiologique</th>
-                        <th style="padding:10px 12px;">% de VMA</th>
-                        <th style="padding:10px 12px;">Objectif Pédagogique & Sportif</th>
-                        <th style="padding:10px 12px;">Exemple (VMA 14 km/h)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr style="border-bottom:1px solid #e2e8f0;">
-                        <td style="padding:10px 12px; font-weight:600;">Endurance Fondamentale</td>
-                        <td style="padding:10px 12px;">65 % à 75 %</td>
-                        <td style="padding:10px 12px;">Échauffement, récupération active, capillarisation</td>
-                        <td style="padding:10px 12px;">9,1 à 10,5 km/h (6'35 à 5'42/km)</td>
-                    </tr>
-                    <tr style="border-bottom:1px solid #e2e8f0;">
-                        <td style="padding:10px 12px; font-weight:600;">Capacité Aérobie (Seuil)</td>
-                        <td style="padding:10px 12px;">80 % à 88 %</td>
-                        <td style="padding:10px 12px;">Course de durée régulière (12 à 20 min), projets d'allure</td>
-                        <td style="padding:10px 12px;">11,2 à 12,3 km/h (5'21 à 4'52/km)</td>
-                    </tr>
-                    <tr style="border-bottom:1px solid #e2e8f0;">
-                        <td style="padding:10px 12px; font-weight:600;">Puissance Aérobie (VMA Longue)</td>
-                        <td style="padding:10px 12px;">90 % à 95 %</td>
-                        <td style="padding:10px 12px;">Fractions de 3 à 6 minutes (ex : 3 × 800m ou 3 × 4 min)</td>
-                        <td style="padding:10px 12px;">12,6 à 13,3 km/h (4'45 à 4'30/km)</td>
-                    </tr>
-                    <tr style="border-bottom:1px solid #e2e8f0;">
-                        <td style="padding:10px 12px; font-weight:600;">VMA Courte & Moyenne</td>
-                        <td style="padding:10px 12px;">100 % à 110 %</td>
-                        <td style="padding:10px 12px;">Intermittent court 30s/30s, 15s/15s, développement VO₂max</td>
-                        <td style="padding:10px 12px;">14,0 à 15,4 km/h (4'17 à 3'53/km)</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <p style="margin-bottom:1.25rem;">Pour approfondir la construction de vos séances de fractionné, consultez notre guide dédié : <a href="article-calcul-allures-vma.html" style="color:#0284c7; font-weight:600; text-decoration:underline;">Comment calculer ses allures d'entraînement à partir de sa VMA</a>.</p>
-
-        <h3 style="font-size:1.35rem; font-weight:700; margin-top:2rem; margin-bottom:0.75rem; color:#0f172a;">3. Exploitation Pédagogique en EPS au Collège et au Lycée</h3>
-        <p style="margin-bottom:1rem;">Dans les établissements scolaires au Maroc comme en France, les pistes d'athlétisme mesurent rarement 400 mètres : on rencontre très souvent des anneaux de <strong>200 mètres, 250 mètres ou 300 mètres</strong> tracés autour des terrains de sport collectif. C'est pourquoi notre calculateur vous permet de personnaliser la longueur exacte de votre tour de piste ainsi que l'espacement de vos plots (20m, 25m ou 50m).</p>
-        <p style="margin-bottom:0.5rem;">Lors d'un cycle de course en durée ou de demi-fond, cette table de passage permet à chaque binôme d'élèves (un coureur et un observateur-chronométreur) de vérifier la régularité de l'allure à chaque plot, développant ainsi la compétence méthodologique d'auto-régulation de l'effort exigée aux examens du Baccalauréat. Retrouvez toutes nos fiches d'observation dans l'article <a href="article-test-vma-eps.html" style="color:#0284c7; font-weight:600; text-decoration:underline;">Test VMA en EPS : protocole, calcul et évaluation des élèves</a>.</p>
-    </section>
-<!-- =========================================================================== -->
-<!-- PROFEPS - TABLEAU RÉCAPITULATIF COMPLET DES PALIERS 1 À 20 (DYNAMIQUE)      -->
-<!-- =========================================================================== -->
-
-
-    <!-- AVERTISSEMENT DE PRUDENCE PHYSIQUE & CONFORMITÉ SANTÉ -->
-    <div class="peps-medical-notice max-w-3xl mx-auto my-6 p-4 rounded-xl bg-slate-50 border border-slate-200 text-slate-600 text-xs leading-relaxed flex items-start gap-3 shadow-xs">
-      <span class="text-amber-500 text-base shrink-0">⚠️</span>
-      <div>
-        <strong class="text-slate-800">Avertissement de sécurité et de prudence sportive :</strong> Les calculs physiologiques fournis sont des estimations théoriques validées scientifiquement à des fins pédagogiques et d'entraînement. Ils ne remplacent pas un avis médical personnalisé. Avant d'entreprendre des efforts à haute intensité, assurez-vous d'une aptitude médicale complète et respectez des phases d'échauffement et d'hydratation progressives.
-      </div>
-    </div>
-
-  
-
-
-    <!-- FICHE SCIENTIFIQUE & PÉDAGOGIQUE OFFICIELLE (1254 MOTS MINIMUM) -->
-    <section class="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 mt-8" id="fiche-pedagogique-officielle" style="max-width:48rem;margin:2rem auto 0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:20px;padding:1.75rem;box-shadow:0 10px 28px -8px rgba(15,23,42,0.06);">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
-        <div>
-          <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-1">
-            <span class="text-red-700 font-bold">Physiologie Aérobie · VMA &amp; Paces</span>
-            <span aria-hidden="true">&middot;</span>
-            <span>Guide Didactique &amp; Scientifique Complet</span>
-          </div>
-          <h2 class="text-lg font-extrabold text-slate-900 tracking-tight flex items-center gap-2 m-0">
-            <span style="font-size:1.15rem;">&#128216;</span>
-            Calculateur de VMA &amp; Allures de Course
-          </h2>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md tabular-nums border border-emerald-200">
-            1254 mots (Guide Approfondi)
-          </span>
-          <button type="button" onclick="copierFichePedagogique()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors cursor-pointer border border-slate-200" title="Copier le guide officiel complet (1254 mots)">
-            <span id="btn-copy-ico">&#128203;</span>
-            <span id="btn-copy-txt">Copier le guide complet</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- 1. Guide d'utilisation pas-à-pas -->
-      <div class="space-y-3">
-        <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
-          <span style="color:#006233;">&#129517;</span>
-          1. Guide d'utilisation pas-à-pas &amp; Protocoles terrain
-        </h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-          
-        <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
-          <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">1</span>
-          <p class="text-xs text-slate-700 leading-relaxed m-0">Choisissez et effectuez un test de terrain reconnu : test continu sur 6 minutes (Demi-Cooper) ou test progressif par paliers sonores (Luc-Léger, VAMEVAL, Léger-Boucher).</p>
-        </div>
-        <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
-          <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">2</span>
-          <p class="text-xs text-slate-700 leading-relaxed m-0">Renseignez avec exactitude la distance totale franchie en mètres ou le palier maximal validé par l'élève ou l'athlète dans le calculateur.</p>
-        </div>
-        <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
-          <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">3</span>
-          <p class="text-xs text-slate-700 leading-relaxed m-0">Générez votre Vitesse Maximale Aérobie en km/h, votre VO2 Max estimé et exportez la grille individualisée des allures d'entraînement.</p>
-        </div>
-        </div>
-      </div>
-
-      <!-- 2. Relations mathématiques en exergue -->
-      <div class="space-y-3">
-        <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
-          <span style="color:#c1272d;">&#128208;</span>
-          2. Relations mathématiques &amp; Équations biomécaniques
-        </h3>
-        <div class="p-4 bg-slate-900 text-white rounded-xl space-y-2 border border-slate-800 shadow-inner">
-          
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
-          <span class="text-slate-400 font-medium">Test continu 6 min (Demi-Cooper) :</span>
-          <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">VMA (km/h) = Distance parcourue (mètres) / 100</code>
-        </div>
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
-          <span class="text-slate-400 font-medium">Test progressif continu Léger-Boucher :</span>
-          <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">VMA (km/h) = 1,02 × Vitesse du dernier palier franchi</code>
-        </div>
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
-          <span class="text-slate-400 font-medium">Équation de Léger &amp; Mercier (VO2 Max) :</span>
-          <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">VO2 Max (ml/kg/min) ≈ VMA (km/h) × 3,5</code>
-        </div>
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
-          <span class="text-slate-400 font-medium">Conversion d’allure au kilomètre :</span>
-          <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Allure (min/km) = 60 / VMA (km/h)</code>
-        </div>
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
-          <span class="text-slate-400 font-medium">Allure kilométrique en secondes :</span>
-          <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Temps au km (sec) = 3600 / VMA (km/h)</code>
-        </div>
-        </div>
-      </div>
-
-      <!-- 3. Interprétation des résultats & repères terrain -->
-      <div class="space-y-3">
-        <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
-          <span style="color:#d97706;">&#128161;</span>
-          3. Interprétation des résultats &amp; Seuils d'entraînement
-        </h3>
-        <p class="text-xs text-slate-700 leading-relaxed bg-amber-50/60 border border-amber-200/70 p-3.5 rounded-xl m-0">
-          La VMA est la vitesse de course à laquelle la consommation d'oxygène atteint son maximum absolu (VO2 Max). Elle constitue le pilier fondamental de la programmation athlétique et didactique en EPS.
-        </p>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1">
-          
-        <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+        <!-- AVERTISSEMENT DE PRUDENCE PHYSIQUE & CONFORMITÉ SANTÉ -->
+        <div class="max-w-3xl mx-auto my-6 p-4 rounded-xl bg-slate-50 border border-slate-200 text-slate-600 text-xs leading-relaxed flex items-start gap-3 shadow-sm">
+          <span class="text-amber-500 text-base shrink-0">⚠️</span>
           <div>
-            <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Endurance Fondamentale (Z1-Z2)</div>
-            <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">65–75% VMA</div>
+            <strong class="text-slate-800">Avertissement de sécurité et de prudence sportive :</strong> Les calculs physiologiques fournis sont des estimations théoriques validées scientifiquement à des fins pédagogiques et d'entraînement. Ils ne remplacent pas un avis médical personnalisé. Avant d'entreprendre des efforts à haute intensité, assurez-vous d'une aptitude médicale complète et respectez des phases d'échauffement et d'hydratation progressives.
           </div>
-          <div class="text-[11px] text-slate-600 leading-normal">Développement du réseau capillaire sanguin, lipolyse et récupération active.</div>
         </div>
-        <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
-          <div>
-            <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Seuil Aérobie / Allure Marathon</div>
-            <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">75–80% VMA</div>
-          </div>
-          <div class="text-[11px] text-slate-600 leading-normal">Aisance respiratoire prolongée, oxydation mixte glucides-lipides stable.</div>
-        </div>
-        <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
-          <div>
-            <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Seuil Anaérobie / Tempo 10k-Semi</div>
-            <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">80–88% VMA</div>
-          </div>
-          <div class="text-[11px] text-slate-600 leading-normal">Équilibre de production et d’élimination du lactate sanguin.</div>
-        </div>
-        <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
-          <div>
-            <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Puissance Aérobie Maximale (PAM)</div>
-            <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">95–105% VMA</div>
-          </div>
-          <div class="text-[11px] text-slate-600 leading-normal">Sollicitation maximale de la pompe cardiaque sur fractions moyennes.</div>
-        </div>
-        <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
-          <div>
-            <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Intermittent Court Supramaximal</div>
-            <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">110–125% VMA</div>
-          </div>
-          <div class="text-[11px] text-slate-600 leading-normal">Séries 15&quot;/15&quot; ou 30&quot;/30&quot; pour stimuler la puissance métabolique.</div>
-        </div>
-        </div>
-      </div>
 
-      <!-- 4. Traité Scientifique & Pédagogique Intégral (+800 mots) -->
-      <div class="space-y-3 pt-2 border-t border-slate-100">
-        <div class="flex items-center justify-between">
-          <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
-            <span style="color:#2563eb;">&#128214;</span>
-            4. Manuel Scientifique &amp; Didactique Détaillé (1254 mots)
-          </h3>
-          <button type="button" onclick="toggleTexteIntegral()" id="btn-toggle-texte" class="text-xs font-bold text-blue-600 hover:text-blue-800 cursor-pointer">
-            Afficher le texte complet &#9660;
-          </button>
-        </div>
-        
-        <div id="bloc-texte-integral" class="hidden p-5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 leading-relaxed whitespace-pre-line font-sans">
+        <!-- FICHE SCIENTIFIQUE & PÉDAGOGIQUE OFFICIELLE (1254 MOTS MINIMUM) -->
+        <section class="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 mt-8" id="fiche-pedagogique-officielle" style="max-width:48rem;margin:2rem auto 0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:20px;padding:1.75rem;box-shadow:0 10px 28px -8px rgba(15,23,42,0.06);">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+            <div>
+              <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-1">
+                <span class="text-red-700 font-bold">Physiologie Aérobie · VMA &amp; Paces</span>
+                <span aria-hidden="true">&middot;</span>
+                <span>Guide Didactique &amp; Scientifique Complet</span>
+              </div>
+              <h2 class="text-lg font-extrabold text-slate-900 tracking-tight flex items-center gap-2 m-0">
+                <span style="font-size:1.15rem;">📖</span>
+                Calculateur de VMA &amp; Allures de Course
+              </h2>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md tabular-nums border border-emerald-200">
+                1254 mots (Guide Approfondi)
+              </span>
+              <button type="button" onclick="copierFichePedagogique()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors cursor-pointer border border-slate-200" title="Copier le guide officiel complet (1254 mots)">
+                <span id="btn-copy-ico">📋</span>
+                <span id="btn-copy-txt">Copier le guide complet</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 1. Guide d'utilisation pas-à-pas -->
+          <div class="space-y-3">
+            <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
+              <span style="color:#006233;">🧪</span>
+              1. Guide d'utilisation pas-à-pas &amp; Protocoles terrain
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
+                <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">1</span>
+                <p class="text-xs text-slate-700 leading-relaxed m-0">Choisissez et effectuez un test de terrain reconnu : test continu sur 6 minutes (Demi-Cooper) ou test progressif par paliers sonores (Luc-Léger, VAMEVAL, Léger-Boucher).</p>
+              </div>
+              <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
+                <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">2</span>
+                <p class="text-xs text-slate-700 leading-relaxed m-0">Renseignez avec exactitude la distance totale franchie en mètres ou le palier maximal validé par l'élève ou l'athlète dans le calculateur.</p>
+              </div>
+              <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
+                <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">3</span>
+                <p class="text-xs text-slate-700 leading-relaxed m-0">Générez votre Vitesse Maximale Aérobie en km/h, votre VO2 Max estimé et exportez la grille individualisée des allures d'entraînement.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Relations mathématiques en exergue -->
+          <div class="space-y-3">
+            <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
+              <span style="color:#c1272d;">📐</span>
+              2. Relations mathématiques &amp; Équations biomécaniques
+            </h3>
+            <div class="p-4 bg-slate-900 text-white rounded-xl space-y-2 border border-slate-800 shadow-inner">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+                <span class="text-slate-400 font-medium">Test continu 6 min (Demi-Cooper) :</span>
+                <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">VMA (km/h) = Distance parcourue (mètres) / 100</code>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+                <span class="text-slate-400 font-medium">Test progressif continu Léger-Boucher :</span>
+                <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">VMA (km/h) = 1,02 × Vitesse du dernier palier franchi</code>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+                <span class="text-slate-400 font-medium">Équation de Léger &amp; Mercier (VO2 Max) :</span>
+                <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">VO2 Max (ml/kg/min) ≈ VMA (km/h) × 3,5</code>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+                <span class="text-slate-400 font-medium">Conversion d’allure au kilomètre :</span>
+                <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Allure (min/km) = 60 / VMA (km/h)</code>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+                <span class="text-slate-400 font-medium">Allure kilométrique en secondes :</span>
+                <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Temps au km (sec) = 3600 / VMA (km/h)</code>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Interprétation des résultats & repères terrain -->
+          <div class="space-y-3">
+            <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
+              <span style="color:#d97706;">💡</span>
+              3. Interprétation des résultats &amp; Seuils d'entraînement
+            </h3>
+            <p class="text-xs text-slate-700 leading-relaxed bg-amber-50/60 border border-amber-200/70 p-3.5 rounded-xl m-0">
+              La VMA est la vitesse de course à laquelle la consommation d'oxygène atteint son maximum absolu (VO2 Max). Elle constitue le pilier fondamental de la programmation athlétique et didactique en EPS.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1">
+              <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+                <div>
+                  <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Endurance Fondamentale (Z1-Z2)</div>
+                  <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">65–75% VMA</div>
+                </div>
+                <div class="text-[11px] text-slate-600 leading-normal">Développement du réseau capillaire sanguin, lipolyse et récupération active.</div>
+              </div>
+              <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+                <div>
+                  <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Seuil Aérobie / Allure Marathon</div>
+                  <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">75–80% VMA</div>
+                </div>
+                <div class="text-[11px] text-slate-600 leading-normal">Aisance respiratoire prolongée, oxydation mixte glucides-lipides stable.</div>
+              </div>
+              <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+                <div>
+                  <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Seuil Anaérobie / Tempo 10k-Semi</div>
+                  <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">80–88% VMA</div>
+                </div>
+                <div class="text-[11px] text-slate-600 leading-normal">Équilibre de production et d’élimination du lactate sanguin.</div>
+              </div>
+              <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+                <div>
+                  <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Puissance Aérobie Maximale (PAM)</div>
+                  <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">95–105% VMA</div>
+                </div>
+                <div class="text-[11px] text-slate-600 leading-normal">Sollicitation maximale de la pompe cardiaque sur fractions moyennes.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Traité Scientifique & Pédagogique Intégral (+800 mots) -->
+          <div class="space-y-3 pt-2 border-t border-slate-100">
+            <div class="flex items-center justify-between">
+              <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
+                <span style="color:#2563eb;">📖</span>
+                4. Manuel Scientifique &amp; Didactique Détaillé (1254 mots)
+              </h3>
+              <button type="button" onclick="toggleTexteIntegral()" id="btn-toggle-texte" class="text-xs font-bold text-blue-600 hover:text-blue-800 cursor-pointer">
+                Afficher le texte complet ▼
+              </button>
+            </div>
+            
+            <div id="bloc-texte-integral" class="hidden p-5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 leading-relaxed whitespace-pre-line font-sans">
 I. Présentation Générale et Rôle Physiologique de la VMA
 
 La Vitesse Maximale Aérobie, universellement désignée sous l'acronyme VMA, constitue le paramètre biomécanique et physiologique fondamental pour quiconque s'intéresse à la course à pied, à la préparation physique et à l'enseignement de l'Éducation Physique et Sportive. Sur le plan de la bioénergétique humaine, la VMA correspond exactement à la vitesse de course atteinte par un athlète lorsque sa consommation d'oxygène atteint son plafond physiologique indépassable, qualifié de VO2 Max. À cette intensité précise, le système cardiorespiratoire travaille à sa puissance mécanique maximale pour apporter le dioxygène aux muscles squelettiques en action. Au-delà de cette vitesse, tout surplus de puissance mécanique nécessite impérativement le recrutement massif de la filière anaérobie lactique avec accumulation rapide d'ions hydrogène et de métabolites conduisant à l'acidose musculaire et à l'épuisement. La connaissance rigoureuse de la VMA est donc indispensable pour calibrer avec une précision chirurgicale l'intensité de chaque séance, éviter les surcharges et garantir une progression méthodique et sécurisée, tant chez le débutant scolaire que chez l'athlète international.
@@ -2049,49 +1436,50 @@ La VMA obtenue n'est pas une simple donnée chiffrée abstraite ; elle constitue
 VI. Applications Pédagogiques et Conseils de Programmation
 
 Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'usage de la VMA révolutionne la pédagogie par l'individualisation des parcours. Au lieu d'imposer une distance identique à tous les élèves ou joueurs au coup de sifflet, l'enseignant dispose des plots à des distances proportionnelles à la VMA de chacun. Par exemple, lors d'un exercice intermittent de quinze secondes d'effort et quinze secondes de récupération à cent pour cent de VMA, un coureur possédant une VMA de 12 km/h devra parcourir exactement cinquante mètres par fraction, tandis qu'un athlète doté d'une VMA de 18 km/h couvrira soixante-quinze mètres dans le même laps de temps. Cette méthodologie garantit une équité physiologique totale, prévient les blessures tendineuses et musculaires consécutives à un surrégime et permet à chaque pratiquant de progresser dans des conditions optimales de motivation et de sécurité physique.
-        </div>
-      </div>
-    </section>
+            </div>
+          </div>
+        </section>
 
-    <script>
-      function toggleTexteIntegral() {
-        var el = document.getElementById('bloc-texte-integral');
-        var btn = document.getElementById('btn-toggle-texte');
-        if (el && btn) {
-          if (el.classList.contains('hidden')) {
-            el.classList.remove('hidden');
-            btn.textContent = 'Masquer le texte complet ▲';
-          } else {
-            el.classList.add('hidden');
-            btn.textContent = 'Afficher le texte complet ▼';
+        <script>
+          function toggleTexteIntegral() {
+            var el = document.getElementById('bloc-texte-integral');
+            var btn = document.getElementById('btn-toggle-texte');
+            if (el && btn) {
+              if (el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+                btn.textContent = 'Masquer le texte complet ▲';
+              } else {
+                el.classList.add('hidden');
+                btn.textContent = 'Afficher le texte complet ▼';
+              }
+            }
           }
-        }
-      }
 
-      function copierFichePedagogique() {
-        var texte = "I. Présentation Générale et Rôle Physiologique de la VMA\n\nLa Vitesse Maximale Aérobie, universellement désignée sous l'acronyme VMA, constitue le paramètre biomécanique et physiologique fondamental pour quiconque s'intéresse à la course à pied, à la préparation physique et à l'enseignement de l'Éducation Physique et Sportive. Sur le plan de la bioénergétique humaine, la VMA correspond exactement à la vitesse de course atteinte par un athlète lorsque sa consommation d'oxygène atteint son plafond physiologique indépassable, qualifié de VO2 Max. À cette intensité précise, le système cardiorespiratoire travaille à sa puissance mécanique maximale pour apporter le dioxygène aux muscles squelettiques en action. Au-delà de cette vitesse, tout surplus de puissance mécanique nécessite impérativement le recrutement massif de la filière anaérobie lactique avec accumulation rapide d'ions hydrogène et de métabolites conduisant à l'acidose musculaire et à l'épuisement. La connaissance rigoureuse de la VMA est donc indispensable pour calibrer avec une précision chirurgicale l'intensité de chaque séance, éviter les surcharges et garantir une progression méthodique et sécurisée, tant chez le débutant scolaire que chez l'athlète international.\n\nII. Guide d'Utilisation Étape par Étape et Protocoles de Terrain\n\nPour utiliser efficacement ce calculateur de VMA, l'utilisateur doit respecter une démarche protocolaire rigoureuse articulée en plusieurs étapes fondamentales :\n1. Choix et réalisation du test de terrain étalonné : L'athlète ou l'enseignant doit sélectionner un test validé scientifiquement selon les installations disponibles. Les deux grandes familles de tests sont les tests continus à vitesse constante et les tests progressifs par paliers. Le test continu le plus accessible est le test Demi-Cooper de six minutes, qui consiste à parcourir la plus grande distance possible sur une piste étalonnée avec un rythme régulier. Les tests progressifs de référence comprennent le test navette de Luc-Léger (avec aller-retour de vingt mètres), le test Léger-Boucher sur piste d'athlétisme balisée tous les cinquante mètres, et le test VAMEVAL dont les paliers augmentent de zéro virgule cinq kilomètre par heure chaque minute.\n2. Échauffement standardisé : Avant toute évaluation, observez un échauffement progressif d'au moins quinze minutes associant course à faible allure, mobilisations articulaires et accélérations progressives pour amener le système cardiovasculaire à température optimale.\n3. Saisie de la performance dans le calculateur : Entrez la distance exacte courue en mètres pour le test Demi-Cooper ou renseignez la vitesse du dernier palier franchi pour les tests progressifs.\n4. Génération instantanée et exploitation des résultats : En cliquant sur le bouton de calcul, le système délivre immédiatement la VMA en kilomètres par heure, le temps de passage théorique au kilomètre ainsi qu'un tableau complet ventilant les allures cibles d'entraînement.\n\nIII. Spécifications des Paramètres et Données à Fournir\n\nAfin de garantir une fiabilité absolue des projections physiologiques, l'utilisateur doit renseigner plusieurs variables précises :\n- Le type de test réalisé : La sélection entre test continu de six minutes et test progressif est déterminante car la cinétique de consommation d'oxygène diffère sensiblement selon le protocole appliqué.\n- La distance parcourue en mètres : Pour le test de six minutes, cette valeur doit être mesurée avec rigueur au décamètre ou via un étalonnage précis des plots de piste de quatre cents mètres. Une erreur de cinquante mètres entraîne une variation de zéro virgule cinq kilomètre par heure sur la VMA estimée.\n- Le dernier palier entièrement validé : Pour les épreuves progressives, il convient de renseigner la vitesse correspondant au dernier palier complété avant l'abandon. Si un athlète s'arrête en cours de palier, on applique une règle de prorata temporel.\n- Les données anthropométriques complémentaires : L'indication facultative de l'âge et du sexe biologique permet de situer la performance par rapport aux tables normatives de la population générale et des barèmes officiels d'évaluation en EPS.\n\nIV. Relations Mathématiques et Modélisations Utilisées\n\nLe calculateur applique des équations biomécaniques et physiologiques directes, validées par des décennies de littérature en sciences du sport :\n1. Modélisation du test continu de six minutes : Sur un effort de six minutes (soit un dixième d'heure), la vitesse moyenne soutenue équivaut très exactement à cent pour cent de la VMA selon les travaux historiques de Péronnet et Thibault. La relation mathématique s'exprime donc sous la formule fondamentale :\nVMA (en km/h) = Distance parcourue (en mètres) divisée par 100.\nExemple concret : Un élève couvrant 1 500 mètres en 6 minutes possède une VMA de 15,0 km/h.\n2. Modélisation des tests progressifs par paliers : Pour le test Léger-Boucher et le test VAMEVAL, la vitesse du dernier palier soutenu pendant une minute entière correspond directement à la VMA. Pour le test continu sur piste circulaire de Léger-Boucher, une légère correction d'ajustement est appliquée :\nVMA (en km/h) = 1,02 × Vitesse du dernier palier (en km/h).\n3. Estimation du VO2 Max selon Léger et Mercier : La consommation maximale d'oxygène en millilitres par kilogramme et par minute est intimement corrélée à la VMA sur sol plat par la relation linéaire universelle :\nVO2 Max (en ml/kg/min) ≈ VMA (en km/h) × 3,5.\n4. Calcul des allures au kilomètre : La conversion de la vitesse en allure s'opère par la formule :\nAllure (en minutes par kilomètre) = 60 / VMA.\nTemps au kilomètre en secondes = 3600 / VMA.\n\nV. Interprétation Approfondie des Résultats et Grille d'Entraînement\n\nLa VMA obtenue n'est pas une simple donnée chiffrée abstraite ; elle constitue la référence absolue pour calibrer l'ensemble des régimes d'entraînement aérobie et anaérobie :\n- Zone 1 et 2 · Endurance Fondamentale (65% à 75% VMA) : Allure d'aisance respiratoire complète, où la ventilation reste calme et permet de converser sans essoufflement. Cette intensité stimule le développement des capillaires sanguins autour des fibres musculaires de type I, accroît la densité des mitochondries et favorise l'utilisation préférentielle des lipides comme substrat énergétique. C'est l'allure privilégiée pour les footings de régénération et les sorties longues.\n- Zone 3 · Seuil Aérobie / Allure Marathon (75% à 80% VMA) : Allure d'effort régulier soutenable sur plusieurs heures pour un coureur entraîné. Elle correspond à la zone de transition où la filière des glucides commence à prédominer sans créer d'accumulation d'acide lactique.\n- Zone 4 · Seuil Anaérobie / Allure 10 km et Semi-Marathon (80% à 88% VMA) : Zone charnière où le taux de lactate sanguin se stabilise autour de quatre millimoles par litre. C'est l'intensité reine pour repousser la limite de tolérance à la fatigue et améliorer la vitesse spécifique de compétition sur route.\n- Zone 5 · Puissance Aérobie Maximale et Intermittent (95% à 120% VMA) : Sollicitation directe de la capacité cardiovasculaire maximale. Les fractions d'effort durent de quinze secondes à trois minutes, entrecoupées de récupérations actives ou passives, permettant de cumuler un temps significatif à VO2 Max sans saturation neuromusculaire.\n\nVI. Applications Pédagogiques et Conseils de Programmation\n\nDans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'usage de la VMA révolutionne la pédagogie par l'individualisation des parcours. Au lieu d'imposer une distance identique à tous les élèves ou joueurs au coup de sifflet, l'enseignant dispose des plots à des distances proportionnelles à la VMA de chacun. Par exemple, lors d'un exercice intermittent de quinze secondes d'effort et quinze secondes de récupération à cent pour cent de VMA, un coureur possédant une VMA de 12 km/h devra parcourir exactement cinquante mètres par fraction, tandis qu'un athlète doté d'une VMA de 18 km/h couvrira soixante-quinze mètres dans le même laps de temps. Cette méthodologie garantit une équité physiologique totale, prévient les blessures tendineuses et musculaires consécutives à un surrégime et permet à chaque pratiquant de progresser dans des conditions optimales de motivation et de sécurité physique.";
-        navigator.clipboard.writeText(texte).then(function() {
-          var ico = document.getElementById('btn-copy-ico');
-          var txt = document.getElementById('btn-copy-txt');
-          if (ico && txt) {
-            ico.textContent = '✓';
-            txt.textContent = 'Guide copié (1254 mots) !';
-            setTimeout(function() {
-              ico.textContent = '📋';
-              txt.textContent = 'Copier le guide complet';
-            }, 2500);
+          function copierFichePedagogique() {
+            var el = document.getElementById('bloc-texte-integral');
+            var texte = el ? el.textContent.trim() : '';
+            navigator.clipboard.writeText(texte).then(function() {
+              var ico = document.getElementById('btn-copy-ico');
+              var txt = document.getElementById('btn-copy-txt');
+              if (ico && txt) {
+                ico.textContent = '✓';
+                txt.textContent = 'Guide copié (1254 mots) !';
+                setTimeout(function() {
+                  ico.textContent = '📋';
+                  txt.textContent = 'Copier le guide complet';
+                }, 2500);
+              }
+            });
           }
-        });
-      }
-    </script>
-  </main>
+        </script>
+    </main>
 
     <!-- ═══ FOOTER ═══ -->
     <footer class="footer" id="profeps-unified-footer">
     <div class="footer-container">
       <div class="footer-grid">
         <div class="footer-brand" style="display:flex !important;flex-direction:column !important;align-items:flex-start !important;">
-          <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:48px !important;max-height:48px !important;width:auto !important;max-width:155px !important;object-fit:contain !important;align-self:flex-start !important;filter:none !important;border-radius:8px !important;margin:0 0 0.9rem 0 !important;display:block !important;">
+          <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:48px !important;max-height:48px !important;width:auto !important;max-width:155px !important;object-fit:contain !important;align-self:flex-start !important;border-radius:8px !important;margin:0 0 0.9rem 0 !important;display:block !important;">
           <p data-i18n-fr="La plateforme de référence pour les professeurs d'EPS au Maroc. Générateur de documents pédagogiques gratuit, conforme aux orientations pédagogiques officielles (MEN)." data-i18n-en="The reference platform for PE teachers in Morocco. Free educational document generator & sports science calculators aligned with official MEN guidelines." data-i18n-ar="المنصة المرجعية لأساتذة التربية البدنية بالمغرب. مولد وثائق تربوية مجاني وحاسبات علمية للرياضة وفق التوجيهات التربوية الرسمية.">La plateforme de référence pour les professeurs d'EPS au Maroc. Générateur de documents pédagogiques gratuit, conforme aux orientations pédagogiques officielles (MEN).</p>
           <div class="footer-stats">
             <div class="footer-stat-item">
@@ -2169,15 +1557,8 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
     <script>
         const i18n = {
             fr: {
-                metaTitle: "Calculateur VMA & Allures de Course EPS — Demi-Cooper, Luc Léger, VAMEVAL | Prof EPS",
+                metaTitle: "Calculateur de VMA & Allures de Course | ProfEPS",
                 metaDesc: "Calculateur gratuit de VMA et VO2max pour professeurs d'EPS et coureurs : Demi-Cooper (6'), Cooper (12'), Luc Léger, VAMEVAL, temps de passage et tours de piste.",
-                navHome: "Accueil",
-                navGen: "Générateur",
-                navCalc: "Calculateur VMA",
-                navBlog: "Blog",
-                navCta: "✨ Créer un document",
-                navAbout: "À propos",
-                navContact: "Contact",
                 heroBadge: "⚡ Calculateur Universel VMA & VO₂max",
                 heroTitle: "Calculateur VMA & <span>Allures de Course</span>",
                 heroDesc: "Estimez la VMA (km/h) et la VO₂max à partir de vos tests de terrain, puis calculez immédiatement la distance totale, le nombre de tours de piste et vos allures d'entraînement.",
@@ -2233,18 +1614,6 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
                 faqA3: "L'échauffement s'effectue entre 60% et 70% de VMA. L'aérobie fondamentale et le seuil se situent entre 75% et 85%. Les séances de fractionné intermittent (30/30) sont travaillées à 100% - 105% de VMA.",
                 faqQ4: "Quelle relation entre VMA et VO₂max ?",
                 faqA4: "La formule classique admise de Léger et Mercier établit : VO₂max (ml/kg/min) = VMA (km/h) × 3,5. Cela permet d'estimer la cylindrée aérobie sans matériel de laboratoire.",
-                footerBrandBold: "Prof EPS (profeps.ma)",
-                footerBrandText: "la plateforme intelligente d'outils et de ressources pédagogiques pour les professeurs d'EPS, les éducateurs sportifs et les passionnés de course à pied.",
-                footerNavTitle: "Navigation",
-                footerToolsTitle: "Outils & Guides",
-                footerCalcLink: "Calculateur VMA Universel",
-                footerBlogLink: "Articles Pédagogiques",
-                footerBibLink: "Bibliothèque EPS",
-                footerLegalTitle: "Légal",
-                footerPrivacy: "Confidentialité",
-                footerTerms: "Conditions d'utilisation",
-                footerRights: "Tous droits réservés.",
-                footerTagline: "Conçu pour les enseignants d'EPS et coureurs du monde entier",
                 intensityOptions: [
                     { val: "50", text: "50% — Récupération très douce / Marche" },
                     { val: "55", text: "55% — Échauffement progressif" },
@@ -2287,13 +1656,6 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
             en: {
                 metaTitle: "MAS & Running Pace Calculator — Half-Cooper, Cooper, Beep Test | Prof EPS",
                 metaDesc: "Free Maximal Aerobic Speed (MAS / VMA) and VO2max calculator: Half-Cooper (6-min), Cooper (12-min), Beep Test, VAMEVAL, split lap times, and track laps.",
-                navHome: "Home",
-                navGen: "Lesson Generator",
-                navCalc: "MAS Calculator",
-                navBlog: "Blog & Guides",
-                navCta: "✨ Create Document",
-                navAbout: "About",
-                navContact: "Contact",
                 heroBadge: "⚡ Universal MAS & VO₂max Running Calculator",
                 heroTitle: "MAS Calculator & <span>Running Paces</span>",
                 heroDesc: "Estimate your Maximal Aerobic Speed (MAS / VMA in km/h) and VO₂max from field tests, and instantly compute lap split times, total distance, and target paces.",
@@ -2349,39 +1711,30 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
                 faqA3: "Warm-up and recovery occur between 60% and 70% of MAS. Base aerobic endurance and threshold work fall between 75% and 85%. Short high-intensity interval training (HIIT 30/30) is executed at 100% to 105% of MAS.",
                 faqQ4: "What is the link between MAS and VO₂max?",
                 faqA4: "The widely accepted Léger-Mercier physiological equation is: VO₂max (ml/kg/min) = MAS (km/h) × 3.5. This provides a direct VO₂max estimate without expensive laboratory equipment.",
-                footerBrandBold: "Prof EPS (profeps.ma)",
-                footerBrandText: "the smart toolkit and pedagogical platform for sports teachers, track coaches, and passionate runners worldwide.",
-                footerNavTitle: "Navigation",
-                footerToolsTitle: "Tools & Resources",
-                footerCalcLink: "Universal MAS Calculator",
-                footerBlogLink: "Pedagogical Articles",
-                footerBibLink: "Digital Sports Library",
-                footerLegalTitle: "Legal",
-                footerPrivacy: "Privacy Policy",
-                footerTerms: "Terms of Use",
-                footerRights: "All rights reserved.",
-                footerTagline: "Designed for PE teachers, athletics coaches & runners worldwide",
                 intensityOptions: [
-                    { val: "50", text: "50% — Récupération très douce / Marche" },
-                    { val: "55", text: "55% — Échauffement progressif" },
-                    { val: "60", text: "60% — Récupération active" },
-                    { val: "65", text: "65% — Aérobie légère" },
-                    { val: "70", text: "70% — Aérobie Fondamentale" },
-                    { val: "75", text: "75% — Capacité Aérobie" },
-                    { val: "80", text: "80% — Endurance active" },
-                    { val: "85", text: "85% — Course longue continue / Seuil aérobie" },
-                    { val: "90", text: "90% — Allure 3x500m / Seuil lactique", selected: true },
-                    { val: "95", text: "95% — Puissance Aérobie" },
-                    { val: "100", text: "100% — 100% VMA" },
-                    { val: "105", text: "105% — Sur-VMA (Court)" },
-                    { val: "110", text: "110% — Vitesse Lactique" },
-                    { val: "115", text: "115% — Intermittent 30/30" },
-                    { val: "120", text: "120% — Fractionné court 15/15" },
-                    { val: "125", text: "125% — Intermittent Puissance" },
-                    { val: "130", text: "130% — Supramaximal court 10/10" }
+                    { val: "50", text: "50% — Light Recovery / Walk" },
+                    { val: "55", text: "55% — Progressive Warm-up" },
+                    { val: "60", text: "60% — Active Recovery" },
+                    { val: "65", text: "65% — Easy Aerobic" },
+                    { val: "70", text: "70% — Base Aerobic Endurance" },
+                    { val: "75", text: "75% — Aerobic Capacity" },
+                    { val: "80", text: "80% — Active Steady Endurance" },
+                    { val: "85", text: "85% — Tempo / Aerobic Threshold" },
+                    { val: "90", text: "90% — Anaerobic Threshold / 3x500m", selected: true },
+                    { val: "95", text: "95% — Aerobic Power (PAM)" },
+                    { val: "100", text: "100% — 100% MAS" },
+                    { val: "105", text: "105% — Supra-MAS (Short)" },
+                    { val: "110", text: "110% — Lactic Speed" },
+                    { val: "115", text: "115% — Interval 30/30" },
+                    { val: "120", text: "120% — Short Intervals 15/15" },
+                    { val: "125", text: "125% — Power Intervals" },
+                    { val: "130", text: "130% — Supramaximal 10/10" }
                 ],
                 zones: [
+                    { pct: 50, name: "Light Recovery", color: "#64748b" },
+                    { pct: 55, name: "Warm-up", color: "#64748b" },
                     { pct: 60, name: "Active Recovery", color: "#64748b" },
+                    { pct: 65, name: "Easy Aerobic", color: "#0284c7" },
                     { pct: 70, name: "Base Endurance", color: "#0284c7" },
                     { pct: 75, name: "Aerobic Capacity", color: "#0ea5e9" },
                     { pct: 80, name: "Steady Pace", color: "#10b981" },
@@ -2390,7 +1743,11 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
                     { pct: 95, name: "Aerobic Power", color: "#f97316" },
                     { pct: 100, name: "100% MAS", color: "#ef4444" },
                     { pct: 105, name: "Sur-MAS (Short)", color: "#dc2626" },
-                    { pct: 110, name: "Lactic Speed", color: "#991b1b" }
+                    { pct: 110, name: "Lactic Speed", color: "#b91c1c" },
+                    { pct: 115, name: "Interval 30/30", color: "#be185d" },
+                    { pct: 120, name: "Interval 15/15", color: "#a21caf" },
+                    { pct: 125, name: "Power Intervals", color: "#9333ea" },
+                    { pct: 130, name: "Supramaximal 10/10", color: "#7e22ce" }
                 ]
             }
         };
@@ -2399,57 +1756,59 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
 
         function switchLanguage(lang) {
             currentLang = (lang === 'en') ? 'en' : 'fr';
-            localStorage.setItem('profeps_lang', currentLang);
+            try { localStorage.setItem('profeps_lang', currentLang); } catch(e) {}
             document.documentElement.lang = currentLang;
 
-            // Boutons d'état
-            document.getElementById('btnLangFr').classList.toggle('active', currentLang === 'fr');
-            document.getElementById('btnLangEn').classList.toggle('active', currentLang === 'en');
+            var btnFr = document.getElementById('peps-btn-lang-fr');
+            var btnEn = document.getElementById('peps-btn-lang-en');
+            if (btnFr) btnFr.className = (currentLang === 'fr') ? 'peps-lang-btn active' : 'peps-lang-btn';
+            if (btnEn) btnEn.className = (currentLang === 'en') ? 'peps-lang-btn active' : 'peps-lang-btn';
 
-            const t = i18n[currentLang];
+            var t = i18n[currentLang];
+            if (!t) return;
 
-            // Remplacement des textes avec data-i18n
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.dataset.i18n;
+            document.querySelectorAll('[data-i18n]').forEach(function(el) {
+                var key = el.dataset.i18n;
                 if (t[key]) {
                     el.innerHTML = t[key];
                 }
             });
 
-            // Metas & Titres
             if (t.metaTitle) {
                 document.title = t.metaTitle;
-                const ogT = document.getElementById('ogTitle');
+                var ogT = document.getElementById('ogTitle');
                 if (ogT) ogT.setAttribute('content', t.metaTitle);
-                const twT = document.getElementById('twTitle');
+                var twT = document.getElementById('twTitle');
                 if (twT) twT.setAttribute('content', t.metaTitle);
             }
             if (t.metaDesc) {
-                const m = document.getElementById('metaDesc');
+                var m = document.getElementById('metaDesc');
                 if (m) m.setAttribute('content', t.metaDesc);
-                const ogD = document.getElementById('ogDesc');
+                var ogD = document.getElementById('ogDesc');
                 if (ogD) ogD.setAttribute('content', t.metaDesc);
-                const twD = document.getElementById('twDesc');
+                var twD = document.getElementById('twDesc');
                 if (twD) twD.setAttribute('content', t.metaDesc);
             }
 
-            // Sélecteur d'allures
             populateIntensitySelect();
 
-            // Si les résultats sont actuellement affichés, rafraîchir le calcul
-            const resultsWrapper = document.getElementById("results-wrapper");
+            var resultsWrapper = document.getElementById("results-wrapper");
             if (resultsWrapper && resultsWrapper.style.display === "block") {
                 performCalculation();
             }
         }
 
+        window.switchLanguage = switchLanguage;
+
         function populateIntensitySelect() {
-            const select = document.getElementById('intensityInput');
-            const prevVal = select.value || "90";
+            var select = document.getElementById('intensityInput');
+            if (!select) return;
+            var prevVal = select.value || "90";
             select.innerHTML = "";
-            const opts = i18n[currentLang].intensityOptions;
-            opts.forEach(o => {
-                const opt = document.createElement('option');
+            var langConfig = i18n[currentLang] || i18n.fr;
+            var opts = langConfig.intensityOptions;
+            opts.forEach(function(o) {
+                var opt = document.createElement('option');
                 opt.value = o.val;
                 opt.textContent = o.text;
                 if (o.val === prevVal) opt.selected = true;
@@ -2457,57 +1816,7 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
             });
         }
 
-        // Détection initiale de la langue (avec support multi-domaines pour le SEO international)
-        window.addEventListener('DOMContentLoaded', () => {
-            const host = (window.location.hostname || '').toLowerCase();
-            const savedLang = localStorage.getItem('profeps_lang');
-
-            if (host.includes('mascalculator')) {
-                // Domaine international anglophone
-                switchLanguage('en');
-            } else if (host.includes('vmacalculateur')) {
-                // Domaine dédié francophone
-                switchLanguage('fr');
-            } else if (savedLang) {
-                switchLanguage(savedLang);
-            } else if (navigator.language && navigator.language.startsWith('en')) {
-                switchLanguage('en');
-            } else {
-                switchLanguage('fr');
-            }
-        });
-
-        // ═══ NAVIGATION ET CALCUL ═══
-        const navbar = document.getElementById("navbar");
-        const navToggle = document.getElementById("navToggle");
-        const navMenu = document.getElementById("navMenu");
-        const navBackdrop = document.getElementById("navBackdrop");
-
-        window.addEventListener("scroll", () => { navbar.classList.toggle("scrolled", window.scrollY > 40); });
-
-        if (navToggle && navMenu && navBackdrop) {
-            function toggleNav() {
-                const isOpen = navMenu.classList.toggle('active');
-                navToggle.classList.toggle('active', isOpen);
-                navBackdrop.classList.toggle('active', isOpen);
-                document.body.style.overflow = isOpen ? 'hidden' : '';
-            }
-            function closeNav() {
-                navMenu.classList.remove('active');
-                navToggle.classList.remove('active');
-                navBackdrop.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-            navToggle.addEventListener('click', (e) => { e.stopPropagation(); toggleNav(); });
-            navBackdrop.addEventListener('click', closeNav);
-            document.addEventListener('click', (e) => {
-                if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) closeNav();
-            });
-            navMenu.querySelectorAll('.nav-link, .nav-cta').forEach(l => l.addEventListener('click', closeNav));
-        }
-
         let selectedTest = "direct";
-        const testButtons = document.querySelectorAll(".test-type-btn");
         const panes = {
             direct: document.getElementById("pane-direct"),
             "cooper-6": document.getElementById("pane-cooper-6"),
@@ -2516,62 +1825,64 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
             vameval: document.getElementById("pane-vameval")
         };
 
-        testButtons.forEach(btn => {
-            btn.addEventListener("click", () => {
-                testButtons.forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".test-type-btn").forEach(function(btn) {
+            btn.addEventListener("click", function() {
+                document.querySelectorAll(".test-type-btn").forEach(function(b) { b.classList.remove("active"); });
                 btn.classList.add("active");
                 selectedTest = btn.dataset.test;
-                Object.keys(panes).forEach(k => {
-                    if (panes[k]) panes[k].style.display = k === selectedTest ? "block" : "none";
+                Object.keys(panes).forEach(function(k) {
+                    if (panes[k]) panes[k].style.display = (k === selectedTest) ? "block" : "none";
                 });
             });
         });
 
-        document.querySelectorAll("[data-track-val]").forEach(chip => {
-            chip.addEventListener("click", () => {
-                document.querySelectorAll("[data-track-val]").forEach(c => c.classList.remove("active"));
+        document.querySelectorAll("[data-track-val]").forEach(function(chip) {
+            chip.addEventListener("click", function() {
+                document.querySelectorAll("[data-track-val]").forEach(function(c) { c.classList.remove("active"); });
                 chip.classList.add("active");
                 document.getElementById("trackLengthInput").value = chip.dataset.trackVal;
             });
         });
 
-        document.querySelectorAll("[data-dur-val]").forEach(chip => {
-            chip.addEventListener("click", () => {
-                document.querySelectorAll("[data-dur-val]").forEach(c => c.classList.remove("active"));
+        document.querySelectorAll("[data-dur-val]").forEach(function(chip) {
+            chip.addEventListener("click", function() {
+                document.querySelectorAll("[data-dur-val]").forEach(function(c) { c.classList.remove("active"); });
                 chip.classList.add("active");
                 document.getElementById("durationInput").value = chip.dataset.durVal;
             });
         });
 
-        document.getElementById("trackLengthInput").addEventListener("input", (e) => {
-            const val = e.target.value;
-            document.querySelectorAll("[data-track-val]").forEach(c => {
+        document.getElementById("trackLengthInput").addEventListener("input", function(e) {
+            var val = e.target.value;
+            document.querySelectorAll("[data-track-val]").forEach(function(c) {
                 c.classList.toggle("active", c.dataset.trackVal === val);
             });
         });
-        document.getElementById("durationInput").addEventListener("input", (e) => {
-            const val = e.target.value;
-            document.querySelectorAll("[data-dur-val]").forEach(c => {
+        document.getElementById("durationInput").addEventListener("input", function(e) {
+            var val = e.target.value;
+            document.querySelectorAll("[data-dur-val]").forEach(function(c) {
                 c.classList.toggle("active", c.dataset.durVal === val);
             });
         });
 
-        const btnTrigger = document.getElementById("btnTriggerCalc");
-        btnTrigger.addEventListener("click", performCalculation);
+        var btnTrigger = document.getElementById("btnTriggerCalc");
+        if (btnTrigger) {
+            btnTrigger.addEventListener("click", performCalculation);
+        }
 
         function performCalculation() {
-            let vma = 0;
-            let vo2max = 0;
+            var vma = 0;
+            var vo2max = 0;
 
             if (selectedTest === "direct") {
                 vma = parseFloat(document.getElementById("directVmaInput").value) || 0;
                 vo2max = vma * 3.5;
             } else if (selectedTest === "cooper-6") {
-                const dist6 = parseFloat(document.getElementById("cooper6DistInput").value) || 0;
+                var dist6 = parseFloat(document.getElementById("cooper6DistInput").value) || 0;
                 vma = dist6 / 100;
                 vo2max = vma * 3.5;
             } else if (selectedTest === "cooper-12") {
-                const dist12 = parseFloat(document.getElementById("cooper12DistInput").value) || 0;
+                var dist12 = parseFloat(document.getElementById("cooper12DistInput").value) || 0;
                 if (dist12 > 505) {
                     vo2max = (dist12 - 504.9) / 44.73;
                     vma = vo2max / 3.5;
@@ -2580,7 +1891,7 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
                     vo2max = vma * 3.5;
                 }
             } else if (selectedTest === "luc-leger") {
-                const palier = parseFloat(document.getElementById("lucPalierInput").value) || 8;
+                var palier = parseFloat(document.getElementById("lucPalierInput").value) || 8;
                 vma = 8 + (palier * 0.5);
                 vo2max = vma * 3.5;
             } else if (selectedTest === "vameval") {
@@ -2593,12 +1904,12 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
                 return;
             }
 
-            const trackDist = parseFloat(document.getElementById("trackLengthInput").value) || 250;
-            const durationMin = parseFloat(document.getElementById("durationInput").value) || 12;
-            const targetIntensity = parseFloat(document.getElementById("intensityInput").value) || 90;
-            const durationSec = durationMin * 60;
+            var trackDist = parseFloat(document.getElementById("trackLengthInput").value) || 250;
+            var durationMin = parseFloat(document.getElementById("durationInput").value) || 12;
+            var targetIntensity = parseFloat(document.getElementById("intensityInput").value) || 90;
+            var durationSec = durationMin * 60;
 
-            const resultsWrapper = document.getElementById("results-wrapper");
+            var resultsWrapper = document.getElementById("results-wrapper");
             resultsWrapper.style.display = "block";
 
             // Bannière
@@ -2606,28 +1917,28 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
             document.getElementById("resVo2").textContent = vo2max.toFixed(1) + " ml/kg/min (VO₂max)";
 
             // Indicateurs
-            const targetSpeedKmh = vma * (targetIntensity / 100);
-            const targetSpeedMs = targetSpeedKmh / 3.6;
+            var targetSpeedKmh = vma * (targetIntensity / 100);
+            var targetSpeedMs = targetSpeedKmh / 3.6;
 
             document.getElementById("resTargetSpeed").textContent = targetSpeedKmh.toFixed(1) + " km/h";
             document.getElementById("resTargetPct").textContent = (currentLang === 'en' ? "at " : "à ") + targetIntensity + "% VMA";
 
-            const paceSecTotal = 3600 / targetSpeedKmh;
-            const paceMin = Math.floor(paceSecTotal / 60);
-            const paceSec = Math.round(paceSecTotal % 60);
+            var paceSecTotal = 3600 / targetSpeedKmh;
+            var paceMin = Math.floor(paceSecTotal / 60);
+            var paceSec = Math.round(paceSecTotal % 60);
             document.getElementById("resTargetPace").textContent = paceMin + ":" + (paceSec < 10 ? "0" : "") + paceSec + " min/km";
             document.getElementById("resTarget100").textContent = (100 / targetSpeedMs).toFixed(1) + "s / 100m";
 
-            const lapSecTotal = trackDist / targetSpeedMs;
-            const lapMin = Math.floor(lapSecTotal / 60);
-            const lapSec = Math.round(lapSecTotal % 60);
+            var lapSecTotal = trackDist / targetSpeedMs;
+            var lapMin = Math.floor(lapSecTotal / 60);
+            var lapSec = Math.round(lapSecTotal % 60);
             document.getElementById("resTargetLap").textContent = (lapMin > 0 ? lapMin + "m " : "") + (lapSec < 10 ? "0" : "") + lapSec + "s";
             document.getElementById("resTrackDistSub").textContent = (currentLang === 'en' ? "Track of " : "Piste de ") + trackDist + " m";
 
-            const totalDistMeters = Math.round(targetSpeedMs * durationSec);
-            const totalLapsCount = totalDistMeters / trackDist;
-            const fullLaps = Math.floor(totalLapsCount);
-            const remMeters = Math.round(totalDistMeters % trackDist);
+            var totalDistMeters = Math.round(targetSpeedMs * durationSec);
+            var totalLapsCount = totalDistMeters / trackDist;
+            var fullLaps = Math.floor(totalLapsCount);
+            var remMeters = Math.round(totalDistMeters % trackDist);
 
             document.getElementById("resLabelDuration").textContent = (currentLang === 'en' ? "Summary (" : "Bilan (") + durationMin + " min)";
             document.getElementById("resTargetDist").textContent = totalDistMeters.toLocaleString(currentLang === 'en' ? "en-US" : "fr-FR") + " m";
@@ -2638,41 +1949,42 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
             document.getElementById("thDynDist").textContent = (currentLang === 'en' ? "Dist. (" : "Dist. (") + durationMin + " min)";
             document.getElementById("thDynLaps").textContent = (currentLang === 'en' ? "Track Laps" : "Nombre de Tours");
 
-            const badgePaliers = document.getElementById("resPaliersBadge");
+            var badgePaliers = document.getElementById("resPaliersBadge");
             if (badgePaliers) {
                 badgePaliers.textContent = (currentLang === 'en' ? "Track: " : "Piste : ") + trackDist + "m · " + (currentLang === 'en' ? "Duration: " : "Durée : ") + durationMin + " min · " + targetIntensity + "% VMA";
             }
-            const thPld = document.getElementById("thPaliersDist");
+            var thPld = document.getElementById("thPaliersDist");
             if (thPld) thPld.textContent = (currentLang === 'en' ? "Dist. (" : "Dist. (") + durationMin + " min)";
-            const thPll = document.getElementById("thPaliersLaps");
+            var thPll = document.getElementById("thPaliersLaps");
             if (thPll) thPll.textContent = (currentLang === 'en' ? "Track Laps" : "Nombre de Tours");
 
-            // 1. Remplir Tableau d'entraînement (50% à 130%)
-            const zones = i18n[currentLang].zones;
-            const tbody = document.getElementById("tbodyTraining");
+            // 1. Remplir Tableau d'entraînement
+            var langCfg = i18n[currentLang] || i18n.fr;
+            var zones = langCfg.zones;
+            var tbody = document.getElementById("tbodyTraining");
             tbody.innerHTML = "";
 
-            zones.forEach(z => {
-                const zSpeedKmh = vma * (z.pct / 100);
-                const zSpeedMs = zSpeedKmh / 3.6;
+            zones.forEach(function(z) {
+                var zSpeedKmh = vma * (z.pct / 100);
+                var zSpeedMs = zSpeedKmh / 3.6;
 
-                const zPaceSec = 3600 / zSpeedKmh;
-                const zPaceMin = Math.floor(zPaceSec / 60);
-                const zPaceRestSec = Math.round(zPaceSec % 60);
-                const zPaceStr = zPaceMin + ":" + (zPaceRestSec < 10 ? "0" : "") + zPaceRestSec;
+                var zPaceSec = 3600 / zSpeedKmh;
+                var zPaceMin = Math.floor(zPaceSec / 60);
+                var zPaceRestSec = Math.round(zPaceSec % 60);
+                var zPaceStr = zPaceMin + ":" + (zPaceRestSec < 10 ? "0" : "") + zPaceRestSec;
 
-                const zTime100 = (100 / zSpeedMs).toFixed(1) + "s";
+                var zTime100 = (100 / zSpeedMs).toFixed(1) + "s";
 
-                const zTourSec = trackDist / zSpeedMs;
-                const zTMin = Math.floor(zTourSec / 60);
-                const zTSec = Math.round(zTourSec % 60);
-                const zTourStr = (zTMin > 0 ? zTMin + "m " : "") + (zTSec < 10 ? "0" : "") + zTSec + "s";
+                var zTourSec = trackDist / zSpeedMs;
+                var zTMin = Math.floor(zTourSec / 60);
+                var zTSec = Math.round(zTourSec % 60);
+                var zTourStr = (zTMin > 0 ? zTMin + "m " : "") + (zTSec < 10 ? "0" : "") + zTSec + "s";
 
-                const zDist = Math.round(zSpeedMs * durationSec);
-                const zLaps = (zDist / trackDist).toFixed(1);
+                var zDist = Math.round(zSpeedMs * durationSec);
+                var zLaps = (zDist / trackDist).toFixed(1);
 
-                const isSelected = Math.abs(targetIntensity - z.pct) <= 2;
-                const tr = document.createElement("tr");
+                var isSelected = Math.abs(targetIntensity - z.pct) <= 2;
+                var tr = document.createElement("tr");
                 if (isSelected) tr.className = "selected-row";
 
                 tr.innerHTML = '<td><strong>' + z.pct + '%</strong></td>' +
@@ -2687,36 +1999,36 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
                 tbody.appendChild(tr);
             });
 
-            // 2. Remplir Tableau des 20 Paliers (Synchronisé)
-            const tbodyPaliers = document.getElementById("tbodyPaliersRecap");
+            // 2. Remplir Tableau des 20 Paliers
+            var tbodyPaliers = document.getElementById("tbodyPaliersRecap");
             if (tbodyPaliers) {
                 tbodyPaliers.innerHTML = "";
 
-                for (let p = 1; p <= 20; p++) {
-                    const pVma = 8.0 + (p * 0.5); // Palier 1 = 8.5 km/h ... Palier 20 = 18.0 km/h
-                    const pSpeedKmh = pVma * (targetIntensity / 100);
-                    const pSpeedMs = pSpeedKmh / 3.6;
+                for (var p = 1; p <= 20; p++) {
+                    var pVma = 8.0 + (p * 0.5);
+                    var pSpeedKmh = pVma * (targetIntensity / 100);
+                    var pSpeedMs = pSpeedKmh / 3.6;
 
-                    const pPaceSecTotal = 3600 / pSpeedKmh;
-                    const pPaceMin = Math.floor(pPaceSecTotal / 60);
-                    const pPaceSec = Math.round(pPaceSecTotal % 60);
-                    const pPaceStr = pPaceMin + ":" + (pPaceSec < 10 ? "0" : "") + pPaceSec;
+                    var pPaceSecTotal = 3600 / pSpeedKmh;
+                    var pPaceMin = Math.floor(pPaceSecTotal / 60);
+                    var pPaceSec = Math.round(pPaceSecTotal % 60);
+                    var pPaceStr = pPaceMin + ":" + (pPaceSec < 10 ? "0" : "") + pPaceSec;
 
-                    const pTime100 = (100 / pSpeedMs).toFixed(1) + "s";
+                    var pTime100 = (100 / pSpeedMs).toFixed(1) + "s";
 
-                    const pTourSec = trackDist / pSpeedMs;
-                    const pTMin = Math.floor(pTourSec / 60);
-                    const pTSec = Math.round(pTourSec % 60);
-                    const pTourStr = (pTMin > 0 ? pTMin + "m " : "") + (pTSec < 10 ? "0" : "") + pTSec + "s";
+                    var pTourSec = trackDist / pSpeedMs;
+                    var pTMin = Math.floor(pTourSec / 60);
+                    var pTSec = Math.round(pTourSec % 60);
+                    var pTourStr = (pTMin > 0 ? pTMin + "m " : "") + (pTSec < 10 ? "0" : "") + pTSec + "s";
 
-                    const pTotalDistMeters = Math.round(pSpeedMs * durationSec);
-                    const pLaps = (pTotalDistMeters / trackDist).toFixed(1);
+                    var pTotalDistMeters = Math.round(pSpeedMs * durationSec);
+                    var pLaps = (pTotalDistMeters / trackDist).toFixed(1);
 
-                    const isCurrentStudent = Math.abs(pVma - vma) < 0.26;
-                    const trP = document.createElement("tr");
+                    var isCurrentStudent = Math.abs(pVma - vma) < 0.26;
+                    var trP = document.createElement("tr");
                     if (isCurrentStudent) trP.className = "selected-row";
 
-                    const badgeEleve = isCurrentStudent ? ' <span style="font-size:0.7rem; background:#0284c7; color:#fff; padding:2px 6px; border-radius:4px; margin-left:4px;">Élève</span>' : '';
+                    var badgeEleve = isCurrentStudent ? ' <span style="font-size:0.7rem; background:#0284c7; color:#fff; padding:2px 6px; border-radius:4px; margin-left:4px;">Élève</span>' : '';
 
                     trP.innerHTML = '<td><strong>Palier ' + p + '</strong>' + badgeEleve + '</td>' +
                         '<td><span class="zone-pill" style="background:#e0f2fe; color:#0284c7;">Palier ' + p + ' (' + pVma.toFixed(1) + ' km/h)</span></td>' +
@@ -2733,50 +2045,9 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
 
             resultsWrapper.scrollIntoView({ behavior: "smooth", block: "start" });
         }
+
+        // Initialisation immédiate
+        populateIntensitySelect();
     </script>
-
-
-
-<!-- PROFEPS CMP BANNER -->
-<div id="profeps-cmp-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#f8fafc;padding:16px 22px;border-top:1px solid #334155;z-index:999999;box-shadow:0 -10px 25px rgba(0,0,0,0.5);font-family:system-ui,-apple-system,sans-serif;">
-  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;">
-    <div style="flex:1 1 500px;font-size:13px;line-height:1.5;">
-      <strong style="color:#38bdf8;">🍪 Respect de votre vie privée</strong><br>
-      ProfEPS utilise des cookies essentiels au site ainsi que des cookies de mesure d'audience et Google AdSense pour maintenir nos outils gratuits. Vous pouvez personnaliser ou refuser à tout moment. <a href="politique-confidentialite.html" style="color:#38bdf8;text-decoration:underline;">Politique de confidentialité</a>.
-    </div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-      <button onclick="window.ProfEPS_CMP.open()" type="button" style="padding:7px 12px;background:#1e293b;color:#cbd5e1;border:1px solid #475569;border-radius:6px;font-size:12.5px;font-weight:600;cursor:pointer;">Personnaliser</button>
-      <button onclick="window.ProfEPS_CMP.rejectAll()" type="button" style="padding:7px 12px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:12.5px;font-weight:600;cursor:pointer;">Refuser</button>
-      <button onclick="window.ProfEPS_CMP.acceptAll()" type="button" style="padding:7px 16px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:12.5px;font-weight:700;cursor:pointer;">Tout accepter</button>
-    </div>
-  </div>
-</div>
-<!-- PROFEPS CMP MODAL -->
-<div id="profeps-cmp-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.85);backdrop-filter:blur(4px);z-index:1000000;align-items:center;justify-content:center;padding:16px;font-family:system-ui,-apple-system,sans-serif;">
-  <div style="background:#0f172a;border:1px solid #334155;border-radius:12px;max-width:540px;width:100%;padding:22px;color:#f8fafc;box-shadow:0 20px 40px rgba(0,0,0,0.6);">
-    <h3 style="margin-top:0;font-size:17px;color:#38bdf8;">⚙️ Préférences de Confidentialité & Cookies</h3>
-    <p style="font-size:12.5px;color:#94a3b8;line-height:1.5;">Gérez vos préférences. Les cookies techniques sont obligatoires pour les calculs.</p>
-    <div style="margin:12px 0;padding:10px;background:#1e293b;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
-      <span style="font-weight:600;font-size:13px;">Cookies techniques essentiels</span>
-      <span style="font-size:11px;color:#10b981;font-weight:bold;">Toujours actif</span>
-    </div>
-    <div style="margin:12px 0;padding:10px;background:#1e293b;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
-      <label for="cmp-opt-analytics" style="font-weight:600;font-size:13px;cursor:pointer;">Mesure d'audience anonyme (Analytics)</label>
-      <input type="checkbox" id="cmp-opt-analytics" checked style="width:17px;height:17px;cursor:pointer;">
-    </div>
-    <div style="margin:12px 0;padding:10px;background:#1e293b;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
-      <label for="cmp-opt-ads" style="font-weight:600;font-size:13px;cursor:pointer;">Publicités personnalisées (Google AdSense)</label>
-      <input type="checkbox" id="cmp-opt-ads" checked style="width:17px;height:17px;cursor:pointer;">
-    </div>
-    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:18px;">
-      <button onclick="document.getElementById('profeps-cmp-modal').style.display='none'" type="button" style="padding:7px 12px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:12px;cursor:pointer;">Fermer</button>
-      <button onclick="window.ProfEPS_CMP.saveCustom()" type="button" style="padding:7px 16px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:12.5px;font-weight:700;cursor:pointer;">Enregistrer mes choix</button>
-    </div>
-  </div>
-</div>
 </body>
 </html>
-
-
-
-
