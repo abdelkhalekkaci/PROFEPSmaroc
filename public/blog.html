@@ -131,6 +131,7 @@
         .themes-header p { color: var(--text-secondary); }
         
         .themes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .theme-card * { pointer-events: none; }
         .theme-card { background: white; border: 2px solid var(--border); border-radius: var(--radius-xl); padding: 1.5rem; text-align: center; cursor: pointer; transition: var(--transition); position: relative; overflow: hidden; }
         .theme-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; transition: height 0.3s ease; }
         .theme-card:hover::before, .theme-card.active::before { height: 100%; opacity: 0.1; }
@@ -1248,62 +1249,61 @@ footer.footer .footer-bottom {
                     <p>Cliquez sur une catégorie pour filtrer les articles</p>
                 </div>
 
-                <div class="themes-grid">
-                    <div class="theme-card theme-all active" data-theme="all" onclick="window.filterByTheme('all')">
+                                <div class="themes-grid">
+                    <div class="theme-card theme-all active" data-theme="all" onclick="window.filterByTheme('all')" role="button" tabindex="0">
                         <div class="theme-icon">
                             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="12" y1="8" x2="12" y2="16"/></svg>
                         </div>
-                        <h3>Tous les articles <span class="theme-count">82</span></h3>
+                        <h3>Tous les articles <span class="theme-count" id="count-all">93</span></h3>
                         <p>Voir tout le contenu</p>
                     </div>
 
-                    <!-- THÉMATIQUE VMA & ENDURANCE -->
-                    <div class="theme-card theme-vma" data-theme="vma" onclick="window.filterByTheme('vma')">
+                    <div class="theme-card theme-vma" data-theme="vma" onclick="window.filterByTheme('vma')" role="button" tabindex="0">
                         <div class="theme-icon">
                             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                         </div>
-                        <h3>VMA & Demi-Fond <span class="theme-count">15</span></h3>
+                        <h3>VMA & Demi-Fond <span class="theme-count" id="count-vma">22</span></h3>
                         <p>Tests, Allures & Calculs (FR & EN)</p>
                     </div>
 
-                    <div class="theme-card theme-documents" data-theme="documents" onclick="window.filterByTheme('documents')">
+                    <div class="theme-card theme-documents" data-theme="documents" onclick="window.filterByTheme('documents')" role="button" tabindex="0">
                         <div class="theme-icon">
                             <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                         </div>
-                        <h3>Documents Officiels <span class="theme-count">8</span></h3>
+                        <h3>Documents Officiels <span class="theme-count" id="count-documents">8</span></h3>
                         <p>OP 2007-2009 & Référentiels</p>
                     </div>
 
-                    <div class="theme-card theme-didactique" data-theme="didactique" onclick="window.filterByTheme('didactique')">
+                    <div class="theme-card theme-didactique" data-theme="didactique" onclick="window.filterByTheme('didactique')" role="button" tabindex="0">
                         <div class="theme-icon">
                             <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
                         </div>
-                        <h3>Didactique <span class="theme-count">12</span></h3>
+                        <h3>Didactique <span class="theme-count" id="count-didactique">13</span></h3>
                         <p>Pédagogie & Méthodes</p>
                     </div>
 
-                    <div class="theme-card theme-carriere" data-theme="carriere" onclick="window.filterByTheme('carriere')">
+                    <div class="theme-card theme-carriere" data-theme="carriere" onclick="window.filterByTheme('carriere')" role="button" tabindex="0">
                         <div class="theme-icon">
                             <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                         </div>
-                        <h3>Carrière <span class="theme-count">11</span></h3>
+                        <h3>Carrière <span class="theme-count" id="count-carriere">11</span></h3>
                         <p>Concours & Examens</p>
                     </div>
 
-                    <div class="theme-card theme-pratique" data-theme="pratique" onclick="window.filterByTheme('pratique')">
+                    <div class="theme-card theme-pratique" data-theme="pratique" onclick="window.filterByTheme('pratique')" role="button" tabindex="0">
                         <div class="theme-icon">
                             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                         </div>
-                        <h3>Pratique <span class="theme-count">16</span></h3>
-                        <p>Sécurité & Gestion</p>
+                        <h3>Pratique & Santé <span class="theme-count" id="count-pratique">19</span></h3>
+                        <p>Sécurité, Climat & Gestion</p>
                     </div>
 
-                    <div class="theme-card theme-aps" data-theme="aps">
+                    <div class="theme-card theme-aps" data-theme="aps" onclick="window.filterByTheme('aps')" role="button" tabindex="0">
                         <div class="theme-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M5 4.5C7.5 7 9 9.5 9 12s-1.5 5-4 7.5"/><path d="M19 4.5C16.5 7 15 9.5 15 12s1.5 5 4 7.5"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
                         </div>
-                        <h3>APS <span class="theme-count">20</span></h3>
-                        <p>Sports & Activités</p>
+                        <h3>APS <span class="theme-count" id="count-aps">20</span></h3>
+                        <p>Sports Collectifs & Individuels</p>
                     </div>
                 </div>
             </section>

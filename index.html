@@ -1825,6 +1825,37 @@ footer.footer .footer-bottom {
     }
   </script>
 
-  <script src="unifier-navbar-footer.js"></script>
+  <script src="unifier-navbar-footer.js">
+    function filterBlogHome(theme) {
+      theme = theme || 'all';
+      var cards = document.querySelectorAll('#grid-blog-home article');
+      var buttons = [
+        { id: 'btn-blog-all', theme: 'all' },
+        { id: 'btn-blog-vma', theme: 'vma' },
+        { id: 'btn-blog-sciences', theme: 'sciences' },
+        { id: 'btn-blog-pedagogie', theme: 'pedagogie' }
+      ];
+
+      buttons.forEach(function(b) {
+        var el = document.getElementById(b.id);
+        if (!el) return;
+        if (b.theme === theme) {
+          el.className = 'px-3.5 py-1.5 text-xs font-bold rounded-lg bg-slate-900 text-white transition cursor-pointer';
+        } else {
+          el.className = 'px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition cursor-pointer';
+        }
+      });
+
+      cards.forEach(function(card) {
+        var cat = card.getAttribute('data-blog-cat');
+        if (theme === 'all' || cat === theme) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  
+</script>
 </body>
 </html>
