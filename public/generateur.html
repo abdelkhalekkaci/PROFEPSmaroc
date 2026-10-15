@@ -4,90 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Créez et personnalisez vos fiches de séance EPS en quelques clics. Outil en ligne gratuit adapté aux programmes du collège et lycée.">
+    <meta name="description" content="Créez et personnalisez vos fiches de séance EPS en quelques clics. Outil en ligne gratuit adapté aux programmes du collège et lycée au Maroc.">
     <meta name="keywords" content="générateur fiche de séance EPS, fiche de préparation EPS Maroc, grille d'observation EPS, grille d'évaluation EPS Maroc, projet de cycle EPS collège, projet de cycle EPS lycée, module EPS cycle qualifiant, module EPS cycle collégial, OTI OTC EPS, OP 2007 OP 2009, CRMEF EPS, didactique EPS Maroc, situation d'apprentissage EPS">
     <link rel="canonical" href="https://profeps.ma/generateur.html">
-    <title>Générateur de Fiches de Séance EPS Gratuit | ProfEPS</title>
+    <title>Générateur de Fiches de Séance & Projets de Cycle EPS | ProfEPS</title>
     <link rel="icon" type="image/png" href="/images/prof_eps.png">
 
-    <!-- Core Web Vitals — LCP preload + preconnect to third parties -->
+    <!-- Preload & Third-parties -->
     <link rel="preload" as="image" href="/images/prof_eps.webp" fetchpriority="high" type="image/webp">
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-    <link rel="dns-prefetch" href="https://www.google-analytics.com">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Générateur IA Fiches EPS Gratuit : Créez en 1 Clic">
-    <meta property="og:description" content="Générateur IA gratuit de fiches EPS, grilles et projets. Conforme aux OP 2007-2009.">
+    <meta property="og:title" content="Générateur Pédagogique EPS Gratuit : Fiches, Cycles et Grilles">
+    <meta property="og:description" content="Générateur gratuit de fiches EPS, grilles et projets complets de cycle. Conforme aux OP 2007-2009 Maroc.">
     <meta property="og:image" content="https://profeps.ma/images/prof_eps.png">
     <meta property="og:url" content="https://profeps.ma/generateur.html">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Prof EPS Maroc">
-    <meta property="og:locale" content="fr_MA">
 
-    <!-- JSON-LD WebApplication -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "Générateur IA de Fiches EPS ProfEPS",
-        "url": "https://profeps.ma/generateur.html",
-        "description": "Générateur IA gratuit de fiches EPS, grilles d'évaluation et projets de cycle. Créez vos documents conformes aux orientations pédagogiques 2007-2009.",
-        "applicationCategory": "EducationalApplication",
-        "applicationSubCategory": "AI Tool",
-        "operatingSystem": "All modern web browsers",
-        "inLanguage": "fr-MA",
-        "isAccessibleForFree": true,
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "MAD"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "Prof EPS Maroc",
-            "url": "https://profeps.ma",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://profeps.ma/images/prof_eps.png"
-            }
-        }
-    }
-    </script>
-
-    <!-- Google Consent Mode v2 -->
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('consent', 'default', {
-            'ad_storage': 'denied',
-            'ad_user_data': 'denied',
-            'ad_personalization': 'denied',
-            'analytics_storage': 'denied',
-            'wait_for_update': 500
-        });
-    </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TH0Z1SGNXH"></script>
-    <script>
-        window.dataLayer = window.dataLayer || []; 
-        function gtag() { dataLayer.push(arguments); } 
-        gtag('js', new Date()); 
-        gtag('config', 'G-TH0Z1SGNXH');
-    </script>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <!-- Libraries -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script defer src="profeps-cmp.js"></script>
     <script defer src="profeps-communaute.js"></script>
 
     <style>
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        *, *::before, *::after {
+            margin: 0; padding: 0; box-sizing: border-box;
         }
 
         :root {
@@ -107,21 +50,18 @@
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            --radius: 8px;
             --radius-lg: 12px;
             --radius-xl: 16px;
             --radius-2xl: 24px;
             --radius-full: 9999px;
-            --spacing-xs: 0.25rem;
             --spacing-sm: 0.5rem;
             --spacing-md: 1rem;
             --spacing-lg: 1.5rem;
             --spacing-xl: 2rem;
             --spacing-2xl: 3rem;
-            --spacing-3xl: 4rem;
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-display: 'Plus Jakarta Sans', var(--font-sans);
-            --transition: all 0.3s ease;
+            --transition: all 0.25s ease;
         }
 
         body {
@@ -132,699 +72,321 @@
             overflow-x: hidden;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: var(--transition);
-        }
+        a { text-decoration: none; color: inherit; }
 
-        /* ========== LOADING OVERLAY ========== */
+        /* LOADING OVERLAY */
         .loading-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            z-index: 99999;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(193, 39, 45, 0.95), rgba(0, 98, 51, 0.95));
+            z-index: 999999;
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            color: white;
+            text-align: center;
+            padding: 20px;
         }
 
-        .loading-overlay.show {
-            display: flex;
-        }
+        .loading-overlay.show { display: flex; }
 
         .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
+            width: 60px; height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
             border-top-color: white;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            animation: spin 0.9s linear infinite;
         }
 
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        .loading-text {
-            color: white;
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-top: 20px;
-        }
-
-        .loading-subtext {
-            color: rgba(255, 255, 255, 0.85);
-            font-size: 0.95rem;
-            margin-top: 8px;
-        }
+        .loading-text { font-size: 1.3rem; font-weight: 700; margin-top: 20px; }
+        .loading-subtext { font-size: 0.95rem; opacity: 0.9; margin-top: 6px; max-width: 450px; }
 
         .progress-container {
-            width: 100%;
-            max-width: 300px;
-            margin-top: 24px;
+            width: 100%; max-width: 340px; margin-top: 22px;
         }
 
         .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: var(--radius-full);
-            overflow: hidden;
+            width: 100%; height: 10px; background: rgba(255, 255, 255, 0.25);
+            border-radius: var(--radius-full); overflow: hidden;
         }
 
         .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #fff, rgba(255,255,255,0.8));
-            border-radius: var(--radius-full);
-            transition: width 0.3s ease;
-            width: 0%;
+            height: 100%; background: #ffffff; width: 0%;
+            transition: width 0.2s ease; border-radius: var(--radius-full);
         }
 
         .progress-text {
-            color: white;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-align: center;
-            margin-top: 8px;
+            color: white; font-size: 0.9rem; font-weight: 700; margin-top: 8px;
         }
 
-        /* Toast Notifications */
-        .error-toast,
-        .success-toast {
-            position: fixed;
-            top: 100px;
-            left: 50%;
+        /* TOASTS */
+        .error-toast, .success-toast {
+            position: fixed; top: 95px; left: 50%;
             transform: translateX(-50%) translateY(-20px);
-            z-index: 100000;
-            opacity: 0;
-            transition: all 0.3s ease;
-            pointer-events: none;
+            z-index: 1000000; opacity: 0; transition: all 0.3s ease; pointer-events: none;
         }
 
-        .error-toast.show,
-        .success-toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
+        .error-toast.show, .success-toast.show {
+            transform: translateX(-50%) translateY(0); opacity: 1;
         }
 
-        .error-toast-content,
-        .success-toast-content {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            padding: var(--spacing-md) var(--spacing-xl);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-xl);
-            font-weight: 600;
-            font-size: 0.95rem;
+        .error-toast-content, .success-toast-content {
+            display: flex; align-items: center; gap: var(--spacing-sm);
+            padding: 12px 24px; border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl); font-weight: 600; font-size: 0.95rem;
         }
 
-        .error-toast-content {
-            background: #dc3545;
-            color: white;
-        }
+        .error-toast-content { background: #dc3545; color: white; }
+        .success-toast-content { background: #006233; color: white; }
 
-        .success-toast-content {
-            background: var(--secondary);
-            color: white;
-        }
-
-        /* ========== MAIN CONTENT ========== */
-        .main-content {
-            padding-top: 100px;
-            min-height: calc(100vh - 200px);
-        }
-
-        .page-header {
-            text-align: center;
-            padding: var(--spacing-2xl) var(--spacing-xl) var(--spacing-xl);
-        }
-
+        /* LAYOUT */
+        .main-content { padding-top: 100px; min-height: calc(100vh - 180px); }
+        .page-header { text-align: center; padding: var(--spacing-2xl) var(--spacing-xl) var(--spacing-xl); }
         .page-header h1 {
-            font-family: var(--font-display);
-            font-size: clamp(1.75rem, 4vw, 2.5rem);
-            font-weight: 800;
-            color: var(--text-primary);
-            margin-bottom: var(--spacing-sm);
+            font-family: var(--font-display); font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 800; color: var(--text-primary); margin-bottom: var(--spacing-sm);
         }
-
         .page-header h1 span {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
+        .page-header p { color: var(--text-secondary); font-size: 1.05rem; }
 
-        .page-header p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-
-        /* ========== GENERATOR LAYOUT ========== */
         .generator-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 var(--spacing-xl) var(--spacing-3xl);
-            display: grid;
-            grid-template-columns: 420px 1fr;
-            gap: var(--spacing-2xl);
-            align-items: start;
+            max-width: 1400px; margin: 0 auto;
+            padding: 0 var(--spacing-xl) var(--spacing-2xl);
+            display: grid; grid-template-columns: 420px 1fr;
+            gap: var(--spacing-2xl); align-items: start;
         }
 
-        /* ========== CARDS ========== */
+        /* CARDS & FORM */
         .card {
-            background: var(--bg-card);
-            border-radius: var(--radius-2xl);
-            box-shadow: var(--shadow-lg);
-            overflow: hidden;
-            border: 1px solid var(--border-light);
+            background: var(--bg-card); border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-lg); overflow: hidden; border: 1px solid var(--border-light);
         }
-
         .card::before {
-            content: '';
-            display: block;
-            height: 4px;
+            content: ''; display: block; height: 4px;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
         }
 
-        /* ========== TABS ========== */
-        .tabs {
-            display: flex;
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border);
-        }
-
+        .tabs { display: flex; background: var(--bg-secondary); border-bottom: 1px solid var(--border); }
         .tab {
-            flex: 1;
-            padding: var(--spacing-lg) var(--spacing-md);
-            text-align: center;
-            cursor: pointer;
-            font-weight: 700;
-            color: var(--text-light);
-            background: none;
-            border: none;
-            transition: var(--transition);
-            border-bottom: 3px solid transparent;
-            user-select: none;
-            outline: none;
+            flex: 1; padding: var(--spacing-lg) var(--spacing-md);
+            text-align: center; cursor: pointer; font-weight: 700;
+            color: var(--text-light); background: none; border: none;
+            transition: var(--transition); border-bottom: 3px solid transparent;
         }
+        .tab:hover { background: rgba(193, 39, 45, 0.05); color: var(--primary); }
+        .tab.active { color: var(--primary); background: var(--bg-card); border-bottom-color: var(--primary); }
+        .tab-icon { display: block; font-size: 1.4rem; margin-bottom: 3px; }
 
-        .tab:hover {
-            background: rgba(193, 39, 45, 0.05);
-            color: var(--primary);
-        }
-
-        .tab.active {
-            color: var(--primary);
-            background: var(--bg-card);
-            border-bottom-color: var(--primary);
-        }
-
-        .tab-icon {
-            display: block;
-            font-size: 1.5rem;
-            margin-bottom: 4px;
-        }
-
-        /* ========== FORM ========== */
-        .card-body {
-            padding: var(--spacing-xl);
-        }
-
-        .form-group {
-            margin-bottom: var(--spacing-lg);
-        }
-
+        .card-body { padding: var(--spacing-xl); }
+        .form-group { margin-bottom: var(--spacing-lg); }
         .form-label {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-xs);
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: var(--spacing-sm);
+            display: flex; align-items: center; gap: 6px; font-size: 0.88rem;
+            font-weight: 600; color: var(--text-primary); margin-bottom: 6px;
         }
+        .form-label .required { color: var(--primary); font-weight: bold; }
 
-        .form-label .required {
-            color: var(--primary);
-            font-weight: bold;
+        .form-input, .form-select, .form-textarea {
+            width: 100%; padding: var(--spacing-md); font-family: var(--font-sans);
+            font-size: 0.98rem; color: var(--text-primary); background: var(--bg-secondary);
+            border: 2px solid var(--border); border-radius: var(--radius-lg); transition: var(--transition);
         }
-
-        .form-input,
-        .form-select,
-        .form-textarea {
-            width: 100%;
-            padding: var(--spacing-md);
-            font-family: var(--font-sans);
-            font-size: 1rem;
-            color: var(--text-primary);
-            background: var(--bg-secondary);
-            border: 2px solid var(--border);
-            border-radius: var(--radius-lg);
-            transition: var(--transition);
-        }
-
-        .form-input:focus,
-        .form-select:focus,
-        .form-textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: var(--bg-card);
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none; border-color: var(--primary); background: var(--bg-card);
             box-shadow: 0 0 0 4px rgba(193, 39, 45, 0.1);
         }
+        .form-textarea { min-height: 95px; resize: vertical; }
 
-        .form-textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .form-select {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 12px center;
-            background-size: 20px;
-            padding-right: 48px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-md);
-        }
-
-        .conditional {
-            display: none !important;
-        }
-
-        .conditional.show {
-            display: block !important;
-        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md); }
+        .conditional { display: none !important; }
+        .conditional.show { display: block !important; }
 
         .info-box {
-            background: linear-gradient(135deg, rgba(193, 39, 45, 0.05), rgba(0, 98, 51, 0.05));
-            border-left: 4px solid var(--secondary);
-            padding: var(--spacing-md);
-            border-radius: 0 var(--radius) var(--radius) 0;
-            margin-bottom: var(--spacing-lg);
-            font-size: 0.875rem;
-            color: var(--text-secondary);
+            background: linear-gradient(135deg, rgba(193, 39, 45, 0.06), rgba(0, 98, 51, 0.06));
+            border-left: 4px solid var(--secondary); padding: var(--spacing-md);
+            border-radius: 0 8px 8px 0; margin-bottom: var(--spacing-lg); font-size: 0.86rem; color: var(--text-secondary);
         }
 
-        /* ========== OPTIONAL TOGGLE ========== */
         .optional-toggle {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            cursor: pointer;
-            padding: var(--spacing-md) 0;
-            border-top: 1px dashed var(--border);
-            margin-top: var(--spacing-md);
-            user-select: none;
+            display: flex; align-items: center; gap: var(--spacing-sm);
+            color: var(--text-secondary); font-size: 0.86rem; cursor: pointer;
+            padding: var(--spacing-md) 0; border-top: 1px dashed var(--border); margin-top: var(--spacing-md);
         }
+        .optional-toggle:hover { color: var(--primary); }
+        .optional-toggle svg { width: 18px; height: 18px; transition: var(--transition); }
+        .optional-toggle.open svg { transform: rotate(180deg); }
+        .optional-content { display: none; padding-top: var(--spacing-md); }
+        .optional-content.show { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md); }
 
-        .optional-toggle:hover {
-            color: var(--primary);
-        }
-
-        .optional-toggle svg {
-            width: 20px;
-            height: 20px;
-            transition: var(--transition);
-        }
-
-        .optional-toggle.open svg {
-            transform: rotate(180deg);
-        }
-
-        .optional-content {
-            display: none;
-            padding-top: var(--spacing-md);
-        }
-
-        .optional-content.show {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-md);
-        }
-
-        /* ========== GENERATE BUTTON ========== */
         .generate-btn {
-            width: 100%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--spacing-sm);
-            padding: var(--spacing-lg);
-            font-size: 1.1rem;
-            font-weight: 700;
+            width: 100%; display: inline-flex; align-items: center; justify-content: center;
+            gap: var(--spacing-sm); padding: var(--spacing-lg); font-size: 1.08rem; font-weight: 700;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            border-radius: var(--radius-full);
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 8px 30px rgba(193, 39, 45, 0.3);
-            margin-top: var(--spacing-lg);
+            color: white; border: none; border-radius: var(--radius-full); cursor: pointer;
+            transition: var(--transition); box-shadow: 0 8px 25px rgba(193, 39, 45, 0.28); margin-top: var(--spacing-lg);
         }
+        .generate-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 35px rgba(193, 39, 45, 0.38); }
+        .generate-btn:disabled { background: var(--text-light); cursor: not-allowed; transform: none; box-shadow: none; }
 
-        .generate-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(193, 39, 45, 0.4);
-        }
-
-        .generate-btn:disabled {
-            background: var(--text-light);
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        /* ========== PREVIEW CARD ========== */
-        .preview-card {
-            display: flex;
-            flex-direction: column;
-            min-height: 600px;
-        }
-
+        /* PREVIEW & 4 BUTTONS */
+        .preview-card { display: flex; flex-direction: column; min-height: 600px; }
         .preview-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: var(--spacing-lg) var(--spacing-xl);
-            border-bottom: 1px solid var(--border-light);
-            flex-wrap: wrap;
-            gap: var(--spacing-sm);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: var(--spacing-lg) var(--spacing-xl); border-bottom: 1px solid var(--border-light);
         }
-
-        .preview-header h2 {
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
+        .preview-header h2 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; }
 
         .preview-actions {
-            display: none;
-            flex-direction: column;
-            gap: var(--spacing-md);
-            width: 100%;
-            padding: 0 var(--spacing-xl) var(--spacing-md);
+            display: none; flex-direction: column; gap: var(--spacing-md);
+            width: 100%; padding: var(--spacing-md) var(--spacing-xl);
+            background: #ffffff; border-bottom: 1px solid var(--border);
         }
-
-        .preview-actions.show {
-            display: flex;
-        }
+        .preview-actions.show { display: flex; }
 
         .download-section {
-            background: var(--bg-secondary);
-            border-radius: var(--radius-lg);
-            padding: var(--spacing-md);
-            border: 1px solid var(--border-light);
+            background: var(--bg-secondary); border-radius: var(--radius-lg);
+            padding: var(--spacing-md); border: 1.5px solid var(--border);
         }
-
         .download-section-title {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--text-secondary);
-            margin-bottom: var(--spacing-sm);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-xs);
+            font-size: 0.85rem; font-weight: 700; color: var(--text-primary);
+            margin-bottom: var(--spacing-sm); display: flex; align-items: center; gap: var(--spacing-xs);
+        }
+        .download-section-title .badge {
+            font-size: 0.72rem; padding: 2px 8px; border-radius: 9999px;
+            background: #e2e8f0; color: #334155; font-weight: 800; margin-left: 6px;
         }
 
-        .download-buttons {
-            display: flex;
-            gap: var(--spacing-sm);
-            flex-wrap: wrap;
-        }
+        .download-buttons { display: flex; gap: var(--spacing-sm); flex-wrap: wrap; }
 
+        /* Styles spécifiques Section Projet Complet */
         .download-section.projet-complet {
-            background: linear-gradient(135deg, rgba(230, 81, 0, 0.08), rgba(191, 54, 12, 0.08));
-            border-color: rgba(230, 81, 0, 0.3);
+            background: linear-gradient(135deg, rgba(234, 88, 12, 0.08), rgba(194, 65, 12, 0.06));
+            border-color: rgba(234, 88, 12, 0.35);
         }
-
-        .download-section.projet-complet .download-section-title {
-            color: #bf360c;
-        }
+        .download-section.projet-complet .download-section-title { color: #c2410c; }
+        .download-section.projet-complet .badge { background: #ffedd5; color: #9a3412; }
 
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--spacing-sm);
-            padding: var(--spacing-sm) var(--spacing-lg);
-            font-weight: 600;
-            font-size: 0.85rem;
-            border-radius: var(--radius-full);
-            transition: var(--transition);
-            cursor: pointer;
-            border: none;
-            flex: 1;
-            min-width: 120px;
-            white-space: nowrap;
+            display: inline-flex; align-items: center; justify-content: center;
+            gap: var(--spacing-sm); padding: 10px 18px; font-weight: 700; font-size: 0.88rem;
+            border-radius: var(--radius-full); transition: var(--transition);
+            cursor: pointer; border: none; flex: 1; min-width: 180px; text-align: center;
         }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
+        .btn:hover { transform: translateY(-2px); }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
         .btn-word {
-            background: linear-gradient(135deg, #2b579a, #1e3a5f);
-            color: white;
-            box-shadow: 0 3px 10px rgba(43, 87, 154, 0.3);
+            background: linear-gradient(135deg, #1e3a8a, #1d4ed8); color: white;
+            box-shadow: 0 4px 12px rgba(29, 78, 216, 0.25);
         }
-
         .btn-pdf {
-            background: linear-gradient(135deg, #dc3545, #c82333);
-            color: white;
-            box-shadow: 0 3px 10px rgba(220, 53, 69, 0.3);
+            background: linear-gradient(135deg, #b91c1c, #dc2626); color: white;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);
         }
-
         .btn-word-orange {
-            background: linear-gradient(135deg, #e65100, #bf360c);
-            color: white;
-            box-shadow: 0 3px 10px rgba(230, 81, 0, 0.3);
+            background: linear-gradient(135deg, #c2410c, #ea580c); color: white;
+            box-shadow: 0 4px 14px rgba(234, 88, 12, 0.32);
         }
-
         .btn-pdf-orange {
-            background: linear-gradient(135deg, #ff6d00, #e65100);
-            color: white;
-            box-shadow: 0 3px 10px rgba(255, 109, 0, 0.3);
+            background: linear-gradient(135deg, #9a3412, #c2410c); color: white;
+            box-shadow: 0 4px 14px rgba(194, 65, 12, 0.32);
         }
 
-        .preview-content {
-            flex: 1;
-            padding: var(--spacing-xl);
-            overflow: auto;
-            background: var(--bg-secondary);
-        }
-
+        .preview-content { flex: 1; padding: var(--spacing-xl); overflow: auto; background: var(--bg-secondary); }
         .preview-empty {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            min-height: 400px;
-            color: var(--text-light);
-            text-align: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            min-height: 380px; color: var(--text-light); text-align: center;
         }
-
-        .preview-empty-icon {
-            font-size: 4rem;
-            opacity: 0.3;
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .preview-empty h3 {
-            font-size: 1.2rem;
-            color: var(--text-primary);
-            margin-bottom: var(--spacing-sm);
-        }
-
+        .preview-empty-icon { font-size: 4rem; opacity: 0.35; margin-bottom: var(--spacing-md); }
         .preview-document {
-            background: var(--bg-card);
-            padding: var(--spacing-xl);
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-sm);
-            font-size: 1rem;
-            line-height: 1.6;
+            background: var(--bg-card); padding: var(--spacing-xl); border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-sm); font-size: 0.96rem; line-height: 1.5;
         }
-
-        .preview-document table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: var(--spacing-md) 0;
-            font-size: 0.92rem;
+        .preview-document table { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
+        .preview-document th, .preview-document td {
+            border: 1px solid #111; padding: 7px 9px; vertical-align: top;
         }
-
-        .preview-document th,
-        .preview-document td {
-            padding: 8px 10px;
-            border: 1px solid var(--border);
-            text-align: left;
-            vertical-align: top;
-        }
-
-        .preview-document th {
-            background: var(--bg-secondary);
-            font-weight: 700;
-        }
+        .preview-document th { background: #f1f5f9; font-weight: 700; }
 
         @media (max-width: 1200px) {
-            .generator-container {
-                grid-template-columns: 1fr;
-                max-width: 900px;
-            }
+            .generator-container { grid-template-columns: 1fr; max-width: 900px; }
         }
-
         @media (max-width: 640px) {
-            .generator-container {
-                padding: 0 var(--spacing-sm) var(--spacing-xl);
-            }
-            .form-row, .optional-content.show {
-                grid-template-columns: 1fr;
-            }
-            .download-buttons {
-                flex-direction: column;
-            }
+            .generator-container { padding: 0 var(--spacing-sm) var(--spacing-xl); }
+            .form-row, .optional-content.show { grid-template-columns: 1fr; }
+            .download-buttons { flex-direction: column; }
+            .btn { width: 100%; min-width: 0; }
         }
     </style>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8253776880916865" crossorigin="anonymous"></script>
-
-    <!-- Master Unifier CSS -->
+    <!-- Master Navbar CSS -->
     <style id="profeps-master-unifier-css">
-    html { overflow-y: scroll !important; }
-    nav.navbar, #navbar, .navbar-decoy {
-      display: none !important;
-      visibility: hidden !important;
-      opacity: 0 !important;
-      height: 0 !important;
-      width: 0 !important;
-      position: absolute !important;
-      z-index: -9999 !important;
-    }
+    nav.navbar, #navbar, .navbar-decoy { display: none !important; }
     #pepsNavbar.peps-navbar {
-      position: fixed !important;
-      top: 0 !important; left: 0 !important; right: 0 !important;
-      height: 80px !important; min-height: 80px !important;
-      padding: 0 2rem !important; z-index: 2147483000 !important;
-      background: rgba(255, 255, 255, 0.98) !important;
-      backdrop-filter: blur(20px) !important;
+      position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important;
+      height: 80px !important; padding: 0 2rem !important; z-index: 2147483000 !important;
+      background: rgba(255, 255, 255, 0.98) !important; backdrop-filter: blur(20px) !important;
       border-bottom: 1px solid rgba(226, 232, 240, 0.85) !important;
-      box-shadow: 0 2px 14px rgba(15, 23, 42, 0.04) !important;
-      display: flex !important; align-items: center !important;
+      box-shadow: 0 2px 14px rgba(15, 23, 42, 0.04) !important; display: flex !important; align-items: center !important;
     }
     #pepsNavbar .peps-nav-container {
-      width: 100% !important; max-width: 1400px !important;
-      margin: 0 auto !important; display: grid !important;
-      grid-template-columns: 1fr auto 1fr !important; align-items: center !important;
+      width: 100% !important; max-width: 1400px !important; margin: 0 auto !important;
+      display: grid !important; grid-template-columns: 1fr auto 1fr !important; align-items: center !important;
     }
-    #pepsNavbar .peps-nav-logo {
-      justify-self: start !important; display: inline-flex !important; align-items: center !important;
-    }
-    #pepsNavbar .peps-nav-logo img {
-      height: 52px !important; width: auto !important; max-width: 160px !important; display: block !important;
-    }
-    #pepsNavbar .peps-nav-menu {
-      display: flex !important; align-items: center !important; justify-content: center !important;
-      gap: 2rem !important; list-style: none !important; margin: 0 !important; padding: 0 !important;
-    }
-    #pepsNavbar .peps-nav-right {
-      justify-self: end !important; display: flex !important; align-items: center !important; gap: 0.75rem !important;
-    }
-    #pepsNavbar .peps-nav-link {
-      font-size: 0.9375rem !important; font-weight: 600 !important; color: #1a1a2e !important;
-      padding: 0.5rem 0.65rem !important; text-decoration: none !important;
-    }
-    #pepsNavbar .peps-nav-link.active,
-    #pepsNavbar .peps-nav-link:hover {
-      color: #c1272d !important;
-    }
+    #pepsNavbar .peps-nav-logo img { height: 52px !important; width: auto !important; display: block !important; }
+    #pepsNavbar .peps-nav-menu { display: flex !important; align-items: center !important; gap: 2rem !important; }
+    #pepsNavbar .peps-nav-link { font-size: 0.9375rem !important; font-weight: 600 !important; color: #1a1a2e !important; }
+    #pepsNavbar .peps-nav-link.active { color: #c1272d !important; }
     #pepsNavbar .peps-dropdown { position: relative !important; display: inline-flex !important; }
     #pepsNavbar .peps-dropdown-menu {
       position: absolute !important; top: calc(100% - 6px) !important; left: 50% !important;
-      transform: translateX(-50%) translateY(8px) !important; width: 340px !important;
+      transform: translateX(-50%) translateY(8px) !important; width: 330px !important;
       background: #ffffff !important; border: 1px solid #e2e8f0 !important; border-radius: 14px !important;
       box-shadow: 0 20px 45px -6px rgba(15, 23, 42, 0.22) !important; padding: 0.55rem !important;
       display: flex !important; flex-direction: column !important; opacity: 0 !important;
       visibility: hidden !important; pointer-events: none !important; transition: all 0.2s ease !important;
-      z-index: 2147483647 !important;
     }
-    #pepsNavbar .peps-dropdown:hover .peps-dropdown-menu,
-    #pepsNavbar .peps-dropdown.open .peps-dropdown-menu {
-      opacity: 1 !important; visibility: visible !important; pointer-events: auto !important;
-      transform: translateX(-50%) translateY(0) !important;
+    #pepsNavbar .peps-dropdown:hover .peps-dropdown-menu {
+      opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; transform: translateX(-50%) translateY(0) !important;
     }
     #pepsNavbar .peps-dropdown-item {
-      padding: 0.5rem 0.75rem !important; font-size: 0.83rem !important; font-weight: 500 !important;
-      color: #0f172a !important; text-decoration: none !important; border-radius: 8px !important;
+      padding: 0.45rem 0.75rem !important; font-size: 0.83rem !important; color: #0f172a !important; border-radius: 8px !important;
     }
-    #pepsNavbar .peps-dropdown-item:hover {
-      background: #f1f5f9 !important; color: #c1272d !important;
-    }
+    #pepsNavbar .peps-dropdown-item:hover { background: #f1f5f9 !important; color: #c1272d !important; }
     #pepsNavbar .peps-lang-switch {
-      display: inline-flex !important; background: #f1f5f9 !important;
-      border: 1px solid #cbd5e1 !important; border-radius: 9999px !important; padding: 3px 4px !important;
+      display: inline-flex !important; background: #f1f5f9 !important; border: 1px solid #cbd5e1 !important;
+      border-radius: 9999px !important; padding: 3px 4px !important;
     }
     #pepsNavbar .peps-lang-btn {
       background: transparent !important; border: none !important; cursor: pointer !important;
       padding: 5px 11px !important; font-size: 0.78rem !important; font-weight: 600 !important;
       color: #475569 !important; border-radius: 9999px !important;
     }
-    #pepsNavbar .peps-lang-btn.active {
-      background: #ffffff !important; color: #0f172a !important; box-shadow: 0 1px 4px rgba(15, 23, 42, 0.14) !important;
-    }
-    #pepsNavbar .peps-nav-toggle {
-      display: none !important; flex-direction: column !important; gap: 5px !important;
-      background: none !important; border: none !important; cursor: pointer !important; padding: 0.5rem !important;
-    }
-    #pepsNavbar .peps-nav-toggle span {
-      width: 24px !important; height: 2.5px !important; background: #1a1a2e !important; border-radius: 2px !important;
-    }
+    #pepsNavbar .peps-lang-btn.active { background: #ffffff !important; color: #0f172a !important; box-shadow: 0 1px 4px rgba(15,23,42,0.14) !important; }
+    #pepsNavbar .peps-nav-toggle { display: none !important; flex-direction: column !important; gap: 5px !important; background: none; border: none; cursor: pointer; }
+    #pepsNavbar .peps-nav-toggle span { width: 24px !important; height: 2.5px !important; background: #1a1a2e !important; }
     @media (max-width: 900px) {
       #pepsNavbar .peps-nav-container { display: flex !important; justify-content: space-between !important; }
       #pepsNavbar .peps-nav-toggle { display: flex !important; }
       #pepsNavbar .peps-nav-menu {
         position: fixed !important; top: 80px !important; left: 0 !important; right: 0 !important;
-        background: #ffffff !important; flex-direction: column !important; padding: 1.5rem !important;
-        display: none !important; box-shadow: 0 12px 30px rgba(0,0,0,0.12) !important;
+        background: #ffffff !important; flex-direction: column !important; padding: 1.5rem !important; display: none !important;
       }
       #pepsNavbar .peps-nav-menu.active { display: flex !important; }
-      #pepsNavbar .peps-dropdown .peps-dropdown-menu {
-        position: static !important; transform: none !important; width: 100% !important;
-        opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; box-shadow: none !important;
-      }
     }
-    /* Footer styles */
     .footer { background: linear-gradient(135deg, #15192b 0%, #162038 100%) !important; color: #ffffff !important; padding: 3.5rem 2rem 1.5rem !important; margin-top: 4rem !important; }
     .footer-container { max-width: 1360px !important; margin: 0 auto !important; }
-    .footer-grid { display: grid !important; grid-template-columns: 1.65fr 0.9fr 1.1fr 1.45fr 1fr !important; gap: 2rem !important; margin-bottom: 2rem !important; }
-    .footer-col h4 { font-size: 0.76rem !important; font-weight: 800 !important; color: rgba(255,255,255,0.48) !important; margin-bottom: 1rem !important; letter-spacing: 0.08em !important; }
+    .footer-grid { display: grid !important; grid-template-columns: 1.6fr 0.9fr 1.1fr 1.4fr 1fr !important; gap: 2rem !important; margin-bottom: 2rem !important; }
+    .footer-col h4 { font-size: 0.76rem !important; font-weight: 800 !important; color: rgba(255,255,255,0.48) !important; margin-bottom: 1rem !important; }
     .footer-col ul { list-style: none !important; display: flex !important; flex-direction: column !important; gap: 0.5rem !important; }
-    .footer-col ul li a { color: rgba(255,255,255,0.76) !important; font-size: 0.83rem !important; text-decoration: none !important; }
+    .footer-col ul li a { color: rgba(255,255,255,0.76) !important; font-size: 0.83rem !important; }
     .footer-col ul li a:hover { color: #ffffff !important; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.09) !important; padding-top: 1.25rem !important; display: flex !important; justify-content: space-between !important; font-size: 0.79rem !important; color: rgba(255,255,255,0.48) !important; flex-wrap: wrap; gap: 0.75rem; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.09) !important; padding-top: 1.25rem !important; display: flex !important; justify-content: space-between !important; font-size: 0.79rem !important; color: rgba(255,255,255,0.48) !important; }
     @media (max-width: 968px) { .footer-grid { grid-template-columns: 1fr 1fr !important; } }
     @media (max-width: 640px) { .footer-grid { grid-template-columns: 1fr !important; } }
     </style>
@@ -832,9 +394,9 @@
 
 <body>
   <!-- UNIFIED NAVBAR -->
-  <div class="peps-navbar" id="pepsNavbar" role="navigation" aria-label="Navigation principale">
+  <div class="peps-navbar" id="pepsNavbar">
     <div class="peps-nav-container">
-      <a href="index.html" class="peps-nav-logo" aria-label="Prof EPS Maroc - Accueil">
+      <a href="index.html" class="peps-nav-logo">
         <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc">
       </a>
       <div class="peps-nav-menu" id="pepsNavMenu">
@@ -846,14 +408,9 @@
             <a href="hub-outils-sport-performance.html" class="peps-dropdown-item">🧭 Tous les Calculateurs Sport</a>
             <a href="calculateur-vma.html" class="peps-dropdown-item">⚡ Calculateur VMA & Allures</a>
             <a href="calculateur-vdot-asr-endurance.html" class="peps-dropdown-item">🫁 Calculateur VO2 Max & VDOT</a>
-            <a href="calculateur-asr-reserve-vitesse.html" class="peps-dropdown-item">🚀 Réserve de Vitesse Anaérobie (ASR)</a>
-            <a href="calculateur-indice-endurance.html" class="peps-dropdown-item">📈 Indice d'Endurance (Péronnet)</a>
-            <a href="calculateur-frequence-cardiaque-karvonen.html" class="peps-dropdown-item">❤️ Fréquence Cardiaque (Karvonen)</a>
-            <a href="calculateur-imc-sportif-masse-grasse.html" class="peps-dropdown-item">⚖️ Calculateur IMC & Masse Grasse</a>
-            <a href="calculateur-chaleur-meteo-altitude.html" class="peps-dropdown-item">☀️ Chaleur, Humidité & Altitude</a>
-            <a href="calculateur-gap-pente-nutrition.html" class="peps-dropdown-item">⛰️ Allure Pente (GAP) & Nutrition</a>
-            <a href="generateur-intermittent-hiit-cod.html" class="peps-dropdown-item">🔄 Intermittent HIIT & COD 180°</a>
-            <a href="calculateur-charge-rpe-foster-acwr.html" class="peps-dropdown-item">🛡️ Charge RPE Foster & ACWR</a>
+            <a href="calculateur-asr-reserve-vitesse.html" class="peps-dropdown-item">🚀 Réserve Anaérobie (ASR)</a>
+            <a href="calculateur-indice-endurance.html" class="peps-dropdown-item">📈 Indice d'Endurance</a>
+            <a href="calculateur-charge-rpe-foster-acwr.html" class="peps-dropdown-item">🛡️ Charge RPE & ACWR</a>
           </div>
         </div>
         <a href="blog.html" class="peps-nav-link">Blog</a>
@@ -875,7 +432,7 @@
   <div class="loading-overlay" id="loadingOverlay">
       <div class="loading-spinner"></div>
       <div class="loading-text" id="loadingText">⚡ Génération en cours...</div>
-      <div class="loading-subtext" id="loadingSubtext">Création de votre document personnalisé</div>
+      <div class="loading-subtext" id="loadingSubtext">Création de votre document pédagogique</div>
       <div class="progress-container" id="progressContainer" style="display: none;">
           <div class="progress-bar" id="progressBar">
               <div class="progress-fill" id="progressFill"></div>
@@ -887,8 +444,8 @@
   <!-- MAIN CONTENT -->
   <main class="main-content">
       <div class="page-header">
-          <h1>Générateur de <span>Fiches Pédagogiques EPS</span> — Maroc</h1>
-          <p>Créez vos fiches de séance, projets de cycle et grilles d'évaluation conformes aux Orientations Pédagogiques 2007-2009</p>
+          <h1>Générateur de <span>Fiches Pédagogiques & Cycles EPS</span> — Maroc</h1>
+          <p>Conforme aux Orientations Pédagogiques du Ministère (OP 2007 Lycée & OP 2009 Collège)</p>
       </div>
 
       <div class="generator-container">
@@ -977,7 +534,7 @@
 
                       <!-- PROJET Fields -->
                       <div id="projetFields" class="conditional">
-                          <div class="info-box">📌 <strong>Structure pédagogique automatique (OP Maroc) :</strong> S1 = Évaluation diagnostique | Séances intermédiaires = Acquisitions & Rôles sociaux | Dernière séance = Évaluation sommative.</div>
+                          <div class="info-box">📌 <strong>Structure pédagogique automatique (OP Maroc) :</strong> S1 = Évaluation diagnostique | S2 à S9 = Acquisitions motrices, tactiques & Rôles sociaux | S10 = Évaluation sommative terminale.</div>
                           <div class="form-row">
                               <div class="form-group">
                                   <label class="form-label" for="niveauEleves"><span>🎚️</span> Niveau des élèves</label>
@@ -1004,7 +561,7 @@
                           <div class="form-group">
                               <label class="form-label" for="typeGrille"><span>📋</span> Type de grille</label>
                               <select class="form-select" id="typeGrille">
-                                  <option value="evaluation" selected>📊 Grille d'évaluation sommative (sur 20 pts)</option>
+                                  <option value="evaluation" selected>📊 Grille d'évaluation sommative (/20 pts)</option>
                                   <option value="observation">👁️ Grille d'observation formative (Critères & Rôles sociaux)</option>
                               </select>
                           </div>
@@ -1015,7 +572,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                               <polyline points="6 9 12 15 18 9"></polyline>
                           </svg>
-                          <span>Afficher les options d'en-tête officielles (Professeur, Établissement...)</span>
+                          <span>Afficher les options d'en-tête (Professeur, Établissement...)</span>
                       </div>
                       <div class="optional-content" id="optionalContent">
                           <div class="form-group">
@@ -1043,33 +600,44 @@
               </div>
           </div>
 
-          <!-- APERÇU -->
+          <!-- APERÇU & 4 BOUTONS CLAIREMENT SÉPARÉS -->
           <div class="card preview-card">
               <div class="preview-header">
                   <h2>📄 Aperçu du document</h2>
               </div>
               
-              <!-- ACTIONS DE TÉLÉCHARGEMENT -->
               <div class="preview-actions" id="previewActions">
+                  <!-- SECTION 1 : DOCUMENT SIMPLE (PROJET SEUL / FICHE SEULE / GRILLE) -->
                   <div class="download-section" id="downloadSectionSimple">
                       <div class="download-section-title">
-                          <span class="icon">📊</span>
-                          <span id="downloadSectionTitle">Fiche de Séance</span>
+                          <span>📄</span>
+                          <span id="downloadSectionTitle">Projet de Cycle (Seul)</span>
+                          <span class="badge" id="downloadBadgeSimple">1 page</span>
                       </div>
                       <div class="download-buttons">
-                          <button type="button" class="btn btn-word" id="downloadWord">📥 Télécharger Word (.doc)</button>
-                          <button type="button" class="btn btn-pdf" id="downloadPDF">📄 Télécharger PDF</button>
+                          <button type="button" class="btn btn-word" id="downloadWord">
+                              📥 Word (Projet seul)
+                          </button>
+                          <button type="button" class="btn btn-pdf" id="downloadPDF">
+                              📄 PDF (Projet seul)
+                          </button>
                       </div>
                   </div>
                   
+                  <!-- SECTION 2 : PACK COMPLET (PROJET + TOUTES LES FICHES MULTI-PAGES) -->
                   <div class="download-section projet-complet" id="downloadSectionComplet" style="display: none;">
                       <div class="download-section-title">
-                          <span class="icon">📦</span>
-                          <span>Pack Projet Complet (Projet + Toutes les fiches du cycle)</span>
+                          <span>📦</span>
+                          <span>Pack Projet Complet Multi-Pages (Cycle + Toutes les Fiches de Séance)</span>
+                          <span class="badge" id="downloadBadgeComplet">11 pages</span>
                       </div>
                       <div class="download-buttons">
-                          <button type="button" class="btn btn-word-orange" id="downloadProjetCompletWord">📥 Pack Complet Word</button>
-                          <button type="button" class="btn btn-pdf-orange" id="downloadProjetCompletPDF">📄 Pack Complet PDF</button>
+                          <button type="button" class="btn btn-word-orange" id="downloadProjetCompletWord">
+                              📦 Pack Complet Word (.doc)
+                          </button>
+                          <button type="button" class="btn btn-pdf-orange" id="downloadProjetCompletPDF">
+                              📄 Pack Complet PDF (Toutes les fiches)
+                          </button>
                       </div>
                   </div>
               </div>
@@ -1078,17 +646,12 @@
                   <div class="preview-empty" id="previewEmpty">
                       <div class="preview-empty-icon">📄</div>
                       <h3>Aucun document généré</h3>
-                      <p>Choisissez votre document, sélectionnez le niveau et l'APS, puis cliquez sur <strong>Générer le document</strong>.</p>
+                      <p>Choisissez le type de document, renseignez le formulaire puis cliquez sur <strong>Générer le document</strong>.</p>
                   </div>
                   <div class="preview-document" id="previewDocument" style="display:none;"></div>
               </div>
           </div>
       </div>
-
-      <section id="guide-methodologique-generateur" style="max-width:1000px; margin:3rem auto; padding:2.5rem; background:#ffffff; border-radius:16px; border:1px solid #e2e8f0; line-height:1.8; color:#1a1a2e;">
-          <h2 style="font-size:1.6rem; margin-bottom:1rem; color:#c1272d;">Guide Méthodologique : Fiches & Cycles EPS au Maroc (OP 2007 & 2009)</h2>
-          <p>La préparation didactique de la leçon d'EPS au Maroc s'articule autour des <strong>Orientations Pédagogiques de 2009 pour le collège</strong> et de <strong>2007 pour le lycée</strong>. Cet outil garantit le respect scrupuleux de l'Approche Par Compétences (APC), de la formulation des Objectifs Terminaux d'Intégration (OTI), des Objectifs Terminaux de Cycle (OTC) et de la déclinaison en situations d'apprentissage motrices avec critères de réussite clairs et observables.</p>
-      </section>
   </main>
 
   <!-- FOOTER -->
@@ -1097,7 +660,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:48px;width:auto;margin-bottom:1rem;">
-          <p style="font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.6;">Plateforme de référence pour les enseignants d'EPS et les préparateurs physiques au Maroc. Documents et calculateurs conformes aux programmes officiels.</p>
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.6;">Plateforme de référence pour les enseignants d'EPS au Maroc. Documents pédagogiques conformes aux programmes officiels MENPS.</p>
         </div>
         <div class="footer-col">
           <h4>NAVIGATION</h4>
@@ -1108,7 +671,7 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h4>PROGRAMMES EPS</h4>
+          <h4>PROGRAMMES</h4>
           <ul>
             <li><a href="cycles-eps-maroc.html">Cycles d'EPS</a></li>
             <li><a href="programme-eps-maroc.html">Programme MEN</a></li>
@@ -1116,10 +679,10 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h4>CALCULATEURS SPORT</h4>
+          <h4>CALCULATEURS</h4>
           <ul>
             <li><a href="hub-outils-sport-performance.html" style="color:#4ade80;font-weight:700;">★ Hub des 10 Outils</a></li>
-            <li><a href="calculateur-vma.html">Calculateur VMA & Allures</a></li>
+            <li><a href="calculateur-vma.html">Calculateur VMA</a></li>
             <li><a href="calculateur-charge-rpe-foster-acwr.html">Charge RPE & ACWR</a></li>
           </ul>
         </div>
@@ -1127,21 +690,19 @@
           <h4>CONTACT</h4>
           <ul>
             <li><a href="contact.html">Nous contacter</a></li>
-            <li><a href="mentions-legales.html">Mentions légales</a></li>
             <li><a href="mailto:profepsma@gmail.com">profepsma@gmail.com</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
         <span>© 2026 Prof EPS Maroc (profeps.ma). Tous droits réservés.</span>
-        <span>Conforme aux Orientations Pédagogiques officielles marocaines (OP 2007-2009).</span>
+        <span>Conforme aux Orientations Pédagogiques (OP 2007-2009).</span>
       </div>
     </div>
   </footer>
 
-  <!-- SCRIPT MAÎTRE SÉCURISÉ & ROBUSTE -->
+  <!-- SCRIPT MAÎTRE SÉCURISÉ AVEC GESTION MULTI-PAGES STRICTE -->
   <script>
-    // Variables d'état
     let currentType = 'fiche';
     let currentHtml = '';
     let currentHtmlDisplay = '';
@@ -1149,60 +710,33 @@
     let projetCompletHtml = '';
     let projetCompletFilename = '';
 
-    // Gestion navbar scroll
-    window.addEventListener('scroll', () => {
-        const n = document.getElementById('pepsNavbar');
-        if (n) n.classList.toggle('scrolled', window.scrollY > 40);
-    });
+    // Définition de la balise canonique de saut de page pour Word & PDF
+    const PAGE_BREAK_MARKER = '<br clear="all" style="page-break-before:always;mso-special-character:line-break;" />';
 
-    // Toggle menu mobile de la navbar
-    const pepsNavToggle = document.getElementById('pepsNavToggle');
-    const pepsNavMenu = document.getElementById('pepsNavMenu');
-    if (pepsNavToggle && pepsNavMenu) {
-        pepsNavToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            pepsNavToggle.classList.toggle('active');
-            pepsNavMenu.classList.toggle('active');
-        });
-    }
-
-    // Changement d'onglet : FONCTION MAÎTRESSE APPELABLE EN CLIC OU PAR CODE
+    // Switch des onglets
     window.switchDocumentType = function(type) {
         if (!type) return;
         currentType = type;
 
-        // Mise à jour visuelle des boutons d'onglets
         document.querySelectorAll('.tab').forEach(t => {
-            if (t.dataset.type === type) {
-                t.classList.add('active');
-            } else {
-                t.classList.remove('active');
-            }
+            t.classList.toggle('active', t.dataset.type === type);
         });
 
-        // Masquer tous les conteneurs conditionnels puis afficher le bon
-        const allFields = document.querySelectorAll('.conditional');
-        allFields.forEach(f => f.classList.remove('show'));
-
+        document.querySelectorAll('.conditional').forEach(f => f.classList.remove('show'));
         const targetFields = document.getElementById(type + 'Fields');
-        if (targetFields) {
-            targetFields.classList.add('show');
-        }
+        if (targetFields) targetFields.classList.add('show');
 
-        // Réinitialiser l'aperçu pour éviter les incohérences
         clearPreview();
     };
 
-    // Attacher aussi l'écouteur aux boutons tabs pour une compatibilité totale
     document.querySelectorAll('.tab').forEach(tab => {
         tab.addEventListener('click', function(e) {
             e.preventDefault();
-            const docType = this.dataset.type;
-            window.switchDocumentType(docType);
+            window.switchDocumentType(this.dataset.type);
         });
     });
 
-    // Déplier/Replier les options supplémentaires d'en-tête
+    // Options supplémentaires toggle
     const optionalToggle = document.getElementById('optionalToggle');
     const optionalContent = document.getElementById('optionalContent');
     if (optionalToggle && optionalContent) {
@@ -1212,18 +746,11 @@
         });
     }
 
-    // Réinitialisation de l'aperçu
     function clearPreview() {
-        const pe = document.getElementById('previewEmpty');
-        const pd = document.getElementById('previewDocument');
-        const pa = document.getElementById('previewActions');
-        const psc = document.getElementById('downloadSectionComplet');
-        
-        if (pe) pe.style.display = 'flex';
-        if (pd) pd.style.display = 'none';
-        if (pa) pa.classList.remove('show');
-        if (psc) psc.style.display = 'none';
-        
+        document.getElementById('previewEmpty').style.display = 'flex';
+        document.getElementById('previewDocument').style.display = 'none';
+        document.getElementById('previewActions').classList.remove('show');
+        document.getElementById('downloadSectionComplet').style.display = 'none';
         currentHtml = '';
         currentHtmlDisplay = '';
         currentFilename = '';
@@ -1237,7 +764,7 @@
         const ls = document.getElementById('loadingSubtext');
         const pc = document.getElementById('progressContainer');
         if (lt) lt.textContent = text || '⚡ Génération en cours...';
-        if (ls) ls.textContent = subtext || 'Création de votre document personnalisé';
+        if (ls) ls.textContent = subtext || 'Création de votre document pédagogique';
         if (ov) ov.classList.add('show');
         if (pc) {
             pc.style.display = showProgress ? 'block' : 'none';
@@ -1246,10 +773,8 @@
     }
 
     function hideLoading() {
-        const ov = document.getElementById('loadingOverlay');
-        const pc = document.getElementById('progressContainer');
-        if (ov) ov.classList.remove('show');
-        if (pc) pc.style.display = 'none';
+        document.getElementById('loadingOverlay').classList.remove('show');
+        document.getElementById('progressContainer').style.display = 'none';
         updateProgress(0);
     }
 
@@ -1260,10 +785,10 @@
         if (txt) txt.textContent = Math.round(percent) + '%';
     }
 
-    function showError(message) {
+    function showError(msg) {
         const toast = document.createElement('div');
         toast.className = 'error-toast';
-        toast.innerHTML = `<div class="error-toast-content"><span>⚠️</span><span>${message}</span></div>`;
+        toast.innerHTML = `<div class="error-toast-content"><span>⚠️</span><span>${msg}</span></div>`;
         document.body.appendChild(toast);
         setTimeout(() => toast.classList.add('show'), 10);
         setTimeout(() => {
@@ -1272,10 +797,10 @@
         }, 4000);
     }
 
-    function showSuccess(message) {
+    function showSuccess(msg) {
         const toast = document.createElement('div');
         toast.className = 'success-toast';
-        toast.innerHTML = `<div class="success-toast-content"><span>✅</span><span>${message}</span></div>`;
+        toast.innerHTML = `<div class="success-toast-content"><span>✅</span><span>${msg}</span></div>`;
         document.body.appendChild(toast);
         setTimeout(() => toast.classList.add('show'), 10);
         setTimeout(() => {
@@ -1287,501 +812,522 @@
     function validateForm() {
         const niveau = document.getElementById('niveau')?.value;
         const aps = document.getElementById('aps')?.value;
-        
-        if (!niveau) {
-            showError('Veuillez sélectionner un niveau scolaire.');
-            return false;
-        }
-        if (!aps) {
-            showError('Veuillez sélectionner une APS (activité physique et sportive).');
-            return false;
-        }
+        if (!niveau) { showError('Veuillez sélectionner un niveau scolaire.'); return false; }
+        if (!aps) { showError('Veuillez sélectionner une APS.'); return false; }
         if (currentType === 'fiche') {
-            const objectif = document.getElementById('objectif')?.value?.trim();
-            if (!objectif) {
-                showError('Veuillez formuler un objectif de séance.');
-                return false;
-            }
+            const obj = document.getElementById('objectif')?.value?.trim();
+            if (!obj) { showError('Veuillez saisir un objectif de séance.'); return false; }
         }
         return true;
     }
 
-    function updateDownloadSectionTitle() {
+    function updateDownloadButtonsUI() {
         const titleEl = document.getElementById('downloadSectionTitle');
-        if (!titleEl) return;
-        switch (currentType) {
-            case 'fiche': titleEl.textContent = 'Fiche de Séance'; break;
-            case 'projet': titleEl.textContent = 'Projet de Cycle'; break;
-            case 'grille': titleEl.textContent = 'Grille d\'Évaluation'; break;
-            default: titleEl.textContent = 'Document EPS';
+        const badgeEl = document.getElementById('downloadBadgeSimple');
+        const badgeComplet = document.getElementById('downloadBadgeComplet');
+        const nbS = parseInt(document.getElementById('nombreSeances')?.value || '10');
+
+        if (currentType === 'fiche') {
+            titleEl.textContent = 'Fiche de Séance (Seule)';
+            badgeEl.textContent = '1 page';
+        } else if (currentType === 'projet') {
+            titleEl.textContent = 'Projet de Cycle (Seul)';
+            badgeEl.textContent = '1 page';
+            if (badgeComplet) badgeComplet.textContent = `${nbS + 1} pages (Projet + ${nbS} Fiches)`;
+        } else {
+            titleEl.textContent = 'Grille d\'Évaluation (Seule)';
+            badgeEl.textContent = '1 page';
         }
     }
 
-    // Récupérer données depuis localStorage ou paramètre URL
-    function initFormData() {
-        try {
-            const urlParams = new URLSearchParams(window.location.search);
-            const typeParam = urlParams.get('type') || urlParams.get('doc');
-            if (typeParam && ['fiche', 'projet', 'grille'].includes(typeParam)) {
-                window.switchDocumentType(typeParam);
-            }
+    // GÉNÉRATEUR DIDACTIQUE DE CONTENUS OP 2007-2009
+    function getPedagogicalPlanForAPS(aps, seanceNum, totalSeances) {
+        const isDiag = (seanceNum === 1);
+        const isBilan = (seanceNum === totalSeances);
 
-            const storedData = localStorage.getItem('profeps_formData');
-            if (storedData) {
-                const formData = JSON.parse(storedData);
-                localStorage.removeItem('profeps_formData');
-                
-                if (formData.niveau && document.getElementById('niveau')) document.getElementById('niveau').value = formData.niveau;
-                if (formData.aps && document.getElementById('aps')) document.getElementById('aps').value = formData.aps;
-                if (formData.nomProf && document.getElementById('nomProf')) document.getElementById('nomProf').value = formData.nomProf;
-                if (formData.etablissement && document.getElementById('etablissement')) document.getElementById('etablissement').value = formData.etablissement;
-                if (formData.anneeScolaire && document.getElementById('anneeScolaire')) document.getElementById('anneeScolaire').value = formData.anneeScolaire;
-                
-                if (formData.type && ['fiche', 'projet', 'grille'].includes(formData.type)) {
-                    window.switchDocumentType(formData.type);
-                }
-            }
-        } catch (e) {
-            console.log('Erreur initFormData:', e);
+        if (isDiag) {
+            return {
+                theme: `Évaluation diagnostique et prise de repères initiaux en ${aps}`,
+                situation: `Match ou situation de référence par poules de niveau. Évaluation diagnostique des conduites motrices et de l'efficacité individuelle et collective.`,
+                consignes: `S'engager loyalement, respecter les règles de jeu et observer les partenaires.`,
+                criteres: `Fiche d'observation diagnostique remplie par les élèves observateurs et le professeur.`
+            };
         }
-    }
-    initFormData();
 
-    // MOTEUR PÉDAGOGIQUE AUTONOME DE SECOURS (OP 2007 & OP 2009)
-    // Garantit que la page génère un document même si le backend est hors-ligne
-    function generateFallbackDocument(formData) {
+        if (isBilan) {
+            return {
+                theme: `Évaluation sommative terminale et validation des compétences du cycle en ${aps}`,
+                situation: `Tournoi d'application en situation sommative avec arbitrage officiel et comptabilisation des scores selon la grille officielle MENPS.`,
+                consignes: `Mobiliser l'ensemble des acquis techniques, tactiques et relationnels stabilisés au cours du cycle.`,
+                criteres: `Notation chiffrée sur 20 points (Efficacité motrice /8, Conduites /6, Rôles sociaux /6).`
+            };
+        }
+
+        // Séances d'apprentissage intermédiaires progressives
+        const themesSportCo = [
+            `Maîtrise de la passe en mouvement et conservation collective`,
+            `Dribble, protection de balle et franchissement d'un barrage défensif`,
+            `Tir et finition cadrée sous pression temporelle`,
+            `Démarquage actif dans les espaces libres et création du surnombre (+1)`,
+            `Repli défensif et organisation du bloc collectif`,
+            `Transition offensive rapide (contre-attaque) et exploitation des couloirs`,
+            `Rôles sociaux : apprentissage de l'arbitrage et respect des règles`,
+            `Combinaisons tactiques simples (écrans, une-deux, décalages)`,
+            `Répétition générale en situation de référence aménagée`
+        ];
+
+        const idx = Math.min(seanceNum - 2, themesSportCo.length - 1);
+        const curTheme = themesSportCo[idx] || `Stabilisation des acquisitions motrices Séance ${seanceNum}`;
+
+        return {
+            theme: `${curTheme} en ${aps}`,
+            situation: `Dispositif en ateliers aménagés par plots (zones d'évolution délimitées). Équipes de 4 à 5 élèves avec jokers offensifs pour favoriser la réussite.`,
+            consignes: `Se placer face au jeu, communiquer verbalement avec les partenaires et accélérer après transmission.`,
+            criteres: `Réussir au moins 4 séquences d'action positives sur 6 tentatives.`
+        };
+    }
+
+    function generateSingleSheetHTML(formData, sNum, totalS) {
         const isCollege = ['1AC', '2AC', '3AC'].includes(formData.niveau);
         const opLabel = isCollege ? 'Orientations Pédagogiques Collège 2009' : 'Orientations Pédagogiques Lycée 2007';
-        const oti = isCollege 
-            ? "L'élève doit pouvoir mobiliser ses ressources motrices, perceptives et relationnelles pour agir avec efficacité et sécurité dans des situations motrices variées, tout en assumant des rôles d'observateur et d'arbitre."
-            : "L'élève doit pouvoir analyser, concevoir et conduire de façon autonome et responsable son projet d'action motrice, en optimisant ses potentialités physiques et en s'engageant loyalement dans le collectif.";
-        
-        const otc = `Stabiliser les habiletés motrices et tactiques fondamentales en ${formData.aps} pour répondre aux exigences des situations d'opposition ou de performance individuelle.`;
+        const plan = getPedagogicalPlanForAPS(formData.aps, sNum, totalS);
         const prof = formData.nomProf || 'Professeur d\'EPS';
         const etab = formData.etablissement || 'Établissement Scolaire';
         const annee = formData.anneeScolaire || '2025-2026';
         const classe = formData.classe || formData.niveau;
 
-        if (formData.typeDocument === 'fiche') {
-            const html = `
-            <div style="font-family:Arial,sans-serif;color:#111;padding:15px;line-height:1.4;">
-                <table style="width:100%;border-collapse:collapse;margin-bottom:12px;border:2px solid #000;">
-                    <tr style="background:#f1f5f9;">
-                        <td style="border:1px solid #000;padding:6px;font-weight:bold;width:33%;">Royaume du Maroc — MENPS<br>${opLabel}</td>
-                        <td style="border:1px solid #000;padding:6px;text-align:center;font-weight:bold;width:34%;font-size:14pt;">FICHE PÉDAGOGIQUE EPS<br><span style="font-size:11pt;color:#c1272d;">${formData.aps.toUpperCase()}</span></td>
-                        <td style="border:1px solid #000;padding:6px;width:33%;font-size:9pt;"><strong>Professeur :</strong> ${prof}<br><strong>Établissement :</strong> ${etab}<br><strong>Année :</strong> ${annee}</td>
-                    </tr>
-                    <tr>
-                        <td style="border:1px solid #000;padding:5px;"><strong>Niveau :</strong> ${formData.niveau} (${classe})</td>
-                        <td style="border:1px solid #000;padding:5px;"><strong>Séance N° :</strong> ${formData.numeroSeance}</td>
-                        <td style="border:1px solid #000;padding:5px;"><strong>Matériel :</strong> Plots, chasubles, ballons, chronomètre, sifflet</td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" style="border:1px solid #000;padding:6px;background:#f8fafc;font-size:9.5pt;">
-                            <strong>OTI :</strong> ${oti}<br>
-                            <strong>OTC :</strong> ${otc}<br>
-                            <strong>Objectif de la séance :</strong> <span style="color:#006233;font-weight:bold;">${formData.objectif}</span>
-                        </td>
-                    </tr>
-                </table>
+        return `
+        <div style="font-family:Arial,sans-serif;color:#111;padding:12px;line-height:1.35;background:#ffffff;">
+            <table style="width:100%;border-collapse:collapse;margin-bottom:10px;border:2px solid #000;">
+                <tr style="background:#f1f5f9;">
+                    <td style="border:1px solid #000;padding:5px;font-weight:bold;width:32%;">Royaume du Maroc — MENPS<br><span style="font-size:8.5pt;">${opLabel}</span></td>
+                    <td style="border:1px solid #000;padding:5px;text-align:center;font-weight:bold;width:36%;font-size:13pt;">FICHE DE SÉANCE EPS<br><span style="color:#c1272d;font-size:11pt;">${formData.aps.toUpperCase()} — SÉANCE ${sNum} / ${totalS}</span></td>
+                    <td style="border:1px solid #000;padding:5px;width:32%;font-size:8.5pt;"><strong>Professeur :</strong> ${prof}<br><strong>Établissement :</strong> ${etab}<br><strong>Année :</strong> ${annee}</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #000;padding:5px;"><strong>Niveau :</strong> ${formData.niveau} (${classe})</td>
+                    <td style="border:1px solid #000;padding:5px;"><strong>Effectif :</strong> 36 à 40 élèves</td>
+                    <td style="border:1px solid #000;padding:5px;"><strong>Matériel :</strong> Plots, chasubles, ballons, chronomètre, sifflet</td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="border:1px solid #000;padding:5px;background:#f8fafc;font-size:9pt;">
+                        <strong>Objectif Opérationnel de Séance :</strong> <span style="color:#006233;font-weight:bold;">${formData.objectif || plan.theme}</span>
+                    </td>
+                </tr>
+            </table>
 
-                <table style="width:100%;border-collapse:collapse;margin-bottom:12px;border:1.5px solid #000;">
-                    <thead>
-                        <tr style="background:#e2e8f0;text-align:center;font-weight:bold;">
-                            <th style="border:1px solid #000;padding:6px;width:15%;">ÉTAPES & DURÉE</th>
-                            <th style="border:1px solid #000;padding:6px;width:40%;">SITUATIONS & AMÉNAGEMENT</th>
-                            <th style="border:1px solid #000;padding:6px;width:25%;">CONSIGNES & RÉALISATION</th>
-                            <th style="border:1px solid #000;padding:6px;width:20%;">CRITÈRES DE RÉUSSITE</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="border:1px solid #000;padding:6px;background:#f8fafc;">
-                                <strong>PARTIE INTRODUCTIVE</strong><br>
-                                <em>15 à 20 min</em><br><br>
-                                - Prise en main<br>
-                                - Échauffement général<br>
-                                - Échauffement spécifique
-                            </td>
-                            <td style="border:1px solid #000;padding:6px;">
-                                - Appel, vérification des tenues et dispenses médicales.<br>
-                                - Mise en train cardio-pulmonaire : trottinement continu, montées de genoux, talons-fesses, pas chassés.<br>
-                                - Mobilisation articulaire dynamique (chevilles, genoux, bassin, épaules).<br>
-                                - Échauffement avec engin par doublettes ou sous forme de passe à dix dynamique.
-                            </td>
-                            <td style="border:1px solid #000;padding:6px;">
-                                - Respecter les trajectoires et l'espace de sécurité.<br>
-                                - Augmentation progressive de la fréquence cardiaque.<br>
-                                - Écoute active et engagement moteur immédiat.
-                            </td>
-                            <td style="border:1px solid #000;padding:6px;">
-                                - Fréquence cardiaque augmentée de façon progressive (120-140 bpm).<br>
-                                - Totalité des élèves échauffés sans douleur articulaire.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="border:1px solid #000;padding:6px;background:#f8fafc;">
-                                <strong>PARTIE FONDAMENTALE</strong><br>
-                                <em>40 à 45 min</em><br><br>
-                                <strong>Situation d'apprentissage :</strong><br>
-                                Transformation motrice ciblée
-                            </td>
-                            <td style="border:1px solid #000;padding:6px;">
-                                <strong>Dispositif :</strong> Terrain délimité par des plots en 2 zones d'évolution. Équipes homogènes de 4 à 5 élèves.<br><br>
-                                <strong>But :</strong> Conserver l'engin et progresser vers la zone de marque en créant des lignes de passe franches.<br><br>
-                                <strong>Variables :</strong><br>
-                                - <em>Simplification :</em> Supériorité numérique (+1 ou +2 jokers offensifs).<br>
-                                - <em>Complexification :</em> Limitation des touches de balle ou réduction de l'espace de jeu.
-                            </td>
-                            <td style="border:1px solid #000;padding:6px;">
-                                - S'orienter face au jeu avant de transmettre.<br>
-                                - Se déplacer activement vers les espaces libres dès que la passe est effectuée.<br>
-                                - Communication verbale et visuelle entre partenaires.
-                            </td>
-                            <td style="border:1px solid #000;padding:6px;">
-                                - Réussir au moins 4 séquences de passes continues sans interception sur 6 possessions.<br>
-                                - Diminution notable des pertes de balle sous pression.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="border:1px solid #000;padding:6px;background:#f8fafc;">
-                                <strong>PARTIE CONCLUSIVE</strong><br>
-                                <em>10 min</em><br><br>
-                                - Retour au calme<br>
-                                - Bilan réflexif
-                            </td>
-                            <td style="border:1px solid #000;padding:6px;">
-                                - Marche lente décontractante et exercices de respiration diaphragmatique.<br>
-                                - Rangement méthodique du matériel pédagogique par les élèves désignés.
-                            </td>
-                            <td style="border:1px solid #000;padding:6px;">
-                                - Verbalisation des réussites et des difficultés rencontrées par rapport à l'objectif du jour.
-                            </td>
-                            <td style="border:1px solid #000;padding:6px;">
-                                - Retour de la fréquence cardiaque sous 100 bpm.<br>
-                                - Compréhension collective de la séance validée.
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>`;
-            return {
-                html: html,
-                filename: `Fiche_EPS_${formData.aps.replace(/\s+/g, '_')}_${formData.niveau}_S${formData.numeroSeance}.doc`
-            };
-        } else if (formData.typeDocument === 'projet') {
-            const nbS = parseInt(formData.nombreSeances || '10');
-            let rows = '';
-            for (let i = 1; i <= nbS; i++) {
-                let role = (i === 1) ? "Évaluation diagnostique : bilan initial des compétences motrices" :
-                           (i === nbS) ? "Évaluation sommative terminale et validation des acquis du cycle" :
-                           `Séance ${i} : Acquisitions motrices spécifiques et apprentissage des rôles sociaux`;
-                rows += `<tr>
-                    <td style="border:1px solid #000;padding:6px;text-align:center;font-weight:bold;">S${i}</td>
-                    <td style="border:1px solid #000;padding:6px;">${role}</td>
-                    <td style="border:1px solid #000;padding:6px;">Situations adaptées en ${formData.aps} (effectif et espace modulés)</td>
-                    <td style="border:1px solid #000;padding:6px;">Pratiquant / Observateur / Arbitre</td>
-                </tr>`;
-            }
-            const html = `
-            <div style="font-family:Arial,sans-serif;color:#111;padding:15px;line-height:1.4;">
-                <table style="width:100%;border-collapse:collapse;margin-bottom:12px;border:2px solid #000;">
-                    <tr style="background:#f1f5f9;">
-                        <td style="border:1px solid #000;padding:6px;font-weight:bold;width:33%;">Royaume du Maroc — MENPS<br>${opLabel}</td>
-                        <td style="border:1px solid #000;padding:6px;text-align:center;font-weight:bold;width:34%;font-size:14pt;">PROJET DE CYCLE EPS<br><span style="color:#c1272d;">${formData.aps.toUpperCase()} (${nbS} SÉANCES)</span></td>
-                        <td style="border:1px solid #000;padding:6px;width:33%;font-size:9pt;"><strong>Professeur :</strong> ${prof}<br><strong>Établissement :</strong> ${etab}<br><strong>Niveau :</strong> ${formData.niveau}</td>
+            <table style="width:100%;border-collapse:collapse;border:1.5px solid #000;">
+                <thead>
+                    <tr style="background:#e2e8f0;text-align:center;font-weight:bold;font-size:9pt;">
+                        <th style="border:1px solid #000;padding:5px;width:15%;">ÉTAPES & DURÉE</th>
+                        <th style="border:1px solid #000;padding:5px;width:40%;">SITUATIONS D'APPRENTISSAGE</th>
+                        <th style="border:1px solid #000;padding:5px;width:25%;">CONSIGNES & RÉALISATION</th>
+                        <th style="border:1px solid #000;padding:5px;width:20%;">CRITÈRES DE RÉUSSITE</th>
                     </tr>
+                </thead>
+                <tbody style="font-size:8.5pt;">
                     <tr>
-                        <td colspan="3" style="border:1px solid #000;padding:6px;background:#f8fafc;font-size:9.5pt;">
-                            <strong>Objectif Terminal de Cycle (OTC) :</strong> ${otc}<br>
-                            <strong>Niveau des élèves :</strong> ${formData.niveauEleves.toUpperCase()} | <strong>Année scolaire :</strong> ${annee}
+                        <td style="border:1px solid #000;padding:5px;background:#f8fafc;">
+                            <strong>INTRODUCTIVE</strong><br><em>15-20 min</em><br><br>
+                            - Appel & tenue<br>- Échauffement général<br>- Échauffement spécifique
+                        </td>
+                        <td style="border:1px solid #000;padding:5px;">
+                            - Prise en main, annonce de l'objectif de la séance ${sNum}.<br>
+                            - Course continue modérée, gammes athlétiques (genoux, talons, pas chassés).<br>
+                            - Mobilisation articulaire dynamique et passe à dix dynamique avec engin.
+                        </td>
+                        <td style="border:1px solid #000;padding:5px;">
+                            - Espacement sécuritaire de 2m.<br>
+                            - Augmentation progressive du rythme cardiaque.<br>
+                            - Écoute et concentration.
+                        </td>
+                        <td style="border:1px solid #000;padding:5px;">
+                            - FC entre 120 et 140 bpm.<br>
+                            - Engagement de l'ensemble de la classe sans incident.
                         </td>
                     </tr>
-                </table>
-                <table style="width:100%;border-collapse:collapse;border:1.5px solid #000;">
-                    <thead>
-                        <tr style="background:#e2e8f0;text-align:center;font-weight:bold;">
-                            <th style="border:1px solid #000;padding:6px;width:8%;">N°</th>
-                            <th style="border:1px solid #000;padding:6px;width:42%;">OBJECTIF OPÉRATIONNEL DE SÉANCE</th>
-                            <th style="border:1px solid #000;padding:6px;width:30%;">CONTENUS D'ENSEIGNEMENT</th>
-                            <th style="border:1px solid #000;padding:6px;width:20%;">RÔLES SOCIAUX</th>
-                        </tr>
-                    </thead>
-                    <tbody>${rows}</tbody>
-                </table>
-            </div>`;
-            return {
-                html: html,
-                filename: `Projet_Cycle_EPS_${formData.aps.replace(/\s+/g, '_')}_${formData.niveau}.doc`
-            };
-        } else {
-            // Grille d'évaluation
-            const html = `
-            <div style="font-family:Arial,sans-serif;color:#111;padding:15px;line-height:1.4;">
-                <table style="width:100%;border-collapse:collapse;margin-bottom:12px;border:2px solid #000;">
-                    <tr style="background:#f1f5f9;">
-                        <td style="border:1px solid #000;padding:6px;font-weight:bold;width:33%;">Royaume du Maroc — MENPS<br>${opLabel}</td>
-                        <td style="border:1px solid #000;padding:6px;text-align:center;font-weight:bold;width:34%;font-size:14pt;">GRILLE D'ÉVALUATION EPS<br><span style="color:#c1272d;">${formData.aps.toUpperCase()}</span></td>
-                        <td style="border:1px solid #000;padding:6px;width:33%;font-size:9pt;"><strong>Établissement :</strong> ${etab}<br><strong>Classe :</strong> ${classe}<br><strong>Barème :</strong> /20 Pts</td>
+                    <tr>
+                        <td style="border:1px solid #000;padding:5px;background:#f8fafc;">
+                            <strong>FONDAMENTALE</strong><br><em>40-45 min</em><br><br>
+                            <strong>Situation ciblée :</strong><br>
+                            ${plan.theme}
+                        </td>
+                        <td style="border:1px solid #000;padding:5px;">
+                            ${plan.situation}<br><br>
+                            <strong>Variables didactiques :</strong><br>
+                            - <em>Simplification :</em> Agrandir l'espace ou ajouter 1 joker.<br>
+                            - <em>Complexification :</em> Réduire le nombre de touches ou opposer une défense stricte.
+                        </td>
+                        <td style="border:1px solid #000;padding:5px;">
+                            ${plan.consignes}<br>
+                            - Lever la tête avant d'agir.<br>
+                            - Respecter les couloirs de jeu.
+                        </td>
+                        <td style="border:1px solid #000;padding:5px;">
+                            ${plan.criteres}
+                        </td>
                     </tr>
-                </table>
-                <table style="width:100%;border-collapse:collapse;border:1.5px solid #000;">
-                    <thead>
-                        <tr style="background:#e2e8f0;text-align:center;font-weight:bold;">
-                            <th style="border:1px solid #000;padding:6px;width:30%;">DOMAINES D'ÉVALUATION</th>
-                            <th style="border:1px solid #000;padding:6px;width:45%;">INDICATEURS OBSERVABLES (OP 2007-2009)</th>
-                            <th style="border:1px solid #000;padding:6px;width:25%;">BARÈME</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="border:1px solid #000;padding:8px;"><strong>1. Efficacité motrice & Performance</strong></td>
-                            <td style="border:1px solid #000;padding:8px;">Réussite dans l'action, régularité des réalisations techniques, vitesse d'exécution et choix adaptés en situation motrice.</td>
-                            <td style="border:1px solid #000;padding:8px;text-align:center;"><strong>8 Points</strong></td>
-                        </tr>
-                        <tr>
-                            <td style="border:1px solid #000;padding:8px;"><strong>2. Maîtrise d'exécution & Conduites motrices</strong></td>
-                            <td style="border:1px solid #000;padding:8px;">Placement corporel, dissociation segmentaire, fluidité du geste, respect des règles techniques fondamentales.</td>
-                            <td style="border:1px solid #000;padding:8px;text-align:center;"><strong>6 Points</strong></td>
-                        </tr>
-                        <tr>
-                            <td style="border:1px solid #000;padding:8px;"><strong>3. Rôles sociaux & Méthodologie</strong></td>
-                            <td style="border:1px solid #000;padding:8px;">Assiduité, tenue réglementaire, investissement dans les rôles d'arbitre, chronométreur ou juge, esprit sportif et fair-play.</td>
-                            <td style="border:1px solid #000;padding:8px;text-align:center;"><strong>6 Points</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>`;
-            return {
-                html: html,
-                filename: `Grille_Evaluation_EPS_${formData.aps.replace(/\s+/g, '_')}_${formData.niveau}.doc`
-            };
-        }
+                    <tr>
+                        <td style="border:1px solid #000;padding:5px;background:#f8fafc;">
+                            <strong>CONCLUSIVE</strong><br><em>10 min</em><br><br>
+                            - Retour au calme<br>- Bilan réflexif
+                        </td>
+                        <td style="border:1px solid #000;padding:5px;">
+                            - Marche lente et décontraction musculaire.<br>
+                            - Rangement méthodique du matériel pédagogique par les élèves désignés.
+                        </td>
+                        <td style="border:1px solid #000;padding:5px;">
+                            - Bilan collectif sur les réussites motrices de la séance ${sNum}.
+                        </td>
+                        <td style="border:1px solid #000;padding:5px;">
+                            - Fréquence cardiaque redescendue sous 100 bpm.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>`;
     }
 
-    // Soumission du formulaire
-    const formEl = document.getElementById('form');
-    if (formEl) {
-        formEl.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            if (!validateForm()) return;
+    // CONSTRUCTEUR DU PROJET DE CYCLE (SEUL — 1 PAGE)
+    function buildProjetSeulHTML(formData) {
+        const isCollege = ['1AC', '2AC', '3AC'].includes(formData.niveau);
+        const opLabel = isCollege ? 'Orientations Pédagogiques Collège 2009' : 'Orientations Pédagogiques Lycée 2007';
+        const nbS = parseInt(formData.nombreSeances || '10');
+        const prof = formData.nomProf || 'Professeur d\'EPS';
+        const etab = formData.etablissement || 'Établissement Scolaire';
+        const annee = formData.anneeScolaire || '2025-2026';
 
-            const btn = document.getElementById('submitBtn');
-            if (btn) btn.disabled = true;
-            showLoading('⚡ Génération en cours...', 'Création de votre document pédagogique officiel...');
+        let rows = '';
+        for (let i = 1; i <= nbS; i++) {
+            const plan = getPedagogicalPlanForAPS(formData.aps, i, nbS);
+            rows += `<tr>
+                <td style="border:1px solid #000;padding:5px;text-align:center;font-weight:bold;">S${i}</td>
+                <td style="border:1px solid #000;padding:5px;"><strong>${plan.theme}</strong></td>
+                <td style="border:1px solid #000;padding:5px;">${plan.situation}</td>
+                <td style="border:1px solid #000;padding:5px;">Pratiquant / Observateur / Arbitre</td>
+            </tr>`;
+        }
 
+        return `
+        <div style="font-family:Arial,sans-serif;color:#111;padding:12px;line-height:1.35;background:#ffffff;">
+            <table style="width:100%;border-collapse:collapse;margin-bottom:10px;border:2px solid #000;">
+                <tr style="background:#f1f5f9;">
+                    <td style="border:1px solid #000;padding:5px;font-weight:bold;width:32%;">Royaume du Maroc — MENPS<br><span style="font-size:8.5pt;">${opLabel}</span></td>
+                    <td style="border:1px solid #000;padding:5px;text-align:center;font-weight:bold;width:36%;font-size:13pt;">PROJET DE CYCLE EPS<br><span style="color:#c1272d;font-size:11pt;">${formData.aps.toUpperCase()} (${nbS} SÉANCES)</span></td>
+                    <td style="border:1px solid #000;padding:5px;width:32%;font-size:8.5pt;"><strong>Professeur :</strong> ${prof}<br><strong>Établissement :</strong> ${etab}<br><strong>Année :</strong> ${annee}</td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="border:1px solid #000;padding:6px;background:#f8fafc;font-size:9pt;">
+                        <strong>Niveau :</strong> ${formData.niveau} | <strong>Niveau élèves :</strong> ${formData.niveauEleves.toUpperCase()} | <strong>Cycle :</strong> ${nbS} Séances d'apprentissage et d'évaluation
+                    </td>
+                </tr>
+            </table>
+
+            <table style="width:100%;border-collapse:collapse;border:1.5px solid #000;">
+                <thead>
+                    <tr style="background:#e2e8f0;text-align:center;font-weight:bold;font-size:9pt;">
+                        <th style="border:1px solid #000;padding:5px;width:8%;">N°</th>
+                        <th style="border:1px solid #000;padding:5px;width:40%;">OBJECTIF OPÉRATIONNEL DE SÉANCE</th>
+                        <th style="border:1px solid #000;padding:5px;width:32%;">SITUATIONS & CONTENUS D'ENSEIGNEMENT</th>
+                        <th style="border:1px solid #000;padding:5px;width:20%;">RÔLES SOCIAUX</th>
+                    </tr>
+                </thead>
+                <tbody style="font-size:8.5pt;">
+                    ${rows}
+                </tbody>
+            </table>
+        </div>`;
+    }
+
+    // CONSTRUCTEUR DU PACK COMPLET (PROJET DE CYCLE + TOUTES LES FICHES DE SÉANCE MULTI-PAGES)
+    function buildProjetCompletMultiPagesHTML(formData) {
+        const nbS = parseInt(formData.nombreSeances || '10');
+        // Page 1 = Le projet de cycle
+        let fullHtml = buildProjetSeulHTML(formData);
+
+        // Pages suivantes = Chaque fiche de séance S1 à S(nbS) séparée par un vrai saut de page
+        for (let i = 1; i <= nbS; i++) {
+            fullHtml += PAGE_BREAK_MARKER;
+            fullHtml += generateSingleSheetHTML(formData, i, nbS);
+        }
+
+        return fullHtml;
+    }
+
+    // SOUMISSION DU FORMULAIRE
+    document.getElementById('form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!validateForm()) return;
+
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        showLoading('⚡ Génération en cours...', 'Conception de vos documents pédagogiques...');
+
+        const formData = {
+            typeDocument: currentType,
+            niveau: document.getElementById('niveau')?.value || '',
+            aps: document.getElementById('aps')?.value || '',
+            objectif: document.getElementById('objectif')?.value || '',
+            numeroSeance: document.getElementById('numeroSeance')?.value || '1',
+            niveauEleves: document.getElementById('niveauEleves')?.value || 'moyen',
+            nombreSeances: document.getElementById('nombreSeances')?.value || '10',
+            typeGrille: document.getElementById('typeGrille')?.value || 'evaluation',
+            classe: document.getElementById('classe')?.value || '',
+            nomProf: document.getElementById('nomProf')?.value || '',
+            etablissement: document.getElementById('etablissement')?.value || '',
+            anneeScolaire: document.getElementById('anneeScolaire')?.value || ''
+        };
+
+        const nbS = parseInt(formData.nombreSeances);
+
+        if (currentType === 'fiche') {
+            currentHtml = generateSingleSheetHTML(formData, parseInt(formData.numeroSeance), nbS);
+            currentFilename = `Fiche_EPS_${formData.aps.replace(/\s+/g, '_')}_${formData.niveau}_S${formData.numeroSeance}.doc`;
+        } else if (currentType === 'projet') {
+            // Document simple = Projet de cycle seul
+            currentHtml = buildProjetSeulHTML(formData);
+            currentFilename = `Projet_Cycle_EPS_${formData.aps.replace(/\s+/g, '_')}_${formData.niveau}_Seul.doc`;
+
+            // Document complet = Projet + Toutes les fiches
+            projetCompletHtml = buildProjetCompletMultiPagesHTML(formData);
+            projetCompletFilename = `Pack_Complet_Cycle_${formData.aps.replace(/\s+/g, '_')}_${formData.niveau}_${nbS}Seances.doc`;
+        } else {
+            // Grille
+            currentHtml = `
+            <div style="font-family:Arial,sans-serif;color:#111;padding:12px;background:#ffffff;">
+                <table style="width:100%;border-collapse:collapse;margin-bottom:10px;border:2px solid #000;">
+                    <tr style="background:#f1f5f9;">
+                        <td style="border:1px solid #000;padding:5px;font-weight:bold;width:32%;">Royaume du Maroc — MENPS</td>
+                        <td style="border:1px solid #000;padding:5px;text-align:center;font-weight:bold;width:36%;font-size:13pt;">GRILLE D'ÉVALUATION EPS<br><span style="color:#c1272d;font-size:11pt;">${formData.aps.toUpperCase()}</span></td>
+                        <td style="border:1px solid #000;padding:5px;width:32%;font-size:8.5pt;"><strong>Niveau :</strong> ${formData.niveau}<br><strong>Barème :</strong> /20 Pts</td>
+                    </tr>
+                </table>
+                <table style="width:100%;border-collapse:collapse;border:1.5px solid #000;">
+                    <thead>
+                        <tr style="background:#e2e8f0;text-align:center;font-weight:bold;font-size:9pt;">
+                            <th style="border:1px solid #000;padding:6px;width:30%;">CRITÈRES MOTRICITÉ (/8)</th>
+                            <th style="border:1px solid #000;padding:6px;width:45%;">CRITÈRES TECHNIQUES & TACTIQUES (/6)</th>
+                            <th style="border:1px solid #000;padding:6px;width:25%;">RÔLES SOCIAUX (/6)</th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size:8.5pt;">
+                        <tr>
+                            <td style="border:1px solid #000;padding:8px;">Efficacité dans les tirs, gain de terrain, régularité des actions motrices positives.</td>
+                            <td style="border:1px solid #000;padding:8px;">Placement postural, dissociation segmentaire, orientation des appuis, pertinence des choix.</td>
+                            <td style="border:1px solid #000;padding:8px;">Arbitrage, tenue de table, chronométrage, fair-play et respect mutuel.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>`;
+            currentFilename = `Grille_Evaluation_${formData.aps.replace(/\s+/g, '_')}_${formData.niveau}.doc`;
+        }
+
+        // Affichage aperçu
+        document.getElementById('previewEmpty').style.display = 'none';
+        const pd = document.getElementById('previewDocument');
+        pd.style.display = 'block';
+        pd.innerHTML = currentHtml;
+
+        document.getElementById('previewActions').classList.add('show');
+        document.getElementById('downloadSectionComplet').style.display = (currentType === 'projet') ? 'block' : 'none';
+
+        updateDownloadButtonsUI();
+        showSuccess('Document généré avec succès !');
+
+        btn.disabled = false;
+        hideLoading();
+    });
+
+    // TÉLÉCHARGEMENT WORD UTILITAIRE
+    function downloadWordFile(htmlString, filename) {
+        const wordDocument = `<!DOCTYPE html>
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta charset="utf-8">
+<title>${filename}</title>
+<style>
+@page { size: 29.7cm 21cm; margin: 1.5cm; }
+body { font-family: Calibri, Arial, sans-serif; font-size: 9.5pt; color: #111; }
+table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+th, td { border: 1px solid #000; padding: 5px; vertical-align: top; }
+</style>
+</head>
+<body>
+${htmlString}
+</body>
+</html>`;
+        const blob = new Blob(['\ufeff' + wordDocument], { type: 'application/msword;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+
+    // BOUTON 1 : WORD (PROJET DE CYCLE SEUL — 1 PAGE)
+    document.getElementById('downloadWord').addEventListener('click', () => {
+        if (!currentHtml) { showError('Veuillez d\'abord générer le document.'); return; }
+        downloadWordFile(currentHtml, currentFilename);
+        showSuccess('Document Word (1 page) téléchargé !');
+    });
+
+    // FONCTION UNIVERSELLE DE CONVERSION PDF (MULTI-PAGES STRICTE)
+    async function renderHTMLToPDF(htmlContent, pdfFilename, isPortrait = false) {
+        if (!window.jspdf || !window.html2canvas) {
+            // Secours impression directe
+            const printWin = window.open('', '_blank');
+            printWin.document.write(`<html><head><title>${pdfFilename}</title><style>table{width:100%;border-collapse:collapse;}th,td{border:1px solid #000;padding:5px;}</style></head><body>${htmlContent}</body></html>`);
+            printWin.document.close();
+            printWin.focus();
+            printWin.print();
+            return;
+        }
+
+        const { jsPDF } = window.jspdf;
+        const pxPerMm = 3.78;
+        const pageWidth = isPortrait ? 210 * pxPerMm : 297 * pxPerMm;
+        const pageHeight = isPortrait ? 297 * pxPerMm : 210 * pxPerMm;
+
+        const pdf = new jsPDF({
+            orientation: isPortrait ? 'portrait' : 'landscape',
+            unit: 'mm',
+            format: 'a4'
+        });
+
+        // Découpage strict par page
+        const pageBreakRegex = /<br[^>]*(?:page-break|mso-special-character)[^>]*>/gi;
+        const pages = htmlContent.split(pageBreakRegex).filter(p => p.trim().length > 50);
+        const pagesToRender = (pages.length > 0) ? pages : [htmlContent];
+
+        showLoading('📄 Conversion PDF...', `Page 1 sur ${pagesToRender.length}`, true);
+
+        for (let i = 0; i < pagesToRender.length; i++) {
+            const pageNum = i + 1;
+            document.getElementById('loadingSubtext').textContent = `Conversion de la page ${pageNum} sur ${pagesToRender.length}...`;
+            updateProgress(Math.round((i / pagesToRender.length) * 100));
+
+            if (i > 0) {
+                pdf.addPage('a4', isPortrait ? 'portrait' : 'landscape');
+            }
+
+            const iframe = document.createElement('iframe');
+            iframe.style.cssText = `position:absolute;left:-9999px;width:${pageWidth}px;height:${pageHeight}px;border:none;`;
+            document.body.appendChild(iframe);
+
+            const iframeDoc = iframe.contentDocument;
+            const fullPageHtml = `<!DOCTYPE html><html><head><meta charset="utf-8">
+            <style>
+            *{margin:0;padding:0;box-sizing:border-box;}
+            body{font-family:Calibri,Arial,sans-serif;font-size:9pt;padding:12px;background:#ffffff;width:${pageWidth}px;height:${pageHeight}px;}
+            table{width:100%;border-collapse:collapse;margin-bottom:6px;table-layout:fixed;}
+            th,td{border:1px solid #000;padding:4px 6px;vertical-align:top;word-wrap:break-word;}
+            </style></head><body>${pagesToRender[i]}</body></html>`;
+
+            iframeDoc.open();
+            iframeDoc.write(fullPageHtml);
+            iframeDoc.close();
+
+            await new Promise(r => setTimeout(r, 200));
+
+            const canvas = await window.html2canvas(iframeDoc.body, {
+                scale: 1.5,
+                useCORS: true,
+                width: pageWidth,
+                height: pageHeight,
+                backgroundColor: '#ffffff'
+            });
+
+            const imgData = canvas.toDataURL('image/jpeg', 0.93);
+            pdf.addImage(imgData, 'JPEG', 0, 0, isPortrait ? 210 : 297, isPortrait ? 297 : 210);
+
+            document.body.removeChild(iframe);
+        }
+
+        updateProgress(100);
+        pdf.save(pdfFilename);
+        hideLoading();
+    }
+
+    // BOUTON 2 : PDF (PROJET DE CYCLE SEUL — 1 PAGE)
+    document.getElementById('downloadPDF').addEventListener('click', async () => {
+        if (!currentHtml) { showError('Veuillez d\'abord générer le document.'); return; }
+        const btn = document.getElementById('downloadPDF');
+        const orig = btn.innerHTML;
+        btn.innerHTML = '⏳ Création...';
+        btn.disabled = true;
+
+        try {
+            const pdfName = currentFilename.replace('.doc', '.pdf');
+            await renderHTMLToPDF(currentHtml, pdfName, false);
+            showSuccess('PDF (1 page) téléchargé avec succès !');
+        } catch (e) {
+            showError('Erreur PDF: ' + e.message);
+        } finally {
+            btn.innerHTML = orig;
+            btn.disabled = false;
+            hideLoading();
+        }
+    });
+
+    // BOUTON 3 : PACK COMPLET WORD (PROJET DE CYCLE + TOUTES LES FICHES)
+    document.getElementById('downloadProjetCompletWord').addEventListener('click', () => {
+        if (!projetCompletHtml) {
             const formData = {
-                typeDocument: currentType,
-                niveau: document.getElementById('niveau')?.value || '',
-                aps: document.getElementById('aps')?.value || '',
-                objectif: document.getElementById('objectif')?.value || '',
-                numeroSeance: document.getElementById('numeroSeance')?.value || '1',
+                aps: document.getElementById('aps')?.value || 'EPS',
+                niveau: document.getElementById('niveau')?.value || 'Collège',
                 niveauEleves: document.getElementById('niveauEleves')?.value || 'moyen',
                 nombreSeances: document.getElementById('nombreSeances')?.value || '10',
-                typeGrille: document.getElementById('typeGrille')?.value || 'evaluation',
-                classe: document.getElementById('classe')?.value || '',
                 nomProf: document.getElementById('nomProf')?.value || '',
                 etablissement: document.getElementById('etablissement')?.value || '',
                 anneeScolaire: document.getElementById('anneeScolaire')?.value || ''
             };
+            projetCompletHtml = buildProjetCompletMultiPagesHTML(formData);
+            projetCompletFilename = `Pack_Complet_Cycle_${formData.aps}_${formData.niveau}_${formData.nombreSeances}Seances.doc`;
+        }
 
-            let generatedData = null;
+        downloadWordFile(projetCompletHtml, projetCompletFilename);
+        showSuccess('Pack Complet Word (Projet + Toutes les fiches) téléchargé !');
+    });
 
-            // Tentative 1 : Appel API backend
-            try {
-                const endpointMap = {
-                    fiche: '/api/generer-fiche',
-                    projet: '/api/generer-projet',
-                    grille: '/api/generer-grille'
-                };
-                const endpoint = endpointMap[currentType] || '/api/generer-fiche';
-                
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 6000); // 6s timeout
+    // BOUTON 4 : PACK COMPLET PDF MULTI-PAGES (PROJET DE CYCLE + TOUTES LES FICHES DE SÉANCE EN PDF)
+    document.getElementById('downloadProjetCompletPDF').addEventListener('click', async () => {
+        if (!projetCompletHtml) {
+            const formData = {
+                aps: document.getElementById('aps')?.value || 'EPS',
+                niveau: document.getElementById('niveau')?.value || 'Collège',
+                niveauEleves: document.getElementById('niveauEleves')?.value || 'moyen',
+                nombreSeances: document.getElementById('nombreSeances')?.value || '10',
+                nomProf: document.getElementById('nomProf')?.value || '',
+                etablissement: document.getElementById('etablissement')?.value || '',
+                anneeScolaire: document.getElementById('anneeScolaire')?.value || ''
+            };
+            projetCompletHtml = buildProjetCompletMultiPagesHTML(formData);
+            projetCompletFilename = `Pack_Complet_Cycle_${formData.aps}_${formData.niveau}_${formData.nombreSeances}Seances.doc`;
+        }
 
-                const resp = await fetch(endpoint, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData),
-                    signal: controller.signal
-                });
-                clearTimeout(timeoutId);
+        const btn = document.getElementById('downloadProjetCompletPDF');
+        const orig = btn.innerHTML;
+        btn.innerHTML = '⏳ Création du Pack PDF...';
+        btn.disabled = true;
 
-                if (resp.ok) {
-                    const data = await resp.json();
-                    if (data && data.success && data.html) {
-                        generatedData = data;
-                    }
-                }
-            } catch (err) {
-                console.log('Serveur API distant non disponible, utilisation du moteur autonome.', err);
-            }
-
-            // Tentative 2 : Si l'API n'a pas répondu ou a échoué, utiliser le moteur pédagogique local garanti
-            if (!generatedData) {
-                generatedData = generateFallbackDocument(formData);
-            }
-
-            // Afficher le résultat
-            currentHtml = generatedData.html;
-            currentHtmlDisplay = generatedData.htmlDisplay || generatedData.html;
-            currentFilename = generatedData.filename;
-
-            const pe = document.getElementById('previewEmpty');
-            const pd = document.getElementById('previewDocument');
-            const pa = document.getElementById('previewActions');
-            const psc = document.getElementById('downloadSectionComplet');
-
-            if (pe) pe.style.display = 'none';
-            if (pd) {
-                pd.style.display = 'block';
-                pd.innerHTML = currentHtmlDisplay;
-            }
-            if (pa) pa.classList.add('show');
-            if (psc) psc.style.display = (currentType === 'projet') ? 'block' : 'none';
-
-            updateDownloadSectionTitle();
-
-            // Sauvegarde historique sécurisée (ne bloque jamais si non connecté)
-            if (typeof window.ProfEPS !== 'undefined' && window.ProfEPS && typeof window.ProfEPS.saveGeneration === 'function') {
-                try {
-                    window.ProfEPS.saveGeneration(
-                        currentType,
-                        formData.aps,
-                        formData.niveau,
-                        (currentType.toUpperCase()) + ' — ' + formData.aps + ' ' + formData.niveau,
-                        formData
-                    ).catch(() => {});
-                } catch(e) {}
-            }
-
-            showSuccess('Document généré avec succès !');
-            if (btn) btn.disabled = false;
+        try {
+            const pdfName = projetCompletFilename.replace('.doc', '.pdf');
+            await renderHTMLToPDF(projetCompletHtml, pdfName, false);
+            showSuccess('Pack Complet PDF multi-pages téléchargé !');
+        } catch (e) {
+            showError('Erreur PDF multi-pages: ' + e.message);
+        } finally {
+            btn.innerHTML = orig;
+            btn.disabled = false;
             hideLoading();
-        });
-    }
+        }
+    });
 
-    // Téléchargement Word (.doc) avec en-têtes Microsoft Office complets
-    const btnWord = document.getElementById('downloadWord');
-    if (btnWord) {
-        btnWord.addEventListener('click', () => {
-            if (!currentHtml) {
-                showError('Veuillez d\'abord générer un document.');
-                return;
-            }
-            const wordHtml = `<!DOCTYPE html>
-<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
-<head>
-<meta charset="utf-8">
-<title>${currentFilename}</title>
-<style>
-body { font-family: Arial, sans-serif; font-size: 10pt; }
-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
-th, td { border: 1px solid #000; padding: 6px; }
-</style>
-</head>
-<body>
-${currentHtml}
-</body>
-</html>`;
-            const blob = new Blob(['\ufeff' + wordHtml], { type: 'application/msword;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = currentFilename || 'Document_EPS.doc';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            showSuccess('Document Word téléchargé !');
-        });
-    }
-
-    // Téléchargement PDF sécurisé
-    const btnPdf = document.getElementById('downloadPDF');
-    if (btnPdf) {
-        btnPdf.addEventListener('click', async () => {
-            if (!currentHtml) {
-                showError('Veuillez d\'abord générer un document.');
-                return;
-            }
-            const originalText = btnPdf.innerHTML;
-            btnPdf.innerHTML = '⏳ Conversion...';
-            btnPdf.disabled = true;
-
-            try {
-                // Si jsPDF & html2canvas sont disponibles
-                if (window.jspdf && window.html2canvas) {
-                    const previewDoc = document.getElementById('previewDocument');
-                    const canvas = await window.html2canvas(previewDoc, { scale: 1.5, useCORS: true, backgroundColor: '#ffffff' });
-                    const imgData = canvas.toDataURL('image/jpeg', 0.95);
-                    const pdf = new window.jspdf.jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-                    const pdfWidth = pdf.internal.pageSize.getWidth();
-                    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-                    pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-                    pdf.save((currentFilename || 'Document_EPS').replace('.doc', '.pdf'));
-                    showSuccess('Document PDF téléchargé !');
-                } else {
-                    // Fallback d'impression directe du navigateur
-                    const printWin = window.open('', '_blank');
-                    printWin.document.write(`<html><head><title>Impression EPS</title><style>table{width:100%;border-collapse:collapse;}th,td{border:1px solid #000;padding:6px;}</style></head><body>${currentHtml}</body></html>`);
-                    printWin.document.close();
-                    printWin.focus();
-                    printWin.print();
-                }
-            } catch (err) {
-                showError('Erreur lors de la création du PDF : ' + err.message);
-            } finally {
-                btnPdf.innerHTML = originalText;
-                btnPdf.disabled = false;
-            }
-        });
-    }
-
-    // Téléchargement Pack Projet Complet Word
-    const btnPackWord = document.getElementById('downloadProjetCompletWord');
-    if (btnPackWord) {
-        btnPackWord.addEventListener('click', () => {
-            if (!currentHtml) return;
-            const nbS = parseInt(document.getElementById('nombreSeances')?.value || '10');
-            const aps = document.getElementById('aps')?.value || 'EPS';
-            const niv = document.getElementById('niveau')?.value || 'Collège';
-            
-            let fullHtml = currentHtml + '<br clear="all" style="page-break-before:always;" />';
-            for (let i = 1; i <= nbS; i++) {
-                const ficheData = generateFallbackDocument({
-                    typeDocument: 'fiche',
-                    aps: aps,
-                    niveau: niv,
-                    numeroSeance: i.toString(),
-                    objectif: `Séance ${i} : Acquisitions motrices et tactiques en ${aps}`,
-                    nomProf: document.getElementById('nomProf')?.value || '',
-                    etablissement: document.getElementById('etablissement')?.value || '',
-                    anneeScolaire: document.getElementById('anneeScolaire')?.value || ''
-                });
-                fullHtml += ficheData.html + '<br clear="all" style="page-break-before:always;" />';
-            }
-
-            const blob = new Blob(['\ufeff' + fullHtml], { type: 'application/msword;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `Pack_Complet_Cycle_${aps}_${niv}_${nbS}Seances.doc`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            showSuccess(`Pack complet de ${nbS} séances téléchargé !`);
-        });
-    }
-
-    // Téléchargement Pack Projet Complet PDF
-    const btnPackPdf = document.getElementById('downloadProjetCompletPDF');
-    if (btnPackPdf) {
-        btnPackPdf.addEventListener('click', () => {
-            if (btnPackWord) btnPackWord.click();
-        });
-    }
+    // Initialisation
+    updateDownloadButtonsUI();
   </script>
 </body>
 </html>
