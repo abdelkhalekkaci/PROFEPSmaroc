@@ -1401,32 +1401,26 @@ const CRITERES_OBSERVATION_TESTS = {
 // FONCTION HELPER AMÉLIORÉE : Détecte les séances spéciales et retourne la structure adaptée
 // ============================================================================
 
+// ============================================================================
+// FONCTION HELPER AMÉLIORÉE : MOTEUR DIDACTIQUE ADAPTATIF UNIVERSEL
+// ============================================================================
+
 const getSituations = (sport, objectif, numeroSeance) => {
     const sportData = SITUATIONS_FICHES[sport];
-    if (!sportData) return null;
+    const num = parseInt(numeroSeance, 10);
+    const objLower = (objectif || '').toLowerCase();
     
-    // ============================================================
-    // DÉTECTION SÉANCE 1 : TEST D'OBSERVATION (Évaluation diagnostique)
-    // ============================================================
-    const motsClesSeance1 = [
-        'test d\'observation',
-        "test d'observation",
-        'identifier le niveau initial',
-        'évaluation diagnostique',
-        'niveau initial',
-        'diagnostic',
-        'observation initiale',
-        'évaluation initiale'
-    ];
-    
-    const estSeance1 = numeroSeance === 1 || 
-                       motsClesSeance1.some(mot => objectif.toLowerCase().includes(mot));
+    // 1. Détection Séance 1 : Test d'observation (Diagnostique)
+    const estSeance1 = num === 1 || 
+                       objLower.includes("test d'observation") ||
+                       objLower.includes("test d’observation") ||
+                       objLower.includes('niveau initial') ||
+                       objLower.includes('évaluation diagnostique') ||
+                       objLower.includes('diagnostic');
     
     if (estSeance1) {
-        const situationRef = SITUATIONS_TESTS[sport];
-        const criteresObs = CRITERES_OBSERVATION_TESTS[sport];
-        
-        if (!situationRef || !criteresObs) return null;
+        const situationRef = SITUATIONS_TESTS[sport] || SITUATIONS_TESTS['Handball'];
+        const criteresObs = CRITERES_OBSERVATION_TESTS[sport] || CRITERES_OBSERVATION_TESTS['Handball'];
         
         return {
             echauffement: 'Échauffement général (5 min) : Course lente, montées de genoux, talons-fesses, mobilisation articulaire | Échauffement spécifique (5 min) : Manipulation de balle/engin spécifique à l\'APS, passes ou déplacements simples | Présentation de l\'objectif et du dispositif d\'observation (5 min)',
@@ -1438,33 +1432,25 @@ const getSituations = (sport, objectif, numeroSeance) => {
                 consignes: situationRef.consignes,
                 variantes: situationRef.variantes
             },
-            situation2: null, // Pas de situation 2 pour les tests
+            situation2: null,
             criteresRealisation: criteresObs.criteresRealisation,
             criteresReussite: criteresObs.criteresReussite,
             isTestObservation: true
         };
     }
     
-    // ============================================================
-    // DÉTECTION DERNIÈRE SÉANCE : TEST BILAN (Évaluation terminale)
-    // ============================================================
-    const motsClesDerniereSeance = [
-        'test bilan',
-        'évaluation finale',
-        'évaluation terminale',
-        'bilan',
-        'évaluation sommative',
-        'test final'
-    ];
-    
-    const estDerniereSeance = (numeroSeance === 8 || numeroSeance === 10 || numeroSeance === 12) ||
-                               motsClesDerniereSeance.some(mot => objectif.toLowerCase().includes(mot));
+    // 2. Détection Dernière Séance : Test Bilan (Sommative)
+    const estDerniereSeance = num >= 8 && (
+        objLower.includes('bilan') ||
+        objLower.includes('évaluation finale') ||
+        objLower.includes('évaluation terminale') ||
+        objLower.includes('test final') ||
+        objLower.includes('évaluation sommative')
+    );
     
     if (estDerniereSeance) {
-        const situationRef = SITUATIONS_TESTS[sport];
-        const criteresObs = CRITERES_OBSERVATION_TESTS[sport];
-        
-        if (!situationRef || !criteresObs) return null;
+        const situationRef = SITUATIONS_TESTS[sport] || SITUATIONS_TESTS['Handball'];
+        const criteresObs = CRITERES_OBSERVATION_TESTS[sport] || CRITERES_OBSERVATION_TESTS['Handball'];
         
         return {
             echauffement: 'Échauffement général (5 min) : Course lente, montées de genoux, talons-fesses, mobilisation articulaire | Échauffement spécifique (5 min) : Révision des gestes techniques du cycle | Rappel des consignes d\'évaluation (5 min)',
@@ -1476,47 +1462,106 @@ const getSituations = (sport, objectif, numeroSeance) => {
                 consignes: situationRef.consignes,
                 variantes: situationRef.variantes
             },
-            situation2: null, // Pas de situation 2 pour les tests
+            situation2: null,
             criteresRealisation: criteresObs.criteresRealisation,
             criteresReussite: criteresObs.criteresReussite,
             isTestBilan: true
         };
     }
     
-    // ============================================================
-    // SÉANCES NORMALES : Recherche de l'objectif dans SITUATIONS_FICHES
-    // ============================================================
+    if (!sportData) {
+        return {
+            echauffement: `Échauffement général (5 min) : Course progressive, étirements activo-dynamiques | Échauffement spécifique (5 min) : Déplacements et manipulations adaptés à ${sport} | Présentation de l'objectif : "${objectif}"`,
+            situation1: {
+                titre: `Atelier d'apprentissage : ${objectif}`,
+                but: `Réaliser l'action motrice avec efficacité en ciblant : ${objectif}`,
+                organisation: `Espace adapté, groupes de 4 à 6 élèves, matériel spécifique à ${sport}`,
+                deroulement: `Les élèves effectuent des répétitions ciblées en augmentant progressivement l'intensité et l'opposition. Le professeur donne des feedbacks correctifs individualisés sur l'action motrice.`,
+                consignes: `Respecter les consignes de sécurité\nRechercher la qualité gestuelle avant la vitesse\nCommuniquer activement avec ses partenaires\nAnalyser sa réussite à chaque essai`,
+                variantes: `Simplifier : Réduire la distance ou l'opposition | Complexifier : Augmenter la vitesse ou ajouter un défenseur actif`
+            },
+            situation2: {
+                titre: `Situation de transfert et confrontation dirigée`,
+                but: `Appliquer les acquis de l'objectif en situation de jeu réel ou de compétition`,
+                organisation: `Terrain officiel ou aménagé, confrontation par équipes équilibrées`,
+                deroulement: `Match à thème où les points marqués grâce à l'application de l'objectif comptent double. Rotation régulière des rôles.`,
+                consignes: `Appliquer la technique travaillée sous pression\nPrendre l'information rapidement avant d'agir\nAssurer le repli et la transition`,
+                variantes: `Simplifier : Supériorité numérique temporaire | Complexifier : Temps limité pour déclencher l'action`
+            },
+            criteresRealisation: `• Placement corporel équilibré et orientation vers la cible\n• Coordination des segments et fluidité du geste technique\n• Prise de décision rapide avant l'action`,
+            criteresReussite: `• Réussite d'au moins 7 essais sur 10 en situation d'apprentissage\n• Application visible de l'objectif sur au moins 3 séquences en match`
+        };
+    }
     
-    // Recherche exacte
+    // 3. Recherche exacte
     if (sportData[objectif]) {
         return sportData[objectif];
     }
     
-    // Recherche partielle (insensible à la casse et aux accents)
-    const objectifLower = objectif.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    // 4. Recherche par mots-clés normalisés
+    const cleanObj = objLower.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     for (const [key, value] of Object.entries(sportData)) {
-        const keyLower = key.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        if (keyLower.includes(objectifLower) || objectifLower.includes(keyLower)) {
-            return value;
+        const cleanKey = key.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        if (cleanObj.includes(cleanKey) || cleanKey.includes(cleanObj)) {
+            return {
+                ...value,
+                situation1: {
+                    ...value.situation1,
+                    titre: `${value.situation1.titre} — ${objectif}`,
+                    but: `Appliquer "${objectif}" dans la situation`
+                }
+            };
         }
     }
     
-    return null;
+    // 5. Recherche par sous-mots clés
+    const keywords = cleanObj.split(/[\s,.'’\-]+/);
+    for (const [key, value] of Object.entries(sportData)) {
+        const cleanKey = key.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        if (keywords.some(kw => kw.length > 3 && cleanKey.includes(kw))) {
+            return {
+                ...value,
+                situation1: {
+                    ...value.situation1,
+                    titre: `${value.situation1.titre} — ${objectif}`,
+                    but: `Appliquer "${objectif}" dans la situation`
+                }
+            };
+        }
+    }
+    
+    // 6. Adaptation intelligente de la situation de base pour tout objectif inédit
+    const baseKeys = Object.keys(sportData);
+    const baseSituation = sportData[baseKeys[0]];
+    
+    return {
+        echauffement: baseSituation.echauffement,
+        situation1: {
+            titre: `Situation d'apprentissage : ${objectif}`,
+            but: `Réaliser la tâche motrice en atteignant l'objectif : ${objectif}`,
+            organisation: baseSituation.situation1.organisation,
+            deroulement: `${baseSituation.situation1.deroulement} L'accent est mis spécifiquement sur : ${objectif}.`,
+            consignes: baseSituation.situation1.consignes,
+            variantes: baseSituation.situation1.variantes
+        },
+        situation2: baseSituation.situation2 ? {
+            titre: `Situation de transfert — ${objectif}`,
+            but: `Valider l'objectif "${objectif}" en situation d'opposition réelle`,
+            organisation: baseSituation.situation2.organisation,
+            deroulement: baseSituation.situation2.deroulement,
+            consignes: baseSituation.situation2.consignes,
+            variantes: baseSituation.situation2.variantes
+        } : null,
+        criteresRealisation: baseSituation.criteresRealisation,
+        criteresReussite: `• Au moins 70% de réussite sur les actions ciblant : ${objectif}\n• Application autonome des consignes par l'élève\n• Progrès technique mesurable au cours de la séance`
+    };
 };
-
-// ============================================================================
-// FONCTION HELPER : Lister les objectifs disponibles pour un sport
-// ============================================================================
 
 const getObjectifsDisponibles = (sport) => {
     const sportData = SITUATIONS_FICHES[sport];
     if (!sportData) return [];
     return Object.keys(sportData);
 };
-
-// ============================================================================
-// EXPORTS
-// ============================================================================
 
 module.exports = {
     SITUATIONS_FICHES,

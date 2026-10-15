@@ -1,11 +1,14 @@
 // ============================================================================
 // API FICHES DE SÉANCE - /api/generer-fiche.js
 // ============================================================================
-// Format: A4 PAYSAGE (297x210mm) | Sans colonne DURÉE | Schémas colorés
-// OBJECTIF = ce que l'élève APPREND | BUT = ce que l'élève FAIT
-// Critères RÉALISATION = COMMENT faire | Critères RÉUSSITE = MESURABLE
+// Moteur Tri-Fournisseurs Résilient :
+// 1. Google Gemini 2.5 Flash via process.env.GEMINI_API_KEY
+// 2. Groq LLaMA 3.3 70B via process.env.GROQ_API_KEY
+// 3. Moteur Didactique Local Autonome (situations_fiches.js + references.js)
+// Format : A4 PAYSAGE (297x210mm) | Conforme OP 2007-2009 Maroc
 // ============================================================================
 
+require('dotenv').config();
 const { OTI, OTC, VOCABULAIRE_APS, getSituationReference, getGroupeAPS, FALLBACKS, getSchema } = require('./data/references.js');
 const { getSituations } = require('./data/situations_fiches.js');
 
@@ -15,13 +18,10 @@ module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     if (req.method === 'OPTIONS') return res.status(200).end();
-    if (req.method !== 'POST') return res.status(405).json({ success: false, error: 'Method not allowed' });
+    if (req.method !== 'POST') return res.status(405).json({ success: false, error: 'Méthode non autorisée' });
 
     try {
-        const GROQ_API_KEY = process.env.GROQ_API_KEY;
-        if (!GROQ_API_KEY) return res.status(500).json({ success: false, error: 'GROQ_API_KEY non configurée' });
-
-        const { aps, objectif, niveau, nomProf, etablissement, anneeScolaire, numeroSeance, classe } = req.body;
+        const { aps, objectif, niveau, nomProf, etablissement, anneeScolaire, numeroSeance, classe } = req.body || {};
 
         if (!aps || !niveau || !objectif) {
             return res.status(400).json({ success: false, error: 'APS, niveau et objectif requis' });
@@ -35,14 +35,11 @@ module.exports = async (req, res) => {
         const vocabAPS = VOCABULAIRE_APS[aps] || '';
 
         // Récupération des situations de référence si disponibles
-        // IMPORTANT: Passer numeroSeance pour détecter les tests d'observation et bilans
         const situationsRef = getSituations(aps, objectif, numeroSeance);
-        
-        // Vérifier si c'est un test d'observation ou un test bilan
         const isTest = situationsRef && (situationsRef.isTestObservation || situationsRef.isTestBilan);
-        
+
         const situationsContext = situationsRef ? (isTest ? `
-🎯 SÉANCE SPÉCIALE ${situationsRef.isTestObservation ? 'TEST D\'OBSERVATION (Séance 1)' : 'TEST BILAN (Dernière séance)'}
+🎯 SÉANCE SPÉCIALE ${situationsRef.isTestObservation ? "TEST D'OBSERVATION (Séance 1)" : "TEST BILAN (Dernière séance)"}
 
 Cette séance utilise la SITUATION DE RÉFÉRENCE avec organisation en 3 groupes :
 - JOUEURS : disputent le match/réalisent la performance
@@ -65,12 +62,11 @@ ${situationsRef.criteresRealisation}
 CRITÈRES DE RÉUSSITE (Mesurable):
 ${situationsRef.criteresReussite}
 
-⚠️ INSTRUCTION SPÉCIALE POUR ${situationsRef.isTestObservation ? 'TEST D\'OBSERVATION' : 'TEST BILAN'}:
+⚠️ INSTRUCTION SPÉCIALE POUR ${situationsRef.isTestObservation ? "TEST D'OBSERVATION" : "TEST BILAN"}:
 - N'invente PAS de situation 2, il y a UNE SEULE situation : la situation de référence
 - Respecte STRICTEMENT l'organisation en 3 groupes (JOUEURS, OBSERVATEURS, ORGANISATEURS)
-- Le professeur utilise des grilles d'observation pour ${situationsRef.isTestObservation ? 'identifier le niveau initial' : 'mesurer les progrès réalisés'}
-- Insiste sur l'importance de la rotation entre les 3 rôles
-- Le but de la phase fondamentale est : ${situationsRef.isTestObservation ? 'Identifier le niveau initial des élèves dans l\'activité' : 'Évaluer les progrès réalisés et le niveau final des élèves'}` : `
+- Le professeur utilise des grilles d'observation pour ${situationsRef.isTestObservation ? "identifier le niveau initial" : "mesurer les progrès réalisés"}
+- Insiste sur l'importance de la rotation entre les 3 rôles` : `
 SITUATIONS DE RÉFÉRENCE PÉDAGOGIQUES (utilise-les comme base et adapte selon l'objectif):
 
 ÉCHAUFFEMENT SPÉCIFIQUE DE RÉFÉRENCE:
@@ -83,12 +79,12 @@ SITUATION 1 (Apprentissage structuré) - "${situationsRef.situation1.titre}":
 - Consignes: ${situationsRef.situation1.consignes}
 - Variantes: ${situationsRef.situation1.variantes}
 
-SITUATION 2 (Transfert/Jeu) - "${situationsRef.situation2.titre}":
+${situationsRef.situation2 ? `SITUATION 2 (Transfert/Jeu) - "${situationsRef.situation2.titre}":
 - But: ${situationsRef.situation2.but}
 - Organisation: ${situationsRef.situation2.organisation}
 - Déroulement: ${situationsRef.situation2.deroulement}
 - Consignes: ${situationsRef.situation2.consignes}
-- Variantes: ${situationsRef.situation2.variantes}
+- Variantes: ${situationsRef.situation2.variantes}` : ''}
 
 CRITÈRES DE RÉALISATION (Comment bien faire):
 ${situationsRef.criteresRealisation}
@@ -96,15 +92,16 @@ ${situationsRef.criteresRealisation}
 CRITÈRES DE RÉUSSITE (Mesurable):
 ${situationsRef.criteresReussite}
 
-⚠️ INSTRUCTION: Utilise ces situations comme BASE et ADAPTE-LES pour correspondre EXACTEMENT à l'objectif "${objectif}". Conserve la structure pédagogique (S1 apprentissage → S2 transfert) mais personnalise le contenu.`) : '';
+⚠️ INSTRUCTION: Utilise ces situations comme BASE et ADAPTE-LES pour correspondre EXACTEMENT à l'objectif "${objectif}". Conserve la structure pédagogique mais personnalise le contenu.`) : '';
 
-        // ==================== PROMPT IA ====================
-        const prompt = `Tu es un expert en EPS au Maroc, spécialiste de ${aps}.
+        // ==================== CONSTRUCTION DU PROMPT ====================
+        const prompt = `Tu es un expert pédagogique d'EPS au Maroc, spécialiste des Orientations Pédagogiques (OP 2007 pour le lycée, OP 2009 pour le collège) et de l'APS ${aps}.
 
 SÉANCE À PRÉPARER:
 - APS: ${aps}
 - Niveau: ${niveau} (${isCollege ? 'Collège' : 'Lycée'})
 - OBJECTIF DE LA SÉANCE (ce que l'élève va APPRENDRE): "${objectif}"
+- SÉANCE N°: ${numeroSeance || 1}
 
 VOCABULAIRE TECHNIQUE OBLIGATOIRE pour ${aps}: ${vocabAPS}
 
@@ -116,8 +113,8 @@ DISTINCTIONS PÉDAGOGIQUES IMPORTANTES:
 
 ${situationsContext}
 
-🛑 IMPORTANT : FORMAT DE RÉPONSE STRICT 🛑
-- N'utilise PAS de markdown (gras **, titres ##) pour les CLÉS.
+🛑 FORMAT DE RÉPONSE STRICT (OBLIGATOIRE) 🛑
+- N'utilise PAS de markdown (pas d'astérisques **, pas de titres ##) pour les noms de balises.
 - Écris CHAQUE CLÉ exactement comme demandé, suivie de deux points.
 - Ne mets pas de texte introductif ou conclusif.
 ${situationsRef ? (isTest ? '- UTILISE STRICTEMENT la situation de référence ci-dessus SANS modification.' : '- ADAPTE les situations de référence ci-dessus pour qu\'elles correspondent PARFAITEMENT à l\'objectif.') : ''}
@@ -144,37 +141,101 @@ SITUATION2_VARIANTES: [variantes de simplification et complexification]
 ` : ''}CRITERES_REALISATION: [4 critères décrivant COMMENT bien faire - qualité technique du geste, avec bullet points •]
 CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres, temps, distances]`;
 
-        // Appel API Groq
-        const groqResp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GROQ_API_KEY}` },
-            body: JSON.stringify({
-                model: 'llama-3.3-70b-versatile',
-                messages: [{ role: 'user', content: prompt }],
-                max_tokens: 3500,
-                temperature: 0.7
-            })
-        });
+        let rawContent = '';
+        let providerUsed = 'local';
 
-        const data = await groqResp.json();
-        const contenu = data.choices?.[0]?.message?.content || '';
+        // ==================== 1. PRIORITÉ GOOGLE GEMINI ====================
+        const GEMINI_KEY = process.env.GEMINI_API_KEY;
+        if (GEMINI_KEY && GEMINI_KEY !== 'votre_cle_gemini_ici' && GEMINI_KEY !== 'MY_GEMINI_API_KEY') {
+            try {
+                // Tentative via le SDK officiel @google/genai
+                let genaiSuccess = false;
+                try {
+                    const { GoogleGenAI } = await import('@google/genai');
+                    const ai = new GoogleGenAI({ apiKey: GEMINI_KEY });
+                    const resp = await ai.models.generateContent({
+                        model: 'gemini-2.5-flash',
+                        contents: prompt,
+                        config: { temperature: 0.7 }
+                    });
+                    if (resp && resp.text && resp.text.length > 100) {
+                        rawContent = resp.text;
+                        providerUsed = 'gemini';
+                        genaiSuccess = true;
+                    }
+                } catch (sdkErr) {
+                    // Si le SDK n'est pas installé, fallback direct via API REST
+                }
 
-        // Fonction d'extraction robuste (tolère les ** et formats variés)
+                if (!genaiSuccess) {
+                    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`;
+                    const geminiResp = await fetch(geminiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: prompt }] }],
+                            generationConfig: { temperature: 0.7 }
+                        })
+                    });
+                    if (geminiResp.ok) {
+                        const geminiData = await geminiResp.json();
+                        const text = geminiData.candidates?.[0]?.content?.parts?.[0]?.text || '';
+                        if (text.length > 100) {
+                            rawContent = text;
+                            providerUsed = 'gemini';
+                        }
+                    }
+                }
+            } catch (errGemini) {
+                console.warn('Gemini a échoué, bascule vers Groq...', errGemini?.message || errGemini);
+            }
+        }
+
+        // ==================== 2. PRIORITÉ GROQ ====================
+        if (!rawContent) {
+            const GROQ_KEY = process.env.GROQ_API_KEY;
+            if (GROQ_KEY && GROQ_KEY !== 'votre_cle_groq_ici') {
+                try {
+                    const groqResp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${GROQ_KEY}`
+                        },
+                        body: JSON.stringify({
+                            model: 'llama-3.3-70b-versatile',
+                            messages: [{ role: 'user', content: prompt }],
+                            max_tokens: 3500,
+                            temperature: 0.7
+                        })
+                    });
+
+                    if (groqResp.ok) {
+                        const groqData = await groqResp.json();
+                        const groqText = groqData.choices?.[0]?.message?.content || '';
+                        if (groqText.length > 100) {
+                            rawContent = groqText;
+                            providerUsed = 'groq';
+                        }
+                    }
+                } catch (errGroq) {
+                    console.warn('Groq a échoué, utilisation du moteur didactique local...', errGroq?.message || errGroq);
+                }
+            }
+        }
+
+        // ==================== EXTRACTION ROBUSTE DES CLÉS ====================
         const extract = (key) => {
-            // Cherche la clé, avec ou sans **, suivie de :
-            // Capture tout jusqu'à la prochaine clé (reconnue par saut de ligne + MAJUSCULES + :)
+            if (!rawContent) return '';
             const regex = new RegExp(`(?:\\*\\*|##)?\\s*${key}(?:\\*\\*|##)?\\s*:?\\s*([\\s\\S]*?)(?=\\n\\s*(?:\\*\\*|##)?\\s*[A-Z][A-Z0-9_]+(?:\\*\\*|##)?\\s*:|$)`, 'i');
-            const match = contenu.match(regex);
+            const match = rawContent.match(regex);
             if (!match) return '';
-
-            // Nettoyage du contenu capturé (enlève les **, les sauts de ligne excessifs)
             return match[1]
                 .replace(/^\*\*/, '')
                 .replace(/\*\*$/, '')
                 .trim();
         };
 
-        // Extraction des données
         let echaufSpec = extract('ECHAUFFEMENT_SPECIFIQUE');
         let butFonda = extract('BUT_PHASE_FONDAMENTALE');
         let s1Titre = extract('SITUATION1_TITRE');
@@ -192,64 +253,60 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
         let critReal = extract('CRITERES_REALISATION');
         let critReuss = extract('CRITERES_REUSSITE');
 
-        // Appliquer fallbacks si nécessaire - Priorité aux situations de référence, puis FALLBACKS
+        // ==================== 3. MOTEUR DIDACTIQUE LOCAL ET FALLBACKS ====================
         const fb = FALLBACKS[aps] || FALLBACKS['Handball'];
-        const sitRefData = situationsRef; // Utiliser les situations de référence si disponibles
-        
-        // Pour les tests, situation2 est null donc on ne doit pas générer de situation 2
+        const sitRefData = situationsRef;
         const skipSituation2 = isTest;
-        
-        if (!echaufSpec || echaufSpec.length < 20) {
+
+        if (!echaufSpec || echaufSpec.length < 15) {
             echaufSpec = sitRefData ? sitRefData.echauffement : fb.echauf;
         }
         if (!butFonda || butFonda.length < 10) {
             butFonda = isTest ? 
                 (situationsRef.isTestObservation ? 
-                    'Identifier le niveau initial des élèves dans l\'activité par l\'observation' : 
-                    'Évaluer les progrès réalisés et le niveau final des élèves') :
-                `Atteindre l'objectif: ${objectif}`;
+                    "Identifier le niveau initial des élèves dans l'activité par l'observation" : 
+                    "Évaluer les progrès réalisés et le niveau final des élèves") :
+                `Atteindre l'objectif opérationnel: ${objectif}`;
         }
-        if (!s1Titre || s1Titre.length < 5) {
+        if (!s1Titre || s1Titre.length < 4) {
             s1Titre = sitRefData ? sitRefData.situation1.titre : fb.s1t;
         }
-        if (!s1But || s1But.length < 10) {
+        if (!s1But || s1But.length < 8) {
             s1But = sitRefData ? sitRefData.situation1.but : fb.s1b;
         }
-        if (!s1Orga || s1Orga.length < 20) {
+        if (!s1Orga || s1Orga.length < 15) {
             s1Orga = sitRefData ? sitRefData.situation1.organisation : fb.s1o;
         }
-        if (!s1Deroul || s1Deroul.length < 50) {
+        if (!s1Deroul || s1Deroul.length < 25) {
             s1Deroul = sitRefData ? sitRefData.situation1.deroulement : fb.s1d;
         }
-        if (!s1Consignes || s1Consignes.length < 30) {
+        if (!s1Consignes || s1Consignes.length < 15) {
             s1Consignes = sitRefData ? sitRefData.situation1.consignes : fb.s1c;
         }
-        if (!s1Variantes || s1Variantes.length < 20) {
+        if (!s1Variantes || s1Variantes.length < 15) {
             s1Variantes = sitRefData ? sitRefData.situation1.variantes : fb.s1v;
         }
-        
-        // NE PAS APPLIQUER de fallbacks pour situation2 si c'est un test
+
         if (!skipSituation2) {
-            if (!s2Titre || s2Titre.length < 5) {
+            if (!s2Titre || s2Titre.length < 4) {
                 s2Titre = sitRefData && sitRefData.situation2 ? sitRefData.situation2.titre : fb.s2t;
             }
-            if (!s2But || s2But.length < 10) {
+            if (!s2But || s2But.length < 8) {
                 s2But = sitRefData && sitRefData.situation2 ? sitRefData.situation2.but : fb.s2b;
             }
-            if (!s2Orga || s2Orga.length < 20) {
+            if (!s2Orga || s2Orga.length < 15) {
                 s2Orga = sitRefData && sitRefData.situation2 ? sitRefData.situation2.organisation : fb.s2o;
             }
-            if (!s2Deroul || s2Deroul.length < 30) {
+            if (!s2Deroul || s2Deroul.length < 25) {
                 s2Deroul = sitRefData && sitRefData.situation2 ? sitRefData.situation2.deroulement : fb.s2d;
             }
-            if (!s2Consignes || s2Consignes.length < 30) {
+            if (!s2Consignes || s2Consignes.length < 15) {
                 s2Consignes = sitRefData && sitRefData.situation2 ? sitRefData.situation2.consignes : fb.s2c;
             }
-            if (!s2Variantes || s2Variantes.length < 20) {
+            if (!s2Variantes || s2Variantes.length < 15) {
                 s2Variantes = sitRefData && sitRefData.situation2 ? sitRefData.situation2.variantes : fb.s2v;
             }
         } else {
-            // Pour les tests, on met des valeurs vides pour situation2
             s2Titre = '';
             s2But = '';
             s2Orga = '';
@@ -257,11 +314,11 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
             s2Consignes = '';
             s2Variantes = '';
         }
-        
-        if (!critReal || critReal.length < 50) {
+
+        if (!critReal || critReal.length < 20) {
             critReal = sitRefData ? sitRefData.criteresRealisation : fb.cr;
         }
-        if (!critReuss || critReuss.length < 50) {
+        if (!critReuss || critReuss.length < 20) {
             critReuss = sitRefData ? sitRefData.criteresReussite : fb.cs;
         }
 
@@ -269,26 +326,27 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
         const schema1 = getSchema(aps, 1);
         const schema2 = getSchema(aps, 2);
 
-        // Couleurs pour le document Word/PDF (bleu marine)
-        const WORD_COLOR_PRIMARY = '#1e3a5f';
-        const WORD_COLOR_PRIMARY_LIGHT = '#e8eef4';
-        const WORD_COLOR_SECONDARY = '#4a6fa5';
-        const WORD_COLOR_ACCENT = '#f5f5f5';
+        // Couleurs site
+        const COLOR_PRIMARY = '#006233';
+        const COLOR_PRIMARY_LIGHT = '#e8f5e9';
+        const COLOR_SECONDARY = '#4a8b5c';
+        const COLOR_ACCENT = '#f5f5f5';
 
-        // Couleurs pour l'affichage site web (vert marocain)
-        const COLOR_PRIMARY = '#006233'; // Vert principal
-        const COLOR_PRIMARY_LIGHT = '#e8f5e9'; // Vert très clair
-        const COLOR_SECONDARY = '#4a8b5c'; // Vert secondaire
-        const COLOR_ACCENT = '#f5f5f5'; // Gris clair
-        const COLOR_BEIGE = '#f5f5dc'; // Beige clair
-        const COLOR_WHITE = '#ffffff'; // Blanc
+        const providerBadges = {
+            gemini: '⚡ Généré via Google Gemini Flash',
+            groq: '🚀 Généré via Groq LLaMA 3.3 70B',
+            local: '📚 Généré via le Moteur Didactique EPS Local'
+        };
 
         // ==================== HTML DISPLAY (SITE WEB) ====================
         const htmlDisplay = `
 <div style="font-family:'Segoe UI',Arial,sans-serif;max-width:950px;margin:0 auto;line-height:1.5;">
     <!-- EN-TÊTE -->
-    <div style="background:${COLOR_PRIMARY};color:white;padding:20px 25px;border-radius:12px;margin-bottom:20px;box-shadow:0 4px 15px rgba(0,0,0,0.2);">
-        <h1 style="margin:0 0 8px 0;font-size:1.5rem;font-weight:700;">📋 Fiche de Séance - ${aps}</h1>
+    <div style="background:${COLOR_PRIMARY};color:white;padding:20px 25px;border-radius:12px;margin-bottom:20px;box-shadow:0 4px 15px rgba(0,0,0,0.15);">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+            <h1 style="margin:0;font-size:1.5rem;font-weight:700;">📋 Fiche de Séance - ${aps}</h1>
+            <span style="background:rgba(255,255,255,0.2);padding:4px 10px;border-radius:20px;font-size:0.75rem;">${providerBadges[providerUsed]}</span>
+        </div>
         <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:0.9rem;opacity:0.95;">
             <span><strong>📊 Niveau:</strong> ${niveau}</span>
             <span><strong>🔢 Séance:</strong> N°${numeroSeance || 1}</span>
@@ -298,7 +356,7 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
     </div>
 
     <!-- OBJECTIF DE LA SÉANCE -->
-    <div style="background:${COLOR_PRIMARY_LIGHT};border-left:5px solid ${COLOR_PRIMARY};padding:15px 20px;border-radius:0 12px 12px 0;margin-bottom:20px;box-shadow:0 2px 8px rgba(30,58,95,0.15);">
+    <div style="background:${COLOR_PRIMARY_LIGHT};border-left:5px solid ${COLOR_PRIMARY};padding:15px 20px;border-radius:0 12px 12px 0;margin-bottom:20px;box-shadow:0 2px 8px rgba(30,58,95,0.08);">
         <h2 style="color:${COLOR_PRIMARY};margin:0 0 5px 0;font-size:1rem;display:flex;align-items:center;gap:8px;">
             🎯 OBJECTIF DE LA SÉANCE
             <span style="font-size:0.75rem;font-weight:normal;color:#666;font-style:italic;">(Ce que l'élève va APPRENDRE)</span>
@@ -307,7 +365,7 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
     </div>
 
     <!-- PARTIE INTRODUCTIVE -->
-    <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:18px 22px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+    <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:18px 22px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
         <h2 style="color:${COLOR_PRIMARY};border-bottom:3px solid ${COLOR_PRIMARY};padding-bottom:8px;margin:0 0 15px 0;font-size:1rem;display:flex;align-items:center;gap:8px;">
             📌 PARTIE INTRODUCTIVE
             <span style="background:${COLOR_PRIMARY};color:white;padding:2px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">15 min</span>
@@ -323,7 +381,7 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
     </div>
 
     <!-- PARTIE FONDAMENTALE -->
-    <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:18px 22px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+    <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:18px 22px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
         <h2 style="color:${COLOR_PRIMARY};border-bottom:3px solid ${COLOR_PRIMARY};padding-bottom:8px;margin:0 0 15px 0;font-size:1rem;display:flex;align-items:center;gap:8px;">
             ⚡ PARTIE FONDAMENTALE
             <span style="background:${COLOR_PRIMARY};color:white;padding:2px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">30 min</span>
@@ -355,10 +413,11 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
             <div style="background:${COLOR_ACCENT};padding:8px 12px;border-radius:6px;margin-top:10px;font-size:0.85rem;">
                 <strong style="color:${COLOR_PRIMARY};">🔄 Variantes:</strong> ${s1Variantes.replace(/\n/g, ' | ')}
             </div>
+            ${schema1 ? `
             <div style="margin-top:12px;padding:12px;background:${COLOR_ACCENT};border-radius:8px;text-align:center;">
                 <p style="font-weight:bold;color:${COLOR_PRIMARY};margin:0 0 8px 0;font-size:0.85rem;">📐 Schéma d'organisation</p>
                 ${schema1}
-            </div>
+            </div>` : ''}
         </div>
 
         ${!isTest ? `<!-- SITUATION 2 -->
@@ -384,10 +443,11 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
             <div style="background:${COLOR_ACCENT};padding:8px 12px;border-radius:6px;margin-top:10px;font-size:0.85rem;">
                 <strong style="color:${COLOR_PRIMARY};">🔄 Variantes:</strong> ${s2Variantes.replace(/\n/g, ' | ')}
             </div>
+            ${schema2 ? `
             <div style="margin-top:12px;padding:12px;background:${COLOR_ACCENT};border-radius:8px;text-align:center;">
                 <p style="font-weight:bold;color:${COLOR_SECONDARY};margin:0 0 8px 0;font-size:0.85rem;">📐 Schéma d'organisation</p>
                 ${schema2}
-            </div>
+            </div>` : ''}
         </div>
 
         <!-- SITUATION DE RÉFÉRENCE -->
@@ -412,7 +472,7 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
     </div>
 
     <!-- PARTIE FINALE -->
-    <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:18px 22px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+    <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:18px 22px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
         <h2 style="color:${COLOR_PRIMARY};border-bottom:3px solid ${COLOR_PRIMARY};padding-bottom:8px;margin:0 0 15px 0;font-size:1rem;display:flex;align-items:center;gap:8px;">
             🧘 PARTIE FINALE
             <span style="background:${COLOR_PRIMARY};color:white;padding:2px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">10 min</span>
@@ -553,22 +613,6 @@ th, td {
     vertical-align: top;
     padding: 6px 8px;
 }
-.schema-container {
-    page-break-inside: avoid;
-    break-inside: avoid;
-    mso-page-break-inside: avoid;
-    margin-top: 6px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background: #fafafa;
-    padding: 4px;
-    max-height: 100px;
-    overflow: hidden;
-}
-.schema-container svg {
-    max-height: 90px;
-    width: auto;
-}
 @media print {
     body {
         -webkit-print-color-adjust: exact;
@@ -652,7 +696,7 @@ ${isTest ? `<div class="sit-title">◆ SITUATION DE RÉFÉRENCE: ${s1Titre}</div
 <b>Consignes:</b> ${s1Consignes.replace(/\n/g, ' | ')}<br>
 <b>Variantes:</b> ${s1Variantes.replace(/\n/g, ' | ')}<br>
 
-${!isTest ? `<br><br><div class="sit-title" style="color:#1565c0">◆ SITUATION 2: ${s2Titre}</div>
+${!isTest ? `<br><div class="sit-title" style="color:#1565c0">◆ SITUATION 2: ${s2Titre}</div>
 <b>But:</b> ${s2But}<br>
 <b>Organisation:</b> ${s2Orga}<br>
 <b>Déroulement:</b> ${s2Deroul}<br>
@@ -697,6 +741,7 @@ Document conforme aux Orientations Pédagogiques ${isCollege ? '2009 (Collège)'
             html,
             htmlDisplay,
             filename,
+            provider: providerUsed,
             oti,
             otc,
             groupeAPS,
@@ -705,6 +750,6 @@ Document conforme aux Orientations Pédagogiques ${isCollege ? '2009 (Collège)'
 
     } catch (error) {
         console.error('Erreur generer-fiche:', error);
-        return res.status(500).json({ success: false, error: error.message });
+        return res.status(500).json({ success: false, error: error?.message || 'Erreur interne' });
     }
 };
