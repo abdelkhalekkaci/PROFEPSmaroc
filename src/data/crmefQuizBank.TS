@@ -1,0 +1,498 @@
+export interface QuizQuestion {
+  id: string;
+  module: 'sciences_education' | 'specialite' | 'didactique';
+  subject: 'eps' | 'primaire' | 'commun' | 'maths' | 'svt';
+  theme: string;
+  question: string;
+  questionAr?: string;
+  options: {
+    id: string;
+    text: string;
+    textAr?: string;
+  }[];
+  correctOptionId: string;
+  explanation: string;
+  explanationAr?: string;
+  officialReference?: string;
+  difficulty: 'facile' | 'moyen' | 'expert';
+}
+
+export interface QuizSubjectConfig {
+  id: string;
+  name: string;
+  nameAr: string;
+  icon: string;
+  description: string;
+  availableModules: ('sciences_education' | 'specialite' | 'didactique')[];
+}
+
+export const QUIZ_SUBJECTS: QuizSubjectConfig[] = [
+  {
+    id: 'eps',
+    name: 'EPS (Éducation Physique & Sportive)',
+    nameAr: 'التربية البدنية والرياضية',
+    icon: 'Activity',
+    description: 'Spécialité EPS, Didactique des APSA, Orientations Pédagogiques 2007/2009 et Sciences de l’Éducation.',
+    availableModules: ['sciences_education', 'specialite', 'didactique'],
+  },
+  {
+    id: 'primaire',
+    name: 'Enseignement Primaire (Double Voie)',
+    nameAr: 'التعليم الابتدائي (مزدوج)',
+    icon: 'GraduationCap',
+    description: 'Sciences de l’Éducation, Didactique du Français/Arabe/Maths et Spécialité pluridisciplinaire.',
+    availableModules: ['sciences_education', 'specialite', 'didactique'],
+  },
+  {
+    id: 'maths',
+    name: 'Mathématiques (Secondaire)',
+    nameAr: 'الرياضيات (الثانوي)',
+    icon: 'Calculator',
+    description: 'Sciences de l’Éducation transversales et Didactique des Mathématiques collégiales et qualifiantes.',
+    availableModules: ['sciences_education', 'didactique'],
+  },
+  {
+    id: 'svt',
+    name: 'SVT (Sciences de la Vie et de la Terre)',
+    nameAr: 'علوم الحياة والأرض',
+    icon: 'Microscope',
+    description: 'Sciences de l’Éducation, Géologie/Biologie et Didactique de la démarche d’investigation.',
+    availableModules: ['sciences_education', 'didactique'],
+  },
+];
+
+export const INITIAL_QUIZ_BANK: QuizQuestion[] = [
+  // ================= MODULE 1 : SCIENCES DE L'ÉDUCATION (TRONC COMMUN UNIVERSEL) =================
+  {
+    id: 'se-01',
+    module: 'sciences_education',
+    subject: 'commun',
+    theme: 'Législation & Loi-Cadre 51.17',
+    question: 'Selon la Loi-Cadre 51.17 relative au système d’éducation et de formation au Maroc, quel est le levier fondamental pour garantir l’équité et l’égalité des chances ?',
+    questionAr: 'وفق القانون الإطار 51.17 المتعلق بمنظومة التربية والتكوين، ما هي الرافعة الأساسية لضمان الإنصاف وتكافؤ الفرص؟',
+    options: [
+      { id: 'a', text: 'La généralisation d’un enseignement préscolaire obligatoire et de qualité pour les 4-5 ans.', textAr: 'تعميم تعليم أولي إلزامي وذي جودة للفئة العمرية 4-5 سنوات.' },
+      { id: 'b', text: 'L’instauration immédiate d’épreuves écrites sans contrôle continu.', textAr: 'الاعتماد الفوري للامتحانات الكتابية دون مراقبة مستمرة.' },
+      { id: 'c', text: 'La réduction des heures d’activités sportives et artistiques.', textAr: 'تقليص حصص الأنشطة الرياضية والفنية.' },
+      { id: 'd', text: 'La sélection stricte des élèves dès l’entrée au collège.', textAr: 'الانتقاء الصارم للتلاميذ عند ولوج الإعدادي.' },
+    ],
+    correctOptionId: 'a',
+    explanation: 'L’article 8 de la Loi-Cadre 51.17 stipule que l’enseignement préscolaire est intégré dans le cycle primaire obligatoire et constitue la base essentielle de l’équité sociale et de la lutte contre le redoublement et l’abandon précoce.',
+    explanationAr: 'تنص المادة 8 من القانون الإطار 51.17 على ربط التعليم الأولي بالتعليم الابتدائي ودمجهما تدريجيا كشرط حاسم لتحقيق الإنصاف وتكافؤ الفرص ومحاربة الهدر المدرسي.',
+    officialReference: 'Loi-Cadre 51.17, Articles 4 et 8 (Royaume du Maroc)',
+    difficulty: 'moyen',
+  },
+  {
+    id: 'se-02',
+    module: 'sciences_education',
+    subject: 'commun',
+    theme: 'Théories d’Apprentissage',
+    question: 'Dans la théorie du constructivisme de Jean Piaget, quel mécanisme décrit l’adaptation des schèmes cognitifs de l’apprenant face à une information nouvelle perturbant l’équilibre ?',
+    questionAr: 'في نظرية البنائية لجان بياجي، ما هي الآلية التي تصف تعديل الخطاطات الذهنية للمتعلم لملاءمة معطيات جديدة؟',
+    options: [
+      { id: 'a', text: 'L’Assimilation pure sans modification des structures mentales.', textAr: 'الاستيعاب فقط دون تعديل البنيات الذهنية.' },
+      { id: 'b', text: 'L’Accommodation, qui modifie les schèmes existants pour intégrer l’inédit.', textAr: 'الملاءمة (Accommodation) عبر تعديل الخطاطات لاستيعاب الجديد.' },
+      { id: 'c', text: 'Le Conditionnement opérant skinnérien.', textAr: 'الإشراط الإجرائي لسكنر.' },
+      { id: 'd', text: 'L’imitation vicariante passive.', textAr: 'النمذجة والمحاكاة التناوبية.' },
+    ],
+    correctOptionId: 'b',
+    explanation: 'Selon Piaget, l’adaptation résulte de deux processus complémentaires : l’assimilation (incorporation d’une donnée) et l’accommodation (modification des schèmes mentaux face aux résistances du milieu). L’équilibration dynamique stabilise ces schèmes.',
+    explanationAr: 'وفق بياجي، الملاءمة هي العملية التي يتم بموجبها تعديل وتطوير الخطاطات المعرفية السابقة للتكيف مع الوضعية المشكلة الجديدة بعد مرحلة الصراع المعرفي.',
+    officialReference: 'Jean Piaget, La Naissance de l’intelligence chez l’enfant',
+    difficulty: 'facile',
+  },
+  {
+    id: 'se-03',
+    module: 'sciences_education',
+    subject: 'commun',
+    theme: 'Socioconstructivisme',
+    question: 'Que désigne la « Zone Proximale de Développement » (ZPD) théorisée par Lev Vygotski ?',
+    questionAr: 'ماذا يقصد بـ "منطقة النمو القريب" (ZPD) في النظرية السوسيوبنائية لـ ليف فيغوتسكي؟',
+    options: [
+      { id: 'a', text: 'L’écart entre ce que l’élève réussit seul et ce qu’il peut accomplir avec l’aide d’un pair ou de l’enseignant.', textAr: 'الفارق بين ما يستطيع المتعلم إنجازه بمفرده وما ينجزه بتوجيه ودعم المدرس أو الأقران.' },
+      { id: 'b', text: 'La zone géographique regroupant les écoles d’un même bassin de recrutement.', textAr: 'المنطقة الجغرافية التي تضم مؤسسات الحوض المدرسي.' },
+      { id: 'c', text: 'Le temps nécessaire pour mémoriser un cours magistral complet.', textAr: 'المدة الزمنية لحفظ درس ملقى بصورة إلقائية.' },
+      { id: 'd', text: 'Le stade biologique terminal de maturation neuromusculaire.', textAr: 'المرحلة البيولوجية النهائية للنمو النمائي.' },
+    ],
+    correctOptionId: 'a',
+    explanation: 'La ZPD est l’espace fécond où se construisent les nouveaux apprentissages : l’élève est guidé par l’étayage (scaffolding) de l’enseignant pour franchir un obstacle cognitif inaccessible seul.',
+    explanationAr: 'منطقة النمو القريب تمثل المسافة بين مستوى النمو الفعلي المستقل للمتعلم، ومستوى النمو المحتمل تحت إشراف وتوجيه المدرس (السند الديداكتيكي).',
+    officialReference: 'Lev Vygotski, Pensée et Langage (1934)',
+    difficulty: 'facile',
+  },
+  {
+    id: 'se-04',
+    module: 'sciences_education',
+    subject: 'commun',
+    theme: 'Méthodologie & Réformes (Écoles Pionnières / TaRL)',
+    question: 'Quelle est la particularité fondamentale de l’approche TaRL (Teaching at the Right Level) déployée dans la feuille de route 2022-2026 au Maroc ?',
+    questionAr: 'ما هي الخاصية الجوهرية لمقاربة التدريس وفق المستوى المناسب (TaRL) المعتمدة في خارطة الطريق 2022-2026 بالمغرب؟',
+    options: [
+      { id: 'a', text: 'Le regroupement des élèves par niveau réel de maîtrise des apprentissages fondamentaux plutôt que par âge ou classe administrative.', textAr: 'تفييء المتعلمين حسب مستواهم الفعلي في التعلمات الأساس وليس حسب السن أو القسم الإداري.' },
+      { id: 'b', text: 'L’obligation d’enseigner toutes les disciplines en langue anglaise dès la 1ère année.', textAr: 'تدريس جميع المواد باللغة الإنجليزية ابتداء من السنة الأولى.' },
+      { id: 'c', text: 'L’évaluation sommative dès le premier jour de la rentrée sans remédiation.', textAr: 'التقويم الإشهادي في اليوم الأول دون معالجة ديداكتيكية.' },
+      { id: 'd', text: 'L’interdiction de toute manipulation ou jeu pédagogique en classe.', textAr: 'منع الأنشطة التفاعلية واللعب التربوي داخل الحجرة.' },
+    ],
+    correctOptionId: 'a',
+    explanation: 'TaRL (Pratham / Abdul Latif Jameel Poverty Action Lab), adopté par le MENPS, repose sur l’évaluation diagnostique rapide et le regroupement transitoire des élèves selon leur niveau réel (lecture, calcul) pour combler les lacunes fondamentales.',
+    explanationAr: 'ترتكز مقاربة TaRL على تجاوز عوائق التعلم بتشخيص دقيق وتفييء التلاميذ وفق كفاياتهم الفعلية لمعالجة التعثرات الأساسية في القراءة والحساب بأنشطة تفاعلية محفزة.',
+    officialReference: 'Feuille de Route MENPS 2022-2026 & Guide Écoles Pionnières (مدارس الريادة)',
+    difficulty: 'moyen',
+  },
+  {
+    id: 'se-05',
+    module: 'sciences_education',
+    subject: 'commun',
+    theme: 'Docimologie & Évaluation',
+    question: 'Quelle est la fonction première de l’évaluation formatrice (auto-évaluation régulatrice) ?',
+    questionAr: 'ما هي الوظيفة الأساسية للتقويم التكويني الذاتي (Évaluation formatrice)؟',
+    options: [
+      { id: 'a', text: 'Permettre à l’élève de s’approprier les critères d’évaluation et d’auto-réguler sa propre démarche de travail.', textAr: 'تمكين المتعلم من تملك معايير النجاح والتقويم الذاتي لضبط وتوجيه مسار تعلمه.' },
+      { id: 'b', text: 'Attribuer une note officielle définitive pour le bulletin de fin de trimestre.', textAr: 'منح نقطة عددية نهائية لتقرير نهاية الأسدس.' },
+      { id: 'c', text: 'Classer les élèves par ordre décroissant de moyenne générale.', textAr: 'ترتيب التلاميذ تنازليا حسب المعدل العام.' },
+      { id: 'd', text: 'Déterminer le budget d’équipement de l’établissement scolaire.', textAr: 'تحديد ميزانية التجهيزات الرياضية للمؤسسة.' },
+    ],
+    correctOptionId: 'a',
+    explanation: 'L’évaluation formatrice (développée par Nunziati et Bonniol) va plus loin que l’évaluation formative : elle rend l’apprenant co-auteur de ses repères, capable d’anticiper les critères d’évaluation et de piloter ses apprentissages.',
+    explanationAr: 'التقويم التكويني التملكي يهدف إلى جعل التلميذ واعيا بمعايير الإنجاز والتحقق، قادرا على تدبير صعوباته بنفسه دون انتظار الجزاء الخارجي للمدرس.',
+    officialReference: 'Georgette Nunziati, Pour construire un dispositif d’évaluation formatrice (1990)',
+    difficulty: 'moyen',
+  },
+
+  // ================= MODULE 2 : SPÉCIALITÉ EPS (مادة التخصص) =================
+  {
+    id: 'eps-sp-01',
+    module: 'specialite',
+    subject: 'eps',
+    theme: 'Physiologie de l’effort & Énergétique',
+    question: 'Lors d’un effort maximal continu de 3 à 7 minutes, quelle filière bioénergétique fournit la majeure partie de l’énergie ATP nécessaire à la contraction musculaire ?',
+    questionAr: 'خلال مجهود بدني أقصى ومستمر يتراوح بين 3 و 7 دقائق، ما هي المسلكية الطاقية المسؤولة عن تزويد الحصة الأكبر من الـ ATP؟',
+    options: [
+      { id: 'a', text: 'La filière aérobie (oxydation mitochondriale du glycogène et glucose).', textAr: 'المسلك الهوائي (الأكسدة الميتوكوندرية للغليكوجين والغلوكوز).' },
+      { id: 'b', text: 'La filière anaérobie alactique (phosphocréatine pure).', textAr: 'المسلك اللاهوائي اللالبني (فوسفوكرياتين فقط).' },
+      { id: 'c', text: 'La lipolyse exclusive des triglycérides sous-cutanés.', textAr: 'أكسدة الأحماض الدهنية حصرا.' },
+      { id: 'd', text: 'La dégradation exclusive des acides aminés ramifiés.', textAr: 'الهدم الحصري للأحماض الأمينية.' },
+    ],
+    correctOptionId: 'a',
+    explanation: 'Au-delà de 2 à 3 minutes d’effort soutenu, la filière aérobie devient prépondérante (> 80% dès 4-5 minutes), soutenant la VMA avec production d’énergie par la chaîne respiratoire mitochondriale.',
+    explanationAr: 'بعد دقيقتين إلى 3 دقائق من الجهد الشديد المتواصل، تصبح المسلكية الهوائية هي المزود الطاقي المهيمن بأكثر من 80% لتلبية متطلبات الجهد المعتمد على VO2max و VMA.',
+    officialReference: 'Astrand, Rodahl & Saltin, Textbook of Work Physiology',
+    difficulty: 'moyen',
+  },
+  {
+    id: 'eps-sp-02',
+    module: 'specialite',
+    subject: 'eps',
+    theme: 'Biomécanique de la Course & Rendement',
+    question: 'En athlétisme scolaire, quelle relation biomécanique régit la vitesse instantanée de course d’un élève (V) ?',
+    questionAr: 'في ألعاب القوى المدرسية، ما هي المعادلة البيوميكانيكية التي تحدد سرعة الجري اللحظية (V)؟',
+    options: [
+      { id: 'a', text: 'Vitesse = Fréquence de foulée (f) × Amplitude de foulée (A).', textAr: 'السرعة = تردد الخطوات (Fréquence) × طول الخطوة (Amplitude).' },
+      { id: 'b', text: 'Vitesse = Fréquence cardiaque max / Poids corporel.', textAr: 'السرعة = نبضات القلب القصوى مقسومة على الوزن.' },
+      { id: 'c', text: 'Vitesse = Durée d’effort × Volume pulmonaire.', textAr: 'السرعة = مدة الجهد مضروبة في السعة الرئوية.' },
+      { id: 'd', text: 'Vitesse = Hauteur du centre de gravité × Indice de Ruffier.', textAr: 'السرعة = ارتفاع مركز الثقل مضروبا في مؤشر روفيي.' },
+    ],
+    correctOptionId: 'a',
+    explanation: 'La vitesse de déplacement est le produit mathématique de la cadence (nombre d’appuis par seconde) et de l’amplitude (distance franchie par foulée). Le travail technique en EPS vise l’équilibre optimal sans sur-amplitude freinatrice.',
+    explanationAr: 'سرعة العدو اللحظية هي الجداء المباشر لطول الخطوة وترددها. أي زيادة غير متناسقة في الطول تؤدي لارتكاز كابح أمام مركز الثقل.',
+    officialReference: 'Pradet M., La préparation physique en EPS',
+    difficulty: 'facile',
+  },
+  {
+    id: 'eps-sp-03',
+    module: 'specialite',
+    subject: 'eps',
+    theme: 'Sports Collectifs (Praxéologie Motrice)',
+    question: 'Dans la classification praxéologique de Pierre Parlebas, comment sont qualifiés le Football, le Basketball et le Handball ?',
+    questionAr: 'في تصنيف بيير بارليباس (Praxéologie motrice)، كيف تصنف رياضات كرة القدم وكرة السلة وكرة اليد؟',
+    options: [
+      { id: 'a', text: 'Situations sociomotrices d’interaction directe, de coopération (partenaires) et d’opposition (adversaires) dans un milieu standardisé (CAI).', textAr: 'وضعيات حركية اجتماعية ذات تفاعل مباشر: تعاون وتنافس في وسط مستقر (CAI).' },
+      { id: 'b', text: 'Situations psychomotrices d’action solitaire sans interaction.', textAr: 'وضعيات نفس حركية فردية معزولة بدون تفاعل مع الآخرين.' },
+      { id: 'c', text: 'Activités d’incertitude environnementale pure en pleine nature (sauvage).', textAr: 'أنشطة تتسم بلايقين الوسط الطبيعي غير المهيأ.' },
+      { id: 'd', text: 'Sports de duel symétrique sans ballon avec filet séparateur.', textAr: 'رياضات مبارزة فردية مع شباك فاصل.' },
+    ],
+    correctOptionId: 'a',
+    explanation: 'Parlebas classe les sports d’équipe de grand terrain en situations sociomotrices avec Co-présence, Co-opération avec les partenaires et Opposition avec les adversaires (indice CAI : Compagnons, Adversaires, Incertitude du milieu nulle car terrain tracé).',
+    explanationAr: 'يصنف بارليباس الألعاب الجماعية كوضعيات حركية تواصلية وتنافسية تفاعلية بامتياز، تقتضي قراءة شبكة التواصل الحركي والشفرات التكتيكية وتدبير ميزان القوى.',
+    officialReference: 'Pierre Parlebas, Lexique de praxéologie motrice (1999)',
+    difficulty: 'moyen',
+  },
+  {
+    id: 'eps-sp-04',
+    module: 'specialite',
+    subject: 'eps',
+    theme: 'Apprentissage Moteur & Schémas de Schmidt',
+    question: 'Dans la théorie du schéma moteur de Richard Schmidt, quel rôle joue le Programme Moteur Généralisé (PMG) ?',
+    questionAr: 'في نظرية البرنامج الحركي المعمم لريتشارد شميدت (Schmidt)، ما هو دور الـ PMG؟',
+    options: [
+      { id: 'a', text: 'Stocker une classe d’actions motrices avec des caractéristiques invariantes (invariants spatio-temporels), modulable par des paramètres variables (force, vitesse).', textAr: 'تخزين صنف من الحركات ذات ثوابت بنيوية مكانية وزمانية، قابلة للتكييف بمتغيرات كالقوة والسرعة.' },
+      { id: 'b', text: 'Produire un geste identique et figé sans aucune adaptation possible aux variations de balle.', textAr: 'إنتاج حركة ميكانيكية جامدة لا تقبل أي تعديل حسب الخصم أو الكرة.' },
+      { id: 'c', text: 'Contrôler uniquement la sécrétion d’adrénaline à l’échauffement.', textAr: 'التحكم حصرا في هرمونات التوتر عند الإحماء.' },
+      { id: 'd', text: 'Mesurer la lactatémie sanguine à la fin du cycle.', textAr: 'قياس نسبة اللاكتات في الدم في ختام الحصة.' },
+    ],
+    correctOptionId: 'a',
+    explanation: 'Le PMG résout le paradoxe du stockage et de la nouveauté : le cerveau stocke une structure générale d’action (ex: lancer de balle) et injecte des paramètres circonstanciels (vitesse de bras, angle, force) selon la cible.',
+    explanationAr: 'البرنامج الحركي المعمم يحل معضلة تخزين ملايين الحركات: حيث يخزن الدماغ هيكل الحركة الأساسي الثابت ويخصص المتغيرات اللحظية وفق متطلبات الموقف الرياضي.',
+    officialReference: 'Richard A. Schmidt, Motor Control and Learning (1988)',
+    difficulty: 'expert',
+  },
+
+  // ================= MODULE 3 : DIDACTIQUE DE L'EPS (DIDACTIQUE MAROCAINE) =================
+  {
+    id: 'eps-did-01',
+    module: 'didactique',
+    subject: 'eps',
+    theme: 'Orientations Pédagogiques Marocaines (OP 2007-2009)',
+    question: 'Quelle est la formulation de la Compétence Visée au Tronc Commun du Lycée marocain selon les Orientations Pédagogiques officielles ?',
+    questionAr: 'ما هي صياغة الكفاية المستهدفة في الجذع المشترك بالثانوي التأهيلي وفق التوجيهات التربوية المغربية الرسمية؟',
+    options: [
+      { id: 'a', text: 'L’élève doit pouvoir analyser des situations motrices complexes, ajuster ses conduites et s’engager de manière autonome et sécurisée dans un projet individuel ou collectif.', textAr: 'القدرة على تحليل مواقف حركية، وضبط الإنجاز، والانخراط باستقلالية وأمان في مشروع فردي أو جماعي.' },
+      { id: 'b', text: 'L’obtention systématique d’un record national d’athlétisme avant la fin du 2ème semestre.', textAr: 'تحقيق أرقام قياسية وطنية إجبارية قبل نهاية الدورة.' },
+      { id: 'c', text: 'L’abandon des sports collectifs au profit exclusif de la gymnastique au sol.', textAr: 'التخلي التام عن الرياضات الجماعية لصالح الجمباز الأرضي.' },
+      { id: 'd', text: 'L’apprentissage par cœur de l’historique des Jeux Olympiques modernes.', textAr: 'الحفظ النظري لتاريخ الألعاب الأولمبية الإغريقية.' },
+    ],
+    correctOptionId: 'a',
+    explanation: 'Les OP 2007 (Lycée) articulent les compétences autour de la responsabilisation, de l’acquisition d’une motricité efficace et de la gestion de projets collectifs et individuels dans le cadre de la démarche de projet.',
+    explanationAr: 'تركز التوجيهات التربوية بالتعليم الثانوي التأهيلي (2007) على كفايات التحليل، الضبط الذاتي، وبناء المشروع الرياضي الفردي والجماعي كمدخل لتطوير الشخصية والاستقلالية.',
+    officialReference: 'Orientations Pédagogiques EPS 2007 pour l’Enseignement Secondaire Qualifiant (Maroc)',
+    difficulty: 'moyen',
+  },
+  {
+    id: 'eps-did-02',
+    module: 'didactique',
+    subject: 'eps',
+    theme: 'Transposition Didactique & Situations d’Apprentissage',
+    question: 'En didactique de l’EPS, comment définit-on une « Situation Problème » efficace sur le terrain ?',
+    questionAr: 'في ديداكتيك التربية البدنية، كيف تعرف "الوضعية المشكلة" الفعالة والمجدية ديداكتيكيا على أرضية الملعب؟',
+    options: [
+      { id: 'a', text: 'Une tâche motrice porteuse de sens qui confronte l’élève à un obstacle franchissable moyennant la réorganisation de ses ressources et l’acquisition d’un nouvel apprentissage.', textAr: 'مهمة حركية ذات دلالة تضع المتعلم أمام عائق يمكن تجاوزه بإعادة تنظيم مكتسباته وبناء تعلمات حركية جديدة.' },
+      { id: 'b', text: 'Une punition sportive consistant à faire 10 tours de piste à fond.', textAr: 'عقوبة بدنية تتمثل في الجري السريع حول الملعب.' },
+      { id: 'c', text: 'Un exercice stéréotypé de répétition sans aucune réflexion tactique ni variable.', textAr: 'تمرين تكراري آلي خالي من أي تفكير تكتيكي أو رهان للنجاح.' },
+      { id: 'd', text: 'Une situation réservée aux seuls élèves sportifs licenciés en club.', textAr: 'نشاط مخصص فقط للتلاميذ الممارسين في أندية رياضية مدنية.' },
+    ],
+    correctOptionId: 'a',
+    explanation: 'Selon Meirieu et Famose, la situation-problème en EPS pose un défi moteur adapté à la ZPD : l’élève ne possède pas d’emblée la réponse motrice exacte, mais la situation l’oblige à transformer ses représentations pour réussir.',
+    explanationAr: 'الوضعية المشكلة الديداكتيكية تضع التلميذ أمام مفارقة إجرائية: الهدف واضح لكن سبل تحقيقه تتطلب تجاوز السلوك الحركي العفوي واكتساب مهارة جديدة عبر التغذية الراجعة.',
+    officialReference: 'J.P. Famose, Apprentissage moteur et difficulté de la tâche (1990)',
+    difficulty: 'facile',
+  },
+  {
+    id: 'eps-did-03',
+    module: 'didactique',
+    subject: 'eps',
+    theme: 'Évaluation Certificative EPS au Maroc',
+    question: 'Dans les grilles officielles d’évaluation de l’EPS au baccalauréat marocain (Note sur 20), quelle est la répartition officielle des composantes de la note ?',
+    questionAr: 'في شبكات التقويم الرسمية لمادة التربية البدنية بالبكالوريا المغربية (النقطة من 20)، ما هو التوزيع الرسمي لمكونات التنقيط؟',
+    options: [
+      { id: 'a', text: 'Performance motrice mesurée (10 pts) + Maîtrise d’exécution / Habiletés motrices (6 pts) + Conduites civiques, engagement et rôles sociaux (4 pts).', textAr: 'الإنجاز الحركي / الأداء الرقمي (10 نقط) + إتقان المهارات الحركية (6 نقط) + السلوك والانخراط والأدوار الاجتماعية (4 نقط).' },
+      { id: 'b', text: '20 points uniquement sur la moyenne des présences sans pratique motrice.', textAr: '20 نقطة تمنح فقط على الحضور دون أي ممارسة حركية.' },
+      { id: 'c', text: '18 points sur la tenue sportive réglementaire et 2 points sur la course.', textAr: '18 نقطة على البذلة الرياضية ونقطتان على الجري.' },
+      { id: 'd', text: 'Tirage au sort de la note sans épreuve physique.', textAr: 'قرعة عشوائية لمنح المعدل الدوري.' },
+    ],
+    correctOptionId: 'a',
+    explanation: 'Le cadre de référence marocain de l’évaluation certificative au secondaire qualifiant attribue 10 points à la performance (barèmes standardisés), 6 points à la maîtrise technique et tactique, et 4 points aux rôles sociaux (arbitrage, entraide, sécurité).',
+    explanationAr: 'الإطار المرجعي للامتحان الوطني للتربية البدنية يوازن بين الأداء البدني القابل للقياس (10ن)، جودة الإنجاز الحركي والتكتيكي (6ن)، والمواقف والالتزام والمسؤولية الاجتماعية (4ن).',
+    officialReference: 'Note Ministérielle Cadre de Référence Baccalauréat EPS (MENPS Maroc)',
+    difficulty: 'moyen',
+  },
+  {
+    id: 'eps-did-04',
+    module: 'didactique',
+    subject: 'eps',
+    theme: 'Sécurité & Responsabilité Civile et Pénale de l’Enseignant',
+    question: 'En cas d’accident survenu durant un cours d’EPS au Maroc (ex: chute en gymnastique), quelle est la première obligation réglementaire du professeur d’EPS ?',
+    questionAr: 'في حالة وقوع حادث مدرسي خلال حصة التربية البدنية بالمغرب، ما هو الالتزام القانوني والإداري الفوري للأستاذ؟',
+    options: [
+      { id: 'a', text: 'Prodiguer les premiers secours d’urgence, alerter la direction de l’établissement et la protection civile, et rédiger un rapport circonstancié d’accident.', textAr: 'تقديم الإسعافات الأولية المستعجلة، إشعار الإدارة والوقاية المدنية، وتحرير تقرير مفصل عن الحادثة.' },
+      { id: 'b', text: 'Demander aux autres élèves de raccompagner le blessé chez lui discrètement.', textAr: 'مطالبة التلاميذ بنقل المصاب إلى منزله دون إعلام الإدارة.' },
+      { id: 'c', text: 'Poursuivre la séance comme si de rien n’était sans prévenir la famille.', textAr: 'مواصلة الدرس وتجاهل الواقعة تجنبا للمسؤولية.' },
+      { id: 'd', text: 'Modifier a posteriori la fiche de séance pour supprimer l’atelier incriminé.', textAr: 'تعديل جذاذة الحصة بأثر رجعي لإخفاء التمرين المسبب للحادث.' },
+    ],
+    correctOptionId: 'a',
+    explanation: 'La jurisprudence marocaine et la circulaire sur les accidents scolaires engagent la responsabilité administrative de l’État sous couvert de la diligence du professeur : secours immédiats, alerte administrative et rédaction du rapport objectif avec témoins.',
+    explanationAr: 'تفرض النصوص التنظيمية (المذكرات الوزارية الخاصة بالحوادث المدرسية) التدخل الإسعافي السريع، الاتصال بالإسعاف وإدارة المؤسسة، وتوثيق الواقعة بتقرير إداري رسمي فوري.',
+    officialReference: 'Guide Juridique de l’Enseignant & Circulaires ministérielles sur les accidents scolaires',
+    difficulty: 'facile',
+  },
+
+  // ================= MODULE 2 BIS : SPÉCIALITÉ PRIMAIRE (ENSEIGNEMENT PRIMAIRE) =================
+  {
+    id: 'prim-sp-01',
+    module: 'specialite',
+    subject: 'primaire',
+    theme: 'Didactique du Français au Primaire',
+    question: 'Dans le curriculum marocain du cycle primaire, selon quelle démarche didactique sont menées les activités de lecture au CP/CE1 ?',
+    questionAr: 'في المنهاج المنقح للتعليم الابتدائي بالمغرب، ما هي المقاربة الديداكتيكية المعتمدة في تدريس القراءة بالمستويات الأولى؟',
+    options: [
+      { id: 'a', text: 'L’approche syllabique et phonologique intégrée (conscience phonologique, principe alphabétique, fluidité, vocabulaire et compréhension).', textAr: 'القراءة المقطعية المرتكزة على الوعي الصوتي، المبدأ الألفبائي، الطلاقة، المفردات والفهم.' },
+      { id: 'b', text: 'La méthode globale pure sans décomposition de syllabes.', textAr: 'الطريقة الكلية البصرية الصرفة دون تفكيك المقاطع.' },
+      { id: 'c', text: 'La mémorisation passive de textes littéraires anciens.', textAr: 'الاستظهار فقط للنصوص التراثية الصعبة.' },
+      { id: 'd', text: 'La suppression de la lecture orale.', textAr: 'إلغاء القراءة الجهرية في الحصص.' },
+    ],
+    correctOptionId: 'a',
+    explanation: 'Le curriculum rénové de l’école primaire marocaine s’appuie sur les 5 composantes de la lecture préconisées par la recherche internationale : conscience phonologique, correspondance grapho-phonémique, fluidité, enrichissement lexical et stratégies de compréhension.',
+    explanationAr: 'يعتمد المنهاج الدراسي المنقح بالابتدائي الطريقة المقطعية التي تشمل: الوعي الصوتي، المبدأ الألفبائي، الطلاقة، تنمية الرصيد المعجمي واستراتيجيات الفهم القرائي.',
+    officialReference: 'Guide Pédagogique du Curriculum Rénové de l’Enseignement Primaire (MENPS Maroc)',
+    difficulty: 'moyen',
+  },
+  {
+    id: 'prim-sp-02',
+    module: 'specialite',
+    subject: 'primaire',
+    theme: 'Didactique des Mathématiques au Primaire',
+    question: 'Quelle étape didactique de la théorie des situations de Brousseau correspond au moment où les élèves échangent et confrontent leurs procédures sans validation immédiate du maître ?',
+    questionAr: 'في نظرية الوضعيات الديداكتيكية لـ غي بروسو، ما هي المرحلة التي يتبادل فيها التلاميذ حلولهم ويتناقشون حول صحتها قبل مأسسة التعلم؟',
+    options: [
+      { id: 'a', text: 'La situation de validation (صراع الحجج والبرهنة).', textAr: 'وضعية المصادقة (Situation de validation).' },
+      { id: 'b', text: 'La situation d’action pure sans parole.', textAr: 'وضعية الفعل الخالصة.' },
+      { id: 'c', text: 'L’institutionnalisation par l’enseignant.', textAr: 'وضعية المأسسة التي يديرها المدرس.' },
+      { id: 'd', text: 'La récitation du tableau de Pythagore.', textAr: 'استظهار جدول الضرب.' },
+    ],
+    correctOptionId: 'a',
+    explanation: 'La situation de validation amène les élèves à prouver, expliciter et confronter la validité de leurs modèles et algorithmes, construisant une preuve mathématique avant que l’enseignant n’institutionnalise le savoir.',
+    explanationAr: 'وضعية المصادقة تقتضي من المتعلم تقديم الحجج والبراهين للدفاع عن حله أو دحض فرضيات زملائه.',
+    officialReference: 'Théorie des Situations Didactiques (Guy Brousseau)',
+    difficulty: 'expert',
+  },
+  {
+    id: 'se-06',
+    module: 'sciences_education',
+    subject: 'commun',
+    theme: 'Feuille de Route 2022-2026',
+    question: 'Quels sont les 3 axes stratégiques majeurs de la Feuille de Route 2022-2026 du Ministère de l’Éducation Nationale du Maroc ?',
+    questionAr: 'ما هي المحاور الاستراتيجية الثلاثة الكبرى لخارطة طريق إصلاح منظومة التعليم 2022-2026 بالمغرب؟',
+    options: [
+      { id: 'a', text: 'L’Élève (تلميذ متفتح ومتحكم في التعلمات), l’Enseignant (أستاذ متمكن ومتحفز) et l’Établissement (مؤسسة توفر مناخا ملائما).', textAr: 'التلميذ (متفتح ومتحكم في التعلمات)، الأستاذ (متمكن ومتحفز) والمؤسسة التعليمية (بيئة ملائمة وجذابة).' },
+      { id: 'b', text: 'L’Université, la Recherche Nucléaire et l’Industrie Lourde.', textAr: 'الجامعة، البحث النووي والصناعة الثقيلة.' },
+      { id: 'c', text: 'La digitalisation intégrale sans enseignants en classe.', textAr: 'الرقمنة الشاملة والاستغناء عن الأستاذ داخل الفصل.' },
+      { id: 'd', text: 'La suppression des vacances scolaires.', textAr: 'إلغاء العطل المدرسية.' },
+    ],
+    correctOptionId: 'a',
+    explanation: 'La feuille de route 2022-2026 s’articule autour de 3 piliers indissociables déclinés en 12 engagements : l’élève au cœur des apprentissages, l’enseignant valorisé et formé aux pratiques probantes, et l’établissement moderne (modèle des Écoles Pionnières).',
+    explanationAr: 'ترتكز خارطة الطريق 2022-2026 على مثلث الإصلاح: التلميذ (تحقيق كفايات الأساس)، الأستاذ (التكوين المستمر والتقدير المهني)، والمؤسسة (مدارس الريادة ومناخ الثقة).',
+    officialReference: 'Feuille de Route MENPS 2022-2026 (Maroc)',
+    difficulty: 'facile',
+  },
+  {
+    id: 'se-07',
+    module: 'sciences_education',
+    subject: 'commun',
+    theme: 'Didactique Générale & Pédagogie',
+    question: 'Dans le triangle pédagogique de Jean Houssaye, quelle relation définit l’axe de la relation Didactique ?',
+    questionAr: 'في المثلث البيداغوجي لـ جان هوساي (Jean Houssaye)، ما هي العلاقة التي تحدد المحور الديداكتيكي؟',
+    options: [
+      { id: 'a', text: 'L’axe Enseignant - Savoir (Processus « Enseigner », transposition et élaboration des contenus).', textAr: 'محور المدرس - المعرفة (عملية التدريس، النقل الديداكتيكي وصياغة المضامين).' },
+      { id: 'b', text: 'L’axe Enseignant - Élève (Processus « Former », relation pédagogique et affective).', textAr: 'محور المدرس - التلميذ (عملية التكوين، العلاقة التربوية والتواصلية).' },
+      { id: 'c', text: 'L’axe Élève - Savoir (Processus « Apprendre », appropriation autonome).', textAr: 'محور التلميذ - المعرفة (عملية التعلم، البناء الذاتي).' },
+      { id: 'd', text: 'L’axe Administration - Famille.', textAr: 'محور الإدارة والأسرة.' },
+    ],
+    correctOptionId: 'a',
+    explanation: 'Le triangle didactique/pédagogique de Houssaye articule trois pôles : Enseignant, Savoir, Élève. L’axe Enseignant-Savoir correspond à la posture didactique (le choix des savoirs à transmettre, leur transposition). L’axe Enseignant-Élève relève de la pédagogie (climat de classe), et Élève-Savoir de l’apprentissage.',
+    explanationAr: 'يربط محور المدرس-المعرفة البعد الديداكتيكي المتمثل في النقل الديداكتيكي وتفكيك المادة المعرفية لتحويلها لمعرفة قابلة للتدريس، بينما محور مدرس-متعلم يمثل البعد البيداغوجي ومحور متعلم-معرفة يمثل مسار التعلم الذاتي.',
+    officialReference: 'Jean Houssaye, Le triangle pédagogique (1988)',
+    difficulty: 'moyen',
+  },
+  {
+    id: 'eps-sp-05',
+    module: 'specialite',
+    subject: 'eps',
+    theme: 'Bioénergétique & Filières Métaboliques',
+    question: 'Quel est le facteur limitant primordial de la filière anaérobie lactique (glycolyse anaérobie) lors d’une course de 400m à allure maximale ?',
+    questionAr: 'ما هو العامل الحاسم المحدد لنهاية المجهود في المسلك اللاهوائي اللبني خلال سباق 400 متر بسرعة قصوى؟',
+    options: [
+      { id: 'a', text: 'L’acidose métabolique intracellulaire (accumulation d’ions H+ inhibant la phosphofructokinase et la liaison calcium-troponine).', textAr: 'الحماض الأيضي (Acidose) الناتج عن تراكم أيونات H+ المثبطة للأنزيمات وانقباض العضلات.' },
+      { id: 'b', text: 'L’épuisement total des graisses corporelles.', textAr: 'النفاد التام للشحوم الثلاثية في الجسم.' },
+      { id: 'c', text: 'La baisse brutale du volume des globules blancs.', textAr: 'الهبوط الحاد في الكريات البيضاء.' },
+      { id: 'd', text: 'L’excès d’oxygène dans les alvéoles pulmonaires.', textAr: 'فائض الأكسجين في الأسناخ الرئوية.' },
+    ],
+    correctOptionId: 'a',
+    explanation: 'Lors d’un 400m (~45 à 55 secondes d’effort maximal), la glycolyse rapide produit des protons H+ qui acidifient le milieu cellulaire (pH < 6.8), bloquant l’enzyme clé PFK et altérant le couplage excitation-contraction musculaire.',
+    explanationAr: 'خلال سباق 400 متر، يرتفع تركيز أيونات الهيدروجين الحامضية H+ في العضلة، مما يخفض الـ pH ويعطل تفاعلات إنتاج الـ ATP وانقباض ألياف الأكتين والميوزين.',
+    officialReference: 'Wilmore & Costill, Physiologie du sport et de l’exercice',
+    difficulty: 'expert',
+  },
+  {
+    id: 'eps-did-05',
+    module: 'didactique',
+    subject: 'eps',
+    theme: 'Ingénierie de la Séance d’EPS au Maroc',
+    question: 'Selon la structure méthodologique préconisée dans les Orientations Pédagogiques marocaines, quelles sont les 3 phases successives d’une séance d’EPS ?',
+    questionAr: 'وفق الهيكلة المنهجية المعتمدة في التوجيهات التربوية المغربية، ما هي المراحل الثلاث المتتابعة لجذاذة حصة التربية البدنية؟',
+    options: [
+      { id: 'a', text: 'Partie Préparatoire / Échauffement (Introductive) -> Partie Principale (Situations d’apprentissage / motricité ciblée) -> Partie Conclusive / Bilan (Retour au calme et verbalisation).', textAr: 'المرحلة التمهيدية (الإحماء العام والخاص) -> المرحلة الرئيسية (وضعيات التعلم والإنجاز) -> المرحلة الختامية (الرجوع إلى الهدوء والتقويم).' },
+      { id: 'b', text: 'Match libre -> Pause café -> Course de 10 km.', textAr: 'مباراة حرة -> استراحة -> جري سريع.' },
+      { id: 'c', text: 'Dictée du cours magistral -> Copie sur cahier -> Interrogation écrite.', textAr: 'إملاء الدرس النظري -> الكتابة في الدفتر -> استجواب كتابي.' },
+      { id: 'd', text: 'Échauffement cardio pendant 2 heures sans partie motrice.', textAr: 'إحماء هوائي لمدة ساعتين دون تعلمات.' },
+    ],
+    correctOptionId: 'a',
+    explanation: 'Une séance d’EPS de 2 heures au collège/lycée marocain s’articule en 3 temps canoniques : mise en train cardio-pulmonaire et ostéo-articulaire (15-20 min), situations fondamentales et régulation (80 min), puis retour au calme, bilan et auto-évaluation (10-15 min).',
+    explanationAr: 'تتكون حصة التربية البدنية من 3 محطات أساسية: مرحلة تمهيدية إحمائية للإعداد البدني والنفسي، مرحلة رئيسية لبناء التعلمات الحركية والتكتيكية، ومرحلة ختامية للاسترخاء والتغذية الراجعة وتقييم المكتسبات.',
+    officialReference: 'Orientations Pédagogiques EPS 2007/2009 (MENPS Maroc)',
+    difficulty: 'facile',
+  },
+];
+
+export interface OfficialSourceInfo {
+  id: string;
+  category: 'concours_annales' | 'legislation_menps' | 'didactique_theories';
+  title: string;
+  titleAr: string;
+  description: string;
+  yearRange: string;
+  officialOrgan: string;
+  importanceScore: number;
+}
+
+export const OFFICIAL_SOURCES_GUIDE: OfficialSourceInfo[] = [
+  {
+    id: 'cnee-annales',
+    category: 'concours_annales',
+    title: 'Annales Officielles des Concours de Recrutement (CRMEF 2016 à 2025)',
+    titleAr: 'مواضيع وعناصر الإجابة الرسمية لمباريات توظيف الأطر النظامية للأكاديميات (2016-2025)',
+    description: 'Sujets réels scannés et barèmes officiels publiés par le Centre National des Examens et de l’Évaluation (CNEE). Comprend l’épreuve QCM de Sciences de l’Éducation (commune) et les épreuves de spécialité.',
+    yearRange: '2016 - 2025',
+    officialOrgan: 'CNEE / المركز الوطني للتقويم والامتحانات والتوجيه',
+    importanceScore: 100,
+  },
+  {
+    id: 'loi-51-17',
+    category: 'legislation_menps',
+    title: 'Loi-Cadre 51.17 relative au système d’éducation, d’enseignement et de formation',
+    titleAr: 'القانون الإطار رقم 51.17 المتعلق بمنظومة التربية والتكوين والبحث العلمي',
+    description: 'Le texte suprême de la réforme éducative marocaine. 10 à 15% des questions du concours portent sur ses articles (Article 3 sur les principes, Article 4 sur les leviers, Article 8 sur le préscolaire, Article 31 sur l’alternance linguistique).',
+    yearRange: 'Promulguée en Août 2019',
+    officialOrgan: 'Secrétariat Général du Gouvernement & MENPS',
+    importanceScore: 98,
+  },
+  {
+    id: 'feuille-route-2026',
+    category: 'legislation_menps',
+    title: 'Feuille de Route 2022-2026 : Vers une école publique de qualité pour tous',
+    titleAr: 'خارطة الطريق 2022-2026 : من أجل مدرسة عمومية ذات جودة للجميع',
+    description: 'Programme actuel du Ministère : 3 axes (Élève, Enseignant, Établissement), 12 engagements, projet des Écoles Pionnières (مدارس الريادة), approche TaRL et enseignement explicite.',
+    yearRange: '2022 - 2026',
+    officialOrgan: 'Ministère de l’Éducation Nationale, du Préscolaire et des Sports (MENPS)',
+    importanceScore: 99,
+  },
+  {
+    id: 'op-eps-maroc',
+    category: 'didactique_theories',
+    title: 'Orientations Pédagogiques EPS (Lycée 2007 & Collège 2009)',
+    titleAr: 'التوجيهات التربوية الرسمية لمادة التربية البدنية والرياضية (2007 ثانوي تأهيلي و2009 ثانوي إعدادي)',
+    description: 'La référence absolue pour l’épreuve de didactique EPS au Maroc. Compétences visées, Objectifs Terminaux d’Intégration (OTI), modules d’apprentissage et démarches d’évaluation.',
+    yearRange: '2007 & 2009',
+    officialOrgan: 'Direction des Curricula / MENPS',
+    importanceScore: 97,
+  },
+  {
+    id: 'psychopedagogie-auteurs',
+    category: 'didactique_theories',
+    title: 'Théories d’Apprentissage & Didactique Fondamentale',
+    titleAr: 'نظريات التعلم الكبرى وعلم النفس التربوي والديداكتيك العام',
+    description: 'Les auteurs incontournables cités chaque année : Piaget (Constructivisme), Vygotski (Socioconstructivisme & ZPD), Skinner (Béhaviorisme), Bruner (Étayage), Brousseau (Situations didactiques), Chevallard (Transposition didactique).',
+    yearRange: 'Classiques Fondamentaux',
+    officialOrgan: 'Centres Régionaux des Métiers de l’Éducation et de la Formation (CRMEF)',
+    importanceScore: 95,
+  },
+];
+
