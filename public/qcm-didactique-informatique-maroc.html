@@ -3,452 +3,546 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QCM Didactique de l'Informatique CRMEF Maroc · Algorithmique & Projets | ProfEPS.ma</title>
-  <meta name="description" content="Simulateur officiel de QCM en Didactique de l'Informatique pour le concours CRMEF Maroc. Démarche algorithmique, pédagogie de projet, TICE, programmation Python et évaluation par compétences.">
-  <link rel="canonical" href="https://profeps.ma/qcm-didactique-informatique-maroc.html">
+  <title>QCM Didactique de l'Informatique CRMEF Maroc · Pensée Computationnelle, Python & Projets</title>
+  <meta name="description" content="Plateforme d'entraînement intensif à l'épreuve de Didactique de l'Informatique du concours CRMEF Maroc (Collège et Lycée). Série de 10 questions avec diagnostic d'admissibilité officiel, corrigés et explications détaillées sans pop-up.">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .font-arabic { font-family: 'Noto Kufi Arabic', sans-serif; }
-  </style>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Quiz",
-    "name": "QCM Didactique de l'Informatique - Concours CRMEF Maroc",
-    "description": "Préparation officielle à l'épreuve de didactique de l'informatique pour le concours de recrutement des enseignants au Maroc.",
-    "educationalLevel": "CRMEF Secondaire Informatique Didactique",
-    "author": {
-      "@type": "Person",
-      "name": "Abdelkhalek ELBOUDANI",
-      "jobTitle": "Professeur de l'Éducation Nationale"
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
-  }
-  </script>
+    code, pre {
+      font-family: 'JetBrains Mono', monospace;
+    }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col selection:bg-teal-600 selection:text-white">
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col selection:bg-sky-500 selection:text-white">
 
-  <!-- ================= HEADER & NAVIGATION ================= -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs backdrop-blur-md bg-white/95">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-      <a href="concours-crmef-hub.html" class="flex items-center gap-2.5 shrink-0 group">
-        <div class="w-8 h-8 rounded-lg bg-teal-600 flex items-center justify-center text-white font-black text-sm shadow-xs group-hover:bg-teal-700 transition-colors">
-          💻
-        </div>
-        <div>
-          <span class="font-extrabold text-slate-900 text-sm sm:text-base tracking-tight block leading-none">
-            Didactique Informatique<span class="text-teal-600"> · CRMEF</span>
-          </span>
-          <span class="text-[10px] text-slate-500 font-medium block mt-0.5">
-            ProfEPS.ma · Démarche Algorithmique & Pédagogie de Projet
-          </span>
-        </div>
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <div class="bg-gradient-to-r from-sky-900 via-cyan-900 to-slate-900 border-b border-sky-800/40 text-sky-200 text-xs sm:text-sm py-2 px-4 text-center font-medium">
+    <span>💻 Épreuve Officielle : <strong class="text-white">Didactique de l'Informatique · CRMEF Maroc</strong> · Secondaire Collégial & Qualifiant · Zéro Pop-up</span>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="/concours-crmef-hub.html" class="inline-flex items-center gap-2 text-slate-300 hover:text-white transition font-medium text-sm group">
+        <svg class="w-4 h-4 transform group-hover:-translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        <span>Retour au Hub Concours CRMEF</span>
       </a>
 
-      <!-- Navigation Silo Transversale -->
-      <nav class="hidden lg:flex items-center gap-1.5 text-xs font-bold">
-        <a href="concours-crmef-hub.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-          🏛️ Hub National
-        </a>
-        <a href="qcm-sciences-education-crmef.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-          📚 Tronc Commun
-        </a>
-        <a href="qcm-didactique-informatique-maroc.html" class="px-3 py-1.5 rounded-lg bg-teal-50 text-teal-800 border border-teal-200">
-          💻 Didactique Info
-        </a>
-        <a href="qcm-specialite-informatique-maroc.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-          ⚡ Spécialité Info
-        </a>
-        <a href="qcm-didactique-maths-maroc.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-          📐 Maths
-        </a>
-      </nav>
-
-      <div class="flex items-center gap-2">
-        <span class="px-3 py-1 rounded-full bg-teal-50 text-teal-800 text-xs font-bold border border-teal-200">
-          Filière Informatique
-        </span>
+      <div class="flex items-center gap-2 text-xs">
+        <span class="px-2.5 py-1 rounded bg-sky-950 text-sky-300 border border-sky-800 font-semibold">Didactique Info</span>
+        <span class="hidden sm:inline px-2.5 py-1 rounded bg-slate-800 text-slate-300">Série Certifiée (10 questions)</span>
       </div>
     </div>
   </header>
 
-  <!-- ================= HERO ================= -->
-  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-8 flex-1 w-full">
-    <div class="bg-gradient-to-br from-slate-950 via-teal-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
-      <div class="space-y-3 relative z-10">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/20 text-teal-300 text-xs font-bold border border-teal-400/30 font-arabic">
-          <span>ديداكتيك مادة الإعلاميات بالتعليم الثانوي التأهيلي والإعدادي</span>
-        </div>
-        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight">
-          QCM Didactique de l'Informatique · Concours CRMEF
-        </h1>
-        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
-          Révisez les principes fondamentaux de la didactique de l'informatique : distinction conceptuelle entre algorithme et programme, transposition didactique des structures de données, démarche de résolution de problème, pédagogie de projet, et gestion de la salle spécialisée multimédia.
-        </p>
-        <div class="text-[11px] text-teal-200 pt-1 flex items-center gap-2">
-          <span>Cadres de Référence MENPS & CNEE</span>
-          <span>·</span>
-          <span>Séries aléatoires de 10 questions corrigées</span>
-        </div>
+  <!-- MAIN WRAPPER -->
+  <main class="flex-1 max-w-4xl w-full mx-auto px-4 py-6 sm:py-10">
+
+    <!-- HERO SECTION -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-900/50 border border-sky-700/50 text-sky-300 text-xs font-semibold mb-3">
+        <span>🚀 Pensée computationnelle · Scratch & Python · Pédagogie de projet · Évaluation</span>
       </div>
+      <h1 class="text-2xl sm:text-4xl font-extrabold text-white mb-3">
+        QCM Didactique de l'Informatique · <span class="text-sky-400">CRMEF Maroc</span>
+      </h1>
+      <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
+        Évaluation complète des compétences professionnelles et didactiques : transposition didactique de l'algorithmique, débuggage métacognitif, activités débranchées (CS Unplugged) et ingénierie de séquences d'apprentissage au secondaire.
+      </p>
     </div>
 
-    <!-- Mode Selector -->
-    <div class="bg-white rounded-2xl border border-slate-200 p-2 shadow-xs flex items-center justify-between gap-2">
-      <button onclick="switchMode('quiz')" id="btn-mode-quiz" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold bg-teal-700 text-white shadow-xs cursor-pointer transition-all text-center">
-        🎯 1. Passer un Test (Série de 10 Questions)
-      </button>
-      <button onclick="switchMode('browse')" id="btn-mode-browse" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center">
-        📖 2. Consulter Toutes les Questions & Corrigés
-      </button>
-    </div>
-
-    <!-- ================= QUIZ MODE ================= -->
-    <div id="section-quiz-mode" class="space-y-6">
-      <div id="quiz-card" class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-md space-y-6">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
-          <div class="flex items-center gap-3">
-            <span id="quiz-series-badge" class="px-3 py-1 bg-teal-100 text-teal-800 text-xs font-black rounded-lg">
-              Série Actuelle
-            </span>
-            <span class="text-xs font-bold text-slate-500">
-              Question <strong id="quiz-current-num" class="text-slate-900 text-sm">1</strong> sur 10
-            </span>
-            <span id="quiz-theme-badge" class="text-[11px] px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-semibold">
-              Démarche Algorithmique
+    <!-- QUIZ CONTAINER -->
+    <div id="quiz-container" class="bg-slate-950 border border-slate-800 rounded-2xl p-4 sm:p-8 shadow-2xl relative overflow-hidden">
+      
+      <!-- PROGRESS BAR & META -->
+      <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-800 mb-6">
+        <div>
+          <span class="text-xs uppercase tracking-wider text-slate-400 font-bold block">Progression</span>
+          <span id="question-counter" class="text-lg font-black text-sky-400">Question 1 / 10</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="text-right">
+            <span class="text-xs text-slate-400 block font-medium">Axe didactique</span>
+            <span id="category-badge" class="inline-block text-xs font-bold text-cyan-300 bg-cyan-950/80 border border-cyan-800/80 px-2.5 py-0.5 rounded">
+              Pensée computationnelle
             </span>
           </div>
-          <button onclick="startNewSeries()" class="text-xs text-slate-500 hover:text-teal-700 font-bold flex items-center gap-1 cursor-pointer">
-            🔄 Nouveau tirage
-          </button>
-        </div>
-
-        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-          <div id="quiz-progress-fill" class="bg-teal-700 h-full w-[10%] transition-all duration-300"></div>
-        </div>
-
-        <div class="space-y-2 py-2">
-          <h3 id="quiz-question-fr" class="text-base sm:text-lg font-black text-slate-900 leading-snug"></h3>
-          <h3 id="quiz-question-ar" class="text-base sm:text-lg font-arabic font-bold text-teal-950 text-right dir-rtl leading-relaxed"></h3>
-        </div>
-
-        <!-- Options Container -->
-        <div id="quiz-options-container" class="space-y-3"></div>
-
-        <!-- Feedback & Explanation Box -->
-        <div id="quiz-explanation-box" class="hidden rounded-2xl p-4 sm:p-5 border transition-all">
-          <div class="flex items-center gap-2 mb-2 font-bold text-sm" id="quiz-feedback-title"></div>
-          <p id="quiz-explanation-text" class="text-xs sm:text-sm text-slate-700 leading-relaxed"></p>
-        </div>
-
-        <!-- Navigation Buttons -->
-        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
-          <span class="text-xs text-slate-400 font-semibold">
-            Score : <span id="quiz-live-score" class="text-slate-800 font-bold">0</span> / <span id="quiz-answered-count">0</span>
-          </span>
-          <button id="btn-next-question" onclick="nextQuestion()" class="hidden px-6 py-2.5 bg-teal-700 hover:bg-teal-800 text-white rounded-xl text-xs font-black transition-colors cursor-pointer shadow-sm">
-            Question Suivante →
-          </button>
+          <div class="text-right pl-2 border-l border-slate-800">
+            <span class="text-xs text-slate-400 block font-medium">Temps écoulé</span>
+            <span id="timer-display" class="text-xs font-mono font-bold text-slate-300">00:00</span>
+          </div>
         </div>
       </div>
+
+      <!-- PROGRESS TRACK -->
+      <div class="w-full bg-slate-900 h-2 rounded-full mb-8 overflow-hidden">
+        <div id="progress-bar" class="bg-gradient-to-r from-sky-500 to-cyan-400 h-full w-[10%] transition-all duration-300"></div>
+      </div>
+
+      <!-- QUESTION TEXT -->
+      <div class="mb-8">
+        <div class="text-xs font-semibold text-sky-400 mb-1 flex items-center gap-1.5">
+          <span>Situation-problème ou énoncé didactique :</span>
+        </div>
+        <h2 id="question-text" class="text-base sm:text-lg font-bold text-slate-100 leading-relaxed text-left">
+          Chargement de la question...
+        </h2>
+      </div>
+
+      <!-- CHOICES -->
+      <div id="choices-container" class="space-y-3 mb-8">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <!-- NAVIGATION BUTTONS -->
+      <div class="flex items-center justify-between pt-4 border-t border-slate-800">
+        <button id="prev-btn" onclick="prevQuestion()" disabled class="px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-400 hover:text-slate-200 hover:bg-slate-800 disabled:opacity-30 disabled:pointer-events-none transition text-sm font-semibold flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+          Précédent
+        </button>
+
+        <button id="next-btn" onclick="nextQuestion()" class="px-6 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold transition shadow-lg shadow-sky-900/40 text-sm flex items-center gap-2">
+          <span>Suivant</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+
+        <button id="submit-btn" onclick="finishQuiz()" class="hidden px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold transition shadow-lg shadow-emerald-900/40 text-sm flex items-center gap-2">
+          <span>Terminer et générer le bilan</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+        </button>
+      </div>
+
     </div>
 
-    <!-- ================= BROWSE MODE ================= -->
-    <div id="section-browse-mode" class="hidden space-y-4">
-      <div class="bg-white rounded-2xl border border-slate-200 p-4 flex items-center justify-between">
-        <span class="text-xs font-bold text-slate-600">Banque Complète de Didactique de l'Informatique</span>
-        <span class="text-xs text-teal-700 font-bold" id="browse-count"></span>
+    <!-- RESULT CONTAINER (HIDDEN INITIALLY) -->
+    <div id="result-container" class="hidden bg-slate-950 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative">
+      
+      <div class="text-center pb-6 border-b border-slate-800 mb-6">
+        <div id="score-badge" class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-sky-900/50 border-4 border-sky-500 text-3xl font-black text-white mb-4">
+          <span id="final-score">--/20</span>
+        </div>
+        <h3 id="diagnostic-title" class="text-xl sm:text-2xl font-bold text-white mb-2">Diagnostic d'Admissibilité CRMEF</h3>
+        <p id="diagnostic-desc" class="text-slate-400 text-sm max-w-lg mx-auto">
+          Évaluation synthétique de votre maîtrise didactique de l'enseignement de l'informatique selon les standards du Ministère de l'Éducation Nationale.
+        </p>
       </div>
-      <div id="browse-questions-list" class="space-y-4"></div>
+
+      <!-- STATS GRID -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 text-center">
+          <span class="text-xs text-slate-400 block font-medium">Réponses Exactes</span>
+          <span id="stat-correct" class="text-lg font-black text-emerald-400">0</span>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 text-center">
+          <span class="text-xs text-slate-400 block font-medium">Erreurs Didactiques</span>
+          <span id="stat-wrong" class="text-lg font-black text-red-400">0</span>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 text-center">
+          <span class="text-xs text-slate-400 block font-medium">Taux de Réussite</span>
+          <span id="stat-accuracy" class="text-lg font-black text-sky-400">0%</span>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 text-center">
+          <span class="text-xs text-slate-400 block font-medium">Durée de l'Épreuve</span>
+          <span id="stat-time" class="text-lg font-black text-slate-300">00:00</span>
+        </div>
+      </div>
+
+      <!-- DETAILED REVIEW ACCORDION -->
+      <div class="mb-8">
+        <h4 class="text-base font-bold text-slate-200 mb-4 flex items-center gap-2">
+          <span>Corrigé détaillé et analyse didactique :</span>
+          <span class="text-xs font-normal text-sky-400">(Revue question par question)</span>
+        </h4>
+        <div id="review-list" class="space-y-4">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="flex flex-wrap items-center justify-center gap-4 pt-4 border-t border-slate-800">
+        <button onclick="restartQuiz()" class="px-6 py-3 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold transition shadow-lg shadow-sky-900/40 text-sm flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+          Recommencer la série
+        </button>
+        <a href="/qcm-specialite-informatique-maroc.html" class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-sky-300 font-semibold border border-sky-800/40 transition text-sm flex items-center gap-2">
+          Passer à l'épreuve Spécialité Informatique →
+        </a>
+        <a href="/concours-crmef-hub.html" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 font-medium border border-slate-700 transition text-sm">
+          Retour au Hub Concours
+        </a>
+      </div>
+
     </div>
 
-    <!-- E-E-A-T Signature -->
-    <div class="p-5 rounded-2xl bg-white border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-2xs">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full bg-teal-700 text-white font-black flex items-center justify-center text-sm shrink-0">
-          AE
-        </div>
-        <div>
-          <span class="text-xs font-bold text-slate-900 block">Supervision Pédagogique : Abdelkhalek ELBOUDANI</span>
-          <span class="text-[11px] text-slate-500">Conforme aux Orientations Officielles MENPS · ProfEPS.ma</span>
-        </div>
-      </div>
-      <a href="qcm-specialite-informatique-maroc.html" class="px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-black hover:bg-slate-800 transition-colors shrink-0">
-        Épreuve Suivante : Spécialité Informatique →
-      </a>
-    </div>
   </main>
 
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-800 bg-slate-950 py-6 text-center text-xs text-slate-500">
+    <p>Plateforme de préparation au concours de recrutement des professeurs du secondaire · CRMEF Maroc</p>
+    <p class="mt-1">Discipline Informatique · Conforme aux Orientations Pédagogiques Officielles (MENPS Maroc)</p>
+  </footer>
+
   <script>
-    const INFO_DIDACTIQUE_BANK = [
+    // 10 QUESTIONS CERTIFIEES DE DIDACTIQUE DE L'INFORMATIQUE CRMEF
+    const quizData = [
       {
-        id: "infd-1",
-        theme: "Algorithmique Débranchée",
-        question: "Qu'est-ce que « l'informatique débranchée » (Computer Science Unplugged) préconisée en début d'apprentissage ?",
-        questionAr: "ماذا يقصد بـ «المعلوماتية غير الموصولة» (Informatique débranchée)؟",
+        id: "info-did-01",
+        category: "Pensée computationnelle",
+        question: "Selon la définition de Jeannette Wing (2006) reprise dans les curricula d'informatique, quels sont les quatre piliers fondamentaux de la pensée computationnelle (Computational Thinking) ?",
         options: [
-          { id: "A", text: "Enseigner les concepts fondamentaux de la pensée algorithmique sans ordinateur, via des jeux de rôles, cartes et manipulations concrètes", correct: true },
-          { id: "B", text: "Couper le courant électrique dans la salle de classe pour faire des économies" },
-          { id: "C", text: "Interdire aux élèves d'utiliser Internet" },
-          { id: "D", text: "Faire écrire le code en binaire sur du papier" }
+          "L'installation d'OS, le câblage réseau, la dactylographie rapide et l'infographie.",
+          "La décomposition d'un problème, la reconnaissance de motifs (patterns), l'abstraction et la conception algorithmique.",
+          "L'écriture en assembleur, la compilation binaire, le chiffrement RSA et le débogage matériel.",
+          "L'utilisation d'une suite bureautique, la navigation web, le tableur et la messagerie électronique."
         ],
-        explanation: "L'approche débranchée isole la logique computationnelle (tri, graphes, cryptographie) des contraintes techniques et syntaxiques d'un langage de programmation particulier."
+        answer: 1,
+        explanation: "La pensée computationnelle repose sur 4 piliers cognitifs : 1) La décomposition (diviser un problème complexe en sous-parties traitables), 2) La reconnaissance de motifs (identifier similitudes et régularités), 3) L'abstraction (isoler l'essentiel en négligeant les détails accessoires), et 4) L'élaboration d'algorithmes (suite ordonnée d'instructions réutilisables).",
+        reference: "Jeannette Wing (2006) · Computational Thinking & Orientations Pédagogiques Informatique Lycée"
       },
       {
-        id: "infd-2",
-        theme: "Algorithme vs Programme",
-        question: "Dans la transposition didactique en informatique, quelle distinction fondamentale l'enseignant doit-il faire acquérir aux élèves ?",
-        questionAr: "ما هو التمييز الديداكتيكي الجوهري بين «الخوارزمية» و«البرنامج»؟",
+        id: "info-did-02",
+        category: "Informatique débranchée (CS Unplugged)",
+        question: "Quelle est la principale valeur didactique d'une activité 'débranchée' (Computer Science Unplugged) pour introduire un concept algorithmique au collège ou tronc commun ?",
         options: [
-          { id: "A", text: "L'algorithme est une suite ordonnée d'instructions indépendantes de toute machine, tandis que le programme est son implémentation concrète dans un langage syntaxique précis", correct: true },
-          { id: "B", text: "Le programme s'exécute toujours plus vite que l'algorithme" },
-          { id: "C", text: "L'algorithme est payant et le programme est gratuit" },
-          { id: "D", text: "Il n'y a aucune différence, ce sont deux synonymes parfaits" }
+          "Compenser uniquement la panne d'électricité ou l'absence de matériel informatique sans bénéfice cognitif propre.",
+          "Dégager le concept algorithmique de la surcharge cognitive liée à la syntaxe d'un langage ou aux aléas de l'interface logicielle, en s'appuyant sur la manipulation physique et l'analogie.",
+          "Préparer les élèves à coder directement sur papier d'examen sans jamais toucher à un ordinateur de l'année.",
+          "Remplacer définitivement les séances pratiques en laboratoire par des cours magistraux théoriques."
         ],
-        explanation: "L'algorithme relève de la conception intellectuelle pure (pseudo-code), universelle et intemporelle, alors que le programme est sa traduction syntaxique exécutable par un processeur (Python, C, Java)."
+        answer: 1,
+        explanation: "L'approche débranchée (CS Unplugged) permet de focaliser l'attention de l'apprenant sur la logique pure du traitement de l'information (ex: algorithme de tri par comparaison avec des gobelets, graphes avec des cordes) sans subir le coût cognitif syntaxique d'un IDE ou d'un clavier, facilitant ainsi l'ancrage conceptuel.",
+        reference: "Tim Bell et al. · Computer Science Unplugged & Didactique de l'informatique au Secondaire"
       },
       {
-        id: "infd-3",
-        theme: "Trace d'Exécution & Débogage",
-        question: "Quel outil didactique est indispensable pour amener l'élève à comprendre le fonctionnement interne d'une boucle 'Pour' ou 'Tant que' ?",
-        questionAr: "ما هي الأداة الديداكتيكية الضرورية لفهم التغير التدريجي للمتغيرات داخل حلقة تكرارية؟",
+        id: "info-did-03",
+        category: "Transition Scratch vers Python",
+        question: "Lors de la transition didactique de la programmation par blocs (Scratch) à la programmation textuelle (Python) au tronc commun, quel est l'obstacle d'apprentissage le plus fréquemment observé chez les apprenants ?",
         options: [
-          { id: "A", text: "Le tableau de traçage (trace d'exécution pas à pas avec évolution de l'état des variables)", correct: true },
-          { id: "B", text: "L'impression directe du code source sans lecture" },
-          { id: "C", text: "La mémorisation par cœur du code" },
-          { id: "D", text: "L'achat d'un ordinateur plus puissant" }
+          "L'incapacité totale à comprendre le concept de boucle conditionnelle.",
+          "La focalisation excessive sur les erreurs de syntaxe (indentation, deux-points, casse des variables, parenthèses) qui masque la logique de résolution du problème (surcharge cognitive syntaxique).",
+          "Le rejet des ordinateurs au profit des calculatrices scientifiques.",
+          "L'absence de souris dans l'environnement Python."
         ],
-        explanation: "Le tableau de traçage simule le comportement du processeur : il matérialise l'état mémoire à chaque itération, aidant l'élève à détecter les boucles infinies ou les erreurs d'incrémentation."
+        answer: 1,
+        explanation: "En passant de Scratch (où la syntaxe est garantie valide par l'emboîtement physique des blocs) à Python, l'élève affronte le choc syntaxique : les erreurs d'indentation (IndentationError), les ':' oubliés après if/for, ou la sensibilité à la casse. Le rôle du professeur est de pratiquer un échafaudage pédagogique (code à trous, lecture de trace, débogage guidé).",
+        reference: "Orientations Pédagogiques pour l'Enseignement de l'Informatique · Tronc Commun Scientifique (MENPS)"
       },
       {
-        id: "infd-4",
-        theme: "Pédagogie de Projet en Informatique",
-        question: "Pourquoi la pédagogie de projet est-elle au cœur des programmes d'informatique au lycée marocain ?",
-        questionAr: "لماذا تعد بيداغوجيا المشروع مدخلاً أساسياً في منهاج الإعلاميات بالسلك الثانوي؟",
+        id: "info-did-04",
+        category: "Didactique de l'Algorithmique & Boucles",
+        question: "Pour démontrer à des élèves de lycée la correction et la terminaison d'une boucle 'Tant que' (while), quel outil didactique l'enseignant doit-il mobiliser ?",
         options: [
-          { id: "A", text: "Parce qu'elle mobilise des compétences transversales (décomposition de problème complexe, travail d'équipe collaboratif, planification et intégration)", correct: true },
-          { id: "B", text: "Pour remplacer les cours théoriques par du temps libre" },
-          { id: "C", text: "Pour vendre des logiciels aux entreprises" },
-          { id: "D", text: "C'est une tradition sans fondement pédagogique" }
+          "Un test avec une seule valeur d'entrée réussie sur la machine.",
+          "L'explicitation d'un variant de boucle (quantité entière strictement décroissante et minorée garantissant la terminaison) et d'un invariant de boucle (propriété vraie avant, pendant et après chaque itération).",
+          "Le remplacement systématique de toutes les boucles 'Tant que' par des boucles 'Pour' inconditionnelles.",
+          "L'affichage à l'écran du temps d'exécution en millisecondes."
         ],
-        explanation: "Le projet informatique met les élèves en situation réelle de concepteurs : cahier des charges, modélisation fonctionnelle, codage modulaire et soutenance orale."
+        answer: 1,
+        explanation: "La rigueur de l'algorithmique au cycle qualifiant exige de distinguer la terminaison (prouvée par un variant de boucle qui décroît strictement vers un seuil d'arrêt pour exclure la boucle infinie) et la correction partielle (assurée par l'invariant de boucle, qui reste vrai à chaque pas et prouve que l'algorithme calcule le bon résultat).",
+        reference: "Curriculum Informatique Option Sciences Mathématiques & CPGE Maroc · Algorithmique Formelle"
       },
       {
-        id: "infd-5",
-        theme: "Obstacle de l'Affectation",
-        question: "Quelle confusion cognitive fréquente observe-t-on chez les élèves lors de la découverte de l'instruction d'affectation « x = x + 1 » en Python ?",
-        questionAr: "ما هو اللبس الرياضي الشائع الذي يواجهه التلاميذ عند مصادفة تعليمة الإسناد 'x = x + 1'؟",
+        id: "info-did-05",
+        category: "Métacognition & Traitement de l'Erreur",
+        question: "Un élève obtient un message d'erreur d'exécution en Python : `IndexError: list index out of range`. Quelle posture didactique l'enseignant doit-il adopter pour développer l'autonomie métacognitive de l'élève ?",
         options: [
-          { id: "A", text: "Confondre l'affectation dynamique en mémoire avec l'égalité mathématique symétrique (qui rendrait l'équation x = x + 1 impossible)", correct: true },
-          { id: "B", text: "Penser que x vaut obligatoirement zéro" },
-          { id: "C", text: "Croire que le signe plus est une soustraction" },
-          { id: "D", text: "Confondre la lettre x avec le chiffre 10" }
+          "Prendre la souris de l'élève et corriger immédiatement l'indice fautif à sa place.",
+          "Guider l'élève dans la lecture du message de trace (Traceback), lui faire afficher la longueur de la liste `len(L)` et lui faire tracer pas à pas les valeurs prises par l'indice lors des itérations.",
+          "Lui dire que le langage Python a un bogue et lui conseiller de changer d'ordinateur.",
+          "Lui demander de supprimer la liste et de recommencer tout le programme à zéro."
         ],
-        explanation: "L'opérateur '=' en programmation est un ordre destructif d'écrasement de la case mémoire, alors qu'en mathématiques il exprime une équivalence symétrique d'égalité."
+        answer: 1,
+        explanation: "L'apprentissage de la programmation est une école de métacognition. Le message d'erreur n'est pas une faute mais une ressource d'apprentissage. L'enseignant doit entraîner l'élève à lire la trace (numéro de ligne, type d'exception), à verbaliser la taille de la structure de données et à vérifier les bornes (problème d'indice 0 à n-1 en Python).",
+        reference: "Didactique de la Programmation · Gestion Métacognitive de l'Erreur & Pédagogie de l'Erreur"
       },
       {
-        id: "infd-6",
-        theme: "Programmation Visuelle par Blocs",
-        question: "Quel est l'intérêt didactique de l'utilisation de Scratch ou Blockly avant d'aborder un langage textuel comme Python au collège ?",
-        questionAr: "ما هي الفائدة الديداكتيكية لاستعمال البرمجة المرئية بالكتل (Scratch) قبل البرمجة النصية؟",
+        id: "info-did-06",
+        category: "Pédagogie de Projet Informatique",
+        question: "Dans le cadre de la pédagogie de projet en informatique au cycle qualifiant (ex: mini-projet de fin de semestre), quelle démarche garantit une collaboration équilibrée et une évaluation objective des apprentissages individuels ?",
         options: [
-          { id: "A", text: "Éliminer la charge cognitive liée aux erreurs de syntaxe (parenthèses, guillemets, indentation) pour se concentrer sur la logique algorithmique", correct: true },
-          { id: "B", text: "Créer des jeux vidéo commerciaux en 3D" },
-          { id: "C", text: "Remplacer l'apprentissage de l'écriture manuscrite" },
-          { id: "D", text: "Scratch ne présente aucun intérêt didactique" }
+          "Attribuer la même note globale à toute l'équipe sans exiger de cahier des charges ni de répartition des tâches.",
+          "Découper le projet en jalons (cahier des charges, modélisation/conception, développement modulaire, tests unitaires) avec carnet de bord individuel, soutenance orale et revue de code.",
+          "Laisser le meilleur élève coder tout le projet chez lui et les autres rédiger le diaporama.",
+          "Interdire formellement toute modularité et imposer l'écriture de tout le code dans un seul fichier sans fonctions."
         ],
-        explanation: "La programmation visuelle par emboîtement supprime les fautes de frappe bloquantes, permettant aux apprenants de se focaliser sur l'ordonnancement séquentiel, les alternatives conditionnelles et les boucles."
+        answer: 1,
+        explanation: "La pédagogie de projet efficace en informatique repose sur le cycle de vie d'un logiciel : spécification fonctionnelle, découpage modulaire (fonctions/classes réparties), versionnage ou carnet de bord attestant de la contribution de chaque membre, et soutenance croisée évaluant la compréhension du code par chaque élève.",
+        reference: "Guide Pédagogique des Projets Informatiques · MENPS Maroc"
       },
       {
-        id: "infd-7",
-        theme: "Transposition Didactique de la Récursivité",
-        question: "Comment introduire intuitivement la notion de fonction récursive en classe terminale ?",
-        questionAr: "كيف يتم تقديم مفهوم الدالة العودية (Récursivité) بشكل مبسط وفعال؟",
+        id: "info-did-07",
+        category: "Bases de Données & Modélisation",
+        question: "Lors de l'enseignement de la modélisation des données (Merise / Modèle Relationnel), quelle est l'erreur conceptuelle classique commise par les élèves lors de la définition d'une clé primaire ?",
         options: [
-          { id: "A", text: "Par analogie avec des poupées russes ou un cas de base trivial (condition d'arrêt) associé à la réduction du problème vers ce cas de base", correct: true },
-          { id: "B", text: "En demandant aux élèves de calculer le factoriel de 1000 de tête" },
-          { id: "C", text: "En interdisant l'utilisation des boucles 'Pour'" },
-          { id: "D", text: "Par une démonstration axiomatique sans exemple" }
+          "Choisir une clé primaire composée d'un identifiant numérique unique.",
+          "Confondre l'identifiant (invariant et unique par définition) avec une donnée descriptive modifiable ou non unique (comme le nom de famille ou l'âge).",
+          "Déclarer une clé étrangère qui référence une clé primaire existante.",
+          "Utiliser des lettres minuscules dans les noms de tables relationnelles."
         ],
-        explanation: "La récursivité repose impérativement sur deux piliers : un cas d'arrêt déterministe (sans appel récursif) et une formule de récurrence qui converge vers ce cas d'arrêt."
+        answer: 1,
+        explanation: "L'obstacle majeur chez les débutants en bases de données est de considérer un attribut descriptif (ex: 'Nom' ou 'Numéro de téléphone') comme clé primaire, ignorant le risque d'homonymie ou de changement de valeur. L'enseignant doit illustrer le principe d'unicité absolue et d'invariance dans le temps (ex: Matricule, CIN, Code MASSAR).",
+        reference: "Didactique des Systèmes d'Information et Bases de Données · CRMEF Informatique"
       },
       {
-        id: "infd-8",
-        theme: "Gestion de la Salle Multimédia",
-        question: "Quelle stratégie de gestion de classe est recommandée pour éviter le décrochage passif lors des séances sur ordinateur en binômes ?",
-        questionAr: "ما هي الاستراتيجية المثلى لضمان المشاركة الفعالة لجميع التلاميذ في قاعة الإعلاميات؟",
+        id: "info-did-08",
+        category: "Évaluation des Compétences Informatiques",
+        question: "Pour évaluer la production d'un code source lors d'une épreuve pratique sur machine, quels critères doivent composer une grille d'évaluation sommative critériée équilibrée ?",
         options: [
-          { id: "A", text: "La méthode du 'Pair Programming' (un pilote qui code et un navigateur qui relit et guide, avec inversion périodique des rôles)", correct: true },
-          { id: "B", text: "Laisser le meilleur élève faire tout le travail seul" },
-          { id: "C", text: "Éteindre les écrans et dicter le cours" },
-          { id: "D", text: "Interdire aux élèves de parler entre eux" }
+          "Uniquement le nombre total de lignes de code écrites par l'élève.",
+          "L'exactitude fonctionnelle (résultats attendus sur jeux de tests), la structuration modulaire (fonctions/paramètres), la lisibilité (noms de variables explicites, indentation) et la gestion des cas limites.",
+          "La vitesse de frappe au clavier et la couleur du thème de l'éditeur de code.",
+          "Le nombre de commentaires copiés/collés depuis internet sans exécution du code."
         ],
-        explanation: "La programmation en binôme responsabilise les deux élèves : le 'pilote' tape le code pendant que le 'navigateur' anticipe la logique et vérifie la conformité avec l'algorithme."
+        answer: 1,
+        explanation: "Une grille d'évaluation critériée en informatique ne se limite pas au binaire 'ça marche / ça ne marche pas'. Elle évalue la qualité intrinsèque du code : 1) Exactitude sur cas nominaux et cas limites (40%), 2) Modularité et réutilisabilité (30%), 3) Lisibilité, nommage et documentation (20%), 4) Optimisation et complexité (10%).",
+        reference: "Cadre de Référence de l'Évaluation des Apprentissages en Informatique · CNEE Maroc"
       },
       {
-        id: "infd-9",
-        theme: "Évaluation en Informatique",
-        question: "Lors de l'évaluation formative d'un projet informatique, quel critère prime sur la simple conformité du résultat final ?",
-        questionAr: "أثناء التقويم التكويني لمشروع إعلامي، ما المعيار الذي يفوق مجرد الحصول على النتيجة النهائية؟",
+        id: "info-did-09",
+        category: "Réseaux & Modèle en Couches",
+        question: "Pour faire comprendre aux élèves l'encapsulation des données dans le modèle réseau TCP/IP, quelle analogie didactique est la plus pertinente et couramment recommandée dans les guides pédagogiques ?",
         options: [
-          { id: "A", text: "La qualité algorithmique : modularité du code (fonctions), lisibilité, indentation rigoureuse, nommage explicite des variables et robustesse face aux erreurs", correct: true },
-          { id: "B", text: "La rapidité de frappe sur le clavier" },
-          { id: "C", text: "Le nombre de pages imprimées" },
-          { id: "D", text: "Le prix de la souris utilisée" }
+          "L'analogie du système postal : le message est placé dans une lettre, elle-même mise dans une enveloppe affranchie avec adresse, puis dans un sac postal et transportée par camion.",
+          "L'analogie de la photosynthèse végétale.",
+          "L'analogie de la cuisson d'un aliment au four à micro-ondes.",
+          "L'analogie du tirage au sort d'une loterie nationale."
         ],
-        explanation: "Un code qui 'marche par accident' n'a pas de valeur éducative : la didactique évalue la structuration logique, la clarté conceptuelle et la réutilisabilité des composants."
+        answer: 0,
+        explanation: "L'analogie de la lettre postale est le classique didactique par excellence pour l'encapsulation réseau : les données de l'application constituent le contenu de la lettre ; la couche Transport ajoute le numéro de suivi (port/TCP) ; la couche Réseau ajoute l'enveloppe avec l'adresse du destinataire (IP) ; et la couche Liaison/Physique assure le transport matériel (trame/Ethernet).",
+        reference: "Didactique des Réseaux Informatiques et Télécommunications · CRMEF & Manuels Scolaires"
       },
       {
-        id: "infd-10",
-        theme: "Éthique & Citoyenneté Numérique",
-        question: "Quelle dimension sociétale doit obligatoirement accompagner l'enseignement de l'informatique selon les orientations du MENPS ?",
-        questionAr: "ما هو البعد القيمي والأخلاقي الإلزامي في منهاج الإعلاميات المغربي؟",
+        id: "info-did-10",
+        category: "Éthique, IA & Citoyenneté Numérique",
+        question: "Conformément aux orientations curriculaires marocaines relatives à l'éducation aux médias et au numérique (Loi 09-08 et Feuille de Route 2022-2026), quel objectif didactique transversal doit être intégré aux cours d'informatique ?",
         options: [
-          { id: "A", text: "La protection des données personnelles, le respect de la propriété intellectuelle (licences libres), la cybersécurité et l'esprit critique face aux infox", correct: true },
-          { id: "B", text: "Apprendre à pirater les sites des banques" },
-          { id: "C", text: "Interdire l'utilisation des logiciels libres" },
-          { id: "D", text: "Obliger les élèves à acheter les logiciels les plus chers" }
+          "Former des pirates informatiques capables de contourner les pares-feux institutionnels.",
+          "Développer chez l'élève une conscience éthique et critique : protection des données personnelles, respect de la propriété intellectuelle, usage raisonné des outils d'IA et détection des infox.",
+          "Interdire l'usage de tout appareil numérique à la maison comme à l'école.",
+          "Considérer que l'éthique ne concerne pas l'informatique mais uniquement les sciences humaines."
         ],
-        explanation: "La culture numérique forme des citoyens éclairés conscients des enjeux juridiques et éthiques de l'intelligence artificielle, des réseaux sociaux et de l'empreinte écologique du numérique."
+        answer: 1,
+        explanation: "L'enseignement de l'informatique au Maroc ne forme pas de simples techniciens mais des citoyens numériques éclairés. L'enseignant doit sensibiliser aux enjeux de la loi 09-08 (protection des données personnelles), aux licences logicielles (open source vs propriétaire), à la cyber-sécurité et aux biais éthiques de l'Intelligence Artificielle.",
+        reference: "Loi 09-08 relative à la protection des personnes physiques à l'égard du traitement des données à caractère personnel & CNDP Maroc"
       }
     ];
 
-    let currentSeries = [];
-    let currentIndex = 0;
-    let score = 0;
-    let hasAnsweredCurrent = false;
+    let currentQuestionIdx = 0;
+    let userAnswers = new Array(quizData.length).fill(null);
+    let secondsElapsed = 0;
+    let timerInterval = null;
 
-    function shuffle(arr) {
-      return [...arr].sort(() => Math.random() - 0.5);
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        secondsElapsed++;
+        const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
+        const secs = String(secondsElapsed % 60).padStart(2, '0');
+        const display = `${mins}:${secs}`;
+        const el = document.getElementById('timer-display');
+        if (el) el.textContent = display;
+      }, 1000);
     }
 
-    function startNewSeries() {
-      currentSeries = shuffle(INFO_DIDACTIQUE_BANK).slice(0, 10);
-      currentIndex = 0;
-      score = 0;
-      hasAnsweredCurrent = false;
-      document.getElementById('quiz-live-score').textContent = '0';
-      document.getElementById('quiz-answered-count').textContent = '0';
-      renderQuestion();
-    }
+    function renderQuestion(idx) {
+      const q = quizData[idx];
+      document.getElementById('question-counter').textContent = `Question ${idx + 1} / ${quizData.length}`;
+      document.getElementById('category-badge').textContent = q.category;
+      document.getElementById('question-text').textContent = q.question;
 
-    function renderQuestion() {
-      hasAnsweredCurrent = false;
-      const q = currentSeries[currentIndex];
-      document.getElementById('quiz-current-num').textContent = currentIndex + 1;
-      document.getElementById('quiz-theme-badge').textContent = q.theme;
-      document.getElementById('quiz-progress-fill').style.width = ((currentIndex + 1) * 10) + '%';
-      document.getElementById('quiz-question-fr').textContent = q.question;
-      document.getElementById('quiz-question-ar').textContent = q.questionAr || '';
-      
-      const expBox = document.getElementById('quiz-explanation-box');
-      expBox.className = 'hidden';
-      document.getElementById('btn-next-question').classList.add('hidden');
+      const progressPct = ((idx + 1) / quizData.length) * 100;
+      document.getElementById('progress-bar').style.width = `${progressPct}%`;
 
-      const container = document.getElementById('quiz-options-container');
+      const container = document.getElementById('choices-container');
       container.innerHTML = '';
 
-      q.options.forEach(opt => {
+      q.options.forEach((optText, optIdx) => {
+        const isSelected = userAnswers[idx] === optIdx;
         const btn = document.createElement('button');
-        btn.className = 'w-full p-4 rounded-2xl border border-slate-200 hover:border-teal-600 hover:bg-teal-50/40 text-left text-xs sm:text-sm font-semibold transition-all flex items-start gap-3 cursor-pointer bg-white';
-        btn.innerHTML = `<span class="w-6 h-6 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center text-xs font-black shrink-0">${opt.id}</span><span>${opt.text}</span>`;
-        btn.onclick = () => selectOption(opt, btn, q);
+        btn.type = 'button';
+        btn.onclick = () => selectOption(optIdx);
+        btn.className = `w-full text-left p-4 rounded-xl border text-sm sm:text-base transition-all duration-200 flex items-start gap-3.5 ${
+          isSelected
+            ? 'bg-sky-950/80 border-sky-500 text-sky-100 ring-2 ring-sky-500/30 font-semibold'
+            : 'bg-slate-900 border-slate-800 text-slate-300 hover:bg-slate-850 hover:border-slate-700'
+        }`;
+
+        const markerLetter = ['A', 'B', 'C', 'D'][optIdx];
+        btn.innerHTML = `
+          <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg text-xs font-black shrink-0 ${
+            isSelected ? 'bg-sky-600 text-white shadow' : 'bg-slate-800 text-slate-400 border border-slate-700'
+          }">${markerLetter}</span>
+          <span class="leading-relaxed flex-1">${optText}</span>
+        `;
         container.appendChild(btn);
       });
+
+      document.getElementById('prev-btn').disabled = idx === 0;
+
+      if (idx === quizData.length - 1) {
+        document.getElementById('next-btn').classList.add('hidden');
+        document.getElementById('submit-btn').classList.remove('hidden');
+      } else {
+        document.getElementById('next-btn').classList.remove('hidden');
+        document.getElementById('submit-btn').classList.add('hidden');
+      }
     }
 
-    function selectOption(opt, btn, q) {
-      if (hasAnsweredCurrent) return;
-      hasAnsweredCurrent = true;
-
-      const buttons = document.querySelectorAll('#quiz-options-container button');
-      buttons.forEach(b => b.classList.add('pointer-events-none'));
-
-      const expBox = document.getElementById('quiz-explanation-box');
-      const title = document.getElementById('quiz-feedback-title');
-      const text = document.getElementById('quiz-explanation-text');
-
-      if (opt.correct) {
-        score++;
-        btn.className = 'w-full p-4 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-left text-xs sm:text-sm font-bold text-emerald-900 flex items-start gap-3';
-        expBox.className = 'rounded-2xl p-4 sm:p-5 border border-emerald-300 bg-emerald-50/80 block';
-        title.innerHTML = '✅ <span class="text-emerald-800">Conception didactique et algorithmique exacte !</span>';
-      } else {
-        btn.className = 'w-full p-4 rounded-2xl border-2 border-red-500 bg-red-50 text-left text-xs sm:text-sm font-bold text-red-900 flex items-start gap-3';
-        buttons.forEach((b, idx) => {
-          if (q.options[idx].correct) {
-            b.className = 'w-full p-4 rounded-2xl border-2 border-emerald-500 bg-emerald-50/60 text-left text-xs sm:text-sm font-bold text-emerald-900 flex items-start gap-3';
-          }
-        });
-        expBox.className = 'rounded-2xl p-4 sm:p-5 border border-red-300 bg-red-50/80 block';
-        title.innerHTML = '❌ <span class="text-red-800">Réponse didactique inexacte</span>';
-      }
-
-      text.textContent = q.explanation;
-      document.getElementById('quiz-live-score').textContent = score;
-      document.getElementById('quiz-answered-count').textContent = currentIndex + 1;
-      document.getElementById('btn-next-question').classList.remove('hidden');
+    function selectOption(optIdx) {
+      userAnswers[currentQuestionIdx] = optIdx;
+      renderQuestion(currentQuestionIdx);
     }
 
     function nextQuestion() {
-      if (currentIndex < currentSeries.length - 1) {
-        currentIndex++;
-        renderQuestion();
-      } else {
-        alert(`Épreuve Didactique Informatique terminée !\nScore : ${score} / 10.`);
-        startNewSeries();
+      if (currentQuestionIdx < quizData.length - 1) {
+        currentQuestionIdx++;
+        renderQuestion(currentQuestionIdx);
       }
     }
 
-    function switchMode(mode) {
-      const qSection = document.getElementById('section-quiz-mode');
-      const bSection = document.getElementById('section-browse-mode');
-      const btnQ = document.getElementById('btn-mode-quiz');
-      const btnB = document.getElementById('btn-mode-browse');
-
-      if (mode === 'quiz') {
-        qSection.classList.remove('hidden');
-        bSection.classList.add('hidden');
-        btnQ.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold bg-teal-700 text-white shadow-xs cursor-pointer transition-all text-center';
-        btnB.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center';
-      } else {
-        qSection.classList.add('hidden');
-        bSection.classList.remove('hidden');
-        btnB.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold bg-teal-700 text-white shadow-xs cursor-pointer transition-all text-center';
-        btnQ.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center';
-        renderBrowse();
+    function prevQuestion() {
+      if (currentQuestionIdx > 0) {
+        currentQuestionIdx--;
+        renderQuestion(currentQuestionIdx);
       }
     }
 
-    function renderBrowse() {
-      const list = document.getElementById('browse-questions-list');
-      document.getElementById('browse-count').textContent = `${INFO_DIDACTIQUE_BANK.length} Questions avec Corrigés`;
+    function finishQuiz() {
+      clearInterval(timerInterval);
+
+      let correctCount = 0;
+      quizData.forEach((q, idx) => {
+        if (userAnswers[idx] === q.answer) {
+          correctCount++;
+        }
+      });
+
+      const scoreOutOf20 = (correctCount / quizData.length) * 20;
+      const accuracyPct = Math.round((correctCount / quizData.length) * 100);
+
+      document.getElementById('quiz-container').classList.add('hidden');
+      document.getElementById('result-container').classList.remove('hidden');
+
+      document.getElementById('final-score').textContent = `${scoreOutOf20}/20`;
+      document.getElementById('stat-correct').textContent = correctCount;
+      document.getElementById('stat-wrong').textContent = quizData.length - correctCount;
+      document.getElementById('stat-accuracy').textContent = `${accuracyPct}%`;
+
+      const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
+      const secs = String(secondsElapsed % 60).padStart(2, '0');
+      document.getElementById('stat-time').textContent = `${mins}:${secs}`;
+
+      const badge = document.getElementById('score-badge');
+      const title = document.getElementById('diagnostic-title');
+      const desc = document.getElementById('diagnostic-desc');
+
+      if (scoreOutOf20 >= 16) {
+        badge.className = "inline-flex items-center justify-center w-24 h-24 rounded-full bg-emerald-950/80 border-4 border-emerald-500 text-3xl font-black text-emerald-300 mb-4 shadow-xl shadow-emerald-950/50";
+        title.textContent = "Excellent Niveau Didactique · Admissibilité Garantie";
+        desc.textContent = "Parfaite maîtrise de l'ingénierie pédagogique de l'informatique : pensée computationnelle, débranchement, transposition Scratch/Python et pédagogie de projet.";
+      } else if (scoreOutOf20 >= 12) {
+        badge.className = "inline-flex items-center justify-center w-24 h-24 rounded-full bg-sky-950/80 border-4 border-sky-500 text-3xl font-black text-sky-300 mb-4 shadow-xl shadow-sky-950/50";
+        title.textContent = "Niveau Satisfaisant · Profil Admissible au CRMEF";
+        desc.textContent = "Bonne maîtrise des principes didactiques généraux. Affinez la formalisation des invariants/variants de boucle et les grilles d'évaluation sommative.";
+      } else if (scoreOutOf20 >= 10) {
+        badge.className = "inline-flex items-center justify-center w-24 h-24 rounded-full bg-amber-950/80 border-4 border-amber-500 text-3xl font-black text-amber-300 mb-4 shadow-xl shadow-amber-950/50";
+        title.textContent = "Niveau Moyen · Seuil Minimal d'Admissibilité";
+        desc.textContent = "Connaissances partielles. Revoir impérativement les documents d'Orientations Pédagogiques du Secondaire et les démarches de résolution de problèmes.";
+      } else {
+        badge.className = "inline-flex items-center justify-center w-24 h-24 rounded-full bg-red-950/80 border-4 border-red-500 text-3xl font-black text-red-300 mb-4 shadow-xl shadow-red-950/50";
+        title.textContent = "Niveau Insuffisant · Risque d'Élimination";
+        desc.textContent = "Lacunes méthodologiques importantes en didactique de la discipline. Étudiez les guides pédagogiques officiels du MENPS pour le collège et le lycée.";
+      }
+
+      renderReviewList();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderReviewList() {
+      const list = document.getElementById('review-list');
       list.innerHTML = '';
 
-      INFO_DIDACTIQUE_BANK.forEach((q, idx) => {
+      quizData.forEach((q, idx) => {
+        const userChoice = userAnswers[idx];
+        const isCorrect = userChoice === q.answer;
+
         const card = document.createElement('div');
-        card.className = 'bg-white rounded-2xl border border-slate-200 p-5 space-y-3';
-        const correctOpt = q.options.find(o => o.correct);
+        card.className = `p-4 sm:p-5 rounded-xl border ${
+          isCorrect ? 'bg-slate-900/80 border-emerald-800/60' : 'bg-slate-900/80 border-red-900/60'
+        }`;
+
+        const userOptionText = userChoice !== null ? q.options[userChoice] : 'Aucune réponse fournie';
+        const correctOptionText = q.options[q.answer];
 
         card.innerHTML = `
-          <div class="flex items-center justify-between">
-            <span class="px-2.5 py-0.5 rounded-md bg-teal-50 text-teal-800 text-[11px] font-bold">Question ${idx + 1} · ${q.theme}</span>
+          <div class="flex items-start justify-between gap-3 mb-2">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-xs font-bold ${
+              isCorrect ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' : 'bg-red-950 text-red-300 border border-red-800'
+            }">
+              <span>${isCorrect ? '✓ Réponse Didactique Exacte' : '✗ Réponse Erronée'}</span>
+            </span>
+            <span class="text-xs text-sky-400 font-semibold">${q.category} · Question ${idx + 1}</span>
           </div>
-          <h4 class="text-sm font-black text-slate-900">${q.question}</h4>
-          ${q.questionAr ? `<p class="text-xs font-arabic text-teal-900 text-right dir-rtl font-semibold">${q.questionAr}</p>` : ''}
-          <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1">
-            <span class="text-xs font-black text-emerald-800">Bonne réponse : Option ${correctOpt.id} - ${correctOpt.text}</span>
-            <p class="text-xs text-slate-700 leading-relaxed">${q.explanation}</p>
+          
+          <h5 class="text-sm sm:text-base font-bold text-slate-100 mb-3 leading-relaxed">${q.question}</h5>
+          
+          <div class="space-y-1.5 text-xs sm:text-sm mb-3">
+            <div class="p-2.5 rounded-lg ${isCorrect ? 'bg-emerald-950/40 text-emerald-200' : 'bg-red-950/40 text-red-200'}">
+              <span class="font-bold block text-xs opacity-75">Votre choix :</span>
+              <span>${userOptionText}</span>
+            </div>
+            ${!isCorrect ? `
+              <div class="p-2.5 rounded-lg bg-emerald-950/40 text-emerald-200 border border-emerald-800/40">
+                <span class="font-bold block text-xs opacity-75">Réponse attendue :</span>
+                <span>${correctOptionText}</span>
+              </div>
+            ` : ''}
+          </div>
+
+          <div class="p-3 rounded-lg bg-sky-950/30 border border-sky-900/40 text-xs sm:text-sm text-sky-200 leading-relaxed">
+            <strong class="text-sky-300 block mb-1">💡 Analyse Didactique & Justification :</strong>
+            ${q.explanation}
+            <div class="mt-2 pt-2 border-t border-sky-900/30 text-xs text-slate-400 flex items-center gap-1">
+              <span>📚 Référence officielle :</span>
+              <span class="text-sky-300 font-medium">${q.reference}</span>
+            </div>
           </div>
         `;
         list.appendChild(card);
       });
     }
 
-    startNewSeries();
+    function restartQuiz() {
+      currentQuestionIdx = 0;
+      userAnswers = new Array(quizData.length).fill(null);
+      secondsElapsed = 0;
+      document.getElementById('result-container').classList.add('hidden');
+      document.getElementById('quiz-container').classList.remove('hidden');
+      startTimer();
+      renderQuestion(0);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      startTimer();
+      renderQuestion(0);
+    });
   </script>
+
 </body>
 </html>
