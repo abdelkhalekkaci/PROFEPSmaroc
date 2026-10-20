@@ -1,20 +1,14 @@
 import React, { useState, useMemo } from 'react';
 import {
-  Award,
   BookOpen,
   CheckCircle2,
   XCircle,
   RotateCcw,
   Sparkles,
-  Timer,
   ChevronRight,
   GraduationCap,
   Activity,
-  Flame,
-  ArrowRight,
   TrendingUp,
-  Share2,
-  HelpCircle,
   FileText,
   BadgeCheck,
   Zap,
@@ -25,7 +19,6 @@ import {
   Check,
   Building2,
   Scale,
-  Compass,
 } from 'lucide-react';
 import {
   INITIAL_QUIZ_BANK,
@@ -784,6 +777,22 @@ export const CrmefQuizHub: React.FC = () => {
                     </button>
                   </div>
                 </div>
+
+                {historyScores.length > 0 && (
+                  <div className="pt-4 mt-4 border-t border-slate-100 flex flex-wrap items-center gap-2 text-xs">
+                    <span className="font-bold text-slate-500 text-[11px] uppercase tracking-wide">
+                      Historique de la session :
+                    </span>
+                    {historyScores.slice(0, 5).map((h, i) => (
+                      <span
+                        key={i}
+                        className="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-semibold text-[11px] border border-slate-200"
+                      >
+                        {h.date} · <strong>{h.score}/{h.total}</strong> ({h.subject})
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* CORRECTION PÉDAGOGIQUE DÉTAILLÉE QUESTION PAR QUESTION */}
@@ -955,10 +964,7 @@ export const CrmefQuizHub: React.FC = () => {
 
           {/* Liste des Questions & Corrigés */}
           <div className="space-y-4">
-            {browsableQuestions.map((q, idx) => {
-              const correctOpt = q.options.find(o => o.id === q.correctOptionId);
-
-              return (
+            {browsableQuestions.map((q, idx) => (
                 <div key={q.id} className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-2xs space-y-4">
                   <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
                     <div className="flex items-center gap-2">
@@ -1036,8 +1042,7 @@ export const CrmefQuizHub: React.FC = () => {
                     )}
                   </div>
                 </div>
-              );
-            })}
+              ))}
           </div>
         </div>
       )}
