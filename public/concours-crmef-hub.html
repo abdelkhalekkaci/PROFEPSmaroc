@@ -3,23 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hub Concours CRMEF Maroc · Simulateur QCM & Préparation aux 3 Épreuves | ProfEPS.ma</title>
-  <meta name="description" content="Portail national d'entraînement aux concours de recrutement des enseignants au Maroc (CRMEF / أطر الأكاديميات). QCM par séries de 10 questions corrigées : Sciences de l'Éducation, Didactique et Spécialités.">
+  <title>Hub Concours CRMEF Maroc · Portail de Préparation par Spécialité & Tronc Commun | ProfEPS.ma</title>
+  <meta name="description" content="Portail national d'entraînement aux concours de recrutement des enseignants au Maroc (CRMEF / أطر الأكاديميات). Tronc commun Sciences de l'Éducation et préparation séparée par spécialité : Didactique et Épreuves Disciplinaires.">
   <link rel="canonical" href="https://profeps.ma/concours-crmef-hub.html">
+  <link rel="icon" type="image/png" href="images/prof_eps.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .font-arabic { font-family: 'Noto Kufi Arabic', sans-serif; }
+    :root {
+      --peps-red: #c1272d;
+      --peps-red-dark: #991b1b;
+      --peps-green: #006233;
+      --peps-green-dark: #064e3b;
+      --peps-slate-dark: #0f172a;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .font-arabic {
+      font-family: 'Noto Kufi Arabic', sans-serif;
+    }
+    .peps-hero-gradient {
+      background: radial-gradient(circle at 18% 20%, rgba(193, 39, 45, 0.08) 0%, transparent 45%),
+                  radial-gradient(circle at 82% 80%, rgba(0, 98, 51, 0.08) 0%, transparent 45%),
+                  linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+    }
+    .peps-btn-primary {
+      background: linear-gradient(135deg, #c1272d 0%, #991b1b 52%, #006233 100%) !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(255, 255, 255, 0.25) !important;
+      box-shadow: 0 10px 24px -5px rgba(193, 39, 45, 0.35), 0 4px 10px -2px rgba(0, 98, 51, 0.2) !important;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .peps-btn-primary:hover {
+      transform: translateY(-2px) scale(1.008) !important;
+      filter: brightness(1.06) !important;
+      box-shadow: 0 14px 28px -5px rgba(193, 39, 45, 0.45), 0 6px 14px -2px rgba(0, 98, 51, 0.28) !important;
+    }
+    .peps-btn-green {
+      background: linear-gradient(135deg, #006233 0%, #064e3b 100%) !important;
+      color: #ffffff !important;
+      box-shadow: 0 6px 16px -3px rgba(0, 98, 51, 0.3) !important;
+      transition: all 0.2s ease !important;
+    }
+    .peps-btn-green:hover {
+      transform: translateY(-1px) !important;
+      filter: brightness(1.08) !important;
+    }
+    .peps-btn-red {
+      background: linear-gradient(135deg, #c1272d 0%, #991b1b 100%) !important;
+      color: #ffffff !important;
+      box-shadow: 0 6px 16px -3px rgba(193, 39, 45, 0.3) !important;
+      transition: all 0.2s ease !important;
+    }
+    .peps-btn-red:hover {
+      transform: translateY(-1px) !important;
+      filter: brightness(1.08) !important;
+    }
+    .peps-card {
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.95);
+      border-radius: 1.25rem;
+      transition: all 0.22s ease;
+      box-shadow: 0 4px 16px -4px rgba(15, 23, 42, 0.04);
+    }
+    .peps-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 12px 30px -8px rgba(15, 23, 42, 0.08);
+    }
   </style>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Course",
-    "name": "Hub de Préparation aux Concours CRMEF Maroc",
-    "description": "Entraînement officiel par séries de 10 QCM corrigés aux 3 épreuves des concours de recrutement des enseignants au Maroc.",
+    "name": "Portail National de Préparation aux Concours CRMEF Maroc",
+    "description": "Hub de préparation au concours de recrutement des enseignants au Maroc : Tronc commun universel en Sciences de l'Éducation et préparation par spécialité (Didactique et Spécialité disciplinaire).",
     "provider": {
       "@type": "Organization",
       "name": "ProfEPS Maroc",
@@ -33,345 +100,1187 @@
   }
   </script>
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col selection:bg-[#c1272d] selection:text-white">
 
-  <!-- ================= TOP UNIVERSAL HEADER & SILO NAVIGATION ================= -->
+  <!-- ================= TOP PROF-EPS BRANDED HEADER ================= -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs backdrop-blur-md bg-white/95">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-      <!-- Logo -->
-      <a href="https://profeps.ma" class="flex items-center gap-2.5 shrink-0 group">
-        <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-black text-sm shadow-xs group-hover:bg-blue-700 transition-colors">
-          PE
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between gap-4">
+      <!-- Logo ProfEPS officiel -->
+      <a href="https://profeps.ma" class="flex items-center gap-3 shrink-0 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#c1272d] to-[#006233] p-0.5 shadow-md group-hover:scale-105 transition-transform">
+          <div class="w-full h-full bg-white rounded-[10px] flex items-center justify-center font-black text-sm tracking-tight text-[#0f172a]">
+            <span class="text-[#c1272d]">P</span><span class="text-[#006233]">E</span>
+          </div>
         </div>
         <div>
-          <span class="font-extrabold text-slate-900 text-sm sm:text-base tracking-tight block leading-none">
-            ProfEPS<span class="text-blue-600">.ma</span>
+          <span class="font-extrabold text-slate-900 text-lg tracking-tight block leading-none font-heading">
+            ProfEPS<span class="text-[#c1272d]">.ma</span>
           </span>
-          <span class="text-[10px] text-slate-500 font-medium block mt-0.5">
-            Portail Concours CRMEF Maroc
+          <span class="text-[11px] text-slate-500 font-medium block mt-1">
+            Portail Officiel Concours CRMEF Maroc
           </span>
         </div>
       </a>
 
-      <!-- Silo Navigation Links -->
-      <nav class="hidden md:flex items-center gap-1 overflow-x-auto py-1 text-xs font-bold">
-        <a href="concours-crmef-hub.html" class="px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 border border-blue-200">
-          Accueil Hub
+      <!-- Navigation & Silos Directs -->
+      <nav class="hidden lg:flex items-center gap-1.5 text-xs font-bold">
+        <a href="concours-crmef-hub.html" class="px-3.5 py-2 rounded-xl bg-slate-900 text-white shadow-xs">
+          🏛️ Hub Concours
         </a>
-        <a href="qcm-sciences-education-crmef.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-          1. Sciences de l'Éducation (Commun)
+        <a href="qcm-sciences-education-crmef.html" class="px-3.5 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+          📚 Tronc Commun (Sciences Éduc.)
         </a>
-        <a href="qcm-didactique-eps-maroc.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-          2. Didactique EPS
+        <a href="qcm-didactique-eps-maroc.html" class="px-3.5 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+          🏃 Didactique EPS
         </a>
-        <a href="qcm-specialite-eps-maroc.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-          3. Spécialité EPS
+        <a href="qcm-specialite-eps-maroc.html" class="px-3.5 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+          ⚡ Spécialité EPS
         </a>
-        <a href="qcm-didactique-primaire-maroc.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-          4. Primaire
+        <a href="qcm-didactique-primaire-maroc.html" class="px-3.5 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+          🎒 Primaire
         </a>
       </nav>
 
-      <!-- Badge Officiel -->
+      <!-- Badge MENPS & Session -->
       <div class="flex items-center gap-2">
-        <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 text-[#006233] text-xs font-bold border border-emerald-200 shadow-2xs">
+          <span class="w-2 h-2 rounded-full bg-[#006233] animate-pulse"></span>
           <span>Session CRMEF 2026</span>
         </span>
       </div>
     </div>
 
     <!-- Mobile Sub-Navigation -->
-    <div class="md:hidden border-t border-slate-100 px-4 py-2 flex items-center gap-1.5 overflow-x-auto scrollbar-none text-[11px] font-bold">
-      <a href="concours-crmef-hub.html" class="px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 shrink-0">Hub</a>
-      <a href="qcm-sciences-education-crmef.html" class="px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100 shrink-0">Sciences Éduc.</a>
-      <a href="qcm-didactique-eps-maroc.html" class="px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100 shrink-0">Didactique EPS</a>
-      <a href="qcm-specialite-eps-maroc.html" class="px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100 shrink-0">Spécialité EPS</a>
-      <a href="qcm-didactique-primaire-maroc.html" class="px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100 shrink-0">Primaire</a>
+    <div class="lg:hidden border-t border-slate-100 px-4 py-2 flex items-center gap-1.5 overflow-x-auto scrollbar-none text-[11px] font-bold bg-white">
+      <a href="concours-crmef-hub.html" class="px-3 py-1.5 rounded-lg bg-slate-900 text-white shrink-0">🏛️ Hub Principal</a>
+      <a href="qcm-sciences-education-crmef.html" class="px-3 py-1.5 rounded-lg text-slate-700 bg-slate-100 shrink-0">📚 Tronc Commun</a>
+      <a href="qcm-didactique-eps-maroc.html" class="px-3 py-1.5 rounded-lg text-slate-700 bg-slate-100 shrink-0">🏃 Didactique EPS</a>
+      <a href="qcm-specialite-eps-maroc.html" class="px-3 py-1.5 rounded-lg text-slate-700 bg-slate-100 shrink-0">⚡ Spécialité EPS</a>
+      <a href="qcm-didactique-primaire-maroc.html" class="px-3 py-1.5 rounded-lg text-slate-700 bg-slate-100 shrink-0">🎒 Didactique Primaire</a>
+      <a href="qcm-specialite-primaire-maroc.html" class="px-3 py-1.5 rounded-lg text-slate-700 bg-slate-100 shrink-0">📘 Spécialité Primaire</a>
     </div>
   </header>
 
-  <!-- ================= MAIN CONTENT ================= -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10 flex-1 w-full">
-
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-950 text-white rounded-3xl p-6 sm:p-10 shadow-xl relative overflow-hidden">
-      <div class="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
-      <div class="relative z-10 max-w-4xl space-y-4">
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-xs font-semibold uppercase tracking-wider">
-          <span>مباريات توظيف الأطر النظامية للأكاديميات الجهوية للتربية والتكوين</span>
-        </div>
-
-        <h1 class="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
-          Portail National de Préparation au Concours CRMEF Maroc
-        </h1>
-
-        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-          Bienvenue sur le hub officiel d'entraînement aux <strong>3 épreuves obligatoires</strong> du concours de recrutement des enseignants au Maroc. Choisissez votre matière pour vous entraîner sur des séries de <strong>10 questions QCM aléatoires</strong> avec correction immédiate, justification didactique intégrale et argumentation légale (Loi-Cadre 51.17, Feuille de Route 2022-2026, TaRL et Orientations Pédagogiques).
-        </p>
-
-        <div class="pt-2 flex flex-wrap items-center gap-3 text-xs text-slate-300">
-          <div class="flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-lg backdrop-blur-xs">
-            <span>✓ 3 Épreuves Dédiées</span>
-          </div>
-          <div class="flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-lg backdrop-blur-xs">
-            <span>✓ Séries de 10 Questions Aléatoires</span>
-          </div>
-          <div class="flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-lg backdrop-blur-xs">
-            <span>✓ Justification Pédagogique Officielle</span>
-          </div>
-          <div class="flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-lg backdrop-blur-xs">
-            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-            <span>Supervisé par Abdelkhalek ELBOUDANI</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- LES 3 ÉPREUVES OFFICIELLES DU CONCOURS (EXPLICATION DE L'INGÉNIERIE) -->
-    <section class="space-y-4">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
-        <div>
-          <h2 class="text-xl font-black text-slate-900">
-            Les 3 Épreuves Officielles du Concours au Maroc
-          </h2>
-          <p class="text-xs text-slate-500">
-            Comprendre l'organisation des épreuves écrites pour cibler efficacement vos révisions
-          </p>
-        </div>
-        <span class="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-200 self-start sm:self-auto">
-          Conforme MENPS
+  <!-- ================= HERO SECTION (PEPS PALETTE) ================= -->
+  <section class="peps-hero-gradient border-b border-slate-200/80 py-10 sm:py-14 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 relative z-10">
+      
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="px-3 py-1 rounded-full bg-red-50 text-[#c1272d] text-xs font-black tracking-wide border border-red-200 font-arabic">
+          مباريات توظيف الأطر النظامية للأكاديميات الجهوية (CRMEF)
+        </span>
+        <span class="px-3 py-1 rounded-full bg-emerald-50 text-[#006233] text-xs font-bold border border-emerald-200">
+          ✓ Conforme aux Cadres de Référence MENPS
         </span>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Épreuve 1 -->
-        <div class="bg-white rounded-2xl border-2 border-indigo-200 p-6 shadow-xs hover:shadow-md transition-shadow space-y-3 relative overflow-hidden">
-          <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-black text-base">
-            01
-          </div>
-          <div class="inline-block px-2.5 py-0.5 rounded-md bg-indigo-50 text-indigo-800 text-[11px] font-extrabold uppercase">
-            Tronc Commun Universel (100% des Candidats)
-          </div>
-          <h3 class="text-base font-black text-slate-900">
-            Sciences de l'Éducation & مستجدات نظام التربية والتكوين
-          </h3>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Épreuve obligatoire commune à toutes les spécialités (Primaire, Secondaire EPS, Maths, SVT, PC, etc.). Porte sur la Loi-Cadre 51.17, la Feuille de route 2022-2026, les Écoles Pionnières, l'approche TaRL et les théories d'apprentissage (Piaget, Vygotski, Bruner).
-          </p>
-          <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
-            <span class="text-xs font-bold text-indigo-700">60 Questions au concours</span>
-            <a href="qcm-sciences-education-crmef.html" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-extrabold rounded-lg inline-flex items-center gap-1 shadow-xs">
-              S'entraîner →
-            </a>
-          </div>
-        </div>
-
-        <!-- Épreuve 2 -->
-        <div class="bg-white rounded-2xl border-2 border-emerald-200 p-6 shadow-xs hover:shadow-md transition-shadow space-y-3 relative overflow-hidden">
-          <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-black text-base">
-            02
-          </div>
-          <div class="inline-block px-2.5 py-0.5 rounded-md bg-emerald-50 text-emerald-800 text-[11px] font-extrabold uppercase">
-            Épreuve Disciplinaire
-          </div>
-          <h3 class="text-base font-black text-slate-900">
-            Spécialité Disciplinaire (مادة التخصص)
-          </h3>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Évalue la maîtrise académique et scientifique pure de votre filière. En EPS : physiologie de l'effort, bioénergétique (VO2max, VMA), biomécanique, anatomie et praxéologie motrice. En Primaire : français, arabe, mathématiques et éveil scientifique.
-          </p>
-          <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
-            <span class="text-xs font-bold text-emerald-700">Spécifique à chaque matière</span>
-            <a href="qcm-specialite-eps-maroc.html" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold rounded-lg inline-flex items-center gap-1 shadow-xs">
-              Accéder →
-            </a>
-          </div>
-        </div>
-
-        <!-- Épreuve 3 -->
-        <div class="bg-white rounded-2xl border-2 border-amber-200 p-6 shadow-xs hover:shadow-md transition-shadow space-y-3 relative overflow-hidden">
-          <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-black text-base">
-            03
-          </div>
-          <div class="inline-block px-2.5 py-0.5 rounded-md bg-amber-50 text-amber-800 text-[11px] font-extrabold uppercase">
-            Ingénierie & Enseignement
-          </div>
-          <h3 class="text-base font-black text-slate-900">
-            Didactique de la Spécialité (ديداكتيك مادة التخصص)
-          </h3>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Évalue votre capacité à enseigner la discipline sur le terrain marocain : Orientations Pédagogiques officielles, transposition didactique, fiches de séance, remédiation, grilles d'évaluation critères/indicateurs et sécurité scolaire.
-          </p>
-          <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
-            <span class="text-xs font-bold text-amber-700">Pédagogie de terrain</span>
-            <a href="qcm-didactique-eps-maroc.html" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-500 text-white text-xs font-extrabold rounded-lg inline-flex items-center gap-1 shadow-xs">
-              Accéder →
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- LES PAGES DÉDIÉES : GRILLE D'AIGUILLAGE PAR FILIÈRE -->
-    <section class="space-y-4">
-      <div class="border-b border-slate-200 pb-3">
-        <h2 class="text-xl font-black text-slate-900">
-          Choisissez votre Page Dédiée d'Entraînement
-        </h2>
-        <p class="text-xs text-slate-500">
-          Chaque page est indépendante, légère et optimisée pour smartphone avec son propre moteur de 10 questions.
+      <div class="max-w-4xl space-y-3">
+        <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight font-heading">
+          Hub de Préparation au Concours CRMEF Maroc
+        </h1>
+        <p class="text-base sm:text-lg text-slate-600 leading-relaxed">
+          Pour une révision fluide et rigoureuse, les épreuves sont structurées selon l'architecture officielle du Ministère : 
+          le <strong>Tronc Commun universel en Sciences de l'Éducation</strong> seul en tête, suivi de chaque <strong>Spécialité clairement séparée</strong> avec ses 2 modules incontournables : <em>Didactique</em> et <em>Spécialité Disciplinaire</em>.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- Garanties officielles -->
+      <div class="pt-2 flex flex-wrap items-center gap-3 sm:gap-4 text-xs font-semibold text-slate-700">
+        <div class="flex items-center gap-2 bg-white px-3.5 py-2 rounded-xl border border-slate-200 shadow-2xs">
+          <span class="text-[#c1272d] font-black">✓</span> Tronc Commun Universel Dédié
+        </div>
+        <div class="flex items-center gap-2 bg-white px-3.5 py-2 rounded-xl border border-slate-200 shadow-2xs">
+          <span class="text-[#006233] font-black">✓</span> 12 Spécialités Séparées en Blocs Nets
+        </div>
+        <div class="flex items-center gap-2 bg-white px-3.5 py-2 rounded-xl border border-slate-200 shadow-2xs">
+          <span class="text-[#c1272d] font-black">✓</span> 2 Épreuves par Spécialité (Didactique & Spécialité)
+        </div>
+        <div class="flex items-center gap-2 bg-white px-3.5 py-2 rounded-xl border border-slate-200 shadow-2xs">
+          <span class="w-2 h-2 rounded-full bg-[#006233]"></span> Justifications Légales & Pédagogiques
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Carte 1 : Sciences de l'Éducation (Tronc Commun) -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs hover:border-indigo-500 transition-all space-y-3 flex flex-col justify-between">
-          <div class="space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="px-2.5 py-1 rounded-md bg-indigo-50 text-indigo-700 text-xs font-black">
-                TRONC COMMUN
-              </span>
-              <span class="text-xs font-arabic font-bold text-indigo-600">علوم التربية</span>
-            </div>
-            <h3 class="text-base font-black text-slate-900">
-              Sciences de l'Éducation & Réformes Éducatives
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              La page incontournable pour les 120 000 candidats. Loi 51.17, Feuille de Route 2022-2026, Écoles Pionnières, TaRL et psychopédagogie.
-            </p>
-          </div>
-          <a href="qcm-sciences-education-crmef.html" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-extrabold rounded-xl text-center block shadow-md shadow-indigo-600/20 transition-all">
-            Lancer les Séries de 10 Questions →
-          </a>
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-14 flex-1 w-full">
+
+    <!-- =========================================================================
+         1. TRONC COMMUN UNIVERSEL : SCIENCES DE L'ÉDUCATION (STRICTEMENT SEUL EN HAUT)
+         ========================================================================= -->
+    <section class="space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="w-3 h-8 bg-gradient-to-b from-[#c1272d] to-[#006233] rounded-full"></div>
+        <div>
+          <span class="text-xs font-black uppercase tracking-wider text-[#c1272d]">Étape 1 · Épreuve Commune Universelle</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 font-heading">
+            Tronc Commun : Sciences de l'Éducation & مستجدات نظام التربية والتكوين
+          </h2>
+        </div>
+      </div>
+
+      <!-- Carte Majestueuse Tronc Commun Seule en Haut -->
+      <div class="bg-gradient-to-br from-white via-slate-50 to-red-50/20 rounded-3xl border-2 border-slate-300 hover:border-[#c1272d] p-6 sm:p-9 shadow-md transition-all relative overflow-hidden group">
+        
+        <!-- Ruban Badge Officiel -->
+        <div class="absolute top-0 right-0 bg-gradient-to-l from-[#c1272d] to-[#991b1b] text-white px-5 py-1.5 rounded-bl-2xl text-xs font-black tracking-wide shadow-sm flex items-center gap-1.5">
+          <span>OBLIGATOIRE POUR 100% DES CANDIDATS</span>
+          <span class="text-amber-200 font-arabic">· عام لجميع التخصصات</span>
         </div>
 
-        <!-- Carte 2 : Didactique EPS -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs hover:border-blue-500 transition-all space-y-3 flex flex-col justify-between">
-          <div class="space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 text-xs font-black">
-                FILIÈRE EPS
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mt-2">
+          
+          <!-- Contenu descriptif gauche (7 cols) -->
+          <div class="lg:col-span-7 space-y-5">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="px-3 py-1 rounded-lg bg-red-100 text-[#991b1b] text-xs font-black">
+                TRONC COMMUN NATIONAL
               </span>
-              <span class="text-xs font-arabic font-bold text-blue-600">ديداكتيك التربية البدنية</span>
-            </div>
-            <h3 class="text-base font-black text-slate-900">
-              Didactique de l'EPS (Orientations Pédagogiques)
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              OP EPS Lycée 2007 et Collège 2009, structure de la séance en 3 temps, cycle d'apprentissage, grilles d'évaluation et sécurité.
-            </p>
-          </div>
-          <a href="qcm-didactique-eps-maroc.html" class="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-extrabold rounded-xl text-center block shadow-md shadow-blue-600/20 transition-all">
-            Lancer les Séries Didactique EPS →
-          </a>
-        </div>
-
-        <!-- Carte 3 : Spécialité EPS -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs hover:border-emerald-500 transition-all space-y-3 flex flex-col justify-between">
-          <div class="space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-700 text-xs font-black">
-                FILIÈRE EPS
+              <span class="px-3 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-bold">
+                Primaire + Secondaire Collégial & Qualifiant
               </span>
-              <span class="text-xs font-arabic font-bold text-emerald-600">التخصص : علوم الرياضة</span>
-            </div>
-            <h3 class="text-base font-black text-slate-900">
-              Spécialité EPS (Physiologie, APSA & Biomécanique)
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Bioénergétique (aérobie, lactique, alactique), VMA, VDOT, praxéologie motrice de Parlebas, sports collectifs et athlétisme.
-            </p>
-          </div>
-          <a href="qcm-specialite-eps-maroc.html" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold rounded-xl text-center block shadow-md shadow-emerald-600/20 transition-all">
-            Lancer les Séries Spécialité EPS →
-          </a>
-        </div>
-
-        <!-- Carte 4 : Didactique Primaire -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs hover:border-amber-500 transition-all space-y-3 flex flex-col justify-between">
-          <div class="space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="px-2.5 py-1 rounded-md bg-amber-50 text-amber-700 text-xs font-black">
-                ENSEIGNEMENT PRIMAIRE
+              <span class="px-3 py-1 rounded-lg bg-emerald-100 text-[#064e3b] text-xs font-bold">
+                60 Questions au Concours
               </span>
-              <span class="text-xs font-arabic font-bold text-amber-600">ديداكتيك الابتدائي</span>
             </div>
-            <h3 class="text-base font-black text-slate-900">
-              Didactique du Primaire (Français, Arabe & Maths)
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Méthode syllabique phonologique, situations didactiques de Brousseau, approche TaRL et éveil scientifique au primaire.
-            </p>
-          </div>
-          <a href="qcm-didactique-primaire-maroc.html" class="w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white text-xs font-extrabold rounded-xl text-center block shadow-md shadow-amber-600/20 transition-all">
-            Lancer les Séries Didactique Primaire →
-          </a>
-        </div>
 
-        <!-- Carte 5 : Spécialité Primaire -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs hover:border-purple-500 transition-all space-y-3 flex flex-col justify-between">
-          <div class="space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="px-2.5 py-1 rounded-md bg-purple-50 text-purple-700 text-xs font-black">
-                ENSEIGNEMENT PRIMAIRE
-              </span>
-              <span class="text-xs font-arabic font-bold text-purple-600">تخصص الابتدائي المزدوج</span>
+            <div>
+              <h3 class="text-xl sm:text-2xl font-black text-slate-900 leading-snug font-heading">
+                مستجدات نظام التربية والتكوين وعلم النفس التربوي ونظريات التعلم
+              </h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                Cette épreuve transversale est identique pour l'ensemble des 120 000 candidats du Royaume, quelle que soit leur filière. Elle conditionne directement l'admissibilité et évalue la maîtrise des textes législatifs et réformes majeures marocaines ainsi que la psychopédagogie fondamentale.
+              </p>
             </div>
-            <h3 class="text-base font-black text-slate-900">
-              Spécialité Primaire (Épreuves Écrites Pluridisciplinaires)
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Grammaire, conjugaison, orthographe, mathématiques fondamentales, sciences appliquées et culture générale du concours primaire.
-            </p>
-          </div>
-          <a href="qcm-specialite-primaire-maroc.html" class="w-full py-2.5 bg-purple-600 hover:bg-purple-500 text-white text-xs font-extrabold rounded-xl text-center block shadow-md shadow-purple-600/20 transition-all">
-            Lancer les Séries Spécialité Primaire →
-          </a>
-        </div>
 
-        <!-- Carte 6 : Simulation Mixte -->
-        <div class="bg-gradient-to-br from-slate-900 to-blue-950 text-white rounded-2xl p-5 shadow-xs space-y-3 flex flex-col justify-between">
-          <div class="space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="px-2.5 py-1 rounded-md bg-blue-500/20 text-blue-300 text-xs font-black border border-blue-400/30">
-                EXAMEN BLANC
-              </span>
-              <span class="text-xs font-arabic text-amber-400 font-bold">امتحان تجريبي كامل</span>
+            <!-- Matières du Tronc Commun -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <div class="bg-white p-3 rounded-xl border border-slate-200 flex items-start gap-2.5 shadow-2xs">
+                <span class="text-[#c1272d] font-bold text-sm">📜</span>
+                <div>
+                  <strong class="text-slate-900 block font-bold">Législation & Réformes Marocaines</strong>
+                  <span class="text-slate-500">Loi-Cadre 51.17, Feuille de route 2022-2026, Écoles Pionnières (مدارس الريادة).</span>
+                </div>
+              </div>
+              <div class="bg-white p-3 rounded-xl border border-slate-200 flex items-start gap-2.5 shadow-2xs">
+                <span class="text-[#006233] font-bold text-sm">🧠</span>
+                <div>
+                  <strong class="text-slate-900 block font-bold">Théories de l'Apprentissage</strong>
+                  <span class="text-slate-500">Béhaviorisme, constructivisme (Piaget), socio-constructivisme (Vygotski), Bruner.</span>
+                </div>
+              </div>
+              <div class="bg-white p-3 rounded-xl border border-slate-200 flex items-start gap-2.5 shadow-2xs">
+                <span class="text-[#c1272d] font-bold text-sm">🎯</span>
+                <div>
+                  <strong class="text-slate-900 block font-bold">Approches & Pédagogies Actives</strong>
+                  <span class="text-slate-500">Approche TaRL (نظام طارل), pédagogie par compétences, différenciation et remédiation.</span>
+                </div>
+              </div>
+              <div class="bg-white p-3 rounded-xl border border-slate-200 flex items-start gap-2.5 shadow-2xs">
+                <span class="text-[#006233] font-bold text-sm">⚖️</span>
+                <div>
+                  <strong class="text-slate-900 block font-bold">Évaluation & Vie Scolaire</strong>
+                  <span class="text-slate-500">Diagnostique, formative, sommative, projet d'établissement intégré (PEI) et déontologie.</span>
+                </div>
+              </div>
             </div>
-            <h3 class="text-base font-black text-white">
-              Simulation Mixte du Concours (10 Qs Panachées)
-            </h3>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Tirage aléatoire combinant les 3 épreuves pour un test de mise en condition réelle avant le jour J.
-            </p>
           </div>
-          <a href="qcm-concours-crmef.html" class="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-extrabold rounded-xl text-center block shadow-md transition-all">
-            Passer la Simulation Mixte →
-          </a>
-        </div>
 
+          <!-- Bloc Action & Lancement droit (5 cols) -->
+          <div class="lg:col-span-5 bg-white rounded-2xl border-2 border-red-100 p-6 shadow-sm flex flex-col justify-between space-y-6 text-center sm:text-left">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-extrabold text-[#c1272d] uppercase">Séries d'entraînement</span>
+                <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                  Correction immédiate
+                </span>
+              </div>
+              <h4 class="text-lg font-black text-slate-900">
+                Prêt pour votre série de 10 Questions Aléatoires ?
+              </h4>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Tirage instantané parmi les QCM officiels du CNEE avec justifications d'experts citant articles de loi et théories éducatives.
+              </p>
+            </div>
+
+            <div class="space-y-3">
+              <a href="qcm-sciences-education-crmef.html" class="peps-btn-primary w-full py-4 px-6 rounded-2xl text-center font-black text-sm tracking-wide block">
+                🚀 S'entraîner en Sciences de l'Éducation (10 Questions) →
+              </a>
+              <div class="text-[11px] text-slate-500 text-center font-medium">
+                Sans inscription · Bilingue (Français & العربية) · 100% Gratuit
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
 
-    <!-- SECTION E-E-A-T SIGNATURE ABDELKHALEK ELBOUDANI -->
-    <section class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-4">
+    <!-- =========================================================================
+         2. SÉPARATION CLAIRE DES SPÉCIALITÉS AVEC FILTRAGE & RECHERCHE
+         ========================================================================= -->
+    <section class="space-y-6" id="specialites-section">
+      
+      <!-- En-tête de section avec filtres rapides -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 pb-5">
+        <div class="space-y-1">
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-6 bg-[#006233] rounded-full"></div>
+            <span class="text-xs font-black uppercase tracking-wider text-[#006233]">Étape 2 · Épreuves Spécifiques par Filière</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 font-heading">
+            Toutes les Spécialités du Concours CRMEF
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600">
+            Chaque filière est isolée dans un bloc dédié présentant strictement ses <strong>2 composantes officielles</strong> : la <em>Didactique</em> et la <em>Spécialité</em>.
+          </p>
+        </div>
+
+        <!-- Recherche rapide de filière -->
+        <div class="w-full md:w-72">
+          <div class="relative">
+            <input 
+              type="text" 
+              id="specialty-search" 
+              placeholder="Rechercher une spécialité..." 
+              class="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-300 bg-white text-xs font-semibold text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#c1272d] focus:border-transparent transition-all shadow-2xs"
+              oninput="filterSpecialties()"
+            />
+            <span class="absolute left-3 top-2.5 text-slate-400 text-sm">🔍</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Boutons de filtres par catégories -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none text-xs font-bold">
+        <button onclick="setFilter('all', this)" class="filter-btn px-4 py-2 rounded-xl bg-slate-900 text-white shadow-2xs shrink-0 transition-all">
+          Toutes les Spécialités (12)
+        </button>
+        <button onclick="setFilter('primaire', this)" class="filter-btn px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 shrink-0 transition-all">
+          🎒 Enseignement Primaire
+        </button>
+        <button onclick="setFilter('eps', this)" class="filter-btn px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 shrink-0 transition-all">
+          🏃 EPS (Sport & Motricité)
+        </button>
+        <button onclick="setFilter('sciences', this)" class="filter-btn px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 shrink-0 transition-all">
+          📐 Scientifiques (Maths, PC, SVT, Info)
+        </button>
+        <button onclick="setFilter('lettres', this)" class="filter-btn px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 shrink-0 transition-all">
+          📖 Langues & Lettres (Français, Arabe, Anglais)
+        </button>
+        <button onclick="setFilter('humaines', this)" class="filter-btn px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 shrink-0 transition-all">
+          ⚖️ Sciences Humaines (HG, Philo, Éduc. Islamique)
+        </button>
+      </div>
+
+      <!-- ================= LISTE DES 12 BLOCS DE SPÉCIALITÉS DÉDIÉS ================= -->
+      <div class="space-y-6" id="specialties-container">
+
+        <!-- ==================== 1. ENSEIGNEMENT PRIMAIRE ==================== -->
+        <div class="specialty-card peps-card p-6 sm:p-7 border-2 border-slate-200 hover:border-amber-400 space-y-6" data-category="primaire" data-name="primaire enseignement primaire مزدوج">
+          <!-- Entête Filière -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center text-2xl shadow-2xs shrink-0">
+                🎒
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2.5 py-0.5 rounded-md bg-amber-50 text-amber-900 text-[11px] font-black uppercase">
+                    Filière N°1 en Recrutement (6000+ Postes)
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-amber-700">التعليم الابتدائي مزدوج</span>
+                </div>
+                <h3 class="text-xl font-black text-slate-900 font-heading">
+                  Enseignement Primaire (التعليم الابتدائي)
+                </h3>
+              </div>
+            </div>
+            <span class="text-xs text-slate-500 font-semibold">
+              Cycle Primaire · Voie Bilingue & Polyvalente
+            </span>
+          </div>
+
+          <!-- Les 2 Épreuves Officielles Séparées Claires -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            
+            <!-- Épreuve 1 : Didactique -->
+            <div class="bg-amber-50/50 rounded-2xl border border-amber-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-xs font-extrabold uppercase">
+                    📘 Épreuve 1 : Didactique
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-amber-700">ديداكتيك المواد الابتدائية</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  Didactique du Primaire (Arabe, Français, Maths & Sciences)
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Méthode syllabique-phonologique, situations-problèmes de Brousseau, démarche d'investigation en éveil scientifique et remédiation active selon l'approche TaRL.
+                </p>
+              </div>
+              <a href="qcm-didactique-primaire-maroc.html" class="w-full py-2.5 px-4 bg-amber-600 hover:bg-amber-700 text-white rounded-xl text-xs font-black text-center block shadow-xs transition-colors">
+                Lancer l'entraînement Didactique Primaire →
+              </a>
+            </div>
+
+            <!-- Épreuve 2 : Spécialité -->
+            <div class="bg-slate-50 rounded-2xl border border-slate-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-800 text-xs font-extrabold uppercase">
+                    📗 Épreuve 2 : Spécialité
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-slate-700">مادة التخصص : المواد المدرسة</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  Épreuves Écrites Disciplinaires Pluridisciplinaires
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Maîtrise académique des 4 disciplines : grammaire et orthographe arabes/françaises, calcul arithmétique et géométrie, physique et sciences de la vie de base.
+                </p>
+              </div>
+              <a href="qcm-specialite-primaire-maroc.html" class="w-full py-2.5 px-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-black text-center block shadow-xs transition-colors">
+                Lancer l'entraînement Spécialité Primaire →
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ==================== 2. EPS (ÉDUCATION PHYSIQUE ET SPORTIVE) ==================== -->
+        <div class="specialty-card peps-card p-6 sm:p-7 border-2 border-slate-200 hover:border-[#006233] space-y-6" data-category="eps" data-name="eps education physique et sportive sport تربية بدنية">
+          <!-- Entête Filière -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-[#006233] flex items-center justify-center text-2xl shadow-2xs shrink-0">
+                🏃‍♂️
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2.5 py-0.5 rounded-md bg-emerald-50 text-[#064e3b] text-[11px] font-black uppercase">
+                    Spécialité Pilote ProfEPS.ma
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-[#006233]">التربية البدنية والرياضية</span>
+                </div>
+                <h3 class="text-xl font-black text-slate-900 font-heading">
+                  Éducation Physique et Sportive (EPS)
+                </h3>
+              </div>
+            </div>
+            <span class="text-xs text-slate-500 font-semibold">
+              Secondaire Collégial & Qualifiant
+            </span>
+          </div>
+
+          <!-- Les 2 Épreuves Officielles Séparées Claires -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            
+            <!-- Épreuve 1 : Didactique -->
+            <div class="bg-emerald-50/50 rounded-2xl border border-emerald-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-[#064e3b] text-xs font-extrabold uppercase">
+                    📘 Épreuve 1 : Didactique
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-[#006233]">ديداكتيك التربية البدنية</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  Didactique de l'EPS & Orientations Pédagogiques (OP 2007-2009)
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Transposition didactique des APSA, structure de séance en 3 parties, projet pédagogique de cycle, grilles d'évaluation critériées et gestion de la sécurité scolaire.
+                </p>
+              </div>
+              <a href="qcm-didactique-eps-maroc.html" class="peps-btn-green w-full py-2.5 px-4 rounded-xl text-xs font-black text-center block shadow-xs">
+                Lancer l'entraînement Didactique EPS →
+              </a>
+            </div>
+
+            <!-- Épreuve 2 : Spécialité -->
+            <div class="bg-red-50/30 rounded-2xl border border-red-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-red-100 text-[#991b1b] text-xs font-extrabold uppercase">
+                    📗 Épreuve 2 : Spécialité
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-[#c1272d]">مادة التخصص : علوم الرياضة</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  Spécialité EPS : Physiologie de l'effort, Biomécanique & Praxéologie
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Filières bioénergétiques (aérobie, lactique, alactique), VMA, VDOT, analyse cinématique du mouvement, praxéologie motrice de Pierre Parlebas et apprentissage moteur.
+                </p>
+              </div>
+              <a href="qcm-specialite-eps-maroc.html" class="peps-btn-red w-full py-2.5 px-4 rounded-xl text-xs font-black text-center block shadow-xs">
+                Lancer l'entraînement Spécialité EPS →
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ==================== 3. MATHÉMATIQUES ==================== -->
+        <div class="specialty-card peps-card p-6 sm:p-7 border-2 border-slate-200 hover:border-blue-400 space-y-6" data-category="sciences" data-name="mathematiques maths رياضيات secondaire">
+          <!-- Entête Filière -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-800 flex items-center justify-center text-2xl shadow-2xs shrink-0">
+                📐
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2.5 py-0.5 rounded-md bg-blue-50 text-blue-900 text-[11px] font-black uppercase">
+                    Secondaire Collégial & Qualifiant
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-blue-700">الرياضيات</span>
+                </div>
+                <h3 class="text-xl font-black text-slate-900 font-heading">
+                  Mathématiques (الرياضيات)
+                </h3>
+              </div>
+            </div>
+            <span class="text-xs text-slate-500 font-semibold">
+              Filière Scientifique Majeure
+            </span>
+          </div>
+
+          <!-- Les 2 Épreuves Officielles Séparées Claires -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            
+            <!-- Épreuve 1 : Didactique -->
+            <div class="bg-blue-50/50 rounded-2xl border border-blue-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-xs font-extrabold uppercase">
+                    📘 Épreuve 1 : Didactique
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-blue-700">ديداكتيك الرياضيات</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  Didactique des Mathématiques & Ingénierie
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Théorie des Situations Didactiques de Guy Brousseau (action, formulation, validation, institutionnalisation), contrat didactique, analyse des erreurs et exploitation des logiciels TICE (GeoGebra).
+                </p>
+              </div>
+              <button onclick="launchInteractiveSpecialtyQuiz('maths_didactique')" class="w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-black text-center block shadow-xs transition-colors">
+                Lancer l'entraînement Didactique Maths →
+              </button>
+            </div>
+
+            <!-- Épreuve 2 : Spécialité -->
+            <div class="bg-slate-50 rounded-2xl border border-slate-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-800 text-xs font-extrabold uppercase">
+                    📗 Épreuve 2 : Spécialité
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-slate-700">مادة التخصص : العلوم الرياضية</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  Spécialité Mathématiques (Analyse, Algèbre & Géométrie)
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Calcul différentiel et intégral, suites et séries, algèbre linéaire (espaces vectoriels, diagonalisation), géométrie affine/euclidienne, probabilités et arithmétique.
+                </p>
+              </div>
+              <button onclick="launchInteractiveSpecialtyQuiz('maths_specialite')" class="w-full py-2.5 px-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-black text-center block shadow-xs transition-colors">
+                Lancer l'entraînement Spécialité Maths →
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ==================== 4. PHYSIQUE - CHIMIE ==================== -->
+        <div class="specialty-card peps-card p-6 sm:p-7 border-2 border-slate-200 hover:border-cyan-400 space-y-6" data-category="sciences" data-name="physique chimie pc فيزياء كيمياء secondaire">
+          <!-- Entête Filière -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-800 flex items-center justify-center text-2xl shadow-2xs shrink-0">
+                ⚛️
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2.5 py-0.5 rounded-md bg-cyan-50 text-cyan-900 text-[11px] font-black uppercase">
+                    Secondaire Collégial & Qualifiant
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-cyan-700">الفيزياء والكيمياء</span>
+                </div>
+                <h3 class="text-xl font-black text-slate-900 font-heading">
+                  Physique - Chimie (الفيزياء والكيمياء)
+                </h3>
+              </div>
+            </div>
+            <span class="text-xs text-slate-500 font-semibold">
+              Sciences Physiques & Expérimentales
+            </span>
+          </div>
+
+          <!-- Les 2 Épreuves Officielles Séparées Claires -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            
+            <!-- Épreuve 1 : Didactique -->
+            <div class="bg-cyan-50/50 rounded-2xl border border-cyan-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-cyan-100 text-cyan-800 text-xs font-extrabold uppercase">
+                    📘 Épreuve 1 : Didactique
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-cyan-700">ديداكتيك الفيزياء والكيمياء</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  Didactique de la Physique-Chimie & Démarche d'Investigation
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Démarche d'investigation scientifique (وضعيات الاستكشاف), obstacles épistémologiques et conceptions d'élèves, gestion des manipulations de laboratoire et sécurité des réactifs.
+                </p>
+              </div>
+              <button onclick="launchInteractiveSpecialtyQuiz('pc_didactique')" class="w-full py-2.5 px-4 bg-cyan-700 hover:bg-cyan-800 text-white rounded-xl text-xs font-black text-center block shadow-xs transition-colors">
+                Lancer l'entraînement Didactique PC →
+              </button>
+            </div>
+
+            <!-- Épreuve 2 : Spécialité -->
+            <div class="bg-slate-50 rounded-2xl border border-slate-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-800 text-xs font-extrabold uppercase">
+                    📗 Épreuve 2 : Spécialité
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-slate-700">مادة التخصص : الفيزياء والكيمياء</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  Spécialité Disciplinaire : Mécanique, Électricité, Thermodynamique & Chimie
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Lois de Newton, oscillateurs et ondes, électrocinétique RLC, thermodynamique classique, équilibres chimiques en solution aqueuse (pH, redox) et chimie organique.
+                </p>
+              </div>
+              <button onclick="launchInteractiveSpecialtyQuiz('pc_specialite')" class="w-full py-2.5 px-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-black text-center block shadow-xs transition-colors">
+                Lancer l'entraînement Spécialité PC →
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ==================== 5. SCIENCES DE LA VIE ET DE LA TERRE (SVT) ==================== -->
+        <div class="specialty-card peps-card p-6 sm:p-7 border-2 border-slate-200 hover:border-emerald-400 space-y-6" data-category="sciences" data-name="svt sciences de la vie et de la terre علوم الحياة والارض biologie geologie">
+          <!-- Entête Filière -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-teal-100 text-teal-800 flex items-center justify-center text-2xl shadow-2xs shrink-0">
+                🔬
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2.5 py-0.5 rounded-md bg-teal-50 text-teal-900 text-[11px] font-black uppercase">
+                    Secondaire Collégial & Qualifiant
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-teal-700">علوم الحياة والأرض</span>
+                </div>
+                <h3 class="text-xl font-black text-slate-900 font-heading">
+                  Sciences de la Vie et de la Terre (SVT)
+                </h3>
+              </div>
+            </div>
+            <span class="text-xs text-slate-500 font-semibold">
+              Biologie, Géologie & Écosystèmes
+            </span>
+          </div>
+
+          <!-- Les 2 Épreuves Officielles Séparées Claires -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            
+            <!-- Épreuve 1 : Didactique -->
+            <div class="bg-teal-50/50 rounded-2xl border border-teal-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-800 text-xs font-extrabold uppercase">
+                    📘 Épreuve 1 : Didactique
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-teal-700">ديداكتيك علوم الحياة والأرض</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  Didactique des SVT & Modélisation Expérimentale
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Démarche d'investigation en SVT, analyse de documents et graphiques scientifiques, observation microscopique, transposition didactique et sorties de terrain géologiques.
+                </p>
+              </div>
+              <button onclick="launchInteractiveSpecialtyQuiz('svt_didactique')" class="w-full py-2.5 px-4 bg-teal-700 hover:bg-teal-800 text-white rounded-xl text-xs font-black text-center block shadow-xs transition-colors">
+                Lancer l'entraînement Didactique SVT →
+              </button>
+            </div>
+
+            <!-- Épreuve 2 : Spécialité -->
+            <div class="bg-slate-50 rounded-2xl border border-slate-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-800 text-xs font-extrabold uppercase">
+                    📗 Épreuve 2 : Spécialité
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-slate-700">مادة التخصص : البيولوجيا والجيولوجيا</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  Spécialité SVT : Biologie Cellulaire, Génétique & Géologie du Maroc
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Biologie moléculaire et cellulaire, génétique mendélienne et humaine, écologie générale, tectonique des plaques, magmatisme, métamorphisme et chaînes de montagnes marocaines.
+                </p>
+              </div>
+              <button onclick="launchInteractiveSpecialtyQuiz('svt_specialite')" class="w-full py-2.5 px-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-black text-center block shadow-xs transition-colors">
+                Lancer l'entraînement Spécialité SVT →
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ==================== 6. LANGUE FRANÇAISE ==================== -->
+        <div class="specialty-card peps-card p-6 sm:p-7 border-2 border-slate-200 hover:border-indigo-400 space-y-6" data-category="lettres" data-name="francais langue francaise litterature لغة فرنسية secondaire">
+          <!-- Entête Filière -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-800 flex items-center justify-center text-2xl shadow-2xs shrink-0">
+                🇫🇷
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2.5 py-0.5 rounded-md bg-indigo-50 text-indigo-900 text-[11px] font-black uppercase">
+                    Secondaire Collégial & Qualifiant
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-indigo-700">اللغة الفرنسية وآدابها</span>
+                </div>
+                <h3 class="text-xl font-black text-slate-900 font-heading">
+                  Langue & Littérature Françaises (اللغة الفرنسية)
+                </h3>
+              </div>
+            </div>
+            <span class="text-xs text-slate-500 font-semibold">
+              Lettres Modernes & FLE
+            </span>
+          </div>
+
+          <!-- Les 2 Épreuves Officielles Séparées Claires -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            
+            <!-- Épreuve 1 : Didactique -->
+            <div class="bg-indigo-50/50 rounded-2xl border border-indigo-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-800 text-xs font-extrabold uppercase">
+                    📘 Épreuve 1 : Didactique
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-indigo-700">ديداكتيك اللغة الفرنسية</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  Didactique du Français & Approche par Compétences (APC)
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Didactique des genres de textes, démarche de lecture méthodique, didactique de l'expression écrite et orale, grammaire textuelle et référentiel CECRL.
+                </p>
+              </div>
+              <button onclick="launchInteractiveSpecialtyQuiz('francais_didactique')" class="w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-black text-center block shadow-xs transition-colors">
+                Lancer l'entraînement Didactique Français →
+              </button>
+            </div>
+
+            <!-- Épreuve 2 : Spécialité -->
+            <div class="bg-slate-50 rounded-2xl border border-slate-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-800 text-xs font-extrabold uppercase">
+                    📗 Épreuve 2 : Spécialité
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-slate-700">مادة التخصص : الأدب واللسانيات</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  Spécialité : Linguistique, Syntaxe & Histoire Littéraire
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Linguistique générale et énonciation, syntaxe normative, figures de rhétorique, stylistique et analyse des grandes œuvres littéraires (Candide, Le Père Goriot, Antigone, etc.).
+                </p>
+              </div>
+              <button onclick="launchInteractiveSpecialtyQuiz('francais_specialite')" class="w-full py-2.5 px-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-black text-center block shadow-xs transition-colors">
+                Lancer l'entraînement Spécialité Français →
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ==================== 7. LANGUE ARABE ==================== -->
+        <div class="specialty-card peps-card p-6 sm:p-7 border-2 border-slate-200 hover:border-emerald-500 space-y-6" data-category="lettres" data-name="arabe langue arabe ادب عربي لغة عربية ثانوي">
+          <!-- Entête Filière -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-[#006233] flex items-center justify-center text-2xl shadow-2xs shrink-0">
+                🇸🇦
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2.5 py-0.5 rounded-md bg-emerald-50 text-[#064e3b] text-[11px] font-black uppercase">
+                    Secondaire Collégial & Qualifiant
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-[#006233]">اللغة العربية وآدابها</span>
+                </div>
+                <h3 class="text-xl font-black text-slate-900 font-heading">
+                  Langue & Littérature Arabes (اللغة العربية)
+                </h3>
+              </div>
+            </div>
+            <span class="text-xs text-slate-500 font-semibold">
+              شعبة اللغة العربية والدراسات الأدبية
+            </span>
+          </div>
+
+          <!-- Les 2 Épreuves Officielles Séparées Claires -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            
+            <!-- Épreuve 1 : Didactique -->
+            <div class="bg-emerald-50/50 rounded-2xl border border-emerald-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-[#064e3b] text-xs font-extrabold uppercase">
+                    📘 Épreuve 1 : Didactique
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-[#006233]">ديداكتيك اللغة العربية</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  ديداكتيك مادة اللغة العربية (النصوص، الدرس اللغوي، التعبير والإنشاء)
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  مقاربة التدريس بالكفايات، مراحل تدريس القراءة المنهجية للنصوص الإبداعية والمقالية، استراتيجيات الفهم، ديداكتيك الظواهر اللغوية والإنشاء والتقويم التربوي.
+                </p>
+              </div>
+              <button onclick="launchInteractiveSpecialtyQuiz('arabe_didactique')" class="peps-btn-green w-full py-2.5 px-4 rounded-xl text-xs font-black text-center block shadow-xs">
+                Lancer l'entraînement Didactique Arabe →
+              </button>
+            </div>
+
+            <!-- Épreuve 2 : Spécialité -->
+            <div class="bg-slate-50 rounded-2xl border border-slate-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-800 text-xs font-extrabold uppercase">
+                    📗 Épreuve 2 : Spécialité
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-slate-700">مادة التخصص : علوم اللغة والأدب</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  التخصص : النحو والصرف، البلاغة والعروض، وتاريخ الأدب والنقد
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  قواعد الإعراب والبناء، الميزان الصرفي، علم البيان والمعاني والبديع، بحور الشعر الخليلي وقوافيه، المدارس الأدبية القديمة والحديثة ونظريات النقد الأدبي.
+                </p>
+              </div>
+              <button onclick="launchInteractiveSpecialtyQuiz('arabe_specialite')" class="w-full py-2.5 px-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-black text-center block shadow-xs transition-colors">
+                Lancer l'entraînement Spécialité Arabe →
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ==================== 8. HISTOIRE - GÉOGRAPHIE ==================== -->
+        <div class="specialty-card peps-card p-6 sm:p-7 border-2 border-slate-200 hover:border-amber-500 space-y-6" data-category="humaines" data-name="histoire geographie hg اجتماعيات تاريخ جغرافيا ثانوي">
+          <!-- Entête Filière -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-900 flex items-center justify-center text-2xl shadow-2xs shrink-0">
+                🌍
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2.5 py-0.5 rounded-md bg-amber-50 text-amber-900 text-[11px] font-black uppercase">
+                    Secondaire Collégial & Qualifiant
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-amber-700">التاريخ والجغرافيا</span>
+                </div>
+                <h3 class="text-xl font-black text-slate-900 font-heading">
+                  Histoire - Géographie (التاريخ والجغرافيا)
+                </h3>
+              </div>
+            </div>
+            <span class="text-xs text-slate-500 font-semibold">
+              شعبة الدراسات التاريخية والجغرافية
+            </span>
+          </div>
+
+          <!-- Les 2 Épreuves Officielles Séparées Claires -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            
+            <!-- Épreuve 1 : Didactique -->
+            <div class="bg-amber-50/50 rounded-2xl border border-amber-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 text-xs font-extrabold uppercase">
+                    📘 Épreuve 1 : Didactique
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-amber-700">ديداكتيك التاريخ والجغرافيا</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  النهج التاريخي والنهج الجغرافي واستثمار الوثائق
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  خطوات النهج التاريخي (التعريف، التفسير، التركيب)، خطوات النهج الجغرافي (الوصف، التفسير، التعميم)، قراءة وتحليل الخرائط والمبيانات والنصوص التاريخية والوثائق الرقمية.
+                </p>
+              </div>
+              <button onclick="launchInteractiveSpecialtyQuiz('hg_didactique')" class="w-full py-2.5 px-4 bg-amber-700 hover:bg-amber-800 text-white rounded-xl text-xs font-black text-center block shadow-xs transition-colors">
+                Lancer l'entraînement Didactique Hist-Géo →
+              </button>
+            </div>
+
+            <!-- Épreuve 2 : Spécialité -->
+            <div class="bg-slate-50 rounded-2xl border border-slate-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-800 text-xs font-extrabold uppercase">
+                    📗 Épreuve 2 : Spécialité
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-slate-700">مادة التخصص : التاريخ والجغرافيا</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  تاريخ المغرب والعالم المعاصر وجغرافية المجال المغربي
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  محطات تاريخ المغرب (الضغوط الاستعمارية، الحماية والاستقلال)، قضايا العالم المعاصر، الموارد الطبيعية والبشرية بالمغرب، إعداد التراب الوطني والتكتلات الاقتصادية الكبرى.
+                </p>
+              </div>
+              <button onclick="launchInteractiveSpecialtyQuiz('hg_specialite')" class="w-full py-2.5 px-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-black text-center block shadow-xs transition-colors">
+                Lancer l'entraînement Spécialité Hist-Géo →
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ==================== 9. PHILOSOPHIE ==================== -->
+        <div class="specialty-card peps-card p-6 sm:p-7 border-2 border-slate-200 hover:border-purple-500 space-y-6" data-category="humaines" data-name="philosophie philo فلسفة ثانوي تاكيلي">
+          <!-- Entête Filière -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-800 flex items-center justify-center text-2xl shadow-2xs shrink-0">
+                🧠
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2.5 py-0.5 rounded-md bg-purple-50 text-purple-900 text-[11px] font-black uppercase">
+                    Secondaire Qualifiant
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-purple-700">مادة الفلسفة</span>
+                </div>
+                <h3 class="text-xl font-black text-slate-900 font-heading">
+                  Philosophie (الفلسفة)
+                </h3>
+              </div>
+            </div>
+            <span class="text-xs text-slate-500 font-semibold">
+              شعبة الفلسفة والفكر الإنساني
+            </span>
+          </div>
+
+          <!-- Les 2 Épreuves Officielles Séparées Claires -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            
+            <!-- Épreuve 1 : Didactique -->
+            <div class="bg-purple-50/50 rounded-2xl border border-purple-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-900 text-xs font-extrabold uppercase">
+                    📘 Épreuve 1 : Didactique
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-purple-700">ديداكتيك الدرس الفلسفي</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  ديداكتيك الكفايات الفلسفية (المفهمة، الأشكَلة، المحاججة)
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  هندسة الدرس الفلسفي بالثانوي التأهيلي، طرائق معالجة النص والقولة والسؤال الفلسفي الإشكالي، بناء المفاهيم وممارسة النقد والتفكير المستقل.
+                </p>
+              </div>
+              <button onclick="launchInteractiveSpecialtyQuiz('philo_didactique')" class="w-full py-2.5 px-4 bg-purple-700 hover:bg-purple-800 text-white rounded-xl text-xs font-black text-center block shadow-xs transition-colors">
+                Lancer l'entraînement Didactique Philo →
+              </button>
+            </div>
+
+            <!-- Épreuve 2 : Spécialité -->
+            <div class="bg-slate-50 rounded-2xl border border-slate-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-800 text-xs font-extrabold uppercase">
+                    📗 Épreuve 2 : Spécialité
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-slate-700">مادة التخصص : تاريخ الفلسفة وقضاياها</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  تاريخ الفلسفة وقضايا الوضع البشري والمعرفة والأخلاق والسياسة
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  الفلسفة اليونانية والإسلامية والحديثة والمعاصرة، إشكاليات الشخص والغير، العقلانية والتجريبية، الحقيقة والحرية والعدالة والدولة.
+                </p>
+              </div>
+              <button onclick="launchInteractiveSpecialtyQuiz('philo_specialite')" class="w-full py-2.5 px-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-black text-center block shadow-xs transition-colors">
+                Lancer l'entraînement Spécialité Philo →
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ==================== 10. INFORMATIQUE ==================== -->
+        <div class="specialty-card peps-card p-6 sm:p-7 border-2 border-slate-200 hover:border-sky-500 space-y-6" data-category="sciences" data-name="informatique اعلاميات info coding python algorithmique">
+          <!-- Entête Filière -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-800 flex items-center justify-center text-2xl shadow-2xs shrink-0">
+                💻
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2.5 py-0.5 rounded-md bg-sky-50 text-sky-900 text-[11px] font-black uppercase">
+                    Secondaire Collégial & Qualifiant
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-sky-700">الإعلاميات</span>
+                </div>
+                <h3 class="text-xl font-black text-slate-900 font-heading">
+                  Informatique (الإعلاميات)
+                </h3>
+              </div>
+            </div>
+            <span class="text-xs text-slate-500 font-semibold">
+              Sciences Numériques & Algorithmique
+            </span>
+          </div>
+
+          <!-- Les 2 Épreuves Officielles Séparées Claires -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            
+            <!-- Épreuve 1 : Didactique -->
+            <div class="bg-sky-50/50 rounded-2xl border border-sky-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-900 text-xs font-extrabold uppercase">
+                    📘 Épreuve 1 : Didactique
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-sky-700">ديداكتيك الإعلاميات</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  Didactique de l'Informatique, Pédagogie de Projet & Robotique
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Développement de la pensée computationnelle, didactique de l'algorithmique débranchée et branchée (Scratch, Python), gestion de projets informatiques scolaires et évaluation des compétences numériques.
+                </p>
+              </div>
+              <button onclick="launchInteractiveSpecialtyQuiz('info_didactique')" class="w-full py-2.5 px-4 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-black text-center block shadow-xs transition-colors">
+                Lancer l'entraînement Didactique Info →
+              </button>
+            </div>
+
+            <!-- Épreuve 2 : Spécialité -->
+            <div class="bg-slate-50 rounded-2xl border border-slate-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-800 text-xs font-extrabold uppercase">
+                    📗 Épreuve 2 : Spécialité
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-slate-700">مادة التخصص : علوم الحاسوب</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  Spécialité : Algorithmique, Structures de Données, Réseaux & BD SQL
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Complexité algorithmique, structures linéaires et arborescentes, modélisation relationnelle Merise/UML et requêtes SQL, architecture des ordinateurs et réseaux TCP/IP.
+                </p>
+              </div>
+              <button onclick="launchInteractiveSpecialtyQuiz('info_specialite')" class="w-full py-2.5 px-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-black text-center block shadow-xs transition-colors">
+                Lancer l'entraînement Spécialité Info →
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ==================== 11. LANGUE ANGLAISE ==================== -->
+        <div class="specialty-card peps-card p-6 sm:p-7 border-2 border-slate-200 hover:border-rose-400 space-y-6" data-category="lettres" data-name="anglais langue anglaise english elt tefl لغة انجليزية">
+          <!-- Entête Filière -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-rose-100 text-rose-800 flex items-center justify-center text-2xl shadow-2xs shrink-0">
+                🇬🇧
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2.5 py-0.5 rounded-md bg-rose-50 text-rose-900 text-[11px] font-black uppercase">
+                    Secondary Education (Collège & Lycée)
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-rose-700">اللغة الإنجليزية</span>
+                </div>
+                <h3 class="text-xl font-black text-slate-900 font-heading">
+                  English Studies (اللغة الإنجليزية)
+                </h3>
+              </div>
+            </div>
+            <span class="text-xs text-slate-500 font-semibold">
+              TEFL / ELT & English Linguistics
+            </span>
+          </div>
+
+          <!-- Les 2 Épreuves Officielles Séparées Claires -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            
+            <!-- Épreuve 1 : Didactique -->
+            <div class="bg-rose-50/50 rounded-2xl border border-rose-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-900 text-xs font-extrabold uppercase">
+                    📘 Paper 1 : TEFL Didactics
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-rose-700">ديداكتيك الإنجليزية</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  ELT Methodology & Communicative Language Teaching (CLT)
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Lesson planning (PPP, TBL), teaching the 4 skills (Reading, Listening, Speaking, Writing), classroom management, formative assessment and Moroccan English textbooks.
+                </p>
+              </div>
+              <button onclick="launchInteractiveSpecialtyQuiz('anglais_didactique')" class="w-full py-2.5 px-4 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-black text-center block shadow-xs transition-colors">
+                Lancer l'entraînement Didactique Anglais →
+              </button>
+            </div>
+
+            <!-- Épreuve 2 : Spécialité -->
+            <div class="bg-slate-50 rounded-2xl border border-slate-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-800 text-xs font-extrabold uppercase">
+                    📗 Paper 2 : Language & Literature
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-slate-700">مادة التخصص : اللسانيات والأدب</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  English Linguistics, Advanced Grammar & Literary Analysis
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Phonetics and phonology, morphology, syntax (tree diagrams), semantics, sociolinguistics, British and American literary movements and critical analysis.
+                </p>
+              </div>
+              <button onclick="launchInteractiveSpecialtyQuiz('anglais_specialite')" class="w-full py-2.5 px-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-black text-center block shadow-xs transition-colors">
+                Lancer l'entraînement Spécialité Anglais →
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ==================== 12. ÉDUCATION ISLAMIQUE ==================== -->
+        <div class="specialty-card peps-card p-6 sm:p-7 border-2 border-slate-200 hover:border-emerald-600 space-y-6" data-category="humaines" data-name="education islamique تربية اسلامية علوم شرعية شريعة فقه قرآن">
+          <!-- Entête Filière -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-[#006233] flex items-center justify-center text-2xl shadow-2xs shrink-0">
+                🕌
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2.5 py-0.5 rounded-md bg-emerald-50 text-[#064e3b] text-[11px] font-black uppercase">
+                    Secondaire Collégial & Qualifiant
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-[#006233]">التربية الإسلامية</span>
+                </div>
+                <h3 class="text-xl font-black text-slate-900 font-heading">
+                  Éducation Islamique (التربية الإسلامية)
+                </h3>
+              </div>
+            </div>
+            <span class="text-xs text-slate-500 font-semibold">
+              العلوم الشرعية والدراسات الإسلامية
+            </span>
+          </div>
+
+          <!-- Les 2 Épreuves Officielles Séparées Claires -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            
+            <!-- Épreuve 1 : Didactique -->
+            <div class="bg-emerald-50/50 rounded-2xl border border-emerald-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-[#064e3b] text-xs font-extrabold uppercase">
+                    📘 Épreuve 1 : Didactique
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-[#006233]">ديداكتيك التربية الإسلامية</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  ديداكتيك المنهاج الجديد ومداخلها الخمسة
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  مداخل منهاج التربية الإسلامية (التزكية، الاقتداء، الاستجابة، القسط، الحكمة)، هندسة الوضعيات المشكلة الدالة، تدريس القرآن الكريم والسيرة النبوية وبناء القيم.
+                </p>
+              </div>
+              <button onclick="launchInteractiveSpecialtyQuiz('islam_didactique')" class="peps-btn-green w-full py-2.5 px-4 rounded-xl text-xs font-black text-center block shadow-xs">
+                Lancer l'entraînement Didactique Éduc. Islamique →
+              </button>
+            </div>
+
+            <!-- Épreuve 2 : Spécialité -->
+            <div class="bg-slate-50 rounded-2xl border border-slate-200 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-800 text-xs font-extrabold uppercase">
+                    📗 Épreuve 2 : Spécialité
+                  </span>
+                  <span class="text-xs font-arabic font-bold text-slate-700">مادة التخصص : العلوم الشرعية</span>
+                </div>
+                <h4 class="text-base font-black text-slate-900">
+                  العلوم الشرعية : التفسير والحديث والفقه والأصول والمقاصد
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  علوم القرآن ورسم المصحف، قواعد أصول الفقه ومقاصد الشريعة، فقه المعاملات والأسرة وفق المذهب المالكي، السيرة النبوية العطرة وتاريخ التشريع الإسلامي.
+                </p>
+              </div>
+              <button onclick="launchInteractiveSpecialtyQuiz('islam_specialite')" class="w-full py-2.5 px-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-black text-center block shadow-xs transition-colors">
+                Lancer l'entraînement Spécialité Éduc. Islamique →
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Message si aucun résultat de recherche -->
+      <div id="no-search-results" class="hidden text-center py-12 bg-white rounded-2xl border border-slate-200 space-y-2">
+        <span class="text-3xl block">🔍</span>
+        <h4 class="text-base font-bold text-slate-800">Aucune spécialité ne correspond à votre recherche</h4>
+        <p class="text-xs text-slate-500">Essayez un autre mot-clé (ex: Maths, Arabe, SVT, EPS, Primaire...)</p>
+      </div>
+
+    </section>
+
+    <!-- ================= SECTION E-E-A-T SIGNATURE ABDELKHALEK ELBOUDANI ================= -->
+    <section class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-4">
       <div class="flex flex-col sm:flex-row items-center gap-5">
-        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white flex items-center justify-center font-black text-2xl shadow-md shrink-0">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#c1272d] to-[#006233] text-white flex items-center justify-center font-black text-xl shadow-md shrink-0">
           AE
         </div>
         <div class="space-y-1 text-center sm:text-left flex-1">
           <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-            <h3 class="text-lg font-black text-slate-900">
+            <h3 class="text-lg font-black text-slate-900 font-heading">
               Abdelkhalek ELBOUDANI
             </h3>
-            <span class="px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 text-xs font-bold border border-blue-200">
-              Professeur d'Éducation Physique et Sportive
+            <span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-[#006233] text-xs font-bold border border-emerald-200">
+              Professeur d'Éducation Physique et Sportive (Prof d'EPS)
             </span>
           </div>
           <p class="text-xs text-slate-600 leading-relaxed">
-            Fondateur et directeur éditorial de <strong>ProfEPS.ma</strong>. Spécialiste de la didactique de l'EPS, de la physiologie de l'effort et de la formation des cadres enseignants au Maroc. Ce hub de préparation au concours CRMEF a été conçu pour offrir aux futurs enseignants du Royaume un cadre d'entraînement rigoureux, conforme aux exigences officielles du Ministère de l'Éducation Nationale.
+            Fondateur et directeur éditorial de <strong>ProfEPS.ma</strong>. Spécialiste de la didactique de l'EPS, de la physiologie de l'effort et de la formation des cadres enseignants au Maroc. Ce hub de préparation au concours CRMEF a été conçu avec la communauté des formateurs pour offrir aux futurs enseignants du Royaume un cadre d'entraînement méthodique et rigoureux, conforme aux exigences officielles du Ministère de l'Éducation Nationale.
           </p>
         </div>
       </div>
@@ -379,17 +1288,711 @@
 
   </main>
 
+  <!-- ================= MODAL SIMULATEUR INTERACTIF (POUR LES AUTRES SPÉCIALITÉS) ================= -->
+  <div id="interactive-quiz-modal" class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-xs hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+      
+      <!-- Modal Header -->
+      <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-[#c1272d] to-[#006233] flex items-center justify-center text-sm font-black text-white">
+            QCM
+          </div>
+          <div>
+            <h3 id="modal-quiz-title" class="font-black text-sm sm:text-base leading-tight font-heading">
+              Série d'entraînement CRMEF
+            </h3>
+            <span id="modal-quiz-subtitle" class="text-[11px] text-slate-300 block font-arabic">
+              مباراة التعليم · تصحيح فوري
+            </span>
+          </div>
+        </div>
+        <button onclick="closeInteractiveModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm font-bold transition-colors">
+          ✕
+        </button>
+      </div>
+
+      <!-- Modal Body (Question & Options) -->
+      <div class="p-6 overflow-y-auto space-y-6 flex-1 text-slate-900" id="modal-quiz-body">
+        
+        <div class="flex items-center justify-between text-xs font-bold text-slate-500 border-b border-slate-100 pb-3">
+          <span id="modal-q-progression">Question 1 sur 10</span>
+          <span id="modal-q-theme" class="text-[#c1272d] font-bold">Thème Officiel</span>
+        </div>
+
+        <div class="space-y-2">
+          <h4 id="modal-q-text" class="text-base sm:text-lg font-black text-slate-900 leading-snug">
+            Texte de la question...
+          </h4>
+          <p id="modal-q-text-ar" class="text-sm font-arabic text-slate-700 leading-relaxed text-right dir-rtl">
+            نص السؤال باللغة العربية...
+          </p>
+        </div>
+
+        <!-- Options Container -->
+        <div id="modal-options-container" class="space-y-3">
+          <!-- Injecté dynamiquement par JS -->
+        </div>
+
+        <!-- Justification Didactique & Légale (s'affiche après clic) -->
+        <div id="modal-explanation-box" class="hidden p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+          <div class="flex items-center gap-2">
+            <span id="modal-feedback-badge" class="px-2.5 py-0.5 rounded-md text-xs font-black uppercase"></span>
+            <span class="text-xs text-slate-500 font-bold" id="modal-ref-label">Référence Officielle</span>
+          </div>
+          <p id="modal-explanation-fr" class="text-xs text-slate-700 leading-relaxed"></p>
+          <p id="modal-explanation-ar" class="text-xs font-arabic text-slate-600 leading-relaxed text-right dir-rtl"></p>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between gap-3">
+        <button onclick="closeInteractiveModal()" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-200 transition-colors">
+          Quitter
+        </button>
+        <div class="flex items-center gap-2">
+          <span id="modal-score-tracker" class="text-xs font-black text-slate-700">Score : 0 / 10</span>
+          <button id="modal-next-btn" onclick="nextModalQuestion()" class="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-black disabled:opacity-40 disabled:cursor-not-allowed transition-all" disabled>
+            Question Suivante →
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- ================= FOOTER ================= -->
-  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-12">
+  <footer class="bg-white border-t border-slate-200 py-8 text-xs text-slate-500 mt-14">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p>© 2026 ProfEPS.ma · Plateforme Éducative EPS & Concours CRMEF Maroc.</p>
-      <div class="flex items-center gap-4">
-        <a href="a-propos.html" class="hover:text-slate-900 font-semibold">À Propos</a>
-        <a href="mentions-legales.html" class="hover:text-slate-900 font-semibold">Mentions Légales</a>
-        <a href="politique-confidentialite.html" class="hover:text-slate-900 font-semibold">Confidentialité</a>
+      <div class="flex items-center gap-2">
+        <span class="font-black text-slate-800 font-heading">ProfEPS<span class="text-[#c1272d]">.ma</span></span>
+        <span>·</span>
+        <span>© 2026 Plateforme Pédagogique & Hub Concours CRMEF Maroc.</span>
+      </div>
+      <div class="flex items-center gap-4 font-semibold text-slate-600">
+        <a href="concours-crmef-hub.html" class="hover:text-slate-900">Hub Concours</a>
+        <a href="qcm-sciences-education-crmef.html" class="hover:text-slate-900">Sciences Éduc.</a>
+        <a href="qcm-didactique-eps-maroc.html" class="hover:text-slate-900">Didactique EPS</a>
+        <a href="a-propos.html" class="hover:text-slate-900">À Propos</a>
+        <a href="mentions-legales.html" class="hover:text-slate-900">Mentions Légales</a>
       </div>
     </div>
   </footer>
+
+  <!-- ================= LOGIQUE JS INTERACTIVE (FILTRAGE, RECHERCHE & SIMULATEUR) ================= -->
+  <script>
+    // 1. Filtrage par Catégorie
+    let currentFilter = 'all';
+
+    function setFilter(cat, btn) {
+      currentFilter = cat;
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.className = 'filter-btn px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 shrink-0 transition-all';
+      });
+      btn.className = 'filter-btn px-4 py-2 rounded-xl bg-slate-900 text-white shadow-2xs shrink-0 transition-all';
+      filterSpecialties();
+    }
+
+    // 2. Recherche textuelle + application du filtre
+    function filterSpecialties() {
+      const query = (document.getElementById('specialty-search')?.value || '').toLowerCase().trim();
+      const cards = document.querySelectorAll('.specialty-card');
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const category = card.getAttribute('data-category');
+        const textData = (card.getAttribute('data-name') + ' ' + card.innerText).toLowerCase();
+
+        const matchCat = (currentFilter === 'all' || category === currentFilter);
+        const matchText = (!query || textData.includes(query));
+
+        if (matchCat && matchText) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      const noResults = document.getElementById('no-search-results');
+      if (noResults) {
+        if (visibleCount === 0) {
+          noResults.classList.remove('hidden');
+        } else {
+          noResults.classList.add('hidden');
+        }
+      }
+    }
+
+    // 3. Banque de Questions Complète pour l'ensemble des Spécialités
+    const SPECIALTY_QUESTION_BANK = {
+      // MATHÉMATIQUES DIDACTIQUE
+      maths_didactique: [
+        {
+          theme: "Théorie des Situations Didactiques (Brousseau)",
+          qFr: "Dans la TSD de Guy Brousseau, quelle est la phase où l'élève formule des conjectures et doit expliciter son raisonnement auprès de ses pairs pour emporter leur adhésion ?",
+          qAr: "في نظرية الوضعيات الديداكتيكية لغي بروسو، ما هي المرحلة التي يصوغ فيها المتعلم فرضيات ويشرح استدلاله لأقرانه لإقناعهم؟",
+          options: [
+            { id: 'a', fr: "La situation d'action", ar: "وضعية الفعل" },
+            { id: 'b', fr: "La situation de validation", ar: "وضعية المصادقة" },
+            { id: 'c', fr: "La situation d'institutionnalisation", ar: "وضعية المأسسة" },
+            { id: 'd', fr: "La dévolution didactique", ar: "التفويض الديداكتيكي" }
+          ],
+          correct: 'b',
+          ref: "Guy Brousseau (1998) · Didactique des Mathématiques MENPS",
+          expFr: "La situation de validation demande à l'apprenant de démontrer la validité de sa solution, de fournir des preuves mathématiques et de convaincre ses pairs par argumentation rationnelle.",
+          expAr: "تتطلب وضعية المصادقة من المتعلم البرهنة على صحة حله وتقديم أدلة رياضية لإقناع زملائه عبر الاستدلال المنطقي."
+        },
+        {
+          theme: "Statut de l'Erreur en Mathématiques",
+          qFr: "En didactique des mathématiques contemporaine, comment est considéré l'obstacle épistémologique ?",
+          qAr: "في ديداكتيك الرياضيات المعاصرة، كيف يُنظر إلى العائق الإبستيمولوجي؟",
+          options: [
+            { id: 'a', fr: "Une simple distraction éliminable par la répétition mécanique d'exercices.", ar: "مجرد سهو يُعالج بالتكرار الآلي للتمارين." },
+            { id: 'b', fr: "Une connaissance qui a été utile et efficace dans un contexte donné, mais qui s'avère fausse ou inadaptée dans un contexte nouveau.", ar: "معرفة كانت صائبة في سياق محدد لكنها تصبح خاطئة أو غير كافية في سياق جديد." },
+            { id: 'c', fr: "Une incapacité cognitive définitive de l'élève pour le raisonnement abstrait.", ar: "عجز معرفي نهائي لدى المتعلم عن التفكير المجرد." },
+            { id: 'd', fr: "Une faute imputable exclusivement au manuel scolaire.", ar: "خطأ يُعزى حصرياً إلى الكتاب المدرسي." }
+          ],
+          correct: 'b',
+          ref: "Gaston Bachelard / Brousseau · Cadre CNEE Mathématiques",
+          expFr: "L'obstacle épistémologique n'est pas une absence de savoir, mais un savoir antérieur résistant qui fait obstacle à l'acquisition d'un concept supérieur (ex: considérer que la multiplication agrandit toujours un nombre).",
+          expAr: "العائق الإبستيمولوجي ليس جهلاً بل معرفة سابقة تقاوم وتعيق بناء المفهوم الرياضي الجديد (مثل الاعتقاد بأن الضرب يكبر دائماً العدد)."
+        }
+      ],
+      // MATHÉMATIQUES SPÉCIALITÉ
+      maths_specialite: [
+        {
+          theme: "Analyse Mathématique · Continuité & Dérivabilité",
+          qFr: "Soit f une fonction continue sur [a, b] et dérivable sur ]a, b[ telle que f(a) = f(b). Quel théorème fondamental garantit l'existence d'au moins un réel c ∈ ]a, b[ tel que f'(c) = 0 ?",
+          qAr: "لتكن f دالة متصلة على [a, b] وقابلة للاشتقاق على ]a, b[ بحيث f(a) = f(b). ما هي المبرهنة الأساسية التي تضمن وجود عنصر c من ]a, b[ بحيث f'(c) = 0؟",
+          options: [
+            { id: 'a', fr: "Le théorème des valeurs intermédiaires (TVI)", ar: "مبرهنة القيم الوسيطية" },
+            { id: 'b', fr: "Le théorème de Rolle", ar: "مبرهنة رول (Théorème de Rolle)" },
+            { id: 'c', fr: "L'inégalité des accroissements finis (IAF)", ar: "متفاوتة التزايدات المنتهية" },
+            { id: 'd', fr: "Le théorème de convergence dominée", ar: "مبرهنة التقارب المحدود" }
+          ],
+          correct: 'b',
+          ref: "Programme du Concours Externe · Mathématiques Secondaire",
+          expFr: "Le théorème de Rolle est l'énoncé exact : f continue sur [a,b], dérivable sur ]a,b[, f(a)=f(b) implique l'existence d'un c dans ]a,b[ où la tangente est horizontale (f'(c)=0).",
+          expAr: "مبرهنة رول تنص بالضبط على أن دالة متصلة على قطعة وقابلة للاشتقاق على مجالها المفتوح مع تساوي الصورتين بالطرفين تنعدم مشتقتها في نقطة واحدة على الأقل."
+        }
+      ],
+      // PHYSIQUE-CHIMIE DIDACTIQUE
+      pc_didactique: [
+        {
+          theme: "Démarche d'Investigation Scientifique",
+          qFr: "Dans la démarche d'investigation en sciences physiques au collège et lycée marocain, quelle étape succède immédiatement à l'appropriation de la situation-problème déclenchante ?",
+          qAr: "في نهج التقصي العلمي بالفيزياء والكيمياء، ما هي الخطوة التي تلي مباشرة تملك الوضعية-المشكلة المنطلقة؟",
+          options: [
+            { id: 'a', fr: "La formulation d'hypothèses et de conjectures explicatives vérifiables.", ar: "صياغة فرضيات وتخمينات تفسيرية قابلة للتحقق." },
+            { id: 'b', fr: "La notation sommative individuelle sur feuille.", ar: "التنقيط الإشهادي الفردي." },
+            { id: 'c', fr: "La dictée du résumé institutionnalisé du cours.", ar: "إملاء خلاصة الدرس المأسسة." },
+            { id: 'd', fr: "Le rangement direct du matériel de verrerie.", ar: "ترتيب الأدوات المخبرية مباشرة." }
+          ],
+          correct: 'a',
+          ref: "Cadre de Référence Didactique Physique-Chimie MENPS",
+          expFr: "La démarche d'investigation s'articule : Situation déclenchante -> Émergence du problème -> Formulation des hypothèses par les élèves -> Élaboration du protocole expérimental -> Validation.",
+          expAr: "يرتكز نهج التقصي على: الوضعية المنطلقة -> إدراك المشكل العلمي -> صياغة الفرضيات -> وضع بروتوكول تجريبي -> الاستنتاج والمأسسة."
+        }
+      ],
+      // PHYSIQUE-CHIMIE SPÉCIALITÉ
+      pc_specialite: [
+        {
+          theme: "Mécanique Newtonienne · Deuxième Loi de Newton",
+          qFr: "Dans un référentiel galiléen, la résultante des forces extérieures appliquées à un solide de masse constante m est liée à son vecteur accélération a par la relation :",
+          qAr: "في معلم غاليلي، ترتبط محصلة القوى الخارجية المطبقة على جسم كتلته ثابتة m بمتجه تسارعه a بالعلاقة:",
+          options: [
+            { id: 'a', fr: "Σ F_ext = m · v", ar: "Σ F_ext = m · v" },
+            { id: 'b', fr: "Σ F_ext = m · a", ar: "Σ F_ext = m · a" },
+            { id: 'c', fr: "Σ F_ext = 0 (toujours)", ar: "Σ F_ext = 0 (دائماً)" },
+            { id: 'd', fr: "Σ F_ext = (1/2) m · v²", ar: "Σ F_ext = (1/2) m · v²" }
+          ],
+          correct: 'b',
+          ref: "Physique Générale · Mécanique du Point Matériel",
+          expFr: "La deuxième loi de Newton énonce : Σ F_ext = d(p)/dt = m · a_G pour une masse constante.",
+          expAr: "القانون الثاني لنيوتن ينص على أن مجموع القوى الخارجية يساوي جداء الكتلة في متجهة التسارع لمركز القصور."
+        }
+      ],
+      // SVT DIDACTIQUE
+      svt_didactique: [
+        {
+          theme: "Démarche d'Investigation & Modélisation en SVT",
+          qFr: "Quelle est la principale fonction didactique d'une modélisation analogique en géologie (ex: boîte de compression tectonique avec couches de sable) ?",
+          qAr: "ما هي الوظيفة الديداكتيكية الأساسية للنمذجة التناظرية في الجيولوجيا (مثل علبة الضغط بالرمل)؟",
+          options: [
+            { id: 'a', fr: "Remplacer totalement la réalité de terrain sans esprit critique.", ar: "تعويض الواقع الحقلي كلياً بدون حس نقدي." },
+            { id: 'b', fr: "Rendre observables et manipulables en classe des phénomènes inaccessibles par leur échelle d'espace et de temps.", ar: "جعل الظواهر الجيولوجية غير القابلة للملاحظة المباشرة بسبب اتساع الزمان والمكان قابلة للمعاينة والفهم." },
+            { id: 'c', fr: "Éviter à l'enseignant de préparer sa séquence pédagogique.", ar: "إعفاء الأستاذ من تحضير مقطعه التربوي." },
+            { id: 'd', fr: "Calculer l'âge absolu des roches avec précision isotopique.", ar: "حساب العمر المطلق للصخور بدقة إشعاعية." }
+          ],
+          correct: 'b',
+          ref: "Orientations Pédagogiques SVT · Lycée & Collège",
+          expFr: "En géologie, les processus se déroulent sur des millions d'années et des milliers de kilomètres. Le modèle analogique réduit les échelles pour tester des hypothèses explicatives.",
+          expAr: "تحدث الظواهر الجيولوجية عبر ملايين السنين ومساحات هائلة؛ وتسمح النمذجة بتقليص المقاييس لاختبار الفرضيات داخل الفصل."
+        }
+      ],
+      // SVT SPÉCIALITÉ
+      svt_specialite: [
+        {
+          theme: "Génétique & Biologie Moléculaire",
+          qFr: "Lors de la méiose, quel mécanisme chromosomique survenant en prophase I est à l'origine du brassage intrachromosomique ?",
+          qAr: "أثناء الانقسام الاختزالي، ما هي الآلية الصبغية في الطور التمهيدي الأول المسؤولة عن التخليط الضمصبغي؟",
+          options: [
+            { id: 'a', fr: "La disjonction aléatoire des chromosomes homologues", ar: "الافتراق العشوائي للصبغيات المتماثلة" },
+            { id: 'b', fr: "Le crossing-over (enjambement) entre chromatides non-sœurs", ar: "ظاهرة العبور الصبغي (Crossing-over)" },
+            { id: 'c', fr: "La réplication semi-conservative de l'ADN", ar: "المضاعفة نصف المحافظة للـ ADN" },
+            { id: 'd', fr: "La cytocinèse mitotique", ar: "انقسام السيتوبلازم التوليدي" }
+          ],
+          correct: 'b',
+          ref: "Biologie Cellulaire & Génétique · Concours CRMEF",
+          expFr: "Le crossing-over a lieu lors de l'appariement des tétrades en prophase I : des segments de chromatides s'échangent, créant de nouvelles combinaisons d'allèles (brassage intrachromosomique).",
+          expAr: "تحدث ظاهرة العبور الصبغي أثناء تشكل الرباعيات في الطور التمهيدي الأول حيث تتبادل قطع من الصبيغيات مما ينتج تركيبات أليلية جديدة."
+        }
+      ],
+      // FRANÇAIS DIDACTIQUE
+      francais_didactique: [
+        {
+          theme: "Didactique de la Lecture Méthodique",
+          qFr: "Dans l'enseignement secondaire qualifiant marocain, quel est l'objectif premier de la lecture méthodique d'un extrait littéraire ?",
+          qAr: "في التعليم الثانوي التأهيلي المغربي، ما هو الهدف الأول من القراءة المنهجية لنص أدبي؟",
+          options: [
+            { id: 'a', fr: "Faire mémoriser par cœur la biographie de l'écrivain.", ar: "تحفيظ السيرة الذاتية للكاتب عن ظهر قلب." },
+            { id: 'b', fr: "Construire le sens du texte à partir du repérage et de l'interprétation rigoureuse d'indices textuels et formels.", ar: "بناء معنى النص انطلاقاً من رصد وتأويل دقيقين للمؤشرات النصية والأسلوبية." },
+            { id: 'c', fr: "Relever uniquement les fautes de syntaxe de l'auteur.", ar: "استخراج الأخطاء النحوية للكاتب فقط." },
+            { id: 'd', fr: "Traduire le texte mot à mot en arabe.", ar: "ترجمة النص كلمة بكلمة إلى العربية." }
+          ],
+          correct: 'b',
+          ref: "Orientations Pédagogiques de Français au Secondaire (MENPS)",
+          expFr: "La lecture méthodique repose sur l'interaction entre le repérage (indices formels, figures, champs lexicaux) et l'interprétation pour dégager des axes de sens cohérents.",
+          expAr: "ترتكز القراءة المنهجية على التفاعل بين رصد القرائن اللغوية والأسلوبية وتأويلها لبناء دلالات النص وفق محاور واضحة."
+        }
+      ],
+      // FRANÇAIS SPÉCIALITÉ
+      francais_specialite: [
+        {
+          theme: "Syntaxe & Stylistique",
+          qFr: "Dans la phrase : « Je meurs de soif », quelle figure de style fondée sur l'exagération de la réalité est employée ?",
+          qAr: "في العبارة « Je meurs de soif » (أموت عطشاً)، ما المحسن البلاغي القائم على تضخيم المعنى؟",
+          options: [
+            { id: 'a', fr: "La litote", ar: "التلميح المنقص (Litote)" },
+            { id: 'b', fr: "L'hyperbole", ar: "المبالغة (Hyperbole)" },
+            { id: 'c', fr: "L'oxymore", ar: "الطباق التناقضي (Oxymore)" },
+            { id: 'd', fr: "La métonymie", ar: "المجاز المرسل (Métonymie)" }
+          ],
+          correct: 'b',
+          ref: "Grammaire et Stylistique du Français Moderne",
+          expFr: "L'hyperbole consiste à employer des termes exagérés afin de marquer vivement l'esprit du destinataire.",
+          expAr: "المبالغة هي استعمال ألفاظ مضخمة لتأكيد المعنى وترك أثر بليغ لدى المتلقي."
+        }
+      ],
+      // ARABE DIDACTIQUE
+      arabe_didactique: [
+        {
+          theme: "ديداكتيك القراءة والنصوص",
+          qFr: "في تدريس النصوص القرائية بالثانوي، ما هي المرحلة الديداكتيكية المخصصة لتفكيك النص وفحص حقوله الدلالية وبنيته الفنية؟",
+          qAr: "في تدريس النصوص القرائية بالثانوي، ما هي المرحلة الديداكتيكية المخصصة لتفكيك النص وفحص حقوله الدلالية وبنيته الفنية؟",
+          options: [
+            { id: 'a', fr: "مرحلة عتبات القراءة والملاحظة", ar: "مرحلة عتبات القراءة والملاحظة" },
+            { id: 'b', fr: "مرحلة الفهم والتحليل", ar: "مرحلة الفهم والتحليل" },
+            { id: 'c', fr: "مرحلة التقويم التشخيصي المبدئي", ar: "مرحلة التقويم التشخيصي المبدئي" },
+            { id: 'd', fr: "مرحلة نسخ النص في الدفتر", ar: "مرحلة نسخ النص في الدفتر" }
+          ],
+          correct: 'b',
+          ref: "التوجيهات التربوية لمادة اللغة العربية بالثانوي التأهيلي",
+          expFr: "مرحلة التحليل تستهدف استنطاق النص عبر الحقول المعجمية والأساليب والخصائص الفنية لاستجلاء أبعاده الدلالية.",
+          expAr: "تستهدف مرحلة الفهم والتحليل تفكيك بنية النص ومعجمه وأساليبه التركيبية والفنية لتعميق الدلالة."
+        }
+      ],
+      // ARABE SPÉCIALITÉ
+      arabe_specialite: [
+        {
+          theme: "علوم اللغة · النحو العربي",
+          qFr: "ما هو المحل الإعرابي لكلمة « صائماً » في جملة : « رأيتُ الهلالَ وأنا صائمٌ » ؟",
+          qAr: "ما هو المحل الإعرابي لجملة « وأنا صائمٌ » في قولنا: « رأيتُ الهلالَ وأنا صائمٌ »؟",
+          options: [
+            { id: 'a', fr: "في محل نصب مفعول به ثانٍ", ar: "في محل نصب مفعول به ثانٍ" },
+            { id: 'b', fr: "في محل نصب حال", ar: "في محل نصب حال (جملة اسمية)" },
+            { id: 'c', fr: "في محل رفع خبر المبتدأ", ar: "في محل رفع خبر المبتدأ" },
+            { id: 'd', fr: "لا محل لها من الإعراب", ar: "لا محل لها من الإعراب" }
+          ],
+          correct: 'b',
+          ref: "شرح ابن عقيل على ألفية ابن مالك",
+          expFr: "الواو واو الحال، والجملة الاسمية من المبتدأ والخبر في محل نصب حال تبين هيئة الفاعل أثناء الرؤية.",
+          expAr: "الواو واو الحال، والجملة الاسمية المكونة من المبتدأ والخبر في محل نصب حال لصاحب الحال (التاء المتحركة)."
+        }
+      ],
+      // HISTOIRE-GÉO DIDACTIQUE
+      hg_didactique: [
+        {
+          theme: "النهج التاريخي في التدريس",
+          qFr: "ما هي الخطوات الإجرائية الثلاث المعتمدة رسمياً في النهج التاريخي بالمنهاج المغربي؟",
+          qAr: "ما هي الخطوات الإجرائية الثلاث المعتمدة رسمياً في النهج التاريخي بالمنهاج المغربي؟",
+          options: [
+            { id: 'a', fr: "الحفظ، الاستظهار، الترديد", ar: "الحفظ، الاستظهار، الترديد" },
+            { id: 'b', fr: "التعريف، التفسير، التركيب", ar: "التعريف، التفسير، التركيب" },
+            { id: 'c', fr: "الوصف، التوزيع، الاستنتاج", ar: "الوصف، التوزيع، الاستنتاج" },
+            { id: 'd', fr: "الملاحظة، الفرضية، التجربة", ar: "الملاحظة، الفرضية، التجربة" }
+          ],
+          correct: 'b',
+          ref: "التوجيهات التربوية لمادة التاريخ والجغرافيا",
+          expFr: "النهج التاريخي يرتكز على التعريف بالحدث التاريخي، ثم تفسير أسبابه وسياقاته، ثم تركيبه وصياغة خلاصات كلية.",
+          expAr: "النهج التاريخي المعتمد يتكون حصراً من ثلاث خطوات متسلسلة: التعريف بالحدث، تفسير أسبابه، وتركيب خلاصاته."
+        }
+      ],
+      // HISTOIRE-GÉO SPÉCIALITÉ
+      hg_specialite: [
+        {
+          theme: "تاريخ المغرب المعاصر",
+          qFr: "في أي سنة تم توقيع معاهدة فاس التي فرضت الحماية الاستعمارية الفرنسية على المغرب؟",
+          qAr: "في أي سنة تم توقيع معاهدة فاس التي فرضت الحماية الاستعمارية الفرنسية على المغرب؟",
+          options: [
+            { id: 'a', fr: "1904", ar: "1904" },
+            { id: 'b', fr: "1906 (مؤتمر الجزيرة الخضراء)", ar: "1906" },
+            { id: 'c', fr: "1912 (30 مارس)", ar: "1912 (30 مارس)" },
+            { id: 'd', fr: "1956", ar: "1956" }
+          ],
+          correct: 'c',
+          ref: "تاريخ المغرب الحديث والمعاصر",
+          expFr: "وقعت معاهدة الحماية بفاس في 30 مارس 1912 بين السلطان مولاي عبد الحفيظ والسفير رينو نيابة عن فرنسا.",
+          expAr: "وقعت معاهدة الحماية في 30 مارس 1912 بفاس، لتبدأ فترة الاستعمار المزدوج الفرنسي والإسباني."
+        }
+      ],
+      // PHILOSOPHIE DIDACTIQUE
+      philo_didactique: [
+        {
+          theme: "ديداكتيك الكفايات الفلسفية الثلاث",
+          qFr: "ما هي القدرات الإجرائية الثلاث المستهدفة بالتقويم في الإنشاء الفلسفي بالبكالوريا المغربية؟",
+          qAr: "ما هي القدرات الإجرائية الثلاث المستهدفة بالتقويم في الإنشاء الفلسفي بالبكالوريا المغربية؟",
+          options: [
+            { id: 'a', fr: "المفهمة، الأشكَلة، المحاججة", ar: "المفهمة، الأشكَلة، المحاججة" },
+            { id: 'b', fr: "السرد، الوصف، التعليق", ar: "السرد، الوصف، التعليق" },
+            { id: 'c', fr: "الحفظ، الاقتباس، التلخيص", ar: "الحفظ، الاقتباس، التلخيص" },
+            { id: 'd', fr: "الترجمة، الإملاء، النحو", ar: "الترجمة، الإملاء، النحو" }
+          ],
+          correct: 'a',
+          ref: "الأطر المرجعية لمادة الفلسفة (المركز الوطني للتقويم)",
+          expFr: "يرتكز التفكير الفلسفي ديداكتيكياً على: أشكلة المفارقات، مفهمة المصطلحات المحورية، ومحاججة الأطروحات ومناقشتها.",
+          expAr: "القدرات الفلسفية المرجعية هي: الأشكلة (إبراز المفارقة)، المفهمة (تحديد المفاهيم)، والمحاججة (تقديم الحجج ومناقشتها)."
+        }
+      ],
+      // PHILOSOPHIE SPÉCIALITÉ
+      philo_specialite: [
+        {
+          theme: "مفهوم الشخص والهوية",
+          qFr: "أي فيلسوف إنجليزي تجريبي أسس الهوية الشخصية على استمرارية الوعي المقترن بالذاكرة والامتداد الزمني؟",
+          qAr: "أي فيلسوف إنجليزي تجريبي أسس الهوية الشخصية على استمرارية الوعي المقترن بالذاكرة والامتداد الزمني؟",
+          options: [
+            { id: 'a', fr: "René Descartes (ديكارت)", ar: "روني ديكارت" },
+            { id: 'b', fr: "John Locke (جون لوك)", ar: "جون لوك (John Locke)" },
+            { id: 'c', fr: "Arthur Schopenhauer (شوبنهاور)", ar: "أرثر شوبنهاور" },
+            { id: 'd', fr: "Sigmund Freud (فرويد)", ar: "سيغموند فرويد" }
+          ],
+          correct: 'b',
+          ref: "مبحث الوضع البشري · تاريخ الفلسفة الحديثة",
+          expFr: "جون لوك في كتابه 'مقال في الفهم البشري' يرى أن الوعي الحسي الممتد في الزمان بفضل الذاكرة هو معيار هوية الشخص.",
+          expAr: "يرى جون لوك أن الوعي المصحوب بالذاكرة هو ما يجعل الشخص هو نفسه في مختلف الأزمنة والأمكنة."
+        }
+      ],
+      // INFORMATIQUE DIDACTIQUE
+      info_didactique: [
+        {
+          theme: "Pensée Computationnelle & Algorithmique Débranchée",
+          qFr: "Quel est l'intérêt didactique majeur de l'« informatique débranchée » (CS Unplugged) avec de jeunes apprenants ?",
+          qAr: "ما هي الفائدة الديداكتيكية الكبرى للأنشطة الخوارزمية 'بدون حاسوب' مع المتعلمين؟",
+          options: [
+            { id: 'a', fr: "Construire les concepts algorithmiques fondamentaux sans être distrait ou bloqué par la syntaxe d'une machine.", ar: "بناء المفاهيم الخوارزمية الأساسية من خلال أنشطة حسية حركية دون ارتباك بصعوبات لوحة المفاتيح واللغة البرمجية." },
+            { id: 'b', fr: "Réduire la facture d'électricité de l'établissement scolaire.", ar: "تخفيض فاتورة الكهرباء بالمؤسسة." },
+            { id: 'c', fr: "Former des réparateurs de matériel informatique.", ar: "تكوين تقنيي صيانة الحواسيب." },
+            { id: 'd', fr: "Remplacer définitivement le langage Python au lycée.", ar: "إلغاء لغة بايثون نهائياً." }
+          ],
+          correct: 'a',
+          ref: "Orientations Pédagogiques Informatique MENPS",
+          expFr: "L'approche débranchée met l'accent sur la logique algorithmique pure (tri, graphes, codage binaire) par le jeu et la manipulation physique avant le passage sur écran.",
+          expAr: "تركز الأنشطة بدون حاسوب على التفكير المنطقي الخوارزمي الخالص والترميز الثنائي عبر اللعب الحسي قبل الانتقال إلى الشاشة."
+        }
+      ],
+      // INFORMATIQUE SPÉCIALITÉ
+      info_specialite: [
+        {
+          theme: "Algorithmique & Complexité",
+          qFr: "Quelle est la complexité temporelle asymptotique moyenne de l'algorithme de tri rapide (QuickSort) sur un tableau de taille n ?",
+          qAr: "ما هو التعقيد الزمني المتوسط لخوارزمية الترتيب السريع (QuickSort) على مصفوفة ذات حجم n؟",
+          options: [
+            { id: 'a', fr: "O(n)", ar: "O(n)" },
+            { id: 'b', fr: "O(n · log n)", ar: "O(n · log n)" },
+            { id: 'c', fr: "O(n²)", ar: "O(n²)" },
+            { id: 'd', fr: "O(1)", ar: "O(1)" }
+          ],
+          correct: 'b',
+          ref: "Algorithmique Avancée & Structures de Données",
+          expFr: "QuickSort repose sur la stratégie 'Diviser pour régner'. Sa complexité temporelle moyenne est en O(n log n), son pire cas étant en O(n²).",
+          expAr: "تعتمد خوارزمية الترتيب السريع على مبدأ 'فرّق تسُد' وتعقيدها الزمني المتوسط هو O(n log n)."
+        }
+      ],
+      // ANGLAIS DIDACTIQUE
+      anglais_didactique: [
+        {
+          theme: "TEFL Methodology · Lesson Planning Stages",
+          qFr: "In the PPP (Presentation, Practice, Production) lesson framework, what distinguishes the 'Production' phase from the 'Practice' phase?",
+          qAr: "في نموذج التخطيط الديداكتيكي PPP، ما الذي يميز مرحلة الإنتاج (Production) عن مرحلة التمرن (Practice)؟",
+          options: [
+            { id: 'a', fr: "Students produce language with full fluency and autonomy, using target structures in communicative, less-controlled contexts.", ar: "ينتج المتعلمون اللغة بطلاقة واستقلالية عبر سياقات تواصلية مفتوحة وأقل تقييداً." },
+            { id: 'b', fr: "The teacher speaks 100% of the time and students copy sentences silently.", ar: "يتحدث الأستاذ طوال الوقت بينما ينسخ التلاميذ بصمت." },
+            { id: 'c', fr: "Students only repeat choral drills verbatim after the teacher.", ar: "ترديد جماعي آلي للمفردات خلف الأستاذ فقط." },
+            { id: 'd', fr: "Students are strictly forbidden from making any grammatical mistake.", ar: "منع المتعلمين من ارتكاب أي خطأ." }
+          ],
+          correct: 'a',
+          ref: "Moroccan ELT Guidelines · Secondary Education (MENPS)",
+          expFr: "While Practice is controlled (gap fills, drills), Production allows students to integrate the new language structure into authentic, communicative output.",
+          expAr: "في حين تكون مرحلة التمرن مقيدة، تمنح مرحلة الإنتاج للتلاميذ فرصة توظيف المعجم والتركيب الجديد في تواصل أصيل ومستقل."
+        }
+      ],
+      // ANGLAIS SPÉCIALITÉ
+      anglais_specialite: [
+        {
+          theme: "English Linguistics & Syntax",
+          qFr: "In the sentence : 'She gave the young student a fascinating book', what syntactic role does 'the young student' play?",
+          qAr: "في الجملة الإنجليزية أعلاه، ما هي الوظيفة النحوية التركيبية لعبارة 'the young student'؟",
+          options: [
+            { id: 'a', fr: "Direct Object (Od)", ar: "مفعول به مباشر" },
+            { id: 'b', fr: "Indirect Object (Oi)", ar: "مفعول به غير مباشر (Indirect Object)" },
+            { id: 'c', fr: "Subject Complement (Cs)", ar: "مكمل الفاعل" },
+            { id: 'd', fr: "Adverbial of place", ar: "ظرف مكان" }
+          ],
+          correct: 'b',
+          ref: "English Syntax & Transformational Grammar",
+          expFr: "In ditransitive verbs like 'give', the pattern is Verb + Indirect Object (recipient) + Direct Object (entity given).",
+          expAr: "مع الأفعال المتعدية لمفعولين كفعل العطاء، يكون المستفيد هو المفعول به غير المباشر (Indirect Object)."
+        }
+      ],
+      // ÉDUCATION ISLAMIQUE DIDACTIQUE
+      islam_didactique: [
+        {
+          theme: "مداخل منهاج التربية الإسلامية",
+          qFr: "ما هي المداخل الخمسة المهيكلة لمنهاج مادة التربية الإسلامية بسلكي التعليم الثانوي بالمغرب؟",
+          qAr: "ما هي المداخل الخمسة المهيكلة لمنهاج مادة التربية الإسلامية بسلكي التعليم الثانوي بالمغرب؟",
+          options: [
+            { id: 'a', fr: "التزكية، الاقتداء، الاستجابة، القسط، الحكمة", ar: "التزكية، الاقتداء، الاستجابة، القسط، الحكمة" },
+            { id: 'b', fr: "العقيدة، الشريعة، الأخلاق، التاريخ، الفلسفة", ar: "العقيدة، الشريعة، الأخلاق، التاريخ، الفلسفة" },
+            { id: 'c', fr: "القرآن، التفسير، الفقه، السيرة، النحو", ar: "القرآن، التفسير، الفقه، السيرة، النحو" },
+            { id: 'd', fr: "الحفظ، الترتيل، الصوم، الحج، الزكاة", ar: "الحفظ، الترتيل، الصوم، الحج، الزكاة" }
+          ],
+          correct: 'a',
+          ref: "المنهاج المنقح لمادة التربية الإسلامية (وزارة التربية الوطنية 2016)",
+          expFr: "المنهاج المعتمد بالمغرب يقوم على خمسة مداخل متكاملة تتوسطها سورة قرآنية ناظمة: التزكية، الاقتداء، الاستجابة، القسط، والحكمة.",
+          expAr: "تنتظم دروس المنهاج المعتمد رسمياً حول 5 مداخل محورية: التزكية (القرآن والعقيدة)، الاقتداء (السيرة)، الاستجابة (الفقه)، القسط والحكمة."
+        }
+      ],
+      // ÉDUCATION ISLAMIQUE SPÉCIALITÉ
+      islam_specialite: [
+        {
+          theme: "أصول الفقه والمقاصد الشرعية",
+          qFr: "ما هي الكليات الخمس الضرورية التي أجمعت الشرائع السماوية ومقاصد الشريعة الإسلامية على وجوب حفظها؟",
+          qAr: "ما هي الكليات الخمس الضرورية التي أجمعت الشرائع ومقاصد الشريعة على حفظها؟",
+          options: [
+            { id: 'a', fr: "حفظ الدين، والنفس، والعقل، والنسل (العرض)، والمال", ar: "حفظ الدين، والنفس، والعقل، والنسل (أو العرض)، والمال" },
+            { id: 'b', fr: "حفظ الأرض، واللغة، والمناخ، والعمران، والصحة", ar: "حفظ الأرض، واللغة، والمناخ، والعمران، والصحة" },
+            { id: 'c', fr: "حفظ الوقت، والعلم، والجاه، والنسب، والوطن", ar: "حفظ الوقت، والعلم، والجاه، والنسب، والوطن" },
+            { id: 'd', fr: "حفظ الصلاة، والزكاة، والصوم، والحج، والشهادة", ar: "حفظ الصلاة، والزكاة، والصوم، والحج، والشهادة" }
+          ],
+          correct: 'a',
+          ref: "الموافقات للإمام الشاطبي · مقاصد الشريعة الإسلامية",
+          expFr: "المقاصد الضرورية الكبرى التي تدور عليها أحكام الشريعة الإسلامية هي حفظ: الدين، النفس، العقل، النسل، والمال.",
+          expAr: "الكليات الضرورية الخمس الكبرى عند الأصوليين كالإمام الشاطبي والغزالي هي: حفظ الدين، النفس، العقل، النسل والمال."
+        }
+      ]
+    };
+
+    // 4. Moteur du Simulateur Interactif Modal
+    let activeQuizQuestions = [];
+    let currentModalQIndex = 0;
+    let modalScore = 0;
+    let answeredCurrent = false;
+
+    function launchInteractiveSpecialtyQuiz(quizKey) {
+      const questions = SPECIALTY_QUESTION_BANK[quizKey];
+      if (!questions || questions.length === 0) {
+        alert("Cette série est en cours d'alimentation par nos inspecteurs.");
+        return;
+      }
+
+      activeQuizQuestions = questions;
+      currentModalQIndex = 0;
+      modalScore = 0;
+      answeredCurrent = false;
+
+      // Titres du modal
+      const modal = document.getElementById('interactive-quiz-modal');
+      const titleElem = document.getElementById('modal-quiz-title');
+      const subElem = document.getElementById('modal-quiz-subtitle');
+
+      const titles = {
+        maths_didactique: "Série QCM Didactique des Mathématiques",
+        maths_specialite: "Série QCM Spécialité Mathématiques",
+        pc_didactique: "Série QCM Didactique Physique-Chimie",
+        pc_specialite: "Série QCM Spécialité Physique-Chimie",
+        svt_didactique: "Série QCM Didactique des SVT",
+        svt_specialite: "Série QCM Spécialité SVT (Biologie & Géologie)",
+        francais_didactique: "Série QCM Didactique du Français",
+        francais_specialite: "Série QCM Spécialité Langue & Littérature Françaises",
+        arabe_didactique: "سلسلة ديداكتيك مادة اللغة العربية",
+        arabe_specialite: "سلسلة التخصص : اللغة العربية وآدابها",
+        hg_didactique: "سلسلة ديداكتيك التاريخ والجغرافيا",
+        hg_specialite: "سلسلة التخصص : التاريخ والجغرافيا",
+        philo_didactique: "سلسلة ديداكتيك الدرس الفلسفي",
+        philo_specialite: "سلسلة التخصص : الفلسفة العامة وتاريخ الفكر",
+        info_didactique: "Série QCM Didactique de l'Informatique",
+        info_specialite: "Série QCM Spécialité Informatique & Algorithmique",
+        anglais_didactique: "Série QCM TEFL / ELT Didactics (English)",
+        anglais_specialite: "Série QCM English Linguistics & Literature",
+        islam_didactique: "سلسلة ديداكتيك التربية الإسلامية",
+        islam_specialite: "سلسلة التخصص : العلوم الشرعية والدراسات الإسلامية"
+      };
+
+      if (titleElem) titleElem.textContent = titles[quizKey] || "Série QCM Concours CRMEF";
+      if (subElem) subElem.textContent = "Entraînement officiel · Correction immédiate avec justification légale";
+
+      renderModalQuestion();
+      modal.classList.remove('hidden');
+    }
+
+    function renderModalQuestion() {
+      if (currentModalQIndex >= activeQuizQuestions.length) {
+        renderModalFinished();
+        return;
+      }
+
+      answeredCurrent = false;
+      const q = activeQuizQuestions[currentModalQIndex];
+
+      document.getElementById('modal-q-progression').textContent = `Question ${currentModalQIndex + 1} sur ${activeQuizQuestions.length}`;
+      document.getElementById('modal-q-theme').textContent = q.theme;
+      document.getElementById('modal-q-text').textContent = q.qFr;
+      document.getElementById('modal-q-text-ar').textContent = q.qAr;
+
+      // Reset options
+      const container = document.getElementById('modal-options-container');
+      container.innerHTML = '';
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = "w-full text-left p-3.5 rounded-2xl border-2 border-slate-200 bg-white hover:border-slate-400 hover:bg-slate-50 transition-all flex items-start gap-3 text-xs font-semibold";
+        btn.onclick = () => selectModalOption(opt.id, q);
+
+        btn.innerHTML = `
+          <span class="w-6 h-6 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
+            ${String.fromCharCode(65 + idx)}
+          </span>
+          <div class="flex-1 space-y-1">
+            <span class="block text-slate-900">${opt.fr}</span>
+            <span class="block text-slate-500 font-arabic text-[11px] text-right dir-rtl">${opt.ar}</span>
+          </div>
+        `;
+        container.appendChild(btn);
+      });
+
+      // Cacher explication
+      const expBox = document.getElementById('modal-explanation-box');
+      expBox.classList.add('hidden');
+
+      // Tracker & bouton suivant
+      document.getElementById('modal-score-tracker').textContent = `Score : ${modalScore} / ${activeQuizQuestions.length}`;
+      document.getElementById('modal-next-btn').disabled = true;
+    }
+
+    function selectModalOption(selectedId, q) {
+      if (answeredCurrent) return;
+      answeredCurrent = true;
+
+      const isCorrect = (selectedId === q.correct);
+      if (isCorrect) modalScore++;
+
+      // Modifier visuel des boutons
+      const container = document.getElementById('modal-options-container');
+      const buttons = container.querySelectorAll('button');
+
+      q.options.forEach((opt, idx) => {
+        const btn = buttons[idx];
+        if (opt.id === q.correct) {
+          btn.className = "w-full text-left p-3.5 rounded-2xl border-2 border-emerald-500 bg-emerald-50 transition-all flex items-start gap-3 text-xs font-semibold shadow-2xs";
+          btn.querySelector('span').className = "w-6 h-6 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5";
+        } else if (opt.id === selectedId && !isCorrect) {
+          btn.className = "w-full text-left p-3.5 rounded-2xl border-2 border-red-500 bg-red-50 transition-all flex items-start gap-3 text-xs font-semibold shadow-2xs";
+          btn.querySelector('span').className = "w-6 h-6 rounded-lg bg-red-600 text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5";
+        } else {
+          btn.className = "w-full text-left p-3.5 rounded-2xl border border-slate-200 bg-white opacity-50 flex items-start gap-3 text-xs font-semibold";
+        }
+      });
+
+      // Afficher justification
+      const expBox = document.getElementById('modal-explanation-box');
+      const badge = document.getElementById('modal-feedback-badge');
+      const refLabel = document.getElementById('modal-ref-label');
+      const expFr = document.getElementById('modal-explanation-fr');
+      const expAr = document.getElementById('modal-explanation-ar');
+
+      if (isCorrect) {
+        badge.className = "px-2.5 py-0.5 rounded-md text-xs font-black uppercase bg-emerald-100 text-emerald-800";
+        badge.textContent = "✓ Bonne Réponse";
+      } else {
+        badge.className = "px-2.5 py-0.5 rounded-md text-xs font-black uppercase bg-red-100 text-red-800";
+        badge.textContent = "✗ Réponse Incorrecte";
+      }
+
+      refLabel.textContent = `Source : ${q.ref}`;
+      expFr.textContent = q.expFr;
+      expAr.textContent = q.expAr;
+
+      expBox.classList.remove('hidden');
+
+      document.getElementById('modal-score-tracker').textContent = `Score : ${modalScore} / ${activeQuizQuestions.length}`;
+      document.getElementById('modal-next-btn').disabled = false;
+    }
+
+    function nextModalQuestion() {
+      currentModalQIndex++;
+      renderModalQuestion();
+    }
+
+    function renderModalFinished() {
+      const body = document.getElementById('modal-quiz-body');
+      const pct = Math.round((modalScore / activeQuizQuestions.length) * 100);
+
+      body.innerHTML = `
+        <div class="text-center py-8 space-y-4">
+          <div class="w-20 h-20 rounded-full ${pct >= 60 ? 'bg-emerald-100 text-[#006233]' : 'bg-amber-100 text-amber-800'} mx-auto flex items-center justify-center text-4xl shadow-sm">
+            ${pct >= 60 ? '🏆' : '📚'}
+          </div>
+          <h4 class="text-2xl font-black text-slate-900 font-heading">Série Terminée avec Succès !</h4>
+          <p class="text-sm text-slate-600">
+            Votre score final : <strong class="text-slate-900 text-lg">${modalScore} / ${activeQuizQuestions.length}</strong> (${pct}%)
+          </p>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-600 max-w-md mx-auto leading-relaxed">
+            ${pct >= 80 
+              ? 'Excellent niveau de maîtrise conforme aux attentes du CNEE pour le concours CRMEF.' 
+              : 'Bonne révision ! Vous pouvez refaire la série ou consulter les autres spécialités pour renforcer vos acquis.'}
+          </div>
+          <div class="pt-4 flex justify-center gap-3">
+            <button onclick="currentModalQIndex=0; modalScore=0; renderModalQuestion();" class="px-5 py-2.5 rounded-xl bg-slate-900 text-white text-xs font-black shadow-xs hover:bg-slate-800 transition-colors">
+              Refaire cette Série ↺
+            </button>
+            <button onclick="closeInteractiveModal()" class="px-5 py-2.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-black hover:bg-slate-200 transition-colors">
+              Fermer et Explorer le Hub
+            </button>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('modal-next-btn').style.display = 'none';
+    }
+
+    function closeInteractiveModal() {
+      const modal = document.getElementById('interactive-quiz-modal');
+      modal.classList.add('hidden');
+      document.getElementById('modal-next-btn').style.display = 'inline-block';
+    }
+  </script>
 
 </body>
 </html>

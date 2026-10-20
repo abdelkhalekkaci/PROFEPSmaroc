@@ -1,7 +1,7 @@
 export interface QuizQuestion {
   id: string;
   module: 'sciences_education' | 'specialite' | 'didactique';
-  subject: 'eps' | 'primaire' | 'commun' | 'maths' | 'svt';
+  subject: 'eps' | 'primaire' | 'commun' | 'maths' | 'svt' | 'pc' | 'francais' | 'arabe' | 'hg' | 'philo' | 'info' | 'anglais' | 'islam';
   theme: string;
   question: string;
   questionAr?: string;
@@ -48,16 +48,80 @@ export const QUIZ_SUBJECTS: QuizSubjectConfig[] = [
     name: 'Mathématiques (Secondaire)',
     nameAr: 'الرياضيات (الثانوي)',
     icon: 'Calculator',
-    description: 'Sciences de l’Éducation transversales et Didactique des Mathématiques collégiales et qualifiantes.',
-    availableModules: ['sciences_education', 'didactique'],
+    description: 'Sciences de l’Éducation transversales, Didactique Brousseau et Spécialité Mathématique (Analyse, Algèbre).',
+    availableModules: ['sciences_education', 'specialite', 'didactique'],
+  },
+  {
+    id: 'pc',
+    name: 'Physique - Chimie (Secondaire)',
+    nameAr: 'الفيزياء والكيمياء',
+    icon: 'Zap',
+    description: 'Sciences de l’Éducation, Démarche d’investigation scientifique et Spécialité Physique-Chimie.',
+    availableModules: ['sciences_education', 'specialite', 'didactique'],
   },
   {
     id: 'svt',
     name: 'SVT (Sciences de la Vie et de la Terre)',
     nameAr: 'علوم الحياة والأرض',
     icon: 'Microscope',
-    description: 'Sciences de l’Éducation, Géologie/Biologie et Didactique de la démarche d’investigation.',
-    availableModules: ['sciences_education', 'didactique'],
+    description: 'Sciences de l’Éducation, Démarche d’investigation en SVT et Spécialité Biologie/Géologie marocaine.',
+    availableModules: ['sciences_education', 'specialite', 'didactique'],
+  },
+  {
+    id: 'francais',
+    name: 'Langue Française (Secondaire)',
+    nameAr: 'اللغة الفرنسية وآدابها',
+    icon: 'BookOpen',
+    description: 'Sciences de l’Éducation, Didactique du Français (APC, lecture méthodique) et Spécialité Littérature/Linguistique.',
+    availableModules: ['sciences_education', 'specialite', 'didactique'],
+  },
+  {
+    id: 'arabe',
+    name: 'Langue Arabe (Secondaire)',
+    nameAr: 'اللغة العربية وآدابها',
+    icon: 'FileText',
+    description: 'علوم التربية، ديداكتيك اللغة العربية (النصوص، الدرس اللغوي، التعبير) ومادة التخصص الأدبية واللغوية.',
+    availableModules: ['sciences_education', 'specialite', 'didactique'],
+  },
+  {
+    id: 'hg',
+    name: 'Histoire - Géographie (Secondaire)',
+    nameAr: 'التاريخ والجغرافيا',
+    icon: 'Compass',
+    description: 'علوم التربية، النهج التاريخي والنهج الجغرافي واستثمار الوثائق، ومادة التخصص التاريخية والجغرافية.',
+    availableModules: ['sciences_education', 'specialite', 'didactique'],
+  },
+  {
+    id: 'philo',
+    name: 'Philosophie (Secondaire)',
+    nameAr: 'الفلسفة والفكر الإنساني',
+    icon: 'HelpCircle',
+    description: 'علوم التربية، ديداكتيك الدرس الفلسفي (المفهمة والأشكلة والمحاججة) وتاريخ الفلسفة وقضاياها.',
+    availableModules: ['sciences_education', 'specialite', 'didactique'],
+  },
+  {
+    id: 'info',
+    name: 'Informatique (Secondaire)',
+    nameAr: 'الإعلاميات وعلوم الحاسوب',
+    icon: 'Code2',
+    description: 'Sciences de l’Éducation, Didactique de l’algorithmique et programmation, et Spécialité Informatique.',
+    availableModules: ['sciences_education', 'specialite', 'didactique'],
+  },
+  {
+    id: 'anglais',
+    name: 'English Studies (TEFL / ELT)',
+    nameAr: 'اللغة الإنجليزية',
+    icon: 'Share2',
+    description: 'Sciences of Education, TEFL / ELT Methodology (CLT, lesson planning) and English Linguistics & Literature.',
+    availableModules: ['sciences_education', 'specialite', 'didactique'],
+  },
+  {
+    id: 'islam',
+    name: 'Éducation Islamique (Secondaire)',
+    nameAr: 'التربية الإسلامية والعلوم الشرعية',
+    icon: 'Scale',
+    description: 'علوم التربية، ديداكتيك المداخل الخمسة لمنهاج التربية الإسلامية ومادة التخصص في العلوم الشرعية.',
+    availableModules: ['sciences_education', 'specialite', 'didactique'],
   },
 ];
 

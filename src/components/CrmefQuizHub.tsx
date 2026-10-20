@@ -465,12 +465,49 @@ export const CrmefQuizHub: React.FC = () => {
               </div>
             </div>
 
-            {/* Subjects Grid */}
-            <div className="space-y-2">
-              <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
-                Filière du Concours :
-              </label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {/* ================= 1. TRONC COMMUN EN TÊTE (STRICTEMENT SEUL EN HAUT) ================= */}
+            <div className="p-4 sm:p-5 rounded-2xl border-2 border-red-200 bg-gradient-to-r from-red-50/50 to-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className="px-2.5 py-0.5 rounded-md bg-[#c1272d] text-white text-[10px] font-black uppercase">
+                    Tronc Commun Universel (100% Candidats)
+                  </span>
+                  <span className="text-xs font-arabic font-bold text-[#c1272d]">مستجدات نظام التربية والتكوين</span>
+                </div>
+                <h3 className="text-sm sm:text-base font-black text-slate-900">
+                  Sciences de l'Éducation & Psychopédagogie
+                </h3>
+                <p className="text-xs text-slate-600 max-w-2xl leading-relaxed">
+                  Loi-Cadre 51.17, Feuille de Route 2022-2026, Écoles Pionnières, TaRL, Piaget, Vygotski et Meirieu.
+                </p>
+              </div>
+
+              <button
+                onClick={() => {
+                  setSelectedModule('sciences_education');
+                  setExamFinished(false);
+                }}
+                className={`px-5 py-3 rounded-xl font-black text-xs transition-all shrink-0 cursor-pointer ${
+                  selectedModule === 'sciences_education'
+                    ? 'bg-gradient-to-r from-[#c1272d] to-[#991b1b] text-white shadow-md shadow-red-600/30 ring-2 ring-red-400'
+                    : 'bg-white border-2 border-slate-300 text-slate-800 hover:border-[#c1272d]'
+                }`}
+              >
+                {selectedModule === 'sciences_education' ? '✓ Module Tronc Commun Sélectionné' : 'Sélectionner le Tronc Commun →'}
+              </button>
+            </div>
+
+            {/* ================= 2. SÉLECTION DE LA SPÉCIALITÉ DU CANDIDAT ================= */}
+            <div className="space-y-3 pt-2">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#006233]" />
+                  <span>Choisissez votre Spécialité (12 Filières Officielles MENPS) :</span>
+                </label>
+                <span className="text-xs text-slate-500 font-semibold">Primaire & Secondaire</span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 max-h-72 overflow-y-auto p-1 border border-slate-100 rounded-2xl">
                 {QUIZ_SUBJECTS.map(subj => {
                   const isSelected = selectedSubjectId === subj.id;
                   return (
@@ -478,19 +515,22 @@ export const CrmefQuizHub: React.FC = () => {
                       key={subj.id}
                       onClick={() => {
                         setSelectedSubjectId(subj.id);
+                        if (selectedModule === 'sciences_education') {
+                          setSelectedModule('didactique');
+                        }
                         setExamFinished(false);
                       }}
                       className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
                         isSelected
-                          ? 'border-blue-600 bg-blue-50/70 ring-2 ring-blue-600/20 shadow-2xs'
+                          ? 'border-[#006233] bg-emerald-50/70 ring-2 ring-[#006233]/20 shadow-2xs'
                           : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50/50'
                       }`}
                     >
-                      <div className="flex items-center justify-between mb-1.5">
-                        <span className="text-xs font-bold text-slate-900">{subj.name}</span>
-                        <span className="text-[11px] text-blue-600 font-arabic font-semibold">{subj.nameAr}</span>
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-xs font-black text-slate-900">{subj.name}</span>
                       </div>
-                      <p className="text-[11px] text-slate-500 line-clamp-2 leading-relaxed">
+                      <span className="text-[11px] text-[#006233] font-arabic font-semibold block mb-1">{subj.nameAr}</span>
+                      <p className="text-[10px] text-slate-500 line-clamp-2 leading-relaxed">
                         {subj.description}
                       </p>
                     </button>
@@ -499,91 +539,69 @@ export const CrmefQuizHub: React.FC = () => {
               </div>
             </div>
 
-            {/* Modules Selection (The 3 official tests) */}
+            {/* ================= 3. LES 2 ÉPREUVES DE LA SPÉCIALITÉ (SANS AUCUN EXAMEN BLANC) ================= */}
             <div className="space-y-2 pt-2">
-              <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
-                Module d'Épreuve (Les 3 Piliers du Concours Marocain) :
+              <label className="text-xs font-black text-slate-800 uppercase tracking-wider block">
+                Épreuve Spécifique à Traiter :
               </label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                <button
-                  onClick={() => {
-                    setSelectedModule('sciences_education');
-                    setExamFinished(false);
-                  }}
-                  className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
-                    selectedModule === 'sciences_education'
-                      ? 'border-indigo-600 bg-indigo-50 ring-2 ring-indigo-600/20'
-                      : 'border-slate-200 hover:bg-slate-50'
-                  }`}
-                >
-                  <div className="flex items-center gap-1.5 mb-1">
-                    <span className="w-2 h-2 rounded-full bg-indigo-600" />
-                    <span className="text-xs font-bold text-slate-900">Épreuve 1 · Sciences de l'Éducation</span>
-                  </div>
-                  <p className="text-[11px] text-slate-500">
-                    Tronc commun universel à 100% des spécialités (Loi 51.17, Vygotski, Piaget, TaRL).
-                  </p>
-                </button>
-
-                <button
-                  onClick={() => {
-                    setSelectedModule('specialite');
-                    setExamFinished(false);
-                  }}
-                  className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
-                    selectedModule === 'specialite'
-                      ? 'border-emerald-600 bg-emerald-50 ring-2 ring-emerald-600/20'
-                      : 'border-slate-200 hover:bg-slate-50'
-                  }`}
-                >
-                  <div className="flex items-center gap-1.5 mb-1">
-                    <span className="w-2 h-2 rounded-full bg-emerald-600" />
-                    <span className="text-xs font-bold text-slate-900">Épreuve 2 · مادة التخصص (Spécialité)</span>
-                  </div>
-                  <p className="text-[11px] text-slate-500">
-                    Connaissances académiques et scientifiques pures de la discipline choisie.
-                  </p>
-                </button>
-
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                
+                {/* Didactique */}
                 <button
                   onClick={() => {
                     setSelectedModule('didactique');
                     setExamFinished(false);
                   }}
-                  className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
+                  className={`p-4 rounded-2xl border-2 text-left transition-all cursor-pointer flex items-start gap-3 ${
                     selectedModule === 'didactique'
-                      ? 'border-amber-600 bg-amber-50 ring-2 ring-amber-600/20'
-                      : 'border-slate-200 hover:bg-slate-50'
+                      ? 'border-[#006233] bg-emerald-50/80 ring-2 ring-[#006233]/20 shadow-sm'
+                      : 'border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50'
                   }`}
                 >
-                  <div className="flex items-center gap-1.5 mb-1">
-                    <span className="w-2 h-2 rounded-full bg-amber-600" />
-                    <span className="text-xs font-bold text-slate-900">Épreuve 3 · Didactique de la Spécialité</span>
+                  <div className={`w-8 h-8 rounded-xl flex items-center justify-center font-black text-xs shrink-0 ${
+                    selectedModule === 'didactique' ? 'bg-[#006233] text-white' : 'bg-slate-100 text-slate-700'
+                  }`}>
+                    01
                   </div>
-                  <p className="text-[11px] text-slate-500">
-                    Transposition didactique, Orientations Pédagogiques, fiches de séance et évaluation.
-                  </p>
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-black text-slate-900">Didactique de la Spécialité</span>
+                      <span className="text-xs font-arabic font-bold text-[#006233]">ديداكتيك مادة التخصص</span>
+                    </div>
+                    <p className="text-xs text-slate-500 leading-relaxed">
+                      Orientations Pédagogiques, transposition didactique, fiches de séance, remédiation et grilles d'évaluation.
+                    </p>
+                  </div>
                 </button>
 
+                {/* Spécialité Disciplinaire */}
                 <button
                   onClick={() => {
-                    setSelectedModule('all');
+                    setSelectedModule('specialite');
                     setExamFinished(false);
                   }}
-                  className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
-                    selectedModule === 'all'
-                      ? 'border-blue-600 bg-blue-50 ring-2 ring-blue-600/20'
-                      : 'border-slate-200 hover:bg-slate-50'
+                  className={`p-4 rounded-2xl border-2 text-left transition-all cursor-pointer flex items-start gap-3 ${
+                    selectedModule === 'specialite'
+                      ? 'border-[#c1272d] bg-red-50/80 ring-2 ring-[#c1272d]/20 shadow-sm'
+                      : 'border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50'
                   }`}
                 >
-                  <div className="flex items-center gap-1.5 mb-1">
-                    <span className="w-2 h-2 rounded-full bg-blue-600" />
-                    <span className="text-xs font-bold text-slate-900">Simulation Mixte (Examen Blanc)</span>
+                  <div className={`w-8 h-8 rounded-xl flex items-center justify-center font-black text-xs shrink-0 ${
+                    selectedModule === 'specialite' ? 'bg-[#c1272d] text-white' : 'bg-slate-100 text-slate-700'
+                  }`}>
+                    02
                   </div>
-                  <p className="text-[11px] text-slate-500">
-                    10 questions panachées couvrant l'ensemble des 3 épreuves pour un test complet.
-                  </p>
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-black text-slate-900">Spécialité Disciplinaire (Académique)</span>
+                      <span className="text-xs font-arabic font-bold text-[#c1272d]">مادة التخصص</span>
+                    </div>
+                    <p className="text-xs text-slate-500 leading-relaxed">
+                      Savoirs savants universitaires et disciplinaires purs de la filière choisie.
+                    </p>
+                  </div>
                 </button>
+
               </div>
             </div>
           </div>
