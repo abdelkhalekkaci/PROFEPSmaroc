@@ -1,756 +1,651 @@
-export interface QuizQuestion {
-  id: string;
-  module: 'sciences_education' | 'specialite' | 'didactique';
-  subject: 'eps' | 'primaire' | 'commun' | 'maths' | 'svt' | 'pc' | 'francais' | 'arabe' | 'hg' | 'philo' | 'info' | 'anglais' | 'islam';
-  theme: string;
-  question: string;
-  questionAr?: string;
-  options: {
-    id: string;
-    text: string;
-    textAr?: string;
-  }[];
-  correctOptionId: string;
-  explanation: string;
-  explanationAr?: string;
-  officialReference?: string;
-  difficulty: 'facile' | 'moyen' | 'expert';
-}
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QCM Didactique des Mathématiques CRMEF Maroc · Guy Brousseau & TSD | ProfEPS.ma</title>
+  <meta name="description" content="Simulateur officiel de QCM en Didactique des Mathématiques pour le concours CRMEF Maroc. Théorie des situations didactiques, contrat didactique, TICE GeoGebra, obstacles et remédiation. Séries de 10 questions avec corrections détaillées.">
+  <link rel="canonical" href="https://profeps.ma/qcm-didactique-maths-maroc.html">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-arabic { font-family: 'Noto Kufi Arabic', sans-serif; }
+    .peps-red { color: #c1272d; }
+    .peps-bg-red { background-color: #c1272d; }
+    .peps-green { color: #006233; }
+    .peps-bg-green { background-color: #006233; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Quiz",
+    "name": "QCM Didactique des Mathématiques - Concours CRMEF Maroc",
+    "description": "Entraînement officiel corrigé en Didactique des Mathématiques pour le concours des CRMEF collégial et qualifiant au Maroc. Séries de 10 questions tirées aléatoirement.",
+    "educationalLevel": "CRMEF Enseignement Secondaire Mathématiques",
+    "author": {
+      "@type": "Person",
+      "name": "Abdelkhalek ELBOUDANI",
+      "jobTitle": "Professeur de l'Éducation Nationale"
+    }
+  }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
 
-export interface QuizSubjectConfig {
-  id: string;
-  name: string;
-  nameAr: string;
-  icon: string;
-  description: string;
-  availableModules: ('sciences_education' | 'specialite' | 'didactique')[];
-}
+  <!-- ================= HEADER & NAVIGATION ================= -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs backdrop-blur-md bg-white/95">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <a href="concours-crmef-hub.html" class="flex items-center gap-2.5 shrink-0 group">
+        <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-sm shadow-xs group-hover:bg-blue-700 transition-colors">
+          📐
+        </div>
+        <div>
+          <span class="font-extrabold text-slate-900 text-sm sm:text-base tracking-tight block leading-none">
+            Didactique Maths<span class="text-blue-600"> · CRMEF</span>
+          </span>
+          <span class="text-[10px] text-slate-500 font-medium block mt-0.5">
+            ProfEPS.ma · Situations Didactiques & Cadres de Référence MENPS
+          </span>
+        </div>
+      </a>
 
-export const QUIZ_SUBJECTS: QuizSubjectConfig[] = [
-  {
-    id: 'eps',
-    name: 'EPS (Éducation Physique & Sportive)',
-    nameAr: 'التربية البدنية والرياضية',
-    icon: 'Activity',
-    description: 'Spécialité EPS, Didactique des APSA, Orientations Pédagogiques 2007/2009 et Sciences de l’Éducation.',
-    availableModules: ['sciences_education', 'specialite', 'didactique'],
-  },
-  {
-    id: 'primaire',
-    name: 'Enseignement Primaire (Double Voie)',
-    nameAr: 'التعليم الابتدائي (مزدوج)',
-    icon: 'GraduationCap',
-    description: 'Sciences de l’Éducation, Didactique du Français/Arabe/Maths et Spécialité pluridisciplinaire.',
-    availableModules: ['sciences_education', 'specialite', 'didactique'],
-  },
-  {
-    id: 'maths',
-    name: 'Mathématiques (Secondaire)',
-    nameAr: 'الرياضيات (الثانوي)',
-    icon: 'Calculator',
-    description: 'Sciences de l’Éducation transversales, Didactique Brousseau et Spécialité Mathématique (Analyse, Algèbre).',
-    availableModules: ['sciences_education', 'specialite', 'didactique'],
-  },
-  {
-    id: 'pc',
-    name: 'Physique - Chimie (Secondaire)',
-    nameAr: 'الفيزياء والكيمياء',
-    icon: 'Zap',
-    description: 'Sciences de l’Éducation, Démarche d’investigation scientifique et Spécialité Physique-Chimie.',
-    availableModules: ['sciences_education', 'specialite', 'didactique'],
-  },
-  {
-    id: 'svt',
-    name: 'SVT (Sciences de la Vie et de la Terre)',
-    nameAr: 'علوم الحياة والأرض',
-    icon: 'Microscope',
-    description: 'Sciences de l’Éducation, Démarche d’investigation en SVT et Spécialité Biologie/Géologie marocaine.',
-    availableModules: ['sciences_education', 'specialite', 'didactique'],
-  },
-  {
-    id: 'francais',
-    name: 'Langue Française (Secondaire)',
-    nameAr: 'اللغة الفرنسية وآدابها',
-    icon: 'BookOpen',
-    description: 'Sciences de l’Éducation, Didactique du Français (APC, lecture méthodique) et Spécialité Littérature/Linguistique.',
-    availableModules: ['sciences_education', 'specialite', 'didactique'],
-  },
-  {
-    id: 'arabe',
-    name: 'Langue Arabe (Secondaire)',
-    nameAr: 'اللغة العربية وآدابها',
-    icon: 'FileText',
-    description: 'علوم التربية، ديداكتيك اللغة العربية (النصوص، الدرس اللغوي، التعبير) ومادة التخصص الأدبية واللغوية.',
-    availableModules: ['sciences_education', 'specialite', 'didactique'],
-  },
-  {
-    id: 'hg',
-    name: 'Histoire - Géographie (Secondaire)',
-    nameAr: 'التاريخ والجغرافيا',
-    icon: 'Compass',
-    description: 'علوم التربية، النهج التاريخي والنهج الجغرافي واستثمار الوثائق، ومادة التخصص التاريخية والجغرافية.',
-    availableModules: ['sciences_education', 'specialite', 'didactique'],
-  },
-  {
-    id: 'philo',
-    name: 'Philosophie (Secondaire)',
-    nameAr: 'الفلسفة والفكر الإنساني',
-    icon: 'HelpCircle',
-    description: 'علوم التربية، ديداكتيك الدرس الفلسفي (المفهمة والأشكلة والمحاججة) وتاريخ الفلسفة وقضاياها.',
-    availableModules: ['sciences_education', 'specialite', 'didactique'],
-  },
-  {
-    id: 'info',
-    name: 'Informatique (Secondaire)',
-    nameAr: 'الإعلاميات وعلوم الحاسوب',
-    icon: 'Code2',
-    description: 'Sciences de l’Éducation, Didactique de l’algorithmique et programmation, et Spécialité Informatique.',
-    availableModules: ['sciences_education', 'specialite', 'didactique'],
-  },
-  {
-    id: 'anglais',
-    name: 'English Studies (TEFL / ELT)',
-    nameAr: 'اللغة الإنجليزية',
-    icon: 'Share2',
-    description: 'Sciences of Education, TEFL / ELT Methodology (CLT, lesson planning) and English Linguistics & Literature.',
-    availableModules: ['sciences_education', 'specialite', 'didactique'],
-  },
-  {
-    id: 'islam',
-    name: 'Éducation Islamique (Secondaire)',
-    nameAr: 'التربية الإسلامية والعلوم الشرعية',
-    icon: 'Scale',
-    description: 'علوم التربية، ديداكتيك المداخل الخمسة لمنهاج التربية الإسلامية ومادة التخصص في العلوم الشرعية.',
-    availableModules: ['sciences_education', 'specialite', 'didactique'],
-  },
-];
+      <!-- Navigation Silo Transversale -->
+      <nav class="hidden lg:flex items-center gap-1.5 text-xs font-bold">
+        <a href="concours-crmef-hub.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+          🏛️ Hub National
+        </a>
+        <a href="qcm-sciences-education-crmef.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+          📚 Tronc Commun (Sciences Éduc.)
+        </a>
+        <a href="qcm-didactique-maths-maroc.html" class="px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 border border-blue-200">
+          📐 Didactique Maths
+        </a>
+        <a href="qcm-specialite-maths-maroc.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+          ⚡ Spécialité Maths
+        </a>
+        <a href="qcm-didactique-eps-maroc.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+          🏃 Didactique EPS
+        </a>
+        <a href="qcm-didactique-primaire-maroc.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+          🎒 Primaire
+        </a>
+      </nav>
 
-export const INITIAL_QUIZ_BANK: QuizQuestion[] = [
-  // ================= MODULE 1 : SCIENCES DE L'ÉDUCATION (TRONC COMMUN UNIVERSEL) =================
-  {
-    id: 'se-01',
-    module: 'sciences_education',
-    subject: 'commun',
-    theme: 'Législation & Loi-Cadre 51.17',
-    question: 'Selon la Loi-Cadre 51.17 relative au système d’éducation et de formation au Maroc, quel est le levier fondamental pour garantir l’équité et l’égalité des chances ?',
-    questionAr: 'وفق القانون الإطار 51.17 المتعلق بمنظومة التربية والتكوين، ما هي الرافعة الأساسية لضمان الإنصاف وتكافؤ الفرص؟',
-    options: [
-      { id: 'a', text: 'La généralisation d’un enseignement préscolaire obligatoire et de qualité pour les 4-5 ans.', textAr: 'تعميم تعليم أولي إلزامي وذي جودة للفئة العمرية 4-5 سنوات.' },
-      { id: 'b', text: 'L’instauration immédiate d’épreuves écrites sans contrôle continu.', textAr: 'الاعتماد الفوري للامتحانات الكتابية دون مراقبة مستمرة.' },
-      { id: 'c', text: 'La réduction des heures d’activités sportives et artistiques.', textAr: 'تقليص حصص الأنشطة الرياضية والفنية.' },
-      { id: 'd', text: 'La sélection stricte des élèves dès l’entrée au collège.', textAr: 'الانتقاء الصارم للتلاميذ عند ولوج الإعدادي.' },
-    ],
-    correctOptionId: 'a',
-    explanation: 'L’article 8 de la Loi-Cadre 51.17 stipule que l’enseignement préscolaire est intégré dans le cycle primaire obligatoire et constitue la base essentielle de l’équité sociale et de la lutte contre le redoublement et l’abandon précoce.',
-    explanationAr: 'تنص المادة 8 من القانون الإطار 51.17 على ربط التعليم الأولي بالتعليم الابتدائي ودمجهما تدريجيا كشرط حاسم لتحقيق الإنصاف وتكافؤ الفرص ومحاربة الهدر المدرسي.',
-    officialReference: 'Loi-Cadre 51.17, Articles 4 et 8 (Royaume du Maroc)',
-    difficulty: 'moyen',
-  },
-  {
-    id: 'se-02',
-    module: 'sciences_education',
-    subject: 'commun',
-    theme: 'Théories d’Apprentissage',
-    question: 'Dans la théorie du constructivisme de Jean Piaget, quel mécanisme décrit l’adaptation des schèmes cognitifs de l’apprenant face à une information nouvelle perturbant l’équilibre ?',
-    questionAr: 'في نظرية البنائية لجان بياجي، ما هي الآلية التي تصف تعديل الخطاطات الذهنية للمتعلم لملاءمة معطيات جديدة؟',
-    options: [
-      { id: 'a', text: 'L’Assimilation pure sans modification des structures mentales.', textAr: 'الاستيعاب فقط دون تعديل البنيات الذهنية.' },
-      { id: 'b', text: 'L’Accommodation, qui modifie les schèmes existants pour intégrer l’inédit.', textAr: 'الملاءمة (Accommodation) عبر تعديل الخطاطات لاستيعاب الجديد.' },
-      { id: 'c', text: 'Le Conditionnement opérant skinnérien.', textAr: 'الإشراط الإجرائي لسكنر.' },
-      { id: 'd', text: 'L’imitation vicariante passive.', textAr: 'النمذجة والمحاكاة التناوبية.' },
-    ],
-    correctOptionId: 'b',
-    explanation: 'Selon Piaget, l’adaptation résulte de deux processus complémentaires : l’assimilation (incorporation d’une donnée) et l’accommodation (modification des schèmes mentaux face aux résistances du milieu). L’équilibration dynamique stabilise ces schèmes.',
-    explanationAr: 'وفق بياجي، الملاءمة هي العملية التي يتم بموجبها تعديل وتطوير الخطاطات المعرفية السابقة للتكيف مع الوضعية المشكلة الجديدة بعد مرحلة الصراع المعرفي.',
-    officialReference: 'Jean Piaget, La Naissance de l’intelligence chez l’enfant',
-    difficulty: 'facile',
-  },
-  {
-    id: 'se-03',
-    module: 'sciences_education',
-    subject: 'commun',
-    theme: 'Socioconstructivisme',
-    question: 'Que désigne la « Zone Proximale de Développement » (ZPD) théorisée par Lev Vygotski ?',
-    questionAr: 'ماذا يقصد بـ "منطقة النمو القريب" (ZPD) في النظرية السوسيوبنائية لـ ليف فيغوتسكي؟',
-    options: [
-      { id: 'a', text: 'L’écart entre ce que l’élève réussit seul et ce qu’il peut accomplir avec l’aide d’un pair ou de l’enseignant.', textAr: 'الفارق بين ما يستطيع المتعلم إنجازه بمفرده وما ينجزه بتوجيه ودعم المدرس أو الأقران.' },
-      { id: 'b', text: 'La zone géographique regroupant les écoles d’un même bassin de recrutement.', textAr: 'المنطقة الجغرافية التي تضم مؤسسات الحوض المدرسي.' },
-      { id: 'c', text: 'Le temps nécessaire pour mémoriser un cours magistral complet.', textAr: 'المدة الزمنية لحفظ درس ملقى بصورة إلقائية.' },
-      { id: 'd', text: 'Le stade biologique terminal de maturation neuromusculaire.', textAr: 'المرحلة البيولوجية النهائية للنمو النمائي.' },
-    ],
-    correctOptionId: 'a',
-    explanation: 'La ZPD est l’espace fécond où se construisent les nouveaux apprentissages : l’élève est guidé par l’étayage (scaffolding) de l’enseignant pour franchir un obstacle cognitif inaccessible seul.',
-    explanationAr: 'منطقة النمو القريب تمثل المسافة بين مستوى النمو الفعلي المستقل للمتعلم، ومستوى النمو المحتمل تحت إشراف وتوجيه المدرس (السند الديداكتيكي).',
-    officialReference: 'Lev Vygotski, Pensée et Langage (1934)',
-    difficulty: 'facile',
-  },
-  {
-    id: 'se-04',
-    module: 'sciences_education',
-    subject: 'commun',
-    theme: 'Méthodologie & Réformes (Écoles Pionnières / TaRL)',
-    question: 'Quelle est la particularité fondamentale de l’approche TaRL (Teaching at the Right Level) déployée dans la feuille de route 2022-2026 au Maroc ?',
-    questionAr: 'ما هي الخاصية الجوهرية لمقاربة التدريس وفق المستوى المناسب (TaRL) المعتمدة في خارطة الطريق 2022-2026 بالمغرب؟',
-    options: [
-      { id: 'a', text: 'Le regroupement des élèves par niveau réel de maîtrise des apprentissages fondamentaux plutôt que par âge ou classe administrative.', textAr: 'تفييء المتعلمين حسب مستواهم الفعلي في التعلمات الأساس وليس حسب السن أو القسم الإداري.' },
-      { id: 'b', text: 'L’obligation d’enseigner toutes les disciplines en langue anglaise dès la 1ère année.', textAr: 'تدريس جميع المواد باللغة الإنجليزية ابتداء من السنة الأولى.' },
-      { id: 'c', text: 'L’évaluation sommative dès le premier jour de la rentrée sans remédiation.', textAr: 'التقويم الإشهادي في اليوم الأول دون معالجة ديداكتيكية.' },
-      { id: 'd', text: 'L’interdiction de toute manipulation ou jeu pédagogique en classe.', textAr: 'منع الأنشطة التفاعلية واللعب التربوي داخل الحجرة.' },
-    ],
-    correctOptionId: 'a',
-    explanation: 'TaRL (Pratham / Abdul Latif Jameel Poverty Action Lab), adopté par le MENPS, repose sur l’évaluation diagnostique rapide et le regroupement transitoire des élèves selon leur niveau réel (lecture, calcul) pour combler les lacunes fondamentales.',
-    explanationAr: 'ترتكز مقاربة TaRL على تجاوز عوائق التعلم بتشخيص دقيق وتفييء التلاميذ وفق كفاياتهم الفعلية لمعالجة التعثرات الأساسية في القراءة والحساب بأنشطة تفاعلية محفزة.',
-    officialReference: 'Feuille de Route MENPS 2022-2026 & Guide Écoles Pionnières (مدارس الريادة)',
-    difficulty: 'moyen',
-  },
-  {
-    id: 'se-05',
-    module: 'sciences_education',
-    subject: 'commun',
-    theme: 'Docimologie & Évaluation',
-    question: 'Quelle est la fonction première de l’évaluation formatrice (auto-évaluation régulatrice) ?',
-    questionAr: 'ما هي الوظيفة الأساسية للتقويم التكويني الذاتي (Évaluation formatrice)؟',
-    options: [
-      { id: 'a', text: 'Permettre à l’élève de s’approprier les critères d’évaluation et d’auto-réguler sa propre démarche de travail.', textAr: 'تمكين المتعلم من تملك معايير النجاح والتقويم الذاتي لضبط وتوجيه مسار تعلمه.' },
-      { id: 'b', text: 'Attribuer une note officielle définitive pour le bulletin de fin de trimestre.', textAr: 'منح نقطة عددية نهائية لتقرير نهاية الأسدس.' },
-      { id: 'c', text: 'Classer les élèves par ordre décroissant de moyenne générale.', textAr: 'ترتيب التلاميذ تنازليا حسب المعدل العام.' },
-      { id: 'd', text: 'Déterminer le budget d’équipement de l’établissement scolaire.', textAr: 'تحديد ميزانية التجهيزات الرياضية للمؤسسة.' },
-    ],
-    correctOptionId: 'a',
-    explanation: 'L’évaluation formatrice (développée par Nunziati et Bonniol) va plus loin que l’évaluation formative : elle rend l’apprenant co-auteur de ses repères, capable d’anticiper les critères d’évaluation et de piloter ses apprentissages.',
-    explanationAr: 'التقويم التكويني التملكي يهدف إلى جعل التلميذ واعيا بمعايير الإنجاز والتحقق، قادرا على تدبير صعوباته بنفسه دون انتظار الجزاء الخارجي للمدرس.',
-    officialReference: 'Georgette Nunziati, Pour construire un dispositif d’évaluation formatrice (1990)',
-    difficulty: 'moyen',
-  },
+      <div class="flex items-center gap-2">
+        <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold border border-blue-200">
+          Filière Mathématiques
+        </span>
+      </div>
+    </div>
+  </header>
 
-  // ================= MODULE 2 : SPÉCIALITÉ EPS (مادة التخصص) =================
-  {
-    id: 'eps-sp-01',
-    module: 'specialite',
-    subject: 'eps',
-    theme: 'Physiologie de l’effort & Énergétique',
-    question: 'Lors d’un effort maximal continu de 3 à 7 minutes, quelle filière bioénergétique fournit la majeure partie de l’énergie ATP nécessaire à la contraction musculaire ?',
-    questionAr: 'خلال مجهود بدني أقصى ومستمر يتراوح بين 3 و 7 دقائق، ما هي المسلكية الطاقية المسؤولة عن تزويد الحصة الأكبر من الـ ATP؟',
-    options: [
-      { id: 'a', text: 'La filière aérobie (oxydation mitochondriale du glycogène et glucose).', textAr: 'المسلك الهوائي (الأكسدة الميتوكوندرية للغليكوجين والغلوكوز).' },
-      { id: 'b', text: 'La filière anaérobie alactique (phosphocréatine pure).', textAr: 'المسلك اللاهوائي اللالبني (فوسفوكرياتين فقط).' },
-      { id: 'c', text: 'La lipolyse exclusive des triglycérides sous-cutanés.', textAr: 'أكسدة الأحماض الدهنية حصرا.' },
-      { id: 'd', text: 'La dégradation exclusive des acides aminés ramifiés.', textAr: 'الهدم الحصري للأحماض الأمينية.' },
-    ],
-    correctOptionId: 'a',
-    explanation: 'Au-delà de 2 à 3 minutes d’effort soutenu, la filière aérobie devient prépondérante (> 80% dès 4-5 minutes), soutenant la VMA avec production d’énergie par la chaîne respiratoire mitochondriale.',
-    explanationAr: 'بعد دقيقتين إلى 3 دقائق من الجهد الشديد المتواصل، تصبح المسلكية الهوائية هي المزود الطاقي المهيمن بأكثر من 80% لتلبية متطلبات الجهد المعتمد على VO2max و VMA.',
-    officialReference: 'Astrand, Rodahl & Saltin, Textbook of Work Physiology',
-    difficulty: 'moyen',
-  },
-  {
-    id: 'eps-sp-02',
-    module: 'specialite',
-    subject: 'eps',
-    theme: 'Biomécanique de la Course & Rendement',
-    question: 'En athlétisme scolaire, quelle relation biomécanique régit la vitesse instantanée de course d’un élève (V) ?',
-    questionAr: 'في ألعاب القوى المدرسية، ما هي المعادلة البيوميكانيكية التي تحدد سرعة الجري اللحظية (V)؟',
-    options: [
-      { id: 'a', text: 'Vitesse = Fréquence de foulée (f) × Amplitude de foulée (A).', textAr: 'السرعة = تردد الخطوات (Fréquence) × طول الخطوة (Amplitude).' },
-      { id: 'b', text: 'Vitesse = Fréquence cardiaque max / Poids corporel.', textAr: 'السرعة = نبضات القلب القصوى مقسومة على الوزن.' },
-      { id: 'c', text: 'Vitesse = Durée d’effort × Volume pulmonaire.', textAr: 'السرعة = مدة الجهد مضروبة في السعة الرئوية.' },
-      { id: 'd', text: 'Vitesse = Hauteur du centre de gravité × Indice de Ruffier.', textAr: 'السرعة = ارتفاع مركز الثقل مضروبا في مؤشر روفيي.' },
-    ],
-    correctOptionId: 'a',
-    explanation: 'La vitesse de déplacement est le produit mathématique de la cadence (nombre d’appuis par seconde) et de l’amplitude (distance franchie par foulée). Le travail technique en EPS vise l’équilibre optimal sans sur-amplitude freinatrice.',
-    explanationAr: 'سرعة العدو اللحظية هي الجداء المباشر لطول الخطوة وترددها. أي زيادة غير متناسقة في الطول تؤدي لارتكاز كابح أمام مركز الثقل.',
-    officialReference: 'Pradet M., La préparation physique en EPS',
-    difficulty: 'facile',
-  },
-  {
-    id: 'eps-sp-03',
-    module: 'specialite',
-    subject: 'eps',
-    theme: 'Sports Collectifs (Praxéologie Motrice)',
-    question: 'Dans la classification praxéologique de Pierre Parlebas, comment sont qualifiés le Football, le Basketball et le Handball ?',
-    questionAr: 'في تصنيف بيير بارليباس (Praxéologie motrice)، كيف تصنف رياضات كرة القدم وكرة السلة وكرة اليد؟',
-    options: [
-      { id: 'a', text: 'Situations sociomotrices d’interaction directe, de coopération (partenaires) et d’opposition (adversaires) dans un milieu standardisé (CAI).', textAr: 'وضعيات حركية اجتماعية ذات تفاعل مباشر: تعاون وتنافس في وسط مستقر (CAI).' },
-      { id: 'b', text: 'Situations psychomotrices d’action solitaire sans interaction.', textAr: 'وضعيات نفس حركية فردية معزولة بدون تفاعل مع الآخرين.' },
-      { id: 'c', text: 'Activités d’incertitude environnementale pure en pleine nature (sauvage).', textAr: 'أنشطة تتسم بلايقين الوسط الطبيعي غير المهيأ.' },
-      { id: 'd', text: 'Sports de duel symétrique sans ballon avec filet séparateur.', textAr: 'رياضات مبارزة فردية مع شباك فاصل.' },
-    ],
-    correctOptionId: 'a',
-    explanation: 'Parlebas classe les sports d’équipe de grand terrain en situations sociomotrices avec Co-présence, Co-opération avec les partenaires et Opposition avec les adversaires (indice CAI : Compagnons, Adversaires, Incertitude du milieu nulle car terrain tracé).',
-    explanationAr: 'يصنف بارليباس الألعاب الجماعية كوضعيات حركية تواصلية وتنافسية تفاعلية بامتياز، تقتضي قراءة شبكة التواصل الحركي والشفرات التكتيكية وتدبير ميزان القوى.',
-    officialReference: 'Pierre Parlebas, Lexique de praxéologie motrice (1999)',
-    difficulty: 'moyen',
-  },
-  {
-    id: 'eps-sp-04',
-    module: 'specialite',
-    subject: 'eps',
-    theme: 'Apprentissage Moteur & Schémas de Schmidt',
-    question: 'Dans la théorie du schéma moteur de Richard Schmidt, quel rôle joue le Programme Moteur Généralisé (PMG) ?',
-    questionAr: 'في نظرية البرنامج الحركي المعمم لريتشارد شميدت (Schmidt)، ما هو دور الـ PMG؟',
-    options: [
-      { id: 'a', text: 'Stocker une classe d’actions motrices avec des caractéristiques invariantes (invariants spatio-temporels), modulable par des paramètres variables (force, vitesse).', textAr: 'تخزين صنف من الحركات ذات ثوابت بنيوية مكانية وزمانية، قابلة للتكييف بمتغيرات كالقوة والسرعة.' },
-      { id: 'b', text: 'Produire un geste identique et figé sans aucune adaptation possible aux variations de balle.', textAr: 'إنتاج حركة ميكانيكية جامدة لا تقبل أي تعديل حسب الخصم أو الكرة.' },
-      { id: 'c', text: 'Contrôler uniquement la sécrétion d’adrénaline à l’échauffement.', textAr: 'التحكم حصرا في هرمونات التوتر عند الإحماء.' },
-      { id: 'd', text: 'Mesurer la lactatémie sanguine à la fin du cycle.', textAr: 'قياس نسبة اللاكتات في الدم في ختام الحصة.' },
-    ],
-    correctOptionId: 'a',
-    explanation: 'Le PMG résout le paradoxe du stockage et de la nouveauté : le cerveau stocke une structure générale d’action (ex: lancer de balle) et injecte des paramètres circonstanciels (vitesse de bras, angle, force) selon la cible.',
-    explanationAr: 'البرنامج الحركي المعمم يحل معضلة تخزين ملايين الحركات: حيث يخزن الدماغ هيكل الحركة الأساسي الثابت ويخصص المتغيرات اللحظية وفق متطلبات الموقف الرياضي.',
-    officialReference: 'Richard A. Schmidt, Motor Control and Learning (1988)',
-    difficulty: 'expert',
-  },
+  <!-- ================= HERO ================= -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-8 flex-1 w-full">
+    <div class="bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-950 text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
+      <div class="space-y-3 relative z-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-bold border border-blue-400/30 font-arabic">
+          <span>ديداكتيك مادة الرياضيات بالتعليم الثانوي الإعدادي والتأهيلي</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight">
+          QCM Didactique des Mathématiques · Concours CRMEF
+        </h1>
+        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+          Préparez l'épreuve de didactique des mathématiques : Théorie des Situations Didactiques (TSD) de Guy Brousseau, contrat didactique, dévolution, obstacles épistémologiques, transposition didactique de Chevallard, statut de l'erreur et intégration des TICE (GeoGebra).
+        </p>
+        <div class="text-[11px] text-blue-200 pt-1 flex items-center gap-2">
+          <span>Conforme aux cadres de référence du CNEE & MENPS Maroc</span>
+          <span>·</span>
+          <span>Séries de 10 questions tirées aléatoirement avec corrigés détaillés</span>
+        </div>
+      </div>
+    </div>
 
-  // ================= MODULE 3 : DIDACTIQUE DE L'EPS (DIDACTIQUE MAROCAINE) =================
-  {
-    id: 'eps-did-01',
-    module: 'didactique',
-    subject: 'eps',
-    theme: 'Orientations Pédagogiques Marocaines (OP 2007-2009)',
-    question: 'Quelle est la formulation de la Compétence Visée au Tronc Commun du Lycée marocain selon les Orientations Pédagogiques officielles ?',
-    questionAr: 'ما هي صياغة الكفاية المستهدفة في الجذع المشترك بالثانوي التأهيلي وفق التوجيهات التربوية المغربية الرسمية؟',
-    options: [
-      { id: 'a', text: 'L’élève doit pouvoir analyser des situations motrices complexes, ajuster ses conduites et s’engager de manière autonome et sécurisée dans un projet individuel ou collectif.', textAr: 'القدرة على تحليل مواقف حركية، وضبط الإنجاز، والانخراط باستقلالية وأمان في مشروع فردي أو جماعي.' },
-      { id: 'b', text: 'L’obtention systématique d’un record national d’athlétisme avant la fin du 2ème semestre.', textAr: 'تحقيق أرقام قياسية وطنية إجبارية قبل نهاية الدورة.' },
-      { id: 'c', text: 'L’abandon des sports collectifs au profit exclusif de la gymnastique au sol.', textAr: 'التخلي التام عن الرياضات الجماعية لصالح الجمباز الأرضي.' },
-      { id: 'd', text: 'L’apprentissage par cœur de l’historique des Jeux Olympiques modernes.', textAr: 'الحفظ النظري لتاريخ الألعاب الأولمبية الإغريقية.' },
-    ],
-    correctOptionId: 'a',
-    explanation: 'Les OP 2007 (Lycée) articulent les compétences autour de la responsabilisation, de l’acquisition d’une motricité efficace et de la gestion de projets collectifs et individuels dans le cadre de la démarche de projet.',
-    explanationAr: 'تركز التوجيهات التربوية بالتعليم الثانوي التأهيلي (2007) على كفايات التحليل، الضبط الذاتي، وبناء المشروع الرياضي الفردي والجماعي كمدخل لتطوير الشخصية والاستقلالية.',
-    officialReference: 'Orientations Pédagogiques EPS 2007 pour l’Enseignement Secondaire Qualifiant (Maroc)',
-    difficulty: 'moyen',
-  },
-  {
-    id: 'eps-did-02',
-    module: 'didactique',
-    subject: 'eps',
-    theme: 'Transposition Didactique & Situations d’Apprentissage',
-    question: 'En didactique de l’EPS, comment définit-on une « Situation Problème » efficace sur le terrain ?',
-    questionAr: 'في ديداكتيك التربية البدنية، كيف تعرف "الوضعية المشكلة" الفعالة والمجدية ديداكتيكيا على أرضية الملعب؟',
-    options: [
-      { id: 'a', text: 'Une tâche motrice porteuse de sens qui confronte l’élève à un obstacle franchissable moyennant la réorganisation de ses ressources et l’acquisition d’un nouvel apprentissage.', textAr: 'مهمة حركية ذات دلالة تضع المتعلم أمام عائق يمكن تجاوزه بإعادة تنظيم مكتسباته وبناء تعلمات حركية جديدة.' },
-      { id: 'b', text: 'Une punition sportive consistant à faire 10 tours de piste à fond.', textAr: 'عقوبة بدنية تتمثل في الجري السريع حول الملعب.' },
-      { id: 'c', text: 'Un exercice stéréotypé de répétition sans aucune réflexion tactique ni variable.', textAr: 'تمرين تكراري آلي خالي من أي تفكير تكتيكي أو رهان للنجاح.' },
-      { id: 'd', text: 'Une situation réservée aux seuls élèves sportifs licenciés en club.', textAr: 'نشاط مخصص فقط للتلاميذ الممارسين في أندية رياضية مدنية.' },
-    ],
-    correctOptionId: 'a',
-    explanation: 'Selon Meirieu et Famose, la situation-problème en EPS pose un défi moteur adapté à la ZPD : l’élève ne possède pas d’emblée la réponse motrice exacte, mais la situation l’oblige à transformer ses représentations pour réussir.',
-    explanationAr: 'الوضعية المشكلة الديداكتيكية تضع التلميذ أمام مفارقة إجرائية: الهدف واضح لكن سبل تحقيقه تتطلب تجاوز السلوك الحركي العفوي واكتساب مهارة جديدة عبر التغذية الراجعة.',
-    officialReference: 'J.P. Famose, Apprentissage moteur et difficulté de la tâche (1990)',
-    difficulty: 'facile',
-  },
-  {
-    id: 'eps-did-03',
-    module: 'didactique',
-    subject: 'eps',
-    theme: 'Évaluation Certificative EPS au Maroc',
-    question: 'Dans les grilles officielles d’évaluation de l’EPS au baccalauréat marocain (Note sur 20), quelle est la répartition officielle des composantes de la note ?',
-    questionAr: 'في شبكات التقويم الرسمية لمادة التربية البدنية بالبكالوريا المغربية (النقطة من 20)، ما هو التوزيع الرسمي لمكونات التنقيط؟',
-    options: [
-      { id: 'a', text: 'Performance motrice mesurée (10 pts) + Maîtrise d’exécution / Habiletés motrices (6 pts) + Conduites civiques, engagement et rôles sociaux (4 pts).', textAr: 'الإنجاز الحركي / الأداء الرقمي (10 نقط) + إتقان المهارات الحركية (6 نقط) + السلوك والانخراط والأدوار الاجتماعية (4 نقط).' },
-      { id: 'b', text: '20 points uniquement sur la moyenne des présences sans pratique motrice.', textAr: '20 نقطة تمنح فقط على الحضور دون أي ممارسة حركية.' },
-      { id: 'c', text: '18 points sur la tenue sportive réglementaire et 2 points sur la course.', textAr: '18 نقطة على البذلة الرياضية ونقطتان على الجري.' },
-      { id: 'd', text: 'Tirage au sort de la note sans épreuve physique.', textAr: 'قرعة عشوائية لمنح المعدل الدوري.' },
-    ],
-    correctOptionId: 'a',
-    explanation: 'Le cadre de référence marocain de l’évaluation certificative au secondaire qualifiant attribue 10 points à la performance (barèmes standardisés), 6 points à la maîtrise technique et tactique, et 4 points aux rôles sociaux (arbitrage, entraide, sécurité).',
-    explanationAr: 'الإطار المرجعي للامتحان الوطني للتربية البدنية يوازن بين الأداء البدني القابل للقياس (10ن)، جودة الإنجاز الحركي والتكتيكي (6ن)، والمواقف والالتزام والمسؤولية الاجتماعية (4ن).',
-    officialReference: 'Note Ministérielle Cadre de Référence Baccalauréat EPS (MENPS Maroc)',
-    difficulty: 'moyen',
-  },
-  {
-    id: 'eps-did-04',
-    module: 'didactique',
-    subject: 'eps',
-    theme: 'Sécurité & Responsabilité Civile et Pénale de l’Enseignant',
-    question: 'En cas d’accident survenu durant un cours d’EPS au Maroc (ex: chute en gymnastique), quelle est la première obligation réglementaire du professeur d’EPS ?',
-    questionAr: 'في حالة وقوع حادث مدرسي خلال حصة التربية البدنية بالمغرب، ما هو الالتزام القانوني والإداري الفوري للأستاذ؟',
-    options: [
-      { id: 'a', text: 'Prodiguer les premiers secours d’urgence, alerter la direction de l’établissement et la protection civile, et rédiger un rapport circonstancié d’accident.', textAr: 'تقديم الإسعافات الأولية المستعجلة، إشعار الإدارة والوقاية المدنية، وتحرير تقرير مفصل عن الحادثة.' },
-      { id: 'b', text: 'Demander aux autres élèves de raccompagner le blessé chez lui discrètement.', textAr: 'مطالبة التلاميذ بنقل المصاب إلى منزله دون إعلام الإدارة.' },
-      { id: 'c', text: 'Poursuivre la séance comme si de rien n’était sans prévenir la famille.', textAr: 'مواصلة الدرس وتجاهل الواقعة تجنبا للمسؤولية.' },
-      { id: 'd', text: 'Modifier a posteriori la fiche de séance pour supprimer l’atelier incriminé.', textAr: 'تعديل جذاذة الحصة بأثر رجعي لإخفاء التمرين المسبب للحادث.' },
-    ],
-    correctOptionId: 'a',
-    explanation: 'La jurisprudence marocaine et la circulaire sur les accidents scolaires engagent la responsabilité administrative de l’État sous couvert de la diligence du professeur : secours immédiats, alerte administrative et rédaction du rapport objectif avec témoins.',
-    explanationAr: 'تفرض النصوص التنظيمية (المذكرات الوزارية الخاصة بالحوادث المدرسية) التدخل الإسعافي السريع، الاتصال بالإسعاف وإدارة المؤسسة، وتوثيق الواقعة بتقرير إداري رسمي فوري.',
-    officialReference: 'Guide Juridique de l’Enseignant & Circulaires ministérielles sur les accidents scolaires',
-    difficulty: 'facile',
-  },
+    <!-- Mode Selector -->
+    <div class="bg-white rounded-2xl border border-slate-200 p-2 shadow-xs flex items-center justify-between gap-2">
+      <button onclick="switchMode('quiz')" id="btn-mode-quiz" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold bg-blue-600 text-white shadow-xs cursor-pointer transition-all text-center">
+        🎯 1. Passer un Test (Série de 10 Questions)
+      </button>
+      <button onclick="switchMode('browse')" id="btn-mode-browse" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center">
+        📖 2. Consulter Toutes les Questions & Corrigés
+      </button>
+    </div>
 
-  // ================= MODULE 2 BIS : SPÉCIALITÉ PRIMAIRE (ENSEIGNEMENT PRIMAIRE) =================
-  {
-    id: 'prim-sp-01',
-    module: 'specialite',
-    subject: 'primaire',
-    theme: 'Didactique du Français au Primaire',
-    question: 'Dans le curriculum marocain du cycle primaire, selon quelle démarche didactique sont menées les activités de lecture au CP/CE1 ?',
-    questionAr: 'في المنهاج المنقح للتعليم الابتدائي بالمغرب، ما هي المقاربة الديداكتيكية المعتمدة في تدريس القراءة بالمستويات الأولى؟',
-    options: [
-      { id: 'a', text: 'L’approche syllabique et phonologique intégrée (conscience phonologique, principe alphabétique, fluidité, vocabulaire et compréhension).', textAr: 'القراءة المقطعية المرتكزة على الوعي الصوتي، المبدأ الألفبائي، الطلاقة، المفردات والفهم.' },
-      { id: 'b', text: 'La méthode globale pure sans décomposition de syllabes.', textAr: 'الطريقة الكلية البصرية الصرفة دون تفكيك المقاطع.' },
-      { id: 'c', text: 'La mémorisation passive de textes littéraires anciens.', textAr: 'الاستظهار فقط للنصوص التراثية الصعبة.' },
-      { id: 'd', text: 'La suppression de la lecture orale.', textAr: 'إلغاء القراءة الجهرية في الحصص.' },
-    ],
-    correctOptionId: 'a',
-    explanation: 'Le curriculum rénové de l’école primaire marocaine s’appuie sur les 5 composantes de la lecture préconisées par la recherche internationale : conscience phonologique, correspondance grapho-phonémique, fluidité, enrichissement lexical et stratégies de compréhension.',
-    explanationAr: 'يعتمد المنهاج الدراسي المنقح بالابتدائي الطريقة المقطعية التي تشمل: الوعي الصوتي، المبدأ الألفبائي، الطلاقة، تنمية الرصيد المعجمي واستراتيجيات الفهم القرائي.',
-    officialReference: 'Guide Pédagogique du Curriculum Rénové de l’Enseignement Primaire (MENPS Maroc)',
-    difficulty: 'moyen',
-  },
-  {
-    id: 'prim-sp-02',
-    module: 'specialite',
-    subject: 'primaire',
-    theme: 'Didactique des Mathématiques au Primaire',
-    question: 'Quelle étape didactique de la théorie des situations de Brousseau correspond au moment où les élèves échangent et confrontent leurs procédures sans validation immédiate du maître ?',
-    questionAr: 'في نظرية الوضعيات الديداكتيكية لـ غي بروسو، ما هي المرحلة التي يتبادل فيها التلاميذ حلولهم ويتناقشون حول صحتها قبل مأسسة التعلم؟',
-    options: [
-      { id: 'a', text: 'La situation de validation (صراع الحجج والبرهنة).', textAr: 'وضعية المصادقة (Situation de validation).' },
-      { id: 'b', text: 'La situation d’action pure sans parole.', textAr: 'وضعية الفعل الخالصة.' },
-      { id: 'c', text: 'L’institutionnalisation par l’enseignant.', textAr: 'وضعية المأسسة التي يديرها المدرس.' },
-      { id: 'd', text: 'La récitation du tableau de Pythagore.', textAr: 'استظهار جدول الضرب.' },
-    ],
-    correctOptionId: 'a',
-    explanation: 'La situation de validation amène les élèves à prouver, expliciter et confronter la validité de leurs modèles et algorithmes, construisant une preuve mathématique avant que l’enseignant n’institutionnalise le savoir.',
-    explanationAr: 'وضعية المصادقة تقتضي من المتعلم تقديم الحجج والبراهين للدفاع عن حله أو دحض فرضيات زملائه.',
-    officialReference: 'Théorie des Situations Didactiques (Guy Brousseau)',
-    difficulty: 'expert',
-  },
-  {
-    id: 'se-06',
-    module: 'sciences_education',
-    subject: 'commun',
-    theme: 'Feuille de Route 2022-2026',
-    question: 'Quels sont les 3 axes stratégiques majeurs de la Feuille de Route 2022-2026 du Ministère de l’Éducation Nationale du Maroc ?',
-    questionAr: 'ما هي المحاور الاستراتيجية الثلاثة الكبرى لخارطة طريق إصلاح منظومة التعليم 2022-2026 بالمغرب؟',
-    options: [
-      { id: 'a', text: 'L’Élève (تلميذ متفتح ومتحكم في التعلمات), l’Enseignant (أستاذ متمكن ومتحفز) et l’Établissement (مؤسسة توفر مناخا ملائما).', textAr: 'التلميذ (متفتح ومتحكم في التعلمات)، الأستاذ (متمكن ومتحفز) والمؤسسة التعليمية (بيئة ملائمة وجذابة).' },
-      { id: 'b', text: 'L’Université, la Recherche Nucléaire et l’Industrie Lourde.', textAr: 'الجامعة، البحث النووي والصناعة الثقيلة.' },
-      { id: 'c', text: 'La digitalisation intégrale sans enseignants en classe.', textAr: 'الرقمنة الشاملة والاستغناء عن الأستاذ داخل الفصل.' },
-      { id: 'd', text: 'La suppression des vacances scolaires.', textAr: 'إلغاء العطل المدرسية.' },
-    ],
-    correctOptionId: 'a',
-    explanation: 'La feuille de route 2022-2026 s’articule autour de 3 piliers indissociables déclinés en 12 engagements : l’élève au cœur des apprentissages, l’enseignant valorisé et formé aux pratiques probantes, et l’établissement moderne (modèle des Écoles Pionnières).',
-    explanationAr: 'ترتكز خارطة الطريق 2022-2026 على مثلث الإصلاح: التلميذ (تحقيق كفايات الأساس)، الأستاذ (التكوين المستمر والتقدير المهني)، والمؤسسة (مدارس الريادة ومناخ الثقة).',
-    officialReference: 'Feuille de Route MENPS 2022-2026 (Maroc)',
-    difficulty: 'facile',
-  },
-  {
-    id: 'se-07',
-    module: 'sciences_education',
-    subject: 'commun',
-    theme: 'Didactique Générale & Pédagogie',
-    question: 'Dans le triangle pédagogique de Jean Houssaye, quelle relation définit l’axe de la relation Didactique ?',
-    questionAr: 'في المثلث البيداغوجي لـ جان هوساي (Jean Houssaye)، ما هي العلاقة التي تحدد المحور الديداكتيكي؟',
-    options: [
-      { id: 'a', text: 'L’axe Enseignant - Savoir (Processus « Enseigner », transposition et élaboration des contenus).', textAr: 'محور المدرس - المعرفة (عملية التدريس، النقل الديداكتيكي وصياغة المضامين).' },
-      { id: 'b', text: 'L’axe Enseignant - Élève (Processus « Former », relation pédagogique et affective).', textAr: 'محور المدرس - التلميذ (عملية التكوين، العلاقة التربوية والتواصلية).' },
-      { id: 'c', text: 'L’axe Élève - Savoir (Processus « Apprendre », appropriation autonome).', textAr: 'محور التلميذ - المعرفة (عملية التعلم، البناء الذاتي).' },
-      { id: 'd', text: 'L’axe Administration - Famille.', textAr: 'محور الإدارة والأسرة.' },
-    ],
-    correctOptionId: 'a',
-    explanation: 'Le triangle didactique/pédagogique de Houssaye articule trois pôles : Enseignant, Savoir, Élève. L’axe Enseignant-Savoir correspond à la posture didactique (le choix des savoirs à transmettre, leur transposition). L’axe Enseignant-Élève relève de la pédagogie (climat de classe), et Élève-Savoir de l’apprentissage.',
-    explanationAr: 'يربط محور المدرس-المعرفة البعد الديداكتيكي المتمثل في النقل الديداكتيكي وتفكيك المادة المعرفية لتحويلها لمعرفة قابلة للتدريس، بينما محور مدرس-متعلم يمثل البعد البيداغوجي ومحور متعلم-معرفة يمثل مسار التعلم الذاتي.',
-    officialReference: 'Jean Houssaye, Le triangle pédagogique (1988)',
-    difficulty: 'moyen',
-  },
-  {
-    id: 'eps-sp-05',
-    module: 'specialite',
-    subject: 'eps',
-    theme: 'Bioénergétique & Filières Métaboliques',
-    question: 'Quel est le facteur limitant primordial de la filière anaérobie lactique (glycolyse anaérobie) lors d’une course de 400m à allure maximale ?',
-    questionAr: 'ما هو العامل الحاسم المحدد لنهاية المجهود في المسلك اللاهوائي اللبني خلال سباق 400 متر بسرعة قصوى؟',
-    options: [
-      { id: 'a', text: 'L’acidose métabolique intracellulaire (accumulation d’ions H+ inhibant la phosphofructokinase et la liaison calcium-troponine).', textAr: 'الحماض الأيضي (Acidose) الناتج عن تراكم أيونات H+ المثبطة للأنزيمات وانقباض العضلات.' },
-      { id: 'b', text: 'L’épuisement total des graisses corporelles.', textAr: 'النفاد التام للشحوم الثلاثية في الجسم.' },
-      { id: 'c', text: 'La baisse brutale du volume des globules blancs.', textAr: 'الهبوط الحاد في الكريات البيضاء.' },
-      { id: 'd', text: 'L’excès d’oxygène dans les alvéoles pulmonaires.', textAr: 'فائض الأكسجين في الأسناخ الرئوية.' },
-    ],
-    correctOptionId: 'a',
-    explanation: 'Lors d’un 400m (~45 à 55 secondes d’effort maximal), la glycolyse rapide produit des protons H+ qui acidifient le milieu cellulaire (pH < 6.8), bloquant l’enzyme clé PFK et altérant le couplage excitation-contraction musculaire.',
-    explanationAr: 'خلال سباق 400 متر، يرتفع تركيز أيونات الهيدروجين الحامضية H+ في العضلة، مما يخفض الـ pH ويعطل تفاعلات إنتاج الـ ATP وانقباض ألياف الأكتين والميوزين.',
-    officialReference: 'Wilmore & Costill, Physiologie du sport et de l’exercice',
-    difficulty: 'expert',
-  },
-  {
-    id: 'eps-did-05',
-    module: 'didactique',
-    subject: 'eps',
-    theme: 'Ingénierie de la Séance d’EPS au Maroc',
-    question: 'Selon la structure méthodologique préconisée dans les Orientations Pédagogiques marocaines, quelles sont les 3 phases successives d’une séance d’EPS ?',
-    questionAr: 'وفق الهيكلة المنهجية المعتمدة في التوجيهات التربوية المغربية، ما هي المراحل الثلاث المتتابعة لجذاذة حصة التربية البدنية؟',
-    options: [
-      { id: 'a', text: 'Partie Préparatoire / Échauffement (Introductive) -> Partie Principale (Situations d’apprentissage / motricité ciblée) -> Partie Conclusive / Bilan (Retour au calme et verbalisation).', textAr: 'المرحلة التمهيدية (الإحماء العام والخاص) -> المرحلة الرئيسية (وضعيات التعلم والإنجاز) -> المرحلة الختامية (الرجوع إلى الهدوء والتقويم).' },
-      { id: 'b', text: 'Match libre -> Pause café -> Course de 10 km.', textAr: 'مباراة حرة -> استراحة -> جري سريع.' },
-      { id: 'c', text: 'Dictée du cours magistral -> Copie sur cahier -> Interrogation écrite.', textAr: 'إملاء الدرس النظري -> الكتابة في الدفتر -> استجواب كتابي.' },
-      { id: 'd', text: 'Échauffement cardio pendant 2 heures sans partie motrice.', textAr: 'إحماء هوائي لمدة ساعتين دون تعلمات.' },
-    ],
-    correctOptionId: 'a',
-    explanation: 'Une séance d’EPS de 2 heures au collège/lycée marocain s’articule en 3 temps canoniques : mise en train cardio-pulmonaire et ostéo-articulaire (15-20 min), situations fondamentales et régulation (80 min), puis retour au calme, bilan et auto-évaluation (10-15 min).',
-    explanationAr: 'تتكون حصة التربية البدنية من 3 محطات أساسية: مرحلة تمهيدية إحمائية للإعداد البدني والنفسي، مرحلة رئيسية لبناء التعلمات الحركية والتكتيكية، ومرحلة ختامية للاسترخاء والتغذية الراجعة وتقييم المكتسبات.',
-    officialReference: 'Orientations Pédagogiques EPS 2007/2009 (MENPS Maroc)',
-    difficulty: 'facile',
-  },
+    <!-- ================= QUIZ MODE ================= -->
+    <div id="section-quiz-mode" class="space-y-6">
+      
+      <!-- Carte du Test Actif -->
+      <div id="quiz-card" class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-md space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+          <div class="flex items-center gap-3">
+            <span id="quiz-series-badge" class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-black rounded-lg">
+              Exemplaire N°1
+            </span>
+            <span class="text-xs font-bold text-slate-500">
+              Question <strong id="quiz-current-num" class="text-slate-900 text-sm">1</strong> sur 10
+            </span>
+            <span id="quiz-theme-badge" class="text-[11px] px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-semibold">
+              TSD Brousseau
+            </span>
+          </div>
+          <button onclick="startNewSeries()" class="text-xs text-slate-500 hover:text-blue-600 font-bold flex items-center gap-1 cursor-pointer">
+            🔄 Nouveau tirage
+          </button>
+        </div>
 
-  // ================= MODULE MATHÉMATIQUES : DIDACTIQUE (10 QUESTIONS SÉRIE COMPLÈTE) =================
-  {
-    id: 'math-did-01',
-    module: 'didactique',
-    subject: 'maths',
-    theme: 'TSD · Guy Brousseau',
-    question: "Dans la Théorie des Situations Didactiques de Guy Brousseau, quelle phase exige que l'élève formule des preuves et explicite son raisonnement pour convaincre ses pairs ?",
-    questionAr: 'في نظرية الوضعيات الديداكتيكية لغي بروسو، ما هي المرحلة التي تقتضي من المتعلم تقديم براهين واستدلالات لإقناع زملائه؟',
-    options: [
-      { id: 'a', text: "La situation d'action (وضعية الفعل)", textAr: 'وضعية الفعل' },
-      { id: 'b', text: "La situation de validation (وضعية المصادقة)", textAr: 'وضعية المصادقة والبرهنة' },
-      { id: 'c', text: "La situation de formulation (وضعية الصياغة)", textAr: 'وضعية الصياغة' },
-      { id: 'd', text: "La dévolution (التفويض الديداكتيكي)", textAr: 'التفويض الديداكتيكي' },
-    ],
-    correctOptionId: 'b',
-    explanation: "La situation de validation amène les élèves à confronter leurs démarches, à formuler des conjectures et à administrer des preuves mathématiques pour emporter l'adhésion de leurs pairs.",
-    explanationAr: 'تتطلب وضعية المصادقة من المتعلم تقديم حجج وبراهين منطقية للدفاع عن حله أو دحض فرضيات زملائه قبل مرحلة المأسسة.',
-    officialReference: 'Guy Brousseau, Théorie des Situations Didactiques (1998)',
-    difficulty: 'moyen',
-  },
-  {
-    id: 'math-did-02',
-    module: 'didactique',
-    subject: 'maths',
-    theme: 'Contrat Didactique · Effet Topaze',
-    question: "Qu'appelle-t-on l'« effet Topaze » dans les dysfonctionnements du contrat didactique en mathématiques ?",
-    questionAr: 'ماذا يقصد بـ «أثر طوباز» (Effet Topaze) ضمن اختلالات التعاقد الديداكتيكي في تدريس الرياضيات؟',
-    options: [
-      { id: 'a', text: "L'enseignant donne ou suggère tellement la solution que l'élève n'a plus d'effort cognitif à fournir.", textAr: 'يقوم المدرس بالإيحاء الشديد بالحل أو تقديمه تدريجياً حتى يُفرغ المهمة من جهدها المعرفي.' },
-      { id: 'b', text: "L'enseignant refuse systématiquement de répondre aux questions des élèves.", textAr: 'رفض الأستاذ الإجابة عن تساؤلات التلاميذ.' },
-      { id: 'c', text: "L'élève résout le problème par une méthode non prévue par le professeur.", textAr: 'حل التلميذ للمسألة بطريقة غير متوقعة.' },
-      { id: 'd', text: "L'interdiction des calculatrices programmables pendant l'examen.", textAr: 'منع الآلات الحاسبة في الاختبار.' },
-    ],
-    correctOptionId: 'a',
-    explanation: "L'effet Topaze survient lorsque l'enseignant, devant la difficulté de l'élève, vide la tâche de son contenu cognitif en induisant directement la bonne réponse.",
-    explanationAr: 'أثر طوباز يحدث حين يقوم المدرس بتسهيل المسألة بشكل مفرط حتى تصبح الإجابة واضحة وتفقد العملية بعدها البنائي.',
-    officialReference: 'Brousseau & Chevallard · Phénomènes du contrat didactique',
-    difficulty: 'moyen',
-  },
-  {
-    id: 'math-did-03',
-    module: 'didactique',
-    subject: 'maths',
-    theme: 'Transposition Didactique (Chevallard)',
-    question: "Selon Yves Chevallard, quelle est la trajectoire de la transposition didactique ?",
-    questionAr: 'وفق إيف شوفلار (Yves Chevallard)، ما هو المسار الديداكتيكي للنقل الديداكتيكي؟',
-    options: [
-      { id: 'a', text: "Savoir savant → Savoir à enseigner (programmes) → Savoir enseigné (classe) → Savoir appris (élève).", textAr: 'المعرفة العالمة ← المعرفة الواجب تدريسها (المقررات) ← المعرفة المـُدرّسة (القسم) ← المعرفة المكتسبة (المتعلم).' },
-      { id: 'b', text: "Savoir de l'élève → Savoir du manuel → Savoir universitaire.", textAr: 'معرفة التلميذ ← معرفة المقرر ← معرفة الجامعة.' },
-      { id: 'c', text: "Savoir populaire → Savoir philosophique → Examen officiel.", textAr: 'معرفة شائعة ← معرفة فلسفية ← امتحان رسمي.' },
-      { id: 'd', text: "Exercice d'application → Théorème général → Définition.", textAr: 'تطبيق جزئي ← مبرهنة ← تعريف.' },
-    ],
-    correctOptionId: 'a',
-    explanation: "La transposition didactique décrit le processus par lequel un savoir scientifique universitaire (savoir savant) est sélectionné dans les programmes (savoir à enseigner), mis en scène en classe (savoir enseigné) et assimilé par l'apprenant.",
-    explanationAr: 'النقل الديداكتيكي هو مجموع التحولات التي تطرأ على معرفة علمية متخصصة لتصبح معرفة قابلة للتدريس والتملك الصفي.',
-    officialReference: 'Yves Chevallard, La Transposition didactique (1985)',
-    difficulty: 'facile',
-  },
-  {
-    id: 'math-did-04',
-    module: 'didactique',
-    subject: 'maths',
-    theme: 'Obstacles Épistémologiques',
-    question: "Quelle est la caractéristique fondamentale d'un « obstacle épistémologique » en mathématiques ?",
-    questionAr: 'ما هي الخاصية الجوهرية لـ «العائق الإبستيمولوجي» في ديداكتيك الرياضيات؟',
-    options: [
-      { id: 'a', text: "Une connaissance qui a été efficace dans un domaine restreint, mais qui s'avère fausse ou bloquante dans un domaine plus large.", textAr: 'معرفة كانت صائبة في سياق محدد لكنها تصبح خاطئة أو معرقلة في سياق مفهومي أوسع.' },
-      { id: 'b', text: "Une simple étourderie passagère de l'élève due au stress.", textAr: 'مجرد سهو عابر ناتج عن قلق الامتحان.' },
-      { id: 'c', text: "Une déficience sensorielle définitive de l'élève.", textAr: 'قصور حسي دائم لدى المتعلم.' },
-      { id: 'd', text: "Une coquille d'impression dans le manuel officiel.", textAr: 'خطأ مطبعي في الكتاب المدرسي.' },
-    ],
-    correctOptionId: 'a',
-    explanation: "L'obstacle épistémologique n'est pas un manque de savoir, mais un savoir antérieur qui résiste au nouveau concept (ex: considérer que la multiplication agrandit toujours un nombre).",
-    explanationAr: 'العائق الإبستيمولوجي ليس جهلاً بل معرفة سابقة تقاوم وتعيق بناء المفهوم الرياضي الجديد (مثل الاعتقاد بأن الضرب يكبر دائماً العدد).',
-    officialReference: 'Gaston Bachelard / Guy Brousseau',
-    difficulty: 'moyen',
-  },
-  {
-    id: 'math-did-05',
-    module: 'didactique',
-    subject: 'maths',
-    theme: 'TICE · Géométrie Dynamique (GeoGebra)',
-    question: "Quel est l'apport didactique majeur de la géométrie dynamique (GeoGebra) au secondaire marocain ?",
-    questionAr: 'ما هو الإسهام الديداكتيكي الأبرز لبرامج الهندسة الديناميكية (GeoGebra) في التعليم الثانوي؟',
-    options: [
-      { id: 'a', text: "Favoriser la conjecture, l'expérimentation visuelle et l'observation d'invariants par déplacement.", textAr: 'تيسير التخمين والاستكشاف البصري ومعاينة الثوابت الهندسية عبر تحريك الأشكال.' },
-      { id: 'b', text: "Remplacer intégralement la démonstration géométrique formelle.", textAr: 'تعويض البرهان الرياضي الاستنتاجي كلياً.' },
-      { id: 'c', text: "Imprimer automatiquement les corrigés des devoirs sans effort.", textAr: 'طباعة التمارين الجاهزة.' },
-      { id: 'd', text: "Supprimer définitivement l'usage de la règle et du compas.", textAr: 'إلغاء الأدوات الهندسية اليدوية نهائياً.' },
-    ],
-    correctOptionId: 'a',
-    explanation: "GeoGebra permet de déformer dynamiquement les figures pour vérifier si une propriété reste invariante, favorisant la transition entre intuition visuelle, conjecture et preuve rigoureuse.",
-    explanationAr: 'تمكن الهندسة الديناميكية من التحقق الحسي من استقرار الخصائص الهندسية مع تغير الأبعاد مما يمهد لبناء البرهان.',
-    officialReference: 'Orientations Pédagogiques Mathématiques MENPS · TICE',
-    difficulty: 'facile',
-  },
+        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+          <div id="quiz-progress-fill" class="bg-blue-600 h-full w-[10%] transition-all duration-300"></div>
+        </div>
 
-  // ================= MODULE MATHÉMATIQUES : SPÉCIALITÉ (10 QUESTIONS SÉRIE COMPLÈTE) =================
-  {
-    id: 'math-sp-01',
-    module: 'specialite',
-    subject: 'maths',
-    theme: 'Analyse · Dérivabilité & Théorème de Rolle',
-    question: "Soit f une fonction continue sur [a, b] et dérivable sur ]a, b[ telle que f(a) = f(b). Quel théorème fondamental garantit l'existence d'au moins un point c ∈ ]a, b[ tel que f'(c) = 0 ?",
-    questionAr: "لتكن f دالة متصلة على [a, b] وقابلة للاشتقاق على ]a, b[ بحيث f(a) = f(b). ما هي المبرهنة التي تضمن وجود عنصر c من ]a, b[ بحيث f'(c) = 0؟",
-    options: [
-      { id: 'a', text: "Le théorème des valeurs intermédiaires (TVI)", textAr: 'مبرهنة القيم الوسيطية' },
-      { id: 'b', text: "Le théorème de Rolle", textAr: 'مبرهنة رول (Rolle)' },
-      { id: 'c', text: "L'inégalité des accroissements finis", textAr: 'متفاوتة التزايدات المنتهية' },
-      { id: 'd', text: "Le théorème de convergence dominée", textAr: 'مبرهنة التقارب المحدود' },
-    ],
-    correctOptionId: 'b',
-    explanation: "Le théorème de Rolle énonce : si f est continue sur [a, b], dérivable sur ]a, b[ et f(a) = f(b), alors il existe au moins un point c dans ]a, b[ où la dérivée s'annule (f'(c) = 0).",
-    explanationAr: 'مبرهنة رول تنص على أنه إذا كانت f متصلة على قطعة وقابلة للاشتقاق على مجالها المفتوح مع تساوي الطرفين، فإن مشتقتها تنعدم في نقطة واحدة على الأقل.',
-    officialReference: 'Programme Concours Recrutement Secondaire Mathématiques',
-    difficulty: 'facile',
-  },
-  {
-    id: 'math-sp-02',
-    module: 'specialite',
-    subject: 'maths',
-    theme: 'Algèbre Linéaire · Théorème du Rang',
-    question: "Soit u une application linéaire d'un espace vectoriel E de dimension finie n vers un espace F. Quelle est la relation du théorème du rang ?",
-    questionAr: 'لتكن u تطبيقاً خطياً من فضاء متجهي E بعده منته n نحو فضاء F. ما هي مبرهنة الرتبة؟',
-    options: [
-      { id: 'a', text: "dim(E) = dim(Ker u) + rg(u)", textAr: 'dim(E) = dim(Ker u) + rg(u)' },
-      { id: 'b', text: "dim(E) = dim(Ker u) × rg(u)", textAr: 'dim(E) = dim(Ker u) × rg(u)' },
-      { id: 'c', text: "rg(u) = dim(F) - dim(Ker u)", textAr: 'rg(u) = dim(F) - dim(Ker u)' },
-      { id: 'd', text: "dim(Ker u) = rg(u)", textAr: 'dim(Ker u) = rg(u)' },
-    ],
-    correctOptionId: 'a',
-    explanation: "Le théorème du rang énonce : pour tout morphisme u: E → F avec dim(E) finie, dim(E) = dim(Ker u) + dim(Im u), où rg(u) = dim(Im u).",
-    explanationAr: 'تنص مبرهنة الرتبة على أن بعد فضاء الانطلاق يساوي مجموع بعد النواة (Ker) ورتبة التطبيق (رتبة الصورة Im).',
-    officialReference: 'Algèbre Linéaire Universitaire · Concours CRMEF',
-    difficulty: 'moyen',
-  },
-  {
-    id: 'math-sp-03',
-    module: 'specialite',
-    subject: 'maths',
-    theme: 'Analyse · Séries de Riemann',
-    question: "Pour quelle condition sur le réel α la série de Riemann ∑_{n=1}^∞ (1 / n^α) converge-t-elle ?",
-    questionAr: 'ما هو شرط تقارب متسلسلة ريمان ∑ (1 / n^α) بالنسبة للعدد الحقيقي α؟',
-    options: [
-      { id: 'a', text: "α > 1", textAr: 'α > 1' },
-      { id: 'b', text: "α ≤ 1", textAr: 'α ≤ 1' },
-      { id: 'c', text: "α ≥ 0", textAr: 'α ≥ 0' },
-      { id: 'd', text: "Pour tout α réel", textAr: 'لكل عدد حقيقي α' },
-    ],
-    correctOptionId: 'a',
-    explanation: "D'après la règle de comparaison de Riemann avec l'intégrale impropre, la série converge si et seulement si α > 1. Pour α = 1 (série harmonique), elle diverge vers +∞.",
-    explanationAr: 'تتقارب متسلسلة ريمان العددية إذا وفقط إذا كان الأس α أكبر قطعا من 1، وتتباعد في حالة α ≤ 1.',
-    officialReference: 'Analyse Réelle & Séries Numériques',
-    difficulty: 'facile',
-  },
-  {
-    id: 'math-sp-04',
-    module: 'specialite',
-    subject: 'maths',
-    theme: 'Algèbre · Diagonalisation Matricielle',
-    question: "À quelle condition nécessaire et suffisante une matrice carrée A d'ordre n est-elle diagonalisable sur ℝ ?",
-    questionAr: 'ما هو الشرط اللازم والكافي لتكون مصفوفة مربعة A من الرتبة n قابلة للتقطير على ℝ؟',
-    options: [
-      { id: 'a', text: "Son polynôme caractéristique est scindé sur ℝ et pour chaque valeur propre, la multiplicité algébrique égale la dimension du sous-espace propre.", textAr: 'كثير حدودها المميز مجزأ على ℝ وبعد كل فضاء متجهي خاص يساوي درجة مضاعفة القيمة الخاصة الموافقة.' },
-      { id: 'b', text: "Son déterminant est strictement positif.", textAr: 'محددها موجب قطعا.' },
-      { id: 'c', text: "Elle est inversible et de trace nulle.", textAr: 'قابلة للقلب وأثرها منعدم.' },
-      { id: 'd', text: "Elle a une unique valeur propre.", textAr: 'لها قيمة خاصة وحيدة.' },
-    ],
-    correctOptionId: 'a',
-    explanation: "Une matrice A est diagonalisable si et seulement si son polynôme caractéristique est scindé sur le corps considéré et que pour chaque valeur propre λ, dim(Ker(A - λ·I)) = multiplicité de λ.",
-    explanationAr: 'تكون المصفوفة قابلة للتقطير إذا وفقط إذا كان كثير حدودها المميز منكسرا وتساوى البعد الهندسي مع البعد الجبري لكل قيمة خاصة.',
-    officialReference: 'Réduction des Endomorphismes · CRMEF Mathématiques',
-    difficulty: 'expert',
-  },
-  {
-    id: 'math-sp-05',
-    module: 'specialite',
-    subject: 'maths',
-    theme: 'Probabilités · Loi Binomiale',
-    question: "Si X est une variable aléatoire suivant la loi binomiale B(n, p), quelle est l'expression de sa variance Var(X) ?",
-    questionAr: 'إذا كان المتغير العشوائي X يتبع التوزيع الثنائي B(n, p)، فما هو تباينه Var(X)؟',
-    options: [
-      { id: 'a', text: "Var(X) = n · p · (1 - p)", textAr: 'Var(X) = n · p · (1 - p)' },
-      { id: 'b', text: "Var(X) = n · p", textAr: 'Var(X) = n · p' },
-      { id: 'c', text: "Var(X) = n² · p", textAr: 'Var(X) = n² · p' },
-      { id: 'd', text: "Var(X) = p · (1 - p) / n", textAr: 'Var(X) = p · (1 - p) / n' },
-    ],
-    correctOptionId: 'a',
-    explanation: "Pour la somme de n variables de Bernoulli indépendantes de paramètre p : l'espérance est E(X) = n·p et la variance est Var(X) = n·p·(1 - p).",
-    explanationAr: 'تباين المتغير العشوائي الثنائي هو جداء عدد التكرارات في احتمال النجاح في احتمال الفشل: n · p · (1 - p).',
-    officialReference: 'Calcul des Probabilités · Concours CRMEF',
-    difficulty: 'facile',
-  },
-];
+        <div class="space-y-2 py-2">
+          <h3 id="quiz-question-fr" class="text-base sm:text-lg font-black text-slate-900 leading-snug"></h3>
+          <h3 id="quiz-question-ar" class="text-base sm:text-lg font-arabic font-bold text-blue-950 text-right dir-rtl leading-relaxed"></h3>
+        </div>
 
-export interface OfficialSourceInfo {
-  id: string;
-  category: 'concours_annales' | 'legislation_menps' | 'didactique_theories';
-  title: string;
-  titleAr: string;
-  description: string;
-  yearRange: string;
-  officialOrgan: string;
-  importanceScore: number;
-}
+        <!-- Options Container -->
+        <div id="quiz-options-container" class="space-y-3"></div>
 
-export const OFFICIAL_SOURCES_GUIDE: OfficialSourceInfo[] = [
-  {
-    id: 'cnee-annales',
-    category: 'concours_annales',
-    title: 'Annales Officielles des Concours de Recrutement (CRMEF 2016 à 2025)',
-    titleAr: 'مواضيع وعناصر الإجابة الرسمية لمباريات توظيف الأطر النظامية للأكاديميات (2016-2025)',
-    description: 'Sujets réels scannés et barèmes officiels publiés par le Centre National des Examens et de l’Évaluation (CNEE). Comprend l’épreuve QCM de Sciences de l’Éducation (commune) et les épreuves de spécialité.',
-    yearRange: '2016 - 2025',
-    officialOrgan: 'CNEE / المركز الوطني للتقويم والامتحانات والتوجيه',
-    importanceScore: 100,
-  },
-  {
-    id: 'loi-51-17',
-    category: 'legislation_menps',
-    title: 'Loi-Cadre 51.17 relative au système d’éducation, d’enseignement et de formation',
-    titleAr: 'القانون الإطار رقم 51.17 المتعلق بمنظومة التربية والتكوين والبحث العلمي',
-    description: 'Le texte suprême de la réforme éducative marocaine. 10 à 15% des questions du concours portent sur ses articles (Article 3 sur les principes, Article 4 sur les leviers, Article 8 sur le préscolaire, Article 31 sur l’alternance linguistique).',
-    yearRange: 'Promulguée en Août 2019',
-    officialOrgan: 'Secrétariat Général du Gouvernement & MENPS',
-    importanceScore: 98,
-  },
-  {
-    id: 'feuille-route-2026',
-    category: 'legislation_menps',
-    title: 'Feuille de Route 2022-2026 : Vers une école publique de qualité pour tous',
-    titleAr: 'خارطة الطريق 2022-2026 : من أجل مدرسة عمومية ذات جودة للجميع',
-    description: 'Programme actuel du Ministère : 3 axes (Élève, Enseignant, Établissement), 12 engagements, projet des Écoles Pionnières (مدارس الريادة), approche TaRL et enseignement explicite.',
-    yearRange: '2022 - 2026',
-    officialOrgan: 'Ministère de l’Éducation Nationale, du Préscolaire et des Sports (MENPS)',
-    importanceScore: 99,
-  },
-  {
-    id: 'op-eps-maroc',
-    category: 'didactique_theories',
-    title: 'Orientations Pédagogiques EPS (Lycée 2007 & Collège 2009)',
-    titleAr: 'التوجيهات التربوية الرسمية لمادة التربية البدنية والرياضية (2007 ثانوي تأهيلي و2009 ثانوي إعدادي)',
-    description: 'La référence absolue pour l’épreuve de didactique EPS au Maroc. Compétences visées, Objectifs Terminaux d’Intégration (OTI), modules d’apprentissage et démarches d’évaluation.',
-    yearRange: '2007 & 2009',
-    officialOrgan: 'Direction des Curricula / MENPS',
-    importanceScore: 97,
-  },
-  {
-    id: 'psychopedagogie-auteurs',
-    category: 'didactique_theories',
-    title: 'Théories d’Apprentissage & Didactique Fondamentale',
-    titleAr: 'نظريات التعلم الكبرى وعلم النفس التربوي والديداكتيك العام',
-    description: 'Les auteurs incontournables cités chaque année : Piaget (Constructivisme), Vygotski (Socioconstructivisme & ZPD), Skinner (Béhaviorisme), Bruner (Étayage), Brousseau (Situations didactiques), Chevallard (Transposition didactique).',
-    yearRange: 'Classiques Fondamentaux',
-    officialOrgan: 'Centres Régionaux des Métiers de l’Éducation et de la Formation (CRMEF)',
-    importanceScore: 95,
-  },
-];
+        <!-- Feedback & Explanation Box (après sélection de l'option) -->
+        <div id="quiz-explanation-box" class="hidden rounded-2xl p-4 sm:p-5 border transition-all">
+          <div class="flex items-center gap-2 mb-2 font-bold text-sm" id="quiz-feedback-title"></div>
+          <p id="quiz-explanation-text" class="text-xs sm:text-sm text-slate-700 leading-relaxed"></p>
+          <p id="quiz-explanation-ref" class="text-[11px] text-slate-400 font-semibold mt-2 pt-2 border-t border-slate-200/50"></p>
+        </div>
 
+        <!-- Navigation Buttons -->
+        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+          <span class="text-xs text-slate-500 font-semibold">
+            Score actuel : <strong id="quiz-live-score" class="text-slate-900">0</strong> / <span id="quiz-answered-count">0</span>
+          </span>
+          <button id="btn-next-question" onclick="nextQuestion()" class="hidden px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-black transition-colors cursor-pointer shadow-sm">
+            Question Suivante →
+          </button>
+        </div>
+      </div>
+
+      <!-- Écran de Résultat & Diagnostic Officiel -->
+      <div id="results-card" class="hidden space-y-6">
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-lg text-center space-y-4">
+          <div class="inline-block px-3 py-1 bg-blue-50 text-blue-700 text-xs font-black rounded-full border border-blue-200">
+            Série Terminée · Épreuve de Didactique des Mathématiques
+          </div>
+          <div id="results-score-display" class="text-4xl sm:text-5xl font-black text-blue-600 leading-none">
+            0 / 10
+          </div>
+          <div id="results-note-20" class="text-sm font-bold text-slate-500">
+            Note officielle estimée : 0.0 / 20
+          </div>
+          <div id="results-diagnosis-box" class="max-w-md mx-auto p-3.5 rounded-xl border text-xs font-bold"></div>
+
+          <div class="pt-4 flex flex-wrap items-center justify-center gap-3">
+            <button onclick="startNewSeries()" class="px-6 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-black text-sm rounded-xl shadow-lg shadow-blue-600/30 transition-all cursor-pointer">
+              🔄 Passer un Autre Exemplaire (10 Nouvelles Questions Inédites)
+            </button>
+            <a href="qcm-specialite-maths-maroc.html" class="px-6 py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-black text-sm rounded-xl shadow-md transition-all">
+              ⚡ Passer à la Spécialité Maths →
+            </a>
+          </div>
+        </div>
+
+        <!-- Section des Corrections Détaillées de la Série -->
+        <div class="space-y-4">
+          <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
+            <span>Correction Intégrale de la Série & Justifications Didactiques :</span>
+          </h3>
+          <div id="corrections-container" class="space-y-4"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================= BROWSE MODE : RÉFÉRENTIEL INTÉGRAL ================= -->
+    <div id="section-browse-mode" class="hidden space-y-4">
+      <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h2 class="text-sm sm:text-base font-extrabold text-slate-900">
+            Référentiel des Questions de Didactique des Mathématiques
+          </h2>
+          <p class="text-xs text-slate-500">Toutes les questions certifiées avec justifications et cadres théoriques officiels.</p>
+        </div>
+        <span id="browse-count" class="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-lg shrink-0">
+          Chargement...
+        </span>
+      </div>
+
+      <div id="browse-questions-list" class="space-y-4"></div>
+    </div>
+
+    <!-- Maillage Silos -->
+    <section class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="space-y-1 text-center sm:text-left">
+        <h4 class="font-extrabold text-xs sm:text-sm text-slate-900">Épreuve Complémentaire Obligatoire</h4>
+        <p class="text-xs text-slate-500">
+          N'oubliez pas que le concours comprend la <strong>Spécialité Mathématiques</strong> et le tronc commun <strong>Sciences de l'Éducation</strong>.
+        </p>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="qcm-specialite-maths-maroc.html" class="px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold hover:bg-blue-700 transition-colors shadow-xs">
+          Spécialité Maths →
+        </a>
+        <a href="qcm-sciences-education-crmef.html" class="px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition-colors shadow-xs">
+          Sciences Éduc. →
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-white border-t border-slate-200 py-8 text-xs text-slate-500 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-800">ProfEPS.ma</span>
+        <span>· Portail Officiel de Préparation aux Concours CRMEF Maroc</span>
+      </div>
+      <div class="flex items-center gap-4 text-slate-600 font-semibold">
+        <a href="concours-crmef-hub.html" class="hover:text-slate-900">Hub National</a>
+        <a href="qcm-didactique-maths-maroc.html" class="hover:text-slate-900">Didactique Maths</a>
+        <a href="qcm-specialite-maths-maroc.html" class="hover:text-slate-900">Spécialité Maths</a>
+        <a href="mentions-legales.html" class="hover:text-slate-900">Mentions Légales</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= JAVASCRIPT & BANQUE DE QUESTIONS CERTIFIÉE ================= -->
+  <script>
+    const MATHS_DIDACTIQUE_BANK = [
+      {
+        id: "md-01",
+        theme: "TSD · Brousseau",
+        question: "Dans la Théorie des Situations Didactiques (TSD) de Guy Brousseau, quelle phase exige que l'élève formule des preuves et explicite son raisonnement pour convaincre ses pairs ?",
+        questionAr: "في نظرية الوضعيات الديداكتيكية لغي بروسو (Guy Brousseau)، ما هي المرحلة التي تقتضي من المتعلم تقديم براهين وشرح استدلاله لإقناع زملائه؟",
+        options: [
+          { id: "A", text: "La situation d'action (وضعية الفعل)" },
+          { id: "B", text: "La situation de validation (وضعية المصادقة)", correct: true },
+          { id: "C", text: "La situation de formulation (وضعية الصياغة)" },
+          { id: "D", text: "La dévolution (التفويض الديداكتيكي)" }
+        ],
+        explanation: "La situation de validation amène les élèves à confronter leurs démarches, à formuler des conjectures et à administrer des preuves mathématiques pour emporter l'adhésion de leurs pairs.",
+        ref: "Guy Brousseau, Théorie des Situations Didactiques (1998)"
+      },
+      {
+        id: "md-02",
+        theme: "Contrat Didactique",
+        question: "Qu'appelle-t-on l'« effet Topaze » dans les dysfonctionnements du contrat didactique ?",
+        questionAr: "ماذا يقصد بـ «أثر طوباز» (Effet Topaze) ضمن اختلالات التعاقد الديداكتيكي في تدريس الرياضيات؟",
+        options: [
+          { id: "A", text: "L'enseignant donne la réponse ou suggère tellement la solution que l'élève n'a plus d'effort cognitif à produire", correct: true },
+          { id: "B", text: "L'enseignant refuse systématiquement de répondre aux questions des élèves" },
+          { id: "C", text: "L'élève résout le problème par une méthode non prévue par le professeur" },
+          { id: "D", text: "L'interdiction des calculatrices programmables pendant l'examen" }
+        ],
+        explanation: "L'effet Topaze survient lorsque l'enseignant, devant la difficulté de l'élève, vide la tâche de son contenu cognitif en induisant directement la bonne réponse (par l'intonation, une question fermée évidente, etc.).",
+        ref: "Brousseau & Chevallard · Phénomènes du contrat didactique"
+      },
+      {
+        id: "md-03",
+        theme: "Effet Jourdain",
+        question: "Dans la typologie des ruptures du contrat didactique, comment se définit l'« effet Jourdain » ?",
+        questionAr: "في أنماط تعثر التعاقد الديداكتيكي، كيف يعرف «أثر جوردان» (Effet Jourdain)؟",
+        options: [
+          { id: "A", text: "L'enseignant reconnaît un comportement banal ou une réponse triviale de l'élève comme le signe d'un savoir savant authentique", correct: true },
+          { id: "B", text: "L'élève oublie sa formule mathématique pendant un contrôle surveillé" },
+          { id: "C", text: "L'utilisation abusive des couleurs sur le tableau noir" },
+          { id: "D", text: "Le refus de l'enseignant de corriger les devoirs à domicile" }
+        ],
+        explanation: "Inspiré du Bourgeois Gentilhomme de Molière, l'effet Jourdain consiste pour le professeur à attribuer une signification mathématique géniale à une réponse simpliste ou fortuite de l'élève pour éviter le constat d'échec.",
+        ref: "Guy Brousseau · Recherches en Didactique des Mathématiques"
+      },
+      {
+        id: "md-04",
+        theme: "Transposition Didactique",
+        question: "Selon Yves Chevallard, quelle est la trajectoire de la transposition didactique externe puis interne ?",
+        questionAr: "وفق إيف شوفلار (Yves Chevallard)، ما هو المسار الديداكتيكي للنقل الديداكتيكي الخارجي ثم الداخلي؟",
+        options: [
+          { id: "A", text: "Savoir savant → Savoir à enseigner (programmes) → Savoir enseigné (classe) → Savoir appris (élève)", correct: true },
+          { id: "B", text: "Savoir de l'élève → Savoir du manuel → Savoir universitaire" },
+          { id: "C", text: "Savoir populaire → Savoir philosophique → Examen officiel" },
+          { id: "D", text: "Exercice d'application → Théorème général → Définition" }
+        ],
+        explanation: "La transposition didactique décrit le processus par lequel un savoir scientifique universitaire (savoir savant) est sélectionné par la noosphère dans les programmes (savoir à enseigner), mis en scène par le professeur (savoir enseigné) et assimilé par l'apprenant (savoir appris).",
+        ref: "Yves Chevallard, La Transposition didactique (1985)"
+      },
+      {
+        id: "md-05",
+        theme: "Obstacle Épistémologique",
+        question: "Quelle est la caractéristique fondamentale d'un « obstacle épistémologique » en didactique des mathématiques ?",
+        questionAr: "ما هي الخاصية الجوهرية لـ «العائق الإبستيمولوجي» في ديداكتيك الرياضيات؟",
+        options: [
+          { id: "A", text: "Une simple étourderie passagère de l'élève due au stress de l'examen" },
+          { id: "B", text: "Une connaissance qui a été efficace dans un domaine restreint, mais qui s'avère fausse ou bloquante dans un domaine plus large", correct: true },
+          { id: "C", text: "Une déficience sensorielle ou intellectuelle définitive de l'élève" },
+          { id: "D", text: "Une coquille d'impression dans le manuel scolaire officiel" }
+        ],
+        explanation: "Selon Gaston Bachelard et Brousseau, l'obstacle n'est pas un manque de savoir, mais un savoir antérieur qui résiste et fait obstacle au nouveau concept (ex: croire que la multiplication agrandit toujours un nombre).",
+        ref: "Gaston Bachelard / Guy Brousseau · Les obstacles didactiques"
+      },
+      {
+        id: "md-06",
+        theme: "TICE en Mathématiques",
+        question: "Quel est l'apport didactique majeur de la géométrie dynamique (GeoGebra) au collège et au lycée ?",
+        questionAr: "ما هو الإسهام الديداكتيكي الأبرز لبرامج الهندسة الديناميكية (مثل GeoGebra) في التعليم الثانوي؟",
+        options: [
+          { id: "A", text: "Remplacer intégralement la démonstration géométrique formelle" },
+          { id: "B", text: "Favoriser la conjecture, l'expérimentation visuelle et l'observation d'invariants lors du déplacement des figures", correct: true },
+          { id: "C", text: "Imprimer automatiquement les corrigés des devoirs sans intervention de l'élève" },
+          { id: "D", text: "Supprimer définitivement l'usage de la règle et du compas manuels" }
+        ],
+        explanation: "La géométrie dynamique permet de modifier dynamiquement les figures pour vérifier si une propriété reste invariante, favorisant ainsi la transition entre l'observation intuitive, la conjecture et la démonstration déductive.",
+        ref: "Orientations Pédagogiques Mathématiques MENPS · TICE"
+      },
+      {
+        id: "md-07",
+        theme: "Statut de l'Erreur",
+        question: "Dans l'approche par compétences (APC) en didactique des mathématiques, comment doit être appréhendée l'erreur de l'élève ?",
+        questionAr: "في المقاربة بالكفايات في ديداكتيك الرياضيات، كيف ينبغي التعامل البيداغوجي مع خطأ المتعلم؟",
+        options: [
+          { id: "A", text: "Comme une faute inadmissible à sanctionner immédiatement par une mauvaise note" },
+          { id: "B", text: "Comme un indicateur précieux des représentations mentales de l'élève et un levier essentiel d'apprentissage", correct: true },
+          { id: "C", text: "En demandant au premier de la classe de donner la solution pour passer à autre chose" },
+          { id: "D", text: "En ignorant totalement l'erreur pour ne pas démotiver l'élève" }
+        ],
+        explanation: "L'erreur n'est pas une tare ou une absence de savoir : elle est le témoin d'une logique cognitive ou d'une règle erronée appliquée par l'élève, servant de point d'appui à la remédiation didactique ciblée.",
+        ref: "Jean-Pierre Astolfi, L'erreur, un outil pour enseigner (1997)"
+      },
+      {
+        id: "md-08",
+        theme: "Dévolution",
+        question: "Que désigne la « dévolution » d'une situation mathématique selon Guy Brousseau ?",
+        questionAr: "ماذا يقصد بـ «التفويض» (La dévolution) في نظرية غي بروسو؟",
+        options: [
+          { id: "A", text: "L'acte par lequel l'enseignant amène l'élève à accepter la responsabilité intellectuelle de résoudre le problème par lui-même", correct: true },
+          { id: "B", text: "La délégation de la correction des copies aux délégués de classe" },
+          { id: "C", text: "Le passage du calcul mental au calcul posé sur feuille" },
+          { id: "D", text: "La distribution des formulaires de trigonométrie" }
+        ],
+        explanation: "La dévolution est l'acte par lequel le professeur fait en sorte que l'élève s'approprie le problème, le considère comme un défi personnel et non pas une simple consigne pour complaire au maître.",
+        ref: "Guy Brousseau · Ingénierie didactique"
+      },
+      {
+        id: "md-09",
+        theme: "Cadre de Référence MENPS",
+        question: "Au collège et lycée marocain, quelle démarche pédagogique est officiellement préconisée pour introduire un nouveau concept mathématique ?",
+        questionAr: "في السلك الثانوي المغربي، ما هو النهج البيداغوجي المعتمد رسمياً لتقديم مفهوم رياضي جديد؟",
+        options: [
+          { id: "A", text: "Présentation directe du théorème suivi d'exercices d'application mécanique" },
+          { id: "B", text: "Activités préparatoires exploratoires (وضعيات أنشطة بنائية) menant à la formulation inductive de la propriété", correct: true },
+          { id: "C", text: "Lecture magistrale du manuel scolaire sans aucune manipulation préalable" },
+          { id: "D", text: "Dictée de définitions axiomatiques pures" }
+        ],
+        explanation: "Les Orientations Pédagogiques marocaines imposent une démarche active inductive : situation-problème ou activité préparatoire ciblée pour faire émerger le besoin d'un nouvel outil mathématique.",
+        ref: "Orientations Pédagogiques Mathématiques Secondaire (MENPS Maroc)"
+      },
+      {
+        id: "md-10",
+        theme: "Variables Didactiques",
+        question: "Qu'est-ce qu'une « variable didactique » dans la conception d'un problème mathématique ?",
+        questionAr: "ما هو «المتغير الديداكتيكي» (Variable didactique) في وضعية رياضية؟",
+        options: [
+          { id: "A", text: "Le temps accordé à la récréation scolaire" },
+          { id: "B", text: "Un paramètre de la situation que l'enseignant peut modifier pour forcer l'élève à changer de stratégie de résolution", correct: true },
+          { id: "C", text: "La note attribuée au contrôle continu semestriel" },
+          { id: "D", text: "La taille des caractères d'impression du manuel" }
+        ],
+        explanation: "Une variable didactique (ex: taille des nombres, instruments géométriques autorisés, forme de la surface) est un paramètre manipulable qui oblige l'élève à abandonner une procédure économique au profit d'un nouveau savoir.",
+        ref: "Guy Brousseau · Ingénierie des situations mathématiques"
+      },
+      {
+        id: "md-11",
+        theme: "Institutionnalisation",
+        question: "En quoi consiste la phase d'« institutionnalisation » dans une séquence de mathématiques ?",
+        questionAr: "في ماذا تتمثل مرحلة «المأسسة» (L'institutionnalisation) في مقطع تعلمي لمادة الرياضيات؟",
+        options: [
+          { id: "A", text: "L'enseignant formalise et donne le statut officiel de savoir mathématique universel aux découvertes validées des élèves", correct: true },
+          { id: "B", text: "L'inscription des élèves au registre de l'établissement scolaire" },
+          { id: "C", text: "L'appel nominatif des présences en début d'heure" },
+          { id: "D", text: "Le rangement des compas et équerres dans l'armoire" }
+        ],
+        explanation: "L'institutionnalisation est le moment où le professeur décontextualise les résultats trouvés par la classe, fixe les définitions canoniques, le vocabulaire conventionnel et les théorèmes à mémoriser.",
+        ref: "Brousseau, Théorie des Situations Didactiques"
+      },
+      {
+        id: "md-12",
+        theme: "Raisonnement Mathématique",
+        question: "Quelle forme de raisonnement consiste à démontrer qu'une proposition P(n) est vraie pour tout entier n ≥ n0 en prouvant l'initialisation et l'hérédité ?",
+        questionAr: "ما هو نمط الاستدلال الذي يقوم على إثبات صحة خاصية P(n) لكل عدد صحيح n ≥ n0 من خلال التحقق من الأساس والتوارث؟",
+        options: [
+          { id: "A", text: "Le raisonnement par l'absurde (الاستدلال بالخلف)" },
+          { id: "B", text: "Le raisonnement par récurrence (الاستدلال بالترجع)", correct: true },
+          { id: "C", text: "Le raisonnement par disjonction de cas (فصل الحالات)" },
+          { id: "D", text: "Le raisonnement par contraposée (الاستلزام العكسي)" }
+        ],
+        explanation: "Le raisonnement par récurrence repose sur l'axiome de Peano : vérifier la propriété au rang initial n0 puis démontrer que si P(k) est vraie, alors P(k+1) est nécessairement vraie.",
+        ref: "Cadre de Référence Baccalauréat Scientifique & CRMEF Mathématiques"
+      }
+    ];
+
+    let currentSeries = [];
+    let currentIndex = 0;
+    let userAnswers = {};
+    let score = 0;
+    let seriesCount = 1;
+
+    function shuffle(arr) {
+      return [...arr].sort(() => Math.random() - 0.5);
+    }
+
+    function startNewSeries() {
+      currentSeries = shuffle(MATHS_DIDACTIQUE_BANK).slice(0, 10);
+      currentIndex = 0;
+      userAnswers = {};
+      score = 0;
+
+      document.getElementById('quiz-card').classList.remove('hidden');
+      document.getElementById('results-card').classList.add('hidden');
+      document.getElementById('quiz-series-badge').textContent = `Exemplaire N°${seriesCount}`;
+      document.getElementById('quiz-live-score').textContent = '0';
+      document.getElementById('quiz-answered-count').textContent = '0';
+
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      const q = currentSeries[currentIndex];
+      document.getElementById('quiz-current-num').textContent = currentIndex + 1;
+      document.getElementById('quiz-theme-badge').textContent = q.theme;
+      document.getElementById('quiz-progress-fill').style.width = (((currentIndex + 1) / currentSeries.length) * 100) + '%';
+      document.getElementById('quiz-question-fr').textContent = q.question;
+      document.getElementById('quiz-question-ar').textContent = q.questionAr || '';
+
+      const expBox = document.getElementById('quiz-explanation-box');
+      expBox.className = 'hidden';
+      document.getElementById('btn-next-question').classList.add('hidden');
+
+      const container = document.getElementById('quiz-options-container');
+      container.innerHTML = '';
+
+      const isAnswered = userAnswers[q.id] !== undefined;
+
+      q.options.forEach(opt => {
+        const btn = document.createElement('button');
+        const isSelected = userAnswers[q.id] === opt.id;
+
+        let style = 'w-full p-4 rounded-2xl border text-left text-xs sm:text-sm font-semibold transition-all flex items-start gap-3 cursor-pointer bg-white border-slate-200 hover:border-blue-500 hover:bg-blue-50/40';
+
+        if (isAnswered) {
+          if (opt.correct) {
+            style = 'w-full p-4 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-left text-xs sm:text-sm font-bold text-emerald-900 flex items-start gap-3 pointer-events-none';
+          } else if (isSelected && !opt.correct) {
+            style = 'w-full p-4 rounded-2xl border-2 border-red-500 bg-red-50 text-left text-xs sm:text-sm font-bold text-red-900 flex items-start gap-3 pointer-events-none';
+          } else {
+            style = 'w-full p-4 rounded-2xl border border-slate-200 bg-white/50 text-slate-400 text-left text-xs sm:text-sm font-semibold flex items-start gap-3 pointer-events-none';
+          }
+        }
+
+        btn.className = style;
+        btn.innerHTML = `<span class="w-6 h-6 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center text-xs font-black shrink-0">${opt.id}</span><span>${opt.text}</span>`;
+        btn.onclick = () => selectOption(opt, q);
+        container.appendChild(btn);
+      });
+
+      if (isAnswered) {
+        showExplanation(q, userAnswers[q.id]);
+        document.getElementById('btn-next-question').classList.remove('hidden');
+      }
+    }
+
+    function selectOption(opt, q) {
+      if (userAnswers[q.id] !== undefined) return;
+      userAnswers[q.id] = opt.id;
+
+      if (opt.correct) {
+        score++;
+      }
+
+      document.getElementById('quiz-live-score').textContent = score;
+      document.getElementById('quiz-answered-count').textContent = Object.keys(userAnswers).length;
+
+      renderQuestion();
+    }
+
+    function showExplanation(q, chosenId) {
+      const expBox = document.getElementById('quiz-explanation-box');
+      const title = document.getElementById('quiz-feedback-title');
+      const text = document.getElementById('quiz-explanation-text');
+      const ref = document.getElementById('quiz-explanation-ref');
+
+      const correctOpt = q.options.find(o => o.correct);
+      const isCorrect = chosenId === correctOpt.id;
+
+      if (isCorrect) {
+        expBox.className = 'rounded-2xl p-4 sm:p-5 border border-emerald-300 bg-emerald-50/80 block';
+        title.innerHTML = '✅ <span class="text-emerald-800">Excellente réponse didactique !</span>';
+      } else {
+        expBox.className = 'rounded-2xl p-4 sm:p-5 border border-red-300 bg-red-50/80 block';
+        title.innerHTML = `❌ <span class="text-red-800">Réponse incorrecte (Bonne réponse : Option ${correctOpt.id})</span>`;
+      }
+
+      text.textContent = q.explanation;
+      ref.textContent = `Cadre officiel : ${q.ref || "Centres Régionaux des Métiers de l'Éducation (CRMEF)"}`;
+    }
+
+    function nextQuestion() {
+      if (currentIndex < currentSeries.length - 1) {
+        currentIndex++;
+        renderQuestion();
+      } else {
+        finishSeries();
+      }
+    }
+
+    function finishSeries() {
+      document.getElementById('quiz-card').classList.add('hidden');
+      const resultsCard = document.getElementById('results-card');
+      resultsCard.classList.remove('hidden');
+
+      const total = currentSeries.length;
+      const note20 = ((score / total) * 20).toFixed(1);
+
+      document.getElementById('results-score-display').textContent = `${score} / ${total}`;
+      document.getElementById('results-note-20').textContent = `Note officielle estimée : ${note20} / 20`;
+
+      const diagBox = document.getElementById('results-diagnosis-box');
+      if (score >= 8) {
+        diagBox.className = 'max-w-md mx-auto p-3.5 rounded-xl border border-emerald-300 bg-emerald-50 text-emerald-800 font-bold';
+        diagBox.innerHTML = '🏆 Admissible avec Distinction · Excellente maîtrise des théories didactiques et des OP marocaines.';
+      } else if (score >= 6) {
+        diagBox.className = 'max-w-md mx-auto p-3.5 rounded-xl border border-blue-300 bg-blue-50 text-blue-800 font-bold';
+        diagBox.innerHTML = '✅ Admissible au Seuil Supérieur · Bon niveau général, consolidez les concepts de Brousseau et Chevallard.';
+      } else if (score >= 5) {
+        diagBox.className = 'max-w-md mx-auto p-3.5 rounded-xl border border-amber-300 bg-amber-50 text-amber-800 font-bold';
+        diagBox.innerHTML = '⚠️ Seuil d’Admissibilité Juste · Révision recommandée du contrat didactique et de la transposition.';
+      } else {
+        diagBox.className = 'max-w-md mx-auto p-3.5 rounded-xl border border-rose-300 bg-rose-50 text-rose-800 font-bold';
+        diagBox.innerHTML = '📈 Non Admissible · Entraînement approfondi requis sur les situations didactiques et le statut de l’erreur.';
+      }
+
+      // Render corrections
+      const corContainer = document.getElementById('corrections-container');
+      corContainer.innerHTML = '';
+
+      currentSeries.forEach((q, idx) => {
+        const correctOpt = q.options.find(o => o.correct);
+        const userChoiceId = userAnswers[q.id];
+        const isRight = userChoiceId === correctOpt.id;
+
+        const card = document.createElement('div');
+        card.className = `p-4 sm:p-5 rounded-2xl border ${isRight ? 'border-emerald-200 bg-emerald-50/40' : 'border-rose-200 bg-rose-50/40'} space-y-2 text-left`;
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between text-xs font-bold">
+            <span class="${isRight ? 'text-emerald-700' : 'text-rose-700'}">
+              ${isRight ? '✓ Réponse Correcte' : '✗ Erreur'} · Question ${idx + 1} (${q.theme})
+            </span>
+            <span class="text-slate-400 font-medium">${q.ref}</span>
+          </div>
+          <h4 class="text-sm font-bold text-slate-900">${q.question}</h4>
+          ${q.questionAr ? `<p class="text-xs font-arabic text-blue-900 text-right dir-rtl">${q.questionAr}</p>` : ''}
+          <div class="p-3 bg-white rounded-xl border border-slate-200 text-xs space-y-1 mt-2">
+            <div><strong class="text-emerald-700">Réponse attendue :</strong> Option ${correctOpt.id} - ${correctOpt.text}</div>
+            <p class="text-slate-600 mt-1">${q.explanation}</p>
+          </div>
+        `;
+        corContainer.appendChild(card);
+      });
+
+      seriesCount++;
+    }
+
+    function switchMode(mode) {
+      const qSection = document.getElementById('section-quiz-mode');
+      const bSection = document.getElementById('section-browse-mode');
+      const btnQ = document.getElementById('btn-mode-quiz');
+      const btnB = document.getElementById('btn-mode-browse');
+
+      if (mode === 'quiz') {
+        qSection.classList.remove('hidden');
+        bSection.classList.add('hidden');
+        btnQ.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold bg-blue-600 text-white shadow-xs cursor-pointer transition-all text-center';
+        btnB.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center';
+      } else {
+        qSection.classList.add('hidden');
+        bSection.classList.remove('hidden');
+        btnB.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold bg-blue-600 text-white shadow-xs cursor-pointer transition-all text-center';
+        btnQ.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center';
+        renderBrowse();
+      }
+    }
+
+    function renderBrowse() {
+      const list = document.getElementById('browse-questions-list');
+      document.getElementById('browse-count').textContent = `${MATHS_DIDACTIQUE_BANK.length} Questions Certifiées`;
+      list.innerHTML = '';
+
+      MATHS_DIDACTIQUE_BANK.forEach((q, idx) => {
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-2xl border border-slate-200 p-5 space-y-3';
+        const correctOpt = q.options.find(o => o.correct);
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-0.5 rounded-md bg-blue-50 text-blue-800 text-[11px] font-bold">Question ${idx + 1} · ${q.theme}</span>
+            <span class="text-[11px] text-slate-400 font-semibold">${q.ref}</span>
+          </div>
+          <h4 class="text-sm font-black text-slate-900">${q.question}</h4>
+          ${q.questionAr ? `<p class="text-xs font-arabic text-blue-900 text-right dir-rtl font-semibold">${q.questionAr}</p>` : ''}
+          <div class="p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1.5">
+            <div class="text-xs font-black text-emerald-800">Bonne réponse officielle : Option ${correctOpt.id} - ${correctOpt.text}</div>
+            <p class="text-xs text-slate-700 leading-relaxed">${q.explanation}</p>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    // Launch first series on load
+    startNewSeries();
+  </script>
+</body>
+</html>
