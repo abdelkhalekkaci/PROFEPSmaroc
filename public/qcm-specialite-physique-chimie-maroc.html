@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QCM Spécialité Physique-Chimie CRMEF Maroc · Mécanique, Électricité & Chimie | ProfEPS.ma</title>
-  <meta name="description" content="Simulateur officiel de QCM en Spécialité Physique-Chimie pour le concours CRMEF Maroc. Mécanique de Newton, thermodynamique, électromagnétisme, cinétique chimique et équilibres acido-basiques.">
+  <title>QCM Spécialité Physique-Chimie CRMEF Maroc · Mécanique, RLC, Thermo & Solutions | ProfEPS.ma</title>
+  <meta name="description" content="Simulateur officiel de QCM en Spécialité Physique-Chimie pour le concours CRMEF Maroc. Mécanique newtonienne, circuits RLC, thermodynamique, équilibres chimiques, cinétique et chimie organique. Séries de 10 questions avec corrections complètes.">
   <link rel="canonical" href="https://profeps.ma/qcm-specialite-physique-chimie-maroc.html">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,14 +13,18 @@
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
     .font-arabic { font-family: 'Noto Kufi Arabic', sans-serif; }
+    .peps-red { color: #c1272d; }
+    .peps-bg-red { background-color: #c1272d; }
+    .peps-green { color: #006233; }
+    .peps-bg-green { background-color: #006233; }
   </style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Quiz",
     "name": "QCM Spécialité Physique-Chimie - Concours CRMEF Maroc",
-    "description": "Préparation officielle aux savoirs disciplinaires universitaires de physique et de chimie pour les épreuves écrites du CRMEF.",
-    "educationalLevel": "CRMEF Secondaire Physique-Chimie Spécialité",
+    "description": "Entraînement officiel corrigé en Spécialité Disciplinaire Physique-Chimie pour le concours des CRMEF collégial et qualifiant au Maroc. Séries de 10 questions tirées aléatoirement.",
+    "educationalLevel": "CRMEF Enseignement Secondaire Physique-Chimie",
     "author": {
       "@type": "Person",
       "name": "Abdelkhalek ELBOUDANI",
@@ -29,21 +33,21 @@
   }
   </script>
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col selection:bg-slate-900 selection:text-white">
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col selection:bg-cyan-600 selection:text-white">
 
   <!-- ================= HEADER & NAVIGATION ================= -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs backdrop-blur-md bg-white/95">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
       <a href="concours-crmef-hub.html" class="flex items-center gap-2.5 shrink-0 group">
-        <div class="w-8 h-8 rounded-lg bg-slate-900 flex items-center justify-center text-white font-black text-sm shadow-xs group-hover:bg-slate-800 transition-colors">
-          ⚡
+        <div class="w-9 h-9 rounded-xl bg-slate-900 flex items-center justify-center text-white font-black text-sm shadow-xs group-hover:bg-cyan-800 transition-colors">
+          ⚗️
         </div>
         <div>
           <span class="font-extrabold text-slate-900 text-sm sm:text-base tracking-tight block leading-none">
-            Spécialité PC<span class="text-slate-900"> · CRMEF</span>
+            Spécialité PC<span class="text-cyan-700"> · CRMEF</span>
           </span>
           <span class="text-[10px] text-slate-500 font-medium block mt-0.5">
-            ProfEPS.ma · Mécanique, Électromagnétisme & Chimie Avancée
+            ProfEPS.ma · Épreuve Disciplinaire Physique & Chimie
           </span>
         </div>
       </a>
@@ -53,344 +57,505 @@
         <a href="concours-crmef-hub.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
           🏛️ Hub National
         </a>
-        <a href="qcm-sciences-education-crmef.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-          📚 Tronc Commun
-        </a>
         <a href="qcm-didactique-physique-chimie-maroc.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-          ⚛️ Didactique PC
+          📘 Didactique PC
         </a>
-        <a href="qcm-specialite-physique-chimie-maroc.html" class="px-3 py-1.5 rounded-lg bg-slate-900 text-white shadow-2xs">
-          ⚡ Spécialité PC
-        </a>
-        <a href="qcm-specialite-eps-maroc.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-          🏃 Spécialité EPS
+        <a href="qcm-sciences-education-crmef.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+          📚 Sciences Éduc.
         </a>
       </nav>
 
       <div class="flex items-center gap-2">
-        <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-800 text-xs font-bold border border-slate-200">
-          Épreuve Écrite Disciplinaire
-        </span>
+        <a href="concours-crmef-hub.html" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-all shadow-xs flex items-center gap-1.5">
+          <span>← Hub Concours</span>
+        </a>
       </div>
     </div>
   </header>
 
-  <!-- ================= HERO ================= -->
-  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-8 flex-1 w-full">
-    <div class="bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
-      <div class="space-y-3 relative z-10">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-bold border border-slate-700 font-arabic">
-          <span>مادة التخصص في العلوم الفيزيائية والكيميائية · الثانوي التأهيلي والإعدادي</span>
+  <!-- ================= BREADCRUMB & HERO ================= -->
+  <div class="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-900 text-white py-8 sm:py-12 border-b border-slate-800">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+      <div class="flex flex-wrap items-center gap-2 text-xs text-slate-400 font-medium">
+        <a href="concours-crmef-hub.html" class="hover:text-white transition-colors">Portail CRMEF</a>
+        <span>/</span>
+        <span class="text-slate-400">Physique - Chimie</span>
+        <span>/</span>
+        <span class="text-white font-bold">Épreuve de Spécialité Disciplinaire</span>
+      </div>
+
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div class="space-y-2">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 text-cyan-300 text-xs font-bold border border-slate-700">
+            <span>Épreuve 2 · Matière de Spécialité</span>
+            <span class="font-arabic">مادة التخصص فيزياء وكيمياء</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight font-heading">
+            QCM Spécialité Physique - Chimie (CRMEF)
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+            Évaluez vos compétences scientifiques sur le programme officiel universitaire et secondaire : <strong>Mécanique newtonienne, Électrocinétique RLC, Ondes, Thermodynamique, Équilibres chimiques acido-basiques/redox et Chimie organique</strong>.
+          </p>
         </div>
-        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight">
-          QCM Spécialité Physique-Chimie · Savoirs Universitaires
-        </h1>
-        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
-          Révisez les savoirs disciplinaires fondamentaux : mécanique du point et du solide (lois de Newton, oscillateurs), thermodynamique, optique ondulatoire, électrostatique et électrodynamique, équilibres acido-basiques, oxydoréduction et cinétique chimique.
-        </p>
-        <div class="text-[11px] text-slate-400 pt-1 flex items-center gap-2">
-          <span>Épreuve N°2 Spécifique</span>
-          <span>·</span>
-          <span>10 questions aléatoires avec résolutions complètes</span>
+
+        <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/15 text-center min-w-[200px] shrink-0">
+          <span class="text-[11px] font-bold text-slate-300 block uppercase tracking-wider">Format Concours</span>
+          <div class="text-2xl font-black text-white mt-1">10 Questions</div>
+          <span class="text-[11px] text-cyan-400 font-semibold block mt-1">Série avec démonstration détaillée</span>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Mode Selector -->
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-8">
+
+    <!-- Onglets de Navigation : Mode Test vs Mode Référentiel -->
     <div class="bg-white rounded-2xl border border-slate-200 p-2 shadow-xs flex items-center justify-between gap-2">
       <button onclick="switchMode('quiz')" id="btn-mode-quiz" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold bg-slate-900 text-white shadow-xs cursor-pointer transition-all text-center">
-        🎯 1. Passer un Test (Série de 10 Questions)
+        🎯 1. Passer un Test (Série de 10 Questions Aléatoires)
       </button>
-      <button onclick="switchMode('browse')" id="btn-mode-browse" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center">
-        📖 2. Consulter Toutes les Questions & Corrigés
+      <button onclick="switchMode('referentiel')" id="btn-mode-referentiel" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center">
+        🏛️ 2. Cadre de Référence Officiel CNEE
       </button>
     </div>
 
-    <!-- ================= QUIZ MODE ================= -->
+    <!-- ================= QUIZ MODE : MOTEUR INTERACTIF ================= -->
     <div id="section-quiz-mode" class="space-y-6">
+      
+      <!-- Carte Question Active -->
       <div id="quiz-card" class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-md space-y-6">
+        
+        <!-- En-tête de la Question -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
           <div class="flex items-center gap-3">
-            <span id="quiz-series-badge" class="px-3 py-1 bg-slate-100 text-slate-900 text-xs font-black rounded-lg">
-              Série Actuelle
+            <span id="quiz-series-badge" class="px-3 py-1 bg-slate-900 text-white text-xs font-black rounded-lg">
+              Épreuve Spécialité PC
             </span>
             <span class="text-xs font-bold text-slate-500">
               Question <strong id="quiz-current-num" class="text-slate-900 text-sm">1</strong> sur 10
             </span>
             <span id="quiz-theme-badge" class="text-[11px] px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-semibold">
-              Mécanique Newtonienne
+              Discipline
             </span>
           </div>
-          <button onclick="startNewSeries()" class="text-xs text-slate-500 hover:text-slate-900 font-bold flex items-center gap-1 cursor-pointer">
-            🔄 Nouveau tirage
+          <button onclick="startNewSeries()" class="text-xs text-slate-500 hover:text-slate-900 font-bold flex items-center gap-1 cursor-pointer transition-colors">
+            🔄 Nouveau tirage aléatoire
           </button>
         </div>
 
-        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+        <!-- Barre de Progression -->
+        <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
           <div id="quiz-progress-fill" class="bg-slate-900 h-full w-[10%] transition-all duration-300"></div>
         </div>
 
+        <!-- Énoncé Bilingue -->
         <div class="space-y-2 py-2">
           <h3 id="quiz-question-fr" class="text-base sm:text-lg font-black text-slate-900 leading-snug"></h3>
           <h3 id="quiz-question-ar" class="text-base sm:text-lg font-arabic font-bold text-slate-800 text-right dir-rtl leading-relaxed"></h3>
         </div>
 
-        <!-- Options Container -->
+        <!-- Conteneur des Options -->
         <div id="quiz-options-container" class="space-y-3"></div>
-
-        <!-- Feedback & Explanation Box -->
-        <div id="quiz-explanation-box" class="hidden rounded-2xl p-4 sm:p-5 border transition-all">
-          <div class="flex items-center gap-2 mb-2 font-bold text-sm" id="quiz-feedback-title"></div>
-          <p id="quiz-explanation-text" class="text-xs sm:text-sm text-slate-700 leading-relaxed"></p>
-        </div>
 
         <!-- Navigation Buttons -->
         <div class="flex items-center justify-between pt-4 border-t border-slate-100">
-          <span class="text-xs text-slate-400 font-semibold">
-            Score : <span id="quiz-live-score" class="text-slate-800 font-bold">0</span> / <span id="quiz-answered-count">0</span>
-          </span>
-          <button id="btn-next-question" onclick="nextQuestion()" class="hidden px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-black transition-colors cursor-pointer shadow-sm">
-            Question Suivante →
+          <button id="btn-prev-question" onclick="prevQuestion()" disabled class="px-4 py-2 rounded-xl text-xs font-bold text-slate-300 cursor-not-allowed">
+            ← Précédente
+          </button>
+          <button id="btn-next-question" onclick="nextQuestion()" disabled class="px-5 py-2.5 rounded-xl text-xs font-bold bg-slate-200 text-slate-400 cursor-not-allowed transition-all">
+            Question suivante →
           </button>
         </div>
       </div>
+
+      <!-- Écran de Résultat & Diagnostic Officiel -->
+      <div id="results-card" class="hidden space-y-6">
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-lg text-center space-y-4">
+          <div class="inline-block px-3 py-1 bg-slate-100 text-slate-900 text-xs font-black rounded-full border border-slate-200">
+            Série Terminée · Épreuve de Spécialité Physique-Chimie
+          </div>
+          <div id="results-score-display" class="text-4xl sm:text-5xl font-black text-slate-900 leading-none">
+            0 / 10
+          </div>
+          <div id="results-note-20" class="text-sm font-bold text-slate-500">
+            Note officielle estimée : 0.0 / 20
+          </div>
+          <div id="results-diagnosis-box" class="max-w-md mx-auto p-3.5 rounded-xl border text-xs font-bold"></div>
+
+          <div class="pt-4 flex flex-wrap items-center justify-center gap-3">
+            <button onclick="startNewSeries()" class="px-6 py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-black text-sm rounded-xl shadow-lg shadow-slate-900/30 transition-all cursor-pointer">
+              🔄 Passer un Autre Exemplaire (10 Nouvelles Questions Inédites)
+            </button>
+            <a href="qcm-didactique-physique-chimie-maroc.html" class="px-6 py-3.5 bg-cyan-700 hover:bg-cyan-800 text-white font-black text-sm rounded-xl shadow-md transition-all">
+              📘 Passer à la Didactique PC →
+            </a>
+          </div>
+        </div>
+
+        <!-- Section des Corrections Détaillées de la Série -->
+        <div class="space-y-4">
+          <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
+            <span>Correction Intégrale de la Série & Démonstrations Scientifiques :</span>
+          </h3>
+          <div id="corrections-container" class="space-y-4"></div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- ================= BROWSE MODE ================= -->
-    <div id="section-browse-mode" class="hidden space-y-4">
-      <div class="bg-white rounded-2xl border border-slate-200 p-4 flex items-center justify-between">
-        <span class="text-xs font-bold text-slate-600">Banque Complète de Spécialité Physique-Chimie</span>
-        <span class="text-xs text-slate-900 font-bold" id="browse-count"></span>
+    <!-- ================= SECTION CADRE DE RÉFÉRENCE OFFICIEL CNEE ================= -->
+    <div id="section-referentiel-mode" class="hidden space-y-6">
+      <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
+        <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+          <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center text-xl font-black">
+            🏛️
+          </div>
+          <div>
+            <h2 class="text-base sm:text-lg font-black text-slate-900">
+              Cadre de Référence Officiel · Spécialité Physique-Chimie (CNEE)
+            </h2>
+            <p class="text-xs text-slate-500">المركز الوطني للتقويم والامتحانات · المعايير والمجالات المعرفية لمادة التخصص الفيزياء والكيمياء</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <h4 class="font-extrabold text-slate-900 text-sm">Domaine 1 : Mécanique & Systèmes Oscillants (30%)</h4>
+            <p class="text-slate-600 leading-relaxed">
+              Lois de Newton, mouvements dans un champ uniforme (pesanteur, électrostatique), oscillateurs harmoniques et amortis, énergie mécanique, théorèmes du moment cinétique et mécanique céleste (lois de Kepler).
+            </p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <h4 class="font-extrabold text-slate-900 text-sm">Domaine 2 : Électricité, Électromagnétisme & Ondes (25%)</h4>
+            <p class="text-slate-600 leading-relaxed">
+              Régimes transitoires et sinusoïdaux forcés (RC, RL, RLC), équations de Maxwell, propagation des ondes électromagnétiques, optique ondulatoire (interférences, diffraction, réseau).
+            </p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <h4 class="font-extrabold text-slate-900 text-sm">Domaine 3 : Chimie Générale, Solutions & Thermochimie (25%)</h4>
+            <p class="text-slate-600 leading-relaxed">
+              Équilibres acido-basiques, pH-métrie, titrages, solubilité et précipitation, oxydoréduction et piles électrochimiques, cinétique chimique (lois de vitesse, catalyse), premier et second principes de la thermodynamique.
+            </p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <h4 class="font-extrabold text-slate-900 text-sm">Domaine 4 : Structure de la Matière & Chimie Organique (20%)</h4>
+            <p class="text-slate-600 leading-relaxed">
+              Structure électronique des atomes, tableau périodique, liaison chimique et géométrie VSEPR, stéréochimie (conformations, configurations R/S, énantiomérie), grandes fonctions organiques et mécanismes réactionnels fondamentaux (SN1, SN2, E1, E2).
+            </p>
+          </div>
+        </div>
       </div>
-      <div id="browse-questions-list" class="space-y-4"></div>
     </div>
 
-    <!-- E-E-A-T Signature -->
-    <div class="p-5 rounded-2xl bg-white border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-2xs">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full bg-slate-900 text-white font-black flex items-center justify-center text-sm shrink-0">
-          AE
-        </div>
-        <div>
-          <span class="text-xs font-bold text-slate-900 block">Supervision Pédagogique : Abdelkhalek ELBOUDANI</span>
-          <span class="text-[11px] text-slate-500">Conforme aux Annales et Cadres de Référence MENPS · ProfEPS.ma</span>
-        </div>
+    <!-- Maillage Silos -->
+    <section class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="space-y-1 text-center sm:text-left">
+        <h4 class="font-extrabold text-xs sm:text-sm text-slate-900">Épreuve Complémentaire Obligatoire</h4>
+        <p class="text-xs text-slate-500">
+          Pour réussir le concours CRMEF, préparez également la <strong>Didactique de la Physique-Chimie</strong> et le tronc commun <strong>Sciences de l'Éducation</strong>.
+        </p>
       </div>
-      <a href="concours-crmef-hub.html" class="px-4 py-2 bg-slate-100 text-slate-800 rounded-xl text-xs font-bold hover:bg-slate-200 transition-colors shrink-0">
-        ← Retourner au Hub Concours
-      </a>
-    </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="qcm-didactique-physique-chimie-maroc.html" class="px-4 py-2 rounded-xl bg-cyan-700 text-white text-xs font-bold hover:bg-cyan-800 transition-colors shadow-xs">
+          Didactique PC →
+        </a>
+        <a href="qcm-sciences-education-crmef.html" class="px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition-colors shadow-xs">
+          Sciences Éduc. →
+        </a>
+      </div>
+    </section>
+
   </main>
 
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-white border-t border-slate-200 py-8 text-xs text-slate-500 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-800">ProfEPS.ma</span>
+        <span>· Portail Officiel de Préparation aux Concours CRMEF Maroc</span>
+      </div>
+      <div class="flex items-center gap-4 text-slate-600 font-semibold">
+        <a href="concours-crmef-hub.html" class="hover:text-slate-900">Hub National</a>
+        <a href="qcm-didactique-physique-chimie-maroc.html" class="hover:text-slate-900">Didactique PC</a>
+        <a href="qcm-specialite-physique-chimie-maroc.html" class="hover:text-slate-900">Spécialité PC</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= SCRIPT & BANQUE DE QUESTIONS SPÉCIALITÉ ================= -->
   <script>
     const PC_SPECIALITE_BANK = [
       {
-        id: "pcs-1",
-        theme: "Mécanique Newtonienne",
-        question: "Dans un référentiel galiléen, quelle est l'expression de la deuxième loi de Newton pour un point matériel de masse m constante ?",
-        questionAr: "في معلم غاليلي، ما هو التعبير الرياضي للقانون الثاني لنيوتن لنقطة مادية ذات كتلة m ثابتة؟",
+        id: 'pcs-01',
+        theme: 'Mécanique Newtonienne',
+        question: 'Un projectile est lancé depuis le sol dans le champ de pesanteur uniforme g avec une vitesse initiale v0 faisant un angle α avec l\'horizontale (en négligeant les frottements de l\'air). Quelle est l\'expression de la portée horizontale Xp (point de retombée au sol) ?',
+        questionAr: 'تُقذف قذيفة من سطح الأرض في مجال ثقالة منتظم g بسرعة بدئية v0 تصنع زاوية α مع الأفقي (مع إهمال احتكاك الهواء). ما هو تعبير المدى الأفقي Xp (نقطة السقوط على الأرض) ؟',
         options: [
-          { id: "A", text: "∑ F_ext = m · a_G (la somme des forces extérieures est égale au produit de la masse par l'accélération)", correct: true },
-          { id: "B", text: "∑ F_ext = 0" },
-          { id: "C", text: "∑ F_ext = 1/2 m · v²" },
-          { id: "D", text: "∑ F_ext = m · v" }
+          { id: 'a', text: 'Xp = (v0² · sin(2α)) / g', textAr: 'Xp = (v0² · sin(2α)) / g' },
+          { id: 'b', text: 'Xp = (v0 · cos(α)) / (2g)', textAr: 'Xp = (v0 · cos(α)) / (2g)' },
+          { id: 'c', text: 'Xp = (v0² · sin²(α)) / (2g)', textAr: 'Xp = (v0² · sin²(α)) / (2g)' },
+          { id: 'd', text: 'Xp = (2 · v0 · tan(α)) / g', textAr: 'Xp = (2 · v0 · tan(α)) / g' }
         ],
-        explanation: "La deuxième loi de Newton stipule que la dérivée temporelle de la quantité de mouvement dP/dt = ∑ F_ext, ce qui donne m · a_G lorsque la masse est constante."
+        correctOptionId: 'a',
+        explanation: 'En posant y(t) = -1/2 g t² + v0 sin(α) t = 0 pour t ≠ 0, le temps de vol est t_p = (2 v0 sin(α)) / g. En injectant dans x(t) = v0 cos(α) t, on obtient Xp = (2 v0² sin(α) cos(α)) / g = (v0² sin(2α)) / g.',
+        officialReference: 'Programme de Mécanique du Point - Concours CRMEF Secondaire Qualifiant'
       },
       {
-        id: "pcs-2",
-        theme: "Thermodynamique",
-        question: "Que stipule le premier principe de la thermodynamique pour un système fermé subissant une transformation cyclique ?",
-        questionAr: "ماذا ينص المبدأ الأول للديناميكا الحرارية لنظام مغلق يخضع لتحول دائري مغلق (دورة)؟",
+        id: 'pcs-02',
+        theme: 'Électrocinétique & Circuits RLC',
+        question: 'Dans un circuit RLC série en régime sinusoïdal forcé alimenté par une tension u(t) = U√2 cos(ωt), que vaut la pulsation de résonance d\'intensité ω0 et quelle est la valeur de l\'impédance minimale Z à la résonance ?',
+        questionAr: 'في دارة RLC متوالية في نظام جيبي قسري مغذاة بتوتر u(t) = U√2 cos(ωt)، كم يساوي تردد الرنين (نبض الرنين) ω0 وما هي قيمة الممانعة الدنيا Z عند الرنين ؟',
         options: [
-          { id: "A", text: "ΔU = 0, donc W + Q = 0", correct: true },
-          { id: "B", text: "ΔU = W - Q" },
-          { id: "C", text: "Le travail reçu est obligatoirement nul" },
-          { id: "D", text: "L'entropie créée est nulle" }
+          { id: 'a', text: 'ω0 = 1 / √(LC) et Z = R', textAr: 'ω0 = 1 / √(LC) و Z = R' },
+          { id: 'b', text: 'ω0 = √(L / C) et Z = 0', textAr: 'ω0 = √(L / C) و Z = 0' },
+          { id: 'c', text: 'ω0 = 1 / (LC) et Z = R + Lω', textAr: 'ω0 = 1 / (LC) و Z = R + Lω' },
+          { id: 'd', text: 'ω0 = 2π√(LC) et Z = √(R² + (Lω)²)', textAr: 'ω0 = 2π√(LC) و Z = √(R² + (Lω)²)' }
         ],
-        explanation: "L'énergie interne U étant une fonction d'état, sa variation sur un cycle fermé est nulle (ΔU = 0). Par conséquent, W + Q = 0."
+        correctOptionId: 'a',
+        explanation: 'L\'impédance totale est Z = √[R² + (Lω - 1/(Cω))²]. Le minimum est atteint lorsque Lω - 1/(Cω) = 0, d\'où ω0 = 1/√(LC) et l\'impédance se réduit à la résistance pure Z = R (le courant et la tension sont alors en phase).',
+        officialReference: 'Électrocinétique des Circuits RLC - Cadre de Référence CRMEF'
       },
       {
-        id: "pcs-3",
-        theme: "Électromagnétisme",
-        question: "Quelle équation de Maxwell traduit l'absence de monopôle magnétique dans la nature (les lignes de champ magnétique se referment sur elles-mêmes) ?",
-        questionAr: "ما هي معادلة ماكسويل التي تعبر عن انعدام أحادي القطب المغناطيسي في الطبيعة؟",
+        id: 'pcs-03',
+        theme: 'Thermodynamique',
+        question: 'Pour un gaz parfait subissant une détente adiabatique réversible (isentropique), quelle loi régit la relation entre la pression P et le volume V (avec γ = Cp / Cv > 1) ?',
+        questionAr: 'بالنسبة لغاز كامل يخضع لتمدد كظوم عكوس (أديباتي)، ما هو القانون الذي يربط بين الضغط P والحجم V (مع γ = Cp / Cv > 1) ؟',
         options: [
-          { id: "A", text: "div B = 0 (ou flux conservatif du champ magnétique)", correct: true },
-          { id: "B", text: "div E = ρ / ε₀" },
-          { id: "C", text: "rot E = - ∂B/∂t" },
-          { id: "D", text: "rot B = μ₀ j" }
+          { id: 'a', text: 'P · V = constante (Loi de Boyle-Mariotte)', textAr: 'P · V = ثابتة (قانون بويل-ماريوت)' },
+          { id: 'b', text: 'P · V^γ = constante (Loi de Laplace)', textAr: 'P · V^γ = ثابتة (قانون لابلاس)' },
+          { id: 'c', text: 'P / T = constante (Loi de Gay-Lussac)', textAr: 'P / T = ثابتة (قانون غاي-لوساك)' },
+          { id: 'd', text: 'P^γ · V = constante', textAr: 'P^γ · V = ثابتة' }
         ],
-        explanation: "L'équation div B = 0 (loi de Gauss magnétique) signifie que le flux magnétique à travers toute surface fermée est nul, impliquant qu'il n'existe pas de charges magnétiques isolées."
+        correctOptionId: 'b',
+        explanation: 'Pour une transformation adiabatique réversible d\'un gaz parfait aux capacités calorifiques constantes, le premier principe dU = δW combiné à dH = V dP conduit aux lois de Laplace : P V^γ = cste, T V^(γ-1) = cste, et T^γ P^(1-γ) = cste.',
+        officialReference: 'Thermodynamique Physique & Concours Agrégation/CRMEF'
       },
       {
-        id: "pcs-4",
-        theme: "Cinétique Chimique",
-        question: "Pour une réaction d'ordre 1 du type A → Produits, comment évolue le temps de demi-réaction t_1/2 en fonction de la concentration initiale [A]₀ ?",
-        questionAr: "بالنسبة لتفاعل من الرتبة الأولى A → نواتج، كيف يتغير زمن نصف التفاعل t_1/2 بدلالة التركيز البدئي [A]₀؟",
+        id: 'pcs-04',
+        theme: 'Chimie des Solutions & pH',
+        question: 'On considère une solution aqueuse d\'un monoacide faible AH de constante d\'acidité Ka et de concentration molaire C. Lorsque l\'acide est très peu dissocié (τ < 0.05), quelle est la formule approchée du pH ?',
+        questionAr: 'نعتبر محلولا مائيا لحمض ضعيف أحادي AH ثابتة حمضيته Ka وتركيزه المولي C. عندما يكون تفكك الحمض ضعيفا جدا (نسبة التقدم النهائي أقل من 5%)، ما هي العلاقة التقريبية لـ pH ؟',
         options: [
-          { id: "A", text: "Il est strictement indépendant de la concentration initiale : t_1/2 = ln(2) / k", correct: true },
-          { id: "B", text: "Il est proportionnel à [A]₀" },
-          { id: "C", text: "Il est inversement proportionnel à [A]₀" },
-          { id: "D", text: "Il diminue de moitié à chaque seconde" }
+          { id: 'a', text: 'pH = -log(C)', textAr: 'pH = -log(C)' },
+          { id: 'b', text: 'pH = 1/2 · (pKa - log(C))', textAr: 'pH = 1/2 · (pKa - log(C))' },
+          { id: 'c', text: 'pH = 7 + 1/2 · (pKa + log(C))', textAr: 'pH = 7 + 1/2 · (pKa + log(C))' },
+          { id: 'd', text: 'pH = pKa + log(C)', textAr: 'pH = pKa + log(C)' }
         ],
-        explanation: "La signature cinétique d'une réaction d'ordre 1 est que le temps de demi-réaction t_1/2 = ln(2)/k ne dépend pas de la concentration initiale du réactif."
+        correctOptionId: 'b',
+        explanation: 'À l\'équilibre : Ka = [H3O+]² / (C - [H3O+]). L\'approximation de faible dissociation donne C - [H3O+] ≈ C, soit [H3O+]² ≈ Ka · C, d\'où [H3O+] = √(Ka · C) et en prenant le -log : pH = 1/2 (pKa - log C).',
+        officialReference: 'Équilibres en Solution Aqueuse - Chimie Générale CRMEF'
       },
       {
-        id: "pcs-5",
-        theme: "Équilibres Acido-Basiques",
-        question: "À 25°C, quelle est la formule d'approximation du pH d'une solution aqueuse d'acide faible de concentration C et de constante pKa (avec dissociation faible) ?",
-        questionAr: "عند 25°C، ما هي صيغة التقريب لحساب pH محلول مائي لحمض ضعيف ذي تركيز C وثابتة pKa؟",
+        id: 'pcs-05',
+        theme: 'Ondes & Diffraction',
+        question: 'Un faisceau laser monochromatique de longueur d\'onde λ dans le vide éclaire une fente fine verticale de largeur a. Quelle est l\'expression de l\'écart angulaire de diffraction θ (demi-largeur de la tache centrale) ?',
+        questionAr: 'تضيء حزمة ليزر أحادية اللون طول موجتها λ في الفراغ شقا رأسيا دقيقا عرضه a. ما هو تعبير الفرق الزاوي لحيود الضوء θ (نصف عرض البقعة المركزية) ؟',
         options: [
-          { id: "A", text: "pH = 1/2 (pKa - log C)", correct: true },
-          { id: "B", text: "pH = - log C" },
-          { id: "C", text: "pH = 7 + 1/2 (pKa + log C)" },
-          { id: "D", text: "pH = 14 + log C" }
+          { id: 'a', text: 'θ = λ / a (en radians)', textAr: 'θ = λ / a (بالراديان)' },
+          { id: 'b', text: 'θ = a / λ', textAr: 'θ = a / λ' },
+          { id: 'c', text: 'θ = λ · a', textAr: 'θ = λ · a' },
+          { id: 'd', text: 'θ = 2 · λ² / a', textAr: 'θ = 2 · λ² / a' }
         ],
-        explanation: "Pour un acide faible faiblement dissocié ([A⁻] << [AH]), on a Ka ≈ [H₃O⁺]² / C, d'où [H₃O⁺] = √(Ka · C), ce qui donne pH = 1/2(pKa - log C)."
+        correctOptionId: 'a',
+        explanation: 'Le phénomène de diffraction par une ouverture rectiligne de dimension a donne pour le premier zéro d\'intensité un écart angulaire θ = λ / a (dans l\'approximation des petits angles sin θ ≈ θ en rad). La largeur angulaire totale de la tache centrale est 2θ = 2λ/a.',
+        officialReference: 'Optique Ondulatoire - Programme 2e Année Baccalauréat & CRMEF'
       },
       {
-        id: "pcs-6",
-        theme: "Optique Ondulatoire",
-        question: "Dans l'expérience des fentes d'Young avec un écartement a entre fentes et une distance D à l'écran, quelle est l'expression de l'interfrange i pour une longueur d'onde λ ?",
-        questionAr: "في تجربة شقي يونغ (Fentes d'Young)، ما هو تعبير الفرق الحيدي i بدلالة المسافة بين الشقين a والمسافة للشاشة D وطول الموجة λ؟",
+        id: 'pcs-06',
+        theme: 'Oxydoréduction & Électrochimie',
+        question: 'À 25 °C (T = 298 K), pour un couple redox Ox + n e⁻ ⇄ Red, quelle est la formule de Nernst donnant le potentiel d\'électrode E en fonction des concentrations molaires ?',
+        questionAr: 'عند 25 درجة مئوية، بالنسبة لمزدوجة مختزلة Ox + n e⁻ ⇄ Red، ما هي علاقة نيرنست المعطية لجهد القطب E بدلالة التراكيز المولية ؟',
         options: [
-          { id: "A", text: "i = (λ · D) / a", correct: true },
-          { id: "B", text: "i = (a · D) / λ" },
-          { id: "C", text: "i = (λ · a) / D" },
-          { id: "D", text: "i = λ · a · D" }
+          { id: 'a', text: 'E = E° + (0.059 / n) · log([Ox] / [Red])', textAr: 'E = E° + (0.059 / n) · log([Ox] / [Red])' },
+          { id: 'b', text: 'E = E° - (0.059 / n) · log([Ox] / [Red])', textAr: 'E = E° - (0.059 / n) · log([Ox] / [Red])' },
+          { id: 'c', text: 'E = E° · (n / 0.059) · ln([Red] / [Ox])', textAr: 'E = E° · (n / 0.059) · ln([Red] / [Ox])' },
+          { id: 'd', text: 'E = E° + (RT / nF) · [Ox] · [Red]', textAr: 'E = E° + (RT / nF) · [Ox] · [Red]' }
         ],
-        explanation: "L'interfrange i est la distance séparant deux franges brillantes ou sombres consécutives : i = λ · D / a."
+        correctOptionId: 'a',
+        explanation: 'La relation de Nernst s\'écrit E = E° + (RT / nF) ln([Ox]/[Red]). En remplaçant R = 8.314 J/mol.K, T = 298.15 K, F = 96485 C/mol et le passage au log décimal (ln(10) ≈ 2.303), le terme (RT/F) ln(10) vaut environ 0.059 V.',
+        officialReference: 'Électrochimie & Thermodynamique Chimique - CRMEF'
       },
       {
-        id: "pcs-7",
-        theme: "Chimie Organique",
-        question: "Quel mécanisme réactionnel est favorisé lors de la substitution nucléophile sur un halogénoalcane tertiaire dans un solvant polaire protique ?",
-        questionAr: "ما هي الآلية التفاعلية المفضلة أثناء الاستبدال النيكليوفيلي على هاليد ألكيل ثالثي في مذيب قطبي بروتوني؟",
+        id: 'pcs-07',
+        theme: 'Cinétique Chimique',
+        question: 'Pour une réaction chimique d\'ordre 1 par rapport à un réactif A : A → Produits, de constante de vitesse k, comment s\'exprime le temps de demi-réaction t1/2 ?',
+        questionAr: 'بالنسبة لتفاعل كيميائي من الرتبة الأولى بالنسبة للمتفاعل A : A → نواتج، بثابتة سرعة k، كيف يُعبَّر عن زمن نصف التفاعل t1/2 ؟',
         options: [
-          { id: "A", text: "Mécanisme SN1 passant par un carbocation intermédiaire stable", correct: true },
-          { id: "B", text: "Mécanisme SN2 concerté d'ordre 2" },
-          { id: "C", text: "Addition électrophile régiosélective" },
-          { id: "D", text: "Transposition de Hofmann" }
+          { id: 'a', text: 't1/2 = ln(2) / k ≈ 0.693 / k (indépendant de la concentration initiale [A]0)', textAr: 't1/2 = ln(2) / k ≈ 0.693 / k (مستقل تماما عن التركيز البدئي للمتفاعل)' },
+          { id: 'b', text: 't1/2 = 1 / (k · [A]0)', textAr: 't1/2 = 1 / (k · [A]0)' },
+          { id: 'c', text: 't1/2 = [A]0 / (2 · k)', textAr: 't1/2 = [A]0 / (2 · k)' },
+          { id: 'd', text: 't1/2 = k · [A]0²', textAr: 't1/2 = k · [A]0²' }
         ],
-        explanation: "L'encombrement stérique important du carbone tertiaire empêche l'attaque dorsale directe (SN2), tandis que la stabilité du carbocation tertiaire formé favorise le mécanisme monomoléculaire SN1."
+        correctOptionId: 'a',
+        explanation: 'L\'intégration de la loi de vitesse -d[A]/dt = k[A] donne [A](t) = [A]0 e^(-kt). Pour [A](t1/2) = [A]0 / 2, on a e^(-k t1/2) = 1/2, d\'où k t1/2 = ln(2) et t1/2 = ln(2) / k. C\'est une caractéristique exclusive des réactions d\'ordre 1 (comme la désintégration radioactive).',
+        officialReference: 'Cinétique Chimique Homogène - Cadre de Référence CRMEF'
       },
       {
-        id: "pcs-8",
-        theme: "Circuits Électriques RLC",
-        question: "Dans un circuit RLC série en régime libre, quelle condition sur la résistance R entraîne un régime pseudo-périodique ?",
-        questionAr: "في دارة RLC متوالية، ما هو الشرط على المقاومة R للحصول على نظام شبه دوري؟",
+        id: 'pcs-08',
+        theme: 'Chimie Organique & Stéréochimie',
+        question: 'Parmi les molécules suivantes, laquelle possède un atome de carbone asymétrique (C*) et présente donc une chiralité optique (activité optique) ?',
+        questionAr: 'من بين الجزيئات التالية، أي جزيء يمتلك ذرة كربون غير متماثلة (C*) ويتميز بنشاط بصري ومصاوغة مرآتية (Chiralité) ؟',
         options: [
-          { id: "A", text: "R < 2 √(L / C) (résistance inférieure à la résistance critique Rc)", correct: true },
-          { id: "B", text: "R = 0 uniquement" },
-          { id: "C", text: "R > 2 √(L / C)" },
-          { id: "D", text: "R = ∞" }
+          { id: 'a', text: 'Le butane-1-ol (CH3-CH2-CH2-CH2OH)', textAr: 'بوتان-1-أول' },
+          { id: 'b', text: 'Le butan-2-ol (CH3-CH(OH)-CH2-CH3)', textAr: 'بوتان-2-أول (كربون مرتبط بـ -H, -OH, -CH3, -C2H5)' },
+          { id: 'c', text: 'Le propan-2-ol ((CH3)2CH-OH)', textAr: 'بروبان-2-أول' },
+          { id: 'd', text: 'L\'acide éthanoïque (CH3-COOH)', textAr: 'حمض الإيثانويك' },
         ],
-        explanation: "Le discriminant de l'équation caractéristique est négatif lorsque R < Rc = 2 √(L/C), conduisant à des racines complexes conjuguées et des oscillations amorties pseudo-périodiques."
+        correctOptionId: 'b',
+        explanation: 'Le carbone 2 du butan-2-ol est lié à quatre substituants tous différents : -H, -OH, -CH3 et -CH2-CH3. Il est donc asymétrique (stéréocentre), ce qui confère à la molécule deux énantiomères R et S non superposables à leur image dans un miroir.',
+        officialReference: 'Stéréochimie & Chimie Organique - Concours CRMEF'
       },
       {
-        id: "pcs-9",
-        theme: "Oxydoréduction & Nernst",
-        question: "Que donne l'équation de Nernst pour le potentiel d'électrode d'un couple redox Ox + n e⁻ ⇌ Red à 298 K ?",
-        questionAr: "ما هي معادلة نرنست لجهد القطب لمزدوجة أكسدة-اختزال عند 298 كلفن؟",
+        id: 'pcs-09',
+        theme: 'Physique Nucléaire',
+        question: 'Dans une désintégration radioactive de type β⁻, que se passe-t-il au niveau des nucléons du noyau père ?',
+        questionAr: 'في تفتت إشعاعي النشاط من نوع β⁻ (بيتا ناقص)، ماذا يحدث على مستوى نويات النواة المشعة الأصلية ؟',
         options: [
-          { id: "A", text: "E = E° + (0,059 / n) · log([Ox] / [Red])", correct: true },
-          { id: "B", text: "E = E° - (0,059 / n) · log([Ox] / [Red])" },
-          { id: "C", text: "E = E° · ([Ox] / [Red])" },
-          { id: "D", text: "E = n · E° + 0,059 pH" }
+          { id: 'a', text: 'Un proton se transforme en neutron avec émission d\'un positon.', textAr: 'يتحول بروتون إلى نوترون مع انبعاث بوزيترون.' },
+          { id: 'b', text: 'Un neutron se transforme en proton avec émission d\'un électron et d\'un antineutrino électronique.', textAr: 'يتحول نوترون إلى بروتون مع انبعاث إلكترون وضديد نوتريونو إلكتروني.' },
+          { id: 'c', text: 'Le noyau éjecte un noyau d\'hélium 4 (particule alpha).', textAr: 'تنبعث نواة هيليوم 4 (دقيقة ألفا).' },
+          { id: 'd', text: 'Le nombre total de nucléons A varie de deux unités.', textAr: 'يتغير عدد الكتلة الإجمالي A بوحدتين.' }
         ],
-        explanation: "L'équation de Nernst relie le potentiel redox au quotient des activités : E = E° + (RT/nF) ln([Ox]/[Red]) = E° + (0,059/n) log([Ox]/[Red]) à 25°C."
+        correctOptionId: 'b',
+        explanation: 'La désintégration β⁻ caractérise les noyaux ayant un excès de neutrons. La réaction nucléaire élémentaire régie par l\'interaction faible est : n → p + e⁻ + ν̄_e. Le nombre de masse A reste constant et le numéro atomique Z augmente de 1 (Z → Z + 1).',
+        officialReference: 'Noyaux, Masse et Énergie - Physique Nucléaire MENPS'
       },
       {
-        id: "pcs-10",
-        theme: "Physique Quantique",
-        question: "Selon la relation de De Broglie, quelle est la longueur d'onde associée à une particule quantique de quantité de mouvement p ?",
-        questionAr: "وفق علاقة دو بروي (De Broglie)، ما هو طول الموجة المقترن بجسيم كمي ذي كمية حركة p؟",
+        id: 'pcs-10',
+        theme: 'Optique Géométrique',
+        question: 'Pour une lentille mince convergente de distance focale f\' = +20 cm, un objet réel AB est placé à 30 cm en amont du centre optique O (OA = -30 cm). À quelle distance OA\' se forme l\'image A\'B\' ?',
+        questionAr: 'بالنسبة لعدسة مجمعة رقيقة مسافتها البؤرية f\' = +20 cm، يوضع جسم حقيقي AB على بعد 30cm قبل المركز البصري O (أي OA = -30 cm). على أي مسافة OA\' تتكون الصورة A\'B\' ؟',
         options: [
-          { id: "A", text: "λ = h / p où h est la constante de Planck", correct: true },
-          { id: "B", text: "λ = p / h" },
-          { id: "C", text: "λ = h · c / p" },
-          { id: "D", text: "λ = p · c²" }
+          { id: 'a', text: 'OA\' = +60 cm (image réelle située 60 cm après la lentille)', textAr: 'OA\' = +60 cm (صورة حقيقية على بعد 60 سم خلف العدسة)' },
+          { id: 'b', text: 'OA\' = +12 cm', textAr: 'OA\' = +12 cm' },
+          { id: 'c', text: 'OA\' = -50 cm (image virtuelle)', textAr: 'OA\' = -50 cm' },
+          { id: 'd', text: 'OA\' = +10 cm', textAr: 'OA\' = +10 cm' }
         ],
-        explanation: "Louis de Broglie a postulé la dualité onde-corpuscule en reliant la longueur d'onde spatiale à la quantité de mouvement mécanique : λ = h / p."
+        correctOptionId: 'a',
+        explanation: 'D\'après la formule de conjugaison de Descartes : 1/OA\' - 1/OA = 1/f\'. Donc 1/OA\' = 1/f\' + 1/OA = 1/20 + 1/(-30) = 3/60 - 2/60 = 1/60 cm⁻¹. Par conséquent OA\' = +60 cm. L\'image est réelle et agrandie (grandissement γ = OA\'/OA = 60/(-30) = -2).',
+        officialReference: 'Optique Géométrique des Systèmes Centrés - CRMEF'
+      },
+      {
+        id: 'pcs-11',
+        theme: 'Mécanique & Oscillateurs',
+        question: 'Quelle est la période propre T0 des oscillations libres non amorties d\'un pendule élastique horizontal constitué d\'un solide de masse m attaché à un ressort de raideur k ?',
+        questionAr: 'ما هو الدور الخاص T0 للتذبذبات الحرة غير المخمدة لنواس مرن أفقي يتكون من جسم كتلته m مرتبط بنابض صلابته k ؟',
+        options: [
+          { id: 'a', text: 'T0 = 2π · √(m / k)', textAr: 'T0 = 2π · √(m / k)' },
+          { id: 'b', text: 'T0 = 2π · √(k / m)', textAr: 'T0 = 2π · √(k / m)' },
+          { id: 'c', text: 'T0 = 1 / (2π) · √(m / k)', textAr: 'T0 = 1 / (2π) · √(m / k)' },
+          { id: 'd', text: 'T0 = 2π · m · k', textAr: 'T0 = 2π · m · k' }
+        ],
+        correctOptionId: 'a',
+        explanation: 'L\'équation différentielle du mouvement sans frottement est d²x/dt² + (k/m) x = 0. La pulsation propre est ω0 = √(k/m), d\'où la période propre T0 = 2π / ω0 = 2π √(m/k).',
+        officialReference: 'Systèmes Mécaniques Oscillants - Physique Secondaire Qualifiant'
+      },
+      {
+        id: 'pcs-12',
+        theme: 'Équilibres Chimiques & Solubilité',
+        question: 'Le produit de solubilité du chlorure d\'argent AgCl dans l\'eau pure à 25 °C est Ks = 1.8 × 10⁻¹⁰. Quelle est la solubilité molaire s de AgCl dans l\'eau pure ?',
+        questionAr: 'جداء ذوبانية كلورور الفضة AgCl في الماء الخالص عند 25 درجة مئوية هو Ks = 1.8 × 10⁻¹⁰. كم تبلغ الذوبانية المولية s لـ AgCl في الماء الخالص ؟',
+        options: [
+          { id: 'a', text: 's = √(Ks) ≈ 1.34 × 10⁻⁵ mol/L', textAr: 's = √(Ks) ≈ 1.34 × 10⁻⁵ mol/L' },
+          { id: 'b', text: 's = Ks / 2 = 0.9 × 10⁻¹⁰ mol/L', textAr: 's = Ks / 2 = 0.9 × 10⁻¹⁰ mol/L' },
+          { id: 'c', text: 's = Ks² = 3.24 × 10⁻²⁰ mol/L', textAr: 's = Ks² = 3.24 × 10⁻²⁰ mol/L' },
+          { id: 'd', text: 's = 1.8 × 10⁻¹⁰ mol/L', textAr: 's = 1.8 × 10⁻¹⁰ mol/L' }
+        ],
+        correctOptionId: 'a',
+        explanation: 'Pour l\'équilibre de dissolution AgCl(s) ⇄ Ag⁺(aq) + Cl⁻(aq), à saturation [Ag⁺] = [Cl⁻] = s. Le produit de solubilité s\'écrit Ks = [Ag⁺][Cl⁻] = s². On a donc s = √(Ks) = √(1.8 × 10⁻¹⁰) ≈ 1.34 × 10⁻⁵ mol/L.',
+        officialReference: 'Réactions de Précipitation et Solubilité - Chimie CRMEF'
       }
     ];
 
     let currentSeries = [];
     let currentIndex = 0;
     let score = 0;
-    let hasAnsweredCurrent = false;
+    let userAnswers = {};
 
-    function shuffle(arr) {
-      return [...arr].sort(() => Math.random() - 0.5);
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
     }
 
     function startNewSeries() {
-      currentSeries = shuffle(PC_SPECIALITE_BANK).slice(0, 10);
+      currentSeries = shuffleArray(PC_SPECIALITE_BANK).slice(0, 10);
       currentIndex = 0;
       score = 0;
-      hasAnsweredCurrent = false;
-      document.getElementById('quiz-live-score').textContent = '0';
-      document.getElementById('quiz-answered-count').textContent = '0';
+      userAnswers = {};
+
+      document.getElementById('quiz-card').classList.remove('hidden');
+      document.getElementById('results-card').classList.add('hidden');
       renderQuestion();
     }
 
     function renderQuestion() {
-      hasAnsweredCurrent = false;
       const q = currentSeries[currentIndex];
       document.getElementById('quiz-current-num').textContent = currentIndex + 1;
       document.getElementById('quiz-theme-badge').textContent = q.theme;
-      document.getElementById('quiz-progress-fill').style.width = ((currentIndex + 1) * 10) + '%';
+      document.getElementById('quiz-progress-fill').style.width = `${((currentIndex + 1) / 10) * 100}%`;
       document.getElementById('quiz-question-fr').textContent = q.question;
       document.getElementById('quiz-question-ar').textContent = q.questionAr || '';
-      
-      const expBox = document.getElementById('quiz-explanation-box');
-      expBox.className = 'hidden';
-      document.getElementById('btn-next-question').classList.add('hidden');
 
       const container = document.getElementById('quiz-options-container');
       container.innerHTML = '';
 
-      q.options.forEach(opt => {
+      q.options.forEach((opt) => {
         const btn = document.createElement('button');
-        btn.className = 'w-full p-4 rounded-2xl border border-slate-200 hover:border-slate-800 hover:bg-slate-50 text-left text-xs sm:text-sm font-semibold transition-all flex items-start gap-3 cursor-pointer bg-white';
-        btn.innerHTML = `<span class="w-6 h-6 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center text-xs font-black shrink-0">${opt.id}</span><span>${opt.text}</span>`;
-        btn.onclick = () => selectOption(opt, btn, q);
+        const isSelected = userAnswers[q.id] === opt.id;
+
+        const style = 'w-full p-4 rounded-2xl border text-left text-xs sm:text-sm font-semibold transition-all flex items-start gap-3.5 cursor-pointer ' +
+          (isSelected ? 'border-slate-900 bg-slate-100 ring-2 ring-slate-900/20 shadow-2xs' : 'border-slate-200 hover:border-slate-800 hover:bg-slate-50 bg-white');
+
+        btn.className = style;
+        btn.onclick = () => selectOption(opt.id, q.id);
+
+        btn.innerHTML = `
+          <span class="w-7 h-7 rounded-lg ${isSelected ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-700'} font-black text-xs flex items-center justify-center shrink-0 uppercase transition-colors">
+            ${opt.id}
+          </span>
+          <div class="flex-1 space-y-1">
+            <span class="text-xs sm:text-sm font-semibold ${isSelected ? 'text-slate-950 font-bold' : 'text-slate-800'} block">${opt.text}</span>
+            ${opt.textAr ? `<span class="text-xs font-arabic text-slate-700 block text-right dir-rtl">${opt.textAr}</span>` : ''}
+          </div>
+        `;
         container.appendChild(btn);
       });
-    }
 
-    function selectOption(opt, btn, q) {
-      if (hasAnsweredCurrent) return;
-      hasAnsweredCurrent = true;
-
-      const buttons = document.querySelectorAll('#quiz-options-container button');
-      buttons.forEach(b => b.classList.add('pointer-events-none'));
-
-      const expBox = document.getElementById('quiz-explanation-box');
-      const title = document.getElementById('quiz-feedback-title');
-      const text = document.getElementById('quiz-explanation-text');
-
-      if (opt.correct) {
-        score++;
-        btn.className = 'w-full p-4 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-left text-xs sm:text-sm font-bold text-emerald-900 flex items-start gap-3';
-        expBox.className = 'rounded-2xl p-4 sm:p-5 border border-emerald-300 bg-emerald-50/80 block';
-        title.innerHTML = '✅ <span class="text-emerald-800">Résolution et réponse exactes !</span>';
+      const nextBtn = document.getElementById('btn-next-question');
+      if (userAnswers[q.id]) {
+        nextBtn.disabled = false;
+        nextBtn.className = 'px-5 py-2.5 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white cursor-pointer shadow-md shadow-slate-900/20';
+        nextBtn.innerText = currentIndex === currentSeries.length - 1 ? 'Terminer & Voir la Démonstration' : 'Question suivante →';
       } else {
-        btn.className = 'w-full p-4 rounded-2xl border-2 border-red-500 bg-red-50 text-left text-xs sm:text-sm font-bold text-red-900 flex items-start gap-3';
-        buttons.forEach((b, idx) => {
-          if (q.options[idx].correct) {
-            b.className = 'w-full p-4 rounded-2xl border-2 border-emerald-500 bg-emerald-50/60 text-left text-xs sm:text-sm font-bold text-emerald-900 flex items-start gap-3';
-          }
-        });
-        expBox.className = 'rounded-2xl p-4 sm:p-5 border border-red-300 bg-red-50/80 block';
-        title.innerHTML = '❌ <span class="text-red-800">Réponse inexacte</span>';
+        nextBtn.disabled = true;
+        nextBtn.className = 'px-5 py-2.5 rounded-xl text-xs font-bold bg-slate-200 text-slate-400 cursor-not-allowed';
       }
 
-      text.textContent = q.explanation;
-      document.getElementById('quiz-live-score').textContent = score;
-      document.getElementById('quiz-answered-count').textContent = currentIndex + 1;
-      document.getElementById('btn-next-question').classList.remove('hidden');
+      const prevBtn = document.getElementById('btn-prev-question');
+      if (currentIndex > 0) {
+        prevBtn.disabled = false;
+        prevBtn.className = 'px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 cursor-pointer';
+      } else {
+        prevBtn.disabled = true;
+        prevBtn.className = 'px-4 py-2 rounded-xl text-xs font-bold text-slate-300 cursor-not-allowed';
+      }
+    }
+
+    function selectOption(optId, qId) {
+      userAnswers[qId] = optId;
+      renderQuestion();
+    }
+
+    function prevQuestion() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderQuestion();
+      }
     }
 
     function nextQuestion() {
@@ -398,54 +563,90 @@
         currentIndex++;
         renderQuestion();
       } else {
-        alert(`Épreuve Spécialité PC terminée !\nScore : ${score} / 10.`);
-        startNewSeries();
+        showResults();
       }
+    }
+
+    function showResults() {
+      document.getElementById('quiz-card').classList.add('hidden');
+      const resCard = document.getElementById('results-card');
+      resCard.classList.remove('hidden');
+
+      let calculatedScore = 0;
+      currentSeries.forEach(q => {
+        if (userAnswers[q.id] === q.correctOptionId) calculatedScore++;
+      });
+
+      const note20 = (calculatedScore * 2).toFixed(1);
+      document.getElementById('results-score-display').textContent = `${calculatedScore} / 10`;
+      document.getElementById('results-note-20').textContent = `Note officielle estimée : ${note20} / 20`;
+
+      const diagBox = document.getElementById('results-diagnosis-box');
+      if (calculatedScore >= 8) {
+        diagBox.className = 'max-w-md mx-auto p-4 rounded-xl border border-emerald-300 bg-emerald-50 text-emerald-900 text-xs font-bold space-y-1';
+        diagBox.innerHTML = '🏆 <strong>Excellente Maîtrise Scientifique : Admissibilité Forte</strong><p class="text-[11px] font-normal text-emerald-800 mt-1">Très solide maîtrise de la mécanique, de l\'électrocinétique RLC et de la thermodynamique chimique.</p>';
+      } else if (calculatedScore >= 6) {
+        diagBox.className = 'max-w-md mx-auto p-4 rounded-xl border border-cyan-300 bg-cyan-50 text-cyan-900 text-xs font-bold space-y-1';
+        diagBox.innerHTML = '🎯 <strong>Niveau Favorable : Profil Admissible</strong><p class="text-[11px] font-normal text-cyan-800 mt-1">Connaissances solides. Révisez les démonstrations fines d\'optique ondulatoire et les équilibres en solution.</p>';
+      } else if (calculatedScore >= 4) {
+        diagBox.className = 'max-w-md mx-auto p-4 rounded-xl border border-amber-300 bg-amber-50 text-amber-900 text-xs font-bold space-y-1';
+        diagBox.innerHTML = '⚠️ <strong>Zone de Vigilance : Révisions Requises</strong><p class="text-[11px] font-normal text-amber-800 mt-1">Renforcez les calculs d\'incertitudes, les lois de Laplace et les bilans énergétiques.</p>';
+      } else {
+        diagBox.className = 'max-w-md mx-auto p-4 rounded-xl border border-red-300 bg-red-50 text-red-900 text-xs font-bold space-y-1';
+        diagBox.innerHTML = '❌ <strong>Score Insuffisant : Risque d\'Élimination</strong><p class="text-[11px] font-normal text-red-800 mt-1">Consultez l\'intégralité des démonstrations détaillées du référentiel et recommencez un tirage.</p>';
+      }
+
+      const correctionsContainer = document.getElementById('corrections-container');
+      correctionsContainer.innerHTML = '';
+
+      currentSeries.forEach((q, idx) => {
+        const correctOpt = q.options.find(o => o.id === q.correctOptionId);
+        const userChoiceId = userAnswers[q.id];
+        const isRight = userChoiceId === q.correctOptionId;
+        const selectedOpt = q.options.find(o => o.id === userChoiceId);
+
+        const item = document.createElement('div');
+        item.className = `p-4 sm:p-5 rounded-2xl border ${isRight ? 'border-emerald-200 bg-emerald-50/40' : 'border-red-200 bg-red-50/40'} space-y-2`;
+
+        item.innerHTML = `
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-extrabold text-slate-700">Question ${idx + 1} · ${q.theme}</span>
+            <span class="px-2 py-0.5 rounded-full font-bold text-[10px] ${isRight ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'}">
+              ${isRight ? '✅ Validée (+1)' : '❌ Erreur (0)'}
+            </span>
+          </div>
+          <h4 class="text-sm font-black text-slate-900">${q.question}</h4>
+          ${q.questionAr ? `<p class="text-xs font-arabic text-slate-800 text-right dir-rtl">${q.questionAr}</p>` : ''}
+          <div class="text-xs space-y-1 pt-1">
+            <div>Votre réponse : <strong class="${isRight ? 'text-emerald-700' : 'text-red-700'}">${selectedOpt ? selectedOpt.id.toUpperCase() + ') ' + selectedOpt.text : 'Non répondu'}</strong></div>
+            ${!isRight ? `<div>Bonne réponse attendue : <strong class="text-emerald-800">${correctOpt.id.toUpperCase()}) ${correctOpt.text}</strong></div>` : ''}
+            <div class="p-2.5 bg-white/80 rounded-xl text-slate-700 leading-relaxed border border-slate-200/60 mt-2 text-[11px]">
+              💡 <strong>Démonstration Scientifique :</strong> ${q.explanation}
+              <div class="text-[10px] text-slate-500 mt-1 italic">Réf : ${q.officialReference}</div>
+            </div>
+          </div>
+        `;
+        correctionsContainer.appendChild(item);
+      });
     }
 
     function switchMode(mode) {
       const qSection = document.getElementById('section-quiz-mode');
-      const bSection = document.getElementById('section-browse-mode');
+      const rSection = document.getElementById('section-referentiel-mode');
       const btnQ = document.getElementById('btn-mode-quiz');
-      const btnB = document.getElementById('btn-mode-browse');
+      const btnR = document.getElementById('btn-mode-referentiel');
 
       if (mode === 'quiz') {
         qSection.classList.remove('hidden');
-        bSection.classList.add('hidden');
+        rSection.classList.add('hidden');
         btnQ.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold bg-slate-900 text-white shadow-xs cursor-pointer transition-all text-center';
-        btnB.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center';
+        btnR.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center';
       } else {
         qSection.classList.add('hidden');
-        bSection.classList.remove('hidden');
-        btnB.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold bg-slate-900 text-white shadow-xs cursor-pointer transition-all text-center';
+        rSection.classList.remove('hidden');
+        btnR.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold bg-slate-900 text-white shadow-xs cursor-pointer transition-all text-center';
         btnQ.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center';
-        renderBrowse();
       }
-    }
-
-    function renderBrowse() {
-      const list = document.getElementById('browse-questions-list');
-      document.getElementById('browse-count').textContent = `${PC_SPECIALITE_BANK.length} Questions avec Démonstrations`;
-      list.innerHTML = '';
-
-      PC_SPECIALITE_BANK.forEach((q, idx) => {
-        const card = document.createElement('div');
-        card.className = 'bg-white rounded-2xl border border-slate-200 p-5 space-y-3';
-        const correctOpt = q.options.find(o => o.correct);
-
-        card.innerHTML = `
-          <div class="flex items-center justify-between">
-            <span class="px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-800 text-[11px] font-bold">Question ${idx + 1} · ${q.theme}</span>
-          </div>
-          <h4 class="text-sm font-black text-slate-900">${q.question}</h4>
-          ${q.questionAr ? `<p class="text-xs font-arabic text-slate-800 text-right dir-rtl font-semibold">${q.questionAr}</p>` : ''}
-          <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1">
-            <span class="text-xs font-black text-emerald-800">Réponse exacte : Option ${correctOpt.id} - ${correctOpt.text}</span>
-            <p class="text-xs text-slate-700 leading-relaxed">${q.explanation}</p>
-          </div>
-        `;
-        list.appendChild(card);
-      });
     }
 
     startNewSeries();

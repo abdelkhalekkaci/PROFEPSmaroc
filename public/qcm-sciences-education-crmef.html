@@ -100,13 +100,13 @@
       </div>
     </div>
 
-    <!-- Toggle Modes : Passer une Série (10 Qs) vs Consulter Toutes les Questions Corrigées -->
+    <!-- Toggle Modes : Passer une Série (10 Qs) vs Cadre de Référence Officiel CNEE -->
     <div class="bg-white rounded-2xl border border-slate-200 p-2 shadow-xs flex items-center justify-between gap-2">
       <button onclick="switchMode('quiz')" id="btn-mode-quiz" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold bg-indigo-600 text-white shadow-xs cursor-pointer transition-all text-center">
         🎯 1. Passer un Test (Série de 10 Qs)
       </button>
-      <button onclick="switchMode('browse')" id="btn-mode-browse" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center">
-        📖 2. Consulter Toutes les Questions & Corrigés
+      <button onclick="switchMode('referentiel')" id="btn-mode-browse" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center">
+        🏛️ 2. Cadre de Référence Officiel CNEE
       </button>
     </div>
 
@@ -203,18 +203,55 @@
 
     </div>
 
-    <!-- ================= MODE 2 : CONSULTATION DE TOUTES LES QUESTIONS DE LA BANQUE ================= -->
+    <!-- ================= MODE 2 : CADRE DE RÉFÉRENCE OFFICIEL CNEE ================= -->
     <div id="section-browse-mode" class="hidden space-y-6">
-      <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs space-y-3">
-        <h3 class="text-base font-black text-slate-900">
-          Banque Officielle des Questions en Sciences de l'Éducation
+      <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-bold border border-indigo-200">
+          <span>الإطار المرجعي الرسمي لمباراة التعليم · مادة علوم التربية</span>
+        </div>
+        <h3 class="text-xl sm:text-2xl font-black text-slate-900">
+          Cadre de Référence Officiel des Sciences de l'Éducation (CNEE / MENPS)
         </h3>
-        <p class="text-xs text-slate-600">
-          Consultez l'ensemble des questions classées par thématique avec leurs clés de réponse validées et leurs justifications légales.
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          L'épreuve écrite des Sciences de l'Éducation est commune à 100% des candidats du concours enseignant au Maroc (Primaire et Secondaire). Elle est conçue par le Centre National des Examens et de l'Évaluation (CNEE) et s'articule autour de 3 domaines de compétences fondamentaux :
         </p>
       </div>
 
-      <div id="browse-all-container" class="space-y-4"></div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="bg-white p-5 rounded-2xl border border-indigo-200 shadow-xs space-y-2">
+          <span class="font-black uppercase text-indigo-700 block text-xs">Domaine 1 · Législation & Réformes</span>
+          <h4 class="font-extrabold text-sm text-slate-900">Nouveautés du Système Éducatif</h4>
+          <p class="text-slate-600 leading-relaxed">
+            Loi-Cadre 51.17 (Articles 4, 8, 31), Feuille de Route 2022-2026 (3 axes Élève/Professeur/Établissement, 12 engagements), Écoles Pionnières (مدارس الريادة) et démarche de remédiation TaRL.
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-indigo-200 shadow-xs space-y-2">
+          <span class="font-black uppercase text-indigo-700 block text-xs">Domaine 2 · Psychopédagogie</span>
+          <h4 class="font-extrabold text-sm text-slate-900">Théories de l'Apprentissage</h4>
+          <p class="text-slate-600 leading-relaxed">
+            Constructivisme (Jean Piaget, assimilation, accommodation, schèmes), Socioconstructivisme (Lev Vygotski, Zone Proximale de Développement ZPD), Béhaviorisme (Skinner) et Théorie de l'étayage (Jérôme Bruner).
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-indigo-200 shadow-xs space-y-2">
+          <span class="font-black uppercase text-indigo-700 block text-xs">Domaine 3 · Didactique & Docimologie</span>
+          <h4 class="font-extrabold text-sm text-slate-900">Ingénierie Pédagogique & Évaluation</h4>
+          <p class="text-slate-600 leading-relaxed">
+            Transposition didactique (Chevallard), contrat didactique (Brousseau), typologie des évaluations (diagnostique, formative, sommatrice, formatrice), gestion des erreurs et différenciation pédagogique.
+          </p>
+        </div>
+      </div>
+
+      <div class="p-6 bg-indigo-950 text-white rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <h4 class="text-sm font-black">Prêt à tester vos connaissances sur ce cadre ?</h4>
+          <p class="text-xs text-indigo-200">Chaque série de 10 questions tirées au sort vous prépare aux conditions réelles du concours.</p>
+        </div>
+        <button onclick="switchMode('quiz')" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs rounded-xl shadow-md cursor-pointer shrink-0">
+          🎯 Passer un Test de 10 Questions →
+        </button>
+      </div>
     </div>
 
     <!-- ================= AUTORITÉ & E-E-A-T CARD ================= -->
@@ -587,7 +624,7 @@
       });
     }
 
-    // Basculer entre Mode Quiz et Mode Consultation Intégrale
+    // Basculer entre Mode Quiz et Cadre de Référence Officiel
     function switchMode(mode) {
       if (mode === 'quiz') {
         document.getElementById('section-quiz-mode').classList.remove('hidden');
@@ -599,53 +636,7 @@
         document.getElementById('section-browse-mode').classList.remove('hidden');
         document.getElementById('btn-mode-quiz').className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center';
         document.getElementById('btn-mode-browse').className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold bg-indigo-600 text-white shadow-xs cursor-pointer transition-all text-center';
-        renderBrowseAll();
       }
-    }
-
-    function renderBrowseAll() {
-      const container = document.getElementById('browse-all-container');
-      container.innerHTML = '';
-
-      SE_QUESTIONS_BANK.forEach((q, idx) => {
-        const correctOpt = q.opts.find(o => o.id === q.correct);
-        const card = document.createElement('div');
-        card.className = 'bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-2xs space-y-4';
-
-        card.innerHTML = `
-          <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-            <span class="px-2.5 py-0.5 rounded-md bg-indigo-50 text-indigo-700 text-xs font-black">Question #${idx + 1}</span>
-            <span class="text-xs font-bold text-slate-500 uppercase">${q.theme}</span>
-          </div>
-
-          <h4 class="text-sm sm:text-base font-black text-slate-900">${q.qFr}</h4>
-          <p class="text-xs sm:text-sm font-arabic font-bold text-slate-700 text-right dir-rtl">${q.qAr}</p>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-            ${q.opts.map((o, oIdx) => {
-              const isCor = o.id === q.correct;
-              const letter = String.fromCharCode(65 + oIdx);
-              return `
-                <div class="p-3 rounded-xl border ${isCor ? 'border-emerald-300 bg-emerald-50 text-emerald-950 font-bold' : 'border-slate-200 bg-slate-50/50 text-slate-600'} flex items-start gap-2">
-                  <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-black shrink-0 ${isCor ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-700'}">${letter}</span>
-                  <div>
-                    <div>${o.text}</div>
-                    <div class="font-arabic text-slate-500 text-right dir-rtl mt-0.5 text-[11px]">${o.textAr}</div>
-                  </div>
-                </div>
-              `;
-            }).join('')}
-          </div>
-
-          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs space-y-1">
-            <div class="font-bold text-indigo-900">💡 Justification Officielle :</div>
-            <p class="text-slate-700 leading-relaxed">${q.exp}</p>
-            <p class="font-arabic text-slate-600 text-right dir-rtl">${q.expAr}</p>
-            <div class="text-[11px] text-slate-500 pt-1 border-t border-slate-200/60">Source : <strong>${q.ref}</strong></div>
-          </div>
-        `;
-        container.appendChild(card);
-      });
     }
 
     // Démarrage initial automatique

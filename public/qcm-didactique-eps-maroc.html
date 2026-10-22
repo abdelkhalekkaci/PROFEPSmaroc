@@ -98,13 +98,13 @@
       </div>
     </div>
 
-    <!-- Toggle Modes : Passer une Série vs Consulter Toutes les Questions -->
+    <!-- Toggle Modes : Passer une Série vs Cadre de Référence Officiel CNEE -->
     <div class="bg-white rounded-2xl border border-slate-200 p-2 shadow-xs flex items-center justify-between gap-2">
       <button onclick="switchMode('quiz')" id="btn-mode-quiz" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold bg-blue-600 text-white shadow-xs cursor-pointer transition-all text-center">
         🎯 1. Passer un Test (Série de 10 Qs)
       </button>
-      <button onclick="switchMode('browse')" id="btn-mode-browse" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center">
-        📖 2. Consulter Toutes les Questions & Corrigés
+      <button onclick="switchMode('referentiel')" id="btn-mode-browse" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center">
+        🏛️ 2. Cadre de Référence Officiel CNEE
       </button>
     </div>
 
@@ -193,18 +193,63 @@
 
     </div>
 
-    <!-- ================= MODE 2 : CONSULTATION DE TOUTES LES QUESTIONS ================= -->
+    <!-- ================= MODE 2 : CADRE DE RÉFÉRENCE OFFICIEL DIDACTIQUE EPS ================= -->
     <div id="section-browse-mode" class="hidden space-y-6">
-      <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs space-y-3">
-        <h3 class="text-base font-black text-slate-900">
-          Banque Intégrale de Didactique EPS (Orientations Pédagogiques Maroc)
+      <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold border border-blue-200">
+          <span>الإطار المرجعي الرسمي لمباراة توظيف أساتذة التربية البدنية · ديداكتيك المادة</span>
+        </div>
+        <h3 class="text-xl sm:text-2xl font-black text-slate-900">
+          Cadre de Référence de la Didactique de l'EPS (CNEE / MENPS)
         </h3>
-        <p class="text-xs text-slate-600">
-          Consultez toutes les questions relatives à l'ingénierie de séance, aux fiches pédagogiques, à l'évaluation certificative et à la sécurité en EPS.
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          L'épreuve de Didactique de l'EPS (Pondération : 50% de l'épreuve écrite) évalue la capacité du futur professeur à concevoir, gérer et évaluer des situations d'apprentissage motrices sécurisées et conformes aux curriculums officiels marocains.
         </p>
       </div>
 
-      <div id="browse-all-container" class="space-y-4"></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+        <div class="bg-white p-5 rounded-2xl border border-blue-200 shadow-xs space-y-2">
+          <span class="font-black uppercase text-blue-700 block text-xs">Axe 1 · Textes Officiels & Orientations Pédagogiques</span>
+          <h4 class="font-extrabold text-sm text-slate-900">OP 2007 (Lycée) & OP 2009 (Collège)</h4>
+          <p class="text-slate-600 leading-relaxed">
+            Objectifs Terminaux d'Intégration (OTI), Objectifs Terminaux de Cycle (OTC), compétences motrices par niveau (Tronc Commun, 1ère et 2ème Bac), logique interne des familles d'APSA (Athlétisme, Gymnastique, Sports Collectifs, Raquettes) et démarche de projet.
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-blue-200 shadow-xs space-y-2">
+          <span class="font-black uppercase text-blue-700 block text-xs">Axe 2 · Ingénierie de Séance & Tâches Motrices</span>
+          <h4 class="font-extrabold text-sm text-slate-900">Conception et Conduite du Cours</h4>
+          <p class="text-slate-600 leading-relaxed">
+            Structure en 3 temps (Préparatoire, Principal, Final), optimisation du Temps de Pratique Motrice Effective (TPME), manipulation des variables didactiques, critères de réussite et de réalisation, gestion du feedback immédiat.
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-blue-200 shadow-xs space-y-2">
+          <span class="font-black uppercase text-blue-700 block text-xs">Axe 3 · Évaluation Certificative & Docimologie</span>
+          <h4 class="font-extrabold text-sm text-slate-900">Évaluation Baccalauréat (Note /20)</h4>
+          <p class="text-slate-600 leading-relaxed">
+            Grille officielle 10/6/4 : Performance motrice mesurée (10 pts), Maîtrise d'exécution technique/tactique (6 pts), Rôles sociaux et civiques (4 pts : arbitrage, observation, entraide). Distinctions entre évaluation diagnostique, formative et certificative.
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-blue-200 shadow-xs space-y-2">
+          <span class="font-black uppercase text-blue-700 block text-xs">Axe 4 · Sécurité & Responsabilité Juridique</span>
+          <h4 class="font-extrabold text-sm text-slate-900">Prévention et Obligations Légales</h4>
+          <p class="text-slate-600 leading-relaxed">
+            Sécurité passive (matériel amortissant, vérification des agrès) et active (apprentissage des parades manuelles). Responsabilité administrative, civile et pénale du professeur (Dahir du 1er mai 1958) et gestion immédiate des accidents scolaires.
+          </p>
+        </div>
+      </div>
+
+      <div class="p-6 bg-slate-900 text-white rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <h4 class="text-sm font-black">Prêt à tester vos réflexes didactiques ?</h4>
+          <p class="text-xs text-slate-300">Passez des séries de 10 questions tirées au sort sur l'ensemble de ces axes officiels.</p>
+        </div>
+        <button onclick="switchMode('quiz')" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs rounded-xl shadow-md cursor-pointer shrink-0">
+          🎯 Passer un Test Didactique (10 Qs) →
+        </button>
+      </div>
     </div>
 
     <!-- ================= E-E-A-T CARD ================= -->
@@ -573,52 +618,7 @@
         document.getElementById('section-browse-mode').classList.remove('hidden');
         document.getElementById('btn-mode-quiz').className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center';
         document.getElementById('btn-mode-browse').className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold bg-blue-600 text-white shadow-xs cursor-pointer transition-all text-center';
-        renderBrowse();
       }
-    }
-
-    function renderBrowse() {
-      const box = document.getElementById('browse-all-container');
-      box.innerHTML = '';
-
-      DID_EPS_BANK.forEach((q, idx) => {
-        const card = document.createElement('div');
-        card.className = 'bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-2xs space-y-4';
-
-        card.innerHTML = `
-          <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-            <span class="px-2.5 py-0.5 rounded-md bg-blue-50 text-blue-700 text-xs font-black">Question #${idx + 1}</span>
-            <span class="text-xs font-bold text-slate-500 uppercase">${q.theme}</span>
-          </div>
-
-          <h4 class="text-sm sm:text-base font-black text-slate-900">${q.qFr}</h4>
-          <p class="text-xs sm:text-sm font-arabic font-bold text-slate-700 text-right dir-rtl">${q.qAr}</p>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-            ${q.opts.map((o, oIdx) => {
-              const isCor = o.id === q.correct;
-              const letter = String.fromCharCode(65 + oIdx);
-              return `
-                <div class="p-3 rounded-xl border ${isCor ? 'border-emerald-300 bg-emerald-50 text-emerald-950 font-bold' : 'border-slate-200 bg-slate-50/50 text-slate-600'} flex items-start gap-2">
-                  <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-black shrink-0 ${isCor ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-700'}">${letter}</span>
-                  <div>
-                    <div>${o.text}</div>
-                    <div class="font-arabic text-slate-500 text-right dir-rtl mt-0.5 text-[11px]">${o.textAr}</div>
-                  </div>
-                </div>
-              `;
-            }).join('')}
-          </div>
-
-          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs space-y-1">
-            <div class="font-bold text-blue-900">💡 Justification Didactique :</div>
-            <p class="text-slate-700 leading-relaxed">${q.exp}</p>
-            <p class="font-arabic text-slate-600 text-right dir-rtl">${q.expAr}</p>
-            <div class="text-[11px] text-slate-500 pt-1 border-t border-slate-200/60">Source : <strong>${q.ref}</strong></div>
-          </div>
-        `;
-        box.appendChild(card);
-      });
     }
 
     startNewSeries();

@@ -19,22 +19,28 @@ import {
   Check,
   Building2,
   Scale,
+  Layers,
+  Award,
+  ListOrdered,
 } from 'lucide-react';
 import {
   INITIAL_QUIZ_BANK,
   QUIZ_SUBJECTS,
   OFFICIAL_SOURCES_GUIDE,
   QuizQuestion,
+  EPS_OFFICIAL_SERIES,
+  PredefinedSeriesMeta,
 } from '../data/crmefQuizBank';
 
 export const CrmefQuizHub: React.FC = () => {
-  // Navigation mode inside Hub
-  const [hubMode, setHubMode] = useState<'exam' | 'browse' | 'sources' | 'import'>('exam');
+  // Navigation mode inside Hub (mode 'browse' replaced by 'referentiel' per CNEE standards)
+  const [hubMode, setHubMode] = useState<'exam' | 'referentiel' | 'sources' | 'import'>('exam');
 
   // Config state
   const [selectedSubjectId, setSelectedSubjectId] = useState<string>('eps');
-  const [selectedModule, setSelectedModule] = useState<'all' | 'sciences_education' | 'specialite' | 'didactique'>('sciences_education');
+  const [selectedModule, setSelectedModule] = useState<'all' | 'sciences_education' | 'specialite' | 'didactique'>('didactique');
   const [langPreference, setLangPreference] = useState<'both' | 'fr' | 'ar'>('both');
+  const [selectedSeriesId, setSelectedSeriesId] = useState<string>('eps-series-01');
 
   // Dynamic questions bank (supports user additions via import)
   const [dynamicBank, setDynamicBank] = useState<QuizQuestion[]>(INITIAL_QUIZ_BANK);
@@ -72,10 +78,53 @@ export const CrmefQuizHub: React.FC = () => {
     });
   }, [dynamicBank, selectedSubjectId, selectedModule]);
 
-  // Helper to start or generate a new 10-question set
+  // Load a specific predefined official series
+  const loadPredefinedSeries = (seriesId: string) => {
+    const targetSeries = EPS_OFFICIAL_SERIES.find(s => s.id === seriesId);
+    if (!targetSeries) {
+      generateNewExamSeries();
+      return;
+    }
+    setSelectedSeriesId(seriesId);
+    setSelectedSubjectId('eps');
+    setSelectedModule(targetSeries.module);
+
+    const questions = targetSeries.questionIds
+      .map(qid => dynamicBank.find(q => q.id === qid))
+      .filter((q): q is QuizQuestion => Boolean(q));
+
+    if (questions.length > 0) {
+      setCurrentExamQuestions(questions);
+    } else {
+      generateNewExamSeries();
+      return;
+    }
+    setCurrentQuestionIndex(0);
+    setUserAnswers({});
+    setExamFinished(false);
+    setExamNumber(targetSeries.seriesNumber);
+  };
+
+  // Next series cycler
+  const loadNextPredefinedSeries = () => {
+    if (selectedSeriesId === 'random') {
+      generateNewExamSeries();
+      return;
+    }
+    const currentIndex = EPS_OFFICIAL_SERIES.findIndex(s => s.id === selectedSeriesId);
+    if (currentIndex >= 0 && currentIndex < EPS_OFFICIAL_SERIES.length - 1) {
+      const next = EPS_OFFICIAL_SERIES[currentIndex + 1];
+      loadPredefinedSeries(next.id);
+    } else {
+      loadPredefinedSeries(EPS_OFFICIAL_SERIES[0].id);
+    }
+  };
+
+  // Helper to start or generate a random 10-question set
   const generateNewExamSeries = () => {
     if (eligibleQuestions.length === 0) return;
 
+    setSelectedSeriesId('random');
     // Shuffle and pick up to 10
     const shuffled = [...eligibleQuestions].sort(() => 0.5 - Math.random());
     const picked = shuffled.slice(0, Math.min(10, shuffled.length));
@@ -84,15 +133,15 @@ export const CrmefQuizHub: React.FC = () => {
     setCurrentQuestionIndex(0);
     setUserAnswers({});
     setExamFinished(false);
-    setExamNumber(prev => prev + 1);
+    setExamNumber(prev => (prev < 100 ? prev + 1 : 1));
   };
 
   // Start initial exam if not started
   React.useEffect(() => {
-    if (currentExamQuestions.length === 0 && eligibleQuestions.length > 0) {
-      generateNewExamSeries();
+    if (currentExamQuestions.length === 0) {
+      loadPredefinedSeries('eps-series-01');
     }
-  }, [selectedSubjectId, selectedModule, dynamicBank]);
+  }, []);
 
   // Answer handler
   const handleSelectOption = (questionId: string, optionId: string) => {
@@ -375,15 +424,15 @@ export const CrmefQuizHub: React.FC = () => {
           </button>
 
           <button
-            onClick={() => setHubMode('browse')}
+            onClick={() => setHubMode('referentiel')}
             className={`py-3 px-4 rounded-xl text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 transition-all cursor-pointer ${
-              hubMode === 'browse'
+              hubMode === 'referentiel'
                 ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
-            <BookOpen className="w-4 h-4" />
-            <span>2. Consulter Questions & Corrections</span>
+            <Scale className="w-4 h-4" />
+            <span>2. Cadres de Référence CNEE</span>
           </button>
 
           <button
@@ -495,7 +544,7 @@ export const CrmefQuizHub: React.FC = () => {
               <div className="flex items-center justify-between">
                 <label className="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#006233]" />
-                  <span>Choisissez votre Spécialité (12 Filières Officielles MENPS) :</span>
+                  <span>Choisissez votre Spécialité (13 Filières Officielles MENPS) :</span>
                 </label>
                 <span className="text-xs text-slate-500 font-semibold">Primaire & Secondaire</span>
               </div>
@@ -594,7 +643,72 @@ export const CrmefQuizHub: React.FC = () => {
                     </p>
                   </div>
                 </button>
+              </div>
+            </div>
 
+            {/* ================= 4. SÉLECTION DES SÉRIES OFFICIELLES (MOTEUR HYBRIDE) ================= */}
+            <div className="space-y-3 pt-3 border-t border-slate-100">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <label className="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center gap-2">
+                  <ListOrdered className="w-4 h-4 text-blue-600" />
+                  <span>Séries Numérotées & Tirages Inédits (10 Questions par Série) :</span>
+                </label>
+                <span className="text-[11px] text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200 font-bold self-start sm:self-auto">
+                  {dynamicBank.length} Questions Certifiées · Conformes Annales CNEE
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+                {/* Option 0 : Simulation Aléatoire Inédite */}
+                <button
+                  onClick={generateNewExamSeries}
+                  className={`p-3.5 rounded-2xl border-2 text-left transition-all cursor-pointer flex items-center justify-between gap-3 ${
+                    selectedSeriesId === 'random'
+                      ? 'border-blue-600 bg-blue-50/80 ring-2 ring-blue-600/20 shadow-xs'
+                      : 'border-slate-200 hover:border-blue-300 bg-white hover:bg-slate-50'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-xl bg-blue-600 text-white font-black text-sm flex items-center justify-center shrink-0">
+                      🎲
+                    </div>
+                    <div>
+                      <div className="text-xs font-black text-slate-900">Tirage Aléatoire Inédit</div>
+                      <span className="text-[11px] text-slate-500 block">10 Qs tirées au sort sans répétition</span>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-slate-400 shrink-0" />
+                </button>
+
+                {/* Séries Officielles Prédéfinies */}
+                {EPS_OFFICIAL_SERIES.map(s => {
+                  const isSel = selectedSeriesId === s.id;
+                  return (
+                    <button
+                      key={s.id}
+                      onClick={() => loadPredefinedSeries(s.id)}
+                      className={`p-3.5 rounded-2xl border-2 text-left transition-all cursor-pointer flex items-start justify-between gap-2.5 ${
+                        isSel
+                          ? 'border-blue-600 bg-blue-50/80 ring-2 ring-blue-600/20 shadow-xs'
+                          : 'border-slate-200 hover:border-blue-300 bg-white hover:bg-slate-50'
+                      }`}
+                    >
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-1.5">
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-black uppercase ${
+                            s.module === 'didactique' ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'
+                          }`}>
+                            Série {s.seriesNumber}
+                          </span>
+                          <span className="text-[10px] text-slate-500 font-medium">({s.examYear})</span>
+                        </div>
+                        <div className="text-xs font-extrabold text-slate-900 leading-snug line-clamp-1">{s.title}</div>
+                        <div className="text-[10px] font-arabic text-slate-600 text-right dir-rtl line-clamp-1">{s.titleAr}</div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-slate-400 shrink-0 mt-1" />
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -761,19 +875,25 @@ export const CrmefQuizHub: React.FC = () => {
                   </div>
                 </div>
 
-                {/* ACTION D'OR : REPLAY AVEC NOUVEL EXEMPLAIRE DE 10 QUESTIONS */}
+                {/* ACTION D'OR : PASSER À LA SÉRIE SUIVANTE OU TIRAGE ALÉATOIRE */}
                 <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div className="text-xs text-slate-600">
-                    <span className="font-bold text-slate-900">Plus de 3 000 questions en réserve.</span> Chaque clic génère un tirage exclusif pour automatiser vos réflexes d'admissibilité.
+                    <span className="font-bold text-slate-900">Banque nationale certifiée.</span> Enchaînez les séries pour automatiser vos réflexes d'admissibilité au concours.
                   </div>
 
-                  <div className="flex items-center gap-3 w-full sm:w-auto">
+                  <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
                     <button
-                      onClick={generateNewExamSeries}
-                      className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-sm rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30 transition-all cursor-pointer"
+                      onClick={loadNextPredefinedSeries}
+                      className="w-full sm:w-auto px-6 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-sm rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30 transition-all cursor-pointer"
                     >
                       <RotateCcw className="w-4 h-4" />
-                      <span>Passer un Autre Exemplaire (10 Nouvelles Questions)</span>
+                      <span>🔄 Lancer la Série Suivante</span>
+                    </button>
+                    <button
+                      onClick={generateNewExamSeries}
+                      className="w-full sm:w-auto px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer border border-slate-300"
+                    >
+                      <span>🎲 Tirage Inédit Aléatoire</span>
                     </button>
                   </div>
                 </div>
@@ -915,134 +1035,164 @@ export const CrmefQuizHub: React.FC = () => {
         </div>
       )}
 
-      {/* ================= MODE 2 : CONSULTER TOUTES LES QUESTIONS ET LEURS CORRECTIONS DIRECTEMENT ================= */}
-      {hubMode === 'browse' && (
+      {/* ================= MODE 2 : CADRES DE RÉFÉRENCE OFFICIELS DU CONCOURS CRMEF (CNEE & MENPS) ================= */}
+      {hubMode === 'referentiel' && (
         <div className="space-y-6">
-          <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div>
-                <h3 className="text-lg font-black text-slate-900 flex items-center gap-2">
-                  <BookOpen className="w-5 h-5 text-blue-600" />
-                  <span>Répertoire Exhaustif des Questions & Corrigés Détaillés</span>
-                </h3>
-                <p className="text-xs text-slate-500">
-                  Consultez directement chaque question avec sa réponse validée et son analyse didactique officielle.
-                </p>
+          <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold border border-blue-200">
+              <Scale className="w-4 h-4" />
+              <span>Cadres de Référence Officiels · Centre National des Examens et de l’Évaluation (CNEE)</span>
+            </div>
+            <h3 className="text-xl sm:text-2xl font-black text-slate-900">
+              Cartographie Officielle des Épreuves & Compétences Exigibles
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-4xl">
+              Conformément aux arrêtés ministériels et aux notes de cadrage du CNEE, chaque concours de recrutement des cadres enseignants au Maroc évalue rigoureusement les candidats sur des domaines précis. Retrouvez ci-dessous la structure officielle de notation, les sous-domaines de compétence et les pondérations certificatives.
+            </p>
+          </div>
+
+          {/* Silo 1 : Épreuve d'EPS (Didactique et Spécialité) */}
+          <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+              <div className="flex items-center gap-3">
+                <span className="w-10 h-10 rounded-xl bg-blue-600 text-white font-black text-sm flex items-center justify-center">
+                  EPS
+                </span>
+                <div>
+                  <h4 className="text-base sm:text-lg font-black text-slate-900">
+                    Cadre de Référence de la Filière EPS (Secondaire Collégial & Qualifiant)
+                  </h4>
+                  <p className="text-xs text-[#006233] font-arabic font-bold">
+                    الإطار المرجعي الرسمي لمباراة توظيف أساتذة التربية البدنية والرياضية بالمغرب
+                  </p>
+                </div>
               </div>
-              <span className="text-xs bg-blue-50 text-blue-700 font-bold px-3 py-1 rounded-full border border-blue-200 self-start sm:self-auto">
-                {browsableQuestions.length} Questions affichées
-              </span>
+              <button
+                onClick={() => {
+                  setSelectedSubjectId('eps');
+                  setSelectedModule('didactique');
+                  setHubMode('exam');
+                }}
+                className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl shadow-xs cursor-pointer transition-all self-start sm:self-auto"
+              >
+                🎯 S'entraîner sur ce Cadre (10 Qs) →
+              </button>
             </div>
 
-            {/* Barre de Recherche et Filtres */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-              <div className="relative">
-                <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />
-                <input
-                  type="text"
-                  placeholder="Rechercher par mot-clé (ex: TaRL, Piaget, VMA, Loi 51.17, ZPD...)"
-                  value={searchQuery}
-                  onChange={e => setSearchQuery(e.target.value)}
-                  className="w-full pl-9 pr-4 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Domaine 1 : Didactique EPS */}
+              <div className="p-5 rounded-2xl border-2 border-emerald-200 bg-emerald-50/30 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-black uppercase text-[#006233] bg-emerald-100 px-2.5 py-1 rounded-md">
+                    Domaine 1 · Pondération : 50%
+                  </span>
+                  <span className="text-xs text-slate-500 font-semibold">Épreuve Didactique</span>
+                </div>
+                <h5 className="text-sm font-extrabold text-slate-900">
+                  Didactique de l'EPS & Ingénierie Pédagogique
+                </h5>
+                <ul className="space-y-2 text-xs text-slate-700 leading-relaxed">
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#006233] mt-1.5 shrink-0" />
+                    <span><strong>1.1 Orientations Pédagogiques (2007 Lycée & 2009 Collège) :</strong> OTI, OTC, compétences motrices et méthodologiques, démarche de projet.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#006233] mt-1.5 shrink-0" />
+                    <span><strong>1.2 Conception et Conduite de Séance :</strong> Fiche pédagogique en 3 temps (préparatoire, principal, final), situations-problèmes motrices, variables didactiques.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#006233] mt-1.5 shrink-0" />
+                    <span><strong>1.3 Évaluation Certificative (Baccalauréat) :</strong> Grille officielle 10/6/4 (Performance 10 pts, Maîtrise d'exécution 6 pts, Rôles sociaux et civiques 4 pts).</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#006233] mt-1.5 shrink-0" />
+                    <span><strong>1.4 Sécurité et Responsabilité Juridique :</strong> Prévention des accidents, sécurité active/passive, dahir de 1958 et circulaires ministérielles d'urgence.</span>
+                  </li>
+                </ul>
               </div>
 
-              <div>
-                <select
-                  value={filterTheme}
-                  onChange={e => setFilterTheme(e.target.value)}
-                  className="w-full py-2.5 px-3 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium"
-                >
-                  <option value="all">Tous les thèmes ({dynamicBank.length})</option>
-                  {uniqueThemes.map(t => (
-                    <option key={t} value={t}>{t}</option>
-                  ))}
-                </select>
+              {/* Domaine 2 : Spécialité EPS */}
+              <div className="p-5 rounded-2xl border-2 border-red-200 bg-red-50/30 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-black uppercase text-[#c1272d] bg-red-100 px-2.5 py-1 rounded-md">
+                    Domaine 2 · Pondération : 50%
+                  </span>
+                  <span className="text-xs text-slate-500 font-semibold">Épreuve Académique</span>
+                </div>
+                <h5 className="text-sm font-extrabold text-slate-900">
+                  Sciences du Sport & Spécialité EPS
+                </h5>
+                <ul className="space-y-2 text-xs text-slate-700 leading-relaxed">
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#c1272d] mt-1.5 shrink-0" />
+                    <span><strong>2.1 Physiologie de l'Effort & Bioénergétique :</strong> Filières ATP-CP, glycolyse aérobie/anaérobie, VO2max, VMA, formule de Karvonen, seuils ventilatoires.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#c1272d] mt-1.5 shrink-0" />
+                    <span><strong>2.2 Biomécanique Humaine :</strong> Répulsion du sol (GRF), leviers articulaires de 3ème genre, trajectoires de lancer et cinématique de la course.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#c1272d] mt-1.5 shrink-0" />
+                    <span><strong>2.3 Contrôle Moteur & Apprentissage :</strong> Théorie du schéma de Schmidt (PMG), modèle de Fitts et Posner, boucles sensorimotrices ouvertes et fermées.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#c1272d] mt-1.5 shrink-0" />
+                    <span><strong>2.4 Praxéologie Motrice (Parlebas) :</strong> Situations sociomotrices, indice CAI, réseaux de communication motrice, gestèmes et praxèmes.</span>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
 
-          {/* Liste des Questions & Corrigés */}
-          <div className="space-y-4">
-            {browsableQuestions.map((q, idx) => (
-                <div key={q.id} className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-2xs space-y-4">
-                  <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
-                    <div className="flex items-center gap-2">
-                      <span className="px-2.5 py-0.5 rounded-md bg-blue-50 text-blue-800 text-xs font-black">
-                        #{idx + 1}
-                      </span>
-                      <span className="text-xs font-bold text-slate-600 uppercase tracking-wide">
-                        {q.theme}
-                      </span>
-                    </div>
-                    <span className="text-[11px] font-semibold text-slate-400 uppercase">
-                      Module : {q.module}
-                    </span>
-                  </div>
-
-                  <div className="space-y-1">
-                    <h4 className="text-sm sm:text-base font-extrabold text-slate-900 leading-snug">
-                      {q.question}
-                    </h4>
-                    {q.questionAr && (
-                      <p className="text-xs sm:text-sm font-arabic font-bold text-slate-700 text-right dir-rtl">
-                        {q.questionAr}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Options Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {q.options.map((opt, oIdx) => {
-                      const isCorrect = opt.id === q.correctOptionId;
-                      const letter = String.fromCharCode(65 + oIdx);
-
-                      return (
-                        <div
-                          key={opt.id}
-                          className={`p-3 rounded-xl border flex items-start gap-2.5 text-xs ${
-                            isCorrect
-                              ? 'border-emerald-300 bg-emerald-50 text-emerald-950 font-bold'
-                              : 'border-slate-200 bg-slate-50/50 text-slate-600'
-                          }`}
-                        >
-                          <span className={`w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-black shrink-0 ${isCorrect ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-700'}`}>
-                            {letter}
-                          </span>
-                          <div className="flex-1">
-                            <div>{opt.text}</div>
-                            {opt.textAr && <div className="font-arabic text-right dir-rtl text-[11px] text-slate-500 mt-0.5">{opt.textAr}</div>}
-                          </div>
-                          {isCorrect && (
-                            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  {/* Justification Pédagogique */}
-                  <div className="bg-slate-50 rounded-xl p-4 border border-slate-200/80 space-y-2 text-xs">
-                    <div className="font-bold text-blue-900 flex items-center gap-1.5">
-                      <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-                      <span>Justification & Argumentation Didactique :</span>
-                    </div>
-                    <p className="text-slate-700 leading-relaxed">
-                      {q.explanation}
-                    </p>
-                    {q.explanationAr && (
-                      <p className="font-arabic text-slate-600 text-right dir-rtl leading-relaxed">
-                        {q.explanationAr}
-                      </p>
-                    )}
-                    {q.officialReference && (
-                      <div className="text-[11px] text-slate-500 pt-1 border-t border-slate-200/60">
-                        Source Officielle : <strong>{q.officialReference}</strong>
-                      </div>
-                    )}
-                  </div>
+          {/* Silo 2 : Tronc Commun Sciences de l'Éducation */}
+          <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+              <div className="flex items-center gap-3">
+                <span className="w-10 h-10 rounded-xl bg-indigo-600 text-white font-black text-sm flex items-center justify-center">
+                  SE
+                </span>
+                <div>
+                  <h4 className="text-base sm:text-lg font-black text-slate-900">
+                    Cadre de Référence : Sciences de l'Éducation (Tronc Commun Universel)
+                  </h4>
+                  <p className="text-xs text-indigo-700 font-arabic font-bold">
+                    مستجدات نظام التربية والتكوين وعلم النفس التربوي والديداكتيك العام (100% من المترشحين)
+                  </p>
                 </div>
-              ))}
+              </div>
+              <button
+                onClick={() => {
+                  setSelectedModule('sciences_education');
+                  setHubMode('exam');
+                }}
+                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow-xs cursor-pointer transition-all self-start sm:self-auto"
+              >
+                🎯 Passer un Test Tronc Commun (10 Qs) →
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+              <div className="p-4 rounded-2xl border border-indigo-200 bg-indigo-50/30 space-y-2">
+                <span className="font-black uppercase text-indigo-700 block">Axe 1 · Législation & Réformes</span>
+                <p className="text-slate-700 leading-relaxed">
+                  Loi-Cadre 51.17 (Articles 4, 8, 31), Feuille de Route 2022-2026 (3 axes Élève/Professeur/Établissement, 12 engagements), modèle des Écoles Pionnières (مدارس الريادة) et méthode de remédiation TaRL.
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl border border-indigo-200 bg-indigo-50/30 space-y-2">
+                <span className="font-black uppercase text-indigo-700 block">Axe 2 · Psychopédagogie</span>
+                <p className="text-slate-700 leading-relaxed">
+                  Constructivisme (Jean Piaget, assimilation, accommodation, schèmes), Socioconstructivisme (Lev Vygotski, Zone Proximale de Développement ZPD), Béhaviorisme (Skinner) et Théorie de l'étayage (Jérome Bruner).
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl border border-indigo-200 bg-indigo-50/30 space-y-2">
+                <span className="font-black uppercase text-indigo-700 block">Axe 3 · Didactique & Docimologie</span>
+                <p className="text-slate-700 leading-relaxed">
+                  Transposition didactique (Yves Chevallard), Contrat didactique (Guy Brousseau), typologie des évaluations (Diagnostique, Formative, Sommatrice, Formatrice) et techniques de remédiation différenciée.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       )}
