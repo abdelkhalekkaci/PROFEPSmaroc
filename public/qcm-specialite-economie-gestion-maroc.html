@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QCM Spécialité Économie & Gestion CRMEF Maroc · Macroéconomie, Comptabilité, Finance & Management</title>
+  <meta name="description" content="Plateforme officielle d'entraînement à l'épreuve de Spécialité Économie et Gestion du concours CRMEF Maroc. Série complète de 10 questions certifiées avec calcul de note sur 20, diagnostic officiel d'admissibilité et démonstrations techniques pas à pas.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    code, pre {
+      font-family: 'JetBrains Mono', monospace;
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col selection:bg-amber-500 selection:text-white">
+
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <div class="bg-gradient-to-r from-amber-950 via-slate-900 to-amber-950 border-b border-amber-800/40 text-amber-200 text-xs sm:text-sm py-2 px-4 text-center font-medium">
+    <span>📊 Épreuve de Spécialité : <strong class="text-white">Sciences Économiques & Gestion (Concours CRMEF Maroc)</strong> · Zéro Pop-up</span>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="/concours-crmef-hub.html" class="inline-flex items-center gap-2 text-slate-300 hover:text-white transition font-medium text-sm group">
+        <svg class="w-4 h-4 transform group-hover:-translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        <span>Retour au Hub Concours CRMEF</span>
+      </a>
+
+      <div class="flex items-center gap-2 text-xs">
+        <span class="px-2.5 py-1 rounded bg-amber-950 text-amber-300 border border-amber-800 font-semibold">Spécialité Éco-Gestion</span>
+        <span class="hidden sm:inline px-2.5 py-1 rounded bg-slate-800 text-slate-300">Série Certifiée (10 questions)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN WRAPPER -->
+  <main class="flex-1 max-w-4xl w-full mx-auto px-4 py-6 sm:py-10">
+
+    <!-- HERO SECTION -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-900/50 border border-amber-700/50 text-amber-300 text-xs font-semibold mb-3">
+        <span>💼 Macroéconomie · CGNC Maroc · Analyse financière · Stratégie d'entreprise & Droit des affaires</span>
+      </div>
+      <h1 class="text-2xl sm:text-4xl font-extrabold text-white mb-3">
+        QCM Spécialité Économie & Gestion · <span class="text-amber-400">CRMEF Maroc</span>
+      </h1>
+      <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
+        Test académique de haute précision conforme au cadre de référence officiel du CNEE : théories des marchés, agrégats macroéconomiques, politique monétaire, comptabilité générale marocaine (CGNC), équilibre financier (FRNG/BFR/TN) et théories des organisations.
+      </p>
+    </div>
+
+    <!-- QUIZ CONTAINER -->
+    <div id="quiz-container" class="bg-slate-950 border border-slate-800 rounded-2xl p-4 sm:p-8 shadow-2xl relative overflow-hidden">
+      
+      <!-- PROGRESS BAR & META -->
+      <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-800 mb-6">
+        <div>
+          <span class="text-xs uppercase tracking-wider text-slate-400 font-bold block">Progression</span>
+          <span id="question-counter" class="text-lg font-black text-amber-400">Question 1 / 10</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="text-right">
+            <span class="text-xs text-slate-400 block font-medium">Domaine Spécialisé</span>
+            <span id="category-badge" class="inline-block text-xs font-bold text-amber-300 bg-amber-950/80 border border-amber-800/80 px-2.5 py-0.5 rounded">
+              Macroéconomie & Agrégats
+            </span>
+          </div>
+          <div class="text-right pl-2 border-l border-slate-800">
+            <span class="text-xs text-slate-400 block font-medium">Temps écoulé</span>
+            <span id="timer-display" class="text-xs font-mono font-bold text-slate-300">00:00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROGRESS TRACK -->
+      <div class="w-full bg-slate-900 h-2 rounded-full mb-8 overflow-hidden">
+        <div id="progress-bar" class="bg-gradient-to-r from-amber-500 to-yellow-400 h-full w-[10%] transition-all duration-300"></div>
+      </div>
+
+      <!-- QUESTION TEXT -->
+      <div class="mb-8">
+        <div class="text-xs font-semibold text-amber-400 mb-1 flex items-center gap-1.5">
+          <span>Question académique & calcul technique :</span>
+        </div>
+        <h2 id="question-text" class="text-base sm:text-lg font-bold text-slate-100 leading-relaxed text-left">
+          Chargement de la question technique...
+        </h2>
+      </div>
+
+      <!-- CHOICES -->
+      <div id="choices-container" class="space-y-3 mb-8">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <!-- NAVIGATION BUTTONS -->
+      <div class="flex items-center justify-between pt-4 border-t border-slate-800">
+        <button id="prev-btn" onclick="prevQuestion()" disabled class="px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-400 hover:text-slate-200 hover:bg-slate-800 disabled:opacity-30 disabled:pointer-events-none transition text-sm font-semibold flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+          Précédent
+        </button>
+
+        <button id="next-btn" onclick="nextQuestion()" class="px-6 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold transition shadow-lg shadow-amber-900/40 text-sm flex items-center gap-2">
+          <span>Suivant</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+
+        <button id="submit-btn" onclick="finishQuiz()" class="hidden px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold transition shadow-lg shadow-emerald-900/40 text-sm flex items-center gap-2">
+          <span>Valider et afficher la note /20</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- RESULT CONTAINER (HIDDEN INITIALLY) -->
+    <div id="result-container" class="hidden bg-slate-950 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative">
+      
+      <div class="text-center pb-6 border-b border-slate-800 mb-6">
+        <div id="score-badge" class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-amber-900/50 border-4 border-amber-500 text-3xl font-black text-white mb-4">
+          <span id="final-score">--/20</span>
+        </div>
+        <h3 id="diagnostic-title" class="text-xl sm:text-2xl font-bold text-white mb-2">Diagnostic d'Admissibilité CRMEF</h3>
+        <p id="diagnostic-desc" class="text-slate-400 text-sm max-w-lg mx-auto">
+          Analyse scientifique de performance basée sur les critères de sélection académique du Centre National des Examens et de l'Évaluation (CNEE).
+        </p>
+      </div>
+
+      <!-- STATS GRID -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 text-center">
+          <span class="text-xs text-slate-400 block font-medium">Réponses Exactes</span>
+          <span id="stat-correct" class="text-lg font-black text-emerald-400">0</span>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 text-center">
+          <span class="text-xs text-slate-400 block font-medium">Erreurs Techniques</span>
+          <span id="stat-wrong" class="text-lg font-black text-red-400">0</span>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 text-center">
+          <span class="text-xs text-slate-400 block font-medium">Taux d'Exactitude</span>
+          <span id="stat-accuracy" class="text-lg font-black text-amber-400">0%</span>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 text-center">
+          <span class="text-xs text-slate-400 block font-medium">Chronomètre</span>
+          <span id="stat-time" class="text-lg font-black text-slate-300">00:00</span>
+        </div>
+      </div>
+
+      <!-- DETAILED REVIEW ACCORDION -->
+      <div class="mb-8">
+        <h4 class="text-base font-bold text-slate-200 mb-4 flex items-center gap-2">
+          <span>Détail des solutions avec démonstrations & calculs :</span>
+          <span class="text-xs font-normal text-amber-400">(Revue pas à pas)</span>
+        </h4>
+        <div id="review-list" class="space-y-4">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="flex flex-wrap items-center justify-center gap-4 pt-4 border-t border-slate-800">
+        <button onclick="restartQuiz()" class="px-6 py-3 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold transition shadow-lg shadow-amber-900/40 text-sm flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+          Refaire le test
+        </button>
+        <a href="/qcm-didactique-economie-gestion-maroc.html" class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 font-semibold border border-amber-800/40 transition text-sm flex items-center gap-2">
+          ← Passer à l'épreuve Didactique Éco-Gestion
+        </a>
+        <a href="/concours-crmef-hub.html" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 font-medium border border-slate-700 transition text-sm">
+          Retour au Hub Concours
+        </a>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-800 bg-slate-950 py-6 text-center text-xs text-slate-500">
+    <p>Préparation au concours de recrutement des professeurs du secondaire qualifiant · CRMEF Maroc</p>
+    <p class="mt-1">Discipline Sciences Économiques et Gestion · Conforme aux référentiels du CNEE et du CGNC</p>
+  </footer>
+
+  <script>
+    // 10 QUESTIONS HAUTE PRECISION DE SPECIALITE ECONOMIE ET GESTION CRMEF
+    const quizData = [
+      {
+        id: "eco-sp-01",
+        category: "Microéconomie & Marchés",
+        question: "Quelles sont les cinq conditions cumulatives définissant le modèle de Concurrence Pure et Parfaite (CPP) selon la théorie néoclassique standard (Arrow-Debreu) ?",
+        options: [
+          "Monopole naturel, entente sur les prix, asymétrie d'information, barrières à l'entrée et différenciation des produits.",
+          "Atomicité du marché, homogénéité des produits, libre entrée et sortie du marché (fluidité), transparence parfaite de l'information, et parfaite mobilité des facteurs de production.",
+          "Interventionnisme étatique, blocage des prix, rationnement, quotas d'importation et subventions massives.",
+          "Bipolarité de l'offre, rendements décroissants exclusifs, absence de monnaie et troc généralisé."
+        ],
+        answer: 1,
+        explanation: "Le modèle de CPP repose sur 5 hypothèses strictes : 1) Atomicité (multitude d'acheteurs et vendeurs de taille négligeable, tous 'price takers'), 2) Homogénéité (biens jugés strictement identiques), 3) Fluidité (pas de barrières à l'entrée/sortie), 4) Transparence (information parfaite et gratuite), 5) Mobilité des facteurs (le capital et le travail se déplacent instantanément sans coût).",
+        reference: "Microéconomie Fondamentale · P. Krugman & R. Pindyck & Annales CRMEF Éco-Gestion"
+      },
+      {
+        id: "eco-sp-02",
+        category: "Comptabilité Nationale & PIB",
+        question: "Selon le Système de Comptabilité Nationale (SCN) adopté par le Haut Commissariat au Plan (HCP) au Maroc, quelle est la formule exacte du Produit Intérieur Brut (PIB) selon l'optique de la 'Dépense' ?",
+        options: [
+          "PIB = Somme des Valeurs Ajoutées brutes + Impôts nets de subventions sur les produits.",
+          "PIB = Consommation finale des ménages et des administrations publiques + Formation Brute de Capital Fixe (FBCF) + Variation des stocks + (Exportations - Importations de biens et services).",
+          "PIB = Rémunération des salariés + Excédent Brut d'Exploitation + Revenus de la propriété.",
+          "PIB = Masse monétaire M3 - Dépenses budgétaires de l'État."
+        ],
+        answer: 1,
+        explanation: "Selon l'optique des dépenses (demande finale) : PIB = Dépenses de consommation finale (C) + Investissement ou Formation Brute de Capital Fixe (FBCF) + Variation des stocks (ΔS) + Solde extérieur des biens et services (X - M). L'option A correspond à l'optique production, et l'option C à l'optique revenus.",
+        reference: "Haut Commissariat au Plan (HCP) · Les Comptes de la Nation & Manuel de Comptabilité Nationale"
+      },
+      {
+        id: "eco-sp-03",
+        category: "Politique Monétaire & Bank Al-Maghrib",
+        question: "Lorsque la banque centrale Bank Al-Maghrib décide de relever son principal taux directeur de 50 points de base (ex: passage de 2,5% à 3,0%), quel effet macroéconomique direct recherche-t-elle principalement ?",
+        options: [
+          "Accélérer la création monétaire et augmenter immédiatement les crédits à la consommation.",
+          "Freiner les tensions inflationnistes en renchérissant le coût du refinancement bancaire, ce qui freine la demande globale de crédit et tempère l'activité économique (politique monétaire restrictive).",
+          "Obliger les banques commerciales à distribuer des dividendes exceptionnels à l'État.",
+          "Faire chuter automatiquement les réserves de devises du Trésor public."
+        ],
+        answer: 1,
+        explanation: "La hausse du taux directeur est l'instrument central de lutte contre l'inflation. Elle augmente le coût auquel les banques commerciales se refinancent auprès de Bank Al-Maghrib. Les banques répercutent cette hausse sur les taux d'intérêt débiteurs appliqués aux ménages et entreprises, freinant l'endettement, la demande globale et donc la hausse des prix.",
+        reference: "Loi n° 40-17 portant statut de Bank Al-Maghrib & Rapports Annuels sur la Politique Monétaire"
+      },
+      {
+        id: "eco-sp-04",
+        category: "Commerce International & Avantages Comparatifs",
+        question: "D'après la théorie des avantages comparatifs de David Ricardo (1817), pourquoi deux pays ont-ils toujours intérêt à échanger même si l'un est plus efficace que l'autre dans la production de tous les biens ?",
+        options: [
+          "Parce que le pays le plus fort doit coloniser le pays le plus faible pour exploiter ses ressources.",
+          "Parce que chaque pays a intérêt à se spécialiser dans la production du bien pour lequel son désavantage de coût relatif est le plus faible (ou son avantage relatif le plus fort), puis à échanger les surplus, dégageant un gain mutuel à l'échange.",
+          "Parce que les taux de change sont fixés par traité international unilatéral.",
+          "Parce que le commerce international n'obéit qu'au troc sans mesure de valeur-travail."
+        ],
+        answer: 1,
+        explanation: "Contrairement à Adam Smith (avantage absolu), Ricardo démontre que c'est la différence des coûts d'opportunité relatifs qui justifie la spécialisation. Même si le Portugal produit le vin et le drap plus vite que l'Angleterre, le Portugal gagne à concentrer ses ressources là où sa supériorité est maximale (le vin) et à importer le drap anglais.",
+        reference: "David Ricardo (1817) · Des Principes de l'Économie Politique et de l'Impôt"
+      },
+      {
+        id: "eco-sp-05",
+        category: "Comptabilité Générale (CGNC Maroc)",
+        question: "Une entreprise marocaine acquiert le 01/01/N une machine industrielle pour 100 000 DH HT, amortissable sur 5 ans selon le mode dégressif fiscal marocain (coefficient fiscal = 2 pour une durée de 5 ans). Que vaut la dotation d'amortissement de la première année (N) ?",
+        options: [
+          "20 000 DH",
+          "40 000 DH",
+          "50 000 DH",
+          "10 000 DH"
+        ],
+        answer: 1,
+        explanation: "Taux linéaire = 100 / 5 = 20%. Taux dégressif = Taux linéaire × Coefficient = 20% × 2 = 40%. La première année, la base de calcul est la valeur d'origine (100 000 DH). Dotation N = 100 000 × 40% = 40 000 DH. (La VNA au 31/12/N sera de 60 000 DH).",
+        reference: "Code Général des Impôts (CGI Maroc) · Article 10 & Plan Comptable Général Marocain (CGNC)"
+      },
+      {
+        id: "eco-sp-06",
+        category: "Analyse Financière & Équilibre du Bilan",
+        question: "Dans l'analyse financière fonctionnelle, comment calcule-t-on le Fonds de Roulement Net Global (FRNG), et quelle est la relation fondamentale qui le lie au Besoin en Fonds de Roulement (BFR) et à la Trésorerie Nette (TN) ?",
+        options: [
+          "FRNG = Actif Circulant - Passif Circulant ; Relation : TN = FRNG + BFR",
+          "FRNG = Ressources Durables (Financement Permanent) - Emplois Stables (Actif Immobilisé) ; Relation : TN = FRNG - BFR",
+          "FRNG = Trésorerie Actif - Trésorerie Passif ; Relation : BFR = FRNG × TN",
+          "FRNG = Chiffre d'affaires - Résultat d'exploitation ; Relation : TN = FRNG / BFR"
+        ],
+        answer: 1,
+        explanation: "Le FRNG mesure l'excédent des capitaux stables finançant les investissements à long terme : FRNG = Financement Permanent - Actif Immobilisé. L'équation fondamentale de l'équilibre financier fonctionnel s'énonce : Trésorerie Nette (TN) = FRNG - BFR. Si le FRNG est supérieur au BFR, la trésorerie est positive.",
+        reference: "Analyse Financière et Gestion Financière d'Entreprise · Plan Comptable Marocain"
+      },
+      {
+        id: "eco-sp-07",
+        category: "Soldes Intermédiaires de Gestion (ESG)",
+        question: "Dans l'État des Soldes de Gestion (ESG) prévu par le plan comptable marocain, quel agrégat mesure la richesse brute créée par l'activité productive de l'entreprise avant rémunération des facteurs travail et capital ?",
+        options: [
+          "Le Résultat Net de l'exercice.",
+          "La Valeur Ajoutée (VA = Marge commerciale + Production de l'exercice - Consommations de l'exercice).",
+          "Le Chiffre d'affaires consolidé.",
+          "Le Résultat Non Courant."
+        ],
+        answer: 1,
+        explanation: "La Valeur Ajoutée (VA) est l'indicateur central de création de richesse économique. Elle rémunère ensuite les salariés (charges de personnel), l'État (impôts et taxes), les prêteurs (charges d'intérêts), l'entreprise elle-même (autofinancement/amortissements) et les actionnaires (dividendes).",
+        reference: "CGNC · État des Soldes de Gestion (ESG) & Ministère de l'Économie et des Finances"
+      },
+      {
+        id: "eco-sp-08",
+        category: "Management & Structures d'Entreprise",
+        question: "Selon la typologie des configurations organisationnelles de Henry Mintzberg, quel mécanisme principal de coordination caractérise la 'Bureaucratie Mécaniste' (ex: grandes usines automobiles, administrations standardisées) ?",
+        options: [
+          "L'ajustement mutuel par communication informelle directe.",
+          "La standardisation des procédés de travail (mise au point de règles, procédures écrites et modes opératoires par la technostructure).",
+          "La standardisation des qualifications par formation universitaire préalable.",
+          "La supervision directe exclusive du PDG sans aucun cadre intermédiaire."
+        ],
+        answer: 1,
+        explanation: "Mintzberg identifie 5 mécanismes de coordination. La bureaucratie mécaniste repose sur la 'standardisation des procédés' conçue par la technostructure (bureau des méthodes, ingénieurs qualité) afin que le travail d'exécution soit prévisible, routinier et standardisé.",
+        reference: "Henry Mintzberg · Structure et Dynamique des Organisations (1982)"
+      },
+      {
+        id: "eco-sp-09",
+        category: "Stratégie d'Entreprise & Modèle de Porter",
+        question: "Dans l'analyse stratégique de Michael Porter, quelles sont les 'Cinq Forces Concurrentielles' qui déterminent l'attractivité et la rentabilité intrinsèque d'un secteur économique ?",
+        options: [
+          "Le PIB, le taux d'inflation, la balance commerciale, la fiscalité et le code des douanes.",
+          "L'intensité de la rivalité entre concurrents du secteur, la menace des nouveaux entrants, la menace des produits de substitution, le pouvoir de négociation des clients, et le pouvoir de négociation des fournisseurs.",
+          "Le marketing mix (Prix, Produit, Promotion, Place) et la politique RH.",
+          "Le bilan, le CPC, l'ESG, le tableau de financement et l'ETIC."
+        ],
+        answer: 1,
+        explanation: "Le modèle des 5 forces de Porter (1979) évalue l'environnement concurrentiel élargi d'un secteur. L'action combinée de ces 5 forces détermine l'intensité concurrentielle et la capacité moyenne des entreprises du secteur à dégager un profit supérieur au coût du capital.",
+        reference: "Michael E. Porter · Choix Stratégiques et Concurrence (Competitive Strategy)"
+      },
+      {
+        id: "eco-sp-10",
+        category: "Droit des Sociétés & Formes Juridiques au Maroc",
+        question: "Selon la loi marocaine n° 5-96 modifiée et complétée (sur la SARL, SNC, SCS) et la loi n° 17-95 sur la SA, quelle est la règle légale en vigueur concernant le capital social minimum d'une Société à Responsabilité Limitée (SARL) au Maroc ?",
+        options: [
+          "Le capital minimum est fixé obligatoirement à 300 000 DH sous peine de nullité.",
+          "Aucun montant minimum de capital n'est exigé par la loi (fixé librement par les associés dans les statuts depuis la loi 24-10 supprimant le seuil de 10 000 DH), et la responsabilité des associés est limitée à leurs apports.",
+          "Le capital doit être versé en devises étrangères uniquement auprès d'une banque publique.",
+          "La SARL doit obligatoirement compter au moins 50 actionnaires dès sa constitution."
+        ],
+        answer: 1,
+        explanation: "Depuis la réforme de la loi 24-10 (modifiant la loi 5-96 sur la SARL au Maroc), l'exigence du capital minimum de 10 000 DH a été abrogée afin d'encourager l'entrepreneuriat et la création d'entreprises : le capital est librement fixé par les statuts (même 1 DH symbolique), tandis que la SA exige un minimum de 300 000 DH (ou 3 000 000 DH avec offre au public).",
+        reference: "Loi n° 5-96 sur la SARL modifiée par la loi n° 24-10 & Ministère de la Justice du Maroc"
+      }
+    ];
+
+    let currentQuestionIdx = 0;
+    let userAnswers = new Array(quizData.length).fill(null);
+    let secondsElapsed = 0;
+    let timerInterval = null;
+
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        secondsElapsed++;
+        const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
+        const secs = String(secondsElapsed % 60).padStart(2, '0');
+        const display = `${mins}:${secs}`;
+        const el = document.getElementById('timer-display');
+        if (el) el.textContent = display;
+      }, 1000);
+    }
+
+    function renderQuestion(idx) {
+      const q = quizData[idx];
+      document.getElementById('question-counter').textContent = `Question ${idx + 1} / ${quizData.length}`;
+      document.getElementById('category-badge').textContent = q.category;
+      document.getElementById('question-text').textContent = q.question;
+
+      const progressPct = ((idx + 1) / quizData.length) * 100;
+      document.getElementById('progress-bar').style.width = `${progressPct}%`;
+
+      const container = document.getElementById('choices-container');
+      container.innerHTML = '';
+
+      q.options.forEach((optText, optIdx) => {
+        const isSelected = userAnswers[idx] === optIdx;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.onclick = () => selectOption(optIdx);
+        btn.className = `w-full text-left p-4 rounded-xl border text-sm sm:text-base transition-all duration-200 flex items-start gap-3.5 ${
+          isSelected
+            ? 'bg-amber-950/80 border-amber-500 text-amber-100 ring-2 ring-amber-500/30 font-semibold'
+            : 'bg-slate-900 border-slate-800 text-slate-300 hover:bg-slate-850 hover:border-slate-700'
+        }`;
+
+        const markerLetter = ['A', 'B', 'C', 'D'][optIdx];
+        btn.innerHTML = `
+          <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg text-xs font-black shrink-0 ${
+            isSelected ? 'bg-amber-600 text-white shadow' : 'bg-slate-800 text-slate-400 border border-slate-700'
+          }">${markerLetter}</span>
+          <span class="leading-relaxed flex-1">${optText}</span>
+        `;
+        container.appendChild(btn);
+      });
+
+      document.getElementById('prev-btn').disabled = idx === 0;
+
+      if (idx === quizData.length - 1) {
+        document.getElementById('next-btn').classList.add('hidden');
+        document.getElementById('submit-btn').classList.remove('hidden');
+      } else {
+        document.getElementById('next-btn').classList.remove('hidden');
+        document.getElementById('submit-btn').classList.add('hidden');
+      }
+    }
+
+    function selectOption(optIdx) {
+      userAnswers[currentQuestionIdx] = optIdx;
+      renderQuestion(currentQuestionIdx);
+    }
+
+    function nextQuestion() {
+      if (currentQuestionIdx < quizData.length - 1) {
+        currentQuestionIdx++;
+        renderQuestion(currentQuestionIdx);
+      }
+    }
+
+    function prevQuestion() {
+      if (currentQuestionIdx > 0) {
+        currentQuestionIdx--;
+        renderQuestion(currentQuestionIdx);
+      }
+    }
+
+    function finishQuiz() {
+      clearInterval(timerInterval);
+
+      let correctCount = 0;
+      quizData.forEach((q, idx) => {
+        if (userAnswers[idx] === q.answer) {
+          correctCount++;
+        }
+      });
+
+      const scoreOutOf20 = (correctCount / quizData.length) * 20;
+      const accuracyPct = Math.round((correctCount / quizData.length) * 100);
+
+      document.getElementById('quiz-container').classList.add('hidden');
+      document.getElementById('result-container').classList.remove('hidden');
+
+      document.getElementById('final-score').textContent = `${scoreOutOf20}/20`;
+      document.getElementById('stat-correct').textContent = correctCount;
+      document.getElementById('stat-wrong').textContent = quizData.length - correctCount;
+      document.getElementById('stat-accuracy').textContent = `${accuracyPct}%`;
+
+      const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
+      const secs = String(secondsElapsed % 60).padStart(2, '0');
+      document.getElementById('stat-time').textContent = `${mins}:${secs}`;
+
+      const badge = document.getElementById('score-badge');
+      const title = document.getElementById('diagnostic-title');
+      const desc = document.getElementById('diagnostic-desc');
+
+      if (scoreOutOf20 >= 16) {
+        badge.className = "inline-flex items-center justify-center w-24 h-24 rounded-full bg-emerald-950/80 border-4 border-emerald-500 text-3xl font-black text-emerald-300 mb-4 shadow-xl shadow-emerald-950/50";
+        title.textContent = "Niveau Exceptionnel · Major de Concours";
+        desc.textContent = "Parfaite maîtrise des théories macroéconomiques, des normes comptables marocaines (CGNC), de l'analyse financière (FRNG/BFR) et de la stratégie d'entreprise.";
+      } else if (scoreOutOf20 >= 12) {
+        badge.className = "inline-flex items-center justify-center w-24 h-24 rounded-full bg-amber-950/80 border-4 border-amber-500 text-3xl font-black text-amber-300 mb-4 shadow-xl shadow-amber-950/50";
+        title.textContent = "Niveau Solide · Profil Admissible";
+        desc.textContent = "Bonne maîtrise des principes fondamentaux. Approfondissez les calculs d'amortissement dégressif et les subtilités juridiques du droit commercial.";
+      } else if (scoreOutOf20 >= 10) {
+        badge.className = "inline-flex items-center justify-center w-24 h-24 rounded-full bg-yellow-950/80 border-4 border-yellow-500 text-3xl font-black text-yellow-300 mb-4 shadow-xl shadow-yellow-950/50";
+        title.textContent = "Seuil d'Admissibilité Juste · Révision Recommandée";
+        desc.textContent = "Connaissances générales acquises mais hésitations sur les formules de comptabilité nationale et les agrégats de l'ESG. Travaillez les annales écrites.";
+      } else {
+        badge.className = "inline-flex items-center justify-center w-24 h-24 rounded-full bg-red-950/80 border-4 border-red-500 text-3xl font-black text-red-300 mb-4 shadow-xl shadow-red-950/50";
+        title.textContent = "Niveau Insuffisant · Risque Éliminatoire";
+        desc.textContent = "Des lacunes importantes en économie théorique et en comptabilité financière. Une révision complète du programme de licence en sciences économiques et gestion est requise.";
+      }
+
+      renderReviewList();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderReviewList() {
+      const list = document.getElementById('review-list');
+      list.innerHTML = '';
+
+      quizData.forEach((q, idx) => {
+        const userChoice = userAnswers[idx];
+        const isCorrect = userChoice === q.answer;
+
+        const card = document.createElement('div');
+        card.className = `p-4 sm:p-5 rounded-xl border ${
+          isCorrect ? 'bg-slate-900/80 border-emerald-800/60' : 'bg-slate-900/80 border-red-900/60'
+        }`;
+
+        const userOptionText = userChoice !== null ? q.options[userChoice] : 'Aucune réponse fournie';
+        const correctOptionText = q.options[q.answer];
+
+        card.innerHTML = `
+          <div class="flex items-start justify-between gap-3 mb-2">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-xs font-bold ${
+              isCorrect ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' : 'bg-red-950 text-red-300 border border-red-800'
+            }">
+              <span>${isCorrect ? '✓ Réponse Exacte' : '✗ Erreur Technique'}</span>
+            </span>
+            <span class="text-xs text-amber-400 font-semibold">${q.category} · Question ${idx + 1}</span>
+          </div>
+          
+          <h5 class="text-sm sm:text-base font-bold text-slate-100 mb-3 leading-relaxed">${q.question}</h5>
+          
+          <div class="space-y-1.5 text-xs sm:text-sm mb-3">
+            <div class="p-2.5 rounded-lg ${isCorrect ? 'bg-emerald-950/40 text-emerald-200' : 'bg-red-950/40 text-red-200'}">
+              <span class="font-bold block text-xs opacity-75">Votre réponse :</span>
+              <span>${userOptionText}</span>
+            </div>
+            ${!isCorrect ? `
+              <div class="p-2.5 rounded-lg bg-emerald-950/40 text-emerald-200 border border-emerald-800/40">
+                <span class="font-bold block text-xs opacity-75">Réponse attendue :</span>
+                <span>${correctOptionText}</span>
+              </div>
+            ` : ''}
+          </div>
+
+          <div class="p-3 rounded-lg bg-amber-950/30 border border-amber-900/40 text-xs sm:text-sm text-amber-200 leading-relaxed">
+            <strong class="text-amber-300 block mb-1">💡 Démonstration & Justification Académique :</strong>
+            ${q.explanation}
+            <div class="mt-2 pt-2 border-t border-amber-900/30 text-xs text-slate-400 flex items-center gap-1">
+              <span>📚 Référence académique :</span>
+              <span class="text-amber-300 font-medium">${q.reference}</span>
+            </div>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    function restartQuiz() {
+      currentQuestionIdx = 0;
+      userAnswers = new Array(quizData.length).fill(null);
+      secondsElapsed = 0;
+      document.getElementById('result-container').classList.add('hidden');
+      document.getElementById('quiz-container').classList.remove('hidden');
+      startTimer();
+      renderQuestion(0);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      startTimer();
+      renderQuestion(0);
+    });
+  </script>
+
+</body>
+</html>

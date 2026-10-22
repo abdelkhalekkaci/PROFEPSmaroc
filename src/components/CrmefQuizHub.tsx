@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import {
   BookOpen,
   CheckCircle2,
@@ -12,15 +12,12 @@ import {
   FileText,
   BadgeCheck,
   Zap,
-  Search,
   ExternalLink,
   Code2,
   Copy,
   Check,
   Building2,
   Scale,
-  Layers,
-  Award,
   ListOrdered,
 } from 'lucide-react';
 import {
@@ -44,8 +41,6 @@ export const CrmefQuizHub: React.FC = () => {
 
   // Dynamic questions bank (supports user additions via import)
   const [dynamicBank, setDynamicBank] = useState<QuizQuestion[]>(INITIAL_QUIZ_BANK);
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [filterTheme, setFilterTheme] = useState<string>('all');
 
   // Quiz running state
   const [currentExamQuestions, setCurrentExamQuestions] = useState<QuizQuestion[]>([]);
@@ -78,9 +73,25 @@ export const CrmefQuizHub: React.FC = () => {
     });
   }, [dynamicBank, selectedSubjectId, selectedModule]);
 
+  // Helper to start or generate a random 10-question set
+  const generateNewExamSeries = useCallback(() => {
+    if (eligibleQuestions.length === 0) return;
+
+    setSelectedSeriesId('random');
+    // Shuffle and pick up to 10
+    const shuffled = [...eligibleQuestions].sort(() => 0.5 - Math.random());
+    const picked = shuffled.slice(0, Math.min(10, shuffled.length));
+
+    setCurrentExamQuestions(picked);
+    setCurrentQuestionIndex(0);
+    setUserAnswers({});
+    setExamFinished(false);
+    setExamNumber(prev => (prev < 100 ? prev + 1 : 1));
+  }, [eligibleQuestions]);
+
   // Load a specific predefined official series
-  const loadPredefinedSeries = (seriesId: string) => {
-    const targetSeries = EPS_OFFICIAL_SERIES.find(s => s.id === seriesId);
+  const loadPredefinedSeries = useCallback((seriesId: string) => {
+    const targetSeries: PredefinedSeriesMeta | undefined = EPS_OFFICIAL_SERIES.find(s => s.id === seriesId);
     if (!targetSeries) {
       generateNewExamSeries();
       return;
@@ -103,7 +114,7 @@ export const CrmefQuizHub: React.FC = () => {
     setUserAnswers({});
     setExamFinished(false);
     setExamNumber(targetSeries.seriesNumber);
-  };
+  }, [dynamicBank, generateNewExamSeries]);
 
   // Next series cycler
   const loadNextPredefinedSeries = () => {
@@ -120,28 +131,12 @@ export const CrmefQuizHub: React.FC = () => {
     }
   };
 
-  // Helper to start or generate a random 10-question set
-  const generateNewExamSeries = () => {
-    if (eligibleQuestions.length === 0) return;
-
-    setSelectedSeriesId('random');
-    // Shuffle and pick up to 10
-    const shuffled = [...eligibleQuestions].sort(() => 0.5 - Math.random());
-    const picked = shuffled.slice(0, Math.min(10, shuffled.length));
-
-    setCurrentExamQuestions(picked);
-    setCurrentQuestionIndex(0);
-    setUserAnswers({});
-    setExamFinished(false);
-    setExamNumber(prev => (prev < 100 ? prev + 1 : 1));
-  };
-
   // Start initial exam if not started
-  React.useEffect(() => {
+  useEffect(() => {
     if (currentExamQuestions.length === 0) {
       loadPredefinedSeries('eps-series-01');
     }
-  }, []);
+  }, [currentExamQuestions.length, loadPredefinedSeries]);
 
   // Answer handler
   const handleSelectOption = (questionId: string, optionId: string) => {
@@ -207,26 +202,6 @@ export const CrmefQuizHub: React.FC = () => {
 
   const diagnosis = getScoreDiagnosis(totalScore, currentExamQuestions.length);
 
-  // Search & filter for Browse mode
-  const browsableQuestions = useMemo(() => {
-    return dynamicBank.filter(q => {
-      const matchSearch =
-        searchQuery === '' ||
-        q.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (q.questionAr && q.questionAr.includes(searchQuery)) ||
-        q.theme.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        q.explanation.toLowerCase().includes(searchQuery.toLowerCase());
-
-      const matchTheme = filterTheme === 'all' || q.theme === filterTheme;
-      return matchSearch && matchTheme;
-    });
-  }, [dynamicBank, searchQuery, filterTheme]);
-
-  // Unique themes list
-  const uniqueThemes = useMemo(() => {
-    return Array.from(new Set(dynamicBank.map(q => q.theme)));
-  }, [dynamicBank]);
-
   // JSON Import handler
   const handleImportJson = () => {
     try {
@@ -245,8 +220,9 @@ export const CrmefQuizHub: React.FC = () => {
       setDynamicBank(prev => [...prev, ...validQuestions]);
       setImportStatus({ success: true, message: `Succès : ${validQuestions.length} questions importées et ajoutées à la banque active !` });
       setImportJsonText('');
-    } catch (e: any) {
-      setImportStatus({ success: false, message: `Erreur de syntaxe JSON : ${e.message}` });
+    } catch (e: unknown) {
+      const err = e as Error;
+      setImportStatus({ success: false, message: `Erreur de syntaxe JSON : ${err.message}` });
     }
   };
 

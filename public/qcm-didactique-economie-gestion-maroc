@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QCM Didactique de l'Économie & Gestion CRMEF Maroc · Transposition, Études de Cas & APC</title>
+  <meta name="description" content="Plateforme officielle d'entraînement à l'épreuve de Didactique de l'Économie et Gestion pour le concours CRMEF Maroc (Lycée Qualifiant : Sciences Économiques et Gestion Comptable). Série complète de 10 questions avec diagnostic officiel d'admissibilité et corrigés détaillés sans pop-up.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    code, pre {
+      font-family: 'JetBrains Mono', monospace;
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col selection:bg-amber-500 selection:text-white">
+
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <div class="bg-gradient-to-r from-amber-950 via-slate-900 to-amber-950 border-b border-amber-800/40 text-amber-200 text-xs sm:text-sm py-2 px-4 text-center font-medium">
+    <span>📊 Épreuve Officielle : <strong class="text-white">Didactique de l'Économie & Gestion (Concours CRMEF Maroc)</strong> · Lycée Qualifiant · Zéro Pop-up</span>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="/concours-crmef-hub.html" class="inline-flex items-center gap-2 text-slate-300 hover:text-white transition font-medium text-sm group">
+        <svg class="w-4 h-4 transform group-hover:-translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        <span>Retour au Hub Concours CRMEF</span>
+      </a>
+
+      <div class="flex items-center gap-2 text-xs">
+        <span class="px-2.5 py-1 rounded bg-amber-950 text-amber-300 border border-amber-800 font-semibold">Didactique Éco-Gestion</span>
+        <span class="hidden sm:inline px-2.5 py-1 rounded bg-slate-800 text-slate-300">Série Certifiée (10 questions)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN WRAPPER -->
+  <main class="flex-1 max-w-4xl w-full mx-auto px-4 py-6 sm:py-10">
+
+    <!-- HERO SECTION -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-900/50 border border-amber-700/50 text-amber-300 text-xs font-semibold mb-3">
+        <span>📈 Transposition didactique · Études de cas · Exploitation documentaire (HCP/BAM) · Évaluation APC</span>
+      </div>
+      <h1 class="text-2xl sm:text-4xl font-extrabold text-white mb-3">
+        QCM Didactique Économie & Gestion · <span class="text-amber-400">CRMEF Maroc</span>
+      </h1>
+      <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
+        Évaluation complète des compétences professionnelles pour l'enseignement des filières Sciences Économiques et Gestion Comptable au lycée qualifiant : pédagogie de l'étude de cas, analyse des représentations économiques, et ingénierie de situations-problèmes socio-économiques.
+      </p>
+    </div>
+
+    <!-- QUIZ CONTAINER -->
+    <div id="quiz-container" class="bg-slate-950 border border-slate-800 rounded-2xl p-4 sm:p-8 shadow-2xl relative overflow-hidden">
+      
+      <!-- PROGRESS BAR & META -->
+      <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-800 mb-6">
+        <div>
+          <span class="text-xs uppercase tracking-wider text-slate-400 font-bold block">Progression</span>
+          <span id="question-counter" class="text-lg font-black text-amber-400">Question 1 / 10</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="text-right">
+            <span class="text-xs text-slate-400 block font-medium">Axe Didactique</span>
+            <span id="category-badge" class="inline-block text-xs font-bold text-amber-300 bg-amber-950/80 border border-amber-800/80 px-2.5 py-0.5 rounded">
+              Transposition didactique
+            </span>
+          </div>
+          <div class="text-right pl-2 border-l border-slate-800">
+            <span class="text-xs text-slate-400 block font-medium">Temps écoulé</span>
+            <span id="timer-display" class="text-xs font-mono font-bold text-slate-300">00:00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROGRESS TRACK -->
+      <div class="w-full bg-slate-900 h-2 rounded-full mb-8 overflow-hidden">
+        <div id="progress-bar" class="bg-gradient-to-r from-amber-500 to-yellow-400 h-full w-[10%] transition-all duration-300"></div>
+      </div>
+
+      <!-- QUESTION TEXT -->
+      <div class="mb-8">
+        <div class="text-xs font-semibold text-amber-400 mb-1 flex items-center gap-1.5">
+          <span>Situation didactique ou problème pédagogique :</span>
+        </div>
+        <h2 id="question-text" class="text-base sm:text-lg font-bold text-slate-100 leading-relaxed text-left">
+          Chargement de la question didactique...
+        </h2>
+      </div>
+
+      <!-- CHOICES -->
+      <div id="choices-container" class="space-y-3 mb-8">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <!-- NAVIGATION BUTTONS -->
+      <div class="flex items-center justify-between pt-4 border-t border-slate-800">
+        <button id="prev-btn" onclick="prevQuestion()" disabled class="px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-400 hover:text-slate-200 hover:bg-slate-800 disabled:opacity-30 disabled:pointer-events-none transition text-sm font-semibold flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+          Précédent
+        </button>
+
+        <button id="next-btn" onclick="nextQuestion()" class="px-6 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold transition shadow-lg shadow-amber-900/40 text-sm flex items-center gap-2">
+          <span>Suivant</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+
+        <button id="submit-btn" onclick="finishQuiz()" class="hidden px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold transition shadow-lg shadow-emerald-900/40 text-sm flex items-center gap-2">
+          <span>Terminer et générer le bilan</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- RESULT CONTAINER (HIDDEN INITIALLY) -->
+    <div id="result-container" class="hidden bg-slate-950 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative">
+      
+      <div class="text-center pb-6 border-b border-slate-800 mb-6">
+        <div id="score-badge" class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-amber-900/50 border-4 border-amber-500 text-3xl font-black text-white mb-4">
+          <span id="final-score">--/20</span>
+        </div>
+        <h3 id="diagnostic-title" class="text-xl sm:text-2xl font-bold text-white mb-2">Diagnostic d'Admissibilité CRMEF</h3>
+        <p id="diagnostic-desc" class="text-slate-400 text-sm max-w-lg mx-auto">
+          Bilan synthétique de vos compétences didactiques en économie et gestion selon les standards du Centre National des Examens et de l'Évaluation (CNEE).
+        </p>
+      </div>
+
+      <!-- STATS GRID -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 text-center">
+          <span class="text-xs text-slate-400 block font-medium">Réponses Exactes</span>
+          <span id="stat-correct" class="text-lg font-black text-emerald-400">0</span>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 text-center">
+          <span class="text-xs text-slate-400 block font-medium">Erreurs Didactiques</span>
+          <span id="stat-wrong" class="text-lg font-black text-red-400">0</span>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 text-center">
+          <span class="text-xs text-slate-400 block font-medium">Taux de Précision</span>
+          <span id="stat-accuracy" class="text-lg font-black text-amber-400">0%</span>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 text-center">
+          <span class="text-xs text-slate-400 block font-medium">Durée</span>
+          <span id="stat-time" class="text-lg font-black text-slate-300">00:00</span>
+        </div>
+      </div>
+
+      <!-- DETAILED REVIEW ACCORDION -->
+      <div class="mb-8">
+        <h4 class="text-base font-bold text-slate-200 mb-4 flex items-center gap-2">
+          <span>Corrigé détaillé et analyse didactique :</span>
+          <span class="text-xs font-normal text-amber-400">(Revue pas à pas)</span>
+        </h4>
+        <div id="review-list" class="space-y-4">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="flex flex-wrap items-center justify-center gap-4 pt-4 border-t border-slate-800">
+        <button onclick="restartQuiz()" class="px-6 py-3 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold transition shadow-lg shadow-amber-900/40 text-sm flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+          Recommencer la série
+        </button>
+        <a href="/qcm-specialite-economie-gestion-maroc.html" class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 font-semibold border border-amber-800/40 transition text-sm flex items-center gap-2">
+          Passer à l'épreuve Spécialité Économie-Gestion →
+        </a>
+        <a href="/concours-crmef-hub.html" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 font-medium border border-slate-700 transition text-sm">
+          Retour au Hub Concours
+        </a>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-800 bg-slate-950 py-6 text-center text-xs text-slate-500">
+    <p>Plateforme de préparation au concours de recrutement des professeurs du secondaire qualifiant · CRMEF Maroc</p>
+    <p class="mt-1">Filières Sciences Économiques et Gestion Comptable · Orientations Pédagogiques Officielles (MENPS Maroc)</p>
+  </footer>
+
+  <script>
+    // 10 QUESTIONS CERTIFIEES DE DIDACTIQUE DE L'ECONOMIE ET GESTION CRMEF
+    const quizData = [
+      {
+        id: "eco-did-01",
+        category: "Transposition didactique en économie",
+        question: "Dans le cadre de la transposition didactique en économie au lycée qualifiant, quelle difficulté majeure distingue les savoirs économiques des savoirs issus des sciences expérimentales ?",
+        options: [
+          "L'absence totale de manuels scolaires et de programmes officiels au Maroc.",
+          "La forte imprégnation idéologique et sociale des savoirs économiques, où les élèves arrivent en classe avec des représentations spontanées fortes et des opinions partisanes sur l'inflation, l'argent ou le chômage (savoirs socialement vifs).",
+          "L'impossibilité d'effectuer des calculs mathématiques en économie.",
+          "Le fait que l'économie ne s'enseigne qu'en langue anglaise au lycée."
+        ],
+        answer: 1,
+        explanation: "L'économie et la gestion traitent de 'questions socialement vives' (QSV) : les élèves ne sont pas des tables rases, ils possèdent déjà des représentations forgées par leur milieu social et les médias. Le rôle didactique de l'enseignant est de faire évoluer ces prénotions vers une conceptualisation rigoureuse sans tomber dans le dogmatisme ou la prise de position idéologique.",
+        reference: "Alain Beitone & Didactique des Sciences Économiques et Sociales (SES) & Orientations Pédagogiques MENPS"
+      },
+      {
+        id: "eco-did-02",
+        category: "Exploitation de documents authentiques (HCP / BAM)",
+        question: "Lors d'une séquence sur la croissance économique et le chômage au Maroc (2ème BAC Sciences Éco), quelle démarche didactique garantit une exploitation rigoureuse d'un tableau statistique issu du Haut Commissariat au Plan (HCP) ?",
+        options: [
+          "Demander aux élèves de recopier l'intégralité des chiffres du tableau dans leur cahier sans aucune analyse.",
+          "Faire expliciter les variables, les unités (milliers, %, points de %) et la source, faire formuler une phrase avec un chiffre clé (lecture), puis guider la comparaison temporelle/sectorielle pour dégager une tendance et une problématique économique.",
+          "Remplacer le tableau du HCP par un poème littéraire sans relation économique.",
+          "Considérer les chiffres comme des vérités absolues ne nécessitant aucune contextualisation méthodologique."
+        ],
+        answer: 1,
+        explanation: "La lecture méthodique d'un document statistique en économie suit le triptyque : 1) Décodage (champ, source, unité, date), 2) Lecture d'une donnée significative avec une phrase type ('Selon le HCP, en 2023, le taux de chômage au Maroc s'élevait à...'), 3) Analyse et mise en relation (comparaison urbain/rural, jeunes diplômés) pour nourrir l'argumentation.",
+        reference: "Cadre de Référence de l'Épreuve d'Économie Générale et Statistique · CNEE / MENPS Maroc"
+      },
+      {
+        id: "eco-did-03",
+        category: "Pédagogie de l'Étude de Cas en Management",
+        question: "En Organisation des Entreprises (Management), quelle est la valeur didactique fondamentale de la méthode des cas (Case Study Method) par rapport à un cours magistral transmissif ?",
+        options: [
+          "Elle évite à l'enseignant de préparer le cours en laissant les élèves bavarder librement.",
+          "Elle place l'apprenant en posture de décideur face à une situation réelle d'entreprise (concurrence, crise de trésorerie, conflit social), mobilisant des outils d'analyse stratégique (SWOT, PESTEL) pour formuler des recommandations argumentées.",
+          "Elle exige des élèves d'apprendre par cœur les statuts juridiques de toutes les multinationales.",
+          "Elle élimine toute forme d'évaluation sommative ou certificative."
+        ],
+        answer: 1,
+        explanation: "La méthode des cas est le cœur didactique du management. Elle permet de développer les compétences d'analyse, de diagnostic et de prise de décision stratégique en confrontant les apprenants à la complexité et à l'incertitude du monde des affaires réel.",
+        reference: "Michel Darbelet · Notions Fondamentales de Management & Didactique de l'Économie-Gestion"
+      },
+      {
+        id: "eco-did-04",
+        category: "Didactique de la Comptabilité Financière",
+        question: "Pour enseigner le mécanisme de la 'partie double' et la logique des flux comptables en 1ère année du cycle du Baccalauréat, quel obstacle conceptuel récurrent l'enseignant doit-il lever ?",
+        options: [
+          "L'impossibilité d'utiliser la calculatrice en classe.",
+          "La confusion fréquente entre le sens bancaire courant de 'Crédit/Débit' (crédit = argent qui rentre) et le sens comptable patrimonial où le compte bancaire de l'entreprise est débité pour toute entrée de liquidités (ressource vs emploi).",
+          "L'obligation légale d'écrire les comptes uniquement en lettres manuscrites calligraphiées.",
+          "L'absence totale de Plan Comptable Général Marocain (CGNC)."
+        ],
+        answer: 1,
+        explanation: "L'obstacle didactique classique en comptabilité résulte du sens courant : sur le relevé bancaire de l'élève, un virement reçu apparaît au crédit. L'enseignant doit faire comprendre que le relevé bancaire est la comptabilité de la banque (où le client est créancier), alors que la comptabilité de l'entreprise fonctionne selon la logique Emploi (Débit) = Ressource (Crédit).",
+        reference: "Plan Comptable Général Marocain (CGNC) & Didactique de la Comptabilité Générale"
+      },
+      {
+        id: "eco-did-05",
+        category: "Situation-problème & Démarche d'investigation",
+        question: "Dans une approche par compétences (APC), comment concevoir une 'situation-problème' efficace pour introduire le concept de défaillance de marché liée aux externalités négatives (ex: pollution industrielle) ?",
+        options: [
+          "Donner la définition mathématique de l'équilibre de Pareto dès la première minute du cours.",
+          "Partir d'un cas réel ou simulé (ex: une usine chimique installée près d'une zone agricole riveraine au Maroc) où l'activité lucrative de l'une pénalise l'autre sans compensation financière par le mécanisme des prix, forçant la classe à interroger le rôle régulateur de l'État.",
+          "Faire réciter par cœur la liste des ministères marocains.",
+          "Supprimer toute référence aux entreprises pour ne parler que de théories pures."
+        ],
+        answer: 1,
+        explanation: "Une bonne situation-problème crée une rupture épistémologique : l'élève qui croyait que le marché autorégulé résout tout constate une impasse (l'usine pollue gratuitement et le marché n'indemnise pas le paysan). Cela justifie l'émergence des concepts d'externalité, de taxe pigouvienne et d'intervention publique.",
+        reference: "Didactique des Sciences Économiques · Situations-Problèmes et Conflit Sociocognitif"
+      },
+      {
+        id: "eco-did-06",
+        category: "Évaluation sommative & Synthèse argumentée",
+        question: "Dans l'épreuve du Baccalauréat d'Économie Générale et Statistique au Maroc, quelle est la grille d'évaluation recommandée pour la question de synthèse / réflexion économique argumentée ?",
+        options: [
+          "Une note attribuée uniquement en fonction de la longueur du texte en nombre de pages.",
+          "Une évaluation critériée portant sur la pertinence économique (mobilisation des concepts et théories), l'utilisation adéquate des données chiffrées des documents, la cohérence du plan (Introduction, Développement structuré, Conclusion) et la rigueur de l'argumentation.",
+          "Une évaluation basée uniquement sur l'absence totale de fautes d'orthographe en français.",
+          "Une notation aléatoire sans barème officiel ministériel."
+        ],
+        answer: 1,
+        explanation: "La question de synthèse évalue la compétence terminale d'intégration : elle exige de mobiliser des connaissances théoriques (Keynes, néoclassiques), d'illustrer par les données du dossier marocain, et de structurer une réponse argumentée répondant à une problématique économique concrète.",
+        reference: "Cadre de Référence de l'Examen National du Baccalauréat · Économie Générale et Statistique (CNEE)"
+      },
+      {
+        id: "eco-did-07",
+        category: "TIC & Intégration du Tableur Excel / PGI",
+        question: "Quel est l'apport pédagogique spécifique de l'utilisation du tableur (Excel) et des progiciels de gestion intégrés (PGI) dans l'enseignement de la comptabilité et de la gestion financière ?",
+        options: [
+          "Remplacer le professeur par une machine automatisée sans explication théorique.",
+          "Décharger l'élève des calculs arithmétiques répétitifs pour consacrer le temps d'apprentissage à l'analyse financière, à la simulation de scénarios ('et si...') et à l'interprétation des ratios de gestion.",
+          "Empêcher les élèves de comprendre la logique des débits et crédits.",
+          "Faire jouer les élèves à des jeux vidéo de gestion pendant la séance."
+        ],
+        answer: 1,
+        explanation: "L'outil informatique en économie-gestion n'est pas une fin en soi mais un puissant amplificateur cognitif : en automatisant les calculs lourds (tableaux d'amortissement, soldes de gestion), il permet à l'élève de se concentrer sur l'interprétation économique et le diagnostic managérial.",
+        reference: "Orientations Pédagogiques pour l'Enseignement de l'Informatique de Gestion et Bureautique (MENPS)"
+      },
+      {
+        id: "eco-did-08",
+        category: "Différenciation pédagogique en Économie-Gestion",
+        question: "Face à une classe hétérogène de Tronc Commun Technologique ou 1ère BAC Eco où certains élèves ont de grandes difficultés de calcul mathématique (pourcentages, taux de variation), quelle stratégie de remédiation didactique est la plus opportune ?",
+        options: [
+          "Exclure définitivement ces élèves de la filière économique.",
+          "Mettre en place des fiches de guidage méthodologique avec formules types et exemples pas à pas (étayage cognitif), tout en dissociant temporairement la compréhension du concept économique de la technicité du calcul.",
+          "Ignorer les difficultés et continuer le cours au rythme des meilleurs éléments.",
+          "Supprimer tous les calculs statistiques du programme officiel."
+        ],
+        answer: 1,
+        explanation: "La différenciation pédagogique passe par l'étayage (scaffolding) : fournir des repères méthodologiques clairs (ex: formule du taux de variation `[(VA - VD)/VD] × 100`), faire verbaliser le calcul, et s'assurer que le sens économique (hausse, baisse, accélération) est bien assimilé indépendamment du blocage arithmétique.",
+        reference: "Pédagogie Différenciée & Didactique de l'Économie-Gestion au Secondaire Qualifiant"
+      },
+      {
+        id: "eco-did-09",
+        category: "Traitement de l'actualité économique nationale",
+        question: "Comment l'enseignant d'économie au Maroc doit-il articuler le programme officiel avec les faits d'actualité économique nationale (ex: Loi de Finances annuelle, décisions de Bank Al-Maghrib sur le taux directeur) ?",
+        options: [
+          "En refusant systématiquement de parler de l'actualité pour ne pas perturber la progression figée du manuel.",
+          "En utilisant l'actualité économique nationale comme illustration vivante et contextualisation des concepts théoriques du programme, favorisant le sens des apprentissages et l'esprit critique citoyen.",
+          "En transformant la classe en tribune politique partisane sans rigueur scientifique.",
+          "En attendant 10 ans que les faits d'actualité soient imprimés dans les manuels scolaires."
+        ],
+        answer: 1,
+        explanation: "L'enseignement de l'économie gagne en pertinence lorsqu'il est ancré dans le réel : commenter la décision du Conseil de Bank Al-Maghrib sur le taux directeur permet d'incarner concrètement le chapitre sur la politique monétaire et ses canaux de transmission vers l'inflation et la croissance.",
+        reference: "Recommandations Pédagogiques Officielles · Économie Générale & Bank Al-Maghrib"
+      },
+      {
+        id: "eco-did-10",
+        category: "Éducation Financière & Esprit d'Entreprendre",
+        question: "Conformément aux orientations de la Feuille de Route 2022-2026 et du Nouveau Modèle de Développement (NMD), quelle finalité éducative transversale l'enseignement de l'économie-gestion doit-il promouvoir ?",
+        options: [
+          "Inciter les jeunes à fuir l'initiative privée pour rechercher uniquement des emplois de rente.",
+          "Développer la culture entrepreneuriale, l'éducation financière responsable (gestion de budget, épargne, investissement) et le sens de l'initiative et de l'innovation chez les futurs bacheliers.",
+          "Interdire aux élèves toute réflexion sur la création d'entreprises au Maroc.",
+          "Considérer que l'économie ne concerne que les banques et pas la vie quotidienne des citoyens."
+        ],
+        answer: 1,
+        explanation: "L'enseignement de l'économie et de la gestion au Maroc vise à former des acteurs économiques autonomes et responsables : maîtrise de l'éducation financière (Fondation Marocaine pour l'Éducation Financière - FMEF), valorisation de l'esprit d'entreprise et compréhension des leviers de développement du Royaume.",
+        reference: "Feuille de Route 2022-2026 & Rapport Général sur le Nouveau Modèle de Développement (NMD Maroc)"
+      }
+    ];
+
+    let currentQuestionIdx = 0;
+    let userAnswers = new Array(quizData.length).fill(null);
+    let secondsElapsed = 0;
+    let timerInterval = null;
+
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        secondsElapsed++;
+        const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
+        const secs = String(secondsElapsed % 60).padStart(2, '0');
+        const display = `${mins}:${secs}`;
+        const el = document.getElementById('timer-display');
+        if (el) el.textContent = display;
+      }, 1000);
+    }
+
+    function renderQuestion(idx) {
+      const q = quizData[idx];
+      document.getElementById('question-counter').textContent = `Question ${idx + 1} / ${quizData.length}`;
+      document.getElementById('category-badge').textContent = q.category;
+      document.getElementById('question-text').textContent = q.question;
+
+      const progressPct = ((idx + 1) / quizData.length) * 100;
+      document.getElementById('progress-bar').style.width = `${progressPct}%`;
+
+      const container = document.getElementById('choices-container');
+      container.innerHTML = '';
+
+      q.options.forEach((optText, optIdx) => {
+        const isSelected = userAnswers[idx] === optIdx;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.onclick = () => selectOption(optIdx);
+        btn.className = `w-full text-left p-4 rounded-xl border text-sm sm:text-base transition-all duration-200 flex items-start gap-3.5 ${
+          isSelected
+            ? 'bg-amber-950/80 border-amber-500 text-amber-100 ring-2 ring-amber-500/30 font-semibold'
+            : 'bg-slate-900 border-slate-800 text-slate-300 hover:bg-slate-850 hover:border-slate-700'
+        }`;
+
+        const markerLetter = ['A', 'B', 'C', 'D'][optIdx];
+        btn.innerHTML = `
+          <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg text-xs font-black shrink-0 ${
+            isSelected ? 'bg-amber-600 text-white shadow' : 'bg-slate-800 text-slate-400 border border-slate-700'
+          }">${markerLetter}</span>
+          <span class="leading-relaxed flex-1">${optText}</span>
+        `;
+        container.appendChild(btn);
+      });
+
+      document.getElementById('prev-btn').disabled = idx === 0;
+
+      if (idx === quizData.length - 1) {
+        document.getElementById('next-btn').classList.add('hidden');
+        document.getElementById('submit-btn').classList.remove('hidden');
+      } else {
+        document.getElementById('next-btn').classList.remove('hidden');
+        document.getElementById('submit-btn').classList.add('hidden');
+      }
+    }
+
+    function selectOption(optIdx) {
+      userAnswers[currentQuestionIdx] = optIdx;
+      renderQuestion(currentQuestionIdx);
+    }
+
+    function nextQuestion() {
+      if (currentQuestionIdx < quizData.length - 1) {
+        currentQuestionIdx++;
+        renderQuestion(currentQuestionIdx);
+      }
+    }
+
+    function prevQuestion() {
+      if (currentQuestionIdx > 0) {
+        currentQuestionIdx--;
+        renderQuestion(currentQuestionIdx);
+      }
+    }
+
+    function finishQuiz() {
+      clearInterval(timerInterval);
+
+      let correctCount = 0;
+      quizData.forEach((q, idx) => {
+        if (userAnswers[idx] === q.answer) {
+          correctCount++;
+        }
+      });
+
+      const scoreOutOf20 = (correctCount / quizData.length) * 20;
+      const accuracyPct = Math.round((correctCount / quizData.length) * 100);
+
+      document.getElementById('quiz-container').classList.add('hidden');
+      document.getElementById('result-container').classList.remove('hidden');
+
+      document.getElementById('final-score').textContent = `${scoreOutOf20}/20`;
+      document.getElementById('stat-correct').textContent = correctCount;
+      document.getElementById('stat-wrong').textContent = quizData.length - correctCount;
+      document.getElementById('stat-accuracy').textContent = `${accuracyPct}%`;
+
+      const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
+      const secs = String(secondsElapsed % 60).padStart(2, '0');
+      document.getElementById('stat-time').textContent = `${mins}:${secs}`;
+
+      const badge = document.getElementById('score-badge');
+      const title = document.getElementById('diagnostic-title');
+      const desc = document.getElementById('diagnostic-desc');
+
+      if (scoreOutOf20 >= 16) {
+        badge.className = "inline-flex items-center justify-center w-24 h-24 rounded-full bg-emerald-950/80 border-4 border-emerald-500 text-3xl font-black text-emerald-300 mb-4 shadow-xl shadow-emerald-950/50";
+        title.textContent = "Excellente Maîtrise Didactique · Très Honorable";
+        desc.textContent = "Parfaite assimilation de l'ingénierie pédagogique en économie-gestion : transposition des savoirs, méthode des cas, décodage documentaire HCP et évaluation par compétences.";
+      } else if (scoreOutOf20 >= 12) {
+        badge.className = "inline-flex items-center justify-center w-24 h-24 rounded-full bg-amber-950/80 border-4 border-amber-500 text-3xl font-black text-amber-300 mb-4 shadow-xl shadow-amber-950/50";
+        title.textContent = "Niveau Satisfaisant · Profil Admissible au Concours";
+        desc.textContent = "Bonne maîtrise des principes didactiques généraux. Affinez la formalisation des situations-problèmes en comptabilité et les grilles de correction de la synthèse.";
+      } else if (scoreOutOf20 >= 10) {
+        badge.className = "inline-flex items-center justify-center w-24 h-24 rounded-full bg-yellow-950/80 border-4 border-yellow-500 text-3xl font-black text-yellow-300 mb-4 shadow-xl shadow-yellow-950/50";
+        title.textContent = "Niveau Moyen · Seuil Minimal de Passage";
+        desc.textContent = "Bases méthodologiques acquises mais confusions subsistantes. Revoir les Orientations Pédagogiques Officielles du Ministère pour le secondaire qualifiant.";
+      } else {
+        badge.className = "inline-flex items-center justify-center w-24 h-24 rounded-full bg-red-950/80 border-4 border-red-500 text-3xl font-black text-red-300 mb-4 shadow-xl shadow-red-950/50";
+        title.textContent = "Niveau Insuffisant · Risque d'Élimination";
+        desc.textContent = "Des lacunes importantes en didactique disciplinaire. Étudiez les guides pédagogiques officiels du MENPS et les annales de didactique du CRMEF.";
+      }
+
+      renderReviewList();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderReviewList() {
+      const list = document.getElementById('review-list');
+      list.innerHTML = '';
+
+      quizData.forEach((q, idx) => {
+        const userChoice = userAnswers[idx];
+        const isCorrect = userChoice === q.answer;
+
+        const card = document.createElement('div');
+        card.className = `p-4 sm:p-5 rounded-xl border ${
+          isCorrect ? 'bg-slate-900/80 border-emerald-800/60' : 'bg-slate-900/80 border-red-900/60'
+        }`;
+
+        const userOptionText = userChoice !== null ? q.options[userChoice] : 'Aucune réponse fournie';
+        const correctOptionText = q.options[q.answer];
+
+        card.innerHTML = `
+          <div class="flex items-start justify-between gap-3 mb-2">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-xs font-bold ${
+              isCorrect ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' : 'bg-red-950 text-red-300 border border-red-800'
+            }">
+              <span>${isCorrect ? '✓ Réponse Didactique Exacte' : '✗ Erreur Méthodologique'}</span>
+            </span>
+            <span class="text-xs text-amber-400 font-semibold">${q.category} · Question ${idx + 1}</span>
+          </div>
+          
+          <h5 class="text-sm sm:text-base font-bold text-slate-100 mb-3 leading-relaxed">${q.question}</h5>
+          
+          <div class="space-y-1.5 text-xs sm:text-sm mb-3">
+            <div class="p-2.5 rounded-lg ${isCorrect ? 'bg-emerald-950/40 text-emerald-200' : 'bg-red-950/40 text-red-200'}">
+              <span class="font-bold block text-xs opacity-75">Votre choix :</span>
+              <span>${userOptionText}</span>
+            </div>
+            ${!isCorrect ? `
+              <div class="p-2.5 rounded-lg bg-emerald-950/40 text-emerald-200 border border-emerald-800/40">
+                <span class="font-bold block text-xs opacity-75">Réponse attendue :</span>
+                <span>${correctOptionText}</span>
+              </div>
+            ` : ''}
+          </div>
+
+          <div class="p-3 rounded-lg bg-amber-950/30 border border-amber-900/40 text-xs sm:text-sm text-amber-200 leading-relaxed">
+            <strong class="text-amber-300 block mb-1">💡 Analyse Didactique & Justification :</strong>
+            ${q.explanation}
+            <div class="mt-2 pt-2 border-t border-amber-900/30 text-xs text-slate-400 flex items-center gap-1">
+              <span>📚 Référence officielle :</span>
+              <span class="text-amber-300 font-medium">${q.reference}</span>
+            </div>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    function restartQuiz() {
+      currentQuestionIdx = 0;
+      userAnswers = new Array(quizData.length).fill(null);
+      secondsElapsed = 0;
+      document.getElementById('result-container').classList.add('hidden');
+      document.getElementById('quiz-container').classList.remove('hidden');
+      startTimer();
+      renderQuestion(0);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      startTimer();
+      renderQuestion(0);
+    });
+  </script>
+
+</body>
+</html>
