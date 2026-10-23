@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QCM Spécialité Mathématiques CRMEF Maroc · Analyse, Algèbre & Géométrie | ProfEPS.ma</title>
-  <meta name="description" content="Simulateur officiel de QCM en Spécialité Mathématiques pour le concours CRMEF Maroc. Analyse différentielle, intégration, algèbre linéaire, probabilités et géométrie. Séries de 10 questions avec corrections et démonstrations.">
+  <title>QCM Spécialité Mathématiques CRMEF Maroc · 100 Séries Corrigées | ProfEPS.ma</title>
+  <meta name="description" content="Banque officielle de 100 séries de 10 questions en Spécialité Mathématiques pour les concours CRMEF secondaire : Analyse, Algèbre linéaire, Arithmétique dans Z, Géométrie euclidienne et Probabilités.">
   <link rel="canonical" href="https://profeps.ma/qcm-specialite-maths-maroc.html">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,13 +13,15 @@
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
     .font-arabic { font-family: 'Noto Kufi Arabic', sans-serif; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Quiz",
-    "name": "QCM Spécialité Mathématiques - Concours CRMEF Maroc",
-    "description": "Entraînement officiel corrigé en Spécialité Mathématiques (Analyse, Algèbre linéaire, Probabilités) pour les concours d'enseignement au Maroc.",
+    "name": "QCM Spécialité Mathématiques - 100 Séries CRMEF Maroc",
+    "description": "Banque officielle de 100 séries de 10 questions en Spécialité Mathématiques (Analyse, Algèbre linéaire, Arithmétique, Probabilités) pour les concours d'enseignement au Maroc.",
     "educationalLevel": "CRMEF Secondaire Mathématiques Spécialité",
     "author": {
       "@type": "Person",
@@ -43,7 +45,7 @@
             Spécialité Maths<span class="text-slate-900"> · CRMEF</span>
           </span>
           <span class="text-[10px] text-slate-500 font-medium block mt-0.5">
-            ProfEPS.ma · Analyse, Algèbre & Géométrie Universitaire
+            ProfEPS.ma · 100 Séries · Analyse, Algèbre, Arithmétique & Proba
           </span>
         </div>
       </a>
@@ -83,18 +85,20 @@
     <div class="bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
       <div class="space-y-3 relative z-10">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-bold border border-slate-700 font-arabic">
-          <span>مادة التخصص في الرياضيات · السلك الثانوي الإعدادي والتأهيلي</span>
+          <span>مادة التخصص في الرياضيات · السلك الثانوي الإعدادي والتأهيلي · 100 سلسلة</span>
         </div>
         <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight">
           QCM Spécialité Mathématiques · Savoirs Disciplinaires
         </h1>
         <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
-          Entraînez-vous aux épreuves disciplinaires du concours CRMEF : calcul différentiel et intégral, suites et séries numériques, algèbre linéaire (espaces vectoriels, réduction d'endomorphismes, matrices), géométrie euclidienne, arithmétique et calcul des probabilités.
+          Entraînement officiel aux épreuves écrites disciplinaires des CRMEF : Analyse réelle et complexe, Algèbre linéaire et réduction des endomorphismes, Arithmétique dans Z, Structures algébriques, Géométrie euclidienne et Probabilités. 100 séries de 10 questions avec démonstrations rigoureuses.
         </p>
-        <div class="text-[11px] text-slate-400 pt-1 flex items-center gap-2">
-          <span>Épreuve N°2 de la Filière Mathématiques</span>
+        <div class="flex flex-wrap items-center gap-3 text-[11px] text-slate-400 pt-1">
+          <span class="flex items-center gap-1">⚡ 100 Séries Disciplinaires</span>
           <span>·</span>
-          <span>Séries de 10 questions corrigées avec démonstrations rigoureuses</span>
+          <span class="flex items-center gap-1">⏱️ 10 Questions / Série</span>
+          <span>·</span>
+          <span class="flex items-center gap-1">📐 Conforme Licence Maths & CPGE</span>
         </div>
       </div>
     </div>
@@ -102,48 +106,74 @@
     <!-- Mode Selector -->
     <div class="bg-white rounded-2xl border border-slate-200 p-2 shadow-xs flex items-center justify-between gap-2">
       <button onclick="switchMode('quiz')" id="btn-mode-quiz" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold bg-slate-900 text-white shadow-xs cursor-pointer transition-all text-center">
-        🎯 1. Passer un Test (Série de 10 Questions)
+        🎯 1. Passer une Série (1 à 100)
       </button>
       <button onclick="switchMode('browse')" id="btn-mode-browse" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center">
-        📖 2. Consulter Toutes les Questions & Démonstrations
+        📖 2. Référentiel Intégral & Démonstrations
       </button>
     </div>
 
     <!-- ================= QUIZ MODE ================= -->
     <div id="section-quiz-mode" class="space-y-6">
-      
+
+      <!-- Séries Switcher Toolbar -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-xs space-y-3">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black text-slate-900 uppercase tracking-wider">Sélection de la Série :</span>
+            <span id="active-series-label" class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-800 text-xs font-black">Série 1 sur 100</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <label for="series-dropdown" class="text-xs text-slate-500 font-semibold">Accès direct :</label>
+            <select id="series-dropdown" onchange="loadSeries(parseInt(this.value))" class="text-xs font-bold bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1 text-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900 cursor-pointer">
+              <!-- Dynamically populated 1 to 100 -->
+            </select>
+            <button onclick="loadRandomSeries()" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-colors cursor-pointer flex items-center gap-1">
+              🎲 Hasard
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick 10 Series Pills -->
+        <div class="flex items-center gap-1.5 overflow-x-auto hide-scrollbar pb-1 pt-1" id="quick-series-pills">
+          <!-- Dynamically generated quick buttons 1..10 -->
+        </div>
+      </div>
+
       <!-- Carte du Test Actif -->
       <div id="quiz-card" class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-md space-y-6">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
           <div class="flex items-center gap-3">
             <span id="quiz-series-badge" class="px-3 py-1 bg-slate-100 text-slate-800 text-xs font-black rounded-lg">
-              Exemplaire N°1
+              Série N°1
             </span>
             <span class="text-xs font-bold text-slate-500">
               Question <strong id="quiz-current-num" class="text-slate-900 text-sm">1</strong> sur 10
             </span>
             <span id="quiz-theme-badge" class="text-[11px] px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-semibold">
-              Analyse Mathématique
+              Analyse
             </span>
           </div>
-          <button onclick="startNewSeries()" class="text-xs text-slate-500 hover:text-slate-900 font-bold flex items-center gap-1 cursor-pointer">
-            🔄 Nouveau tirage
+          <button onclick="restartCurrentSeries()" class="text-xs text-slate-500 hover:text-slate-900 font-bold flex items-center gap-1 cursor-pointer">
+            🔄 Recommencer cette série
           </button>
         </div>
 
+        <!-- Progress bar -->
         <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
           <div id="quiz-progress-fill" class="bg-slate-900 h-full w-[10%] transition-all duration-300"></div>
         </div>
 
-        <div class="space-y-2 py-2">
+        <!-- Questions Text -->
+        <div class="space-y-3 py-2">
           <h3 id="quiz-question-fr" class="text-base sm:text-lg font-black text-slate-900 leading-snug"></h3>
-          <h3 id="quiz-question-ar" class="text-base sm:text-lg font-arabic font-bold text-slate-950 text-right dir-rtl leading-relaxed"></h3>
+          <h3 id="quiz-question-ar" class="text-base sm:text-lg font-arabic font-bold text-slate-800 text-right dir-rtl leading-relaxed"></h3>
         </div>
 
         <!-- Options Container -->
         <div id="quiz-options-container" class="space-y-3"></div>
 
-        <!-- Feedback & Demonstration Box -->
+        <!-- Feedback & Explanation Box -->
         <div id="quiz-explanation-box" class="hidden rounded-2xl p-4 sm:p-5 border transition-all">
           <div class="flex items-center gap-2 mb-2 font-bold text-sm" id="quiz-feedback-title"></div>
           <p id="quiz-explanation-text" class="text-xs sm:text-sm text-slate-700 leading-relaxed font-mono"></p>
@@ -155,40 +185,49 @@
           <span class="text-xs text-slate-500 font-semibold">
             Score actuel : <strong id="quiz-live-score" class="text-slate-900">0</strong> / <span id="quiz-answered-count">0</span>
           </span>
-          <button id="btn-next-question" onclick="nextQuestion()" class="hidden px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-black transition-colors cursor-pointer shadow-sm">
-            Question Suivante →
+          <button id="btn-next-question" onclick="nextQuestion()" class="hidden px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-all shadow-xs flex items-center gap-2 cursor-pointer">
+            <span>Question Suivante</span>
+            <span>→</span>
           </button>
         </div>
       </div>
 
-      <!-- Écran de Résultat & Diagnostic Officiel -->
-      <div id="results-card" class="hidden space-y-6">
-        <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-lg text-center space-y-4">
-          <div class="inline-block px-3 py-1 bg-slate-100 text-slate-800 text-xs font-black rounded-full border border-slate-300">
-            Série Terminée · Épreuve de Spécialité Mathématiques
+      <!-- Carte des Résultats (à la fin de la série) -->
+      <div id="results-card" class="hidden bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-md space-y-6">
+        <div class="text-center space-y-3 py-4">
+          <div class="inline-flex p-4 rounded-full bg-slate-100 text-slate-900 text-3xl font-black mb-1">
+            🎯
           </div>
-          <div id="results-score-display" class="text-4xl sm:text-5xl font-black text-slate-900 leading-none">
-            0 / 10
+          <h2 class="text-2xl font-black text-slate-900">Bilan de la Série N°<span id="res-series-num">1</span></h2>
+          <p class="text-xs text-slate-500">Épreuve de Spécialité Mathématiques · Concours CRMEF Maroc</p>
+          
+          <div class="max-w-xs mx-auto py-4 bg-slate-50 rounded-2xl border border-slate-100">
+            <div class="text-4xl font-black text-slate-900">
+              <span id="final-score" class="text-slate-900">0</span> <span class="text-lg text-slate-400 font-bold">/ 10</span>
+            </div>
+            <div id="final-percentage" class="text-xs font-bold text-slate-500 mt-1">0% de réussite</div>
           </div>
-          <div id="results-note-20" class="text-sm font-bold text-slate-500">
-            Note officielle estimée : 0.0 / 20
-          </div>
-          <div id="results-diagnosis-box" class="max-w-md mx-auto p-3.5 rounded-xl border text-xs font-bold"></div>
+
+          <div id="results-mention" class="inline-block px-4 py-1.5 rounded-full text-xs font-black"></div>
 
           <div class="pt-4 flex flex-wrap items-center justify-center gap-3">
-            <button onclick="startNewSeries()" class="px-6 py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-black text-sm rounded-xl shadow-lg shadow-slate-900/20 transition-all cursor-pointer">
-              🔄 Passer un Autre Exemplaire (10 Nouvelles Questions Inédites)
+            <button onclick="nextSeries()" class="px-6 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-all shadow-xs cursor-pointer flex items-center gap-1.5">
+              <span>Série Suivante (Série <span id="btn-next-series-num">2</span>)</span>
+              <span>→</span>
             </button>
-            <a href="qcm-didactique-maths-maroc.html" class="px-6 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-black text-sm rounded-xl shadow-md transition-all">
-              📐 Passer à la Didactique Maths →
-            </a>
+            <button onclick="restartCurrentSeries()" class="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-all cursor-pointer">
+              🔄 Refaire cette série
+            </button>
+            <button onclick="switchMode('browse')" class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 text-xs font-bold transition-all cursor-pointer">
+              📖 Consulter le référentiel complet
+            </button>
           </div>
         </div>
 
-        <!-- Section des Corrections Détaillées de la Série -->
-        <div class="space-y-4">
-          <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
-            <span>Démonstrations Intégrales des 10 Questions de la Série :</span>
+        <!-- Détail des corrections -->
+        <div class="border-t border-slate-100 pt-6 space-y-4">
+          <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider">
+            Correction Détaillée des 10 Questions de la Série
           </h3>
           <div id="corrections-container" class="space-y-4"></div>
         </div>
@@ -196,18 +235,26 @@
 
     </div>
 
-    <!-- ================= BROWSE MODE ================= -->
+    <!-- ================= BROWSE MODE : RÉFÉRENTIEL INTÉGRAL ================= -->
     <div id="section-browse-mode" class="hidden space-y-4">
       <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h2 class="text-sm sm:text-base font-extrabold text-slate-900">
             Référentiel des Questions de Spécialité Mathématiques
           </h2>
-          <p class="text-xs text-slate-500">Banque académique officielle avec démonstrations rigoureuses.</p>
+          <p class="text-xs text-slate-500">Toutes les questions théoriques et appliquées avec démonstrations certifiées.</p>
         </div>
         <span id="browse-count" class="px-3 py-1 bg-slate-100 text-slate-800 text-xs font-bold rounded-lg shrink-0">
           Chargement...
         </span>
+      </div>
+
+      <!-- Filtres de recherche -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-3 flex flex-col sm:flex-row gap-2">
+        <input type="text" id="browse-search" oninput="filterBrowseQuestions()" placeholder="Rechercher par notion (Rolle, Cayley-Hamilton, Bézout, Bayes, Grassmann...)..." class="flex-1 text-xs border border-slate-200 rounded-xl px-3 py-2 text-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900">
+        <select id="browse-theme-filter" onchange="filterBrowseQuestions()" class="text-xs font-bold border border-slate-200 rounded-xl px-3 py-2 text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-900">
+          <option value="">Tous les Domaines</option>
+        </select>
       </div>
 
       <div id="browse-questions-list" class="space-y-4"></div>
@@ -216,9 +263,9 @@
     <!-- Maillage Silos -->
     <section class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
       <div class="space-y-1 text-center sm:text-left">
-        <h4 class="font-extrabold text-xs sm:text-sm text-slate-900">Complétez votre Préparation CRMEF</h4>
+        <h4 class="font-extrabold text-xs sm:text-sm text-slate-900">Épreuve de Didactique Associée</h4>
         <p class="text-xs text-slate-500">
-          Révisez la <strong>Didactique des Mathématiques</strong> et le tronc commun obligatoire en <strong>Sciences de l'Éducation</strong>.
+          Préparez également l'épreuve de <strong>Didactique des Mathématiques</strong> (TSD Brousseau, Chevallard, TaRL).
         </p>
       </div>
       <div class="flex items-center gap-2 shrink-0">
@@ -238,7 +285,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-2">
         <span class="font-bold text-slate-800">ProfEPS.ma</span>
-        <span>· Portail Officiel de Préparation aux Concours CRMEF Maroc</span>
+        <span>· Concours CRMEF Maroc · Spécialité Mathématiques</span>
       </div>
       <div class="flex items-center gap-4 text-slate-600 font-semibold">
         <a href="concours-crmef-hub.html" class="hover:text-slate-900">Hub National</a>
@@ -249,204 +296,1210 @@
     </div>
   </footer>
 
-  <!-- ================= JAVASCRIPT & BANQUE DE SPÉCIALITÉ MATHS ================= -->
+  <!-- ================= SCRIPTS & 100 SERIES LOGIC ================= -->
   <script>
     const MATHS_SPECIALITE_BANK = [
+  {
+    "id": "ms-01",
+    "theme": "Analyse · Dérivabilité & Rolle",
+    "question": "Soit f une fonction continue sur [a, b] et dérivable sur ]a, b[ telle que f(a) = f(b). Quel théorème fondamental garantit l'existence d'au moins un point c ∈ ]a, b[ tel que f'(c) = 0 ?",
+    "questionAr": "لتكن f دالة متصلة على [a, b] وقابلة للاشتقاق على ]a, b[ بحيث f(a) = f(b). ما هي المبرهنة الأساسية التي تضمن وجود عنصر c على الأقل من ]a, b[ بحيث f'(c) = 0؟",
+    "options": [
       {
-        id: "ms-01",
-        theme: "Analyse · Dérivabilité & Rolle",
-        question: "Soit f une fonction continue sur [a, b] et dérivable sur ]a, b[ telle que f(a) = f(b). Quel théorème fondamental garantit l'existence d'au moins un point c ∈ ]a, b[ tel que f'(c) = 0 ?",
-        questionAr: "لتكن f دالة متصلة على [a, b] وقابلة للاشتقاق على ]a, b[ بحيث f(a) = f(b). ما هي المبرهنة التي تضمن وجود عنصر c من ]a, b[ بحيث f'(c) = 0؟",
-        options: [
-          { id: "A", text: "Le théorème des valeurs intermédiaires (TVI)" },
-          { id: "B", text: "Le théorème de Rolle", correct: true },
-          { id: "C", text: "L'inégalité des accroissements finis (IAF)" },
-          { id: "D", text: "Le théorème de convergence dominée" }
-        ],
-        explanation: "Le théorème de Rolle stipule : si f est continue sur [a, b], dérivable sur ]a, b[ et f(a) = f(b), alors il existe au moins un réel c dans ]a, b[ tel que la dérivée s'annule (f'(c) = 0).",
-        ref: "Programme du Concours de Recrutement · Mathématiques Secondaire"
+        "id": "A",
+        "text": "Le théorème des valeurs intermédiaires (TVI)"
       },
       {
-        id: "ms-02",
-        theme: "Algèbre Linéaire · Théorème du Rang",
-        question: "Soit u une application linéaire d'un espace vectoriel E de dimension finie n vers un espace F. Quelle est la relation donnée par le théorème du rang ?",
-        questionAr: "لتكن u تطبيقاً خطياً من فضاء متجهي E بعده منته n نحو فضاء F. ما هي العلاقة المعبرة عن مبرهنة الرتبة (Théorème du rang)؟",
-        options: [
-          { id: "A", text: "dim(E) = dim(Ker u) + rg(u)", correct: true },
-          { id: "B", text: "dim(E) = dim(Ker u) × rg(u)" },
-          { id: "C", text: "rg(u) = dim(F) - dim(Ker u)" },
-          { id: "D", text: "dim(Ker u) = rg(u)" }
-        ],
-        explanation: "Le théorème du rang (ou théorème de la dimension) énonce que pour tout morphisme u: E → F avec dim(E) < ∞, la dimension de l'espace de départ est la somme de la dimension du noyau et du rang : dim(E) = dim(Ker u) + dim(Im u).",
-        ref: "Algèbre Linéaire Universitaire · Concours CRMEF"
+        "id": "B",
+        "text": "Le théorème de Rolle",
+        "correct": true
       },
       {
-        id: "ms-03",
-        theme: "Analyse · Séries Numériques",
-        question: "Pour quelle valeur du réel α la série de Riemann ∑_{n=1}^∞ (1 / n^α) converge-t-elle ?",
-        questionAr: "ما هي قيم العدد الحقيقي α التي تتقارب من أجلها متسلسلة ريمان ∑ (1 / n^α)؟",
-        options: [
-          { id: "A", text: "α ≤ 1" },
-          { id: "B", text: "α > 1", correct: true },
-          { id: "C", text: "α ≥ 0" },
-          { id: "D", text: "Pour tout α réel" }
-        ],
-        explanation: "D'après la règle de Riemann par comparaison avec l'intégrale impropre ∫_1^∞ (1/t^α) dt, la série converge si et seulement si α > 1. Pour α = 1 (série harmonique), la série diverge.",
-        ref: "Analyse Réelle & Séries · Licence Mathématiques"
+        "id": "C",
+        "text": "L'inégalité des accroissements finis (IAF)"
       },
       {
-        id: "ms-04",
-        theme: "Algèbre · Diagonalisation",
-        question: "Soit A une matrice carrée d'ordre n à coefficients réels. À quelle condition nécessaire et suffisante A est-elle diagonalisable sur ℝ ?",
-        questionAr: "لتكن A مصفوفة مربعة من الرتبة n بمعاملات حقيقية. ما هو الشرط اللازم والكافي لتكون A قابلة للتقطير على ℝ؟",
-        options: [
-          { id: "A", text: "Son polynôme caractéristique est scindé sur ℝ et pour chaque valeur propre, la multiplicité algébrique est égale à la dimension du sous-espace propre associé", correct: true },
-          { id: "B", text: "Son déterminant est strictement positif" },
-          { id: "C", text: "Elle est inversible et de trace nulle" },
-          { id: "D", text: "Elle ne possède qu'une unique valeur propre triple" }
-        ],
-        explanation: "Une matrice A est diagonalisable si et seulement si son polynôme caractéristique est scindé sur le corps considéré et que pour chaque valeur propre λ, dim(Ker(A - λ·I)) = ordre de multiplicité de λ.",
-        ref: "Réduction des Endomorphismes · Cadre CNEE CRMEF"
-      },
-      {
-        id: "ms-05",
-        theme: "Probabilités · Variables Aléatoires",
-        question: "Si X suit une loi binomiale B(n, p), quelle est l'expression exacte de sa variance Var(X) ?",
-        questionAr: "إذا كان المتغير العشوائي X يتبع التوزيع الثنائي B(n, p)، فما هو التعبير الدقيق لتباينه Var(X)؟",
-        options: [
-          { id: "A", text: "Var(X) = n · p" },
-          { id: "B", text: "Var(X) = n · p · (1 - p)", correct: true },
-          { id: "C", text: "Var(X) = n² · p" },
-          { id: "D", text: "Var(X) = p · (1 - p) / n" }
-        ],
-        explanation: "Pour une somme de n variables de Bernoulli indépendantes de paramètre p : l'espérance est E(X) = n·p et la variance est Var(X) = n·p·q où q = 1 - p.",
-        ref: "Calcul des Probabilités · Concours Enseignement"
-      },
-      {
-        id: "ms-06",
-        theme: "Arithmétique · Théorème de Bézout",
-        question: "Soient a et b deux entiers relatifs non nuls. Le théorème de Bachet-Bézout affirme que a et b sont premiers entre eux si et seulement si :",
-        questionAr: "ليكن a و b عددين صحيحين غير منعدمين. تنص مبرهنة بيزو (Bézout) على أن a و b أوليان فيما بينهما إذا وفقط إذا:",
-        options: [
-          { id: "A", text: "Il existe (u, v) ∈ ℤ² tel que a·u + b·v = 1", correct: true },
-          { id: "B", text: "a divise b ou b divise a" },
-          { id: "C", text: "a + b est un nombre premier" },
-          { id: "D", text: "Le produit a · b est impair" }
-        ],
-        explanation: "Théorème fondamental de Bézout : pgcd(a, b) = 1 ⟺ ∃ (u, v) ∈ ℤ² tel que a·u + b·v = 1. Les coefficients (u, v) s'obtiennent par l'algorithme d'Euclide étendu.",
-        ref: "Arithmétique dans ℤ · Concours Secondaire"
-      },
-      {
-        id: "ms-07",
-        theme: "Analyse · Théorème de Heine",
-        question: "Que garantit le théorème de Heine pour une fonction f définie sur un intervalle compact [a, b] ?",
-        questionAr: "ما الذي تضمنه مبرهنة هايني (Théorème de Heine) لدالة f متصلة على قطعة مدمجة [a, b]؟",
-        options: [
-          { id: "A", text: "Toute fonction continue sur un compact est uniformément continue", correct: true },
-          { id: "B", text: "Toute fonction dérivable est de classe C^∞" },
-          { id: "C", text: "La fonction admet une unique racine réelle" },
-          { id: "D", text: "La fonction est paire" }
-        ],
-        explanation: "Le théorème de Heine énonce que toute fonction continue sur un espace métrique compact (notamment tout segment [a, b] de ℝ) est uniformément continue (le module de continuité ne dépend pas du point choisi).",
-        ref: "Topologie des Espaces Métriques · CRMEF"
-      },
-      {
-        id: "ms-08",
-        theme: "Algèbre · Théorème de Cayley-Hamilton",
-        question: "Soit P_A(X) = det(X·I_n - A) le polynôme caractéristique d'une matrice carrée A. Que stipule le théorème de Cayley-Hamilton ?",
-        questionAr: "ليكن P_A(X) كثير الحدود المميز للمصفوفة المربعة A. ماذا تنص مبرهنة كايلي-هاملتون (Cayley-Hamilton)؟",
-        options: [
-          { id: "A", text: "P_A(A) = 0 (toute matrice carrée annule son propre polynôme caractéristique)", correct: true },
-          { id: "B", text: "det(A) = trace(A)" },
-          { id: "C", text: "Toute matrice est semblable à son inverse" },
-          { id: "D", text: "Le degré du polynôme caractéristique est strictement inférieur à n" }
-        ],
-        explanation: "Le théorème de Cayley-Hamilton affirme que l'endomorphisme (ou la matrice) est racine de son propre polynôme caractéristique : P_A(A) = 0_n. Il en découle que le polynôme minimal divise le polynôme caractéristique.",
-        ref: "Algèbre Linéaire Avancée · CRMEF"
-      },
-      {
-        id: "ms-09",
-        theme: "Géométrie · Espaces Euclidiens",
-        question: "Dans un espace préhilbertien réel muni du produit scalaire ⟨x, y⟩, quelle inégalité lie le produit scalaire aux normes des vecteurs ?",
-        questionAr: "في فضاء متجهي إقليدي مزود بالجداء السلمي، ما هي المتفاوتة التي تربط الجداء السلمي بمنظمي المتجهتين؟",
-        options: [
-          { id: "A", text: "L'inégalité de Cauchy-Schwarz : |⟨x, y⟩| ≤ ‖x‖ · ‖y‖", correct: true },
-          { id: "B", text: "L'inégalité de Markov" },
-          { id: "C", text: "L'inégalité de Bernoulli" },
-          { id: "D", text: "L'inégalité de Jensen pour les fonctions concaves" }
-        ],
-        explanation: "L'inégalité de Cauchy-Schwarz |⟨x, y⟩| ≤ ‖x‖·‖y‖ est fondamentale. L'égalité a lieu si et seulement si les deux vecteurs x et y sont colinéaires (liés).",
-        ref: "Géométrie Vectorielle & Espaces Préhilbertiens"
-      },
-      {
-        id: "ms-10",
-        theme: "Analyse · Déterminants",
-        question: "Soit A une matrice carrée d'ordre n et k un scalaire réel. Que vaut det(k · A) ?",
-        questionAr: "لتكن A مصفوفة مربعة من الرتبة n و k عدداً حقيقياً. كم يساوي محدد det(k · A)؟",
-        options: [
-          { id: "A", text: "k · det(A)" },
-          { id: "B", text: "k^n · det(A)", correct: true },
-          { id: "C", text: "n^k · det(A)" },
-          { id: "D", text: "det(A) / k" }
-        ],
-        explanation: "Le déterminant est une forme n-linéaire par rapport aux n colonnes (ou lignes). Multiplier la matrice par k revient à multiplier chacune de ses n lignes par k, d'où le facteur k^n devant det(A).",
-        ref: "Calcul Matriciel · Concours CRMEF"
-      },
-      {
-        id: "ms-11",
-        theme: "Équations Différentielles",
-        question: "Quelle est la forme générale des solutions sur ℝ de l'équation différentielle linéaire homogène y'' + ω²·y = 0 (avec ω > 0) ?",
-        questionAr: "ما هو الشكل العام لحلول المعادلة التفاضلية الخطية y'' + ω²·y = 0 على ℝ؟",
-        options: [
-          { id: "A", text: "y(t) = A · cos(ω·t) + B · sin(ω·t) avec (A, B) ∈ ℝ²", correct: true },
-          { id: "B", text: "y(t) = A · e^(ω·t) + B · e^(-ω·t)" },
-          { id: "C", text: "y(t) = A · t + B" },
-          { id: "D", text: "y(t) = A · ln(ω·t)" }
-        ],
-        explanation: "L'équation caractéristique r² + ω² = 0 a deux racines complexes conjuguées r = ± i·ω. L'espace vectoriel des solutions réelles est de dimension 2, engendré par cos(ω·t) et sin(ω·t).",
-        ref: "Équations Différentielles Linéaires · Mathématiques CRMEF"
-      },
-      {
-        id: "ms-12",
-        theme: "Intégration · Riemann",
-        question: "Si f est une fonction continue par morceaux sur [a, b], que représente la somme de Riemann S_n = (b - a)/n · ∑_{k=0}^{n-1} f(a + k·(b - a)/n) quand n tend vers l'infini ?",
-        questionAr: "إذا كانت f دالة متصلة على قطعة [a, b]، إلى ماذا تؤول مجموع ريمان S_n عندما يؤول n إلى ما لا نهاية؟",
-        options: [
-          { id: "A", text: "Elle converge vers l'intégrale définie ∫_a^b f(t) dt", correct: true },
-          { id: "B", text: "Elle diverge systématiquement vers +∞" },
-          { id: "C", text: "Elle converge vers f(b) - f(a)" },
-          { id: "D", text: "Elle est toujours égale à zéro" }
-        ],
-        explanation: "Toute fonction continue par morceaux sur un segment est intégrable au sens de Riemann. Les sommes de Riemann associées à une subdivision régulière convergent vers la valeur exacte de l'intégrale définie.",
-        ref: "Intégrale de Riemann · Licence Mathématiques"
+        "id": "D",
+        "text": "Le théorème de convergence dominée"
       }
-    ];
+    ],
+    "explanation": "Le théorème de Rolle stipule : si f est continue sur [a, b], dérivable sur ]a, b[ et f(a) = f(b), alors il existe au moins un réel c dans ]a, b[ tel que la dérivée s'annule : f'(c) = 0.",
+    "ref": "Programme du Concours de Recrutement · Mathématiques Secondaire"
+  },
+  {
+    "id": "ms-02",
+    "theme": "Algèbre Linéaire · Théorème du Rang",
+    "question": "Soit u une application linéaire d'un espace vectoriel E de dimension finie n vers un espace F. Quelle est la relation fondamentale donnée par le théorème du rang ?",
+    "questionAr": "لتكن u تطبيقاً خطياً من فضاء متجهي E بعده منته n نحو فضاء F. ما هي العلاقة الأساسية المعبرة عن مبرهنة الرتبة (Théorème du rang)؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "dim(E) = dim(Ker u) + rg(u)",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "dim(E) = dim(Ker u) × rg(u)"
+      },
+      {
+        "id": "C",
+        "text": "rg(u) = dim(F) - dim(Ker u)"
+      },
+      {
+        "id": "D",
+        "text": "dim(Ker u) = rg(u)"
+      }
+    ],
+    "explanation": "Le théorème du rang (ou théorème de la dimension) énonce que pour tout morphisme u: E → F avec dim(E) < ∞, la dimension de l'espace de départ est la somme de la dimension du noyau et du rang : dim(E) = dim(Ker u) + dim(Im u).",
+    "ref": "Algèbre Linéaire Universitaire · Concours CRMEF"
+  },
+  {
+    "id": "ms-03",
+    "theme": "Analyse · Séries Numériques",
+    "question": "Pour quelle condition sur le réel α la série de Riemann ∑_{n=1}^∞ (1 / n^α) converge-t-elle ?",
+    "questionAr": "ما هو الشرط على العدد الحقيقي α لكي تتقارب متسلسلة ريمان ∑_{n=1}^∞ (1 / n^α)؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "α ≤ 1"
+      },
+      {
+        "id": "B",
+        "text": "α > 1",
+        "correct": true
+      },
+      {
+        "id": "C",
+        "text": "α ≥ 0"
+      },
+      {
+        "id": "D",
+        "text": "Pour tout α réel"
+      }
+    ],
+    "explanation": "D'après le critère de Riemann (par comparaison avec l'intégrale impropre ∫_1^∞ dt/t^α), la série ∑ 1/n^α converge si et seulement si l'exposant α est strictement supérieur à 1 (α > 1).",
+    "ref": "Analyse Mathématique · Séries Numériques"
+  },
+  {
+    "id": "ms-04",
+    "theme": "Arithmétique · Identité de Bézout",
+    "question": "Soient a et b deux entiers relatifs non nuls. Quelle est la caractérisation nécessaire et suffisante pour que a et b soient premiers entre eux (a ∧ b = 1) selon le théorème de Bézout ?",
+    "questionAr": "ليكن a و b عددين صحيحين نسبيين غير منعدمين. ما هو الشرط اللازم والكافي لكي يكون a و b أوليين فيما بينهما حسب مبرهنة بيزو (Bézout)؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "Il existe deux entiers relatifs u et v tels que a·u + b·v = 1",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "a divise b ou b divise a"
+      },
+      {
+        "id": "C",
+        "text": "a et b sont tous les deux des nombres premiers"
+      },
+      {
+        "id": "D",
+        "text": "a + b est un nombre impair"
+      }
+    ],
+    "explanation": "L'identité de Bézout affirme que a et b sont premiers entre eux si et seulement si 1 est combinaison linéaire entière de a et b : ∃ (u, v) ∈ Z² tel que au + bv = 1.",
+    "ref": "Arithmétique dans Z · 2ème Bac Sciences Maths & CRMEF"
+  },
+  {
+    "id": "ms-05",
+    "theme": "Algèbre Linéaire · Réduction",
+    "question": "Soit A une matrice carrée d'ordre n à coefficients dans R. Que stipule le théorème fondamental de Cayley-Hamilton ?",
+    "questionAr": "لتكن A مصفوفة مربعة من الرتبة n بمعاملات في R. ماذا تنص عليه مبرهنة كايلي-هاميلتون (Cayley-Hamilton) الأساسية؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "Toute matrice carrée annule son propre polynôme caractéristique : χ_A(A) = 0_n",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "Le déterminant d'une matrice carrée est toujours égal à sa trace"
+      },
+      {
+        "id": "C",
+        "text": "Toute matrice carrée admet au moins n valeurs propres réelles distinctes"
+      },
+      {
+        "id": "D",
+        "text": "Le produit de deux matrices carrées est toujours commutatif"
+      }
+    ],
+    "explanation": "Le théorème de Cayley-Hamilton établit que si χ_A(X) = det(XI_n - A) est le polynôme caractéristique de A, alors en substituant formellement la matrice A à l'indéterminée X, on obtient la matrice nulle : χ_A(A) = 0.",
+    "ref": "Algèbre Bilinéaire & Réduction des Endomorphismes"
+  },
+  {
+    "id": "ms-06",
+    "theme": "Analyse · Théorème des Accroissements Finis",
+    "question": "Soit f une fonction continue sur [a, b] et dérivable sur ]a, b[. Quelle est l'égalité donnée par le Théorème des Accroissements Finis (TAF) ?",
+    "questionAr": "لتكن f دالة عددية متصلة على [a, b] وقابلة للاشتقاق على ]a, b[. ما هي المساواة التي تعبر عن مبرهنة التزايدات المنتهية (TAF)؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "Il existe c ∈ ]a, b[ tel que f(b) - f(a) = f'(c)·(b - a)",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "f(b) - f(a) = f'((a+b)/2)·(b - a)"
+      },
+      {
+        "id": "C",
+        "text": "f'(c) = [f(b) + f(a)] / 2"
+      },
+      {
+        "id": "D",
+        "text": "f(c) = 0 pour tout c ∈ [a, b]"
+      }
+    ],
+    "explanation": "Le TAF garantit qu'il existe au moins un point c dans ]a, b[ où la pente de la tangente f'(c) est exactement égale à la pente de la sécante reliant (a, f(a)) et (b, f(b)) : f'(c) = (f(b) - f(a))/(b - a).",
+    "ref": "Programme National de Mathématiques · CRMEF & 2ème Bac"
+  },
+  {
+    "id": "ms-07",
+    "theme": "Arithmétique · Petit Théorème de Fermat",
+    "question": "Soit p un nombre premier et a un entier relatif non divisible par p. Que donne le Petit Théorème de Fermat ?",
+    "questionAr": "ليكن p عدداً أولياً و a عدداً صحيحاً نسبياً لا يقبل القسمة على p. ماذا تعطي مبرهنة فيرما الصغرى (Petit théorème de Fermat)؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "a^(p - 1) ≡ 1 [p]",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "a^p ≡ 0 [p]"
+      },
+      {
+        "id": "C",
+        "text": "a^(p - 1) ≡ -1 [p]"
+      },
+      {
+        "id": "D",
+        "text": "a + p ≡ 1 [p]"
+      }
+    ],
+    "explanation": "Le petit théorème de Fermat affirme que pour tout nombre premier p et tout entier a premier avec p, on a a^(p-1) ≡ 1 (mod p), ou de manière équivalente a^p ≡ a (mod p) pour tout a entier.",
+    "ref": "Arithmétique · Concours d'Accès aux CRMEF"
+  },
+  {
+    "id": "ms-08",
+    "theme": "Probabilités · Théorème de Bayes",
+    "question": "Soit (A_i)_{i=1}^n un système complet d'événements de probabilités non nulles, et B un événement de probabilité non nulle. Quelle est la formule de Bayes pour P(A_k | B) ?",
+    "questionAr": "لتكن (A_i) تجزيئاً لفضاء الاحتمالات بأحداث احتمالاتها غير منعدمة، و B حدثاً احتماله غير منعدم. ما هي صيغة بايز (Formule de Bayes) لحساب الاحتمال البعدي P(A_k | B)؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "P(A_k | B) = [P(B | A_k) · P(A_k)] / ∑_{i=1}^n [P(B | A_i) · P(A_i)]",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "P(A_k | B) = P(B | A_k) / P(A_k)"
+      },
+      {
+        "id": "C",
+        "text": "P(A_k | B) = P(A_k) · P(B)"
+      },
+      {
+        "id": "D",
+        "text": "P(A_k | B) = [P(A_k) + P(B)] / 2"
+      }
+    ],
+    "explanation": "La formule de Bayes (probabilité des causes) s'écrit P(A_k | B) = P(A_k ∩ B) / P(B) = [P(B | A_k)P(A_k)] / [∑ P(B | A_i)P(A_i)], en développant le dénominateur par la formule des probabilités totales.",
+    "ref": "Probabilités & Statistiques · Licence & Concours CRMEF"
+  },
+  {
+    "id": "ms-09",
+    "theme": "Probabilités · Lois Usuelles",
+    "question": "Quelle est l'espérance mathématique E(X) et la variance V(X) d'une variable aléatoire X suivant une loi binomiale B(n, p) ?",
+    "questionAr": "ما هو الأمل الرياضي E(X) والتباين V(X) لمتغير عشوائي X يتبع قانون ذي الحدين B(n, p)؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "E(X) = n·p et V(X) = n·p·(1 - p)",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "E(X) = n / p et V(X) = n·p²"
+      },
+      {
+        "id": "C",
+        "text": "E(X) = p et V(X) = p·(1 - p)"
+      },
+      {
+        "id": "D",
+        "text": "E(X) = n·p et V(X) = n·p"
+      }
+    ],
+    "explanation": "Pour une loi binomiale B(n, p), somme de n variables indépendantes de Bernoulli de paramètre p, l'espérance est E(X) = np et la variance est V(X) = np(1 - p) = npq.",
+    "ref": "Probabilités Discrètes · CRMEF Secondaire"
+  },
+  {
+    "id": "ms-10",
+    "theme": "Algèbre Linéaire · Diagonalisation",
+    "question": "À quelle condition nécessaire et suffisante un endomorphisme u d'un espace vectoriel E de dimension finie n est-il diagonalisable ?",
+    "questionAr": "ما هو الشرط اللازم والكافي لكي يكون تشاكل داخلي u من فضاء متجهي E بعده منته n قابلاً للتقطير (Diagonalisable)؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "Son polynôme caractéristique est scindé sur le corps K et pour chaque valeur propre, la multiplicité géométrique (dimension du sous-espace propre) est égale à sa multiplicité algébrique",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "La trace de u est nulle"
+      },
+      {
+        "id": "C",
+        "text": "Le déterminant de u est strictement positif"
+      },
+      {
+        "id": "D",
+        "text": "Toutes ses coordonnées sont des entiers relatifs"
+      }
+    ],
+    "explanation": "Un endomorphisme est diagonalisable si et seulement s'il existe une base de vecteurs propres, ce qui équivaut à un polynôme caractéristique scindé et dim(E_λ) = ordre de multiplicité de λ pour toute valeur propre λ.",
+    "ref": "Algèbre Linéaire & Réduction · Université & CRMEF"
+  },
+  {
+    "id": "ms-11",
+    "theme": "Analyse · Continuité & TVI",
+    "question": "Soit f une fonction continue et strictement monotone sur un intervalle [a, b]. Que garantit le corollaire du TVI (théorème de la bijection) si f(a)·f(b) < 0 ?",
+    "questionAr": "لتكن f دالة متصلة ورتيبة قطعا على مجال [a, b]. ماذا يضمن الاستلزام الأساسي لمبرهنة القيم الوسيطية إذا كان f(a)·f(b) < 0؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "L'équation f(x) = 0 admet une unique solution α dans l'intervalle ouvert ]a, b[",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "L'équation f(x) = 0 admet une infinité non dénombrable de solutions"
+      },
+      {
+        "id": "C",
+        "text": "La fonction f est obligatoirement constante"
+      },
+      {
+        "id": "D",
+        "text": "La dérivée f' s'annule en au moins deux points distincts"
+      }
+    ],
+    "explanation": "Puisque f est continue et change de signe (f(a)·f(b) < 0), le TVI garantit l'existence d'au moins une racine. La stricte monotonie en assure l'unicité stricte sur ]a, b[.",
+    "ref": "Analyse Réelle · 2ème Bac & Concours Enseignement"
+  },
+  {
+    "id": "ms-12",
+    "theme": "Analyse · Intégration",
+    "question": "Quelle est la valeur de l'intégrale définie I = ∫_0^1 x·e^x dx calculée par intégration par parties ?",
+    "questionAr": "ما هي قيمة التكامل المحدد I = ∫_0^1 x·e^x dx المحسوب بواسطة المكاملة بالأجزاء؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "1",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "e - 1"
+      },
+      {
+        "id": "C",
+        "text": "e"
+      },
+      {
+        "id": "D",
+        "text": "0"
+      }
+    ],
+    "explanation": "En posant u(x) = x ⇒ u'(x) = 1 et v'(x) = e^x ⇒ v(x) = e^x, on a I = [x·e^x]_0^1 - ∫_0^1 e^x dx = (1·e - 0) - [e^x]_0^1 = e - (e - 1) = 1.",
+    "ref": "Calcul Intégral · Concours CRMEF Mathématiques"
+  },
+  {
+    "id": "ms-13",
+    "theme": "Arithmétique · Théorème de Gauss",
+    "question": "Que stipule le Théorème de Gauss en arithmétique élémentaire ?",
+    "questionAr": "ماذا تنص عليه مبرهنة غوص (Théorème de Gauss) في الحسابيات؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "Si un entier a divise le produit b·c et si a est premier avec b (a ∧ b = 1), alors a divise c",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "La somme de deux nombres premiers est toujours un nombre pair"
+      },
+      {
+        "id": "C",
+        "text": "Tout nombre premier congru à 1 modulo 4 est somme de deux carrés"
+      },
+      {
+        "id": "D",
+        "text": "Le produit de deux entiers impairs est pair"
+      }
+    ],
+    "explanation": "Le théorème de Gauss découle de l'identité de Bézout : puisque au + bv = 1, en multipliant par c, on obtient acu + bcv = c. Comme a divise acu et a divise bc, a divise leur somme, donc a divise c.",
+    "ref": "Arithmétique dans Z · 2ème Bac Sciences Maths"
+  },
+  {
+    "id": "ms-14",
+    "theme": "Géométrie · Nombres Complexes",
+    "question": "Dans le plan complexe rapporté à un repère orthonormé direct, quelle transformation géométrique est représentée par l'écriture complexe z' - ω = e^(iθ) · (z - ω) ?",
+    "questionAr": "في المستوى العقدي، ما هو التحويل الهندسي الممثل بالكتابة العقدية z' - ω = e^(iθ) · (z - ω)؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "La rotation de centre Ω d'affixe ω et d'angle de mesure θ",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "L'homothétie de centre Ω et de rapport θ"
+      },
+      {
+        "id": "C",
+        "text": "La translation de vecteur d'affixe e^(iθ)"
+      },
+      {
+        "id": "D",
+        "text": "La réflexion d'axe passant par Ω"
+      }
+    ],
+    "explanation": "Une rotation de centre Ω(ω) et d'angle θ multiplie les vecteurs d'affixe (z - ω) par le complexe de module 1 et d'argument θ : e^(iθ). L'écriture est z' - ω = e^(iθ)(z - ω).",
+    "ref": "Nombres Complexes & Géométrie · 2ème Bac Sciences Maths"
+  },
+  {
+    "id": "ms-15",
+    "theme": "Espaces Euclidiens · Cauchy-Schwarz",
+    "question": "Soit E un espace vectoriel euclidien muni du produit scalaire ⟨·, ·⟩. Que dit l'inégalité de Cauchy-Schwarz pour tous vecteurs x et y de E ?",
+    "questionAr": "ليكن E فضاء متجهيا إقليديا مزودا بالجداء السلمي ⟨·, ·⟩. ماذا تنص متراجحة كوشي-شفارز (Cauchy-Schwarz) بالنسبة لأي متجهتين x و y من E؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "|⟨x, y⟩| ≤ ‖x‖ · ‖y‖, avec égalité si et seulement si x et y sont colinéaires",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "‖x + y‖ = ‖x‖ + ‖y‖"
+      },
+      {
+        "id": "C",
+        "text": "⟨x, y⟩ = ‖x‖² + ‖y‖²"
+      },
+      {
+        "id": "D",
+        "text": "|⟨x, y⟩| ≥ ‖x‖ · ‖y‖"
+      }
+    ],
+    "explanation": "L'inégalité fondamentale de Cauchy-Schwarz établit que la valeur absolue du produit scalaire de deux vecteurs est majorée par le produit de leurs normes, le cas d'égalité traduisant la dépendance linéaire des deux vecteurs.",
+    "ref": "Espaces Préhilbertiens & Euclidiens · Licence & Concours"
+  },
+  {
+    "id": "ms-16",
+    "theme": "Analyse · Équations Différentielles",
+    "question": "Quelle est la forme générale des solutions réelles de l'équation différentielle linéaire homogène du second ordre y'' + ω² y = 0 (avec ω > 0) ?",
+    "questionAr": "ما هو الشكل العام للحلول الحقيقية للمعادلة التفاضلية الخطية المتجانسة من الدرجة الثانية y'' + ω² y = 0 (حيث ω > 0)؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "y(x) = A·cos(ωx) + B·sin(ωx), où (A, B) ∈ R²",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "y(x) = A·e^(ωx) + B·e^(-ωx)"
+      },
+      {
+        "id": "C",
+        "text": "y(x) = (Ax + B)·e^(ωx)"
+      },
+      {
+        "id": "D",
+        "text": "y(x) = A·x² + B·x + C"
+      }
+    ],
+    "explanation": "L'équation caractéristique r² + ω² = 0 possède deux racines complexes conjuguées pures r = ±iω. Les solutions réelles sont donc les combinaisons linéaires des fonctions harmoniques cos(ωx) et sin(ωx).",
+    "ref": "Équations Différentielles · 2ème Bac & CRMEF"
+  },
+  {
+    "id": "ms-17",
+    "theme": "Structures Algébriques · Théorème de Lagrange",
+    "question": "Soit G un groupe fini et H un sous-groupe de G. Que stipule le théorème de Lagrange ?",
+    "questionAr": "لتكن G زمرة منتهية و H زمرة جزئية من G. ماذا تنص عليه مبرهنة لاغرانج (Théorème de Lagrange)؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "L'ordre du sous-groupe H divise l'ordre du groupe G : |H| divise |G|",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "L'ordre de H est toujours égal à |G| - 1"
+      },
+      {
+        "id": "C",
+        "text": "H est obligatoirement un sous-groupe distingué"
+      },
+      {
+        "id": "D",
+        "text": "Le cardinal de G est obligatoirement un nombre premier"
+      }
+    ],
+    "explanation": "Le théorème de Lagrange pour les groupes finis énonce que le cardinal de tout sous-groupe divise le cardinal du groupe, l'indice [G:H] représentant le nombre de classes à gauche selon H : |G| = [G:H] × |H|.",
+    "ref": "Théorie des Groupes · Algèbre Générale Universitaire"
+  },
+  {
+    "id": "ms-18",
+    "theme": "Analyse · Suites Numériques",
+    "question": "Que stipule le Théorème de Bolzano-Weierstrass dans R ?",
+    "questionAr": "ماذا تنص عليه مبرهنة بولزانو-فايرشتراس (Bolzano-Weierstrass) في مجموعة الأعداد الحقيقية R؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "De toute suite réelle bornée, on peut extraire une sous-suite convergente",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "Toute suite réelle bornée est convergente"
+      },
+      {
+        "id": "C",
+        "text": "Toute suite croissante est bornée"
+      },
+      {
+        "id": "D",
+        "text": "La limite d'une suite est toujours un nombre rationnel"
+      }
+    ],
+    "explanation": "Le théorème de Bolzano-Weierstrass traduit la compacité séquentielle des fermés bornés de R : toute suite à valeurs dans un compact admet au moins une valeur d'adhérence (limite d'une sous-suite).",
+    "ref": "Topologie de R & Analyse Réelle · Licence Mathématiques"
+  },
+  {
+    "id": "ms-19",
+    "theme": "Géométrie · Espace & Produit Vectoriel",
+    "question": "Dans l'espace euclidien orienté R³, quelle est la propriété fondamentale du produit vectoriel u ∧ v de deux vecteurs non colinéaires ?",
+    "questionAr": "في الفضاء الإقليدي الموجه R³، ما هي الخاصية الهندسية الأساسية للجداء المتجهي u ∧ v لمتجهتين غير مستقيميتين؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "Le vecteur u ∧ v est orthogonal à la fois au vecteur u et au vecteur v, et sa norme est égale à l'aire du parallélogramme formé par u et v",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "u ∧ v est colinéaire à la somme u + v"
+      },
+      {
+        "id": "C",
+        "text": "La norme de u ∧ v est toujours égale à 1"
+      },
+      {
+        "id": "D",
+        "text": "Le produit vectoriel est commutatif : u ∧ v = v ∧ u"
+      }
+    ],
+    "explanation": "Le produit vectoriel u ∧ v est antisymétrique (u ∧ v = -(v ∧ u)), orthogonal au plan engendré par (u, v), dirigé selon la règle de la main droite, et a pour norme ‖u‖·‖v‖·|sin(u, v)|, qui est l'aire du parallélogramme.",
+    "ref": "Géométrie dans l'Espace · Bac Sciences Maths & Concours"
+  },
+  {
+    "id": "ms-20",
+    "theme": "Statistiques & Probabilités · TCL",
+    "question": "Que stipule le Théorème Central Limite (TCL) pour une suite (X_n) de variables aléatoires indépendantes et identiquement distribuées d'espérance μ et de variance σ² > 0 ?",
+    "questionAr": "ماذا تنص مبرهنة النهاية المركزية (TCL) لمتتالية (X_n) من المتغيرات العشوائية المستقلة والمتطابقة التوزيع بأمل μ وتباين σ² > 0؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "La variable centrée réduite √n · (X̄_n - μ) / σ converge en loi vers la loi normale centrée réduite N(0, 1)",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "La moyenne X̄_n est toujours constante égale à μ"
+      },
+      {
+        "id": "C",
+        "text": "La variance tend vers l'infini"
+      },
+      {
+        "id": "D",
+        "text": "La somme des variables converge presque sûrement vers zéro"
+      }
+    ],
+    "explanation": "Le TCL est le théorème fondamental de la statistique inférentielle : quelle que soit la loi mère (discrète ou continue), la moyenne standardisée tend en distribution vers une loi de Gauss N(0, 1).",
+    "ref": "Probabilités Continues & Statistique Inférentielle · CRMEF"
+  },
+  {
+    "id": "ms-21",
+    "theme": "Analyse · Règle de d'Alembert",
+    "question": "Soit ∑ u_n une série numérique à termes strictement positifs telle que lim (u_{n+1} / u_n) = L. Que peut-on conclure si L < 1 ?",
+    "questionAr": "لتكن ∑ u_n متسلسلة عددية حدودها موجبة قطعا بحيث lim (u_{n+1} / u_n) = L. ماذا يمكن استنتاجه إذا كان L < 1 حسب معيار دالمبير؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "La série ∑ u_n est absolument convergente",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "La série ∑ u_n est grossièrement divergente"
+      },
+      {
+        "id": "C",
+        "text": "On ne peut pas conclure (cas douteux)"
+      },
+      {
+        "id": "D",
+        "text": "La somme de la série est égale à L"
+      }
+    ],
+    "explanation": "La règle de d'Alembert énonce : si L < 1, la série converge (par comparaison avec une suite géométrique de raison q ∈ ]L, 1[) ; si L > 1, elle diverge ; si L = 1, la règle ne permet pas de conclure.",
+    "ref": "Séries Numériques · Analyse Universitaire"
+  },
+  {
+    "id": "ms-22",
+    "theme": "Analyse · Séries Alternées",
+    "question": "Que stipule le critère spécial des séries alternées (règle de Leibniz) pour la série ∑ (-1)^n · a_n où a_n > 0 ?",
+    "questionAr": "ماذا ينص معيار لايبنتز (Règle de Leibniz) للمتسلسلات المتناوبة ∑ (-1)^n · a_n حيث a_n > 0؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "Si la suite (a_n) est décroissante et converge vers 0, alors la série alternée converge et la valeur absolue du reste d'ordre n est majorée par a_{n+1}",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "La série converge pour toute suite bornée a_n"
+      },
+      {
+        "id": "C",
+        "text": "La somme de la série est toujours égale à zéro"
+      },
+      {
+        "id": "D",
+        "text": "La série diverge dès que a_n n'est pas constante"
+      }
+    ],
+    "explanation": "Le théorème de Leibniz affirme que si (a_n) décroît vers 0, la série alternée converge, ses sommes partielles d'ordres pairs et impairs sont adjacentes, et le reste vérifie |R_n| ≤ a_{n+1}.",
+    "ref": "Analyse Réelle · CRMEF & Prépas"
+  },
+  {
+    "id": "ms-23",
+    "theme": "Algèbre Linéaire · Formule de Grassmann",
+    "question": "Soient F et G deux sous-espaces vectoriels d'un espace vectoriel E de dimension finie. Quelle est la formule de Grassmann ?",
+    "questionAr": "ليكن F و G فضاءين متجهيين جزئيين من فضاء E بعده منته. ما هي صيغة غراسمان (Formule de Grassmann)؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "dim(F + G) = dim(F) + dim(G) - dim(F ∩ G)",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "dim(F + G) = dim(F) × dim(G)"
+      },
+      {
+        "id": "C",
+        "text": "dim(F ∩ G) = dim(F) - dim(G)"
+      },
+      {
+        "id": "D",
+        "text": "dim(F + G) = dim(E) - dim(F ∩ G)"
+      }
+    ],
+    "explanation": "La formule de Grassmann relie la dimension de la somme et de l'intersection : dim(F + G) = dim F + dim G - dim(F ∩ G). En particulier, la somme est directe (F ⊕ G) si et seulement si dim(F ⊕ G) = dim F + dim G.",
+    "ref": "Algèbre Linéaire Fondamentale · CRMEF"
+  },
+  {
+    "id": "ms-24",
+    "theme": "Arithmétique · Restes Chinois",
+    "question": "Soient m et n deux entiers naturels supérieurs à 1 et premiers entre eux (m ∧ n = 1). Que garantit le théorème des restes chinois pour tout couple (a, b) d'entiers ?",
+    "questionAr": "ليكن m و n عددين طبيعيين أوليين فيما بينهما (m ∧ n = 1). ماذا يضمن مبرهنة البواقي الصينية (Théorème des restes chinois) لأي زوج (a, b)؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "Il existe un entier x unique modulo m·n tel que x ≡ a [m] et x ≡ b [n]",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "Il n'existe aucune solution entière"
+      },
+      {
+        "id": "C",
+        "text": "Le produit a·b est toujours congru à 1 modulo m·n"
+      },
+      {
+        "id": "D",
+        "text": "x est obligatoirement un multiple commun de m et n"
+      }
+    ],
+    "explanation": "Le théorème des restes chinois établit l'isomorphisme d'anneaux Z/(mn)Z ≃ Z/mZ × Z/nZ lorsque m et n sont premiers entre eux, garantissant l'existence et l'unicité modulo mn d'une solution au système.",
+    "ref": "Arithmétique Avancée · CPGE & CRMEF"
+  },
+  {
+    "id": "ms-25",
+    "theme": "Polynômes · Théorème de d'Alembert-Gauss",
+    "question": "Que stipule le Théorème fondamental de l'algèbre (Théorème de d'Alembert-Gauss) pour les polynômes à coefficients complexes ?",
+    "questionAr": "ماذا تنص المبرهنة الأساسية في الجبر (مبرهنة دالمبير-غوص) بالنسبة للحدوديات ذات المعاملات العقدية C[X]؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "Tout polynôme non constant à coefficients dans C est scindé sur C (admet au moins une racine dans C et exactement deg(P) racines comptées avec leurs multiplicités)",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "Les racines d'un polynôme réel sont obligatoirement réelles"
+      },
+      {
+        "id": "C",
+        "text": "Tout polynôme de degré pair est irréductible sur C"
+      },
+      {
+        "id": "D",
+        "text": "Le degré d'un polynôme scindé est toujours un nombre premier"
+      }
+    ],
+    "explanation": "Le théorème de d'Alembert-Gauss affirme que le corps C des nombres complexes est algébriquement clos : tout polynôme P de degré n ≥ 1 possède exactement n racines complexes comptées avec leur ordre de multiplicité.",
+    "ref": "Polynômes & Algèbre Générale · CRMEF"
+  },
+  {
+    "id": "ms-26",
+    "theme": "Analyse · Formule de Taylor-Young",
+    "question": "Soit f une fonction n fois dérivable en un point x_0. Quelle est la formule de Taylor-Young au voisinage de x_0 ?",
+    "questionAr": "لتكن f دالة قابلة للاشتقاق n مرة عند النقطة x_0. ما هي صيغة تايلور-يونغ (Taylor-Young) بجوار x_0؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "f(x) = ∑_{k=0}^n [f^(k)(x_0) / k!] · (x - x_0)^k + o((x - x_0)^n)",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "f(x) = f(x_0) + f'(x_0)·(x - x_0)"
+      },
+      {
+        "id": "C",
+        "text": "f(x) = ∑_{k=0}^n f(k)·x^k"
+      },
+      {
+        "id": "D",
+        "text": "f(x) = f'(x_0) / n!"
+      }
+    ],
+    "explanation": "La formule de Taylor-Young fournit le développement limité d'ordre n d'une fonction de classe C^n au voisinage d'un point, avec un reste négligeable sous la forme de Landau o((x - x_0)^n).",
+    "ref": "Développements Limités & Analyse Locale · CRMEF"
+  },
+  {
+    "id": "ms-27",
+    "theme": "Géométrie · Barycentres",
+    "question": "Soit G le barycentre du système pondéré {(A, a), (B, b), (C, c)} avec a + b + c ≠ 0. Quelle égalité vectorielle fondamentale caractérise le point G pour tout point M de l'espace ?",
+    "questionAr": "ليكن G مرجح النقط المتزنة {(A, a), (B, b), (C, c)} مع a + b + c ≠ 0. ما هي المتساوية المتجهية الأساسية التي تميز G بالنسبة لأي نقطة M من الفضاء؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "a·vect(MA) + b·vect(MB) + c·vect(MC) = (a + b + c)·vect(MG)",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "vect(GA) + vect(GB) + vect(GC) = vect(0)"
+      },
+      {
+        "id": "C",
+        "text": "vect(MG) = vect(MA) + vect(MB) + vect(MC)"
+      },
+      {
+        "id": "D",
+        "text": "a·vect(MA) = b·vect(MB)"
+      }
+    ],
+    "explanation": "La propriété caractéristique du barycentre s'écrit pour tout point M : ∑ a_i·vect(MA_i) = (∑ a_i)·vect(MG). En particulier pour M = G, on retrouve a·vect(GA) + b·vect(GB) + c·vect(GC) = vect(0).",
+    "ref": "Géométrie Affine · 1ère & 2ème Bac Sciences Maths"
+  },
+  {
+    "id": "ms-28",
+    "theme": "Probabilités · Loi de Poisson",
+    "question": "Soit X une variable aléatoire suivant une loi de Poisson de paramètre λ > 0 (P(λ)). Pour tout entier k ≥ 0, quelle est l'expression de P(X = k) ?",
+    "questionAr": "لتكن X متغيراً عشوائياً يتبع قانون بواسون بوسيط λ > 0 (P(λ)). لأي عدد صحيح طبيعي k، ما هي قيمة الاحتمال P(X = k)؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "P(X = k) = e^(-λ) · (λ^k / k!)",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "P(X = k) = λ^k · (1 - λ)"
+      },
+      {
+        "id": "C",
+        "text": "P(X = k) = 1 / (k + 1)"
+      },
+      {
+        "id": "D",
+        "text": "P(X = k) = e^(λ·k)"
+      }
+    ],
+    "explanation": "La loi de Poisson P(λ), modélisant les événements rares indépendants, associe à chaque entier k le terme de la série exponentielle : P(X = k) = e^(-λ)·λ^k / k!, avec E(X) = V(X) = λ.",
+    "ref": "Probabilités Discrètes · Licence & CRMEF"
+  },
+  {
+    "id": "ms-29",
+    "theme": "Probabilités · Inégalité de Bienaymé-Tchebychev",
+    "question": "Soit X une variable aléatoire d'espérance E(X) = m et de variance V(X) = σ². Que stipule l'inégalité de Bienaymé-Tchebychev pour tout ε > 0 ?",
+    "questionAr": "ليكن X متغيرا عشوائيا بأمل رياضي m وتباين σ². ماذا تنص متراجحة بيانيمي-تشيبيشيف (Bienaymé-Tchebychev) لأي ε > 0؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "P(|X - m| ≥ ε) ≤ V(X) / ε²",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "P(|X - m| ≥ ε) ≥ ε² / V(X)"
+      },
+      {
+        "id": "C",
+        "text": "P(|X - m| ≤ ε) = 1 - ε"
+      },
+      {
+        "id": "D",
+        "text": "P(|X - m| ≥ ε) ≤ m / ε"
+      }
+    ],
+    "explanation": "L'inégalité de Bienaymé-Tchebychev majore la probabilité que X s'écarte de son espérance d'au moins ε par le quotient de sa variance par ε² : P(|X - E(X)| ≥ ε) ≤ V(X) / ε².",
+    "ref": "Probabilités · Loi Faible des Grands Nombres"
+  },
+  {
+    "id": "ms-30",
+    "theme": "Algèbre · Matrices Orthogonales",
+    "question": "À quelle condition nécessaire et suffisante une matrice carrée M ∈ M_n(R) est-elle une matrice orthogonale (M ∈ O(n)) ?",
+    "questionAr": "ما هو الشرط اللازم والكافي لكي تكون مصفوفة مربعة M من الرتبة n مصفوفة متعامدة (Matrice orthogonale M ∈ O(n))؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "^tM · M = I_n (la transposée de M est égale à son inverse)",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "det(M) = 0"
+      },
+      {
+        "id": "C",
+        "text": "M est symétrique : ^tM = M"
+      },
+      {
+        "id": "D",
+        "text": "La trace de M est égale à n"
+      }
+    ],
+    "explanation": "Une matrice est orthogonale si et seulement si ses colonnes forment une base orthonormée de R^n pour le produit scalaire usuel, ce qui se traduit matriciellement par ^tM × M = I_n, impliquant que det(M) = ±1.",
+    "ref": "Géométrie Euclidienne & Espaces Préhilbertiens"
+  },
+  {
+    "id": "ms-31",
+    "theme": "Analyse · Suites Adjacentes",
+    "question": "Deux suites réelles (u_n) et (v_n) sont dites adjacentes si l'une est croissante, l'autre est décroissante et :",
+    "questionAr": "يقال عن متتاليتين حقيقيتين (u_n) و (v_n) أنهما متحاديتان (Suites adjacentes) إذا كانت إحداهما تزايدية والأخرى تناقصية و :",
+    "options": [
+      {
+        "id": "A",
+        "text": "lim_{n→∞} (v_n - u_n) = 0",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "u_n × v_n = 1 pour tout n"
+      },
+      {
+        "id": "C",
+        "text": "u_n + v_n = 0"
+      },
+      {
+        "id": "D",
+        "text": "lim_{n→∞} (u_n / v_n) = +∞"
+      }
+    ],
+    "explanation": "Le théorème des suites adjacentes garantit que si (u_n) croît, (v_n) décroît et v_n - u_n tend vers 0, alors pour tout n on a u_n ≤ v_n, et les deux suites convergent vers une même limite finie commune l.",
+    "ref": "Suites Réelles · Analyse 2ème Bac & CRMEF"
+  },
+  {
+    "id": "ms-32",
+    "theme": "Analyse · Continuité Uniforme",
+    "question": "Que stipule le Théorème de Heine pour les fonctions définies sur un intervalle fermé borné [a, b] ?",
+    "questionAr": "ماذا تنص مبرهنة هاينه (Théorème de Heine) بالنسبة للدوال العددية المعرفة على مجال مغلق ومحدود [a, b]؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "Toute fonction continue sur un segment [a, b] est uniformément continue sur ce segment",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "Toute fonction continue est dérivable sur [a, b]"
+      },
+      {
+        "id": "C",
+        "text": "Toute fonction uniformément continue est constante"
+      },
+      {
+        "id": "D",
+        "text": "Toute fonction bornée est continue"
+      }
+    ],
+    "explanation": "Le théorème de Heine est une propriété topologique fondamentale : la continuité d'une fonction sur un compact (fermé borné de R) implique sa continuité uniforme (le choix de η ne dépend que de ε et non du point x).",
+    "ref": "Topologie des Espaces Métriques · Licence & CRMEF"
+  },
+  {
+    "id": "ms-33",
+    "theme": "Arithmétique · Groupe des Inversibles Z/nZ",
+    "question": "Quel est le cardinal du groupe des éléments inversibles de l'anneau (Z/nZ, +, ×) noté (Z/nZ)* ?",
+    "questionAr": "ما هو رئيسي زمرة العناصر القابلة للقلب في الحلقة (Z/nZ, +, ×) المعبر عنها بـ (Z/nZ)*؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "φ(n), où φ est l'indicatrice d'Euler (le nombre d'entiers k ∈ {1, ..., n} premiers avec n)",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "n - 1 dans tous les cas"
+      },
+      {
+        "id": "C",
+        "text": "n²"
+      },
+      {
+        "id": "D",
+        "text": "2^n"
+      }
+    ],
+    "explanation": "Une classe x̄ est inversible dans Z/nZ si et seulement si x est premier avec n (pgcd(x, n) = 1 d'après Bézout). Le nombre d'inversibles est donc par définition l'indicatrice d'Euler φ(n).",
+    "ref": "Arithmétique & Algèbre Générale · CRMEF"
+  },
+  {
+    "id": "ms-34",
+    "theme": "Algèbre Linéaire · Trace d'un Endomorphisme",
+    "question": "Soit A et B deux matrices carrées de même taille dans M_n(K). Quelle propriété fondamentale vérifie la trace du produit matriciel ?",
+    "questionAr": "لتكن A و B مصفوفتين مربعتين من نفس الرتبة. ما هي الخاصية الأساسية التي يحققها أثر الجداء المصفوفاتي (Trace)؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "Tr(A·B) = Tr(B·A)",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "Tr(A·B) = Tr(A) × Tr(B)"
+      },
+      {
+        "id": "C",
+        "text": "Tr(A·B) = det(A) + det(B)"
+      },
+      {
+        "id": "D",
+        "text": "Tr(A·B) = 0 dès que A ≠ B"
+      }
+    ],
+    "explanation": "La trace est invariante par permutation circulaire : Tr(AB) = Tr(BA). En conséquence, deux matrices semblables ont la même trace, ce qui permet de définir la trace intrinsèque d'un endomorphisme.",
+    "ref": "Algèbre Linéaire · Espaces Vectoriels & Matrices"
+  },
+  {
+    "id": "ms-35",
+    "theme": "Analyse · Règle de L'Hôpital",
+    "question": "Dans le calcul des limites de formes indéterminées « 0/0 » ou « ∞/∞ », quelle est la conclusion de la règle de L'Hôpital pour deux fonctions dérivables f et g au voisinage de a avec g'(x) ≠ 0 ?",
+    "questionAr": "في حساب نهايات الأشكال غير المحددة «0/0» أو «∞/∞»، ما هو استنتاج قاعدة لوبيتال (Règle de L'Hôpital) عند النقطة a؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "Si lim_{x→a} [f'(x) / g'(x)] = L (fini ou infini), alors lim_{x→a} [f(x) / g(x)] = L",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "lim [f(x)/g(x)] = f'(a) × g'(a)"
+      },
+      {
+        "id": "C",
+        "text": "La limite est toujours égale à 1"
+      },
+      {
+        "id": "D",
+        "text": "La règle ne s'applique qu'aux polynômes de degré 2"
+      }
+    ],
+    "explanation": "La règle de L'Hôpital, conséquence du théorème des accroissements finis généralisé de Cauchy, permet de lever les formes 0/0 ou ∞/∞ en calculant la limite du rapport des dérivées f'(x)/g'(x).",
+    "ref": "Analyse Réelle · Dérivation & Limites"
+  },
+  {
+    "id": "ms-36",
+    "theme": "Probabilités · Loi Normale",
+    "question": "Soit X une variable aléatoire suivant une loi normale N(μ, σ²). Quelle transformation permet d'obtenir la variable normale centrée réduite Z ~ N(0, 1) ?",
+    "questionAr": "لتكن X متغيراً عشوائياً يتبع قانوناً طبيعياً N(μ, σ²). ما هو التحويل الذي يمكن من الحصول على المتغير الطبيعي الممركز والمختزل Z ~ N(0, 1)؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "Z = (X - μ) / σ",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "Z = (X + μ) · σ"
+      },
+      {
+        "id": "C",
+        "text": "Z = X² - μ²"
+      },
+      {
+        "id": "D",
+        "text": "Z = X / μ"
+      }
+    ],
+    "explanation": "En soustrayant l'espérance μ (centrage) et en divisant par l'écart-type σ (réduction), on obtient une variable Z de moyenne nulle E(Z) = 0 et de variance unitaire V(Z) = 1, permettant la lecture des probabilités dans la table de Gauss.",
+    "ref": "Probabilités Continues · Concours Enseignement"
+  },
+  {
+    "id": "ms-37",
+    "theme": "Géométrie · Produit Mixte",
+    "question": "Dans l'espace euclidien R³, quelle est la signification géométrique de la valeur absolue du produit mixte [u, v, w] = (u ∧ v) · w de trois vecteurs ?",
+    "questionAr": "في الفضاء الإقليدي R³، ما هو المدلول الهندسي للقيمة المطلقة للجداء المختلط (Produit mixte) [u, v, w] = (u ∧ v) · w لثلاث متجهات؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "Le volume du parallélépipède construit sur les trois vecteurs u, v et w",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "La somme des longueurs des trois vecteurs"
+      },
+      {
+        "id": "C",
+        "text": "L'aire du triangle formé par les extrémités des vecteurs"
+      },
+      {
+        "id": "D",
+        "text": "Le périmètre de la sphère circonscrite"
+      }
+    ],
+    "explanation": "Le déterminant det(u, v, w) = (u ∧ v) · w représente le volume orienté du parallélépipède engendré par la famille {u, v, w}. Sa valeur absolue est le volume euclidien.",
+    "ref": "Géométrie Vectorielle dans l'Espace · CRMEF"
+  },
+  {
+    "id": "ms-38",
+    "theme": "Analyse · Complétude de R",
+    "question": "Que signifie la propriété selon laquelle « le corps des réels R est un espace métrique complet » ?",
+    "questionAr": "ماذا تعني الخاصية القائلة بأن «حقل الأعداد الحقيقية R هو فضاء متري كامل (Complet)»؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "Toute suite de Cauchy dans R est convergente dans R",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "R ne contient aucun nombre irrationnel"
+      },
+      {
+        "id": "C",
+        "text": "Tout sous-ensemble de R est fini"
+      },
+      {
+        "id": "D",
+        "text": "La distance entre deux réels distincts est toujours supérieure à 1"
+      }
+    ],
+    "explanation": "La complétude de R signifie qu'il n'a pas de « trous » métriques : toute suite vérifiant le critère intrinsèque de Cauchy (|x_p - x_q| < ε pour p, q grands) converge vers une limite appartenant à R (contrairement à Q).",
+    "ref": "Topologie Générale & Analyse Fondamentale"
+  },
+  {
+    "id": "ms-39",
+    "theme": "Algèbre · Polynôme Minimal",
+    "question": "Soit u un endomorphisme d'un espace vectoriel E de dimension finie. Quelle est la relation entre le polynôme minimal μ_u et le polynôme caractéristique χ_u de u ?",
+    "questionAr": "ليكن u تشاكلا داخليا لفضاء متجهي E بعده منته. ما هي العلاقة بين الحدودية الصغرى μ_u والحدودية المميزة χ_u لـ u؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "Le polynôme minimal μ_u divise le polynôme caractéristique χ_u, et ils ont exactement les mêmes racines (les valeurs propres de u)",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "μ_u et χ_u n'ont aucune racine commune"
+      },
+      {
+        "id": "C",
+        "text": "Le degré de μ_u est toujours strictement supérieur au degré de χ_u"
+      },
+      {
+        "id": "D",
+        "text": "Leur somme est égale au polynôme nul"
+      }
+    ],
+    "explanation": "D'après Cayley-Hamilton, χ_u annule u, donc le polynôme minimal μ_u (générateur unitaire de l'idéal annulateur) divise χ_u. De plus, λ est valeur propre si et seulement si μ_u(λ) = 0.",
+    "ref": "Réduction des Endomorphismes · Licence & CPGE"
+  },
+  {
+    "id": "ms-40",
+    "theme": "Dénombrement & Combinatoire",
+    "question": "Combien de parties à p éléments contient un ensemble fini de cardinal n (avec 0 ≤ p ≤ n) ?",
+    "questionAr": "كم عدد الأجزاء ذات p عنصراً التي تحتوي عليها مجموعة منتهية رئيسيها n (حيث 0 ≤ p ≤ n)؟",
+    "options": [
+      {
+        "id": "A",
+        "text": "C_n^p = n! / [p! · (n - p)!]",
+        "correct": true
+      },
+      {
+        "id": "B",
+        "text": "A_n^p = n! / (n - p)!"
+      },
+      {
+        "id": "C",
+        "text": "n^p"
+      },
+      {
+        "id": "D",
+        "text": "n × p"
+      }
+    ],
+    "explanation": "Le nombre de combinaisons de p éléments parmi n, correspondant au nombre de sous-ensembles de cardinal p, est donné par le coefficient binomial C_n^p = (n choose p) = n! / [p!(n - p)!].",
+    "ref": "Dénombrement & Analyse Combinatoire · 1ère Bac & CRMEF"
+  }
+];
 
+    let currentSeriesNumber = 1;
     let currentSeries = [];
     let currentIndex = 0;
     let userAnswers = {};
     let score = 0;
-    let seriesCount = 1;
 
-    function shuffle(arr) {
-      return [...arr].sort(() => Math.random() - 0.5);
+    // Pseudo-random generator with fixed seed for series reproducibility
+    function pseudoRandom(seed) {
+      const x = Math.sin(seed) * 10000;
+      return x - Math.floor(x);
     }
 
-    function startNewSeries() {
-      currentSeries = shuffle(MATHS_SPECIALITE_BANK).slice(0, 10);
+    // Generate deterministic 10 questions for Series N (from 1 to 100)
+    function getSeriesQuestions(seriesNum) {
+      const seed = seriesNum * 10007 + 38411;
+      const indices = MATHS_SPECIALITE_BANK.map((_, i) => i);
+      // Fisher-Yates shuffle with seed
+      for (let i = indices.length - 1; i > 0; i--) {
+        const j = Math.floor(pseudoRandom(seed + i * 43) * (i + 1));
+        [indices[i], indices[j]] = [indices[j], indices[i]];
+      }
+      return indices.slice(0, 10).map(idx => MATHS_SPECIALITE_BANK[idx]);
+    }
+
+    // Mode Switcher (Quiz / Browse)
+    function switchMode(mode) {
+      const quizSection = document.getElementById('section-quiz-mode');
+      const browseSection = document.getElementById('section-browse-mode');
+      const btnQuiz = document.getElementById('btn-mode-quiz');
+      const btnBrowse = document.getElementById('btn-mode-browse');
+
+      if (mode === 'quiz') {
+        quizSection.classList.remove('hidden');
+        browseSection.classList.add('hidden');
+        btnQuiz.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold bg-slate-900 text-white shadow-xs cursor-pointer transition-all text-center';
+        btnBrowse.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center';
+      } else {
+        quizSection.classList.add('hidden');
+        browseSection.classList.remove('hidden');
+        btnBrowse.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold bg-slate-900 text-white shadow-xs cursor-pointer transition-all text-center';
+        btnQuiz.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center';
+        renderBrowseMode();
+      }
+    }
+
+    // Initialize Dropdown and Quick Pills
+    function initSeriesSelector() {
+      const dropdown = document.getElementById('series-dropdown');
+      dropdown.innerHTML = '';
+      for (let i = 1; i <= 100; i++) {
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = `Série ${i} / 100`;
+        dropdown.appendChild(opt);
+      }
+
+      const pillsContainer = document.getElementById('quick-series-pills');
+      pillsContainer.innerHTML = '';
+      for (let i = 1; i <= 10; i++) {
+        const btn = document.createElement('button');
+        btn.id = `pill-series-${i}`;
+        btn.onclick = () => loadSeries(i);
+        btn.textContent = `S${i}`;
+        btn.className = (i === 1) 
+          ? 'px-3 py-1 rounded-lg text-xs font-black bg-slate-900 text-white shrink-0 cursor-pointer transition-colors shadow-2xs'
+          : 'px-3 py-1 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 shrink-0 cursor-pointer transition-colors';
+        pillsContainer.appendChild(btn);
+      }
+    }
+
+    // Load a specific Series (1 to 100)
+    function loadSeries(seriesNum) {
+      if (seriesNum < 1) seriesNum = 1;
+      if (seriesNum > 100) seriesNum = 100;
+      currentSeriesNumber = seriesNum;
+
+      // Update dropdown & label
+      document.getElementById('series-dropdown').value = seriesNum;
+      document.getElementById('active-series-label').textContent = `Série ${seriesNum} sur 100`;
+
+      // Update pills
+      for (let i = 1; i <= 10; i++) {
+        const pill = document.getElementById(`pill-series-${i}`);
+        if (pill) {
+          pill.className = (i === seriesNum)
+            ? 'px-3 py-1 rounded-lg text-xs font-black bg-slate-900 text-white shrink-0 cursor-pointer transition-colors shadow-2xs'
+            : 'px-3 py-1 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 shrink-0 cursor-pointer transition-colors';
+        }
+      }
+
+      currentSeries = getSeriesQuestions(seriesNum);
       currentIndex = 0;
       userAnswers = {};
       score = 0;
 
       document.getElementById('quiz-card').classList.remove('hidden');
       document.getElementById('results-card').classList.add('hidden');
-      document.getElementById('quiz-series-badge').textContent = `Exemplaire N°${seriesCount}`;
+      document.getElementById('quiz-series-badge').textContent = `Série N°${seriesNum}`;
       document.getElementById('quiz-live-score').textContent = '0';
       document.getElementById('quiz-answered-count').textContent = '0';
 
       renderQuestion();
     }
 
+    function restartCurrentSeries() {
+      loadSeries(currentSeriesNumber);
+    }
+
+    function loadRandomSeries() {
+      const rand = Math.floor(Math.random() * 100) + 1;
+      loadSeries(rand);
+    }
+
+    function nextSeries() {
+      const next = (currentSeriesNumber % 100) + 1;
+      loadSeries(next);
+    }
+
+    // Render current question
     function renderQuestion() {
       const q = currentSeries[currentIndex];
       document.getElementById('quiz-current-num').textContent = currentIndex + 1;
@@ -474,57 +1527,69 @@
           if (opt.correct) {
             style = 'w-full p-4 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-left text-xs sm:text-sm font-bold text-emerald-900 flex items-start gap-3 pointer-events-none';
           } else if (isSelected && !opt.correct) {
-            style = 'w-full p-4 rounded-2xl border-2 border-red-500 bg-red-50 text-left text-xs sm:text-sm font-bold text-red-900 flex items-start gap-3 pointer-events-none';
+            style = 'w-full p-4 rounded-2xl border-2 border-rose-500 bg-rose-50 text-left text-xs sm:text-sm font-bold text-rose-900 flex items-start gap-3 pointer-events-none';
           } else {
-            style = 'w-full p-4 rounded-2xl border border-slate-200 bg-white/50 text-slate-400 text-left text-xs sm:text-sm font-semibold flex items-start gap-3 pointer-events-none';
+            style = 'w-full p-4 rounded-2xl border border-slate-200 bg-slate-50 text-slate-400 text-left text-xs sm:text-sm flex items-start gap-3 pointer-events-none opacity-60';
           }
         }
 
         btn.className = style;
-        btn.innerHTML = `<span class="w-6 h-6 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center text-xs font-black shrink-0">${opt.id}</span><span>${opt.text}</span>`;
-        btn.onclick = () => selectOption(opt, q);
+        btn.innerHTML = `
+          <span class="w-6 h-6 rounded-lg ${opt.correct && isAnswered ? 'bg-emerald-600 text-white' : (isSelected ? 'bg-rose-600 text-white' : 'bg-slate-100 text-slate-700')} flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">${opt.id}</span>
+          <span class="leading-relaxed flex-1">${opt.text}</span>
+        `;
+
+        if (!isAnswered) {
+          btn.onclick = () => selectOption(q, opt);
+        }
+
         container.appendChild(btn);
       });
 
       if (isAnswered) {
         showExplanation(q, userAnswers[q.id]);
-        document.getElementById('btn-next-question').classList.remove('hidden');
       }
     }
 
-    function selectOption(opt, q) {
-      if (userAnswers[q.id] !== undefined) return;
+    // When candidate clicks an option
+    function selectOption(q, opt) {
       userAnswers[q.id] = opt.id;
-
-      if (opt.correct) {
-        score++;
-      }
+      if (opt.correct) score++;
 
       document.getElementById('quiz-live-score').textContent = score;
       document.getElementById('quiz-answered-count').textContent = Object.keys(userAnswers).length;
 
       renderQuestion();
+      showExplanation(q, opt.id);
     }
 
-    function showExplanation(q, chosenId) {
+    function showExplanation(q, selectedOptId) {
       const expBox = document.getElementById('quiz-explanation-box');
+      const isCorrect = q.options.find(o => o.id === selectedOptId)?.correct;
       const title = document.getElementById('quiz-feedback-title');
       const text = document.getElementById('quiz-explanation-text');
       const ref = document.getElementById('quiz-explanation-ref');
-
-      const correctOpt = q.options.find(o => o.correct);
-      const isCorrect = chosenId === correctOpt.id;
+      const btnNext = document.getElementById('btn-next-question');
 
       if (isCorrect) {
-        expBox.className = 'rounded-2xl p-4 sm:p-5 border border-emerald-300 bg-emerald-50/80 block';
-        title.innerHTML = '✅ <span class="text-emerald-800">Démonstration mathématique exacte !</span>';
+        expBox.className = 'rounded-2xl p-4 sm:p-5 border bg-emerald-50 border-emerald-200 text-emerald-950 block transition-all';
+        title.innerHTML = '✅ Réponse Exacte !';
+        title.className = 'flex items-center gap-2 mb-2 font-black text-sm text-emerald-800';
       } else {
-        expBox.className = 'rounded-2xl p-4 sm:p-5 border border-red-300 bg-red-50/80 block';
-        title.innerHTML = `❌ <span class="text-red-800">Réponse inexacte (Démonstration correcte : Option ${correctOpt.id})</span>`;
+        expBox.className = 'rounded-2xl p-4 sm:p-5 border bg-rose-50 border-rose-200 text-rose-950 block transition-all';
+        title.innerHTML = '❌ Réponse Inexacte';
+        title.className = 'flex items-center gap-2 mb-2 font-black text-sm text-rose-800';
       }
 
       text.textContent = q.explanation;
-      ref.textContent = `Cadre officiel : ${q.ref || "Programme du Concours de Recrutement CRMEF"}`;
+      ref.textContent = `Référence disciplinaire : ${q.ref}`;
+
+      btnNext.classList.remove('hidden');
+      if (currentIndex === currentSeries.length - 1) {
+        btnNext.innerHTML = '<span>Voir le Bilan de la Série</span><span>📊</span>';
+      } else {
+        btnNext.innerHTML = '<span>Question Suivante</span><span>→</span>';
+      }
     }
 
     function nextQuestion() {
@@ -532,94 +1597,103 @@
         currentIndex++;
         renderQuestion();
       } else {
-        finishSeries();
+        showResults();
       }
     }
 
-    function finishSeries() {
+    function showResults() {
       document.getElementById('quiz-card').classList.add('hidden');
       const resultsCard = document.getElementById('results-card');
       resultsCard.classList.remove('hidden');
 
-      const total = currentSeries.length;
-      const note20 = ((score / total) * 20).toFixed(1);
+      document.getElementById('res-series-num').textContent = currentSeriesNumber;
+      document.getElementById('btn-next-series-num').textContent = (currentSeriesNumber % 100) + 1;
+      document.getElementById('final-score').textContent = score;
+      
+      const pct = Math.round((score / currentSeries.length) * 100);
+      document.getElementById('final-percentage').textContent = `${pct}% de réussite (${score}/10)`;
 
-      document.getElementById('results-score-display').textContent = `${score} / ${total}`;
-      document.getElementById('results-note-20').textContent = `Note officielle estimée : ${note20} / 20`;
-
-      const diagBox = document.getElementById('results-diagnosis-box');
-      if (score >= 8) {
-        diagBox.className = 'max-w-md mx-auto p-3.5 rounded-xl border border-emerald-300 bg-emerald-50 text-emerald-800 font-bold';
-        diagBox.innerHTML = '🏆 Admissible avec Distinction · Niveau académique universitaire excellent en analyse et algèbre.';
-      } else if (score >= 6) {
-        diagBox.className = 'max-w-md mx-auto p-3.5 rounded-xl border border-blue-300 bg-blue-50 text-blue-800 font-bold';
-        diagBox.innerHTML = '✅ Admissible au Seuil Supérieur · Bonnes compétences disciplinaires, travaillez les démonstrations fines.';
+      const mention = document.getElementById('results-mention');
+      if (score >= 9) {
+        mention.className = 'inline-block px-4 py-1.5 rounded-full text-xs font-black bg-emerald-100 text-emerald-800 border border-emerald-200';
+        mention.textContent = '🌟 Distinction Majeur de Promotion · Maîtrise Exceptionnelle';
+      } else if (score >= 7) {
+        mention.className = 'inline-block px-4 py-1.5 rounded-full text-xs font-black bg-slate-900 text-white border border-slate-700';
+        mention.textContent = '✅ Très Bon Niveau · Largement Admissible au CRMEF';
       } else if (score >= 5) {
-        diagBox.className = 'max-w-md mx-auto p-3.5 rounded-xl border border-amber-300 bg-amber-50 text-amber-800 font-bold';
-        diagBox.innerHTML = '⚠️ Seuil d’Admissibilité Juste · Révision conseillée des séries, diagonalisation et intégration.';
+        mention.className = 'inline-block px-4 py-1.5 rounded-full text-xs font-black bg-amber-100 text-amber-800 border border-amber-200';
+        mention.textContent = '⚠️ Niveau Moyen · Renforcer l'Algèbre et l'Analyse';
       } else {
-        diagBox.className = 'max-w-md mx-auto p-3.5 rounded-xl border border-rose-300 bg-rose-50 text-rose-800 font-bold';
-        diagBox.innerHTML = '📈 Non Admissible · Entraînement approfondi requis sur les théorèmes fondamentaux du concours.';
+        mention.className = 'inline-block px-4 py-1.5 rounded-full text-xs font-black bg-rose-100 text-rose-800 border border-rose-200';
+        mention.textContent = '❌ Score Insuffisant · Reprendre les Démonstrations Fondamentales';
       }
 
-      // Render corrections
-      const corContainer = document.getElementById('corrections-container');
-      corContainer.innerHTML = '';
+      // Corrections list
+      const container = document.getElementById('corrections-container');
+      container.innerHTML = '';
 
       currentSeries.forEach((q, idx) => {
+        const userChoice = userAnswers[q.id];
         const correctOpt = q.options.find(o => o.correct);
-        const userChoiceId = userAnswers[q.id];
-        const isRight = userChoiceId === correctOpt.id;
+        const isUserCorrect = userChoice === correctOpt.id;
 
-        const card = document.createElement('div');
-        card.className = `p-4 sm:p-5 rounded-2xl border ${isRight ? 'border-emerald-200 bg-emerald-50/40' : 'border-rose-200 bg-rose-50/40'} space-y-2 text-left`;
+        const div = document.createElement('div');
+        div.className = `p-4 sm:p-5 rounded-2xl border ${isUserCorrect ? 'border-emerald-200 bg-emerald-50/40' : 'border-rose-200 bg-rose-50/40'} space-y-2.5`;
 
-        card.innerHTML = `
-          <div class="flex items-center justify-between text-xs font-bold">
-            <span class="${isRight ? 'text-emerald-700' : 'text-rose-700'}">
-              ${isRight ? '✓ Réponse Exacte' : '✗ Erreur de calcul / raisonnement'} · Question ${idx + 1} (${q.theme})
+        div.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black text-slate-800">Question ${idx + 1} · ${q.theme}</span>
+            <span class="text-[11px] font-bold px-2 py-0.5 rounded-md ${isUserCorrect ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
+              ${isUserCorrect ? '✔ Validé' : '✘ Incorrect'}
             </span>
-            <span class="text-slate-400 font-medium">${q.ref}</span>
           </div>
-          <h4 class="text-sm font-bold text-slate-900">${q.question}</h4>
-          ${q.questionAr ? `<p class="text-xs font-arabic text-slate-800 text-right dir-rtl">${q.questionAr}</p>` : ''}
-          <div class="p-3 bg-white rounded-xl border border-slate-200 text-xs space-y-1 mt-2">
-            <div><strong class="text-emerald-700">Option exacte :</strong> Option ${correctOpt.id} - ${correctOpt.text}</div>
-            <p class="text-slate-600 font-mono mt-1">${q.explanation}</p>
+          <h4 class="text-xs sm:text-sm font-bold text-slate-900">${q.question}</h4>
+          ${q.questionAr ? `<p class="text-xs font-arabic text-slate-800 text-right dir-rtl font-semibold">${q.questionAr}</p>` : ''}
+          <div class="text-xs space-y-1 pt-1">
+            <div class="text-slate-600">Votre choix : <strong class="${isUserCorrect ? 'text-emerald-700' : 'text-rose-700'}">Option ${userChoice || 'Non répondu'}</strong></div>
+            <div class="text-emerald-800 font-bold">Réponse exacte : Option ${correctOpt.id} - ${correctOpt.text}</div>
           </div>
+          <p class="text-xs text-slate-700 font-mono bg-white/70 p-3 rounded-xl border border-slate-200/50 leading-relaxed">${q.explanation}</p>
+          <div class="text-[10px] text-slate-400 font-semibold">Référence : ${q.ref}</div>
         `;
-        corContainer.appendChild(card);
+        container.appendChild(div);
       });
-
-      seriesCount++;
     }
 
-    function switchMode(mode) {
-      const qSection = document.getElementById('section-quiz-mode');
-      const bSection = document.getElementById('section-browse-mode');
-      const btnQ = document.getElementById('btn-mode-quiz');
-      const btnB = document.getElementById('btn-mode-browse');
-
-      if (mode === 'quiz') {
-        qSection.classList.remove('hidden');
-        bSection.classList.add('hidden');
-        btnQ.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold bg-slate-900 text-white shadow-xs cursor-pointer transition-all text-center';
-        btnB.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center';
-      } else {
-        qSection.classList.add('hidden');
-        bSection.classList.remove('hidden');
-        btnB.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold bg-slate-900 text-white shadow-xs cursor-pointer transition-all text-center';
-        btnQ.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center';
-        renderBrowse();
-      }
-    }
-
-    function renderBrowse() {
+    // Render Browse Mode (All questions repository)
+    function renderBrowseMode() {
       const list = document.getElementById('browse-questions-list');
-      document.getElementById('browse-count').textContent = `${MATHS_SPECIALITE_BANK.length} Questions Certifiées`;
+      const themeFilter = document.getElementById('browse-theme-filter');
+      
+      // Populate unique themes if not already done
+      if (themeFilter.options.length <= 1) {
+        const themes = [...new Set(MATHS_SPECIALITE_BANK.map(q => q.theme))];
+        themes.forEach(th => {
+          const opt = document.createElement('option');
+          opt.value = th;
+          opt.textContent = th;
+          themeFilter.appendChild(opt);
+        });
+      }
+
+      filterBrowseQuestions();
+    }
+
+    function filterBrowseQuestions() {
+      const query = (document.getElementById('browse-search')?.value || '').toLowerCase();
+      const selectedTheme = document.getElementById('browse-theme-filter')?.value || '';
+      const list = document.getElementById('browse-questions-list');
       list.innerHTML = '';
 
-      MATHS_SPECIALITE_BANK.forEach((q, idx) => {
+      const filtered = MATHS_SPECIALITE_BANK.filter(q => {
+        const matchesQuery = !query || q.question.toLowerCase().includes(query) || (q.questionAr && q.questionAr.includes(query)) || q.explanation.toLowerCase().includes(query) || q.theme.toLowerCase().includes(query);
+        const matchesTheme = !selectedTheme || q.theme === selectedTheme;
+        return matchesQuery && matchesTheme;
+      });
+
+      document.getElementById('browse-count').textContent = `${filtered.length} Questions Disponibles`;
+
+      filtered.forEach((q, idx) => {
         const card = document.createElement('div');
         card.className = 'bg-white rounded-2xl border border-slate-200 p-5 space-y-3';
         const correctOpt = q.options.find(o => o.correct);
@@ -640,8 +1714,9 @@
       });
     }
 
-    // Launch first series on load
-    startNewSeries();
+    // Init on page load
+    initSeriesSelector();
+    loadSeries(1);
   </script>
 </body>
 </html>
