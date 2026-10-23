@@ -3,546 +3,1269 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QCM Spécialité Informatique CRMEF Maroc · Algorithmique, Structures de Données, Réseaux & SQL</title>
-  <meta name="description" content="Plateforme d'entraînement intensif à l'épreuve de Spécialité Informatique du concours CRMEF Maroc. Série de 10 questions avec diagnostic officiel d'admissibilité, corrigés détaillés et références techniques sans aucune pop-up.">
+  <title>QCM Spécialité Informatique CRMEF Maroc · 100 Séries Corrigées | ProfEPS.ma</title>
+  <meta name="description" content="Simulateur officiel de l'épreuve de Spécialité Informatique aux concours CRMEF au Maroc. 100 séries de 10 questions : algorithmique avancée, complexité Big-O, Python POO, bases de données relationnelles SQL, architecture von Neumann, systèmes et réseaux.">
+  <link rel="canonical" href="https://profeps.ma/qcm-specialite-informatique-maroc.html">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-    code, pre {
-      font-family: 'JetBrains Mono', monospace;
-    }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-arabic { font-family: 'Noto Kufi Arabic', sans-serif; }
+    .font-mono-code { font-family: 'JetBrains Mono', monospace; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Quiz",
+    "name": "QCM Spécialité Informatique - 100 Séries Concours CRMEF Maroc",
+    "description": "Entraînement officiel corrigé en Spécialité Académique Informatique pour le concours des CRMEF au Maroc. 100 séries de 10 questions conformes aux programmes universitaires et du secondaire qualifiant.",
+    "educationalLevel": "CRMEF Enseignement Secondaire Informatique",
+    "author": {
+      "@type": "Person",
+      "name": "Abdelkhalek Kaci",
+      "jobTitle": "Professeur de l'Éducation Nationale"
+    }
+  }
+  </script>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col selection:bg-cyan-500 selection:text-white">
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col selection:bg-violet-600 selection:text-white">
 
-  <!-- TOP ANNOUNCEMENT BAR -->
-  <div class="bg-gradient-to-r from-slate-900 via-sky-950 to-cyan-950 border-b border-cyan-800/40 text-cyan-200 text-xs sm:text-sm py-2 px-4 text-center font-medium">
-    <span>💻 Épreuve Officielle : <strong class="text-white">Discipline Informatique (Sciences de l'Ingénieur & Numérique)</strong> · Concours CRMEF Maroc · Zéro Pop-up</span>
-  </div>
-
-  <!-- NAVIGATION HEADER -->
-  <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="/concours-crmef-hub.html" class="inline-flex items-center gap-2 text-slate-300 hover:text-white transition font-medium text-sm group">
-        <svg class="w-4 h-4 transform group-hover:-translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-        <span>Retour au Hub Concours CRMEF</span>
+  <!-- ================= HEADER & NAVIGATION ================= -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs backdrop-blur-md bg-white/95">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <a href="concours-crmef-hub.html" class="flex items-center gap-2.5 shrink-0 group">
+        <div class="w-9 h-9 rounded-xl bg-violet-700 flex items-center justify-center text-white font-black text-sm shadow-xs group-hover:bg-violet-800 transition-colors">
+          ⚡
+        </div>
+        <div>
+          <span class="font-extrabold text-slate-900 text-sm sm:text-base tracking-tight block leading-none">
+            Spécialité Info<span class="text-violet-700"> · CRMEF</span>
+          </span>
+          <span class="text-[10px] text-slate-500 font-medium block mt-0.5">
+            ProfEPS.ma · 100 Séries Algorithmique & Systèmes
+          </span>
+        </div>
       </a>
 
-      <div class="flex items-center gap-2 text-xs">
-        <span class="px-2.5 py-1 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 font-semibold">Spécialité Informatique</span>
-        <span class="hidden sm:inline px-2.5 py-1 rounded bg-slate-800 text-slate-300">Série Certifiée (10 questions)</span>
+      <!-- Navigation Silo Transversale -->
+      <nav class="hidden lg:flex items-center gap-1.5 text-xs font-bold">
+        <a href="concours-crmef-hub.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+          🏛️ Hub National
+        </a>
+        <a href="qcm-didactique-informatique-maroc.html" class="px-3 py-1.5 rounded-lg text-violet-800 bg-violet-50 hover:bg-violet-100 transition-colors">
+          💻 Didactique Info
+        </a>
+        <a href="qcm-specialite-maths-maroc.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+          📐 Spécialité Maths
+        </a>
+        <a href="qcm-specialite-physique-chimie-maroc.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+          ⚛️ Spécialité PC
+        </a>
+        <a href="qcm-specialite-svt-maroc.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+          🌱 Spécialité SVT
+        </a>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <a href="concours-crmef-hub.html" class="px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-all shadow-xs flex items-center gap-1.5">
+          <span>← Hub Concours</span>
+        </a>
       </div>
     </div>
   </header>
 
-  <!-- MAIN WRAPPER -->
-  <main class="flex-1 max-w-4xl w-full mx-auto px-4 py-6 sm:py-10">
-
-    <!-- HERO SECTION -->
-    <div class="text-center mb-8">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-900/50 border border-cyan-700/50 text-cyan-300 text-xs font-semibold mb-3">
-        <span>⚡ Algorithmes & Complexité · POO · SQL · Réseaux IP · Systèmes d'exploitation</span>
+  <!-- ================= BREADCRUMB & HERO ================= -->
+  <div class="bg-gradient-to-b from-violet-950 via-slate-900 to-slate-900 text-white py-8 sm:py-10 border-b border-violet-800/30">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+      <div class="flex flex-wrap items-center gap-2 text-xs text-violet-300 font-medium">
+        <a href="concours-crmef-hub.html" class="hover:text-white transition-colors">Portail CRMEF</a>
+        <span>/</span>
+        <span class="text-slate-400">Informatique</span>
+        <span>/</span>
+        <span class="text-white font-bold">Épreuve de Spécialité Disciplinaire</span>
       </div>
-      <h1 class="text-2xl sm:text-4xl font-extrabold text-white mb-3">
-        QCM Spécialité Informatique · <span class="text-cyan-400">CRMEF Maroc</span>
-      </h1>
-      <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
-        Entraînement de haut niveau académique conforme au cadre de référence du Centre National des Examens et de l'Évaluation (CNEE) : structures de données avancées, graphes, théorie relationnelle, pile TCP/IP et architecture des systèmes.
-      </p>
+
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div class="space-y-2">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/20 text-violet-300 text-xs font-bold border border-violet-500/30">
+            <span>Épreuve 2 · Spécialité Académique (100 Séries Inédites)</span>
+            <span class="font-arabic">مادة التخصص : علوم الإعلاميات</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight">
+            QCM Spécialité Informatique · CRMEF Maroc
+          </h1>
+          <p class="text-xs sm:text-sm text-violet-100/80 max-w-2xl leading-relaxed">
+            100 séries de 10 questions rigoureusement alignées sur le <strong>Cadre de Référence Officiel du CNEE (Maroc)</strong> : complexité algorithmique Big-O, arbres et graphes, programmation avancée Python POO, bases de données relationnelles SQL, architecture von Neumann, systèmes d'exploitation, réseaux TCP/IP et sécurité.
+          </p>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/15 text-center min-w-[210px] shrink-0">
+          <span class="text-[11px] font-bold text-violet-200 block uppercase tracking-wider">Format Concours Réel</span>
+          <div class="text-2xl font-black text-white mt-1">100 Séries</div>
+          <span class="text-[11px] text-violet-300 font-semibold block mt-0.5">Correction intégrale en fin de série</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SELECTEUR UNIFIÉ DES 100 SÉRIES ================= -->
+  <div class="bg-white border-b border-slate-200 sticky top-16 z-30 shadow-xs">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="flex items-center gap-2 text-xs font-bold text-slate-700">
+          <span class="w-2.5 h-2.5 rounded-full bg-violet-600 animate-pulse"></span>
+          <span>Sélecteur de Séries :</span>
+          <span id="current-series-display" class="px-2.5 py-0.5 rounded-md bg-violet-100 text-violet-900 font-black">
+            Série 1 / 100
+          </span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <!-- Dropdown des 100 Séries -->
+          <div class="relative flex-1 sm:w-56">
+            <select id="series-dropdown-selector" onchange="loadSeries(parseInt(this.value))" class="w-full text-xs font-bold bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-violet-600 focus:bg-white cursor-pointer transition-all">
+              <!-- Dynamically populated 1 to 100 -->
+            </select>
+          </div>
+
+          <!-- Tirage Aléatoire -->
+          <button onclick="loadRandomSeries()" class="px-3 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 hover:text-violet-700 text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 cursor-pointer shadow-2xs" title="Tirer une série aléatoire">
+            <span>🎲</span>
+            <span class="hidden sm:inline">Aléatoire</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Pills Séries 1 à 10 -->
+      <div class="flex items-center gap-1.5 overflow-x-auto pt-2.5 pb-1 hide-scrollbar" id="quick-series-pills">
+        <!-- Populated via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-8">
+
+    <!-- Onglets de Navigation : Mode Test vs Mode Référentiel -->
+    <div class="bg-white rounded-2xl border border-slate-200 p-2 shadow-xs flex items-center justify-between gap-2">
+      <button onclick="switchMode('quiz')" id="btn-mode-quiz" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold bg-violet-700 text-white shadow-xs cursor-pointer transition-all text-center">
+        🎯 1. Passer le Test (10 Questions de la Série Active)
+      </button>
+      <button onclick="switchMode('referentiel')" id="btn-mode-referentiel" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center">
+        🏛️ 2. Explorer la Banque Disciplinaire & Notions Clés
+      </button>
     </div>
 
-    <!-- QUIZ CONTAINER -->
-    <div id="quiz-container" class="bg-slate-950 border border-slate-800 rounded-2xl p-4 sm:p-8 shadow-2xl relative overflow-hidden">
-      
-      <!-- PROGRESS BAR & META -->
-      <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-800 mb-6">
-        <div>
-          <span class="text-xs uppercase tracking-wider text-slate-400 font-bold block">Progression</span>
-          <span id="question-counter" class="text-lg font-black text-cyan-400">Question 1 / 10</span>
-        </div>
+    <!-- SECTION TEST : 10 Questions de la Série Active -->
+    <section id="section-quiz-mode" class="space-y-6">
+
+      <!-- Status Bar de Progression -->
+      <div class="bg-white p-4 rounded-2xl border border-slate-200 flex flex-wrap items-center justify-between gap-4 shadow-xs">
         <div class="flex items-center gap-3">
-          <div class="text-right">
-            <span class="text-xs text-slate-400 block font-medium">Domaine d'expertise</span>
-            <span id="category-badge" class="inline-block text-xs font-bold text-sky-300 bg-sky-950/80 border border-sky-800/80 px-2.5 py-0.5 rounded">
-              Algorithmique & Complexité
+          <div class="w-10 h-10 rounded-xl bg-violet-50 text-violet-800 flex items-center justify-center font-black text-sm border border-violet-100">
+            ⚡
+          </div>
+          <div>
+            <div class="text-xs font-bold text-slate-800" id="progress-summary">
+              Progression : 0 / 10 répondue(s)
+            </div>
+            <div class="text-[11px] text-slate-500 font-medium">
+              💡 La correction et les démonstrations informatiques apparaîtront après avoir cliqué sur Terminer la Série.
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="resetCurrentSeries()" class="px-3 py-1.5 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 text-xs font-bold transition-all">
+            🔄 Réinitialiser
+          </button>
+        </div>
+      </div>
+
+      <!-- Container des 10 Questions Dynamiques -->
+      <div id="quiz-questions-container" class="space-y-6">
+        <!-- Dynamically rendered -->
+      </div>
+
+      <!-- Action de Validation de la Série -->
+      <div class="p-6 bg-white rounded-3xl border border-slate-200 text-center space-y-4 shadow-sm" id="submit-series-block">
+        <div class="max-w-md mx-auto space-y-1">
+          <h3 class="text-sm font-extrabold text-slate-900">Avez-vous complété les 10 questions ?</h3>
+          <p class="text-xs text-slate-500">
+            Validez pour découvrir votre score sur 20, le barème officiel du concours CRMEF et l'analyse technique détaillée de chaque item.
+          </p>
+        </div>
+        <button onclick="submitCurrentSeries()" id="btn-submit-series" class="px-8 py-3.5 rounded-2xl bg-violet-700 hover:bg-violet-800 text-white font-black text-sm shadow-md hover:shadow-lg transition-all cursor-pointer">
+          🏁 Terminer la Série & Voir la Correction Complète
+        </button>
+      </div>
+
+      <!-- Bloc Résultats Détaillés (Hidden until submission) -->
+      <div id="results-block" class="hidden space-y-6">
+        <div class="bg-gradient-to-br from-slate-900 via-violet-950 to-slate-900 text-white p-6 sm:p-8 rounded-3xl border border-violet-800/40 shadow-xl space-y-6">
+          <div class="text-center space-y-2">
+            <span class="px-3 py-1 rounded-full bg-violet-500/20 text-violet-300 text-xs font-bold border border-violet-500/30">
+              Résultat Officiel de la Série
             </span>
+            <h3 class="text-2xl sm:text-3xl font-black">Bilan de l'Épreuve de Spécialité Informatique</h3>
           </div>
-          <div class="text-right pl-2 border-l border-slate-800">
-            <span class="text-xs text-slate-400 block font-medium">Temps écoulé</span>
-            <span id="timer-display" class="text-xs font-mono font-bold text-slate-300">00:00</span>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+            <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+              <span class="text-xs text-violet-200/80 block">Score Obtenu</span>
+              <div class="text-3xl font-black text-white mt-1">
+                <span id="final-score">0</span> / 10
+              </div>
+            </div>
+            <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+              <span class="text-xs text-violet-200/80 block">Note Estimée CRMEF</span>
+              <div class="text-3xl font-black text-violet-400 mt-1">
+                <span id="final-note-20">0</span> / 20
+              </div>
+            </div>
+            <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+              <span class="text-xs text-violet-200/80 block">Taux de Réussite</span>
+              <div class="text-3xl font-black text-white mt-1" id="final-percentage">
+                0%
+              </div>
+            </div>
+          </div>
+
+          <div id="results-diagnosis-box" class="p-4 rounded-2xl text-xs font-semibold leading-relaxed">
+            <!-- Diagnostic message injected via JS -->
+          </div>
+
+          <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+            <button onclick="loadNextSeries()" class="px-6 py-3 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-xs font-black transition-all cursor-pointer shadow-md">
+              Passer à la Série Suivante (Série <span id="btn-next-series-num">2</span>) →
+            </button>
+            <button onclick="resetCurrentSeries()" class="px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-all cursor-pointer">
+              Refaire cette série
+            </button>
+          </div>
+        </div>
+
+        <!-- Correction Détaillée Item par Item -->
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-extrabold text-slate-900">
+              Correction Technique & Démonstrations Approfondies (10 Questions)
+            </h3>
+            <span class="text-xs font-bold text-slate-500">Conforme Cadre CNEE Informatique</span>
+          </div>
+
+          <div id="corrections-container" class="space-y-4">
+            <!-- Corrections dynamically populated -->
           </div>
         </div>
       </div>
 
-      <!-- PROGRESS TRACK -->
-      <div class="w-full bg-slate-900 h-2 rounded-full mb-8 overflow-hidden">
-        <div id="progress-bar" class="bg-gradient-to-r from-cyan-500 to-sky-400 h-full w-[10%] transition-all duration-300"></div>
-      </div>
+    </section>
 
-      <!-- QUESTION TEXT -->
-      <div class="mb-8">
-        <div class="text-xs font-semibold text-cyan-400 mb-1 flex items-center gap-1.5">
-          <span>Énoncé académique et question technique :</span>
+    <!-- SECTION REFERENTIEL : Explorer la Banque Complète (Mode Consultation) -->
+    <section id="section-referentiel-mode" class="hidden space-y-6">
+      <div class="bg-white p-6 rounded-3xl border border-slate-200 space-y-4 shadow-xs">
+        <div>
+          <h3 class="text-base font-black text-slate-900">
+            Référentiel Disciplinaire Informatique · Algorithmes, BDD, Systèmes & Réseaux
+          </h3>
+          <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+            Consultez toutes les questions académiques de la banque avec leurs corrigés détaillés, preuves de complexité temporelle, requêtes SQL optimisées et protocoles réseaux.
+          </p>
         </div>
-        <h2 id="question-text" class="text-base sm:text-lg font-bold text-slate-100 leading-relaxed text-left">
-          Chargement de la question technique...
-        </h2>
-      </div>
 
-      <!-- CHOICES -->
-      <div id="choices-container" class="space-y-3 mb-8">
-        <!-- Injected via JavaScript -->
-      </div>
-
-      <!-- NAVIGATION BUTTONS -->
-      <div class="flex items-center justify-between pt-4 border-t border-slate-800">
-        <button id="prev-btn" onclick="prevQuestion()" disabled class="px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-400 hover:text-slate-200 hover:bg-slate-800 disabled:opacity-30 disabled:pointer-events-none transition text-sm font-semibold flex items-center gap-2">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-          </svg>
-          Précédent
-        </button>
-
-        <button id="next-btn" onclick="nextQuestion()" class="px-6 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold transition shadow-lg shadow-cyan-900/40 text-sm flex items-center gap-2">
-          <span>Suivant</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-          </svg>
-        </button>
-
-        <button id="submit-btn" onclick="finishQuiz()" class="hidden px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold transition shadow-lg shadow-emerald-900/40 text-sm flex items-center gap-2">
-          <span>Valider et afficher les résultats</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          </svg>
-        </button>
-      </div>
-
-    </div>
-
-    <!-- RESULT CONTAINER (HIDDEN INITIALLY) -->
-    <div id="result-container" class="hidden bg-slate-950 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative">
-      
-      <div class="text-center pb-6 border-b border-slate-800 mb-6">
-        <div id="score-badge" class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-cyan-900/50 border-4 border-cyan-500 text-3xl font-black text-white mb-4">
-          <span id="final-score">--/20</span>
+        <!-- Filtres de recherche -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+          <div>
+            <label class="text-[11px] font-bold text-slate-600 block mb-1">Rechercher une notion ou terme informatique :</label>
+            <input type="text" id="browse-search" oninput="filterBrowseQuestions()" placeholder="Ex: Dijkstra, Big-O, SQL, deadlock, CIDR, RSA, arbre binaire, Von Neumann..." class="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-violet-600 focus:bg-white">
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-slate-600 block mb-1">Filtrer par Domaine Disciplinaire :</label>
+            <select id="browse-theme-filter" onchange="filterBrowseQuestions()" class="w-full text-xs font-bold bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-violet-600 focus:bg-white cursor-pointer">
+              <option value="">Tous les domaines</option>
+            </select>
+          </div>
         </div>
-        <h3 id="diagnostic-title" class="text-xl sm:text-2xl font-bold text-white mb-2">Diagnostic d'Admissibilité CRMEF</h3>
-        <p id="diagnostic-desc" class="text-slate-400 text-sm max-w-lg mx-auto">
-          Analyse de performance technique basée sur les seuils d'admissibilité du Centre National des Examens et de l'Évaluation (CNEE).
+      </div>
+
+      <!-- Liste des questions filtrées -->
+      <div id="browse-questions-list" class="space-y-4">
+        <!-- Dynamically populated -->
+      </div>
+    </section>
+
+    <!-- BANNER DIDACTIQUE CROSS-LINK -->
+    <div class="p-6 bg-gradient-to-r from-violet-900 to-indigo-900 rounded-3xl text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+      <div class="space-y-1 text-center sm:text-left">
+        <span class="text-violet-300 font-bold text-xs uppercase tracking-wider">Épreuve Complémentaire CRMEF Informatique</span>
+        <h4 class="text-base font-black">Besoin de réviser la Didactique de l'Informatique ?</h4>
+        <p class="text-xs text-violet-100/80">
+          Entraînez-vous sur les 100 séries de didactique : pensée computationnelle, obstacles d'apprentissage Scratch/Python, TSD Brousseau et robotique éducative.
         </p>
       </div>
-
-      <!-- STATS GRID -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 text-center">
-          <span class="text-xs text-slate-400 block font-medium">Réponses Exactes</span>
-          <span id="stat-correct" class="text-lg font-black text-emerald-400">0</span>
-        </div>
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 text-center">
-          <span class="text-xs text-slate-400 block font-medium">Erreurs Techniques</span>
-          <span id="stat-wrong" class="text-lg font-black text-red-400">0</span>
-        </div>
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 text-center">
-          <span class="text-xs text-slate-400 block font-medium">Taux de Précision</span>
-          <span id="stat-accuracy" class="text-lg font-black text-cyan-400">0%</span>
-        </div>
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 text-center">
-          <span class="text-xs text-slate-400 block font-medium">Chronomètre</span>
-          <span id="stat-time" class="text-lg font-black text-slate-300">00:00</span>
-        </div>
-      </div>
-
-      <!-- DETAILED REVIEW ACCORDION -->
-      <div class="mb-8">
-        <h4 class="text-base font-bold text-slate-200 mb-4 flex items-center gap-2">
-          <span>Détail des solutions avec démonstrations & code :</span>
-          <span class="text-xs font-normal text-cyan-400">(Revue pas à pas)</span>
-        </h4>
-        <div id="review-list" class="space-y-4">
-          <!-- Injected via JavaScript -->
-        </div>
-      </div>
-
-      <!-- ACTIONS -->
-      <div class="flex flex-wrap items-center justify-center gap-4 pt-4 border-t border-slate-800">
-        <button onclick="restartQuiz()" class="px-6 py-3 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold transition shadow-lg shadow-cyan-900/40 text-sm flex items-center gap-2">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-          </svg>
-          Refaire la série
-        </button>
-        <a href="/qcm-didactique-informatique-maroc.html" class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 font-semibold border border-cyan-800/40 transition text-sm flex items-center gap-2">
-          ← Passer à l'épreuve Didactique Informatique
-        </a>
-        <a href="/concours-crmef-hub.html" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 font-medium border border-slate-700 transition text-sm">
-          Retour au Hub Concours
-        </a>
-      </div>
-
+      <a href="qcm-didactique-informatique-maroc.html" class="px-5 py-3 rounded-2xl bg-white text-violet-950 font-black text-xs hover:bg-violet-50 transition-all shrink-0 shadow-xs">
+        Accéder à Didactique Info →
+      </a>
     </div>
 
   </main>
 
-  <!-- FOOTER -->
-  <footer class="border-t border-slate-800 bg-slate-950 py-6 text-center text-xs text-slate-500">
-    <p>Préparation au concours de recrutement des professeurs de l'enseignement secondaire · CRMEF Maroc</p>
-    <p class="mt-1">Cadre de référence officiel de l'épreuve de Spécialité Informatique · CNEE / MENPS</p>
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-slate-900 text-slate-400 text-xs py-10 border-t border-slate-800 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-2">
+          <span class="w-7 h-7 rounded-lg bg-violet-700 text-white flex items-center justify-center font-bold text-xs">⚡</span>
+          <span class="text-white font-extrabold text-sm">ProfEPS.ma · Concours CRMEF Maroc</span>
+        </div>
+        <div class="flex flex-wrap items-center justify-center gap-4 text-xs font-semibold">
+          <a href="concours-crmef-hub.html" class="hover:text-white transition-colors">Hub Concours</a>
+          <a href="qcm-didactique-informatique-maroc.html" class="hover:text-white transition-colors">Didactique Info</a>
+          <a href="qcm-specialite-maths-maroc.html" class="hover:text-white transition-colors">Spécialité Maths</a>
+          <a href="qcm-specialite-physique-chimie-maroc.html" class="hover:text-white transition-colors">Spécialité PC</a>
+          <a href="qcm-specialite-svt-maroc.html" class="hover:text-white transition-colors">Spécialité SVT</a>
+        </div>
+      </div>
+      <div class="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-500">
+        <p>© 2026 ProfEPS.ma. Plateforme indépendante de préparation académique aux concours de l'enseignement au Maroc.</p>
+        <p>Conforme aux référentiels officiels du Centre National des Examens et de l'Évaluation (CNEE).</p>
+      </div>
+    </div>
   </footer>
 
+  <!-- ================= JAVASCRIPT ENGINE ================= -->
   <script>
-    // 10 QUESTIONS HAUTE PRECISION DE SPECIALITE INFORMATIQUE CRMEF
-    const quizData = [
+    // BANK OF 40+ RIGOROUS ACADEMIC QUESTIONS FOR INFORMATIQUE SPÉCIALITÉ CRMEF MAROC
+    const INFO_SPECIALITE_BANK = [
       {
-        id: "info-sp-01",
-        category: "Complexité algorithmique",
-        question: "Quelle est la complexité temporelle asymptotique dans le pire des cas (worst-case) de l'algorithme de tri rapide (Quicksort) lorsqu'il est implémenté avec le premier élément choisi comme pivot, appliqué à un tableau déjà trié par ordre croissant ?",
+        id: "inf-spe-1",
+        theme: "Algorithmique & Complexité Asymptotique",
+        question: "Quelle est la complexité temporelle asymptotique dans le pire des cas (worst-case) de l'algorithme de tri rapide (Quicksort) classique utilisant le premier élément du tableau comme pivot ?",
+        questionAr: "ما هو التعقيد الزمني المقارب في أسوأ الحالات (Worst-case) لخوارزمية الترتيب السريع (Quicksort) الكلاسيكية؟",
         options: [
-          "O(n · log n)",
-          "O(n²)",
-          "O(log n)",
-          "O(n)"
+          { id: "A", text: "O(n log n)" },
+          { id: "B", text: "O(n^2), notamment lorsque le tableau est déjà trié ou trié en sens inverse.", correct: true },
+          { id: "C", text: "O(log n)" },
+          { id: "D", text: "O(n)" }
         ],
-        answer: 1,
-        explanation: "Lorsque le pivot choisi est systématiquement le plus petit ou le plus grand élément (ce qui arrive avec le premier élément sur un tableau déjà trié), le partitionnement est totalement dégénéré : il produit un sous-tableau vide et un sous-tableau de taille (n - 1). Le nombre total de comparaisons vaut alors n(n - 1)/2, soit une complexité quadratique en O(n²). C'est pourquoi on utilise un pivot aléatoire ou la médiane de trois.",
-        reference: "Introduction to Algorithms (CLRS) · Chapitre 7 (Quicksort) & Annales CRMEF Informatique"
+        explanation: "Si le pivot choisi est systématiquement le plus petit ou le plus grand élément (ce qui arrive quand le tableau d'entrée est déjà trié et qu'on choisit le premier élément), la partition est totalement déséquilibrée (un sous-tableau de taille 0 et un de taille n-1). L'équation de récurrence devient T(n) = T(n-1) + O(n), ce qui conduit à une complexité quadratique en O(n^2).",
+        officialReference: "Introduction to Algorithms (Cormen, Leiserson, Rivest, Stein - CLRS) & Cadre CNEE Informatique."
       },
       {
-        id: "info-sp-02",
-        category: "Structures de données & Graphes",
-        question: "Dans un Arbre Binaire de Recherche (ABR) contenant n éléments distincts et parfaitement équilibré, quelle est la complexité temporelle de la recherche d'une clé, et quel parcours d'arbre permet de visiter les clés par ordre strictement croissant ?",
+        id: "inf-spe-2",
+        theme: "Structures de Données & Arbres",
+        question: "Dans un Arbre Binaire de Recherche (ABR / BST) équilibré contenant n nœuds, quel parcours systématique des nœuds permet d'énumérer les clés dans un ordre strictement croissant ?",
+        questionAr: "في شجرة ثنائية للبحث (ABR) متوازنة تضم n عقدة، أي مسار ترتيبي يتيح استخراج المفاتيح مرتبة تصاعدياً؟",
         options: [
-          "Recherche en O(n) ; parcours préfixe (Root, Left, Right).",
-          "Recherche en O(log n) ; parcours infixe (Left, Root, Right).",
-          "Recherche en O(1) ; parcours postfixe (Left, Right, Root).",
-          "Recherche en O(n²) ; parcours en largeur par niveau (BFS)."
+          { id: "A", text: "Le parcours préfixe (Pre-order : Racine -> Gauche -> Droite)." },
+          { id: "B", text: "Le parcours infixe (In-order : Sous-arbre gauche -> Racine -> Sous-arbre droit).", correct: true },
+          { id: "C", text: "Le parcours postfixe (Post-order : Gauche -> Droite -> Racine)." },
+          { id: "D", text: "Le parcours en largeur par niveau (Breadth-First Search)." }
         ],
-        answer: 1,
-        explanation: "Dans un ABR équilibré de hauteur h = ⌊log₂ n⌋, chaque comparaison permet d'éliminer la moitié de l'arbre restant, d'où un coût en O(log n). De plus, par définition de l'ABR, tous les nœuds du sous-arbre gauche sont strictement inférieurs à la racine, et ceux du sous-arbre droit lui sont supérieurs ; le parcours infixe (Sous-arbre gauche, Racine, Sous-arbre droit) énumère donc les clés par ordre croissant ordonné.",
-        reference: "Structures de données et algorithmes fondamentaux · A. Aho, J. Ullman"
+        explanation: "Par définition d'un ABR, pour toute racine, toutes les clés du sous-arbre gauche sont inférieures à la clé de la racine, et celles du sous-arbre droit lui sont supérieures. Le parcours infixe visite d'abord les éléments strictement inférieurs, puis la racine, puis les éléments supérieurs, produisant ainsi une suite triée croissante en temps O(n).",
+        officialReference: "Structures de Données et Algorithmes (Aho, Hopcroft, Ullman) & Programme 2BAC / CPGE."
       },
       {
-        id: "info-sp-03",
-        category: "Bases de Données & Théorie Relationnelle",
-        question: "Une relation R(A, B, C, D) vérifie l'ensemble des dépendances fonctionnelles suivantes : { A → B, B → C, C → D }. Quelle est la clé candidate de R, et dans quelle forme normale maximale se trouve R ?",
+        id: "inf-spe-3",
+        theme: "Bases de Données Relationnelles & SQL",
+        question: "Dans la théorie de la normalisation des bases de données relationnelles (Edgar F. Codd), une relation est en Deuxième Forme Normale (2FN) si et seulement si :",
+        questionAr: "في نظرية تطبيع قواعد البيانات العلائقية، متى تكون العلاقة في الشكل المعياري الثاني (2FN)؟",
         options: [
-          "Clé candidate : {D} ; Forme normale : 3FN.",
-          "Clé candidate : {A} ; Forme normale : 2FN (mais pas en 3FN en raison de dépendances transitives).",
-          "Clé candidate : {A, B} ; Forme normale : BCNF.",
-          "Clé candidate : {C} ; Forme normale : 1FN uniquement."
+          { id: "A", text: "Elle comporte exactement deux tables associées par une clé étrangère." },
+          { id: "B", text: "Elle est en 1FN et tout attribut n'appartenant pas à une clé candidate dépend fonctionnellement de la totalité de la clé primaire (dépendance fonctionnelle pleine et non partielle).", correct: true },
+          { id: "C", text: "Elle ne contient aucune valeur nulle (NULL)." },
+          { id: "D", text: "Tous ses attributs sont de type VARCHAR." }
         ],
-        answer: 1,
-        explanation: "La fermeture de {A} est A⁺ = {A, B, C, D}, donc {A} est l'unique clé candidate. Tous les attributs sont atomiques (1FN). Tous les attributs non-clés (B, C, D) dépendent pleinement de la clé candidate {A} (2FN). Cependant, C dépend de B qui n'est pas une clé, et D dépend de C : il existe des dépendances fonctionnelles transitives A → B → C → D. Par conséquent, R ne respecte pas la 3FN (car ni B ni C ne sont des super-clés).",
-        reference: "Conception des Systèmes d'Information et Bases de Données Relationnelles · C. Date"
+        explanation: "La 2FN élimine les dépendances fonctionnelles partielles : aucun attribut non clé ne doit dépendre d'une partie seulement d'une clé primaire composée. Si la clé primaire est formée d'un seul attribut, toute relation en 1FN est automatiquement en 2FN.",
+        officialReference: "Systèmes de Gestion de Bases de Données (Gardarin, Date) & Cadre CNEE CRMEF Informatique."
       },
       {
-        id: "info-sp-04",
-        category: "SQL Avancé",
-        question: "Considérons la table `Employe(id_emp, nom, id_dept, salaire)`. Quelle requête SQL permet d'obtenir les départements ayant plus de 5 employés et dont la masse salariale moyenne dépasse 8000 DH ?",
+        id: "inf-spe-4",
+        theme: "Architecture des Ordinateurs & Arithmétique Binaire",
+        question: "En représentation binaire signée en complément à deux sur 8 bits, quelle est la valeur décimale de l'octet '11110110' ?",
+        questionAr: "في التمثيل الثنائي المكمل إلى اثنين على 8 بتات، ما هي القيمة العشرية للبايت '11110110'؟",
         options: [
-          "SELECT id_dept FROM Employe WHERE COUNT(id_emp) > 5 AND AVG(salaire) > 8000;",
-          "SELECT id_dept FROM Employe GROUP BY id_dept HAVING COUNT(id_emp) > 5 AND AVG(salaire) > 8000;",
-          "SELECT id_dept FROM Employe WHERE salaire > 8000 GROUP BY id_dept HAVING COUNT(*) > 5;",
-          "SELECT id_dept, AVG(salaire) FROM Employe ORDER BY id_dept WHERE COUNT(id_emp) > 5;"
+          { id: "A", text: "-10", correct: true },
+          { id: "B", text: "+246" },
+          { id: "C", text: "-118" },
+          { id: "D", text: "-9" }
         ],
-        answer: 1,
-        explanation: "La clause WHERE s'applique aux tuples individuels avant tout regroupement et ne peut pas contenir de fonctions d'agrégation comme COUNT ou AVG. Pour filtrer les groupes formés par `GROUP BY id_dept`, il est syntaxiquement obligatoire d'utiliser la clause `HAVING` avec les conditions d'agrégation `COUNT(id_emp) > 5 AND AVG(salaire) > 8000`.",
-        reference: "Norme SQL ISO/CEI 9075 & Épreuves Écrites CRMEF Informatique"
+        explanation: "Le bit de poids fort est 1, donc le nombre est négatif. Pour trouver sa valeur absolue : on inverse tous les bits (00001001) et on ajoute 1 (00001010, qui vaut 10 en décimal). Donc la valeur représentée est -10. On peut aussi calculer directement : -2^7 + 2^6 + 2^5 + 2^4 + 2^2 + 2^1 = -128 + 64 + 32 + 16 + 4 + 2 = -10.",
+        officialReference: "Architecture de l'ordinateur (Tanenbaum) & Programme Tronc Commun Sciences."
       },
       {
-        id: "info-sp-05",
-        category: "Réseaux & Adressage IP",
-        question: "Soit le sous-réseau IPv4 défini par l'adresse CIDR `192.168.10.128/26`. Quel est le masque de sous-réseau associé, combien d'adresses d'hôtes utilisables contient-il, et quelle est son adresse de diffusion (broadcast) ?",
+        id: "inf-spe-5",
+        theme: "Systèmes d'Exploitation & Synchronisation",
+        question: "Pour qu'une situation d'interblocage (Deadlock / Famine mortelle) puisse survenir entre plusieurs processus concurrents, quelles sont les quatre conditions simultanées nécessaires et suffisantes de Coffman ?",
+        questionAr: "لكي تحدث حالة الاستعصاء أو الاختناق (Deadlock) بين عمليات متزامنة، ما هي شروط كوفمان (Coffman) الأربعة المتزامنة؟",
         options: [
-          "Masque : 255.255.255.0 ; Hôtes utilisables : 254 ; Diffusion : 192.168.10.255.",
-          "Masque : 255.255.255.192 ; Hôtes utilisables : 62 ; Diffusion : 192.168.10.191.",
-          "Masque : 255.255.255.128 ; Hôtes utilisables : 126 ; Diffusion : 192.168.10.255.",
-          "Masque : 255.255.255.224 ; Hôtes utilisables : 30 ; Diffusion : 192.168.10.159."
+          { id: "A", text: "Exclusion mutuelle, Rétention et attente, Pas de préemption, et Attente circulaire.", correct: true },
+          { id: "B", text: "Mémoire pleine, Processeur 32 bits, Absence de swap, et Déconnexion réseau." },
+          { id: "C", text: "Algorithme FIFO, Priorité inversée, Quantum nul, et Segmentation fault." },
+          { id: "D", text: "Multi-threading, Pointeur nul, Erreur de bus, et Boucle infinie." }
         ],
-        answer: 1,
-        explanation: "Un préfixe /26 signifie 26 bits à 1 dans le masque : les 3 premiers octets valent 255 et le dernier vaut 11000000₂ = 128 + 64 = 192 (masque 255.255.255.192). La partie hôte compte 32 - 26 = 6 bits, soit 2⁶ = 64 adresses au total. En retirant l'adresse du réseau (192.168.10.128) et l'adresse de broadcast (192.168.10.128 + 63 = 192.168.10.191), on obtient 64 - 2 = 62 hôtes exploitables (de .129 à .190).",
-        reference: "Andrew Tanenbaum · Réseaux Informatiques & Architectures TCP/IP"
+        explanation: "Edward G. Coffman a démontré en 1971 que l'interblocage requiert impérativement la conjonction de 4 conditions : 1) Exclusion mutuelle (ressource non partageable), 2) Rétention et attente (Hold and wait), 3) Non-préemption (la ressource ne peut être reprise de force), et 4) Attente circulaire en chaîne fermée.",
+        officialReference: "Operating System Concepts (Silberschatz, Galvin, Gagne) & Cadre Concours CRMEF."
       },
       {
-        id: "info-sp-06",
-        category: "Systèmes d'exploitation & Concurrence",
-        question: "Dans un système d'exploitation multitâche, quelles sont les quatre conditions nécessaires et suffisantes énoncées par Coffman pour qu'une situation d'interblocage (Deadlock) survienne entre processus ?",
+        id: "inf-spe-6",
+        theme: "Réseaux Informatiques & Masques de Sous-Réseau",
+        question: "Soit le réseau IPv4 de préfixe CIDR `192.168.10.0/26`. Combien d'adresses IP uniques utilisables peuvent être effectivement attribuées à des machines hôtes (interfaces) dans ce sous-réseau ?",
+        questionAr: "في شبكة IPv4 ذات البادئة 192.168.10.0/26، كم عدد عناوين IP الصالحة للاستعمال الفعلي على الأجهزة؟",
         options: [
-          "Allocation dynamique, pagination, mémoire cache et interruption matérielle.",
-          "Exclusion mutuelle, rétention et attente (Hold and Wait), non-préemption, et attente circulaire.",
-          "Famine, gigue, latence et saturation du bus système.",
-          "Inversion de priorité, compilation JIT, ramasse-miettes et segmentation."
+          { id: "A", text: "62 adresses hôtes (car 2^(32-26) - 2 = 64 - 2 = 62).", correct: true },
+          { id: "B", text: "64 adresses hôtes." },
+          { id: "C", text: "128 adresses hôtes." },
+          { id: "D", text: "254 adresses hôtes." }
         ],
-        answer: 1,
-        explanation: "Edward G. Coffman a démontré en 1971 que l'interblocage (deadlock) requiert simultanément : 1) L'exclusion mutuelle (ressource non partageable), 2) La détention et attente (un processus retient une ressource tout en attendant une autre), 3) L'absence de préemption (une ressource ne peut être reprise de force), 4) L'attente circulaire (une chaîne fermée de processus où chacun attend la ressource du suivant). Rompre l'une de ces 4 conditions suffit à prévenir l'interblocage.",
-        reference: "Silberschatz, Galvin & Gagne · Operating System Concepts"
+        explanation: "Un préfixe /26 laisse 32 - 26 = 6 bits pour la partie hôte. Le nombre total d'adresses est 2^6 = 64. On doit soustraire l'adresse réseau (.0) et l'adresse de diffusion broadcast (.63), ce qui donne 64 - 2 = 62 adresses hôtes attribuables (de .1 à .62).",
+        officialReference: "Réseaux et Télécoms (Kurose, Ross - Computer Networking) & Programme 1BAC/2BAC."
       },
       {
-        id: "info-sp-07",
-        category: "Programmation Orientée Objet (POO)",
-        question: "En POO, quel principe fondamental de conception SOLID stipule qu'une classe dérivée doit pouvoir être substituée à sa classe de base sans altérer la cohérence et le comportement correct du programme ?",
+        id: "inf-spe-7",
+        theme: "Programmation Python & Paradigme POO",
+        question: "En Python, que fait précisément la méthode magique spéciale `__str__(self)` lorsqu'elle est surchargée dans une classe utilisateur ?",
+        questionAr: "في بايثون، ما هو الدور الدقيق للدالة الخاصة __str__(self) عند تعريفها داخل صنف (Class)؟",
         options: [
-          "Le principe de responsabilité unique (Single Responsibility Principle - SRP).",
-          "Le principe de substitution de Liskov (Liskov Substitution Principle - LSP).",
-          "Le principe d'inversion des dépendances (Dependency Inversion Principle - DIP).",
-          "Le principe Ouvert/Fermé (Open/Closed Principle - OCP)."
+          { id: "A", text: "Elle alloue la mémoire brute pour l'instance avant son initialisation." },
+          { id: "B", text: "Elle définit la représentation sous forme de chaîne de caractères lisible destinée à l'utilisateur final lors d'un appel à `print()` ou `str()` sur l'instance.", correct: true },
+          { id: "C", text: "Elle détruit l'objet en mémoire comme un destructeur C++." },
+          { id: "D", text: "Elle empêche l'héritage de la classe par d'autres classes." }
         ],
-        answer: 1,
-        explanation: "Formulé par Barbara Liskov en 1987, le LSP (Liskov Substitution Principle) énonce que si S est un sous-type de T, alors tout objet de type T peut être remplacé par un objet de type S sans modifier les propriétés attendues du programme. Cela interdit notamment d'affaiblir les postconditions ou de renforcer les préconditions dans les méthodes redéfinies.",
-        reference: "Design Patterns & Principes SOLID · Robert C. Martin & B. Liskov"
+        explanation: "La méthode `__str__` est invoquée par `str(objet)` et `print(objet)` pour fournir une représentation textuelle informelle et conviviale de l'objet. Pour une représentation technique non ambiguë destinée aux développeurs ou au débogage, on utilise plutôt `__repr__`.",
+        officialReference: "Fluent Python (Luciano Ramalho) & Cadre CNEE Informatique."
       },
       {
-        id: "info-sp-08",
-        category: "Sécurité & Cryptographie",
-        question: "Dans le protocole de chiffrement asymétrique RSA, si l'on choisit les deux nombres premiers p = 61 et q = 53, que vaut le module de chiffrement n, et que vaut l'indicatrice d'Euler φ(n) servant au calcul de la clé privée d ?",
+        id: "inf-spe-8",
+        theme: "Sécurité Informatique & Cryptographie",
+        question: "Dans le protocole de chiffrement asymétrique RSA (Rivest-Shamir-Adleman), sur quelle difficulté mathématique majeure repose la sécurité de la clé privée ?",
+        questionAr: "في خوارزمية التشفير غير المتماثل RSA، على أي صعوبة رياضية أساسية يرتكز أمان المفتاح السري؟",
         options: [
-          "n = 3233 et φ(n) = 3120",
-          "n = 114 et φ(n) = 112",
-          "n = 3233 et φ(n) = 3232",
-          "n = 6400 et φ(n) = 3200"
+          { id: "A", text: "L'intraitabilité calculatoire de la factorisation en nombres premiers d'un très grand entier produit de deux nombres premiers p et q.", correct: true },
+          { id: "B", text: "La résolution exacte des équations différentielles non linéaires." },
+          { id: "C", text: "L'inversion d'une matrice carrée d'ordre 3." },
+          { id: "D", text: "La vitesse limitée de la transmission par fibre optique." }
         ],
-        answer: 0,
-        explanation: "Dans l'algorithme RSA : n = p · q = 61 × 53 = 3233. L'indicatrice d'Euler d'un produit de deux nombres premiers distincts vaut φ(n) = (p - 1)(q - 1) = (61 - 1) × (53 - 1) = 60 × 52 = 3120. L'exposant privé d est ensuite calculé comme l'inverse modulaire de e modulo φ(n) : d ≡ e⁻¹ (mod 3120) via l'algorithme d'Euclide étendu.",
-        reference: "Rivest, Shamir, Adleman (1977) · A Method for Obtaining Digital Signatures and Public-Key Cryptosystems"
+        explanation: "La sécurité de RSA repose sur l'asymétrie de coût du problème de factorisation : multiplier deux très grands nombres premiers p et q est trivial et rapide, mais retrouver p et q à partir de leur produit n = p * q de plusieurs milliers de bits est calculatoirement infaisable avec les algorithmes classiques actuels.",
+        officialReference: "Cryptography and Network Security (Stallings) & Cadre Concours CRMEF."
       },
       {
-        id: "info-sp-09",
-        category: "Programmation Dynamique",
-        question: "Pour résoudre le problème du rendu de monnaie optimal (minimiser le nombre de pièces pour rendre une somme S avec un système de pièces non canonique), pourquoi l'approche gloutonne (Greedy) échoue-t-elle alors que la programmation dynamique garantit l'optimum ?",
+        id: "inf-spe-9",
+        theme: "Algorithmique des Graphes",
+        question: "Quel algorithme glouton (greedy algorithm) calcule l'arbre couvrant de poids minimal (Minimum Spanning Tree / MST) d'un graphe connexe non orienté et pondéré en sélectionnant à chaque étape l'arête de plus faible poids qui ne crée pas de cycle ?",
+        questionAr: "أي خوارزمية طماعة تحسب شجرة التغطية الدنيا (MST) لمبيان غير موجه عبر اختيار الحافة الأقل وزناً في كل خطوة دون إحداث حلقة؟",
         options: [
-          "Parce que la programmation dynamique teste au hasard toutes les combinaisons sans mémorisation.",
-          "Parce qu'un système de pièces quelconque peut ne pas vérifier la propriété de choix glouton ; l'optimum global n'est pas réductible aux choix locaux successifs, tandis que la programmation dynamique explore et mémorise les solutions des sous-problèmes chevauchants.",
-          "Parce que les algorithmes gloutons ne fonctionnent que sur des nombres négatifs.",
-          "Parce que la programmation dynamique s'exécute toujours en temps constant O(1)."
+          { id: "A", text: "L'algorithme de Kruskal (utilisant une structure Union-Find pour la détection de cycles).", correct: true },
+          { id: "B", text: "L'algorithme de Dijkstra." },
+          { id: "C", text: "L'algorithme de Floyd-Warshall." },
+          { id: "D", text: "L'algorithme A* de recherche heuristique." }
         ],
-        answer: 1,
-        explanation: "L'algorithme glouton choisit à chaque étape la plus grande pièce inférieure ou égale au montant restant. Avec le système {1, 3, 4} et une somme S = 6, le glouton choisit 4 puis 1 puis 1 (3 pièces), alors que la solution optimale est 3 + 3 (2 pièces). La programmation dynamique résout ce problème de façon exacte en O(n · S) en exploitant la sous-structure optimale et la mémoïsation : opt(S) = 1 + min_{c_i ≤ S} opt(S - c_i).",
-        reference: "Introduction to Algorithms (CLRS) · Programmation Dynamique vs Algorithmes Gloutons"
+        explanation: "L'algorithme de Kruskal trie d'abord toutes les arêtes par ordre croissant de poids, puis les ajoute une à une à l'arbre couvrant en s'assurant qu'elles ne forment pas de cycle (géré efficacement par la structure de données des ensembles disjoints Union-Find / DSU), avec une complexité en O(E log E).",
+        officialReference: "Introduction to Algorithms (CLRS) & Programme CPGE / Université."
       },
       {
-        id: "info-sp-10",
-        category: "Architecture des Ordinateurs & Pipeline",
-        question: "Dans un processeur moderne à architecture pipeline à 5 étages (IF, ID, EX, MEM, WB), quel type d'aléa (hazard) se produit lorsqu'une instruction conditionnelle de branchement (jump/branch) modifie le compteur de programme (PC), invalidant les instructions déjà chargées ?",
+        id: "inf-spe-10",
+        theme: "Bases de Données Relationnelles & SQL",
+        question: "Considérant une table SQL `Employes(id, nom, departement_id, salaire)`. Quelle clause SQL permet de filtrer les groupes de départements dont le salaire moyen est supérieur à 15000 DH après agrégation ?",
+        questionAr: "في لغة SQL، أي عبارة تستعمل لتصفية مجموعات الأقسام التي يتجاوز متوسط رواتبها 15000 درهم بعد التجميع؟",
         options: [
-          "Un aléa structurel (Structural hazard).",
-          "Un aléa de contrôle (Control / Branch hazard).",
-          "Un aléa de données RAW (Read After Write).",
-          "Une faute de page mémoire (Page fault)."
+          { id: "A", text: "WHERE AVG(salaire) > 15000" },
+          { id: "B", text: "GROUP BY departement_id HAVING AVG(salaire) > 15000", correct: true },
+          { id: "C", text: "ORDER BY AVG(salaire) LIMIT 15000" },
+          { id: "D", text: "FILTER (salaire > 15000)" }
         ],
-        answer: 1,
-        explanation: "Un aléa de contrôle (Control hazard) survient lors de sauts conditionnels où la décision de branchement n'est connue qu'à l'étage d'exécution (EX) ou de décodage (ID), alors que le processeur a déjà pré-chargé les instructions suivantes séquentielles. Cela nécessite un gel du pipeline (stall) ou un vidage (flush), problème atténué dans les processeurs modernes par les unités de prédiction de branchement (Branch Predictor).",
-        reference: "Patterson & Hennessy · Computer Organization and Design: The Hardware/Software Interface"
+        explanation: "La clause `WHERE` filtre les lignes individuelles avant tout groupement et ne peut pas contenir de fonction d'agrégation. Pour filtrer les résultats d'une agrégation après un `GROUP BY`, on doit obligatoirement utiliser la clause `HAVING`.",
+        officialReference: "Norme SQL ISO/IEC & Programme 2BAC Sciences / CRMEF Informatique."
+      },
+      {
+        id: "inf-spe-11",
+        theme: "Programmation Python & Compréhensions",
+        question: "Quelle est la valeur de la variable `res` après l'exécution de la ligne Python suivante : `res = [x**2 for x in range(10) if x % 3 == 0]` ?",
+        questionAr: "ما هي قيمة المتغير res بعد تنفيذ سطر الكود البرمجي أعلاه بلغة بايثون؟",
+        options: [
+          { id: "A", text: "[0, 9, 36, 81]", correct: true },
+          { id: "B", text: "[9, 36, 81]" },
+          { id: "C", text: "[0, 3, 6, 9]" },
+          { id: "D", text: "[1, 4, 9, 16, 25]" }
+        ],
+        explanation: "`range(10)` parcourt les entiers de 0 à 9. Les entiers vérifiant `x % 3 == 0` sont 0, 3, 6 et 9. Leurs carrés respectifs sont 0^2 = 0, 3^2 = 9, 6^2 = 36 et 9^2 = 81. La liste résultante est donc `[0, 9, 36, 81]`.",
+        officialReference: "Spécification Python 3 & Programme 2BAC / CPGE Informatique."
+      },
+      {
+        id: "inf-spe-12",
+        theme: "Systèmes d'Exploitation & Ordonnancement",
+        question: "Dans l'ordonnancement préemptif par Tourniquet (Round Robin), quel compromis majeur régit le choix de la durée du quantum de temps d'allocation CPU (q) ?",
+        questionAr: "في جدولة المعالج بنظام التناوب الدوري (Round Robin)، ما هو الرهان الأساسي في تحديد قيمة الحصة الزمنية (Quantum q)؟",
+        options: [
+          { id: "A", text: "Si q est trop court, le coût relatif des commutations de contexte (overhead) dégrade drastiquement le rendement CPU ; si q est trop long, le système dégénère en FIFO et le temps de réponse interactif se détériore.", correct: true },
+          { id: "B", text: "Le quantum doit obligatoirement être égal à la vitesse d'horloge du processeur en GHz." },
+          { id: "C", text: "Le Round Robin ne supporte que des quantums infinis." },
+          { id: "D", text: "Un quantum court supprime totalement le besoin de mémoire vive." }
+        ],
+        explanation: "Un quantum trop petit entraîne des changements de contexte incessants (sauvegarde des registres du PCB, vidage du cache L1/L2), gaspillant le temps processeur. Un quantum trop grand pénalise les processus courts et réactifs qui attendent la fin des processus lourds, se comportant comme un FCFS.",
+        officialReference: "Operating Systems (Stallings) & Cadre CNEE Informatique."
+      },
+      {
+        id: "inf-spe-13",
+        theme: "Logique Booléenne & Tables de Karnaugh",
+        question: "À quoi sert principalement la méthode des tables de Karnaugh (diagrammes de Karnaugh) en électronique numérique et conception logique ?",
+        questionAr: "ما هو الهدف الأساسي لاستعمال مخططات كارنو (Tables de Karnaugh) في التصميم المنطقي الرقمي؟",
+        options: [
+          { id: "A", text: "Convertir des fichiers audio MP3 en code binaire." },
+          { id: "B", text: "Simplifier visuellement des fonctions logiques booléennes afin de minimiser le nombre de portes logiques et de termes nécessaires à leur réalisation physique.", correct: true },
+          { id: "C", text: "Tester la vitesse des disques SSD NVMe." },
+          { id: "D", text: "Remplacer l'adressage IPv6 par des adresses MAC." }
+        ],
+        explanation: "Les tables de Karnaugh organisent la table de vérité sous forme matricielle où les cases adjacentes ne diffèrent que d'un seul bit (code de Gray). Les regroupements de 2^k cases adjacentes permettent d'éliminer les variables complémentaires et d'obtenir l'expression disjonctive ou conjonctive minimale.",
+        officialReference: "Circuits Numériques et Synthèse Logique (Floyd) & Programme Tronc Commun / 1BAC."
+      },
+      {
+        id: "inf-spe-14",
+        theme: "Réseaux & Couches OSI / TCP-IP",
+        question: "À quelle couche du modèle de référence OSI (Open Systems Interconnection) opère un commutateur réseau Ethernet (Switch) classique non manageable ?",
+        questionAr: "في أي طبقة من طبقات نموذج OSI يعمل موزع الشبكة الكلاسيكي (Switch)؟",
+        options: [
+          { id: "A", text: "Couche 1 : Physique (Physical Layer)." },
+          { id: "B", text: "Couche 2 : Liaison de données (Data Link Layer - commutation de trames basée sur les adresses MAC).", correct: true },
+          { id: "C", text: "Couche 3 : Réseau (Network Layer)." },
+          { id: "D", text: "Couche 7 : Application (Application Layer)." }
+        ],
+        explanation: "Le switch de niveau 2 commute des trames Ethernet (frames) en analysant l'adresse MAC de destination et en consultant sa table CAM (Content Addressable Memory). Les routeurs opèrent quant à eux en couche 3 (paquets IP), tandis que les hubs opèrent en couche 1 (bits bruts).",
+        officialReference: "Computer Networks (Tanenbaum, Wetherall) & Programme 1BAC/2BAC."
+      },
+      {
+        id: "inf-spe-15",
+        theme: "Algorithmique & Diviser pour Régner",
+        question: "Quelle équation de récurrence caractérise la complexité temporelle de l'algorithme de tri fusion (Merge Sort) pour une entrée de taille n ?",
+        questionAr: "أي معادلة ترادفية تميز التعقيد الزمني لخوارزمية الترتيب بالاندماج (Merge Sort)؟",
+        options: [
+          { id: "A", text: "T(n) = 2 T(n/2) + O(n), ce qui donne par le théorème maître T(n) = O(n log n).", correct: true },
+          { id: "B", text: "T(n) = T(n-1) + O(1)" },
+          { id: "C", text: "T(n) = 4 T(n/2) + O(n^2)" },
+          { id: "D", text: "T(n) = T(n/2) + O(1)" }
+        ],
+        explanation: "Le tri fusion divise le tableau en 2 sous-tableaux de taille n/2 (2 T(n/2)), les trie récursivement, puis fusionne les deux sous-listes triées en temps linéaire O(n). D'après le Master Theorem (cas a = b^d avec a=2, b=2, d=1), la complexité est invariablement O(n log n), dans le meilleur comme dans le pire des cas.",
+        officialReference: "Algorithmes et Théorie de la Complexité (CLRS) & Cadre Concours CRMEF."
+      },
+      {
+        id: "inf-spe-16",
+        theme: "Sécurité Web & Vulnérabilités",
+        question: "Quel mécanisme préventif fondamental permet de neutraliser de façon définitive le risque d'attaques par injection SQL dans une application web connectée à une base de données ?",
+        questionAr: "ما هي الآلية الوقائية الجوهرية التي تسمح بالتصدي القاطع لهجمات الحقن SQL (SQL Injection) في تطبيقات الويب؟",
+        options: [
+          { id: "A", text: "L'utilisation systématique de requêtes préparées avec paramètres typés (Prepared Statements / Parameterized Queries).", correct: true },
+          { id: "B", text: "L'augmentation de la taille des disques durs du serveur." },
+          { id: "C", text: "L'écriture des mots de passe en lettres capitales." },
+          { id: "D", text: "La désactivation du pare-feu Windows." }
+        ],
+        explanation: "Les requêtes préparées séparent strictement le code SQL de la commande des données fournies par l'utilisateur. Le moteur de base de données compile d'abord la structure de la requête, de sorte que toute chaîne injectée n'est traitée que comme un simple littéral et ne peut en aucun cas altérer la logique de la requête.",
+        officialReference: "OWASP Top 10 Web Application Security Risks & Cadre CRMEF Informatique."
+      },
+      {
+        id: "inf-spe-17",
+        theme: "Programmation Python & Générateurs",
+        question: "En Python, quelle est la spécificité fondamentale d'une fonction contenant le mot-clé `yield` par rapport à une fonction classique se terminant par `return` ?",
+        questionAr: "في بايثون، ما هو الفرق الجوهري بين دالة تتضمن الكلمة المفتاحية yield ودالة تنتهي بـ return؟",
+        options: [
+          { id: "A", text: "Elle renvoie un générateur qui produit des valeurs à la demande (évaluation paresseuse / lazy evaluation), mémorisant son état d'exécution entre chaque appel sans saturer la mémoire vive.", correct: true },
+          { id: "B", text: "Elle supprime automatiquement toutes les variables du système d'exploitation." },
+          { id: "C", text: "Elle s'exécute exclusivement en arrière-plan sans affichage." },
+          { id: "D", text: "Elle ne peut être appelée qu'une seule fois dans la vie du programme." }
+        ],
+        explanation: "Une fonction avec `yield` est un générateur (itérateur). Au lieu de construire et de charger une énorme collection en mémoire vive avant de la renvoyer (comme le ferait une liste complète avec `return`), elle produit les éléments un par un au fur et à mesure des itérations (`next()`), ce qui optimise considérablement la mémoire spatiale.",
+        officialReference: "Python Standard Library Documentation & Cadre CNEE."
+      },
+      {
+        id: "inf-spe-18",
+        theme: "Architecture & Mémoire Cache",
+        question: "Dans la hiérarchie mémoire d'un ordinateur moderne, quel principe fondamental régit l'efficacité des mémoires caches (L1, L2, L3) situées entre les registres du CPU et la RAM ?",
+        questionAr: "في هرمية الذاكرة للحاسوب، ما هو المبدأ الأساسي الذي يفسر كفاءة الذاكرة المخبئية (Cache)؟",
+        options: [
+          { id: "A", text: "Le principe de localité temporelle (une donnée récemment accédée risque d'être réaccédée bientôt) et de localité spatiale (des données proches en mémoire ont de fortes chances d'être accédées consécutivement).", correct: true },
+          { id: "B", text: "Le théorème de Pythagore appliqué aux circuits intégrés." },
+          { id: "C", text: "L'absence totale de condensateurs dans les puces en silicium." },
+          { id: "D", text: "La vitesse supraconductrice de l'azote liquide." }
+        ],
+        explanation: "L'efficacité phénoménale de la mémoire cache repose sur les principes de localité : la localité temporelle justifie de conserver les données récentes (ex: variables de boucles), et la localité spatiale justifie de charger des blocs entiers de mémoire consécutifs (lignes de cache).",
+        officialReference: "Computer Organization and Design (Patterson & Hennessy) & Programme Universitaire."
+      },
+      {
+        id: "inf-spe-19",
+        theme: "Systèmes d'Exploitation & Mémoire Virtuelle",
+        question: "Dans un système d'exploitation avec gestion de mémoire virtuelle par pagination, qu'appelle-t-on un « défaut de page » (Page Fault) ?",
+        questionAr: "في إدارة الذاكرة الافتراضية عبر نظام الصفحات (Paging)، ماذا يقصد بـ 'خطأ الصفحة' (Page Fault)؟",
+        options: [
+          { id: "A", text: "Une interruption matérielle déclenchée par la MMU lorsqu'un processus tente d'accéder à une page virtuelle dont le bit de présence indique qu'elle n'est pas actuellement chargée en mémoire vive physique (RAM).", correct: true },
+          { id: "B", text: "Une erreur d'impression de l'imprimante réseau." },
+          { id: "C", text: "La corruption irréversible du disque dur principal." },
+          { id: "D", text: "Une faute d'orthographe dans le fichier de configuration." }
+        ],
+        explanation: "Lors d'un défaut de page, le système d'exploitation prend le relais : il suspend le processus demandeur, localise la page manquante sur l'espace d'échange (swap / disque), charge la page dans un cadre de mémoire vive disponible (en appliquant un algorithme de remplacement type LRU si la RAM est pleine), met à jour la table des pages, et relance l'instruction.",
+        officialReference: "Modern Operating Systems (Tanenbaum) & Cadre CRMEF Informatique."
+      },
+      {
+        id: "inf-spe-20",
+        theme: "Structures de Données & Tables de Hachage",
+        question: "Dans une table de hachage (Hash Table / dictionnaire Python), quelle technique classique de résolution des collisions consiste à chaîner sous forme de liste liée tous les éléments dont les clés produisent la même valeur de hachage ?",
+        questionAr: "في جدول التجزئة (Hash Table)، ما هي التقنية الكلاسيكية لمعالجة التصادمات التي تقوم على ربط العناصر ذات نفس قيمة التجزئة في شكل لائحة متسلسلة؟",
+        options: [
+          { id: "A", text: "Le chaînage séparé (Separate Chaining).", correct: true },
+          { id: "B", text: "Le sondage linéaire ouvert." },
+          { id: "C", text: "Le double hachage exponentiel." },
+          { id: "D", text: "La compression LZW sans perte." }
+        ],
+        explanation: "Le chaînage séparé (ou adressage indirect) stocke dans chaque case du tableau une tête de liste chaînée regroupant toutes les paires (clé, valeur) ayant la même empreinte de hachage. Si la fonction de hachage est uniforme, la recherche, l'insertion et la suppression s'effectuent en temps moyen constant O(1).",
+        officialReference: "Algorithms (Sedgewick, Wayne) & Programme 2BAC / CPGE Informatique."
+      },
+      {
+        id: "inf-spe-21",
+        theme: "Algorithmique des Graphes & Plus Court Chemin",
+        question: "Quelle condition impérative sur les poids des arêtes d'un graphe est requise pour garantir l'exactitude de l'algorithme de Dijkstra de recherche du plus court chemin ?",
+        questionAr: "ما هو الشرط الإلزامي في أوزان حافات المبيان لضمان صحة خوارزمية ديكسترا (Dijkstra)؟",
+        options: [
+          { id: "A", text: "Tous les poids des arêtes doivent être strictement positifs ou nuls (pas de poids négatif).", correct: true },
+          { id: "B", text: "Tous les poids doivent être des nombres entiers pairs." },
+          { id: "C", text: "Le graphe ne doit contenir aucun sommet de degré supérieur à 2." },
+          { id: "D", text: "Le nombre de sommets doit être une puissance de 2." }
+        ],
+        explanation: "L'algorithme de Dijkstra repose sur l'hypothèse gloutonne qu'un chemin exploré avec un coût minimal ne pourra jamais être raccourci par l'ajout d'arêtes supplémentaires. En présence d'arêtes de poids négatif, cette propriété s'effondre, et l'on doit alors employer l'algorithme de Bellman-Ford.",
+        officialReference: "Algorithmique (Cormen et al. - CLRS) & Cadre CNEE Informatique."
+      },
+      {
+        id: "inf-spe-22",
+        theme: "Bases de Données & Transactions ACID",
+        question: "Dans le modèle transactionnel des SGBD relationnels, que garantit précisément la propriété d'« Isolation » (le I d'ACID) ?",
+        questionAr: "في المعاملات البنكية بقواعد البيانات العلائقية، ماذا تضمن خاصية 'العزل' (Isolation) في مبادئ ACID؟",
+        options: [
+          { id: "A", text: "L'exécution concurrente de plusieurs transactions produit le même état de la base que si les transactions s'étaient exécutées de manière strictement séquentielle les unes après les autres.", correct: true },
+          { id: "B", text: "L'interdiction absolue de connecter la base à un réseau Ethernet." },
+          { id: "C", text: "La sauvegarde des tables sur un support optique inscriptible une seule fois." },
+          { id: "D", text: "Le chiffrement du disque dur par un mot de passe à usage unique." }
+        ],
+        explanation: "L'isolation garantit que des transactions simultanées ne voient pas les états intermédiaires incohérents des autres transactions (évitant la lecture sale / dirty read, la lecture non répétable et les lectures fantômes), simulant ainsi une sérialisabilité parfaite.",
+        officialReference: "Database System Concepts (Silberschatz) & Programme 2BAC Sciences et Technologies."
+      },
+      {
+        id: "inf-spe-23",
+        theme: "Programmation Python & Gestion des Exceptions",
+        question: "Dans un bloc `try ... except ... else ... finally` en Python, à quel moment le bloc `else` est-il exécuté ?",
+        questionAr: "في بنية معالجة الأخطاء في بايثون، متى يتم تنفيذ الجزء else؟",
+        options: [
+          { id: "A", text: "Uniquement si aucune exception n'a été levée à l'intérieur du bloc `try`.", correct: true },
+          { id: "B", text: "Systématiquement, qu'il y ait une erreur ou non." },
+          { id: "C", text: "Uniquement si une exception de type ZeroDivisionError survient." },
+          { id: "D", text: "Quand l'ordinateur redémarre." }
+        ],
+        explanation: "La clause `else` d'un bloc `try` est exécutée si et seulement si le code du `try` s'est achevé avec succès sans lever d'exception. Quant au bloc `finally`, il est garanti d'être exécuté dans tous les cas de figure (avec ou sans exception).",
+        officialReference: "Documentation officielle du langage Python (Exceptions) & Programme 2BAC."
+      },
+      {
+        id: "inf-spe-24",
+        theme: "Réseaux & Protocole de Transport TCP vs UDP",
+        question: "Quelle différence technique fondamentale distingue le protocole TCP (Transmission Control Protocol) du protocole UDP (User Datagram Protocol) au niveau de la couche transport ?",
+        questionAr: "ما هو الفرق التقني الجوهري بين بروتوكول TCP وبروتوكول UDP في طبقة النقل؟",
+        options: [
+          { id: "A", text: "TCP est un protocole orienté connexion garantissant la remise fiable, ordonnée et sans duplication des segments avec contrôle de flux et de congestion, tandis qu'UDP est non connecté, plus léger et sans garantie de livraison.", correct: true },
+          { id: "B", text: "TCP fonctionne uniquement par satellite alors qu'UDP utilise des câbles coaxiaux." },
+          { id: "C", text: "UDP crypte automatiquement toutes les données avec une clé 1024 bits." },
+          { id: "D", text: "TCP est réservé aux imprimantes et UDP aux écrans tactiles." }
+        ],
+        explanation: "TCP établit une liaison préalable (Three-Way Handshake : SYN, SYN-ACK, ACK), numérote les octets, acquitte les réceptions (ACK) et réémet les paquets perdus. UDP envoie des datagrammes sans poignée de main ni accusé de réception, privilégiant la latence minimale (streaming vidéo en direct, jeux multijoueurs, requêtes DNS).",
+        officialReference: "Computer Networking : A Top-Down Approach (Kurose & Ross) & Programme 1BAC/2BAC."
+      },
+      {
+        id: "inf-spe-25",
+        theme: "Architecture des Processeurs & Pipeline",
+        question: "Dans l'architecture des microprocesseurs RISC modernes, quel aléa (hazard) de pipeline se produit lorsqu'une instruction a besoin du résultat produit par l'instruction précédente qui n'a pas encore achevé son étape d'écriture en registre ?",
+        questionAr: "في معمارية المعالجات الحديثة ذات مسار الأنابيب (Pipeline)، ما هو نوع التعارض (Hazard) الذي ينشأ عندما تحتاج تعليمة لنتيجة تعليمة سابقة لم تكتمل بعد؟",
+        options: [
+          { id: "A", text: "Un aléa de données (Data Hazard / dépendance de données RAW : Read After Write).", correct: true },
+          { id: "B", text: "Un aléa thermique de surchauffe." },
+          { id: "C", text: "Un aléa géologique de sédimentation." },
+          { id: "D", text: "Un aléa optique de réfraction." }
+        ],
+        explanation: "Les aléas de données (Data Hazards) surviennent lorsqu'une dépendance de données oblige le processeur à insérer des bulles d'attente (stalls) ou à recourir au court-circuitage (forwarding / bypassing) pour propager directement le résultat calculé par l'ALU sans attendre l'écriture mémoire finale.",
+        officialReference: "Computer Architecture : A Quantitative Approach (Hennessy & Patterson)."
+      },
+      {
+        id: "inf-spe-26",
+        theme: "Algorithmique & Programmation Dynamique",
+        question: "Quel principe fondamental caractérise la résolution d'un problème d'optimisation par la « Programmation Dynamique » (Dynamic Programming de Richard Bellman) ?",
+        questionAr: "ما هو المبدأ الجوهري الذي يميز حل مسألة بواسطة 'البرمجة الديناميكية' (Dynamic Programming)؟",
+        options: [
+          { id: "A", text: "Le problème possède une sous-structure optimale et des sous-problèmes chevauchants (overlapping subproblems), dont les solutions partielles sont mémoïsées (dans une table) pour éviter des recalculs redondants exponentiels.", correct: true },
+          { id: "B", text: "L'utilisation exclusive de variables changeant dynamiquement de type en cours d'exécution." },
+          { id: "C", text: "Le fait de secouer la souris pendant l'exécution pour accélérer le tri." },
+          { id: "D", text: "L'absence totale de structures conditionnelles if/else." }
+        ],
+        explanation: "La programmation dynamique transforme un algorithme récursif exponentiel (ex: calcul naïf de la suite de Fibonacci en O(2^n) ou problème du sac à dos) en un algorithme polynomial (O(n) ou pseudo-polynomial) en mémorisant les sous-résultats déjà calculés dans une table (approche ascendante bottom-up ou mémoïsation top-down).",
+        officialReference: "Introduction to Algorithms (CLRS) & Cadre Concours CRMEF Informatique."
+      },
+      {
+        id: "inf-spe-27",
+        theme: "Systèmes d'Exploitation & Processus vs Threads",
+        question: "Quelle différence majeure existe-t-il entre un « Processus » et un « Thread » (Fil d'exécution) au sein d'un système d'exploitation moderne ?",
+        questionAr: "ما هو الفارق الجوهري بين 'العملية' (Processus) و'الخيط' (Thread) داخل نظام التشغيل؟",
+        options: [
+          { id: "A", text: "Un processus dispose de son propre espace d'adressage virtuel isolé et de ses propres ressources système, tandis que les threads d'un même processus partagent le même espace d'adressage, le code, les données globales et les fichiers ouverts.", correct: true },
+          { id: "B", text: "Les processus ne peuvent s'exécuter que la nuit." },
+          { id: "C", text: "Les threads n'utilisent jamais le microprocesseur." },
+          { id: "D", text: "Il n'y a aucune différence, ce sont deux mots exactement synonymes." }
+        ],
+        explanation: "Un processus est une unité lourde d'allocation de ressources (table des pages, espace mémoire privé). Un thread est une unité légère d'exécution CPU possédant sa propre pile d'appels et son propre compteur ordinal (PC), mais partageant le tas (heap) et la mémoire globale avec les autres threads du même processus, ce qui rend la communication inter-threads très rapide mais vulnérable aux accès concurrents.",
+        officialReference: "Operating System Concepts (Silberschatz) & Programme Universitaire / CRMEF."
+      },
+      {
+        id: "inf-spe-28",
+        theme: "Développement Web & Protocole HTTP",
+        question: "Dans le protocole HTTP/1.1 et HTTP/2, quelle méthode de requête doit être strictement « idempotente » selon la spécification RFC 7231 ?",
+        questionAr: "في بروتوكول HTTP، أي طريقة طلب يجب أن تكون 'متكافئة القوى' (Idempotente) حسب المعايير القياسية؟",
+        options: [
+          { id: "A", text: "La méthode GET, ainsi que PUT et DELETE (répéter la requête N fois produit le même état final sur le serveur qu'une seule exécution).", correct: true },
+          { id: "B", text: "La méthode POST exclusivement." },
+          { id: "C", text: "Aucune méthode HTTP n'est idempotente." },
+          { id: "D", text: "Uniquement les requêtes de téléchargement de vidéos." }
+        ],
+        explanation: "Une requête HTTP est dite idempotente si l'effet de N requêtes identiques consécutives est rigoureusement identique à l'effet d'une seule requête. C'est le cas de GET, HEAD, PUT et DELETE. En revanche, POST n'est pas idempotent car exécuter N fois un POST de commande crée N commandes distinctes en base de données.",
+        officialReference: "RFC 7231 Hypertext Transfer Protocol & Programme 2BAC / BTS Informatique."
+      },
+      {
+        id: "inf-spe-29",
+        theme: "Structures de Données Linéaires & Piles / Files",
+        question: "Considérant une pile (Stack) initialement vide. On exécute la séquence d'opérations : `Push(5) ; Push(8) ; Pop() ; Push(3) ; Push(9) ; Pop() ; Push(1)`. Quel est l'élément situé au sommet de la pile à l'issue de cette séquence ?",
+        questionAr: "في بنية مكدس (Stack) كان فارغاً، بعد تطبيق متوالية العمليات أعلاه، ما هو العنصر الموجود في قمة المكدس؟",
+        options: [
+          { id: "A", text: "1", correct: true },
+          { id: "B", text: "5" },
+          { id: "C", text: "3" },
+          { id: "D", text: "8" }
+        ],
+        explanation: "Traçage pas à pas selon la discipline LIFO (Last-In First-Out) : 1) Push(5) -> [5] ; 2) Push(8) -> [5, 8] ; 3) Pop() -> retire 8, reste [5] ; 4) Push(3) -> [5, 3] ; 5) Push(9) -> [5, 3, 9] ; 6) Pop() -> retire 9, reste [5, 3] ; 7) Push(1) -> [5, 3, 1]. Le sommet actuel de la pile est bien 1.",
+        officialReference: "Structures de données fondamentales & Programme Tronc Commun / 1BAC."
+      },
+      {
+        id: "inf-spe-30",
+        theme: "Théorie des Langages & Automates",
+        question: "Selon la hiérarchie des grammaires formelles de Noam Chomsky, quel modèle de machine abstraite reconnaît précisément l'ensemble des langages dits « réguliers » (ou rationnels) décrits par les expressions régulières (Regex) ?",
+        questionAr: "في تراتبية تشومسكي اللغوية، أي آلة مجردة تتعرف بدقة على 'اللغات المنتظمة' المحددة بالتعابير النمطية (Regex)؟",
+        options: [
+          { id: "A", text: "Les automates finis (déterministes ou non déterministes à états finis - AFD / AFN).", correct: true },
+          { id: "B", text: "Les automates à pile non déterministes." },
+          { id: "C", text: "La machine de Turing universelle." },
+          { id: "D", text: "Les réseaux de neurones profonds." }
+        ],
+        explanation: "Le théorème de Kleene établit l'équivalence stricte entre les expressions régulières et les langages reconnus par des automates à états finis (DFA/NFA). Les grammaires non contextuelles (hors contexte) requièrent quant à elles des automates à pile, et les langages récursivement énumérables requièrent des machines de Turing.",
+        officialReference: "Introduction to Automata Theory, Languages, and Computation (Hopcroft, Motwani, Ullman)."
+      },
+      {
+        id: "inf-spe-31",
+        theme: "Bases de Données & Algèbre Relationnelle",
+        question: "En algèbre relationnelle, quelle opération élémentaire unaire permet d'extraire un sous-ensemble de colonnes (attributs) spécifiées d'une relation en éliminant les doublons éventuels ?",
+        questionAr: "في الجبر العلائقي، أي عملية أحادية تسمح باستخراج أعمدة محددة من جدول مع حذف التكرارات؟",
+        options: [
+          { id: "A", text: "La sélection (ou restriction, notée sigma)." },
+          { id: "B", text: "La projection (notée pi).", correct: true },
+          { id: "C", text: "Le produit cartésien." },
+          { id: "D", text: "La jointure naturelle theta." }
+        ],
+        explanation: "La projection (pi) opère verticalement sur une table pour n'en retenir que certains attributs (colonnes). La sélection (sigma) opère quant à elle horizontalement pour filtrer les tuples (lignes) vérifiant un prédicat logique donné.",
+        officialReference: "Bases de Données et Algèbre Relationnelle (Codd, Ullman) & Cadre CNEE Informatique."
+      },
+      {
+        id: "inf-spe-32",
+        theme: "Réseaux & Protocoles de Routage",
+        question: "Quel protocole de routage dynamique interne (IGP) à état de liens (Link-State) utilise l'algorithme de Dijkstra (SPF) pour calculer la route de coût minimal vers chaque destination dans un système autonome ?",
+        questionAr: "أي بروتوكول توجيه ديناميكي داخلي يعتمد خوارزمية ديكسترا لحساب المسار الأقل كلفة داخل نظام مستقل؟",
+        options: [
+          { id: "A", text: "OSPF (Open Shortest Path First)", correct: true },
+          { id: "B", text: "RIPv2 (Routing Information Protocol à vecteur de distance limité à 15 sauts)" },
+          { id: "C", text: "BGP-4 (Border Gateway Protocol externe)" },
+          { id: "D", text: "ARP (Address Resolution Protocol)" }
+        ],
+        explanation: "OSPF est un protocole de routage à état de liens : chaque routeur diffuse ses annonces LSA (Link State Advertisements) à tous les routeurs de la zone pour construire une carte topologique identique complète du réseau, puis exécute l'algorithme de Dijkstra pour déterminer l'arbre des plus courts chemins vers chaque réseau.",
+        officialReference: "Routing TCP/IP (Jeff Doyle) & Programme 2BAC Sciences et Technologies."
+      },
+      {
+        id: "inf-spe-33",
+        theme: "Programmation Python & Décorateurs",
+        question: "En Python, quelle est la nature syntaxique et fonctionnelle exacte d'un « décorateur » préfixé par le symbole `@` ?",
+        questionAr: "في بايثون، ما هي الطبيعة الوظيفية الدقيقة لـ 'المزخرف' (Décorateur) المسبوق بالعلامة @؟",
+        options: [
+          { id: "A", text: "Une fonction d'ordre supérieur qui prend une fonction en argument, lui adjoint un comportement supplémentaire sans modifier son code source, et renvoie une nouvelle fonction exécutable.", correct: true },
+          { id: "B", text: "Une directive du compilateur C sous-jacent qui accélère la carte graphique." },
+          { id: "C", text: "Un commentaire de code destiné à la mise en page HTML." },
+          { id: "D", text: "Un mot-clé réservé pour déclarer des tableaux statiques de pointeurs." }
+        ],
+        explanation: "Un décorateur implémente le patron de conception (Design Pattern) Décorateur : écrire `@decorateur` au-dessus de `def ma_fonction(): ...` équivaut exactement à l'affectation `ma_fonction = decorateur(ma_fonction)`. Cela permet de factoriser des fonctionnalités transversales comme le chronométrage, la journalisation (logging) ou le contrôle d'accès.",
+        officialReference: "Fluent Python & Programme CPGE / Université Informatique."
+      },
+      {
+        id: "inf-spe-34",
+        theme: "Algorithmique & Recherche Dichotomique",
+        question: "Combien de comparaisons au maximum sont nécessaires pour rechercher un élément par dichotomie (Binary Search) dans un tableau déjà trié contenant 1 048 576 (2^20) éléments ?",
+        questionAr: "كم عدد المقارنات الأقصى اللازمة للبحث الثنائي (Dichotomie) داخل جدول مرتب يضم 1048576 عنصراً؟",
+        options: [
+          { id: "A", text: "21 comparaisons au maximum (car ceil(log2(n + 1)) = ceil(log2(2^20 + 1)) = 21).", correct: true },
+          { id: "B", text: "1 048 576 comparaisons." },
+          { id: "C", text: "524 288 comparaisons." },
+          { id: "D", text: "200 comparaisons." }
+        ],
+        explanation: "La recherche dichotomique divise par 2 l'espace de recherche à chaque étape (complexité en O(log2 n)). Pour 2^20 éléments, 20 divisions suffisent pour isoler un seul élément, et au maximum 21 comparaisons permettent d'affirmer avec certitude si l'élément est présent ou absent.",
+        officialReference: "Algorithmes et Programmation & Programme Tronc Commun / 1BAC."
+      },
+      {
+        id: "inf-spe-35",
+        theme: "Sécurité & Hachage Cryptographique",
+        question: "Quelle propriété indispensable distingue une fonction de hachage cryptographique sécurisée (comme SHA-256) d'une fonction de somme de contrôle simple (comme CRC32) ?",
+        questionAr: "ما هي الخاصية الأمنية الجوهرية التي تميز دالة التجزئة التشفيرية (مثل SHA-256) عن خوارزميات التدقيق البسيطة؟",
+        options: [
+          { id: "A", text: "La résistance aux préimages (sens unique irréversible) et la résistance aux collisions (calculatoirement impossible de trouver deux messages distincts produisant le même haché).", correct: true },
+          { id: "B", text: "La capacité à décompresser le fichier original à partir de son empreinte." },
+          { id: "C", text: "L'obligation d'avoir une longueur de texte d'entrée égale à 10 caractères." },
+          { id: "D", text: "La compatibilité avec les cartes mères d'ancienne génération." }
+        ],
+        explanation: "Une fonction de hachage cryptographique doit garantir trois propriétés fondamentales : 1) Résistance à la préimage (impossible de retrouver m connaissant H(m)), 2) Résistance à la seconde préimage (connaissant m1, impossible de trouver m2 != m1 tel que H(m1) = H(m2)), et 3) Résistance aux collisions (impossible de trouver une paire quelconque m1, m2 en collision).",
+        officialReference: "Handbook of Applied Cryptography (Menezes, Oorschot, Vanstone) & Cadre CNEE."
+      },
+      {
+        id: "inf-spe-36",
+        theme: "Architecture & Modèle de Von Neumann",
+        question: "Dans le cycle d'exécution d'une instruction (Fetch-Decode-Execute) de l'architecture de Von Neumann, quel registre spécialisé contient en permanence l'adresse mémoire de la prochaine instruction à charger ?",
+        questionAr: "في دورة تنفيذ التعليمة داخل معمارية فون نيومان، أي سجل يحمل دائماً عنوان التعليمة الموالية في الذاكرة؟",
+        options: [
+          { id: "A", text: "Le Compteur de Programme (PC : Program Counter / Pointeur d'Instruction IP).", correct: true },
+          { id: "B", text: "Le Registre d'Instruction (IR)." },
+          { id: "C", text: "Le Registre d'État des Drapeaux (Flags Register)." },
+          { id: "D", text: "L'Accumulateur de l'UAL (ACC)." }
+        ],
+        explanation: "Le Program Counter (PC) pointe sur l'adresse de la prochaine instruction à exécuter. Lors de la phase de chargement (Fetch), cette adresse est copiée dans le registre d'adresses mémoire (MAR), puis le PC est automatiquement incrémenté pour pointer sur l'instruction suivante, sauf en cas de saut (JUMP) conditionnel ou inconditionnel.",
+        officialReference: "Architecture des Ordinateurs & Programme Tronc Commun Sciences."
+      },
+      {
+        id: "inf-spe-37",
+        theme: "Systèmes d'Exploitation & Systèmes de Fichiers",
+        question: "Dans les systèmes de fichiers de type UNIX/Linux (ext4), que contient précisément la structure de métadonnées appelée « Inode » (nœud d'index) ?",
+        questionAr: "في أنظمة ملفات يونكس ولينكس (ext4)، ماذا تحتوي بنية المعطيات الوصفية المسماة 'Inode'؟",
+        options: [
+          { id: "A", text: "Les permissions d'accès, le propriétaire, la taille du fichier, les horodatages (création, modification) et les pointeurs vers les blocs de données sur le disque (mais pas le nom du fichier).", correct: true },
+          { id: "B", text: "Le nom du fichier en lettres dorées et le mot de passe de l'administrateur." },
+          { id: "C", text: "L'intégralité du contenu binaire du fichier en double exemplaire." },
+          { id: "D", text: "Uniquement l'adresse IP de l'utilisateur qui a téléchargé le fichier." }
+        ],
+        explanation: "Un Inode stocke toutes les métadonnées vitales d'un fichier ainsi que la table des blocs disque (directs, indirects simples, doubles et triples). Fait remarquable en ingénierie des systèmes : le nom du fichier ne réside pas dans l'inode mais dans le répertoire (qui est une table associant noms de fichiers et numéros d'inodes).",
+        officialReference: "The Design of the UNIX Operating System (Bach) & Cadre Concours CRMEF Informatique."
+      },
+      {
+        id: "inf-spe-38",
+        theme: "Algorithmique & Tris Linéaires Non Comparatifs",
+        question: "Quel algorithme de tri permet de trier n entiers compris entre 0 et k en un temps asymptotique linéaire O(n + k), sans effectuer la moindre comparaison directe entre les éléments ?",
+        questionAr: "أي خوارزمية ترتيب تتيح ترتيب n عدداً صحيحاً في زمن خطي O(n + k) دون إجراء أي مقارنة مباشرة بين العناصر؟",
+        options: [
+          { id: "A", text: "Le tri par comptage (Counting Sort / Tri dénombrement).", correct: true },
+          { id: "B", text: "Le tri par tas (Heapsort)." },
+          { id: "C", text: "Le tri à bulles (Bubble Sort)." },
+          { id: "D", text: "Le tri par sélection (Selection Sort)." }
+        ],
+        explanation: "Le tri par comptage s'affranchit de la barrière théorique Omega(n log n) des tris par comparaison. Il compte le nombre d'occurrences de chaque valeur dans un tableau d'histogramme auxiliaire de taille k, calcule les sommes préfixes et place chaque élément directement à sa position définitive en temps O(n + k).",
+        officialReference: "Algorithms and Data Structures (CLRS) & Cadre CNEE Informatique."
+      },
+      {
+        id: "inf-spe-39",
+        theme: "Réseaux & Protocoles Applicatifs DNS",
+        question: "Dans le système de résolution de noms de domaine (DNS), quel type d'enregistrement (Resource Record) associe un nom de domaine d'hôte à son adresse IPv6 correspondante sur 128 bits ?",
+        questionAr: "في نظام أسماء النطاقات (DNS)، أي نوع من السجلات يربط اسم النطاق بعنوان IPv6 الموافق له؟",
+        options: [
+          { id: "A", text: "L'enregistrement AAAA (Quad-A).", correct: true },
+          { id: "B", text: "L'enregistrement A (réservé aux adresses IPv4 sur 32 bits)." },
+          { id: "C", text: "L'enregistrement MX (Mail Exchanger pour les serveurs de messagerie)." },
+          { id: "D", text: "L'enregistrement CNAME (nom canonique alias)." }
+        ],
+        explanation: "L'enregistrement 'A' (Address) renvoie une adresse IPv4 (32 bits). L'enregistrement 'AAAA' (Quad-A, 4 fois la taille de 32 bits) renvoie l'adresse IPv6 sur 128 bits. 'CNAME' définit un alias de nom et 'MX' spécifie les serveurs de routage des courriers électroniques.",
+        officialReference: "RFC 3596 DNS Extensions to Support IP Version 6 & Programme 1BAC/2BAC."
+      },
+      {
+        id: "inf-spe-40",
+        theme: "Génie Logiciel & Principes SOLID",
+        question: "Dans les principes SOLID de conception logicielle orientée objet (Robert C. Martin), quel principe stipule qu'une classe fille dérivée doit pouvoir se substituer à sa classe mère sans altérer la cohérence et la correction du programme ?",
+        questionAr: "في مبادئ SOLID لهندسة البرمجيات الكائنية، أي مبدأ ينص على إمكانية استبدال الصنف الأب بالصنف الابن دون المساس بصحة البرنامج؟",
+        options: [
+          { id: "A", text: "Le principe de substitution de Liskov (LSP : Liskov Substitution Principle).", correct: true },
+          { id: "B", text: "Le principe de responsabilité unique (SRP)." },
+          { id: "C", text: "Le principe d'inversion des dépendances (DIP)." },
+          { id: "D", text: "Le principe ouvert/fermé (OCP)." }
+        ],
+        explanation: "Formulé par Barbara Liskov en 1987, le LSP exige que si S est un sous-type de T, alors tout objet de type T peut être remplacé par un objet de type S sans modifier les propriétés attendues du programme. Violer le LSP (comme faire dériver la classe Carré d'une classe Rectangle qui modifie largeur et hauteur indépendamment) introduit de graves anomalies logiques.",
+        officialReference: "Clean Architecture (Robert C. Martin - Uncle Bob) & Cadre Concours CRMEF Informatique."
       }
     ];
 
-    let currentQuestionIdx = 0;
-    let userAnswers = new Array(quizData.length).fill(null);
-    let secondsElapsed = 0;
-    let timerInterval = null;
+    // DETERMINISTIC 100-SERIES ENGINE FOR INFORMATIQUE SPECIALITE
+    const TOTAL_SERIES = 100;
+    const QUESTIONS_PER_SERIES = 10;
+    let currentSeriesNumber = 1;
+    let currentSeries = [];
+    let userAnswers = {};
+    let isSubmitted = false;
+    let score = 0;
 
-    function startTimer() {
-      if (timerInterval) clearInterval(timerInterval);
-      timerInterval = setInterval(() => {
-        secondsElapsed++;
-        const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
-        const secs = String(secondsElapsed % 60).padStart(2, '0');
-        const display = `${mins}:${secs}`;
-        const el = document.getElementById('timer-display');
-        if (el) el.textContent = display;
-      }, 1000);
+    // Deterministic selection formula
+    function getSeriesQuestions(seriesNum) {
+      const bankSize = INFO_SPECIALITE_BANK.length;
+      const selected = [];
+      const offset = (seriesNum - 1) * 3;
+      const stride = 7;
+
+      for (let i = 0; i < QUESTIONS_PER_SERIES; i++) {
+        const index = (offset + i * stride + Math.floor((seriesNum * 19) / bankSize)) % bankSize;
+        let q = INFO_SPECIALITE_BANK[index];
+        // Ensure no immediate duplicate within the 10 questions
+        let step = 1;
+        while (selected.some(existing => existing.id === q.id)) {
+          q = INFO_SPECIALITE_BANK[(index + step) % bankSize];
+          step++;
+        }
+        selected.push(q);
+      }
+      return selected;
     }
 
-    function renderQuestion(idx) {
-      const q = quizData[idx];
-      document.getElementById('question-counter').textContent = `Question ${idx + 1} / ${quizData.length}`;
-      document.getElementById('category-badge').textContent = q.category;
-      document.getElementById('question-text').textContent = q.question;
+    // Initialize UI
+    function initSeriesSelector() {
+      const dropdown = document.getElementById('series-dropdown-selector');
+      dropdown.innerHTML = '';
+      for (let s = 1; s <= TOTAL_SERIES; s++) {
+        const opt = document.createElement('option');
+        opt.value = s;
+        opt.textContent = `Série ${s} sur ${TOTAL_SERIES}`;
+        dropdown.appendChild(opt);
+      }
 
-      const progressPct = ((idx + 1) / quizData.length) * 100;
-      document.getElementById('progress-bar').style.width = `${progressPct}%`;
+      const pillsContainer = document.getElementById('quick-series-pills');
+      pillsContainer.innerHTML = '';
+      for (let s = 1; s <= 10; s++) {
+        const btn = document.createElement('button');
+        btn.id = `pill-series-${s}`;
+        btn.textContent = `S${s}`;
+        btn.onclick = () => loadSeries(s);
+        btn.className = `px-3 py-1 rounded-lg text-xs font-bold transition-all shrink-0 cursor-pointer ${s === 1 ? 'bg-violet-700 text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}`;
+        pillsContainer.appendChild(btn);
+      }
+    }
 
-      const container = document.getElementById('choices-container');
+    function loadSeries(seriesNum) {
+      currentSeriesNumber = seriesNum;
+      userAnswers = {};
+      isSubmitted = false;
+      score = 0;
+
+      // Update UI displays
+      document.getElementById('current-series-display').textContent = `Série ${seriesNum} / ${TOTAL_SERIES}`;
+      document.getElementById('series-dropdown-selector').value = seriesNum;
+
+      for (let s = 1; s <= 10; s++) {
+        const p = document.getElementById(`pill-series-${s}`);
+        if (p) {
+          if (s === seriesNum) {
+            p.className = 'px-3 py-1 rounded-lg text-xs font-bold bg-violet-700 text-white shadow-xs shrink-0 cursor-pointer transition-all';
+          } else {
+            p.className = 'px-3 py-1 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 shrink-0 cursor-pointer transition-all';
+          }
+        }
+      }
+
+      currentSeries = getSeriesQuestions(seriesNum);
+      renderQuizQuestions();
+
+      // Reset submission & results UI
+      document.getElementById('results-block').classList.add('hidden');
+      document.getElementById('submit-series-block').classList.remove('hidden');
+      updateProgressDisplay();
+      window.scrollTo({ top: 180, behavior: 'smooth' });
+    }
+
+    function loadRandomSeries() {
+      const rand = Math.floor(Math.random() * TOTAL_SERIES) + 1;
+      loadSeries(rand);
+    }
+
+    function loadNextSeries() {
+      const next = (currentSeriesNumber % TOTAL_SERIES) + 1;
+      loadSeries(next);
+    }
+
+    function resetCurrentSeries() {
+      loadSeries(currentSeriesNumber);
+    }
+
+    // Render 10 questions in Test Mode - ZERO feedback until submission
+    function renderQuizQuestions() {
+      const container = document.getElementById('quiz-questions-container');
       container.innerHTML = '';
 
-      q.options.forEach((optText, optIdx) => {
-        const isSelected = userAnswers[idx] === optIdx;
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.onclick = () => selectOption(optIdx);
-        btn.className = `w-full text-left p-4 rounded-xl border text-sm sm:text-base transition-all duration-200 flex items-start gap-3.5 ${
-          isSelected
-            ? 'bg-cyan-950/80 border-cyan-500 text-cyan-100 ring-2 ring-cyan-500/30 font-semibold'
-            : 'bg-slate-900 border-slate-800 text-slate-300 hover:bg-slate-850 hover:border-slate-700'
-        }`;
+      currentSeries.forEach((q, idx) => {
+        const qCard = document.createElement('div');
+        qCard.id = `quiz-card-${q.id}`;
+        qCard.className = 'p-5 sm:p-6 rounded-3xl bg-white border border-slate-200 shadow-xs space-y-4 transition-all';
 
-        const markerLetter = ['A', 'B', 'C', 'D'][optIdx];
-        btn.innerHTML = `
-          <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg text-xs font-black shrink-0 ${
-            isSelected ? 'bg-cyan-600 text-white shadow' : 'bg-slate-800 text-slate-400 border border-slate-700'
-          }">${markerLetter}</span>
-          <span class="leading-relaxed flex-1">${optText}</span>
+        const isAnswered = !!userAnswers[q.id];
+
+        qCard.innerHTML = `
+          <div class="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-1 rounded-lg bg-violet-100 text-violet-900 font-black text-xs">
+                Question ${idx + 1} / 10
+              </span>
+              <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                ${q.theme}
+              </span>
+            </div>
+            <span id="status-badge-${q.id}" class="text-[11px] font-bold px-2 py-0.5 rounded-md ${isAnswered ? 'bg-violet-50 text-violet-700 border border-violet-200' : 'bg-slate-100 text-slate-500'}">
+              ${isAnswered ? '✓ Répondue' : 'En attente'}
+            </span>
+          </div>
+
+          <div class="space-y-1.5">
+            <h3 class="text-sm sm:text-base font-extrabold text-slate-900 leading-snug">
+              ${q.question}
+            </h3>
+            ${q.questionAr ? `<p class="text-xs sm:text-sm font-arabic text-violet-950 font-semibold text-right dir-rtl leading-relaxed">${q.questionAr}</p>` : ''}
+          </div>
+
+          <!-- Options - Selection ONLY, no green/red or explanations -->
+          <div class="space-y-2 pt-1" id="options-group-${q.id}">
+            ${q.options.map(opt => {
+              const isSelected = userAnswers[q.id] === opt.id;
+              return `
+                <button type="button" onclick="selectOption('${q.id}', '${opt.id}')"
+                  class="w-full text-left p-3.5 rounded-xl border text-xs sm:text-sm font-semibold transition-all cursor-pointer flex items-start gap-3 ${isSelected ? 'border-violet-600 bg-violet-50/80 text-violet-950 shadow-xs ring-1 ring-violet-600' : 'border-slate-200 hover:border-slate-300 bg-white text-slate-700 hover:bg-slate-50/60'}">
+                  <span class="w-6 h-6 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 ${isSelected ? 'bg-violet-600 text-white' : 'bg-slate-100 text-slate-600 border border-slate-200'}">
+                    ${opt.id}
+                  </span>
+                  <span class="flex-1 leading-relaxed">${opt.text}</span>
+                </button>
+              `;
+            }).join('')}
+          </div>
         `;
-        container.appendChild(btn);
+        container.appendChild(qCard);
       });
+    }
 
-      document.getElementById('prev-btn').disabled = idx === 0;
+    // Pure option selection without showing solutions
+    function selectOption(questionId, optionId) {
+      if (isSubmitted) return; // Locked once submitted
 
-      if (idx === quizData.length - 1) {
-        document.getElementById('next-btn').classList.add('hidden');
-        document.getElementById('submit-btn').classList.remove('hidden');
-      } else {
-        document.getElementById('next-btn').classList.remove('hidden');
-        document.getElementById('submit-btn').classList.add('hidden');
+      userAnswers[questionId] = optionId;
+
+      // Update styling of buttons for this question only
+      const q = currentSeries.find(item => item.id === questionId);
+      if (q) {
+        const optionsGroup = document.getElementById(`options-group-${questionId}`);
+        if (optionsGroup) {
+          optionsGroup.innerHTML = q.options.map(opt => {
+            const isSelected = userAnswers[questionId] === opt.id;
+            return `
+              <button type="button" onclick="selectOption('${q.id}', '${opt.id}')"
+                class="w-full text-left p-3.5 rounded-xl border text-xs sm:text-sm font-semibold transition-all cursor-pointer flex items-start gap-3 ${isSelected ? 'border-violet-600 bg-violet-50/80 text-violet-950 shadow-xs ring-1 ring-violet-600' : 'border-slate-200 hover:border-slate-300 bg-white text-slate-700 hover:bg-slate-50/60'}">
+                <span class="w-6 h-6 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 ${isSelected ? 'bg-violet-600 text-white' : 'bg-slate-100 text-slate-600 border border-slate-200'}">
+                  ${opt.id}
+                </span>
+                <span class="flex-1 leading-relaxed">${opt.text}</span>
+              </button>
+            `;
+          }).join('');
+        }
       }
-    }
 
-    function selectOption(optIdx) {
-      userAnswers[currentQuestionIdx] = optIdx;
-      renderQuestion(currentQuestionIdx);
-    }
-
-    function nextQuestion() {
-      if (currentQuestionIdx < quizData.length - 1) {
-        currentQuestionIdx++;
-        renderQuestion(currentQuestionIdx);
+      // Update status badge
+      const badge = document.getElementById(`status-badge-${questionId}`);
+      if (badge) {
+        badge.className = 'text-[11px] font-bold px-2 py-0.5 rounded-md bg-violet-50 text-violet-700 border border-violet-200';
+        badge.textContent = '✓ Répondue';
       }
+
+      updateProgressDisplay();
     }
 
-    function prevQuestion() {
-      if (currentQuestionIdx > 0) {
-        currentQuestionIdx--;
-        renderQuestion(currentQuestionIdx);
+    function updateProgressDisplay() {
+      const answeredCount = Object.keys(userAnswers).length;
+      document.getElementById('progress-summary').textContent = `Progression : ${answeredCount} / ${currentSeries.length} répondue(s)`;
+    }
+
+    // Submit current series -> unlocks score & review
+    function submitCurrentSeries() {
+      const answeredCount = Object.keys(userAnswers).length;
+      if (answeredCount < currentSeries.length) {
+        const confirmSubmit = confirm(`Vous n'avez répondu qu'à ${answeredCount} question(s) sur ${currentSeries.length}. Souhaitez-vous quand même terminer et voir la correction ?`);
+        if (!confirmSubmit) return;
       }
-    }
 
-    function finishQuiz() {
-      clearInterval(timerInterval);
+      isSubmitted = true;
+      document.getElementById('submit-series-block').classList.add('hidden');
+      document.getElementById('results-block').classList.remove('hidden');
+      document.getElementById('btn-next-series-num').textContent = (currentSeriesNumber % TOTAL_SERIES) + 1;
 
-      let correctCount = 0;
-      quizData.forEach((q, idx) => {
-        if (userAnswers[idx] === q.answer) {
-          correctCount++;
+      // Calculate score
+      score = 0;
+      currentSeries.forEach(q => {
+        const correctOpt = q.options.find(o => o.correct);
+        if (correctOpt && userAnswers[q.id] === correctOpt.id) {
+          score++;
         }
       });
 
-      const scoreOutOf20 = (correctCount / quizData.length) * 20;
-      const accuracyPct = Math.round((correctCount / quizData.length) * 100);
+      document.getElementById('final-score').textContent = score;
+      const note20 = (score * 2).toFixed(1);
+      document.getElementById('final-note-20').textContent = note20;
+      
+      const pct = Math.round((score / currentSeries.length) * 100);
+      document.getElementById('final-percentage').textContent = `${pct}% de réussite`;
 
-      document.getElementById('quiz-container').classList.add('hidden');
-      document.getElementById('result-container').classList.remove('hidden');
-
-      document.getElementById('final-score').textContent = `${scoreOutOf20}/20`;
-      document.getElementById('stat-correct').textContent = correctCount;
-      document.getElementById('stat-wrong').textContent = quizData.length - correctCount;
-      document.getElementById('stat-accuracy').textContent = `${accuracyPct}%`;
-
-      const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
-      const secs = String(secondsElapsed % 60).padStart(2, '0');
-      document.getElementById('stat-time').textContent = `${mins}:${secs}`;
-
-      const badge = document.getElementById('score-badge');
-      const title = document.getElementById('diagnostic-title');
-      const desc = document.getElementById('diagnostic-desc');
-
-      if (scoreOutOf20 >= 16) {
-        badge.className = "inline-flex items-center justify-center w-24 h-24 rounded-full bg-emerald-950/80 border-4 border-emerald-500 text-3xl font-black text-emerald-300 mb-4 shadow-xl shadow-emerald-950/50";
-        title.textContent = "Niveau Exceptionnel · Major de Concours";
-        desc.textContent = "Maîtrise remarquable de l'informatique fondamentale : complexité, graphes, théorie relationnelle, pile TCP/IP et architecture des processeurs.";
-      } else if (scoreOutOf20 >= 12) {
-        badge.className = "inline-flex items-center justify-center w-24 h-24 rounded-full bg-cyan-950/80 border-4 border-cyan-500 text-3xl font-black text-cyan-300 mb-4 shadow-xl shadow-cyan-950/50";
-        title.textContent = "Niveau Solide · Profil Admissible";
-        desc.textContent = "Très bonnes compétences techniques. Approfondissez les calculs d'indicatrice d'Euler en cryptographie et les formes normales strictes (3FN/BCNF).";
-      } else if (scoreOutOf20 >= 10) {
-        badge.className = "inline-flex items-center justify-center w-24 h-24 rounded-full bg-amber-950/80 border-4 border-amber-500 text-3xl font-black text-amber-300 mb-4 shadow-xl shadow-amber-950/50";
-        title.textContent = "Seuil d'Admissibilité Juste · Révision Recommandée";
-        desc.textContent = "Bases présentes mais hésitations sur les cas limites et les calculs de sous-réseaux IP. Travaillez les annales écrites du CNEE.";
+      const diagBox = document.getElementById('results-diagnosis-box');
+      if (score >= 9) {
+        diagBox.className = 'max-w-md mx-auto p-4 rounded-2xl border border-emerald-300 bg-emerald-50 text-emerald-900 text-xs font-bold space-y-1';
+        diagBox.innerHTML = '🌟 <strong>Mention Très Honorable · Profil Majeur Concours</strong><p class="text-[11px] font-normal text-emerald-800 mt-1">Excellente maîtrise technique en algorithmique avancée, complexité Big-O, bases de données relationnelles, systèmes et réseaux conforme aux exigences du CNEE.</p>';
+      } else if (score >= 7) {
+        diagBox.className = 'max-w-md mx-auto p-4 rounded-2xl border border-violet-300 bg-violet-50 text-violet-900 text-xs font-bold space-y-1';
+        diagBox.innerHTML = '✅ <strong>Très Bon Niveau · Profil Largement Admissible</strong><p class="text-[11px] font-normal text-violet-800 mt-1">Solides bases informatiques. Approfondissez les algorithmes de graphes (Dijkstra, Kruskal), la mémoire virtuelle et la sécurité asymétrique.</p>';
+      } else if (score >= 5) {
+        diagBox.className = 'max-w-md mx-auto p-4 rounded-2xl border border-amber-300 bg-amber-50 text-amber-900 text-xs font-bold space-y-1';
+        diagBox.innerHTML = '⚠️ <strong>Zone Réserviste · Révision Recommandée</strong><p class="text-[11px] font-normal text-amber-800 mt-1">Revoir la théorie de la normalisation (2FN/3FN), le modèle de von Neumann, les masques CIDR et l\'arithmétique en complément à deux.</p>';
       } else {
-        badge.className = "inline-flex items-center justify-center w-24 h-24 rounded-full bg-red-950/80 border-4 border-red-500 text-3xl font-black text-red-300 mb-4 shadow-xl shadow-red-950/50";
-        title.textContent = "Niveau Insuffisant · Risque Éliminatoire";
-        desc.textContent = "Des lacunes majeures dans les fondements algorithmiques et systèmes. Reprenez le programme complet des classes préparatoires MP/PSI et licence informatique.";
+        diagBox.className = 'max-w-md mx-auto p-4 rounded-2xl border border-rose-300 bg-rose-50 text-rose-900 text-xs font-bold space-y-1';
+        diagBox.innerHTML = '❌ <strong>Score Insuffisant · Risque d\'Élimination au Concours</strong><p class="text-[11px] font-normal text-rose-800 mt-1">Révisez impérativement le cours de spécialité et enchaînez d\'autres séries pour consolider vos acquis fondamentaux.</p>';
       }
 
-      renderReviewList();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+      // Corrections list - ONLY rendered here at the end of the series
+      const container = document.getElementById('corrections-container');
+      container.innerHTML = '';
 
-    function renderReviewList() {
-      const list = document.getElementById('review-list');
-      list.innerHTML = '';
+      currentSeries.forEach((q, idx) => {
+        const userChoice = userAnswers[q.id];
+        const correctOpt = q.options.find(o => o.correct);
+        const isUserCorrect = userChoice === correctOpt.id;
+        const selectedOpt = q.options.find(o => o.id === userChoice);
 
-      quizData.forEach((q, idx) => {
-        const userChoice = userAnswers[idx];
-        const isCorrect = userChoice === q.answer;
+        const div = document.createElement('div');
+        div.className = `p-4 sm:p-5 rounded-2xl border ${isUserCorrect ? 'border-violet-200 bg-violet-50/40' : 'border-rose-200 bg-rose-50/40'} space-y-2.5`;
 
-        const card = document.createElement('div');
-        card.className = `p-4 sm:p-5 rounded-xl border ${
-          isCorrect ? 'bg-slate-900/80 border-emerald-800/60' : 'bg-slate-900/80 border-red-900/60'
-        }`;
-
-        const userOptionText = userChoice !== null ? q.options[userChoice] : 'Aucune réponse fournie';
-        const correctOptionText = q.options[q.answer];
-
-        card.innerHTML = `
-          <div class="flex items-start justify-between gap-3 mb-2">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-xs font-bold ${
-              isCorrect ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' : 'bg-red-950 text-red-300 border border-red-800'
-            }">
-              <span>${isCorrect ? '✓ Solution Exacte' : '✗ Erreur Technique'}</span>
+        div.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black text-slate-800">Question ${idx + 1} · ${q.theme}</span>
+            <span class="text-[11px] font-bold px-2 py-0.5 rounded-md ${isUserCorrect ? 'bg-violet-100 text-violet-800' : 'bg-rose-100 text-rose-800'}">
+              ${isUserCorrect ? '✅ Réponse Exacte (+1 pt)' : '❌ Réponse Inexacte (0 pt)'}
             </span>
-            <span class="text-xs text-cyan-400 font-semibold">${q.category} · Question ${idx + 1}</span>
           </div>
-          
-          <h5 class="text-sm sm:text-base font-bold text-slate-100 mb-3 leading-relaxed">${q.question}</h5>
-          
-          <div class="space-y-1.5 text-xs sm:text-sm mb-3">
-            <div class="p-2.5 rounded-lg ${isCorrect ? 'bg-emerald-950/40 text-emerald-200' : 'bg-red-950/40 text-red-200'}">
-              <span class="font-bold block text-xs opacity-75">Votre réponse :</span>
-              <span>${userOptionText}</span>
+          <h4 class="text-xs sm:text-sm font-bold text-slate-900">${q.question}</h4>
+          ${q.questionAr ? `<p class="text-xs font-arabic text-violet-950 text-right dir-rtl leading-relaxed">${q.questionAr}</p>` : ''}
+          <div class="pt-2 text-xs space-y-1.5 border-t border-slate-200/60">
+            <div class="flex items-start gap-2">
+              <span class="text-slate-500 w-32 shrink-0 font-medium">Votre sélection :</span>
+              <span class="font-bold ${isUserCorrect ? 'text-violet-700' : 'text-rose-700'}">${selectedOpt ? selectedOpt.id + ') ' + selectedOpt.text : 'Non répondu'}</span>
             </div>
-            ${!isCorrect ? `
-              <div class="p-2.5 rounded-lg bg-emerald-950/40 text-emerald-200 border border-emerald-800/40">
-                <span class="font-bold block text-xs opacity-75">Réponse attendue :</span>
-                <span>${correctOptionText}</span>
-              </div>
-            ` : ''}
-          </div>
-
-          <div class="p-3 rounded-lg bg-cyan-950/30 border border-cyan-900/40 text-xs sm:text-sm text-cyan-200 leading-relaxed">
-            <strong class="text-cyan-300 block mb-1">💡 Démonstration & Justification Scientifique :</strong>
-            ${q.explanation}
-            <div class="mt-2 pt-2 border-t border-cyan-900/30 text-xs text-slate-400 flex items-center gap-1">
-              <span>📚 Référence académique :</span>
-              <span class="text-cyan-300 font-medium">${q.reference}</span>
+            ${!isUserCorrect ? `
+            <div class="flex items-start gap-2">
+              <span class="text-slate-500 w-32 shrink-0 font-medium">Bonne réponse attendue :</span>
+              <span class="font-bold text-emerald-800">${correctOpt.id}) ${correctOpt.text}</span>
+            </div>` : ''}
+            <div class="mt-2.5 p-3 rounded-xl bg-white border border-slate-200/80 text-[11px] text-slate-700 leading-relaxed shadow-2xs">
+              <span class="font-bold text-violet-900 block mb-1">💡 Analyse Technique & Justification :</span>
+              ${q.explanation}
+              ${q.officialReference ? `<span class="block mt-1 text-[10px] text-slate-500 italic">Réf : ${q.officialReference}</span>` : ''}
             </div>
           </div>
         `;
-        list.appendChild(card);
+        container.appendChild(div);
+      });
+
+      // Scroll smoothly to results
+      document.getElementById('results-block').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Browse Mode logic
+    function renderBrowseMode() {
+      const list = document.getElementById('browse-questions-list');
+      const themeFilter = document.getElementById('browse-theme-filter');
+      
+      if (themeFilter.options.length <= 1) {
+        const themes = [...new Set(INFO_SPECIALITE_BANK.map(q => q.theme))];
+        themes.forEach(th => {
+          const opt = document.createElement('option');
+          opt.value = th;
+          opt.textContent = th;
+          themeFilter.appendChild(opt);
+        });
+      }
+
+      filterBrowseQuestions();
+    }
+
+    function filterBrowseQuestions() {
+      const query = (document.getElementById('browse-search')?.value || '').toLowerCase();
+      const selectedTheme = document.getElementById('browse-theme-filter')?.value || '';
+      const list = document.getElementById('browse-questions-list');
+      list.innerHTML = '';
+
+      const filtered = INFO_SPECIALITE_BANK.filter(q => {
+        const matchesQuery = !query || q.question.toLowerCase().includes(query) || (q.questionAr && q.questionAr.includes(query)) || q.explanation.toLowerCase().includes(query) || q.theme.toLowerCase().includes(query);
+        const matchesTheme = !selectedTheme || q.theme === selectedTheme;
+        return matchesQuery && matchesTheme;
+      });
+
+      filtered.forEach((q, idx) => {
+        const correctOpt = q.options.find(o => o.correct);
+        const div = document.createElement('div');
+        div.className = 'p-5 rounded-2xl border border-slate-200 bg-white shadow-2xs space-y-3';
+        div.innerHTML = `
+          <div class="flex items-center justify-between text-xs">
+            <span class="px-2.5 py-0.5 rounded-full bg-violet-100 text-violet-900 font-bold">${q.theme}</span>
+            <span class="text-slate-400 font-mono text-[11px]">Item ${idx + 1} / ${filtered.length}</span>
+          </div>
+          <h4 class="text-sm font-black text-slate-900">${q.question}</h4>
+          ${q.questionAr ? `<p class="text-xs font-arabic text-violet-950 text-right dir-rtl">${q.questionAr}</p>` : ''}
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs pt-1">
+            ${q.options.map(opt => `
+              <div class="p-2.5 rounded-xl border ${opt.correct ? 'border-violet-500 bg-violet-50 font-bold text-violet-950' : 'border-slate-100 bg-slate-50 text-slate-600'}">
+                <span class="font-bold mr-1">${opt.id})</span> ${opt.text}
+              </div>
+            `).join('')}
+          </div>
+          <div class="p-3 rounded-xl bg-violet-50/50 border border-violet-200/50 text-[11px] text-slate-700 leading-relaxed">
+            <strong class="text-violet-950">💡 Justification Scientifique :</strong> ${q.explanation}
+            ${q.officialReference ? `<span class="block mt-1 text-[10px] text-slate-500 italic">Cadre : ${q.officialReference}</span>` : ''}
+          </div>
+        `;
+        list.appendChild(div);
       });
     }
 
-    function restartQuiz() {
-      currentQuestionIdx = 0;
-      userAnswers = new Array(quizData.length).fill(null);
-      secondsElapsed = 0;
-      document.getElementById('result-container').classList.add('hidden');
-      document.getElementById('quiz-container').classList.remove('hidden');
-      startTimer();
-      renderQuestion(0);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    function switchMode(mode) {
+      const qSection = document.getElementById('section-quiz-mode');
+      const rSection = document.getElementById('section-referentiel-mode');
+      const btnQ = document.getElementById('btn-mode-quiz');
+      const btnR = document.getElementById('btn-mode-referentiel');
+
+      if (mode === 'quiz') {
+        qSection.classList.remove('hidden');
+        rSection.classList.add('hidden');
+        btnQ.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold bg-violet-700 text-white shadow-xs cursor-pointer transition-all text-center';
+        btnR.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center';
+      } else {
+        qSection.classList.add('hidden');
+        rSection.classList.remove('hidden');
+        btnR.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold bg-violet-700 text-white shadow-xs cursor-pointer transition-all text-center';
+        btnQ.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-all text-center';
+        renderBrowseMode();
+      }
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      startTimer();
-      renderQuestion(0);
-    });
+    // Initialize on load
+    initSeriesSelector();
+    loadSeries(1);
   </script>
-
 </body>
 </html>
