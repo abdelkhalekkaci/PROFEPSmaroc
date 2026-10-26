@@ -82,7 +82,7 @@ export const DigitalLibraryBlock: React.FC = () => {
           <button
             key={cat.id}
             type="button"
-            onClick={() => setSelectedCycle(cat.id)}
+            onClick={() => setSelectedCategory(cat.id)}
             className={`px-3 py-1.5 rounded-lg font-bold shrink-0 cursor-pointer transition-all border ${
               selectedCategory === cat.id
                 ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
