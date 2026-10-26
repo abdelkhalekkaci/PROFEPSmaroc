@@ -829,19 +829,19 @@ footer.footer, #profeps-unified-footer {
       </div>
     </section>
 
-    <!-- ═══ 2. PREMIER BLOC : LE GÉNÉRATEUR DES FICHES PÉDAGOGIQUES (AU-DESSOUS DU HERO SECTION) ═══ -->
+    <!-- ═══ 2. PREMIER BLOC : LE MINI-GÉNÉRATEUR DE FICHES PÉDAGOGIQUES CONNECTÉ ═══ -->
     <section id="bloc-generateur" class="space-y-6">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-200 pb-3">
         <div>
           <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-red-700 mb-1">
             <span>✨</span>
-            <span>Outil Star · Didactique EPS Maroc</span>
+            <span>Studio Didactique EPS · Maroc</span>
           </div>
           <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-            Générateur de Fiches Pédagogiques & Cycles EPS
+            Mini-Générateur de Fiches Pédagogiques EPS
           </h2>
           <p class="text-sm text-slate-600 mt-1 max-w-2xl leading-relaxed">
-            Concevez en quelques clics vos fiches de séance, progressions de cycle et situations d'évaluation conformes aux compétences terminales et modules des Orientations Pédagogiques (2007 & 2009).
+            Configurez votre séance en 4 étapes simples et générez instantanément votre fiche prête pour le terrain, conforme aux Orientations Pédagogiques (2007 Lycée & 2009 Collège).
           </p>
         </div>
 
@@ -850,96 +850,477 @@ footer.footer, #profeps-unified-footer {
         </span>
       </div>
 
-      <!-- Carte du Générateur -->
+      <!-- Carte du Mini-Générateur Interactif -->
       <div class="bg-white border-2 border-red-500/80 rounded-3xl p-6 sm:p-8 shadow-sm hover:shadow-md transition-all relative overflow-hidden">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div class="lg:col-span-8 space-y-4">
-            <div class="flex items-center gap-2 flex-wrap">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          
+          <!-- Colonne Formulaire (8 colonnes) -->
+          <div class="lg:col-span-8 space-y-5">
+            <div class="flex items-center gap-2 flex-wrap pb-1">
               <span class="text-[11px] font-bold text-white bg-red-600 px-3 py-1 rounded-full uppercase tracking-wide">
-                Générateur Automatisé
+                Configuration Express
               </span>
               <span class="text-xs text-slate-500 font-medium">
-                Collège (1AC, 2AC, 3AC) & Lycée (Tronc Commun, 1BAC, 2BAC)
+                Pré-remplissage automatique direct vers le studio
               </span>
             </div>
 
-            <h3 class="text-xl sm:text-2xl font-black text-slate-900 leading-snug">
-              Édition Instantanée de Documents Pédagogiques Prêts pour le Terrain & l'Inspection
-            </h3>
+            <form id="mini-generateur-form" onsubmit="handleMiniGenerate(event)" class="space-y-4">
+              <!-- Ligne 1 : APSA & Niveau -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="space-y-1.5">
+                  <label for="mini-aps" class="block text-xs font-bold text-slate-800">
+                    <span class="text-red-600 font-bold">●</span> Activité Physique & Sportive (APSA) :
+                  </label>
+                  <select id="mini-aps" class="w-full bg-slate-50 border border-slate-300 focus:border-red-600 focus:ring-2 focus:ring-red-100 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-slate-900 outline-none transition" required>
+                    <option value="">-- Sélectionner l'APSA --</option>
+                    <optgroup label="🏆 Sports Collectifs">
+                      <option value="Handball" selected>🤾 Handball</option>
+                      <option value="Basketball">🏀 Basketball</option>
+                      <option value="Football">⚽ Football</option>
+                      <option value="Volleyball">🏐 Volleyball</option>
+                      <option value="Rugby">🏉 Rugby</option>
+                      <option value="Basketball 3x3">🏀 Basketball 3x3</option>
+                    </optgroup>
+                    <optgroup label="🏃 Athlétisme & Mesure">
+                      <option value="Course de vitesse">🏃 Course de vitesse</option>
+                      <option value="Course de durée">⏱️ Course de durée (Demi-fond)</option>
+                      <option value="Course de relais">🏃‍♂️ Course de relais</option>
+                      <option value="Course de haies">🏃‍♂️ Course de haies</option>
+                      <option value="Saut en longueur">🦘 Saut en longueur</option>
+                      <option value="Saut en hauteur">⬆️ Saut en hauteur</option>
+                      <option value="Lancer de poids">💪 Lancer de poids</option>
+                    </optgroup>
+                    <optgroup label="🤸 Gymnastique">
+                      <option value="Gymnastique">🤸 Gymnastique au sol</option>
+                    </optgroup>
+                    <optgroup label="🏸 Sports de Renvoi">
+                      <option value="Badminton">🏸 Badminton</option>
+                      <option value="Tennis de table">🏓 Tennis de table</option>
+                    </optgroup>
+                  </select>
+                </div>
 
-            <p className="text-sm text-slate-600 leading-relaxed">
-              Le générateur ProfEPS vous permet de paramétrer le niveau scolaire, l'activité physique et sportive (APSA) et l'objectif de séance pour produire une fiche didactique structurée avec critères de réussite, variables didactiques et régulation de l'effort.
-            </p>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-              <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-start gap-2.5">
-                <span class="text-red-600 font-bold text-base shrink-0 mt-0.5">📋</span>
-                <div>
-                  <h4 class="text-xs font-bold text-slate-900">Fiches de Séance Complètes</h4>
-                  <p class="text-[11px] text-slate-500">Mise en train, situations d'apprentissage & bilan métacognitif.</p>
+                <div class="space-y-1.5">
+                  <label for="mini-niveau" class="block text-xs font-bold text-slate-800">
+                    <span class="text-red-600 font-bold">●</span> Niveau Scolaire Officiel :
+                  </label>
+                  <select id="mini-niveau" class="w-full bg-slate-50 border border-slate-300 focus:border-red-600 focus:ring-2 focus:ring-red-100 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-slate-900 outline-none transition" required>
+                    <option value="">-- Choisir le Niveau --</option>
+                    <optgroup label="🏫 Collège (Orientations Pédagogiques 2009)">
+                      <option value="1AC">1ère Année Collège (1AC)</option>
+                      <option value="2AC">2ème Année Collège (2AC)</option>
+                      <option value="3AC" selected>3ème Année Collège (3AC)</option>
+                    </optgroup>
+                    <optgroup label="🎓 Lycée Qualifiant (Orientations Pédagogiques 2007)">
+                      <option value="TC">Tronc Commun (TC)</option>
+                      <option value="1AB">1ère Année Baccalauréat (1BAC)</option>
+                      <option value="2AB">2ème Année Baccalauréat (2BAC)</option>
+                    </optgroup>
+                  </select>
                 </div>
               </div>
 
-              <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-start gap-2.5">
-                <span class="text-emerald-600 font-bold text-base shrink-0 mt-0.5">📅</span>
-                <div>
-                  <h4 class="text-xs font-bold text-slate-900">Projets de Cycle Découpés</h4>
-                  <p class="text-[11px] text-slate-500">Progression didactique en 10 à 12 séances par APSA.</p>
+              <!-- Ligne 2 : Numéro de séance & Objectif -->
+              <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
+                <div class="sm:col-span-4 space-y-1.5">
+                  <label for="mini-seance" class="block text-xs font-bold text-slate-800">
+                    <span class="text-red-600 font-bold">●</span> Numéro de Séance :
+                  </label>
+                  <select id="mini-seance" class="w-full bg-slate-50 border border-slate-300 focus:border-red-600 focus:ring-2 focus:ring-red-100 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-slate-900 outline-none transition">
+                    <option value="1">Séance 1 (Diag. / Entrée de cycle)</option>
+                    <option value="2">Séance 2 (Apprentissage)</option>
+                    <option value="3">Séance 3 (Apprentissage)</option>
+                    <option value="4" selected>Séance 4 (Apprentissage régulation)</option>
+                    <option value="5">Séance 5 (Apprentissage)</option>
+                    <option value="6">Séance 6 (Éval. formative intermédiaire)</option>
+                    <option value="7">Séance 7 (Apprentissage)</option>
+                    <option value="8">Séance 8 (Apprentissage)</option>
+                    <option value="9">Séance 9 (Consolidation tactique)</option>
+                    <option value="10">Séance 10 (Perfectionnement)</option>
+                    <option value="11">Séance 11 (Répétition générale)</option>
+                    <option value="12">Séance 12 (Bilan / Éval. sommative)</option>
+                  </select>
+                </div>
+
+                <div class="sm:col-span-8 space-y-1.5">
+                  <label for="mini-objectif" class="block text-xs font-bold text-slate-800">
+                    <span class="text-red-600 font-bold">●</span> Objectif Pédagogique d'Apprentissage :
+                  </label>
+                  <input
+                    type="text"
+                    id="mini-objectif"
+                    value="Améliorer la qualité de la passe en mouvement vers un partenaire démarqué"
+                    placeholder="Ex: Maîtriser le tir en suspension avec prise d'information sur le gardien"
+                    class="w-full bg-slate-50 border border-slate-300 focus:border-red-600 focus:ring-2 focus:ring-red-100 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 outline-none transition"
+                  />
                 </div>
               </div>
 
-              <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-start gap-2.5">
-                <span class="text-blue-600 font-bold text-base shrink-0 mt-0.5">📊</span>
-                <div>
-                  <h4 class="text-xs font-bold text-slate-900">Grilles d'Évaluation OTI / OTC</h4>
-                  <p class="text-[11px] text-slate-500">Barèmes sur 20 points : motricité, technique & citoyenneté.</p>
+              <!-- Puces de suggestions didactiques rapides -->
+              <div class="space-y-1.5 pt-1">
+                <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">
+                  💡 Suggestions didactiques rapides (cliquer pour appliquer) :
+                </span>
+                <div class="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onclick="fillMiniObjectif('Conservation de la balle et progression rapide vers la cible adverse')"
+                    class="text-[11px] font-semibold bg-slate-100 hover:bg-red-50 hover:text-red-700 text-slate-700 px-2.5 py-1 rounded-lg border border-slate-200 transition cursor-pointer"
+                  >
+                    + Conservation & progression
+                  </button>
+                  <button
+                    type="button"
+                    onclick="fillMiniObjectif('Gestion de l\'allure aérobie et maintien d\'une vitesse constante à 80% VMA')"
+                    class="text-[11px] font-semibold bg-slate-100 hover:bg-red-50 hover:text-red-700 text-slate-700 px-2.5 py-1 rounded-lg border border-slate-200 transition cursor-pointer"
+                  >
+                    + Régulation allure VMA
+                  </button>
+                  <button
+                    type="button"
+                    onclick="fillMiniObjectif('Coordination optimale entre la course d\'élan et l\'impulsion finale')"
+                    class="text-[11px] font-semibold bg-slate-100 hover:bg-red-50 hover:text-red-700 text-slate-700 px-2.5 py-1 rounded-lg border border-slate-200 transition cursor-pointer"
+                  >
+                    + Course d'élan & impulsion
+                  </button>
+                  <button
+                    type="button"
+                    onclick="fillMiniObjectif('Organisation défensive collective et replacement rapide à la perte du ballon')"
+                    class="text-[11px] font-semibold bg-slate-100 hover:bg-red-50 hover:text-red-700 text-slate-700 px-2.5 py-1 rounded-lg border border-slate-200 transition cursor-pointer"
+                  >
+                    + Organisation défensive
+                  </button>
                 </div>
               </div>
 
-              <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-start gap-2.5">
-                <span class="text-amber-600 font-bold text-base shrink-0 mt-0.5">🖨️</span>
-                <div>
-                  <h4 class="text-xs font-bold text-slate-900">Export & Impression Propre</h4>
-                  <p class="text-[11px] text-slate-500">Mise en page prête pour le classeur de bord de l'enseignant.</p>
-                </div>
+              <!-- Boutons de soumission -->
+              <div class="pt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                <button
+                  type="submit"
+                  class="peps-btn-red px-6 py-3.5 rounded-xl text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg transition-all"
+                >
+                  <span>✨ Générer ma Fiche Pédagogique Conforme</span>
+                  <span>→</span>
+                </button>
+
+                <a
+                  href="generateur.html"
+                  class="px-5 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition"
+                >
+                  <span>Ouvrir le Studio Complet (Fiche, Projet & Grille)</span>
+                </a>
               </div>
-            </div>
+            </form>
           </div>
 
-          <!-- Panneau CTA vers generateur.html -->
+          <!-- Colonne Garanties & Normes MENPS (4 colonnes) -->
           <div class="lg:col-span-4 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between space-y-5 shadow-lg border border-slate-800">
-            <div class="space-y-3">
-              <span class="text-[11px] font-bold text-emerald-400 uppercase tracking-widest block">
-                Accès Libre & Instantané
-              </span>
-              <h4 class="text-lg font-bold">Lancer le Générateur de Fiches</h4>
-              <p class="text-xs text-slate-300 leading-relaxed">
-                Préparez vos séances en un temps record en respectant scrupuleusement la nomenclature officielle du Ministère.
-              </p>
+            <div class="space-y-4">
+              <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold rounded-full">
+                <span>🇲🇦</span>
+                <span>Conformité Ministérielle Assurée</span>
+              </div>
+
+              <h4 class="text-lg font-bold leading-snug">
+                Structure Certifiée pour le Terrain & l'Inspection
+              </h4>
+
+              <ul class="space-y-2.5 text-xs text-slate-300">
+                <li class="flex items-start gap-2">
+                  <span class="text-emerald-400 font-bold">✔</span>
+                  <span><strong>3 Phases canoniques :</strong> Mise en train cardio-musculaire, situations d'apprentissage & bilan métacognitif.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-emerald-400 font-bold">✔</span>
+                  <span><strong>Alignement OTI / OTC :</strong> Formulations didactiques conformes aux compétences terminales MENPS.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-emerald-400 font-bold">✔</span>
+                  <span><strong>Variables & Régulation :</strong> Critères de réussite quantitatifs et qualitatifs pour l'élève.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-emerald-400 font-bold">✔</span>
+                  <span><strong>Export PDF prêt à imprimer :</strong> Prêt pour le cahier de texte et le classeur de bord.</span>
+                </li>
+              </ul>
             </div>
 
-            <div class="space-y-2.5 pt-2">
-              <a
-                href="generateur.html"
-                class="peps-btn-primary w-full py-3 px-4 rounded-xl text-xs font-extrabold flex items-center justify-center gap-2 text-center block"
-              >
-                <span>✨ Ouvrir le Générateur de Fiches</span>
-                <span>→</span>
-              </a>
-
+            <div class="pt-3 border-t border-slate-800 space-y-2">
               <a
                 href="cycles-eps-maroc.html"
                 class="w-full py-2.5 px-4 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition text-center block"
               >
-                <span>📖 Consulter les Fiches de Cycles Types</span>
+                <span>📖 Consulter les Projets de Cycle Types</span>
               </a>
             </div>
           </div>
+
         </div>
       </div>
     </section>
 
-    <!-- ═══ 3. DEUXIÈME BLOC : LES CALCULATEURS SCIENTIFIQUES ═══ -->
+    <!-- ═══ 3. NOUVELLE SECTION VEDETTE : HUB NATIONAL DE PRÉPARATION AU CONCOURS CRMEF ═══ -->
+    <section id="bloc-crmef-hub" class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-200 pb-3">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-red-700 mb-1">
+            <span>🏛️</span>
+            <span>Concours de Recrutement des Enseignants · Session CRMEF 2026</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            Hub de Préparation au Concours CRMEF
+          </h2>
+          <p class="text-sm text-slate-600 mt-1 max-w-2xl leading-relaxed">
+            La plateforme d'entraînement de référence pour les 12 disciplines du concours d'accès aux Centres Régionaux des Métiers de l'Éducation et de la Formation et le Tronc Commun des Sciences de l'Éducation.
+          </p>
+        </div>
+
+        <a href="concours-crmef-hub.html" class="text-xs font-bold text-red-700 hover:text-red-800 flex items-center gap-1.5 shrink-0">
+          <span>Ouvrir le Hub CRMEF National</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <!-- CARTE VEDETTE INTERACTIVE DU HUB CRMEF -->
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm relative overflow-hidden space-y-6">
+        
+        <!-- En-tête de la carte avec badges -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-red-50 text-red-700 border border-red-200 rounded-full text-xs font-black">
+                <span>🇲🇦</span>
+                <span>Session CRMEF 2026</span>
+              </span>
+              <span class="px-2.5 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-full text-xs font-bold">
+                12 Disciplines + Tronc Commun
+              </span>
+              <span class="px-2.5 py-1 bg-slate-100 text-slate-700 rounded-full text-xs font-medium">
+                QCM Didactique & Spécialité
+              </span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-black text-slate-900 pt-1">
+              Sélectionnez votre discipline pour accéder directement aux épreuves :
+            </h3>
+          </div>
+
+          <a
+            href="qcm-sciences-education-crmef.html"
+            class="px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold flex items-center gap-2 transition shadow-xs shrink-0 self-start md:self-auto"
+          >
+            <span>📚 QCM Tronc Commun (Sciences Éduc.)</span>
+            <span>→</span>
+          </a>
+        </div>
+
+        <!-- Ruban sélecteur interactif des 12 disciplines -->
+        <div class="space-y-2">
+          <div class="text-xs font-bold text-slate-600 uppercase tracking-wider">
+            Choisir une filière disciplinaire :
+          </div>
+          <div class="flex flex-wrap gap-2" id="crmef-tabs-container">
+            <button
+              type="button"
+              onclick="selectCrmefDiscipline('eps')"
+              id="tab-crmef-eps"
+              class="crmef-tab-btn px-3.5 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 transition bg-slate-900 text-white shadow-xs"
+            >
+              <span>🏃</span>
+              <span>EPS</span>
+            </button>
+            <button
+              type="button"
+              onclick="selectCrmefDiscipline('primaire')"
+              id="tab-crmef-primaire"
+              class="crmef-tab-btn px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition bg-slate-100 hover:bg-slate-200 text-slate-700"
+            >
+              <span>🎒</span>
+              <span>Primaire</span>
+            </button>
+            <button
+              type="button"
+              onclick="selectCrmefDiscipline('maths')"
+              id="tab-crmef-maths"
+              class="crmef-tab-btn px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition bg-slate-100 hover:bg-slate-200 text-slate-700"
+            >
+              <span>📐</span>
+              <span>Maths</span>
+            </button>
+            <button
+              type="button"
+              onclick="selectCrmefDiscipline('pc')"
+              id="tab-crmef-pc"
+              class="crmef-tab-btn px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition bg-slate-100 hover:bg-slate-200 text-slate-700"
+            >
+              <span>⚛️</span>
+              <span>Physique-Chimie</span>
+            </button>
+            <button
+              type="button"
+              onclick="selectCrmefDiscipline('svt')"
+              id="tab-crmef-svt"
+              class="crmef-tab-btn px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition bg-slate-100 hover:bg-slate-200 text-slate-700"
+            >
+              <span>🌿</span>
+              <span>SVT</span>
+            </button>
+            <button
+              type="button"
+              onclick="selectCrmefDiscipline('francais')"
+              id="tab-crmef-francais"
+              class="crmef-tab-btn px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition bg-slate-100 hover:bg-slate-200 text-slate-700"
+            >
+              <span>🇫🇷</span>
+              <span>Français</span>
+            </button>
+            <button
+              type="button"
+              onclick="selectCrmefDiscipline('arabe')"
+              id="tab-crmef-arabe"
+              class="crmef-tab-btn px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition bg-slate-100 hover:bg-slate-200 text-slate-700"
+            >
+              <span>🇲🇦</span>
+              <span>Arabe</span>
+            </button>
+            <button
+              type="button"
+              onclick="selectCrmefDiscipline('hg')"
+              id="tab-crmef-hg"
+              class="crmef-tab-btn px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition bg-slate-100 hover:bg-slate-200 text-slate-700"
+            >
+              <span>🌍</span>
+              <span>Histoire-Géo</span>
+            </button>
+            <button
+              type="button"
+              onclick="selectCrmefDiscipline('philo')"
+              id="tab-crmef-philo"
+              class="crmef-tab-btn px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition bg-slate-100 hover:bg-slate-200 text-slate-700"
+            >
+              <span>💭</span>
+              <span>Philosophie</span>
+            </button>
+            <button
+              type="button"
+              onclick="selectCrmefDiscipline('info')"
+              id="tab-crmef-info"
+              class="crmef-tab-btn px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition bg-slate-100 hover:bg-slate-200 text-slate-700"
+            >
+              <span>💻</span>
+              <span>Informatique</span>
+            </button>
+            <button
+              type="button"
+              onclick="selectCrmefDiscipline('anglais')"
+              id="tab-crmef-anglais"
+              class="crmef-tab-btn px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition bg-slate-100 hover:bg-slate-200 text-slate-700"
+            >
+              <span>🇬🇧</span>
+              <span>Anglais</span>
+            </button>
+            <button
+              type="button"
+              onclick="selectCrmefDiscipline('islamique')"
+              id="tab-crmef-islamique"
+              class="crmef-tab-btn px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition bg-slate-100 hover:bg-slate-200 text-slate-700"
+            >
+              <span>🕌</span>
+              <span>Éduc. Islamique</span>
+            </button>
+            <button
+              type="button"
+              onclick="selectCrmefDiscipline('economie')"
+              id="tab-crmef-economie"
+              class="crmef-tab-btn px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition bg-slate-100 hover:bg-slate-200 text-slate-700"
+            >
+              <span>📊</span>
+              <span>Économie-Gestion</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Volet d'affichage dynamique de la matière active -->
+        <div id="crmef-showcase-panel" class="bg-gradient-to-br from-slate-50 via-white to-red-50/30 border border-slate-200/90 rounded-2xl p-6 sm:p-7 space-y-5 transition-all">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-4">
+            <div class="flex items-center gap-3">
+              <span id="crmef-active-icon" class="text-3xl sm:text-4xl p-2 bg-white rounded-xl shadow-2xs border border-slate-200">🏃</span>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span id="crmef-active-badge" class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-red-100 text-red-800">
+                    Matière Pilote · Session 2026
+                  </span>
+                  <span id="crmef-active-coef" class="text-xs text-slate-500 font-mono font-semibold">
+                    Coeff Écrit : 12 | Coeff Oral : 8
+                  </span>
+                </div>
+                <h4 id="crmef-active-title" class="text-lg sm:text-xl font-black text-slate-900 mt-1">
+                  EPS · Éducation Physique et Sportive
+                </h4>
+              </div>
+            </div>
+
+            <a href="concours-crmef-hub.html" class="text-xs font-bold text-slate-600 hover:text-slate-900 flex items-center gap-1">
+              <span>Voir le programme officiel</span>
+              <span>↗</span>
+            </a>
+          </div>
+
+          <p id="crmef-active-desc" class="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-4xl">
+            Cadre de référence officiel pour l'enseignement de l'EPS au secondaire marocain : didactique des APSA, théories de l'apprentissage moteur, physiologie de l'effort et barèmes certificatifs des Orientations Pédagogiques (2007 & 2009).
+          </p>
+
+          <!-- Boutons des deux épreuves officielles aux couleurs de la charte -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+            <a
+              id="crmef-btn-didactique"
+              href="qcm-didactique-eps-maroc.html"
+              class="peps-btn-red p-4 rounded-xl flex items-center justify-between text-left group shadow-sm hover:shadow-md transition-all"
+            >
+              <div class="space-y-1">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-red-100 block">Épreuve 1</span>
+                <span id="crmef-btn-didactique-label" class="text-xs sm:text-sm font-extrabold block">
+                  QCM Didactique de l'EPS & Pédagogie
+                </span>
+                <span class="text-[11px] text-red-100/90 block">Cadres de référence MENPS & situations didactiques</span>
+              </div>
+              <span class="text-lg font-black ml-2 group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+
+            <a
+              id="crmef-btn-specialite"
+              href="qcm-specialite-eps-maroc.html"
+              class="peps-btn-green p-4 rounded-xl flex items-center justify-between text-left group shadow-sm hover:shadow-md transition-all"
+            >
+              <div class="space-y-1">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-100 block">Épreuve 2</span>
+                <span id="crmef-btn-specialite-label" class="text-xs sm:text-sm font-extrabold block">
+                  QCM Spécialité EPS & Physiologie
+                </span>
+                <span class="text-[11px] text-emerald-100/90 block">Sciences biologiques, biomécanique & APSA</span>
+              </div>
+              <span class="text-lg font-black ml-2 group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+          </div>
+
+          <!-- Pied de la carte CRMEF -->
+          <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-200 text-xs text-slate-500">
+            <div class="flex items-center gap-3">
+              <span class="font-bold text-slate-700">Tronc Commun Complémentaire :</span>
+              <a href="qcm-sciences-education-crmef.html" class="text-red-700 font-bold hover:underline">
+                Sciences de l'Éducation (Tous candidats) →
+              </a>
+            </div>
+            <a href="concours-crmef-hub.html" class="text-slate-700 font-semibold hover:text-red-700">
+              Voir le tableau complet des 28 modules d'examen →
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══ 4. TROISIÈME BLOC : LES CALCULATEURS SCIENTIFIQUES (HUB 11 OUTILS AVEC FILTRES) ═══ -->
     <section id="bloc-calculateurs" class="space-y-6">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-200 pb-3">
         <div>
@@ -961,83 +1342,124 @@ footer.footer, #profeps-unified-footer {
         </a>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Cluster 1 (Rouge ProfEPS) -->
-        <div class="peps-card p-6 flex flex-col justify-between relative overflow-hidden">
+      <!-- Filtres interactifs par catégorie -->
+      <div class="flex flex-wrap items-center gap-2 pt-1">
+        <span class="text-xs font-bold text-slate-500 mr-1">Filtrer les outils :</span>
+        <button
+          type="button"
+          onclick="filterCalculateurs('all')"
+          id="btn-calc-all"
+          class="px-3.5 py-1.5 text-xs font-bold rounded-lg bg-slate-900 text-white transition shadow-xs cursor-pointer"
+        >
+          Tous les 11 outils
+        </button>
+        <button
+          type="button"
+          onclick="filterCalculateurs('aerobie')"
+          id="btn-calc-aerobie"
+          class="px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition cursor-pointer"
+        >
+          ⚡ Aérobie & VMA (4)
+        </button>
+        <button
+          type="button"
+          onclick="filterCalculateurs('sante')"
+          id="btn-calc-sante"
+          class="px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition cursor-pointer"
+        >
+          ❤️ Santé & Cardiologie (4)
+        </button>
+        <button
+          type="button"
+          onclick="filterCalculateurs('charge')"
+          id="btn-calc-charge"
+          class="px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition cursor-pointer"
+        >
+          🏋️ Charge & Puissance (3)
+        </button>
+      </div>
+
+      <!-- Grille des 3 Clusters regroupant les 11 outils -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="grid-calculateurs">
+        
+        <!-- Cluster 1 (Rouge ProfEPS : Aérobie & VMA) -->
+        <div class="peps-card p-6 flex flex-col justify-between relative overflow-hidden calc-cluster-card" data-calc-cat="aerobie">
           <div class="absolute top-0 left-0 right-0 h-1 bg-red-600"></div>
           <div class="space-y-4">
             <div class="w-12 h-12 rounded-xl bg-red-50 text-red-700 flex items-center justify-center border border-red-100 font-black text-xl">
               ⚡
             </div>
             <div>
-              <span class="text-[11px] font-bold uppercase tracking-wider text-red-700 bg-red-50 px-2 py-0.5 rounded-full border border-red-200">Cluster 1</span>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-red-700 bg-red-50 px-2 py-0.5 rounded-full border border-red-200">Cluster 1 · Aérobie</span>
               <h3 class="text-lg font-bold text-slate-900 mt-1">VMA, VO2 Max & Allures</h3>
               <p class="text-xs text-slate-600 mt-1 leading-relaxed">
                 Calculs complets du profil aérobie de l’élève et du coureur de demi-fond scolaire.
               </p>
             </div>
             <ul class="space-y-2 text-xs text-slate-700 pt-3 border-t border-slate-100">
-              <li><a href="calculateur-vma.html" class="hover:text-red-700 font-semibold">• Calculateur VMA & Allures (km/h & min/km)</a></li>
-              <li><a href="calculateur-vdot-asr-endurance.html" class="hover:text-red-700 font-semibold">• VO2 Max & VDOT (Jack Daniels)</a></li>
-              <li><a href="calculateur-asr-reserve-vitesse.html" class="hover:text-red-700 font-semibold">• Réserve de Vitesse Anaérobie (ASR)</a></li>
-              <li><a href="calculateur-indice-endurance.html" class="hover:text-red-700 font-semibold">• Indice d’Endurance (Péronnet)</a></li>
+              <li><a href="calculateur-vma.html" class="hover:text-red-700 font-semibold flex items-center gap-1.5"><span>•</span> <span>Calculateur VMA & Allures (km/h & min/km)</span></a></li>
+              <li><a href="calculateur-vdot-asr-endurance.html" class="hover:text-red-700 font-semibold flex items-center gap-1.5"><span>•</span> <span>VO2 Max & VDOT (Jack Daniels)</span></a></li>
+              <li><a href="calculateur-asr-reserve-vitesse.html" class="hover:text-red-700 font-semibold flex items-center gap-1.5"><span>•</span> <span>Réserve de Vitesse Anaérobie (ASR)</span></a></li>
+              <li><a href="calculateur-indice-endurance.html" class="hover:text-red-700 font-semibold flex items-center gap-1.5"><span>•</span> <span>Indice d'Endurance (Péronnet & Thibault)</span></a></li>
             </ul>
           </div>
-          <a href="calculateur-vma.html" class="mt-5 w-full py-2.5 px-4 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold text-center block transition-colors">
-            Ouvrir Cluster 1
+          <a href="calculateur-vma.html" class="mt-5 w-full py-2.5 px-4 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+            Ouvrir la Suite Aérobie (VMA) →
           </a>
         </div>
 
-        <!-- Cluster 2 (Vert Émeraude) -->
-        <div class="peps-card p-6 flex flex-col justify-between relative overflow-hidden">
+        <!-- Cluster 2 (Vert Émeraude : Santé & Cardiologie) -->
+        <div class="peps-card p-6 flex flex-col justify-between relative overflow-hidden calc-cluster-card" data-calc-cat="sante">
           <div class="absolute top-0 left-0 right-0 h-1 bg-emerald-600"></div>
           <div class="space-y-4">
             <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center border border-emerald-100 font-black text-xl">
               ❤️
             </div>
             <div>
-              <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">Cluster 2</span>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">Cluster 2 · Santé</span>
               <h3 class="text-lg font-bold text-slate-900 mt-1">Santé, Climat & Cardiologie</h3>
               <p class="text-xs text-slate-600 mt-1 leading-relaxed">
                 Fréquence cardiaque, morphologie sportive et impact des conditions météo sur l’effort.
               </p>
             </div>
             <ul class="space-y-2 text-xs text-slate-700 pt-3 border-t border-slate-100">
-              <li><a href="calculateur-frequence-cardiaque-karvonen.html" class="hover:text-emerald-700 font-semibold">• FC Karvonen & Zones Cardiaques Z1-Z5</a></li>
-              <li><a href="calculateur-imc-sportif-masse-grasse.html" class="hover:text-emerald-700 font-semibold">• IMC Sportif & Masse Grasse (IMG)</a></li>
-              <li><a href="calculateur-chaleur-meteo-altitude.html" class="hover:text-emerald-700 font-semibold">• Chaleur, Humidité & Altitude</a></li>
-              <li><a href="calculateur-gap-pente-nutrition.html" class="hover:text-emerald-700 font-semibold">• Allure Pente GAP & Besoins Glucides</a></li>
+              <li><a href="calculateur-frequence-cardiaque-karvonen.html" class="hover:text-emerald-700 font-semibold flex items-center gap-1.5"><span>•</span> <span>FC Karvonen & Zones Cardiaques Z1-Z5</span></a></li>
+              <li><a href="calculateur-imc-sportif-masse-grasse.html" class="hover:text-emerald-700 font-semibold flex items-center gap-1.5"><span>•</span> <span>IMC Sportif & Masse Grasse (IMG Deurenberg)</span></a></li>
+              <li><a href="calculateur-chaleur-meteo-altitude.html" class="hover:text-emerald-700 font-semibold flex items-center gap-1.5"><span>•</span> <span>Chaleur, Humidité & Altitude (Ajustement)</span></a></li>
+              <li><a href="calculateur-gap-pente-nutrition.html" class="hover:text-emerald-700 font-semibold flex items-center gap-1.5"><span>•</span> <span>Allure Pente GAP & Besoins Glucidiques</span></a></li>
             </ul>
           </div>
-          <a href="calculateur-frequence-cardiaque-karvonen.html" class="mt-5 w-full py-2.5 px-4 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold text-center block transition-colors">
-            Ouvrir Cluster 2
+          <a href="calculateur-frequence-cardiaque-karvonen.html" class="mt-5 w-full py-2.5 px-4 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+            Ouvrir la Suite Cardio & Santé →
           </a>
         </div>
 
-        <!-- Cluster 3 (Bleu Roi) -->
-        <div class="peps-card p-6 flex flex-col justify-between relative overflow-hidden">
+        <!-- Cluster 3 (Bleu Roi : Charge & Puissance) -->
+        <div class="peps-card p-6 flex flex-col justify-between relative overflow-hidden calc-cluster-card" data-calc-cat="charge">
           <div class="absolute top-0 left-0 right-0 h-1 bg-blue-600"></div>
           <div class="space-y-4">
             <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100 font-black text-xl">
               🏋️
             </div>
             <div>
-              <span class="text-[11px] font-bold uppercase tracking-wider text-blue-800 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">Cluster 3</span>
-              <h3 class="text-lg font-bold text-slate-900 mt-1">Intermittent HIIT & Charge</h3>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-blue-800 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">Cluster 3 · Charge</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-1">Intermittent HIIT & Monitoring</h3>
               <p class="text-xs text-slate-600 mt-1 leading-relaxed">
-                Calibration des plots sur piste et monitoring de la charge d'entraînement.
+                Calibration des plots sur piste et monitoring de la charge d'entraînement sRPE.
               </p>
             </div>
             <ul class="space-y-2 text-xs text-slate-700 pt-3 border-t border-slate-100">
-              <li><a href="generateur-intermittent-hiit-cod.html" class="hover:text-blue-600 font-semibold">• Intermittent HIIT & Navettes COD 180°</a></li>
-              <li><a href="calculateur-charge-rpe-foster-acwr.html" class="hover:text-blue-600 font-semibold">• Charge RPE Foster & Ratio ACWR</a></li>
-              <li><a href="widget-vma.html" class="hover:text-blue-600 font-semibold">• Widget VMA Intégrable pour Sites EPS</a></li>
+              <li><a href="generateur-intermittent-hiit-cod.html" class="hover:text-blue-600 font-semibold flex items-center gap-1.5"><span>•</span> <span>Intermittent HIIT & Navettes COD 180°</span></a></li>
+              <li><a href="calculateur-charge-rpe-foster-acwr.html" class="hover:text-blue-600 font-semibold flex items-center gap-1.5"><span>•</span> <span>Charge RPE Foster & Ratio ACWR Aiguë/Chronique</span></a></li>
+              <li><a href="hub-outils-sport-performance.html" class="hover:text-blue-600 font-semibold flex items-center gap-1.5"><span>•</span> <span>Hub Global de la Performance Sportive</span></a></li>
+              <li><a href="widget-vma.html" class="hover:text-blue-600 font-semibold flex items-center gap-1.5"><span>•</span> <span>Widget VMA Intégrable pour Sites EPS</span></a></li>
             </ul>
           </div>
-          <a href="generateur-intermittent-hiit-cod.html" class="mt-5 w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold text-center block transition-colors">
-            Ouvrir Cluster 3
+          <a href="generateur-intermittent-hiit-cod.html" class="mt-5 w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+            Ouvrir la Suite Charge & HIIT →
           </a>
         </div>
+
       </div>
     </section>
 
@@ -1478,14 +1900,15 @@ footer.footer, #profeps-unified-footer {
     </div>
   </footer>
 
-  <!-- Script interactif du Curseur VMA et Filtre OP -->
+  <!-- Scripts interactifs ProfEPS : Curseur VMA, Mini-Générateur, Hub CRMEF 12 Disciplines, Calculateurs & OP -->
   <script>
+    // 1. Curseur VMA en temps réel (Hero Section)
     function updateHeroVma(val) {
       val = parseFloat(val);
       document.getElementById('hero-vma-val').textContent = val.toFixed(1);
       document.getElementById('hero-vma-label').textContent = val.toFixed(1) + ' km/h';
 
-      // 100% VMA pace
+      // Allure 100% VMA
       var secPace = Math.round(3600 / val);
       var m = Math.floor(secPace / 60);
       var s = secPace % 60;
@@ -1498,6 +1921,262 @@ footer.footer, #profeps-unified-footer {
       document.getElementById('hero-speed-65').textContent = v65 + ' km/h';
     }
 
+    // 2. Gestionnaire de soumission du Mini-Générateur avec redirection URL
+    function handleMiniGenerate(e) {
+      if (e) e.preventDefault();
+      var apsEl = document.getElementById('mini-aps');
+      var niveauEl = document.getElementById('mini-niveau');
+      var seanceEl = document.getElementById('mini-seance');
+      var objectifEl = document.getElementById('mini-objectif');
+
+      var aps = apsEl ? apsEl.value : '';
+      var niveau = niveauEl ? niveauEl.value : '';
+      var seance = seanceEl ? seanceEl.value : '1';
+      var objectif = objectifEl ? objectifEl.value.trim() : '';
+
+      if (!aps) {
+        alert('Veuillez sélectionner une APSA pour continuer.');
+        if (apsEl) apsEl.focus();
+        return false;
+      }
+      if (!niveau) {
+        alert('Veuillez choisir le niveau scolaire (Collège ou Lycée).');
+        if (niveauEl) niveauEl.focus();
+        return false;
+      }
+
+      var targetUrl = 'generateur.html?aps=' + encodeURIComponent(aps) +
+                      '&niveau=' + encodeURIComponent(niveau) +
+                      '&seance=' + encodeURIComponent(seance) +
+                      '&objectif=' + encodeURIComponent(objectif);
+
+      window.location.href = targetUrl;
+      return false;
+    }
+
+    function fillMiniObjectif(text) {
+      var el = document.getElementById('mini-objectif');
+      if (el) {
+        el.value = text;
+        el.focus();
+      }
+    }
+
+    // 3. Sélecteur interactif du Hub Concours CRMEF (12 Disciplines + Tronc Commun)
+    var crmefDisciplines = {
+      'eps': {
+        nom: 'EPS · Éducation Physique et Sportive',
+        badge: 'Matière Pilote · Session 2026',
+        desc: "Cadre de référence officiel pour l'enseignement de l'EPS au secondaire marocain : didactique des APSA, théories de l'apprentissage moteur, physiologie de l'effort et barèmes certificatifs des Orientations Pédagogiques (2007 & 2009).",
+        didactiqueUrl: 'qcm-didactique-eps-maroc.html',
+        specialiteUrl: 'qcm-specialite-eps-maroc.html',
+        didactiqueLabel: "QCM Didactique de l'EPS & Pédagogie",
+        specialiteLabel: 'QCM Spécialité EPS & Physiologie',
+        coef: 'Coeff Écrit : 12 | Coeff Oral : 8',
+        icon: '🏃'
+      },
+      'primaire': {
+        nom: 'Enseignement Primaire (Double Voie Arabe / Bilingue)',
+        badge: 'Filière Générale',
+        desc: "Préparation complète aux épreuves du concours primaire : didactique du français, arabe, sciences et mathématiques, démarches actives et gestion de la classe au cycle primaire marocain.",
+        didactiqueUrl: 'qcm-didactique-primaire-maroc.html',
+        specialiteUrl: 'qcm-specialite-primaire-maroc.html',
+        didactiqueLabel: 'QCM Didactique du Primaire & Transposition',
+        specialiteLabel: 'QCM Spécialité Matières du Primaire',
+        coef: 'Coeff Écrit : 10 | Coeff Oral : 8',
+        icon: '🎒'
+      },
+      'maths': {
+        nom: 'Mathématiques (Collège & Lycée)',
+        badge: 'Sciences Exactes',
+        desc: "Analyse, algèbre linéaire, géométrie vectorielle, probabilités et didactique de la résolution de problèmes et de l'institutionnalisation selon les curricula marocains.",
+        didactiqueUrl: 'qcm-didactique-maths-maroc.html',
+        specialiteUrl: 'qcm-specialite-maths-maroc.html',
+        didactiqueLabel: 'QCM Didactique des Mathématiques',
+        specialiteLabel: 'QCM Spécialité Analyse, Algèbre & Géométrie',
+        coef: 'Coeff Écrit : 12 | Coeff Oral : 8',
+        icon: '📐'
+      },
+      'pc': {
+        nom: 'Physique - Chimie',
+        badge: 'Sciences Expérimentales',
+        desc: "Mécanique newtonienne, électromagnétisme, thermodynamique, cinétique chimique et didactique de la démarche d'investigation en laboratoire d'établissement.",
+        didactiqueUrl: 'qcm-didactique-physique-chimie-maroc.html',
+        specialiteUrl: 'qcm-specialite-physique-chimie-maroc.html',
+        didactiqueLabel: 'QCM Didactique Physique-Chimie',
+        specialiteLabel: 'QCM Spécialité Sciences Physiques & Chimie',
+        coef: 'Coeff Écrit : 12 | Coeff Oral : 8',
+        icon: '⚛️'
+      },
+      'svt': {
+        nom: 'Sciences de la Vie et de la Terre (SVT)',
+        badge: 'Biologie & Géologie',
+        desc: "Génétique mendélienne et moléculaire, géodynamique globale, immunologie, écologie et transposition didactique des concepts biologiques et géologiques.",
+        didactiqueUrl: 'qcm-didactique-svt-maroc.html',
+        specialiteUrl: 'qcm-specialite-svt-maroc.html',
+        didactiqueLabel: 'QCM Didactique des SVT',
+        specialiteLabel: 'QCM Spécialité Biologie Cellulaire & Géologie',
+        coef: 'Coeff Écrit : 12 | Coeff Oral : 8',
+        icon: '🌿'
+      },
+      'francais': {
+        nom: 'Langue Française & Littérature',
+        badge: 'Lettres & FLE / FOS',
+        desc: "Didactique du FLE/FOS au Maroc, théories de la lecture méthodique, analyse textuelle, grammaire de discours et approche par compétences communicatives.",
+        didactiqueUrl: 'qcm-didactique-francais-maroc.html',
+        specialiteUrl: 'qcm-specialite-francais-maroc.html',
+        didactiqueLabel: 'QCM Didactique du Français & Pédagogie',
+        specialiteLabel: 'QCM Spécialité Langue, Linguistique & Littérature',
+        coef: 'Coeff Écrit : 12 | Coeff Oral : 8',
+        icon: '🇫🇷'
+      },
+      'arabe': {
+        nom: 'اللغة العربية وآدابها (Langue Arabe)',
+        badge: 'الديداكتيك والتخصص',
+        desc: 'علوم اللغة، النحو والصرف، البلاغة، النقد الأدبي القديم والحديث، وديداكتيك مكونات مادة اللغة العربية بالثانوي الإعدادي والتأهيلي وفق الأطر المرجعية للمنهاج المغربي.',
+        didactiqueUrl: 'qcm-didactique-arabe-maroc.html',
+        specialiteUrl: 'qcm-specialite-arabe-maroc.html',
+        didactiqueLabel: 'اختبار ديداكتيك اللغة العربية وطرائق التدريس',
+        specialiteLabel: 'اختبار تخصص اللغة العربية وآدابها',
+        coef: 'معامل الكتابي : 12 | معامل الشفوي : 8',
+        icon: '🇲🇦'
+      },
+      'hg': {
+        nom: 'Histoire - Géographie',
+        badge: 'Sciences Humaines',
+        desc: "Démarches de contextualisation et causalité historique, raisonnement géographique territorial, analyse de cartes et exploitation critique de documents en classe.",
+        didactiqueUrl: 'qcm-didactique-histoire-geographie-maroc.html',
+        specialiteUrl: 'qcm-specialite-histoire-geographie-maroc.html',
+        didactiqueLabel: 'QCM Didactique Histoire-Géographie',
+        specialiteLabel: 'QCM Spécialité Histoire & Géographie',
+        coef: 'Coeff Écrit : 12 | Coeff Oral : 8',
+        icon: '🌍'
+      },
+      'philo': {
+        nom: 'Philosophie (الفلسفة)',
+        badge: 'Pensée Critique',
+        desc: "Problématisation conceptuelle, analyse et commentaire de texte philosophique, repères notionnels du programme marocain et didactique de l'interrogation réflexive.",
+        didactiqueUrl: 'qcm-didactique-philosophie-maroc.html',
+        specialiteUrl: 'qcm-specialite-philosophie-maroc.html',
+        didactiqueLabel: 'QCM Didactique de la Philosophie',
+        specialiteLabel: 'QCM Spécialité Histoire de la Philosophie & Notions',
+        coef: 'Coeff Écrit : 12 | Coeff Oral : 8',
+        icon: '💭'
+      },
+      'info': {
+        nom: 'Informatique & Technologies',
+        badge: 'Sciences du Numérique',
+        desc: "Algorithmique, Python, bases de données relationnelles SQL, architectures des ordinateurs, réseaux informatiques et didactique des démarches de projet numérique.",
+        didactiqueUrl: 'qcm-didactique-informatique-maroc.html',
+        specialiteUrl: 'qcm-specialite-informatique-maroc.html',
+        didactiqueLabel: 'QCM Didactique de l\'Informatique',
+        specialiteLabel: 'QCM Spécialité Algorithmique, Code & Systèmes',
+        coef: 'Coeff Écrit : 12 | Coeff Oral : 8',
+        icon: '💻'
+      },
+      'anglais': {
+        nom: 'English Language & Literature',
+        badge: 'TEFL & Applied Linguistics',
+        desc: 'Principles and methodology of Teaching English as a Foreign Language (TEFL), pedagogical approaches, grammar translation, communicative language teaching and literature analysis.',
+        didactiqueUrl: 'qcm-didactique-anglais-maroc.html',
+        specialiteUrl: 'qcm-specialite-anglais-maroc.html',
+        didactiqueLabel: 'QCM English ELT / TEFL Methodology',
+        specialiteLabel: 'QCM English Linguistics & Literature',
+        coef: 'Coeff Écrit : 12 | Coeff Oral : 8',
+        icon: '🇬🇧'
+      },
+      'islamique': {
+        nom: 'التربية الإسلامية (Éducation Islamique)',
+        badge: 'العلوم الشرعية والتربوية',
+        desc: 'تفسير القرآن الكريم والحديث النبوي، الفقه وأصوله، السيرة النبوية، ومقاصد الشريعة الإسلامية مع ديداكتيك المداخل البيداغوجية الخمسة للمنهاج المغربي.',
+        didactiqueUrl: 'qcm-didactique-education-islamique-maroc.html',
+        specialiteUrl: 'qcm-specialite-education-islamique-maroc.html',
+        didactiqueLabel: 'اختبار ديداكتيك مادة التربية الإسلامية',
+        specialiteLabel: 'اختبار تخصص العلوم الشرعية والفقه',
+        coef: 'معامل الكتابي : 12 | معامل الشفوي : 8',
+        icon: '🕌'
+      },
+      'economie': {
+        nom: 'Économie & Gestion',
+        badge: 'Sciences Économiques & Management',
+        desc: "Macroéconomie, comptabilité générale et analytique, gestion des ressources humaines, droit des affaires et didactique des sciences économiques et managériales.",
+        didactiqueUrl: 'qcm-didactique-economie-gestion-maroc.html',
+        specialiteUrl: 'qcm-specialite-economie-gestion-maroc.html',
+        didactiqueLabel: 'QCM Didactique Économie & Gestion',
+        specialiteLabel: 'QCM Spécialité Économie, Comptabilité & Gestion',
+        coef: 'Coeff Écrit : 12 | Coeff Oral : 8',
+        icon: '📊'
+      }
+    };
+
+    function selectCrmefDiscipline(key) {
+      var item = crmefDisciplines[key];
+      if (!item) return;
+
+      // Met à jour l'apparence des boutons du ruban
+      document.querySelectorAll('.crmef-tab-btn').forEach(function(btn) {
+        btn.className = 'crmef-tab-btn px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer';
+      });
+      var activeBtn = document.getElementById('tab-crmef-' + key);
+      if (activeBtn) {
+        activeBtn.className = 'crmef-tab-btn px-3.5 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 transition bg-slate-900 text-white shadow-xs cursor-pointer';
+      }
+
+      // Met à jour les éléments de la carte d'aperçu dynamique
+      var iconEl = document.getElementById('crmef-active-icon');
+      var titleEl = document.getElementById('crmef-active-title');
+      var badgeEl = document.getElementById('crmef-active-badge');
+      var coefEl = document.getElementById('crmef-active-coef');
+      var descEl = document.getElementById('crmef-active-desc');
+      var btnDidactique = document.getElementById('crmef-btn-didactique');
+      var btnDidactiqueLbl = document.getElementById('crmef-btn-didactique-label');
+      var btnSpecialite = document.getElementById('crmef-btn-specialite');
+      var btnSpecialiteLbl = document.getElementById('crmef-btn-specialite-label');
+
+      if (iconEl) iconEl.textContent = item.icon;
+      if (titleEl) titleEl.textContent = item.nom;
+      if (badgeEl) badgeEl.textContent = item.badge;
+      if (coefEl) coefEl.textContent = item.coef;
+      if (descEl) descEl.textContent = item.desc;
+
+      if (btnDidactique) btnDidactique.href = item.didactiqueUrl;
+      if (btnDidactiqueLbl) btnDidactiqueLbl.textContent = item.didactiqueLabel;
+      if (btnSpecialite) btnSpecialite.href = item.specialiteUrl;
+      if (btnSpecialiteLbl) btnSpecialiteLbl.textContent = item.specialiteLabel;
+    }
+
+    // 4. Filtrage dynamique des Calculateurs Sportifs
+    function filterCalculateurs(cat) {
+      cat = cat || 'all';
+      var buttons = [
+        { id: 'btn-calc-all', cat: 'all' },
+        { id: 'btn-calc-aerobie', cat: 'aerobie' },
+        { id: 'btn-calc-sante', cat: 'sante' },
+        { id: 'btn-calc-charge', cat: 'charge' }
+      ];
+
+      buttons.forEach(function(b) {
+        var el = document.getElementById(b.id);
+        if (!el) return;
+        if (b.cat === cat) {
+          el.className = 'px-3.5 py-1.5 text-xs font-bold rounded-lg bg-slate-900 text-white transition shadow-xs cursor-pointer';
+        } else {
+          el.className = 'px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition cursor-pointer';
+        }
+      });
+
+      var cards = document.querySelectorAll('.calc-cluster-card');
+      cards.forEach(function(card) {
+        var cardCat = card.getAttribute('data-calc-cat');
+        if (cat === 'all' || cardCat === cat) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // 5. Filtre Orientations Pédagogiques (Collège vs Lycée)
     function filterOp(type) {
       var cCol = document.getElementById('card-op-college');
       var cLyc = document.getElementById('card-op-lycee');
@@ -1505,27 +2184,28 @@ footer.footer, #profeps-unified-footer {
       var bCol = document.getElementById('btn-op-college');
       var bLyc = document.getElementById('btn-op-lycee');
 
-      bAll.className = 'px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition';
-      bCol.className = 'px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition';
-      bLyc.className = 'px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition';
+      if (!cCol || !cLyc) return;
+
+      if (bAll) bAll.className = 'px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition';
+      if (bCol) bCol.className = 'px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition';
+      if (bLyc) bLyc.className = 'px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition';
 
       if (type === 'college') {
         cCol.style.display = 'flex';
         cLyc.style.display = 'none';
-        bCol.className = 'px-3.5 py-1.5 text-xs font-bold rounded-lg bg-red-600 text-white transition';
+        if (bCol) bCol.className = 'px-3.5 py-1.5 text-xs font-bold rounded-lg bg-red-600 text-white transition';
       } else if (type === 'lycee') {
         cCol.style.display = 'none';
         cLyc.style.display = 'flex';
-        bLyc.className = 'px-3.5 py-1.5 text-xs font-bold rounded-lg bg-emerald-700 text-white transition';
+        if (bLyc) bLyc.className = 'px-3.5 py-1.5 text-xs font-bold rounded-lg bg-emerald-700 text-white transition';
       } else {
         cCol.style.display = 'flex';
         cLyc.style.display = 'flex';
-        bAll.className = 'px-3.5 py-1.5 text-xs font-bold rounded-lg bg-slate-900 text-white transition';
+        if (bAll) bAll.className = 'px-3.5 py-1.5 text-xs font-bold rounded-lg bg-slate-900 text-white transition';
       }
     }
-  </script>
 
-  <script src="unifier-navbar-footer.js">
+    // 6. Filtre du Blog Didactique
     function filterBlogHome(theme) {
       theme = theme || 'all';
       var cards = document.querySelectorAll('#grid-blog-home article');
@@ -1555,7 +2235,8 @@ footer.footer, #profeps-unified-footer {
         }
       });
     }
-  
-</script>
+  </script>
+
+  <script src="unifier-navbar-footer.js"></script>
 </body>
 </html>

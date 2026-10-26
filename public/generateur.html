@@ -2477,16 +2477,83 @@ th,td{border:1px solid #000;padding:4px 6px;vertical-align:top;word-wrap:break-w
                         if (prefill.etablissement) { const el = document.getElementById('etablissement'); if (el) el.value = prefill.etablissement; }
                         if (prefill.anneeScolaire) { const el = document.getElementById('anneeScolaire'); if (el) el.value = prefill.anneeScolaire; }
                         // Switch to correct document type tab
-                        if (prefill.typeDocument) {
-                            const tabBtn = document.querySelector('[data-type="' + prefill.typeDocument + '"]');
-                            if (tabBtn) tabBtn.click();
+                // Direct URL params handler for mini-generator & deep links
+                (function applyDirectParams() {
+                    const params = new URLSearchParams(window.location.search);
+                    const aps = params.get('aps');
+                    const niveau = params.get('niveau');
+                    const seance = params.get('seance') || params.get('numeroSeance');
+                    const objectif = params.get('objectif');
+                    const type = params.get('type') || 'fiche';
+
+                    if (type) {
+                        const tabBtn = document.querySelector('[data-type="' + type + '"]');
+                        if (tabBtn) tabBtn.click();
+                    }
+                    if (aps) {
+                        const el = document.getElementById('aps');
+                        if (el) {
+                            el.value = aps;
+                            el.dispatchEvent(new Event('change'));
                         }
-                    } catch (e) { console.log('Prefill parse error:', e); }
-                }
+                    }
+                    if (niveau) {
+                        const el = document.getElementById('niveau');
+                        if (el) {
+                            el.value = niveau;
+                            el.dispatchEvent(new Event('change'));
+                        }
+                    }
+                    if (seance) {
+                        const el = document.getElementById('numeroSeance');
+                        if (el) el.value = seance;
+                    }
+                    if (objectif) {
+                        const el = document.getElementById('objectif');
+                        if (el) el.value = decodeURIComponent(objectif);
+                    }
+                })();
             } catch (e) {
                 console.log('Auto-fill failed:', e);
             }
         })();
+
+        // Also run direct URL params parser independently in case Supabase is offline or guest
+        document.addEventListener('DOMContentLoaded', function() {
+            var params = new URLSearchParams(window.location.search);
+            var aps = params.get('aps');
+            var niveau = params.get('niveau');
+            var seance = params.get('seance') || params.get('numeroSeance');
+            var objectif = params.get('objectif');
+            var type = params.get('type') || 'fiche';
+
+            if (type) {
+                var tabBtn = document.querySelector('[data-type="' + type + '"]');
+                if (tabBtn) tabBtn.click();
+            }
+            if (aps) {
+                var apsEl = document.getElementById('aps');
+                if (apsEl) {
+                    apsEl.value = aps;
+                    apsEl.dispatchEvent(new Event('change'));
+                }
+            }
+            if (niveau) {
+                var nivEl = document.getElementById('niveau');
+                if (nivEl) {
+                    nivEl.value = niveau;
+                    nivEl.dispatchEvent(new Event('change'));
+                }
+            }
+            if (seance) {
+                var seanceEl = document.getElementById('numeroSeance');
+                if (seanceEl) seanceEl.value = seance;
+            }
+            if (objectif) {
+                var objEl = document.getElementById('objectif');
+                if (objEl) objEl.value = decodeURIComponent(objectif);
+            }
+        });
     </script>
 
 </body>
