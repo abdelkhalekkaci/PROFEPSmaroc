@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Générez gratuitement vos fiches de séance EPS, grilles d'observation/évaluation et projets de cycle — conformes aux OP 2007-2009. Adapté collège et lycée Maroc. Résultat en quelques secondes.">
+    <meta name="description" content="Créez et personnalisez vos fiches de séance EPS en quelques clics. Outil en ligne gratuit adapté aux programmes du collège et lycée.">
     <meta name="keywords" content="générateur fiche de séance EPS, fiche de préparation EPS Maroc, grille d'observation EPS, grille d'évaluation EPS Maroc, projet de cycle EPS collège, projet de cycle EPS lycée, module EPS cycle qualifiant, module EPS cycle collégial, OTI OTC EPS, OP 2007 OP 2009, CRMEF EPS, didactique EPS Maroc, situation d'apprentissage EPS">
     <link rel="canonical" href="https://profeps.ma/generateur.html">
-    <title>Générateur Fiche de Séance EPS Maroc | Grille d'Évaluation & Projet de Cycle | ProfEPS</title>
+    <title>Générateur de Fiches de Séance EPS Gratuit | ProfEPS</title>
     <link rel="icon" type="image/png" href="/images/prof_eps.png">
 
     <!-- Core Web Vitals — LCP preload + preconnect to third parties -->
@@ -64,7 +64,7 @@
         }
     }
     </script>
-    <!-- Google Consent Mode v2 — defaults AVANT gtag -->
+        <!-- Google Consent Mode v2 — defaults AVANT gtag -->
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -82,9 +82,6 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script defer src="profeps-cmp.js"></script>
-    <script defer src="profeps-communaute.js"></script>
-
     <style>
         *,
         *::before,
@@ -141,7 +138,8 @@
             color: inherit;
             transition: var(--transition);
         }
-
+        /* Login Button */
+        /* User Menu */
         /* ========== LOADING OVERLAY ========== */
         .loading-overlay {
             display: none;
@@ -151,7 +149,7 @@
             right: 0;
             bottom: 0;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            z-index: 99999;
+            z-index: 9999;
             justify-content: center;
             align-items: center;
             flex-direction: column;
@@ -226,7 +224,7 @@
             top: 100px;
             left: 50%;
             transform: translateX(-50%) translateY(-20px);
-            z-index: 100000;
+            z-index: 10000;
             opacity: 0;
             transition: all 0.3s ease;
             pointer-events: none;
@@ -711,6 +709,8 @@
             font-weight: 600;
         }
 
+        /* ========== FOOTER ========== */
+
         /* ========== RESPONSIVE ========== */
         @media (max-width: 1200px) {
             .generator-container {
@@ -724,6 +724,12 @@
         }
 
         @media (max-width: 968px) {
+            .nav-menu.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+
             .preview-header {
                 flex-direction: column;
                 align-items: flex-start;
@@ -879,12 +885,38 @@
                 padding: var(--spacing-sm);
             }
         }
-    </style>
+           
+                /* ═══ FOOTER CANONIQUE ═══ */
+        .footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 3.5rem 2rem 0; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; }
+        .footer-brand { display: flex; flex-direction: column; gap: 1rem; }
+        .footer-brand img { height: 48px; filter: brightness(0) invert(1); }
+        .footer-brand p { color: rgba(255,255,255,0.65); font-size: 0.875rem; line-height: 1.75; }
+        .footer-social { display: flex; gap: 0.625rem; margin-top: 0.25rem; }
+        .footer-social a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 50%; transition: all 0.3s ease; }
+        .footer-social a:hover { background: rgba(255,255,255,0.18); transform: translateY(-2px); }
+        .footer-social svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.8); }
+        .footer-col h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); margin-bottom: 1.125rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.625rem; }
+        .footer-col ul li a { color: rgba(255,255,255,0.7); font-size: 0.875rem; transition: color 0.2s ease; display: inline-flex; align-items: center; gap: 0.375rem; }
+        .footer-col ul li a:hover { color: white; }
+        .footer-col ul li a .dot { width: 4px; height: 4px; border-radius: 50%; background: #c1272d; flex-shrink: 0; opacity: 0; transition: opacity 0.2s ease; }
+        .footer-col ul li a:hover .dot { opacity: 1; }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.5rem 0; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+        .footer-copyright { color: rgba(255,255,255,0.35); font-size: 0.8125rem; }
+        .footer-tagline { color: rgba(255,255,255,0.35); font-size: 0.8125rem; font-style: italic; }
+        @media (max-width: 968px) { .footer-inner { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
+        @media (max-width: 640px) { .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; } .footer-brand { grid-column: 1 / -1; } .footer-bottom { flex-direction: column; text-align: center; } }
+        </style>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8253776880916865" crossorigin="anonymous"></script>
+  
 
-    <!-- STYLE CANONIQUE UNIFIÉ (NAVBAR FIXE 80PX & FOOTER 5 COLONNES) -->
-    <style id="profeps-master-unifier-css">
+
+
+
+<script src="profeps-cmp.js" defer></script>
+<style id="profeps-master-unifier-css">
 /* ═══ 1. NAVBAR FIXE ISOLÉE (.peps-*) — 80PX VERROUILLÉ SUR TOUTES LES PAGES ═══ */
 html {
   overflow-y: scroll !important;
@@ -1619,11 +1651,15 @@ footer.footer .footer-bottom {
         <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:52px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
       </a>
       <div class="peps-nav-menu" id="pepsNavMenu">
-        <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
+        <a href="index.html" class="peps-nav-link" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
         <a href="generateur.html" class="peps-nav-link active" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
         <div class="peps-dropdown" id="pepsCalcDropdown">
-          <a href="calculateur-vma.html" class="peps-nav-link" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS Calculator" data-i18n-ar="حاسبة السرعة الهوائية VMA"><span class="peps-dropdown-title">Calculateur VMA</span></span><span class="peps-dropdown-caret">▾</span></a>
-          <div class="peps-dropdown-menu" id="pepsDropdownMenu">            <a href="hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub" data-i18n-fr="🧭 Hub de Tous les Calculateurs Sport" data-i18n-en="🧭 All Sports Calculators Hub" data-i18n-ar="🧭 بوابة جميع الحاسبات الرياضية">🧭 Hub de Tous les Calculateurs Sport</a>
+          <a href="hub-outils-sport-performance.html" class="peps-nav-link" id="pepsDropdownTrigger">
+            <span id="pepsDropdownTriggerText" data-i18n-fr="Calculateurs Sport" data-i18n-en="Sports Calculators" data-i18n-ar="الحاسبات الرياضية">Calculateurs Sport</span>
+            <span class="peps-dropdown-caret">▾</span>
+          </a>
+          <div class="peps-dropdown-menu" id="pepsDropdownMenu">
+            <a href="hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub" data-i18n-fr="🧭 Hub de Tous les Calculateurs Sport" data-i18n-en="🧭 All Sports Calculators Hub" data-i18n-ar="🧭 بوابة جميع الحاسبات الرياضية">🧭 Hub de Tous les Calculateurs Sport</a>
             <a href="calculateur-vma.html" class="peps-dropdown-item" data-i18n-fr="⚡ Calculateur VMA & Allures" data-i18n-en="⚡ MAS (VMA) & Paces Calculator" data-i18n-ar="⚡ حاسبة السرعة الهوائية القصوى (VMA)">⚡ Calculateur VMA & Allures</a>
             <a href="calculateur-vdot-asr-endurance.html" class="peps-dropdown-item" data-i18n-fr="🫁 Calculateur VO2 Max & VDOT" data-i18n-en="🫁 VO2 Max & VDOT Calculator" data-i18n-ar="🫁 حاسبة VO2 Max ومؤشر VDOT">🫁 Calculateur VO2 Max & VDOT</a>
             <a href="calculateur-asr-reserve-vitesse.html" class="peps-dropdown-item" data-i18n-fr="🚀 Réserve de Vitesse Anaérobie (ASR)" data-i18n-en="🚀 Anaerobic Speed Reserve (ASR)" data-i18n-ar="🚀 احتياطي السرعة اللاهوائية (ASR)">🚀 Réserve de Vitesse Anaérobie (ASR)</a>
@@ -1636,7 +1672,8 @@ footer.footer .footer-bottom {
             <a href="calculateur-charge-rpe-foster-acwr.html" class="peps-dropdown-item" data-i18n-fr="🛡️ Charge RPE Foster & ACWR" data-i18n-en="🛡️ Foster sRPE Load & ACWR Ratio" data-i18n-ar="🛡️ حمل التدريب (RPE Foster) ونسبة ACWR">🛡️ Charge RPE Foster & ACWR</a>
           </div>
         </div>
-        <a href="concours-crmef-hub.html" class="peps-nav-link" data-i18n-fr="Préparer Concours CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparer Concours CRMEF</a>
+        <a href="concours-crmef-hub.html" class="peps-nav-link" data-i18n-fr="Concours CRMEF" data-i18n-en="CRMEF Exam" data-i18n-ar="مباراة التعليم">Concours CRMEF</a>
+        <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
       </div>
       <div class="peps-nav-right">
         <div dir="ltr" class="peps-lang-switch" aria-label="Sélecteur de langue">
@@ -1812,43 +1849,9 @@ footer.footer .footer-bottom {
 })();
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->
-    <!-- ELEMENTS LEURRES SILENCIEUX POUR COMPATIBILITÉ SCRIPT EXISTANT -->
-    <!-- NOUVELLE NAVBAR CANONIQUE UNIFIÉE -->
-    <div class="peps-navbar" id="pepsNavbar" role="navigation" aria-label="Navigation principale" data-current-file="generateur.html">
-        <div class="peps-nav-container">
-            <a href="index.html" class="peps-nav-logo" aria-label="Prof EPS Maroc - Accueil">
-                <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc">
-            </a>
-            <div class="peps-nav-menu" id="pepsNavMenu">
-                <a href="index.html" class="peps-nav-link" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
-                <a href="generateur.html" class="peps-nav-link active" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
-                <div class="peps-dropdown" id="pepsCalcDropdown">
-                    <a href="calculateur-vma.html" class="peps-nav-link" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS Calculator" data-i18n-ar="حاسبة السرعة الهوائية VMA">Calculateur VMA</span><span class="peps-dropdown-caret">▾</span></a>
-                    <div class="peps-dropdown-menu" id="pepsDropdownMenu">
-                        <a href="hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub" data-i18n-fr="🧭 Hub de Tous les Calculateurs Sport" data-i18n-en="🧭 All Sports Calculators Hub" data-i18n-ar="🧭 بوابة جميع الحاسبات الرياضية">🧭 Hub de Tous les Calculateurs Sport</a>
-                        <a href="calculateur-vma.html" class="peps-dropdown-item" data-i18n-fr="⚡ Calculateur VMA & Allures" data-i18n-en="⚡ MAS (VMA) & Paces Calculator" data-i18n-ar="⚡ حاسبة السرعة الهوائية القصوى (VMA)">⚡ Calculateur VMA & Allures</a>
-                        <a href="calculateur-vdot-asr-endurance.html" class="peps-dropdown-item" data-i18n-fr="🫁 Calculateur VO2 Max & VDOT" data-i18n-en="🫁 VO2 Max & VDOT Calculator" data-i18n-ar="🫁 حاسبة VO2 Max ومؤشر VDOT">🫁 Calculateur VO2 Max & VDOT</a>
-                        <a href="calculateur-asr-reserve-vitesse.html" class="peps-dropdown-item" data-i18n-fr="🚀 Réserve de Vitesse Anaérobie (ASR)" data-i18n-en="🚀 Anaerobic Speed Reserve (ASR)" data-i18n-ar="🚀 احتياطي السرعة اللاهوائية (ASR)">🚀 Réserve de Vitesse Anaérobie (ASR)</a>
-                        <a href="calculateur-indice-endurance.html" class="peps-dropdown-item" data-i18n-fr="📈 Indice d'Endurance (Péronnet)" data-i18n-en="📈 Endurance Index (Péronnet)" data-i18n-ar="📈 مؤشر التحمل (نموذج بيروني)">📈 Indice d'Endurance (Péronnet)</a>
-                        <a href="calculateur-frequence-cardiaque-karvonen.html" class="peps-dropdown-item" data-i18n-fr="❤️ Fréquence Cardiaque (Karvonen)" data-i18n-en="❤️ Heart Rate Zones (Karvonen)" data-i18n-ar="❤️ نبضات القلب ومناطق التدريب (Karvonen)">❤️ Fréquence Cardiaque (Karvonen)</a>
-                        <a href="calculateur-imc-sportif-masse-grasse.html" class="peps-dropdown-item" data-i18n-fr="⚖️ Calculateur IMC & Masse Grasse" data-i18n-en="⚖️ Athletic BMI & Body Fat %" data-i18n-ar="⚖️ حاسبة مؤشر كتلة الجسم ونسبة الدهون">⚖️ Calculateur IMC & Masse Grasse</a>
-                        <a href="calculateur-chaleur-meteo-altitude.html" class="peps-dropdown-item" data-i18n-fr="☀️ Chaleur, Humidité & Altitude" data-i18n-en="☀️ Heat, Humidity & Altitude" data-i18n-ar="☀️ تأثير الحرارة والرطوبة والارتفاع">☀️ Chaleur, Humidité & Altitude</a>
-                        <a href="calculateur-gap-pente-nutrition.html" class="peps-dropdown-item" data-i18n-fr="⛰️ Allure Pente (GAP) & Nutrition" data-i18n-en="⛰️ Grade Adjusted Pace & Nutrition" data-i18n-ar="⛰️ إيقاع المنحدرات (GAP) والتغذية">⛰️ Allure Pente (GAP) & Nutrition</a>
-                        <a href="generateur-intermittent-hiit-cod.html" class="peps-dropdown-item" data-i18n-fr="🔄 Intermittent HIIT & COD 180°" data-i18n-en="🔄 HIIT Intermittent & 180° COD" data-i18n-ar="🔄 مولد التدريب المتقطع HIIT وتغيير الاتجاه">🔄 Intermittent HIIT & COD 180°</a>
-                        <a href="calculateur-charge-rpe-foster-acwr.html" class="peps-dropdown-item" data-i18n-fr="🛡️ Charge RPE Foster & ACWR" data-i18n-en="🛡️ Foster sRPE Load & ACWR Ratio" data-i18n-ar="🛡️ حمل التدريب (RPE Foster) ونسبة ACWR">🛡️ Charge RPE Foster & ACWR</a>
-                    </div>
-                </div>
-                <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
-            </div>
-            <div class="peps-nav-right">
-                <button type="button" class="peps-nav-toggle" id="pepsNavToggle" aria-label="Menu mobile">
-                    <span></span><span></span><span></span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- SCRIPT DU MENU & TRADUCTION DE LA NAVBAR -->
+<!-- Unified Canonique ProfEPS Navbar (Blog & Homepage Style) -->
+    
+    
     <!-- LOADING OVERLAY -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-spinner"></div>
@@ -2080,10 +2083,10 @@ footer.footer .footer-bottom {
             <h3 style="font-size:1.25rem; margin-top:1.5rem; margin-bottom:0.75rem; color:#006233;">3. Différenciation Pédagogique et Gestion des Grands Effectifs</h3>
             <p>L'hétérogénéité des classes marocaines (effectifs souvent compris entre 34 et 42 élèves par classe) impose une gestion spatiale et temporelle rigoureuse sur les installations sportives scolaires. L'utilisation de groupes de besoin ou de niveau, combinée à la responsabilisation systématique des élèves dispensés dans des rôles sociaux d'observateurs, de chronométreurs, de statisticiens, de juges ou d'arbitres, garantit un temps d'engagement moteur effectif optimal et une inclusion totale. Les documents générés via notre plateforme intègrent directement ces dimensions méthodologiques afin de vous faire gagner un temps précieux dans la tenue de votre cahier journal et de votre dossier pédagogique officiel.</p>
         </section>
-    </main>
+</main>
 
-    <!-- NOUVEAU FOOTER UNIFIÉ CANONIQUE 5 COLONNES -->
-    <footer class="footer" id="profeps-unified-footer">
+    <!-- FOOTER -->
+        <footer class="footer" id="profeps-unified-footer">
     <div class="footer-container">
       <div class="footer-grid">
         <div class="footer-brand" style="display:flex !important;flex-direction:column !important;align-items:flex-start !important;">
@@ -2116,15 +2119,16 @@ footer.footer .footer-bottom {
         </div>
 
         <div class="footer-col">
-          <h4 data-i18n-fr="PRÉPARATION CRMEF" data-i18n-en="CRMEF PREPARATION" data-i18n-ar="الاستعداد لمباراة التعليم">PRÉPARATION CRMEF</h4>
+          <h4 data-i18n-fr="RESSOURCES EPS" data-i18n-en="PE RESOURCES" data-i18n-ar="موارد التربية البدنية">RESSOURCES EPS</h4>
           <ul>
-            <li><a href="concours-crmef-hub.html" data-i18n-fr="🏛️ Hub National CRMEF" data-i18n-en="🏛️ National CRMEF Hub" data-i18n-ar="🏛️ بوابة مباريات التعليم">🏛️ Hub National CRMEF</a></li>
-            <li><a href="qcm-sciences-education-crmef.html" data-i18n-fr="📚 Tronc Commun (Sciences Éduc)" data-i18n-en="📚 Education Sciences" data-i18n-ar="📚 علوم التربية والديداكتيك">📚 Tronc Commun (Sciences Éduc)</a></li>
-            <li><a href="qcm-specialite-eps-maroc.html" data-i18n-fr="🏃 Spécialité EPS" data-i18n-en="🏃 PE Specialty" data-i18n-ar="🏃 تخصص التربية البدنية">🏃 Spécialité EPS</a></li>
-            <li><a href="qcm-didactique-eps-maroc.html" data-i18n-fr="⚡ Didactique EPS" data-i18n-en="⚡ PE Didactics" data-i18n-ar="⚡ ديداكتيك التربية البدنية">⚡ Didactique EPS</a></li>
-            <li><a href="concours-crmef-hub.html#discipline-eps" data-i18n-fr="🎯 Les 12 Spécialités CRMEF" data-i18n-en="🎯 All 12 CRMEF Specialties" data-i18n-ar="🎯 التخصصات الـ12 لمباراة التعليم">🎯 Les 12 Spécialités CRMEF</a></li>
+            <li><a href="cycles-eps-maroc.html" data-i18n-fr="Cycles d'EPS au Maroc" data-i18n-en="PE Cycles in Morocco" data-i18n-ar="أسلاك التربية البدنية بالمغرب">Cycles d'EPS au Maroc</a></li>
+            <li><a href="programme-eps-maroc.html" data-i18n-fr="Programme EPS Maroc" data-i18n-en="Morocco PE Curriculum" data-i18n-ar="برنامج التربية البدنية بالمغرب">Programme EPS Maroc</a></li>
+            <li><a href="evaluation-eps.html" data-i18n-fr="Évaluation en EPS" data-i18n-en="PE Assessment" data-i18n-ar="التقويم في التربية البدنية">Évaluation en EPS</a></li>
+            <li><a href="securite-eps.html" data-i18n-fr="Sécurité en EPS" data-i18n-en="Safety in PE" data-i18n-ar="السلامة في التربية البدنية">Sécurité en EPS</a></li>
+            <li><a href="bibliotheque-numerique-eps.html" data-i18n-fr="Bibliothèque numérique" data-i18n-en="Digital Library" data-i18n-ar="المكتبة الرقمية">Bibliothèque numérique</a></li>
           </ul>
         </div>
+
         <div class="footer-col" id="footer-col-calculators">
           <h4 data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</h4>
           <ul>
@@ -2160,7 +2164,6 @@ footer.footer .footer-bottom {
     </div>
   </footer>
 
-    <!-- SCRIPT DU GÉNÉRATEUR STRICTEMENT CONSERVÉ SANS MODIFICATION -->
     <script>
         // Variables globales
         let currentType = 'fiche';
@@ -2172,9 +2175,7 @@ footer.footer .footer-bottom {
 
         // Navbar scroll
         const navbar = document.getElementById('navbar');
-        if (navbar) {
-            window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
-        }
+        window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
 
         // Mobile menu
         const navToggle = document.getElementById('navToggle');
@@ -2182,7 +2183,6 @@ footer.footer .footer-bottom {
         const navBackdrop = document.getElementById('navBackdrop');
 
         function toggleMenu() {
-            if (!navMenu || !navToggle || !navBackdrop) return;
             navMenu.classList.toggle('active');
             navToggle.classList.toggle('active');
             navBackdrop.classList.toggle('active');
@@ -2190,31 +2190,24 @@ footer.footer .footer-bottom {
         }
 
         function closeMenu() {
-            if (!navMenu || !navToggle || !navBackdrop) return;
             navMenu.classList.remove('active');
             navToggle.classList.remove('active');
             navBackdrop.classList.remove('active');
             document.body.style.overflow = '';
         }
 
-        if (navToggle) navToggle.addEventListener('click', (e) => { e.stopPropagation(); toggleMenu(); });
-        if (navBackdrop) navBackdrop.addEventListener('click', closeMenu);
-        document.addEventListener('click', (e) => { 
-            if (navMenu && navToggle && !navMenu.contains(e.target) && !navToggle.contains(e.target)) closeMenu(); 
-        });
-        if (navMenu) {
-            navMenu.querySelectorAll('.nav-link, .nav-cta').forEach(link => link.addEventListener('click', closeMenu));
-        }
+        navToggle.addEventListener('click', (e) => { e.stopPropagation(); toggleMenu(); });
+        navBackdrop.addEventListener('click', closeMenu);
+        document.addEventListener('click', (e) => { if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) closeMenu(); });
+        navMenu.querySelectorAll('.nav-link, .nav-cta').forEach(link => link.addEventListener('click', closeMenu));
 
         // Optional toggle
         const optionalToggle = document.getElementById('optionalToggle');
         const optionalContent = document.getElementById('optionalContent');
-        if (optionalToggle && optionalContent) {
-            optionalToggle.addEventListener('click', () => {
-                optionalToggle.classList.toggle('open');
-                optionalContent.classList.toggle('show');
-            });
-        }
+        optionalToggle.addEventListener('click', () => {
+            optionalToggle.classList.toggle('open');
+            optionalContent.classList.toggle('show');
+        });
 
         // Récupérer les données du localStorage (venant de la page d'accueil)
         function loadFormDataFromStorage() {
@@ -2226,11 +2219,11 @@ footer.footer .footer-bottom {
                 localStorage.removeItem('profeps_formData');
                 
                 // Pré-remplir les champs communs
-                if (formData.niveau && document.getElementById('niveau')) document.getElementById('niveau').value = formData.niveau;
-                if (formData.aps && document.getElementById('aps')) document.getElementById('aps').value = formData.aps;
-                if (formData.nomProf && document.getElementById('nomProf')) document.getElementById('nomProf').value = formData.nomProf;
-                if (formData.etablissement && document.getElementById('etablissement')) document.getElementById('etablissement').value = formData.etablissement;
-                if (formData.anneeScolaire && document.getElementById('anneeScolaire')) document.getElementById('anneeScolaire').value = formData.anneeScolaire;
+                if (formData.niveau) document.getElementById('niveau').value = formData.niveau;
+                if (formData.aps) document.getElementById('aps').value = formData.aps;
+                if (formData.nomProf) document.getElementById('nomProf').value = formData.nomProf;
+                if (formData.etablissement) document.getElementById('etablissement').value = formData.etablissement;
+                if (formData.anneeScolaire) document.getElementById('anneeScolaire').value = formData.anneeScolaire;
                 
                 // Changer l'onglet actif selon le type
                 if (formData.type) {
@@ -2249,13 +2242,13 @@ footer.footer .footer-bottom {
                     
                     // Pré-remplir les champs spécifiques
                     if (currentType === 'fiche') {
-                        if (formData.objectif && document.getElementById('objectif')) document.getElementById('objectif').value = formData.objectif;
-                        if (formData.numeroSeance && document.getElementById('numeroSeance')) document.getElementById('numeroSeance').value = formData.numeroSeance;
+                        if (formData.objectif) document.getElementById('objectif').value = formData.objectif;
+                        if (formData.numeroSeance) document.getElementById('numeroSeance').value = formData.numeroSeance;
                     } else if (currentType === 'projet') {
-                        if (formData.niveauEleves && document.getElementById('niveauEleves')) document.getElementById('niveauEleves').value = formData.niveauEleves;
-                        if (formData.nombreSeances && document.getElementById('nombreSeances')) document.getElementById('nombreSeances').value = formData.nombreSeances;
+                        if (formData.niveauEleves) document.getElementById('niveauEleves').value = formData.niveauEleves;
+                        if (formData.nombreSeances) document.getElementById('nombreSeances').value = formData.nombreSeances;
                     } else if (currentType === 'grille') {
-                        if (formData.typeGrille && document.getElementById('typeGrille')) document.getElementById('typeGrille').value = formData.typeGrille;
+                        if (formData.typeGrille) document.getElementById('typeGrille').value = formData.typeGrille;
                     }
                 }
                 
@@ -2448,16 +2441,14 @@ footer.footer .footer-bottom {
                     }
 
                     // Save to user history (silent, non-blocking)
-                    if (typeof ProfEPS !== 'undefined' && ProfEPS && typeof ProfEPS.saveGeneration === 'function') {
-                        const typeLabels = { fiche: 'Fiche de Séance', grille: 'Grille', projet: 'Projet de Cycle' };
-                        ProfEPS.saveGeneration(
-                            currentType,
-                            formData.aps,
-                            formData.niveau,
-                            (typeLabels[currentType] || 'Document') + ' — ' + formData.aps + ' ' + formData.niveau,
-                            formData
-                        ).catch(err => console.log('Save generation error:', err));
-                    }
+                    const typeLabels = { fiche: 'Fiche de Séance', grille: 'Grille', projet: 'Projet de Cycle' };
+                    ProfEPS.saveGeneration(
+                        currentType,
+                        formData.aps,
+                        formData.niveau,
+                        (typeLabels[currentType] || 'Document') + ' — ' + formData.aps + ' ' + formData.niveau,
+                        formData
+                    ).catch(err => console.log('Save generation error:', err));
 
                     showSuccess('Document généré avec succès !');
                 } else {
@@ -2606,10 +2597,10 @@ footer.footer .footer-bottom {
 
                     clearInterval(progressInterval);
 
-                    const data = await resp.json();
-                    console.log('API response:', resp.status, data);
+                const data = await resp.json();
+                console.log('API response:', resp.status, data);
 
-                    if (data.success) {
+                if (data.success) {
                         projetCompletHtml = data.html;
                         projetCompletFilename = data.filename;
                     } else {
@@ -2691,7 +2682,46 @@ body{font-family:Calibri,Arial,sans-serif;font-size:9pt;padding:15px;width:${pag
 table{width:100%;border-collapse:collapse;margin-bottom:6px;table-layout:fixed;}
 th,td{border:1px solid #000;padding:4px 6px;vertical-align:top;word-wrap:break-word;}
 </style>
-</head><body>${pagesToRender[i]}</body></html>`;
+  
+</head><body>${pagesToRender[i]}
+<!-- PROFEPS CMP BANNER -->
+<div id="profeps-cmp-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#f8fafc;padding:16px 22px;border-top:1px solid #334155;z-index:999999;box-shadow:0 -10px 25px rgba(0,0,0,0.5);font-family:system-ui,-apple-system,sans-serif;">
+  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;">
+    <div style="flex:1 1 500px;font-size:13px;line-height:1.5;">
+      <strong style="color:#38bdf8;">🍪 Respect de votre vie privée</strong><br>
+      ProfEPS utilise des cookies essentiels au site ainsi que des cookies de mesure d'audience et Google AdSense pour maintenir nos outils gratuits. Vous pouvez personnaliser ou refuser à tout moment. <a href="politique-confidentialite.html" style="color:#38bdf8;text-decoration:underline;">Politique de confidentialité</a>.
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+      <button onclick="window.ProfEPS_CMP.open()" type="button" style="padding:7px 12px;background:#1e293b;color:#cbd5e1;border:1px solid #475569;border-radius:6px;font-size:12.5px;font-weight:600;cursor:pointer;">Personnaliser</button>
+      <button onclick="window.ProfEPS_CMP.rejectAll()" type="button" style="padding:7px 12px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:12.5px;font-weight:600;cursor:pointer;">Refuser</button>
+      <button onclick="window.ProfEPS_CMP.acceptAll()" type="button" style="padding:7px 16px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:12.5px;font-weight:700;cursor:pointer;">Tout accepter</button>
+    </div>
+  </div>
+</div>
+<!-- PROFEPS CMP MODAL -->
+<div id="profeps-cmp-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.85);backdrop-filter:blur(4px);z-index:1000000;align-items:center;justify-content:center;padding:16px;font-family:system-ui,-apple-system,sans-serif;">
+  <div style="background:#0f172a;border:1px solid #334155;border-radius:12px;max-width:540px;width:100%;padding:22px;color:#f8fafc;box-shadow:0 20px 40px rgba(0,0,0,0.6);">
+    <h3 style="margin-top:0;font-size:17px;color:#38bdf8;">⚙️ Préférences de Confidentialité & Cookies</h3>
+    <p style="font-size:12.5px;color:#94a3b8;line-height:1.5;">Gérez vos préférences. Les cookies techniques sont obligatoires pour les calculs.</p>
+    <div style="margin:12px 0;padding:10px;background:#1e293b;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
+      <span style="font-weight:600;font-size:13px;">Cookies techniques essentiels</span>
+      <span style="font-size:11px;color:#10b981;font-weight:bold;">Toujours actif</span>
+    </div>
+    <div style="margin:12px 0;padding:10px;background:#1e293b;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
+      <label for="cmp-opt-analytics" style="font-weight:600;font-size:13px;cursor:pointer;">Mesure d'audience anonyme (Analytics)</label>
+      <input type="checkbox" id="cmp-opt-analytics" checked style="width:17px;height:17px;cursor:pointer;">
+    </div>
+    <div style="margin:12px 0;padding:10px;background:#1e293b;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
+      <label for="cmp-opt-ads" style="font-weight:600;font-size:13px;cursor:pointer;">Publicités personnalisées (Google AdSense)</label>
+      <input type="checkbox" id="cmp-opt-ads" checked style="width:17px;height:17px;cursor:pointer;">
+    </div>
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:18px;">
+      <button onclick="document.getElementById('profeps-cmp-modal').style.display='none'" type="button" style="padding:7px 12px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:12px;cursor:pointer;">Fermer</button>
+      <button onclick="window.ProfEPS_CMP.saveCustom()" type="button" style="padding:7px 16px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:12.5px;font-weight:700;cursor:pointer;">Enregistrer mes choix</button>
+    </div>
+  </div>
+</div>
+</body></html>`;
                 
                 iframeDoc.open();
                 iframeDoc.write(pageHtml);
@@ -2717,15 +2747,14 @@ th,td{border:1px solid #000;padding:4px 6px;vertical-align:top;word-wrap:break-w
         }
     </script>
     
-    <!-- Supabase SDK & Profil Auto-Fill -->
+    <!-- Supabase SDK -->
     <script>
         // Auto-fill form fields from user profile
         (async function autoFillFromProfile() {
             try {
-                if (typeof ProfEPS === 'undefined' || !ProfEPS || typeof ProfEPS.getSupabase !== 'function') return;
                 const sb = ProfEPS.getSupabase();
                 const { data } = await sb.auth.getSession();
-                if (!data || !data.session) return;
+                if (!data.session) return;
 
                 const user = data.session.user;
                 const { data: profile } = await sb
@@ -2738,12 +2767,14 @@ th,td{border:1px solid #000;padding:4px 6px;vertical-align:top;word-wrap:break-w
                 const nom = profile?.nom || meta.nom || meta.full_name || '';
                 const etab = profile?.etablissement || meta.etablissement || '';
 
+                // Only fill if user hasn't already typed something
                 const nomField = document.getElementById('nomProf');
                 const etabField = document.getElementById('etablissement');
 
                 if (nomField && !nomField.value) nomField.value = nom;
                 if (etabField && !etabField.value) etabField.value = etab;
 
+                // Check URL params for pre-fill from "Regénérer" or template
                 const params = new URLSearchParams(window.location.search);
                 if (params.has('prefill')) {
                     try {
@@ -2759,6 +2790,7 @@ th,td{border:1px solid #000;padding:4px 6px;vertical-align:top;word-wrap:break-w
                         if (prefill.nomProf) { const el = document.getElementById('nomProf'); if (el) el.value = prefill.nomProf; }
                         if (prefill.etablissement) { const el = document.getElementById('etablissement'); if (el) el.value = prefill.etablissement; }
                         if (prefill.anneeScolaire) { const el = document.getElementById('anneeScolaire'); if (el) el.value = prefill.anneeScolaire; }
+                        // Switch to correct document type tab
                         if (prefill.typeDocument) {
                             const tabBtn = document.querySelector('[data-type="' + prefill.typeDocument + '"]');
                             if (tabBtn) tabBtn.click();
@@ -2770,6 +2802,10 @@ th,td{border:1px solid #000;padding:4px 6px;vertical-align:top;word-wrap:break-w
             }
         })();
     </script>
+
 </body>
 
 </html>
+
+
+

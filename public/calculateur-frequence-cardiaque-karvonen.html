@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calculateur Fréquence Cardiaque Karvonen | Prof EPS</title>
+  <title>Calculateur FC Max & Zones Karvonen | ProfEPS</title>
   <meta name="description" id="metaDesc" content="Déterminez votre FC Max, FC de réserve et vos 5 zones cibles d’entraînement avec la méthode Karvonen. Repères pour l’EPS." />
   <meta name="keywords" content="calculateur fréquence cardiaque karvonen, zone cardiaque course à pied, fc max tanaka, fréquence cardiaque de réserve, zones entrainement cardiaque eps" />
   <meta property="og:type" content="website" />
@@ -642,16 +642,12 @@ main > div.max-w-3xl select:focus {
   overflow: hidden !important;
 }
 .peps-cta-btn::after {
-  content: '→' !important;
-  font-size: 1.15rem !important;
-  font-weight: 900 !important;
-  margin-left: 0.25rem !important;
-  transition: transform 0.2s ease !important;
+  display: none !important;
+  content: none !important;
 }
 html[dir="rtl"] .peps-cta-btn::after {
-  content: '←' !important;
-  margin-left: 0 !important;
-  margin-right: 0.25rem !important;
+  display: none !important;
+  content: none !important;
 }
 .peps-cta-btn:hover {
   transform: translateY(-2.5px) scale(1.005) !important;
@@ -756,7 +752,9 @@ footer.footer .footer-stat-lbl {
   color: rgba(255, 255, 255, 0.55) !important;
 }
 #profeps-unified-footer .footer-col h4,
-footer.footer .footer-col h4 {
+#profeps-unified-footer .footer-col .footer-col-title,
+footer.footer .footer-col h4,
+footer.footer .footer-col .footer-col-title {
   font-size: 0.76rem !important;
   font-weight: 800 !important;
   text-transform: uppercase !important;
@@ -888,11 +886,12 @@ footer.footer .footer-bottom {
         <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:52px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
       </a>
       <div class="peps-nav-menu" id="pepsNavMenu">
-        <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
+        <a href="index.html" class="peps-nav-link" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
         <a href="generateur.html" class="peps-nav-link" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
         <div class="peps-dropdown" id="pepsCalcDropdown">
-          <a href="calculateur-frequence-cardiaque-karvonen.html" class="peps-nav-link active" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="Fréquence Cardiaque" data-i18n-en="Heart Rate (Karvonen)" data-i18n-ar="معدل نبضات القلب (Karvonen)"><span class="peps-dropdown-title">Fréquence Cardiaque</span></span><span class="peps-dropdown-caret">▾</span></a>
-          <div class="peps-dropdown-menu" id="pepsDropdownMenu">            <a href="hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub" data-i18n-fr="🧭 Hub de Tous les Calculateurs Sport" data-i18n-en="🧭 All Sports Calculators Hub" data-i18n-ar="🧭 بوابة جميع الحاسبات الرياضية">🧭 Hub de Tous les Calculateurs Sport</a>
+          <a href="calculateur-frequence-cardiaque-karvonen.html" class="peps-nav-link active" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="Fréquence Cardiaque" data-i18n-en="Heart Rate (Karvonen)" data-i18n-ar="معدل نبضات القلب (Karvonen)">Fréquence Cardiaque</span><span class="peps-dropdown-caret">▾</span></a>
+          <div class="peps-dropdown-menu" id="pepsDropdownMenu">
+            <a href="hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub" data-i18n-fr="🧭 Hub de Tous les Calculateurs Sport" data-i18n-en="🧭 All Sports Calculators Hub" data-i18n-ar="🧭 بوابة جميع الحاسبات الرياضية">🧭 Hub de Tous les Calculateurs Sport</a>
             <a href="calculateur-vma.html" class="peps-dropdown-item" data-i18n-fr="⚡ Calculateur VMA & Allures" data-i18n-en="⚡ MAS (VMA) & Paces Calculator" data-i18n-ar="⚡ حاسبة السرعة الهوائية القصوى (VMA)">⚡ Calculateur VMA & Allures</a>
             <a href="calculateur-vdot-asr-endurance.html" class="peps-dropdown-item" data-i18n-fr="🫁 Calculateur VO2 Max & VDOT" data-i18n-en="🫁 VO2 Max & VDOT Calculator" data-i18n-ar="🫁 حاسبة VO2 Max ومؤشر VDOT">🫁 Calculateur VO2 Max & VDOT</a>
             <a href="calculateur-asr-reserve-vitesse.html" class="peps-dropdown-item" data-i18n-fr="🚀 Réserve de Vitesse Anaérobie (ASR)" data-i18n-en="🚀 Anaerobic Speed Reserve (ASR)" data-i18n-ar="🚀 احتياطي السرعة اللاهوائية (ASR)">🚀 Réserve de Vitesse Anaérobie (ASR)</a>
@@ -905,7 +904,7 @@ footer.footer .footer-bottom {
             <a href="calculateur-charge-rpe-foster-acwr.html" class="peps-dropdown-item" data-i18n-fr="🛡️ Charge RPE Foster & ACWR" data-i18n-en="🛡️ Foster sRPE Load & ACWR Ratio" data-i18n-ar="🛡️ حمل التدريب (RPE Foster) ونسبة ACWR">🛡️ Charge RPE Foster & ACWR</a>
           </div>
         </div>
-        <a href="concours-crmef-hub.html" class="peps-nav-link" data-i18n-fr="Préparer Concours CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparer Concours CRMEF</a>
+        <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
       </div>
       <div class="peps-nav-right">
         <div dir="ltr" class="peps-lang-switch" aria-label="Sélecteur de langue">
@@ -1138,7 +1137,7 @@ footer.footer .footer-bottom {
         <div id="out-rest-diag" class="p-5 bg-slate-50 border-l-4 border-emerald-600 rounded-xl text-xs sm:text-sm text-slate-700 leading-relaxed space-y-2"></div>
 
         <div>
-          <p class="text-xs font-extrabold uppercase tracking-wider text-slate-800 mb-3" data-i18n-fr="Vos 5 Zones d'Entraînement Cardiaque (Formule Karvonen : FCR × % + FC Repos)" data-i18n-en="Your 5 Karvonen Heart Rate Zones (HRR × % + Resting HR)" data-i18n-ar="مناطق التدريب الخمس حسب طريقة كارفونين (HRR × % + نبض الراحة)" class="footer-col-title">Vos 5 Zones d'Entraînement Cardiaque (Formule Karvonen : FCR × % + FC Repos)</p>
+          <p class="text-xs font-extrabold uppercase tracking-wider text-slate-800 mb-3 footer-col-title" data-i18n-fr="Vos 5 Zones d'Entraînement Cardiaque (Formule Karvonen : FCR × % + FC Repos)" data-i18n-en="Your 5 Karvonen Heart Rate Zones (HRR × % + Resting HR)" data-i18n-ar="مناطق التدريب الخمس حسب طريقة كارفونين (HRR × % + نبض الراحة)">Vos 5 Zones d'Entraînement Cardiaque (Formule Karvonen : FCR × % + FC Repos)</p>
           <div id="zones-container" class="space-y-2.5"></div>
         </div>
       </div>
@@ -1221,30 +1220,32 @@ footer.footer .footer-bottom {
       </div>
     </div>
 
+
+
   
-
-
-    <!-- FICHE SCIENTIFIQUE & PÉDAGOGIQUE OFFICIELLE (959 MOTS MINIMUM) -->
-    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (959 MOTS MINIMUM) -->
-    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (959 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PÉDAGOGIQUE OFFICIELLE (1130 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1130 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1130 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1130 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1130 MOTS MINIMUM) -->
     <section class="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 mt-8" id="fiche-pedagogique-officielle" style="max-width:48rem;margin:2rem auto 0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:20px;padding:1.75rem;box-shadow:0 10px 28px -8px rgba(15,23,42,0.06);">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
         <div>
           <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-1">
-            <span class="text-red-700 font-bold">Cluster 1D · Cardiologie de l'Effort &amp; Réserve Cardiaque</span>
+            <span class="text-red-700 font-bold">Cluster 2A · Cardiologie de l’Exercice</span>
             <span aria-hidden="true">&middot;</span>
             <span style="color:#006233;font-weight:700;">Rédigé par Abdelkhalek ELBOUDANI (Prof d'EPS au Maroc)</span>
           </div>
           <h2 class="text-lg font-extrabold text-slate-900 tracking-tight flex items-center gap-2 m-0">
             <span style="font-size:1.15rem;">📖</span>
-            Calculateur Fréquence Cardiaque Karvonen &amp; Zones Cibles
+            Fréquence Cardiaque Karvonen &amp; Tanaka
           </h2>
         </div>
         <div class="flex items-center gap-2">
           <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md tabular-nums border border-emerald-200">
-            959 mots (Guide Approfondi)
+            1130 mots (Guide Approfondi)
           </span>
-          <button type="button" onclick="copierFichePedagogique()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors cursor-pointer border border-slate-200">
+          <button type="button" onclick="copierFichePedagogique()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors cursor-pointer border border-slate-200" title="Copier le guide officiel complet (1130 mots)">
             <span id="btn-copy-ico">📋</span>
             <span id="btn-copy-txt">Copier le guide complet</span>
           </button>
@@ -1258,45 +1259,45 @@ footer.footer .footer-bottom {
           Zone 2 : Interprétation Immédiate &amp; Barèmes Scolaires Marocains
         </h3>
         <p class="text-xs text-slate-700 leading-relaxed bg-amber-50/60 border border-amber-200/70 p-3.5 rounded-xl m-0">
-          La méthode Karvonen calibre l'effort sur la Réserve Cardiaque réelle disponible plutôt que sur la FC Max brute, offrant une précision physiologique inégalée pour piloter l'entraînement au cardiofréquencemètre.
+          La formule de Karvonen s'impose comme la référence médicale et sportive absolue pour le pilotage du cardiofréquencemètre en intégrant le niveau de forme via la fréquence cardiaque de repos.
         </p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1">
           
     <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
       <div>
-        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Zone 1 · Récupération Active</div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Zone 1 · Récupération Active / Régénération</div>
         <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">50–60% FCR</div>
       </div>
-      <div class="text-[11px] text-slate-600 leading-normal">Régénération post-effort, élimination des toxines, stimulation de la circulation sanguine sans fatigue.</div>
+      <div class="text-[11px] text-slate-600 leading-normal">Régénération post-compétition, retour au calme circulatoire, oxygénation tissulaire sans fatigue.</div>
     </div>
     <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
       <div>
-        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Zone 2 · Endurance Fondamentale</div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Zone 2 · Endurance Fondamentale / Brûlage Lipides</div>
         <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">60–70% FCR</div>
       </div>
-      <div class="text-[11px] text-slate-600 leading-normal">Zone reine de lipolyse, renforcement du système cardiovasculaire de base et habituation à l'effort prolongé.</div>
+      <div class="text-[11px] text-slate-600 leading-normal">Développement de la pompe cardiaque, angiogenèse capillaire et métabolisme des graisses.</div>
     </div>
     <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
       <div>
-        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Zone 3 · Aérobie Modérée / Tempo</div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Zone 3 · Tempo Aérobie / Allure Marathon</div>
         <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">70–80% FCR</div>
       </div>
-      <div class="text-[11px] text-slate-600 leading-normal">Développement de la capacité respiratoire, travail au seuil aérobie ventilatoire (SV1).</div>
+      <div class="text-[11px] text-slate-600 leading-normal">Rythme d’endurance active soutenable, renforcement de la capacité glycogénique.</div>
     </div>
     <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
       <div>
-        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Zone 4 · Seuil Anaérobie (SV2)</div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Zone 4 · Seuil Anaérobie / Résistance Dure</div>
         <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">80–90% FCR</div>
       </div>
-      <div class="text-[11px] text-slate-600 leading-normal">Zone d'effort soutenu intense, amélioration du recyclage des lactates musculaires.</div>
+      <div class="text-[11px] text-slate-600 leading-normal">Allure 10 km, équilibre lactique dynamique, respiration soutenue mais rythmée.</div>
     </div>
     <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
       <div>
-        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Zone 5 · Effort Maximal / PAM</div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Zone 5 · Puissance Cardiaque Maximale</div>
         <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">90–100% FCR</div>
       </div>
-      <div class="text-[11px] text-slate-600 leading-normal">Sollicitation extrême du myocarde, réservée aux fractions courtes d'intermittent et aux sprints.</div>
+      <div class="text-[11px] text-slate-600 leading-normal">Sollicitation extrême du myocarde et de la PAM, réservée aux séries courtes d'intermittent.</div>
     </div>
         </div>
       </div>
@@ -1306,7 +1307,7 @@ footer.footer .footer-bottom {
         <div class="flex items-center justify-between">
           <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
             <span style="color:#006233;">🏃</span>
-            Zone 3 : Application Didactique EPS Maroc &amp; Gestion de Classe (959 mots)
+            Zone 3 : Application Didactique EPS Maroc &amp; Gestion de Classe (1130 mots)
           </h3>
           <button type="button" onclick="toggleTexteIntegral()" id="btn-toggle-texte" class="text-xs font-bold text-blue-600 hover:text-blue-800 cursor-pointer">
             Afficher le texte complet ▼
@@ -1317,15 +1318,15 @@ footer.footer .footer-bottom {
           
     <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
       <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">1</span>
-      <p class="text-xs text-slate-700 leading-relaxed m-0">Mesurez avec précision votre Fréquence Cardiaque au Repos (FC Repos) dès le réveil au lit sur trois jours consécutifs.</p>
+      <p class="text-xs text-slate-700 leading-relaxed m-0">Mesurez votre Fréquence Cardiaque au Repos (FC Repos en battements par minute) le matin au réveil, allongé au calme avant tout effort et avant le café.</p>
     </div>
     <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
       <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">2</span>
-      <p class="text-xs text-slate-700 leading-relaxed m-0">Renseignez votre Fréquence Cardiaque Maximale (FC Max) mesurée lors d'un test d'effort maximal ou estimée par équation validée (Gellish ou Tanaka).</p>
+      <p class="text-xs text-slate-700 leading-relaxed m-0">Renseignez votre âge et votre FC Maximale réelle si elle a été mesurée lors d'un test maximal d'effort médical ou sur piste ; sinon, laissez le champ libre pour laisser le calculateur appliquer l'équation de Tanaka.</p>
     </div>
     <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
       <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">3</span>
-      <p class="text-xs text-slate-700 leading-relaxed m-0">Obtenez instantanément votre Fréquence Cardiaque de Réserve (FCR) et vos 5 zones d'entraînement cardiaques cibles rigoureusement individualisées.</p>
+      <p class="text-xs text-slate-700 leading-relaxed m-0">Générez instantanément votre Fréquence Cardiaque de Réserve (FCR) et vos cinq zones cardiaques d'entraînement individualisées.</p>
     </div>
         </div>
         
@@ -1333,43 +1334,55 @@ footer.footer .footer-bottom {
           <div style="font-weight:700;color:#006233;margin-bottom:0.75rem;padding-bottom:0.4rem;border-bottom:1px solid #cbd5e1;">
             Auteur : Abdelkhalek ELBOUDANI · Professeur d'Éducation Physique et Sportive (Maroc) · Conforme Orientations 2007-2009
           </div>
-I. Fondements Cardiovasculaires et Supériorité de la Méthode Karvonen
+I. Fondements Physiologiques du Suivi Cardiaque et Rôle de la Méthode Karvonen
 
-Introduite en 1957 par le médecin et physiologiste finlandais Dr Martti J. Karvonen, la formule de la Fréquence Cardiaque de Réserve constitue l'une des pierres angulaires de la cardiologie de l'exercice et de l'entraînement moderne. Trop souvent encore, des pratiquants et sportifs calculent leurs zones d'effort en appliquant de simples pourcentages de leur fréquence cardiaque maximale brute (par exemple : 70% de FC Max). Cette approche simpliste est physiologiquement erronée car elle méconnaît totalement la fréquence cardiaque au repos. Considérons deux individus ayant tous deux une FC Max de 190 battements par minute, mais dont le premier, très entraîné en endurance, possède une FC Repos de 45 bpm, tandis que le second, sédentaire, affiche une FC Repos de 75 bpm. À une intensité théorique de 70% de FC Max brute (soit 133 bpm), le premier athlète travaille à un niveau métabolique beaucoup plus élevé par rapport à son amplitude cardiaque utile que le second. La méthode Karvonen rétablit la justice physiologique en intégrant la Fréquence Cardiaque de Réserve (FCR), qui représente le réservoir réel de battements dont dispose le cœur entre son état d'inactivité complète et son plafonnement absolu.
+Dans toutes les disciplines sportives sollicitant l'appareil cardiorespiratoire, le cœur agit comme la pompe motrice centrale distribuant le dioxygène et les nutriments aux cellules musculaires tout en évacuant les métabolites acides et le dioxyde de carbone. L'usage du cardiofréquencemètre est devenu un outil universel pour les coureurs, cyclistes, triathlètes et élèves en EPS. Toutefois, une erreur méthodologique fréquente consiste à calculer ses zones d'entraînement en appliquant un pourcentage direct de sa Fréquence Cardiaque Maximale brute (par exemple courir à soixante-quinze pour cent de sa FC Max). Cette approche simpliste est scientifiquement inexacte car elle ignore totalement la Fréquence Cardiaque de Repos de l'individu. En 1957, le médecin et physiologiste finlandais Martti J. Karvonen a révolutionné la cardiologie de l'exercice en introduisant la notion de Fréquence Cardiaque de Réserve (FCR). Sa formule établit une relation mathématique étroite et directe entre le pourcentage de Fréquence Cardiaque de Réserve mobilisé et le pourcentage réel de consommation maximale d'oxygène (% VO2 Max), garantissant une justesse physiologique inégalée.
 
-II. Protocole Pratique de Prise de Données
+II. Guide d'Utilisation Étape par Étape
 
-Pour obtenir des zones cardiaques d'une exactitude chirurgicale, l'utilisateur doit respecter un protocole rigoureux de mesure :
-1. Mesure de la Fréquence Cardiaque au Repos (FC Repos) : La mesure doit être effectuée le matin immédiatement au réveil, avant d'avoir posé le pied par terre, d'avoir bu un café ou d'avoir consulté son téléphone. Utilisez une ceinture pectorale connectée ou posez délicatement vos doigts sur l'artère radiale pendant soixante secondes entières. Répétez la mesure pendant trois jours consécutifs et retenez la moyenne la plus basse. Une baisse progressive de la FC Repos au fil des mois est le marqueur indiscutable d'une hypertrophie bienfaisante des cavités cardiaques et d'un tonus vagal renforcé.
-2. Détermination de la Fréquence Cardiaque Maximale (FC Max) : La méthode idéale reste la mesure directe sur le terrain lors du dernier palier d'un test progressif VAMEVAL ou dans les 200 derniers mètres d'une côte courue à bloc après un échauffement complet. Si aucun test maximal n'est réalisable, le calculateur intègre l'équation moderne de Gellish (207 - 0,7 × âge), qui présente une précision bien supérieure à l'antique formule d'Astrand (220 - âge) dont la marge d'erreur chez les plus de 40 ans peut atteindre 15 bpm.
-3. Saisie dans l'outil : Indiquez votre FC Repos et votre FC Max dans les curseurs ou champs numériques.
-4. Génération immédiate des plages cibles : Le calculateur délivre instantanément votre Fréquence Cardiaque de Réserve ainsi que les cinq plages cibles en battements par minute pour paramétrer votre montre GPS cardiofréquencemètre.
+Pour déterminer vos zones cardiaques avec une exactitude clinique, suivez ces recommandations :
+1. Mesure rigoureuse de la FC de Repos : La Fréquence Cardiaque de Repos doit impérativement être mesurée dans un état de quiétude absolue. Le protocole optimal consiste à poser sa montre cardio ou sa ceinture thoracique le matin au réveil, en restant allongé sur le dos pendant trois à cinq minutes dans le calme sans regarder son téléphone ni avoir consommé de boisson stimulante. Relevez la valeur minimale stable en battements par minute (bpm).
+2. Évaluation de la FC Maximale : La valeur idéale provient d'un test maximal d'effort réel (en fin de test Demi-Cooper, de test VAMEVAL ou lors d'une ascension progressive en côte courue à bloc). Si vous n'avez pas de mesure récente de terrain, vous pouvez utiliser l'estimation automatique calculée selon la formule moderne de Tanaka.
+3. Renseignement des données dans le calculateur : Saisissez votre âge, votre FC Repos et votre FC Max dans les champs respectifs.
+4. Exploitation de la grille personnalisée : Le système génère instantanément vos cinq zones cardiaques cibles (Z1 à Z5), avec la fréquence cardiaque plancher et plafond exprimée en battements par minute pour chaque régime d'effort.
 
-III. Modélisation Mathématique de Karvonen
+III. Explication des Paramètres et Signification Médicale
 
-L'algorithme de calcul applique scrupuleusement la formule historique :
-1. Calcul de la Fréquence Cardiaque de Réserve :
-FCR = FC Max - FC Repos.
-Exemple concret : Pour un athlète ayant une FC Max de 185 bpm et une FC Repos de 50 bpm :
-FCR = 185 - 50 = 135 bpm de réserve utile.
-2. Calcul de la Fréquence Cardiaque Cible pour un pourcentage d'effort P :
-FC Cible (bpm) = FC Repos + (P / 100) × FCR.
-Si l'on cherche la fréquence cible à 70% de réserve pour cet athlète :
-FC Cible = 50 + (0,70 × 135) = 50 + 94,5 = 144,5 (arrondi à 145 bpm).
-Par comparaison, le calcul simpliste (70% de 185) aurait donné 129,5 bpm, soit un écart massif de 15 battements par minute qui aurait placé l'athlète en sous-régime complet.
+Les trois variables requises par le calculateur possèdent une signification cardiologique majeure :
+- L'âge (en années) : La fréquence cardiaque maximale diminue inéluctablement avec l'avancée en âge, en raison de modifications intrinsèques du nœud sinusal et d'une moindre sensibilité aux catécholamines.
+- La Fréquence Cardiaque de Repos (bpm) : C'est le marqueur par excellence de la forme parasympathique et du volume d'éjection systolique. Chez un sujet sédentaire, elle se situe entre 70 et 85 bpm. Chez un athlète d'endurance très entraîné dont le ventricule gauche est hypertrophié et plus compliant, elle peut descendre entre 38 et 48 bpm sans la moindre anomalie pathologique.
+- La Fréquence Cardiaque Maximale (bpm) : Elle représente le plafond de contraction du myocarde au-delà duquel le temps de remplissage diastolique devient insuffisant pour maintenir le débit cardiaque.
 
-IV. Description Détaillée des 5 Zones d'Entraînement Karvonen
+IV. Relations Mathématiques et Formules Scientifiques
 
-Le découpage en cinq zones physiologiques permet de structurer harmonieusement la semaine d'entraînement :
-- Zone 1 · Récupération Active et Échauffement (50% à 60% FCR) : L'effort est très doux, sans aucune dette d'oxygène. Cette zone facilite le drainage des lactates après une compétition rude, stimule le retour veineux et habitue l'appareil locomoteur sans créer de stress sur le système nerveux autonome.
-- Zone 2 · Endurance Fondamentale / Base Aérobie (60% à 70% FCR) : C'est la zone maîtresse de tout sportif d'endurance. À ce rythme, le corps utilise principalement les lipides comme carburant via la bêta-oxydation. Cette allure doit représenter 70 à 80% du kilométrage hebdomadaire pour bâtir un réseau de capillaires dense et accroître le volume d'éjection systolique du cœur.
-- Zone 3 · Tempo / Seuil Aérobie (70% à 80% FCR) : La respiration s'accélère modérément mais reste parfaitement contrôlée. On entre dans la zone de transition aérobie où le débit de glucose devient prépondérant. Idéale pour les sorties au train et l'allure marathon.
-- Zone 4 · Seuil Anaérobie / Résistance Dure (80% à 90% FCR) : Le souffle devient court, la parole est difficile et le taux de lactate sanguin augmente pour flirter avec la zone de non-retour métabolique. Travaillée sous forme de fractions de 6 à 15 minutes, cette zone repousse le seuil de tolérance à la fatigue.
-- Zone 5 · Puissance Cardiaque Maximale (90% à 100% FCR) : Réservée aux sprints finaux et au travail fractionné court de type 30&quot;/30&quot;, cette zone sollicite le cœur à son débit d'éjection maximal.
+Le calculateur applique les modélisations cardiologiques les plus éprouvées :
+1. Estimation de la FC Max selon Tanaka (2001) : La formule historique d'Astrand (220 − Âge) élaborée dans les années 1970 est aujourd'hui reconnue comme sous-estimant la FC Max des personnes de plus de quarante ans. La méta-analyse moderne du Dr Hirofumi Tanaka portant sur des milliers de sujets valide l'équation :
+FC Max (en bpm) = 208 − (0,7 × Âge).
+2. Calcul de la Fréquence Cardiaque de Réserve (FCR) :
+FCR = FC Max − FC Repos.
+La FCR représente la plage de battements réellement utilisable par l'organisme entre la survie au repos et l'effort paroxystique.
+3. Équation fondamentale de Karvonen :
+FC Cible (en bpm) = FC Repos + [(%Intensité visé / 100) × FCR].
+Démonstration mathématique de la supériorité de Karvonen :
+Soit deux personnes de 40 ans ayant une FC Max identique de 180 bpm. L'un est sédentaire avec une FC Repos de 80 bpm (FCR = 100 bpm). L'autre est athlète avec une FC Repos de 40 bpm (FCR = 140 bpm).
+Si l'on cherche une intensité d'endurance de base à 70% :
+- Selon le simple % de FC Max : Les deux devraient courir à 0,70 × 180 = 126 bpm.
+- Selon Karvonen pour le sédentaire : 80 + (0,70 × 100) = 150 bpm.
+- Selon Karvonen pour l'athlète : 40 + (0,70 × 140) = 138 bpm.
+La formule Karvonen tient compte du fait que l'amplitude cardiaque disponible chez l'athlète est bien plus vaste.
 
-V. Recommandations Pédagogiques et Pièges à Éviter
+V. Description et Rôle des Cinq Zones d'Entraînement Karvonen
 
-En milieu scolaire et en coaching sportif, il convient d'enseigner aux pratiquants la dérive cardiaque (cardiac drift) : par forte chaleur ou en cas de déshydratation, la fréquence cardiaque a tendance à augmenter progressivement au cours de la séance alors même que l'allure de course reste constante. Pour compenser la baisse du volume plasmatique sanguin, le cœur doit battre plus vite pour maintenir le même débit. L'athlète instruit doit donc savoir ralentir légèrement son allure pour rester dans sa plage cible Karvonen.
+Le calculateur segmente la charge cardiaque en cinq zones physiologiques distinctes :
+- Zone 1 · Récupération Active (50% à 60% FCR) : Effort très doux. Idéal pour stimuler la circulation sanguine sans créer de fatigue, favoriser l'élimination des toxines musculaires au lendemain d'une épreuve et régénérer le système nerveux autonome.
+- Zone 2 · Endurance Fondamentale (60% à 70% FCR) : C'est la zone reine où l'athlète d'endurance doit passer entre soixante-dix et quatre-vingts pour cent de son temps d'entraînement total. À cette intensité, le corps optimise la prolifération des mitochondries, améliore la capillarisation musculaire et utilise majoritairement les triglycérides intramusculaires comme source d'énergie.
+- Zone 3 · Tempo Aérobie / Allure Marathon (70% à 80% FCR) : Allure de travail dynamique. La respiration devient plus profonde, la consommation de glycogène musculaire s'intensifie. Elle prépare le système cardiovasculaire à maintenir un débit cardiaque élevé sur la durée.
+- Zone 4 · Seuil Anaérobie (80% à 90% FCR) : Zone de haute intensité correspondant à l'allure d'un dix kilomètres de compétition. Le taux d'acide lactique produit égale le taux d'acide lactique éliminé par le foie et les fibres lentes. L'entraînement dans cette zone repousse l'apparition de l'asphyxie musculaire.
+- Zone 5 · Puissance Cardiaque Maximale (90% à 100% FCR) : Sollicitation extrême de la machinerie cardiorespiratoire. Elle est utilisée exclusivement lors de répétitions courtes de fractionné (trente secondes à deux minutes) pour booster le VO2 Max.
+
+VI. Précautions et Facteurs d'Influence sur la Fréquence Cardiaque
+
+L'utilisateur de cardiofréquencemètre doit garder à l'esprit que la fréquence cardiaque n'est pas insensible aux éléments extérieurs. La chaleur, l'humidité et la déshydratation provoquent une dérive cardiaque naturelle (élévation de 10 à 15 bpm pour une vitesse constante en raison de la baisse du volume plasmatique). De même, le manque de sommeil, le stress psychologique, l'altitude et la caféine majorent la fréquence cardiaque. En EPS et en préparation physique, croiser la fréquence cardiaque avec l'allure de course et le ressenti d'effort (RPE) offre la garantie d'un entraînement intelligent et protecteur de la santé.
         </div>
       </div>
 
@@ -1382,20 +1395,24 @@ En milieu scolaire et en coaching sportif, il convient d'enseigner aux pratiquan
         <div class="p-4 bg-slate-900 text-white rounded-xl space-y-2 border border-slate-800 shadow-inner">
           
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
-      <span class="text-slate-400 font-medium">Fréquence Cardiaque de Réserve (FCR) :</span>
-      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">FCR = FC Max - FC Repos</code>
+      <span class="text-slate-400 font-medium">Formule de Tanaka (FC Max estimée moderne) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">FC Max (bpm) = 208 − (0,7 × Âge)</code>
     </div>
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
-      <span class="text-slate-400 font-medium">Formule maîtresse de Karvonen :</span>
-      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">FC Cible = FC Repos + (%Intensité × FCR / 100)</code>
+      <span class="text-slate-400 font-medium">Formule d’Astrand classique (FC Max historique) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Hommes : 220 − Âge | Femmes : 226 − Âge</code>
     </div>
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
-      <span class="text-slate-400 font-medium">Estimation FC Max selon Gellish (recommandée) :</span>
-      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">FC Max = 207 - (0,7 × Âge)</code>
+      <span class="text-slate-400 font-medium">Fréquence Cardiaque de Réserve utile (FCR) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">FCR (bpm) = FC Max − FC Repos</code>
     </div>
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
-      <span class="text-slate-400 font-medium">Estimation FC Max classique (Astrand) :</span>
-      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">FC Max = 220 - Âge</code>
+      <span class="text-slate-400 font-medium">Formule universelle de Karvonen (FC Cible) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">FC Cible = FC Repos + (%Intensité / 100 × FCR)</code>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Indice de Réserve Cardiaque Résiduelle :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">%FCR = (FC Mesurée − FC Repos) / (FC Max − FC Repos) × 100</code>
     </div>
         </div>
       </div>
@@ -1417,13 +1434,13 @@ En milieu scolaire et en coaching sportif, il convient d'enseigner aux pratiquan
       }
 
       function copierFichePedagogique() {
-        var texte = "I. Fondements Cardiovasculaires et Supériorité de la Méthode Karvonen\n\nIntroduite en 1957 par le médecin et physiologiste finlandais Dr Martti J. Karvonen, la formule de la Fréquence Cardiaque de Réserve constitue l'une des pierres angulaires de la cardiologie de l'exercice et de l'entraînement moderne. Trop souvent encore, des pratiquants et sportifs calculent leurs zones d'effort en appliquant de simples pourcentages de leur fréquence cardiaque maximale brute (par exemple : 70% de FC Max). Cette approche simpliste est physiologiquement erronée car elle méconnaît totalement la fréquence cardiaque au repos. Considérons deux individus ayant tous deux une FC Max de 190 battements par minute, mais dont le premier, très entraîné en endurance, possède une FC Repos de 45 bpm, tandis que le second, sédentaire, affiche une FC Repos de 75 bpm. À une intensité théorique de 70% de FC Max brute (soit 133 bpm), le premier athlète travaille à un niveau métabolique beaucoup plus élevé par rapport à son amplitude cardiaque utile que le second. La méthode Karvonen rétablit la justice physiologique en intégrant la Fréquence Cardiaque de Réserve (FCR), qui représente le réservoir réel de battements dont dispose le cœur entre son état d'inactivité complète et son plafonnement absolu.\n\nII. Protocole Pratique de Prise de Données\n\nPour obtenir des zones cardiaques d'une exactitude chirurgicale, l'utilisateur doit respecter un protocole rigoureux de mesure :\n1. Mesure de la Fréquence Cardiaque au Repos (FC Repos) : La mesure doit être effectuée le matin immédiatement au réveil, avant d'avoir posé le pied par terre, d'avoir bu un café ou d'avoir consulté son téléphone. Utilisez une ceinture pectorale connectée ou posez délicatement vos doigts sur l'artère radiale pendant soixante secondes entières. Répétez la mesure pendant trois jours consécutifs et retenez la moyenne la plus basse. Une baisse progressive de la FC Repos au fil des mois est le marqueur indiscutable d'une hypertrophie bienfaisante des cavités cardiaques et d'un tonus vagal renforcé.\n2. Détermination de la Fréquence Cardiaque Maximale (FC Max) : La méthode idéale reste la mesure directe sur le terrain lors du dernier palier d'un test progressif VAMEVAL ou dans les 200 derniers mètres d'une côte courue à bloc après un échauffement complet. Si aucun test maximal n'est réalisable, le calculateur intègre l'équation moderne de Gellish (207 - 0,7 × âge), qui présente une précision bien supérieure à l'antique formule d'Astrand (220 - âge) dont la marge d'erreur chez les plus de 40 ans peut atteindre 15 bpm.\n3. Saisie dans l'outil : Indiquez votre FC Repos et votre FC Max dans les curseurs ou champs numériques.\n4. Génération immédiate des plages cibles : Le calculateur délivre instantanément votre Fréquence Cardiaque de Réserve ainsi que les cinq plages cibles en battements par minute pour paramétrer votre montre GPS cardiofréquencemètre.\n\nIII. Modélisation Mathématique de Karvonen\n\nL'algorithme de calcul applique scrupuleusement la formule historique :\n1. Calcul de la Fréquence Cardiaque de Réserve :\nFCR = FC Max - FC Repos.\nExemple concret : Pour un athlète ayant une FC Max de 185 bpm et une FC Repos de 50 bpm :\nFCR = 185 - 50 = 135 bpm de réserve utile.\n2. Calcul de la Fréquence Cardiaque Cible pour un pourcentage d'effort P :\nFC Cible (bpm) = FC Repos + (P / 100) × FCR.\nSi l'on cherche la fréquence cible à 70% de réserve pour cet athlète :\nFC Cible = 50 + (0,70 × 135) = 50 + 94,5 = 144,5 (arrondi à 145 bpm).\nPar comparaison, le calcul simpliste (70% de 185) aurait donné 129,5 bpm, soit un écart massif de 15 battements par minute qui aurait placé l'athlète en sous-régime complet.\n\nIV. Description Détaillée des 5 Zones d'Entraînement Karvonen\n\nLe découpage en cinq zones physiologiques permet de structurer harmonieusement la semaine d'entraînement :\n- Zone 1 · Récupération Active et Échauffement (50% à 60% FCR) : L'effort est très doux, sans aucune dette d'oxygène. Cette zone facilite le drainage des lactates après une compétition rude, stimule le retour veineux et habitue l'appareil locomoteur sans créer de stress sur le système nerveux autonome.\n- Zone 2 · Endurance Fondamentale / Base Aérobie (60% à 70% FCR) : C'est la zone maîtresse de tout sportif d'endurance. À ce rythme, le corps utilise principalement les lipides comme carburant via la bêta-oxydation. Cette allure doit représenter 70 à 80% du kilométrage hebdomadaire pour bâtir un réseau de capillaires dense et accroître le volume d'éjection systolique du cœur.\n- Zone 3 · Tempo / Seuil Aérobie (70% à 80% FCR) : La respiration s'accélère modérément mais reste parfaitement contrôlée. On entre dans la zone de transition aérobie où le débit de glucose devient prépondérant. Idéale pour les sorties au train et l'allure marathon.\n- Zone 4 · Seuil Anaérobie / Résistance Dure (80% à 90% FCR) : Le souffle devient court, la parole est difficile et le taux de lactate sanguin augmente pour flirter avec la zone de non-retour métabolique. Travaillée sous forme de fractions de 6 à 15 minutes, cette zone repousse le seuil de tolérance à la fatigue.\n- Zone 5 · Puissance Cardiaque Maximale (90% à 100% FCR) : Réservée aux sprints finaux et au travail fractionné court de type 30\"/30\", cette zone sollicite le cœur à son débit d'éjection maximal.\n\nV. Recommandations Pédagogiques et Pièges à Éviter\n\nEn milieu scolaire et en coaching sportif, il convient d'enseigner aux pratiquants la dérive cardiaque (cardiac drift) : par forte chaleur ou en cas de déshydratation, la fréquence cardiaque a tendance à augmenter progressivement au cours de la séance alors même que l'allure de course reste constante. Pour compenser la baisse du volume plasmatique sanguin, le cœur doit battre plus vite pour maintenir le même débit. L'athlète instruit doit donc savoir ralentir légèrement son allure pour rester dans sa plage cible Karvonen.";
+        var texte = "I. Fondements Physiologiques du Suivi Cardiaque et Rôle de la Méthode Karvonen\n\nDans toutes les disciplines sportives sollicitant l'appareil cardiorespiratoire, le cœur agit comme la pompe motrice centrale distribuant le dioxygène et les nutriments aux cellules musculaires tout en évacuant les métabolites acides et le dioxyde de carbone. L'usage du cardiofréquencemètre est devenu un outil universel pour les coureurs, cyclistes, triathlètes et élèves en EPS. Toutefois, une erreur méthodologique fréquente consiste à calculer ses zones d'entraînement en appliquant un pourcentage direct de sa Fréquence Cardiaque Maximale brute (par exemple courir à soixante-quinze pour cent de sa FC Max). Cette approche simpliste est scientifiquement inexacte car elle ignore totalement la Fréquence Cardiaque de Repos de l'individu. En 1957, le médecin et physiologiste finlandais Martti J. Karvonen a révolutionné la cardiologie de l'exercice en introduisant la notion de Fréquence Cardiaque de Réserve (FCR). Sa formule établit une relation mathématique étroite et directe entre le pourcentage de Fréquence Cardiaque de Réserve mobilisé et le pourcentage réel de consommation maximale d'oxygène (% VO2 Max), garantissant une justesse physiologique inégalée.\n\nII. Guide d'Utilisation Étape par Étape\n\nPour déterminer vos zones cardiaques avec une exactitude clinique, suivez ces recommandations :\n1. Mesure rigoureuse de la FC de Repos : La Fréquence Cardiaque de Repos doit impérativement être mesurée dans un état de quiétude absolue. Le protocole optimal consiste à poser sa montre cardio ou sa ceinture thoracique le matin au réveil, en restant allongé sur le dos pendant trois à cinq minutes dans le calme sans regarder son téléphone ni avoir consommé de boisson stimulante. Relevez la valeur minimale stable en battements par minute (bpm).\n2. Évaluation de la FC Maximale : La valeur idéale provient d'un test maximal d'effort réel (en fin de test Demi-Cooper, de test VAMEVAL ou lors d'une ascension progressive en côte courue à bloc). Si vous n'avez pas de mesure récente de terrain, vous pouvez utiliser l'estimation automatique calculée selon la formule moderne de Tanaka.\n3. Renseignement des données dans le calculateur : Saisissez votre âge, votre FC Repos et votre FC Max dans les champs respectifs.\n4. Exploitation de la grille personnalisée : Le système génère instantanément vos cinq zones cardiaques cibles (Z1 à Z5), avec la fréquence cardiaque plancher et plafond exprimée en battements par minute pour chaque régime d'effort.\n\nIII. Explication des Paramètres et Signification Médicale\n\nLes trois variables requises par le calculateur possèdent une signification cardiologique majeure :\n- L'âge (en années) : La fréquence cardiaque maximale diminue inéluctablement avec l'avancée en âge, en raison de modifications intrinsèques du nœud sinusal et d'une moindre sensibilité aux catécholamines.\n- La Fréquence Cardiaque de Repos (bpm) : C'est le marqueur par excellence de la forme parasympathique et du volume d'éjection systolique. Chez un sujet sédentaire, elle se situe entre 70 et 85 bpm. Chez un athlète d'endurance très entraîné dont le ventricule gauche est hypertrophié et plus compliant, elle peut descendre entre 38 et 48 bpm sans la moindre anomalie pathologique.\n- La Fréquence Cardiaque Maximale (bpm) : Elle représente le plafond de contraction du myocarde au-delà duquel le temps de remplissage diastolique devient insuffisant pour maintenir le débit cardiaque.\n\nIV. Relations Mathématiques et Formules Scientifiques\n\nLe calculateur applique les modélisations cardiologiques les plus éprouvées :\n1. Estimation de la FC Max selon Tanaka (2001) : La formule historique d'Astrand (220 − Âge) élaborée dans les années 1970 est aujourd'hui reconnue comme sous-estimant la FC Max des personnes de plus de quarante ans. La méta-analyse moderne du Dr Hirofumi Tanaka portant sur des milliers de sujets valide l'équation :\nFC Max (en bpm) = 208 − (0,7 × Âge).\n2. Calcul de la Fréquence Cardiaque de Réserve (FCR) :\nFCR = FC Max − FC Repos.\nLa FCR représente la plage de battements réellement utilisable par l'organisme entre la survie au repos et l'effort paroxystique.\n3. Équation fondamentale de Karvonen :\nFC Cible (en bpm) = FC Repos + [(%Intensité visé / 100) × FCR].\nDémonstration mathématique de la supériorité de Karvonen :\nSoit deux personnes de 40 ans ayant une FC Max identique de 180 bpm. L'un est sédentaire avec une FC Repos de 80 bpm (FCR = 100 bpm). L'autre est athlète avec une FC Repos de 40 bpm (FCR = 140 bpm).\nSi l'on cherche une intensité d'endurance de base à 70% :\n- Selon le simple % de FC Max : Les deux devraient courir à 0,70 × 180 = 126 bpm.\n- Selon Karvonen pour le sédentaire : 80 + (0,70 × 100) = 150 bpm.\n- Selon Karvonen pour l'athlète : 40 + (0,70 × 140) = 138 bpm.\nLa formule Karvonen tient compte du fait que l'amplitude cardiaque disponible chez l'athlète est bien plus vaste.\n\nV. Description et Rôle des Cinq Zones d'Entraînement Karvonen\n\nLe calculateur segmente la charge cardiaque en cinq zones physiologiques distinctes :\n- Zone 1 · Récupération Active (50% à 60% FCR) : Effort très doux. Idéal pour stimuler la circulation sanguine sans créer de fatigue, favoriser l'élimination des toxines musculaires au lendemain d'une épreuve et régénérer le système nerveux autonome.\n- Zone 2 · Endurance Fondamentale (60% à 70% FCR) : C'est la zone reine où l'athlète d'endurance doit passer entre soixante-dix et quatre-vingts pour cent de son temps d'entraînement total. À cette intensité, le corps optimise la prolifération des mitochondries, améliore la capillarisation musculaire et utilise majoritairement les triglycérides intramusculaires comme source d'énergie.\n- Zone 3 · Tempo Aérobie / Allure Marathon (70% à 80% FCR) : Allure de travail dynamique. La respiration devient plus profonde, la consommation de glycogène musculaire s'intensifie. Elle prépare le système cardiovasculaire à maintenir un débit cardiaque élevé sur la durée.\n- Zone 4 · Seuil Anaérobie (80% à 90% FCR) : Zone de haute intensité correspondant à l'allure d'un dix kilomètres de compétition. Le taux d'acide lactique produit égale le taux d'acide lactique éliminé par le foie et les fibres lentes. L'entraînement dans cette zone repousse l'apparition de l'asphyxie musculaire.\n- Zone 5 · Puissance Cardiaque Maximale (90% à 100% FCR) : Sollicitation extrême de la machinerie cardiorespiratoire. Elle est utilisée exclusivement lors de répétitions courtes de fractionné (trente secondes à deux minutes) pour booster le VO2 Max.\n\nVI. Précautions et Facteurs d'Influence sur la Fréquence Cardiaque\n\nL'utilisateur de cardiofréquencemètre doit garder à l'esprit que la fréquence cardiaque n'est pas insensible aux éléments extérieurs. La chaleur, l'humidité et la déshydratation provoquent une dérive cardiaque naturelle (élévation de 10 à 15 bpm pour une vitesse constante en raison de la baisse du volume plasmatique). De même, le manque de sommeil, le stress psychologique, l'altitude et la caféine majorent la fréquence cardiaque. En EPS et en préparation physique, croiser la fréquence cardiaque avec l'allure de course et le ressenti d'effort (RPE) offre la garantie d'un entraînement intelligent et protecteur de la santé.";
         navigator.clipboard.writeText(texte).then(function() {
           var ico = document.getElementById('btn-copy-ico');
           var txt = document.getElementById('btn-copy-txt');
           if (ico && txt) {
             ico.textContent = '✓';
-            txt.textContent = 'Guide copié (959 mots) !';
+            txt.textContent = 'Guide copié (1130 mots) !';
             setTimeout(function() {
               ico.textContent = '📋';
               txt.textContent = 'Copier le guide complet';
@@ -1432,6 +1449,7 @@ En milieu scolaire et en coaching sportif, il convient d'enseigner aux pratiquan
         });
       }
     </script>
+  
   </main>
 
   <footer class="footer" id="profeps-unified-footer">
@@ -1457,7 +1475,7 @@ En milieu scolaire et en coaching sportif, il convient d'enseigner aux pratiquan
         </div>
 
         <div class="footer-col">
-          <h4 data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</h4>
+          <p class="footer-col-title" data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</p>
           <ul>
             <li><a href="index.html" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a></li>
             <li><a href="generateur.html" data-i18n-fr="Générateur PDF" data-i18n-en="PDF Generator" data-i18n-ar="مولد ملفات PDF">Générateur PDF</a></li>
@@ -1467,17 +1485,18 @@ En milieu scolaire et en coaching sportif, il convient d'enseigner aux pratiquan
         </div>
 
         <div class="footer-col">
-          <h4 data-i18n-fr="PRÉPARATION CRMEF" data-i18n-en="CRMEF PREPARATION" data-i18n-ar="الاستعداد لمباراة التعليم">PRÉPARATION CRMEF</h4>
+          <p class="footer-col-title" data-i18n-fr="RESSOURCES EPS" data-i18n-en="PE RESOURCES" data-i18n-ar="موارد التربية البدنية">RESSOURCES EPS</p>
           <ul>
-            <li><a href="concours-crmef-hub.html" data-i18n-fr="🏛️ Hub National CRMEF" data-i18n-en="🏛️ National CRMEF Hub" data-i18n-ar="🏛️ بوابة مباريات التعليم">🏛️ Hub National CRMEF</a></li>
-            <li><a href="qcm-sciences-education-crmef.html" data-i18n-fr="📚 Tronc Commun (Sciences Éduc)" data-i18n-en="📚 Education Sciences" data-i18n-ar="📚 علوم التربية والديداكتيك">📚 Tronc Commun (Sciences Éduc)</a></li>
-            <li><a href="qcm-specialite-eps-maroc.html" data-i18n-fr="🏃 Spécialité EPS" data-i18n-en="🏃 PE Specialty" data-i18n-ar="🏃 تخصص التربية البدنية">🏃 Spécialité EPS</a></li>
-            <li><a href="qcm-didactique-eps-maroc.html" data-i18n-fr="⚡ Didactique EPS" data-i18n-en="⚡ PE Didactics" data-i18n-ar="⚡ ديداكتيك التربية البدنية">⚡ Didactique EPS</a></li>
-            <li><a href="concours-crmef-hub.html#discipline-eps" data-i18n-fr="🎯 Les 12 Spécialités CRMEF" data-i18n-en="🎯 All 12 CRMEF Specialties" data-i18n-ar="🎯 التخصصات الـ12 لمباراة التعليم">🎯 Les 12 Spécialités CRMEF</a></li>
+            <li><a href="cycles-eps-maroc.html" data-i18n-fr="Cycles d'EPS au Maroc" data-i18n-en="PE Cycles in Morocco" data-i18n-ar="أسلاك التربية البدنية بالمغرب">Cycles d'EPS au Maroc</a></li>
+            <li><a href="programme-eps-maroc.html" data-i18n-fr="Programme EPS Maroc" data-i18n-en="Morocco PE Curriculum" data-i18n-ar="برنامج التربية البدنية بالمغرب">Programme EPS Maroc</a></li>
+            <li><a href="evaluation-eps.html" data-i18n-fr="Évaluation en EPS" data-i18n-en="PE Assessment" data-i18n-ar="التقويم في التربية البدنية">Évaluation en EPS</a></li>
+            <li><a href="securite-eps.html" data-i18n-fr="Sécurité en EPS" data-i18n-en="Safety in PE" data-i18n-ar="السلامة في التربية البدنية">Sécurité en EPS</a></li>
+            <li><a href="bibliotheque-numerique-eps.html" data-i18n-fr="Bibliothèque numérique" data-i18n-en="Digital Library" data-i18n-ar="المكتبة الرقمية">Bibliothèque numérique</a></li>
           </ul>
         </div>
+
         <div class="footer-col" id="footer-col-calculators">
-          <h4 data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</h4>
+          <p class="footer-col-title" data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</p>
           <ul>
             <li><a href="hub-outils-sport-performance.html" class="footer-hub-highlight" data-i18n-fr="★ Hub des Calculateurs Sport" data-i18n-en="★ All Sports Calculators Hub" data-i18n-ar="★ بوابة جميع الحاسبات الرياضية">★ Hub des Calculateurs Sport</a></li>
             <li><a href="calculateur-vma.html" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS (VMA) Calculator" data-i18n-ar="حاسبة السرعة الهوائية VMA">Calculateur VMA</a></li>
@@ -1494,7 +1513,7 @@ En milieu scolaire et en coaching sportif, il convient d'enseigner aux pratiquan
         </div>
 
         <div class="footer-col">
-          <h4 data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</h4>
+          <p class="footer-col-title" data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</p>
           <ul>
             <li><a href="politique-confidentialite.html" data-i18n-fr="Politique de confidentialité" data-i18n-en="Privacy Policy" data-i18n-ar="سياسة الخصوصية">Politique de confidentialité</a></li>
             <li><a href="cgu.html" data-i18n-fr="Conditions d'utilisation" data-i18n-en="Terms of Use" data-i18n-ar="شروط الاستخدام">Conditions d'utilisation</a></li>
@@ -1610,42 +1629,57 @@ En milieu scolaire et en coaching sportif, il convient d'enseigner aux pratiquan
     }
   </script>
 
-<!-- PROFEPS CMP BANNER -->
-<div id="profeps-cmp-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#f8fafc;padding:16px 22px;border-top:1px solid #334155;z-index:999999;box-shadow:0 -10px 25px rgba(0,0,0,0.5);font-family:system-ui,-apple-system,sans-serif;">
-  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;">
-    <div style="flex:1 1 500px;font-size:13px;line-height:1.5;">
-      <strong style="color:#38bdf8;">🍪 Respect de votre vie privée</strong><br>
-      ProfEPS utilise des cookies essentiels au site ainsi que des cookies de mesure d'audience et Google AdSense pour maintenir nos outils gratuits. Vous pouvez personnaliser ou refuser à tout moment. <a href="politique-confidentialite.html" style="color:#38bdf8;text-decoration:underline;">Politique de confidentialité</a>.
+<!-- BANDEAU DE CONSENTEMENT GOOGLE ADSENSE & RGPD (PROFEPS CMP) -->
+<div id="profeps-cmp-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#f8fafc;padding:18px 24px;border-top:1px solid #334155;z-index:999999;box-shadow:0 -10px 25px rgba(0,0,0,0.5);font-family:system-ui,-apple-system,sans-serif;">
+  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;">
+    <div style="flex:1 1 500px;font-size:13.5px;line-height:1.5;">
+      <strong style="color:#38bdf8;font-size:14.5px;">🍪 Respect de votre vie privée & Cookies</strong><br>
+      ProfEPS utilise des cookies essentiels au fonctionnement du site, ainsi que des cookies d'analyse d'audience et de personnalisation publicitaire Google AdSense pour financer nos outils pédagogiques gratuits. Vous pouvez accepter, refuser ou personnaliser vos préférences à tout moment. Consultez notre <a href="politique-confidentialite.html" style="color:#38bdf8;text-decoration:underline;">Politique de confidentialité</a>.
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-      <button onclick="window.ProfEPS_CMP.open()" type="button" style="padding:7px 12px;background:#1e293b;color:#cbd5e1;border:1px solid #475569;border-radius:6px;font-size:12.5px;font-weight:600;cursor:pointer;">Personnaliser</button>
-      <button onclick="window.ProfEPS_CMP.rejectAll()" type="button" style="padding:7px 12px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:12.5px;font-weight:600;cursor:pointer;">Refuser</button>
-      <button onclick="window.ProfEPS_CMP.acceptAll()" type="button" style="padding:7px 16px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:12.5px;font-weight:700;cursor:pointer;">Tout accepter</button>
+      <button onclick="window.ProfEPS_CMP.open()" type="button" style="padding:8px 14px;background:#1e293b;color:#cbd5e1;border:1px solid #475569;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Personnaliser</button>
+      <button onclick="window.ProfEPS_CMP.rejectAll()" type="button" style="padding:8px 14px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Continuer sans accepter</button>
+      <button onclick="window.ProfEPS_CMP.acceptAll()" type="button" style="padding:8px 18px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;">Tout accepter</button>
     </div>
   </div>
 </div>
-<!-- PROFEPS CMP MODAL -->
-<div id="profeps-cmp-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.85);backdrop-filter:blur(4px);z-index:1000000;align-items:center;justify-content:center;padding:16px;font-family:system-ui,-apple-system,sans-serif;">
-  <div style="background:#0f172a;border:1px solid #334155;border-radius:12px;max-width:540px;width:100%;padding:22px;color:#f8fafc;box-shadow:0 20px 40px rgba(0,0,0,0.6);">
-    <h3 style="margin-top:0;font-size:17px;color:#38bdf8;">⚙️ Préférences de Confidentialité & Cookies</h3>
-    <p style="font-size:12.5px;color:#94a3b8;line-height:1.5;">Gérez vos préférences. Les cookies techniques sont obligatoires pour les calculs.</p>
-    <div style="margin:12px 0;padding:10px;background:#1e293b;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
-      <span style="font-weight:600;font-size:13px;">Cookies techniques essentiels</span>
-      <span style="font-size:11px;color:#10b981;font-weight:bold;">Toujours actif</span>
+
+<!-- MODAL DE PERSONNALISATION DES COOKIES -->
+<div id="profeps-cmp-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.8);backdrop-filter:blur(4px);z-index:1000000;align-items:center;justify-content:center;padding:16px;font-family:system-ui,-apple-system,sans-serif;">
+  <div style="background:#0f172a;border:1px solid #334155;border-radius:12px;max-width:560px;width:100%;padding:24px;color:#f8fafc;box-shadow:0 20px 40px rgba(0,0,0,0.6);max-height:90vh;overflow-y:auto;">
+    <h3 style="margin-top:0;font-size:18px;color:#38bdf8;">⚙️ Préférences de Confidentialité & Cookies</h3>
+    <p style="font-size:13px;color:#94a3b8;line-height:1.5;">Gérez ici vos préférences concernant le dépôt de cookies sur votre appareil. Les cookies techniques sont indispensables à la navigation.</p>
+    
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-weight:600;font-size:14px;">Cookies techniques essentiels</span>
+        <span style="font-size:12px;color:#10b981;font-weight:bold;">Toujours actif</span>
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Nécessaires au fonctionnement des calculateurs, de la sécurité et de la mémorisation de votre choix de consentement.</p>
     </div>
-    <div style="margin:12px 0;padding:10px;background:#1e293b;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
-      <label for="cmp-opt-analytics" style="font-weight:600;font-size:13px;cursor:pointer;">Mesure d'audience anonyme (Analytics)</label>
-      <input type="checkbox" id="cmp-opt-analytics" checked style="width:17px;height:17px;cursor:pointer;">
+
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <label for="cmp-opt-analytics" style="font-weight:600;font-size:14px;cursor:pointer;">Cookies de mesure d'audience (Analytics)</label>
+        <input type="checkbox" id="cmp-opt-analytics" checked style="width:18px;height:18px;cursor:pointer;">
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Nous permettent de mesurer anonymement la fréquentation de nos pages et calculateurs EPS.</p>
     </div>
-    <div style="margin:12px 0;padding:10px;background:#1e293b;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
-      <label for="cmp-opt-ads" style="font-weight:600;font-size:13px;cursor:pointer;">Publicités personnalisées (Google AdSense)</label>
-      <input type="checkbox" id="cmp-opt-ads" checked style="width:17px;height:17px;cursor:pointer;">
+
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <label for="cmp-opt-ads" style="font-weight:600;font-size:14px;cursor:pointer;">Publicités personnalisées (Google AdSense)</label>
+        <input type="checkbox" id="cmp-opt-ads" checked style="width:18px;height:18px;cursor:pointer;">
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Permet à Google et ses partenaires d'afficher des annonces adaptées à vos centres d'intérêt afin de maintenir la gratuité de la plateforme.</p>
     </div>
-    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:18px;">
-      <button onclick="document.getElementById('profeps-cmp-modal').style.display='none'" type="button" style="padding:7px 12px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:12px;cursor:pointer;">Fermer</button>
-      <button onclick="window.ProfEPS_CMP.saveCustom()" type="button" style="padding:7px 16px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:12.5px;font-weight:700;cursor:pointer;">Enregistrer mes choix</button>
+
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px;">
+      <button onclick="document.getElementById('profeps-cmp-modal').style.display='none'" type="button" style="padding:8px 14px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:13px;cursor:pointer;">Fermer</button>
+      <button onclick="window.ProfEPS_CMP.saveCustom()" type="button" style="padding:8px 18px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;">Enregistrer mes préférences</button>
     </div>
   </div>
 </div>
+
 </body>
 </html>

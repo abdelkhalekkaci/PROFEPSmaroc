@@ -8,6 +8,9 @@
   <meta name="robots" content="noindex, follow">
   <link rel="canonical" href="https://profeps.ma/widget-vma.html">
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; }
+  </style>
 <style id="profeps-master-unifier-css">
 /* ═══ 1. NAVBAR FIXE ISOLÉE (.peps-*) — 80PX VERROUILLÉ SUR TOUTES LES PAGES ═══ */
 html {
@@ -496,16 +499,12 @@ main > div.max-w-3xl select:focus {
   overflow: hidden !important;
 }
 .peps-cta-btn::after {
-  content: '→' !important;
-  font-size: 1.15rem !important;
-  font-weight: 900 !important;
-  margin-left: 0.25rem !important;
-  transition: transform 0.2s ease !important;
+  display: none !important;
+  content: none !important;
 }
 html[dir="rtl"] .peps-cta-btn::after {
-  content: '←' !important;
-  margin-left: 0 !important;
-  margin-right: 0.25rem !important;
+  display: none !important;
+  content: none !important;
 }
 .peps-cta-btn:hover {
   transform: translateY(-2.5px) scale(1.005) !important;
@@ -610,7 +609,9 @@ footer.footer .footer-stat-lbl {
   color: rgba(255, 255, 255, 0.55) !important;
 }
 #profeps-unified-footer .footer-col h4,
-footer.footer .footer-col h4 {
+#profeps-unified-footer .footer-col .footer-col-title,
+footer.footer .footer-col h4,
+footer.footer .footer-col .footer-col-title {
   font-size: 0.76rem !important;
   font-weight: 800 !important;
   text-transform: uppercase !important;
@@ -742,11 +743,12 @@ footer.footer .footer-bottom {
         <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:52px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
       </a>
       <div class="peps-nav-menu" id="pepsNavMenu">
-        <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
+        <a href="index.html" class="peps-nav-link" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
         <a href="generateur.html" class="peps-nav-link" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
         <div class="peps-dropdown" id="pepsCalcDropdown">
-          <a href="calculateur-vma.html" class="peps-nav-link" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS Calculator" data-i18n-ar="حاسبة السرعة الهوائية VMA"><span class="peps-dropdown-title">Calculateur VMA</span></span><span class="peps-dropdown-caret">▾</span></a>
-          <div class="peps-dropdown-menu" id="pepsDropdownMenu">            <a href="hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub" data-i18n-fr="🧭 Hub de Tous les Calculateurs Sport" data-i18n-en="🧭 All Sports Calculators Hub" data-i18n-ar="🧭 بوابة جميع الحاسبات الرياضية">🧭 Hub de Tous les Calculateurs Sport</a>
+          <a href="calculateur-vma.html" class="peps-nav-link" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS Calculator" data-i18n-ar="حاسبة السرعة الهوائية VMA">Calculateur VMA</span><span class="peps-dropdown-caret">▾</span></a>
+          <div class="peps-dropdown-menu" id="pepsDropdownMenu">
+            <a href="hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub" data-i18n-fr="🧭 Hub de Tous les Calculateurs Sport" data-i18n-en="🧭 All Sports Calculators Hub" data-i18n-ar="🧭 بوابة جميع الحاسبات الرياضية">🧭 Hub de Tous les Calculateurs Sport</a>
             <a href="calculateur-vma.html" class="peps-dropdown-item" data-i18n-fr="⚡ Calculateur VMA & Allures" data-i18n-en="⚡ MAS (VMA) & Paces Calculator" data-i18n-ar="⚡ حاسبة السرعة الهوائية القصوى (VMA)">⚡ Calculateur VMA & Allures</a>
             <a href="calculateur-vdot-asr-endurance.html" class="peps-dropdown-item" data-i18n-fr="🫁 Calculateur VO2 Max & VDOT" data-i18n-en="🫁 VO2 Max & VDOT Calculator" data-i18n-ar="🫁 حاسبة VO2 Max ومؤشر VDOT">🫁 Calculateur VO2 Max & VDOT</a>
             <a href="calculateur-asr-reserve-vitesse.html" class="peps-dropdown-item" data-i18n-fr="🚀 Réserve de Vitesse Anaérobie (ASR)" data-i18n-en="🚀 Anaerobic Speed Reserve (ASR)" data-i18n-ar="🚀 احتياطي السرعة اللاهوائية (ASR)">🚀 Réserve de Vitesse Anaérobie (ASR)</a>
@@ -759,7 +761,7 @@ footer.footer .footer-bottom {
             <a href="calculateur-charge-rpe-foster-acwr.html" class="peps-dropdown-item" data-i18n-fr="🛡️ Charge RPE Foster & ACWR" data-i18n-en="🛡️ Foster sRPE Load & ACWR Ratio" data-i18n-ar="🛡️ حمل التدريب (RPE Foster) ونسبة ACWR">🛡️ Charge RPE Foster & ACWR</a>
           </div>
         </div>
-        <a href="concours-crmef-hub.html" class="peps-nav-link" data-i18n-fr="Préparer Concours CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparer Concours CRMEF</a>
+        <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
       </div>
       <div class="peps-nav-right">
         <div dir="ltr" class="peps-lang-switch" aria-label="Sélecteur de langue">
@@ -943,6 +945,7 @@ footer.footer .footer-bottom {
       </div>
       <a href="https://profeps.ma/calculateur-vma.html" target="_blank" class="text-xs text-sky-400 hover:underline font-semibold">ProfEPS.ma ↗</a>
     </div>
+
     <div class="space-y-3">
       <div>
         <label class="block text-xs text-slate-400 mb-1">Test Demi-Cooper (Distance en mètres courue en 6 min) :</label>
@@ -951,6 +954,7 @@ footer.footer .footer-bottom {
           <button onclick="calculateWidgetVma()" type="button" class="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs rounded-lg transition">Calculer</button>
         </div>
       </div>
+
       <div id="w-results" class="p-3 bg-slate-950 border border-slate-800 rounded-xl space-y-2 mt-3">
         <div class="flex justify-between items-center">
           <span class="text-xs text-slate-400">VMA Estimée :</span>
@@ -971,30 +975,37 @@ footer.footer .footer-bottom {
           </div>
         </div>
       </div>
+
       <div class="pt-2 flex justify-between items-center text-[11px] text-slate-500">
         <span>Précision Demi-Cooper (Brouha)</span>
         <button onclick="copyWidgetCode()" type="button" class="text-sky-400 hover:underline">📋 Intégrer ce widget</button>
       </div>
     </div>
   </div>
+
   <script>
     function calculateWidgetVma() {
       var d = parseFloat(document.getElementById('w-distance').value);
       if (isNaN(d) || d <= 0) return;
       var vma = (d / 100).toFixed(1);
       document.getElementById('w-vma-val').innerText = vma + ' km/h';
+      
       var speedMs = (vma * 1000) / 3600;
-      document.getElementById('w-s100').innerText = (100 / speedMs).toFixed(1) + 's';
-      document.getElementById('w-s200').innerText = (200 / speedMs).toFixed(1) + 's';
+      var t100 = (100 / speedMs).toFixed(1);
+      var t200 = (200 / speedMs).toFixed(1);
       var t400 = (400 / speedMs);
       var min400 = Math.floor(t400 / 60);
       var sec400 = Math.round(t400 % 60);
+
+      document.getElementById('w-s100').innerText = t100 + 's';
+      document.getElementById('w-s200').innerText = t200 + 's';
       document.getElementById('w-s400').innerText = min400 + 'm ' + (sec400 < 10 ? '0' : '') + sec400 + 's';
     }
+
     function copyWidgetCode() {
       var code = '<iframe src="https://profeps.ma/widget-vma.html" width="100%" height="280" frameborder="0" style="border:none;border-radius:16px;max-width:440px;" title="Calculateur VMA ProfEPS Maroc"></iframe>';
       navigator.clipboard.writeText(code).then(function() {
-        alert('Code iframe copié ! Vous pouvez l\'intégrer sur votre site ou intranet CRMEF.');
+        alert('Code iframe copié dans le presse-papier ! Collez-le dans votre site ou intranet CRMEF.');
       });
     }
   </script>
@@ -1022,7 +1033,7 @@ footer.footer .footer-bottom {
         </div>
 
         <div class="footer-col">
-          <h4 data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</h4>
+          <p class="footer-col-title" data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</p>
           <ul>
             <li><a href="index.html" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a></li>
             <li><a href="generateur.html" data-i18n-fr="Générateur PDF" data-i18n-en="PDF Generator" data-i18n-ar="مولد ملفات PDF">Générateur PDF</a></li>
@@ -1032,17 +1043,18 @@ footer.footer .footer-bottom {
         </div>
 
         <div class="footer-col">
-          <h4 data-i18n-fr="PRÉPARATION CRMEF" data-i18n-en="CRMEF PREPARATION" data-i18n-ar="الاستعداد لمباراة التعليم">PRÉPARATION CRMEF</h4>
+          <p class="footer-col-title" data-i18n-fr="RESSOURCES EPS" data-i18n-en="PE RESOURCES" data-i18n-ar="موارد التربية البدنية">RESSOURCES EPS</p>
           <ul>
-            <li><a href="concours-crmef-hub.html" data-i18n-fr="🏛️ Hub National CRMEF" data-i18n-en="🏛️ National CRMEF Hub" data-i18n-ar="🏛️ بوابة مباريات التعليم">🏛️ Hub National CRMEF</a></li>
-            <li><a href="qcm-sciences-education-crmef.html" data-i18n-fr="📚 Tronc Commun (Sciences Éduc)" data-i18n-en="📚 Education Sciences" data-i18n-ar="📚 علوم التربية والديداكتيك">📚 Tronc Commun (Sciences Éduc)</a></li>
-            <li><a href="qcm-specialite-eps-maroc.html" data-i18n-fr="🏃 Spécialité EPS" data-i18n-en="🏃 PE Specialty" data-i18n-ar="🏃 تخصص التربية البدنية">🏃 Spécialité EPS</a></li>
-            <li><a href="qcm-didactique-eps-maroc.html" data-i18n-fr="⚡ Didactique EPS" data-i18n-en="⚡ PE Didactics" data-i18n-ar="⚡ ديداكتيك التربية البدنية">⚡ Didactique EPS</a></li>
-            <li><a href="concours-crmef-hub.html#discipline-eps" data-i18n-fr="🎯 Les 12 Spécialités CRMEF" data-i18n-en="🎯 All 12 CRMEF Specialties" data-i18n-ar="🎯 التخصصات الـ12 لمباراة التعليم">🎯 Les 12 Spécialités CRMEF</a></li>
+            <li><a href="cycles-eps-maroc.html" data-i18n-fr="Cycles d'EPS au Maroc" data-i18n-en="PE Cycles in Morocco" data-i18n-ar="أسلاك التربية البدنية بالمغرب">Cycles d'EPS au Maroc</a></li>
+            <li><a href="programme-eps-maroc.html" data-i18n-fr="Programme EPS Maroc" data-i18n-en="Morocco PE Curriculum" data-i18n-ar="برنامج التربية البدنية بالمغرب">Programme EPS Maroc</a></li>
+            <li><a href="evaluation-eps.html" data-i18n-fr="Évaluation en EPS" data-i18n-en="PE Assessment" data-i18n-ar="التقويم في التربية البدنية">Évaluation en EPS</a></li>
+            <li><a href="securite-eps.html" data-i18n-fr="Sécurité en EPS" data-i18n-en="Safety in PE" data-i18n-ar="السلامة في التربية البدنية">Sécurité en EPS</a></li>
+            <li><a href="bibliotheque-numerique-eps.html" data-i18n-fr="Bibliothèque numérique" data-i18n-en="Digital Library" data-i18n-ar="المكتبة الرقمية">Bibliothèque numérique</a></li>
           </ul>
         </div>
+
         <div class="footer-col" id="footer-col-calculators">
-          <h4 data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</h4>
+          <p class="footer-col-title" data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</p>
           <ul>
             <li><a href="hub-outils-sport-performance.html" class="footer-hub-highlight" data-i18n-fr="★ Hub des Calculateurs Sport" data-i18n-en="★ All Sports Calculators Hub" data-i18n-ar="★ بوابة جميع الحاسبات الرياضية">★ Hub des Calculateurs Sport</a></li>
             <li><a href="calculateur-vma.html" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS (VMA) Calculator" data-i18n-ar="حاسبة السرعة الهوائية VMA">Calculateur VMA</a></li>
@@ -1059,7 +1071,7 @@ footer.footer .footer-bottom {
         </div>
 
         <div class="footer-col">
-          <h4 data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</h4>
+          <p class="footer-col-title" data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</p>
           <ul>
             <li><a href="politique-confidentialite.html" data-i18n-fr="Politique de confidentialité" data-i18n-en="Privacy Policy" data-i18n-ar="سياسة الخصوصية">Politique de confidentialité</a></li>
             <li><a href="cgu.html" data-i18n-fr="Conditions d'utilisation" data-i18n-en="Terms of Use" data-i18n-ar="شروط الاستخدام">Conditions d'utilisation</a></li>

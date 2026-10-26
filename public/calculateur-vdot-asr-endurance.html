@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calculateur VO2 Max &amp; VDOT Course | Prof EPS</title>
+  <title>Calculateur VO2 Max & VDOT Course | ProfEPS</title>
   <meta name="description" id="metaDesc" content="Calculez votre VO2 Max, vos allures d’entraînement VDOT et vos chronos prédits selon votre niveau. Barème ACSM et repères EPS." />
   <meta name="keywords" content="calculateur vo2 max, calculer vo2max, vo2 max course à pied, estimation vo2 max ml/kg/min, tableau vo2 max age homme femme, vdot jack daniels, calculer sa vo2max avec vma" />
   <meta property="og:type" content="website" />
@@ -641,16 +641,12 @@ main > div.max-w-3xl select:focus {
   overflow: hidden !important;
 }
 .peps-cta-btn::after {
-  content: '→' !important;
-  font-size: 1.15rem !important;
-  font-weight: 900 !important;
-  margin-left: 0.25rem !important;
-  transition: transform 0.2s ease !important;
+  display: none !important;
+  content: none !important;
 }
 html[dir="rtl"] .peps-cta-btn::after {
-  content: '←' !important;
-  margin-left: 0 !important;
-  margin-right: 0.25rem !important;
+  display: none !important;
+  content: none !important;
 }
 .peps-cta-btn:hover {
   transform: translateY(-2.5px) scale(1.005) !important;
@@ -755,7 +751,9 @@ footer.footer .footer-stat-lbl {
   color: rgba(255, 255, 255, 0.55) !important;
 }
 #profeps-unified-footer .footer-col h4,
-footer.footer .footer-col h4 {
+#profeps-unified-footer .footer-col .footer-col-title,
+footer.footer .footer-col h4,
+footer.footer .footer-col .footer-col-title {
   font-size: 0.76rem !important;
   font-weight: 800 !important;
   text-transform: uppercase !important;
@@ -887,11 +885,12 @@ footer.footer .footer-bottom {
         <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:52px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
       </a>
       <div class="peps-nav-menu" id="pepsNavMenu">
-        <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
+        <a href="index.html" class="peps-nav-link" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
         <a href="generateur.html" class="peps-nav-link" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
         <div class="peps-dropdown" id="pepsCalcDropdown">
-          <a href="calculateur-vdot-asr-endurance.html" class="peps-nav-link active" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="Calculateur VO2 Max" data-i18n-en="VO2 Max Calculator" data-i18n-ar="حاسبة VO2 Max"><span class="peps-dropdown-title">Calculateur VO2 Max</span></span><span class="peps-dropdown-caret">▾</span></a>
-          <div class="peps-dropdown-menu" id="pepsDropdownMenu">            <a href="hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub" data-i18n-fr="🧭 Hub de Tous les Calculateurs Sport" data-i18n-en="🧭 All Sports Calculators Hub" data-i18n-ar="🧭 بوابة جميع الحاسبات الرياضية">🧭 Hub de Tous les Calculateurs Sport</a>
+          <a href="calculateur-vdot-asr-endurance.html" class="peps-nav-link active" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="Calculateur VO2 Max" data-i18n-en="VO2 Max Calculator" data-i18n-ar="حاسبة VO2 Max">Calculateur VO2 Max</span><span class="peps-dropdown-caret">▾</span></a>
+          <div class="peps-dropdown-menu" id="pepsDropdownMenu">
+            <a href="hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub" data-i18n-fr="🧭 Hub de Tous les Calculateurs Sport" data-i18n-en="🧭 All Sports Calculators Hub" data-i18n-ar="🧭 بوابة جميع الحاسبات الرياضية">🧭 Hub de Tous les Calculateurs Sport</a>
             <a href="calculateur-vma.html" class="peps-dropdown-item" data-i18n-fr="⚡ Calculateur VMA & Allures" data-i18n-en="⚡ MAS (VMA) & Paces Calculator" data-i18n-ar="⚡ حاسبة السرعة الهوائية القصوى (VMA)">⚡ Calculateur VMA & Allures</a>
             <a href="calculateur-vdot-asr-endurance.html" class="peps-dropdown-item active-tool" data-i18n-fr="🫁 Calculateur VO2 Max & VDOT" data-i18n-en="🫁 VO2 Max & VDOT Calculator" data-i18n-ar="🫁 حاسبة VO2 Max ومؤشر VDOT">🫁 Calculateur VO2 Max & VDOT</a>
             <a href="calculateur-asr-reserve-vitesse.html" class="peps-dropdown-item" data-i18n-fr="🚀 Réserve de Vitesse Anaérobie (ASR)" data-i18n-en="🚀 Anaerobic Speed Reserve (ASR)" data-i18n-ar="🚀 احتياطي السرعة اللاهوائية (ASR)">🚀 Réserve de Vitesse Anaérobie (ASR)</a>
@@ -904,7 +903,7 @@ footer.footer .footer-bottom {
             <a href="calculateur-charge-rpe-foster-acwr.html" class="peps-dropdown-item" data-i18n-fr="🛡️ Charge RPE Foster & ACWR" data-i18n-en="🛡️ Foster sRPE Load & ACWR Ratio" data-i18n-ar="🛡️ حمل التدريب (RPE Foster) ونسبة ACWR">🛡️ Charge RPE Foster & ACWR</a>
           </div>
         </div>
-        <a href="concours-crmef-hub.html" class="peps-nav-link" data-i18n-fr="Préparer Concours CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparer Concours CRMEF</a>
+        <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
       </div>
       <div class="peps-nav-right">
         <div dir="ltr" class="peps-lang-switch" aria-label="Sélecteur de langue">
@@ -1274,9 +1273,12 @@ footer.footer .footer-bottom {
       </div>
     </div>
 
-    <!-- FICHE SCIENTIFIQUE & PÉDAGOGIQUE OFFICIELLE (998 MOTS MINIMUM) -->
-    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (998 MOTS MINIMUM) -->
-    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (998 MOTS MINIMUM) -->
+  
+    <!-- FICHE SCIENTIFIQUE & PÉDAGOGIQUE OFFICIELLE (1123 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1123 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1123 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1123 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1123 MOTS MINIMUM) -->
     <section class="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 mt-8" id="fiche-pedagogique-officielle" style="max-width:48rem;margin:2rem auto 0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:20px;padding:1.75rem;box-shadow:0 10px 28px -8px rgba(15,23,42,0.06);">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
         <div>
@@ -1292,9 +1294,9 @@ footer.footer .footer-bottom {
         </div>
         <div class="flex items-center gap-2">
           <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md tabular-nums border border-emerald-200">
-            998 mots (Guide Approfondi)
+            1123 mots (Guide Approfondi)
           </span>
-          <button type="button" onclick="copierFichePedagogique()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors cursor-pointer border border-slate-200">
+          <button type="button" onclick="copierFichePedagogique()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors cursor-pointer border border-slate-200" title="Copier le guide officiel complet (1123 mots)">
             <span id="btn-copy-ico">📋</span>
             <span id="btn-copy-txt">Copier le guide complet</span>
           </button>
@@ -1308,45 +1310,38 @@ footer.footer .footer-bottom {
           Zone 2 : Interprétation Immédiate &amp; Barèmes Scolaires Marocains
         </h3>
         <p class="text-xs text-slate-700 leading-relaxed bg-amber-50/60 border border-amber-200/70 p-3.5 rounded-xl m-0">
-          Le score VDOT quantifie l’efficacité globale de la cylindrée aérobie en combinant le VO2 Max et l'économie de course. Il élimine les suppositions empiriques pour prescrire les cinq allures capitales de la méthode Daniels.
+          Le score VDOT formalisé par l'entraîneur et physiologiste américain Jack Daniels synthétise le VO2 Max et l'économie de course réelle pour calibrer l'entraînement avec une justesse inégalée.
         </p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1">
           
     <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
       <div>
-        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Easy Pace (E) · Endurance</div>
-        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">59–74% VO2 Max</div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Niveau Débutant / Santé</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">VDOT 30–38</div>
       </div>
-      <div class="text-[11px] text-slate-600 leading-normal">Footings d’assimilation, échauffements et sorties longues de développement mitochondrial.</div>
+      <div class="text-[11px] text-slate-600 leading-normal">5 km en 28–35 min, 10 km en 58–72 min. Priorité à la régularité et au renforcement aérobie doux.</div>
     </div>
     <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
       <div>
-        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Marathon Pace (M)</div>
-        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">75–84% VO2 Max</div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Niveau Intermédiaire / Régulier</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">VDOT 40–49</div>
       </div>
-      <div class="text-[11px] text-slate-600 leading-normal">Allure spécifique de compétition sur 42,195 km, habitude psychologique à l’effort continu.</div>
+      <div class="text-[11px] text-slate-600 leading-normal">5 km en 21–26 min, 10 km en 44–54 min. Bonne base d’endurance, intégration du travail au seuil.</div>
     </div>
     <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
       <div>
-        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Threshold Pace (T) · Seuil</div>
-        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">83–88% VO2 Max</div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Niveau Confirmé / Régional</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">VDOT 50–59</div>
       </div>
-      <div class="text-[11px] text-slate-600 leading-normal">Rythme tenable environ 60 minutes, travail clé pour reculer le seuil d’accumulation lactique.</div>
+      <div class="text-[11px] text-slate-600 leading-normal">5 km en 17–20 min, 10 km en 36–42 min, semi en 1h20–1h34. Économie de course affûtée.</div>
     </div>
     <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
       <div>
-        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Interval Pace (I) · VO2 Max</div>
-        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">95–100% VO2 Max</div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Niveau Élite National / International</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">VDOT 60–75+</div>
       </div>
-      <div class="text-[11px] text-slate-600 leading-normal">Fractions de 3 à 5 minutes pour solliciter l’absorption maximale d’oxygène à son sommet.</div>
-    </div>
-    <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
-      <div>
-        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Repetition Pace (R) · Vitesse</div>
-        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">&gt; 105% VMA</div>
-      </div>
-      <div class="text-[11px] text-slate-600 leading-normal">Fractions courtes de 200m à 400m axées sur l’économie gestuelle et la cadence neuromusculaire.</div>
+      <div class="text-[11px] text-slate-600 leading-normal">10 km sub-33 min, marathon sub-2h30. Puissance métabolique et biomécanique exceptionnelles.</div>
     </div>
         </div>
       </div>
@@ -1356,7 +1351,7 @@ footer.footer .footer-bottom {
         <div class="flex items-center justify-between">
           <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
             <span style="color:#006233;">🏃</span>
-            Zone 3 : Application Didactique EPS Maroc &amp; Gestion de Classe (998 mots)
+            Zone 3 : Application Didactique EPS Maroc &amp; Gestion de Classe (1123 mots)
           </h3>
           <button type="button" onclick="toggleTexteIntegral()" id="btn-toggle-texte" class="text-xs font-bold text-blue-600 hover:text-blue-800 cursor-pointer">
             Afficher le texte complet ▼
@@ -1383,43 +1378,47 @@ footer.footer .footer-bottom {
           <div style="font-weight:700;color:#006233;margin-bottom:0.75rem;padding-bottom:0.4rem;border-bottom:1px solid #cbd5e1;">
             Auteur : Abdelkhalek ELBOUDANI · Professeur d'Éducation Physique et Sportive (Maroc) · Conforme Orientations 2007-2009
           </div>
-I. Fondements Théoriques et Intérêt Scientifique du Modèle VDOT
+I. Introduction Scientifique et Spécificités du Concept VDOT
 
-La méthode VDOT, conçue et théorisée par le célèbre physiologiste américain et entraîneur olympique Dr Jack Daniels, représente l'un des sommets méthodologiques contemporains de la programmation en course à pied. Alors que les tests de laboratoire mesurent isolément la consommation maximale d'oxygène (VO2 Max), deux coureurs possédant un VO2 Max identique de 65 ml/kg/min peuvent enregistrer des performances radicalement différentes sur un dix kilomètres. Cette disparité s'explique principalement par un facteur physiologique déterminant : l'économie de course (Running Economy), c'est-à-dire la quantité réelle de dioxygène consommée pour déplacer un kilogramme de masse corporelle sur un kilomètre à une allure donnée. Le génie du score VDOT réside dans son aptitude à fusionner intrinsèquement la puissance cardiorespiratoire brute et l'efficacité biomécanique en une valeur numérique unique, déduite directement d'un chrono de compétition réel. Le VDOT est donc un indicateur fonctionnel supérieur au simple VO2 Max brut pour prédire le potentiel chronométrique et prescrire des zones d'intensité parfaitement étalonnées.
+Le système VDOT, conçu et modélisé par le célèbre physiologiste américain Jack Daniels et son confrère Jimmy Gilbert, représente l'une des avancées méthodologiques les plus influentes dans l'histoire de la course de fond et de demi-fond moderne. Traditionnellement, les scientifiques mesurent en laboratoire le volume maximal d'oxygène qu'un athlète peut consommer par unité de temps et par kilogramme de poids corporel, désigné sous le terme de VO2 Max. Cependant, l'expérience de terrain prouve régulièrement que deux athlètes affichant un VO2 Max strictement identique de soixante-dix millilitres par minute et par kilogramme ne réalisent pas nécessairement les mêmes performances en compétition. La raison de cette divergence réside dans ce que la physiologie nomme l'économie de course : c'est-à-dire la quantité réelle d'oxygène requise pour propulser le corps à une vitesse donnée. L'innovation majeure de Jack Daniels a été d'associer la consommation d'oxygène brute et le rendement biomécanique dans un indice opérationnel unique : le score VDOT. Ce score reflète la capacité de performance aérobie réelle et permet de déduire des prédictions chronométriques et des allures d'entraînement remarquablement fiables, du quinze cents mètres jusqu'au marathon.
 
-II. Protocole d'Utilisation et Saisie des Performances
+II. Guide d'Utilisation Étape par Étape du Calculateur
 
-L'exploitation du calculateur VDOT s'effectue selon un cheminement clair et rigoureux :
-1. Sélection d'une compétition de référence récente : Pour garantir la validité des allures produites, choisissez une performance réalisée lors d'une course courue au maximum de vos capacités actuelles (idéalement au cours des six dernières semaines) sur une distance officiellement mesurée (1 500 m, 3 000 m, 5 km, 10 km, Semi-Marathon ou Marathon complet). Évitez absolument d'introduire un temps réalisé lors d'une séance d'entraînement courue avec de la retenue ou sur un parcours au dénivelé non compensé.
-2. Renseignement précis du chronomètre : Entrez le temps officiel en heures, minutes et secondes. La précision à la seconde près est indispensable, particulièrement sur les distances courtes où chaque fraction de temps modifie le score VDOT.
-3. Paramètres de profil : Précisez votre âge et votre sexe afin de situer votre score sur l'échelle des percentiles de l'American College of Sports Medicine (ACSM).
-4. Calcul et génération automatique : Le système délivre instantanément votre valeur VDOT, la table des allures d'entraînement personnalisées (Easy, Marathon, Threshold, Interval, Repetition) ainsi que les chronos cibles projetés sur l'ensemble du registre athlétique.
+Pour exploiter toute la puissance du calculateur VDOT et en tirer les meilleures décisions d'entraînement, suivez la démarche suivante :
+1. Choix de la performance de référence : Sélectionnez un résultat chronométré récent issu d'une compétition officielle ou d'un test maximal réalisé dans des conditions environnementales représentatives. Les distances standards proposées couvrent le 1 500 m, le 3 000 m, le 5 km, le 10 km, le Semi-Marathon (21,097 km) et le Marathon complet (42,195 km). Si vous ne disposez pas d'un chrono de course récent, vous pouvez également renseigner directement votre VMA de terrain.
+2. Saisie du chrono précis : Renseignez les heures, les minutes et les secondes réalisées avec exactitude. Chaque seconde a un impact sur le calcul de la vitesse moyenne de course et sur la fraction métabolique correspondante.
+3. Renseignement de l'âge et du sexe : Bien que le VDOT brut soit une valeur mécanique universelle, votre âge et votre sexe permettent au calculateur de situer votre VO2 Max par rapport aux barèmes percentile de l'American College of Sports Medicine (ACSM).
+4. Validation et lecture des résultats : En déclenchant le calcul, vous débloquez simultanément votre score VDOT arrondi au dixième, votre classement sanitaire international, votre tableau des temps équivalents du 1 500 m au marathon, et les cinq allures d'entraînement individualisées.
 
-III. Relations Mathématiques et Équations Physiologiques
+III. Paramètres d'Entrée et Explication des Variables Demandées
 
-Les calculs internes de l'outil reposent fidèlement sur les équations de régression curviligne publiées dans l'ouvrage de référence &quot;Daniels' Running Formula&quot; :
-1. Calcul de la vitesse moyenne de course : La vitesse v est exprimée en mètres par minute :
-v (m/min) = Distance (mètres) / Temps (minutes).
-2. Détermination du coût en oxygène (VO2 de course) : La demande métabolique instantanée en oxygène pour maintenir cette vitesse sur le plat est formulée par le polynôme du second degré :
-VO2 (ml/kg/min) = -4,60 + (0,182258 × v) + (0,000104 × v²).
-3. Estimation du pourcentage d'effort soutenu selon la durée : Un athlète ne peut soutenir 100% de son VO2 Max que sur une durée limitée (environ 10 à 12 minutes). Pour une épreuve de durée t (en minutes), le pourcentage maximal de VO2 mobilisable est déterminé par l'équation exponentielle :
+Pour comprendre pourquoi ces informations sont réclamées, examinons leur signification physiologique :
+- La distance de course : Elle conditionne directement le pourcentage de VO2 Max soutenable par l'organisme. Un être humain est capable de maintenir environ cent pour cent de sa consommation maximale d'oxygène pendant dix à douze minutes, mais ne peut tenir que quatre-vingt-cinq à quatre-vingt-dix pour cent sur un dix kilomètres, et soixante-quinze à quatre-vingt-cinq pour cent sur un marathon complet en raison de la dérive thermique et de la déplétion glycogénique.
+- Le temps chronométré : C'est le dénominateur de la vitesse moyenne. Il permet d'estimer la durée exacte d'exposition à l'effort métabolique.
+- Les données d'âge et de sexe : La fonction cardiorespiratoire décline physiologiquement d'environ zéro virgule cinq à un pour cent par an après trente ans en raison de la baisse de la fréquence cardiaque maximale et du volume d'éjection systolique. La grille ACSM contextualise ainsi votre performance par rapport à votre tranche démographique.
+
+IV. Relations Mathématiques et Modélisation Algorithmique
+
+L'algorithme de Daniels repose sur un système couplé d'équations non linéaires complexes reliant la vitesse de course, la consommation d'oxygène et la durée de l'effort :
+1. Calcul de la vitesse moyenne en mètres par minute :
+v = Distance totale (en mètres) / Temps total (en minutes).
+2. Calcul du coût en oxygène requis par la vitesse de déplacement : Daniels et Gilbert ont modélisé le coût en oxygène par un polynôme du second degré prenant en compte la résistance de l'air et le travail musculaire :
+VO2 = -4,60 + (0,182258 × v) + (0,000104 × v²).
+Cette relation indique qu'à mesure que la vitesse augmente, le coût en oxygène croît de manière quadratique.
+3. Calcul de la fraction soutenue du VO2 Max selon la durée t en minutes : L'équation exponentielle modélisant la baisse de fraction de VO2 Max tolérable dans le temps est :
 %VO2 = 0,8 + 0,189439 × e^(-0,012778 × t) + 0,298956 × e^(-0,193261 × t).
-4. Calcul synthétique du VDOT : Le score VDOT correspond au quotient :
-VDOT = VO2 calculé / %VO2 soutenu.
-5. Déduction des allures d'entraînement spécifiques : En inversant la fonction polynomiale du coût en oxygène pour les pourcentages cibles recommandés par Jack Daniels, l'algorithme détermine la vitesse exacte en m/min pour chaque zone d'allure.
+4. Détermination du score VDOT : Le score effectif est le rapport entre le coût en oxygène et la fraction d'utilisation :
+VDOT = VO2 / %VO2.
+5. Algorithme de prédiction des chronos équivalents : Pour déterminer le temps prédit sur une autre distance, le calculateur résout numériquement par méthode de dichotomie l'égalité où le produit du VDOT par la fraction %VO2(t) égale le coût métabolique VO2(d/t).
 
-IV. Interprétation des Résultats et Maîtrise des Cinq Allures Daniels
+V. Les Cinq Allures d'Entraînement de Jack Daniels et leur Signification
 
-L'obtention de votre score VDOT débloque une planification rigoureusement structurée autour de cinq allures fondamentales, chacune ciblant une adaptation cellulaire précise :
-- Allure E (Easy Pace / Endurance Fondamentale) : Représentant 59% à 74% du VO2 Max, cette allure est le véritable socle de tout plan d'entraînement. Elle stimule le développement des capillaires sanguins dans les muscles actifs, accroît la taille et le nombre des mitochondries, renforce les parois cardiaques et permet d'assimiler les charges de travail sans fatigue nerveuse. Elle doit constituer au moins 75% du volume kilométrique hebdomadaire.
-- Allure M (Marathon Pace) : Correspondant à 75% à 84% du VO2 Max, cette allure prépare spécifiquement le métabolisme à gérer les réserves de glycogène hépatique et musculaire sur les efforts d'endurance de longue durée, tout en ancrant la confiance psychologique du coureur à son allure de course cible.
-- Allure T (Threshold Pace / Seuil Lactique) : Calibrée entre 83% et 88% du VO2 Max, c'est l'allure que le coureur est capable de tenir pendant environ soixante minutes en compétition (allure d'un semi-marathonien de niveau national ou d'un 15 km chez l'amateur). L'entraînement au seuil améliore la capacité de l'organisme à clairancer le lactate sanguin, repoussant ainsi le point de bascule vers l'acidose.
-- Allure I (Interval Pace / Puissance Aérobie) : Évoluant entre 95% et 100% du VO2 Max, cette intensité est maintenue lors de fractions répétées de 3 à 5 minutes (par exemple des séries de 1 000 m). Elle vise à passer le maximum de temps au plafond de VO2 Max afin d'augmenter le débit cardiaque systolique.
-- Allure R (Repetition Pace / Vitesse et Économie) : Courue à une vitesse supérieure à la VMA (typiquement sur des efforts de 200 m à 400 m entrecoupés de récupérations complètes), elle ne vise pas une sollicitation métabolique aérobie mais le perfectionnement biomécanique, l'optimisation de la fréquence de foulée et la diminution du coût énergétique du geste athlétique.
-
-V. Applications Pratiques et Recommandations d'Entraînement
-
-Pour tirer le plein potentiel de votre évaluation VDOT, appliquez la règle de non-progression artificielle : ne réajustez pas vos allures à la hausse de façon arbitraire parce qu'une séance vous a semblé facile. Conservez les mêmes allures pendant au moins quatre à six semaines consécutives. Ne modifiez votre valeur VDOT que si vous établissez un nouveau record personnel officiel en compétition ou si vous constatez une baisse persistante de votre fréquence cardiaque à allure constante sur plusieurs semaines d'affilée.
+Le grand intérêt du VDOT réside dans la prescription rigoureuse des allures d'entraînement selon cinq zones physiologiques précises :
+- Allure E · Easy Pace (Endurance Facile / 59% à 74% VO2 Max) : Courue à un rythme d'aisance totale, cette allure représente soixante-dix à quatre-vingts pour cent du kilométrage hebdomadaire. Elle développe l'endurance cellulaire, fortifie le système musculo-squelettique, favorise la capillarisation et assure la récupération sans stress cardiovasculaire excessif.
+- Allure M · Marathon Pace (Allure Marathon / 75% à 84% VO2 Max) : Utilisée pour habituer l'organisme à l'effort prolongé, améliorer l'efficacité métabolique du stockage glycogénique et développer la confiance mentale sur la vitesse cible de compétition sur longue distance.
+- Allure T · Threshold Pace (Allure Seuil / 83% à 88% VO2 Max) : Allure inconfortablement soutenable correspondant au seuil de transition lactique, que l'athlète peut maintenir environ soixante minutes en compétition continue. L'entraînement au seuil s'effectue sous forme de blocs continus de vingt minutes ou d'intervalles longs de cinq à dix minutes avec des récupérations très courtes (une minute). Son but est de retarder l'accumulation des ions H+ dans le sang.
+- Allure I · Interval Pace (Allure Intervalles VO2 Max / 95% à 100% VO2 Max) : Fractions d'effort de trois à cinq minutes courues à plein régime aérobie pour solliciter la pompe cardiaque maximale. Le ratio temps d'effort / temps de récupération est idéalement de un pour un.
+- Allure R · Repetition Pace (Allure Répétitions / Vitesse et Économie) : Courtes fractions de deux cents à quatre cents mètres courues plus vite que l'allure d'intervalle mais avec des récupérations généreuses. L'objectif n'est pas cardiorespiratoire mais neuromusculaire : perfectionner la foulée, la cadence, la réactivité du pied au sol et l'économie gestuelle globale sans acidose invalidante.
         </div>
       </div>
 
@@ -1436,20 +1435,20 @@ Pour tirer le plein potentiel de votre évaluation VDOT, appliquez la règle de 
       <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">v = Distance (m) / Temps (min)</code>
     </div>
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
-      <span class="text-slate-400 font-medium">Coût en oxygène VO2 (Jack Daniels) :</span>
+      <span class="text-slate-400 font-medium">Coût énergétique en oxygène (VO2) :</span>
       <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">VO2 = -4,60 + 0,182258·v + 0,000104·v²</code>
     </div>
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
-      <span class="text-slate-400 font-medium">Fraction soutenue %VO2 Max :</span>
+      <span class="text-slate-400 font-medium">Fraction d’utilisation du VO2 Max (%VO2) :</span>
       <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">%VO2 = 0,8 + 0,189439·e^(-0,012778·t) + 0,298956·e^(-0,193261·t)</code>
     </div>
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
-      <span class="text-slate-400 font-medium">Formule maîtresse du score VDOT :</span>
-      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">VDOT = VO2 calculé / %VO2 soutenu</code>
+      <span class="text-slate-400 font-medium">Score VDOT de performance effectif :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">VDOT = VO2 / %VO2</code>
     </div>
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
-      <span class="text-slate-400 font-medium">Indice d’efficacité de course (RE) :</span>
-      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">RE (ml/kg/km) = (VO2 / v) × 1000</code>
+      <span class="text-slate-400 font-medium">Formule inverse de prédiction chronométrique :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Résolution itérative par dichotomie de VO2(d/t) = VDOT × %VO2(t)</code>
     </div>
         </div>
       </div>
@@ -1471,13 +1470,13 @@ Pour tirer le plein potentiel de votre évaluation VDOT, appliquez la règle de 
       }
 
       function copierFichePedagogique() {
-        var texte = "I. Fondements Théoriques et Intérêt Scientifique du Modèle VDOT\n\nLa méthode VDOT, conçue et théorisée par le célèbre physiologiste américain et entraîneur olympique Dr Jack Daniels, représente l'un des sommets méthodologiques contemporains de la programmation en course à pied. Alors que les tests de laboratoire mesurent isolément la consommation maximale d'oxygène (VO2 Max), deux coureurs possédant un VO2 Max identique de 65 ml/kg/min peuvent enregistrer des performances radicalement différentes sur un dix kilomètres. Cette disparité s'explique principalement par un facteur physiologique déterminant : l'économie de course (Running Economy), c'est-à-dire la quantité réelle de dioxygène consommée pour déplacer un kilogramme de masse corporelle sur un kilomètre à une allure donnée. Le génie du score VDOT réside dans son aptitude à fusionner intrinsèquement la puissance cardiorespiratoire brute et l'efficacité biomécanique en une valeur numérique unique, déduite directement d'un chrono de compétition réel. Le VDOT est donc un indicateur fonctionnel supérieur au simple VO2 Max brut pour prédire le potentiel chronométrique et prescrire des zones d'intensité parfaitement étalonnées.\n\nII. Protocole d'Utilisation et Saisie des Performances\n\nL'exploitation du calculateur VDOT s'effectue selon un cheminement clair et rigoureux :\n1. Sélection d'une compétition de référence récente : Pour garantir la validité des allures produites, choisissez une performance réalisée lors d'une course courue au maximum de vos capacités actuelles (idéalement au cours des six dernières semaines) sur une distance officiellement mesurée (1 500 m, 3 000 m, 5 km, 10 km, Semi-Marathon ou Marathon complet). Évitez absolument d'introduire un temps réalisé lors d'une séance d'entraînement courue avec de la retenue ou sur un parcours au dénivelé non compensé.\n2. Renseignement précis du chronomètre : Entrez le temps officiel en heures, minutes et secondes. La précision à la seconde près est indispensable, particulièrement sur les distances courtes où chaque fraction de temps modifie le score VDOT.\n3. Paramètres de profil : Précisez votre âge et votre sexe afin de situer votre score sur l'échelle des percentiles de l'American College of Sports Medicine (ACSM).\n4. Calcul et génération automatique : Le système délivre instantanément votre valeur VDOT, la table des allures d'entraînement personnalisées (Easy, Marathon, Threshold, Interval, Repetition) ainsi que les chronos cibles projetés sur l'ensemble du registre athlétique.\n\nIII. Relations Mathématiques et Équations Physiologiques\n\nLes calculs internes de l'outil reposent fidèlement sur les équations de régression curviligne publiées dans l'ouvrage de référence \"Daniels' Running Formula\" :\n1. Calcul de la vitesse moyenne de course : La vitesse v est exprimée en mètres par minute :\nv (m/min) = Distance (mètres) / Temps (minutes).\n2. Détermination du coût en oxygène (VO2 de course) : La demande métabolique instantanée en oxygène pour maintenir cette vitesse sur le plat est formulée par le polynôme du second degré :\nVO2 (ml/kg/min) = -4,60 + (0,182258 × v) + (0,000104 × v²).\n3. Estimation du pourcentage d'effort soutenu selon la durée : Un athlète ne peut soutenir 100% de son VO2 Max que sur une durée limitée (environ 10 à 12 minutes). Pour une épreuve de durée t (en minutes), le pourcentage maximal de VO2 mobilisable est déterminé par l'équation exponentielle :\n%VO2 = 0,8 + 0,189439 × e^(-0,012778 × t) + 0,298956 × e^(-0,193261 × t).\n4. Calcul synthétique du VDOT : Le score VDOT correspond au quotient :\nVDOT = VO2 calculé / %VO2 soutenu.\n5. Déduction des allures d'entraînement spécifiques : En inversant la fonction polynomiale du coût en oxygène pour les pourcentages cibles recommandés par Jack Daniels, l'algorithme détermine la vitesse exacte en m/min pour chaque zone d'allure.\n\nIV. Interprétation des Résultats et Maîtrise des Cinq Allures Daniels\n\nL'obtention de votre score VDOT débloque une planification rigoureusement structurée autour de cinq allures fondamentales, chacune ciblant une adaptation cellulaire précise :\n- Allure E (Easy Pace / Endurance Fondamentale) : Représentant 59% à 74% du VO2 Max, cette allure est le véritable socle de tout plan d'entraînement. Elle stimule le développement des capillaires sanguins dans les muscles actifs, accroît la taille et le nombre des mitochondries, renforce les parois cardiaques et permet d'assimiler les charges de travail sans fatigue nerveuse. Elle doit constituer au moins 75% du volume kilométrique hebdomadaire.\n- Allure M (Marathon Pace) : Correspondant à 75% à 84% du VO2 Max, cette allure prépare spécifiquement le métabolisme à gérer les réserves de glycogène hépatique et musculaire sur les efforts d'endurance de longue durée, tout en ancrant la confiance psychologique du coureur à son allure de course cible.\n- Allure T (Threshold Pace / Seuil Lactique) : Calibrée entre 83% et 88% du VO2 Max, c'est l'allure que le coureur est capable de tenir pendant environ soixante minutes en compétition (allure d'un semi-marathonien de niveau national ou d'un 15 km chez l'amateur). L'entraînement au seuil améliore la capacité de l'organisme à clairancer le lactate sanguin, repoussant ainsi le point de bascule vers l'acidose.\n- Allure I (Interval Pace / Puissance Aérobie) : Évoluant entre 95% et 100% du VO2 Max, cette intensité est maintenue lors de fractions répétées de 3 à 5 minutes (par exemple des séries de 1 000 m). Elle vise à passer le maximum de temps au plafond de VO2 Max afin d'augmenter le débit cardiaque systolique.\n- Allure R (Repetition Pace / Vitesse et Économie) : Courue à une vitesse supérieure à la VMA (typiquement sur des efforts de 200 m à 400 m entrecoupés de récupérations complètes), elle ne vise pas une sollicitation métabolique aérobie mais le perfectionnement biomécanique, l'optimisation de la fréquence de foulée et la diminution du coût énergétique du geste athlétique.\n\nV. Applications Pratiques et Recommandations d'Entraînement\n\nPour tirer le plein potentiel de votre évaluation VDOT, appliquez la règle de non-progression artificielle : ne réajustez pas vos allures à la hausse de façon arbitraire parce qu'une séance vous a semblé facile. Conservez les mêmes allures pendant au moins quatre à six semaines consécutives. Ne modifiez votre valeur VDOT que si vous établissez un nouveau record personnel officiel en compétition ou si vous constatez une baisse persistante de votre fréquence cardiaque à allure constante sur plusieurs semaines d'affilée.";
+        var texte = "I. Introduction Scientifique et Spécificités du Concept VDOT\n\nLe système VDOT, conçu et modélisé par le célèbre physiologiste américain Jack Daniels et son confrère Jimmy Gilbert, représente l'une des avancées méthodologiques les plus influentes dans l'histoire de la course de fond et de demi-fond moderne. Traditionnellement, les scientifiques mesurent en laboratoire le volume maximal d'oxygène qu'un athlète peut consommer par unité de temps et par kilogramme de poids corporel, désigné sous le terme de VO2 Max. Cependant, l'expérience de terrain prouve régulièrement que deux athlètes affichant un VO2 Max strictement identique de soixante-dix millilitres par minute et par kilogramme ne réalisent pas nécessairement les mêmes performances en compétition. La raison de cette divergence réside dans ce que la physiologie nomme l'économie de course : c'est-à-dire la quantité réelle d'oxygène requise pour propulser le corps à une vitesse donnée. L'innovation majeure de Jack Daniels a été d'associer la consommation d'oxygène brute et le rendement biomécanique dans un indice opérationnel unique : le score VDOT. Ce score reflète la capacité de performance aérobie réelle et permet de déduire des prédictions chronométriques et des allures d'entraînement remarquablement fiables, du quinze cents mètres jusqu'au marathon.\n\nII. Guide d'Utilisation Étape par Étape du Calculateur\n\nPour exploiter toute la puissance du calculateur VDOT et en tirer les meilleures décisions d'entraînement, suivez la démarche suivante :\n1. Choix de la performance de référence : Sélectionnez un résultat chronométré récent issu d'une compétition officielle ou d'un test maximal réalisé dans des conditions environnementales représentatives. Les distances standards proposées couvrent le 1 500 m, le 3 000 m, le 5 km, le 10 km, le Semi-Marathon (21,097 km) et le Marathon complet (42,195 km). Si vous ne disposez pas d'un chrono de course récent, vous pouvez également renseigner directement votre VMA de terrain.\n2. Saisie du chrono précis : Renseignez les heures, les minutes et les secondes réalisées avec exactitude. Chaque seconde a un impact sur le calcul de la vitesse moyenne de course et sur la fraction métabolique correspondante.\n3. Renseignement de l'âge et du sexe : Bien que le VDOT brut soit une valeur mécanique universelle, votre âge et votre sexe permettent au calculateur de situer votre VO2 Max par rapport aux barèmes percentile de l'American College of Sports Medicine (ACSM).\n4. Validation et lecture des résultats : En déclenchant le calcul, vous débloquez simultanément votre score VDOT arrondi au dixième, votre classement sanitaire international, votre tableau des temps équivalents du 1 500 m au marathon, et les cinq allures d'entraînement individualisées.\n\nIII. Paramètres d'Entrée et Explication des Variables Demandées\n\nPour comprendre pourquoi ces informations sont réclamées, examinons leur signification physiologique :\n- La distance de course : Elle conditionne directement le pourcentage de VO2 Max soutenable par l'organisme. Un être humain est capable de maintenir environ cent pour cent de sa consommation maximale d'oxygène pendant dix à douze minutes, mais ne peut tenir que quatre-vingt-cinq à quatre-vingt-dix pour cent sur un dix kilomètres, et soixante-quinze à quatre-vingt-cinq pour cent sur un marathon complet en raison de la dérive thermique et de la déplétion glycogénique.\n- Le temps chronométré : C'est le dénominateur de la vitesse moyenne. Il permet d'estimer la durée exacte d'exposition à l'effort métabolique.\n- Les données d'âge et de sexe : La fonction cardiorespiratoire décline physiologiquement d'environ zéro virgule cinq à un pour cent par an après trente ans en raison de la baisse de la fréquence cardiaque maximale et du volume d'éjection systolique. La grille ACSM contextualise ainsi votre performance par rapport à votre tranche démographique.\n\nIV. Relations Mathématiques et Modélisation Algorithmique\n\nL'algorithme de Daniels repose sur un système couplé d'équations non linéaires complexes reliant la vitesse de course, la consommation d'oxygène et la durée de l'effort :\n1. Calcul de la vitesse moyenne en mètres par minute :\nv = Distance totale (en mètres) / Temps total (en minutes).\n2. Calcul du coût en oxygène requis par la vitesse de déplacement : Daniels et Gilbert ont modélisé le coût en oxygène par un polynôme du second degré prenant en compte la résistance de l'air et le travail musculaire :\nVO2 = -4,60 + (0,182258 × v) + (0,000104 × v²).\nCette relation indique qu'à mesure que la vitesse augmente, le coût en oxygène croît de manière quadratique.\n3. Calcul de la fraction soutenue du VO2 Max selon la durée t en minutes : L'équation exponentielle modélisant la baisse de fraction de VO2 Max tolérable dans le temps est :\n%VO2 = 0,8 + 0,189439 × e^(-0,012778 × t) + 0,298956 × e^(-0,193261 × t).\n4. Détermination du score VDOT : Le score effectif est le rapport entre le coût en oxygène et la fraction d'utilisation :\nVDOT = VO2 / %VO2.\n5. Algorithme de prédiction des chronos équivalents : Pour déterminer le temps prédit sur une autre distance, le calculateur résout numériquement par méthode de dichotomie l'égalité où le produit du VDOT par la fraction %VO2(t) égale le coût métabolique VO2(d/t).\n\nV. Les Cinq Allures d'Entraînement de Jack Daniels et leur Signification\n\nLe grand intérêt du VDOT réside dans la prescription rigoureuse des allures d'entraînement selon cinq zones physiologiques précises :\n- Allure E · Easy Pace (Endurance Facile / 59% à 74% VO2 Max) : Courue à un rythme d'aisance totale, cette allure représente soixante-dix à quatre-vingts pour cent du kilométrage hebdomadaire. Elle développe l'endurance cellulaire, fortifie le système musculo-squelettique, favorise la capillarisation et assure la récupération sans stress cardiovasculaire excessif.\n- Allure M · Marathon Pace (Allure Marathon / 75% à 84% VO2 Max) : Utilisée pour habituer l'organisme à l'effort prolongé, améliorer l'efficacité métabolique du stockage glycogénique et développer la confiance mentale sur la vitesse cible de compétition sur longue distance.\n- Allure T · Threshold Pace (Allure Seuil / 83% à 88% VO2 Max) : Allure inconfortablement soutenable correspondant au seuil de transition lactique, que l'athlète peut maintenir environ soixante minutes en compétition continue. L'entraînement au seuil s'effectue sous forme de blocs continus de vingt minutes ou d'intervalles longs de cinq à dix minutes avec des récupérations très courtes (une minute). Son but est de retarder l'accumulation des ions H+ dans le sang.\n- Allure I · Interval Pace (Allure Intervalles VO2 Max / 95% à 100% VO2 Max) : Fractions d'effort de trois à cinq minutes courues à plein régime aérobie pour solliciter la pompe cardiaque maximale. Le ratio temps d'effort / temps de récupération est idéalement de un pour un.\n- Allure R · Repetition Pace (Allure Répétitions / Vitesse et Économie) : Courtes fractions de deux cents à quatre cents mètres courues plus vite que l'allure d'intervalle mais avec des récupérations généreuses. L'objectif n'est pas cardiorespiratoire mais neuromusculaire : perfectionner la foulée, la cadence, la réactivité du pied au sol et l'économie gestuelle globale sans acidose invalidante.";
         navigator.clipboard.writeText(texte).then(function() {
           var ico = document.getElementById('btn-copy-ico');
           var txt = document.getElementById('btn-copy-txt');
           if (ico && txt) {
             ico.textContent = '✓';
-            txt.textContent = 'Guide copié (998 mots) !';
+            txt.textContent = 'Guide copié (1123 mots) !';
             setTimeout(function() {
               ico.textContent = '📋';
               txt.textContent = 'Copier le guide complet';
@@ -1486,6 +1485,7 @@ Pour tirer le plein potentiel de votre évaluation VDOT, appliquez la règle de 
         });
       }
     </script>
+  
   </main>
 
   <footer class="footer" id="profeps-unified-footer">
@@ -1511,7 +1511,7 @@ Pour tirer le plein potentiel de votre évaluation VDOT, appliquez la règle de 
         </div>
 
         <div class="footer-col">
-          <h4 data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</h4>
+          <p class="footer-col-title" data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</p>
           <ul>
             <li><a href="index.html" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a></li>
             <li><a href="generateur.html" data-i18n-fr="Générateur PDF" data-i18n-en="PDF Generator" data-i18n-ar="مولد ملفات PDF">Générateur PDF</a></li>
@@ -1521,17 +1521,18 @@ Pour tirer le plein potentiel de votre évaluation VDOT, appliquez la règle de 
         </div>
 
         <div class="footer-col">
-          <h4 data-i18n-fr="PRÉPARATION CRMEF" data-i18n-en="CRMEF PREPARATION" data-i18n-ar="الاستعداد لمباراة التعليم">PRÉPARATION CRMEF</h4>
+          <p class="footer-col-title" data-i18n-fr="RESSOURCES EPS" data-i18n-en="PE RESOURCES" data-i18n-ar="موارد التربية البدنية">RESSOURCES EPS</p>
           <ul>
-            <li><a href="concours-crmef-hub.html" data-i18n-fr="🏛️ Hub National CRMEF" data-i18n-en="🏛️ National CRMEF Hub" data-i18n-ar="🏛️ بوابة مباريات التعليم">🏛️ Hub National CRMEF</a></li>
-            <li><a href="qcm-sciences-education-crmef.html" data-i18n-fr="📚 Tronc Commun (Sciences Éduc)" data-i18n-en="📚 Education Sciences" data-i18n-ar="📚 علوم التربية والديداكتيك">📚 Tronc Commun (Sciences Éduc)</a></li>
-            <li><a href="qcm-specialite-eps-maroc.html" data-i18n-fr="🏃 Spécialité EPS" data-i18n-en="🏃 PE Specialty" data-i18n-ar="🏃 تخصص التربية البدنية">🏃 Spécialité EPS</a></li>
-            <li><a href="qcm-didactique-eps-maroc.html" data-i18n-fr="⚡ Didactique EPS" data-i18n-en="⚡ PE Didactics" data-i18n-ar="⚡ ديداكتيك التربية البدنية">⚡ Didactique EPS</a></li>
-            <li><a href="concours-crmef-hub.html#discipline-eps" data-i18n-fr="🎯 Les 12 Spécialités CRMEF" data-i18n-en="🎯 All 12 CRMEF Specialties" data-i18n-ar="🎯 التخصصات الـ12 لمباراة التعليم">🎯 Les 12 Spécialités CRMEF</a></li>
+            <li><a href="cycles-eps-maroc.html" data-i18n-fr="Cycles d'EPS au Maroc" data-i18n-en="PE Cycles in Morocco" data-i18n-ar="أسلاك التربية البدنية بالمغرب">Cycles d'EPS au Maroc</a></li>
+            <li><a href="programme-eps-maroc.html" data-i18n-fr="Programme EPS Maroc" data-i18n-en="Morocco PE Curriculum" data-i18n-ar="برنامج التربية البدنية بالمغرب">Programme EPS Maroc</a></li>
+            <li><a href="evaluation-eps.html" data-i18n-fr="Évaluation en EPS" data-i18n-en="PE Assessment" data-i18n-ar="التقويم في التربية البدنية">Évaluation en EPS</a></li>
+            <li><a href="securite-eps.html" data-i18n-fr="Sécurité en EPS" data-i18n-en="Safety in PE" data-i18n-ar="السلامة في التربية البدنية">Sécurité en EPS</a></li>
+            <li><a href="bibliotheque-numerique-eps.html" data-i18n-fr="Bibliothèque numérique" data-i18n-en="Digital Library" data-i18n-ar="المكتبة الرقمية">Bibliothèque numérique</a></li>
           </ul>
         </div>
+
         <div class="footer-col" id="footer-col-calculators">
-          <h4 data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</h4>
+          <p class="footer-col-title" data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</p>
           <ul>
             <li><a href="hub-outils-sport-performance.html" class="footer-hub-highlight" data-i18n-fr="★ Hub des Calculateurs Sport" data-i18n-en="★ All Sports Calculators Hub" data-i18n-ar="★ بوابة جميع الحاسبات الرياضية">★ Hub des Calculateurs Sport</a></li>
             <li><a href="calculateur-vma.html" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS (VMA) Calculator" data-i18n-ar="حاسبة السرعة الهوائية VMA">Calculateur VMA</a></li>
@@ -1548,7 +1549,7 @@ Pour tirer le plein potentiel de votre évaluation VDOT, appliquez la règle de 
         </div>
 
         <div class="footer-col">
-          <h4 data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</h4>
+          <p class="footer-col-title" data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</p>
           <ul>
             <li><a href="politique-confidentialite.html" data-i18n-fr="Politique de confidentialité" data-i18n-en="Privacy Policy" data-i18n-ar="سياسة الخصوصية">Politique de confidentialité</a></li>
             <li><a href="cgu.html" data-i18n-fr="Conditions d'utilisation" data-i18n-en="Terms of Use" data-i18n-ar="شروط الاستخدام">Conditions d'utilisation</a></li>
@@ -1721,42 +1722,57 @@ Pour tirer le plein potentiel de votre évaluation VDOT, appliquez la règle de 
     }
   </script>
 
-<!-- PROFEPS CMP BANNER -->
-<div id="profeps-cmp-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#f8fafc;padding:16px 22px;border-top:1px solid #334155;z-index:999999;box-shadow:0 -10px 25px rgba(0,0,0,0.5);font-family:system-ui,-apple-system,sans-serif;">
-  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;">
-    <div style="flex:1 1 500px;font-size:13px;line-height:1.5;">
-      <strong style="color:#38bdf8;">🍪 Respect de votre vie privée</strong><br>
-      ProfEPS utilise des cookies essentiels au site ainsi que des cookies de mesure d'audience et Google AdSense pour maintenir nos outils gratuits. Vous pouvez personnaliser ou refuser à tout moment. <a href="politique-confidentialite.html" style="color:#38bdf8;text-decoration:underline;">Politique de confidentialité</a>.
+<!-- BANDEAU DE CONSENTEMENT GOOGLE ADSENSE & RGPD (PROFEPS CMP) -->
+<div id="profeps-cmp-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#f8fafc;padding:18px 24px;border-top:1px solid #334155;z-index:999999;box-shadow:0 -10px 25px rgba(0,0,0,0.5);font-family:system-ui,-apple-system,sans-serif;">
+  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;">
+    <div style="flex:1 1 500px;font-size:13.5px;line-height:1.5;">
+      <strong style="color:#38bdf8;font-size:14.5px;">🍪 Respect de votre vie privée & Cookies</strong><br>
+      ProfEPS utilise des cookies essentiels au fonctionnement du site, ainsi que des cookies d'analyse d'audience et de personnalisation publicitaire Google AdSense pour financer nos outils pédagogiques gratuits. Vous pouvez accepter, refuser ou personnaliser vos préférences à tout moment. Consultez notre <a href="politique-confidentialite.html" style="color:#38bdf8;text-decoration:underline;">Politique de confidentialité</a>.
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-      <button onclick="window.ProfEPS_CMP.open()" type="button" style="padding:7px 12px;background:#1e293b;color:#cbd5e1;border:1px solid #475569;border-radius:6px;font-size:12.5px;font-weight:600;cursor:pointer;">Personnaliser</button>
-      <button onclick="window.ProfEPS_CMP.rejectAll()" type="button" style="padding:7px 12px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:12.5px;font-weight:600;cursor:pointer;">Refuser</button>
-      <button onclick="window.ProfEPS_CMP.acceptAll()" type="button" style="padding:7px 16px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:12.5px;font-weight:700;cursor:pointer;">Tout accepter</button>
+      <button onclick="window.ProfEPS_CMP.open()" type="button" style="padding:8px 14px;background:#1e293b;color:#cbd5e1;border:1px solid #475569;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Personnaliser</button>
+      <button onclick="window.ProfEPS_CMP.rejectAll()" type="button" style="padding:8px 14px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Continuer sans accepter</button>
+      <button onclick="window.ProfEPS_CMP.acceptAll()" type="button" style="padding:8px 18px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;">Tout accepter</button>
     </div>
   </div>
 </div>
-<!-- PROFEPS CMP MODAL -->
-<div id="profeps-cmp-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.85);backdrop-filter:blur(4px);z-index:1000000;align-items:center;justify-content:center;padding:16px;font-family:system-ui,-apple-system,sans-serif;">
-  <div style="background:#0f172a;border:1px solid #334155;border-radius:12px;max-width:540px;width:100%;padding:22px;color:#f8fafc;box-shadow:0 20px 40px rgba(0,0,0,0.6);">
-    <h3 style="margin-top:0;font-size:17px;color:#38bdf8;">⚙️ Préférences de Confidentialité & Cookies</h3>
-    <p style="font-size:12.5px;color:#94a3b8;line-height:1.5;">Gérez vos préférences. Les cookies techniques sont obligatoires pour les calculs.</p>
-    <div style="margin:12px 0;padding:10px;background:#1e293b;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
-      <span style="font-weight:600;font-size:13px;">Cookies techniques essentiels</span>
-      <span style="font-size:11px;color:#10b981;font-weight:bold;">Toujours actif</span>
+
+<!-- MODAL DE PERSONNALISATION DES COOKIES -->
+<div id="profeps-cmp-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.8);backdrop-filter:blur(4px);z-index:1000000;align-items:center;justify-content:center;padding:16px;font-family:system-ui,-apple-system,sans-serif;">
+  <div style="background:#0f172a;border:1px solid #334155;border-radius:12px;max-width:560px;width:100%;padding:24px;color:#f8fafc;box-shadow:0 20px 40px rgba(0,0,0,0.6);max-height:90vh;overflow-y:auto;">
+    <h3 style="margin-top:0;font-size:18px;color:#38bdf8;">⚙️ Préférences de Confidentialité & Cookies</h3>
+    <p style="font-size:13px;color:#94a3b8;line-height:1.5;">Gérez ici vos préférences concernant le dépôt de cookies sur votre appareil. Les cookies techniques sont indispensables à la navigation.</p>
+    
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-weight:600;font-size:14px;">Cookies techniques essentiels</span>
+        <span style="font-size:12px;color:#10b981;font-weight:bold;">Toujours actif</span>
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Nécessaires au fonctionnement des calculateurs, de la sécurité et de la mémorisation de votre choix de consentement.</p>
     </div>
-    <div style="margin:12px 0;padding:10px;background:#1e293b;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
-      <label for="cmp-opt-analytics" style="font-weight:600;font-size:13px;cursor:pointer;">Mesure d'audience anonyme (Analytics)</label>
-      <input type="checkbox" id="cmp-opt-analytics" checked style="width:17px;height:17px;cursor:pointer;">
+
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <label for="cmp-opt-analytics" style="font-weight:600;font-size:14px;cursor:pointer;">Cookies de mesure d'audience (Analytics)</label>
+        <input type="checkbox" id="cmp-opt-analytics" checked style="width:18px;height:18px;cursor:pointer;">
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Nous permettent de mesurer anonymement la fréquentation de nos pages et calculateurs EPS.</p>
     </div>
-    <div style="margin:12px 0;padding:10px;background:#1e293b;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
-      <label for="cmp-opt-ads" style="font-weight:600;font-size:13px;cursor:pointer;">Publicités personnalisées (Google AdSense)</label>
-      <input type="checkbox" id="cmp-opt-ads" checked style="width:17px;height:17px;cursor:pointer;">
+
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <label for="cmp-opt-ads" style="font-weight:600;font-size:14px;cursor:pointer;">Publicités personnalisées (Google AdSense)</label>
+        <input type="checkbox" id="cmp-opt-ads" checked style="width:18px;height:18px;cursor:pointer;">
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Permet à Google et ses partenaires d'afficher des annonces adaptées à vos centres d'intérêt afin de maintenir la gratuité de la plateforme.</p>
     </div>
-    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:18px;">
-      <button onclick="document.getElementById('profeps-cmp-modal').style.display='none'" type="button" style="padding:7px 12px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:12px;cursor:pointer;">Fermer</button>
-      <button onclick="window.ProfEPS_CMP.saveCustom()" type="button" style="padding:7px 16px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:12.5px;font-weight:700;cursor:pointer;">Enregistrer mes choix</button>
+
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px;">
+      <button onclick="document.getElementById('profeps-cmp-modal').style.display='none'" type="button" style="padding:8px 14px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:13px;cursor:pointer;">Fermer</button>
+      <button onclick="window.ProfEPS_CMP.saveCustom()" type="button" style="padding:8px 18px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;">Enregistrer mes préférences</button>
     </div>
   </div>
 </div>
+
 </body>
 </html>

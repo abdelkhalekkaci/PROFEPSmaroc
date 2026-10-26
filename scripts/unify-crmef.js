@@ -347,7 +347,53 @@ nav.navbar, #navbar, .navbar-decoy {
   box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03) !important;
 }
 
-/* ═══ 5. COMPOSANTS DE CHARTE GRAPHIQUE UNIFIÉS ═══ */
+
+/* ═══ 5. BOUTONS & COMPOSANTS UNIFIÉS CHARTE PROFEPS ═══ */
+.peps-btn-red {
+  background-color: #c1272d !important;
+  color: #ffffff !important;
+  border-radius: 0.75rem !important;
+  font-weight: 800 !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 4px 12px rgba(193, 39, 45, 0.25) !important;
+}
+.peps-btn-red:hover {
+  background-color: #991b1b !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 18px rgba(193, 39, 45, 0.35) !important;
+}
+
+.peps-btn-green {
+  background-color: #006233 !important;
+  color: #ffffff !important;
+  border-radius: 0.75rem !important;
+  font-weight: 800 !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 4px 12px rgba(0, 98, 51, 0.25) !important;
+}
+.peps-btn-green:hover {
+  background-color: #064e3b !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 18px rgba(0, 98, 51, 0.35) !important;
+}
+
+.peps-btn-slate {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+  border-radius: 0.75rem !important;
+  font-weight: 800 !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.25) !important;
+}
+.peps-btn-slate:hover {
+  background-color: #1e293b !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.35) !important;
+}
+
 .peps-hero-gradient {
   background: radial-gradient(circle at 18% 20%, rgba(193, 39, 45, 0.08) 0%, transparent 45%),
               radial-gradient(circle at 82% 80%, rgba(0, 98, 51, 0.08) 0%, transparent 45%),
@@ -558,36 +604,98 @@ ${dropdownLinks}
   </div>`;
 }
 
-// ═══ 5. SOUS-BARRE DE NAVIGATION CRMEF (STICKY SOUS NAVBAR) ═══
+
+// ═══ 5. SOUS-BARRE DE NAVIGATION CRMEF MAÎTRE (13 DISCIPLINES + TRONC COMMUN) ═══
+const CRMEF_NAV_ITEMS = [
+  { key: "hub", label: "🏛️ Hub National", href: "concours-crmef-hub.html", anchor: "top" },
+  { key: "se", label: "📚 Tronc Commun", href: "qcm-sciences-education-crmef.html", anchor: "tronc-commun" },
+  { key: "eps", label: "🏃 EPS", didac: "qcm-didactique-eps-maroc.html", spec: "qcm-specialite-eps-maroc.html", anchor: "card-eps" },
+  { key: "primaire", label: "🎒 Primaire", didac: "qcm-didactique-primaire-maroc.html", spec: "qcm-specialite-primaire-maroc.html", anchor: "card-primaire" },
+  { key: "maths", label: "📐 Maths", didac: "qcm-didactique-maths-maroc.html", spec: "qcm-specialite-maths-maroc.html", anchor: "card-maths" },
+  { key: "pc", label: "⚛️ Physique-Chimie", didac: "qcm-didactique-physique-chimie-maroc.html", spec: "qcm-specialite-physique-chimie-maroc.html", anchor: "card-pc" },
+  { key: "svt", label: "🌿 SVT", didac: "qcm-didactique-svt-maroc.html", spec: "qcm-specialite-svt-maroc.html", anchor: "card-svt" },
+  { key: "francais", label: "🇫🇷 Français", didac: "qcm-didactique-francais-maroc.html", spec: "qcm-specialite-francais-maroc.html", anchor: "card-francais" },
+  { key: "arabe", label: "🇲🇦 Arabe", didac: "qcm-didactique-arabe-maroc.html", spec: "qcm-specialite-arabe-maroc.html", anchor: "card-arabe" },
+  { key: "hg", label: "🌍 Histoire-Géo", didac: "qcm-didactique-histoire-geographie-maroc.html", spec: "qcm-specialite-histoire-geographie-maroc.html", anchor: "card-hg" },
+  { key: "philo", label: "💭 Philosophie", didac: "qcm-didactique-philosophie-maroc.html", spec: "qcm-specialite-philosophie-maroc.html", anchor: "card-philo" },
+  { key: "info", label: "💻 Informatique", didac: "qcm-didactique-informatique-maroc.html", spec: "qcm-specialite-informatique-maroc.html", anchor: "card-info" },
+  { key: "anglais", label: "🇬🇧 Anglais", didac: "qcm-didactique-anglais-maroc.html", spec: "qcm-specialite-anglais-maroc.html", anchor: "card-anglais" },
+  { key: "islam", label: "🕌 Éduc. Islamique", didac: "qcm-didactique-education-islamique-maroc.html", spec: "qcm-specialite-education-islamique-maroc.html", anchor: "card-islam" },
+  { key: "eco", label: "📊 Éco-Gestion", didac: "qcm-didactique-economie-gestion-maroc.html", spec: "qcm-specialite-economie-gestion-maroc.html", anchor: "card-eco" }
+];
+
 function buildCrmefSubnavHtml(fileName) {
-  const isHub = fileName === 'concours-crmef-hub.html' || fileName === 'qcm-concours-crmef.html';
-  const isSE = fileName === 'qcm-sciences-education-crmef.html';
-  const isDidacEps = fileName === 'qcm-didactique-eps-maroc.html';
-  const isSpecEps = fileName === 'qcm-specialite-eps-maroc.html';
-  const isPrimaire = fileName.includes('primaire');
+  const isHub = fileName === "concours-crmef-hub.html" || fileName === "qcm-concours-crmef.html";
+
+  // Identifier la discipline courante et le type dépreuve
+  let currentKey = "hub";
+  let isDidactique = false;
+  let isSpecialite = false;
+
+  if (isHub) {
+    currentKey = "hub";
+  } else if (fileName.includes("sciences-education")) {
+    currentKey = "se";
+  } else {
+    for (const item of CRMEF_NAV_ITEMS) {
+      if (item.didac && fileName === item.didac) {
+        currentKey = item.key;
+        isDidactique = true;
+        break;
+      }
+      if (item.spec && fileName === item.spec) {
+        currentKey = item.key;
+        isSpecialite = true;
+        break;
+      }
+    }
+  }
+
+  // Construction des liens de disciplines
+  const linksHtml = CRMEF_NAV_ITEMS.map(item => {
+    const isActive = item.key === currentKey;
+    let targetUrl = item.href;
+    if (!targetUrl) {
+      if (isHub) {
+        targetUrl = `#${item.anchor}`;
+      } else {
+        targetUrl = item.didac || item.spec;
+      }
+    }
+
+    const baseClass = "px-3 py-1.5 rounded-xl transition-all whitespace-nowrap text-xs font-bold shrink-0";
+    const activeClass = "bg-slate-900 text-white shadow-xs font-black";
+    const inactiveClass = "text-slate-600 hover:text-slate-900 hover:bg-slate-100";
+
+    return `        <a href="${targetUrl}" class="${baseClass} ${isActive ? activeClass : inactiveClass}">
+          ${item.label}
+        </a>`;
+  }).join("\n");
+
+  // Si on est sur une page spécifique d une discipline, ajouter le switch Didactique / Spécialité
+  let dualToggleHtml = "";
+  const currentDiscipline = CRMEF_NAV_ITEMS.find(d => d.key === currentKey);
+  if (currentDiscipline && currentDiscipline.didac && currentDiscipline.spec) {
+    dualToggleHtml = `
+      <div class="hidden md:flex items-center gap-1.5 pl-3 border-l border-slate-200 shrink-0 text-xs">
+        <a href="${currentDiscipline.didac}" class="px-2.5 py-1 rounded-lg font-bold transition-all ${isDidactique ? "peps-btn-red text-white shadow-xs" : "bg-red-50 text-[#c1272d] hover:bg-red-100"}">
+          📘 Didactique
+        </a>
+        <a href="${currentDiscipline.spec}" class="px-2.5 py-1 rounded-lg font-bold transition-all ${isSpecialite ? "peps-btn-green text-white shadow-xs" : "bg-emerald-50 text-[#006233] hover:bg-emerald-100"}">
+          📗 Spécialité
+        </a>
+      </div>`;
+  }
 
   return `  <!-- ================= CRMEF DISCIPLINE STICKY SUBNAV ================= -->
-  <div class="peps-crmef-subnav" role="navigation" aria-label="Disciplines CRMEF">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between gap-4 overflow-x-auto scrollbar-none">
-      <div class="flex items-center gap-1.5 shrink-0 text-xs font-bold">
-        <a href="concours-crmef-hub.html" class="px-3 py-1.5 rounded-xl transition-all ${isHub ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}">
-          🏛️ Hub National
-        </a>
-        <a href="qcm-sciences-education-crmef.html" class="px-3 py-1.5 rounded-xl transition-all ${isSE ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}">
-          📚 Tronc Commun
-        </a>
-        <a href="qcm-didactique-eps-maroc.html" class="px-3 py-1.5 rounded-xl transition-all ${isDidacEps ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}">
-          🏃 Didactique EPS
-        </a>
-        <a href="qcm-specialite-eps-maroc.html" class="px-3 py-1.5 rounded-xl transition-all ${isSpecEps ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}">
-          ⚡ Spécialité EPS
-        </a>
-        <a href="qcm-didactique-primaire-maroc.html" class="px-3 py-1.5 rounded-xl transition-all ${isPrimaire ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}">
-          🎒 Primaire
-        </a>
+  <div class="peps-crmef-subnav" role="navigation" aria-label="Sous-navigation des Disciplines CRMEF">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between gap-3 overflow-x-auto scrollbar-none">
+      <div class="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-0.5">
+${linksHtml}
       </div>
-      <div class="hidden sm:flex items-center gap-2 shrink-0">
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-[#006233] text-xs font-bold border border-emerald-200">
+      <div class="flex items-center gap-2 shrink-0">
+${dualToggleHtml}
+        <span class="hidden lg:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-[#006233] text-xs font-bold border border-emerald-200">
           <span class="w-2 h-2 rounded-full bg-[#006233] animate-pulse"></span>
           <span>Session CRMEF 2026</span>
         </span>

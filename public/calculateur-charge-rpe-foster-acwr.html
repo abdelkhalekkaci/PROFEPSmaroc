@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calculateur Charge RPE &amp; Ratio ACWR | Prof EPS</title>
+  <title>Calculateur Charge RPE Foster & ACWR | ProfEPS</title>
   <meta name="description" id="metaDesc" content="Suivez votre charge d’entraînement aiguë/chronique et évaluez votre ratio ACWR pour prévenir les blessures selon Gabbett." />
   <meta name="keywords" content="calculateur charge rpe foster, ratio acwr blessure, charge aigue chronique sport, calcul sRPE entrainement" />
   <meta property="og:type" content="website" />
@@ -641,16 +641,12 @@ main > div.max-w-3xl select:focus {
   overflow: hidden !important;
 }
 .peps-cta-btn::after {
-  content: '→' !important;
-  font-size: 1.15rem !important;
-  font-weight: 900 !important;
-  margin-left: 0.25rem !important;
-  transition: transform 0.2s ease !important;
+  display: none !important;
+  content: none !important;
 }
 html[dir="rtl"] .peps-cta-btn::after {
-  content: '←' !important;
-  margin-left: 0 !important;
-  margin-right: 0.25rem !important;
+  display: none !important;
+  content: none !important;
 }
 .peps-cta-btn:hover {
   transform: translateY(-2.5px) scale(1.005) !important;
@@ -755,7 +751,9 @@ footer.footer .footer-stat-lbl {
   color: rgba(255, 255, 255, 0.55) !important;
 }
 #profeps-unified-footer .footer-col h4,
-footer.footer .footer-col h4 {
+#profeps-unified-footer .footer-col .footer-col-title,
+footer.footer .footer-col h4,
+footer.footer .footer-col .footer-col-title {
   font-size: 0.76rem !important;
   font-weight: 800 !important;
   text-transform: uppercase !important;
@@ -887,11 +885,12 @@ footer.footer .footer-bottom {
         <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:52px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
       </a>
       <div class="peps-nav-menu" id="pepsNavMenu">
-        <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
+        <a href="index.html" class="peps-nav-link" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
         <a href="generateur.html" class="peps-nav-link" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
         <div class="peps-dropdown" id="pepsCalcDropdown">
-          <a href="calculateur-charge-rpe-foster-acwr.html" class="peps-nav-link active" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="Charge RPE & ACWR" data-i18n-en="RPE Load & ACWR" data-i18n-ar="حمل التدريب RPE و ACWR"><span class="peps-dropdown-title">Charge RPE & ACWR</span></span><span class="peps-dropdown-caret">▾</span></a>
-          <div class="peps-dropdown-menu" id="pepsDropdownMenu">            <a href="hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub" data-i18n-fr="🧭 Hub de Tous les Calculateurs Sport" data-i18n-en="🧭 All Sports Calculators Hub" data-i18n-ar="🧭 بوابة جميع الحاسبات الرياضية">🧭 Hub de Tous les Calculateurs Sport</a>
+          <a href="calculateur-charge-rpe-foster-acwr.html" class="peps-nav-link active" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="Charge RPE & ACWR" data-i18n-en="RPE Load & ACWR" data-i18n-ar="حمل التدريب RPE و ACWR">Charge RPE & ACWR</span><span class="peps-dropdown-caret">▾</span></a>
+          <div class="peps-dropdown-menu" id="pepsDropdownMenu">
+            <a href="hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub" data-i18n-fr="🧭 Hub de Tous les Calculateurs Sport" data-i18n-en="🧭 All Sports Calculators Hub" data-i18n-ar="🧭 بوابة جميع الحاسبات الرياضية">🧭 Hub de Tous les Calculateurs Sport</a>
             <a href="calculateur-vma.html" class="peps-dropdown-item" data-i18n-fr="⚡ Calculateur VMA & Allures" data-i18n-en="⚡ MAS (VMA) & Paces Calculator" data-i18n-ar="⚡ حاسبة السرعة الهوائية القصوى (VMA)">⚡ Calculateur VMA & Allures</a>
             <a href="calculateur-vdot-asr-endurance.html" class="peps-dropdown-item" data-i18n-fr="🫁 Calculateur VO2 Max & VDOT" data-i18n-en="🫁 VO2 Max & VDOT Calculator" data-i18n-ar="🫁 حاسبة VO2 Max ومؤشر VDOT">🫁 Calculateur VO2 Max & VDOT</a>
             <a href="calculateur-asr-reserve-vitesse.html" class="peps-dropdown-item" data-i18n-fr="🚀 Réserve de Vitesse Anaérobie (ASR)" data-i18n-en="🚀 Anaerobic Speed Reserve (ASR)" data-i18n-ar="🚀 احتياطي السرعة اللاهوائية (ASR)">🚀 Réserve de Vitesse Anaérobie (ASR)</a>
@@ -904,7 +903,7 @@ footer.footer .footer-bottom {
             <a href="calculateur-charge-rpe-foster-acwr.html" class="peps-dropdown-item active-tool" data-i18n-fr="🛡️ Charge RPE Foster & ACWR" data-i18n-en="🛡️ Foster sRPE Load & ACWR Ratio" data-i18n-ar="🛡️ حمل التدريب (RPE Foster) ونسبة ACWR">🛡️ Charge RPE Foster & ACWR</a>
           </div>
         </div>
-        <a href="concours-crmef-hub.html" class="peps-nav-link" data-i18n-fr="Préparer Concours CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparer Concours CRMEF</a>
+        <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
       </div>
       <div class="peps-nav-right">
         <div dir="ltr" class="peps-lang-switch" aria-label="Sélecteur de langue">
@@ -1210,27 +1209,30 @@ footer.footer .footer-bottom {
       </div>
     </div>
 
-    <!-- FICHE SCIENTIFIQUE & PÉDAGOGIQUE OFFICIELLE (875 MOTS MINIMUM) -->
-    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (875 MOTS MINIMUM) -->
-    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (875 MOTS MINIMUM) -->
+  
+    <!-- FICHE SCIENTIFIQUE & PÉDAGOGIQUE OFFICIELLE (1130 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1130 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1130 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1130 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1130 MOTS MINIMUM) -->
     <section class="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 mt-8" id="fiche-pedagogique-officielle" style="max-width:48rem;margin:2rem auto 0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:20px;padding:1.75rem;box-shadow:0 10px 28px -8px rgba(15,23,42,0.06);">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
         <div>
           <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-1">
-            <span class="text-red-700 font-bold">Cluster 3B · Prévention des Blessures &amp; Monitoring Athlétique</span>
+            <span class="text-red-700 font-bold">Cluster 3B · Monitoring de Charge &amp; Prévention des Blessures</span>
             <span aria-hidden="true">&middot;</span>
             <span style="color:#006233;font-weight:700;">Rédigé par Abdelkhalek ELBOUDANI (Prof d'EPS au Maroc)</span>
           </div>
           <h2 class="text-lg font-extrabold text-slate-900 tracking-tight flex items-center gap-2 m-0">
             <span style="font-size:1.15rem;">📖</span>
-            Calculateur Charge d'Entraînement ACWR, RPE &amp; Foster
+            Charge RPE Foster &amp; Ratio ACWR
           </h2>
         </div>
         <div class="flex items-center gap-2">
           <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md tabular-nums border border-emerald-200">
-            875 mots (Guide Approfondi)
+            1130 mots (Guide Approfondi)
           </span>
-          <button type="button" onclick="copierFichePedagogique()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors cursor-pointer border border-slate-200">
+          <button type="button" onclick="copierFichePedagogique()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors cursor-pointer border border-slate-200" title="Copier le guide officiel complet (1130 mots)">
             <span id="btn-copy-ico">📋</span>
             <span id="btn-copy-txt">Copier le guide complet</span>
           </button>
@@ -1244,7 +1246,7 @@ footer.footer .footer-bottom {
           Zone 2 : Interprétation Immédiate &amp; Barèmes Scolaires Marocains
         </h3>
         <p class="text-xs text-slate-700 leading-relaxed bg-amber-50/60 border border-amber-200/70 p-3.5 rounded-xl m-0">
-          Le modèle ACWR de Tim Gabbett démontre que ce n'est pas la charge élevée en soi qui blesse l'athlète, mais les pics brutaux de surcharge par rapport au niveau de préparation chronique.
+          Le modèle couplé de Carl Foster et Tim Gabbett constitue le standard scientifique mondial pour monitorer la fatigue interne, optimiser le pic de forme et prévenir jusqu'à 80% des blessures de surmenage musculaire et tendineux.
         </p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1">
@@ -1254,28 +1256,28 @@ footer.footer .footer-bottom {
         <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Zone de Sous-Entraînement</div>
         <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">ACWR &lt; 0,80</div>
       </div>
-      <div class="text-[11px] text-slate-600 leading-normal">Charge aiguë trop faible, désentraînement relatif, perte de tolérance tissulaire aux efforts intenses.</div>
+      <div class="text-[11px] text-slate-600 leading-normal">Charge récente insuffisante par rapport aux habitudes. Risque de désadaptation aérobie et vulnérabilité lors de la reprise.</div>
     </div>
     <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
       <div>
-        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Zone Optimale (&quot;Sweet Spot&quot;)</div>
-        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">ACWR 0,80 – 1,30</div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Zone Optimale / « Sweet Spot » de Gabbett</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">0,80 ≤ ACWR ≤ 1,30</div>
       </div>
-      <div class="text-[11px] text-slate-600 leading-normal">Progression athlétique idéale, gain maximal de condition physique associé au risque de blessure le plus bas.</div>
+      <div class="text-[11px] text-slate-600 leading-normal">Progression physiologique maximale avec risque de blessure minimal (&lt; 5%). Adaptation parfaite.</div>
     </div>
     <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
       <div>
-        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Zone d'Alerte Surcharge</div>
-        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">ACWR 1,30 – 1,50</div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Zone de Vigilance / Surcharge Modérée</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">1,31 ≤ ACWR ≤ 1,50</div>
       </div>
-      <div class="text-[11px] text-slate-600 leading-normal">Augmentation sensible du risque de blessure musculaire et tendineuse, vigilance requise sur la récupération.</div>
+      <div class="text-[11px] text-slate-600 leading-normal">Augmentation rapide de la fatigue. Surveillance du sommeil, réduction de la monotonie requise.</div>
     </div>
     <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
       <div>
-        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Zone Critique / Danger Majeur</div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Zone Critique / Risque Majeur de Blessure</div>
         <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">ACWR &gt; 1,50</div>
       </div>
-      <div class="text-[11px] text-slate-600 leading-normal">Risque de blessure multiplié par 3 à 4 dans les 7 à 10 jours suivants. Allègement obligatoire immédiat.</div>
+      <div class="text-[11px] text-slate-600 leading-normal">Pic de charge brutal (+50%). Risque de blessure musculaire ou tendineuse triplé dans les 7 à 14 jours suivants.</div>
     </div>
         </div>
       </div>
@@ -1285,7 +1287,7 @@ footer.footer .footer-bottom {
         <div class="flex items-center justify-between">
           <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
             <span style="color:#006233;">🏃</span>
-            Zone 3 : Application Didactique EPS Maroc &amp; Gestion de Classe (875 mots)
+            Zone 3 : Application Didactique EPS Maroc &amp; Gestion de Classe (1130 mots)
           </h3>
           <button type="button" onclick="toggleTexteIntegral()" id="btn-toggle-texte" class="text-xs font-bold text-blue-600 hover:text-blue-800 cursor-pointer">
             Afficher le texte complet ▼
@@ -1296,15 +1298,15 @@ footer.footer .footer-bottom {
           
     <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
       <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">1</span>
-      <p class="text-xs text-slate-700 leading-relaxed m-0">Après chaque séance d'entraînement ou match, attribuez une note de Perception de l'Effort (RPE sur l'échelle CR-10 de Borg/Foster modifiée) et notez la durée en minutes.</p>
+      <p class="text-xs text-slate-700 leading-relaxed m-0">À l'issue de chaque séance d'entraînement ou de match (environ 15 à 30 minutes après le retour au calme), évaluez votre effort perçu global sur l'échelle RPE de Foster / Borg CR10 (de 1 très léger à 10 effort maximal absolu).</p>
     </div>
     <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
       <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">2</span>
-      <p class="text-xs text-slate-700 leading-relaxed m-0">Renseignez la charge aiguë des 7 derniers jours (Acute Load) et la charge chronique moyenne des 28 derniers jours (Chronic Load).</p>
+      <p class="text-xs text-slate-700 leading-relaxed m-0">Renseignez la durée effective de la séance en minutes pour obtenir la charge interne en Unités Arbitraires (UA = Durée × RPE).</p>
     </div>
     <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
       <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">3</span>
-      <p class="text-xs text-slate-700 leading-relaxed m-0">Obtenez votre ratio ACWR (Acute:Chronic Workload Ratio), votre positionnement dans la zone optimale de performance (&quot;Sweet Spot&quot;) et votre alerte de risque de blessure.</p>
+      <p class="text-xs text-slate-700 leading-relaxed m-0">Suivez vos charges quotidiennes sur la semaine pour obtenir votre Charge Aiguë (7 jours), votre Monotonie, votre Contrainte (Strain) et comparez-la à votre Charge Chronique habituelle (moyenne des 4 dernières semaines) pour obtenir votre ratio ACWR.</p>
     </div>
         </div>
         
@@ -1312,49 +1314,58 @@ footer.footer .footer-bottom {
           <div style="font-weight:700;color:#006233;margin-bottom:0.75rem;padding-bottom:0.4rem;border-bottom:1px solid #cbd5e1;">
             Auteur : Abdelkhalek ELBOUDANI · Professeur d'Éducation Physique et Sportive (Maroc) · Conforme Orientations 2007-2009
           </div>
-I. Épistémologie du Monitoring de Charge et Modèle ACWR de Gabbett
+I. Introduction au Suivi de Charge et Révolution du Modèle sRPE / ACWR
 
-Au cours de la dernière décennie, la gestion de la charge d'entraînement s'est imposée comme la préoccupation centrale des staffs médicaux et techniques du sport de haut niveau international. Historiquement, le réflexe dominant des entraîneurs face à une blessure musculaire ou tendineuse était de considérer que l'athlète s'était &quot;trop entraîné&quot;. Les recherches révolutionnaires menées par le professeur australien Tim Gabbett ont radicalement transformé ce paradigme en formulant le concept de l'Acute:Chronic Workload Ratio (ACWR). Gabbett a démontré avec une rigueur statistique éclatante que le volume d'entraînement élevé n'est pas le responsable des traumatismes physiques ; au contraire, des charges d'entraînement chroniques élevées et bien assimilées immunisent l'athlète contre les blessures. Ce qui brise les fibres musculaires et inflamed les tendons, ce sont les pointes brutales de surcharge (workload spikes) appliquées à un organisme insuffisamment conditionné sur le plan chronique. L'ACWR permet de surveiller avec précision le fragile équilibre entre fatigue aiguë et adaptation chronique.
+Dans l'univers du sport contemporain, de l'athlétisme aux sports collectifs professionnels jusqu'à la pratique scolaire en EPS, la performance athlétique résulte d'un équilibre délicat entre deux forces opposées : la charge d'entraînement qui stimule l'adaptation physiologique et la fatigue qui s'accumule au fil des séances. Pendant longtemps, les entraîneurs n'ont quantifié que la charge externe : le nombre de kilomètres courus, le nombre de levées de fonte ou la vitesse chronométrée. Cependant, deux athlètes effectuant la même séance externe subissent un stress interne radicalement différent selon leur niveau de forme, leur état de fatigue nerveuse, leur sommeil et leur niveau de stress personnel. Pour capturer cette réalité biologique interne sans recourir à des prises de sang ou des appareils invasifs coûteux, le professeur américain Carl Foster a mis au point dans les années quatre-vingt-dix la méthode de la Session-RPE (sRPE). Plus tard, le chercheur australien Tim Gabbett a enrichi cette approche en formalisant le concept de ratio Charge Aiguë / Charge Chronique (ACWR pour Acute:Chronic Workload Ratio). Ce couplage est aujourd'hui universellement reconnu comme l'outil le plus puissant pour maximiser la condition physique tout en réduisant drastiquement les blessures sans contact.
 
-II. Protocole Quotidien de Recueil et Échelle de Foster
+II. Guide d'Utilisation Étape par Étape
 
-L'efficacité du suivi dépend de la régularité et de la sincérité du recueil de données :
-1. Évaluation de la Perception de l'Effort (Session-RPE) : Développée par Carl Foster à partir de l'échelle d'effort perçu de Borg, la méthode session-RPE consiste à poser une question simple à l'athlète environ vingt à trente minutes après la fin de la séance : &quot;Comment s'est passée votre séance dans son ensemble ?&quot;. L'athlète répond sur une échelle standardisée graduée de 1 à 10 (1 représentant un repos complet et 10 un effort maximal épuisant). Attendre 20 à 30 minutes est capital pour éviter que la dernière phase de la séance (par exemple un retour au calme relaxant ou un sprint final houleux) ne biaise le jugement global de l'athlète.
-2. Mesure du volume temporel : Relevez la durée exacte de la séance en minutes (échauffement compris, mais hors étirements passifs finaux).
-3. Calcul de la charge de séance : Multipliez le score RPE par la durée en minutes. Le résultat est exprimé en Unités Arbitraires (UA).
-4. Consolidation hebdomadaire et mensuelle :
-- Charge Aiguë (Acute Workload) : Somme des charges en UA cumulées sur les 7 derniers jours (représente l'état de fatigue instantané).
-- Charge Chronique (Chronic Workload) : Moyenne hebdomadaire des charges cumulées sur les 28 derniers jours (représente le niveau de forme physique et d'aptitude historique).
-5. Saisie dans l'outil : Entrez vos valeurs pour générer l'analyse ACWR et l'indice de contrainte globale.
+Pour monitorer avec rigueur votre charge d'entraînement et sécuriser votre progression :
+1. Évaluation différée du RPE : Environ quinze à trente minutes après la fin de la séance d'entraînement ou du match (afin d'éviter que le ressenti des toutes dernières minutes ne biaise le jugement global), posez-vous la question simple : « Comment avez-vous trouvé la séance dans sa globalité ? ». Évaluez l'effort sur l'échelle de Borg CR10 modifiée de Foster, allant de 1 (très facile) à 10 (effort maximal absolu).
+2. Calcul de la charge de séance : Renseignez la durée réelle de l'entraînement en minutes (sans compter les pauses prolongées de vestiaire) et multipliez-la par le score RPE. Le résultat s'exprime en Unités Arbitraires (UA).
+3. Suivi hebdomadaire et calcul de la Monotonie : Enregistrez les charges quotidiennes sur l'ensemble des sept jours de la semaine pour obtenir la Charge Aiguë hebdomadaire et l'Indice de Monotonie.
+4. Comparaison avec la Charge Chronique et lecture de l'ACWR : Saisissez la moyenne hebdomadaire des charges accumulées au cours des quatre dernières semaines (Charge Chronique de 28 jours). Le calculateur affiche immédiatement votre ratio ACWR et vous délivre un diagnostic de sécurité sans équivoque.
 
-III. Relations Mathématiques et Calculs Statistiques de Foster et Gabbett
+III. Explication des Paramètres et Notions Clés
 
-Les algorithmes internes appliquent les relations formalisées dans la littérature internationale :
-1. Calcul de la charge d'une séance élémentaire :
-Charge de séance (UA) = RPE (score de 1 à 10) × Durée (minutes).
-Exemple : Un entraînement de 90 minutes jugé &quot;difficile&quot; (RPE = 7) génère :
-Charge = 7 × 90 = 630 UA.
-2. Calcul du ratio ACWR couplé (Acute:Chronic Workload Ratio) :
-ACWR = Charge des 7 derniers jours / (Moyenne des charges hebdomadaires sur 28 jours).
-Exemple pratique : Si un joueur de football a accumulé 2 800 UA au cours des 7 derniers jours, et que sa moyenne hebdomadaire sur le mois écoulé était de 2 000 UA :
-ACWR = 2 800 / 2 000 = 1,40.
-3. Monotonie de l'entraînement de Foster :
-Monotonie = Moyenne des charges quotidiennes / Écart-type des charges quotidiennes de la semaine.
-Une monotonie supérieure à 2,0 indique que toutes les séances se ressemblent sans alternance d'intensités douces et dures, ce qui favorise le surentraînement.
-4. Calcul de la Contrainte Globale (Strain) :
-Contrainte = Charge totale de la semaine × Monotonie.
+Comprendre les variables calculées permet d'adapter intelligemment sa programmation :
+- Le RPE (Rating of Perceived Exertion) : Il s'agit d'un intégrateur neurophysiologique exceptionnel validé scientifiquement. Il synthétise les signaux cardiorespiratoires (ventilation, fréquence cardiaque), musculaires (acidose, tensions myofibrillaires) et psychologiques du sportif.
+- La Charge Aiguë (Acute Workload en UA) : Somme des charges des sept derniers jours. Elle représente la fatigue immédiate accumulée récemment.
+- La Charge Chronique (Chronic Workload en UA) : Moyenne mobile des charges hebdomadaires sur les vingt-huit derniers jours. Elle représente la condition physique de fond, la robustesse et la tolérance à l'effort construites par l'athlète au fil du mois écoulé.
+- L'Indice de Monotonie : Rapport entre la charge moyenne quotidienne et son écart-type sur la semaine. Une monotonie élevée signifie que toutes les séances se ressemblent en intensité sans aucune alternance entre jours durs et jours légers.
+- La Contrainte (Strain) : Produit de la charge hebdomadaire par la monotonie. Elle reflète le stress biologique global et constitue le signal d'alarme du surentraînement.
 
-IV. Interprétation des Plages de Risque et &quot;Sweet Spot&quot;
+IV. Relations Mathématiques et Équations de Foster et Gabbett
 
-L'analyse de l'indice ACWR permet de piloter la programmation athlétique en toute sérénité :
-- Zone de Sous-Entraînement (ACWR inférieur à 0,80) : La charge récente est sensiblement inférieure au niveau de conditionnement habituel. Si cette phase n'est pas une période volontaire d'affûtage pré-compétitif, elle expose l'athlète à une désadaptation tissulaire.
-- Zone Optimale ou &quot;Sweet Spot&quot; (ACWR compris entre 0,80 et 1,30) : C'est la plage de référence absolue. L'organisme s'adapte, le niveau de forme s'élève et le risque de blessure est statistiquement à son minimum historique (inférieur à 5% d'incidence).
-- Zone d'Alerte et de Risque Modéré (ACWR compris entre 1,30 et 1,50) : Le volume récent dépasse la capacité de tolérance chronique de plus de 30%. Le risque de lésion musculaire commence à grimper sensiblement.
-- Zone Critique de Danger (ACWR supérieur à 1,50) : Le risque relatif de blessure est multiplié par 3 à 4 dans les sept à dix jours qui suivent le pic de charge. Une réduction immédiate de l'intensité ou un jour de repos compensatoire s'impose pour désamorcer la crise.
+Les relations mathématiques qui pilotent le calculateur sont d'une rigueur absolue :
+1. Charge d'une séance unitaire (Méthode de Carl Foster) :
+Charge (UA) = Durée de la séance (en minutes) × RPE (score de 0 à 10).
+Exemple : Une séance de 90 minutes évaluée à un RPE de 6 (difficile) représente 90 × 6 = 540 Unités Arbitraires (UA).
+2. Charge Hebdomadaire Aiguë :
+Charge Aiguë = Somme des charges des 7 jours de la semaine (UA).
+3. Calcul de la Monotonie hebdomadaire de Foster :
+Monotonie = Moyenne journalière des 7 jours / Écart-type des 7 jours.
+4. Calcul de l'Indice de Contrainte (Training Strain) :
+Strain = Charge Hebdomadaire Aiguë × Monotonie.
+5. Calcul du ratio Charge Aiguë / Charge Chronique (ACWR de Tim Gabbett) :
+ACWR = Charge Aiguë (semaine en cours) / Charge Chronique Moyenne (4 semaines précédentes).
+Exemple concret : Si un athlète affiche une charge aiguë de 3 600 UA cette semaine, et que sa charge chronique moyenne sur les 4 dernières semaines était de 3 000 UA :
+ACWR = 3 600 / 3 000 = 1,20.
 
-V. Applications Scolaires et Prévention en Milieu Éducatif EPS
+V. Grille d'Interprétation du Ratio ACWR et Seuils de Risque
 
-En milieu scolaire et associatif, les adolescents sont particulièrement vulnérables aux pathologies de surmenage ostéo-articulaire (maladie d'Osgood-Schlatter au genou, maladie de Sever au talon). L'utilisation de ce calculateur permet à l'enseignant et à l'entraîneur de repérer les collégiens et lycéens qui cumulent le sport scolaire, le club fédéral et les activités extrascolaires sans phase de récupération, et de réajuster leur investissement avant l'apparition de lésions d'usure irréversibles.
+Les travaux de Tim Gabbett sur des milliers d'athlètes professionnels ont identifié des zones prédictives remarquables :
+- ACWR &lt; 0,80 (Zone de Sous-Entraînement) : La charge récente est trop faible par rapport aux habitudes de l'athlète. Bien que le risque de blessure immédiate soit bas, cette situation entraîne une perte d'adaptations physiologiques. L'athlète devient vulnérable dès qu'il devra réaccélérer ses charges.
+- 0,80 ≤ ACWR ≤ 1,30 (Zone Optimale ou « Sweet Spot ») : C'est la zone idéale de progression. La charge augmente de manière progressive et maîtrisée (+5% à +10% par semaine). L'athlète développe sa forme physique tout en maintenant son risque de blessure en dessous de 5%.
+- 1,31 ≤ ACWR ≤ 1,50 (Zone de Vigilance et Surcharge Modérée) : L'augmentation de la charge est rapide. Le risque de blessure augmente modérément. Il convient de stabiliser la charge sur les sept jours suivants et de surveiller la qualité du sommeil et de la nutrition.
+- ACWR &gt; 1,50 (Zone Critique et Risque Élevé de Blessure) : La charge a augmenté de plus de 50% d'un coup par rapport aux habitudes. Les études démontrent que dans cette zone de danger, le risque de blessure musculaire, tendineuse ou articulaire est multiplié par trois à quatre dans les sept à quatorze jours qui suivent.
+
+VI. Règles d'Or pour la Planification et la Prévention des Blessures
+
+Pour tirer le meilleur parti du suivi RPE et de l'ACWR en club ou en milieu scolaire :
+- Ne jamais augmenter la charge hebdomadaire de plus de dix pour cent d'une semaine sur l'autre (règle des 10%).
+- Casser la monotonie : Veillez à ce que l'indice de monotonie reste toujours inférieur à 2,0. Pour cela, alternez impérativement des journées très intenses (RPE 7-9) avec des journées très légères de régénération (RPE 2-3) ou de repos complet.
+- Ne pas diaboliser la charge élevée : Gabbett rappelle qu'une charge chronique élevée protège contre les blessures. Ce n'est pas le fait de s'entraîner beaucoup qui blesse, mais le fait d'augmenter la charge trop brutalement sans préparation préalable.
         </div>
       </div>
 
@@ -1367,20 +1378,24 @@ En milieu scolaire et associatif, les adolescents sont particulièrement vulnér
         <div class="p-4 bg-slate-900 text-white rounded-xl space-y-2 border border-slate-800 shadow-inner">
           
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
-      <span class="text-slate-400 font-medium">Charge de Séance selon Foster (UA) :</span>
-      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Charge (Unités Arbitraires) = RPE (1 à 10) × Durée (minutes)</code>
+      <span class="text-slate-400 font-medium">Charge Interne de Séance de Carl Foster (sRPE) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Charge de Séance (UA) = Durée de la séance (minutes) × Score RPE (0 à 10)</code>
     </div>
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
-      <span class="text-slate-400 font-medium">Ratio Charge Aiguë / Chronique (ACWR) :</span>
-      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">ACWR = Charge Aiguë (7 jours) / Charge Chronique (28 jours / 4)</code>
+      <span class="text-slate-400 font-medium">Charge Hebdomadaire Aiguë (Acute Load) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Charge Aiguë (UA) = Somme des charges de séance des 7 derniers jours</code>
     </div>
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
-      <span class="text-slate-400 font-medium">Monotonie de l'Entraînement :</span>
-      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Monotonie = Moyenne quotidienne / Écart-type des charges quotidiennes</code>
+      <span class="text-slate-400 font-medium">Indice de Monotonie de Foster :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Monotonie = Charge journalière moyenne (7j) / Écart-type des charges journalières (7j)</code>
     </div>
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
-      <span class="text-slate-400 font-medium">Contrainte Globale (Strain) :</span>
-      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Contrainte = Charge Totale Hebdomadaire × Monotonie</code>
+      <span class="text-slate-400 font-medium">Indice de Contrainte Globale (Training Strain) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Contrainte (Strain) = Charge Hebdomadaire Aiguë × Monotonie</code>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Ratio Charge Aiguë : Chronique (ACWR de Tim Gabbett) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">ACWR = Charge Aiguë (7 jours) / Charge Chronique Hebdomadaire Moyenne (28 jours)</code>
     </div>
         </div>
       </div>
@@ -1402,13 +1417,13 @@ En milieu scolaire et associatif, les adolescents sont particulièrement vulnér
       }
 
       function copierFichePedagogique() {
-        var texte = "I. Épistémologie du Monitoring de Charge et Modèle ACWR de Gabbett\n\nAu cours de la dernière décennie, la gestion de la charge d'entraînement s'est imposée comme la préoccupation centrale des staffs médicaux et techniques du sport de haut niveau international. Historiquement, le réflexe dominant des entraîneurs face à une blessure musculaire ou tendineuse était de considérer que l'athlète s'était \"trop entraîné\". Les recherches révolutionnaires menées par le professeur australien Tim Gabbett ont radicalement transformé ce paradigme en formulant le concept de l'Acute:Chronic Workload Ratio (ACWR). Gabbett a démontré avec une rigueur statistique éclatante que le volume d'entraînement élevé n'est pas le responsable des traumatismes physiques ; au contraire, des charges d'entraînement chroniques élevées et bien assimilées immunisent l'athlète contre les blessures. Ce qui brise les fibres musculaires et inflamed les tendons, ce sont les pointes brutales de surcharge (workload spikes) appliquées à un organisme insuffisamment conditionné sur le plan chronique. L'ACWR permet de surveiller avec précision le fragile équilibre entre fatigue aiguë et adaptation chronique.\n\nII. Protocole Quotidien de Recueil et Échelle de Foster\n\nL'efficacité du suivi dépend de la régularité et de la sincérité du recueil de données :\n1. Évaluation de la Perception de l'Effort (Session-RPE) : Développée par Carl Foster à partir de l'échelle d'effort perçu de Borg, la méthode session-RPE consiste à poser une question simple à l'athlète environ vingt à trente minutes après la fin de la séance : \"Comment s'est passée votre séance dans son ensemble ?\". L'athlète répond sur une échelle standardisée graduée de 1 à 10 (1 représentant un repos complet et 10 un effort maximal épuisant). Attendre 20 à 30 minutes est capital pour éviter que la dernière phase de la séance (par exemple un retour au calme relaxant ou un sprint final houleux) ne biaise le jugement global de l'athlète.\n2. Mesure du volume temporel : Relevez la durée exacte de la séance en minutes (échauffement compris, mais hors étirements passifs finaux).\n3. Calcul de la charge de séance : Multipliez le score RPE par la durée en minutes. Le résultat est exprimé en Unités Arbitraires (UA).\n4. Consolidation hebdomadaire et mensuelle :\n- Charge Aiguë (Acute Workload) : Somme des charges en UA cumulées sur les 7 derniers jours (représente l'état de fatigue instantané).\n- Charge Chronique (Chronic Workload) : Moyenne hebdomadaire des charges cumulées sur les 28 derniers jours (représente le niveau de forme physique et d'aptitude historique).\n5. Saisie dans l'outil : Entrez vos valeurs pour générer l'analyse ACWR et l'indice de contrainte globale.\n\nIII. Relations Mathématiques et Calculs Statistiques de Foster et Gabbett\n\nLes algorithmes internes appliquent les relations formalisées dans la littérature internationale :\n1. Calcul de la charge d'une séance élémentaire :\nCharge de séance (UA) = RPE (score de 1 à 10) × Durée (minutes).\nExemple : Un entraînement de 90 minutes jugé \"difficile\" (RPE = 7) génère :\nCharge = 7 × 90 = 630 UA.\n2. Calcul du ratio ACWR couplé (Acute:Chronic Workload Ratio) :\nACWR = Charge des 7 derniers jours / (Moyenne des charges hebdomadaires sur 28 jours).\nExemple pratique : Si un joueur de football a accumulé 2 800 UA au cours des 7 derniers jours, et que sa moyenne hebdomadaire sur le mois écoulé était de 2 000 UA :\nACWR = 2 800 / 2 000 = 1,40.\n3. Monotonie de l'entraînement de Foster :\nMonotonie = Moyenne des charges quotidiennes / Écart-type des charges quotidiennes de la semaine.\nUne monotonie supérieure à 2,0 indique que toutes les séances se ressemblent sans alternance d'intensités douces et dures, ce qui favorise le surentraînement.\n4. Calcul de la Contrainte Globale (Strain) :\nContrainte = Charge totale de la semaine × Monotonie.\n\nIV. Interprétation des Plages de Risque et \"Sweet Spot\"\n\nL'analyse de l'indice ACWR permet de piloter la programmation athlétique en toute sérénité :\n- Zone de Sous-Entraînement (ACWR inférieur à 0,80) : La charge récente est sensiblement inférieure au niveau de conditionnement habituel. Si cette phase n'est pas une période volontaire d'affûtage pré-compétitif, elle expose l'athlète à une désadaptation tissulaire.\n- Zone Optimale ou \"Sweet Spot\" (ACWR compris entre 0,80 et 1,30) : C'est la plage de référence absolue. L'organisme s'adapte, le niveau de forme s'élève et le risque de blessure est statistiquement à son minimum historique (inférieur à 5% d'incidence).\n- Zone d'Alerte et de Risque Modéré (ACWR compris entre 1,30 et 1,50) : Le volume récent dépasse la capacité de tolérance chronique de plus de 30%. Le risque de lésion musculaire commence à grimper sensiblement.\n- Zone Critique de Danger (ACWR supérieur à 1,50) : Le risque relatif de blessure est multiplié par 3 à 4 dans les sept à dix jours qui suivent le pic de charge. Une réduction immédiate de l'intensité ou un jour de repos compensatoire s'impose pour désamorcer la crise.\n\nV. Applications Scolaires et Prévention en Milieu Éducatif EPS\n\nEn milieu scolaire et associatif, les adolescents sont particulièrement vulnérables aux pathologies de surmenage ostéo-articulaire (maladie d'Osgood-Schlatter au genou, maladie de Sever au talon). L'utilisation de ce calculateur permet à l'enseignant et à l'entraîneur de repérer les collégiens et lycéens qui cumulent le sport scolaire, le club fédéral et les activités extrascolaires sans phase de récupération, et de réajuster leur investissement avant l'apparition de lésions d'usure irréversibles.";
+        var texte = "I. Introduction au Suivi de Charge et Révolution du Modèle sRPE / ACWR\n\nDans l'univers du sport contemporain, de l'athlétisme aux sports collectifs professionnels jusqu'à la pratique scolaire en EPS, la performance athlétique résulte d'un équilibre délicat entre deux forces opposées : la charge d'entraînement qui stimule l'adaptation physiologique et la fatigue qui s'accumule au fil des séances. Pendant longtemps, les entraîneurs n'ont quantifié que la charge externe : le nombre de kilomètres courus, le nombre de levées de fonte ou la vitesse chronométrée. Cependant, deux athlètes effectuant la même séance externe subissent un stress interne radicalement différent selon leur niveau de forme, leur état de fatigue nerveuse, leur sommeil et leur niveau de stress personnel. Pour capturer cette réalité biologique interne sans recourir à des prises de sang ou des appareils invasifs coûteux, le professeur américain Carl Foster a mis au point dans les années quatre-vingt-dix la méthode de la Session-RPE (sRPE). Plus tard, le chercheur australien Tim Gabbett a enrichi cette approche en formalisant le concept de ratio Charge Aiguë / Charge Chronique (ACWR pour Acute:Chronic Workload Ratio). Ce couplage est aujourd'hui universellement reconnu comme l'outil le plus puissant pour maximiser la condition physique tout en réduisant drastiquement les blessures sans contact.\n\nII. Guide d'Utilisation Étape par Étape\n\nPour monitorer avec rigueur votre charge d'entraînement et sécuriser votre progression :\n1. Évaluation différée du RPE : Environ quinze à trente minutes après la fin de la séance d'entraînement ou du match (afin d'éviter que le ressenti des toutes dernières minutes ne biaise le jugement global), posez-vous la question simple : « Comment avez-vous trouvé la séance dans sa globalité ? ». Évaluez l'effort sur l'échelle de Borg CR10 modifiée de Foster, allant de 1 (très facile) à 10 (effort maximal absolu).\n2. Calcul de la charge de séance : Renseignez la durée réelle de l'entraînement en minutes (sans compter les pauses prolongées de vestiaire) et multipliez-la par le score RPE. Le résultat s'exprime en Unités Arbitraires (UA).\n3. Suivi hebdomadaire et calcul de la Monotonie : Enregistrez les charges quotidiennes sur l'ensemble des sept jours de la semaine pour obtenir la Charge Aiguë hebdomadaire et l'Indice de Monotonie.\n4. Comparaison avec la Charge Chronique et lecture de l'ACWR : Saisissez la moyenne hebdomadaire des charges accumulées au cours des quatre dernières semaines (Charge Chronique de 28 jours). Le calculateur affiche immédiatement votre ratio ACWR et vous délivre un diagnostic de sécurité sans équivoque.\n\nIII. Explication des Paramètres et Notions Clés\n\nComprendre les variables calculées permet d'adapter intelligemment sa programmation :\n- Le RPE (Rating of Perceived Exertion) : Il s'agit d'un intégrateur neurophysiologique exceptionnel validé scientifiquement. Il synthétise les signaux cardiorespiratoires (ventilation, fréquence cardiaque), musculaires (acidose, tensions myofibrillaires) et psychologiques du sportif.\n- La Charge Aiguë (Acute Workload en UA) : Somme des charges des sept derniers jours. Elle représente la fatigue immédiate accumulée récemment.\n- La Charge Chronique (Chronic Workload en UA) : Moyenne mobile des charges hebdomadaires sur les vingt-huit derniers jours. Elle représente la condition physique de fond, la robustesse et la tolérance à l'effort construites par l'athlète au fil du mois écoulé.\n- L'Indice de Monotonie : Rapport entre la charge moyenne quotidienne et son écart-type sur la semaine. Une monotonie élevée signifie que toutes les séances se ressemblent en intensité sans aucune alternance entre jours durs et jours légers.\n- La Contrainte (Strain) : Produit de la charge hebdomadaire par la monotonie. Elle reflète le stress biologique global et constitue le signal d'alarme du surentraînement.\n\nIV. Relations Mathématiques et Équations de Foster et Gabbett\n\nLes relations mathématiques qui pilotent le calculateur sont d'une rigueur absolue :\n1. Charge d'une séance unitaire (Méthode de Carl Foster) :\nCharge (UA) = Durée de la séance (en minutes) × RPE (score de 0 à 10).\nExemple : Une séance de 90 minutes évaluée à un RPE de 6 (difficile) représente 90 × 6 = 540 Unités Arbitraires (UA).\n2. Charge Hebdomadaire Aiguë :\nCharge Aiguë = Somme des charges des 7 jours de la semaine (UA).\n3. Calcul de la Monotonie hebdomadaire de Foster :\nMonotonie = Moyenne journalière des 7 jours / Écart-type des 7 jours.\n4. Calcul de l'Indice de Contrainte (Training Strain) :\nStrain = Charge Hebdomadaire Aiguë × Monotonie.\n5. Calcul du ratio Charge Aiguë / Charge Chronique (ACWR de Tim Gabbett) :\nACWR = Charge Aiguë (semaine en cours) / Charge Chronique Moyenne (4 semaines précédentes).\nExemple concret : Si un athlète affiche une charge aiguë de 3 600 UA cette semaine, et que sa charge chronique moyenne sur les 4 dernières semaines était de 3 000 UA :\nACWR = 3 600 / 3 000 = 1,20.\n\nV. Grille d'Interprétation du Ratio ACWR et Seuils de Risque\n\nLes travaux de Tim Gabbett sur des milliers d'athlètes professionnels ont identifié des zones prédictives remarquables :\n- ACWR < 0,80 (Zone de Sous-Entraînement) : La charge récente est trop faible par rapport aux habitudes de l'athlète. Bien que le risque de blessure immédiate soit bas, cette situation entraîne une perte d'adaptations physiologiques. L'athlète devient vulnérable dès qu'il devra réaccélérer ses charges.\n- 0,80 ≤ ACWR ≤ 1,30 (Zone Optimale ou « Sweet Spot ») : C'est la zone idéale de progression. La charge augmente de manière progressive et maîtrisée (+5% à +10% par semaine). L'athlète développe sa forme physique tout en maintenant son risque de blessure en dessous de 5%.\n- 1,31 ≤ ACWR ≤ 1,50 (Zone de Vigilance et Surcharge Modérée) : L'augmentation de la charge est rapide. Le risque de blessure augmente modérément. Il convient de stabiliser la charge sur les sept jours suivants et de surveiller la qualité du sommeil et de la nutrition.\n- ACWR > 1,50 (Zone Critique et Risque Élevé de Blessure) : La charge a augmenté de plus de 50% d'un coup par rapport aux habitudes. Les études démontrent que dans cette zone de danger, le risque de blessure musculaire, tendineuse ou articulaire est multiplié par trois à quatre dans les sept à quatorze jours qui suivent.\n\nVI. Règles d'Or pour la Planification et la Prévention des Blessures\n\nPour tirer le meilleur parti du suivi RPE et de l'ACWR en club ou en milieu scolaire :\n- Ne jamais augmenter la charge hebdomadaire de plus de dix pour cent d'une semaine sur l'autre (règle des 10%).\n- Casser la monotonie : Veillez à ce que l'indice de monotonie reste toujours inférieur à 2,0. Pour cela, alternez impérativement des journées très intenses (RPE 7-9) avec des journées très légères de régénération (RPE 2-3) ou de repos complet.\n- Ne pas diaboliser la charge élevée : Gabbett rappelle qu'une charge chronique élevée protège contre les blessures. Ce n'est pas le fait de s'entraîner beaucoup qui blesse, mais le fait d'augmenter la charge trop brutalement sans préparation préalable.";
         navigator.clipboard.writeText(texte).then(function() {
           var ico = document.getElementById('btn-copy-ico');
           var txt = document.getElementById('btn-copy-txt');
           if (ico && txt) {
             ico.textContent = '✓';
-            txt.textContent = 'Guide copié (875 mots) !';
+            txt.textContent = 'Guide copié (1130 mots) !';
             setTimeout(function() {
               ico.textContent = '📋';
               txt.textContent = 'Copier le guide complet';
@@ -1417,6 +1432,7 @@ En milieu scolaire et associatif, les adolescents sont particulièrement vulnér
         });
       }
     </script>
+  
   </main>
 
   <footer class="footer" id="profeps-unified-footer">
@@ -1442,7 +1458,7 @@ En milieu scolaire et associatif, les adolescents sont particulièrement vulnér
         </div>
 
         <div class="footer-col">
-          <h4 data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</h4>
+          <p class="footer-col-title" data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</p>
           <ul>
             <li><a href="index.html" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a></li>
             <li><a href="generateur.html" data-i18n-fr="Générateur PDF" data-i18n-en="PDF Generator" data-i18n-ar="مولد ملفات PDF">Générateur PDF</a></li>
@@ -1452,17 +1468,18 @@ En milieu scolaire et associatif, les adolescents sont particulièrement vulnér
         </div>
 
         <div class="footer-col">
-          <h4 data-i18n-fr="PRÉPARATION CRMEF" data-i18n-en="CRMEF PREPARATION" data-i18n-ar="الاستعداد لمباراة التعليم">PRÉPARATION CRMEF</h4>
+          <p class="footer-col-title" data-i18n-fr="RESSOURCES EPS" data-i18n-en="PE RESOURCES" data-i18n-ar="موارد التربية البدنية">RESSOURCES EPS</p>
           <ul>
-            <li><a href="concours-crmef-hub.html" data-i18n-fr="🏛️ Hub National CRMEF" data-i18n-en="🏛️ National CRMEF Hub" data-i18n-ar="🏛️ بوابة مباريات التعليم">🏛️ Hub National CRMEF</a></li>
-            <li><a href="qcm-sciences-education-crmef.html" data-i18n-fr="📚 Tronc Commun (Sciences Éduc)" data-i18n-en="📚 Education Sciences" data-i18n-ar="📚 علوم التربية والديداكتيك">📚 Tronc Commun (Sciences Éduc)</a></li>
-            <li><a href="qcm-specialite-eps-maroc.html" data-i18n-fr="🏃 Spécialité EPS" data-i18n-en="🏃 PE Specialty" data-i18n-ar="🏃 تخصص التربية البدنية">🏃 Spécialité EPS</a></li>
-            <li><a href="qcm-didactique-eps-maroc.html" data-i18n-fr="⚡ Didactique EPS" data-i18n-en="⚡ PE Didactics" data-i18n-ar="⚡ ديداكتيك التربية البدنية">⚡ Didactique EPS</a></li>
-            <li><a href="concours-crmef-hub.html#discipline-eps" data-i18n-fr="🎯 Les 12 Spécialités CRMEF" data-i18n-en="🎯 All 12 CRMEF Specialties" data-i18n-ar="🎯 التخصصات الـ12 لمباراة التعليم">🎯 Les 12 Spécialités CRMEF</a></li>
+            <li><a href="cycles-eps-maroc.html" data-i18n-fr="Cycles d'EPS au Maroc" data-i18n-en="PE Cycles in Morocco" data-i18n-ar="أسلاك التربية البدنية بالمغرب">Cycles d'EPS au Maroc</a></li>
+            <li><a href="programme-eps-maroc.html" data-i18n-fr="Programme EPS Maroc" data-i18n-en="Morocco PE Curriculum" data-i18n-ar="برنامج التربية البدنية بالمغرب">Programme EPS Maroc</a></li>
+            <li><a href="evaluation-eps.html" data-i18n-fr="Évaluation en EPS" data-i18n-en="PE Assessment" data-i18n-ar="التقويم في التربية البدنية">Évaluation en EPS</a></li>
+            <li><a href="securite-eps.html" data-i18n-fr="Sécurité en EPS" data-i18n-en="Safety in PE" data-i18n-ar="السلامة في التربية البدنية">Sécurité en EPS</a></li>
+            <li><a href="bibliotheque-numerique-eps.html" data-i18n-fr="Bibliothèque numérique" data-i18n-en="Digital Library" data-i18n-ar="المكتبة الرقمية">Bibliothèque numérique</a></li>
           </ul>
         </div>
+
         <div class="footer-col" id="footer-col-calculators">
-          <h4 data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</h4>
+          <p class="footer-col-title" data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</p>
           <ul>
             <li><a href="hub-outils-sport-performance.html" class="footer-hub-highlight" data-i18n-fr="★ Hub des Calculateurs Sport" data-i18n-en="★ All Sports Calculators Hub" data-i18n-ar="★ بوابة جميع الحاسبات الرياضية">★ Hub des Calculateurs Sport</a></li>
             <li><a href="calculateur-vma.html" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS (VMA) Calculator" data-i18n-ar="حاسبة السرعة الهوائية VMA">Calculateur VMA</a></li>
@@ -1479,7 +1496,7 @@ En milieu scolaire et associatif, les adolescents sont particulièrement vulnér
         </div>
 
         <div class="footer-col">
-          <h4 data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</h4>
+          <p class="footer-col-title" data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</p>
           <ul>
             <li><a href="politique-confidentialite.html" data-i18n-fr="Politique de confidentialité" data-i18n-en="Privacy Policy" data-i18n-ar="سياسة الخصوصية">Politique de confidentialité</a></li>
             <li><a href="cgu.html" data-i18n-fr="Conditions d'utilisation" data-i18n-en="Terms of Use" data-i18n-ar="شروط الاستخدام">Conditions d'utilisation</a></li>
@@ -1579,42 +1596,57 @@ En milieu scolaire et associatif, les adolescents sont particulièrement vulnér
     }
   </script>
 
-<!-- PROFEPS CMP BANNER -->
-<div id="profeps-cmp-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#f8fafc;padding:16px 22px;border-top:1px solid #334155;z-index:999999;box-shadow:0 -10px 25px rgba(0,0,0,0.5);font-family:system-ui,-apple-system,sans-serif;">
-  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;">
-    <div style="flex:1 1 500px;font-size:13px;line-height:1.5;">
-      <strong style="color:#38bdf8;">🍪 Respect de votre vie privée</strong><br>
-      ProfEPS utilise des cookies essentiels au site ainsi que des cookies de mesure d'audience et Google AdSense pour maintenir nos outils gratuits. Vous pouvez personnaliser ou refuser à tout moment. <a href="politique-confidentialite.html" style="color:#38bdf8;text-decoration:underline;">Politique de confidentialité</a>.
+<!-- BANDEAU DE CONSENTEMENT GOOGLE ADSENSE & RGPD (PROFEPS CMP) -->
+<div id="profeps-cmp-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#f8fafc;padding:18px 24px;border-top:1px solid #334155;z-index:999999;box-shadow:0 -10px 25px rgba(0,0,0,0.5);font-family:system-ui,-apple-system,sans-serif;">
+  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;">
+    <div style="flex:1 1 500px;font-size:13.5px;line-height:1.5;">
+      <strong style="color:#38bdf8;font-size:14.5px;">🍪 Respect de votre vie privée & Cookies</strong><br>
+      ProfEPS utilise des cookies essentiels au fonctionnement du site, ainsi que des cookies d'analyse d'audience et de personnalisation publicitaire Google AdSense pour financer nos outils pédagogiques gratuits. Vous pouvez accepter, refuser ou personnaliser vos préférences à tout moment. Consultez notre <a href="politique-confidentialite.html" style="color:#38bdf8;text-decoration:underline;">Politique de confidentialité</a>.
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-      <button onclick="window.ProfEPS_CMP.open()" type="button" style="padding:7px 12px;background:#1e293b;color:#cbd5e1;border:1px solid #475569;border-radius:6px;font-size:12.5px;font-weight:600;cursor:pointer;">Personnaliser</button>
-      <button onclick="window.ProfEPS_CMP.rejectAll()" type="button" style="padding:7px 12px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:12.5px;font-weight:600;cursor:pointer;">Refuser</button>
-      <button onclick="window.ProfEPS_CMP.acceptAll()" type="button" style="padding:7px 16px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:12.5px;font-weight:700;cursor:pointer;">Tout accepter</button>
+      <button onclick="window.ProfEPS_CMP.open()" type="button" style="padding:8px 14px;background:#1e293b;color:#cbd5e1;border:1px solid #475569;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Personnaliser</button>
+      <button onclick="window.ProfEPS_CMP.rejectAll()" type="button" style="padding:8px 14px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Continuer sans accepter</button>
+      <button onclick="window.ProfEPS_CMP.acceptAll()" type="button" style="padding:8px 18px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;">Tout accepter</button>
     </div>
   </div>
 </div>
-<!-- PROFEPS CMP MODAL -->
-<div id="profeps-cmp-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.85);backdrop-filter:blur(4px);z-index:1000000;align-items:center;justify-content:center;padding:16px;font-family:system-ui,-apple-system,sans-serif;">
-  <div style="background:#0f172a;border:1px solid #334155;border-radius:12px;max-width:540px;width:100%;padding:22px;color:#f8fafc;box-shadow:0 20px 40px rgba(0,0,0,0.6);">
-    <h3 style="margin-top:0;font-size:17px;color:#38bdf8;">⚙️ Préférences de Confidentialité & Cookies</h3>
-    <p style="font-size:12.5px;color:#94a3b8;line-height:1.5;">Gérez vos préférences. Les cookies techniques sont obligatoires pour les calculs.</p>
-    <div style="margin:12px 0;padding:10px;background:#1e293b;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
-      <span style="font-weight:600;font-size:13px;">Cookies techniques essentiels</span>
-      <span style="font-size:11px;color:#10b981;font-weight:bold;">Toujours actif</span>
+
+<!-- MODAL DE PERSONNALISATION DES COOKIES -->
+<div id="profeps-cmp-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.8);backdrop-filter:blur(4px);z-index:1000000;align-items:center;justify-content:center;padding:16px;font-family:system-ui,-apple-system,sans-serif;">
+  <div style="background:#0f172a;border:1px solid #334155;border-radius:12px;max-width:560px;width:100%;padding:24px;color:#f8fafc;box-shadow:0 20px 40px rgba(0,0,0,0.6);max-height:90vh;overflow-y:auto;">
+    <h3 style="margin-top:0;font-size:18px;color:#38bdf8;">⚙️ Préférences de Confidentialité & Cookies</h3>
+    <p style="font-size:13px;color:#94a3b8;line-height:1.5;">Gérez ici vos préférences concernant le dépôt de cookies sur votre appareil. Les cookies techniques sont indispensables à la navigation.</p>
+    
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-weight:600;font-size:14px;">Cookies techniques essentiels</span>
+        <span style="font-size:12px;color:#10b981;font-weight:bold;">Toujours actif</span>
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Nécessaires au fonctionnement des calculateurs, de la sécurité et de la mémorisation de votre choix de consentement.</p>
     </div>
-    <div style="margin:12px 0;padding:10px;background:#1e293b;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
-      <label for="cmp-opt-analytics" style="font-weight:600;font-size:13px;cursor:pointer;">Mesure d'audience anonyme (Analytics)</label>
-      <input type="checkbox" id="cmp-opt-analytics" checked style="width:17px;height:17px;cursor:pointer;">
+
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <label for="cmp-opt-analytics" style="font-weight:600;font-size:14px;cursor:pointer;">Cookies de mesure d'audience (Analytics)</label>
+        <input type="checkbox" id="cmp-opt-analytics" checked style="width:18px;height:18px;cursor:pointer;">
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Nous permettent de mesurer anonymement la fréquentation de nos pages et calculateurs EPS.</p>
     </div>
-    <div style="margin:12px 0;padding:10px;background:#1e293b;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
-      <label for="cmp-opt-ads" style="font-weight:600;font-size:13px;cursor:pointer;">Publicités personnalisées (Google AdSense)</label>
-      <input type="checkbox" id="cmp-opt-ads" checked style="width:17px;height:17px;cursor:pointer;">
+
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <label for="cmp-opt-ads" style="font-weight:600;font-size:14px;cursor:pointer;">Publicités personnalisées (Google AdSense)</label>
+        <input type="checkbox" id="cmp-opt-ads" checked style="width:18px;height:18px;cursor:pointer;">
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Permet à Google et ses partenaires d'afficher des annonces adaptées à vos centres d'intérêt afin de maintenir la gratuité de la plateforme.</p>
     </div>
-    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:18px;">
-      <button onclick="document.getElementById('profeps-cmp-modal').style.display='none'" type="button" style="padding:7px 12px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:12px;cursor:pointer;">Fermer</button>
-      <button onclick="window.ProfEPS_CMP.saveCustom()" type="button" style="padding:7px 16px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:12.5px;font-weight:700;cursor:pointer;">Enregistrer mes choix</button>
+
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px;">
+      <button onclick="document.getElementById('profeps-cmp-modal').style.display='none'" type="button" style="padding:8px 14px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:13px;cursor:pointer;">Fermer</button>
+      <button onclick="window.ProfEPS_CMP.saveCustom()" type="button" style="padding:8px 18px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;">Enregistrer mes préférences</button>
     </div>
   </div>
 </div>
+
 </body>
 </html>

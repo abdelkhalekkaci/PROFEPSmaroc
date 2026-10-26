@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ajustement Chaleur, Météo &amp; Altitude | Prof EPS</title>
+  <title>Calculateur Chaleur, Humidité & Altitude | ProfEPS</title>
   <meta name="description" id="metaDesc" content="Ajustez vos allures de course selon la météo et l’altitude. Point de rosée, hydratation et consignes de sécurité thermique." />
   <meta name="keywords" content="calculateur chaleur course à pied, humidité point de rosée running, entrainement altitude hypoxie, hydratation course à pied chaleur" />
   <meta property="og:type" content="website" />
@@ -641,16 +641,12 @@ main > div.max-w-3xl select:focus {
   overflow: hidden !important;
 }
 .peps-cta-btn::after {
-  content: '→' !important;
-  font-size: 1.15rem !important;
-  font-weight: 900 !important;
-  margin-left: 0.25rem !important;
-  transition: transform 0.2s ease !important;
+  display: none !important;
+  content: none !important;
 }
 html[dir="rtl"] .peps-cta-btn::after {
-  content: '←' !important;
-  margin-left: 0 !important;
-  margin-right: 0.25rem !important;
+  display: none !important;
+  content: none !important;
 }
 .peps-cta-btn:hover {
   transform: translateY(-2.5px) scale(1.005) !important;
@@ -755,7 +751,9 @@ footer.footer .footer-stat-lbl {
   color: rgba(255, 255, 255, 0.55) !important;
 }
 #profeps-unified-footer .footer-col h4,
-footer.footer .footer-col h4 {
+#profeps-unified-footer .footer-col .footer-col-title,
+footer.footer .footer-col h4,
+footer.footer .footer-col .footer-col-title {
   font-size: 0.76rem !important;
   font-weight: 800 !important;
   text-transform: uppercase !important;
@@ -887,11 +885,12 @@ footer.footer .footer-bottom {
         <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:52px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
       </a>
       <div class="peps-nav-menu" id="pepsNavMenu">
-        <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
+        <a href="index.html" class="peps-nav-link" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
         <a href="generateur.html" class="peps-nav-link" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
         <div class="peps-dropdown" id="pepsCalcDropdown">
-          <a href="calculateur-chaleur-meteo-altitude.html" class="peps-nav-link active" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="Chaleur & Altitude" data-i18n-en="Heat & Altitude" data-i18n-ar="الحرارة والارتفاع عن البحر"><span class="peps-dropdown-title">Chaleur & Altitude</span></span><span class="peps-dropdown-caret">▾</span></a>
-          <div class="peps-dropdown-menu" id="pepsDropdownMenu">            <a href="hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub" data-i18n-fr="🧭 Hub de Tous les Calculateurs Sport" data-i18n-en="🧭 All Sports Calculators Hub" data-i18n-ar="🧭 بوابة جميع الحاسبات الرياضية">🧭 Hub de Tous les Calculateurs Sport</a>
+          <a href="calculateur-chaleur-meteo-altitude.html" class="peps-nav-link active" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="Chaleur & Altitude" data-i18n-en="Heat & Altitude" data-i18n-ar="الحرارة والارتفاع عن البحر">Chaleur & Altitude</span><span class="peps-dropdown-caret">▾</span></a>
+          <div class="peps-dropdown-menu" id="pepsDropdownMenu">
+            <a href="hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub" data-i18n-fr="🧭 Hub de Tous les Calculateurs Sport" data-i18n-en="🧭 All Sports Calculators Hub" data-i18n-ar="🧭 بوابة جميع الحاسبات الرياضية">🧭 Hub de Tous les Calculateurs Sport</a>
             <a href="calculateur-vma.html" class="peps-dropdown-item" data-i18n-fr="⚡ Calculateur VMA & Allures" data-i18n-en="⚡ MAS (VMA) & Paces Calculator" data-i18n-ar="⚡ حاسبة السرعة الهوائية القصوى (VMA)">⚡ Calculateur VMA & Allures</a>
             <a href="calculateur-vdot-asr-endurance.html" class="peps-dropdown-item" data-i18n-fr="🫁 Calculateur VO2 Max & VDOT" data-i18n-en="🫁 VO2 Max & VDOT Calculator" data-i18n-ar="🫁 حاسبة VO2 Max ومؤشر VDOT">🫁 Calculateur VO2 Max & VDOT</a>
             <a href="calculateur-asr-reserve-vitesse.html" class="peps-dropdown-item" data-i18n-fr="🚀 Réserve de Vitesse Anaérobie (ASR)" data-i18n-en="🚀 Anaerobic Speed Reserve (ASR)" data-i18n-ar="🚀 احتياطي السرعة اللاهوائية (ASR)">🚀 Réserve de Vitesse Anaérobie (ASR)</a>
@@ -904,7 +903,7 @@ footer.footer .footer-bottom {
             <a href="calculateur-charge-rpe-foster-acwr.html" class="peps-dropdown-item" data-i18n-fr="🛡️ Charge RPE Foster & ACWR" data-i18n-en="🛡️ Foster sRPE Load & ACWR Ratio" data-i18n-ar="🛡️ حمل التدريب (RPE Foster) ونسبة ACWR">🛡️ Charge RPE Foster & ACWR</a>
           </div>
         </div>
-        <a href="concours-crmef-hub.html" class="peps-nav-link" data-i18n-fr="Préparer Concours CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparer Concours CRMEF</a>
+        <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
       </div>
       <div class="peps-nav-right">
         <div dir="ltr" class="peps-lang-switch" aria-label="Sélecteur de langue">
@@ -1218,27 +1217,30 @@ footer.footer .footer-bottom {
       </div>
     </div>
 
-    <!-- FICHE SCIENTIFIQUE & PÉDAGOGIQUE OFFICIELLE (864 MOTS MINIMUM) -->
-    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (864 MOTS MINIMUM) -->
-    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (864 MOTS MINIMUM) -->
+  
+    <!-- FICHE SCIENTIFIQUE & PÉDAGOGIQUE OFFICIELLE (1087 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1087 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1087 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1087 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1087 MOTS MINIMUM) -->
     <section class="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 mt-8" id="fiche-pedagogique-officielle" style="max-width:48rem;margin:2rem auto 0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:20px;padding:1.75rem;box-shadow:0 10px 28px -8px rgba(15,23,42,0.06);">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
         <div>
           <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-1">
-            <span class="text-red-700 font-bold">Cluster 2B · Environnement &amp; Thermorégulation de l'Effort</span>
+            <span class="text-red-700 font-bold">Cluster 2C · Éco-Physiologie &amp; Thermorégulation</span>
             <span aria-hidden="true">&middot;</span>
             <span style="color:#006233;font-weight:700;">Rédigé par Abdelkhalek ELBOUDANI (Prof d'EPS au Maroc)</span>
           </div>
           <h2 class="text-lg font-extrabold text-slate-900 tracking-tight flex items-center gap-2 m-0">
             <span style="font-size:1.15rem;">📖</span>
-            Calculateur Impact Météo, Chaleur, Humidité &amp; Altitude
+            Ajustement Chaleur, Humidité, Vent &amp; Altitude
           </h2>
         </div>
         <div class="flex items-center gap-2">
           <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md tabular-nums border border-emerald-200">
-            864 mots (Guide Approfondi)
+            1087 mots (Guide Approfondi)
           </span>
-          <button type="button" onclick="copierFichePedagogique()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors cursor-pointer border border-slate-200">
+          <button type="button" onclick="copierFichePedagogique()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors cursor-pointer border border-slate-200" title="Copier le guide officiel complet (1087 mots)">
             <span id="btn-copy-ico">📋</span>
             <span id="btn-copy-txt">Copier le guide complet</span>
           </button>
@@ -1252,38 +1254,38 @@ footer.footer .footer-bottom {
           Zone 2 : Interprétation Immédiate &amp; Barèmes Scolaires Marocains
         </h3>
         <p class="text-xs text-slate-700 leading-relaxed bg-amber-50/60 border border-amber-200/70 p-3.5 rounded-xl m-0">
-          La chaleur humide bloque l'évaporation de la sueur tandis que l'altitude réduit la pression partielle d'oxygène. Ignorer ces contraintes environnementales conduit inévitablement au coup de chaleur ou à la défaillance athlétique.
+          Vouloir maintenir une allure de course programmée par temps chaud, humide ou en altitude provoque une dérive cardiaque sévère et expose l'athlète au coup de chaleur. Ajuster l'allure préserve le même bénéfice physiologique métabolique.
         </p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1">
           
     <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
       <div>
-        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Conditions Idéales / Record (10–15°C)</div>
-        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">0% de pénalité</div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Conditions Idéales / Record Personnel</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">Température 8–14°C · Altitude &lt; 500 m</div>
       </div>
-      <div class="text-[11px] text-slate-600 leading-normal">Thermorégulation optimale, dissipation thermique efficace par simple convection.</div>
+      <div class="text-[11px] text-slate-600 leading-normal">Thermorégulation optimale, évaporation complète de la sueur, aucune pénalité chronométrique.</div>
     </div>
     <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
       <div>
-        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Chaleur Modérée (20–25°C)</div>
-        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">+2% à +5% de temps</div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Conditions Modérées / Vigilance</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">Température 18–24°C · Altitude 1000–1600 m</div>
       </div>
-      <div class="text-[11px] text-slate-600 leading-normal">Dérivation du débit sanguin vers la peau, légère élévation de la fréquence cardiaque de 5 à 8 bpm.</div>
+      <div class="text-[11px] text-slate-600 leading-normal">Ralentissement physiologique de 2% à 5% (+5 à +15 sec/km). Boire 500 à 700 ml d’eau par heure.</div>
     </div>
     <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
       <div>
-        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Chaleur Sévère &amp; Humide (26–32°C)</div>
-        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">+6% à +12% de temps</div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Conditions Sévères / Chaleur Lourde</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">Température 25–32°C ou Altitude &gt; 2000 m</div>
       </div>
-      <div class="text-[11px] text-slate-600 leading-normal">Risque élevé de surchauffe centrale, impératif de réduire l'allure cible et d'augmenter l'apport hydrique.</div>
+      <div class="text-[11px] text-slate-600 leading-normal">Ralentissement de 6% à 12% (+15 à +35 sec/km). Dérive cardiaque de 10 à 20 bpm. Sodium requis.</div>
     </div>
     <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
       <div>
-        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Canicule Extrême ou Haute Altitude</div>
-        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">&gt; +15% d'impact</div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Zone Critique / Risque Vital Coup de Chaleur</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">T &gt; 33°C avec humidité &gt; 70% ou WBGT &gt; 28°C</div>
       </div>
-      <div class="text-[11px] text-slate-600 leading-normal">Zone critique pour la santé, adaptation impérative des séances sous peine d'accident thermique.</div>
+      <div class="text-[11px] text-slate-600 leading-normal">Évaporation bloquée. Remplacer les séances d’intensité par du renforcement à l’ombre fraîche.</div>
     </div>
         </div>
       </div>
@@ -1293,7 +1295,7 @@ footer.footer .footer-bottom {
         <div class="flex items-center justify-between">
           <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
             <span style="color:#006233;">🏃</span>
-            Zone 3 : Application Didactique EPS Maroc &amp; Gestion de Classe (864 mots)
+            Zone 3 : Application Didactique EPS Maroc &amp; Gestion de Classe (1087 mots)
           </h3>
           <button type="button" onclick="toggleTexteIntegral()" id="btn-toggle-texte" class="text-xs font-bold text-blue-600 hover:text-blue-800 cursor-pointer">
             Afficher le texte complet ▼
@@ -1304,15 +1306,15 @@ footer.footer .footer-bottom {
           
     <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
       <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">1</span>
-      <p class="text-xs text-slate-700 leading-relaxed m-0">Indiquez votre chrono de référence sur une distance clé (par exemple votre record sur 10 km) réalisé en conditions tempérées optimales (12-15°C au niveau de la mer).</p>
+      <p class="text-xs text-slate-700 leading-relaxed m-0">Indiquez la température extérieure sous abri (°C) et le taux d'humidité relative de l'air (%), ou votre indice météo local.</p>
     </div>
     <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
       <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">2</span>
-      <p class="text-xs text-slate-700 leading-relaxed m-0">Renseignez la température ambiante prévue (°C), le taux d'humidité relative (%) et l'altitude du parcours en mètres.</p>
+      <p class="text-xs text-slate-700 leading-relaxed m-0">Renseignez l'altitude du lieu d'entraînement ou de compétition en mètres (ex. 0 m au bord de la mer, 1 650 m à Ifrane, 2 400 m à Font-Romeu).</p>
     </div>
     <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
       <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">3</span>
-      <p class="text-xs text-slate-700 leading-relaxed m-0">Calculez l'impact thermique et hypoxique combiné, votre temps de course corrigé réaliste et le plan d'hydratation horaire obligatoire.</p>
+      <p class="text-xs text-slate-700 leading-relaxed m-0">Indiquez votre vitesse habituelle ou allure cible sur le plat par temps frais (min/km ou sec/km) pour découvrir votre ralentissement physiologique inévitable, votre allure ajustée protectrice et vos besoins hydriques horaires en eau et sodium.</p>
     </div>
         </div>
         
@@ -1320,48 +1322,59 @@ footer.footer .footer-bottom {
           <div style="font-weight:700;color:#006233;margin-bottom:0.75rem;padding-bottom:0.4rem;border-bottom:1px solid #cbd5e1;">
             Auteur : Abdelkhalek ELBOUDANI · Professeur d'Éducation Physique et Sportive (Maroc) · Conforme Orientations 2007-2009
           </div>
-I. Physiologie Environnementale et Thermorégulation à l'Effort
+I. Introduction à l'Éco-Physiologie de l'Effort et Thermorégulation
 
-Le corps humain est une machine thermique remarquable dont le rendement mécanique ne dépasse guère 20 à 25%. Cela signifie que pour 100 watts d'énergie mécanique dépensée par les muscles pour courir ou pédaler, 75 à 80 watts sont immédiatement convertis en énergie thermique pure qui doit être évacuée en continu pour empêcher la température centrale de franchir la barre fatale des 40°C. En conditions de course à pied, le principal mécanisme d'évacuation thermique est l'évaporation de la sueur à la surface de la peau. Cependant, ce mécanisme dépend intimement des paramètres météorologiques : si l'air ambiant est saturé d'humidité (hygrométrie élevée), la sueur perle et coule sans s'évaporer, rendant la thermolyse totalement inopérante. Parallèlement, en altitude, la diminution de la pression barométrique entraîne une chute directe de la pression partielle en oxygène (hypoxie hypobarique), diminuant la saturation du sang en dioxygène et bridant le VO2 Max. Notre calculateur synthétise l'ensemble de ces contraintes physiques pour ajuster scientifiquement les objectifs chronométriques et préserver l'intégrité physiologique de l'athlète.
+Lorsque nous courons ou pratiquons une activité physique soutenue, les muscles squelettiques ne convertissent qu'environ vingt à vingt-cinq pour cent de l'énergie chimique consommée en travail mécanique externe. Les soixante-quinze à quatre-vingts pour cent restants sont immédiatement dissipés sous forme d'énergie thermique pure : le corps humain agit ainsi littéralement comme un moteur à combustion qui dégage une chaleur colossale. Pour maintenir sa température centrale vitale dans un intervalle étroitement régulé entre trente-sept et trente-huit degrés Celsius, l'organisme met en branle des mécanismes de thermorégulation puissants, dont le plus déterminant est l'évaporation de la sueur sécrétée par les glandes sudoripares. Cependant, l'efficacité de cette évaporation ne dépend pas uniquement du thermomètre : elle est intimement liée au taux d'humidité de l'air ambiant. Par ailleurs, lorsque l'on s'entraîne en altitude, un tout autre phénomène physiologique entre en jeu : la raréfaction de la pression atmosphérique et la baisse de la pression partielle en dioxygène (hypoxie). Ignorer ces contraintes environnementales et s'obstiner à maintenir les chronos établis par temps frais au niveau de la mer est l'erreur la plus fréquente des sportifs, conduisant directement à l'épuisement prématuré, à la déshydratation aiguë et au redoutable coup de chaleur d'exercice.
 
-II. Protocole d'Utilisation et Saisie des Variables Météorologiques
+II. Guide d'Utilisation Étape par Étape
 
-Pour calibrer au mieux vos prédictions de course :
-1. Performance étalon en conditions idéales : Introduisez un temps de référence récemment accompli dans des conditions climatiques clémentes (température comprise entre 10°C et 15°C, humidité modérée et altitude inférieure à 300 mètres).
-2. Conditions météorologiques du jour de la compétition : Consultez le bulletin météo local à l'heure exacte de l'épreuve et notez :
-- La température de l'air sous abri en degrés Celsius (°C).
-- Le taux d'humidité relative de l'air en pourcentage (%).
-- La présence éventuelle d'un rayonnement solaire direct (rayonnement noir).
-3. Altitude moyenne du parcours : Renseignez l'altitude moyenne en mètres au-dessus du niveau de la mer.
-4. Génération du plan d'allure adapté : Cliquez sur Calculer pour découvrir votre allure cible corrigée ainsi que le protocole de compensation hydrique et sodique recommandé.
+Pour déterminer vos allures réelles et vos protocoles d'hydratation selon votre environnement :
+1. Collecte des paramètres météorologiques : Renseignez la température sous abri en degrés Celsius ainsi que le pourcentage d'humidité relative de l'air au moment de votre sortie (données disponibles sur n'importe quelle application météo locale).
+2. Saisie de l'altitude du parcours : Indiquez l'altitude moyenne en mètres. Si vous vous entraînez au bord de l'océan, entrez zéro ; si vous êtes sur les hauts plateaux de l'Atlas ou d'Ifrane, renseignez mille six cent cinquante mètres.
+3. Renseignement de votre allure de référence sur le plat : Indiquez votre allure habituelle par temps frais (10°C à 15°C au niveau de la mer) sur la distance visée (ex. 4 min 30 s au kilomètre ou 270 secondes).
+4. Analyse des résultats et recommandations : Le calculateur dévoile le point de rosée de votre environnement, le pourcentage exact de déclassement physiologique, l'allure corrigée à adopter pour préserver votre cœur, ainsi que le volume horaire précis d'eau et de sodium à absorber.
 
-III. Relations Mathématiques et Algorithmes d'Ajustement
+III. Explication des Paramètres et Notions Météorologiques Clés
 
-Le calculateur applique les régressions validées par l'American College of Sports Medicine et le National Weather Service américain :
-1. Calcul du Heat Index (Indice de Chaleur Ressenti) :
-Pour les températures supérieures à 20°C associées à une humidité significative, le calculateur utilise l'équation empirique de Rothfusz :
-HI = -42,379 + 2,04901523·T + 10,14333127·RH - 0,22475541·T·RH - 0,00683783·T² - 0,05481717·RH² + 0,00122874·T²·RH + 0,00085282·T·RH² - 0,00000199·T²·RH².
-(où T est la température en °F et RH l'humidité relative en %). Le résultat est ensuite converti en °C pour quantifier le stress thermique effectif.
-2. Dégradation d'allure en fonction de la température :
-La température idéale pour réaliser une performance sur longue distance se situe entre 8°C et 12°C pour le marathon et entre 12°C et 15°C pour le 10 km. Au-delà de 15°C, chaque degré supplémentaire induit une perte d'allure prévisible modélisée par Galloway et Montain :
-- De 16°C à 20°C : Perte de 0,3% à 0,5% par degré supplémentaire.
-- De 21°C à 25°C : Perte de 0,6% à 0,9% par degré.
-- Au-delà de 26°C avec forte humidité : Chute pouvant dépasser 1,5% par degré.
-3. Impact hypoxique de l'altitude selon Bassett :
-La réduction du VO2 Max au-dessus de 1 000 mètres d'altitude est modélisée par l'équation polynomiale :
-% Perte de VO2 Max ≈ 0,0000000003·Alt³ + 0,000001·Alt² - 0,0012·Alt.
-Sur un 10 km couru à 1 800 mètres d'altitude, la perte de vitesse aérobie atteint entre 6% et 8% pour un athlète non acclimaté.
+Comprendre les variables d'ambiance est indispensable pour anticiper la fatigue :
+- La température de l'air (°C) : Plus l'air est chaud, plus le gradient thermique entre la peau et l'environnement se réduit, diminuant la déperdition de chaleur par convection et rayonnement.
+- L'humidité relative (%) : Elle indique le niveau de saturation de l'air en vapeur d'eau. Dans un air sec (30% d'humidité), la sueur s'évapore instantanément et refroidit le corps. Dans un air tropical ou étouffant (80% d'humidité), la sueur ruisselle sur la peau sans s'évaporer : le corps perd son eau et ses minéraux sans réussir à abaisser sa température interne.
+- Le Point de Rosée (Dew Point) : C'est le véritable juge de paix de la chaleur ressentie par le coureur. Un point de rosée supérieur à 18°C commence à peser sur l'organisme ; au-delà de 22°C, l'effort devient éprouvant et dangereux.
+- L'altitude (mètres) : Bien que la proportion d'oxygène dans l'air reste constante à 20,9%, la baisse de pression barométrique en altitude réduit la pression partielle d'oxygène dans les alvéoles pulmonaires, diminuant la saturation de l'hémoglobine et le VO2 Max d'environ un pour cent tous les cent mètres au-delà de mille mètres.
 
-IV. Interprétation Physiologique et Stratégie d'Hydratation
+IV. Relations Mathématiques et Équations de Déclassement
 
-Comprendre la réaction de son organisme face à l'environnement est vital pour éviter la défaillance :
-- Dérive cardiovasculaire et partage du débit cardiaque : Sous l'effet de la chaleur, l'organisme doit envoyer une fraction considérable du sang vers la peau pour dissiper les calories par vasodilatation périphérique. Ce sang détourné n'est plus disponible pour alimenter les muscles propulseurs. Pour maintenir le débit, le cœur doit accélérer son rythme de 10 à 20 bpm pour une vitesse de déplacement identique.
-- Calcul du taux de sudation horaire : Un coureur peut perdre entre 0,8 et 2,5 litres d'eau par heure d'effort en climat tropical ou estival. Une déshydratation représentant seulement 2% de la masse corporelle induit une baisse de performance aérobie de 10% et décuple le risque de crampes et de coup de chaleur d'exercice.
-- Compensation en électrolytes : Boire de l'eau pure en grande quantité par forte chaleur sans apport de sodium expose au risque mortel d'hyponatrémie d'effort. Il est impératif d'adjoindre 400 à 600 mg de sodium par litre de boisson consommée dès que l'épreuve dépasse une heure.
+Le calculateur intègre les formules physiques et biomédicales validées :
+1. Calcul du point de rosée (Formule de Magnus-Tetens) :
+Td = (b × α) / (a − α)
+où a = 17,27, b = 237,7°C et α = [(a × T) / (b + T)] + ln(Humidité / 100).
+2. Déclassement thermique d'allure (Modèle McMillan / ACSM) :
+Entre 15°C et 20°C, la vitesse de course baisse d'environ 1,5% à 2,0%.
+Entre 21°C et 26°C, la baisse atteint 3,0% à 5,0%.
+Entre 27°C et 32°C, la baisse s'élève de 6,0% à 9,0%.
+Au-delà de 33°C avec humidité élevée, le déclassement dépasse 12% à 15%.
+3. Déclassement hypoxique en altitude (Modèle Péronnet) :
+Jusqu'à 900 mètres, l'impact est négligeable sur les courses de fond.
+Au-delà de 1 000 mètres, le VO2 Max diminue d'environ 1,2% par 100 mètres de dénivelé positif d'altitude.
+4. Formule de calcul de l'allure corrigée :
+Allure Réelle Ajustée (min/km) = Allure de Référence / (1 − Déclassement Total).
+Exemple concret : Si un coureur vaut 4:00/km (240 s) par temps frais et subit un déclassement combiné de 8% (chaleur + altitude) :
+Allure corrigée = 240 / (1 − 0,08) = 240 / 0,92 = 260,8 secondes, soit environ 4 min 21 s au kilomètre.
+En courant à 4:21/km, son cœur battra exactement à la même fréquence et sollicitera la même fraction de VO2 Max qu'à 4:00/km dans des conditions tempérées.
 
-V. Didactique Scolaire et Sécurité en Éducation Physique et Sportive
+V. Grille de Sécurité WBGT et Plans d'Hydratation
 
-Pour le professeur d'EPS, ce calculateur constitue un outil pédagogique et réglementaire indispensable. Au Maroc et dans les pays connaissant des épisodes de forte chaleur printanière ou automnale, programmer une séance de VMA ou un cycle d'endurance sous 32°C sans adaptation expose les élèves à un danger grave. L'enseignant doit utiliser l'outil pour justifier auprès de la classe le réajustement des allures, l'instauration de pauses hydratation obligatoires toutes les 15 minutes à l'ombre et la substitution des efforts continus intenses par des ateliers techniques lorsque l'indice thermique franchit le seuil d'alerte orange.
+L'adaptation nutritionnelle et hydrique est indissociable du climat :
+- Plan d'hydratation horaire : Pour un point de rosée inférieur à 15°C, boire 400 à 600 ml d'eau par heure suffit. Lorsque le point de rosée dépasse 18°C, le débit de sudation s'élève souvent à plus de 1 000 ml par heure. L'estomac ne pouvant guère absorber plus de 800 ml par heure, il convient de boire par petites gorgées régulières de 150 ml toutes les dix à quinze minutes.
+- Compensation en Sodium : La sueur contient environ un gramme de sodium par litre. Par forte chaleur sur des efforts de plus d'une heure, boire de l'eau pure expose à l'hyponatrémie de dilution (chute dangereuse du sodium sanguin). Il est impératif d'ajouter 500 à 800 mg de sodium par litre de boisson d'effort.
+
+VI. Recommandations Pédagogiques et Organisationnelles
+
+En EPS comme en club d'athlétisme, l'enseignant et le coach doivent appliquer une politique de prudence climatique :
+- Décaler les séances aux heures les plus fraîches de la matinée (avant 9h30) ou en soirée.
+- Raccourcir la durée des fractions d'effort et allonger les temps de récupération passive à l'ombre.
+- Encourager le port de vêtements légers, clairs et respirants qui facilitent la circulation de l'air.
+- Surveiller les signaux d'alarme du coup de chaleur : vertiges, cessation anormale de la sudation, maux de tête violents, peau chaude et rouge, confusion ou nausées. À la moindre alerte, arrêt immédiat de l'exercice, mise au repos au frais et réhydratation active.
         </div>
       </div>
 
@@ -1374,20 +1387,28 @@ Pour le professeur d'EPS, ce calculateur constitue un outil pédagogique et rég
         <div class="p-4 bg-slate-900 text-white rounded-xl space-y-2 border border-slate-800 shadow-inner">
           
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
-      <span class="text-slate-400 font-medium">Indice de Chaleur Heat Index (Rothfusz) :</span>
-      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">HI = -42,379 + 2,049·T + 10,143·RH - 0,2247·T·RH - ...</code>
+      <span class="text-slate-400 font-medium">Calcul du Point de Rosée (Formule de Magnus-Tetens) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Td = (b × α) / (a − α) où α = [a·T / (b + T)] + ln(RH / 100)</code>
     </div>
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
-      <span class="text-slate-400 font-medium">Perte de performance en Altitude (Bassett) :</span>
-      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">%Perte = 0,0000000003·Alt³ + 0,000001·Alt² - 0,0012·Alt</code>
+      <span class="text-slate-400 font-medium">Indice Combiné Chaleur &amp; Humidité (Heat Stress) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Score = Température (°C) + [Humidité relative (%) × 0,1]</code>
     </div>
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
-      <span class="text-slate-400 font-medium">Correction thermique d’allure (&gt; 15°C) :</span>
-      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Dégradation = +0,3% à +0,8% par °C au-dessus de 15°C</code>
+      <span class="text-slate-400 font-medium">Déclassement Thermique d’allure (McMillan / ACSM) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Perte de 1,5% à 3,0% par palier de 5°C au-delà de 15°C</code>
     </div>
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
-      <span class="text-slate-400 font-medium">Taux de sudation estimé (L/h) :</span>
-      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Sudation = (Poids avant - Poids après + Boisson) / Durée (h)</code>
+      <span class="text-slate-400 font-medium">Déclassement Hypoxique d’Altitude (Peronnet) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Perte de VO2 Max ≈ 1,0% à 1,5% par tranche de 100 m au-dessus de 900 m</code>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Allure Corrigée Protectrice :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Allure Ajustée = Allure Référence / (1 − Déclassement Total)</code>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Débit Sudoral et Besoins Électrolytiques :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Pertes = 500 à 1200 ml/h d’eau + 400 à 800 mg/h de Sodium (selon Td)</code>
     </div>
         </div>
       </div>
@@ -1409,13 +1430,13 @@ Pour le professeur d'EPS, ce calculateur constitue un outil pédagogique et rég
       }
 
       function copierFichePedagogique() {
-        var texte = "I. Physiologie Environnementale et Thermorégulation à l'Effort\n\nLe corps humain est une machine thermique remarquable dont le rendement mécanique ne dépasse guère 20 à 25%. Cela signifie que pour 100 watts d'énergie mécanique dépensée par les muscles pour courir ou pédaler, 75 à 80 watts sont immédiatement convertis en énergie thermique pure qui doit être évacuée en continu pour empêcher la température centrale de franchir la barre fatale des 40°C. En conditions de course à pied, le principal mécanisme d'évacuation thermique est l'évaporation de la sueur à la surface de la peau. Cependant, ce mécanisme dépend intimement des paramètres météorologiques : si l'air ambiant est saturé d'humidité (hygrométrie élevée), la sueur perle et coule sans s'évaporer, rendant la thermolyse totalement inopérante. Parallèlement, en altitude, la diminution de la pression barométrique entraîne une chute directe de la pression partielle en oxygène (hypoxie hypobarique), diminuant la saturation du sang en dioxygène et bridant le VO2 Max. Notre calculateur synthétise l'ensemble de ces contraintes physiques pour ajuster scientifiquement les objectifs chronométriques et préserver l'intégrité physiologique de l'athlète.\n\nII. Protocole d'Utilisation et Saisie des Variables Météorologiques\n\nPour calibrer au mieux vos prédictions de course :\n1. Performance étalon en conditions idéales : Introduisez un temps de référence récemment accompli dans des conditions climatiques clémentes (température comprise entre 10°C et 15°C, humidité modérée et altitude inférieure à 300 mètres).\n2. Conditions météorologiques du jour de la compétition : Consultez le bulletin météo local à l'heure exacte de l'épreuve et notez :\n- La température de l'air sous abri en degrés Celsius (°C).\n- Le taux d'humidité relative de l'air en pourcentage (%).\n- La présence éventuelle d'un rayonnement solaire direct (rayonnement noir).\n3. Altitude moyenne du parcours : Renseignez l'altitude moyenne en mètres au-dessus du niveau de la mer.\n4. Génération du plan d'allure adapté : Cliquez sur Calculer pour découvrir votre allure cible corrigée ainsi que le protocole de compensation hydrique et sodique recommandé.\n\nIII. Relations Mathématiques et Algorithmes d'Ajustement\n\nLe calculateur applique les régressions validées par l'American College of Sports Medicine et le National Weather Service américain :\n1. Calcul du Heat Index (Indice de Chaleur Ressenti) :\nPour les températures supérieures à 20°C associées à une humidité significative, le calculateur utilise l'équation empirique de Rothfusz :\nHI = -42,379 + 2,04901523·T + 10,14333127·RH - 0,22475541·T·RH - 0,00683783·T² - 0,05481717·RH² + 0,00122874·T²·RH + 0,00085282·T·RH² - 0,00000199·T²·RH².\n(où T est la température en °F et RH l'humidité relative en %). Le résultat est ensuite converti en °C pour quantifier le stress thermique effectif.\n2. Dégradation d'allure en fonction de la température :\nLa température idéale pour réaliser une performance sur longue distance se situe entre 8°C et 12°C pour le marathon et entre 12°C et 15°C pour le 10 km. Au-delà de 15°C, chaque degré supplémentaire induit une perte d'allure prévisible modélisée par Galloway et Montain :\n- De 16°C à 20°C : Perte de 0,3% à 0,5% par degré supplémentaire.\n- De 21°C à 25°C : Perte de 0,6% à 0,9% par degré.\n- Au-delà de 26°C avec forte humidité : Chute pouvant dépasser 1,5% par degré.\n3. Impact hypoxique de l'altitude selon Bassett :\nLa réduction du VO2 Max au-dessus de 1 000 mètres d'altitude est modélisée par l'équation polynomiale :\n% Perte de VO2 Max ≈ 0,0000000003·Alt³ + 0,000001·Alt² - 0,0012·Alt.\nSur un 10 km couru à 1 800 mètres d'altitude, la perte de vitesse aérobie atteint entre 6% et 8% pour un athlète non acclimaté.\n\nIV. Interprétation Physiologique et Stratégie d'Hydratation\n\nComprendre la réaction de son organisme face à l'environnement est vital pour éviter la défaillance :\n- Dérive cardiovasculaire et partage du débit cardiaque : Sous l'effet de la chaleur, l'organisme doit envoyer une fraction considérable du sang vers la peau pour dissiper les calories par vasodilatation périphérique. Ce sang détourné n'est plus disponible pour alimenter les muscles propulseurs. Pour maintenir le débit, le cœur doit accélérer son rythme de 10 à 20 bpm pour une vitesse de déplacement identique.\n- Calcul du taux de sudation horaire : Un coureur peut perdre entre 0,8 et 2,5 litres d'eau par heure d'effort en climat tropical ou estival. Une déshydratation représentant seulement 2% de la masse corporelle induit une baisse de performance aérobie de 10% et décuple le risque de crampes et de coup de chaleur d'exercice.\n- Compensation en électrolytes : Boire de l'eau pure en grande quantité par forte chaleur sans apport de sodium expose au risque mortel d'hyponatrémie d'effort. Il est impératif d'adjoindre 400 à 600 mg de sodium par litre de boisson consommée dès que l'épreuve dépasse une heure.\n\nV. Didactique Scolaire et Sécurité en Éducation Physique et Sportive\n\nPour le professeur d'EPS, ce calculateur constitue un outil pédagogique et réglementaire indispensable. Au Maroc et dans les pays connaissant des épisodes de forte chaleur printanière ou automnale, programmer une séance de VMA ou un cycle d'endurance sous 32°C sans adaptation expose les élèves à un danger grave. L'enseignant doit utiliser l'outil pour justifier auprès de la classe le réajustement des allures, l'instauration de pauses hydratation obligatoires toutes les 15 minutes à l'ombre et la substitution des efforts continus intenses par des ateliers techniques lorsque l'indice thermique franchit le seuil d'alerte orange.";
+        var texte = "I. Introduction à l'Éco-Physiologie de l'Effort et Thermorégulation\n\nLorsque nous courons ou pratiquons une activité physique soutenue, les muscles squelettiques ne convertissent qu'environ vingt à vingt-cinq pour cent de l'énergie chimique consommée en travail mécanique externe. Les soixante-quinze à quatre-vingts pour cent restants sont immédiatement dissipés sous forme d'énergie thermique pure : le corps humain agit ainsi littéralement comme un moteur à combustion qui dégage une chaleur colossale. Pour maintenir sa température centrale vitale dans un intervalle étroitement régulé entre trente-sept et trente-huit degrés Celsius, l'organisme met en branle des mécanismes de thermorégulation puissants, dont le plus déterminant est l'évaporation de la sueur sécrétée par les glandes sudoripares. Cependant, l'efficacité de cette évaporation ne dépend pas uniquement du thermomètre : elle est intimement liée au taux d'humidité de l'air ambiant. Par ailleurs, lorsque l'on s'entraîne en altitude, un tout autre phénomène physiologique entre en jeu : la raréfaction de la pression atmosphérique et la baisse de la pression partielle en dioxygène (hypoxie). Ignorer ces contraintes environnementales et s'obstiner à maintenir les chronos établis par temps frais au niveau de la mer est l'erreur la plus fréquente des sportifs, conduisant directement à l'épuisement prématuré, à la déshydratation aiguë et au redoutable coup de chaleur d'exercice.\n\nII. Guide d'Utilisation Étape par Étape\n\nPour déterminer vos allures réelles et vos protocoles d'hydratation selon votre environnement :\n1. Collecte des paramètres météorologiques : Renseignez la température sous abri en degrés Celsius ainsi que le pourcentage d'humidité relative de l'air au moment de votre sortie (données disponibles sur n'importe quelle application météo locale).\n2. Saisie de l'altitude du parcours : Indiquez l'altitude moyenne en mètres. Si vous vous entraînez au bord de l'océan, entrez zéro ; si vous êtes sur les hauts plateaux de l'Atlas ou d'Ifrane, renseignez mille six cent cinquante mètres.\n3. Renseignement de votre allure de référence sur le plat : Indiquez votre allure habituelle par temps frais (10°C à 15°C au niveau de la mer) sur la distance visée (ex. 4 min 30 s au kilomètre ou 270 secondes).\n4. Analyse des résultats et recommandations : Le calculateur dévoile le point de rosée de votre environnement, le pourcentage exact de déclassement physiologique, l'allure corrigée à adopter pour préserver votre cœur, ainsi que le volume horaire précis d'eau et de sodium à absorber.\n\nIII. Explication des Paramètres et Notions Météorologiques Clés\n\nComprendre les variables d'ambiance est indispensable pour anticiper la fatigue :\n- La température de l'air (°C) : Plus l'air est chaud, plus le gradient thermique entre la peau et l'environnement se réduit, diminuant la déperdition de chaleur par convection et rayonnement.\n- L'humidité relative (%) : Elle indique le niveau de saturation de l'air en vapeur d'eau. Dans un air sec (30% d'humidité), la sueur s'évapore instantanément et refroidit le corps. Dans un air tropical ou étouffant (80% d'humidité), la sueur ruisselle sur la peau sans s'évaporer : le corps perd son eau et ses minéraux sans réussir à abaisser sa température interne.\n- Le Point de Rosée (Dew Point) : C'est le véritable juge de paix de la chaleur ressentie par le coureur. Un point de rosée supérieur à 18°C commence à peser sur l'organisme ; au-delà de 22°C, l'effort devient éprouvant et dangereux.\n- L'altitude (mètres) : Bien que la proportion d'oxygène dans l'air reste constante à 20,9%, la baisse de pression barométrique en altitude réduit la pression partielle d'oxygène dans les alvéoles pulmonaires, diminuant la saturation de l'hémoglobine et le VO2 Max d'environ un pour cent tous les cent mètres au-delà de mille mètres.\n\nIV. Relations Mathématiques et Équations de Déclassement\n\nLe calculateur intègre les formules physiques et biomédicales validées :\n1. Calcul du point de rosée (Formule de Magnus-Tetens) :\nTd = (b × α) / (a − α)\noù a = 17,27, b = 237,7°C et α = [(a × T) / (b + T)] + ln(Humidité / 100).\n2. Déclassement thermique d'allure (Modèle McMillan / ACSM) :\nEntre 15°C et 20°C, la vitesse de course baisse d'environ 1,5% à 2,0%.\nEntre 21°C et 26°C, la baisse atteint 3,0% à 5,0%.\nEntre 27°C et 32°C, la baisse s'élève de 6,0% à 9,0%.\nAu-delà de 33°C avec humidité élevée, le déclassement dépasse 12% à 15%.\n3. Déclassement hypoxique en altitude (Modèle Péronnet) :\nJusqu'à 900 mètres, l'impact est négligeable sur les courses de fond.\nAu-delà de 1 000 mètres, le VO2 Max diminue d'environ 1,2% par 100 mètres de dénivelé positif d'altitude.\n4. Formule de calcul de l'allure corrigée :\nAllure Réelle Ajustée (min/km) = Allure de Référence / (1 − Déclassement Total).\nExemple concret : Si un coureur vaut 4:00/km (240 s) par temps frais et subit un déclassement combiné de 8% (chaleur + altitude) :\nAllure corrigée = 240 / (1 − 0,08) = 240 / 0,92 = 260,8 secondes, soit environ 4 min 21 s au kilomètre.\nEn courant à 4:21/km, son cœur battra exactement à la même fréquence et sollicitera la même fraction de VO2 Max qu'à 4:00/km dans des conditions tempérées.\n\nV. Grille de Sécurité WBGT et Plans d'Hydratation\n\nL'adaptation nutritionnelle et hydrique est indissociable du climat :\n- Plan d'hydratation horaire : Pour un point de rosée inférieur à 15°C, boire 400 à 600 ml d'eau par heure suffit. Lorsque le point de rosée dépasse 18°C, le débit de sudation s'élève souvent à plus de 1 000 ml par heure. L'estomac ne pouvant guère absorber plus de 800 ml par heure, il convient de boire par petites gorgées régulières de 150 ml toutes les dix à quinze minutes.\n- Compensation en Sodium : La sueur contient environ un gramme de sodium par litre. Par forte chaleur sur des efforts de plus d'une heure, boire de l'eau pure expose à l'hyponatrémie de dilution (chute dangereuse du sodium sanguin). Il est impératif d'ajouter 500 à 800 mg de sodium par litre de boisson d'effort.\n\nVI. Recommandations Pédagogiques et Organisationnelles\n\nEn EPS comme en club d'athlétisme, l'enseignant et le coach doivent appliquer une politique de prudence climatique :\n- Décaler les séances aux heures les plus fraîches de la matinée (avant 9h30) ou en soirée.\n- Raccourcir la durée des fractions d'effort et allonger les temps de récupération passive à l'ombre.\n- Encourager le port de vêtements légers, clairs et respirants qui facilitent la circulation de l'air.\n- Surveiller les signaux d'alarme du coup de chaleur : vertiges, cessation anormale de la sudation, maux de tête violents, peau chaude et rouge, confusion ou nausées. À la moindre alerte, arrêt immédiat de l'exercice, mise au repos au frais et réhydratation active.";
         navigator.clipboard.writeText(texte).then(function() {
           var ico = document.getElementById('btn-copy-ico');
           var txt = document.getElementById('btn-copy-txt');
           if (ico && txt) {
             ico.textContent = '✓';
-            txt.textContent = 'Guide copié (864 mots) !';
+            txt.textContent = 'Guide copié (1087 mots) !';
             setTimeout(function() {
               ico.textContent = '📋';
               txt.textContent = 'Copier le guide complet';
@@ -1424,6 +1445,7 @@ Pour le professeur d'EPS, ce calculateur constitue un outil pédagogique et rég
         });
       }
     </script>
+  
   </main>
 
   <footer class="footer" id="profeps-unified-footer">
@@ -1449,7 +1471,7 @@ Pour le professeur d'EPS, ce calculateur constitue un outil pédagogique et rég
         </div>
 
         <div class="footer-col">
-          <h4 data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</h4>
+          <p class="footer-col-title" data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</p>
           <ul>
             <li><a href="index.html" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a></li>
             <li><a href="generateur.html" data-i18n-fr="Générateur PDF" data-i18n-en="PDF Generator" data-i18n-ar="مولد ملفات PDF">Générateur PDF</a></li>
@@ -1459,17 +1481,18 @@ Pour le professeur d'EPS, ce calculateur constitue un outil pédagogique et rég
         </div>
 
         <div class="footer-col">
-          <h4 data-i18n-fr="PRÉPARATION CRMEF" data-i18n-en="CRMEF PREPARATION" data-i18n-ar="الاستعداد لمباراة التعليم">PRÉPARATION CRMEF</h4>
+          <p class="footer-col-title" data-i18n-fr="RESSOURCES EPS" data-i18n-en="PE RESOURCES" data-i18n-ar="موارد التربية البدنية">RESSOURCES EPS</p>
           <ul>
-            <li><a href="concours-crmef-hub.html" data-i18n-fr="🏛️ Hub National CRMEF" data-i18n-en="🏛️ National CRMEF Hub" data-i18n-ar="🏛️ بوابة مباريات التعليم">🏛️ Hub National CRMEF</a></li>
-            <li><a href="qcm-sciences-education-crmef.html" data-i18n-fr="📚 Tronc Commun (Sciences Éduc)" data-i18n-en="📚 Education Sciences" data-i18n-ar="📚 علوم التربية والديداكتيك">📚 Tronc Commun (Sciences Éduc)</a></li>
-            <li><a href="qcm-specialite-eps-maroc.html" data-i18n-fr="🏃 Spécialité EPS" data-i18n-en="🏃 PE Specialty" data-i18n-ar="🏃 تخصص التربية البدنية">🏃 Spécialité EPS</a></li>
-            <li><a href="qcm-didactique-eps-maroc.html" data-i18n-fr="⚡ Didactique EPS" data-i18n-en="⚡ PE Didactics" data-i18n-ar="⚡ ديداكتيك التربية البدنية">⚡ Didactique EPS</a></li>
-            <li><a href="concours-crmef-hub.html#discipline-eps" data-i18n-fr="🎯 Les 12 Spécialités CRMEF" data-i18n-en="🎯 All 12 CRMEF Specialties" data-i18n-ar="🎯 التخصصات الـ12 لمباراة التعليم">🎯 Les 12 Spécialités CRMEF</a></li>
+            <li><a href="cycles-eps-maroc.html" data-i18n-fr="Cycles d'EPS au Maroc" data-i18n-en="PE Cycles in Morocco" data-i18n-ar="أسلاك التربية البدنية بالمغرب">Cycles d'EPS au Maroc</a></li>
+            <li><a href="programme-eps-maroc.html" data-i18n-fr="Programme EPS Maroc" data-i18n-en="Morocco PE Curriculum" data-i18n-ar="برنامج التربية البدنية بالمغرب">Programme EPS Maroc</a></li>
+            <li><a href="evaluation-eps.html" data-i18n-fr="Évaluation en EPS" data-i18n-en="PE Assessment" data-i18n-ar="التقويم في التربية البدنية">Évaluation en EPS</a></li>
+            <li><a href="securite-eps.html" data-i18n-fr="Sécurité en EPS" data-i18n-en="Safety in PE" data-i18n-ar="السلامة في التربية البدنية">Sécurité en EPS</a></li>
+            <li><a href="bibliotheque-numerique-eps.html" data-i18n-fr="Bibliothèque numérique" data-i18n-en="Digital Library" data-i18n-ar="المكتبة الرقمية">Bibliothèque numérique</a></li>
           </ul>
         </div>
+
         <div class="footer-col" id="footer-col-calculators">
-          <h4 data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</h4>
+          <p class="footer-col-title" data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</p>
           <ul>
             <li><a href="hub-outils-sport-performance.html" class="footer-hub-highlight" data-i18n-fr="★ Hub des Calculateurs Sport" data-i18n-en="★ All Sports Calculators Hub" data-i18n-ar="★ بوابة جميع الحاسبات الرياضية">★ Hub des Calculateurs Sport</a></li>
             <li><a href="calculateur-vma.html" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS (VMA) Calculator" data-i18n-ar="حاسبة السرعة الهوائية VMA">Calculateur VMA</a></li>
@@ -1486,7 +1509,7 @@ Pour le professeur d'EPS, ce calculateur constitue un outil pédagogique et rég
         </div>
 
         <div class="footer-col">
-          <h4 data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</h4>
+          <p class="footer-col-title" data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</p>
           <ul>
             <li><a href="politique-confidentialite.html" data-i18n-fr="Politique de confidentialité" data-i18n-en="Privacy Policy" data-i18n-ar="سياسة الخصوصية">Politique de confidentialité</a></li>
             <li><a href="cgu.html" data-i18n-fr="Conditions d'utilisation" data-i18n-en="Terms of Use" data-i18n-ar="شروط الاستخدام">Conditions d'utilisation</a></li>
@@ -1598,42 +1621,57 @@ Pour le professeur d'EPS, ce calculateur constitue un outil pédagogique et rég
     }
   </script>
 
-<!-- PROFEPS CMP BANNER -->
-<div id="profeps-cmp-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#f8fafc;padding:16px 22px;border-top:1px solid #334155;z-index:999999;box-shadow:0 -10px 25px rgba(0,0,0,0.5);font-family:system-ui,-apple-system,sans-serif;">
-  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;">
-    <div style="flex:1 1 500px;font-size:13px;line-height:1.5;">
-      <strong style="color:#38bdf8;">🍪 Respect de votre vie privée</strong><br>
-      ProfEPS utilise des cookies essentiels au site ainsi que des cookies de mesure d'audience et Google AdSense pour maintenir nos outils gratuits. Vous pouvez personnaliser ou refuser à tout moment. <a href="politique-confidentialite.html" style="color:#38bdf8;text-decoration:underline;">Politique de confidentialité</a>.
+<!-- BANDEAU DE CONSENTEMENT GOOGLE ADSENSE & RGPD (PROFEPS CMP) -->
+<div id="profeps-cmp-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#f8fafc;padding:18px 24px;border-top:1px solid #334155;z-index:999999;box-shadow:0 -10px 25px rgba(0,0,0,0.5);font-family:system-ui,-apple-system,sans-serif;">
+  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;">
+    <div style="flex:1 1 500px;font-size:13.5px;line-height:1.5;">
+      <strong style="color:#38bdf8;font-size:14.5px;">🍪 Respect de votre vie privée & Cookies</strong><br>
+      ProfEPS utilise des cookies essentiels au fonctionnement du site, ainsi que des cookies d'analyse d'audience et de personnalisation publicitaire Google AdSense pour financer nos outils pédagogiques gratuits. Vous pouvez accepter, refuser ou personnaliser vos préférences à tout moment. Consultez notre <a href="politique-confidentialite.html" style="color:#38bdf8;text-decoration:underline;">Politique de confidentialité</a>.
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-      <button onclick="window.ProfEPS_CMP.open()" type="button" style="padding:7px 12px;background:#1e293b;color:#cbd5e1;border:1px solid #475569;border-radius:6px;font-size:12.5px;font-weight:600;cursor:pointer;">Personnaliser</button>
-      <button onclick="window.ProfEPS_CMP.rejectAll()" type="button" style="padding:7px 12px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:12.5px;font-weight:600;cursor:pointer;">Refuser</button>
-      <button onclick="window.ProfEPS_CMP.acceptAll()" type="button" style="padding:7px 16px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:12.5px;font-weight:700;cursor:pointer;">Tout accepter</button>
+      <button onclick="window.ProfEPS_CMP.open()" type="button" style="padding:8px 14px;background:#1e293b;color:#cbd5e1;border:1px solid #475569;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Personnaliser</button>
+      <button onclick="window.ProfEPS_CMP.rejectAll()" type="button" style="padding:8px 14px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Continuer sans accepter</button>
+      <button onclick="window.ProfEPS_CMP.acceptAll()" type="button" style="padding:8px 18px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;">Tout accepter</button>
     </div>
   </div>
 </div>
-<!-- PROFEPS CMP MODAL -->
-<div id="profeps-cmp-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.85);backdrop-filter:blur(4px);z-index:1000000;align-items:center;justify-content:center;padding:16px;font-family:system-ui,-apple-system,sans-serif;">
-  <div style="background:#0f172a;border:1px solid #334155;border-radius:12px;max-width:540px;width:100%;padding:22px;color:#f8fafc;box-shadow:0 20px 40px rgba(0,0,0,0.6);">
-    <h3 style="margin-top:0;font-size:17px;color:#38bdf8;">⚙️ Préférences de Confidentialité & Cookies</h3>
-    <p style="font-size:12.5px;color:#94a3b8;line-height:1.5;">Gérez vos préférences. Les cookies techniques sont obligatoires pour les calculs.</p>
-    <div style="margin:12px 0;padding:10px;background:#1e293b;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
-      <span style="font-weight:600;font-size:13px;">Cookies techniques essentiels</span>
-      <span style="font-size:11px;color:#10b981;font-weight:bold;">Toujours actif</span>
+
+<!-- MODAL DE PERSONNALISATION DES COOKIES -->
+<div id="profeps-cmp-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.8);backdrop-filter:blur(4px);z-index:1000000;align-items:center;justify-content:center;padding:16px;font-family:system-ui,-apple-system,sans-serif;">
+  <div style="background:#0f172a;border:1px solid #334155;border-radius:12px;max-width:560px;width:100%;padding:24px;color:#f8fafc;box-shadow:0 20px 40px rgba(0,0,0,0.6);max-height:90vh;overflow-y:auto;">
+    <h3 style="margin-top:0;font-size:18px;color:#38bdf8;">⚙️ Préférences de Confidentialité & Cookies</h3>
+    <p style="font-size:13px;color:#94a3b8;line-height:1.5;">Gérez ici vos préférences concernant le dépôt de cookies sur votre appareil. Les cookies techniques sont indispensables à la navigation.</p>
+    
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-weight:600;font-size:14px;">Cookies techniques essentiels</span>
+        <span style="font-size:12px;color:#10b981;font-weight:bold;">Toujours actif</span>
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Nécessaires au fonctionnement des calculateurs, de la sécurité et de la mémorisation de votre choix de consentement.</p>
     </div>
-    <div style="margin:12px 0;padding:10px;background:#1e293b;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
-      <label for="cmp-opt-analytics" style="font-weight:600;font-size:13px;cursor:pointer;">Mesure d'audience anonyme (Analytics)</label>
-      <input type="checkbox" id="cmp-opt-analytics" checked style="width:17px;height:17px;cursor:pointer;">
+
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <label for="cmp-opt-analytics" style="font-weight:600;font-size:14px;cursor:pointer;">Cookies de mesure d'audience (Analytics)</label>
+        <input type="checkbox" id="cmp-opt-analytics" checked style="width:18px;height:18px;cursor:pointer;">
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Nous permettent de mesurer anonymement la fréquentation de nos pages et calculateurs EPS.</p>
     </div>
-    <div style="margin:12px 0;padding:10px;background:#1e293b;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
-      <label for="cmp-opt-ads" style="font-weight:600;font-size:13px;cursor:pointer;">Publicités personnalisées (Google AdSense)</label>
-      <input type="checkbox" id="cmp-opt-ads" checked style="width:17px;height:17px;cursor:pointer;">
+
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <label for="cmp-opt-ads" style="font-weight:600;font-size:14px;cursor:pointer;">Publicités personnalisées (Google AdSense)</label>
+        <input type="checkbox" id="cmp-opt-ads" checked style="width:18px;height:18px;cursor:pointer;">
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Permet à Google et ses partenaires d'afficher des annonces adaptées à vos centres d'intérêt afin de maintenir la gratuité de la plateforme.</p>
     </div>
-    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:18px;">
-      <button onclick="document.getElementById('profeps-cmp-modal').style.display='none'" type="button" style="padding:7px 12px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:12px;cursor:pointer;">Fermer</button>
-      <button onclick="window.ProfEPS_CMP.saveCustom()" type="button" style="padding:7px 16px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:12.5px;font-weight:700;cursor:pointer;">Enregistrer mes choix</button>
+
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px;">
+      <button onclick="document.getElementById('profeps-cmp-modal').style.display='none'" type="button" style="padding:8px 14px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:13px;cursor:pointer;">Fermer</button>
+      <button onclick="window.ProfEPS_CMP.saveCustom()" type="button" style="padding:8px 18px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;">Enregistrer mes préférences</button>
     </div>
   </div>
 </div>
+
 </body>
 </html>
