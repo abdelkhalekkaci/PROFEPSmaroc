@@ -339,6 +339,7 @@
 html {
   overflow-y: scroll !important;
 }
+/* Masquer tout ancien <nav class="navbar"> ou leurre #navbar pour éviter toute superposition */
 nav.navbar, #navbar, .navbar-decoy {
   display: none !important;
   visibility: hidden !important;
@@ -349,6 +350,29 @@ nav.navbar, #navbar, .navbar-decoy {
   overflow: hidden !important;
   position: absolute !important;
   z-index: -9999 !important;
+}
+/* Masquer tout bouton traducteur en doublon dans le contenu des pages (hors #pepsNavbar) */
+.lang-switch:not(.peps-lang-switch),
+.in-page-lang-switch,
+header .lang-switch,
+main .lang-switch,
+.vma-hero .lang-switch,
+#btn-lang-fr,
+#btn-lang-en,
+#btn-lang-ar,
+button[onclick*="setToolLang"],
+button[onclick*="changeLang"],
+button.lang-btn:not(.peps-lang-btn) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  overflow: hidden !important;
 }
 #pepsNavbar.peps-navbar {
   position: fixed !important;
@@ -482,7 +506,7 @@ nav.navbar, #navbar, .navbar-decoy {
   -webkit-text-fill-color: #c1272d !important;
 }
 
-/* ═══ 2. MENU DÉROULANT (.peps-dropdown) — HOVER CSS + JS ═══ */
+/* ═══ 2. MENU DÉROULANT (.peps-dropdown) — HOVER CSS + JS SUR 100 % DES PAGES ═══ */
 #pepsNavbar .peps-dropdown {
   position: relative !important;
   display: inline-flex !important;
@@ -505,6 +529,7 @@ nav.navbar, #navbar, .navbar-decoy {
   transform: rotate(180deg) !important;
   color: #c1272d !important;
 }
+/* Pont invisible sous le bouton pour garder le hover actif en descendant vers la liste */
 #pepsNavbar .peps-dropdown::after {
   content: '' !important;
   position: absolute !important;
@@ -523,6 +548,7 @@ nav.navbar, #navbar, .navbar-decoy {
   width: 340px !important;
   min-width: 340px !important;
   height: auto !important;
+  max-height: none !important;
   background: #ffffff !important;
   border: 1px solid #e2e8f0 !important;
   border-radius: 14px !important;
@@ -531,12 +557,15 @@ nav.navbar, #navbar, .navbar-decoy {
   margin: 0 !important;
   display: flex !important;
   flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
   gap: 3px !important;
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
   transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease !important;
   z-index: 2147483647 !important;
+  overflow: visible !important;
   box-sizing: border-box !important;
   text-align: left !important;
   direction: ltr !important;
@@ -551,22 +580,37 @@ nav.navbar, #navbar, .navbar-decoy {
 }
 #pepsNavbar .peps-dropdown-menu a.peps-dropdown-item {
   display: flex !important;
+  flex-direction: row !important;
   align-items: center !important;
+  justify-content: flex-start !important;
   gap: 0.55rem !important;
   width: 100% !important;
   min-height: 36px !important;
+  height: auto !important;
   padding: 0.5rem 0.75rem !important;
+  margin: 0 !important;
   border-radius: 9px !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-size: 0.83rem !important;
   font-weight: 500 !important;
+  line-height: 1.35 !important;
   color: #0f172a !important;
   -webkit-text-fill-color: #0f172a !important;
   background: transparent !important;
   text-decoration: none !important;
   white-space: nowrap !important;
   box-sizing: border-box !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  position: relative !important;
+  transform: none !important;
+  border: 1px solid transparent !important;
   transition: background 0.15s ease, color 0.15s ease !important;
+}
+#pepsNavbar .peps-dropdown-menu a.peps-dropdown-item::after,
+#pepsNavbar .peps-dropdown-menu a.peps-dropdown-item::before {
+  display: none !important;
+  content: none !important;
 }
 #pepsNavbar .peps-dropdown-menu a.peps-dropdown-item:hover {
   background: #f1f5f9 !important;
@@ -587,8 +631,13 @@ nav.navbar, #navbar, .navbar-decoy {
   border: 1px solid rgba(193, 39, 45, 0.24) !important;
   margin-bottom: 0.3rem !important;
 }
+#pepsNavbar .peps-dropdown-menu a.peps-dropdown-item.peps-dropdown-hub:hover {
+  background: linear-gradient(135deg, #c1272d, #006233) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
 
-/* ═══ 3. BOUTON TRADUCTEUR UNIVERSEL (FR / EN / عربي) ═══ */
+/* ═══ 3. BOUTON TRADUCTEUR UNIVERSEL (FR / EN / عربي) À DROITE ═══ */
 #pepsNavbar .peps-lang-switch {
   display: inline-flex !important;
   align-items: center !important;
@@ -599,6 +648,7 @@ nav.navbar, #navbar, .navbar-decoy {
   gap: 2px !important;
   margin-left: 0.5rem !important;
   direction: ltr !important;
+  box-sizing: border-box !important;
 }
 #pepsNavbar .peps-lang-btn {
   background: transparent !important;
@@ -616,7 +666,7 @@ nav.navbar, #navbar, .navbar-decoy {
 #pepsNavbar .peps-lang-btn.active {
   background: #ffffff !important;
   color: #0f172a !important;
-  font-weight: 700 !important;
+  font-weight: 600 !important;
   box-shadow: 0 1px 4px rgba(15, 23, 42, 0.14) !important;
 }
 #pepsNavbar .peps-lang-btn:hover:not(.active) {
@@ -645,7 +695,167 @@ nav.navbar, #navbar, .navbar-decoy {
   border-radius: 2px !important;
 }
 
-/* ═══ FOOTER UNIFIÉ À 5 COLONNES ═══ */
+/* ═══ 3B. HERO, CARTES ALIGNÉES & BOUTON CTA CALCULER (STYLE VMA PREMIUM) ═══ */
+.vma-hero {
+  margin-top: 80px !important;
+  padding: 2.85rem 1.25rem 2.35rem !important;
+  background: radial-gradient(circle at 18% 20%, rgba(193, 39, 45, 0.07) 0%, transparent 45%),
+              radial-gradient(circle at 82% 80%, rgba(0, 98, 51, 0.07) 0%, transparent 45%),
+              linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  text-align: center !important;
+  position: relative !important;
+}
+.hero-badge {
+  display: inline-flex !important; align-items: center !important; gap: 0.45rem !important;
+  background: linear-gradient(135deg, rgba(193, 39, 45, 0.1), rgba(0, 98, 51, 0.08)) !important;
+  color: #c1272d !important;
+  padding: 0.4rem 1.1rem !important; border-radius: 9999px !important;
+  font-size: 0.76rem !important; font-weight: 800 !important; text-transform: uppercase !important;
+  letter-spacing: 0.05em !important; margin-bottom: 0.85rem !important;
+  border: 1px solid rgba(193, 39, 45, 0.22) !important;
+  box-shadow: 0 2px 8px rgba(193, 39, 45, 0.08) !important;
+}
+.vma-hero h1 {
+  font-family: var(--font-display) !important;
+  font-size: clamp(1.6rem, 3.1vw, 2.3rem) !important;
+  font-weight: 800 !important; color: #0f172a !important; margin: 0 auto 0.65rem auto !important;
+  max-width: 880px !important; line-height: 1.22 !important; letter-spacing: -0.02em !important;
+}
+.vma-hero p {
+  font-size: 0.96rem !important; color: #475569 !important; max-width: 760px !important;
+  margin: 0 auto !important; line-height: 1.6 !important;
+}
+.peps-hero-pills {
+  display: flex !important; flex-wrap: wrap !important; justify-content: center !important;
+  gap: 0.55rem !important; margin-top: 1.15rem !important;
+}
+.peps-hero-pill {
+  display: inline-flex !important; align-items: center !important; gap: 0.35rem !important;
+  background: #ffffff !important; border: 1px solid #e2e8f0 !important; border-radius: 9999px !important;
+  padding: 0.3rem 0.8rem !important; font-size: 0.74rem !important; font-weight: 700 !important;
+  color: #334155 !important; box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+main > div.max-w-3xl,
+#tool-results-panel > div,
+.peps-seo-guide-card {
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(203, 213, 225, 0.85) !important;
+  box-shadow: 0 12px 32px -8px rgba(15, 23, 42, 0.07), 0 2px 6px rgba(15, 23, 42, 0.03) !important;
+  background: #ffffff !important;
+}
+main > div.max-w-3xl::before {
+  content: '' !important;
+  position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important;
+  height: 4px !important;
+  background: linear-gradient(90deg, #c1272d 0%, #e11d48 50%, #006233 100%) !important;
+}
+main > div.max-w-3xl .grid {
+  align-items: stretch !important;
+}
+main > div.max-w-3xl .grid > div {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+}
+main > div.max-w-3xl .grid > div > label {
+  margin-bottom: 0.45rem !important;
+  line-height: 1.3 !important;
+  min-height: 2.1rem !important;
+  display: flex !important;
+  align-items: flex-end !important;
+}
+main > div.max-w-3xl input[type="number"],
+main > div.max-w-3xl select {
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  border-radius: 12px !important;
+  border: 1.5px solid #cbd5e1 !important;
+  background-color: #f8fafc !important;
+  padding: 0 0.9rem !important;
+  font-size: 0.95rem !important;
+  color: #0f172a !important;
+  transition: all 0.18s ease !important;
+  margin-top: auto !important;
+}
+main > div.max-w-3xl input[type="number"]:focus,
+main > div.max-w-3xl select:focus {
+  outline: none !important;
+  border-color: #c1272d !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 0 0 4px rgba(193, 39, 45, 0.12) !important;
+}
+#tool-results-panel .grid > div {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+}
+.peps-cta-btn {
+  width: 100% !important;
+  padding: 1.05rem 1.6rem !important;
+  margin-top: 0.5rem !important;
+  background: linear-gradient(135deg, #c1272d 0%, #991b1b 55%, #006233 100%) !important;
+  background-size: 160% 160% !important;
+  color: #ffffff !important;
+  font-family: var(--font-display) !important;
+  font-size: 1.02rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.01em !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  border-radius: 14px !important;
+  cursor: pointer !important;
+  box-shadow: 0 10px 25px -4px rgba(193, 39, 45, 0.45), 0 4px 10px -2px rgba(0, 98, 51, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, filter 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.65rem !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+.peps-cta-btn::after {
+  content: '→' !important;
+  font-size: 1.15rem !important;
+  font-weight: 900 !important;
+  margin-left: 0.25rem !important;
+  transition: transform 0.2s ease !important;
+}
+html[dir="rtl"] .peps-cta-btn::after {
+  content: '←' !important;
+  margin-left: 0 !important;
+  margin-right: 0.25rem !important;
+}
+.peps-cta-btn:hover {
+  transform: translateY(-2.5px) scale(1.005) !important;
+  box-shadow: 0 16px 32px -5px rgba(193, 39, 45, 0.55), 0 6px 14px -2px rgba(0, 98, 51, 0.3) !important;
+  filter: brightness(1.07) !important;
+}
+.peps-cta-btn:hover::after {
+  transform: translateX(4px) !important;
+}
+html[dir="rtl"] .peps-cta-btn:hover::after {
+  transform: translateX(-4px) !important;
+}
+.peps-cta-btn:active {
+  transform: translateY(0) scale(0.995) !important;
+}
+@keyframes pepsFadeSlideUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.peps-results-reveal {
+  animation: pepsFadeSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ═══ 4. FOOTER UNIFIÉ À 5 COLONNES SANS DOUBLONS (BLINDÉ CONTRE TAILWIND CDN) ═══ */
 footer.footer, #profeps-unified-footer {
   background: linear-gradient(135deg, #15192b 0%, #162038 100%) !important;
   color: #ffffff !important;
@@ -657,59 +867,76 @@ footer.footer, #profeps-unified-footer {
   width: 100% !important;
   display: block !important;
 }
-#profeps-unified-footer .footer-container {
+#profeps-unified-footer .footer-container,
+footer.footer .footer-container,
+.footer .footer-inner {
   max-width: 1360px !important;
   margin: 0 auto !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
 }
-#profeps-unified-footer .footer-grid {
+#profeps-unified-footer .footer-grid,
+footer.footer .footer-grid {
   display: grid !important;
   grid-template-columns: 1.65fr 0.9fr 1.1fr 1.45fr 1fr !important;
   gap: 2.25rem !important;
   padding-bottom: 2.75rem !important;
   align-items: start !important;
 }
-#profeps-unified-footer .footer-brand {
+#profeps-unified-footer .footer-brand,
+footer.footer .footer-brand {
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-start !important;
 }
-#profeps-unified-footer .footer-brand img {
+#profeps-unified-footer .footer-brand img,
+footer.footer .footer-brand img {
   height: 46px !important;
   max-height: 46px !important;
   width: auto !important;
   max-width: 155px !important;
   object-fit: contain !important;
+  align-self: flex-start !important;
+  filter: none !important;
   border-radius: 8px !important;
   margin: 0 0 0.9rem 0 !important;
+  padding: 0 !important;
+  display: block !important;
 }
-#profeps-unified-footer .footer-brand p {
+#profeps-unified-footer .footer-brand p,
+footer.footer .footer-brand p {
   color: rgba(255, 255, 255, 0.72) !important;
   font-size: 0.84rem !important;
   line-height: 1.65 !important;
   margin: 0 0 1.25rem 0 !important;
 }
-#profeps-unified-footer .footer-stats {
+#profeps-unified-footer .footer-stats,
+footer.footer .footer-stats {
   display: flex !important;
   align-items: center !important;
   gap: 1.25rem !important;
   flex-wrap: wrap !important;
   padding-top: 0.5rem !important;
 }
-#profeps-unified-footer .footer-stat-item {
+#profeps-unified-footer .footer-stat-item,
+footer.footer .footer-stat-item {
   display: flex !important;
   flex-direction: column !important;
 }
-#profeps-unified-footer .footer-stat-num {
+#profeps-unified-footer .footer-stat-num,
+footer.footer .footer-stat-num {
   font-size: 1.05rem !important;
   font-weight: 800 !important;
   color: #ffffff !important;
   line-height: 1.2 !important;
 }
-#profeps-unified-footer .footer-stat-lbl {
+#profeps-unified-footer .footer-stat-lbl,
+footer.footer .footer-stat-lbl {
   font-size: 0.7rem !important;
   color: rgba(255, 255, 255, 0.55) !important;
 }
-#profeps-unified-footer .footer-col h4 {
+#profeps-unified-footer .footer-col h4,
+footer.footer .footer-col h4 {
   font-size: 0.76rem !important;
   font-weight: 800 !important;
   text-transform: uppercase !important;
@@ -718,7 +945,8 @@ footer.footer, #profeps-unified-footer {
   margin: 0 0 1rem 0 !important;
   line-height: 1.3 !important;
 }
-#profeps-unified-footer .footer-col ul {
+#profeps-unified-footer .footer-col ul,
+footer.footer .footer-col ul {
   list-style: none !important;
   padding: 0 !important;
   margin: 0 !important;
@@ -726,7 +954,13 @@ footer.footer, #profeps-unified-footer {
   flex-direction: column !important;
   gap: 0.52rem !important;
 }
-#profeps-unified-footer .footer-col ul li a {
+#profeps-unified-footer .footer-col ul li,
+footer.footer .footer-col ul li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+#profeps-unified-footer .footer-col ul li a,
+footer.footer .footer-col ul li a {
   color: rgba(255, 255, 255, 0.76) !important;
   font-size: 0.83rem !important;
   font-weight: 500 !important;
@@ -735,15 +969,22 @@ footer.footer, #profeps-unified-footer {
   display: inline-block !important;
   line-height: 1.35 !important;
 }
-#profeps-unified-footer .footer-col ul li a:hover {
+#profeps-unified-footer .footer-col ul li a:hover,
+footer.footer .footer-col ul li a:hover {
   color: #ffffff !important;
   transform: translateX(2px) !important;
 }
-#profeps-unified-footer .footer-col ul li a.footer-hub-highlight {
+#profeps-unified-footer .footer-col ul li a.footer-hub-highlight,
+footer.footer .footer-col ul li a.footer-hub-highlight {
   color: #4ade80 !important;
   font-weight: 800 !important;
 }
-#profeps-unified-footer .footer-bottom {
+#profeps-unified-footer .footer-col ul li a.footer-hub-highlight:hover,
+footer.footer .footer-col ul li a.footer-hub-highlight:hover {
+  color: #86efac !important;
+}
+#profeps-unified-footer .footer-bottom,
+footer.footer .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.09) !important;
   padding: 1.25rem 0 !important;
   display: flex !important;
@@ -755,12 +996,20 @@ footer.footer, #profeps-unified-footer {
   color: rgba(255, 255, 255, 0.48) !important;
 }
 
+/* ═══ 5. RESPONSIVE MOBILE & TABLETTE ═══ */
 @media (max-width: 1024px) {
-  #profeps-unified-footer .footer-grid { grid-template-columns: 1fr 1fr !important; }
+  .footer .footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
 }
 @media (max-width: 900px) {
-  #pepsNavbar .peps-nav-container { display: flex !important; justify-content: space-between !important; }
-  #pepsNavbar .peps-nav-toggle { display: flex !important; }
+  #pepsNavbar .peps-nav-container {
+    display: flex !important;
+    justify-content: space-between !important;
+  }
+  #pepsNavbar .peps-nav-toggle {
+    display: flex !important;
+  }
   #pepsNavbar .peps-nav-menu {
     position: fixed !important;
     top: 80px !important;
@@ -776,8 +1025,14 @@ footer.footer, #profeps-unified-footer {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12) !important;
     display: none !important;
   }
-  #pepsNavbar .peps-nav-menu.active { display: flex !important; }
-  #pepsNavbar .peps-dropdown { flex-direction: column !important; height: auto !important; width: 100% !important; }
+  #pepsNavbar .peps-nav-menu.active {
+    display: flex !important;
+  }
+  #pepsNavbar .peps-dropdown {
+    flex-direction: column !important;
+    height: auto !important;
+    width: 100% !important;
+  }
   #pepsNavbar .peps-dropdown .peps-dropdown-menu {
     position: static !important;
     transform: none !important;
@@ -792,25 +1047,33 @@ footer.footer, #profeps-unified-footer {
   }
 }
 @media (max-width: 640px) {
-  #profeps-unified-footer .footer-grid { grid-template-columns: 1fr !important; }
+  .footer .footer-grid {
+    grid-template-columns: 1fr !important;
+  }
 }
 </style>
 </head>
 
 <body>
 <!-- PROFEPS_UNIFIED_NAVBAR_START -->
+  <nav id="navbar" class="navbar navbar-decoy" style="display:none !important;visibility:hidden !important;opacity:0 !important;width:0 !important;height:0 !important;overflow:hidden !important;position:absolute !important;pointer-events:none !important;z-index:-9999 !important;" aria-hidden="true">
+    <div class="nav-container">
+      <div id="navMenu" class="nav-menu"></div>
+      <div id="navRightDecoy" class="nav-right"></div>
+      <button id="navToggle" class="nav-toggle" type="button"></button>
+    </div>
+  </nav>
   <div class="peps-navbar" id="pepsNavbar" role="navigation" aria-label="Navigation principale" data-current-file="calculateur-vma.html">
     <div class="peps-nav-container">
       <a href="index.html" class="peps-nav-logo" aria-label="Prof EPS Maroc - Accueil">
-        <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc">
+        <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:52px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
       </a>
       <div class="peps-nav-menu" id="pepsNavMenu">
-        <a href="index.html" class="peps-nav-link" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
+        <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
         <a href="generateur.html" class="peps-nav-link" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
         <div class="peps-dropdown" id="pepsCalcDropdown">
-          <a href="calculateur-vma.html" class="peps-nav-link active" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS Calculator" data-i18n-ar="حاسبة السرعة الهوائية VMA">Calculateur VMA</span><span class="peps-dropdown-caret">▾</span></a>
-          <div class="peps-dropdown-menu" id="pepsDropdownMenu">
-            <a href="hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub" data-i18n-fr="🧭 Hub de Tous les Calculateurs Sport" data-i18n-en="🧭 All Sports Calculators Hub" data-i18n-ar="🧭 بوابة جميع الحاسبات الرياضية">🧭 Hub de Tous les Calculateurs Sport</a>
+          <a href="calculateur-vma.html" class="peps-nav-link active" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS Calculator" data-i18n-ar="حاسبة السرعة الهوائية VMA"><span class="peps-dropdown-title">Calculateur VMA</span></span><span class="peps-dropdown-caret">▾</span></a>
+          <div class="peps-dropdown-menu" id="pepsDropdownMenu">            <a href="hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub" data-i18n-fr="🧭 Hub de Tous les Calculateurs Sport" data-i18n-en="🧭 All Sports Calculators Hub" data-i18n-ar="🧭 بوابة جميع الحاسبات الرياضية">🧭 Hub de Tous les Calculateurs Sport</a>
             <a href="calculateur-vma.html" class="peps-dropdown-item active-tool" data-i18n-fr="⚡ Calculateur VMA & Allures" data-i18n-en="⚡ MAS (VMA) & Paces Calculator" data-i18n-ar="⚡ حاسبة السرعة الهوائية القصوى (VMA)">⚡ Calculateur VMA & Allures</a>
             <a href="calculateur-vdot-asr-endurance.html" class="peps-dropdown-item" data-i18n-fr="🫁 Calculateur VO2 Max & VDOT" data-i18n-en="🫁 VO2 Max & VDOT Calculator" data-i18n-ar="🫁 حاسبة VO2 Max ومؤشر VDOT">🫁 Calculateur VO2 Max & VDOT</a>
             <a href="calculateur-asr-reserve-vitesse.html" class="peps-dropdown-item" data-i18n-fr="🚀 Réserve de Vitesse Anaérobie (ASR)" data-i18n-en="🚀 Anaerobic Speed Reserve (ASR)" data-i18n-ar="🚀 احتياطي السرعة اللاهوائية (ASR)">🚀 Réserve de Vitesse Anaérobie (ASR)</a>
@@ -823,7 +1086,7 @@ footer.footer, #profeps-unified-footer {
             <a href="calculateur-charge-rpe-foster-acwr.html" class="peps-dropdown-item" data-i18n-fr="🛡️ Charge RPE Foster & ACWR" data-i18n-en="🛡️ Foster sRPE Load & ACWR Ratio" data-i18n-ar="🛡️ حمل التدريب (RPE Foster) ونسبة ACWR">🛡️ Charge RPE Foster & ACWR</a>
           </div>
         </div>
-        <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
+        <a href="concours-crmef-hub.html" class="peps-nav-link" data-i18n-fr="Préparer Concours CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparer Concours CRMEF</a>
       </div>
       <div class="peps-nav-right">
         <div dir="ltr" class="peps-lang-switch" aria-label="Sélecteur de langue">
@@ -841,12 +1104,36 @@ footer.footer, #profeps-unified-footer {
   </div>
 <script id="profeps-master-unifier-js">
 (function() {
+  // Stub silencieux au cas où un ancien script de page appelle encore window.supabase
+  var dummyAuth = {
+    getSession: function() { return Promise.resolve({ data: { session: null }, error: null }); },
+    getUser: function() { return Promise.resolve({ data: { user: null }, error: null }); },
+    onAuthStateChange: function() { return { data: { subscription: { unsubscribe: function() {} } } }; },
+    signOut: function() { return Promise.resolve({ error: null }); }
+  };
+  var dummyClient = {
+    auth: dummyAuth,
+    from: function() {
+      return {
+        select: function() { return Promise.resolve({ data: [], error: null }); },
+        insert: function() { return Promise.resolve({ data: null, error: null }); },
+        update: function() { return Promise.resolve({ data: null, error: null }); },
+        delete: function() { return Promise.resolve({ data: null, error: null }); }
+      };
+    }
+  };
+  window.supabase = { createClient: function() { return dummyClient; } };
+  window.supabaseClient = dummyClient;
+
   var dropdown = document.getElementById('pepsCalcDropdown');
   var dropdownMenu = document.getElementById('pepsDropdownMenu');
   var closeTimer = null;
 
   function openDropdown() {
-    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+    if (closeTimer) {
+      clearTimeout(closeTimer);
+      closeTimer = null;
+    }
     var dd = document.getElementById('pepsCalcDropdown');
     var dm = document.getElementById('pepsDropdownMenu');
     if (dd) dd.classList.add('open');
@@ -882,6 +1169,50 @@ footer.footer, #profeps-unified-footer {
     dropdownMenu.addEventListener('mouseleave', closeDropdownDelayed);
   }
 
+  // Délégation globale en renfort pour garantir l'ouverture au survol sur 100 % des pages
+  document.addEventListener('mouseover', function(e) {
+    var t = e.target;
+    if (t && t.closest && (t.closest('#pepsCalcDropdown') || t.closest('#pepsDropdownMenu'))) {
+      openDropdown();
+    }
+  });
+  document.addEventListener('mouseout', function(e) {
+    var t = e.target;
+    if (t && t.closest && (t.closest('#pepsCalcDropdown') || t.closest('#pepsDropdownMenu'))) {
+      var rel = e.relatedTarget;
+      if (!rel || !rel.closest || (!rel.closest('#pepsCalcDropdown') && !rel.closest('#pepsDropdownMenu'))) {
+        closeDropdownDelayed();
+      }
+    }
+  });
+
+  // Supprimer tout ancien <nav class="navbar"> résiduel ET tout bouton traducteur en doublon dans le contenu
+  function cleanPageDuplicates() {
+    document.querySelectorAll('nav.navbar:not(.navbar-decoy), .navbar:not(.navbar-decoy)').forEach(function(oldNav) {
+      if (oldNav.id !== 'pepsNavbar') {
+        if (oldNav.parentNode) oldNav.parentNode.removeChild(oldNav);
+      }
+    });
+    document.querySelectorAll('.lang-switch:not(.peps-lang-switch), .in-page-lang-switch, #btn-lang-fr, #btn-lang-en, #btn-lang-ar, button[onclick*="setToolLang"], button[onclick*="changeLang"], button.lang-btn:not(.peps-lang-btn)').forEach(function(el) {
+      if (!el.closest || !el.closest('#pepsNavbar')) {
+        var wrapper = el.closest ? (el.closest('.lang-switch, .in-page-lang-switch, [aria-label="Language selection"], [title*="Traduction"]') || el) : el;
+        if (wrapper === el && el.parentNode && el.parentNode.tagName === 'DIV') {
+          var parentTxt = (el.parentNode.textContent || '').trim();
+          if (parentTxt.length <= 50 && (!el.parentNode.closest || !el.parentNode.closest('#pepsNavbar'))) {
+            wrapper = el.parentNode;
+          }
+        }
+        if (wrapper && wrapper.parentNode && (!wrapper.closest || !wrapper.closest('#pepsNavbar'))) {
+          wrapper.parentNode.removeChild(wrapper);
+        }
+      }
+    });
+  }
+  cleanPageDuplicates();
+  window.addEventListener('DOMContentLoaded', cleanPageDuplicates);
+  var obs = new MutationObserver(cleanPageDuplicates);
+  obs.observe(document.documentElement, { childList: true, subtree: true });
+
   window.addEventListener('scroll', function() {
     var n = document.getElementById('pepsNavbar');
     if (n) n.classList.toggle('scrolled', window.scrollY > 40);
@@ -904,12 +1235,17 @@ footer.footer, #profeps-unified-footer {
     ['fr', 'en', 'ar'].forEach(function(code) {
       var btn = document.getElementById('peps-btn-lang-' + code);
       if (btn) btn.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
+      document.querySelectorAll('.peps-lang-btn[data-lang="' + code + '"]').forEach(function(b) {
+        b.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
+      });
     });
     document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function(el) {
       var val = el.getAttribute('data-i18n-' + lang);
       if (val) el.textContent = val;
     });
-    if (typeof window.switchLanguage === 'function') window.switchLanguage(lang);
+    if (typeof window.setToolLang === 'function') window.setToolLang(lang);
+    if (typeof window.changeLang === 'function') window.changeLang(lang);
+    if (typeof window.setLanguage === 'function') window.setLanguage(lang);
     document.documentElement.lang = lang;
     document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
   };
@@ -926,8 +1262,7 @@ footer.footer, #profeps-unified-footer {
 })();
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->
-
-    <!-- ═══ HERO SECTION ═══ -->
+<!-- ═══ HERO SECTION ═══ -->
     <header class="vma-hero">
         <div class="hero-badge" data-i18n="heroBadge">⚡ Calculateur Universel VMA & VO₂max</div>
         <h1 data-i18n="heroTitle">Calculateur VMA & <span>Allures de Course</span></h1>
@@ -1486,7 +1821,7 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
     <div class="footer-container">
       <div class="footer-grid">
         <div class="footer-brand" style="display:flex !important;flex-direction:column !important;align-items:flex-start !important;">
-          <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:48px !important;max-height:48px !important;width:auto !important;max-width:155px !important;object-fit:contain !important;align-self:flex-start !important;border-radius:8px !important;margin:0 0 0.9rem 0 !important;display:block !important;">
+          <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:48px !important;max-height:48px !important;width:auto !important;max-width:155px !important;object-fit:contain !important;align-self:flex-start !important;filter:none !important;border-radius:8px !important;margin:0 0 0.9rem 0 !important;display:block !important;">
           <p data-i18n-fr="La plateforme de référence pour les professeurs d'EPS au Maroc. Générateur de documents pédagogiques gratuit, conforme aux orientations pédagogiques officielles (MEN)." data-i18n-en="The reference platform for PE teachers in Morocco. Free educational document generator & sports science calculators aligned with official MEN guidelines." data-i18n-ar="المنصة المرجعية لأساتذة التربية البدنية بالمغرب. مولد وثائق تربوية مجاني وحاسبات علمية للرياضة وفق التوجيهات التربوية الرسمية.">La plateforme de référence pour les professeurs d'EPS au Maroc. Générateur de documents pédagogiques gratuit, conforme aux orientations pédagogiques officielles (MEN).</p>
           <div class="footer-stats">
             <div class="footer-stat-item">
@@ -1515,16 +1850,15 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
         </div>
 
         <div class="footer-col">
-          <h4 data-i18n-fr="RESSOURCES EPS" data-i18n-en="PE RESOURCES" data-i18n-ar="موارد التربية البدنية">RESSOURCES EPS</h4>
+          <h4 data-i18n-fr="PRÉPARATION CRMEF" data-i18n-en="CRMEF PREPARATION" data-i18n-ar="الاستعداد لمباراة التعليم">PRÉPARATION CRMEF</h4>
           <ul>
-            <li><a href="cycles-eps-maroc.html" data-i18n-fr="Cycles d'EPS au Maroc" data-i18n-en="PE Cycles in Morocco" data-i18n-ar="أسلاك التربية البدنية بالمغرب">Cycles d'EPS au Maroc</a></li>
-            <li><a href="programme-eps-maroc.html" data-i18n-fr="Programme EPS Maroc" data-i18n-en="Morocco PE Curriculum" data-i18n-ar="برنامج التربية البدنية بالمغرب">Programme EPS Maroc</a></li>
-            <li><a href="evaluation-eps.html" data-i18n-fr="Évaluation en EPS" data-i18n-en="PE Assessment" data-i18n-ar="التقويم في التربية البدنية">Évaluation en EPS</a></li>
-            <li><a href="securite-eps.html" data-i18n-fr="Sécurité en EPS" data-i18n-en="Safety in PE" data-i18n-ar="السلامة في التربية البدنية">Sécurité en EPS</a></li>
-            <li><a href="bibliotheque-numerique-eps.html" data-i18n-fr="Bibliothèque numérique" data-i18n-en="Digital Library" data-i18n-ar="المكتبة الرقمية">Bibliothèque numérique</a></li>
+            <li><a href="concours-crmef-hub.html" data-i18n-fr="🏛️ Hub National CRMEF" data-i18n-en="🏛️ National CRMEF Hub" data-i18n-ar="🏛️ بوابة مباريات التعليم">🏛️ Hub National CRMEF</a></li>
+            <li><a href="qcm-sciences-education-crmef.html" data-i18n-fr="📚 Tronc Commun (Sciences Éduc)" data-i18n-en="📚 Education Sciences" data-i18n-ar="📚 علوم التربية والديداكتيك">📚 Tronc Commun (Sciences Éduc)</a></li>
+            <li><a href="qcm-specialite-eps-maroc.html" data-i18n-fr="🏃 Spécialité EPS" data-i18n-en="🏃 PE Specialty" data-i18n-ar="🏃 تخصص التربية البدنية">🏃 Spécialité EPS</a></li>
+            <li><a href="qcm-didactique-eps-maroc.html" data-i18n-fr="⚡ Didactique EPS" data-i18n-en="⚡ PE Didactics" data-i18n-ar="⚡ ديداكتيك التربية البدنية">⚡ Didactique EPS</a></li>
+            <li><a href="concours-crmef-hub.html#discipline-eps" data-i18n-fr="🎯 Les 12 Spécialités CRMEF" data-i18n-en="🎯 All 12 CRMEF Specialties" data-i18n-ar="🎯 التخصصات الـ12 لمباراة التعليم">🎯 Les 12 Spécialités CRMEF</a></li>
           </ul>
         </div>
-
         <div class="footer-col" id="footer-col-calculators">
           <h4 data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</h4>
           <ul>
