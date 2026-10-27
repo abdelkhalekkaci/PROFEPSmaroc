@@ -355,12 +355,12 @@ nav.navbar, #navbar, .navbar-decoy {
 
 
 /* ═══ 5. BOUTONS & COMPOSANTS UNIFIÉS CHARTE PROFEPS ═══ */
-/* 5.1 BOUTON DIDACTIQUE (ROUGE ROYAL HARMONISÉ) */
+/* 5.1 BOUTON DIDACTIQUE : BORDEAUX NOBLE, DOUX POUR LES YEUX & CONTRASTÉ */
 .peps-btn-didactique, .peps-btn-primary, .peps-btn-red {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  background: linear-gradient(135deg, #c1272d 0%, #991b1b 100%) !important;
+  background: linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%) !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   font-family: 'Plus Jakarta Sans', sans-serif !important;
@@ -369,47 +369,47 @@ nav.navbar, #navbar, .navbar-decoy {
   line-height: 1.3 !important;
   padding: 0.85rem 1.25rem !important;
   border-radius: 0.85rem !important;
-  border: 1.5px solid #991b1b !important;
-  box-shadow: 0 4px 14px rgba(193, 39, 45, 0.32) !important;
+  border: 1px solid #7f1d1d !important;
+  box-shadow: 0 4px 14px rgba(127, 29, 29, 0.25) !important;
   text-decoration: none !important;
   cursor: pointer !important;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 .peps-btn-didactique:hover, .peps-btn-primary:hover, .peps-btn-red:hover {
-  background: linear-gradient(135deg, #a81d22 0%, #7f1d1d 100%) !important;
+  background: linear-gradient(135deg, #7f1d1d 0%, #581c1c 100%) !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 8px 22px rgba(193, 39, 45, 0.45) !important;
+  box-shadow: 0 8px 20px rgba(127, 29, 29, 0.35) !important;
 }
 
-/* 5.2 BOUTON SPÉCIALITÉ (FOND BLANC ÉLÉGANT AVEC BORDURE ROUGE VIVE & TEXTE ROUGE NET) */
+/* 5.2 BOUTON SPÉCIALITÉ : FOND BLANC, BORDURE 2PX BORDEAUX NETTE & TEXTE SOMBRE HAUT CONTRASTE */
 .peps-btn-specialite, .peps-btn-slate, .peps-btn-green {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   background-color: #ffffff !important;
-  color: #c1272d !important;
-  -webkit-text-fill-color: #c1272d !important;
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
   font-family: 'Plus Jakarta Sans', sans-serif !important;
   font-weight: 800 !important;
   font-size: 0.85rem !important;
   line-height: 1.3 !important;
   padding: 0.85rem 1.25rem !important;
   border-radius: 0.85rem !important;
-  border: 2px solid #c1272d !important;
-  box-shadow: 0 2px 10px rgba(193, 39, 45, 0.08) !important;
+  border: 2px solid #991b1b !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08) !important;
   text-decoration: none !important;
   cursor: pointer !important;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 .peps-btn-specialite:hover, .peps-btn-slate:hover, .peps-btn-green:hover {
-  background-color: #fef2f2 !important;
-  color: #991b1b !important;
-  -webkit-text-fill-color: #991b1b !important;
-  border-color: #991b1b !important;
+  background-color: #f8fafc !important;
+  color: #7f1d1d !important;
+  -webkit-text-fill-color: #7f1d1d !important;
+  border-color: #7f1d1d !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 6px 18px rgba(193, 39, 45, 0.2) !important;
+  box-shadow: 0 6px 16px rgba(127, 29, 29, 0.15) !important;
 }
 
 .peps-hero-gradient {
@@ -614,8 +614,8 @@ ${dropdownLinks}
 // ═══ 5. SOUS-BARRE DE NAVIGATION CRMEF MAÎTRE (13 DISCIPLINES + TRONC COMMUN) ═══
 const CRMEF_NAV_ITEMS = [
   { key: "hub", label: "🏛️ Hub National", href: "concours-crmef-hub.html", anchor: "top" },
-  { key: "se", label: "📚 Tronc Commun", href: "qcm-sciences-education-crmef.html", anchor: "tronc-commun" },
   { key: "eps", label: "🏃 EPS", didac: "qcm-didactique-eps-maroc.html", spec: "qcm-specialite-eps-maroc.html", anchor: "card-eps" },
+  { key: "se", label: "📚 Tronc Commun", href: "qcm-sciences-education-crmef.html", anchor: "tronc-commun" },
   { key: "primaire", label: "🎒 Primaire", didac: "qcm-didactique-primaire-maroc.html", spec: "qcm-specialite-primaire-maroc.html", anchor: "card-primaire" },
   { key: "maths", label: "📐 Maths", didac: "qcm-didactique-maths-maroc.html", spec: "qcm-specialite-maths-maroc.html", anchor: "card-maths" },
   { key: "pc", label: "⚛️ Physique-Chimie", didac: "qcm-didactique-physique-chimie-maroc.html", spec: "qcm-specialite-physique-chimie-maroc.html", anchor: "card-pc" },
@@ -683,11 +683,11 @@ function buildCrmefSubnavHtml(fileName) {
   const currentDiscipline = CRMEF_NAV_ITEMS.find(d => d.key === currentKey);
   if (currentDiscipline && currentDiscipline.didac && currentDiscipline.spec) {
     dualToggleHtml = `
-      <div class="flex items-center gap-1 bg-slate-100/90 p-1 rounded-full border border-slate-200/80 shrink-0 text-xs">
-        <a href="${currentDiscipline.didac}" class="px-3.5 py-1.5 rounded-full font-black transition-all ${isDidactique ? "bg-[#c1272d] text-white shadow-xs" : "text-slate-600 hover:text-slate-900"}">
+      <div class="flex items-center gap-1 bg-slate-100/90 p-1 rounded-full border border-slate-200/80 shrink-0 text-xs ml-2">
+        <a href="${currentDiscipline.didac}" class="px-3.5 py-1.5 rounded-full font-black transition-all ${isDidactique ? "bg-[#991b1b] text-white shadow-xs" : "text-slate-600 hover:text-slate-900"}">
           📘 Didactique
         </a>
-        <a href="${currentDiscipline.spec}" class="px-3.5 py-1.5 rounded-full font-black transition-all ${isSpecialite ? "bg-white text-[#c1272d] border border-[#c1272d] shadow-xs" : "text-slate-600 hover:text-slate-900"}">
+        <a href="${currentDiscipline.spec}" class="px-3.5 py-1.5 rounded-full font-black transition-all ${isSpecialite ? "bg-white text-[#0f172a] border-2 border-slate-700 shadow-xs" : "text-slate-600 hover:text-slate-900"}">
           📗 Spécialité
         </a>
       </div>`;
@@ -695,8 +695,8 @@ function buildCrmefSubnavHtml(fileName) {
 
   return `  <!-- ================= CRMEF DISCIPLINE STICKY SUBNAV ================= -->
   <div class="peps-crmef-subnav" role="navigation" aria-label="Sous-navigation des Disciplines CRMEF">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-center flex-wrap sm:flex-nowrap gap-3 overflow-x-auto scrollbar-none">
-      <div class="flex items-center justify-center gap-1.5 overflow-x-auto scrollbar-none py-0.5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-start md:justify-center gap-2 overflow-x-auto scrollbar-none">
+      <div class="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-0.5 shrink-0">
 ${linksHtml}
       </div>
 ${dualToggleHtml ? `      <div class="flex items-center justify-center gap-2 shrink-0">
