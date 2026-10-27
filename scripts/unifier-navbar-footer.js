@@ -1320,8 +1320,8 @@ dirsToScan.forEach((dir) => {
     const filePath = path.join(dir, file);
     let html = fs.readFileSync(filePath, 'utf8');
 
-    // Ignorer le point d'entrée Vite SPA s'il contient uniquement <div id="root"></div>
-    if (file === 'index.html' && html.includes('<div id="root"></div>') && html.includes('/src/main.tsx')) {
+    // Protéger index.html qui a sa propre structure canonique riche
+    if (file === 'index.html') {
       return;
     }
 

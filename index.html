@@ -1624,7 +1624,7 @@ footer.footer .footer-bottom {
       </div>
     </section>
 
-    <!-- ═══ 4. TROISIÈME BLOC : LES CALCULATEURS SCIENTIFIQUES (HUB 11 OUTILS AVEC FILTRES) ═══ -->
+    <!-- ═══ 4. TROISIÈME BLOC : LES CALCULATEURS SCIENTIFIQUES (CARROUSEL DES 11 OUTILS INDIVIDUELS) ═══ -->
     <section id="bloc-calculateurs" class="space-y-6">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-200 pb-3">
         <div>
@@ -1636,131 +1636,305 @@ footer.footer .footer-bottom {
             Calculateurs Physiologiques & Sciences du Sport
           </h2>
           <p class="text-sm text-slate-600 mt-1 max-w-2xl leading-relaxed">
-            11 outils physiologiques calibrés selon les modèles de référence (Billat, Cazorla, Daniels, Péronnet, Karvonen, Foster) pour réguler vos séances scolaires et d'athlétisme.
+            11 outils physiologiques calibrés selon les modèles scientifiques de référence (Billat, Cazorla, Daniels, Péronnet, Karvonen, Foster) pour réguler vos séances scolaires et d'athlétisme.
           </p>
         </div>
 
-        <a href="hub-outils-sport-performance.html" class="text-xs font-bold text-red-700 hover:text-red-800 flex items-center gap-1.5 shrink-0">
-          <span>Accéder au Hub des 11 outils</span>
-          <span>→</span>
-        </a>
+        <div class="flex items-center gap-3">
+          <a href="hub-outils-sport-performance.html" class="text-xs font-bold text-red-700 hover:text-red-800 flex items-center gap-1.5 shrink-0">
+            <span>Accéder au Hub des 11 outils</span>
+            <span>→</span>
+          </a>
+        </div>
       </div>
 
-      <!-- Filtres interactifs par catégorie -->
-      <div class="flex flex-wrap items-center gap-2 pt-1">
-        <span class="text-xs font-bold text-slate-500 mr-1">Filtrer les outils :</span>
-        <button
-          type="button"
-          onclick="filterCalculateurs('all')"
-          id="btn-calc-all"
-          class="px-3.5 py-1.5 text-xs font-bold rounded-lg bg-slate-900 text-white transition shadow-xs cursor-pointer"
-        >
-          Tous les 11 outils
-        </button>
-        <button
-          type="button"
-          onclick="filterCalculateurs('aerobie')"
-          id="btn-calc-aerobie"
-          class="px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition cursor-pointer"
-        >
-          ⚡ Aérobie & VMA (4)
-        </button>
-        <button
-          type="button"
-          onclick="filterCalculateurs('sante')"
-          id="btn-calc-sante"
-          class="px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition cursor-pointer"
-        >
-          ❤️ Santé & Cardiologie (4)
-        </button>
-        <button
-          type="button"
-          onclick="filterCalculateurs('charge')"
-          id="btn-calc-charge"
-          class="px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition cursor-pointer"
-        >
-          🏋️ Charge & Puissance (3)
-        </button>
+      <!-- Barre de contrôles du Carrousel : Filtres thématiques + Flèches Précédent/Suivant -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <!-- Filtres interactifs par catégorie -->
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-xs font-bold text-slate-500 mr-1">Filtrer les outils :</span>
+          <button
+            type="button"
+            onclick="filterCalculateurs('all')"
+            id="btn-calc-all"
+            class="px-3.5 py-1.5 text-xs font-bold rounded-lg bg-slate-900 text-white transition shadow-xs cursor-pointer"
+          >
+            Tous les 11 outils
+          </button>
+          <button
+            type="button"
+            onclick="filterCalculateurs('aerobie')"
+            id="btn-calc-aerobie"
+            class="px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition cursor-pointer"
+          >
+            ⚡ Aérobie & VMA (4)
+          </button>
+          <button
+            type="button"
+            onclick="filterCalculateurs('sante')"
+            id="btn-calc-sante"
+            class="px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition cursor-pointer"
+          >
+            ❤️ Santé & Cardiologie (4)
+          </button>
+          <button
+            type="button"
+            onclick="filterCalculateurs('charge')"
+            id="btn-calc-charge"
+            class="px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition cursor-pointer"
+          >
+            🏋️ Charge & Puissance (3)
+          </button>
+        </div>
+
+        <!-- Flèches de Défilement du Carrousel -->
+        <div class="flex items-center gap-2 self-end sm:self-auto shrink-0">
+          <button
+            type="button"
+            onclick="scrollCalcCarousel(-1)"
+            id="btn-calc-prev"
+            class="w-9 h-9 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 active:bg-slate-100 flex items-center justify-center text-slate-700 shadow-xs transition cursor-pointer font-bold text-base select-none"
+            title="Outil précédent"
+            aria-label="Outil précédent"
+          >
+            ‹
+          </button>
+          <button
+            type="button"
+            onclick="scrollCalcCarousel(1)"
+            id="btn-calc-next"
+            class="w-9 h-9 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 active:bg-slate-100 flex items-center justify-center text-slate-700 shadow-xs transition cursor-pointer font-bold text-base select-none"
+            title="Outil suivant"
+            aria-label="Outil suivant"
+          >
+            ›
+          </button>
+        </div>
       </div>
 
-      <!-- Grille des 3 Clusters regroupant les 11 outils -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="grid-calculateurs">
-        
-        <!-- Cluster 1 (Rouge ProfEPS : Aérobie & VMA) -->
-        <div class="peps-card p-6 flex flex-col justify-between relative overflow-hidden calc-cluster-card" data-calc-cat="aerobie">
+      <!-- CARROUSEL INTERACTIF DES 11 OUTILS PHYSIOLOGIQUES -->
+      <div
+        id="carousel-calculateurs"
+        class="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 pt-1 px-0.5 scrollbar-thin"
+        style="scrollbar-width: thin;"
+      >
+        <!-- 1. VMA & Allures -->
+        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-red-400 transition-all duration-200" data-calc-cat="aerobie">
           <div class="absolute top-0 left-0 right-0 h-1 bg-red-600"></div>
-          <div class="space-y-4">
-            <div class="w-12 h-12 rounded-xl bg-red-50 text-red-700 flex items-center justify-center border border-red-100 font-black text-xl">
-              ⚡
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="w-10 h-10 rounded-xl bg-red-50 text-red-700 flex items-center justify-center font-bold text-lg border border-red-100">⚡</span>
+              <span class="text-[11px] font-bold text-red-700 bg-red-50 px-2.5 py-0.5 rounded-full border border-red-200">Aérobie & VMA</span>
             </div>
             <div>
-              <span class="text-[11px] font-bold uppercase tracking-wider text-red-700 bg-red-50 px-2 py-0.5 rounded-full border border-red-200">Cluster 1 · Aérobie</span>
-              <h3 class="text-lg font-bold text-slate-900 mt-1">VMA, VO2 Max & Allures</h3>
-              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
-                Calculs complets du profil aérobie de l’élève et du coureur de demi-fond scolaire.
+              <h3 class="text-base font-extrabold text-slate-900">VMA & Allures de Demi-Fond</h3>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed line-clamp-3">
+                Calcul précis des allures d'entraînement (100% VMA, Seuil 85%, Footing 65%) et temps de passage au tour de piste (200m, 250m, 400m).
               </p>
             </div>
-            <ul class="space-y-2 text-xs text-slate-700 pt-3 border-t border-slate-100">
-              <li><a href="calculateur-vma.html" class="hover:text-red-700 font-semibold flex items-center gap-1.5"><span>•</span> <span>Calculateur VMA & Allures (km/h & min/km)</span></a></li>
-              <li><a href="calculateur-vdot-asr-endurance.html" class="hover:text-red-700 font-semibold flex items-center gap-1.5"><span>•</span> <span>VO2 Max & VDOT (Jack Daniels)</span></a></li>
-              <li><a href="calculateur-asr-reserve-vitesse.html" class="hover:text-red-700 font-semibold flex items-center gap-1.5"><span>•</span> <span>Réserve de Vitesse Anaérobie (ASR)</span></a></li>
-              <li><a href="calculateur-indice-endurance.html" class="hover:text-red-700 font-semibold flex items-center gap-1.5"><span>•</span> <span>Indice d'Endurance (Péronnet & Thibault)</span></a></li>
-            </ul>
           </div>
-          <a href="calculateur-vma.html" class="mt-5 w-full py-2.5 px-4 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
-            Ouvrir la Suite Aérobie (VMA) →
+          <a href="calculateur-vma.html" class="mt-4 w-full py-2.5 px-3 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+            Lancer le Calculateur VMA →
           </a>
         </div>
 
-        <!-- Cluster 2 (Vert Émeraude : Santé & Cardiologie) -->
-        <div class="peps-card p-6 flex flex-col justify-between relative overflow-hidden calc-cluster-card" data-calc-cat="sante">
+        <!-- 2. VO2 Max & VDOT -->
+        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-red-400 transition-all duration-200" data-calc-cat="aerobie">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-red-600"></div>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="w-10 h-10 rounded-xl bg-red-50 text-red-700 flex items-center justify-center font-bold text-lg border border-red-100">🫁</span>
+              <span class="text-[11px] font-bold text-red-700 bg-red-50 px-2.5 py-0.5 rounded-full border border-red-200">Aérobie & VDOT</span>
+            </div>
+            <div>
+              <h3 class="text-base font-extrabold text-slate-900">VO2 Max & VDOT Jack Daniels</h3>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed line-clamp-3">
+                Estimation scientifique du VO2 Max et prédiction des allures personnalisées d'entraînement (Easy, Marathon, Threshold, Interval, Repetition).
+              </p>
+            </div>
+          </div>
+          <a href="calculateur-vdot-asr-endurance.html" class="mt-4 w-full py-2.5 px-3 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+            Calculer la VDOT & VO2 Max →
+          </a>
+        </div>
+
+        <!-- 3. Fréquence Cardiaque Karvonen -->
+        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-emerald-400 transition-all duration-200" data-calc-cat="sante">
           <div class="absolute top-0 left-0 right-0 h-1 bg-emerald-600"></div>
-          <div class="space-y-4">
-            <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center border border-emerald-100 font-black text-xl">
-              ❤️
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-lg border border-emerald-100">❤️</span>
+              <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">Santé & Cardio</span>
             </div>
             <div>
-              <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">Cluster 2 · Santé</span>
-              <h3 class="text-lg font-bold text-slate-900 mt-1">Santé, Climat & Cardiologie</h3>
-              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
-                Fréquence cardiaque, morphologie sportive et impact des conditions météo sur l’effort.
+              <h3 class="text-base font-extrabold text-slate-900">FC Karvonen & Zones Z1-Z5</h3>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed line-clamp-3">
+                Calcul des 5 plages cardiaques cibles (échauffement, aérobie, seuil, anaérobie) à partir de la FC de réserve (FCmax - FCrepos).
               </p>
             </div>
-            <ul class="space-y-2 text-xs text-slate-700 pt-3 border-t border-slate-100">
-              <li><a href="calculateur-frequence-cardiaque-karvonen.html" class="hover:text-emerald-700 font-semibold flex items-center gap-1.5"><span>•</span> <span>FC Karvonen & Zones Cardiaques Z1-Z5</span></a></li>
-              <li><a href="calculateur-imc-sportif-masse-grasse.html" class="hover:text-emerald-700 font-semibold flex items-center gap-1.5"><span>•</span> <span>IMC Sportif & Masse Grasse (IMG Deurenberg)</span></a></li>
-              <li><a href="calculateur-chaleur-meteo-altitude.html" class="hover:text-emerald-700 font-semibold flex items-center gap-1.5"><span>•</span> <span>Chaleur, Humidité & Altitude (Ajustement)</span></a></li>
-              <li><a href="calculateur-gap-pente-nutrition.html" class="hover:text-emerald-700 font-semibold flex items-center gap-1.5"><span>•</span> <span>Allure Pente GAP & Besoins Glucidiques</span></a></li>
-            </ul>
           </div>
-          <a href="calculateur-frequence-cardiaque-karvonen.html" class="mt-5 w-full py-2.5 px-4 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
-            Ouvrir la Suite Cardio & Santé →
+          <a href="calculateur-frequence-cardiaque-karvonen.html" class="mt-4 w-full py-2.5 px-3 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+            Calculer les Zones Cardiaques →
           </a>
         </div>
 
-        <!-- Cluster 3 (Bleu Roi : Charge & Puissance) -->
-        <div class="peps-card p-6 flex flex-col justify-between relative overflow-hidden calc-cluster-card" data-calc-cat="charge">
+        <!-- 4. Intermittent HIIT & COD 180° -->
+        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-blue-400 transition-all duration-200" data-calc-cat="charge">
           <div class="absolute top-0 left-0 right-0 h-1 bg-blue-600"></div>
-          <div class="space-y-4">
-            <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100 font-black text-xl">
-              🏋️
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-lg border border-blue-100">🔄</span>
+              <span class="text-[11px] font-bold text-blue-800 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200">Charge & Puissance</span>
             </div>
             <div>
-              <span class="text-[11px] font-bold uppercase tracking-wider text-blue-800 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">Cluster 3 · Charge</span>
-              <h3 class="text-lg font-bold text-slate-900 mt-1">Intermittent HIIT & Monitoring</h3>
-              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
-                Calibration des plots sur piste et monitoring de la charge d'entraînement sRPE.
+              <h3 class="text-base font-extrabold text-slate-900">Intermittent HIIT & COD 180°</h3>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed line-clamp-3">
+                Générateur de distances pour séances intermittentes (15/15, 30/30) avec ajustement biomécanique des changements de direction (navettes).
               </p>
             </div>
-            <ul class="space-y-2 text-xs text-slate-700 pt-3 border-t border-slate-100">
-              <li><a href="generateur-intermittent-hiit-cod.html" class="hover:text-blue-600 font-semibold flex items-center gap-1.5"><span>•</span> <span>Intermittent HIIT & Navettes COD 180°</span></a></li>
-              <li><a href="calculateur-charge-rpe-foster-acwr.html" class="hover:text-blue-600 font-semibold flex items-center gap-1.5"><span>•</span> <span>Charge RPE Foster & Ratio ACWR Aiguë/Chronique</span></a></li>
-              <li><a href="hub-outils-sport-performance.html" class="hover:text-blue-600 font-semibold flex items-center gap-1.5"><span>•</span> <span>Hub Global de la Performance Sportive</span></a></li>
-              <li><a href="widget-vma.html" class="hover:text-blue-600 font-semibold flex items-center gap-1.5"><span>•</span> <span>Widget VMA Intégrable pour Sites EPS</span></a></li>
-            </ul>
           </div>
-          <a href="generateur-intermittent-hiit-cod.html" class="mt-5 w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
-            Ouvrir la Suite Charge & HIIT →
+          <a href="generateur-intermittent-hiit-cod.html" class="mt-4 w-full py-2.5 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+            Calibrer l'Intermittent HIIT →
+          </a>
+        </div>
+
+        <!-- 5. Charge RPE Foster & ACWR -->
+        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-blue-400 transition-all duration-200" data-calc-cat="charge">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-blue-600"></div>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-lg border border-blue-100">🛡️</span>
+              <span class="text-[11px] font-bold text-blue-800 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200">Charge & Suivi</span>
+            </div>
+            <div>
+              <h3 class="text-base font-extrabold text-slate-900">Charge RPE Foster & ACWR</h3>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed line-clamp-3">
+                Monitoring de la charge d'entraînement (sRPE × volume en min), indice de monotonie et ratio de contrainte aiguë/chronique anti-blessure.
+              </p>
+            </div>
+          </div>
+          <a href="calculateur-charge-rpe-foster-acwr.html" class="mt-4 w-full py-2.5 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+            Calculer la Charge sRPE →
+          </a>
+        </div>
+
+        <!-- 6. Réserve de Vitesse Anaérobie (ASR) -->
+        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-red-400 transition-all duration-200" data-calc-cat="aerobie">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-red-600"></div>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="w-10 h-10 rounded-xl bg-red-50 text-red-700 flex items-center justify-center font-bold text-lg border border-red-100">🚀</span>
+              <span class="text-[11px] font-bold text-red-700 bg-red-50 px-2.5 py-0.5 rounded-full border border-red-200">Aérobie & Vitesse</span>
+            </div>
+            <div>
+              <h3 class="text-base font-extrabold text-slate-900">Réserve Anaérobie (ASR)</h3>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed line-clamp-3">
+                Calcul de la réserve entre la VMA et la Vitesse Maximale de Sprint (MSS) pour individualiser les courses supramaximales en club et en EPS.
+              </p>
+            </div>
+          </div>
+          <a href="calculateur-asr-reserve-vitesse.html" class="mt-4 w-full py-2.5 px-3 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+            Calculer le Profil ASR →
+          </a>
+        </div>
+
+        <!-- 7. Indice d'Endurance Péronnet-Thibault -->
+        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-red-400 transition-all duration-200" data-calc-cat="aerobie">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-red-600"></div>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="w-10 h-10 rounded-xl bg-red-50 text-red-700 flex items-center justify-center font-bold text-lg border border-red-100">📈</span>
+              <span class="text-[11px] font-bold text-red-700 bg-red-50 px-2.5 py-0.5 rounded-full border border-red-200">Aérobie & Maintien</span>
+            </div>
+            <div>
+              <h3 class="text-base font-extrabold text-slate-900">Indice d'Endurance Péronnet</h3>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed line-clamp-3">
+                Mesure mathématique de la capacité à maintenir un haut pourcentage de VMA sur la durée sans s'épuiser (pente logarithmique de vitesse).
+              </p>
+            </div>
+          </div>
+          <a href="calculateur-indice-endurance.html" class="mt-4 w-full py-2.5 px-3 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+            Mesurer l'Indice d'Endurance →
+          </a>
+        </div>
+
+        <!-- 8. Ajustement Chaleur, Humidité & Altitude -->
+        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-emerald-400 transition-all duration-200" data-calc-cat="sante">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-emerald-600"></div>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-lg border border-emerald-100">☀️</span>
+              <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">Santé & Climat</span>
+            </div>
+            <div>
+              <h3 class="text-base font-extrabold text-slate-900">Chaleur, Météo & Altitude</h3>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed line-clamp-3">
+                Régulation physiologique des allures et des fréquences de réhydratation en fonction de la température ambiante, de l'hygrométrie et de l'altitude.
+              </p>
+            </div>
+          </div>
+          <a href="calculateur-chaleur-meteo-altitude.html" class="mt-4 w-full py-2.5 px-3 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+            Ajuster selon le Climat →
+          </a>
+        </div>
+
+        <!-- 9. Allure Pente GAP & Nutrition -->
+        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-emerald-400 transition-all duration-200" data-calc-cat="sante">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-emerald-600"></div>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-lg border border-emerald-100">⛰️</span>
+              <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">Santé & Pente</span>
+            </div>
+            <div>
+              <h3 class="text-base font-extrabold text-slate-900">Allure Pente GAP & Nutrition</h3>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed line-clamp-3">
+                Conversion Minetti du coût énergétique sur terrain accidenté (montée/descente) et estimation du taux d'oxydation des glucides par heure d'effort.
+              </p>
+            </div>
+          </div>
+          <a href="calculateur-gap-pente-nutrition.html" class="mt-4 w-full py-2.5 px-3 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+            Calculer l'Allure GAP →
+          </a>
+        </div>
+
+        <!-- 10. IMC Sportif & Masse Grasse (Deurenberg) -->
+        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-emerald-400 transition-all duration-200" data-calc-cat="sante">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-emerald-600"></div>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-lg border border-emerald-100">⚖️</span>
+              <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">Santé & Morphologie</span>
+            </div>
+            <div>
+              <h3 class="text-base font-extrabold text-slate-900">IMC Sportif & Masse Grasse</h3>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed line-clamp-3">
+                Indice de masse corporelle adapté aux élèves et formule de Deurenberg pour estimer le pourcentage de masse grasse selon le sexe et l'âge.
+              </p>
+            </div>
+          </div>
+          <a href="calculateur-imc-sportif-masse-grasse.html" class="mt-4 w-full py-2.5 px-3 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+            Calculer l'IMC & IMG →
+          </a>
+        </div>
+
+        <!-- 11. Widget VMA Intégrable -->
+        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-blue-400 transition-all duration-200" data-calc-cat="charge">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-blue-600"></div>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-lg border border-blue-100">💻</span>
+              <span class="text-[11px] font-bold text-blue-800 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200">Intégration Web</span>
+            </div>
+            <div>
+              <h3 class="text-base font-extrabold text-slate-900">Widget VMA Intégrable</h3>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed line-clamp-3">
+                Module interactif et embed iframe prêt à insérer directement sur les blogs pédagogiques, plateformes EPS d'établissements et sites d'athlétisme.
+              </p>
+            </div>
+          </div>
+          <a href="widget-vma.html" class="mt-4 w-full py-2.5 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+            Obtenir le Code Widget →
           </a>
         </div>
 
@@ -2453,7 +2627,14 @@ footer.footer .footer-bottom {
       if (btnSpecialiteLbl) btnSpecialiteLbl.textContent = item.specialiteLabel;
     }
 
-    // 4. Filtrage dynamique des Calculateurs Sportifs
+    // 4. Carrousel et filtrage dynamique des 11 Calculateurs Sportifs
+    function scrollCalcCarousel(direction) {
+      var track = document.getElementById('carousel-calculateurs');
+      if (!track) return;
+      var scrollStep = 330 * direction;
+      track.scrollBy({ left: scrollStep, behavior: 'smooth' });
+    }
+
     function filterCalculateurs(cat) {
       cat = cat || 'all';
       var buttons = [
@@ -2473,15 +2654,22 @@ footer.footer .footer-bottom {
         }
       });
 
-      var cards = document.querySelectorAll('.calc-cluster-card');
+      var cards = document.querySelectorAll('.calc-tool-card');
       cards.forEach(function(card) {
         var cardCat = card.getAttribute('data-calc-cat');
         if (cat === 'all' || cardCat === cat) {
           card.style.display = 'flex';
+          card.classList.remove('hidden');
         } else {
           card.style.display = 'none';
+          card.classList.add('hidden');
         }
       });
+
+      var track = document.getElementById('carousel-calculateurs');
+      if (track) {
+        track.scrollTo({ left: 0, behavior: 'smooth' });
+      }
     }
 
     // 5. Filtre Orientations Pédagogiques (Collège vs Lycée)
