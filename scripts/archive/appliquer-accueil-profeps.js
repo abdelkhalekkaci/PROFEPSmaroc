@@ -109,12 +109,12 @@ function generateHomeHtml() {
 </head>
 <body class="antialiased">
 
-  <!-- Point de montage Navbar (sera harmonisé par unifier-navbar-footer.js) -->
+  <!-- Point de montage Navbar (harmonisera par unifier-navbar-footer.js) -->
   <nav id="navbar" class="navbar"></nav>
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12" style="margin-top: 80px;">
 
-    <!-- ═══ 1. HERO SECTION AVEC CURSEUR VMA INTERACTIF ═══ -->
+    <!-- ═══ 1. HERO SECTION AVEC CURSEUR VMA INTERACTIF & COULEURS NATIONALES ═══ -->
     <section class="peps-hero-gradient border border-slate-200/90 rounded-3xl p-6 sm:p-10 shadow-sm relative overflow-hidden">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         <div class="lg:col-span-7 space-y-5">
@@ -243,7 +243,7 @@ function generateHomeHtml() {
         </span>
       </div>
 
-      <!-- Carte du Générateur -->
+      <!-- Carte de présentation du Générateur avec Palette Officielle -->
       <div class="bg-white border-2 border-red-500/80 rounded-3xl p-6 sm:p-8 shadow-sm hover:shadow-md transition-all relative overflow-hidden">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div class="lg:col-span-8 space-y-4">
@@ -332,7 +332,7 @@ function generateHomeHtml() {
       </div>
     </section>
 
-    <!-- ═══ 3. DEUXIÈME BLOC : LES CALCULATEURS SCIENTIFIQUES ═══ -->
+    <!-- ═══ 3. DEUXIÈME BLOC : LES CALCULATEURS SCIENTIFIQUES (SUIVI PAR LES CALCULATEURS) ═══ -->
     <section id="bloc-calculateurs" class="space-y-6">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-200 pb-3">
         <div>
@@ -620,7 +620,7 @@ function generateHomeHtml() {
       </div>
     </section>
 
-    <!-- ═══ 6. CINQUIÈME BLOC : CARROUSEL / GRILLE DES ARTICLES DE BLOG ═══ -->
+    <!-- ═══ 6. CINQUIÈME BLOC : CARROUSEL / GRILLE DES ARTICLES DE BLOG (3-4 ARTICLES + BOUTON BLOG.HTML) ═══ -->
     <section id="bloc-blog" class="space-y-6">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-200 pb-3">
         <div>
@@ -860,35 +860,33 @@ const publicDir = path.join(rootDir, 'public');
 if (fs.existsSync(publicDir)) {
   fs.writeFileSync(path.join(publicDir, 'index.html'), htmlContent, 'utf8');
 }
-console.log('✔ index.html créé avec succès.');
+console.log('✔ index.html créé avec la hiérarchie et la palette officielle.');
 
-// 2. Harmonisation avec unifier-navbar-footer.js
+// 2. Exécution du script unificateur si présent
 if (fs.existsSync(path.join(rootDir, 'unifier-navbar-footer.js'))) {
-  console.log('✔ Harmonisation Navbar & Footer...');
+  console.log('✔ Harmonisation Navbar & Footer avec unifier-navbar-footer.js...');
   try {
     execSync('node unifier-navbar-footer.js', { stdio: 'inherit' });
   } catch (e) {
-    console.warn('Note unifier:', e.message);
+    console.warn('Note sur unifier-navbar-footer:', e.message);
   }
 }
 
-// 3. Compilation Vite (dist/)
+// 3. Build Vite si package.json existe
 try {
   console.log('✔ Compilation Vite de production (npm run build)...');
   execSync('npm run build', { stdio: 'inherit' });
 } catch (e) {
-  console.warn('Note build:', e.message);
+  console.warn('Note sur npm run build:', e.message);
 }
 
-// 4. Git Commit & Push
+// 4. Git add, commit et push
 try {
-  console.log('✔ Envoi sur GitHub (git add, commit, push)...');
-  execSync('git add index.html public/index.html dist/index.html unifier-navbar-footer.js 2>nul || git add .', { stdio: 'inherit' });
-  execSync('git commit -m "feat: nouvelle page accueil profeps.ma conforme" || echo "Rien a commiter"', { stdio: 'inherit' });
+  console.log('✔ Déploiement Git vers GitHub / profeps.ma...');
+  execSync('git add index.html public/index.html dist/index.html 2>nul || git add .', { stdio: 'inherit' });
+  execSync('git commit -m "feat: nouvelle page accueil - generateur sous hero, calculateurs, op, biblio, blog et reseaux" || echo "Rien a commiter"', { stdio: 'inherit' });
   execSync('git push origin main || git push', { stdio: 'inherit' });
-  console.log('\n===============================================================');
-  console.log('🎉 SUCCÈS TOTAL : LE SITE EST DÉPLOYÉ SUR PROFEPS.MA !');
-  console.log('===============================================================\n');
+  console.log('\n🎉 TOUT EST DÉPLOYÉ AVEC SUCCÈS SUR PROFEPS.MA !');
 } catch (e) {
   console.warn('Note Git :', e.message);
 }

@@ -9,10 +9,15 @@
  */
 
 (async () => {
-const fs = await import('fs');
-const path = await import('path');
+  // Sécurité : si ce script Node.js est chargé dans un navigateur web, on ne fait rien
+  if (typeof process === 'undefined' || !process || typeof process.cwd !== 'function') {
+    return;
+  }
 
-const rootDir = process.cwd();
+  const fs = await import('fs');
+  const path = await import('path');
+
+  const rootDir = process.cwd();
 
 console.log('\n======================================================');
 console.log('🚀 NETTOYAGE SUPABASE/LOGIN/DASHBOARD & UNIFICATION NAVBAR/FOOTER');
@@ -761,16 +766,12 @@ main > div.max-w-3xl select:focus {
   overflow: hidden !important;
 }
 .peps-cta-btn::after {
-  content: '→' !important;
-  font-size: 1.15rem !important;
-  font-weight: 900 !important;
-  margin-left: 0.25rem !important;
-  transition: transform 0.2s ease !important;
+  display: none !important;
+  content: none !important;
 }
 html[dir="rtl"] .peps-cta-btn::after {
-  content: '←' !important;
-  margin-left: 0 !important;
-  margin-right: 0.25rem !important;
+  display: none !important;
+  content: none !important;
 }
 .peps-cta-btn:hover {
   transform: translateY(-2.5px) scale(1.005) !important;
@@ -875,7 +876,9 @@ footer.footer .footer-stat-lbl {
   color: rgba(255, 255, 255, 0.55) !important;
 }
 #profeps-unified-footer .footer-col h4,
-footer.footer .footer-col h4 {
+#profeps-unified-footer .footer-col .footer-col-title,
+footer.footer .footer-col h4,
+footer.footer .footer-col .footer-col-title {
   font-size: 0.76rem !important;
   font-weight: 800 !important;
   text-transform: uppercase !important;
@@ -999,10 +1002,6 @@ function buildNavbarHtml(fileName) {
     fileName === 'blog.html' ||
     fileName.startsWith('article-') ||
     fileName.startsWith('guide-');
-  const isCrmef =
-    fileName === 'concours-crmef-hub.html' ||
-    fileName.startsWith('qcm-') ||
-    fileName.includes('crmef');
   const isTool = Boolean(TOOL_INFO[fileName]);
 
   const currentTool = TOOL_INFO[fileName] || TOOL_INFO['calculateur-vma.html'];
@@ -1032,14 +1031,15 @@ function buildNavbarHtml(fileName) {
         <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:52px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
       </a>
       <div class="peps-nav-menu" id="pepsNavMenu">
-        <a href="blog.html" class="peps-nav-link${isBlog ? " active" : ""}" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
-        <a href="generateur.html" class="peps-nav-link${isGen ? " active" : ""}" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
+        <a href="index.html" class="peps-nav-link${isHome ? ' active' : ''}" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
+        <a href="generateur.html" class="peps-nav-link${isGen ? ' active' : ''}" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
         <div class="peps-dropdown" id="pepsCalcDropdown">
-          <a href="${triggerHref}" class="peps-nav-link${isTool ? " active" : ""}" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="${currentTool.fr.replace(/"/g, "&quot;")}" data-i18n-en="${currentTool.en.replace(/"/g, "&quot;")}" data-i18n-ar="${currentTool.ar.replace(/"/g, "&quot;")}"><span class="peps-dropdown-title">${currentTool.fr}</span></span><span class="peps-dropdown-caret">▾</span></a>
-          <div class="peps-dropdown-menu" id="pepsDropdownMenu">${dropdownLinks}
+          <a href="${triggerHref}" class="peps-nav-link${isTool ? ' active' : ''}" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="${currentTool.fr.replace(/"/g, '&quot;')}" data-i18n-en="${currentTool.en.replace(/"/g, '&quot;')}" data-i18n-ar="${currentTool.ar.replace(/"/g, '&quot;')}">${currentTool.fr}</span><span class="peps-dropdown-caret">▾</span></a>
+          <div class="peps-dropdown-menu" id="pepsDropdownMenu">
+${dropdownLinks}
           </div>
         </div>
-        <a href="concours-crmef-hub.html" class="peps-nav-link${isCrmef ? " active" : ""}" data-i18n-fr="Préparer Concours CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparer Concours CRMEF</a>
+        <a href="blog.html" class="peps-nav-link${isBlog ? ' active' : ''}" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
       </div>
       <div class="peps-nav-right">
         <div dir="ltr" class="peps-lang-switch" aria-label="Sélecteur de langue">
@@ -1057,8 +1057,7 @@ function buildNavbarHtml(fileName) {
   </div>`;
 }
 
-function buildFooterHtml(isPublicDir = false) {
-  const pfx = "";
+function buildFooterHtml() {
   return `<footer class="footer" id="profeps-unified-footer">
     <div class="footer-container">
       <div class="footer-grid">
@@ -1082,7 +1081,7 @@ function buildFooterHtml(isPublicDir = false) {
         </div>
 
         <div class="footer-col">
-          <h4 data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</h4>
+          <p class="footer-col-title" data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</p>
           <ul>
             <li><a href="index.html" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a></li>
             <li><a href="generateur.html" data-i18n-fr="Générateur PDF" data-i18n-en="PDF Generator" data-i18n-ar="مولد ملفات PDF">Générateur PDF</a></li>
@@ -1092,17 +1091,18 @@ function buildFooterHtml(isPublicDir = false) {
         </div>
 
         <div class="footer-col">
-          <h4 data-i18n-fr="PRÉPARATION CRMEF" data-i18n-en="CRMEF PREPARATION" data-i18n-ar="الاستعداد لمباراة التعليم">PRÉPARATION CRMEF</h4>
+          <p class="footer-col-title" data-i18n-fr="RESSOURCES EPS" data-i18n-en="PE RESOURCES" data-i18n-ar="موارد التربية البدنية">RESSOURCES EPS</p>
           <ul>
-            <li><a href="concours-crmef-hub.html" data-i18n-fr="🏛️ Hub National CRMEF" data-i18n-en="🏛️ National CRMEF Hub" data-i18n-ar="🏛️ بوابة مباريات التعليم">🏛️ Hub National CRMEF</a></li>
-            <li><a href="qcm-sciences-education-crmef.html" data-i18n-fr="📚 Tronc Commun (Sciences Éduc)" data-i18n-en="📚 Education Sciences" data-i18n-ar="📚 علوم التربية والديداكتيك">📚 Tronc Commun (Sciences Éduc)</a></li>
-            <li><a href="qcm-specialite-eps-maroc.html" data-i18n-fr="🏃 Spécialité EPS" data-i18n-en="🏃 PE Specialty" data-i18n-ar="🏃 تخصص التربية البدنية">🏃 Spécialité EPS</a></li>
-            <li><a href="qcm-didactique-eps-maroc.html" data-i18n-fr="⚡ Didactique EPS" data-i18n-en="⚡ PE Didactics" data-i18n-ar="⚡ ديداكتيك التربية البدنية">⚡ Didactique EPS</a></li>
-            <li><a href="concours-crmef-hub.html#discipline-eps" data-i18n-fr="🎯 Les 12 Spécialités CRMEF" data-i18n-en="🎯 All 12 CRMEF Specialties" data-i18n-ar="🎯 التخصصات الـ12 لمباراة التعليم">🎯 Les 12 Spécialités CRMEF</a></li>
+            <li><a href="cycles-eps-maroc.html" data-i18n-fr="Cycles d'EPS au Maroc" data-i18n-en="PE Cycles in Morocco" data-i18n-ar="أسلاك التربية البدنية بالمغرب">Cycles d'EPS au Maroc</a></li>
+            <li><a href="programme-eps-maroc.html" data-i18n-fr="Programme EPS Maroc" data-i18n-en="Morocco PE Curriculum" data-i18n-ar="برنامج التربية البدنية بالمغرب">Programme EPS Maroc</a></li>
+            <li><a href="evaluation-eps.html" data-i18n-fr="Évaluation en EPS" data-i18n-en="PE Assessment" data-i18n-ar="التقويم في التربية البدنية">Évaluation en EPS</a></li>
+            <li><a href="securite-eps.html" data-i18n-fr="Sécurité en EPS" data-i18n-en="Safety in PE" data-i18n-ar="السلامة في التربية البدنية">Sécurité en EPS</a></li>
+            <li><a href="bibliotheque-numerique-eps.html" data-i18n-fr="Bibliothèque numérique" data-i18n-en="Digital Library" data-i18n-ar="المكتبة الرقمية">Bibliothèque numérique</a></li>
           </ul>
         </div>
+
         <div class="footer-col" id="footer-col-calculators">
-          <h4 data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</h4>
+          <p class="footer-col-title" data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</p>
           <ul>
             <li><a href="hub-outils-sport-performance.html" class="footer-hub-highlight" data-i18n-fr="★ Hub des Calculateurs Sport" data-i18n-en="★ All Sports Calculators Hub" data-i18n-ar="★ بوابة جميع الحاسبات الرياضية">★ Hub des Calculateurs Sport</a></li>
             <li><a href="calculateur-vma.html" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS (VMA) Calculator" data-i18n-ar="حاسبة السرعة الهوائية VMA">Calculateur VMA</a></li>
@@ -1119,7 +1119,7 @@ function buildFooterHtml(isPublicDir = false) {
         </div>
 
         <div class="footer-col">
-          <h4 data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</h4>
+          <p class="footer-col-title" data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</p>
           <ul>
             <li><a href="politique-confidentialite.html" data-i18n-fr="Politique de confidentialité" data-i18n-en="Privacy Policy" data-i18n-ar="سياسة الخصوصية">Politique de confidentialité</a></li>
             <li><a href="cgu.html" data-i18n-fr="Conditions d'utilisation" data-i18n-en="Terms of Use" data-i18n-ar="شروط الاستخدام">Conditions d'utilisation</a></li>
@@ -1320,8 +1320,8 @@ dirsToScan.forEach((dir) => {
     const filePath = path.join(dir, file);
     let html = fs.readFileSync(filePath, 'utf8');
 
-    // Protéger index.html qui a sa propre structure canonique riche
-    if (file === 'index.html') {
+    // Ignorer le point d'entrée Vite SPA s'il contient uniquement <div id="root"></div>
+    if (file === 'index.html' && html.includes('<div id="root"></div>') && html.includes('/src/main.tsx')) {
       return;
     }
 
@@ -1343,43 +1343,6 @@ dirsToScan.forEach((dir) => {
     // 3. Supprimer tous les liens <a> vers login.html ou dashboard.html
     html = html.replace(/<a[^>]*href=["'][^"']*(?:login|dashboard)\.html[^"']*["'][^>]*>[\s\S]*?<\/a>\s*/gi, '');
 
-    // Sauvegarder la sous-barre des disciplines CRMEF si elle existe
-    let preservedCrmefSubnav = '';
-    const subnavMatch = html.match(/<!-- ================= CRMEF DISCIPLINE STICKY SUBNAV ================= -->[\s\S]*?<\/div>\s*<\/div>\s*<\/div>|<div class="peps-crmef-subnav"[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/);
-    if (subnavMatch) {
-      preservedCrmefSubnav = '\n  ' + subnavMatch[0].trim() + '\n';
-    } else if (file.startsWith('qcm-')) {
-      preservedCrmefSubnav = `
-  <!-- ================= CRMEF DISCIPLINE STICKY SUBNAV ================= -->
-  <div class="peps-crmef-subnav" role="navigation" aria-label="Disciplines CRMEF">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between gap-4 overflow-x-auto scrollbar-none">
-      <div class="flex items-center gap-1.5 shrink-0 text-xs font-bold">
-        <a href="concours-crmef-hub.html" class="px-3 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
-          🏛️ Hub National
-        </a>
-        <a href="qcm-sciences-education-crmef.html" class="px-3 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
-          📚 Tronc Commun
-        </a>
-        <a href="qcm-didactique-eps-maroc.html" class="px-3 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
-          🏃 Didactique EPS
-        </a>
-        <a href="qcm-specialite-eps-maroc.html" class="px-3 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
-          ⚡ Spécialité EPS
-        </a>
-        <a href="qcm-didactique-primaire-maroc.html" class="px-3 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
-          🎒 Primaire
-        </a>
-      </div>
-      <div class="hidden sm:flex items-center gap-2 shrink-0">
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-[#006233] text-xs font-bold border border-emerald-200">
-          <span class="w-2 h-2 rounded-full bg-[#006233] animate-pulse"></span>
-          <span>Session CRMEF 2026</span>
-        </span>
-      </div>
-    </div>
-  </div>\n`;
-    }
-
     // 4. Nettoyer tous les anciens styles/scripts d'unification et anciennes navbars
     html = html.replace(/<!-- PROFEPS_UNIFIED_NAVBAR_START -->[\s\S]*?<!-- PROFEPS_UNIFIED_NAVBAR_END -->\s*/g, '');
     html = html.replace(/<nav id="navbar" class="navbar navbar-decoy"[\s\S]*?<\/nav>\s*/g, '');
@@ -1394,8 +1357,6 @@ dirsToScan.forEach((dir) => {
 
     // Supprimer TOUTES les anciennes balises <nav class="navbar"> ou <nav id="navbar">
     html = html.replace(/<nav[^>]*(?:id=["']navbar["']|class=["'][^"']*navbar[^"']*["'])[^>]*>[\s\S]*?<\/nav>\s*/gi, '');
-    html = html.replace(/<!-- ================= HEADER & NAVIGATION ================= -->\s*<header[\s\S]*?<\/header>\s*/gi, '');
-    html = html.replace(/<header class="bg-white border-b border-slate-200 sticky top-0[\s\S]*?<\/header>\s*/gi, '');
 
     // Supprimer uniquement les conteneurs explicites de sélecteurs de langue en doublon (sans jamais toucher aux balises <footer ou <script)
     html = html.replace(/<div\b[^>]*class=["'][^"']*in-page-lang-switch[^"']*["'][^>]*>[\s\S]*?<\/div>\s*/gi, '');
@@ -1411,13 +1372,21 @@ dirsToScan.forEach((dir) => {
       }
     );
 
+    // 4b. U1 : Dé-noindexation systématique de la page OP et des pages de contenu publiques
+    const isPrivatePage = /^(login|register|dashboard|connexion|inscription|auth|admin)\.html$/i.test(file);
+    if (!isPrivatePage && /noindex/i.test(html)) {
+      html = html.replace(/<meta[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex[^"']*["'][^>]*>/gi, '<meta name="robots" content="index, follow">');
+      html = html.replace(/<meta[^>]*content=["'][^"']*noindex[^"']*["'][^>]*name=["']robots["'][^>]*>/gi, '<meta name="robots" content="index, follow">');
+      console.log(`🛡️  [SEO DE-NOINDEX] -> Page dé-noindexée avec succès : ${file}`);
+    }
+
     // 5. Injecter le CSS maître juste avant </head>
     if (/<\/head>/i.test(html)) {
       html = html.replace(/<\/head>/i, `${MASTER_CSS}\n</head>`);
     }
 
     // 6. Injecter la nouvelle Navbar isolée (#pepsNavbar) + le JS maître juste après <body...>
-    const newNavWithJs = `${buildNavbarHtml(file)}${preservedCrmefSubnav ? '\n' + preservedCrmefSubnav : ''}\n${MASTER_JS}`;
+    const newNavWithJs = `${buildNavbarHtml(file)}\n${MASTER_JS}`;
     if (/<body[^>]*>/i.test(html)) {
       html = html.replace(/<body[^>]*>/i, (match) => `${match}\n${newNavWithJs}`);
     } else if (/<nav[\s\S]*?<\/nav>/i.test(html)) {
