@@ -94,6 +94,43 @@
       transform: translateY(-2px);
       box-shadow: 0 12px 30px -8px rgba(15, 23, 42, 0.08);
     }
+    /* Boutons CRMEF Épreuve 1 (Didactique) & Épreuve 2 (Spécialité) — Haute lisibilité & confort visuel */
+    .peps-btn-red {
+      background: linear-gradient(135deg, #fff8f8 0%, #fef2f2 100%);
+      border: 1.5px solid #f5c2c7;
+      border-left: 5px solid #991b1b;
+      color: #0f172a;
+      transition: all 0.22s ease;
+    }
+    .peps-btn-red:hover {
+      background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+      border-color: #991b1b;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px -6px rgba(153, 27, 27, 0.16);
+    }
+    .peps-btn-green {
+      background: linear-gradient(135deg, #f3faf6 0%, #ecfdf5 100%);
+      border: 1.5px solid #a7f3d0;
+      border-left: 5px solid #006233;
+      color: #0f172a;
+      transition: all 0.22s ease;
+    }
+    .peps-btn-green:hover {
+      background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+      border-color: #006233;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px -6px rgba(0, 98, 51, 0.16);
+    }
+    /* Masquer la barre de scroll horizontale disgracieuse sous le carrousel calculateurs */
+    #carousel-calculateurs {
+      scrollbar-width: none !important;
+      -ms-overflow-style: none !important;
+    }
+    #carousel-calculateurs::-webkit-scrollbar {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
   </style>
 <style id="profeps-master-unifier-css">
 /* ═══ 1. NAVBAR FIXE ISOLÉE (.peps-*) — 80PX VERROUILLÉ SUR TOUTES LES PAGES ═══ */
@@ -1603,36 +1640,48 @@ footer.footer .footer-bottom {
             Cadre de référence officiel pour l'enseignement de l'EPS au secondaire marocain : didactique des APSA, théories de l'apprentissage moteur, physiologie de l'effort et barèmes certificatifs des Orientations Pédagogiques (2007 & 2009).
           </p>
 
-          <!-- Boutons des deux épreuves officielles aux couleurs de la charte -->
+          <!-- Boutons des deux épreuves officielles aux couleurs de la charte (Haute visibilité & confort visuel) -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
             <a
               id="crmef-btn-didactique"
               href="qcm-didactique-eps-maroc.html"
-              class="peps-btn-red p-4 rounded-xl flex items-center justify-between text-left group shadow-sm hover:shadow-md transition-all"
+              class="peps-btn-red p-4 sm:p-5 rounded-xl flex items-center justify-between gap-3 text-left group shadow-xs"
             >
-              <div class="space-y-1">
-                <span class="text-[10px] font-bold uppercase tracking-wider text-red-100 block">Épreuve 1</span>
-                <span id="crmef-btn-didactique-label" class="text-xs sm:text-sm font-extrabold block">
+              <div class="space-y-1.5">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-[#991b1b] text-white shadow-2xs">
+                  📘 Épreuve 1 · Didactique
+                </span>
+                <span id="crmef-btn-didactique-label" class="text-sm sm:text-base font-extrabold text-slate-900 group-hover:text-[#991b1b] transition-colors block">
                   QCM Didactique de l'EPS & Pédagogie
                 </span>
-                <span class="text-[11px] text-red-100/90 block">Cadres de référence MENPS & situations didactiques</span>
+                <span class="text-xs text-slate-600 font-medium block">
+                  Cadres de référence MENPS & situations didactiques
+                </span>
               </div>
-              <span class="text-lg font-black ml-2 group-hover:translate-x-1 transition-transform">→</span>
+              <span class="w-9 h-9 rounded-lg bg-[#991b1b] group-hover:bg-[#7f1d1d] text-white flex items-center justify-center text-base font-black shrink-0 shadow-xs group-hover:translate-x-0.5 transition-all">
+                →
+              </span>
             </a>
 
             <a
               id="crmef-btn-specialite"
               href="qcm-specialite-eps-maroc.html"
-              class="peps-btn-green p-4 rounded-xl flex items-center justify-between text-left group shadow-sm hover:shadow-md transition-all"
+              class="peps-btn-green p-4 sm:p-5 rounded-xl flex items-center justify-between gap-3 text-left group shadow-xs"
             >
-              <div class="space-y-1">
-                <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-100 block">Épreuve 2</span>
-                <span id="crmef-btn-specialite-label" class="text-xs sm:text-sm font-extrabold block">
+              <div class="space-y-1.5">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-[#006233] text-white shadow-2xs">
+                  📗 Épreuve 2 · Spécialité
+                </span>
+                <span id="crmef-btn-specialite-label" class="text-sm sm:text-base font-extrabold text-slate-900 group-hover:text-[#006233] transition-colors block">
                   QCM Spécialité EPS & Physiologie
                 </span>
-                <span class="text-[11px] text-emerald-100/90 block">Sciences biologiques, biomécanique & APSA</span>
+                <span class="text-xs text-slate-600 font-medium block">
+                  Sciences biologiques, biomécanique & APSA
+                </span>
               </div>
-              <span class="text-lg font-black ml-2 group-hover:translate-x-1 transition-transform">→</span>
+              <span class="w-9 h-9 rounded-lg bg-[#006233] group-hover:bg-[#064e3b] text-white flex items-center justify-center text-base font-black shrink-0 shadow-xs group-hover:translate-x-0.5 transition-all">
+                →
+              </span>
             </a>
           </div>
 
@@ -1741,19 +1790,18 @@ footer.footer .footer-bottom {
         </div>
       </div>
 
-      <!-- CARROUSEL INTERACTIF DES 11 OUTILS PHYSIOLOGIQUES -->
+      <!-- CARROUSEL INTERACTIF DES 11 OUTILS PHYSIOLOGIQUES (Palette ProfEPS douce & institutionnelle) -->
       <div
         id="carousel-calculateurs"
-        class="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 pt-1 px-0.5 scrollbar-thin"
-        style="scrollbar-width: thin;"
+        class="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-3 pt-1 px-0.5"
       >
         <!-- 1. VMA & Allures -->
-        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-red-400 transition-all duration-200" data-calc-cat="aerobie">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-red-600"></div>
+        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-[#991b1b]/50 transition-all duration-200" data-calc-cat="aerobie">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-[#991b1b]"></div>
           <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="w-10 h-10 rounded-xl bg-red-50 text-red-700 flex items-center justify-center font-bold text-lg border border-red-100">⚡</span>
-              <span class="text-[11px] font-bold text-red-700 bg-red-50 px-2.5 py-0.5 rounded-full border border-red-200">Aérobie & VMA</span>
+              <span class="w-10 h-10 rounded-xl bg-[#fff5f5] text-[#991b1b] flex items-center justify-center font-bold text-lg border border-[#fecdd3]">⚡</span>
+              <span class="text-[11px] font-bold text-[#991b1b] bg-[#fff5f5] px-2.5 py-0.5 rounded-full border border-[#fecdd3]">Aérobie & VMA</span>
             </div>
             <div>
               <h3 class="text-base font-extrabold text-slate-900">VMA & Allures de Demi-Fond</h3>
@@ -1762,18 +1810,18 @@ footer.footer .footer-bottom {
               </p>
             </div>
           </div>
-          <a href="calculateur-vma.html" class="mt-4 w-full py-2.5 px-3 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+          <a href="calculateur-vma.html" class="mt-4 w-full py-2.5 px-3.5 bg-[#991b1b] hover:bg-[#7f1d1d] text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-2xs">
             Lancer le Calculateur VMA →
           </a>
         </div>
 
         <!-- 2. VO2 Max & VDOT -->
-        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-red-400 transition-all duration-200" data-calc-cat="aerobie">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-red-600"></div>
+        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-[#991b1b]/50 transition-all duration-200" data-calc-cat="aerobie">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-[#991b1b]"></div>
           <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="w-10 h-10 rounded-xl bg-red-50 text-red-700 flex items-center justify-center font-bold text-lg border border-red-100">🫁</span>
-              <span class="text-[11px] font-bold text-red-700 bg-red-50 px-2.5 py-0.5 rounded-full border border-red-200">Aérobie & VDOT</span>
+              <span class="w-10 h-10 rounded-xl bg-[#fff5f5] text-[#991b1b] flex items-center justify-center font-bold text-lg border border-[#fecdd3]">🫁</span>
+              <span class="text-[11px] font-bold text-[#991b1b] bg-[#fff5f5] px-2.5 py-0.5 rounded-full border border-[#fecdd3]">Aérobie & VDOT</span>
             </div>
             <div>
               <h3 class="text-base font-extrabold text-slate-900">VO2 Max & VDOT Jack Daniels</h3>
@@ -1782,18 +1830,18 @@ footer.footer .footer-bottom {
               </p>
             </div>
           </div>
-          <a href="calculateur-vdot-asr-endurance.html" class="mt-4 w-full py-2.5 px-3 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+          <a href="calculateur-vdot-asr-endurance.html" class="mt-4 w-full py-2.5 px-3.5 bg-[#991b1b] hover:bg-[#7f1d1d] text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-2xs">
             Calculer la VDOT & VO2 Max →
           </a>
         </div>
 
         <!-- 3. Fréquence Cardiaque Karvonen -->
-        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-emerald-400 transition-all duration-200" data-calc-cat="sante">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-emerald-600"></div>
+        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-[#006233]/50 transition-all duration-200" data-calc-cat="sante">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-[#006233]"></div>
           <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-lg border border-emerald-100">❤️</span>
-              <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">Santé & Cardio</span>
+              <span class="w-10 h-10 rounded-xl bg-[#f2fbf6] text-[#006233] flex items-center justify-center font-bold text-lg border border-[#bbf7d0]">❤️</span>
+              <span class="text-[11px] font-bold text-[#006233] bg-[#f2fbf6] px-2.5 py-0.5 rounded-full border border-[#bbf7d0]">Santé & Cardio</span>
             </div>
             <div>
               <h3 class="text-base font-extrabold text-slate-900">FC Karvonen & Zones Z1-Z5</h3>
@@ -1802,18 +1850,18 @@ footer.footer .footer-bottom {
               </p>
             </div>
           </div>
-          <a href="calculateur-frequence-cardiaque-karvonen.html" class="mt-4 w-full py-2.5 px-3 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+          <a href="calculateur-frequence-cardiaque-karvonen.html" class="mt-4 w-full py-2.5 px-3.5 bg-[#006233] hover:bg-[#064e3b] text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-2xs">
             Calculer les Zones Cardiaques →
           </a>
         </div>
 
         <!-- 4. Intermittent HIIT & COD 180° -->
-        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-blue-400 transition-all duration-200" data-calc-cat="charge">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-blue-600"></div>
+        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-slate-400 transition-all duration-200" data-calc-cat="charge">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-[#1e293b]"></div>
           <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-lg border border-blue-100">🔄</span>
-              <span class="text-[11px] font-bold text-blue-800 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200">Charge & Puissance</span>
+              <span class="w-10 h-10 rounded-xl bg-slate-100 text-[#1e293b] flex items-center justify-center font-bold text-lg border border-slate-200">🔄</span>
+              <span class="text-[11px] font-bold text-[#1e293b] bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">Charge & Puissance</span>
             </div>
             <div>
               <h3 class="text-base font-extrabold text-slate-900">Intermittent HIIT & COD 180°</h3>
@@ -1822,18 +1870,18 @@ footer.footer .footer-bottom {
               </p>
             </div>
           </div>
-          <a href="generateur-intermittent-hiit-cod.html" class="mt-4 w-full py-2.5 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+          <a href="generateur-intermittent-hiit-cod.html" class="mt-4 w-full py-2.5 px-3.5 bg-[#1e293b] hover:bg-[#0f172a] text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-2xs">
             Calibrer l'Intermittent HIIT →
           </a>
         </div>
 
         <!-- 5. Charge RPE Foster & ACWR -->
-        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-blue-400 transition-all duration-200" data-calc-cat="charge">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-blue-600"></div>
+        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-slate-400 transition-all duration-200" data-calc-cat="charge">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-[#1e293b]"></div>
           <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-lg border border-blue-100">🛡️</span>
-              <span class="text-[11px] font-bold text-blue-800 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200">Charge & Suivi</span>
+              <span class="w-10 h-10 rounded-xl bg-slate-100 text-[#1e293b] flex items-center justify-center font-bold text-lg border border-slate-200">🛡️</span>
+              <span class="text-[11px] font-bold text-[#1e293b] bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">Charge & Suivi</span>
             </div>
             <div>
               <h3 class="text-base font-extrabold text-slate-900">Charge RPE Foster & ACWR</h3>
@@ -1842,18 +1890,18 @@ footer.footer .footer-bottom {
               </p>
             </div>
           </div>
-          <a href="calculateur-charge-rpe-foster-acwr.html" class="mt-4 w-full py-2.5 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+          <a href="calculateur-charge-rpe-foster-acwr.html" class="mt-4 w-full py-2.5 px-3.5 bg-[#1e293b] hover:bg-[#0f172a] text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-2xs">
             Calculer la Charge sRPE →
           </a>
         </div>
 
         <!-- 6. Réserve de Vitesse Anaérobie (ASR) -->
-        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-red-400 transition-all duration-200" data-calc-cat="aerobie">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-red-600"></div>
+        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-[#991b1b]/50 transition-all duration-200" data-calc-cat="aerobie">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-[#991b1b]"></div>
           <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="w-10 h-10 rounded-xl bg-red-50 text-red-700 flex items-center justify-center font-bold text-lg border border-red-100">🚀</span>
-              <span class="text-[11px] font-bold text-red-700 bg-red-50 px-2.5 py-0.5 rounded-full border border-red-200">Aérobie & Vitesse</span>
+              <span class="w-10 h-10 rounded-xl bg-[#fff5f5] text-[#991b1b] flex items-center justify-center font-bold text-lg border border-[#fecdd3]">🚀</span>
+              <span class="text-[11px] font-bold text-[#991b1b] bg-[#fff5f5] px-2.5 py-0.5 rounded-full border border-[#fecdd3]">Aérobie & Vitesse</span>
             </div>
             <div>
               <h3 class="text-base font-extrabold text-slate-900">Réserve Anaérobie (ASR)</h3>
@@ -1862,18 +1910,18 @@ footer.footer .footer-bottom {
               </p>
             </div>
           </div>
-          <a href="calculateur-asr-reserve-vitesse.html" class="mt-4 w-full py-2.5 px-3 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+          <a href="calculateur-asr-reserve-vitesse.html" class="mt-4 w-full py-2.5 px-3.5 bg-[#991b1b] hover:bg-[#7f1d1d] text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-2xs">
             Calculer le Profil ASR →
           </a>
         </div>
 
         <!-- 7. Indice d'Endurance Péronnet-Thibault -->
-        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-red-400 transition-all duration-200" data-calc-cat="aerobie">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-red-600"></div>
+        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-[#991b1b]/50 transition-all duration-200" data-calc-cat="aerobie">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-[#991b1b]"></div>
           <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="w-10 h-10 rounded-xl bg-red-50 text-red-700 flex items-center justify-center font-bold text-lg border border-red-100">📈</span>
-              <span class="text-[11px] font-bold text-red-700 bg-red-50 px-2.5 py-0.5 rounded-full border border-red-200">Aérobie & Maintien</span>
+              <span class="w-10 h-10 rounded-xl bg-[#fff5f5] text-[#991b1b] flex items-center justify-center font-bold text-lg border border-[#fecdd3]">📈</span>
+              <span class="text-[11px] font-bold text-[#991b1b] bg-[#fff5f5] px-2.5 py-0.5 rounded-full border border-[#fecdd3]">Aérobie & Maintien</span>
             </div>
             <div>
               <h3 class="text-base font-extrabold text-slate-900">Indice d'Endurance Péronnet</h3>
@@ -1882,18 +1930,18 @@ footer.footer .footer-bottom {
               </p>
             </div>
           </div>
-          <a href="calculateur-indice-endurance.html" class="mt-4 w-full py-2.5 px-3 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+          <a href="calculateur-indice-endurance.html" class="mt-4 w-full py-2.5 px-3.5 bg-[#991b1b] hover:bg-[#7f1d1d] text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-2xs">
             Mesurer l'Indice d'Endurance →
           </a>
         </div>
 
         <!-- 8. Ajustement Chaleur, Humidité & Altitude -->
-        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-emerald-400 transition-all duration-200" data-calc-cat="sante">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-emerald-600"></div>
+        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-[#006233]/50 transition-all duration-200" data-calc-cat="sante">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-[#006233]"></div>
           <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-lg border border-emerald-100">☀️</span>
-              <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">Santé & Climat</span>
+              <span class="w-10 h-10 rounded-xl bg-[#f2fbf6] text-[#006233] flex items-center justify-center font-bold text-lg border border-[#bbf7d0]">☀️</span>
+              <span class="text-[11px] font-bold text-[#006233] bg-[#f2fbf6] px-2.5 py-0.5 rounded-full border border-[#bbf7d0]">Santé & Climat</span>
             </div>
             <div>
               <h3 class="text-base font-extrabold text-slate-900">Chaleur, Météo & Altitude</h3>
@@ -1902,18 +1950,18 @@ footer.footer .footer-bottom {
               </p>
             </div>
           </div>
-          <a href="calculateur-chaleur-meteo-altitude.html" class="mt-4 w-full py-2.5 px-3 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+          <a href="calculateur-chaleur-meteo-altitude.html" class="mt-4 w-full py-2.5 px-3.5 bg-[#006233] hover:bg-[#064e3b] text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-2xs">
             Ajuster selon le Climat →
           </a>
         </div>
 
         <!-- 9. Allure Pente GAP & Nutrition -->
-        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-emerald-400 transition-all duration-200" data-calc-cat="sante">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-emerald-600"></div>
+        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-[#006233]/50 transition-all duration-200" data-calc-cat="sante">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-[#006233]"></div>
           <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-lg border border-emerald-100">⛰️</span>
-              <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">Santé & Pente</span>
+              <span class="w-10 h-10 rounded-xl bg-[#f2fbf6] text-[#006233] flex items-center justify-center font-bold text-lg border border-[#bbf7d0]">⛰️</span>
+              <span class="text-[11px] font-bold text-[#006233] bg-[#f2fbf6] px-2.5 py-0.5 rounded-full border border-[#bbf7d0]">Santé & Pente</span>
             </div>
             <div>
               <h3 class="text-base font-extrabold text-slate-900">Allure Pente GAP & Nutrition</h3>
@@ -1922,18 +1970,18 @@ footer.footer .footer-bottom {
               </p>
             </div>
           </div>
-          <a href="calculateur-gap-pente-nutrition.html" class="mt-4 w-full py-2.5 px-3 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+          <a href="calculateur-gap-pente-nutrition.html" class="mt-4 w-full py-2.5 px-3.5 bg-[#006233] hover:bg-[#064e3b] text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-2xs">
             Calculer l'Allure GAP →
           </a>
         </div>
 
         <!-- 10. IMC Sportif & Masse Grasse (Deurenberg) -->
-        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-emerald-400 transition-all duration-200" data-calc-cat="sante">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-emerald-600"></div>
+        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-[#006233]/50 transition-all duration-200" data-calc-cat="sante">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-[#006233]"></div>
           <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-lg border border-emerald-100">⚖️</span>
-              <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">Santé & Morphologie</span>
+              <span class="w-10 h-10 rounded-xl bg-[#f2fbf6] text-[#006233] flex items-center justify-center font-bold text-lg border border-[#bbf7d0]">⚖️</span>
+              <span class="text-[11px] font-bold text-[#006233] bg-[#f2fbf6] px-2.5 py-0.5 rounded-full border border-[#bbf7d0]">Santé & Morphologie</span>
             </div>
             <div>
               <h3 class="text-base font-extrabold text-slate-900">IMC Sportif & Masse Grasse</h3>
@@ -1942,18 +1990,18 @@ footer.footer .footer-bottom {
               </p>
             </div>
           </div>
-          <a href="calculateur-imc-sportif-masse-grasse.html" class="mt-4 w-full py-2.5 px-3 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+          <a href="calculateur-imc-sportif-masse-grasse.html" class="mt-4 w-full py-2.5 px-3.5 bg-[#006233] hover:bg-[#064e3b] text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-2xs">
             Calculer l'IMC & IMG →
           </a>
         </div>
 
         <!-- 11. Widget VMA Intégrable -->
-        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-blue-400 transition-all duration-200" data-calc-cat="charge">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-blue-600"></div>
+        <div class="calc-tool-card snap-start shrink-0 w-[300px] sm:w-[320px] bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shadow-xs hover:shadow-md hover:border-slate-400 transition-all duration-200" data-calc-cat="charge">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-[#1e293b]"></div>
           <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-lg border border-blue-100">💻</span>
-              <span class="text-[11px] font-bold text-blue-800 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200">Intégration Web</span>
+              <span class="w-10 h-10 rounded-xl bg-slate-100 text-[#1e293b] flex items-center justify-center font-bold text-lg border border-slate-200">💻</span>
+              <span class="text-[11px] font-bold text-[#1e293b] bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">Intégration Web</span>
             </div>
             <div>
               <h3 class="text-base font-extrabold text-slate-900">Widget VMA Intégrable</h3>
@@ -1962,7 +2010,7 @@ footer.footer .footer-bottom {
               </p>
             </div>
           </div>
-          <a href="widget-vma.html" class="mt-4 w-full py-2.5 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-xs">
+          <a href="widget-vma.html" class="mt-4 w-full py-2.5 px-3.5 bg-[#1e293b] hover:bg-[#0f172a] text-white rounded-xl text-xs font-bold text-center block transition-colors shadow-2xs">
             Obtenir le Code Widget →
           </a>
         </div>
@@ -2675,17 +2723,17 @@ footer.footer .footer-bottom {
     function filterCalculateurs(cat) {
       cat = cat || 'all';
       var buttons = [
-        { id: 'btn-calc-all', cat: 'all' },
-        { id: 'btn-calc-aerobie', cat: 'aerobie' },
-        { id: 'btn-calc-sante', cat: 'sante' },
-        { id: 'btn-calc-charge', cat: 'charge' }
+        { id: 'btn-calc-all', cat: 'all', activeClass: 'px-3.5 py-1.5 text-xs font-bold rounded-lg bg-[#1e293b] text-white transition shadow-2xs cursor-pointer' },
+        { id: 'btn-calc-aerobie', cat: 'aerobie', activeClass: 'px-3.5 py-1.5 text-xs font-bold rounded-lg bg-[#991b1b] text-white transition shadow-2xs cursor-pointer' },
+        { id: 'btn-calc-sante', cat: 'sante', activeClass: 'px-3.5 py-1.5 text-xs font-bold rounded-lg bg-[#006233] text-white transition shadow-2xs cursor-pointer' },
+        { id: 'btn-calc-charge', cat: 'charge', activeClass: 'px-3.5 py-1.5 text-xs font-bold rounded-lg bg-[#1e293b] text-white transition shadow-2xs cursor-pointer' }
       ];
 
       buttons.forEach(function(b) {
         var el = document.getElementById(b.id);
         if (!el) return;
         if (b.cat === cat) {
-          el.className = 'px-3.5 py-1.5 text-xs font-bold rounded-lg bg-slate-900 text-white transition shadow-xs cursor-pointer';
+          el.className = b.activeClass;
         } else {
           el.className = 'px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition cursor-pointer';
         }
