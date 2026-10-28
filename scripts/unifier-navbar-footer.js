@@ -987,25 +987,74 @@ footer.footer .footer-bottom {
     border: 1px solid #e2e8f0 !important;
     margin-top: 0.5rem !important;
   }
+/* ═══ BOUTONS DIDACTIQUE & SPÉCIALITÉ CHARTE PROFEPS ═══ */
+.peps-btn-didactique, .peps-btn-red {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border: 1px solid #7f1d1d !important;
+  border-radius: 0.85rem !important;
+  padding: 0.85rem 1.25rem !important;
+  box-shadow: 0 4px 14px rgba(127, 29, 29, 0.25) !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
-@media (max-width: 640px) {
-  .footer .footer-grid {
-    grid-template-columns: 1fr !important;
-  }
+.peps-btn-didactique:hover, .peps-btn-red:hover {
+  background: linear-gradient(135deg, #7f1d1d 0%, #581c1c 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(127, 29, 29, 0.35) !important;
+}
+.peps-btn-specialite, .peps-btn-green {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+  border: 2px solid #991b1b !important;
+  border-radius: 0.85rem !important;
+  padding: 0.85rem 1.25rem !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08) !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.peps-btn-specialite:hover, .peps-btn-green:hover {
+  background-color: #f8fafc !important;
+  color: #7f1d1d !important;
+  -webkit-text-fill-color: #7f1d1d !important;
+  transform: translateY(-2px) !important;
+  border-color: #7f1d1d !important;
 }
 </style>`;
 
 function buildNavbarHtml(fileName) {
   const isHome = fileName === 'index.html';
+  const isEps = fileName.includes('eps') && !fileName.includes('crmef-hub') && !fileName.includes('blog');
   const isGen = fileName === 'generateur.html';
   const isBlog =
     fileName === 'blog.html' ||
     fileName.startsWith('article-') ||
-    fileName.startsWith('guide-');
+    fileName.startsWith('guide-') ||
+    fileName.includes('minetti') ||
+    fileName.includes('foster') ||
+    fileName.includes('altitude') ||
+    fileName.includes('karvonen') ||
+    fileName.includes('deurenberg') ||
+    fileName.includes('peronnet') ||
+    fileName.includes('hiit-changement') ||
+    fileName.includes('jack-daniels') ||
+    fileName.includes('asr-sports-co') ||
+    fileName.includes('course-duree');
+  const isCrmef = fileName.includes('crmef') || fileName.includes('qcm');
   const isTool = Boolean(TOOL_INFO[fileName]);
 
   const currentTool = TOOL_INFO[fileName] || TOOL_INFO['calculateur-vma.html'];
-  const triggerHref = TOOL_INFO[fileName] ? fileName : 'calculateur-vma.html';
+  const triggerHref = TOOL_INFO[fileName] ? fileName : 'hub-outils-sport-performance.html';
 
   const dropdownLinks = DROPDOWN_ITEMS.map((item) => {
     const isCurrent = item.href === fileName;
@@ -1032,6 +1081,7 @@ function buildNavbarHtml(fileName) {
       </a>
       <div class="peps-nav-menu" id="pepsNavMenu">
         <a href="index.html" class="peps-nav-link${isHome ? ' active' : ''}" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
+        <a href="qcm-didactique-eps-maroc.html" class="peps-nav-link${isEps ? ' active' : ''}" data-i18n-fr="Didactique EPS" data-i18n-en="PE Didactics" data-i18n-ar="ديداكتيك التربية البدنية">Didactique EPS</a>
         <a href="generateur.html" class="peps-nav-link${isGen ? ' active' : ''}" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
         <div class="peps-dropdown" id="pepsCalcDropdown">
           <a href="${triggerHref}" class="peps-nav-link${isTool ? ' active' : ''}" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="${currentTool.fr.replace(/"/g, '&quot;')}" data-i18n-en="${currentTool.en.replace(/"/g, '&quot;')}" data-i18n-ar="${currentTool.ar.replace(/"/g, '&quot;')}">${currentTool.fr}</span><span class="peps-dropdown-caret">▾</span></a>
@@ -1039,6 +1089,7 @@ function buildNavbarHtml(fileName) {
 ${dropdownLinks}
           </div>
         </div>
+        <a href="concours-crmef-hub.html" class="peps-nav-link${isCrmef ? ' active' : ''}" data-i18n-fr="Concours CRMEF" data-i18n-en="CRMEF Exam" data-i18n-ar="مباراة التعليم">Concours CRMEF</a>
         <a href="blog.html" class="peps-nav-link${isBlog ? ' active' : ''}" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
       </div>
       <div class="peps-nav-right">
@@ -1314,9 +1365,50 @@ if (fs.existsSync(path.join(rootDir, 'public'))) {
 
 let updatedCount = 0;
 
+const CRMEF_FILES = new Set([
+  'concours-crmef-hub.html',
+  'qcm-concours-crmef.html',
+  'qcm-sciences-education-crmef.html',
+  'qcm-150-questions-crmef-eps.html',
+  'qcm-didactique-eps-maroc.html',
+  'qcm-specialite-eps-maroc.html',
+  'qcm-didactique-primaire-maroc.html',
+  'qcm-specialite-primaire-maroc.html',
+  'qcm-didactique-maths-maroc.html',
+  'qcm-specialite-maths-maroc.html',
+  'qcm-didactique-physique-chimie-maroc.html',
+  'qcm-specialite-physique-chimie-maroc.html',
+  'qcm-didactique-svt-maroc.html',
+  'qcm-specialite-svt-maroc.html',
+  'qcm-didactique-francais-maroc.html',
+  'qcm-specialite-francais-maroc.html',
+  'qcm-didactique-arabe-maroc.html',
+  'qcm-specialite-arabe-maroc.html',
+  'qcm-didactique-histoire-geographie-maroc.html',
+  'qcm-specialite-histoire-geographie-maroc.html',
+  'qcm-didactique-philosophie-maroc.html',
+  'qcm-specialite-philosophie-maroc.html',
+  'qcm-didactique-informatique-maroc.html',
+  'qcm-specialite-informatique-maroc.html',
+  'qcm-didactique-anglais-maroc.html',
+  'qcm-specialite-anglais-maroc.html',
+  'qcm-didactique-education-islamique-maroc.html',
+  'qcm-specialite-education-islamique-maroc.html',
+  'qcm-didactique-economie-gestion-maroc.html',
+  'qcm-specialite-economie-gestion-maroc.html'
+]);
+
 dirsToScan.forEach((dir) => {
   const htmlFiles = fs.readdirSync(dir).filter((f) => f.endsWith('.html'));
   htmlFiles.forEach((file) => {
+    // Ne pas traiter les pages CRMEF (gérées par unify-crmef.js avec la sous-navigation dédiée)
+    if (CRMEF_FILES.has(file)) {
+      return;
+    }
+    if (file === 'google9e56188ccdfea7e9.html') {
+      return;
+    }
+
     const filePath = path.join(dir, file);
     let html = fs.readFileSync(filePath, 'utf8');
 
@@ -1349,6 +1441,7 @@ dirsToScan.forEach((dir) => {
     html = html.replace(/<div id="navbar" class="navbar-decoy"[\s\S]*?<\/div>\s*<\/div>\s*/g, '');
     html = html.replace(/<div[^>]*class=["'][^"']*nav-backdrop[^"']*["'][^>]*>\s*<\/div>\s*/gi, '');
     html = html.replace(/<style id="profeps-navbar-styles">[\s\S]*?<\/style>\s*/g, '');
+    html = html.replace(/<style id="profeps-navbar-600">[\s\S]*?<\/style>\s*/g, '');
     html = html.replace(/<style id="profeps-vma-dropdown-footer-css">[\s\S]*?<\/style>\s*/g, '');
     html = html.replace(/<style id="profeps-master-unifier-css">[\s\S]*?<\/style>\s*/g, '');
     html = html.replace(/<script id="profeps-navbar-script">[\s\S]*?<\/script>\s*/g, '');
@@ -1358,7 +1451,7 @@ dirsToScan.forEach((dir) => {
     // Supprimer TOUTES les anciennes balises <nav class="navbar"> ou <nav id="navbar">
     html = html.replace(/<nav[^>]*(?:id=["']navbar["']|class=["'][^"']*navbar[^"']*["'])[^>]*>[\s\S]*?<\/nav>\s*/gi, '');
 
-    // Supprimer uniquement les conteneurs explicites de sélecteurs de langue en doublon (sans jamais toucher aux balises <footer ou <script)
+    // Supprimer uniquement les conteneurs explicites de sélecteurs de langue en doublon
     html = html.replace(/<div\b[^>]*class=["'][^"']*in-page-lang-switch[^"']*["'][^>]*>[\s\S]*?<\/div>\s*/gi, '');
     html = html.replace(/<div\b[^>]*class=["'][^"']*\blang-switch\b[^"']*["'][^>]*>[\s\S]*?<\/div>\s*/gi, '');
     html = html.replace(/<div\b[^>]*class=["'][^"']*\bpeps-hero-pills\b[^"']*["'][^>]*>[\s\S]*?<\/div>\s*/gi, '');
@@ -1380,28 +1473,38 @@ dirsToScan.forEach((dir) => {
       console.log(`🛡️  [SEO DE-NOINDEX] -> Page dé-noindexée avec succès : ${file}`);
     }
 
+    // Favicon universel
+    if (!html.includes('<link rel="icon"')) {
+      html = html.replace(/<\/head>/i, '  <link rel="icon" type="image/png" href="images/prof_eps.png">\n</head>');
+    }
+
     // 5. Injecter le CSS maître juste avant </head>
     if (/<\/head>/i.test(html)) {
       html = html.replace(/<\/head>/i, `${MASTER_CSS}\n</head>`);
     }
 
-    // 6. Injecter la nouvelle Navbar isolée (#pepsNavbar) + le JS maître juste après <body...>
+    // 6. Injecter la nouvelle Navbar isolée (#pepsNavbar) + le JS maître
     const newNavWithJs = `${buildNavbarHtml(file)}\n${MASTER_JS}`;
-    if (/<body[^>]*>/i.test(html)) {
+    if (html.includes('<div id="navbar-placeholder"></div>')) {
+      html = html.replace('<div id="navbar-placeholder"></div>', newNavWithJs);
+    } else if (/<div\b[^>]*id=["']navbar-placeholder["'][^>]*>[\s\S]*?<\/div>/i.test(html)) {
+      html = html.replace(/<div\b[^>]*id=["']navbar-placeholder["'][^>]*>[\s\S]*?<\/div>/i, newNavWithJs);
+    } else if (/<body[^>]*>/i.test(html)) {
       html = html.replace(/<body[^>]*>/i, (match) => `${match}\n${newNavWithJs}`);
     } else if (/<nav[\s\S]*?<\/nav>/i.test(html)) {
       html = html.replace(/<nav[\s\S]*?<\/nav>/i, newNavWithJs);
     }
 
-    // 7. Remplacer le <footer> par le Footer à 5 colonnes sans doublons
+    // 7. Remplacer ou injecter le Footer à 5 colonnes sans doublons
     const newFooter = buildFooterHtml();
-    const lastFooterStart = html.lastIndexOf('<footer');
-    const lastFooterEnd = html.lastIndexOf('</footer>');
-    if (lastFooterStart !== -1 && lastFooterEnd !== -1 && lastFooterEnd > lastFooterStart) {
-      html =
-        html.slice(0, lastFooterStart) +
-        newFooter +
-        html.slice(lastFooterEnd + '</footer>'.length);
+    html = html.replace(/<footer[^>]*id=["']profeps-unified-footer["'][\s\S]*?<\/footer>\s*/gi, '');
+
+    if (html.includes('<div id="footer-placeholder"></div>')) {
+      html = html.replace('<div id="footer-placeholder"></div>', newFooter);
+    } else if (/<div\b[^>]*id=["']footer-placeholder["'][^>]*>[\s\S]*?<\/div>/i.test(html)) {
+      html = html.replace(/<div\b[^>]*id=["']footer-placeholder["'][^>]*>[\s\S]*?<\/div>/i, newFooter);
+    } else if (/<footer\b[^>]*class=["'][^"']*\bfooter\b[^"']*["'][\s\S]*?<\/footer>/i.test(html)) {
+      html = html.replace(/<footer\b[^>]*class=["'][^"']*\bfooter\b[^"']*["'][\s\S]*?<\/footer>/i, newFooter);
     } else {
       const lastBodyIdx = html.lastIndexOf('</body>');
       if (lastBodyIdx !== -1) {
