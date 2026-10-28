@@ -149,7 +149,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: rgba(248, 250, 252, 0.94);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             z-index: 9999;
             justify-content: center;
             align-items: center;
@@ -161,12 +163,12 @@
         }
 
         .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top-color: white;
+            width: 56px;
+            height: 56px;
+            border: 4px solid #fee2e2;
+            border-top-color: #991b1b;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            animation: spin 0.9s linear infinite;
         }
 
         @keyframes spin {
@@ -176,44 +178,44 @@
         }
 
         .loading-text {
-            color: white;
-            font-size: 1.25rem;
-            font-weight: 600;
+            color: #0f172a;
+            font-size: 1.2rem;
+            font-weight: 700;
             margin-top: 20px;
         }
 
         .loading-subtext {
-            color: rgba(255, 255, 255, 0.8);
+            color: #475569;
             font-size: 0.95rem;
             margin-top: 8px;
         }
 
         .progress-container {
             width: 100%;
-            max-width: 300px;
+            max-width: 320px;
             margin-top: 24px;
         }
 
         .progress-bar {
             width: 100%;
             height: 8px;
-            background: rgba(255, 255, 255, 0.2);
+            background: #e2e8f0;
             border-radius: var(--radius-full);
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #fff, rgba(255,255,255,0.8));
+            background: linear-gradient(90deg, #991b1b, #006233);
             border-radius: var(--radius-full);
             transition: width 0.3s ease;
             width: 0%;
         }
 
         .progress-text {
-            color: white;
+            color: #334155;
             font-size: 0.9rem;
-            font-weight: 600;
+            font-weight: 700;
             text-align: center;
             margin-top: 8px;
         }
@@ -303,17 +305,17 @@
         /* ========== CARDS ========== */
         .card {
             background: var(--bg-card);
-            border-radius: var(--radius-2xl);
-            box-shadow: var(--shadow-lg);
+            border-radius: 20px;
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
             overflow: hidden;
-            border: 1px solid var(--border-light);
+            border: 1px solid #e2e8f0;
         }
 
         .card::before {
             content: '';
             display: block;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            height: 2px;
+            background: linear-gradient(90deg, #fda4af, #a7f3d0);
         }
 
         /* ========== TABS ========== */
@@ -482,26 +484,31 @@
             align-items: center;
             justify-content: center;
             gap: var(--spacing-sm);
-            padding: var(--spacing-lg);
-            font-size: 1.1rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            border-radius: var(--radius-full);
+            padding: 15px 22px;
+            font-size: 1.02rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff8f8 0%, #fef2f2 100%);
+            color: #881337;
+            border: 1.5px solid #f5c2c7;
+            border-radius: 14px;
             cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 8px 30px rgba(193, 39, 45, 0.3);
+            transition: all 0.22s ease;
+            box-shadow: 0 2px 6px rgba(153, 27, 27, 0.06);
             margin-top: var(--spacing-lg);
         }
 
         .generate-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(193, 39, 45, 0.4);
+            transform: translateY(-1px);
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border-color: #fda4af;
+            color: #7f1d1d;
+            box-shadow: 0 6px 16px -4px rgba(153, 27, 27, 0.14);
         }
 
         .generate-btn:disabled {
-            background: var(--text-light);
+            background: #f1f5f9;
+            color: #94a3b8;
+            border-color: #e2e8f0;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
@@ -585,21 +592,20 @@
             align-items: center;
             justify-content: center;
             gap: var(--spacing-sm);
-            padding: var(--spacing-sm) var(--spacing-lg);
-            font-weight: 600;
+            padding: 10px 18px;
+            font-weight: 700;
             font-size: 0.85rem;
-            border-radius: var(--radius-full);
-            transition: var(--transition);
+            border-radius: 12px;
+            transition: all 0.2s ease;
             cursor: pointer;
-            border: none;
+            border: 1.5px solid transparent;
             flex: 1;
             min-width: 120px;
             white-space: nowrap;
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
         }
 
         .btn:disabled {
@@ -610,43 +616,55 @@
         }
 
         .btn-word {
-            background: linear-gradient(135deg, #2b579a, #1e3a5f);
-            color: white;
-            box-shadow: 0 3px 10px rgba(43, 87, 154, 0.3);
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            color: #1e293b;
+            border-color: #cbd5e1;
+            box-shadow: 0 2px 5px rgba(15, 23, 42, 0.05);
         }
 
         .btn-word:hover:not(:disabled) {
-            box-shadow: 0 5px 15px rgba(43, 87, 154, 0.5);
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border-color: #94a3b8;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
         }
 
         .btn-pdf {
-            background: linear-gradient(135deg, #dc3545, #c82333);
-            color: white;
-            box-shadow: 0 3px 10px rgba(220, 53, 69, 0.3);
+            background: linear-gradient(135deg, #fff8f8 0%, #fef2f2 100%);
+            color: #881337;
+            border-color: #f5c2c7;
+            box-shadow: 0 2px 5px rgba(153, 27, 27, 0.06);
         }
 
         .btn-pdf:hover:not(:disabled) {
-            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.5);
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border-color: #fda4af;
+            box-shadow: 0 4px 12px rgba(153, 27, 27, 0.12);
         }
 
         .btn-word-orange {
-            background: linear-gradient(135deg, #e65100, #bf360c);
-            color: white;
-            box-shadow: 0 3px 10px rgba(230, 81, 0, 0.3);
+            background: linear-gradient(135deg, #f3faf6 0%, #ecfdf5 100%);
+            color: #065f46;
+            border-color: #a7f3d0;
+            box-shadow: 0 2px 5px rgba(0, 98, 51, 0.06);
         }
 
         .btn-word-orange:hover:not(:disabled) {
-            box-shadow: 0 5px 15px rgba(230, 81, 0, 0.5);
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border-color: #6ee7b7;
+            box-shadow: 0 4px 12px rgba(0, 98, 51, 0.12);
         }
 
         .btn-pdf-orange {
-            background: linear-gradient(135deg, #ff6d00, #e65100);
-            color: white;
-            box-shadow: 0 3px 10px rgba(255, 109, 0, 0.3);
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            color: #92400e;
+            border-color: #fde68a;
+            box-shadow: 0 2px 5px rgba(180, 83, 9, 0.06);
         }
 
         .btn-pdf-orange:hover:not(:disabled) {
-            box-shadow: 0 5px 15px rgba(255, 109, 0, 0.5);
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-color: #fcd34d;
+            box-shadow: 0 4px 12px rgba(180, 83, 9, 0.12);
         }
 
         .preview-content {

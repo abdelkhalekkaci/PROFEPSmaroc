@@ -24,35 +24,34 @@
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Calculateur d’IMC, Barème de Référence (Normal / Anormal) & Masse Grasse","url":"https://profeps.ma/calculateur-imc-sportif-masse-grasse.html","applicationCategory":"HealthApplication","operatingSystem":"All","inLanguage":["fr","en","ar"],"description":"Renseignez votre poids, votre taille, votre âge et votre sexe puis cliquez sur Calculer pour obtenir votre IMC, votre taux de masse grasse (IMG) et votre position exacte sur le barème officiel (ce qui est normal et ce qui est anormal).","keywords":"calculateur imc, calcul imc homme femme, barème imc normal anormal oms, indice masse corporelle, indice masse grasse img, poids idéal selon taille, imc sportif masse maigre","offers":{"@type":"Offer","price":"0","priceCurrency":"MAD"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quel est l'IMC normal et pourquoi le barème IMC classique peut-il tromper un sportif ?","acceptedAnswer":{"@type":"Answer","text":"Selon l'OMS, un IMC normal se situe entre 18,5 et 24,9 kg/m². En dessous de 18,5 on parle d'insuffisance pondérale (maigreur), entre 25,0 et 29,9 de surpoids, et à partir de 30,0 d'obésité. Toutefois, chez un sportif musclé, l'IMC peut dépasser 25 kg/m² tout en ayant un faible taux de masse grasse (IMG < 15 % chez l'homme, < 22 % chez la femme) : c'est pourquoi notre calculateur croise le barème IMC avec l'IMG et l'indice musculaire FFMI."}}]}]}</script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style id="profeps-calculator-ui-css">
-/* Styles dédiés aux pages Calculateurs (Hero, Alignement des cases & Bouton CTA VMA) */
+/* Styles dédiés aux pages Calculateurs — Palette douce, académique & reposante ProfEPS */
 .vma-hero {
   margin-top: 80px !important;
-  padding: 2.75rem 1.25rem 2.25rem !important;
-  background: radial-gradient(circle at 18% 20%, rgba(193, 39, 45, 0.07) 0%, transparent 45%),
-              radial-gradient(circle at 82% 80%, rgba(0, 98, 51, 0.07) 0%, transparent 45%),
-              linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+  padding: 2.5rem 1.25rem 2rem !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
   border-bottom: 1px solid #e2e8f0 !important;
   text-align: center !important;
   position: relative !important;
 }
 .hero-badge {
   display: inline-flex !important; align-items: center !important; gap: 0.45rem !important;
-  background: linear-gradient(135deg, rgba(193, 39, 45, 0.1), rgba(0, 98, 51, 0.08)) !important;
-  color: #c1272d !important;
-  padding: 0.4rem 1.1rem !important; border-radius: 9999px !important;
-  font-size: 0.76rem !important; font-weight: 800 !important; text-transform: uppercase !important;
-  letter-spacing: 0.05em !important; margin-bottom: 0.85rem !important;
-  border: 1px solid rgba(193, 39, 45, 0.22) !important;
-  box-shadow: 0 2px 8px rgba(193, 39, 45, 0.08) !important;
+  background: #f3faf6 !important;
+  color: #006233 !important;
+  padding: 0.38rem 1rem !important; border-radius: 9999px !important;
+  font-size: 0.75rem !important; font-weight: 800 !important; text-transform: uppercase !important;
+  letter-spacing: 0.04em !important; margin-bottom: 0.8rem !important;
+  border: 1px solid #a7f3d0 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
 }
 .vma-hero h1 {
   font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
-  font-size: clamp(1.55rem, 3vw, 2.25rem) !important;
+  font-size: clamp(1.55rem, 3vw, 2.2rem) !important;
   font-weight: 800 !important; color: #0f172a !important; margin: 0 auto 0.65rem auto !important;
-  max-width: 880px !important; line-height: 1.22 !important; letter-spacing: -0.02em !important;
+  max-width: 860px !important; line-height: 1.24 !important; letter-spacing: -0.02em !important;
+  text-wrap: balance !important;
 }
 .vma-hero p {
-  font-size: 0.95rem !important; color: #475569 !important; max-width: 760px !important;
+  font-size: 0.95rem !important; color: #475569 !important; max-width: 740px !important;
   margin: 0 auto !important; line-height: 1.6 !important;
 }
 main > div.max-w-3xl,
@@ -61,15 +60,13 @@ main > div.max-w-3xl,
   position: relative !important;
   overflow: hidden !important;
   border-radius: 20px !important;
-  border: 1px solid rgba(203, 213, 225, 0.85) !important;
-  box-shadow: 0 12px 32px -8px rgba(15, 23, 42, 0.07), 0 2px 6px rgba(15, 23, 42, 0.03) !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 8px 24px -8px rgba(15, 23, 42, 0.05) !important;
   background: #ffffff !important;
 }
 main > div.max-w-3xl::before {
-  content: '' !important;
-  position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important;
-  height: 4px !important;
-  background: linear-gradient(90deg, #c1272d 0%, #e11d48 50%, #006233 100%) !important;
+  display: none !important;
+  content: none !important;
 }
 main > div.max-w-3xl .grid {
   align-items: stretch !important;
@@ -90,9 +87,9 @@ main > div.max-w-3xl .grid > div > label {
 }
 main > div.max-w-3xl input[type="number"],
 main > div.max-w-3xl select {
-  height: 48px !important;
-  min-height: 48px !important;
-  max-height: 48px !important;
+  height: 46px !important;
+  min-height: 46px !important;
+  max-height: 46px !important;
   width: 100% !important;
   box-sizing: border-box !important;
   border-radius: 12px !important;
@@ -101,40 +98,42 @@ main > div.max-w-3xl select {
   padding: 0 0.9rem !important;
   font-size: 0.95rem !important;
   color: #0f172a !important;
+  font-variant-numeric: tabular-nums !important;
   transition: all 0.18s ease !important;
   margin-top: auto !important;
 }
 main > div.max-w-3xl input[type="number"]:focus,
 main > div.max-w-3xl select:focus {
   outline: none !important;
-  border-color: #c1272d !important;
+  border-color: #006233 !important;
   background-color: #ffffff !important;
-  box-shadow: 0 0 0 4px rgba(193, 39, 45, 0.12) !important;
+  box-shadow: 0 0 0 3px rgba(0, 98, 51, 0.10) !important;
 }
 #tool-results-panel .grid > div {
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
   height: 100% !important;
+  font-variant-numeric: tabular-nums !important;
 }
 button.peps-cta-btn,
 #btn-calc-main {
   width: 100% !important;
-  padding: 1.05rem 1.6rem !important;
+  padding: 0.95rem 1.4rem !important;
   margin-top: 0.65rem !important;
-  background: linear-gradient(135deg, #c1272d 0%, #991b1b 52%, #006233 100%) !important;
-  background-color: #c1272d !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+  background: linear-gradient(135deg, #f3faf6 0%, #ecfdf5 100%) !important;
+  background-color: #f3faf6 !important;
+  color: #065f46 !important;
+  -webkit-text-fill-color: #065f46 !important;
   font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
-  font-size: 1.02rem !important;
+  font-size: 0.98rem !important;
   font-weight: 800 !important;
-  letter-spacing: 0.01em !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  letter-spacing: 0.005em !important;
+  border: 1.5px solid #a7f3d0 !important;
   border-radius: 14px !important;
   cursor: pointer !important;
-  box-shadow: 0 12px 28px -5px rgba(193, 39, 45, 0.48), 0 4px 12px -2px rgba(0, 98, 51, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.28) !important;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, filter 0.2s ease !important;
+  box-shadow: 0 4px 14px -4px rgba(0, 98, 51, 0.10) !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -145,13 +144,36 @@ button.peps-cta-btn,
 }
 button.peps-cta-btn:hover,
 #btn-calc-main:hover {
-  transform: translateY(-2px) scale(1.005) !important;
-  box-shadow: 0 16px 34px -5px rgba(193, 39, 45, 0.58), 0 6px 16px -2px rgba(0, 98, 51, 0.34) !important;
-  filter: brightness(1.07) !important;
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%) !important;
+  border-color: #006233 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 8px 20px -5px rgba(0, 98, 51, 0.16) !important;
 }
 button.peps-cta-btn:active,
 #btn-calc-main:active {
-  transform: translateY(0) scale(0.995) !important;
+  transform: translateY(0) !important;
+}
+button.peps-cta-btn .peps-cta-arrow,
+#btn-calc-main .peps-cta-arrow {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 8px !important;
+  background: #006233 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-size: 0.95rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  flex-shrink: 0 !important;
+  margin-left: 0.25rem !important;
+  transition: transform 0.18s ease !important;
+}
+button.peps-cta-btn:hover .peps-cta-arrow,
+#btn-calc-main:hover .peps-cta-arrow {
+  transform: translateX(2px) !important;
 }
 </style>
   <script src="profeps-cmp.js" defer></script>
@@ -1111,8 +1133,8 @@ footer.footer .footer-bottom {
 })();
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->
-<header class="vma-hero" style="margin-top:80px;padding:2.75rem 1.25rem 2.25rem;text-align:center;border-bottom:1px solid #e2e8f0;background:radial-gradient(circle at 18% 20%,rgba(193,39,45,0.07) 0%,transparent 45%),radial-gradient(circle at 82% 80%,rgba(0,98,51,0.07) 0%,transparent 45%),linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);">
-    <div id="ui-badge" class="hero-badge" style="display:inline-flex;align-items:center;gap:0.45rem;background:linear-gradient(135deg,rgba(193,39,45,0.1),rgba(0,98,51,0.08));color:#c1272d;padding:0.4rem 1.1rem;border-radius:9999px;font-size:0.76rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.85rem;border:1px solid rgba(193,39,45,0.22);" data-i18n-fr="⚡ Cluster 2B · Indice de Masse Corporelle (IMC), Barème OMS &amp; Masse Grasse (IMG)" data-i18n-en="⚡ Cluster 2B · Body Mass Index (BMI), WHO Reference Scale &amp; Body Fat %" data-i18n-ar="⚡ القطب 2B · مؤشر كتلة الجسم (IMC)، سلم المعايير ونسبة الدهون (IMG)">⚡ Cluster 2B · Indice de Masse Corporelle (IMC), Barème OMS &amp; Masse Grasse (IMG)</div>
+<header class="vma-hero">
+    <div id="ui-badge" class="hero-badge" data-i18n-fr="⚡ Cluster 2B · Indice de Masse Corporelle (IMC), Barème OMS &amp; Masse Grasse (IMG)" data-i18n-en="⚡ Cluster 2B · Body Mass Index (BMI), WHO Reference Scale &amp; Body Fat %" data-i18n-ar="⚡ القطب 2B · مؤشر كتلة الجسم (IMC)، سلم المعايير ونسبة الدهون (IMG)">⚡ Cluster 2B · Indice de Masse Corporelle (IMC), Barème OMS &amp; Masse Grasse (IMG)</div>
     <h1 id="ui-title" style="font-size:clamp(1.55rem,3vw,2.25rem);font-weight:800;color:#0f172a;margin:0 auto 0.65rem auto;max-width:880px;line-height:1.22;" data-i18n-fr="Calculateur d’IMC, Barème de Référence (Normal / Anormal) &amp; Masse Grasse" data-i18n-en="BMI Calculator, Official WHO Reference Scale (Normal vs Abnormal) &amp; Body Fat %" data-i18n-ar="حاسبة مؤشر كتلة الجسم (IMC) وجدول المعايير الصحية (طبيعي / غير طبيعي) ونسبة الدهون">Calculateur d’IMC, Barème de Référence (Normal / Anormal) &amp; Masse Grasse</h1>
     <p id="ui-sub" style="font-size:0.95rem;color:#475569;max-width:760px;margin:0 auto;line-height:1.6;" data-i18n-fr="Renseignez votre poids, votre taille, votre âge et votre sexe puis cliquez sur Calculer pour obtenir votre IMC, votre taux de masse grasse (IMG) et votre position exacte sur le barème officiel (ce qui est normal et ce qui est anormal)." data-i18n-en="Enter your weight, height, age, and sex, then click Calculate to get your BMI, body fat % (IMG), and your exact position on the official normal vs abnormal reference scale." data-i18n-ar="أدخل الوزن والطول والعمر والجنس ثم اضغط على &quot;احسب&quot; لمعرفة مؤشر كتلة الجسم ونسبة الدهون وموقعك الدقيق في سلم المعايير (الطبيعي وغير الطبيعي).">Renseignez votre poids, votre taille, votre âge et votre sexe puis cliquez sur Calculer pour obtenir votre IMC, votre taux de masse grasse (IMG) et votre position exacte sur le barème officiel (ce qui est normal et ce qui est anormal).</p>
   </header>
@@ -1146,8 +1168,8 @@ footer.footer .footer-bottom {
         </div>
       </div>
 
-      <button type="button" id="btn-calc-main" onclick="triggerCalculation()" class="peps-cta-btn w-full mt-3 py-4 px-6 rounded-2xl font-extrabold text-base sm:text-lg text-white shadow-xl transition-all duration-200 flex items-center justify-center gap-3 cursor-pointer select-none" style="width:100% !important;margin-top:0.7rem !important;padding:1.05rem 1.6rem !important;border-radius:14px !important;background:linear-gradient(135deg,#c1272d 0%,#991b1b 52%,#006233 100%) !important;background-color:#c1272d !important;color:#ffffff !important;-webkit-text-fill-color:#ffffff !important;font-weight:800 !important;font-size:1.02rem !important;letter-spacing:0.01em !important;border:1px solid rgba(255,255,255,0.26) !important;box-shadow:0 12px 28px -5px rgba(193,39,45,0.48),0 4px 12px -2px rgba(0,98,51,0.28),inset 0 1px 0 rgba(255,255,255,0.28) !important;display:flex !important;align-items:center !important;justify-content:center !important;gap:0.75rem !important;cursor:pointer !important;text-align:center !important;"><span>⚖️</span>
-        <span data-i18n-fr="Calculer mon IMC, ma Masse Grasse & Voir le Barème de Référence" data-i18n-en="Calculate My BMI, Body Fat % & View Reference Scale" data-i18n-ar="احسب مؤشر كتلة الجسم ونسبة الدهون واعرض جدول المعايير">Calculer mon IMC, ma Masse Grasse & Voir le Barème de Référence</span><span class="peps-cta-arrow" aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:9999px;background:rgba(255,255,255,0.2);font-size:1rem;font-weight:900;line-height:1;flex-shrink:0;margin-left:0.25rem;">→</span></button>
+      <button type="button" id="btn-calc-main" onclick="triggerCalculation()" class="peps-cta-btn w-full mt-3 py-4 px-6 rounded-2xl font-extrabold text-base sm:text-lg text-white shadow-xl transition-all duration-200 flex items-center justify-center gap-3 cursor-pointer select-none"><span>⚖️</span>
+        <span data-i18n-fr="Calculer mon IMC, ma Masse Grasse & Voir le Barème de Référence" data-i18n-en="Calculate My BMI, Body Fat % & View Reference Scale" data-i18n-ar="احسب مؤشر كتلة الجسم ونسبة الدهون واعرض جدول المعايير">Calculer mon IMC, ma Masse Grasse & Voir le Barème de Référence</span><span class="peps-cta-arrow" aria-hidden="true">→</span></button>
     </div>
 
     <div id="tool-results-panel" class="hidden space-y-6">
@@ -1158,10 +1180,10 @@ footer.footer .footer-bottom {
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-          <div class="p-4 bg-blue-50 border border-blue-200 rounded-2xl space-y-1">
-            <div class="text-xs font-extrabold uppercase text-blue-900" data-i18n-fr="Indice IMC (kg/m²)" data-i18n-en="BMI Index (kg/m²)" data-i18n-ar="مؤشر كتلة الجسم (IMC)">Indice IMC (kg/m²)</div>
-            <div id="out-bmi" dir="ltr" class="text-3xl font-black font-mono text-blue-700 tabular-nums">--</div>
-            <div id="out-bmi-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 border border-blue-100"></div>
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-1">
+            <div class="text-xs font-extrabold uppercase text-slate-800" data-i18n-fr="Indice IMC (kg/m²)" data-i18n-en="BMI Index (kg/m²)" data-i18n-ar="مؤشر كتلة الجسم (IMC)">Indice IMC (kg/m²)</div>
+            <div id="out-bmi" dir="ltr" class="text-3xl font-black font-mono text-slate-800 tabular-nums">--</div>
+            <div id="out-bmi-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 border border-slate-200"></div>
           </div>
           <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl space-y-1">
             <div class="text-xs font-extrabold uppercase text-emerald-900" data-i18n-fr="Masse Grasse Estimée (IMG)" data-i18n-en="Estimated Body Fat %" data-i18n-ar="نسبة الدهون المقدرة (IMG)">Masse Grasse Estimée (IMG)</div>
@@ -1181,7 +1203,7 @@ footer.footer .footer-bottom {
         <div class="space-y-3 pt-2">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <p class="text-sm font-extrabold uppercase tracking-wider text-slate-900 footer-col-title" data-i18n-fr="3. Barème Officiel de Référence de l'IMC (Ce qui est Normal vs Anormal — Normes OMS)" data-i18n-en="3. Official WHO BMI Reference Scale (What is Normal vs Abnormal)" data-i18n-ar="3. جدول المعايير المرجعي لمؤشر كتلة الجسم (ما هو طبيعي وما هو غير طبيعي - منظمة الصحة العالمية)">3. Barème Officiel de Référence de l'IMC (Ce qui est Normal vs Anormal — Normes OMS)</p>
-            <span id="out-ideal-range-badge" class="text-xs font-bold text-blue-800 bg-blue-50 border border-blue-200 px-3 py-1 rounded-full"></span>
+            <span id="out-ideal-range-badge" class="text-xs font-bold text-blue-800 bg-slate-50 border border-slate-200 px-3 py-1 rounded-full"></span>
           </div>
           <p class="text-xs text-slate-600" data-i18n-fr="Le tableau ci-dessous vous permet d'avoir une opinion claire et objective sur votre IMC : la zone verte (18,5 à 24,9 kg/m²) correspond à l'IMC normal de référence pour la santé, tandis que les zones inférieures ou supérieures signalent un écart à interpréter selon votre masse musculaire." data-i18n-en="The reference scale below shows where your BMI stands: the green zone (18.5 to 24.9 kg/m²) represents the normal healthy reference range, while values outside require interpretation alongside muscle mass." data-i18n-ar="يوضح الجدول المرجعي أدناه موقعك بدقة: المنطقة الخضراء (18.5 إلى 24.9 كغ/م²) تمثل المعدل الطبيعي والصحي، بينما تشير الفئات الأخرى إلى نقص أو زيادة في الوزن.">Le tableau ci-dessous vous permet d'avoir une opinion claire et objective sur votre IMC : la zone verte (18,5 à 24,9 kg/m²) correspond à l'IMC normal de référence pour la santé, tandis que les zones inférieures ou supérieures signalent un écart à interpréter selon votre masse musculaire.</p>
           <div id="out-bmi-scale-rows" class="space-y-2"></div>
@@ -1212,19 +1234,19 @@ footer.footer .footer-bottom {
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           
           <div class="flex items-start gap-3.5 p-4 rounded-xl bg-slate-50/90 border border-slate-200/90 shadow-xs hover:border-red-200 transition-all" style="display:flex;align-items:flex-start;gap:0.85rem;padding:1rem;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;">
-            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:linear-gradient(135deg,#c1272d,#991b1b);color:#ffffff;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 8px rgba(193,39,45,0.28);">1</span>
+            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:#f3faf6;color:#006233;border:1px solid #a7f3d0;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">1</span>
             <p class="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed m-0" style="font-size:0.84rem;line-height:1.55;color:#334155;margin:0;" data-i18n-fr="Entrez votre poids corporel en kilogrammes (kg) pesé le matin à jeun." data-i18n-en="Enter your morning body weight in kilograms (kg)." data-i18n-ar="أدخل وزنك بالكيلوغرام (كغ) صباحاً.">Entrez votre poids corporel en kilogrammes (kg) pesé le matin à jeun.</p>
           </div>
           <div class="flex items-start gap-3.5 p-4 rounded-xl bg-slate-50/90 border border-slate-200/90 shadow-xs hover:border-red-200 transition-all" style="display:flex;align-items:flex-start;gap:0.85rem;padding:1rem;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;">
-            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:linear-gradient(135deg,#c1272d,#991b1b);color:#ffffff;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 8px rgba(193,39,45,0.28);">2</span>
+            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:#f3faf6;color:#006233;border:1px solid #a7f3d0;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">2</span>
             <p class="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed m-0" style="font-size:0.84rem;line-height:1.55;color:#334155;margin:0;" data-i18n-fr="Indiquez votre taille exacte en centimètres (cm)." data-i18n-en="Enter your height in centimeters (cm)." data-i18n-ar="أدخل طولك بالسنتيمتر (سم).">Indiquez votre taille exacte en centimètres (cm).</p>
           </div>
           <div class="flex items-start gap-3.5 p-4 rounded-xl bg-slate-50/90 border border-slate-200/90 shadow-xs hover:border-red-200 transition-all" style="display:flex;align-items:flex-start;gap:0.85rem;padding:1rem;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;">
-            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:linear-gradient(135deg,#c1272d,#991b1b);color:#ffffff;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 8px rgba(193,39,45,0.28);">3</span>
+            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:#f3faf6;color:#006233;border:1px solid #a7f3d0;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">3</span>
             <p class="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed m-0" style="font-size:0.84rem;line-height:1.55;color:#334155;margin:0;" data-i18n-fr="Précisez votre âge et votre sexe biologique (Homme ou Femme)." data-i18n-en="Select your age and biological sex." data-i18n-ar="حدد عمرك وجنسك (ذكر أو أنثى).">Précisez votre âge et votre sexe biologique (Homme ou Femme).</p>
           </div>
           <div class="flex items-start gap-3.5 p-4 rounded-xl bg-slate-50/90 border border-slate-200/90 shadow-xs hover:border-red-200 transition-all" style="display:flex;align-items:flex-start;gap:0.85rem;padding:1rem;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;">
-            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:linear-gradient(135deg,#c1272d,#991b1b);color:#ffffff;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 8px rgba(193,39,45,0.28);">4</span>
+            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:#f3faf6;color:#006233;border:1px solid #a7f3d0;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">4</span>
             <p class="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed m-0" style="font-size:0.84rem;line-height:1.55;color:#334155;margin:0;" data-i18n-fr="Cliquez sur Calculer pour obtenir votre Indice de Masse Corporelle (IMC), votre taux de masse grasse estimé (IMG %), votre masse maigre active et votre positionnement dans le barème de référence officiel (Normal vs Anormal)." data-i18n-en="Click Calculate to get your BMI, estimated Body Fat % (IMG), active lean body mass, and your exact classification on the official WHO &amp; Athletic reference scale." data-i18n-ar="اضغط على زر الحساب لمعرفة مؤشر كتلة الجسم (IMC)، نسبة الدهون (IMG)، الكتلة العضلية الصافية وموقعك في جدول المعايير الصحية والرياضية.">Cliquez sur Calculer pour obtenir votre Indice de Masse Corporelle (IMC), votre taux de masse grasse estimé (IMG %), votre masse maigre active et votre positionnement dans le barème de référence officiel (Normal vs Anormal).</p>
           </div>
         </div>
@@ -1357,7 +1379,7 @@ footer.footer .footer-bottom {
             <span style="color:#006233;">🏃</span>
             Zone 3 : Application Didactique EPS Maroc &amp; Gestion de Classe (1051 mots)
           </h3>
-          <button type="button" onclick="toggleTexteIntegral()" id="btn-toggle-texte" class="text-xs font-bold text-blue-600 hover:text-blue-800 cursor-pointer">
+          <button type="button" onclick="toggleTexteIntegral()" id="btn-toggle-texte" class="text-xs font-bold text-[#991b1b] hover:text-[#7f1d1d] cursor-pointer">
             Afficher le texte complet ▼
           </button>
         </div>
