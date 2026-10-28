@@ -936,7 +936,7 @@ footer.footer .footer-bottom {
   <div class="peps-navbar" id="pepsNavbar" role="navigation" aria-label="Navigation principale" data-current-file="calculateur-imc-sportif-masse-grasse.html">
     <div class="peps-nav-container">
       <a href="index.html" class="peps-nav-logo" aria-label="Prof EPS Maroc - Accueil">
-        <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:52px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
+        <img src="images/prof_eps.png" width="156" height="52" decoding="async" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:52px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
       </a>
       <div class="peps-nav-menu" id="pepsNavMenu">
         <a href="index.html" class="peps-nav-link" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
@@ -1083,8 +1083,27 @@ footer.footer .footer-bottom {
   }
   cleanPageDuplicates();
   window.addEventListener('DOMContentLoaded', cleanPageDuplicates);
-  var obs = new MutationObserver(cleanPageDuplicates);
-  obs.observe(document.documentElement, { childList: true, subtree: true });
+  // Nettoyage unique à l'initialisation et au DOMContentLoaded (CLS = 0, zéro surcharge MutationObserver)
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      var dd = document.getElementById('pepsCalcDropdown');
+      var dm = document.getElementById('pepsDropdownMenu');
+      if (dd) dd.classList.remove('open');
+      if (dm) {
+        dm.style.removeProperty('opacity');
+        dm.style.removeProperty('visibility');
+        dm.style.removeProperty('pointer-events');
+        dm.style.removeProperty('transform');
+      }
+      var toggleBtn = document.getElementById('pepsNavToggle');
+      var navMenuEl = document.getElementById('pepsNavMenu');
+      if (toggleBtn && navMenuEl) {
+        toggleBtn.classList.remove('active');
+        navMenuEl.classList.remove('active');
+      }
+    }
+  });
 
   window.addEventListener('scroll', function() {
     var n = document.getElementById('pepsNavbar');
@@ -1531,7 +1550,7 @@ Pour un sportif cherchant à optimiser son poids de forme, l'objectif ne doit ja
     <div class="footer-container">
       <div class="footer-grid">
         <div class="footer-brand" style="display:flex !important;flex-direction:column !important;align-items:flex-start !important;">
-          <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:46px !important;max-height:46px !important;width:auto !important;max-width:155px !important;object-fit:contain !important;align-self:flex-start !important;filter:none !important;border-radius:8px !important;margin:0 0 0.9rem 0 !important;display:block !important;">
+          <img src="images/prof_eps.png" width="150" height="46" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:46px !important;max-height:46px !important;width:auto !important;max-width:155px !important;object-fit:contain !important;align-self:flex-start !important;filter:none !important;border-radius:8px !important;margin:0 0 0.9rem 0 !important;display:block !important;">
           <p data-i18n-fr="La plateforme de référence pour les professeurs d'EPS et candidats aux concours de l'enseignement au Maroc. Générateur pédagogique, calculateurs sportifs et préparation CRMEF." data-i18n-en="The reference platform for PE teachers and CRMEF candidates in Morocco. Educational generator, sports calculators &amp; official curriculum-aligned quizzes." data-i18n-ar="المنصة المرجعية لأساتذة التربية البدنية والمترشحين لمباريات التعليم بالمغرب. مولد وثائق تربوية، حاسبات رياضية واستعداد لمباراة التعليم.">La plateforme de référence pour les professeurs d'EPS et candidats aux concours de l'enseignement au Maroc. Générateur pédagogique, calculateurs sportifs et préparation CRMEF.</p>
           <div class="footer-stats">
             <div class="footer-stat-item">

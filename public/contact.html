@@ -758,6 +758,96 @@ footer.footer .footer-bottom {
   }
 }
 </style>
+
+<style id="profeps-phase3-dark-to-soft-light">
+  body.bg-slate-950 {
+    background-color: #f8fafc !important;
+    color: #1e293b !important;
+  }
+  header.vma-hero {
+    background: linear-gradient(135deg, #fff8f8 0%, #f8fafc 52%, #f3faf6 100%) !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+  header.vma-hero h1 { color: #0f172a !important; }
+  header.vma-hero p { color: #334155 !important; }
+  header.vma-hero nav .text-emerald-400 { color: #006233 !important; }
+  header.vma-hero nav .text-slate-200 { color: #0f172a !important; font-weight: 700 !important; }
+  header.vma-hero nav .text-slate-400 { color: #475569 !important; }
+  header.vma-hero .bg-emerald-500\/10 {
+    background: #f3faf6 !important;
+    border-color: #a7d7c5 !important;
+    color: #065f46 !important;
+  }
+  main .bg-slate-900\/80,
+  main .bg-slate-900\/70,
+  main .bg-slate-900\/60,
+  main .bg-slate-900\/50,
+  main .bg-slate-900,
+  main section.from-slate-900,
+  main section.from-emerald-950\/40 {
+    background: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    color: #1e293b !important;
+    box-shadow: 0 2px 12px rgba(15, 23, 42, 0.04) !important;
+  }
+  main .bg-slate-950\/80,
+  main .bg-slate-950\/70,
+  main .bg-slate-950\/60,
+  main .bg-slate-950 {
+    background: #f8fafc !important;
+    border-color: #e2e8f0 !important;
+    color: #1e293b !important;
+  }
+  main h1, main h2, main h3, main .text-white {
+    color: #0f172a !important;
+  }
+  main a.text-white, main button.text-white,
+  main a[class*="from-emerald-600"], main a[class*="from-sky-600"],
+  main button.bg-emerald-600, main button.bg-sky-600 {
+    color: #ffffff !important;
+  }
+  main a[class*="from-emerald-600"] {
+    background: #006233 !important;
+    box-shadow: 0 4px 12px rgba(0, 98, 51, 0.18) !important;
+  }
+  main a[class*="from-sky-600"], main button.bg-sky-600 {
+    background: #991b1b !important;
+    box-shadow: 0 4px 12px rgba(153, 27, 27, 0.18) !important;
+  }
+  main .text-slate-300, main .text-slate-200 {
+    color: #334155 !important;
+  }
+  main .text-slate-400, main .text-slate-500 {
+    color: #475569 !important;
+  }
+  main .text-emerald-400, main .group:hover .group-hover\:text-emerald-300 {
+    color: #006233 !important;
+  }
+  main .text-sky-400, main .group:hover .group-hover\:text-sky-300 {
+    color: #991b1b !important;
+  }
+  main .text-amber-400, main .group:hover .group-hover\:text-amber-300 {
+    color: #92400e !important;
+  }
+  main .border-slate-800, main .border-slate-800\/80, main .border-slate-700 {
+    border-color: #e2e8f0 !important;
+  }
+  main input.bg-slate-950, main textarea.bg-slate-950 {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
+  }
+  main table th {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+  }
+  main table td {
+    border-color: #e2e8f0 !important;
+    color: #334155 !important;
+    font-variant-numeric: tabular-nums !important;
+  }
+</style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans antialiased">
 <!-- PROFEPS_UNIFIED_NAVBAR_START -->
@@ -772,7 +862,7 @@ footer.footer .footer-bottom {
   <div class="peps-navbar" id="pepsNavbar" role="navigation" aria-label="Navigation principale" data-current-file="contact.html">
     <div class="peps-nav-container">
       <a href="index.html" class="peps-nav-logo" aria-label="Prof EPS Maroc - Accueil">
-        <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:52px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
+        <img src="images/prof_eps.png" width="156" height="52" decoding="async" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:52px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
       </a>
       <div class="peps-nav-menu" id="pepsNavMenu">
         <a href="index.html" class="peps-nav-link" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
@@ -919,8 +1009,27 @@ footer.footer .footer-bottom {
   }
   cleanPageDuplicates();
   window.addEventListener('DOMContentLoaded', cleanPageDuplicates);
-  var obs = new MutationObserver(cleanPageDuplicates);
-  obs.observe(document.documentElement, { childList: true, subtree: true });
+  // Nettoyage unique à l'initialisation et au DOMContentLoaded (CLS = 0, zéro surcharge MutationObserver)
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      var dd = document.getElementById('pepsCalcDropdown');
+      var dm = document.getElementById('pepsDropdownMenu');
+      if (dd) dd.classList.remove('open');
+      if (dm) {
+        dm.style.removeProperty('opacity');
+        dm.style.removeProperty('visibility');
+        dm.style.removeProperty('pointer-events');
+        dm.style.removeProperty('transform');
+      }
+      var toggleBtn = document.getElementById('pepsNavToggle');
+      var navMenuEl = document.getElementById('pepsNavMenu');
+      if (toggleBtn && navMenuEl) {
+        toggleBtn.classList.remove('active');
+        navMenuEl.classList.remove('active');
+      }
+    }
+  });
 
   window.addEventListener('scroll', function() {
     var n = document.getElementById('pepsNavbar');
@@ -971,21 +1080,8 @@ footer.footer .footer-bottom {
 })();
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->
-<header class="navbar" id="profeps-unified-header">
-    <div class="nav-container">
-      <div class="nav-left"><a href="index.html" class="nav-brand-group"><img src="images/prof_eps.png" alt="Prof EPS Maroc" class="nav-brand-logo" onerror="this.onerror=null;this.src='/images/prof_eps.png';"></a></div>
-      <nav class="nav-center" id="nav-menu">
-        <a href="index.html" class="nav-link">Accueil</a>
-        <a href="hub-outils-sport-performance.html" class="nav-link">Calculateurs Sport</a>
-        <a href="cycles-eps-maroc.html" class="nav-link">Cycles EPS</a>
-        <a href="orientations-pedagogiques-eps-2007-2009.html" class="nav-link">Orientations 2007-2009</a>
-        <a href="blog.html" class="nav-link">Blog</a>
-        <a href="contact.html" class="nav-link active">Contact</a>
-      </nav>
-      <div class="nav-right"><a href="hub-outils-sport-performance.html" class="btn-nav-primary">★ Hub Outils</a></div>
-    </div>
-  </header>
-  <main class="flex-grow max-w-4xl mx-auto px-4 py-12 w-full">
+
+  <main class="flex-grow max-w-4xl mx-auto px-4 pt-28 pb-12 w-full">
     <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 sm:p-10 shadow-2xl backdrop-blur-sm">
       <div class="border-b border-slate-800 pb-6 mb-8">
         <span class="inline-block px-3 py-1 bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs font-semibold rounded-full mb-3 uppercase tracking-wider">Support & Échanges</span>
@@ -1002,7 +1098,7 @@ footer.footer .footer-bottom {
       <input type="text" placeholder="Votre nom complet" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-sm text-white">
       <input type="email" placeholder="Votre email" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-sm text-white">
       <textarea rows="4" placeholder="Votre message pour l'équipe ProfEPS..." class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-sm text-white"></textarea>
-      <button onclick="alert('Message enregistré ! Notre équipe vous répondra par email sous 48h.')" type="button" class="w-full py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm rounded-lg transition">Envoyer le message →</button>
+      <button onclick="var msg=document.getElementById('contact-confirm-msg');if(msg){msg.style.display='block';}" type="button" class="w-full py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm rounded-lg transition">Envoyer le message →</button><div id="contact-confirm-msg" role="status" style="display:none;margin-top:0.75rem;padding:0.75rem 1rem;border-radius:0.5rem;background:#f3faf6;border:1px solid #a7d7c5;color:#065f46;font-weight:600;font-size:0.85rem;">✓ Message enregistré ! Notre équipe vous répondra par email sous 48h.</div>
     </div>
   </div>
 </div>
@@ -1013,7 +1109,7 @@ footer.footer .footer-bottom {
     <div class="footer-container">
       <div class="footer-grid">
         <div class="footer-brand" style="display:flex !important;flex-direction:column !important;align-items:flex-start !important;">
-          <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:46px !important;max-height:46px !important;width:auto !important;max-width:155px !important;object-fit:contain !important;align-self:flex-start !important;filter:none !important;border-radius:8px !important;margin:0 0 0.9rem 0 !important;display:block !important;">
+          <img src="images/prof_eps.png" width="150" height="46" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:46px !important;max-height:46px !important;width:auto !important;max-width:155px !important;object-fit:contain !important;align-self:flex-start !important;filter:none !important;border-radius:8px !important;margin:0 0 0.9rem 0 !important;display:block !important;">
           <p data-i18n-fr="La plateforme de référence pour les professeurs d'EPS et candidats aux concours de l'enseignement au Maroc. Générateur pédagogique, calculateurs sportifs et préparation CRMEF." data-i18n-en="The reference platform for PE teachers and CRMEF candidates in Morocco. Educational generator, sports calculators &amp; official curriculum-aligned quizzes." data-i18n-ar="المنصة المرجعية لأساتذة التربية البدنية والمترشحين لمباريات التعليم بالمغرب. مولد وثائق تربوية، حاسبات رياضية واستعداد لمباراة التعليم.">La plateforme de référence pour les professeurs d'EPS et candidats aux concours de l'enseignement au Maroc. Générateur pédagogique, calculateurs sportifs et préparation CRMEF.</p>
           <div class="footer-stats">
             <div class="footer-stat-item">

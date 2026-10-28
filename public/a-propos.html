@@ -801,6 +801,48 @@ footer.footer .footer-bottom {
   }
 }
 </style>
+
+<style id="profeps-phase3-editorial-light">
+  body { background-color: #f8fafc !important; color: #1e293b !important; }
+  section.from-slate-900 {
+    background: linear-gradient(135deg, #fff8f8 0%, #f8fafc 52%, #f3faf6 100%) !important;
+    color: #0f172a !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+  section.from-slate-900 h1 { color: #0f172a !important; }
+  section.from-slate-900 p { color: #334155 !important; }
+  section.from-slate-900 strong { color: #0f172a !important; }
+  section.from-slate-900 .text-slate-300,
+  section.from-slate-900 .text-slate-400 { color: #475569 !important; }
+  section.from-slate-900 .border-slate-800\/80,
+  section.from-slate-900 .border-slate-700 { border-color: #e2e8f0 !important; }
+  section.from-slate-900 .bg-red-500\/15,
+  section.from-slate-900 .bg-red-500\/10 {
+    background: #fff1f2 !important;
+    border-color: #f5c2c7 !important;
+    color: #991b1b !important;
+  }
+  section.from-slate-900 a.bg-white\/10 {
+    background: #ffffff !important;
+    color: #1e293b !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05) !important;
+  }
+  section.from-slate-900 a.bg-white\/10:hover {
+    background: #f8fafc !important;
+    border-color: #991b1b !important;
+    color: #991b1b !important;
+  }
+  div.from-slate-900.rounded-3xl {
+    background: linear-gradient(135deg, #fff8f8 0%, #f3faf6 100%) !important;
+    border: 1px solid #e2e8f0 !important;
+    color: #0f172a !important;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05) !important;
+  }
+  div.from-slate-900.rounded-3xl h3 { color: #0f172a !important; }
+  div.from-slate-900.rounded-3xl p { color: #475569 !important; }
+  div.from-slate-900.rounded-3xl .text-red-400 { color: #991b1b !important; }
+</style>
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col selection:bg-red-600 selection:text-white">
 <!-- PROFEPS_UNIFIED_NAVBAR_START -->
@@ -815,7 +857,7 @@ footer.footer .footer-bottom {
   <div class="peps-navbar" id="pepsNavbar" role="navigation" aria-label="Navigation principale" data-current-file="a-propos.html">
     <div class="peps-nav-container">
       <a href="index.html" class="peps-nav-logo" aria-label="Prof EPS Maroc - Accueil">
-        <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:52px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
+        <img src="images/prof_eps.png" width="156" height="52" decoding="async" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:52px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
       </a>
       <div class="peps-nav-menu" id="pepsNavMenu">
         <a href="index.html" class="peps-nav-link" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
@@ -962,8 +1004,27 @@ footer.footer .footer-bottom {
   }
   cleanPageDuplicates();
   window.addEventListener('DOMContentLoaded', cleanPageDuplicates);
-  var obs = new MutationObserver(cleanPageDuplicates);
-  obs.observe(document.documentElement, { childList: true, subtree: true });
+  // Nettoyage unique à l'initialisation et au DOMContentLoaded (CLS = 0, zéro surcharge MutationObserver)
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      var dd = document.getElementById('pepsCalcDropdown');
+      var dm = document.getElementById('pepsDropdownMenu');
+      if (dd) dd.classList.remove('open');
+      if (dm) {
+        dm.style.removeProperty('opacity');
+        dm.style.removeProperty('visibility');
+        dm.style.removeProperty('pointer-events');
+        dm.style.removeProperty('transform');
+      }
+      var toggleBtn = document.getElementById('pepsNavToggle');
+      var navMenuEl = document.getElementById('pepsNavMenu');
+      if (toggleBtn && navMenuEl) {
+        toggleBtn.classList.remove('active');
+        navMenuEl.classList.remove('active');
+      }
+    }
+  });
 
   window.addEventListener('scroll', function() {
     var n = document.getElementById('pepsNavbar');
@@ -1015,43 +1076,10 @@ footer.footer .footer-bottom {
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->
 
-  <!-- Navbar Principale -->
-  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
-      <a href="index.html" class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center text-white font-black text-base shadow-sm">
-          PE
-        </div>
-        <div>
-          <span class="font-extrabold text-slate-900 text-lg tracking-tight block leading-none">
-            ProfEPS<span class="text-red-600">.ma</span>
-          </span>
-          <span class="text-xs text-slate-500 font-medium block mt-0.5">
-            Éducation Physique &amp; Sciences du Sport au Maroc
-          </span>
-        </div>
-      </a>
-
-      <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-700">
-        <a href="index.html" class="hover:text-red-600 transition-colors">Accueil</a>
-        <a href="orientations-pedagogiques-eps-2007-2009.html" class="hover:text-red-600 transition-colors">Orientations 2007-2009</a>
-        <a href="hub-outils-sport-performance.html" class="hover:text-red-600 transition-colors">Calculateurs Sport</a>
-        <a href="bibliotheque-numerique-eps.html" class="hover:text-red-600 transition-colors">Bibliothèque Numérique</a>
-        <a href="blog.html" class="hover:text-red-600 transition-colors">Articles &amp; Blog</a>
-        <a href="a-propos.html" class="text-red-600 font-bold border-b-2 border-red-600 pb-0.5">À Propos</a>
-        <a href="contact.html" class="hover:text-red-600 transition-colors">Contact</a>
-      </nav>
-
-      <div class="flex items-center gap-3">
-        <a href="hub-outils-sport-performance.html" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-bold transition-all shadow-xs">
-          ★ Hub des Calculateurs
-        </a>
-      </div>
-    </div>
-  </header>
+  
 
   <!-- Hero Section -->
-  <section class="bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 text-white py-16 px-4 sm:px-6 lg:px-8 border-b border-slate-700">
+  <section class="bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 text-white pt-28 pb-14 px-4 sm:px-6 lg:px-8 border-b border-slate-200">
     <div class="max-w-4xl mx-auto">
       <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-6">
         <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-gradient-to-tr from-red-600 to-amber-500 p-1 shrink-0 shadow-xl">
@@ -1189,7 +1217,7 @@ footer.footer .footer-bottom {
     <div class="footer-container">
       <div class="footer-grid">
         <div class="footer-brand" style="display:flex !important;flex-direction:column !important;align-items:flex-start !important;">
-          <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:46px !important;max-height:46px !important;width:auto !important;max-width:155px !important;object-fit:contain !important;align-self:flex-start !important;filter:none !important;border-radius:8px !important;margin:0 0 0.9rem 0 !important;display:block !important;">
+          <img src="images/prof_eps.png" width="150" height="46" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:46px !important;max-height:46px !important;width:auto !important;max-width:155px !important;object-fit:contain !important;align-self:flex-start !important;filter:none !important;border-radius:8px !important;margin:0 0 0.9rem 0 !important;display:block !important;">
           <p data-i18n-fr="La plateforme de référence pour les professeurs d'EPS et candidats aux concours de l'enseignement au Maroc. Générateur pédagogique, calculateurs sportifs et préparation CRMEF." data-i18n-en="The reference platform for PE teachers and CRMEF candidates in Morocco. Educational generator, sports calculators &amp; official curriculum-aligned quizzes." data-i18n-ar="المنصة المرجعية لأساتذة التربية البدنية والمترشحين لمباريات التعليم بالمغرب. مولد وثائق تربوية، حاسبات رياضية واستعداد لمباراة التعليم.">La plateforme de référence pour les professeurs d'EPS et candidats aux concours de l'enseignement au Maroc. Générateur pédagogique, calculateurs sportifs et préparation CRMEF.</p>
           <div class="footer-stats">
             <div class="footer-stat-item">

@@ -828,6 +828,26 @@ footer.footer, #profeps-unified-footer {
   }
 
   // Scroll Navbar Effect
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      var dd = document.getElementById('pepsCalcDropdown');
+      var dm = document.getElementById('pepsDropdownMenu');
+      if (dd) dd.classList.remove('open');
+      if (dm) {
+        dm.style.removeProperty('opacity');
+        dm.style.removeProperty('visibility');
+        dm.style.removeProperty('pointer-events');
+        dm.style.removeProperty('transform');
+      }
+      var toggleBtn = document.getElementById('pepsNavToggle');
+      var navMenuEl = document.getElementById('pepsNavMenu');
+      if (toggleBtn && navMenuEl) {
+        toggleBtn.classList.remove('active');
+        navMenuEl.classList.remove('active');
+      }
+    }
+  });
+
   window.addEventListener('scroll', function() {
     var nav = document.getElementById('pepsNavbar');
     if (nav) {
@@ -2102,7 +2122,7 @@ footer.footer, #profeps-unified-footer {
     <div class="footer-container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:46px !important;max-height:46px !important;width:auto !important;max-width:155px !important;object-fit:contain !important;display:block !important;">
+          <img src="images/prof_eps.png" width="150" height="46" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:46px !important;max-height:46px !important;width:auto !important;max-width:155px !important;object-fit:contain !important;display:block !important;">
           <p data-i18n-fr="La plateforme de référence pour les professeurs d'EPS et candidats aux concours de l'enseignement au Maroc. Générateur pédagogique, calculateurs sportifs et préparation CRMEF." data-i18n-en="The reference platform for PE teachers and CRMEF candidates in Morocco. Educational generator, sports calculators &amp; official curriculum-aligned quizzes." data-i18n-ar="المنصة المرجعية لأساتذة التربية البدنية والمترشحين لمباريات التعليم بالمغرب. مولد وثائق تربوية، حاسبات رياضية واستعداد لمباراة التعليم.">La plateforme de référence pour les professeurs d'EPS et candidats aux concours de l'enseignement au Maroc. Générateur pédagogique, calculateurs sportifs et préparation CRMEF.</p>
           <div class="footer-stats">
             <div class="footer-stat-item">
