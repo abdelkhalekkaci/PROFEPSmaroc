@@ -335,7 +335,7 @@ nav.navbar, #navbar, .navbar-decoy {
   border-radius: 2px !important;
 }
 
-/* ═══ 4. SOUS-BARRE DE NAVIGATION CRMEF (STICKY 80PX) ═══ */
+/* ═══ 4. SOUS-BARRE DE NAVIGATION CRMEF (STICKY 80PX · GRILLE COMPACTE 2 LIGNES SANS SCROLLBAR) ═══ */
 .peps-crmef-subnav {
   position: sticky !important;
   top: 80px !important;
@@ -344,13 +344,83 @@ nav.navbar, #navbar, .navbar-decoy {
   backdrop-filter: blur(16px) !important;
   -webkit-backdrop-filter: blur(16px) !important;
   border-bottom: 1px solid rgba(226, 232, 240, 0.95) !important;
-  box-shadow: 0 4px 14px -3px rgba(15, 23, 42, 0.04) !important;
+  box-shadow: 0 4px 14px -3px rgba(15, 23, 42, 0.05) !important;
+  overflow: visible !important;
+}
+.peps-crmef-subnav,
+.peps-crmef-subnav * {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+.peps-crmef-subnav::-webkit-scrollbar,
+.peps-crmef-subnav *::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+.peps-crmef-subnav-inner {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0.45rem 1rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.38rem !important;
+}
+.peps-crmef-pills-grid {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.32rem 0.42rem !important;
+  width: 100% !important;
+}
+.peps-subnav-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.28rem !important;
+  padding: 0.24rem 0.62rem !important;
+  border-radius: 0.5rem !important;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 0.73rem !important;
+  font-weight: 700 !important;
+  line-height: 1.25 !important;
+  white-space: nowrap !important;
+  text-decoration: none !important;
+  color: #334155 !important;
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.peps-subnav-pill:hover {
+  color: #991b1b !important;
+  background: #fef2f2 !important;
+  border-color: rgba(153, 27, 27, 0.3) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 6px rgba(153, 27, 27, 0.08) !important;
+}
+.peps-subnav-pill.peps-pill-eps:not(.active) {
+  color: #991b1b !important;
+  background: #fff1f2 !important;
+  border-color: rgba(153, 27, 27, 0.35) !important;
+  font-weight: 800 !important;
+}
+.peps-subnav-pill.active {
+  background: linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #7f1d1d !important;
+  font-weight: 800 !important;
+  box-shadow: 0 3px 10px rgba(153, 27, 27, 0.24) !important;
 }
 .specialty-card {
-  scroll-margin-top: 145px !important;
+  scroll-margin-top: 155px !important;
 }
-#specialites-section {
-  scroll-margin-top: 140px !important;
+#specialites-section,
+#tronc-commun {
+  scroll-margin-top: 150px !important;
 }
 
 
@@ -436,7 +506,7 @@ footer.footer, #profeps-unified-footer {
   padding: 3.5rem 2rem 0 !important;
   margin-top: 4rem !important;
   border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
-  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   box-sizing: border-box !important;
   width: 100% !important;
   display: block !important;
@@ -448,8 +518,8 @@ footer.footer, #profeps-unified-footer {
 }
 #profeps-unified-footer .footer-grid {
   display: grid !important;
-  grid-template-columns: 1.65fr 0.95fr 1.15fr 1.45fr 1fr !important;
-  gap: 2.25rem !important;
+  grid-template-columns: 1.45fr 0.85fr 1.65fr 1.3fr 0.95fr !important;
+  gap: 2rem !important;
   padding-bottom: 2.75rem !important;
   align-items: start !important;
 }
@@ -469,7 +539,7 @@ footer.footer, #profeps-unified-footer {
 }
 #profeps-unified-footer .footer-brand p {
   color: rgba(255, 255, 255, 0.72) !important;
-  font-size: 0.84rem !important;
+  font-size: 0.83rem !important;
   line-height: 1.65 !important;
   margin: 0 0 1.25rem 0 !important;
 }
@@ -483,13 +553,13 @@ footer.footer, #profeps-unified-footer {
   flex-direction: column !important;
 }
 #profeps-unified-footer .footer-stat-num {
-  font-size: 1.25rem !important;
+  font-size: 1.2rem !important;
   font-weight: 900 !important;
   color: #c1272d !important;
   line-height: 1 !important;
 }
 #profeps-unified-footer .footer-stat-lbl {
-  font-size: 0.7rem !important;
+  font-size: 0.68rem !important;
   color: rgba(255, 255, 255, 0.6) !important;
   margin-top: 0.2rem !important;
   text-transform: uppercase !important;
@@ -497,11 +567,11 @@ footer.footer, #profeps-unified-footer {
 }
 #profeps-unified-footer .footer-col-title {
   color: #ffffff !important;
-  font-size: 0.8rem !important;
+  font-size: 0.78rem !important;
   font-weight: 800 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.08em !important;
-  margin-bottom: 1.1rem !important;
+  margin: 0 0 1rem 0 !important;
   position: relative !important;
   padding-bottom: 0.5rem !important;
 }
@@ -520,23 +590,39 @@ footer.footer, #profeps-unified-footer {
   padding: 0 !important;
   margin: 0 !important;
 }
+#profeps-unified-footer .footer-col ul.footer-crmef-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 0.42rem 0.85rem !important;
+}
+#profeps-unified-footer .footer-col ul.footer-crmef-grid li.footer-crmef-hub-item {
+  grid-column: 1 / -1 !important;
+  margin-bottom: 0.25rem !important;
+}
 #profeps-unified-footer .footer-col ul li {
-  margin-bottom: 0.55rem !important;
+  margin-bottom: 0.5rem !important;
+}
+#profeps-unified-footer .footer-col ul.footer-crmef-grid li {
+  margin-bottom: 0 !important;
 }
 #profeps-unified-footer .footer-col ul li a {
-  color: rgba(255, 255, 255, 0.72) !important;
+  color: rgba(255, 255, 255, 0.74) !important;
   text-decoration: none !important;
-  font-size: 0.82rem !important;
+  font-size: 0.8rem !important;
   transition: all 0.18s ease !important;
   display: inline-block !important;
+  line-height: 1.35 !important;
 }
 #profeps-unified-footer .footer-col ul li a:hover {
   color: #ffffff !important;
   transform: translateX(3px) !important;
 }
 #profeps-unified-footer .footer-hub-highlight {
-  color: #38bdf8 !important;
-  font-weight: 700 !important;
+  color: #4ade80 !important;
+  font-weight: 800 !important;
+}
+#profeps-unified-footer .footer-hub-highlight:hover {
+  color: #86efac !important;
 }
 #profeps-unified-footer .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
@@ -567,9 +653,6 @@ footer.footer, #profeps-unified-footer {
 
 // ═══ 4. NAVBAR MAÎTRE HTML ═══
 function buildNavbarHtml(fileName) {
-  const isGen = fileName === 'generateur.html';
-  const isBlog = fileName === 'blog.html';
-  const isPrep = true;
   const dropdownLinks = DROPDOWN_ITEMS.map((item) => {
     const cls = item.isHub ? 'peps-dropdown-item peps-dropdown-hub' : 'peps-dropdown-item';
     return `            <a href="${item.href}" class="${cls}" data-i18n-fr="${item.fr.replace(/"/g, '&quot;')}" data-i18n-en="${item.en.replace(/"/g, '&quot;')}" data-i18n-ar="${item.ar.replace(/"/g, '&quot;')}">${item.fr}</a>`;
@@ -582,18 +665,19 @@ function buildNavbarHtml(fileName) {
         <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:48px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
       </a>
       <div class="peps-nav-menu" id="pepsNavMenu">
-        <a href="generateur.html" class="peps-nav-link ${isGen ? 'active' : ''}" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
-        <a href="blog.html" class="peps-nav-link ${isBlog ? 'active' : ''}" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
-        <a href="concours-crmef-hub.html" class="peps-nav-link ${isPrep ? 'active' : ''}" data-i18n-fr="Préparation" data-i18n-en="Preparation" data-i18n-ar="التحضير">Préparation</a>
+        <a href="index.html" class="peps-nav-link" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
+        <a href="generateur.html" class="peps-nav-link" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
         <div class="peps-dropdown" id="pepsCalcDropdown">
           <a href="hub-outils-sport-performance.html" class="peps-nav-link" id="pepsDropdownTrigger">
-            <span id="pepsDropdownTriggerText" data-i18n-fr="Calculateurs" data-i18n-en="Calculators" data-i18n-ar="الحاسبات">Calculateurs</span>
+            <span id="pepsDropdownTriggerText" data-i18n-fr="Calculateurs Sport" data-i18n-en="Sports Calculators" data-i18n-ar="الحاسبات الرياضية">Calculateurs Sport</span>
             <span class="peps-dropdown-caret">▾</span>
           </a>
           <div class="peps-dropdown-menu" id="pepsDropdownMenu">
 ${dropdownLinks}
           </div>
         </div>
+        <a href="concours-crmef-hub.html" class="peps-nav-link active" data-i18n-fr="Préparation CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparation CRMEF</a>
+        <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
       </div>
       <div class="peps-nav-right">
         <div dir="ltr" class="peps-lang-switch" aria-label="Sélecteur de langue">
@@ -612,10 +696,10 @@ ${dropdownLinks}
 }
 
 
-// ═══ 5. SOUS-BARRE DE NAVIGATION CRMEF MAÎTRE (13 DISCIPLINES + TRONC COMMUN) ═══
+// ═══ 5. SOUS-BARRE DE NAVIGATION CRMEF MAÎTRE (13 DISCIPLINES + TRONC COMMUN · GRILLE COMPACTE 2 LIGNES) ═══
 const CRMEF_NAV_ITEMS = [
   { key: "hub", label: "🏛️ Hub National", href: "concours-crmef-hub.html", anchor: "top" },
-  { key: "eps", label: "🏃 EPS", didac: "qcm-didactique-eps-maroc.html", spec: "qcm-specialite-eps-maroc.html", anchor: "card-eps" },
+  { key: "eps", label: "🏃 EPS", didac: "qcm-didactique-eps-maroc.html", spec: "qcm-specialite-eps-maroc.html", anchor: "card-eps", isEps: true },
   { key: "se", label: "📚 Tronc Commun", href: "qcm-sciences-education-crmef.html", anchor: "tronc-commun" },
   { key: "primaire", label: "🎒 Primaire", didac: "qcm-didactique-primaire-maroc.html", spec: "qcm-specialite-primaire-maroc.html", anchor: "card-primaire" },
   { key: "maths", label: "📐 Maths", didac: "qcm-didactique-maths-maroc.html", spec: "qcm-specialite-maths-maroc.html", anchor: "card-maths" },
@@ -634,8 +718,9 @@ const CRMEF_NAV_ITEMS = [
 function buildCrmefSubnavHtml(fileName) {
   const isHub = fileName === "concours-crmef-hub.html" || fileName === "qcm-concours-crmef.html";
 
-  // Identifier la discipline courante et le type dépreuve
   let currentKey = "hub";
+  let isDidactique = false;
+  let isSpecialite = false;
 
   if (isHub) {
     currentKey = "hub";
@@ -645,90 +730,64 @@ function buildCrmefSubnavHtml(fileName) {
     for (const item of CRMEF_NAV_ITEMS) {
       if (item.didac && fileName === item.didac) {
         currentKey = item.key;
+        isDidactique = true;
         break;
       }
       if (item.spec && fileName === item.spec) {
         currentKey = item.key;
+        isSpecialite = true;
         break;
       }
     }
   }
 
-  // Construction des liens de disciplines
   const linksHtml = CRMEF_NAV_ITEMS.map(item => {
     const isActive = item.key === currentKey;
     let targetUrl = item.href;
-    if (!targetUrl) {
-      if (isHub) {
-        targetUrl = `#${item.anchor}`;
-      } else {
-        targetUrl = item.didac || item.spec;
-      }
+    if (isHub && item.key !== "hub") {
+      targetUrl = `#${item.anchor}`;
+    } else if (!targetUrl) {
+      targetUrl = item.didac || item.spec;
     }
 
-    const baseClass = "px-3.5 py-1.5 rounded-full transition-all whitespace-nowrap text-xs font-bold shrink-0";
-    const activeClass = "bg-slate-900 text-white shadow-xs font-black ring-1 ring-slate-900/10";
-    const inactiveClass = "text-slate-600 hover:text-slate-900 hover:bg-slate-100";
+    const epsClass = item.isEps ? " peps-pill-eps" : "";
+    const activeClass = isActive ? " active" : "";
 
-    return `        <a href="${targetUrl}" class="${baseClass} ${isActive ? activeClass : inactiveClass}">
-          ${item.label}
-        </a>`;
+    return `        <a href="${targetUrl}" data-subnav-key="${item.key}" class="peps-subnav-pill${epsClass}${activeClass}">${item.label}</a>`;
   }).join("\n");
+
+  let dualToggleHtml = "";
+  const currentDiscipline = CRMEF_NAV_ITEMS.find(d => d.key === currentKey);
+  if (currentDiscipline && currentDiscipline.didac && currentDiscipline.spec) {
+    dualToggleHtml = `
+      <div class="flex items-center justify-center gap-1.5 bg-slate-100/90 p-1 rounded-lg border border-slate-200/80 text-xs">
+        <a href="${currentDiscipline.didac}" class="px-3 py-1 rounded-md font-black transition-all ${isDidactique ? "bg-[#991b1b] text-white shadow-2xs" : "text-slate-600 hover:text-slate-900"}">
+          📘 Didactique
+        </a>
+        <a href="${currentDiscipline.spec}" class="px-3 py-1 rounded-md font-black transition-all ${isSpecialite ? "bg-white text-[#0f172a] border border-slate-700 shadow-2xs" : "text-slate-600 hover:text-slate-900"}">
+          📗 Spécialité
+        </a>
+      </div>`;
+  }
 
   return `  <!-- ================= CRMEF DISCIPLINE STICKY SUBNAV ================= -->
   <div class="peps-crmef-subnav" role="navigation" aria-label="Sous-navigation des Disciplines CRMEF">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-start md:justify-center gap-2 overflow-x-auto scrollbar-none">
-      <div class="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-0.5 shrink-0">
+    <div class="peps-crmef-subnav-inner">
+      <div class="peps-crmef-pills-grid">
 ${linksHtml}
-      </div>
+      </div>${dualToggleHtml}
     </div>
   </div>`;
 }
 
-// ═══ 5B. TOGGLE DIDACTIQUE / SPÉCIALITÉ (EN HAUT À GAUCHE SOUS LES NAVBARS) ═══
-function buildDisciplineToggleHtml(fileName) {
-  let currentKey = null;
-  let isDidactique = false;
-  let isSpecialite = false;
-
-  for (const item of CRMEF_NAV_ITEMS) {
-    if (item.didac && fileName === item.didac) {
-      currentKey = item.key;
-      isDidactique = true;
-      break;
-    }
-    if (item.spec && fileName === item.spec) {
-      currentKey = item.key;
-      isSpecialite = true;
-      break;
-    }
-  }
-
-  if (!currentKey) return "";
-  const currentDiscipline = CRMEF_NAV_ITEMS.find(d => d.key === currentKey);
-  if (!currentDiscipline || !currentDiscipline.didac || !currentDiscipline.spec) return "";
-
-  return `  <!-- ================= TOGGLE DIDACTIQUE / SPÉCIALITÉ (HAUT GAUCHE SOUS NAVBARS) ================= -->
-  <div class="peps-discipline-toggle-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3 pb-1 flex items-center justify-start">
-    <div class="inline-flex items-center gap-1.5 bg-slate-100/90 p-1 rounded-2xl border border-slate-200 shadow-2xs">
-      <a href="${currentDiscipline.didac}" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center gap-1.5 ${isDidactique ? 'bg-[#991b1b] text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'}">
-        <span>📘</span> <span>Didactique</span>
-      </a>
-      <a href="${currentDiscipline.spec}" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center gap-2 ${isSpecialite ? 'bg-white text-slate-900 border-2 border-[#991b1b] shadow-xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'}">
-        <span>📗</span> <span>Spécialité</span>
-      </a>
-    </div>
-  </div>`;
-}
-
-// ═══ 6. FOOTER MAÎTRE UNIFIÉ À 5 COLONNES ═══
+// ═══ 6. FOOTER MAÎTRE UNIFIÉ À 5 COLONNES (IDENTIQUE SUR TOUT LE SITE) ═══
 function buildFooterHtml() {
   return `<footer class="footer" id="profeps-unified-footer">
     <div class="footer-container">
       <div class="footer-grid">
         <div class="footer-brand">
           <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:46px !important;max-height:46px !important;width:auto !important;max-width:155px !important;object-fit:contain !important;display:block !important;">
-          <p data-i18n-fr="La plateforme de référence pour les professeurs d'EPS et candidats aux concours de l'enseignement au Maroc. QCM conformes aux cadres de référence officiels du MENPS." data-i18n-en="The reference platform for PE teachers and CRMEF candidates in Morocco. Official curriculum-aligned quizzes." data-i18n-ar="المنصة المرجعية لأساتذة التربية البدنية والمترشحين لمباريات التعليم بالمغرب. أسئلة QCM متوافقة مع الأطر المرجعية الرسمية.">La plateforme de référence pour les professeurs d'EPS et candidats aux concours de l'enseignement au Maroc. QCM conformes aux cadres de référence officiels du MENPS.</p>
+          <p data-i18n-fr="La plateforme de référence pour les professeurs d'EPS et candidats aux concours de l'enseignement au Maroc. Générateur pédagogique, calculateurs sportifs et préparation CRMEF." data-i18n-en="The reference platform for PE teachers and CRMEF candidates in Morocco. Educational generator, sports calculators &amp; official curriculum-aligned quizzes." data-i18n-ar="المنصة المرجعية لأساتذة التربية البدنية والمترشحين لمباريات التعليم بالمغرب. مولد وثائق تربوية، حاسبات رياضية واستعداد لمباراة التعليم.">La plateforme de référence pour les professeurs d'EPS et candidats aux concours de l'enseignement au Maroc. Générateur pédagogique, calculateurs sportifs et préparation CRMEF.</p>
           <div class="footer-stats">
             <div class="footer-stat-item">
               <span class="footer-stat-num">16+</span>
@@ -749,21 +808,32 @@ function buildFooterHtml() {
           <p class="footer-col-title" data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</p>
           <ul>
             <li><a href="index.html" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a></li>
-            <li><a href="concours-crmef-hub.html" data-i18n-fr="Hub Concours CRMEF" data-i18n-en="CRMEF Hub" data-i18n-ar="بوابة مباراة التعليم">Hub Concours CRMEF</a></li>
+            <li><a href="concours-crmef-hub.html" data-i18n-fr="Préparation CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparation CRMEF</a></li>
             <li><a href="generateur.html" data-i18n-fr="Générateur PDF" data-i18n-en="PDF Generator" data-i18n-ar="مولد الوثائق PDF">Générateur PDF</a></li>
             <li><a href="blog.html" data-i18n-fr="Articles &amp; Blog" data-i18n-en="Articles &amp; Blog" data-i18n-ar="المقالات والمدونة">Articles &amp; Blog</a></li>
+            <li><a href="bibliotheque-numerique-eps.html" data-i18n-fr="Bibliothèque EPS" data-i18n-en="PE Digital Library" data-i18n-ar="المكتبة الرقمية">Bibliothèque EPS</a></li>
             <li><a href="a-propos.html" data-i18n-fr="À propos" data-i18n-en="About Us" data-i18n-ar="من نحن">À propos</a></li>
           </ul>
         </div>
 
-        <div class="footer-col">
-          <p class="footer-col-title" data-i18n-fr="CONCOURS CRMEF" data-i18n-en="CRMEF EXAM" data-i18n-ar="مباراة التعليم">CONCOURS CRMEF</p>
-          <ul>
-            <li><a href="qcm-sciences-education-crmef.html" data-i18n-fr="Tronc Commun (Sciences Éduc)" data-i18n-en="Education Sciences" data-i18n-ar="علوم التربية والديداكتيك">Tronc Commun (Sciences Éduc)</a></li>
-            <li><a href="qcm-didactique-eps-maroc.html" data-i18n-fr="Didactique EPS" data-i18n-en="PE Didactics" data-i18n-ar="ديداكتيك التربية البدنية">Didactique EPS</a></li>
-            <li><a href="qcm-specialite-eps-maroc.html" data-i18n-fr="Spécialité EPS" data-i18n-en="PE Specialty" data-i18n-ar="تخصص التربية البدنية">Spécialité EPS</a></li>
-            <li><a href="qcm-didactique-primaire-maroc.html" data-i18n-fr="Didactique Primaire (TaRL)" data-i18n-en="Primary Education" data-i18n-ar="ديداكتيك الابتدائي">Didactique Primaire (TaRL)</a></li>
-            <li><a href="qcm-specialite-maths-maroc.html" data-i18n-fr="Spécialité Mathématiques" data-i18n-en="Mathematics" data-i18n-ar="تخصص الرياضيات">Spécialité Mathématiques</a></li>
+        <div class="footer-col" id="footer-col-crmef">
+          <p class="footer-col-title" data-i18n-fr="HUB CONCOURS CRMEF" data-i18n-en="CRMEF EXAM HUB" data-i18n-ar="بوابة مباراة التعليم">HUB CONCOURS CRMEF</p>
+          <ul class="footer-crmef-grid">
+            <li class="footer-crmef-hub-item"><a href="concours-crmef-hub.html" class="footer-hub-highlight" data-i18n-fr="★ Hub Concours CRMEF (Toutes Filières)" data-i18n-en="★ CRMEF Exam Hub (All Specialties)" data-i18n-ar="★ بوابة مباراة التعليم (جميع التخصصات)">★ Hub Concours CRMEF (Toutes Filières)</a></li>
+            <li><a href="qcm-sciences-education-crmef.html" data-i18n-fr="Tronc Commun (SE)" data-i18n-en="Education Sciences" data-i18n-ar="علوم التربية">Tronc Commun (SE)</a></li>
+            <li><a href="qcm-didactique-eps-maroc.html" data-i18n-fr="EPS (Sport)" data-i18n-en="PE &amp; Sport" data-i18n-ar="التربية البدنية">EPS (Sport)</a></li>
+            <li><a href="qcm-didactique-primaire-maroc.html" data-i18n-fr="Primaire (TaRL)" data-i18n-en="Primary (TaRL)" data-i18n-ar="التعليم الابتدائي">Primaire (TaRL)</a></li>
+            <li><a href="qcm-didactique-maths-maroc.html" data-i18n-fr="Mathématiques" data-i18n-en="Mathematics" data-i18n-ar="الرياضيات">Mathématiques</a></li>
+            <li><a href="qcm-didactique-physique-chimie-maroc.html" data-i18n-fr="Physique-Chimie" data-i18n-en="Physics &amp; Chemistry" data-i18n-ar="الفيزياء والكيمياء">Physique-Chimie</a></li>
+            <li><a href="qcm-didactique-svt-maroc.html" data-i18n-fr="SVT" data-i18n-en="Life &amp; Earth Sciences" data-i18n-ar="علوم الحياة والأرض">SVT</a></li>
+            <li><a href="qcm-didactique-francais-maroc.html" data-i18n-fr="Français" data-i18n-en="French" data-i18n-ar="اللغة الفرنسية">Français</a></li>
+            <li><a href="qcm-didactique-arabe-maroc.html" data-i18n-fr="Arabe" data-i18n-en="Arabic" data-i18n-ar="اللغة العربية">Arabe</a></li>
+            <li><a href="qcm-didactique-histoire-geographie-maroc.html" data-i18n-fr="Histoire-Géo" data-i18n-en="History &amp; Geography" data-i18n-ar="التاريخ والجغرافيا">Histoire-Géo</a></li>
+            <li><a href="qcm-didactique-philosophie-maroc.html" data-i18n-fr="Philosophie" data-i18n-en="Philosophy" data-i18n-ar="الفلسفة">Philosophie</a></li>
+            <li><a href="qcm-didactique-informatique-maroc.html" data-i18n-fr="Informatique" data-i18n-en="Computer Science" data-i18n-ar="الإعلاميات">Informatique</a></li>
+            <li><a href="qcm-didactique-anglais-maroc.html" data-i18n-fr="Anglais" data-i18n-en="English" data-i18n-ar="اللغة الإنجليزية">Anglais</a></li>
+            <li><a href="qcm-didactique-education-islamique-maroc.html" data-i18n-fr="Éduc. Islamique" data-i18n-en="Islamic Education" data-i18n-ar="التربية الإسلامية">Éduc. Islamique</a></li>
+            <li><a href="qcm-didactique-economie-gestion-maroc.html" data-i18n-fr="Éco-Gestion" data-i18n-en="Economics &amp; Mgmt" data-i18n-ar="الاقتصاد والتدبير">Éco-Gestion</a></li>
           </ul>
         </div>
 
@@ -774,6 +844,7 @@ function buildFooterHtml() {
             <li><a href="calculateur-vma.html" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS (VMA) Calculator" data-i18n-ar="حاسبة السرعة VMA">Calculateur VMA</a></li>
             <li><a href="calculateur-vdot-asr-endurance.html" data-i18n-fr="Calculateur VO2 Max &amp; VDOT" data-i18n-en="VO2 Max &amp; VDOT" data-i18n-ar="حاسبة VO2 Max و VDOT">Calculateur VO2 Max &amp; VDOT</a></li>
             <li><a href="calculateur-asr-reserve-vitesse.html" data-i18n-fr="Réserve Anaérobie (ASR)" data-i18n-en="Speed Reserve (ASR)" data-i18n-ar="احتياطي السرعة ASR">Réserve Anaérobie (ASR)</a></li>
+            <li><a href="calculateur-frequence-cardiaque-karvonen.html" data-i18n-fr="Fréquence Cardiaque Karvonen" data-i18n-en="Heart Rate (Karvonen)" data-i18n-ar="نبضات القلب Karvonen">Fréquence Cardiaque Karvonen</a></li>
             <li><a href="calculateur-charge-rpe-foster-acwr.html" data-i18n-fr="Charge RPE Foster &amp; ACWR" data-i18n-en="Foster RPE &amp; ACWR" data-i18n-ar="حمل التدريب RPE و ACWR">Charge RPE Foster &amp; ACWR</a></li>
           </ul>
         </div>
@@ -834,6 +905,24 @@ const MASTER_JS = `<script id="profeps-master-unifier-js">
         }
       });
     }
+
+    // Interaction fluide des pastilles de disciplines sur le Hub CRMEF
+    document.querySelectorAll('.peps-subnav-pill').forEach(function(pill) {
+      pill.addEventListener('click', function() {
+        var href = pill.getAttribute('href') || '';
+        if (href.charAt(0) === '#') {
+          document.querySelectorAll('.peps-subnav-pill').forEach(function(p) {
+            p.classList.remove('active');
+          });
+          pill.classList.add('active');
+          var searchInput = document.getElementById('specialty-search');
+          if (searchInput && searchInput.value) {
+            searchInput.value = '';
+            if (typeof window.filterSpecialties === 'function') window.filterSpecialties();
+          }
+        }
+      });
+    });
   }
 
   // Hamburger mobile
@@ -919,8 +1008,6 @@ TARGET_FILES.forEach((fileName) => {
     // 1. Nettoyer les anciens blocs d'unification
     html = html.replace(/<!-- PROFEPS_UNIFIED_NAVBAR_START -->[\s\S]*?<!-- PROFEPS_UNIFIED_NAVBAR_END -->\s*/g, '');
     html = html.replace(/<!-- ================= CRMEF DISCIPLINE STICKY SUBNAV ================= -->[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/g, '');
-    html = html.replace(/<!-- ================= TOGGLE DIDACTIQUE \/ SPÉCIALITÉ \(HAUT GAUCHE SOUS NAVBARS\) ================= -->[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/g, '');
-    html = html.replace(/<div class="peps-discipline-toggle-container[\s\S]*?<\/div>\s*<\/div>/g, '');
     html = html.replace(/<style id="profeps-master-unifier-css">[\s\S]*?<\/style>\s*/g, '');
     html = html.replace(/<script id="profeps-master-unifier-js">[\s\S]*?<\/script>\s*/g, '');
 
@@ -936,9 +1023,8 @@ TARGET_FILES.forEach((fileName) => {
       html = html.replace(/<\/head>/i, `${MASTER_CSS}\n</head>`);
     }
 
-    // 4. Injecter la Navbar Maître 80px + la sous-barre sticky + le toggle discipline + le JS maître après <body...>
-    const toggleHtml = buildDisciplineToggleHtml(fileName);
-    const newNav = `${buildNavbarHtml(fileName)}\n${buildCrmefSubnavHtml(fileName)}${toggleHtml ? `\n${toggleHtml}` : ''}\n${MASTER_JS}`;
+    // 4. Injecter la Navbar Maître 80px + la sous-barre sticky + le JS maître après <body...>
+    const newNav = `${buildNavbarHtml(fileName)}\n${buildCrmefSubnavHtml(fileName)}\n${MASTER_JS}`;
     if (/<body[^>]*>/i.test(html)) {
       html = html.replace(/<body([^>]*)>/i, (m, attrs) => {
         // Garantir que body a bg-slate-50 et le padding requis
