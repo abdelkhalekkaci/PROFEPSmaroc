@@ -1689,6 +1689,7 @@ footer.footer .footer-bottom {
       <div id="navMenu" class="nav-menu"></div>
       <div id="navRightDecoy" class="nav-right"></div>
       <button id="navToggle" class="nav-toggle" type="button"></button>
+      <div id="navBackdrop" class="nav-backdrop"></div>
     </div>
   </nav>
   <div class="peps-navbar" id="pepsNavbar" role="navigation" aria-label="Navigation principale" data-current-file="generateur.html">
@@ -1754,6 +1755,7 @@ footer.footer .footer-bottom {
   };
   window.supabase = { createClient: function() { return dummyClient; } };
   window.supabaseClient = dummyClient;
+  window.ProfEPS = window.ProfEPS || { getSupabase: function() { return dummyClient; }, saveGeneration: function() { return Promise.resolve(); } };
 
   var dropdown = document.getElementById('pepsCalcDropdown');
   var dropdownMenu = document.getElementById('pepsDropdownMenu');
@@ -1919,9 +1921,9 @@ footer.footer .footer-bottom {
             <!-- FORMULAIRE -->
             <div class="card">
                 <div class="tabs">
-                    <button class="tab active" data-type="fiche"><span class="tab-icon">📋</span>Fiche</button>
-                    <button class="tab" data-type="projet"><span class="tab-icon">📊</span>Projet</button>
-                    <button class="tab" data-type="grille"><span class="tab-icon">📝</span>Grille</button>
+                    <button type="button" class="tab active" data-type="fiche"><span class="tab-icon">📋</span>Fiche</button>
+                    <button type="button" class="tab" data-type="projet"><span class="tab-icon">📊</span>Projet</button>
+                    <button type="button" class="tab" data-type="grille"><span class="tab-icon">📝</span>Grille</button>
                 </div>
                 <div class="card-body">
                     <form id="form">
@@ -2082,8 +2084,8 @@ footer.footer .footer-bottom {
                             <span id="downloadSectionTitle">Projet de Cycle</span>
                         </div>
                         <div class="download-buttons">
-                            <button class="btn btn-word" id="downloadWord">📥 Word</button>
-                            <button class="btn btn-pdf" id="downloadPDF">📄 PDF</button>
+                            <button type="button" class="btn btn-word" id="downloadWord">📥 Word</button>
+                            <button type="button" class="btn btn-pdf" id="downloadPDF">📄 PDF</button>
                         </div>
                     </div>
                     
@@ -2094,8 +2096,8 @@ footer.footer .footer-bottom {
                             <span>Projet Complet (Cycle + Toutes les fiches)</span>
                         </div>
                         <div class="download-buttons">
-                            <button class="btn btn-word-orange" id="downloadProjetCompletWord">📥 Word</button>
-                            <button class="btn btn-pdf-orange" id="downloadProjetCompletPDF">📄 PDF</button>
+                            <button type="button" class="btn btn-word-orange" id="downloadProjetCompletWord">📥 Word</button>
+                            <button type="button" class="btn btn-pdf-orange" id="downloadProjetCompletPDF">📄 PDF</button>
                         </div>
                     </div>
                 </div>
@@ -2223,41 +2225,47 @@ footer.footer .footer-bottom {
         let projetCompletHtml = '';
         let projetCompletFilename = '';
 
-        // Navbar scroll
+        // Navbar scroll (sécurisé)
         const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+        if (navbar) {
+            window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+        }
 
-        // Mobile menu
+        // Mobile menu (sécurisé si les anciens éléments n'existent plus)
         const navToggle = document.getElementById('navToggle');
         const navMenu = document.getElementById('navMenu');
         const navBackdrop = document.getElementById('navBackdrop');
 
         function toggleMenu() {
-            navMenu.classList.toggle('active');
-            navToggle.classList.toggle('active');
-            navBackdrop.classList.toggle('active');
-            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+            if (navMenu) navMenu.classList.toggle('active');
+            if (navToggle) navToggle.classList.toggle('active');
+            if (navBackdrop) navBackdrop.classList.toggle('active');
+            if (navMenu) document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
         }
 
         function closeMenu() {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
-            navBackdrop.classList.remove('active');
+            if (navMenu) navMenu.classList.remove('active');
+            if (navToggle) navToggle.classList.remove('active');
+            if (navBackdrop) navBackdrop.classList.remove('active');
             document.body.style.overflow = '';
         }
 
-        navToggle.addEventListener('click', (e) => { e.stopPropagation(); toggleMenu(); });
-        navBackdrop.addEventListener('click', closeMenu);
-        document.addEventListener('click', (e) => { if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) closeMenu(); });
-        navMenu.querySelectorAll('.nav-link, .nav-cta').forEach(link => link.addEventListener('click', closeMenu));
+        if (navToggle) navToggle.addEventListener('click', (e) => { e.stopPropagation(); toggleMenu(); });
+        if (navBackdrop) navBackdrop.addEventListener('click', closeMenu);
+        if (navMenu && navToggle) {
+            document.addEventListener('click', (e) => { if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) closeMenu(); });
+            navMenu.querySelectorAll('.nav-link, .nav-cta').forEach(link => link.addEventListener('click', closeMenu));
+        }
 
         // Optional toggle
         const optionalToggle = document.getElementById('optionalToggle');
         const optionalContent = document.getElementById('optionalContent');
-        optionalToggle.addEventListener('click', () => {
-            optionalToggle.classList.toggle('open');
-            optionalContent.classList.toggle('show');
-        });
+        if (optionalToggle && optionalContent) {
+            optionalToggle.addEventListener('click', () => {
+                optionalToggle.classList.toggle('open');
+                optionalContent.classList.toggle('show');
+            });
+        }
 
         // Récupérer les données du localStorage (venant de la page d'accueil)
         function loadFormDataFromStorage() {
@@ -2491,14 +2499,16 @@ footer.footer .footer-bottom {
                     }
 
                     // Save to user history (silent, non-blocking)
-                    const typeLabels = { fiche: 'Fiche de Séance', grille: 'Grille', projet: 'Projet de Cycle' };
-                    ProfEPS.saveGeneration(
-                        currentType,
-                        formData.aps,
-                        formData.niveau,
-                        (typeLabels[currentType] || 'Document') + ' — ' + formData.aps + ' ' + formData.niveau,
-                        formData
-                    ).catch(err => console.log('Save generation error:', err));
+                    if (typeof window.ProfEPS !== 'undefined' && typeof window.ProfEPS.saveGeneration === 'function') {
+                        const typeLabels = { fiche: 'Fiche de Séance', grille: 'Grille', projet: 'Projet de Cycle' };
+                        window.ProfEPS.saveGeneration(
+                            currentType,
+                            formData.aps,
+                            formData.niveau,
+                            (typeLabels[currentType] || 'Document') + ' — ' + formData.aps + ' ' + formData.niveau,
+                            formData
+                        ).catch(err => console.log('Save generation error:', err));
+                    }
 
                     showSuccess('Document généré avec succès !');
                 } else {
