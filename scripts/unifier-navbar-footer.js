@@ -1033,8 +1033,6 @@ footer.footer .footer-bottom {
 </style>`;
 
 function buildNavbarHtml(fileName) {
-  const isHome = fileName === 'index.html';
-  const isEps = fileName.includes('eps') && !fileName.includes('crmef-hub') && !fileName.includes('blog');
   const isGen = fileName === 'generateur.html';
   const isBlog =
     fileName === 'blog.html' ||
@@ -1050,10 +1048,9 @@ function buildNavbarHtml(fileName) {
     fileName.includes('jack-daniels') ||
     fileName.includes('asr-sports-co') ||
     fileName.includes('course-duree');
-  const isCrmef = fileName.includes('crmef') || fileName.includes('qcm');
+  const isPrep = fileName.includes('crmef') || fileName.includes('qcm') || fileName.includes('concours');
   const isTool = Boolean(TOOL_INFO[fileName]);
 
-  const currentTool = TOOL_INFO[fileName] || TOOL_INFO['calculateur-vma.html'];
   const triggerHref = TOOL_INFO[fileName] ? fileName : 'hub-outils-sport-performance.html';
 
   const dropdownLinks = DROPDOWN_ITEMS.map((item) => {
@@ -1080,17 +1077,15 @@ function buildNavbarHtml(fileName) {
         <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:52px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
       </a>
       <div class="peps-nav-menu" id="pepsNavMenu">
-        <a href="index.html" class="peps-nav-link${isHome ? ' active' : ''}" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
-        <a href="qcm-didactique-eps-maroc.html" class="peps-nav-link${isEps ? ' active' : ''}" data-i18n-fr="Didactique EPS" data-i18n-en="PE Didactics" data-i18n-ar="ديداكتيك التربية البدنية">Didactique EPS</a>
         <a href="generateur.html" class="peps-nav-link${isGen ? ' active' : ''}" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
+        <a href="blog.html" class="peps-nav-link${isBlog ? ' active' : ''}" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
+        <a href="concours-crmef-hub.html" class="peps-nav-link${isPrep ? ' active' : ''}" data-i18n-fr="Préparation" data-i18n-en="Preparation" data-i18n-ar="التحضير">Préparation</a>
         <div class="peps-dropdown" id="pepsCalcDropdown">
-          <a href="${triggerHref}" class="peps-nav-link${isTool ? ' active' : ''}" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="${currentTool.fr.replace(/"/g, '&quot;')}" data-i18n-en="${currentTool.en.replace(/"/g, '&quot;')}" data-i18n-ar="${currentTool.ar.replace(/"/g, '&quot;')}">${currentTool.fr}</span><span class="peps-dropdown-caret">▾</span></a>
+          <a href="${triggerHref}" class="peps-nav-link${isTool ? ' active' : ''}" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="Calculateurs" data-i18n-en="Calculators" data-i18n-ar="الحاسبات">Calculateurs</span><span class="peps-dropdown-caret">▾</span></a>
           <div class="peps-dropdown-menu" id="pepsDropdownMenu">
 ${dropdownLinks}
           </div>
         </div>
-        <a href="concours-crmef-hub.html" class="peps-nav-link${isCrmef ? ' active' : ''}" data-i18n-fr="Concours CRMEF" data-i18n-en="CRMEF Exam" data-i18n-ar="مباراة التعليم">Concours CRMEF</a>
-        <a href="blog.html" class="peps-nav-link${isBlog ? ' active' : ''}" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
       </div>
       <div class="peps-nav-right">
         <div dir="ltr" class="peps-lang-switch" aria-label="Sélecteur de langue">

@@ -567,7 +567,9 @@ footer.footer, #profeps-unified-footer {
 
 // ═══ 4. NAVBAR MAÎTRE HTML ═══
 function buildNavbarHtml(fileName) {
-  const isCrmef = true;
+  const isGen = fileName === 'generateur.html';
+  const isBlog = fileName === 'blog.html';
+  const isPrep = true;
   const dropdownLinks = DROPDOWN_ITEMS.map((item) => {
     const cls = item.isHub ? 'peps-dropdown-item peps-dropdown-hub' : 'peps-dropdown-item';
     return `            <a href="${item.href}" class="${cls}" data-i18n-fr="${item.fr.replace(/"/g, '&quot;')}" data-i18n-en="${item.en.replace(/"/g, '&quot;')}" data-i18n-ar="${item.ar.replace(/"/g, '&quot;')}">${item.fr}</a>`;
@@ -580,20 +582,18 @@ function buildNavbarHtml(fileName) {
         <img src="images/prof_eps.png" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:48px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
       </a>
       <div class="peps-nav-menu" id="pepsNavMenu">
-        <a href="index.html" class="peps-nav-link" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
-        <a href="qcm-didactique-eps-maroc.html" class="peps-nav-link ${fileName.includes('eps') ? 'active' : ''}" data-i18n-fr="Didactique EPS" data-i18n-en="PE Didactics" data-i18n-ar="ديداكتيك التربية البدنية">Didactique EPS</a>
-        <a href="generateur.html" class="peps-nav-link" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
+        <a href="generateur.html" class="peps-nav-link ${isGen ? 'active' : ''}" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
+        <a href="blog.html" class="peps-nav-link ${isBlog ? 'active' : ''}" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
+        <a href="concours-crmef-hub.html" class="peps-nav-link ${isPrep ? 'active' : ''}" data-i18n-fr="Préparation" data-i18n-en="Preparation" data-i18n-ar="التحضير">Préparation</a>
         <div class="peps-dropdown" id="pepsCalcDropdown">
           <a href="hub-outils-sport-performance.html" class="peps-nav-link" id="pepsDropdownTrigger">
-            <span id="pepsDropdownTriggerText" data-i18n-fr="Calculateurs Sport" data-i18n-en="Sports Calculators" data-i18n-ar="الحاسبات الرياضية">Calculateurs Sport</span>
+            <span id="pepsDropdownTriggerText" data-i18n-fr="Calculateurs" data-i18n-en="Calculators" data-i18n-ar="الحاسبات">Calculateurs</span>
             <span class="peps-dropdown-caret">▾</span>
           </a>
           <div class="peps-dropdown-menu" id="pepsDropdownMenu">
 ${dropdownLinks}
           </div>
         </div>
-        <a href="concours-crmef-hub.html" class="peps-nav-link ${fileName.includes('crmef') && !fileName.includes('eps') ? 'active' : ''}" data-i18n-fr="Concours CRMEF" data-i18n-en="CRMEF Exam" data-i18n-ar="مباراة التعليم">Concours CRMEF</a>
-        <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
       </div>
       <div class="peps-nav-right">
         <div dir="ltr" class="peps-lang-switch" aria-label="Sélecteur de langue">
@@ -636,8 +636,6 @@ function buildCrmefSubnavHtml(fileName) {
 
   // Identifier la discipline courante et le type dépreuve
   let currentKey = "hub";
-  let isDidactique = false;
-  let isSpecialite = false;
 
   if (isHub) {
     currentKey = "hub";
@@ -647,12 +645,10 @@ function buildCrmefSubnavHtml(fileName) {
     for (const item of CRMEF_NAV_ITEMS) {
       if (item.didac && fileName === item.didac) {
         currentKey = item.key;
-        isDidactique = true;
         break;
       }
       if (item.spec && fileName === item.spec) {
         currentKey = item.key;
-        isSpecialite = true;
         break;
       }
     }
@@ -679,30 +675,48 @@ function buildCrmefSubnavHtml(fileName) {
         </a>`;
   }).join("\n");
 
-  // Si on est sur une page spécifique d une discipline, ajouter le switch Didactique / Spécialité
-  let dualToggleHtml = "";
-  const currentDiscipline = CRMEF_NAV_ITEMS.find(d => d.key === currentKey);
-  if (currentDiscipline && currentDiscipline.didac && currentDiscipline.spec) {
-    dualToggleHtml = `
-      <div class="flex items-center gap-1 bg-slate-100/90 p-1 rounded-full border border-slate-200/80 shrink-0 text-xs ml-2">
-        <a href="${currentDiscipline.didac}" class="px-3.5 py-1.5 rounded-full font-black transition-all ${isDidactique ? "bg-[#991b1b] text-white shadow-xs" : "text-slate-600 hover:text-slate-900"}">
-          📘 Didactique
-        </a>
-        <a href="${currentDiscipline.spec}" class="px-3.5 py-1.5 rounded-full font-black transition-all ${isSpecialite ? "bg-white text-[#0f172a] border-2 border-slate-700 shadow-xs" : "text-slate-600 hover:text-slate-900"}">
-          📗 Spécialité
-        </a>
-      </div>`;
-  }
-
   return `  <!-- ================= CRMEF DISCIPLINE STICKY SUBNAV ================= -->
   <div class="peps-crmef-subnav" role="navigation" aria-label="Sous-navigation des Disciplines CRMEF">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-start md:justify-center gap-2 overflow-x-auto scrollbar-none">
       <div class="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-0.5 shrink-0">
 ${linksHtml}
       </div>
-${dualToggleHtml ? `      <div class="flex items-center justify-center gap-2 shrink-0">
-${dualToggleHtml}
-      </div>` : ""}
+    </div>
+  </div>`;
+}
+
+// ═══ 5B. TOGGLE DIDACTIQUE / SPÉCIALITÉ (EN HAUT À GAUCHE SOUS LES NAVBARS) ═══
+function buildDisciplineToggleHtml(fileName) {
+  let currentKey = null;
+  let isDidactique = false;
+  let isSpecialite = false;
+
+  for (const item of CRMEF_NAV_ITEMS) {
+    if (item.didac && fileName === item.didac) {
+      currentKey = item.key;
+      isDidactique = true;
+      break;
+    }
+    if (item.spec && fileName === item.spec) {
+      currentKey = item.key;
+      isSpecialite = true;
+      break;
+    }
+  }
+
+  if (!currentKey) return "";
+  const currentDiscipline = CRMEF_NAV_ITEMS.find(d => d.key === currentKey);
+  if (!currentDiscipline || !currentDiscipline.didac || !currentDiscipline.spec) return "";
+
+  return `  <!-- ================= TOGGLE DIDACTIQUE / SPÉCIALITÉ (HAUT GAUCHE SOUS NAVBARS) ================= -->
+  <div class="peps-discipline-toggle-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3 pb-1 flex items-center justify-start">
+    <div class="inline-flex items-center gap-1.5 bg-slate-100/90 p-1 rounded-2xl border border-slate-200 shadow-2xs">
+      <a href="${currentDiscipline.didac}" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center gap-1.5 ${isDidactique ? 'bg-[#991b1b] text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'}">
+        <span>📘</span> <span>Didactique</span>
+      </a>
+      <a href="${currentDiscipline.spec}" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center gap-2 ${isSpecialite ? 'bg-white text-slate-900 border-2 border-[#991b1b] shadow-xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'}">
+        <span>📗</span> <span>Spécialité</span>
+      </a>
     </div>
   </div>`;
 }
@@ -905,6 +919,8 @@ TARGET_FILES.forEach((fileName) => {
     // 1. Nettoyer les anciens blocs d'unification
     html = html.replace(/<!-- PROFEPS_UNIFIED_NAVBAR_START -->[\s\S]*?<!-- PROFEPS_UNIFIED_NAVBAR_END -->\s*/g, '');
     html = html.replace(/<!-- ================= CRMEF DISCIPLINE STICKY SUBNAV ================= -->[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/g, '');
+    html = html.replace(/<!-- ================= TOGGLE DIDACTIQUE \/ SPÉCIALITÉ \(HAUT GAUCHE SOUS NAVBARS\) ================= -->[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/g, '');
+    html = html.replace(/<div class="peps-discipline-toggle-container[\s\S]*?<\/div>\s*<\/div>/g, '');
     html = html.replace(/<style id="profeps-master-unifier-css">[\s\S]*?<\/style>\s*/g, '');
     html = html.replace(/<script id="profeps-master-unifier-js">[\s\S]*?<\/script>\s*/g, '');
 
@@ -920,8 +936,9 @@ TARGET_FILES.forEach((fileName) => {
       html = html.replace(/<\/head>/i, `${MASTER_CSS}\n</head>`);
     }
 
-    // 4. Injecter la Navbar Maître 80px + la sous-barre sticky + le JS maître après <body...>
-    const newNav = `${buildNavbarHtml(fileName)}\n${buildCrmefSubnavHtml(fileName)}\n${MASTER_JS}`;
+    // 4. Injecter la Navbar Maître 80px + la sous-barre sticky + le toggle discipline + le JS maître après <body...>
+    const toggleHtml = buildDisciplineToggleHtml(fileName);
+    const newNav = `${buildNavbarHtml(fileName)}\n${buildCrmefSubnavHtml(fileName)}${toggleHtml ? `\n${toggleHtml}` : ''}\n${MASTER_JS}`;
     if (/<body[^>]*>/i.test(html)) {
       html = html.replace(/<body([^>]*)>/i, (m, attrs) => {
         // Garantir que body a bg-slate-50 et le padding requis
