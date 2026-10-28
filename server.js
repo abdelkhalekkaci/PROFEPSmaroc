@@ -1,59 +1,120 @@
 const express = require('express');
 const cors = require('cors');
-const fetch = require('node-fetch');
 const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ✅ CLÉ API GROQ - Utilise UNIQUEMENT la variable d'environnement (PAS de clé en dur!)
-const GROQ_API_KEY = process.env.GROQ_API_KEY;
-
 // Path resolution compatible Vercel
 const rootDir = process.env.VERCEL ? '/var/task' : __dirname;
 
-// Middleware
-app.use(cors());
-app.use(express.json());
-
-// Redirection /index.html → / est gérée au niveau Vercel edge (vercel.json) — supprimée du serveur Node.
-// La redirection non-www → www est gérée au niveau Vercel edge (vercel.json)
-// Redirection automatique des domaines VMA
+// En-têtes de sécurité globaux
 app.use((req, res, next) => {
-  const host = req.headers.host || '';
-  if (host.includes('vmacalculateur.com') || host.includes('mascalculator.com')) {
-    return res.redirect(301, 'https://profeps.ma/calculateur-vma.html');
-  }
-  next();
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    res.setHeader('X-XSS-Protection', '1; mode=block');
+    next();
 });
-// Servir les fichiers statiques du dossier public
-app.use(express.static(path.join(rootDir, 'public')));
 
-// Servir explicitement le dossier images
-app.use('/images', express.static(path.join(rootDir, 'public', 'images')));
+// Middleware CORS & JSON Body Parser sécurisé (limite 64kb contre les abus de payload)
+app.use(cors());
+app.use(express.json({ limit: '64kb' }));
+app.use(express.urlencoded({ extended: true, limit: '64kb' }));
 
-// Routes API modulaire
+// Redirection automatique des domaines secondaires VMA vers profeps.ma
+app.use((req, res, next) => {
+    const host = req.headers.host || '';
+    if (host.includes('vmacalculateur.com') || host.includes('mascalculator.com')) {
+        return res.redirect(301, 'https://profeps.ma/calculateur-vma.html');
+    }
+    next();
+});
+
+// Rate-limiter léger en mémoire pour protéger les endpoints /api/generer-* (30 req / min / IP)
+const rateLimitMap = new Map();
+const RATE_LIMIT_WINDOW_MS = 60 * 1000;
+const RATE_LIMIT_MAX = 30;
+
+function apiRateLimiter(req, res, next) {
+    const now = Date.now();
+    const forwarded = req.headers['x-forwarded-for'];
+    const clientIp = (typeof forwarded === 'string' ? forwarded.split(',')[0].trim() : req.socket?.remoteAddress) || 'unknown';
+
+    if (rateLimitMap.size > 2000) {
+        for (const [ip, entry] of rateLimitMap.entries()) {
+            if (now - entry.start > RATE_LIMIT_WINDOW_MS) rateLimitMap.delete(ip);
+        }
+    }
+
+    const entry = rateLimitMap.get(clientIp);
+    if (!entry || now - entry.start > RATE_LIMIT_WINDOW_MS) {
+        rateLimitMap.set(clientIp, { count: 1, start: now });
+        return next();
+    }
+
+    entry.count += 1;
+    if (entry.count > RATE_LIMIT_MAX) {
+        res.setHeader('Retry-After', '60');
+        return res.status(429).json({
+            success: false,
+            error: 'Trop de requêtes simultanées. Veuillez patienter quelques secondes avant de relancer la génération.'
+        });
+    }
+    next();
+}
+
+// Servir explicitement le dossier images avec cache long
+app.use('/images', express.static(path.join(rootDir, 'public', 'images'), {
+    maxAge: '7d',
+    setHeaders: (res) => {
+        res.setHeader('Cache-Control', 'public, max-age=604800, stale-while-revalidate=86400');
+    }
+}));
+
+// Servir les fichiers statiques du dossier public avec stratégie de cache différenciée
+app.use(express.static(path.join(rootDir, 'public'), {
+    setHeaders: (res, filePath) => {
+        if (/\.(css|js|png|jpg|jpeg|gif|svg|webp|ico|woff2?)$/i.test(filePath)) {
+            res.setHeader('Cache-Control', 'public, max-age=604800, stale-while-revalidate=86400');
+        } else if (/\.html$/i.test(filePath)) {
+            res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+        }
+    }
+}));
+
+// Routes API modulaires
 const genererFiche = require('./api/generer-fiche');
 const genererGrille = require('./api/generer-grille');
 const genererProjet = require('./api/generer-projet');
 const genererProjetComplet = require('./api/generer-projet-complet');
 
+// Endpoint de santé
+app.get('/api/health', (req, res) => {
+    res.status(200).json({ status: 'ok', service: 'ProfEPS.ma', version: '2.0.0' });
+});
+
 // Route principale
 app.get('/', (req, res) => {
+    res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
     res.sendFile(path.join(rootDir, 'public', 'index.html'));
 });
 
-// Montage des routes API
-app.post('/api/generer-fiche', genererFiche);
-app.post('/api/generer-grille', genererGrille);
-app.post('/api/generer-projet', genererProjet);
-app.post('/api/generer-projet-complet', genererProjetComplet);
+// Montage des routes API protégées par le rate-limiter
+app.post('/api/generer-fiche', apiRateLimiter, genererFiche);
+app.post('/api/generer-grille', apiRateLimiter, genererGrille);
+app.post('/api/generer-projet', apiRateLimiter, genererProjet);
+app.post('/api/generer-projet-complet', apiRateLimiter, genererProjetComplet);
+
+// Gestionnaire 404 propre pour les routes API inconnues
+app.all('/api/*', (req, res) => {
+    res.status(404).json({ success: false, error: 'Point de terminaison API introuvable' });
+});
 
 if (process.env.VERCEL) {
     module.exports = app;
 } else {
     app.listen(PORT, () => {
-        console.log(`🚀 Serveur EPS: http://localhost:${PORT}`);
-        console.log('⚠️ Configurez GROQ_API_KEY dans les variables d\'environnement');
+        console.log(`🚀 Serveur ProfEPS Maroc actif sur http://localhost:${PORT}`);
     });
 }
+

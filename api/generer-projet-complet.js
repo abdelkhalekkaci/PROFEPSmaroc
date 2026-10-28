@@ -58,16 +58,21 @@ module.exports = async (req, res) => {
 
     try {
         const GROQ_API_KEY = process.env.GROQ_API_KEY;
-        if (!GROQ_API_KEY) return res.status(500).json({ success: false, error: 'GROQ_API_KEY non configurée' });
-
-        const { aps, niveau, niveauEleves, nombreSeances, nomProf, etablissement, anneeScolaire } = req.body;
+        const body = req.body || {};
+        const aps = String(body.aps || '').trim();
+        const niveau = String(body.niveau || '').trim();
+        const niveauEleves = String(body.niveauEleves || 'moyen').trim();
+        const nombreSeances = body.nombreSeances;
+        const nomProf = String(body.nomProf || '').trim().slice(0, 120);
+        const etablissement = String(body.etablissement || '').trim().slice(0, 140);
+        const anneeScolaire = String(body.anneeScolaire || '').trim().slice(0, 30);
 
         if (!aps || !niveau) {
             return res.status(400).json({ success: false, error: 'APS et niveau requis' });
         }
 
         const isCollege = ['1AC', '2AC', '3AC'].includes(niveau);
-        const nb = parseInt(nombreSeances) || 10;
+        const nb = Math.min(16, Math.max(6, parseInt(nombreSeances, 10) || 10));
         const nivEleves = niveauEleves || 'moyen';
         const nivTxt = { 'debutant': 'Débutant', 'moyen': 'Moyen', 'avance': 'Avancé', 'elite': 'Expert' }[nivEleves] || 'Moyen';
 
@@ -179,32 +184,21 @@ Document conforme aux Orientations Pédagogiques ${isCollege ? '2009 (Collège)'
 
         // ==================== GÉNÉRATION DES FICHES DE SÉANCE ====================
         let fichesHtml = '';
+        const startTime = Date.now();
+        const MAX_AI_BUDGET_MS = 5500; // Budget global max 5.5s pour éviter tout timeout Serverless (10s max sur Vercel)
         
         for (let seanceNum = 1; seanceNum <= nb; seanceNum++) {
             const objectifSeance = objectifs[seanceNum - 1];
             
             const situationsRef = getSituations(aps, objectifSeance, seanceNum);
             const isTest = situationsRef && (situationsRef.isTestObservation || situationsRef.isTestBilan);
-            
-            const situationsContext = situationsRef ? (isTest ? `
-SÉANCE SPÉCIALE ${situationsRef.isTestObservation ? 'TEST D\'OBSERVATION' : 'TEST BILAN'}
-ÉCHAUFFEMENT: ${situationsRef.echauffement}
-SITUATION UNIQUE - "${situationsRef.situation1.titre}":
-- But: ${situationsRef.situation1.but}
-- Organisation: ${situationsRef.situation1.organisation}
-- Déroulement: ${situationsRef.situation1.deroulement}
-- Consignes: ${situationsRef.situation1.consignes}
-- Variantes: ${situationsRef.situation1.variantes}
-CRITÈRES DE RÉALISATION: ${situationsRef.criteresRealisation}
-CRITÈRES DE RÉUSSITE: ${situationsRef.criteresReussite}` : `
-ÉCHAUFFEMENT: ${situationsRef.echauffement}
-SITUATION 1 - "${situationsRef.situation1.titre}": But: ${situationsRef.situation1.but} | Organisation: ${situationsRef.situation1.organisation}
-SITUATION 2 - "${situationsRef.situation2.titre}": But: ${situationsRef.situation2.but} | Organisation: ${situationsRef.situation2.organisation}
-CRITÈRES: ${situationsRef.criteresRealisation} | ${situationsRef.criteresReussite}`) : '';
+            let contenu = '';
 
-            const prompt = `Tu es un expert EPS. Génère une fiche de séance pour ${aps}, niveau ${niveau}, séance ${seanceNum}/${nb}.
+            // N'utiliser l'appel réseau IA que si la clé est présente, que la situation n'est pas déjà couverte par situationsRef, et que le budget temps le permet
+            if (GROQ_API_KEY && GROQ_API_KEY !== 'votre_cle_groq_ici' && !situationsRef && (Date.now() - startTime < MAX_AI_BUDGET_MS)) {
+                try {
+                    const prompt = `Tu es un expert EPS. Génère une fiche de séance pour ${aps}, niveau ${niveau}, séance ${seanceNum}/${nb}.
 OBJECTIF: "${objectifSeance}"
-${situationsContext}
 
 Réponds UNIQUEMENT avec ces clés (format strict):
 ECHAUFFEMENT_SPECIFIQUE: [3 exercices avec durées]
@@ -224,21 +218,34 @@ SITUATION2_VARIANTES: [variantes]
 ` : ''}CRITERES_REALISATION: [4 critères COMMENT faire]
 CRITERES_REUSSITE: [4 critères MESURABLES]`;
 
-            const groqResp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GROQ_API_KEY}` },
-                body: JSON.stringify({
-                    model: 'llama-3.3-70b-versatile',
-                    messages: [{ role: 'user', content: prompt }],
-                    max_tokens: 2500,
-                    temperature: 0.7
-                })
-            });
-
-            const data = await groqResp.json();
-            const contenu = data.choices?.[0]?.message?.content || '';
+                    const controller = new AbortController();
+                    const timer = setTimeout(() => controller.abort(), 2500);
+                    try {
+                        const groqResp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GROQ_API_KEY}` },
+                            body: JSON.stringify({
+                                model: 'llama-3.3-70b-versatile',
+                                messages: [{ role: 'user', content: prompt }],
+                                max_tokens: 1800,
+                                temperature: 0.7
+                            }),
+                            signal: controller.signal
+                        });
+                        if (groqResp.ok) {
+                            const data = await groqResp.json();
+                            contenu = data.choices?.[0]?.message?.content || '';
+                        }
+                    } finally {
+                        clearTimeout(timer);
+                    }
+                } catch (errAi) {
+                    // Fallback transparent sur le moteur didactique local
+                }
+            }
 
             const extract = (key) => {
+                if (!contenu) return '';
                 const regex = new RegExp(`(?:\\*\\*|##)?\\s*${key}(?:\\*\\*|##)?\\s*:?\\s*([\\s\\S]*?)(?=\\n\\s*(?:\\*\\*|##)?\\s*[A-Z][A-Z0-9_]+(?:\\*\\*|##)?\\s*:|$)`, 'i');
                 const match = contenu.match(regex);
                 return match ? match[1].replace(/^\*\*/, '').replace(/\*\*$/, '').trim() : '';
@@ -264,26 +271,26 @@ CRITERES_REUSSITE: [4 critères MESURABLES]`;
             const fb = FALLBACKS[aps] || FALLBACKS['Handball'];
             const sitRefData = situationsRef;
             
-            if (!echaufSpec || echaufSpec.length < 20) echaufSpec = sitRefData ? sitRefData.echauffement : fb.echauf;
+            if (!echaufSpec || echaufSpec.length < 15) echaufSpec = sitRefData ? sitRefData.echauffement : fb.echauf;
             if (!butFonda || butFonda.length < 10) butFonda = isTest ? (situationsRef?.isTestObservation ? 'Identifier le niveau initial des élèves' : 'Évaluer les progrès réalisés') : `Atteindre l'objectif: ${objectifSeance}`;
-            if (!s1Titre || s1Titre.length < 5) s1Titre = sitRefData ? sitRefData.situation1.titre : fb.s1t;
-            if (!s1But || s1But.length < 10) s1But = sitRefData ? sitRefData.situation1.but : fb.s1b;
-            if (!s1Orga || s1Orga.length < 20) s1Orga = sitRefData ? sitRefData.situation1.organisation : fb.s1o;
-            if (!s1Deroul || s1Deroul.length < 50) s1Deroul = sitRefData ? sitRefData.situation1.deroulement : fb.s1d;
-            if (!s1Consignes || s1Consignes.length < 30) s1Consignes = sitRefData ? sitRefData.situation1.consignes : fb.s1c;
-            if (!s1Variantes || s1Variantes.length < 20) s1Variantes = sitRefData ? sitRefData.situation1.variantes : fb.s1v;
+            if (!s1Titre || s1Titre.length < 4) s1Titre = sitRefData ? sitRefData.situation1.titre : fb.s1t;
+            if (!s1But || s1But.length < 8) s1But = sitRefData ? sitRefData.situation1.but : fb.s1b;
+            if (!s1Orga || s1Orga.length < 15) s1Orga = sitRefData ? sitRefData.situation1.organisation : fb.s1o;
+            if (!s1Deroul || s1Deroul.length < 25) s1Deroul = sitRefData ? sitRefData.situation1.deroulement : fb.s1d;
+            if (!s1Consignes || s1Consignes.length < 15) s1Consignes = sitRefData ? sitRefData.situation1.consignes : fb.s1c;
+            if (!s1Variantes || s1Variantes.length < 15) s1Variantes = sitRefData ? sitRefData.situation1.variantes : fb.s1v;
             
             if (!isTest) {
-                if (!s2Titre || s2Titre.length < 5) s2Titre = sitRefData?.situation2 ? sitRefData.situation2.titre : fb.s2t;
-                if (!s2But || s2But.length < 10) s2But = sitRefData?.situation2 ? sitRefData.situation2.but : fb.s2b;
-                if (!s2Orga || s2Orga.length < 20) s2Orga = sitRefData?.situation2 ? sitRefData.situation2.organisation : fb.s2o;
-                if (!s2Deroul || s2Deroul.length < 30) s2Deroul = sitRefData?.situation2 ? sitRefData.situation2.deroulement : fb.s2d;
-                if (!s2Consignes || s2Consignes.length < 30) s2Consignes = sitRefData?.situation2 ? sitRefData.situation2.consignes : fb.s2c;
-                if (!s2Variantes || s2Variantes.length < 20) s2Variantes = sitRefData?.situation2 ? sitRefData.situation2.variantes : fb.s2v;
+                if (!s2Titre || s2Titre.length < 4) s2Titre = sitRefData?.situation2 ? sitRefData.situation2.titre : fb.s2t;
+                if (!s2But || s2But.length < 8) s2But = sitRefData?.situation2 ? sitRefData.situation2.but : fb.s2b;
+                if (!s2Orga || s2Orga.length < 15) s2Orga = sitRefData?.situation2 ? sitRefData.situation2.organisation : fb.s2o;
+                if (!s2Deroul || s2Deroul.length < 25) s2Deroul = sitRefData?.situation2 ? sitRefData.situation2.deroulement : fb.s2d;
+                if (!s2Consignes || s2Consignes.length < 15) s2Consignes = sitRefData?.situation2 ? sitRefData.situation2.consignes : fb.s2c;
+                if (!s2Variantes || s2Variantes.length < 15) s2Variantes = sitRefData?.situation2 ? sitRefData.situation2.variantes : fb.s2v;
             }
             
-            if (!critReal || critReal.length < 50) critReal = sitRefData ? sitRefData.criteresRealisation : fb.cr;
-            if (!critReuss || critReuss.length < 50) critReuss = sitRefData ? sitRefData.criteresReussite : fb.cs;
+            if (!critReal || critReal.length < 20) critReal = sitRefData ? sitRefData.criteresRealisation : fb.cr;
+            if (!critReuss || critReuss.length < 20) critReuss = sitRefData ? sitRefData.criteresReussite : fb.cs;
 
             // HTML de la fiche avec saut de page AVANT (sauf pour la première fiche)
             fichesHtml += `

@@ -21,10 +21,22 @@ module.exports = async (req, res) => {
     if (req.method !== 'POST') return res.status(405).json({ success: false, error: 'Méthode non autorisée' });
 
     try {
-        const { aps, objectif, niveau, nomProf, etablissement, anneeScolaire, numeroSeance, classe } = req.body || {};
+        const body = req.body || {};
+        const aps = String(body.aps || '').trim();
+        const niveau = String(body.niveau || '').trim();
+        let objectif = String(body.objectif || '').trim();
+        const nomProf = String(body.nomProf || '').trim().slice(0, 120);
+        const etablissement = String(body.etablissement || '').trim().slice(0, 140);
+        const anneeScolaire = String(body.anneeScolaire || '').trim().slice(0, 30);
+        const numeroSeance = Math.min(20, Math.max(1, parseInt(body.numeroSeance, 10) || 1));
+        const classe = String(body.classe || '').trim().slice(0, 50);
 
-        if (!aps || !niveau || !objectif) {
-            return res.status(400).json({ success: false, error: 'APS, niveau et objectif requis' });
+        if (!aps || !niveau) {
+            return res.status(400).json({ success: false, error: 'APS et niveau requis' });
+        }
+
+        if (!objectif) {
+            objectif = `Maîtriser les fondamentaux techniques et tactiques en ${aps} (Séance ${numeroSeance})`;
         }
 
         const isCollege = ['1AC', '2AC', '3AC'].includes(niveau);
@@ -144,50 +156,40 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
         let rawContent = '';
         let providerUsed = 'local';
 
+        // Helper fetch avec timeout strict (6.5s) pour éviter tout timeout Serverless Vercel
+        const fetchWithTimeout = async (url, options, timeoutMs = 6500) => {
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), timeoutMs);
+            try {
+                return await fetch(url, { ...options, signal: controller.signal });
+            } finally {
+                clearTimeout(timer);
+            }
+        };
+
         // ==================== 1. PRIORITÉ GOOGLE GEMINI ====================
         const GEMINI_KEY = process.env.GEMINI_API_KEY;
         if (GEMINI_KEY && GEMINI_KEY !== 'votre_cle_gemini_ici' && GEMINI_KEY !== 'MY_GEMINI_API_KEY') {
             try {
-                // Tentative via le SDK officiel @google/genai
-                let genaiSuccess = false;
-                try {
-                    const { GoogleGenAI } = await import('@google/genai');
-                    const ai = new GoogleGenAI({ apiKey: GEMINI_KEY });
-                    const resp = await ai.models.generateContent({
-                        model: 'gemini-2.5-flash',
-                        contents: prompt,
-                        config: { temperature: 0.7 }
-                    });
-                    if (resp && resp.text && resp.text.length > 100) {
-                        rawContent = resp.text;
+                const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`;
+                const geminiResp = await fetchWithTimeout(geminiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }],
+                        generationConfig: { temperature: 0.7 }
+                    })
+                }, 6500);
+                if (geminiResp.ok) {
+                    const geminiData = await geminiResp.json();
+                    const text = geminiData.candidates?.[0]?.content?.parts?.[0]?.text || '';
+                    if (text.length > 100) {
+                        rawContent = text;
                         providerUsed = 'gemini';
-                        genaiSuccess = true;
-                    }
-                } catch (sdkErr) {
-                    // Si le SDK n'est pas installé, fallback direct via API REST
-                }
-
-                if (!genaiSuccess) {
-                    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`;
-                    const geminiResp = await fetch(geminiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            contents: [{ parts: [{ text: prompt }] }],
-                            generationConfig: { temperature: 0.7 }
-                        })
-                    });
-                    if (geminiResp.ok) {
-                        const geminiData = await geminiResp.json();
-                        const text = geminiData.candidates?.[0]?.content?.parts?.[0]?.text || '';
-                        if (text.length > 100) {
-                            rawContent = text;
-                            providerUsed = 'gemini';
-                        }
                     }
                 }
             } catch (errGemini) {
-                console.warn('Gemini a échoué, bascule vers Groq...', errGemini?.message || errGemini);
+                console.warn('Gemini indisponible ou timeout, bascule vers Groq...', errGemini?.message || errGemini);
             }
         }
 
@@ -196,7 +198,7 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
             const GROQ_KEY = process.env.GROQ_API_KEY;
             if (GROQ_KEY && GROQ_KEY !== 'votre_cle_groq_ici') {
                 try {
-                    const groqResp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                    const groqResp = await fetchWithTimeout('https://api.groq.com/openai/v1/chat/completions', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -208,7 +210,7 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
                             max_tokens: 3500,
                             temperature: 0.7
                         })
-                    });
+                    }, 6500);
 
                     if (groqResp.ok) {
                         const groqData = await groqResp.json();
@@ -219,7 +221,7 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
                         }
                     }
                 } catch (errGroq) {
-                    console.warn('Groq a échoué, utilisation du moteur didactique local...', errGroq?.message || errGroq);
+                    console.warn('Groq indisponible ou timeout, utilisation du moteur didactique local...', errGroq?.message || errGroq);
                 }
             }
         }

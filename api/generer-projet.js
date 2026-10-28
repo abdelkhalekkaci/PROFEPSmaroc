@@ -18,14 +18,21 @@ module.exports = async (req, res) => {
     if (req.method !== 'POST') return res.status(405).json({ success: false, error: 'Method not allowed' });
 
     try {
-        const { aps, niveau, niveauEleves, nombreSeances, nomProf, etablissement, anneeScolaire } = req.body;
+        const body = req.body || {};
+        const aps = String(body.aps || '').trim();
+        const niveau = String(body.niveau || '').trim();
+        const niveauEleves = String(body.niveauEleves || 'moyen').trim();
+        const nombreSeances = body.nombreSeances;
+        const nomProf = String(body.nomProf || '').trim().slice(0, 120);
+        const etablissement = String(body.etablissement || '').trim().slice(0, 140);
+        const anneeScolaire = String(body.anneeScolaire || '').trim().slice(0, 30);
 
         if (!aps || !niveau) {
             return res.status(400).json({ success: false, error: 'APS et niveau requis' });
         }
 
         const isCollege = ['1AC', '2AC', '3AC'].includes(niveau);
-        const nb = parseInt(nombreSeances) || 10;
+        const nb = Math.min(16, Math.max(6, parseInt(nombreSeances, 10) || 10));
         const nivEleves = niveauEleves || 'moyen';
         const nivTxt = { 'debutant': 'Débutant', 'moyen': 'Moyen', 'avance': 'Avancé', 'elite': 'Expert' }[nivEleves] || 'Moyen';
 

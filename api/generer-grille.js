@@ -18,7 +18,14 @@ module.exports = async (req, res) => {
     if (req.method !== 'POST') return res.status(405).json({ success: false, error: 'Method not allowed' });
 
     try {
-        const { typeGrille, aps, niveau, nomProf, etablissement, classe, anneeScolaire } = req.body;
+        const body = req.body || {};
+        const typeGrille = String(body.typeGrille || 'observation').trim();
+        const aps = String(body.aps || '').trim();
+        const niveau = String(body.niveau || '').trim();
+        const nomProf = String(body.nomProf || '').trim().slice(0, 120);
+        const etablissement = String(body.etablissement || '').trim().slice(0, 140);
+        const classe = String(body.classe || '').trim().slice(0, 50);
+        const anneeScolaire = String(body.anneeScolaire || '').trim().slice(0, 30);
 
         if (!aps || !niveau) {
             return res.status(400).json({ success: false, error: 'APS et niveau requis' });
