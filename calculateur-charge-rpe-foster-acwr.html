@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" id="html-root">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculateur Charge RPE Foster & ACWR | ProfEPS</title>
+  <meta name="description" content="Suivez votre charge d’entraînement aiguë/chronique et évaluez votre ratio ACWR pour prévenir les blessures selon Gabbett.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ProfEPS Maroc">
+  <meta property="og:title" content="Calculateur Charge RPE Foster & ACWR | ProfEPS">
+  <meta property="og:description" content="Suivez votre charge d’entraînement aiguë/chronique et évaluez votre ratio ACWR pour prévenir les blessures selon Gabbett.">
+  <meta property="og:url" content="https://profeps.ma/calculateur-charge-rpe-foster-acwr.html">
+  <meta property="og:image" content="https://profeps.ma/images/prof_eps.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Calculateur Charge RPE Foster & ACWR | ProfEPS">
+  <meta name="twitter:description" content="Suivez votre charge d’entraînement aiguë/chronique et évaluez votre ratio ACWR pour prévenir les blessures selon Gabbett.">
+  <meta name="twitter:image" content="https://profeps.ma/images/prof_eps.png">
+  <meta name="keywords" content="calculateur charge rpe foster, ratio acwr blessure, charge aigue chronique sport, calcul sRPE entrainement" />
+  <link rel="canonical" href="https://profeps.ma/calculateur-charge-rpe-foster-acwr.html" />
+  <link rel="alternate" hreflang="fr-MA" href="https://profeps.ma/calculateur-charge-rpe-foster-acwr.html">
+  <link rel="alternate" hreflang="x-default" href="https://profeps.ma/calculateur-charge-rpe-foster-acwr.html">
+  <link rel="icon" type="image/png" href="images/prof_eps.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Calculateur de Charge RPE Foster & Ratio ACWR Prévention des Blessures","url":"https://profeps.ma/calculateur-charge-rpe-foster-acwr.html","applicationCategory":"HealthApplication","operatingSystem":"All","inLanguage":["fr","en","ar"],"description":"Saisissez votre charge aiguë (7 derniers jours) et votre charge chronique (moyenne 4 semaines) puis cliquez sur Calculer pour évaluer votre ratio ACWR et votre risque de blessure.","keywords":"calculateur charge rpe foster, ratio acwr blessure, charge aigue chronique sport, calcul sRPE entrainement","offers":{"@type":"Offer","price":"0","priceCurrency":"MAD"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quel est le ratio ACWR idéal pour progresser sans se blesser ?","acceptedAnswer":{"@type":"Answer","text":"Selon les travaux de Tim Gabbett et Carl Foster, le ratio ACWR optimal (« Sweet Spot ») se situe entre 0,80 et 1,30. Lorsque le ratio dépasse 1,50 (hausse brutale de plus de 50 % de la charge hebdomadaire), le risque de blessure musculaire ou tendineuse double dans les 7 à 14 jours suivants."}}]}]}</script>
+  <link rel="stylesheet" href="/css/tailwind-precompiled.min.css">
+  <style id="profeps-calculator-ui-css">
+/* Styles dédiés aux pages Calculateurs — Palette douce, académique & reposante ProfEPS */
+.vma-hero {
+  margin-top: 80px !important;
+  padding: 2.5rem 1.25rem 2rem !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  text-align: center !important;
+  position: relative !important;
+}
+.hero-badge {
+  display: inline-flex !important; align-items: center !important; gap: 0.45rem !important;
+  background: #f8fafc !important;
+  color: #1e293b !important;
+  padding: 0.38rem 1rem !important; border-radius: 9999px !important;
+  font-size: 0.75rem !important; font-weight: 800 !important; text-transform: uppercase !important;
+  letter-spacing: 0.04em !important; margin-bottom: 0.8rem !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+.vma-hero h1 {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
+  font-size: clamp(1.55rem, 3vw, 2.2rem) !important;
+  font-weight: 800 !important; color: #0f172a !important; margin: 0 auto 0.65rem auto !important;
+  max-width: 860px !important; line-height: 1.24 !important; letter-spacing: -0.02em !important;
+  text-wrap: balance !important;
+}
+.vma-hero p {
+  font-size: 0.95rem !important; color: #475569 !important; max-width: 740px !important;
+  margin: 0 auto !important; line-height: 1.6 !important;
+}
+main > div.max-w-3xl,
+#tool-results-panel > div,
+.peps-seo-guide-card {
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 20px !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 8px 24px -8px rgba(15, 23, 42, 0.05) !important;
+  background: #ffffff !important;
+}
+main > div.max-w-3xl::before {
+  display: none !important;
+  content: none !important;
+}
+main > div.max-w-3xl .grid {
+  align-items: stretch !important;
+}
+main > div.max-w-3xl .grid > div {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+}
+main > div.max-w-3xl .grid > div > label {
+  margin-bottom: 0.45rem !important;
+  line-height: 1.3 !important;
+  min-height: 2.1rem !important;
+  display: flex !important;
+  align-items: flex-end !important;
+}
+main > div.max-w-3xl input[type="number"],
+main > div.max-w-3xl select {
+  height: 46px !important;
+  min-height: 46px !important;
+  max-height: 46px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  border-radius: 12px !important;
+  border: 1.5px solid #cbd5e1 !important;
+  background-color: #f8fafc !important;
+  padding: 0 0.9rem !important;
+  font-size: 0.95rem !important;
+  color: #0f172a !important;
+  font-variant-numeric: tabular-nums !important;
+  transition: all 0.18s ease !important;
+  margin-top: auto !important;
+}
+main > div.max-w-3xl input[type="number"]:focus,
+main > div.max-w-3xl select:focus {
+  outline: none !important;
+  border-color: #1e293b !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(30, 41, 59, 0.08) !important;
+}
+#tool-results-panel .grid > div {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  font-variant-numeric: tabular-nums !important;
+}
+button.peps-cta-btn,
+#btn-calc-main {
+  width: 100% !important;
+  padding: 0.95rem 1.4rem !important;
+  margin-top: 0.65rem !important;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+  background-color: #f8fafc !important;
+  color: #1e293b !important;
+  -webkit-text-fill-color: #1e293b !important;
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
+  font-size: 0.98rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.005em !important;
+  border: 1.5px solid #cbd5e1 !important;
+  border-radius: 14px !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 14px -4px rgba(30, 41, 59, 0.08) !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.75rem !important;
+  position: relative !important;
+  overflow: hidden !important;
+  text-align: center !important;
+}
+button.peps-cta-btn:hover,
+#btn-calc-main:hover {
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%) !important;
+  border-color: #1e293b !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 8px 20px -5px rgba(30, 41, 59, 0.14) !important;
+}
+button.peps-cta-btn:active,
+#btn-calc-main:active {
+  transform: translateY(0) !important;
+}
+button.peps-cta-btn .peps-cta-arrow,
+#btn-calc-main .peps-cta-arrow {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 8px !important;
+  background: #1e293b !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-size: 0.95rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  flex-shrink: 0 !important;
+  margin-left: 0.25rem !important;
+  transition: transform 0.18s ease !important;
+}
+button.peps-cta-btn:hover .peps-cta-arrow,
+#btn-calc-main:hover .peps-cta-arrow {
+  transform: translateX(2px) !important;
+}
+</style>
+  <script src="profeps-cmp.js" defer></script>
+<link rel="stylesheet" href="/css/profeps-unifier.min.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil ProfEPS Maroc","item":"https://profeps.ma/"},{"@type":"ListItem","position":2,"name":"Calculateurs & Physiologie Sportive","item":"https://profeps.ma/hub-outils-sport-performance.html"},{"@type":"ListItem","position":3,"name":"Calculateur Charge RPE Foster & ACWR | ProfEPS","item":"https://profeps.ma/calculateur-charge-rpe-foster-acwr.html"}]}</script>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50">
+<!-- PROFEPS_UNIFIED_NAVBAR_START -->
+  <nav id="navbar" class="navbar navbar-decoy" style="display:none !important;visibility:hidden !important;opacity:0 !important;width:0 !important;height:0 !important;overflow:hidden !important;position:absolute !important;pointer-events:none !important;z-index:-9999 !important;" aria-hidden="true">
+    <div class="nav-container">
+      <div id="navMenu" class="nav-menu"></div>
+      <div id="navRightDecoy" class="nav-right"></div>
+      <button id="navToggle" class="nav-toggle" type="button"></button>
+      <div id="navBackdrop" class="nav-backdrop"></div>
+    </div>
+  </nav>
+  <div class="peps-navbar" id="pepsNavbar" role="navigation" aria-label="Navigation principale" data-current-file="calculateur-charge-rpe-foster-acwr.html">
+    <div class="peps-nav-container">
+      <a href="index.html" class="peps-nav-logo" aria-label="Prof EPS Maroc - Accueil">
+        <img src="/images/prof_eps.webp" width="156" height="52" decoding="async" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:52px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
+      </a>
+      <div class="peps-nav-menu" id="pepsNavMenu">
+        <a href="index.html" class="peps-nav-link" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
+        <a href="generateur.html" class="peps-nav-link" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
+        <div class="peps-dropdown" id="pepsCalcDropdown">
+          <a href="calculateur-charge-rpe-foster-acwr.html" class="peps-nav-link active" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="Charge RPE & ACWR" data-i18n-en="RPE Load & ACWR" data-i18n-ar="حمل التدريب RPE و ACWR">Charge RPE & ACWR</span><span class="peps-dropdown-caret">▾</span></a>
+          <div class="peps-dropdown-menu" id="pepsDropdownMenu">
+            <a href="hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub" data-i18n-fr="🧭 Hub de Tous les Calculateurs Sport" data-i18n-en="🧭 All Sports Calculators Hub" data-i18n-ar="🧭 بوابة جميع الحاسبات الرياضية">🧭 Hub de Tous les Calculateurs Sport</a>
+            <a href="calculateur-vma.html" class="peps-dropdown-item" data-i18n-fr="⚡ Calculateur VMA & Allures" data-i18n-en="⚡ MAS (VMA) & Paces Calculator" data-i18n-ar="⚡ حاسبة السرعة الهوائية القصوى (VMA)">⚡ Calculateur VMA & Allures</a>
+            <a href="calculateur-vdot-asr-endurance.html" class="peps-dropdown-item" data-i18n-fr="🫁 Calculateur VO2 Max & VDOT" data-i18n-en="🫁 VO2 Max & VDOT Calculator" data-i18n-ar="🫁 حاسبة VO2 Max ومؤشر VDOT">🫁 Calculateur VO2 Max & VDOT</a>
+            <a href="calculateur-asr-reserve-vitesse.html" class="peps-dropdown-item" data-i18n-fr="🚀 Réserve de Vitesse Anaérobie (ASR)" data-i18n-en="🚀 Anaerobic Speed Reserve (ASR)" data-i18n-ar="🚀 احتياطي السرعة اللاهوائية (ASR)">🚀 Réserve de Vitesse Anaérobie (ASR)</a>
+            <a href="calculateur-indice-endurance.html" class="peps-dropdown-item" data-i18n-fr="📈 Indice d'Endurance (Péronnet)" data-i18n-en="📈 Endurance Index (Péronnet)" data-i18n-ar="📈 مؤشر التحمل (نموذج بيروني)">📈 Indice d'Endurance (Péronnet)</a>
+            <a href="calculateur-frequence-cardiaque-karvonen.html" class="peps-dropdown-item" data-i18n-fr="❤️ Fréquence Cardiaque (Karvonen)" data-i18n-en="❤️ Heart Rate Zones (Karvonen)" data-i18n-ar="❤️ نبضات القلب ومناطق التدريب (Karvonen)">❤️ Fréquence Cardiaque (Karvonen)</a>
+            <a href="calculateur-imc-sportif-masse-grasse.html" class="peps-dropdown-item" data-i18n-fr="⚖️ Calculateur IMC & Masse Grasse" data-i18n-en="⚖️ Athletic BMI & Body Fat %" data-i18n-ar="⚖️ حاسبة مؤشر كتلة الجسم ونسبة الدهون">⚖️ Calculateur IMC & Masse Grasse</a>
+            <a href="calculateur-chaleur-meteo-altitude.html" class="peps-dropdown-item" data-i18n-fr="☀️ Chaleur, Humidité & Altitude" data-i18n-en="☀️ Heat, Humidity & Altitude" data-i18n-ar="☀️ تأثير الحرارة والرطوبة والارتفاع">☀️ Chaleur, Humidité & Altitude</a>
+            <a href="calculateur-gap-pente-nutrition.html" class="peps-dropdown-item" data-i18n-fr="⛰️ Allure Pente (GAP) & Nutrition" data-i18n-en="⛰️ Grade Adjusted Pace & Nutrition" data-i18n-ar="⛰️ إيقاع المنحدرات (GAP) والتغذية">⛰️ Allure Pente (GAP) & Nutrition</a>
+            <a href="generateur-intermittent-hiit-cod.html" class="peps-dropdown-item" data-i18n-fr="🔄 Intermittent HIIT & COD 180°" data-i18n-en="🔄 HIIT Intermittent & 180° COD" data-i18n-ar="🔄 مولد التدريب المتقطع HIIT وتغيير الاتجاه">🔄 Intermittent HIIT & COD 180°</a>
+            <a href="calculateur-charge-rpe-foster-acwr.html" class="peps-dropdown-item active-tool" data-i18n-fr="🛡️ Charge RPE Foster & ACWR" data-i18n-en="🛡️ Foster sRPE Load & ACWR Ratio" data-i18n-ar="🛡️ حمل التدريب (RPE Foster) ونسبة ACWR">🛡️ Charge RPE Foster & ACWR</a>
+          </div>
+        </div>
+        <a href="concours-crmef-hub.html" class="peps-nav-link" data-i18n-fr="Préparation CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparation CRMEF</a>
+        <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
+      </div>
+      <div class="peps-nav-right">
+        <div dir="ltr" class="peps-lang-switch" aria-label="Sélecteur de langue">
+          <button type="button" class="peps-lang-btn active" id="peps-btn-lang-fr" data-lang="fr" onclick="window.profepsSetLang('fr')">FR</button>
+          <span class="peps-lang-sep">/</span>
+          <button type="button" class="peps-lang-btn" id="peps-btn-lang-en" data-lang="en" onclick="window.profepsSetLang('en')">EN</button>
+          <span class="peps-lang-sep">/</span>
+          <button type="button" class="peps-lang-btn" id="peps-btn-lang-ar" data-lang="ar" onclick="window.profepsSetLang('ar')">عربي</button>
+        </div>
+        <button type="button" class="peps-nav-toggle" id="pepsNavToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+<script id="profeps-master-unifier-js">
+(function() {
+  // Stub silencieux au cas où un ancien script de page appelle encore window.supabase
+  var dummyAuth = {
+    getSession: function() { return Promise.resolve({ data: { session: null }, error: null }); },
+    getUser: function() { return Promise.resolve({ data: { user: null }, error: null }); },
+    onAuthStateChange: function() { return { data: { subscription: { unsubscribe: function() {} } } }; },
+    signOut: function() { return Promise.resolve({ error: null }); }
+  };
+  var dummyClient = {
+    auth: dummyAuth,
+    from: function() {
+      return {
+        select: function() { return Promise.resolve({ data: [], error: null }); },
+        insert: function() { return Promise.resolve({ data: null, error: null }); },
+        update: function() { return Promise.resolve({ data: null, error: null }); },
+        delete: function() { return Promise.resolve({ data: null, error: null }); }
+      };
+    }
+  };
+  window.supabase = { createClient: function() { return dummyClient; } };
+  window.supabaseClient = dummyClient;
+  window.ProfEPS = window.ProfEPS || { getSupabase: function() { return dummyClient; }, saveGeneration: function() { return Promise.resolve(); } };
+
+  var dropdown = document.getElementById('pepsCalcDropdown');
+  var dropdownMenu = document.getElementById('pepsDropdownMenu');
+  var closeTimer = null;
+
+  function openDropdown() {
+    if (closeTimer) {
+      clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+    var dd = document.getElementById('pepsCalcDropdown');
+    var dm = document.getElementById('pepsDropdownMenu');
+    if (dd) dd.classList.add('open');
+    if (dm) {
+      dm.style.setProperty('opacity', '1', 'important');
+      dm.style.setProperty('visibility', 'visible', 'important');
+      dm.style.setProperty('pointer-events', 'auto', 'important');
+      dm.style.setProperty('transform', 'translateX(-50%) translateY(0)', 'important');
+    }
+  }
+
+  function closeDropdownDelayed() {
+    if (closeTimer) clearTimeout(closeTimer);
+    closeTimer = setTimeout(function() {
+      var dd = document.getElementById('pepsCalcDropdown');
+      var dm = document.getElementById('pepsDropdownMenu');
+      if (dd) dd.classList.remove('open');
+      if (dm) {
+        dm.style.removeProperty('opacity');
+        dm.style.removeProperty('visibility');
+        dm.style.removeProperty('pointer-events');
+        dm.style.removeProperty('transform');
+      }
+    }, 180);
+  }
+
+  if (dropdown) {
+    dropdown.addEventListener('mouseenter', openDropdown);
+    dropdown.addEventListener('mouseleave', closeDropdownDelayed);
+  }
+  if (dropdownMenu) {
+    dropdownMenu.addEventListener('mouseenter', openDropdown);
+    dropdownMenu.addEventListener('mouseleave', closeDropdownDelayed);
+  }
+
+  // Délégation globale en renfort pour garantir l'ouverture au survol sur 100 % des pages
+  document.addEventListener('mouseover', function(e) {
+    var t = e.target;
+    if (t && t.closest && (t.closest('#pepsCalcDropdown') || t.closest('#pepsDropdownMenu'))) {
+      openDropdown();
+    }
+  });
+  document.addEventListener('mouseout', function(e) {
+    var t = e.target;
+    if (t && t.closest && (t.closest('#pepsCalcDropdown') || t.closest('#pepsDropdownMenu'))) {
+      var rel = e.relatedTarget;
+      if (!rel || !rel.closest || (!rel.closest('#pepsCalcDropdown') && !rel.closest('#pepsDropdownMenu'))) {
+        closeDropdownDelayed();
+      }
+    }
+  });
+
+  // Supprimer tout ancien <nav class="navbar"> résiduel ET tout bouton traducteur en doublon dans le contenu
+  function cleanPageDuplicates() {
+    document.querySelectorAll('nav.navbar:not(.navbar-decoy), .navbar:not(.navbar-decoy)').forEach(function(oldNav) {
+      if (oldNav.id !== 'pepsNavbar') {
+        if (oldNav.parentNode) oldNav.parentNode.removeChild(oldNav);
+      }
+    });
+    document.querySelectorAll('.lang-switch:not(.peps-lang-switch), .in-page-lang-switch, #btn-lang-fr, #btn-lang-en, #btn-lang-ar, button[onclick*="setToolLang"], button[onclick*="changeLang"], button.lang-btn:not(.peps-lang-btn)').forEach(function(el) {
+      if (!el.closest || !el.closest('#pepsNavbar')) {
+        var wrapper = el.closest ? (el.closest('.lang-switch, .in-page-lang-switch, [aria-label="Language selection"], [title*="Traduction"]') || el) : el;
+        if (wrapper === el && el.parentNode && el.parentNode.tagName === 'DIV') {
+          var parentTxt = (el.parentNode.textContent || '').trim();
+          if (parentTxt.length <= 50 && (!el.parentNode.closest || !el.parentNode.closest('#pepsNavbar'))) {
+            wrapper = el.parentNode;
+          }
+        }
+        if (wrapper && wrapper.parentNode && (!wrapper.closest || !wrapper.closest('#pepsNavbar'))) {
+          wrapper.parentNode.removeChild(wrapper);
+        }
+      }
+    });
+  }
+  cleanPageDuplicates();
+  window.addEventListener('DOMContentLoaded', cleanPageDuplicates);
+  // Nettoyage unique à l'initialisation et au DOMContentLoaded (CLS = 0, zéro surcharge MutationObserver)
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      var dd = document.getElementById('pepsCalcDropdown');
+      var dm = document.getElementById('pepsDropdownMenu');
+      if (dd) dd.classList.remove('open');
+      if (dm) {
+        dm.style.removeProperty('opacity');
+        dm.style.removeProperty('visibility');
+        dm.style.removeProperty('pointer-events');
+        dm.style.removeProperty('transform');
+      }
+      var toggleBtn = document.getElementById('pepsNavToggle');
+      var navMenuEl = document.getElementById('pepsNavMenu');
+      if (toggleBtn && navMenuEl) {
+        toggleBtn.classList.remove('active');
+        navMenuEl.classList.remove('active');
+      }
+    }
+  });
+
+  window.addEventListener('scroll', function() {
+    var n = document.getElementById('pepsNavbar');
+    if (n) n.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  document.addEventListener('click', function(e) {
+    var t = e.target;
+    if (t && t.closest && t.closest('#pepsNavToggle')) {
+      var toggleBtn = document.getElementById('pepsNavToggle');
+      var navMenuEl = document.getElementById('pepsNavMenu');
+      if (toggleBtn && navMenuEl) {
+        toggleBtn.classList.toggle('active');
+        navMenuEl.classList.toggle('active');
+      }
+    }
+  });
+
+  window.profepsSetLang = function(lang) {
+    try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
+    ['fr', 'en', 'ar'].forEach(function(code) {
+      var btn = document.getElementById('peps-btn-lang-' + code);
+      if (btn) btn.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
+      document.querySelectorAll('.peps-lang-btn[data-lang="' + code + '"]').forEach(function(b) {
+        b.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
+      });
+    });
+    document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function(el) {
+      var val = el.getAttribute('data-i18n-' + lang);
+      if (val) el.textContent = val;
+    });
+    if (typeof window.setToolLang === 'function') window.setToolLang(lang);
+    if (typeof window.changeLang === 'function') window.changeLang(lang);
+    if (typeof window.setLanguage === 'function') window.setLanguage(lang);
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+  };
+
+  var saved = 'fr';
+  try { saved = localStorage.getItem('profeps_lang') || 'fr'; } catch(e) {}
+  if (saved && saved !== 'fr') {
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', function() { window.profepsSetLang(saved); });
+    } else {
+      window.profepsSetLang(saved);
+    }
+  }
+})();
+</script>
+<!-- PROFEPS_UNIFIED_NAVBAR_END -->
+<header class="vma-hero">
+    <div id="ui-badge" class="hero-badge" data-i18n-fr="⚡ Cluster 3C · Monitoring de la Charge Interne (Foster sRPE &amp; ACWR)" data-i18n-en="⚡ Cluster 3C · Internal Training Load (Foster sRPE &amp; ACWR Ratio)" data-i18n-ar="⚡ القطب 3C · مراقبة الحمل التدريبي (Foster sRPE) والوقاية من الإصابات (ACWR)">⚡ Cluster 3C · Monitoring de la Charge Interne (Foster sRPE &amp; ACWR)</div>
+    <h1 id="ui-title" style="font-size:clamp(1.55rem,3vw,2.25rem);font-weight:800;color:#0f172a;margin:0 auto 0.65rem auto;max-width:880px;line-height:1.22;" data-i18n-fr="Calculateur de Charge RPE Foster &amp; Ratio ACWR Prévention des Blessures" data-i18n-en="Foster sRPE Training Load, Monotony &amp; ACWR Injury Risk Calculator" data-i18n-ar="حاسبة الحمل التدريبي Foster sRPE ونسبة الوقاية من الإصابات ACWR">Calculateur de Charge RPE Foster &amp; Ratio ACWR Prévention des Blessures</h1>
+    <p id="ui-sub" style="font-size:0.95rem;color:#475569;max-width:760px;margin:0 auto;line-height:1.6;" data-i18n-fr="Saisissez votre charge aiguë (7 derniers jours) et votre charge chronique (moyenne 4 semaines) puis cliquez sur Calculer pour évaluer votre ratio ACWR et votre risque de blessure." data-i18n-en="Enter your 7-day acute load and 28-day chronic average load, then click Calculate to evaluate your ACWR ratio and injury risk zone." data-i18n-ar="أدخل الحمل التدريبي الحاد (آخر 7 أيام) والحمل المزمن (متوسط 4 أسابيع) ثم اضغط على &quot;احسب&quot; لتقييم نسبة ACWR ومخاطر الإصابة.">Saisissez votre charge aiguë (7 derniers jours) et votre charge chronique (moyenne 4 semaines) puis cliquez sur Calculer pour évaluer votre ratio ACWR et votre risque de blessure.</p>
+  </header>
+
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-6">
+    <div class="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-5">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3.5">
+        <h2 class="text-base font-extrabold text-slate-900 uppercase tracking-wider" data-i18n-fr="1. Paramètres de Charge d'Entraînement (Méthode Foster sRPE)" data-i18n-en="1. Training Load Inputs (Foster sRPE Method)" data-i18n-ar="1. معطيات الحمل التدريبي (طريقة Foster sRPE)">1. Paramètres de Charge d'Entraînement (Méthode Foster sRPE)</h2>
+        <span class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">UA · Ratio ACWR</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Charge Aiguë — 7 derniers jours (UA = Σ Durée min × RPE)" data-i18n-en="Acute Load — Last 7 days (AU = Σ Duration min × RPE)" data-i18n-ar="الحمل الحاد — آخر 7 أيام (وحدة = المدة × RPE)">Charge Aiguë — 7 derniers jours (UA = Σ Durée min × RPE)</label>
+          <input id="inp-acute" type="number" value="2150" min="100" max="10000" step="50" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-base font-mono font-bold" />
+        </div>
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Charge Chronique — Moyenne hebdo sur 4 semaines (UA)" data-i18n-en="Chronic Load — 4-week rolling weekly average (AU)" data-i18n-ar="الحمل المزمن — المتوسط الأسبوعي لـ 4 أسابيع">Charge Chronique — Moyenne hebdo sur 4 semaines (UA)</label>
+          <input id="inp-chronic" type="number" value="1900" min="100" max="10000" step="50" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-base font-mono font-bold" />
+        </div>
+      </div>
+
+      <button type="button" id="btn-calc-main" onclick="triggerCalculation()" class="peps-cta-btn w-full mt-3 py-4 px-6 rounded-2xl font-extrabold text-base sm:text-lg text-white shadow-xl transition-all duration-200 flex items-center justify-center gap-3 cursor-pointer select-none"><span>🛡️</span>
+        <span data-i18n-fr="Calculer mon Ratio ACWR & le Diagnostic Prévention Blessures" data-i18n-en="Calculate My ACWR Ratio & Injury Risk Diagnosis" data-i18n-ar="احسب نسبة ACWR وتشخيص الوقاية من الإصابات">Calculer mon Ratio ACWR & le Diagnostic Prévention Blessures</span><span class="peps-cta-arrow" aria-hidden="true">→</span></button>
+    </div>
+
+    <div id="tool-results-panel" class="hidden space-y-6">
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+        <h3 class="text-base font-extrabold text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-3" data-i18n-fr="2. Vos Indicateurs de Charge & Interprétation du Risque" data-i18n-en="2. Load Metrics & Injury Risk Interpretation" data-i18n-ar="2. مؤشرات الحمل التدريبي وتفسير مستوى الخطر">2. Vos Indicateurs de Charge & Interprétation du Risque</h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+          <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl space-y-1">
+            <div class="text-xs font-extrabold uppercase text-emerald-900" data-i18n-fr="Ratio ACWR (Aigu / Chronique)" data-i18n-en="ACWR Ratio (Acute / Chronic)" data-i18n-ar="نسبة ACWR (الحاد / المزمن)">Ratio ACWR (Aigu / Chronique)</div>
+            <div id="out-acwr" dir="ltr" class="text-3xl font-black font-mono text-emerald-700 tabular-nums">--</div>
+            <div id="out-acwr-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 border border-emerald-100"></div>
+          </div>
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-1">
+            <div class="text-xs font-extrabold uppercase text-slate-800" data-i18n-fr="Variation Hebdomadaire" data-i18n-en="Weekly Load Progression" data-i18n-ar="نسبة التغير الأسبوعي للحمل">Variation Hebdomadaire</div>
+            <div id="out-diff" dir="ltr" class="text-3xl font-black font-mono text-slate-800 tabular-nums">--</div>
+            <div id="out-diff-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 border border-slate-200"></div>
+          </div>
+          <div class="p-4 bg-red-50 border border-red-200 rounded-2xl space-y-1">
+            <div class="text-xs font-extrabold uppercase text-red-900" data-i18n-fr="Plafond Sécuritaire Semaine Suivante" data-i18n-en="Safe Max Load Next Week" data-i18n-ar="الحد الآمن للأسبوع القادم">Plafond Sécuritaire Semaine Suivante</div>
+            <div id="out-safe-max" dir="ltr" class="text-3xl font-black font-mono text-red-700 tabular-nums">--</div>
+            <div id="out-safe-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 border border-red-100"></div>
+          </div>
+        </div>
+
+        <div id="out-acwr-diag" class="p-5 bg-slate-50 border-l-4 border-emerald-600 rounded-xl text-xs sm:text-sm text-slate-700 leading-relaxed space-y-2"></div>
+      </div>
+    </div>
+    
+    <!-- GUIDE D'UTILISATION VISUEL & EXPLICATION DES PARAMÈTRES (SEO) -->
+    <section class="peps-seo-guide-card max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 mt-8" style="max-width:48rem;margin:2rem auto 0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:20px;padding:1.75rem;box-shadow:0 10px 28px -8px rgba(15,23,42,0.06);" aria-labelledby="seo-guide-title">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.5rem;border-bottom:1px solid #f1f5f9;padding-bottom:1rem;">
+        <div class="flex items-center gap-2.5" style="display:flex;align-items:center;gap:0.65rem;">
+          <span class="w-9 h-9 rounded-xl bg-red-50 border border-red-200 text-red-700 flex items-center justify-center font-black text-base shrink-0" style="width:36px;height:36px;border-radius:10px;background:#fef2f2;border:1px solid #fecaca;display:inline-flex;align-items:center;justify-content:center;font-size:1rem;">📘</span>
+          <div>
+            <h2 id="seo-guide-title" class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight m-0" style="font-size:1.05rem;font-weight:800;color:#0f172a;margin:0;" data-i18n-fr="Mode d'Emploi & Signification des Paramètres" data-i18n-en="How It Works & Input Parameter Guide" data-i18n-ar="طريقة الاستخدام وشرح المعطيات المطلوبة">Mode d'Emploi & Signification des Paramètres</h2>
+          </div>
+        </div>
+        <span class="text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full self-start sm:self-auto" style="font-size:0.74rem;font-weight:700;color:#065f46;background:#ecfdf5;border:1px solid #a7f3d0;padding:0.25rem 0.75rem;border-radius:9999px;" data-i18n-fr="Guide Scientifique & EPS" data-i18n-en="Sports Science & PE Guide" data-i18n-ar="دليل علمي وتربوي">Guide Scientifique & EPS</span>
+      </div>
+
+      <div class="space-y-2.5">
+        <h3 class="text-xs font-extrabold uppercase tracking-wider text-red-700 m-0" style="font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:#b91c1c;margin:0 0 0.5rem 0;" data-i18n-fr="1. Étapes d'utilisation du calculateur" data-i18n-en="1. Step-by-Step Instructions" data-i18n-ar="1. خطوات استخدام الحاسبة">1. Étapes d'utilisation du calculateur</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          
+          <div class="flex items-start gap-3.5 p-4 rounded-xl bg-slate-50/90 border border-slate-200/90 shadow-xs hover:border-red-200 transition-all" style="display:flex;align-items:flex-start;gap:0.85rem;padding:1rem;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;">
+            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:#f8fafc;color:#1e293b;border:1px solid #cbd5e1;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">1</span>
+            <p class="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed m-0" style="font-size:0.84rem;line-height:1.55;color:#334155;margin:0;" data-i18n-fr="Calculez la charge de chaque séance selon la méthode de Carl Foster : Durée de la séance (en minutes) × RPE ressenti (de 1 à 10 sur l'échelle de Borg CR10)." data-i18n-en="Multiply session duration (minutes) by Borg CR10 RPE (1–10) for each workout." data-i18n-ar="احسب حمل كل حصة بضرب المدة (بالدقائق) في شدة الجهد المدرك RPE (من 1 إلى 10).">Calculez la charge de chaque séance selon la méthode de Carl Foster : Durée de la séance (en minutes) × RPE ressenti (de 1 à 10 sur l'échelle de Borg CR10).</p>
+          </div>
+          <div class="flex items-start gap-3.5 p-4 rounded-xl bg-slate-50/90 border border-slate-200/90 shadow-xs hover:border-red-200 transition-all" style="display:flex;align-items:flex-start;gap:0.85rem;padding:1rem;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;">
+            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:#f8fafc;color:#1e293b;border:1px solid #cbd5e1;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">2</span>
+            <p class="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed m-0" style="font-size:0.84rem;line-height:1.55;color:#334155;margin:0;" data-i18n-fr="Additionnez vos charges des 7 derniers jours pour obtenir la Charge Aiguë (en Unités Arbitraires UA)." data-i18n-en="Sum the last 7 days to enter your Acute Load (AU)." data-i18n-ar="اجمع حمل آخر 7 أيام لإدخال الحمل الحاد (UA).">Additionnez vos charges des 7 derniers jours pour obtenir la Charge Aiguë (en Unités Arbitraires UA).</p>
+          </div>
+          <div class="flex items-start gap-3.5 p-4 rounded-xl bg-slate-50/90 border border-slate-200/90 shadow-xs hover:border-red-200 transition-all" style="display:flex;align-items:flex-start;gap:0.85rem;padding:1rem;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;">
+            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:#f8fafc;color:#1e293b;border:1px solid #cbd5e1;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">3</span>
+            <p class="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed m-0" style="font-size:0.84rem;line-height:1.55;color:#334155;margin:0;" data-i18n-fr="Indiquez votre Charge Chronique (moyenne hebdomadaire des 4 dernières semaines)." data-i18n-en="Enter your 4-week rolling average Weekly Chronic Load (AU)." data-i18n-ar="أدخل المتوسط الأسبوعي لآخر 4 أسابيع (الحمل المزمن).">Indiquez votre Charge Chronique (moyenne hebdomadaire des 4 dernières semaines).</p>
+          </div>
+          <div class="flex items-start gap-3.5 p-4 rounded-xl bg-slate-50/90 border border-slate-200/90 shadow-xs hover:border-red-200 transition-all" style="display:flex;align-items:flex-start;gap:0.85rem;padding:1rem;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;">
+            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:#f8fafc;color:#1e293b;border:1px solid #cbd5e1;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">4</span>
+            <p class="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed m-0" style="font-size:0.84rem;line-height:1.55;color:#334155;margin:0;" data-i18n-fr="Cliquez sur Calculer pour obtenir votre ratio ACWR et votre plafond sécuritaire." data-i18n-en="Click Calculate to check your ACWR injury risk ratio and next week's safe ceiling." data-i18n-ar="اضغط على زر الحساب لمعرفة نسبة ACWR ومستوى الوقاية من الإصابات.">Cliquez sur Calculer pour obtenir votre ratio ACWR et votre plafond sécuritaire.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-2.5 pt-2">
+        <h3 class="text-xs font-extrabold uppercase tracking-wider text-emerald-800 m-0" style="font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:#065f46;margin:0 0 0.5rem 0;" data-i18n-fr="2. Explication des informations demandées" data-i18n-en="2. Explanation of Requested Inputs" data-i18n-ar="2. شرح المعلومات والمعطيات المطلوبة">2. Explication des informations demandées</h3>
+        <div class="grid grid-cols-1 gap-2.5">
+          
+          <div class="flex items-start gap-3 p-3.5 rounded-xl bg-emerald-50/50 border border-emerald-200/80" style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.9rem 1rem;border-radius:12px;background:rgba(236,253,245,0.55);border:1px solid rgba(167,243,208,0.85);">
+            <span class="w-6 h-6 rounded-lg bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0 mt-0.5" style="width:24px;height:24px;border-radius:8px;background:#006233;color:#ffffff;font-size:0.72rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">✓</span>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed m-0" style="font-size:0.83rem;line-height:1.55;color:#1e293b;margin:0;" data-i18n-fr="Charge Aiguë 7 jours (UA) : reflète la fatigue récente accumulée sur la semaine en cours." data-i18n-en="Acute Load (7d AU): recent weekly fatigue." data-i18n-ar="الحمل الحاد (7 أيام): يعبر عن الإجهاد الحديث للأسبوع الحالي.">Charge Aiguë 7 jours (UA) : reflète la fatigue récente accumulée sur la semaine en cours.</p>
+          </div>
+          <div class="flex items-start gap-3 p-3.5 rounded-xl bg-emerald-50/50 border border-emerald-200/80" style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.9rem 1rem;border-radius:12px;background:rgba(236,253,245,0.55);border:1px solid rgba(167,243,208,0.85);">
+            <span class="w-6 h-6 rounded-lg bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0 mt-0.5" style="width:24px;height:24px;border-radius:8px;background:#006233;color:#ffffff;font-size:0.72rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">✓</span>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed m-0" style="font-size:0.83rem;line-height:1.55;color:#1e293b;margin:0;" data-i18n-fr="Charge Chronique 28 jours (UA) : représente l'état de préparation physique (« fitness ») construit sur le dernier mois." data-i18n-en="Chronic Load (28d AU): 4-week rolling fitness baseline." data-i18n-ar="الحمل المزمن (4 أسابيع): يعكس مستوى الجاهزية البدنية التراكمي.">Charge Chronique 28 jours (UA) : représente l'état de préparation physique (« fitness ») construit sur le dernier mois.</p>
+          </div>
+          <div class="flex items-start gap-3 p-3.5 rounded-xl bg-emerald-50/50 border border-emerald-200/80" style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.9rem 1rem;border-radius:12px;background:rgba(236,253,245,0.55);border:1px solid rgba(167,243,208,0.85);">
+            <span class="w-6 h-6 rounded-lg bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0 mt-0.5" style="width:24px;height:24px;border-radius:8px;background:#006233;color:#ffffff;font-size:0.72rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">✓</span>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed m-0" style="font-size:0.83rem;line-height:1.55;color:#1e293b;margin:0;" data-i18n-fr="Ratio ACWR (Aigu / Chronique) : indicateur de Tim Gabbett identifiant la zone optimale (« Sweet Spot » entre 0,80 et 1,30) et la zone de danger (&gt; 1,50)." data-i18n-en="ACWR Ratio: Gabbett's workload index identifying the 0.80–1.30 sweet spot vs &gt;1.50 injury danger zone." data-i18n-ar="نسبة ACWR: مؤشر غابيت لتحديد المنطقة الآمنة (0.80 إلى 1.30) وتفادي منطقة الخطر (&gt; 1.50).">Ratio ACWR (Aigu / Chronique) : indicateur de Tim Gabbett identifiant la zone optimale (« Sweet Spot » entre 0,80 et 1,30) et la zone de danger (&gt; 1,50).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 rounded-xl bg-amber-50/70 border border-amber-200/80 space-y-1.5" style="padding:1rem 1.15rem;border-radius:14px;background:#fffbeb;border:1px solid #fde68a;">
+        <h3 class="text-xs font-extrabold uppercase tracking-wider text-amber-900 m-0" style="font-size:0.76rem;font-weight:800;color:#78350f;margin:0 0 0.35rem 0;">💡 Quel est le ratio ACWR idéal pour progresser sans se blesser ?</h3>
+        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed m-0" style="font-size:0.83rem;line-height:1.55;color:#334155;margin:0;">Selon les travaux de Tim Gabbett et Carl Foster, le ratio ACWR optimal (« Sweet Spot ») se situe entre 0,80 et 1,30. Lorsque le ratio dépasse 1,50 (hausse brutale de plus de 50 % de la charge hebdomadaire), le risque de blessure musculaire ou tendineuse double dans les 7 à 14 jours suivants.</p>
+      </div>
+
+      <div class="pt-3 border-t border-slate-100 flex flex-wrap items-center gap-1.5" style="padding-top:0.75rem;border-top:1px solid #f1f5f9;display:flex;flex-wrap:wrap;align-items:center;gap:0.4rem;">
+        <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mr-1" style="font-size:0.68rem;font-weight:700;text-transform:uppercase;color:#94a3b8;margin-right:0.35rem;" data-i18n-fr="Thématiques :" data-i18n-en="Topics:" data-i18n-ar="مواضيع ذات صلة:">Thématiques :</span>
+        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600 border border-slate-200" style="display:inline-flex;align-items:center;padding:0.22rem 0.65rem;border-radius:9999px;font-size:0.72rem;font-weight:600;background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;">calculateur charge rpe foster</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600 border border-slate-200" style="display:inline-flex;align-items:center;padding:0.22rem 0.65rem;border-radius:9999px;font-size:0.72rem;font-weight:600;background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;">ratio acwr blessure</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600 border border-slate-200" style="display:inline-flex;align-items:center;padding:0.22rem 0.65rem;border-radius:9999px;font-size:0.72rem;font-weight:600;background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;">charge aigue chronique sport</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600 border border-slate-200" style="display:inline-flex;align-items:center;padding:0.22rem 0.65rem;border-radius:9999px;font-size:0.72rem;font-weight:600;background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;">calcul sRPE entrainement</span>
+      </div>
+    </section>
+  
+    <!-- AVERTISSEMENT DE PRUDENCE PHYSIQUE & CONFORMITÉ SANTÉ -->
+    <div class="peps-medical-notice max-w-3xl mx-auto my-6 p-4 rounded-xl bg-slate-50 border border-slate-200 text-slate-600 text-xs leading-relaxed flex items-start gap-3 shadow-xs">
+      <span class="text-amber-500 text-base shrink-0">⚠️</span>
+      <div>
+        <strong class="text-slate-800">Avertissement de sécurité et de prudence sportive :</strong> Les calculs physiologiques fournis sont des estimations théoriques validées scientifiquement à des fins pédagogiques et d'entraînement. Ils ne remplacent pas un avis médical personnalisé. Avant d'entreprendre des efforts à haute intensité, assurez-vous d'une aptitude médicale complète et respectez des phases d'échauffement et d'hydratation progressives.
+      </div>
+    </div>
+
+  
+    <!-- FICHE SCIENTIFIQUE & PÉDAGOGIQUE OFFICIELLE (1130 MOTS MINIMUM) -->
+    <section class="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 mt-8" id="fiche-pedagogique-officielle" style="max-width:48rem;margin:2rem auto 0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:20px;padding:1.75rem;box-shadow:0 10px 28px -8px rgba(15,23,42,0.06);">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-1">
+            <span class="text-red-700 font-bold">Cluster 3B · Monitoring de Charge &amp; Prévention des Blessures</span>
+            <span aria-hidden="true">&middot;</span>
+            <span style="color:#006233;font-weight:700;">Rédigé par Abdelkhalek ELBOUDANI (Prof d'EPS au Maroc)</span>
+          </div>
+          <h2 class="text-lg font-extrabold text-slate-900 tracking-tight flex items-center gap-2 m-0">
+            <span style="font-size:1.15rem;">📖</span>
+            Charge RPE Foster &amp; Ratio ACWR
+          </h2>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md tabular-nums border border-emerald-200">
+            1130 mots (Guide Approfondi)
+          </span>
+          <button type="button" onclick="copierFichePedagogique()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors cursor-pointer border border-slate-200" title="Copier le guide officiel complet (1130 mots)">
+            <span id="btn-copy-ico">📋</span>
+            <span id="btn-copy-txt">Copier le guide complet</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ZONE 2 : INTERPRÉTATION DES RÉSULTATS & BARÈMES SCOLAIRES (DIRECTEMENT SOUS L'OUTIL) -->
+      <div class="space-y-3">
+        <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
+          <span style="color:#d97706;">💡</span>
+          Zone 2 : Interprétation Immédiate &amp; Barèmes Scolaires Marocains
+        </h3>
+        <p class="text-xs text-slate-700 leading-relaxed bg-amber-50/60 border border-amber-200/70 p-3.5 rounded-xl m-0">
+          Le modèle couplé de Carl Foster et Tim Gabbett constitue le standard scientifique mondial pour monitorer la fatigue interne, optimiser le pic de forme et prévenir jusqu'à 80% des blessures de surmenage musculaire et tendineux.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1">
+          
+    <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+      <div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Zone de Sous-Entraînement</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">ACWR &lt; 0,80</div>
+      </div>
+      <div class="text-[11px] text-slate-600 leading-normal">Charge récente insuffisante par rapport aux habitudes. Risque de désadaptation aérobie et vulnérabilité lors de la reprise.</div>
+    </div>
+    <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+      <div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Zone Optimale / « Sweet Spot » de Gabbett</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">0,80 ≤ ACWR ≤ 1,30</div>
+      </div>
+      <div class="text-[11px] text-slate-600 leading-normal">Progression physiologique maximale avec risque de blessure minimal (&lt; 5%). Adaptation parfaite.</div>
+    </div>
+    <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+      <div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Zone de Vigilance / Surcharge Modérée</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">1,31 ≤ ACWR ≤ 1,50</div>
+      </div>
+      <div class="text-[11px] text-slate-600 leading-normal">Augmentation rapide de la fatigue. Surveillance du sommeil, réduction de la monotonie requise.</div>
+    </div>
+    <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+      <div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Zone Critique / Risque Majeur de Blessure</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">ACWR &gt; 1,50</div>
+      </div>
+      <div class="text-[11px] text-slate-600 leading-normal">Pic de charge brutal (+50%). Risque de blessure musculaire ou tendineuse triplé dans les 7 à 14 jours suivants.</div>
+    </div>
+        </div>
+      </div>
+
+      <!-- ZONE 3 : TRAITÉ DIDACTIQUE & SITUATIONS DE TERRAIN EN EPS AU MAROC -->
+      <div class="space-y-3 pt-2 border-t border-slate-100">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
+            <span style="color:#006233;">🏃</span>
+            Zone 3 : Application Didactique EPS Maroc &amp; Gestion de Classe (1130 mots)
+          </h3>
+          <button type="button" onclick="toggleTexteIntegral()" id="btn-toggle-texte" class="text-xs font-bold text-[#991b1b] hover:text-[#7f1d1d] cursor-pointer">
+            Afficher le texte complet ▼
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          
+    <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
+      <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">1</span>
+      <p class="text-xs text-slate-700 leading-relaxed m-0">À l'issue de chaque séance d'entraînement ou de match (environ 15 à 30 minutes après le retour au calme), évaluez votre effort perçu global sur l'échelle RPE de Foster / Borg CR10 (de 1 très léger à 10 effort maximal absolu).</p>
+    </div>
+    <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
+      <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">2</span>
+      <p class="text-xs text-slate-700 leading-relaxed m-0">Renseignez la durée effective de la séance en minutes pour obtenir la charge interne en Unités Arbitraires (UA = Durée × RPE).</p>
+    </div>
+    <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
+      <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">3</span>
+      <p class="text-xs text-slate-700 leading-relaxed m-0">Suivez vos charges quotidiennes sur la semaine pour obtenir votre Charge Aiguë (7 jours), votre Monotonie, votre Contrainte (Strain) et comparez-la à votre Charge Chronique habituelle (moyenne des 4 dernières semaines) pour obtenir votre ratio ACWR.</p>
+    </div>
+        </div>
+        
+        <div id="bloc-texte-integral" class="hidden p-5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 leading-relaxed whitespace-pre-line font-sans">
+          <div style="font-weight:700;color:#006233;margin-bottom:0.75rem;padding-bottom:0.4rem;border-bottom:1px solid #cbd5e1;">
+            Auteur : Abdelkhalek ELBOUDANI · Professeur d'Éducation Physique et Sportive (Maroc) · Conforme Orientations 2007-2009
+          </div>
+I. Introduction au Suivi de Charge et Révolution du Modèle sRPE / ACWR
+
+Dans l'univers du sport contemporain, de l'athlétisme aux sports collectifs professionnels jusqu'à la pratique scolaire en EPS, la performance athlétique résulte d'un équilibre délicat entre deux forces opposées : la charge d'entraînement qui stimule l'adaptation physiologique et la fatigue qui s'accumule au fil des séances. Pendant longtemps, les entraîneurs n'ont quantifié que la charge externe : le nombre de kilomètres courus, le nombre de levées de fonte ou la vitesse chronométrée. Cependant, deux athlètes effectuant la même séance externe subissent un stress interne radicalement différent selon leur niveau de forme, leur état de fatigue nerveuse, leur sommeil et leur niveau de stress personnel. Pour capturer cette réalité biologique interne sans recourir à des prises de sang ou des appareils invasifs coûteux, le professeur américain Carl Foster a mis au point dans les années quatre-vingt-dix la méthode de la Session-RPE (sRPE). Plus tard, le chercheur australien Tim Gabbett a enrichi cette approche en formalisant le concept de ratio Charge Aiguë / Charge Chronique (ACWR pour Acute:Chronic Workload Ratio). Ce couplage est aujourd'hui universellement reconnu comme l'outil le plus puissant pour maximiser la condition physique tout en réduisant drastiquement les blessures sans contact.
+
+II. Guide d'Utilisation Étape par Étape
+
+Pour monitorer avec rigueur votre charge d'entraînement et sécuriser votre progression :
+1. Évaluation différée du RPE : Environ quinze à trente minutes après la fin de la séance d'entraînement ou du match (afin d'éviter que le ressenti des toutes dernières minutes ne biaise le jugement global), posez-vous la question simple : « Comment avez-vous trouvé la séance dans sa globalité ? ». Évaluez l'effort sur l'échelle de Borg CR10 modifiée de Foster, allant de 1 (très facile) à 10 (effort maximal absolu).
+2. Calcul de la charge de séance : Renseignez la durée réelle de l'entraînement en minutes (sans compter les pauses prolongées de vestiaire) et multipliez-la par le score RPE. Le résultat s'exprime en Unités Arbitraires (UA).
+3. Suivi hebdomadaire et calcul de la Monotonie : Enregistrez les charges quotidiennes sur l'ensemble des sept jours de la semaine pour obtenir la Charge Aiguë hebdomadaire et l'Indice de Monotonie.
+4. Comparaison avec la Charge Chronique et lecture de l'ACWR : Saisissez la moyenne hebdomadaire des charges accumulées au cours des quatre dernières semaines (Charge Chronique de 28 jours). Le calculateur affiche immédiatement votre ratio ACWR et vous délivre un diagnostic de sécurité sans équivoque.
+
+III. Explication des Paramètres et Notions Clés
+
+Comprendre les variables calculées permet d'adapter intelligemment sa programmation :
+- Le RPE (Rating of Perceived Exertion) : Il s'agit d'un intégrateur neurophysiologique exceptionnel validé scientifiquement. Il synthétise les signaux cardiorespiratoires (ventilation, fréquence cardiaque), musculaires (acidose, tensions myofibrillaires) et psychologiques du sportif.
+- La Charge Aiguë (Acute Workload en UA) : Somme des charges des sept derniers jours. Elle représente la fatigue immédiate accumulée récemment.
+- La Charge Chronique (Chronic Workload en UA) : Moyenne mobile des charges hebdomadaires sur les vingt-huit derniers jours. Elle représente la condition physique de fond, la robustesse et la tolérance à l'effort construites par l'athlète au fil du mois écoulé.
+- L'Indice de Monotonie : Rapport entre la charge moyenne quotidienne et son écart-type sur la semaine. Une monotonie élevée signifie que toutes les séances se ressemblent en intensité sans aucune alternance entre jours durs et jours légers.
+- La Contrainte (Strain) : Produit de la charge hebdomadaire par la monotonie. Elle reflète le stress biologique global et constitue le signal d'alarme du surentraînement.
+
+IV. Relations Mathématiques et Équations de Foster et Gabbett
+
+Les relations mathématiques qui pilotent le calculateur sont d'une rigueur absolue :
+1. Charge d'une séance unitaire (Méthode de Carl Foster) :
+Charge (UA) = Durée de la séance (en minutes) × RPE (score de 0 à 10).
+Exemple : Une séance de 90 minutes évaluée à un RPE de 6 (difficile) représente 90 × 6 = 540 Unités Arbitraires (UA).
+2. Charge Hebdomadaire Aiguë :
+Charge Aiguë = Somme des charges des 7 jours de la semaine (UA).
+3. Calcul de la Monotonie hebdomadaire de Foster :
+Monotonie = Moyenne journalière des 7 jours / Écart-type des 7 jours.
+4. Calcul de l'Indice de Contrainte (Training Strain) :
+Strain = Charge Hebdomadaire Aiguë × Monotonie.
+5. Calcul du ratio Charge Aiguë / Charge Chronique (ACWR de Tim Gabbett) :
+ACWR = Charge Aiguë (semaine en cours) / Charge Chronique Moyenne (4 semaines précédentes).
+Exemple concret : Si un athlète affiche une charge aiguë de 3 600 UA cette semaine, et que sa charge chronique moyenne sur les 4 dernières semaines était de 3 000 UA :
+ACWR = 3 600 / 3 000 = 1,20.
+
+V. Grille d'Interprétation du Ratio ACWR et Seuils de Risque
+
+Les travaux de Tim Gabbett sur des milliers d'athlètes professionnels ont identifié des zones prédictives remarquables :
+- ACWR &lt; 0,80 (Zone de Sous-Entraînement) : La charge récente est trop faible par rapport aux habitudes de l'athlète. Bien que le risque de blessure immédiate soit bas, cette situation entraîne une perte d'adaptations physiologiques. L'athlète devient vulnérable dès qu'il devra réaccélérer ses charges.
+- 0,80 ≤ ACWR ≤ 1,30 (Zone Optimale ou « Sweet Spot ») : C'est la zone idéale de progression. La charge augmente de manière progressive et maîtrisée (+5% à +10% par semaine). L'athlète développe sa forme physique tout en maintenant son risque de blessure en dessous de 5%.
+- 1,31 ≤ ACWR ≤ 1,50 (Zone de Vigilance et Surcharge Modérée) : L'augmentation de la charge est rapide. Le risque de blessure augmente modérément. Il convient de stabiliser la charge sur les sept jours suivants et de surveiller la qualité du sommeil et de la nutrition.
+- ACWR &gt; 1,50 (Zone Critique et Risque Élevé de Blessure) : La charge a augmenté de plus de 50% d'un coup par rapport aux habitudes. Les études démontrent que dans cette zone de danger, le risque de blessure musculaire, tendineuse ou articulaire est multiplié par trois à quatre dans les sept à quatorze jours qui suivent.
+
+VI. Règles d'Or pour la Planification et la Prévention des Blessures
+
+Pour tirer le meilleur parti du suivi RPE et de l'ACWR en club ou en milieu scolaire :
+- Ne jamais augmenter la charge hebdomadaire de plus de dix pour cent d'une semaine sur l'autre (règle des 10%).
+- Casser la monotonie : Veillez à ce que l'indice de monotonie reste toujours inférieur à 2,0. Pour cela, alternez impérativement des journées très intenses (RPE 7-9) avec des journées très légères de régénération (RPE 2-3) ou de repos complet.
+- Ne pas diaboliser la charge élevée : Gabbett rappelle qu'une charge chronique élevée protège contre les blessures. Ce n'est pas le fait de s'entraîner beaucoup qui blesse, mais le fait d'augmenter la charge trop brutalement sans préparation préalable.
+        </div>
+      </div>
+
+      <!-- ZONE 4 : FONDEMENTS PHYSIOLOGIQUES & RELATIONS MATHÉMATIQUES -->
+      <div class="space-y-3 pt-2 border-t border-slate-100">
+        <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
+          <span style="color:#c1272d;">📐</span>
+          Zone 4 : Fondements Physiologiques &amp; Relations Mathématiques
+        </h3>
+        <div class="p-4 bg-slate-900 text-white rounded-xl space-y-2 border border-slate-800 shadow-inner">
+          
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Charge Interne de Séance de Carl Foster (sRPE) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Charge de Séance (UA) = Durée de la séance (minutes) × Score RPE (0 à 10)</code>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Charge Hebdomadaire Aiguë (Acute Load) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Charge Aiguë (UA) = Somme des charges de séance des 7 derniers jours</code>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Indice de Monotonie de Foster :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Monotonie = Charge journalière moyenne (7j) / Écart-type des charges journalières (7j)</code>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Indice de Contrainte Globale (Training Strain) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Contrainte (Strain) = Charge Hebdomadaire Aiguë × Monotonie</code>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Ratio Charge Aiguë : Chronique (ACWR de Tim Gabbett) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">ACWR = Charge Aiguë (7 jours) / Charge Chronique Hebdomadaire Moyenne (28 jours)</code>
+    </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      function toggleTexteIntegral() {
+        var el = document.getElementById('bloc-texte-integral');
+        var btn = document.getElementById('btn-toggle-texte');
+        if (el && btn) {
+          if (el.classList.contains('hidden')) {
+            el.classList.remove('hidden');
+            btn.textContent = 'Masquer le texte complet ▲';
+          } else {
+            el.classList.add('hidden');
+            btn.textContent = 'Afficher le texte complet ▼';
+          }
+        }
+      }
+
+      function copierFichePedagogique() {
+        var texte = "I. Introduction au Suivi de Charge et Révolution du Modèle sRPE / ACWR\n\nDans l'univers du sport contemporain, de l'athlétisme aux sports collectifs professionnels jusqu'à la pratique scolaire en EPS, la performance athlétique résulte d'un équilibre délicat entre deux forces opposées : la charge d'entraînement qui stimule l'adaptation physiologique et la fatigue qui s'accumule au fil des séances. Pendant longtemps, les entraîneurs n'ont quantifié que la charge externe : le nombre de kilomètres courus, le nombre de levées de fonte ou la vitesse chronométrée. Cependant, deux athlètes effectuant la même séance externe subissent un stress interne radicalement différent selon leur niveau de forme, leur état de fatigue nerveuse, leur sommeil et leur niveau de stress personnel. Pour capturer cette réalité biologique interne sans recourir à des prises de sang ou des appareils invasifs coûteux, le professeur américain Carl Foster a mis au point dans les années quatre-vingt-dix la méthode de la Session-RPE (sRPE). Plus tard, le chercheur australien Tim Gabbett a enrichi cette approche en formalisant le concept de ratio Charge Aiguë / Charge Chronique (ACWR pour Acute:Chronic Workload Ratio). Ce couplage est aujourd'hui universellement reconnu comme l'outil le plus puissant pour maximiser la condition physique tout en réduisant drastiquement les blessures sans contact.\n\nII. Guide d'Utilisation Étape par Étape\n\nPour monitorer avec rigueur votre charge d'entraînement et sécuriser votre progression :\n1. Évaluation différée du RPE : Environ quinze à trente minutes après la fin de la séance d'entraînement ou du match (afin d'éviter que le ressenti des toutes dernières minutes ne biaise le jugement global), posez-vous la question simple : « Comment avez-vous trouvé la séance dans sa globalité ? ». Évaluez l'effort sur l'échelle de Borg CR10 modifiée de Foster, allant de 1 (très facile) à 10 (effort maximal absolu).\n2. Calcul de la charge de séance : Renseignez la durée réelle de l'entraînement en minutes (sans compter les pauses prolongées de vestiaire) et multipliez-la par le score RPE. Le résultat s'exprime en Unités Arbitraires (UA).\n3. Suivi hebdomadaire et calcul de la Monotonie : Enregistrez les charges quotidiennes sur l'ensemble des sept jours de la semaine pour obtenir la Charge Aiguë hebdomadaire et l'Indice de Monotonie.\n4. Comparaison avec la Charge Chronique et lecture de l'ACWR : Saisissez la moyenne hebdomadaire des charges accumulées au cours des quatre dernières semaines (Charge Chronique de 28 jours). Le calculateur affiche immédiatement votre ratio ACWR et vous délivre un diagnostic de sécurité sans équivoque.\n\nIII. Explication des Paramètres et Notions Clés\n\nComprendre les variables calculées permet d'adapter intelligemment sa programmation :\n- Le RPE (Rating of Perceived Exertion) : Il s'agit d'un intégrateur neurophysiologique exceptionnel validé scientifiquement. Il synthétise les signaux cardiorespiratoires (ventilation, fréquence cardiaque), musculaires (acidose, tensions myofibrillaires) et psychologiques du sportif.\n- La Charge Aiguë (Acute Workload en UA) : Somme des charges des sept derniers jours. Elle représente la fatigue immédiate accumulée récemment.\n- La Charge Chronique (Chronic Workload en UA) : Moyenne mobile des charges hebdomadaires sur les vingt-huit derniers jours. Elle représente la condition physique de fond, la robustesse et la tolérance à l'effort construites par l'athlète au fil du mois écoulé.\n- L'Indice de Monotonie : Rapport entre la charge moyenne quotidienne et son écart-type sur la semaine. Une monotonie élevée signifie que toutes les séances se ressemblent en intensité sans aucune alternance entre jours durs et jours légers.\n- La Contrainte (Strain) : Produit de la charge hebdomadaire par la monotonie. Elle reflète le stress biologique global et constitue le signal d'alarme du surentraînement.\n\nIV. Relations Mathématiques et Équations de Foster et Gabbett\n\nLes relations mathématiques qui pilotent le calculateur sont d'une rigueur absolue :\n1. Charge d'une séance unitaire (Méthode de Carl Foster) :\nCharge (UA) = Durée de la séance (en minutes) × RPE (score de 0 à 10).\nExemple : Une séance de 90 minutes évaluée à un RPE de 6 (difficile) représente 90 × 6 = 540 Unités Arbitraires (UA).\n2. Charge Hebdomadaire Aiguë :\nCharge Aiguë = Somme des charges des 7 jours de la semaine (UA).\n3. Calcul de la Monotonie hebdomadaire de Foster :\nMonotonie = Moyenne journalière des 7 jours / Écart-type des 7 jours.\n4. Calcul de l'Indice de Contrainte (Training Strain) :\nStrain = Charge Hebdomadaire Aiguë × Monotonie.\n5. Calcul du ratio Charge Aiguë / Charge Chronique (ACWR de Tim Gabbett) :\nACWR = Charge Aiguë (semaine en cours) / Charge Chronique Moyenne (4 semaines précédentes).\nExemple concret : Si un athlète affiche une charge aiguë de 3 600 UA cette semaine, et que sa charge chronique moyenne sur les 4 dernières semaines était de 3 000 UA :\nACWR = 3 600 / 3 000 = 1,20.\n\nV. Grille d'Interprétation du Ratio ACWR et Seuils de Risque\n\nLes travaux de Tim Gabbett sur des milliers d'athlètes professionnels ont identifié des zones prédictives remarquables :\n- ACWR < 0,80 (Zone de Sous-Entraînement) : La charge récente est trop faible par rapport aux habitudes de l'athlète. Bien que le risque de blessure immédiate soit bas, cette situation entraîne une perte d'adaptations physiologiques. L'athlète devient vulnérable dès qu'il devra réaccélérer ses charges.\n- 0,80 ≤ ACWR ≤ 1,30 (Zone Optimale ou « Sweet Spot ») : C'est la zone idéale de progression. La charge augmente de manière progressive et maîtrisée (+5% à +10% par semaine). L'athlète développe sa forme physique tout en maintenant son risque de blessure en dessous de 5%.\n- 1,31 ≤ ACWR ≤ 1,50 (Zone de Vigilance et Surcharge Modérée) : L'augmentation de la charge est rapide. Le risque de blessure augmente modérément. Il convient de stabiliser la charge sur les sept jours suivants et de surveiller la qualité du sommeil et de la nutrition.\n- ACWR > 1,50 (Zone Critique et Risque Élevé de Blessure) : La charge a augmenté de plus de 50% d'un coup par rapport aux habitudes. Les études démontrent que dans cette zone de danger, le risque de blessure musculaire, tendineuse ou articulaire est multiplié par trois à quatre dans les sept à quatorze jours qui suivent.\n\nVI. Règles d'Or pour la Planification et la Prévention des Blessures\n\nPour tirer le meilleur parti du suivi RPE et de l'ACWR en club ou en milieu scolaire :\n- Ne jamais augmenter la charge hebdomadaire de plus de dix pour cent d'une semaine sur l'autre (règle des 10%).\n- Casser la monotonie : Veillez à ce que l'indice de monotonie reste toujours inférieur à 2,0. Pour cela, alternez impérativement des journées très intenses (RPE 7-9) avec des journées très légères de régénération (RPE 2-3) ou de repos complet.\n- Ne pas diaboliser la charge élevée : Gabbett rappelle qu'une charge chronique élevée protège contre les blessures. Ce n'est pas le fait de s'entraîner beaucoup qui blesse, mais le fait d'augmenter la charge trop brutalement sans préparation préalable.";
+        navigator.clipboard.writeText(texte).then(function() {
+          var ico = document.getElementById('btn-copy-ico');
+          var txt = document.getElementById('btn-copy-txt');
+          if (ico && txt) {
+            ico.textContent = '✓';
+            txt.textContent = 'Guide copié (1130 mots) !';
+            setTimeout(function() {
+              ico.textContent = '📋';
+              txt.textContent = 'Copier le guide complet';
+            }, 2500);
+          }
+        });
+      }
+    </script>
+  
+  </main>
+
+  
+  <!-- PROFEPS_RELATED_MESH_START -->
+  <aside class="peps-related-mesh" style="max-width:1024px;margin:2rem auto;padding:1.25rem 1.5rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;">
+    <h2 style="font-size:0.95rem;font-weight:800;color:#0f172a;margin:0 0 0.85rem 0;">🔗 Ressources &amp; Guides Associés (Calculateurs & Physiologie Sportive)</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.65rem;">
+        <a href="calculateur-imc-sportif-masse-grasse.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Calculateur IMC Sportif & Masse Grasse | ProfEPS →</a>
+        <a href="calculateur-vma.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Calculateur VMA & Allures de Course | ProfEPS →</a>
+        <a href="formule-karvonen-zones-cardiaques-fc-reserve.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Formule de Karvonen : Calculer sa FC de Réserve et sa Zone 2 →</a>
+        <a href="imc-sportif-masse-grasse-formule-deurenberg.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 IMC du Sportif et Formule Deurenberg : Masse Grasse Réelle →</a>
+    </div>
+  </aside>
+  <!-- PROFEPS_RELATED_MESH_END -->
+  <footer class="footer" id="profeps-unified-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-brand" style="display:flex !important;flex-direction:column !important;align-items:flex-start !important;">
+          <img src="/images/prof_eps.webp" width="150" height="46" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:46px !important;max-height:46px !important;width:auto !important;max-width:155px !important;object-fit:contain !important;align-self:flex-start !important;filter:none !important;border-radius:8px !important;margin:0 0 0.9rem 0 !important;display:block !important;">
+          <p data-i18n-fr="La plateforme de référence pour les professeurs d'EPS et candidats aux concours de l'enseignement au Maroc. Générateur pédagogique, calculateurs sportifs et préparation CRMEF." data-i18n-en="The reference platform for PE teachers and CRMEF candidates in Morocco. Educational generator, sports calculators &amp; official curriculum-aligned quizzes." data-i18n-ar="المنصة المرجعية لأساتذة التربية البدنية والمترشحين لمباريات التعليم بالمغرب. مولد وثائق تربوية، حاسبات رياضية واستعداد لمباراة التعليم.">La plateforme de référence pour les professeurs d'EPS et candidats aux concours de l'enseignement au Maroc. Générateur pédagogique, calculateurs sportifs et préparation CRMEF.</p>
+          <div class="footer-stats">
+            <div class="footer-stat-item">
+              <span class="footer-stat-num">16+</span>
+              <span class="footer-stat-lbl" data-i18n-fr="APS couvertes" data-i18n-en="Sports covered" data-i18n-ar="نشاط رياضي">APS couvertes</span>
+            </div>
+            <div class="footer-stat-item">
+              <span class="footer-stat-num">24</span>
+              <span class="footer-stat-lbl" data-i18n-fr="Silos Disciplines" data-i18n-en="Disciplines" data-i18n-ar="تخصصات ومواد">Silos Disciplines</span>
+            </div>
+            <div class="footer-stat-item">
+              <span class="footer-stat-num">100%</span>
+              <span class="footer-stat-lbl" data-i18n-fr="Gratuit" data-i18n-en="Free" data-i18n-ar="مجاني">Gratuit</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-col-title" data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</p>
+          <ul>
+            <li><a href="index.html" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a></li>
+            <li><a href="concours-crmef-hub.html" data-i18n-fr="Préparation CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparation CRMEF</a></li>
+            <li><a href="generateur.html" data-i18n-fr="Générateur PDF" data-i18n-en="PDF Generator" data-i18n-ar="مولد الوثائق PDF">Générateur PDF</a></li>
+            <li><a href="blog.html" data-i18n-fr="Articles &amp; Blog" data-i18n-en="Articles &amp; Blog" data-i18n-ar="المقالات والمدونة">Articles &amp; Blog</a></li>
+            <li><a href="bibliotheque-numerique-eps.html" data-i18n-fr="Bibliothèque EPS" data-i18n-en="PE Digital Library" data-i18n-ar="المكتبة الرقمية">Bibliothèque EPS</a></li>
+            <li><a href="a-propos.html" data-i18n-fr="À propos" data-i18n-en="About Us" data-i18n-ar="من نحن">À propos</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col" id="footer-col-crmef">
+          <p class="footer-col-title" data-i18n-fr="HUB CONCOURS CRMEF" data-i18n-en="CRMEF EXAM HUB" data-i18n-ar="بوابة مباراة التعليم">HUB CONCOURS CRMEF</p>
+          <ul class="footer-crmef-grid">
+            <li class="footer-crmef-hub-item"><a href="concours-crmef-hub.html" class="footer-hub-highlight" data-i18n-fr="★ Hub Concours CRMEF (Toutes Filières)" data-i18n-en="★ CRMEF Exam Hub (All Specialties)" data-i18n-ar="★ بوابة مباراة التعليم (جميع التخصصات)">★ Hub Concours CRMEF (Toutes Filières)</a></li>
+            <li><a href="qcm-sciences-education-crmef.html" data-i18n-fr="Tronc Commun (SE)" data-i18n-en="Education Sciences" data-i18n-ar="علوم التربية">Tronc Commun (SE)</a></li>
+            <li><a href="qcm-didactique-eps-maroc.html" data-i18n-fr="EPS (Sport)" data-i18n-en="PE &amp; Sport" data-i18n-ar="التربية البدنية">EPS (Sport)</a></li>
+            <li><a href="qcm-didactique-primaire-maroc.html" data-i18n-fr="Primaire (TaRL)" data-i18n-en="Primary (TaRL)" data-i18n-ar="التعليم الابتدائي">Primaire (TaRL)</a></li>
+            <li><a href="qcm-didactique-maths-maroc.html" data-i18n-fr="Mathématiques" data-i18n-en="Mathematics" data-i18n-ar="الرياضيات">Mathématiques</a></li>
+            <li><a href="qcm-didactique-physique-chimie-maroc.html" data-i18n-fr="Physique-Chimie" data-i18n-en="Physics &amp; Chemistry" data-i18n-ar="الفيزياء والكيمياء">Physique-Chimie</a></li>
+            <li><a href="qcm-didactique-svt-maroc.html" data-i18n-fr="SVT" data-i18n-en="Life &amp; Earth Sciences" data-i18n-ar="علوم الحياة والأرض">SVT</a></li>
+            <li><a href="qcm-didactique-francais-maroc.html" data-i18n-fr="Français" data-i18n-en="French" data-i18n-ar="اللغة الفرنسية">Français</a></li>
+            <li><a href="qcm-didactique-arabe-maroc.html" data-i18n-fr="Arabe" data-i18n-en="Arabic" data-i18n-ar="اللغة العربية">Arabe</a></li>
+            <li><a href="qcm-didactique-histoire-geographie-maroc.html" data-i18n-fr="Histoire-Géo" data-i18n-en="History &amp; Geography" data-i18n-ar="التاريخ والجغرافيا">Histoire-Géo</a></li>
+            <li><a href="qcm-didactique-philosophie-maroc.html" data-i18n-fr="Philosophie" data-i18n-en="Philosophy" data-i18n-ar="الفلسفة">Philosophie</a></li>
+            <li><a href="qcm-didactique-informatique-maroc.html" data-i18n-fr="Informatique" data-i18n-en="Computer Science" data-i18n-ar="الإعلاميات">Informatique</a></li>
+            <li><a href="qcm-didactique-anglais-maroc.html" data-i18n-fr="Anglais" data-i18n-en="English" data-i18n-ar="اللغة الإنجليزية">Anglais</a></li>
+            <li><a href="qcm-didactique-education-islamique-maroc.html" data-i18n-fr="Éduc. Islamique" data-i18n-en="Islamic Education" data-i18n-ar="التربية الإسلامية">Éduc. Islamique</a></li>
+            <li><a href="qcm-didactique-economie-gestion-maroc.html" data-i18n-fr="Éco-Gestion" data-i18n-en="Economics &amp; Mgmt" data-i18n-ar="الاقتصاد والتدبير">Éco-Gestion</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col" id="footer-col-calculators">
+          <p class="footer-col-title" data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</p>
+          <ul>
+            <li><a href="hub-outils-sport-performance.html" class="footer-hub-highlight" data-i18n-fr="★ Hub Tous les Calculateurs" data-i18n-en="★ All Calculators Hub" data-i18n-ar="★ بوابة جميع الحاسبات الرياضية">★ Hub Tous les Calculateurs</a></li>
+            <li><a href="calculateur-vma.html" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS (VMA) Calculator" data-i18n-ar="حاسبة السرعة VMA">Calculateur VMA</a></li>
+            <li><a href="calculateur-vdot-asr-endurance.html" data-i18n-fr="Calculateur VO2 Max &amp; VDOT" data-i18n-en="VO2 Max &amp; VDOT" data-i18n-ar="حاسبة VO2 Max و VDOT">Calculateur VO2 Max &amp; VDOT</a></li>
+            <li><a href="calculateur-asr-reserve-vitesse.html" data-i18n-fr="Réserve Anaérobie (ASR)" data-i18n-en="Speed Reserve (ASR)" data-i18n-ar="احتياطي السرعة ASR">Réserve Anaérobie (ASR)</a></li>
+            <li><a href="calculateur-frequence-cardiaque-karvonen.html" data-i18n-fr="Fréquence Cardiaque Karvonen" data-i18n-en="Heart Rate (Karvonen)" data-i18n-ar="نبضات القلب Karvonen">Fréquence Cardiaque Karvonen</a></li>
+            <li><a href="calculateur-charge-rpe-foster-acwr.html" data-i18n-fr="Charge RPE Foster &amp; ACWR" data-i18n-en="Foster RPE &amp; ACWR" data-i18n-ar="حمل التدريب RPE و ACWR">Charge RPE Foster &amp; ACWR</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-col-title" data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</p>
+          <ul>
+            <li><a href="mentions-legales.html" data-i18n-fr="Mentions légales" data-i18n-en="Legal Notice" data-i18n-ar="إشعار قانوني">Mentions légales</a></li>
+            <li><a href="politique-confidentialite.html" data-i18n-fr="Politique de confidentialité" data-i18n-en="Privacy Policy" data-i18n-ar="سياسة الخصوصية">Politique de confidentialité</a></li>
+            <li><a href="cgu.html" data-i18n-fr="Conditions d'utilisation" data-i18n-en="Terms of Use" data-i18n-ar="شروط الاستخدام">Conditions d'utilisation</a></li>
+            <li><a href="contact.html" data-i18n-fr="Nous contacter" data-i18n-en="Contact Us" data-i18n-ar="اتصل بنا">Nous contacter</a></li>
+            <li><a href="mailto:profepsma@gmail.com">✉️ profepsma@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span data-i18n-fr="© 2026 Prof EPS Maroc (profeps.ma). Tous droits réservés." data-i18n-en="© 2026 Prof EPS Morocco (profeps.ma). All rights reserved." data-i18n-ar="© 2026 أستاذ التربية البدنية المغرب (profeps.ma). جميع الحقوق محفوظة.">© 2026 Prof EPS Maroc (profeps.ma). Tous droits réservés.</span>
+        <span data-i18n-fr="Fait avec ❤️ pour les enseignants et candidats CRMEF au Maroc" data-i18n-en="Made with ❤️ for teachers &amp; candidates in Morocco" data-i18n-ar="صنع بـ ❤️ لأساتذة التربية البدنية والمترشحين بالمغرب">Fait avec ❤️ pour les enseignants et candidats CRMEF au Maroc</span>
+      </div>
+    </div>
+  </footer>
+
+  <script id="profeps-tool-engine-js">
+    var currentLang = 'fr';
+    var hasCalculated = false;
+
+    function setToolLang(lang) {
+      currentLang = lang;
+      var root = document.getElementById('html-root');
+      if (root) {
+        root.lang = lang;
+        root.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+      }
+      document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function(el) {
+        var val = el.getAttribute('data-i18n-' + lang);
+        if (val) el.textContent = val;
+      });
+      if (typeof applyToolTranslations === 'function') applyToolTranslations(lang);
+      if (hasCalculated && typeof computeTool === 'function') computeTool();
+    }
+
+    function triggerCalculation() {
+      hasCalculated = true;
+      var panel = document.getElementById('tool-results-panel');
+      if (panel) {
+        panel.classList.remove('hidden');
+        panel.classList.remove('peps-results-reveal');
+        void panel.offsetWidth;
+        panel.classList.add('peps-results-reveal');
+      }
+      if (typeof computeTool === 'function') computeTool();
+      if (panel && window.innerWidth < 768) {
+        setTimeout(function() {
+          panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 80);
+      }
+    }
+
+    function onInputUpdated() {
+      if (hasCalculated && typeof computeTool === 'function') {
+        computeTool();
+      }
+    }
+
+    function computeTool() {
+      var a = parseFloat(document.getElementById('inp-acute').value) || 2150;
+      var c = Math.max(200, parseFloat(document.getElementById('inp-chronic').value) || 1900);
+      var ratio = a / c;
+      var diffPct = ((a - c) / c) * 100;
+      var safeMax = Math.round(c * 1.25);
+
+      document.getElementById('out-acwr').textContent = ratio.toFixed(2);
+      document.getElementById('out-diff').textContent = (diffPct >= 0 ? '+' : '') + diffPct.toFixed(0) + ' %';
+      document.getElementById('out-safe-max').textContent = safeMax + ' UA';
+
+      var statusFr = 'Sweet Spot Optimal (0.80–1.30)', statusEn = 'Optimal Sweet Spot (0.80–1.30)', statusAr = 'المنطقة الآمنة المثالية (0.80–1.30)';
+      if (ratio > 1.50) { statusFr = 'Danger Critique (> 1.50)'; statusEn = 'High Injury Risk (> 1.50)'; statusAr = 'خطر إصابة مرتفع جداً (> 1.50)'; }
+      else if (ratio > 1.30) { statusFr = 'Vigilance Surcharge (1.31–1.50)'; statusEn = 'Overload Warning (1.31–1.50)'; statusAr = 'تنبيه: حمل زائد (1.31–1.50)'; }
+      else if (ratio < 0.80) { statusFr = 'Sous-charge / Affûtage (< 0.80)'; statusEn = 'Underload / Taper (< 0.80)'; statusAr = 'حمل منخفض / استشفاء (< 0.80)'; }
+
+      if (currentLang === 'fr') {
+        document.getElementById('out-acwr-meaning').textContent = statusFr;
+        document.getElementById('out-diff-meaning').textContent = 'Écart brut : ' + (a - c >= 0 ? '+' : '') + Math.round(a - c) + ' UA';
+        document.getElementById('out-safe-meaning').textContent = 'Limite haute recommandée (ACWR ≤ 1.25)';
+      } else if (currentLang === 'en') {
+        document.getElementById('out-acwr-meaning').textContent = statusEn;
+        document.getElementById('out-diff-meaning').textContent = 'Net delta: ' + (a - c >= 0 ? '+' : '') + Math.round(a - c) + ' AU';
+        document.getElementById('out-safe-meaning').textContent = 'Recommended upper ceiling (ACWR ≤ 1.25)';
+      } else {
+        document.getElementById('out-acwr-meaning').textContent = statusAr;
+        document.getElementById('out-diff-meaning').textContent = 'الفارق الصافي: ' + (a - c >= 0 ? '+' : '') + Math.round(a - c) + ' وحدة';
+        document.getElementById('out-safe-meaning').textContent = 'السقف الآمن الموصى به (ACWR ≤ 1.25)';
+      }
+
+      var d = document.getElementById('out-acwr-diag');
+      if (currentLang === 'fr') {
+        d.innerHTML = '<p><strong>📊 Modèle de Gabbett & Foster :</strong> Votre ratio Aigu:Chronique est de <strong>' + ratio.toFixed(2) + '</strong> (<strong>' + statusFr + '</strong>). Une séance de 60 minutes à RPE 7/10 génère 420 UA.</p><p><strong>🛡️ Recommandation Prévention :</strong> ' + (ratio > 1.3 ? 'Votre charge hebdomadaire a augmenté trop brusquement (+' + diffPct.toFixed(0) + '%). Réduisez le volume ou l’intensité de 20 à 25 % sur les 5 prochains jours pour protéger les tendons et ischio-jambiers.' : 'Votre progression est maîtrisée. Pour la semaine prochaine, ne dépassez pas <strong>' + safeMax + ' UA</strong> afin de rester dans la fenêtre protectrice.') + '</p>';
+      } else if (currentLang === 'en') {
+        d.innerHTML = '<p><strong>📊 Gabbett & Foster Load Model:</strong> Your Acute:Chronic Workload Ratio is <strong>' + ratio.toFixed(2) + '</strong> (<strong>' + statusEn + '</strong>).</p><p><strong>🛡️ Injury Prevention Advice:</strong> ' + (ratio > 1.3 ? 'Weekly load spiked by +' + diffPct.toFixed(0) + '%. Reduce intensity/volume by 20–25% over the next 5 days.' : 'Progression is well controlled. Keep next week below <strong>' + safeMax + ' AU</strong>.') + '</p>';
+      } else {
+        d.innerHTML = '<p><strong>📊 نموذج غابيت وفوستر للحمل التدريبي:</strong> تبلغ نسبة الحمل الحاد إلى المزمن <strong>' + ratio.toFixed(2) + '</strong> (<strong>' + statusAr + '</strong>).</p><p><strong>🛡️ نصيحة الوقاية من الإصابات:</strong> ' + (ratio > 1.3 ? 'ارتفع الحمل الأسبوعي بشكل مفاجئ (+' + diffPct.toFixed(0) + '%). ينصح بخفض الحجم أو الشدة بنسبة 20% خلال الأيام القادمة.' : 'تدرج الحمل متوازن وآمن. لا تتجاوز <strong>' + safeMax + ' وحدة</strong> في الأسبوع القادم.') + '</p>';
+      }
+    }
+  </script>
+
+<!-- BANDEAU DE CONSENTEMENT GOOGLE ADSENSE & RGPD (PROFEPS CMP) -->
+<div id="profeps-cmp-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#f8fafc;padding:18px 24px;border-top:1px solid #334155;z-index:999999;box-shadow:0 -10px 25px rgba(0,0,0,0.5);font-family:system-ui,-apple-system,sans-serif;">
+  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;">
+    <div style="flex:1 1 500px;font-size:13.5px;line-height:1.5;">
+      <strong style="color:#38bdf8;font-size:14.5px;">🍪 Respect de votre vie privée & Cookies</strong><br>
+      ProfEPS utilise des cookies essentiels au fonctionnement du site, ainsi que des cookies d'analyse d'audience et de personnalisation publicitaire Google AdSense pour financer nos outils pédagogiques gratuits. Vous pouvez accepter, refuser ou personnaliser vos préférences à tout moment. Consultez notre <a href="politique-confidentialite.html" style="color:#38bdf8;text-decoration:underline;">Politique de confidentialité</a>.
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+      <button onclick="window.ProfEPS_CMP.open()" type="button" style="padding:8px 14px;background:#1e293b;color:#cbd5e1;border:1px solid #475569;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Personnaliser</button>
+      <button onclick="window.ProfEPS_CMP.rejectAll()" type="button" style="padding:8px 14px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Continuer sans accepter</button>
+      <button onclick="window.ProfEPS_CMP.acceptAll()" type="button" style="padding:8px 18px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;">Tout accepter</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE PERSONNALISATION DES COOKIES -->
+<div id="profeps-cmp-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.8);backdrop-filter:blur(4px);z-index:1000000;align-items:center;justify-content:center;padding:16px;font-family:system-ui,-apple-system,sans-serif;">
+  <div style="background:#0f172a;border:1px solid #334155;border-radius:12px;max-width:560px;width:100%;padding:24px;color:#f8fafc;box-shadow:0 20px 40px rgba(0,0,0,0.6);max-height:90vh;overflow-y:auto;">
+    <h3 style="margin-top:0;font-size:18px;color:#38bdf8;">⚙️ Préférences de Confidentialité & Cookies</h3>
+    <p style="font-size:13px;color:#94a3b8;line-height:1.5;">Gérez ici vos préférences concernant le dépôt de cookies sur votre appareil. Les cookies techniques sont indispensables à la navigation.</p>
+    
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-weight:600;font-size:14px;">Cookies techniques essentiels</span>
+        <span style="font-size:12px;color:#10b981;font-weight:bold;">Toujours actif</span>
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Nécessaires au fonctionnement des calculateurs, de la sécurité et de la mémorisation de votre choix de consentement.</p>
+    </div>
+
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <label for="cmp-opt-analytics" style="font-weight:600;font-size:14px;cursor:pointer;">Cookies de mesure d'audience (Analytics)</label>
+        <input type="checkbox" id="cmp-opt-analytics" checked style="width:18px;height:18px;cursor:pointer;">
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Nous permettent de mesurer anonymement la fréquentation de nos pages et calculateurs EPS.</p>
+    </div>
+
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <label for="cmp-opt-ads" style="font-weight:600;font-size:14px;cursor:pointer;">Publicités personnalisées (Google AdSense)</label>
+        <input type="checkbox" id="cmp-opt-ads" checked style="width:18px;height:18px;cursor:pointer;">
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Permet à Google et ses partenaires d'afficher des annonces adaptées à vos centres d'intérêt afin de maintenir la gratuité de la plateforme.</p>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px;">
+      <button onclick="document.getElementById('profeps-cmp-modal').style.display='none'" type="button" style="padding:8px 14px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:13px;cursor:pointer;">Fermer</button>
+      <button onclick="window.ProfEPS_CMP.saveCustom()" type="button" style="padding:8px 18px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;">Enregistrer mes préférences</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

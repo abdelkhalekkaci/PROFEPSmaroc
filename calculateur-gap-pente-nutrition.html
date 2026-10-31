@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" id="html-root">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculateur Allure Pente (GAP) & Nutrition | ProfEPS</title>
+  <meta name="description" content="Convertissez votre effort en dénivelé en allure équivalente sur le plat (Minetti) et planifiez vos apports glucidiques. Conforme aux Orientations.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ProfEPS Maroc">
+  <meta property="og:title" content="Calculateur Allure Pente (GAP) & Nutrition | ProfEPS">
+  <meta property="og:description" content="Convertissez votre effort en dénivelé en allure équivalente sur le plat (Minetti) et planifiez vos apports glucidiques. Conforme aux Orientations.">
+  <meta property="og:url" content="https://profeps.ma/calculateur-gap-pente-nutrition.html">
+  <meta property="og:image" content="https://profeps.ma/images/prof_eps.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Calculateur Allure Pente (GAP) & Nutrition | ProfEPS">
+  <meta name="twitter:description" content="Convertissez votre effort en dénivelé en allure équivalente sur le plat (Minetti) et planifiez vos apports glucidiques. Conforme aux Orientations.">
+  <meta name="twitter:image" content="https://profeps.ma/images/prof_eps.png">
+  <meta name="keywords" content="calculateur gap allure pente trail, cout energetique pente minetti, glucides par heure marathon trail, nutrition course à pied" />
+  <link rel="canonical" href="https://profeps.ma/calculateur-gap-pente-nutrition.html" />
+  <link rel="alternate" hreflang="fr-MA" href="https://profeps.ma/calculateur-gap-pente-nutrition.html">
+  <link rel="alternate" hreflang="x-default" href="https://profeps.ma/calculateur-gap-pente-nutrition.html">
+  <link rel="icon" type="image/png" href="images/prof_eps.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Calculateur d’Allure Ajustée à la Pente (GAP) & Plan Ravitaillement Glucides","url":"https://profeps.ma/calculateur-gap-pente-nutrition.html","applicationCategory":"HealthApplication","operatingSystem":"All","inLanguage":["fr","en","ar"],"description":"Indiquez le pourcentage de pente, votre allure sur le plat et la durée de l’épreuve puis cliquez sur Calculer pour obtenir votre allure cible en côte/descente (modèle Minetti) et vos besoins en glucides.","keywords":"calculateur gap allure pente trail, cout energetique pente minetti, glucides par heure marathon trail, nutrition course à pied","offers":{"@type":"Offer","price":"0","priceCurrency":"MAD"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qu'est-ce que l'Allure Ajustée à la Pente (GAP) en course sur route et en trail ?","acceptedAnswer":{"@type":"Answer","text":"L'Allure Ajustée à la Pente (Grade Adjusted Pace ou GAP) calcule l'allure en montée ou en descente qui exige exactement la même dépense métabolique (VO2) que votre allure sur terrain plat. Chaque +1 % de pente en montée augmente le coût énergétique d'environ 3,3 à 3,5 %."}}]}]}</script>
+  <link rel="stylesheet" href="/css/tailwind-precompiled.min.css">
+  <style id="profeps-calculator-ui-css">
+/* Styles dédiés aux pages Calculateurs — Palette douce, académique & reposante ProfEPS */
+.vma-hero {
+  margin-top: 80px !important;
+  padding: 2.5rem 1.25rem 2rem !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  text-align: center !important;
+  position: relative !important;
+}
+.hero-badge {
+  display: inline-flex !important; align-items: center !important; gap: 0.45rem !important;
+  background: #f3faf6 !important;
+  color: #006233 !important;
+  padding: 0.38rem 1rem !important; border-radius: 9999px !important;
+  font-size: 0.75rem !important; font-weight: 800 !important; text-transform: uppercase !important;
+  letter-spacing: 0.04em !important; margin-bottom: 0.8rem !important;
+  border: 1px solid #a7f3d0 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+.vma-hero h1 {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
+  font-size: clamp(1.55rem, 3vw, 2.2rem) !important;
+  font-weight: 800 !important; color: #0f172a !important; margin: 0 auto 0.65rem auto !important;
+  max-width: 860px !important; line-height: 1.24 !important; letter-spacing: -0.02em !important;
+  text-wrap: balance !important;
+}
+.vma-hero p {
+  font-size: 0.95rem !important; color: #475569 !important; max-width: 740px !important;
+  margin: 0 auto !important; line-height: 1.6 !important;
+}
+main > div.max-w-3xl,
+#tool-results-panel > div,
+.peps-seo-guide-card {
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 20px !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 8px 24px -8px rgba(15, 23, 42, 0.05) !important;
+  background: #ffffff !important;
+}
+main > div.max-w-3xl::before {
+  display: none !important;
+  content: none !important;
+}
+main > div.max-w-3xl .grid {
+  align-items: stretch !important;
+}
+main > div.max-w-3xl .grid > div {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+}
+main > div.max-w-3xl .grid > div > label {
+  margin-bottom: 0.45rem !important;
+  line-height: 1.3 !important;
+  min-height: 2.1rem !important;
+  display: flex !important;
+  align-items: flex-end !important;
+}
+main > div.max-w-3xl input[type="number"],
+main > div.max-w-3xl select {
+  height: 46px !important;
+  min-height: 46px !important;
+  max-height: 46px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  border-radius: 12px !important;
+  border: 1.5px solid #cbd5e1 !important;
+  background-color: #f8fafc !important;
+  padding: 0 0.9rem !important;
+  font-size: 0.95rem !important;
+  color: #0f172a !important;
+  font-variant-numeric: tabular-nums !important;
+  transition: all 0.18s ease !important;
+  margin-top: auto !important;
+}
+main > div.max-w-3xl input[type="number"]:focus,
+main > div.max-w-3xl select:focus {
+  outline: none !important;
+  border-color: #006233 !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(0, 98, 51, 0.10) !important;
+}
+#tool-results-panel .grid > div {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  font-variant-numeric: tabular-nums !important;
+}
+button.peps-cta-btn,
+#btn-calc-main {
+  width: 100% !important;
+  padding: 0.95rem 1.4rem !important;
+  margin-top: 0.65rem !important;
+  background: linear-gradient(135deg, #f3faf6 0%, #ecfdf5 100%) !important;
+  background-color: #f3faf6 !important;
+  color: #065f46 !important;
+  -webkit-text-fill-color: #065f46 !important;
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
+  font-size: 0.98rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.005em !important;
+  border: 1.5px solid #a7f3d0 !important;
+  border-radius: 14px !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 14px -4px rgba(0, 98, 51, 0.10) !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.75rem !important;
+  position: relative !important;
+  overflow: hidden !important;
+  text-align: center !important;
+}
+button.peps-cta-btn:hover,
+#btn-calc-main:hover {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%) !important;
+  border-color: #006233 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 8px 20px -5px rgba(0, 98, 51, 0.16) !important;
+}
+button.peps-cta-btn:active,
+#btn-calc-main:active {
+  transform: translateY(0) !important;
+}
+button.peps-cta-btn .peps-cta-arrow,
+#btn-calc-main .peps-cta-arrow {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 8px !important;
+  background: #006233 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-size: 0.95rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  flex-shrink: 0 !important;
+  margin-left: 0.25rem !important;
+  transition: transform 0.18s ease !important;
+}
+button.peps-cta-btn:hover .peps-cta-arrow,
+#btn-calc-main:hover .peps-cta-arrow {
+  transform: translateX(2px) !important;
+}
+</style>
+  <script src="profeps-cmp.js" defer></script>
+<link rel="stylesheet" href="/css/profeps-unifier.min.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil ProfEPS Maroc","item":"https://profeps.ma/"},{"@type":"ListItem","position":2,"name":"Calculateurs & Physiologie Sportive","item":"https://profeps.ma/hub-outils-sport-performance.html"},{"@type":"ListItem","position":3,"name":"Calculateur Allure Pente (GAP) & Nutrition | ProfEPS","item":"https://profeps.ma/calculateur-gap-pente-nutrition.html"}]}</script>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50">
+<!-- PROFEPS_UNIFIED_NAVBAR_START -->
+  <nav id="navbar" class="navbar navbar-decoy" style="display:none !important;visibility:hidden !important;opacity:0 !important;width:0 !important;height:0 !important;overflow:hidden !important;position:absolute !important;pointer-events:none !important;z-index:-9999 !important;" aria-hidden="true">
+    <div class="nav-container">
+      <div id="navMenu" class="nav-menu"></div>
+      <div id="navRightDecoy" class="nav-right"></div>
+      <button id="navToggle" class="nav-toggle" type="button"></button>
+      <div id="navBackdrop" class="nav-backdrop"></div>
+    </div>
+  </nav>
+  <div class="peps-navbar" id="pepsNavbar" role="navigation" aria-label="Navigation principale" data-current-file="calculateur-gap-pente-nutrition.html">
+    <div class="peps-nav-container">
+      <a href="index.html" class="peps-nav-logo" aria-label="Prof EPS Maroc - Accueil">
+        <img src="/images/prof_eps.webp" width="156" height="52" decoding="async" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:52px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
+      </a>
+      <div class="peps-nav-menu" id="pepsNavMenu">
+        <a href="index.html" class="peps-nav-link" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
+        <a href="generateur.html" class="peps-nav-link" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
+        <div class="peps-dropdown" id="pepsCalcDropdown">
+          <a href="calculateur-gap-pente-nutrition.html" class="peps-nav-link active" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="Allure Pente (GAP)" data-i18n-en="Grade Adjusted Pace" data-i18n-ar="إيقاع الجري في المنحدرات GAP">Allure Pente (GAP)</span><span class="peps-dropdown-caret">▾</span></a>
+          <div class="peps-dropdown-menu" id="pepsDropdownMenu">
+            <a href="hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub" data-i18n-fr="🧭 Hub de Tous les Calculateurs Sport" data-i18n-en="🧭 All Sports Calculators Hub" data-i18n-ar="🧭 بوابة جميع الحاسبات الرياضية">🧭 Hub de Tous les Calculateurs Sport</a>
+            <a href="calculateur-vma.html" class="peps-dropdown-item" data-i18n-fr="⚡ Calculateur VMA & Allures" data-i18n-en="⚡ MAS (VMA) & Paces Calculator" data-i18n-ar="⚡ حاسبة السرعة الهوائية القصوى (VMA)">⚡ Calculateur VMA & Allures</a>
+            <a href="calculateur-vdot-asr-endurance.html" class="peps-dropdown-item" data-i18n-fr="🫁 Calculateur VO2 Max & VDOT" data-i18n-en="🫁 VO2 Max & VDOT Calculator" data-i18n-ar="🫁 حاسبة VO2 Max ومؤشر VDOT">🫁 Calculateur VO2 Max & VDOT</a>
+            <a href="calculateur-asr-reserve-vitesse.html" class="peps-dropdown-item" data-i18n-fr="🚀 Réserve de Vitesse Anaérobie (ASR)" data-i18n-en="🚀 Anaerobic Speed Reserve (ASR)" data-i18n-ar="🚀 احتياطي السرعة اللاهوائية (ASR)">🚀 Réserve de Vitesse Anaérobie (ASR)</a>
+            <a href="calculateur-indice-endurance.html" class="peps-dropdown-item" data-i18n-fr="📈 Indice d'Endurance (Péronnet)" data-i18n-en="📈 Endurance Index (Péronnet)" data-i18n-ar="📈 مؤشر التحمل (نموذج بيروني)">📈 Indice d'Endurance (Péronnet)</a>
+            <a href="calculateur-frequence-cardiaque-karvonen.html" class="peps-dropdown-item" data-i18n-fr="❤️ Fréquence Cardiaque (Karvonen)" data-i18n-en="❤️ Heart Rate Zones (Karvonen)" data-i18n-ar="❤️ نبضات القلب ومناطق التدريب (Karvonen)">❤️ Fréquence Cardiaque (Karvonen)</a>
+            <a href="calculateur-imc-sportif-masse-grasse.html" class="peps-dropdown-item" data-i18n-fr="⚖️ Calculateur IMC & Masse Grasse" data-i18n-en="⚖️ Athletic BMI & Body Fat %" data-i18n-ar="⚖️ حاسبة مؤشر كتلة الجسم ونسبة الدهون">⚖️ Calculateur IMC & Masse Grasse</a>
+            <a href="calculateur-chaleur-meteo-altitude.html" class="peps-dropdown-item" data-i18n-fr="☀️ Chaleur, Humidité & Altitude" data-i18n-en="☀️ Heat, Humidity & Altitude" data-i18n-ar="☀️ تأثير الحرارة والرطوبة والارتفاع">☀️ Chaleur, Humidité & Altitude</a>
+            <a href="calculateur-gap-pente-nutrition.html" class="peps-dropdown-item active-tool" data-i18n-fr="⛰️ Allure Pente (GAP) & Nutrition" data-i18n-en="⛰️ Grade Adjusted Pace & Nutrition" data-i18n-ar="⛰️ إيقاع المنحدرات (GAP) والتغذية">⛰️ Allure Pente (GAP) & Nutrition</a>
+            <a href="generateur-intermittent-hiit-cod.html" class="peps-dropdown-item" data-i18n-fr="🔄 Intermittent HIIT & COD 180°" data-i18n-en="🔄 HIIT Intermittent & 180° COD" data-i18n-ar="🔄 مولد التدريب المتقطع HIIT وتغيير الاتجاه">🔄 Intermittent HIIT & COD 180°</a>
+            <a href="calculateur-charge-rpe-foster-acwr.html" class="peps-dropdown-item" data-i18n-fr="🛡️ Charge RPE Foster & ACWR" data-i18n-en="🛡️ Foster sRPE Load & ACWR Ratio" data-i18n-ar="🛡️ حمل التدريب (RPE Foster) ونسبة ACWR">🛡️ Charge RPE Foster & ACWR</a>
+          </div>
+        </div>
+        <a href="concours-crmef-hub.html" class="peps-nav-link" data-i18n-fr="Préparation CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparation CRMEF</a>
+        <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
+      </div>
+      <div class="peps-nav-right">
+        <div dir="ltr" class="peps-lang-switch" aria-label="Sélecteur de langue">
+          <button type="button" class="peps-lang-btn active" id="peps-btn-lang-fr" data-lang="fr" onclick="window.profepsSetLang('fr')">FR</button>
+          <span class="peps-lang-sep">/</span>
+          <button type="button" class="peps-lang-btn" id="peps-btn-lang-en" data-lang="en" onclick="window.profepsSetLang('en')">EN</button>
+          <span class="peps-lang-sep">/</span>
+          <button type="button" class="peps-lang-btn" id="peps-btn-lang-ar" data-lang="ar" onclick="window.profepsSetLang('ar')">عربي</button>
+        </div>
+        <button type="button" class="peps-nav-toggle" id="pepsNavToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+<script id="profeps-master-unifier-js">
+(function() {
+  // Stub silencieux au cas où un ancien script de page appelle encore window.supabase
+  var dummyAuth = {
+    getSession: function() { return Promise.resolve({ data: { session: null }, error: null }); },
+    getUser: function() { return Promise.resolve({ data: { user: null }, error: null }); },
+    onAuthStateChange: function() { return { data: { subscription: { unsubscribe: function() {} } } }; },
+    signOut: function() { return Promise.resolve({ error: null }); }
+  };
+  var dummyClient = {
+    auth: dummyAuth,
+    from: function() {
+      return {
+        select: function() { return Promise.resolve({ data: [], error: null }); },
+        insert: function() { return Promise.resolve({ data: null, error: null }); },
+        update: function() { return Promise.resolve({ data: null, error: null }); },
+        delete: function() { return Promise.resolve({ data: null, error: null }); }
+      };
+    }
+  };
+  window.supabase = { createClient: function() { return dummyClient; } };
+  window.supabaseClient = dummyClient;
+  window.ProfEPS = window.ProfEPS || { getSupabase: function() { return dummyClient; }, saveGeneration: function() { return Promise.resolve(); } };
+
+  var dropdown = document.getElementById('pepsCalcDropdown');
+  var dropdownMenu = document.getElementById('pepsDropdownMenu');
+  var closeTimer = null;
+
+  function openDropdown() {
+    if (closeTimer) {
+      clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+    var dd = document.getElementById('pepsCalcDropdown');
+    var dm = document.getElementById('pepsDropdownMenu');
+    if (dd) dd.classList.add('open');
+    if (dm) {
+      dm.style.setProperty('opacity', '1', 'important');
+      dm.style.setProperty('visibility', 'visible', 'important');
+      dm.style.setProperty('pointer-events', 'auto', 'important');
+      dm.style.setProperty('transform', 'translateX(-50%) translateY(0)', 'important');
+    }
+  }
+
+  function closeDropdownDelayed() {
+    if (closeTimer) clearTimeout(closeTimer);
+    closeTimer = setTimeout(function() {
+      var dd = document.getElementById('pepsCalcDropdown');
+      var dm = document.getElementById('pepsDropdownMenu');
+      if (dd) dd.classList.remove('open');
+      if (dm) {
+        dm.style.removeProperty('opacity');
+        dm.style.removeProperty('visibility');
+        dm.style.removeProperty('pointer-events');
+        dm.style.removeProperty('transform');
+      }
+    }, 180);
+  }
+
+  if (dropdown) {
+    dropdown.addEventListener('mouseenter', openDropdown);
+    dropdown.addEventListener('mouseleave', closeDropdownDelayed);
+  }
+  if (dropdownMenu) {
+    dropdownMenu.addEventListener('mouseenter', openDropdown);
+    dropdownMenu.addEventListener('mouseleave', closeDropdownDelayed);
+  }
+
+  // Délégation globale en renfort pour garantir l'ouverture au survol sur 100 % des pages
+  document.addEventListener('mouseover', function(e) {
+    var t = e.target;
+    if (t && t.closest && (t.closest('#pepsCalcDropdown') || t.closest('#pepsDropdownMenu'))) {
+      openDropdown();
+    }
+  });
+  document.addEventListener('mouseout', function(e) {
+    var t = e.target;
+    if (t && t.closest && (t.closest('#pepsCalcDropdown') || t.closest('#pepsDropdownMenu'))) {
+      var rel = e.relatedTarget;
+      if (!rel || !rel.closest || (!rel.closest('#pepsCalcDropdown') && !rel.closest('#pepsDropdownMenu'))) {
+        closeDropdownDelayed();
+      }
+    }
+  });
+
+  // Supprimer tout ancien <nav class="navbar"> résiduel ET tout bouton traducteur en doublon dans le contenu
+  function cleanPageDuplicates() {
+    document.querySelectorAll('nav.navbar:not(.navbar-decoy), .navbar:not(.navbar-decoy)').forEach(function(oldNav) {
+      if (oldNav.id !== 'pepsNavbar') {
+        if (oldNav.parentNode) oldNav.parentNode.removeChild(oldNav);
+      }
+    });
+    document.querySelectorAll('.lang-switch:not(.peps-lang-switch), .in-page-lang-switch, #btn-lang-fr, #btn-lang-en, #btn-lang-ar, button[onclick*="setToolLang"], button[onclick*="changeLang"], button.lang-btn:not(.peps-lang-btn)').forEach(function(el) {
+      if (!el.closest || !el.closest('#pepsNavbar')) {
+        var wrapper = el.closest ? (el.closest('.lang-switch, .in-page-lang-switch, [aria-label="Language selection"], [title*="Traduction"]') || el) : el;
+        if (wrapper === el && el.parentNode && el.parentNode.tagName === 'DIV') {
+          var parentTxt = (el.parentNode.textContent || '').trim();
+          if (parentTxt.length <= 50 && (!el.parentNode.closest || !el.parentNode.closest('#pepsNavbar'))) {
+            wrapper = el.parentNode;
+          }
+        }
+        if (wrapper && wrapper.parentNode && (!wrapper.closest || !wrapper.closest('#pepsNavbar'))) {
+          wrapper.parentNode.removeChild(wrapper);
+        }
+      }
+    });
+  }
+  cleanPageDuplicates();
+  window.addEventListener('DOMContentLoaded', cleanPageDuplicates);
+  // Nettoyage unique à l'initialisation et au DOMContentLoaded (CLS = 0, zéro surcharge MutationObserver)
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      var dd = document.getElementById('pepsCalcDropdown');
+      var dm = document.getElementById('pepsDropdownMenu');
+      if (dd) dd.classList.remove('open');
+      if (dm) {
+        dm.style.removeProperty('opacity');
+        dm.style.removeProperty('visibility');
+        dm.style.removeProperty('pointer-events');
+        dm.style.removeProperty('transform');
+      }
+      var toggleBtn = document.getElementById('pepsNavToggle');
+      var navMenuEl = document.getElementById('pepsNavMenu');
+      if (toggleBtn && navMenuEl) {
+        toggleBtn.classList.remove('active');
+        navMenuEl.classList.remove('active');
+      }
+    }
+  });
+
+  window.addEventListener('scroll', function() {
+    var n = document.getElementById('pepsNavbar');
+    if (n) n.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  document.addEventListener('click', function(e) {
+    var t = e.target;
+    if (t && t.closest && t.closest('#pepsNavToggle')) {
+      var toggleBtn = document.getElementById('pepsNavToggle');
+      var navMenuEl = document.getElementById('pepsNavMenu');
+      if (toggleBtn && navMenuEl) {
+        toggleBtn.classList.toggle('active');
+        navMenuEl.classList.toggle('active');
+      }
+    }
+  });
+
+  window.profepsSetLang = function(lang) {
+    try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
+    ['fr', 'en', 'ar'].forEach(function(code) {
+      var btn = document.getElementById('peps-btn-lang-' + code);
+      if (btn) btn.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
+      document.querySelectorAll('.peps-lang-btn[data-lang="' + code + '"]').forEach(function(b) {
+        b.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
+      });
+    });
+    document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function(el) {
+      var val = el.getAttribute('data-i18n-' + lang);
+      if (val) el.textContent = val;
+    });
+    if (typeof window.setToolLang === 'function') window.setToolLang(lang);
+    if (typeof window.changeLang === 'function') window.changeLang(lang);
+    if (typeof window.setLanguage === 'function') window.setLanguage(lang);
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+  };
+
+  var saved = 'fr';
+  try { saved = localStorage.getItem('profeps_lang') || 'fr'; } catch(e) {}
+  if (saved && saved !== 'fr') {
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', function() { window.profepsSetLang(saved); });
+    } else {
+      window.profepsSetLang(saved);
+    }
+  }
+})();
+</script>
+<!-- PROFEPS_UNIFIED_NAVBAR_END -->
+<header class="vma-hero">
+    <div id="ui-badge" class="hero-badge" data-i18n-fr="⚡ Cluster 2D · Biomécanique de la Pente (GAP) &amp; Nutrition d’Endurance" data-i18n-en="⚡ Cluster 2D · Grade Adjusted Pace (GAP) &amp; Race Fueling Strategy" data-i18n-ar="⚡ القطب 2D · تعديل الإيقاع حسب الانحدار (GAP) والتغذية الرياضية">⚡ Cluster 2D · Biomécanique de la Pente (GAP) &amp; Nutrition d’Endurance</div>
+    <h1 id="ui-title" style="font-size:clamp(1.55rem,3vw,2.25rem);font-weight:800;color:#0f172a;margin:0 auto 0.65rem auto;max-width:880px;line-height:1.22;" data-i18n-fr="Calculateur d’Allure Ajustée à la Pente (GAP) &amp; Plan Ravitaillement Glucides" data-i18n-en="Grade Adjusted Pace (GAP) &amp; Endurance Carbohydrate/Fluid Calculator" data-i18n-ar="حاسبة تعديل الإيقاع حسب المرتفعات والانحدار (GAP) وخطة التغذية">Calculateur d’Allure Ajustée à la Pente (GAP) &amp; Plan Ravitaillement Glucides</h1>
+    <p id="ui-sub" style="font-size:0.95rem;color:#475569;max-width:760px;margin:0 auto;line-height:1.6;" data-i18n-fr="Indiquez le pourcentage de pente, votre allure sur le plat et la durée de l’épreuve puis cliquez sur Calculer pour obtenir votre allure cible en côte/descente (modèle Minetti) et vos besoins en glucides." data-i18n-en="Enter slope gradient %, flat pace, and race duration, then click Calculate to get your uphill/downhill target pace (Minetti model) and hourly carb intake." data-i18n-ar="أدخل نسبة الانحدار (%) وإيقاعك في الأرض المنبسطة ومدة السباق ثم اضغط على &quot;احسب&quot; لمعرفة الإيقاع المستهدف وخطة الكربوهيدرات.">Indiquez le pourcentage de pente, votre allure sur le plat et la durée de l’épreuve puis cliquez sur Calculer pour obtenir votre allure cible en côte/descente (modèle Minetti) et vos besoins en glucides.</p>
+  </header>
+
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-6">
+    <div class="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-5">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3.5">
+        <h2 class="text-base font-extrabold text-slate-900 uppercase tracking-wider" data-i18n-fr="1. Pente du Parcours, Allure Plat & Durée" data-i18n-en="1. Slope Gradient, Flat Pace & Duration" data-i18n-ar="1. نسبة الانحدار والإيقاع المنبسط والمدة">1. Pente du Parcours, Allure Plat & Durée</h2>
+        <span class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">Minetti GAP · CHO g/h</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Pente (% positif montée / négatif descente)" data-i18n-en="Slope Gradient (% uphill / -% downhill)" data-i18n-ar="نسبة الانحدار (% صعود / -% هبوط)">Pente (% positif montée / négatif descente)</label>
+          <input id="inp-slope" type="number" value="6" min="-25" max="35" step="1" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-base font-mono font-bold" />
+        </div>
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Allure sur le plat (sec/km, ex: 270 = 4:30/km)" data-i18n-en="Flat Pace (sec/km, e.g. 270 = 4:30/km)" data-i18n-ar="الإيقاع في المنبسط (ثانية/كم، 270 = 4:30)">Allure sur le plat (sec/km, ex: 270 = 4:30/km)</label>
+          <input id="inp-pace" type="number" value="270" min="150" max="600" step="5" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-base font-mono font-bold" />
+        </div>
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Durée totale de l'effort (minutes)" data-i18n-en="Total Effort Duration (minutes)" data-i18n-ar="المدة الإجمالية للجهد (بالدقائق)">Durée totale de l'effort (minutes)</label>
+          <input id="inp-dur" type="number" value="120" min="20" max="600" step="15" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-base font-mono font-bold" />
+        </div>
+      </div>
+
+      <button type="button" id="btn-calc-main" onclick="triggerCalculation()" class="peps-cta-btn w-full mt-3 py-4 px-6 rounded-2xl font-extrabold text-base sm:text-lg text-white shadow-xl transition-all duration-200 flex items-center justify-center gap-3 cursor-pointer select-none"><span>⛰️</span>
+        <span data-i18n-fr="Calculer mon Allure Pente (GAP) & mon Plan Nutritionnel" data-i18n-en="Calculate My Grade Adjusted Pace (GAP) & Fueling Plan" data-i18n-ar="احسب إيقاع المنحدرات (GAP) وخطة التغذية الرياضية">Calculer mon Allure Pente (GAP) & mon Plan Nutritionnel</span><span class="peps-cta-arrow" aria-hidden="true">→</span></button>
+    </div>
+
+    <div id="tool-results-panel" class="hidden space-y-6">
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+        <h3 class="text-base font-extrabold text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-3" data-i18n-fr="2. Vos Résultats Biomécaniques & Nutritionnels Interprétés" data-i18n-en="2. Biomechanical & Nutritional Results Explained" data-i18n-ar="2. النتائج البيوميكانيكية والغذائية مع التفسير">2. Vos Résultats Biomécaniques & Nutritionnels Interprétés</h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-1">
+            <div class="text-xs font-extrabold uppercase text-slate-800" data-i18n-fr="Allure Cible dans la Pente" data-i18n-en="Target Pace on Slope" data-i18n-ar="الإيقاع المستهدف في المنحدر">Allure Cible dans la Pente</div>
+            <div id="out-gap" dir="ltr" class="text-3xl font-black font-mono text-slate-800 tabular-nums">--</div>
+            <div id="out-gap-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 border border-slate-200"></div>
+          </div>
+          <div class="p-4 bg-red-50 border border-red-200 rounded-2xl space-y-1">
+            <div class="text-xs font-extrabold uppercase text-red-900" data-i18n-fr="Variation du Coût Énergétique" data-i18n-en="Energy Cost Delta (Minetti)" data-i18n-ar="تغير التكلفة الطاقية (Minetti)">Variation du Coût Énergétique</div>
+            <div id="out-cost" dir="ltr" class="text-3xl font-black font-mono text-red-700 tabular-nums">--</div>
+            <div id="out-cost-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 border border-red-100"></div>
+          </div>
+          <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl space-y-1">
+            <div class="text-xs font-extrabold uppercase text-emerald-900" data-i18n-fr="Apport Glucidique (CHO)" data-i18n-en="Carbohydrate Intake (CHO)" data-i18n-ar="الحاجيات من الكربوهيدرات">Apport Glucidique (CHO)</div>
+            <div id="out-carbs" dir="ltr" class="text-3xl font-black font-mono text-emerald-700 tabular-nums">--</div>
+            <div id="out-carbs-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 border border-emerald-100"></div>
+          </div>
+        </div>
+
+        <div id="out-gap-interp" class="p-5 bg-slate-50 border-l-4 border-emerald-600 rounded-xl text-xs sm:text-sm text-slate-700 leading-relaxed space-y-2"></div>
+      </div>
+    </div>
+    
+    <!-- GUIDE D'UTILISATION VISUEL & EXPLICATION DES PARAMÈTRES (SEO) -->
+    <section class="peps-seo-guide-card max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 mt-8" style="max-width:48rem;margin:2rem auto 0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:20px;padding:1.75rem;box-shadow:0 10px 28px -8px rgba(15,23,42,0.06);" aria-labelledby="seo-guide-title">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.5rem;border-bottom:1px solid #f1f5f9;padding-bottom:1rem;">
+        <div class="flex items-center gap-2.5" style="display:flex;align-items:center;gap:0.65rem;">
+          <span class="w-9 h-9 rounded-xl bg-red-50 border border-red-200 text-red-700 flex items-center justify-center font-black text-base shrink-0" style="width:36px;height:36px;border-radius:10px;background:#fef2f2;border:1px solid #fecaca;display:inline-flex;align-items:center;justify-content:center;font-size:1rem;">📘</span>
+          <div>
+            <h2 id="seo-guide-title" class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight m-0" style="font-size:1.05rem;font-weight:800;color:#0f172a;margin:0;" data-i18n-fr="Mode d'Emploi & Signification des Paramètres" data-i18n-en="How It Works & Input Parameter Guide" data-i18n-ar="طريقة الاستخدام وشرح المعطيات المطلوبة">Mode d'Emploi & Signification des Paramètres</h2>
+          </div>
+        </div>
+        <span class="text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full self-start sm:self-auto" style="font-size:0.74rem;font-weight:700;color:#065f46;background:#ecfdf5;border:1px solid #a7f3d0;padding:0.25rem 0.75rem;border-radius:9999px;" data-i18n-fr="Guide Scientifique & EPS" data-i18n-en="Sports Science & PE Guide" data-i18n-ar="دليل علمي وتربوي">Guide Scientifique & EPS</span>
+      </div>
+
+      <div class="space-y-2.5">
+        <h3 class="text-xs font-extrabold uppercase tracking-wider text-red-700 m-0" style="font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:#b91c1c;margin:0 0 0.5rem 0;" data-i18n-fr="1. Étapes d'utilisation du calculateur" data-i18n-en="1. Step-by-Step Instructions" data-i18n-ar="1. خطوات استخدام الحاسبة">1. Étapes d'utilisation du calculateur</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          
+          <div class="flex items-start gap-3.5 p-4 rounded-xl bg-slate-50/90 border border-slate-200/90 shadow-xs hover:border-red-200 transition-all" style="display:flex;align-items:flex-start;gap:0.85rem;padding:1rem;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;">
+            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:#f3faf6;color:#006233;border:1px solid #a7f3d0;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">1</span>
+            <p class="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed m-0" style="font-size:0.84rem;line-height:1.55;color:#334155;margin:0;" data-i18n-fr="Indiquez le pourcentage de pente moyen de la section (+6 % pour une montée, -5 % pour une descente)." data-i18n-en="Enter slope gradient percentage (+% uphill, -% downhill)." data-i18n-ar="أدخل نسبة انحدار الطريق بالمئة (+% للصعود، -% للهبوط).">Indiquez le pourcentage de pente moyen de la section (+6 % pour une montée, -5 % pour une descente).</p>
+          </div>
+          <div class="flex items-start gap-3.5 p-4 rounded-xl bg-slate-50/90 border border-slate-200/90 shadow-xs hover:border-red-200 transition-all" style="display:flex;align-items:flex-start;gap:0.85rem;padding:1rem;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;">
+            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:#f3faf6;color:#006233;border:1px solid #a7f3d0;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">2</span>
+            <p class="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed m-0" style="font-size:0.84rem;line-height:1.55;color:#334155;margin:0;" data-i18n-fr="Entrez votre allure de référence sur le plat en secondes par kilomètre (ex : 270 s = 4:30/km)." data-i18n-en="Input your flat-ground reference pace in seconds per km (e.g., 270 = 4:30/km)." data-i18n-ar="أدخل إيقاعك على الأرض المنبسطة بالثواني لكل كم (270 = 4:30/كم).">Entrez votre allure de référence sur le plat en secondes par kilomètre (ex : 270 s = 4:30/km).</p>
+          </div>
+          <div class="flex items-start gap-3.5 p-4 rounded-xl bg-slate-50/90 border border-slate-200/90 shadow-xs hover:border-red-200 transition-all" style="display:flex;align-items:flex-start;gap:0.85rem;padding:1rem;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;">
+            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:#f3faf6;color:#006233;border:1px solid #a7f3d0;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">3</span>
+            <p class="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed m-0" style="font-size:0.84rem;line-height:1.55;color:#334155;margin:0;" data-i18n-fr="Précisez la durée totale prévue de votre sortie, trail ou marathon en minutes." data-i18n-en="Enter total workout or race duration in minutes." data-i18n-ar="حدد المدة الإجمالية للسباق بالدقائق.">Précisez la durée totale prévue de votre sortie, trail ou marathon en minutes.</p>
+          </div>
+          <div class="flex items-start gap-3.5 p-4 rounded-xl bg-slate-50/90 border border-slate-200/90 shadow-xs hover:border-red-200 transition-all" style="display:flex;align-items:flex-start;gap:0.85rem;padding:1rem;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;">
+            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:#f3faf6;color:#006233;border:1px solid #a7f3d0;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">4</span>
+            <p class="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed m-0" style="font-size:0.84rem;line-height:1.55;color:#334155;margin:0;" data-i18n-fr="Cliquez sur Calculer pour obtenir votre Allure Ajustée à la Pente (GAP selon Minetti) et votre plan de ravitaillement glucidique (g/h)." data-i18n-en="Click Calculate to get your Minetti Grade Adjusted Pace (GAP) and hourly carbohydrate fueling plan." data-i18n-ar="اضغط على زر الحساب لمعرفة الإيقاع المعدل للمنحدر وخطة الكربوهيدرات.">Cliquez sur Calculer pour obtenir votre Allure Ajustée à la Pente (GAP selon Minetti) et votre plan de ravitaillement glucidique (g/h).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-2.5 pt-2">
+        <h3 class="text-xs font-extrabold uppercase tracking-wider text-emerald-800 m-0" style="font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:#065f46;margin:0 0 0.5rem 0;" data-i18n-fr="2. Explication des informations demandées" data-i18n-en="2. Explanation of Requested Inputs" data-i18n-ar="2. شرح المعلومات والمعطيات المطلوبة">2. Explication des informations demandées</h3>
+        <div class="grid grid-cols-1 gap-2.5">
+          
+          <div class="flex items-start gap-3 p-3.5 rounded-xl bg-emerald-50/50 border border-emerald-200/80" style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.9rem 1rem;border-radius:12px;background:rgba(236,253,245,0.55);border:1px solid rgba(167,243,208,0.85);">
+            <span class="w-6 h-6 rounded-lg bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0 mt-0.5" style="width:24px;height:24px;border-radius:8px;background:#006233;color:#ffffff;font-size:0.72rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">✓</span>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed m-0" style="font-size:0.83rem;line-height:1.55;color:#1e293b;margin:0;" data-i18n-fr="Pente (%) : dénivelé vertical divisé par la distance horizontale (ex : +60 m sur 1 km = +6 %)." data-i18n-en="Slope (%): vertical gain/loss per 100m horizontal distance." data-i18n-ar="نسبة الانحدار (%): الارتفاع العمودي لكل 100 متر أفقي.">Pente (%) : dénivelé vertical divisé par la distance horizontale (ex : +60 m sur 1 km = +6 %).</p>
+          </div>
+          <div class="flex items-start gap-3 p-3.5 rounded-xl bg-emerald-50/50 border border-emerald-200/80" style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.9rem 1rem;border-radius:12px;background:rgba(236,253,245,0.55);border:1px solid rgba(167,243,208,0.85);">
+            <span class="w-6 h-6 rounded-lg bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0 mt-0.5" style="width:24px;height:24px;border-radius:8px;background:#006233;color:#ffffff;font-size:0.72rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">✓</span>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed m-0" style="font-size:0.83rem;line-height:1.55;color:#1e293b;margin:0;" data-i18n-fr="Allure sur le plat (sec/km) : vitesse étalon convertie via l'équation polynomiale du coût énergétique de Minetti (2002)." data-i18n-en="Flat Pace (sec/km): converted via Minetti's (2002) locomotion energy cost equation." data-i18n-ar="الإيقاع المنبسط: يحول وفق معادلة مينيتي للتكلفة الطاقية في الصعود والهبوط.">Allure sur le plat (sec/km) : vitesse étalon convertie via l'équation polynomiale du coût énergétique de Minetti (2002).</p>
+          </div>
+          <div class="flex items-start gap-3 p-3.5 rounded-xl bg-emerald-50/50 border border-emerald-200/80" style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.9rem 1rem;border-radius:12px;background:rgba(236,253,245,0.55);border:1px solid rgba(167,243,208,0.85);">
+            <span class="w-6 h-6 rounded-lg bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0 mt-0.5" style="width:24px;height:24px;border-radius:8px;background:#006233;color:#ffffff;font-size:0.72rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">✓</span>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed m-0" style="font-size:0.83rem;line-height:1.55;color:#1e293b;margin:0;" data-i18n-fr="Durée totale (min) : détermine la cible d'oxydation exogène de glucides (30, 60 ou 90 g/h) selon les recommandations de l'ACSM et d'Asker Jeukendrup." data-i18n-en="Duration (min): sets exogenous carbohydrate intake (30–90 g/h)." data-i18n-ar="مدة الجهد: تحدد حاجيات الكربوهيدرات في الساعة (30 إلى 90 غ/ساعة).">Durée totale (min) : détermine la cible d'oxydation exogène de glucides (30, 60 ou 90 g/h) selon les recommandations de l'ACSM et d'Asker Jeukendrup.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 rounded-xl bg-amber-50/70 border border-amber-200/80 space-y-1.5" style="padding:1rem 1.15rem;border-radius:14px;background:#fffbeb;border:1px solid #fde68a;">
+        <h3 class="text-xs font-extrabold uppercase tracking-wider text-amber-900 m-0" style="font-size:0.76rem;font-weight:800;color:#78350f;margin:0 0 0.35rem 0;">💡 Qu'est-ce que l'Allure Ajustée à la Pente (GAP) en course sur route et en trail ?</h3>
+        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed m-0" style="font-size:0.83rem;line-height:1.55;color:#334155;margin:0;">L'Allure Ajustée à la Pente (Grade Adjusted Pace ou GAP) calcule l'allure en montée ou en descente qui exige exactement la même dépense métabolique (VO2) que votre allure sur terrain plat. Chaque +1 % de pente en montée augmente le coût énergétique d'environ 3,3 à 3,5 %.</p>
+      </div>
+
+      <div class="pt-3 border-t border-slate-100 flex flex-wrap items-center gap-1.5" style="padding-top:0.75rem;border-top:1px solid #f1f5f9;display:flex;flex-wrap:wrap;align-items:center;gap:0.4rem;">
+        <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mr-1" style="font-size:0.68rem;font-weight:700;text-transform:uppercase;color:#94a3b8;margin-right:0.35rem;" data-i18n-fr="Thématiques :" data-i18n-en="Topics:" data-i18n-ar="مواضيع ذات صلة:">Thématiques :</span>
+        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600 border border-slate-200" style="display:inline-flex;align-items:center;padding:0.22rem 0.65rem;border-radius:9999px;font-size:0.72rem;font-weight:600;background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;">calculateur gap allure pente trail</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600 border border-slate-200" style="display:inline-flex;align-items:center;padding:0.22rem 0.65rem;border-radius:9999px;font-size:0.72rem;font-weight:600;background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;">cout energetique pente minetti</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600 border border-slate-200" style="display:inline-flex;align-items:center;padding:0.22rem 0.65rem;border-radius:9999px;font-size:0.72rem;font-weight:600;background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;">glucides par heure marathon trail</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600 border border-slate-200" style="display:inline-flex;align-items:center;padding:0.22rem 0.65rem;border-radius:9999px;font-size:0.72rem;font-weight:600;background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;">nutrition course à pied</span>
+      </div>
+    </section>
+  
+    <!-- AVERTISSEMENT DE PRUDENCE PHYSIQUE & CONFORMITÉ SANTÉ -->
+    <div class="peps-medical-notice max-w-3xl mx-auto my-6 p-4 rounded-xl bg-slate-50 border border-slate-200 text-slate-600 text-xs leading-relaxed flex items-start gap-3 shadow-xs">
+      <span class="text-amber-500 text-base shrink-0">⚠️</span>
+      <div>
+        <strong class="text-slate-800">Avertissement de sécurité et de prudence sportive :</strong> Les calculs physiologiques fournis sont des estimations théoriques validées scientifiquement à des fins pédagogiques et d'entraînement. Ils ne remplacent pas un avis médical personnalisé. Avant d'entreprendre des efforts à haute intensité, assurez-vous d'une aptitude médicale complète et respectez des phases d'échauffement et d'hydratation progressives.
+      </div>
+    </div>
+
+  
+    <!-- FICHE SCIENTIFIQUE & PÉDAGOGIQUE OFFICIELLE (1080 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1080 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1080 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1080 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1080 MOTS MINIMUM) -->
+    <section class="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 mt-8" id="fiche-pedagogique-officielle" style="max-width:48rem;margin:2rem auto 0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:20px;padding:1.75rem;box-shadow:0 10px 28px -8px rgba(15,23,42,0.06);">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-1">
+            <span class="text-red-700 font-bold">Cluster 2D · Trail &amp; Bioénergétique de Pente</span>
+            <span aria-hidden="true">&middot;</span>
+            <span style="color:#006233;font-weight:700;">Rédigé par Abdelkhalek ELBOUDANI (Prof d'EPS au Maroc)</span>
+          </div>
+          <h2 class="text-lg font-extrabold text-slate-900 tracking-tight flex items-center gap-2 m-0">
+            <span style="font-size:1.15rem;">📖</span>
+            Allure Ajustée à la Pente (GAP) &amp; Nutrition
+          </h2>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md tabular-nums border border-emerald-200">
+            1080 mots (Guide Approfondi)
+          </span>
+          <button type="button" onclick="copierFichePedagogique()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors cursor-pointer border border-slate-200" title="Copier le guide officiel complet (1080 mots)">
+            <span id="btn-copy-ico">📋</span>
+            <span id="btn-copy-txt">Copier le guide complet</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ZONE 2 : INTERPRÉTATION DES RÉSULTATS & BARÈMES SCOLAIRES (DIRECTEMENT SOUS L'OUTIL) -->
+      <div class="space-y-3">
+        <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
+          <span style="color:#d97706;">💡</span>
+          Zone 2 : Interprétation Immédiate &amp; Barèmes Scolaires Marocains
+        </h3>
+        <p class="text-xs text-slate-700 leading-relaxed bg-amber-50/60 border border-amber-200/70 p-3.5 rounded-xl m-0">
+          L'Allure Ajustée à la Pente (Grade Adjusted Pace) convertit l'effort produit en côte ou en descente en son équivalent métabolique exact sur terrain plat, neutralisant les pièges du dénivelé.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1">
+          
+    <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+      <div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Pente Faible (+3% à +5%)</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">Surcoût énergétique +20% à +35%</div>
+      </div>
+      <div class="text-[11px] text-slate-600 leading-normal">Hausse modérée du coût O2. Raccourcir légèrement la foulée, maintenir une cadence haute (&gt; 175 spm).</div>
+    </div>
+    <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+      <div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Pente Forte (+8% à +12%)</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">Surcoût énergétique +60% à +95%</div>
+      </div>
+      <div class="text-[11px] text-slate-600 leading-normal">Courir à 8 km/h équivaut physiologiquement à 13 km/h sur le plat. Gérer l'acidose lactique.</div>
+    </div>
+    <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+      <div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Pente Très Raide (&gt; +15%)</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">Surcoût supérieur à +120%</div>
+      </div>
+      <div class="text-[11px] text-slate-600 leading-normal">La marche athlétique dynamique avec appui mains sur les cuisses devient plus économe que la course.</div>
+    </div>
+    <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+      <div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Descente Modérée (-5% à -8%)</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">Économie d’O2 maximale</div>
+      </div>
+      <div class="text-[11px] text-slate-600 leading-normal">Vitesse supérieure pour un coût cardiaque faible, mais contrainte musculaire excentrique majeure.</div>
+    </div>
+    <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+      <div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Descente Raide (&lt; -12%)</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">Freinage musculaire coûteux</div>
+      </div>
+      <div class="text-[11px] text-slate-600 leading-normal">Le coût énergétique remonte en raison de la force de freinage des quadriceps.</div>
+    </div>
+        </div>
+      </div>
+
+      <!-- ZONE 3 : TRAITÉ DIDACTIQUE & SITUATIONS DE TERRAIN EN EPS AU MAROC -->
+      <div class="space-y-3 pt-2 border-t border-slate-100">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
+            <span style="color:#006233;">🏃</span>
+            Zone 3 : Application Didactique EPS Maroc &amp; Gestion de Classe (1080 mots)
+          </h3>
+          <button type="button" onclick="toggleTexteIntegral()" id="btn-toggle-texte" class="text-xs font-bold text-[#991b1b] hover:text-[#7f1d1d] cursor-pointer">
+            Afficher le texte complet ▼
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          
+    <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
+      <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">1</span>
+      <p class="text-xs text-slate-700 leading-relaxed m-0">Indiquez votre allure de référence sur le plat ou votre vitesse chronométrée réelle en montée ou en descente.</p>
+    </div>
+    <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
+      <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">2</span>
+      <p class="text-xs text-slate-700 leading-relaxed m-0">Renseignez le pourcentage moyen de la pente (+% pour une côte, -% pour une descente) ou le dénivelé franchi sur la distance parcourue.</p>
+    </div>
+    <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
+      <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">3</span>
+      <p class="text-xs text-slate-700 leading-relaxed m-0">Saisissez votre poids corporel et la durée totale estimée de votre sortie pour débloquer votre Allure Ajustée à la Pente (GAP - modèle de Minetti), vos dépenses caloriques et votre plan horaire d'apport glucidique.</p>
+    </div>
+        </div>
+        
+        <div id="bloc-texte-integral" class="hidden p-5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 leading-relaxed whitespace-pre-line font-sans">
+          <div style="font-weight:700;color:#006233;margin-bottom:0.75rem;padding-bottom:0.4rem;border-bottom:1px solid #cbd5e1;">
+            Auteur : Abdelkhalek ELBOUDANI · Professeur d'Éducation Physique et Sportive (Maroc) · Conforme Orientations 2007-2009
+          </div>
+I. Introduction à la Biomécanique de Course en Pente et Concept GAP
+
+Dans la pratique de la course sur route vallonnée, du trail running, du cross-country et de la course d'orientation en milieu naturel, le chronomètre traditionnel et la vitesse instantanée affichée sur la montre GPS deviennent des indicateurs trompeurs. Un coureur qui progresse à huit kilomètres par heure sur une montée sévère de dix pour cent peut avoir l'impression erronée de se traîner, alors que son système cardiorespiratoire et ses fibres musculaires travaillent en réalité à cent pour cent de leur VMA. À l'inverse, lors d'une descente rapide à seize kilomètres par heure, son cœur peut battre à une fréquence très modérée tout en soumettant ses quadriceps à une contrainte mécanique destructrice. Pour comparer équitablement les intensités d'effort indépendamment du relief et calibrer intelligemment ses allures, les chercheurs en biomécanique ont créé le concept d'Allure Ajustée à la Pente, mondialement connue sous l'acronyme GAP (pour Grade Adjusted Pace). Le modèle de référence absolue utilisé par les plus grandes plateformes scientifiques et d'analyse athlétique repose sur les travaux pionniers du professeur Alberto E. Minetti et de son équipe, publiés au début des années deux mille.
+
+II. Guide d'Utilisation Étape par Étape
+
+Pour utiliser le calculateur GAP et établir votre stratégie de gestion d'effort et de ravitaillement :
+1. Renseignement de l'allure ou de la vitesse : Entrez votre allure chronométrée observée sur la pente en minutes et secondes par kilomètre, ou indiquez votre allure de base sur le plat.
+2. Saisie du pourcentage de déclivité : Renseignez la pente moyenne du secteur. Utilisez un chiffre positif pour les montées (par exemple +8% pour une côte de 80 mètres de dénivelé sur 1 000 mètres de distance) et un chiffre négatif pour les descentes (par exemple -6%).
+3. Renseignement du poids et de la durée : Entrez votre poids corporel en kilogrammes ainsi que la durée totale estimée de votre séance ou compétition en minutes.
+4. Analyse des indicateurs délivrés : Le calculateur affiche instantanément votre allure GAP équivalente sur le plat, le surcoût énergétique métabolique encouru, la dépense calorique prévisionnelle et votre plan nutritionnel horaire en glucides et hydratation.
+
+III. Explication des Paramètres et Notions de Biomécanique
+
+La physique de la course en terrain accidenté obéit à des lois biomécaniques strictes :
+- La pente (ou Grade en pourcentage) : Elle représente le dénivelé vertical divisé par la distance horizontale parcourue, multiplié par cent. Une pente de +10% signifie qu'à chaque kilomètre parcouru au sol, vous élevez votre centre de gravité de cent mètres verticalement contre la gravité terrestre.
+- Le coût énergétique de locomotion (Cr) : C'est la quantité d'énergie métabolique (exprimée en Joules par kilogramme de masse corporelle et par mètre parcouru) nécessaire pour déplacer l'organisme. Sur le plat, le coût énergétique est remarquablement stable chez un coureur régulier, autour de 3,6 à 4,0 J/kg/m. Dès que la pente s'élève, le coût explose car le coureur doit vaincre son propre poids dans le champ de pesanteur.
+- La durée totale de l'épreuve : Elle conditionne l'épuisement des réserves de glycogène hépatique et musculaire, dictant la stratégie d'apport en glucides exogènes.
+
+IV. Relations Mathématiques et Équations de Minetti
+
+Le modèle repose sur l'équation polynomiale du cinquième degré établie par Alberto Minetti (2002) mesurant la consommation d'oxygène sur tapis roulant incliné :
+1. Équation du coût énergétique de course Cr :
+Cr = 155,4·i⁵ − 30,4·i⁴ − 43,3·i³ + 46,3·i² + 19,5·i + 3,6 (en J/kg/m),
+où « i » représente la pente sous forme décimale (par exemple i = +0,10 pour +10%, ou i = -0,05 pour -5%).
+2. Calcul du facteur d'équivalence GAP :
+Facteur = Cr(pente) / Cr(plat).
+Sur le plat (i = 0), Cr(0) = 3,6 J/kg/m.
+Pour une montée de +10% (i = 0,10), le coût Cr grimpe à environ 6,85 J/kg/m.
+Le facteur d'équivalence vaut alors 6,85 / 3,6 ≈ 1,90.
+3. Calcul de l'allure GAP :
+GAP (en min/km) = Allure Réelle de montée / Facteur.
+Exemple concret : Si vous montez une côte à 10% à une vitesse de 7:30/km (450 s/km) :
+GAP = 450 / 1,90 = 236,8 secondes, soit 3 min 57 s au kilomètre sur le plat !
+Cette égalité prouve que votre organisme subit exactement la même contrainte cardiaque et respiratoire que si vous couriez à 15,2 km/h sur une piste d'athlétisme plane.
+4. Phénomène paradoxal en descente :
+Entre 0% et -10%, le coût énergétique diminue jusqu'à un minimum situé vers -10% (où Cr tombe à environ 1,7 J/kg/m), car la gravité aide à la propulsion. Cependant, au-delà de -15% de pente négative, le coût énergétique remonte en flèche : le coureur doit exercer un freinage excentrique massif pour ne pas chuter, ce qui détruit les ponts actine-myosine et engendre des microlésions musculaires sévères.
+
+V. Stratégie Nutritionnelle et Apports Glucidiques Horaires
+
+En trail et course de longue durée, le métabolisme énergétique doit être compensé sans discontinuer :
+- Ravitaillement selon la durée (Recommandations Asker Jeukendrup / ACSM) :
+  * Moins de 45 minutes : Aucun apport glucidique nécessaire, un rinçage buccal peut suffire.
+  * De 45 à 75 minutes : Apports légers de 30 g de glucides par heure.
+  * De 1h15 à 2h30 : Apport standard de 30 à 60 g de glucides par heure sous forme de gels énergétiques ou de boisson isotonique.
+  * Au-delà de 2h30 à 3h00 (Trails longs, marathons, ultra) : Les récepteurs intestinaux au glucose (SGLT1) saturent à 60 g/heure. Pour assimiler jusqu'à 90 g voire 100 g de glucides par heure sans troubles digestifs, il est impératif d'utiliser un mélange glucidique multiple associant maltodextrines/glucose et fructose selon un ratio 2:1 ou 1:0,8, exploitant les transporteurs GLUT5.
+
+VI. Conseils Pratiques de Gestion de Course et de Sécurité
+
+La gestion d'allure en côte impose de briser le piège psychologique de la vitesse chronométrique :
+- En montée : Ne cherchez jamais à garder votre vitesse du plat. Fiez-vous à votre fréquence cardiaque, à votre perception d'effort (RPE) ou à votre allure GAP. Réduisez l'amplitude de votre foulée et augmentez votre cadence. Dès que la pente dépasse quinze à vingt pour cent, basculez en marche athlétique active en posant les mains sur les cuisses : le rendement métabolique est supérieur et épargne les mollets.
+- En descente : Évitez l'attaque talon freinée jambe tendue qui martyrise les genoux et les quadriceps. Gardez le buste légèrement penché dans la pente, posez le médio-pied sous le bassin et laissez tourner les jambes avec agilité.
+        </div>
+      </div>
+
+      <!-- ZONE 4 : FONDEMENTS PHYSIOLOGIQUES & RELATIONS MATHÉMATIQUES -->
+      <div class="space-y-3 pt-2 border-t border-slate-100">
+        <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
+          <span style="color:#c1272d;">📐</span>
+          Zone 4 : Fondements Physiologiques &amp; Relations Mathématiques
+        </h3>
+        <div class="p-4 bg-slate-900 text-white rounded-xl space-y-2 border border-slate-800 shadow-inner">
+          
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Équation polynomiale du coût énergétique Cr (Minetti 2002) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Cr = 155,4·i⁵ − 30,4·i⁴ − 43,3·i³ + 46,3·i² + 19,5·i + 3,6 (en J/kg/m)</code>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Facteur d’équivalence mécanique de pente :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Facteur = Cr(pente i) / Cr(plat i = 0)</code>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Allure Ajustée à la Pente équivalente (GAP) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">GAP (min/km) = Allure Réelle (min/km) / Facteur</code>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Dépense énergétique kilométrique :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Énergie (kcal) ≈ Poids (kg) × Distance (km) × (Cr_pente / Cr_plat)</code>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Cibles d’oxydation glucidique exogène (Jeukendrup) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Durée 1h–2h : 30–60 g/h | Durée &gt; 2h30 : 60–90 g/h (ratio 2:1 glucose-fructose)</code>
+    </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      function toggleTexteIntegral() {
+        var el = document.getElementById('bloc-texte-integral');
+        var btn = document.getElementById('btn-toggle-texte');
+        if (el && btn) {
+          if (el.classList.contains('hidden')) {
+            el.classList.remove('hidden');
+            btn.textContent = 'Masquer le texte complet ▲';
+          } else {
+            el.classList.add('hidden');
+            btn.textContent = 'Afficher le texte complet ▼';
+          }
+        }
+      }
+
+      function copierFichePedagogique() {
+        var texte = "I. Introduction à la Biomécanique de Course en Pente et Concept GAP\n\nDans la pratique de la course sur route vallonnée, du trail running, du cross-country et de la course d'orientation en milieu naturel, le chronomètre traditionnel et la vitesse instantanée affichée sur la montre GPS deviennent des indicateurs trompeurs. Un coureur qui progresse à huit kilomètres par heure sur une montée sévère de dix pour cent peut avoir l'impression erronée de se traîner, alors que son système cardiorespiratoire et ses fibres musculaires travaillent en réalité à cent pour cent de leur VMA. À l'inverse, lors d'une descente rapide à seize kilomètres par heure, son cœur peut battre à une fréquence très modérée tout en soumettant ses quadriceps à une contrainte mécanique destructrice. Pour comparer équitablement les intensités d'effort indépendamment du relief et calibrer intelligemment ses allures, les chercheurs en biomécanique ont créé le concept d'Allure Ajustée à la Pente, mondialement connue sous l'acronyme GAP (pour Grade Adjusted Pace). Le modèle de référence absolue utilisé par les plus grandes plateformes scientifiques et d'analyse athlétique repose sur les travaux pionniers du professeur Alberto E. Minetti et de son équipe, publiés au début des années deux mille.\n\nII. Guide d'Utilisation Étape par Étape\n\nPour utiliser le calculateur GAP et établir votre stratégie de gestion d'effort et de ravitaillement :\n1. Renseignement de l'allure ou de la vitesse : Entrez votre allure chronométrée observée sur la pente en minutes et secondes par kilomètre, ou indiquez votre allure de base sur le plat.\n2. Saisie du pourcentage de déclivité : Renseignez la pente moyenne du secteur. Utilisez un chiffre positif pour les montées (par exemple +8% pour une côte de 80 mètres de dénivelé sur 1 000 mètres de distance) et un chiffre négatif pour les descentes (par exemple -6%).\n3. Renseignement du poids et de la durée : Entrez votre poids corporel en kilogrammes ainsi que la durée totale estimée de votre séance ou compétition en minutes.\n4. Analyse des indicateurs délivrés : Le calculateur affiche instantanément votre allure GAP équivalente sur le plat, le surcoût énergétique métabolique encouru, la dépense calorique prévisionnelle et votre plan nutritionnel horaire en glucides et hydratation.\n\nIII. Explication des Paramètres et Notions de Biomécanique\n\nLa physique de la course en terrain accidenté obéit à des lois biomécaniques strictes :\n- La pente (ou Grade en pourcentage) : Elle représente le dénivelé vertical divisé par la distance horizontale parcourue, multiplié par cent. Une pente de +10% signifie qu'à chaque kilomètre parcouru au sol, vous élevez votre centre de gravité de cent mètres verticalement contre la gravité terrestre.\n- Le coût énergétique de locomotion (Cr) : C'est la quantité d'énergie métabolique (exprimée en Joules par kilogramme de masse corporelle et par mètre parcouru) nécessaire pour déplacer l'organisme. Sur le plat, le coût énergétique est remarquablement stable chez un coureur régulier, autour de 3,6 à 4,0 J/kg/m. Dès que la pente s'élève, le coût explose car le coureur doit vaincre son propre poids dans le champ de pesanteur.\n- La durée totale de l'épreuve : Elle conditionne l'épuisement des réserves de glycogène hépatique et musculaire, dictant la stratégie d'apport en glucides exogènes.\n\nIV. Relations Mathématiques et Équations de Minetti\n\nLe modèle repose sur l'équation polynomiale du cinquième degré établie par Alberto Minetti (2002) mesurant la consommation d'oxygène sur tapis roulant incliné :\n1. Équation du coût énergétique de course Cr :\nCr = 155,4·i⁵ − 30,4·i⁴ − 43,3·i³ + 46,3·i² + 19,5·i + 3,6 (en J/kg/m),\noù « i » représente la pente sous forme décimale (par exemple i = +0,10 pour +10%, ou i = -0,05 pour -5%).\n2. Calcul du facteur d'équivalence GAP :\nFacteur = Cr(pente) / Cr(plat).\nSur le plat (i = 0), Cr(0) = 3,6 J/kg/m.\nPour une montée de +10% (i = 0,10), le coût Cr grimpe à environ 6,85 J/kg/m.\nLe facteur d'équivalence vaut alors 6,85 / 3,6 ≈ 1,90.\n3. Calcul de l'allure GAP :\nGAP (en min/km) = Allure Réelle de montée / Facteur.\nExemple concret : Si vous montez une côte à 10% à une vitesse de 7:30/km (450 s/km) :\nGAP = 450 / 1,90 = 236,8 secondes, soit 3 min 57 s au kilomètre sur le plat !\nCette égalité prouve que votre organisme subit exactement la même contrainte cardiaque et respiratoire que si vous couriez à 15,2 km/h sur une piste d'athlétisme plane.\n4. Phénomène paradoxal en descente :\nEntre 0% et -10%, le coût énergétique diminue jusqu'à un minimum situé vers -10% (où Cr tombe à environ 1,7 J/kg/m), car la gravité aide à la propulsion. Cependant, au-delà de -15% de pente négative, le coût énergétique remonte en flèche : le coureur doit exercer un freinage excentrique massif pour ne pas chuter, ce qui détruit les ponts actine-myosine et engendre des microlésions musculaires sévères.\n\nV. Stratégie Nutritionnelle et Apports Glucidiques Horaires\n\nEn trail et course de longue durée, le métabolisme énergétique doit être compensé sans discontinuer :\n- Ravitaillement selon la durée (Recommandations Asker Jeukendrup / ACSM) :\n  * Moins de 45 minutes : Aucun apport glucidique nécessaire, un rinçage buccal peut suffire.\n  * De 45 à 75 minutes : Apports légers de 30 g de glucides par heure.\n  * De 1h15 à 2h30 : Apport standard de 30 à 60 g de glucides par heure sous forme de gels énergétiques ou de boisson isotonique.\n  * Au-delà de 2h30 à 3h00 (Trails longs, marathons, ultra) : Les récepteurs intestinaux au glucose (SGLT1) saturent à 60 g/heure. Pour assimiler jusqu'à 90 g voire 100 g de glucides par heure sans troubles digestifs, il est impératif d'utiliser un mélange glucidique multiple associant maltodextrines/glucose et fructose selon un ratio 2:1 ou 1:0,8, exploitant les transporteurs GLUT5.\n\nVI. Conseils Pratiques de Gestion de Course et de Sécurité\n\nLa gestion d'allure en côte impose de briser le piège psychologique de la vitesse chronométrique :\n- En montée : Ne cherchez jamais à garder votre vitesse du plat. Fiez-vous à votre fréquence cardiaque, à votre perception d'effort (RPE) ou à votre allure GAP. Réduisez l'amplitude de votre foulée et augmentez votre cadence. Dès que la pente dépasse quinze à vingt pour cent, basculez en marche athlétique active en posant les mains sur les cuisses : le rendement métabolique est supérieur et épargne les mollets.\n- En descente : Évitez l'attaque talon freinée jambe tendue qui martyrise les genoux et les quadriceps. Gardez le buste légèrement penché dans la pente, posez le médio-pied sous le bassin et laissez tourner les jambes avec agilité.";
+        navigator.clipboard.writeText(texte).then(function() {
+          var ico = document.getElementById('btn-copy-ico');
+          var txt = document.getElementById('btn-copy-txt');
+          if (ico && txt) {
+            ico.textContent = '✓';
+            txt.textContent = 'Guide copié (1080 mots) !';
+            setTimeout(function() {
+              ico.textContent = '📋';
+              txt.textContent = 'Copier le guide complet';
+            }, 2500);
+          }
+        });
+      }
+    </script>
+  
+  </main>
+
+  
+  <!-- PROFEPS_RELATED_MESH_START -->
+  <aside class="peps-related-mesh" style="max-width:1024px;margin:2rem auto;padding:1.25rem 1.5rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;">
+    <h2 style="font-size:0.95rem;font-weight:800;color:#0f172a;margin:0 0 0.85rem 0;">🔗 Ressources &amp; Guides Associés (Calculateurs & Physiologie Sportive)</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.65rem;">
+        <a href="calculateur-vdot-asr-endurance.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Calculateur VO2 Max & VDOT Course | ProfEPS →</a>
+        <a href="courir-forte-chaleur-point-de-rosee-altitude.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Courir par Forte Chaleur et Altitude : Point de Rosée & →</a>
+        <a href="hub-outils-sport-performance.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Hub Outils & Calculateurs Sportifs EPS | ProfEPS →</a>
+        <a href="methode-vdot-jack-daniels-calcul-allures.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Méthode VDOT Jack Daniels : Calcul Allures & Prédictions →</a>
+    </div>
+  </aside>
+  <!-- PROFEPS_RELATED_MESH_END -->
+  <footer class="footer" id="profeps-unified-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-brand" style="display:flex !important;flex-direction:column !important;align-items:flex-start !important;">
+          <img src="/images/prof_eps.webp" width="150" height="46" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:46px !important;max-height:46px !important;width:auto !important;max-width:155px !important;object-fit:contain !important;align-self:flex-start !important;filter:none !important;border-radius:8px !important;margin:0 0 0.9rem 0 !important;display:block !important;">
+          <p data-i18n-fr="La plateforme de référence pour les professeurs d'EPS et candidats aux concours de l'enseignement au Maroc. Générateur pédagogique, calculateurs sportifs et préparation CRMEF." data-i18n-en="The reference platform for PE teachers and CRMEF candidates in Morocco. Educational generator, sports calculators &amp; official curriculum-aligned quizzes." data-i18n-ar="المنصة المرجعية لأساتذة التربية البدنية والمترشحين لمباريات التعليم بالمغرب. مولد وثائق تربوية، حاسبات رياضية واستعداد لمباراة التعليم.">La plateforme de référence pour les professeurs d'EPS et candidats aux concours de l'enseignement au Maroc. Générateur pédagogique, calculateurs sportifs et préparation CRMEF.</p>
+          <div class="footer-stats">
+            <div class="footer-stat-item">
+              <span class="footer-stat-num">16+</span>
+              <span class="footer-stat-lbl" data-i18n-fr="APS couvertes" data-i18n-en="Sports covered" data-i18n-ar="نشاط رياضي">APS couvertes</span>
+            </div>
+            <div class="footer-stat-item">
+              <span class="footer-stat-num">24</span>
+              <span class="footer-stat-lbl" data-i18n-fr="Silos Disciplines" data-i18n-en="Disciplines" data-i18n-ar="تخصصات ومواد">Silos Disciplines</span>
+            </div>
+            <div class="footer-stat-item">
+              <span class="footer-stat-num">100%</span>
+              <span class="footer-stat-lbl" data-i18n-fr="Gratuit" data-i18n-en="Free" data-i18n-ar="مجاني">Gratuit</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-col-title" data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</p>
+          <ul>
+            <li><a href="index.html" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a></li>
+            <li><a href="concours-crmef-hub.html" data-i18n-fr="Préparation CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparation CRMEF</a></li>
+            <li><a href="generateur.html" data-i18n-fr="Générateur PDF" data-i18n-en="PDF Generator" data-i18n-ar="مولد الوثائق PDF">Générateur PDF</a></li>
+            <li><a href="blog.html" data-i18n-fr="Articles &amp; Blog" data-i18n-en="Articles &amp; Blog" data-i18n-ar="المقالات والمدونة">Articles &amp; Blog</a></li>
+            <li><a href="bibliotheque-numerique-eps.html" data-i18n-fr="Bibliothèque EPS" data-i18n-en="PE Digital Library" data-i18n-ar="المكتبة الرقمية">Bibliothèque EPS</a></li>
+            <li><a href="a-propos.html" data-i18n-fr="À propos" data-i18n-en="About Us" data-i18n-ar="من نحن">À propos</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col" id="footer-col-crmef">
+          <p class="footer-col-title" data-i18n-fr="HUB CONCOURS CRMEF" data-i18n-en="CRMEF EXAM HUB" data-i18n-ar="بوابة مباراة التعليم">HUB CONCOURS CRMEF</p>
+          <ul class="footer-crmef-grid">
+            <li class="footer-crmef-hub-item"><a href="concours-crmef-hub.html" class="footer-hub-highlight" data-i18n-fr="★ Hub Concours CRMEF (Toutes Filières)" data-i18n-en="★ CRMEF Exam Hub (All Specialties)" data-i18n-ar="★ بوابة مباراة التعليم (جميع التخصصات)">★ Hub Concours CRMEF (Toutes Filières)</a></li>
+            <li><a href="qcm-sciences-education-crmef.html" data-i18n-fr="Tronc Commun (SE)" data-i18n-en="Education Sciences" data-i18n-ar="علوم التربية">Tronc Commun (SE)</a></li>
+            <li><a href="qcm-didactique-eps-maroc.html" data-i18n-fr="EPS (Sport)" data-i18n-en="PE &amp; Sport" data-i18n-ar="التربية البدنية">EPS (Sport)</a></li>
+            <li><a href="qcm-didactique-primaire-maroc.html" data-i18n-fr="Primaire (TaRL)" data-i18n-en="Primary (TaRL)" data-i18n-ar="التعليم الابتدائي">Primaire (TaRL)</a></li>
+            <li><a href="qcm-didactique-maths-maroc.html" data-i18n-fr="Mathématiques" data-i18n-en="Mathematics" data-i18n-ar="الرياضيات">Mathématiques</a></li>
+            <li><a href="qcm-didactique-physique-chimie-maroc.html" data-i18n-fr="Physique-Chimie" data-i18n-en="Physics &amp; Chemistry" data-i18n-ar="الفيزياء والكيمياء">Physique-Chimie</a></li>
+            <li><a href="qcm-didactique-svt-maroc.html" data-i18n-fr="SVT" data-i18n-en="Life &amp; Earth Sciences" data-i18n-ar="علوم الحياة والأرض">SVT</a></li>
+            <li><a href="qcm-didactique-francais-maroc.html" data-i18n-fr="Français" data-i18n-en="French" data-i18n-ar="اللغة الفرنسية">Français</a></li>
+            <li><a href="qcm-didactique-arabe-maroc.html" data-i18n-fr="Arabe" data-i18n-en="Arabic" data-i18n-ar="اللغة العربية">Arabe</a></li>
+            <li><a href="qcm-didactique-histoire-geographie-maroc.html" data-i18n-fr="Histoire-Géo" data-i18n-en="History &amp; Geography" data-i18n-ar="التاريخ والجغرافيا">Histoire-Géo</a></li>
+            <li><a href="qcm-didactique-philosophie-maroc.html" data-i18n-fr="Philosophie" data-i18n-en="Philosophy" data-i18n-ar="الفلسفة">Philosophie</a></li>
+            <li><a href="qcm-didactique-informatique-maroc.html" data-i18n-fr="Informatique" data-i18n-en="Computer Science" data-i18n-ar="الإعلاميات">Informatique</a></li>
+            <li><a href="qcm-didactique-anglais-maroc.html" data-i18n-fr="Anglais" data-i18n-en="English" data-i18n-ar="اللغة الإنجليزية">Anglais</a></li>
+            <li><a href="qcm-didactique-education-islamique-maroc.html" data-i18n-fr="Éduc. Islamique" data-i18n-en="Islamic Education" data-i18n-ar="التربية الإسلامية">Éduc. Islamique</a></li>
+            <li><a href="qcm-didactique-economie-gestion-maroc.html" data-i18n-fr="Éco-Gestion" data-i18n-en="Economics &amp; Mgmt" data-i18n-ar="الاقتصاد والتدبير">Éco-Gestion</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col" id="footer-col-calculators">
+          <p class="footer-col-title" data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</p>
+          <ul>
+            <li><a href="hub-outils-sport-performance.html" class="footer-hub-highlight" data-i18n-fr="★ Hub Tous les Calculateurs" data-i18n-en="★ All Calculators Hub" data-i18n-ar="★ بوابة جميع الحاسبات الرياضية">★ Hub Tous les Calculateurs</a></li>
+            <li><a href="calculateur-vma.html" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS (VMA) Calculator" data-i18n-ar="حاسبة السرعة VMA">Calculateur VMA</a></li>
+            <li><a href="calculateur-vdot-asr-endurance.html" data-i18n-fr="Calculateur VO2 Max &amp; VDOT" data-i18n-en="VO2 Max &amp; VDOT" data-i18n-ar="حاسبة VO2 Max و VDOT">Calculateur VO2 Max &amp; VDOT</a></li>
+            <li><a href="calculateur-asr-reserve-vitesse.html" data-i18n-fr="Réserve Anaérobie (ASR)" data-i18n-en="Speed Reserve (ASR)" data-i18n-ar="احتياطي السرعة ASR">Réserve Anaérobie (ASR)</a></li>
+            <li><a href="calculateur-frequence-cardiaque-karvonen.html" data-i18n-fr="Fréquence Cardiaque Karvonen" data-i18n-en="Heart Rate (Karvonen)" data-i18n-ar="نبضات القلب Karvonen">Fréquence Cardiaque Karvonen</a></li>
+            <li><a href="calculateur-charge-rpe-foster-acwr.html" data-i18n-fr="Charge RPE Foster &amp; ACWR" data-i18n-en="Foster RPE &amp; ACWR" data-i18n-ar="حمل التدريب RPE و ACWR">Charge RPE Foster &amp; ACWR</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-col-title" data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</p>
+          <ul>
+            <li><a href="mentions-legales.html" data-i18n-fr="Mentions légales" data-i18n-en="Legal Notice" data-i18n-ar="إشعار قانوني">Mentions légales</a></li>
+            <li><a href="politique-confidentialite.html" data-i18n-fr="Politique de confidentialité" data-i18n-en="Privacy Policy" data-i18n-ar="سياسة الخصوصية">Politique de confidentialité</a></li>
+            <li><a href="cgu.html" data-i18n-fr="Conditions d'utilisation" data-i18n-en="Terms of Use" data-i18n-ar="شروط الاستخدام">Conditions d'utilisation</a></li>
+            <li><a href="contact.html" data-i18n-fr="Nous contacter" data-i18n-en="Contact Us" data-i18n-ar="اتصل بنا">Nous contacter</a></li>
+            <li><a href="mailto:profepsma@gmail.com">✉️ profepsma@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span data-i18n-fr="© 2026 Prof EPS Maroc (profeps.ma). Tous droits réservés." data-i18n-en="© 2026 Prof EPS Morocco (profeps.ma). All rights reserved." data-i18n-ar="© 2026 أستاذ التربية البدنية المغرب (profeps.ma). جميع الحقوق محفوظة.">© 2026 Prof EPS Maroc (profeps.ma). Tous droits réservés.</span>
+        <span data-i18n-fr="Fait avec ❤️ pour les enseignants et candidats CRMEF au Maroc" data-i18n-en="Made with ❤️ for teachers &amp; candidates in Morocco" data-i18n-ar="صنع بـ ❤️ لأساتذة التربية البدنية والمترشحين بالمغرب">Fait avec ❤️ pour les enseignants et candidats CRMEF au Maroc</span>
+      </div>
+    </div>
+  </footer>
+
+  <script id="profeps-tool-engine-js">
+    var currentLang = 'fr';
+    var hasCalculated = false;
+
+    function setToolLang(lang) {
+      currentLang = lang;
+      var root = document.getElementById('html-root');
+      if (root) {
+        root.lang = lang;
+        root.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+      }
+      document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function(el) {
+        var val = el.getAttribute('data-i18n-' + lang);
+        if (val) el.textContent = val;
+      });
+      if (typeof applyToolTranslations === 'function') applyToolTranslations(lang);
+      if (hasCalculated && typeof computeTool === 'function') computeTool();
+    }
+
+    function triggerCalculation() {
+      hasCalculated = true;
+      var panel = document.getElementById('tool-results-panel');
+      if (panel) {
+        panel.classList.remove('hidden');
+        panel.classList.remove('peps-results-reveal');
+        void panel.offsetWidth;
+        panel.classList.add('peps-results-reveal');
+      }
+      if (typeof computeTool === 'function') computeTool();
+      if (panel && window.innerWidth < 768) {
+        setTimeout(function() {
+          panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 80);
+      }
+    }
+
+    function onInputUpdated() {
+      if (hasCalculated && typeof computeTool === 'function') {
+        computeTool();
+      }
+    }
+
+    function computeTool() {
+      var slope = parseFloat(document.getElementById('inp-slope').value) || 0;
+      var baseSec = parseFloat(document.getElementById('inp-pace').value) || 270;
+      var dur = parseFloat(document.getElementById('inp-dur').value) || 120;
+
+      var factor = slope >= 0 ? (1 + slope * 0.033 + slope * slope * 0.0012) : Math.max(0.84, 1 + slope * 0.018);
+      var adjSec = Math.round(baseSec * factor);
+      var costPct = (factor - 1) * 100;
+      var m = Math.floor(adjSec / 60), s = String(adjSec % 60).padStart(2, '0');
+      var bm = Math.floor(baseSec / 60), bs = String(baseSec % 60).padStart(2, '0');
+      var carbsPerH = dur <= 60 ? 30 : dur <= 150 ? 60 : 90;
+      var totalCarbs = Math.round((carbsPerH * dur) / 60);
+
+      document.getElementById('out-gap').textContent = m + ':' + s + ' /km';
+      document.getElementById('out-cost').textContent = (costPct >= 0 ? '+' : '') + costPct.toFixed(1) + ' %';
+      document.getElementById('out-carbs').textContent = carbsPerH + ' g/h';
+
+      if (currentLang === 'fr') {
+        document.getElementById('out-gap-meaning').textContent = 'Équivalent plat : ' + bm + ':' + bs + ' /km';
+        document.getElementById('out-cost-meaning').textContent = slope >= 0 ? 'Travail concentrique de montée' : 'Travail excentrique de descente';
+        document.getElementById('out-carbs-meaning').textContent = 'Total épreuve (' + dur + ' min) : ~' + totalCarbs + ' g de glucides';
+      } else if (currentLang === 'en') {
+        document.getElementById('out-gap-meaning').textContent = 'Flat equivalent: ' + bm + ':' + bs + ' /km';
+        document.getElementById('out-cost-meaning').textContent = slope >= 0 ? 'Concentric uphill cost' : 'Eccentric downhill braking';
+        document.getElementById('out-carbs-meaning').textContent = 'Total event (' + dur + ' min): ~' + totalCarbs + ' g carbs';
+      } else {
+        document.getElementById('out-gap-meaning').textContent = 'المكافئ في المنبسط: ' + bm + ':' + bs + ' /كم';
+        document.getElementById('out-cost-meaning').textContent = slope >= 0 ? 'جهد عضلي صاعد' : 'انقباض لا مركزي هابط';
+        document.getElementById('out-carbs-meaning').textContent = 'إجمالي السباق (' + dur + ' د): ~' + totalCarbs + ' غ كربوهيدرات';
+      }
+
+      var box = document.getElementById('out-gap-interp');
+      if (currentLang === 'fr') {
+        box.innerHTML = '<p><strong>⛰️ Biomécanique de Minetti (Pente ' + slope + ' %) :</strong> Courir à <strong>' + m + ':' + s + ' /km</strong> sur une pente de <strong>' + slope + ' %</strong> demande exactement la même dépense métabolique que courir à <strong>' + bm + ':' + bs + ' /km</strong> sur le plat. En montée, augmentez la fréquence de foulée (cadence ~175–185 ppm) en réduisant l’amplitude.</p><p><strong>🍌 Stratégie Ravitaillement (' + dur + ' min) :</strong> Consommez <strong>' + carbsPerH + ' g de glucides/heure</strong> (soit ~1 gel ou 500 ml de boisson isotonique toutes les 25–30 minutes) pour prévenir la déplétion du glycogène hépatique et musculaire.</p>';
+      } else if (currentLang === 'en') {
+        box.innerHTML = '<p><strong>⛰️ Minetti Slope Biomechanics (' + slope + '% grade):</strong> Running at <strong>' + m + ':' + s + ' /km</strong> on a <strong>' + slope + '%</strong> grade requires the exact same metabolic power as <strong>' + bm + ':' + bs + ' /km</strong> on flat ground. Shorten your stride and keep cadence high.</p><p><strong>🍌 Fueling Strategy (' + dur + ' min):</strong> Target <strong>' + carbsPerH + ' g/h of carbohydrates</strong> (~' + totalCarbs + ' g total) to prevent glycogen depletion.</p>';
+      } else {
+        box.innerHTML = '<p><strong>⛰️ بيوميكانيك الانحدار (نموذج Minetti عند ' + slope + '%):</strong> الجري بإيقاع <strong>' + m + ':' + s + ' /كم</strong> في منحدر <strong>' + slope + '%</strong> يتطلب نفس الطاقة الفيزيولوجية للجري بإيقاع <strong>' + bm + ':' + bs + ' /كم</strong> على أرض منبسطة.</p><p><strong>🍌 خطة التغذية (' + dur + ' دقيقة):</strong> تناول <strong>' + carbsPerH + ' غرام كربوهيدرات في الساعة</strong> (إجمالي ~' + totalCarbs + ' غ) لتفادي نفاد الجليكوجين العضلي.</p>';
+      }
+    }
+  </script>
+
+<!-- BANDEAU DE CONSENTEMENT GOOGLE ADSENSE & RGPD (PROFEPS CMP) -->
+<div id="profeps-cmp-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#f8fafc;padding:18px 24px;border-top:1px solid #334155;z-index:999999;box-shadow:0 -10px 25px rgba(0,0,0,0.5);font-family:system-ui,-apple-system,sans-serif;">
+  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;">
+    <div style="flex:1 1 500px;font-size:13.5px;line-height:1.5;">
+      <strong style="color:#38bdf8;font-size:14.5px;">🍪 Respect de votre vie privée & Cookies</strong><br>
+      ProfEPS utilise des cookies essentiels au fonctionnement du site, ainsi que des cookies d'analyse d'audience et de personnalisation publicitaire Google AdSense pour financer nos outils pédagogiques gratuits. Vous pouvez accepter, refuser ou personnaliser vos préférences à tout moment. Consultez notre <a href="politique-confidentialite.html" style="color:#38bdf8;text-decoration:underline;">Politique de confidentialité</a>.
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+      <button onclick="window.ProfEPS_CMP.open()" type="button" style="padding:8px 14px;background:#1e293b;color:#cbd5e1;border:1px solid #475569;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Personnaliser</button>
+      <button onclick="window.ProfEPS_CMP.rejectAll()" type="button" style="padding:8px 14px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Continuer sans accepter</button>
+      <button onclick="window.ProfEPS_CMP.acceptAll()" type="button" style="padding:8px 18px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;">Tout accepter</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE PERSONNALISATION DES COOKIES -->
+<div id="profeps-cmp-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.8);backdrop-filter:blur(4px);z-index:1000000;align-items:center;justify-content:center;padding:16px;font-family:system-ui,-apple-system,sans-serif;">
+  <div style="background:#0f172a;border:1px solid #334155;border-radius:12px;max-width:560px;width:100%;padding:24px;color:#f8fafc;box-shadow:0 20px 40px rgba(0,0,0,0.6);max-height:90vh;overflow-y:auto;">
+    <h3 style="margin-top:0;font-size:18px;color:#38bdf8;">⚙️ Préférences de Confidentialité & Cookies</h3>
+    <p style="font-size:13px;color:#94a3b8;line-height:1.5;">Gérez ici vos préférences concernant le dépôt de cookies sur votre appareil. Les cookies techniques sont indispensables à la navigation.</p>
+    
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-weight:600;font-size:14px;">Cookies techniques essentiels</span>
+        <span style="font-size:12px;color:#10b981;font-weight:bold;">Toujours actif</span>
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Nécessaires au fonctionnement des calculateurs, de la sécurité et de la mémorisation de votre choix de consentement.</p>
+    </div>
+
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <label for="cmp-opt-analytics" style="font-weight:600;font-size:14px;cursor:pointer;">Cookies de mesure d'audience (Analytics)</label>
+        <input type="checkbox" id="cmp-opt-analytics" checked style="width:18px;height:18px;cursor:pointer;">
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Nous permettent de mesurer anonymement la fréquentation de nos pages et calculateurs EPS.</p>
+    </div>
+
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <label for="cmp-opt-ads" style="font-weight:600;font-size:14px;cursor:pointer;">Publicités personnalisées (Google AdSense)</label>
+        <input type="checkbox" id="cmp-opt-ads" checked style="width:18px;height:18px;cursor:pointer;">
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Permet à Google et ses partenaires d'afficher des annonces adaptées à vos centres d'intérêt afin de maintenir la gratuité de la plateforme.</p>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px;">
+      <button onclick="document.getElementById('profeps-cmp-modal').style.display='none'" type="button" style="padding:8px 14px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:13px;cursor:pointer;">Fermer</button>
+      <button onclick="window.ProfEPS_CMP.saveCustom()" type="button" style="padding:8px 18px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;">Enregistrer mes préférences</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

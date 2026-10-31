@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" id="html-root">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculateur Réserve Anaérobie (ASR) | ProfEPS</title>
+  <meta name="description" content="Analysez votre profil neuromusculaire (endurant, hybride, sprinteur) et personnalisez vos séances intermittentes avec l’ASR.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ProfEPS Maroc">
+  <meta property="og:title" content="Calculateur Réserve Anaérobie (ASR) | ProfEPS">
+  <meta property="og:description" content="Analysez votre profil neuromusculaire (endurant, hybride, sprinteur) et personnalisez vos séances intermittentes avec l’ASR.">
+  <meta property="og:url" content="https://profeps.ma/calculateur-asr-reserve-vitesse.html">
+  <meta property="og:image" content="https://profeps.ma/images/prof_eps.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Calculateur Réserve Anaérobie (ASR) | ProfEPS">
+  <meta name="twitter:description" content="Analysez votre profil neuromusculaire (endurant, hybride, sprinteur) et personnalisez vos séances intermittentes avec l’ASR.">
+  <meta name="twitter:image" content="https://profeps.ma/images/prof_eps.png">
+  <meta name="keywords" content="calculateur asr reserve vitesse anaerobie, vitesse maximale sprint vma, profilage sprinteur endurant, hiit supramaximal asr" />
+  <link rel="canonical" href="https://profeps.ma/calculateur-asr-reserve-vitesse.html" />
+  <link rel="alternate" hreflang="fr-MA" href="https://profeps.ma/calculateur-asr-reserve-vitesse.html">
+  <link rel="alternate" hreflang="x-default" href="https://profeps.ma/calculateur-asr-reserve-vitesse.html">
+  <link rel="icon" type="image/png" href="images/prof_eps.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Calculateur de Réserve de Vitesse Anaérobie (ASR) & Profilage Athlète","url":"https://profeps.ma/calculateur-asr-reserve-vitesse.html","applicationCategory":"HealthApplication","operatingSystem":"All","inLanguage":["fr","en","ar"],"description":"Saisissez votre VMA et votre Vitesse Maximale de Sprint (MSS) puis cliquez sur Calculer pour découvrir votre Réserve Anaérobie (ASR), votre profil neuromusculaire et vos cibles de 10% à 50% ASR.","keywords":"calculateur asr reserve vitesse anaerobie, vitesse maximale sprint vma, profilage sprinteur endurant, hiit supramaximal asr","offers":{"@type":"Offer","price":"0","priceCurrency":"MAD"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Pourquoi prescrire le fractionné court en % d'ASR plutôt qu'en % de VMA au-delà de 100 % VMA ?","acceptedAnswer":{"@type":"Answer","text":"Deux coureurs ou joueurs ayant la même VMA (ex : 16 km/h) peuvent avoir une vitesse de sprint maximal très différente (27 km/h vs 34 km/h). À 115 % de VMA (18,4 km/h), le profil endurant puise à 22 % de sa réserve anaérobie tandis que le sprinteur n'utilise que 13 % de son ASR : calibrer à +25 % d'ASR garantit une fatigue physiologique équivalente."}}]}]}</script>
+  <link rel="stylesheet" href="/css/tailwind-precompiled.min.css">
+  <style id="profeps-calculator-ui-css">
+/* Styles dédiés aux pages Calculateurs — Palette douce, académique & reposante ProfEPS */
+.vma-hero {
+  margin-top: 80px !important;
+  padding: 2.5rem 1.25rem 2rem !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  text-align: center !important;
+  position: relative !important;
+}
+.hero-badge {
+  display: inline-flex !important; align-items: center !important; gap: 0.45rem !important;
+  background: #fff8f8 !important;
+  color: #991b1b !important;
+  padding: 0.38rem 1rem !important; border-radius: 9999px !important;
+  font-size: 0.75rem !important; font-weight: 800 !important; text-transform: uppercase !important;
+  letter-spacing: 0.04em !important; margin-bottom: 0.8rem !important;
+  border: 1px solid #f5c2c7 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+.vma-hero h1 {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
+  font-size: clamp(1.55rem, 3vw, 2.2rem) !important;
+  font-weight: 800 !important; color: #0f172a !important; margin: 0 auto 0.65rem auto !important;
+  max-width: 860px !important; line-height: 1.24 !important; letter-spacing: -0.02em !important;
+  text-wrap: balance !important;
+}
+.vma-hero p {
+  font-size: 0.95rem !important; color: #475569 !important; max-width: 740px !important;
+  margin: 0 auto !important; line-height: 1.6 !important;
+}
+main > div.max-w-3xl,
+#tool-results-panel > div,
+.peps-seo-guide-card {
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 20px !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 8px 24px -8px rgba(15, 23, 42, 0.05) !important;
+  background: #ffffff !important;
+}
+main > div.max-w-3xl::before {
+  display: none !important;
+  content: none !important;
+}
+main > div.max-w-3xl .grid {
+  align-items: stretch !important;
+}
+main > div.max-w-3xl .grid > div {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+}
+main > div.max-w-3xl .grid > div > label {
+  margin-bottom: 0.45rem !important;
+  line-height: 1.3 !important;
+  min-height: 2.1rem !important;
+  display: flex !important;
+  align-items: flex-end !important;
+}
+main > div.max-w-3xl input[type="number"],
+main > div.max-w-3xl select {
+  height: 46px !important;
+  min-height: 46px !important;
+  max-height: 46px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  border-radius: 12px !important;
+  border: 1.5px solid #cbd5e1 !important;
+  background-color: #f8fafc !important;
+  padding: 0 0.9rem !important;
+  font-size: 0.95rem !important;
+  color: #0f172a !important;
+  font-variant-numeric: tabular-nums !important;
+  transition: all 0.18s ease !important;
+  margin-top: auto !important;
+}
+main > div.max-w-3xl input[type="number"]:focus,
+main > div.max-w-3xl select:focus {
+  outline: none !important;
+  border-color: #991b1b !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(153, 27, 27, 0.10) !important;
+}
+#tool-results-panel .grid > div {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  font-variant-numeric: tabular-nums !important;
+}
+button.peps-cta-btn,
+#btn-calc-main {
+  width: 100% !important;
+  padding: 0.95rem 1.4rem !important;
+  margin-top: 0.65rem !important;
+  background: linear-gradient(135deg, #fff8f8 0%, #fef2f2 100%) !important;
+  background-color: #fff8f8 !important;
+  color: #881337 !important;
+  -webkit-text-fill-color: #881337 !important;
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
+  font-size: 0.98rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.005em !important;
+  border: 1.5px solid #f5c2c7 !important;
+  border-radius: 14px !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 14px -4px rgba(153, 27, 27, 0.10) !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.75rem !important;
+  position: relative !important;
+  overflow: hidden !important;
+  text-align: center !important;
+}
+button.peps-cta-btn:hover,
+#btn-calc-main:hover {
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%) !important;
+  border-color: #991b1b !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 8px 20px -5px rgba(153, 27, 27, 0.16) !important;
+}
+button.peps-cta-btn:active,
+#btn-calc-main:active {
+  transform: translateY(0) !important;
+}
+button.peps-cta-btn .peps-cta-arrow,
+#btn-calc-main .peps-cta-arrow {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 8px !important;
+  background: #991b1b !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-size: 0.95rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  flex-shrink: 0 !important;
+  margin-left: 0.25rem !important;
+  transition: transform 0.18s ease !important;
+}
+button.peps-cta-btn:hover .peps-cta-arrow,
+#btn-calc-main:hover .peps-cta-arrow {
+  transform: translateX(2px) !important;
+}
+</style>
+  <script src="profeps-cmp.js" defer></script>
+<link rel="stylesheet" href="/css/profeps-unifier.min.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil ProfEPS Maroc","item":"https://profeps.ma/"},{"@type":"ListItem","position":2,"name":"Calculateurs & Physiologie Sportive","item":"https://profeps.ma/hub-outils-sport-performance.html"},{"@type":"ListItem","position":3,"name":"Calculateur Réserve Anaérobie (ASR) | ProfEPS","item":"https://profeps.ma/calculateur-asr-reserve-vitesse.html"}]}</script>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50">
+<!-- PROFEPS_UNIFIED_NAVBAR_START -->
+  <nav id="navbar" class="navbar navbar-decoy" style="display:none !important;visibility:hidden !important;opacity:0 !important;width:0 !important;height:0 !important;overflow:hidden !important;position:absolute !important;pointer-events:none !important;z-index:-9999 !important;" aria-hidden="true">
+    <div class="nav-container">
+      <div id="navMenu" class="nav-menu"></div>
+      <div id="navRightDecoy" class="nav-right"></div>
+      <button id="navToggle" class="nav-toggle" type="button"></button>
+      <div id="navBackdrop" class="nav-backdrop"></div>
+    </div>
+  </nav>
+  <div class="peps-navbar" id="pepsNavbar" role="navigation" aria-label="Navigation principale" data-current-file="calculateur-asr-reserve-vitesse.html">
+    <div class="peps-nav-container">
+      <a href="index.html" class="peps-nav-logo" aria-label="Prof EPS Maroc - Accueil">
+        <img src="/images/prof_eps.webp" width="156" height="52" decoding="async" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:52px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
+      </a>
+      <div class="peps-nav-menu" id="pepsNavMenu">
+        <a href="index.html" class="peps-nav-link" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
+        <a href="generateur.html" class="peps-nav-link" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
+        <div class="peps-dropdown" id="pepsCalcDropdown">
+          <a href="calculateur-asr-reserve-vitesse.html" class="peps-nav-link active" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="Calculateur ASR" data-i18n-en="ASR Speed Reserve" data-i18n-ar="احتياطي السرعة اللاهوائية ASR">Calculateur ASR</span><span class="peps-dropdown-caret">▾</span></a>
+          <div class="peps-dropdown-menu" id="pepsDropdownMenu">
+            <a href="hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub" data-i18n-fr="🧭 Hub de Tous les Calculateurs Sport" data-i18n-en="🧭 All Sports Calculators Hub" data-i18n-ar="🧭 بوابة جميع الحاسبات الرياضية">🧭 Hub de Tous les Calculateurs Sport</a>
+            <a href="calculateur-vma.html" class="peps-dropdown-item" data-i18n-fr="⚡ Calculateur VMA & Allures" data-i18n-en="⚡ MAS (VMA) & Paces Calculator" data-i18n-ar="⚡ حاسبة السرعة الهوائية القصوى (VMA)">⚡ Calculateur VMA & Allures</a>
+            <a href="calculateur-vdot-asr-endurance.html" class="peps-dropdown-item" data-i18n-fr="🫁 Calculateur VO2 Max & VDOT" data-i18n-en="🫁 VO2 Max & VDOT Calculator" data-i18n-ar="🫁 حاسبة VO2 Max ومؤشر VDOT">🫁 Calculateur VO2 Max & VDOT</a>
+            <a href="calculateur-asr-reserve-vitesse.html" class="peps-dropdown-item active-tool" data-i18n-fr="🚀 Réserve de Vitesse Anaérobie (ASR)" data-i18n-en="🚀 Anaerobic Speed Reserve (ASR)" data-i18n-ar="🚀 احتياطي السرعة اللاهوائية (ASR)">🚀 Réserve de Vitesse Anaérobie (ASR)</a>
+            <a href="calculateur-indice-endurance.html" class="peps-dropdown-item" data-i18n-fr="📈 Indice d'Endurance (Péronnet)" data-i18n-en="📈 Endurance Index (Péronnet)" data-i18n-ar="📈 مؤشر التحمل (نموذج بيروني)">📈 Indice d'Endurance (Péronnet)</a>
+            <a href="calculateur-frequence-cardiaque-karvonen.html" class="peps-dropdown-item" data-i18n-fr="❤️ Fréquence Cardiaque (Karvonen)" data-i18n-en="❤️ Heart Rate Zones (Karvonen)" data-i18n-ar="❤️ نبضات القلب ومناطق التدريب (Karvonen)">❤️ Fréquence Cardiaque (Karvonen)</a>
+            <a href="calculateur-imc-sportif-masse-grasse.html" class="peps-dropdown-item" data-i18n-fr="⚖️ Calculateur IMC & Masse Grasse" data-i18n-en="⚖️ Athletic BMI & Body Fat %" data-i18n-ar="⚖️ حاسبة مؤشر كتلة الجسم ونسبة الدهون">⚖️ Calculateur IMC & Masse Grasse</a>
+            <a href="calculateur-chaleur-meteo-altitude.html" class="peps-dropdown-item" data-i18n-fr="☀️ Chaleur, Humidité & Altitude" data-i18n-en="☀️ Heat, Humidity & Altitude" data-i18n-ar="☀️ تأثير الحرارة والرطوبة والارتفاع">☀️ Chaleur, Humidité & Altitude</a>
+            <a href="calculateur-gap-pente-nutrition.html" class="peps-dropdown-item" data-i18n-fr="⛰️ Allure Pente (GAP) & Nutrition" data-i18n-en="⛰️ Grade Adjusted Pace & Nutrition" data-i18n-ar="⛰️ إيقاع المنحدرات (GAP) والتغذية">⛰️ Allure Pente (GAP) & Nutrition</a>
+            <a href="generateur-intermittent-hiit-cod.html" class="peps-dropdown-item" data-i18n-fr="🔄 Intermittent HIIT & COD 180°" data-i18n-en="🔄 HIIT Intermittent & 180° COD" data-i18n-ar="🔄 مولد التدريب المتقطع HIIT وتغيير الاتجاه">🔄 Intermittent HIIT & COD 180°</a>
+            <a href="calculateur-charge-rpe-foster-acwr.html" class="peps-dropdown-item" data-i18n-fr="🛡️ Charge RPE Foster & ACWR" data-i18n-en="🛡️ Foster sRPE Load & ACWR Ratio" data-i18n-ar="🛡️ حمل التدريب (RPE Foster) ونسبة ACWR">🛡️ Charge RPE Foster & ACWR</a>
+          </div>
+        </div>
+        <a href="concours-crmef-hub.html" class="peps-nav-link" data-i18n-fr="Préparation CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparation CRMEF</a>
+        <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
+      </div>
+      <div class="peps-nav-right">
+        <div dir="ltr" class="peps-lang-switch" aria-label="Sélecteur de langue">
+          <button type="button" class="peps-lang-btn active" id="peps-btn-lang-fr" data-lang="fr" onclick="window.profepsSetLang('fr')">FR</button>
+          <span class="peps-lang-sep">/</span>
+          <button type="button" class="peps-lang-btn" id="peps-btn-lang-en" data-lang="en" onclick="window.profepsSetLang('en')">EN</button>
+          <span class="peps-lang-sep">/</span>
+          <button type="button" class="peps-lang-btn" id="peps-btn-lang-ar" data-lang="ar" onclick="window.profepsSetLang('ar')">عربي</button>
+        </div>
+        <button type="button" class="peps-nav-toggle" id="pepsNavToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+<script id="profeps-master-unifier-js">
+(function() {
+  // Stub silencieux au cas où un ancien script de page appelle encore window.supabase
+  var dummyAuth = {
+    getSession: function() { return Promise.resolve({ data: { session: null }, error: null }); },
+    getUser: function() { return Promise.resolve({ data: { user: null }, error: null }); },
+    onAuthStateChange: function() { return { data: { subscription: { unsubscribe: function() {} } } }; },
+    signOut: function() { return Promise.resolve({ error: null }); }
+  };
+  var dummyClient = {
+    auth: dummyAuth,
+    from: function() {
+      return {
+        select: function() { return Promise.resolve({ data: [], error: null }); },
+        insert: function() { return Promise.resolve({ data: null, error: null }); },
+        update: function() { return Promise.resolve({ data: null, error: null }); },
+        delete: function() { return Promise.resolve({ data: null, error: null }); }
+      };
+    }
+  };
+  window.supabase = { createClient: function() { return dummyClient; } };
+  window.supabaseClient = dummyClient;
+  window.ProfEPS = window.ProfEPS || { getSupabase: function() { return dummyClient; }, saveGeneration: function() { return Promise.resolve(); } };
+
+  var dropdown = document.getElementById('pepsCalcDropdown');
+  var dropdownMenu = document.getElementById('pepsDropdownMenu');
+  var closeTimer = null;
+
+  function openDropdown() {
+    if (closeTimer) {
+      clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+    var dd = document.getElementById('pepsCalcDropdown');
+    var dm = document.getElementById('pepsDropdownMenu');
+    if (dd) dd.classList.add('open');
+    if (dm) {
+      dm.style.setProperty('opacity', '1', 'important');
+      dm.style.setProperty('visibility', 'visible', 'important');
+      dm.style.setProperty('pointer-events', 'auto', 'important');
+      dm.style.setProperty('transform', 'translateX(-50%) translateY(0)', 'important');
+    }
+  }
+
+  function closeDropdownDelayed() {
+    if (closeTimer) clearTimeout(closeTimer);
+    closeTimer = setTimeout(function() {
+      var dd = document.getElementById('pepsCalcDropdown');
+      var dm = document.getElementById('pepsDropdownMenu');
+      if (dd) dd.classList.remove('open');
+      if (dm) {
+        dm.style.removeProperty('opacity');
+        dm.style.removeProperty('visibility');
+        dm.style.removeProperty('pointer-events');
+        dm.style.removeProperty('transform');
+      }
+    }, 180);
+  }
+
+  if (dropdown) {
+    dropdown.addEventListener('mouseenter', openDropdown);
+    dropdown.addEventListener('mouseleave', closeDropdownDelayed);
+  }
+  if (dropdownMenu) {
+    dropdownMenu.addEventListener('mouseenter', openDropdown);
+    dropdownMenu.addEventListener('mouseleave', closeDropdownDelayed);
+  }
+
+  // Délégation globale en renfort pour garantir l'ouverture au survol sur 100 % des pages
+  document.addEventListener('mouseover', function(e) {
+    var t = e.target;
+    if (t && t.closest && (t.closest('#pepsCalcDropdown') || t.closest('#pepsDropdownMenu'))) {
+      openDropdown();
+    }
+  });
+  document.addEventListener('mouseout', function(e) {
+    var t = e.target;
+    if (t && t.closest && (t.closest('#pepsCalcDropdown') || t.closest('#pepsDropdownMenu'))) {
+      var rel = e.relatedTarget;
+      if (!rel || !rel.closest || (!rel.closest('#pepsCalcDropdown') && !rel.closest('#pepsDropdownMenu'))) {
+        closeDropdownDelayed();
+      }
+    }
+  });
+
+  // Supprimer tout ancien <nav class="navbar"> résiduel ET tout bouton traducteur en doublon dans le contenu
+  function cleanPageDuplicates() {
+    document.querySelectorAll('nav.navbar:not(.navbar-decoy), .navbar:not(.navbar-decoy)').forEach(function(oldNav) {
+      if (oldNav.id !== 'pepsNavbar') {
+        if (oldNav.parentNode) oldNav.parentNode.removeChild(oldNav);
+      }
+    });
+    document.querySelectorAll('.lang-switch:not(.peps-lang-switch), .in-page-lang-switch, #btn-lang-fr, #btn-lang-en, #btn-lang-ar, button[onclick*="setToolLang"], button[onclick*="changeLang"], button.lang-btn:not(.peps-lang-btn)').forEach(function(el) {
+      if (!el.closest || !el.closest('#pepsNavbar')) {
+        var wrapper = el.closest ? (el.closest('.lang-switch, .in-page-lang-switch, [aria-label="Language selection"], [title*="Traduction"]') || el) : el;
+        if (wrapper === el && el.parentNode && el.parentNode.tagName === 'DIV') {
+          var parentTxt = (el.parentNode.textContent || '').trim();
+          if (parentTxt.length <= 50 && (!el.parentNode.closest || !el.parentNode.closest('#pepsNavbar'))) {
+            wrapper = el.parentNode;
+          }
+        }
+        if (wrapper && wrapper.parentNode && (!wrapper.closest || !wrapper.closest('#pepsNavbar'))) {
+          wrapper.parentNode.removeChild(wrapper);
+        }
+      }
+    });
+  }
+  cleanPageDuplicates();
+  window.addEventListener('DOMContentLoaded', cleanPageDuplicates);
+  // Nettoyage unique à l'initialisation et au DOMContentLoaded (CLS = 0, zéro surcharge MutationObserver)
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      var dd = document.getElementById('pepsCalcDropdown');
+      var dm = document.getElementById('pepsDropdownMenu');
+      if (dd) dd.classList.remove('open');
+      if (dm) {
+        dm.style.removeProperty('opacity');
+        dm.style.removeProperty('visibility');
+        dm.style.removeProperty('pointer-events');
+        dm.style.removeProperty('transform');
+      }
+      var toggleBtn = document.getElementById('pepsNavToggle');
+      var navMenuEl = document.getElementById('pepsNavMenu');
+      if (toggleBtn && navMenuEl) {
+        toggleBtn.classList.remove('active');
+        navMenuEl.classList.remove('active');
+      }
+    }
+  });
+
+  window.addEventListener('scroll', function() {
+    var n = document.getElementById('pepsNavbar');
+    if (n) n.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  document.addEventListener('click', function(e) {
+    var t = e.target;
+    if (t && t.closest && t.closest('#pepsNavToggle')) {
+      var toggleBtn = document.getElementById('pepsNavToggle');
+      var navMenuEl = document.getElementById('pepsNavMenu');
+      if (toggleBtn && navMenuEl) {
+        toggleBtn.classList.toggle('active');
+        navMenuEl.classList.toggle('active');
+      }
+    }
+  });
+
+  window.profepsSetLang = function(lang) {
+    try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
+    ['fr', 'en', 'ar'].forEach(function(code) {
+      var btn = document.getElementById('peps-btn-lang-' + code);
+      if (btn) btn.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
+      document.querySelectorAll('.peps-lang-btn[data-lang="' + code + '"]').forEach(function(b) {
+        b.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
+      });
+    });
+    document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function(el) {
+      var val = el.getAttribute('data-i18n-' + lang);
+      if (val) el.textContent = val;
+    });
+    if (typeof window.setToolLang === 'function') window.setToolLang(lang);
+    if (typeof window.changeLang === 'function') window.changeLang(lang);
+    if (typeof window.setLanguage === 'function') window.setLanguage(lang);
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+  };
+
+  var saved = 'fr';
+  try { saved = localStorage.getItem('profeps_lang') || 'fr'; } catch(e) {}
+  if (saved && saved !== 'fr') {
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', function() { window.profepsSetLang(saved); });
+    } else {
+      window.profepsSetLang(saved);
+    }
+  }
+})();
+</script>
+<!-- PROFEPS_UNIFIED_NAVBAR_END -->
+<header class="vma-hero">
+    <div id="ui-badge" class="hero-badge" data-i18n-fr="⚡ Cluster 1B · Réserve de Vitesse Anaérobie (ASR = MSS − VMA)" data-i18n-en="⚡ Cluster 1B · Anaerobic Speed Reserve (ASR = MSS − MAS)" data-i18n-ar="⚡ القطب 1B · احتياطي السرعة اللاهوائية (ASR = أقصى سرعة − VMA)">⚡ Cluster 1B · Réserve de Vitesse Anaérobie (ASR = MSS − VMA)</div>
+    <h1 id="ui-title" style="font-size:clamp(1.55rem,3vw,2.25rem);font-weight:800;color:#0f172a;margin:0 auto 0.65rem auto;max-width:880px;line-height:1.22;" data-i18n-fr="Calculateur de Réserve de Vitesse Anaérobie (ASR) &amp; Profilage Athlète" data-i18n-en="Anaerobic Speed Reserve (ASR) &amp; Supramaximal HIIT Calculator" data-i18n-ar="حاسبة احتياطي السرعة اللاهوائية (ASR) وتصنيف العداء">Calculateur de Réserve de Vitesse Anaérobie (ASR) &amp; Profilage Athlète</h1>
+    <p id="ui-sub" style="font-size:0.95rem;color:#475569;max-width:760px;margin:0 auto;line-height:1.6;" data-i18n-fr="Saisissez votre VMA et votre Vitesse Maximale de Sprint (MSS) puis cliquez sur Calculer pour découvrir votre Réserve Anaérobie (ASR), votre profil neuromusculaire et vos cibles de 10% à 50% ASR." data-i18n-en="Enter your MAS (VMA) and Max Sprint Speed (MSS), then click Calculate to unlock your Anaerobic Speed Reserve, athlete profile, and 10%–50% ASR targets." data-i18n-ar="أدخل سرعة VMA وأقصى سرعة انطلاق (MSS) ثم اضغط على &quot;احسب&quot; لمعرفة احتياطي السرعة اللاهوائية ونوع ملفك العضلي والمسافات المستهدفة.">Saisissez votre VMA et votre Vitesse Maximale de Sprint (MSS) puis cliquez sur Calculer pour découvrir votre Réserve Anaérobie (ASR), votre profil neuromusculaire et vos cibles de 10% à 50% ASR.</p>
+  </header>
+
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-6">
+    <div class="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-5">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3.5">
+        <h2 class="text-base font-extrabold text-slate-900 uppercase tracking-wider" data-i18n-fr="1. Vos Vitesses Aérobie (VMA) & Sprint Maximal (MSS)" data-i18n-en="1. Your Aerobic Speed (MAS) & Max Sprint Speed (MSS)" data-i18n-ar="1. السرعة الهوائية (VMA) وأقصى سرعة انطلاق (MSS)">1. Vos Vitesses Aérobie (VMA) & Sprint Maximal (MSS)</h2>
+        <span class="text-xs font-bold px-3 py-1 rounded-full bg-red-50 text-red-700 border border-red-200">ASR · Buchheit & Sandford</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Votre VMA / MAS (km/h)" data-i18n-en="Your MAS / VMA (km/h)" data-i18n-ar="سرعة VMA (كم/س)">Votre VMA / MAS (km/h)</label>
+          <input id="inp-vma" type="number" value="16.0" min="8" max="25" step="0.5" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-base font-mono font-bold" />
+        </div>
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Vitesse Max Sprint — MSS (km/h, ex: test 30m lancé)" data-i18n-en="Max Sprint Speed — MSS (km/h, e.g. flying 30m)" data-i18n-ar="أقصى سرعة سبرينت MSS (كم/س)">Vitesse Max Sprint — MSS (km/h, ex: test 30m lancé)</label>
+          <input id="inp-mss" type="number" value="29.5" min="15" max="42" step="0.5" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-base font-mono font-bold" />
+        </div>
+      </div>
+
+      <button type="button" id="btn-calc-main" onclick="triggerCalculation()" class="peps-cta-btn w-full mt-3 py-4 px-6 rounded-2xl font-extrabold text-base sm:text-lg text-white shadow-xl transition-all duration-200 flex items-center justify-center gap-3 cursor-pointer select-none"><span>🚀</span>
+        <span data-i18n-fr="Calculer ma Réserve Anaérobie (ASR) & mon Profil Neuromusculaire" data-i18n-en="Calculate My Anaerobic Speed Reserve (ASR) & Profile" data-i18n-ar="احسب احتياطي السرعة اللاهوائية (ASR) وتصنيفك العضلي">Calculer ma Réserve Anaérobie (ASR) & mon Profil Neuromusculaire</span><span class="peps-cta-arrow" aria-hidden="true">→</span></button>
+    </div>
+
+    <div id="tool-results-panel" class="hidden space-y-6">
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+        <h3 class="text-base font-extrabold text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-3" data-i18n-fr="2. Vos Indicateurs ASR & Interprétation du Profil" data-i18n-en="2. Your ASR Metrics & Fiber Profile Interpretation" data-i18n-ar="2. نتائج احتياطي السرعة وتفسير الملف العضلي">2. Vos Indicateurs ASR & Interprétation du Profil</h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+          <div class="p-4 bg-red-50 border border-red-200 rounded-2xl space-y-1">
+            <div class="text-xs font-extrabold uppercase text-red-900" data-i18n-fr="Réserve ASR (MSS − VMA)" data-i18n-en="ASR Reserve (MSS − MAS)" data-i18n-ar="احتياطي السرعة (ASR)">Réserve ASR (MSS − VMA)</div>
+            <div id="out-asr" dir="ltr" class="text-3xl font-black font-mono text-red-700 tabular-nums">--</div>
+            <div id="out-asr-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 border border-red-100"></div>
+          </div>
+          <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl space-y-1">
+            <div class="text-xs font-extrabold uppercase text-emerald-900" data-i18n-fr="Ratio de Vitesse (MSS / VMA)" data-i18n-en="Speed Ratio (MSS / MAS)" data-i18n-ar="نسبة السرعة (MSS / VMA)">Ratio de Vitesse (MSS / VMA)</div>
+            <div id="out-ratio" dir="ltr" class="text-3xl font-black font-mono text-emerald-700 tabular-nums">--</div>
+            <div id="out-ratio-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 border border-emerald-100"></div>
+          </div>
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-1">
+            <div class="text-xs font-extrabold uppercase text-slate-800" data-i18n-fr="Cible HIIT Supramax (+25% ASR)" data-i18n-en="Supramax HIIT Target (+25% ASR)" data-i18n-ar="السرعة المثالية للتدريب المتقطع (+25% ASR)">Cible HIIT Supramax (+25% ASR)</div>
+            <div id="out-asr25" dir="ltr" class="text-3xl font-black font-mono text-slate-800 tabular-nums">--</div>
+            <div id="out-asr25-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 border border-slate-200"></div>
+          </div>
+        </div>
+
+        <div id="out-asr-diag" class="p-5 bg-slate-50 border-l-4 border-red-600 rounded-xl text-xs sm:text-sm text-slate-700 leading-relaxed space-y-2"></div>
+
+        <div>
+          <p class="text-xs font-extrabold uppercase tracking-wider text-slate-800 mb-3 footer-col-title" data-i18n-fr="Barème d'Individualisation Supramaximale (10% à 50% de la Réserve ASR)" data-i18n-en="Supramaximal Prescription Table (10% to 50% ASR)" data-i18n-ar="جدول ضبط المسافات فوق القصوى (من 10% إلى 50% من احتياطي ASR)">Barème d'Individualisation Supramaximale (10% à 50% de la Réserve ASR)</p>
+          <div id="out-asr-table" class="space-y-2"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- GUIDE D'UTILISATION VISUEL & EXPLICATION DES PARAMÈTRES (SEO) -->
+    <section class="peps-seo-guide-card max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 mt-8" style="max-width:48rem;margin:2rem auto 0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:20px;padding:1.75rem;box-shadow:0 10px 28px -8px rgba(15,23,42,0.06);" aria-labelledby="seo-guide-title">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.5rem;border-bottom:1px solid #f1f5f9;padding-bottom:1rem;">
+        <div class="flex items-center gap-2.5" style="display:flex;align-items:center;gap:0.65rem;">
+          <span class="w-9 h-9 rounded-xl bg-red-50 border border-red-200 text-red-700 flex items-center justify-center font-black text-base shrink-0" style="width:36px;height:36px;border-radius:10px;background:#fef2f2;border:1px solid #fecaca;display:inline-flex;align-items:center;justify-content:center;font-size:1rem;">📘</span>
+          <div>
+            <h2 id="seo-guide-title" class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight m-0" style="font-size:1.05rem;font-weight:800;color:#0f172a;margin:0;" data-i18n-fr="Mode d'Emploi & Signification des Paramètres" data-i18n-en="How It Works & Input Parameter Guide" data-i18n-ar="طريقة الاستخدام وشرح المعطيات المطلوبة">Mode d'Emploi & Signification des Paramètres</h2>
+          </div>
+        </div>
+        <span class="text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full self-start sm:self-auto" style="font-size:0.74rem;font-weight:700;color:#065f46;background:#ecfdf5;border:1px solid #a7f3d0;padding:0.25rem 0.75rem;border-radius:9999px;" data-i18n-fr="Guide Scientifique & EPS" data-i18n-en="Sports Science & PE Guide" data-i18n-ar="دليل علمي وتربوي">Guide Scientifique & EPS</span>
+      </div>
+
+      <div class="space-y-2.5">
+        <h3 class="text-xs font-extrabold uppercase tracking-wider text-red-700 m-0" style="font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:#b91c1c;margin:0 0 0.5rem 0;" data-i18n-fr="1. Étapes d'utilisation du calculateur" data-i18n-en="1. Step-by-Step Instructions" data-i18n-ar="1. خطوات استخدام الحاسبة">1. Étapes d'utilisation du calculateur</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          
+          <div class="flex items-start gap-3.5 p-4 rounded-xl bg-slate-50/90 border border-slate-200/90 shadow-xs hover:border-red-200 transition-all" style="display:flex;align-items:flex-start;gap:0.85rem;padding:1rem;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;">
+            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:#fff8f8;color:#991b1b;border:1px solid #f5c2c7;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">1</span>
+            <p class="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed m-0" style="font-size:0.84rem;line-height:1.55;color:#334155;margin:0;" data-i18n-fr="Indiquez votre VMA / MAS (en km/h) obtenue lors d'un test aérobie progressif." data-i18n-en="Enter your MAS / VMA (km/h)." data-i18n-ar="أدخل سرعة VMA الخاصة بك (كم/س).">Indiquez votre VMA / MAS (en km/h) obtenue lors d'un test aérobie progressif.</p>
+          </div>
+          <div class="flex items-start gap-3.5 p-4 rounded-xl bg-slate-50/90 border border-slate-200/90 shadow-xs hover:border-red-200 transition-all" style="display:flex;align-items:flex-start;gap:0.85rem;padding:1rem;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;">
+            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:#fff8f8;color:#991b1b;border:1px solid #f5c2c7;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">2</span>
+            <p class="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed m-0" style="font-size:0.84rem;line-height:1.55;color:#334155;margin:0;" data-i18n-fr="Renseignez votre Vitesse Maximale de Sprint (MSS en km/h), mesurée par exemple sur un sprint de 20 m ou 30 m lancé à vitesse maximale." data-i18n-en="Input your Maximal Sprint Speed (MSS in km/h) measured over a flying 20–30m sprint." data-i18n-ar="أدخل أقصى سرعة انطلاق في السبرينت (MSS بالكم/س) مقاسة في مسافة 20 أو 30 متر مع انطلاق مسبق.">Renseignez votre Vitesse Maximale de Sprint (MSS en km/h), mesurée par exemple sur un sprint de 20 m ou 30 m lancé à vitesse maximale.</p>
+          </div>
+          <div class="flex items-start gap-3.5 p-4 rounded-xl bg-slate-50/90 border border-slate-200/90 shadow-xs hover:border-red-200 transition-all" style="display:flex;align-items:flex-start;gap:0.85rem;padding:1rem;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;">
+            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:#fff8f8;color:#991b1b;border:1px solid #f5c2c7;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">3</span>
+            <p class="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed m-0" style="font-size:0.84rem;line-height:1.55;color:#334155;margin:0;" data-i18n-fr="Cliquez sur Calculer pour obtenir votre Réserve de Vitesse Anaérobie (ASR = MSS − VMA), votre ratio de vitesse (profilage fibres lentes vs rapides) et vos vitesses cibles de +10 % à +50 % ASR." data-i18n-en="Click Calculate to unlock your Anaerobic Speed Reserve (ASR = MSS − MAS), speed ratio fiber profile, and 10%–50% ASR supramaximal HIIT targets." data-i18n-ar="اضغط على زر الحساب لمعرفة احتياطي السرعة اللاهوائية (ASR) وتصنيف أليافك العضلية.">Cliquez sur Calculer pour obtenir votre Réserve de Vitesse Anaérobie (ASR = MSS − VMA), votre ratio de vitesse (profilage fibres lentes vs rapides) et vos vitesses cibles de +10 % à +50 % ASR.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-2.5 pt-2">
+        <h3 class="text-xs font-extrabold uppercase tracking-wider text-emerald-800 m-0" style="font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:#065f46;margin:0 0 0.5rem 0;" data-i18n-fr="2. Explication des informations demandées" data-i18n-en="2. Explanation of Requested Inputs" data-i18n-ar="2. شرح المعلومات والمعطيات المطلوبة">2. Explication des informations demandées</h3>
+        <div class="grid grid-cols-1 gap-2.5">
+          
+          <div class="flex items-start gap-3 p-3.5 rounded-xl bg-emerald-50/50 border border-emerald-200/80" style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.9rem 1rem;border-radius:12px;background:rgba(236,253,245,0.55);border:1px solid rgba(167,243,208,0.85);">
+            <span class="w-6 h-6 rounded-lg bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0 mt-0.5" style="width:24px;height:24px;border-radius:8px;background:#006233;color:#ffffff;font-size:0.72rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">✓</span>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed m-0" style="font-size:0.83rem;line-height:1.55;color:#1e293b;margin:0;" data-i18n-fr="VMA (km/h) : limite supérieure du système aérobie (100 % VO2 Max)." data-i18n-en="MAS (km/h): aerobic ceiling." data-i18n-ar="سرعة VMA (كم/س): السقف الهوائي.">VMA (km/h) : limite supérieure du système aérobie (100 % VO2 Max).</p>
+          </div>
+          <div class="flex items-start gap-3 p-3.5 rounded-xl bg-emerald-50/50 border border-emerald-200/80" style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.9rem 1rem;border-radius:12px;background:rgba(236,253,245,0.55);border:1px solid rgba(167,243,208,0.85);">
+            <span class="w-6 h-6 rounded-lg bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0 mt-0.5" style="width:24px;height:24px;border-radius:8px;background:#006233;color:#ffffff;font-size:0.72rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">✓</span>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed m-0" style="font-size:0.83rem;line-height:1.55;color:#1e293b;margin:0;" data-i18n-fr="Vitesse Max Sprint — MSS (km/h) : plafond locomoteur neuromusculaire et alactique." data-i18n-en="Max Sprint Speed — MSS (km/h): neuromuscular speed ceiling." data-i18n-ar="أقصى سرعة سبرينت MSS (كم/س): السقف العصبي العضلي اللاهوائي.">Vitesse Max Sprint — MSS (km/h) : plafond locomoteur neuromusculaire et alactique.</p>
+          </div>
+          <div class="flex items-start gap-3 p-3.5 rounded-xl bg-emerald-50/50 border border-emerald-200/80" style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.9rem 1rem;border-radius:12px;background:rgba(236,253,245,0.55);border:1px solid rgba(167,243,208,0.85);">
+            <span class="w-6 h-6 rounded-lg bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0 mt-0.5" style="width:24px;height:24px;border-radius:8px;background:#006233;color:#ffffff;font-size:0.72rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">✓</span>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed m-0" style="font-size:0.83rem;line-height:1.55;color:#1e293b;margin:0;" data-i18n-fr="Réserve Anaérobie (ASR = MSS − VMA) : marge de vitesse disponible au-dessus de la VMA (modèle de Buchheit &amp; Sandford) permettant d'individualiser les séances intermittentes supramaximales." data-i18n-en="Anaerobic Speed Reserve (ASR = MSS − MAS): supramaximal speed bandwidth used to equalize HIIT strain across athletes." data-i18n-ar="احتياطي السرعة (ASR = MSS − VMA): الهامش الفاصل لتخصيص شدة التمارين فوق القصوى بدقة.">Réserve Anaérobie (ASR = MSS − VMA) : marge de vitesse disponible au-dessus de la VMA (modèle de Buchheit &amp; Sandford) permettant d'individualiser les séances intermittentes supramaximales.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 rounded-xl bg-amber-50/70 border border-amber-200/80 space-y-1.5" style="padding:1rem 1.15rem;border-radius:14px;background:#fffbeb;border:1px solid #fde68a;">
+        <h3 class="text-xs font-extrabold uppercase tracking-wider text-amber-900 m-0" style="font-size:0.76rem;font-weight:800;color:#78350f;margin:0 0 0.35rem 0;">💡 Pourquoi prescrire le fractionné court en % d'ASR plutôt qu'en % de VMA au-delà de 100 % VMA ?</h3>
+        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed m-0" style="font-size:0.83rem;line-height:1.55;color:#334155;margin:0;">Deux coureurs ou joueurs ayant la même VMA (ex : 16 km/h) peuvent avoir une vitesse de sprint maximal très différente (27 km/h vs 34 km/h). À 115 % de VMA (18,4 km/h), le profil endurant puise à 22 % de sa réserve anaérobie tandis que le sprinteur n'utilise que 13 % de son ASR : calibrer à +25 % d'ASR garantit une fatigue physiologique équivalente.</p>
+      </div>
+
+      <div class="pt-3 border-t border-slate-100 flex flex-wrap items-center gap-1.5" style="padding-top:0.75rem;border-top:1px solid #f1f5f9;display:flex;flex-wrap:wrap;align-items:center;gap:0.4rem;">
+        <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mr-1" style="font-size:0.68rem;font-weight:700;text-transform:uppercase;color:#94a3b8;margin-right:0.35rem;" data-i18n-fr="Thématiques :" data-i18n-en="Topics:" data-i18n-ar="مواضيع ذات صلة:">Thématiques :</span>
+        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600 border border-slate-200" style="display:inline-flex;align-items:center;padding:0.22rem 0.65rem;border-radius:9999px;font-size:0.72rem;font-weight:600;background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;">calculateur asr reserve vitesse anaerobie</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600 border border-slate-200" style="display:inline-flex;align-items:center;padding:0.22rem 0.65rem;border-radius:9999px;font-size:0.72rem;font-weight:600;background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;">vitesse maximale sprint vma</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600 border border-slate-200" style="display:inline-flex;align-items:center;padding:0.22rem 0.65rem;border-radius:9999px;font-size:0.72rem;font-weight:600;background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;">profilage sprinteur endurant</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600 border border-slate-200" style="display:inline-flex;align-items:center;padding:0.22rem 0.65rem;border-radius:9999px;font-size:0.72rem;font-weight:600;background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;">hiit supramaximal asr</span>
+      </div>
+    </section>
+  
+    <!-- AVERTISSEMENT DE PRUDENCE PHYSIQUE & CONFORMITÉ SANTÉ -->
+    <div class="peps-medical-notice max-w-3xl mx-auto my-6 p-4 rounded-xl bg-slate-50 border border-slate-200 text-slate-600 text-xs leading-relaxed flex items-start gap-3 shadow-xs">
+      <span class="text-amber-500 text-base shrink-0">⚠️</span>
+      <div>
+        <strong class="text-slate-800">Avertissement de sécurité et de prudence sportive :</strong> Les calculs physiologiques fournis sont des estimations théoriques validées scientifiquement à des fins pédagogiques et d'entraînement. Ils ne remplacent pas un avis médical personnalisé. Avant d'entreprendre des efforts à haute intensité, assurez-vous d'une aptitude médicale complète et respectez des phases d'échauffement et d'hydratation progressives.
+      </div>
+    </div>
+
+  
+    <!-- FICHE SCIENTIFIQUE & PÉDAGOGIQUE OFFICIELLE (1106 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1106 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1106 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1106 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1106 MOTS MINIMUM) -->
+    <section class="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 mt-8" id="fiche-pedagogique-officielle" style="max-width:48rem;margin:2rem auto 0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:20px;padding:1.75rem;box-shadow:0 10px 28px -8px rgba(15,23,42,0.06);">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-1">
+            <span class="text-red-700 font-bold">Cluster 1B · Profilage Neuromusculaire</span>
+            <span aria-hidden="true">&middot;</span>
+            <span style="color:#006233;font-weight:700;">Rédigé par Abdelkhalek ELBOUDANI (Prof d'EPS au Maroc)</span>
+          </div>
+          <h2 class="text-lg font-extrabold text-slate-900 tracking-tight flex items-center gap-2 m-0">
+            <span style="font-size:1.15rem;">📖</span>
+            Réserve de Vitesse Anaérobie (ASR)
+          </h2>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md tabular-nums border border-emerald-200">
+            1106 mots (Guide Approfondi)
+          </span>
+          <button type="button" onclick="copierFichePedagogique()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors cursor-pointer border border-slate-200" title="Copier le guide officiel complet (1106 mots)">
+            <span id="btn-copy-ico">📋</span>
+            <span id="btn-copy-txt">Copier le guide complet</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ZONE 2 : INTERPRÉTATION DES RÉSULTATS & BARÈMES SCOLAIRES (DIRECTEMENT SOUS L'OUTIL) -->
+      <div class="space-y-3">
+        <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
+          <span style="color:#d97706;">💡</span>
+          Zone 2 : Interprétation Immédiate &amp; Barèmes Scolaires Marocains
+        </h3>
+        <p class="text-xs text-slate-700 leading-relaxed bg-amber-50/60 border border-amber-200/70 p-3.5 rounded-xl m-0">
+          La Réserve de Vitesse Anaérobie développée par Martin Buchheit et Gareth Sandford révolutionne la préparation physique en démontrant que prescrire les efforts supramaximaux en simple pourcentage de VMA crée des disparités physiologiques inacceptables entre athlètes.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1">
+          
+    <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+      <div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Profil Endurant / Moteur Diesel</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">Ratio &lt; 1,80 · ASR &lt; 6 km/h</div>
+      </div>
+      <div class="text-[11px] text-slate-600 leading-normal">Forte endurance aérobie mais vitesse de pointe limitée. Travail prioritaire de force maximale, pliométrie et sprint court.</div>
+    </div>
+    <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+      <div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Profil Équilibré / Hybride</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">Ratio 1,80–1,95 · ASR 6–8 km/h</div>
+      </div>
+      <div class="text-[11px] text-slate-600 leading-normal">Polyvalence athlétique optimale, profil standard des milieux de terrain et coureurs de demi-fond moderne.</div>
+    </div>
+    <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+      <div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Profil Explosif / Sprinteur</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">Ratio &gt; 1,95 · ASR &gt; 8,5 km/h</div>
+      </div>
+      <div class="text-[11px] text-slate-600 leading-normal">Puissance neuromusculaire colossale mais forte sensibilité à la fatigue lactique. Individualisation impérative en % ASR.</div>
+    </div>
+        </div>
+      </div>
+
+      <!-- ZONE 3 : TRAITÉ DIDACTIQUE & SITUATIONS DE TERRAIN EN EPS AU MAROC -->
+      <div class="space-y-3 pt-2 border-t border-slate-100">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
+            <span style="color:#006233;">🏃</span>
+            Zone 3 : Application Didactique EPS Maroc &amp; Gestion de Classe (1106 mots)
+          </h3>
+          <button type="button" onclick="toggleTexteIntegral()" id="btn-toggle-texte" class="text-xs font-bold text-[#991b1b] hover:text-[#7f1d1d] cursor-pointer">
+            Afficher le texte complet ▼
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          
+    <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
+      <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">1</span>
+      <p class="text-xs text-slate-700 leading-relaxed m-0">Mesurez votre VMA (en km/h) via un test aérobie reconnu et votre Vitesse Maximale de Sprint (VMS / MSS en km/h) enregistrée par radar, cellules photoélectriques ou GPS sur un sprint lancé de 30 à 60 mètres.</p>
+    </div>
+    <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
+      <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">2</span>
+      <p class="text-xs text-slate-700 leading-relaxed m-0">Saisissez les deux vitesses dans les champs correspondants pour calculer l'écart d'ASR en km/h et votre ratio neuromusculaire (MSS / VMA).</p>
+    </div>
+    <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
+      <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">3</span>
+      <p class="text-xs text-slate-700 leading-relaxed m-0">Consultez votre profilage de typologie musculaire (Endurant, Hybride, Explosif) et appliquez les intensités calibrées en pourcentage d'ASR pour vos séances d'intermittent supramaximal.</p>
+    </div>
+        </div>
+        
+        <div id="bloc-texte-integral" class="hidden p-5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 leading-relaxed whitespace-pre-line font-sans">
+          <div style="font-weight:700;color:#006233;margin-bottom:0.75rem;padding-bottom:0.4rem;border-bottom:1px solid #cbd5e1;">
+            Auteur : Abdelkhalek ELBOUDANI · Professeur d'Éducation Physique et Sportive (Maroc) · Conforme Orientations 2007-2009
+          </div>
+I. Fondements et Révolution du Concept d'ASR dans le Sport Moderne
+
+Le concept de Réserve de Vitesse Anaérobie, mondialement abrégé sous le sigle ASR (pour Anaerobic Speed Reserve), s'est imposé au cours de la dernière décennie comme l'un des piliers les plus novateurs de la préparation physique de haut niveau, notamment sous l'impulsion des chercheurs et praticiens de renommée internationale tels que Martin Buchheit et Gareth Sandford. Pendant des générations, entraîneurs et enseignants ont eu pour habitude de calibrer les séances de fractionné court et d'intermittent en utilisant un pourcentage fixe de la VMA : par exemple, courir des fractions de quinze secondes à cent quinze pour cent ou cent vingt pour cent de VMA. Si cette approche fonctionne convenablement pour les intensités sous-maximales, elle s'avère profondément défaillante dès que l'on franchit le seuil des cent pour cent de VMA. En effet, au-delà de la VMA, l'énergie supplémentaire requise provient exclusivement des voies métaboliques anaérobies et dépend de la vitesse maximale de sprint de chaque individu. L'ASR représente précisément cette marge de manœuvre locomotrice située entre le plafond aérobie de l'athlète et son plafond neuromusculaire absolu.
+
+II. Guide d'Utilisation Étape par Étape
+
+Pour déterminer avec exactitude votre ASR et structurer vos charges d'entraînement, appliquez scrupuleusement la procédure suivante :
+1. Mesure de la VMA : Réalisez au préalable une évaluation aérobie validée (comme un test Demi-Cooper de six minutes ou un test continu progressif VAMEVAL) pour obtenir votre Vitesse Maximale Aérobie en kilomètres par heure avec une précision d'au moins zéro virgule deux km/h.
+2. Mesure de la Vitesse Maximale de Sprint (VMS / MSS) : Évaluez votre vitesse maximale de pointe. Le protocole d'or consiste à effectuer deux à trois sprints lancés de quarante à soixante mètres sur piste ou pelouse avec une récupération complète de trois à quatre minutes entre chaque essai. La vitesse maximale instantanée est mesurée soit par des cellules photoélectriques réparties sur une zone de dix mètres lancés, soit par un radar cinétique ou un boîtier GPS professionnel haute fréquence (10 Hz ou plus). Renseignez la meilleure performance en kilomètres par heure.
+3. Saisie dans le calculateur : Introduisez votre VMA et votre VMS dans les champs correspondants.
+4. Analyse du profil et exploitation : Le calculateur délivre instantanément votre écart d'ASR en km/h, votre ratio de vitesse, votre classification physiologique de profilage musculaire ainsi que les vitesses de passage cibles calibrées de vingt pour cent à soixante pour cent d'ASR.
+
+III. Explication des Paramètres et Enjeux de Mesure
+
+La pertinence des résultats repose sur la fidélité des deux mesures d'entrée :
+- VMA (Vitesse Maximale Aérobie en km/h) : Elle symbolise la vitesse de croisière maximale oxygénée de votre machinerie aérobie. Si cette valeur est sous-estimée (par exemple lors d'un test mal géré où l'athlète est parti trop prudemment), votre ASR calculée sera artificiellement trop grande.
+- VMS / MSS (Maximal Sprint Speed en km/h) : Elle reflète la puissance neuromusculaire, la force explosive des membres inférieurs, l'efficacité de la chaîne postérieure et la coordination motrice à haute cadence. Elle nécessite un engagement mental et physique absolu dans un état de fraîcheur neurologique total.
+
+IV. Relations Mathématiques et Calculs de Normalisation
+
+Les relations mathématiques qui régissent l'ASR sont limpides dans leur formulation mais capitales dans leurs implications :
+1. Calcul de la Réserve de Vitesse Anaérobie :
+ASR (en km/h) = VMS (km/h) − VMA (km/h).
+Cette valeur représente la largeur en km/h du couloir anaérobie utilisable par l'athlète.
+2. Calcul du ratio de vitesse (Speed Ratio) :
+Speed Ratio = VMS / VMA.
+Ce ratio adimensionnel isole la dominante contractile de l'athlète, indépendamment de son niveau de vitesse brute.
+3. Formule d'individualisation des allures de travail supramaximales en % d'ASR :
+Vitesse Cible (km/h) = VMA + [(%ASR / 100) × ASR].
+Exemple concret démontrant la supériorité de l'ASR :
+Considérons deux athlètes ayant la même VMA de 16,0 km/h. L'athlète A (profil endurant) possède une VMS de 22,0 km/h (son ASR est de 6,0 km/h). L'athlète B (profil sprinteur) possède une VMS de 32,0 km/h (son ASR est de 16,0 km/h).
+Si l'entraîneur prescrit une séance à 120% de VMA, la vitesse imposée est de 19,2 km/h pour les deux :
+- L'athlète A court à 3,2 km/h au-dessus de sa VMA, ce qui représente 3,2 / 6,0 = 53,3% de son ASR. Il sera en acidose lactique sévère en quelques répétitions.
+- L'athlète B court également à 19,2 km/h, mais pour lui cela ne représente que 3,2 / 16,0 = 20,0% de son ASR. L'effort est pour lui modéré et peu stimulant.
+En prescrivant plutôt la séance à 30% d'ASR :
+- L'athlète A courra à 16 + (0,30 × 6) = 17,8 km/h.
+- L'athlète B courra à 16 + (0,30 × 16) = 20,8 km/h.
+Les deux coureurs subiront alors une contrainte métabolique et neuromusculaire strictement équivalente.
+
+V. Profilage Typologique et Barèmes d'Interprétation
+
+La valeur du Speed Ratio (VMS / VMA) permet de classer immédiatement les athlètes en trois familles physiologiques majeures :
+- Profil « Endurant » ou Moteur Diesel (Speed Ratio &lt; 1,80) : Ces sportifs disposent d'un moteur aérobie puissant et résistant mais manquent de vitesse de pointe et d'accélération. Leurs muscles sont majoritairement riches en fibres de type I à métabolisme oxydatif. Dans leur préparation, il convient de développer la force maximale, la raideur tendineuse, les sprints courts alactiques et la pliométrie pour élargir leur ASR par le haut.
+- Profil « Hybride » ou Mixte (Speed Ratio entre 1,80 et 1,95) : C'est le profil le plus répandu et le plus polyvalent chez les joueurs de sports collectifs de haut niveau (football, rugby à sept, handball). Ils allient une VMA élevée à une excellente capacité de répétition de sprints.
+- Profil « Explosif » ou Sprinteur (Speed Ratio &gt; 1,95) : Athlètes dotés d'une pointe de vitesse prodigieuse et d'une prédominance de fibres de type IIa et IIx. Leur filière glycolytique s'emballe très vite. Si un entraîneur leur impose des volumes d'intermittent calibrés en pourcentage brut de VMA sans tenir compte de leur ASR, ils s'épuisent rapidement et s'exposent à des blessures musculaires aux ischio-jambiers.
+
+VI. Applications Directes pour les Séances d'Intermittent Court
+
+Sur le terrain, l'ASR permet d'ajuster les formats de travail intermittent :
+- Pour les séances courtes de type 10s/10s ou 15s/15s : prescrivez entre 20% et 35% d'ASR pour un travail à dominante puissance aérobie, et entre 40% et 60% d'ASR pour stimuler la puissance lactique tolérée.
+- Pour les sports collectifs : regroupez les joueurs par couloirs d'ASR plutôt que par postes de jeu afin d'homogénéiser la charge interne et la qualité du stimulus physiologique.
+        </div>
+      </div>
+
+      <!-- ZONE 4 : FONDEMENTS PHYSIOLOGIQUES & RELATIONS MATHÉMATIQUES -->
+      <div class="space-y-3 pt-2 border-t border-slate-100">
+        <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
+          <span style="color:#c1272d;">📐</span>
+          Zone 4 : Fondements Physiologiques &amp; Relations Mathématiques
+        </h3>
+        <div class="p-4 bg-slate-900 text-white rounded-xl space-y-2 border border-slate-800 shadow-inner">
+          
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Réserve de Vitesse Anaérobie brute (ASR) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">ASR (km/h) = VMS − VMA</code>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Ratio de vitesse neuromusculaire (Speed Ratio) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Speed Ratio = VMS / VMA</code>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Conversion en mètres par seconde (m/s) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Vitesse (m/s) = Vitesse (km/h) / 3,6</code>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Prescription individualisée en % ASR :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Vitesse Cible (km/h) = VMA + (%ASR / 100 × ASR)</code>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Indice de Sollicitation Lactique Relative :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">%ASR_utilisé = (Vitesse de course − VMA) / (VMS − VMA) × 100</code>
+    </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      function toggleTexteIntegral() {
+        var el = document.getElementById('bloc-texte-integral');
+        var btn = document.getElementById('btn-toggle-texte');
+        if (el && btn) {
+          if (el.classList.contains('hidden')) {
+            el.classList.remove('hidden');
+            btn.textContent = 'Masquer le texte complet ▲';
+          } else {
+            el.classList.add('hidden');
+            btn.textContent = 'Afficher le texte complet ▼';
+          }
+        }
+      }
+
+      function copierFichePedagogique() {
+        var texte = "I. Fondements et Révolution du Concept d'ASR dans le Sport Moderne\n\nLe concept de Réserve de Vitesse Anaérobie, mondialement abrégé sous le sigle ASR (pour Anaerobic Speed Reserve), s'est imposé au cours de la dernière décennie comme l'un des piliers les plus novateurs de la préparation physique de haut niveau, notamment sous l'impulsion des chercheurs et praticiens de renommée internationale tels que Martin Buchheit et Gareth Sandford. Pendant des générations, entraîneurs et enseignants ont eu pour habitude de calibrer les séances de fractionné court et d'intermittent en utilisant un pourcentage fixe de la VMA : par exemple, courir des fractions de quinze secondes à cent quinze pour cent ou cent vingt pour cent de VMA. Si cette approche fonctionne convenablement pour les intensités sous-maximales, elle s'avère profondément défaillante dès que l'on franchit le seuil des cent pour cent de VMA. En effet, au-delà de la VMA, l'énergie supplémentaire requise provient exclusivement des voies métaboliques anaérobies et dépend de la vitesse maximale de sprint de chaque individu. L'ASR représente précisément cette marge de manœuvre locomotrice située entre le plafond aérobie de l'athlète et son plafond neuromusculaire absolu.\n\nII. Guide d'Utilisation Étape par Étape\n\nPour déterminer avec exactitude votre ASR et structurer vos charges d'entraînement, appliquez scrupuleusement la procédure suivante :\n1. Mesure de la VMA : Réalisez au préalable une évaluation aérobie validée (comme un test Demi-Cooper de six minutes ou un test continu progressif VAMEVAL) pour obtenir votre Vitesse Maximale Aérobie en kilomètres par heure avec une précision d'au moins zéro virgule deux km/h.\n2. Mesure de la Vitesse Maximale de Sprint (VMS / MSS) : Évaluez votre vitesse maximale de pointe. Le protocole d'or consiste à effectuer deux à trois sprints lancés de quarante à soixante mètres sur piste ou pelouse avec une récupération complète de trois à quatre minutes entre chaque essai. La vitesse maximale instantanée est mesurée soit par des cellules photoélectriques réparties sur une zone de dix mètres lancés, soit par un radar cinétique ou un boîtier GPS professionnel haute fréquence (10 Hz ou plus). Renseignez la meilleure performance en kilomètres par heure.\n3. Saisie dans le calculateur : Introduisez votre VMA et votre VMS dans les champs correspondants.\n4. Analyse du profil et exploitation : Le calculateur délivre instantanément votre écart d'ASR en km/h, votre ratio de vitesse, votre classification physiologique de profilage musculaire ainsi que les vitesses de passage cibles calibrées de vingt pour cent à soixante pour cent d'ASR.\n\nIII. Explication des Paramètres et Enjeux de Mesure\n\nLa pertinence des résultats repose sur la fidélité des deux mesures d'entrée :\n- VMA (Vitesse Maximale Aérobie en km/h) : Elle symbolise la vitesse de croisière maximale oxygénée de votre machinerie aérobie. Si cette valeur est sous-estimée (par exemple lors d'un test mal géré où l'athlète est parti trop prudemment), votre ASR calculée sera artificiellement trop grande.\n- VMS / MSS (Maximal Sprint Speed en km/h) : Elle reflète la puissance neuromusculaire, la force explosive des membres inférieurs, l'efficacité de la chaîne postérieure et la coordination motrice à haute cadence. Elle nécessite un engagement mental et physique absolu dans un état de fraîcheur neurologique total.\n\nIV. Relations Mathématiques et Calculs de Normalisation\n\nLes relations mathématiques qui régissent l'ASR sont limpides dans leur formulation mais capitales dans leurs implications :\n1. Calcul de la Réserve de Vitesse Anaérobie :\nASR (en km/h) = VMS (km/h) − VMA (km/h).\nCette valeur représente la largeur en km/h du couloir anaérobie utilisable par l'athlète.\n2. Calcul du ratio de vitesse (Speed Ratio) :\nSpeed Ratio = VMS / VMA.\nCe ratio adimensionnel isole la dominante contractile de l'athlète, indépendamment de son niveau de vitesse brute.\n3. Formule d'individualisation des allures de travail supramaximales en % d'ASR :\nVitesse Cible (km/h) = VMA + [(%ASR / 100) × ASR].\nExemple concret démontrant la supériorité de l'ASR :\nConsidérons deux athlètes ayant la même VMA de 16,0 km/h. L'athlète A (profil endurant) possède une VMS de 22,0 km/h (son ASR est de 6,0 km/h). L'athlète B (profil sprinteur) possède une VMS de 32,0 km/h (son ASR est de 16,0 km/h).\nSi l'entraîneur prescrit une séance à 120% de VMA, la vitesse imposée est de 19,2 km/h pour les deux :\n- L'athlète A court à 3,2 km/h au-dessus de sa VMA, ce qui représente 3,2 / 6,0 = 53,3% de son ASR. Il sera en acidose lactique sévère en quelques répétitions.\n- L'athlète B court également à 19,2 km/h, mais pour lui cela ne représente que 3,2 / 16,0 = 20,0% de son ASR. L'effort est pour lui modéré et peu stimulant.\nEn prescrivant plutôt la séance à 30% d'ASR :\n- L'athlète A courra à 16 + (0,30 × 6) = 17,8 km/h.\n- L'athlète B courra à 16 + (0,30 × 16) = 20,8 km/h.\nLes deux coureurs subiront alors une contrainte métabolique et neuromusculaire strictement équivalente.\n\nV. Profilage Typologique et Barèmes d'Interprétation\n\nLa valeur du Speed Ratio (VMS / VMA) permet de classer immédiatement les athlètes en trois familles physiologiques majeures :\n- Profil « Endurant » ou Moteur Diesel (Speed Ratio < 1,80) : Ces sportifs disposent d'un moteur aérobie puissant et résistant mais manquent de vitesse de pointe et d'accélération. Leurs muscles sont majoritairement riches en fibres de type I à métabolisme oxydatif. Dans leur préparation, il convient de développer la force maximale, la raideur tendineuse, les sprints courts alactiques et la pliométrie pour élargir leur ASR par le haut.\n- Profil « Hybride » ou Mixte (Speed Ratio entre 1,80 et 1,95) : C'est le profil le plus répandu et le plus polyvalent chez les joueurs de sports collectifs de haut niveau (football, rugby à sept, handball). Ils allient une VMA élevée à une excellente capacité de répétition de sprints.\n- Profil « Explosif » ou Sprinteur (Speed Ratio > 1,95) : Athlètes dotés d'une pointe de vitesse prodigieuse et d'une prédominance de fibres de type IIa et IIx. Leur filière glycolytique s'emballe très vite. Si un entraîneur leur impose des volumes d'intermittent calibrés en pourcentage brut de VMA sans tenir compte de leur ASR, ils s'épuisent rapidement et s'exposent à des blessures musculaires aux ischio-jambiers.\n\nVI. Applications Directes pour les Séances d'Intermittent Court\n\nSur le terrain, l'ASR permet d'ajuster les formats de travail intermittent :\n- Pour les séances courtes de type 10s/10s ou 15s/15s : prescrivez entre 20% et 35% d'ASR pour un travail à dominante puissance aérobie, et entre 40% et 60% d'ASR pour stimuler la puissance lactique tolérée.\n- Pour les sports collectifs : regroupez les joueurs par couloirs d'ASR plutôt que par postes de jeu afin d'homogénéiser la charge interne et la qualité du stimulus physiologique.";
+        navigator.clipboard.writeText(texte).then(function() {
+          var ico = document.getElementById('btn-copy-ico');
+          var txt = document.getElementById('btn-copy-txt');
+          if (ico && txt) {
+            ico.textContent = '✓';
+            txt.textContent = 'Guide copié (1106 mots) !';
+            setTimeout(function() {
+              ico.textContent = '📋';
+              txt.textContent = 'Copier le guide complet';
+            }, 2500);
+          }
+        });
+      }
+    </script>
+  
+  </main>
+
+  
+  <!-- PROFEPS_RELATED_MESH_START -->
+  <aside class="peps-related-mesh" style="max-width:1024px;margin:2rem auto;padding:1.25rem 1.5rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;">
+    <h2 style="font-size:0.95rem;font-weight:800;color:#0f172a;margin:0 0 0.85rem 0;">🔗 Ressources &amp; Guides Associés (Calculateurs & Physiologie Sportive)</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.65rem;">
+        <a href="calculateur-frequence-cardiaque-karvonen.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Calculateur FC Max & Zones Karvonen | ProfEPS →</a>
+        <a href="calculateur-indice-endurance.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Calculateur Indice d'Endurance (IE) | ProfEPS →</a>
+        <a href="charge-entrainement-rpe-foster-monotonie-acwr.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Charge d'Entraînement : RPE de Foster, Monotonie et Ratio →</a>
+        <a href="generateur-intermittent-hiit-cod.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Générateur Intermittent HIIT & COD 180° | ProfEPS →</a>
+    </div>
+  </aside>
+  <!-- PROFEPS_RELATED_MESH_END -->
+  <footer class="footer" id="profeps-unified-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-brand" style="display:flex !important;flex-direction:column !important;align-items:flex-start !important;">
+          <img src="/images/prof_eps.webp" width="150" height="46" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:46px !important;max-height:46px !important;width:auto !important;max-width:155px !important;object-fit:contain !important;align-self:flex-start !important;filter:none !important;border-radius:8px !important;margin:0 0 0.9rem 0 !important;display:block !important;">
+          <p data-i18n-fr="La plateforme de référence pour les professeurs d'EPS et candidats aux concours de l'enseignement au Maroc. Générateur pédagogique, calculateurs sportifs et préparation CRMEF." data-i18n-en="The reference platform for PE teachers and CRMEF candidates in Morocco. Educational generator, sports calculators &amp; official curriculum-aligned quizzes." data-i18n-ar="المنصة المرجعية لأساتذة التربية البدنية والمترشحين لمباريات التعليم بالمغرب. مولد وثائق تربوية، حاسبات رياضية واستعداد لمباراة التعليم.">La plateforme de référence pour les professeurs d'EPS et candidats aux concours de l'enseignement au Maroc. Générateur pédagogique, calculateurs sportifs et préparation CRMEF.</p>
+          <div class="footer-stats">
+            <div class="footer-stat-item">
+              <span class="footer-stat-num">16+</span>
+              <span class="footer-stat-lbl" data-i18n-fr="APS couvertes" data-i18n-en="Sports covered" data-i18n-ar="نشاط رياضي">APS couvertes</span>
+            </div>
+            <div class="footer-stat-item">
+              <span class="footer-stat-num">24</span>
+              <span class="footer-stat-lbl" data-i18n-fr="Silos Disciplines" data-i18n-en="Disciplines" data-i18n-ar="تخصصات ومواد">Silos Disciplines</span>
+            </div>
+            <div class="footer-stat-item">
+              <span class="footer-stat-num">100%</span>
+              <span class="footer-stat-lbl" data-i18n-fr="Gratuit" data-i18n-en="Free" data-i18n-ar="مجاني">Gratuit</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-col-title" data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</p>
+          <ul>
+            <li><a href="index.html" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a></li>
+            <li><a href="concours-crmef-hub.html" data-i18n-fr="Préparation CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparation CRMEF</a></li>
+            <li><a href="generateur.html" data-i18n-fr="Générateur PDF" data-i18n-en="PDF Generator" data-i18n-ar="مولد الوثائق PDF">Générateur PDF</a></li>
+            <li><a href="blog.html" data-i18n-fr="Articles &amp; Blog" data-i18n-en="Articles &amp; Blog" data-i18n-ar="المقالات والمدونة">Articles &amp; Blog</a></li>
+            <li><a href="bibliotheque-numerique-eps.html" data-i18n-fr="Bibliothèque EPS" data-i18n-en="PE Digital Library" data-i18n-ar="المكتبة الرقمية">Bibliothèque EPS</a></li>
+            <li><a href="a-propos.html" data-i18n-fr="À propos" data-i18n-en="About Us" data-i18n-ar="من نحن">À propos</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col" id="footer-col-crmef">
+          <p class="footer-col-title" data-i18n-fr="HUB CONCOURS CRMEF" data-i18n-en="CRMEF EXAM HUB" data-i18n-ar="بوابة مباراة التعليم">HUB CONCOURS CRMEF</p>
+          <ul class="footer-crmef-grid">
+            <li class="footer-crmef-hub-item"><a href="concours-crmef-hub.html" class="footer-hub-highlight" data-i18n-fr="★ Hub Concours CRMEF (Toutes Filières)" data-i18n-en="★ CRMEF Exam Hub (All Specialties)" data-i18n-ar="★ بوابة مباراة التعليم (جميع التخصصات)">★ Hub Concours CRMEF (Toutes Filières)</a></li>
+            <li><a href="qcm-sciences-education-crmef.html" data-i18n-fr="Tronc Commun (SE)" data-i18n-en="Education Sciences" data-i18n-ar="علوم التربية">Tronc Commun (SE)</a></li>
+            <li><a href="qcm-didactique-eps-maroc.html" data-i18n-fr="EPS (Sport)" data-i18n-en="PE &amp; Sport" data-i18n-ar="التربية البدنية">EPS (Sport)</a></li>
+            <li><a href="qcm-didactique-primaire-maroc.html" data-i18n-fr="Primaire (TaRL)" data-i18n-en="Primary (TaRL)" data-i18n-ar="التعليم الابتدائي">Primaire (TaRL)</a></li>
+            <li><a href="qcm-didactique-maths-maroc.html" data-i18n-fr="Mathématiques" data-i18n-en="Mathematics" data-i18n-ar="الرياضيات">Mathématiques</a></li>
+            <li><a href="qcm-didactique-physique-chimie-maroc.html" data-i18n-fr="Physique-Chimie" data-i18n-en="Physics &amp; Chemistry" data-i18n-ar="الفيزياء والكيمياء">Physique-Chimie</a></li>
+            <li><a href="qcm-didactique-svt-maroc.html" data-i18n-fr="SVT" data-i18n-en="Life &amp; Earth Sciences" data-i18n-ar="علوم الحياة والأرض">SVT</a></li>
+            <li><a href="qcm-didactique-francais-maroc.html" data-i18n-fr="Français" data-i18n-en="French" data-i18n-ar="اللغة الفرنسية">Français</a></li>
+            <li><a href="qcm-didactique-arabe-maroc.html" data-i18n-fr="Arabe" data-i18n-en="Arabic" data-i18n-ar="اللغة العربية">Arabe</a></li>
+            <li><a href="qcm-didactique-histoire-geographie-maroc.html" data-i18n-fr="Histoire-Géo" data-i18n-en="History &amp; Geography" data-i18n-ar="التاريخ والجغرافيا">Histoire-Géo</a></li>
+            <li><a href="qcm-didactique-philosophie-maroc.html" data-i18n-fr="Philosophie" data-i18n-en="Philosophy" data-i18n-ar="الفلسفة">Philosophie</a></li>
+            <li><a href="qcm-didactique-informatique-maroc.html" data-i18n-fr="Informatique" data-i18n-en="Computer Science" data-i18n-ar="الإعلاميات">Informatique</a></li>
+            <li><a href="qcm-didactique-anglais-maroc.html" data-i18n-fr="Anglais" data-i18n-en="English" data-i18n-ar="اللغة الإنجليزية">Anglais</a></li>
+            <li><a href="qcm-didactique-education-islamique-maroc.html" data-i18n-fr="Éduc. Islamique" data-i18n-en="Islamic Education" data-i18n-ar="التربية الإسلامية">Éduc. Islamique</a></li>
+            <li><a href="qcm-didactique-economie-gestion-maroc.html" data-i18n-fr="Éco-Gestion" data-i18n-en="Economics &amp; Mgmt" data-i18n-ar="الاقتصاد والتدبير">Éco-Gestion</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col" id="footer-col-calculators">
+          <p class="footer-col-title" data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</p>
+          <ul>
+            <li><a href="hub-outils-sport-performance.html" class="footer-hub-highlight" data-i18n-fr="★ Hub Tous les Calculateurs" data-i18n-en="★ All Calculators Hub" data-i18n-ar="★ بوابة جميع الحاسبات الرياضية">★ Hub Tous les Calculateurs</a></li>
+            <li><a href="calculateur-vma.html" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS (VMA) Calculator" data-i18n-ar="حاسبة السرعة VMA">Calculateur VMA</a></li>
+            <li><a href="calculateur-vdot-asr-endurance.html" data-i18n-fr="Calculateur VO2 Max &amp; VDOT" data-i18n-en="VO2 Max &amp; VDOT" data-i18n-ar="حاسبة VO2 Max و VDOT">Calculateur VO2 Max &amp; VDOT</a></li>
+            <li><a href="calculateur-asr-reserve-vitesse.html" data-i18n-fr="Réserve Anaérobie (ASR)" data-i18n-en="Speed Reserve (ASR)" data-i18n-ar="احتياطي السرعة ASR">Réserve Anaérobie (ASR)</a></li>
+            <li><a href="calculateur-frequence-cardiaque-karvonen.html" data-i18n-fr="Fréquence Cardiaque Karvonen" data-i18n-en="Heart Rate (Karvonen)" data-i18n-ar="نبضات القلب Karvonen">Fréquence Cardiaque Karvonen</a></li>
+            <li><a href="calculateur-charge-rpe-foster-acwr.html" data-i18n-fr="Charge RPE Foster &amp; ACWR" data-i18n-en="Foster RPE &amp; ACWR" data-i18n-ar="حمل التدريب RPE و ACWR">Charge RPE Foster &amp; ACWR</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-col-title" data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</p>
+          <ul>
+            <li><a href="mentions-legales.html" data-i18n-fr="Mentions légales" data-i18n-en="Legal Notice" data-i18n-ar="إشعار قانوني">Mentions légales</a></li>
+            <li><a href="politique-confidentialite.html" data-i18n-fr="Politique de confidentialité" data-i18n-en="Privacy Policy" data-i18n-ar="سياسة الخصوصية">Politique de confidentialité</a></li>
+            <li><a href="cgu.html" data-i18n-fr="Conditions d'utilisation" data-i18n-en="Terms of Use" data-i18n-ar="شروط الاستخدام">Conditions d'utilisation</a></li>
+            <li><a href="contact.html" data-i18n-fr="Nous contacter" data-i18n-en="Contact Us" data-i18n-ar="اتصل بنا">Nous contacter</a></li>
+            <li><a href="mailto:profepsma@gmail.com">✉️ profepsma@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span data-i18n-fr="© 2026 Prof EPS Maroc (profeps.ma). Tous droits réservés." data-i18n-en="© 2026 Prof EPS Morocco (profeps.ma). All rights reserved." data-i18n-ar="© 2026 أستاذ التربية البدنية المغرب (profeps.ma). جميع الحقوق محفوظة.">© 2026 Prof EPS Maroc (profeps.ma). Tous droits réservés.</span>
+        <span data-i18n-fr="Fait avec ❤️ pour les enseignants et candidats CRMEF au Maroc" data-i18n-en="Made with ❤️ for teachers &amp; candidates in Morocco" data-i18n-ar="صنع بـ ❤️ لأساتذة التربية البدنية والمترشحين بالمغرب">Fait avec ❤️ pour les enseignants et candidats CRMEF au Maroc</span>
+      </div>
+    </div>
+  </footer>
+
+  <script id="profeps-tool-engine-js">
+    var currentLang = 'fr';
+    var hasCalculated = false;
+
+    function setToolLang(lang) {
+      currentLang = lang;
+      var root = document.getElementById('html-root');
+      if (root) {
+        root.lang = lang;
+        root.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+      }
+      document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function(el) {
+        var val = el.getAttribute('data-i18n-' + lang);
+        if (val) el.textContent = val;
+      });
+      if (typeof applyToolTranslations === 'function') applyToolTranslations(lang);
+      if (hasCalculated && typeof computeTool === 'function') computeTool();
+    }
+
+    function triggerCalculation() {
+      hasCalculated = true;
+      var panel = document.getElementById('tool-results-panel');
+      if (panel) {
+        panel.classList.remove('hidden');
+        panel.classList.remove('peps-results-reveal');
+        void panel.offsetWidth;
+        panel.classList.add('peps-results-reveal');
+      }
+      if (typeof computeTool === 'function') computeTool();
+      if (panel && window.innerWidth < 768) {
+        setTimeout(function() {
+          panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 80);
+      }
+    }
+
+    function onInputUpdated() {
+      if (hasCalculated && typeof computeTool === 'function') {
+        computeTool();
+      }
+    }
+
+    function computeTool() {
+      var vma = parseFloat(document.getElementById('inp-vma').value) || 16;
+      var mss = Math.max(vma + 2, parseFloat(document.getElementById('inp-mss').value) || 29.5);
+      var asr = mss - vma;
+      var ratio = mss / vma;
+      var spd25 = vma + 0.25 * asr;
+
+      document.getElementById('out-asr').textContent = asr.toFixed(1) + ' km/h';
+      document.getElementById('out-ratio').textContent = ratio.toFixed(2);
+      document.getElementById('out-asr25').textContent = spd25.toFixed(1) + ' km/h';
+
+      var profFr = ratio < 1.80 ? 'Profil Endurant (Fibres I dominantes)' : ratio > 1.95 ? 'Profil Explosif / Sprinteur (Fibres IIa/IIx)' : 'Profil Hybride Équilibré (Demi-fond / Sports Co)';
+      var profEn = ratio < 1.80 ? 'Endurance Profile (Slow-twitch dominant)' : ratio > 1.95 ? 'Speed / Sprinter Profile (Fast-twitch)' : 'Balanced Hybrid Profile';
+      var profAr = ratio < 1.80 ? 'ملف تحملي (هيمنة الألياف البطيئة)' : ratio > 1.95 ? 'ملف انفجاري / عداء سرعة (ألياف سريعة)' : 'ملف هجين متوازن (مسافات متوسطة / رياضات جماعية)';
+
+      if (currentLang === 'fr') {
+        document.getElementById('out-asr-meaning').textContent = 'Soit ' + (asr / 3.6).toFixed(2) + ' m/s de marge au-dessus de la VMA';
+        document.getElementById('out-ratio-meaning').textContent = profFr;
+        document.getElementById('out-asr25-meaning').textContent = 'Équivaut à ' + ((spd25 / vma) * 100).toFixed(0) + '% de votre VMA';
+      } else if (currentLang === 'en') {
+        document.getElementById('out-asr-meaning').textContent = (asr / 3.6).toFixed(2) + ' m/s margin above MAS';
+        document.getElementById('out-ratio-meaning').textContent = profEn;
+        document.getElementById('out-asr25-meaning').textContent = 'Equals ' + ((spd25 / vma) * 100).toFixed(0) + '% of your MAS';
+      } else {
+        document.getElementById('out-asr-meaning').textContent = 'هامش ' + (asr / 3.6).toFixed(2) + ' م/ثانية فوق VMA';
+        document.getElementById('out-ratio-meaning').textContent = profAr;
+        document.getElementById('out-asr25-meaning').textContent = 'يعادل ' + ((spd25 / vma) * 100).toFixed(0) + '% من سرعة VMA';
+      }
+
+      var diag = document.getElementById('out-asr-diag');
+      if (currentLang === 'fr') {
+        diag.innerHTML = '<p><strong>🔬 Pourquoi calibrer en % d’ASR plutôt qu’en % de VMA ?</strong> Deux élèves ayant la même VMA (16 km/h) mais un sprint max différent (27 vs 33 km/h) ne subissent pas la même fatigue à 115% VMA. Votre profil est <strong>« ' + profFr + ' »</strong> (Ratio = <strong>' + ratio.toFixed(2) + '</strong>).</p><p><strong>🏃‍♂️ Conseil Séance :</strong> Pour vos 15"/15" ou 30"/30" supramaximaux, ciblez <strong>+20% à +30% ASR (' + spd25.toFixed(1) + ' km/h)</strong> afin d’homogénéiser la contrainte métabolique entre tous les profils.</p>';
+      } else if (currentLang === 'en') {
+        diag.innerHTML = '<p><strong>🔬 Why prescribe in % ASR instead of % MAS?</strong> Athletes with identical MAS but different Max Sprint Speeds experience vastly different strain above 100% MAS. Your profile is <strong>"' + profEn + '"</strong> (Ratio = <strong>' + ratio.toFixed(2) + '</strong>).</p><p><strong>🏃‍♂️ Workout Advice:</strong> Use <strong>+20% to +30% ASR (' + spd25.toFixed(1) + ' km/h)</strong> for 15s/15s or 30s/30s HIIT sessions.</p>';
+      } else {
+        diag.innerHTML = '<p><strong>🔬 لماذا نعتمد نسبة ASR بدل نسبة VMA فوق القصوى؟</strong> تلميذان بنفس سرعة VMA ولكن بسرعة قصوى مختلفة لا يتحملان نفس الشدة فوق 100% VMA. تصنيفك هو: <strong>« ' + profAr + ' »</strong>.</p><p><strong>🏃‍♂️ نصيحة التدريب:</strong> في تمارين 15"/15" استهدف <strong>+20% إلى +30% من احتياطي ASR (' + spd25.toFixed(1) + ' كم/س)</strong>.</p>';
+      }
+
+      document.getElementById('out-asr-table').innerHTML = [10, 20, 30, 40, 50].map(function(pct) {
+        var spd = vma + (asr * pct) / 100;
+        var pctVma = ((spd / vma) * 100).toFixed(0);
+        var d15 = Math.round((spd / 3.6) * 15);
+        var d30 = Math.round((spd / 3.6) * 30);
+        var useFr = pct <= 20 ? 'HIIT Long (30"/30")' : pct <= 35 ? 'HIIT Court (15"/15")' : 'Sprint Répété / RSA (10"/20")';
+        var useEn = pct <= 20 ? 'Long HIIT (30s/30s)' : pct <= 35 ? 'Short HIIT (15s/15s)' : 'Repeated Sprint (10s/20s)';
+        var useAr = pct <= 20 ? 'متقطع طويل (30"/30")' : pct <= 35 ? 'متقطع قصير (15"/15")' : 'تكرارات سرعة (10"/20")';
+        var u = currentLang === 'fr' ? useFr : currentLang === 'en' ? useEn : useAr;
+        return '<div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs"><div class="font-bold text-slate-900">+' + pct + '% ASR → <span class="text-red-700 font-mono">' + spd.toFixed(1) + ' km/h</span> (' + pctVma + '% VMA) · <span class="text-slate-600">' + u + '</span></div><strong dir="ltr" class="font-mono text-slate-900 bg-white px-3 py-1 rounded-lg border border-slate-200">15s : ' + d15 + ' m | 30s : ' + d30 + ' m</strong></div>';
+      }).join('');
+    }
+  </script>
+
+<!-- BANDEAU DE CONSENTEMENT GOOGLE ADSENSE & RGPD (PROFEPS CMP) -->
+<div id="profeps-cmp-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#f8fafc;padding:18px 24px;border-top:1px solid #334155;z-index:999999;box-shadow:0 -10px 25px rgba(0,0,0,0.5);font-family:system-ui,-apple-system,sans-serif;">
+  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;">
+    <div style="flex:1 1 500px;font-size:13.5px;line-height:1.5;">
+      <strong style="color:#38bdf8;font-size:14.5px;">🍪 Respect de votre vie privée & Cookies</strong><br>
+      ProfEPS utilise des cookies essentiels au fonctionnement du site, ainsi que des cookies d'analyse d'audience et de personnalisation publicitaire Google AdSense pour financer nos outils pédagogiques gratuits. Vous pouvez accepter, refuser ou personnaliser vos préférences à tout moment. Consultez notre <a href="politique-confidentialite.html" style="color:#38bdf8;text-decoration:underline;">Politique de confidentialité</a>.
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+      <button onclick="window.ProfEPS_CMP.open()" type="button" style="padding:8px 14px;background:#1e293b;color:#cbd5e1;border:1px solid #475569;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Personnaliser</button>
+      <button onclick="window.ProfEPS_CMP.rejectAll()" type="button" style="padding:8px 14px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Continuer sans accepter</button>
+      <button onclick="window.ProfEPS_CMP.acceptAll()" type="button" style="padding:8px 18px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;">Tout accepter</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE PERSONNALISATION DES COOKIES -->
+<div id="profeps-cmp-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.8);backdrop-filter:blur(4px);z-index:1000000;align-items:center;justify-content:center;padding:16px;font-family:system-ui,-apple-system,sans-serif;">
+  <div style="background:#0f172a;border:1px solid #334155;border-radius:12px;max-width:560px;width:100%;padding:24px;color:#f8fafc;box-shadow:0 20px 40px rgba(0,0,0,0.6);max-height:90vh;overflow-y:auto;">
+    <h3 style="margin-top:0;font-size:18px;color:#38bdf8;">⚙️ Préférences de Confidentialité & Cookies</h3>
+    <p style="font-size:13px;color:#94a3b8;line-height:1.5;">Gérez ici vos préférences concernant le dépôt de cookies sur votre appareil. Les cookies techniques sont indispensables à la navigation.</p>
+    
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-weight:600;font-size:14px;">Cookies techniques essentiels</span>
+        <span style="font-size:12px;color:#10b981;font-weight:bold;">Toujours actif</span>
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Nécessaires au fonctionnement des calculateurs, de la sécurité et de la mémorisation de votre choix de consentement.</p>
+    </div>
+
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <label for="cmp-opt-analytics" style="font-weight:600;font-size:14px;cursor:pointer;">Cookies de mesure d'audience (Analytics)</label>
+        <input type="checkbox" id="cmp-opt-analytics" checked style="width:18px;height:18px;cursor:pointer;">
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Nous permettent de mesurer anonymement la fréquentation de nos pages et calculateurs EPS.</p>
+    </div>
+
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <label for="cmp-opt-ads" style="font-weight:600;font-size:14px;cursor:pointer;">Publicités personnalisées (Google AdSense)</label>
+        <input type="checkbox" id="cmp-opt-ads" checked style="width:18px;height:18px;cursor:pointer;">
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Permet à Google et ses partenaires d'afficher des annonces adaptées à vos centres d'intérêt afin de maintenir la gratuité de la plateforme.</p>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px;">
+      <button onclick="document.getElementById('profeps-cmp-modal').style.display='none'" type="button" style="padding:8px 14px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:13px;cursor:pointer;">Fermer</button>
+      <button onclick="window.ProfEPS_CMP.saveCustom()" type="button" style="padding:8px 18px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;">Enregistrer mes préférences</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
