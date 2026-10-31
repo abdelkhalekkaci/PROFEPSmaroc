@@ -1,7 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { createServer as createViteServer } from 'vite';
 import { createRequire } from 'module';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -45,7 +44,7 @@ function apiRateLimiter(req: Request, res: Response, next: NextFunction) {
 
 async function startServer() {
   const app = express();
-  const PORT = Number(process.env.PORT) || 3000;
+  const PORT = 3000;
 
   // Middleware - CORS & Security Headers
   app.use((req: Request, res: Response, next: NextFunction) => {
@@ -108,35 +107,47 @@ async function startServer() {
     res.status(404).json({ success: false, error: 'Point de terminaison API introuvable' });
   });
 
-  // En développement, monter les middlewares Vite pour servir l'application et les pages
-  if (process.env.NODE_ENV !== 'production') {
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: 'spa',
-    });
-    app.use(vite.middlewares);
-
-    // Servir également les fichiers statiques de public/ si non interceptés par Vite
-    app.use(express.static(path.join(__dirname, 'public')));
-  } else {
-    // Mode production
-    app.use(express.static(path.join(__dirname, 'dist')));
-    app.use(express.static(path.join(__dirname, 'public'), {
-      setHeaders: (res, filePath) => {
-        if (/\.(css|js|png|jpg|jpeg|gif|svg|webp|ico|woff2?)$/i.test(filePath)) {
-          res.setHeader('Cache-Control', 'public, max-age=604800, stale-while-revalidate=86400');
-        } else if (/\.html$/i.test(filePath)) {
-          res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
-        }
+  // Servir les fichiers statiques de public/ directement (HTML, CSS, JS, images)
+  app.use(express.static(path.join(__dirname, 'public'), {
+    setHeaders: (res, filePath) => {
+      if (/\.(css|js|png|jpg|jpeg|gif|svg|webp|ico|woff2?)$/i.test(filePath)) {
+        res.setHeader('Cache-Control', 'public, max-age=604800, stale-while-revalidate=86400');
+      } else if (/\.html$/i.test(filePath)) {
+        res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
       }
-    }));
-    app.get('*', (_req: Request, res: Response) => {
-      res.sendFile(path.join(__dirname, 'public', 'index.html'));
-    });
-  }
+    }
+  }));
 
+  app.get('/', (_req: Request, res: Response) => {
+    res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  });
+
+  // Démarrer l'écoute immédiatement sur le port 3000 pour répondre instantanément au contrôle de santé
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Serveur ProfEPS démarré sur http://0.0.0.0:${PORT}`);
+  });
+
+  // En développement, monter les middlewares Vite en arrière-plan sans bloquer le port 3000
+  if (process.env.NODE_ENV !== 'production') {
+    try {
+      const { createServer: createViteServer } = await import('vite');
+      const vite = await createViteServer({
+        configFile: false,
+        server: { middlewareMode: true, hmr: false, watch: null },
+        optimizeDeps: { noDiscovery: true, include: [] },
+        appType: 'custom',
+      });
+      app.use(vite.middlewares);
+    } catch (viteErr) {
+      console.warn('Vite middleware skipped:', viteErr);
+    }
+  } else {
+    app.use(express.static(path.join(__dirname, 'dist')));
+  }
+
+  app.get('*', (_req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
   });
 }
 
