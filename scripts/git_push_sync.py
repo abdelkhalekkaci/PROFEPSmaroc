@@ -20,6 +20,10 @@ try:
     print("Copying updated public/ and scripts/ files...")
     # Copy public/
     subprocess.run(["cp", "-r", "public/.", f"{CLONE_DIR}/public/"], check=True)
+    # Remove temporary chat screenshot attachments if present
+    aistudio_dir = os.path.join(CLONE_DIR, "public", "assets", "aistudio")
+    if os.path.exists(aistudio_dir):
+        shutil.rmtree(aistudio_dir)
     # Copy scripts/
     subprocess.run(["cp", "-r", "scripts/.", f"{CLONE_DIR}/scripts/"], check=True)
 
@@ -29,11 +33,12 @@ try:
 
     if status.stdout.strip():
         subprocess.run(["git", "add", "-A"], cwd=CLONE_DIR, check=True)
-        commit_msg = "Refonte EPS : Cadre référentiel CNEE, sous-navigation moderne 13 disciplines et harmonisation des CTA ProfEPS"
+        commit_msg = "feat(adsense-eeat): inject first-person Moroccan PE field experience, named author Abdelkhalek ELBOUDANI & Person JSON-LD across all 90 articles/guides/cycles"
         subprocess.run(["git", "commit", "-m", commit_msg], cwd=CLONE_DIR, check=True)
         print("Pushing to main branch...")
         subprocess.run(["git", "push", "origin", "main"], cwd=CLONE_DIR, check=True)
-        print("Push succeeded!")
+        rev = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=CLONE_DIR, capture_output=True, text=True, check=True)
+        print("Push succeeded! Commit:", rev.stdout.strip())
     else:
         print("No changes detected to commit.")
 
