@@ -23,12 +23,25 @@ export interface LibraryResource {
   category: 'guides' | 'concours' | 'aps' | 'fiches';
   categoryLabel: string;
   format: 'PDF' | 'DOCX';
+  fileFormat?: 'PDF' | 'DOCX';
   fileSize: string;
   year: string;
   author: string;
   description: string;
   downloadUrl: string;
   tags: string[];
+}
+
+export interface BlogArticle {
+  id: string;
+  title: string;
+  topic: 'vma' | 'sciences' | 'pedagogie';
+  category: string;
+  badgeColor: 'red' | 'emerald' | 'blue' | 'amber';
+  readTime: string;
+  date: string;
+  summary: string;
+  url: string;
 }
 
 export const OP_DOCUMENTS: OpDocument[] = [
@@ -202,5 +215,52 @@ export const LIBRARY_RESOURCES: LibraryResource[] = [
       'Trame éditable Word pour la rédaction du projet pédagogique EPS, répartition des cycles d\'APS par trimestre et programmation de l\'Association Sportive Scolaire (ASS).',
     downloadUrl: '/documents/Trame_Projet_Pedagogique_EPS.docx',
     tags: ['Projet Pédagogique', 'ASS', 'Coordination', 'Inspection'],
+  },
+];
+
+export const FEATURED_BLOG_ARTICLES: BlogArticle[] = [
+  {
+    id: 'art-vma-1',
+    title: 'Différencier en Course de Durée grâce à la VMA en EPS',
+    topic: 'vma',
+    category: 'VMA & Demi-Fond',
+    badgeColor: 'red',
+    readTime: '8 min',
+    date: 'Octobre 2026',
+    summary: 'Méthodologie complète pour organiser des groupes de niveau VMA homogènes au collège et au lycée.',
+    url: 'vma-differencier-course-duree-eps.html',
+  },
+  {
+    id: 'art-sci-1',
+    title: 'Méthode VDOT de Jack Daniels : Calcul des Allures',
+    topic: 'sciences',
+    category: 'Physiologie',
+    badgeColor: 'blue',
+    readTime: '10 min',
+    date: 'Octobre 2026',
+    summary: 'Comprendre l’indice VDOT combinant VO2max et économie de course pour individualiser les séances.',
+    url: 'methode-vdot-jack-daniels-calcul-allures.html',
+  },
+  {
+    id: 'art-ped-1',
+    title: 'Différences entre les OP 2007 (Lycée) et OP 2009 (Collège)',
+    topic: 'pedagogie',
+    category: 'Textes Officiels',
+    badgeColor: 'emerald',
+    readTime: '7 min',
+    date: 'Octobre 2026',
+    summary: 'Analyse comparative des Orientations Pédagogiques ministérielles pour le concours CRMEF EPS.',
+    url: 'article-difference-op-2007-2009-eps.html',
+  },
+  {
+    id: 'art-sci-2',
+    title: 'Charge d’Entraînement sRPE de Foster, Monotonie & ACWR',
+    topic: 'sciences',
+    category: 'Charge & Prévention',
+    badgeColor: 'amber',
+    readTime: '9 min',
+    date: 'Octobre 2026',
+    summary: 'Quantifier la charge interne en EPS et prévenir le surentraînement avec le ratio aigu/chronique.',
+    url: 'charge-entrainement-rpe-foster-monotonie-acwr.html',
   },
 ];
