@@ -33,8 +33,11 @@ try:
     for sub in [os.path.join(CLONE_DIR, "public", "assets", "aistudio"), os.path.join(CLONE_DIR, "assets", "aistudio")]:
         if os.path.exists(sub):
             shutil.rmtree(sub)
-    # Copy scripts/ and src/
+    # Copy scripts/, docs/, and src/
     subprocess.run(["cp", "-r", "scripts/.", f"{CLONE_DIR}/scripts/"], check=True)
+    if os.path.exists("docs"):
+        os.makedirs(f"{CLONE_DIR}/docs", exist_ok=True)
+        subprocess.run(["cp", "-r", "docs/.", f"{CLONE_DIR}/docs/"], check=True)
     if os.path.exists("src"):
         subprocess.run(["cp", "-r", "src/.", f"{CLONE_DIR}/src/"], check=True)
     # Copy server.js, server.ts, and root configs
