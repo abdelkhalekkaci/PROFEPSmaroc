@@ -1,4 +1,5 @@
 import os
+import sys
 import shutil
 import subprocess
 
@@ -47,7 +48,7 @@ try:
 
     if status.stdout.strip():
         subprocess.run(["git", "add", "-A"], cwd=CLONE_DIR, check=True)
-        commit_msg = "fix(seo-production-root): sync updated index.html, blog.html, sitemap.xml, and all 163 static HTML pages to repository root for production build"
+        commit_msg = sys.argv[1] if len(sys.argv) > 1 else "feat(seo-step2a): inject 360 APSA pillar mesh across 43 APSA pages and backlink embed/APA citation widget across 11 calculators"
         subprocess.run(["git", "commit", "-m", commit_msg], cwd=CLONE_DIR, check=True)
         print("Pushing to main branch...")
         subprocess.run(["git", "push", "origin", "main"], cwd=CLONE_DIR, check=True)
