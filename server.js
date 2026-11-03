@@ -32,6 +32,9 @@ app.use((req, res, next) => {
     if (host.includes('vmacalculateur.com') || host.includes('mascalculator.com')) {
         return res.redirect(301, 'https://profeps.ma/calculateur-vma.html');
     }
+    if (req.path === '/index.html') {
+        return res.redirect(301, '/');
+    }
     if (req.path === '/article-s%C3%A9ance.html' || decodeURIComponent(req.path) === '/article-séance.html') {
         return res.redirect(301, '/article-structure-seance.html');
     }

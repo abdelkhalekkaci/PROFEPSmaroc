@@ -26,6 +26,8 @@ try:
         shutil.rmtree(aistudio_dir)
     # Copy scripts/
     subprocess.run(["cp", "-r", "scripts/.", f"{CLONE_DIR}/scripts/"], check=True)
+    # Copy server.js and server.ts
+    subprocess.run(["cp", "server.js", "server.ts", f"{CLONE_DIR}/"], check=True)
 
     print("Checking git status...")
     status = subprocess.run(["git", "status", "--porcelain"], cwd=CLONE_DIR, capture_output=True, text=True, check=True)
@@ -33,7 +35,7 @@ try:
 
     if status.stdout.strip():
         subprocess.run(["git", "add", "-A"], cwd=CLONE_DIR, check=True)
-        commit_msg = "feat(adsense-eeat): inject first-person Moroccan PE field experience, named author Abdelkhalek ELBOUDANI & Person JSON-LD across all 90 articles/guides/cycles"
+        commit_msg = "feat(seo-benchmark-fixes): fix AdSense institutional wording, /index.html canonical links, lang=en on 11 MAS articles, scientific citations & full ATD matrices"
         subprocess.run(["git", "commit", "-m", commit_msg], cwd=CLONE_DIR, check=True)
         print("Pushing to main branch...")
         subprocess.run(["git", "push", "origin", "main"], cwd=CLONE_DIR, check=True)
