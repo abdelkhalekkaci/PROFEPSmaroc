@@ -16,7 +16,7 @@ try:
 
     print("Configuring git user...")
     subprocess.run(["git", "config", "user.name", "abdelkhalekkaci"], cwd=CLONE_DIR, check=True)
-    subprocess.run(["git", "config", "user.email", "profepsma@gmail.com"], cwd=CLONE_DIR, check=True)
+    subprocess.run(["git", "config", "user.email", "kaci.abdelkhalek.95@gmail.com"], cwd=CLONE_DIR, check=True)
 
     print("Copying updated public/, root HTML, and scripts/ files...")
     # Copy public/ to both public/ and root of the repository (for Vite / static hosting compatibility)
@@ -49,16 +49,13 @@ try:
     status = subprocess.run(["git", "status", "--porcelain"], cwd=CLONE_DIR, capture_output=True, text=True, check=True)
     print("Changed files:\n" + status.stdout)
 
-    if status.stdout.strip():
-        subprocess.run(["git", "add", "-A"], cwd=CLONE_DIR, check=True)
-        commit_msg = sys.argv[1] if len(sys.argv) > 1 else "feat(seo-step2a): inject 360 APSA pillar mesh across 43 APSA pages and backlink embed/APA citation widget across 11 calculators"
-        subprocess.run(["git", "commit", "-m", commit_msg], cwd=CLONE_DIR, check=True)
-        print("Pushing to main branch...")
-        subprocess.run(["git", "push", "origin", "main"], cwd=CLONE_DIR, check=True)
-        rev = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=CLONE_DIR, capture_output=True, text=True, check=True)
-        print("Push succeeded! Commit:", rev.stdout.strip())
-    else:
-        print("No changes detected to commit.")
+    subprocess.run(["git", "add", "-A"], cwd=CLONE_DIR, check=True)
+    commit_msg = sys.argv[1] if len(sys.argv) > 1 else "feat(deploy): trigger production Vercel deployment with verified GitHub owner email"
+    subprocess.run(["git", "commit", "--allow-empty", "-m", commit_msg], cwd=CLONE_DIR, check=True)
+    print("Pushing to main branch...")
+    subprocess.run(["git", "push", "origin", "main"], cwd=CLONE_DIR, check=True)
+    rev = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=CLONE_DIR, capture_output=True, text=True, check=True)
+    print("Push succeeded! Commit:", rev.stdout.strip())
 
 finally:
     if os.path.exists(CLONE_DIR):
