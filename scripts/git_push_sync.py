@@ -17,9 +17,10 @@ try:
     subprocess.run(["git", "config", "user.name", "abdelkhalekkaci"], cwd=CLONE_DIR, check=True)
     subprocess.run(["git", "config", "user.email", "profepsma@gmail.com"], cwd=CLONE_DIR, check=True)
 
-    print("Copying updated public/ and scripts/ files...")
-    # Copy public/
+    print("Copying updated public/, root HTML, and scripts/ files...")
+    # Copy public/ to both public/ and root of the repository (for Vite / static hosting compatibility)
     subprocess.run(["cp", "-r", "public/.", f"{CLONE_DIR}/public/"], check=True)
+    subprocess.run(["cp", "-r", "public/.", f"{CLONE_DIR}/"], check=True)
     # Remove old generalist athletics regulation article if present in remote
     old_athle = os.path.join(CLONE_DIR, "public", "reglement-athletisme-world-athletics-jury-eps.html")
     if os.path.exists(old_athle):
@@ -28,9 +29,9 @@ try:
     if os.path.exists(old_athle_root):
         os.remove(old_athle_root)
     # Remove temporary chat screenshot attachments if present
-    aistudio_dir = os.path.join(CLONE_DIR, "public", "assets", "aistudio")
-    if os.path.exists(aistudio_dir):
-        shutil.rmtree(aistudio_dir)
+    for sub in [os.path.join(CLONE_DIR, "public", "assets", "aistudio"), os.path.join(CLONE_DIR, "assets", "aistudio")]:
+        if os.path.exists(sub):
+            shutil.rmtree(sub)
     # Copy scripts/
     subprocess.run(["cp", "-r", "scripts/.", f"{CLONE_DIR}/scripts/"], check=True)
     # Copy server.js and server.ts
@@ -42,7 +43,7 @@ try:
 
     if status.stdout.strip():
         subprocess.run(["git", "add", "-A"], cwd=CLONE_DIR, check=True)
-        commit_msg = "feat(blog-thematique-reglements-arbitrage): add Règlements & Arbitrage thematic card and link all 41 related regulation, refereeing & competition articles"
+        commit_msg = "fix(seo-production-root): sync updated index.html, blog.html, sitemap.xml, and all 163 static HTML pages to repository root for production build"
         subprocess.run(["git", "commit", "-m", commit_msg], cwd=CLONE_DIR, check=True)
         print("Pushing to main branch...")
         subprocess.run(["git", "push", "origin", "main"], cwd=CLONE_DIR, check=True)
