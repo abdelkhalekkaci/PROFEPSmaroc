@@ -20,6 +20,13 @@ try:
     print("Copying updated public/ and scripts/ files...")
     # Copy public/
     subprocess.run(["cp", "-r", "public/.", f"{CLONE_DIR}/public/"], check=True)
+    # Remove old generalist athletics regulation article if present in remote
+    old_athle = os.path.join(CLONE_DIR, "public", "reglement-athletisme-world-athletics-jury-eps.html")
+    if os.path.exists(old_athle):
+        os.remove(old_athle)
+    old_athle_root = os.path.join(CLONE_DIR, "reglement-athletisme-world-athletics-jury-eps.html")
+    if os.path.exists(old_athle_root):
+        os.remove(old_athle_root)
     # Remove temporary chat screenshot attachments if present
     aistudio_dir = os.path.join(CLONE_DIR, "public", "assets", "aistudio")
     if os.path.exists(aistudio_dir):
@@ -35,7 +42,7 @@ try:
 
     if status.stdout.strip():
         subprocess.run(["git", "add", "-A"], cwd=CLONE_DIR, check=True)
-        commit_msg = "feat(seo-benchmark-fixes): fix AdSense institutional wording, /index.html canonical links, lang=en on 11 MAS articles, scientific citations & full ATD matrices"
+        commit_msg = "feat(reglements-aps-2026): add 20 complete APS regulation articles (9 dedicated Athletics disciplines + 11 team/gym/racket/combat sports), SVG referee signals, official PDF links & blog theme"
         subprocess.run(["git", "commit", "-m", commit_msg], cwd=CLONE_DIR, check=True)
         print("Pushing to main branch...")
         subprocess.run(["git", "push", "origin", "main"], cwd=CLONE_DIR, check=True)
