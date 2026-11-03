@@ -13,6 +13,11 @@ app.use((req, res, next) => {
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
     res.setHeader('X-XSS-Protection', '1; mode=block');
+    res.setHeader('Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload');
+    res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+    if (!req.path.includes('widget-vma.html')) {
+        res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+    }
     next();
 });
 
@@ -26,6 +31,9 @@ app.use((req, res, next) => {
     const host = req.headers.host || '';
     if (host.includes('vmacalculateur.com') || host.includes('mascalculator.com')) {
         return res.redirect(301, 'https://profeps.ma/calculateur-vma.html');
+    }
+    if (req.path === '/article-s%C3%A9ance.html' || decodeURIComponent(req.path) === '/article-séance.html') {
+        return res.redirect(301, '/article-structure-seance.html');
     }
     next();
 });

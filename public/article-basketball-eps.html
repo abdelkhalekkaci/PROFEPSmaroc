@@ -16,17 +16,37 @@
   <meta name="twitter:image" content="https://profeps.ma/images/prof_eps.png">
     <meta name="keywords" content="basketball EPS Maroc, séance basketball collège, basketball lycée EPS, dribble tir passe EPS, situations apprentissage basketball, évaluation basketball EPS, sports collectifs EPS Maroc, basket scolaire, situation d'apprentissage basketball EPS, cycle basketball EPS collège, cycle basketball EPS lycée, module basketball EPS Maroc, L'approche par compétences basket EPS">
     <!-- Google Consent Mode v2 — defaults AVANT gtag -->
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('consent', 'default', {
-            'ad_storage': 'denied',
-            'ad_user_data': 'denied',
-            'ad_personalization': 'denied',
-            'analytics_storage': 'denied',
-            'wait_for_update': 500
+    <!-- Google tag (gtag.js) & Consent Mode v2 ProfEPS.ma -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    try {
+      var saved = JSON.parse(localStorage.getItem("profeps_cookie_consent_v2") || "null");
+      if (saved) {
+        gtag("consent", "default", {
+          "ad_storage": saved.ads ? "granted" : "denied",
+          "ad_user_data": saved.ads ? "granted" : "denied",
+          "ad_personalization": saved.ads ? "granted" : "denied",
+          "analytics_storage": saved.analytics ? "granted" : "denied"
         });
-    </script>
+      } else {
+        gtag("consent", "default", {
+          "ad_storage": "granted",
+          "ad_user_data": "granted",
+          "ad_personalization": "granted",
+          "analytics_storage": "granted"
+        });
+        gtag("consent", "default", {
+          "ad_storage": "denied",
+          "ad_user_data": "denied",
+          "ad_personalization": "denied",
+          "analytics_storage": "denied",
+          "region": ["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IS","IE","IT","LV","LI","LT","LU","MT","NL","NO","PL","PT","RO","SK","SI","ES","SE","GB","CH"],
+          "wait_for_update": 500
+        });
+      }
+    } catch (e) {}
+  </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TH0Z1SGNXH"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -1402,7 +1422,7 @@
     <h2 style="font-size:0.95rem;font-weight:800;color:#0f172a;margin:0 0 0.85rem 0;">🔗 Ressources &amp; Guides Associés (Guides & Pédagogie EPS Maroc)</h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.65rem;">
         <a href="article-course-duree-eps.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Enseigner la Course de Durée en EPS : Fiche Cycle →</a>
-        <a href="article-difference-op-2007-2009-eps.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Différence OP EPS 2007 (Collège) & 2009 (Lycée) →</a>
+        <a href="article-difference-op-2007-2009-eps.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Différence OP EPS 2007 (Lycée) & 2009 (Collège) →</a>
         <a href="article-eps-confiance-en-soi.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Développer la Confiance en Soi par l'EPS →</a>
         <a href="article-eps-ramadan.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Adapter les Séances d'EPS pendant le Ramadan →</a>
     </div>

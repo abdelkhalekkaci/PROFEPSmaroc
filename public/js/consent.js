@@ -7,13 +7,24 @@
     'use strict';
 
     var STORAGE_KEY = 'profeps_consent';
+    var V2_KEY = 'profeps_cookie_consent_v2';
     var CONSENT_VERSION = '1';
 
     // ─── Lire le consentement stocké ───
     function getStoredConsent() {
         try {
             var raw = localStorage.getItem(STORAGE_KEY);
-            return raw ? JSON.parse(raw) : null;
+            if (raw) return JSON.parse(raw);
+            var rawV2 = localStorage.getItem(V2_KEY);
+            if (rawV2) {
+                var parsedV2 = JSON.parse(rawV2);
+                return {
+                    granted: Boolean(parsedV2.analytics || parsedV2.ads),
+                    version: CONSENT_VERSION,
+                    timestamp: Date.now()
+                };
+            }
+            return null;
         } catch (e) { return null; }
     }
 
@@ -24,6 +35,11 @@
                 granted: granted,
                 version: CONSENT_VERSION,
                 timestamp: Date.now()
+            }));
+            localStorage.setItem(V2_KEY, JSON.stringify({
+                essential: true,
+                analytics: granted,
+                ads: granted
             }));
         } catch (e) {}
     }
@@ -229,6 +245,11 @@
         if (stored && stored.version === CONSENT_VERSION) {
             // Consentement déjà donné — appliquer immédiatement
             updateConsentMode(stored.granted);
+            return;
+        }
+
+        // Si la bannière unifiée #profeps-cmp-banner est déjà présente sur la page, ne pas doubler la bannière
+        if (document.getElementById('profeps-cmp-banner')) {
             return;
         }
 

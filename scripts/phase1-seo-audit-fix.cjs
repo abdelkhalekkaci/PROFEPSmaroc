@@ -7,7 +7,7 @@ const allFiles = fs.readdirSync(pubDir)
   .sort();
 
 const OG_IMAGE_DEFAULT = 'https://profeps.ma/images/prof_eps.png';
-const TODAY = '2026-10-28';
+const TODAY = '2026-11-03';
 
 let fixedCanonical = 0;
 let fixedOgImage = 0;

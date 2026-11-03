@@ -72,6 +72,10 @@ async function startServer() {
       res.redirect(301, 'https://profeps.ma/calculateur-vma.html');
       return;
     }
+    if (req.path === '/article-s%C3%A9ance.html' || decodeURIComponent(req.path) === '/article-séance.html') {
+      res.redirect(301, '/article-structure-seance.html');
+      return;
+    }
     next();
   });
 

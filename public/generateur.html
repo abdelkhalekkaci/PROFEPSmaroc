@@ -35,17 +35,37 @@
     <!-- JSON-LD WebApplication & SoftwareApplication -->
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Générateur IA de Fiches EPS ProfEPS","url":"https://profeps.ma/generateur.html","description":"Générateur IA gratuit de fiches EPS, grilles d'évaluation et projets de cycle. Créez vos documents conformes aux orientations pédagogiques 2007-2009.","applicationCategory":"EducationalApplication","applicationSubCategory":"AI Tool","operatingSystem":"All modern web browsers","inLanguage":"fr-MA","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"MAD"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","bestRating":"5","worstRating":"1","ratingCount":"328"},"softwareRequirements":"Connexion Internet, JavaScript activé (Groq AI API)","browserRequirements":"Requires JavaScript. Requires HTML5.","publisher":{"@type":"Organization","name":"Prof EPS Maroc","url":"https://profeps.ma","logo":{"@type":"ImageObject","url":"https://profeps.ma/images/prof_eps.png"}}}</script>
         <!-- Google Consent Mode v2 — defaults AVANT gtag -->
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('consent', 'default', {
-            'ad_storage': 'denied',
-            'ad_user_data': 'denied',
-            'ad_personalization': 'denied',
-            'analytics_storage': 'denied',
-            'wait_for_update': 500
+    <!-- Google tag (gtag.js) & Consent Mode v2 ProfEPS.ma -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    try {
+      var saved = JSON.parse(localStorage.getItem("profeps_cookie_consent_v2") || "null");
+      if (saved) {
+        gtag("consent", "default", {
+          "ad_storage": saved.ads ? "granted" : "denied",
+          "ad_user_data": saved.ads ? "granted" : "denied",
+          "ad_personalization": saved.ads ? "granted" : "denied",
+          "analytics_storage": saved.analytics ? "granted" : "denied"
         });
-    </script>
+      } else {
+        gtag("consent", "default", {
+          "ad_storage": "granted",
+          "ad_user_data": "granted",
+          "ad_personalization": "granted",
+          "analytics_storage": "granted"
+        });
+        gtag("consent", "default", {
+          "ad_storage": "denied",
+          "ad_user_data": "denied",
+          "ad_personalization": "denied",
+          "analytics_storage": "denied",
+          "region": ["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IS","IE","IT","LV","LI","LT","LU","MT","NL","NO","PL","PT","RO","SK","SI","ES","SE","GB","CH"],
+          "wait_for_update": 500
+        });
+      }
+    } catch (e) {}
+  </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TH0Z1SGNXH"></script>
     <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-TH0Z1SGNXH');</script>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
