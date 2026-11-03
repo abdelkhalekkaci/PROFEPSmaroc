@@ -32,10 +32,14 @@ try:
     for sub in [os.path.join(CLONE_DIR, "public", "assets", "aistudio"), os.path.join(CLONE_DIR, "assets", "aistudio")]:
         if os.path.exists(sub):
             shutil.rmtree(sub)
-    # Copy scripts/
+    # Copy scripts/ and src/
     subprocess.run(["cp", "-r", "scripts/.", f"{CLONE_DIR}/scripts/"], check=True)
-    # Copy server.js and server.ts
-    subprocess.run(["cp", "server.js", "server.ts", f"{CLONE_DIR}/"], check=True)
+    if os.path.exists("src"):
+        subprocess.run(["cp", "-r", "src/.", f"{CLONE_DIR}/src/"], check=True)
+    # Copy server.js, server.ts, and root configs
+    for cfg in ["server.js", "server.ts", "package.json", "vite.config.ts", "tsconfig.json", "metadata.json"]:
+        if os.path.exists(cfg):
+            subprocess.run(["cp", cfg, f"{CLONE_DIR}/{cfg}"], check=True)
 
     print("Checking git status...")
     status = subprocess.run(["git", "status", "--porcelain"], cwd=CLONE_DIR, capture_output=True, text=True, check=True)
