@@ -701,7 +701,7 @@ for (const sport of allSports) {
 }
 console.log(`✅ Generated ${createdCount} complete APS Regulation & Illustrated Referee Signals articles.`);
 
-// 2. Update blog.html (both in /public and root /) to add the new theme "reglements" & the 12 cards
+// 2. Update blog.html (both in /public and root /) to add the new theme "Règlements & Arbitrage" & all related articles
 function updateBlogHtml(blogPath) {
   if (!fs.existsSync(blogPath)) return;
   let blog = fs.readFileSync(blogPath, 'utf8');
@@ -720,37 +720,94 @@ function updateBlogHtml(blogPath) {
     );
   }
 
-  // B. Add the Theme Filter Card for "Règlements & Lois" in .themes-grid
-  const themeCardHtml = `
+  // Update Hero Carousel slide for Règlements & Arbitrage
+  blog = blog.replace(
+    /<p class="hero-slide-desc">12 dossiers complets[\s\S]*?<\/p>/,
+    '<p class="hero-slide-desc">Lois du Sport 2026 (IFAB, FIFA, IHF, FIBA, FIVB, World Rugby, World Athletics, FIG, BWF, ITTF), Gestes d\'Arbitrage SVG &amp; PDF Officiels</p>'
+  );
+
+  // B. Rebuild the complete .themes-section cleanly with all 8 thematic cards (including Règlements & Arbitrage and APS)
+  const themesSectionHtml = `<section class="themes-section">
+                <div class="themes-header">
+                    <h2>Thématiques</h2>
+                </div>
+
+                <div class="themes-grid">
+                    <div class="theme-card theme-all active" data-theme="all" onclick="window.filterByTheme('all')" role="button" tabindex="0">
+                        <div class="theme-icon">
+                            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+                        </div>
+                        <h3>Tous <span class="theme-count" id="count-all">113</span></h3>
+                        <p>Tous les dossiers</p>
+                    </div>
+
                     <div class="theme-card theme-reglements" data-theme="reglements" onclick="window.filterByTheme('reglements')" role="button" tabindex="0">
                         <div class="theme-icon">
                             <svg viewBox="0 0 24 24"><path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"/><path d="M9 12l2 2 4-4"/></svg>
                         </div>
-                        <h3>Règlements &amp; Lois <span class="theme-count" id="count-reglements">${allSports.length}</span></h3>
+                        <h3>Règlements &amp; Arbitrage <span class="theme-count" id="count-reglements">41</span></h3>
                         <p>Lois 2026, Gestes &amp; PDF</p>
-                    </div>`;
+                    </div>
 
-  // Remove any previous injection of data-theme="reglements" before re-inserting cleanly
-  blog = blog.replace(/<div class="theme-card theme-reglements"[\s\S]*?<\/div>\s*<\/div>/g, '');
-  const apsThemeMarker = '<div class="theme-card theme-aps"';
-  if (blog.includes(apsThemeMarker)) {
-    blog = blog.replace(apsThemeMarker, themeCardHtml + '\n\n                    ' + apsThemeMarker);
-  }
+                    <div class="theme-card theme-aps" data-theme="aps" onclick="window.filterByTheme('aps')" role="button" tabindex="0">
+                        <div class="theme-icon">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M4.93 4.93l14.14 14.14"/><path d="M19.07 4.93L4.93 19.07"/></svg>
+                        </div>
+                        <h3>Activités Sportives <span class="theme-count" id="count-aps">23</span></h3>
+                        <p>Cycles, Séances &amp; APS</p>
+                    </div>
+
+                    <div class="theme-card theme-vma" data-theme="vma" onclick="window.filterByTheme('vma')" role="button" tabindex="0">
+                        <div class="theme-icon">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        </div>
+                        <h3>VMA &amp; Demi-Fond <span class="theme-count" id="count-vma">22</span></h3>
+                        <p>Tests &amp; Allures</p>
+                    </div>
+
+                    <div class="theme-card theme-documents" data-theme="documents" onclick="window.filterByTheme('documents')" role="button" tabindex="0">
+                        <div class="theme-icon">
+                            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        </div>
+                        <h3>Textes Officiels <span class="theme-count" id="count-documents">8</span></h3>
+                        <p>OP 2007-2009</p>
+                    </div>
+
+                    <div class="theme-card theme-didactique" data-theme="didactique" onclick="window.filterByTheme('didactique')" role="button" tabindex="0">
+                        <div class="theme-icon">
+                            <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                        </div>
+                        <h3>Didactique <span class="theme-count" id="count-didactique">13</span></h3>
+                        <p>Séances &amp; Cycles</p>
+                    </div>
+
+                    <div class="theme-card theme-carriere" data-theme="carriere" onclick="window.filterByTheme('carriere')" role="button" tabindex="0">
+                        <div class="theme-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <h3>Carrière <span class="theme-count" id="count-carriere">11</span></h3>
+                        <p>Concours CRMEF</p>
+                    </div>
+
+                    <div class="theme-card theme-pratique" data-theme="pratique" onclick="window.filterByTheme('pratique')" role="button" tabindex="0">
+                        <div class="theme-icon">
+                            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                        </div>
+                        <h3>Pratique &amp; Santé <span class="theme-count" id="count-pratique">19</span></h3>
+                        <p>Terrain &amp; Sécurité</p>
+                    </div>
+                </div>
+            </section>`;
+
+  blog = blog.replace(/<section class="themes-section">[\s\S]*?<\/section>/, themesSectionHtml);
 
   // Update static fallback counts in blog.html (93 existing + 20 reglements = 113)
   blog = blog.replace('<span class="stat-number" id="totalArticlesCount">105</span>', '<span class="stat-number" id="totalArticlesCount">113</span>');
   blog = blog.replace('<span class="theme-count" id="count-all">105</span>', '<span class="theme-count" id="count-all">113</span>');
+  blog = blog.replace('<span class="articles-count" id="articlesCount">105 articles</span>', '<span class="articles-count" id="articlesCount">113 articles</span>');
   blog = blog.replace('Parcourez 105 articles de fond', 'Parcourez 113 articles de fond');
 
-  // C. Add filter label in window.filterByTheme
-  if (!blog.includes("reglements: 'Règlements Officiels des APS")) {
-    blog = blog.replace(
-      "aps: 'Activités Physiques et Sportives (APS)'",
-      "aps: 'Activités Physiques et Sportives (APS)',\n                    reglements: 'Règlements Officiels des APS (Lois 2026), Gestes d\\'Arbitrage Illustrés & PDF Fédéraux'"
-    );
-  }
-
-  // D. Build the 20 dedicated cards for #articlesGrid
+  // C. Build the 20 dedicated regulation cards for #articlesGrid
   const cardsHtml = `
                 <!-- PROFEPS_REGLEMENTS_LOIS_2026_CARDS_START -->
                 ${allSports.map(sport => `
@@ -778,12 +835,149 @@ function updateBlogHtml(blogPath) {
     blog = blog.replace(gridMarker, gridMarker + '\n' + cardsHtml + '\n');
   }
 
+  // D & E. Convert the 3 existing Arbitrage & Gestes articles to primary category "reglements" (with extra theme "aps")
+  // and tag all other articles having a relationship with Règlement, Arbitrage, Compétition Scolaire & Barèmes Officiels with data-extra-themes="reglements"
+  const primaryArbitrageFiles = [
+    'article-arbitrage-volleyball.html',
+    'article-gestes-arbitres-basketball.html',
+    'article-gestes-arbitres-volleyball.html'
+  ];
+  const relatedReglementFiles = [
+    'article-competition-scolaire.html',
+    'article-basket-3x3-eps.html',
+    'article-volleyball-eps.html',
+    'article-football-eps.html',
+    'cycle-basketball-college-eps-maroc.html',
+    'article-eps-coupe-du-monde-2030.html',
+    'article-eleves-timides.html',
+    'article-association-sportive.html',
+    'qa-evaluation-eps-bac.html',
+    'qa-coefficient-eps-bac-maroc.html',
+    'article-handball-eps.html',
+    'article-basketball-eps.html',
+    'article-rugby-eps-maroc.html',
+    'article-badminton-eps.html',
+    'article-tennis-de-table-eps.html',
+    'article-beach-volley-eps.html',
+    'article-seance-gymnastique.html',
+    'article-fiche-seance-athletisme-eps.html'
+  ];
+
+  blog = blog.replace(/<article class="article-card"[\s\S]*?<\/article>/g, (cardHtml) => {
+    for (const arbFile of primaryArbitrageFiles) {
+      if (cardHtml.includes(`href="${arbFile}"`)) {
+        return cardHtml
+          .replace(/<article class="article-card"[^>]*>/, '<article class="article-card" data-category="reglements" data-extra-themes="aps">')
+          .replace('class="article-visual article-aps"', 'class="article-visual article-reglements"')
+          .replace('class="category-badge category-aps">', 'class="category-badge category-reglements">⚖️ ');
+      }
+    }
+    for (const relFile of relatedReglementFiles) {
+      if (cardHtml.includes(`href="${relFile}"`)) {
+        return cardHtml.replace(/<article class="article-card" data-category="([^"]+)"[^>]*>/, '<article class="article-card" data-category="$1" data-extra-themes="reglements">');
+      }
+    }
+    return cardHtml;
+  });
+
+  // F. Upgrade window.filterByTheme and refreshBlogStats() to support data-category + data-extra-themes and URL ?theme=reglements
+  const updatedFilterScript = `<script>
+        function cardMatchesTheme(card, theme) {
+            if (!theme || theme === 'all') return true;
+            var cardCat = card.getAttribute('data-category');
+            if (cardCat === theme) return true;
+            var extra = (card.getAttribute('data-extra-themes') || '').split(/\\s+/);
+            return extra.indexOf(theme) !== -1;
+        }
+
+        window.filterByTheme = function(theme, skipScroll) {
+            theme = theme || 'all';
+
+            var themeCards = document.querySelectorAll('.theme-card');
+            themeCards.forEach(function(card) {
+                var cardTheme = card.getAttribute('data-theme');
+                if (cardTheme === theme) {
+                    card.classList.add('active');
+                } else {
+                    card.classList.remove('active');
+                }
+            });
+
+            var articleCards = document.querySelectorAll('.article-card');
+            var visibleCount = 0;
+            articleCards.forEach(function(card) {
+                if (cardMatchesTheme(card, theme)) {
+                    card.classList.remove('hidden');
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                    card.style.display = 'none';
+                }
+            });
+
+            var countEl = document.getElementById('articlesCount');
+            if (countEl) {
+                countEl.textContent = visibleCount + ' article' + (visibleCount > 1 ? 's' : '');
+            }
+
+            var titleEl = document.querySelector('.articles-header h2');
+            if (titleEl) {
+                var labels = {
+                    all: 'Tous les articles & guides',
+                    reglements: 'Règlements & Arbitrage des APS (Lois 2026, Gestes Illustrés, Compétitions & PDF Fédéraux)',
+                    aps: 'Activités Physiques et Sportives (APS) : Cycles, Séances & ATD',
+                    vma: 'VMA, Tests & Demi-Fond',
+                    documents: 'Documents Officiels (OP 2007-2009)',
+                    didactique: 'Didactique & Pédagogie de l’EPS',
+                    carriere: 'Carrière, Concours CRMEF & Examens',
+                    pratique: 'Pratique de Terrain, Climat & Santé'
+                };
+                titleEl.textContent = labels[theme] || 'Articles sélectionnés';
+            }
+
+            if (!skipScroll) {
+                var headerEl = document.querySelector('.articles-header');
+                if (headerEl) {
+                    var navOffset = 90;
+                    var elPosition = headerEl.getBoundingClientRect().top;
+                    var offsetPosition = elPosition + window.pageYOffset - navOffset;
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        };
+
+        function refreshBlogStats() {
+            var articleCards = document.querySelectorAll('.article-card');
+            var total = articleCards.length;
+            var badgeAll = document.getElementById('count-all');
+            if (badgeAll) badgeAll.textContent = total;
+
+            var themesList = ['reglements', 'aps', 'vma', 'documents', 'didactique', 'carriere', 'pratique'];
+            themesList.forEach(function(th) {
+                var c = 0;
+                articleCards.forEach(function(card) {
+                    if (cardMatchesTheme(card, th)) c++;
+                });
+                var badge = document.getElementById('count-' + th);
+                if (badge) badge.textContent = c;
+            });
+
+            var countEl = document.getElementById('articlesCount');
+            if (countEl) countEl.textContent = total + ' articles';
+        }`;
+
+  blog = blog.replace(/<script>\s*(?:function cardMatchesTheme[\s\S]*?)?window\.filterByTheme = function[\s\S]*?function refreshBlogStats\(\) \{[\s\S]*?\}\s*(?=document\.addEventListener\('DOMContentLoaded')/, updatedFilterScript + '\n\n        ');
+
   fs.writeFileSync(blogPath, blog, 'utf8');
 }
 
 updateBlogHtml(path.join(PUBLIC_DIR, 'blog.html'));
 updateBlogHtml(path.join(ROOT_DIR, 'blog.html'));
-console.log(`✅ Updated blog.html with new theme filter "Règlements & Lois" and ${allSports.length} dedicated regulation cards.`);
+console.log('✅ Updated blog.html with new theme filter "Règlements & Arbitrage" and all related articles.');
 
 // 3. Enrich existing APS articles with a prominent Regulation 2026 + Illustrated Referee Signals + Official PDF Callout Box
 const existingMappings = [

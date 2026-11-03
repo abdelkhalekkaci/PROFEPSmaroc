@@ -42,7 +42,7 @@ try:
 
     if status.stdout.strip():
         subprocess.run(["git", "add", "-A"], cwd=CLONE_DIR, check=True)
-        commit_msg = "feat(reglements-aps-2026): add 20 complete APS regulation articles (9 dedicated Athletics disciplines + 11 team/gym/racket/combat sports), SVG referee signals, official PDF links & blog theme"
+        commit_msg = "feat(blog-thematique-reglements-arbitrage): add Règlements & Arbitrage thematic card and link all 41 related regulation, refereeing & competition articles"
         subprocess.run(["git", "commit", "-m", commit_msg], cwd=CLONE_DIR, check=True)
         print("Pushing to main branch...")
         subprocess.run(["git", "push", "origin", "main"], cwd=CLONE_DIR, check=True)
