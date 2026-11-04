@@ -1,0 +1,2160 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Generates:
+1. /public/aps-course-haies-eps-maroc.html (Complete Silo APS #12: Course de Haies 50m / 60m / 80m / 100m-110m-400m Haies — 1AC -> 2Bac, 4 Niveaux de pratique, Visionneuse A4 + Export Word/PDF, Calculateur d'Indice de Perte sur Haies ΔT = T_Haies - T_Plat + Configurateur de Couloirs Différenciés 3/4 appuis + Barèmes, ATD Complet, 4 Grilles d'Évaluation, Sécurité Pieds en L & Règlement World Athletics RT 22).
+2. Updates /public/hub-aps-sports-eps-maroc.html to include the Course de Haies Silo.
+3. Updates existing APS Silos to include Course de Haies in their quick-navigation bar.
+4. Updates /public/blog.html, /public/index.html, /index.html, and /public/sitemap.xml.
+Never touches /public/generateur.html.
+"""
+
+import os
+import re
+
+ROOT = "/app/applet"
+PUBLIC = os.path.join(ROOT, "public")
+
+
+def read_file(path):
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read()
+
+
+def write_file(path, content):
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(content)
+
+
+def extract_chrome():
+    ref_path = os.path.join(PUBLIC, "aps-badminton-tennis-table-eps-maroc.html")
+    html = read_file(ref_path)
+
+    nav_start = html.find("<!-- PROFEPS_UNIFIED_NAVBAR_START -->")
+    nav_end_marker = "<!-- PROFEPS_UNIFIED_NAVBAR_END -->"
+    nav_end = html.find(nav_end_marker) + len(nav_end_marker)
+    navbar_html = html[nav_start:nav_end]
+
+    foot_start = html.find('<footer class="footer">')
+    foot_end = html.find("</body>")
+    footer_html = html[foot_start:foot_end]
+
+    head_style_start = html.find('<link rel="stylesheet" href="/css/profeps-unifier.min.css?v=20261101">')
+    head_style_end = html.find("</style>", html.find('<style id="profeps-Required-styles">'))
+    if head_style_end == -1:
+        head_style_end = html.find("</head>")
+    head_styles = html[head_style_start:head_style_end]
+
+    return navbar_html, footer_html, head_styles
+
+
+def build_silo_course_haies(navbar_html, footer_html, head_styles):
+    return f"""<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course de Haies en EPS Maroc (50m, 60m, 80m, 110m Haies) : Cycles 1AC-2Bac, Fiches, Calculateur Indice de Perte ΔT, ATD, Barèmes &amp; RT 22 | ProfEPS</title>
+    <meta name="description" content="Dossier et Studio complet de la Course de Haies (50m, 60m, 80m, 100m/110m/400m Haies) en EPS au Maroc (OP 2007 &amp; 2009) : 24 cycles et 240 fiches (1AC à 2Bac × 4 niveaux), calculateur d'Indice d'Obstacle (ΔT = T_Haies - T_Plat), couloirs différenciés 3 ou 4 appuis, ATD, barèmes (/20) et règlement RT 22.">
+    <meta name="keywords" content="course de haies EPS Maroc, 50m haies 60m haies 80m haies EPS, indice de perte sur haies EPS, 110m haies 100m haies 400m haies RT 22, jambe d attaque jambe d esquive haies, rythme 3 appuis 4 appuis haies, ATD course de haies CRMEF, barème course de haies bac Maroc">
+    <meta name="author" content="Abdelkhalek ELBOUDANI — ProfEPS Maroc">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <link rel="canonical" href="https://profeps.ma/aps-course-haies-eps-maroc.html">
+    <link rel="alternate" hreflang="fr-MA" href="https://profeps.ma/aps-course-haies-eps-maroc.html">
+    <link rel="alternate" hreflang="x-default" href="https://profeps.ma/aps-course-haies-eps-maroc.html">
+    <link rel="icon" type="image/png" href="/images/prof_eps.png">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="ProfEPS Maroc">
+    <meta property="og:title" content="Course de Haies en EPS Maroc : Studio Cycles 1AC-2Bac, Calculateur Indice d'Obstacle ΔT, ATD &amp; Barèmes (/20)">
+    <meta property="og:description" content="Portail complet de la Course de Haies au Maroc : générateur de cycles et 10 séances (1AC à 2Bac × 4 niveaux), calculateur d'indice de perte (T_Haies - T_Plat) &amp; couloirs 3/4 appuis, ATD, barèmes (/20) et règlement RT 22.">
+    <meta property="og:url" content="https://profeps.ma/aps-course-haies-eps-maroc.html">
+    <meta property="og:image" content="https://profeps.ma/images/prof_eps.png">
+    <meta property="og:locale" content="fr_MA">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Course de Haies EPS Maroc : Studio Cycles 1AC-2Bac, Calculateur ΔT, ATD &amp; Barèmes (/20)">
+    <meta name="twitter:description" content="Studio interactif des cycles Course de Haies (1AC-2Bac), calculateur d'Indice d'Obstacle ΔT &amp; couloirs différenciés, ATD et grilles OP 2009/2007.">
+    <meta name="twitter:image" content="https://profeps.ma/images/prof_eps.png">
+
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      try {{
+        var saved = JSON.parse(localStorage.getItem("profeps_cookie_consent_v2") || "null");
+        if (saved) {{
+          gtag("consent", "default", {{
+            "ad_storage": saved.ads ? "granted" : "denied",
+            "ad_user_data": saved.ads ? "granted" : "denied",
+            "ad_personalization": saved.ads ? "granted" : "denied",
+            "analytics_storage": saved.analytics ? "granted" : "denied"
+          }});
+        }} else {{
+          gtag("consent", "default", {{
+            "ad_storage": "granted",
+            "ad_user_data": "granted",
+            "ad_personalization": "granted",
+            "analytics_storage": "granted"
+          }});
+        }}
+      }} catch (e) {{}}
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TH0Z1SGNXH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      gtag('js', new Date());
+      gtag('config', 'G-TH0Z1SGNXH');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8253776880916865" crossorigin="anonymous"></script>
+    <script src="profeps-cmp.js" defer></script>
+    {head_styles}
+
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Course de Haies en EPS au Maroc (50m, 60m, 80m, 110m Haies) : Studio des Cycles (1AC à 2Bac), Calculateur d'Indice de Perte ΔT, ATD, Barèmes (/20) et Règlement RT 22",
+      "description": "Portail pédagogique complet de la Course de Haies en EPS au Maroc conforme aux OP 2009 (Collège) et OP 2007 (Lycée) et à la Règle Technique 22 World Athletics.",
+      "url": "https://profeps.ma/aps-course-haies-eps-maroc.html",
+      "inLanguage": ["fr-MA", "ar-MA"],
+      "datePublished": "2026-11-04",
+      "dateModified": "2026-11-04",
+      "author": {{
+        "@type": "Person",
+        "name": "Abdelkhalek ELBOUDANI",
+        "jobTitle": "Professeur d'Éducation Physique et Sportive (EPS)",
+        "url": "https://profeps.ma/a-propos.html"
+      }},
+      "publisher": {{
+        "@type": "EducationalOrganization",
+        "name": "ProfEPS Maroc",
+        "url": "https://profeps.ma/"
+      }}
+    }}
+    </script>
+
+    <style>
+      :root {{
+        --aps-primary: #c2410c;
+        --aps-primary-dark: #9a3412;
+        --aps-accent: #ea580c;
+        --aps-green: #006233;
+        --aps-red: #991b1b;
+        --aps-slate: #0f172a;
+        --aps-muted: #475569;
+        --aps-border: #e2e8f0;
+        --aps-bg: #f8fafc;
+      }}
+      body {{
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: var(--aps-bg);
+        color: var(--aps-slate);
+        margin: 0;
+        line-height: 1.65;
+      }}
+      .silo-hero {{
+        padding: 120px 1.5rem 2.25rem;
+        background: linear-gradient(135deg, #fff7ed 0%, #ffffff 50%, #f0fdf4 100%);
+        border-bottom: 1px solid var(--aps-border);
+      }}
+      .silo-container {{
+        max-width: 1320px;
+        margin: 0 auto;
+      }}
+      .silo-breadcrumb {{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.84rem;
+        font-weight: 600;
+        color: #64748b;
+        margin-bottom: 1rem;
+      }}
+      .silo-breadcrumb a {{
+        color: var(--aps-primary);
+        text-decoration: none;
+      }}
+      .silo-breadcrumb a:hover {{
+        text-decoration: underline;
+      }}
+      .silo-hero-grid {{
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 1.75rem;
+        align-items: start;
+      }}
+      .silo-kicker {{
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.35rem 0.85rem;
+        border-radius: 8px;
+        background: #ffedd5;
+        border: 1px solid #fdba74;
+        color: #9a3412;
+        font-size: 0.78rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.75rem;
+      }}
+      .silo-title {{
+        font-size: clamp(1.75rem, 3.2vw, 2.55rem);
+        font-weight: 900;
+        color: #0f172a;
+        line-height: 1.18;
+        margin: 0 0 0.75rem;
+        letter-spacing: -0.02em;
+      }}
+      .silo-title span {{
+        color: var(--aps-primary);
+      }}
+      .silo-intro-box {{
+        background: #ffffff;
+        border: 1px solid #cbd5e1;
+        border-left: 5px solid var(--aps-primary);
+        border-radius: 12px;
+        padding: 1.15rem 1.35rem;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+      }}
+      .silo-intro-box p {{
+        margin: 0 0 0.65rem;
+        font-size: 0.96rem;
+        color: #334155;
+      }}
+      .silo-intro-box p:last-child {{
+        margin-bottom: 0;
+      }}
+      .silo-specs-card {{
+        background: #ffffff;
+        border: 1px solid var(--aps-border);
+        border-radius: 14px;
+        padding: 1.25rem;
+        box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
+      }}
+      .silo-specs-card h2 {{
+        font-size: 0.95rem;
+        font-weight: 800;
+        color: #0f172a;
+        margin: 0 0 0.85rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #f1f5f9;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }}
+      .specs-grid {{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.65rem;
+      }}
+      .spec-item {{
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 0.65rem 0.75rem;
+      }}
+      .spec-label {{
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #64748b;
+        letter-spacing: 0.04em;
+      }}
+      .spec-val {{
+        font-size: 0.92rem;
+        font-weight: 800;
+        color: #0f172a;
+        font-variant-numeric: tabular-nums;
+      }}
+
+      /* Sticky Volet Navigation */
+      .volet-nav-wrap {{
+        position: sticky;
+        top: 72px;
+        z-index: 90;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--aps-border);
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+      }}
+      .volet-nav {{
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 0.65rem 1.5rem;
+        display: flex;
+        gap: 0.5rem;
+        overflow-x: auto;
+        scrollbar-width: thin;
+      }}
+      .volet-tab-btn {{
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.55rem 1rem;
+        border-radius: 8px;
+        border: 1px solid #cbd5e1;
+        background: #ffffff;
+        color: #334155;
+        font-size: 0.85rem;
+        font-weight: 800;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.2s ease;
+        text-decoration: none;
+      }}
+      .volet-tab-btn:hover {{
+        border-color: var(--aps-primary);
+        color: var(--aps-primary);
+        background: #fff7ed;
+      }}
+      .volet-tab-btn.active {{
+        background: var(--aps-primary);
+        color: #ffffff;
+        border-color: var(--aps-primary-dark);
+      }}
+
+      .silo-main {{
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 4rem;
+      }}
+      .silo-section {{
+        margin-bottom: 3.25rem;
+        scroll-margin-top: 140px;
+      }}
+      .section-header-bar {{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.85rem;
+        border-bottom: 2px solid #e2e8f0;
+      }}
+      .section-header-bar h2 {{
+        font-size: 1.45rem;
+        font-weight: 900;
+        color: #0f172a;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }}
+      .section-subtitle {{
+        font-size: 0.92rem;
+        color: #475569;
+        margin: 0.25rem 0 0;
+      }}
+
+      /* STUDIO FICHE CREATOR */
+      .studio-shell {{
+        background: #ffffff;
+        border: 1px solid #cbd5e1;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      }}
+      .studio-top-bar {{
+        background: #0f172a;
+        color: #ffffff;
+        padding: 1rem 1.25rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }}
+      .grade-tabs {{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+      }}
+      .grade-tab {{
+        padding: 0.55rem 1rem;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.08);
+        color: #e2e8f0;
+        font-size: 0.86rem;
+        font-weight: 800;
+        cursor: pointer;
+        transition: all 0.18s ease;
+      }}
+      .grade-tab:hover {{
+        background: rgba(255, 255, 255, 0.16);
+        color: #ffffff;
+      }}
+      .grade-tab.active {{
+        background: #ea580c;
+        border-color: #fb923c;
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgba(234, 88, 12, 0.4);
+      }}
+      .practice-bar {{
+        background: #f1f5f9;
+        padding: 0.85rem 1.25rem;
+        border-bottom: 1px solid #cbd5e1;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.85rem;
+      }}
+      .practice-label {{
+        font-size: 0.82rem;
+        font-weight: 800;
+        color: #334155;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }}
+      .practice-buttons {{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }}
+      .practice-btn {{
+        padding: 0.48rem 0.9rem;
+        border-radius: 8px;
+        border: 1px solid #cbd5e1;
+        background: #ffffff;
+        color: #334155;
+        font-size: 0.82rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.18s ease;
+      }}
+      .practice-btn:hover {{
+        border-color: var(--aps-primary);
+        color: var(--aps-primary);
+      }}
+      .practice-btn.active {{
+        background: #006233;
+        color: #ffffff;
+        border-color: #064e3b;
+      }}
+
+      .studio-meta-inputs {{
+        padding: 0.85rem 1.25rem;
+        background: #f8fafc;
+        border-bottom: 1px solid #e2e8f0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 0.75rem;
+      }}
+      .meta-field {{
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }}
+      .meta-field label {{
+        font-size: 0.74rem;
+        font-weight: 800;
+        color: #475569;
+        text-transform: uppercase;
+      }}
+      .meta-field input, .meta-field select {{
+        padding: 0.48rem 0.65rem;
+        border-radius: 7px;
+        border: 1px solid #cbd5e1;
+        font-size: 0.86rem;
+        font-weight: 600;
+        color: #0f172a;
+        background: #ffffff;
+      }}
+
+      .studio-workspace {{
+        display: grid;
+        grid-template-columns: 330px 1fr;
+        min-height: 680px;
+      }}
+      .studio-sidebar {{
+        border-right: 1px solid #e2e8f0;
+        background: #f8fafc;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }}
+      .sidebar-heading {{
+        font-size: 0.78rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: #64748b;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.35rem;
+      }}
+      .session-item-btn {{
+        width: 100%;
+        text-align: left;
+        padding: 0.65rem 0.75rem;
+        border-radius: 9px;
+        border: 1px solid #e2e8f0;
+        background: #ffffff;
+        color: #1e293b;
+        cursor: pointer;
+        transition: all 0.16s ease;
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+      }}
+      .session-item-btn:hover {{
+        border-color: var(--aps-primary);
+        background: #fff7ed;
+      }}
+      .session-item-btn.active {{
+        background: #fff7ed;
+        border-color: var(--aps-primary);
+        border-left: 4px solid var(--aps-primary);
+      }}
+      .session-num {{
+        font-size: 0.73rem;
+        font-weight: 800;
+        color: var(--aps-primary);
+        text-transform: uppercase;
+      }}
+      .session-title-short {{
+        font-size: 0.83rem;
+        font-weight: 700;
+        color: #0f172a;
+        line-height: 1.3;
+      }}
+
+      .studio-preview-pane {{
+        padding: 1.25rem;
+        background: #f1f5f9;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }}
+      .studio-toolbar {{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        background: #ffffff;
+        border: 1px solid #cbd5e1;
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+      }}
+      .toolbar-actions {{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }}
+      .btn-export {{
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.55rem 0.95rem;
+        border-radius: 8px;
+        font-size: 0.82rem;
+        font-weight: 800;
+        cursor: pointer;
+        border: 1px solid transparent;
+        transition: all 0.18s ease;
+        text-decoration: none;
+      }}
+      .btn-export.word {{
+        background: #1e40af;
+        color: #ffffff;
+      }}
+      .btn-export.word:hover {{
+        background: #1e3a8a;
+      }}
+      .btn-export.pdf {{
+        background: #991b1b;
+        color: #ffffff;
+      }}
+      .btn-export.pdf:hover {{
+        background: #7f1d1d;
+      }}
+      .btn-export.cycle-word {{
+        background: #006233;
+        color: #ffffff;
+      }}
+      .btn-export.cycle-word:hover {{
+        background: #064e3b;
+      }}
+      .btn-export.cycle-pdf {{
+        background: #0f172a;
+        color: #ffffff;
+      }}
+
+      /* A4 Pro Sheet Preview */
+      .a4-sheet {{
+        background: #ffffff;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        padding: 1.75rem;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+        color: #0f172a;
+      }}
+      .a4-header-table, .a4-body-table {{
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 1rem;
+      }}
+      .a4-header-table th, .a4-header-table td,
+      .a4-body-table th, .a4-body-table td {{
+        border: 1px solid #334155;
+        padding: 0.55rem 0.7rem;
+        font-size: 0.85rem;
+        vertical-align: top;
+      }}
+      .a4-header-table th {{
+        background: #0f172a;
+        color: #ffffff;
+        font-weight: 800;
+        text-transform: uppercase;
+        font-size: 0.78rem;
+      }}
+      .a4-body-table th {{
+        background: #f1f5f9;
+        color: #0f172a;
+        font-weight: 800;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+      }}
+      .a4-phase-badge {{
+        display: inline-block;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-weight: 800;
+        font-size: 0.75rem;
+        background: #ffedd5;
+        color: #9a3412;
+      }}
+
+      /* Content Cards & Tables */
+      .content-card {{
+        background: #ffffff;
+        border: 1px solid #cbd5e1;
+        border-radius: 14px;
+        padding: 1.5rem;
+        margin-bottom: 1.25rem;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+      }}
+      .content-card h3 {{
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: #0f172a;
+        margin: 0 0 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }}
+      .grid-2 {{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+      }}
+      .grid-3 {{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.15rem;
+      }}
+      .pro-table-wrap {{
+        overflow-x: auto;
+      }}
+      .pro-table {{
+        width: 100%;
+        border-collapse: collapse;
+      }}
+      .pro-table th, .pro-table td {{
+        border: 1px solid #cbd5e1;
+        padding: 0.65rem 0.8rem;
+        font-size: 0.87rem;
+        text-align: left;
+        vertical-align: top;
+      }}
+      .pro-table th {{
+        background: #f1f5f9;
+        color: #0f172a;
+        font-weight: 800;
+      }}
+      .pro-table tr:nth-child(even) td {{
+        background: #f8fafc;
+      }}
+
+      /* Sub-tabs for Evaluation Grids */
+      .sub-tabs {{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }}
+      .sub-tab-btn {{
+        padding: 0.55rem 1rem;
+        border-radius: 8px;
+        border: 1px solid #cbd5e1;
+        background: #ffffff;
+        color: #334155;
+        font-size: 0.85rem;
+        font-weight: 800;
+        cursor: pointer;
+      }}
+      .sub-tab-btn.active {{
+        background: #0f172a;
+        color: #ffffff;
+        border-color: #0f172a;
+      }}
+      .sub-tab-panel {{
+        display: none;
+      }}
+      .sub-tab-panel.active {{
+        display: block;
+      }}
+
+      @media (max-width: 980px) {{
+        .silo-hero-grid, .studio-workspace, .grid-2, .grid-3 {{
+          grid-template-columns: 1fr;
+        }}
+        .studio-sidebar {{
+          border-right: none;
+          border-bottom: 1px solid #e2e8f0;
+          max-height: 290px;
+          overflow-y: auto;
+        }}
+      }}
+    </style>
+</head>
+<body>
+{navbar_html}
+
+    <!-- HERO + INTRO + REPÈRES OFFICIELS -->
+    <header class="silo-hero">
+        <div class="silo-container">
+            <nav class="silo-breadcrumb" aria-label="Fil d'Ariane">
+                <a href="index.html">Accueil</a> <span>›</span>
+                <a href="hub-aps-sports-eps-maroc.html">Hub Central des APS</a> <span>›</span>
+                <span>Athlétisme : Course de Haies (50m · 60m · 80m · 100m/110m/400m Haies)</span>
+            </nav>
+
+            <div class="silo-hero-grid">
+                <div>
+                    <div class="silo-kicker">🚧🏃 Silo Complet #12 · Courses d'Obstacles &amp; Rythme · World Athletics RT 22 &amp; OP Maroc</div>
+                    <h1 class="silo-title"><span>Course de Haies (50m / 60m / 80m / 110m Haies)</span> en EPS au Maroc : Cycles (1AC → 2Bac), Fiches, Calculateur d'Indice de Perte (ΔT), ATD, Barèmes (/20) &amp; RT 22</h1>
+                    <div class="silo-intro-box">
+                        <p><strong>Introduction &amp; Logique Interne :</strong> La <strong>Course de Haies</strong> (<em>سباق الحواجز</em>) n'est pas une succession de sauts entrecoupés de course, mais un <strong>sprint rythmé malgré les obstacles</strong> (« <em>courir par-dessus la haie</em> »). Le problème fondamental consiste à <strong>minimiser la perte de vitesse horizontale au franchissement</strong> (traduite par l'<strong>Indice d'Obstacle $ΔT = T_{{Haies}} - T_{{Plat}}$</strong>) en adoptant une trajectoire rasante (2/3 avant la haie, 1/3 derrière) et une structure rythmique stable dans l'intervalle (<strong>3 appuis = même jambe d'attaque</strong> ou <strong>4 appuis = jambe d'attaque alternée</strong>).</p>
+                        <p><strong>Sécurité Impérative &amp; Règle Technique 22 (World Athletics) :</strong> Les pieds en « L » des haies doivent <strong>obligatoirement pointer vers la ligne de DÉPART</strong> afin que la haie bascule vers l'avant en cas de heurt. Selon la <strong>RT 22.6</strong>, renverser involontairement des haies n'entraîne <strong>aucune disqualification</strong> ; seules sont sanctionnées la jambe d'esquive passant à côté sous le plan horizontal supérieur de la haie, le renversement volontaire à la main ou la gêne d'un couloir voisin.</p>
+                    </div>
+                </div>
+
+                <aside class="silo-specs-card" aria-label="Repères officiels World Athletics RT 22 & EPS Maroc">
+                    <h2>
+                        <span>📐 Repères Officiels RT 22 &amp; Scolaires EPS</span>
+                        <a href="reglement-course-haies-100m-110m-400m-athletisme-eps.html" style="font-size:0.78rem;color:#c2410c;text-decoration:underline;">Règlement RT 22 →</a>
+                    </h2>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <div class="spec-label">110m Haies Hommes (RT 22.1)</div>
+                            <div class="spec-val">10 Haies · H = 1,067 m</div>
+                            <div style="font-size:0.72rem;color:#64748b;">Dép→H1: 13,72m · Interv: 9,14m · H10→Arr: 14,02m</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">100m Haies Femmes (RT 22.1)</div>
+                            <div class="spec-val">10 Haies · H = 0,838 m</div>
+                            <div style="font-size:0.72rem;color:#64748b;">Dép→H1: 13,00m · Interv: 8,50m · H10→Arr: 10,50m</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">400m Haies H &amp; F (RT 22.1)</div>
+                            <div class="spec-val">10 Haies · 0,914m / 0,762m</div>
+                            <div style="font-size:0.72rem;color:#64748b;">Dép→H1: 45,00m · Interv: 35,00m · H10→Arr: 40,00m</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Épreuves EPS Maroc (50/60/80mH)</div>
+                            <div class="spec-val">4 à 5 Haies (50 à 76 cm)</div>
+                            <div style="font-size:0.72rem;color:#64748b;">Couloirs différenciés : 6,50m / 7,00m / 7,50m / 8,00m</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Indice d'Obstacle (ΔT)</div>
+                            <div class="spec-val">ΔT = T_Haies − T_Plat</div>
+                            <div style="font-size:0.72rem;color:#64748b;">Cible maîtrise EPS (4 haies) : ΔT ≤ 1,10 s à 1,30 s</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Sens des Pieds de la Haie</div>
+                            <div class="spec-val">Vers le DÉPART (RT 22.2)</div>
+                            <div style="font-size:0.72rem;color:#64748b;">Bascule avant (3,6–4 kg) · À l'envers = Danger chute !</div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </header>
+
+    <!-- STICKY NAVIGATION ENTRE LES 6 VOLETS -->
+    <div class="volet-nav-wrap">
+        <nav class="volet-nav" aria-label="Navigation des volets Course de Haies">
+            <a href="#volet-studio" class="volet-tab-btn active">⚡ 1. Studio Cycles &amp; Fiches (1AC → 2Bac)</a>
+            <a href="#volet-calculateur-haies" class="volet-tab-btn">🧮 2. Calculateur Indice ΔT, Couloirs 3/4 Appuis &amp; Barème</a>
+            <a href="#volet-atd" class="volet-tab-btn">📐 3. ATD Course de Haies</a>
+            <a href="#volet-grilles" class="volet-tab-btn">📊 4. Barèmes (T_Haies + ΔT) &amp; 4 Grilles (/20)</a>
+            <a href="#volet-terrain" class="volet-tab-btn">🏟️ 5. Sécurité Pieds en « L », 40+ Élèves &amp; RT 22</a>
+            <a href="#volet-articles" class="volet-tab-btn">📚 6. Bibliothèque Haies &amp; Sprint</a>
+        </nav>
+    </div>
+
+    <!-- BARRE D'ACCÈS RAPIDE AUX AUTRES SILOS APS -->
+    <div style="background:#f1f5f9;border-bottom:1px solid #cbd5e1;padding:0.5rem 1.5rem;">
+        <div style="max-width:1320px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem;font-size:0.78rem;font-weight:700;color:#475569;">
+            <span>🔗 Silos APS :</span>
+            <a href="aps-handball-eps-maroc.html" style="padding:0.25rem 0.65rem;border-radius:99px;background:#ffffff;color:#0f172a;border:1px solid #cbd5e1;text-decoration:none;">🤾 Handball</a>
+            <a href="aps-basketball-eps-maroc.html" style="padding:0.25rem 0.65rem;border-radius:99px;background:#ffffff;color:#0f172a;border:1px solid #cbd5e1;text-decoration:none;">🏀 Basket-Ball</a>
+            <a href="aps-volleyball-eps-maroc.html" style="padding:0.25rem 0.65rem;border-radius:99px;background:#ffffff;color:#0f172a;border:1px solid #cbd5e1;text-decoration:none;">🏐 Volley-Ball</a>
+            <a href="aps-football-eps-maroc.html" style="padding:0.25rem 0.65rem;border-radius:99px;background:#ffffff;color:#0f172a;border:1px solid #cbd5e1;text-decoration:none;">⚽ Football</a>
+            <a href="aps-gymnastique-sol-eps-maroc.html" style="padding:0.25rem 0.65rem;border-radius:99px;background:#ffffff;color:#0f172a;border:1px solid #cbd5e1;text-decoration:none;">🤸 Gymnastique</a>
+            <a href="aps-course-vitesse-relais-eps-maroc.html" style="padding:0.25rem 0.65rem;border-radius:99px;background:#ffffff;color:#0f172a;border:1px solid #cbd5e1;text-decoration:none;">🏃 Vitesse &amp; Relais</a>
+            <a href="aps-course-duree-demi-fond-eps-maroc.html" style="padding:0.25rem 0.65rem;border-radius:99px;background:#ffffff;color:#0f172a;border:1px solid #cbd5e1;text-decoration:none;">⏱️ Course de Durée</a>
+            <a href="aps-lancer-poids-eps-maroc.html" style="padding:0.25rem 0.65rem;border-radius:99px;background:#ffffff;color:#0f172a;border:1px solid #cbd5e1;text-decoration:none;">☄️ Lancer du Poids</a>
+            <a href="aps-saut-longueur-triple-saut-eps-maroc.html" style="padding:0.25rem 0.65rem;border-radius:99px;background:#ffffff;color:#0f172a;border:1px solid #cbd5e1;text-decoration:none;">🦘 Longueur &amp; Triple Saut</a>
+            <a href="aps-saut-hauteur-fosbury-eps-maroc.html" style="padding:0.25rem 0.65rem;border-radius:99px;background:#ffffff;color:#0f172a;border:1px solid #cbd5e1;text-decoration:none;">🆙 Saut en Hauteur</a>
+            <a href="aps-badminton-tennis-table-eps-maroc.html" style="padding:0.25rem 0.65rem;border-radius:99px;background:#ffffff;color:#0f172a;border:1px solid #cbd5e1;text-decoration:none;">🏸🏓 Badminton &amp; Ping-Pong</a>
+            <a href="aps-course-haies-eps-maroc.html" style="padding:0.25rem 0.65rem;border-radius:99px;background:#c2410c;color:#ffffff;text-decoration:none;">🚧 Course de Haies (Actif)</a>
+            <a href="hub-aps-sports-eps-maroc.html" style="margin-left:auto;color:#c2410c;text-decoration:underline;">Voir toutes les APS →</a>
+        </div>
+    </div>
+
+    <main class="silo-main">
+
+        <!-- ================================================================
+             VOLET 1 : STUDIO INTERACTIF DES CYCLES & FICHES (1AC -> 2BAC)
+             ================================================================ -->
+        <section id="volet-studio" class="silo-section">
+            <div class="section-header-bar">
+                <div>
+                    <h2>⚡ Volet 1 : Studio Interactif des Cycles &amp; Fiches — Course de Haies (1AC à 2Bac)</h2>
+                    <p class="section-subtitle">Sélectionnez le niveau scolaire (<strong>1AC à 2Bac</strong> : 50m Haies, 60m Haies ou 80m Haies) puis l'un des <strong>4 niveaux de pratique</strong>. Prévisualisez la fiche A4 complète avant de la télécharger en <strong>Word (.doc)</strong> ou <strong>PDF A4</strong>.</p>
+                </div>
+            </div>
+
+            <div class="studio-shell">
+                <!-- 1. Onglets des 6 Niveaux Scolaires -->
+                <div class="studio-top-bar">
+                    <div style="font-size:0.82rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:#fdba74;">
+                        1. Choisissez le Niveau Scolaire :
+                    </div>
+                    <div class="grade-tabs" role="tablist" aria-label="Niveaux scolaires EPS Maroc">
+                        <button type="button" class="grade-tab active" data-grade="1AC" onclick="selectHaiesGrade('1AC')">1AC · 50m Haies (4 H)</button>
+                        <button type="button" class="grade-tab" data-grade="2AC" onclick="selectHaiesGrade('2AC')">2AC · 50m/60m Haies</button>
+                        <button type="button" class="grade-tab" data-grade="3AC" onclick="selectHaiesGrade('3AC')">3AC · 60m Haies (4 H)</button>
+                        <button type="button" class="grade-tab" data-grade="TC" onclick="selectHaiesGrade('TC')">TC · 60m Haies</button>
+                        <button type="button" class="grade-tab" data-grade="1BAC" onclick="selectHaiesGrade('1BAC')">1Bac · 60m/80m Haies</button>
+                        <button type="button" class="grade-tab" data-grade="2BAC" onclick="selectHaiesGrade('2BAC')">2Bac · 60m/80m Haies Bac</button>
+                    </div>
+                </div>
+
+                <!-- 2. Choix parmi les 4 Niveaux de Pratique -->
+                <div class="practice-bar">
+                    <span class="practice-label">2. Niveau de Pratique de la Classe (4 Niveaux) :</span>
+                    <div class="practice-buttons" role="group" aria-label="Niveaux de pratique">
+                        <button type="button" class="practice-btn active" data-level="1" onclick="selectHaiesLevel(1)">Niveau 1 · Débutant (Piétinement &amp; Saut en cloche)</button>
+                        <button type="button" class="practice-btn" data-level="2" onclick="selectHaiesLevel(2)">Niveau 2 · Initié (Franchissement continu 4 ou 5 appuis)</button>
+                        <button type="button" class="practice-btn" data-level="3" onclick="selectHaiesLevel(3)">Niveau 3 · Confirmé (Attaque loin 2/3-1/3 &amp; Rythme 3/4 appuis)</button>
+                        <button type="button" class="practice-btn" data-level="4" onclick="selectHaiesLevel(4)">Niveau 4 · Expert / AS (Sprint rasant 3 appuis · ΔT ≤ 1,10s)</button>
+                    </div>
+                </div>
+
+                <!-- 3. Entête personnalisable -->
+                <div class="studio-meta-inputs">
+                    <div class="meta-field">
+                        <label for="haiesProfInput">Enseignant(e) EPS</label>
+                        <input id="haiesProfInput" type="text" value="Prof. EPS" oninput="renderHaiesSheet()">
+                    </div>
+                    <div class="meta-field">
+                        <label for="haiesEtabInput">Établissement / AREF</label>
+                        <input id="haiesEtabInput" type="text" value="Lycée / Collège Maroc" oninput="renderHaiesSheet()">
+                    </div>
+                    <div class="meta-field">
+                        <label for="haiesEffectifInput">Effectif &amp; Dispositif</label>
+                        <input id="haiesEffectifInput" type="text" value="38 élèves · 4 couloirs différenciés (6,5m / 7m / 7,5m / 8m) + 1 couloir plat" oninput="renderHaiesSheet()">
+                    </div>
+                    <div class="meta-field">
+                        <label for="haiesDureeInput">Durée de la Séance</label>
+                        <select id="haiesDureeInput" onchange="renderHaiesSheet()">
+                            <option value="55 min (1h effective)">55 min (1h effective)</option>
+                            <option value="110 min (2h groupées)">110 min (2h groupées)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 4. Espace de travail : Liste des 10 séances + Visionneuse A4 Pro -->
+                <div class="studio-workspace">
+                    <aside class="studio-sidebar">
+                        <div class="sidebar-heading">3. Séances du Cycle (10 Séances)</div>
+                        <div id="haiesSessionList" style="display:flex;flex-direction:column;gap:0.45rem;"></div>
+                    </aside>
+
+                    <div class="studio-preview-pane">
+                        <div class="studio-toolbar">
+                            <div>
+                                <strong id="haiesCurrentBadge" style="font-size:0.92rem;color:#0f172a;">Aperçu Pro A4 — Course de Haies · 1AC · Niveau 1 · Séance 1/10</strong>
+                                <div style="font-size:0.78rem;color:#64748b;">Vérifiez le contenu didactique ci-dessous avant d'exporter votre document officiel.</div>
+                            </div>
+                            <div class="toolbar-actions">
+                                <button type="button" class="btn-export word" onclick="exportHaiesCurrentWord()">📄 Fiche Active (.doc)</button>
+                                <button type="button" class="btn-export pdf" onclick="exportHaiesCurrentPDF()">🖨️ Fiche Active (PDF A4)</button>
+                                <button type="button" class="btn-export cycle-word" onclick="exportHaiesFullCycleWord()">📚 Cycle Complet 10 Séances (.doc)</button>
+                                <button type="button" class="btn-export cycle-pdf" onclick="exportHaiesFullCyclePDF()">🗂️ Cycle Complet (PDF)</button>
+                            </div>
+                        </div>
+
+                        <div id="haiesA4Container" class="a4-sheet">
+                            <!-- Injecté dynamiquement par JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================
+             VOLET 2 : CALCULATEUR INDICE DE PERTE ΔT, COULOIRS 3/4 APPUIS & BARÈME
+             ================================================================ -->
+        <section id="volet-calculateur-haies" class="silo-section">
+            <div class="section-header-bar">
+                <div>
+                    <h2>🧮 Volet 2 : Calculateur d'Indice de Perte sur Haies (ΔT = T_Haies − T_Plat), Couloirs Différenciés (3 ou 4 Appuis) &amp; Barème (/20)</h2>
+                    <p class="section-subtitle">Évaluez objectivement la maîtrise technique d'un élève indépendamment de sa seule vitesse pure grâce à l'<strong>Indice d'Obstacle (ΔT)</strong> et déterminez son <strong>couloir d'intervalle optimal</strong>.</p>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <!-- OUTIL 1 : CALCULATEUR D'INDICE D'OBSTACLE ΔT & BARÈME (/20) -->
+                <div class="content-card" style="border-top:4px solid #c2410c;">
+                    <h3>⏱️ 1. Calculateur d'Indice d'Obstacle (ΔT = T_Haies − T_Plat) &amp; Note (/20)</h3>
+                    <p style="font-size:0.86rem;color:#475569;margin-top:0;">En chronométrant l'élève sur la <strong>même distance à plat ($T_{{Plat}}$)</strong> puis <strong>avec 4 haies ($T_{{Haies}}$)</strong>, l'écart ΔT mesure directement l'efficacité biomécanique du franchissement.</p>
+
+                    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.75rem;margin-bottom:1rem;">
+                        <div class="meta-field">
+                            <label for="calcHGrade">Niveau Scolaire</label>
+                            <select id="calcHGrade" onchange="computeHaiesCalculator()">
+                                <option value="1AC">1AC (50m Haies · 4 Haies)</option>
+                                <option value="2AC">2AC (50m Haies · 4 Haies)</option>
+                                <option value="3AC">3AC (60m Haies · 4 Haies)</option>
+                                <option value="TC">Tronc Commun (60m Haies · 4 H)</option>
+                                <option value="1BAC">1ère Bac (60m Haies · 4 H)</option>
+                                <option value="2BAC" selected>2ème Bac (60m Haies · 4 H)</option>
+                            </select>
+                        </div>
+                        <div class="meta-field">
+                            <label for="calcHSex">Sexe de l'Élève</label>
+                            <select id="calcHSex" onchange="computeHaiesCalculator()">
+                                <option value="G">Garçons (H = 65 à 84 cm)</option>
+                                <option value="F">Filles (H = 50 à 76 cm)</option>
+                            </select>
+                        </div>
+                        <div class="meta-field">
+                            <label for="calcHTPlat">Temps sur Plat T_Plat (s)</label>
+                            <input id="calcHTPlat" type="number" min="6.0" max="16.0" step="0.05" value="8.20" oninput="computeHaiesCalculator()">
+                        </div>
+                        <div class="meta-field">
+                            <label for="calcHTHaies">Temps sur Haies T_Haies (s)</label>
+                            <input id="calcHTHaies" type="number" min="6.5" max="20.0" step="0.05" value="9.35" oninput="computeHaiesCalculator()">
+                        </div>
+                        <div class="meta-field">
+                            <label for="calcHRhythm">Structure Rythmique Inter-Haies</label>
+                            <select id="calcHRhythm" onchange="computeHaiesCalculator()">
+                                <option value="3" selected>3 appuis réguliers (4 foulées · Même jambe d'attaque)</option>
+                                <option value="4">4 appuis réguliers (5 foulées · Jambe d'attaque alternée G/D)</option>
+                                <option value="5">5 appuis réguliers (6 foulées · Même jambe)</option>
+                                <option value="irr">Irrégulier / Piétinement devant la haie (6+ appuis)</option>
+                            </select>
+                        </div>
+                        <div class="meta-field">
+                            <label for="calcHHeightCm">Taille de l'Élève (cm)</label>
+                            <input id="calcHHeightCm" type="number" min="130" max="205" step="1" value="172" oninput="computeHaiesCalculator()">
+                        </div>
+                    </div>
+
+                    <div id="calcHaiesOutput" style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;padding:1rem;">
+                        <!-- Injecté par JS -->
+                    </div>
+                </div>
+
+                <!-- OUTIL 2 : RECOMMANDATION DU COULOIR DIFFÉRENCIÉ & CIBLES D'APPEL/RÉCEPTION -->
+                <div class="content-card" style="border-top:4px solid #006233;">
+                    <h3>📏 2. Étalonnage Personnalisé : Couloir Différencié, Attaque H1 &amp; Parabole (2/3 − 1/3)</h3>
+                    <p style="font-size:0.86rem;color:#475569;margin-top:0;">Recommandations individualisées calculées automatiquement à partir de la stature et de la vitesse sur plat de l'élève pour éviter tout piétinement devant l'obstacle.</p>
+
+                    <div id="calcHaiesCorridorOutput">
+                        <!-- Injecté par JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================
+             VOLET 3 : ANALYSE ET TRAITEMENT DIDACTIQUE (ATD) COURSE DE HAIES
+             ================================================================ -->
+        <section id="volet-atd" class="silo-section">
+            <div class="section-header-bar">
+                <div>
+                    <h2>📐 Volet 3 : Analyse &amp; Traitement Didactique (ATD) — Course de Haies</h2>
+                    <p class="section-subtitle">Référentiel scientifique, biomécanique et didactique complet pour les cours d'EPS et la préparation aux écrits et oraux du CRMEF.</p>
+                </div>
+                <div class="toolbar-actions">
+                    <button type="button" class="btn-export word" onclick="exportElementToWord('atdHaiesPrintable', 'ATD_Course_de_Haies_EPS_Maroc.doc')">📄 Exporter l'ATD (.doc)</button>
+                    <button type="button" class="btn-export pdf" onclick="printElementAsPDF('atdHaiesPrintable', 'ATD Course de Haies — ProfEPS Maroc')">🖨️ Imprimer / PDF A4</button>
+                </div>
+            </div>
+
+            <div id="atdHaiesPrintable">
+                <div class="grid-2">
+                    <div class="content-card">
+                        <h3>1. Définition, Logique Interne &amp; Problème Fondamental</h3>
+                        <p><strong>Définition :</strong> La course de haies est une épreuve athlétique de sprint en couloir individuel consistant à franchir une succession d'obstacles équidistants (10 haies en compétition officielle : 100mH, 110mH, 400mH ; 4 à 5 haies sur 50m/60m/80m en EPS) pour rallier l'arrivée dans le temps le plus court possible.</p>
+                        <p><strong>Logique Interne :</strong> Contrairement au saut en hauteur où l'objectif est d'élever au maximum son centre de gravité (CG), le hurdler cherche à <strong>élever le moins possible son centre de gravité</strong> au-dessus de l'obstacle en dissociant le train inférieur (jambe d'attaque et jambe d'esquive qui s'effacent à l'horizontale) et le buste (qui plonge vers l'avant).</p>
+                        <p><strong>Problème Fondamental :</strong> Comment concilier le <strong>maintien d'une vitesse horizontale maximale</strong> et l'<strong>obligation d'élever momentanément le corps pour franchir un obstacle fixe</strong> sans freiner à l'approche ni s'écraser à la réception ?</p>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>2. Biomécanique de la Parabole Rasante (2/3 − 1/3) &amp; Rythme Inter-Haies</h3>
+                        <ul style="padding-left:1.2rem;margin:0;font-size:0.9rem;">
+                            <li><strong>La règle asymétrique 2/3 avant — 1/3 après :</strong> Pour que le point culminant de la trajectoire du centre de gravité se situe <em>avant</em> la barre de la haie (permettant au coureur de redescendre déjà lorsqu'il passe au-dessus de la latte), l'impulsion d'appel doit se prendre loin devant la haie (<strong>≈ 1,80 m à 2,20 m avant la haie, soit 2/3 de l'enjambée</strong>) et la reprise au sol doit être proche derrière la haie (<strong>≈ 0,90 m à 1,10 m après la haie, soit 1/3</strong>).</li>
+                            <li><strong>3 Appuis (Impair) vs 4 Appuis (Pair) en EPS :</strong>
+                                <br>• <strong>En 3 appuis (4 foulées inter-haies) :</strong> Nombre d'appuis impair → l'élève attaque <strong>toutes les haies avec la MÊME jambe d'attaque</strong> (jambe préférentielle).
+                                <br>• <strong>En 4 appuis (5 foulées inter-haies) :</strong> Nombre d'appuis pair → l'élève est obligé d'<strong>ALTERNER sa jambe d'attaque d'une haie sur l'autre</strong> (Droite sur H1, Gauche sur H2, Droite sur H3...), excellent pour l'ambidextrie motrice au collège et sur intervalles longs.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- LES 4 PHASES TECHNIQUES DU FRANCHISSEMENT -->
+                <div class="content-card">
+                    <h3>3. Analyse Technique des 4 Phases de la Course de Haies</h3>
+                    <div class="pro-table-wrap">
+                        <table class="pro-table">
+                            <thead>
+                                <tr>
+                                    <th>Phase Technique</th>
+                                    <th>Objectif Biomécanique</th>
+                                    <th>Critères de Réalisation (Ce qu'il faut faire)</th>
+                                    <th>Indicateurs Observables sur le Terrain</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1. L'Approche &amp; la Course vers H1 (7 ou 8 appuis)</strong></td>
+                                    <td>Acquérir très tôt une vitesse élevée et arriver sur le bon pied d'appel à distance exacte devant H1.</td>
+                                    <td>Placer le bon pied avant dans les starting-blocks (en 8 appuis vers H1 : pied d'appel placé à l'avant ; en 7 appuis : pied d'appel placé à l'arrière). Se redresser dès le 4ème appui en fixant le sommet de H1.</td>
+                                    <td>Aucun piétinement ni ralentissement dans les 3 derniers mètres avant la 1ère haie.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2. L'Impulsion &amp; l'Attaque de la Haie (2/3 avant)</strong></td>
+                                    <td>Transformer la vitesse en franchissement rasant vers l'avant sans sauter vers le haut.</td>
+                                    <td>Prendre appel loin devant la haie (1,80 à 2,10 m) sur plante de pied active ; <strong>monter le genou de la jambe d'attaque fléchi dans l'axe</strong> (pied armé en flexion dorsale) tout en <strong>engageant fortement le buste et le bras opposé vers l'avant</strong>.</td>
+                                    <td>L'élève « attaque » la haie avec le genou et non en lançant la jambe tendue depuis le sol.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3. L'Esquive &amp; la Suspension Rasante</strong></td>
+                                    <td>Effacer le segment libre au-dessus de la barre et préparer un retour rapide au sol.</td>
+                                    <td>Une fois la poussée terminée, <strong>tirer rapidement la jambe d'esquive fléchie sur le côté à l'horizontale</strong> (ouverture coxale en abduction, genou plus haut que la cheville, orteils relevés pour ne pas accrocher la latte) et la ramener haut dans l'axe de course.</td>
+                                    <td>Trajectoire rasante du bassin ; la jambe arrière ne traîne pas sous la haie et ne passe pas à côté du montant (RT 22.6).</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>4. La Reprise au Sol (1/3 après) &amp; la Course Inter-Obstacles</strong></td>
+                                    <td>Reprendre contact sans écrasement et relancer immédiatement en 3 ou 4 appuis.</td>
+                                    <td>Rabattre activement la jambe d'attaque vers le sol (« griffé » sous le bassin) sur l'avant-pied (jambe gainée, bassin haut) à ≈ 1 m derrière la haie, et tirer le genou de la jambe d'esquive haut devant pour lancer la 1ère foulée de reprise.</td>
+                                    <td>Le talon ne touche pas le sol à la réception ; la 1ère foulée après la haie est immédiatement ample et dynamique.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TABLEAU DE REMÉDIATION DES 5 DÉFAUTS FRÉQUENTS -->
+                <div class="content-card">
+                    <h3>4. Diagnostic Pédagogique : Les 5 Défauts Majeurs en Course de Haies &amp; Remédiations</h3>
+                    <div class="pro-table-wrap">
+                        <table class="pro-table">
+                            <thead>
+                                <tr>
+                                    <th>Défaut Observé chez l'Élève</th>
+                                    <th>Origine Biomécanique / Affective</th>
+                                    <th>Conséquence sur le Chrono &amp; ΔT</th>
+                                    <th>Dispositif de Remédiation sur le Terrain</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1. Piétinement (petits pas de freinage) devant chaque haie</strong></td>
+                                    <td>Peur de l'obstacle ou couloir dont l'intervalle est trop long/court pour l'amplitude de l'élève.</td>
+                                    <td>Chute brutale de la vitesse horizontale ; $ΔT > 2,5 s$.</td>
+                                    <td>Changer l'élève vers un <strong>couloir d'intervalle adapté</strong> (6,50 m, 7,00 m, 7,50 m ou 8,00 m) + utiliser des lattes souples ou haies en mousse pour lever l'appréhension.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2. Saut « en cloche » très haut au-dessus de la haie (buste cabré en arrière)</strong></td>
+                                    <td>Appel pris trop près du pied de la haie ($< 1,20 m$) et attaque jambe tendue sans engagement du buste.</td>
+                                    <td>Temps de suspension aérien très long (pendant lequel on ne propulse plus) ; écrasement à la réception.</td>
+                                    <td>Tracer une <strong>zone d'appel obligatoire à la craie entre 1,70 m et 2,00 m devant la haie</strong> + consigne « toucher son genou d'attaque avec le coude opposé ».</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3. Écrasement à la réception derrière la haie (arrêt puis redémarrage)</strong></td>
+                                    <td>Bassin en arrière du point de pose du pied de réception ; réception sur le talon jambe fléchie.</td>
+                                    <td>Perte totale de l'élasticité pliométrique ; impossible de tenir les 3 ou 4 appuis dans l'intervalle suivant.</td>
+                                    <td>Placer une <strong>latte au sol à 1,30 m derrière la haie</strong> pour obliger à rabattre vite la jambe d'attaque et enchaîner immédiatement le 1er appui de reprise.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>4. Jambe d'esquive qui traîne bas ou contourne la haie par le côté</strong></td>
+                                    <td>Manque de souplesse coxo-fémorale ou oubli de ramener le genou d'esquive haut dans l'axe avant de le poser.</td>
+                                    <td>Accrochage de la haie avec la cheville ou <strong>disqualification RT 22.6</strong> (jambe sous le plan horizontal à côté de la haie).</td>
+                                    <td>Éducatif « Marche et trot de haies sur le côté » (franchissement uniquement de la jambe d'esquive au-dessus du bord de la haie en montant le genou sous l'aisselle).</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>5. Rotation des épaules et déséquilibre latéral à la réception</strong></td>
+                                    <td>Le bras du côté de la jambe d'attaque part violemment sur le côté pour compenser l'ouverture de la jambe d'esquive.</td>
+                                    <td>Course en zigzag dans l'intervalle et perte d'alignement.</td>
+                                    <td>Consigne « Poing opposé à la jambe d'attaque devant le menton, coude arrière serré le long des côtes » (« regarder sa montre »).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================
+             VOLET 4 : BARÈMES OFFICIELS (T_HAIES + ΔT) & 4 GRILLES (/20)
+             ================================================================ -->
+        <section id="volet-grilles" class="silo-section">
+            <div class="section-header-bar">
+                <div>
+                    <h2>📊 Volet 4 : Barèmes Chiffrés Officiels (Temps + Indice ΔT) &amp; 4 Grilles d'Évaluation (/20)</h2>
+                    <p class="section-subtitle">Feuille de chronométrage comparé ($T_{{Plat}} vs T_{{Haies}}$), barèmes chiffrés Collège/Lycée (G &amp; F) et grilles d'évaluation sommative exportables en <strong>Word (.doc)</strong> et <strong>PDF A4</strong>.</p>
+                </div>
+            </div>
+
+            <div class="sub-tabs" role="tablist">
+                <button type="button" class="sub-tab-btn active" onclick="switchHaiesGridTab('hgrid-bareme', this)">⏱️ 1. Feuille Chrono Comparé (ΔT) &amp; Barèmes Chiffrés</button>
+                <button type="button" class="sub-tab-btn" onclick="switchHaiesGridTab('hgrid-college', this)">🏫 2. Grille Collège 1AC–3AC (OP 2009 · /20)</button>
+                <button type="button" class="sub-tab-btn" onclick="switchHaiesGridTab('hgrid-lycee', this)">🎓 3. Grille Lycée TC–2Bac (OP 2007 · /20)</button>
+                <button type="button" class="sub-tab-btn" onclick="switchHaiesGridTab('hgrid-dispense', this)">⚖️ 4. Grille Élève Dispensé / Chef Sécurité Haies (/20)</button>
+            </div>
+
+            <!-- PANEL 1 : BARÈMES CHIFFRÉS & FEUILLE DE CHRONOMÉTRAGE ΔT -->
+            <div id="hgrid-bareme" class="sub-tab-panel active">
+                <div class="content-card">
+                    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1rem;">
+                        <h3 style="margin:0;">⏱️ Barèmes Chiffrés Course de Haies (50mH Collège / 60mH Lycée — 4 Haies) &amp; Barème de l'Indice ΔT</h3>
+                        <div class="toolbar-actions">
+                            <button type="button" class="btn-export word" onclick="exportElementToWord('haiesBaremeDoc', 'Bareme_Officiel_Course_Haies_DeltaT_EPS_Maroc.doc')">📄 Exporter (.doc)</button>
+                            <button type="button" class="btn-export pdf" onclick="printElementAsPDF('haiesBaremeDoc', 'Barèmes Officiels Course de Haies & Indice ΔT — EPS Maroc')">🖨️ Imprimer / PDF A4</button>
+                        </div>
+                    </div>
+
+                    <div id="haiesBaremeDoc">
+                        <div class="pro-table-wrap">
+                            <table class="pro-table">
+                                <thead>
+                                    <tr>
+                                        <th>Niveau de Note</th>
+                                        <th>50m Haies Collège (4H)<br>Garçons / Filles</th>
+                                        <th>60m Haies TC &amp; 1Bac (4H)<br>Garçons / Filles</th>
+                                        <th>60m Haies 2Bac (4H)<br>Garçons (76-84cm) / Filles (65-76cm)</th>
+                                        <th>Indice de Perte ΔT (4 Haies)<br>(ΔT = T_Haies − T_Plat)</th>
+                                        <th>Rythme Inter-Haies Observé</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Excellent (Max : 6/6 Collège · 7/7 Lycée)</strong></td>
+                                        <td>G : ≤ 8,30 s<br>F : ≤ 9,40 s</td>
+                                        <td>G : ≤ 9,40 s<br>F : ≤ 10,80 s</td>
+                                        <td><strong>G : ≤ 9,00 s</strong><br><strong>F : ≤ 10,40 s</strong></td>
+                                        <td><strong>ΔT ≤ 1,10 s</strong><br>(≤ 0,27 s perdu / haie)</td>
+                                        <td>3 appuis constants (ou 4 appuis fluides sans aucune rupture)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Très Bien (5/6 Collège · 5,5–6/7 Lycée)</strong></td>
+                                        <td>G : 8,35 – 8,85 s<br>F : 9,45 – 10,05 s</td>
+                                        <td>G : 9,45 – 10,00 s<br>F : 10,85 – 11,50 s</td>
+                                        <td><strong>G : 9,05 – 9,55 s</strong><br><strong>F : 10,45 – 11,10 s</strong></td>
+                                        <td><strong>ΔT : 1,15 s à 1,40 s</strong><br>(0,29 à 0,35 s / haie)</td>
+                                        <td>3 ou 4 appuis constants sur les 3 intervalles</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Satisfaisant / Moyen (3,5–4/6 · 4–5/7)</strong></td>
+                                        <td>G : 8,90 – 9,60 s<br>F : 10,10 – 10,90 s</td>
+                                        <td>G : 10,05 – 10,80 s<br>F : 11,55 – 12,40 s</td>
+                                        <td><strong>G : 9,60 – 10,30 s</strong><br><strong>F : 11,15 – 12,00 s</strong></td>
+                                        <td><strong>ΔT : 1,45 s à 1,85 s</strong><br>(0,36 à 0,46 s / haie)</td>
+                                        <td>4 ou 5 appuis réguliers mais franchissement encore haut</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>En cours d'acquisition (1,5–2,5 pts)</strong></td>
+                                        <td>G : > 9,60 s<br>F : > 10,90 s</td>
+                                        <td>G : > 10,80 s<br>F : > 12,40 s</td>
+                                        <td><strong>G : > 10,30 s</strong><br><strong>F : > 12,00 s</strong></td>
+                                        <td><strong>ΔT > 1,90 s</strong><br>(> 0,48 s / haie)</td>
+                                        <td>Nombre d'appuis variable (5–7 appuis) et piétinement d'appel</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 2 : GRILLE COLLÈGE OP 2009 (/20) -->
+            <div id="hgrid-college" class="sub-tab-panel">
+                <div class="content-card">
+                    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1rem;">
+                        <h3 style="margin:0;">🏫 Grille d'Évaluation Sommative Collège (1AC, 2AC, 3AC) — Course de Haies OP 2009 (/20)</h3>
+                        <div class="toolbar-actions">
+                            <button type="button" class="btn-export word" onclick="exportElementToWord('haiesCollegeDoc', 'Grille_Evaluation_College_Course_Haies_OP2009.doc')">📄 Exporter (.doc)</button>
+                            <button type="button" class="btn-export pdf" onclick="printElementAsPDF('haiesCollegeDoc', 'Grille Évaluation Collège Course de Haies OP 2009')">🖨️ Imprimer / PDF A4</button>
+                        </div>
+                    </div>
+                    <div id="haiesCollegeDoc">
+                        <div class="pro-table-wrap">
+                            <table class="pro-table">
+                                <thead>
+                                    <tr>
+                                        <th>Domaine (OP 2009)</th>
+                                        <th>Critères d'Évaluation Course de Haies</th>
+                                        <th>Barème &amp; Indicateurs</th>
+                                        <th>Max</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td rowspan="2"><strong>1. Habiletés Motrices<br>(12 points)</strong></td>
+                                        <td><strong>A. Performance Chronométrique sur 50m/60m Haies (/6 pts)</strong></td>
+                                        <td>Note attribuée selon le barème officiel du niveau scolaire (1AC, 2AC, 3AC) et du sexe (Garçons / Filles) sur 4 haies.</td>
+                                        <td><strong>/ 6 pts</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>B. Indice de Perte ΔT &amp; Régularité du Franchissement (/6 pts)</strong></td>
+                                        <td>• <strong>Indice ΔT (/3 pts) :</strong> $≤ 1,20 s = 3 pts$ ; $1,25 à 1,60 s = 2 pts$ ; $> 1,60 s = 1 pt$.<br>• <strong>Rythme &amp; Technique (/3 pts) :</strong> Attaque loin devant la haie (buste engagé), esquive horizontale et maintien d'un nombre constant d'appuis (3, 4 ou 5 appuis) sans piétiner.</td>
+                                        <td><strong>/ 6 pts</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>2. Connaissances Conceptuelles<br>(3 points)</strong></td>
+                                        <td><strong>Règlement RT 22, Sécurité &amp; Notions d'Indice ΔT (/3 pts)</strong></td>
+                                        <td>• <strong>1 pt :</strong> Sens obligatoire des pieds en « L » de la haie (vers le départ).<br>• <strong>1 pt :</strong> Différence entre rythme en 3 appuis (même jambe) et 4 appuis (jambe alternée).<br>• <strong>1 pt :</strong> Fautes de disqualification RT 22.6 (jambe à côté sous le plan horizontal, main volontaire).</td>
+                                        <td><strong>/ 3 pts</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>3. Comportement &amp; Rôles Sociaux<br>(5 points)</strong></td>
+                                        <td><strong>Starter, Chronométreur ΔT, Juge d'Intervalle &amp; Sécurité (/5 pts)</strong></td>
+                                        <td>• <strong>2 pts :</strong> Vérification systématique du sens de pose des haies et remise en place après passage.<br>• <strong>2 pts :</strong> Chronométrage précis et calcul de ΔT pour son binôme.<br>• <strong>1 pt :</strong> Échauffement spécifique hurdler et respect des couloirs.</td>
+                                        <td><strong>/ 5 pts</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:right;font-weight:900;">NOTE TOTALE COLLÈGE (1AC / 2AC / 3AC) :</td>
+                                        <td><strong>/ 20 pts</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 3 : GRILLE LYCÉE / BAC OP 2007 (/20) -->
+            <div id="hgrid-lycee" class="sub-tab-panel">
+                <div class="content-card">
+                    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1rem;">
+                        <h3 style="margin:0;">🎓 Grille d'Évaluation Sommative Lycée (TC, 1Bac, 2Bac) — Course de Haies OP 2007 (/20)</h3>
+                        <div class="toolbar-actions">
+                            <button type="button" class="btn-export word" onclick="exportElementToWord('haiesLyceeDoc', 'Grille_Evaluation_Lycee_Bac_Course_Haies_OP2007.doc')">📄 Exporter (.doc)</button>
+                            <button type="button" class="btn-export pdf" onclick="printElementAsPDF('haiesLyceeDoc', 'Grille Évaluation Lycée Course de Haies OP 2007')">🖨️ Imprimer / PDF A4</button>
+                        </div>
+                    </div>
+                    <div id="haiesLyceeDoc">
+                        <div class="pro-table-wrap">
+                            <table class="pro-table">
+                                <thead>
+                                    <tr>
+                                        <th>Domaine (OP 2007)</th>
+                                        <th>Critères d'Évaluation Lycée / Bac</th>
+                                        <th>Barème &amp; Indicateurs de Maîtrise</th>
+                                        <th>Max</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td rowspan="2"><strong>1. Habiletés Motrices<br>(14 points)</strong></td>
+                                        <td><strong>A. Performance Chronométrique sur 60m/80m Haies (/7 pts)</strong></td>
+                                        <td>Note chiffrée sur 7 points selon le barème officiel Lycée (TC, 1Bac, 2Bac) Garçons ($9,00 s = 7/7$ en 2Bac) et Filles ($10,40 s = 7/7$ en 2Bac).</td>
+                                        <td><strong>/ 7 pts</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>B. Indice d'Obstacle ΔT (/4 pts) &amp; Biomécanique 2/3-1/3 (/3 pts) (/7 pts)</strong></td>
+                                        <td>• <strong>Indice $ΔT = T_{{Haies}} - T_{{Plat}}$ (/4 pts) :</strong> $≤ 1,10 s = 4 pts$ ; $1,15 à 1,35 s = 3 pts$ ; $1,40 à 1,70 s = 2 pts$ ; $> 1,70 s = 1 pt$.<br>• <strong>Efficacité technique (/3 pts) :</strong> Approche H1 en 7/8 appuis maîtrisée (1 pt) + Parabole rasante 2/3-1/3 avec reprise active plante de pied (1 pt) + Rythme 3 ou 4 appuis maintenu jusqu'à H4 (1 pt).</td>
+                                        <td><strong>/ 7 pts</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>2. Connaissances Conceptuelles<br>(3 points)</strong></td>
+                                        <td><strong>Règlement World Athletics RT 22 &amp; Biomécanique (/3 pts)</strong></td>
+                                        <td>• <strong>1,5 pt :</strong> Cotes officielles (110mH : 1,067 m / 13,72 m / 9,14 m ; 100mH : 0,84 m / 13,00 m / 8,50 m ; 400mH : 45 m / 35 m / 40 m) et RT 22.6.<br>• <strong>1,5 pt :</strong> Justification de son choix de couloir (3 appuis vs 4 appuis) et analyse de son ΔT.</td>
+                                        <td><strong>/ 3 pts</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>3. Comportement &amp; Rôles d'Officiel<br>(3 points)</strong></td>
+                                        <td><strong>Starter, Commissaire de Haies (Drapeau Blanc/Jaune) &amp; Chronométreur (/3 pts)</strong></td>
+                                        <td>• <strong>1,5 pt :</strong> Officiel Starter / Chronométreur / Commissaire de piste rigoureux.<br>• <strong>1,5 pt :</strong> Respect absolu des consignes de sécurité (sens des haies, retour par les couloirs extérieurs).</td>
+                                        <td><strong>/ 3 pts</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:right;font-weight:900;">NOTE TOTALE LYCÉE (TC / 1BAC / 2BAC) :</td>
+                                        <td><strong>/ 20 pts</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 4 : GRILLE ÉLÈVE DISPENSÉ (/20) -->
+            <div id="hgrid-dispense" class="sub-tab-panel">
+                <div class="content-card">
+                    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1rem;">
+                        <h3 style="margin:0;">⚖️ Grille d'Évaluation pour Élève Dispensé(e) — Chef Sécurité Haies, Chronométreur ΔT &amp; Commissaire RT 22 (/20)</h3>
+                        <div class="toolbar-actions">
+                            <button type="button" class="btn-export word" onclick="exportElementToWord('haiesDispenseDoc', 'Grille_Eleve_Dispense_Course_Haies_EPS.doc')">📄 Exporter (.doc)</button>
+                            <button type="button" class="btn-export pdf" onclick="printElementAsPDF('haiesDispenseDoc', 'Grille Élève Dispensé Course de Haies EPS')">🖨️ Imprimer / PDF A4</button>
+                        </div>
+                    </div>
+                    <div id="haiesDispenseDoc">
+                        <div class="pro-table-wrap">
+                            <table class="pro-table">
+                                <thead>
+                                    <tr>
+                                        <th>Mission confiée à l'élève dispensé(e)</th>
+                                        <th>Compétences Observées sur le Terrain</th>
+                                        <th>Max</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>1. Chef de Sécurité &amp; Contrôle du Sens des Haies (RT 22.2) (/6 pts)</strong></td>
+                                        <td>Vérifie avant chaque série que 100% des haies ont leurs pieds en « L » orientés vers la ligne de DÉPART, contrôle l'alignement sur les marques d'intervalle (6,50 m / 7,00 m / 7,50 m / 8,00 m) et interdit tout franchissement en sens inverse.</td>
+                                        <td><strong>/ 6 pts</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>2. Chronométreur Officiel &amp; Calculateur de l'Indice ΔT (/5 pts)</strong></td>
+                                        <td>Déclenche le chronomètre au signal visuel (fumée/drapeau du starter), relève $T_{{Plat}} et T_{{Haies}}$, calcule l'Indice de Perte ΔT et la perte moyenne par obstacle (ΔT / 4).</td>
+                                        <td><strong>/ 5 pts</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>3. Commissaire de Haies &amp; Observateur du Rythme (/5 pts)</strong></td>
+                                        <td>Compte le nombre d'appuis dans chaque intervalle (3, 4 ou 5 appuis), observe la distance d'attaque devant la haie et signale toute infraction RT 22.6 (jambe d'esquive passant à côté sous le plan horizontal de la barre).</td>
+                                        <td><strong>/ 5 pts</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>4. Assiduité, Tenue &amp; Gestion du Matériel (/4 pts)</strong></td>
+                                        <td>Présence active, aide au transport sécurisé des haies et des décamètres/plots.</td>
+                                        <td><strong>/ 4 pts</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="text-align:right;font-weight:900;">NOTE TOTALE ÉLÈVE DISPENSÉ(E) :</td>
+                                        <td><strong>/ 20 pts</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================
+             VOLET 5 : SÉCURITÉ PIEDS EN « L », 40+ ÉLÈVES & RÈGLEMENT RT 22
+             ================================================================ -->
+        <section id="volet-terrain" class="silo-section">
+            <div class="section-header-bar">
+                <div>
+                    <h2>🏟️ Volet 5 : Sécurité Critique (Pieds en « L »), Organisation de 40+ Élèves en Couloirs Différenciés &amp; Règlement RT 22</h2>
+                    <p class="section-subtitle">Organisation pratique sur piste ou terrain scolaire au Maroc pour faire courir 40 élèves en sécurité maximale.</p>
+                </div>
+            </div>
+
+            <div class="grid-3">
+                <div class="content-card" style="border-top:4px solid #991b1b;">
+                    <h3>🚨 1. Règle d'Or de Sécurité : Le Sens des Haies !</h3>
+                    <p style="font-size:0.88rem;color:#334155;"><strong>Les bases horizontales (pieds en « L ») de la haie doivent TOUJOURS pointer vers la ligne de DÉPART</strong> (face au coureur qui arrive).</p>
+                    <ul style="padding-left:1.15rem;font-size:0.86rem;color:#334155;">
+                        <li>Si l'élève touche la barre, la haie bascule librement vers l'avant.</li>
+                        <li><strong>Interdiction absolue de franchir une haie à l'envers</strong> (en revenant vers le départ) : la haie est alors bloquée par ses pieds et provoque une chute grave vers l'avant !</li>
+                        <li>Retour obligatoire en marchant par les <strong>couloirs extérieurs de retour</strong>.</li>
+                    </ul>
+                </div>
+
+                <div class="content-card" style="border-top:4px solid #c2410c;">
+                    <h3>🛤️ 2. Les 4 Couloirs à Intervalles Différenciés (40+ Élèves)</h3>
+                    <p style="font-size:0.88rem;color:#334155;">Dans une classe hétérogène de 36 à 42 élèves, un intervalle unique met en échec les plus petits et bloque les plus grands :</p>
+                    <ul style="padding-left:1.15rem;font-size:0.86rem;color:#334155;">
+                        <li><strong>Couloir 1 (Intervalle 6,50 m · H=50 cm) :</strong> Rythme 3 appuis (petits gabarits) ou 4 appuis courts.</li>
+                        <li><strong>Couloir 2 (Intervalle 7,00 m · H=60 cm) :</strong> Rythme 3 appuis (moyens) ou 4 appuis.</li>
+                        <li><strong>Couloir 3 (Intervalle 7,50 m · H=65–76 cm) :</strong> Rythme 3 appuis (grands) ou 4 appuis rapides.</li>
+                        <li><strong>Couloir 4 (Intervalle 8,00 m · H=76–84 cm) :</strong> Rythme 3 appuis amples ou 4 appuis.</li>
+                        <li><strong>Couloir 5 (Couloir Plat témoin) :</strong> Permet de chronométrer $T_{{Plat}} en parallèle pour calculer ΔT$.</li>
+                    </ul>
+                </div>
+
+                <div class="content-card" style="border-top:4px solid #006233;">
+                    <h3>🔥 3. Échauffement Spécifique Hurdler (12 min)</h3>
+                    <ol style="padding-left:1.15rem;font-size:0.86rem;color:#334155;">
+                        <li><strong>Activation cardio &amp; Gammes (4 min) :</strong> Montées de genoux hautes (jambe d'attaque), talons-fesses, griffés du sol jambes tendues.</li>
+                        <li><strong>Mobilité coxo-fémorale sur le côté des haies (5 min) :</strong> Passage marché puis trotté de la <strong>jambe d'attaque</strong> à droite des haies, puis de la <strong>jambe d'esquive</strong> (genou ouvert à l'horizontale) à gauche des haies.</li>
+                        <li><strong>2 Accélérations sur 1 haie (3 min) :</strong> Réglage des 7 ou 8 appuis jusqu'à H1.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================
+             VOLET 6 : BIBLIOTHÈQUE DES ARTICLES HAIES & SPRINT LIÉS
+             ================================================================ -->
+        <section id="volet-articles" class="silo-section">
+            <div class="section-header-bar">
+                <div>
+                    <h2>📚 Volet 6 : Bibliothèque Complète des Articles &amp; Règlements Courses de Haies, Steeple &amp; Sprint</h2>
+                    <p class="section-subtitle">Approfondissez la réglementation World Athletics (RT 22 &amp; RT 23) et les outils de sprint sur ProfEPS Maroc.</p>
+                </div>
+            </div>
+
+            <div class="grid-3">
+                <article class="content-card">
+                    <div style="font-size:0.75rem;font-weight:800;color:#c2410c;text-transform:uppercase;margin-bottom:0.35rem;">Règlement Officiel RT 22</div>
+                    <h3 style="font-size:1.02rem;margin-bottom:0.5rem;"><a href="reglement-course-haies-100m-110m-400m-athletisme-eps.html" style="color:#0f172a;text-decoration:none;">🚧 Règlement Officiel des Courses de Haies (100m, 110m, 400m Haies — RT 22)</a></h3>
+                    <p style="font-size:0.85rem;color:#475569;">Tableau complet des 10 haies (hauteurs et distances exactes), règle des haies renversées (RT 22.6), fautes de disqualification et gestes des juges.</p>
+                    <a href="reglement-course-haies-100m-110m-400m-athletisme-eps.html" style="font-size:0.84rem;font-weight:800;color:#c2410c;text-decoration:none;">Lire le règlement RT 22 →</a>
+                </article>
+
+                <article class="content-card">
+                    <div style="font-size:0.75rem;font-weight:800;color:#991b1b;text-transform:uppercase;margin-bottom:0.35rem;">Silo Sprint &amp; Relais</div>
+                    <h3 style="font-size:1.02rem;margin-bottom:0.5rem;"><a href="aps-course-vitesse-relais-eps-maroc.html" style="color:#0f172a;text-decoration:none;">🏃 Silo Complet Course de Vitesse &amp; Relais (Indice d'Efficacité de Transmission)</a></h3>
+                    <p style="font-size:0.85rem;color:#475569;">Cycles 1AC-2Bac, calculateur d'indice de relais, zone de transmission 30m (RT 24) et barèmes vitesse.</p>
+                    <a href="aps-course-vitesse-relais-eps-maroc.html" style="font-size:0.84rem;font-weight:800;color:#991b1b;text-decoration:none;">Ouvrir le Silo Vitesse &amp; Relais →</a>
+                </article>
+
+                <article class="content-card">
+                    <div style="font-size:0.75rem;font-weight:800;color:#006233;text-transform:uppercase;margin-bottom:0.35rem;">Règlement Steeple RT 23</div>
+                    <h3 style="font-size:1.02rem;margin-bottom:0.5rem;"><a href="reglement-course-steeple-3000m-2000m-athletisme-eps.html" style="color:#0f172a;text-decoration:none;">🌊 Règlement 3000m &amp; 2000m Steeple (28 Barrières + 7 Rivières — RT 23)</a></h3>
+                    <p style="font-size:0.85rem;color:#475569;">Cotes officielles des barrières fixes de steeple, fosse de rivière (3,66 m) et règlement de franchissement.</p>
+                    <a href="reglement-course-steeple-3000m-2000m-athletisme-eps.html" style="font-size:0.84rem;font-weight:800;color:#006233;text-decoration:none;">Lire le règlement Steeple →</a>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================================================================
+         SCRIPT INTERACTIF : STUDIO 24 CYCLES COURSE DE HAIES + CALCULATEUR ΔT + EXPORT WORD/PDF
+         ================================================================ -->
+    <script>
+    (function() {{
+      const GRADE_META = {{
+        "1AC": {{
+          label: "1ère Année Collège (1AC · 50m Haies — 4 Haies de 50 cm)",
+          ref: "Orientations Pédagogiques 2009 (Note 143-09)",
+          oti: "L'élève de la 1ère année doit pouvoir acquérir une motricité correcte lui permettant de s'adapter aux exigences des situations (forme et rythme) et s'intégrer dans le groupe.",
+          otc: "Au terme du cycle de Course de Haies en 1AC, l'élève doit pouvoir franchir 4 haies basses sur 50m sans s'arrêter ni piétiner devant l'obstacle, en conservant un rythme régulier (4 ou 5 appuis) et en respectant les règles de sécurité (sens des haies).",
+          bareme: "Habiletés motrices : 12 pts (Perf 6 + ΔT/Technique 6) | Connaissances : 3 pts | Comportement : 5 pts (/20)"
+        }},
+        "2AC": {{
+          label: "2ème Année Collège (2AC · 50m/60m Haies — 4 Haies de 50–60 cm)",
+          ref: "Orientations Pédagogiques 2009 (Note 143-09)",
+          oti: "L'élève de la 2ème année doit pouvoir ajuster l'énergie physique et la maîtriser et fournir l'effort et l'orienter pour effectuer des réalisations coordonnées et organisées, et communiquer avec les autres.",
+          otc: "Au terme du cycle de Course de Haies en 2AC, l'élève doit pouvoir attaquer la 1ère haie en 7 ou 8 appuis sans ralentir et stabiliser un rythme constant de 3 ou 4 appuis entre les 4 haies dans un couloir adapté à son gabarit.",
+          bareme: "Habiletés motrices : 12 pts (Perf 6 + ΔT/Technique 6) | Connaissances : 3 pts | Comportement : 5 pts (/20)"
+        }},
+        "3AC": {{
+          label: "3ème Annège Collège (3AC · 60m Haies — 4 Haies de 60–65 cm)",
+          ref: "Orientations Pédagogiques 2009 (Note 143-09)",
+          oti: "L'élève de la 3ème année doit pouvoir ajuster les éléments de l'acte moteur et l'adapter aux différentes situations en fonction de ses exigences organisationnelles et réglementaires, et s'exercer sur la pratique des droits et devoirs pour réaliser un projet sportif individuel ou collectif.",
+          otc: "Au terme du cycle de Course de Haies en 3AC, l'élève doit pouvoir transformer un saut en cloche en un franchissement rasant (attaque genou haut 2/3 avant la haie, esquive horizontale et reprise active 1/3 après) pour réduire son indice de perte ΔT sous 1,40 s.",
+          bareme: "Habiletés motrices : 12 pts (Perf 6 + ΔT/Technique 6) | Connaissances : 3 pts | Comportement : 5 pts (/20)"
+        }},
+        "TC": {{
+          label: "Tronc Commun (TC · 60m Haies — 4 Haies de 65–76 cm)",
+          ref: "Orientations Pédagogiques 2007 (Note 142-10)",
+          oti: "L'élève du Tronc Commun doit pouvoir maîtriser les composantes du comportement moteur et pouvoir s'adapter aux différentes situations et faire face à ses défis et accepter l'intégration dans le groupe.",
+          otc: "Réaliser une course de 60m Haies (4 obstacles) au rythme constant de 3 ou 4 appuis inter-obstacles avec une trajectoire rasante du centre de gravité et une relance terminale dynamique jusqu'à la ligne d'arrivée.",
+          bareme: "Habiletés motrices : 14 pts (Perf 7 + ΔT/Technique 7) | Connaissances : 3 pts | Comportement : 3 pts (/20)"
+        }},
+        "1BAC": {{
+          label: "1ère Année Baccalauréat (1Bac · 60m/80m Haies — 4 à 5 Haies)",
+          ref: "Orientations Pédagogiques 2007 (Note 142-10)",
+          oti: "L'élève de la 1ère année Bac doit pouvoir confronter les situations motrices grâce à l'adéquation des différents éléments de l'acte moteur et la planification de différents types d'effort physique individuel ou collectif.",
+          otc: "Optimiser la liaison Approche H1 – Franchissement rasant (2/3-1/3) – Course inter-obstacles en 3 ou 4 appuis pour abaisser son Indice d'Obstacle (ΔT ≤ 1,25 s) tout en assurant les rôles de starter, chronométreur et commissaire RT 22.",
+          bareme: "Habiletés motrices : 14 pts (Perf 7 + ΔT/Technique 7) | Connaissances : 3 pts | Comportement : 3 pts (/20)"
+        }},
+        "2BAC": {{
+          label: "2ème Année Baccalauréat (2Bac · 60m/80m Haies Bac — H=76/84cm G · 65/76cm F)",
+          ref: "Orientations Pédagogiques 2007 (Note 142-10)",
+          oti: "L'élève de la 2ème année Bac doit pouvoir analyser différentes situations et interactions motrices et s'intégrer volontairement dans la planification et la réalisation de projets individuels et collectifs.",
+          otc: "Concevoir et réaliser un projet individuel de performance sur 60m/80m Haies en choisissant son couloir optimal (3 appuis jambe préférentielle ou 4 appuis ambidextres) et en minimisant sa perte de vitesse (ΔT ≤ 1,15 s) conformément à la RT 22 World Athletics.",
+          bareme: "Habiletés motrices : 14 pts (Perf 7 + ΔT/Technique 7) | Connaissances : 3 pts | Comportement : 3 pts (/20)"
+        }}
+      }};
+
+      const LEVEL_PROFILES = {{
+        1: {{
+          name: "Niveau 1 · Débutant (Piétinement d'appel & Saut en cloche)",
+          diag: "L'élève a peur de l'obstacle : il ralentit en faisant de tout petits pas devant chaque haie, saute très haut pieds joints ou jambe tendue et s'arrête à la réception (ΔT > 2,20 s).",
+          trans: "Oser courir sans ralentir par-dessus des obstacles bas/souples, attaquer loin devant la haie avec le genou monté dans l'axe et conserver un rythme régulier de 4 ou 5 appuis dans l'intervalle.",
+          diff: "Haies basses (40–50 cm) ou lattes souples sur cônes, zone d'attaque tracée à la craie à 1,60m devant la haie, couloir court (6,50m)."
+        }},
+        2: {{
+          name: "Niveau 2 · Initié (Franchissement continu mais réception écrasée)",
+          diag: "L'élève franchit les 4 haies sans s'arrêter mais saute encore trop haut (buste droit) et s'écrase sur le talon à la réception, ce qui lui fait perdre son rythme au 3ème intervalle (ΔT ≈ 1,60–1,90 s).",
+          trans: "Engager fortement le buste vers le genou d'attaque à l'impulsion, rabattre activement la jambe d'attaque sur l'avant-pied derrière la haie et stabiliser 4 appuis (ou 3 appuis) sur les 3 intervalles.",
+          diff: "Marque d'appel à 1,80m devant la haie + latte posée au sol à 1,20m derrière la haie pour imposer une reprise courte et active."
+        }},
+        3: {{
+          name: "Niveau 3 · Confirmé (Parabole 2/3-1/3 & Rythme 3 ou 4 Appuis)",
+          diag: "L'élève maîtrise le rythme en 3 ou 4 appuis mais sa jambe d'esquive traîne bas ou provoque une rotation des épaules qui dégrade sa vitesse inter-obstacles (ΔT ≈ 1,25–1,50 s).",
+          trans: "Tirer vite le genou de la jambe d'esquive fléchi à l'horizontale sous l'aisselle, équilibrer avec le bras opposé dans l'axe et accélérer dans les intervalles.",
+          diff: "Couloirs de 7,50m à 8,00m, travail de départ en 7 ou 8 appuis jusqu'à H1 et chronométrage comparatif systématique ΔT."
+        }},
+        4: {{
+          name: "Niveau 4 · Expert / AS (Sprint rasant en 3 Appuis · ΔT ≤ 1,10 s)",
+          diag: "L'élève franchit de manière rasante en 3 appuis mais peut encore gagner en fréquence inter-obstacles et sur le sprint terminal de H4 à l'arrivée.",
+          trans: "Réaliser un départ explosif en starting-blocks (8 appuis vers H1), maintenir une fréquence maximale en 3 appuis avec griffé actif et plonger sur la ligne d'arrivée (cible ΔT ≤ 1,05 s).",
+          diff: "Hauteurs réglementaires UNSS/ASS (76 cm F / 84 cm G), confrontation directe par séries de niveau au signal officiel du starter."
+        }}
+      }};
+
+      const SESSIONS = [
+        {{
+          num: 1,
+          short: "Évaluation Diagnostique Comparée : 50m/60m Plat vs 50m/60m Haies (Calcul de ΔT)",
+          obj: "Mesurer le temps de référence sur plat (T_Plat) et le temps sur 4 haies (T_Haies), calculer l'Indice de Perte initial (ΔT = T_Haies - T_Plat) et constituer les 4 groupes de niveau par couloir.",
+          echauff: "Footing 4 min, mobilisations articulaires (hanches, genoux, chevilles), gammes athlétiques (montées de genoux, talons-fesses) et 2 accélérations sur plat (12 min).",
+          fond: "Passage 1 : Chronométrage par binôme sur 50m ou 60m Plat (couloir témoin sans obstacle). Passage 2 : Chronométrage sur 50m ou 60m Haies (4 haies basses sécurisées, pieds en L vers le départ). L'observateur relève le nombre d'appuis dans les 3 intervalles et calcule ΔT = T_Haies - T_Plat.",
+          critComp: "Courir à vitesse maximale du départ jusqu'à la ligne d'arrivée sans contourner les haies et vérifier le sens des pieds en L avant le départ.",
+          critReuss: "Obtenir ses deux chronos de référence (T_Plat et T_Haies), son ΔT initial et choisir son couloir de travail (6,5m / 7m / 7,5m / 8m).",
+          retour: "Regroupement, explication de l'Indice d'Obstacle ΔT et rappel impératif de l'interdiction de sauter une haie à l'envers."
+        }},
+        {{
+          num: 2,
+          short: "Sécurité RT 22 & Choix du Couloir d'Intervalle Optimal (Franchir sans Piétiner)",
+          obj: "Supprimer tout piétinement de freinage devant l'obstacle en trouvant le couloir d'intervalle adapté à sa foulée (6,50m, 7,00m, 7,50m ou 8,00m).",
+          echauff: "Échauffement spécifique hurdler : gammes + passages latéraux marchés et trottés de la jambe d'attaque et de la jambe d'esquive (12 min).",
+          fond: "Dispositif des 4 couloirs à intervalles différenciés (C1 = 6,50m ; C2 = 7,00m ; C3 = 7,50m ; C4 = 8,00m). Chaque élève réalise 4 passages en testant deux couloirs voisins pour identifier celui où il franchit les 4 haies sans aucun petit pas d'ajustement avec un nombre fixe d'appuis (3, 4 ou 5).",
+          critComp: "Garder le regard fixé vers l'horizon (et non sur ses pieds), conserver une foulée ample et continue entre les haies.",
+          critReuss: "Réaliser 2 passages consécutifs dans son couloir choisi avec le même nombre d'appuis dans les 3 intervalles (0 piétinement).",
+          retour: "Étirements ischio-jambiers et psoas ; enregistrement du couloir de référence de chaque élève."
+        }},
+        {{
+          num: 3,
+          short: "L'Approche de la 1ère Haie (H1) : Étalonner ses 7 ou 8 Appuis depuis le Départ",
+          obj: "Stabiliser la course d'approche du départ jusqu'à la 1ère haie (11,50m à 13,00m) en 7 ou 8 appuis pour arriver plein gaz sur sa jambe d'appel préférentielle.",
+          echauff: "Activation cardio, gammes dynamiques et 3 départs commandés (« À vos marques… Prêts… Top ! ») sur 15m plat (12 min).",
+          fond: "Atelier « Zéro Hésitation sur H1 » : 2 haies placées à H1 et H2. L'élève choisit sa jambe d'attaque de H1 et place le bon pied devant sur la ligne de départ (en 8 appuis : pied d'appel devant ; en 7 appuis : pied d'appel derrière). Une zone d'impulsion est tracée à la craie entre 1,70m et 2,00m devant H1.",
+          critComp: "Pousser fort sur les 4 premiers appuis puis se redresser aux appuis 5–6–7 pour attaquer H1 le bassin haut dans la zone tracée.",
+          critReuss: "Prendre appel dans la zone tracée devant H1 sur la bonne jambe lors de 4 départs sur 5 à vitesse maximale.",
+          retour: "Retour au calme et mémorisation individuelle de son pied avant au départ."
+        }},
+        {{
+          num: 4,
+          short: "L'Action de la Jambe d'Attaque & l'Engagement du Buste (Parabole 2/3 avant)",
+          obj: "Attaquer la haie de loin (≈ 1,80m à 2,10m) en montant le genou de la jambe d'attaque fléchi dans l'axe et en plongeant le buste vers l'avant pour aplatir la trajectoire.",
+          echauff: "Gammes de montées de genoux hautes + éducatif « Fouetté du genou d'attaque contre un mur / sur le côté des haies » (12 min).",
+          fond: "Situation « Courir à travers la fenêtre » : une zone d'appel obligatoire (tapis fin ou craie) est tracée à 1,80m–2,00m devant chaque haie. L'élève doit impulser avant la ligne, monter le genou d'attaque haut dans l'axe (pied armé) et incliner le buste (« mettre le nez sur le genou ») en projetant le bras opposé devant.",
+          critComp: "Ne jamais lancer la jambe tendue depuis le sol ; monter d'abord le genou fléchi puis déplier la jambe au-dessus de la barre.",
+          critReuss: "Valider au moins 3 franchissements rasants sur 4 par passage sans sauter en cloche.",
+          retour: "Étirements de la chaîne postérieure et explication de la règle biomécanique 2/3 avant — 1/3 après."
+        }},
+        {{
+          num: 5,
+          short: "La Jambe d'Esquive (Retour Latéral Horizontal) & l'Équilibre des Épaules",
+          obj: "Effacer rapidement la jambe d'appui (jambe d'esquive) fléchie à l'horizontale au-dessus de la haie et la ramener haut dans l'axe sans vriller les épaules.",
+          echauff: "Mobilité des hanches (ouvertures latérales « haies imaginaires ») et passages de la seule jambe d'esquive sur le côté des haies (12 min).",
+          fond: "Atelier « Genou sous l'aisselle » : sur 4 haies espacées à l'intervalle choisi, un petit plot souple est posé sur l'extrémité de la haie côté jambe d'esquive pour obliger l'élève à lever le genou d'esquive à l'horizontale (genou plus haut que la cheville, orteils relevés) et à le ramener loin devant pour la 1ère foulée de reprise.",
+          critComp: "Garder les épaules face à l'arrivée (bras opposé devant le menton) et tirer le genou d'esquive vers l'avant-haut (et non vers le bas).",
+          critReuss: "Franchir les 4 haies sans accrocher avec la cheville arrière ni passer la jambe à côté sous le plan de la haie (RT 22.6).",
+          retour: "Assouplissement des adducteurs et rappel de la faute de disqualification RT 22.6 (drapeau jaune)."
+        }},
+        {{
+          num: 6,
+          short: "La Reprise Active derrière la Haie (1/3 après) : Griffé Plante de Pied & Relance",
+          obj: "Supprimer l'écrasement à la réception en rabattant vite la jambe d'attaque vers le sol sur l'avant-pied pour conserver toute la vitesse horizontale.",
+          echauff: "Bondissements jambes tendues (griffés de cheville) et passages rapides sur lattes basses (12 min).",
+          fond: "Situation « Le Sol Brûlant derrière la Haie » : une latte plate est posée au sol à 1,25m derrière chaque haie. Le pied de la jambe d'attaque doit reprendre contact AVANT la latte (à ≈ 0,90m–1,05m de la haie) sur la plante de pied (talon haut) et la foulée suivante (jambe d'esquive) doit franchir largement la latte.",
+          critComp: "Fouetter le sol vers l'arrière sous le bassin avec la jambe d'attaque gainée, bassin très haut.",
+          critReuss: "Poser le pied de réception dans la zone 1/3 sur les 4 haies sans que le talon ne s'affaisse au sol.",
+          retour: "Étirements mollets/tendons d'Achille et comparaison du bruit d'impact (silencieux = dynamique vs lourd = écrasé)."
+        }},
+        {{
+          num: 7,
+          short: "Maîtrise du Rythme en 3 Appuis (Même Jambe) vs 4 Appuis (Jambe Alternée G/D)",
+          obj: "Consolider sa structure rythmique optimale entre les haies : soit 3 appuis rapides (attaque jambe unique), soit 4 appuis fluides (attaque alternée Droite / Gauche).",
+          echauff: "Courses rythmées sur lattes au sol en 3 appuis (« Ta-Ta-Ta-Haie ») et en 4 appuis (« 1-2-3-4-Haie ») (12 min).",
+          fond: "Deux ateliers au choix de projet : Groupe A (Projet 3 appuis) travaille l'amplitude et la fréquence sur 4 haies pour conserver toujours sa jambe forte d'attaque. Groupe B (Projet 4 appuis) travaille l'ambidextrie (attaque jambe Droite sur H1 et H3, jambe Gauche sur H2 et H4) sans ralentir sur sa jambe faible.",
+          critComp: "Annoncer son contrat rythmique (3 appuis ou 4 appuis) avant le départ et le maintenir jusqu'à la 4ème haie.",
+          critReuss: "Réussir 3 courses complètes sur 4 en respectant exactement le contrat d'appuis annoncé.",
+          retour: "Analyse comparative des chronos et choix définitif du contrat rythmique pour l'évaluation."
+        }},
+        {{
+          num: 8,
+          short: "Sprint Terminal (H4 → Arrivée) & Optimisation de l'Indice de Perte ΔT",
+          obj: "Relancer à vitesse maximale dès la réception de la dernière haie jusqu'à la ligne d'arrivée (cassé du buste) et abaisser son Indice ΔT sous 1,30 s.",
+          echauff: "Échauffement complet autonome + 2 passages sur 2 haies à vitesse maximale (12 min).",
+          fond: "Chronométrage croisé « Objectif ΔT ≤ 1,25 s » : chaque élève réalise 1 sprint témoin sur plat (T_Plat) puis 2 courses sur 4 haies (T_Haies) avec chronométrage intermédiaire du dernier tronçon (H4 → Arrivée). L'élève doit sprinter à travers la ligne d'arrivée sans relâcher son effort après la 4ème haie.",
+          critComp: "Se pencher en sprint dès le 1er appui après H4 et casser le buste sur la ligne blanche d'arrivée.",
+          critReuss: "Améliorer son Indice de Perte ΔT d'au moins 0,30 seconde par rapport à la séance diagnostique S1.",
+          retour: "Saisie des résultats dans le calculateur ΔT et bilan individuel."
+        }},
+        {{
+          num: 9,
+          short: "Meeting Pré-Sommatif en Séries Homogènes & Rôles d'Officiels RT 22",
+          obj: "Répéter en conditions officielles de compétition (séries de 4 coureurs de niveau proche, starter, chronométreurs ΔT et commissaires de haies) son projet de course.",
+          echauff: "Échauffement autonome dirigé par les chefs de série (12 min).",
+          fond: "Courses en confrontation directe par séries de niveau sur les 4 couloirs différenciés. Rotation des rôles officiels : 1 Starter (commandements RT 16), 4 Chronométreurs (1 par couloir), 2 Commissaires de haies (drapeau blanc = course régulière / drapeau jaune = faute RT 22.6 ou rupture de contrat d'appuis).",
+          critComp: "Maintenir sa propre structure rythmique (3 ou 4 appuis) sans se laisser désorganiser par le rythme du coureur voisin.",
+          critReuss: "Valider 2 courses officielles sans faute RT 22.6 et remplir sa mission de juge/chronométreur.",
+          retour: "Validation des séries définitives pour l'évaluation sommative de la séance 10."
+        }},
+        {{
+          num: 10,
+          short: "Évaluation Sommative Officielle Course de Haies (/20 — OP 2009 / OP 2007)",
+          obj: "Évaluer sur 50m/60m/80m Haies la performance chronométrique, l'Indice de Perte ΔT et l'efficacité technique de franchissement, les connaissances RT 22 et les rôles d'officiel (/20).",
+          echauff: "Échauffement autonome structuré (gammes, mobilité sur haies, 2 départs sur H1) (12 min).",
+          fond: "Épreuve sommative officielle : 1 passage chronométré sur Plat (T_Plat) + 2 essais officiels sur 4 Haies (le meilleur T_Haies et le meilleur ΔT sont retenus). Notation sur 20 points conforme aux OP 2009 (Collège : 12+3+5) ou OP 2007 (Lycée : 14+3+3).",
+          critComp: "Respecter le règlement RT 22, la sécurité (retour par l'extérieur) et assurer sa fonction au sein du jury.",
+          critReuss: "Atteindre l'Objectif Terminal du Cycle (OTC) de son niveau scolaire.",
+          retour: "Communication des notes et bilan final du cycle de Course de Haies."
+        }}
+      ];
+
+      let currentGrade = "1AC";
+      let currentLevel = 1;
+      let currentSessionIdx = 0;
+
+      function buildSidebarList() {{
+        const listEl = document.getElementById("haiesSessionList");
+        if (!listEl) return;
+        listEl.innerHTML = SESSIONS.map((s, idx) => `
+          <button type="button" class="session-item-btn ${{idx === currentSessionIdx ? 'active' : ''}}" onclick="selectHaiesSession(${{idx}})">
+            <span class="session-num">Séance ${{s.num}} / 10</span>
+            <span class="session-title-short">${{s.short}}</span>
+          </button>
+        `).join("");
+      }}
+
+      function buildSingleSessionHTML(s, gMeta, lvl, prof, etab, eff, duree) {{
+        return `
+          <table class="a4-header-table">
+            <tr>
+              <th colspan="4" style="text-align:center;font-size:0.92rem;">ROYAUME DU MAROC · MINISTÈRE DE L'ÉDUCATION NATIONALE, DU PRÉSCOLAIRE ET DES SPORTS<br>FICHE DE PRÉPARATION DE SÉANCE D'ÉDUCATION PHYSIQUE ET SPORTIVE — COURSE DE HAIES</th>
+            </tr>
+            <tr>
+              <td><strong>APS :</strong> Course de Haies (RT 22)</td>
+              <td><strong>Niveau Scolaire :</strong> ${{gMeta.label}}</td>
+              <td><strong>Enseignant(e) :</strong> ${{prof}}</td>
+              <td><strong>Séance :</strong> N° ${{s.num}} / 10</td>
+            </tr>
+            <tr>
+              <td><strong>Référentiel :</strong> ${{gMeta.ref}}</td>
+              <td><strong>Profil de Classe :</strong> ${{lvl.name}}</td>
+              <td><strong>Établissement :</strong> ${{etab}}</td>
+              <td><strong>Durée / Effectif :</strong> ${{duree}} · ${{eff}}</td>
+            </tr>
+            <tr>
+              <td colspan="4"><strong>OTI (${{currentGrade}}) :</strong> ${{gMeta.oti}}</td>
+            </tr>
+            <tr>
+              <td colspan="4"><strong>OTC (Course de Haies — ${{currentGrade}}) :</strong> ${{gMeta.otc}}</td>
+            </tr>
+            <tr>
+              <td colspan="4" style="background:#fff7ed;"><strong>Objectif de la Séance N°${{s.num}} (${{s.short}}) :</strong> ${{s.obj}}</td>
+            </tr>
+          </table>
+
+          <table class="a4-body-table">
+            <thead>
+              <tr>
+                <th style="width:14%;">Phase &amp; Durée</th>
+                <th style="width:36%;">Contenu &amp; Situations d'Apprentissage (${{lvl.name}})</th>
+                <th style="width:26%;">Critères de Réalisation (Comment faire ?)</th>
+                <th style="width:24%;">Critères de Réussite &amp; Différenciation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="a4-phase-badge">1. Partie Introductive</span><br><strong>10 à 12 min</strong></td>
+                <td><strong>Prise en main &amp; Échauffement Spécifique Hurdler :</strong><br>${{s.echauff}}<br><em>Diagnostic du groupe :</em> ${{lvl.diag}}</td>
+                <td>• Vérifier que les pieds en « L » de toutes les haies pointent vers la ligne de DÉPART.<br>• Mobiliser activement les hanches (abduction jambe d'esquive) et les chevilles.</td>
+                <td>• 100% des élèves engagés en sécurité.<br>• Articulations coxo-fémorales et ischio-jambiers prêts à l'effort explosif.</td>
+              </tr>
+              <tr>
+                <td><span class="a4-phase-badge">2. Partie Fondamentale</span><br><strong>35 à 38 min</strong></td>
+                <td><strong>Situation Fondamentale &amp; But de la Tâche :</strong><br>${{s.fond}}<br><br><strong>Transformation visée (${{lvl.name}}) :</strong> ${{lvl.trans}}</td>
+                <td>• ${{s.critComp}}<br>• Assurer les rôles d'officiel (Starter, Chronométreur ΔT = T_Haies − T_Plat, Commissaire RT 22).<br>• Revenir obligatoirement par les couloirs extérieurs.</td>
+                <td><strong>Critère de réussite :</strong><br>• ${{s.critReuss}}<br><br><strong>Variable de différenciation :</strong><br>• ${{lvl.diff}}</td>
+              </tr>
+              <tr>
+                <td><span class="a4-phase-badge">3. Partie Finale</span><br><strong>5 à 7 min</strong></td>
+                <td><strong>Retour au calme, Bilan &amp; Rangement :</strong><br>${{s.retour}}</td>
+                <td>• Étirements passifs légers (ischio-jambiers, adducteurs, psoas, mollets).<br>• Verbalisation des repères 2/3 avant — 1/3 après et du rythme 3 ou 4 appuis.</td>
+                <td>• Rangement sécurisé des haies et plots.<br>• Bilan des Indices ΔT de la séance.</td>
+              </tr>
+            </tbody>
+          </table>
+        `;
+      }}
+
+      window.renderHaiesSheet = function() {{
+        const gMeta = GRADE_META[currentGrade];
+        const lvl = LEVEL_PROFILES[currentLevel];
+        const s = SESSIONS[currentSessionIdx];
+        const prof = document.getElementById("haiesProfInput").value || "Prof. EPS";
+        const etab = document.getElementById("haiesEtabInput").value || "Établissement Maroc";
+        const eff = document.getElementById("haiesEffectifInput").value || "38 élèves";
+        const duree = document.getElementById("haiesDureeInput").value || "55 min";
+
+        document.getElementById("haiesCurrentBadge").textContent =
+          `Aperçu Pro A4 — Course de Haies · ${{currentGrade}} · Niveau ${{currentLevel}} · Séance ${{s.num}}/10 : ${{s.short}}`;
+
+        document.getElementById("haiesA4Container").innerHTML =
+          buildSingleSessionHTML(s, gMeta, lvl, prof, etab, eff, duree);
+      }};
+
+      window.selectHaiesGrade = function(grade) {{
+        currentGrade = grade;
+        document.querySelectorAll(".grade-tab").forEach(btn => {{
+          btn.classList.toggle("active", btn.getAttribute("data-grade") === grade);
+        }});
+        renderHaiesSheet();
+      }};
+
+      window.selectHaiesLevel = function(level) {{
+        currentLevel = level;
+        document.querySelectorAll(".practice-btn").forEach(btn => {{
+          btn.classList.toggle("active", parseInt(btn.getAttribute("data-level"), 10) === level);
+        }});
+        renderHaiesSheet();
+      }};
+
+      window.selectHaiesSession = function(idx) {{
+        currentSessionIdx = idx;
+        buildSidebarList();
+        renderHaiesSheet();
+      }};
+
+      function wrapWordDocument(htmlBody, title) {{
+        return `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+        <head><meta charset="utf-8"><title>${{title}}</title>
+        <style>
+          body {{ font-family: Arial, sans-serif; font-size: 10.5pt; color: #0f172a; }}
+          table {{ width: 100%; border-collapse: collapse; margin-bottom: 14px; }}
+          th, td {{ border: 1px solid #334155; padding: 6px 8px; vertical-align: top; text-align: left; font-size: 10pt; }}
+          th {{ background: #f1f5f9; font-weight: bold; }}
+          h1, h2, h3 {{ color: #0f172a; }}
+          .page-break {{ page-break-after: always; }}
+        </style>
+        </head><body>${{htmlBody}}</body></html>`;
+      }}
+
+      function triggerDocDownload(content, filename) {{
+        const blob = new Blob(['\\ufeff', content], {{ type: 'application/msword;charset=utf-8' }});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }}
+
+      window.exportHaiesCurrentWord = function() {{
+        const s = SESSIONS[currentSessionIdx];
+        const html = document.getElementById("haiesA4Container").innerHTML;
+        const filename = `Fiche_Course_Haies_${{currentGrade}}_Niveau${{currentLevel}}_Seance${{s.num}}.doc`;
+        triggerDocDownload(wrapWordDocument(html, filename), filename);
+      }};
+
+      window.exportHaiesCurrentPDF = function() {{
+        const s = SESSIONS[currentSessionIdx];
+        const html = document.getElementById("haiesA4Container").innerHTML;
+        printHTMLWindow(html, `Fiche Course de Haies ${{currentGrade}} - Niveau ${{currentLevel}} - Séance ${{s.num}}`);
+      }};
+
+      function buildFullCycleHTML() {{
+        const gMeta = GRADE_META[currentGrade];
+        const lvl = LEVEL_PROFILES[currentLevel];
+        const prof = document.getElementById("haiesProfInput").value || "Prof. EPS";
+        const etab = document.getElementById("haiesEtabInput").value || "Établissement Maroc";
+        const eff = document.getElementById("haiesEffectifInput").value || "38 élèves";
+        const duree = document.getElementById("haiesDureeInput").value || "55 min";
+
+        const cycleOverviewRows = SESSIONS.map(s => `
+          <tr>
+            <td><strong>Séance ${{s.num}}</strong></td>
+            <td><strong>${{s.short}}</strong></td>
+            <td>${{s.obj}}</td>
+            <td>${{s.critReuss}}</td>
+          </tr>
+        `).join("");
+
+        const overviewTable = `
+          <h2 style="margin:0 0 8px;">PROJET PRÉVISIONNEL DU CYCLE DE COURSE DE HAIES (10 SÉANCES) — ${{gMeta.label}} (${{lvl.name}})</h2>
+          <p style="margin:0 0 6px;"><strong>Référentiel :</strong> ${{gMeta.ref}} | <strong>Barème :</strong> ${{gMeta.bareme}}</p>
+          <p style="margin:0 0 6px;"><strong>OTI :</strong> ${{gMeta.oti}}</p>
+          <p style="margin:0 0 12px;"><strong>OTC :</strong> ${{gMeta.otc}}</p>
+          <table class="a4-body-table">
+            <thead>
+              <tr><th>Séance</th><th>Thème Didactique</th><th>Objectif de Séance</th><th>Critère de Réussite</th></tr>
+            </thead>
+            <tbody>${{cycleOverviewRows}}</tbody>
+          </table>
+          <div class="page-break"></div>
+        `;
+
+        const allSheets = SESSIONS.map((s, idx) =>
+          buildSingleSessionHTML(s, gMeta, lvl, prof, etab, eff, duree) +
+          (idx < SESSIONS.length - 1 ? '<div class="page-break"></div>' : '')
+        ).join("");
+
+        return overviewTable + allSheets;
+      }}
+
+      window.exportHaiesFullCycleWord = function() {{
+        const html = buildFullCycleHTML();
+        const filename = `Cycle_Complet_10_Seances_Course_Haies_${{currentGrade}}_Niveau${{currentLevel}}.doc`;
+        triggerDocDownload(wrapWordDocument(html, filename), filename);
+      }};
+
+      window.exportHaiesFullCyclePDF = function() {{
+        const html = buildFullCycleHTML();
+        printHTMLWindow(html, `Cycle Complet 10 Séances Course de Haies — ${{currentGrade}} (Niveau ${{currentLevel}})`);
+      }};
+
+      window.exportElementToWord = function(elId, filename) {{
+        const el = document.getElementById(elId);
+        if (!el) return;
+        triggerDocDownload(wrapWordDocument(el.innerHTML, filename), filename);
+      }};
+
+      window.printElementAsPDF = function(elId, title) {{
+        const el = document.getElementById(elId);
+        if (!el) return;
+        printHTMLWindow(el.innerHTML, title);
+      }};
+
+      function printHTMLWindow(htmlContent, title) {{
+        const w = window.open('', '_blank', 'width=1050,height=800');
+        if (!w) return;
+        w.document.open();
+        w.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>${{title}}</title>
+          <style>
+            body {{ font-family: Arial, sans-serif; color: #0f172a; margin: 15mm; font-size: 11px; }}
+            table {{ width: 100%; border-collapse: collapse; margin-bottom: 12px; }}
+            th, td {{ border: 1px solid #334155; padding: 6px 8px; text-align: left; vertical-align: top; }}
+            th {{ background: #f1f5f9; font-weight: bold; }}
+            .page-break {{ page-break-after: always; }}
+            @media print {{ @page {{ size: A4 portrait; margin: 10mm; }} }}
+          </style>
+        </head><body>
+          <h2 style="margin-top:0;border-bottom:2px solid #c2410c;padding-bottom:6px;">${{title}}</h2>
+          ${{htmlContent}}
+          <script>window.onload = function(){{ setTimeout(function(){{ window.print(); }}, 250); }};<\/script>
+        </body></html>`);
+        w.document.close();
+      }}
+
+      window.switchHaiesGridTab = function(panelId, btnEl) {{
+        document.querySelectorAll(".sub-tab-panel").forEach(p => p.classList.remove("active"));
+        document.querySelectorAll(".sub-tab-btn").forEach(b => b.classList.remove("active"));
+        const target = document.getElementById(panelId);
+        if (target) target.classList.add("active");
+        if (btnEl) btnEl.classList.add("active");
+      }};
+
+      // ================================================================
+      // CALCULATEUR D'INDICE D'OBSTACLE ΔT & COULOIR DIFFÉRENCIÉ
+      // ================================================================
+      window.computeHaiesCalculator = function() {{
+        const grade = document.getElementById("calcHGrade").value;
+        const sex = document.getElementById("calcHSex").value;
+        const tPlat = Math.max(5.5, parseFloat(document.getElementById("calcHTPlat").value) || 8.20);
+        const tHaies = Math.max(tPlat + 0.2, parseFloat(document.getElementById("calcHTHaies").value) || 9.35);
+        const rhythm = document.getElementById("calcHRhythm").value;
+        const heightCm = Math.max(130, parseInt(document.getElementById("calcHHeightCm").value, 10) || 172);
+
+        const isCollege = (grade === "1AC" || grade === "2AC" || grade === "3AC");
+        const distM = (grade === "1AC" || grade === "2AC") ? 50 : 60;
+        const nHurdles = 4;
+
+        const deltaT = Math.max(0, tHaies - tPlat);
+        const lossPerHurdle = deltaT / nHurdles;
+        const speedRetentionPct = ((tPlat / tHaies) * 100).toFixed(1);
+
+        // Cible chrono 20/20 pour le barème de performance
+        const targetTimeTable = {{
+          "1AC": {{ G: 8.60, F: 9.70 }},
+          "2AC": {{ G: 8.30, F: 9.40 }},
+          "3AC": {{ G: 9.70, F: 11.10 }},
+          "TC":  {{ G: 9.50, F: 10.90 }},
+          "1BAC":{{ G: 9.25, F: 10.65 }},
+          "2BAC":{{ G: 9.00, F: 10.40 }}
+        }};
+        const bestTime = targetTimeTable[grade][sex];
+        const maxPerfPts = isCollege ? 6 : 7;
+        const maxTechPts = isCollege ? 6 : 7;
+        const maxMoteur = isCollege ? 12 : 14;
+
+        // Note de performance chronométrique
+        const timeDiff = Math.max(0, tHaies - bestTime);
+        const perfRatio = Math.max(0.25, 1 - (timeDiff / 2.8));
+        const notePerf = Math.min(maxPerfPts, Math.round(maxPerfPts * perfRatio * 2) / 2);
+
+        // Note d'Indice ΔT + Structure rythmique
+        let deltaRatio = 1.0;
+        if (deltaT <= 1.10) deltaRatio = 1.0;
+        else if (deltaT <= 1.35) deltaRatio = 0.85;
+        else if (deltaT <= 1.65) deltaRatio = 0.68;
+        else if (deltaT <= 2.00) deltaRatio = 0.50;
+        else deltaRatio = 0.32;
+
+        const rhythmFactor = (rhythm === "3" || rhythm === "4") ? 1.0 : (rhythm === "5" ? 0.80 : 0.45);
+        const noteTech = Math.min(maxTechPts, Math.round(maxTechPts * (deltaRatio * 0.65 + rhythmFactor * 0.35) * 2) / 2);
+        const totalMoteur = Math.min(maxMoteur, notePerf + noteTech);
+        const equiv20 = Math.min(20, Math.round((totalMoteur / maxMoteur) * 20 * 2) / 2);
+
+        let diagBadge = "";
+        if (deltaT <= 1.15) {{
+          diagBadge = "🟢 Franchissement rasant expert : conservation exceptionnelle de la vitesse horizontale.";
+        }} else if (deltaT <= 1.45) {{
+          diagBadge = "🔵 Bon franchissement continu : réduisez encore la hauteur de suspension en engageant plus le buste.";
+        }} else if (deltaT <= 1.85) {{
+          diagBadge = "🟠 Franchissement haut (en cloche) : avancez votre point d'appel à 1,90m devant la haie et griffez derrière.";
+        }} else {{
+          diagBadge = "🔴 Perte importante (piétinement ou freinage) : changez de couloir d'intervalle pour stabiliser 3 ou 4 appuis.";
+        }}
+
+        document.getElementById("calcHaiesOutput").innerHTML = `
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.65rem;margin-bottom:0.75rem;">
+            <div style="background:#ffffff;border:1px solid #cbd5e1;border-radius:9px;padding:0.65rem;">
+              <div style="font-size:0.72rem;font-weight:800;color:#64748b;text-transform:uppercase;">Indice d'Obstacle ΔT</div>
+              <div style="font-size:1.25rem;font-weight:900;color:#c2410c;">+${{deltaT.toFixed(2)}} s</div>
+              <div style="font-size:0.75rem;color:#334155;">+${{lossPerHurdle.toFixed(2)}} s / haie (sur 4 H)</div>
+            </div>
+            <div style="background:#ffffff;border:1px solid #cbd5e1;border-radius:9px;padding:0.65rem;">
+              <div style="font-size:0.72rem;font-weight:800;color:#64748b;text-transform:uppercase;">Conservation Vitesse</div>
+              <div style="font-size:1.25rem;font-weight:900;color:#1d4ed8;">${{speedRetentionPct}} %</div>
+              <div style="font-size:0.75rem;color:#334155;">Distance : ${{distM}}m Haies</div>
+            </div>
+            <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:9px;padding:0.65rem;">
+              <div style="font-size:0.72rem;font-weight:800;color:#166534;text-transform:uppercase;">Note Motrice (${{grade}})</div>
+              <div style="font-size:1.25rem;font-weight:900;color:#15803d;">${{totalMoteur.toFixed(1)}} / ${{maxMoteur}}</div>
+              <div style="font-size:0.75rem;color:#166534;font-weight:700;">Perf ${{notePerf}} + Tech ${{noteTech}} (≈ ${{equiv20}}/20)</div>
+            </div>
+          </div>
+          <div style="font-size:0.81rem;color:#334155;background:#ffffff;border-left:4px solid #c2410c;padding:0.5rem 0.75rem;border-radius:6px;">
+            <strong>Diagnostic Biomécanique :</strong> ${{diagBadge}}
+          </div>
+        `;
+
+        // Calcul du couloir d'intervalle optimal et de la parabole 2/3 - 1/3
+        const strideEst = (heightCm * 0.0114); // foulée sprint en m
+        const takeOffBeforeH = (heightCm * 0.0115).toFixed(2); // ~2/3 avant la haie (env 1.85-2.05m)
+        const landingAfterH = (heightCm * 0.0057).toFixed(2);  // ~1/3 après la haie (env 0.90-1.05m)
+        const totalClearance = (parseFloat(takeOffBeforeH) + parseFloat(landingAfterH)).toFixed(2);
+
+        const optInterval3Appuis = (parseFloat(totalClearance) + 3 * strideEst * 0.82).toFixed(2);
+        const optInterval4Appuis = (parseFloat(totalClearance) + 4 * strideEst * 0.76).toFixed(2);
+
+        let recommendedCorridor = "Couloir 2 (Intervalle 7,00 m)";
+        const iv3 = parseFloat(optInterval3Appuis);
+        if (iv3 < 6.75) recommendedCorridor = "Couloir 1 (Intervalle 6,50 m · Hauteur 50–60 cm)";
+        else if (iv3 < 7.25) recommendedCorridor = "Couloir 2 (Intervalle 7,00 m · Hauteur 60–65 cm)";
+        else if (iv3 < 7.75) recommendedCorridor = "Couloir 3 (Intervalle 7,50 m · Hauteur 65–76 cm)";
+        else recommendedCorridor = "Couloir 4 (Intervalle 8,00 m · Hauteur 76–84 cm)";
+
+        const distStartToH1 = (heightCm >= 170) ? "12,30 m à 12,80 m (en 8 appuis : pied d'appel placé DEVANT au départ)" : "11,50 m à 12,00 m (en 7 ou 8 appuis)";
+
+        document.getElementById("calcHaiesCorridorOutput").innerHTML = `
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.75rem;margin-bottom:0.85rem;">
+            <div style="background:#fff7ed;border:1px solid #fdba74;border-radius:10px;padding:0.8rem;">
+              <div style="font-size:0.74rem;font-weight:800;color:#9a3412;text-transform:uppercase;">Couloir Recommandé (en 3 Appuis)</div>
+              <div style="font-size:1.05rem;font-weight:900;color:#0f172a;margin:0.2rem 0;">${{recommendedCorridor}}</div>
+              <div style="font-size:0.78rem;color:#475569;">Intervalle théorique 3 appuis (même jambe) : <strong>${{optInterval3Appuis}} m</strong><br>Intervalle théorique 4 appuis (jambe alternée) : <strong>${{optInterval4Appuis}} m</strong></div>
+            </div>
+            <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:0.8rem;">
+              <div style="font-size:0.74rem;font-weight:800;color:#166534;text-transform:uppercase;">Parabole Rasante 2/3 avant — 1/3 après</div>
+              <div style="font-size:1.05rem;font-weight:900;color:#0f172a;margin:0.2rem 0;">Appel à ${{takeOffBeforeH}} m · Reprise à ${{landingAfterH}} m</div>
+              <div style="font-size:0.78rem;color:#475569;">Longueur totale du franchissement : <strong>${{totalClearance}} m</strong><br>Approche Départ → H1 : <strong>${{distStartToH1}}</strong></div>
+            </div>
+          </div>
+          <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:0.65rem 0.85rem;font-size:0.81rem;color:#334155;">
+            💡 <strong>Astuce terrain :</strong> Tracez un trait de craie à <strong>${{takeOffBeforeH}} m devant la haie</strong> (zone d'impulsion 2/3) et posez une latte souple à <strong>${{landingAfterH}} m derrière la haie</strong> (zone de reprise active 1/3 plante de pied).
+          </div>
+        `;
+      }};
+
+      // Initialisation au chargement
+      buildSidebarList();
+      renderHaiesSheet();
+      computeHaiesCalculator();
+    }})();
+    </script>
+
+{footer_html}
+</body>
+</html>
+"""
+
+
+def update_hub_aps():
+    hub_path = os.path.join(PUBLIC, "hub-aps-sports-eps-maroc.html")
+    html = read_file(hub_path)
+
+    if "aps-course-haies-eps-maroc.html" not in html:
+        # 1. Insert Course de Haies card right after Saut en Hauteur card
+        marker = "<!-- 10. GYMNASTIQUE AU SOL -->"
+        haies_card = """<!-- 9ter. COURSE DE HAIES (50M / 60M / 80M / 110M HAIES) -->
+            <article class="aps-card" data-aps-family="athletisme" style="border-color:#c2410c;border-width:2px;">
+                <div>
+                    <div class="aps-card-kicker" style="color:#c2410c;">Athlétisme · Courses d'Obstacles · Studio Complet Actif</div>
+                    <h3 class="aps-card-title">🚧 Course de Haies — 50m / 60m / 80m / 110mH (سباق الحواجز)</h3>
+                    <p class="aps-card-desc">Silo complet Course de Haies : Calculateur d'Indice de Perte (ΔT = T_Haies − T_Plat) &amp; couloirs différenciés (3 ou 4 appuis), ATD officiel, 24 cycles et 240 fiches (1AC à 2Bac × 4 niveaux), barèmes (/20) et RT 22.</p>
+                    <ul class="aps-links-list">
+                        <li><a href="aps-course-haies-eps-maroc.html#volet-studio"><span>⚡ Studio Cycles &amp; Fiches (1AC → 2Bac · PDF/Word)</span> <span>→</span></a></li>
+                        <li><a href="aps-course-haies-eps-maroc.html#volet-calculateur-haies"><span>🧮 Calculateur Indice de Perte ΔT &amp; Couloirs 3/4 Appuis</span> <span>→</span></a></li>
+                        <li><a href="aps-course-haies-eps-maroc.html#volet-grilles"><span>📊 Barèmes (Temps + ΔT) &amp; 4 Grilles (/20)</span> <span>→</span></a></li>
+                        <li><a href="aps-course-haies-eps-maroc.html#volet-atd"><span>📐 ATD Course de Haies &amp; Règle 2/3–1/3</span> <span>→</span></a></li>
+                    </ul>
+                </div>
+                <div class="aps-card-footer">
+                    <a href="aps-course-haies-eps-maroc.html" class="aps-btn-main" style="background:#c2410c;">Ouvrir la Page Spéciale Course de Haies →</a>
+                </div>
+            </article>
+
+            """
+        if marker in html:
+            html = html.replace(marker, haies_card + marker, 1)
+
+        # 2. Add button in top banner
+        target_btn = '<a href="aps-badminton-tennis-table-eps-maroc.html" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.55rem 1rem;border-radius:8px;background:#0f766e;color:#ffffff;font-weight:800;font-size:0.84rem;text-decoration:none;">🏸🏓 Badminton &amp; Ping-Pong (Silo Complet) →</a>'
+        new_btn = target_btn + '\n                    <a href="aps-course-haies-eps-maroc.html" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.55rem 1rem;border-radius:8px;background:#c2410c;color:#ffffff;font-weight:800;font-size:0.84rem;text-decoration:none;">🚧 Course de Haies (Silo Complet) →</a>'
+        html = html.replace(target_btn, new_btn, 1)
+
+        write_file(hub_path, html)
+        print("[HUB APS OK] Updated /public/hub-aps-sports-eps-maroc.html with Course de Haies Complete Silo.")
+
+
+def update_sibling_silos():
+    silos = [
+        "aps-handball-eps-maroc.html",
+        "aps-basketball-eps-maroc.html",
+        "aps-volleyball-eps-maroc.html",
+        "aps-football-eps-maroc.html",
+        "aps-gymnastique-sol-eps-maroc.html",
+        "aps-course-vitesse-relais-eps-maroc.html",
+        "aps-course-duree-demi-fond-eps-maroc.html",
+        "aps-lancer-poids-eps-maroc.html",
+        "aps-saut-longueur-triple-saut-eps-maroc.html",
+        "aps-saut-hauteur-fosbury-eps-maroc.html",
+        "aps-badminton-tennis-table-eps-maroc.html",
+    ]
+    link_html = '<a href="aps-course-haies-eps-maroc.html" style="padding:0.25rem 0.65rem;border-radius:99px;background:#ffffff;color:#0f172a;border:1px solid #cbd5e1;text-decoration:none;">🚧 Course de Haies</a>'
+    for fname in silos:
+        p = os.path.join(PUBLIC, fname)
+        if not os.path.exists(p):
+            continue
+        content = read_file(p)
+        if "aps-course-haies-eps-maroc.html" not in content:
+            hub_link = '<a href="hub-aps-sports-eps-maroc.html" style="margin-left:auto;'
+            if hub_link in content:
+                content = content.replace(hub_link, link_html + "\n            " + hub_link, 1)
+                write_file(p, content)
+
+
+def update_blog_index_sitemap():
+    # 1. Update blog.html
+    blog_path = os.path.join(PUBLIC, "blog.html")
+    blog_html = read_file(blog_path)
+    if "aps-course-haies-eps-maroc.html" not in blog_html:
+        card_html = """
+                <!-- SILO COMPLET COURSE DE HAIES -->
+                <article class="article-card" data-category="aps">
+                    <div class="article-card-header" style="background: linear-gradient(135deg, #c2410c, #9a3412);">
+                        <span class="article-category-badge">🚧 Silo APS Complet · Athlétisme</span>
+                        <span class="article-reading-time">⚡ Studio 1AC→2Bac + Calculateur ΔT</span>
+                    </div>
+                    <div class="article-card-body">
+                        <h3 class="article-card-title"><a href="aps-course-haies-eps-maroc.html">Course de Haies en EPS Maroc (50m, 60m, 80m, 110m Haies) : Cycles 1AC–2Bac, Fiches, Calculateur Indice de Perte ΔT, ATD, Barèmes &amp; RT 22</a></h3>
+                        <p class="article-card-excerpt">Studio interactif des 24 cycles et 240 fiches Course de Haies (1AC à 2Bac × 4 niveaux), calculateur d'Indice d'Obstacle (ΔT = T_Haies − T_Plat) et couloirs différenciés (3 ou 4 appuis), ATD complet, barèmes (/20) et règlement RT 22 Word/PDF.</p>
+                        <div class="article-card-footer">
+                            <span class="article-date">OP 2009 &amp; OP 2007</span>
+                            <a href="aps-course-haies-eps-maroc.html" class="article-read-more">Ouvrir le Studio Course de Haies →</a>
+                        </div>
+                    </div>
+                </article>"""
+        marker = "<!-- SILO COMPLET BADMINTON & TENNIS DE TABLE -->"
+        if marker in blog_html:
+            blog_html = blog_html.replace(marker, card_html + "\n                " + marker, 1)
+        blog_html = re.sub(
+            r'(<button class="category-tab active" data-category="all">Tous les articles <span class="count">)(\d+)(</span></button>)',
+            lambda m: m.group(1) + str(int(m.group(2)) + 1) + m.group(3),
+            blog_html,
+            count=1,
+        )
+        blog_html = re.sub(
+            r'(<button class="category-tab" data-category="aps">APS &amp; Didactique <span class="count">)(\d+)(</span></button>)',
+            lambda m: m.group(1) + str(int(m.group(2)) + 1) + m.group(3),
+            blog_html,
+            count=1,
+        )
+        write_file(blog_path, blog_html)
+        print("[BLOG OK] Added Silo Course de Haies card to /public/blog.html.")
+
+    # 2. Update index.html & /index.html
+    idx_path = os.path.join(PUBLIC, "index.html")
+    idx_html = read_file(idx_path)
+    if "aps-course-haies-eps-maroc.html" not in idx_html:
+        target = '<a href="aps-badminton-tennis-table-eps-maroc.html"'
+        idx_pos = idx_html.find(target)
+        if idx_pos != -1:
+            end_a = idx_html.find("</a>", idx_pos) + 4
+            snippet = idx_html[idx_pos:end_a]
+            new_snippet = (
+                snippet
+                + '\n          <a href="aps-course-haies-eps-maroc.html" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.55rem 0.95rem;border-radius:99px;background:#fff7ed;border:1px solid #fdba74;color:#9a3412;font-size:0.82rem;font-weight:800;text-decoration:none;">🚧 Silo Course de Haies (Cycles 1AC-2Bac + Calculateur ΔT) →</a>'
+            )
+            idx_html = idx_html[:idx_pos] + new_snippet + idx_html[end_a:]
+            write_file(idx_path, idx_html)
+            write_file(os.path.join(ROOT, "index.html"), idx_html)
+            print("[INDEX OK] Updated /public/index.html and mirrored to /index.html.")
+
+    # 3. Update sitemap.xml
+    sm_path = os.path.join(PUBLIC, "sitemap.xml")
+    sm_xml = read_file(sm_path)
+    if "aps-course-haies-eps-maroc.html" not in sm_xml:
+        entry = """  <url>
+    <loc>https://profeps.ma/aps-course-haies-eps-maroc.html</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+</urlset>"""
+        sm_xml = sm_xml.replace("</urlset>", entry)
+        write_file(sm_path, sm_xml)
+        print("[SITEMAP OK] Added aps-course-haies-eps-maroc.html to /public/sitemap.xml.")
+
+
+def main():
+    navbar_html, footer_html, head_styles = extract_chrome()
+    silo_html = build_silo_course_haies(navbar_html, footer_html, head_styles)
+    out_path = os.path.join(PUBLIC, "aps-course-haies-eps-maroc.html")
+    write_file(out_path, silo_html)
+    print(f"[SILO COURSE DE HAIES OK] Created {out_path}")
+
+    update_hub_aps()
+    update_sibling_silos()
+    update_blog_index_sitemap()
+    print("=== SILO COMPLET COURSE DE HAIES GENERATED SUCCESSFULLY ===")
+
+
+if __name__ == "__main__":
+    main()
