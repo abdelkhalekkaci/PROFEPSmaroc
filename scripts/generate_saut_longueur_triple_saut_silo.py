@@ -1,0 +1,2579 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Generates the Complete Silo for Saut en Longueur & Triple Saut in EPS Morocco:
+1. /public/aps-saut-longueur-triple-saut-eps-maroc.html — Interactive Saut en Longueur & Triple Saut Silo & Studio (1AC -> 2Bac × 4 practice levels = 24 cycles & 240 session sheets with live A4 preview + Word .doc & PDF exports, Interactive Approach Run Calibration + Triple Jump 35%-30%-35% Ratio Calculator, Complete ATD, 4 Evaluation Grids + Official Long Jump & Triple Jump Barèmes OP 2007/2009, Sand Pit Safety & Organization for 40+ students, Warm-up & World Athletics RT 29-30 Rules).
+2. Updates /public/hub-aps-sports-eps-maroc.html, existing APS silos, /public/blog.html, /public/index.html, /index.html, and /public/sitemap.xml.
+NOTE: Does NOT touch generateur.html.
+"""
+
+import os
+import re
+import shutil
+
+ROOT_DIR = "/app/applet"
+PUBLIC_DIR = os.path.join(ROOT_DIR, "public")
+
+
+def get_Navbar_and_Footer():
+    ref_path = os.path.join(PUBLIC_DIR, "aps-lancer-poids-eps-maroc.html")
+    with open(ref_path, "r", encoding="utf-8") as f:
+        html = f.read()
+
+    nav_start = html.find("<!-- PROFEPS_UNIFIED_NAVBAR_START -->")
+    nav_end = html.find("<!-- PROFEPS_UNIFIED_NAVBAR_END -->") + len("<!-- PROFEPS_UNIFIED_NAVBAR_END -->")
+    navbar = html[nav_start:nav_end]
+
+    foot_start = html.find("<!-- PROFEPS_EEAT_AUTHOR_START -->")
+    foot_end = html.find("</body>")
+    footer = html[foot_start:foot_end]
+    return navbar, footer
+
+
+def create_saut_longueur_triple_saut_silo_page():
+    navbar, footer = get_Navbar_and_Footer()
+    navbar_saut = navbar.replace(
+        'data-current-file="aps-lancer-poids-eps-maroc.html"',
+        'data-current-file="aps-saut-longueur-triple-saut-eps-maroc.html"'
+    )
+
+    html_content = f'''<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Silo complet Saut en Longueur &amp; Triple Saut en EPS au Maroc (Collège OP 2009 &amp; Lycée/Bac OP 2007) : Calculateur étalonnage d'élan &amp; ratio Triple Saut (35-30-35%), ATD, 24 Cycles &amp; 240 Fiches (1AC à 2Bac × 4 niveaux) en Word/PDF et barèmes (/20).">
+    <meta name="keywords" content="saut en longueur EPS Maroc, triple saut EPS Maroc, cycle saut en longueur 1AC 2AC 3AC TC 1Bac 2Bac, ATD saut en longueur triple saut CRMEF, barème saut en longueur Bac Sport Maroc, cloche-pied foulée saut RT 29 30, étalonnage course d'élan">
+    <meta name="author" content="Abdelkhalek ELBOUDANI — ProfEPS Maroc">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ProfEPS Maroc">
+    <meta property="og:title" content="Saut en Longueur &amp; Triple Saut en EPS au Maroc : Studio 24 Cycles &amp; 240 Fiches (1AC→2Bac), Calculateur d'Élan &amp; Triple Bond, ATD &amp; Barèmes | ProfEPS">
+    <meta property="og:description" content="Page spéciale Saut en Longueur &amp; Triple Saut en EPS au Maroc : Calculateur d'étalonnage de la course d'élan &amp; répartition des 3 bonds (35%-30%-35%), Studio de 24 cycles et 240 fiches (1AC à 2Bac) en Word/PDF, ATD officiel et barèmes (/20).">
+    <meta property="og:url" content="https://profeps.ma/aps-saut-longueur-triple-saut-eps-maroc.html">
+    <meta property="og:image" content="https://profeps.ma/images/prof_eps.png">
+    <meta property="og:locale" content="fr_MA">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Saut en Longueur &amp; Triple Saut en EPS au Maroc : Studio Cycles &amp; Fiches (1AC→2Bac), Calculateur, ATD &amp; Barèmes (/20) | ProfEPS">
+    <meta name="twitter:description" content="Silo complet Saut en Longueur &amp; Triple Saut EPS Maroc : 6 niveaux scolaires × 4 niveaux de pratique, visionneuse A4 Pro, export Word/PDF, calculateur d'élan &amp; triple saut, ATD et barèmes officiels.">
+    <meta name="twitter:image" content="https://profeps.ma/images/prof_eps.png">
+    <link rel="canonical" href="https://profeps.ma/aps-saut-longueur-triple-saut-eps-maroc.html">
+    <link rel="alternate" hreflang="fr-MA" href="https://profeps.ma/aps-saut-longueur-triple-saut-eps-maroc.html">
+    <link rel="alternate" hreflang="x-default" href="https://profeps.ma/aps-saut-longueur-triple-saut-eps-maroc.html">
+    <title>Saut en Longueur &amp; Triple Saut en EPS au Maroc : Studio Cycles &amp; Fiches (1AC→2Bac), Calculateur Élan &amp; 3 Bonds, ATD &amp; Barèmes (Word/PDF) | ProfEPS</title>
+    <link rel="icon" type="image/png" href="/images/prof_eps.png">
+
+    <!-- Google tag (gtag.js) & Consent Mode v2 ProfEPS.ma -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      try {{
+        var saved = JSON.parse(localStorage.getItem("profeps_cookie_consent_v2") || "null");
+        if (saved) {{
+          gtag("consent", "default", {{
+            "ad_storage": saved.ads ? "granted" : "denied",
+            "ad_user_data": saved.ads ? "granted" : "denied",
+            "ad_personalization": saved.ads ? "granted" : "denied",
+            "analytics_storage": saved.analytics ? "granted" : "denied"
+          }});
+        }} else {{
+          gtag("consent", "default", {{
+            "ad_storage": "granted",
+            "ad_user_data": "granted",
+            "ad_personalization": "granted",
+            "analytics_storage": "granted"
+          }});
+          gtag("consent", "default", {{
+            "ad_storage": "denied",
+            "ad_user_data": "denied",
+            "ad_personalization": "denied",
+            "analytics_storage": "denied",
+            "region": ["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IS","IE","IT","LV","LI","LT","LU","MT","NL","NO","PL","PT","RO","SK","SI","ES","SE","GB","CH"],
+            "wait_for_update": 500
+          }});
+        }}
+      }} catch (e) {{}}
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TH0Z1SGNXH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      gtag('js', new Date());
+      gtag('config', 'G-TH0Z1SGNXH');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8253776880916865" crossorigin="anonymous"></script>
+    <script src="profeps-cmp.js" defer></script>
+    <link rel="stylesheet" href="/css/profeps-unifier.min.css?v=20261101">
+
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Silo Saut en Longueur & Triple Saut en EPS au Maroc : Studio 24 Cycles & 240 Fiches (1AC à 2Bac), Calculateur d'Élan & Ratio 35-30-35%, ATD, Barèmes & Règlement World Athletics",
+      "description": "Portail didactique et pédagogique complet du Saut en Longueur et du Triple Saut en EPS au Maroc conforme aux OP 2009 (Collège) et OP 2007 (Lycée) et aux Règles Techniques 29-30 World Athletics : studio interactif 1AC à 2Bac × 4 niveaux avec aperçu A4 et téléchargement Word/PDF, calculateur d'élan et de triple bond intégré, ATD complet et barèmes officiels.",
+      "url": "https://profeps.ma/aps-saut-longueur-triple-saut-eps-maroc.html",
+      "inLanguage": "fr-MA",
+      "author": {{
+        "@type": "Person",
+        "name": "Abdelkhalek ELBOUDANI",
+        "jobTitle": "Professeur d'Éducation Physique et Sportive (EPS)",
+        "url": "https://profeps.ma/a-propos.html"
+      }},
+      "publisher": {{
+        "@type": "EducationalOrganization",
+        "name": "ProfEPS Maroc",
+        "url": "https://profeps.ma/"
+      }}
+    }}
+    </script>
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {{"@type": "ListItem", "position": 1, "name": "Accueil ProfEPS Maroc", "item": "https://profeps.ma/"}},
+        {{"@type": "ListItem", "position": 2, "name": "Hub Central des APS & Sports", "item": "https://profeps.ma/hub-aps-sports-eps-maroc.html"}},
+        {{"@type": "ListItem", "position": 3, "name": "Silo Saut en Longueur & Triple Saut (Cycles 1AC-2Bac, Calculateur, ATD & Barèmes)", "item": "https://profeps.ma/aps-saut-longueur-triple-saut-eps-maroc.html"}}
+      ]
+    }}
+    </script>
+
+    <style>
+        *, *::before, *::after {{ margin: 0; padding: 0; box-sizing: border-box; }}
+        :root {{
+            --primary: #d97706;
+            --primary-dark: #b45309;
+            --primary-light: #fffbeb;
+            --secondary: #991b1b;
+            --secondary-light: #fef2f2;
+            --accent: #006233;
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #64748b;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --border: #cbd5e1;
+            --border-light: #e2e8f0;
+            --radius: 10px;
+            --radius-lg: 16px;
+            --shadow-sm: 0 2px 6px rgba(15,23,42,0.05);
+            --shadow-md: 0 8px 24px rgba(15,23,42,0.08);
+            --shadow-lg: 0 14px 34px rgba(15,23,42,0.12);
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Plus Jakarta Sans', var(--font-sans);
+        }}
+        body {{
+            font-family: var(--font-sans);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }}
+        a {{ text-decoration: none; color: inherit; }}
+
+        /* HERO & INTRO */
+        .silo-hero {{
+            padding: 124px 1.5rem 2.25rem;
+            background: linear-gradient(135deg, #fffbeb 0%, #ffffff 50%, #f0fdf4 100%);
+            border-bottom: 1px solid var(--border);
+        }}
+        .silo-hero-inner {{
+            max-width: 1220px;
+            margin: 0 auto;
+        }}
+        .breadcrumb-bar {{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }}
+        .breadcrumb-bar a {{ color: var(--primary-dark); }}
+        .breadcrumb-bar a:hover {{ text-decoration: underline; }}
+
+        .hero-top-grid {{
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }}
+        .silo-badge {{
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.38rem 0.9rem;
+            background: var(--primary-light);
+            border: 1px solid #fde68a;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 0.75rem;
+        }}
+        .silo-title {{
+            font-family: var(--font-display);
+            font-size: clamp(1.65rem, 3.3vw, 2.35rem);
+            font-weight: 900;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+        }}
+        .silo-intro-text {{
+            font-size: 0.96rem;
+            color: var(--text-secondary);
+            line-height: 1.68;
+            margin-bottom: 1rem;
+        }}
+        .atd-summary-card {{
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-left: 5px solid var(--primary-dark);
+            border-radius: var(--radius-lg);
+            padding: 1.15rem 1.25rem;
+            box-shadow: var(--shadow-sm);
+        }}
+        .atd-summary-card h2 {{
+            font-size: 0.96rem;
+            font-weight: 900;
+            color: var(--primary-dark);
+            margin-bottom: 0.55rem;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }}
+        .specs-mini-grid {{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.55rem;
+            margin-top: 0.65rem;
+        }}
+        .spec-mini-item {{
+            background: #f8fafc;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 0.5rem 0.65rem;
+            font-size: 0.78rem;
+        }}
+        .spec-mini-item strong {{
+            display: block;
+            color: var(--text-primary);
+            font-weight: 800;
+        }}
+        .spec-mini-item span {{
+            color: var(--text-secondary);
+            font-weight: 600;
+        }}
+
+        /* STICKY VOLETS NAVIGATION */
+        .volets-sticky-bar {{
+            position: sticky;
+            top: 68px;
+            z-index: 40;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--border);
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+        }}
+        .volets-nav-inner {{
+            max-width: 1220px;
+            margin: 0 auto;
+            padding: 0.6rem 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }}
+        .volets-tabs {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+        }}
+        .volet-tab-btn {{
+            padding: 0.55rem 0.95rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: #f8fafc;
+            color: var(--text-secondary);
+            font-size: 0.82rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.18s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }}
+        .volet-tab-btn:hover {{
+            border-color: var(--primary-dark);
+            color: var(--primary-dark);
+            background: var(--primary-light);
+        }}
+        .volet-tab-btn.active {{
+            background: var(--primary-dark);
+            color: #ffffff;
+            border-color: var(--primary-dark);
+            box-shadow: 0 3px 10px rgba(180, 83, 9, 0.25);
+        }}
+
+        /* MAIN CONTAINER & VOLETS */
+        .silo-main {{
+            max-width: 1220px;
+            margin: 0 auto;
+            padding: 1.75rem 1.5rem 3.5rem;
+        }}
+        .volet-panel {{
+            display: none;
+            animation: fadeIn 0.22s ease;
+        }}
+        .volet-panel.active {{
+            display: block;
+        }}
+        @keyframes fadeIn {{
+            from {{ opacity: 0; transform: translateY(4px); }}
+            to {{ opacity: 1; transform: translateY(0); }}
+        }}
+
+        /* STUDIO GENERATOR (VOLET 1) */
+        .studio-shell {{
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }}
+        .studio-header {{
+            padding: 1.25rem 1.5rem;
+            background: linear-gradient(135deg, #78350f 0%, #b45309 55%, #0f172a 100%);
+            color: #ffffff;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }}
+        .studio-header h2 {{
+            font-family: var(--font-display);
+            font-size: 1.22rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 0.2rem;
+        }}
+        .studio-header p {{
+            font-size: 0.83rem;
+            color: #fef3c7;
+        }}
+
+        /* Step 1: 6 School Levels Tabs */
+        .school-levels-bar {{
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0.5rem;
+            padding: 1rem 1.25rem;
+            background: #f1f5f9;
+            border-bottom: 1px solid var(--border);
+        }}
+        .school-level-tab {{
+            padding: 0.65rem 0.5rem;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            background: #ffffff;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.16s ease;
+            box-shadow: 0 1px 3px rgba(15,23,42,0.05);
+        }}
+        .school-level-tab:hover {{
+            border-color: #cbd5e1;
+            transform: translateY(-1px);
+        }}
+        .school-level-tab.active {{
+            border-color: var(--primary-dark);
+            background: var(--primary-light);
+        }}
+        .school-level-tab .lvl-code {{
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 900;
+            color: var(--text-primary);
+        }}
+        .school-level-tab.active .lvl-code {{
+            color: var(--primary-dark);
+        }}
+        .school-level-tab .lvl-tag {{
+            display: block;
+            font-size: 0.69rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-top: 0.1rem;
+        }}
+
+        /* Step 2: 4 Practice Levels Bar */
+        .practice-levels-bar {{
+            padding: 0.9rem 1.25rem;
+            background: #ffffff;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }}
+        .practice-label {{
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }}
+        .practice-pills {{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            flex: 1;
+            min-width: 280px;
+        }}
+        .practice-pill {{
+            padding: 0.55rem 0.7rem;
+            border-radius: 9px;
+            border: 1px solid var(--border);
+            background: #f8fafc;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.16s ease;
+        }}
+        .practice-pill:hover {{
+            border-color: var(--accent);
+            background: #f0fdf4;
+        }}
+        .practice-pill.active {{
+            background: var(--accent);
+            color: #ffffff;
+            border-color: var(--accent);
+        }}
+        .practice-pill strong {{
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 800;
+        }}
+        .practice-pill span {{
+            display: block;
+            font-size: 0.69rem;
+            opacity: 0.88;
+            margin-top: 0.08rem;
+        }}
+
+        /* Step 3: Document Mode + Session Selector + Action Buttons */
+        .studio-controls-bar {{
+            padding: 0.95rem 1.25rem;
+            background: #f8fafc;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.85rem;
+        }}
+        .doc-mode-switch {{
+            display: inline-flex;
+            background: #e2e8f0;
+            padding: 0.25rem;
+            border-radius: 10px;
+            gap: 0.25rem;
+        }}
+        .doc-mode-btn {{
+            padding: 0.48rem 0.9rem;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            font-size: 0.81rem;
+            font-weight: 800;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }}
+        .doc-mode-btn.active {{
+            background: #ffffff;
+            color: var(--text-primary);
+            box-shadow: 0 1px 4px rgba(15,23,42,0.1);
+        }}
+
+        .session-selector-wrap {{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.35rem;
+        }}
+        .session-num-btn {{
+            width: 34px;
+            height: 32px;
+            border-radius: 7px;
+            border: 1px solid var(--border);
+            background: #ffffff;
+            font-size: 0.77rem;
+            font-weight: 800;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.14s;
+        }}
+        .session-num-btn:hover {{
+            border-color: var(--primary-dark);
+            color: var(--primary-dark);
+        }}
+        .session-num-btn.active {{
+            background: var(--primary-dark);
+            color: #ffffff;
+            border-color: var(--primary-dark);
+        }}
+
+        .export-actions-group {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+        }}
+        .export-btn {{
+            padding: 0.52rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: transform 0.12s ease, opacity 0.12s ease;
+        }}
+        .export-btn:hover {{ transform: translateY(-1px); opacity: 0.95; }}
+        .export-word-cycle {{ background: #1e40af; color: #ffffff; }}
+        .export-pdf-cycle {{ background: #991b1b; color: #ffffff; }}
+        .export-word-fiche {{ background: #b45309; color: #ffffff; }}
+        .export-pdf-fiche {{ background: #006233; color: #ffffff; }}
+
+        /* Step 4: Pro A4 Document Viewer */
+        .a4-viewer-outer {{
+            padding: 1.5rem;
+            background: #cbd5e1;
+            max-height: 820px;
+            overflow-y: auto;
+        }}
+        .a4-sheet {{
+            max-width: 980px;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 1px solid #94a3b8;
+            border-radius: 6px;
+            padding: 1.75rem 2rem;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
+            color: #0f172a;
+            font-size: 0.86rem;
+        }}
+        .a4-header-banner {{
+            border: 2px solid #0f172a;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1rem;
+            background: #f8fafc;
+        }}
+        .a4-header-top {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #334155;
+            border-bottom: 1px solid #cbd5e1;
+            padding-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }}
+        .a4-doc-title {{
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: #b45309;
+            text-align: center;
+            margin: 0.25rem 0;
+            text-transform: uppercase;
+        }}
+        .a4-meta-table, .a4-table {{
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 0.9rem;
+            font-size: 0.82rem;
+        }}
+        .a4-meta-table th, .a4-meta-table td,
+        .a4-table th, .a4-table td {{
+            border: 1px solid #334155;
+            padding: 0.5rem 0.65rem;
+            vertical-align: top;
+            text-align: left;
+        }}
+        .a4-meta-table th {{
+            background: #f1f5f9;
+            font-weight: 800;
+            width: 18%;
+            color: #0f172a;
+        }}
+        .a4-table thead th {{
+            background: #0f172a;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.79rem;
+            text-transform: uppercase;
+        }}
+        .a4-table tbody tr:nth-child(even) td {{
+            background: #f8fafc;
+        }}
+        .a4-oti-box {{
+            border: 1.5px solid #006233;
+            background: #f0fdf4;
+            padding: 0.65rem 0.85rem;
+            border-radius: 6px;
+            margin-bottom: 0.9rem;
+            font-size: 0.82rem;
+        }}
+        .a4-oti-box strong {{ color: #006233; }}
+
+        /* CALCULATOR WIDGET (VOLET 2) */
+        .calc-widget-shell {{
+            background: #ffffff;
+            border: 2px solid var(--primary-dark);
+            border-radius: 18px;
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }}
+        .calc-widget-header {{
+            padding: 1.15rem 1.5rem;
+            background: linear-gradient(135deg, #78350f 0%, #b45309 55%, #0f172a 100%);
+            color: #ffffff;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }}
+        .calc-widget-header h2 {{
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin: 0;
+        }}
+        .calc-controls-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1rem;
+            padding: 1.25rem 1.5rem;
+            background: #fffbeb;
+            border-bottom: 1px solid #fde68a;
+        }}
+        .calc-input-group label {{
+            display: block;
+            font-size: 0.79rem;
+            font-weight: 800;
+            color: #78350f;
+            margin-bottom: 0.35rem;
+            text-transform: uppercase;
+        }}
+        .calc-input-group input, .calc-input-group select {{
+            width: 100%;
+            padding: 0.6rem 0.75rem;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 0.92rem;
+            font-weight: 800;
+            color: #0f172a;
+            background: #ffffff;
+        }}
+        .calc-kpi-strip {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+            gap: 0.75rem;
+            padding: 1.1rem 1.5rem;
+            background: #f8fafc;
+            border-bottom: 1px solid var(--border);
+        }}
+        .calc-kpi-box {{
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-top: 4px solid var(--primary-dark);
+            border-radius: 10px;
+            padding: 0.75rem 0.85rem;
+            text-align: center;
+        }}
+        .calc-kpi-box .kpi-val {{
+            display: block;
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 900;
+            color: var(--text-primary);
+        }}
+        .calc-kpi-box .kpi-lbl {{
+            display: block;
+            font-size: 0.74rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-top: 0.15rem;
+        }}
+
+        /* CONTENT CARDS FOR ATD, GRIDS, TERRAIN, ARTICLES */
+        .content-panel-card {{
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.65rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 1.5rem;
+        }}
+        .content-panel-card h2 {{
+            font-family: var(--font-display);
+            font-size: 1.32rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary-dark);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }}
+        .content-panel-card h3 {{
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin: 1.25rem 0 0.5rem;
+        }}
+        .two-col-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }}
+        .info-callout {{
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary-dark);
+            border-radius: 10px;
+            padding: 1rem 1.15rem;
+            font-size: 0.88rem;
+        }}
+        .table-wrap {{
+            overflow-x: auto;
+            margin: 1rem 0;
+        }}
+
+        /* GRIDS SUB-TABS */
+        .sub-tabs-bar {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+        }}
+        .sub-tab-btn {{
+            padding: 0.55rem 1rem;
+            border-radius: 9px;
+            border: 1px solid var(--border);
+            background: #f8fafc;
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }}
+        .sub-tab-btn.active {{
+            background: #0f172a;
+            color: #ffffff;
+            border-color: #0f172a;
+        }}
+
+        /* RELATED ARTICLES CARDS */
+        .articles-cards-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 1.1rem;
+            margin-top: 1rem;
+        }}
+        .rel-card {{
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.15rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 0.75rem;
+            transition: all 0.18s ease;
+        }}
+        .rel-card:hover {{
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }}
+        .rel-card-kicker {{
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            text-transform: uppercase;
+        }}
+        .rel-card h3 {{
+            margin: 0.25rem 0;
+            font-size: 0.98rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1.35;
+        }}
+        .rel-card p {{
+            font-size: 0.83rem;
+            color: var(--text-secondary);
+        }}
+        .rel-card-link {{
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }}
+
+        @media (max-width: 960px) {{
+            .hero-top-grid {{ grid-template-columns: 1fr; }}
+            .school-levels-bar {{ grid-template-columns: repeat(3, 1fr); }}
+            .practice-pills {{ grid-template-columns: repeat(2, 1fr); }}
+            .a4-sheet {{ padding: 1rem; }}
+        }}
+        @media (max-width: 560px) {{
+            .school-levels-bar {{ grid-template-columns: repeat(2, 1fr); }}
+            .practice-pills {{ grid-template-columns: 1fr; }}
+        }}
+    </style>
+</head>
+<body>
+{navbar_saut}
+
+    <!-- ====================================================================== -->
+    <!-- HERO & INTRO : SAUT EN LONGUEUR & TRIPLE SAUT + REPÈRES OFFICIELS      -->
+    <!-- ====================================================================== -->
+    <header class="silo-hero">
+        <div class="silo-hero-inner">
+            <nav class="breadcrumb-bar" aria-label="Fil d'Ariane">
+                <a href="/">Accueil ProfEPS</a> <span>›</span>
+                <a href="hub-aps-sports-eps-maroc.html">Hub Central des APS &amp; Sports</a> <span>›</span>
+                <span>Silo Saut en Longueur &amp; Triple Saut (1AC → 2Bac)</span>
+            </nav>
+
+            <div class="hero-top-grid">
+                <div>
+                    <span class="silo-badge">🦘 Silo APS Complet · Saut en Longueur &amp; Triple Saut · OP 2007/2009 &amp; World Athletics RT 29-30</span>
+                    <h1 class="silo-title">Saut en Longueur &amp; Triple Saut en EPS au Maroc : Studio Cycles &amp; Fiches (1AC → 2Bac), Calculateur d'Élan &amp; Ratio 35-30-35%, ATD &amp; Barèmes (/20)</h1>
+                    <p class="silo-intro-text">
+                        Les <strong>Sauts Horizontaux</strong> — <strong>Saut en Longueur (القفز الطولي)</strong> et <strong>Triple Saut (القفز الثلاثي)</strong> — consistent à convertir une <strong>vitesse horizontale maximale acquise sur une course d'élan étalonnée (12 à 18 foulées)</strong> en une trajectoire aérienne optimale (angle d'envol $\\approx 20^\\circ\\text{{–}}22^\\circ$) grâce à une <strong>impulsion d'un seul pied sur une planche de $20\\text{{ cm}}$</strong> (ou trois impulsions successives <strong>Cloche-pied → Foulée → Saut</strong> réparties selon le ratio d'or <strong>$35\\,\\% - 30\\,\\% - 35\\,\\%$</strong> au Triple Saut) avant d'atterrir en ramené groupé dans la fosse de sable.
+                    </p>
+                    <div style="display:flex;flex-wrap:wrap;gap:0.6rem;">
+                        <button type="button" class="export-btn export-word-fiche" onclick="switchVolet('volet-studio')">⚡ Studio 24 Cycles &amp; 240 Fiches</button>
+                        <button type="button" class="export-btn export-pdf-fiche" onclick="switchVolet('volet-calculateur-sauts')">🧮 Calculateur Élan &amp; Triple Saut (35-30-35%)</button>
+                        <button type="button" class="export-btn export-word-cycle" onclick="switchVolet('volet-grilles')">📊 Barèmes Longueur &amp; Triple Saut (/20)</button>
+                        <button type="button" class="export-btn export-pdf-cycle" onclick="switchVolet('volet-atd')">📐 ATD Sauts Horizontaux (Word/PDF)</button>
+                    </div>
+                </div>
+
+                <aside class="atd-summary-card" aria-label="Repères officiels Saut en Longueur et Triple Saut EPS Maroc">
+                    <h2>📌 Repères Officiels Longueur &amp; Triple Saut (RT 29-30 &amp; OP Maroc)</h2>
+                    <p style="font-size:0.81rem;color:var(--text-secondary);">Normes réglementaires, biomécaniques et barémiques pour vos séances d'EPS, le Bac Sport et le concours CRMEF :</p>
+                    <div class="specs-mini-grid">
+                        <div class="spec-mini-item">
+                            <strong>📏 Piste &amp; Planche (RT 29.1-29.3)</strong>
+                            <span>Piste ≥ 40m × 1,22m · Planche blanche 20cm</span>
+                        </div>
+                        <div class="spec-mini-item">
+                            <strong>🏖️ Fosse &amp; Mesure à 90° (RT 29.9)</strong>
+                            <span>Largeur 2,75–3,00m · Zéro (0cm) dans le sable !</span>
+                        </div>
+                        <div class="spec-mini-item">
+                            <strong>🐇 Séquence Triple Saut (RT 30.1)</strong>
+                            <span>G-G-D-2 pieds ou D-D-G-2 pieds (Jambe dormante OK)</span>
+                        </div>
+                        <div class="spec-mini-item">
+                            <strong>⚖️ Ratio d'Or des 3 Bonds</strong>
+                            <span>35% Cloche-pied · 30% Foulée · 35% Saut</span>
+                        </div>
+                        <div class="spec-mini-item">
+                            <strong>📊 Barème 20/20 Longueur (2Bac)</strong>
+                            <span>Garçons ≥ 5,40 m · Filles ≥ 4,10 m</span>
+                        </div>
+                        <div class="spec-mini-item">
+                            <strong>📊 Barème 20/20 Triple Saut (2Bac)</strong>
+                            <span>Garçons ≥ 11,60 m · Filles ≥ 9,20 m</span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </header>
+
+    <!-- ====================================================================== -->
+    <!-- BARRE DE NAVIGATION STICKY DES 6 VOLETS DU SILO SAUTS HORIZONTAUX      -->
+    <!-- ====================================================================== -->
+    <div class="volets-sticky-bar" role="tablist" aria-label="Navigation des volets du Silo Saut en Longueur et Triple Saut">
+        <div class="volets-nav-inner">
+            <div class="volets-tabs">
+                <button type="button" class="volet-tab-btn active" data-volet="volet-studio" onclick="switchVolet('volet-studio')">
+                    ⚡ 1. Studio Cycles &amp; Fiches (1AC → 2Bac)
+                </button>
+                <button type="button" class="volet-tab-btn" data-volet="volet-calculateur-sauts" onclick="switchVolet('volet-calculateur-sauts')">
+                    🧮 2. Calculateur Élan &amp; Triple Saut (35-30-35%)
+                </button>
+                <button type="button" class="volet-tab-btn" data-volet="volet-atd" onclick="switchVolet('volet-atd')">
+                    📐 3. ATD Longueur &amp; Triple Saut
+                </button>
+                <button type="button" class="volet-tab-btn" data-volet="volet-grilles" onclick="switchVolet('volet-grilles')">
+                    📊 4. Barèmes &amp; Grilles (/20)
+                </button>
+                <button type="button" class="volet-tab-btn" data-volet="volet-terrain" onclick="switchVolet('volet-terrain')">
+                    🏖️ 5. Terrain (40 élèves), Échauffement &amp; RT 29-30
+                </button>
+                <button type="button" class="volet-tab-btn" data-volet="volet-articles" onclick="switchVolet('volet-articles')">
+                    📚 6. Articles Sauts Liés
+                </button>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">
+                <a href="aps-lancer-poids-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#475569;">🏋️ Poids</a>
+                <a href="aps-course-duree-demi-fond-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#0f766e;">🏃 Durée/VMA</a>
+                <a href="aps-course-vitesse-relais-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#dc2626;">⚡ Vitesse</a>
+                <a href="aps-gymnastique-sol-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#7c3aed;">🤸 Gym</a>
+                <a href="aps-football-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#b45309;">⚽ Foot</a>
+                <a href="aps-volleyball-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#1e40af;">🏐 Volley</a>
+                <a href="aps-basketball-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#006233;">🏀 Basket</a>
+                <a href="aps-handball-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#991b1b;">🤾 Hand</a>
+                <a href="hub-aps-sports-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:var(--text-primary);">← Hub APS</a>
+            </div>
+        </div>
+    </div>
+
+    <main class="silo-main">
+        <!-- ================================================================== -->
+        <!-- VOLET 1 : STUDIO INTERACTIF CYCLES & FICHES LONGUEUR & TRIPLE SAUT -->
+        <!-- ================================================================== -->
+        <section id="volet-studio" class="volet-panel active" aria-label="Studio interactif des cycles et fiches pédagogiques Saut en Longueur et Triple Saut">
+            <div class="studio-shell">
+                <div class="studio-header">
+                    <div>
+                        <h2>⚡ Studio Saut en Longueur &amp; Triple Saut : 6 Niveaux Scolaires × 4 Niveaux de Pratique (Visionneuse A4 Pro)</h2>
+                        <p>Choisissez la classe (1AC à 2Bac), le niveau moteur de vos élèves (Débutant à Élite/ASS) et prévisualisez le Projet de Cycle ou chacune des 10 Séances avant téléchargement en Word (.doc) ou PDF A4.</p>
+                    </div>
+                    <div style="font-size:0.78rem;font-weight:800;background:rgba(255,255,255,0.14);padding:0.45rem 0.8rem;border-radius:8px;">
+                        24 Projets de Cycles · 240 Fiches de Séances
+                    </div>
+                </div>
+
+                <!-- STEP 1 : 6 SCHOOL LEVELS -->
+                <div class="school-levels-bar" role="tablist" aria-label="Sélection du niveau scolaire">
+                    <button type="button" class="school-level-tab active" data-level="1AC" onclick="selectSchoolLevel('1AC')">
+                        <span class="lvl-code">1ère AC</span>
+                        <span class="lvl-tag">Zone d'appel 80cm &amp; Impulsion 1 pied</span>
+                    </button>
+                    <button type="button" class="school-level-tab" data-level="2AC" onclick="selectSchoolLevel('2AC')">
+                        <span class="lvl-code">2ème AC</span>
+                        <span class="lvl-tag">Élan 10-12 foulées &amp; Multibonds</span>
+                    </button>
+                    <button type="button" class="school-level-tab" data-level="3AC" onclick="selectSchoolLevel('3AC')">
+                        <span class="lvl-code">3ème AC</span>
+                        <span class="lvl-tag">Étalonnage &amp; Cloche-pied/Foulée/Saut</span>
+                    </button>
+                    <button type="button" class="school-level-tab" data-level="TC" onclick="selectSchoolLevel('TC')">
+                        <span class="lvl-code">Tronc Commun</span>
+                        <span class="lvl-tag">Liaison Course-Appel &amp; Ratio 35-30-35%</span>
+                    </button>
+                    <button type="button" class="school-level-tab" data-level="1BAC" onclick="selectSchoolLevel('1BAC')">
+                        <span class="lvl-code">1ère Bac</span>
+                        <span class="lvl-tag">Planche 20cm, Griffé &amp; Suspension</span>
+                    </button>
+                    <button type="button" class="school-level-tab" data-level="2BAC" onclick="selectSchoolLevel('2BAC')">
+                        <span class="lvl-code">2ème Bac</span>
+                        <span class="lvl-tag">Concours Bac Longueur &amp; Triple Saut</span>
+                    </button>
+                </div>
+
+                <!-- STEP 2 : 4 PRACTICE LEVELS -->
+                <div class="practice-levels-bar">
+                    <span class="practice-label">Niveau de pratique de la classe :</span>
+                    <div class="practice-pills" role="tablist" aria-label="Sélection du niveau de pratique">
+                        <button type="button" class="practice-pill active" data-practice="N1" onclick="selectPracticeLevel('N1')">
+                            <strong>Niveau 1 · Débutant</strong>
+                            <span>Piétine devant la planche, s'écrase au 2e bond</span>
+                        </button>
+                        <button type="button" class="practice-pill" data-practice="N2" onclick="selectPracticeLevel('N2')">
+                            <strong>Niveau 2 · Débrouillé</strong>
+                            <span>Élan irrégulier, saut rasant, main en arrière</span>
+                        </button>
+                        <button type="button" class="practice-pill" data-practice="N3" onclick="selectPracticeLevel('N3')">
+                            <strong>Niveau 3 · Confirmé</strong>
+                            <span>Élan étalonné, genou haut 20°, 3 bonds rythmés</span>
+                        </button>
+                        <button type="button" class="practice-pill" data-practice="N4" onclick="selectPracticeLevel('N4')">
+                            <strong>Niveau 4 · Élite / ASS</strong>
+                            <span>Vitesse max sur 20cm, ciseaux &amp; ramené loin</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 3 : DOCUMENT MODE, SESSION PICKER & 4 EXPORT BUTTONS -->
+                <div class="studio-controls-bar">
+                    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem;">
+                        <div class="doc-mode-switch" role="tablist">
+                            <button type="button" class="doc-mode-btn active" id="btnModeCycle" onclick="selectDocMode('cycle')">📋 Projet de Cycle (10 Séances)</button>
+                            <button type="button" class="doc-mode-btn" id="btnModeFiche" onclick="selectDocMode('fiche')">📝 Fiche de Séance Détaillée</button>
+                        </div>
+
+                        <div class="session-selector-wrap" id="sessionSelectorWrap">
+                            <span style="font-size:0.76rem;font-weight:800;color:var(--text-muted);margin-right:0.2rem;">Séance :</span>
+                            <button type="button" class="session-num-btn active" data-s="1" onclick="selectSessionNumber(1)">S1</button>
+                            <button type="button" class="session-num-btn" data-s="2" onclick="selectSessionNumber(2)">S2</button>
+                            <button type="button" class="session-num-btn" data-s="3" onclick="selectSessionNumber(3)">S3</button>
+                            <button type="button" class="session-num-btn" data-s="4" onclick="selectSessionNumber(4)">S4</button>
+                            <button type="button" class="session-num-btn" data-s="5" onclick="selectSessionNumber(5)">S5</button>
+                            <button type="button" class="session-num-btn" data-s="6" onclick="selectSessionNumber(6)">S6</button>
+                            <button type="button" class="session-num-btn" data-s="7" onclick="selectSessionNumber(7)">S7</button>
+                            <button type="button" class="session-num-btn" data-s="8" onclick="selectSessionNumber(8)">S8</button>
+                            <button type="button" class="session-num-btn" data-s="9" onclick="selectSessionNumber(9)">S9</button>
+                            <button type="button" class="session-num-btn" data-s="10" onclick="selectSessionNumber(10)">S10</button>
+                        </div>
+                    </div>
+
+                    <div class="export-actions-group">
+                        <button type="button" class="export-btn export-word-cycle" onclick="exportStudioDocument('cycle', 'word')">📄 Projet de Cycle (.DOC Word)</button>
+                        <button type="button" class="export-btn export-pdf-cycle" onclick="exportStudioDocument('cycle', 'pdf')">🖨️ Projet de Cycle (PDF A4)</button>
+                        <button type="button" class="export-btn export-word-fiche" onclick="exportStudioDocument('fiche', 'word')">📝 Fiche de Séance (.DOC Word)</button>
+                        <button type="button" class="export-btn export-pdf-fiche" onclick="exportStudioDocument('fiche', 'pdf')">🖨️ Fiche de Séance (PDF A4)</button>
+                    </div>
+                </div>
+
+                <!-- STEP 4 : LIVE A4 PREVIEWER -->
+                <div class="a4-viewer-outer">
+                    <div id="studioA4Sheet" class="a4-sheet">
+                        <!-- Populated dynamically by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 2 : CALCULATEUR ÉLAN LONGUEUR & RATIO TRIPLE SAUT (35-30-35) -->
+        <!-- ================================================================== -->
+        <section id="volet-calculateur-sauts" class="volet-panel" aria-label="Calculateur d'étalonnage de la course d'élan et de répartition des 3 bonds au Triple Saut">
+            <div class="calc-widget-shell">
+                <div class="calc-widget-header">
+                    <div>
+                        <h2>🧮 Calculateur Interactif : Étalonnage de l'Élan, Ratio d'Or du Triple Saut (35%–30%–35%) &amp; Note Barème (/20)</h2>
+                        <p style="font-size:0.83rem;color:#fef3c7;margin-top:0.2rem;">Calculez la marque exacte de départ (en mètres et en pieds), les zones à tracer à la craie pour équilibrer les 3 bonds du Triple Saut (Cloche-pied / Foulée / Saut) et la note officielle au Bac Sport.</p>
+                    </div>
+                    <div style="display:flex;gap:0.5rem;">
+                        <button type="button" class="export-btn" style="background:#ffffff;color:#b45309;" onclick="exportSautsCalcTable('word')">📥 Table Élan &amp; Triple Saut (.DOC Word)</button>
+                        <button type="button" class="export-btn" style="background:#0f172a;color:#ffffff;" onclick="exportSautsCalcTable('pdf')">🖨️ Imprimer / PDF A4</button>
+                    </div>
+                </div>
+
+                <!-- CONTROLS -->
+                <div class="calc-controls-grid">
+                    <div class="calc-input-group">
+                        <label for="calcEpreuve">1. Épreuve &amp; Catégorie EPS Maroc</label>
+                        <select id="calcEpreuve" onchange="updateSautsCalculator()">
+                            <option value="LONG_BAC_G" selected>Saut en Longueur — 2Bac Garçons</option>
+                            <option value="LONG_BAC_F">Saut en Longueur — 2Bac Filles</option>
+                            <option value="LONG_COL_G">Saut en Longueur — Collège 3AC Garçons</option>
+                            <option value="LONG_COL_F">Saut en Longueur — Collège 3AC Filles</option>
+                            <option value="TS_BAC_G">Triple Saut — Lycée / 2Bac Garçons</option>
+                            <option value="TS_BAC_F">Triple Saut — Lycée / 2Bac Filles</option>
+                        </select>
+                    </div>
+                    <div class="calc-input-group">
+                        <label for="calcFoulees">2. Nombre de Foulées d'Élan</label>
+                        <select id="calcFoulees" onchange="updateSautsCalculator()">
+                            <option value="8">8 foulées (Initiation 1AC / Collège)</option>
+                            <option value="10">10 foulées (Collège 2AC/3AC)</option>
+                            <option value="12">12 foulées (3AC / Tronc Commun)</option>
+                            <option value="14" selected>14 foulées (Standard Lycée / Bac)</option>
+                            <option value="16">16 foulées (Confirmé Bac / ASS)</option>
+                            <option value="18">18 foulées (Élite ASS)</option>
+                        </select>
+                    </div>
+                    <div class="calc-input-group">
+                        <label for="calcTaille">3. Taille de l'Élève (en cm)</label>
+                        <input type="number" id="calcTaille" value="172" min="135" max="200" step="1" oninput="updateSautsCalculator()">
+                        <span style="font-size:0.72rem;color:#78350f;font-weight:700;">Estime l'amplitude moyenne de foulée &amp; la marque en pieds</span>
+                    </div>
+                    <div class="calc-input-group">
+                        <label for="calcPerf">4. Performance Visée / Réalisée (m)</label>
+                        <input type="number" id="calcPerf" value="4.85" min="2.20" max="15.00" step="0.05" oninput="updateSautsCalculator()">
+                        <div style="display:flex;gap:0.25rem;margin-top:0.35rem;flex-wrap:wrap;">
+                            <button type="button" style="padding:0.2rem 0.45rem;font-size:0.71rem;font-weight:800;border:1px solid #b45309;border-radius:5px;background:#fff;cursor:pointer;" onclick="setSautPreset('LONG_BAC_G', 4.80)">Long G 4,80m</button>
+                            <button type="button" style="padding:0.2rem 0.45rem;font-size:0.71rem;font-weight:800;border:1px solid #b45309;border-radius:5px;background:#fff;cursor:pointer;" onclick="setSautPreset('LONG_BAC_F', 3.60)">Long F 3,60m</button>
+                            <button type="button" style="padding:0.2rem 0.45rem;font-size:0.71rem;font-weight:800;border:1px solid #006233;border-radius:5px;background:#f0fdf4;color:#006233;cursor:pointer;" onclick="setSautPreset('TS_BAC_G', 10.50)">Triple G 10,50m</button>
+                            <button type="button" style="padding:0.2rem 0.45rem;font-size:0.71rem;font-weight:800;border:1px solid #006233;border-radius:5px;background:#f0fdf4;color:#006233;cursor:pointer;" onclick="setSautPreset('TS_BAC_F', 8.40)">Triple F 8,40m</button>
+                        </div>
+                    </div>
+                    <div class="calc-input-group">
+                        <label for="calcPlancheTS">5. Planche Triple Saut (Distance Fosse)</label>
+                        <select id="calcPlancheTS" onchange="updateSautsCalculator()">
+                            <option value="5">Planche Scolaire 5,00 m (Débutants / Collège)</option>
+                            <option value="7">Planche Scolaire 7,00 m (Collège / Lycée Filles)</option>
+                            <option value="9" selected>Planche Lycée 9,00 m (Standard Bac / ASS)</option>
+                            <option value="11">Planche Officielle 11,00 m (Femmes / Juniors H)</option>
+                            <option value="13">Planche Officielle 13,00 m (Seniors Hommes)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- LIVE KPI RESULTS -->
+                <div class="calc-kpi-strip" id="sautsLiveKpis">
+                    <!-- Populated dynamically by JS -->
+                </div>
+
+                <!-- PRINTABLE TRIPLE JUMP 35-30-35% & APPROACH CALIBRATION TABLE -->
+                <div style="padding:1.25rem 1.5rem;background:#ffffff;" id="sautsPrintableTableWrapper">
+                    <h3 style="margin:0 0 0.5rem;font-size:1.02rem;font-weight:900;color:#0f172a;">📋 Table Officielle de Répartition des 3 Bonds au Triple Saut (Ratio d'Or 35% – 30% – 35%) &amp; Repères d'Étalonnage de la Course d'Élan</h3>
+                    <p style="font-size:0.84rem;color:#475569;margin-bottom:0.75rem;">Utilisez la première table pour tracer à la craie sur la piste d'élan les <strong>zones d'atterrissage du 1er bond (Cloche-pied) et du 2e bond (Foulée bondissante)</strong> afin d'éliminer l'écrasement du deuxième bond, et la seconde table pour étalonner la marque de départ de vos élèves :</p>
+                    <div class="table-wrap" id="sautsTablesContainer">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- LINKS TO RELEVANT SCIENTIFIC CALCULATORS -->
+            <div class="content-panel-card">
+                <h2>🧭 Calculateurs Scientifiques Complémentaires sur ProfEPS.ma</h2>
+                <div class="articles-cards-grid">
+                    <article class="rel-card" style="border-color:#b45309;border-width:2px;">
+                        <div>
+                            <div class="rel-card-kicker">Vitesse Maximale · Sprint &amp; Sauts</div>
+                            <h3>🚀 Calculateur de Réserve de Vitesse Anaérobie (ASR) &amp; Vitesse Maximale de Sprint</h3>
+                            <p>La vitesse horizontale en fin d'élan représente 70% de la performance en saut en longueur : évaluez la Vmax de vos sauteurs.</p>
+                        </div>
+                        <a href="calculateur-asr-reserve-vitesse.html" class="rel-card-link">Ouvrir le Calculateur Vmax &amp; ASR →</a>
+                    </article>
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Hub Outils Sport · ProfEPS</div>
+                            <h3>🧭 Hub de Tous les Calculateurs Sport &amp; Performance en EPS</h3>
+                            <p>Retrouvez l'ensemble des 10 calculateurs physiologiques et biomécaniques pour l'EPS et l'ASS.</p>
+                        </div>
+                        <a href="hub-outils-sport-performance.html" class="rel-card-link">Ouvrir le Hub des Calculateurs →</a>
+                    </article>
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Charge Pliométrique · ASS</div>
+                            <h3>🛡️ Calculateur de Charge sRPE (Foster) &amp; Ratio ACWR</h3>
+                            <p>Contrôlez la charge de bondissements pliométriques en Triple Saut pour prévenir les périostites tibiales et tendinites rotuliennes.</p>
+                        </div>
+                        <a href="calculateur-charge-rpe-foster-acwr.html" class="rel-card-link">Ouvrir le Calculateur RPE Foster →</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 3 : ATD SAUT EN LONGUEUR & TRIPLE SAUT                       -->
+        <!-- ================================================================== -->
+        <section id="volet-atd" class="volet-panel" aria-label="Analyse et Traitement Didactique du Saut en Longueur et du Triple Saut">
+            <div class="content-panel-card">
+                <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:0.75rem;">
+                    <h2 style="margin:0;border:none;padding:0;">📐 Analyse et Traitement Didactique (ATD) — Saut en Longueur &amp; Triple Saut</h2>
+                    <div style="display:flex;gap:0.5rem;">
+                        <button type="button" class="export-btn export-word-cycle" onclick="exportSautsATD('word')">📥 Télécharger l'ATD Longueur/Triple Saut (.DOC Word)</button>
+                        <button type="button" class="export-btn export-pdf-cycle" onclick="exportSautsATD('pdf')">🖨️ Imprimer / PDF A4</button>
+                    </div>
+                </div>
+                <p>Synthèse scientifique, biomécanique et didactique complète pour l'épreuve écrite et orale du <strong>concours CRMEF EPS</strong>, l'examen d'aptitude professionnelle et vos cahiers journaliers (OP 2009 &amp; OP 2007).</p>
+
+                <div id="sautsATDExportableContent">
+                    <h3>1. Définition &amp; Logique Interne des Sauts Horizontaux (Longueur &amp; Triple Saut)</h3>
+                    <div class="info-callout">
+                        <p style="margin-bottom:0.5rem;"><strong>Définition didactique :</strong> Le Saut en Longueur et le Triple Saut sont des activités athlétiques psychomotrices codifiées consistant à <strong>franchir la plus grande distance horizontale possible à partir d'une course d'élan progressivement accélérée et étalonnée</strong>, en réalisant une impulsion sur un seul pied dans une zone réglementaire (planche de $20\\text{{ cm}}$) — ou trois impulsions enchaînées <strong>Cloche-pied (Hop) → Foulée (Step) → Saut (Jump)</strong> au Triple Saut — avant de réceptionner dans une fosse de sable.</p>
+                        <p style="margin:0;"><strong>Contradiction biomécanique fondamentale :</strong> Concilier une <strong>vitesse horizontale maximale ($V_x$)</strong> en fin de course d'élan avec la création d'une <strong>vitesse verticale optimale ($V_y$)</strong> lors d'un temps de contact très bref sur la planche ($110\\text{{ à }}130\\text{{ ms}}$), sans freiner ni regarder la planche.</p>
+                    </div>
+
+                    <h3>2. Les 4 Phases Biomécaniques du Saut en Longueur &amp; Spécificités du Triple Saut</h3>
+                    <div class="table-wrap">
+                        <table class="a4-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:18%;">Phase du Saut</th>
+                                    <th style="width:30%;">Saut en Longueur (RT 29)</th>
+                                    <th style="width:30%;">Triple Saut (RT 30 : Cloche-pied / Foulée / Saut)</th>
+                                    <th style="width:22%;">Critères Visuels sur le Terrain</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1. Course d'Élan Étalonnée<br>(70% de la performance)</strong></td>
+                                    <td>Course de <strong>12 à 18 foulées ($20\\text{{ à }}32\\text{{ m}}$)</strong> progressivement accélérée, buste redressé dans les 4 dernières foulées, regard fixé vers l'horizon (jamais sur la planche !).</td>
+                                    <td>Même exigence d'étalonnage précis au demi-pied près, avec une <strong>préparation au griffé rasant</strong> pour ne pas monter trop haut sur le 1er bond.</td>
+                                    <td>Passage à vitesse maximale sur la planche sans piétiner ni allonger la dernière foulée.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2. Liaison Course-Impulsion<br>(Mise en action sur la planche)</strong></td>
+                                    <td>Rythme des 2 derniers appuis <strong>« Long – Court »</strong> (avant-dernière foulée légèrement allongée qui abaisse le centre de gravité, dernière foulée plus courte et ultra-active en griffé), blocage brutal du genou libre et du bras opposé à hauteur d'épaule. Angle d'envol : <strong>$20^\\circ\\text{{ à }}22^\\circ$</strong>.</td>
+                                    <td><strong>1er bond (Cloche-pied / Hop — $35\\%$) :</strong> trajectoire rasante ($\approx 15^\\circ$), échange rapide des cuisses en « ciseau » en l'air pour retomber sur le <strong>même pied</strong> en griffé actif.<br><strong>2e bond (Foulée / Step — $30\\%$) :</strong> montée haute et maintenue du genou libre vers l'avant pour franchir l'espace et retomber sur l'<strong>autre pied</strong>.<br><strong>3e bond (Saut / Jump — $35\\%$) :</strong> impulsion finale vers le haut ($20^\\circ$) dans la fosse.</td>
+                                    <td>Son sec et bref sur la planche (« clac ! » et non « boum ! ») ; alignement Pied d'appel – Bassin – Épaules.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3. Suspension Aérienne<br>(Équilibration en vol)</strong></td>
+                                    <td>La trajectoire du centre de gravité est définitivement fixée dès que le pied quitte la planche ! Les mouvements en l'air (<strong>saut groupé, en extension/cambré ou en ciseaux 2,5 foulées</strong>) servent uniquement à <strong>lutter contre la rotation avant</strong> et à préparer le ramené des jambes.</td>
+                                    <td>Lors du 3e bond (Jump), l'élève utilise une suspension en ouverture (extension) ou groupée haute avant de projeter les deux talons loin devant.</td>
+                                    <td>Buste droit en l'air, bras équilibrateurs actifs, regard vers l'avant de la fosse.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>4. Réception en Ramené<br>(Atterrissage &amp; Sortie)</strong></td>
+                                    <td>Projection des deux jambes tendues loin devant (talons au-delà de la parabole du centre de gravité), suivie d'une flexion souple des genoux et d'un passage du bassin et des bras vers l'avant ou le côté à la touche du sable.</td>
+                                    <td>Même technique d'esquive vers l'avant à l'atterrissage dans le sable afin de ne jamais poser une main en arrière de l'empreinte des talons.</td>
+                                    <td>Une seule trace nette des talons dans le sable + sortie vers l'avant de la fosse.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>3. Tableau de Remédiation des 5 Défauts Majeurs en Saut en Longueur &amp; Triple Saut</h3>
+                    <div class="table-wrap">
+                        <table class="a4-table">
+                            <thead>
+                                <tr>
+                                    <th>Profil d'Élève</th>
+                                    <th>Défaut Observé sur le Sautoir</th>
+                                    <th>Cause Biomécanique / Psychologique</th>
+                                    <th>Situation de Remédiation Ciblée</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Défaut N°1<br>« Le Piétineur Regardant la Planche »</strong></td>
+                                    <td>Ralentit dans les 4 derniers mètres, baisse la tête pour viser la planche et fait 3 petits pas de freinage avant de sauter.</td>
+                                    <td>Peur de mordre la planche de $20\\text{{ cm}}$ + absence de marque d'élan étalonnée.</td>
+                                    <td><strong>Étalonnage en Sens Inverse + Zone Talquée de 60 cm :</strong> partir de la planche et courir vers le départ en comptant 12 foulées à pleine vitesse pour fixer la marque ; placer un foulard haut au fond de la fosse à fixer des yeux.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Défaut N°2<br>« Le Saut Rasant Sans Hauteur »</strong></td>
+                                    <td>Traverse la planche en courant sans monter ; atterrit debout dans le sable à $2{{,}}80\\text{{ m}}$ en continuant à courir.</td>
+                                    <td>Absence de transformation de la vitesse horizontale en impulsion verticale (genou libre bas, pas de blocage).</td>
+                                    <td><strong>Obstacle Mousse / Élastique à $40\\text{{–}}50\\text{{ cm}}$ :</strong> placer une haie en mousse à $1{{,}}50\\text{{ m}}$ après la planche + consigne « frapper le genou libre vers le menton ».</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Défaut N°3<br>« L'Écrasement du 2e Bond au Triple Saut »</strong></td>
+                                    <td>Fait un énorme 1er bond (cloche-pied très haut), s'écrase complètement à la réception et fait un tout petit pas de $80\\text{{ cm}}$ au 2e bond ($48\\% - 15\\% - 37\\%$).</td>
+                                    <td>1er bond trop vertical qui génère une pression d'impact supérieure à la force excentrique du quadriceps.</td>
+                                    <td><strong>Zones Cibles 35%-30%-35% + Lattes d'Espacement :</strong> imposer un 1er bond rasant limité par une zone tracée à la craie et valoriser (+2 pts bonus) tout élève dont la foulée (2e bond) dépasse un cône repère.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Défaut N°4<br>« L'Erreur de Séquence (Foulée-Foulée-Saut) »</strong></td>
+                                    <td>Au Triple Saut, l'élève court sur ses 3 bonds ($G \\to D \\to G$) au lieu de faire le cloche-pied initial ($G \\to G \\to D$).</td>
+                                    <td>Schéma moteur spontané de la course alternée qui prend le dessus sur la coordination du cloche-pied.</td>
+                                    <td><strong>Rythme Sonore &amp; Visuel Couleur :</strong> placer 2 cerceaux de MÊME couleur (ex. Rouge - Rouge) pour le Cloche-pied puis 1 cerceau de couleur opposée (Bleu) pour la Foulée : « ROUGE – ROUGE – BLEU – SABLE ! ».</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Défaut N°5<br>« La Main Posée en Arrière dans le Sable »</strong></td>
+                                    <td>Atterrit loin avec les pieds ($4{{,}}80\\text{{ m}}$), mais tombe sur les fesses ou pose les mains en arrière à $4{{,}}10\\text{{ m}}$ (perdant $70\\text{{ cm}}$ au mesurage RT 29.9 !).</td>
+                                    <td>Épaules rejetées en arrière en fin de vol ou jambes trop raides à l'impact dans le sable.</td>
+                                    <td><strong>Consigne « Embrasser ses Genoux » :</strong> dès que les talons touchent le sable, plier souplement les genoux et lancer les deux bras tendus vers l'avant (vers le râteau au bout de la fosse).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 4 : BARÈMES OFFICIELS LONGUEUR & TRIPLE SAUT & GRILLES (/20) -->
+        <!-- ================================================================== -->
+        <section id="volet-grilles" class="volet-panel" aria-label="Barèmes officiels Saut en Longueur et Triple Saut et grilles d'évaluation sur 20">
+            <div class="content-panel-card">
+                <h2>📊 Barèmes Officiels Chiffrés (Saut en Longueur &amp; Triple Saut — Garçons &amp; Filles) &amp; 4 Grilles (/20)</h2>
+                <p>Sélectionnez la grille d'évaluation souhaitée (Feuille de Concours 3 essais + Précision d'élan, Collège OP 2009, Lycée/Bac OP 2007 ou Élève Dispensé / Juge à la Planche &amp; Mesure à 90°) pour la visualiser en format A4 et la télécharger en <strong>Word (.doc)</strong> ou <strong>PDF A4</strong>.</p>
+
+                <div class="sub-tabs-bar" role="tablist">
+                    <button type="button" class="sub-tab-btn active" data-grid="recueil" onclick="selectEvaluationGrid('recueil')">
+                        📋 1. Feuille Concours 3 Essais &amp; Étalonnage / Ratio 3 Bonds
+                    </button>
+                    <button type="button" class="sub-tab-btn" data-grid="college" onclick="selectEvaluationGrid('college')">
+                        🏫 2. Grille Sommative Collège (1AC–3AC · 12+3+5)
+                    </button>
+                    <button type="button" class="sub-tab-btn" data-grid="lycee" onclick="selectEvaluationGrid('lycee')">
+                        🎓 3. Grille Sommative Lycée &amp; Bac (TC–2Bac · 14+3+3)
+                    </button>
+                    <button type="button" class="sub-tab-btn" data-grid="dispense" onclick="selectEvaluationGrid('dispense')">
+                        🚩 4. Grille Élève Dispensé / Juge Planche &amp; Mesure 90° (/20)
+                    </button>
+                </div>
+
+                <div style="display:flex;justify-content:flex-end;gap:0.5rem;margin-bottom:1rem;">
+                    <button type="button" class="export-btn export-word-cycle" onclick="exportEvaluationGrid('word')">📥 Télécharger cette Grille (.DOC Word)</button>
+                    <button type="button" class="export-btn export-pdf-cycle" onclick="exportEvaluationGrid('pdf')">🖨️ Imprimer / Exporter en PDF A4</button>
+                </div>
+
+                <div class="a4-viewer-outer" style="max-height:none;">
+                    <div id="gridPreviewContainer" class="a4-sheet">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 5 : TERRAIN MAROC (40 ÉLÈVES), ÉCHAUFFEMENT & RT 29-30       -->
+        <!-- ================================================================== -->
+        <section id="volet-terrain" class="volet-panel" aria-label="Organisation de la fosse de saut pour 40 élèves, échauffement et règlement World Athletics">
+            <div class="content-panel-card">
+                <h2>🏖️ Organisation d'un Sautoir pour 40+ Élèves au Maroc, Sécurité de la Fosse &amp; Règlement RT 29-30</h2>
+                <p>Comment éviter la file d'attente interminable de 40 élèves devant une seule piste de saut en longueur et garantir la sécurité des chevilles et des genoux ? Voici l'organisation pédagogique de référence :</p>
+
+                <div class="two-col-grid">
+                    <div class="info-callout" style="border-left-color:var(--primary-dark);background:#fffbeb;">
+                        <strong style="color:#78350f;display:block;margin-bottom:0.35rem;">🏟️ Organisation en 3 Couloirs Parallèles (Largeur de la Fosse Utilisée)</strong>
+                        <ul>
+                            <li>En début et milieu de cycle (Séances 1 à 6), si la fosse de sable est suffisamment longue ($7\text{{ à }}9\text{{ m}}$), on organise des passages sur <strong>2 ou 3 couloirs d'élan réduits ($8\text{{ à }}10\text{{ foulées}}$)</strong> arrivant sur le côté large ou sur 2 planches décalées, doublant ainsi le nombre de sauts par élève.</li>
+                            <li>Sur la piste principale, pendant qu'un groupe de 8 élèves saute, un 2ème groupe de 8 élèves travaille l'<strong>étalonnage de sa course d'élan et le rythme « Cloche-pied – Foulée » sur un couloir parallèle tracé à la craie sur la piste d'athlétisme</strong>, et un 3ème groupe assure le <strong>jury (juge d'appel, juge de fosse, râtisseur, secrétaire)</strong>.</li>
+                        </ul>
+                    </div>
+                    <div class="info-callout" style="border-left-color:var(--accent);background:#f0fdf4;">
+                        <strong style="color:var(--accent);display:block;margin-bottom:0.35rem;">🛡️ Règles de Sécurité Absolue de la Fosse de Sable</strong>
+                        <ul>
+                            <li><strong>Bêchage &amp; Humectage avant la séance :</strong> Une fosse de sable sec et tassé est aussi dure que du béton ! Toujours retourner/ameublir le sable et vérifier l'absence totale de cailloux ou débris avant le 1er saut.</li>
+                            <li><strong>Râteau TOUJOURS posé DENTS VERS LE BAS en dehors de la fosse :</strong> Le râteau doit être posé à $2\text{{ m}}$ sur le côté extérieur de la fosse, dents contre terre.</li>
+                            <li><strong>Couloir dégagé :</strong> Aucun sauteur ne s'élance tant que le camarade précédent n'est pas sorti de la fosse et que le râtisseur n'a pas quitté le sable (Drapeau Blanc levé au départ).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>🔥 Routine d'Échauffement Spécifique Saut en Longueur &amp; Triple Saut (12 Minutes)</h3>
+                <div class="table-wrap">
+                    <table class="a4-table">
+                        <thead>
+                            <tr>
+                                <th style="width:18%;">Phase &amp; Durée</th>
+                                <th style="width:46%;">Exercices &amp; Gammes Athlétiques / Pliométriques</th>
+                                <th style="width:36%;">Objectif Biomécanique &amp; Préventif</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1. Activation Cardio &amp; Mobilisation Articulaire<br>(4 min)</strong></td>
+                                <td>Footing progressif 2 tours + mobilisation active des chevilles (flexion/extension, inversion/éversion), genoux, hanches (ouvertures/fermetures de haies) et colonne lombaire.</td>
+                                <td>Préparer le complexe musculo-tendineux achilléen et rotulien aux forces de réaction au sol (jusqu'à $6\text{{ à }}8\text{{ fois}}$ le poids du corps au Triple Saut !).</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2. Gammes de Course &amp; Griffé Actif<br>(4 min)</strong></td>
+                                <td>Sur $25\text{{ m}}$ : Montées de genoux hautes (bassin haut en antéversion), talons-fesses dynamiques, <strong>griffés jambes tendues (« pas de géant / course jambes tendues »)</strong>, pas chassés et foulées bondissantes alternées ($G-D-G-D$).</td>
+                                <td>Installer la pose d'appui active par l'avant-pied sous le bassin (« griffé ») sans jamais attaquer par le talon bloqué devant soi.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3. Activation Spécifique Impulsion &amp; Multibonds<br>(4 min)</strong></td>
+                                <td>• 3 accélérations progressives sur $25\text{{ m}}$ avec impulsion verticale sur 1 pied tous les 3 appuis (« 1-2-3-Haut ! ») ;<br>• 2 enchaînements souples sur herbe ou piste : 2 cloche-pieds + 2 foulées bondissantes ($G-G-D-D$).</td>
+                                <td>Activer la coordination bras-genou libre à l'appel et le rythme d'enchaînement du Triple Saut.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>⚖️ Règles Techniques World Athletics 2025/2026 (RT 29 &amp; RT 30) — Points Clés &amp; Pièges CRMEF</h3>
+                <div class="table-wrap">
+                    <table class="a4-table">
+                        <thead>
+                            <tr>
+                                <th style="width:24%;">Règle World Athletics</th>
+                                <th style="width:42%;">Texte Réglementaire Exact (RT 29 &amp; RT 30)</th>
+                                <th style="width:34%;">Application EPS Maroc &amp; Concours CRMEF</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>RT 29.1 &amp; 29.3 — Piste ($40\text{{ m}}$) &amp; Planche ($20\text{{ cm}}$)</strong></td>
+                                <td>Piste d'élan d'au moins $40\text{{ m}}$ de long et $1{{,}}22\text{{ m}}$ de large. Planche d'appel blanche : $1{{,}}22\text{{ m}} \times 20\text{{ cm}} \times 10\text{{ cm}}$, placée entre $1\text{{ m}}$ et $3\text{{ m}}$ de la fosse en Longueur.</td>
+                                <td>Au Collège (OP 2009), on utilise une <strong>zone d'appel élargie ($60\text{{ à }}80\text{{ cm}}$)</strong> avec mesure effective depuis la trace du pied d'appel.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>RT 29.5 — Plan Vertical d'Appel &amp; Causes d'Essai Nul</strong></td>
+                                <td>Essai Nul (Drapeau Rouge) si : 1) la chaussure dépasse le <strong>plan vertical</strong> de la ligne d'appel ; 2) appel pris hors des extrémités latérales de la planche ; 3) appel à 2 pieds ou salto ; 4) premier contact en sortant de la fosse plus proche de la planche que l'empreinte dans le sable.</td>
+                                <td>Prendre son appel <strong>avant</strong> la planche (sans toucher la planche) est <strong>100% VALIDE</strong>, mais le saut reste mesuré jusqu'à la ligne d'appel !</td>
+                            </tr>
+                            <tr>
+                                <td><strong>RT 30.1 &amp; 30.2 — Séquence du Triple Saut &amp; Jambe Dormante</strong></td>
+                                <td>Ordre obligatoire : <strong>Cloche-pied (même pied) → Foulée (autre pied) → Saut</strong>. Si la jambe libre (« jambe dormante ») effleure le sol pendant le saut, ce n'est <strong>PAS une faute</strong>.</td>
+                                <td>Question piège classique de l'écrit CRMEF EPS : la jambe dormante qui touche le sol n'annule jamais l'essai !</td>
+                            </tr>
+                            <tr>
+                                <td><strong>RT 29.9 — Mesure Perpendiculaire ($90^\\circ$) &amp; Zéro dans le Sable</strong></td>
+                                <td>Le <strong>zéro ($0\text{{ cm}}$)</strong> du décamètre est placé dans la fosse sur l'empreinte la plus proche de la ligne d'appel (laissée par n'importe quelle partie du corps), et la lecture est prise <strong>perpendiculairement</strong> sur la ligne d'appel au cm inférieur.</td>
+                                <td>Si l'élève pose une main en arrière en se relevant, on mesure depuis l'empreinte de la main !</td>
+                            </tr>
+                            <tr>
+                                <td><strong>RT 25.22 — Départage des Ex Aequo</strong></td>
+                                <td>En cas d'égalité sur la meilleure performance, on compare la <strong>deuxième meilleure performance</strong> des athlètes ex aequo (puis la 3ème si nécessaire).</td>
+                                <td>Même règle pour tous les concours mesurés en mètres/centimètres (Longueur, Triple saut, Lancers).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 6 : BIBLIOTHÈQUE DES ARTICLES SAUTS & ATHLÉTISME LIÉS        -->
+        <!-- ================================================================== -->
+        <section id="volet-articles" class="volet-panel" aria-label="Articles et règlements Sauts et Athlétisme liés">
+            <div class="content-panel-card">
+                <h2>📚 Bibliothèque des Articles, Règlements Sauts (Longueur, Triple Saut, Hauteur, Perche) &amp; Dossiers Liés</h2>
+                <p>Consultez nos dossiers réglementaires et didactiques complets autour du Saut en Longueur, du Triple Saut et du Saut en Hauteur :</p>
+
+                <div class="articles-cards-grid">
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Règlement Officiel · RT 29 &amp; 30</div>
+                            <h3>⚖️ Règlement Officiel du Saut en Longueur &amp; du Triple Saut (World Athletics 2026) : Piste 40m, Planche 20cm, Mesure 90°, Jury &amp; PDF</h3>
+                            <p>Dossier complet illustré avec schéma vectoriel coté du sautoir, gestes des juges (Drapeau Blanc/Rouge/Jaune), règles de la jambe dormante et QCM CRMEF.</p>
+                        </div>
+                        <a href="reglement-saut-longueur-triple-saut-athletisme-eps.html" class="rel-card-link">Lire le règlement Longueur &amp; Triple Saut →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Barèmes Officiels · OP 2007 &amp; Bac Libre</div>
+                            <h3>📊 Barèmes du Bac Sport au Maroc (Officiels &amp; Candidats Libres) : Saut en Longueur (5,40m G / 4,10m F), Poids, Vitesse &amp; Demi-Fond</h3>
+                            <p>Tableaux complets des barèmes sur 20 et sur 7 points (Produit) pour le Saut en Longueur Garçons et Filles au Baccalauréat marocain.</p>
+                        </div>
+                        <a href="article-baremes-bac-sport-maroc-officiels-libres.html" class="rel-card-link">Consulter les barèmes officiels →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Sauts Verticaux · RT 26, 27 &amp; 28</div>
+                            <h3>🦘 Règlement Officiel du Saut en Hauteur (Fosbury-Flop) &amp; du Saut à la Perche : Tapis, Barre 4m, Départage des Ex Aequo &amp; Jury</h3>
+                            <p>Toutes les règles des sauts verticaux : appel obligatoire sur 1 seul pied, 3 échecs consécutifs, départage des ex aequo au moindre nombre d'essais et barrage.</p>
+                        </div>
+                        <a href="reglement-saut-hauteur-perche-athletisme-eps.html" class="rel-card-link">Lire le règlement Saut en Hauteur →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Fiches Pédagogiques · Athlétisme</div>
+                            <h3>📘 Comment Construire une Fiche de Séance d'Athlétisme en EPS (Saut en Longueur avec Élan Étalonné, Sprint &amp; Lancer du Poids)</h3>
+                            <p>Exemples concrets de situations d'apprentissage pour étalonner la course d'élan et construire la liaison course-impulsion en collège et lycée.</p>
+                        </div>
+                        <a href="article-fiche-seance-athletisme-eps.html" class="rel-card-link">Voir les fiches séances Athlétisme →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Fiches ATD · Concours CRMEF</div>
+                            <h3>📐 Ressources ATD Toutes APS (Athlétisme : Sauts, Courses, Lancers ; Gymnastique &amp; Sports Collectifs)</h3>
+                            <p>Synthèses didactiques complètes pour réussir les épreuves écrites et orales du concours des professeurs d'EPS au Maroc.</p>
+                        </div>
+                        <a href="ressources-atd.html" class="rel-card-link">Accéder aux ressources ATD →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Évaluation EPS · OP 2007 &amp; 2009</div>
+                            <h3>📋 Guide de l'Évaluation en EPS au Maroc : Pondération 12/3/5 (Collège) et 14/3/3 (Lycée), Produit vs Processus</h3>
+                            <p>Articulation entre la distance mesurée dans la fosse (Produit /6 ou /7) et l'efficacité technique de l'élan et de l'impulsion (Processus /6 ou /7).</p>
+                        </div>
+                        <a href="evaluation-eps.html" class="rel-card-link">Ouvrir le dossier Évaluation EPS →</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ====================================================================== -->
+    <!-- JAVASCRIPT ENGINE : STUDIO 24 CYCLES / 240 FICHES + CALCULATEUR SAUTS  -->
+    <!-- ====================================================================== -->
+    <script>
+    (function() {{
+        // 1. SCHOOL LEVELS METADATA (OP 2009 Collège & OP 2007 Lycée)
+        var SCHOOL_LEVELS = {{
+            "1AC": {{
+                label: "1ère Année Collège (1AC)",
+                op: "Orientations Pédagogiques 2009 (Collège)",
+                ponderation: "Motricité : 12 pts (6 Produit + 6 Processus) · Connaissances : 3 pts · Attitudes & Sécurité : 5 pts (/20)",
+                epreuve: "Saut en Longueur (Zone d'appel élargie 80 cm) & Initiation aux Multibonds",
+                oti: "L'élève de 1ère AC doit pouvoir acquérir une motricité correcte lui permettant de s'adapter aux exigences des milieux stables (couloir d'élan et fosse de réception).",
+                otc: "Enchaîner une course d'élan accélérée de 8 à 10 foulées avec une impulsion franche sur un seul pied dans une zone d'appel élargie (80 cm) sans ralentir, et réceptionner sur les deux pieds fléchis dans la fosse de sable en sortant vers l'avant."
+            }},
+            "2AC": {{
+                label: "2ème Année Collège (2AC)",
+                op: "Orientations Pédagogiques 2009 (Collège)",
+                ponderation: "Motricité : 12 pts (6 Produit + 6 Processus) · Connaissances : 3 pts · Attitudes & Sécurité : 5 pts (/20)",
+                epreuve: "Saut en Longueur (Zone 60 cm) & Enchaînement de 3 Bonds",
+                oti: "L'élève de 2ème AC doit pouvoir ajuster son énergie physique et la maîtriser pour fournir l'effort adapté et produire la meilleure performance possible.",
+                otc: "Réaliser un saut en longueur (ou un triple bond réglementaire Cloche-pied → Foulée → Saut) après une course d'élan étalonnée de 10 à 12 foulées, en orientant son impulsion vers le haut-avant (montée du genou libre) sans regarder la zone d'appel."
+            }},
+            "3AC": {{
+                label: "3ème Année Collège (3AC)",
+                op: "Orientations Pédagogiques 2009 (Collège)",
+                ponderation: "Motricité : 12 pts (6 Produit + 6 Processus) · Connaissances : 3 pts · Attitudes & Sécurité : 5 pts (/20)",
+                epreuve: "Saut en Longueur (Planche 30–40 cm) & Triple Saut Codifié (Planches 5m / 7m)",
+                oti: "L'élève de 3ème AC doit pouvoir mobiliser ses ressources bioénergétiques et biomécaniques pour réaliser une performance optimale mesurable dans le cadre d'un concours codifié.",
+                otc: "Enchaîner une course d'élan étalonnée (12 foulées) à vitesse maximale avec une impulsion active sur planche (ou 3 bonds équilibrés Cloche-pied → Foulée → Saut sans écrasement du 2ème bond) et une réception en ramené des jambes loin devant."
+            }},
+            "TC": {{
+                label: "Tronc Commun (TC)",
+                op: "Orientations Pédagogiques 2007 (Lycée Qualifiant)",
+                ponderation: "Habiletés Motrices : 14 pts (7 Produit + 7 Processus) · Connaissances : 3 pts · Comportement : 3 pts (/20)",
+                epreuve: "Saut en Longueur (Planche 20 cm) & Triple Saut (Planches 7m / 9m)",
+                oti: "L'élève du Tronc Commun doit pouvoir maîtriser les composantes biomécaniques de la liaison course-impulsion afin de conserver sa vitesse horizontale tout en créant une vitesse verticale optimale.",
+                otc: "Réaliser un saut en longueur ou un triple saut à partir d'une course d'élan étalonnée de 12 à 14 foulées, en posant le pied d'appel avec précision sur la planche sans perte de vitesse et en maintenant l'équilibre aérien jusqu'au ramené."
+            }},
+            "1BAC": {{
+                label: "1ère Année Baccalauréat (1Bac)",
+                op: "Orientations Pédagogiques 2007 (Lycée Qualifiant)",
+                ponderation: "Habiletés Motrices : 14 pts (7 Produit + 7 Processus) · Connaissances : 3 pts · Comportement : 3 pts (/20)",
+                epreuve: "Saut en Longueur (Planche 20 cm) & Triple Saut (Ratio 35%–30%–35%)",
+                oti: "L'élève de 1ère Bac doit pouvoir optimiser son rendement moteur en coordonnant le rythme des deux dernières foulées (« Long – Court »), le griffé actif et la suspension aérienne.",
+                otc: "Exécuter un saut en longueur (avec suspension en extension ou ciseaux) ou un triple saut équilibré (35% Cloche-pied / 30% Foulée / 35% Saut) après 14 à 16 foulées d'élan étalonnées, avec un ramené complet des jambes et du bassin à l'atterrissage."
+            }},
+            "2BAC": {{
+                label: "2ème Année Baccalauréat (2Bac & Bac Sport)",
+                op: "Orientations Pédagogiques 2007 (Examen National Bac Sport)",
+                ponderation: "Habiletés Motrices : 14 pts (7 Produit + 7 Processus) · Connaissances : 3 pts · Comportement : 3 pts (/20)",
+                epreuve: "Concours Officiel Bac Sport : Saut en Longueur ou Triple Saut (3 Essais RT 29-30)",
+                oti: "L'élève de 2ème Bac doit pouvoir concevoir et réaliser un projet individuel de performance sur un concours officiel de 3 essais en mobilisant de façon optimale vitesse d'élan, impulsion et réception.",
+                otc: "Réaliser sur 3 essais réglementaires sa performance maximale au saut en longueur (barème 20/20 = 5,40m G / 4,10m F) ou au triple saut (11,60m G / 9,20m F) avec un élan étalonné précis à ±5 cm sur la planche de 20 cm, un angle d'envol de 20°–22° et une réception sans perte vers l'arrière."
+            }}
+        }};
+
+        // 2. PRACTICE LEVELS METADATA (4 Levels)
+        var PRACTICE_LEVELS = {{
+            "N1": {{
+                title: "Niveau 1 — Débutant (Piétinement devant la planche / Écrasement du 2e bond)",
+                diag: "Les élèves partent sans marque d'élan fixe, baissent la tête dans les 4 derniers mètres pour viser la planche, piétinent en freinant fortement, sautent de façon rasante ou s'écrasent complètement sur le 2e bond du triple saut (ou se trompent dans la séquence Cloche-pied / Foulée).",
+                obj: "Construire une course d'élan régulière et progressivement accélérée (étalonnée en sens inverse), franchir la zone d'appel la tête haute à pleine vitesse et maîtriser la séquence réglementaire « Même pied → Autre pied → 2 pieds ».",
+                org: "Zone d'appel élargie de 60 à 80 cm saupoudrée de talc · Repère visuel haut au fond de la fosse · Cerceaux de couleur (Rouge-Rouge-Bleu) pour guider la séquence du Triple Saut."
+            }},
+            "N2": {{
+                title: "Niveau 2 — Débrouillé (Course accélérée mais impulsion rasante / Main en arrière)",
+                diag: "Les élèves conservent leur vitesse d'élan mais traversent la planche sans créer de hauteur (pas de blocage du genou libre), retombent debout ou posent une main en arrière dans le sable à la réception (perdant 40 à 70 cm).",
+                obj: "Transformer la vitesse horizontale en impulsion verticale (angle ~20°) par l'action coordonnée du genou libre et des bras vers le haut, équilibrer le 2e bond du triple saut et maîtriser l'esquive vers l'avant à l'atterrissage.",
+                org: "Obstacle en mousse ou fil élastique à 40–50 cm de haut placé à 1,50 m après la planche · Zones cibles 35%-30%-35% tracées à la craie sur la piste."
+            }},
+            "N3": {{
+                title: "Niveau 3 — Confirmé (Élan étalonné 14 foulées, liaison course-appel & ramené)",
+                diag: "Les élèves possèdent une marque d'élan fiable à ±10 cm et décollent correctement (20°), mais manquent encore de griffé actif sur la dernière foulée (« Long-Court ») ou ramènent les jambes trop tôt en l'air.",
+                obj: "Optimiser le rythme des 2 dernières foulées (avant-dernière légèrement allongée, dernière raccourcie et griffée sous le bassin), retarder la rotation avant par une suspension en extension/ciseaux et projeter les talons loin devant.",
+                org: "Planche officielle de 20 cm · Couloirs d'élan étalonnés au décamètre (12 à 16 foulées) · Planches de Triple Saut à 7 m, 9 m et 11 m."
+            }},
+            "N4": {{
+                title: "Niveau 4 — Élite / ASS (Vitesse terminale maximale, Ciseaux 2,5 & Ratio 35-30-35%)",
+                diag: "Élèves performants visant le 18–20/20 au Bac ou les compétitions ASS, cherchant à maximiser la vitesse sur les 4 derniers appuis et l'amplitude de la foulée bondissante au Triple Saut sans perte d'énergie.",
+                obj: "Atteindre 98–100% de sa vitesse maximale sur la planche de 20 cm avec moins de 5 cm de perte, réaliser un double ciseau aérien (Longueur) ou un triple bond en griffé à plat (35%-30%-35%) et réussir un concours stratégique de 3 essais.",
+                org: "Conditions officielles World Athletics (RT 29 & 30) · Plastiline / bande de contrôle de mordu · Jury officiel complet d'élèves (Drapeaux Blanc/Rouge, mesure perpendiculaire à 90°)."
+            }}
+        }};
+
+        // 3. 10 SESSIONS STRUCTURE GENERATOR
+        var SESSION_TEMPLATES = [
+            {{
+                num: 1,
+                title: "Séance 1 — Évaluation Diagnostique, Sécurité de la Fosse & Découverte de l'Impulsion",
+                theme: "Diagnostic initial (Longueur & Triple bond) + Règles de sécurité de la fosse de sable et du râteau",
+                echauffement: "Footing 2 tours + mobilisation chevilles/genoux/hanches + gammes athlétiques (montées de genoux, griffés, foulées bondissantes) sur 25 m.",
+                fondamentale: "Atelier 1 : Explication des règles de sécurité (bêchage du sable, râteau dents vers le bas à 2 m hors fosse, sortie obligatoire vers l'avant). Atelier 2 : Test diagnostique sur 3 essais en Saut en Longueur (avec zone d'appel talquée de 80 cm pour observer l'écart et le piétinement) + 2 essais de découverte du Triple Saut (Cloche-pied → Foulée → Saut).",
+                critRealisation: "Choisir son pied d'appel fort (pied de détente), courir en accélérant progressivement sans regarder ses pieds à l'approche de la fosse et atterrir sur les deux pieds fléchis dans le sable.",
+                critReussite: "Identifier son pied d'appel préférentiel, réaliser 3 sauts mesurés sans piétiner et constituer les 4 groupes de niveau.",
+                bilan: "Retour au calme, étirements ischio-jambiers/mollets et explication de la mesure perpendiculaire (0 cm dans le sable)."
+            }},
+            {{
+                num: 2,
+                title: "Séance 2 — Étalonnage de la Course d'Élan (10 à 14 Foulées) & Suppression du Piétinement",
+                theme: "Construire une course d'élan régulière et reproductible pour attaquer la planche à 100% de vitesse",
+                echauffement: "Activation cardio + gammes d'appuis rythmés sur lattes espacées régulièrement + 3 accélérations progressives sur 25 m.",
+                fondamentale: "Méthode de l'Étalonnage en Sens Inverse : chaque élève place son pied d'appel sur la planche et court en sens inverse (vers le départ) en accélérant progressivement sur 10, 12 ou 14 foulées. Son binôme observateur pointe exactement l'empreinte de la 12e (ou 14e) foulée à la craie/plot. L'élève réalise ensuite 5 courses d'élan dans le bon sens en fixant un foulard haut au fond de la fosse (interdiction de baisser les yeux vers la planche !).",
+                critRealisation: "Partir toujours du même pied sur la marque de départ (pied d'appel dessus pour un nombre pair de foulées), accélérer régulièrement jusqu'à la planche et garder la tête haute.",
+                critReussite: "Atteindre la zone d'appel de 30 cm sur au moins 4 essais sur 5 à pleine vitesse sans aucun petit pas de réglage.",
+                bilan: "Enregistrement par chaque élève de sa marque personnelle d'élan en mètres et en nombre de pieds depuis la planche."
+            }},
+            {{
+                num: 3,
+                title: "Séance 3 — Liaison Course-Impulsion : Le Rythme « Long – Court » & l'Angle d'Envol (20°–22°)",
+                theme: "Transformer la vitesse horizontale en impulsion verticale par le blocage du genou libre",
+                echauffement: "Mise en train + exercices de « 1-2-3-Haut ! » (montée explosive du genou libre et du bras opposé tous les 3 pas).",
+                fondamentale: "Situation de la « Haie Mousse & Cible Haute » : placer un obstacle en mousse (40 cm de haut) à 1,50 m après la planche d'appel et suspendre un ballon/foulard en hauteur au-dessus de la fosse. Sur 10 à 12 foulées d'élan, l'élève doit frapper la planche par un griffé sec (son « clac ! ») et projeter son genou libre vers le ballon suspendu pour franchir l'obstacle mousse.",
+                critRealisation: "Raccourcir et accélérer la toute dernière foulée (« Long – Court »), poser le pied d'appel à plat sous le bassin (jamais talon loin devant) et bloquer le genou libre à l'horizontale.",
+                critReussite: "Franchir l'obstacle mousse sans le toucher sur 4 essais sur 5 tout en gagnant au moins +25 cm de longueur par rapport à un saut rasant.",
+                bilan: "Analyse par les observateurs de la différence entre un appel « écrasé » (bassin bas) et un appel « haut et griffé »."
+            }},
+            {{
+                num: 4,
+                title: "Séance 4 — Initiation au Triple Saut : Maîtriser la Séquence « Cloche-Pied → Foulée → Saut » (RT 30.1)",
+                theme: "Installer la coordination motrice fondamentale « Même pied – Autre pied – 2 pieds »",
+                echauffement: "Échauffement articulaire renforcé des chevilles + gammes de cloche-pieds (G-G-G / D-D-D) et de foulées bondissantes (G-D-G-D) sur herbe ou tapis.",
+                fondamentale: "Atelier des « Cerceaux Couleurs & Rythme Sonore » : devant la fosse (planche à 5 m ou 7 m), disposer 2 zones de MÊME couleur (ex. 2 lattes Jaunes pour le Cloche-pied : G → G) suivies d'une zone de couleur différente (Bleue pour la Foulée : → D) avant le sable (→ 2 pieds). L'élève annonce à voix haute sa formule (« Gauche – Gauche – Droite – Sable ! » ou « Droite – Droite – Gauche – Sable ! ») pendant son saut.",
+                critRealisation: "Enchaîner le 1er bond sur le même pied d'appel en ramenant le talon sous la fesse avant de griffer le sol vers l'avant (et non en sautillant sur place).",
+                critReussite: "Réaliser 5 triples sauts consécutifs réglementairement valides (100% de réussite de la séquence G-G-D ou D-D-G sans faute de pied).",
+                bilan: "Rappel de la règle RT 30.2 sur la jambe dormante (effleurer le sol avec la jambe libre n'est pas une faute)."
+            }},
+            {{
+                num: 5,
+                title: "Séance 5 — Équilibrer les 3 Bonds au Triple Saut : Le Ratio d'Or 35% – 30% – 35% (Vaincre l'Écrasement du 2e Bond)",
+                theme: "Raser le 1er bond (Cloche-pied) pour conserver l'énergie et allonger le 2e bond (Foulée bondissante)",
+                echauffement: "Échauffement complet + exercices de griffé actif jambes tendues et foulées bondissantes par-dessus des lattes espacées.",
+                fondamentale: "À l'aide du Calculateur Triple Saut ProfEPS, tracer à la craie sur la piste les zones cibles 35% / 30% / 35% (ex. depuis la planche de 7 m ou 9 m). Règle de score bonifié : si l'élève fait un 1er bond trop haut et s'écrase avant la ligne des 30% au 2e bond, il ne marque que 1 point ; s'il réalise un Cloche-pied rasant et franchit la zone cible du 2e bond (Foulée haute et maintenue) avant de sauter dans le sable, il obtient un bonus de +1,00 m au classement de l'atelier !",
+                critRealisation: "Garder le 1er bond rasant (~15°), attaquer le sol en « patinette » (griffé actif d'avant en arrière sous le bassin) et monter haut le genou libre lors du 2e bond (Foulée).",
+                critReussite: "Obtenir un 2e bond (Foulée) représentant au moins 27% à 30% de la distance totale sur 3 essais sur 4.",
+                bilan: "Comparaison chiffrée entre un triple saut déséquilibré (45%-18%-37%) et un triple saut équilibré (35%-30%-35%)."
+            }},
+            {{
+                num: 6,
+                title: "Séance 6 — La Suspension Aérienne (Extension / Ciseaux) & le Ramené Groupé des Jambes",
+                theme: "Retarder la rotation avant en l'air et projeter les talons au-delà de la parabole du centre de gravité",
+                echauffement: "Activation cardio + sauts groupés et sauts en extension sur place + éducatifs de ramené assis sur tapis.",
+                fondamentale: "Situation en Saut en Longueur (et 3e bond du Triple Saut) sur élan de 10 à 12 foulées : après l'impulsion sur la planche, l'élève maintient une phase d'ouverture (extension du buste ou 1,5 à 2,5 ciseaux de jambes en l'air), puis regroupe tardivement les deux genoux vers la poitrine en jetant les talons loin devant dans le sable.",
+                critRealisation: "Ne pas précipiter les pieds vers le sol dès l'appel ; grandir en l'air avec les bras hauts, puis lancer simultanément les deux talons vers l'avant et les bras vers l'avant à l'impact.",
+                critReussite: "Gagner +20 à +35 cm sur la trace des talons avec une réception équilibrée vers l'avant sur 4 essais sur 5.",
+                bilan: "Correction du défaut de la main posée en arrière dans le sable (qui fait perdre jusqu'à 70 cm à la mesure)."
+            }},
+            {{
+                num: 7,
+                title: "Séance 7 — Précision à la Planche Officielle de 20 cm & Ajustement de la Marque d'Élan",
+                theme: "Réduire la perte à l'appel (écart pied-planche ≤ 10 cm) sans ralentir ni mordre",
+                echauffement: "Échauffement spécifique + 2 passages d'étalonnage à vitesse de compétition sur le couloir d'élan.",
+                fondamentale: "Passage de la zone élargie à la planche officielle de 20 cm. Le juge d'appel observe l'écart exact entre la pointe du pied et la ligne d'appel : • Si l'élève mord de 15 cm, il recule sa marque de départ de 15 cm (sans changer sa course !) ; • S'il prend son appel 25 cm avant la planche, il avance sa marque de départ de 20 cm. Répétition sur 5 essais à vitesse maximale.",
+                critRealisation: "Faire une confiance totale à sa marque d'élan : courir exactement avec la même amplitude et le même rythme, et laisser le juge d'appel régler la marque de départ.",
+                critReussite: "Poser le pied d'appel sur la planche blanche de 20 cm (perte < 10 cm, zéro mordu) sur au moins 4 essais sur 5.",
+                bilan: "Validation définitive de la marque individuelle d'élan (en mètres et en pieds) pour le concours sommatif."
+            }},
+            {{
+                num: 8,
+                title: "Séance 8 — Le Griffé Actif sur les 3 Appuis du Triple Saut & Choix de la Planche (7m / 9m / 11m)",
+                theme: "Optimiser la conservation de la vitesse horizontale et choisir sa planche officielle de concours",
+                echauffement: "Échauffement complet + bondissements pliométriques rasants et griffés actifs.",
+                fondamentale: "Test de sélection de la planche optimale au Triple Saut (7 m, 9 m ou 11 m de la fosse) : pour que le 3e bond atterrisse en toute sécurité à au moins 1,50 m à l'intérieur de la fosse de sable tout en permettant un élan rapide. Travail de l'action symétrique ou alternée des bras pour soulager l'appui lors de la transition Cloche-pied → Foulée.",
+                critRealisation: "Garder le tronc droit et vertical au-dessus de chaque appui (ne jamais pencher les épaules en avant lors du 1er et du 2e bond).",
+                critReussite: "Atterrir à plus de 1,50 m à l'intérieur du sable sur 3 essais consécutifs avec un rythme sonore régulier des 3 appuis (« TAC… TAC… TAC ! »).",
+                bilan: "Attribution de la planche officielle (7m, 9m ou 11m) de chaque élève pour le concours."
+            }},
+            {{
+                num: 9,
+                title: "Séance 9 — Concours Blanc Officiel (3 Essais) & Formation du Jury World Athletics (RT 29-30)",
+                theme: "Simulation complète de l'épreuve du Bac Sport / Collège avec rotation des rôles d'officiels",
+                echauffement: "Échauffement autonome dirigé par les chefs de groupe (12 min) + 1 passage de vérification de marque sur la piste.",
+                fondamentale: "Concours officiel en poules sur 3 essais (temps limité à 60 s par essai). Rotation sur les 4 rôles d'officiels : 1) Juge Chef à la Planche (vérifie le plan vertical de la ligne d'appel et la séquence du triple saut → Drapeau Blanc / Rouge + lit la distance sur la ligne d'appel) ; 2) Juge à la Fosse (plante le 0 cm du décamètre sur la trace la plus proche de la planche) ; 3) Râtisseur-Seccurité (nivelle le sable et pose le râteau dents vers le bas) ; 4) Secrétaire de concours (note les 3 essais et départage les ex aequo à la 2e meilleure performance).",
+                critRealisation: "Assurer un 1er essai valide (marge de sécurité de 5 cm sur la planche), puis engager 100% de vitesse sur les essais 2 et 3.",
+                critReussite: "Au moins 2 essais validés (Drapeau Blanc) sur 3 + application rigoureuse de la mesure perpendiculaire à 90°.",
+                bilan: "Analyse des feuilles de concours, calcul des notes provisoires et rappels techniques individualisés."
+            }},
+            {{
+                num: 10,
+                title: "Séance 10 — Évaluation Sommative Officielle (/20 — OP 2009 Collège & OP 2007 Lycée/Bac)",
+                theme: "Concours officiel de 3 essais + Évaluation du processus technique, des connaissances et du jugement",
+                echauffement: "Échauffement standardisé autonome (12 min) + vérification de la marque personnelle d'élan.",
+                fondamentale: "Passage par groupes officiels sur 3 essais réglementaires en Saut en Longueur (ou Triple Saut). La meilleure des 3 performances validées donne la note Produit (/6 au Collège, /7 au Lycée/Bac), complétée par la note de Processus moteur (/6 ou /7 : régularité de l'élan, précision à la planche, impulsion/équilibrage des 3 bonds et ramené), le contrôle des connaissances (/3) et la tenue des rôles de juge et râtisseur (/5 ou /3).",
+                critRealisation: "Mobiliser sa vitesse maximale sur une course étalonnée, impulser à 20°–22° sans mordre et ramener les jambes loin devant.",
+                critReussite: "Validation de la compétence attendue du niveau scolaire et attribution de la note finale sur 20.",
+                bilan: "Proclamation des résultats du concours, bilan du cycle et remise en état de la fosse."
+            }}
+        ];
+
+        // Current Studio State
+        var currentState = {{
+            level: "1AC",
+            practice: "N1",
+            mode: "cycle",
+            sessionNum: 1,
+            gridType: "recueil"
+        }};
+
+        // Read URL parameter ?level= if provided
+        try {{
+            var params = new URLSearchParams(window.location.search);
+            var lvlParam = (params.get("level") || "").toUpperCase();
+            if (SCHOOL_LEVELS[lvlParam]) {{
+                currentState.level = lvlParam;
+            }}
+        }} catch (e) {{}}
+
+        // Expose Global Navigation Functions
+        window.switchVolet = function(voletId) {{
+            document.querySelectorAll(".volet-tab-btn").forEach(function(btn) {{
+                btn.classList.toggle("active", btn.getAttribute("data-volet") === voletId);
+            }});
+            document.querySelectorAll(".volet-panel").forEach(function(panel) {{
+                panel.classList.toggle("active", panel.id === voletId);
+            }});
+            if (window.location.hash !== "#" + voletId) {{
+                history.replaceState(null, null, "#" + voletId);
+            }}
+        }};
+
+        window.selectSchoolLevel = function(lvl) {{
+            if (!SCHOOL_LEVELS[lvl]) return;
+            currentState.level = lvl;
+            document.querySelectorAll(".school-level-tab").forEach(function(b) {{
+                b.classList.toggle("active", b.getAttribute("data-level") === lvl);
+            }});
+            renderStudioA4();
+        }};
+
+        window.selectPracticeLevel = function(prac) {{
+            if (!PRACTICE_LEVELS[prac]) return;
+            currentState.practice = prac;
+            document.querySelectorAll(".practice-pill").forEach(function(b) {{
+                b.classList.toggle("active", b.getAttribute("data-practice") === prac);
+            }});
+            renderStudioA4();
+        }};
+
+        window.selectDocMode = function(mode) {{
+            currentState.mode = mode;
+            document.getElementById("btnModeCycle").classList.toggle("active", mode === "cycle");
+            document.getElementById("btnModeFiche").classList.toggle("active", mode === "fiche");
+            renderStudioA4();
+        }};
+
+        window.selectSessionNumber = function(num) {{
+            currentState.sessionNum = num;
+            currentState.mode = "fiche";
+            document.getElementById("btnModeCycle").classList.remove("active");
+            document.getElementById("btnModeFiche").classList.add("active");
+            document.querySelectorAll(".session-num-btn").forEach(function(b) {{
+                b.classList.toggle("active", parseInt(b.getAttribute("data-s"), 10) === num);
+            }});
+            renderStudioA4();
+        }};
+
+        function renderStudioA4() {{
+            var container = document.getElementById("studioA4Sheet");
+            if (!container) return;
+            var s = SCHOOL_LEVELS[currentState.level];
+            var p = PRACTICE_LEVELS[currentState.practice];
+
+            if (currentState.mode === "cycle") {{
+                var rowsHtml = "";
+                for (var i = 0; i < SESSION_TEMPLATES.length; i++) {{
+                    var st = SESSION_TEMPLATES[i];
+                    rowsHtml += '<tr>' +
+                        '<td style="font-weight:800;text-align:center;width:7%;">S' + st.num + '</td>' +
+                        '<td style="width:24%;"><strong>' + st.title.replace(/^Séance \\d+ — /, '') + '</strong><br><span style="font-size:0.75rem;color:#475569;">' + st.theme + '</span></td>' +
+                        '<td style="width:33%;">' + st.fondamentale + '</td>' +
+                        '<td style="width:20%;">' + st.critRealisation + '</td>' +
+                        '<td style="width:16%;font-weight:700;color:#006233;">' + st.critReussite + '<br><button type="button" onclick="selectSessionNumber(' + st.num + ')" style="margin-top:0.35rem;padding:0.2rem 0.5rem;background:#b45309;color:#fff;border:none;border-radius:5px;font-size:0.7rem;font-weight:800;cursor:pointer;">Voir Fiche S' + st.num + ' →</button></td>' +
+                        '</tr>';
+                }}
+
+                container.innerHTML =
+                    '<div class="a4-header-banner">' +
+                        '<div class="a4-header-top">' +
+                            '<span>Royaume du Maroc · Ministère de l\'Éducation Nationale, du Préscolaire et des Sports</span>' +
+                            '<span>' + s.op + '</span>' +
+                        '</div>' +
+                        '<div class="a4-doc-title">PROJET PRÉVISIONNEL DE CYCLE — SAUT EN LONGUEUR &amp; TRIPLE SAUT (' + s.label.toUpperCase() + ')</div>' +
+                        '<div style="text-align:center;font-size:0.8rem;font-weight:800;color:#006233;">' + p.title + ' · Support : ' + s.epreuve + '</div>' +
+                    '</div>' +
+                    '<table class="a4-meta-table">' +
+                        '<tr>' +
+                            '<th>APS Support</th><td><strong>Saut en Longueur &amp; Triple Saut (Athlétisme)</strong> — Piste ≥ 40m · Planche 20cm · Fosse 2,75–3,00m</td>' +
+                            '<th>Niveau Scolaire</th><td><strong>' + s.label + '</strong> (' + s.epreuve + ')</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                            '<th>Profil Initial (Diagnostic)</th><td>' + p.diag + '</td>' +
+                            '<th>Objectif de Transformation</th><td>' + p.obj + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                            '<th>Pondération Évaluation</th><td colspan="3"><strong>' + s.ponderation + '</strong></td>' +
+                        '</tr>' +
+                    '</table>' +
+                    '<div class="a4-oti-box">' +
+                        '<p style="margin-bottom:0.35rem;"><strong>Objectif Terminal d\'Intégration (OTI) :</strong> ' + s.oti + '</p>' +
+                        '<p style="margin:0;"><strong>Compétence Attendue en Saut en Longueur / Triple Saut (OTC) :</strong> ' + s.otc + '</p>' +
+                    '</div>' +
+                    '<table class="a4-table">' +
+                        '<thead>' +
+                            '<tr>' +
+                                '<th>N°</th>' +
+                                '<th>Objectif &amp; Thème de Séance</th>' +
+                                '<th>Situation Fondamentale &amp; Dispositif Pédagogique</th>' +
+                                '<th>Critères de Réalisation (Savoir-Faire)</th>' +
+                                '<th>Critères de Réussite</th>' +
+                            '</tr>' +
+                        '</thead>' +
+                        '<tbody>' + rowsHtml + '</tbody>' +
+                    '</table>';
+            }} else {{
+                var sess = SESSION_TEMPLATES[currentState.sessionNum - 1] || SESSION_TEMPLATES[0];
+                container.innerHTML =
+                    '<div class="a4-header-banner">' +
+                        '<div class="a4-header-top">' +
+                            '<span>Royaume du Maroc · MENPS · Éducation Physique et Sportive</span>' +
+                            '<span>Fiche Pédagogique Officielle · ' + s.op + '</span>' +
+                        '</div>' +
+                        '<div class="a4-doc-title">FICHE DE PRÉPARATION DE SÉANCE N°' + sess.num + ' / 10 — SAUT EN LONGUEUR &amp; TRIPLE SAUT</div>' +
+                        '<div style="text-align:center;font-size:0.82rem;font-weight:800;color:#006233;">' + s.label + ' · ' + p.title + '</div>' +
+                    '</div>' +
+                    '<table class="a4-meta-table">' +
+                        '<tr>' +
+                            '<th>Titre de la Séance</th><td><strong>' + sess.title + '</strong></td>' +
+                            '<th>Durée &amp; Effectif</th><td>55 à 60 min · 36 à 42 élèves (Couloirs parallèles + Fosse)</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                            '<th>Thème Principal</th><td>' + sess.theme + '</td>' +
+                            '<th>Matériel &amp; Sécurité</th><td>' + p.org + ' · Râteau dents vers le bas à 2m hors fosse</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                            '<th>Compétence du Cycle (OTC)</th><td colspan="3">' + s.otc + '</td>' +
+                        '</tr>' +
+                    '</table>' +
+                    '<table class="a4-table">' +
+                        '<thead>' +
+                            '<tr>' +
+                                '<th style="width:15%;">Partie &amp; Durée</th>' +
+                                '<th style="width:37%;">Contenu Pédagogique &amp; Dispositif Spatial</th>' +
+                                '<th style="width:26%;">Critères de Réalisation &amp; Consignes</th>' +
+                                '<th style="width:22%;">Critères de Réussite &amp; Régulation</th>' +
+                            '</tr>' +
+                        '</thead>' +
+                        '<tbody>' +
+                            '<tr>' +
+                                '<td><strong>1. Partie Introductive<br>(12 min)</strong></td>' +
+                                '<td><strong>Prise en main &amp; Échauffement Spécifique Sauts :</strong><br>' + sess.echauffement + '<br><em>Vérification de l\'ameublissement du sable et de la position sécurisée du râteau.</em></td>' +
+                                '<td>• Mobiliser activement chevilles, genoux et hanches.<br>• Poser les appuis par l\'avant-pied (« griffé ») sous le bassin.</td>' +
+                                '<td>• Élèves prêts sur le plan articulaire et pliométrique.<br>• Piste et fosse sécurisées.</td>' +
+                            '</tr>' +
+                            '<tr>' +
+                                '<td><strong>2. Partie Fondamentale<br>(35 min)</strong></td>' +
+                                '<td><strong>Situation d\'Apprentissage de Référence :</strong><br>' + sess.fondamentale + '<br><br><strong>Aménagement matériel :</strong> ' + p.org + '</td>' +
+                                '<td><strong>Critères de réalisation :</strong><br>' + sess.critRealisation + '<br><br><strong>Variables didactiques :</strong><br>• Simplifier : zone d\'appel élargie (60 cm), élan réduit à 10 foulées, lattes guides.<br>• Complexifier : planche officielle 20 cm, élan complet 14–16 foulées, fil haut.</td>' +
+                                '<td><strong>Critères de réussite :</strong><br>' + sess.critReussite + '</td>' +
+                            '</tr>' +
+                            '<tr>' +
+                                '<td><strong>3. Partie Finale<br>(8 min)</strong></td>' +
+                                '<td><strong>Retour au calme, Bilan &amp; Remise en état de la fosse :</strong><br>' + sess.bilan + '</td>' +
+                                '<td>• Étirements passifs courts des mollets, ischio-jambiers, quadriceps et psoas.<br>• Nivellement final du sable.</td>' +
+                                '<td>• Verbalisation des repères d\'étalonnage et de la séquence des bonds.<br>• Annonce de la séance suivante.</td>' +
+                            '</tr>' +
+                        '</tbody>' +
+                    '</table>';
+            }}
+        }}
+
+        // Export Helper (Word .doc & PDF Print)
+        function exportHtmlBlock(htmlInner, filenameBase, mode, titleDoc) {{
+            var fullHtml = '<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>' + titleDoc + '</title>' +
+                '<style>' +
+                'body {{ font-family: Arial, sans-serif; color: #0f172a; margin: 18px; font-size: 11pt; line-height: 1.45; }}' +
+                'table {{ width: 100%; border-collapse: collapse; margin-bottom: 12px; font-size: 9.5pt; }}' +
+                'th, td {{ border: 1px solid #1e293b; padding: 6px 8px; text-align: left; vertical-align: top; }}' +
+                'thead th {{ background: #0f172a; color: #ffffff; font-weight: bold; }}' +
+                '.a4-header-banner {{ border: 2px solid #0f172a; padding: 10px; margin-bottom: 12px; background: #f8fafc; text-align: center; }}' +
+                '.a4-doc-title {{ font-size: 14pt; font-weight: bold; color: #b45309; margin: 4px 0; }}' +
+                '.a4-oti-box {{ border: 1.5px solid #006233; background: #f0fdf4; padding: 8px 10px; margin-bottom: 12px; }}' +
+                'button {{ display: none !important; }}' +
+                '@page {{ size: A4 landscape; margin: 12mm; }}' +
+                '</style></head><body>' + htmlInner +
+                '<p style="text-align:right;font-size:8.5pt;color:#64748b;margin-top:10px;">Document généré gratuitement sur ProfEPS Maroc (https://profeps.ma)</p>' +
+                '</body></html>';
+
+            if (mode === "word") {{
+                var blob = new Blob(['\\ufeff', fullHtml], {{ type: 'application/msword;charset-utf-8' }});
+                var url = URL.createObjectURL(blob);
+                var a = document.createElement("a");
+                a.href = url;
+                a.download = filenameBase + ".doc";
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(function() {{
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }}, 250);
+            }} else {{
+                var w = window.open("", "_blank");
+                if (w) {{
+                    w.document.open();
+                    w.document.write(fullHtml);
+                    w.document.close();
+                    setTimeout(function() {{ w.focus(); w.print(); }}, 350);
+                }} else {{
+                    window.print();
+                }}
+            }}
+        }}
+
+        window.exportStudioDocument = function(targetMode, format) {{
+            var prevMode = currentState.mode;
+            if (targetMode !== prevMode) {{
+                currentState.mode = targetMode;
+                renderStudioA4();
+            }}
+            var sheet = document.getElementById("studioA4Sheet");
+            var htmlInner = sheet ? sheet.innerHTML : "";
+            var fname = "ProfEPS-Saut-Longueur-Triple-Saut-" + currentState.level + "-" + currentState.practice + "-" +
+                        (targetMode === "cycle" ? "Projet-Cycle-10-Seances" : "Fiche-Seance-S" + currentState.sessionNum);
+            exportHtmlBlock(htmlInner, fname, format, fname);
+            if (targetMode !== prevMode) {{
+                currentState.mode = prevMode;
+                renderStudioA4();
+            }}
+        }};
+
+        window.exportSautsATD = function(format) {{
+            var el = document.getElementById("sautsATDExportableContent");
+            if (!el) return;
+            var header = '<div class="a4-header-banner"><div class="a4-doc-title">ANALYSE ET TRAITEMENT DIDACTIQUE (ATD) — SAUT EN LONGUEUR &amp; TRIPLE SAUT EN EPS AU MAROC</div><div>Référentiel OP 2009 (Collège), OP 2007 (Lycée) &amp; Règles Techniques 29-30 World Athletics · ProfEPS.ma</div></div>';
+            exportHtmlBlock(header + el.innerHTML, "ProfEPS-ATD-Saut-Longueur-Triple-Saut-EPS-Maroc", format, "ATD Saut en Longueur et Triple Saut EPS Maroc");
+        }};
+
+        // ==================================================================
+        // 4. APPROACH CALIBRATION & TRIPLE JUMP 35-30-35% CALCULATOR (VOLET 2)
+        // ==================================================================
+        function getSautBaremeNote(dist, epreuve) {{
+            var thresholds = {{
+                "LONG_BAC_G": [5.40, 5.10, 4.80, 4.50, 4.20, 3.90, 3.55],
+                "LONG_BAC_F": [4.10, 3.85, 3.60, 3.35, 3.10, 2.85, 2.60],
+                "LONG_COL_G": [4.50, 4.20, 3.90, 3.60, 3.30, 3.00, 2.70],
+                "LONG_COL_F": [3.50, 3.25, 3.00, 2.75, 2.50, 2.25, 2.00],
+                "TS_BAC_G":   [11.60, 11.00, 10.40, 9.80, 9.20, 8.60, 7.90],
+                "TS_BAC_F":   [9.20, 8.70, 8.20, 7.70, 7.20, 6.70, 6.10]
+            }};
+            var t = thresholds[epreuve] || thresholds["LONG_BAC_G"];
+            if (dist >= t[0]) return {{ note20: "20 / 20", noteProd: "7,0 / 7 (ou 6/6)" }};
+            if (dist >= t[1]) return {{ note20: "18 / 20", noteProd: "6,5 / 7 (ou 5,5/6)" }};
+            if (dist >= t[2]) return {{ note20: "16 / 20", noteProd: "6,0 / 7 (ou 5,0/6)" }};
+            if (dist >= t[3]) return {{ note20: "14 / 20", noteProd: "5,0 / 7 (ou 4,25/6)" }};
+            if (dist >= t[4]) return {{ note20: "12 / 20", noteProd: "4,25 / 7 (ou 3,5/6)" }};
+            if (dist >= t[5]) return {{ note20: "10 / 20", noteProd: "3,5 / 7 (ou 3,0/6)" }};
+            if (dist >= t[6]) return {{ note20: "08 / 20", noteProd: "2,75 / 7 (ou 2,5/6)" }};
+            return {{ note20: "06 / 20", noteProd: "2,0 / 7 (ou 2,0/6)" }};
+        }}
+
+        window.setSautPreset = function(epreuve, perf) {{
+            var sel = document.getElementById("calcEpreuve");
+            var inp = document.getElementById("calcPerf");
+            if (sel && inp) {{
+                sel.value = epreuve;
+                inp.value = perf;
+                updateSautsCalculator();
+            }}
+        }};
+
+        window.updateSautsCalculator = function() {{
+            var epreuve = document.getElementById("calcEpreuve").value || "LONG_BAC_G";
+            var nbFoulees = parseInt(document.getElementById("calcFoulees").value, 10) || 14;
+            var tailleCm = parseFloat(document.getElementById("calcTaille").value) || 172;
+            var perf = parseFloat(document.getElementById("calcPerf").value) || 4.85;
+            var plancheTS = parseFloat(document.getElementById("calcPlancheTS").value) || 9.0;
+
+            // Average running stride in approach run ~ 1.12 * height (first 4 strides shorter, last strides longer)
+            var ampMoy = (tailleCm / 100.0) * 1.11;
+            var distElanM = nbFoulees * ampMoy;
+            var chaussureM = (tailleCm / 100.0) * 0.158; // standard foot length with shoe
+            var nbPieds = Math.round(distElanM / chaussureM);
+
+            // Triple jump breakdown for either the entered perf (if >= 6.5m) or a reference TS perf (= perf * 2.15 if user entered a Long Jump distance)
+            var isTripleSelected = epreuve.indexOf("TS_") === 0;
+            var tsRefDist = isTripleSelected ? perf : Math.max(7.50, +(perf * 2.15).toFixed(2));
+            var b1Hop = tsRefDist * 0.35;
+            var b2Step = tsRefDist * 0.30;
+            var b3Jump = tsRefDist * 0.35;
+            var dansSable = (b1Hop + b2Step + b3Jump) - plancheTS;
+
+            var bareme = getSautBaremeNote(perf, epreuve);
+
+            var kpiStrip = document.getElementById("sautsLiveKpis");
+            if (kpiStrip) {{
+                kpiStrip.innerHTML =
+                    '<div class="calc-kpi-box">' +
+                        '<span class="kpi-val" style="color:#b45309;">' + distElanM.toFixed(2).replace('.', ',') + ' m</span>' +
+                        '<span class="kpi-lbl">Marque d\'Élan (' + nbFoulees + ' foulées ≈ ' + nbPieds + ' pieds)</span>' +
+                    '</div>' +
+                    '<div class="calc-kpi-box">' +
+                        '<span class="kpi-val" style="color:#1e40af;">' + bareme.note20 + '</span>' +
+                        '<span class="kpi-lbl">Note Barème (' + bareme.noteProd + ')</span>' +
+                    '</div>' +
+                    '<div class="calc-kpi-box">' +
+                        '<span class="kpi-val" style="color:#006233;">' + b1Hop.toFixed(2).replace('.', ',') + ' m</span>' +
+                        '<span class="kpi-lbl">1er Bond Cloche-Pied (35% de ' + tsRefDist.toFixed(2).replace('.', ',') + 'm)</span>' +
+                    '</div>' +
+                    '<div class="calc-kpi-box">' +
+                        '<span class="kpi-val" style="color:#991b1b;">' + b2Step.toFixed(2).replace('.', ',') + ' m</span>' +
+                        '<span class="kpi-lbl">2e Bond Foulée (30% — Cible Anti-Écrasement)</span>' +
+                    '</div>' +
+                    '<div class="calc-kpi-box">' +
+                        '<span class="kpi-val" style="color:#0f766e;">' + b3Jump.toFixed(2).replace('.', ',') + ' m</span>' +
+                        '<span class="kpi-lbl">3e Bond Saut (35% · Dans le sable : ' + (dansSable > 0 ? '+' + dansSable.toFixed(2).replace('.', ',') + 'm' : 'Planche trop loin !') + ')</span>' +
+                    '</div>';
+            }}
+
+            // Build Triple Jump 35-30-35% Reference Table from 7.00m to 13.00m
+            var tsTargets = [7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0];
+            var tsRows = "";
+            for (var i = 0; i < tsTargets.length; i++) {{
+                var d = tsTargets[i];
+                var h = d * 0.35;
+                var s = d * 0.30;
+                var j = d * 0.35;
+                var cum1 = h;
+                var cum2 = h + s;
+                var recPl = d < 8.2 ? "Planche 5 m ou 7 m" : (d < 10.2 ? "Planche 7 m ou 9 m" : (d < 11.8 ? "Planche 9 m" : "Planche 11 m"));
+                tsRows += '<tr>' +
+                    '<td><strong>' + d.toFixed(2).replace('.', ',') + ' m</strong></td>' +
+                    '<td style="color:#006233;font-weight:800;">' + h.toFixed(2).replace('.', ',') + ' m (Marque 1 à ' + cum1.toFixed(2).replace('.', ',') + ' m)</td>' +
+                    '<td style="color:#991b1b;font-weight:800;">' + s.toFixed(2).replace('.', ',') + ' m (Marque 2 à ' + cum2.toFixed(2).replace('.', ',') + ' m)</td>' +
+                    '<td style="color:#1e40af;font-weight:800;">' + j.toFixed(2).replace('.', ',') + ' m</td>' +
+                    '<td><strong>' + recPl + '</strong></td>' +
+                    '</tr>';
+            }}
+
+            // Build Approach Run Calibration Table for 8, 10, 12, 14, 16, 18 strides
+            var fList = [8, 10, 12, 14, 16, 18];
+            var fRows = "";
+            for (var k = 0; k < fList.length; k++) {{
+                var nf = fList[k];
+                var dm = nf * ampMoy;
+                var np = Math.round(dm / chaussureM);
+                var highlight = (nf === nbFoulees) ? ' style="background:#fffbeb;font-weight:800;"' : '';
+                fRows += '<tr' + highlight + '>' +
+                    '<td><strong>' + nf + ' foulées</strong> ' + (nf === 12 ? '(Standard Collège 3AC / TC)' : (nf === 14 ? '★ Standard Lycée / Bac' : '')) + '</td>' +
+                    '<td><strong>' + dm.toFixed(2).replace('.', ',') + ' m</strong> depuis la planche</td>' +
+                    '<td><strong>≈ ' + np + ' pieds</strong> (chaussures bout-à-bout)</td>' +
+                    '<td>Départ pied d\'appel sur la marque (nombre pair de foulées)</td>' +
+                    '</tr>';
+            }}
+
+            var tblContainer = document.getElementById("sautsTablesContainer");
+            if (tblContainer) {{
+                tblContainer.innerHTML =
+                    '<table class="a4-table">' +
+                        '<thead>' +
+                            '<tr>' +
+                                '<th>Performance Totale Triple Saut</th>' +
+                                '<th>1er Bond : Cloche-Pied (35%) &amp; Marque Craie N°1</th>' +
+                                '<th>2e Bond : Foulée Bondissante (30%) &amp; Marque Craie N°2</th>' +
+                                '<th>3e Bond : Saut Final dans le Sable (35%)</th>' +
+                                '<th>Planche Recommandée en EPS</th>' +
+                            '</tr>' +
+                        '</thead>' +
+                        '<tbody>' + tsRows + '</tbody>' +
+                    '</table>' +
+                    '<table class="a4-table" style="margin-top:0.8rem;">' +
+                        '<thead>' +
+                            '<tr>' +
+                                '<th colspan="4">📏 Table d\'Étalonnage de la Marque de Départ de la Course d\'Élan (Pour un élève de ' + tailleCm + ' cm)</th>' +
+                            '</tr>' +
+                            '<tr>' +
+                                '<th>Nombre de Foulées d\'Élan</th>' +
+                                '<th>Distance de Départ au Décamètre</th>' +
+                                '<th>Équivalent en « Pieds » (Chaussures)</th>' +
+                                '<th>Repère de Pose du Pied au Départ</th>' +
+                            '</tr>' +
+                        '</thead>' +
+                        '<tbody>' + fRows + '</tbody>' +
+                    '</table>';
+            }}
+        }};
+
+        window.exportSautsCalcTable = function(format) {{
+            var wrap = document.getElementById("sautsPrintableTableWrapper");
+            if (!wrap) return;
+            var header = '<div class="a4-header-banner"><div class="a4-doc-title">TABLE D\'ÉTALONNAGE DE L\'ÉLAN &amp; RÉPARTITION DES 3 BONDS AU TRIPLE SAUT (35%–30%–35%) — EPS MAROC</div></div>';
+            exportHtmlBlock(header + wrap.innerHTML, "ProfEPS-Table-Elan-Longueur-Triple-Saut", format, "Table Élan et Triple Saut EPS Maroc");
+        }};
+
+        // ==================================================================
+        // 5. EVALUATION GRIDS & OFFICIAL BARÈMES (VOLET 4)
+        // ==================================================================
+        window.selectEvaluationGrid = function(gType) {{
+            currentState.gridType = gType;
+            document.querySelectorAll("#volet-grilles .sub-tab-btn").forEach(function(b) {{
+                b.classList.toggle("active", b.getAttribute("data-grid") === gType);
+            }});
+            renderEvaluationGrid();
+        }};
+
+        function renderEvaluationGrid() {{
+            var box = document.getElementById("gridPreviewContainer");
+            if (!box) return;
+            var g = currentState.gridType;
+
+            if (g === "recueil") {{
+                var emptyRows = "";
+                for (var i = 1; i <= 12; i++) {{
+                    emptyRows += '<tr>' +
+                        '<td style="text-align:center;font-weight:700;">' + i + '</td>' +
+                        '<td></td>' +
+                        '<td style="text-align:center;">G / F</td>' +
+                        '<td style="text-align:center;">...... m (.... foulées)</td>' +
+                        '<td></td><td></td><td></td>' +
+                        '<td style="background:#f8fafc;font-weight:800;"></td>' +
+                        '<td style="text-align:center;">☐ &lt;10cm ☐ &gt;20cm</td>' +
+                        '<td style="text-align:center;">☐ Oui ☐ Non</td>' +
+                        '<td></td>' +
+                        '</tr>';
+                }}
+                box.innerHTML =
+                    '<div class="a4-header-banner">' +
+                        '<div class="a4-header-top"><span>Royaume du Maroc · MENPS · EPS</span><span>Fiche Officielle de Concours (3 Essais) — Saut en Longueur &amp; Triple Saut</span></div>' +
+                        '<div class="a4-doc-title">FEUILLE DE CONCOURS SAUT EN LONGUEUR / TRIPLE SAUT (3 ESSAIS) &amp; PRÉCISION D\'ÉTALONNAGE</div>' +
+                        '<div style="font-size:0.8rem;font-weight:700;color:#334155;">Classe : .................... · Épreuve : ☐ Saut en Longueur ☐ Triple Saut (Planche : .... m) · Date : ....../....../202..</div>' +
+                    '</div>' +
+                    '<table class="a4-table">' +
+                        '<thead>' +
+                            '<tr>' +
+                                '<th style="width:4%;">N°</th>' +
+                                '<th style="width:19%;">Nom &amp; Prénom du Sauteur</th>' +
+                                '<th style="width:5%;">Sexe</th>' +
+                                '<th style="width:13%;">Marque d\'Élan Étalonnée</th>' +
+                                '<th style="width:9%;">Essai 1 (m)</th>' +
+                                '<th style="width:9%;">Essai 2 (m)</th>' +
+                                '<th style="width:9%;">Essai 3 (m)</th>' +
+                                '<th style="width:10%;">Meilleur Saut Retenu</th>' +
+                                '<th style="width:10%;">Perte Planche</th>' +
+                                '<th style="width:10%;">Ramené &amp; Sortie Avant ?</th>' +
+                                '<th style="width:7%;">Note /20</th>' +
+                            '</tr>' +
+                        '</thead>' +
+                        '<tbody>' + emptyRows + '</tbody>' +
+                    '</table>' +
+                    '<div class="a4-oti-box" style="margin-top:0.5rem;">' +
+                        '<strong>Rappel réglementaire (RT 29 &amp; 30) :</strong> Le <strong>Zéro (0 cm)</strong> du décamètre est placé dans la fosse sur l\'empreinte la plus proche de la planche (main, fesses ou talons) et la lecture se fait perpendiculairement sur la ligne d\'appel au cm inférieur · Inscrire <strong>« X »</strong> si Essai Mordu (Drapeau Rouge).' +
+                    '</div>';
+            }} else if (g === "college") {{
+                box.innerHTML =
+                    '<div class="a4-header-banner">' +
+                        '<div class="a4-header-top"><span>Royaume du Maroc · MENPS · Collège (OP 2009)</span><span>Pondération Officielle : 12 pts Motricité + 3 pts Connaissances + 5 pts Attitudes = /20</span></div>' +
+                        '<div class="a4-doc-title">GRILLE D\'ÉVALUATION SOMMATIVE COLLÈGE (1AC · 2AC · 3AC) — SAUT EN LONGUEUR &amp; TRIPLE SAUT</div>' +
+                        '<div style="font-size:0.8rem;font-weight:800;color:#006233;">Évaluation sur 3 essais avec zone d\'appel aménagée (60 cm en 1AC/2AC, 30–40 cm en 3AC)</div>' +
+                    '</div>' +
+                    '<h4 style="margin:0.4rem 0;color:#b45309;font-size:0.9rem;">1. Barème de Performance Chiffrée — Note PRODUIT (/6 points) en Collège (Longueur &amp; Triple Saut)</h4>' +
+                    '<table class="a4-table">' +
+                        '<thead>' +
+                            '<tr>' +
+                                '<th>Note Produit (/6 pts)</th>' +
+                                '<th>1AC/2AC Longueur G</th>' +
+                                '<th>1AC/2AC Longueur F</th>' +
+                                '<th>3AC Longueur Garçons</th>' +
+                                '<th>3AC Longueur Filles</th>' +
+                                '<th>3AC Triple Saut Garçons</th>' +
+                                '<th>3AC Triple Saut Filles</th>' +
+                            '</tr>' +
+                        '</thead>' +
+                        '<tbody>' +
+                            '<tr><td><strong>6,0 / 6 pts (Excellent)</strong></td><td>≥ 4,00 m</td><td>≥ 3,15 m</td><td><strong>≥ 4,50 m</strong></td><td><strong>≥ 3,50 m</strong></td><td><strong>≥ 9,60 m</strong></td><td><strong>≥ 7,60 m</strong></td></tr>' +
+                            '<tr><td><strong>5,0 / 6 pts (Très Bien)</strong></td><td>3,65 – 3,99 m</td><td>2,85 – 3,14 m</td><td><strong>4,15 – 4,49 m</strong></td><td><strong>3,20 – 3,49 m</strong></td><td><strong>8,90 – 9,59 m</strong></td><td><strong>7,00 – 7,59 m</strong></td></tr>' +
+                            '<tr><td><strong>4,0 / 6 pts (Bien)</strong></td><td>3,30 – 3,64 m</td><td>2,55 – 2,84 m</td><td><strong>3,80 – 4,14 m</strong></td><td><strong>2,90 – 3,19 m</strong></td><td><strong>8,20 – 8,89 m</strong></td><td><strong>6,40 – 6,99 m</strong></td></tr>' +
+                            '<tr><td><strong>3,0 / 6 pts (Moyen)</strong></td><td>2,95 – 3,29 m</td><td>2,25 – 2,54 m</td><td><strong>3,45 – 3,79 m</strong></td><td><strong>2,60 – 2,89 m</strong></td><td><strong>7,50 – 8,19 m</strong></td><td><strong>5,80 – 6,39 m</strong></td></tr>' +
+                            '<tr><td><strong>2,0 / 6 pts (Faible)</strong></td><td>2,60 – 2,94 m</td><td>1,95 – 2,24 m</td><td><strong>3,00 – 3,44 m</strong></td><td><strong>2,25 – 2,59 m</strong></td><td><strong>6,80 – 7,49 m</strong></td><td><strong>5,20 – 5,79 m</strong></td></tr>' +
+                            '<tr><td><strong>1,0 / 6 pts (Insuffisant)</strong></td><td>&lt; 2,60 m</td><td>&lt; 1,95 m</td><td><strong>&lt; 3,00 m</strong></td><td><strong>&lt; 2,25 m</strong></td><td><strong>&lt; 6,80 m</strong></td><td><strong>&lt; 5,20 m</strong></td></tr>' +
+                        '</tbody>' +
+                    '</table>' +
+                    '<h4 style="margin:0.5rem 0 0.35rem;color:#006233;font-size:0.9rem;">2. Grille du PROCESSUS Moteur (/6 pts), des Connaissances (/3 pts) et des Attitudes/Sécurité (/5 pts)</h4>' +
+                    '<table class="a4-table">' +
+                        '<thead>' +
+                            '<tr>' +
+                                '<th style="width:22%;">Dimension Évaluée</th>' +
+                                '<th style="width:26%;">Niveau 1 (1 à 2 pts)</th>' +
+                                '<th style="width:26%;">Niveau 2 (3 à 4 pts)</th>' +
+                                '<th style="width:26%;">Niveau 3 (5 à 6 pts)</th>' +
+                            '</tr>' +
+                        '</thead>' +
+                        '<tbody>' +
+                            '<tr>' +
+                                '<td><strong>Processus Technique : Élan, Impulsion &amp; Réception (/6 pts)</strong></td>' +
+                                '<td>Élan non étalonné, piétine en regardant la planche, impulsion rasante ou erreur de pied au triple saut.</td>' +
+                                '<td>Élan accéléré sans freinage, appel valide mais suspension courte ou main posée en arrière dans le sable.</td>' +
+                                '<td><strong>Course étalonnée rapide (tête haute), impulsion haute (~20°) ou 3 bonds équilibrés (G-G-D) et réception en ramené groupé vers l\'avant.</strong></td>' +
+                            '</tr>' +
+                            '<tr>' +
+                                '<td><strong>Connaissances Conceptuelles &amp; Règlement (/3 pts)</strong></td>' +
+                                '<td><strong>1 / 3 pt :</strong> Connaît uniquement l\'interdiction de dépasser la ligne d\'appel.</td>' +
+                                '<td><strong>2 / 3 pts :</strong> Connaît les causes d\'essai nul et la séquence obligatoire Cloche-pied / Foulée / Saut.</td>' +
+                                '<td><strong>3 / 3 pts :</strong> Maîtrise la mesure perpendiculaire (0 cm dans le sable), le ratio 35-30-35% et le départage des ex aequo.</td>' +
+                            '</tr>' +
+                            '<tr>' +
+                                '<td><strong>Attitudes, Sécurité de la Fosse &amp; Jugement (/5 pts)</strong></td>' +
+                                '<td><strong>1 à 2 / 5 pts :</strong> Oublie de niveler le sable ou laisse le râteau dents vers le haut.</td>' +
+                                '<td><strong>3 à 4 / 5 pts :</strong> Respecte les règles de sécurité et participe activement au ratissage et au mesurage.</td>' +
+                                '<td><strong>5 / 5 pts :</strong> Juge autonome à la planche (Drapeaux Blanc/Rouge) et à la lecture perpendiculaire au cm inférieur.</td>' +
+                            '</tr>' +
+                        '</tbody>' +
+                    '</table>';
+            }} else if (g === "lycee") {{
+                box.innerHTML =
+                    '<div class="a4-header-banner">' +
+                        '<div class="a4-header-top"><span>Royaume du Maroc · MENPS · Lycée Qualifiant &amp; Bac Sport (OP 2007)</span><span>Pondération Officielle : 14 pts Motricité (7 Produit + 7 Processus) + 3 pts Connaissances + 3 pts Comportement = /20</span></div>' +
+                        '<div class="a4-doc-title">GRILLE SOMMATIVE LYCÉE (TC · 1BAC · 2BAC) &amp; BARÈME OFFICIEL BAC SPORT — LONGUEUR &amp; TRIPLE SAUT</div>' +
+                        '<div style="font-size:0.8rem;font-weight:800;color:#b45309;">Concours officiel de 3 essais sur planche réglementaire de 20 cm (RT 29 &amp; RT 30 World Athletics)</div>' +
+                    '</div>' +
+                    '<h4 style="margin:0.4rem 0;color:#b45309;font-size:0.9rem;">1. Barème Officiel Chiffré Lycée &amp; Bac Sport Maroc — Note PRODUIT (/7 pts en Cycle EPS ou /20 au Bac Libre)</h4>' +
+                    '<table class="a4-table">' +
+                        '<thead>' +
+                            '<tr>' +
+                                '<th>Note Bac Libre (/20)</th>' +
+                                '<th>Note Produit Cycle (/7 pts)</th>' +
+                                '<th>Saut en Longueur Garçons (2Bac)</th>' +
+                                '<th>Saut en Longueur Filles (2Bac)</th>' +
+                                '<th>Triple Saut Garçons (Lycée/Bac)</th>' +
+                                '<th>Triple Saut Filles (Lycée/Bac)</th>' +
+                            '</tr>' +
+                        '</thead>' +
+                        '<tbody>' +
+                            '<tr><td><strong>20 / 20</strong></td><td><strong>7,0 / 7 pts</strong></td><td style="background:#fffbeb;font-weight:900;color:#b45309;">≥ 5,40 m</td><td style="background:#f0fdf4;font-weight:900;color:#006233;">≥ 4,10 m</td><td style="background:#fffbeb;font-weight:900;color:#b45309;">≥ 11,60 m</td><td style="background:#f0fdf4;font-weight:900;color:#006233;">≥ 9,20 m</td></tr>' +
+                            '<tr><td><strong>18 / 20</strong></td><td><strong>6,5 / 7 pts</strong></td><td><strong>5,10 m</strong></td><td><strong>3,85 m</strong></td><td><strong>11,00 m</strong></td><td><strong>8,70 m</strong></td></tr>' +
+                            '<tr><td><strong>16 / 20</strong></td><td><strong>6,0 / 7 pts</strong></td><td><strong>4,80 m</strong></td><td><strong>3,60 m</strong></td><td><strong>10,40 m</strong></td><td><strong>8,20 m</strong></td></tr>' +
+                            '<tr><td><strong>14 / 20</strong></td><td><strong>5,0 / 7 pts</strong></td><td><strong>4,50 m</strong></td><td><strong>3,35 m</strong></td><td><strong>9,80 m</strong></td><td><strong>7,70 m</strong></td></tr>' +
+                            '<tr><td><strong>12 / 20</strong></td><td><strong>4,25 / 7 pts</strong></td><td><strong>4,20 m</strong></td><td><strong>3,10 m</strong></td><td><strong>9,20 m</strong></td><td><strong>7,20 m</strong></td></tr>' +
+                            '<tr><td><strong>10 / 20</strong></td><td><strong>3,5 / 7 pts</strong></td><td><strong>3,90 m</strong></td><td><strong>2,85 m</strong></td><td><strong>8,60 m</strong></td><td><strong>6,70 m</strong></td></tr>' +
+                            '<tr><td><strong>08 / 20</strong></td><td><strong>2,75 / 7 pts</strong></td><td><strong>3,55 m</strong></td><td><strong>2,60 m</strong></td><td><strong>7,90 m</strong></td><td><strong>6,10 m</strong></td></tr>' +
+                            '<tr><td><strong>06 / 20</strong></td><td><strong>2,0 / 7 pts</strong></td><td><strong>&lt; 3,55 m</strong></td><td><strong>&lt; 2,60 m</strong></td><td><strong>&lt; 7,90 m</strong></td><td><strong>&lt; 6,10 m</strong></td></tr>' +
+                        '</tbody>' +
+                    '</table>' +
+                    '<h4 style="margin:0.5rem 0 0.35rem;color:#006233;font-size:0.9rem;">2. Grille d\'Évaluation du PROCESSUS Moteur (/7 points) — Lycée &amp; 2ème Bac (OP 2007)</h4>' +
+                    '<table class="a4-table">' +
+                        '<thead>' +
+                            '<tr>' +
+                                '<th style="width:25%;">Critère Biomécanique (/7 pts)</th>' +
+                                '<th style="width:25%;">Niveau Débutant (0,5 pt)</th>' +
+                                '<th style="width:25%;">Niveau Intermédiaire (1 à 1,5 pt)</th>' +
+                                '<th style="width:25%;">Niveau Confirmé / Élite (2 à 2,5 pts)</th>' +
+                            '</tr>' +
+                        '</thead>' +
+                        '<tbody>' +
+                            '<tr>' +
+                                '<td><strong>1. Étalonnage de l\'Élan &amp; Précision sur la Planche 20 cm (/2,5 pts)</strong></td>' +
+                                '<td>Ralentit devant la planche, regarde ses pieds ou mord 2 essais sur 3.</td>' +
+                                '<td>Course accélérée mais perte à l\'appel comprise entre 15 et 30 cm.</td>' +
+                                '<td><strong>Élan de 14–16 foulées progressivement accéléré à vitesse maximale, pose sur la planche de 20 cm (perte &lt; 8 cm) la tête haute.</strong></td>' +
+                            '</tr>' +
+                            '<tr>' +
+                                '<td><strong>2. Liaison Course-Impulsion (ou Équilibrage 35-30-35% au Triple Saut) (/2,5 pts)</strong></td>' +
+                                '<td>Impulsion écrasée / rasante (&lt; 12°) ou écrasement complet du 2e bond au triple saut.</td>' +
+                                '<td>Impulsion correcte mais sans rythme « Long – Court » marqué sur les 2 derniers appuis.</td>' +
+                                '<td><strong>Griffé actif sous le bassin, blocage explosif du genou libre à 20°–22° (ou 3 bonds équilibrés 35%-30%-35% sans temps mort).</strong></td>' +
+                            '</tr>' +
+                            '<tr>' +
+                                '<td><strong>3. Suspension Aérienne &amp; Réception en Ramené (/2,0 pts)</strong></td>' +
+                                '<td>Déséquilibre aérien, retombe debout ou pose les mains en arrière dans le sable.</td>' +
+                                '<td>Suspension groupée simple avec réception à 2 pieds sans chute arrière.</td>' +
+                                '<td><strong>Suspension en extension ou ciseaux (2,5 foulées), ramené tardif des talons loin devant et esquive du bassin vers l\'avant.</strong></td>' +
+                            '</tr>' +
+                        '</tbody>' +
+                    '</table>';
+            }} else {{
+                box.innerHTML =
+                    '<div class="a4-header-banner">' +
+                        '<div class="a4-header-top"><span>Royaume du Maroc · MENPS · Évaluation Adaptée</span><span>Élève Inapte Partiel / Dispensé Pratique · Jury Officiel Sauts Horizontaux</span></div>' +
+                        '<div class="a4-doc-title">GRILLE D\'ÉVALUATION DE L\'ÉLÈVE DISPENSÉ / JUGE À LA PLANCHE &amp; À LA MESURE 90° (/20)</div>' +
+                        '<div style="font-size:0.8rem;font-weight:700;color:#334155;">Nom &amp; Prénom : ................................................ · Classe : ............ · Rôle : Chef Juge d\'Appel &amp; Juge Décamètre</div>' +
+                    '</div>' +
+                    '<table class="a4-table">' +
+                        '<thead>' +
+                            '<tr>' +
+                                '<th style="width:26%;">Compétence Évaluée</th>' +
+                                '<th style="width:14%;">Barème</th>' +
+                                '<th style="width:42%;">Indicateurs de Réussite sur le Sautoir</th>' +
+                                '<th style="width:18%;">Note Attribuée</th>' +
+                            '</tr>' +
+                        '</thead>' +
+                        '<tbody>' +
+                            '<tr>' +
+                                '<td><strong>1. Jugement à la Planche d\'Appel (RT 29.5 &amp; RT 30.1)</strong></td>' +
+                                '<td><strong>/ 5 points</strong></td>' +
+                                '<td>Vérifie le plan vertical de la ligne d\'appel (20 cm), la séquence Cloche-pied → Foulée → Saut au triple saut et la sortie vers l\'avant de la fosse → Lève Drapeau Blanc ou Rouge sans hésitation.</td>' +
+                                '<td>........ / 5 pts</td>' +
+                            '</tr>' +
+                            '<tr>' +
+                                '<td><strong>2. Mesure Officielle Perpendiculaire à 90° (RT 29.9)</strong></td>' +
+                                '<td><strong>/ 5 points</strong></td>' +
+                                '<td>Place systématiquement le ZÉRO (0 cm) dans le sable sur la trace la plus proche de la planche (main, bassin ou talon) et lit la mesure perpendiculairement sur la ligne d\'appel au cm inférieur.</td>' +
+                                '<td>........ / 5 pts</td>' +
+                            '</tr>' +
+                            '<tr>' +
+                                '<td><strong>3. Conseil d\'Étalonnage de la Marque d\'Élan</strong></td>' +
+                                '<td><strong>/ 5 points</strong></td>' +
+                                '<td>Observe l\'écart pied-planche du sauteur et lui indique la correction exacte à reporter sur sa marque de départ (ex. « recule ta marque de 15 cm » ou « avance de 20 cm »).</td>' +
+                                '<td>........ / 5 pts</td>' +
+                            '</tr>' +
+                            '<tr>' +
+                                '<td><strong>4. Sécurité de la Fosse &amp; Départage des Ex Aequo (RT 25.22)</strong></td>' +
+                                '<td><strong>/ 5 points</strong></td>' +
+                                '<td>Veille à ce que le râteau soit toujours posé dents vers le bas à 2 m hors fosse, tient la feuille des 3 essais et départage les ex aequo grâce à la 2e meilleure performance.</td>' +
+                                '<td>........ / 5 pts</td>' +
+                            '</tr>' +
+                            '<tr style="background:#f1f5f9;font-weight:900;">' +
+                                '<td colspan="3" style="text-align:right;">TOTAL ÉVALUATION ÉLÈVE DISPENSÉ / JUGE OFFICIEL LONGUEUR &amp; TRIPLE SAUT :</td>' +
+                                '<td>........ / 20</td>' +
+                            '</tr>' +
+                        '</tbody>' +
+                    '</table>';
+            }}
+        }}
+
+        window.exportEvaluationGrid = function(format) {{
+            var box = document.getElementById("gridPreviewContainer");
+            if (!box) return;
+            var fname = "ProfEPS-Grille-Longueur-Triple-Saut-" + currentState.gridType;
+            exportHtmlBlock(box.innerHTML, fname, format, fname);
+        }};
+
+        // Initial render on page load
+        document.addEventListener("DOMContentLoaded", function() {{
+            selectSchoolLevel(currentState.level);
+            updateSautsCalculator();
+            renderEvaluationGrid();
+
+            // Check hash to open specific volet
+            var h = (window.location.hash || "").replace("#", "");
+            if (h && document.getElementById(h)) {{
+                switchVolet(h);
+            }}
+        }});
+
+        // Immediate init in case DOM is already parsed
+        selectSchoolLevel(currentState.level);
+        updateSautsCalculator();
+        renderEvaluationGrid();
+    }})();
+    </script>
+
+{footer}
+</body>
+</html>
+'''
+
+    out_path = os.path.join(PUBLIC_DIR, "aps-saut-longueur-triple-saut-eps-maroc.html")
+    with open(out_path, "w", encoding="utf-8") as f:
+        f.write(html_content)
+    print(f"[SILO SAUT EN LONGUEUR & TRIPLE SAUT OK] Created {out_path}")
+
+
+def update_hub_silos_blog_index_sitemap():
+    # 1. Update /public/hub-aps-sports-eps-maroc.html
+    hub_path = os.path.join(PUBLIC_DIR, "hub-aps-sports-eps-maroc.html")
+    if os.path.exists(hub_path):
+        with open(hub_path, "r", encoding="utf-8") as f:
+            hhtml = f.read()
+
+        if "aps-saut-longueur-triple-saut-eps-maroc.html" not in hhtml:
+            saut_featured_section = '''
+        <!-- SILO MODÈLE N°9 : SAUT EN LONGUEUR & TRIPLE SAUT (STUDIO COMPLET ACTIF) -->
+        <section class="featured-silo-banner" aria-label="Silo Complet N°9 : Saut en Longueur & Triple Saut en EPS" style="background:linear-gradient(135deg,#78350f 0%,#b45309 55%,#0f172a 100%);margin-top:1.5rem;">
+            <div>
+                <span class="featured-silo-kicker">🦘 Silo Complet N°9 Actif · 1AC à 2Bac × 4 Niveaux + Calculateur Élan &amp; Ratio 35-30-35%</span>
+                <h2 class="featured-silo-title">Page Spéciale Saut en Longueur &amp; Triple Saut : Studio Cycles &amp; Fiches (Visionneuse A4 Pro), Calculateur d'Élan &amp; Triple Bond, ATD &amp; Barèmes (/20)</h2>
+                <p class="featured-silo-desc">
+                    Le neuvième silo complet du portail est en ligne : <strong>Calculateur d'étalonnage de la course d'élan (en mètres et en pieds) &amp; répartition des 3 bonds au Triple Saut (35%–30%–35%)</strong>, <strong>introduction + ATD Sauts Horizontaux</strong>, <strong>Studio interactif des 6 niveaux scolaires (1AC → 2Bac) × 4 niveaux de pratique</strong> avec aperçu A4 et téléchargement <strong>Word (.doc) et PDF</strong>, plus les <strong>barèmes officiels Longueur &amp; Triple Saut (/20)</strong>.
+                </p>
+                <div class="featured-silo-actions">
+                    <a href="aps-saut-longueur-triple-saut-eps-maroc.html" class="btn-silo-primary" style="color:#b45309;">🦘 Ouvrir le Silo Saut en Longueur &amp; Triple Saut →</a>
+                    <a href="aps-saut-longueur-triple-saut-eps-maroc.html#volet-calculateur-sauts" class="btn-silo-secondary">🧮 Calculateur Élan &amp; 35-30-35%</a>
+                    <a href="aps-saut-longueur-triple-saut-eps-maroc.html#volet-grilles" class="btn-silo-secondary">📊 Barèmes Longueur &amp; Triple Saut (/20)</a>
+                </div>
+            </div>
+            <div class="featured-silo-Matrix">
+                <h4>⚡ Accès Direct par Niveau Scolaire (Longueur &amp; Triple Saut)</h4>
+                <div class="level-mini-grid">
+                    <a href="aps-saut-longueur-triple-saut-eps-maroc.html?level=1AC#volet-studio" class="level-item">1ère AC<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">Zone 80cm &amp; Appel 1 pied</span></a>
+                    <a href="aps-saut-longueur-triple-saut-eps-maroc.html?level=2AC#volet-studio" class="level-item">2ème AC<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">Élan 10-12F &amp; Multibonds</span></a>
+                    <a href="aps-saut-longueur-triple-saut-eps-maroc.html?level=3AC#volet-studio" class="level-item">3ème AC<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">Étalonnage &amp; G-G-D</span></a>
+                    <a href="aps-saut-longueur-triple-saut-eps-maroc.html?level=TC#volet-studio" class="level-item">Tronc Commun<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">Liaison Course-Appel</span></a>
+                    <a href="aps-saut-longueur-triple-saut-eps-maroc.html?level=1BAC#volet-studio" class="level-item">1ère Bac<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">Ratio 35-30-35% &amp; 20°</span></a>
+                    <a href="aps-saut-longueur-triple-saut-eps-maroc.html?level=2BAC#volet-studio" class="level-item">2ème Bac<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">Concours Bac 5,40m / 4,10m</span></a>
+                </div>
+                <div style="margin-top:0.85rem;padding-top:0.75rem;border-top:1px solid #e2e8f0;display:flex;justify-content:space-between;font-size:0.78rem;font-weight:700;color:#b45309;">
+                    <a href="aps-saut-longueur-triple-saut-eps-maroc.html#volet-calculateur-sauts">🧮 Calculateur Élan &amp; 3 Bonds</a>
+                    <a href="aps-saut-longueur-triple-saut-eps-maroc.html#volet-grilles">📊 Barèmes Longueur &amp; Triple Saut</a>
+                </div>
+            </div>
+        </section>
+'''
+            hhtml = hhtml.replace(
+                "<!-- GRILLE DE TOUTES LES APS PAR FAMILLE -->",
+                saut_featured_section + "\n        <!-- GRILLE DE TOUTES LES APS PAR FAMILLE -->",
+                1
+            )
+
+            old_saut_card = '''            <!-- 9. SAUT EN LONGUEUR & HAUTEUR -->
+            <article class="aps-card" data-aps-family="athletisme">
+                <div>
+                    <div class="aps-card-kicker">Athlétisme · Sauts · OP 2007/2009</div>
+                    <h3 class="aps-card-title">🦘 Saut en Longueur, Triple Saut &amp; Hauteur (القفز الطولي والعلوي)</h3>
+                    <p class="aps-card-desc">Étalonnage de la course d'élan, impulsion sur la planche d'appel (20cm), liaison course-impulsion, mesure perpendiculaire à 90° et barèmes officiels OP 2007/2009.</p>
+                    <ul class="aps-links-list">
+                        <li><a href="article-saut-longueur-eps.html"><span>📘 Guide Didactique Saut en Longueur en EPS</span> <span>→</span></a></li>
+                        <li><a href="reglement-sauts-longueur-hauteur-triple-saut-eps.html"><span>⚖️ Règlement Officiel Longueur, Triple Saut &amp; Hauteur</span> <span>→</span></a></li>
+                        <li><a href="article-baremes-bac-sport-maroc-officiels-libres.html"><span>📊 Barèmes Chiffrés Saut en Longueur (/20)</span> <span>→</span></a></li>
+                    </ul>
+                </div>
+                <div class="aps-card-footer">
+                    <a href="article-saut-longueur-eps.html" class="aps-btn-main">Dossier Saut en Longueur →</a>
+                    <a href="article-baremes-bac-sport-maroc-officiels-libres.html" class="aps-btn-alt">Barèmes /20</a>
+                </div>
+            </article>'''
+
+            new_saut_card = '''            <!-- 9. SAUT EN LONGUEUR & TRIPLE SAUT -->
+            <article class="aps-card" data-aps-family="athletisme" style="border-color:#b45309;border-width:2px;">
+                <div>
+                    <div class="aps-card-kicker" style="color:#b45309;">Athlétisme · Sauts Horizontaux · Studio Complet Actif</div>
+                    <h3 class="aps-card-title">🦘 Saut en Longueur &amp; Triple Saut (القفز الطولي والثلاثي)</h3>
+                    <p class="aps-card-desc">Silo complet Longueur &amp; Triple Saut : Calculateur d'étalonnage d'élan &amp; ratio 35-30-35%, ATD officiel, 24 cycles et 240 fiches (1AC à 2Bac × 4 niveaux), barèmes (/20) et règlement RT 29-30.</p>
+                    <ul class="aps-links-list">
+                        <li><a href="aps-saut-longueur-triple-saut-eps-maroc.html#volet-studio"><span>⚡ Studio Cycles &amp; Fiches (1AC → 2Bac · PDF/Word)</span> <span>→</span></a></li>
+                        <li><a href="aps-saut-longueur-triple-saut-eps-maroc.html#volet-calculateur-sauts"><span>🧮 Calculateur Étalonnage Élan &amp; Ratio 35-30-35%</span> <span>→</span></a></li>
+                        <li><a href="aps-saut-longueur-triple-saut-eps-maroc.html#volet-grilles"><span>📊 Barèmes Longueur (5,40m/4,10m) &amp; Triple Saut (/20)</span> <span>→</span></a></li>
+                        <li><a href="aps-saut-longueur-triple-saut-eps-maroc.html#volet-atd"><span>📐 ATD Saut en Longueur &amp; Triple Saut</span> <span>→</span></a></li>
+                    </ul>
+                </div>
+                <div class="aps-card-footer">
+                    <a href="aps-saut-longueur-triple-saut-eps-maroc.html" class="aps-btn-main" style="background:#b45309;">Ouvrir la Page Spéciale Longueur &amp; Triple Saut →</a>
+                </div>
+            </article>'''
+
+            hhtml = hhtml.replace(old_saut_card, new_saut_card)
+            with open(hub_path, "w", encoding="utf-8") as f:
+                f.write(hhtml)
+            print("[HUB APS OK] Updated /public/hub-aps-sports-eps-maroc.html with Saut en Longueur & Triple Saut Complete Silo.")
+
+    # 2. Add Saut en Longueur & Triple Saut cross-link in sticky nav of existing silos
+    for silo_file in [
+        "aps-handball-eps-maroc.html",
+        "aps-basketball-eps-maroc.html",
+        "aps-volleyball-eps-maroc.html",
+        "aps-football-eps-maroc.html",
+        "aps-gymnastique-sol-eps-maroc.html",
+        "aps-course-vitesse-relais-eps-maroc.html",
+        "aps-course-duree-demi-fond-eps-maroc.html",
+        "aps-lancer-poids-eps-maroc.html"
+    ]:
+        s_path = os.path.join(PUBLIC_DIR, silo_file)
+        if os.path.exists(s_path):
+            with open(s_path, "r", encoding="utf-8") as f:
+                s_html = f.read()
+            if "aps-saut-longueur-triple-saut-eps-maroc.html" not in s_html:
+                s_html = s_html.replace(
+                    '<a href="hub-aps-sports-eps-maroc.html" style="font-size:',
+                    '<a href="aps-saut-longueur-triple-saut-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#b45309;">🦘 Longueur/TS</a>\n                <a href="hub-aps-sports-eps-maroc.html" style="font-size:'
+                )
+                with open(s_path, "w", encoding="utf-8") as f:
+                    f.write(s_html)
+
+    # 3. Update /public/blog.html with the new Silo Saut en Longueur & Triple Saut card
+    blog_path = os.path.join(PUBLIC_DIR, "blog.html")
+    if os.path.exists(blog_path):
+        with open(blog_path, "r", encoding="utf-8") as f:
+            bhtml = f.read()
+
+        if "aps-saut-longueur-triple-saut-eps-maroc.html" not in bhtml:
+            saut_blog_card = '''                <!-- Silo Complet Saut en Longueur & Triple Saut : aps-saut-longueur-triple-saut-eps-maroc.html -->
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">🦘 Studio Longueur, Triple Saut &amp; Calculateur Élan</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M4 18h16M6 14c3-5 7-5 11 0" stroke="#b45309" stroke-width="2.2" stroke-linecap="round"/><circle cx="17" cy="9" r="2" fill="#006233"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Silo Saut en Longueur &amp; Triple Saut en EPS au Maroc (1AC à 2Bac) : Calculateur d'Élan &amp; Ratio 35-30-35%, ATD, 24 Cycles &amp; 240 Fiches (PDF/Word) + Barèmes (/20)</h3>
+                        <p class="article-excerpt">Page spéciale Saut en Longueur &amp; Triple Saut tout-en-un : Calculateur d'étalonnage de la course d'élan et des 3 bonds (35%-30%-35%), ATD complet, visionneuse A4 pro des cycles et fiches (1AC à 2Bac × 4 niveaux) en Word/PDF et barèmes (/20).</p>
+                        <div class="article-footer">
+                            <span class="article-date">4 Novembre 2026 · Calculateur + PDF/Word</span>
+                            <a href="aps-saut-longueur-triple-saut-eps-maroc.html" class="read-more">Ouvrir le Studio Longueur &amp; Triple Saut →</a>
+                        </div>
+                    </div>
+                </article>'''
+
+            marker = '<div class="articles-grid" id="articlesGrid">'
+            bhtml = bhtml.replace(marker, marker + "\n" + saut_blog_card, 1)
+            bhtml = bhtml.replace('<h3>Tous <span class="theme-count" id="count-all">143</span></h3>', '<h3>Tous <span class="theme-count" id="count-all">144</span></h3>')
+            bhtml = bhtml.replace('<span class="articles-count" id="articlesCount">143 articles</span>', '<span class="articles-count" id="articlesCount">144 articles</span>')
+            bhtml = bhtml.replace('<h3>Activités Sportives <span class="theme-count" id="count-aps">32</span></h3>', '<h3>Activités Sportives <span class="theme-count" id="count-aps">33</span></h3>')
+
+            with open(blog_path, "w", encoding="utf-8") as f:
+                f.write(bhtml)
+            print("[BLOG OK] Added Silo Saut en Longueur & Triple Saut card to /public/blog.html.")
+
+    # 4. Update /public/index.html (and mirror to /index.html) so the APS Studio Banner highlights all 9 Complete Silos
+    index_path = os.path.join(PUBLIC_DIR, "index.html")
+    if os.path.exists(index_path):
+        with open(index_path, "r", encoding="utf-8") as f:
+            ihtml = f.read()
+
+        start_tag = "<!-- PROFEPS_APS_STUDIO_HUB_BANNER_START -->"
+        end_tag = "<!-- PROFEPS_APS_STUDIO_HUB_BANNER_END -->"
+        if start_tag in ihtml and end_tag in ihtml:
+            s_idx = ihtml.find(start_tag)
+            e_idx = ihtml.find(end_tag) + len(end_tag)
+            updated_banner = '''<!-- PROFEPS_APS_STUDIO_HUB_BANNER_START -->
+  <section aria-label="Portail des APS : 9 Studios Complets (Longueur/Triple Saut, Lancer du Poids, Course de Durée/VMA, Vitesse/Relais, Gymnastique, Football/Futsal, Volley, Basket & Handball)" style="max-width:1140px;margin:1.75rem auto;padding:1.5rem;background:linear-gradient(135deg,#f0fdf4 0%,#ffffff 50%,#fff1f2 100%);border:2px solid #006233;border-radius:18px;box-shadow:0 8px 22px rgba(15,23,42,0.06);">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem;margin-bottom:1rem;">
+      <div>
+        <span style="display:inline-block;font-size:0.74rem;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:#ffffff;background:#006233;padding:0.22rem 0.7rem;border-radius:999px;">🏟️ Nouveau · 9 Studios APS Complets (1AC → 2Bac × 4 Niveaux)</span>
+        <h2 style="margin:0.35rem 0 0;font-size:1.22rem;font-weight:900;color:#0f172a;">Portail des APS : Longueur &amp; Triple Saut, Poids, Durée &amp; VMA, Vitesse &amp; Relais, Gymnastique, Foot/Futsal, Volley, Basket &amp; Handball (24 Cycles, 240 Fiches Word/PDF &amp; Grilles /20)</h2>
+      </div>
+      <a href="hub-aps-sports-eps-maroc.html" style="font-size:0.84rem;font-weight:800;color:#006233;text-decoration:underline;">Ouvrir le Portail de Toutes les APS →</a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:0.65rem;">
+      <a href="aps-saut-longueur-triple-saut-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.85rem;background:#ffffff;border:2px solid #b45309;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.7rem;font-weight:800;color:#b45309;margin-bottom:0.2rem;">🦘 Nouveau · Longueur &amp; TS</span>
+        <strong style="font-size:0.79rem;color:#0f172a;line-height:1.3;">Calculateur Élan &amp; 35-30-35%, 24 Cycles, 240 Fiches + Barèmes →</strong>
+      </a>
+      <a href="aps-lancer-poids-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.85rem;background:#ffffff;border:2px solid #475569;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.7rem;font-weight:800;color:#991b1b;margin-bottom:0.2rem;">🏋️ Lancer du Poids</span>
+        <strong style="font-size:0.79rem;color:#0f172a;line-height:1.3;">Calculateur 40° &amp; 34,92°, 24 Cycles, 240 Fiches + Barèmes 3/4/5kg →</strong>
+      </a>
+      <a href="aps-course-duree-demi-fond-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.85rem;background:#ffffff;border:2px solid #0d9488;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.7rem;font-weight:800;color:#0f766e;margin-bottom:0.2rem;">🏃 Durée &amp; VMA</span>
+        <strong style="font-size:0.79rem;color:#0f172a;line-height:1.3;">Calculateur VMA &amp; Plots, 24 Cycles, 240 Fiches + Barèmes 1000m/800m →</strong>
+      </a>
+      <a href="aps-course-vitesse-relais-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.85rem;background:#ffffff;border:2px solid #dc2626;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.7rem;font-weight:800;color:#dc2626;margin-bottom:0.2rem;">⚡ Vitesse &amp; Relais</span>
+        <strong style="font-size:0.79rem;color:#0f172a;line-height:1.3;">ATD Sprint/Relais, 24 Cycles &amp; 240 Fiches + Barèmes 60m/80m/100m →</strong>
+      </a>
+      <a href="aps-gymnastique-sol-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.85rem;background:#ffffff;border:2px solid #7c3aed;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.7rem;font-weight:800;color:#7c3aed;margin-bottom:0.2rem;">🤸 Gymnastique au Sol</span>
+        <strong style="font-size:0.79rem;color:#0f172a;line-height:1.3;">ATD Gym, Code A/B/C/D, 24 Cycles &amp; 240 Fiches + Jury D+E (/20) →</strong>
+      </a>
+      <a href="aps-football-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.85rem;background:#ffffff;border:2px solid #b45309;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.7rem;font-weight:800;color:#b45309;margin-bottom:0.2rem;">⚽ Football &amp; Futsal</span>
+        <strong style="font-size:0.79rem;color:#0f172a;line-height:1.3;">ATD Foot/Futsal, 24 Cycles &amp; 240 Fiches (Système 1-2-1) + Grilles →</strong>
+      </a>
+      <a href="aps-volleyball-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.85rem;background:#ffffff;border:2px solid #1e40af;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.7rem;font-weight:800;color:#1e40af;margin-bottom:0.2rem;">🏐 Volley-Ball</span>
+        <strong style="font-size:0.79rem;color:#0f172a;line-height:1.3;">ATD Volley, 24 Cycles &amp; 240 Fiches (Chaîne R-P-A) + Grilles (/20) →</strong>
+      </a>
+      <a href="aps-basketball-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.85rem;background:#ffffff;border:2px solid #006233;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.7rem;font-weight:800;color:#006233;margin-bottom:0.2rem;">🏀 Basket-Ball à 5</span>
+        <strong style="font-size:0.79rem;color:#0f172a;line-height:1.3;">ATD Basket 5×5, 24 Cycles &amp; 240 Fiches (Pick &amp; Roll) + Grilles →</strong>
+      </a>
+      <a href="aps-handball-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.85rem;background:#ffffff;border:2px solid #991b1b;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.7rem;font-weight:800;color:#991b1b;margin-bottom:0.2rem;">🤾 Handball</span>
+        <strong style="font-size:0.79rem;color:#0f172a;line-height:1.3;">ATD Handball, 24 Cycles &amp; 240 Fiches (Visionneuse A4) + Grilles →</strong>
+      </a>
+    </div>
+  </section>
+  <!-- PROFEPS_APS_STUDIO_HUB_BANNER_END -->'''
+            ihtml = ihtml[:s_idx] + updated_banner + ihtml[e_idx:]
+            with open(index_path, "w", encoding="utf-8") as f:
+                f.write(ihtml)
+            shutil.copy2(index_path, os.path.join(ROOT_DIR, "index.html"))
+            print("[INDEX OK] Updated /public/index.html and mirrored to /index.html.")
+
+    # 5. Update /public/sitemap.xml
+    sitemap_path = os.path.join(PUBLIC_DIR, "sitemap.xml")
+    if os.path.exists(sitemap_path):
+        with open(sitemap_path, "r", encoding="utf-8") as f:
+            xml = f.read()
+        loc = "https://profeps.ma/aps-saut-longueur-triple-saut-eps-maroc.html"
+        if loc not in xml:
+            entry = f'''  <url>
+    <loc>{loc}</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>'''
+            xml = xml.replace("</urlset>", entry + "\n</urlset>")
+            with open(sitemap_path, "w", encoding="utf-8") as f:
+                f.write(xml)
+            print("[SITEMAP OK] Added aps-saut-longueur-triple-saut-eps-maroc.html to /public/sitemap.xml.")
+
+
+if __name__ == "__main__":
+    create_saut_longueur_triple_saut_silo_page()
+    update_hub_silos_blog_index_sitemap()
+    print("=== SILO COMPLET SAUT EN LONGUEUR & TRIPLE SAUT GENERATED SUCCESSFULLY ===")
