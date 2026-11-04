@@ -1,0 +1,1458 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Création de la Page Silo Complète Football Scolaire & Futsal (FIFA / IFAB) — ProfEPS Maroc (profeps.ma)
+Fichier généré : /public/aps-football-eps-maroc.html
+Mise à jour du maillage :
+  - /public/hub-aps-sports-eps-maroc.html (Activation du Silo Complet Football & Futsal + correction des liens IFAB/Futsal)
+  - /public/aps-handball-eps-maroc.html, /public/aps-basketball-eps-maroc.html, /public/aps-volleyball-eps-maroc.html (Liens croisés)
+  - /public/blog.html (Ajout de la carte Silo Football & Futsal)
+  - /public/index.html & /index.html (Mise à jour de la bannière Portail APS : 4 Sports Collectifs complets)
+  - /public/sitemap.xml
+CONTRAINTE STRICTE : Ne jamais toucher ni modifier generateur.html.
+"""
+
+import os
+import json
+import shutil
+
+PUBLIC_DIR = "/app/applet/public"
+ROOT_DIR = "/app/applet"
+
+
+def extract_template_parts():
+    """Extract standardized navbar and E-E-A-T/footer from an existing article in /public/."""
+    ref_path = os.path.join(PUBLIC_DIR, "article-baremes-bac-sport-maroc-officiels-libres.html")
+    with open(ref_path, "r", encoding="utf-8") as f:
+        html = f.read()
+
+    nav_start = html.find("<!-- PROFEPS_UNIFIED_NAVBAR_START -->")
+    nav_end = html.find("<!-- PROFEPS_UNIFIED_NAVBAR_END -->") + len("<!-- PROFEPS_UNIFIED_NAVBAR_END -->")
+    navbar_html = html[nav_start:nav_end]
+
+    eeat_start = html.find("<!-- PROFEPS_EEAT_AUTHOR_START -->")
+    footer_html = html[eeat_start:]
+
+    return navbar_html, footer_html
+
+
+def create_football_silo_page():
+    filename = "aps-football-eps-maroc.html"
+    navbar_html, footer_html = extract_template_parts()
+    navbar_custom = navbar_html.replace(
+        'data-current-file="article-baremes-bac-sport-maroc-officiels-libres.html"',
+        f'data-current-file="{filename}"'
+    )
+
+    canonical_url = f"https://profeps.ma/{filename}"
+    title = "Football & Futsal en EPS au Maroc (1AC à 2Bac) : ATD, Studio Cycles & Fiches (PDF/Word) + Grilles d'Évaluation (/20) | ProfEPS"
+    meta_desc = "Silo officiel du Football Scolaire et Futsal (5x5 / 7x7 / 11x11) en EPS au Maroc (OP 2009 Collège & OP 2007 Lycée) : Analyse et Traitement Didactique (ATD), Studio interactif de projets de cycles et fiches de séances (1AC, 2AC, 3AC, TC, 1Bac, 2Bac × 4 niveaux du Débutant à l'Élite) avec visionneuse A4 avant téléchargement PDF/Word et grilles d'observation et d'évaluation /20."
+
+    course_schema = {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        "name": "Silo Complet Football Scolaire & Futsal EPS Maroc (1AC à 2Bac) : ATD, 24 Cycles, 240 Fiches & Grilles /20",
+        "description": meta_desc,
+        "provider": {"@id": "https://profeps.ma/#organization"},
+        "educationalLevel": ["1AC", "2AC", "3AC", "Tronc Commun", "1ère Bac", "2ème Bac"],
+        "inLanguage": "fr-MA"
+    }
+
+    breadcrumb_schema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Accueil ProfEPS Maroc", "item": "https://profeps.ma/"},
+            {"@type": "ListItem", "position": 2, "name": "Portail des APS & Sports EPS", "item": "https://profeps.ma/hub-aps-sports-eps-maroc.html"},
+            {"@type": "ListItem", "position": 3, "name": "Football & Futsal EPS Maroc (Cycles, Fiches, ATD & Grilles)", "item": canonical_url}
+        ]
+    }
+
+    html = f'''<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{meta_desc}">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="ProfEPS Maroc">
+    <meta property="og:title" content="{title}">
+    <meta property="og:description" content="{meta_desc}">
+    <meta property="og:url" content="{canonical_url}">
+    <meta property="og:image" content="https://profeps.ma/images/prof_eps.png">
+    <meta property="og:locale" content="fr_MA">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{title}">
+    <meta name="twitter:description" content="{meta_desc}">
+    <meta name="twitter:image" content="https://profeps.ma/images/prof_eps.png">
+    <link rel="canonical" href="{canonical_url}">
+    <link rel="alternate" hreflang="fr-MA" href="{canonical_url}">
+    <link rel="alternate" hreflang="x-default" href="{canonical_url}">
+    <title>{title}</title>
+    <link rel="icon" type="image/png" href="/images/prof_eps.png">
+
+    <!-- Google tag (gtag.js) & Consent Mode v2 ProfEPS.ma -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      try {{
+        var saved = JSON.parse(localStorage.getItem("profeps_cookie_consent_v2") || "null");
+        if (saved) {{
+          gtag("consent", "default", {{
+            "ad_storage": saved.ads ? "granted" : "denied",
+            "ad_user_data": saved.ads ? "granted" : "denied",
+            "ad_personalization": saved.ads ? "granted" : "denied",
+            "analytics_storage": saved.analytics ? "granted" : "denied"
+          }});
+        }} else {{
+          gtag("consent", "default", {{
+            "ad_storage": "granted",
+            "ad_user_data": "granted",
+            "ad_personalization": "granted",
+            "analytics_storage": "granted"
+          }});
+          gtag("consent", "default", {{
+            "ad_storage": "denied",
+            "ad_user_data": "denied",
+            "ad_personalization": "denied",
+            "analytics_storage": "denied",
+            "region": ["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IS","IE","IT","LV","LI","LT","LU","MT","NL","NO","PL","PT","RO","SK","SI","ES","SE","GB","CH"],
+            "wait_for_update": 500
+          }});
+        }}
+      }} catch (e) {{}}
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TH0Z1SGNXH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      gtag('js', new Date());
+      gtag('config', 'G-TH0Z1SGNXH');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8253776880916865" crossorigin="anonymous"></script>
+    <script src="profeps-cmp.js" defer></script>
+    <link rel="stylesheet" href="/css/profeps-unifier.min.css?v=20261101">
+
+    <script type="application/ld+json">{json.dumps(course_schema, ensure_ascii=False)}</script>
+    <script type="application/ld+json">{json.dumps(breadcrumb_schema, ensure_ascii=False)}</script>
+
+    <style>
+        *, *::before, *::after {{ margin: 0; padding: 0; box-sizing: border-box; }}
+        :root {{
+            --primary: #991b1b; --primary-dark: #7f1d1d; --secondary: #006233; --secondary-dark: #064e3b;
+            --text-primary: #0f172a; --text-secondary: #334155; --text-muted: #64748b;
+            --bg-primary: #ffffff; --bg-secondary: #f8fafc; --border: #cbd5e1; --border-light: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(15,23,42,0.06); --shadow-md: 0 6px 20px rgba(15,23,42,0.08);
+            --radius: 10px; --radius-lg: 16px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Plus Jakarta Sans', var(--font-sans);
+        }}
+        body {{ font-family: var(--font-sans); background: var(--bg-secondary); color: var(--text-primary); line-height: 1.65; }}
+        a {{ text-decoration: none; color: inherit; }}
+
+        /* Hero & Intro */
+        .silo-hero {{ padding: 125px 1.5rem 2.25rem; background: linear-gradient(135deg, #fff8f8 0%, #f8fafc 52%, #f3faf6 100%); border-bottom: 1px solid var(--border-light); }}
+        .silo-hero-inner {{ max-width: 1220px; margin: 0 auto; }}
+        .silo-breadcrumb {{ font-size: 0.84rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.65rem; display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }}
+        .silo-breadcrumb a:hover {{ color: var(--primary); text-decoration: underline; }}
+        .silo-title {{ font-family: var(--font-display); font-size: clamp(1.65rem, 3.3vw, 2.35rem); font-weight: 900; color: var(--text-primary); line-height: 1.24; margin-bottom: 0.85rem; }}
+        .silo-intro-box {{ background: #ffffff; border: 1px solid var(--border); border-left: 5px solid var(--primary); border-radius: 12px; padding: 1.2rem 1.4rem; margin-bottom: 1.25rem; box-shadow: var(--shadow-sm); display: grid; grid-template-columns: 1.6fr 1fr; gap: 1.25rem; align-items: center; }}
+        .silo-intro-text {{ font-size: 0.94rem; color: var(--text-secondary); line-height: 1.65; }}
+        .specs-strip {{ display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.55rem; background: #f8fafc; padding: 0.85rem; border-radius: 10px; border: 1px solid var(--border-light); font-size: 0.8rem; color: var(--text-primary); }}
+        .specs-strip div strong {{ display: block; color: var(--primary); font-size: 0.76rem; text-transform: uppercase; }}
+
+        /* Sticky Main Volet Navigation */
+        .volet-nav-wrapper {{ position: sticky; top: 74px; z-index: 90; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); box-shadow: 0 2px 10px rgba(15,23,42,0.04); }}
+        .volet-nav {{ max-width: 1220px; margin: 0 auto; padding: 0.6rem 1.5rem; display: flex; flex-wrap: wrap; gap: 0.45rem; align-items: center; justify-content: space-between; }}
+        .volet-tabs {{ display: flex; flex-wrap: wrap; gap: 0.35rem; }}
+        .volet-tab-btn {{ cursor: pointer; border: 1px solid transparent; background: #f1f5f9; color: var(--text-secondary); padding: 0.58rem 1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 800; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.4rem; }}
+        .volet-tab-btn:hover {{ color: var(--text-primary); background: #e2e8f0; }}
+        .volet-tab-btn.active {{ background: var(--primary); color: #ffffff; box-shadow: var(--shadow-sm); }}
+
+        .silo-main {{ max-width: 1220px; margin: 0 auto; padding: 2rem 1.5rem 3.5rem; }}
+        .volet-panel {{ display: none; }}
+        .volet-panel.active {{ display: block; }}
+
+        /* Studio Cycles & Fiches Control Panel */
+        .studio-shell {{ background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); overflow: hidden; }}
+        .studio-top-bar {{ background: #0f172a; color: #ffffff; padding: 1.25rem 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }}
+        .studio-top-bar h2 {{ font-size: 1.22rem; font-weight: 900; color: #ffffff; margin: 0; }}
+        .studio-top-bar p {{ font-size: 0.84rem; color: #cbd5e1; margin: 0.2rem 0 0; }}
+
+        .studio-controls {{ padding: 1.35rem 1.5rem; background: #f8fafc; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 1.15rem; }}
+        .control-row {{ display: flex; flex-direction: column; gap: 0.45rem; }}
+        .control-label {{ font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); }}
+
+        /* 6 School Level Tabs (1AC -> 2Bac) */
+        .school-level-tabs {{ display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.5rem; }}
+        .school-tab {{ cursor: pointer; padding: 0.7rem 0.5rem; background: #ffffff; border: 2px solid var(--border); border-radius: 10px; text-align: center; transition: all 0.2s; }}
+        .school-tab strong {{ display: block; font-size: 0.92rem; color: var(--text-primary); font-weight: 900; }}
+        .school-tab span {{ display: block; font-size: 0.73rem; color: var(--text-muted); font-weight: 600; margin-top: 0.15rem; }}
+        .school-tab:hover {{ border-color: var(--primary); }}
+        .school-tab.active {{ background: #fff1f2; border-color: var(--primary); box-shadow: var(--shadow-sm); }}
+        .school-tab.active strong {{ color: var(--primary); }}
+
+        /* 4 Practice Level Tabs (N1 -> N4) */
+        .practice-level-tabs {{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }}
+        .practice-tab {{ cursor: pointer; padding: 0.65rem 0.75rem; background: #ffffff; border: 2px solid var(--border); border-radius: 10px; text-align: left; transition: all 0.2s; }}
+        .practice-tab strong {{ display: block; font-size: 0.85rem; color: var(--text-primary); font-weight: 800; }}
+        .practice-tab span {{ display: block; font-size: 0.74rem; color: var(--text-muted); margin-top: 0.15rem; line-height: 1.3; }}
+        .practice-tab:hover {{ border-color: var(--secondary); }}
+        .practice-tab.active {{ background: #f0fdf4; border-color: var(--secondary); box-shadow: var(--shadow-sm); }}
+        .practice-tab.active strong {{ color: var(--secondary); }}
+
+        /* View Mode & Custom Meta Inputs */
+        .meta-and-view-grid {{ display: grid; grid-template-columns: 1.1fr 1.4fr; gap: 1rem; align-items: end; padding-top: 0.5rem; border-top: 1px dashed var(--border); }}
+        .view-mode-group {{ display: flex; flex-wrap: wrap; gap: 0.4rem; background: #e2e8f0; padding: 0.3rem; border-radius: 9px; }}
+        .view-mode-btn {{ flex: 1; cursor: pointer; border: none; background: transparent; padding: 0.5rem 0.75rem; font-size: 0.81rem; font-weight: 800; color: var(--text-secondary); border-radius: 7px; white-space: nowrap; }}
+        .view-mode-btn.active {{ background: #ffffff; color: var(--text-primary); box-shadow: var(--shadow-sm); }}
+        .custom-inputs-row {{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }}
+        .custom-inputs-row input, .seance-select {{ width: 100%; padding: 0.5rem 0.65rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.82rem; font-family: inherit; background: #ffffff; color: var(--text-primary); }}
+
+        /* Download Action Bar (Word & PDF for Cycle + Fiches) */
+        .export-action-bar {{ padding: 1rem 1.5rem; background: #fff8f8; border-bottom: 1px solid #fecdd3; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.85rem; }}
+        .export-btn-group {{ display: flex; flex-wrap: wrap; gap: 0.55rem; }}
+        .btn-export {{ cursor: pointer; border: none; padding: 0.62rem 1rem; border-radius: 8px; font-size: 0.82rem; font-weight: 800; display: inline-flex; align-items: center; gap: 0.45rem; transition: all 0.2s; }}
+        .btn-word-cycle {{ background: #1e40af; color: #ffffff; }}
+        .btn-word-cycle:hover {{ background: #1e3a8a; }}
+        .btn-pdf-cycle {{ background: #991b1b; color: #ffffff; }}
+        .btn-pdf-cycle:hover {{ background: #7f1d1d; }}
+        .btn-word-fiches {{ background: #006233; color: #ffffff; }}
+        .btn-word-fiches:hover {{ background: #064e3b; }}
+        .btn-pdf-fiches {{ background: #0f172a; color: #ffffff; }}
+        .btn-pdf-fiches:hover {{ background: #1e293b; }}
+        .btn-copy-doc {{ background: #ffffff; color: var(--text-primary); border: 1px solid var(--border); }}
+        .btn-copy-doc:hover {{ border-color: var(--primary); color: var(--primary); }}
+
+        /* Professional A4 Document Viewer */
+        .viewer-canvas {{ background: #cbd5e1; padding: 1.75rem 1.25rem; max-height: 820px; overflow-y: auto; }}
+        .a4-sheet {{ background: #ffffff; max-width: 960px; margin: 0 auto; padding: 2rem 2.25rem; border-radius: 6px; box-shadow: 0 10px 30px rgba(15,23,42,0.18); color: #0f172a; font-size: 0.9rem; line-height: 1.6; }}
+        .a4-header-table {{ width: 100%; border-collapse: collapse; margin-bottom: 1.15rem; border-bottom: 3px double #0f172a; padding-bottom: 0.75rem; }}
+        .a4-header-table td {{ border: none !important; padding: 0.2rem 0 !important; vertical-align: top; font-size: 0.84rem; }}
+        .a4-doc-title {{ text-align: center; background: #f1f5f9; border: 2px solid #0f172a; padding: 0.7rem 1rem; margin: 0.85rem 0 1.15rem; border-radius: 6px; }}
+        .a4-doc-title h3 {{ font-size: 1.12rem; font-weight: 900; color: #991b1b; text-transform: uppercase; margin: 0; }}
+        .a4-doc-title p {{ font-size: 0.84rem; font-weight: 700; color: #0f172a; margin: 0.2rem 0 0; }}
+        .a4-meta-box {{ background: #f8fafc; border: 1px solid #94a3b8; border-radius: 6px; padding: 0.85rem 1rem; margin-bottom: 1.15rem; font-size: 0.85rem; }}
+        .a4-meta-box p {{ margin-bottom: 0.35rem; }}
+        .a4-meta-box p:last-child {{ margin-bottom: 0; }}
+        .a4-table {{ width: 100%; border-collapse: collapse; margin: 0.85rem 0 1.25rem; font-size: 0.83rem; }}
+        .a4-table th {{ background: #0f172a; color: #ffffff; font-weight: 800; padding: 0.6rem 0.7rem; border: 1px solid #0f172a; text-align: left; }}
+        .a4-table td {{ padding: 0.6rem 0.7rem; border: 1px solid #64748b; vertical-align: top; color: #0f172a; }}
+        .a4-table tr:nth-child(even) td {{ background: #f8fafc; }}
+        .seance-fiche-block {{ border: 2px solid #0f172a; border-radius: 8px; margin-bottom: 1.5rem; page-break-inside: avoid; overflow: hidden; }}
+        .seance-fiche-head {{ background: #991b1b; color: #ffffff; padding: 0.65rem 1rem; display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 0.9rem; }}
+
+        /* Content Cards for Volet ATD, Grilles, Terrain & Articles */
+        .content-panel-card {{ background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm); }}
+        .content-panel-card h2 {{ font-size: 1.38rem; font-weight: 900; color: var(--text-primary); margin-bottom: 0.85rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--primary); }}
+        .content-panel-card h3 {{ font-size: 1.12rem; font-weight: 800; color: var(--primary); margin: 1.35rem 0 0.55rem; }}
+        .atd-grid-2 {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.1rem; margin: 1rem 0; }}
+        .atd-box {{ background: #f8fafc; border: 1px solid var(--border); border-left: 4px solid var(--secondary); padding: 1.15rem; border-radius: 10px; }}
+        .atd-box h4 {{ font-size: 0.98rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.45rem; }}
+        .atd-box ul {{ padding-left: 1.25rem; font-size: 0.88rem; color: var(--text-secondary); }}
+        .atd-box li {{ margin-bottom: 0.35rem; }}
+
+        /* Related Articles Grid */
+        .articles-cards-grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.2rem; margin-top: 1.25rem; }}
+        .rel-card {{ background: #ffffff; border: 1px solid var(--border); border-radius: 12px; padding: 1.3rem; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm); transition: all 0.2s; }}
+        .rel-card:hover {{ border-color: var(--primary); transform: translateY(-2px); }}
+        .rel-card-kicker {{ font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--primary); margin-bottom: 0.35rem; }}
+        .rel-card h3 {{ font-size: 1.05rem; font-weight: 800; color: var(--text-primary); margin: 0 0 0.5rem; line-height: 1.35; }}
+        .rel-card p {{ font-size: 0.86rem; color: var(--text-secondary); margin-bottom: 1rem; }}
+        .rel-card-link {{ font-size: 0.84rem; font-weight: 800; color: var(--primary); display: inline-flex; align-items: center; gap: 0.3rem; }}
+
+        @media (max-width: 960px) {{
+            .silo-intro-box {{ grid-template-columns: 1fr; }}
+            .school-level-tabs {{ grid-template-columns: repeat(3, 1fr); }}
+            .practice-level-tabs {{ grid-template-columns: repeat(2, 1fr); }}
+            .meta-and-view-grid {{ grid-template-columns: 1fr; }}
+            .custom-inputs-row {{ grid-template-columns: 1fr; }}
+        }}
+        @media (max-width: 560px) {{
+            .school-level-tabs {{ grid-template-columns: repeat(2, 1fr); }}
+            .practice-level-tabs {{ grid-template-columns: 1fr; }}
+        }}
+    </style>
+</head>
+<body>
+{navbar_custom}
+
+    <!-- EN-TÊTE & INTRODUCTION PÉDAGOGIQUE DU FOOTBALL SCOLAIRE & FUTSAL (FIFA / IFAB) -->
+    <header class="silo-hero">
+        <div class="silo-hero-inner">
+            <nav class="silo-breadcrumb" aria-label="Fil d'Ariane">
+                <a href="index.html">Accueil</a> <span>›</span>
+                <a href="hub-aps-sports-eps-maroc.html">Portail des APS &amp; Sports</a> <span>›</span>
+                <span style="color:#991b1b;">Football &amp; Futsal EPS Maroc (1AC à 2Bac)</span>
+            </nav>
+            <h1 class="silo-title">⚽ Football Scolaire &amp; Futsal en EPS au Maroc : ATD, Studio des Cycles &amp; Fiches (1AC à 2Bac) et Grilles d'Observation &amp; d'Évaluation (/20)</h1>
+
+            <div class="silo-intro-box">
+                <div class="silo-intro-text">
+                    <strong style="color:#0f172a;display:block;margin-bottom:0.3rem;font-size:1rem;">Introduction Didactique &amp; Spécificité du Football / Futsal en EPS au Maroc (OP 2009 &amp; OP 2007) :</strong>
+                    Le <strong>Football et le Futsal (كرة القدم وكرة القدم داخل القاعة)</strong> appartiennent à la famille des sports collectifs de démarquage et d'interpénétration à <strong>motricité podale exclusive</strong> (les membres inférieurs assurent simultanément l'équilibration, le déplacement et le contrôle/frappe du ballon, rendant la prise d'information visuelle tête levée primordiale). Dans les collèges et lycées marocains, il s'enseigne principalement en <strong>format Futsal 5×5 ou Mini-Foot 7×7 sur terrain de 40×20m</strong> (multipliant par 3 le nombre de ballons touchés par élève) ou sur grand terrain. Retrouvez ici : le <strong>Studio interactif des 24 Cycles &amp; 240 Fiches (1AC à 2Bac × 4 niveaux) en Word/PDF</strong>, l'<strong>ATD complet</strong>, les <strong>Grilles d'observation et d'évaluation (/20)</strong> et les Lois du Jeu IFAB / Futsal FIFA.
+                </div>
+                <div class="specs-strip">
+                    <div><strong>Terrain Scolaire &amp; Futsal</strong>40 m × 20 m (Futsal 5×5) · Cages : 3 m × 2 m · Zone : 6 m · Penalty : 6m / 10m</div>
+                    <div><strong>Règles Futsal FIFA / EPS</strong>Touche au pied (4s) · Pas de hors-jeu · 5 fautes cumulées · Tacles glissés interdits</div>
+                    <div><strong>Ballons Scolaires</strong>Futsal / Collège : Taille 4 (rebond contrôlé) · Foot 7/11 Lycée : Taille 5</div>
+                    <div><strong>Évaluation OP</strong>Collège (143-09) : 12+3+5 (/20) · Lycée (142-10) : 14+3+3 (/20)</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- BARRE DE NAVIGATION INTERNE EN 5 VOLETS (UX CLAIRE & RAPIDE) -->
+    <div class="volet-nav-wrapper">
+        <div class="volet-nav">
+            <div class="volet-tabs" role="tablist" aria-label="Sections du Silo Football et Futsal">
+                <button type="button" class="volet-tab-btn active" id="tab-btn-studio" onclick="switchFootballVolet('studio')">⚡ 1. Studio Cycles &amp; Fiches (1AC → 2Bac)</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-atd" onclick="switchFootballVolet('atd')">📐 2. ATD Football &amp; Futsal Complet</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-grilles" onclick="switchFootballVolet('grilles')">📊 3. Grilles d'Observation &amp; Évaluation (/20)</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-terrain" onclick="switchFootballVolet('terrain')">🏟️ 4. Terrain 40+ Élèves &amp; Règles FIFA/IFAB</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-articles" onclick="switchFootballVolet('articles')">📚 5. Articles &amp; Dossiers Foot/Futsal (7)</button>
+            </div>
+            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;">
+                <a href="aps-handball-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#006233;">🤾 Handball</a>
+                <a href="aps-basketball-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#1e40af;">🏀 Basket</a>
+                <a href="aps-volleyball-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#6d28d9;">🏐 Volley</a>
+                <a href="hub-aps-sports-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#991b1b;">← Toutes les APS</a>
+            </div>
+        </div>
+    </div>
+
+    <main class="silo-main">
+
+        <!-- ================================================================== -->
+        <!-- VOLET 1 : STUDIO INTERACTIF CYCLES & FICHES (1AC -> 2BAC × 4 NIV)  -->
+        <!-- ================================================================== -->
+        <section id="volet-studio" class="volet-panel active" aria-label="Studio Cycles et Fiches Football et Futsal">
+            <div class="studio-shell">
+                <div class="studio-top-bar">
+                    <div>
+                        <h2>⚡ Studio Professionnel Football &amp; Futsal : Projets de Cycles &amp; Fiches de Séances (Visionnage A4 + Export Word &amp; PDF)</h2>
+                        <p>Sélectionnez votre niveau scolaire (1AC à 2Bac) puis le niveau de pratique de vos élèves (Débutant à Élite) pour visualiser et télécharger le dossier complet.</p>
+                    </div>
+                    <span id="studioCurrentBadge" style="background:#991b1b;color:#fff;padding:0.4rem 0.85rem;border-radius:8px;font-size:0.8rem;font-weight:800;white-space:nowrap;">1AC · Niveau 1 (Débutant)</span>
+                </div>
+
+                <div class="studio-controls">
+                    <!-- ÉTAPE 1 : LES 6 NIVEAUX SCOLAIRES -->
+                    <div class="control-row">
+                        <span class="control-label">Étape 1 — Choisissez le Niveau Scolaire (Orientations Pédagogiques 2009 Collège &amp; 2007 Lycée) :</span>
+                        <div class="school-level-tabs" role="tablist">
+                            <button type="button" class="school-tab active" data-school="1AC" onclick="selectSchoolLevel('1AC')">
+                                <strong>1ère AC</strong>
+                                <span>Collège · OP 2009</span>
+                            </button>
+                            <button type="button" class="school-tab" data-school="2AC" onclick="selectSchoolLevel('2AC')">
+                                <strong>2ème AC</strong>
+                                <span>Collège · OP 2009</span>
+                            </button>
+                            <button type="button" class="school-tab" data-school="3AC" onclick="selectSchoolLevel('3AC')">
+                                <strong>3ème AC</strong>
+                                <span>Collège · OP 2009</span>
+                            </button>
+                            <button type="button" class="school-tab" data-school="TC" onclick="selectSchoolLevel('TC')">
+                                <strong>Tronc Commun</strong>
+                                <span>Lycée · OP 2007</span>
+                            </button>
+                            <button type="button" class="school-tab" data-school="1BAC" onclick="selectSchoolLevel('1BAC')">
+                                <strong>1ère Bac</strong>
+                                <span>Lycée · OP 2007</span>
+                            </button>
+                            <button type="button" class="school-tab" data-school="2BAC" onclick="selectSchoolLevel('2BAC')">
+                                <strong>2ème Bac</strong>
+                                <span>Bac Sport · OP 2007</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ÉTAPE 2 : LES 4 NIVEAUX DE PRATIQUE -->
+                    <div class="control-row">
+                        <span class="control-label">Étape 2 — Choisissez le Niveau de Pratique de votre Classe dans ce Niveau Scolaire :</span>
+                        <div class="practice-level-tabs" role="tablist">
+                            <button type="button" class="practice-tab active" data-practice="N1" onclick="selectPracticeLevel('N1')">
+                                <strong>Niveau 1 · Débutant</strong>
+                                <span>Sortir de la grappe, contrôle-passe du plat du pied et conduite tête levée</span>
+                            </button>
+                            <button type="button" class="practice-tab" data-practice="N2" onclick="selectPracticeLevel('N2')">
+                                <strong>Niveau 2 · Débrouillé</strong>
+                                <span>Contrôle orienté, triangle Appui-Soutien, surnombre 2c1 / 3c2 et tir cadré</span>
+                            </button>
+                            <button type="button" class="practice-tab" data-practice="N3" onclick="selectPracticeLevel('N3')">
+                                <strong>Niveau 3 · Confirmé</strong>
+                                <span>Progression en 3 zones, Une-Deux, jeu par les couloirs &amp; cadrage-couverture</span>
+                            </button>
+                            <button type="button" class="practice-tab" data-practice="N4" onclick="selectPracticeLevel('N4')">
+                                <strong>Niveau 4 · Élite / ASS</strong>
+                                <span>Systèmes Futsal 1-2-1 Losange / 2-2 Carré, jeu avec Pivot, Pressing &amp; FIFA</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ÉTAPE 3 : MODE DE VISIONNAGE & PERSONNALISATION EN-TÊTE -->
+                    <div class="meta-and-view-grid">
+                        <div>
+                            <span class="control-label" style="display:block;margin-bottom:0.35rem;">Étape 3 — Document affiché dans la Visionneuse Pro :</span>
+                            <div class="view-mode-group">
+                                <button type="button" class="view-mode-btn active" id="vmode-ppc" onclick="selectViewMode('ppc')">📋 Projet de Cycle (PPC)</button>
+                                <button type="button" class="view-mode-btn" id="vmode-all-fiches" onclick="selectViewMode('all_fiches')">📚 Les 10 Fiches de Séance</button>
+                                <button type="button" class="view-mode-btn" id="vmode-single-fiche" onclick="selectViewMode('single_fiche')">🔍 Fiche par Séance</button>
+                            </div>
+                            <div id="singleSeanceSelectorWrap" style="display:none;margin-top:0.5rem;">
+                                <select id="singleSeanceSelect" class="seance-select" onchange="renderStudioPreview()">
+                                    <option value="0">Séance 1 — Évaluation Diagnostique (Situation de Référence 5c5 / 7c7)</option>
+                                    <option value="1">Séance 2 — Conduite de balle tête levée &amp; Contrôle de la semelle / intérieur</option>
+                                    <option value="2">Séance 3 — Sortir de la grappe : Passe du plat du pied &amp; occupation de l'espace</option>
+                                    <option value="3">Séance 4 — Le Contrôle Orienté et le Jeu en Triangle (Appui &amp; Soutien)</option>
+                                    <option value="4">Séance 5 — Exploiter le Surnombre Offensif (2c1 puis 3c2) &amp; Le Une-Deux</option>
+                                    <option value="5">Séance 6 — Précision et Finition au Tir (Plat du pied placé &amp; Cou-de-pied)</option>
+                                    <option value="6">Séance 7 — Défense Individuelle (Cadrage sans se jeter) &amp; Couverture Collective</option>
+                                    <option value="7">Séance 8 — Transition Rapide Récupération → Contre-Attaque en &lt; 6s</option>
+                                    <option value="8">Séance 9 — Match à Thème (3 Zones / Losange 1-2-1) &amp; Arbitrage FIFA / IFAB</option>
+                                    <option value="9">Séance 10 — Évaluation Sommative Finale (/20)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="control-label" style="display:block;margin-bottom:0.35rem;">Personnaliser l'en-tête officiel avant export (Optionnel) :</span>
+                            <div class="custom-inputs-row">
+                                <input type="text" id="inpProfName" placeholder="Nom du Professeur..." oninput="renderStudioPreview()">
+                                <input type="text" id="inpEtabName" placeholder="Établissement / Lycée..." oninput="renderStudioPreview()">
+                                <input type="text" id="inpArefName" placeholder="AREF / Direction..." oninput="renderStudioPreview()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BARRE DES 4 BOUTONS DE TÉLÉCHARGEMENT (PROJET DE CYCLE WORD/PDF + FICHES PÉDAGOGIQUES WORD/PDF) -->
+                <div class="export-action-bar">
+                    <div class="export-btn-group">
+                        <button type="button" class="btn-export btn-word-cycle" onclick="exportFootballDoc('ppc', 'word')">📝 Projet de Cycle (.doc Word)</button>
+                        <button type="button" class="btn-export btn-pdf-cycle" onclick="exportFootballDoc('ppc', 'pdf')">📄 Projet de Cycle (PDF A4)</button>
+                        <button type="button" class="btn-export btn-word-fiches" onclick="exportFootballDoc('fiches', 'word')">📝 Fiches Pédagogiques (.doc Word)</button>
+                        <button type="button" class="btn-export btn-pdf-fiches" onclick="exportFootballDoc('fiches', 'pdf')">📄 Fiches Pédagogiques (PDF A4)</button>
+                    </div>
+                    <button type="button" class="btn-export btn-copy-doc" onclick="copyCurrentPreview(this)">📋 Copier l'aperçu</button>
+                </div>
+
+                <!-- VISIONNEUSE PROFESSIONNELLE A4 EN DIRECT -->
+                <div class="viewer-canvas">
+                    <div id="studioA4Preview" class="a4-sheet">
+                        <!-- Injecté dynamiquement par JS dès le chargement -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 2 : ANALYSE ET TRAITEMENT DIDACTIQUE (ATD) DU FOOTBALL/FUTSAL-->
+        <!-- ================================================================== -->
+        <section id="volet-atd" class="volet-panel" aria-label="Analyse et Traitement Didactique Football et Futsal">
+            <div class="content-panel-card">
+                <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1rem;">
+                    <div>
+                        <span style="font-size:0.78rem;font-weight:800;color:#006233;text-transform:uppercase;">Référentiel Didactique Officiel · Concours CRMEF, CAPEP &amp; Dossier Pédagogique</span>
+                        <h2 style="border:none;margin:0.2rem 0 0;padding:0;">📐 Analyse et Traitement Didactique (ATD) du Football &amp; Futsal en EPS</h2>
+                    </div>
+                    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+                        <button type="button" class="btn-export btn-word-cycle" onclick="exportElementAsWord('atdPrintableContent', 'ATD-Football-Futsal-EPS-Maroc')">📝 Télécharger ATD (.doc Word)</button>
+                        <button type="button" class="btn-export btn-pdf-cycle" onclick="printElementAsPdf('atdPrintableContent', 'ATD Football et Futsal EPS Maroc')">📄 Imprimer / PDF A4</button>
+                    </div>
+                </div>
+
+                <div id="atdPrintableContent">
+                    <h3>1. Définition &amp; Logique Interne du Football Scolaire &amp; du Futsal</h3>
+                    <p>Le <strong>Football (et sa déclinaison scolaire en Futsal 5×5 ou Mini-Foot 7×7)</strong> est un sport collectif de démarquage et d'interpénétration codifié, opposant deux équipes qui se disputent un ballon sphérique au sol ou dans les airs pour l'envoyer dans la cible verticale adverse (but protégé par un gardien) sans utiliser les membres supérieurs. Sa logique interne repose sur une contrainte biomécanique fondamentale qui le distingue du Handball et du Basket-Ball : <strong>l'exclusivité de la motricité podale</strong>. Les pieds et les jambes doivent assurer simultanément deux fonctions contradictoires : <strong>la locomotion/équilibration (pied d'appui)</strong> et <strong>la manipulation/propulsion fine du ballon (pied libre : intérieur, cou-de-pied, extérieur, semelle)</strong>, ce qui tend naturellement à fixer le regard du débutant vers le sol au détriment de la prise d'information collective.</p>
+
+                    <div class="atd-grid-2">
+                        <div class="atd-box">
+                            <h4>🎯 Problèmes Fondamentaux du Football / Futsal en EPS</h4>
+                            <ul>
+                                <li><strong>Dissocier l'équilibration sur un seul pied de la manipulation du ballon :</strong> Maîtriser son équilibre unipodal sur la jambe d'appui fléchie pendant que la jambe libre amortit (contrôle), conduit ou frappe la balle.</li>
+                                <li><strong>Décentrer le regard du ballon (Vision périphérique) :</strong> Passer d'une conduite de balle regard rivé sur ses pieds à une prise d'information préalable (« scanner le terrain avant de recevoir ») pour identifier partenaires et adversaires.</li>
+                                <li><strong>Résoudre l'alternative du Porteur de Balle (Conduire / Passer / Tirer) :</strong> Renoncer au dribble solitaire systématique ou au dégagement à l'aveugle (« kick and rush ») pour construire un jeu en triangle (Appui / Soutien).</li>
+                                <li><strong>Coordonner le pressing et la couverture défensive sans faute :</strong> Cadrer le porteur sur l'axe ballon-but sans se livrer (et sans tacle glissé dangereux) tout en fermant les lignes de passe intérieures.</li>
+                            </ul>
+                        </div>
+                        <div class="atd-box" style="border-left-color:#991b1b;">
+                            <h4>🌱 Principes &amp; Règles d'Action + Enjeux de Formation (OP 2007/2009)</h4>
+                            <ul>
+                                <li><strong>Principes Offensifs :</strong> Conserver le ballon (contrôle orienté, protection de balle, triangle de soutien), progresser vers la cible (jeu en appui-remise, une-deux, utilisation de la largeur des couloirs), déséquilibrer et finir (tir cadré dès l'entrée en zone de vérité).</li>
+                                <li><strong>Principes Défensifs :</strong> Repli défensif immédiat à la perte de balle, ralentissement/cadrage du porteur (appui décalé), couverture mutuelle entre lignes et interception des passes.</li>
+                                <li><strong>Enjeux Moteurs, Cognitifs &amp; Citoyens :</strong> Coordination oculo-pédestre et dissociation segmentaire, lecture spatio-temporelle des trajectoires, mixité inclusive (valorisation de la passe et du Futsal technique sur la force brute), maîtrise des émotions et arbitrage FIFA / IFAB.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>2. Modélisation Didactique des 4 Niveaux d'Habileté en Football / Futsal Scolaire</h3>
+                    <div class="table-wrap" style="margin-top:0.75rem;">
+                        <table class="a4-table">
+                            <thead>
+                                <tr>
+                                    <th>Niveau Didactique</th>
+                                    <th>Comportements Initiaux Observables (Porteur / Non-Porteur / Défense)</th>
+                                    <th>Thème d'Étude Prioritaire &amp; Objectif de Transformation</th>
+                                    <th>Situation de Référence Évolutive</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Niveau 1<br>Débutant (Grappe &amp; Pointu)</strong></td>
+                                    <td>Effet « grappe » autour du ballon, regard rivé au sol, contrôles qui rebondissent à 3 mètres, frappes du pointu à l'aveugle vers l'avant, peur du ballon chez certains élèves, défenseurs qui se jettent tous sur le porteur.</td>
+                                    <td>Sortir de la grappe, amortir la balle (semelle ou intérieur du pied), lever la tête et enchaîner des passes courtes du plat du pied vers un partenaire démarqué.</td>
+                                    <td>Match 5c5 en 3 couloirs avec interdiction des balles hautes et bonification (+2 pts) après 3 passes réussies.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Niveau 2<br>Débrouillé (Conduite solitaire)</strong></td>
+                                    <td>Les élèves techniques abusent du dribble individuel jusqu'à perdre la balle ; les non-porteurs s'arrêtent pour regarder ou courent tous vers le but adverse sans offrir de soutien.</td>
+                                    <td>Enchaîner contrôle orienté et passe dans le mouvement, créer permanence du triangle (1 Appui devant + 1 Soutien derrière) et exploiter le surnombre 2c1 / 3c2.</td>
+                                    <td>Situation 4c4 / 5c5 avec limitation à 3 touches de balle maximum en zone défensive et médiane.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Niveau 3<br>Confirmé (Jeu en 3 zones)</strong></td>
+                                    <td>Progression collective dans l'axe mais manque d'utilisation de la largeur (couloirs) face à un bloc défensif replié ; tirs précipités de loin hors cadre.</td>
+                                    <td>Structurer la progression en 3 zones (Défense → Milieu → Attaque), combiner en <em>Une-Deux</em> ou <em>Appui-Remise</em>, écarter sur les ailes et organiser une défense de zone (cadrage + couverture).</td>
+                                    <td>Match 5c5 (Losange 1-2-1) ou 7c7 avec but comptant double sur centre en retrait ou combinaison Une-Deux.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Niveau 4<br>Élite / ASS</strong></td>
+                                    <td>Bonne maîtrise technique à 2 touches mais manque d'automatismes collectifs face à un pressing haut ou une défense basse en Futsal / Foot à 7.</td>
+                                    <td>Maîtriser les systèmes tactiques (Futsal 1-2-1 avec Pivot ou 2-2 en rotation ; Foot 7c7 en 2-3-1), gérer les transitions rapides (&lt; 6s), les coups de pied arrêtés et le code FIFA/IFAB.</td>
+                                    <td>Match officiel Futsal 5c5 FIFA (cumul des 5 fautes, 4s à la touche) avec contrat stratégique et scouting.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>3. Tableau de Remédiation Technique : Erreurs Fréquentes des Élèves &amp; Corrections Pédagogiques</h3>
+                    <div class="table-wrap" style="margin-top:0.75rem;">
+                        <table class="a4-table">
+                            <thead>
+                                <tr>
+                                    <th>Fondamental Technique</th>
+                                    <th>Erreur Fréquente Observée sur le Terrain</th>
+                                    <th>Remédiation &amp; Consigne Pédagogique Immédiate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>La Passe Courte (Intérieur / Plat du Pied)</strong></td>
+                                    <td>Frappe du bout du pied (« pointu »), trajectoire aléatoire ou balle qui saute, pied d'appui placé trop loin derrière le ballon.</td>
+                                    <td>Placer le <strong>pied d'appui à 15 cm à côté du ballon</strong> (pointe du pied dirigée vers le partenaire cible), ouvrir la cheville à 90° verrouillée (« club de golf ») et traverser le milieu du ballon avec la large surface interne du pied.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Le Contrôle (Semelle &amp; Intérieur Orienté)</strong></td>
+                                    <td>Jambe raide sur laquelle le ballon rebondit à 3 mètres, ou arrêt complet du ballon sous le pied sans visibilité de la suite.</td>
+                                    <td>En Futsal (sol plat) : <strong>contrôle de la semelle</strong> (pied incliné formant un toit au-dessus de la balle) suivi immédiatement d'une poussée dans l'espace libre ; sur grand terrain : amortir de l'intérieur du pied en orientant son 1er toucher vers le couloir libre (contrôle orienté).</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>La Conduite de Balle en Mouvement</strong></td>
+                                    <td>Pousser le ballon trop loin devant soi (perte de balle) ou marcher sur le ballon en gardant les yeux fixés sur ses chaussures.</td>
+                                    <td>Conduire par petites touches fréquentes (intérieur/extérieur du pied à chaque foulée) en gardant la balle à moins d'un mètre ; lever la tête tous les 2 contacts pour annoncer la couleur du chasuble levé par l'enseignant.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Le Tir au But (Cou-de-Pied &amp; Plat du Pied Placé)</strong></td>
+                                    <td>Buste penché en arrière au moment de la frappe (le ballon s'envole systématiquement au-dessus de la barre transversale).</td>
+                                    <td>Engager les <strong>épaules et le genou au-dessus du ballon</strong> au moment de l'impact, pied d'appui sur la même ligne que la balle, cheville tendue et verrouillée (frappe du cou-de-pied / lacets) ou ouverte (plat du pied placé dans les coins bas).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 3 : GRILLES D'OBSERVATION & D'ÉVALUATION SOMMATIVE (/20)     -->
+        <!-- ================================================================== -->
+        <section id="volet-grilles" class="volet-panel" aria-label="Grilles d'Observation et d'Évaluation Football et Futsal">
+            <div class="studio-shell">
+                <div class="studio-top-bar" style="background:#006233;">
+                    <div>
+                        <h2>📊 Grilles Officielles d'Observation &amp; d'Évaluation Sommative Football &amp; Futsal (/20)</h2>
+                        <p>Conformes aux Notes ministérielles n° 143-09 (Collège OP 2009) et n° 142-10 (Lycée Qualifiant &amp; Bac OP 2007) — Prêtes à imprimer en A4 ou télécharger en Word.</p>
+                    </div>
+                </div>
+
+                <div class="studio-controls">
+                    <span class="control-label">Choisissez la Grille Football / Futsal à visualiser et télécharger :</span>
+                    <div class="practice-level-tabs">
+                        <button type="button" class="practice-tab active" data-grille="diag" onclick="selectFootballGrille('diag', this)">
+                            <strong>1. Fiche d'Observation Diagnostique</strong>
+                            <span>Recueil statistique en binôme (Match 5c5 / 7c7 : BJ, PR, TC, Buts, Récup.)</span>
+                        </button>
+                        <button type="button" class="practice-tab" data-grille="college" onclick="selectFootballGrille('college', this)">
+                            <strong>2. Grille Sommative Collège (/20)</strong>
+                            <span>1AC · 2AC · 3AC (OP 2009 &amp; Note 143-09 : 12 + 3 + 5 pts)</span>
+                        </button>
+                        <button type="button" class="practice-tab" data-grille="lycee" onclick="selectFootballGrille('lycee', this)">
+                            <strong>3. Grille Sommative Lycée &amp; Bac (/20)</strong>
+                            <span>TC · 1Bac · 2Bac (OP 2007 &amp; Note 142-10 : 14 + 3 + 3 pts)</span>
+                        </button>
+                        <button type="button" class="practice-tab" data-grille="dispense" onclick="selectFootballGrille('dispense', this)">
+                            <strong>4. Grille Élève Dispensé &amp; Arbitre (/20)</strong>
+                            <span>Arbitrage FIFA/IFAB, Table Futsal (5 fautes, 4s) &amp; Dossier théorique</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="export-action-bar" style="background:#f0fdf4;border-color:#bbf7d0;">
+                    <div class="export-btn-group">
+                        <button type="button" class="btn-export btn-word-fiches" onclick="exportElementAsWord('grilleA4Preview', 'Grille-Evaluation-Football-Futsal-EPS-Maroc')">📝 Télécharger cette Grille (.doc Word)</button>
+                        <button type="button" class="btn-export btn-pdf-fiches" onclick="printElementAsPdf('grilleA4Preview', 'Grille Evaluation Football Futsal EPS Maroc')">📄 Imprimer / Télécharger en PDF A4</button>
+                    </div>
+                    <button type="button" class="btn-export btn-copy-doc" onclick="copyGrillePreview(this)">📋 Copier la grille</button>
+                </div>
+
+                <div class="viewer-canvas">
+                    <div id="grilleA4Preview" class="a4-sheet">
+                        <!-- Injecté dynamiquement par JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 4 : TERRAIN MAROC (40+ ÉLÈVES), ÉCHAUFFEMENT & ARBITRAGE FIFA-->
+        <!-- ================================================================== -->
+        <section id="volet-terrain" class="volet-panel" aria-label="Gestion Grands Effectifs et Arbitrage FIFA Football et Futsal">
+            <div class="content-panel-card">
+                <h2>🏟️ Gérer 40 à 44 Élèves en Football / Futsal sur un Terrain de 40×20 m et Favoriser la Mixité</h2>
+                <p>L'enseignement du Football/Futsal en EPS au Maroc confronte l'enseignant à deux défis majeurs : le grand effectif (38 à 44 élèves sur un seul terrain de handball/futsal de 40×20m) et l'écart initial de vécu entre les élèves pratiquants en club/quartier et les élèves débutants (notamment les jeunes filles). Voici les deux organisations de terrain les plus efficaces :</p>
+
+                <div class="atd-grid-2">
+                    <div class="atd-box">
+                        <h4>Dispositif A : « 3 Mini-Terrains Transversaux de 4c4 » avec Petits Buts de Plots (Séances 2 à 7)</h4>
+                        <ul>
+                            <li><strong>Découpage de l'espace :</strong> Dans la largeur du terrain de 40×20m, tracez <strong>3 mini-terrains de 20m × 13m</strong> munis de 2 petits buts de plots (2m de large, sans gardien) sur chaque terrain.</li>
+                            <li><strong>Répartition par Groupes de Niveau (N1, N2, N3) :</strong> Terrain 1 = Groupe N1 (débutants/filles en confiance, ballon Futsal à rebond réduit) · Terrain 2 = Groupe N2 (intermédiaires) · Terrain 3 = Groupe N3 (confirmés, jeu limité à 2 touches de balle).</li>
+                            <li><strong>Engagement moteur :</strong> 24 élèves jouent simultanément pendant que les 16 autres assurent l'observation statistique en binôme et l'arbitrage (rotation toutes les 6 minutes).</li>
+                        </ul>
+                    </div>
+                    <div class="atd-box" style="border-left-color:#991b1b;">
+                        <h4>Dispositif B : Le Tournoi Futsal 5c5 « Mondial Maroc 2030 » avec Règles Inclusives (Séances 1, 8, 9, 10)</h4>
+                        <ul>
+                            <li><strong>Organisation en 6 équipes mixtes de 6 à 7 joueurs portant le nom d'une sélection nationale :</strong></li>
+                            <li><strong>Règles d'équité mixte &amp; sécurité :</strong> Interdiction formelle des tacles glissés et des balles levées au-dessus de la taille · Tout but marqué par une élève fille (ou sur une passe décisive d'une fille) compte <strong>3 points</strong> au lieu de 1 point.</li>
+                            <li><strong>Table de Marque Futsal FIFA :</strong> Équipe C fournit les 2 arbitres de ligne + le chronométreur des 4 secondes (remise en jeu) + le marqueur des fautes cumulées · Équipe D observe en binôme.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>🔥 Protocole d'Échauffement Spécifique « FIFA 11+ Scolaire » (12 minutes)</h3>
+                <ol style="padding-left:1.5rem;font-size:0.9rem;color:#334155;">
+                    <li><strong>Phase 1 — Courses &amp; Mobilisation Articulaire Dynamique (4 min) :</strong> Course légère par deux sur la longueur avec ouverture et fermeture de hanche (adducteurs / psoas), talons-fesses, montées de genoux, pas chassés et changements d'appuis bas (prévention des entorses de cheville et du genou).</li>
+                    <li><strong>Phase 2 — Activation Musculaire des Ischio-Jambiers &amp; Gainage (3 min) :</strong> Fentes avant dynamiques, équilibre unipodal sur pied d'appui fléchi (proprioception) et accélérations progressives sur 10 mètres.</li>
+                    <li><strong>Phase 3 — Maîtrise de Balle (Coerver / Futsal) &amp; Passes à Deux (5 min) :</strong> Semelles alternées sur le ballon, intérieur-extérieur des deux pieds tête levée, puis passes du plat du pied en mouvement à 2 touches (contrôle semelle + passe intérieur).</li>
+                </ol>
+
+                <h3>⚖️ Règles Officielles Futsal FIFA &amp; Football IFAB 2026 en EPS</h3>
+                <div class="table-wrap">
+                    <table class="a4-table">
+                        <thead>
+                            <tr>
+                                <th>Règle Officielle FIFA / IFAB</th>
+                                <th>Application en Futsal Scolaire (5c5) vs Football (7c7 / 11c11)</th>
+                                <th>Sanction / Remise en Jeu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Rentrée de Touche &amp; Règle des 4 Secondes (Loi 15 Futsal)</strong></td>
+                                <td>En <strong>Futsal (5c5)</strong> : la touche s'effectue <strong>au pied</strong> (ballon immobile sur la ligne de touche) en moins de <strong>4 secondes</strong> (adversaires à 5 m). En <strong>Football (11c11)</strong> : touche à deux mains derrière la tête, les deux pieds au sol.</td>
+                                <td>Si les 4 secondes sont dépassées ou la touche mal exécutée → Rentrée de touche inversée pour l'adversaire.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Hors-Jeu (Loi 11 IFAB / Futsal)</strong></td>
+                                <td>En <strong>Futsal (5c5) et Foot réduit (7c7 EPS)</strong> : <strong>il n'y a PAS de hors-jeu</strong>. En <strong>Football à 11</strong> : hors-jeu dans la moitié adverse si le joueur est plus près de la ligne de but que le ballon et l'avant-dernier adversaire au départ de la passe.</td>
+                                <td>Coup franc indirect pour la défense à l'endroit du hors-jeu (Foot à 11).</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fautes Cumulées &amp; Jet Franc à 10m (Loi 13 Futsal)</strong></td>
+                                <td>En Futsal, les fautes directes sont comptabilisées par équipe : à partir de la <strong>6ème faute cumulée par mi-temps</strong>, l'équipe adverse bénéficie d'un <strong>coup franc direct sans mur depuis le second point de penalty à 10 mètres</strong>.</td>
+                                <td>Tir direct au but à 10 mètres sans mur défensif.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Passe en Retrait au Gardien (Loi 12)</strong></td>
+                                <td>Le gardien de but n'a pas le droit de toucher le ballon avec les mains sur une passe volontaire du pied d'un partenaire. En Futsal, le gardien ne peut garder le ballon dans son propre camp (au pied ou à la main) plus de <strong>4 secondes</strong>.</td>
+                                <td>Coup franc indirect pour l'équipe adverse sur la ligne de la surface (à 6 mètres).</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sécurité Scolaire : Tacles Glissés &amp; Contacts (Loi 12 EPS)</strong></td>
+                                <td>En EPS au Maroc (revêtement béton/bitume), <strong>les tacles glissés sont strictement interdits</strong> pour prévenir les brûlures, fractures et entorses : la récupération du ballon se fait uniquement debout sur ses appuis.</td>
+                                <td>Coup franc direct + Exclusion temporaire de <strong>2 minutes</strong> en cas de geste dangereux.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 5 : CARTES DE TOUS LES ARTICLES & DOSSIERS FOOT/FUTSAL       -->
+        <!-- ================================================================== -->
+        <section id="volet-articles" class="volet-panel" aria-label="Articles et Dossiers Football et Futsal sur ProfEPS">
+            <div class="content-panel-card">
+                <h2>📚 Bibliothèque Complète des Articles &amp; Dossiers Football &amp; Futsal sur ProfEPS Maroc</h2>
+                <p>Consultez nos guides pédagogiques, projets transversaux Coupe du Monde 2030 et dossiers réglementaires FIFA/IFAB consacrés au Football et au Futsal :</p>
+
+                <div class="articles-cards-grid">
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Guide Didactique Complet · Collège &amp; Lycée</div>
+                            <h3>Football et Futsal en EPS au Maroc : Guide Pédagogique Complet, Progression de 10 Séances &amp; Grilles</h3>
+                            <p>Comparatif Football vs Futsal en EPS, OTI/OTC Collège et Lycée, progression détaillée de 10 séances, 5 situations d'apprentissage clés et gestion de la mixité.</p>
+                        </div>
+                        <a href="article-football-eps.html" class="rel-card-link">Lire le guide complet Football &amp; Futsal →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Règlement Officiel Futsal · FIFA 2026</div>
+                            <h3>Règlement Officiel Futsal (Lois du Jeu FIFA 2026 &amp; Arbitrage en EPS) : Terrain 40×20m, 4 Secondes &amp; 5 Fautes</h3>
+                            <p>Tout le règlement officiel du Futsal adapté aux terrains scolaires marocains : dimensions, ballon Taille 4, touche au pied, règle du gardien et gestuelle d'arbitrage.</p>
+                        </div>
+                        <a href="reglement-futsal-fifa-arbitrage-eps.html" class="rel-card-link">Consulter le Règlement Futsal FIFA →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Lois du Jeu Football · IFAB 2026</div>
+                            <h3>Règlement Football (Les 17 Lois du Jeu IFAB 2026 &amp; Arbitrage EPS) : Hors-Jeu, Fautes &amp; Terrain</h3>
+                            <p>Référentiel complet des 17 Lois du Jeu de l'IFAB pour préparer l'épreuve écrite/orale du concours CRMEF et former vos élèves à l'arbitrage officiel.</p>
+                        </div>
+                        <a href="reglement-football-lois-jeu-ifab-arbitrage-eps.html" class="rel-card-link">Consulter les 17 Lois du Jeu IFAB →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Projet Pédagogique Transversal · Maroc 2030</div>
+                            <h3>EPS et Coupe du Monde 2030 au Maroc : Projet Pédagogique de Cycle &amp; Tournoi Interclasses</h3>
+                            <p>Comment organiser votre cycle de Football/Futsal et vos activités ASS autour de la co-organisation historique du Mondial 2030 par le Maroc.</p>
+                        </div>
+                        <a href="article-eps-coupe-du-monde-2030.html" class="rel-card-link">Découvrir le Projet Mondial 2030 EPS →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Fiches ATD Officielles · PDF</div>
+                            <h3>Analyses et Traitements Didactiques (ATD) des APS au Maroc : Sports Collectifs, Athlétisme &amp; Gym</h3>
+                            <p>Retrouvez les synthèses ATD officielles (Logique interne, Problèmes fondamentaux, Principes d'action) conformes aux OP 2007 et OP 2009.</p>
+                        </div>
+                        <a href="ressources-atd.html" class="rel-card-link">Accéder aux Fiches ATD PDF →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Pédagogie de Terrain · 40+ Élèves</div>
+                            <h3>Gérer une Classe de 40+ Élèves et Évaluer les Élèves Dispensés en EPS au Maroc</h3>
+                            <p>Dispositifs d'organisation en tournoi rotatif et grilles d'évaluation sur 20 points pour les élèves dispensés de pratique physique.</p>
+                        </div>
+                        <a href="article-gestion-grands-effectifs-dispenses-eps-maroc.html" class="rel-card-link">Consulter le guide Grands Effectifs →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Sport Scolaire ASS &amp; FRMSS</div>
+                            <h3>Déplacements Sport Scolaire (ASS &amp; FRMSS) : Loi 30-09, Décret 2.10.628 &amp; Ordre de Mission</h3>
+                            <p>Toutes les procédures légales et les modèles d'Ordre de Mission et d'Autorisation Parentale (FR/AR) pour les championnats provinciaux de Futsal et Football ASS.</p>
+                        </div>
+                        <a href="deplacement-sport-scolaire-ass-frmss-ordre-mission-eps.html" class="rel-card-link">Voir la procédure &amp; les modèles ASS →</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- SCRIPT INTERACTIF DU STUDIO FOOTBALL & FUTSAL (6 NIVEAUX × 4 NIVEAUX DE PRATIQUE + GRILLES + EXPORT WORD/PDF) -->
+    <script>
+      var FB_SCHOOL_LEVELS = {{
+        "1AC": {{
+          label: "1ère Année Collège (1AC)",
+          ref: "Orientations Pédagogiques 2009 (Cycle Secondaire Collégial) · Note n° 143-09",
+          oti: "L'élève de la 1ère année collégiale doit pouvoir acquérir une motricité correcte lui permettant de s'adapter aux exigences des situations (forme et rythme) et s'intégrer dans le groupe.",
+          comp: "S'approprier les règles fondamentales du Football/Futsal (non-usage des mains, interdiction des contacts dangereux), maîtriser le contrôle-passe de l'intérieur du pied et sortir de la grappe pour progresser vers le but adverse.",
+          bareme: "Habiletés motrices : 12 pts (Produit 6 pts + Processus 6 pts) · Connaissances conceptuelles : 3 pts · Comportement & Rôles sociaux : 5 pts"
+        }},
+        "2AC": {{
+          label: "2ème Année Collège (2AC)",
+          ref: "Orientations Pédagogiques 2009 (Cycle Secondaire Collégial) · Note n° 143-09",
+          oti: "L'élève de la 2ème année collégiale doit pouvoir ajuster l'énergie physique et la maîtriser et fournir l'effort et l'orienter pour effectuer des réalisations coordonnées et organisées, et communiquer avec les autres.",
+          comp: "Rechercher le gain d'une rencontre à effectif réduit (5c5) en enchaînant contrôle orienté et passe dans les intervalles (jeu en triangle Appui-Soutien) pour conclure par un tir cadré.",
+          bareme: "Habiletés motrices : 12 pts (Produit 6 pts + Processus 6 pts) · Connaissances conceptuelles : 3 pts · Comportement & Rôles sociaux : 5 pts"
+        }},
+        "3AC": {{
+          label: "3ème Année Collège (3AC)",
+          ref: "Orientations Pédagogiques 2009 (Cycle Secondaire Collégial) · Note n° 143-09",
+          oti: "L'élève de la 3ème année collégiale doit pouvoir ajuster les éléments de l'acte moteur et l'adapter aux différentes situations en fonction de ses exigences organisationnelles et réglementaires, et s'exercer sur la pratique des droits et devoirs pour réaliser un projet sportif individuel ou collectif.",
+          comp: "Construire et exécuter un projet collectif d'attaque (exploitation des couloirs et du surnombre 3c2, Une-Deux) et de défense de zone (cadrage-couverture) tout en assumant l'arbitrage FIFA/IFAB.",
+          bareme: "Habiletés motrices : 12 pts (Produit 6 pts + Processus 6 pts) · Connaissances conceptuelles : 3 pts · Comportement & Rôles sociaux : 5 pts"
+        }},
+        "TC": {{
+          label: "Tronc Commun (TC)",
+          ref: "Orientations Pédagogiques 2007 (Cycle Secondaire Qualifiant) · Note n° 142-10",
+          oti: "L'élève du Tronc Commun doit pouvoir maîtriser les composantes du comportement moteur et pouvoir s'adapter aux différentes situations et faire face à ses défis et accepter l'intégration dans le groupe.",
+          comp: "Conserver collectivement le ballon et faire progresser le jeu dans les 3 couloirs en limitant le nombre de touches de balle pour créer le surnombre et conclure face au gardien.",
+          bareme: "Habiletés motrices : 14 pts (Efficacité collective/individuelle 7 pts + Processus technique/tactique 7 pts) · Connaissances conceptuelles : 3 pts · Comportement : 3 pts"
+        }},
+        "1BAC": {{
+          label: "1ère Année Baccalauréat (1Bac)",
+          ref: "Orientations Pédagogiques 2007 (Cycle Secondaire Qualifiant) · Note n° 142-10",
+          oti: "L'élève de la 1ère année Bac doit pouvoir confronter les situations motrices grâce à l'adéquation des différents éléments de l'acte moteur et la planification de différents types d'effort physique individuel ou collectif.",
+          comp: "Alterner jeu rapide de transition (contre-attaque) et attaque placée (circulation en losange 1-2-1, appui-remise avec le pivot, dédoublement) face à une défense organisée.",
+          bareme: "Habiletés motrices : 14 pts (Efficacité 7 pts + Processus 7 pts) · Connaissances conceptuelles : 3 pts · Comportement : 3 pts"
+        }},
+        "2BAC": {{
+          label: "2ème Année Baccalauréat (2Bac)",
+          ref: "Orientations Pédagogiques 2007 (Examen National / Contrôle Continu Bac Sport) · Note n° 142-10",
+          oti: "L'élève de la 2ème année Bac doit pouvoir analyser différentes situations et interactions motrices et s'intégrer volontairement dans la planification et la réalisation de projets individuels et collectifs.",
+          comp: "Concevoir, piloter et réguler un système tactique collectif (Futsal 1-2-1 / 2-2 ou Foot 7c7) en attaque et en défense (pressing coordonné ou bloc bas) pour remporter le match dans le respect strict des Lois du Jeu FIFA/IFAB.",
+          bareme: "Habiletés motrices : 14 pts (Efficacité 7 pts + Processus 7 pts) · Connaissances conceptuelles : 3 pts · Comportement : 3 pts"
+        }}
+      }};
+
+      var FB_PRACTICE_LEVELS = {{
+        "N1": {{
+          shortName: "Niveau 1 (Débutant)",
+          title: "Niveau 1 — Débutant : Sortir de la grappe, contrôle semelle/intérieur et passe du plat du pied tête levée",
+          otcPrefix: "Rechercher le gain d'une rencontre en 5c5 en rompant l'attroupement autour du ballon (la grappe) par un contrôle assuré (semelle ou intérieur du pied) et des passes courtes au sol vers un partenaire démarqué pour amener le ballon en zone de tir.",
+          seances: [
+            ["Séance 1 — Évaluation Diagnostique (Match 5c5 Futsal / Mini-Foot)", "Identifier le niveau initial des élèves en situation de référence (2×6 min) à l'aide de la fiche d'observation statistique en binôme.", "Terrain 40×20m ou 2 terrains réduits · Matchs 5c5 de 6 min avec arbitres et observateurs.", "Règles de sécurité : interdiction absolue des tacles glissés et des balles levées au-dessus de la taille ; touche au pied.", "Contrôler le ballon avant de le jouer ; lever la tête pour chercher un partenaire libre.", "Indice collectif de conservation > 40% et au moins 3 tirs cadrés par match.", "Jeu en 4c4 ou 5c5 avec ballon Futsal Taille 4 à rebond réduit pour faciliter le contrôle au sol."],
+            ["Séance 2 — Conduite de Balle Tête Levée & Maîtrise des Surfaces de Contact (Semelle / Intérieur / Extérieur)", "Dissocier le pied d'appui du pied manipulateur pour conduire le ballon tout en prenant l'information visuelle autour de soi.", "3 carrés de 12m × 12m par groupes de niveau · 1 ballon pour 2 élèves (« Le Défi du Cercle »).", "Conduire par petites touches fréquentes ; au coup de sifflet : stopper net le ballon sous la semelle et annoncer la couleur du plot levé par le professeur.", "Garder le ballon à moins d'un mètre de ses pieds ; fléchir légèrement la jambe d'appui.", "Réaliser 2 séquences de 45 secondes de conduite et 5 arrêts-semelle sans perdre le contrôle ni percuter un camarade.", "Introduire 2 « défenseurs-crabes » qui cherchent à pousser les ballons hors du carré sans contact."],
+            ["Séance 3 — Le Contrôle-Passe de l'Intérieur du Pied (Plat du Pied) en Mouvement", "Remplacer le dégagement aléatoire du pointu par un enchaînement Contrôle semelle/intérieur → Passe précise du plat du pied au sol.", "Couloirs de 12m × 6m · Groupes de 4 élèves face à face (Passe et suit puis passe en triangle).", "Contrôler du pied droit (semelle) puis passer de l'intérieur du pied droit : pied d'appui posé à 15 cm à côté du ballon, cheville ouverte à 90° verrouillée.", "Regarder le partenaire cible avant de frapper ; amortir la balle à la réception pour qu'elle reste devant soi.", "Réussir 8 enchaînements contrôle-passe consécutifs sur 10 au sol entre les plots portes.", "Réduire la largeur de la porte de passe (de 2m à 1m) ou imposer 2 touches obligatoires."],
+            ["Séance 4 — Sortir de la Grappe : Occuper les 3 Couloirs Longitudinaux", "Écarter le jeu sur toute la largeur du terrain (20m) pour offrir au porteur des lignes de passe hors de l'attroupement.", "Terrain divisé par des coupelles en 3 couloirs longitudinaux (Gauche, Centre, Droite) · Situation 4c2 puis 5c3.", "Un but vaut 3 points si le ballon a circulé dans les 3 couloirs avant le tir.", "Interdiction d'être plus de 2 joueurs de la même équipe dans le même couloir ; s'écarter dès la récupération du ballon.", "Amener le ballon en zone de finition 4 fois sur 5 en utilisant au moins 2 couloirs.", "Interdire aux défenseurs d'entrer dans les couloirs latéraux pendant les 3 premières secondes."],
+            ["Séance 5 — Se Démarquer en Appui et en Soutien : Le « Jeu du Carré » (3c1 puis 4c2)", "Se déplacer sans ballon sur les côtés du porteur pour lui offrir en permanence deux solutions de passe hors de l'ombre du défenseur.", "Carrés de 10m × 10m · 3 attaquants (sur les 4 côtés) contre 1 défenseur au centre (puis 4c2).", "Le porteur doit toujours avoir un partenaire à sa gauche et un partenaire à sa droite (formation d'un triangle permanent).", "Se déplacer dès que la passe part pour ouvrir l'angle de transmission ; orienter ses épaules face au jeu.", "Réaliser 6 passes consécutives sans interception sur 3 séries.", "Autoriser les 4 joueurs à sortir du carré vers le but dès la 5ème passe réussie."],
+            ["Séance 6 — Initiation au Tir Cadré au Sol et à Mi-Hauteur (Plat du Pied Placé & Cou-de-Pied)", "Coordonner la course d'élan oblique, le placement du pied d'appui à côté du ballon et la frappe équilibrée vers les coins du but.", "2 buts avec gardiens · Départ à 12m : conduite sur 4m (ou passe remise du professeur) suivie d'un tir avant la ligne des 7m.", "Placer le pied d'appui sur la ligne du ballon, pencher le buste légèrement en avant (genou au-dessus de la balle) et viser les coins bas loin du gardien.", "Prendre l'information sur la position du gardien avant le dernier pas d'élan ; ne jamais frapper en se penchant en arrière.", "Cadrer 4 tirs sur 5 et marquer au moins 3 buts sur 5.", "Ajouter un défenseur qui part en poursuite pour imposer une prise de tir rapide."],
+            ["Séance 7 — Progresser vers le But en Surnombre Simple (2c1 puis 3c2)", "Lire le comportement du défenseur : conduire vers le but si l'espace est libre, ou passer au partenaire démarqué si le défenseur sort sur moi.", "Demi-terrain · Vagues de 2c1 (aller) et 3c2 (retour) dans un couloir de 20m × 14m.", "Si le défenseur monte sur le porteur → Passe dans la course du partenaire ; s'il recule et ferme la passe → Conduite et tir.", "Pour le non-porteur : courir à hauteur ou légèrement en avant du ballon dans le couloir opposé en offrant une cible.", "Terminer l'action par un tir cadré sans perte de balle sur 4 situations sur 5.", "Limiter l'action à 8 secondes maximum."],
+            ["Séance 8 — Défendre Debout sans Faute : Cadrer le Porteur sur l'Axe Ballon-But", "Récupérer le ballon ou ralentir l'attaque adverse en restant sur ses appuis (sans se jeter ni tacler) entre l'attaquant et son but.", "Couloirs de 15m × 8m · Duels 1c1 puis 2c2 avec zones de marque.", "Le défenseur se place de trois-quarts (pieds décalés, genoux fléchis) sur l'axe ballon-but pour orienter l'attaquant vers la touche.", "Ne jamais croiser les jambes ni se jeter à terre ; intervenir du pied uniquement lorsque l'attaquant pousse trop loin son ballon.", "Stopper ou récupérer proprement 3 attaques sur 5 sans commettre aucune faute.", "Ajouter un second défenseur en couverture à 3 mètres derrière le premier."],
+            ["Séance 9 — Match Dirigé 5c5 à Thème & Initiation à l'Arbitrage Futsal FIFA", "Transférer les acquis dans un match 5c5 arbitré en autonomie par les élèves (touche au pied, 4s, fautes, sortie de but).", "Tournoi triangulaire 5c5 · Matchs de 7 min · 2 arbitres-élèves + 1 chronométreur des 4s + 1 marqueur.", "But normal = 1 pt ; But marqué après 4 passes collectives ou par une élève fille = 3 pts.", "Utiliser les gestes officiels d'arbitrage (sens de la touche, décompte visuel des 4 secondes avec les doigts, coup franc).", "Moins de 2 fautes par équipe et plus de 60% de passes réussies au sol.", "Rotation complète des équipes toutes les 7 minutes."],
+            ["Séance 10 — Évaluation Sommative Finale (/20)", "Évaluer les compétences motrices, conceptuelles et comportementales en situation réelle de tournoi 5c5.", "Tournoi par poules de niveau homogènes · Matchs de 8 min · Grille officielle OP 2009 / OP 2007.", "Application intégrale du règlement Futsal adapté et rotation sur les rôles d'arbitre et d'observateur.", "Mobiliser la maîtrise technique (contrôle-passe-tir), le démarquage en couloirs et le fair-play.", "Attribution de la note sommative sur 20 points.", "Poules équilibrées par niveau."]
+          ]
+        }},
+        "N2": {{
+          shortName: "Niveau 2 (Débrouillé)",
+          title: "Niveau 2 — Débrouillé : Contrôle orienté, jeu en triangle (Appui-Soutien), surnombre 3c2 et finition",
+          otcPrefix: "Rechercher le gain de la rencontre en enchaînant contrôle orienté et passe dans le mouvement (appui-soutien) pour progresser rapidement dans les couloirs, exploiter le surnombre offensif (2c1, 3c2) et conclure par un tir cadré.",
+          seances: [
+            ["Séance 1 — Évaluation Diagnostique (Match 5c5 / 7c7)", "Évaluer la capacité des élèves à conserver et faire progresser le ballon collectivement vers le but lors d'un match observé.", "Terrain 40×20m · Tournoi 4 équipes · Fiche d'observation statistique en binôme.", "Règlement Futsal FIFA (touche au pied en 4s, relance gardien à la main, interdiction des tacles glissés).", "Prendre l'information avant de recevoir le ballon ; éviter de porter la balle plus de 3 secondes.", "Plus de 50% des possessions franchissent la ligne médiane et aboutissent à un tir.", "Limiter le jeu à 3 touches de balle maximum dans sa propre moitié de terrain."],
+            ["Séance 2 — Le Contrôle Orienté (Intérieur, Extérieur & Semelle Dynamique) pour Éliminer et Enchaîner", "Gagner un temps d'avance dès la 1ère touche de balle en orientant son contrôle dans le sens de la progression.", "Demi-terrain · Ateliers en losange : A passe à B qui réalise un contrôle orienté autour d'un mannequin/plot et passe à C.", "Avant que la balle n'arrive : coup d'œil par-dessus l'épaule (« scan »), ouverture de la hanche et 1ère touche dirigée dans l'espace libre.", "Ne jamais stopper la balle morte sous ses pieds si l'espace devant soi est ouvert ; enchaîner la passe sur le 2ème appui.", "Réussir 8 contrôles orientés fluides suivis d'une passe précise sur 10 ballons reçus.", "Remplacer le plot par un défenseur semi-actif qui oblige à orienter à l'opposé de sa pression."],
+            ["Séance 3 — Le Jeu en Appui-Soutien (Triangle Permanent autour du Porteur)", "Assurer la continuité de la progression en offrant systématiquement une solution en avant (Appui) et une solution en retrait (Soutien).", "Situation 4c2 puis 4c3 dans un couloir de 25m × 15m avec deux zones d'en-but à atteindre.", "Lorsque le porteur reçoit la balle : un partenaire s'engage devant lui entre deux défenseurs (appui), un autre décroche à distance de passe (soutien).", "Si la passe vers l'appui est fermée, repasser par le soutien qui change immédiatement de couloir en 2 touches.", "Atteindre la zone de marque adverse en moins de 6 passes sur 4 tentatives sur 5.", "Imposer 2 touches de balle maximum au joueur en soutien."],
+            ["Séance 4 — La Combinaison du « Une-Deux » (Passe et Va) pour Éliminer un Défenseur", "Utiliser un partenaire comme mur de remise (appui) pour contourner un adversaire direct à pleine vitesse.", "Demi-terrain · Couloirs d'attaque 2c1 puis 3c2 vers le but gardé.", "Le porteur A fixe le défenseur, donne à l'appui B (intérieur du pied au sol) et sprinte immédiatement dans le dos du défenseur pour recevoir la remise en 1 touche de B.", "Pour le remiseur B : bloquer sa cheville pour remettre la balle dans la course de A (devant lui et non dans ses pieds).", "Réussir 3 combinaisons de Une-Deux aboutissant à un duel face au gardien sur 5 attaques.", "Accorder 3 points à tout but marqué suite à un Une-Deux."],
+            ["Séance 5 — Exploiter le Surnombre Offensif Rapide (2c1 et 3c2 en Transition)", "Prendre de vitesse le repli défensif adverse en occupant les 3 couloirs et en choisissant le bon moment pour fixer et décaler.", "Terrain complet 40×20m · Aller en 2c1, Retour immédiat en 3c2 déclenché par le gardien ou le professeur.", "L'attaquant central conduit à haute vitesse vers l'axe : les deux ailiers sprintent dans les couloirs latéraux en restant ouverts.", "Passer dans le tempo de la course de l'ailier dès que le défenseur central se livre ; tir en 1 ou 2 touches maximum.", "Obtenir un tir cadré à moins de 9 mètres en moins de 7 secondes sur 4 surnombres sur 5.", "Faire partir un défenseur en poursuite depuis la ligne médiane (pression temporelle)."],
+            ["Séance 6 — Tir en Course, Tir sur Passe en Retrait & Duel avec le Gardien de But", "Optimiser l'efficacité devant le but en frappant en 1ère intention (sans contrôle superflu) sur centre ou passe en retrait.", "Demi-terrain · Débordement dans le couloir latéral suivi d'une passe en retrait au point de penalty (6m-9m) face au gardien.", "L'ailier lève la tête avant de centrer au sol en retrait ; l'attaquant central ajuste ses derniers petits pas et frappe du plat du pied ouvert.", "Cibler les zones basses aux deux poteaux (là où le gardien met le plus de temps à plonger).", "Marquer au moins 3 buts sur 5 centres en retrait face au gardien.", "Ajouter un défenseur central en duel avec l'attaquant dans la surface."],
+            ["Séance 7 — Organisation Défensive à Deux et Trois : Cadrage du Porteur + Couverture des Lignes de Passe", "Passer d'une défense individuelle désordonnée à un binôme/trinôme coordonné (1 joueur cadre le ballon, les autres couvrent l'axe).", "Demi-terrain · 3 défenseurs + 1 gardien contre 4 attaquants partant de la ligne médiane.", "Le défenseur le plus proche du ballon monte cadrer à 1m50 (sans se jeter) ; ses deux partenaires reculent en triangle pour fermer l'axe central.", "Communiquer à chaque passe latérale (« Sors ! », « Je couvre ! ») pour permuter les rôles de cadreur et de couvreur.", "Empêcher le tir dans la zone des 6m et récupérer 4 ballons sur 6 attaques adverses.", "Si la défense récupère et franchit la ligne médiane en passe, elle marque 2 points."],
+            ["Séance 8 — Le Match à 3 Zones (Structuration Défense - Milieu - Attaque)", "Maintenir l'équilibre collectif de l'équipe en évitant que tous les joueurs ne montent ou ne descendent en même temps.", "Terrain 40×20m divisé en 3 zones transversales · Match 5c5 (1-2-1) ou 7c7 (2-3-1).", "Au départ, chaque joueur respecte sa zone ; dès qu'une passe franchit une ligne, un joueur de la zone inférieure peut créer le surnombre dans la zone supérieure.", "Toujours laisser au moins 1 joueur en couverture défensive (le « Fixe / Libéro ») lorsque l'équipe attaque.", "Progresser proprement à travers les 3 zones et maintenir l'équilibre défensif sur 80% du match.", "Lever la restriction des zones dans les 4 dernières minutes tout en conservant la structure 1-2-1."],
+            ["Séance 9 — Match Officiel 5c5 Futsal FIFA (4s, 5 Fautes, Gardien Relanceur) & Arbitrage à 2", "Appliquer l'organisation collective en losange (1-2-1) dans un match réglementaire dirigé par un duo d'arbitres et une table de marque.", "Tournoi 5c5 sur 40×20m · 2 arbitres sur les lignes de touche + table de marque (chrono 4s et cumul des fautes).", "Application intégrale du règlement Futsal FIFA (y compris coup franc à 10m à la 6ème faute d'équipe).", "Exécuter rapidement les rentrées de touche au pied (< 4s) pour surprendre l'adversaire ; arbitrage gestuel clair.", "Réalisation du projet de jeu (> 60%) et respect absolu des décisions arbitrales.", "Temps mort tactique de 1 minute par équipe."],
+            ["Séance 10 — Évaluation Sommative Finale (/20)", "Valider le niveau d'acquisition individuel et collectif en situation réglementaire de compétition.", "Tournoi final · Grille officielle Collège (12/3/5) ou Lycée & Bac (14/3/3) sur 20 points.", "Application stricte du code FIFA/IFAB et rotation sur les rôles d'arbitre et d'observateur.", "Efficacité dans la conservation-progression, la finition, le repli défensif et l'arbitrage.", "Notation finale sur 20 points.", "Matchs de classement par poules de niveau."]
+          ]
+        }},
+        "N3": {{
+          shortName: "Niveau 3 (Confirmé)",
+          title: "Niveau 3 — Confirmé : Système Losange 1-2-1, jeu avec Pivot, dédoublement, transition rapide & défense de zone",
+          otcPrefix: "S'intégrer dans un collectif organisé (système 1-2-1 en Futsal ou 2-3-1 en Foot à 7) pour alterner attaque rapide de transition et attaque placée (jeu sur le Pivot, dédoublement dans les couloirs) tout en défendant en zone coordonnée.",
+          seances: [
+            ["Séance 1 — Évaluation Diagnostique (Match 5c5 / 7c7)", "Analyser la capacité des équipes à s'organiser par postes (Fixe, Ailiers, Pivot) et à gérer la transition attaque-défense.", "Terrain 40×20m · Matchs de 8 min · Fiche statistique technico-tactique en binôme.", "Règles Futsal FIFA / IFAB complètes.", "Respecter la structure en losange (1 Fixe derrière, 2 Ailiers larges, 1 Pivot haut).", "Plus de 60% de passes réussies et 50% d'attaques terminées par un tir en zone favorable.", "Bonifier de +2 pts les buts inscrits après appui-remise sur le Pivot."],
+            ["Séance 2 — Le Jeu avec le Pivot (Fixation Dos au But, Remise en 1 Touche & Rotation)", "Utiliser l'attaquant de pointe (Pivot) comme point d'ancrage au cœur de la défense adverse pour remiser ou se retourner.", "Demi-terrain · 1 Fixe + 2 Ailiers + 1 Pivot contre 3 défenseurs + Gardien.", "Trouver le Pivot au sol par une passe ferme dans l'intervalle : le Pivot protège son ballon avec le corps (semelle) et remise pour un ailier lancé ou pivote pour tirer.", "Pour les ailiers : plonger dans l'espace libre dès que la passe part vers le Pivot.", "Réussir 4 relations avec le Pivot aboutissant à un tir cadré sur 6 possessions.", "Autoriser le défenseur du Pivot à anticiper (obligeant le Pivot à demander la balle dans la profondeur)."],
+            ["Séance 3 — Le Dédoublement (Overlap) et la Permutation dans les Couloirs", "Créer le surnombre sur les côtés par la course croisée d'un partenaire dans le dos du porteur de balle.", "Terrain complet · Situation 4c4 à partir de la structure 1-2-1.", "L'ailier rentre légèrement vers l'intérieur balle au pied pour fixer son vis-à-vis pendant que le Fixe (ou l'autre ailier) sprinte dans son dos le long de la ligne de touche.", "Servir le partenaire qui dédouble dans sa course ou profiter de son appel leurre pour frapper au but.", "Obtenir un centre en retrait ou un tir ouvert sur 4 dédoublements sur 6.", "Limiter le porteur à 3 touches de balle maximum."],
+            ["Séance 4 — Conservation sous Pression & Sortie de Balle (Jeu à 2 Touches)", "Sortir proprement le ballon de sa zone défensive face à un adversaire qui presse haut, sans dégager au hasard.", "Demi-terrain · 4 relanceurs (dont le gardien au pied) contre 3 presseurs adverses.", "Utiliser la largeur maximale et le gardien comme joueur supplémentaire (surnombre 4c3) pour trouver un joueur lancé au-delà de la ligne médiane.", "Prendre l'information *avant* que le ballon n'arrive ; orienter son contrôle du pied le plus éloigné du défenseur.", "Réussir 5 sorties de balle propres franchissant la ligne médiane au sol sur 7 tentatives.", "Passer en 4 contre 4 dès que le groupe réussit 3 sorties consécutives."],
+            ["Séance 5 — Transition Défense → Attaque : La Contre-Attaque Éclair en moins de 6 Secondes", "Exploiter le déséquilibre adverse immédiatement après une interception ou un arrêt du gardien.", "Terrain 40×20m · 4c4 devant un but : dès la récupération défensive, contre-attaque immédiate vers le but opposé.", "1ère passe vers l'avant (ou relance tendue à la main du gardien) en moins de 2 secondes ; sprint en éventail dans les 3 couloirs.", "Interdiction de faire une passe en arrière pendant la contre-attaque ; finir au second poteau.", "Marquer ou tirer en moins de 6 secondes sur 4 récupérations sur 6.", "Un seul ou deux défenseurs ont le droit de se replier au sprint (3c1 ou 3c2 à haute vitesse)."],
+            ["Séance 6 — Défense de Zone en Losange (1-2-1) vs Défense Individuelle avec Changement", "Fermer l'axe central et orienter l'attaque adverse vers les lignes de touche pour déclencher la récupération.", "Demi-terrain · 4 défenseurs organisés en losange (Pointe haute sur le Fixe adverse, 2 Ailiers qui ferment l'intérieur, 1 Dernier défenseur devant le Pivot).", "Coulisser collectivement du côté du ballon ; lorsque la balle arrive sur l'aile, l'ailier défensif cadre et la pointe haute ferme la passe en retrait.", "Communication verbale constante et maintien d'une distance de 3-4 mètres entre les lignes.", "Forcer 4 pertes de balle, touches ou tirs excentrés sur 6 possessions adverses.", "Alterner défense basse (départ ligne médiane) et défense haute (départ à 10m du but adverse)."],
+            ["Séance 7 — Les Coups de Pied Arrêtés Tactiques (Corners, Touches au Pied & Coups Francs)", "Transformer les remises en jeu arrêtées (en moins de 4 secondes) en occasions franches de but par des combinaisons annoncées.", "Demi-terrain · 4 attaquants contre 4 défenseurs + Gardien sur corners et touches offensives.", "Combinaison 1 : Bloc/écran légal sur le défenseur central pour libérer le tireur en retrait à 9m · Combinaison 2 : Passe feintée et remise au second poteau.", "Exécuter la combinaison avant la 4ème seconde du décompte arbitral.", "Obtenir un tir cadré sur 3 coups de pied arrêtés sur 5.", "Chaque équipe conçoit et nomme ses 2 propres combinaisons sur touche et corner."],
+            ["Séance 8 — Transition Attaque → Défense : Le Contre-Pressing Immédiat (3 Secondes) ou le Repli", "Agir collectivement dans les 3 secondes suivant la perte du ballon : presser immédiatement si le ballon est fermé, ou sprinter en repli sous la ligne du ballon.", "Terrain complet 5c5 · Match à thème « But encaissé dans les 5s suivant une perte de balle = 3 points pour l'adversaire ».", "Le joueur qui perd la balle harcèle immédiatement le nouveau porteur pour l'empêcher de lever la tête ; les 3 partenaires se replacent sous la ligne du ballon.", "Ne jamais s'arrêter pour contester ou lever les bras après une perte de balle.", "Réduire de 70% les contre-attaques subies et récupérer 3 ballons dès la zone haute.", "Accorder +2 points pour un but marqué suite à une récupération haute (contre-pressing)."],
+            ["Séance 9 — Rencontre Officielle 5c5 / 7c7 (2×10 min), Projet Tactique & Arbitrage Complet", "Gérer un match complet en autonomie avec choix du système, temps mort de coaching et arbitrage officiel à 2.", "Tournoi officiel · 2 arbitres FIFA + Table de marque (chrono, 4s, fautes cumulées, feuille de match).", "Chaque capitaine définit son système (1-2-1 ou 2-2) et ajuste sa hauteur de bloc défensif à la mi-temps d'après les statistiques.", "Respect strict des Lois du Jeu et maîtrise émotionnelle totale.", "Adéquation entre le projet tactique et la réalisation (> 65%) + arbitrage sans erreur.", "Gestion des 2 dernières minutes en situation de score serré."],
+            ["Séance 10 — Évaluation Sommative & Certificative Finale (/20)", "Évaluer les élèves en situation réglementaire de compétition selon le barème officiel OP.", "Tournoi final · Grille officielle Collège (12/3/5) ou Lycée & Bac (14/3/3) sur 20 points.", "Application stricte du code FIFA/IFAB et rotation sur les rôles d'officiels.", "Mobiliser toutes les compétences technico-tactiques, conceptuelles et citoyennes acquises.", "Attribution de la note finale sur 20 points.", "Poules homogènes de niveau."]
+          ]
+        }},
+        "N4": {{
+          shortName: "Niveau 4 (Élite / ASS)",
+          title: "Niveau 4 — Élite & Sport Scolaire ASS : Rotation à 4 (Système 4-0 / 3-1), Power-Play (Gardien volant) & FIFA",
+          otcPrefix: "Concevoir, piloter et adapter en temps réel un projet stratégique de haut niveau scolaire en Futsal 5c5 ou Foot 7c7 (rotation continue en 3-1 ou 4-0, pressing tout-terrain coordonné, gestion du Power-Play à 5c4 et combinaisons arrêtées) pour performer en championnat ASS / FRMSS.",
+          seances: [
+            ["Séance 1 — Diagnostic Stratégique & Profilage par Poste (Gardien, Fixe, Ailiers G/D, Pivot)", "Évaluer la maîtrise individuelle et collective des rotations en 5c5 FIFA et établir le profil de chaque joueur.", "Terrain 40×20m · Match officiel Futsal 5c5 · Fiche de scouting avancé (Passes clés, Duels gagnés, Tirs cadrés, Récupérations).", "Règles Futsal FIFA 2026 intégrales.", "Assurer plus de 75% de passes réussies sous pression et moins de 4 pertes de balle dangereuses par mi-temps.", "Définition des deux quatuors de rotation et des rôles spécifiques.", "Tester le comportement de l'équipe face à une défense basse puis face à un pressing haut."],
+            ["Séance 2 — La Rotation Continue en Système 3-1 (Passe, Coupe Centrale & Remplacement de Poste)", "Créer du mouvement permanent sans ballon pour ouvrir des brèches dans une défense individuelle ou mixte.", "Demi-terrain puis terrain complet 5c5 · Travail de la rotation à 3 joueurs autour du Pivot.", "Dès que le Fixe passe à l'ailier, il coupe en diagonale dans l'axe central ; l'ailier opposé descend prendre le poste de Fixe.", "Jouer à 1 ou 2 touches de balle maximum ; orienter chaque contrôle avec la semelle vers l'intérieur ou l'extérieur selon le suivi du défenseur.", "Enchaîner 3 rotations complètes et trouver le Pivot ou un joueur lancé dans le dos de la défense 4 fois sur 6.", "Exiger que chaque joueur occupe au moins 3 postes différents au cours de la même possession."],
+            ["Séance 3 — Le Système 4-0 en Ligne (Sans Pivot Fixe) : Appels en Profondeur & Jeu dans le Dos", "Aspirer la défense adverse vers l'avant avec les 4 joueurs alignés bas pour exploiter l'espace libre dans son dos.", "Terrain 40×20m · 5c5 en système 4-0 face à une défense pressante.", "Les 4 joueurs de champ circulent sur une ligne haute : au signal visuel (passe en retrait appuyée), l'ailier opposé plonge à pleine vitesse dans le dos de la défense.", "Synchroniser la passe lobée ou tendue dans l'intervalle avec le départ de l'appel en profondeur.", "Obtenir 4 duels francs face au gardien sur appel en profondeur sur 6 séquences.", "Alterner librement entre structure 3-1 (avec Pivot) et structure 4-0 selon la hauteur du bloc adverse."],
+            ["Séance 4 — Pressing Tout-Terrain Coordonné (1-2-1 Haut / Trap sur la Ligne de Touche)", "Étouffer la relance adverse dès la sortie de but pour récupérer le ballon à moins de 12 mètres de la cible.", "Terrain complet 5c5 · L'équipe défensive déclenche le pressing au moment où le gardien adverse relance vers un côté.", "Le Pivot ferme le retour vers le gardien et l'axe ; l'ailier côté ballon monte fort à 1m ; le second ailier anticipe la passe transversale ; le Fixe couvre la passe longue.", "Agir comme un bloc compact de 10m × 10m se déplaçant à la vitesse de la balle.", "Récupérer au moins 4 ballons en zone haute (ou forcer 4 touches/dégagements) sur 8 relances adverses.", "Enchaîner chaque récupération haute par une finition en moins de 3 secondes."],
+            ["Séance 5 — Attaque et Défense en Surnombre « Power-Play » (5 contre 4 avec Gardien Volant)", "Maîtriser la situation stratégique de fin de match (équipe menée au score qui fait monter son gardien en 5ème attaquant) et la défense en losange/carré à 4.", "Demi-terrain · 5 attaquants (en arc 2-1-2 ou 3-2) contre 4 défenseurs + 1 gardien.", "Pour l'attaque (5) : faire circuler rapidement à 1-2 touches pour chercher le décalage au 2ème poteau (attention : le gardien volant n'a que 4s par touche en zone arrière). Pour la défense (4) : bloc compact en carré, tenter le tir dans le but vide dès l'interception.", "Précision chirurgicale des passes (toute perte de balle offre un tir dans le but déserté).", "Attaque : marquer 3 fois sur 6 possessions de 25s · Défense : stopper 3 fois et marquer 1 fois dans le but vide.", "Inverser les rôles toutes les 6 possessions."],
+            ["Séance 6 — Exploitation du Jeu du Gardien de But (Relance Main/Pied & Montée à 5c4)", "Intégrer pleinement le gardien de but dans la tactique offensive (contre-attaque directe à la main, jeu au pied sous pression).", "Terrain complet 40×20m · Situations déclenchées par un tir sur le gardien.", "Sur arrêt capté : relance tendue à la main en moins de 3 secondes vers le Pivot ou l'ailier lancé dans le dos du repli adverse ; sur jeu placé : le gardien offre une ligne de passe de sécurité au pied.", "Précision de la relance à la main (au ras du sol ou tendue dans la course) et qualité du jeu long au pied.", "Créer 4 occasions franches de but directement issues de la relance du gardien sur 8 ballons.", "Chronométrer strictement les 4 secondes de possession du gardien dans sa propre moitié de terrain."],
+            ["Séance 7 — Gestion de l'Infériorité Numérique (3 contre 4 pendant 2 Minutes après Exclusion)", "Organiser la défense en triangle à 3 joueurs de champ suite à un carton rouge / exclusion temporaire (Règle Futsal FIFA : 2 min ou jusqu'à un but encaissé).", "Demi-terrain · 3 défenseurs + Gardien contre 4 attaquants pendant un bloc chronométré de 2 minutes.", "Les 3 défenseurs forment un triangle compact devant les 6m, ferment l'axe et le second poteau, et laissent uniquement les tirs excentrés fermés par le gardien.", "Solidarité maximale, déplacements en pas chassés et communication permanente avec le gardien.", "Tenir les 2 minutes d'infériorité numérique sans encaisser de but.", "Si l'équipe à 3 récupère et marque en contre-attaque, le 4ème joueur rentre immédiatement."],
+            ["Séance 8 — Stratégie de Fin de Match (« Money Time »), Gestion de la 5ème Faute Cumulée & Tirs à 10m", "Adapter son agressivité défensive lorsque l'équipe atteint 5 fautes d'équipe (risque du penalty à 10m sans mur) et réussir les tirs à 6m et 10m.", "Terrain complet 5c5 · Match démarrant à 4-4 au score avec 5 fautes cumulées pour chaque équipe à 4 minutes de la fin.", "Défendre debout avec maîtrise absolue (zéro faute) tout en provoquant la 6ème faute adverse par des prises d'initiative en 1c1.", "Travail spécifique du duel tireur / gardien sur coup franc direct à 10 mètres (sans mur).", "Zéro 6ème faute concédée et plus de 60% de réussite aux tirs à 10 mètres.", "Séance de tirs au but finale (3 tireurs par équipe selon le protocole FIFA)."],
+            ["Séance 9 — Compétition Officielle ASS / FRMSS avec Arbitrage FIFA à 2, Chrono 4s & Feuille Officielle", "Disputer une rencontre complète dans les conditions exactes du championnat scolaire provincial/régional FRMSS.", "Terrain 40×20m · Match officiel · 1er arbitre, 2ème arbitre, 3ème arbitre/chronométreur, marqueur et observateurs-scouts.", "Application intégrale des Lois du Jeu Futsal FIFA 2026.", "Ajuster le système tactique pendant le temps mort d'une minute par mi-temps.", "Match de référence maîtrisé et feuille de match officielle validée.", "Finale du tournoi."],
+            ["Séance 10 — Évaluation Sommative & Certificative Finale (/20)", "Valider l'excellence motrice, tactique, conceptuelle et citoyenne en situation de compétition officielle.", "Tournoi final 5c5 / 7c7 · Grille officielle sur 20 points (OP 2007 / OP 2009).", "Règlement FIFA/IFAB intégral + rotation sur l'arbitrage et la table de marque.", "Performance individuelle au service du collectif, leadership positif et maîtrise réglementaire.", "Note finale sur 20 points.", "Clôture du cycle."]
+          ]
+        }}
+      }};
+
+      var currentSchool = "1AC";
+      var currentPractice = "N1";
+      var currentViewMode = "ppc";
+      var currentGrilleType = "diag";
+
+      function switchFootballVolet(voletId) {{
+        document.querySelectorAll('.volet-panel').forEach(function(p) {{ p.classList.remove('active'); }});
+        document.querySelectorAll('.volet-tab-btn').forEach(function(b) {{ b.classList.remove('active'); }});
+        var targetPanel = document.getElementById('volet-' + voletId);
+        var targetBtn = document.getElementById('tab-btn-' + voletId);
+        if (targetPanel) targetPanel.classList.add('active');
+        if (targetBtn) targetBtn.classList.add('active');
+      }}
+
+      function selectSchoolLevel(lvl) {{
+        currentSchool = lvl;
+        document.querySelectorAll('.school-tab').forEach(function(b) {{
+          b.classList.toggle('active', b.getAttribute('data-school') === lvl);
+        }});
+        renderStudioPreview();
+      }}
+
+      function selectPracticeLevel(plvl) {{
+        currentPractice = plvl;
+        document.querySelectorAll('.practice-tab[data-practice]').forEach(function(b) {{
+          b.classList.toggle('active', b.getAttribute('data-practice') === plvl);
+        }});
+        renderStudioPreview();
+      }}
+
+      function selectViewMode(mode) {{
+        currentViewMode = mode;
+        document.getElementById('vmode-ppc').classList.toggle('active', mode === 'ppc');
+        document.getElementById('vmode-all-fiches').classList.toggle('active', mode === 'all_fiches');
+        document.getElementById('vmode-single-fiche').classList.toggle('active', mode === 'single_fiche');
+        document.getElementById('singleSeanceSelectorWrap').style.display = (mode === 'single_fiche') ? 'block' : 'none';
+        renderStudioPreview();
+      }}
+
+      function getHeaderMetaHtml(docTitle, docSubtitle) {{
+        var prof = (document.getElementById('inpProfName').value || '..................................................').trim();
+        var etab = (document.getElementById('inpEtabName').value || '..................................................').trim();
+        var aref = (document.getElementById('inpArefName').value || '..................................................').trim();
+        var sInfo = FB_SCHOOL_LEVELS[currentSchool];
+        var pInfo = FB_PRACTICE_LEVELS[currentPractice];
+
+        return '<table class="a4-header-table"><tr>' +
+          '<td style="width:36%;"><strong>ROYAUME DU MAROC</strong><br>Ministère de l\\'Éducation Nationale, du Préscolaire et des Sports<br><strong>AREF / Direction :</strong> ' + aref + '</td>' +
+          '<td style="width:28%;text-align:center;"><strong>ANNÉE SCOLAIRE : 2026 / 2027</strong><br>Matière : Éducation Physique et Sportive<br><strong>APS : FOOTBALL SCOLAIRE &amp; FUTSAL</strong></td>' +
+          '<td style="width:36%;text-align:right;"><strong>Établissement :</strong> ' + etab + '<br><strong>Professeur d\\'EPS :</strong> ' + prof + '<br><strong>Niveau :</strong> ' + sInfo.label + ' · ' + pInfo.shortName + '</td>' +
+          '</tr></table>' +
+          '<div class="a4-doc-title"><h3>' + docTitle + '</h3><p>' + docSubtitle + '</p></div>' +
+          '<div class="a4-meta-box">' +
+          '<p><strong>Référentiel Officiel :</strong> ' + sInfo.ref + '</p>' +
+          '<p><strong>Objectif Terminal d\\'Intégration (OTI — ' + currentSchool + ') :</strong> ' + sInfo.oti + '</p>' +
+          '<p><strong>Compétence Visée en Football / Futsal :</strong> ' + sInfo.comp + '</p>' +
+          '<p><strong>Objectif Terminal du Cycle (OTC — ' + pInfo.shortName + ') :</strong> ' + pInfo.otcPrefix + '</p>' +
+          '<p><strong>Modalité d\\'Évaluation Sommative (/20) :</strong> ' + sInfo.bareme + '</p>' +
+          '</div>';
+      }}
+
+      function buildPpcHtml() {{
+        var sInfo = FB_SCHOOL_LEVELS[currentSchool];
+        var pInfo = FB_PRACTICE_LEVELS[currentPractice];
+        var html = getHeaderMetaHtml(
+          'PROJET PRÉVISIONNEL DE CYCLE (PPC) — FOOTBALL & FUTSAL (10 SÉANCES)',
+          sInfo.label + ' · ' + pInfo.title
+        );
+
+        html += '<table class="a4-table"><thead><tr>' +
+          '<th style="width:12%;">N° &amp; Thème de Séance</th>' +
+          '<th style="width:20%;">Objectif Opérationnel de la Séance</th>' +
+          '<th style="width:22%;">Situation d\\'Apprentissage &amp; Organisation</th>' +
+          '<th style="width:24%;">Critères de Réalisation (Contenus d\\'Enseignement)</th>' +
+          '<th style="width:22%;">Critères de Réussite &amp; Variables Didactiques</th>' +
+          '</tr></thead><tbody>';
+
+        for (var i = 0; i < pInfo.seances.length; i++) {{
+          var s = pInfo.seances[i];
+          html += '<tr>' +
+            '<td><strong>' + s[0] + '</strong></td>' +
+            '<td>' + s[1] + '</td>' +
+            '<td><strong>Dispositif :</strong> ' + s[2] + '<br><strong>Consigne :</strong> ' + s[3] + '</td>' +
+            '<td>' + s[4] + '</td>' +
+            '<td><strong>Réussite :</strong> ' + s[5] + '<br><strong>Variable :</strong> ' + s[6] + '</td>' +
+            '</tr>';
+        }}
+        html += '</tbody></table>';
+
+        html += '<table style="width:100%;margin-top:1.25rem;border:none;font-size:0.84rem;"><tr>' +
+          '<td style="border:none;width:33%;"><strong>Signature du Professeur d\\'EPS :</strong><br><br>........................................</td>' +
+          '<td style="border:none;width:33%;text-align:center;"><strong>Visa du Coordonnateur EPS :</strong><br><br>........................................</td>' +
+          '<td style="border:none;width:33%;text-align:right;"><strong>Visa de la Direction / Inspection :</strong><br><br>........................................</td>' +
+          '</tr></table>';
+
+        return html;
+      }}
+
+      function buildSingleFicheHtml(index) {{
+        var sInfo = FB_SCHOOL_LEVELS[currentSchool];
+        var pInfo = FB_PRACTICE_LEVELS[currentPractice];
+        var s = pInfo.seances[index];
+
+        return '<div class="seance-fiche-block">' +
+          '<div class="seance-fiche-head"><span>⚽ ' + s[0] + ' — FOOTBALL &amp; FUTSAL (' + sInfo.label + ' · ' + pInfo.shortName + ')</span><span>Durée : 55 à 60 min · Effectif : 36-42 élèves</span></div>' +
+          '<div style="padding:1rem;">' +
+          '<p style="margin-bottom:0.65rem;font-size:0.88rem;"><strong>🎯 Objectif de la Séance :</strong> ' + s[1] + '</p>' +
+          '<table class="a4-table" style="margin:0;"><thead><tr>' +
+          '<th style="width:16%;">Phase &amp; Durée</th>' +
+          '<th style="width:28%;">But, Dispositif &amp; Aménagement Matériel</th>' +
+          '<th style="width:28%;">Consignes &amp; Critères de Réalisation</th>' +
+          '<th style="width:28%;">Critères de Réussite &amp; Régulation (Variables)</th>' +
+          '</tr></thead><tbody>' +
+          '<tr>' +
+          '<td><strong>1. Prise en main &amp; Mise en train</strong><br>(10 à 12 min)</td>' +
+          '<td>• Appel, vérification des tenues sportives et présentation de l\\'objectif.<br>• Échauffement spécifique « FIFA 11+ Scolaire » autour du terrain 40×20m (ouverture/fermeture de hanches, ischio-jambiers, appuis bas) + Maîtrise de balle au pied (semelle/intérieur/extérieur tête levée) et passes à deux.</td>' +
+          '<td>• Respecter la progressivité cardio-vasculaire et musculaire (adducteurs et ischio-jambiers).<br>• Conduire et contrôler le ballon en levant régulièrement la tête.</td>' +
+          '<td>• Préparation articulaire et musculaire optimale.<br>• Zéro blessure musculaire ; écoute attentive des consignes.</td>' +
+          '</tr>' +
+          '<tr>' +
+          '<td><strong>2. Partie Fondamentale</strong><br>(35 à 40 min)</td>' +
+          '<td><strong>Aménagement &amp; Tâche :</strong><br>' + s[2] + '<br><br><strong>But de la situation :</strong><br>' + s[3] + '</td>' +
+          '<td><strong>Ce qu\\'il faut faire pour réussir (Contenus) :</strong><br>• ' + s[4] + '<br>• Respecter les règles FIFA/IFAB ciblées (interdiction des tacles glissés, touche au pied en 4s, démarquage en couloirs).</td>' +
+          '<td><strong>Critères de réussite quantitatifs :</strong><br>• ' + s[5] + '<br><br><strong>Variable didactique de régulation :</strong><br>• ' + s[6] + '</td>' +
+          '</tr>' +
+          '<tr>' +
+          '<td><strong>3. Retour au calme &amp; Bilan</strong><br>(5 à 8 min)</td>' +
+          '<td>• Rassemblement au centre du terrain, étirements passifs légers (quadriceps, mollets, adducteurs) et récupération respiratoire.<br>• Bilan participatif avec les élèves-observateurs et les arbitres.</td>' +
+          '<td>• Verbaliser la règle d\\'action retenue (ex. : pourquoi orienter son 1er contrôle ; comment offrir un triangle Appui-Soutien au porteur).<br>• Ramassage et comptage des ballons, coupelles et chasubles.</td>' +
+          '<td>• Participation active au bilan métacognitif et présentation du thème de la séance suivante.</td>' +
+          '</tr>' +
+          '</tbody></table>' +
+          '</div></div>';
+      }}
+
+      function buildAllFichesHtml() {{
+        var sInfo = FB_SCHOOL_LEVELS[currentSchool];
+        var pInfo = FB_PRACTICE_LEVELS[currentPractice];
+        var html = getHeaderMetaHtml(
+          'CAHIER COMPLET DES 10 FICHES DE SÉANCES — FOOTBALL & FUTSAL',
+          sInfo.label + ' · ' + pInfo.title
+        );
+        for (var i = 0; i < pInfo.seances.length; i++) {{
+          html += buildSingleFicheHtml(i);
+        }}
+        return html;
+      }}
+
+      function renderStudioPreview() {{
+        var sInfo = FB_SCHOOL_LEVELS[currentSchool];
+        var pInfo = FB_PRACTICE_LEVELS[currentPractice];
+        var badge = document.getElementById('studioCurrentBadge');
+        if (badge) {{
+          badge.textContent = currentSchool + ' · ' + pInfo.shortName;
+        }}
+        var selectEl = document.getElementById('singleSeanceSelect');
+        if (selectEl) {{
+          for (var i = 0; i < pInfo.seances.length; i++) {{
+            if (selectEl.options[i]) {{
+              selectEl.options[i].textContent = pInfo.seances[i][0];
+            }}
+          }}
+        }}
+
+        var container = document.getElementById('studioA4Preview');
+        if (!container) return;
+        if (currentViewMode === 'ppc') {{
+          container.innerHTML = buildPpcHtml();
+        }} else if (currentViewMode === 'all_fiches') {{
+          container.innerHTML = buildAllFichesHtml();
+        }} else {{
+          var idx = parseInt(document.getElementById('singleSeanceSelect').value || '0', 10);
+          container.innerHTML = getHeaderMetaHtml(
+            'FICHE PÉDAGOGIQUE DÉTAILLÉE — ' + pInfo.seances[idx][0].toUpperCase(),
+            sInfo.label + ' · ' + pInfo.shortName
+          ) + buildSingleFicheHtml(idx);
+        }}
+      }}
+
+      function exportFootballDoc(docKind, format) {{
+        var htmlContent = (docKind === 'ppc') ? buildPpcHtml() : buildAllFichesHtml();
+        var fileBase = 'Football-Futsal-' + currentSchool + '-' + currentPractice + '-' + (docKind === 'ppc' ? 'Projet-Cycle' : '10-Fiches-Seances');
+        if (format === 'word') {{
+          downloadHtmlAsWord(htmlContent, fileBase + '.doc');
+        }} else {{
+          openPrintWindow(htmlContent, fileBase);
+        }}
+      }}
+
+      function exportElementAsWord(elementId, fileBase) {{
+        var el = document.getElementById(elementId);
+        if (!el) return;
+        downloadHtmlAsWord(el.innerHTML, fileBase + '.doc');
+      }}
+
+      function printElementAsPdf(elementId, docTitle) {{
+        var el = document.getElementById(elementId);
+        if (!el) return;
+        openPrintWindow(el.innerHTML, docTitle);
+      }}
+
+      function downloadHtmlAsWord(innerHtml, filename) {{
+        var fullDoc = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">' +
+          '<head><meta charset="utf-8"><title>' + filename + '</title>' +
+          '<style>body {{ font-family: Arial, sans-serif; font-size: 10.5pt; color: #0f172a; line-height: 1.45; }} ' +
+          'table {{ width: 100%; border-collapse: collapse; margin: 10px 0; }} ' +
+          'th {{ background: #0f172a; color: #ffffff; padding: 6px; border: 1px solid #000; font-size: 9.5pt; text-align: left; }} ' +
+          'td {{ padding: 6px; border: 1px solid #475569; font-size: 9.5pt; vertical-align: top; }} ' +
+          'h3 {{ color: #991b1b; margin: 8px 0; }} .a4-doc-title {{ text-align: center; background: #f1f5f9; border: 2px solid #000; padding: 8px; margin: 10px 0; }}</style>' +
+          '</head><body>' + innerHtml + '</body></html>';
+        var blob = new Blob(['\\ufeff', fullDoc], {{ type: 'application/msword;charset=utf-8' }});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function() {{ URL.revokeObjectURL(url); }}, 1500);
+      }}
+
+      function openPrintWindow(innerHtml, title) {{
+        var w = window.open('', '_blank', 'width=1020,height=800');
+        if (!w) {{
+          window.print();
+          return;
+        }}
+        w.document.write('<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>' + title + '</title>');
+        w.document.write('<style>@page {{ size: A4 landscape; margin: 12mm; }} body {{ font-family: Arial, sans-serif; font-size: 10pt; color: #0f172a; line-height: 1.45; }} table {{ width: 100%; border-collapse: collapse; margin: 8px 0; }} th {{ background: #0f172a !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 6px; border: 1px solid #000; text-align: left; }} td {{ padding: 6px; border: 1px solid #334155; vertical-align: top; }} .a4-doc-title {{ text-align: center; border: 2px solid #000; padding: 6px; margin: 8px 0; background: #f1f5f9; }} .a4-meta-box {{ border: 1px solid #334155; padding: 8px; margin-bottom: 10px; }} .seance-fiche-block {{ border: 2px solid #000; margin-bottom: 14px; page-break-inside: avoid; }} .seance-fiche-head {{ background: #991b1b !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 6px 10px; font-weight: bold; display: flex; justify-content: space-between; }}</style>');
+        w.document.write('</head><body>' + innerHtml + '</body></html>');
+        w.document.close();
+        w.focus();
+        setTimeout(function() {{ w.print(); }}, 350);
+      }}
+
+      function copyCurrentPreview(btn) {{
+        var el = document.getElementById('studioA4Preview');
+        if (!el) return;
+        navigator.clipboard.writeText(el.innerText).then(function() {{
+          var old = btn.innerHTML;
+          btn.innerHTML = '✅ Copié !';
+          setTimeout(function() {{ btn.innerHTML = old; }}, 2000);
+        }});
+      }}
+
+      function copyGrillePreview(btn) {{
+        var el = document.getElementById('grilleA4Preview');
+        if (!el) return;
+        navigator.clipboard.writeText(el.innerText).then(function() {{
+          var old = btn.innerHTML;
+          btn.innerHTML = '✅ Grille copiée !';
+          setTimeout(function() {{ btn.innerHTML = old; }}, 2000);
+        }});
+      }}
+
+      /* GRILLES D'OBSERVATION ET D'ÉVALUATION FOOTBALL & FUTSAL (/20) */
+      var FB_GRILLES_HTML = {{
+        "diag": '<div class="a4-doc-title"><h3>FICHE D\\'OBSERVATION DIAGNOSTIQUE &amp; CO-ÉVALUATION EN BINÔME — FOOTBALL &amp; FUTSAL</h3><p>Recueil Statistique Individuel &amp; Collectif en Situation de Référence (Match 5c5 / 7c7 — 2 × 6 min)</p></div>' +
+          '<p style="font-size:0.85rem;margin-bottom:0.75rem;"><strong>Classe :</strong> ...................... | <strong>Date :</strong> ..../..../2026 | <strong>Élève Observateur :</strong> .......................................... | <strong>Équipe observée :</strong> ......................</p>' +
+          '<table class="a4-table"><thead><tr>' +
+          '<th>N° / Nom &amp; Prénom du Joueur Observé</th>' +
+          '<th>Ballons Joués (BJ)</th>' +
+          '<th>Contrôles-Passes Réussis (PR)</th>' +
+          '<th>Pertes de Balle / Dribble Isolé (BP)</th>' +
+          '<th>Tirs Cadrés (TC)</th>' +
+          '<th>Buts Marqués (B)</th>' +
+          '<th>Récupérations Propres sans Faute (REC)</th>' +
+          '<th>Indice d\\'Efficacité<br>Ie = (PR+TC+B+REC)/BJ</th>' +
+          '<th>Niveau Identifié (N1 à N4)</th>' +
+          '</tr></thead><tbody>' +
+          '<tr><td>1. ..................................................</td><td></td><td></td><td></td><td></td><td></td><td></td><td>....... %</td><td>[ ] N1 [ ] N2 [ ] N3 [ ] N4</td></tr>' +
+          '<tr><td>2. ..................................................</td><td></td><td></td><td></td><td></td><td></td><td></td><td>....... %</td><td>[ ] N1 [ ] N2 [ ] N3 [ ] N4</td></tr>' +
+          '<tr><td>3. ..................................................</td><td></td><td></td><td></td><td></td><td></td><td></td><td>....... %</td><td>[ ] N1 [ ] N2 [ ] N3 [ ] N4</td></tr>' +
+          '<tr><td>4. ..................................................</td><td></td><td></td><td></td><td></td><td></td><td></td><td>....... %</td><td>[ ] N1 [ ] N2 [ ] N3 [ ] N4</td></tr>' +
+          '<tr><td>5. ..................................................</td><td></td><td></td><td></td><td></td><td></td><td></td><td>....... %</td><td>[ ] N1 [ ] N2 [ ] N3 [ ] N4</td></tr>' +
+          '<tr><td>6. ..................................................</td><td></td><td></td><td></td><td></td><td></td><td></td><td>....... %</td><td>[ ] N1 [ ] N2 [ ] N3 [ ] N4</td></tr>' +
+          '<tr><td>7. ..................................................</td><td></td><td></td><td></td><td></td><td></td><td></td><td>....... %</td><td>[ ] N1 [ ] N2 [ ] N3 [ ] N4</td></tr>' +
+          '</tbody></table>' +
+          '<div class="a4-meta-box" style="margin-top:0.85rem;"><strong>Clé de détermination du Niveau de Pratique en Football / Futsal :</strong><br>' +
+          '• <strong>Niveau 1 (Débutant) :</strong> Ie &lt; 40% (Jeu en grappe, contrôles fuyants, frappes du pointu à l\\'aveugle, regard rivé au sol).<br>' +
+          '• <strong>Niveau 2 (Débrouillé) :</strong> Ie entre 40% et 60% (Conduite tête levée, contrôle orienté, triangle appui-soutien et tir cadré du plat du pied).<br>' +
+          '• <strong>Niveau 3 (Confirmé) :</strong> Ie entre 60% et 75% (Jeu en 3 zones / losange 1-2-1, Une-Deux, utilisation des couloirs et cadrage-couverture).<br>' +
+          '• <strong>Niveau 4 (Élite / ASS) :</strong> Ie &gt; 75% (Rotation continue 3-1 ou 4-0, jeu avec le Pivot, pressing coordonné et maîtrise Futsal FIFA).</div>',
+
+        "college": '<div class="a4-doc-title"><h3>GRILLE OFFICIELLE D\\'ÉVALUATION SOMMATIVE FOOTBALL / FUTSAL — CYCLE COLLÉGIAL (/20)</h3><p>Conforme aux Orientations Pédagogiques 2009 &amp; à la Note Ministérielle n° 143-09 (1AC · 2AC · 3AC)</p></div>' +
+          '<table class="a4-table"><thead><tr>' +
+          '<th style="width:24%;">Composante Évaluée</th>' +
+          '<th style="width:14%;">Barème OP 2009</th>' +
+          '<th style="width:42%;">Critères &amp; Indicateurs Observables en Situation de Match (5c5 / 7c7)</th>' +
+          '<th style="width:20%;">Échelle d\\'Attribution des Points</th>' +
+          '</tr></thead><tbody>' +
+          '<tr><td><strong>1. Habiletés Motrices — Processus (Maîtrise technique &amp; tactique individuelle)</strong></td><td><strong>06 Points</strong><br>(/12 pts moteurs)</td><td>• <strong>Porteur de balle (3 pts) :</strong> Contrôle assuré (semelle ou intérieur orienté), conduite tête levée, passe précise du plat du pied au sol, tir cadré.<br>• <strong>Non-Porteur &amp; Défenseur (3 pts) :</strong> Sortie de la grappe, démarquage en appui/soutien dans les couloirs, cadrage debout sur l\\'axe ballon-but sans faute.</td><td>• Niveau 1 : 1 à 2 pts<br>• Niveau 2 : 2,5 à 3,5 pts<br>• Niveau 3 : 4 à 5 pts<br>• Niveau 4 : 5,5 à 6 pts</td></tr>' +
+          '<tr><td><strong>2. Habiletés Motrices — Produit (Rendement &amp; Efficacité collective/individuelle)</strong></td><td><strong>06 Points</strong><br>(/12 pts moteurs)</td><td>• <strong>Efficacité individuelle (3 pts) :</strong> Ratio (Passes réussies + Tirs cadrés + Buts + Récupérations propres) / Ballons joués.<br>• <strong>Progression collective &amp; Gain du match (3 pts) :</strong> Pourcentage d\\'actions arrivant en zone de finition et classement de l\\'équipe.</td><td>• Ie &lt; 40% : 1 à 2 pts<br>• Ie 40-60% : 2,5 à 4 pts<br>• Ie 60-75% : 4,5 à 5 pts<br>• Ie &gt; 75% : 5,5 à 6 pts</td></tr>' +
+          '<tr><td><strong>3. Connaissances Conceptuelles</strong></td><td><strong>03 Points</strong></td><td>• Connaissance des règles fondamentales Futsal FIFA / IFAB (touche au pied en 4s, passe en retrait au gardien, cumul des 5 fautes, interdiction des tacles glissés en EPS) et de l\\'échauffement FIFA 11+.</td><td>• 1 pt par réponse / règle maîtrisée en situation</td></tr>' +
+          '<tr><td><strong>4. Connaissances Comportementales &amp; Rôles Sociaux</strong></td><td><strong>05 Points</strong></td><td>• Assiduité et tenue sportive (1,5 pt) · Fair-play, mixité et respect de l\\'intégrité physique (1,5 pt) · Tenue efficace du rôle d\\'arbitre FIFA et d\\'observateur statistique (2 pts).</td><td>• Barème progressif de 0 à 5 points</td></tr>' +
+          '<tr><td colspan="3" style="text-align:right;font-weight:900;font-size:0.95rem;">NOTE SOMMATIVE TOTALE COLLÈGE (OP 2009 — NOTE 143-09) :</td><td style="font-weight:900;font-size:1rem;color:#991b1b;">......... / 20 Points</td></tr>' +
+          '</tbody></table>',
+
+        "lycee": '<div class="a4-doc-title"><h3>GRILLE OFFICIELLE D\\'ÉVALUATION SOMMATIVE FOOTBALL / FUTSAL — CYCLE QUALIFIANT &amp; BAC (/20)</h3><p>Conforme aux Orientations Pédagogiques 2007 &amp; à la Note Ministérielle n° 142-10 (Tronc Commun · 1ère Bac · 2ème Bac)</p></div>' +
+          '<table class="a4-table"><thead><tr>' +
+          '<th style="width:24%;">Composante Évaluée</th>' +
+          '<th style="width:14%;">Barème OP 2007</th>' +
+          '<th style="width:42%;">Critères &amp; Indicateurs Observables en Compétition 5c5 Futsal / 7c7</th>' +
+          '<th style="width:20%;">Échelle d\\'Attribution des Points</th>' +
+          '</tr></thead><tbody>' +
+          '<tr><td><strong>1. Habiletés Motrices — Processus Technico-Tactique</strong></td><td><strong>07 Points</strong><br>(/14 pts moteurs)</td><td>• <strong>Porteur de balle (2,5 pts) :</strong> Contrôle orienté en mouvement, jeu à 2 touches sous pression, passe dans les intervalles (vers le Pivot ou en profondeur), finition cadrée.<br>• <strong>Non-Porteur (2,5 pts) :</strong> Appels en appui/soutien, Une-Deux, dédoublement, rotation de postes en 1-2-1.<br>• <strong>Défenseur (2 pts) :</strong> Cadrage-couverture en zone, fermeture des lignes de passe et transition rapide.</td><td>• Niveau 1 : 1,5 à 3 pts<br>• Niveau 2 : 3,5 à 4,5 pts<br>• Niveau 3 : 5 à 6 pts<br>• Niveau 4 : 6,5 à 7 pts</td></tr>' +
+          '<tr><td><strong>2. Habiletés Motrices — Produit (Efficacité Individuelle &amp; Collective)</strong></td><td><strong>07 Points</strong><br>(/14 pts moteurs)</td><td>• <strong>Indice d\\'efficacité individuelle (4 pts) :</strong> Taux de passes réussies, passes décisives, tirs cadrés/buts et ballons récupérés sans faute.<br>• <strong>Performance collective (3 pts) :</strong> Résultat des matchs et exécution du projet tactique d\\'équipe.</td><td>• Ie &lt; 45% : 2 à 3 pts<br>• Ie 45-65% : 3,5 à 5 pts<br>• Ie 65-80% : 5,5 à 6,25 pts<br>• Ie &gt; 80% : 6,5 à 7 pts</td></tr>' +
+          '<tr><td><strong>3. Connaissances Conceptuelles</strong></td><td><strong>03 Points</strong></td><td>• Maîtrise des Lois du Jeu Futsal FIFA &amp; Football IFAB 2026 (règle des 4s, 5 fautes cumulées et tir à 10m, hors-jeu en Foot à 11, loi de l\\'avantage), systèmes tactiques (1-2-1, 2-2) et physiologie.</td><td>• 0 à 3 points</td></tr>' +
+          '<tr><td><strong>4. Connaissances Comportementales &amp; Rôles Sociaux</strong></td><td><strong>03 Points</strong></td><td>• Arbitrage officiel en duo et tenue de la table de marque (chrono 4s + cumul des fautes) (1,5 pt), esprit sportif, coaching et assiduité (1,5 pt).</td><td>• 0 à 3 points</td></tr>' +
+          '<tr><td colspan="3" style="text-align:right;font-weight:900;font-size:0.95rem;">NOTE SOMMATIVE TOTALE LYCÉE QUALIFIANT &amp; BAC (OP 2007 — NOTE 142-10) :</td><td style="font-weight:900;font-size:1rem;color:#991b1b;">......... / 20 Points</td></tr>' +
+          '</tbody></table>',
+
+        "dispense": '<div class="a4-doc-title"><h3>GRILLE D\\'ÉVALUATION ALTERNATIVE FOOTBALL &amp; FUTSAL — ÉLÈVE DISPENSÉ DE PRATIQUE (/20)</h3><p>Évaluation par les Rôles Sociaux (Arbitrage FIFA/IFAB, Table de Marque Futsal, Observation Statistique &amp; Dossier Théorique)</p></div>' +
+          '<table class="a4-table"><thead><tr>' +
+          '<th>Volet d\\'Évaluation Alternative</th>' +
+          '<th>Barème (/20)</th>' +
+          '<th>Tâches Pédagogiques et Critères d\\'Évaluation durant le Cycle de Football / Futsal</th>' +
+          '</tr></thead><tbody>' +
+          '<tr><td><strong>1. Compétences Méthodologiques, Arbitrage FIFA/IFAB &amp; Table de Marque</strong></td><td><strong>08 Points</strong></td><td>• Diriger une rencontre scolaire en appliquant les coups de sifflet et la <strong>gestuelle officielle Futsal FIFA</strong> (décompte des 4 secondes bras levé, coup franc direct/indirect, avantage) (4 pts).<br>• Tenir la table de marque officielle (comptage des 5 fautes cumulées par équipe, score, chronométrage) et remplir les fiches d\\'observation statistique (4 pts).</td></tr>' +
+          '<tr><td><strong>2. Connaissances Conceptuelles &amp; Lois du Jeu</strong></td><td><strong>06 Points</strong></td><td>• Dossier écrit ou interrogation orale sur : les dimensions du terrain (Futsal 40×20m vs Foot à 11), les différences réglementaires entre Futsal et Football (hors-jeu, touche, fautes cumulées) et le protocole d\\'échauffement FIFA 11+.</td></tr>' +
+          '<tr><td><strong>3. Connaissances Comportementales &amp; Assiduité</strong></td><td><strong>06 Points</strong></td><td>• Présence effective et ponctualité à toutes les séances du cycle (2 pts), aide à la mise en place des terrains et coupelles (2 pts), impartialité et autorité calme dans l\\'arbitrage (2 pts).</td></tr>' +
+          '<tr><td colspan="2" style="text-align:right;font-weight:900;">NOTE FINALE ÉLÈVE DISPENSÉ :</td><td style="font-weight:900;color:#006233;">......... / 20 Points</td></tr>' +
+          '</tbody></table>'
+      }};
+
+      function selectFootballGrille(gKey, btn) {{
+        currentGrilleType = gKey;
+        document.querySelectorAll('.practice-tab[data-grille]').forEach(function(b) {{ b.classList.remove('active'); }});
+        if (btn) btn.classList.add('active');
+        var container = document.getElementById('grilleA4Preview');
+        if (container) container.innerHTML = FB_GRILLES_HTML[gKey] || '';
+      }}
+
+      /* Initialisation au chargement + lecture paramètre URL ?level= */
+      window.addEventListener('DOMContentLoaded', function() {{
+        try {{
+          var params = new URLSearchParams(window.location.search);
+          var lvl = (params.get('level') || '').toUpperCase();
+          if (lvl && FB_SCHOOL_LEVELS[lvl]) {{
+            currentSchool = lvl;
+            document.querySelectorAll('.school-tab').forEach(function(b) {{
+              b.classList.toggle('active', b.getAttribute('data-school') === lvl);
+            }});
+          }}
+          if (window.location.hash === '#volet-atd') switchFootballVolet('atd');
+          else if (window.location.hash === '#volet-grilles') switchFootballVolet('grilles');
+          else if (window.location.hash === '#volet-terrain') switchFootballVolet('terrain');
+          else if (window.location.hash === '#volet-articles') switchFootballVolet('articles');
+        }} catch(e) {{}}
+        renderStudioPreview();
+        selectFootballGrille('diag', document.querySelector('.practice-tab[data-grille="diag"]'));
+      }});
+    </script>
+
+{footer_html}
+'''
+    with open(os.path.join(PUBLIC_DIR, filename), "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"[SILO FOOTBALL OK] Created /public/{filename}")
+
+
+def update_hub_silos_blog_index_sitemap():
+    # 1. Update /public/hub-aps-sports-eps-maroc.html to feature Football & Futsal as an active Complete Silo
+    hub_path = os.path.join(PUBLIC_DIR, "hub-aps-sports-eps-maroc.html")
+    if os.path.exists(hub_path):
+        with open(hub_path, "r", encoding="utf-8") as f:
+            hhtml = f.read()
+
+        if "aps-football-eps-maroc.html" not in hhtml:
+            football_featured_section = '''
+        <!-- SILO VEDETTE 4 : FOOTBALL SCOLAIRE & FUTSAL (STUDIO COMPLET 1AC-2BAC) -->
+        <section class="featured-silo-card" data-aps-family="collectifs" style="border-color:#b45309;" aria-label="Silo Complet Football et Futsal EPS Maroc">
+            <div>
+                <div class="featured-kicker" style="color:#b45309;">Silo APS Complet Disponible · Collège (OP 2009) &amp; Lycée (OP 2007) · FIFA / IFAB</div>
+                <h2 class="featured-title">⚽ Football Scolaire &amp; Futsal en EPS au Maroc : ATD, Studio des 24 Cycles &amp; 240 Fiches (1AC à 2Bac) + Grilles d'Observation &amp; Évaluation (/20)</h2>
+                <p class="featured-desc">Accédez à la page spéciale Football &amp; Futsal (5×5 / 7×7 / 11×11) regroupant l'Analyse et Traitement Didactique (ATD), le studio interactif de visualisation A4 et téléchargement des projets de cycles et fiches de séances pour les 6 niveaux scolaires (1AC, 2AC, 3AC, TC, 1Bac, 2Bac × 4 niveaux de pratique : de la sortie de grappe aux systèmes Futsal 1-2-1 Losange et 4-0), ainsi que les grilles d'observation et d'évaluation (/20) en Word et PDF.</p>
+                <div class="featured-features">
+                    <span>✓ ATD Foot &amp; Futsal (Motricité podale, Appui-Soutien, Remédiations)</span>
+                    <span>✓ 6 Niveaux Scolaires × 4 Niveaux (Débutant à Élite Système 1-2-1)</span>
+                    <span>✓ Visionneuse A4 Pro avant téléchargement Word (.doc) &amp; PDF</span>
+                    <span>✓ Grilles d'Observation Binôme &amp; Évaluation (/20 Collège &amp; Lycée)</span>
+                </div>
+                <div class="featured-actions">
+                    <a href="aps-football-eps-maroc.html" class="btn-primary-action" style="background:#b45309;">Ouvrir le Silo Complet Football &amp; Futsal (Cycles, Fiches &amp; Grilles) →</a>
+                    <a href="aps-football-eps-maroc.html#volet-grilles" class="btn-secondary-action">Grilles d'Observation &amp; Évaluation (/20)</a>
+                </div>
+            </div>
+            <div class="featured-preview-box">
+                <strong style="display:block;font-size:0.88rem;color:#0f172a;margin-bottom:0.35rem;">Accès direct par Niveau Scolaire (Football &amp; Futsal) :</strong>
+                <p style="font-size:0.8rem;color:#475569;margin-bottom:0.65rem;">Cliquez sur votre niveau pour ouvrir directement ses 4 niveaux de pratique (Débutant à Élite) avec aperçu A4 + export Word/PDF :</p>
+                <div class="level-matrix">
+                    <a href="aps-football-eps-maroc.html?level=1AC#volet-studio" class="level-item">1ère AC<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">4 Cycles + Fiches</span></a>
+                    <a href="aps-football-eps-maroc.html?level=2AC#volet-studio" class="level-item">2ème AC<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">4 Cycles + Fiches</span></a>
+                    <a href="aps-football-eps-maroc.html?level=3AC#volet-studio" class="level-item">3ème AC<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">4 Cycles + Fiches</span></a>
+                    <a href="aps-football-eps-maroc.html?level=TC#volet-studio" class="level-item">Tronc Commun<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">4 Cycles + Fiches</span></a>
+                    <a href="aps-football-eps-maroc.html?level=1BAC#volet-studio" class="level-item">1ère Bac<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">4 Cycles + Fiches</span></a>
+                    <a href="aps-football-eps-maroc.html?level=2BAC#volet-studio" class="level-item">2ème Bac<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">4 Cycles + Fiches</span></a>
+                </div>
+                <div style="margin-top:0.85rem;padding-top:0.75rem;border-top:1px solid #e2e8f0;display:flex;justify-content:space-between;font-size:0.78rem;font-weight:700;color:#b45309;">
+                    <a href="aps-football-eps-maroc.html#volet-atd">📐 Voir l'ATD Foot/Futsal</a>
+                    <a href="reglement-futsal-fifa-arbitrage-eps.html">⚖️ Règlement Futsal FIFA &amp; IFAB</a>
+                </div>
+            </div>
+        </section>
+'''
+            hhtml = hhtml.replace(
+                "<!-- GRILLE DE TOUTES LES APS PAR FAMILLE -->",
+                football_featured_section + "\n        <!-- GRILLE DE TOUTES LES APS PAR FAMILLE -->",
+                1
+            )
+
+            old_foot_card = '''            <!-- 4. FOOTBALL & FUTSAL -->
+            <article class="aps-card" data-aps-family="collectifs">
+                <div>
+                    <div class="aps-card-kicker">Sports Collectifs · Démarquage · FIFA / IFAB</div>
+                    <h3 class="aps-card-title">⚽ Football &amp; Futsal (كرة القدم داخل القاعة)</h3>
+                    <p class="aps-card-desc">Adaptations scolaires sur terrain de handball (Futsal 5c5), ATD, conservation et progression collective, lois du jeu FIFA/IFAB et évaluation sommative.</p>
+                    <ul class="aps-links-list">
+                        <li><a href="article-football-eps.html"><span>📘 Guide Football &amp; Futsal EPS Maroc : ATD &amp; Cycles</span> <span>→</span></a></li>
+                        <li><a href="reglement-football-ifab-arbitrage-eps.html"><span>⚖️ Lois du Jeu Football IFAB 2026 &amp; Arbitrage</span> <span>→</span></a></li>
+                        <li><a href="reglement-futsal-fifa-terrain-eps.html"><span>🏟️ Règlement Officiel Futsal FIFA (5 fautes, 4s)</span> <span>→</span></a></li>
+                        <li><a href="ressources-atd.html"><span>📐 Fiche ATD Football Scolaire (PDF)</span> <span>→</span></a></li>
+                    </ul>
+                </div>
+                <div class="aps-card-footer">
+                    <a href="article-football-eps.html" class="aps-btn-main">Dossier &amp; Cycles Foot/Futsal →</a>
+                    <a href="evaluation-eps.html" class="aps-btn-alt">Grilles /20</a>
+                </div>
+            </article>'''
+
+            new_foot_card = '''            <!-- 4. FOOTBALL & FUTSAL -->
+            <article class="aps-card" data-aps-family="collectifs" style="border-color:#b45309;border-width:2px;">
+                <div>
+                    <div class="aps-card-kicker" style="color:#b45309;">Sports Collectifs · Démarquage · Studio Complet Actif</div>
+                    <h3 class="aps-card-title">⚽ Football Scolaire &amp; Futsal (كرة القدم)</h3>
+                    <p class="aps-card-desc">Silo complet Football &amp; Futsal (5×5 / 7×7) : ATD officiel, 24 projets de cycles et 240 fiches de séances (1AC à 2Bac × 4 niveaux), grilles (/20) et code FIFA / IFAB 2026.</p>
+                    <ul class="aps-links-list">
+                        <li><a href="aps-football-eps-maroc.html#volet-studio"><span>⚡ Studio Cycles &amp; Fiches (1AC → 2Bac · PDF/Word)</span> <span>→</span></a></li>
+                        <li><a href="aps-football-eps-maroc.html#volet-grilles"><span>📊 Grilles d'Observation &amp; Évaluation (/20)</span> <span>→</span></a></li>
+                        <li><a href="aps-football-eps-maroc.html#volet-atd"><span>📐 ATD Football &amp; Futsal (Motricité podale)</span> <span>→</span></a></li>
+                        <li><a href="reglement-futsal-fifa-arbitrage-eps.html"><span>⚖️ Règlement Futsal FIFA (4s, 5 fautes) &amp; IFAB</span> <span>→</span></a></li>
+                    </ul>
+                </div>
+                <div class="aps-card-footer">
+                    <a href="aps-football-eps-maroc.html" class="aps-btn-main" style="background:#b45309;">Ouvrir la Page Spéciale Foot &amp; Futsal →</a>
+                </div>
+            </article>'''
+
+            hhtml = hhtml.replace(old_foot_card, new_foot_card)
+            with open(hub_path, "w", encoding="utf-8") as f:
+                f.write(hhtml)
+            print("[HUB APS OK] Updated /public/hub-aps-sports-eps-maroc.html with Football & Futsal Complete Silo.")
+
+    # 2. Add Football cross-link in sticky nav of Handball, Basketball and Volleyball silos
+    for silo_file in ["aps-handball-eps-maroc.html", "aps-basketball-eps-maroc.html", "aps-volleyball-eps-maroc.html"]:
+        s_path = os.path.join(PUBLIC_DIR, silo_file)
+        if os.path.exists(s_path):
+            with open(s_path, "r", encoding="utf-8") as f:
+                s_html = f.read()
+            if "aps-football-eps-maroc.html" not in s_html:
+                s_html = s_html.replace(
+                    '<a href="hub-aps-sports-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#991b1b;">← Toutes les APS</a>',
+                    '<a href="aps-football-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#b45309;">⚽ Foot/Futsal</a>\n                <a href="hub-aps-sports-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#991b1b;">← Toutes les APS</a>'
+                )
+                with open(s_path, "w", encoding="utf-8") as f:
+                    f.write(s_html)
+
+    # 3. Update /public/blog.html with the new Silo Football & Futsal card
+    blog_path = os.path.join(PUBLIC_DIR, "blog.html")
+    if os.path.exists(blog_path):
+        with open(blog_path, "r", encoding="utf-8") as f:
+            bhtml = f.read()
+
+        if "aps-football-eps-maroc.html" not in bhtml:
+            foot_blog_card = '''                <!-- Silo Complet Football & Futsal : aps-football-eps-maroc.html -->
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">⚽ Studio Foot &amp; Futsal · 24 Cycles &amp; 240 Fiches</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#991b1b" stroke-width="2"/><polygon points="12 7 16 10 14.5 15 9.5 15 8 10" stroke="#006233" stroke-width="2"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Silo Football Scolaire &amp; Futsal en EPS au Maroc (1AC à 2Bac) : ATD, Studio Cycles &amp; Fiches (4 Niveaux · PDF/Word) + Grilles (/20)</h3>
+                        <p class="article-excerpt">Page spéciale Football &amp; Futsal (5×5 / 7×7) tout-en-un : ATD complet, créateur et visionneuse A4 pro des cycles et fiches pour les 6 niveaux scolaires (1AC à 2Bac × 4 niveaux : de la sortie de grappe aux systèmes Futsal 1-2-1 et 4-0) en Word/PDF et grilles d'évaluation (/20).</p>
+                        <div class="article-footer">
+                            <span class="article-date">4 Novembre 2026 · Studio PDF/Word</span>
+                            <a href="aps-football-eps-maroc.html" class="read-more">Ouvrir le Studio Foot &amp; Futsal →</a>
+                        </div>
+                    </div>
+                </article>'''
+
+            marker = '<div class="articles-grid" id="articlesGrid">'
+            bhtml = bhtml.replace(marker, marker + "\n" + foot_blog_card, 1)
+            bhtml = bhtml.replace('<h3>Tous <span class="theme-count" id="count-all">138</span></h3>', '<h3>Tous <span class="theme-count" id="count-all">139</span></h3>')
+            bhtml = bhtml.replace('<span class="articles-count" id="articlesCount">138 articles</span>', '<span class="articles-count" id="articlesCount">139 articles</span>')
+            bhtml = bhtml.replace('<h3>Activités Sportives <span class="theme-count" id="count-aps">27</span></h3>', '<h3>Activités Sportives <span class="theme-count" id="count-aps">28</span></h3>')
+
+            with open(blog_path, "w", encoding="utf-8") as f:
+                f.write(bhtml)
+            print("[BLOG OK] Added Silo Football & Futsal card to /public/blog.html.")
+
+    # 4. Update /public/index.html (and mirror to /index.html) so the APS Studio Banner highlights all 4 Complete Team Sport Silos (Foot, Volley, Basket, Handball)
+    index_path = os.path.join(PUBLIC_DIR, "index.html")
+    if os.path.exists(index_path):
+        with open(index_path, "r", encoding="utf-8") as f:
+            ihtml = f.read()
+
+        start_tag = "<!-- PROFEPS_APS_STUDIO_HUB_BANNER_START -->"
+        end_tag = "<!-- PROFEPS_APS_STUDIO_HUB_BANNER_END -->"
+        if start_tag in ihtml and end_tag in ihtml:
+            s_idx = ihtml.find(start_tag)
+            e_idx = ihtml.find(end_tag) + len(end_tag)
+            updated_banner = '''<!-- PROFEPS_APS_STUDIO_HUB_BANNER_START -->
+  <section aria-label="Portail des APS : Studios Football/Futsal, Volley-Ball, Basket-Ball à 5 & Handball (1AC-2Bac)" style="max-width:1140px;margin:1.75rem auto;padding:1.5rem;background:linear-gradient(135deg,#f0fdf4 0%,#ffffff 50%,#fff1f2 100%);border:2px solid #006233;border-radius:18px;box-shadow:0 8px 22px rgba(15,23,42,0.06);">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem;margin-bottom:1rem;">
+      <div>
+        <span style="display:inline-block;font-size:0.74rem;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:#ffffff;background:#006233;padding:0.22rem 0.7rem;border-radius:999px;">🏟️ Nouveau · Studios APS par Sport (1AC → 2Bac × 4 Niveaux)</span>
+        <h2 style="margin:0.35rem 0 0;font-size:1.22rem;font-weight:900;color:#0f172a;">Portail des APS : Pages Spéciales Football/Futsal, Volley-Ball, Basket-Ball à 5 &amp; Handball (ATD, 24 Cycles, 240 Fiches A4 Word/PDF &amp; Grilles /20)</h2>
+      </div>
+      <a href="hub-aps-sports-eps-maroc.html" style="font-size:0.84rem;font-weight:800;color:#006233;text-decoration:underline;">Ouvrir le Portail de Toutes les APS →</a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0.8rem;">
+      <a href="aps-football-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.95rem;background:#ffffff;border:2px solid #b45309;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.72rem;font-weight:800;color:#b45309;margin-bottom:0.25rem;">⚽ Nouveau · Studio Football &amp; Futsal (1AC → 2Bac)</span>
+        <strong style="font-size:0.86rem;color:#0f172a;line-height:1.35;">ATD Foot/Futsal, 24 Cycles &amp; 240 Fiches (Débutant à Élite Système 1-2-1) + Grilles (/20) en Word &amp; PDF →</strong>
+      </a>
+      <a href="aps-volleyball-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.95rem;background:#ffffff;border:2px solid #1e40af;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.72rem;font-weight:800;color:#1e40af;margin-bottom:0.25rem;">🏐 Studio Volley-Ball (1AC → 2Bac)</span>
+        <strong style="font-size:0.86rem;color:#0f172a;line-height:1.35;">ATD Volley, 24 Cycles &amp; 240 Fiches (Débutant à Élite Chaîne R-P-A) + Grilles (/20) en Word &amp; PDF →</strong>
+      </a>
+      <a href="aps-basketball-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.95rem;background:#ffffff;border:2px solid #006233;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.72rem;font-weight:800;color:#006233;margin-bottom:0.25rem;">🏀 Studio Basket-Ball à 5 (1AC → 2Bac)</span>
+        <strong style="font-size:0.86rem;color:#0f172a;line-height:1.35;">ATD Basket 5×5, 24 Cycles &amp; 240 Fiches (Débutant à Élite Pick &amp; Roll) + Grilles (/20) en Word &amp; PDF →</strong>
+      </a>
+      <a href="aps-handball-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.95rem;background:#ffffff;border:2px solid #991b1b;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.72rem;font-weight:800;color:#991b1b;margin-bottom:0.25rem;">🤾 Studio Complet Handball (1AC → 2Bac)</span>
+        <strong style="font-size:0.86rem;color:#0f172a;line-height:1.35;">ATD Handball, 24 Cycles &amp; 240 Fiches (Visionneuse A4 Pro) + Grilles (/20) en Word &amp; PDF →</strong>
+      </a>
+    </div>
+  </section>
+  <!-- PROFEPS_APS_STUDIO_HUB_BANNER_END -->'''
+            ihtml = ihtml[:s_idx] + updated_banner + ihtml[e_idx:]
+            with open(index_path, "w", encoding="utf-8") as f:
+                f.write(ihtml)
+            shutil.copy2(index_path, os.path.join(ROOT_DIR, "index.html"))
+            print("[INDEX OK] Updated /public/index.html and mirrored to /index.html.")
+
+    # 5. Update /public/sitemap.xml
+    sitemap_path = os.path.join(PUBLIC_DIR, "sitemap.xml")
+    if os.path.exists(sitemap_path):
+        with open(sitemap_path, "r", encoding="utf-8") as f:
+            xml = f.read()
+        loc = "https://profeps.ma/aps-football-eps-maroc.html"
+        if loc not in xml:
+            entry = f'''  <url>
+    <loc>{loc}</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>'''
+            xml = xml.replace("</urlset>", entry + "\n</urlset>")
+            with open(sitemap_path, "w", encoding="utf-8") as f:
+                f.write(xml)
+            print("[SITEMAP OK] Added aps-football-eps-maroc.html to /public/sitemap.xml.")
+
+
+if __name__ == "__main__":
+    create_football_silo_page()
+    update_hub_silos_blog_index_sitemap()
+    print("=== SILO COMPLET FOOTBALL & FUTSAL GENERATED SUCCESSFULLY ===")
