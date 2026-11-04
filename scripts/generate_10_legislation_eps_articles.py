@@ -2790,31 +2790,23 @@ def update_blog_html():
 
     cards_html_list = []
     for slug, cat_badge, meta_tag, read_t, card_title, card_excerpt, tags in cards_data:
-        tags_spans = "\n                        ".join([f'<span class="tag">{t}</span>' for t in tags])
-        cards_html_list.append(f'''            <!-- Législation EPS Maroc : {slug} -->
-            <article class="article-card" data-category="documents">
-                <div class="card-image docs">
-                    <span class="card-category">{cat_badge}</span>
-                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M12 3v18M3 7l9-4 9 4M5 10l-2 5h4l-2-5zM19 10l-2 5h4l-2-5z"/>
-                    </svg>
-                </div>
-                <div class="card-content">
-                    <div class="card-meta">
-                        <span>{meta_tag}</span>
-                        <span>•</span>
-                        <span>{read_t}</span>
+        cards_html_list.append(f'''                <!-- Législation EPS Maroc : {slug} -->
+                <article class="article-card" data-category="documents">
+                    <div class="article-visual article-documents">
+                        <span class="category-badge category-documents">{cat_badge}</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#1d4ed8" stroke-width="2"/><polyline points="14 2 14 8 20 8" stroke="#1d4ed8" stroke-width="2"/><line x1="16" y1="13" x2="8" y2="13" stroke="#991b1b" stroke-width="2"/><line x1="16" y1="17" x2="8" y2="17" stroke="#991b1b" stroke-width="2"/></svg>
+                        </div>
                     </div>
-                    <h3 class="card-title">{card_title}</h3>
-                    <p class="card-excerpt">{card_excerpt}</p>
-                    <div class="card-tags">
-                        {tags_spans}
+                    <div class="article-content">
+                        <h3 class="article-title">{card_title}</h3>
+                        <p class="article-excerpt">{card_excerpt}</p>
+                        <div class="article-footer">
+                            <span class="article-date">4 Novembre 2026 · {read_t}</span>
+                            <a href="{slug}" class="read-more">Lire le dossier + Modèles FR/AR →</a>
+                        </div>
                     </div>
-                    <div class="card-footer">
-                        <a href="{slug}" class="read-more">Lire le dossier + Modèles FR/AR →</a>
-                    </div>
-                </div>
-            </article>''')
+                </article>''')
 
     marker = '<div class="articles-grid" id="articlesGrid">'
     html = html.replace(marker, marker + "\n" + "\n".join(cards_html_list), 1)
