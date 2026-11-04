@@ -18,17 +18,31 @@ try:
     subprocess.run(["git", "config", "user.name", "abdelkhalekkaci"], cwd=CLONE_DIR, check=True)
     subprocess.run(["git", "config", "user.email", "kaci.abdelkhalek.95@gmail.com"], cwd=CLONE_DIR, check=True)
 
-    print("Copying updated public/, root HTML, and scripts/ files...")
-    # Copy public/ to both public/ and root of the repository (for Vite / static hosting compatibility)
+    print("Copying updated public/ and scripts/ files and cleaning root duplicates...")
+    # Copy public/ to public/ in the repository
     subprocess.run(["cp", "-r", "public/.", f"{CLONE_DIR}/public/"], check=True)
-    subprocess.run(["cp", "-r", "public/.", f"{CLONE_DIR}/"], check=True)
+    # Keep index.html at root for Vite/AI Studio entry point compatibility
+    shutil.copy2("public/index.html", os.path.join(CLONE_DIR, "index.html"))
+
+    # Clean duplicate HTML and static files from repository root that already exist in public/
+    pub_entries = set(os.listdir(os.path.join(CLONE_DIR, "public")))
+    for fname in os.listdir(CLONE_DIR):
+        if fname in (".git", "index.html", "generateur.html"):
+            continue
+        root_path = os.path.join(CLONE_DIR, fname)
+        if fname in pub_entries:
+            if os.path.isfile(root_path) and (fname.endswith(".html") or fname in (
+                "sitemap.xml", "robots.txt", "ads.txt", ".htaccess", "llms.txt",
+                "llms-full.txt", "manifest.json", "profeps-cmp.js", "profeps-communaute.js"
+            )):
+                os.remove(root_path)
+            elif os.path.isdir(root_path) and fname in ("css", "images", "pdf"):
+                shutil.rmtree(root_path)
+
     # Remove old generalist athletics regulation article if present in remote
     old_athle = os.path.join(CLONE_DIR, "public", "reglement-athletisme-world-athletics-jury-eps.html")
     if os.path.exists(old_athle):
         os.remove(old_athle)
-    old_athle_root = os.path.join(CLONE_DIR, "reglement-athletisme-world-athletics-jury-eps.html")
-    if os.path.exists(old_athle_root):
-        os.remove(old_athle_root)
     # Remove temporary chat screenshot attachments if present
     for sub in [os.path.join(CLONE_DIR, "public", "assets", "aistudio"), os.path.join(CLONE_DIR, "assets", "aistudio")]:
         if os.path.exists(sub):

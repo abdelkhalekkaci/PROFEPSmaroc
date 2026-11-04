@@ -97,17 +97,9 @@ def run_audit_and_fix():
     print(f"Indexable pages missing canonical   : {len(missing_canonical)}")
     print(f"Indexable pages missing JSON-LD     : {len(missing_jsonld)} {missing_jsonld if missing_jsonld else ''}")
 
-    # Sync public/ to root / (NEVER touch generateur.html)
-    synced = 0
-    for fname in os.listdir(PUBLIC_DIR):
-        if fname == "generateur.html":
-            continue
-        src = os.path.join(PUBLIC_DIR, fname)
-        dst = os.path.join(ROOT_DIR, fname)
-        if os.path.isfile(src) and (fname.endswith(".html") or fname in ("sitemap.xml", "robots.txt", "manifest.json", "sw.js")):
-            shutil.copy2(src, dst)
-            synced += 1
-    print(f"\nSynced {synced} files from public/ to workspace root / (generateur.html untouched).")
+    # Sync only index.html to root / for Vite/AI Studio entry point metadata check
+    shutil.copy2(os.path.join(PUBLIC_DIR, "index.html"), os.path.join(ROOT_DIR, "index.html"))
+    print(f"\nSynced public/index.html to workspace root /index.html (all other HTML files reside exclusively in public/).")
 
 
 if __name__ == "__main__":
