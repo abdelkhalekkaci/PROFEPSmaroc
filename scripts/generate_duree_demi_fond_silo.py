@@ -1563,7 +1563,7 @@ def create_duree_demi_fond_silo_page():
                 label: "3ème Année Collège (3AC)",
                 ref: "Orientations Pédagogiques Août 2009 (Collège)",
                 oti: "L'élève de la 3ème année doit pouvoir ajuster les éléments de l'acte moteur et l'adapter aux différentes situations en fonction de ses exigences organisationnelles et réglementaires, et s'exercer sur la pratique des droits et devoirs pour réaliser un projet sportif individuel ou collectif.",
-                otc: "Concevoir et réaliser un projet individuel d'allure à 95%–105% de sa VMA (en 3 × 3 min, intermittent 30\"/30\" ou sur 600m F / 1000m G) avec un écart inter-tours inférieur à 3 secondes.",
+                otc: "Concevoir et réaliser un projet individuel d'allure à 95%–105% de sa VMA (en 3 × 3 min, intermittent 30\\"/30\\" ou sur 600m F / 1000m G) avec un écart inter-tours inférieur à 3 secondes.",
                 bareme: "Habiletés motrices (Produit 6 pts + Processus/Régularité 6 pts) : 12 pts · Connaissances : 3 pts · Rôles sociaux (Chronométreur/Coach) : 5 pts (Total /20)",
                 situationRef: "Course de demi-fond scolaire (600m Filles / 1000m Garçons) ou 3 × 3 min avec annonce préalable du contrat de temps par tour selon sa VMA."
             }},
@@ -1579,7 +1579,7 @@ def create_duree_demi_fond_silo_page():
                 label: "1ère Année Baccalauréat (1Bac)",
                 ref: "Orientations Pédagogiques 2007 (Lycée Qualifiant)",
                 oti: "L'élève de la 1ère année Bac doit pouvoir confronter les situations motrices et s'y adapter par l'analyse et l'évaluation et la prise d'initiative pour améliorer le rendement.",
-                otc: "Planifier et réguler de manière autonome un projet d'entraînement VMA (intermittent 30\"/30\", 15\"/15\" et demi-fond 800m/1000m) pour optimiser sa performance aérobie.",
+                otc: "Planifier et réguler de manière autonome un projet d'entraînement VMA (intermittent 30\\"/30\\", 15\\"/15\\" et demi-fond 800m/1000m) pour optimiser sa performance aérobie.",
                 bareme: "Habiletés motrices (Produit 7 pts + Processus/Régularité 7 pts) : 14 pts · Connaissances : 3 pts · Rôles sociaux (Officiels/Observateur) : 3 pts (Total /20)",
                 situationRef: "Course de Demi-Fond 800m (Filles) / 1000m (Garçons) avec contrat de temps de passage à chaque tour (écart inter-tours ≤ 2 à 3 secondes)."
             }},
@@ -1614,7 +1614,7 @@ def create_duree_demi_fond_silo_page():
             "N2": {{
                 badge: "Niveau 2 — Débrouillé (Course continue acquise & Repères aux plots — VMA 11–13 km/h)",
                 diagnostique: "L'élève est capable de courir 6 à 8 minutes sans s'arrêter marcher, mais reste dans une zone de confort sous-maximale (75% VMA) ou subit des variations d'allure de ±5 secondes par tour dès que la fatigue apparaît.",
-                objCycle: "Élever l'intensité de course soutenue vers 95%–105% de sa VMA grâce au travail intermittent (30\"/30\", 15\"/15\") et stabiliser une régularité inter-tours à ±2 secondes sur 600m/800m/1000m.",
+                objCycle: "Élever l'intensité de course soutenue vers 95%–105% de sa VMA grâce au travail intermittent (30\\"/30\\", 15\\"/15\\") et stabiliser une régularité inter-tours à ±2 secondes sur 600m/800m/1000m.",
                 sessions: [
                     {{ num: 1, title: "Évaluation Diagnostique : Test Demi-Cooper 6 min & Calcul des Cibles VMA", obj: "Déterminer précisément la VMA individuelle et établir sa table personnelle d'allures (90%, 100%, 105% VMA).", intro: "12 min : Footing progressif, mobilisation dynamique et 3 accélérations sur 60m.", sitRef: "Test Demi-Cooper de 6 minutes sur piste de 200m (8 plots de 25m) avec relevé du temps à chaque tour pour diagnostiquer l'indice de régularité initial.", cr: "Maintenir une vitesse élevée et constante pendant les 6 minutes.", cs: "Calculer sa VMA (Distance / 100) et ses temps de passage aux 100m et 200m à 100% VMA.", calme: "Marche active 2 min et répartition dans les groupes de VMA." }},
                     {{ num: 2, title: "Allures Progressivas par Blocs : 3 × 3 minutes (90% → 95% → 100% VMA)", obj: "Apprendre à différencier par ses sensations corporelles trois paliers d'intensité aérobie croissants.", intro: "12 min : Échauffement cardio-respiratoire et éducatifs de foulée.", sitRef: "3 séquences de 3 minutes (récupération 1 min 30s) : Bloc 1 à 90% VMA (aisance contrôlée), Bloc 2 à 95% VMA (ventilation soutenue), Bloc 3 à 100% VMA (puissance aérobie).", cr: "Franchir 1 plot supplémentaire sur le Bloc 2 puis sur le Bloc 3 en augmentant légèrement l'amplitude et la fréquence.", cs: "Respecter exactement les 3 distances cibles croissantes sans ralentir en fin de bloc.", calme: "Relevé de la FC et du RPE (échelle 1–10) après chaque bloc." }},
@@ -1646,9 +1646,9 @@ def create_duree_demi_fond_silo_page():
                 ]
             }},
             "N4": {{
-                badge: "Niveau 4 — Élite / ASS (Puissance Aérobie 110% VMA, 1000m/800m < 3'00\" & Cross ASS — VMA > 15 km/h)",
+                badge: "Niveau 4 — Élite / ASS (Puissance Aérobie 110% VMA, 1000m/800m < 3'00\\" & Cross ASS — VMA > 15 km/h)",
                 diagnostique: "Coureurs confirmés ou membres de l'équipe ASS de Cross-Country / Piste (VMA ≥ 15–18 km/h Garçons, ≥ 13–15 km/h Filles), capables de planifier leurs séances à l'aide de la VMA, du VDOT et de la Réserve de Vitesse Anaérobie (ASR).",
-                objCycle: "Viser le score maximal au Bac Sport (20/20 : ≤ 2'55\" au 1000m G / ≤ 2'48\" au 800m F / ≤ 1'56\" au 600m F) et les podiums provinciaux/régionaux ASS de Cross-Country et de Piste.",
+                objCycle: "Viser le score maximal au Bac Sport (20/20 : ≤ 2'55\\" au 1000m G / ≤ 2'48\\" au 800m F / ≤ 1'56\\" au 600m F) et les podiums provinciaux/régionaux ASS de Cross-Country et de Piste.",
                 sessions: [
                     {{ num: 1, title: "Bilan Physiologique Complet : VMA (Vameval/Cooper), Vmax Sprint & Calcul ASR", obj: "Établir le profil complet du coureur de demi-fond (VMA, VO2max, VDOT et Réserve de Vitesse Anaérobie ASR = Vmax − VMA).", intro: "12 min : Protocole élite d'échauffement et gammes athlétiques.", sitRef: "1) Mesure de Vmax sur 30m lancé ; 2) Test VMA Vameval ou Demi-Cooper 6 min ; 3) Saisie dans les calculateurs ProfEPS (VMA, VDOT, ASR).", cr: "Engagement maximal sur les deux tests pour déterminer son profil (« Profil Endurance » vs « Profil Vitesse-Demi-Fond »).", cs: "Fiche de profilage physiologique complétée avec allures individualisées en % VMA et % ASR.", calme: "Footing de récupération et analyse scientifique." }},
                     {{ num: 2, title: "Puissance Aérobie Élite : Intermittent 30s / 20s & 15s / 15s à 110% VMA (20% ASR)", obj: "Maximiser le temps passé à 100% de VO2max grâce à un ratio travail/repos pincé (30s effort / 20s repos actif).", intro: "12 min : Échauffement complet et lignes droites progressives.", sitRef: "Bloc 1 : 10 × (30s à 105% VMA / 20s trot actif) ; Repos 4 min ; Bloc 2 : 12 × (15s à 112% VMA / 15s repos).", cr: "Foulée haute médio-pied, attaque réactive sous le bassin et relâchement facial.", cs: "100% des répétitions validées dans la seconde exacte au plot cible.", calme: "Décrassage 5 min à 60% VMA." }},

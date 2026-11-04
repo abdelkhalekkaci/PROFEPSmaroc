@@ -1775,7 +1775,7 @@ def create_lancer_poids_silo_page():
                 container.innerHTML =
                     '<div class="a4-header-banner">' +
                         '<div class="a4-header-top">' +
-                            '<span>Royaume du Maroc · Ministère de l\'Éducation Nationale, du Préscolaire et des Sports</span>' +
+                            '<span>Royaume du Maroc · Ministère de l\\'Éducation Nationale, du Préscolaire et des Sports</span>' +
                             '<span>' + s.op + '</span>' +
                         '</div>' +
                         '<div class="a4-doc-title">PROJET PRÉVISIONNEL DE CYCLE — LANCER DU POIDS (' + s.label.toUpperCase() + ')</div>' +
@@ -1795,7 +1795,7 @@ def create_lancer_poids_silo_page():
                         '</tr>' +
                     '</table>' +
                     '<div class="a4-oti-box">' +
-                        '<p style="margin-bottom:0.35rem;"><strong>Objectif Terminal d\'Intégration (OTI) :</strong> ' + s.oti + '</p>' +
+                        '<p style="margin-bottom:0.35rem;"><strong>Objectif Terminal d\\'Intégration (OTI) :</strong> ' + s.oti + '</p>' +
                         '<p style="margin:0;"><strong>Compétence Attendue en Lancer du Poids (OTC) :</strong> ' + s.otc + '</p>' +
                     '</div>' +
                     '<table class="a4-table">' +
@@ -1846,21 +1846,21 @@ def create_lancer_poids_silo_page():
                         '<tbody>' +
                             '<tr>' +
                                 '<td><strong>1. Partie Introductive<br>(12 à 15 min)</strong></td>' +
-                                '<td><strong>Prise en main &amp; Échauffement Spécifique Lancer :</strong><br>' + sess.echauffement + '<br><em>Vérification des tenues, rappel de l\'interdiction absolue d\'entrer dans le secteur sans coup de sifflet.</em></td>' +
+                                '<td><strong>Prise en main &amp; Échauffement Spécifique Lancer :</strong><br>' + sess.echauffement + '<br><em>Vérification des tenues, rappel de l\\'interdiction absolue d\\'entrer dans le secteur sans coup de sifflet.</em></td>' +
                                 '<td>• Mobiliser nuque, épaules, coudes, poignets et doigts.<br>• Aligner les ateliers de médecine-ball sur une seule ligne de tir.</td>' +
                                 '<td>• Rythme cardiaque et articulaire prêt.<br>• Zéro lancer hors commandement au sifflet.</td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td><strong>2. Partie Fondamentale<br>(30 à 35 min)</strong></td>' +
-                                '<td><strong>Situation d\'Apprentissage de Référence :</strong><br>' + sess.fondamentale + '<br><br><strong>Organisation sécurisée :</strong> ' + p.org + '</td>' +
-                                '<td><strong>Critères de réalisation :</strong><br>' + sess.critRealisation + '<br><br><strong>Variables didactiques :</strong><br>• Simplifier : départ arrêté de profil ou médecine-ball 2 kg.<br>• Complexifier : élan en translation dorsale (O\'Brien) et fil haut à 40°.</td>' +
+                                '<td><strong>Situation d\\'Apprentissage de Référence :</strong><br>' + sess.fondamentale + '<br><br><strong>Organisation sécurisée :</strong> ' + p.org + '</td>' +
+                                '<td><strong>Critères de réalisation :</strong><br>' + sess.critRealisation + '<br><br><strong>Variables didactiques :</strong><br>• Simplifier : départ arrêté de profil ou médecine-ball 2 kg.<br>• Complexifier : élan en translation dorsale (O\\'Brien) et fil haut à 40°.</td>' +
                                 '<td><strong>Critères de réussite :</strong><br>' + sess.critReussite + '</td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td><strong>3. Partie Finale<br>(8 à 10 min)</strong></td>' +
                                 '<td><strong>Retour au calme, Bilan &amp; Rangement :</strong><br>' + sess.bilan + '</td>' +
                                 '<td>• Étirements passifs courts des épaules, pectoraux, triceps et lombaires.<br>• Rangement des poids en marchant.</td>' +
-                                '<td>• Verbalisation par les élèves des règles d\'action de la chaîne cinétique.<br>• Annonce du thème de la séance suivante.</td>' +
+                                '<td>• Verbalisation par les élèves des règles d\\'action de la chaîne cinétique.<br>• Annonce du thème de la séance suivante.</td>' +
                             '</tr>' +
                         '</tbody>' +
                     '</table>';
@@ -2009,7 +2009,7 @@ def create_lancer_poids_silo_page():
                     '</div>' +
                     '<div class="calc-kpi-box">' +
                         '<span class="kpi-val" style="color:#b45309;">-' + lossAngle.toFixed(2).replace('.', ',') + ' m</span>' +
-                        '<span class="kpi-lbl">Perte liée à l\'angle (' + angle + '° vs ' + optAngle.toFixed(1).replace('.', ',') + '°)</span>' +
+                        '<span class="kpi-lbl">Perte liée à l\\'angle (' + angle + '° vs ' + optAngle.toFixed(1).replace('.', ',') + '°)</span>' +
                     '</div>' +
                     '<div class="calc-kpi-box">' +
                         '<span class="kpi-val" style="color:#1e40af;">' + bareme.note20 + '</span>' +
@@ -2045,7 +2045,7 @@ def create_lancer_poids_silo_page():
                     '<table class="a4-table">' +
                         '<thead>' +
                             '<tr>' +
-                                '<th>Angle d\'Envol (θ)</th>' +
+                                '<th>Angle d\\'Envol (θ)</th>' +
                                 '<th>Portée à v₀ = ' + v0.toFixed(1).replace('.', ',') + ' m/s (h₀ = ' + h0.toFixed(2).replace('.', ',') + ' m)</th>' +
                                 '<th>Écart vs Angle Optimal (' + optAngle.toFixed(1).replace('.', ',') + '°)</th>' +
                                 '<th>Portée si Chaîne Cinétique Active (v₀ + 1 m/s = ' + (v0 + 1).toFixed(1).replace('.', ',') + ' m/s)</th>' +
@@ -2124,7 +2124,7 @@ def create_lancer_poids_silo_page():
                     '<div class="a4-header-banner">' +
                         '<div class="a4-header-top"><span>Royaume du Maroc · MENPS · EPS</span><span>Fiche Officielle de Concours (3 Essais) &amp; Observation Biomécanique</span></div>' +
                         '<div class="a4-doc-title">FEUILLE DE CONCOURS LANCER DU POIDS (3 ESSAIS) &amp; OBSERVATION DE LA CHAÎNE CINÉTIQUE</div>' +
-                        '<div style="font-size:0.8rem;font-weight:700;color:#334155;">Classe : .................... · Masse de l\'engin : ☐ 3 kg ☐ 4 kg ☐ 5 kg · Date : ....../....../202.. · Professeur : ............................</div>' +
+                        '<div style="font-size:0.8rem;font-weight:700;color:#334155;">Classe : .................... · Masse de l\\'engin : ☐ 3 kg ☐ 4 kg ☐ 5 kg · Date : ....../....../202.. · Professeur : ............................</div>' +
                     '</div>' +
                     '<table class="a4-table">' +
                         '<thead>' +
@@ -2151,7 +2151,7 @@ def create_lancer_poids_silo_page():
                 box.innerHTML =
                     '<div class="a4-header-banner">' +
                         '<div class="a4-header-top"><span>Royaume du Maroc · MENPS · Collège (OP 2009)</span><span>Pondération Officielle : 12 pts Motricité + 3 pts Connaissances + 5 pts Attitudes = /20</span></div>' +
-                        '<div class="a4-doc-title">GRILLE D\'ÉVALUATION SOMMATIVE COLLÈGE (1AC · 2AC · 3AC) — LANCER DU POIDS</div>' +
+                        '<div class="a4-doc-title">GRILLE D\\'ÉVALUATION SOMMATIVE COLLÈGE (1AC · 2AC · 3AC) — LANCER DU POIDS</div>' +
                         '<div style="font-size:0.8rem;font-weight:800;color:#006233;">Masses officielles Collège : Filles = 3,0 kg (2 kg en 1AC) · Garçons = 4,0 kg (3 kg en 1AC/2AC)</div>' +
                     '</div>' +
                     '<h4 style="margin:0.4rem 0;color:#991b1b;font-size:0.9rem;">1. Barème de Performance Chiffrée — Note PRODUIT (/6 points) en Collège (Meilleur des 3 essais)</h4>' +
@@ -2189,19 +2189,19 @@ def create_lancer_poids_silo_page():
                         '<tbody>' +
                             '<tr>' +
                                 '<td><strong>Processus Technique : Chaîne Cinétique &amp; Élan (/6 pts)</strong></td>' +
-                                '<td>Jette avec le bras seul à l\'arrêt, décolle parfois le poids du cou, jambes raides et trajectoire basse (&lt; 30°).</td>' +
+                                '<td>Jette avec le bras seul à l\\'arrêt, décolle parfois le poids du cou, jambes raides et trajectoire basse (&lt; 30°).</td>' +
                                 '<td>Pousse réglementairement depuis le cou en départ de profil avec flexion-extension des jambes, mais léger arrêt après le pas chassé.</td>' +
                                 '<td><strong>Pas chassé rasant fluide, reprise en double appui (« position de force »), vissage/dévissage Jambes-Bassin-Tronc-Bras à ~40° et sortie arrière équilibrée.</strong></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td><strong>Connaissances Conceptuelles &amp; Règlement (/3 pts)</strong></td>' +
-                                '<td><strong>1 / 3 pt :</strong> Connaît uniquement l\'interdiction de lancer comme une balle.</td>' +
-                                '<td><strong>2 / 3 pts :</strong> Connaît les 5 causes d\'essai nul (cou, dessus du butoir, secteur, sortie arrière).</td>' +
+                                '<td><strong>1 / 3 pt :</strong> Connaît uniquement l\\'interdiction de lancer comme une balle.</td>' +
+                                '<td><strong>2 / 3 pts :</strong> Connaît les 5 causes d\\'essai nul (cou, dessus du butoir, secteur, sortie arrière).</td>' +
                                 '<td><strong>3 / 3 pts :</strong> Maîtrise le règlement RT 32-33 (Ø 2,135m, 34,92°, mesure par le centre) et les facteurs biomécaniques (v₀, 40°).</td>' +
                             '</tr>' +
                             '<tr>' +
-                                '<td><strong>Attitudes, Sécurité d\'Or &amp; Rôles de Juge (/5 pts)</strong></td>' +
-                                '<td><strong>1 à 2 / 5 pts :</strong> Passif dans les rôles d\'observateur ou nécessite des rappels à l\'ordre sur la ligne de sécurité.</td>' +
+                                '<td><strong>Attitudes, Sécurité d\\'Or &amp; Rôles de Juge (/5 pts)</strong></td>' +
+                                '<td><strong>1 à 2 / 5 pts :</strong> Passif dans les rôles d\\'observateur ou nécessite des rappels à l\\'ordre sur la ligne de sécurité.</td>' +
                                 '<td><strong>3 à 4 / 5 pts :</strong> Respecte strictement les 3 coups de sifflet et participe à la mesure au décamètre.</td>' +
                                 '<td><strong>5 / 5 pts :</strong> Exemplaire sur la sécurité, juge autonome au cercle (Drapeaux Blanc/Rouge) et à la lecture au cm inférieur.</td>' +
                             '</tr>' +
@@ -2212,7 +2212,7 @@ def create_lancer_poids_silo_page():
                     '<div class="a4-header-banner">' +
                         '<div class="a4-header-top"><span>Royaume du Maroc · MENPS · Lycée Qualifiant &amp; Bac Sport (OP 2007)</span><span>Pondération Officielle : 14 pts Motricité (7 Produit + 7 Processus) + 3 pts Connaissances + 3 pts Comportement = /20</span></div>' +
                         '<div class="a4-doc-title">GRILLE SOMMATIVE LYCÉE (TC · 1BAC · 2BAC) &amp; BARÈME OFFICIEL BAC SPORT — LANCER DU POIDS</div>' +
-                        '<div style="font-size:0.8rem;font-weight:800;color:#991b1b;">Masses officielles Bac Maroc : Garçons = 5,000 kg (4 kg en TC) · Filles = 3,000 kg (ou 4,000 kg selon l\'AREF)</div>' +
+                        '<div style="font-size:0.8rem;font-weight:800;color:#991b1b;">Masses officielles Bac Maroc : Garçons = 5,000 kg (4 kg en TC) · Filles = 3,000 kg (ou 4,000 kg selon l\\'AREF)</div>' +
                     '</div>' +
                     '<h4 style="margin:0.4rem 0;color:#991b1b;font-size:0.9rem;">1. Barème Officiel Chiffré Lycée &amp; Bac Sport Maroc — Note PRODUIT (/7 pts en Cycle EPS ou /20 au Bac Libre)</h4>' +
                     '<table class="a4-table">' +
@@ -2238,7 +2238,7 @@ def create_lancer_poids_silo_page():
                             '<tr><td><strong>06 / 20</strong></td><td><strong>2,0 / 7 pts</strong></td><td>&lt; 6,80 m</td><td>&lt; 6,60 m</td><td><strong>&lt; 7,20 m</strong></td><td><strong>&lt; 4,80 m</strong></td><td>&lt; 4,30 m</td></tr>' +
                         '</tbody>' +
                     '</table>' +
-                    '<h4 style="margin:0.5rem 0 0.35rem;color:#006233;font-size:0.9rem;">2. Grille d\'Évaluation du PROCESSUS Moteur (/7 points) — Lycée &amp; 2ème Bac (OP 2007)</h4>' +
+                    '<h4 style="margin:0.5rem 0 0.35rem;color:#006233;font-size:0.9rem;">2. Grille d\\'Évaluation du PROCESSUS Moteur (/7 points) — Lycée &amp; 2ème Bac (OP 2007)</h4>' +
                     '<table class="a4-table">' +
                         '<thead>' +
                             '<tr>' +
@@ -2252,20 +2252,20 @@ def create_lancer_poids_silo_page():
                             '<tr>' +
                                 '<td><strong>1. Élan en Translation &amp; Reprise en Double Appui (/2,5 pts)</strong></td>' +
                                 '<td>Lancer sans élan ou saut vertical avec arrêt complet au milieu du cercle.</td>' +
-                                '<td>Pas chassé rasant mais ouverture précoce de la ligne d\'épaules avant la pose du pied gauche.</td>' +
-                                '<td><strong>Sursaut dorsal O\'Brien (ou pas chassé rasant rapide), rythme « 1… 2-3 ! » vif et maintien du retard des épaules sur le bassin.</strong></td>' +
+                                '<td>Pas chassé rasant mais ouverture précoce de la ligne d\\'épaules avant la pose du pied gauche.</td>' +
+                                '<td><strong>Sursaut dorsal O\\'Brien (ou pas chassé rasant rapide), rythme « 1… 2-3 ! » vif et maintien du retard des épaules sur le bassin.</strong></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td><strong>2. Sommation des Vitesses (Chaîne J-B-T-B) &amp; Angle 40° (/2,5 pts)</strong></td>' +
-                                '<td>Action isolée du bras lanceur, jambe avant fléchie qui s\'affaisse, tir plat (&lt; 30°).</td>' +
+                                '<td>Action isolée du bras lanceur, jambe avant fléchie qui s\\'affaisse, tir plat (&lt; 30°).</td>' +
                                 '<td>Poussée des jambes présente mais dévissage simultané sans fouetté final des doigts.</td>' +
                                 '<td><strong>Poussée-vissage jambe arrière → blocage ferme jambe avant → dévissage explosif tronc → poussé final du cou à 38°–41°.</strong></td>' +
                             '</tr>' +
                             '<tr>' +
-                                '<td><strong>3. Rattrapage (Inversion d\'Appuis) &amp; Régularité (/2,0 pts)</strong></td>' +
+                                '<td><strong>3. Rattrapage (Inversion d\\'Appuis) &amp; Régularité (/2,0 pts)</strong></td>' +
                                 '<td>2 essais mordus sur 3 ou retenue de la poussée par peur de sortir.</td>' +
                                 '<td>Reste dans le cercle sans inversion complète des pieds (2 essais validés sur 3).</td>' +
-                                '<td><strong>Inversion explosive des appuis contre l\'intérieur du butoir et sortie contrôlée par la moitié arrière (3 essais sur 3 maîtrisés).</strong></td>' +
+                                '<td><strong>Inversion explosive des appuis contre l\\'intérieur du butoir et sortie contrôlée par la moitié arrière (3 essais sur 3 maîtrisés).</strong></td>' +
                             '</tr>' +
                         '</tbody>' +
                     '</table>';
@@ -2273,7 +2273,7 @@ def create_lancer_poids_silo_page():
                 box.innerHTML =
                     '<div class="a4-header-banner">' +
                         '<div class="a4-header-top"><span>Royaume du Maroc · MENPS · Évaluation Adaptée</span><span>Élève Inapte Partiel / Dispensé Pratique · Jury Officiel Lancer du Poids</span></div>' +
-                        '<div class="a4-doc-title">GRILLE D\'ÉVALUATION DE L\'ÉLÈVE DISPENSÉ / JUGE OFFICIEL AU CERCLE &amp; À LA MESURE (/20)</div>' +
+                        '<div class="a4-doc-title">GRILLE D\\'ÉVALUATION DE L\\'ÉLÈVE DISPENSÉ / JUGE OFFICIEL AU CERCLE &amp; À LA MESURE (/20)</div>' +
                         '<div style="font-size:0.8rem;font-weight:700;color:#334155;">Nom &amp; Prénom : ................................................ · Classe : ............ · Rôle : Chef Juge au Cercle &amp; Juge Décamètre</div>' +
                     '</div>' +
                     '<table class="a4-table">' +
@@ -2287,9 +2287,9 @@ def create_lancer_poids_silo_page():
                         '</thead>' +
                         '<tbody>' +
                             '<tr>' +
-                                '<td><strong>1. Commandement du Protocole de Sécurité d\'Or</strong></td>' +
+                                '<td><strong>1. Commandement du Protocole de Sécurité d\\'Or</strong></td>' +
                                 '<td><strong>/ 5 points</strong></td>' +
-                                '<td>Fait respecter la ligne d\'attente à 4 m derrière le cercle, vérifie qu\'aucun élève n\'est dans le secteur avant de donner le signal de tir et interdit tout retour du poids par jet.</td>' +
+                                '<td>Fait respecter la ligne d\\'attente à 4 m derrière le cercle, vérifie qu\\'aucun élève n\\'est dans le secteur avant de donner le signal de tir et interdit tout retour du poids par jet.</td>' +
                                 '<td>........ / 5 pts</td>' +
                             '</tr>' +
                             '<tr>' +
@@ -2301,7 +2301,7 @@ def create_lancer_poids_silo_page():
                             '<tr>' +
                                 '<td><strong>3. Procédure Officielle de Mesure au Décamètre (RT 32.19)</strong></td>' +
                                 '<td><strong>/ 5 points</strong></td>' +
-                                '<td>Plante le zéro sur le bord de l\'empreinte le plus proche du centre, fait passer le ruban exactement par le CENTRE du cercle (1,0675 m) et lit la performance au bord intérieur du butoir au cm inférieur.</td>' +
+                                '<td>Plante le zéro sur le bord de l\\'empreinte le plus proche du centre, fait passer le ruban exactement par le CENTRE du cercle (1,0675 m) et lit la performance au bord intérieur du butoir au cm inférieur.</td>' +
                                 '<td>........ / 5 pts</td>' +
                             '</tr>' +
                             '<tr>' +

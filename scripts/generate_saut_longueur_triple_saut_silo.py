@@ -1762,7 +1762,7 @@ def create_saut_longueur_triple_saut_silo_page():
                 container.innerHTML =
                     '<div class="a4-header-banner">' +
                         '<div class="a4-header-top">' +
-                            '<span>Royaume du Maroc · Ministère de l\'Éducation Nationale, du Préscolaire et des Sports</span>' +
+                            '<span>Royaume du Maroc · Ministère de l\\'Éducation Nationale, du Préscolaire et des Sports</span>' +
                             '<span>' + s.op + '</span>' +
                         '</div>' +
                         '<div class="a4-doc-title">PROJET PRÉVISIONNEL DE CYCLE — SAUT EN LONGUEUR &amp; TRIPLE SAUT (' + s.label.toUpperCase() + ')</div>' +
@@ -1782,7 +1782,7 @@ def create_saut_longueur_triple_saut_silo_page():
                         '</tr>' +
                     '</table>' +
                     '<div class="a4-oti-box">' +
-                        '<p style="margin-bottom:0.35rem;"><strong>Objectif Terminal d\'Intégration (OTI) :</strong> ' + s.oti + '</p>' +
+                        '<p style="margin-bottom:0.35rem;"><strong>Objectif Terminal d\\'Intégration (OTI) :</strong> ' + s.oti + '</p>' +
                         '<p style="margin:0;"><strong>Compétence Attendue en Saut en Longueur / Triple Saut (OTC) :</strong> ' + s.otc + '</p>' +
                     '</div>' +
                     '<table class="a4-table">' +
@@ -1833,21 +1833,21 @@ def create_saut_longueur_triple_saut_silo_page():
                         '<tbody>' +
                             '<tr>' +
                                 '<td><strong>1. Partie Introductive<br>(12 min)</strong></td>' +
-                                '<td><strong>Prise en main &amp; Échauffement Spécifique Sauts :</strong><br>' + sess.echauffement + '<br><em>Vérification de l\'ameublissement du sable et de la position sécurisée du râteau.</em></td>' +
-                                '<td>• Mobiliser activement chevilles, genoux et hanches.<br>• Poser les appuis par l\'avant-pied (« griffé ») sous le bassin.</td>' +
+                                '<td><strong>Prise en main &amp; Échauffement Spécifique Sauts :</strong><br>' + sess.echauffement + '<br><em>Vérification de l\\'ameublissement du sable et de la position sécurisée du râteau.</em></td>' +
+                                '<td>• Mobiliser activement chevilles, genoux et hanches.<br>• Poser les appuis par l\\'avant-pied (« griffé ») sous le bassin.</td>' +
                                 '<td>• Élèves prêts sur le plan articulaire et pliométrique.<br>• Piste et fosse sécurisées.</td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td><strong>2. Partie Fondamentale<br>(35 min)</strong></td>' +
-                                '<td><strong>Situation d\'Apprentissage de Référence :</strong><br>' + sess.fondamentale + '<br><br><strong>Aménagement matériel :</strong> ' + p.org + '</td>' +
-                                '<td><strong>Critères de réalisation :</strong><br>' + sess.critRealisation + '<br><br><strong>Variables didactiques :</strong><br>• Simplifier : zone d\'appel élargie (60 cm), élan réduit à 10 foulées, lattes guides.<br>• Complexifier : planche officielle 20 cm, élan complet 14–16 foulées, fil haut.</td>' +
+                                '<td><strong>Situation d\\'Apprentissage de Référence :</strong><br>' + sess.fondamentale + '<br><br><strong>Aménagement matériel :</strong> ' + p.org + '</td>' +
+                                '<td><strong>Critères de réalisation :</strong><br>' + sess.critRealisation + '<br><br><strong>Variables didactiques :</strong><br>• Simplifier : zone d\\'appel élargie (60 cm), élan réduit à 10 foulées, lattes guides.<br>• Complexifier : planche officielle 20 cm, élan complet 14–16 foulées, fil haut.</td>' +
                                 '<td><strong>Critères de réussite :</strong><br>' + sess.critReussite + '</td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td><strong>3. Partie Finale<br>(8 min)</strong></td>' +
                                 '<td><strong>Retour au calme, Bilan &amp; Remise en état de la fosse :</strong><br>' + sess.bilan + '</td>' +
                                 '<td>• Étirements passifs courts des mollets, ischio-jambiers, quadriceps et psoas.<br>• Nivellement final du sable.</td>' +
-                                '<td>• Verbalisation des repères d\'étalonnage et de la séquence des bonds.<br>• Annonce de la séance suivante.</td>' +
+                                '<td>• Verbalisation des repères d\\'étalonnage et de la séquence des bonds.<br>• Annonce de la séance suivante.</td>' +
                             '</tr>' +
                         '</tbody>' +
                     '</table>';
@@ -1981,7 +1981,7 @@ def create_saut_longueur_triple_saut_silo_page():
                 kpiStrip.innerHTML =
                     '<div class="calc-kpi-box">' +
                         '<span class="kpi-val" style="color:#b45309;">' + distElanM.toFixed(2).replace('.', ',') + ' m</span>' +
-                        '<span class="kpi-lbl">Marque d\'Élan (' + nbFoulees + ' foulées ≈ ' + nbPieds + ' pieds)</span>' +
+                        '<span class="kpi-lbl">Marque d\\'Élan (' + nbFoulees + ' foulées ≈ ' + nbPieds + ' pieds)</span>' +
                     '</div>' +
                     '<div class="calc-kpi-box">' +
                         '<span class="kpi-val" style="color:#1e40af;">' + bareme.note20 + '</span>' +
@@ -2033,7 +2033,7 @@ def create_saut_longueur_triple_saut_silo_page():
                     '<td><strong>' + nf + ' foulées</strong> ' + (nf === 12 ? '(Standard Collège 3AC / TC)' : (nf === 14 ? '★ Standard Lycée / Bac' : '')) + '</td>' +
                     '<td><strong>' + dm.toFixed(2).replace('.', ',') + ' m</strong> depuis la planche</td>' +
                     '<td><strong>≈ ' + np + ' pieds</strong> (chaussures bout-à-bout)</td>' +
-                    '<td>Départ pied d\'appel sur la marque (nombre pair de foulées)</td>' +
+                    '<td>Départ pied d\\'appel sur la marque (nombre pair de foulées)</td>' +
                     '</tr>';
             }}
 
@@ -2055,10 +2055,10 @@ def create_saut_longueur_triple_saut_silo_page():
                     '<table class="a4-table" style="margin-top:0.8rem;">' +
                         '<thead>' +
                             '<tr>' +
-                                '<th colspan="4">📏 Table d\'Étalonnage de la Marque de Départ de la Course d\'Élan (Pour un élève de ' + tailleCm + ' cm)</th>' +
+                                '<th colspan="4">📏 Table d\\'Étalonnage de la Marque de Départ de la Course d\\'Élan (Pour un élève de ' + tailleCm + ' cm)</th>' +
                             '</tr>' +
                             '<tr>' +
-                                '<th>Nombre de Foulées d\'Élan</th>' +
+                                '<th>Nombre de Foulées d\\'Élan</th>' +
                                 '<th>Distance de Départ au Décamètre</th>' +
                                 '<th>Équivalent en « Pieds » (Chaussures)</th>' +
                                 '<th>Repère de Pose du Pied au Départ</th>' +
@@ -2072,7 +2072,7 @@ def create_saut_longueur_triple_saut_silo_page():
         window.exportSautsCalcTable = function(format) {{
             var wrap = document.getElementById("sautsPrintableTableWrapper");
             if (!wrap) return;
-            var header = '<div class="a4-header-banner"><div class="a4-doc-title">TABLE D\'ÉTALONNAGE DE L\'ÉLAN &amp; RÉPARTITION DES 3 BONDS AU TRIPLE SAUT (35%–30%–35%) — EPS MAROC</div></div>';
+            var header = '<div class="a4-header-banner"><div class="a4-doc-title">TABLE D\\'ÉTALONNAGE DE L\\'ÉLAN &amp; RÉPARTITION DES 3 BONDS AU TRIPLE SAUT (35%–30%–35%) — EPS MAROC</div></div>';
             exportHtmlBlock(header + wrap.innerHTML, "ProfEPS-Table-Elan-Longueur-Triple-Saut", format, "Table Élan et Triple Saut EPS Maroc");
         }};
 
@@ -2110,7 +2110,7 @@ def create_saut_longueur_triple_saut_silo_page():
                 box.innerHTML =
                     '<div class="a4-header-banner">' +
                         '<div class="a4-header-top"><span>Royaume du Maroc · MENPS · EPS</span><span>Fiche Officielle de Concours (3 Essais) — Saut en Longueur &amp; Triple Saut</span></div>' +
-                        '<div class="a4-doc-title">FEUILLE DE CONCOURS SAUT EN LONGUEUR / TRIPLE SAUT (3 ESSAIS) &amp; PRÉCISION D\'ÉTALONNAGE</div>' +
+                        '<div class="a4-doc-title">FEUILLE DE CONCOURS SAUT EN LONGUEUR / TRIPLE SAUT (3 ESSAIS) &amp; PRÉCISION D\\'ÉTALONNAGE</div>' +
                         '<div style="font-size:0.8rem;font-weight:700;color:#334155;">Classe : .................... · Épreuve : ☐ Saut en Longueur ☐ Triple Saut (Planche : .... m) · Date : ....../....../202..</div>' +
                     '</div>' +
                     '<table class="a4-table">' +
@@ -2119,7 +2119,7 @@ def create_saut_longueur_triple_saut_silo_page():
                                 '<th style="width:4%;">N°</th>' +
                                 '<th style="width:19%;">Nom &amp; Prénom du Sauteur</th>' +
                                 '<th style="width:5%;">Sexe</th>' +
-                                '<th style="width:13%;">Marque d\'Élan Étalonnée</th>' +
+                                '<th style="width:13%;">Marque d\\'Élan Étalonnée</th>' +
                                 '<th style="width:9%;">Essai 1 (m)</th>' +
                                 '<th style="width:9%;">Essai 2 (m)</th>' +
                                 '<th style="width:9%;">Essai 3 (m)</th>' +
@@ -2132,14 +2132,14 @@ def create_saut_longueur_triple_saut_silo_page():
                         '<tbody>' + emptyRows + '</tbody>' +
                     '</table>' +
                     '<div class="a4-oti-box" style="margin-top:0.5rem;">' +
-                        '<strong>Rappel réglementaire (RT 29 &amp; 30) :</strong> Le <strong>Zéro (0 cm)</strong> du décamètre est placé dans la fosse sur l\'empreinte la plus proche de la planche (main, fesses ou talons) et la lecture se fait perpendiculairement sur la ligne d\'appel au cm inférieur · Inscrire <strong>« X »</strong> si Essai Mordu (Drapeau Rouge).' +
+                        '<strong>Rappel réglementaire (RT 29 &amp; 30) :</strong> Le <strong>Zéro (0 cm)</strong> du décamètre est placé dans la fosse sur l\\'empreinte la plus proche de la planche (main, fesses ou talons) et la lecture se fait perpendiculairement sur la ligne d\\'appel au cm inférieur · Inscrire <strong>« X »</strong> si Essai Mordu (Drapeau Rouge).' +
                     '</div>';
             }} else if (g === "college") {{
                 box.innerHTML =
                     '<div class="a4-header-banner">' +
                         '<div class="a4-header-top"><span>Royaume du Maroc · MENPS · Collège (OP 2009)</span><span>Pondération Officielle : 12 pts Motricité + 3 pts Connaissances + 5 pts Attitudes = /20</span></div>' +
-                        '<div class="a4-doc-title">GRILLE D\'ÉVALUATION SOMMATIVE COLLÈGE (1AC · 2AC · 3AC) — SAUT EN LONGUEUR &amp; TRIPLE SAUT</div>' +
-                        '<div style="font-size:0.8rem;font-weight:800;color:#006233;">Évaluation sur 3 essais avec zone d\'appel aménagée (60 cm en 1AC/2AC, 30–40 cm en 3AC)</div>' +
+                        '<div class="a4-doc-title">GRILLE D\\'ÉVALUATION SOMMATIVE COLLÈGE (1AC · 2AC · 3AC) — SAUT EN LONGUEUR &amp; TRIPLE SAUT</div>' +
+                        '<div style="font-size:0.8rem;font-weight:800;color:#006233;">Évaluation sur 3 essais avec zone d\\'appel aménagée (60 cm en 1AC/2AC, 30–40 cm en 3AC)</div>' +
                     '</div>' +
                     '<h4 style="margin:0.4rem 0;color:#b45309;font-size:0.9rem;">1. Barème de Performance Chiffrée — Note PRODUIT (/6 points) en Collège (Longueur &amp; Triple Saut)</h4>' +
                     '<table class="a4-table">' +
@@ -2178,12 +2178,12 @@ def create_saut_longueur_triple_saut_silo_page():
                                 '<td><strong>Processus Technique : Élan, Impulsion &amp; Réception (/6 pts)</strong></td>' +
                                 '<td>Élan non étalonné, piétine en regardant la planche, impulsion rasante ou erreur de pied au triple saut.</td>' +
                                 '<td>Élan accéléré sans freinage, appel valide mais suspension courte ou main posée en arrière dans le sable.</td>' +
-                                '<td><strong>Course étalonnée rapide (tête haute), impulsion haute (~20°) ou 3 bonds équilibrés (G-G-D) et réception en ramené groupé vers l\'avant.</strong></td>' +
+                                '<td><strong>Course étalonnée rapide (tête haute), impulsion haute (~20°) ou 3 bonds équilibrés (G-G-D) et réception en ramené groupé vers l\\'avant.</strong></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td><strong>Connaissances Conceptuelles &amp; Règlement (/3 pts)</strong></td>' +
-                                '<td><strong>1 / 3 pt :</strong> Connaît uniquement l\'interdiction de dépasser la ligne d\'appel.</td>' +
-                                '<td><strong>2 / 3 pts :</strong> Connaît les causes d\'essai nul et la séquence obligatoire Cloche-pied / Foulée / Saut.</td>' +
+                                '<td><strong>1 / 3 pt :</strong> Connaît uniquement l\\'interdiction de dépasser la ligne d\\'appel.</td>' +
+                                '<td><strong>2 / 3 pts :</strong> Connaît les causes d\\'essai nul et la séquence obligatoire Cloche-pied / Foulée / Saut.</td>' +
                                 '<td><strong>3 / 3 pts :</strong> Maîtrise la mesure perpendiculaire (0 cm dans le sable), le ratio 35-30-35% et le départage des ex aequo.</td>' +
                             '</tr>' +
                             '<tr>' +
@@ -2224,7 +2224,7 @@ def create_saut_longueur_triple_saut_silo_page():
                             '<tr><td><strong>06 / 20</strong></td><td><strong>2,0 / 7 pts</strong></td><td><strong>&lt; 3,55 m</strong></td><td><strong>&lt; 2,60 m</strong></td><td><strong>&lt; 7,90 m</strong></td><td><strong>&lt; 6,10 m</strong></td></tr>' +
                         '</tbody>' +
                     '</table>' +
-                    '<h4 style="margin:0.5rem 0 0.35rem;color:#006233;font-size:0.9rem;">2. Grille d\'Évaluation du PROCESSUS Moteur (/7 points) — Lycée &amp; 2ème Bac (OP 2007)</h4>' +
+                    '<h4 style="margin:0.5rem 0 0.35rem;color:#006233;font-size:0.9rem;">2. Grille d\\'Évaluation du PROCESSUS Moteur (/7 points) — Lycée &amp; 2ème Bac (OP 2007)</h4>' +
                     '<table class="a4-table">' +
                         '<thead>' +
                             '<tr>' +
@@ -2236,9 +2236,9 @@ def create_saut_longueur_triple_saut_silo_page():
                         '</thead>' +
                         '<tbody>' +
                             '<tr>' +
-                                '<td><strong>1. Étalonnage de l\'Élan &amp; Précision sur la Planche 20 cm (/2,5 pts)</strong></td>' +
+                                '<td><strong>1. Étalonnage de l\\'Élan &amp; Précision sur la Planche 20 cm (/2,5 pts)</strong></td>' +
                                 '<td>Ralentit devant la planche, regarde ses pieds ou mord 2 essais sur 3.</td>' +
-                                '<td>Course accélérée mais perte à l\'appel comprise entre 15 et 30 cm.</td>' +
+                                '<td>Course accélérée mais perte à l\\'appel comprise entre 15 et 30 cm.</td>' +
                                 '<td><strong>Élan de 14–16 foulées progressivement accéléré à vitesse maximale, pose sur la planche de 20 cm (perte &lt; 8 cm) la tête haute.</strong></td>' +
                             '</tr>' +
                             '<tr>' +
@@ -2251,7 +2251,7 @@ def create_saut_longueur_triple_saut_silo_page():
                                 '<td><strong>3. Suspension Aérienne &amp; Réception en Ramené (/2,0 pts)</strong></td>' +
                                 '<td>Déséquilibre aérien, retombe debout ou pose les mains en arrière dans le sable.</td>' +
                                 '<td>Suspension groupée simple avec réception à 2 pieds sans chute arrière.</td>' +
-                                '<td><strong>Suspension en extension ou ciseaux (2,5 foulées), ramené tardif des talons loin devant et esquive du bassin vers l\'avant.</strong></td>' +
+                                '<td><strong>Suspension en extension ou ciseaux (2,5 foulées), ramené tardif des talons loin devant et esquive du bassin vers l\\'avant.</strong></td>' +
                             '</tr>' +
                         '</tbody>' +
                     '</table>';
@@ -2259,8 +2259,8 @@ def create_saut_longueur_triple_saut_silo_page():
                 box.innerHTML =
                     '<div class="a4-header-banner">' +
                         '<div class="a4-header-top"><span>Royaume du Maroc · MENPS · Évaluation Adaptée</span><span>Élève Inapte Partiel / Dispensé Pratique · Jury Officiel Sauts Horizontaux</span></div>' +
-                        '<div class="a4-doc-title">GRILLE D\'ÉVALUATION DE L\'ÉLÈVE DISPENSÉ / JUGE À LA PLANCHE &amp; À LA MESURE 90° (/20)</div>' +
-                        '<div style="font-size:0.8rem;font-weight:700;color:#334155;">Nom &amp; Prénom : ................................................ · Classe : ............ · Rôle : Chef Juge d\'Appel &amp; Juge Décamètre</div>' +
+                        '<div class="a4-doc-title">GRILLE D\\'ÉVALUATION DE L\\'ÉLÈVE DISPENSÉ / JUGE À LA PLANCHE &amp; À LA MESURE 90° (/20)</div>' +
+                        '<div style="font-size:0.8rem;font-weight:700;color:#334155;">Nom &amp; Prénom : ................................................ · Classe : ............ · Rôle : Chef Juge d\\'Appel &amp; Juge Décamètre</div>' +
                     '</div>' +
                     '<table class="a4-table">' +
                         '<thead>' +
@@ -2273,21 +2273,21 @@ def create_saut_longueur_triple_saut_silo_page():
                         '</thead>' +
                         '<tbody>' +
                             '<tr>' +
-                                '<td><strong>1. Jugement à la Planche d\'Appel (RT 29.5 &amp; RT 30.1)</strong></td>' +
+                                '<td><strong>1. Jugement à la Planche d\\'Appel (RT 29.5 &amp; RT 30.1)</strong></td>' +
                                 '<td><strong>/ 5 points</strong></td>' +
-                                '<td>Vérifie le plan vertical de la ligne d\'appel (20 cm), la séquence Cloche-pied → Foulée → Saut au triple saut et la sortie vers l\'avant de la fosse → Lève Drapeau Blanc ou Rouge sans hésitation.</td>' +
+                                '<td>Vérifie le plan vertical de la ligne d\\'appel (20 cm), la séquence Cloche-pied → Foulée → Saut au triple saut et la sortie vers l\\'avant de la fosse → Lève Drapeau Blanc ou Rouge sans hésitation.</td>' +
                                 '<td>........ / 5 pts</td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td><strong>2. Mesure Officielle Perpendiculaire à 90° (RT 29.9)</strong></td>' +
                                 '<td><strong>/ 5 points</strong></td>' +
-                                '<td>Place systématiquement le ZÉRO (0 cm) dans le sable sur la trace la plus proche de la planche (main, bassin ou talon) et lit la mesure perpendiculairement sur la ligne d\'appel au cm inférieur.</td>' +
+                                '<td>Place systématiquement le ZÉRO (0 cm) dans le sable sur la trace la plus proche de la planche (main, bassin ou talon) et lit la mesure perpendiculairement sur la ligne d\\'appel au cm inférieur.</td>' +
                                 '<td>........ / 5 pts</td>' +
                             '</tr>' +
                             '<tr>' +
-                                '<td><strong>3. Conseil d\'Étalonnage de la Marque d\'Élan</strong></td>' +
+                                '<td><strong>3. Conseil d\\'Étalonnage de la Marque d\\'Élan</strong></td>' +
                                 '<td><strong>/ 5 points</strong></td>' +
-                                '<td>Observe l\'écart pied-planche du sauteur et lui indique la correction exacte à reporter sur sa marque de départ (ex. « recule ta marque de 15 cm » ou « avance de 20 cm »).</td>' +
+                                '<td>Observe l\\'écart pied-planche du sauteur et lui indique la correction exacte à reporter sur sa marque de départ (ex. « recule ta marque de 15 cm » ou « avance de 20 cm »).</td>' +
                                 '<td>........ / 5 pts</td>' +
                             '</tr>' +
                             '<tr>' +

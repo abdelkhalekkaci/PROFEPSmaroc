@@ -1761,7 +1761,7 @@ def create_saut_hauteur_silo_page():
                 container.innerHTML =
                     '<div class="a4-header-banner">' +
                         '<div class="a4-header-top">' +
-                            '<span>Royaume du Maroc · Ministère de l\'Éducation Nationale, du Préscolaire et des Sports</span>' +
+                            '<span>Royaume du Maroc · Ministère de l\\'Éducation Nationale, du Préscolaire et des Sports</span>' +
                             '<span>' + s.op + '</span>' +
                         '</div>' +
                         '<div class="a4-doc-title">PROJET PRÉVISIONNEL DE CYCLE — SAUT EN HAUTEUR FOSBURY-FLOP (' + s.label.toUpperCase() + ')</div>' +
@@ -1781,7 +1781,7 @@ def create_saut_hauteur_silo_page():
                         '</tr>' +
                     '</table>' +
                     '<div class="a4-oti-box">' +
-                        '<p style="margin-bottom:0.35rem;"><strong>Objectif Terminal d\'Intégration (OTI) :</strong> ' + s.oti + '</p>' +
+                        '<p style="margin-bottom:0.35rem;"><strong>Objectif Terminal d\\'Intégration (OTI) :</strong> ' + s.oti + '</p>' +
                         '<p style="margin:0;"><strong>Compétence Attendue en Saut en Hauteur (OTC) :</strong> ' + s.otc + '</p>' +
                     '</div>' +
                     '<table class="a4-table">' +
@@ -1833,20 +1833,20 @@ def create_saut_hauteur_silo_page():
                             '<tr>' +
                                 '<td><strong>1. Partie Introductive<br>(12 min)</strong></td>' +
                                 '<td><strong>Prise en main &amp; Échauffement Spécifique Hauteur :</strong><br>' + sess.echauffement + '<br><em>Vérification de la jonction des blocs du gros tapis de réception et de la protection des poteaux.</em></td>' +
-                                '<td>• S\'incliner vers l\'intérieur dans les courses en courbe.<br>• Échauffer chevilles, genoux et rachis lombaire/cervical.</td>' +
+                                '<td>• S\\'incliner vers l\\'intérieur dans les courses en courbe.<br>• Échauffer chevilles, genoux et rachis lombaire/cervical.</td>' +
                                 '<td>• Élèves prêts sur le plan articulaire.<br>• Dispositif de réception 100% sécurisé.</td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td><strong>2. Partie Fondamentale<br>(35 min)</strong></td>' +
-                                '<td><strong>Situation d\'Apprentissage de Référence :</strong><br>' + sess.fondamentale + '<br><br><strong>Aménagement matériel :</strong> ' + p.org + '</td>' +
+                                '<td><strong>Situation d\\'Apprentissage de Référence :</strong><br>' + sess.fondamentale + '<br><br><strong>Aménagement matériel :</strong> ' + p.org + '</td>' +
                                 '<td><strong>Critères de réalisation :</strong><br>' + sess.critRealisation + '<br><br><strong>Variables didactiques :</strong><br>• Simplifier : élastique souple, élan réduit à 4 foulées en courbe, repère haut.<br>• Complexifier : élan complet 8 foulées (4+4), barre rigide, montée de +3 cm.</td>' +
                                 '<td><strong>Critères de réussite :</strong><br>' + sess.critReussite + '</td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td><strong>3. Partie Finale<br>(8 min)</strong></td>' +
                                 '<td><strong>Retour au calme, Bilan &amp; Rangement :</strong><br>' + sess.bilan + '</td>' +
-                                '<td>• Étirements doux du dos (posture de l\'enfant), des psoas et des mollets.<br>• Rangement sécurisé des tapis.</td>' +
-                                '<td>• Maîtrise des règles d\'action du Fosbury et du règlement RT 26-27.<br>• Annonce du thème suivant.</td>' +
+                                '<td>• Étirements doux du dos (posture de l\\'enfant), des psoas et des mollets.<br>• Rangement sécurisé des tapis.</td>' +
+                                '<td>• Maîtrise des règles d\\'action du Fosbury et du règlement RT 26-27.<br>• Annonce du thème suivant.</td>' +
                             '</tr>' +
                         '</tbody>' +
                     '</table>';
@@ -1984,7 +1984,7 @@ def create_saut_hauteur_silo_page():
                     '</div>' +
                     '<div class="calc-kpi-box">' +
                         '<span class="kpi-val" style="color:#006233;">' + ptAppelDevantCm + ' cm</span>' +
-                        '<span class="kpi-lbl">Point d\'Appel devant la Barre (à 80cm du poteau)</span>' +
+                        '<span class="kpi-lbl">Point d\\'Appel devant la Barre (à 80cm du poteau)</span>' +
                     '</div>' +
                     '<div class="calc-kpi-box">' +
                         '<span class="kpi-val" style="color:#b45309;">' + ratioPct.replace('.', ',') + ' % (' + diffSign + ')</span>' +
@@ -2010,21 +2010,21 @@ def create_saut_hauteur_silo_page():
             var verdictHtml = "";
             if (aLast < bLast) {{
                 verdictHtml = '<strong style="color:#006233;font-size:0.95rem;">🏆 VAINQUEUR : ATHLÈTE A (par le Critère N°1 de la Règle Technique 26.8) !</strong><br>' +
-                    'Explication officielle : On regarde <strong>d\'abord uniquement le nombre d\'essais à la dernière hauteur franchie</strong> où l\'égalité s\'est produite. L\'Athlète A a franchi cette dernière barre en <strong>' + aCode + '</strong> contre <strong>' + bCode + '</strong> pour l\'Athlète B (même si A avait ' + aPrevX + ' échec(s) antérieur(s)).';
+                    'Explication officielle : On regarde <strong>d\\'abord uniquement le nombre d\\'essais à la dernière hauteur franchie</strong> où l\\'égalité s\\'est produite. L\\'Athlète A a franchi cette dernière barre en <strong>' + aCode + '</strong> contre <strong>' + bCode + '</strong> pour l\\'Athlète B (même si A avait ' + aPrevX + ' échec(s) antérieur(s)).';
             }} else if (bLast < aLast) {{
                 verdictHtml = '<strong style="color:#006233;font-size:0.95rem;">🏆 VAINQUEUR : ATHLÈTE B (par le Critère N°1 de la Règle Technique 26.8) !</strong><br>' +
-                    'Explication officielle : Selon la RT 26.8, le <strong>1er critère</strong> compare le nombre d\'essais à la <strong>dernière hauteur franchie</strong>. L\'Athlète B l\'a franchie en <strong>' + bCode + '</strong> alors que l\'Athlète A l\'a franchie en <strong>' + aCode + '</strong>. On ne passe au total des échecs que s\'ils sont à égalité sur ce 1er critère !';
+                    'Explication officielle : Selon la RT 26.8, le <strong>1er critère</strong> compare le nombre d\\'essais à la <strong>dernière hauteur franchie</strong>. L\\'Athlète B l\\'a franchie en <strong>' + bCode + '</strong> alors que l\\'Athlète A l\\'a franchie en <strong>' + aCode + '</strong>. On ne passe au total des échecs que s\\'ils sont à égalité sur ce 1er critère !';
             }} else {{
                 // Equal on Criterion 1 -> Check Criterion 2 (total X up to and including last cleared height)
                 if (aTotalX < bTotalX) {{
                     verdictHtml = '<strong style="color:#1d4ed8;font-size:0.95rem;">🏆 VAINQUEUR : ATHLÈTE A (par le Critère N°2 de la Règle Technique 26.8) !</strong><br>' +
-                        'Explication officielle : Les deux athlètes sont à égalité sur le Critère 1 (tous deux ont franchi la dernière barre en <strong>' + aCode + '</strong>). On applique donc le <strong>Critère 2 (total des échecs « X » sur tout le concours jusqu\'à la dernière barre franchie incluse)</strong> : Athlète A = <strong>' + aTotalX + ' échec(s)</strong> contre Athlète B = <strong>' + bTotalX + ' échec(s)</strong>.';
+                        'Explication officielle : Les deux athlètes sont à égalité sur le Critère 1 (tous deux ont franchi la dernière barre en <strong>' + aCode + '</strong>). On applique donc le <strong>Critère 2 (total des échecs « X » sur tout le concours jusqu\\'à la dernière barre franchie incluse)</strong> : Athlète A = <strong>' + aTotalX + ' échec(s)</strong> contre Athlète B = <strong>' + bTotalX + ' échec(s)</strong>.';
                 }} else if (bTotalX < aTotalX) {{
                     verdictHtml = '<strong style="color:#1d4ed8;font-size:0.95rem;">🏆 VAINQUEUR : ATHLÈTE B (par le Critère N°2 de la Règle Technique 26.8) !</strong><br>' +
-                        'Explication officielle : Égalité sur le Critère 1 (tous deux en <strong>' + aCode + '</strong> à la dernière barre). Le <strong>Critère 2</strong> départage au moindre nombre total d\'échecs « X » sur l\'ensemble du concours : Athlète B = <strong>' + bTotalX + ' échec(s)</strong> contre Athlète A = <strong>' + aTotalX + ' échec(s)</strong>.';
+                        'Explication officielle : Égalité sur le Critère 1 (tous deux en <strong>' + aCode + '</strong> à la dernière barre). Le <strong>Critère 2</strong> départage au moindre nombre total d\\'échecs « X » sur l\\'ensemble du concours : Athlète B = <strong>' + bTotalX + ' échec(s)</strong> contre Athlète A = <strong>' + aTotalX + ' échec(s)</strong>.';
                 }} else {{
                     verdictHtml = '<strong style="color:#991b1b;font-size:0.95rem;">🤝 ÉGALITÉ PARFAITE (Critères 1 et 2 identiques : ' + aCode + ' et ' + aTotalX + ' échec(s) total) !</strong><br>' +
-                        'Décision RT 26.8 / 26.9 : S\'il s\'agit d\'une 2e, 3e ou autre place, A et B sont classés <strong>ex aequo</strong>. S\'il s\'agit de la <strong>1re place</strong>, ils peuvent soit décider de partager la 1re place, soit disputer un <strong>barrage (Jump-off : 1 seul essai par barre)</strong>.';
+                        'Décision RT 26.8 / 26.9 : S\\'il s\\'agit d\\'une 2e, 3e ou autre place, A et B sont classés <strong>ex aequo</strong>. S\\'il s\\'agit de la <strong>1re place</strong>, ils peuvent soit décider de partager la 1re place, soit disputer un <strong>barrage (Jump-off : 1 seul essai par barre)</strong>.';
                 }}
             }}
 
@@ -2051,16 +2051,16 @@ def create_saut_hauteur_silo_page():
                                 '<td><strong>1. Côté de Départ Face au Tapis</strong></td>' +
                                 '<td style="background:#eff6ff;font-weight:900;color:#1d4ed8;">DÉPART À DROITE (Côté poteau droit)</td>' +
                                 '<td style="background:#f0fdf4;font-weight:900;color:#006233;">DÉPART À GAUCHE (Côté poteau gauche)</td>' +
-                                '<td>Permet d\'avoir toujours le pied d\'appel à l\'EXTÉRIEUR du virage (éloigné de la barre).</td>' +
+                                '<td>Permet d\\'avoir toujours le pied d\\'appel à l\\'EXTÉRIEUR du virage (éloigné de la barre).</td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td><strong>2. Marque de Départ (8 foulées = 4 droites + 4 courbes)</strong></td>' +
                                 '<td>Écart latéral = <strong>' + ecartLateralM.toFixed(2).replace('.', ',') + ' m</strong> à droite du poteau · Recul = <strong>' + reculPerpM.toFixed(2).replace('.', ',') + ' m</strong></td>' +
                                 '<td>Écart latéral = <strong>' + ecartLateralM.toFixed(2).replace('.', ',') + ' m</strong> à gauche du poteau · Recul = <strong>' + reculPerpM.toFixed(2).replace('.', ',') + ' m</strong></td>' +
-                                '<td>Les 4 premières foulées sont rectilignes pour créer la vitesse ; l\'entrée en courbe se situe à <strong>' + reculVirageM.toFixed(2).replace('.', ',') + ' m</strong> de la barre.</td>' +
+                                '<td>Les 4 premières foulées sont rectilignes pour créer la vitesse ; l\\'entrée en courbe se situe à <strong>' + reculVirageM.toFixed(2).replace('.', ',') + ' m</strong> de la barre.</td>' +
                             '</tr>' +
                             '<tr>' +
-                                '<td><strong>3. Point d\'Appel Idéal &amp; Genou Libre</strong></td>' +
+                                '<td><strong>3. Point d\\'Appel Idéal &amp; Genou Libre</strong></td>' +
                                 '<td>À <strong>' + ptAppelDevantCm + ' cm</strong> devant la barre (80 cm du poteau droit) · Montée croisée du <strong>Genou DROIT</strong></td>' +
                                 '<td>À <strong>' + ptAppelDevantCm + ' cm</strong> devant la barre (80 cm du poteau gauche) · Montée croisée du <strong>Genou GAUCHE</strong></td>' +
                                 '<td>La montée croisée du genou intérieur déclenche la rotation longitudinale qui place le dos face à la barre.</td>' +
@@ -2073,7 +2073,7 @@ def create_saut_hauteur_silo_page():
         window.exportHauteurCalcTable = function(format) {{
             var wrap = document.getElementById("hjPrintableTableWrapper");
             if (!wrap) return;
-            var header = '<div class="a4-header-banner"><div class="a4-doc-title">TABLE D\'ÉTALONNAGE DE LA COURSE EN « J » (FOSBURY-FLOP) &amp; DÉPARTAGE RT 26.8 — EPS MAROC</div></div>';
+            var header = '<div class="a4-header-banner"><div class="a4-doc-title">TABLE D\\'ÉTALONNAGE DE LA COURSE EN « J » (FOSBURY-FLOP) &amp; DÉPARTAGE RT 26.8 — EPS MAROC</div></div>';
             exportHtmlBlock(header + wrap.innerHTML, "ProfEPS-Table-Course-en-J-Saut-Hauteur", format, "Table Course en J Saut en Hauteur");
         }};
 
@@ -2135,13 +2135,13 @@ def create_saut_hauteur_silo_page():
                         '<tbody>' + emptyRows + '</tbody>' +
                     '</table>' +
                     '<div class="a4-oti-box" style="margin-top:0.5rem;">' +
-                        '<strong>Règle officielle de classement (RT 26.8) :</strong> 1) Hauteur maximale franchie · 2) En cas d\'égalité : <strong>Critère 1</strong> = le moins d\'essais à la dernière hauteur franchie (O bat XO, qui bat XXO) · 3) Si égalité sur le Critère 1 : <strong>Critère 2</strong> = le moins d\'échecs « X » sur tout le concours jusqu\'à la dernière hauteur franchie incluse.' +
+                        '<strong>Règle officielle de classement (RT 26.8) :</strong> 1) Hauteur maximale franchie · 2) En cas d\\'égalité : <strong>Critère 1</strong> = le moins d\\'essais à la dernière hauteur franchie (O bat XO, qui bat XXO) · 3) Si égalité sur le Critère 1 : <strong>Critère 2</strong> = le moins d\\'échecs « X » sur tout le concours jusqu\\'à la dernière hauteur franchie incluse.' +
                     '</div>';
             }} else if (g === "college") {{
                 box.innerHTML =
                     '<div class="a4-header-banner">' +
                         '<div class="a4-header-top"><span>Royaume du Maroc · MENPS · Collège (OP 2009)</span><span>Pondération Officielle : 12 pts Motricité + 3 pts Connaissances + 5 pts Attitudes = /20</span></div>' +
-                        '<div class="a4-doc-title">GRILLE D\'ÉVALUATION SOMMATIVE COLLÈGE (1AC · 2AC · 3AC) — SAUT EN HAUTEUR</div>' +
+                        '<div class="a4-doc-title">GRILLE D\\'ÉVALUATION SOMMATIVE COLLÈGE (1AC · 2AC · 3AC) — SAUT EN HAUTEUR</div>' +
                         '<div style="font-size:0.8rem;font-weight:800;color:#006233;">Technique Fosbury-Flop (sur matelas ≥ 50 cm) ou Ciseaux (si tapis fins / fosse de sable)</div>' +
                     '</div>' +
                     '<h4 style="margin:0.4rem 0;color:#1d4ed8;font-size:0.9rem;">1. Barème de Performance Chiffrée — Note PRODUIT (/6 points) en Collège</h4>' +
@@ -2185,13 +2185,13 @@ def create_saut_hauteur_silo_page():
                             '</tr>' +
                             '<tr>' +
                                 '<td><strong>Connaissances Conceptuelles &amp; Règlement (/3 pts)</strong></td>' +
-                                '<td><strong>1 / 3 pt :</strong> Connaît uniquement l\'interdiction de l\'appel à 2 pieds.</td>' +
+                                '<td><strong>1 / 3 pt :</strong> Connaît uniquement l\\'interdiction de l\\'appel à 2 pieds.</td>' +
                                 '<td><strong>2 / 3 pts :</strong> Connaît le code O / X / - et la règle des 3 échecs consécutifs.</td>' +
-                                '<td><strong>3 / 3 pts :</strong> Maîtrise le départage des ex aequo (RT 26.8) et la relation pied d\'appel / côté de départ.</td>' +
+                                '<td><strong>3 / 3 pts :</strong> Maîtrise le départage des ex aequo (RT 26.8) et la relation pied d\\'appel / côté de départ.</td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td><strong>Attitudes, Sécurité du Tapis &amp; Rôles de Juge (/5 pts)</strong></td>' +
-                                '<td><strong>1 à 2 / 5 pts :</strong> Passif dans les rôles d\'officiel ou inattentif à la jonction des tapis.</td>' +
+                                '<td><strong>1 à 2 / 5 pts :</strong> Passif dans les rôles d\\'officiel ou inattentif à la jonction des tapis.</td>' +
                                 '<td><strong>3 à 4 / 5 pts :</strong> Respecte les consignes de sécurité et participe à la remise de la barre.</td>' +
                                 '<td><strong>5 / 5 pts :</strong> Juge autonome à la barre (Drapeau Blanc/Rouge) et secrétaire de concours rigoureux.</td>' +
                             '</tr>' +
@@ -2228,7 +2228,7 @@ def create_saut_hauteur_silo_page():
                             '<tr><td><strong>06 / 20</strong></td><td><strong>2,0 / 7 pts</strong></td><td>&lt; 1,12 m</td><td>&lt; 1,16 m</td><td><strong>&lt; 1,20 m</strong></td><td>&lt; 0,96 m</td><td><strong>&lt; 1,00 m</strong></td></tr>' +
                         '</tbody>' +
                     '</table>' +
-                    '<h4 style="margin:0.5rem 0 0.35rem;color:#006233;font-size:0.9rem;">2. Grille d\'Évaluation du PROCESSUS Moteur (/7 points) — Lycée &amp; 2ème Bac (OP 2007)</h4>' +
+                    '<h4 style="margin:0.5rem 0 0.35rem;color:#006233;font-size:0.9rem;">2. Grille d\\'Évaluation du PROCESSUS Moteur (/7 points) — Lycée &amp; 2ème Bac (OP 2007)</h4>' +
                     '<table class="a4-table">' +
                         '<thead>' +
                             '<tr>' +
@@ -2240,16 +2240,16 @@ def create_saut_hauteur_silo_page():
                         '</thead>' +
                         '<tbody>' +
                             '<tr>' +
-                                '<td><strong>1. Course d\'Élan en « J » &amp; Inclinaison Centripète (/2,5 pts)</strong></td>' +
+                                '<td><strong>1. Course d\\'Élan en « J » &amp; Inclinaison Centripète (/2,5 pts)</strong></td>' +
                                 '<td>Coupe le virage en ligne droite, piétine ou ralentit dans les 3 derniers appuis.</td>' +
                                 '<td>Suit la courbe du « J » mais sans accélération terminale ni inclinaison marquée.</td>' +
-                                '<td><strong>Course en « J » (4+4) progressivement accélérée, inclinaison nette vers l\'intérieur du virage et rythme « 1… 2-3 ! » vif.</strong></td>' +
+                                '<td><strong>Course en « J » (4+4) progressivement accélérée, inclinaison nette vers l\\'intérieur du virage et rythme « 1… 2-3 ! » vif.</strong></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td><strong>2. Impulsion Verticale Pied Éloigné &amp; Rotation (/2,5 pts)</strong></td>' +
-                                '<td>Jette les épaules dans la barre dès l\'appel (plongeon précoce) ou attaque trop près de la barre.</td>' +
+                                '<td>Jette les épaules dans la barre dès l\\'appel (plongeon précoce) ou attaque trop près de la barre.</td>' +
                                 '<td>Appel sur le pied éloigné à 80 cm de la barre, mais montée du genou libre incomplète.</td>' +
-                                '<td><strong>Griffé actif, alignement vertical complet à l\'impulsion et montée explosive du genou libre croisé qui place le dos face à la barre.</strong></td>' +
+                                '<td><strong>Griffé actif, alignement vertical complet à l\\'impulsion et montée explosive du genou libre croisé qui place le dos face à la barre.</strong></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td><strong>3. Esquive Cambrée (Pont Dorsal) &amp; Rappel des Jambes (/2,0 pts)</strong></td>' +
@@ -2263,7 +2263,7 @@ def create_saut_hauteur_silo_page():
                 box.innerHTML =
                     '<div class="a4-header-banner">' +
                         '<div class="a4-header-top"><span>Royaume du Maroc · MENPS · Évaluation Adaptée</span><span>Élève Inapte Partiel / Dispensé Pratique · Jury Officiel Saut en Hauteur</span></div>' +
-                        '<div class="a4-doc-title">GRILLE D\'ÉVALUATION DE L\'ÉLÈVE DISPENSÉ / CHEF JUGE À LA BARRE &amp; SECRÉTAIRE RT 26.8 (/20)</div>' +
+                        '<div class="a4-doc-title">GRILLE D\\'ÉVALUATION DE L\\'ÉLÈVE DISPENSÉ / CHEF JUGE À LA BARRE &amp; SECRÉTAIRE RT 26.8 (/20)</div>' +
                         '<div style="font-size:0.8rem;font-weight:700;color:#334155;">Nom &amp; Prénom : ................................................ · Classe : ............ · Rôle : Chef Juge Barre &amp; Secrétaire Officiel</div>' +
                     '</div>' +
                     '<table class="a4-table">' +
@@ -2279,25 +2279,25 @@ def create_saut_hauteur_silo_page():
                             '<tr>' +
                                 '<td><strong>1. Jugement Officiel à la Barre (RT 27.1 &amp; 27.2)</strong></td>' +
                                 '<td><strong>/ 5 points</strong></td>' +
-                                '<td>Vérifie l\'appel obligatoire sur 1 seul pied, le franchissement de la barre et l\'absence de contact au-delà du plan vertical des montants → Lève Drapeau Blanc (« O ») ou Rouge (« X »).</td>' +
+                                '<td>Vérifie l\\'appel obligatoire sur 1 seul pied, le franchissement de la barre et l\\'absence de contact au-delà du plan vertical des montants → Lève Drapeau Blanc (« O ») ou Rouge (« X »).</td>' +
                                 '<td>........ / 5 pts</td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td><strong>2. Tenue de la Feuille (O / X / -) &amp; 3 Échecs Consécutifs (RT 26.2)</strong></td>' +
                                 '<td><strong>/ 5 points</strong></td>' +
-                                '<td>Note sans erreur chaque essai (« O », « X », « - »), gère le report des essais restants après une impasse et signale l\'élimination après 3 échecs consécutifs.</td>' +
+                                '<td>Note sans erreur chaque essai (« O », « X », « - »), gère le report des essais restants après une impasse et signale l\\'élimination après 3 échecs consécutifs.</td>' +
                                 '<td>........ / 5 pts</td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td><strong>3. Application du Départage des Ex Aequo (RT 26.8)</strong></td>' +
                                 '<td><strong>/ 5 points</strong></td>' +
-                                '<td>Classe correctement les athlètes à égalité en appliquant dans l\'ordre le Critère 1 (essais à la dernière barre franchie) puis le Critère 2 (total des « X » sur le concours).</td>' +
+                                '<td>Classe correctement les athlètes à égalité en appliquant dans l\\'ordre le Critère 1 (essais à la dernière barre franchie) puis le Critère 2 (total des « X » sur le concours).</td>' +
                                 '<td>........ / 5 pts</td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td><strong>4. Sécurité du Matelas &amp; Mesure de la Barre (RT 26.5)</strong></td>' +
                                 '<td><strong>/ 5 points</strong></td>' +
-                                '<td>Vérifie la jonction des tapis avant chaque barre, maintient 1 cm d\'espace entre la barre et les montants et mesure la hauteur au bord supérieur au milieu de la barre.</td>' +
+                                '<td>Vérifie la jonction des tapis avant chaque barre, maintient 1 cm d\\'espace entre la barre et les montants et mesure la hauteur au bord supérieur au milieu de la barre.</td>' +
                                 '<td>........ / 5 pts</td>' +
                             '</tr>' +
                             '<tr style="background:#f1f5f9;font-weight:900;">' +
