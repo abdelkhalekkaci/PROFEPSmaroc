@@ -1,0 +1,1307 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Generates the 10 Arabic Pillar HTML Articles on the Moroccan Ministry of Education Law
+(BO n° 7277 - Decrees n° 2.24.140 & 2.24.141), embeds the Interactive Dual Simulator
+(Salary/Indemnities Art. 59 & 66 + Promotion/Echelon Calculator Art. 49, 50, 51, 81, 87),
+links the official PDF (/assets/aistudio/lois_et_regles_minist_re_d__education_2764c974.pdf),
+updates /public/blog.html and /public/sitemap.xml, and verifies >1,000+ Arabic words per article.
+"""
+
+import json
+import os
+import re
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from statut_2024_data_part1 import ARTICLES_PART_1
+from statut_2024_data_part2 import ARTICLES_PART2
+
+ALL_ARTICLES = ARTICLES_PART_1 + ARTICLES_PART2
+assert len(ALL_ARTICLES) == 10, f"Expected 10 articles, got {len(ALL_ARTICLES)}"
+
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PUBLIC_DIR = os.path.join(ROOT_DIR, "public")
+PDF_URL = "/assets/aistudio/lois_et_regles_minist_re_d__education_2764c974.pdf"
+
+# Tailored deep-dive practical case studies & administrative procedures per article
+# so each article has rich, non-duplicated content well above 1,000+ words.
+CASE_STUDIES_BY_NUM = {
+    "01": """
+        <section id="sec-cases-01" class="mb-10 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+            <h2 class="text-2xl font-extrabold text-slate-900 mb-4 border-r-4 border-emerald-700 pr-3">مذكرة تطبيقية إضافية: قواعد صرف التعويضات الشهرية وعدم الجمع (المادتان 59 و60)</h2>
+            <p class="text-slate-700 leading-relaxed mb-4">
+                أكدت <strong>المادة 60</strong> من المرسوم رقم 2.24.140 أن التعويضات النظامية الثلاثة (التعويض عن التعليم أو التدرج الإداري، التعويض عن الأعباء، والتعويض عن التأطير) تؤدى عند نهاية كل شهر، ولا يمكن الجمع بينها وبين أي تعويضات أو مكافآت أخرى من نفس الطبيعة، باستثناء التعويضات العائلية، والتعويضات عن المصاريف والتنقل، والتعويض عن الساعات الإضافية، والتعويض عن تصحيح أوراق الامتحانات، والتعويضات عن الأعباء الإدارية المنصوص عليها في المرسوم رقم 2.24.141.
+            </p>
+        </section>
+    """,
+    "02": """
+        <section id="sec-cases-02" class="mb-10 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+            <h2 class="text-2xl font-extrabold text-slate-900 mb-4 border-r-4 border-emerald-700 pr-3">خلاصة مسطرية: الوثائق الإدارية اللازمة للتقييد في جدول الترقي إلى الدرجة الممتازة (المادتان 50 و87)</h2>
+            <p class="text-slate-700 leading-relaxed mb-4">
+                يتعين على كل موظف استوفى شرط الرتبة السابعة (7) وخمس (5) سنوات من الخدمة الفعلية في الدرجة الأولى التأكد من تحيين وضعيته الإدارية في منظومة التدبير المندمج لموظفي التربية الوطنية (مسير / التبليغ)، ومراجعة نقطة التقييم المهني الممنوحة له طبقاً للمادتين 53 و54 قبل انعقاد اللجان الإدارية المتساوية الأعضاء المختصة بالبث في جداول الترقي بالاختيار في حدود حصيص 36% سنوياً أو في إطار التسقيف في التقييد الرابع.
+            </p>
+        </section>
+    """,
+    "03": """
+        <section id="sec-cases-03" class="mb-10 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+            <h2 class="text-2xl font-extrabold text-slate-900 mb-4 border-r-4 border-emerald-700 pr-3">تطبيقات خاصة بمادة التربية البدنية والرياضية والجمعية الرياضية المدرسية ASS (المادة 15)</h2>
+            <p class="text-slate-700 leading-relaxed mb-4">
+                بالنسبة لأساتذة مادة التربية البدنية والرياضية بالتعليم الثانوي الإعدادي والتأهيلي والأساتذة المبرزين، يشكل البند السادس من <strong>المادة 15</strong> السند التشريعي المباشر لتأطير أنشطة الجمعية الرياضية المدرسية (ASS) والبطولات المدرسية المنظمة تحت إشراف مديرية الارتقاء بالرياضة المدرسية والجامعة الملكية المغربية للرياضة المدرسية (FRMSS)، إلى جانب مهام التدريس والتقويم والمشاركة في لجان امتحانات البكالوريا (Bac Sport).
+            </p>
+        </section>
+    """,
+    "04": """
+        <section id="sec-cases-04" class="mb-10 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+            <h2 class="text-2xl font-extrabold text-slate-900 mb-4 border-r-4 border-emerald-700 pr-3">ضمانات الاحتفاظ بالأقدمية والوضعية المالية بعد الإدماج في الأطر الجديدة (المواد 73 إلى 79 و89)</h2>
+            <p class="text-slate-700 leading-relaxed mb-4">
+                تنص المواد الانتقالية من 73 إلى 79 والمادة 89 من المرسوم رقم 2.24.140 على أن جميع الموظفين المدمجين (تلقائياً أو بناءً على طلب داخل أجل سنة) يحتفظون بنفس الدرجة والرتبة والأقدمية المكتسبة في إطارهم الأصلي، وتُحتسب هذه الأقدمية كاملة لأغراض الترقية في الرتبة والدرجة والحركة الانتقالية، مع منح تعويض تكميلي (المادة 89) في حال ترتب عن أي تغيير في الإطار نقص في الأجرة السابقة.
+            </p>
+        </section>
+    """,
+    "05": """
+        <section id="sec-cases-05" class="mb-10 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+            <h2 class="text-2xl font-extrabold text-slate-900 mb-4 border-r-4 border-emerald-700 pr-3">البديل القانوني للدروس الخصوصية: الساعات الإضافية المؤدى عنها داخل المؤسسات العمومية (المادة 72 والمرسوم 2.24.141)</h2>
+            <p class="text-slate-700 leading-relaxed mb-4">
+                في مقابل منع الدروس الخصوصية المؤدى عنها صوناً لتكافؤ الفرص (المادة 8)، فتح المشرع في المادة 72 من المرسوم 2.24.140 والمرسوم 2.24.141 باب إنجاز الساعات الإضافية المؤدى عنها داخل مؤسسات التربية والتعليم العمومي بتعريفة 159 درهماً للساعة في الابتدائي والإعدادي، و218 درهماً للساعة في الثانوي التأهيلي، و300 درهم في الأقسام التحضيرية ومراكز التكوين.
+            </p>
+        </section>
+    """,
+    "06": """
+        <section id="sec-cases-06" class="mb-10 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+            <h2 class="text-2xl font-extrabold text-slate-900 mb-4 border-r-4 border-emerald-700 pr-3">6. المسطرة العملية لتقديم تظلم حول نقطة التقييم وطلب سحب العقوبة التأديبية (المادتان 54 و65)</h2>
+            <p class="text-slate-700 leading-relaxed mb-4">
+                من أجل تمكين الأساتذة والأطر التربوية والإدارية من ممارسة حقوقهم الإدارية المكفولة في المادتين 54 و65 من المرسوم رقم 2.24.140 بطريقة سليمة قانوناً، نوضح الخطوات المسطرية الدقيقة لكلتا الآليتين:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-5">
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+                    <h3 class="font-bold text-emerald-900 mb-2">أولاً: مسطرة التظلم الإداري بخصوص نقطة التقييم المهني (المادة 54)</h3>
+                    <ol class="text-sm text-slate-700 space-y-2 list-decimal pr-5">
+                        <li><strong>الاطلاع على بطاقة التنقيط السنوية:</strong> يوقع الموظف على بطاقة التنقيط لإثبات الاطلاع، وفي حال عدم اقتناعه بالنقطة العددية الممنوحة له، يشير كتابةً إلى تحفظه.</li>
+                        <li><strong>تحرير تظلم معلل:</strong> يوجه الموظف طلباً كتابياً معللاً عبر السلم الإداري إلى مدير الأكاديمية الجهوية للتربية والتكوين (أو المدير الإقليمي حسب التفويض)، مرفقاً بالوثائق والشواهد المثبتة لمجهوداته التربوية (تقارير التفتيش، أنشطة الجمعية الرياضية المدرسية، المشاريع التربوية، المواظبة).</li>
+                        <li><strong>مراجعة النقطة:</strong> تدرس الإدارة أو اللجنة المختصة التظلم قبل الحصر النهائي للوائح الترقي في الرتبة (المادة 49) والدرجة (المادة 50).</li>
+                    </ol>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+                    <h3 class="font-bold text-emerald-900 mb-2">ثانياً: مسطرة طلب سحب العقوبة التأديبية من الملف الإداري (المادة 65)</h3>
+                    <ol class="text-sm text-slate-700 space-y-2 list-decimal pr-5">
+                        <li><strong>التحقق من انصرام الأجل القانوني:</strong> مرور <strong>5 سنوات كاملة</strong> على صدور عقوبة الإنذار أو التوبيخ، أو <strong>10 سنوات كاملة</strong> على صدور عقوبة من الدرجة الثانية، دون صدور أي عقوبة تأديبية أخرى خلال هذه الفترة، مع كون الموظف في وضعية مزاولة العمل.</li>
+                        <li><strong>تقديم الطلب الإداري:</strong> يرفع الموظف طلباً خطياً تحت إشراف السلم الإداري إلى مدير الأكاديمية الجهوية يلتمس فيه سحب العقوبة التأديبية استناداً إلى المادة 65 من المرسوم رقم 2.24.140.</li>
+                        <li><strong>رأي اللجنة الإدارية المتساوية الأعضاء:</strong> يُعرض الطلب على اللجنة الإدارية المتساوية الأعضاء المختصة إزاء الإطار، وبناءً على رأيها يصدر مقرر سحب العقوبة وإزالة كافة وثائقها من الملف الإداري للموظف.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+    """,
+    "07": """
+        <section id="sec-cases-07" class="mb-10 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+            <h2 class="text-2xl font-extrabold text-slate-900 mb-4 border-r-4 border-emerald-700 pr-3">5. جدول تطبيقي لإعادة الترتيب عند الترقية بين الدرجات (المادتان 51 و66)</h2>
+            <p class="text-slate-700 leading-relaxed mb-4">
+                يوضح الجدول التطبيقي التالي كيفية انتقال الأستاذ أو الموظف من رتبته في <strong>الدرجة الثانية (السلم 10)</strong> إلى رتبته الجديدة في <strong>الدرجة الأولى (السلم 11)</strong>، ومن <strong>الدرجة الأولى</strong> إلى <strong>الدرجة الممتازة (خارج السلم)</strong> تطبيقاً لقاعدة المادتين 51 و66 من المرسوم رقم 2.24.140:
+            </p>
+            <div class="overflow-x-auto my-5 rounded-xl border border-slate-200 shadow-sm">
+                <table class="w-full text-right border-collapse bg-white text-sm">
+                    <thead>
+                        <tr class="bg-slate-900 text-white">
+                            <th class="p-3 border border-slate-700 font-bold">الوضعية الأصلية قبل الترقية</th>
+                            <th class="p-3 border border-slate-700 font-bold">الرقم الاستدلالي الأصلي</th>
+                            <th class="p-3 border border-slate-700 font-bold text-emerald-300">الوضعية الجديدة بعد إعادة الترتيب (المادة 51)</th>
+                            <th class="p-3 border border-slate-700 font-bold">الرقم الاستدلالي الجديد</th>
+                            <th class="p-3 border border-slate-700 font-bold">مصير الأقدمية المكتسبة في الرتبة السابقة</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 border border-slate-200 font-bold">الدرجة الثانية - الرتبة 5</td>
+                            <td class="p-3 border border-slate-200">377</td>
+                            <td class="p-3 border border-slate-200 font-bold text-emerald-800">الدرجة الأولى - الرتبة 3</td>
+                            <td class="p-3 border border-slate-200 font-semibold">403 (يفوق مباشرة 377)</td>
+                            <td class="p-3 border border-slate-200">يستفيد من 26 نقطة استدلالية إضافية وتبدأ أقدميته في الرتبة 3 من تاريخ الترقية.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 border border-slate-200 font-bold">الدرجة الثانية - الرتبة 6</td>
+                            <td class="p-3 border border-slate-200">402</td>
+                            <td class="p-3 border border-slate-200 font-bold text-emerald-800">الدرجة الأولى - الرتبة 3</td>
+                            <td class="p-3 border border-slate-200 font-semibold">403 (يفوق بنقطة واحدة 402)</td>
+                            <td class="p-3 border border-slate-200">يحتفظ بأقدميته المكتسبة في الرتبة 6 السابقة في حدود سنتين للترقي إلى الرتبة 4 (436).</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 border border-slate-200 font-bold">الدرجة الثانية - الرتبة 10</td>
+                            <td class="p-3 border border-slate-200">512</td>
+                            <td class="p-3 border border-slate-200 font-bold text-emerald-800">الدرجة الأولى - الرتبة 7</td>
+                            <td class="p-3 border border-slate-200 font-semibold">564 (يفوق مباشرة 512)</td>
+                            <td class="p-3 border border-slate-200">يُرتب مباشرة في الرتبة 7 (وهي الرتبة المؤهلة لاحقاً لولوج الدرجة الممتازة بعد 5 سنوات).</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 border border-slate-200 font-bold">الدرجة الأولى - الرتبة 7 أو 8 أو 9 أو 10</td>
+                            <td class="p-3 border border-slate-200">من 564 إلى 675</td>
+                            <td class="p-3 border border-slate-200 font-bold text-emerald-800">الدرجة الممتازة - الرتبة 1</td>
+                            <td class="p-3 border border-slate-200 font-semibold">704</td>
+                            <td class="p-3 border border-slate-200">يُرتب في الرتبة 1 بالدرجة الممتازة (704) ويترقى للرتبة 2 (746) بعد 3 سنوات مباشرة.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 border border-slate-200 font-bold">الدرجة الأولى - الرتبة 11</td>
+                            <td class="p-3 border border-slate-200">704</td>
+                            <td class="p-3 border border-slate-200 font-bold text-emerald-800">الدرجة الممتازة - الرتبة 1</td>
+                            <td class="p-3 border border-slate-200 font-semibold">704 (معادل للرقم السابق)</td>
+                            <td class="p-3 border border-slate-200">يحتفظ بأقدميته المكتسبة في الرتبة 11 في حدود سنتين للانتقال السريع إلى الرتبة 2 (746).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    """,
+    "08": """
+        <section id="sec-cases-08" class="mb-10 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+            <h2 class="text-2xl font-extrabold text-slate-900 mb-4 border-r-4 border-emerald-700 pr-3">4. الدليل العملي للترسيم وامتحان الكفاءة التربوية والمباراة المهنية لحاملي الماستر (المواد 46-48 و80)</h2>
+            <p class="text-slate-700 leading-relaxed mb-4">
+                يمر الأستاذ الجديد بعد تخرجه من المركز الجهوي لمهن التربية والتكوين (CRMEF) بمرحلة التمرين (Stage) لمدة سنة دراسية واحدة طبقاً للمادة 46 من المرسوم رقم 2.24.140. ولنجاح هذه المرحلة وضمان الترسيم المباشر في الرتبة الثانية (الرقم الاستدلالي 300)، يتعين استحضار العناصر التنظيمية التالية:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-5">
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+                    <h3 class="font-bold text-emerald-900 mb-2">ملف ترسيم الأستاذ المتمرن (المادتان 46 و47)</h3>
+                    <ul class="text-sm text-slate-700 space-y-2 list-disc pr-5">
+                        <li>إعداد ملف الترسيم التربوي والإداري (دفتر النصوص، الجذاذات البيداغوجية، تخطيط الحلقات الدراسية، سجل التنقيط والمواظبة، تقرير الأنشطة المندمجة أو الجمعية الرياضية المدرسية ASS بالنسبة لأستاذ التربية البدنية).</li>
+                        <li>الخضوع لتقييم الأهلية المهنية وفق القرار التنظيمي المتخذ تطبيقاً للمادة 47 من طرف اللجنة المختصة.</li>
+                        <li>فور المصادقة على الترسيم، يصدر قرار الترسيم في <strong>الرتبة 2 من الدرجة الثانية (الرقم الاستدلالي 300)</strong> ابتداءً من اليوم الموالي لانتهاء سنة التمرين.</li>
+                    </ul>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+                    <h3 class="font-bold text-emerald-900 mb-2">ملف المشاركة في المباراة المهنية لحاملي الماستر (المادة 80)</h3>
+                    <ul class="text-sm text-slate-700 space-y-2 list-disc pr-5">
+                        <li>أن يكون المترشح <strong>موظفاً مرسماً</strong> خاضعاً للمرسوم رقم 2.24.140 ومرتباً في الدرجة الثانية على الأقل في تاريخ الإعلان عن المباراة.</li>
+                        <li>أن يكون حاصلاً على شهادة الماستر أو الماستر المتخصص أو دبلوم مهندس الدولة أو ما يعادلها المسلمة من مؤسسة جامعية وطنية أو معترف بمعادلتها قانوناً.</li>
+                        <li>النجاح في الاختبارات الكتابية و/أو الشفوية ومتابعة التكوين الخاص، ليتم تعيينه وإعادة ترتيبه في <strong>الدرجة الأولى (السلم 11)</strong> وفق قاعدة المادة 52 دون خسارة في الرقم الاستدلالي.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    """,
+    "09": """
+        <section id="sec-cases-09" class="mb-10 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+            <h2 class="text-2xl font-extrabold text-slate-900 mb-4 border-r-4 border-emerald-700 pr-3">4. حساب العائد المالي للساعات الإضافية وتنظيم الزمن المدرسي لأستاذ التربية البدنية (المادتان 67 و72 والمرسوم 2.24.141)</h2>
+            <p class="text-slate-700 leading-relaxed mb-4">
+                بموجب المرسوم رقم 2.24.141 المنشور في الصفحة 1386 من الجريدة الرسمية عدد 7277، أصبحت الساعات الإضافية المنجزة داخل المؤسسات التعليمية العمومية (في إطار سد الخصاص أو الدعم التربوي الرسمي) تخول تعويضاً مالياً مجزياً يؤدى عن كل ساعة فعلية منجزة. ويوضح المثال التطبيقي التالي كيفية احتساب هذا التعويض:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-5">
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+                    <h3 class="font-bold text-emerald-900 mb-2">مثال 1: أستاذ بالتعليم الثانوي الإعدادي ينجز 4 ساعات إضافية أسبوعياً</h3>
+                    <p class="text-slate-700 text-sm leading-relaxed">
+                        وفق تعريفة المرسوم 2.24.141 المحددة في <strong>159 درهماً للساعة الواحدة</strong> بالتعليم الإعدادي والابتدائي، فإن إنجاز 4 ساعات إضافية أسبوعياً (أي ما يعادل 16 ساعة في الشهر من أربعة أسابيع عمل فعلي) يخول تعويضاً شهرياً خاماً قدره:
+                        <br><strong class="text-emerald-800">16 ساعة × 159 درهماً = 2,544 درهماً في الشهر</strong> (أكثر من 20,000 درهم خلال ثمانية أشهر من السنة الدراسية).
+                    </p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+                    <h3 class="font-bold text-emerald-900 mb-2">مثال 2: أستاذ بالتعليم الثانوي التأهيلي ينجز 4 ساعات إضافية أسبوعياً</h3>
+                    <p class="text-slate-700 text-sm leading-relaxed">
+                        وفق تعريفة المرسوم 2.24.141 المحددة في <strong>218 درهماً للساعة الواحدة</strong> بالتعليم الثانوي التأهيلي، فإن إنجاز 4 ساعات إضافية أسبوعياً (16 ساعة في الشهر) يخول تعويضاً شهرياً خاماً قدره:
+                        <br><strong class="text-emerald-800">16 ساعة × 218 درهماً = 3,488 درهماً في الشهر</strong> (نحو 27,900 درهم خلال الموسم الدراسي).
+                    </p>
+                </div>
+            </div>
+            <p class="text-slate-700 leading-relaxed">
+                وبالنسبة لأساتذة مادة التربية البدنية والرياضية، تظل الحصة الأسبوعية النظامية بموجب المادة 67 محددة في <strong>24 ساعة بالإعدادي</strong> و<strong>21 ساعة بالتأهيلي</strong>، مع احتساب الساعتين المخصصتين لتنشيط الجمعية الرياضية المدرسية (ASS) يوم الجمعة بعد الزوال ضمن جدول الحصص الرسمي للأستاذ وفق المذكرات التنظيمية والتوجيهات التربوية لمادة التربية البدنية والرياضية.
+            </p>
+        </section>
+    """,
+    "10": """
+        <section id="sec-cases-10" class="mb-10 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+            <h2 class="text-2xl font-extrabold text-slate-900 mb-4 border-r-4 border-emerald-700 pr-3">5. جسور الحركية المهنية والارتقاء من هيئة التدريس إلى التفتيش والإدارة والبحث العلمي (المواد 44 و52 و56)</h2>
+            <p class="text-slate-700 leading-relaxed mb-4">
+                من أبرز المزايا الهندسية التي أرساها المرسوم رقم 2.24.140 أنه لم يجعل الهيئات الأربع معزولة عن بعضها البعض، بل بنى <strong>جسور ترقٍ وحركية مهنية (Passerelles professionnelles)</strong> تمكن أستاذ التعليم الابتدائي أو الإعدادي أو التأهيلي أو الأستاذ المبرز من الارتقاء المهني نحو أطر القيادة والتأطير والبحث العلمي:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-5">
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                    <h3 class="font-bold text-emerald-900 mb-2">الجسر الأول: ولوج إطار متصرف التربية الوطنية أو مستشار التوجيه والتخطيط (المادة 44)</h3>
+                    <p class="text-slate-700 text-sm leading-relaxed">
+                        يمكن لأطر التدريس المرسمين الترشح لمباراة ولوج سلك تكوين أطر الإدارة التربوية بـ CRMEF أو مباراة مركز التوجيه والتخطيط التربوي (COPE)، وبعد التخرج يُعيَّنون في <strong>الدرجة الأولى (السلم 11)</strong> مع إعادة ترتيبهم وفق المادة 52 وتوليهم مهام مدير أو ناظر أو حارس عام أو مستشار.
+                    </p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                    <h3 class="font-bold text-emerald-900 mb-2">الجسر الثاني: ولوج هيئة التفتيش والتأطير والمراقبة والتقييم (المواد 25-29)</h3>
+                    <p class="text-slate-700 text-sm leading-relaxed">
+                        يفتح مركز تكوين مفتشي التعليم (CFIE) أبوابه عبر المباراة أمام الأساتذة المرسمين المستوفين لشرط الأقدمية والدرجة، ليتخرجوا في إطار مفتش تربوي للتعليم الابتدائي أو الثانوي (بما في ذلك مفتشو التربية البدنية والرياضية) المرتبين في الدرجة الأولى والدرجة الممتازة.
+                    </p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                    <h3 class="font-bold text-emerald-900 mb-2">الجسر الثالث: ولوج هيئة الأساتذة الباحثين في التربية والتكوين (المواد 30-37)</h3>
+                    <p class="text-slate-700 text-sm leading-relaxed">
+                        يحق لموظفي الوزارة الحاصلين على شهادة الدكتوراه الترشح لمباريات توظيف <strong>الأساتذة المساعدين في التربية والتكوين</strong> بمراكز CRMEF وCFIE وCOPE، مع الاستفادة من المسار الأكاديمي والعلمي والمالي الكامل لأساتذة التعليم العالي (أستاذ مساعد، أستاذ مؤهل، أستاذ التعليم العالي).
+                    </p>
+                </div>
+            </div>
+        </section>
+    """
+}
+
+
+def normalize_article(art: dict) -> dict:
+    """Ensures every article dictionary has all required fields regardless of Part 1 or Part 2 format."""
+    a = dict(art)
+    a.setdefault("meta_title", f"{a['title']} | الجريدة الرسمية 7277")
+    a.setdefault("category_label", a.get("badge", "النظام الأساسي 2024"))
+    a.setdefault("keywords", f"{a['title']}, النظام الأساسي 2024, المرسوم 2.24.140, الجريدة الرسمية 7277")
+    a.setdefault("lead", a.get("summary_excerpt", a["meta_desc"]))
+    a.setdefault("default_tab", a.get("default_sim_tab", "salary"))
+    if "legal_refs" not in a:
+        if "toc" in a:
+            a["legal_refs"] = [t[1] for t in a["toc"]]
+        else:
+            a["legal_refs"] = [
+                "المرسوم رقم 2.24.140 صادر في 13 من شعبان 1445 (23 فبراير 2024) بشأن النظام الأساسي الخاص بموظفي الوزارة المكلفة بالتربية الوطنية (الجريدة الرسمية عدد 7277).",
+                "المرسوم رقم 2.24.141 صادر في 13 من شعبان 1445 (23 فبراير 2024) بسن تدابير متفرقة تتعلق بالتعويضات المخولة لموظفي الوزارة المكلفة بالتربية الوطنية."
+            ]
+    return a
+
+
+ALL_ARTICLES = [normalize_article(x) for x in ALL_ARTICLES]
+
+
+def build_interactive_simulator_html(default_tab: str) -> str:
+    """
+    Returns the complete RTL Arabic Dual Interactive Simulator HTML + JS:
+    Tab 1: محاكي الأجرة والتعويضات والزيادة (+1500 درهم) والأرقام الاستدلالية (المادة 59 والمادة 66 والمرسوم 2.24.141)
+    Tab 2: حاسبة الترقية في الرتبة والدرجة والدرجة الممتازة (خارج السلم) وإعادة الترتيب (المواد 49 و50 و51 و81 و87)
+    """
+    sal_active = "bg-emerald-700 text-white shadow-sm" if default_tab == "salary" else "bg-slate-100 text-slate-700 hover:bg-slate-200"
+    pro_active = "bg-emerald-700 text-white shadow-sm" if default_tab == "promo" else "bg-slate-100 text-slate-700 hover:bg-slate-200"
+    sal_hidden = "" if default_tab == "salary" else "hidden"
+    pro_hidden = "" if default_tab == "promo" else "hidden"
+
+    return f"""
+    <!-- INTERACTIVE STATUT 2024 DUAL CALCULATOR (ART. 59/66 & ART. 49/50/51/87) -->
+    <section id="statut-2024-calculators" class="my-12 bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950 text-white rounded-3xl p-6 md:p-8 shadow-xl border border-emerald-700/40">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-700/80">
+            <div>
+                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 mb-2">
+                    ⚡ أدوات تفاعلية رسمية مطابقة للجريدة الرسمية عدد 7277
+                </span>
+                <h2 class="text-xl md:text-2xl font-extrabold text-white">
+                    المحاكي القانوني التفاعلي: التعويضات والأجرة (المادة 59 و66) + الترقية في الرتبة والدرجة وخارج السلم (المواد 49 و50 و87)
+                </h2>
+                <p class="text-slate-300 text-sm mt-1">
+                    أداة حسابية فورية مبنية 100% على الجداول الرسمية للمرسوم رقم 2.24.140 والمرسوم رقم 2.24.141 الصادرين بتاريخ 26 فبراير 2024.
+                </p>
+            </div>
+            <div class="flex flex-wrap gap-2 shrink-0">
+                <button type="button" id="btn-tab-salary" onclick="switchStatutTab('salary')" class="px-4 py-2.5 rounded-xl text-xs md:text-sm font-bold transition cursor-pointer {sal_active}">
+                    💰 محاكي الأجرة والتعويضات (المادة 59 و66)
+                </button>
+                <button type="button" id="btn-tab-promo" onclick="switchStatutTab('promo')" class="px-4 py-2.5 rounded-xl text-xs md:text-sm font-bold transition cursor-pointer {pro_active}">
+                    📈 حاسبة الترقية وخارج السلم (المادتان 49 و50)
+                </button>
+            </div>
+        </div>
+
+        <!-- TAB 1: SALARY & ALLOWANCES SIMULATOR (ARTICLES 59 & 66) -->
+        <div id="panel-tab-salary" class="pt-6 {sal_hidden}">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div class="lg:col-span-5 bg-slate-800/80 border border-slate-700 rounded-2xl p-5 space-y-4">
+                    <h3 class="text-base font-bold text-emerald-300 border-b border-slate-700 pb-2">
+                        1. حدد وضعيتك الإدارية (المادة 59 والمادة 66)
+                    </h3>
+                    <div>
+                        <label for="sim-grade" class="block text-xs font-bold text-slate-300 mb-1.5">الدرجة الإدارية (السلم):</label>
+                        <select id="sim-grade" onchange="updateStatutSalaryOptions()" class="w-full bg-slate-900 border border-slate-600 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                            <option value="G2" selected>الدرجة الثانية (السلم 10) — أطر التدريس والدعم والإدارة</option>
+                            <option value="G1">الدرجة الأولى (السلم 11) — أطر التدريس والدعم والإدارة والتفتيش</option>
+                            <option value="GM">الدرجة الممتازة (خارج السلم) — كافة الهيئات</option>
+                            <option value="G3">الدرجة الثالثة (السلم 9 — في طور الانقراض / المساعدون التربويون)</option>
+                            <option value="G4">الدرجة الرابعة (السلم 8 — المساعدون التربويون)</option>
+                            <option value="G5">الدرجة الخامسة (السلم 6 — المساعدون التربويون)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="sim-echelon" class="block text-xs font-bold text-slate-300 mb-1.5">الرتبة (Échelon) والرقم الاستدلالي (المادة 66):</label>
+                        <select id="sim-echelon" onchange="calculateStatutSalary()" class="w-full bg-slate-900 border border-slate-600 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                        </select>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label for="sim-zone" class="block text-xs font-bold text-slate-300 mb-1.5">منطقة الإقامة:</label>
+                            <select id="sim-zone" onchange="calculateStatutSalary()" class="w-full bg-slate-900 border border-slate-600 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                                <option value="C" selected>المنطقة ج (10%)</option>
+                                <option value="B">المنطقة ب (15%)</option>
+                                <option value="A">المنطقة أ (25%)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="sim-children" class="block text-xs font-bold text-slate-300 mb-1.5">عدد الأطفال (التعويضات العائلية):</label>
+                            <select id="sim-children" onchange="calculateStatutSalary()" class="w-full bg-slate-900 border border-slate-600 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                                <option value="0" selected>0 طفل</option>
+                                <option value="1">طفل واحد (+300 د)</option>
+                                <option value="2">طفلان (+600 د)</option>
+                                <option value="3">3 أطفال (+900 د)</option>
+                                <option value="4">4 أطفال (+936 د)</option>
+                                <option value="5">5 أطفال (+972 د)</option>
+                                <option value="6">6 أطفال (+1008 د)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="sim-heures" class="block text-xs font-bold text-slate-300 mb-1.5">ساعات إضافية أسبوعية اختيارية (المرسوم 2.24.141):</label>
+                        <select id="sim-heures" onchange="calculateStatutSalary()" class="w-full bg-slate-900 border border-slate-600 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                            <option value="0" selected>بدون ساعات إضافية (0 ساعة)</option>
+                            <option value="2_159">ساعتان أسبوعياً — ابتدائي/إعدادي (159 درهم/ساعة)</option>
+                            <option value="4_159">4 ساعات أسبوعياً — ابتدائي/إعدادي (159 درهم/ساعة)</option>
+                            <option value="2_218">ساعتان أسبوعياً — ثانوي تأهيلي (218 درهم/ساعة)</option>
+                            <option value="4_218">4 ساعات أسبوعياً — ثانوي تأهيلي (218 درهم/ساعة)</option>
+                            <option value="2_300">ساعتان أسبوعياً — أقسام تحضيرية/مراكز (300 درهم/ساعة)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 bg-slate-800/90 border border-slate-700 rounded-2xl p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-700 pb-3 mb-4">
+                            <h3 class="text-base font-bold text-white">2. تفاصيل التعويضات الرسمية والأجرة الشهرية التقديرية</h3>
+                            <span id="sim-indice-badge" class="px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-extrabold">
+                                الرقم الاستدلالي: 300
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5">
+                            <div class="bg-slate-900/90 border border-slate-700 rounded-xl p-3.5">
+                                <div class="text-xs text-slate-400 mb-1">التعويض عن التعليم / التدرج (يناير 2025)</div>
+                                <div id="res-ind-ens-2025" class="text-lg font-extrabold text-emerald-400">4,412 درهم</div>
+                                <div id="res-ind-ens-evol" class="text-[11px] text-slate-400 mt-1">شتنبر 2023: 2,550 د | يناير 2024: 3,481 د</div>
+                            </div>
+                            <div class="bg-slate-900/90 border border-slate-700 rounded-xl p-3.5">
+                                <div class="text-xs text-slate-400 mb-1">التعويض عن الأعباء (المادة 59)</div>
+                                <div id="res-ind-charges" class="text-lg font-extrabold text-amber-300">1,000 درهم</div>
+                                <div class="text-[11px] text-slate-400 mt-1">مقدار شهري قار حسب الدرجة</div>
+                            </div>
+                            <div class="bg-slate-900/90 border border-slate-700 rounded-xl p-3.5">
+                                <div class="text-xs text-slate-400 mb-1">التعويض عن التأطير (المادة 59)</div>
+                                <div id="res-ind-encadrement" class="text-lg font-extrabold text-sky-300">0 درهم</div>
+                                <div id="res-ind-enc-note" class="text-[11px] text-slate-400 mt-1">يبدأ من الرتبة 6 بالدرجة 2</div>
+                            </div>
+                        </div>
+
+                        <div class="bg-emerald-950/60 border border-emerald-600/40 rounded-2xl p-4 mb-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center">
+                                <div>
+                                    <div class="text-xs text-emerald-200">مجموع التعويضات النظامية الخام (المادة 59):</div>
+                                    <div id="res-total-ind-brut" class="text-xl font-extrabold text-white mt-0.5">6,637 درهم/شهر</div>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-emerald-200">الأجرة الشهرية الصافية التقديرية (2025):</div>
+                                    <div id="res-net-2025" class="text-2xl font-extrabold text-emerald-300 mt-0.5">~ 6,660 درهم/شهر</div>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-emerald-200">الزيادة الصافية المكتسبة (+1500 د):</div>
+                                    <div id="res-gain-net" class="text-base font-bold text-amber-300 mt-0.5">+1,500 درهم صافية شهرياً (+18,000 د/سنة)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="res-heures-box" class="text-xs text-slate-300 bg-slate-900/70 border border-slate-700 rounded-xl p-3 leading-relaxed">
+                        💡 <strong>ملاحظة قانونية (المادة 59 و60):</strong> تُصرف الزيادة العامة في الأجور (+1500 درهم صافية شهرياً) عبر شطرين متساويين في خانة «التعويض عن التعليم / التدرج الإداري» (الشطر الأول بأثر رجعي من فاتح يناير 2024 والشطر الثاني من فاتح يناير 2025).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: PROMOTION IN ECHELON, GRADE & HORS ECHELLE CALCULATOR (ARTICLES 49, 50, 51, 81, 87) -->
+        <div id="panel-tab-promo" class="pt-6 {pro_hidden}">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div class="lg:col-span-5 bg-slate-800/80 border border-slate-700 rounded-2xl p-5 space-y-4">
+                    <h3 class="text-base font-bold text-emerald-300 border-b border-slate-700 pb-2">
+                        1. معطيات الأقدمية والرتبة الحالية (المواد 49 و50 و87)
+                    </h3>
+                    <div>
+                        <label for="pro-grade" class="block text-xs font-bold text-slate-300 mb-1.5">الدرجة الحالية للموظف:</label>
+                        <select id="pro-grade" onchange="calculateStatutPromotion()" class="w-full bg-slate-900 border border-slate-600 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                            <option value="G2">الدرجة الثانية (السلم 10) — نحو الدرجة الأولى (السلم 11)</option>
+                            <option value="G1" selected>الدرجة الأولى (السلم 11) — نحو الدرجة الممتازة (خارج السلم)</option>
+                            <option value="GM">الدرجة الممتازة (خارج السلم) — الترقي في رتب خارج السلم</option>
+                        </select>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label for="pro-echelon" class="block text-xs font-bold text-slate-300 mb-1.5">الرتبة الحالية:</label>
+                            <select id="pro-echelon" onchange="calculateStatutPromotion()" class="w-full bg-slate-900 border border-slate-600 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                                <option value="1">الرتبة 1</option>
+                                <option value="2">الرتبة 2</option>
+                                <option value="3">الرتبة 3</option>
+                                <option value="4">الرتبة 4</option>
+                                <option value="5">الرتبة 5</option>
+                                <option value="6">الرتبة 6</option>
+                                <option value="7" selected>الرتبة 7</option>
+                                <option value="8">الرتبة 8</option>
+                                <option value="9">الرتبة 9</option>
+                                <option value="10">الرتبة 10</option>
+                                <option value="11">الرتبة 11</option>
+                                <option value="12">الرتبة 12</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="pro-anc-grade" class="block text-xs font-bold text-slate-300 mb-1.5">الأقدمية في الدرجة (بالسنوات):</label>
+                            <input type="number" id="pro-anc-grade" value="6" min="0" max="35" onchange="calculateStatutPromotion()" onkeyup="calculateStatutPromotion()" class="w-full bg-slate-900 border border-slate-600 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-400" />
+                        </div>
+                    </div>
+                    <div>
+                        <label for="pro-rythme" class="block text-xs font-bold text-slate-300 mb-1.5">نسق الترقي في الرتبة (المادة 49):</label>
+                        <select id="pro-rythme" onchange="calculateStatutPromotion()" class="w-full bg-slate-900 border border-slate-600 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                            <option value="fast" selected>النسق السريع (21 سنة لبلوغ الرتبة 10)</option>
+                            <option value="medium">النسق المتوسط (25.5 سنة لبلوغ الرتبة 10)</option>
+                            <option value="slow">النسق البطيء (31 سنة لبلوغ الرتبة 10)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 bg-slate-800/90 border border-slate-700 rounded-2xl p-5 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-bold text-white border-b border-slate-700 pb-3 mb-4">
+                            2. نتيجة التشخيص القانوني للترقية في الرتبة والدرجة وإعادة الترتيب
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                            <div class="bg-slate-900/90 border border-slate-700 rounded-xl p-4">
+                                <div class="text-xs text-slate-400 mb-1">الترقية إلى الرتبة الموالية (المادة 49):</div>
+                                <div id="pro-res-next-echelon" class="text-base font-extrabold text-emerald-300">الانتقال من الرتبة 7 إلى الرتبة 8</div>
+                                <div id="pro-res-echelon-time" class="text-xs text-slate-300 mt-1">المدة المطلوبة: 3 سنوات (النسق السريع)</div>
+                            </div>
+                            <div class="bg-slate-900/90 border border-slate-700 rounded-xl p-4">
+                                <div class="text-xs text-slate-400 mb-1">إعادة الترتيب عند الترقية في الدرجة (المادة 51):</div>
+                                <div id="pro-res-reclassement" class="text-base font-extrabold text-amber-300">الدرجة الممتازة — الرتبة 1 (الرقم 704)</div>
+                                <div id="pro-res-reclass-note" class="text-xs text-slate-300 mt-1">مقابل الرقم الاستدلالي الحالي (564)</div>
+                            </div>
+                        </div>
+
+                        <div id="pro-res-grade-status" class="bg-emerald-950/70 border border-emerald-500/40 rounded-2xl p-4 text-sm text-slate-100 leading-relaxed space-y-2">
+                        </div>
+                    </div>
+                    <div class="text-xs text-slate-300 bg-slate-900/70 border border-slate-700 rounded-xl p-3 mt-4 leading-relaxed">
+                        📌 <strong>قاعدة التسقيف (المادة 50):</strong> الموظفون الذين لم تتم ترقيتهم في الدرجة بالاختيار بعد تقييدهم للمرة الثالثة في جدول الترقي، تتم ترقيتهم <strong>بدون حصيص (خارج الكوطا) برسم سنة تقييدهم للمرة الرابعة</strong>.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+    (function() {{
+        // Exact official table values from Article 59 (page 1378) and Article 66 (page 1380) of BO n° 7277
+        const STATUT_DATA = {{
+            G5: {{
+                label: "الدرجة الخامسة (السلم 6)",
+                ens23: [2712,2712,2712,2712,2712,2712,2712,2712,2712,2712,2712],
+                ens24: [3633,3633,3633,3633,3633,3650,3650,3650,3650,3650,3650],
+                ens25: [4605,4605,4605,4605,4605,4702,4702,4702,4702,4702,4702],
+                charges: 305,
+                enc: [0,0,0,0,0,0,0,0,0,0,0],
+                echelons: [
+                    {{e:"الرتبة 1", ind:153}}, {{e:"الرتبة 2", ind:161}}, {{e:"الرتبة 3", ind:173}},
+                    {{e:"الرتبة 4", ind:185}}, {{e:"الرتبة 5", ind:197}}, {{e:"الرتبة 6", ind:209}},
+                    {{e:"الرتبة 7", ind:222}}, {{e:"الرتبة 8", ind:236}}, {{e:"الرتبة 9", ind:249}},
+                    {{e:"الرتبة 10", ind:262}}, {{e:"الرتبة الاستثنائية", ind:291}}
+                ]
+            }},
+            G4: {{
+                label: "الدرجة الرابعة (السلم 8)",
+                ens23: [2760,2760,2760,2760,2760,2785,2785,2785,2785,2785,2785],
+                ens24: [3779,3779,3779,3779,3779,3832,3832,3832,3832,3832,3832],
+                ens25: [4895,4895,4895,4895,4895,4971,4971,4971,4971,4971,4971],
+                charges: 305,
+                enc: [0,0,0,0,0,0,0,0,0,0,0],
+                echelons: [
+                    {{e:"الرتبة 1", ind:207}}, {{e:"الرتبة 2", ind:224}}, {{e:"الرتبة 3", ind:241}},
+                    {{e:"الرتبة 4", ind:259}}, {{e:"الرتبة 5", ind:276}}, {{e:"الرتبة 6", ind:293}},
+                    {{e:"الرتبة 7", ind:311}}, {{e:"الرتبة 8", ind:332}}, {{e:"الرتبة 9", ind:353}},
+                    {{e:"الرتبة 10", ind:373}}, {{e:"الرتبة الاستثنائية", ind:392}}
+                ]
+            }},
+            G3: {{
+                label: "الدرجة الثالثة (السلم 9)",
+                ens23: [2986,2986,2986,2986,2986,3213,3213,3213,3213,3213,3213],
+                ens24: [4106,4106,4106,4106,4106,4349,4349,4349,4349,4349,4349],
+                ens25: [5227,5227,5227,5227,5227,5486,5486,5486,5486,5486,5486],
+                charges: 305,
+                enc: [0,0,0,0,0,260,260,260,260,260,260],
+                echelons: [
+                    {{e:"الرتبة 1", ind:235}}, {{e:"الرتبة 2", ind:253}}, {{e:"الرتبة 3", ind:274}},
+                    {{e:"الرتبة 4", ind:296}}, {{e:"الرتبة 5", ind:317}}, {{e:"الرتبة 6", ind:339}},
+                    {{e:"الرتبة 7", ind:361}}, {{e:"الرتبة 8", ind:382}}, {{e:"الرتبة 9", ind:404}},
+                    {{e:"الرتبة 10", ind:438}}, {{e:"الرتبة الاستثنائية", ind:472}}
+                ]
+            }},
+            G2: {{
+                label: "الدرجة الثانية (السلم 10)",
+                ens23: [3365,3365,3365,3365,3365,3568,3568,3568,3568,3568,3568],
+                ens24: [4501,4501,4501,4501,4501,4704,4704,4704,4704,4704,4704],
+                ens25: [5637,5637,5637,5637,5637,5840,5840,5840,5840,5840,5840],
+                charges: 1000,
+                enc: [0,0,0,0,0,700,700,700,700,700,700],
+                echelons: [
+                    {{e:"الرتبة 1 (متمرن)", ind:275}}, {{e:"الرتبة 2 (مرسم)", ind:300}}, {{e:"الرتبة 3", ind:326}},
+                    {{e:"الرتبة 4", ind:351}}, {{e:"الرتبة 5", ind:377}}, {{e:"الرتبة 6", ind:402}},
+                    {{e:"الرتبة 7", ind:428}}, {{e:"الرتبة 8", ind:456}}, {{e:"الرتبة 9", ind:484}},
+                    {{e:"الرتبة 10", ind:512}}, {{e:"الرتبة الاستثنائية", ind:564}}
+                ]
+            }},
+            G1: {{
+                label: "الدرجة الأولى (السلم 11)",
+                ens23: [5202,5202,5202,5202,5202,6787,6787,6787,6787,6787,7202,7202,7202],
+                ens24: [6339,6339,6339,6339,6339,7923,7923,7923,7923,7923,8339,8339,8339],
+                ens25: [7475,7475,7475,7475,7475,9060,9060,9060,9060,9060,9475,9475,9475],
+                charges: 1000,
+                enc: [950,950,950,950,950,3600,3600,3600,3600,3600,3600,3600,3600],
+                echelons: [
+                    {{e:"الرتبة 1", ind:336}}, {{e:"الرتبة 2", ind:369}}, {{e:"الرتبة 3", ind:403}},
+                    {{e:"الرتبة 4", ind:436}}, {{e:"الرتبة 5", ind:472}}, {{e:"الرتبة 6", ind:509}},
+                    {{e:"الرتبة 7 (عتبة خارج السلم)", ind:564}}, {{e:"الرتبة 8", ind:606}}, {{e:"الرتبة 9", ind:639}},
+                    {{e:"الرتبة 10", ind:675}}, {{e:"الرتبة 11 / الاستثنائية", ind:704}},
+                    {{e:"الرتبة 12", ind:746}}, {{e:"الرتبة 13", ind:779}}
+                ]
+            }},
+            GM: {{
+                label: "الدرجة الممتازة (خارج السلم)",
+                ens23: [9589,9589,9589,9589,9589,9589],
+                ens24: [10725,10725,10725,10725,10725,10725],
+                ens25: [11862,11862,11862,11862,11862,11862],
+                charges: 1000,
+                enc: [5500,5500,5500,5500,5500,5500],
+                echelons: [
+                    {{e:"الرتبة 1", ind:704}}, {{e:"الرتبة 2", ind:746}}, {{e:"الرتبة 3", ind:779}},
+                    {{e:"الرتبة 4", ind:812}}, {{e:"الرتبة 5", ind:840}}, {{e:"الرتبة 6 (مبرزون)", ind:930}}
+                ]
+            }}
+        }};
+
+        window.switchStatutTab = function(tab) {{
+            const btnSal = document.getElementById('btn-tab-salary');
+            const btnPro = document.getElementById('btn-tab-promo');
+            const panSal = document.getElementById('panel-tab-salary');
+            const panPro = document.getElementById('panel-tab-promo');
+            if (tab === 'salary') {{
+                panSal.classList.remove('hidden');
+                panPro.classList.add('hidden');
+                btnSal.className = 'px-4 py-2.5 rounded-xl text-xs md:text-sm font-bold transition cursor-pointer bg-emerald-700 text-white shadow-sm';
+                btnPro.className = 'px-4 py-2.5 rounded-xl text-xs md:text-sm font-bold transition cursor-pointer bg-slate-100 text-slate-700 hover:bg-slate-200';
+            }} else {{
+                panPro.classList.remove('hidden');
+                panSal.classList.add('hidden');
+                btnPro.className = 'px-4 py-2.5 rounded-xl text-xs md:text-sm font-bold transition cursor-pointer bg-emerald-700 text-white shadow-sm';
+                btnSal.className = 'px-4 py-2.5 rounded-xl text-xs md:text-sm font-bold transition cursor-pointer bg-slate-100 text-slate-700 hover:bg-slate-200';
+            }}
+        }};
+
+        window.updateStatutSalaryOptions = function() {{
+            const g = document.getElementById('sim-grade').value;
+            const sel = document.getElementById('sim-echelon');
+            const data = STATUT_DATA[g];
+            sel.innerHTML = '';
+            data.echelons.forEach((item, idx) => {{
+                const opt = document.createElement('option');
+                opt.value = idx;
+                opt.textContent = item.e + ' — الرقم الاستدلالي ' + item.ind;
+                if ((g === 'G2' && idx === 1) || (g === 'G1' && idx === 6) || (g === 'GM' && idx === 0)) {{
+                    opt.selected = true;
+                }}
+                sel.appendChild(opt);
+            }});
+            calculateStatutSalary();
+        }};
+
+        function computeMonthlyBaseFromIndice(ind) {{
+            let annual = 0;
+            if (ind <= 100) annual = ind * 98.85;
+            else if (ind <= 150) annual = 100 * 98.85 + (ind - 100) * 79.62;
+            else annual = 100 * 98.85 + 50 * 79.62 + (ind - 150) * 50.92;
+            return annual / 12.0;
+        }}
+
+        window.calculateStatutSalary = function() {{
+            const g = document.getElementById('sim-grade').value;
+            const idx = parseInt(document.getElementById('sim-echelon').value || '0', 10);
+            const zone = document.getElementById('sim-zone').value;
+            const children = parseInt(document.getElementById('sim-children').value || '0', 10);
+            const hVal = document.getElementById('sim-heures').value;
+
+            const data = STATUT_DATA[g];
+            const ech = data.echelons[idx] || data.echelons[0];
+            const ind = ech.ind;
+
+            const ens23 = data.ens23[idx];
+            const ens24 = data.ens24[idx];
+            const ens25 = data.ens25[idx];
+            const charges = data.charges;
+            const enc = data.enc[idx];
+
+            const baseMonth = computeMonthlyBaseFromIndice(ind);
+            const zoneRate = zone === 'A' ? 0.25 : (zone === 'B' ? 0.15 : 0.10);
+            const resAllowance = baseMonth * zoneRate;
+
+            let fam = 0;
+            if (children <= 3) fam = children * 300;
+            else fam = 900 + (children - 3) * 36;
+
+            let suppHoursGross = 0;
+            if (hVal !== '0') {{
+                const parts = hVal.split('_');
+                const hrsWeek = parseInt(parts[0], 10);
+                const rate = parseInt(parts[1], 10);
+                suppHoursGross = hrsWeek * 4 * rate;
+            }}
+
+            const totalIndBrut = ens25 + charges + enc;
+            const grossTotal = baseMonth + resAllowance + totalIndBrut;
+            let netRatio = 0.78;
+            if (g === 'G1') netRatio = 0.72;
+            if (g === 'GM') netRatio = 0.67;
+            const estimatedNet = Math.round(grossTotal * netRatio + fam + (suppHoursGross * 0.82));
+
+            document.getElementById('sim-indice-badge').textContent = ech.e + ' · الرقم الاستدلالي: ' + ind;
+            document.getElementById('res-ind-ens-2025').textContent = ens25.toLocaleString('en-US') + ' درهم';
+            document.getElementById('res-ind-ens-evol').textContent = 'شتنبر 2023: ' + ens23.toLocaleString('en-US') + ' د | يناير 2024: ' + ens24.toLocaleString('en-US') + ' د';
+            document.getElementById('res-ind-charges').textContent = charges.toLocaleString('en-US') + ' درهم';
+            document.getElementById('res-ind-encadrement').textContent = enc.toLocaleString('en-US') + ' درهم';
+            document.getElementById('res-total-ind-brut').textContent = totalIndBrut.toLocaleString('en-US') + ' درهم/شهر';
+            document.getElementById('res-net-2025').textContent = '~ ' + estimatedNet.toLocaleString('en-US') + ' درهم/شهر';
+
+            const hBox = document.getElementById('res-heures-box');
+            if (suppHoursGross > 0) {{
+                hBox.innerHTML = '⏱️ <strong>شامل للتعويض عن الساعات الإضافية (المرسوم 2.24.141):</strong> يضيف لك إنجاز الساعات الإضافية المختارة مبلغاً خاماً قدره <strong>' + suppHoursGross.toLocaleString('en-US') + ' درهم شهرياً</strong> زيادة على الأجرة النظامية.';
+            }} else {{
+                hBox.innerHTML = '💡 <strong>ملاحظة قانونية (المادة 59 و60):</strong> تُصرف الزيادة العامة في الأجور (+1500 درهم صافية شهرياً) عبر شطرين متساويين في خانة «التعويض عن التعليم / التدرج الإداري» (الشطر الأول من فاتح يناير 2024 والشطر الثاني من فاتح يناير 2025).';
+            }}
+        }};
+
+        window.calculateStatutPromotion = function() {{
+            const g = document.getElementById('pro-grade').value;
+            const ech = parseInt(document.getElementById('pro-echelon').value || '1', 10);
+            const anc = parseFloat(document.getElementById('pro-anc-grade').value || '0');
+            const rythme = document.getElementById('pro-rythme').value;
+
+            const durations = {{
+                1: {{fast: "سنة واحدة (1)", medium: "سنة واحدة (1)", slow: "سنة واحدة (1)"}},
+                2: {{fast: "سنة واحدة (1)", medium: "سنة ونصف (1.5)", slow: "سنتان (2)"}},
+                3: {{fast: "سنتان (2)", medium: "سنتان ونصف (2.5)", slow: "3 سنوات"}},
+                4: {{fast: "سنتان (2)", medium: "سنتان ونصف (2.5)", slow: "3.5 سنوات"}},
+                5: {{fast: "سنتان (2)", medium: "سنتان ونصف (2.5)", slow: "3.5 سنوات"}},
+                6: {{fast: "3 سنوات", medium: "3.5 سنوات", slow: "4 سنوات"}},
+                7: {{fast: "3 سنوات", medium: "3.5 سنوات", slow: "4 سنوات"}},
+                8: {{fast: "3 سنوات", medium: "4 سنوات", slow: "4.5 سنوات"}},
+                9: {{fast: "4 سنوات", medium: "4.5 سنوات", slow: "5.5 سنوات"}}
+            }};
+
+            const nextEchEl = document.getElementById('pro-res-next-echelon');
+            const echTimeEl = document.getElementById('pro-res-echelon-time');
+            const reclEl = document.getElementById('pro-res-reclassement');
+            const reclNoteEl = document.getElementById('pro-res-reclass-note');
+            const statusEl = document.getElementById('pro-res-grade-status');
+
+            if (g === 'GM') {{
+                const nextE = Math.min(ech + 1, 6);
+                nextEchEl.textContent = ech < 6 ? ('الانتقال من الرتبة ' + ech + ' إلى الرتبة ' + nextE + ' (خارج السلم)') : 'الرتبة القصوى في الدرجة الممتازة';
+                echTimeEl.textContent = 'الترقي مباشر كل 3 سنوات بدون أنساق أو حصيص (المادة 49)';
+                reclEl.textContent = 'الدرجة الممتازة هي أعلى درجة في الإطار';
+                reclNoteEl.textContent = 'الرقم الاستدلالي يرتفع من 704 (الرتبة 1) إلى 840 أو 930';
+                statusEl.innerHTML = '<p>✅ <strong>الوضعية في الدرجة الممتازة (خارج السلم):</strong> تنص الفقرة ما قبل الأخيرة من المادة 49 على أن الترقية من رتبة إلى الرتبة الموالية في الدرجة الممتازة تتم <strong>مباشرة كل ثلاث (3) سنوات</strong>.</p>';
+                return;
+            }}
+
+            if (ech <= 9) {{
+                nextEchEl.textContent = 'الانتقال من الرتبة ' + ech + ' إلى الرتبة ' + (ech + 1);
+                echTimeEl.textContent = 'المدة القانونية حسب المادة 49: ' + durations[ech][rythme];
+            }} else if (ech === 10) {{
+                if (g === 'G2') {{
+                    nextEchEl.textContent = 'الانتقال من الرتبة 10 إلى الرتبة الاستثنائية (564)';
+                    echTimeEl.textContent = 'الشرط (المادة 49 و81): سنتان أقدمية في الرتبة 10 + حصيص 10%';
+                }} else {{
+                    nextEchEl.textContent = 'الانتقال من الرتبة 10 إلى الرتبة 11 (704)';
+                    echTimeEl.textContent = 'الشرط (المادة 49): ترقٍ مباشر بعد سنتين (أو حصيص 10% للرتبة الاستثنائية)';
+                }}
+            }} else {{
+                nextEchEl.textContent = 'الانتقال إلى الرتبة ' + Math.min(ech + 1, 13) + ' بالدرجة الأولى';
+                echTimeEl.textContent = 'الشرط (المادة 49): ترقٍ مباشر كل سنتين (2 سنتين)';
+            }}
+
+            if (g === 'G2') {{
+                const g2Map = {{
+                    1: {{r:"الرتبة 1 (336)", o:275}}, 2: {{r:"الرتبة 1 (336)", o:300}}, 3: {{r:"الرتبة 1 (336)", o:326}},
+                    4: {{r:"الرتبة 2 (369)", o:351}}, 5: {{r:"الرتبة 3 (403)", o:377}}, 6: {{r:"الرتبة 3 (403)", o:402}},
+                    7: {{r:"الرتبة 4 (436)", o:428}}, 8: {{r:"الرتبة 5 (472)", o:456}}, 9: {{r:"الرتبة 6 (509)", o:484}},
+                    10: {{r:"الرتبة 7 (564)", o:512}}, 11: {{r:"الرتبة 7 (564)", o:564}}, 12: {{r:"الرتبة 7 (564)", o:564}}
+                }};
+                const m = g2Map[ech] || g2Map[10];
+                reclEl.textContent = 'الدرجة الأولى — ' + m.r;
+                reclNoteEl.textContent = 'تطبيقاً للمادة 51 (مقابل الرقم الاستدلالي الأصلي ' + m.o + ')';
+
+                const examOk = anc >= 6;
+                const choixOk = anc >= 10;
+                let html = '<p><strong>تشخيص الترقية من الدرجة الثانية إلى الدرجة الأولى (المادة 50):</strong></p><ul class="list-disc pr-5 space-y-1">';
+                html += '<li><strong>امتحان الكفاءة المهنية (حصيص 14%):</strong> ' + (examOk ? '<span class="text-emerald-300 font-bold">مستوفٍ لشرط 6 سنوات أقدمية في الدرجة (' + anc + ' سنوات).</span>' : '<span class="text-amber-300">يتطلب 6 سنوات أقدمية (متبقي ' + Math.max(0, 6 - anc) + ' سنوات).</span>') + '</li>';
+                html += '<li><strong>الترقية بالاختيار (حصيص 22%):</strong> ' + (choixOk ? '<span class="text-emerald-300 font-bold">مستوفٍ لشرط 10 سنوات أقدمية في الدرجة (' + anc + ' سنوات)، وتُسقَّف الترقية بدون حصيص في التقييد الرابع.</span>' : '<span class="text-amber-300">يتطلب 10 سنوات أقدمية في الدرجة (متبقي ' + Math.max(0, 10 - anc) + ' سنوات).</span>') + '</li></ul>';
+                statusEl.innerHTML = html;
+            }} else if (g === 'G1') {{
+                reclEl.textContent = ech >= 12 ? 'الدرجة الممتازة — الرتبة 2 (746) أو 3 (779)' : 'الدرجة الممتازة — الرتبة 1 (الرقم الاستدلالي 704)';
+                reclNoteEl.textContent = 'تطبيقاً للمادة 51 (مع الاحتفاظ بالأقدمية إن تعادل الرقم الاستدلالي)';
+                const echOk = ech >= 7;
+                const ancOk = anc >= 5;
+                let html = '<p><strong>تشخيص الترقية من الدرجة الأولى إلى الدرجة الممتازة - خارج السلم (المادتان 50 و87):</strong></p><ul class="list-disc pr-5 space-y-1">';
+                html += '<li><strong>شرط الرتبة (الرتبة 7 على الأقل):</strong> ' + (echOk ? '<span class="text-emerald-300 font-bold">مستوفى (أنت في الرتبة ' + ech + ').</span>' : '<span class="text-rose-300 font-bold">غير مستوفى بعد (يجب بلوغ الرتبة 7 على الأقل).</span>') + '</li>';
+                html += '<li><strong>شرط الأقدمية في الدرجة الأولى (5 سنوات على الأقل):</strong> ' + (ancOk ? '<span class="text-emerald-300 font-bold">مستوفى (' + anc + ' سنوات في الدرجة الأولى).</span>' : '<span class="text-amber-300 font-bold">يتطلب 5 سنوات في الدرجة الأولى (متبقي ' + Math.max(0, 5 - anc) + ' سنوات).</span>') + '</li>';
+                html += '<li><strong>الحصيص والتسقيف:</strong> نسبة الحصيص السنوي هي <strong>36%</strong> بالاختيار، مع ضمان الترقية <strong>بدون حصيص في التقييد الرابع</strong> طبقاً للفقرة الأخيرة من المادة 50.</li></ul>';
+                statusEl.innerHTML = html;
+            }}
+        }};
+
+        updateStatutSalaryOptions();
+        calculateStatutPromotion();
+    }})();
+    </script>
+    """
+
+
+def build_shared_context_sections(current_article: dict) -> str:
+    nav_cards = []
+    for art in ALL_ARTICLES:
+        is_current = art["slug"] == current_article["slug"]
+        border_cls = "border-emerald-600 bg-emerald-50/70 ring-2 ring-emerald-500/20" if is_current else "border-slate-200 bg-white hover:border-emerald-500 hover:shadow-md"
+        badge_txt = "📍 المقال الحالي" if is_current else f"الدليل القانوني {art['num']}/10"
+        nav_cards.append(f"""
+            <a href="/{art['slug']}" class="block p-4 rounded-2xl border transition {border_cls}">
+                <div class="flex items-center justify-between gap-2 mb-1.5">
+                    <span class="text-xs font-extrabold text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-md">{badge_txt}</span>
+                    <span class="text-[11px] text-slate-500 font-semibold">{art['category_label']}</span>
+                </div>
+                <h3 class="text-sm font-bold text-slate-900 leading-snug">{art['title']}</h3>
+            </a>
+        """)
+    nav_html = "\n".join(nav_cards)
+
+    return f"""
+    <!-- OFFICIAL PDF DOWNLOAD & VIEWER CARD (BO N° 7277 - DECRETS 2.24.140 & 2.24.141) -->
+    <section id="official-bo-7277-pdf" class="my-10 bg-emerald-950 text-white rounded-3xl p-6 md:p-8 border border-emerald-700 shadow-lg">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div class="space-y-2">
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-extrabold bg-amber-400 text-slate-950">
+                    📄 الوثيقة الرسمية الكاملة · الجريدة الرسمية عدد 7277 (26 فبراير 2024)
+                </span>
+                <h2 class="text-xl md:text-2xl font-extrabold text-white">
+                    تحميل النص الرسمي الكامل للنظام الأساسي 2024 (المرسوم 2.24.140 والمرسوم 2.24.141 - PDF)
+                </h2>
+                <p class="text-emerald-100 text-sm leading-relaxed max-w-3xl">
+                    تتضمن هذه النسخة الرسمية الصادرة عن الأمانة العامة للحكومة (الصفحات 1366 إلى 1386) النص الكامل للمرسوم رقم 2.24.140 بشأن النظام الأساسي الخاص بموظفي الوزارة المكلفة بالتربية الوطنية (95 مادة في 8 أبواب) والمرسوم رقم 2.24.141 المتعلق بالتعويضات عن الساعات الإضافية وتصحيح الامتحانات والأعباء الإدارية.
+                </p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-3 shrink-0">
+                <a href="{PDF_URL}" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-extrabold text-sm bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition shadow-md">
+                    📥 فتح وتحميل الجريدة الرسمية (PDF)
+                </a>
+                <a href="#statut-2024-calculators" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-sm bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 transition">
+                    🧮 استخدام حاسبة الأجرة والترقية
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- STRUCTURAL ARCHITECTURE OF DECREE 2.24.140 (95 ARTICLES / 8 CHAPTERS) -->
+    <section id="sec-architecture-2-24-140" class="mb-10 bg-slate-50 border border-slate-200 rounded-2xl p-6">
+        <h2 class="text-xl font-extrabold text-slate-900 mb-3 border-r-4 border-emerald-700 pr-3">
+            الهيكلة التشريعية الكاملة للمرسوم رقم 2.24.140 في الجريدة الرسمية عدد 7277 (من المادة 1 إلى المادة 95)
+        </h2>
+        <p class="text-slate-700 text-sm leading-relaxed mb-4">
+            لتسهيل الرجوع إلى المواد القانونية في الوثيقة الرسمية المرفقة أعلاه، يتوزع المرسوم رقم 2.24.140 الصادر في 13 من شعبان 1445 (23 فبراير 2024) على ثمانية (8) أبواب رئيسية تضم 95 مادة:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 text-xs text-slate-700">
+            <div class="bg-white p-3.5 rounded-xl border border-slate-200">
+                <div class="font-extrabold text-emerald-900 mb-1">الباب الأول والثاني (المواد 1 إلى 8)</div>
+                <p>مجال التطبيق، صفة الموظف العمومي، الهوية المهنية، الحرية البيداغوجية، الحماية القانونية، أخلاقيات المهنة، ومنع الدروس الخصوصية (ص. 1366–1367).</p>
+            </div>
+            <div class="bg-white p-3.5 rounded-xl border border-slate-200">
+                <div class="font-extrabold text-emerald-900 mb-1">الباب الثالث (المواد 9 إلى 37)</div>
+                <p>تأليف ومهام ودرجات الهيئات الأربع: هيئة التربية والتعليم، هيئة الإدارة التربوية والتدبير، هيئة التفتيش والتأطير، وهيئة الأساتذة الباحثين (ص. 1367–1372).</p>
+            </div>
+            <div class="bg-white p-3.5 rounded-xl border border-slate-200">
+                <div class="font-extrabold text-emerald-900 mb-1">الباب الرابع والخامس (المواد 38 إلى 60)</div>
+                <p>التوظيف والتعيين والترسيم، الترقية في الرتبة والدرجة (المواد 49-52)، تقييم الأداء (53-54)، مهام الإدارة (55-58)، وجدول التعويضات (المادة 59-60) (ص. 1372–1379).</p>
+            </div>
+            <div class="bg-white p-3.5 rounded-xl border border-slate-200">
+                <div class="font-extrabold text-emerald-900 mb-1">الباب السادس والسابع والثامن (المواد 61 إلى 95)</div>
+                <p>الحركة الانتقالية، التأديب وسحب العقوبات، الأرقام الاستدلالية (المادة 66)، ساعات العمل والعطل (67-72)، والإدماج والمقتضيات الانتقالية (73-95) (ص. 1379–1386).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10-ARTICLE INTERNAL SILO NAVIGATION -->
+    <section id="silo-statut-2024-nav" class="my-12 bg-slate-100/80 border border-slate-200 rounded-3xl p-6 md:p-8">
+        <div class="mb-5">
+            <span class="text-xs font-extrabold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full">
+                📚 الموسوعة القانونية الشاملة للنظام الأساسي 2024 (10 دلائل مرجعية)
+            </span>
+            <h2 class="text-xl md:text-2xl font-extrabold text-slate-900 mt-2">
+                تصفح الدلائل العشرة الكاملة للنظام الأساسي لموظفي التربية الوطنية (الجريدة الرسمية عدد 7277)
+            </h2>
+            <p class="text-slate-600 text-sm mt-1">
+                تم إعداد هذه السلسلة القانونية المرجعية حصرياً على منصة ProfEPS Maroc بدون أي تكرار موضوعاتي، لتغطية كافة مواد المرسومين 2.24.140 و2.24.141:
+            </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+            {nav_html}
+        </div>
+    </section>
+    """
+
+
+def render_full_article_html(article: dict) -> str:
+    slug = article["slug"]
+    canonical = f"https://profepsmaroc.com/{slug}"
+    refs_li = "\n".join([f'<li class="flex items-start gap-2"><span class="text-emerald-700 font-bold">▪</span><span>{r}</span></li>' for r in article["legal_refs"]])
+    faqs_html_items = []
+    faq_schema_items = []
+    for f in article["faqs"]:
+        faqs_html_items.append(f"""
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+                <h3 class="text-base md:text-lg font-extrabold text-slate-900 mb-2 flex items-start gap-2">
+                    <span class="text-emerald-700">❓</span>
+                    <span>{f['q']}</span>
+                </h3>
+                <p class="text-slate-700 text-sm md:text-base leading-relaxed pr-6">{f['a']}</p>
+            </div>
+        """)
+        faq_schema_items.append({
+            "@type": "Question",
+            "name": f["q"],
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": f["a"]
+            }
+        })
+
+    json_ld_article = {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": article["title"],
+        "description": article["meta_desc"],
+        "inLanguage": "ar-MA",
+        "datePublished": "2026-11-06",
+        "dateModified": "2026-11-06",
+        "mainEntityOfPage": canonical,
+        "author": {
+            "@type": "Person",
+            "name": "Abdelkhalek ELBOUDANI",
+            "jobTitle": "Professeur d'Éducation Physique et Sportive & Chercheur en Législation Scolaire",
+            "url": "https://profepsmaroc.com/a-propos.html"
+        },
+        "publisher": {
+            "@type": "EducationalOrganization",
+            "name": "ProfEPS Maroc",
+            "url": "https://profepsmaroc.com/"
+        }
+    }
+
+    json_ld_faq = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faq_schema_items
+    }
+
+    json_ld_breadcrumb = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "الرئيسية ProfEPS Maroc", "item": "https://profepsmaroc.com/"},
+            {"@type": "ListItem", "position": 2, "name": "مدونة التشريع المدرسي والمهني", "item": "https://profepsmaroc.com/blog.html"},
+            {"@type": "ListItem", "position": 3, "name": article["title"], "item": canonical}
+        ]
+    }
+
+    simulator_html = build_interactive_simulator_html(article["default_tab"])
+    case_study_html = CASE_STUDIES_BY_NUM.get(article["num"], "")
+    shared_context_html = build_shared_context_sections(article)
+
+    return f"""<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C74T2663G5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      gtag('js', new Date());
+      gtag('config', 'G-C74T2663G5');
+    </script>
+    <title>{article["meta_title"]}</title>
+    <meta name="description" content="{article["meta_desc"]}">
+    <meta name="keywords" content="{article["keywords"]}">
+    <meta name="author" content="Abdelkhalek ELBOUDANI — ProfEPS Maroc">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <link rel="canonical" href="{canonical}">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{article["meta_title"]}">
+    <meta property="og:description" content="{article["meta_desc"]}">
+    <meta property="og:url" content="{canonical}">
+    <meta property="og:site_name" content="ProfEPS Maroc">
+    <meta property="og:locale" content="ar_MA">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{article["meta_title"]}">
+    <meta name="twitter:description" content="{article["meta_desc"]}">
+    <link rel="icon" type="image/webp" href="/images/prof_eps.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {{
+            font-family: 'Cairo', 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }}
+        .legal-article-content h2 {{
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 2.25rem;
+            margin-bottom: 1rem;
+            padding-right: 0.85rem;
+            border-right: 4px solid #047857;
+            line-height: 1.5;
+        }}
+        .legal-article-content h3 {{
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #064e3b;
+            margin-top: 1.4rem;
+            margin-bottom: 0.65rem;
+        }}
+        .legal-article-content p {{
+            color: #334155;
+            line-height: 1.9;
+            margin-bottom: 1rem;
+            font-size: 1.02rem;
+        }}
+        .legal-article-content ul, .legal-article-content ol {{
+            color: #334155;
+            line-height: 1.85;
+            margin-bottom: 1.25rem;
+            padding-right: 1.5rem;
+        }}
+        .legal-article-content ul {{ list-style-type: disc; }}
+        .legal-article-content ol {{ list-style-type: decimal; }}
+        .legal-article-content li {{ margin-bottom: 0.5rem; }}
+        .legal-article-content .info-box {{
+            background-color: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            border-right: 5px solid #059669;
+            padding: 1.25rem;
+            border-radius: 1rem;
+            margin: 1.5rem 0;
+            color: #064e3b;
+            line-height: 1.85;
+        }}
+        .legal-article-content .warning-box {{
+            background-color: #fffbeb;
+            border: 1px solid #fde68a;
+            border-right: 5px solid #d97706;
+            padding: 1.25rem;
+            border-radius: 1rem;
+            margin: 1.5rem 0;
+            color: #78350f;
+            line-height: 1.85;
+        }}
+        .legal-article-content .step-card {{
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin: 1.25rem 0;
+            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+        }}
+        .legal-article-content .table-container {{
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-radius: 0.85rem;
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+        }}
+        .legal-article-content table {{
+            width: 100%;
+            border-collapse: collapse;
+            text-align: right;
+            font-size: 0.92rem;
+        }}
+        .legal-article-content thead tr {{
+            background-color: #0f172a;
+            color: #ffffff;
+        }}
+        .legal-article-content th, .legal-article-content td {{
+            padding: 0.85rem 1rem;
+            border: 1px solid #e2e8f0;
+        }}
+        .legal-article-content tbody tr:nth-child(even) {{
+            background-color: #f8fafc;
+        }}
+    </style>
+    <script type="application/ld+json">{json.dumps(json_ld_article, ensure_ascii=False)}</script>
+    <script type="application/ld+json">{json.dumps(json_ld_faq, ensure_ascii=False)}</script>
+    <script type="application/ld+json">{json.dumps(json_ld_breadcrumb, ensure_ascii=False)}</script>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+
+    <!-- UNIFIED PROFEPS NAVBAR -->
+    <header id="profeps-unified-navbar" dir="ltr" class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="/index.html" class="flex items-center gap-3 group">
+                <img src="/images/prof_eps.webp" alt="ProfEPS Maroc" class="h-10 w-auto object-contain">
+                <span class="font-extrabold text-lg tracking-tight text-slate-900 group-hover:text-emerald-700 transition">ProfEPS <span class="text-emerald-700">Maroc</span></span>
+            </a>
+            <nav class="hidden md:flex items-center gap-6 text-sm font-bold text-slate-700">
+                <a href="/index.html" class="hover:text-emerald-700 transition">Accueil</a>
+                <a href="/generateur.html" class="hover:text-emerald-700 transition">Générateur EPS</a>
+                <a href="/hub-outils-sport-performance.html" class="hover:text-emerald-700 transition">Calculateurs Sport</a>
+                <a href="/concours-crmef-hub.html" class="hover:text-emerald-700 transition">Préparation CRMEF</a>
+                <a href="/blog.html" class="text-emerald-700 font-extrabold border-b-2 border-emerald-700 pb-1">Blog & Législation</a>
+            </nav>
+            <div class="flex items-center gap-2">
+                <a href="{PDF_URL}" target="_blank" rel="noopener" class="px-3.5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-extrabold transition">
+                    📄 الجريدة الرسمية 7277 (PDF)
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- BREADCRUMB -->
+    <nav aria-label="Breadcrumb" class="bg-white border-b border-slate-200 py-3">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-wrap items-center gap-2 text-xs font-bold text-slate-600">
+            <a href="/index.html" class="hover:text-emerald-700">الرئيسية ProfEPS Maroc</a>
+            <span>←</span>
+            <a href="/blog.html" class="hover:text-emerald-700">موسوعة التشريع المدرسي والنظام الأساسي 2024</a>
+            <span>←</span>
+            <span class="text-emerald-800 font-extrabold">{article["category_label"]}</span>
+        </div>
+    </nav>
+
+    <!-- HERO HEADER -->
+    <header class="bg-gradient-to-b from-slate-900 via-slate-900 to-emerald-950 text-white py-12 md:py-16 border-b border-emerald-800/40">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+                <span class="px-3.5 py-1 rounded-full text-xs font-extrabold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    {article["badge"]}
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700">
+                    الدليل التشريعي المرجعي رقم {article["num"]} من 10
+                </span>
+            </div>
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-black leading-snug text-white mb-5">
+                {article["title"]}
+            </h1>
+            <p class="text-base md:text-lg text-slate-200 leading-relaxed mb-6">
+                {article["lead"]}
+            </p>
+            <div class="flex flex-wrap items-center justify-between gap-4 pt-5 border-t border-slate-800 text-xs text-slate-300">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center font-extrabold text-white">AE</div>
+                    <div>
+                        <div class="font-bold text-white">إعداد ومراجعة قانونية: الأستاذ عبد الخالق البوداني (Abdelkhalek ELBOUDANI)</div>
+                        <div class="text-slate-400">أستاذ التعليم الثانوي وباحث في التشريع المدرسي والتربية البدنية · مرجع رسمي: الجريدة الرسمية عدد 7277</div>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <a href="#statut-2024-calculators" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold transition">
+                        🧮 الانتقال إلى حاسبة الأجرة والترقية
+                    </a>
+                    <a href="{PDF_URL}" target="_blank" rel="noopener" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 font-bold transition">
+                        📥 تحميل المرسوم 2.24.140 PDF
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN ARTICLE CONTENT -->
+    <main class="flex-grow max-w-5xl w-full mx-auto px-4 sm:px-6 py-10">
+
+        <!-- LEGAL REFERENCES SUMMARY BOX -->
+        <section class="mb-10 bg-emerald-50/80 border border-emerald-200 rounded-2xl p-6 shadow-sm">
+            <h2 class="text-lg font-extrabold text-emerald-950 mb-3 flex items-center gap-2">
+                <span>⚖️</span>
+                <span>المحاور والسند القانوني المرجعي في الجريدة الرسمية عدد 7277 (26 فبراير 2024):</span>
+            </h2>
+            <ul class="space-y-2 text-sm text-slate-800 leading-relaxed">
+                {refs_li}
+            </ul>
+        </section>
+
+        <!-- CORE ARTICLE BODY -->
+        <article class="legal-article-content max-w-none">
+            {article["body_html"]}
+            {case_study_html}
+        </article>
+
+        <!-- INTERACTIVE CALCULATORS (SALARY ART. 59 & PROMOTION ART. 49/50) -->
+        {simulator_html}
+
+        <!-- FAQ SECTION -->
+        <section id="sec-faq" class="my-12">
+            <h2 class="text-2xl font-extrabold text-slate-900 mb-5 border-r-4 border-emerald-700 pr-3">
+                أسئلة شائعة وإجابات قانونية موثقة من النظام الأساسي 2024 (المرسوم 2.24.140)
+            </h2>
+            <div class="space-y-4">
+                {"".join(faqs_html_items)}
+            </div>
+        </section>
+
+        <!-- SHARED PDF CARD, ARCHITECTURE & 10-ARTICLE SILO HUB -->
+        {shared_context_html}
+
+    </main>
+
+    <!-- UNIFIED PROFEPS FOOTER -->
+    <footer id="profeps-unified-footer" dir="ltr" class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
+            <div>
+                <div class="font-extrabold text-white text-lg mb-2">ProfEPS <span class="text-emerald-500">Maroc</span></div>
+                <p class="text-xs leading-relaxed text-slate-400">
+                    Plateforme pédagogique et juridique de référence pour les enseignants d'Éducation Physique et Sportive et les cadres de l'Éducation Nationale au Maroc (OP 2007/2009 & BO n° 7277).
+                </p>
+            </div>
+            <div>
+                <div class="font-bold text-white mb-3">Outils & Simulateurs</div>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="/generateur.html" class="hover:text-emerald-400 transition">Générateur de Fiches & Cycles EPS</a></li>
+                    <li><a href="/hub-outils-sport-performance.html" class="hover:text-emerald-400 transition">Calculateurs Sport & VMA</a></li>
+                    <li><a href="/concours-crmef-hub.html" class="hover:text-emerald-400 transition">Préparation Concours CRMEF EPS</a></li>
+                    <li><a href="/blog.html" class="hover:text-emerald-400 transition">Blog & Législation Scolaire</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="font-bold text-white mb-3">النظام الأساسي 2024 (الجريدة الرسمية 7277)</div>
+                <ul class="space-y-2 text-xs" dir="rtl">
+                    <li><a href="/ar-jadwal-taawidat-ziyada-ojour-mada-59-statut-2024.html" class="hover:text-emerald-400 transition">جدول التعويضات والزيادة في الأجور (المادة 59)</a></li>
+                    <li><a href="/ar-daraja-momtaza-kharij-salam-chorout-statut-2024.html" class="hover:text-emerald-400 transition">الدرجة الممتازة خارج السلم (المواد 50 و87)</a></li>
+                    <li><a href="/ar-idmaj-otour-jadida-molhaq-momawin-mostachar-statut-2024.html" class="hover:text-emerald-400 transition">الإدماج في الأطر الجديدة (المواد 73-77)</a></li>
+                    <li><a href="/ar-taqyim-adaa-oqoubat-otla-haraka-intiqaliya-statut-2024.html" class="hover:text-emerald-400 transition">تقييم الأداء والعقوبات والعطلة والحركة</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="font-bold text-white mb-3">Informations Légales & E-E-A-T</div>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="/a-propos.html" class="hover:text-emerald-400 transition">À propos (Abdelkhalek ELBOUDANI)</a></li>
+                    <li><a href="/contact.html" class="hover:text-emerald-400 transition">Contact & Support</a></li>
+                    <li><a href="/mentions-legales.html" class="hover:text-emerald-400 transition">Mentions Légales</a></li>
+                    <li><a href="/politique-confidentialite.html" class="hover:text-emerald-400 transition">Politique de Confidentialité</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-6 border-t border-slate-900 text-center text-xs text-slate-500">
+            © 2026 ProfEPS Maroc — Tous droits réservés. Conforme au Bulletin Officiel n° 7277 (Décrets n° 2.24.140 et n° 2.24.141).
+        </div>
+    </footer>
+
+</body>
+</html>
+"""
+
+
+def count_visible_words(html_str: str) -> int:
+    clean = re.sub(r"<script[\s\S]*?</script>", " ", html_str, flags=re.IGNORECASE)
+    clean = re.sub(r"<style[\s\S]*?</style>", " ", clean, flags=re.IGNORECASE)
+    clean = re.sub(r"<[^>]+>", " ", clean)
+    clean = re.sub(r"\s+", " ", clean).strip()
+    return len(clean.split(" "))
+
+
+def update_blog_html():
+    blog_path = os.path.join(PUBLIC_DIR, "blog.html")
+    with open(blog_path, "r", encoding="utf-8") as f:
+        blog_content = f.read()
+
+    marker_start = "<!-- STATUT_2024_ARABIC_PILLARS_START -->"
+    marker_end = "<!-- STATUT_2024_ARABIC_PILLARS_END -->"
+
+    cards = []
+    for art in ALL_ARTICLES:
+        cat = art["category"]
+        cards.append(f"""                <!-- Article Statut 2024 #{art['num']}: {art['slug']} -->
+                <article class="article-card" data-category="{cat}" dir="rtl">
+                    <div class="article-visual article-{cat}">
+                        <span class="category-badge category-{cat}">{art['badge']}</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#006233" stroke-width="2"/><polyline points="14 2 14 8 20 8" stroke="#006233" stroke-width="2"/><line x1="16" y1="13" x2="8" y2="13" stroke="#991b1b" stroke-width="2"/><line x1="16" y1="17" x2="8" y2="17" stroke="#991b1b" stroke-width="2"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">{art['title']}</h3>
+                        <p class="article-excerpt">{art['meta_desc']}</p>
+                        <div class="article-footer">
+                            <span class="article-date">الجريدة الرسمية 7277 · المرسوم 2.24.140 + حاسبة تفاعلية</span>
+                            <a href="{art['slug']}" class="read-more">قراءة الدليل القانوني الكامل ←</a>
+                        </div>
+                    </div>
+                </article>""")
+
+    block_html = f"{marker_start}\n" + "\n".join(cards) + f"\n                {marker_end}"
+
+    if marker_start in blog_content and marker_end in blog_content:
+        blog_content = re.sub(
+            re.escape(marker_start) + r"[\s\S]*?" + re.escape(marker_end),
+            block_html,
+            blog_content
+        )
+    else:
+        target = '<div class="articles-grid" id="articlesGrid">'
+        assert target in blog_content, "Could not find #articlesGrid in public/blog.html"
+        blog_content = blog_content.replace(target, target + "\n" + block_html, 1)
+
+    all_cards = re.findall(r'<article\s+class="article-card"\s+data-category="([^"]+)"', blog_content)
+    total_count = len(all_cards)
+    cat_counts = {}
+    for c in all_cards:
+        cat_counts[c] = cat_counts.get(c, 0) + 1
+
+    blog_content = re.sub(r'(<span class="theme-count" id="count-all">)\d+(</span>)', rf'\g<1>{total_count}\2', blog_content)
+    for cat_key, cnt in cat_counts.items():
+        blog_content = re.sub(rf'(<span class="theme-count" id="count-{cat_key}">)\d+(</span>)', rf'\g<1>{cnt}\2', blog_content)
+    blog_content = re.sub(r'(<span class="articles-count" id="articlesCount">)\d+\s+articles(</span>)', rf'\g<1>{total_count} articles\2', blog_content)
+
+    with open(blog_path, "w", encoding="utf-8") as f:
+        f.write(blog_content)
+    print(f"[OK] Updated public/blog.html -> Total articles: {total_count} (by category: {cat_counts})")
+
+
+def update_sitemap_xml():
+    sitemap_path = os.path.join(PUBLIC_DIR, "sitemap.xml")
+    with open(sitemap_path, "r", encoding="utf-8") as f:
+        sm = f.read()
+
+    added = 0
+    for art in ALL_ARTICLES:
+        loc = f"https://profepsmaroc.com/{art['slug']}"
+        if loc not in sm:
+            entry = f"""  <url>
+    <loc>{loc}</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.92</priority>
+  </url>\n"""
+            sm = sm.replace("</urlset>", entry + "</urlset>")
+            added += 1
+
+    with open(sitemap_path, "w", encoding="utf-8") as f:
+        f.write(sm)
+    print(f"[OK] Updated public/sitemap.xml -> Added {added} new URLs")
+
+
+def main():
+    print("=== Generating 10 Arabic Pillar Articles on Statut 2024 (BO n° 7277) ===")
+    for art in ALL_ARTICLES:
+        html_out = render_full_article_html(art)
+        out_path = os.path.join(PUBLIC_DIR, art["slug"])
+        with open(out_path, "w", encoding="utf-8") as f:
+            f.write(html_out)
+        wc = count_visible_words(html_out)
+        assert wc >= 1000, f"Article {art['slug']} has {wc} words (< 1000 minimum)!"
+        print(f"  [GENERATED] {art['slug']} -> {wc} visible Arabic words (PASS >= 1,000)")
+
+    update_blog_html()
+    update_sitemap_xml()
+    print("=== All 10 articles generated, verified, and indexed in blog.html & sitemap.xml ===")
+
+
+if __name__ == "__main__":
+    main()
