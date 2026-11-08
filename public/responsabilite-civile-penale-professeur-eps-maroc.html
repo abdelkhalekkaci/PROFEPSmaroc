@@ -347,8 +347,13 @@
     }
   });
 
-  window.profepsSetLang = function(lang) {
-    try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
+  var nativeLang = ((document.documentElement.getAttribute('lang') || 'fr').toLowerCase().slice(0, 2));
+  var nativeDir = document.documentElement.getAttribute('dir') || (nativeLang === 'ar' ? 'rtl' : 'ltr');
+
+  window.profepsSetLang = function(lang, isAutoInit) {
+    if (!isAutoInit) {
+      try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
+    }
     ['fr', 'en', 'ar'].forEach(function(code) {
       var btn = document.getElementById('peps-btn-lang-' + code);
       if (btn) btn.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
@@ -363,17 +368,35 @@
     if (typeof window.setToolLang === 'function') window.setToolLang(lang);
     if (typeof window.changeLang === 'function') window.changeLang(lang);
     if (typeof window.setLanguage === 'function') window.setLanguage(lang);
-    document.documentElement.lang = lang;
-    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    var hasBodyI18n = (
+      typeof window.setToolLang === 'function' ||
+      typeof window.changeLang === 'function' ||
+      typeof window.setLanguage === 'function' ||
+      document.querySelector('main [data-i18n-ar], .hero [data-i18n-ar], .vma-hero [data-i18n-ar]') !== null
+    );
+    if (hasBodyI18n) {
+      document.documentElement.lang = lang;
+      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    } else {
+      document.documentElement.lang = nativeLang;
+      document.documentElement.dir = nativeDir;
+    }
   };
 
-  var saved = 'fr';
-  try { saved = localStorage.getItem('profeps_lang') || 'fr'; } catch(e) {}
-  if (saved && saved !== 'fr') {
+  var saved = nativeLang === 'ar' ? 'ar' : 'fr';
+  try {
+    var storedLang = localStorage.getItem('profeps_lang');
+    if (nativeLang === 'ar') {
+      saved = 'ar';
+    } else if (storedLang) {
+      saved = storedLang;
+    }
+  } catch(e) {}
+  if (saved && (saved !== 'fr' || nativeLang === 'ar')) {
     if (document.readyState === 'loading') {
-      window.addEventListener('DOMContentLoaded', function() { window.profepsSetLang(saved); });
+      window.addEventListener('DOMContentLoaded', function() { window.profepsSetLang(saved, true); });
     } else {
-      window.profepsSetLang(saved);
+      window.profepsSetLang(saved, true);
     }
   }
 })();

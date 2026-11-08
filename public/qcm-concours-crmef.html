@@ -68,6 +68,7 @@
     gtag("js", new Date());
     gtag("config", "G-TH0Z1SGNXH");
   </script>
+    <link rel="stylesheet" href="/css/profeps-unifier.min.css?v=20261101">
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
 <!-- PROFEPS_UNIFIED_NAVBAR_START -->
@@ -250,30 +251,57 @@
   });
 
   // Sélecteur de langue universel
-  window.profepsSetLang = function(lang) {
-    try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
+  var nativeLang = ((document.documentElement.getAttribute('lang') || 'fr').toLowerCase().slice(0, 2));
+  var nativeDir = document.documentElement.getAttribute('dir') || (nativeLang === 'ar' ? 'rtl' : 'ltr');
+
+  window.profepsSetLang = function(lang, isAutoInit) {
+    if (!isAutoInit) {
+      try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
+    }
     ['fr', 'en', 'ar'].forEach(function(code) {
       var btn = document.getElementById('peps-btn-lang-' + code);
       if (btn) btn.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
+      document.querySelectorAll('.peps-lang-btn[data-lang="' + code + '"]').forEach(function(b) {
+        b.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
+      });
     });
     document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function(el) {
       var val = el.getAttribute('data-i18n-' + lang);
       if (val) el.textContent = val;
     });
-    document.documentElement.lang = lang;
-    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    if (typeof window.setToolLang === 'function') window.setToolLang(lang);
+    if (typeof window.changeLang === 'function') window.changeLang(lang);
+    if (typeof window.setLanguage === 'function') window.setLanguage(lang);
+    var hasBodyI18n = (
+      typeof window.setToolLang === 'function' ||
+      typeof window.changeLang === 'function' ||
+      typeof window.setLanguage === 'function' ||
+      document.querySelector('main [data-i18n-ar], .hero [data-i18n-ar], .vma-hero [data-i18n-ar]') !== null
+    );
+    if (hasBodyI18n) {
+      document.documentElement.lang = lang;
+      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    } else {
+      document.documentElement.lang = nativeLang;
+      document.documentElement.dir = nativeDir;
+    }
   };
 
-  var saved = 'fr';
-  try { saved = localStorage.getItem('profeps_lang') || 'fr'; } catch(e) {}
-  if (saved && saved !== 'fr') {
-    window.profepsSetLang(saved);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initPepsDropdown);
-  } else {
-    initPepsDropdown();
+  var saved = nativeLang === 'ar' ? 'ar' : 'fr';
+  try {
+    var storedLang = localStorage.getItem('profeps_lang');
+    if (nativeLang === 'ar') {
+      saved = 'ar';
+    } else if (storedLang) {
+      saved = storedLang;
+    }
+  } catch(e) {}
+  if (saved && (saved !== 'fr' || nativeLang === 'ar')) {
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', function() { window.profepsSetLang(saved, true); });
+    } else {
+      window.profepsSetLang(saved, true);
+    }
   }
 })();
 </script>
@@ -291,7 +319,7 @@
       </div>
       <div class="peps-crmef-header-actions">
         
-        <a href="qcm-sciences-education-crmef.html" class="peps-crmef-pair-btn">📘 Sciences de l'Éducation →</a>
+        <a id="tronc-commun" href="qcm-sciences-education-crmef.html" class="peps-crmef-pair-btn">📘 Sciences de l'Éducation →</a>
         <a href="concours-crmef-hub.html" class="peps-crmef-hub-btn">← Toutes les disciplines</a>
       </div>
     </div>
@@ -1826,10 +1854,10 @@
   <aside class="peps-related-mesh" style="max-width:1024px;margin:2rem auto;padding:1.25rem 1.5rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;">
     <h2 style="font-size:0.95rem;font-weight:800;color:#0f172a;margin:0 0 0.85rem 0;">🔗 Accès Rapide</h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.65rem;">
-        <a href="qcm-didactique-economie-gestion-maroc.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 QCM Didactique de l'Économie & Gestion CRMEF Maroc →</a>
-        <a href="qcm-didactique-francais-maroc.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 QCM Didactique du Français CRMEF Maroc · APC, Lecture →</a>
-        <a href="qcm-didactique-maths-maroc.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 QCM Didactique des Mathématiques CRMEF Maroc · 100 Séries →</a>
-        <a href="qcm-didactique-primaire-maroc.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 QCM Didactique Primaire CRMEF Maroc · Arabe, Français →</a>
+        <a id="card-eco" href="qcm-didactique-economie-gestion-maroc.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 QCM Didactique de l'Économie & Gestion CRMEF Maroc →</a>
+        <a id="card-fr" id="card-francais" href="qcm-didactique-francais-maroc.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 QCM Didactique du Français CRMEF Maroc · APC, Lecture →</a>
+        <a id="card-maths" href="qcm-didactique-maths-maroc.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 QCM Didactique des Mathématiques CRMEF Maroc · 100 Séries →</a>
+        <a id="card-primaire" href="qcm-didactique-primaire-maroc.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 QCM Didactique Primaire CRMEF Maroc · Arabe, Français →</a>
     </div>
   </aside>
   <!-- PROFEPS_RELATED_MESH_END -->
@@ -1873,18 +1901,18 @@
           <ul class="footer-crmef-grid">
             <li class="footer-crmef-hub-item"><a href="concours-crmef-hub.html" class="footer-hub-highlight" data-i18n-fr="★ Hub Concours CRMEF (Toutes Filières)" data-i18n-en="★ CRMEF Exam Hub (All Specialties)" data-i18n-ar="★ بوابة مباراة التعليم (جميع التخصصات)">★ Hub Concours CRMEF (Toutes Filières)</a></li>
             <li><a href="qcm-sciences-education-crmef.html" data-i18n-fr="Tronc Commun (SE)" data-i18n-en="Education Sciences" data-i18n-ar="علوم التربية">Tronc Commun (SE)</a></li>
-            <li><a href="qcm-didactique-eps-maroc.html" data-i18n-fr="EPS (Sport)" data-i18n-en="PE &amp; Sport" data-i18n-ar="التربية البدنية">EPS (Sport)</a></li>
+            <li><a id="card-eps" href="qcm-didactique-eps-maroc.html" data-i18n-fr="EPS (Sport)" data-i18n-en="PE &amp; Sport" data-i18n-ar="التربية البدنية">EPS (Sport)</a></li>
             <li><a href="qcm-didactique-primaire-maroc.html" data-i18n-fr="Primaire (TaRL)" data-i18n-en="Primary (TaRL)" data-i18n-ar="التعليم الابتدائي">Primaire (TaRL)</a></li>
             <li><a href="qcm-didactique-maths-maroc.html" data-i18n-fr="Mathématiques" data-i18n-en="Mathematics" data-i18n-ar="الرياضيات">Mathématiques</a></li>
-            <li><a href="qcm-didactique-physique-chimie-maroc.html" data-i18n-fr="Physique-Chimie" data-i18n-en="Physics &amp; Chemistry" data-i18n-ar="الفيزياء والكيمياء">Physique-Chimie</a></li>
-            <li><a href="qcm-didactique-svt-maroc.html" data-i18n-fr="SVT" data-i18n-en="Life &amp; Earth Sciences" data-i18n-ar="علوم الحياة والأرض">SVT</a></li>
+            <li><a id="card-pc" href="qcm-didactique-physique-chimie-maroc.html" data-i18n-fr="Physique-Chimie" data-i18n-en="Physics &amp; Chemistry" data-i18n-ar="الفيزياء والكيمياء">Physique-Chimie</a></li>
+            <li><a id="card-svt" href="qcm-didactique-svt-maroc.html" data-i18n-fr="SVT" data-i18n-en="Life &amp; Earth Sciences" data-i18n-ar="علوم الحياة والأرض">SVT</a></li>
             <li><a href="qcm-didactique-francais-maroc.html" data-i18n-fr="Français" data-i18n-en="French" data-i18n-ar="اللغة الفرنسية">Français</a></li>
-            <li><a href="qcm-didactique-arabe-maroc.html" data-i18n-fr="Arabe" data-i18n-en="Arabic" data-i18n-ar="اللغة العربية">Arabe</a></li>
-            <li><a href="qcm-didactique-histoire-geographie-maroc.html" data-i18n-fr="Histoire-Géo" data-i18n-en="History &amp; Geography" data-i18n-ar="التاريخ والجغرافيا">Histoire-Géo</a></li>
-            <li><a href="qcm-didactique-philosophie-maroc.html" data-i18n-fr="Philosophie" data-i18n-en="Philosophy" data-i18n-ar="الفلسفة">Philosophie</a></li>
-            <li><a href="qcm-didactique-informatique-maroc.html" data-i18n-fr="Informatique" data-i18n-en="Computer Science" data-i18n-ar="الإعلاميات">Informatique</a></li>
-            <li><a href="qcm-didactique-anglais-maroc.html" data-i18n-fr="Anglais" data-i18n-en="English" data-i18n-ar="اللغة الإنجليزية">Anglais</a></li>
-            <li><a href="qcm-didactique-education-islamique-maroc.html" data-i18n-fr="Éduc. Islamique" data-i18n-en="Islamic Education" data-i18n-ar="التربية الإسلامية">Éduc. Islamique</a></li>
+            <li><a id="card-ar" id="card-arabe" href="qcm-didactique-arabe-maroc.html" data-i18n-fr="Arabe" data-i18n-en="Arabic" data-i18n-ar="اللغة العربية">Arabe</a></li>
+            <li><a id="card-hg" href="qcm-didactique-histoire-geographie-maroc.html" data-i18n-fr="Histoire-Géo" data-i18n-en="History &amp; Geography" data-i18n-ar="التاريخ والجغرافيا">Histoire-Géo</a></li>
+            <li><a id="card-philo" href="qcm-didactique-philosophie-maroc.html" data-i18n-fr="Philosophie" data-i18n-en="Philosophy" data-i18n-ar="الفلسفة">Philosophie</a></li>
+            <li><a id="card-info" href="qcm-didactique-informatique-maroc.html" data-i18n-fr="Informatique" data-i18n-en="Computer Science" data-i18n-ar="الإعلاميات">Informatique</a></li>
+            <li><a id="card-en" id="card-anglais" href="qcm-didactique-anglais-maroc.html" data-i18n-fr="Anglais" data-i18n-en="English" data-i18n-ar="اللغة الإنجليزية">Anglais</a></li>
+            <li><a id="card-ei" id="card-islam" href="qcm-didactique-education-islamique-maroc.html" data-i18n-fr="Éduc. Islamique" data-i18n-en="Islamic Education" data-i18n-ar="التربية الإسلامية">Éduc. Islamique</a></li>
             <li><a href="qcm-didactique-economie-gestion-maroc.html" data-i18n-fr="Éco-Gestion" data-i18n-en="Economics &amp; Mgmt" data-i18n-ar="الاقتصاد والتدبير">Éco-Gestion</a></li>
           </ul>
         </div>

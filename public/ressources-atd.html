@@ -512,8 +512,13 @@
     }
   });
 
-  window.profepsSetLang = function(lang) {
-    try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
+  var nativeLang = ((document.documentElement.getAttribute('lang') || 'fr').toLowerCase().slice(0, 2));
+  var nativeDir = document.documentElement.getAttribute('dir') || (nativeLang === 'ar' ? 'rtl' : 'ltr');
+
+  window.profepsSetLang = function(lang, isAutoInit) {
+    if (!isAutoInit) {
+      try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
+    }
     ['fr', 'en', 'ar'].forEach(function(code) {
       var btn = document.getElementById('peps-btn-lang-' + code);
       if (btn) btn.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
@@ -528,17 +533,35 @@
     if (typeof window.setToolLang === 'function') window.setToolLang(lang);
     if (typeof window.changeLang === 'function') window.changeLang(lang);
     if (typeof window.setLanguage === 'function') window.setLanguage(lang);
-    document.documentElement.lang = lang;
-    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    var hasBodyI18n = (
+      typeof window.setToolLang === 'function' ||
+      typeof window.changeLang === 'function' ||
+      typeof window.setLanguage === 'function' ||
+      document.querySelector('main [data-i18n-ar], .hero [data-i18n-ar], .vma-hero [data-i18n-ar]') !== null
+    );
+    if (hasBodyI18n) {
+      document.documentElement.lang = lang;
+      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    } else {
+      document.documentElement.lang = nativeLang;
+      document.documentElement.dir = nativeDir;
+    }
   };
 
-  var saved = 'fr';
-  try { saved = localStorage.getItem('profeps_lang') || 'fr'; } catch(e) {}
-  if (saved && saved !== 'fr') {
+  var saved = nativeLang === 'ar' ? 'ar' : 'fr';
+  try {
+    var storedLang = localStorage.getItem('profeps_lang');
+    if (nativeLang === 'ar') {
+      saved = 'ar';
+    } else if (storedLang) {
+      saved = storedLang;
+    }
+  } catch(e) {}
+  if (saved && (saved !== 'fr' || nativeLang === 'ar')) {
     if (document.readyState === 'loading') {
-      window.addEventListener('DOMContentLoaded', function() { window.profepsSetLang(saved); });
+      window.addEventListener('DOMContentLoaded', function() { window.profepsSetLang(saved, true); });
     } else {
-      window.profepsSetLang(saved);
+      window.profepsSetLang(saved, true);
     }
   }
 })();
@@ -735,7 +758,7 @@
               <td style="padding:0.6rem;border:1px solid #cbd5e1;font-weight:700;">Niveau 3 &amp; 4 (1BAC / 2BAC)</td>
               <td style="padding:0.6rem;border:1px solid #cbd5e1;">Enchaîne réception-lecture-action (triple menace), alterne contre-attaque et attaque placée.</td>
               <td style="padding:0.6rem;border:1px solid #cbd5e1;">Passe et va, écrans, occupation des 3 couloirs ; défense individuelle ou zone organisée + rebond.</td>
-              <td style="padding:0.6rem;border:1px solid #cbd5e1;">Transition rapide défense/attaque et choix tactique collectif (Cycle <a href="cycle-basketball-lycee-eps-maroc.html" style="color:#991b1b;font-weight:700;">Basket Lycée</a>).</td>
+              <td style="padding:0.6rem;border:1px solid #cbd5e1;">Transition rapide défense/attaque et choix tactique collectif (Cycle <a href="cycle-basketball-college-eps-maroc.html" style="color:#991b1b;font-weight:700;">Basket Lycée</a>).</td>
             </tr>
           </tbody>
         </table>
@@ -778,7 +801,7 @@
               <td style="padding:0.6rem;border:1px solid #cbd5e1;font-weight:700;">Niveau 3 &amp; 4 (1BAC / 2BAC)</td>
               <td style="padding:0.6rem;border:1px solid #cbd5e1;">Attaque placée en circulation de balle (fixation-passe dans l'intervalle, jeu avec pivot/ailiers).</td>
               <td style="padding:0.6rem;border:1px solid #cbd5e1;">Défense étagée (0-6 ou 1-5) avec entraide, interception et relance immédiate.</td>
-              <td style="padding:0.6rem;border:1px solid #cbd5e1;">Attaque d'une défense placée et continuité attaque/défense (<a href="cycle-handball-lycee-eps-maroc.html" style="color:#006233;font-weight:700;">Cycle Hand Lycée</a>).</td>
+              <td style="padding:0.6rem;border:1px solid #cbd5e1;">Attaque d'une défense placée et continuité attaque/défense (<a href="cycle-handball-college-eps-maroc.html" style="color:#006233;font-weight:700;">Cycle Hand Lycée</a>).</td>
             </tr>
           </tbody>
         </table>
@@ -791,7 +814,7 @@
       <p style="margin:0 0 0.75rem 0;font-size:0.9rem;color:#334155;"><strong>Définition &amp; Logique interne :</strong> Sport collectif d'espace séparé par un filet haut, où la cible est le sol adverse (9×9 m). La règle fondamentale interdit de bloquer ou de tenir le ballon (frappe explosive obligatoire en quelques centièmes de seconde) avec un maximum de 3 touches par équipe.</p>
       <ul style="margin:0 0 0.85rem 1.25rem;font-size:0.88rem;color:#334155;display:grid;gap:0.35rem;">
         <li><strong>Problèmes fondamentaux :</strong> Se déplacer avant de frapper (lire la trajectoire et se placer sous le ballon à l'arrêt) ; dissocier le rôle de réceptionneur (orienter la balle haute vers l'avant du terrain) et celui de passeur/attaquant ; défendre son propre sol tout en visant les zones libres adverses.</li>
-        <li><strong>Progression des 4 Niveaux :</strong> N1 (renvoi direct aléatoire en 1 touche, peur de la balle) → N2 (conservation à 2 touches : réception orientée + renvoi placé au fond) → N3 &amp; N4 (construction en 3 touches : Réception en manchette vers zone 3 → Passe haute en touche → Attaque placée ou smashée). Voir <a href="cycle-volleyball-college-eps-maroc.html" style="color:#991b1b;font-weight:700;">Cycle Volley Collège</a> &amp; <a href="cycle-volleyball-lycee-eps-maroc.html" style="color:#991b1b;font-weight:700;">Cycle Volley Lycée</a>.</li>
+        <li><strong>Progression des 4 Niveaux :</strong> N1 (renvoi direct aléatoire en 1 touche, peur de la balle) → N2 (conservation à 2 touches : réception orientée + renvoi placé au fond) → N3 &amp; N4 (construction en 3 touches : Réception en manchette vers zone 3 → Passe haute en touche → Attaque placée ou smashée). Voir <a href="cycle-volleyball-college-eps-maroc.html" style="color:#991b1b;font-weight:700;">Cycle Volley Collège</a> &amp; <a href="cycle-volleyball-college-eps-maroc.html" style="color:#991b1b;font-weight:700;">Cycle Volley Lycée</a>.</li>
       </ul>
     </div>
 

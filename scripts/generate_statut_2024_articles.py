@@ -43,53 +43,53 @@ UNIFIED_FOOTER_AND_CMP = _footer_match.group(1)
 CASE_STUDIES_BY_NUM = {
     "01": """
         <div class="step-card" id="sec-cases-01">
-            <h2>مذكرة تطبيقية إضافية: قواعد صرف التعويضات الشهرية والتعويض التكميلي (المواد 59 و60 و89)</h2>
-            <p>
+            <h3 style="margin-top:0;color:#991b1b;">مذكرة تطبيقية إضافية: قواعد صرف التعويضات الشهرية والتعويض التكميلي (المواد 59 و60 و89)</h3>
+            <p style="margin-bottom:0;">
                 أكدت <strong>المادة 59</strong> من المرسوم رقم 2.24.140 أن التعويضات النظامية الثلاثة (التعويض عن التعليم لأطر التدريس أو التعويض عن التدرج الإداري لباقي الأطر، التعويض عن الأعباء، والتعويض عن التأطير) تؤدى عند نهاية كل شهر، بينما نصت <strong>المادة 60</strong> على أنه علاوة على تعويضات المادة 59، يتقاضى الموظفون، حسب الفئات المعنية، تعويضات تحدد أصنافها ومقاديرها بمرسوم (كالتعويضات العائلية، والتعويض عن الساعات الإضافية، والتعويضات التكميلية وعن الأعباء الإدارية المنصوص عليها في المرسوم رقم 2.24.141)، مع ضمانة <strong>المادة 89</strong> التي تخول تعويضاً تكميلياً لكل موظف ترتب عن إدماجه أو تغيير إطاره نقص في أجرته السابقة.
             </p>
         </div>
     """,
     "02": """
         <div class="step-card" id="sec-cases-02">
-            <h2>خلاصة مسطرية: الوثائق الإدارية اللازمة للتقييد في جدول الترقي إلى الدرجة الممتازة (المادتان 50 و87)</h2>
-            <p>
+            <h3 style="margin-top:0;color:#991b1b;">خلاصة مسطرية: الوثائق الإدارية اللازمة للتقييد في جدول الترقي إلى الدرجة الممتازة (المادتان 50 و87)</h3>
+            <p style="margin-bottom:0;">
                 يتعين على كل موظف استوفى شرط الرتبة السابعة (7 — الرقم الاستدلالي 542) وخمس (5) سنوات من الخدمة الفعلية في الدرجة الأولى التأكد من تحيين وضعيته الإدارية في منظومة التدبير المندمج لموظفي التربية الوطنية (مسير / التبليغ)، ومراجعة نقطة التقييم المهني الممنوحة له طبقاً للمادتين 53 و54 قبل انعقاد اللجان الإدارية المتساوية الأعضاء المختصة بالبث في جداول الترقي بالاختيار في حدود حصيص 36% سنوياً أو في إطار التسقيف بدون حصيص في التقييد الرابع.
             </p>
         </div>
     """,
     "03": """
         <div class="step-card" id="sec-cases-03">
-            <h2>تطبيقات خاصة بمادة التربية البدنية والرياضية والجمعية الرياضية المدرسية ASS (المادتان 15 و67)</h2>
-            <p>
+            <h3 style="margin-top:0;color:#991b1b;">تطبيقات خاصة بمادة التربية البدنية والرياضية والجمعية الرياضية المدرسية ASS (المادتان 15 و67)</h3>
+            <p style="margin-bottom:0;">
                 بالنسبة لأساتذة مادة التربية البدنية والرياضية بالتعليم الثانوي الإعدادي والتأهيلي والأساتذة المبرزين للتربية والتكوين، تشكل <strong>المادة 15</strong> و<strong>المادة 67</strong> السند التشريعي المباشر لمهام التربية والتدريس والتقييم والمشاركة في تنظيم الامتحانات المدرسية (بما فيها اختبارات البكالوريا الرياضية Bac Sport)، وكذا تأطير أنشطة الجمعية الرياضية المدرسية (ASS) والبطولات المدرسية المنظمة تحت إشراف مديرية الارتقاء بالرياضة المدرسية والجامعة الملكية المغربية للرياضة المدرسية (FRMSS).
             </p>
         </div>
     """,
     "04": """
         <div class="step-card" id="sec-cases-04">
-            <h2>ضمانات الاحتفاظ بالأقدمية والوضعية المالية بعد الإدماج في الأطر الجديدة (المواد 73 إلى 79 و89)</h2>
-            <p>
+            <h3 style="margin-top:0;color:#991b1b;">ضمانات الاحتفاظ بالأقدمية والوضعية المالية بعد الإدماج في الأطر الجديدة (المواد 73 إلى 79 و89)</h3>
+            <p style="margin-bottom:0;">
                 تنص المواد الانتقالية من 73 إلى 79 والمادة 89 من المرسوم رقم 2.24.140 على أن جميع الموظفين المدمجين (تلقائياً أو بناءً على طلب داخل الآجال القانونية) يحتفظون بنفس الدرجة والرتبة والأقدمية المكتسبة في إطارهم الأصلي، وتُحتسب هذه الأقدمية كاملة لأغراض الترقية في الرتبة والدرجة والحركة الانتقالية، مع منح تعويض تكميلي (المادة 89) في حال ترتب عن أي تغيير في الإطار نقص في الأجرة السابقة.
             </p>
         </div>
     """,
     "05": """
         <div class="step-card" id="sec-cases-05">
-            <h2>البديل القانوني للدروس الخصوصية: الساعات الإضافية المؤدى عنها داخل المؤسسات العمومية (المادة 6 والمرسوم 2.24.141)</h2>
-            <p>
+            <h3 style="margin-top:0;color:#991b1b;">البديل القانوني للدروس الخصوصية: الساعات الإضافية المؤدى عنها داخل المؤسسات العمومية (المادة 6 والمرسوم 2.24.141)</h3>
+            <p style="margin-bottom:0;">
                 في مقابل منع الدروس الخصوصية بمقابل لمتعلمي المؤسسة العمومية التي يزاول بها الأستاذ مهامه صوناً لتكافؤ الفرص والإنصاف (المادة 6 والمادة 7)، كرس المرسوم رقم 2.24.141 العمل بالمرسوم رقم 2.05.1012 المتعلق بالتعويضات عن الساعات الإضافية داخل مؤسسات التربية والتعليم العمومي بتعريفة 159 درهماً للساعة في الابتدائي والإعدادي، و218 درهماً للساعة في الثانوي التأهيلي، و300 درهم في الأقسام التحضيرية ومراكز التكوين.
             </p>
         </div>
     """,
     "06": """
-        <div class="step-card" id="sec-cases-06">
-            <h2>7. المسطرة العملية للتظلم الإداري ومحو العقوبات التأديبية بشهادات التقدير أو بمرور الأجل (المواد 54 و62 و64 و65)</h2>
+        <h2 id="sec-cases-06">7. المسطرة العملية للتظلم الإداري ومحو العقوبات التأديبية بشهادات التقدير أو بمرور الأجل (المواد 54 و62 و64 و65)</h2>
+        <div class="step-card">
             <p>
                 لتمكين الأساتذة والأطر التربوية والإدارية من ممارسة حقوقهم الإدارية المكفولة في المواد 54 و62 و64 و65 من المرسوم رقم 2.24.140 بطريقة سليمة قانوناً، نوضح الخطوات المسطرية الدقيقة لكلتا الآليتين:
             </p>
             <div class="sim-grid-2">
                 <div class="info-box" style="margin:0;">
-                    <h3>أولاً: مسطرة التظلم الإداري بخصوص نقطة التقييم المهني (المادتان 53 و54)</h3>
+                    <h3 style="margin-top:0;">أولاً: مسطرة التظلم الإداري بخصوص نقطة التقييم المهني (المادتان 53 و54)</h3>
                     <ol>
                         <li><strong>الاطلاع على بطاقة التنقيط السنوية (0 إلى 20):</strong> يطلع الموظف على النقطة العددية الممنوحة له وفق شبكة التنقيط المؤشر عليها من الوظيفة العمومية، ويمكن لأطر التدريس إرفاق استمارة التقييم الذاتي الاختيارية (المادة 53).</li>
                         <li><strong>تحرير تظلم معلل:</strong> في حال عدم اقتناع الموظف بالنقطة الممنوحة له، يوجه تظلماً كتابياً معللاً عبر السلم الإداري إلى مدير الأكاديمية الجهوية للتربية والتكوين مرفقاً بالوثائق المثبتة لتنفيذ المهام وجودة الممارسات المهنية والانخراط في مشروع المؤسسة المندمج.</li>
@@ -97,7 +97,7 @@ CASE_STUDIES_BY_NUM = {
                     </ol>
                 </div>
                 <div class="success-box" style="margin:0;">
-                    <h3 style="color:#006233;">ثانياً: مسطرة محو أو سحب العقوبة التأديبية (المادتان 64 و65)</h3>
+                    <h3 style="margin-top:0;color:#006233;">ثانياً: مسطرة محو أو سحب العقوبة التأديبية (المادتان 64 و65)</h3>
                     <ol>
                         <li><strong>المسار التحفيزي السريع (المادة 65):</strong> الحصول على شهادة «التشجيع» يترتب عنه محو عقوبة الإنذار، وشهادة «التنويه» تمحو عقوبة التوبيخ، وشهادة «ميزة الشرف» تمحو وتسحب آثار باقي العقوبات التأديبية المقيدة في الملف (باستثناء عقوبات الخروج من أسلاك الإدارة)، بعد استطلاع رأي اللجنة الإدارية المتساوية الأعضاء المختصة.</li>
                         <li><strong>مسار رد الاعتبار الإداري بمرور الأجل (المادة 64 / الفصل 75 مكرر):</strong> مرور <strong>5 سنوات</strong> على عقوبة الإنذار أو التوبيخ، أو <strong>10 سنوات</strong> على باقي العقوبات دون صدور عقوبة جديدة، وتقديم طلب خطي لمدير الأكاديمية الجهوية يعرض على اللجنة الإدارية المتساوية الأعضاء لسحب العقوبة نهائياً من الملف.</li>
@@ -107,12 +107,12 @@ CASE_STUDIES_BY_NUM = {
         </div>
     """,
     "07": """
-        <div class="step-card" id="sec-cases-07">
-            <h2>6. جدول تطبيقي شامل لإعادة الترتيب عند الترقية بين الدرجات (المادتان 52 و66)</h2>
+        <h2 id="sec-cases-07">6. جدول تطبيقي شامل لإعادة الترتيب عند الترقية بين الدرجات (المادتان 52 و66)</h2>
+        <div class="step-card">
             <p>
                 يوضح الجدول التطبيقي التالي كيفية انتقال الأستاذ أو الموظف من رتبته في <strong>الدرجة الثانية (السلم 10)</strong> إلى رتبته الجديدة في <strong>الدرجة الأولى (السلم 11)</strong>، ومن <strong>الدرجة الأولى</strong> إلى <strong>الدرجة الممتازة (خارج السلم)</strong> تطبيقاً للقاعدة الرسمية في <strong>المادة 52</strong> و<strong>المادة 66</strong> من المرسوم رقم 2.24.140:
             </p>
-            <div class="table-container">
+            <div class="table-container" style="margin-bottom:0;">
                 <table>
                     <thead>
                         <tr>
@@ -172,14 +172,14 @@ CASE_STUDIES_BY_NUM = {
         </div>
     """,
     "08": """
-        <div class="step-card" id="sec-cases-08">
-            <h2>5. الدليل العملي لملف ترسيم الأستاذ المتمرن وملف المباراة المهنية لحاملي الماستر (المواد 45 و47 و48)</h2>
+        <h2 id="sec-cases-08">5. الدليل العملي لملف ترسيم الأستاذ المتمرن وملف المباراة المهنية لحاملي الماستر (المواد 45 و47 و48)</h2>
+        <div class="step-card">
             <p>
                 يمر الأستاذ الجديد بعد تخرجه من المركز الجهوي لمهن التربية والتكوين (CRMEF) بمرحلة التمرين (Stage) في الرتبة الأولى لمدة سنة كاملة طبقاً للمادتين 47 و48 من المرسوم رقم 2.24.140. ولنجاح هذه المرحلة أو للمشاركة في المباراة المهنية لحاملي الماستر (المادة 45)، يتعين استحضار الضوابط التنظيمية التالية:
             </p>
             <div class="sim-grid-2">
                 <div class="info-box" style="margin:0;">
-                    <h3>ملف ترسيم الأستاذ المتمرن (المادتان 47 و48)</h3>
+                    <h3 style="margin-top:0;">ملف ترسيم الأستاذ المتمرن (المادتان 47 و48)</h3>
                     <ul>
                         <li>إعداد ملف الترسيم التربوي والإداري (دفتر النصوص، الجذاذات البيداغوجية، تخطيط الحلقات الدراسية، سجل التنقيط والمواظبة، وتقرير الأنشطة المندمجة أو الجمعية الرياضية المدرسية ASS بالنسبة لأستاذ التربية البدنية).</li>
                         <li>المثول أمام اللجنة المختصة بالترسيم (أو مفتش ما بعد البكالوريا بالنسبة للمبرزين) طبقاً للقرار الوزاري المتخذ تطبيقاً للمادة 48.</li>
@@ -187,7 +187,7 @@ CASE_STUDIES_BY_NUM = {
                     </ul>
                 </div>
                 <div class="success-box" style="margin:0;">
-                    <h3 style="color:#006233;">ملف المباراة المهنية لحاملي الماستر (المادة 45)</h3>
+                    <h3 style="margin-top:0;color:#006233;">ملف المباراة المهنية لحاملي الماستر (المادة 45)</h3>
                     <ul>
                         <li>أن يكون المترشح <strong>موظفاً مرسماً</strong> خاضعاً للمرسوم رقم 2.24.140 في تاريخ الإعلان عن المباراة السنوية.</li>
                         <li>الإدلاء بشهادة الماستر أو الماستر المتخصص أو دبلوم الدراسات العليا أو دبلوم مهندس الدولة أو ما يعادل إحداها في التخصصات المفتوحة بقرار وزاري.</li>
@@ -198,54 +198,54 @@ CASE_STUDIES_BY_NUM = {
         </div>
     """,
     "09": """
-        <div class="step-card" id="sec-cases-09">
-            <h2>5. تطبيقات عملية لحساب عائد الساعات الإضافية والحصة الأسبوعية لأستاذ التربية البدنية (المادتان 68 و69 والمرسوم 2.24.141)</h2>
+        <h2 id="sec-cases-09">5. تطبيقات عملية لحساب عائد الساعات الإضافية والحصة الأسبوعية لأستاذ التربية البدنية (المادتان 68 و69 والمرسوم 2.24.141)</h2>
+        <div class="step-card">
             <p>
                 بموجب المرسوم رقم 2.24.141 المنشور في الصفحة 1386 من الجريدة الرسمية عدد 7277، تخول الساعات الإضافية المنجزة داخل المؤسسات التعليمية العمومية تعويضاً مالياً يؤدى عن كل ساعة فعلية منجزة. ويوضح المثال التطبيقي التالي كيفية احتساب هذا التعويض:
             </p>
             <div class="sim-grid-2">
                 <div class="info-box" style="margin:0;">
-                    <h3>مثال 1: أستاذ بالتعليم الثانوي الإعدادي ينجز 4 ساعات إضافية أسبوعياً</h3>
+                    <h3 style="margin-top:0;">مثال 1: أستاذ بالتعليم الثانوي الإعدادي ينجز 4 ساعات إضافية أسبوعياً</h3>
                     <p>
                         وفق تعريفة المرسوم 2.05.1012 المعمول بها بموجب المرسوم 2.24.141 والمحددة في <strong>159 درهماً للساعة الواحدة</strong> بالتعليم الإعدادي والابتدائي، فإن إنجاز 4 ساعات إضافية أسبوعياً (16 ساعة في الشهر) يخول تعويضاً شهرياً خاماً قدره:
                         <br><strong style="color:#991b1b;">16 ساعة × 159 درهماً = 2,544 درهماً في الشهر</strong>.
                     </p>
                 </div>
                 <div class="success-box" style="margin:0;">
-                    <h3 style="color:#006233;">مثال 2: أستاذ بالتعليم الثانوي التأهيلي ينجز 4 ساعات إضافية أسبوعياً</h3>
+                    <h3 style="margin-top:0;color:#006233;">مثال 2: أستاذ بالتعليم الثانوي التأهيلي ينجز 4 ساعات إضافية أسبوعياً</h3>
                     <p>
                         وفق التعريفة المحددة في <strong>218 درهماً للساعة الواحدة</strong> بالتعليم الثانوي التأهيلي، فإن إنجاز 4 ساعات إضافية أسبوعياً (16 ساعة في الشهر) يخول تعويضاً شهرياً خاماً قدره:
                         <br><strong style="color:#006233;">16 ساعة × 218 درهماً = 3,488 درهماً في الشهر</strong>.
                     </p>
                 </div>
             </div>
-            <p style="margin-top:1rem;">
+            <p style="margin:1rem 0 0 0;">
                 وبالنسبة لأساتذة مادة التربية البدنية والرياضية، تظل الحصة الأسبوعية النظامية بموجب المادة 68 محددة في <strong>24 ساعة بالإعدادي</strong> و<strong>21 ساعة بالتأهيلي</strong> (وهي نفس الساعات المطبقة على المختصين التربويين والمختصين الاجتماعيين بموجب المادة 69)، مع احتساب الساعتين المخصصتين لتنشيط الجمعية الرياضية المدرسية (ASS) يوم الجمعة بعد الزوال ضمن جدول الحصص الرسمي للأستاذ.
             </p>
         </div>
     """,
     "10": """
-        <div class="step-card" id="sec-cases-10">
-            <h2>6. جسور الارتقاء والحركية المهنية من هيئة التدريس نحو الإدارة والتفتيش والبحث العلمي (المواد 33 و44 و52 و57)</h2>
+        <h2 id="sec-cases-10">6. جسور الارتقاء والحركية المهنية من هيئة التدريس نحو الإدارة والتفتيش والبحث العلمي (المواد 33 و44 و52 و57)</h2>
+        <div class="step-card">
             <p>
                 من أبرز المزايا الهندسية التي أرساها المرسوم رقم 2.24.140 أنه بنى <strong>جسور ترقٍ وحركية مهنية (Passerelles professionnelles)</strong> تمكن أطر التدريس من الارتقاء المهني نحو الهيئات الأخرى مع الاحتفاظ بمكتسباتهم:
             </p>
             <div class="sim-grid-3">
                 <div class="info-box" style="margin:0;">
-                    <h3>الجسر الأول: متصرف تربوي أو مستشار أو ممون (المادة 44)</h3>
-                    <p>
+                    <h3 style="margin-top:0;">الجسر الأول: متصرف تربوي أو مستشار أو ممون (المادة 44)</h3>
+                    <p style="margin-bottom:0;">
                         يمكن لأطر التدريس الترشح لمباراة سلك الإدارة التربوية أو سلك الممونين بـ CRMEF أو مركز التوجيه والتخطيط التربوي (COPE)، وبعد التخرج يُعيَّنون في <strong>الدرجة الأولى (السلم 11)</strong> مع الإعفاء من التمرين ومنح <strong>سنتين (2) أقدمية اعتبارية</strong> لمن غيروا الإطار دون تغيير الدرجة!
                     </p>
                 </div>
                 <div class="success-box" style="margin:0;">
-                    <h3 style="color:#006233;">الجسر الثاني: هيئة التفتيش والتأطير والمراقبة والتقييم (المواد 23-28 و44)</h3>
-                    <p>
+                    <h3 style="margin-top:0;color:#006233;">الجسر الثاني: هيئة التفتيش والتأطير والمراقبة والتقييم (المواد 23-28 و44)</h3>
+                    <p style="margin-bottom:0;">
                         يفتح مركز تكوين مفتشي التعليم (CFIE) أبوابه عبر المباراة أمام الأساتذة المرسمين ليتخرجوا في إطار مفتش تربوي للتعليم الابتدائي أو الإعدادي أو التأهيلي أو ما بعد البكالوريا (بما في ذلك مفتشو التربية البدنية والرياضية) المرتبين في الدرجة الأولى والدرجة الممتازة.
                     </p>
                 </div>
                 <div class="info-box" style="margin:0;">
-                    <h3>الجسر الثالث: هيئة الأساتذة الباحثين في التربية والتكوين (المواد 33-37 و46)</h3>
-                    <p>
+                    <h3 style="margin-top:0;">الجسر الثالث: هيئة الأساتذة الباحثين في التربية والتكوين (المواد 33-37 و46)</h3>
+                    <p style="margin-bottom:0;">
                         يحق لحاملي الدكتوراه الترشح لمباريات توظيف <strong>الأساتذة المساعدين في التربية والتكوين</strong> بمراكز CRMEF وCFIE وCOPE، مع التدرج الأكاديمي الكامل (أستاذ مساعد ⬅️ أستاذ مؤهل ⬅️ أستاذ مؤطر) بنفس الوضعية المادية والعلمية لأساتذة التعليم العالي.
                     </p>
                 </div>
@@ -292,7 +292,7 @@ def clean_body_html_to_site_ui(raw_html: str) -> str:
     return h
 
 
-def build_interactive_simulator_html(default_tab: str) -> str:
+def build_interactive_simulator_html(default_tab: str, sim_num_prefix: str = "") -> str:
     """
     Builds the Interactive Dual Simulator (Salary/Indemnities Art. 59 & 66 + Promotion/Echelon Art. 49/50/52/87)
     styled 100% with the ProfEPS Maroc UI palette (--primary: #991b1b, --secondary: #006233,
@@ -311,7 +311,7 @@ def build_interactive_simulator_html(default_tab: str) -> str:
             <div>
                 <span class="section-badge" style="margin-bottom:0.5rem;">⚡ أدوات تفاعلية رسمية مطابقة للجريدة الرسمية عدد 7277</span>
                 <h2 style="margin:0;border:none;padding:0;font-size:1.35rem;color:#0f172a;">
-                    المحاكي القانوني التفاعلي: التعويضات والأجرة (المادتان 59 و66) + الترقية وإعادة الترتيب (المواد 49 و50 و52 و87)
+                    {sim_num_prefix}المحاكي القانوني التفاعلي: التعويضات والأجرة (المادتان 59 و66) + الترقية وإعادة الترتيب (المواد 49 و50 و52 و87)
                 </h2>
                 <p style="margin:0.35rem 0 0 0;font-size:0.9rem;color:#475569;">
                     أداة حسابية فورية مبنية 100% على الجداول الرسمية للمرسوم رقم 2.24.140 (ص. 1375–1380) والمرسوم رقم 2.24.141 (ص. 1386).
@@ -465,9 +465,10 @@ def build_interactive_simulator_html(default_tab: str) -> str:
                                 <option value="8">الرتبة 8</option>
                                 <option value="9">الرتبة 9</option>
                                 <option value="10">الرتبة 10</option>
-                                <option value="11">الرتبة 11 / الاستثنائية</option>
-                                <option value="12">الرتبة 12</option>
-                                <option value="13">الرتبة 13</option>
+                                <option value="11">الرتبة 11 (الابتدائي/الإعدادي/المختصون - الرقم 675)</option>
+                                <option value="110">الرتبة الاستثنائية (التأهيلي/المبرز/المفتش/المتصرف - 704 أو 564)</option>
+                                <option value="12">الرتبة 12 (الابتدائي/الإعدادي/المختصون - الرقم 690)</option>
+                                <option value="13">الرتبة 13 (الابتدائي/الإعدادي/المختصون - الرقم 704)</option>
                             </select>
                         </div>
                         <div class="peps-field">
@@ -693,8 +694,20 @@ def build_interactive_simulator_html(default_tab: str) -> str:
             document.getElementById('res-ind-ens-evol').textContent = 'شتنبر 2023: ' + ens23.toLocaleString('en-US') + ' د | يناير 2024: ' + ens24.toLocaleString('en-US') + ' د';
             document.getElementById('res-ind-charges').textContent = charges.toLocaleString('en-US') + ' درهم';
             document.getElementById('res-ind-encadrement').textContent = enc.toLocaleString('en-US') + ' درهم';
+            const encNoteEl = document.getElementById('res-ind-enc-note');
+            if (encNoteEl) {{
+                if (g === 'GM') encNoteEl.textContent = '5,500 د قارة في جميع رتب خارج السلم';
+                else if (g === 'G1') encNoteEl.textContent = idx < 5 ? '950 د (الرتب 1-5) | يرتفع إلى 3,600 د من الرتبة 6' : '3,600 د ابتداءً من الرتبة 6 بالدرجة 1';
+                else if (g === 'G2') encNoteEl.textContent = idx < 5 ? 'يبدأ بـ 700 د ابتداءً من الرتبة 6 بالدرجة 2' : '700 د ابتداءً من الرتبة 6 بالدرجة 2';
+                else encNoteEl.textContent = 'غير مخول للدرجات 3 و4 و5 (المادة 59)';
+            }}
             document.getElementById('res-total-ind-brut').textContent = totalIndBrut.toLocaleString('en-US') + ' درهم/شهر';
             document.getElementById('res-net-2025').textContent = '~ ' + estimatedNet.toLocaleString('en-US') + ' درهم/شهر';
+            const gainNetEl = document.getElementById('res-gain-net');
+            if (gainNetEl) {{
+                const diffBrut = ens25 - ens23;
+                gainNetEl.textContent = '+' + diffBrut.toLocaleString('en-US') + ' د خام (+1,500 د صافية/شهر)';
+            }}
 
             const hBox = document.getElementById('res-heures-box');
             if (suppHoursGross > 0) {{
@@ -706,7 +719,9 @@ def build_interactive_simulator_html(default_tab: str) -> str:
 
         window.calculateStatutPromotion = function() {{
             const g = document.getElementById('pro-grade').value;
-            const ech = parseInt(document.getElementById('pro-echelon').value || '1', 10);
+            const rawEch = parseInt(document.getElementById('pro-echelon').value || '1', 10);
+            const isExcep = (rawEch === 110);
+            const ech = isExcep ? 11 : rawEch;
             const anc = parseFloat(document.getElementById('pro-anc-grade').value || '0');
             const rythme = document.getElementById('pro-rythme').value;
 
@@ -731,8 +746,9 @@ def build_interactive_simulator_html(default_tab: str) -> str:
             const statusEl = document.getElementById('pro-res-grade-status');
 
             if (g === 'GM') {{
-                const nextE = Math.min(ech + 1, 8);
-                nextEchEl.textContent = ech < 8 ? ('الانتقال من الرتبة ' + ech + ' إلى الرتبة ' + nextE + ' (خارج السلم)') : 'الرتبة 8 القصوى في الدرجة الممتازة (الرقم 930)';
+                const curGmEch = Math.min(ech, 8);
+                const nextE = Math.min(curGmEch + 1, 8);
+                nextEchEl.textContent = curGmEch < 8 ? ('الانتقال من الرتبة ' + curGmEch + ' إلى الرتبة ' + nextE + ' (خارج السلم)') : 'الرتبة 8 القصوى في الدرجة الممتازة (الرقم 930)';
                 echTimeEl.textContent = 'الترقي مباشر كل 3 سنوات بدون أنساق أو حصيص (المادة 49)';
                 reclEl.textContent = 'الدرجة الممتازة هي أعلى درجة في الإطار';
                 reclNoteEl.textContent = 'الرقم الاستدلالي يتدرج من 704 (الرتبة 1) إلى 930 (الرتبة 8)';
@@ -751,18 +767,19 @@ def build_interactive_simulator_html(default_tab: str) -> str:
                     nextEchEl.textContent = 'الانتقال من الرتبة 10 إلى الرتبة 11 (675) أو الاستثنائية (704)';
                     echTimeEl.textContent = 'الشرط (المادة 49): سنتان مباشرة للرتبة 11 (أو حصيص 10% للاستثنائية)';
                 }}
+            }} else if (isExcep) {{
+                nextEchEl.textContent = g === 'G2' ? 'الرتبة الاستثنائية هي أعلى رتبة بالدرجة الثانية (564)' : 'الرتبة الاستثنائية تعادل الرقم الاستدلالي 704 بالدرجة الأولى';
+                echTimeEl.textContent = 'الخطوة الموالية هي الترقية إلى الدرجة الأعلى (المادتان 50 و52)';
             }} else {{
-                nextEchEl.textContent = 'الانتقال إلى الرتبة ' + Math.min(ech + 1, 13) + ' بالدرجة الأولى';
+                nextEchEl.textContent = ech < 13 ? ('الانتقال من الرتبة ' + ech + ' إلى الرتبة ' + (ech + 1) + ' بالدرجة الأولى') : 'الرتبة 13 هي أعلى رتبة بالدرجة الأولى (الرقم 704)';
                 echTimeEl.textContent = 'الشرط (المادة 49): ترقٍ مباشر كل سنتين (2 سنتين) حتى الرتبة 13 (704)';
             }}
 
             if (g === 'G2') {{
                 // Article 52 Paragraph 2: Appointed in the new grade at the numerical echelon immediately below the original echelon
                 const g1Indices = {{1:336, 2:369, 3:403, 4:436, 5:472, 6:509, 7:542, 8:574, 9:606, 10:639}};
-                const g2Indices = {{1:275, 2:300, 3:326, 4:351, 5:377, 6:402, 7:428, 8:456, 9:484, 10:512, 11:564, 12:564, 13:564}};
                 const newEchNum = Math.min(10, Math.max(1, ech - 1));
                 const newInd = g1Indices[newEchNum];
-                const oldInd = g2Indices[ech] || 564;
                 reclEl.textContent = 'الدرجة الأولى — الرتبة ' + newEchNum + ' (الرقم ' + newInd + ')';
                 reclNoteEl.textContent = 'تطبيقاً للمادة 52: الرتبة العددية التي تقل مباشرة (مع الاحتفاظ بالأقدمية في حدود السريع)';
 
@@ -775,13 +792,14 @@ def build_interactive_simulator_html(default_tab: str) -> str:
             }} else if (g === 'G1') {{
                 // Article 52 Paragraph 3: Those entering Hors Échelle are placed in Echelon 1 (index 704) and keep up to 2 years seniority if previous index was 704
                 const g1Indices = {{1:336, 2:369, 3:403, 4:436, 5:472, 6:509, 7:542, 8:574, 9:606, 10:639, 11:675, 12:690, 13:704}};
-                const curInd = g1Indices[ech] || 704;
+                const curInd = isExcep ? 704 : (g1Indices[ech] || 704);
                 reclEl.textContent = 'الدرجة الممتازة — الرتبة 1 (الرقم الاستدلالي 704)';
-                reclNoteEl.textContent = (ech >= 13 || ech === 11) ? 'تطبيقاً للمادة 52: الاحتفاظ بالأقدمية في حدود سنتين إذا كان الرقم السابق 704' : ('تطبيقاً للفقرة 3 من المادة 52 (مقابل الرقم الحالي ' + curInd + ')');
+                reclNoteEl.textContent = (ech >= 13 || isExcep) ? 'تطبيقاً للمادة 52: الاحتفاظ بالأقدمية في حدود سنتين لأن الرقم السابق يعادل 704' : ('تطبيقاً للفقرة 3 من المادة 52 (مقابل الرقم الحالي ' + curInd + ')');
                 const echOk = ech >= 7;
                 const ancOk = anc >= 5;
+                const echDisplay = isExcep ? 'الاستثنائية (704)' : ('الرتبة ' + ech + ' (' + curInd + ')');
                 let html = '<p style="margin-bottom:0.4rem;"><strong>تشخيص الترقية من الدرجة الأولى إلى الدرجة الممتازة - خارج السلم (المادتان 50 و87):</strong></p><ul style="margin:0;">';
-                html += '<li><strong>شرط الرتبة (الرتبة 7 على الأقل — الرقم 542):</strong> ' + (echOk ? '<span style="color:#006233;font-weight:800;">مستوفى (أنت في الرتبة ' + ech + ').</span>' : '<span style="color:#991b1b;font-weight:800;">غير مستوفى بعد (يجب بلوغ الرتبة 7 على الأقل).</span>') + '</li>';
+                html += '<li><strong>شرط الرتبة (الرتبة 7 على الأقل — الرقم 542):</strong> ' + (echOk ? '<span style="color:#006233;font-weight:800;">مستوفى (أنت في ' + echDisplay + ').</span>' : '<span style="color:#991b1b;font-weight:800;">غير مستوفى بعد (يجب بلوغ الرتبة 7 على الأقل).</span>') + '</li>';
                 html += '<li><strong>شرط الأقدمية في الدرجة الأولى (5 سنوات على الأقل):</strong> ' + (ancOk ? '<span style="color:#006233;font-weight:800;">مستوفى (' + anc + ' سنوات في الدرجة الأولى).</span>' : '<span style="color:#991b1b;font-weight:800;">يتطلب 5 سنوات في الدرجة الأولى (متبقي ' + Math.max(0, 5 - anc) + ' سنوات).</span>') + '</li>';
                 html += '<li><strong>الحصيص والتسقيف والأقدمية الاعتبارية:</strong> نسبة الحصيص السنوي هي <strong>36%</strong> بالاختيار (والتسقيف <strong>بدون حصيص في التقييد الرابع</strong>)، مع منح <strong>3 سنوات أقدمية اعتبارية</strong> للمترقين ما بين 2024 و2028 من أطر الابتدائي والإعدادي والمختصين (المادة 87).</li></ul>';
                 statusEl.innerHTML = html;
@@ -956,7 +974,18 @@ def render_full_article_html(article: dict) -> str:
         ]
     }
 
-    simulator_html = build_interactive_simulator_html(article["default_tab"])
+    sim_num_prefix = ""
+    faq_num_prefix = ""
+    if "toc" in article and article["toc"]:
+        for anchor_id, label_txt in article["toc"]:
+            m = re.match(r"^(\d+\.\s*)", label_txt)
+            if m:
+                if anchor_id in ("sec-simulator", "statut-2024-calculators"):
+                    sim_num_prefix = m.group(1)
+                elif anchor_id == "sec-faq":
+                    faq_num_prefix = m.group(1)
+
+    simulator_html = build_interactive_simulator_html(article["default_tab"], sim_num_prefix=sim_num_prefix)
     cleaned_body = clean_body_html_to_site_ui(article["body_html"])
     case_study_html = CASE_STUDIES_BY_NUM.get(article["num"], "")
     shared_context_html = build_shared_context_sections(article)
@@ -966,6 +995,39 @@ def render_full_article_html(article: dict) -> str:
         bottom_simulator_html = ""
     else:
         bottom_simulator_html = simulator_html
+
+    arabic_eeat_card = """<!-- PROFEPS_EEAT_AUTHOR_START -->
+  <aside id="peps-eeat-author-card" dir="rtl" aria-label="الكاتب والمراجعة القانونية والتربوية" style="max-width:1024px;margin:1.75rem auto;padding:1.25rem 1.5rem;background:#ffffff;border:1px solid #e2e8f0;border-right:4px solid #991b1b;border-radius:16px;box-shadow:0 2px 10px rgba(15,23,42,0.04);text-align:right;">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;">
+      <div style="display:flex;align-items:center;gap:0.9rem;">
+        <a href="a-propos.html" style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#991b1b,#006233);color:#ffffff;font-weight:900;font-size:1.05rem;display:flex;align-items:center;justify-content:center;text-decoration:none;flex-shrink:0;">AE</a>
+        <div>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem;">
+            <span style="font-size:0.75rem;font-weight:800;color:#991b1b;background:#fef2f2;padding:0.15rem 0.55rem;border-radius:6px;border:1px solid #fecaca;">✔ محتوى قانوني وتربوي موثق E-E-A-T</span>
+            <span style="font-size:0.78rem;color:#64748b;font-weight:700;">مراجعة قانونية وتربوية : <time datetime="2026-11">نونبر 2026</time></span>
+          </div>
+          <p style="margin:0.25rem 0 0 0;font-size:0.94rem;font-weight:800;color:#0f172a;">
+            إعداد ومراجعة الأستاذ <a href="a-propos.html" style="color:#991b1b;text-decoration:underline;">عبد الخالق البوداني (Abdelkhalek ELBOUDANI)</a> — أستاذ التربية البدنية والرياضية بالمغرب ومؤسس منصة ProfEPS
+          </p>
+          <p style="margin:0.2rem 0 0 0;font-size:0.8rem;color:#475569;line-height:1.5;">
+            <strong>المصادر والنصوص المرجعية الرسمية :</strong> الجريدة الرسمية للمملكة المغربية عدد 7277 بتاريخ 26 فبراير 2024 (المرسوم رقم 2.24.140 والمرسوم رقم 2.24.141) والتوجيهات التربوية الرسمية لوزارة التربية الوطنية (2007 و2009).
+          </p>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <a href="a-propos.html" style="padding:0.45rem 0.85rem;background:#f8fafc;border:1px solid #cbd5e1;border-radius:10px;font-size:0.78rem;font-weight:800;color:#1e293b;text-decoration:none;">ميثاق التحرير والكاتب ←</a>
+        <a href="ar-orientations-pedagogiques-eps-maroc.html" style="padding:0.45rem 0.85rem;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;font-size:0.78rem;font-weight:800;color:#166534;text-decoration:none;">التوجيهات التربوية 2007/2009</a>
+      </div>
+    </div>
+  </aside>
+<!-- PROFEPS_EEAT_AUTHOR_END -->"""
+
+    localized_footer_and_cmp = re.sub(
+        r"<!-- PROFEPS_EEAT_AUTHOR_START -->[\s\S]*?<!-- PROFEPS_EEAT_AUTHOR_END -->",
+        arabic_eeat_card,
+        UNIFIED_FOOTER_AND_CMP,
+        count=1
+    )
 
     return f"""<!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -1141,14 +1203,14 @@ def render_full_article_html(article: dict) -> str:
 
             {bottom_simulator_html}
 
-            <h2 id="sec-faq">أسئلة شائعة وإجابات قانونية موثقة من النظام الأساسي 2024 (المرسوم 2.24.140)</h2>
+            <h2 id="sec-faq">{faq_num_prefix}أسئلة شائعة وإجابات قانونية موثقة من النظام الأساسي 2024 (المرسوم 2.24.140)</h2>
             {"".join(faqs_html_items)}
 
             {shared_context_html}
         </div>
     </article>
 
-{UNIFIED_FOOTER_AND_CMP}
+{localized_footer_and_cmp}
 </body>
 </html>
 """

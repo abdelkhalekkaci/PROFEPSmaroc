@@ -87,7 +87,11 @@ html{overflow-y:scroll !important}nav.navbar,#navbar,.navbar-decoy{display:none 
 }
 
 /* Helper classes across articles & tools */
-.table-container, .custom-table-wrapper {
+:root {
+  --text-light: #64748b;
+  --text-sec: #475569;
+}
+.table-container, .custom-table-wrapper, .table-wrap {
   width: 100%;
   overflow-x: auto;
   margin: 1.5rem 0;
@@ -95,26 +99,29 @@ html{overflow-y:scroll !important}nav.navbar,#navbar,.navbar-decoy{display:none 
   border: 1px solid #e2e8f0;
   background: #ffffff;
 }
-.custom-table {
+.custom-table, .table-wrap table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.92rem;
   text-align: left;
 }
-.custom-table th {
+html[dir="rtl"] .custom-table, html[dir="rtl"] .table-wrap table {
+  text-align: right;
+}
+.custom-table th, .table-wrap th {
   background: #f8fafc;
   color: #0f172a;
   font-weight: 800;
   padding: 0.9rem 1rem;
   border-bottom: 2px solid #e2e8f0;
 }
-.custom-table td {
+.custom-table td, .table-wrap td {
   padding: 0.85rem 1rem;
   border-bottom: 1px solid #f1f5f9;
   color: #334155;
   vertical-align: top;
 }
-.custom-table tr:last-child td {
+.custom-table tr:last-child td, .table-wrap tr:last-child td {
   border-bottom: none;
 }
 .info-box-blue {
@@ -128,6 +135,14 @@ html{overflow-y:scroll !important}nav.navbar,#navbar,.navbar-decoy{display:none 
 .info-box-green {
   background: #f0fdf4;
   border-left: 4px solid #16a34a;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 14px 14px 0;
+  margin: 1.5rem 0;
+  color: #0f172a;
+}
+.info-box-yellow {
+  background: #fefce8;
+  border-left: 4px solid #ca8a04;
   padding: 1.25rem 1.5rem;
   border-radius: 0 14px 14px 0;
   margin: 1.5rem 0;
@@ -169,6 +184,96 @@ html{overflow-y:scroll !important}nav.navbar,#navbar,.navbar-decoy{display:none 
   font-weight: 800;
   font-size: 0.78rem;
   margin-bottom: 0.4rem;
+}
+
+/* Missing Tailwind utility classes used in index.html & hubs */
+.bg-green-50 { background-color: #f0fdf4 !important; }
+.bg-orange-50 { background-color: #fff7ed !important; }
+.border-green-200 { border-color: #bbf7d0 !important; }
+.border-orange-200 { border-color: #fed7aa !important; }
+.text-green-700 { color: #15803d !important; }
+.text-green-800 { color: #166534 !important; }
+.text-orange-700 { color: #c2410c !important; }
+.text-orange-800 { color: #9a3412 !important; }
+.border-l-\[\#006233\] { border-left-color: #006233 !important; }
+.border-l-\[\#991b1b\] { border-left-color: #991b1b !important; }
+.border-l-amber-600 { border-left-color: #d97706 !important; }
+.border-l-amber-700 { border-left-color: #b45309 !important; }
+.border-l-blue-600 { border-left-color: #2563eb !important; }
+.border-l-blue-700 { border-left-color: #1d4ed8 !important; }
+.border-l-green-700 { border-left-color: #15803d !important; }
+.border-l-orange-600 { border-left-color: #ea580c !important; }
+.border-l-purple-600 { border-left-color: #9333ea !important; }
+.border-l-red-600 { border-left-color: #dc2626 !important; }
+.border-l-slate-700 { border-left-color: #334155 !important; }
+.border-l-teal-600 { border-left-color: #0d9488 !important; }
+.border-l-teal-700 { border-left-color: #0f766e !important; }
+.hover\:border-amber-300:hover { border-color: #fcd34d !important; }
+.hover\:border-blue-300:hover { border-color: #93c5fd !important; }
+.hover\:border-cyan-300:hover { border-color: #67e8f9 !important; }
+.hover\:border-emerald-300:hover { border-color: #6ee7b7 !important; }
+.hover\:border-green-300:hover { border-color: #86efac !important; }
+.hover\:border-indigo-300:hover { border-color: #a5b4fc !important; }
+.hover\:border-orange-300:hover { border-color: #fdba74 !important; }
+.hover\:border-purple-300:hover { border-color: #d8b4fe !important; }
+.hover\:border-red-300:hover { border-color: #fca5a5 !important; }
+.hover\:border-rose-300:hover { border-color: #fda4af !important; }
+.hover\:border-sky-300:hover { border-color: #7dd3fc !important; }
+.hover\:border-teal-300:hover { border-color: #5eead4 !important; }
+.hover\:border-violet-300:hover { border-color: #c4b5fd !important; }
+.group:hover .group-hover\:text-\[\#006233\] { color: #006233 !important; }
+.group:hover .group-hover\:text-\[\#991b1b\] { color: #991b1b !important; }
+.group:hover .group-hover\:text-amber-600 { color: #d97706 !important; }
+.group:hover .group-hover\:text-amber-700 { color: #b45309 !important; }
+.group:hover .group-hover\:text-blue-600 { color: #2563eb !important; }
+.group:hover .group-hover\:text-blue-700 { color: #1d4ed8 !important; }
+.group:hover .group-hover\:text-green-700 { color: #15803d !important; }
+.group:hover .group-hover\:text-orange-600 { color: #ea580c !important; }
+.group:hover .group-hover\:text-purple-600 { color: #9333ea !important; }
+.group:hover .group-hover\:text-red-600 { color: #dc2626 !important; }
+.group:hover .group-hover\:text-slate-700 { color: #334155 !important; }
+.group:hover .group-hover\:text-teal-600 { color: #0d9488 !important; }
+.group:hover .group-hover\:text-teal-700 { color: #0f766e !important; }
+@media (min-width: 640px) {
+  .sm\:col-span-2 { grid-column: span 2 / span 2 !important; }
+}
+@media (min-width: 1024px) {
+  .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  .lg\:col-span-1 { grid-column: span 1 / span 1 !important; }
+  .lg\:items-end { align-items: flex-end !important; }
+}
+@media (min-width: 1280px) {
+  .xl\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+}
+
+/* Complete light-mode safeguard for residual dark-mode sections in body.bg-slate-950 pages */
+body.bg-slate-950 main [class*="bg-slate-900"],
+body.bg-slate-950 main [class*="bg-slate-950"] {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #1e293b !important;
+}
+body.bg-slate-950 main [class*="from-slate-900"],
+body.bg-slate-950 main [class*="via-slate-900"],
+body.bg-slate-950 main [class*="to-slate-900"],
+body.bg-slate-950 main [class*="from-emerald-950"],
+body.bg-slate-950 main [class*="to-sky-950"] {
+  background-image: linear-gradient(135deg, #fff8f8 0%, #f8fafc 50%, #f0fdf4 100%) !important;
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #1e293b !important;
+}
+body.bg-slate-950 main a.bg-slate-800,
+body.bg-slate-950 main button.bg-slate-800 {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+body.bg-slate-950 main a.bg-slate-800:hover,
+body.bg-slate-950 main button.bg-slate-800:hover {
+  background-color: #f1f5f9 !important;
+  border-color: #991b1b !important;
+  color: #991b1b !important;
 }
 
 /* Static 150 Q&A Reference Block on qcm-150-questions-crmef-eps.html */
@@ -274,3 +379,4 @@ html{overflow-y:scroll !important}nav.navbar,#navbar,.navbar-decoy{display:none 
   color: #475569;
   line-height: 1.6;
 }
+

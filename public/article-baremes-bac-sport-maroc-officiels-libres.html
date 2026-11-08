@@ -310,8 +310,13 @@
     }
   });
 
-  window.profepsSetLang = function(lang) {
-    try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
+  var nativeLang = ((document.documentElement.getAttribute('lang') || 'fr').toLowerCase().slice(0, 2));
+  var nativeDir = document.documentElement.getAttribute('dir') || (nativeLang === 'ar' ? 'rtl' : 'ltr');
+
+  window.profepsSetLang = function(lang, isAutoInit) {
+    if (!isAutoInit) {
+      try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
+    }
     ['fr', 'en', 'ar'].forEach(function(code) {
       var btn = document.getElementById('peps-btn-lang-' + code);
       if (btn) btn.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
@@ -326,17 +331,35 @@
     if (typeof window.setToolLang === 'function') window.setToolLang(lang);
     if (typeof window.changeLang === 'function') window.changeLang(lang);
     if (typeof window.setLanguage === 'function') window.setLanguage(lang);
-    document.documentElement.lang = lang;
-    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    var hasBodyI18n = (
+      typeof window.setToolLang === 'function' ||
+      typeof window.changeLang === 'function' ||
+      typeof window.setLanguage === 'function' ||
+      document.querySelector('main [data-i18n-ar], .hero [data-i18n-ar], .vma-hero [data-i18n-ar]') !== null
+    );
+    if (hasBodyI18n) {
+      document.documentElement.lang = lang;
+      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    } else {
+      document.documentElement.lang = nativeLang;
+      document.documentElement.dir = nativeDir;
+    }
   };
 
-  var saved = 'fr';
-  try { saved = localStorage.getItem('profeps_lang') || 'fr'; } catch(e) {}
-  if (saved && saved !== 'fr') {
+  var saved = nativeLang === 'ar' ? 'ar' : 'fr';
+  try {
+    var storedLang = localStorage.getItem('profeps_lang');
+    if (nativeLang === 'ar') {
+      saved = 'ar';
+    } else if (storedLang) {
+      saved = storedLang;
+    }
+  } catch(e) {}
+  if (saved && (saved !== 'fr' || nativeLang === 'ar')) {
     if (document.readyState === 'loading') {
-      window.addEventListener('DOMContentLoaded', function() { window.profepsSetLang(saved); });
+      window.addEventListener('DOMContentLoaded', function() { window.profepsSetLang(saved, true); });
     } else {
-      window.profepsSetLang(saved);
+      window.profepsSetLang(saved, true);
     }
   }
 })();
@@ -466,7 +489,7 @@
             </ul>
 
             <h2 id="bareme-demi-fond">III. Barème Course de Demi-Fond et Course en Durée (1000m Garçons / 600m ou 800m Filles)</h2>
-            <p>En demi-fond scolaire au Maroc, l'évaluation croise la <strong>performance chronométrique (ou le pourcentage de VMA maintenu)</strong> et la <strong>régularité d'allure (écart entre les tours)</strong> afin d'éviter le départ en sprint suivi d'une marche d'épuisement. Utilisez notre <a href="calculateur-vma.html" style="color:#991b1b;font-weight:800;text-decoration:underline;">Calculateur VMA &amp; Allures Cibles</a> et notre <a href="planificateur-seances-vma-groupes-eps.html" style="color:#006233;font-weight:800;text-decoration:underline;">Planificateur de Groupes de Niveau VMA</a> pour individualiser les temps de passage par plots :</p>
+            <p>En demi-fond scolaire au Maroc, l'évaluation croise la <strong>performance chronométrique (ou le pourcentage de VMA maintenu)</strong> et la <strong>régularité d'allure (écart entre les tours)</strong> afin d'éviter le départ en sprint suivi d'une marche d'épuisement. Utilisez notre <a href="calculateur-vma.html" style="color:#991b1b;font-weight:800;text-decoration:underline;">Calculateur VMA &amp; Allures Cibles</a> et notre <a href="calculateur-vma.html" style="color:#006233;font-weight:800;text-decoration:underline;">Planificateur de Groupes de Niveau VMA</a> pour individualiser les temps de passage par plots :</p>
 
             <div class="table-container">
                 <table>

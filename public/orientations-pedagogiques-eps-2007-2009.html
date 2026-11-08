@@ -369,8 +369,13 @@
     }
   });
 
-  window.profepsSetLang = function(lang) {
-    try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
+  var nativeLang = ((document.documentElement.getAttribute('lang') || 'fr').toLowerCase().slice(0, 2));
+  var nativeDir = document.documentElement.getAttribute('dir') || (nativeLang === 'ar' ? 'rtl' : 'ltr');
+
+  window.profepsSetLang = function(lang, isAutoInit) {
+    if (!isAutoInit) {
+      try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
+    }
     ['fr', 'en', 'ar'].forEach(function(code) {
       var btn = document.getElementById('peps-btn-lang-' + code);
       if (btn) btn.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
@@ -385,17 +390,35 @@
     if (typeof window.setToolLang === 'function') window.setToolLang(lang);
     if (typeof window.changeLang === 'function') window.changeLang(lang);
     if (typeof window.setLanguage === 'function') window.setLanguage(lang);
-    document.documentElement.lang = lang;
-    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    var hasBodyI18n = (
+      typeof window.setToolLang === 'function' ||
+      typeof window.changeLang === 'function' ||
+      typeof window.setLanguage === 'function' ||
+      document.querySelector('main [data-i18n-ar], .hero [data-i18n-ar], .vma-hero [data-i18n-ar]') !== null
+    );
+    if (hasBodyI18n) {
+      document.documentElement.lang = lang;
+      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    } else {
+      document.documentElement.lang = nativeLang;
+      document.documentElement.dir = nativeDir;
+    }
   };
 
-  var saved = 'fr';
-  try { saved = localStorage.getItem('profeps_lang') || 'fr'; } catch(e) {}
-  if (saved && saved !== 'fr') {
+  var saved = nativeLang === 'ar' ? 'ar' : 'fr';
+  try {
+    var storedLang = localStorage.getItem('profeps_lang');
+    if (nativeLang === 'ar') {
+      saved = 'ar';
+    } else if (storedLang) {
+      saved = storedLang;
+    }
+  } catch(e) {}
+  if (saved && (saved !== 'fr' || nativeLang === 'ar')) {
     if (document.readyState === 'loading') {
-      window.addEventListener('DOMContentLoaded', function() { window.profepsSetLang(saved); });
+      window.addEventListener('DOMContentLoaded', function() { window.profepsSetLang(saved, true); });
     } else {
-      window.profepsSetLang(saved);
+      window.profepsSetLang(saved, true);
     }
   }
 })();
@@ -446,7 +469,7 @@
           </ul>
         </div>
         <div class="pt-6">
-          <a href="/documents/orientations-pedagogiques-college-2007.pdf" download class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-sm shadow-lg shadow-emerald-900/30 transition">
+          <a href="bibliotheque-numerique-eps.html" download class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-sm shadow-lg shadow-emerald-900/30 transition">
             <span>📥 Télécharger OP Collège 2007 (PDF)</span>
           </a>
         </div>
@@ -469,7 +492,7 @@
           </ul>
         </div>
         <div class="pt-6">
-          <a href="/documents/orientations-pedagogiques-lycee-2009.pdf" download class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-500 hover:to-indigo-500 text-white font-bold text-sm shadow-lg shadow-sky-900/30 transition">
+          <a href="bibliotheque-numerique-eps.html" download class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-500 hover:to-indigo-500 text-white font-bold text-sm shadow-lg shadow-sky-900/30 transition">
             <span>📥 Télécharger OP Lycée 2009 (PDF)</span>
           </a>
         </div>
@@ -625,36 +648,6 @@
     <p>En définitive, qu'il s'agisse du texte de 2007 ou de celui de 2009, l'ambition ultime assignée à l'Éducation Physique et Sportive dépasse le cadre scolaire immédiat : il s'agit de doter chaque futur citoyen marocain d'une culture corporelle durable, du goût de l'effort régulier et des connaissances méthodologiques lui permettant d'entretenir sa santé cardio-respiratoire et son équilibre psychologique tout au long de sa vie d'adulte.</p>
   </section>
   
-  <!-- PROFEPS_MOROCCAN_AUTHORITY_HUB_START -->
-  <section aria-label="Dossiers Exclusifs EPS Maroc" style="max-width:1140px;margin:2rem auto;padding:1.5rem;background:linear-gradient(135deg,#fff8f8 0%,#ffffff 55%,#f3faf6 100%);border:2px solid #cbd5e1;border-left:6px solid #991b1b;border-radius:18px;box-shadow:0 8px 22px rgba(15,23,42,0.06);">
-    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem;margin-bottom:1rem;">
-      <div>
-        <span style="display:inline-block;font-size:0.74rem;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:#991b1b;background:#fef2f2;padding:0.2rem 0.65rem;border-radius:999px;border:1px solid #fecaca;">🇲🇦 Référentiels Exclusifs EPS Maroc · OP 2007/2009</span>
-        <h2 style="margin:0.35rem 0 0;font-size:1.22rem;font-weight:900;color:#0f172a;">Guides de Référence : Barèmes Bac Sport, Inspection CAPEP, Grands Effectifs (40+) &amp; Comparatif Générateur Gratuit</h2>
-      </div>
-      <a href="blog.html" style="font-size:0.82rem;font-weight:800;color:#991b1b;text-decoration:underline;">Voir les 117 dossiers du Blog →</a>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0.85rem;">
-      <a href="article-baremes-bac-sport-maroc-officiels-libres.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:1rem;background:#ffffff;border:1px solid #cbd5e1;border-radius:12px;text-decoration:none;">
-        <span style="font-size:0.72rem;font-weight:800;color:#991b1b;margin-bottom:0.3rem;">🏅 Examen Bac &amp; Bac Libre</span>
-        <strong style="font-size:0.88rem;color:#0f172a;line-height:1.35;">Barèmes du Bac Sport au Maroc (Officiels &amp; Libres) : Vitesse, Demi-Fond, Poids, Longueur &amp; Gym (OP 2007) →</strong>
-      </a>
-      <a href="article-inspection-pedagogique-titularisation-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:1rem;background:#ffffff;border:1px solid #cbd5e1;border-radius:12px;text-decoration:none;">
-        <span style="font-size:0.72rem;font-weight:800;color:#b45309;margin-bottom:0.3rem;">🏛️ Inspection &amp; CAPEP (Kafaâ)</span>
-        <strong style="font-size:0.88rem;color:#0f172a;line-height:1.35;">Guide de l'Inspection Pédagogique &amp; Examen de Titularisation EPS : Les 8 Pièces du Dossier &amp; Cahier Journal →</strong>
-      </a>
-      <a href="article-gestion-grands-effectifs-dispenses-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:1rem;background:#ffffff;border:1px solid #cbd5e1;border-radius:12px;text-decoration:none;">
-        <span style="font-size:0.72rem;font-weight:800;color:#047857;margin-bottom:0.3rem;">🏟️ Terrain Maroc · 40+ Élèves</span>
-        <strong style="font-size:0.88rem;color:#0f172a;line-height:1.35;">Gérer une Classe de 40+ Élèves et Noter les Élèves Dispensés (/20) en EPS : Ateliers &amp; Rôles Sociaux →</strong>
-      </a>
-      <a href="comparatif-generateur-eps-gratuit-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:1rem;background:#ffffff;border:1px solid #cbd5e1;border-radius:12px;text-decoration:none;">
-        <span style="font-size:0.72rem;font-weight:800;color:#6d28d9;margin-bottom:0.3rem;">⚡ 100% Gratuit (PDF &amp; Word)</span>
-        <strong style="font-size:0.88rem;color:#0f172a;line-height:1.35;">Comparatif Générateur EPS : Pourquoi ProfEPS Maroc (PDF &amp; Word Gratuit) Surpasse les Outils Payants →</strong>
-      </a>
-    </div>
-  </section>
-  <!-- PROFEPS_MOROCCAN_AUTHORITY_HUB_END -->
-
   <!-- PROFEPS_EEAT_AUTHOR_START -->
   <aside id="peps-eeat-author-card" aria-label="Auteur et vérification pédagogique" style="max-width:1024px;margin:1.75rem auto;padding:1.25rem 1.5rem;background:#ffffff;border:1px solid #e2e8f0;border-left:4px solid #c1272d;border-radius:16px;box-shadow:0 2px 10px rgba(15,23,42,0.04);">
     <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;">

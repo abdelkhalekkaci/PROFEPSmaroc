@@ -293,6 +293,7 @@
     gtag("config", "G-TH0Z1SGNXH");
   </script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Comment préparer efficacement le concours CRMEF 2026 (مباراة التعليم) au Maroc ?","acceptedAnswer":{"@type":"Answer","text":"La préparation au concours d'accès aux CRMEF 2026 repose sur 3 piliers : 1) Sciences de l'Éducation (علوم التربية : théories d'apprentissage, APC, Loi-cadre 51.17, Feuille de route 2022-2026), 2) Didactique de la discipline (Orientations Pédagogiques 2007 Lycée et 2009 Collège, planification, gestion et évaluation), et 3) Spécialité académique via nos 29 simulateurs QCM corrigés sur ProfEPS.ma."}},{"@type":"Question","name":"Quelles sont les spécialités disponibles en QCM corrigés sur le Hub CRMEF ProfEPS.ma ?","acceptedAnswer":{"@type":"Answer","text":"Le Hub CRMEF ProfEPS.ma propose 29 simulateurs gratuits couvrant le Tronc Commun (Sciences de l'Éducation) et les 13 filières (Didactique + Spécialité) : EPS, Enseignement Primaire (TaRL), Français, Mathématiques, SVT, Physique-Chimie, Langue Arabe, Éducation Islamique, Histoire-Géographie, Philosophie, Anglais, Informatique et Économie-Gestion."}},{"@type":"Question","name":"ما هي التوجيهات التربوية المعتمدة في مباراة التعليم تخصص التربية البدنية 2026؟","acceptedAnswer":{"@type":"Answer","text":"تعتمد مباراة التعليم لتوظيف أساتذة التربية البدنية والرياضية بالمغرب (CRMEF 2026) على التوجيهات التربوية لسنة 2009 الخاصة بالسلك الثانوي الإعدادي، والتوجيهات التربوية لسنة 2007 الخاصة بالسلك الثانوي التأهيلي، بالإضافة إلى مستجدات علوم التربية والقانون الإطار 51.17."}}]}</script>
+    <link rel="stylesheet" href="/css/profeps-unifier.min.css?v=20261101">
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col selection:bg-[#991b1b] selection:text-white">
 <!-- PROFEPS_UNIFIED_NAVBAR_START -->
@@ -475,30 +476,57 @@
   });
 
   // Sélecteur de langue universel
-  window.profepsSetLang = function(lang) {
-    try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
+  var nativeLang = ((document.documentElement.getAttribute('lang') || 'fr').toLowerCase().slice(0, 2));
+  var nativeDir = document.documentElement.getAttribute('dir') || (nativeLang === 'ar' ? 'rtl' : 'ltr');
+
+  window.profepsSetLang = function(lang, isAutoInit) {
+    if (!isAutoInit) {
+      try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
+    }
     ['fr', 'en', 'ar'].forEach(function(code) {
       var btn = document.getElementById('peps-btn-lang-' + code);
       if (btn) btn.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
+      document.querySelectorAll('.peps-lang-btn[data-lang="' + code + '"]').forEach(function(b) {
+        b.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
+      });
     });
     document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function(el) {
       var val = el.getAttribute('data-i18n-' + lang);
       if (val) el.textContent = val;
     });
-    document.documentElement.lang = lang;
-    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    if (typeof window.setToolLang === 'function') window.setToolLang(lang);
+    if (typeof window.changeLang === 'function') window.changeLang(lang);
+    if (typeof window.setLanguage === 'function') window.setLanguage(lang);
+    var hasBodyI18n = (
+      typeof window.setToolLang === 'function' ||
+      typeof window.changeLang === 'function' ||
+      typeof window.setLanguage === 'function' ||
+      document.querySelector('main [data-i18n-ar], .hero [data-i18n-ar], .vma-hero [data-i18n-ar]') !== null
+    );
+    if (hasBodyI18n) {
+      document.documentElement.lang = lang;
+      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    } else {
+      document.documentElement.lang = nativeLang;
+      document.documentElement.dir = nativeDir;
+    }
   };
 
-  var saved = 'fr';
-  try { saved = localStorage.getItem('profeps_lang') || 'fr'; } catch(e) {}
-  if (saved && saved !== 'fr') {
-    window.profepsSetLang(saved);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initPepsDropdown);
-  } else {
-    initPepsDropdown();
+  var saved = nativeLang === 'ar' ? 'ar' : 'fr';
+  try {
+    var storedLang = localStorage.getItem('profeps_lang');
+    if (nativeLang === 'ar') {
+      saved = 'ar';
+    } else if (storedLang) {
+      saved = storedLang;
+    }
+  } catch(e) {}
+  if (saved && (saved !== 'fr' || nativeLang === 'ar')) {
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', function() { window.profepsSetLang(saved, true); });
+    } else {
+      window.profepsSetLang(saved, true);
+    }
   }
 })();
 </script>
