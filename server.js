@@ -38,6 +38,13 @@ app.use((req, res, next) => {
     if (req.path === '/article-s%C3%A9ance.html' || decodeURIComponent(req.path) === '/article-séance.html') {
         return res.redirect(301, '/article-structure-seance.html');
     }
+    if (
+        req.path === '/article-arbitrage-volleyball.html' ||
+        req.path === '/article-gestes-arbitres-volleyball.html' ||
+        req.path === '/volleyball-eps-reglement-cycles-2bac.html'
+    ) {
+        return res.redirect(301, '/reglement-volleyball-fivb-gestes-arbitrage-eps.html');
+    }
     next();
 });
 
