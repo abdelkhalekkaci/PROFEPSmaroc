@@ -57,7 +57,7 @@ try:
     if os.path.exists("src"):
         subprocess.run(["cp", "-r", "src/.", f"{CLONE_DIR}/src/"], check=True)
     # Copy server.js, server.ts, and root configs
-    for cfg in ["server.js", "server.ts", "package.json", "vite.config.ts", "tsconfig.json", "metadata.json"]:
+    for cfg in ["server.js", "server.ts", "vercel.json", "package.json", "vite.config.ts", "tsconfig.json", "metadata.json"]:
         if os.path.exists(cfg):
             subprocess.run(["cp", cfg, f"{CLONE_DIR}/{cfg}"], check=True)
 
