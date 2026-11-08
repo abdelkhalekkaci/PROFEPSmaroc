@@ -43,10 +43,12 @@ try:
     old_athle = os.path.join(CLONE_DIR, "public", "reglement-athletisme-world-athletics-jury-eps.html")
     if os.path.exists(old_athle):
         os.remove(old_athle)
-    # Remove temporary chat screenshot attachments if present
+    # Remove temporary chat screenshot image attachments if present, while preserving PDF documents
     for sub in [os.path.join(CLONE_DIR, "public", "assets", "aistudio"), os.path.join(CLONE_DIR, "assets", "aistudio")]:
         if os.path.exists(sub):
-            shutil.rmtree(sub)
+            for f in os.listdir(sub):
+                if f.lower().endswith((".png", ".jpg", ".jpeg", ".webp")):
+                    os.remove(os.path.join(sub, f))
     # Copy scripts/, docs/, and src/
     subprocess.run(["cp", "-r", "scripts/.", f"{CLONE_DIR}/scripts/"], check=True)
     if os.path.exists("docs"):
