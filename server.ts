@@ -65,7 +65,7 @@ async function startServer() {
   app.use(express.json({ limit: '64kb' }));
   app.use(express.urlencoded({ extended: true, limit: '64kb' }));
 
-  // Redirection automatique des domaines VMA
+  // Redirection automatique des domaines VMA et URLs dupliquées (301)
   app.use((req: Request, res: Response, next: NextFunction) => {
     const host = req.headers.host || '';
     if (host.includes('vmacalculateur.com') || host.includes('mascalculator.com')) {
@@ -76,8 +76,43 @@ async function startServer() {
       res.redirect(301, '/');
       return;
     }
-    if (req.path === '/article-s%C3%A9ance.html' || decodeURIComponent(req.path) === '/article-séance.html') {
+    let decodedPath = req.path;
+    try {
+      decodedPath = decodeURIComponent(req.path);
+    } catch (_e) {}
+
+    if (
+      req.path === '/article-s%C3%A9ance.html' ||
+      decodedPath === '/article-séance.html' ||
+      req.path === '/article-structure-seance'
+    ) {
       res.redirect(301, '/article-structure-seance.html');
+      return;
+    }
+    if (
+      req.path === '/orientations-p%C3%A9dagogiques-eps-2007-2009.html' ||
+      decodedPath === '/orientations-pédagogiques-eps-2007-2009.html' ||
+      req.path === '/orientations-pedagogiques-2007-2009.html' ||
+      req.path === '/orientations-pedagogiques-eps-2009.html' ||
+      req.path === '/orientations-pedagogiques-septembre-2007-et-2009.html'
+    ) {
+      res.redirect(301, '/orientations-pedagogiques-eps-2007-2009.html');
+      return;
+    }
+    if (
+      req.path === '/biblioth%C3%A8que-num%C3%A9rique-eps.html' ||
+      decodedPath === '/bibliothèque-numérique-eps.html' ||
+      req.path === '/article-cours.html'
+    ) {
+      res.redirect(301, '/bibliotheque-numerique-eps.html');
+      return;
+    }
+    if (
+      req.path === '/article-arbitrage-volleyball.html' ||
+      req.path === '/article-gestes-arbitres-volleyball.html' ||
+      req.path === '/volleyball-eps-reglement-cycles-2bac.html'
+    ) {
+      res.redirect(301, '/reglement-volleyball-fivb-gestes-arbitrage-eps.html');
       return;
     }
     next();
@@ -115,13 +150,23 @@ async function startServer() {
     res.status(404).json({ success: false, error: 'Point de terminaison API introuvable' });
   });
 
-  // Servir les fichiers statiques de public/ directement (HTML, CSS, JS, images)
+  // Servir les fichiers statiques de public/ directement (HTML, CSS, JS, images, PDF avec Link canonical)
   app.use(express.static(path.join(__dirname, 'public'), {
     setHeaders: (res, filePath) => {
       if (/\.(css|js|png|jpg|jpeg|gif|svg|webp|ico|woff2?)$/i.test(filePath)) {
         res.setHeader('Cache-Control', 'public, max-age=604800, stale-while-revalidate=86400');
       } else if (/\.html$/i.test(filePath)) {
         res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+      } else if (/\.pdf$/i.test(filePath)) {
+        res.setHeader('Cache-Control', 'public, max-age=604800, stale-while-revalidate=86400');
+        const baseName = path.basename(filePath);
+        const opMatch = baseName.match(/^op-(.+)\.pdf$/i);
+        if (opMatch) {
+          const slug = opMatch[1].toLowerCase();
+          res.setHeader('Link', `<https://profeps.ma/orientations-pedagogiques-${slug}.html>; rel="canonical"`);
+        } else if (baseName === 'ARABE_OP_2009_12fa6def.pdf') {
+          res.setHeader('Link', '<https://profeps.ma/orientations-pedagogiques-arabe-college-2009.html>; rel="canonical"');
+        }
       }
     }
   }));

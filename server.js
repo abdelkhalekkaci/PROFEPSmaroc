@@ -35,8 +35,33 @@ app.use((req, res, next) => {
     if (req.path === '/index.html') {
         return res.redirect(301, '/');
     }
-    if (req.path === '/article-s%C3%A9ance.html' || decodeURIComponent(req.path) === '/article-séance.html') {
+    let decodedPath = req.path;
+    try {
+        decodedPath = decodeURIComponent(req.path);
+    } catch (e) {}
+
+    if (
+        req.path === '/article-s%C3%A9ance.html' ||
+        decodedPath === '/article-séance.html' ||
+        req.path === '/article-structure-seance'
+    ) {
         return res.redirect(301, '/article-structure-seance.html');
+    }
+    if (
+        req.path === '/orientations-p%C3%A9dagogiques-eps-2007-2009.html' ||
+        decodedPath === '/orientations-pédagogiques-eps-2007-2009.html' ||
+        req.path === '/orientations-pedagogiques-2007-2009.html' ||
+        req.path === '/orientations-pedagogiques-eps-2009.html' ||
+        req.path === '/orientations-pedagogiques-septembre-2007-et-2009.html'
+    ) {
+        return res.redirect(301, '/orientations-pedagogiques-eps-2007-2009.html');
+    }
+    if (
+        req.path === '/biblioth%C3%A8que-num%C3%A9rique-eps.html' ||
+        decodedPath === '/bibliothèque-numérique-eps.html' ||
+        req.path === '/article-cours.html'
+    ) {
+        return res.redirect(301, '/bibliotheque-numerique-eps.html');
     }
     if (
         req.path === '/article-arbitrage-volleyball.html' ||
@@ -89,13 +114,23 @@ app.use('/images', express.static(path.join(rootDir, 'public', 'images'), {
     }
 }));
 
-// Servir les fichiers statiques du dossier public avec stratégie de cache différenciée
+// Servir les fichiers statiques du dossier public avec stratégie de cache différenciée et en-tête Link canonical sur les PDF OP
 app.use(express.static(path.join(rootDir, 'public'), {
     setHeaders: (res, filePath) => {
         if (/\.(png|jpg|jpeg|gif|svg|webp|ico|woff2?)$/i.test(filePath)) {
             res.setHeader('Cache-Control', 'public, max-age=604800, stale-while-revalidate=86400');
         } else if (/\.(html|css|js)$/i.test(filePath)) {
             res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+        } else if (/\.pdf$/i.test(filePath)) {
+            res.setHeader('Cache-Control', 'public, max-age=604800, stale-while-revalidate=86400');
+            const baseName = path.basename(filePath);
+            const opMatch = baseName.match(/^op-(.+)\.pdf$/i);
+            if (opMatch) {
+                const slug = opMatch[1].toLowerCase();
+                res.setHeader('Link', `<https://profeps.ma/orientations-pedagogiques-${slug}.html>; rel="canonical"`);
+            } else if (baseName === 'ARABE_OP_2009_12fa6def.pdf') {
+                res.setHeader('Link', '<https://profeps.ma/orientations-pedagogiques-arabe-college-2009.html>; rel="canonical"');
+            }
         }
     }
 }));
