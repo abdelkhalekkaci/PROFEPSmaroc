@@ -140,6 +140,10 @@ app.use(express.static(path.join(rootDir, 'public'), {
                 res.setHeader('Link', '<https://profeps.ma/orientations-pedagogiques-anglais-college-2009.html>; rel="canonical"');
             } else if (baseName === '38_1893c607.pdf') {
                 res.setHeader('Link', '<https://profeps.ma/orientations-pedagogiques-anglais-lycee-2007.html>; rel="canonical"');
+            } else if (baseName === '27_9e312689.pdf') {
+                res.setHeader('Link', '<https://profeps.ma/orientations-pedagogiques-espagnol-college-2009.html>; rel="canonical"');
+            } else if (baseName === '39_4b901c89.pdf') {
+                res.setHeader('Link', '<https://profeps.ma/orientations-pedagogiques-espagnol-lycee-2007.html>; rel="canonical"');
             }
         }
     }
