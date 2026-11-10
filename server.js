@@ -136,6 +136,10 @@ app.use(express.static(path.join(rootDir, 'public'), {
                 res.setHeader('Link', '<https://profeps.ma/orientations-pedagogiques-francais-college-2009.html>; rel="canonical"');
             } else if (baseName === '43_5d2f40bc.pdf') {
                 res.setHeader('Link', '<https://profeps.ma/orientations-pedagogiques-francais-lycee-2007.html>; rel="canonical"');
+            } else if (baseName === '23_de42bac3.pdf') {
+                res.setHeader('Link', '<https://profeps.ma/orientations-pedagogiques-anglais-college-2009.html>; rel="canonical"');
+            } else if (baseName === '38_1893c607.pdf') {
+                res.setHeader('Link', '<https://profeps.ma/orientations-pedagogiques-anglais-lycee-2007.html>; rel="canonical"');
             }
         }
     }
