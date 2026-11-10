@@ -1,0 +1,1482 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Création de la Page Silo Complète Volley-Ball (FIVB) — ProfEPS Maroc (profeps.ma)
+Fichier généré : /public/aps-volleyball-eps-maroc.html
+Mise à jour du maillage :
+  - /public/hub-aps-sports-eps-maroc.html (Activation du Silo Complet Volley-Ball)
+  - /public/aps-handball-eps-maroc.html & /public/aps-basketball-eps-maroc.html (Liens croisés entre Silos)
+  - /public/blog.html (Ajout de la carte Silo Volley-Ball)
+  - /public/index.html & /index.html (Mise à jour de la bannière Portail APS : Handball + Basket + Volley)
+  - /public/sitemap.xml
+CONTRAINTE STRICTE : Ne jamais toucher ni modifier generateur.html.
+"""
+
+import os
+import json
+import shutil
+
+PUBLIC_DIR = "/app/applet/public"
+ROOT_DIR = "/app/applet"
+
+
+def extract_template_parts():
+    """Extract standardized navbar and E-E-A-T/footer from an existing article in /public/."""
+    ref_path = os.path.join(PUBLIC_DIR, "article-baremes-bac-sport-maroc-officiels-libres.html")
+    with open(ref_path, "r", encoding="utf-8") as f:
+        html = f.read()
+
+    nav_start = html.find("<!-- PROFEPS_UNIFIED_NAVBAR_START -->")
+    nav_end = html.find("<!-- PROFEPS_UNIFIED_NAVBAR_END -->") + len("<!-- PROFEPS_UNIFIED_NAVBAR_END -->")
+    navbar_html = html[nav_start:nav_end]
+
+    eeat_start = html.find("<!-- PROFEPS_EEAT_AUTHOR_START -->")
+    footer_html = html[eeat_start:]
+
+    return navbar_html, footer_html
+
+
+def create_volleyball_silo_page():
+    filename = "aps-volleyball-eps-maroc.html"
+    navbar_html, footer_html = extract_template_parts()
+    navbar_custom = navbar_html.replace(
+        'data-current-file="article-baremes-bac-sport-maroc-officiels-libres.html"',
+        f'data-current-file="{filename}"'
+    )
+
+    canonical_url = f"https://profeps.ma/{filename}"
+    title = "Volley-Ball en EPS au Maroc (1AC à 2Bac) : ATD, Studio Cycles & Fiches (PDF/Word) + Grilles d'Évaluation (/20) | ProfEPS"
+    meta_desc = "Silo officiel du Volley-Ball en EPS au Maroc (OP 2009 Collège & OP 2007 Lycée) : Analyse et Traitement Didactique (ATD), Studio interactif de projets de cycles et fiches de séances (1AC, 2AC, 3AC, TC, 1Bac, 2Bac × 4 niveaux du Débutant à l'Élite) avec visionneuse A4 avant téléchargement PDF/Word et grilles d'observation et d'évaluation /20."
+
+    course_schema = {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        "name": "Silo Complet Volley-Ball EPS Maroc (1AC à 2Bac) : ATD, 24 Cycles, 240 Fiches & Grilles /20",
+        "description": meta_desc,
+        "provider": {"@id": "https://profeps.ma/#organization"},
+        "educationalLevel": ["1AC", "2AC", "3AC", "Tronc Commun", "1ère Bac", "2ème Bac"],
+        "inLanguage": "fr-MA"
+    }
+
+    breadcrumb_schema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Accueil ProfEPS Maroc", "item": "https://profeps.ma/"},
+            {"@type": "ListItem", "position": 2, "name": "Portail des APS & Sports EPS", "item": "https://profeps.ma/hub-aps-sports-eps-maroc.html"},
+            {"@type": "ListItem", "position": 3, "name": "Volley-Ball EPS Maroc (Cycles, Fiches, ATD & Grilles)", "item": canonical_url}
+        ]
+    }
+
+    html = f'''<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{meta_desc}">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="ProfEPS Maroc">
+    <meta property="og:title" content="{title}">
+    <meta property="og:description" content="{meta_desc}">
+    <meta property="og:url" content="{canonical_url}">
+    <meta property="og:image" content="https://profeps.ma/images/prof_eps.png">
+    <meta property="og:locale" content="fr_MA">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{title}">
+    <meta name="twitter:description" content="{meta_desc}">
+    <meta name="twitter:image" content="https://profeps.ma/images/prof_eps.png">
+    <link rel="canonical" href="{canonical_url}">
+    <link rel="alternate" hreflang="fr-MA" href="{canonical_url}">
+    <link rel="alternate" hreflang="x-default" href="{canonical_url}">
+    <title>{title}</title>
+    <link rel="icon" type="image/png" href="/images/prof_eps.png">
+
+    <!-- Google tag (gtag.js) & Consent Mode v2 ProfEPS.ma -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      try {{
+        var saved = JSON.parse(localStorage.getItem("profeps_cookie_consent_v2") || "null");
+        if (saved) {{
+          gtag("consent", "default", {{
+            "ad_storage": saved.ads ? "granted" : "denied",
+            "ad_user_data": saved.ads ? "granted" : "denied",
+            "ad_personalization": saved.ads ? "granted" : "denied",
+            "analytics_storage": saved.analytics ? "granted" : "denied"
+          }});
+        }} else {{
+          gtag("consent", "default", {{
+            "ad_storage": "granted",
+            "ad_user_data": "granted",
+            "ad_personalization": "granted",
+            "analytics_storage": "granted"
+          }});
+          gtag("consent", "default", {{
+            "ad_storage": "denied",
+            "ad_user_data": "denied",
+            "ad_personalization": "denied",
+            "analytics_storage": "denied",
+            "region": ["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IS","IE","IT","LV","LI","LT","LU","MT","NL","NO","PL","PT","RO","SK","SI","ES","SE","GB","CH"],
+            "wait_for_update": 500
+          }});
+        }}
+      }} catch (e) {{}}
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TH0Z1SGNXH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      gtag('js', new Date());
+      gtag('config', 'G-TH0Z1SGNXH');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8253776880916865" crossorigin="anonymous"></script>
+    <script src="profeps-cmp.js" defer></script>
+    <link rel="stylesheet" href="/css/profeps-unifier.min.css?v=20261101">
+
+    <script type="application/ld+json">{json.dumps(course_schema, ensure_ascii=False)}</script>
+    <script type="application/ld+json">{json.dumps(breadcrumb_schema, ensure_ascii=False)}</script>
+
+    <style>
+        *, *::before, *::after {{ margin: 0; padding: 0; box-sizing: border-box; }}
+        :root {{
+            --primary: #991b1b; --primary-dark: #7f1d1d; --secondary: #006233; --secondary-dark: #064e3b;
+            --text-primary: #0f172a; --text-secondary: #334155; --text-muted: #64748b;
+            --bg-primary: #ffffff; --bg-secondary: #f8fafc; --border: #cbd5e1; --border-light: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(15,23,42,0.06); --shadow-md: 0 6px 20px rgba(15,23,42,0.08);
+            --radius: 10px; --radius-lg: 16px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Plus Jakarta Sans', var(--font-sans);
+        }}
+        body {{ font-family: var(--font-sans); background: var(--bg-secondary); color: var(--text-primary); line-height: 1.65; }}
+        a {{ text-decoration: none; color: inherit; }}
+
+        /* Hero & Intro */
+        .silo-hero {{ padding: 125px 1.5rem 2.25rem; background: linear-gradient(135deg, #fff8f8 0%, #f8fafc 52%, #f3faf6 100%); border-bottom: 1px solid var(--border-light); }}
+        .silo-hero-inner {{ max-width: 1220px; margin: 0 auto; }}
+        .silo-breadcrumb {{ font-size: 0.84rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.65rem; display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }}
+        .silo-breadcrumb a:hover {{ color: var(--primary); text-decoration: underline; }}
+        .silo-title {{ font-family: var(--font-display); font-size: clamp(1.65rem, 3.3vw, 2.35rem); font-weight: 900; color: var(--text-primary); line-height: 1.24; margin-bottom: 0.85rem; }}
+        .silo-intro-box {{ background: #ffffff; border: 1px solid var(--border); border-left: 5px solid var(--primary); border-radius: 12px; padding: 1.2rem 1.4rem; margin-bottom: 1.25rem; box-shadow: var(--shadow-sm); display: grid; grid-template-columns: 1.6fr 1fr; gap: 1.25rem; align-items: center; }}
+        .silo-intro-text {{ font-size: 0.94rem; color: var(--text-secondary); line-height: 1.65; }}
+        .specs-strip {{ display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.55rem; background: #f8fafc; padding: 0.85rem; border-radius: 10px; border: 1px solid var(--border-light); font-size: 0.8rem; color: var(--text-primary); }}
+        .specs-strip div strong {{ display: block; color: var(--primary); font-size: 0.76rem; text-transform: uppercase; }}
+
+        /* Sticky Main Volet Navigation */
+        .volet-nav-wrapper {{ position: sticky; top: 74px; z-index: 90; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); box-shadow: 0 2px 10px rgba(15,23,42,0.04); }}
+        .volet-nav {{ max-width: 1220px; margin: 0 auto; padding: 0.6rem 1.5rem; display: flex; flex-wrap: wrap; gap: 0.45rem; align-items: center; justify-content: space-between; }}
+        .volet-tabs {{ display: flex; flex-wrap: wrap; gap: 0.35rem; }}
+        .volet-tab-btn {{ cursor: pointer; border: 1px solid transparent; background: #f1f5f9; color: var(--text-secondary); padding: 0.58rem 1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 800; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.4rem; }}
+        .volet-tab-btn:hover {{ color: var(--text-primary); background: #e2e8f0; }}
+        .volet-tab-btn.active {{ background: var(--primary); color: #ffffff; box-shadow: var(--shadow-sm); }}
+
+        .silo-main {{ max-width: 1220px; margin: 0 auto; padding: 2rem 1.5rem 3.5rem; }}
+        .volet-panel {{ display: none; }}
+        .volet-panel.active {{ display: block; }}
+
+        /* Studio Cycles & Fiches Control Panel */
+        .studio-shell {{ background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); overflow: hidden; }}
+        .studio-top-bar {{ background: #0f172a; color: #ffffff; padding: 1.25rem 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }}
+        .studio-top-bar h2 {{ font-size: 1.22rem; font-weight: 900; color: #ffffff; margin: 0; }}
+        .studio-top-bar p {{ font-size: 0.84rem; color: #cbd5e1; margin: 0.2rem 0 0; }}
+
+        .studio-controls {{ padding: 1.35rem 1.5rem; background: #f8fafc; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 1.15rem; }}
+        .control-row {{ display: flex; flex-direction: column; gap: 0.45rem; }}
+        .control-label {{ font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); }}
+
+        /* 6 School Level Tabs (1AC -> 2Bac) */
+        .school-level-tabs {{ display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.5rem; }}
+        .school-tab {{ cursor: pointer; padding: 0.7rem 0.5rem; background: #ffffff; border: 2px solid var(--border); border-radius: 10px; text-align: center; transition: all 0.2s; }}
+        .school-tab strong {{ display: block; font-size: 0.92rem; color: var(--text-primary); font-weight: 900; }}
+        .school-tab span {{ display: block; font-size: 0.73rem; color: var(--text-muted); font-weight: 600; margin-top: 0.15rem; }}
+        .school-tab:hover {{ border-color: var(--primary); }}
+        .school-tab.active {{ background: #fff1f2; border-color: var(--primary); box-shadow: var(--shadow-sm); }}
+        .school-tab.active strong {{ color: var(--primary); }}
+
+        /* 4 Practice Level Tabs (N1 -> N4) */
+        .practice-level-tabs {{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }}
+        .practice-tab {{ cursor: pointer; padding: 0.65rem 0.75rem; background: #ffffff; border: 2px solid var(--border); border-radius: 10px; text-align: left; transition: all 0.2s; }}
+        .practice-tab strong {{ display: block; font-size: 0.85rem; color: var(--text-primary); font-weight: 800; }}
+        .practice-tab span {{ display: block; font-size: 0.74rem; color: var(--text-muted); margin-top: 0.15rem; line-height: 1.3; }}
+        .practice-tab:hover {{ border-color: var(--secondary); }}
+        .practice-tab.active {{ background: #f0fdf4; border-color: var(--secondary); box-shadow: var(--shadow-sm); }}
+        .practice-tab.active strong {{ color: var(--secondary); }}
+
+        /* View Mode & Custom Meta Inputs */
+        .meta-and-view-grid {{ display: grid; grid-template-columns: 1.1fr 1.4fr; gap: 1rem; align-items: end; padding-top: 0.5rem; border-top: 1px dashed var(--border); }}
+        .view-mode-group {{ display: flex; flex-wrap: wrap; gap: 0.4rem; background: #e2e8f0; padding: 0.3rem; border-radius: 9px; }}
+        .view-mode-btn {{ flex: 1; cursor: pointer; border: none; background: transparent; padding: 0.5rem 0.75rem; font-size: 0.81rem; font-weight: 800; color: var(--text-secondary); border-radius: 7px; white-space: nowrap; }}
+        .view-mode-btn.active {{ background: #ffffff; color: var(--text-primary); box-shadow: var(--shadow-sm); }}
+        .custom-inputs-row {{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }}
+        .custom-inputs-row input, .seance-select {{ width: 100%; padding: 0.5rem 0.65rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.82rem; font-family: inherit; background: #ffffff; color: var(--text-primary); }}
+
+        /* Download Action Bar (Word & PDF for Cycle + Fiches) */
+        .export-action-bar {{ padding: 1rem 1.5rem; background: #fff8f8; border-bottom: 1px solid #fecdd3; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.85rem; }}
+        .export-btn-group {{ display: flex; flex-wrap: wrap; gap: 0.55rem; }}
+        .btn-export {{ cursor: pointer; border: none; padding: 0.62rem 1rem; border-radius: 8px; font-size: 0.82rem; font-weight: 800; display: inline-flex; align-items: center; gap: 0.45rem; transition: all 0.2s; }}
+        .btn-word-cycle {{ background: #1e40af; color: #ffffff; }}
+        .btn-word-cycle:hover {{ background: #1e3a8a; }}
+        .btn-pdf-cycle {{ background: #991b1b; color: #ffffff; }}
+        .btn-pdf-cycle:hover {{ background: #7f1d1d; }}
+        .btn-word-fiches {{ background: #006233; color: #ffffff; }}
+        .btn-word-fiches:hover {{ background: #064e3b; }}
+        .btn-pdf-fiches {{ background: #0f172a; color: #ffffff; }}
+        .btn-pdf-fiches:hover {{ background: #1e293b; }}
+        .btn-copy-doc {{ background: #ffffff; color: var(--text-primary); border: 1px solid var(--border); }}
+        .btn-copy-doc:hover {{ border-color: var(--primary); color: var(--primary); }}
+
+        /* Professional A4 Document Viewer */
+        .viewer-canvas {{ background: #cbd5e1; padding: 1.75rem 1.25rem; max-height: 820px; overflow-y: auto; }}
+        .a4-sheet {{ background: #ffffff; max-width: 960px; margin: 0 auto; padding: 2rem 2.25rem; border-radius: 6px; box-shadow: 0 10px 30px rgba(15,23,42,0.18); color: #0f172a; font-size: 0.9rem; line-height: 1.6; }}
+        .a4-header-table {{ width: 100%; border-collapse: collapse; margin-bottom: 1.15rem; border-bottom: 3px double #0f172a; padding-bottom: 0.75rem; }}
+        .a4-header-table td {{ border: none !important; padding: 0.2rem 0 !important; vertical-align: top; font-size: 0.84rem; }}
+        .a4-doc-title {{ text-align: center; background: #f1f5f9; border: 2px solid #0f172a; padding: 0.7rem 1rem; margin: 0.85rem 0 1.15rem; border-radius: 6px; }}
+        .a4-doc-title h3 {{ font-size: 1.12rem; font-weight: 900; color: #991b1b; text-transform: uppercase; margin: 0; }}
+        .a4-doc-title p {{ font-size: 0.84rem; font-weight: 700; color: #0f172a; margin: 0.2rem 0 0; }}
+        .a4-meta-box {{ background: #f8fafc; border: 1px solid #94a3b8; border-radius: 6px; padding: 0.85rem 1rem; margin-bottom: 1.15rem; font-size: 0.85rem; }}
+        .a4-meta-box p {{ margin-bottom: 0.35rem; }}
+        .a4-meta-box p:last-child {{ margin-bottom: 0; }}
+        .a4-table {{ width: 100%; border-collapse: collapse; margin: 0.85rem 0 1.25rem; font-size: 0.83rem; }}
+        .a4-table th {{ background: #0f172a; color: #ffffff; font-weight: 800; padding: 0.6rem 0.7rem; border: 1px solid #0f172a; text-align: left; }}
+        .a4-table td {{ padding: 0.6rem 0.7rem; border: 1px solid #64748b; vertical-align: top; color: #0f172a; }}
+        .a4-table tr:nth-child(even) td {{ background: #f8fafc; }}
+        .seance-fiche-block {{ border: 2px solid #0f172a; border-radius: 8px; margin-bottom: 1.5rem; page-break-inside: avoid; overflow: hidden; }}
+        .seance-fiche-head {{ background: #991b1b; color: #ffffff; padding: 0.65rem 1rem; display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 0.9rem; }}
+
+        /* Content Cards for Volet ATD, Grilles, Terrain & Articles */
+        .content-panel-card {{ background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm); }}
+        .content-panel-card h2 {{ font-size: 1.38rem; font-weight: 900; color: var(--text-primary); margin-bottom: 0.85rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--primary); }}
+        .content-panel-card h3 {{ font-size: 1.12rem; font-weight: 800; color: var(--primary); margin: 1.35rem 0 0.55rem; }}
+        .atd-grid-2 {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.1rem; margin: 1rem 0; }}
+        .atd-box {{ background: #f8fafc; border: 1px solid var(--border); border-left: 4px solid var(--secondary); padding: 1.15rem; border-radius: 10px; }}
+        .atd-box h4 {{ font-size: 0.98rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.45rem; }}
+        .atd-box ul {{ padding-left: 1.25rem; font-size: 0.88rem; color: var(--text-secondary); }}
+        .atd-box li {{ margin-bottom: 0.35rem; }}
+
+        /* Related Articles Grid */
+        .articles-cards-grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.2rem; margin-top: 1.25rem; }}
+        .rel-card {{ background: #ffffff; border: 1px solid var(--border); border-radius: 12px; padding: 1.3rem; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm); transition: all 0.2s; }}
+        .rel-card:hover {{ border-color: var(--primary); transform: translateY(-2px); }}
+        .rel-card-kicker {{ font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--primary); margin-bottom: 0.35rem; }}
+        .rel-card h3 {{ font-size: 1.05rem; font-weight: 800; color: var(--text-primary); margin: 0 0 0.5rem; line-height: 1.35; }}
+        .rel-card p {{ font-size: 0.86rem; color: var(--text-secondary); margin-bottom: 1rem; }}
+        .rel-card-link {{ font-size: 0.84rem; font-weight: 800; color: var(--primary); display: inline-flex; align-items: center; gap: 0.3rem; }}
+
+        @media (max-width: 960px) {{
+            .silo-intro-box {{ grid-template-columns: 1fr; }}
+            .school-level-tabs {{ grid-template-columns: repeat(3, 1fr); }}
+            .practice-level-tabs {{ grid-template-columns: repeat(2, 1fr); }}
+            .meta-and-view-grid {{ grid-template-columns: 1fr; }}
+            .custom-inputs-row {{ grid-template-columns: 1fr; }}
+        }}
+        @media (max-width: 560px) {{
+            .school-level-tabs {{ grid-template-columns: repeat(2, 1fr); }}
+            .practice-level-tabs {{ grid-template-columns: 1fr; }}
+        }}
+    </style>
+</head>
+<body>
+{navbar_custom}
+
+    <!-- EN-TÊTE & INTRODUCTION PÉDAGOGIQUE DU VOLLEY-BALL (FIVB) -->
+    <header class="silo-hero">
+        <div class="silo-hero-inner">
+            <nav class="silo-breadcrumb" aria-label="Fil d'Ariane">
+                <a href="index.html">Accueil</a> <span>›</span>
+                <a href="hub-aps-sports-eps-maroc.html">Portail des APS &amp; Sports</a> <span>›</span>
+                <span style="color:#991b1b;">Volley-Ball EPS Maroc (1AC à 2Bac)</span>
+            </nav>
+            <h1 class="silo-title">🏐 Volley-Ball en EPS au Maroc : ATD, Studio des Cycles &amp; Fiches (1AC à 2Bac) et Grilles d'Observation &amp; d'Évaluation (/20)</h1>
+
+            <div class="silo-intro-box">
+                <div class="silo-intro-text">
+                    <strong style="color:#0f172a;display:block;margin-bottom:0.3rem;font-size:1rem;">Introduction Didactique &amp; Spécificité du Volley-Ball en EPS au Maroc (OP 2009 &amp; OP 2007) :</strong>
+                    Le <strong>Volley-Ball (الكرة الطائرة)</strong> est le sport collectif de renvoi en espace séparé de référence dans les collèges et lycées marocains. Contrairement aux sports d'interpénétration, la cible est <strong>horizontale et se confond avec l'espace de jeu adverse (9 m × 9 m)</strong> par-delà un filet haut, tandis que la règle fondamentale <strong>interdit de tenir ou de bloquer le ballon (frappe explosive en une fraction de seconde, maximum 3 touches par équipe)</strong>. Retrouvez sur cette page spéciale : le <strong>Studio interactif des 24 Cycles &amp; 240 Fiches de séances (1AC à 2Bac × 4 niveaux de pratique) avec visionnage A4 Pro et export Word/PDF</strong>, l'<strong>ATD complet</strong>, les <strong>Grilles d'observation et d'évaluation (/20)</strong> et tous nos guides FIVB.
+                </div>
+                <div class="specs-strip">
+                    <div><strong>Terrain Officiel FIVB</strong>18 m × 9 m (2 camps de 9×9m) · Ligne d'attaque à 3 m du filet</div>
+                    <div><strong>Hauteurs du Filet</strong>Collège : 2,00–2,15 m · Lycée Filles : 2,24 m · Lycée Garçons : 2,43 m</div>
+                    <div><strong>Ballon &amp; Règles Clés</strong>Taille 5 (260–280 g) · 3 touches max · Frappe brève · Rotation 6 postes</div>
+                    <div><strong>Évaluation OP</strong>Collège (143-09) : 12+3+5 (/20) · Lycée (142-10) : 14+3+3 (/20)</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- BARRE DE NAVIGATION INTERNE EN 5 VOLETS (UX CLAIRE & RAPIDE) -->
+    <div class="volet-nav-wrapper">
+        <div class="volet-nav">
+            <div class="volet-tabs" role="tablist" aria-label="Sections du Silo Volley-Ball">
+                <button type="button" class="volet-tab-btn active" id="tab-btn-studio" onclick="switchVolleyballVolet('studio')">⚡ 1. Studio Cycles &amp; Fiches (1AC → 2Bac)</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-atd" onclick="switchVolleyballVolet('atd')">📐 2. ATD Volley-Ball Complet</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-grilles" onclick="switchVolleyballVolet('grilles')">📊 3. Grilles d'Observation &amp; Évaluation (/20)</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-terrain" onclick="switchVolleyballVolet('terrain')">🏟️ 4. Terrain 40+ Élèves &amp; Arbitrage FIVB</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-articles" onclick="switchVolleyballVolet('articles')">📚 5. Articles &amp; Dossiers Volley (8)</button>
+            </div>
+            <div style="display:flex;gap:0.85rem;align-items:center;">
+                <a href="aps-handball-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#006233;">🤾 Handball</a>
+                <a href="aps-basketball-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#1e40af;">🏀 Basket à 5</a>
+                <a href="hub-aps-sports-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#991b1b;">← Toutes les APS</a>
+            </div>
+        </div>
+    </div>
+
+    <main class="silo-main">
+
+        <!-- ================================================================== -->
+        <!-- VOLET 1 : STUDIO INTERACTIF CYCLES & FICHES (1AC -> 2BAC × 4 NIV)  -->
+        <!-- ================================================================== -->
+        <section id="volet-studio" class="volet-panel active" aria-label="Studio Cycles et Fiches Volley-Ball">
+            <div class="studio-shell">
+                <div class="studio-top-bar">
+                    <div>
+                        <h2>⚡ Studio Professionnel Volley-Ball : Projets de Cycles &amp; Fiches de Séances (Visionnage A4 + Export Word &amp; PDF)</h2>
+                        <p>Sélectionnez votre niveau scolaire (1AC à 2Bac) puis le niveau de pratique de vos élèves (Débutant à Élite) pour visualiser et télécharger le dossier complet.</p>
+                    </div>
+                    <span id="studioCurrentBadge" style="background:#991b1b;color:#fff;padding:0.4rem 0.85rem;border-radius:8px;font-size:0.8rem;font-weight:800;white-space:nowrap;">1AC · Niveau 1 (Débutant)</span>
+                </div>
+
+                <div class="studio-controls">
+                    <!-- ÉTAPE 1 : LES 6 NIVEAUX SCOLAIRES -->
+                    <div class="control-row">
+                        <span class="control-label">Étape 1 — Choisissez le Niveau Scolaire (Orientations Pédagogiques 2009 Collège &amp; 2007 Lycée) :</span>
+                        <div class="school-level-tabs" role="tablist">
+                            <button type="button" class="school-tab active" data-school="1AC" onclick="selectSchoolLevel('1AC')">
+                                <strong>1ère AC</strong>
+                                <span>Collège · OP 2009</span>
+                            </button>
+                            <button type="button" class="school-tab" data-school="2AC" onclick="selectSchoolLevel('2AC')">
+                                <strong>2ème AC</strong>
+                                <span>Collège · OP 2009</span>
+                            </button>
+                            <button type="button" class="school-tab" data-school="3AC" onclick="selectSchoolLevel('3AC')">
+                                <strong>3ème AC</strong>
+                                <span>Collège · OP 2009</span>
+                            </button>
+                            <button type="button" class="school-tab" data-school="TC" onclick="selectSchoolLevel('TC')">
+                                <strong>Tronc Commun</strong>
+                                <span>Lycée · OP 2007</span>
+                            </button>
+                            <button type="button" class="school-tab" data-school="1BAC" onclick="selectSchoolLevel('1BAC')">
+                                <strong>1ère Bac</strong>
+                                <span>Lycée · OP 2007</span>
+                            </button>
+                            <button type="button" class="school-tab" data-school="2BAC" onclick="selectSchoolLevel('2BAC')">
+                                <strong>2ème Bac</strong>
+                                <span>Bac Sport · OP 2007</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ÉTAPE 2 : LES 4 NIVEAUX DE PRATIQUE -->
+                    <div class="control-row">
+                        <span class="control-label">Étape 2 — Choisissez le Niveau de Pratique de votre Classe dans ce Niveau Scolaire :</span>
+                        <div class="practice-level-tabs" role="tablist">
+                            <button type="button" class="practice-tab active" data-practice="N1" onclick="selectPracticeLevel('N1')">
+                                <strong>Niveau 1 · Débutant</strong>
+                                <span>Se déplacer sous la balle, frapper haut (touche/manchette) et assurer le service cuillère</span>
+                            </button>
+                            <button type="button" class="practice-tab" data-practice="N2" onclick="selectPracticeLevel('N2')">
+                                <strong>Niveau 2 · Débrouillé</strong>
+                                <span>Construire en 2 touches (Réception orientée vers l'avant + Renvoi placé au fond)</span>
+                            </button>
+                            <button type="button" class="practice-tab" data-practice="N3" onclick="selectPracticeLevel('N3')">
+                                <strong>Niveau 3 · Confirmé</strong>
+                                <span>Chaîne 3 touches (Réception → Passe en Zone 3 → Attaque placée) &amp; Service tennis</span>
+                            </button>
+                            <button type="button" class="practice-tab" data-practice="N4" onclick="selectPracticeLevel('N4')">
+                                <strong>Niveau 4 · Élite / ASS</strong>
+                                <span>Système 6c6 en W, Smash &amp; Feinte (Tip), Contre au filet, Couverture &amp; FIVB</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ÉTAPE 3 : MODE DE VISIONNAGE & PERSONNALISATION EN-TÊTE -->
+                    <div class="meta-and-view-grid">
+                        <div>
+                            <span class="control-label" style="display:block;margin-bottom:0.35rem;">Étape 3 — Document affiché dans la Visionneuse Pro :</span>
+                            <div class="view-mode-group">
+                                <button type="button" class="view-mode-btn active" id="vmode-ppc" onclick="selectViewMode('ppc')">📋 Projet de Cycle (PPC)</button>
+                                <button type="button" class="view-mode-btn" id="vmode-all-fiches" onclick="selectViewMode('all_fiches')">📚 Les 10 Fiches de Séance</button>
+                                <button type="button" class="view-mode-btn" id="vmode-single-fiche" onclick="selectViewMode('single_fiche')">🔍 Fiche par Séance</button>
+                            </div>
+                            <div id="singleSeanceSelectorWrap" style="display:none;margin-top:0.5rem;">
+                                <select id="singleSeanceSelect" class="seance-select" onchange="renderStudioPreview()">
+                                    <option value="0">Séance 1 — Évaluation Diagnostique (Situation de Référence 4c4 / 6c6)</option>
+                                    <option value="1">Séance 2 — Lecture de trajectoire, déplacement et Touche Haute à 10 doigts</option>
+                                    <option value="2">Séance 3 — La Manchette de réception (Plateforme des avant-bras &amp; poussée des jambes)</option>
+                                    <option value="3">Séance 4 — Le Service par en bas (Cuillère) régulier et ciblé</option>
+                                    <option value="4">Séance 5 — Coopérer à 2 touches : Amortir en 1ère touche vers la zone avant</option>
+                                    <option value="5">Séance 6 — La Chaîne Réception - Passe (Orientation vers le Passeur en Zone 3)</option>
+                                    <option value="6">Séance 7 — La 3ème Touche d'Attaque : Viser les espaces libres adverses (Zones 1, 5, 6)</option>
+                                    <option value="7">Séance 8 — Organisation Défensive Collective, Couverture &amp; Rotation des postes</option>
+                                    <option value="8">Séance 9 — Match dirigé à thème (4c4 / 6c6) &amp; Arbitrage Officiel FIVB</option>
+                                    <option value="9">Séance 10 — Évaluation Sommative Finale (/20)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="control-label" style="display:block;margin-bottom:0.35rem;">Personnaliser l'en-tête officiel avant export (Optionnel) :</span>
+                            <div class="custom-inputs-row">
+                                <input type="text" id="inpProfName" placeholder="Nom du Professeur..." oninput="renderStudioPreview()">
+                                <input type="text" id="inpEtabName" placeholder="Établissement / Lycée..." oninput="renderStudioPreview()">
+                                <input type="text" id="inpArefName" placeholder="AREF / Direction..." oninput="renderStudioPreview()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BARRE DES 4 BOUTONS DE TÉLÉCHARGEMENT (PROJET DE CYCLE WORD/PDF + FICHES PÉDAGOGIQUES WORD/PDF) -->
+                <div class="export-action-bar">
+                    <div class="export-btn-group">
+                        <button type="button" class="btn-export btn-word-cycle" onclick="exportVolleyballDoc('ppc', 'word')">📝 Projet de Cycle (.doc Word)</button>
+                        <button type="button" class="btn-export btn-pdf-cycle" onclick="exportVolleyballDoc('ppc', 'pdf')">📄 Projet de Cycle (PDF A4)</button>
+                        <button type="button" class="btn-export btn-word-fiches" onclick="exportVolleyballDoc('fiches', 'word')">📝 Fiches Pédagogiques (.doc Word)</button>
+                        <button type="button" class="btn-export btn-pdf-fiches" onclick="exportVolleyballDoc('fiches', 'pdf')">📄 Fiches Pédagogiques (PDF A4)</button>
+                    </div>
+                    <button type="button" class="btn-export btn-copy-doc" onclick="copyCurrentPreview(this)">📋 Copier l'aperçu</button>
+                </div>
+
+                <!-- VISIONNEUSE PROFESSIONNELLE A4 EN DIRECT -->
+                <div class="viewer-canvas">
+                    <div id="studioA4Preview" class="a4-sheet">
+                        <!-- Injecté dynamiquement par JS dès le chargement -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 2 : ANALYSE ET TRAITEMENT DIDACTIQUE (ATD) DU VOLLEY-BALL    -->
+        <!-- ================================================================== -->
+        <section id="volet-atd" class="volet-panel" aria-label="Analyse et Traitement Didactique Volley-Ball">
+            <div class="content-panel-card">
+                <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1rem;">
+                    <div>
+                        <span style="font-size:0.78rem;font-weight:800;color:#006233;text-transform:uppercase;">Référentiel Didactique Officiel · Concours CRMEF, CAPEP &amp; Dossier Pédagogique</span>
+                        <h2 style="border:none;margin:0.2rem 0 0;padding:0;">📐 Analyse et Traitement Didactique (ATD) du Volley-Ball en EPS</h2>
+                    </div>
+                    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+                        <button type="button" class="btn-export btn-word-cycle" onclick="exportElementAsWord('atdPrintableContent', 'ATD-Volleyball-EPS-Maroc')">📝 Télécharger ATD (.doc Word)</button>
+                        <button type="button" class="btn-export btn-pdf-cycle" onclick="printElementAsPdf('atdPrintableContent', 'ATD Volley-Ball EPS Maroc')">📄 Imprimer / PDF A4</button>
+                    </div>
+                </div>
+
+                <div id="atdPrintableContent">
+                    <h3>1. Définition &amp; Logique Interne du Volley-Ball (FIVB)</h3>
+                    <p>Le <strong>Volley-Ball</strong> est un sport collectif de renvoi en <strong>espace séparé</strong> par un obstacle vertical haut (le filet : 2,00 m à 2,43 m), opposant deux équipes de <strong>6 joueurs</strong> sur un terrain rectangulaire de <strong>18 m × 9 m</strong> (deux camps de <strong>9 m × 9 m</strong>). Sa logique interne est unique parmi les sports collectifs scolaires : <strong>la cible est horizontale et se confond intégralement avec le sol du camp adverse</strong> (l'adversaire se trouve donc *dans* la cible qu'il défend), tandis que la règle fondamentale <strong>interdit tout maintien ou blocage du ballon</strong> (obligation de frapper la balle de manière brève et explosive en quelques centièmes de seconde, avec un maximum de <strong>3 touches collectives par camp</strong> et interdiction pour un même joueur de toucher deux fois consécutivement le ballon hors contre).</p>
+
+                    <div class="atd-grid-2">
+                        <div class="atd-box">
+                            <h4>🎯 Problèmes Fondamentaux du Volley-Ball en EPS</h4>
+                            <ul>
+                                <li><strong>Agir avant que la balle ne touche le sol (Urgence perceptive et motrice) :</strong> Lire précocement la trajectoire aérienne du ballon (vitesse, hauteur, profondeur) pour <strong>se déplacer avant de frapper à l'arrêt et équilibré</strong> sous la balle.</li>
+                                <li><strong>Construire une motricité spécifique de frappe (et non de saisie) :</strong> Remplacer le réflexe naturel d'attraper ou de griffer la balle par deux surfaces de rebond rigides et orientables : le <strong>triangle des 10 doigts au-dessus du front (touche haute)</strong> et la <strong>plateforme des avant-bras tendus (manchette)</strong>.</li>
+                                <li><strong>Résoudre la contradiction « Conserver pour Attaquer » :</strong> Amortir une balle rapide qui arrive (1ère touche haute vers le centre avant / Zone 3) puis accélérer une balle haute vers un espace libre du sol adverse (3ème touche).</li>
+                                <li><strong>Passer de l'espace individuel à la solidarité des 3 touches :</strong> Communiquer (« J'ai ! », « Laisse ! »), respecter la rotation des 6 postes et différencier les rôles de réceptionneur, passeur et attaquant.</li>
+                            </ul>
+                        </div>
+                        <div class="atd-box" style="border-left-color:#991b1b;">
+                            <h4>🌱 Principes &amp; Règles d'Action + Enjeux de Formation (OP 2007/2009)</h4>
+                            <ul>
+                                <li><strong>Principes en Phase de Réception / Construction (Attaque) :</strong> Mettre la balle en jeu à coup sûr (service), amortir et conserver la balle dans son camp en l'orientant haut vers la zone avant (Zone 3), transmettre une passe haute et précise à l'attaquant (Zones 4 ou 2), envoyer le ballon dans les zones libres ou de rupture adverses.</li>
+                                <li><strong>Principes en Phase de Défense du Sol :</strong> Protéger son camp en se répartissant l'espace (formation en W ou demi-cercle), couvrir le partenaire qui attaque ou qui contre, se replacer immédiatement après chaque frappe.</li>
+                                <li><strong>Enjeux Moteurs, Cognitifs &amp; Citoyens :</strong> Coordination oculo-manuelle, appréciation des trajectoires paraboliques, équité filles/garçons (zéro contact physique, primauté de la précision sur la force brute), arbitrage FIVB et maîtrise émotionnelle.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>2. Modélisation Didactique des 4 Niveaux d'Habileté en Volley-Ball Scolaire</h3>
+                    <div class="table-wrap" style="margin-top:0.75rem;">
+                        <table class="a4-table">
+                            <thead>
+                                <tr>
+                                    <th>Niveau Didactique</th>
+                                    <th>Comportements Initiaux Observables (Service / Réception / Renvoi)</th>
+                                    <th>Thème d'Étude Prioritaire &amp; Objectif de Transformation</th>
+                                    <th>Situation de Référence Évolutive</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Niveau 1<br>Débutant (Renvoi aléatoire)</strong></td>
+                                    <td>Peur du ballon ou déplacement tardif (frappe en reculant à bout de bras), nombreuses balles tenues/collées, renvoi direct aléatoire dès la 1ère touche, échec fréquent au service (filet), silence total entre partenaires.</td>
+                                    <td>Lire la trajectoire pour se placer sous le ballon avant de frapper haut (touche à 10 doigts / manchette), réussir 7 services cuillère sur 10 et conserver le ballon à 2 joueurs.</td>
+                                    <td>Jeu 2c2 ou 3c3 sur terrain réduit (6×6m ou 7×7m) avec bonus de +2 pts si renvoi après 2 touches.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Niveau 2<br>Débrouillé (Construction à 2 touches)</strong></td>
+                                    <td>Service par en bas acquis, mais la 1ère touche est encore trop basse ou envoyée au hasard ; les élèves proches se gênent ou se regardent pendant que la balle tombe entre eux.</td>
+                                    <td>Dissocier la 1ère touche (réception haute orientée vers l'avant du terrain) de la 2ème/3ème touche (renvoi placé vers le fond du camp adverse) et communiquer (« J'ai ! »).</td>
+                                    <td>Match 3c3 ou 4c4 : point simple = 1 pt ; point marqué après réception orientée vers l'avant + renvoi au fond = 3 pts.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Niveau 3<br>Confirmé (Chaîne R-P-A en 3 touches)</strong></td>
+                                    <td>Capacité à faire 2 ou 3 touches mais sans poste de passeur fixe ; attaques systématiquement renvoyées sur les joueurs adverses au lieu des espaces vides.</td>
+                                    <td>Stabiliser la chaîne <strong>Réception (manchette vers Zone 3) → Passe haute du passeur → Attaque placée ou smashée (Zones 4/2)</strong> vers les zones libres adverses + introduire le service tennis.</td>
+                                    <td>Match 4c4 ou 6c6 avec passeur fixe en Zone 3 et bonification des attaques en 3ème touche dans les coins (Zones 1 et 5).</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Niveau 4<br>Élite / ASS</strong></td>
+                                    <td>Chaîne des 3 touches maîtrisée sur balles faciles mais désorganisation sur service flottant/puissant ou face au contre adverse.</td>
+                                    <td>Organiser le système collectif 6c6 en W en réception, varier l'attaque (smash puissant vs feinte/tip derrière le contre), mettre en place le contre individuel/à deux et la couverture défensive.</td>
+                                    <td>Match officiel 6c6 FIVB (sets de 15 ou 25 pts) avec rotation intégrale, arbitrage à 2 et analyse statistique.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>3. Tableau de Remédiation Technique : Erreurs Fréquentes des Élèves &amp; Corrections Pédagogiques</h3>
+                    <div class="table-wrap" style="margin-top:0.75rem;">
+                        <table class="a4-table">
+                            <thead>
+                                <tr>
+                                    <th>Geste Technique FIVB</th>
+                                    <th>Erreur Fréquente Observée sur le Terrain</th>
+                                    <th>Remédiation &amp; Consigne Pédagogique Immédiate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>La Passe Haute (Touche à 10 doigts)</strong></td>
+                                    <td>Balle frappée avec la paume des mains (claque bruyante) ou « portée / collée » à hauteur de poitrine, coudes trop écartés.</td>
+                                    <td>Former une <strong>« fenêtre triangulaire » (pouces-index) à 15 cm au-dessus du front</strong> avant l'arrivée du ballon ; si l'élève laisse tomber la balle sans la toucher, elle doit atterrir sur son front (et non devant ses pieds) ; poussée simultanée jambes-bras.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>La Manchette (Réception basse)</strong></td>
+                                    <td>Coudes pliés au moment de l'impact (la balle part en arrière au-dessus de la tête), poignets croisés ou saut en frappant la balle.</td>
+                                    <td>Verrouiller les coudes tendus (<strong>« Rentrer la tête dans les épaules, pouces parallèles pointés vers le sol »</strong>) ; ne jamais balancer les bras vers le haut : c'est la poussée des jambes fléchies qui soulève et oriente le ballon vers la Zone 3.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Le Service par en bas (Cuillère)</strong></td>
+                                    <td>Lancer le ballon à 2 mètres de haut avant de tenter de le frapper (perte totale de coordination et balle dans le filet).</td>
+                                    <td>Tenir le ballon dans la main non-frappeuse à hauteur de la hanche devant la cuisse droite (pour un droitier), <strong>lâcher à peine la balle de 5 cm</strong> et traverser le dessous du ballon avec le talon de la main dure, en transférant le poids du pied arrière au pied avant.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Le Service par en haut (Service Tennis)</strong></td>
+                                    <td>Lancer de balle derrière la tête ou trop loin en avant, bras frappeur fléchi qui rabat la balle dans le filet.</td>
+                                    <td>Lancer la balle à 1 mètre juste devant l'épaule du bras frappeur (si on ne frappe pas, la balle doit tomber devant le pied droit), armer le coude haut (« tir à l'arc ») et frapper main ouverte et rigide au point le plus haut.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Le Smash / Attaque au Filet</strong></td>
+                                    <td>Prendre son appel trop sous le ballon (frappe en reculant le dos cambré) ou toucher le bord supérieur du filet en retombant.</td>
+                                    <td>Garder toujours le ballon légèrement <strong>devant son épaule de frappe</strong> ; enchaîner les 3 derniers appuis d'élan (Gauche - Droite-Gauche pour un droitier) pour transformer la vitesse horizontale en saut vertical à 50 cm du filet.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 3 : GRILLES D'OBSERVATION & D'ÉVALUATION SOMMATIVE (/20)     -->
+        <!-- ================================================================== -->
+        <section id="volet-grilles" class="volet-panel" aria-label="Grilles d'Observation et d'Évaluation Volley-Ball">
+            <div class="studio-shell">
+                <div class="studio-top-bar" style="background:#006233;">
+                    <div>
+                        <h2>📊 Grilles Officielles d'Observation &amp; d'Évaluation Sommative Volley-Ball (/20)</h2>
+                        <p>Conformes aux Notes ministérielles n° 143-09 (Collège OP 2009) et n° 142-10 (Lycée Qualifiant &amp; Bac OP 2007) — Prêtes à imprimer en A4 ou télécharger en Word.</p>
+                    </div>
+                </div>
+
+                <div class="studio-controls">
+                    <span class="control-label">Choisissez la Grille Volley-Ball à visualiser et télécharger :</span>
+                    <div class="practice-level-tabs">
+                        <button type="button" class="practice-tab active" data-grille="diag" onclick="selectVolleyballGrille('diag', this)">
+                            <strong>1. Fiche d'Observation Diagnostique</strong>
+                            <span>Recueil statistique en binôme (Services, Réceptions orientées, Passes, Attaques)</span>
+                        </button>
+                        <button type="button" class="practice-tab" data-grille="college" onclick="selectVolleyballGrille('college', this)">
+                            <strong>2. Grille Sommative Collège (/20)</strong>
+                            <span>1AC · 2AC · 3AC (OP 2009 &amp; Note 143-09 : 12 + 3 + 5 pts)</span>
+                        </button>
+                        <button type="button" class="practice-tab" data-grille="lycee" onclick="selectVolleyballGrille('lycee', this)">
+                            <strong>3. Grille Sommative Lycée &amp; Bac (/20)</strong>
+                            <span>TC · 1Bac · 2Bac (OP 2007 &amp; Note 142-10 : 14 + 3 + 3 pts)</span>
+                        </button>
+                        <button type="button" class="practice-tab" data-grille="dispense" onclick="selectVolleyballGrille('dispense', this)">
+                            <strong>4. Grille Élève Dispensé &amp; Arbitre (/20)</strong>
+                            <span>Arbitrage FIVB, Juge de ligne, Feuille de match &amp; Dossier théorique</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="export-action-bar" style="background:#f0fdf4;border-color:#bbf7d0;">
+                    <div class="export-btn-group">
+                        <button type="button" class="btn-export btn-word-fiches" onclick="exportElementAsWord('grilleA4Preview', 'Grille-Evaluation-Volleyball-EPS-Maroc')">📝 Télécharger cette Grille (.doc Word)</button>
+                        <button type="button" class="btn-export btn-pdf-fiches" onclick="printElementAsPdf('grilleA4Preview', 'Grille Evaluation Volley-Ball EPS Maroc')">📄 Imprimer / Télécharger en PDF A4</button>
+                    </div>
+                    <button type="button" class="btn-export btn-copy-doc" onclick="copyGrillePreview(this)">📋 Copier la grille</button>
+                </div>
+
+                <div class="viewer-canvas">
+                    <div id="grilleA4Preview" class="a4-sheet">
+                        <!-- Injecté dynamiquement par JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 4 : TERRAIN MAROC (40+ ÉLÈVES), ÉCHAUFFEMENT & ARBITRAGE FIVB-->
+        <!-- ================================================================== -->
+        <section id="volet-terrain" class="volet-panel" aria-label="Gestion Grands Effectifs et Arbitrage FIVB Volley-Ball">
+            <div class="content-panel-card">
+                <h2>🏟️ Gérer 40 à 44 Élèves en Volley-Ball sur un Seul Terrain (18×9 m) avec un Filet Long / Rubalise</h2>
+                <p>En Volley-Ball scolaire au Maroc, faire jouer deux équipes de 6 élèves (12 joueurs) sur le terrain réglementaire pendant que 30 élèves attendent sur le banc réduit le Temps d'Engagement Moteur (TEM) et multiplie les ballons perdus. Voici les deux aménagements de terrain plébiscités par les inspecteurs pédagogiques d'EPS :</p>
+
+                <div class="atd-grid-2">
+                    <div class="atd-box">
+                        <h4>Dispositif A : L'Aménagement « Filet Long / Rubalise en 3 ou 4 Mini-Terrains » (Séances 2 à 7)</h4>
+                        <ul>
+                            <li><strong>Principe matériel :</strong> Tendez une corde élastique ou une rubalise dans le prolongement des poteaux de volley (ou dans le sens de la longueur de 18 m) pour diviser le plateau en <strong>3 ou 4 terrains réduits de 4,5 m × 7 m</strong>.</li>
+                            <li><strong>Densité motrice maximale :</strong> 8 équipes de 3 ou 4 joueurs évoluent simultanément en <strong>2c2 ou 3c3</strong> (24 à 32 élèves actifs en même temps) pendant que les binômes observateurs/arbitres officient à chaque filet et permutent toutes les 5 minutes.</li>
+                            <li><strong>Bénéfice didactique :</strong> Chaque élève touche <strong>3 à 4 fois plus de ballons</strong> qu'en 6c6 et apprend beaucoup plus vite à se déplacer sous la trajectoire.</li>
+                        </ul>
+                    </div>
+                    <div class="atd-box" style="border-left-color:#991b1b;">
+                        <h4>Dispositif B : Le Tournoi Rotatif 4c4 / 6c6 « Montante-Descendante » (Séances 1, 8, 9, 10)</h4>
+                        <ul>
+                            <li><strong>Organisation en 6 équipes homogènes de 6 à 7 joueurs :</strong></li>
+                            <li><strong>Terrain Central (Match officiel) :</strong> Équipe A contre Équipe B en set rapide de <strong>11 ou 15 points (Rally Point System)</strong>.</li>
+                            <li><strong>Corps Arbitral &amp; Observation FIVB :</strong> Équipe C fournit le <strong>1er arbitre</strong>, le <strong>2ème arbitre</strong>, les <strong>2 juges de ligne</strong> et les <strong>2 marqueurs</strong> · Équipe D remplit les fiches d'observation statistique en binôme · Équipes E et F travaillent en ronde de conservation (passe haute/manchette) en zone d'échauffement externe.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>🔥 Protocole d'Échauffement Spécifique Volley-Ball (12 minutes)</h3>
+                <ol style="padding-left:1.5rem;font-size:0.9rem;color:#334155;">
+                    <li><strong>Phase 1 — Activation Cardio &amp; Déplacements Spécifiques Volley (3 min) :</strong> Course autour du terrain (18×9m) avec pas chassés le long du filet, sauts d'école de bloc (sans toucher le filet), fentes basses de défense et déplacements rapides avant/arrière à partir de la posture d'attente basse.</li>
+                    <li><strong>Phase 2 — Mobilisation Articulaire Ciblée (4 min) :</strong> Insister particulièrement sur les <strong>doigts et poignets</strong> (flexions-extensions, pressions souples pulpe contre pulpe pour prévenir les entorses des doigts en touche haute), les <strong>épaules et la coiffe des rotateurs</strong> (service/smash) ainsi que les <strong>chevilles et genoux</strong>.</li>
+                    <li><strong>Phase 3 — Échauffement avec Ballon en Binôme face à face (5 min) :</strong> Lancer-bloquer au-dessus du front (vérification du triangle des 10 doigts), puis passes hautes après 1 rebond, puis échanges continus en touche haute et manchette par-dessus le filet.</li>
+                </ol>
+
+                <h3>⚖️ Règles Officielles FIVB 2026 Indispensables en EPS</h3>
+                <div class="table-wrap">
+                    <table class="a4-table">
+                        <thead>
+                            <tr>
+                                <th>Règle Officielle FIVB</th>
+                                <th>Définition &amp; Application Scolaire en EPS</th>
+                                <th>Sanction / Gestuelle d'Arbitrage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>3 Touches Maximum &amp; Double Contact (Règle 9)</strong></td>
+                                <td>Une équipe a droit à <strong>3 touches maximum</strong> (en plus du contre) pour renvoyer le ballon. Un joueur ne peut pas toucher deux fois de suite le ballon (sauf lors d'une première action de contre).</td>
+                                <td>Arbitre lève <strong>4 doigts</strong> (4 touches) ou <strong>2 doigts</strong> (double contact) → Point et service pour l'adversaire.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Balle Tenue / Portée (Règle 9.2.2)</strong></td>
+                                <td>Le ballon ne doit être ni arrêté, ni bloqué, ni lancé : le contact doit être franc et bref (interdiction d'accompagner longuement la balle à hauteur de poitrine).</td>
+                                <td>Avant-bras levé verticalement, paume ouverte tournée vers le haut (geste de soulever) → Point adverse.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Le Service &amp; le « Let » au Filet (Règle 12)</strong></td>
+                                <td>Le serveur dispose de <strong>8 secondes</strong> après le coup de sifflet de l'arbitre et ne doit pas mordre la ligne de fond au moment de la frappe. <strong>Le ballon qui touche le filet au service et retombe dans le camp adverse (« Let ») est VALABLE.</strong></td>
+                                <td>Bras tendu indiquant l'équipe qui gagne le point et l'autorisation de servir.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Contact avec le Filet &amp; Pénétration sous le Filet (Règle 11)</strong></td>
+                                <td>Il est interdit à tout joueur de toucher la bande supérieure du filet pendant son action de jeu. Il est également interdit de pénétrer complètement avec le(s) pied(s) au-delà de la ligne centrale dans le camp adverse.</td>
+                                <td>Arbitre touche le filet du côté de l'équipe fautive ou pointe la ligne centrale → Point adverse.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Rotation Horaire des 6 Postes (Règle 7.6)</strong></td>
+                                <td>Lorsque l'équipe qui recevait le service gagne l'échange, ses joueurs doivent effectuer une <strong>rotation d'un poste dans le sens des aiguilles d'une montre</strong> (le joueur du poste 2 passe au poste 1 pour servir).</td>
+                                <td>Mouvement circulaire de l'index droit en cas de faute de position ou de rotation.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 5 : CARTES DE TOUS LES ARTICLES & DOSSIERS VOLLEY DU SITE    -->
+        <!-- ================================================================== -->
+        <section id="volet-articles" class="volet-panel" aria-label="Articles et Dossiers Volley-Ball sur ProfEPS">
+            <div class="content-panel-card">
+                <h2>📚 Bibliothèque Complète des Articles &amp; Dossiers Volley-Ball sur ProfEPS Maroc</h2>
+                <p>Retrouvez l'ensemble de nos guides pédagogiques, projets de cycles Collège/Lycée et dossiers d'arbitrage FIVB consacrés au Volley-Ball et au Beach-Volley :</p>
+
+                <div class="articles-cards-grid">
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Guide Didactique Complet · Collège &amp; Lycée</div>
+                            <h3>Séance de Volleyball en EPS au Maroc : Guide Complet Collège et Lycée (ATD, Situations &amp; Remédiations)</h3>
+                            <p>Dossier pédagogique complet : enseignement de la passe haute à 10 doigts, de la manchette, du service par en bas/haut et progression en 3 situations clés.</p>
+                        </div>
+                        <a href="article-volleyball-eps.html" class="rel-card-link">Lire le guide complet Volley-Ball EPS →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Cycle Secondaire Collégial · OP 2009</div>
+                            <h3>Projet de Cycle Volleyball Collège — EPS Maroc (10 Séances Détaillées &amp; Grille OP 2009)</h3>
+                            <p>Progression complète en 10 séances pour 1AC, 2AC et 3AC : maîtrise individuelle, échanges en binôme, service cuillère et jeu 3c3 aménagé.</p>
+                        </div>
+                        <a href="cycle-volleyball-college-eps-maroc.html" class="rel-card-link">Voir le dossier Cycle Volley Collège →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Cycle Secondaire Qualifiant · OP 2007</div>
+                            <h3>Projet de Cycle Volleyball Lycée — EPS Maroc (10 Séances : Chaîne R-P-A, Service Tennis &amp; Rôles)</h3>
+                            <p>Progression qualifiante pour TC, 1ère Bac et 2ème Bac : chaîne réception-passe-attaque, spécialisation du passeur en zone 3 et grille 14/3/3.</p>
+                        </div>
+                        <a href="cycle-volleyball-lycee-eps-maroc.html" class="rel-card-link">Voir le dossier Cycle Volley Lycée →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Règlement Officiel &amp; Arbitrage · FIVB 2026</div>
+                            <h3>Règlement Officiel Volleyball (Code FIVB 2026 &amp; Gestes d'Arbitrage) : Terrain 18×9m, Postes &amp; Rotations</h3>
+                            <p>Toutes les règles officielles FIVB expliquées pour l'EPS et le concours CRMEF : hauteurs de filet, zones 1 à 6, libéro, fautes de filet et gestuelle.</p>
+                        </div>
+                        <a href="reglement-volleyball-fivb-gestes-arbitrage-eps.html" class="rel-card-link">Consulter le Règlement FIVB 2026 →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Arbitrage Scolaire · Méthodologie</div>
+                            <h3>L'Arbitrage en Volleyball Scolaire : Former les Élèves Arbitres et Tenir la Feuille de Match</h3>
+                            <p>Guide pratique pour responsabiliser vos élèves (et évaluer les élèves dispensés) dans les rôles de 1er arbitre, 2ème arbitre, juge de ligne et marqueur.</p>
+                        </div>
+                        <a href="article-arbitrage-volleyball.html" class="rel-card-link">Lire le guide Arbitrage Volleyball →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Signaux Officiels FIVB · Visuel</div>
+                            <h3>Guide Illustré des Gestes d'Arbitres au Volleyball (Fautes de Touche, Filet, Ligne &amp; Service)</h3>
+                            <p>Récapitulatif clair de la séquence officielle du coup de sifflet FIVB : nature de la faute, équipe qui marque le point et joueur fautif.</p>
+                        </div>
+                        <a href="article-gestes-arbitres-volleyball.html" class="rel-card-link">Voir les Gestes d'Arbitres Volley →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Variante 2×2 · Plein Air</div>
+                            <h3>Beach-Volley en EPS : Adaptation Pédagogique du Jeu en 2×2 et Développement de la Lecture de Balle</h3>
+                            <p>Comment utiliser les règles et la logique du Beach-Volley (2 contre 2 sans spécialisation de poste) pour développer la polyvalence des élèves.</p>
+                        </div>
+                        <a href="article-beach-volley-eps.html" class="rel-card-link">Découvrir le dossier Beach-Volley EPS →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Règlement Spécifique 2×2 · FIVB</div>
+                            <h3>Règlement Officiel Beach-Volley FIVB : Terrain 16×8m, Contre Comptant pour 1 Touche &amp; Feintes</h3>
+                            <p>Toutes les différences réglementaires entre le Volley-Ball de salle (6×6) et le Beach-Volley (2×2) pour vos cours et examens CRMEF.</p>
+                        </div>
+                        <a href="reglement-beach-volley-fivb-arbitrage-eps.html" class="rel-card-link">Voir le Règlement Beach-Volley FIVB →</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- SCRIPT INTERACTIF DU STUDIO VOLLEY-BALL (6 NIVEAUX × 4 NIVEAUX DE PRATIQUE + GRILLES + EXPORT WORD/PDF) -->
+    <script>
+      var VB_SCHOOL_LEVELS = {{
+        "1AC": {{
+          label: "1ère Année Collège (1AC)",
+          ref: "Orientations Pédagogiques 2009 (Cycle Secondaire Collégial) · Note n° 143-09",
+          oti: "L'élève de la 1ère année collégiale doit pouvoir acquérir une motricité correcte lui permettant de s'adapter aux exigences des situations (forme et rythme) et s'intégrer dans le groupe.",
+          comp: "S'approprier la logique du jeu de renvoi (frapper sans bloquer), lire la trajectoire pour se déplacer sous le ballon et produire des trajectoires hautes permettant de maintenir l'échange et de renvoyer la balle dans le camp adverse.",
+          bareme: "Habiletés motrices : 12 pts (Produit 6 pts + Processus 6 pts) · Connaissances conceptuelles : 3 pts · Comportement & Rôles sociaux : 5 pts"
+        }},
+        "2AC": {{
+          label: "2ème Année Collège (2AC)",
+          ref: "Orientations Pédagogiques 2009 (Cycle Secondaire Collégial) · Note n° 143-09",
+          oti: "L'élève de la 2ème année collégiale doit pouvoir ajuster l'énergie physique et la maîtriser et fournir l'effort et l'orienter pour effectuer des réalisations coordonnées et organisées, et communiquer avec les autres.",
+          comp: "Rechercher le gain de la rencontre en construisant l'action collective sur 2 touches minimum (réception haute orientée vers un partenaire avant + renvoi placé dans le camp adverse) à partir d'un service régulier.",
+          bareme: "Habiletés motrices : 12 pts (Produit 6 pts + Processus 6 pts) · Connaissances conceptuelles : 3 pts · Comportement & Rôles sociaux : 5 pts"
+        }},
+        "3AC": {{
+          label: "3ème Année Collège (3AC)",
+          ref: "Orientations Pédagogiques 2009 (Cycle Secondaire Collégial) · Note n° 143-09",
+          oti: "L'élève de la 3ème année collégiale doit pouvoir ajuster les éléments de l'acte moteur et l'adapter aux différentes situations en fonction de ses exigences organisationnelles et réglementaires, et s'exercer sur la pratique des droits et devoirs pour réaliser un projet sportif individuel ou collectif.",
+          comp: "Construire une attaque collective en 3 touches (Réception → Passe en Zone 3 → Renvoi d'attaque vers un espace libre adverse) et protéger son propre camp en respectant la rotation et l'arbitrage FIVB.",
+          bareme: "Habiletés motrices : 12 pts (Produit 6 pts + Processus 6 pts) · Connaissances conceptuelles : 3 pts · Comportement & Rôles sociaux : 5 pts"
+        }},
+        "TC": {{
+          label: "Tronc Commun (TC)",
+          ref: "Orientations Pédagogiques 2007 (Cycle Secondaire Qualifiant) · Note n° 142-10",
+          oti: "L'élève du Tronc Commun doit pouvoir maîtriser les composantes du comportement moteur et pouvoir s'adapter aux différentes situations et faire face à ses défis et accepter l'intégration dans le groupe.",
+          comp: "Conserver collectivement le ballon dans son camp par une réception en manchette ou touche haute orientée vers la zone avant afin d'organiser un renvoi offensif placé dans les espaces libres adverses.",
+          bareme: "Habiletés motrices : 14 pts (Efficacité collective/individuelle 7 pts + Processus technique/tactique 7 pts) · Connaissances conceptuelles : 3 pts · Comportement : 3 pts"
+        }},
+        "1BAC": {{
+          label: "1ère Année Baccalauréat (1Bac)",
+          ref: "Orientations Pédagogiques 2007 (Cycle Secondaire Qualifiant) · Note n° 142-10",
+          oti: "L'élève de la 1ère année Bac doit pouvoir confronter les situations motrices grâce à l'adéquation des différents éléments de l'acte moteur et la planification de différents types d'effort physique individuel ou collectif.",
+          comp: "Maîtriser la chaîne Réception - Passe - Attaque en différenciant les rôles (réceptionneur, passeur en Zone 3, attaquant aux ailes) et assurer une défense collective coordonnée de son sol.",
+          bareme: "Habiletés motrices : 14 pts (Efficacité 7 pts + Processus 7 pts) · Connaissances conceptuelles : 3 pts · Comportement : 3 pts"
+        }},
+        "2BAC": {{
+          label: "2ème Année Baccalauréat (2Bac)",
+          ref: "Orientations Pédagogiques 2007 (Examen National / Contrôle Continu Bac Sport) · Note n° 142-10",
+          oti: "L'élève de la 2ème année Bac doit pouvoir analyser différentes situations et interactions motrices et s'intégrer volontairement dans la planification et la réalisation de projets individuels et collectifs.",
+          comp: "Concevoir et mettre en œuvre un projet tactique collectif en 6c6 (système de réception en W, attaque variée smashée/placée, contre et couverture) pour créer la rupture dans le camp adverse selon le code FIVB.",
+          bareme: "Habiletés motrices : 14 pts (Efficacité 7 pts + Processus 7 pts) · Connaissances conceptuelles : 3 pts · Comportement : 3 pts"
+        }}
+      }};
+
+      var VB_PRACTICE_LEVELS = {{
+        "N1": {{
+          shortName: "Niveau 1 (Débutant)",
+          title: "Niveau 1 — Débutant : Se déplacer sous la trajectoire, frapper haut (touche/manchette) et servir en cuillère",
+          otcPrefix: "Rechercher le gain d'une rencontre en 3c3 ou 4c4 en se déplaçant précocement sous la trajectoire pour produire des frappes hautes réglementaires (sans blocage/tenu) et mettre régulièrement la balle en jeu par un service par en bas.",
+          seances: [
+            ["Séance 1 — Évaluation Diagnostique (Match 3c3 / 4c4)", "Identifier le niveau initial des élèves en situation de référence (2×6 min) à l'aide de la fiche d'observation statistique en binôme.", "3 ou 4 mini-terrains (6m × 6m) avec filet/rubalise · Matchs de 6 min.", "Mettre la balle en jeu derrière la ligne et renvoyer en 1 à 3 touches sans laisser tomber la balle au sol.", "Observer le départ de la balle adverse et bouger ses pieds avant de tendre les bras.", "Plus de 50% de services réussis et au moins 4 échanges maintenus par séquence.", "Autoriser 1 rebond unique au sol sur la 1ère touche si le groupe est en grande difficulté initiale."],
+            ["Séance 2 — Lecture de Trajectoire, Déplacement-Arrêt & Touche Haute à 10 Doigts", "Passer du réflexe d'attraper ou de claquer la balle à une frappe souple à 10 doigts au-dessus du front après déplacement.", "Ateliers en binôme de part et d'autre du filet ou face à face à 4m.", "Étape 1 : Se déplacer et bloquer la balle dans la « fenêtre triangulaire » au-dessus du front ; Étape 2 : Frapper haut en poussant sur les jambes.", "Former le triangle pouces-index à 15 cm du front ; pieds décalés et jambes fléchies à l'arrêt sous la balle.", "Réaliser 8 passes hautes consécutives en binôme avec une trajectoire culminant à 3 mètres de haut.", "Faire lancer la balle légèrement à gauche/droite/avant pour obliger 2 pas chassés avant l'arrêt."],
+            ["Séance 3 — La Manchette sur Balle Basse (Plateforme des Avant-Bras & Poussée des Jambes)", "Construire le plateau de réception des avant-bras tendus pour relever les balles arrivant sous le niveau des épaules.", "Binômes par-dessus le filet · A lance une balle basse en cloche, B se place et renvoie en manchette haute vers A.", "Coudes verrouillés tendus, pouces joints et parallèles pointés vers le bas, épaules haussées vers l'avant.", "Interdiction de plier les coudes (effet catapulte en arrière) : c'est l'extension des jambes qui soulève la balle.", "Réussir 7 manchettes hautes et contrôlées sur 10 lancers variés.", "Alterner aléatoirement un lancer haut (touche à 10 doigts) et un lancer bas (manchette)."],
+            ["Séance 4 — Le Service par en Bas (Service Cuillère) : Régularité et Mise en Jeu", "Maîtriser le service par en bas pour engager 100% des points sans donner de points gratuits à l'adversaire.", "2 lignes de serveurs de chaque côté du filet (à 5m, puis 7m, puis 9m à la ligne de fond).", "Pied gauche devant (droitier), balle tenue à hauteur de hanche, lâcher court (5 cm) et frappe par-dessous avec le talon de la main dure.", "Accompagner le geste vers le haut et l'avant en transférant le poids du corps sur la jambe avant ; ne jamais lancer la balle haut.", "Réussir au moins 7 services réglementaires sur 10 depuis la ligne de fond.", "Tracer 2 zones cibles au fond du terrain adverse valant 2 points."],
+            ["Séance 5 — De la Frappe Individuelle à la Coopération à 2 Touches", "Remplacer le renvoi direct précipité dès la 1ère touche par une première touche d'amortissement orientée vers son partenaire.", "Mini-terrains 2c2 ou 3c3 · Règle : « Interdiction de renvoyer en 1 touche (faute) ; renvoi en 2 ou 3 touches obligatoire ».", "Le joueur qui reçoit amortit la balle haut au milieu de son propre camp en criant « J'ai ! » ; son partenaire renvoie par-dessus le filet.", "S'orienter de profil vers son partenaire au moment de la réception pour envoyer la balle vers lui et non vers le filet.", "Réussir 6 séquences de conservation-renvoi à 2 touches sur 10 ballons reçus.", "Autoriser le partenaire passeur à bloquer puis lancer la 2ème touche pendant les 4 premières minutes."],
+            ["Séance 6 — Choisir entre Touche Haute et Manchette selon la Hauteur de Balle", "Prendre l'information dès le franchissement du filet : balle haute (au-dessus de la poitrine) = 10 doigts ; balle basse = manchette.", "Situation 2c2 sur terrain de 7m × 4,5m · Service par en bas suivi d'un échange continu.", "Tout point marqué après une touche haute + une manchette (ou inversement) dans le même camp vaut 3 points.", "Rester en posture d'attente dynamique (pieds écartés, genoux fléchis, mains à hauteur de taille prêtes à monter ou descendre).", "Zéro balle tombée entre les deux partenaires sans tentative et 4 échanges de plus de 4 passages du filet.", "Varier la profondeur du service adverse (court près du filet vs long au fond)."],
+            ["Séance 7 — S'Organiser à 3 ou 4 Joueurs : Communication (« J'ai ! / Laisse ! ») & Zones", "Répartir clairement l'espace du camp (avant / arrière, gauche / droite) pour éviter les collisions et les balles d'hésitation.", "Match dirigé 3c3 (formation en triangle : 1 joueur avant au filet + 2 joueurs arrière) ou 4c4 en losange.", "Obligation d'annoncer « J'ai ! » avant que le ballon n'atteigne le sommet de sa trajectoire ; balle tombée sans annonce = 2 pts adverses.", "Les joueurs arrière prennent toutes les balles longues en 1ère touche et les orientent vers le joueur avant placé près du filet.", "Plus de 70% des ballons réceptionnés sont orientés vers la zone avant du terrain.", "Rotation obligatoire des postes (avant ↔ arrière) tous les 3 services."],
+            ["Séance 8 — Viser les Espaces Libres du Camp Adverse lors du Renvoi", "Lever la tête avant le renvoi pour placer la balle là où il n'y a pas d'adversaire (court derrière le filet ou dans les coins).", "Situation 3c3 sur terrain 7m × 7m avec 4 cerceaux/zones cibles placés dans les 4 coins de chaque camp.", "Point normal = 1 pt ; Balle qui touche directement le sol dans un coin libre (ou sans être touchée par l'adversaire) = 3 pts.", "Frapper la balle haute et profonde vers la ligne de fond ou amortir court derrière le filet selon le placement adverse.", "Marquer au moins 3 points directs en zone libre par match de 6 minutes.", "Interdire aux défenseurs de rester statiques au centre du terrain."],
+            ["Séance 9 — Match Dirigé 4c4 / 6c6 & Apprentissage de l'Arbitrage Officiel FIVB", "Transférer les acquis en situation de match réglementaire tout en assurant l'arbitrage (service, tenu, 4 touches, filet, ligne).", "Tournoi triangulaire · Sets de 11 points (Rally Point System) · 1er arbitre, 2ème arbitre, 2 juges de ligne et marqueur.", "Point en 1 touche = 1 pt · Point construit en 2 touches = 2 pts · Point construit en 3 touches = 3 pts.", "Pour l'arbitre : siffler franchement, indiquer le camp qui gagne le point puis montrer le geste officiel de la faute.", "Au moins 50% des points construits en 2 ou 3 touches et arbitrage respecté sans contestation.", "Rotation complète des équipes toutes les 6 minutes."],
+            ["Séance 10 — Évaluation Sommative Finale (/20)", "Évaluer les compétences motrices, conceptuelles et comportementales en situation de tournoi officiel.", "Tournoi par poules de niveau homogènes · Sets de 15 points · Grille officielle OP 2009 / OP 2007.", "Application intégrale du règlement adapté et rotation sur les rôles d'officiels FIVB.", "Mobiliser la technique de frappe (touche/manchette/service), la coopération collective et le fair-play.", "Validation de la grille sommative sur 20 points.", "Matchs équilibrés par niveau."]
+          ]
+        }},
+        "N2": {{
+          shortName: "Niveau 2 (Débrouillé)",
+          title: "Niveau 2 — Débrouillé : Construction systématique en 2 ou 3 touches, orientation vers la Zone 3 et renvoi placé",
+          otcPrefix: "Rechercher le gain de la rencontre en stabilisant la réception du service vers la zone avant (Zone 3) pour construire collectivement en 2 ou 3 touches et renvoyer le ballon dans les espaces libres du camp adverse.",
+          seances: [
+            ["Séance 1 — Évaluation Diagnostique (Match 4c4 / 6c6)", "Évaluer la capacité des élèves à réceptionner le service et à construire en plusieurs touches lors d'un match observé.", "Terrain 18×9m ou 2 terrains réduits · Fiche d'observation statistique en binôme.", "Règlement FIVB adapté · Relevé des services réussis, réceptions orientées et touches collectives.", "Orienter sa 1ère touche haut vers le centre-avant du terrain.", "Plus de 60% de services réussis et au moins 40% d'actions construites en 2 ou 3 touches.", "Jeu en 4c4 en losange pour maximiser le nombre de ballons touchés par élève."],
+            ["Séance 2 — La Réception Orientée en Manchette (Dissocier Direction d'Arrivée et Direction de Renvoi)", "Orienter ses épaules et son plateau d'avant-bras vers la Zone 3 (passeur) même lorsque le service arrive sur les côtés.", "Demi-terrain · 1 serveur en face + 2 réceptionneurs en Zone 5 et Zone 1 + 1 cible/passeur en Zone 3.", "Se déplacer vite pour placer ses appuis avant l'arrivée de la balle, tourner le buste et la ligne d'épaules face à la Zone 3.", "Incliner légèrement le plateau d'avant-bras vers l'intérieur du terrain ; donner une trajectoire haute en cloche (3 à 4m).", "Réussir 6 réceptions sur 10 qui tombent directement dans le cercle du passeur en Zone 3.", "Varier la zone de départ du service (depuis le poste 1 puis le poste 5)."],
+            ["Séance 3 — Le Rôle du Passeur Relais en Zone 3 (Passe Haute Précise vers les Ailes)", "Enchaîner une prise d'information sous le ballon et une passe haute à 10 doigts précise vers la Zone 4 (gauche) ou Zone 2 (droite).", "Terrain complet · Triangle Réceptionneur (Z5/Z6) → Passeur (Z3) → Attaquant (Z4 ou Z2).", "Le passeur se place près du filet en Zone 3, pieds orientés vers le poste 4, et offre une balle haute à 1m du filet.", "Rentrer sous la balle rapidement, étendre simultanément jambes et bras sans tourner les poignets (éviter la faute de double contact).", "Réussir 7 passes hautes exploitables par l'attaquant sur 10 ballons reçus en Zone 3.", "Introduire la passe arrière (extension du haut du buste et des pouces vers l'arrière) vers le poste 2."],
+            ["Séance 4 — Initiation au Service par en Haut (Service Tennis) & Service Cuillère Placé", "Frapper la balle au-dessus de la tête pour produire une trajectoire tendue et difficile à réceptionner.", "Ateliers de service à 6m du filet, puis recul progressif à 7m50 et 9m (ligne de fond) après chaque série de 3 réussites.", "Lancer régulier à 1m devant l'épaule droite, armé du bras haut (« tir à l'arc ») et frappe sèche à pleine paume au sommet du lancer.", "Bloquer le poignet rigide à l'impact pour donner un effet flottant ou lifté ; viser les zones de conflit entre deux réceptionneurs.", "Réussir 6 services par en haut (ou 8 services cuillère placés dans les zones cibles) sur 10 essais.", "Placer 3 réceptionneurs adverses et accorder 2 points si le service tombe entre deux joueurs (Ace)."],
+            ["Séance 5 — Construire la Chaîne Complète des 3 Touches (Réception → Passe → Attaque)", "Coordonner les 3 rôles successifs au sein de l'équipe sans précipitation entre la 2ème et la 3ème touche.", "Situation 3c3 ou 4c4 · Règle : « Renvoi en 1 touche = interdit ; Renvoi en 2 touches = 1 pt ; Renvoi en 3 touches = 3 pts ».", "1ère touche haute au centre → 2ème touche parallèle au filet → 3ème touche dirigée vers le fond du camp adverse.", "Pour l'attaquant (3ème touche) : attendre que le passeur ait touché la balle avant de s'engager vers le filet.", "Réaliser au moins 5 chaînes complètes de 3 touches par set de 10 minutes.", "Si le ballon de réception est trop loin du filet (hors des 3m), faire une passe haute de sécurité vers l'aile."],
+            ["Séance 6 — La 3ème Touche d'Attaque : Attaque en Touche Orientée (2 Pieds au Sol ou en Saut) & Smash", "Transformer la 3ème touche de simple renvoi de sécurité en véritable attaque visant à mettre l'adversaire en difficulté.", "Ateliers aux postes 4 et 2 sur passes hautes venues de Zone 3, face à 2 défenseurs placés au fond adverse.", "Attaquer soit en touche haute tendue dans les coins longs (Zones 1 et 5), soit par un smash (élan 2-3 pas + saut + frappe haute).", "Prendre l'information sur la position des défenseurs adverses avant de sauter ou de pousser le ballon.", "Marquer le point ou mettre la défense adverse en crise de temps sur 6 attaques sur 10.", "Ajouter un contreur (1 bloc au filet) pour obliger l'attaquant à contourner ou lobber le contre."],
+            ["Séance 7 — Organisation Défensive Collective : La Formation en Losange (4c4) et en W (6c6)", "Couvrir rationnellement tout le terrain de 9×9m en réception de service et en défense sur attaque adverse.", "Terrain complet 6c6 · Mise en place des 5 réceptionneurs en W (le passeur s'efface au filet en Zone 3).", "Chaque joueur est responsable de son couloir et de la profondeur : balle à hauteur d'épaules = pour le joueur arrière ; balle courte = joueur avant.", "Fléchir bas sur ses appuis au moment où l'adversaire frappe ; avancer d'un pas vers la zone d'attaque.", "Relever et conserver dans le camp plus de 65% des services et attaques adverses.", "Travailler la rotation horaire des 6 postes après chaque récupération du service (Side-out)."],
+            ["Séance 8 — Couverture d'Attaque & Relance après Défense Basse", "Ne pas rester spectateur lorsque son partenaire attaque : se rapprocher pour sauver une balle contrée par le filet ou l'adversaire.", "Match à thème 4c4 / 6c6 · Tout ballon sauvé après un contre adverse ou une défense basse donne un bonus de +2 pts.", "Les 2 joueurs les plus proches de l'attaquant viennent former un demi-cercle de soutien à 2 mètres derrière lui.", "Rester fléchi et réactif jusqu'à ce que le ballon ait touché le sol adverse.", "Sauver au moins 3 ballons défensifs difficiles par set.", "L'enseignant injecte une « balle gratuite » (Free ball) dès que l'échange s'arrête pour maintenir l'intensité."],
+            ["Séance 9 — Match Officiel 6c6 avec Rotation Horaire & Arbitrage FIVB Complet", "Jouer un match réglementaire en 6c6 en respectant l'ordre de rotation des 6 postes et le code d'arbitrage FIVB.", "Tournoi 6c6 sur terrain 18×9m · Sets de 15 points · 1er arbitre, 2ème arbitre, juges de ligne et feuille de match.", "Respect strict des positions au moment de la frappe du serveur et des 3 touches collectives.", "Annoncer clairement le score avant chaque service ; utiliser la gestuelle officielle FIVB.", "Zéro faute de rotation et plus de 50% des points construits en 3 touches.", "Coaching d'équipe autonome de 45 secondes au passage à 8 points."],
+            ["Séance 10 — Évaluation Sommative Finale (/20)", "Valider le niveau d'acquisition individuel et collectif en situation réglementaire de compétition.", "Tournoi final · Grille officielle Collège (12/3/5) ou Lycée & Bac (14/3/3) sur 20 points.", "Application intégrale du règlement FIVB adapté + évaluation des rôles d'arbitre et d'observateur.", "Efficacité au service, en réception-passe-attaque, en défense et dans l'arbitrage.", "Notation finale sur 20 points.", "Poules de niveau homogènes."]
+          ]
+        }},
+        "N3": {{
+          shortName: "Niveau 3 (Confirmé)",
+          title: "Niveau 3 — Confirmé : Spécialisation du passeur (Zone 3), Smash aux ailes (Zones 4/2), Contre & Service Tennis",
+          otcPrefix: "S'intégrer dans une organisation collective structurée en 6c6 (chaîne Réception en W → Passe haute ou arrière en Zone 3 → Attaque smashée ou placée aux ailes) pour faire rupture dans le camp adverse et défendre collectivement son sol.",
+          seances: [
+            ["Séance 1 — Évaluation Diagnostique (Match 6c6 FIVB)", "Évaluer le rendement de la chaîne Réception-Passe-Attaque et la régularité du service par en haut en 6c6.", "Terrain 18×9m · Matchs en sets de 15 pts · Fiche statistique en binôme (Ratio R-P-A et fautes directes).", "Règles officielles FIVB intégrales.", "Viser systématiquement le passeur en Zone 3 sur la 1ère touche de réception.", "Plus de 50% des réceptions arrivent dans la zone des 3m pour permettre une attaque construite.", "Bonifier de +2 pts tout point conclu par un smash ou une attaque placée en 3ème touche."],
+            ["Séance 2 — Perfectionnement du Service Tennis (Flottant & Ciblé sur les Zones 1, 6, 5)", "Transformer le service en première arme offensive pour gêner la construction adverse sans commettre de faute directe.", "Terrain complet · Serveurs derrière la ligne des 9m visant des tapis/zones placés en Zone 1, Zone 6 et Zone 5.", "Frappe sèche au centre du ballon sans rotation du poignet (effet flottant) avec arrêt net du bras vers la cible.", "Rester concentré pendant les 8 secondes autorisées ; ajuster la trajectoire rase au-dessus de la bande du filet.", "Réussir 8 services tennis sur 10 dont au moins 5 dans la zone cible demandée.", "Mise en situation de duel : Serveur contre 3 Réceptionneurs en ligne arrière."],
+            ["Séance 3 — Spécialisation et Aiguillage du Passeur en Zone 3 (Passe Avant Zone 4 & Passe Arrière Zone 2)", "Permettre au passeur d'orienter le jeu des deux côtés du filet pour surprendre le contre adverse.", "Terrain complet · Réceptionneur en Z5/Z6 → Passeur en Z3 → 2 Attaquants prêts en Z4 et Z2.", "Le passeur se place sous le ballon face au poste 4 : au dernier moment, il pousse soit devant lui (Z4), soit en cambrant les pouces vers l'arrière (Z2).", "hauteur de passe constante (2,50m au-dessus du filet) et décollée de 50 cm à 80 cm du filet pour éviter que l'attaquant ne touche le filet.", "Réussir 7 passes précises (4 en avant, 3 en arrière) sur 10 réceptions.", "Ajouter un contreur central adverse qui doit lire le choix du passeur."],
+            ["Séance 4 — L'Élan et la Frappe du Smash (Course d'Élan 3 Pas, Saut Vertical & Fouetté du Bras)", "Synchroniser sa course d'élan avec la trajectoire de la passe haute pour frapper le ballon au point le plus haut vers le sol adverse.", "Ateliers d'attaque en poste 4 et poste 2 avec passeur fixe en Zone 3.", "Démarrer la course d'élan (Gauche - Droite-Gauche pour un droitier) *après* que le ballon a quitté les mains du passeur.", "Armer le coude haut, frapper le sommet du ballon avec la main ouverte (« coiffer la balle ») pour rabattre la trajectoire vers le bas.", "Réussir 6 smashs cadrés dans le terrain adverse (sans faute de filet ni d'antenne) sur 10 passes.", "Demander à l'attaquant d'annoncer « Longue ligne ! » ou « Diagonale ! » pendant son saut."],
+            ["Séance 5 — Alterner Smash Puissant et Feinte d'Attaque (Ballon Placé / « Tip » derrière le Contre)", "Lire la présence du contre adverse : frapper fort si le couloir est ouvert, ou déposer un ballon amorti (tip) à une main derrière le bloc.", "Demi-terrain en opposition 3 attaquants (Z4-Z3-Z2) contre 2 contreurs + 2 défenseurs arrière.", "La feinte (tip) doit être frappée du bout des doigts rigides (sans accompagner ni porter la balle) juste derrière les mains du contreur.", "Garder exactement le même élan et le même armé de bras que pour un smash afin de masquer son intention jusqu'au dernier centième de seconde.", "Gagner le point sur 6 attaques sur 10 en alternant smash et feinte selon le placement défensif.", "Accorder 3 points pour une feinte gagnante dans la zone des 3 mètres adverse."],
+            ["Séance 6 — Le Contre (Bloc Individuel et à Deux) au Filet", "Former un mur défensif au-dessus du filet face à l'attaquant adverse sans toucher la bande du filet.", "Filet réglementaire · 3 contreurs (Z4, Z3, Z2) face à un passeur et deux attaquants adverses.", "Observer la passe adverse, se déplacer en pas chassés ou pas croisés parallèlement au filet, sauter verticalement un instant *après* l'attaquant.", "Passer les deux mains ouvertes et dures au-dessus et au-delà du filet (pénétration légale) avec les doigts écartés pour fermer la diagonale.", "Freiner (soft-block) ou contrer directement 4 attaques adverses sur 10 sans aucune faute de filet.", "Travailler la jonction du contreur central (Z3) avec le contreur d'aile (Z4 ou Z2) pour un bloc à deux."],
+            ["Séance 7 — Défense Autour du Contre (Système 2-1-3 ou 2-0-4) & Relance de Contre-Attaque", "Coordonner le placement des défenseurs arrière avec les zones laissées ouvertes par le contre au filet.", "Match d'application 6c6 avec focus sur la transition Défense → Contre-attaque.", "Pendant que le poste 2 contre à l'aile, le poste 4 recule aux 3m pour couvrir la feinte (tip), et les postes 1, 6 et 5 couvrent la ligne et la grande diagonale.", "Fléchir très bas, bras devant les genoux, prêt à plonger ou à relever la balle haute vers le centre du terrain.", "Convertir au moins 4 ballons défendus sur attaque adverse en contre-attaque construite en 3 touches.", "Donner un deuxième ballon immédiat d'attaque à l'équipe qui réussit une défense complète."],
+            ["Séance 8 — Le Système de Réception en W (5 Réceptionneurs) & Pénétration Simple du Passeur", "Stabiliser l'organisation collective 6c6 sur toutes les rotations des 6 postes.", "Terrain 18×9m · 6c6 : travail des 6 positions de rotation face au service adverse.", "En réception, le joueur qui est en Zone 3 (ou le passeur qui monte) s'efface près du filet ; les 5 autres forment un W pour couvrir tout le terrain.", "Respecter les lignes d'alignement (chaque joueur avant devant son joueur arrière correspondant au moment de la frappe du serveur).", "Zéro faute de position/rotation et plus de 65% de réceptions positives vers le passeur.", "Simuler les 6 rotations complètes en changeant de rotation tous les 4 services."],
+            ["Séance 9 — Rencontre Officielle 6c6 FIVB (Sets de 15 pts), Coaching & Feuille de Marque", "Gérer un match complet avec stratégie de service/attaque, arbitrage officiel à 2 et feuille de match.", "Tournoi 6c6 · 1er arbitre (au poteau), 2ème arbitre (en face), 2 juges de ligne et marqueur.", "Application intégrale du code FIVB (fautes de position, filet, antennes, attaque d'un joueur arrière derrière la ligne des 3m).", "Utiliser son temps mort tactique de 30 secondes pour casser la série d'un bon serveur adverse.", "Exécution fluide du projet collectif (> 65%) et arbitrage officiel irréprochable.", "Set décisif (Tie-break) avec changement de camp à 8 points."],
+            ["Séance 10 — Évaluation Sommative & Certificative Finale (/20)", "Évaluer les élèves en situation réglementaire de compétition 6c6 selon le barème officiel OP.", "Tournoi final · Grille officielle Collège (12/3/5) ou Lycée & Bac (14/3/3).", "Application stricte du code FIVB et rotation sur les rôles d'officiels.", "Mobiliser toutes les compétences technico-tactiques, conceptuelles et citoyennes acquises.", "Attribution de la note finale sur 20 points.", "Poules homogènes de niveau."]
+          ]
+        }},
+        "N4": {{
+          shortName: "Niveau 4 (Élite / ASS)",
+          title: "Niveau 4 — Élite & Sport Scolaire ASS : Système 5-1 / 4-2 avec Pénétration, Attaque Rapide, Libéro & FIVB",
+          otcPrefix: "Concevoir, piloter et réguler un système de jeu collectif avancé en 6c6 (système 4-2 avec pénétration ou 5-1, réception à 3 joueurs, attaques combinées en 1er et 2ème temps, attaque aux 3m et système bloc-défense) pour performer en compétition scolaire ASS / FRMSS.",
+          seances: [
+            ["Séance 1 — Diagnostic Tactique & Profilage par Poste Spécifique (Passeur, Pointu, Récep-Attaquant, Central, Libéro)", "Évaluer le rendement individuel par poste spécifique et la maîtrise des rotations en 6c6 FIVB.", "Terrain 18×9m · Match officiel 6c6 · Fiche d'analyse statistique par rotation (Side-out % et Break-point %).", "Règles FIVB 2026 intégrales (avec rôle du Libéro en ligne arrière).", "Assurer un taux de Side-out (gain du point sur réception de service) supérieur à 60%.", "Attribution des postes spécifiques de chaque joueur au sein du système 4-2 ou 5-1.", "Analyser la rotation la plus faible pour la travailler spécifiquement."],
+            ["Séance 2 — La Réception à 3 Joueurs (Lignes Arrière + Libéro) & Pénétration du Passeur Arrière", "Libérer les attaquants avant de la tâche de réception et faire pénétrer le passeur depuis les postes arrière (Z1, Z6, Z5) vers la Zone 2/3.", "Terrain complet 6c6 · Travail spécifique des 3 rotations où le passeur est en ligne arrière.", "Au moment exact où le serveur frappe le ballon, le passeur sprinte vers la zone avant-droite (Z2/Z3) sans commettre de faute de position préalable.", "Les 3 réceptionneurs (dont le Libéro) couvrent les 9 mètres de largeur et visent la zone de passe à 2m50 (entre Z2 et Z3).", "Réussir 7 pénétrations fluides suivies d'une attaque à 3 options sur 10 services.", "Imposer un service flottant ou smashé tendu en face."],
+            ["Séance 3 — Combinaisons Offensives : Attaque Rapide au Centre (1er Temps / « Fixe ») & Ailes (2ème Temps)", "Fixer le contreur central adverse par un appel rapide au centre (Zone 3) pour laisser les attaquants d'aile en 1 contre 1.", "Demi-terrain · Passeur + Central (Z3) + Attaquant Z4 + Attaquant Z2 contre 3 contreurs.", "Le central saute en même temps que le ballon arrive dans les mains du passeur (attaque en 1er temps) : le passeur choisit de le servir court ou d'écarter aux ailes.", "Synchronisation temporelle parfaite entre l'impulsion du central et le lâcher de balle du passeur.", "Obtenir un smash face à un seul contreur (ou sans contre) sur 7 actions sur 10.", "Intégrer l'attaque arrière derrière la ligne des 3 mètres (« Pipe » en Zone 6 ou attaque en Zone 1)."],
+            ["Séance 4 — L'Attaque Arrière aux 3 Mètres (« Pipe » en Zone 6 et Pointu en Zone 1)", "Exploiter un 4ème attaquant prenant son impulsion derrière la ligne d'attaque des 3 mètres.", "Terrain complet 6c6 · Combinaisons incluant l'attaquant de ligne arrière.", "Le joueur arrière prend son appel *sans mordre la ligne des 3 mètres* (règle FIVB 13.2.2), plane vers l'avant dans la zone avant et smashe haut.", "Pour le passeur : offrir une passe légèrement reculée à 2 mètres du filet pour favoriser l'élan aérien de l'arrière.", "Réussir 5 attaques arrière réglementaires et gagnantes sur 8 tentatives.", "Combiner un appel d'écran rapide du central au filet avec une attaque « Pipe » en Zone 6 dans son dos."],
+            ["Séance 5 — Le Service Smashé et le Service Flottant Sautant (Jump-Float)", "Mettre une pression maximale dès l'engagement pour provoquer des réceptions négatives ou des Aces.", "Terrain 18×9m · Ateliers de service à haute intensité avec cibles tactiques (couloirs de conflit, attaquant avant).", "Jump-Float : lancer à deux mains, 2 pas d'élan, saut près de la ligne de fond et frappe sèche au centre du ballon au sommet du saut.", "Atterrir de manière équilibrée (autorisé à retomber dans le terrain après avoir pris son appel derrière la ligne de fond) et gagner immédiatement son poste défensif.", "Plus de 75% de services validés mettant la réception adverse hors de la zone des 3 mètres.", "Série sous pression : réussir 3 services consécutifs à 14-14 au score."],
+            ["Séance 6 — Système Bloc-Défense Coordonné (Fermeture de la Ligne vs Fermeture de la Diagonale)", "Annoncer par code gestuel derrière le dos des contreurs la zone fermée au filet et la zone défendue au sol.", "Terrain complet 6c6 · Match à thème « Point double sur bloc gagnant ou transition défensive convertie ».", "Le contreur d'aile annonce avec ses doigts derrière le dos : 1 doigt = je ferme la ligne (défenseur en diagonale) ; 2 doigts = je ferme la diagonale (défenseur sur la ligne).", "Le Libéro en poste 5 lit l'épaule du smasheur et couvre le tir puissant ou le lob.", "Réaliser au moins 3 blocs gagnants et 5 défenses converties en point par set de 15 points.", "Varier les hauteurs de passes adverses (passe haute d'urgence vs passe rapide)."],
+            ["Séance 7 — Gestion du Rôle du Libéro & Transitions Défense → Contre-Attaque (2ème Touche du Libéro)", "Utiliser les prérogatives réglementaires spécifiques du Libéro (Règle 19 FIVB) pour stabiliser le fond de jeu.", "Terrain 18×9m · 6c6 avec Libéro portant un chasuble de couleur distincte.", "Rappel FIVB : si le Libéro effectue une passe haute des doigts *en étant dans la zone avant (devant les 3m)*, l'attaquant n'a pas le droit de frapper la balle plus haut que le bord supérieur du filet ; derrière les 3m, passe à 10 doigts libre.", "Lorsque le passeur défend le 1er ballon, le Libéro prend le relais de la 2ème touche derrière la ligne des 3m (ou en manchette dans les 3m).", "100% de respect du règlement spécifique du Libéro et 4 contre-attaques réussies sur relais du Libéro.", "Travailler les remplacements libres du Libéro avec les joueurs centraux en poste arrière."],
+            ["Séance 8 — Gestion Tactique du « Money Time » (20-20 / Tie-Break 12-12) & Temps Morts", "Prendre les décisions optimales sous haute pression psychologique en fin de set.", "Terrain complet 6c6 · Départ des sets à 21-21 (jusqu'à 25 avec 2 points d'écart) ou 12-12 au Tie-Break.", "Servir sur le réceptionneur adverse le moins performant, sécuriser la 1ère attaque sur son meilleur attaquant et organiser le double contre.", "Communication sereine, rituels de cohésion d'équipe au centre du terrain entre chaque point.", "Zéro faute directe non provoquée (service dans le filet ou faute de filet) dans le Money Time.", "Imposer un handicap de -2 points à l'équipe qui mène pour travailler la remontée mentale."],
+            ["Séance 9 — Compétition Officielle ASS / FRMSS avec Arbitrage FIVB à 2, Juges de Ligne & Feuille Officielle", "Disputer une rencontre complète en 2 sets gagnants dans les conditions exactes du championnat scolaire FRMSS.", "Terrain 18×9m · Match officiel · 1er arbitre, 2ème arbitre, 2 juges de ligne avec fanions et feuille de marque FIVB.", "Application intégrale du règlement FIVB 2026.", "Ajuster le plan de jeu entre les sets à partir des statistiques d'efficacité d'attaque et de réception.", "Rencontre officielle maîtrisée et feuille de match dûment complétée et signée.", "Finale des poules."],
+            ["Séance 10 — Évaluation Sommative & Certificative Finale (/20)", "Valider l'excellence motrice, tactique, conceptuelle et citoyenne en situation de compétition officielle.", "Tournoi final 6c6 · Grille officielle sur 20 points (OP 2007 / OP 2009).", "Règlement FIVB intégral + rotation sur l'arbitrage et la table de marque.", "Performance individuelle au service du collectif, leadership positif et maîtrise réglementaire.", "Note finale sur 20 points.", "Clôture du cycle."]
+          ]
+        }}
+      }};
+
+      var currentSchool = "1AC";
+      var currentPractice = "N1";
+      var currentViewMode = "ppc";
+      var currentGrilleType = "diag";
+
+      function switchVolleyballVolet(voletId) {{
+        document.querySelectorAll('.volet-panel').forEach(function(p) {{ p.classList.remove('active'); }});
+        document.querySelectorAll('.volet-tab-btn').forEach(function(b) {{ b.classList.remove('active'); }});
+        var targetPanel = document.getElementById('volet-' + voletId);
+        var targetBtn = document.getElementById('tab-btn-' + voletId);
+        if (targetPanel) targetPanel.classList.add('active');
+        if (targetBtn) targetBtn.classList.add('active');
+      }}
+
+      function selectSchoolLevel(lvl) {{
+        currentSchool = lvl;
+        document.querySelectorAll('.school-tab').forEach(function(b) {{
+          b.classList.toggle('active', b.getAttribute('data-school') === lvl);
+        }});
+        renderStudioPreview();
+      }}
+
+      function selectPracticeLevel(plvl) {{
+        currentPractice = plvl;
+        document.querySelectorAll('.practice-tab[data-practice]').forEach(function(b) {{
+          b.classList.toggle('active', b.getAttribute('data-practice') === plvl);
+        }});
+        renderStudioPreview();
+      }}
+
+      function selectViewMode(mode) {{
+        currentViewMode = mode;
+        document.getElementById('vmode-ppc').classList.toggle('active', mode === 'ppc');
+        document.getElementById('vmode-all-fiches').classList.toggle('active', mode === 'all_fiches');
+        document.getElementById('vmode-single-fiche').classList.toggle('active', mode === 'single_fiche');
+        document.getElementById('singleSeanceSelectorWrap').style.display = (mode === 'single_fiche') ? 'block' : 'none';
+        renderStudioPreview();
+      }}
+
+      function getHeaderMetaHtml(docTitle, docSubtitle) {{
+        var prof = (document.getElementById('inpProfName').value || '..................................................').trim();
+        var etab = (document.getElementById('inpEtabName').value || '..................................................').trim();
+        var aref = (document.getElementById('inpArefName').value || '..................................................').trim();
+        var sInfo = VB_SCHOOL_LEVELS[currentSchool];
+        var pInfo = VB_PRACTICE_LEVELS[currentPractice];
+
+        return '<table class="a4-header-table"><tr>' +
+          '<td style="width:36%;"><strong>ROYAUME DU MAROC</strong><br>Ministère de l\\'Éducation Nationale, du Préscolaire et des Sports<br><strong>AREF / Direction :</strong> ' + aref + '</td>' +
+          '<td style="width:28%;text-align:center;"><strong>ANNÉE SCOLAIRE : 2026 / 2027</strong><br>Matière : Éducation Physique et Sportive<br><strong>APS : VOLLEY-BALL (FIVB)</strong></td>' +
+          '<td style="width:36%;text-align:right;"><strong>Établissement :</strong> ' + etab + '<br><strong>Professeur d\\'EPS :</strong> ' + prof + '<br><strong>Niveau :</strong> ' + sInfo.label + ' · ' + pInfo.shortName + '</td>' +
+          '</tr></table>' +
+          '<div class="a4-doc-title"><h3>' + docTitle + '</h3><p>' + docSubtitle + '</p></div>' +
+          '<div class="a4-meta-box">' +
+          '<p><strong>Référentiel Officiel :</strong> ' + sInfo.ref + '</p>' +
+          '<p><strong>Objectif Terminal d\\'Intégration (OTI — ' + currentSchool + ') :</strong> ' + sInfo.oti + '</p>' +
+          '<p><strong>Compétence Visée en Volley-Ball :</strong> ' + sInfo.comp + '</p>' +
+          '<p><strong>Objectif Terminal du Cycle (OTC — ' + pInfo.shortName + ') :</strong> ' + pInfo.otcPrefix + '</p>' +
+          '<p><strong>Modalité d\\'Évaluation Sommative (/20) :</strong> ' + sInfo.bareme + '</p>' +
+          '</div>';
+      }}
+
+      function buildPpcHtml() {{
+        var sInfo = VB_SCHOOL_LEVELS[currentSchool];
+        var pInfo = VB_PRACTICE_LEVELS[currentPractice];
+        var html = getHeaderMetaHtml(
+          'PROJET PRÉVISIONNEL DE CYCLE (PPC) — VOLLEY-BALL (10 SÉANCES)',
+          sInfo.label + ' · ' + pInfo.title
+        );
+
+        html += '<table class="a4-table"><thead><tr>' +
+          '<th style="width:12%;">N° &amp; Thème de Séance</th>' +
+          '<th style="width:20%;">Objectif Opérationnel de la Séance</th>' +
+          '<th style="width:22%;">Situation d\\'Apprentissage &amp; Organisation</th>' +
+          '<th style="width:24%;">Critères de Réalisation (Contenus d\\'Enseignement)</th>' +
+          '<th style="width:22%;">Critères de Réussite &amp; Variables Didactiques</th>' +
+          '</tr></thead><tbody>';
+
+        for (var i = 0; i < pInfo.seances.length; i++) {{
+          var s = pInfo.seances[i];
+          html += '<tr>' +
+            '<td><strong>' + s[0] + '</strong></td>' +
+            '<td>' + s[1] + '</td>' +
+            '<td><strong>Dispositif :</strong> ' + s[2] + '<br><strong>Consigne :</strong> ' + s[3] + '</td>' +
+            '<td>' + s[4] + '</td>' +
+            '<td><strong>Réussite :</strong> ' + s[5] + '<br><strong>Variable :</strong> ' + s[6] + '</td>' +
+            '</tr>';
+        }}
+        html += '</tbody></table>';
+
+        html += '<table style="width:100%;margin-top:1.25rem;border:none;font-size:0.84rem;"><tr>' +
+          '<td style="border:none;width:33%;"><strong>Signature du Professeur d\\'EPS :</strong><br><br>........................................</td>' +
+          '<td style="border:none;width:33%;text-align:center;"><strong>Visa du Coordonnateur EPS :</strong><br><br>........................................</td>' +
+          '<td style="border:none;width:33%;text-align:right;"><strong>Visa de la Direction / Inspection :</strong><br><br>........................................</td>' +
+          '</tr></table>';
+
+        return html;
+      }}
+
+      function buildSingleFicheHtml(index) {{
+        var sInfo = VB_SCHOOL_LEVELS[currentSchool];
+        var pInfo = VB_PRACTICE_LEVELS[currentPractice];
+        var s = pInfo.seances[index];
+
+        return '<div class="seance-fiche-block">' +
+          '<div class="seance-fiche-head"><span>🏐 ' + s[0] + ' — VOLLEY-BALL (' + sInfo.label + ' · ' + pInfo.shortName + ')</span><span>Durée : 55 à 60 min · Effectif : 36-42 élèves</span></div>' +
+          '<div style="padding:1rem;">' +
+          '<p style="margin-bottom:0.65rem;font-size:0.88rem;"><strong>🎯 Objectif de la Séance :</strong> ' + s[1] + '</p>' +
+          '<table class="a4-table" style="margin:0;"><thead><tr>' +
+          '<th style="width:16%;">Phase &amp; Durée</th>' +
+          '<th style="width:28%;">But, Dispositif &amp; Aménagement Matériel</th>' +
+          '<th style="width:28%;">Consignes &amp; Critères de Réalisation</th>' +
+          '<th style="width:28%;">Critères de Réussite &amp; Régulation (Variables)</th>' +
+          '</tr></thead><tbody>' +
+          '<tr>' +
+          '<td><strong>1. Prise en main &amp; Mise en train</strong><br>(10 à 12 min)</td>' +
+          '<td>• Appel, vérification des tenues sportives et présentation de l\\'objectif.<br>• Échauffement progressif autour du terrain 18×9m (pas chassés au filet, déplacements avant/arrière, posture basse) + Mobilisation spécifique doigts/poignets/épaules/chevilles + Jonglage et passes en binôme.</td>' +
+          '<td>• Respecter la progressivité articulaire (prévention des entorses digitales).<br>• Se déplacer avant d\\'arrêter ses appuis sous le ballon.</td>' +
+          '<td>• Élévation thermique et articulaire optimale.<br>• Zéro traumatisme aux doigts ; écoute active des consignes.</td>' +
+          '</tr>' +
+          '<tr>' +
+          '<td><strong>2. Partie Fondamentale</strong><br>(35 à 40 min)</td>' +
+          '<td><strong>Aménagement &amp; Tâche :</strong><br>' + s[2] + '<br><br><strong>But de la situation :</strong><br>' + s[3] + '</td>' +
+          '<td><strong>Ce qu\\'il faut faire pour réussir (Contenus) :</strong><br>• ' + s[4] + '<br>• Respecter les règles FIVB ciblées (frappe brève sans tenu, 3 touches max, interdiction de toucher le filet, communication).</td>' +
+          '<td><strong>Critères de réussite quantitatifs :</strong><br>• ' + s[5] + '<br><br><strong>Variable didactique de régulation :</strong><br>• ' + s[6] + '</td>' +
+          '</tr>' +
+          '<tr>' +
+          '<td><strong>3. Retour au calme &amp; Bilan</strong><br>(5 à 8 min)</td>' +
+          '<td>• Rassemblement autour du filet, étirements passifs courts et récupération respiratoire.<br>• Bilan participatif avec les élèves-observateurs et les arbitres FIVB.</td>' +
+          '<td>• Verbaliser la règle d\\'action retenue (ex. : pourquoi amortir haut vers la Zone 3 en 1ère touche ; quand utiliser la touche haute vs la manchette).<br>• Ramassage et rangement du filet et des ballons.</td>' +
+          '<td>• Participation active au bilan métacognitif et présentation du thème de la séance suivante.</td>' +
+          '</tr>' +
+          '</tbody></table>' +
+          '</div></div>';
+      }}
+
+      function buildAllFichesHtml() {{
+        var sInfo = VB_SCHOOL_LEVELS[currentSchool];
+        var pInfo = VB_PRACTICE_LEVELS[currentPractice];
+        var html = getHeaderMetaHtml(
+          'CAHIER COMPLET DES 10 FICHES DE SÉANCES — VOLLEY-BALL',
+          sInfo.label + ' · ' + pInfo.title
+        );
+        for (var i = 0; i < pInfo.seances.length; i++) {{
+          html += buildSingleFicheHtml(i);
+        }}
+        return html;
+      }}
+
+      function renderStudioPreview() {{
+        var sInfo = VB_SCHOOL_LEVELS[currentSchool];
+        var pInfo = VB_PRACTICE_LEVELS[currentPractice];
+        var badge = document.getElementById('studioCurrentBadge');
+        if (badge) {{
+          badge.textContent = currentSchool + ' · ' + pInfo.shortName;
+        }}
+        var selectEl = document.getElementById('singleSeanceSelect');
+        if (selectEl) {{
+          for (var i = 0; i < pInfo.seances.length; i++) {{
+            if (selectEl.options[i]) {{
+              selectEl.options[i].textContent = pInfo.seances[i][0];
+            }}
+          }}
+        }}
+
+        var container = document.getElementById('studioA4Preview');
+        if (!container) return;
+        if (currentViewMode === 'ppc') {{
+          container.innerHTML = buildPpcHtml();
+        }} else if (currentViewMode === 'all_fiches') {{
+          container.innerHTML = buildAllFichesHtml();
+        }} else {{
+          var idx = parseInt(document.getElementById('singleSeanceSelect').value || '0', 10);
+          container.innerHTML = getHeaderMetaHtml(
+            'FICHE PÉDAGOGIQUE DÉTAILLÉE — ' + pInfo.seances[idx][0].toUpperCase(),
+            sInfo.label + ' · ' + pInfo.shortName
+          ) + buildSingleFicheHtml(idx);
+        }}
+      }}
+
+      function exportVolleyballDoc(docKind, format) {{
+        var htmlContent = (docKind === 'ppc') ? buildPpcHtml() : buildAllFichesHtml();
+        var fileBase = 'Volleyball-' + currentSchool + '-' + currentPractice + '-' + (docKind === 'ppc' ? 'Projet-Cycle' : '10-Fiches-Seances');
+        if (format === 'word') {{
+          downloadHtmlAsWord(htmlContent, fileBase + '.doc');
+        }} else {{
+          openPrintWindow(htmlContent, fileBase);
+        }}
+      }}
+
+      function exportElementAsWord(elementId, fileBase) {{
+        var el = document.getElementById(elementId);
+        if (!el) return;
+        downloadHtmlAsWord(el.innerHTML, fileBase + '.doc');
+      }}
+
+      function printElementAsPdf(elementId, docTitle) {{
+        var el = document.getElementById(elementId);
+        if (!el) return;
+        openPrintWindow(el.innerHTML, docTitle);
+      }}
+
+      function downloadHtmlAsWord(innerHtml, filename) {{
+        var fullDoc = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">' +
+          '<head><meta charset="utf-8"><title>' + filename + '</title>' +
+          '<style>body {{ font-family: Arial, sans-serif; font-size: 10.5pt; color: #0f172a; line-height: 1.45; }} ' +
+          'table {{ width: 100%; border-collapse: collapse; margin: 10px 0; }} ' +
+          'th {{ background: #0f172a; color: #ffffff; padding: 6px; border: 1px solid #000; font-size: 9.5pt; text-align: left; }} ' +
+          'td {{ padding: 6px; border: 1px solid #475569; font-size: 9.5pt; vertical-align: top; }} ' +
+          'h3 {{ color: #991b1b; margin: 8px 0; }} .a4-doc-title {{ text-align: center; background: #f1f5f9; border: 2px solid #000; padding: 8px; margin: 10px 0; }}</style>' +
+          '</head><body>' + innerHtml + '</body></html>';
+        var blob = new Blob(['\\ufeff', fullDoc], {{ type: 'application/msword;charset=utf-8' }});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function() {{ URL.revokeObjectURL(url); }}, 1500);
+      }}
+
+      function openPrintWindow(innerHtml, title) {{
+        var w = window.open('', '_blank', 'width=1020,height=800');
+        if (!w) {{
+          window.print();
+          return;
+        }}
+        w.document.write('<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>' + title + '</title>');
+        w.document.write('<style>@page {{ size: A4 landscape; margin: 12mm; }} body {{ font-family: Arial, sans-serif; font-size: 10pt; color: #0f172a; line-height: 1.45; }} table {{ width: 100%; border-collapse: collapse; margin: 8px 0; }} th {{ background: #0f172a !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 6px; border: 1px solid #000; text-align: left; }} td {{ padding: 6px; border: 1px solid #334155; vertical-align: top; }} .a4-doc-title {{ text-align: center; border: 2px solid #000; padding: 6px; margin: 8px 0; background: #f1f5f9; }} .a4-meta-box {{ border: 1px solid #334155; padding: 8px; margin-bottom: 10px; }} .seance-fiche-block {{ border: 2px solid #000; margin-bottom: 14px; page-break-inside: avoid; }} .seance-fiche-head {{ background: #991b1b !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 6px 10px; font-weight: bold; display: flex; justify-content: space-between; }}</style>');
+        w.document.write('</head><body>' + innerHtml + '</body></html>');
+        w.document.close();
+        w.focus();
+        setTimeout(function() {{ w.print(); }}, 350);
+      }}
+
+      function copyCurrentPreview(btn) {{
+        var el = document.getElementById('studioA4Preview');
+        if (!el) return;
+        navigator.clipboard.writeText(el.innerText).then(function() {{
+          var old = btn.innerHTML;
+          btn.innerHTML = '✅ Copié !';
+          setTimeout(function() {{ btn.innerHTML = old; }}, 2000);
+        }});
+      }}
+
+      function copyGrillePreview(btn) {{
+        var el = document.getElementById('grilleA4Preview');
+        if (!el) return;
+        navigator.clipboard.writeText(el.innerText).then(function() {{
+          var old = btn.innerHTML;
+          btn.innerHTML = '✅ Grille copiée !';
+          setTimeout(function() {{ btn.innerHTML = old; }}, 2000);
+        }});
+      }}
+
+      /* GRILLES D'OBSERVATION ET D'ÉVALUATION VOLLEY-BALL (/20) */
+      var VB_GRILLES_HTML = {{
+        "diag": '<div class="a4-doc-title"><h3>FICHE D\\'OBSERVATION DIAGNOSTIQUE &amp; CO-ÉVALUATION EN BINÔME — VOLLEY-BALL</h3><p>Recueil Statistique Individuel &amp; Collectif en Situation de Référence (Match 4c4 / 6c6 — 2 Sets de 11 pts)</p></div>' +
+          '<p style="font-size:0.85rem;margin-bottom:0.75rem;"><strong>Classe :</strong> ...................... | <strong>Date :</strong> ..../..../2026 | <strong>Élève Observateur :</strong> .......................................... | <strong>Équipe observée :</strong> ......................</p>' +
+          '<table class="a4-table"><thead><tr>' +
+          '<th>N° / Nom &amp; Prénom du Joueur Observé</th>' +
+          '<th>Services Réussis / Tentés (SR/ST)</th>' +
+          '<th>Balles Jouées en Jeu (BJ)</th>' +
+          '<th>Réceptions Orientées vers l\\'Avant (RO)</th>' +
+          '<th>Passes de Relais Exploitables (PA)</th>' +
+          '<th>Renvois / Attaques en Zone Libre (AG)</th>' +
+          '<th>Pertes : Balle Tenue / Filet / Sans Réaction (BP)</th>' +
+          '<th>Indice d\\'Efficacité<br>Ie = (SR+RO+PA+AG)/(ST+BJ)</th>' +
+          '<th>Niveau Identifié (N1 à N4)</th>' +
+          '</tr></thead><tbody>' +
+          '<tr><td>1. ..................................................</td><td>.... / ....</td><td></td><td></td><td></td><td></td><td></td><td>....... %</td><td>[ ] N1 [ ] N2 [ ] N3 [ ] N4</td></tr>' +
+          '<tr><td>2. ..................................................</td><td>.... / ....</td><td></td><td></td><td></td><td></td><td></td><td>....... %</td><td>[ ] N1 [ ] N2 [ ] N3 [ ] N4</td></tr>' +
+          '<tr><td>3. ..................................................</td><td>.... / ....</td><td></td><td></td><td></td><td></td><td></td><td>....... %</td><td>[ ] N1 [ ] N2 [ ] N3 [ ] N4</td></tr>' +
+          '<tr><td>4. ..................................................</td><td>.... / ....</td><td></td><td></td><td></td><td></td><td></td><td>....... %</td><td>[ ] N1 [ ] N2 [ ] N3 [ ] N4</td></tr>' +
+          '<tr><td>5. ..................................................</td><td>.... / ....</td><td></td><td></td><td></td><td></td><td></td><td>....... %</td><td>[ ] N1 [ ] N2 [ ] N3 [ ] N4</td></tr>' +
+          '<tr><td>6. ..................................................</td><td>.... / ....</td><td></td><td></td><td></td><td></td><td></td><td>....... %</td><td>[ ] N1 [ ] N2 [ ] N3 [ ] N4</td></tr>' +
+          '<tr><td>7. ..................................................</td><td>.... / ....</td><td></td><td></td><td></td><td></td><td></td><td>....... %</td><td>[ ] N1 [ ] N2 [ ] N3 [ ] N4</td></tr>' +
+          '</tbody></table>' +
+          '<div class="a4-meta-box" style="margin-top:0.85rem;"><strong>Clé de détermination du Niveau de Pratique en Volley-Ball :</strong><br>' +
+          '• <strong>Niveau 1 (Débutant) :</strong> Ie &lt; 40% (Échecs au service, balles tenues/collées, renvoi direct aléatoire en 1 touche, peur de la balle).<br>' +
+          '• <strong>Niveau 2 (Débrouillé) :</strong> Ie entre 40% et 60% (Service cuillère régulier, construction en 2 touches : réception orientée + renvoi au fond).<br>' +
+          '• <strong>Niveau 3 (Confirmé) :</strong> Ie entre 60% et 75% (Chaîne complète en 3 touches R-P-A avec passeur en Zone 3, attaque placée et service tennis).<br>' +
+          '• <strong>Niveau 4 (Élite / ASS) :</strong> Ie &gt; 75% (Système 6c6 en W / pénétration, smash et feinte d\\'attaque, contre au filet et défense coordonnée).</div>',
+
+        "college": '<div class="a4-doc-title"><h3>GRILLE OFFICIELLE D\\'ÉVALUATION SOMMATIVE VOLLEY-BALL — CYCLE COLLÉGIAL (/20)</h3><p>Conforme aux Orientations Pédagogiques 2009 &amp; à la Note Ministérielle n° 143-09 (1AC · 2AC · 3AC)</p></div>' +
+          '<table class="a4-table"><thead><tr>' +
+          '<th style="width:24%;">Composante Évaluée</th>' +
+          '<th style="width:14%;">Barème OP 2009</th>' +
+          '<th style="width:42%;">Critères &amp; Indicateurs Observables en Situation de Match (4c4 / 6c6)</th>' +
+          '<th style="width:20%;">Échelle d\\'Attribution des Points</th>' +
+          '</tr></thead><tbody>' +
+          '<tr><td><strong>1. Habiletés Motrices — Processus (Maîtrise technique &amp; tactique individuelle)</strong></td><td><strong>06 Points</strong><br>(/12 pts moteurs)</td><td>• <strong>Service &amp; Réception (3 pts) :</strong> Service cuillère régulier et profond ; déplacement précoce et arrêt sous le ballon ; manchette ou touche haute à 10 doigts orientée vers l\\'avant.<br>• <strong>Passe, Renvoi &amp; Couverture (3 pts) :</strong> Relais vers le partenaire avant, renvoi dirigé vers une zone libre adverse, communication (« J\\'ai ! ») et replacement.</td><td>• Niveau 1 : 1 à 2 pts<br>• Niveau 2 : 2,5 à 3,5 pts<br>• Niveau 3 : 4 à 5 pts<br>• Niveau 4 : 5,5 à 6 pts</td></tr>' +
+          '<tr><td><strong>2. Habiletés Motrices — Produit (Rendement &amp; Efficacité collective/individuelle)</strong></td><td><strong>06 Points</strong><br>(/12 pts moteurs)</td><td>• <strong>Efficacité individuelle (3 pts) :</strong> Taux de services réussis + Ratio (Réceptions orientées + Passes + Attaques réussies) / Balles jouées.<br>• <strong>Construction collective &amp; Gain du match (3 pts) :</strong> Pourcentage de points construits en 2 ou 3 touches et classement de l\\'équipe.</td><td>• Ie &lt; 40% : 1 à 2 pts<br>• Ie 40-60% : 2,5 à 4 pts<br>• Ie 60-75% : 4,5 à 5 pts<br>• Ie &gt; 75% : 5,5 à 6 pts</td></tr>' +
+          '<tr><td><strong>3. Connaissances Conceptuelles</strong></td><td><strong>03 Points</strong></td><td>• Connaissance des règles fondamentales FIVB (3 touches max, interdiction du tenu et du double contact, let au service, faute de filet, rotation horaire des 6 postes) et de l\\'échauffement spécifique.</td><td>• 1 pt par réponse / règle maîtrisée en situation</td></tr>' +
+          '<tr><td><strong>4. Connaissances Comportementales &amp; Rôles Sociaux</strong></td><td><strong>05 Points</strong></td><td>• Assiduité et tenue sportive (1,5 pt) · Fair-play et encouragement des partenaires (1,5 pt) · Tenue efficace du rôle d\\'arbitre FIVB, juge de ligne et marqueur (2 pts).</td><td>• Barème progressif de 0 à 5 points</td></tr>' +
+          '<tr><td colspan="3" style="text-align:right;font-weight:900;font-size:0.95rem;">NOTE SOMMATIVE TOTALE COLLÈGE (OP 2009 — NOTE 143-09) :</td><td style="font-weight:900;font-size:1rem;color:#991b1b;">......... / 20 Points</td></tr>' +
+          '</tbody></table>',
+
+        "lycee": '<div class="a4-doc-title"><h3>GRILLE OFFICIELLE D\\'ÉVALUATION SOMMATIVE VOLLEY-BALL — CYCLE QUALIFIANT &amp; BAC (/20)</h3><p>Conforme aux Orientations Pédagogiques 2007 &amp; à la Note Ministérielle n° 142-10 (Tronc Commun · 1ère Bac · 2ème Bac)</p></div>' +
+          '<table class="a4-table"><thead><tr>' +
+          '<th style="width:24%;">Composante Évaluée</th>' +
+          '<th style="width:14%;">Barème OP 2007</th>' +
+          '<th style="width:42%;">Critères &amp; Indicateurs Observables en Compétition 6c6 FIVB</th>' +
+          '<th style="width:20%;">Échelle d\\'Attribution des Points</th>' +
+          '</tr></thead><tbody>' +
+          '<tr><td><strong>1. Habiletés Motrices — Processus Technico-Tactique</strong></td><td><strong>07 Points</strong><br>(/14 pts moteurs)</td><td>• <strong>Service &amp; Réception (2,5 pts) :</strong> Service par en haut (tennis) ciblé ; réception en manchette amortie vers la Zone 3 au sein du dispositif en W.<br>• <strong>Passe &amp; Attaque (2,5 pts) :</strong> Aiguillage du passeur en Zone 3 (avant/arrière) ; attaque smashée ou feintée (tip) dans les espaces libres.<br>• <strong>Défense &amp; Contre (2 pts) :</strong> Contre individuel/à deux au filet, couverture d\\'attaque et défense basse.</td><td>• Niveau 1 : 1,5 à 3 pts<br>• Niveau 2 : 3,5 à 4,5 pts<br>• Niveau 3 : 5 à 6 pts<br>• Niveau 4 : 6,5 à 7 pts</td></tr>' +
+          '<tr><td><strong>2. Habiletés Motrices — Produit (Efficacité Individuelle &amp; Collective)</strong></td><td><strong>07 Points</strong><br>(/14 pts moteurs)</td><td>• <strong>Indice d\\'efficacité individuelle (4 pts) :</strong> Ratio de réussite au service, en réception positive, à la passe et à l\\'attaque (faible taux de fautes directes).<br>• <strong>Performance collective (3 pts) :</strong> Pourcentage d\\'actions construites en 3 touches (R-P-A) et résultat des matchs.</td><td>• Ie &lt; 45% : 2 à 3 pts<br>• Ie 45-65% : 3,5 à 5 pts<br>• Ie 65-80% : 5,5 à 6,25 pts<br>• Ie &gt; 80% : 6,5 à 7 pts</td></tr>' +
+          '<tr><td><strong>3. Connaissances Conceptuelles</strong></td><td><strong>03 Points</strong></td><td>• Maîtrise du code d\\'arbitrage FIVB 2026 (fautes de position/rotation, attaque aux 3m, rôle du Libéro, gestuelle officielle), principes tactiques (système en W, pénétration) et biomécanique.</td><td>• 0 à 3 points</td></tr>' +
+          '<tr><td><strong>4. Connaissances Comportementales &amp; Rôles Sociaux</strong></td><td><strong>03 Points</strong></td><td>• Arbitrage officiel (1er et 2ème arbitre, feuille de match) (1,5 pt), cohésion d\\'équipe, esprit sportif et assiduité (1,5 pt).</td><td>• 0 à 3 points</td></tr>' +
+          '<tr><td colspan="3" style="text-align:right;font-weight:900;font-size:0.95rem;">NOTE SOMMATIVE TOTALE LYCÉE QUALIFIANT &amp; BAC (OP 2007 — NOTE 142-10) :</td><td style="font-weight:900;font-size:1rem;color:#991b1b;">......... / 20 Points</td></tr>' +
+          '</tbody></table>',
+
+        "dispense": '<div class="a4-doc-title"><h3>GRILLE D\\'ÉVALUATION ALTERNATIVE VOLLEY-BALL — ÉLÈVE DISPENSÉ DE PRATIQUE (/20)</h3><p>Évaluation par les Rôles Sociaux (Arbitrage FIVB, Juge de Ligne, Feuille de Match &amp; Dossier Théorique)</p></div>' +
+          '<table class="a4-table"><thead><tr>' +
+          '<th>Volet d\\'Évaluation Alternative</th>' +
+          '<th>Barème (/20)</th>' +
+          '<th>Tâches Pédagogiques et Critères d\\'Évaluation durant le Cycle de Volley-Ball</th>' +
+          '</tr></thead><tbody>' +
+          '<tr><td><strong>1. Compétences Méthodologiques, Arbitrage FIVB &amp; Table de Marque</strong></td><td><strong>08 Points</strong></td><td>• Diriger un set officiel en tant que 1er ou 2ème arbitre en exécutant la séquence gestuelle FIVB (coup de sifflet → camp qui marque → nature de la faute : 4 touches, tenu, double contact, filet, in/out) (4 pts).<br>• Tenir la feuille de match (contrôle de l\\'ordre de rotation des 6 postes, score, temps morts) et remplir les fiches d\\'observation statistique (4 pts).</td></tr>' +
+          '<tr><td><strong>2. Connaissances Conceptuelles &amp; Règlement FIVB</strong></td><td><strong>06 Points</strong></td><td>• Dossier écrit ou interrogation orale sur : les dimensions du terrain (18×9m, ligne des 3m, hauteurs de filet F/G), la numérotation des 6 postes et le sens de rotation, ainsi que l\\'échauffement spécifique.</td></tr>' +
+          '<tr><td><strong>3. Connaissances Comportementales &amp; Assiduité</strong></td><td><strong>06 Points</strong></td><td>• Présence effective et ponctualité à toutes les séances du cycle (2 pts), aide au montage/réglage du filet et de la rubalise (2 pts), impartialité et sérieux dans l\\'arbitrage (2 pts).</td></tr>' +
+          '<tr><td colspan="2" style="text-align:right;font-weight:900;">NOTE FINALE ÉLÈVE DISPENSÉ :</td><td style="font-weight:900;color:#006233;">......... / 20 Points</td></tr>' +
+          '</tbody></table>'
+      }};
+
+      function selectVolleyballGrille(gKey, btn) {{
+        currentGrilleType = gKey;
+        document.querySelectorAll('.practice-tab[data-grille]').forEach(function(b) {{ b.classList.remove('active'); }});
+        if (btn) btn.classList.add('active');
+        var container = document.getElementById('grilleA4Preview');
+        if (container) container.innerHTML = VB_GRILLES_HTML[gKey] || '';
+      }}
+
+      /* Initialisation au chargement + lecture paramètre URL ?level= */
+      window.addEventListener('DOMContentLoaded', function() {{
+        try {{
+          var params = new URLSearchParams(window.location.search);
+          var lvl = (params.get('level') || '').toUpperCase();
+          if (lvl && VB_SCHOOL_LEVELS[lvl]) {{
+            currentSchool = lvl;
+            document.querySelectorAll('.school-tab').forEach(function(b) {{
+              b.classList.toggle('active', b.getAttribute('data-school') === lvl);
+            }});
+          }}
+          if (window.location.hash === '#volet-atd') switchVolleyballVolet('atd');
+          else if (window.location.hash === '#volet-grilles') switchVolleyballVolet('grilles');
+          else if (window.location.hash === '#volet-terrain') switchVolleyballVolet('terrain');
+          else if (window.location.hash === '#volet-articles') switchVolleyballVolet('articles');
+        }} catch(e) {{}}
+        renderStudioPreview();
+        selectVolleyballGrille('diag', document.querySelector('.practice-tab[data-grille="diag"]'));
+      }});
+    </script>
+
+{footer_html}
+'''
+    with open(os.path.join(PUBLIC_DIR, filename), "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"[SILO VOLLEYBALL OK] Created /public/{filename}")
+
+
+def update_hub_silos_blog_index_sitemap():
+    # 1. Update /public/hub-aps-sports-eps-maroc.html to feature Volley-Ball as an active Complete Silo alongside Handball & Basket-Ball à 5
+    hub_path = os.path.join(PUBLIC_DIR, "hub-aps-sports-eps-maroc.html")
+    if os.path.exists(hub_path):
+        with open(hub_path, "r", encoding="utf-8") as f:
+            hhtml = f.read()
+
+        if "aps-volleyball-eps-maroc.html" not in hhtml:
+            volley_featured_section = '''
+        <!-- SILO VEDETTE 3 : VOLLEY-BALL (STUDIO COMPLET 1AC-2BAC) -->
+        <section class="featured-silo-card" data-aps-family="collectifs" style="border-color:#1e40af;" aria-label="Silo Complet Volley-Ball EPS Maroc">
+            <div>
+                <div class="featured-kicker" style="color:#1e40af;">Silo APS Complet Disponible · Collège (OP 2009) &amp; Lycée (OP 2007) · FIVB</div>
+                <h2 class="featured-title">🏐 Volley-Ball en EPS au Maroc : ATD, Studio des 24 Cycles &amp; 240 Fiches (1AC à 2Bac) + Grilles d'Observation &amp; Évaluation (/20)</h2>
+                <p class="featured-desc">Accédez à la page spéciale Volley-Ball regroupant l'Analyse et Traitement Didactique (ATD), le studio interactif de visualisation A4 et téléchargement des projets de cycles et fiches de séances pour les 6 niveaux scolaires (1AC, 2AC, 3AC, TC, 1Bac, 2Bac × 4 niveaux de pratique : du renvoi débutant à la chaîne R-P-A et au système 6c6 en W), ainsi que les grilles d'observation et d'évaluation (/20) en Word et PDF.</p>
+                <div class="featured-features">
+                    <span>✓ ATD Volley-Ball (Cible au sol 9×9m, Frappe brève, Remédiations)</span>
+                    <span>✓ 6 Niveaux Scolaires × 4 Niveaux (Débutant à Élite Système W)</span>
+                    <span>✓ Visionneuse A4 Pro avant téléchargement Word (.doc) &amp; PDF</span>
+                    <span>✓ Grilles d'Observation Binôme &amp; Évaluation (/20 Collège &amp; Lycée)</span>
+                </div>
+                <div class="featured-actions">
+                    <a href="aps-volleyball-eps-maroc.html" class="btn-primary-action" style="background:#1e40af;">Ouvrir le Silo Complet Volley-Ball (Cycles, Fiches &amp; Grilles) →</a>
+                    <a href="aps-volleyball-eps-maroc.html#volet-grilles" class="btn-secondary-action">Grilles d'Observation &amp; Évaluation (/20)</a>
+                </div>
+            </div>
+            <div class="featured-preview-box">
+                <strong style="display:block;font-size:0.88rem;color:#0f172a;margin-bottom:0.35rem;">Accès direct par Niveau Scolaire (Volley-Ball) :</strong>
+                <p style="font-size:0.8rem;color:#475569;margin-bottom:0.65rem;">Cliquez sur votre niveau pour ouvrir directement ses 4 niveaux de pratique (Débutant à Élite) avec aperçu A4 + export Word/PDF :</p>
+                <div class="level-matrix">
+                    <a href="aps-volleyball-eps-maroc.html?level=1AC#volet-studio" class="level-item">1ère AC<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">4 Cycles + Fiches</span></a>
+                    <a href="aps-volleyball-eps-maroc.html?level=2AC#volet-studio" class="level-item">2ème AC<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">4 Cycles + Fiches</span></a>
+                    <a href="aps-volleyball-eps-maroc.html?level=3AC#volet-studio" class="level-item">3ème AC<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">4 Cycles + Fiches</span></a>
+                    <a href="aps-volleyball-eps-maroc.html?level=TC#volet-studio" class="level-item">Tronc Commun<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">4 Cycles + Fiches</span></a>
+                    <a href="aps-volleyball-eps-maroc.html?level=1BAC#volet-studio" class="level-item">1ère Bac<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">4 Cycles + Fiches</span></a>
+                    <a href="aps-volleyball-eps-maroc.html?level=2BAC#volet-studio" class="level-item">2ème Bac<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">4 Cycles + Fiches</span></a>
+                </div>
+                <div style="margin-top:0.85rem;padding-top:0.75rem;border-top:1px solid #e2e8f0;display:flex;justify-content:space-between;font-size:0.78rem;font-weight:700;color:#1e40af;">
+                    <a href="aps-volleyball-eps-maroc.html#volet-atd">📐 Voir l'ATD Volley-Ball</a>
+                    <a href="reglement-volleyball-fivb-gestes-arbitrage-eps.html">⚖️ Règlement FIVB 2026 &amp; Gestes</a>
+                </div>
+            </div>
+        </section>
+'''
+            hhtml = hhtml.replace(
+                "<!-- GRILLE DE TOUTES LES APS PAR FAMILLE -->",
+                volley_featured_section + "\n        <!-- GRILLE DE TOUTES LES APS PAR FAMILLE -->",
+                1
+            )
+
+            old_volley_card = '''            <!-- 3. VOLLEY-BALL -->
+            <article class="aps-card" data-aps-family="collectifs">
+                <div>
+                    <div class="aps-card-kicker">Sports Collectifs · Renvoi · FIVB</div>
+                    <h3 class="aps-card-title">🏐 Volley-Ball (الكرة الطائرة)</h3>
+                    <p class="aps-card-desc">Traitement didactique de la cible au sol (1c1 à 6c6), manchette, touche haute, service, attaque/réception, code d'arbitrage FIVB et grilles d'évaluation OP 2007/2009.</p>
+                    <ul class="aps-links-list">
+                        <li><a href="article-volleyball-eps.html"><span>📘 Guide Complet Volley-Ball EPS : ATD &amp; Situations</span> <span>→</span></a></li>
+                        <li><a href="cycle-volleyball-college-eps-maroc.html"><span>📋 Cycle Volley-Ball Collège (10 Séances OP 2009)</span> <span>→</span></a></li>
+                        <li><a href="cycle-volleyball-lycee-eps-maroc.html"><span>📋 Cycle Volley-Ball Lycée (10 Séances OP 2007)</span> <span>→</span></a></li>
+                        <li><a href="reglement-volleyball-fivb-gestes-arbitrage-eps.html"><span>⚖️ Règlement FIVB 2026 &amp; Gestes d'Arbitrage</span> <span>→</span></a></li>
+                    </ul>
+                </div>
+                <div class="aps-card-footer">
+                    <a href="article-volleyball-eps.html" class="aps-btn-main">Dossier &amp; Cycles Volley →</a>
+                    <a href="evaluation-eps.html" class="aps-btn-alt">Grilles /20</a>
+                </div>
+            </article>'''
+
+            new_volley_card = '''            <!-- 3. VOLLEY-BALL -->
+            <article class="aps-card" data-aps-family="collectifs" style="border-color:#1e40af;border-width:2px;">
+                <div>
+                    <div class="aps-card-kicker" style="color:#1e40af;">Sports Collectifs · Renvoi · Studio Complet Actif</div>
+                    <h3 class="aps-card-title">🏐 Volley-Ball &amp; Beach-Volley (الكرة الطائرة)</h3>
+                    <p class="aps-card-desc">Silo complet Volley-Ball : ATD officiel, 24 projets de cycles et 240 fiches de séances (1AC à 2Bac × 4 niveaux), grilles d'observation et d'évaluation (/20) et code FIVB 2026.</p>
+                    <ul class="aps-links-list">
+                        <li><a href="aps-volleyball-eps-maroc.html#volet-studio"><span>⚡ Studio Cycles &amp; Fiches (1AC → 2Bac · PDF/Word)</span> <span>→</span></a></li>
+                        <li><a href="aps-volleyball-eps-maroc.html#volet-grilles"><span>📊 Grilles d'Observation &amp; Évaluation (/20)</span> <span>→</span></a></li>
+                        <li><a href="aps-volleyball-eps-maroc.html#volet-atd"><span>📐 ATD Volley-Ball (Cible au sol &amp; Remédiations)</span> <span>→</span></a></li>
+                        <li><a href="reglement-volleyball-fivb-gestes-arbitrage-eps.html"><span>⚖️ Règlement FIVB 2026 &amp; Gestes d'Arbitrage</span> <span>→</span></a></li>
+                    </ul>
+                </div>
+                <div class="aps-card-footer">
+                    <a href="aps-volleyball-eps-maroc.html" class="aps-btn-main" style="background:#1e40af;">Ouvrir la Page Spéciale Volley-Ball →</a>
+                </div>
+            </article>'''
+
+            hhtml = hhtml.replace(old_volley_card, new_volley_card)
+            with open(hub_path, "w", encoding="utf-8") as f:
+                f.write(hhtml)
+            print("[HUB APS OK] Updated /public/hub-aps-sports-eps-maroc.html with Volley-Ball Complete Silo.")
+
+    # 2. Add Volley-Ball link in sticky nav of Handball and Basketball silos
+    hb_path = os.path.join(PUBLIC_DIR, "aps-handball-eps-maroc.html")
+    if os.path.exists(hb_path):
+        with open(hb_path, "r", encoding="utf-8") as f:
+            hb_html = f.read()
+        if "aps-volleyball-eps-maroc.html" not in hb_html:
+            hb_html = hb_html.replace(
+                '<a href="aps-basketball-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#006233;">🏀 Silo Basket à 5</a>',
+                '<a href="aps-basketball-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#006233;">🏀 Basket à 5</a>\n                <a href="aps-volleyball-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#1e40af;">🏐 Volley-Ball</a>'
+            )
+            with open(hb_path, "w", encoding="utf-8") as f:
+                f.write(hb_html)
+
+    bb_path = os.path.join(PUBLIC_DIR, "aps-basketball-eps-maroc.html")
+    if os.path.exists(bb_path):
+        with open(bb_path, "r", encoding="utf-8") as f:
+            bb_html = f.read()
+        if "aps-volleyball-eps-maroc.html" not in bb_html:
+            bb_html = bb_html.replace(
+                '<a href="aps-handball-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#006233;">🤾 Silo Handball</a>',
+                '<a href="aps-handball-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#006233;">🤾 Handball</a>\n                <a href="aps-volleyball-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#1e40af;">🏐 Volley-Ball</a>'
+            )
+            with open(bb_path, "w", encoding="utf-8") as f:
+                f.write(bb_html)
+
+    # 3. Update /public/blog.html with the new Silo Volley-Ball card
+    blog_path = os.path.join(PUBLIC_DIR, "blog.html")
+    if os.path.exists(blog_path):
+        with open(blog_path, "r", encoding="utf-8") as f:
+            bhtml = f.read()
+
+        if "aps-volleyball-eps-maroc.html" not in bhtml:
+            volley_blog_card = '''                <!-- Silo Complet Volley-Ball : aps-volleyball-eps-maroc.html -->
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">🏐 Studio Volley-Ball · 24 Cycles &amp; 240 Fiches</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#991b1b" stroke-width="2"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10m0-20a15.3 15.3 0 0 0-4 10 15.3 15.3 0 0 0 4 10M2 12h20" stroke="#006233" stroke-width="2"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Silo Volley-Ball en EPS au Maroc (1AC à 2Bac) : ATD, Studio Cycles &amp; Fiches (4 Niveaux · PDF/Word) + Grilles (/20)</h3>
+                        <p class="article-excerpt">Page spéciale Volley-Ball tout-en-un : ATD complet (cible au sol 9×9m, frappe brève), créateur et visionneuse A4 pro des cycles et fiches pour les 6 niveaux scolaires (1AC à 2Bac × 4 niveaux : du renvoi débutant à la chaîne R-P-A et au système W) en Word/PDF et grilles d'évaluation (/20).</p>
+                        <div class="article-footer">
+                            <span class="article-date">4 Novembre 2026 · Studio PDF/Word</span>
+                            <a href="aps-volleyball-eps-maroc.html" class="read-more">Ouvrir le Studio Volley-Ball →</a>
+                        </div>
+                    </div>
+                </article>'''
+
+            marker = '<div class="articles-grid" id="articlesGrid">'
+            bhtml = bhtml.replace(marker, marker + "\n" + volley_blog_card, 1)
+            bhtml = bhtml.replace('<h3>Tous <span class="theme-count" id="count-all">137</span></h3>', '<h3>Tous <span class="theme-count" id="count-all">138</span></h3>')
+            bhtml = bhtml.replace('<span class="articles-count" id="articlesCount">137 articles</span>', '<span class="articles-count" id="articlesCount">138 articles</span>')
+            bhtml = bhtml.replace('<h3>Activités Sportives <span class="theme-count" id="count-aps">26</span></h3>', '<h3>Activités Sportives <span class="theme-count" id="count-aps">27</span></h3>')
+
+            with open(blog_path, "w", encoding="utf-8") as f:
+                f.write(bhtml)
+            print("[BLOG OK] Added Silo Volley-Ball card to /public/blog.html.")
+
+    # 4. Update /public/index.html (and mirror to /index.html) so the APS Studio Banner highlights Handball, Basket-Ball à 5 & Volley-Ball
+    index_path = os.path.join(PUBLIC_DIR, "index.html")
+    if os.path.exists(index_path):
+        with open(index_path, "r", encoding="utf-8") as f:
+            ihtml = f.read()
+
+        start_tag = "<!-- PROFEPS_APS_STUDIO_HUB_BANNER_START -->"
+        end_tag = "<!-- PROFEPS_APS_STUDIO_HUB_BANNER_END -->"
+        if start_tag in ihtml and end_tag in ihtml:
+            s_idx = ihtml.find(start_tag)
+            e_idx = ihtml.find(end_tag) + len(end_tag)
+            updated_banner = '''<!-- PROFEPS_APS_STUDIO_HUB_BANNER_START -->
+  <section aria-label="Portail des APS : Studios Handball, Basket-Ball à 5 & Volley-Ball (1AC-2Bac)" style="max-width:1140px;margin:1.75rem auto;padding:1.5rem;background:linear-gradient(135deg,#f0fdf4 0%,#ffffff 50%,#fff1f2 100%);border:2px solid #006233;border-radius:18px;box-shadow:0 8px 22px rgba(15,23,42,0.06);">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem;margin-bottom:1rem;">
+      <div>
+        <span style="display:inline-block;font-size:0.74rem;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:#ffffff;background:#006233;padding:0.22rem 0.7rem;border-radius:999px;">🏟️ Nouveau · Studios APS par Sport (1AC → 2Bac × 4 Niveaux)</span>
+        <h2 style="margin:0.35rem 0 0;font-size:1.22rem;font-weight:900;color:#0f172a;">Portail des APS : Pages Spéciales Volley-Ball, Basket-Ball à 5 &amp; Handball (ATD, 24 Cycles, 240 Fiches A4 Word/PDF &amp; Grilles /20)</h2>
+      </div>
+      <a href="hub-aps-sports-eps-maroc.html" style="font-size:0.84rem;font-weight:800;color:#006233;text-decoration:underline;">Ouvrir le Portail des APS →</a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0.8rem;">
+      <a href="aps-volleyball-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.95rem;background:#ffffff;border:2px solid #1e40af;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.72rem;font-weight:800;color:#1e40af;margin-bottom:0.25rem;">🏐 Nouveau · Studio Volley-Ball (1AC → 2Bac)</span>
+        <strong style="font-size:0.86rem;color:#0f172a;line-height:1.35;">ATD Volley, 24 Cycles &amp; 240 Fiches (Débutant à Élite Chaîne R-P-A) + Grilles (/20) en Word &amp; PDF →</strong>
+      </a>
+      <a href="aps-basketball-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.95rem;background:#ffffff;border:2px solid #006233;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.72rem;font-weight:800;color:#006233;margin-bottom:0.25rem;">🏀 Studio Basket-Ball à 5 (1AC → 2Bac)</span>
+        <strong style="font-size:0.86rem;color:#0f172a;line-height:1.35;">ATD Basket 5×5, 24 Cycles &amp; 240 Fiches (Débutant à Élite Pick &amp; Roll) + Grilles (/20) en Word &amp; PDF →</strong>
+      </a>
+      <a href="aps-handball-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.95rem;background:#ffffff;border:2px solid #991b1b;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.72rem;font-weight:800;color:#991b1b;margin-bottom:0.25rem;">🤾 Studio Complet Handball (1AC → 2Bac)</span>
+        <strong style="font-size:0.86rem;color:#0f172a;line-height:1.35;">ATD Handball, 24 Cycles &amp; 240 Fiches (Visionneuse A4 Pro) + Grilles (/20) en Word &amp; PDF →</strong>
+      </a>
+      <a href="hub-aps-sports-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.95rem;background:#ffffff;border:1px solid #cbd5e1;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.72rem;font-weight:800;color:#b45309;margin-bottom:0.25rem;">🏟️ Catalogue des 11 APS Maroc</span>
+        <strong style="font-size:0.86rem;color:#0f172a;line-height:1.35;">Accéder au Hub Central des APS : Sports Collectifs, Athlétisme, Gymnastique au Sol &amp; Référentiel des OTI →</strong>
+      </a>
+    </div>
+  </section>
+  <!-- PROFEPS_APS_STUDIO_HUB_BANNER_END -->'''
+            ihtml = ihtml[:s_idx] + updated_banner + ihtml[e_idx:]
+            with open(index_path, "w", encoding="utf-8") as f:
+                f.write(ihtml)
+            shutil.copy2(index_path, os.path.join(ROOT_DIR, "index.html"))
+            print("[INDEX OK] Updated /public/index.html and mirrored to /index.html.")
+
+    # 5. Update /public/sitemap.xml
+    sitemap_path = os.path.join(PUBLIC_DIR, "sitemap.xml")
+    if os.path.exists(sitemap_path):
+        with open(sitemap_path, "r", encoding="utf-8") as f:
+            xml = f.read()
+        loc = "https://profeps.ma/aps-volleyball-eps-maroc.html"
+        if loc not in xml:
+            entry = f'''  <url>
+    <loc>{loc}</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>'''
+            xml = xml.replace("</urlset>", entry + "\n</urlset>")
+            with open(sitemap_path, "w", encoding="utf-8") as f:
+                f.write(xml)
+            print("[SITEMAP OK] Added aps-volleyball-eps-maroc.html to /public/sitemap.xml.")
+
+
+if __name__ == "__main__":
+    create_volleyball_silo_page()
+    update_hub_silos_blog_index_sitemap()
+    print("=== SILO COMPLET VOLLEY-BALL GENERATED SUCCESSFULLY ===")

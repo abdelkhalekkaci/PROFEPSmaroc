@@ -1,0 +1,2269 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Generates:
+1. /public/aps-course-vitesse-relais-eps-maroc.html (Silo Complet Course de Vitesse & Relais : Intro + ATD + Studio Interactif 6 Niveaux Scolaires x 4 Niveaux de Pratique avec Visionneuse A4 Pro & Export Word/PDF + Grilles d'Observation, Barèmes 60m/80m/100m & Évaluation /20 + Terrain/Gammes/Règlement World Athletics + Articles liés)
+2. Updates /public/hub-aps-sports-eps-maroc.html, the 5 existing APS silos, /public/blog.html, /public/index.html, /index.html, and /public/sitemap.xml.
+Strictly preserves /public/generateur.html untouched.
+"""
+
+import os
+import shutil
+
+ROOT_DIR = "/app/applet"
+PUBLIC_DIR = os.path.join(ROOT_DIR, "public")
+
+
+def get_unified_navbar_html(current_file: str) -> str:
+    with open(os.path.join(PUBLIC_DIR, "aps-handball-eps-maroc.html"), "r", encoding="utf-8") as f:
+        content = f.read()
+    start_marker = "<!-- PROFEPS_UNIFIED_NAVBAR_START -->"
+    end_marker = "<!-- PROFEPS_UNIFIED_NAVBAR_END -->"
+    s_idx = content.find(start_marker)
+    e_idx = content.find(end_marker) + len(end_marker)
+    nav_block = content[s_idx:e_idx]
+    nav_block = nav_block.replace('data-current-file="aps-handball-eps-maroc.html"', f'data-current-file="{current_file}"')
+    return nav_block
+
+
+def create_vitesse_relais_silo_page():
+    navbar_html = get_unified_navbar_html("aps-course-vitesse-relais-eps-maroc.html")
+
+    html = f'''<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course de Vitesse &amp; Relais en EPS au Maroc (1AC à 2Bac) : ATD, Cycles, Fiches (Word/PDF), Barèmes 60m/80m/100m &amp; Grilles | ProfEPS</title>
+    <meta name="description" content="Page spéciale Course de Vitesse &amp; Relais EPS Maroc (OP 2009 Collège &amp; OP 2007 Lycée) : ATD complet, Studio des 24 Cycles et 240 Fiches (1AC à 2Bac × 4 niveaux) avec visionneuse A4 Pro, export Word/PDF, Barèmes officiels 60m/80m/100m et Grilles /20.">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="ProfEPS Maroc">
+    <meta property="og:title" content="Course de Vitesse &amp; Relais en EPS au Maroc (1AC à 2Bac) : ATD, Studio Cycles &amp; Fiches PDF/Word, Barèmes &amp; Grilles /20">
+    <meta property="og:description" content="Silo complet Course de Vitesse &amp; Relais pour l'EPS au Maroc : ATD, 6 niveaux scolaires × 4 niveaux de pratique avec aperçu A4 avant téléchargement Word/PDF, barèmes 60m/80m/100m et grilles (/20).">
+    <meta property="og:url" content="https://profeps.ma/aps-course-vitesse-relais-eps-maroc.html">
+    <meta property="og:image" content="https://profeps.ma/images/prof_eps.png">
+    <meta property="og:locale" content="fr_MA">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Course de Vitesse &amp; Relais EPS Maroc : Studio Cycles &amp; Fiches (1AC-2Bac), ATD, Barèmes &amp; Grilles">
+    <meta name="twitter:description" content="Tous les cycles et fiches pédagogiques de Course de Vitesse &amp; Relais du 1AC au 2Bac (4 niveaux de pratique), ATD, barèmes 60m/80m/100m et grilles en Word et PDF.">
+    <meta name="twitter:image" content="https://profeps.ma/images/prof_eps.png">
+    <link rel="canonical" href="https://profeps.ma/aps-course-vitesse-relais-eps-maroc.html">
+    <link rel="alternate" hreflang="fr-MA" href="https://profeps.ma/aps-course-vitesse-relais-eps-maroc.html">
+    <link rel="alternate" hreflang="x-default" href="https://profeps.ma/aps-course-vitesse-relais-eps-maroc.html">
+    <link rel="icon" type="image/png" href="/images/prof_eps.png">
+
+    <!-- Google tag (gtag.js) & Consent Mode v2 ProfEPS.ma -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      try {{
+        var saved = JSON.parse(localStorage.getItem("profeps_cookie_consent_v2") || "null");
+        if (saved) {{
+          gtag("consent", "default", {{
+            "ad_storage": saved.ads ? "granted" : "denied",
+            "ad_user_data": saved.ads ? "granted" : "denied",
+            "ad_personalization": saved.ads ? "granted" : "denied",
+            "analytics_storage": saved.analytics ? "granted" : "denied"
+          }});
+        }} else {{
+          gtag("consent", "default", {{
+            "ad_storage": "granted",
+            "ad_user_data": "granted",
+            "ad_personalization": "granted",
+            "analytics_storage": "granted"
+          }});
+          gtag("consent", "default", {{
+            "ad_storage": "denied",
+            "ad_user_data": "denied",
+            "ad_personalization": "denied",
+            "analytics_storage": "denied",
+            "region": ["AT","BE","BG","HR","CY","DK","EE","FI","FR","DE","GR","HU","IS","IE","IT","LV","LI","LT","LU","MT","NL","NO","PL","PT","RO","SK","SI","ES","SE","GB","CH"],
+            "wait_for_update": 500
+          }});
+        }}
+      }} catch (e) {{}}
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TH0Z1SGNXH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      gtag('js', new Date());
+      gtag('config', 'G-TH0Z1SGNXH');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8253776880916865" crossorigin="anonymous"></script>
+    <script src="profeps-cmp.js" defer></script>
+    <link rel="stylesheet" href="/css/profeps-unifier.min.css?v=20261101">
+
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Course de Vitesse & Relais en EPS au Maroc (1AC à 2Bac) : ATD, Studio des Cycles & Fiches Pédagogiques (Word/PDF), Barèmes 60m/80m/100m & Grilles (/20)",
+      "description": "Silo disciplinaire complet dédié à la Course de Vitesse (60m, 80m, 100m) et au Relais (Zone de 30m) en EPS au Maroc (OP 2009 & OP 2007) : Analyse et Traitement Didactique (ATD), Studio interactif avec visionneuse A4 pro pour 6 niveaux scolaires × 4 niveaux de pratique, barèmes chiffrés Garçons/Filles et grilles d'évaluation.",
+      "inLanguage": "fr-MA",
+      "author": {{
+        "@type": "Person",
+        "name": "Abdelkhalek ELBOUDANI",
+        "jobTitle": "Professeur d'Éducation Physique et Sportive (EPS)",
+        "url": "https://profeps.ma/a-propos.html"
+      }},
+      "publisher": {{
+        "@id": "https://profeps.ma/#organization"
+      }},
+      "datePublished": "2026-11-04",
+      "dateModified": "2026-11-04",
+      "mainEntityOfPage": {{
+        "@type": "WebPage",
+        "@id": "https://profeps.ma/aps-course-vitesse-relais-eps-maroc.html"
+      }}
+    }}
+    </script>
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {{"@type": "ListItem", "position": 1, "name": "Accueil ProfEPS", "item": "https://profeps.ma/"}},
+        {{"@type": "ListItem", "position": 2, "name": "Hub Central des APS & Sports", "item": "https://profeps.ma/hub-aps-sports-eps-maroc.html"}},
+        {{"@type": "ListItem", "position": 3, "name": "Silo Course de Vitesse & Relais (Cycles, Fiches, Barèmes & Grilles)", "item": "https://profeps.ma/aps-course-vitesse-relais-eps-maroc.html"}}
+      ]
+    }}
+    </script>
+
+    <style>
+        *, *::before, *::after {{ margin: 0; padding: 0; box-sizing: border-box; }}
+        :root {{
+            --primary: #dc2626;
+            --primary-dark: #991b1b;
+            --secondary: #006233;
+            --secondary-dark: #064e3b;
+            --accent: #d97706;
+            --slate-950: #020617;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-600: #475569;
+            --slate-500: #64748b;
+            --slate-200: #e2e8f0;
+            --slate-100: #f1f5f9;
+            --slate-50: #f8fafc;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Plus Jakarta Sans', var(--font-sans);
+        }}
+        body {{
+            font-family: var(--font-sans);
+            background: var(--slate-50);
+            color: var(--slate-900);
+            line-height: 1.65;
+        }}
+        a {{ text-decoration: none; color: inherit; }}
+
+        /* HERO & INTRO */
+        .silo-hero {{
+            padding: 125px 1.5rem 2.25rem;
+            background: linear-gradient(135deg, #fef2f2 0%, #ffffff 50%, #f0fdf4 100%);
+            border-bottom: 1px solid var(--slate-200);
+        }}
+        .silo-hero-inner {{
+            max-width: 1220px;
+            margin: 0 auto;
+        }}
+        .breadcrumb-bar {{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--slate-600);
+            margin-bottom: 1rem;
+        }}
+        .breadcrumb-bar a {{ color: var(--primary); }}
+        .breadcrumb-bar a:hover {{ text-decoration: underline; }}
+
+        .hero-top-grid {{
+            display: grid;
+            grid-template-columns: 1.35fr 0.9fr;
+            gap: 1.75rem;
+            align-items: start;
+        }}
+        .silo-badge {{
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.9rem;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: var(--primary);
+            font-size: 0.78rem;
+            font-weight: 800;
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 0.85rem;
+        }}
+        .silo-title {{
+            font-family: var(--font-display);
+            font-size: clamp(1.75rem, 3.3vw, 2.55rem);
+            font-weight: 900;
+            color: var(--slate-900);
+            line-height: 1.2;
+            margin-bottom: 0.85rem;
+        }}
+        .silo-intro-text {{
+            font-size: 0.98rem;
+            color: var(--slate-700);
+            margin-bottom: 1rem;
+        }}
+        .silo-specs-card {{
+            background: #ffffff;
+            border: 1px solid var(--slate-200);
+            border-top: 4px solid var(--primary);
+            border-radius: 14px;
+            padding: 1.25rem;
+            box-shadow: 0 6px 20px rgba(15,23,42,0.05);
+        }}
+        .silo-specs-title {{
+            font-size: 0.9rem;
+            font-weight: 900;
+            color: var(--slate-900);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }}
+        .specs-list {{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem;
+        }}
+        .spec-item {{
+            background: var(--slate-50);
+            border: 1px solid var(--slate-200);
+            border-radius: 8px;
+            padding: 0.55rem 0.7rem;
+        }}
+        .spec-label {{
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--slate-500);
+        }}
+        .spec-val {{
+            font-size: 0.84rem;
+            font-weight: 800;
+            color: var(--slate-900);
+        }}
+
+        /* STICKY VOLETS NAVIGATION */
+        .volets-sticky-bar {{
+            position: sticky;
+            top: 72px;
+            z-index: 40;
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--slate-200);
+            box-shadow: 0 4px 12px rgba(15,23,42,0.04);
+        }}
+        .volets-nav-inner {{
+            max-width: 1220px;
+            margin: 0 auto;
+            padding: 0.65rem 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+            justify-content: space-between;
+        }}
+        .volets-tabs {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+        }}
+        .volet-tab-btn {{
+            padding: 0.55rem 1rem;
+            border-radius: 9px;
+            border: 1px solid var(--slate-200);
+            background: var(--slate-50);
+            color: var(--slate-800);
+            font-size: 0.84rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+        }}
+        .volet-tab-btn:hover {{
+            border-color: var(--primary);
+            color: var(--primary);
+            background: #fef2f2;
+        }}
+        .volet-tab-btn.active {{
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            box-shadow: 0 3px 10px rgba(220,38,38,0.25);
+        }}
+
+        /* MAIN CONTAINER & VOLETS */
+        .silo-main {{
+            max-width: 1220px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }}
+        .volet-panel {{
+            display: none;
+            animation: fadeIn 0.22s ease;
+        }}
+        .volet-panel.active {{
+            display: block;
+        }}
+        @keyframes fadeIn {{
+            from {{ opacity: 0; transform: translateY(4px); }}
+            to {{ opacity: 1; transform: translateY(0); }}
+        }}
+
+        /* STUDIO INTERACTIF (VOLET 1) */
+        .studio-shell {{
+            background: #ffffff;
+            border: 1px solid var(--slate-200);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 28px rgba(15,23,42,0.06);
+        }}
+        .studio-header {{
+            padding: 1.35rem 1.6rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #ffffff;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }}
+        .studio-header h2 {{
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin: 0;
+        }}
+        .studio-header p {{
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            margin: 0.2rem 0 0;
+        }}
+
+        /* STEP 1 : 6 SCHOOL LEVELS BAR */
+        .school-levels-bar {{
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            background: var(--slate-100);
+            border-bottom: 1px solid var(--slate-200);
+        }}
+        .school-lvl-btn {{
+            padding: 0.7rem 0.6rem;
+            background: #ffffff;
+            border: 2px solid var(--slate-200);
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.18s;
+        }}
+        .school-lvl-btn:hover {{
+            border-color: var(--primary);
+        }}
+        .school-lvl-btn.active {{
+            background: #fef2f2;
+            border-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(220,38,38,0.12);
+        }}
+        .school-lvl-code {{
+            display: block;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 900;
+            color: var(--slate-900);
+        }}
+        .school-lvl-btn.active .school-lvl-code {{
+            color: var(--primary);
+        }}
+        .school-lvl-ref {{
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--slate-500);
+        }}
+
+        /* STEP 2 : 4 PRACTICE LEVELS BAR */
+        .practice-levels-bar {{
+            padding: 1rem 1.5rem;
+            background: #ffffff;
+            border-bottom: 1px solid var(--slate-200);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }}
+        .practice-pills {{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.55rem;
+            flex: 1 1 640px;
+        }}
+        .practice-btn {{
+            padding: 0.65rem 0.75rem;
+            border-radius: 9px;
+            border: 1.5px solid var(--slate-200);
+            background: var(--slate-50);
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.18s;
+        }}
+        .practice-btn:hover {{
+            border-color: var(--secondary);
+        }}
+        .practice-btn.active {{
+            background: #f0fdf4;
+            border-color: var(--secondary);
+            box-shadow: 0 2px 8px rgba(0,98,51,0.12);
+        }}
+        .practice-btn-top {{
+            display: block;
+            font-size: 0.74rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--secondary);
+        }}
+        .practice-btn-name {{
+            display: block;
+            font-size: 0.86rem;
+            font-weight: 800;
+            color: var(--slate-900);
+        }}
+
+        /* STEP 3 : DOCUMENT MODE SWITCH + EXPORT ACTION BAR */
+        .studio-toolbar {{
+            padding: 1rem 1.5rem;
+            background: #f8fafc;
+            border-bottom: 1px solid var(--slate-200);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }}
+        .doc-mode-switch {{
+            display: inline-flex;
+            background: #e2e8f0;
+            padding: 0.25rem;
+            border-radius: 10px;
+            gap: 0.25rem;
+        }}
+        .doc-mode-btn {{
+            padding: 0.5rem 0.95rem;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            color: var(--slate-700);
+            font-size: 0.83rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.15s;
+        }}
+        .doc-mode-btn.active {{
+            background: #ffffff;
+            color: var(--slate-900);
+            box-shadow: 0 1px 4px rgba(15,23,42,0.12);
+        }}
+        .export-actions-group {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }}
+        .export-btn {{
+            padding: 0.55rem 0.9rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            cursor: pointer;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.18s;
+        }}
+        .export-word-cycle {{
+            background: #eff6ff;
+            color: #1e40af;
+            border-color: #bfdbfe;
+        }}
+        .export-word-cycle:hover {{ background: #1e40af; color: #ffffff; }}
+        .export-pdf-cycle {{
+            background: #fef2f2;
+            color: #dc2626;
+            border-color: #fecaca;
+        }}
+        .export-pdf-cycle:hover {{ background: #dc2626; color: #ffffff; }}
+        .export-word-fiches {{
+            background: #ecfdf5;
+            color: #065f46;
+            border-color: #a7f3d0;
+        }}
+        .export-word-fiches:hover {{ background: #065f46; color: #ffffff; }}
+        .export-pdf-fiches {{
+            background: #0f172a;
+            color: #ffffff;
+            border-color: #0f172a;
+        }}
+        .export-pdf-fiches:hover {{ background: #334155; }}
+
+        /* SESSION SELECTOR BAR (FOR FICHES VIEW) */
+        .session-selector-bar {{
+            padding: 0.75rem 1.5rem;
+            background: #ffffff;
+            border-bottom: 1px solid var(--slate-200);
+            display: none;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.4rem;
+        }}
+        .session-selector-bar.visible {{
+            display: flex;
+        }}
+        .sess-pill {{
+            padding: 0.35rem 0.7rem;
+            border-radius: 7px;
+            border: 1px solid var(--slate-200);
+            background: var(--slate-50);
+            font-size: 0.78rem;
+            font-weight: 800;
+            color: var(--slate-700);
+            cursor: pointer;
+        }}
+        .sess-pill:hover {{ border-color: var(--primary); color: var(--primary); }}
+        .sess-pill.active {{
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }}
+
+        /* A4 PRO DOCUMENT VIEWER */
+        .a4-viewer-stage {{
+            background: #cbd5e1;
+            padding: 1.75rem 1.25rem;
+            max-height: 820px;
+            overflow-y: auto;
+        }}
+        .a4-sheet {{
+            max-width: 920px;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 1px solid #94a3b8;
+            box-shadow: 0 12px 32px rgba(15,23,42,0.18);
+            padding: 2.2rem 2.4rem;
+            color: #0f172a;
+            font-size: 0.9rem;
+            line-height: 1.55;
+        }}
+        .a4-official-Banner {{
+            border: 2px solid #0f172a;
+            padding: 0.85rem 1.1rem;
+            margin-bottom: 1.25rem;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 1rem;
+            background: #f8fafc;
+        }}
+        .a4-banner-left, .a4-banner-right {{
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #1e293b;
+            line-height: 1.4;
+        }}
+        .a4-banner-right {{ text-align: right; }}
+        .a4-banner-center {{
+            text-align: center;
+            padding: 0 1rem;
+            border-left: 1px solid #cbd5e1;
+            border-right: 1px solid #cbd5e1;
+        }}
+        .a4-doc-type {{
+            font-size: 0.72rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--primary);
+        }}
+        .a4-doc-title {{
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: #0f172a;
+            margin-top: 0.15rem;
+        }}
+        .a4-meta-grid {{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 1px solid #0f172a;
+            margin-bottom: 1.15rem;
+            background: #ffffff;
+        }}
+        .a4-meta-cell {{
+            padding: 0.5rem 0.7rem;
+            border-right: 1px solid #cbd5e1;
+            font-size: 0.78rem;
+        }}
+        .a4-meta-cell:last-child {{ border-right: none; }}
+        .a4-meta-cell strong {{
+            display: block;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            color: #475569;
+        }}
+        .a4-pedago-box {{
+            border: 1px solid #0f172a;
+            padding: 0.8rem 1rem;
+            margin-bottom: 1.15rem;
+            background: #fff1f2;
+        }}
+        .a4-pedago-box p {{
+            margin-bottom: 0.35rem;
+            font-size: 0.84rem;
+        }}
+        .a4-pedago-box p:last-child {{ margin-bottom: 0; }}
+        .a4-table {{
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.75rem;
+            font-size: 0.82rem;
+        }}
+        .a4-table th {{
+            background: #0f172a;
+            color: #ffffff;
+            padding: 0.55rem 0.65rem;
+            border: 1px solid #0f172a;
+            text-align: left;
+            font-weight: 800;
+        }}
+        .a4-table td {{
+            padding: 0.55rem 0.65rem;
+            border: 1px solid #64748b;
+            vertical-align: top;
+            color: #0f172a;
+        }}
+        .a4-table tr:nth-child(even) td {{
+            background: #f8fafc;
+        }}
+        .fiche-block {{
+            border: 2px solid #0f172a;
+            margin-bottom: 1.75rem;
+            page-break-inside: avoid;
+            background: #ffffff;
+        }}
+        .fiche-header-bar {{
+            background: #0f172a;
+            color: #ffffff;
+            padding: 0.6rem 0.95rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 800;
+            font-size: 0.88rem;
+        }}
+
+        /* CONTENT CARDS FOR VOLETS 2, 3, 4, 5 */
+        .content-panel-card {{
+            background: #ffffff;
+            border: 1px solid var(--slate-200);
+            border-radius: 16px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 14px rgba(15,23,42,0.04);
+        }}
+        .content-panel-card h2 {{
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 900;
+            color: var(--slate-900);
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary);
+        }}
+        .content-panel-card h3 {{
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 1.35rem 0 0.55rem;
+        }}
+        .two-col-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.15rem;
+            margin: 1rem 0;
+        }}
+        .info-callout {{
+            background: #f8fafc;
+            border: 1px solid var(--slate-200);
+            border-left: 4px solid var(--secondary);
+            border-radius: 10px;
+            padding: 1rem 1.15rem;
+        }}
+        .articles-cards-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            gap: 1.15rem;
+            margin-top: 1.25rem;
+        }}
+        .rel-card {{
+            background: var(--slate-50);
+            border: 1px solid var(--slate-200);
+            border-radius: 14px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.2s;
+        }}
+        .rel-card:hover {{
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            background: #ffffff;
+            box-shadow: 0 8px 20px rgba(15,23,42,0.06);
+        }}
+        .rel-card-kicker {{
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 0.35rem;
+        }}
+        .rel-card h3 {{
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin: 0 0 0.5rem;
+            line-height: 1.35;
+        }}
+        .rel-card p {{
+            font-size: 0.84rem;
+            color: var(--slate-600);
+            margin-bottom: 1rem;
+        }}
+        .rel-card-link {{
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: var(--secondary);
+        }}
+
+        @media (max-width: 980px) {{
+            .hero-top-grid {{ grid-template-columns: 1fr; }}
+            .school-levels-bar {{ grid-template-columns: repeat(3, 1fr); }}
+            .practice-pills {{ grid-template-columns: repeat(2, 1fr); }}
+            .a4-meta-grid {{ grid-template-columns: repeat(2, 1fr); }}
+            .a4-official-Banner {{ grid-template-columns: 1fr; text-align: center; }}
+            .a4-banner-right {{ text-align: center; }}
+            .a4-banner-center {{ border: none; padding: 0.35rem 0; }}
+        }}
+        @media (max-width: 560px) {{
+            .school-levels-bar {{ grid-template-columns: repeat(2, 1fr); }}
+            .practice-pills {{ grid-template-columns: 1fr; }}
+            .a4-sheet {{ padding: 1.15rem; }}
+        }}
+    </style>
+</head>
+<body>
+{navbar_html}
+
+    <!-- ====================================================================== -->
+    <!-- TOP HERO : INTRO VITESSE & RELAIS + REPÈRES OFFICIELS WA & OP MAROC    -->
+    <!-- ====================================================================== -->
+    <header class="silo-hero">
+        <div class="silo-hero-inner">
+            <nav class="breadcrumb-bar" aria-label="Fil d'Ariane">
+                <a href="/">Accueil ProfEPS</a> <span>›</span>
+                <a href="hub-aps-sports-eps-maroc.html">Hub Central des APS &amp; Sports</a> <span>›</span>
+                <span>Silo Course de Vitesse &amp; Relais (Cycles, Fiches, Barèmes 60m/80m/100m &amp; Grilles)</span>
+            </nav>
+
+            <div class="hero-top-grid">
+                <div>
+                    <span class="silo-badge">⚡ Silo Disciplinaire Complet · OP 2009 Collège &amp; OP 2007 Lycée · World Athletics RT 16-24</span>
+                    <h1 class="silo-title">Course de Vitesse &amp; Relais en EPS au Maroc (الجري السريع والتناوب) : ATD, Studio des Cycles &amp; Fiches (1AC → 2Bac), Barèmes &amp; Grilles (/20)</h1>
+                    <p class="silo-intro-text">
+                        Activité athlétique de <strong>production de performance maximale mesurée au chronomètre</strong> dans un milieu standardisé en couloir, la <strong>Course de Vitesse (60m, 80m, 100m)</strong> et le <strong>Relais-Vitesse (4×50m, 4×60m, 4×80m, 4×100m)</strong> consistent à parcourir une distance courte dans le temps le plus bref possible en réagissant instantanément à un signal codifié, en créant une accélération maximale (\(V = F \\times A\)) et, en relais, en transmettant le témoin à pleine vitesse à l'intérieur d'une <strong>zone réglementaire de 30 mètres</strong>.
+                    </p>
+                    <p class="silo-intro-text" style="margin-bottom:0;">
+                        Cette page spéciale rassemble l'<strong>Analyse et le Traitement Didactique (ATD)</strong>, un <strong>Studio Interactif avec Visionneuse A4 Pro</strong> permettant d'afficher et de télécharger en <strong>Word (.doc)</strong> et <strong>PDF</strong> les <strong>24 Projets de Cycles</strong> et <strong>240 Fiches Pédagogiques</strong> (du 1AC au 2Bac × 4 niveaux de pratique), ainsi que les <strong>Barèmes Officiels Chiffrés (60m / 80m / 100m Garçons &amp; Filles) et Grilles d'Évaluation (/20)</strong>.
+                    </p>
+                </div>
+
+                <aside class="silo-specs-card" aria-label="Repères officiels Course de Vitesse et Relais World Athletics et EPS Maroc">
+                    <div class="silo-specs-title">
+                        <span>📏 Mémento World Athletics 2026 &amp; EPS Maroc</span>
+                        <a href="reglement-course-vitesse-100m-200m-400m-athletisme-eps.html" style="font-size:0.75rem;color:var(--primary);text-decoration:underline;">Règlements RT 16-24 →</a>
+                    </div>
+                    <div class="specs-list">
+                        <div class="spec-item">
+                            <span class="spec-label">Distances EPS Maroc</span>
+                            <span class="spec-val">60m (Collège) · 80m F / 100m G (Bac)</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Commandements Départ</span>
+                            <span class="spec-val">« À vos marques - Prêts - Signal »</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Couloirs &amp; Arrivée</span>
+                            <span class="spec-val">Largeur 1,22 m · Jugée au Torse</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Zone Relais (RT 24.3)</span>
+                            <span class="spec-val">30 mètres (Position du témoin)</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Témoin Officiel</span>
+                            <span class="spec-val">Longueur 28–30 cm · Masse ≥ 50 g</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Barèmes EPS Maroc</span>
+                            <span class="spec-val">Collège 12+3+5 · Lycée 14+3+3</span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </header>
+
+    <!-- ====================================================================== -->
+    <!-- STICKY NAVIGATION BAR FOR THE 5 VOLETS                                 -->
+    <!-- ====================================================================== -->
+    <div class="volets-sticky-bar" role="navigation" aria-label="Navigation des volets du Silo Course de Vitesse et Relais">
+        <div class="volets-nav-inner">
+            <div class="volets-tabs">
+                <button type="button" class="volet-tab-btn active" data-volet="volet-studio" onclick="switchSprintVolet('volet-studio')">
+                    ⚡ 1. Studio Cycles &amp; Fiches (1AC → 2Bac)
+                </button>
+                <button type="button" class="volet-tab-btn" data-volet="volet-atd" onclick="switchSprintVolet('volet-atd')">
+                    📐 2. ATD Vitesse &amp; Relais
+                </button>
+                <button type="button" class="volet-tab-btn" data-volet="volet-grilles" onclick="switchSprintVolet('volet-grilles')">
+                    📊 3. Barèmes (60m/80m/100m) &amp; Grilles (/20)
+                </button>
+                <button type="button" class="volet-tab-btn" data-volet="volet-terrain" onclick="switchSprintVolet('volet-terrain')">
+                    🏟️ 4. Terrain Maroc, Gammes &amp; Règlement
+                </button>
+                <button type="button" class="volet-tab-btn" data-volet="volet-articles" onclick="switchSprintVolet('volet-articles')">
+                    📚 5. Articles &amp; Calculateurs Liés
+                </button>
+            </div>
+            <div style="display:flex;gap:0.75rem;align-items:center;">
+                <a href="aps-gymnastique-sol-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#7c3aed;">🤸 Gym Sol</a>
+                <a href="aps-football-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#b45309;">⚽ Foot/Futsal</a>
+                <a href="aps-volleyball-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#1e40af;">🏐 Volley</a>
+                <a href="aps-basketball-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#006233;">🏀 Basket</a>
+                <a href="aps-handball-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#991b1b;">🤾 Handball</a>
+                <a href="hub-aps-sports-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#dc2626;">← Toutes les APS</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================================== -->
+    <!-- MAIN CONTENT CONTAINER                                                 -->
+    <!-- ====================================================================== -->
+    <main class="silo-main">
+
+        <!-- ================================================================== -->
+        <!-- VOLET 1 : STUDIO INTERACTIF DES CYCLES & FICHES (1AC -> 2BAC)      -->
+        <!-- ================================================================== -->
+        <section id="volet-studio" class="volet-panel active" aria-label="Studio Interactif des Cycles et Fiches Pédagogiques Course de Vitesse et Relais">
+            <div class="studio-shell">
+                <div class="studio-header">
+                    <div>
+                        <h2>⚡ Studio des Cycles &amp; Fiches Pédagogiques Course de Vitesse &amp; Relais (Visionneuse A4 Pro avant Téléchargement)</h2>
+                        <p>Étape 1 : Choisissez le niveau scolaire (1AC à 2Bac) · Étape 2 : Choisissez le niveau de pratique (Débutant à Élite) · Étape 3 : Visionnez et téléchargez en Word (.doc) ou PDF.</p>
+                    </div>
+                    <span style="background:rgba(255,255,255,0.14);padding:0.4rem 0.8rem;border-radius:8px;font-size:0.78rem;font-weight:800;color:#fecaca;">
+                        24 Projets de Cycles · 240 Fiches de Séance
+                    </span>
+                </div>
+
+                <!-- STEP 1 : 6 SCHOOL LEVELS -->
+                <div class="school-levels-bar" role="tablist" aria-label="Niveaux scolaires marocains">
+                    <button type="button" class="school-lvl-btn active" data-level="1AC" onclick="selectSprintSchoolLevel('1AC')">
+                        <span class="school-lvl-code">1ère AC</span>
+                        <span class="school-lvl-ref">OP 2009 · 60m &amp; Relais 4×50m</span>
+                    </button>
+                    <button type="button" class="school-lvl-btn" data-level="2AC" onclick="selectSprintSchoolLevel('2AC')">
+                        <span class="school-lvl-code">2ème AC</span>
+                        <span class="school-lvl-ref">OP 2009 · 60m &amp; Relais 4×50m</span>
+                    </button>
+                    <button type="button" class="school-lvl-btn" data-level="3AC" onclick="selectSprintSchoolLevel('3AC')">
+                        <span class="school-lvl-code">3ème AC</span>
+                        <span class="school-lvl-ref">OP 2009 · 60m/80m &amp; Relais 4×60m</span>
+                    </button>
+                    <button type="button" class="school-lvl-btn" data-level="TC" onclick="selectSprintSchoolLevel('TC')">
+                        <span class="school-lvl-code">Tronc Commun</span>
+                        <span class="school-lvl-ref">OP 2007 · 80m F / 100m G &amp; Relais</span>
+                    </button>
+                    <button type="button" class="school-lvl-btn" data-level="1BAC" onclick="selectSprintSchoolLevel('1BAC')">
+                        <span class="school-lvl-code">1ère Bac</span>
+                        <span class="school-lvl-ref">OP 2007 · 80m F / 100m G &amp; Relais</span>
+                    </button>
+                    <button type="button" class="school-lvl-btn" data-level="2BAC" onclick="selectSprintSchoolLevel('2BAC')">
+                        <span class="school-lvl-code">2ème Bac</span>
+                        <span class="school-lvl-ref">OP 2007 · Bac 80m/100m &amp; Relais</span>
+                    </button>
+                </div>
+
+                <!-- STEP 2 : 4 PRACTICE LEVELS WITHIN THE SELECTED SCHOOL LEVEL -->
+                <div class="practice-levels-bar">
+                    <div class="practice-pills" role="tablist" aria-label="4 niveaux de pratique en Course de Vitesse et Relais">
+                        <button type="button" class="practice-btn active" data-practice="N1" onclick="selectSprintPracticeLevel('N1')">
+                            <span class="practice-btn-top">Niveau 1 · Débutant</span>
+                            <span class="practice-btn-name">Réaction lente, redressement brusque &amp; Relais arrêté</span>
+                        </button>
+                        <button type="button" class="practice-btn" data-practice="N2" onclick="selectSprintPracticeLevel('N2')">
+                            <span class="practice-btn-top">Niveau 2 · Débrouillé</span>
+                            <span class="practice-btn-name">Départ 4 appuis, axe rectiligne &amp; Départ à la marque</span>
+                        </button>
+                        <button type="button" class="practice-btn" data-practice="N3" onclick="selectSprintPracticeLevel('N3')">
+                            <span class="practice-btn-top">Niveau 3 · Confirmé</span>
+                            <span class="practice-btn-name">Mise en action inclinée, Griffé &amp; Passage en zone 30m</span>
+                        </button>
+                        <button type="button" class="practice-btn" data-practice="N4" onclick="selectSprintPracticeLevel('N4')">
+                            <span class="practice-btn-top">Niveau 4 · Élite / ASS</span>
+                            <span class="practice-btn-name">Profil Force-Vitesse, Vmax &amp; Passage à l'aveugle</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 3 : MODE SWITCH (CYCLE vs FICHES) + 4 DOWNLOAD BUTTONS -->
+                <div class="studio-toolbar">
+                    <div class="doc-mode-switch" role="tablist" aria-label="Type de document à prévisualiser">
+                        <button type="button" class="doc-mode-btn active" id="btnModeCycle" onclick="selectSprintDocMode('cycle')">
+                            📋 Aperçu du Projet de Cycle (10 Séances)
+                        </button>
+                        <button type="button" class="doc-mode-btn" id="btnModeFiches" onclick="selectSprintDocMode('fiches')">
+                            📄 Aperçu des 10 Fiches Pédagogiques Détaillées
+                        </button>
+                    </div>
+
+                    <div class="export-actions-group">
+                        <button type="button" class="export-btn export-word-cycle" onclick="exportSprintDoc('cycle', 'word')">
+                            📥 Projet de Cycle (.DOC Word)
+                        </button>
+                        <button type="button" class="export-btn export-pdf-cycle" onclick="exportSprintDoc('cycle', 'pdf')">
+                            🖨️ Projet de Cycle (PDF A4)
+                        </button>
+                        <button type="button" class="export-btn export-word-fiches" onclick="exportSprintDoc('fiches', 'word')">
+                            📥 Fiches Pédagogiques (.DOC Word)
+                        </button>
+                        <button type="button" class="export-btn export-pdf-fiches" onclick="exportSprintDoc('fiches', 'pdf')">
+                            🖨️ Fiches Pédagogiques (PDF A4)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- OPTIONAL SESSION FILTER WHEN IN "FICHES" MODE -->
+                <div class="session-selector-bar" id="sprintSessionSelectorBar">
+                    <span style="font-size:0.78rem;font-weight:800;color:var(--slate-700);margin-right:0.35rem;">Afficher :</span>
+                    <button type="button" class="sess-pill active" data-sess="ALL" onclick="selectSprintSessionFilter('ALL')">Toutes les 10 Séances (Cahier Complet)</button>
+                    <button type="button" class="sess-pill" data-sess="0" onclick="selectSprintSessionFilter(0)">S1 (Diagnostique)</button>
+                    <button type="button" class="sess-pill" data-sess="1" onclick="selectSprintSessionFilter(1)">S2</button>
+                    <button type="button" class="sess-pill" data-sess="2" onclick="selectSprintSessionFilter(2)">S3</button>
+                    <button type="button" class="sess-pill" data-sess="3" onclick="selectSprintSessionFilter(3)">S4</button>
+                    <button type="button" class="sess-pill" data-sess="4" onclick="selectSprintSessionFilter(4)">S5</button>
+                    <button type="button" class="sess-pill" data-sess="5" onclick="selectSprintSessionFilter(5)">S6</button>
+                    <button type="button" class="sess-pill" data-sess="6" onclick="selectSprintSessionFilter(6)">S7</button>
+                    <button type="button" class="sess-pill" data-sess="7" onclick="selectSprintSessionFilter(7)">S8</button>
+                    <button type="button" class="sess-pill" data-sess="8" onclick="selectSprintSessionFilter(8)">S9</button>
+                    <button type="button" class="sess-pill" data-sess="9" onclick="selectSprintSessionFilter(9)">S10 (Sommative)</button>
+                </div>
+
+                <!-- A4 PRO PREVIEW STAGE -->
+                <div class="a4-viewer-stage">
+                    <div class="a4-sheet" id="sprintA4PreviewSheet">
+                        <!-- Populated dynamically by JavaScript on load and on tab click -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 2 : ATD COURSE DE VITESSE & RELAIS                           -->
+        <!-- ================================================================== -->
+        <section id="volet-atd" class="volet-panel" aria-label="Analyse et Traitement Didactique de la Course de Vitesse et du Relais">
+            <div class="content-panel-card">
+                <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:0.75rem;">
+                    <h2 style="margin:0;border:none;padding:0;">📐 Analyse et Traitement Didactique (ATD) — Course de Vitesse &amp; Relais</h2>
+                    <div style="display:flex;gap:0.5rem;">
+                        <button type="button" class="export-btn export-word-cycle" onclick="exportSprintATD('word')">📥 Télécharger l'ATD Vitesse &amp; Relais (.DOC Word)</button>
+                        <button type="button" class="export-btn export-pdf-cycle" onclick="exportSprintATD('pdf')">🖨️ Imprimer / PDF A4</button>
+                    </div>
+                </div>
+                <p>Synthèse scientifique et didactique complète pour l'épreuve écrite et orale du <strong>concours CRMEF EPS</strong>, l'examen professionnel et la préparation de vos fiches en Collège (OP 2009) et Lycée (OP 2007).</p>
+
+                <div id="sprintATDExportableContent">
+                    <h3>1. Définition &amp; Logique Interne de l'APS (Sprint Individuel &amp; Course de Relais)</h3>
+                    <div class="info-callout">
+                        <p style="margin-bottom:0.5rem;"><strong>Course de Vitesse (60m, 80m, 100m) :</strong> Activité athlétique psychomotrice de performance chronométrique maximale consistant à franchir une distance courte en couloir dans le temps le plus bref possible (filière énergétique <strong>anaérobie alactique</strong> — ATP-CP), à partir d'un départ quadrupédique commandé (<em>« À vos marques - Prêts - Signal »</em>). L'efficacité dépend du produit <strong>Fréquence gestuelle × Amplitude de foulée (\(V = F \\times A\))</strong> et de l'orientation horizontale puis verticale des forces d'impulsion au sol.</p>
+                        <p style="margin:0;"><strong>Course de Relais (4×50m, 4×60m, 4×80m, 4×100m) :</strong> Activité sociomotrice de coopération pure où 4 coureurs se transmettent de la main à la main un témoin (28–30 cm, ≥ 50g) pour lui faire parcourir la distance totale le plus vite possible. Sa logique interne repose sur le <strong>maintien de la vitesse maximale du témoin lors de son passage dans la zone réglementaire de 30 mètres</strong> grâce à la synchronisation spatio-temporelle entre le donneur (en fin de course) et le receveur (en pleine accélération).</p>
+                    </div>
+
+                    <h3>2. Problèmes Fondamentaux en Course de Vitesse et en Relais</h3>
+                    <div class="two-col-grid">
+                        <div class="info-callout" style="border-left-color:var(--primary);">
+                            <strong style="color:var(--primary);display:block;margin-bottom:0.3rem;">1. Réagir Instantanément sans Commettre de Faux Départ</strong>
+                            Gérer la tension nerveuse entre le commandement <em>« Prêts ! »</em> (pré-tension musculaire en déséquilibre avant) et le signal sonore/visuel pour déclencher une poussée explosive vers l'avant sans anticiper (&ge; 0,100 s).
+                        </div>
+                        <div class="info-callout" style="border-left-color:var(--secondary);">
+                            <strong style="color:var(--secondary);display:block;margin-bottom:0.3rem;">2. Passer de la Poussée Inclinée au Redressement Progressif</strong>
+                            Créer une forte accélération initiale en poussant le sol vers l'arrière-bas (corps incliné à 45°) sur les 15 à 20 premiers mètres sans se redresser brutalement dès le 1er appui.
+                        </div>
+                        <div class="info-callout" style="border-left-color:var(--primary);">
+                            <strong style="color:var(--primary);display:block;margin-bottom:0.3rem;">3. Coordonner Fréquence et Amplitude en Relâchement à Vmax</strong>
+                            À vitesse maximale (entre 30 m et 80/100 m), privilégier des appuis brefs et actifs en plante de pied (« griffé du sol » sous le bassin) tout en relâchant la mâchoire et les épaules pour limiter la décélération finale.
+                        </div>
+                        <div class="info-callout" style="border-left-color:var(--secondary);">
+                            <strong style="color:var(--secondary);display:block;margin-bottom:0.3rem;">4. Synchroniser deux Vitesses dans un Espace Contraint (Zone 30m)</strong>
+                            En relais, résoudre le paradoxe <em>« Partir tôt et vite sans être dépassé ni sortir des 30m »</em> : étalonner une marque d'élan au sol (en pieds) pour que la rencontre Donneur/Receveur ait lieu à vitesses égalisées aux 2/3 de la zone (entre 18 et 25m), sans regarder en arrière.
+                        </div>
+                    </div>
+
+                    <h3>3. Principes, Règles d'Action &amp; Indicateurs Biomécaniques par Phase</h3>
+                    <div class="table-wrap">
+                        <table class="a4-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:20%;">Phase de la Course</th>
+                                    <th style="width:26%;">Principes d'Action</th>
+                                    <th style="width:32%;">Règles d'Action Opérationnelles (Pour l'Élève)</th>
+                                    <th style="width:22%;">Indicateurs de Réussite</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1. Le Départ Commandé<br>(0 m — RT 16)</strong></td>
+                                    <td>Mise en pré-tension musculaire et création d'un déséquilibre dynamique vers l'avant.</td>
+                                    <td>
+                                        • À <em>« À vos marques »</em> : 5 appuis au sol, pied fort devant (1,5 pied de la ligne), mains en pont derrière la ligne blanche.<br>
+                                        • À <em>« Prêts »</em> : monter le bassin légèrement plus haut que les épaules, avancer les épaules au-dessus des mains (angles genoux ~90° avant / 120° arrière).<br>
+                                        • Au <em>« Signal »</em> : projeter violemment le bras opposé et pousser fort sur la jambe avant.
+                                    </td>
+                                    <td>Temps de réaction minimal sans faux départ ; alignement talon-bassin-épaules-tête à 45° au 1er appui.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2. La Mise en Action / Accélération<br>(0 à 25 m)</strong></td>
+                                    <td>Augmenter progressivement la longueur et la fréquence des foulées en conservant l'inclinaison.</td>
+                                    <td>
+                                        • Pousser complètement le sol vers l'arrière avant de ramener le genou haut devant.<br>
+                                        • Garder le regard fixé au sol à 4–5 mètres devant soi pendant les 8 à 10 premiers appuis pour se redresser progressivement.
+                                    </td>
+                                    <td>Augmentation régulière de l'espacement des appuis (ex. lattes progressives de 4,5 pieds à 7 pieds).</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3. Le Maintien de Vmax &amp; l'Arrivée<br>(25 m à 60/80/100 m)</strong></td>
+                                    <td>Maximiser le produit \(F \\times A\) en cycle avant haut et franchir la ligne au torse sans décélérer.</td>
+                                    <td>
+                                        • Courir « haut sur plante de pied » (le talon n'écrase jamais le sol), bassin gainé en rétroversion.<br>
+                                        • Synchroniser le mouvement des bras dans l'axe antéro-postérieur (mains de la joue à la poche, coudes à 90°).<br>
+                                        • Viser un plot situé <strong>5 mètres APRÈS la ligne d'arrivée</strong> et engager le buste (torse) sur le fil.
+                                    </td>
+                                    <td>Temps au 50m/60m/100m maximal ; aucune baisse de cadence dans les 10 derniers mètres.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>4. La Transmission en Relais<br>(Zone de 30 m — RT 24)</strong></td>
+                                    <td>Transmettre le témoin bras tendus à vitesses maximales égalisées sans regarder en arrière.</td>
+                                    <td>
+                                        • <strong>Receveur :</strong> placé à l'entrée de la zone de 30m en appuis décalés ; démarre à fond dès que le donneur franchit la marque au sol (14 à 18 pieds) ; tend le bras arrière immobile uniquement au cri <em>« HOP ! »</em> du donneur.<br>
+                                        • <strong>Donneur :</strong> crie <em>« HOP ! »</em> à 2 foulées (environ 3m) et dépose le témoin de bas en haut (ou de haut en bas) dans son demi-couloir.
+                                    </td>
+                                    <td><strong>Gain de Relais Positif :</strong><br>\(T_{{4\\times 50m}} < \\sum (T_1 + T_2 + T_3 + T_4)\) de <strong>1,2s à 2,5s</strong>.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>4. Tableau de Remédiation Didactique des Défauts Fréquents en Sprint &amp; Relais Scolaire</h3>
+                    <div class="table-wrap">
+                        <table class="a4-table">
+                            <thead>
+                                <tr>
+                                    <th>Phase</th>
+                                    <th>Défaut Observé chez l'Élève</th>
+                                    <th>Cause Biomécanique / Perceptive</th>
+                                    <th>Situation de Remédiation sur le Terrain</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Départ &amp; 1ers appuis</strong></td>
+                                    <td>Se redresse complètement debout dès le 1er pas après le coup de sifflet (« départ en chandelle »).</td>
+                                    <td>Épaules placées en arrière des mains à « Prêts » et regard levé immédiatement vers la ligne d'arrivée.</td>
+                                    <td>Placer un élastique souple (ou le bras tendu d'un partenaire) à hauteur d'épaule sur les 3 premiers mètres pour obliger l'élève à jaillir bas vers l'avant + fixer un plot au sol à 4m.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Pleine vitesse (Vmax)</strong></td>
+                                    <td>Court « assis » (bassin bas), attaque du talon en freinant ou balaye les bras latéralement.</td>
+                                    <td>Effondrement de la cheville et du bassin à l'impact (cycle arrière) et crispation des épaules.</td>
+                                    <td>Corridor de mini-lattes espacées (gammes de « griffé jambe tendue » et « skip A » genoux hauts plante de pied) + courir en tenant deux témoins pour sentir l'axe antéro-postérieur des bras.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Franchissement d'arrivée</strong></td>
+                                    <td>Ralentit à 5 mètres de la ligne ou saute pieds joints sur la ligne d'arrivée.</td>
+                                    <td>Assimile la ligne d'arrivée à un lieu d'arrêt au lieu d'un plan vertical à traverser à Vmax.</td>
+                                    <td>Placer une « porte de chronométrage » avec 2 cônes rouges situés <strong>5 mètres APRÈS la vraie ligne d'arrivée</strong> : interdiction de ralentir avant les cônes rouges.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Passage du Témoin (Relais)</strong></td>
+                                    <td>Le receveur court la tête retournée en arrière et le bras tendu dès son 1er pas, ou se fait percuter par le donneur.</td>
+                                    <td>Peur de rater le témoin (dépendance visuelle) et marque d'élan trop proche (ou départ trop tardif).</td>
+                                    <td><strong>Règle des Demi-Couloirs :</strong> tracer une ligne de craie au milieu du couloir (Donneur à droite main droite / Receveur à gauche main gauche) + interdire de tendre le bras avant le signal vocal <em>« HOP ! »</em> + reculer la marque d'élan de 2 pieds en cas de tamponnage.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 3 : BARÈMES CHIFFRÉS (60M/80M/100M) & GRILLES (/20)          -->
+        <!-- ================================================================== -->
+        <section id="volet-grilles" class="volet-panel" aria-label="Barèmes Chiffrés 60m 80m 100m et Grilles d'Évaluation Course de Vitesse et Relais">
+            <div class="studio-shell">
+                <div class="studio-header">
+                    <div>
+                        <h2>📊 Barèmes Officiels Chiffrés (60m, 80m, 100m — Garçons &amp; Filles) &amp; Grilles d'Évaluation (/20)</h2>
+                        <p>Sélectionnez l'une des 4 grilles ci-dessous pour la visualiser au format A4 officiel et la télécharger en Word (.doc) ou PDF.</p>
+                    </div>
+                    <div class="export-actions-group">
+                        <button type="button" class="export-btn export-word-fiches" onclick="exportSprintGrid('word')">📥 Télécharger la Grille (.DOC Word)</button>
+                        <button type="button" class="export-btn export-pdf-fiches" onclick="exportSprintGrid('pdf')">🖨️ Imprimer / PDF A4</button>
+                    </div>
+                </div>
+
+                <div class="practice-levels-bar">
+                    <div class="practice-pills" role="tablist" aria-label="Choix de la grille Course de Vitesse et Relais">
+                        <button type="button" class="practice-btn active" data-grid="G1" onclick="selectSprintGrid('G1')">
+                            <span class="practice-btn-top">Grille 1 · Diagnostique &amp; Relais</span>
+                            <span class="practice-btn-name">Fiche Binôme Sprint &amp; Calcul du Gain de Relais (30m)</span>
+                        </button>
+                        <button type="button" class="practice-btn" data-grid="G2" onclick="selectSprintGrid('G2')">
+                            <span class="practice-btn-top">Grille 2 · Collège OP 2009</span>
+                            <span class="practice-btn-name">Barème 60m &amp; Relais (1AC-2AC-3AC · 12+3+5 = /20)</span>
+                        </button>
+                        <button type="button" class="practice-btn" data-grid="G3" onclick="selectSprintGrid('G3')">
+                            <span class="practice-btn-top">Grille 3 · Lycée &amp; Bac OP 2007</span>
+                            <span class="practice-btn-name">Barème Officiel 100m/80m/60m (TC-1Bac-2Bac = /20)</span>
+                        </button>
+                        <button type="button" class="practice-btn" data-grid="G4" onclick="selectSprintGrid('G4')">
+                            <span class="practice-btn-top">Grille 4 · Élève Dispensé / Officiel</span>
+                            <span class="practice-btn-name">Grille Starter, Chronométreur &amp; Juge Zone 30m (/20)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="a4-viewer-stage">
+                    <div class="a4-sheet" id="sprintGridA4Container">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 4 : TERRAIN MAROC, GAMMES ATHLÉTIQUES & RÈGLES WA RT 16-24   -->
+        <!-- ================================================================== -->
+        <section id="volet-terrain" class="volet-panel" aria-label="Gestion des Grands Effectifs, Gammes d'Échauffement et Règlement World Athletics">
+            <div class="content-panel-card">
+                <h2>🏟️ Réalité du Terrain au Maroc : Organisation de 40+ Élèves en Vagues Sécurisées, Échauffement &amp; Règlement World Athletics</h2>
+                <p>Dispositifs opérationnels pour gérer une classe de <strong>40 à 44 élèves</strong> sur une piste ou dans la longueur d'un terrain de Handball/Basket (40m à 60m) avec un temps d'engagement moteur maximal :</p>
+
+                <div class="two-col-grid">
+                    <div class="info-callout" style="border-left-color:var(--primary);">
+                        <strong style="color:var(--primary);display:block;margin-bottom:0.4rem;">🔄 1. Dispositif des 6 Couloirs en Vagues Successives avec Retour par les Couloirs Extérieurs (42 élèves)</strong>
+                        <ul style="padding-left:1.2rem;font-size:0.88rem;color:#334155;">
+                            <li><strong>Tracés sur plateau scolaire :</strong> Tracer <strong>6 couloirs de 1,20 m</strong> sur la diagonale ou la longueur du plateau (50m à 60m) avec une <strong>zone de freinage dégagée d'au moins 10 à 12 mètres après la ligne d'arrivée</strong> (ne jamais placer la ligne d'arrivée à moins de 10 m d'un mur ou d'un grillage !).</li>
+                            <li><strong>Rotation sur 3 rôles (Coureurs / Chronométreurs / Juges de départ &amp; de zone) :</strong>
+                                <br>• <strong>5 vagues de 6 coureurs (30 élèves)</strong> qui s'élancent toutes les 45 secondes aux commandements du Starter ;
+                                <br>• <strong>6 Chronométreurs à l'arrivée</strong> (alignés dans le prolongement exact de la ligne d'arrivée, chacun responsable d'un couloir) ;
+                                <br>• <strong>6 Juges de départ / Juges de zone 30m</strong> qui vérifient la position des mains derrière la ligne et l'endroit exact où le témoin est transmis.
+                            </li>
+                            <li><strong>Règle de sécurité absolue :</strong> Le retour au départ se fait <strong>exclusivement en marchant par les deux couloirs extérieurs de récupération</strong>, jamais en traversant les couloirs de sprint.</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-callout" style="border-left-color:var(--secondary);">
+                        <strong style="color:var(--secondary);display:block;margin-bottom:0.4rem;">🤝 2. Équité Mixte &amp; Constitution des Équipes de Relais Homogènes</strong>
+                        <ul style="padding-left:1.2rem;font-size:0.88rem;color:#334155;">
+                            <li><strong>Barèmes différenciés Garçons / Filles :</strong> En sprint individuel, utiliser les barèmes officiels distincts (ex. 100m Garçons / 80m Filles au Bac) tout en notant sur 6 ou 7 points le <strong>processus biomécanique et le gain de relais</strong>, accessible à 100% des élèves indépendamment de leur vitesse brute.</li>
+                            <li><strong>Relais 4×50m / 4×60m à Temps Cible :</strong> Évaluer l'équipe non pas sur son classement brut face aux autres équipes, mais sur son <strong>Indice d'Efficacité de Transmission</strong> : \(Gain = (T_1 + T_2 + T_3 + T_4) - T_{{Relais}}\). Une équipe féminine ou mixte qui réalise 3 passages parfaits à pleine vitesse gagne jusqu'à <strong>2,0 secondes</strong> sur la somme de ses temps individuels et obtient la note maximale en processus !</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>🔥 Protocole d'Échauffement Spécifique « Gammes Athlétiques &amp; Prévention Ischio-Jambiers » (12 minutes)</h3>
+                <ol style="padding-left:1.5rem;font-size:0.9rem;color:#334155;">
+                    <li><strong>Phase 1 — Activation Cardio-Vasculaire &amp; Mobilisation Articulaire (4 min) :</strong> Footing léger (2 tours de plateau), ouverture/fermeture des hanches, mobilisation active des chevilles, genoux et épaules.</li>
+                    <li><strong>Phase 2 — Gammes Athlétiques sur 20 mètres (5 min — OBLIGATOIRE) :</strong>
+                        <br>• 1 passage en <strong>Montées de genoux (« Skip A »)</strong> buste droit, appui plante de pied rebondissant ;
+                        <br>• 1 passage en <strong>Talons-fesses dynamiques</strong> sous le bassin ;
+                        <br>• 1 passage en <strong>Griffé du sol jambes tendues</strong> (activation spécifique des ischio-jambiers et des mollets) ;
+                        <br>• 1 passage en <strong>Foulées bondissantes</strong> (recherche d'amplitude).
+                    </li>
+                    <li><strong>Phase 3 — Accélérations Progressives &amp; Réactions aux Signaux (3 min) :</strong> 2 accélérations progressives sur 30 mètres (de 60% à 90% Vmax) + 2 départs sur 10 mètres à partir de positions variées (assis, couché ventral, trépied) au coup de sifflet.</li>
+                </ol>
+
+                <h3>⚖️ Règles Officielles World Athletics 2026 (RT 16 à 24) en EPS &amp; Concours CRMEF</h3>
+                <div class="table-wrap">
+                    <table class="a4-table">
+                        <thead>
+                            <tr>
+                                <th>Règle Technique World Athletics</th>
+                                <th>Norme Fédérale Officielle (2026)</th>
+                                <th>Application Pédagogique en EPS au Maroc</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Commandements du Starter &amp; Faux Départ (RT 16)</strong></td>
+                                <td>Pour toutes les courses jusqu'au 400 m inclus : 1) <em>« À vos marques ! »</em> (5 appuis au sol derrière la ligne) → 2) <em>« Prêts ! »</em> (immobilité complète bassin levé) → Coup de pistolet. Temps de réaction &lt; <strong>0,100 s</strong> = Faux départ (Disqualification directe).</td>
+                                <td>En EPS : départ quadrupédique (3 ou 4 appuis) obligatoire. En cas de 1er faux départ d'un élève en séance, rappel à l'ordre et pénalité de -0,5 pt en processus s'il récidive.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Course en Couloir &amp; Virage (RT 17)</strong></td>
+                                <td>Largeur d'un couloir = <strong>1,22 m (± 0,01 m)</strong>, ligne de droite incluse. En virage (200m, 400m, 4×100m), poser un pied SUR ou à gauche de la ligne intérieure (corde) entraîne la disqualification.</td>
+                                <td>L'élève doit courir dans son couloir du départ jusqu'à l'arrêt complet dans la zone de freinage sans couper la trajectoire d'un camarade.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Jugement de l'Arrivée &amp; Vent (RT 18)</strong></td>
+                                <td>Le chronomètre est arrêté à l'instant où le <strong>TORSE</strong> (tronc/buste, hors tête, cou, bras et jambes) franchit le plan vertical du bord intérieur de la ligne d'arrivée. Vent max homologable : <strong>+2,0 m/s</strong>.</td>
+                                <td>L'élève-chronométreur déclenche son chronomètre à la fumée/abaissement du drapeau du starter et l'arrête au passage du buste sur la ligne.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Zone de Transmission en Relais (RT 24.3 &amp; 24.7)</strong></td>
+                                <td>Au relais <strong>4×100 m</strong> (et 4×200 m), la zone de transmission mesure <strong>30 mètres</strong> (suppression de l'ancienne pré-zone de 10 m). Au <strong>4×400 m</strong>, elle mesure <strong>20 mètres</strong>. <strong>Seule la position du témoin fait foi</strong> (et non celle des pieds des coureurs).</td>
+                                <td>Sur plateau scolaire (Relais 4×50 m ou 4×60 m), on aménage une zone de transmission de <strong>15 m à 20 m</strong> (ou 30 m sur piste) avec 1 marque d'élan (scotch/craie) réglée en nombre de pieds.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Chute du Témoin (RT 24.6)</strong></td>
+                                <td>Le témoin doit être passé de la main à la main (interdit de le lancer). S'il tombe, il doit obligatoirement être ramassé <strong>par l'athlète qui l'a fait tomber</strong>, en reprenant la course à l'endroit de la chute.</td>
+                                <td>Sécurité : avant de sortir du couloir pour ramasser un témoin tombé, vérifier qu'aucun coureur adverse n'arrive dans le couloir voisin.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 5 : CARTES DE TOUS LES ARTICLES & CALCULATEURS VITESSE       -->
+        <!-- ================================================================== -->
+        <section id="volet-articles" class="volet-panel" aria-label="Articles et Calculateurs Course de Vitesse et Relais sur ProfEPS">
+            <div class="content-panel-card">
+                <h2>📚 Bibliothèque Complète des Articles, Règlements &amp; Calculateurs Vitesse/Relais sur ProfEPS Maroc</h2>
+                <p>Consultez nos dossiers réglementaires World Athletics 2026, barèmes officiels du Bac Sport et calculateurs scientifiques liés au Sprint et au Relais :</p>
+
+                <div class="articles-cards-grid">
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Règlement Officiel Sprint · World Athletics RT 16-21</div>
+                            <h3>Règlement Course de Vitesse (100m, 200m, 400m &amp; 60m/80m EPS) : Terrain Coté, Blocks, Faux Départ (0,100s) &amp; Arrivée au Torse</h3>
+                            <p>Dossier complet sur les commandements du starter, la largeur des couloirs (1,22m), les décalages en virage, l'anémométrie (+2,0 m/s) et les Q&amp;R du concours CRMEF.</p>
+                        </div>
+                        <a href="reglement-course-vitesse-100m-200m-400m-athletisme-eps.html" class="rel-card-link">Consulter le Règlement Course de Vitesse →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Règlement Officiel Relais · World Athletics RT 24</div>
+                            <h3>Règlement Course de Relais (4×100m, 4×400m, 1200m &amp; EPS) : Zone de 30m, Témoin (50g) &amp; Techniques de Passage</h3>
+                            <p>Tout savoir sur la zone unique de 30 mètres, le jugement sur la position du témoin, l'alternance des mains (Droite-Gauche-Droite-Gauche) et les motifs de disqualification.</p>
+                        </div>
+                        <a href="reglement-course-relais-4x100m-4x400m-1200m-athletisme-eps.html" class="rel-card-link">Consulter le Règlement Course de Relais →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Règlement Courses de Haies · 100m / 110m / 400m</div>
+                            <h3>Règlement Course de Haies (100m F, 110m G, 400m &amp; Haies Basses EPS) : Hauteurs, Intervalles &amp; Franchissement</h3>
+                            <p>Toutes les cotes officielles des courses de haies et l'adaptation didactique en EPS au Maroc (haies basses, rythme 3 ou 4 appuis inter-obstacles).</p>
+                        </div>
+                        <a href="reglement-course-haies-100m-110m-400m-athletisme-eps.html" class="rel-card-link">Consulter le Règlement Course de Haies →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Barèmes Officiels &amp; Bac Libre · OP 2007</div>
+                            <h3>Barèmes du Bac Sport au Maroc (Officiels &amp; Candidats Libres) : Vitesse (100m, 80m, 60m), Demi-Fond, Poids &amp; Longueur</h3>
+                            <p>Tableaux chiffrés complets sur 20 points et sur 7 points (Produit/Processus) pour les élèves scolarisés et les candidats au Bac Libre dans les AREF.</p>
+                        </div>
+                        <a href="article-baremes-bac-sport-maroc-officiels-libres.html" class="rel-card-link">Voir tous les Barèmes Officiels Bac Sport →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Calculateur Scientifique · Sprint &amp; ASR</div>
+                            <h3>Calculateur de Réserve de Vitesse Anaérobie (ASR = Vmax − VMA) &amp; Profilage des Sprinters en EPS</h3>
+                            <p>Calculez instantanément la vitesse maximale de sprint (km/h et m/s), la réserve de vitesse anaérobie (ASR) et les cibles d'entraînement de vos élèves.</p>
+                        </div>
+                        <a href="calculateur-asr-reserve-vitesse.html" class="rel-card-link">Ouvrir le Calculateur Vmax &amp; ASR →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Fiches ATD Officielles · PDF</div>
+                            <h3>Analyses et Traitements Didactiques (ATD) des APS au Maroc : Athlétisme, Sports Collectifs &amp; Gymnastique</h3>
+                            <p>Retrouvez les synthèses ATD officielles (Logique interne, Problèmes fondamentaux, Principes d'action) conformes aux OP 2007 et OP 2009.</p>
+                        </div>
+                        <a href="ressources-atd.html" class="rel-card-link">Accéder aux Fiches ATD PDF →</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ====================================================================== -->
+    <!-- JAVASCRIPT ENGINE : 6 SCHOOL LEVELS x 4 PRACTICE LEVELS + A4 EXPORT    -->
+    <!-- ====================================================================== -->
+    <script>
+    (function() {{
+        const SCHOOL_LEVELS = {{
+            "1AC": {{
+                label: "1ère Année Collège (1AC)",
+                ref: "Orientations Pédagogiques Août 2009 (Collège)",
+                oti: "L'élève de la 1ère année doit pouvoir acquérir une motricité correcte lui permettant de s'adapter aux exigences des situations (forme et rythme) et s'intégrer dans le groupe.",
+                otc: "Réagir rapidement à un signal codifié à partir d'un départ quadrupédique pour parcourir une distance courte (50m à 60m) en ligne droite à vitesse maximale et transmettre le témoin en mouvement dans une zone délimitée.",
+                bareme: "Habiletés motrices (Produit 6 pts + Processus 6 pts) : 12 pts · Connaissances : 3 pts · Rôles sociaux (Starter/Chronométreur/Juge) : 5 pts (Total /20)",
+                situationRef: "Course de vitesse individuelle sur 60 mètres départ commandé en couloir + Course de relais par équipes de 4 élèves (4×50m) avec zone de transmission de 20 mètres."
+            }},
+            "2AC": {{
+                label: "2ème Année Collège (2AC)",
+                ref: "Orientations Pédagogiques Août 2009 (Collège)",
+                oti: "L'élève de la 2ème année doit pouvoir ajuster l'énergie physique et la maîtriser et fournir l'effort et l'orienter pour effectuer des réalisations coordonnées et organisées, et communiquer avec les autres.",
+                otc: "Coordonner la poussée de départ et l'accélération progressive sur 60m sans ralentir avant la ligne d'arrivée, et synchroniser le départ du receveur à l'aide d'une marque d'élan en relais 4×50m.",
+                bareme: "Habiletés motrices (Produit 6 pts + Processus 6 pts) : 12 pts · Connaissances : 3 pts · Rôles sociaux (Starter/Chronométreur/Juge) : 5 pts (Total /20)",
+                situationRef: "Sprint chronométré sur 60m départ quadrupédique commandé + Relais 4×50m avec étalonnage d'une marque d'élan (en pieds) et transmission de bas en haut sans perte de vitesse."
+            }},
+            "3AC": {{
+                label: "3ème Année Collège (3AC)",
+                ref: "Orientations Pédagogiques Août 2009 (Collège)",
+                oti: "L'élève de la 3ème année doit pouvoir ajuster les éléments de l'acte moteur et l'adapter aux différentes situations en fonction de ses exigences organisationnelles et réglementaires, et s'exercer sur la pratique des droits et devoirs pour réaliser un projet sportif individuel ou collectif.",
+                otc: "Optimiser le rapport fréquence/amplitude sur 60m/80m et réaliser un gain de temps collectif en relais (4×60m) grâce à une transmission à pleine vitesse dans la zone réglementaire.",
+                bareme: "Habiletés motrices (Produit 6 pts + Processus 6 pts) : 12 pts · Connaissances : 3 pts · Rôles sociaux (Starter/Chronométreur/Juge) : 5 pts (Total /20)",
+                situationRef: "Épreuve combinée : Sprint individuel 60m (ou 80m) aux 3 commandements officiels + Relais 4×60m évalué sur l'indice de gain de relais par rapport à la somme des temps individuels."
+            }},
+            "TC": {{
+                label: "Tronc Commun (TC — Lycée Qualifiant)",
+                ref: "Orientations Pédagogiques 2007 (Lycée Qualifiant)",
+                oti: "L'élève du Tronc Commun doit pouvoir maîtriser les composantes du comportement moteur et pouvoir s'adapter aux différentes situations et faire face à leurs défis, et accepter l'intégration dans le groupe.",
+                otc: "Maîtriser les 3 phases du sprint (départ explosif, mise en action inclinée, maintien de Vmax en plante de pied) sur 80m (Filles) / 100m (Garçons) et assurer une transmission fluide en zone de 30m.",
+                bareme: "Habiletés motrices (Produit 7 pts + Processus 7 pts) : 14 pts · Connaissances : 3 pts · Rôles sociaux (Officiels WA) : 3 pts (Total /20)",
+                situationRef: "Course de vitesse officielle sur 80m (F) / 100m (G) (ou 60m sur plateau court) + Relais 4×60m ou 4×100m avec zone de transmission de 30m et alternance des mains."
+            }},
+            "1BAC": {{
+                label: "1ère Année Baccalauréat (1Bac)",
+                ref: "Orientations Pédagogiques 2007 (Lycée Qualifiant)",
+                oti: "L'élève de la 1ère année Bac doit pouvoir confronter les situations motrices et s'y adapter par l'analyse et l'évaluation et la prise d'initiative pour améliorer le rendement.",
+                otc: "Produire une performance maximale sur 80m/100m en optimisant son profil fréquence-amplitude et concevoir un projet collectif de relais maximisant le gain chronométrique dans les 3 zones de 30m.",
+                bareme: "Habiletés motrices (Produit 7 pts + Processus 7 pts) : 14 pts · Connaissances : 3 pts · Rôles sociaux (Officiels WA) : 3 pts (Total /20)",
+                situationRef: "Sprint 80m (F) / 100m (G) chronométré + Relais 4×80m / 4×100m avec évaluation croisée de la performance chronométrique et du gain de transmission."
+            }},
+            "2BAC": {{
+                label: "2ème Année Baccalauréat (2Bac — Examen National EPS)",
+                ref: "Orientations Pédagogiques 2007 (Lycée Qualifiant — Bac Sport)",
+                oti: "L'élève de la 2ème année Bac doit pouvoir analyser différentes situations et interactions motrices et s'intégrer volontairement dans la planification et la réalisation de projets individuels et collectifs.",
+                otc: "Réaliser sa performance optimale le jour de l'épreuve du Bac sur 80m (F) / 100m (G) et/ou en relais 4×100m en maîtrisant parfaitement le départ quadrupédique, le relâchement à Vmax et la transmission à l'aveugle.",
+                bareme: "Habiletés motrices (Produit 7 pts + Processus 7 pts) : 14 pts · Connaissances : 3 pts · Rôles sociaux (Jury Starter/Chrono/Zone) : 3 pts (Total /20)",
+                situationRef: "Épreuve officielle type Bac Sport : Course de vitesse 100m Garçons / 80m Filles (2 essais chronométrés au 1/10e s) + Relais 4×100m (ou 4×60m sur plateau) avec calcul de l'indice d'efficacité collective."
+            }}
+        }};
+
+        const PRACTICE_PROFILES = {{
+            "N1": {{
+                badge: "Niveau 1 — Débutant (Réaction lente, redressement brusque & Relais à l'arrêt)",
+                diagnostique: "Réaction tardive au signal, redressement vertical immédiat dès le 1er pas, course à plat pied avec buste crispé, ralentissement net à 5 mètres de l'arrivée ; en relais, le receveur attend le témoin à l'arrêt en regardant derrière lui.",
+                objCycle: "Apprendre la posture du départ quadrupédique aux 3 commandements, courir droit dans son couloir en accélérant jusqu'après la ligne d'arrivée, et transmettre le témoin en mouvement dans la zone.",
+                sessions: [
+                    {{ num: 1, title: "Évaluation Diagnostique : Test Vitesse (50m/60m) & Relais Navette/Couloir", obj: "Mesurer les temps individuels de référence sur 50m/60m et observer le mode spontané de transmission du témoin en relais.", intro: "12 min : Footing léger, mobilisation chevilles/genoux/hanches et gammes athlétiques (montées de genoux, talons-fesses).", sitRef: "1) Passage chronométré individuel sur 50m/60m par vagues de 6 couloirs ; 2) Relais 4×50m par équipes de 4 pour comparer le temps du relais à la somme des 4 temps individuels.", cr: "Rester dans son couloir, ne pas ralentir avant la ligne, passer le témoin de la main à la main.", cs: "Établir sa fiche diagnostique (Temps individuel + Temps relais) et former des quatuors homogènes.", calme: "Étirements doux des mollets et ischio-jambiers + rappel des règles de sécurité." }},
+                    {{ num: 2, title: "Réaction aux Signaux & Départ Quadrupédique (« À vos marques - Prêts - Signal »)", obj: "Réagir instantanément à un signal sonore ou visuel et maîtriser les 2 postures préparatoires du départ quadrupédique.", intro: "12 min : Échauffement dynamique + départs de 10m depuis positions variées (assis, à genoux, couché ventral).", sitRef: "Travail en vagues sur 20 mètres : apprentissage du placement à « À vos marques » (5 appuis, mains derrière la ligne) puis à « Prêts » (bassin levé au-dessus des épaules, poids sur les mains) + duel par deux sur 20m.", cr: "Placer le genou de la jambe arrière au niveau de la pointe du pied avant ; lever le bassin à « Prêts » sans bouger avant le coup de sifflet.", cs: "Réaliser 4 départs commandés sur 5 sans faux départ ni redressement sur place.", calme: "Retour au calme et auto-évaluation par le juge de départ." }},
+                    {{ num: 3, title: "Mise en Action Inclinée & Poussée sur les 15 Premiers Mètres", obj: "Conserver une inclinaison avant du buste sur les 6 à 8 premiers appuis pour créer une forte accélération initiale.", intro: "12 min : Gammes de poussées jambes (« griffé », fentes bondissantes) et départs en chute avant.", sitRef: "Départ commandé sur 25 mètres avec un repère au sol à 4 mètres (plot) que le coureur doit fixer du regard pendant les 6 premiers appuis avant de relever progressivement la tête.", cr: "Pousser fort le sol vers l'arrière avec toute la jambe avant et synchroniser l'action vigoureuse des bras.", cs: "Franchir la marque des 20 mètres en moins de 3,5 à 4,0 secondes sans se redresser au 1er pas.", calme: "Étirements des quadriceps et psoas." }},
+                    {{ num: 4, title: "Courir dans l'Axe sur Plante de Pied & Franchir l'Arrivée à Pleine Vitesse", obj: "Supprimer le ralentissement de fin de course en visant une porte située 5 mètres APRÈS la ligne d'arrivée.", intro: "12 min : Gammes de rebonds chevilles (plante de pied haute) et accélérations progressives.", sitRef: "Courses de 50m/60m en couloirs avec une « fausse arrivée » (2 cônes rouges placés 5m après la ligne officielle où se trouve le chronométreur) : interdiction de décélérer avant les cônes rouges.", cr: "Courir haut sur l'avant-pied, bras fléchis à 90° dans l'axe, et engager la poitrine (torse) sur la ligne.", cs: "Améliorer son temps diagnostique de 0,2 à 0,4 seconde grâce au franchissement à Vmax.", calme: "Marche de récupération par les couloirs extérieurs et étirements." }},
+                    {{ num: 5, title: "Initiation au Relais : Manipulation du Témoin & Technique de Bas en Haut", obj: "Apprendre à donner et recevoir le témoin de la main à la main (de bas en haut, paume en V inversé) au signal vocal « HOP ! » sans se retourner.", intro: "12 min : Passe-et-va du témoin en trottinant par binômes (main droite → main gauche).", sitRef: "Dans un couloir divisé en 2 demi-couloirs à la craie (Donneur à droite main droite / Receveur à gauche main gauche) : passage en footing puis à 70% Vmax dès le cri « HOP ! » du donneur.", cr: "Le receveur garde la tête droite vers l'avant et ne tend son bras arrière (pouce écarté vers l'intérieur) qu'au cri « HOP ! ».", cs: "Réussir 4 transmissions sur 5 en mouvement sans jamais tourner la tête en arrière.", calme: "Bilan sur les règles du témoin (RT 24.5 et 24.6)." }},
+                    {{ num: 6, title: "Relais en Zone de 20m/30m : Mettre le Receveur en Mouvement (Marque d'Élan)", obj: "Passer d'une réception à l'arrêt à une réception lancée en plaçant une marque d'élan (12 à 15 pieds avant la zone).", intro: "12 min : Gammes athlétiques et passages de témoin à 2 en trottinant.", sitRef: "Atelier par binômes sur une zone de transmission de 20m : le receveur place une marque à 14 pieds (env. 4m) avant la zone ; dès que le donneur passe sur la marque, le receveur démarre vers l'avant.", cr: "Démarrer franchement au passage du donneur sur la marque et recevoir le témoin au milieu de la zone.", cs: "Valider 3 passages sur 4 à l'intérieur des limites de la zone sans que le donneur ne percute le receveur.", calme: "Ajustement de la marque (+2 pieds si rattrapé trop tôt, -2 pieds si non rattrapé)." }},
+                    {{ num: 7, title: "Coordination Fréquence / Amplitude : Le Corridor de Lattes", obj: "Découvrir l'équilibre entre la cadence des appuis (fréquence) et la longueur des foulées (amplitude) à pleine vitesse.", intro: "12 min : Échauffement complet et éducatifs de fréquence/amplitude.", sitRef: "3 couloirs aménagés sur 40m : Couloir 1 « Fréquence » (lattes rapprochées 1,30m) ; Couloir 2 « Amplitude » (lattes espacées 1,80m) ; Couloir 3 « Libre chronométré » pour transférer la meilleure sensation.", cr: "Attaquer le sol activement sous le bassin sans « écraser » les appuis ni bondir en hauteur.", cs: "Identifier son couloir préférentiel et battre son record personnel sur 40m lancé.", calme: "Étirements actifs des ischio-jambiers." }},
+                    {{ num: 8, title: "Enchaîner les 3 Passages du Relais 4×50m (Alternance Droite-Gauche-Droite-Gauche)", obj: "Organiser l'équipe de 4 relayeurs dans l'ordre optimal et réussir 3 transmissions successives sans chute de témoin.", intro: "12 min : Échauffement autonome dirigé par le capitaine de chaque quatuor.", sitRef: "Parcours complet de Relais 4×50m (ou 4×60m) : Relayeur 1 (main D) → Relayeur 2 (main G) → Relayeur 3 (main D) → Relayeur 4 (main G).", cr: "Respecter sa moitié de couloir et rester dans son couloir après avoir donné le témoin pour ne gêner personne.", cs: "Réaliser le relais 4×50m complet en validant les 3 zones de transmission.", calme: "Calcul du premier indice de gain de relais par l'observateur." }},
+                    {{ num: 9, title: "Compétition Préparatoire & Formation aux Rôles d'Officiels (Starter / Chrono / Juge)", obj: "Répéter les deux épreuves (Sprint 60m + Relais 4×50m) en conditions officielles et maîtriser le chronométrage et le jugement.", intro: "12 min : Protocole officiel d'échauffement pré-compétition.", sitRef: "Séries chronométrées de 60m suivies du tournoi de relais 4×50m gérées intégralement par les élèves-officiels (1 Starter avec drapeau, 6 Chronométreurs, 3 Juges de zone).", cr: "Concentration au départ, franchissement au torse et transmissions assurées dans la zone.", cs: "Obtenir un temps de relais inférieur ou égal à la somme des 4 temps individuels.", calme: "Vérification des fiches de performance avant la séance 10." }},
+                    {{ num: 10, title: "Séance 10 : Évaluation Sommative Officielle sur 20 Points (OP Maroc)", obj: "Évaluer le produit chronométrique, le processus biomécanique (départ, course, transmission), les connaissances et les rôles d'officiels.", intro: "12 min : Échauffement autonome complet par équipe.", sitRef: "Épreuve officielle : 1) Sprint individuel chronométré (60m Collège / 80m-100m Lycée) ; 2) Course de Relais par équipes de 4 avec calcul du gain de relais.", cr: "Application stricte du règlement World Athletics et engagement maximal.", cs: "Validation de la grille officielle sommative sur 20 points.", calme: "Retour au calme et bilan du cycle." }}
+                ]
+            }},
+            "N2": {{
+                badge: "Niveau 2 — Débrouillé (Départ 4 appuis acquis, axe rectiligne & Départ à la marque)",
+                diagnostique: "L'élève maîtrise les commandements du départ et court dans son couloir, mais son accélération plafonne vite par manque de griffé actif au sol ; en relais, le receveur part à la marque mais ralentit ou se retourne au moment de saisir le témoin.",
+                objCycle: "Améliorer la poussée d'accélération et l'action plante de pied (« griffé ») pour abaisser son chrono sur 60m/80m/100m, et automatiser une transmission à l'aveugle dans le dernier tiers de la zone.",
+                sessions: [
+                    {{ num: 1, title: "Évaluation Diagnostique : Chronométrage 60m/80m/100m & Indice de Relais", obj: "Mesurer le temps individuel de départ arrêté et calculer l'écart initial entre la somme des 4 temps et le relais 4×50m/60m.", intro: "12 min : Footing, mobilité articulaire et gammes athlétiques sur 20m.", sitRef: "Test chronométré individuel + test relais 4×50m/60m avec relevé précis de l'indice : Gain = Somme des 4 temps − Temps Relais.", cr: "Départ quadrupédique réglementaire et passage dans la zone de 20m/30m.", cs: "Situer son niveau sur le barème officiel et fixer le contrat de gain de relais de l'équipe.", calme: "Analyse des pertes de temps lors des passages." }},
+                    {{ num: 2, title: "Explosivité du Départ Quadrupédique & Temps de Réaction", obj: "Optimiser les angles articulaires à « Prêts ! » (90° genou avant / 120° genou arrière) et jaillir vers l'avant sans temps mort.", intro: "12 min : Jeux de réaction auditive, visuelle et tactile par binômes.", sitRef: "Atelier de départs sur 20m avec bandes de craie pour régler l'écartement des appuis (pied avant à 1,5 pied de la ligne, pied arrière à 3 pieds) + course-poursuite avec handicap d'1m.", cr: "Avancer les épaules légèrement devant les mains à « Prêts » et tirer violemment le bras avant vers le haut.", cs: "Gagner au moins 3 duels sur 5 sur les 15 premiers mètres sans faux départ.", calme: "Étirements dynamiques doux." }},
+                    {{ num: 3, title: "Transition Mise en Action → Vitesse Maximale (Lattes Progressives 0–30m)", obj: "Structurer l'augmentation progressive de l'amplitude sur les 12 premiers appuis tout en conservant une fréquence élevée.", intro: "12 min : Gammes de montées de genoux, griffé et foulées bondissantes.", sitRef: "Parcours de lattes à espacement croissant de 0 à 25m (de 0,90m à 1,85m) suivi de 25m de maintien de vitesse libre chronométré.", cr: "Franchir chaque intervalle avec un seul appui dynamique plante de pied en poussant le bassin vers l'avant.", cs: "Passer les 12 intervalles sans piétiner ni sauter et améliorer son temps sur 50m.", calme: "Récupération marchée et hydratation." }},
+                    {{ num: 4, title: "Action Plante de Pied (« Griffé ») & Relâchement à Vmax", obj: "Courir « haut » avec le bassin en rétroversion et un contact bref au sol sous le centre de gravité.", intro: "12 min : Éducatifs de rebonds chevilles jambes tendues et « Skip A » haute fréquence.", sitRef: "Sprints lancés sur 30m (20m d'élan progressif + 30m chronométrés à Vmax) avec consigne de relâchement de la mâchoire et des mains.", cr: "Armer la pointe du pied vers le tibia (« pied flex » en l'air) avant de griffer le sol vers l'arrière.", cs: "Réaliser un temps sur 30m lancé inférieur de 0,4s à son 30m départ arrêté.", calme: "Étirements des mollets et ischio-jambiers." }},
+                    {{ num: 5, title: "Étalonnage Précis de la Marque d'Élan en Relais (14 à 18 Pieds)", obj: "Trouver la distance exacte de la marque au sol pour que le donneur rejoigne le receveur à pleine vitesse entre 18m et 25m dans la zone.", intro: "12 min : Échauffement complet et passes de témoin au signal « HOP ! ».", sitRef: "Travail par binômes fixes (R1→R2, R2→R3, R3→R4) dans une zone de 30m découpée en 3 sous-zones de 10m : objectif = transmettre dans la 3ème sous-zone (20–30m) qui rapporte un bonus de 3 points.", cr: "Le receveur part en sprint maximal (comme un départ de 100m) dès que le pied du donneur touche la marque.", cs: "Réussir 3 transmissions sur 4 dans la sous-zone optimale (20–30m) sans ralentir.", calme: "Noter sur la fiche d'équipe le nombre exact de pieds de chaque marque." }},
+                    {{ num: 6, title: "Transmission à l'Aveugle à Pleine Vitesse & Règle des Demi-Couloirs", obj: "Stabiliser le bras cible du receveur au cri « HOP ! » sans aucun regard en arrière ni perte d'équilibre.", intro: "12 min : Gammes athlétiques et automatisme bras-voix à haute vitesse.", sitRef: "Duels de binômes en couloirs parallèles sur 60m (Donneur lancé sur 30m + Receveur lancé en zone de 30m) chronométrés d'un bout à l'autre.", cr: "Le donneur crie « HOP ! » à 2 foulées et vise la main ouverte immobile du receveur ; le receveur ne tend le bras qu'au signal.", cs: "Obtenir un temps sur le 60m en binôme inférieur au meilleur 60m individuel des deux coureurs.", calme: "Analyse par le juge de zone de la fluidité du passage." }},
+                    {{ num: 7, title: "Stratégie de Placement des 4 Relayeurs (Spécialistes Virage vs Ligne Droite)", obj: "Répartir les 4 élèves de l'équipe selon leurs qualités spécifiques (R1 explosif au départ, R2 et R4 rapides en ligne droite, R3 fort en virage).", intro: "12 min : Échauffement en équipe avec passages coordonnés.", sitRef: "Relais complet 4×50m / 4×60m en testant l'ordre stratégique des 4 coureurs et l'alternance stricte des mains (D → G → D → G).", cr: "Enchaîner les 3 passages à pleine vitesse dans les demi-couloirs respectifs.", cs: "Réaliser un gain de relais positif d'au moins +0,8 à +1,2 seconde.", calme: "Validation de la composition définitive du quatuor." }},
+                    {{ num: 8, title: "Endurance de Vitesse & Franchissement au Torse (« Cassé » sur la Ligne)", obj: "Maintenir sa fréquence gestuelle dans les 15 derniers mètres et engager les épaules vers l'avant sur la ligne d'arrivée.", intro: "12 min : Gammes et accélérations progressives.", sitRef: "Courses de 60m / 80m / 100m en opposition directe par couloirs de niveau homogène (départs handicap si besoin pour créer une arrivée groupée au coude-à-coude).", cr: "Conserver l'action dynamique des bras jusqu'au franchissement de la ligne et incliner le torse sur le dernier appui.", cs: "Battre son record personnel du cycle sur la distance officielle.", calme: "Récupération complète et étirements." }},
+                    {{ num: 9, title: "Meeting Blanc : Épreuve Combinée Sprint + Relais & Jury World Athletics", obj: "Vivre une compétition complète gérée par les élèves-officiels (Starter, Juge d'arrivée, Chronométreurs, Juges de zone 30m).", intro: "12 min : Échauffement autonome de compétition.", sitRef: "Passage officiel à blanc sur le sprint individuel puis sur le relais 4×50m/60m/100m avec calcul immédiat des points Produit + Processus.", cr: "Zéro faux départ, zéro hors-zone en relais.", cs: "Valider tous les indicateurs de la grille d'évaluation.", calme: "Derniers réglages des marques d'élan." }},
+                    {{ num: 10, title: "Séance 10 : Évaluation Sommative Officielle sur 20 Points (OP Maroc)", obj: "Évaluer la performance chronométrique, l'efficacité biomécanique et le gain de relais, ainsi que les connaissances et rôles d'officiels.", intro: "12 min : Échauffement autonome par équipe.", sitRef: "Épreuve sommative officielle en couloirs (Sprint individuel + Relais par équipes de 4).", cr: "Maîtrise technique complète et respect du règlement World Athletics.", cs: "Attribution de la note finale sur 20 points.", calme: "Bilan du cycle et proclamation des résultats." }}
+                ]
+            }},
+            "N3": {{
+                badge: "Niveau 3 — Confirmé (Mise en action inclinée, Griffé actif & Passage en zone 30m)",
+                diagnostique: "Bonnes qualités de vitesse et départ quadrupédique maîtrisé ; l'élève cherche à optimiser son rapport Fréquence × Amplitude entre 40m et 100m et à transmettre le témoin dans la zone de 30m avec un gain collectif supérieur à 1,5 seconde.",
+                objCycle: "Perfectionner la biomécanique du sprint (poussée inclinée, cycle avant haut en plante de pied, relâchement à Vmax) et réussir 3 transmissions à vitesse maximale dans le dernier tiers de la zone de 30m.",
+                sessions: [
+                    {{ num: 1, title: "Diagnostic Biomécanique : Temps de Passage (20m / 60m / 100m) & Gain de Relais", obj: "Analyser séparément la capacité d'accélération (0–20m), la vitesse maximale lancée et l'indice de gain de relais.", intro: "12 min : Protocole complet de gammes athlétiques et accélérations.", sitRef: "Prise de temps simultanée à 20m et à l'arrivée (60m/80m/100m) + test Relais 4×60m/100m.", cr: "Engagement maximal dès le coup de sifflet et jusqu'à 5m après la ligne.", cs: "Identifier son profil (explosif au départ vs véloce lancé) et son poste optimal dans le relais.", calme: "Constitution des équipes définitives et analyse des données." }},
+                    {{ num: 2, title: "Puissance d'Extraction au Départ & Angle d'Inclinaison (0–20m)", obj: "Maximiser la projection horizontale du centre de gravité sur les 8 premiers appuis grâce à une extension complète triple (cheville-genou-hanche).", intro: "12 min : Mobilisation spécifique, pliométrie horizontale (sauts en longueur sans élan) et départs réactifs.", sitRef: "Départs commandés sur 20m avec résistance légère (partenaire ou harnais sur 5m) suivis d'un sprint libre en sur-vitesse sur 20m.", cr: "Aligner rigoureusement pied de poussée - bassin - épaules - tête à 45° et raser le sol avec le pied de reprise.", cs: "Abaisser son temps de passage aux 20 mètres de 0,10 à 0,15 seconde.", calme: "Étirements actifs du psoas et des fessiers." }},
+                    {{ num: 3, title: "Cycle Avant Haut & Raideur Active de la Cheville (« Griffé » à Vmax)", obj: "Réduire le temps de contact au sol à pleine vitesse en attaquant la piste par un mouvement de griffé actif de haut en bas et d'avant en arrière.", intro: "12 min : Gammes de « Skip A », « Skip B » (extension-griffé) et rebonds chevilles.", sitRef: "Travail sur 40m (20m d'élan + 20m de mini-haies basses de 15 cm espacées de 1,90m à 2,10m selon la taille) pour imposer un cycle avant haut du genou libre.", cr: "Maintenir le bassin haut en rétroversion, genou libre monté à l'horizontale et cheville verrouillée à l'impact.", cs: "Franchir la zone des 20m à Vmax en moins de 2,4s (G) / 2,8s (F) avec une foulée aérienne.", calme: "Récupération marchée et relâchement musculaire." }},
+                    {{ num: 4, title: "Dissociation Fréquence / Amplitude & Relâchement Neuro-Musculaire (50–100m)", obj: "Conserver son amplitude maximale en fin de course grâce au relâchement de la ceinture scapulaire et à l'action ample des bras.", intro: "12 min : Échauffement complet et sprints progressifs.", sitRef: "Sprints de 80m/100m en « In & Out » (25m accélération max → 20m maintien fluide relâché sans forcer → 25m ré-accélération maximale jusqu'à la ligne).", cr: "Visage détendu, épaules basses, mains qui montent à hauteur de joue et descendent derrière la hanche.", cs: "Maintenir la même vitesse moyenne sur les 30 derniers mètres que entre 30m et 50m.", calme: "Étirements et respiration." }},
+                    {{ num: 5, title: "Relais Haute Vitesse : Transmission de Haut en Bas (ou Push-Pass) en Zone 30m", obj: "Maîtriser la transmission bras tendus à hauteur d'épaule pour maximiser l'espace libre (« distance utile ») entre le donneur et le receveur.", intro: "12 min : Gammes et automatisme vocal « HOP ! » en mouvement.", sitRef: "Couloir de transmission de 30m avec chronométrage exclusif du temps mis par le témoin pour traverser les 30m de la zone (entre l'entrée 0m et la sortie 30m).", cr: "Échange réalisé à bras tendus (plus d'1,20 m d'espace entre les deux torses) entre le 20ème et le 26ème mètre de la zone.", cs: "Faire traverser la zone de 30m au témoin en moins de 3,5s (G) / 4,0s (F).", calme: "Ajustement au demi-pied près de la marque d'élan." }},
+                    {{ num: 6, title: "Course en Virage (200m / Relais 4×100m) : Inclinaison Centripète & Corde", obj: "Courir à pleine vitesse en virage au plus près de la ligne intérieure (sans jamais marcher dessus — RT 17.2) et transmettre en entrée/sortie de virage.", intro: "12 min : Échauffement et éducatifs d'appui en courbe.", sitRef: "Sprints en virage de 60m + passages de témoin R1→R2 (sortie de virage) et R2→R3 (entrée de virage).", cr: "Incliner légèrement tout le corps vers l'intérieur du virage et amplifier l'action du bras extérieur (bras droit).", cs: "Zéro empiètement sur la ligne intérieure de gauche et passage validé à pleine vitesse.", calme: "Retour au calme." }},
+                    {{ num: 7, title: "Optimisation du Gain Collectif sur le Relais Complet (Objectif Gain ≥ +1,5s)", obj: "Enchaîner les 3 zones de transmission à vitesse maximale sans aucune perte d'équilibre ni ralentissement.", intro: "12 min : Échauffement spécifique d'équipe dirigé par les élèves.", sitRef: "Tentatives chronométrées sur le relais complet (4×60m ou 4×100m) avec analyse immédiate des 3 zones par les juges de zone.", cr: "Le donneur continue de sprinter AU-DELÀ du receveur jusqu'à ce que le témoin soit fermement pris.", cs: "Atteindre un Gain de Relais supérieur ou égal à +1,5 seconde par rapport à la somme des 4 temps.", calme: "Débriefing technique par binôme." }},
+                    {{ num: 8, title: "Gestion Tactique des Séries & Finale de Sprint (Départ sous Pression)", obj: "Réaliser son meilleur chrono en confrontation directe sans se crisper face à un adversaire placé dans le couloir voisin.", intro: "12 min : Routine individuelle d'échauffement pré-course.", sitRef: "Organisation d'un tournoi par séries qualificatives puis finales A, B et C par niveaux de performance homogènes sur 60m/80m/100m.", cr: "Rester concentré dans sa « bulle » (son couloir) sans regarder ses adversaires latéralement.", cs: "Égaler ou battre son record personnel lors de la finale.", calme: "Récupération active." }},
+                    {{ num: 9, title: "Répétition Générale Type Bac / ASS & Arbitrage Officiel World Athletics", obj: "Valider ses marques définitives et officier comme Starter, Chef Chronométreur et Juge-Arbitre de Relais.", intro: "12 min : Échauffement officiel en autonomie.", sitRef: "Simulation complète de l'épreuve sommative avec application stricte des Règles Techniques 16, 17, 18 et 24.", cr: "Précision du chronométrage au 1/10e de seconde et rigueur du signalement au drapeau blanc/rouge.", cs: "Validation complète du contrat de performance individuel et collectif.", calme: "Derniers conseils avant l'évaluation." }},
+                    {{ num: 10, title: "Séance 10 : Évaluation Sommative Officielle sur 20 Points (OP Maroc)", obj: "Évaluer la performance chronométrique (Produit), la maîtrise biomécanique et le gain de relais (Processus), les connaissances et l'arbitrage.", intro: "12 min : Échauffement autonome complet.", sitRef: "Épreuve officielle sommative : Sprint individuel (60m/80m/100m) + Course de Relais par équipes de 4.", cr: "Explosivité, fluidité à Vmax et transmissions parfaites en zone de 30m.", cs: "Attribution de la note sommative officielle sur 20 points.", calme: "Clôture et bilan du cycle." }}
+                ]
+            }},
+            "N4": {{
+                badge: "Niveau 4 — Élite / ASS (Profil Force-Vitesse, Vmax & Passage à l'aveugle > +2,0s)",
+                diagnostique: "Sprinters confirmés ou membres de l'équipe ASS d'athlétisme maîtrisant la gestuelle de course et le passage du témoin, capables de travailler sur le profilage Force-Vitesse (Samozino/Morin), la réserve de vitesse anaérobie (ASR) et le passage en zone de 30m à plus de 95% de Vmax.",
+                objCycle: "Atteindre les barèmes maximaux (18 à 20/20 au Bac Sport et podiums ASS) en individualisant le travail Force-Vitesse et en réalisant un gain de relais supérieur à +2,0 secondes.",
+                sessions: [
+                    {{ num: 1, title: "Profilage Force-Vitesse (10m / 30m / 60m / 100m) & Diagnostic Relais Élite", obj: "Déterminer le profil individuel (Déficit de Force initiale F0 vs Déficit de Vitesse maximale V0) et le potentiel du collectif 4×100m.", intro: "12 min : Protocole élite d'activation neuromusculaire et gammes pliométriques.", sitRef: "Relevé des temps de passage à 10m, 30m, 60m et 100m + test Relais 4×100m (ou 4×60m).", cr: "Poussée maximale dès l'impulsion dans les blocks et maintien de la fréquence jusqu'au fil.", cs: "Établir sa fiche de profil Force-Vitesse et la feuille de route du quatuor.", calme: "Récupération et interprétation scientifique des temps." }},
+                    {{ num: 2, title: "Développement de la Force Horizontale Initiale (\(F_0\) — 0 à 20m)", obj: "Augmenter la quantité de force orientée horizontalement lors des 6 premiers appuis de sortie de blocks.", intro: "12 min : Mobilisation dynamique, bondissements horizontaux (5-bonds) et gainage.", sitRef: "Sprints courts de 15m à 20m en contraste de charge (1 passage avec résistance élastique/chariot léger → 1 passage libre explosif à récupération complète de 3 min).", cr: "Projection basse du bassin (angle tibia au décollage ~45°), poussée complète de la cheville et attaque sous le bassin.", cs: "Record personnel battu sur le 10m et le 20m départ arrêté.", calme: "Étirements actifs et relâchement." }},
+                    {{ num: 3, title: "Développement de la Vitesse Maximale (\(V_0\)) & Pliométrie de Cheville", obj: "Abaisser le temps de contact au sol (< 0,11 s) à pleine vitesse grâce à la pré-activation des ischio-jambiers et du triceps sural.", intro: "12 min : Gammes « Skip A/B/C » haute intensité et rebonds réactifs.", sitRef: "Flying Sprints (25m d'accélération progressive + 20m de sprint maximal chronométré à la cellule/chrono) avec corridor de lattes à amplitude optimale.", cr: "Bassin haut verrouillé, attaque fouettée plante de pied sous la verticale du centre de masse.", cs: "Atteindre une vitesse maximale instantanée supérieure à 8,0–9,0 m/s (G) / 6,8–7,5 m/s (F).", calme: "Décompression vertébrale et hydratation." }},
+                    {{ num: 4, title: "Endurance de Vitesse Alactique-Lactique Courte (Maintien de Vmax 60–100m)", obj: "Limiter la chute de fréquence gestuelle dans les 30 derniers mètres du 100m (et du 200m).", intro: "12 min : Échauffement complet et gammes de relâchement.", sitRef: "Séance de « Speed Endurance » : 3 × 80m à 95–98% Vmax (récupération complète de 6 min active/arbitrage entre les courses) avec focus sur le relâchement cervico-scapulaire.", cr: "Ne pas crisper les trapèzes ni raccourcir le retour des coudes vers l'arrière après 60m.", cs: "Écart inférieur à 0,2s entre les 3 répétitions de 80m.", calme: "Récupération complète." }},
+                    {{ num: 5, title: "biomécanique Élite du Passage en Zone de 30m (Échange entre 22m et 27m)", obj: "Exploiter les 20 premiers mètres de la zone de 30m comme rampe d'accélération maximale du receveur pour échanger le témoin à vitesses strictement égales.", intro: "12 min : Échauffement spécifique relais et passages rapides.", sitRef: "Travail chronométré sur la zone de 30m : le receveur part en position quadrupédique (3 appuis) à l'entrée de la zone (0m) et accélère à 100% pour recevoir le témoin à 24m.", cr: "Synchronisation parfaite entre le cri « HOP ! », l'extension instantanée du bras arrière et le dépôt franc du témoin à bras tendus.", cs: "Temps de traversée de la zone de 30m par le témoin ≤ 3,1s (G) / 3,6s (F).", calme: "Validation micrométrique des marques d'élan (en pieds et demi-pieds)." }},
+                    {{ num: 6, title: "Enchaînement Haute Intensité des 3 Transmissions (4×100m / 4×60m)", obj: "Maintenir la continuité cinétique du témoin à travers les 3 zones avec alternance Droite-Gauche-Droite-Gauche.", intro: "12 min : Échauffement collectif synchronisé.", sitRef: "Relais complet en opposition face au chronomètre cible avec juges de zone mesurant la distance libre entre les deux coureurs à chaque passage.", cr: "Distance libre entre les bustes ≥ 1,30 m au moment de la prise du témoin.", cs: "Obtenir un Gain de Relais supérieur ou égal à +2,0 secondes.", calme: "Analyse des 3 passages." }},
+                    {{ num: 7, title: "Techniques de Cassé d'Arrivée (Engagement du Torse au 1/100e s)", obj: "Gagner 0,05 à 0,10 seconde sur la ligne d'arrivée grâce au « cassé » (inclinaison brusque du buste avec projection des bras vers l'arrière sur le dernier appui).", intro: "12 min : Gammes et sprints courts.", sitRef: "Sprints de 40m en duels serrés avec exercice spécifique de « cassé du torse » exactement sur le plan vertical de la ligne sans perdre l'équilibre.", cr: "Incliner le buste uniquement sur le tout dernier pas (jamais à 3 mètres de la ligne, ce qui freine).", cs: "Remporter les arrivées serrées au jugement photo-finish/visuel sans chuter.", calme: "Étirements doux." }},
+                    {{ num: 8, title: "Simulation Compétition ASS / Bac Sport (Gestion de l'Échauffement & de la Chambre d'Appel)", obj: "Gérer de manière autonome son échauffement minuté de 15 minutes avant l'appel du Starter.", intro: "12 min : Routine autonome complète.", sitRef: "Passage officiel chronométré (100m G / 80m F) suivi 15 minutes plus tard du Relais 4×100m.", cr: "Pic d'activation nerveuse atteint exactement à l'entrée en couloir.", cs: "Réaliser un chrono correspondant à la tranche 18–20/20 du barème officiel.", calme: "Récupération active." }},
+                    {{ num: 9, title: "Direction de Compétition & Juge-Arbitre World Athletics", obj: "Assurer la direction technique complète d'un plateau d'athlétisme (Starter, Chef Juge d'arrivée, Juge-Arbitre Relais).", intro: "12 min : Échauffement autonome.", sitRef: "Organisation intégrale d'un meeting inter-équipes avec feuille de résultats officielle, gestion des couloirs et application des règles RT 16-24.", cr: "Impartialité, précision chronométrique et maîtrise réglementaire.", cs: "Zéro erreur d'arbitrage ou de calcul des gains de relais.", calme: "Bilan pré-sommatif." }},
+                    {{ num: 10, title: "Séance 10 : Évaluation Sommative Officielle sur 20 Points (Bac / OP Maroc)", obj: "Valider l'excellence motrice, technique et méthodologique en Course de Vitesse et Relais.", intro: "12 min : Échauffement autonome de compétition.", sitRef: "Épreuve officielle sommative : Sprint individuel (100m/80m/60m) + Course de Relais par équipes de 4.", cr: "Performance chronométrique maximale et gain de relais optimal.", cs: "Attribution de la note finale sur 20 points.", calme: "Clôture du cycle." }}
+                ]
+            }}
+        }};
+
+        const GRIDS_DATA = {{
+            "G1": {{
+                title: "FICHE D'OBSERVATION BINÔME (SPRINT) & CALCUL DE L'INDICE DE GAIN DE RELAIS (ZONE 30M)",
+                subtitle: "Outil d'évaluation diagnostique et formative : Biomécanique du Sprint + Efficacité Collective de Transmission",
+                html: `
+                    <div class="a4-pedago-box">
+                        <p><strong>Formule Officielle de l'Indice de Gain de Relais :</strong> On additionne d'abord les 4 temps individuels des relayeurs (\(S = T_1 + T_2 + T_3 + T_4\)), puis on chronomètre le temps de l'équipe sur le relais complet (\(T_{{Relais}}\)). <strong>Gain de Relais = \(S - T_{{Relais}}\)</strong>. Plus le gain est positif (ex. <strong>+1,5s à +2,5s</strong>), plus les transmissions ont été réalisées à pleine vitesse dans la zone !</p>
+                    </div>
+                    <table class="a4-table">
+                        <thead>
+                            <tr>
+                                <th style="width:16%;">Relayeur &amp; Poste</th>
+                                <th style="width:14%;">Temps Individuel<br>(50m ou 60m arrêté)</th>
+                                <th style="width:26%;">Observation Technique Sprint Individuel<br>(Départ · Mise en action · Vmax · Arrivée)</th>
+                                <th style="width:22%;">Marque d'Élan Choisie &amp; Main du Témoin</th>
+                                <th style="width:22%;">Validation de la Zone (30m)<br>(Sous-zone 1 / 2 / 3 · Sans regarder)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1. Donneur 1 (Départ)</strong><br>Nom : ....................</td>
+                                <td>\(T_1 = \) .......... s</td>
+                                <td>[ ] 5 appuis stables &nbsp; [ ] Poussée inclinée<br>[ ] Plante de pied &nbsp; [ ] Franchit sans ralentir</td>
+                                <td>Départ commandé<br><strong>Main DROITE</strong> (Couloir int.)</td>
+                                <td>Passage 1 (R1 → R2) :<br>[ ] Zone 0-10m [ ] 10-20m [ ] <strong>20-30m</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>2. Relayeur 2</strong><br>Nom : ....................</td>
+                                <td>\(T_2 = \) .......... s</td>
+                                <td>[ ] 5 appuis stables &nbsp; [ ] Poussée inclinée<br>[ ] Plante de pied &nbsp; [ ] Franchit sans ralentir</td>
+                                <td>Marque : ....... pieds<br><strong>Main GAUCHE</strong> (Couloir ext.)</td>
+                                <td>Passage 2 (R2 → R3) :<br>[ ] Zone 0-10m [ ] 10-20m [ ] <strong>20-30m</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>3. Relayeur 3</strong><br>Nom : ....................</td>
+                                <td>\(T_3 = \) .......... s</td>
+                                <td>[ ] 5 appuis stables &nbsp; [ ] Poussée inclinée<br>[ ] Plante de pied &nbsp; [ ] Franchit sans ralentir</td>
+                                <td>Marque : ....... pieds<br><strong>Main DROITE</strong> (Couloir int.)</td>
+                                <td>Passage 3 (R3 → R4) :<br>[ ] Zone 0-10m [ ] 10-20m [ ] <strong>20-30m</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>4. Finisseur 4</strong><br>Nom : ....................</td>
+                                <td>\(T_4 = \) .......... s</td>
+                                <td>[ ] 5 appuis stables &nbsp; [ ] Poussée inclinée<br>[ ] Plante de pied &nbsp; [ ] Cassé au torse</td>
+                                <td>Marque : ....... pieds<br><strong>Main GAUCHE</strong> (Sprint final)</td>
+                                <td>Arrivée au Torse :<br>[ ] Pleine vitesse &nbsp; [ ] Sans gêner</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-top:0.85rem;border:1px solid #0f172a;padding:0.7rem;background:#fff1f2;font-size:0.82rem;display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;">
+                        <div><strong>1. Somme des 4 Temps Individuels (\(S\)) :</strong><br>\(T_1 + T_2 + T_3 + T_4 = \) <strong>............ secondes</strong></div>
+                        <div><strong>2. Temps Officiel du Relais (\(T_{{Relais}}\)) :</strong><br>Chrono Équipe = <strong>............ secondes</strong></div>
+                        <div><strong>3. Indice de Gain de Relais (\(S - T_{{Relais}}\)) :</strong><br><strong style="font-size:1rem;color:#006233;">Gain = + ............ secondes</strong></div>
+                    </div>
+                `
+            }},
+            "G2": {{
+                title: "GRILLE OFFICIELLE D'ÉVALUATION SOMMATIVE COLLÈGE (1AC – 2AC – 3AC) — OP 2009",
+                subtitle: "Barème Officiel Collège (60 mètres & Relais 4×50m/60m) : Habiletés Motrices (12 pts) + Connaissances (3 pts) + Rôles Sociaux (5 pts) = /20",
+                html: `
+                    <div class="a4-pedago-box">
+                        <p><strong>Référentiel Officiel MENPS (OP Août 2009 — Collège) :</strong> Les habiletés motrices sur <strong>12 points</strong> combinent la <strong>Note Produit Chronométrique 60m (sur 6 points)</strong> et la <strong>Note Processus Biomécanique &amp; Efficacité en Relais (sur 6 points)</strong>.</p>
+                    </div>
+                    <table class="a4-table">
+                        <thead>
+                            <tr>
+                                <th style="width:16%;">Note Produit<br>(sur 6 points)</th>
+                                <th style="width:14%;">60m Garçons<br>(1AC / 2AC)</th>
+                                <th style="width:14%;">60m Filles<br>(1AC / 2AC)</th>
+                                <th style="width:14%;">60m Garçons<br>(3ème AC)</th>
+                                <th style="width:14%;">60m Filles<br>(3ème AC)</th>
+                                <th style="width:28%;">Critères du Processus &amp; Gain de Relais (sur 6 points)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>6,0 / 6 pts</strong></td><td>≤ 8"4</td><td>≤ 9"4</td><td>≤ 7"9</td><td>≤ 9"0</td><td rowspan="7" style="vertical-align:top;">
+                                <strong>1. Processus Sprint Individuel (3 pts) :</strong><br>
+                                • Départ quadrupédique stable et réaction vive sans faux départ (1 pt).<br>
+                                • Mise en action inclinée et course haute plante de pied dans l'axe (1 pt).<br>
+                                • Franchissement de la ligne au torse sans ralentir (1 pt).<br><br>
+                                <strong>2. Efficacité en Relais (3 pts) :</strong><br>
+                                • Gain de relais ≥ +1,2s et 3 passages dans la zone sans regarder en arrière = <strong>3 / 3 pts</strong>.<br>
+                                • Gain entre +0,4s et +1,1s = <strong>2 / 3 pts</strong>.<br>
+                                • Gain nul ou passage à l'arrêt = <strong>1 / 3 pt</strong>.
+                            </td></tr>
+                            <tr><td><strong>5,0 / 6 pts</strong></td><td>8"8</td><td>9"9</td><td>8"3</td><td>9"5</td></tr>
+                            <tr><td><strong>4,0 / 6 pts</strong></td><td>9"2</td><td>10"4</td><td>8"7</td><td>10"0</td></tr>
+                            <tr><td><strong>3,0 / 6 pts</strong></td><td>9"7</td><td>11"0</td><td>9"2</td><td>10"6</td></tr>
+                            <tr><td><strong>2,0 / 6 pts</strong></td><td>10"3</td><td>11"7</td><td>9"8</td><td>11"3</td></tr>
+                            <tr><td><strong>1,0 / 6 pts</strong></td><td>&gt; 10"3</td><td>&gt; 11"7</td><td>&gt; 9"8</td><td>&gt; 11"3</td></tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-top:0.75rem;border:1px solid #0f172a;padding:0.65rem;background:#f8fafc;font-size:0.82rem;display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
+                        <div><strong>3. Connaissances Conceptuelles &amp; Règlement (sur 3 points) :</strong><br>Commandements du starter, règle du faux départ, longueur de la zone de transmission et règle de la position du témoin (RT 24.7).</div>
+                        <div><strong>4. Compétences Comportementales &amp; Rôles Sociaux (sur 5 points) :</strong><br>Rôles de Starter, Chronométreur et Juge de zone (2,5 pts) + sécurité des couloirs et entraide dans le quatuor (2,5 pts).</div>
+                    </div>
+                `
+            }},
+            "G3": {{
+                title: "GRILLE OFFICIELLE D'ÉVALUATION SOMMATIVE LYCÉE & BAC (TC – 1BAC – 2BAC) — OP 2007",
+                subtitle: "Barème Officiel Lycée & Bac Sport (100m, 80m et 60m Garçons & Filles) : Produit (7 pts) + Processus/Relais (7 pts) + Connaissances (3 pts) + Rôles (3 pts) = /20",
+                html: `
+                    <div class="a4-pedago-box">
+                        <p><strong>Référentiel Officiel MENPS (OP 2007 — Lycée Qualifiant &amp; Bac Sport) :</strong> La note motrice sur <strong>14 points</strong> additionne la <strong>Note Produit Chronométrique (sur 7 points)</strong> et la <strong>Note Processus Technique &amp; Relais (sur 7 points)</strong>.</p>
+                    </div>
+                    <table class="a4-table">
+                        <thead>
+                            <tr>
+                                <th>Note (/20 Bac Libre)</th>
+                                <th>Note Produit Cycle (/7 pts)</th>
+                                <th>100m Garçons (2Bac)</th>
+                                <th>100m Filles (2Bac)</th>
+                                <th>80m Garçons (Plateau)</th>
+                                <th>80m Filles (Plateau)</th>
+                                <th>60m Garçons (Court)</th>
+                                <th>60m Filles (Court)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>20 / 20</strong></td><td><strong>7,0 / 7</strong></td><td>≤ 12"0</td><td>≤ 14"2</td><td>≤ 9"8</td><td>≤ 11"5</td><td>≤ 7"5</td><td>≤ 8"7</td></tr>
+                            <tr><td><strong>18 / 20</strong></td><td><strong>6,5 / 7</strong></td><td>12"3</td><td>14"6</td><td>10"1</td><td>11"9</td><td>7"8</td><td>9"0</td></tr>
+                            <tr><td><strong>16 / 20</strong></td><td><strong>6,0 / 7</strong></td><td>12"7</td><td>15"1</td><td>10"4</td><td>12"3</td><td>8"1</td><td>9"4</td></tr>
+                            <tr><td><strong>14 / 20</strong></td><td><strong>5,0 / 7</strong></td><td>13"2</td><td>15"7</td><td>10"8</td><td>12"8</td><td>8"4</td><td>9"8</td></tr>
+                            <tr><td><strong>12 / 20</strong></td><td><strong>4,25 / 7</strong></td><td>13"7</td><td>16"4</td><td>11"3</td><td>13"4</td><td>8"8</td><td>10"3</td></tr>
+                            <tr><td><strong>10 / 20</strong></td><td><strong>3,5 / 7</strong></td><td>14"3</td><td>17"2</td><td>11"8</td><td>14"0</td><td>9"2</td><td>10"8</td></tr>
+                            <tr><td><strong>08 / 20</strong></td><td><strong>2,75 / 7</strong></td><td>15"0</td><td>18"1</td><td>12"4</td><td>14"8</td><td>9"7</td><td>11"4</td></tr>
+                            <tr><td><strong>06 / 20</strong></td><td><strong>2,0 / 7</strong></td><td>15"8</td><td>19"2</td><td>13"1</td><td>15"7</td><td>10"3</td><td>12"1</td></tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-top:0.75rem;border:1px solid #0f172a;padding:0.65rem;background:#f8fafc;font-size:0.82rem;display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;">
+                        <div><strong>Processus Technique &amp; Relais (7 pts) :</strong><br>• Départ 4 appuis &amp; réaction (2 pts)<br>• Mise en action &amp; griffé Vmax (2,5 pts)<br>• Franchissement &amp; Gain Relais ≥ +1,5s (2,5 pts)</div>
+                        <div><strong>Connaissances Réglementaires (3 pts) :</strong><br>Règles Techniques WA 16 à 24 (faux départ 0,100s, couloir 1,22m, zone 30m, filière alactique).</div>
+                        <div><strong>Rôles Sociaux &amp; Arbitrage (3 pts) :</strong><br>Starter officiel, Chronométreur au 1/10e s, Juge de zone 30m et autonomie d'échauffement.</div>
+                    </div>
+                `
+            }},
+            "G4": {{
+                title: "GRILLE D'ÉVALUATION ÉLÈVE DISPENSÉ TEMPORAIRE / STARTER, CHRONOMÉTREUR & JUGE DE ZONE (/20)",
+                subtitle: "Évaluation officielle sur 20 points d'un élève inapte partiel ou dispensé temporaire en cycle de Course de Vitesse & Relais",
+                html: `
+                    <div class="a4-pedago-box">
+                        <p><strong>Cadre Réglementaire MENPS :</strong> Tout élève dispensé de course rapide est évalué sur 20 points dans les fonctions officielles de <strong>Starter (« À vos marques - Prêts - Signal »), Chef Chronométreur à l'arrivée et Juge-Arbitre de Zone de Transmission (30m)</strong>.</p>
+                    </div>
+                    <table class="a4-table">
+                        <thead>
+                            <tr>
+                                <th>Domaine d'Évaluation</th>
+                                <th>Indicateurs Observables sur le Plateau d'Athlétisme</th>
+                                <th>Barème</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1. Maîtrise du Rôle de Starter Officiel (RT 16)</strong></td>
+                                <td>Se place de profil pour contrôler l'alignement des mains derrière la ligne blanche, prononce clairement les commandements avec les temps d'immobilité réglementaires, abaisse franchement le drapeau au coup de sifflet et rappelle tout faux départ.</td>
+                                <td><strong>....... / 5 pts</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>2. Chronométrage Précis &amp; Jugement au Torse (RT 18)</strong></td>
+                                <td>Déclenche le chronomètre à l'instant exact du signal visuel/sonore du starter et l'arrête au franchissement du plan vertical de la ligne par le TORSE du coureur (écart &lt; 0,15 s avec le professeur).</td>
+                                <td><strong>....... / 5 pts</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>3. Juge de Zone de Transmission 30m &amp; Calcul du Gain (RT 24)</strong></td>
+                                <td>Contrôle que le témoin est échangé exclusivement à l'intérieur des 30m, lève le drapeau blanc (validé) ou rouge (hors zone / témoin lancé) et calcule sans erreur l'indice de Gain de Relais (\(S - T_{{Relais}}\)).</td>
+                                <td><strong>....... / 6 pts</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>4. Sécurité des Couloirs, Matériel &amp; Assiduité</strong></td>
+                                <td>Présence en tenue, installe les plots des zones de 30m et de la porte de freinage après l'arrivée, et fait respecter le retour par les couloirs extérieurs.</td>
+                                <td><strong>....... / 4 pts</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `
+            }}
+        }};
+
+        let currentSchoolLevel = "1AC";
+        let currentPracticeLevel = "N1";
+        let currentDocMode = "cycle";
+        let currentSessionFilter = "ALL";
+        let currentGridId = "G1";
+
+        function buildCycleHTML(lvlKey, pracKey) {{
+            const lvl = SCHOOL_LEVELS[lvlKey];
+            const prac = PRACTICE_PROFILES[pracKey];
+            let rows = "";
+            prac.sessions.forEach(s => {{
+                rows += `
+                    <tr>
+                        <td style="font-weight:800;text-align:center;background:#f8fafc;">Séance ${{s.num}}</td>
+                        <td><strong>${{s.title}}</strong><br><span style="color:#475569;font-size:0.78rem;"><strong>Objectif :</strong> ${{s.obj}}</span></td>
+                        <td>${{s.sitRef}}</td>
+                        <td><strong>CR :</strong> ${{s.cr}}<br><strong style="color:#006233;">CS :</strong> ${{s.cs}}</td>
+                    </tr>
+                `;
+            }});
+
+            return `
+                <div class="a4-official-Banner">
+                    <div class="a4-banner-left">
+                        ROYAUME DU MAROC<br>
+                        Ministère de l'Éducation Nationale,<br>du Préscolaire et des Sports (MENPS)<br>
+                        <strong>Éducation Physique et Sportive (EPS)</strong>
+                    </div>
+                    <div class="a4-banner-center">
+                        <div class="a4-doc-type">PROJET PRÉVISIONNEL DE CYCLE (10 SÉANCES)</div>
+                        <div class="a4-doc-title">APS : COURSE DE VITESSE &amp; RELAIS · ${{lvl.label}}</div>
+                        <div style="font-size:0.76rem;font-weight:800;color:#006233;margin-top:0.2rem;">${{prac.badge}}</div>
+                    </div>
+                    <div class="a4-banner-right">
+                        <strong>Référentiel Officiel :</strong><br>
+                        ${{lvl.ref}}<br>
+                        <strong>World Athletics RT 16-24</strong><br>
+                        Portail : ProfEPS.ma
+                    </div>
+                </div>
+
+                <div class="a4-meta-grid">
+                    <div class="a4-meta-cell"><strong>APS Support</strong>Course de Vitesse &amp; Relais (Zone 30m)</div>
+                    <div class="a4-meta-cell"><strong>Niveau Scolaire</strong>${{lvl.label}}</div>
+                    <div class="a4-meta-cell"><strong>Niveau de Pratique</strong>${{pracKey}} (${{prac.badge.split('—')[1].trim()}})</div>
+                    <div class="a4-meta-cell"><strong>Volume Horaire</strong>10 Séances d'1h (ou 2h)</div>
+                </div>
+
+                <div class="a4-pedago-box">
+                    <p><strong>1. Objectif Terminal d'Intégration (OTI) :</strong> ${{lvl.oti}}</p>
+                    <p><strong>2. Objectif Terminal du Cycle (OTC — Vitesse &amp; Relais) :</strong> ${{lvl.otc}}</p>
+                    <p><strong>3. Comportement Initial Diagnostiqué (${{pracKey}}) :</strong> ${{prac.diagnostique}}</p>
+                    <p><strong>4. Transformation Visée en Fin de Cycle :</strong> ${{prac.objCycle}}</p>
+                    <p><strong>5. Situation de Référence &amp; Barème Officiel (/20) :</strong> ${{lvl.situationRef}} — <em>${{lvl.bareme}}</em></p>
+                </div>
+
+                <table class="a4-table">
+                    <thead>
+                        <tr>
+                            <th style="width:10%;">Séance</th>
+                            <th style="width:28%;">Thème &amp; Objectif Opérationnel de Séance</th>
+                            <th style="width:34%;">Situation d'Apprentissage / Situation de Référence</th>
+                            <th style="width:28%;">Critères de Réalisation (CR) &amp; Critères de Réussite (CS)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${{rows}}
+                    </tbody>
+                </table>
+
+                <div style="margin-top:1.15rem;display:flex;justify-content:space-between;font-size:0.76rem;font-weight:700;color:#475569;border-top:1px solid #cbd5e1;padding-top:0.65rem;">
+                    <span>Signature de l'Enseignant(e) d'EPS : .................................</span>
+                    <span>Visa de Monsieur l'Inspecteur Pédagogique : .................................</span>
+                    <span>Cachet de l'Administration : .................................</span>
+                </div>
+            `;
+        }}
+
+        function buildFichesHTML(lvlKey, pracKey, sessFilter) {{
+            const lvl = SCHOOL_LEVELS[lvlKey];
+            const prac = PRACTICE_PROFILES[pracKey];
+            const sessionsToRender = (sessFilter === "ALL")
+                ? prac.sessions
+                : [prac.sessions[parseInt(sessFilter, 10)]];
+
+            let fichesBlocks = "";
+            sessionsToRender.forEach(s => {{
+                fichesBlocks += `
+                    <div class="fiche-block">
+                        <div class="fiche-header-bar">
+                            <span>FICHE PÉDAGOGIQUE DE SÉANCE N° ${{s.num}} / 10 — COURSE DE VITESSE &amp; RELAIS (${{lvlKey}} · ${{pracKey}})</span>
+                            <span>Durée : 55 à 60 min · Effectif : 36–44 élèves (6 couloirs)</span>
+                        </div>
+                        <div style="padding:0.9rem 1.1rem;">
+                            <p style="margin-bottom:0.4rem;font-size:0.86rem;"><strong>Thème de la Séance :</strong> ${{s.title}}</p>
+                            <p style="margin-bottom:0.65rem;font-size:0.84rem;color:#dc2626;"><strong>Objectif Opérationnel :</strong> ${{s.obj}}</p>
+                            <table class="a4-table" style="margin-top:0.35rem;">
+                                <thead>
+                                    <tr>
+                                        <th style="width:16%;">Phase &amp; Durée</th>
+                                        <th style="width:46%;">Contenu Didactique, Dispositif &amp; Sécurité des Couloirs</th>
+                                        <th style="width:38%;">Critères de Réalisation (CR) &amp; Critères de Réussite (CS)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>1. Partie Introductive<br>(10 à 12 min)</strong></td>
+                                        <td>
+                                            • Prise en main : appel, vérification des tenues (lacets noués) et tracé des 6 couloirs avec zone de freinage dégagée (10m après l'arrivée).<br>
+                                            • <strong>Échauffement Spécifique :</strong> ${{s.intro}}
+                                        </td>
+                                        <td>
+                                            • Réalisation appliquée des gammes athlétiques (Skip A, talons-fesses, griffé ischio-jambiers).<br>
+                                            • Retour obligatoire en marchant par les couloirs extérieurs.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>2. Partie Fondamentale<br>(35 à 38 min)</strong></td>
+                                        <td>
+                                            <strong>Dispositif Pédagogique &amp; Situation de Référence :</strong><br>
+                                            ${{s.sitRef}}<br><br>
+                                            <strong>Variables de Régulation Didactique :</strong><br>
+                                            • <em>Simplification :</em> Départ debout en fente (3 appuis), élargir la sous-zone de transmission ou réduire la vitesse du donneur à 80%.<br>
+                                            • <em>Complexification :</em> Départ quadrupédique commandé strict, imposer la transmission entre 20m et 28m de la zone à vitesse maximale sans regarder en arrière.
+                                        </td>
+                                        <td>
+                                            <strong>Critères de Réalisation (Comment faire) :</strong><br>
+                                            ${{s.cr}}<br><br>
+                                            <strong style="color:#006233;">Critères de Réussite (Indicateur chiffré) :</strong><br>
+                                            ${{s.cs}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>3. Partie Finale<br>(8 à 10 min)</strong></td>
+                                        <td>
+                                            • <strong>Retour au calme :</strong> ${{s.calme}}<br>
+                                            • Bilan avec les chronométreurs et juges de zone, ramassage des témoins et des plots, annonce du thème suivant.
+                                        </td>
+                                        <td>
+                                            • Maîtrise des rôles de Starter, Chronométreur et Juge de zone 30m.<br>
+                                            • Respect de la récupération active entre les répétitions.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+            }});
+
+            return `
+                <div class="a4-official-Banner">
+                    <div class="a4-banner-left">
+                        ROYAUME DU MAROC · MENPS<br>
+                        <strong>Cahier des Fiches Pédagogiques EPS</strong><br>
+                        APS : Course de Vitesse &amp; Relais
+                    </div>
+                    <div class="a4-banner-center">
+                        <div class="a4-doc-type">CAHIER DES FICHES DE SÉANCES DÉTAILLÉES</div>
+                        <div class="a4-doc-title">${{lvl.label}}</div>
+                        <div style="font-size:0.76rem;font-weight:800;color:#006233;margin-top:0.2rem;">${{prac.badge}}</div>
+                    </div>
+                    <div class="a4-banner-right">
+                        <strong>Référentiel :</strong> ${{lvl.ref}}<br>
+                        <strong>OTC :</strong> Sprint &amp; Relais Zone 30m
+                    </div>
+                </div>
+                ${{fichesBlocks}}
+            `;
+        }}
+
+        function renderSprintStudio() {{
+            const container = document.getElementById("sprintA4PreviewSheet");
+            const sessBar = document.getElementById("sprintSessionSelectorBar");
+            if (!container) return;
+
+            if (currentDocMode === "cycle") {{
+                if (sessBar) sessBar.classList.remove("visible");
+                container.innerHTML = buildCycleHTML(currentSchoolLevel, currentPracticeLevel);
+            }} else {{
+                if (sessBar) sessBar.classList.add("visible");
+                container.innerHTML = buildFichesHTML(currentSchoolLevel, currentPracticeLevel, currentSessionFilter);
+            }}
+        }}
+
+        function renderSprintGrid() {{
+            const gContainer = document.getElementById("sprintGridA4Container");
+            if (!gContainer) return;
+            const g = GRIDS_DATA[currentGridId];
+            gContainer.innerHTML = `
+                <div class="a4-official-Banner">
+                    <div class="a4-banner-left">
+                        ROYAUME DU MAROC · MENPS<br>
+                        <strong>Éducation Physique et Sportive</strong><br>
+                        APS : Course de Vitesse &amp; Relais
+                    </div>
+                    <div class="a4-banner-center">
+                        <div class="a4-doc-type">DOCUMENT OFFICIEL D'OBSERVATION &amp; D'ÉVALUATION</div>
+                        <div class="a4-doc-title">${{g.title}}</div>
+                        <div style="font-size:0.75rem;font-weight:700;color:#006233;margin-top:0.2rem;">${{g.subtitle}}</div>
+                    </div>
+                    <div class="a4-banner-right">
+                        <strong>OP 2009 &amp; OP 2007</strong><br>
+                        World Athletics RT 16-24<br>
+                        ProfEPS.ma
+                    </div>
+                </div>
+                ${{g.html}}
+            `;
+        }}
+
+        window.switchSprintVolet = function(voletId) {{
+            document.querySelectorAll(".volet-panel").forEach(p => p.classList.remove("active"));
+            document.querySelectorAll(".volet-tab-btn").forEach(b => b.classList.remove("active"));
+            const target = document.getElementById(voletId);
+            if (target) target.classList.add("active");
+            const btn = document.querySelector(`.volet-tab-btn[data-volet="${{voletId}}"]`);
+            if (btn) btn.classList.add("active");
+            window.scrollTo({{ top: 240, behavior: "smooth" }});
+        }};
+
+        window.selectSprintSchoolLevel = function(lvl) {{
+            currentSchoolLevel = lvl;
+            document.querySelectorAll(".school-lvl-btn").forEach(b => {{
+                b.classList.toggle("active", b.getAttribute("data-level") === lvl);
+            }});
+            renderSprintStudio();
+        }};
+
+        window.selectSprintPracticeLevel = function(prac) {{
+            currentPracticeLevel = prac;
+            document.querySelectorAll("#volet-studio .practice-btn").forEach(b => {{
+                b.classList.toggle("active", b.getAttribute("data-practice") === prac);
+            }});
+            renderSprintStudio();
+        }};
+
+        window.selectSprintDocMode = function(mode) {{
+            currentDocMode = mode;
+            document.getElementById("btnModeCycle").classList.toggle("active", mode === "cycle");
+            document.getElementById("btnModeFiches").classList.toggle("active", mode === "fiches");
+            renderSprintStudio();
+        }};
+
+        window.selectSprintSessionFilter = function(sess) {{
+            currentSessionFilter = String(sess);
+            document.querySelectorAll("#sprintSessionSelectorBar .sess-pill").forEach(b => {{
+                b.classList.toggle("active", b.getAttribute("data-sess") === String(sess));
+            }});
+            renderSprintStudio();
+        }};
+
+        window.selectSprintGrid = function(gridId) {{
+            currentGridId = gridId;
+            document.querySelectorAll("#volet-grilles .practice-btn").forEach(b => {{
+                b.classList.toggle("active", b.getAttribute("data-grid") === gridId);
+            }});
+            renderSprintGrid();
+        }};
+
+        function triggerWordDownload(htmlBody, filename) {{
+            const fullWordHTML = `
+                <html xmlns:o="urn:schemas-microsoft-com:office:office"
+                      xmlns:w="urn:schemas-microsoft-com:office:word"
+                      xmlns="http://www.w3.org/TR/REC-html40">
+                <head>
+                    <meta charset="utf-8">
+                    <title>${{filename}}</title>
+                    <style>
+                        @page {{ size: A4 landscape; margin: 1.2cm; }}
+                        body {{ font-family: Arial, sans-serif; font-size: 10pt; color: #0f172a; line-height: 1.4; }}
+                        table {{ width: 100%; border-collapse: collapse; margin-top: 8px; margin-bottom: 12px; }}
+                        th {{ background-color: #0f172a; color: #ffffff; border: 1px solid #0f172a; padding: 6px; font-size: 9.5pt; text-align: left; }}
+                        td {{ border: 1px solid #64748b; padding: 6px; font-size: 9.5pt; vertical-align: top; }}
+                        .a4-official-Banner {{ border: 2px solid #0f172a; padding: 10px; margin-bottom: 12px; background-color: #f8fafc; }}
+                        .a4-pedago-box {{ border: 1px solid #0f172a; padding: 8px; margin-bottom: 10px; background-color: #fff1f2; }}
+                        .fiche-block {{ border: 2px solid #0f172a; margin-bottom: 18px; page-break-inside: avoid; }}
+                        .fiche-header-bar {{ background-color: #0f172a; color: #ffffff; padding: 6px 10px; font-weight: bold; }}
+                    </style>
+                </head>
+                <body>${{htmlBody}}</body>
+                </html>
+            `;
+            const blob = new Blob(['\\ufeff', fullWordHTML], {{ type: 'application/msword;charset=utf-8' }});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }}
+
+        function triggerPDFPrint(htmlBody, title) {{
+            const iframe = document.createElement("iframe");
+            iframe.style.position = "fixed";
+            iframe.style.right = "0";
+            iframe.style.bottom = "0";
+            iframe.style.width = "0";
+            iframe.style.height = "0";
+            iframe.style.border = "0";
+            document.body.appendChild(iframe);
+
+            const doc = iframe.contentWindow.document;
+            doc.open();
+            doc.write(`
+                <!DOCTYPE html>
+                <html lang="fr">
+                <head>
+                    <meta charset="utf-8">
+                    <title>${{title}}</title>
+                    <style>
+                        @page {{ size: A4 landscape; margin: 1cm; }}
+                        body {{ font-family: Inter, Arial, sans-serif; font-size: 9.5pt; color: #0f172a; line-height: 1.4; margin: 0; padding: 0; }}
+                        table {{ width: 100%; border-collapse: collapse; margin-top: 6px; }}
+                        th {{ background: #0f172a !important; color: #ffffff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; border: 1px solid #0f172a; padding: 5px 6px; text-align: left; font-size: 9pt; }}
+                        td {{ border: 1px solid #64748b; padding: 5px 6px; vertical-align: top; font-size: 9pt; }}
+                        .a4-official-Banner {{ border: 2px solid #0f172a; padding: 8px 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; background: #f8fafc !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }}
+                        .a4-meta-grid {{ display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid #0f172a; margin-bottom: 10px; }}
+                        .a4-meta-cell {{ padding: 4px 6px; border-right: 1px solid #cbd5e1; font-size: 8.5pt; }}
+                        .a4-pedago-box {{ border: 1px solid #0f172a; padding: 7px 10px; margin-bottom: 10px; background: #fff1f2 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-size: 8.8pt; }}
+                        .fiche-block {{ border: 2px solid #0f172a; margin-bottom: 14px; page-break-inside: avoid; }}
+                        .fiche-header-bar {{ background: #0f172a !important; color: #ffffff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 5px 10px; font-weight: bold; display: flex; justify-content: space-between; }}
+                    </style>
+                </head>
+                <body>${{htmlBody}}</body>
+                </html>
+            `);
+            doc.close();
+            setTimeout(() => {{
+                iframe.contentWindow.focus();
+                iframe.contentWindow.print();
+                setTimeout(() => document.body.removeChild(iframe), 1500);
+            }}, 250);
+        }}
+
+        window.exportSprintDoc = function(docType, format) {{
+            const htmlContent = (docType === "cycle")
+                ? buildCycleHTML(currentSchoolLevel, currentPracticeLevel)
+                : buildFichesHTML(currentSchoolLevel, currentPracticeLevel, "ALL");
+            const baseName = (docType === "cycle")
+                ? `Projet_Cycle_Vitesse_Relais_${{currentSchoolLevel}}_${{currentPracticeLevel}}_ProfEPS`
+                : `Cahier_10_Fiches_Vitesse_Relais_${{currentSchoolLevel}}_${{currentPracticeLevel}}_ProfEPS`;
+
+            if (format === "word") {{
+                triggerWordDownload(htmlContent, baseName + ".doc");
+            }} else {{
+                triggerPDFPrint(htmlContent, baseName);
+            }}
+        }};
+
+        window.exportSprintGrid = function(format) {{
+            const container = document.getElementById("sprintGridA4Container");
+            if (!container) return;
+            const baseName = `Grille_Vitesse_Relais_${{currentGridId}}_ProfEPS`;
+            if (format === "word") {{
+                triggerWordDownload(container.innerHTML, baseName + ".doc");
+            }} else {{
+                triggerPDFPrint(container.innerHTML, baseName);
+            }}
+        }};
+
+        window.exportSprintATD = function(format) {{
+            const el = document.getElementById("sprintATDExportableContent");
+            if (!el) return;
+            const header = `
+                <div class="a4-official-Banner">
+                    <div><strong>ROYAUME DU MAROC · MENPS</strong><br>Analyse et Traitement Didactique (ATD)</div>
+                    <div><strong>APS : COURSE DE VITESSE &amp; RELAIS (الجري السريع والتناوب)</strong><br>World Athletics RT 16-24 &amp; OP Maroc (2009 / 2007)</div>
+                    <div><strong>Portail ProfEPS.ma</strong></div>
+                </div>
+            `;
+            if (format === "word") {{
+                triggerWordDownload(header + el.innerHTML, "ATD_Course_Vitesse_Relais_EPS_Maroc_ProfEPS.doc");
+            }} else {{
+                triggerPDFPrint(header + el.innerHTML, "ATD_Course_Vitesse_Relais_EPS_Maroc_ProfEPS");
+            }}
+        }};
+
+        document.addEventListener("DOMContentLoaded", function() {{
+            const params = new URLSearchParams(window.location.search);
+            const lvlParam = (params.get("level") || "").toUpperCase();
+            if (SCHOOL_LEVELS[lvlParam]) {{
+                currentSchoolLevel = lvlParam;
+                document.querySelectorAll(".school-lvl-btn").forEach(b => {{
+                    b.classList.toggle("active", b.getAttribute("data-level") === lvlParam);
+                }});
+            }}
+            if (window.location.hash) {{
+                const h = window.location.hash.replace("#", "");
+                if (document.getElementById(h) && document.getElementById(h).classList.contains("volet-panel")) {{
+                    window.switchSprintVolet(h);
+                }}
+            }}
+            renderSprintStudio();
+            renderSprintGrid();
+        }});
+    }})();
+    </script>
+</body>
+</html>
+'''
+
+    out_path = os.path.join(PUBLIC_DIR, "aps-course-vitesse-relais-eps-maroc.html")
+    with open(out_path, "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"[SILO VITESSE & RELAIS OK] Created {out_path}")
+
+
+def update_hub_silos_blog_index_sitemap():
+    # 1. Update /public/hub-aps-sports-eps-maroc.html to feature Course de Vitesse & Relais as an active Complete Silo
+    hub_path = os.path.join(PUBLIC_DIR, "hub-aps-sports-eps-maroc.html")
+    if os.path.exists(hub_path):
+        with open(hub_path, "r", encoding="utf-8") as f:
+            hhtml = f.read()
+
+        if "aps-course-vitesse-relais-eps-maroc.html" not in hhtml:
+            sprint_featured_section = '''
+        <!-- SILO VEDETTE 6 : COURSE DE VITESSE & RELAIS (STUDIO COMPLET 1AC-2BAC) -->
+        <section class="featured-silo-card" data-aps-family="athletisme" style="border-color:#dc2626;" aria-label="Silo Complet Course de Vitesse et Relais EPS Maroc">
+            <div>
+                <div class="featured-kicker" style="color:#dc2626;">Silo APS Complet Disponible · Collège (OP 2009) &amp; Lycée (OP 2007) · World Athletics RT 16-24</div>
+                <h2 class="featured-title">⚡ Course de Vitesse &amp; Relais en EPS au Maroc : ATD, Studio des 24 Cycles &amp; 240 Fiches (1AC à 2Bac), Barèmes (60m/80m/100m) + Grilles (/20)</h2>
+                <p class="featured-desc">Accédez à la page spéciale Course de Vitesse (60m, 80m, 100m) et Relais (Zone de 30m) regroupant l'Analyse et Traitement Didactique (ATD), le studio interactif de visualisation A4 et téléchargement des projets de cycles et fiches de séances pour les 6 niveaux scolaires (1AC, 2AC, 3AC, TC, 1Bac, 2Bac × 4 niveaux de pratique : du départ quadrupédique au profilage Force-Vitesse et passage à l'aveugle), ainsi que les barèmes officiels Garçons/Filles et grilles (/20) en Word et PDF.</p>
+                <div class="featured-features">
+                    <span>✓ ATD Sprint &amp; Relais (Départ 4 appuis, Griffé, Zone 30m)</span>
+                    <span>✓ 6 Niveaux Scolaires × 4 Niveaux (Débutant à Élite ASS)</span>
+                    <span>✓ Visionneuse A4 Pro avant téléchargement Word (.doc) &amp; PDF</span>
+                    <span>✓ Barèmes Chiffrés 60m/80m/100m &amp; Indice de Gain de Relais (/20)</span>
+                </div>
+                <div class="featured-actions">
+                    <a href="aps-course-vitesse-relais-eps-maroc.html" class="btn-primary-action" style="background:#dc2626;">Ouvrir le Silo Complet Vitesse &amp; Relais (Cycles, Fiches &amp; Barèmes) →</a>
+                    <a href="aps-course-vitesse-relais-eps-maroc.html#volet-grilles" class="btn-secondary-action">Barèmes 60m/80m/100m &amp; Grilles (/20)</a>
+                </div>
+            </div>
+            <div class="featured-preview-box">
+                <strong style="display:block;font-size:0.88rem;color:#0f172a;margin-bottom:0.35rem;">Accès direct par Niveau Scolaire (Vitesse &amp; Relais) :</strong>
+                <p style="font-size:0.8rem;color:#475569;margin-bottom:0.65rem;">Cliquez sur votre niveau pour ouvrir directement ses 4 niveaux de pratique (Débutant à Élite) avec aperçu A4 + export Word/PDF :</p>
+                <div class="level-matrix">
+                    <a href="aps-course-vitesse-relais-eps-maroc.html?level=1AC#volet-studio" class="level-item">1ère AC<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">60m &amp; 4×50m · 4 Cycles</span></a>
+                    <a href="aps-course-vitesse-relais-eps-maroc.html?level=2AC#volet-studio" class="level-item">2ème AC<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">60m &amp; 4×50m · 4 Cycles</span></a>
+                    <a href="aps-course-vitesse-relais-eps-maroc.html?level=3AC#volet-studio" class="level-item">3ème AC<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">60m/80m &amp; Relais</span></a>
+                    <a href="aps-course-vitesse-relais-eps-maroc.html?level=TC#volet-studio" class="level-item">Tronc Commun<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">80m F / 100m G</span></a>
+                    <a href="aps-course-vitesse-relais-eps-maroc.html?level=1BAC#volet-studio" class="level-item">1ère Bac<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">80m F / 100m G</span></a>
+                    <a href="aps-course-vitesse-relais-eps-maroc.html?level=2BAC#volet-studio" class="level-item">2ème Bac<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">Bac 80m/100m &amp; Relais</span></a>
+                </div>
+                <div style="margin-top:0.85rem;padding-top:0.75rem;border-top:1px solid #e2e8f0;display:flex;justify-content:space-between;font-size:0.78rem;font-weight:700;color:#dc2626;">
+                    <a href="aps-course-vitesse-relais-eps-maroc.html#volet-atd">📐 Voir l'ATD Vitesse &amp; Relais</a>
+                    <a href="reglement-course-vitesse-100m-200m-400m-athletisme-eps.html">⚖️ Règlement World Athletics</a>
+                </div>
+            </div>
+        </section>
+'''
+            hhtml = hhtml.replace(
+                "<!-- GRILLE DE TOUTES LES APS PAR FAMILLE -->",
+                sprint_featured_section + "\n        <!-- GRILLE DE TOUTES LES APS PAR FAMILLE -->",
+                1
+            )
+
+            old_sprint_card = '''            <!-- 6. COURSE DE VITESSE & RELAIS -->
+            <article class="aps-card" data-aps-family="athletisme">
+                <div>
+                    <div class="aps-card-kicker">Athlétisme · Courses · OP 2007/2009</div>
+                    <h3 class="aps-card-title">⚡ Course de Vitesse &amp; Relais (الجري السريع والتناوب)</h3>
+                    <p class="aps-card-desc">Départ commandé, réaction au signal, fréquence/amplitude, transmission du témoin dans la zone de 30m, barèmes officiels du Bac Sport (60m, 80m, 100m).</p>
+                    <ul class="aps-links-list">
+                        <li><a href="article-vitesse-relais-eps.html"><span>📘 Guide Course de Vitesse &amp; Relais en EPS</span> <span>→</span></a></li>
+                        <li><a href="reglement-course-vitesse-relais-haies-athletisme-eps.html"><span>⚖️ Règlement Officiel Sprint, Relais (30m) &amp; Haies</span> <span>→</span></a></li>
+                        <li><a href="article-baremes-bac-sport-maroc-officiels-libres.html"><span>📊 Barèmes Chiffrés Vitesse (Collège, Lycée &amp; Bac)</span> <span>→</span></a></li>
+                        <li><a href="calculateur-sprint.html"><span>⏱️ Calculateur de Sprint &amp; Profil Force-Vitesse</span> <span>→</span></a></li>
+                    </ul>
+                </div>
+                <div class="aps-card-footer">
+                    <a href="article-vitesse-relais-eps.html" class="aps-btn-main">Dossier Vitesse &amp; Relais →</a>
+                    <a href="article-baremes-bac-sport-maroc-officiels-libres.html" class="aps-btn-alt">Barèmes /20</a>
+                </div>
+            </article>'''
+
+            new_sprint_card = '''            <!-- 6. COURSE DE VITESSE & RELAIS -->
+            <article class="aps-card" data-aps-family="athletisme" style="border-color:#dc2626;border-width:2px;">
+                <div>
+                    <div class="aps-card-kicker" style="color:#dc2626;">Athlétisme · Courses · Studio Complet Actif</div>
+                    <h3 class="aps-card-title">⚡ Course de Vitesse &amp; Relais (الجري السريع والتناوب)</h3>
+                    <p class="aps-card-desc">Silo complet Vitesse (60m/80m/100m) &amp; Relais (Zone 30m) : ATD officiel, 24 projets de cycles et 240 fiches de séances (1AC à 2Bac × 4 niveaux), barèmes chiffrés et grilles (/20).</p>
+                    <ul class="aps-links-list">
+                        <li><a href="aps-course-vitesse-relais-eps-maroc.html#volet-studio"><span>⚡ Studio Cycles &amp; Fiches (1AC → 2Bac · PDF/Word)</span> <span>→</span></a></li>
+                        <li><a href="aps-course-vitesse-relais-eps-maroc.html#volet-grilles"><span>📊 Barèmes 60m/80m/100m &amp; Grilles (/20)</span> <span>→</span></a></li>
+                        <li><a href="aps-course-vitesse-relais-eps-maroc.html#volet-atd"><span>📐 ATD Vitesse &amp; Relais (Gain de Relais)</span> <span>→</span></a></li>
+                        <li><a href="reglement-course-vitesse-100m-200m-400m-athletisme-eps.html"><span>⚖️ Règlements World Athletics Sprint &amp; Relais</span> <span>→</span></a></li>
+                    </ul>
+                </div>
+                <div class="aps-card-footer">
+                    <a href="aps-course-vitesse-relais-eps-maroc.html" class="aps-btn-main" style="background:#dc2626;">Ouvrir la Page Spéciale Vitesse &amp; Relais →</a>
+                </div>
+            </article>'''
+
+            hhtml = hhtml.replace(old_sprint_card, new_sprint_card)
+            with open(hub_path, "w", encoding="utf-8") as f:
+                f.write(hhtml)
+            print("[HUB APS OK] Updated /public/hub-aps-sports-eps-maroc.html with Course de Vitesse & Relais Complete Silo.")
+
+    # 2. Add Vitesse & Relais cross-link in sticky nav of existing silos
+    for silo_file in ["aps-handball-eps-maroc.html", "aps-basketball-eps-maroc.html", "aps-volleyball-eps-maroc.html", "aps-football-eps-maroc.html", "aps-gymnastique-sol-eps-maroc.html"]:
+        s_path = os.path.join(PUBLIC_DIR, silo_file)
+        if os.path.exists(s_path):
+            with open(s_path, "r", encoding="utf-8") as f:
+                s_html = f.read()
+            if "aps-course-vitesse-relais-eps-maroc.html" not in s_html:
+                s_html = s_html.replace(
+                    '<a href="hub-aps-sports-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:',
+                    '<a href="aps-course-vitesse-relais-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#dc2626;">⚡ Vitesse/Relais</a>\n                <a href="hub-aps-sports-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:'
+                )
+                with open(s_path, "w", encoding="utf-8") as f:
+                    f.write(s_html)
+
+    # 3. Update /public/blog.html with the new Silo Course de Vitesse & Relais card
+    blog_path = os.path.join(PUBLIC_DIR, "blog.html")
+    if os.path.exists(blog_path):
+        with open(blog_path, "r", encoding="utf-8") as f:
+            bhtml = f.read()
+
+        if "aps-course-vitesse-relais-eps-maroc.html" not in bhtml:
+            sprint_blog_card = '''                <!-- Silo Complet Course de Vitesse & Relais : aps-course-vitesse-relais-eps-maroc.html -->
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">⚡ Studio Vitesse &amp; Relais · 24 Cycles &amp; 240 Fiches</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke="#991b1b" stroke-width="2" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Silo Course de Vitesse &amp; Relais en EPS au Maroc (1AC à 2Bac) : ATD, Studio Cycles &amp; Fiches (4 Niveaux · PDF/Word), Barèmes 60m/80m/100m &amp; Grilles (/20)</h3>
+                        <p class="article-excerpt">Page spéciale Course de Vitesse (60m, 80m, 100m) &amp; Relais (Zone 30m) tout-en-un : ATD complet, visionneuse A4 pro des cycles et fiches pour les 6 niveaux scolaires (1AC à 2Bac × 4 niveaux) en Word/PDF, barèmes chiffrés Garçons/Filles et calcul du gain de relais (/20).</p>
+                        <div class="article-footer">
+                            <span class="article-date">4 Novembre 2026 · Studio PDF/Word</span>
+                            <a href="aps-course-vitesse-relais-eps-maroc.html" class="read-more">Ouvrir le Studio Vitesse &amp; Relais →</a>
+                        </div>
+                    </div>
+                </article>'''
+
+            marker = '<div class="articles-grid" id="articlesGrid">'
+            bhtml = bhtml.replace(marker, marker + "\n" + sprint_blog_card, 1)
+            bhtml = bhtml.replace('<h3>Tous <span class="theme-count" id="count-all">140</span></h3>', '<h3>Tous <span class="theme-count" id="count-all">141</span></h3>')
+            bhtml = bhtml.replace('<span class="articles-count" id="articlesCount">140 articles</span>', '<span class="articles-count" id="articlesCount">141 articles</span>')
+            bhtml = bhtml.replace('<h3>Activités Sportives <span class="theme-count" id="count-aps">29</span></h3>', '<h3>Activités Sportives <span class="theme-count" id="count-aps">30</span></h3>')
+
+            with open(blog_path, "w", encoding="utf-8") as f:
+                f.write(bhtml)
+            print("[BLOG OK] Added Silo Course de Vitesse & Relais card to /public/blog.html.")
+
+    # 4. Update /public/index.html (and mirror to /index.html) so the APS Studio Banner highlights all 6 Complete Silos (Vitesse/Relais, Gymnastique, Foot, Volley, Basket, Handball)
+    index_path = os.path.join(PUBLIC_DIR, "index.html")
+    if os.path.exists(index_path):
+        with open(index_path, "r", encoding="utf-8") as f:
+            ihtml = f.read()
+
+        start_tag = "<!-- PROFEPS_APS_STUDIO_HUB_BANNER_START -->"
+        end_tag = "<!-- PROFEPS_APS_STUDIO_HUB_BANNER_END -->"
+        if start_tag in ihtml and end_tag in ihtml:
+            s_idx = ihtml.find(start_tag)
+            e_idx = ihtml.find(end_tag) + len(end_tag)
+            updated_banner = '''<!-- PROFEPS_APS_STUDIO_HUB_BANNER_START -->
+  <section aria-label="Portail des APS : Studios Course de Vitesse & Relais, Gymnastique au Sol, Football/Futsal, Volley-Ball, Basket-Ball à 5 & Handball (1AC-2Bac)" style="max-width:1140px;margin:1.75rem auto;padding:1.5rem;background:linear-gradient(135deg,#f0fdf4 0%,#ffffff 50%,#fff1f2 100%);border:2px solid #006233;border-radius:18px;box-shadow:0 8px 22px rgba(15,23,42,0.06);">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem;margin-bottom:1rem;">
+      <div>
+        <span style="display:inline-block;font-size:0.74rem;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:#ffffff;background:#006233;padding:0.22rem 0.7rem;border-radius:999px;">🏟️ Nouveau · 6 Studios APS Complets (1AC → 2Bac × 4 Niveaux)</span>
+        <h2 style="margin:0.35rem 0 0;font-size:1.22rem;font-weight:900;color:#0f172a;">Portail des APS : Pages Spéciales Vitesse &amp; Relais, Gymnastique au Sol, Football/Futsal, Volley-Ball, Basket-Ball à 5 &amp; Handball (ATD, 24 Cycles, 240 Fiches Word/PDF &amp; Grilles /20)</h2>
+      </div>
+      <a href="hub-aps-sports-eps-maroc.html" style="font-size:0.84rem;font-weight:800;color:#006233;text-decoration:underline;">Ouvrir le Portail de Toutes les APS →</a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:0.75rem;">
+      <a href="aps-course-vitesse-relais-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.9rem;background:#ffffff;border:2px solid #dc2626;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.71rem;font-weight:800;color:#dc2626;margin-bottom:0.25rem;">⚡ Nouveau · Vitesse &amp; Relais</span>
+        <strong style="font-size:0.83rem;color:#0f172a;line-height:1.35;">ATD Sprint/Relais, 24 Cycles &amp; 240 Fiches + Barèmes 60m/80m/100m (/20) →</strong>
+      </a>
+      <a href="aps-gymnastique-sol-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.9rem;background:#ffffff;border:2px solid #7c3aed;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.71rem;font-weight:800;color:#7c3aed;margin-bottom:0.25rem;">🤸 Gymnastique au Sol</span>
+        <strong style="font-size:0.83rem;color:#0f172a;line-height:1.35;">ATD Gym, Code A/B/C/D, 24 Cycles &amp; 240 Fiches + Grilles Jury D+E (/20) →</strong>
+      </a>
+      <a href="aps-football-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.9rem;background:#ffffff;border:2px solid #b45309;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.71rem;font-weight:800;color:#b45309;margin-bottom:0.25rem;">⚽ Football &amp; Futsal</span>
+        <strong style="font-size:0.83rem;color:#0f172a;line-height:1.35;">ATD Foot/Futsal, 24 Cycles &amp; 240 Fiches (Système 1-2-1) + Grilles (/20) →</strong>
+      </a>
+      <a href="aps-volleyball-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.9rem;background:#ffffff;border:2px solid #1e40af;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.71rem;font-weight:800;color:#1e40af;margin-bottom:0.25rem;">🏐 Volley-Ball</span>
+        <strong style="font-size:0.83rem;color:#0f172a;line-height:1.35;">ATD Volley, 24 Cycles &amp; 240 Fiches (Chaîne R-P-A) + Grilles (/20) →</strong>
+      </a>
+      <a href="aps-basketball-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.9rem;background:#ffffff;border:2px solid #006233;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.71rem;font-weight:800;color:#006233;margin-bottom:0.25rem;">🏀 Basket-Ball à 5</span>
+        <strong style="font-size:0.83rem;color:#0f172a;line-height:1.35;">ATD Basket 5×5, 24 Cycles &amp; 240 Fiches (Pick &amp; Roll) + Grilles (/20) →</strong>
+      </a>
+      <a href="aps-handball-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.9rem;background:#ffffff;border:2px solid #991b1b;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.71rem;font-weight:800;color:#991b1b;margin-bottom:0.25rem;">🤾 Handball</span>
+        <strong style="font-size:0.83rem;color:#0f172a;line-height:1.35;">ATD Handball, 24 Cycles &amp; 240 Fiches (Visionneuse A4) + Grilles (/20) →</strong>
+      </a>
+    </div>
+  </section>
+  <!-- PROFEPS_APS_STUDIO_HUB_BANNER_END -->'''
+            ihtml = ihtml[:s_idx] + updated_banner + ihtml[e_idx:]
+            with open(index_path, "w", encoding="utf-8") as f:
+                f.write(ihtml)
+            shutil.copy2(index_path, os.path.join(ROOT_DIR, "index.html"))
+            print("[INDEX OK] Updated /public/index.html and mirrored to /index.html.")
+
+    # 5. Update /public/sitemap.xml
+    sitemap_path = os.path.join(PUBLIC_DIR, "sitemap.xml")
+    if os.path.exists(sitemap_path):
+        with open(sitemap_path, "r", encoding="utf-8") as f:
+            xml = f.read()
+        loc = "https://profeps.ma/aps-course-vitesse-relais-eps-maroc.html"
+        if loc not in xml:
+            entry = f'''  <url>
+    <loc>{loc}</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>'''
+            xml = xml.replace("</urlset>", entry + "\n</urlset>")
+            with open(sitemap_path, "w", encoding="utf-8") as f:
+                f.write(xml)
+            print("[SITEMAP OK] Added aps-course-vitesse-relais-eps-maroc.html to /public/sitemap.xml.")
+
+
+if __name__ == "__main__":
+    create_vitesse_relais_silo_page()
+    update_hub_silos_blog_index_sitemap()
+    print("=== SILO COMPLET COURSE DE VITESSE & RELAIS GENERATED SUCCESSFULLY ===")

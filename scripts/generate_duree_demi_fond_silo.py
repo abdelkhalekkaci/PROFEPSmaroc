@@ -1,0 +1,2597 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Generates:
+1. /public/aps-course-duree-demi-fond-eps-maroc.html (Silo Complet Course de Durée / Demi-Fond & VMA : Intro + Studio Interactif 6 Niveaux Scolaires x 4 Niveaux de Pratique avec Visionneuse A4 Pro & Export Word/PDF + Calculateur VMA & Temps de Passage par Plots intégré en direct + Hub des 8 Calculateurs Scientifiques + ATD + Barèmes 1000m/800m/600m & Grilles /20 + Terrain/Règlement World Athletics + Articles liés)
+2. Updates /public/hub-aps-sports-eps-maroc.html, the 6 existing APS silos, /public/blog.html, /public/index.html, /index.html, and /public/sitemap.xml.
+Strictly preserves /public/generateur.html untouched.
+"""
+
+import os
+import shutil
+
+ROOT_DIR = "/app/applet"
+PUBLIC_DIR = os.path.join(ROOT_DIR, "public")
+
+
+def get_unified_navbar_html(current_file: str) -> str:
+    with open(os.path.join(PUBLIC_DIR, "aps-handball-eps-maroc.html"), "r", encoding="utf-8") as f:
+        content = f.read()
+    start_marker = "<!-- PROFEPS_UNIFIED_NAVBAR_START -->"
+    end_marker = "<!-- PROFEPS_UNIFIED_NAVBAR_END -->"
+    s_idx = content.find(start_marker)
+    e_idx = content.find(end_marker) + len(end_marker)
+    nav_block = content[s_idx:e_idx]
+    nav_block = nav_block.replace('data-current-file="aps-handball-eps-maroc.html"', f'data-current-file="{current_file}"')
+    return nav_block
+
+
+def create_duree_demi_fond_silo_page():
+    navbar_html = get_unified_navbar_html("aps-course-duree-demi-fond-eps-maroc.html")
+
+    html = f'''<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course de Durée &amp; Demi-Fond en EPS au Maroc (1AC à 2Bac) : Calculateur VMA, ATD, Cycles, Fiches (Word/PDF), Barèmes 1000m/800m/600m &amp; Grilles | ProfEPS</title>
+    <meta name="description" content="Page spéciale Course de Durée, Demi-Fond &amp; VMA en EPS au Maroc (OP 2009 Collège &amp; OP 2007 Lycée) : Calculateur VMA &amp; plots intégré, ATD complet, Studio des 24 Cycles et 240 Fiches (1AC à 2Bac × 4 niveaux) en Word/PDF, Barèmes 1000m/800m/600m et Grilles /20.">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="ProfEPS Maroc">
+    <meta property="og:title" content="Course de Durée, Demi-Fond &amp; VMA en EPS au Maroc (1AC à 2Bac) : Calculateur VMA, Studio Cycles &amp; Fiches PDF/Word + Barèmes /20">
+    <meta property="og:description" content="Silo complet Course de Durée &amp; Demi-Fond pour l'EPS au Maroc : Calculateur VMA &amp; temps de passage par plots, ATD, 6 niveaux scolaires × 4 niveaux de pratique (Word/PDF), barèmes 1000m/800m/600m et grilles (/20).">
+    <meta property="og:url" content="https://profeps.ma/aps-course-duree-demi-fond-eps-maroc.html">
+    <meta property="og:image" content="https://profeps.ma/images/prof_eps.png">
+    <meta property="og:locale" content="fr_MA">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Course de Durée &amp; Demi-Fond EPS Maroc : Calculateur VMA, Studio Cycles &amp; Fiches (1AC-2Bac), ATD &amp; Barèmes">
+    <meta name="twitter:description" content="Tous les cycles et fiches pédagogiques de Course de Durée &amp; Demi-Fond du 1AC au 2Bac (4 niveaux), calculateur VMA &amp; plots intégré, ATD et barèmes 1000m/800m/600m en Word et PDF.">
+    <meta name="twitter:image" content="https://profeps.ma/images/prof_eps.png">
+    <link rel="canonical" href="https://profeps.ma/aps-course-duree-demi-fond-eps-maroc.html">
+    <link rel="alternate" hreflang="fr-MA" href="https://profeps.ma/aps-course-duree-demi-fond-eps-maroc.html">
+    <link rel="alternate" hreflang="x-default" href="https://profeps.ma/aps-course-duree-demi-fond-eps-maroc.html">
+    <link rel="icon" type="image/png" href="/images/prof_eps.png">
+
+    <!-- Google tag (gtag.js) & Consent Mode v2 ProfEPS.ma -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      try {{
+        var saved = JSON.parse(localStorage.getItem("profeps_cookie_consent_v2") || "null");
+        if (saved) {{
+          gtag("consent", "default", {{
+            "ad_storage": saved.ads ? "granted" : "denied",
+            "ad_user_data": saved.ads ? "granted" : "denied",
+            "ad_personalization": saved.ads ? "granted" : "denied",
+            "analytics_storage": saved.analytics ? "granted" : "denied"
+          }});
+        }} else {{
+          gtag("consent", "default", {{
+            "ad_storage": "granted",
+            "ad_user_data": "granted",
+            "ad_personalization": "granted",
+            "analytics_storage": "granted"
+          }});
+          gtag("consent", "default", {{
+            "ad_storage": "denied",
+            "ad_user_data": "denied",
+            "ad_personalization": "denied",
+            "analytics_storage": "denied",
+            "region": ["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IS","IE","IT","LV","LI","LT","LU","MT","NL","NO","PL","PT","RO","SK","SI","ES","SE","GB","CH"],
+            "wait_for_update": 500
+          }});
+        }}
+      }} catch (e) {{}}
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TH0Z1SGNXH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      gtag('js', new Date());
+      gtag('config', 'G-TH0Z1SGNXH');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8253776880916865" crossorigin="anonymous"></script>
+    <script src="profeps-cmp.js" defer></script>
+    <link rel="stylesheet" href="/css/profeps-unifier.min.css?v=20261101">
+
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Course de Durée, Demi-Fond & VMA en EPS au Maroc (1AC à 2Bac) : Calculateur VMA, ATD, Studio des Cycles & Fiches Pédagogiques (Word/PDF), Barèmes 1000m/800m/600m & Grilles (/20)",
+      "description": "Silo disciplinaire complet dédié à la Course de Durée, au Demi-Fond (600m, 800m, 1000m) et à la VMA en EPS au Maroc (OP 2009 & OP 2007) : Calculateur VMA et temps de passage par plots intégré, Analyse et Traitement Didactique (ATD), Studio interactif avec visionneuse A4 pro pour 6 niveaux scolaires × 4 niveaux de pratique, barèmes chiffrés et grilles d'évaluation.",
+      "inLanguage": "fr-MA",
+      "author": {{
+        "@type": "Person",
+        "name": "Abdelkhalek ELBOUDANI",
+        "jobTitle": "Professeur d'Éducation Physique et Sportive (EPS)",
+        "url": "https://profeps.ma/a-propos.html"
+      }},
+      "publisher": {{
+        "@id": "https://profeps.ma/#organization"
+      }},
+      "datePublished": "2026-11-04",
+      "dateModified": "2026-11-04",
+      "mainEntityOfPage": {{
+        "@type": "WebPage",
+        "@id": "https://profeps.ma/aps-course-duree-demi-fond-eps-maroc.html"
+      }}
+    }}
+    </script>
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {{"@type": "ListItem", "position": 1, "name": "Accueil ProfEPS", "item": "https://profeps.ma/"}},
+        {{"@type": "ListItem", "position": 2, "name": "Hub Central des APS & Sports", "item": "https://profeps.ma/hub-aps-sports-eps-maroc.html"}},
+        {{"@type": "ListItem", "position": 3, "name": "Silo Course de Durée & Demi-Fond (Calculateur VMA, Cycles, Fiches & Barèmes)", "item": "https://profeps.ma/aps-course-duree-demi-fond-eps-maroc.html"}}
+      ]
+    }}
+    </script>
+
+    <style>
+        *, *::before, *::after {{ margin: 0; padding: 0; box-sizing: border-box; }}
+        :root {{
+            --primary: #0d9488;
+            --primary-dark: #0f766e;
+            --secondary: #006233;
+            --secondary-dark: #064e3b;
+            --crimson: #991b1b;
+            --accent: #d97706;
+            --slate-950: #020617;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-600: #475569;
+            --slate-500: #64748b;
+            --slate-200: #e2e8f0;
+            --slate-100: #f1f5f9;
+            --slate-50: #f8fafc;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Plus Jakarta Sans', var(--font-sans);
+        }}
+        body {{
+            font-family: var(--font-sans);
+            background: var(--slate-50);
+            color: var(--slate-900);
+            line-height: 1.65;
+        }}
+        a {{ text-decoration: none; color: inherit; }}
+
+        /* HERO & INTRO */
+        .silo-hero {{
+            padding: 125px 1.5rem 2.25rem;
+            background: linear-gradient(135deg, #f0fdfa 0%, #ffffff 50%, #fff1f2 100%);
+            border-bottom: 1px solid var(--slate-200);
+        }}
+        .silo-hero-inner {{
+            max-width: 1220px;
+            margin: 0 auto;
+        }}
+        .breadcrumb-bar {{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--slate-600);
+            margin-bottom: 1rem;
+        }}
+        .breadcrumb-bar a {{ color: var(--primary); }}
+        .breadcrumb-bar a:hover {{ text-decoration: underline; }}
+
+        .hero-top-grid {{
+            display: grid;
+            grid-template-columns: 1.35fr 0.9fr;
+            gap: 1.75rem;
+            align-items: start;
+        }}
+        .silo-badge {{
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.9rem;
+            background: #f0fdfa;
+            border: 1px solid #99f6e4;
+            color: var(--primary-dark);
+            font-size: 0.78rem;
+            font-weight: 800;
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 0.85rem;
+        }}
+        .silo-title {{
+            font-family: var(--font-display);
+            font-size: clamp(1.75rem, 3.3vw, 2.55rem);
+            font-weight: 900;
+            color: var(--slate-900);
+            line-height: 1.2;
+            margin-bottom: 0.85rem;
+        }}
+        .silo-intro-text {{
+            font-size: 0.98rem;
+            color: var(--slate-700);
+            margin-bottom: 1rem;
+        }}
+        .silo-specs-card {{
+            background: #ffffff;
+            border: 1px solid var(--slate-200);
+            border-top: 4px solid var(--primary);
+            border-radius: 14px;
+            padding: 1.25rem;
+            box-shadow: 0 6px 20px rgba(15,23,42,0.05);
+        }}
+        .silo-specs-title {{
+            font-size: 0.9rem;
+            font-weight: 900;
+            color: var(--slate-900);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }}
+        .specs-list {{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem;
+        }}
+        .spec-item {{
+            background: var(--slate-50);
+            border: 1px solid var(--slate-200);
+            border-radius: 8px;
+            padding: 0.55rem 0.7rem;
+        }}
+        .spec-label {{
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--slate-500);
+        }}
+        .spec-val {{
+            font-size: 0.84rem;
+            font-weight: 800;
+            color: var(--slate-900);
+        }}
+
+        /* STICKY VOLETS NAVIGATION */
+        .volets-sticky-bar {{
+            position: sticky;
+            top: 72px;
+            z-index: 40;
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--slate-200);
+            box-shadow: 0 4px 12px rgba(15,23,42,0.04);
+        }}
+        .volets-nav-inner {{
+            max-width: 1220px;
+            margin: 0 auto;
+            padding: 0.65rem 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+            justify-content: space-between;
+        }}
+        .volets-tabs {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.42rem;
+        }}
+        .volet-tab-btn {{
+            padding: 0.52rem 0.88rem;
+            border-radius: 9px;
+            border: 1px solid var(--slate-200);
+            background: var(--slate-50);
+            color: var(--slate-800);
+            font-size: 0.82rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }}
+        .volet-tab-btn:hover {{
+            border-color: var(--primary);
+            color: var(--primary);
+            background: #f0fdfa;
+        }}
+        .volet-tab-btn.active {{
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            box-shadow: 0 3px 10px rgba(13,148,136,0.25);
+        }}
+
+        /* MAIN CONTAINER & VOLETS */
+        .silo-main {{
+            max-width: 1220px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }}
+        .volet-panel {{
+            display: none;
+            animation: fadeIn 0.22s ease;
+        }}
+        .volet-panel.active {{
+            display: block;
+        }}
+        @keyframes fadeIn {{
+            from {{ opacity: 0; transform: translateY(4px); }}
+            to {{ opacity: 1; transform: translateY(0); }}
+        }}
+
+        /* STUDIO INTERACTIF (VOLET 1) */
+        .studio-shell {{
+            background: #ffffff;
+            border: 1px solid var(--slate-200);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 28px rgba(15,23,42,0.06);
+        }}
+        .studio-header {{
+            padding: 1.35rem 1.6rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #ffffff;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }}
+        .studio-header h2 {{
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin: 0;
+        }}
+        .studio-header p {{
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            margin: 0.2rem 0 0;
+        }}
+
+        /* STEP 1 : 6 SCHOOL LEVELS BAR */
+        .school-levels-bar {{
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            background: var(--slate-100);
+            border-bottom: 1px solid var(--slate-200);
+        }}
+        .school-lvl-btn {{
+            padding: 0.7rem 0.6rem;
+            background: #ffffff;
+            border: 2px solid var(--slate-200);
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.18s;
+        }}
+        .school-lvl-btn:hover {{
+            border-color: var(--primary);
+        }}
+        .school-lvl-btn.active {{
+            background: #f0fdfa;
+            border-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(13,148,136,0.12);
+        }}
+        .school-lvl-code {{
+            display: block;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 900;
+            color: var(--slate-900);
+        }}
+        .school-lvl-btn.active .school-lvl-code {{
+            color: var(--primary-dark);
+        }}
+        .school-lvl-ref {{
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--slate-500);
+        }}
+
+        /* STEP 2 : 4 PRACTICE LEVELS BAR */
+        .practice-levels-bar {{
+            padding: 1rem 1.5rem;
+            background: #ffffff;
+            border-bottom: 1px solid var(--slate-200);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }}
+        .practice-pills {{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.55rem;
+            flex: 1 1 640px;
+        }}
+        .practice-btn {{
+            padding: 0.65rem 0.75rem;
+            border-radius: 9px;
+            border: 1.5px solid var(--slate-200);
+            background: var(--slate-50);
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.18s;
+        }}
+        .practice-btn:hover {{
+            border-color: var(--secondary);
+        }}
+        .practice-btn.active {{
+            background: #f0fdf4;
+            border-color: var(--secondary);
+            box-shadow: 0 2px 8px rgba(0,98,51,0.12);
+        }}
+        .practice-btn-top {{
+            display: block;
+            font-size: 0.74rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--secondary);
+        }}
+        .practice-btn-name {{
+            display: block;
+            font-size: 0.86rem;
+            font-weight: 800;
+            color: var(--slate-900);
+        }}
+
+        /* STEP 3 : DOCUMENT MODE SWITCH + EXPORT ACTION BAR */
+        .studio-toolbar {{
+            padding: 1rem 1.5rem;
+            background: #f8fafc;
+            border-bottom: 1px solid var(--slate-200);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }}
+        .doc-mode-switch {{
+            display: inline-flex;
+            background: #e2e8f0;
+            padding: 0.25rem;
+            border-radius: 10px;
+            gap: 0.25rem;
+        }}
+        .doc-mode-btn {{
+            padding: 0.5rem 0.95rem;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            color: var(--slate-700);
+            font-size: 0.83rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.15s;
+        }}
+        .doc-mode-btn.active {{
+            background: #ffffff;
+            color: var(--slate-900);
+            box-shadow: 0 1px 4px rgba(15,23,42,0.12);
+        }}
+        .export-actions-group {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }}
+        .export-btn {{
+            padding: 0.55rem 0.9rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            cursor: pointer;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.18s;
+        }}
+        .export-word-cycle {{
+            background: #eff6ff;
+            color: #1e40af;
+            border-color: #bfdbfe;
+        }}
+        .export-word-cycle:hover {{ background: #1e40af; color: #ffffff; }}
+        .export-pdf-cycle {{
+            background: #f0fdfa;
+            color: #0f766e;
+            border-color: #99f6e4;
+        }}
+        .export-pdf-cycle:hover {{ background: #0f766e; color: #ffffff; }}
+        .export-word-fiches {{
+            background: #ecfdf5;
+            color: #065f46;
+            border-color: #a7f3d0;
+        }}
+        .export-word-fiches:hover {{ background: #065f46; color: #ffffff; }}
+        .export-pdf-fiches {{
+            background: #0f172a;
+            color: #ffffff;
+            border-color: #0f172a;
+        }}
+        .export-pdf-fiches:hover {{ background: #334155; }}
+
+        /* SESSION SELECTOR BAR (FOR FICHES VIEW) */
+        .session-selector-bar {{
+            padding: 0.75rem 1.5rem;
+            background: #ffffff;
+            border-bottom: 1px solid var(--slate-200);
+            display: none;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.4rem;
+        }}
+        .session-selector-bar.visible {{
+            display: flex;
+        }}
+        .sess-pill {{
+            padding: 0.35rem 0.7rem;
+            border-radius: 7px;
+            border: 1px solid var(--slate-200);
+            background: var(--slate-50);
+            font-size: 0.78rem;
+            font-weight: 800;
+            color: var(--slate-700);
+            cursor: pointer;
+        }}
+        .sess-pill:hover {{ border-color: var(--primary); color: var(--primary); }}
+        .sess-pill.active {{
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }}
+
+        /* A4 PRO DOCUMENT VIEWER */
+        .a4-viewer-stage {{
+            background: #cbd5e1;
+            padding: 1.75rem 1.25rem;
+            max-height: 820px;
+            overflow-y: auto;
+        }}
+        .a4-sheet {{
+            max-width: 920px;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 1px solid #94a3b8;
+            box-shadow: 0 12px 32px rgba(15,23,42,0.18);
+            padding: 2.2rem 2.4rem;
+            color: #0f172a;
+            font-size: 0.9rem;
+            line-height: 1.55;
+        }}
+        .a4-official-Banner {{
+            border: 2px solid #0f172a;
+            padding: 0.85rem 1.1rem;
+            margin-bottom: 1.25rem;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 1rem;
+            background: #f8fafc;
+        }}
+        .a4-banner-left, .a4-banner-right {{
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #1e293b;
+            line-height: 1.4;
+        }}
+        .a4-banner-right {{ text-align: right; }}
+        .a4-banner-center {{
+            text-align: center;
+            padding: 0 1rem;
+            border-left: 1px solid #cbd5e1;
+            border-right: 1px solid #cbd5e1;
+        }}
+        .a4-doc-type {{
+            font-size: 0.72rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--primary-dark);
+        }}
+        .a4-doc-title {{
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: #0f172a;
+            margin-top: 0.15rem;
+        }}
+        .a4-meta-grid {{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 1px solid #0f172a;
+            margin-bottom: 1.15rem;
+            background: #ffffff;
+        }}
+        .a4-meta-cell {{
+            padding: 0.5rem 0.7rem;
+            border-right: 1px solid #cbd5e1;
+            font-size: 0.78rem;
+        }}
+        .a4-meta-cell:last-child {{ border-right: none; }}
+        .a4-meta-cell strong {{
+            display: block;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            color: #475569;
+        }}
+        .a4-pedago-box {{
+            border: 1px solid #0f172a;
+            padding: 0.8rem 1rem;
+            margin-bottom: 1.15rem;
+            background: #f0fdfa;
+        }}
+        .a4-pedago-box p {{
+            margin-bottom: 0.35rem;
+            font-size: 0.84rem;
+        }}
+        .a4-pedago-box p:last-child {{ margin-bottom: 0; }}
+        .a4-table {{
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.75rem;
+            font-size: 0.82rem;
+        }}
+        .a4-table th {{
+            background: #0f172a;
+            color: #ffffff;
+            padding: 0.55rem 0.65rem;
+            border: 1px solid #0f172a;
+            text-align: left;
+            font-weight: 800;
+        }}
+        .a4-table td {{
+            padding: 0.55rem 0.65rem;
+            border: 1px solid #64748b;
+            vertical-align: top;
+            color: #0f172a;
+        }}
+        .a4-table tr:nth-child(even) td {{
+            background: #f8fafc;
+        }}
+        .fiche-block {{
+            border: 2px solid #0f172a;
+            margin-bottom: 1.75rem;
+            page-break-inside: avoid;
+            background: #ffffff;
+        }}
+        .fiche-header-bar {{
+            background: #0f172a;
+            color: #ffffff;
+            padding: 0.6rem 0.95rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 800;
+            font-size: 0.88rem;
+        }}
+
+        /* IN-PAGE CALCULATOR STUDIO (VOLET 2) */
+        .calc-controls-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1rem;
+            padding: 1.25rem 1.5rem;
+            background: #f8fafc;
+            border-bottom: 1px solid var(--slate-200);
+        }}
+        .calc-field label {{
+            display: block;
+            font-size: 0.76rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--slate-700);
+            margin-bottom: 0.35rem;
+        }}
+        .calc-field input, .calc-field select {{
+            width: 100%;
+            padding: 0.6rem 0.75rem;
+            border: 1.5px solid var(--slate-200);
+            border-radius: 9px;
+            font-size: 0.92rem;
+            font-weight: 800;
+            color: var(--slate-900);
+            background: #ffffff;
+        }}
+        .calc-field input:focus, .calc-field select:focus {{
+            outline: none;
+            border-color: var(--primary);
+        }}
+        .calc-kpi-strip {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+            gap: 0.85rem;
+            padding: 1.25rem 1.5rem;
+            background: #ffffff;
+            border-bottom: 1px solid var(--slate-200);
+        }}
+        .calc-kpi-card {{
+            background: var(--slate-50);
+            border: 1px solid var(--slate-200);
+            border-left: 4px solid var(--primary);
+            border-radius: 10px;
+            padding: 0.75rem 0.95rem;
+        }}
+        .calc-kpi-label {{
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--slate-500);
+        }}
+        .calc-kpi-value {{
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--slate-900);
+        }}
+        .calc-kpi-sub {{
+            display: block;
+            font-size: 0.74rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }}
+
+        /* CONTENT CARDS */
+        .content-panel-card {{
+            background: #ffffff;
+            border: 1px solid var(--slate-200);
+            border-radius: 16px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 14px rgba(15,23,42,0.04);
+        }}
+        .content-panel-card h2 {{
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 900;
+            color: var(--slate-900);
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary);
+        }}
+        .content-panel-card h3 {{
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin: 1.35rem 0 0.55rem;
+        }}
+        .two-col-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.15rem;
+            margin: 1rem 0;
+        }}
+        .info-callout {{
+            background: #f8fafc;
+            border: 1px solid var(--slate-200);
+            border-left: 4px solid var(--secondary);
+            border-radius: 10px;
+            padding: 1rem 1.15rem;
+        }}
+        .articles-cards-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            gap: 1.15rem;
+            margin-top: 1.25rem;
+        }}
+        .rel-card {{
+            background: var(--slate-50);
+            border: 1px solid var(--slate-200);
+            border-radius: 14px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.2s;
+        }}
+        .rel-card:hover {{
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            background: #ffffff;
+            box-shadow: 0 8px 20px rgba(15,23,42,0.06);
+        }}
+        .rel-card-kicker {{
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--primary-dark);
+            margin-bottom: 0.35rem;
+        }}
+        .rel-card h3 {{
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin: 0 0 0.5rem;
+            line-height: 1.35;
+        }}
+        .rel-card p {{
+            font-size: 0.84rem;
+            color: var(--slate-600);
+            margin-bottom: 1rem;
+        }}
+        .rel-card-link {{
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: var(--secondary);
+        }}
+
+        @media (max-width: 980px) {{
+            .hero-top-grid {{ grid-template-columns: 1fr; }}
+            .school-levels-bar {{ grid-template-columns: repeat(3, 1fr); }}
+            .practice-pills {{ grid-template-columns: repeat(2, 1fr); }}
+            .a4-meta-grid {{ grid-template-columns: repeat(2, 1fr); }}
+            .a4-official-Banner {{ grid-template-columns: 1fr; text-align: center; }}
+            .a4-banner-right {{ text-align: center; }}
+            .a4-banner-center {{ border: none; padding: 0.35rem 0; }}
+        }}
+        @media (max-width: 560px) {{
+            .school-levels-bar {{ grid-template-columns: repeat(2, 1fr); }}
+            .practice-pills {{ grid-template-columns: 1fr; }}
+            .a4-sheet {{ padding: 1.15rem; }}
+        }}
+    </style>
+</head>
+<body>
+{navbar_html}
+
+    <!-- ====================================================================== -->
+    <!-- TOP HERO : INTRO COURSE DE DURÉE / DEMI-FOND + CALCULATEURS VMA        -->
+    <!-- ====================================================================== -->
+    <header class="silo-hero">
+        <div class="silo-hero-inner">
+            <nav class="breadcrumb-bar" aria-label="Fil d'Ariane">
+                <a href="/">Accueil ProfEPS</a> <span>›</span>
+                <a href="hub-aps-sports-eps-maroc.html">Hub Central des APS &amp; Sports</a> <span>›</span>
+                <span>Silo Course de Durée, Demi-Fond &amp; VMA (Cycles, Fiches, Calculateurs &amp; Barèmes)</span>
+            </nav>
+
+            <div class="hero-top-grid">
+                <div>
+                    <span class="silo-badge">🏃 Silo Disciplinaire Complet · OP 2009 Collège &amp; OP 2007 Lycée · VMA &amp; World Athletics</span>
+                    <h1 class="silo-title">Course de Durée, Demi-Fond &amp; VMA en EPS au Maroc (الجري المطاول ونصف الطويل) : Calculateur VMA, ATD, Studio Cycles &amp; Fiches (1AC → 2Bac) et Barèmes (/20)</h1>
+                    <p class="silo-intro-text">
+                        Activité athlétique bioénergétique de <strong>gestion optimale de ses ressources aérobies et anaérobies lactiques</strong>, la <strong>Course en Durée (Contrat d'allure de 6 à 12 min / Intermittent 30"-30" ou 15"-15")</strong> et le <strong>Demi-Fond Scolaire (600m / 800m Filles &amp; 1000m Garçons au Bac Sport)</strong> visent à développer la <strong>Vitesse Maximale Aérobie (VMA)</strong> et la capacité à maintenir une allure régulière élevée (90% à 110% VMA) sans départ en sprint ni marche d'épuisement.
+                    </p>
+                    <p class="silo-intro-text" style="margin-bottom:0.9rem;">
+                        Cette page spéciale intègre directement un <strong>Studio Calculateur VMA, Temps de Passage par Plots &amp; Groupes d'Allures</strong>, l'<strong>Analyse et le Traitement Didactique (ATD)</strong>, un <strong>Studio Interactif avec Visionneuse A4 Pro</strong> des <strong>24 Projets de Cycles</strong> et <strong>240 Fiches Pédagogiques</strong> (1AC → 2Bac × 4 niveaux) en <strong>Word (.doc)</strong> et <strong>PDF</strong>, ainsi que les <strong>Barèmes Officiels (1000m / 800m / 600m) et Grilles de Régularité (/20)</strong>.
+                    </p>
+                    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+                        <button type="button" onclick="switchDureeVolet('volet-calculateurs')" style="padding:0.5rem 0.9rem;background:#0d9488;color:#fff;border:none;border-radius:8px;font-size:0.8rem;font-weight:800;cursor:pointer;">🧮 Calculateur VMA &amp; Plots (Intégré)</button>
+                        <a href="calculateur-vma.html" style="padding:0.5rem 0.85rem;background:#ffffff;border:1px solid #cbd5e1;border-radius:8px;font-size:0.78rem;font-weight:800;color:#0f172a;">⚡ Calculateur VMA Complet ↗</a>
+                        <a href="calculateur-vdot-asr-endurance.html" style="padding:0.5rem 0.85rem;background:#ffffff;border:1px solid #cbd5e1;border-radius:8px;font-size:0.78rem;font-weight:800;color:#0f172a;">🫁 VO2max &amp; VDOT ↗</a>
+                        <a href="generateur-intermittent-hiit-cod.html" style="padding:0.5rem 0.85rem;background:#ffffff;border:1px solid #cbd5e1;border-radius:8px;font-size:0.78rem;font-weight:800;color:#0f172a;">🔄 Intermittent HIIT &amp; COD ↗</a>
+                    </div>
+                </div>
+
+                <aside class="silo-specs-card" aria-label="Repères officiels Course de Durée et Demi-Fond EPS Maroc">
+                    <div class="silo-specs-title">
+                        <span>📏 Mémento VMA, Demi-Fond &amp; EPS Maroc</span>
+                        <a href="reglement-course-fond-1500m-3000m-5000m-marathon-eps.html" style="font-size:0.75rem;color:var(--primary-dark);text-decoration:underline;">Règlements RT 16-55 →</a>
+                    </div>
+                    <div class="specs-list">
+                        <div class="spec-item">
+                            <span class="spec-label">Épreuves Bac Maroc</span>
+                            <span class="spec-val">1000m (G) · 800m / 600m (F)</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Test Demi-Cooper 6'</span>
+                            <span class="spec-val">VMA (km/h) = Distance (m) / 100</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Départ ≥ 800m (RT 16.3)</span>
+                            <span class="spec-val">Debout · « À vos marques ! » seul</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Allures Cibles EPS</span>
+                            <span class="spec-val">90% à 110% VMA (Écart ≤ 2s/tour)</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Conversion Vitesse</span>
+                            <span class="spec-val">V (m/s) = VMA (km/h) ÷ 3,6</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Barèmes EPS Maroc</span>
+                            <span class="spec-val">Collège 12+3+5 · Lycée 14+3+3</span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </header>
+
+    <!-- ====================================================================== -->
+    <!-- STICKY NAVIGATION BAR FOR THE 6 VOLETS                                 -->
+    <!-- ====================================================================== -->
+    <div class="volets-sticky-bar" role="navigation" aria-label="Navigation des volets du Silo Course de Durée et Demi-Fond">
+        <div class="volets-nav-inner">
+            <div class="volets-tabs">
+                <button type="button" class="volet-tab-btn active" data-volet="volet-studio" onclick="switchDureeVolet('volet-studio')">
+                    ⚡ 1. Studio Cycles &amp; Fiches (1AC → 2Bac)
+                </button>
+                <button type="button" class="volet-tab-btn" data-volet="volet-calculateurs" onclick="switchDureeVolet('volet-calculateurs')">
+                    🧮 2. Calculateur VMA &amp; Plots + 8 Outils
+                </button>
+                <button type="button" class="volet-tab-btn" data-volet="volet-atd" onclick="switchDureeVolet('volet-atd')">
+                    📐 3. ATD Durée &amp; Demi-Fond
+                </button>
+                <button type="button" class="volet-tab-btn" data-volet="volet-grilles" onclick="switchDureeVolet('volet-grilles')">
+                    📊 4. Barèmes (1000m/800m/600m) &amp; Grilles
+                </button>
+                <button type="button" class="volet-tab-btn" data-volet="volet-terrain" onclick="switchDureeVolet('volet-terrain')">
+                    🏟️ 5. Terrain Maroc, Échauffement &amp; Lois
+                </button>
+                <button type="button" class="volet-tab-btn" data-volet="volet-articles" onclick="switchDureeVolet('volet-articles')">
+                    📚 6. Articles &amp; Dossiers VMA Liés
+                </button>
+            </div>
+            <div style="display:flex;gap:0.65rem;align-items:center;">
+                <a href="aps-course-vitesse-relais-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#dc2626;">⚡ Vitesse/Relais</a>
+                <a href="aps-gymnastique-sol-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#7c3aed;">🤸 Gym Sol</a>
+                <a href="aps-football-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#b45309;">⚽ Foot</a>
+                <a href="hub-aps-sports-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#0f766e;">← Toutes les APS</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================================== -->
+    <!-- MAIN CONTENT CONTAINER                                                 -->
+    <!-- ====================================================================== -->
+    <main class="silo-main">
+
+        <!-- ================================================================== -->
+        <!-- VOLET 1 : STUDIO INTERACTIF DES CYCLES & FICHES (1AC -> 2BAC)      -->
+        <!-- ================================================================== -->
+        <section id="volet-studio" class="volet-panel active" aria-label="Studio Interactif des Cycles et Fiches Pédagogiques Course de Durée et Demi-Fond">
+            <div class="studio-shell">
+                <div class="studio-header">
+                    <div>
+                        <h2>⚡ Studio des Cycles &amp; Fiches Pédagogiques Course de Durée &amp; Demi-Fond (Visionneuse A4 Pro avant Téléchargement)</h2>
+                        <p>Étape 1 : Choisissez le niveau scolaire (1AC à 2Bac) · Étape 2 : Choisissez le niveau de pratique (Débutant à Élite) · Étape 3 : Visionnez et téléchargez en Word (.doc) ou PDF.</p>
+                    </div>
+                    <span style="background:rgba(255,255,255,0.14);padding:0.4rem 0.8rem;border-radius:8px;font-size:0.78rem;font-weight:800;color:#99f6e4;">
+                        24 Projets de Cycles · 240 Fiches de Séance
+                    </span>
+                </div>
+
+                <!-- STEP 1 : 6 SCHOOL LEVELS -->
+                <div class="school-levels-bar" role="tablist" aria-label="Niveaux scolaires marocains">
+                    <button type="button" class="school-lvl-btn active" data-level="1AC" onclick="selectDureeSchoolLevel('1AC')">
+                        <span class="school-lvl-code">1ère AC</span>
+                        <span class="school-lvl-ref">OP 2009 · 6 à 8 min / 600m</span>
+                    </button>
+                    <button type="button" class="school-lvl-btn" data-level="2AC" onclick="selectDureeSchoolLevel('2AC')">
+                        <span class="school-lvl-code">2ème AC</span>
+                        <span class="school-lvl-ref">OP 2009 · 8 à 10 min / 600m-800m</span>
+                    </button>
+                    <button type="button" class="school-lvl-btn" data-level="3AC" onclick="selectDureeSchoolLevel('3AC')">
+                        <span class="school-lvl-code">3ème AC</span>
+                        <span class="school-lvl-ref">OP 2009 · Contrat VMA &amp; 600m/1000m</span>
+                    </button>
+                    <button type="button" class="school-lvl-btn" data-level="TC" onclick="selectDureeSchoolLevel('TC')">
+                        <span class="school-lvl-code">Tronc Commun</span>
+                        <span class="school-lvl-ref">OP 2007 · 3×3 min &amp; 600m/1000m</span>
+                    </button>
+                    <button type="button" class="school-lvl-btn" data-level="1BAC" onclick="selectDureeSchoolLevel('1BAC')">
+                        <span class="school-lvl-code">1ère Bac</span>
+                        <span class="school-lvl-ref">OP 2007 · Intermittent &amp; 800m/1000m</span>
+                    </button>
+                    <button type="button" class="school-lvl-btn" data-level="2BAC" onclick="selectDureeSchoolLevel('2BAC')">
+                        <span class="school-lvl-code">2ème Bac</span>
+                        <span class="school-lvl-ref">OP 2007 · Bac 1000m G / 800m-600m F</span>
+                    </button>
+                </div>
+
+                <!-- STEP 2 : 4 PRACTICE LEVELS WITHIN THE SELECTED SCHOOL LEVEL -->
+                <div class="practice-levels-bar">
+                    <div class="practice-pills" role="tablist" aria-label="4 niveaux de pratique en Course de Durée et Demi-Fond">
+                        <button type="button" class="practice-btn active" data-practice="N1" onclick="selectDureePracticeLevel('N1')">
+                            <span class="practice-btn-top">Niveau 1 · Débutant</span>
+                            <span class="practice-btn-name">Départ en sprint &amp; Arrêts marche (VMA &lt; 11 km/h)</span>
+                        </button>
+                        <button type="button" class="practice-btn" data-practice="N2" onclick="selectDureePracticeLevel('N2')">
+                            <span class="practice-btn-top">Niveau 2 · Débrouillé</span>
+                            <span class="practice-btn-name">Course continue sans arrêt &amp; Repères aux plots</span>
+                        </button>
+                        <button type="button" class="practice-btn" data-practice="N3" onclick="selectDureePracticeLevel('N3')">
+                            <span class="practice-btn-top">Niveau 3 · Confirmé</span>
+                            <span class="practice-btn-name">Contrat d'allure 95–105% VMA &amp; Régularité ±2s</span>
+                        </button>
+                        <button type="button" class="practice-btn" data-practice="N4" onclick="selectDureePracticeLevel('N4')">
+                            <span class="practice-btn-top">Niveau 4 · Élite / ASS</span>
+                            <span class="practice-btn-name">Puissance Aérobie 110% VMA, 1000m/800m &amp; Cross</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 3 : MODE SWITCH (CYCLE vs FICHES) + 4 DOWNLOAD BUTTONS -->
+                <div class="studio-toolbar">
+                    <div class="doc-mode-switch" role="tablist" aria-label="Type de document à prévisualiser">
+                        <button type="button" class="doc-mode-btn active" id="btnModeCycle" onclick="selectDureeDocMode('cycle')">
+                            📋 Aperçu du Projet de Cycle (10 Séances)
+                        </button>
+                        <button type="button" class="doc-mode-btn" id="btnModeFiches" onclick="selectDureeDocMode('fiches')">
+                            📄 Aperçu des 10 Fiches Pédagogiques Détaillées
+                        </button>
+                    </div>
+
+                    <div class="export-actions-group">
+                        <button type="button" class="export-btn export-word-cycle" onclick="exportDureeDoc('cycle', 'word')">
+                            📥 Projet de Cycle (.DOC Word)
+                        </button>
+                        <button type="button" class="export-btn export-pdf-cycle" onclick="exportDureeDoc('cycle', 'pdf')">
+                            🖨️ Projet de Cycle (PDF A4)
+                        </button>
+                        <button type="button" class="export-btn export-word-fiches" onclick="exportDureeDoc('fiches', 'word')">
+                            📥 Fiches Pédagogiques (.DOC Word)
+                        </button>
+                        <button type="button" class="export-btn export-pdf-fiches" onclick="exportDureeDoc('fiches', 'pdf')">
+                            🖨️ Fiches Pédagogiques (PDF A4)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- OPTIONAL SESSION FILTER WHEN IN "FICHES" MODE -->
+                <div class="session-selector-bar" id="dureeSessionSelectorBar">
+                    <span style="font-size:0.78rem;font-weight:800;color:var(--slate-700);margin-right:0.35rem;">Afficher :</span>
+                    <button type="button" class="sess-pill active" data-sess="ALL" onclick="selectDureeSessionFilter('ALL')">Toutes les 10 Séances (Cahier Complet)</button>
+                    <button type="button" class="sess-pill" data-sess="0" onclick="selectDureeSessionFilter(0)">S1 (Test Demi-Cooper 6')</button>
+                    <button type="button" class="sess-pill" data-sess="1" onclick="selectDureeSessionFilter(1)">S2</button>
+                    <button type="button" class="sess-pill" data-sess="2" onclick="selectDureeSessionFilter(2)">S3</button>
+                    <button type="button" class="sess-pill" data-sess="3" onclick="selectDureeSessionFilter(3)">S4</button>
+                    <button type="button" class="sess-pill" data-sess="4" onclick="selectDureeSessionFilter(4)">S5</button>
+                    <button type="button" class="sess-pill" data-sess="5" onclick="selectDureeSessionFilter(5)">S6</button>
+                    <button type="button" class="sess-pill" data-sess="6" onclick="selectDureeSessionFilter(6)">S7</button>
+                    <button type="button" class="sess-pill" data-sess="7" onclick="selectDureeSessionFilter(7)">S8</button>
+                    <button type="button" class="sess-pill" data-sess="8" onclick="selectDureeSessionFilter(8)">S9</button>
+                    <button type="button" class="sess-pill" data-sess="9" onclick="selectDureeSessionFilter(9)">S10 (Sommative)</button>
+                </div>
+
+                <!-- A4 PRO PREVIEW STAGE -->
+                <div class="a4-viewer-stage">
+                    <div class="a4-sheet" id="dureeA4PreviewSheet">
+                        <!-- Populated dynamically by JavaScript on load and on tab click -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 2 : CALCULATEUR VMA & PLOTS INTÉGRÉ + 8 CALCULATEURS PROFEPS -->
+        <!-- ================================================================== -->
+        <section id="volet-calculateurs" class="volet-panel" aria-label="Calculateur VMA et Temps de Passage par Plots intégré et Hub des Calculateurs">
+            <div class="studio-shell" style="margin-bottom:1.75rem;">
+                <div class="studio-header">
+                    <div>
+                        <h2>🧮 Calculateur Interactif VMA, Temps de Passage aux Plots &amp; Groupes d'Allures EPS (Intégré)</h2>
+                        <p>Saisissez la distance réalisée au Test Demi-Cooper (6 min) ou la VMA (km/h) pour générer instantanément les temps de passage aux plots (25m, 50m, 100m, tour de piste), les distances en intermittent (15"/15", 30"/30") et la fiche A4 des groupes de niveau VMA.</p>
+                    </div>
+                    <div class="export-actions-group">
+                        <button type="button" class="export-btn export-word-fiches" onclick="exportVMATable('word')">📥 Table des Groupes VMA (.DOC Word)</button>
+                        <button type="button" class="export-btn export-pdf-fiches" onclick="exportVMATable('pdf')">🖨️ Imprimer Table VMA (PDF A4)</button>
+                    </div>
+                </div>
+
+                <!-- INTERACTIVE INPUT CONTROLS -->
+                <div class="calc-controls-grid">
+                    <div class="calc-field">
+                        <label for="inpCooperDist">1. Distance Demi-Cooper 6 min (m)</label>
+                        <input type="number" id="inpCooperDist" value="1300" min="600" max="2200" step="25" oninput="syncFromCooper()">
+                    </div>
+                    <div class="calc-field">
+                        <label for="inpVmaKmh">2. VMA Individuelle (km/h)</label>
+                        <input type="number" id="inpVmaKmh" value="13.0" min="6.0" max="22.0" step="0.25" oninput="syncFromVma()">
+                    </div>
+                    <div class="calc-field">
+                        <label for="selTargetPct">3. Intensité du Contrat (% VMA)</label>
+                        <select id="selTargetPct" onchange="recalcVMAStudio()">
+                            <option value="75">75 % VMA (Échauffement / Footing long)</option>
+                            <option value="85">85 % VMA (Endurance fondamentale / Continu 12')</option>
+                            <option value="90">90 % VMA (Seuil aérobie / Continu 8-10')</option>
+                            <option value="95">95 % VMA (Course en durée 6 min / 3×3 min)</option>
+                            <option value="100" selected>100 % VMA (Puissance Aérobie / Intermittent 30"-30")</option>
+                            <option value="105">105 % VMA (Intermittent 15"-15" / Demi-Fond 1000m)</option>
+                            <option value="110">110 % VMA (Supra-maximal court / 600m-800m Bac)</option>
+                            <option value="115">115 % VMA (Capacité lactique / 400m-600m)</option>
+                        </select>
+                    </div>
+                    <div class="calc-field">
+                        <label for="selTrackLen">4. Longueur de votre Piste / Plateau</label>
+                        <select id="selTrackLen" onchange="recalcVMAStudio()">
+                            <option value="120">Plateau Handball 40×20m (Tour = 120 m)</option>
+                            <option value="150">Plateau Scolaire Moyen (Tour = 150 m)</option>
+                            <option value="200" selected>Piste Scolaire Standard (Tour = 200 m)</option>
+                            <option value="250">Grande Piste Scolaire (Tour = 250 m)</option>
+                            <option value="300">Piste 300 m (Tour = 300 m)</option>
+                            <option value="400">Piste Olympique (Tour = 400 m)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- LIVE KPI RESULTS -->
+                <div class="calc-kpi-strip" id="vmaLiveKpis">
+                    <!-- Populated dynamically by JS -->
+                </div>
+
+                <!-- COMPLETE CLASS VMA GROUPS TABLE (9 to 18 km/h) READY TO PRINT -->
+                <div style="padding:1.25rem 1.5rem;background:#ffffff;" id="vmaPrintableTableWrapper">
+                    <h3 style="margin:0 0 0.5rem;font-size:1.02rem;font-weight:900;color:#0f172a;">📋 Table Officielle des Groupes de Niveau VMA (9 à 18 km/h) pour le Terrain — Prête à Imprimer</h3>
+                    <p style="font-size:0.84rem;color:#475569;margin-bottom:0.75rem;">Cette grille regroupe pour chaque groupe de VMA de votre classe les distances à parcourir en intermittent (<strong>15s</strong>, <strong>30s</strong>, <strong>45s</strong>, <strong>1 min</strong>, <strong>3 min</strong>) et les temps de passage exacts aux plots (<strong>50m</strong>, <strong>100m</strong>, <strong>Tour de piste</strong>) à l'intensité sélectionnée (<strong id="lblSelectedPct">100% VMA</strong>) :</p>
+                    <div class="table-wrap" id="vmaClassGroupsTableContainer">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- HUB OF ALL 8 SCIENTIFIC CALCULATORS ON PROFEPS -->
+            <div class="content-panel-card">
+                <h2>🧭 Suite Complète des 8 Calculateurs Physiologiques &amp; Outils Course de Durée sur ProfEPS.ma</h2>
+                <p>Pour aller plus loin dans la programmation scientifique de vos cycles d'endurance, d'intermittent et d'entraînement ASS, ouvrez nos calculateurs spécialisés :</p>
+
+                <div class="articles-cards-grid">
+                    <article class="rel-card" style="border-color:#0d9488;border-width:2px;">
+                        <div>
+                            <div class="rel-card-kicker">Calculateur N°1 · VMA &amp; Allures EPS</div>
+                            <h3>⚡ Calculateur VMA Complet &amp; Temps de Passage par Plots (Demi-Cooper, Luc Léger, Vameval)</h3>
+                            <p>Convertissez n'importe quel test VMA en allures cibles personnalisées de 60% à 120% VMA avec export PDF/Excel pour vos groupes de niveau.</p>
+                        </div>
+                        <a href="calculateur-vma.html" class="rel-card-link">Ouvrir le Calculateur VMA Complet →</a>
+                    </article>
+
+                    <article class="rel-card" style="border-color:#006233;border-width:2px;">
+                        <div>
+                            <div class="rel-card-kicker">Calculateur N°2 · Intermittent &amp; COD</div>
+                            <h3>🔄 Générateur de Séances Intermittentes HIIT (15"/15", 30"/30") &amp; Pénalité COD 180° (Aller-Retour)</h3>
+                            <p>Calcule les distances exactes de plots pour le travail intermittent en ligne droite ou en navette aller-retour (avec correction biomécanique du demi-tour 180°).</p>
+                        </div>
+                        <a href="generateur-intermittent-hiit-cod.html" class="rel-card-link">Ouvrir le Générateur Intermittent HIIT →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Calculateur N°3 · VO2max &amp; Jack Daniels</div>
+                            <h3>🫁 Calculateur VO2 Max, VDOT (Jack Daniels) &amp; Prédiction de Temps de Course</h3>
+                            <p>Estimez la consommation maximale d'oxygène (\(VO_2max\)) et prédisez les chronos sur 800m, 1000m, 1500m, 3000m et 5000m.</p>
+                        </div>
+                        <a href="calculateur-vdot-asr-endurance.html" class="rel-card-link">Ouvrir le Calculateur VO2max &amp; VDOT →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Calculateur N°4 · Modèle Péronnet-Thibault</div>
+                            <h3>📈 Calculateur d'Indice d'Endurance Aérobie (Modèle de Péronnet &amp; Thibault)</h3>
+                            <p>Évaluez la capacité d'un élève ou athlète ASS à soutenir un haut pourcentage de sa VMA dans la durée.</p>
+                        </div>
+                        <a href="calculateur-indice-endurance.html" class="rel-card-link">Ouvrir le Calculateur Indice d'Endurance →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Calculateur N°5 · Réserve de Vitesse (ASR)</div>
+                            <h3>🚀 Calculateur de Réserve de Vitesse Anaérobie (ASR = Vmax Sprint − VMA)</h3>
+                            <p>Outil indispensable pour le demi-fond court (600m, 800m, 1000m Bac) afin d'individualiser les allures supra-maximales (&gt; 100% VMA).</p>
+                        </div>
+                        <a href="calculateur-asr-reserve-vitesse.html" class="rel-card-link">Ouvrir le Calculateur ASR →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Calculateur N°6 · Fréquence Cardiaque</div>
+                            <h3>❤️ Calculateur de Zones de Fréquence Cardiaque de Réserve (Formule de Karvonen)</h3>
+                            <p>Déterminez les 5 zones cardiaques d'entraînement à partir de la FC de repos et de la FC maximale.</p>
+                        </div>
+                        <a href="calculateur-frequence-cardiaque-karvonen.html" class="rel-card-link">Ouvrir le Calculateur Karvonen →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Calculateur N°7 · Chaleur &amp; Altitude Maroc</div>
+                            <h3>☀️ Ajustement des Allures VMA selon la Température, l'Humidité &amp; l'Altitude</h3>
+                            <p>Adaptez en toute sécurité les contrats d'allure lors des séances par forte chaleur (printemps/été au Maroc) ou en altitude (Ifrane, Azrou, Moyen-Atlas).</p>
+                        </div>
+                        <a href="calculateur-chaleur-meteo-altitude.html" class="rel-card-link">Ouvrir le Calculateur Météo &amp; Chaleur →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Calculateur N°8 · Charge RPE Foster</div>
+                            <h3>🛡️ Calculateur de Charge Interne sRPE (Foster) &amp; Ratio Aigu:Chronique (ACWR)</h3>
+                            <p>Quantifiez la charge d'entraînement perçue (Échelle RPE 1–10 × Durée en min) et prévenez le surentraînement.</p>
+                        </div>
+                        <a href="calculateur-charge-rpe-foster-acwr.html" class="rel-card-link">Ouvrir le Calculateur Charge RPE →</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 3 : ATD COURSE DE DURÉE & DEMI-FOND                          -->
+        <!-- ================================================================== -->
+        <section id="volet-atd" class="volet-panel" aria-label="Analyse et Traitement Didactique de la Course de Durée et du Demi-Fond">
+            <div class="content-panel-card">
+                <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:0.75rem;">
+                    <h2 style="margin:0;border:none;padding:0;">📐 Analyse et Traitement Didactique (ATD) — Course de Durée &amp; Demi-Fond</h2>
+                    <div style="display:flex;gap:0.5rem;">
+                        <button type="button" class="export-btn export-word-cycle" onclick="exportDureeATD('word')">📥 Télécharger l'ATD Durée/Demi-Fond (.DOC Word)</button>
+                        <button type="button" class="export-btn export-pdf-cycle" onclick="exportDureeATD('pdf')">🖨️ Imprimer / PDF A4</button>
+                    </div>
+                </div>
+                <p>Synthèse scientifique et didactique complète pour l'épreuve écrite et orale du <strong>concours CRMEF EPS</strong>, l'examen d'aptitude professionnelle et vos cahiers journaliers (OP 2009 &amp; OP 2007).</p>
+
+                <div id="dureeATDExportableContent">
+                    <h3>1. Définition &amp; Logique Interne de l'APS (Course en Durée &amp; Demi-Fond)</h3>
+                    <div class="info-callout">
+                        <p style="margin-bottom:0.5rem;"><strong>Définition didactique :</strong> La Course en Durée et le Demi-Fond (600m, 800m, 1000m, 1500m) sont des activités athlétiques psychomotrices à dominante <strong>bioénergétique</strong> consistant à soutenir une vitesse de déplacement élevée et régulière sur une durée de <strong>2 à 15 minutes</strong> en mobilisant principalement le <strong>système aérobie (Puissance Aérobie Maximale — PAM / VMA et Capacité Aérobie)</strong> complété, en demi-fond court (600m/800m/1000m), par la <strong>capacité anaérobie lactique</strong>.</p>
+                        <p style="margin:0;"><strong>Enjeu didactique central en EPS :</strong> Passer d'une motricité émotionnelle de « tout ou rien » (partir en sprint les 150 premiers mètres puis s'arrêter en marchant épuisé) à une <strong>motricité autorégulée par projet d'allure (% de sa propre VMA)</strong> en mettant en relation des <strong>repères externes</strong> (plots tous les 25m/50m, coups de sifflet) et des <strong>repères internes</strong> (rythme ventilatoire, fréquence cardiaque, échelle RPE de Borg).</p>
+                    </div>
+
+                    <h3>2. Problèmes Fondamentaux de la Course de Durée et du Demi-Fond</h3>
+                    <div class="two-col-grid">
+                        <div class="info-callout" style="border-left-color:var(--primary);">
+                            <strong style="color:var(--primary-dark);display:block;margin-bottom:0.3rem;">1. Dissocier sa Propre Allure de celle du Groupe (Refuser le Départ en Sprint)</strong>
+                            Accepter de courir à son propre pourcentage de VMA dès les 100 premiers mètres sans se laisser entraîner par le départ euphorique des camarades plus rapides, afin de ne pas accumuler une dette lactique précoce.
+                        </div>
+                        <div class="info-callout" style="border-left-color:var(--secondary);">
+                            <strong style="color:var(--secondary);display:block;margin-bottom:0.3rem;">2. Maintenir une Régularité Temporelle Stricte (Écart Inter-Tours ≤ 2s)</strong>
+                            Ajuster finement sa foulée entre les plots pour que chaque tour de piste (ou chaque fraction de 100m/200m) soit parcouru exactement dans le même temps cible.
+                        </div>
+                        <div class="info-callout" style="border-left-color:var(--primary);">
+                            <strong style="color:var(--primary-dark);display:block;margin-bottom:0.3rem;">3. Construire une Foulée Économique et un Rythme Respiratoire Continu</strong>
+                            Éliminer les oscillations verticales parasites (bondissements) et les crispations des épaules au profit d'une foulée rasante souple, synchronisée avec une expiration active profonde (rythme 2-2 ou 3-3).
+                        </div>
+                        <div class="info-callout" style="border-left-color:var(--secondary);">
+                            <strong style="color:var(--secondary);display:block;margin-bottom:0.3rem;">4. Gérer l'Inconfort Physiologique &amp; Mobiliser la Réserve Finale</strong>
+                            Accepter l'élévation de la ventilation et de la fréquence cardiaque à 95%–105% VMA sans s'arrêter marcher, et placer une accélération progressive dans les 150 derniers mètres du 800m/1000m.
+                        </div>
+                    </div>
+
+                    <h3>3. Les Formes de Travail de la VMA en EPS (Continu vs Intermittent Court / Long)</h3>
+                    <div class="table-wrap">
+                        <table class="a4-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:20%;">Modalité Pédagogique</th>
+                                    <th style="width:18%;">Intensité (% VMA)</th>
+                                    <th style="width:28%;">Organisation sur le Terrain (Piste / Plots)</th>
+                                    <th style="width:34%;">Intérêt Physiologique &amp; Didactique en EPS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1. Course Continue Régulée<br>(Contrat de 6 à 12 min)</strong></td>
+                                    <td><strong>80 % à 90 % VMA</strong><br>(Capacité aérobie)</td>
+                                    <td>Plots tous les 25m ou 50m ; coup de sifflet toutes les 10s ou 15s (chaque groupe de VMA doit franchir 1 plot par coup de sifflet).</td>
+                                    <td>Idéal en début de cycle Collège (1AC/2AC) pour stabiliser l'allure, installer l'aisance respiratoire et supprimer la marche.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2. Fractionné Long par Blocs<br>(ex. 3 × 3 min ou 2 × 4 min)</strong></td>
+                                    <td><strong>90 % à 100 % VMA</strong><br>(Seuil / PAM)</td>
+                                    <td>3 séries de 3 minutes avec 2 minutes de récupération active (pendant laquelle le binôme observateur donne son feedback).</td>
+                                    <td>Permet à l'élève de tester 3 contrats d'allure progressifs dans la même séance (ex. 90%, 95%, 100% VMA) et d'apprendre à réguler.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3. Intermittent Court<br>(15s/15s ou 30s/30s)</strong></td>
+                                    <td><strong>100 % à 110 % VMA</strong><br>(Puissance Aérobie Maximale)</td>
+                                    <td>2 séries de 8 à 10 × (30s de course à la cible de son plot VMA / 30s de récupération passive ou marchée).</td>
+                                    <td><strong>Format roi en EPS (3AC et Lycée) :</strong> permet de passer beaucoup de temps à 100–110% de \(VO_2max\) avec une faible accumulation lactique (grâce à la myoglobine rechargée pendant les 15s/30s de repos) et motive fortement tous les élèves !</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>4. Épreuve de Demi-Fond Bac<br>(1000m G / 800m ou 600m F)</strong></td>
+                                    <td><strong>100 % à 112 % VMA</strong><br>(PAM + Capacité lactique)</td>
+                                    <td>Course de 2,5 tours (1000m) ou 2 tours (800m) avec temps de passage annoncés tous les 200m pour garantir un écart inter-tours ≤ 2 secondes.</td>
+                                    <td>Préparation spécifique à l'évaluation sommative du Baccalauréat EPS et aux compétitions ASS sur piste.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>4. Tableau de Remédiation des Défauts Fréquents en Course de Durée Scolaire</h3>
+                    <div class="table-wrap">
+                        <table class="a4-table">
+                            <thead>
+                                <tr>
+                                    <th>Profil d'Élève</th>
+                                    <th>Défaut Observé sur la Piste</th>
+                                    <th>Cause Physiologique / Cognitive</th>
+                                    <th>Remédiation Didactique Immédiate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Le « Sprinter-Marcheur »</strong></td>
+                                    <td>Part à fond lors des 200 premiers mètres pour être en tête, puis s'arrête en marchant dès la 2ème minute en se tenant les côtes.</td>
+                                    <td>Représentation erronée de la course de durée (confondue avec un sprint) et glycolyse anaérobie massive dès la 1ère minute.</td>
+                                    <td><strong>Pénaliser l'avance autant que le retard :</strong> en contrat d'allure aux plots, interdire de dépasser son plot avant le coup de sifflet (tout élève qui a plus d'1 plot d'avance au 1er tour perd les points de régularité).</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Le « Bondissant Crispé »</strong></td>
+                                    <td>Foulée très haute verticalement, épaules remontées aux oreilles, respiration bloquée bouche fermée.</td>
+                                    <td>Coût énergétique mécanique excessif et hypoventilation.</td>
+                                    <td>Consigne de « course rasante silencieuse » (glisser au ras du sol sans faire de bruit avec les pieds), bras relâchés bas et expiration soufflée bruyamment par la bouche tous les 3 appuis.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Le « Suiveur Décentré »</strong></td>
+                                    <td>Copie la vitesse de son meilleur ami (qui a 3 km/h de VMA de plus ou de moins que lui) et échoue à son contrat.</td>
+                                    <td>Dépendance affective au pair et méconnaissance de sa propre VMA.</td>
+                                    <td>Constituer des <strong>couloirs/vagues par groupes de VMA homogènes</strong> (chasubles de couleur par tranche de 1 km/h de VMA) et associer les deux amis en binôme <em>Coureur Vague 1 / Observateur Vague 2</em>.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 4 : BARÈMES (1000M/800M/600M) & GRILLES D'ÉVALUATION (/20)   -->
+        <!-- ================================================================== -->
+        <section id="volet-grilles" class="volet-panel" aria-label="Barèmes Officiels 1000m 800m 600m et Grilles d'Évaluation Course de Durée">
+            <div class="studio-shell">
+                <div class="studio-header">
+                    <div>
+                        <h2>📊 Barèmes Officiels Chiffrés (1000m Garçons · 800m &amp; 600m Filles) &amp; Grilles de Régularité (/20)</h2>
+                        <p>Sélectionnez l'une des 4 grilles ci-dessous pour la visualiser au format A4 officiel et la télécharger en Word (.doc) ou PDF.</p>
+                    </div>
+                    <div class="export-actions-group">
+                        <button type="button" class="export-btn export-word-fiches" onclick="exportDureeGrid('word')">📥 Télécharger la Grille (.DOC Word)</button>
+                        <button type="button" class="export-btn export-pdf-fiches" onclick="exportDureeGrid('pdf')">🖨️ Imprimer / PDF A4</button>
+                    </div>
+                </div>
+
+                <div class="practice-levels-bar">
+                    <div class="practice-pills" role="tablist" aria-label="Choix de la grille Course de Durée et Demi-Fond">
+                        <button type="button" class="practice-btn active" data-grid="G1" onclick="selectDureeGrid('G1')">
+                            <span class="practice-btn-top">Grille 1 · Test VMA &amp; Régularité</span>
+                            <span class="practice-btn-name">Fiche Demi-Cooper 6 min &amp; Suivi Inter-Tours (±2s)</span>
+                        </button>
+                        <button type="button" class="practice-btn" data-grid="G2" onclick="selectDureeGrid('G2')">
+                            <span class="practice-btn-top">Grille 2 · Collège OP 2009</span>
+                            <span class="practice-btn-name">Évaluation Sommative 1AC-2AC-3AC (12+3+5 = /20)</span>
+                        </button>
+                        <button type="button" class="practice-btn" data-grid="G3" onclick="selectDureeGrid('G3')">
+                            <span class="practice-btn-top">Grille 3 · Lycée &amp; Bac OP 2007</span>
+                            <span class="practice-btn-name">Barème Officiel 1000m G / 800m-600m F (14+3+3 = /20)</span>
+                        </button>
+                        <button type="button" class="practice-btn" data-grid="G4" onclick="selectDureeGrid('G4')">
+                            <span class="practice-btn-top">Grille 4 · Élève Dispensé / Officiel</span>
+                            <span class="practice-btn-name">Grille Chronométreur VMA, Signaux &amp; Tours (/20)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="a4-viewer-stage">
+                    <div class="a4-sheet" id="dureeGridA4Container">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 5 : TERRAIN MAROC, ÉCHAUFFEMENT & RÈGLEMENT WORLD ATHLETICS  -->
+        <!-- ================================================================== -->
+        <section id="volet-terrain" class="volet-panel" aria-label="Gestion des Grands Effectifs, Échauffement et Règlement Demi-Fond">
+            <div class="content-panel-card">
+                <h2>🏟️ Réalité du Terrain au Maroc : Organisation d'une Classe de 40+ Élèves aux Plots VMA, Chaleur &amp; Règlement World Athletics</h2>
+                <p>Comment organiser une séance de Course en Durée ou de Demi-Fond avec <strong>40 à 44 élèves</strong> sur une piste de 150m/200m (ou autour d'un terrain de sport) de manière ultra-lisible :</p>
+
+                <div class="two-col-grid">
+                    <div class="info-callout" style="border-left-color:var(--primary);">
+                        <strong style="color:var(--primary-dark);display:block;margin-bottom:0.4rem;">🔄 1. Dispositif des 2 Vagues de 20 Élèves avec Plots tous les 25 mètres (Zéro Embouteillage)</strong>
+                        <ul style="padding-left:1.2rem;font-size:0.88rem;color:#334155;">
+                            <li><strong>Balisage universel à 8 plots (sur piste de 200m) :</strong> Placer <strong>8 plots de couleur</strong> espacés de <strong>25 mètres</strong> exactement (0m, 25m, 50m, 75m, 100m, 125m, 150m, 175m). C'est le dispositif le plus simple au Maroc car lors du <strong>Test Demi-Cooper de 6 minutes</strong>, chaque tour = 200m et chaque plot = 25m (ex. 6 tours + 2 plots = 1250m → <strong>VMA = 12,5 km/h</strong> sans aucun calcul complexe !).</li>
+                            <li><strong>Fonctionnement en Binômes (Vague 1 court / Vague 2 observe &amp; chronomètre) :</strong>
+                                <br>• <strong>20 Coureurs sur la piste</strong> répartis par plots de départ selon leur groupe de VMA (Groupes de 10 km/h à 16 km/h) ;
+                                <br>• <strong>20 Observateurs à la corde</strong> munis de la fiche individuelle de leur binôme : ils cochent chaque tour franchi, notent l'écart de régularité (en avance / au plot exact / en retard au coup de sifflet) et interdisent toute triche sur le comptage des tours.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="info-callout" style="border-left-color:var(--secondary);">
+                        <strong style="color:var(--secondary);display:block;margin-bottom:0.4rem;">☀️ 2. Sécurité Physiologique : Chaleur au Maroc, Asthme &amp; Échelle RPE</strong>
+                        <ul style="padding-left:1.2rem;font-size:0.88rem;color:#334155;">
+                            <li><strong>Adaptation thermique (> 28 °C) :</strong> Lorsque la séance a lieu entre 11h et 16h par temps chaud, privilégier l'<strong>intermittent court (15"/15" ou 30"/30")</strong> avec pause hydratation à l'ombre entre les séries plutôt qu'une course continue de 12 minutes en plein soleil, et réduire la cible de <strong>-0,5 à -1,0 km/h de VMA</strong> (voir notre <a href="calculateur-chaleur-meteo-altitude.html" style="color:var(--primary-dark);font-weight:800;text-decoration:underline;">Calculateur Chaleur &amp; Humidité</a>).</li>
+                            <li><strong>Récupération active obligatoire :</strong> Interdire formellement aux élèves de s'asseoir ou de s'allonger immédiatement après l'arrivée d'un 1000m ou d'un test VMA (risque de malaise vagal par chute brutale du retour veineux) : imposer <strong>2 minutes de marche active</strong> en soufflant profondément.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>🔥 Protocole d'Échauffement Spécifique Demi-Fond &amp; VMA (12 minutes)</h3>
+                <ol style="padding-left:1.5rem;font-size:0.9rem;color:#334155;">
+                    <li><strong>Phase 1 — Mise en Train Cardio-Respiratoire Progressive (5 min) :</strong> Footing continu très lent en groupe à <strong>60–65% VMA</strong> (« aisance respiratoire : être capable de parler en courant ») pour activer progressivement le système aérobie et élever la température musculaire.</li>
+                    <li><strong>Phase 2 — Mobilisation Articulaire Dynamique &amp; Éducatifs de Foulée Économique (4 min) :</strong> Mobilisation chevilles/hanches/épaules en marchant, puis sur 30m : éducatifs de pose médio-pied souple, déroulement du pied et relâchement des bras.</li>
+                    <li><strong>Phase 3 — 3 Lignes Droites d'Éveil à l'Allure Cible du Jour (3 min) :</strong> 3 accélérations progressives de 60m à 80m calibrées exactement à l'allure du contrat de la séance (95% à 105% VMA) pour mémoriser le rythme avant le départ.</li>
+                </ol>
+
+                <h3>⚖️ Règles Officielles World Athletics 2026 (Demi-Fond, Fond &amp; Cross — RT 16, 17, 55)</h3>
+                <div class="table-wrap">
+                    <table class="a4-table">
+                        <thead>
+                            <tr>
+                                <th>Règle Officielle World Athletics</th>
+                                <th>Norme Fédérale (800m, 1000m, 1500m, 3000m, Cross)</th>
+                                <th>Application en EPS au Maroc &amp; Concours CRMEF</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Départ Debout &amp; Unique Commandement (RT 16.3)</strong></td>
+                                <td>Pour toutes les courses de distance <strong>supérieure à 400 m</strong> (à partir du 800 m inclus), le départ s'effectue <strong>DEBOUT</strong> (blocks interdits, interdiction de toucher le sol avec les mains) avec <strong>UN SEUL commandement vocal : « À vos marques ! »</strong> suivi du coup de feu (jamais de « Prêts ! »).</td>
+                                <td>Question classique du QCM CRMEF : sur 800m, 1000m et 1500m, il n'y a qu'un seul commandement vocal (<em>« À vos marques ! »</em>) avant le coup de sifflet/pistolet.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Rabattement au 800 m vs Départ en Involute (RT 17.5)</strong></td>
+                                <td>Au <strong>800 m</strong>, les coureurs partent en couloirs décalés pour le 1er virage (100 m) puis se rabattent à la corde après la ligne arquée vert/blanc. Au <strong>1000 m, 1500 m, 3000 m et 5000 m</strong>, le départ se fait en ligne courbe (« en involute ») avec rabattement immédiat à la corde.</td>
+                                <td>En EPS (1000m G / 800m F / 600m F), départ groupé en ligne courbe par séries de 10 à 12 élèves de niveau homogène.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Lice Intérieure &amp; Bousculades (RT 17.2)</strong></td>
+                                <td>Marcher sur ou à l'intérieur de la lice (bordure intérieure de la piste) en virage pour raccourcir la distance entraîne la disqualification. Bousculer ou obstruer volontairement un adversaire est sanctionné.</td>
+                                <td>En EPS : interdiction absolue de couper par l'intérieur des plots de délimitation du tour de piste (tout plot coupé annule le tour).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 6 : CARTES DE TOUS LES ARTICLES & DOSSIERS VMA / DEMI-FOND   -->
+        <!-- ================================================================== -->
+        <section id="volet-articles" class="volet-panel" aria-label="Articles et Dossiers Course de Durée, Demi-Fond et VMA sur ProfEPS">
+            <div class="content-panel-card">
+                <h2>📚 Bibliothèque Complète des Articles &amp; Dossiers Course de Durée, Demi-Fond &amp; VMA sur ProfEPS Maroc</h2>
+                <p>Consultez nos guides méthodologiques sur les tests VMA (Demi-Cooper, Vameval, Luc Léger), la différenciation pédagogique et les règlements World Athletics :</p>
+
+                <div class="articles-cards-grid">
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Guide Didactique Complet · Collège &amp; Lycée</div>
+                            <h3>Cycle Course en Durée en EPS (OP 2009 &amp; OP 2007) : Contrat d'Allure, Zones d'Effort &amp; Grille sur 20</h3>
+                            <p>Comment réconcilier les élèves avec la course de durée grâce au contrat d'allure individualisé, au test de la parole et à l'échelle RPE de Borg.</p>
+                        </div>
+                        <a href="article-course-duree-eps.html" class="rel-card-link">Lire le guide Course de Durée →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Test Terrain N°1 · Demi-Cooper 6 min</div>
+                            <h3>Le Test Demi-Cooper (6 minutes) en EPS : Protocole sur Piste de 200m, Calcul de la VMA &amp; Fiche Élève</h3>
+                            <p>Pourquoi le test de 6 minutes (\(VMA = Distance / 100\)) est le protocole le plus fiable et le plus simple à mettre en place avec 40 élèves au Maroc.</p>
+                        </div>
+                        <a href="article-test-demi-cooper-vma.html" class="rel-card-link">Lire le protocole Demi-Cooper 6 min →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Test Terrain N°2 · Vameval &amp; Luc Léger</div>
+                            <h3>Tests VMA en EPS (Vameval sur Piste vs Navette Luc Léger 20m) : Comparatif, Paliers &amp; Bips Sonores</h3>
+                            <p>Tout savoir sur les tests progressifs par paliers d'une minute (incrément de 0,5 km/h) et la correction de la pénalité de demi-tour en navette 20m.</p>
+                        </div>
+                        <a href="article-test-vameval-vma.html" class="rel-card-link">Lire le dossier Vameval &amp; Luc Léger →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Pédagogie Différenciée · Groupes VMA</div>
+                            <h3>Exploiter la VMA pour Différencier la Course en Durée en EPS : Groupes de Niveau &amp; Plots</h3>
+                            <p>Méthode pas à pas pour transformer les résultats du test VMA en groupes de couleurs homogènes et calculer les temps de passage aux plots.</p>
+                        </div>
+                        <a href="vma-differencier-course-duree-eps.html" class="rel-card-link">Voir la méthode de différenciation VMA →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Physiologie &amp; Modélisation · Péronnet</div>
+                            <h3>Indice d'Endurance de Péronnet &amp; Thibault : Prédire les Temps de Course à partir de la VMA</h3>
+                            <p>Comprendre la relation mathématique entre la VMA, le \(VO_2max\) et le temps limite (\(t_{{lim}}\)) du 800m au marathon.</p>
+                        </div>
+                        <a href="indice-endurance-peronnet-thibault-vma.html" class="rel-card-link">Lire l'article scientifique Péronnet →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Entraînement Moderne · HIIT &amp; COD</div>
+                            <h3>L'Intermittent Court (15"/15", 30"/30") et le Coût Énergétique du Changement de Direction (COD 180°)</h3>
+                            <p>Justification physiologique de l'intermittent court en EPS et calcul de la distance réduite en aller-retour sur plateau de 40m.</p>
+                        </div>
+                        <a href="intermittent-hiit-changement-direction-cod.html" class="rel-card-link">Lire le dossier Intermittent &amp; COD →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Règlement Officiel · World Athletics RT 16-55</div>
+                            <h3>Règlement Demi-Fond (800m, 1000m, 1500m), Fond (3000m, 5000m) &amp; Marathon : Piste, Départ Debout &amp; Jury</h3>
+                            <p>Toutes les règles officielles World Athletics 2026 pour le demi-fond, le fond et le cross-country ASS ainsi que les Q&amp;R du concours CRMEF.</p>
+                        </div>
+                        <a href="reglement-course-fond-1500m-3000m-5000m-marathon-eps.html" class="rel-card-link">Consulter le Règlement Demi-Fond &amp; Fond →</a>
+                    </article>
+
+                    <article class="rel-card">
+                        <div>
+                            <div class="rel-card-kicker">Barèmes Officiels &amp; Bac Libre · OP 2007</div>
+                            <h3>Barèmes du Bac Sport au Maroc : Demi-Fond (1000m Garçons / 800m &amp; 600m Filles), Vitesse, Poids &amp; Longueur</h3>
+                            <p>Tableaux chiffrés officiels sur 20 points et sur 7 points (Produit + Régularité inter-tours) pour le contrôle continu et le Bac Libre.</p>
+                        </div>
+                        <a href="article-baremes-bac-sport-maroc-officiels-libres.html" class="rel-card-link">Voir les Barèmes Officiels 1000m/800m/600m →</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ====================================================================== -->
+    <!-- JAVASCRIPT ENGINE : STUDIO 1AC->2BAC + LIVE VMA CALCULATOR + EXPORTS   -->
+    <!-- ====================================================================== -->
+    <script>
+    (function() {{
+        const SCHOOL_LEVELS = {{
+            "1AC": {{
+                label: "1ère Année Collège (1AC)",
+                ref: "Orientations Pédagogiques Août 2009 (Collège)",
+                oti: "L'élève de la 1ère année doit pouvoir acquérir une motricité correcte lui permettant de s'adapter aux exigences des situations (forme et rythme) et s'intégrer dans le groupe.",
+                otc: "Soutenir un effort continu de 6 à 8 minutes (ou sur 600m) à une allure régulière adaptée à ses capacités (80% à 90% VMA) sans s'arrêter marcher.",
+                bareme: "Habiletés motrices (Performance/% VMA 6 pts + Régularité d'allure 6 pts) : 12 pts · Connaissances : 3 pts · Rôles sociaux (Observateur/Chronométreur) : 5 pts (Total /20)",
+                situationRef: "Course en durée de 6 minutes (ou 2 × 4 min) sur piste balisée de plots tous les 25m avec contrat de régularité au coup de sifflet (écart ≤ 1 plot par tour)."
+            }},
+            "2AC": {{
+                label: "2ème Année Collège (2AC)",
+                ref: "Orientations Pédagogiques Août 2009 (Collège)",
+                oti: "L'élève de la 2ème année doit pouvoir ajuster l'énergie physique et la maîtriser et fournir l'effort et l'orienter pour effectuer des réalisations coordonnées et organisées, et communiquer avec les autres.",
+                otc: "Gérer et répartir son effort sur une course de durée fractionnée (2 × 4 min ou 3 × 3 min à 90–95% VMA) ou sur 600m/800m en maintenant une foulée économique et un rythme respiratoire régulier.",
+                bareme: "Habiletés motrices (Performance/% VMA 6 pts + Régularité d'allure 6 pts) : 12 pts · Connaissances : 3 pts · Rôles sociaux (Observateur/Chronométreur) : 5 pts (Total /20)",
+                situationRef: "Épreuve de contrat d'allure (2 × 4 minutes à 90% et 95% VMA ou 600m/800m chronométré) avec évaluation croisée de la distance parcourue et de la régularité inter-tours."
+            }},
+            "3AC": {{
+                label: "3ème Année Collège (3AC)",
+                ref: "Orientations Pédagogiques Août 2009 (Collège)",
+                oti: "L'élève de la 3ème année doit pouvoir ajuster les éléments de l'acte moteur et l'adapter aux différentes situations en fonction de ses exigences organisationnelles et réglementaires, et s'exercer sur la pratique des droits et devoirs pour réaliser un projet sportif individuel ou collectif.",
+                otc: "Concevoir et réaliser un projet individuel d'allure à 95%–105% de sa VMA (en 3 × 3 min, intermittent 30\\"/30\\" ou sur 600m F / 1000m G) avec un écart inter-tours inférieur à 3 secondes.",
+                bareme: "Habiletés motrices (Produit 6 pts + Processus/Régularité 6 pts) : 12 pts · Connaissances : 3 pts · Rôles sociaux (Chronométreur/Coach) : 5 pts (Total /20)",
+                situationRef: "Course de demi-fond scolaire (600m Filles / 1000m Garçons) ou 3 × 3 min avec annonce préalable du contrat de temps par tour selon sa VMA."
+            }},
+            "TC": {{
+                label: "Tronc Commun (TC — Lycée Qualifiant)",
+                ref: "Orientations Pédagogiques 2007 (Lycée Qualifiant)",
+                oti: "L'élève du Tronc Commun doit pouvoir maîtriser les composantes du comportement moteur et pouvoir s'adapter aux différentes situations et faire face à leurs défis, et accepter l'intégration dans le groupe.",
+                otc: "Maîtriser une allure de course comprise entre 90% et 105% de sa VMA sur des efforts continus ou intermittents et sur l'épreuve de demi-fond (600m/800m F et 1000m G).",
+                bareme: "Habiletés motrices (Produit 7 pts + Processus/Régularité 7 pts) : 14 pts · Connaissances : 3 pts · Rôles sociaux (Officiels/Observateur) : 3 pts (Total /20)",
+                situationRef: "Épreuve combinée : 2 séries de course à contrat d'allure (% VMA) ou Course de Demi-Fond (800m F / 1000m G) avec contrôle des temps de passage tous les 200m."
+            }},
+            "1BAC": {{
+                label: "1ère Année Baccalauréat (1Bac)",
+                ref: "Orientations Pédagogiques 2007 (Lycée Qualifiant)",
+                oti: "L'élève de la 1ère année Bac doit pouvoir confronter les situations motrices et s'y adapter par l'analyse et l'évaluation et la prise d'initiative pour améliorer le rendement.",
+                otc: "Planifier et réguler de manière autonome un projet d'entraînement VMA (intermittent 30\\"/30\\", 15\\"/15\\" et demi-fond 800m/1000m) pour optimiser sa performance aérobie.",
+                bareme: "Habiletés motrices (Produit 7 pts + Processus/Régularité 7 pts) : 14 pts · Connaissances : 3 pts · Rôles sociaux (Officiels/Observateur) : 3 pts (Total /20)",
+                situationRef: "Course de Demi-Fond 800m (Filles) / 1000m (Garçons) avec contrat de temps de passage à chaque tour (écart inter-tours ≤ 2 à 3 secondes)."
+            }},
+            "2BAC": {{
+                label: "2ème Année Baccalauréat (2Bac — Examen National EPS)",
+                ref: "Orientations Pédagogiques 2007 (Lycée Qualifiant — Bac Sport)",
+                oti: "L'élève de la 2ème année Bac doit pouvoir analyser différentes situations et interactions motrices et s'intégrer volontairement dans la planification et la réalisation de projets individuels et collectifs.",
+                otc: "Réaliser sa performance optimale sur l'épreuve officielle du Bac (1000m Garçons / 800m ou 600m Filles) en gérant scientifiquement son allure de course (102% à 110% VMA) avec une régularité inter-tours ≤ 2 secondes et un sprint final maîtrisé.",
+                bareme: "Habiletés motrices (Produit Chronométrique 7 pts + Processus/Régularité inter-tours 7 pts) : 14 pts · Connaissances : 3 pts · Rôles sociaux (Chronométreur/Juge) : 3 pts (Total /20)",
+                situationRef: "Épreuve officielle type Bac Sport : Course de 1000m (Garçons — 2,5 tours de 400m ou 5 tours de 200m) et 800m / 600m (Filles) départ debout commandé (« À vos marques ! » → Signal), avec relevé de tous les temps inter-tours."
+            }}
+        }};
+
+        const PRACTICE_PROFILES = {{
+            "N1": {{
+                badge: "Niveau 1 — Débutant (Départ en sprint & Arrêts marche — VMA < 11 km/h)",
+                diagnostique: "Départ euphorique en sprint sur les 150 premiers mètres en suivant la tête de course, suivi d'un essoufflement brutal, d'un point de côté et de longs arrêts en marchant ; aucune connaissance de son allure personnelle.",
+                objCycle: "Supprimer totalement les arrêts en marchant en apprenant à partir lentement à son propre rythme (80–90% VMA) grâce aux repères sonores aux plots (tous les 25m) et à une expiration régulière.",
+                sessions: [
+                    {{ num: 1, title: "Évaluation Diagnostique : Test Demi-Cooper (6 minutes) sur Piste à 8 Plots (200m)", obj: "Mesurer la VMA initiale de chaque élève (VMA = Distance en m / 100) et former les groupes de couleur homogènes.", intro: "12 min : Footing très lent en groupe (5 min), mobilisation articulaire chevilles/hanches et 2 lignes droites progressives.", sitRef: "Passage en 2 vagues de 6 minutes sur piste de 200m balisée tous les 25m (8 plots) : chaque coureur est suivi par son binôme observateur qui compte les tours et le dernier plot atteint au coup de sifflet final.", cr: "Courir le plus régulièrement possible pendant 6 minutes pour parcourir la plus grande distance (marcher autorisé uniquement si nécessaire, sans s'arrêter).", cs: "Calculer sa VMA exacte (ex. 5 tours = 1000m → VMA = 10,0 km/h) et intégrer son groupe de niveau.", calme: "2 minutes de marche obligatoire debout + hydratation et constitution des groupes VMA." }},
+                    {{ num: 2, title: "Découverte de son Allure Personnelle (85% VMA) : Le Repère Sonore aux Plots", obj: "Apprendre à courir à vitesse constante sans jamais dépasser son plot avant le coup de sifflet du professeur.", intro: "12 min : Échauffement progressif à 65% VMA + éducatifs de foulée rasante économique.", sitRef: "2 × 4 minutes à 85% VMA (récupération 2 min marchée) : coup de sifflet toutes les 15 secondes ; chaque groupe de VMA connaît le nombre de plots de 25m qu'il doit franchir par minute.", cr: "Interdiction de sprinter au départ : ajuster sa foulée pour arriver exactement au plot cible au coup de sifflet.", cs: "Terminer les 2 × 4 minutes sans aucun arrêt en marchant et avec moins d'1 plot d'écart.", calme: "Prise de la fréquence cardiaque au poignet/cou (sur 15s × 4) et étirements doux." }},
+                    {{ num: 3, title: "Foulée Économique & Synchronisation Respiratoire (Souffler Active 2-2 ou 3-3)", obj: "Éliminer les crispations parasites et installer une expiration buccale profonde et rythmée sur les appuis.", intro: "12 min : Footing lent en binôme avec « Test de la Parole » (raconter une phrase sans s'essouffler).", sitRef: "3 × 3 minutes à 85–90% VMA : travail spécifique sur le relâchement des épaules, la pose souple du pied à plat/médio-pied et le rythme respiratoire (inspirer sur 2 pas, souffler longuement par la bouche sur 2 ou 3 pas).", cr: "Courir sans faire de bruit au sol, bras fléchis à 90° bas près des hanches, bouche entrouverte.", cs: "Maintenir son allure pendant les 3 × 3 min avec un score RPE de Borg compris entre 5 et 6/10.", calme: "Marche de récupération et exercices de respiration diaphragmatique." }},
+                    {{ num: 4, title: "Vaincre la Tentation du Départ Rapide : Le « Premier Tour Contrôlé »", obj: "Réussir un 1er tour exactement au temps cible (sans partir trop vite) pour pouvoir finir la course au même rythme.", intro: "12 min : Échauffement progressif + 2 passages de calibrage sur 100m au chrono cible.", sitRef: "2 × 5 minutes en continu (90% VMA) : l'observateur annonce le temps dès le passage au 1er demi-tour (100m) et au 1er tour (200m). Bonus de +2 points si le 1er tour est réalisé à ±2 secondes du contrat.", cr: "Freiner volontairement son enthousiasme sur les 100 premiers mètres pour se caler sur son groupe de couleur.", cs: "Écart inférieur à 3 secondes entre le 1er tour et le dernier tour des 5 minutes.", calme: "Analyse avec son binôme de la courbe des temps de passage." }},
+                    {{ num: 5, title: "Initiation à l'Intermittent Court Ludique (30s Course à 100% VMA / 30s Marche)", obj: "Découvrir le plaisir de courir plus vite (100% VMA) sur des durées courtes (30 secondes) sans s'épuiser.", intro: "12 min : Footing d'éveil, gammes souples et 2 accélérations à 100% VMA sur 50m.", sitRef: "2 séries de 6 × (30s de course à 100% VMA / 30s de récupération marchée) : chaque groupe de VMA a une cible précise en mètres à atteindre en 30 secondes (ex. VMA 10 km/h = 83m · VMA 12 km/h = 100m).", cr: "Atteindre son plot cible exactement au coup de sifflet des 30 secondes sur chacune des 6 répétitions.", cs: "Réussir au moins 5 répétitions sur 6 dans la zone cible (±3 mètres) sans marcher pendant les 30s d'effort.", calme: "3 minutes de marche active et bilan sur la sensation d'effort intermittent." }},
+                    {{ num: 6, title: "Allonger la Durée de Course Continue sans Repère Sonore Intermédiaire", obj: "Passer des repères externes (sifflet toutes les 15s) aux repères internes (sensations corporelles) pour garder son allure.", intro: "12 min : Échauffement progressif par groupes de VMA.", sitRef: "2 × 5 minutes à 90% VMA : 1) les 2 premières minutes avec coups de sifflet aux plots ; 2) les 3 dernières minutes en « silence radio » (sans sifflet) où l'élève doit conserver seul la même vitesse.", cr: "Mémoriser la cadence de ses pas et le rythme de son souffle pendant les 2 premières minutes pour les reproduire ensuite.", cs: "Parcourir exactement la même distance par minute avec et sans coups de sifflet.", calme: "Feedback de l'observateur et étirements des mollets/quadriceps." }},
+                    {{ num: 7, title: "Découverte de la Distance de Demi-Fond Scolaire (600m / 800m / 1000m par Paliers)", obj: "Transférer la régularité acquise en course de durée vers une distance fixe chronométrée (3 à 5 tours de 200m).", intro: "12 min : Échauffement complet et 2 × 100m à l'allure cible du 600m/1000m.", sitRef: "Fractionné spécifique Demi-Fond : 3 × 300m (ou 3 × 400m) à 100% VMA avec 2 minutes de récupération, en visant un temps strictement identique sur les 3 répétitions.", cr: "Partir debout au commandement « À vos marques ! — Signal » et stabiliser immédiatement sa foulée.", cs: "Écart maximal de 2 secondes entre le 1er et le 3ème 300m/400m.", calme: "Marche active et calcul de son temps prédit sur 600m/1000m." }},
+                    {{ num: 8, title: "Choisir son Contrat Personnel d'Évaluation (90%, 95% ou 100% VMA)", obj: "Permettre à chaque élève de choisir et tester le contrat d'allure qui lui rapporte le maximum de points (Produit + Régularité).", intro: "12 min : Échauffement autonome dirigé par un élève par groupe de VMA.", sitRef: "Simulation de contrat : l'élève annonce par écrit son contrat (en secondes par tour de 200m) et réalise un test de 6 minutes (ou un 600m/1000m) chronométré tour par tour par son binôme.", cr: "Écouter les temps de passage annoncés à chaque tour par son observateur pour corriger immédiatement (+ vite / - vite).", cs: "Valider son contrat sans aucun arrêt en marchant et avec un écart inter-tours ≤ 3 secondes.", calme: "Ajustement définitif de la fiche contrat avant la séance 9." }},
+                    {{ num: 9, title: "Répétition Générale & Formation au Rôle d'Observateur-Chronométreur Officiel", obj: "Tester sa course finale en conditions réelles et maîtriser le relevé des temps inter-tours d'un camarade.", intro: "12 min : Protocole officiel d'échauffement pré-compétition.", sitRef: "Passage à blanc par séries homogènes de 12 élèves (Vague 1 court / Vague 2 chronomètre et remplit la grille officielle de régularité).", cr: "L'observateur annonce clairement le temps à chaque passage sur la ligne et calcule l'écart moyen.", cs: "Fiche d'observation complétée sans erreur de calcul et contrat validé.", calme: "Conseils individualisés de récupération et d'hydratation." }},
+                    {{ num: 10, title: "Séance 10 : Évaluation Sommative Officielle sur 20 Points (OP Maroc)", obj: "Évaluer la performance (distance / temps au barème ou % VMA), la régularité inter-tours, les connaissances et l'observation.", intro: "12 min : Échauffement autonome complet par groupe de VMA.", sitRef: "Épreuve officielle sommative (Course à contrat de durée ou Demi-Fond 600m/800m F et 1000m G) en 2 vagues avec co-évaluation des temps de passage par tour.", cr: "Course continue régulière du départ à l'arrivée et relance finale dans les 100 derniers mètres.", cs: "Validation de la grille officielle sommative sur 20 points.", calme: "Marche de récupération obligatoire (3 min), étirements et bilan du cycle." }}
+                ]
+            }},
+            "N2": {{
+                badge: "Niveau 2 — Débrouillé (Course continue acquise & Repères aux plots — VMA 11–13 km/h)",
+                diagnostique: "L'élève est capable de courir 6 à 8 minutes sans s'arrêter marcher, mais reste dans une zone de confort sous-maximale (75% VMA) ou subit des variations d'allure de ±5 secondes par tour dès que la fatigue apparaît.",
+                objCycle: "Élever l'intensité de course soutenue vers 95%–105% de sa VMA grâce au travail intermittent (30\\"/30\\", 15\\"/15\\") et stabiliser une régularité inter-tours à ±2 secondes sur 600m/800m/1000m.",
+                sessions: [
+                    {{ num: 1, title: "Évaluation Diagnostique : Test Demi-Cooper 6 min & Calcul des Cibles VMA", obj: "Déterminer précisément la VMA individuelle et établir sa table personnelle d'allures (90%, 100%, 105% VMA).", intro: "12 min : Footing progressif, mobilisation dynamique et 3 accélérations sur 60m.", sitRef: "Test Demi-Cooper de 6 minutes sur piste de 200m (8 plots de 25m) avec relevé du temps à chaque tour pour diagnostiquer l'indice de régularité initial.", cr: "Maintenir une vitesse élevée et constante pendant les 6 minutes.", cs: "Calculer sa VMA (Distance / 100) et ses temps de passage aux 100m et 200m à 100% VMA.", calme: "Marche active 2 min et répartition dans les groupes de VMA." }},
+                    {{ num: 2, title: "Allures Progressivas par Blocs : 3 × 3 minutes (90% → 95% → 100% VMA)", obj: "Apprendre à différencier par ses sensations corporelles trois paliers d'intensité aérobie croissants.", intro: "12 min : Échauffement cardio-respiratoire et éducatifs de foulée.", sitRef: "3 séquences de 3 minutes (récupération 1 min 30s) : Bloc 1 à 90% VMA (aisance contrôlée), Bloc 2 à 95% VMA (ventilation soutenue), Bloc 3 à 100% VMA (puissance aérobie).", cr: "Franchir 1 plot supplémentaire sur le Bloc 2 puis sur le Bloc 3 en augmentant légèrement l'amplitude et la fréquence.", cs: "Respecter exactement les 3 distances cibles croissantes sans ralentir en fin de bloc.", calme: "Relevé de la FC et du RPE (échelle 1–10) après chaque bloc." }},
+                    {{ num: 3, title: "Développement de la Puissance Aérobie : Intermittent 30s / 30s à 105% VMA", obj: "Solliciter 100% du VO2max en enchaînant des fractions de 30 secondes à 105% VMA avec une régularité métronomique.", intro: "12 min : Échauffement complet et 2 répétitions de calibrage de 15s.", sitRef: "2 séries de 8 × (30s course à 105% VMA / 30s récupération marchée au plot) avec 3 min de repos entre les deux séries.", cr: "Partir au plot de son groupe de VMA et atteindre le plot d'arrivée exactement au coup de sifflet des 30 secondes.", cs: "Réussir au moins 14 répétitions sur 16 à la cible exacte sans dérive de vitesse.", calme: "Marche active et étirements de la chaîne postérieure." }},
+                    {{ num: 4, title: "Intermittent Court Haute Intensité (15s / 15s à 110% VMA) & Foulée Dynamique", obj: "Améliorer l'économie de course à vitesse rapide (allure 800m/1000m) grâce à des efforts brefs de 15 secondes.", intro: "12 min : Footing, gammes athlétiques (Skip A, foulées rasantes) et lignes droites.", sitRef: "2 séries de 10 × (15s de course à 110% VMA / 15s de récupération passive sur place) en aller-retour entre son plot de départ et son plot cible.", cr: "Attaque médio-pied dynamique, bassin haut et relâchement des épaules.", cs: "Maintenir la distance cible sur les 20 répétitions sans baisse d'amplitude.", calme: "Récupération marchée et hydratation." }},
+                    {{ num: 5, title: "Construction du Rythme Spécifique Demi-Fond (600m / 800m / 1000m)", obj: "Calibrer son allure de course au tour de piste (200m) pour préparer l'épreuve chronométrée de fin de cycle.", intro: "12 min : Échauffement progressif et gammes.", sitRef: "Séance de « Tempo Demi-Fond » : 4 × 200m (ou 3 × 300m) courus à 105% VMA (r = 1 min 30s) avec annonce du temps aux 100m et aux 200m.", cr: "Passer aux 100m exactement à la moitié du temps cible du 200m (ex. 22s aux 100m → 44s aux 200m).", cs: "Réaliser les 4 répétitions de 200m dans une fourchette de ±1,5 seconde.", calme: "Bilan individuel des temps de passage." }},
+                    {{ num: 6, title: "Course en « Negative Split » (Deuxième Moitié Plus Rapide que la Première)", obj: "Maîtriser la gestion tactique optimale d'une course de durée ou d'un 1000m en gardant une réserve pour accélérer dans le dernier tiers.", intro: "12 min : Échauffement autonome par groupes de VMA.", sitRef: "2 × 600m (ou 2 × 4 minutes) avec consigne obligatoire de « Negative Split » : les 300 derniers mètres doivent être parcourus 2 à 3 secondes plus vite que les 300 premiers mètres.", cr: "Contrôler strictement le 1er tour à 95–100% VMA puis augmenter la fréquence des bras dans le dernier tour.", cs: "Valider un temps sur la 2ème moitié inférieur ou égal à celui de la 1ère moitié sur les 2 passages.", calme: "Étirements et retour au calme." }},
+                    {{ num: 7, title: "Simulation d'Épreuve : Test sur 800m / 1000m (ou Contrat 8 min) & Régularité", obj: "Tester sa capacité à tenir l'allure cible sur la distance complète et ajuster son projet de note.", intro: "12 min : Protocole d'échauffement pré-compétition.", sitRef: "Course test sur la distance officielle (1000m Garçons / 800m ou 600m Filles) en séries de niveau homogène avec relevé des temps tous les 200m par l'observateur.", cr: "Départ debout à « À vos marques ! », rabattement propre à la corde sans bousculade et maintien de la cadence.", cs: "Obtenir un écart inter-tours moyen inférieur ou égal à 3 secondes.", calme: "Analyse croisée Produit (Chrono) + Processus (Régularité)." }},
+                    {{ num: 8, title: "Remédiation Individualisée : Vitesse Terminale vs Endurance de Maintien", obj: "Travailler sur son point faible identifié en séance 7 (manque de vitesse de base ou chute d'allure au 3ème/4ème tour).", intro: "12 min : Échauffement différencié par profil.", sitRef: "2 ateliers au choix : Atelier A « Résistance au maintien » (2 × 500m réguliers à 102% VMA) ; Atelier B « Vitesse terminale & Relance » (400m à 100% VMA + 200m en accélération progressive à 115% VMA).", cr: "Maintenir la posture haute du buste et l'action des bras malgré l'acidose musculaire finale.", cs: "Valider le critère spécifique de son atelier de remédiation.", calme: "Récupération active et étirements." }},
+                    {{ num: 9, title: "Affûtage Pré-Compétition & Formation des Juges-Chronométreurs Officiels", obj: "Réaliser une séance courte d'affûtage (sans fatigue résiduelle) et valider les compétences d'arbitrage et de chronométrage.", intro: "12 min : Échauffement complet.", sitRef: "3 × 200m à l'allure exacte du 1er tour de l'examen (récupération complète 3 min) + révision pratique des rôles de Starter (« À vos marques ! »), Chronométreur de tour et Juge de lice.", cr: "Sensation de facilité et précision au dixième de seconde sur le temps du 1er tour.", cs: "100% des élèves ont leur fiche contrat validée avec les temps de passage cibles par tour.", calme: "Repos et préparation mentale." }},
+                    {{ num: 10, title: "Séance 10 : Évaluation Sommative Officielle sur 20 Points (OP Maroc)", obj: "Évaluer la performance chronométrique (Produit), la régularité inter-tours et le respect du contrat (Processus), les connaissances et les rôles sociaux.", intro: "12 min : Échauffement autonome complet.", sitRef: "Épreuve officielle sommative par séries homogènes (1000m G / 800m ou 600m F / Contrat VMA) avec relevé intégral des temps de passage.", cr: "Régularité inter-tours ≤ 2 à 3s et engagement maximal jusqu'à la ligne d'arrivée.", cs: "Attribution de la note finale sur 20 points.", calme: "Marche de récupération et bilan du cycle." }}
+                ]
+            }},
+            "N3": {{
+                badge: "Niveau 3 — Confirmé (Contrat 95–105% VMA & Régularité ±2s — VMA 13–15 km/h)",
+                diagnostique: "Bon potentiel aérobie (VMA 13 à 15 km/h) et capacité à courir en continu ; l'élève cherche à optimiser sa puissance aérobie maximale (intermittent 105–110% VMA) et à maîtriser au dixième près ses temps de passage au 200m sur 800m/1000m.",
+                objCycle: "Développer la VMA et la tolérance lactique pour soutenir 103% à 108% de sa VMA sur l'épreuve de demi-fond (800m/1000m) avec un écart inter-tours inférieur ou égal à 2 secondes.",
+                sessions: [
+                    {{ num: 1, title: "Diagnostic Physiologique : Test VMA (Demi-Cooper 6' / Vameval) & Profil d'Endurance", obj: "Mesurer la VMA précise, estimer le VO2max et déterminer les allures cibles de 95% à 115% VMA via le calculateur ProfEPS.", intro: "12 min : Protocole complet d'échauffement athlétique et lignes droites.", sitRef: "Test Demi-Cooper 6 minutes (ou Vameval par paliers d'1 min) avec chronométrage de chaque tour de 200m.", cr: "Engagement maximal et gestion régulière de l'allure du début à la fin du test.", cs: "Établir sa fiche individuelle de programmation (VMA, VO2max estimé et temps cibles aux 100m/200m).", calme: "Récupération active et exploitation du calculateur VMA." }},
+                    {{ num: 2, title: "Capacité Aérobie Haute & Seuil : 3 × 4 minutes (92% → 96% → 100% VMA)", obj: "Stabiliser une foulée ample et économique à haute vitesse aérobie avec un écart nul entre les tours.", intro: "12 min : Footing d'activation, gammes athlétiques et éducatifs médio-pied.", sitRef: "3 × 4 minutes (r = 2 min) avec contrôle des temps de passage tous les 100m : l'élève ne porte pas de montre et doit annoncer son écart ressenti à l'arrivée de chaque bloc.", cr: "Affiner sa perception kinesthésique de la vitesse (écart ressenti vs écart réel < 1 seconde).", cs: "Réaliser les 3 blocs à moins de 1,5 seconde du contrat par tour.", calme: "Étirements actifs et hydratation." }},
+                    {{ num: 3, title: "Puissance Aérobie Maximale (PAM) : Intermittent 30s / 30s à 105% VMA", obj: "Accumuler 10 minutes de travail effectif à 105% VMA en maintenant une qualité d'appui irréprochable.", intro: "12 min : Échauffement complet et accélérations progressives.", sitRef: "2 séries de 10 × (30s course à 105% VMA / 30s récupération active trottinée sur 25m) — r = 3 min entre séries.", cr: "Maintenir une récupération active en trottinant pendant les 30s de repos sans s'arrêter net.", cs: "Valider au moins 18 répétitions sur 20 exactement au plot cible.", calme: "Marche et relâchement musculaire." }},
+                    {{ num: 4, title: "Intermittent Court Supra-Maximal (15s / 15s à 110–115% VMA) & Économie de Course", obj: "Solliciter les fibres rapides oxydatives et habituer la foulée aux vitesses supérieures à l'allure du 1000m/800m.", intro: "12 min : Gammes athlétiques dynamiques (Skip A, griffé souple) et lignes droites.", sitRef: "2 séries de 12 × (15s à 112% VMA / 15s repos passif au plot) sur piste balisée tous les 5 mètres autour des cibles.", cr: "Placement haut du bassin, attaque plante/médio-pied réactive et retour actif des coudes.", cs: "Aucune chute de distance entre la 1ère et la 24ème répétition.", calme: "Étirements doux des mollets et ischio-jambiers." }},
+                    {{ num: 5, title: "Séance Spécifique Demi-Fond (Capacité Lactique & Allure 1000m/800m)", obj: "Soutenir l'allure spécifique de compétition (105–108% VMA) sur des fractions longues (400m et 300m).", intro: "12 min : Échauffement complet de demi-fond.", sitRef: "Pyramide descendante à allure 1000m/800m : 500m + 400m + 300m + 200m (récupération 2 min 30s entre les courses) chronométrés tous les 100m.", cr: "Conserver la même vitesse aux 100m du 500m jusqu'au 200m malgré la fatigue musculaire.", cs: "Temps aux 100m constant à ±0,5 seconde sur les 4 fractions de la pyramide.", calme: "Footing très lent de décrassage (4 min) pour favoriser le recyclage des lactates." }},
+                    {{ num: 6, title: "Tactique de Course en Peloton : Placement à la Corde, Relance en Sortie de Virage", obj: "Apprendre à courir en peloton sans se faire enfermer, à doubler uniquement en ligne droite et à relancer après les virages.", intro: "12 min : Échauffement collectif et éducatifs de peloton.", sitRef: "Courses de 600m en peloton de 8 coureurs de même VMA avec 3 règles tactiques : 1) Courir à 20 cm de la lice intérieure ; 2) Interdiction de doubler dans le virage (doubler à l'entrée de la ligne droite) ; 3) Relance sur les 150 derniers mètres.", cr: "Protection de son espace de course (coudes proches du corps) et fluidité des trajectoires.", cs: "Réaliser son temps cible en peloton sans aucune bousculade ni perte de rythme.", calme: "Débriefing tactique." }},
+                    {{ num: 7, title: "Test Pré-Compétitif sur 1000m (Garçons) / 800m ou 600m (Filles) & Analyse Inter-Tours", obj: "Évaluer son niveau réel sur l'épreuve du Bac et vérifier la tenue de la régularité inter-tours (écart ≤ 2s).", intro: "12 min : Routine individuelle d'échauffement de compétition.", sitRef: "Course chronométrée sur 1000m / 800m / 600m avec relevé des temps à chaque passage aux 200m (T1, T2, T3, T4, T5).", cr: "Répartition idéale : 1er 200m contrôlé → tours centraux maintenus par l'action des bras → dernier 200m en accélération.", cs: "Écart maximal entre le tour le plus lent et le tour moyen ≤ 2 secondes.", calme: "Footing lent de récupération et analyse de la feuille de temps." }},
+                    {{ num: 8, title: "Séance Combinée Aérobie-Lactique : « Le 1000m Cassé » (600m + 400m)", obj: "Simuler la fin de course du 1000m/800m pour apprendre à accélérer malgré l'acidose des 300 derniers mètres.", intro: "12 min : Échauffement complet.", sitRef: "2 blocs de [600m à 104% VMA → repos 45 secondes seulement → 400m en accélération progressive de 105% à 112% VMA] (r = 5 min entre les 2 blocs).", cr: "Ne pas raccourcir excessivement la foulée dans le 400m final : maintenir la fréquence des bras et le regard loin devant.", cs: "Courir le 400m final au moins 1 à 2 secondes plus vite au tour que le 600m initial.", calme: "Récupération active prolongée." }},
+                    {{ num: 9, title: "Affûtage & Calibrage du Premier 200m (Spécial Jour d'Examen Bac)", obj: "Mémoriser au dixième de seconde près le rythme des 200 premiers mètres pour réussir son départ le jour J.", intro: "12 min : Échauffement autonome minuté.", sitRef: "3 × 200m courus exactement au temps prévu pour le 1er tour du lendemain/séance 10 (r = 3 min) + arbitrage officiel World Athletics.", cr: "Sensations de relâchement total et précision chronométrique.", cs: "Réaliser les 3 × 200m à moins de 0,5 seconde du temps cible.", calme: "Préparation de la fiche d'évaluation finale." }},
+                    {{ num: 10, title: "Séance 10 : Évaluation Sommative Officielle sur 20 Points (OP Maroc / Bac)", obj: "Valider la performance chronométrique (Produit /7) et la régularité inter-tours (Processus /7), les connaissances (/3) et l'arbitrage (/3).", intro: "12 min : Échauffement autonome de compétition.", sitRef: "Épreuve officielle sommative : 1000m Garçons / 800m ou 600m Filles départ debout commandé (« À vos marques ! ») avec chronométrage intégral de chaque tour.", cr: "Maîtrise complète du projet d'allure (écart inter-tours ≤ 2s) et sprint final engagé.", cs: "Attribution de la note sommative officielle sur 20 points.", calme: "Marche et trot de récupération + bilan du cycle." }}
+                ]
+            }},
+            "N4": {{
+                badge: "Niveau 4 — Élite / ASS (Puissance Aérobie 110% VMA, 1000m/800m < 3'00\\" & Cross ASS — VMA > 15 km/h)",
+                diagnostique: "Coureurs confirmés ou membres de l'équipe ASS de Cross-Country / Piste (VMA ≥ 15–18 km/h Garçons, ≥ 13–15 km/h Filles), capables de planifier leurs séances à l'aide de la VMA, du VDOT et de la Réserve de Vitesse Anaérobie (ASR).",
+                objCycle: "Viser le score maximal au Bac Sport (20/20 : ≤ 2'55\\" au 1000m G / ≤ 2'48\\" au 800m F / ≤ 1'56\\" au 600m F) et les podiums provinciaux/régionaux ASS de Cross-Country et de Piste.",
+                sessions: [
+                    {{ num: 1, title: "Bilan Physiologique Complet : VMA (Vameval/Cooper), Vmax Sprint & Calcul ASR", obj: "Établir le profil complet du coureur de demi-fond (VMA, VO2max, VDOT et Réserve de Vitesse Anaérobie ASR = Vmax − VMA).", intro: "12 min : Protocole élite d'échauffement et gammes athlétiques.", sitRef: "1) Mesure de Vmax sur 30m lancé ; 2) Test VMA Vameval ou Demi-Cooper 6 min ; 3) Saisie dans les calculateurs ProfEPS (VMA, VDOT, ASR).", cr: "Engagement maximal sur les deux tests pour déterminer son profil (« Profil Endurance » vs « Profil Vitesse-Demi-Fond »).", cs: "Fiche de profilage physiologique complétée avec allures individualisées en % VMA et % ASR.", calme: "Footing de récupération et analyse scientifique." }},
+                    {{ num: 2, title: "Puissance Aérobie Élite : Intermittent 30s / 20s & 15s / 15s à 110% VMA (20% ASR)", obj: "Maximiser le temps passé à 100% de VO2max grâce à un ratio travail/repos pincé (30s effort / 20s repos actif).", intro: "12 min : Échauffement complet et lignes droites progressives.", sitRef: "Bloc 1 : 10 × (30s à 105% VMA / 20s trot actif) ; Repos 4 min ; Bloc 2 : 12 × (15s à 112% VMA / 15s repos).", cr: "Foulée haute médio-pied, attaque réactive sous le bassin et relâchement facial.", cs: "100% des répétitions validées dans la seconde exacte au plot cible.", calme: "Décrassage 5 min à 60% VMA." }},
+                    {{ num: 3, title: "Puissance & Capacité Anaérobie Lactique Spécifique 800m / 1000m", obj: "Développer la tolérance à l'acidose musculaire et le pouvoir tampon à 110–115% VMA.", intro: "12 min : Échauffement complet, gammes et 3 accélérations à allure course.", sitRef: "Séance lactique : 3 × 500m (G) ou 3 × 400m (F) courus à 108–110% VMA (allure record 1000m/800m) avec 4 minutes de récupération active trottinée.", cr: "Maintenir la fréquence des bras et la hauteur du bassin dans les 150 derniers mètres de chaque 500m.", cs: "Réaliser les 3 répétitions à moins d'une seconde de son temps cible au passage des 400m/500m.", calme: "Footing lent de recyclage lactique (6 min) et hydratation." }},
+                    {{ num: 4, title: "Préparation Cross-Country ASS : Variations d'Allure (« Fartlek Codifié ») & Relances", obj: "S'adapter aux changements de rythme (départ rapide, côtes, relances) typiques des championnats scolaires ASS de Cross.", intro: "12 min : Échauffement sur parcours varié.", sitRef: "2 × 6 minutes de Fartlek codifié au coup de sifflet : base à 90% VMA avec 6 relances de 20 secondes à 110% VMA placées après les virages sans jamais descendre sous 85% VMA ensuite.", cr: "Capacité à récupérer tout en courant à 88–90% VMA juste après une attaque.", cs: "Distance totale parcourue sur 6 min supérieure ou égale à 96% de son test Demi-Cooper.", calme: "Marche et étirements." }},
+                    {{ num: 5, title: "Cinétique de VO2 & Départ Spécifique Demi-Fond (Les 200 Premiers Mètres)", obj: "Amorcer rapidement la consommation d'oxygène sans creuser une dette alactique/lactique excessive au départ.", intro: "12 min : Échauffement de compétition.", sitRef: "4 × (200m départ debout en peloton à 112% VMA → enchaîné immédiatement par 400m régulés à 103% VMA) — r = 3 min.", cr: "Se placer aux avant-postes dans les 80 premiers mètres puis relâcher immédiatement les épaules pour verrouiller son allure de croisière.", cs: "Transition fluide entre le départ rapide et les 400m de maintien.", calme: "Récupération active." }},
+                    {{ num: 6, title: "Travail du « Kick Final » (Les 200 Derniers Mètres en Pré-Fatigue)", obj: "Mobiliser sa Réserve de Vitesse Anaérobie (ASR) dans le dernier tour d'un 800m/1000m pour remporter la course ou battre le barème 20/20.", intro: "12 min : Échauffement complet.", sitRef: "2 × (600m à 102% VMA + à la cloche, dernier 200m en sprint progressif maximal > 120% VMA) — r = 6 min.", cr: "Au son de la cloche : redresser le buste, augmenter la fréquence des bras et passer sur l'avant-pied.", cs: "Courir le dernier 200m au moins 3 à 4 secondes plus vite que les trois 200m précédents.", calme: "Décrassage complet." }},
+                    {{ num: 7, title: "Compétition Test Officielle : 1000m (G) / 800m (F) avec Lièvres d'Allure", obj: "Réaliser un chrono de référence sous conduite d'allure (pacing) et analyser les 5 temps de passage de 200m.", intro: "12 min : Routine autonome de compétition.", sitRef: "Course officielle avec un élève « lièvre » (pacemaker) chargé d'emmener le peloton sur les 400 premiers mètres au temps exact du barème 18–20/20.", cr: "Courir abrité dans le sillage du lièvre à la corde et déclencher son attaque aux 600m/700m.", cs: "Record personnel battu avec un écart inter-tours ≤ 2 secondes.", calme: "Analyse des données chronométriques et RPE." }},
+                    {{ num: 8, title: "Gestion de la Charge d'Entraînement (sRPE Foster & ACWR) & Optimisation Tactique", obj: "Apprendre à quantifier sa charge interne (Durée × RPE) pour arriver en état de fraîcheur (« pic de forme ») le jour de l'examen.", intro: "12 min : Échauffement autonome.", sitRef: "Séance de rythme : 5 × 300m à 106% VMA (r = 2 min) + calcul de la charge sRPE sur le calculateur Foster/ACWR de ProfEPS.", cr: "Foulée aérienne, relâchée et coût cardiaque minimal.", cs: "Maintenir un ratio ACWR dans la « zone optimale » (0,8 à 1,3) avant l'examen.", calme: "Étirements et récupération." }},
+                    {{ num: 9, title: "Séance de Tonification Pré-Examen & Direction du Jury Officiel World Athletics", obj: "Activer le système neuromusculaire à J-2/J-3 et présider le jury de chronométrage et de contrôle des tours.", intro: "12 min : Échauffement complet.", sitRef: "3 × 200m à allure 1000m/800m + 2 × 100m vifs + organisation complète de la feuille de pointage des tours et de la cloche.", cr: "Fraîcheur maximale et maîtrise absolue des règles RT 16, 17 et 55.", cs: "Validation du plan de course seconde par seconde.", calme: "Repos complet." }},
+                    {{ num: 10, title: "Séance 10 : Évaluation Sommative Officielle sur 20 Points (Bac Sport / ASS)", obj: "Valider l'excellence chronométrique (Produit /7), la maîtrise stratégique de l'allure (Processus /7), les connaissances (/3) et l'arbitrage (/3).", intro: "12 min : Échauffement autonome de compétition.", sitRef: "Épreuve officielle sommative : 1000m Garçons / 800m ou 600m Filles avec chronométrage intégral de chaque 200m.", cr: "Régularité inter-tours ≤ 2s, negative split ou finish puissant.", cs: "Obtention de la note finale sur 20 points.", calme: "Décrassage collectif et bilan final." }}
+                ]
+            }}
+        }};
+
+        const GRIDS_DATA = {{
+            "G1": {{
+                title: "FICHE INDIVIDUELLE & BINÔME : TEST VMA (DEMI-COOPER 6 MIN) & CONTRÔLE DE RÉGULARITÉ INTER-TOURS",
+                subtitle: "Outil de terrain pour mesurer la VMA sur piste de 200m (8 plots de 25m) et contrôler l'écart inter-tours (≤ 2s)",
+                html: `
+                    <div class="a4-pedago-box">
+                        <p><strong>Protocole Terrain (Piste de 200m à 8 plots de 25m) :</strong> 1) Au <strong>Test Demi-Cooper (6 minutes)</strong>, l'observateur coche chaque tour de 200m franchi et ajoute les plots de 25m du dernier tour incomplet. <strong>Formule directe : \(VMA\\,(km/h) = \\frac{{Distance\\,(m)}}{{100}}\)</strong>. 2) En <strong>Course à Contrat / Demi-Fond (1000m / 800m / 600m)</strong>, l'observateur note le temps de chaque tour de 200m pour vérifier que l'écart reste <strong>&le; 2 secondes</strong>.</p>
+                    </div>
+                    <div style="border:1px solid #0f172a;padding:0.65rem 0.9rem;margin-bottom:0.85rem;background:#f8fafc;font-size:0.82rem;display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem;">
+                        <div><strong>Coureur :</strong> .....................................</div>
+                        <div><strong>Observateur :</strong> .................................</div>
+                        <div><strong>Distance 6 min :</strong> ............ m</div>
+                        <div><strong>VMA Calculée :</strong> <strong style="color:#0f766e;">.......... km/h</strong></div>
+                    </div>
+                    <table class="a4-table">
+                        <thead>
+                            <tr>
+                                <th style="width:14%;">Tour de Piste<br>(Base 200m)</th>
+                                <th style="width:18%;">Temps de Passage Cumulé</th>
+                                <th style="width:18%;">Temps du Tour Seul (\(T_i\))</th>
+                                <th style="width:18%;">Temps Cible du Contrat (\(T_{{cible}}\))</th>
+                                <th style="width:16%;">Écart au Contrat<br>(\(|T_i - T_{{cible}}|\))</th>
+                                <th style="width:16%;">Régulation Annoncée par le Coach</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Tour 1 (200 m)</strong></td><td>.......... min .......... s</td><td>\(T_1 = \) .......... s</td><td>.......... s</td><td>.......... s</td><td>[ ] Trop vite [ ] OK [ ] Lent</td></tr>
+                            <tr><td><strong>Tour 2 (400 m)</strong></td><td>.......... min .......... s</td><td>\(T_2 = \) .......... s</td><td>.......... s</td><td>.......... s</td><td>[ ] Trop vite [ ] OK [ ] Lent</td></tr>
+                            <tr><td><strong>Tour 3 (600 m — Arrivée F)</strong></td><td>.......... min .......... s</td><td>\(T_3 = \) .......... s</td><td>.......... s</td><td>.......... s</td><td>[ ] Trop vite [ ] OK [ ] Lent</td></tr>
+                            <tr><td><strong>Tour 4 (800 m — Arrivée F)</strong></td><td>.......... min .......... s</td><td>\(T_4 = \) .......... s</td><td>.......... s</td><td>.......... s</td><td>[ ] Trop vite [ ] OK [ ] Lent</td></tr>
+                            <tr><td><strong>Tour 5 (1000 m — Arrivée G)</strong></td><td>.......... min .......... s</td><td>\(T_5 = \) .......... s</td><td>.......... s</td><td>.......... s</td><td>[ ] Sprint final validé</td></tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-top:0.85rem;border:1px solid #0f172a;padding:0.7rem;background:#f0fdfa;font-size:0.82rem;display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;">
+                        <div><strong>Temps Final Officiel :</strong><br><strong style="font-size:0.95rem;">.......... min .......... s</strong></div>
+                        <div><strong>Écart Inter-Tours Moyen :</strong><br><strong>\(\\Delta = \) ............ secondes</strong> (Cible &le; 2s)</div>
+                        <div><strong>Auto-Évaluation RPE Borg (1 à 10) :</strong><br>Ressenti fin de course : <strong>....... / 10</strong></div>
+                    </div>
+                `
+            }},
+            "G2": {{
+                title: "GRILLE OFFICIELLE D'ÉVALUATION SOMMATIVE COLLÈGE (1AC – 2AC – 3AC) — OP 2009",
+                subtitle: "Barème Officiel Collège : Habiletés Motrices (12 pts : 6 pts Performance/% VMA + 6 pts Régularité) + Connaissances (3 pts) + Rôles Sociaux (5 pts) = /20",
+                html: `
+                    <div class="a4-pedago-box">
+                        <p><strong>Référentiel Officiel MENPS (OP Août 2009 — Collège) :</strong> Pour valoriser tous les élèves quel que soit leur profil morphologique, la note motrice sur <strong>12 points</strong> croise l'<strong>intensité du contrat réalisé en % de sa VMA (ou le barème 600m/1000m) sur 6 points</strong> et la <strong>maîtrise de la régularité d'allure sans arrêt en marchant sur 6 points</strong>.</p>
+                    </div>
+                    <table class="a4-table">
+                        <thead>
+                            <tr>
+                                <th style="width:16%;">Note Produit<br>(sur 6 points)</th>
+                                <th style="width:24%;">Option A : Contrat Course en Durée<br>(% VMA soutenu sur 6 à 9 min)</th>
+                                <th style="width:15%;">Option B : 600m Filles (Collège)</th>
+                                <th style="width:15%;">Option B : 1000m Garçons (Collège)</th>
+                                <th style="width:30%;">Note Processus : Régularité &amp; Continuité<br>(sur 6 points)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>6,0 / 6 pts</strong></td><td>Soutient <strong>≥ 100 % VMA</strong> sur la durée</td><td>≤ 2'08"</td><td>≤ 3'25"</td><td rowspan="6" style="vertical-align:top;">
+                                <strong>1. Continuité de l'effort (2 pts) :</strong><br>
+                                • Course 100% continue sans aucun pas de marche = <strong>2 / 2 pts</strong> (1 arrêt = 1 pt ; ≥ 2 arrêts = 0 pt).<br><br>
+                                <strong>2. Régularité Inter-Tours (4 pts) :</strong><br>
+                                • Écart moyen entre les tours <strong>≤ 2 secondes</strong> (ou ≤ 0,5 plot) = <strong>4 / 4 pts</strong>.<br>
+                                • Écart entre <strong>3 et 4 secondes</strong> = <strong>3 / 4 pts</strong>.<br>
+                                • Écart entre <strong>5 et 7 secondes</strong> = <strong>2 / 4 pts</strong>.<br>
+                                • Écart &gt; 7 secondes (départ en sprint) = <strong>0,5 à 1 / 4 pt</strong>.
+                            </td></tr>
+                            <tr><td><strong>5,0 / 6 pts</strong></td><td>Soutient <strong>95 % VMA</strong> sur la durée</td><td>2'18"</td><td>3'40"</td></tr>
+                            <tr><td><strong>4,0 / 6 pts</strong></td><td>Soutient <strong>90 % VMA</strong> sur la durée</td><td>2'28"</td><td>3'55"</td></tr>
+                            <tr><td><strong>3,0 / 6 pts</strong></td><td>Soutient <strong>85 % VMA</strong> sur la durée</td><td>2'40"</td><td>4'12"</td></tr>
+                            <tr><td><strong>2,0 / 6 pts</strong></td><td>Soutient <strong>80 % VMA</strong> sur la durée</td><td>2'55"</td><td>4'30"</td></tr>
+                            <tr><td><strong>1,0 / 6 pts</strong></td><td>&lt; 80 % VMA</td><td>&gt; 2'55"</td><td>&gt; 4'30"</td></tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-top:0.75rem;border:1px solid #0f172a;padding:0.65rem;background:#f8fafc;font-size:0.82rem;display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
+                        <div><strong>3. Connaissances Conceptuelles &amp; Physiologiques (sur 3 points) :</strong><br>Définition de la VMA, formule du test Demi-Cooper (\(D/100\)), règles du départ debout (RT 16.3) et de l'échauffement cardio-respiratoire.</div>
+                        <div><strong>4. Compétences Comportementales &amp; Rôles Sociaux (sur 5 points) :</strong><br>Fiabilité dans le rôle d'observateur-chronométreur de son binôme (3 pts) + respect des couloirs/plots et récupération active (2 pts).</div>
+                    </div>
+                `
+            }},
+            "G3": {{
+                title: "GRILLE OFFICIELLE D'ÉVALUATION SOMMATIVE LYCÉE & BAC (TC – 1BAC – 2BAC) — OP 2007",
+                subtitle: "Barème Officiel Lycée & Bac Sport (1000m Garçons · 800m & 600m Filles) : Produit (7 pts) + Processus/Régularité (7 pts) + Connaissances (3 pts) + Rôles (3 pts) = /20",
+                html: `
+                    <div class="a4-pedago-box">
+                        <p><strong>Référentiel Officiel MENPS (OP 2007 — Lycée Qualifiant &amp; Examen du Bac) :</strong> La note des habiletés motrices sur <strong>14 points</strong> additionne la <strong>Note Produit Chronométrique (sur 7 points)</strong> et la <strong>Note Processus de Gestion d'Allure &amp; Régularité Inter-Tours (sur 7 points)</strong>.</p>
+                    </div>
+                    <table class="a4-table">
+                        <thead>
+                            <tr>
+                                <th>Note (/20 Bac Libre)</th>
+                                <th>Note Produit Cycle (/7 pts)</th>
+                                <th>1000 mètres Garçons (2Bac)</th>
+                                <th>800 mètres Filles (2Bac)</th>
+                                <th>600 mètres Filles (Bac Libre / Plateau)</th>
+                                <th>Processus : Régularité Inter-Tours &amp; Gestion (/7 pts)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>20 / 20</strong></td><td><strong>7,0 / 7</strong></td><td>≤ 2'55"</td><td>≤ 2'48"</td><td>≤ 1'56"</td><td>Écart inter-tours <strong>≤ 2 secondes</strong> + Foulée économique &amp; Finish (<strong>7,0 / 7 pts</strong>)</td></tr>
+                            <tr><td><strong>18 / 20</strong></td><td><strong>6,5 / 7</strong></td><td>3'05"</td><td>2'58"</td><td>2'03"</td><td>Écart inter-tours <strong>≤ 3 secondes</strong> sans marche (<strong>6,0 / 7 pts</strong>)</td></tr>
+                            <tr><td><strong>16 / 20</strong></td><td><strong>6,0 / 7</strong></td><td>3'15"</td><td>3'08"</td><td>2'10"</td><td>Écart inter-tours <strong>≤ 4 secondes</strong> sans marche (<strong>5,0 / 7 pts</strong>)</td></tr>
+                            <tr><td><strong>14 / 20</strong></td><td><strong>5,0 / 7</strong></td><td>3'28"</td><td>3'20"</td><td>2'18"</td><td>Écart inter-tours <strong>≤ 5 secondes</strong> sans marche (<strong>4,25 / 7 pts</strong>)</td></tr>
+                            <tr><td><strong>12 / 20</strong></td><td><strong>4,25 / 7</strong></td><td>3'42"</td><td>3'34"</td><td>2'28"</td><td>Course continue mais écart 6 à 8 secondes (<strong>3,5 / 7 pts</strong>)</td></tr>
+                            <tr><td><strong>10 / 20</strong></td><td><strong>3,5 / 7</strong></td><td>3'58"</td><td>3'50"</td><td>2'40"</td><td>1 ralentissement marqué mais sans arrêt complet (<strong>2,5 / 7 pts</strong>)</td></tr>
+                            <tr><td><strong>08 / 20</strong></td><td><strong>2,75 / 7</strong></td><td>4'15"</td><td>4'08"</td><td>2'55"</td><td>Écart inter-tours &gt; 10 secondes ou marche (<strong>1,5 / 7 pts</strong>)</td></tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-top:0.75rem;border:1px solid #0f172a;padding:0.65rem;background:#f8fafc;font-size:0.82rem;display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;">
+                        <div><strong>Détail Processus (sur 7 pts) :</strong><br>• Respect du contrat d'allure par tour (4 pts)<br>• Aisance technique &amp; respiratoire (1,5 pt)<br>• Relance dans le dernier tour (1,5 pt)</div>
+                        <div><strong>Connaissances Conceptuelles (sur 3 pts) :</strong><br>Filières aérobie/anaérobie lactique, calcul des temps de passage à partir de la VMA, règles WA RT 16.3 &amp; 17.5.</div>
+                        <div><strong>Rôles Sociaux &amp; Arbitrage (sur 3 pts) :</strong><br>Chronométrage officiel inter-tours, annonce vocale des temps de passage et sécurité.</div>
+                    </div>
+                `
+            }},
+            "G4": {{
+                title: "GRILLE D'ÉVALUATION ÉLÈVE DISPENSÉ TEMPORAIRE / CHRONOMÉTREUR VMA & CONTRÔLEUR DE TOURS (/20)",
+                subtitle: "Évaluation officielle sur 20 points d'un élève inapte partiel ou dispensé temporaire en cycle de Course de Durée & Demi-Fond",
+                html: `
+                    <div class="a4-pedago-box">
+                        <p><strong>Cadre Réglementaire MENPS :</strong> Un élève dispensé de course prolongée (certificat médical d'asthme sévère, entorse ou dispense temporaire) est évalué sur 20 points dans les fonctions officielles de <strong>Chronométreur Général des Signaux Sonores VMA, Pointeur des Tours et Calculateur des Allures Cibles</strong>.</p>
+                    </div>
+                    <table class="a4-table">
+                        <thead>
+                            <tr>
+                                <th>Domaine d'Évaluation</th>
+                                <th>Indicateurs Observables sur le Terrain</th>
+                                <th>Barème</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1. Gestion du Chronomètre Général &amp; des Signaux Sonores aux Plots</strong></td>
+                                <td>Donne un coup de sifflet net et régulier aux intervalles exacts de la séance (toutes les 15s, 30s ou à chaque fin de série d'intermittent 15"/15" et 30"/30") sans jamais perdre le fil du temps.</td>
+                                <td><strong>....... / 6 pts</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>2. Pointage des Tours &amp; Calcul de l'Indice de Régularité</strong></td>
+                                <td>Tient la feuille officielle de pointage d'un groupe de coureurs sur 800m/1000m, annonce à voix haute le temps de passage à chaque tour de 200m, sonne la cloche du dernier tour et calcule l'écart moyen inter-tours.</td>
+                                <td><strong>....... / 6 pts</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>3. Maîtrise des Calculs de VMA &amp; des Temps de Passage</strong></td>
+                                <td>Sait calculer sans erreur la VMA d'un camarade à partir de sa distance au test Demi-Cooper (\(D/100\)) et convertir cette VMA en m/s (\(\div 3,6\)) et en temps de passage au 100m/200m.</td>
+                                <td><strong>....... / 4 pts</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>4. Installation du Balisage (8 Plots de 25m) &amp; Sécurité Post-Course</strong></td>
+                                <td>Présence en tenue, installe les 8 plots de 25m autour de la piste de 200m avant la séance et veille à ce que tous les coureurs marchent debout pendant 2 minutes après l'arrivée.</td>
+                                <td><strong>....... / 4 pts</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `
+            }}
+        }};
+
+        let currentSchoolLevel = "1AC";
+        let currentPracticeLevel = "N1";
+        let currentDocMode = "cycle";
+        let currentSessionFilter = "ALL";
+        let currentGridId = "G1";
+
+        function buildCycleHTML(lvlKey, pracKey) {{
+            const lvl = SCHOOL_LEVELS[lvlKey];
+            const prac = PRACTICE_PROFILES[pracKey];
+            let rows = "";
+            prac.sessions.forEach(s => {{
+                rows += `
+                    <tr>
+                        <td style="font-weight:800;text-align:center;background:#f8fafc;">Séance ${{s.num}}</td>
+                        <td><strong>${{s.title}}</strong><br><span style="color:#475569;font-size:0.78rem;"><strong>Objectif :</strong> ${{s.obj}}</span></td>
+                        <td>${{s.sitRef}}</td>
+                        <td><strong>CR :</strong> ${{s.cr}}<br><strong style="color:#006233;">CS :</strong> ${{s.cs}}</td>
+                    </tr>
+                `;
+            }});
+
+            return `
+                <div class="a4-official-Banner">
+                    <div class="a4-banner-left">
+                        ROYAUME DU MAROC<br>
+                        Ministère de l'Éducation Nationale,<br>du Préscolaire et des Sports (MENPS)<br>
+                        <strong>Éducation Physique et Sportive (EPS)</strong>
+                    </div>
+                    <div class="a4-banner-center">
+                        <div class="a4-doc-type">PROJET PRÉVISIONNEL DE CYCLE (10 SÉANCES)</div>
+                        <div class="a4-doc-title">APS : COURSE DE DURÉE / DEMI-FOND · ${{lvl.label}}</div>
+                        <div style="font-size:0.76rem;font-weight:800;color:#006233;margin-top:0.2rem;">${{prac.badge}}</div>
+                    </div>
+                    <div class="a4-banner-right">
+                        <strong>Référentiel Officiel :</strong><br>
+                        ${{lvl.ref}}<br>
+                        <strong>VMA &amp; World Athletics</strong><br>
+                        Portail : ProfEPS.ma
+                    </div>
+                </div>
+
+                <div class="a4-meta-grid">
+                    <div class="a4-meta-cell"><strong>APS Support</strong>Course de Durée, Demi-Fond &amp; VMA</div>
+                    <div class="a4-meta-cell"><strong>Niveau Scolaire</strong>${{lvl.label}}</div>
+                    <div class="a4-meta-cell"><strong>Niveau de Pratique</strong>${{pracKey}} (${{prac.badge.split('—')[1].trim()}})</div>
+                    <div class="a4-meta-cell"><strong>Volume Horaire</strong>10 Séances d'1h (ou 2h)</div>
+                </div>
+
+                <div class="a4-pedago-box">
+                    <p><strong>1. Objectif Terminal d'Intégration (OTI) :</strong> ${{lvl.oti}}</p>
+                    <p><strong>2. Objectif Terminal du Cycle (OTC — Course de Durée / Demi-Fond) :</strong> ${{lvl.otc}}</p>
+                    <p><strong>3. Comportement Initial Diagnostiqué (${{pracKey}}) :</strong> ${{prac.diagnostique}}</p>
+                    <p><strong>4. Transformation Visée en Fin de Cycle :</strong> ${{prac.objCycle}}</p>
+                    <p><strong>5. Situation de Référence &amp; Barème Officiel (/20) :</strong> ${{lvl.situationRef}} — <em>${{lvl.bareme}}</em></p>
+                </div>
+
+                <table class="a4-table">
+                    <thead>
+                        <tr>
+                            <th style="width:10%;">Séance</th>
+                            <th style="width:28%;">Thème &amp; Objectif Opérationnel de Séance</th>
+                            <th style="width:34%;">Situation d'Apprentissage / Situation de Référence</th>
+                            <th style="width:28%;">Critères de Réalisation (CR) &amp; Critères de Réussite (CS)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${{rows}}
+                    </tbody>
+                </table>
+
+                <div style="margin-top:1.15rem;display:flex;justify-content:space-between;font-size:0.76rem;font-weight:700;color:#475569;border-top:1px solid #cbd5e1;padding-top:0.65rem;">
+                    <span>Signature de l'Enseignant(e) d'EPS : .................................</span>
+                    <span>Visa de Monsieur l'Inspecteur Pédagogique : .................................</span>
+                    <span>Cachet de l'Administration : .................................</span>
+                </div>
+            `;
+        }}
+
+        function buildFichesHTML(lvlKey, pracKey, sessFilter) {{
+            const lvl = SCHOOL_LEVELS[lvlKey];
+            const prac = PRACTICE_PROFILES[pracKey];
+            const sessionsToRender = (sessFilter === "ALL")
+                ? prac.sessions
+                : [prac.sessions[parseInt(sessFilter, 10)]];
+
+            let fichesBlocks = "";
+            sessionsToRender.forEach(s => {{
+                fichesBlocks += `
+                    <div class="fiche-block">
+                        <div class="fiche-header-bar">
+                            <span>FICHE PÉDAGOGIQUE DE SÉANCE N° ${{s.num}} / 10 — COURSE DE DURÉE &amp; DEMI-FOND (${{lvlKey}} · ${{pracKey}})</span>
+                            <span>Durée : 55 à 60 min · Effectif : 36–44 élèves (2 vagues / 8 plots)</span>
+                        </div>
+                        <div style="padding:0.9rem 1.1rem;">
+                            <p style="margin-bottom:0.4rem;font-size:0.86rem;"><strong>Thème de la Séance :</strong> ${{s.title}}</p>
+                            <p style="margin-bottom:0.65rem;font-size:0.84rem;color:#0f766e;"><strong>Objectif Opérationnel :</strong> ${{s.obj}}</p>
+                            <table class="a4-table" style="margin-top:0.35rem;">
+                                <thead>
+                                    <tr>
+                                        <th style="width:16%;">Phase &amp; Durée</th>
+                                        <th style="width:46%;">Contenu Didactique, Balisage aux Plots VMA &amp; Organisation</th>
+                                        <th style="width:38%;">Critères de Réalisation (CR) &amp; Critères de Réussite (CS)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>1. Partie Introductive<br>(10 à 12 min)</strong></td>
+                                        <td>
+                                            • Prise en main : appel, vérification des tenues, rappel des groupes de couleur VMA et balisage de la piste avec 8 plots espacés de 25m.<br>
+                                            • <strong>Échauffement Spécifique :</strong> ${{s.intro}}
+                                        </td>
+                                        <td>
+                                            • Footing d'activation en aisance respiratoire (60–65% VMA).<br>
+                                            • Mobilisation articulaire et lignes droites de calibrage.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>2. Partie Fondamentale<br>(35 à 38 min)</strong></td>
+                                        <td>
+                                            <strong>Dispositif Pédagogique &amp; Situation de Référence :</strong><br>
+                                            ${{s.sitRef}}<br><br>
+                                            <strong>Variables de Régulation Didactique :</strong><br>
+                                            • <em>Simplification :</em> Abaisser le contrat de -5% VMA, donner un coup de sifflet plus fréquent (toutes les 10s/15s) ou passer en intermittent 30"/30".<br>
+                                            • <em>Complexification :</em> Augmenter le contrat de +5% VMA, supprimer les coups de sifflet intermédiaires pour favoriser l'autorégulation interne.
+                                        </td>
+                                        <td>
+                                            <strong>Critères de Réalisation (Comment faire) :</strong><br>
+                                            ${{s.cr}}<br><br>
+                                            <strong style="color:#006233;">Critères de Réussite (Indicateur chiffré) :</strong><br>
+                                            ${{s.cs}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>3. Partie Finale<br>(8 à 10 min)</strong></td>
+                                        <td>
+                                            • <strong>Retour au calme :</strong> ${{s.calme}}<br>
+                                            • Bilan avec les binômes observateurs, relevé des fiches de suivi VMA et annonce du thème de la séance suivante.
+                                        </td>
+                                        <td>
+                                            • Marche active obligatoire de 2 minutes après l'effort (interdiction de s'asseoir immédiatement).<br>
+                                            • Remplissage rigoureux de la fiche d'observation.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+            }});
+
+            return `
+                <div class="a4-official-Banner">
+                    <div class="a4-banner-left">
+                        ROYAUME DU MAROC · MENPS<br>
+                        <strong>Cahier des Fiches Pédagogiques EPS</strong><br>
+                        APS : Course de Durée &amp; Demi-Fond
+                    </div>
+                    <div class="a4-banner-center">
+                        <div class="a4-doc-type">CAHIER DES FICHES DE SÉANCES DÉTAILLÉES</div>
+                        <div class="a4-doc-title">${{lvl.label}}</div>
+                        <div style="font-size:0.76rem;font-weight:800;color:#006233;margin-top:0.2rem;">${{prac.badge}}</div>
+                    </div>
+                    <div class="a4-banner-right">
+                        <strong>Référentiel :</strong> ${{lvl.ref}}<br>
+                        <strong>OTC :</strong> Contrat VMA &amp; Régularité
+                    </div>
+                </div>
+                ${{fichesBlocks}}
+            `;
+        }}
+
+        /* ============================================================== */
+        /* IN-PAGE VMA & PLOTS CALCULATOR ENGINE                          */
+        /* ============================================================== */
+        function formatMinSec(totalSec) {{
+            const m = Math.floor(totalSec / 60);
+            const s = Math.round(totalSec - m * 60);
+            if (m === 0) return s + " s";
+            return m + "'" + (s < 10 ? "0" + s : s) + '"';
+        }}
+
+        window.syncFromCooper = function() {{
+            const dist = parseFloat(document.getElementById("inpCooperDist").value) || 1200;
+            const vma = Math.round((dist / 100) * 10) / 10;
+            document.getElementById("inpVmaKmh").value = vma.toFixed(1);
+            window.recalcVMAStudio();
+        }};
+
+        window.syncFromVma = function() {{
+            const vma = parseFloat(document.getElementById("inpVmaKmh").value) || 12.0;
+            const dist = Math.round(vma * 100);
+            document.getElementById("inpCooperDist").value = dist;
+            window.recalcVMAStudio();
+        }};
+
+        window.recalcVMAStudio = function() {{
+            const vma = parseFloat(document.getElementById("inpVmaKmh").value) || 13.0;
+            const pct = parseFloat(document.getElementById("selTargetPct").value) || 100;
+            const trackLen = parseFloat(document.getElementById("selTrackLen").value) || 200;
+
+            const lblPct = document.getElementById("lblSelectedPct");
+            if (lblPct) lblPct.textContent = pct + " % VMA";
+
+            const targetKmh = vma * (pct / 100);
+            const targetMs = targetKmh / 3.6;
+            const vo2max = (vma * 3.5).toFixed(1);
+
+            const t25m = (25 / targetMs).toFixed(1);
+            const t50m = (50 / targetMs).toFixed(1);
+            const t100m = (100 / targetMs).toFixed(1);
+            const tLap = (trackLen / targetMs).toFixed(1);
+
+            const d15s = Math.round(targetMs * 15);
+            const d30s = Math.round(targetMs * 30);
+            const d3min = Math.round(targetMs * 180);
+
+            // Predictions for 600m (110% VMA), 800m (106% VMA), 1000m (103% VMA)
+            const t600 = formatMinSec(600 / ((vma * 1.10) / 3.6));
+            const t800 = formatMinSec(800 / ((vma * 1.06) / 3.6));
+            const t1000 = formatMinSec(1000 / ((vma * 1.03) / 3.6));
+
+            const kpiStrip = document.getElementById("vmaLiveKpis");
+            if (kpiStrip) {{
+                kpiStrip.innerHTML = `
+                    <div class="calc-kpi-card">
+                        <span class="calc-kpi-label">Vitesse Cible (${{pct}}% VMA)</span>
+                        <span class="calc-kpi-value">${{targetKmh.toFixed(1)}} km/h</span>
+                        <span class="calc-kpi-sub">Soit ${{targetMs.toFixed(2)}} m/s · VO2max ~${{vo2max}} ml/kg/min</span>
+                    </div>
+                    <div class="calc-kpi-card">
+                        <span class="calc-kpi-label">Temps aux Plots (25m / 50m / 100m)</span>
+                        <span class="calc-kpi-value">${{t25m}}s · ${{t50m}}s · ${{t100m}}s</span>
+                        <span class="calc-kpi-sub">1 Tour de ${{trackLen}}m = <strong>${{tLap}} secondes</strong></span>
+                    </div>
+                    <div class="calc-kpi-card">
+                        <span class="calc-kpi-label">Distances Intermittent (15" / 30")</span>
+                        <span class="calc-kpi-value">${{d15s}} m / ${{d30s}} m</span>
+                        <span class="calc-kpi-sub">Contrat 3 minutes = <strong>${{d3min}} mètres</strong></span>
+                    </div>
+                    <div class="calc-kpi-card">
+                        <span class="calc-kpi-label">Temps Prédits Demi-Fond Bac</span>
+                        <span class="calc-kpi-value" style="font-size:1.08rem;">600m: ${{t600}} · 1000m: ${{t1000}}</span>
+                        <span class="calc-kpi-sub">800m prédit : <strong>${{t800}}</strong> (Régularité ±2s/tour)</span>
+                    </div>
+                `;
+            }}
+
+            // Build class groups table from 9 to 18 km/h
+            const tableBox = document.getElementById("vmaClassGroupsTableContainer");
+            if (tableBox) {{
+                let rows = "";
+                for (let gVma = 9; gVma <= 18; gVma += 1) {{
+                    const gKmh = gVma * (pct / 100);
+                    const gMs = gKmh / 3.6;
+                    const highlight = (Math.round(vma) === gVma) ? 'style="background:#ccfbf1;font-weight:800;"' : '';
+                    rows += `
+                        <tr ${{highlight}}>
+                            <td><strong>Groupe ${{gVma}} km/h</strong><br><span style="font-size:0.74rem;color:#475569;">Cooper 6' = ${{gVma * 100}} m</span></td>
+                            <td><strong>${{gKmh.toFixed(1)}} km/h</strong><br>(${{gMs.toFixed(2)}} m/s)</td>
+                            <td><strong>${{(25 / gMs).toFixed(1)}} s</strong> / 25m<br><strong>${{(50 / gMs).toFixed(1)}} s</strong> / 50m</td>
+                            <td><strong>${{(100 / gMs).toFixed(1)}} s</strong> / 100m<br><strong>${{(trackLen / gMs).toFixed(1)}} s</strong> / tour (${{trackLen}}m)</td>
+                            <td><strong>${{Math.round(gMs * 15)}} m</strong> (en 15s)<br><strong>${{Math.round(gMs * 30)}} m</strong> (en 30s)</td>
+                            <td><strong>${{Math.round(gMs * 60)}} m</strong> (en 1 min)<br><strong>${{Math.round(gMs * 180)}} m</strong> (en 3 min)</td>
+                            <td>600m : <strong>${{formatMinSec(600 / ((gVma * 1.10) / 3.6))}}</strong><br>1000m : <strong>${{formatMinSec(1000 / ((gVma * 1.03) / 3.6))}}</strong></td>
+                        </tr>
+                    `;
+                }}
+                tableBox.innerHTML = `
+                    <table class="a4-table">
+                        <thead>
+                            <tr>
+                                <th>Groupe de VMA<br>(Test Demi-Cooper 6')</th>
+                                <th>Allure à ${{pct}}% VMA</th>
+                                <th>Temps Plot 25m &amp; 50m</th>
+                                <th>Temps 100m &amp; Tour (${{trackLen}}m)</th>
+                                <th>Distance Intermittent<br>(15s / 30s)</th>
+                                <th>Distance Continue<br>(1 min / 3 min)</th>
+                                <th>Temps Cibles Demi-Fond<br>(600m F / 1000m G)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${{rows}}
+                        </tbody>
+                    </table>
+                `;
+            }}
+        }};
+
+        function renderDureeStudio() {{
+            const container = document.getElementById("dureeA4PreviewSheet");
+            const sessBar = document.getElementById("dureeSessionSelectorBar");
+            if (!container) return;
+
+            if (currentDocMode === "cycle") {{
+                if (sessBar) sessBar.classList.remove("visible");
+                container.innerHTML = buildCycleHTML(currentSchoolLevel, currentPracticeLevel);
+            }} else {{
+                if (sessBar) sessBar.classList.add("visible");
+                container.innerHTML = buildFichesHTML(currentSchoolLevel, currentPracticeLevel, currentSessionFilter);
+            }}
+        }}
+
+        function renderDureeGrid() {{
+            const gContainer = document.getElementById("dureeGridA4Container");
+            if (!gContainer) return;
+            const g = GRIDS_DATA[currentGridId];
+            gContainer.innerHTML = `
+                <div class="a4-official-Banner">
+                    <div class="a4-banner-left">
+                        ROYAUME DU MAROC · MENPS<br>
+                        <strong>Éducation Physique et Sportive</strong><br>
+                        APS : Course de Durée &amp; Demi-Fond
+                    </div>
+                    <div class="a4-banner-center">
+                        <div class="a4-doc-type">DOCUMENT OFFICIEL D'OBSERVATION &amp; D'ÉVALUATION</div>
+                        <div class="a4-doc-title">${{g.title}}</div>
+                        <div style="font-size:0.75rem;font-weight:700;color:#006233;margin-top:0.2rem;">${{g.subtitle}}</div>
+                    </div>
+                    <div class="a4-banner-right">
+                        <strong>OP 2009 &amp; OP 2007</strong><br>
+                        VMA &amp; World Athletics<br>
+                        ProfEPS.ma
+                    </div>
+                </div>
+                ${{g.html}}
+            `;
+        }}
+
+        window.switchDureeVolet = function(voletId) {{
+            document.querySelectorAll(".volet-panel").forEach(p => p.classList.remove("active"));
+            document.querySelectorAll(".volet-tab-btn").forEach(b => b.classList.remove("active"));
+            const target = document.getElementById(voletId);
+            if (target) target.classList.add("active");
+            const btn = document.querySelector(`.volet-tab-btn[data-volet="${{voletId}}"]`);
+            if (btn) btn.classList.add("active");
+            window.scrollTo({{ top: 240, behavior: "smooth" }});
+        }};
+
+        window.selectDureeSchoolLevel = function(lvl) {{
+            currentSchoolLevel = lvl;
+            document.querySelectorAll(".school-lvl-btn").forEach(b => {{
+                b.classList.toggle("active", b.getAttribute("data-level") === lvl);
+            }});
+            renderDureeStudio();
+        }};
+
+        window.selectDureePracticeLevel = function(prac) {{
+            currentPracticeLevel = prac;
+            document.querySelectorAll("#volet-studio .practice-btn").forEach(b => {{
+                b.classList.toggle("active", b.getAttribute("data-practice") === prac);
+            }});
+            renderDureeStudio();
+        }};
+
+        window.selectDureeDocMode = function(mode) {{
+            currentDocMode = mode;
+            document.getElementById("btnModeCycle").classList.toggle("active", mode === "cycle");
+            document.getElementById("btnModeFiches").classList.toggle("active", mode === "fiches");
+            renderDureeStudio();
+        }};
+
+        window.selectDureeSessionFilter = function(sess) {{
+            currentSessionFilter = String(sess);
+            document.querySelectorAll("#dureeSessionSelectorBar .sess-pill").forEach(b => {{
+                b.classList.toggle("active", b.getAttribute("data-sess") === String(sess));
+            }});
+            renderDureeStudio();
+        }};
+
+        window.selectDureeGrid = function(gridId) {{
+            currentGridId = gridId;
+            document.querySelectorAll("#volet-grilles .practice-btn").forEach(b => {{
+                b.classList.toggle("active", b.getAttribute("data-grid") === gridId);
+            }});
+            renderDureeGrid();
+        }};
+
+        function triggerWordDownload(htmlBody, filename) {{
+            const fullWordHTML = `
+                <html xmlns:o="urn:schemas-microsoft-com:office:office"
+                      xmlns:w="urn:schemas-microsoft-com:office:word"
+                      xmlns="http://www.w3.org/TR/REC-html40">
+                <head>
+                    <meta charset="utf-8">
+                    <title>${{filename}}</title>
+                    <style>
+                        @page {{ size: A4 landscape; margin: 1.2cm; }}
+                        body {{ font-family: Arial, sans-serif; font-size: 10pt; color: #0f172a; line-height: 1.4; }}
+                        table {{ width: 100%; border-collapse: collapse; margin-top: 8px; margin-bottom: 12px; }}
+                        th {{ background-color: #0f172a; color: #ffffff; border: 1px solid #0f172a; padding: 6px; font-size: 9.5pt; text-align: left; }}
+                        td {{ border: 1px solid #64748b; padding: 6px; font-size: 9.5pt; vertical-align: top; }}
+                        .a4-official-Banner {{ border: 2px solid #0f172a; padding: 10px; margin-bottom: 12px; background-color: #f8fafc; }}
+                        .a4-pedago-box {{ border: 1px solid #0f172a; padding: 8px; margin-bottom: 10px; background-color: #f0fdfa; }}
+                        .fiche-block {{ border: 2px solid #0f172a; margin-bottom: 18px; page-break-inside: avoid; }}
+                        .fiche-header-bar {{ background-color: #0f172a; color: #ffffff; padding: 6px 10px; font-weight: bold; }}
+                    </style>
+                </head>
+                <body>${{htmlBody}}</body>
+                </html>
+            `;
+            const blob = new Blob(['\\ufeff', fullWordHTML], {{ type: 'application/msword;charset=utf-8' }});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }}
+
+        function triggerPDFPrint(htmlBody, title) {{
+            const iframe = document.createElement("iframe");
+            iframe.style.position = "fixed";
+            iframe.style.right = "0";
+            iframe.style.bottom = "0";
+            iframe.style.width = "0";
+            iframe.style.height = "0";
+            iframe.style.border = "0";
+            document.body.appendChild(iframe);
+
+            const doc = iframe.contentWindow.document;
+            doc.open();
+            doc.write(`
+                <!DOCTYPE html>
+                <html lang="fr">
+                <head>
+                    <meta charset="utf-8">
+                    <title>${{title}}</title>
+                    <style>
+                        @page {{ size: A4 landscape; margin: 1cm; }}
+                        body {{ font-family: Inter, Arial, sans-serif; font-size: 9.5pt; color: #0f172a; line-height: 1.4; margin: 0; padding: 0; }}
+                        table {{ width: 100%; border-collapse: collapse; margin-top: 6px; }}
+                        th {{ background: #0f172a !important; color: #ffffff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; border: 1px solid #0f172a; padding: 5px 6px; text-align: left; font-size: 9pt; }}
+                        td {{ border: 1px solid #64748b; padding: 5px 6px; vertical-align: top; font-size: 9pt; }}
+                        .a4-official-Banner {{ border: 2px solid #0f172a; padding: 8px 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; background: #f8fafc !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }}
+                        .a4-meta-grid {{ display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid #0f172a; margin-bottom: 10px; }}
+                        .a4-meta-cell {{ padding: 4px 6px; border-right: 1px solid #cbd5e1; font-size: 8.5pt; }}
+                        .a4-pedago-box {{ border: 1px solid #0f172a; padding: 7px 10px; margin-bottom: 10px; background: #f0fdfa !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-size: 8.8pt; }}
+                        .fiche-block {{ border: 2px solid #0f172a; margin-bottom: 14px; page-break-inside: avoid; }}
+                        .fiche-header-bar {{ background: #0f172a !important; color: #ffffff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 5px 10px; font-weight: bold; display: flex; justify-content: space-between; }}
+                    </style>
+                </head>
+                <body>${{htmlBody}}</body>
+                </html>
+            `);
+            doc.close();
+            setTimeout(() => {{
+                iframe.contentWindow.focus();
+                iframe.contentWindow.print();
+                setTimeout(() => document.body.removeChild(iframe), 1500);
+            }}, 250);
+        }}
+
+        window.exportDureeDoc = function(docType, format) {{
+            const htmlContent = (docType === "cycle")
+                ? buildCycleHTML(currentSchoolLevel, currentPracticeLevel)
+                : buildFichesHTML(currentSchoolLevel, currentPracticeLevel, "ALL");
+            const baseName = (docType === "cycle")
+                ? `Projet_Cycle_Course_Duree_Demi_Fond_${{currentSchoolLevel}}_${{currentPracticeLevel}}_ProfEPS`
+                : `Cahier_10_Fiches_Course_Duree_Demi_Fond_${{currentSchoolLevel}}_${{currentPracticeLevel}}_ProfEPS`;
+
+            if (format === "word") {{
+                triggerWordDownload(htmlContent, baseName + ".doc");
+            }} else {{
+                triggerPDFPrint(htmlContent, baseName);
+            }}
+        }};
+
+        window.exportDureeGrid = function(format) {{
+            const container = document.getElementById("dureeGridA4Container");
+            if (!container) return;
+            const baseName = `Grille_Course_Duree_Demi_Fond_${{currentGridId}}_ProfEPS`;
+            if (format === "word") {{
+                triggerWordDownload(container.innerHTML, baseName + ".doc");
+            }} else {{
+                triggerPDFPrint(container.innerHTML, baseName);
+            }}
+        }};
+
+        window.exportVMATable = function(format) {{
+            const wrapper = document.getElementById("vmaPrintableTableWrapper");
+            if (!wrapper) return;
+            const header = `
+                <div class="a4-official-Banner">
+                    <div><strong>ROYAUME DU MAROC · MENPS</strong><br>Table des Groupes de Niveau VMA (9 à 18 km/h)</div>
+                    <div><strong>APS : COURSE DE DURÉE &amp; DEMI-FOND</strong><br>Temps de Passage aux Plots &amp; Distances Intermittentes</div>
+                    <div><strong>Portail ProfEPS.ma</strong></div>
+                </div>
+            `;
+            if (format === "word") {{
+                triggerWordDownload(header + wrapper.innerHTML, "Table_Groupes_VMA_Plots_Course_Duree_ProfEPS.doc");
+            }} else {{
+                triggerPDFPrint(header + wrapper.innerHTML, "Table_Groupes_VMA_Plots_Course_Duree_ProfEPS");
+            }}
+        }};
+
+        window.exportDureeATD = function(format) {{
+            const el = document.getElementById("dureeATDExportableContent");
+            if (!el) return;
+            const header = `
+                <div class="a4-official-Banner">
+                    <div><strong>ROYAUME DU MAROC · MENPS</strong><br>Analyse et Traitement Didactique (ATD)</div>
+                    <div><strong>APS : COURSE DE DURÉE &amp; DEMI-FOND (الجري المطاول)</strong><br>VMA, World Athletics RT 16-55 &amp; OP Maroc</div>
+                    <div><strong>Portail ProfEPS.ma</strong></div>
+                </div>
+            `;
+            if (format === "word") {{
+                triggerWordDownload(header + el.innerHTML, "ATD_Course_Duree_Demi_Fond_VMA_ProfEPS.doc");
+            }} else {{
+                triggerPDFPrint(header + el.innerHTML, "ATD_Course_Duree_Demi_Fond_VMA_ProfEPS");
+            }}
+        }};
+
+        document.addEventListener("DOMContentLoaded", function() {{
+            const params = new URLSearchParams(window.location.search);
+            const lvlParam = (params.get("level") || "").toUpperCase();
+            if (SCHOOL_LEVELS[lvlParam]) {{
+                currentSchoolLevel = lvlParam;
+                document.querySelectorAll(".school-lvl-btn").forEach(b => {{
+                    b.classList.toggle("active", b.getAttribute("data-level") === lvlParam);
+                }});
+            }}
+            if (window.location.hash) {{
+                const h = window.location.hash.replace("#", "");
+                if (document.getElementById(h) && document.getElementById(h).classList.contains("volet-panel")) {{
+                    window.switchDureeVolet(h);
+                }}
+            }}
+            renderDureeStudio();
+            renderDureeGrid();
+            window.recalcVMAStudio();
+        }});
+    }})();
+    </script>
+</body>
+</html>
+'''
+
+    out_path = os.path.join(PUBLIC_DIR, "aps-course-duree-demi-fond-eps-maroc.html")
+    with open(out_path, "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"[SILO COURSE DE DURÉE / DEMI-FOND OK] Created {out_path}")
+
+
+def update_hub_silos_blog_index_sitemap():
+    # 1. Update /public/hub-aps-sports-eps-maroc.html to feature Course de Durée / Demi-Fond as an active Complete Silo
+    hub_path = os.path.join(PUBLIC_DIR, "hub-aps-sports-eps-maroc.html")
+    if os.path.exists(hub_path):
+        with open(hub_path, "r", encoding="utf-8") as f:
+            hhtml = f.read()
+
+        if "aps-course-duree-demi-fond-eps-maroc.html" not in hhtml:
+            duree_featured_section = '''
+        <!-- SILO VEDETTE 7 : COURSE DE DURÉE, DEMI-FOND & VMA (STUDIO COMPLET + CALCULATEUR VMA) -->
+        <section class="featured-silo-card" data-aps-family="athletisme" style="border-color:#0d9488;" aria-label="Silo Complet Course de Durée, Demi-Fond et VMA EPS Maroc">
+            <div>
+                <div class="featured-kicker" style="color:#0f766e;">Silo APS Complet Disponible · Collège (OP 2009) &amp; Lycée (OP 2007) · Calculateur VMA Intégré</div>
+                <h2 class="featured-title">🏃 Course de Durée, Demi-Fond &amp; VMA en EPS au Maroc : Calculateur VMA &amp; Plots, ATD, Studio des 24 Cycles &amp; 240 Fiches (1AC à 2Bac) + Barèmes (/20)</h2>
+                <p class="featured-desc">Accédez à la page spéciale Course de Durée &amp; Demi-Fond (600m, 800m, 1000m) intégrant un calculateur interactif VMA &amp; temps de passage par plots (plus nos 8 calculateurs physiologiques VO2max, VDOT, Indice Péronnet, ASR, Intermittent HIIT, Karvonen), l'ATD complet, le studio A4 des 24 cycles et 240 fiches (1AC à 2Bac × 4 niveaux) et les barèmes officiels (/20) en Word et PDF.</p>
+                <div class="featured-features">
+                    <span>✓ Calculateur VMA, Plots (25m/50m/Tour) &amp; Intermittent Intégré</span>
+                    <span>✓ 6 Niveaux Scolaires × 4 Niveaux (Débutant à Élite Cross/1000m)</span>
+                    <span>✓ Visionneuse A4 Pro avant téléchargement Word (.doc) &amp; PDF</span>
+                    <span>✓ Barèmes 1000m G / 800m-600m F &amp; Grille Régularité (±2s/tour)</span>
+                </div>
+                <div class="featured-actions">
+                    <a href="aps-course-duree-demi-fond-eps-maroc.html" class="btn-primary-action" style="background:#0d9488;">Ouvrir le Silo Course de Durée &amp; Demi-Fond →</a>
+                    <a href="aps-course-duree-demi-fond-eps-maroc.html#volet-calculateurs" class="btn-secondary-action">🧮 Calculateur VMA &amp; Plots</a>
+                </div>
+            </div>
+            <div class="featured-preview-box">
+                <strong style="display:block;font-size:0.88rem;color:#0f172a;margin-bottom:0.35rem;">Accès direct par Niveau Scolaire (Durée &amp; Demi-Fond) :</strong>
+                <p style="font-size:0.8rem;color:#475569;margin-bottom:0.65rem;">Cliquez sur votre niveau pour ouvrir directement ses 4 niveaux de pratique (Débutant à Élite) avec aperçu A4 + export Word/PDF :</p>
+                <div class="level-matrix">
+                    <a href="aps-course-duree-demi-fond-eps-maroc.html?level=1AC#volet-studio" class="level-item">1ère AC<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">6–8 min &amp; VMA</span></a>
+                    <a href="aps-course-duree-demi-fond-eps-maroc.html?level=2AC#volet-studio" class="level-item">2ème AC<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">2×4 min &amp; 600m</span></a>
+                    <a href="aps-course-duree-demi-fond-eps-maroc.html?level=3AC#volet-studio" class="level-item">3ème AC<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">Contrat VMA &amp; 1000m</span></a>
+                    <a href="aps-course-duree-demi-fond-eps-maroc.html?level=TC#volet-studio" class="level-item">Tronc Commun<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">3×3 min &amp; Demi-Fond</span></a>
+                    <a href="aps-course-duree-demi-fond-eps-maroc.html?level=1BAC#volet-studio" class="level-item">1ère Bac<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">30"/30" &amp; 800m/1000m</span></a>
+                    <a href="aps-course-duree-demi-fond-eps-maroc.html?level=2BAC#volet-studio" class="level-item">2ème Bac<br><span style="font-size:0.7rem;font-weight:600;color:#64748b;">Bac 1000m G / 800m F</span></a>
+                </div>
+                <div style="margin-top:0.85rem;padding-top:0.75rem;border-top:1px solid #e2e8f0;display:flex;justify-content:space-between;font-size:0.78rem;font-weight:700;color:#0f766e;">
+                    <a href="aps-course-duree-demi-fond-eps-maroc.html#volet-calculateurs">🧮 Calculateur VMA &amp; Plots</a>
+                    <a href="aps-course-duree-demi-fond-eps-maroc.html#volet-grilles">📊 Barèmes 1000m / 800m / 600m</a>
+                </div>
+            </div>
+        </section>
+'''
+            hhtml = hhtml.replace(
+                "<!-- GRILLE DE TOUTES LES APS PAR FAMILLE -->",
+                duree_featured_section + "\n        <!-- GRILLE DE TOUTES LES APS PAR FAMILLE -->",
+                1
+            )
+
+            old_duree_card = '''            <!-- 7. DEMI-FOND & VMA -->
+            <article class="aps-card" data-aps-family="athletisme">
+                <div>
+                    <div class="aps-card-kicker">Athlétisme · Demi-Fond &amp; Endurance</div>
+                    <h3 class="aps-card-title">🏃 Course de Durée, Demi-Fond &amp; VMA (الجري المطاول)</h3>
+                    <p class="aps-card-desc">Tests VMA (Luc Léger, Demi-Cooper 6 min, Vameval), projets d'allure (90% à 110% VMA), cycles Collège et Lycée, et barèmes officiels 600m / 1000m au Bac Sport.</p>
+                    <ul class="aps-links-list">
+                        <li><a href="cycle-course-duree-college-eps-maroc.html"><span>📋 Cycle Course de Durée Collège (10 Séances OP 2009)</span> <span>→</span></a></li>
+                        <li><a href="cycle-course-duree-lycee-eps-maroc.html"><span>📋 Cycle Course de Durée Lycée (10 Séances OP 2007)</span> <span>→</span></a></li>
+                        <li><a href="reglement-demi-fond-cross-country-eps-ass.html"><span>⚖️ Règlement Demi-Fond (600m/1000m) &amp; Cross ASS</span> <span>→</span></a></li>
+                        <li><a href="calculateur-vma.html"><span>🧮 Calculateur VMA &amp; Groupes d'Allures EPS</span> <span>→</span></a></li>
+                    </ul>
+                </div>
+                <div class="aps-card-footer">
+                    <a href="cycle-course-duree-lycee-eps-maroc.html" class="aps-btn-main">Cycles Demi-Fond →</a>
+                    <a href="calculateur-vma.html" class="aps-btn-alt">Outil VMA</a>
+                </div>
+            </article>'''
+
+            new_duree_card = '''            <!-- 7. DEMI-FOND & VMA -->
+            <article class="aps-card" data-aps-family="athletisme" style="border-color:#0d9488;border-width:2px;">
+                <div>
+                    <div class="aps-card-kicker" style="color:#0f766e;">Athlétisme · Demi-Fond &amp; VMA · Studio Complet Actif</div>
+                    <h3 class="aps-card-title">🏃 Course de Durée, Demi-Fond &amp; VMA (الجري المطاول)</h3>
+                    <p class="aps-card-desc">Silo complet Durée &amp; Demi-Fond (600m/800m/1000m) : Calculateur VMA &amp; plots intégré, ATD officiel, 24 cycles et 240 fiches (1AC à 2Bac × 4 niveaux), barèmes et grilles (/20).</p>
+                    <ul class="aps-links-list">
+                        <li><a href="aps-course-duree-demi-fond-eps-maroc.html#volet-studio"><span>⚡ Studio Cycles &amp; Fiches (1AC → 2Bac · PDF/Word)</span> <span>→</span></a></li>
+                        <li><a href="aps-course-duree-demi-fond-eps-maroc.html#volet-calculateurs"><span>🧮 Calculateur VMA, Plots (25m/50m) &amp; 8 Outils</span> <span>→</span></a></li>
+                        <li><a href="aps-course-duree-demi-fond-eps-maroc.html#volet-grilles"><span>📊 Barèmes 1000m/800m/600m &amp; Régularité (/20)</span> <span>→</span></a></li>
+                        <li><a href="aps-course-duree-demi-fond-eps-maroc.html#volet-atd"><span>📐 ATD Course de Durée &amp; Demi-Fond</span> <span>→</span></a></li>
+                    </ul>
+                </div>
+                <div class="aps-card-footer">
+                    <a href="aps-course-duree-demi-fond-eps-maroc.html" class="aps-btn-main" style="background:#0d9488;">Ouvrir la Page Spéciale Durée &amp; VMA →</a>
+                </div>
+            </article>'''
+
+            hhtml = hhtml.replace(old_duree_card, new_duree_card)
+            with open(hub_path, "w", encoding="utf-8") as f:
+                f.write(hhtml)
+            print("[HUB APS OK] Updated /public/hub-aps-sports-eps-maroc.html with Course de Durée / Demi-Fond Complete Silo.")
+
+    # 2. Add Demi-Fond cross-link in sticky nav of existing silos
+    for silo_file in [
+        "aps-handball-eps-maroc.html",
+        "aps-basketball-eps-maroc.html",
+        "aps-volleyball-eps-maroc.html",
+        "aps-football-eps-maroc.html",
+        "aps-gymnastique-sol-eps-maroc.html",
+        "aps-course-vitesse-relais-eps-maroc.html"
+    ]:
+        s_path = os.path.join(PUBLIC_DIR, silo_file)
+        if os.path.exists(s_path):
+            with open(s_path, "r", encoding="utf-8") as f:
+                s_html = f.read()
+            if "aps-course-duree-demi-fond-eps-maroc.html" not in s_html:
+                s_html = s_html.replace(
+                    '<a href="hub-aps-sports-eps-maroc.html" style="font-size:',
+                    '<a href="aps-course-duree-demi-fond-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#0f766e;">🏃 Durée/VMA</a>\n                <a href="hub-aps-sports-eps-maroc.html" style="font-size:'
+                )
+                with open(s_path, "w", encoding="utf-8") as f:
+                    f.write(s_html)
+
+    # 3. Update /public/blog.html with the new Silo Course de Durée & Demi-Fond card
+    blog_path = os.path.join(PUBLIC_DIR, "blog.html")
+    if os.path.exists(blog_path):
+        with open(blog_path, "r", encoding="utf-8") as f:
+            bhtml = f.read()
+
+        if "aps-course-duree-demi-fond-eps-maroc.html" not in bhtml:
+            duree_blog_card = '''                <!-- Silo Complet Course de Durée & Demi-Fond : aps-course-duree-demi-fond-eps-maroc.html -->
+                <article class="article-card" data-category="aps">
+                    <div class="article-visual article-aps">
+                        <span class="category-badge category-aps">🏃 Studio Durée, Demi-Fond &amp; Calculateur VMA</span>
+                        <div class="article-icon">
+                            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#006233" stroke-width="2"/><path d="M12 7v5l3 3" stroke="#991b1b" stroke-width="2" stroke-linecap="round"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Silo Course de Durée, Demi-Fond &amp; VMA en EPS au Maroc (1AC à 2Bac) : Calculateur VMA &amp; Plots, ATD, 24 Cycles &amp; 240 Fiches (PDF/Word) + Barèmes (/20)</h3>
+                        <p class="article-excerpt">Page spéciale Course de Durée &amp; Demi-Fond (600m, 800m, 1000m) tout-en-un : Calculateur VMA et temps de passage aux plots intégré, ATD complet, visionneuse A4 pro des cycles et fiches (1AC à 2Bac × 4 niveaux) en Word/PDF et barèmes de régularité (/20).</p>
+                        <div class="article-footer">
+                            <span class="article-date">4 Novembre 2026 · Calculateur VMA + PDF/Word</span>
+                            <a href="aps-course-duree-demi-fond-eps-maroc.html" class="read-more">Ouvrir le Studio Durée &amp; VMA →</a>
+                        </div>
+                    </div>
+                </article>'''
+
+            marker = '<div class="articles-grid" id="articlesGrid">'
+            bhtml = bhtml.replace(marker, marker + "\n" + duree_blog_card, 1)
+            bhtml = bhtml.replace('<h3>Tous <span class="theme-count" id="count-all">141</span></h3>', '<h3>Tous <span class="theme-count" id="count-all">142</span></h3>')
+            bhtml = bhtml.replace('<span class="articles-count" id="articlesCount">141 articles</span>', '<span class="articles-count" id="articlesCount">142 articles</span>')
+            bhtml = bhtml.replace('<h3>Activités Sportives <span class="theme-count" id="count-aps">30</span></h3>', '<h3>Activités Sportives <span class="theme-count" id="count-aps">31</span></h3>')
+
+            with open(blog_path, "w", encoding="utf-8") as f:
+                f.write(bhtml)
+            print("[BLOG OK] Added Silo Course de Durée & Demi-Fond card to /public/blog.html.")
+
+    # 4. Update /public/index.html (and mirror to /index.html) so the APS Studio Banner highlights all 7 Complete Silos
+    index_path = os.path.join(PUBLIC_DIR, "index.html")
+    if os.path.exists(index_path):
+        with open(index_path, "r", encoding="utf-8") as f:
+            ihtml = f.read()
+
+        start_tag = "<!-- PROFEPS_APS_STUDIO_HUB_BANNER_START -->"
+        end_tag = "<!-- PROFEPS_APS_STUDIO_HUB_BANNER_END -->"
+        if start_tag in ihtml and end_tag in ihtml:
+            s_idx = ihtml.find(start_tag)
+            e_idx = ihtml.find(end_tag) + len(end_tag)
+            updated_banner = '''<!-- PROFEPS_APS_STUDIO_HUB_BANNER_START -->
+  <section aria-label="Portail des APS : 7 Studios Complets (Course de Durée/VMA, Vitesse/Relais, Gymnastique, Football/Futsal, Volley, Basket & Handball)" style="max-width:1140px;margin:1.75rem auto;padding:1.5rem;background:linear-gradient(135deg,#f0fdf4 0%,#ffffff 50%,#fff1f2 100%);border:2px solid #006233;border-radius:18px;box-shadow:0 8px 22px rgba(15,23,42,0.06);">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem;margin-bottom:1rem;">
+      <div>
+        <span style="display:inline-block;font-size:0.74rem;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:#ffffff;background:#006233;padding:0.22rem 0.7rem;border-radius:999px;">🏟️ Nouveau · 7 Studios APS Complets (1AC → 2Bac × 4 Niveaux)</span>
+        <h2 style="margin:0.35rem 0 0;font-size:1.22rem;font-weight:900;color:#0f172a;">Portail des APS : Course de Durée &amp; VMA, Vitesse &amp; Relais, Gymnastique au Sol, Foot/Futsal, Volley, Basket &amp; Handball (ATD, 24 Cycles, 240 Fiches Word/PDF &amp; Grilles /20)</h2>
+      </div>
+      <a href="hub-aps-sports-eps-maroc.html" style="font-size:0.84rem;font-weight:800;color:#006233;text-decoration:underline;">Ouvrir le Portail de Toutes les APS →</a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:0.7rem;">
+      <a href="aps-course-duree-demi-fond-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.85rem;background:#ffffff;border:2px solid #0d9488;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.7rem;font-weight:800;color:#0f766e;margin-bottom:0.2rem;">🏃 Nouveau · Durée &amp; VMA</span>
+        <strong style="font-size:0.8rem;color:#0f172a;line-height:1.3;">Calculateur VMA &amp; Plots, 24 Cycles, 240 Fiches + Barèmes 1000m/800m →</strong>
+      </a>
+      <a href="aps-course-vitesse-relais-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.85rem;background:#ffffff;border:2px solid #dc2626;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.7rem;font-weight:800;color:#dc2626;margin-bottom:0.2rem;">⚡ Vitesse &amp; Relais</span>
+        <strong style="font-size:0.8rem;color:#0f172a;line-height:1.3;">ATD Sprint/Relais, 24 Cycles &amp; 240 Fiches + Barèmes 60m/80m/100m →</strong>
+      </a>
+      <a href="aps-gymnastique-sol-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.85rem;background:#ffffff;border:2px solid #7c3aed;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.7rem;font-weight:800;color:#7c3aed;margin-bottom:0.2rem;">🤸 Gymnastique au Sol</span>
+        <strong style="font-size:0.8rem;color:#0f172a;line-height:1.3;">ATD Gym, Code A/B/C/D, 24 Cycles &amp; 240 Fiches + Jury D+E (/20) →</strong>
+      </a>
+      <a href="aps-football-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.85rem;background:#ffffff;border:2px solid #b45309;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.7rem;font-weight:800;color:#b45309;margin-bottom:0.2rem;">⚽ Football &amp; Futsal</span>
+        <strong style="font-size:0.8rem;color:#0f172a;line-height:1.3;">ATD Foot/Futsal, 24 Cycles &amp; 240 Fiches (Système 1-2-1) + Grilles →</strong>
+      </a>
+      <a href="aps-volleyball-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.85rem;background:#ffffff;border:2px solid #1e40af;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.7rem;font-weight:800;color:#1e40af;margin-bottom:0.2rem;">🏐 Volley-Ball</span>
+        <strong style="font-size:0.8rem;color:#0f172a;line-height:1.3;">ATD Volley, 24 Cycles &amp; 240 Fiches (Chaîne R-P-A) + Grilles (/20) →</strong>
+      </a>
+      <a href="aps-basketball-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.85rem;background:#ffffff;border:2px solid #006233;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.7rem;font-weight:800;color:#006233;margin-bottom:0.2rem;">🏀 Basket-Ball à 5</span>
+        <strong style="font-size:0.8rem;color:#0f172a;line-height:1.3;">ATD Basket 5×5, 24 Cycles &amp; 240 Fiches (Pick &amp; Roll) + Grilles →</strong>
+      </a>
+      <a href="aps-handball-eps-maroc.html" style="display:flex;flex-direction:column;justify-content:space-between;padding:0.85rem;background:#ffffff;border:2px solid #991b1b;border-radius:12px;text-decoration:none;">
+        <span style="font-size:0.7rem;font-weight:800;color:#991b1b;margin-bottom:0.2rem;">🤾 Handball</span>
+        <strong style="font-size:0.8rem;color:#0f172a;line-height:1.3;">ATD Handball, 24 Cycles &amp; 240 Fiches (Visionneuse A4) + Grilles →</strong>
+      </a>
+    </div>
+  </section>
+  <!-- PROFEPS_APS_STUDIO_HUB_BANNER_END -->'''
+            ihtml = ihtml[:s_idx] + updated_banner + ihtml[e_idx:]
+            with open(index_path, "w", encoding="utf-8") as f:
+                f.write(ihtml)
+            shutil.copy2(index_path, os.path.join(ROOT_DIR, "index.html"))
+            print("[INDEX OK] Updated /public/index.html and mirrored to /index.html.")
+
+    # 5. Update /public/sitemap.xml
+    sitemap_path = os.path.join(PUBLIC_DIR, "sitemap.xml")
+    if os.path.exists(sitemap_path):
+        with open(sitemap_path, "r", encoding="utf-8") as f:
+            xml = f.read()
+        loc = "https://profeps.ma/aps-course-duree-demi-fond-eps-maroc.html"
+        if loc not in xml:
+            entry = f'''  <url>
+    <loc>{loc}</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>'''
+            xml = xml.replace("</urlset>", entry + "\n</urlset>")
+            with open(sitemap_path, "w", encoding="utf-8") as f:
+                f.write(xml)
+            print("[SITEMAP OK] Added aps-course-duree-demi-fond-eps-maroc.html to /public/sitemap.xml.")
+
+
+if __name__ == "__main__":
+    create_duree_demi_fond_silo_page()
+    update_hub_silos_blog_index_sitemap()
+    print("=== SILO COMPLET COURSE DE DURÉE / DEMI-FOND GENERATED SUCCESSFULLY ===")

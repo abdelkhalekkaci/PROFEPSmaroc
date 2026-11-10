@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" id="html-root">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Générateur Intermittent HIIT & COD 180° | ProfEPS</title>
+  <meta name="description" content="Calculez vos distances d’intermittent HIIT avec ou sans demi-tours 180°. Modèle Buchheit pour sports collectifs et cours d’EPS.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ProfEPS Maroc">
+  <meta property="og:title" content="Générateur Intermittent HIIT & COD 180° | ProfEPS">
+  <meta property="og:description" content="Calculez vos distances d’intermittent HIIT avec ou sans demi-tours 180°. Modèle Buchheit pour sports collectifs et cours d’EPS.">
+  <meta property="og:url" content="https://profeps.ma/generateur-intermittent-hiit-cod.html">
+  <meta property="og:image" content="https://profeps.ma/images/prof_eps.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Générateur Intermittent HIIT & COD 180° | ProfEPS">
+  <meta name="twitter:description" content="Calculez vos distances d’intermittent HIIT avec ou sans demi-tours 180°. Modèle Buchheit pour sports collectifs et cours d’EPS.">
+  <meta name="twitter:image" content="https://profeps.ma/images/prof_eps.png">
+  <link rel="canonical" href="https://profeps.ma/generateur-intermittent-hiit-cod.html" />
+  <link rel="alternate" hreflang="fr-MA" href="https://profeps.ma/generateur-intermittent-hiit-cod.html">
+  <link rel="alternate" hreflang="x-default" href="https://profeps.ma/generateur-intermittent-hiit-cod.html">
+  <link rel="icon" type="image/png" href="images/prof_eps.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Calculateur d’Intermittent HIIT & Navettes Sports Collectifs (COD 180°)","url":"https://profeps.ma/generateur-intermittent-hiit-cod.html","applicationCategory":"HealthApplication","operatingSystem":"All","inLanguage":["fr","en","ar"],"description":"Paramétrez votre VMA, la durée d’effort, le % VMA et la longueur du terrain puis cliquez sur Calculer pour obtenir vos distances de plots sur piste et avec relances à 180° (modèle Buchheit).","keywords":"calculateur intermittent 15/15 30/30, distance plots vma eps, navette cod 180 buchheit, entrainement fractionné sports collectifs","offers":{"@type":"Offer","price":"0","priceCurrency":"MAD"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Pourquoi faut-il réduire la distance des plots lors d'un 15/15 en navette avec demi-tours (COD 180°) ?","acceptedAnswer":{"@type":"Answer","text":"Sur un terrain de handball, de basket ou une cour d'établissement scolaire, chaque demi-tour à 180° oblige à freiner puis relancer, ce qui coûte environ 0,72 seconde et un surplus d'énergie musculaire excentrique. Sans réduction de la distance des plots, l'élève est en surcharge lactique précoce."}}]}]}</script>
+  <link rel="stylesheet" href="/css/tailwind-precompiled.min.css?v=20261101">
+  <style id="profeps-calculator-ui-css">
+/* Styles dédiés aux pages Calculateurs — Palette douce, académique & reposante ProfEPS */
+.vma-hero {
+  margin-top: 80px !important;
+  padding: 2.5rem 1.25rem 2rem !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  text-align: center !important;
+  position: relative !important;
+}
+.hero-badge {
+  display: inline-flex !important; align-items: center !important; gap: 0.45rem !important;
+  background: #f8fafc !important;
+  color: #1e293b !important;
+  padding: 0.38rem 1rem !important; border-radius: 9999px !important;
+  font-size: 0.75rem !important; font-weight: 800 !important; text-transform: uppercase !important;
+  letter-spacing: 0.04em !important; margin-bottom: 0.8rem !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+.vma-hero h1 {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
+  font-size: clamp(1.55rem, 3vw, 2.2rem) !important;
+  font-weight: 800 !important; color: #0f172a !important; margin: 0 auto 0.65rem auto !important;
+  max-width: 860px !important; line-height: 1.24 !important; letter-spacing: -0.02em !important;
+  text-wrap: balance !important;
+}
+.vma-hero p {
+  font-size: 0.95rem !important; color: #475569 !important; max-width: 740px !important;
+  margin: 0 auto !important; line-height: 1.6 !important;
+}
+main > div.max-w-3xl,
+#tool-results-panel > div,
+.peps-seo-guide-card {
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 20px !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 8px 24px -8px rgba(15, 23, 42, 0.05) !important;
+  background: #ffffff !important;
+}
+main > div.max-w-3xl::before {
+  display: none !important;
+  content: none !important;
+}
+main > div.max-w-3xl .grid {
+  align-items: stretch !important;
+}
+main > div.max-w-3xl .grid > div {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+}
+main > div.max-w-3xl .grid > div > label {
+  margin-bottom: 0.45rem !important;
+  line-height: 1.3 !important;
+  min-height: 2.1rem !important;
+  display: flex !important;
+  align-items: flex-end !important;
+}
+main > div.max-w-3xl input[type="number"],
+main > div.max-w-3xl select {
+  height: 46px !important;
+  min-height: 46px !important;
+  max-height: 46px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  border-radius: 12px !important;
+  border: 1.5px solid #cbd5e1 !important;
+  background-color: #f8fafc !important;
+  padding: 0 0.9rem !important;
+  font-size: 0.95rem !important;
+  color: #0f172a !important;
+  font-variant-numeric: tabular-nums !important;
+  transition: all 0.18s ease !important;
+  margin-top: auto !important;
+}
+main > div.max-w-3xl input[type="number"]:focus,
+main > div.max-w-3xl select:focus {
+  outline: none !important;
+  border-color: #1e293b !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(30, 41, 59, 0.08) !important;
+}
+#tool-results-panel .grid > div {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  font-variant-numeric: tabular-nums !important;
+}
+button.peps-cta-btn,
+#btn-calc-main {
+  width: 100% !important;
+  padding: 0.95rem 1.4rem !important;
+  margin-top: 0.65rem !important;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+  background-color: #f8fafc !important;
+  color: #1e293b !important;
+  -webkit-text-fill-color: #1e293b !important;
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
+  font-size: 0.98rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.005em !important;
+  border: 1.5px solid #cbd5e1 !important;
+  border-radius: 14px !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 14px -4px rgba(30, 41, 59, 0.08) !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.75rem !important;
+  position: relative !important;
+  overflow: hidden !important;
+  text-align: center !important;
+}
+button.peps-cta-btn:hover,
+#btn-calc-main:hover {
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%) !important;
+  border-color: #1e293b !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 8px 20px -5px rgba(30, 41, 59, 0.14) !important;
+}
+button.peps-cta-btn:active,
+#btn-calc-main:active {
+  transform: translateY(0) !important;
+}
+button.peps-cta-btn .peps-cta-arrow,
+#btn-calc-main .peps-cta-arrow {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 8px !important;
+  background: #1e293b !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-size: 0.95rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  flex-shrink: 0 !important;
+  margin-left: 0.25rem !important;
+  transition: transform 0.18s ease !important;
+}
+button.peps-cta-btn:hover .peps-cta-arrow,
+#btn-calc-main:hover .peps-cta-arrow {
+  transform: translateX(2px) !important;
+}
+</style>
+  <script src="profeps-cmp.js" defer></script>
+<link rel="stylesheet" href="/css/profeps-unifier.min.css?v=20261101">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil ProfEPS Maroc","item":"https://profeps.ma/"},{"@type":"ListItem","position":2,"name":"Calculateurs & Physiologie Sportive","item":"https://profeps.ma/hub-outils-sport-performance.html"},{"@type":"ListItem","position":3,"name":"Générateur Intermittent HIIT & COD 180° | ProfEPS","item":"https://profeps.ma/generateur-intermittent-hiit-cod.html"}]}</script>
+  <!-- Google tag (gtag.js) & Consent Mode v2 ProfEPS.ma -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    try {
+      var saved = JSON.parse(localStorage.getItem("profeps_cookie_consent_v2") || "null");
+      if (saved) {
+        gtag("consent", "default", {
+          "ad_storage": saved.ads ? "granted" : "denied",
+          "ad_user_data": saved.ads ? "granted" : "denied",
+          "ad_personalization": saved.ads ? "granted" : "denied",
+          "analytics_storage": saved.analytics ? "granted" : "denied"
+        });
+      } else {
+        gtag("consent", "default", {
+          "ad_storage": "granted",
+          "ad_user_data": "granted",
+          "ad_personalization": "granted",
+          "analytics_storage": "granted"
+        });
+        gtag("consent", "default", {
+          "ad_storage": "denied",
+          "ad_user_data": "denied",
+          "ad_personalization": "denied",
+          "analytics_storage": "denied",
+          "region": ["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IS","IE","IT","LV","LI","LT","LU","MT","NL","NO","PL","PT","RO","SK","SI","ES","SE","GB","CH"],
+          "wait_for_update": 500
+        });
+      }
+    } catch (e) {}
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TH0Z1SGNXH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-TH0Z1SGNXH");
+  </script>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50">
+<!-- PROFEPS_UNIFIED_NAVBAR_START -->
+  <nav id="navbar" class="navbar navbar-decoy" style="display:none !important;visibility:hidden !important;opacity:0 !important;width:0 !important;height:0 !important;overflow:hidden !important;position:absolute !important;pointer-events:none !important;z-index:-9999 !important;" aria-hidden="true">
+    <div class="nav-container">
+      <div id="navMenu" class="nav-menu"></div>
+      <div id="navRightDecoy" class="nav-right"></div>
+      <button id="navToggle" class="nav-toggle" type="button"></button>
+      <div id="navBackdrop" class="nav-backdrop"></div>
+    </div>
+  </nav>
+  <div class="peps-navbar" id="pepsNavbar" role="navigation" aria-label="Navigation principale" data-current-file="generateur-intermittent-hiit-cod.html">
+    <div class="peps-nav-container">
+      <a href="/" class="peps-nav-logo" aria-label="Prof EPS Maroc - Accueil">
+        <img src="/images/prof_eps.webp" width="156" height="52" decoding="async" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:52px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
+      </a>
+      <div class="peps-nav-menu" id="pepsNavMenu">
+        <a href="/" class="peps-nav-link" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
+        <a href="generateur.html" class="peps-nav-link" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
+        <div class="peps-dropdown" id="pepsCalcDropdown">
+          <a href="generateur-intermittent-hiit-cod.html" class="peps-nav-link active" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="Intermittent HIIT & COD" data-i18n-en="HIIT & 180° Shuttle" data-i18n-ar="التدريب المتقطع HIIT و COD">Intermittent HIIT & COD</span><span class="peps-dropdown-caret">▾</span></a>
+          <div class="peps-dropdown-menu" id="pepsDropdownMenu">
+            <a href="hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub" data-i18n-fr="🧭 Hub de Tous les Calculateurs Sport" data-i18n-en="🧭 All Sports Calculators Hub" data-i18n-ar="🧭 بوابة جميع الحاسبات الرياضية">🧭 Hub de Tous les Calculateurs Sport</a>
+            <a href="calculateur-vma.html" class="peps-dropdown-item" data-i18n-fr="⚡ Calculateur VMA & Allures" data-i18n-en="⚡ MAS (VMA) & Paces Calculator" data-i18n-ar="⚡ حاسبة السرعة الهوائية القصوى (VMA)">⚡ Calculateur VMA & Allures</a>
+            <a href="calculateur-vdot-asr-endurance.html" class="peps-dropdown-item" data-i18n-fr="🫁 Calculateur VO2 Max & VDOT" data-i18n-en="🫁 VO2 Max & VDOT Calculator" data-i18n-ar="🫁 حاسبة VO2 Max ومؤشر VDOT">🫁 Calculateur VO2 Max & VDOT</a>
+            <a href="calculateur-asr-reserve-vitesse.html" class="peps-dropdown-item" data-i18n-fr="🚀 Réserve de Vitesse Anaérobie (ASR)" data-i18n-en="🚀 Anaerobic Speed Reserve (ASR)" data-i18n-ar="🚀 احتياطي السرعة اللاهوائية (ASR)">🚀 Réserve de Vitesse Anaérobie (ASR)</a>
+            <a href="calculateur-indice-endurance.html" class="peps-dropdown-item" data-i18n-fr="📈 Indice d'Endurance (Péronnet)" data-i18n-en="📈 Endurance Index (Péronnet)" data-i18n-ar="📈 مؤشر التحمل (نموذج بيروني)">📈 Indice d'Endurance (Péronnet)</a>
+            <a href="calculateur-frequence-cardiaque-karvonen.html" class="peps-dropdown-item" data-i18n-fr="❤️ Fréquence Cardiaque (Karvonen)" data-i18n-en="❤️ Heart Rate Zones (Karvonen)" data-i18n-ar="❤️ نبضات القلب ومناطق التدريب (Karvonen)">❤️ Fréquence Cardiaque (Karvonen)</a>
+            <a href="calculateur-imc-sportif-masse-grasse.html" class="peps-dropdown-item" data-i18n-fr="⚖️ Calculateur IMC & Masse Grasse" data-i18n-en="⚖️ Athletic BMI & Body Fat %" data-i18n-ar="⚖️ حاسبة مؤشر كتلة الجسم ونسبة الدهون">⚖️ Calculateur IMC & Masse Grasse</a>
+            <a href="calculateur-chaleur-meteo-altitude.html" class="peps-dropdown-item" data-i18n-fr="☀️ Chaleur, Humidité & Altitude" data-i18n-en="☀️ Heat, Humidity & Altitude" data-i18n-ar="☀️ تأثير الحرارة والرطوبة والارتفاع">☀️ Chaleur, Humidité & Altitude</a>
+            <a href="calculateur-gap-pente-nutrition.html" class="peps-dropdown-item" data-i18n-fr="⛰️ Allure Pente (GAP) & Nutrition" data-i18n-en="⛰️ Grade Adjusted Pace & Nutrition" data-i18n-ar="⛰️ إيقاع المنحدرات (GAP) والتغذية">⛰️ Allure Pente (GAP) & Nutrition</a>
+            <a href="generateur-intermittent-hiit-cod.html" class="peps-dropdown-item active-tool" data-i18n-fr="🔄 Intermittent HIIT & COD 180°" data-i18n-en="🔄 HIIT Intermittent & 180° COD" data-i18n-ar="🔄 مولد التدريب المتقطع HIIT وتغيير الاتجاه">🔄 Intermittent HIIT & COD 180°</a>
+            <a href="calculateur-charge-rpe-foster-acwr.html" class="peps-dropdown-item" data-i18n-fr="🛡️ Charge RPE Foster & ACWR" data-i18n-en="🛡️ Foster sRPE Load & ACWR Ratio" data-i18n-ar="🛡️ حمل التدريب (RPE Foster) ونسبة ACWR">🛡️ Charge RPE Foster & ACWR</a>
+          </div>
+        </div>
+        <a href="concours-crmef-hub.html" class="peps-nav-link" data-i18n-fr="Préparation CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparation CRMEF</a>
+        <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
+      </div>
+      <div class="peps-nav-right">
+        <div dir="ltr" class="peps-lang-switch" aria-label="Sélecteur de langue">
+          <button type="button" class="peps-lang-btn active" id="peps-btn-lang-fr" data-lang="fr" onclick="window.profepsSetLang('fr')">FR</button>
+          <span class="peps-lang-sep">/</span>
+          <button type="button" class="peps-lang-btn" id="peps-btn-lang-en" data-lang="en" onclick="window.profepsSetLang('en')">EN</button>
+          <span class="peps-lang-sep">/</span>
+          <button type="button" class="peps-lang-btn" id="peps-btn-lang-ar" data-lang="ar" onclick="window.profepsSetLang('ar')">عربي</button>
+        </div>
+        <button type="button" class="peps-nav-toggle" id="pepsNavToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+<script id="profeps-master-unifier-js">
+(function() {
+  // Stub silencieux au cas où un ancien script de page appelle encore window.supabase
+  var dummyAuth = {
+    getSession: function() { return Promise.resolve({ data: { session: null }, error: null }); },
+    getUser: function() { return Promise.resolve({ data: { user: null }, error: null }); },
+    onAuthStateChange: function() { return { data: { subscription: { unsubscribe: function() {} } } }; },
+    signOut: function() { return Promise.resolve({ error: null }); }
+  };
+  var dummyClient = {
+    auth: dummyAuth,
+    from: function() {
+      return {
+        select: function() { return Promise.resolve({ data: [], error: null }); },
+        insert: function() { return Promise.resolve({ data: null, error: null }); },
+        update: function() { return Promise.resolve({ data: null, error: null }); },
+        delete: function() { return Promise.resolve({ data: null, error: null }); }
+      };
+    }
+  };
+  window.supabase = { createClient: function() { return dummyClient; } };
+  window.supabaseClient = dummyClient;
+  window.ProfEPS = window.ProfEPS || { getSupabase: function() { return dummyClient; }, saveGeneration: function() { return Promise.resolve(); } };
+
+  var dropdown = document.getElementById('pepsCalcDropdown');
+  var dropdownMenu = document.getElementById('pepsDropdownMenu');
+  var closeTimer = null;
+
+  function openDropdown() {
+    if (closeTimer) {
+      clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+    var dd = document.getElementById('pepsCalcDropdown');
+    var dm = document.getElementById('pepsDropdownMenu');
+    if (dd) dd.classList.add('open');
+    if (dm) {
+      dm.style.setProperty('opacity', '1', 'important');
+      dm.style.setProperty('visibility', 'visible', 'important');
+      dm.style.setProperty('pointer-events', 'auto', 'important');
+      dm.style.setProperty('transform', 'translateX(-50%) translateY(0)', 'important');
+    }
+  }
+
+  function closeDropdownDelayed() {
+    if (closeTimer) clearTimeout(closeTimer);
+    closeTimer = setTimeout(function() {
+      var dd = document.getElementById('pepsCalcDropdown');
+      var dm = document.getElementById('pepsDropdownMenu');
+      if (dd) dd.classList.remove('open');
+      if (dm) {
+        dm.style.removeProperty('opacity');
+        dm.style.removeProperty('visibility');
+        dm.style.removeProperty('pointer-events');
+        dm.style.removeProperty('transform');
+      }
+    }, 180);
+  }
+
+  if (dropdown) {
+    dropdown.addEventListener('mouseenter', openDropdown);
+    dropdown.addEventListener('mouseleave', closeDropdownDelayed);
+  }
+  if (dropdownMenu) {
+    dropdownMenu.addEventListener('mouseenter', openDropdown);
+    dropdownMenu.addEventListener('mouseleave', closeDropdownDelayed);
+  }
+
+  // Délégation globale en renfort pour garantir l'ouverture au survol sur 100 % des pages
+  document.addEventListener('mouseover', function(e) {
+    var t = e.target;
+    if (t && t.closest && (t.closest('#pepsCalcDropdown') || t.closest('#pepsDropdownMenu'))) {
+      openDropdown();
+    }
+  });
+  document.addEventListener('mouseout', function(e) {
+    var t = e.target;
+    if (t && t.closest && (t.closest('#pepsCalcDropdown') || t.closest('#pepsDropdownMenu'))) {
+      var rel = e.relatedTarget;
+      if (!rel || !rel.closest || (!rel.closest('#pepsCalcDropdown') && !rel.closest('#pepsDropdownMenu'))) {
+        closeDropdownDelayed();
+      }
+    }
+  });
+
+  // Supprimer tout ancien <nav class="navbar"> résiduel ET tout bouton traducteur en doublon dans le contenu
+  function cleanPageDuplicates() {
+    document.querySelectorAll('nav.navbar:not(.navbar-decoy), .navbar:not(.navbar-decoy)').forEach(function(oldNav) {
+      if (oldNav.id !== 'pepsNavbar') {
+        if (oldNav.parentNode) oldNav.parentNode.removeChild(oldNav);
+      }
+    });
+    document.querySelectorAll('.lang-switch:not(.peps-lang-switch), .in-page-lang-switch, #btn-lang-fr, #btn-lang-en, #btn-lang-ar, button[onclick*="setToolLang"], button[onclick*="changeLang"], button.lang-btn:not(.peps-lang-btn)').forEach(function(el) {
+      if (!el.closest || !el.closest('#pepsNavbar')) {
+        var wrapper = el.closest ? (el.closest('.lang-switch, .in-page-lang-switch, [aria-label="Language selection"], [title*="Traduction"]') || el) : el;
+        if (wrapper === el && el.parentNode && el.parentNode.tagName === 'DIV') {
+          var parentTxt = (el.parentNode.textContent || '').trim();
+          if (parentTxt.length <= 50 && (!el.parentNode.closest || !el.parentNode.closest('#pepsNavbar'))) {
+            wrapper = el.parentNode;
+          }
+        }
+        if (wrapper && wrapper.parentNode && (!wrapper.closest || !wrapper.closest('#pepsNavbar'))) {
+          wrapper.parentNode.removeChild(wrapper);
+        }
+      }
+    });
+  }
+  cleanPageDuplicates();
+  window.addEventListener('DOMContentLoaded', cleanPageDuplicates);
+  // Nettoyage unique à l'initialisation et au DOMContentLoaded (CLS = 0, zéro surcharge MutationObserver)
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      var dd = document.getElementById('pepsCalcDropdown');
+      var dm = document.getElementById('pepsDropdownMenu');
+      if (dd) dd.classList.remove('open');
+      if (dm) {
+        dm.style.removeProperty('opacity');
+        dm.style.removeProperty('visibility');
+        dm.style.removeProperty('pointer-events');
+        dm.style.removeProperty('transform');
+      }
+      var toggleBtn = document.getElementById('pepsNavToggle');
+      var navMenuEl = document.getElementById('pepsNavMenu');
+      if (toggleBtn && navMenuEl) {
+        toggleBtn.classList.remove('active');
+        navMenuEl.classList.remove('active');
+      }
+    }
+  });
+
+  window.addEventListener('scroll', function() {
+    var n = document.getElementById('pepsNavbar');
+    if (n) n.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  document.addEventListener('click', function(e) {
+    var t = e.target;
+    if (t && t.closest && t.closest('#pepsNavToggle')) {
+      var toggleBtn = document.getElementById('pepsNavToggle');
+      var navMenuEl = document.getElementById('pepsNavMenu');
+      if (toggleBtn && navMenuEl) {
+        toggleBtn.classList.toggle('active');
+        navMenuEl.classList.toggle('active');
+      }
+    }
+  });
+
+  var nativeLang = ((document.documentElement.getAttribute('lang') || 'fr').toLowerCase().slice(0, 2));
+  var nativeDir = document.documentElement.getAttribute('dir') || (nativeLang === 'ar' ? 'rtl' : 'ltr');
+
+  window.profepsSetLang = function(lang, isAutoInit) {
+    if (!isAutoInit) {
+      try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
+    }
+    ['fr', 'en', 'ar'].forEach(function(code) {
+      var btn = document.getElementById('peps-btn-lang-' + code);
+      if (btn) btn.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
+      document.querySelectorAll('.peps-lang-btn[data-lang="' + code + '"]').forEach(function(b) {
+        b.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
+      });
+    });
+    document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function(el) {
+      var val = el.getAttribute('data-i18n-' + lang);
+      if (val) el.textContent = val;
+    });
+    if (typeof window.setToolLang === 'function') window.setToolLang(lang);
+    if (typeof window.changeLang === 'function') window.changeLang(lang);
+    if (typeof window.setLanguage === 'function') window.setLanguage(lang);
+    var hasBodyI18n = (
+      typeof window.setToolLang === 'function' ||
+      typeof window.changeLang === 'function' ||
+      typeof window.setLanguage === 'function' ||
+      document.querySelector('main [data-i18n-ar], .hero [data-i18n-ar], .vma-hero [data-i18n-ar]') !== null
+    );
+    if (hasBodyI18n) {
+      document.documentElement.lang = lang;
+      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    } else {
+      document.documentElement.lang = nativeLang;
+      document.documentElement.dir = nativeDir;
+    }
+  };
+
+  var saved = nativeLang === 'ar' ? 'ar' : 'fr';
+  try {
+    var storedLang = localStorage.getItem('profeps_lang');
+    if (nativeLang === 'ar') {
+      saved = 'ar';
+    } else if (storedLang) {
+      saved = storedLang;
+    }
+  } catch(e) {}
+  if (saved && (saved !== 'fr' || nativeLang === 'ar')) {
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', function() { window.profepsSetLang(saved, true); });
+    } else {
+      window.profepsSetLang(saved, true);
+    }
+  }
+})();
+</script>
+<!-- PROFEPS_UNIFIED_NAVBAR_END -->
+<header class="vma-hero">
+    <div id="ui-badge" class="hero-badge" data-i18n-fr="⚡ Cluster 3A/B · Intermittent HIIT &amp; Changement de Direction (COD 180°)" data-i18n-en="⚡ Cluster 3A/B · HIIT Intervals &amp; 180° Shuttle COD Calculator" data-i18n-ar="⚡ القطب 3A/B · التمارين المتقطعة HIIT وتغيير الاتجاه 180° للملاعب الجماعية">⚡ Cluster 3A/B · Intermittent HIIT &amp; Changement de Direction (COD 180°)</div>
+    <h1 id="ui-title" style="font-size:clamp(1.55rem,3vw,2.25rem);font-weight:800;color:#0f172a;margin:0 auto 0.65rem auto;max-width:880px;line-height:1.22;" data-i18n-fr="Calculateur d’Intermittent HIIT &amp; Navettes Sports Collectifs (COD 180°)" data-i18n-en="HIIT Interval &amp; Team Sports 180° Shuttle Cone Distance Calculator" data-i18n-ar="حاسبة مسافات التمارين المتقطعة والمكوك (COD 180°) للرياضات الجماعية">Calculateur d’Intermittent HIIT &amp; Navettes Sports Collectifs (COD 180°)</h1>
+    <p id="ui-sub" style="font-size:0.95rem;color:#475569;max-width:760px;margin:0 auto;line-height:1.6;" data-i18n-fr="Paramétrez votre VMA, la durée d’effort, le % VMA et la longueur du terrain puis cliquez sur Calculer pour obtenir vos distances de plots sur piste et avec relances à 180° (modèle Buchheit)." data-i18n-en="Set your MAS, interval duration, % MAS, and court shuttle length, then click Calculate to get linear track and 180° COD-adjusted cone distances." data-i18n-ar="حدد سرعة VMA ومدة الجهد ونسبة الشدة وطول الملعب ثم اضغط على &quot;احسب&quot; لمعرفة المسافات الدقيقة للأقماع على المضمار أو مع تغيير الاتجاه 180°.">Paramétrez votre VMA, la durée d’effort, le % VMA et la longueur du terrain puis cliquez sur Calculer pour obtenir vos distances de plots sur piste et avec relances à 180° (modèle Buchheit).</p>
+  </header>
+
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-6">
+    <div class="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-5">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3.5">
+        <h2 class="text-base font-extrabold text-slate-900 uppercase tracking-wider" data-i18n-fr="1. Paramètres de la Séance Intermittente (10s/10s, 15s/15s, 30s/30s)" data-i18n-en="1. HIIT Session Parameters (10s/10s, 15s/15s, 30s/30s)" data-i18n-ar="1. معطيات حصة التدريب المتقطع (15/15، 30/30)">1. Paramètres de la Séance Intermittente (10s/10s, 15s/15s, 30s/30s)</h2>
+        <span class="text-xs font-bold px-3 py-1 rounded-full bg-blue-50 text-blue-800 border border-blue-200">Piste & COD 180°</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="VMA du groupe/athlète (km/h)" data-i18n-en="Athlete/Group MAS (km/h)" data-i18n-ar="سرعة VMA (كم/س)">VMA du groupe/athlète (km/h)</label>
+          <input id="inp-vma" type="number" value="16" min="8" max="25" step="0.5" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-base font-mono font-bold" />
+        </div>
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Durée d'effort (secondes)" data-i18n-en="Work Duration (seconds)" data-i18n-ar="مدة الجهد (بالثواني)">Durée d'effort (secondes)</label>
+          <input id="inp-sec" type="number" value="15" min="5" max="180" step="5" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-base font-mono font-bold" />
+        </div>
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Intensité cible (% VMA)" data-i18n-en="Target Intensity (% MAS)" data-i18n-ar="الشدة المستهدفة (% من VMA)">Intensité cible (% VMA)</label>
+          <input id="inp-pct" type="number" value="110" min="80" max="140" step="5" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-base font-mono font-bold" />
+        </div>
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5" data-i18n-fr="Navette Terrain (m) [0 = Piste]" data-i18n-en="Shuttle Length (m) [0 = Track]" data-i18n-ar="طول المكوك بالمتر [0 = مضمار]">Navette Terrain (m) [0 = Piste]</label>
+          <input id="inp-shuttle" type="number" value="20" min="0" max="100" step="5" oninput="onInputUpdated()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-base font-mono font-bold" />
+        </div>
+      </div>
+
+      <button type="button" id="btn-calc-main" onclick="triggerCalculation()" class="peps-cta-btn w-full mt-3 py-4 px-6 rounded-2xl font-extrabold text-base sm:text-lg text-white shadow-xl transition-all duration-200 flex items-center justify-center gap-3 cursor-pointer select-none"><span>🔄</span>
+        <span data-i18n-fr="Calculer les Distances de Plots (Piste & Navettes COD 180°)" data-i18n-en="Calculate Cone Distances (Linear Track & 180° Shuttles)" data-i18n-ar="احسب مسافات الأقماع (على المضمار ومع تغيير الاتجاه 180°)">Calculer les Distances de Plots (Piste & Navettes COD 180°)</span><span class="peps-cta-arrow" aria-hidden="true">→</span></button>
+    </div>
+
+    <div id="tool-results-panel" class="hidden space-y-6">
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+        <h3 class="text-base font-extrabold text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-3" data-i18n-fr="2. Vos Distances Cibles & Interprétation Biomécanique" data-i18n-en="2. Target Cone Distances & Biomechanical Interpretation" data-i18n-ar="2. المسافات المستهدفة والتفسير البيوميكانيكي">2. Vos Distances Cibles & Interprétation Biomécanique</h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-1">
+            <div class="text-xs font-extrabold uppercase text-slate-800" data-i18n-fr="Distance Linéaire (Sur Piste)" data-i18n-en="Linear Distance (Track)" data-i18n-ar="المسافة الخطية (مضمار بدون دوران)">Distance Linéaire (Sur Piste)</div>
+            <div id="out-lin" dir="ltr" class="text-3xl font-black font-mono text-slate-800 tabular-nums">--</div>
+            <div id="out-lin-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 border border-slate-200"></div>
+          </div>
+          <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl space-y-1">
+            <div class="text-xs font-extrabold uppercase text-emerald-900" data-i18n-fr="Distance Corrigée COD 180°" data-i18n-en="180° COD Adjusted Distance" data-i18n-ar="المسافة المعدلة مع الدوران 180°">Distance Corrigée COD 180°</div>
+            <div id="out-cod" dir="ltr" class="text-3xl font-black font-mono text-emerald-700 tabular-nums">--</div>
+            <div id="out-cod-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 border border-emerald-100"></div>
+          </div>
+          <div class="p-4 bg-red-50 border border-red-200 rounded-2xl space-y-1">
+            <div class="text-xs font-extrabold uppercase text-red-900" data-i18n-fr="Vitesse Cible Mécanique" data-i18n-en="Target Mechanical Speed" data-i18n-ar="السرعة الميكانيكية المستهدفة">Vitesse Cible Mécanique</div>
+            <div id="out-spd" dir="ltr" class="text-3xl font-black font-mono text-red-700 tabular-nums">--</div>
+            <div id="out-spd-meaning" class="text-xs font-semibold text-slate-700 bg-white/80 rounded-lg p-2 border border-red-100"></div>
+          </div>
+        </div>
+
+        <div id="out-hiit-interp" class="p-5 bg-slate-50 border-l-4 border-emerald-600 rounded-xl text-xs sm:text-sm text-slate-700 space-y-2 leading-relaxed"></div>
+      </div>
+    </div>
+    
+    <!-- GUIDE D'UTILISATION VISUEL & EXPLICATION DES PARAMÈTRES (SEO) -->
+    <section class="peps-seo-guide-card max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 mt-8" style="max-width:48rem;margin:2rem auto 0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:20px;padding:1.75rem;box-shadow:0 10px 28px -8px rgba(15,23,42,0.06);" aria-labelledby="seo-guide-title">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.5rem;border-bottom:1px solid #f1f5f9;padding-bottom:1rem;">
+        <div class="flex items-center gap-2.5" style="display:flex;align-items:center;gap:0.65rem;">
+          <span class="w-9 h-9 rounded-xl bg-red-50 border border-red-200 text-red-700 flex items-center justify-center font-black text-base shrink-0" style="width:36px;height:36px;border-radius:10px;background:#fef2f2;border:1px solid #fecaca;display:inline-flex;align-items:center;justify-content:center;font-size:1rem;">📘</span>
+          <div>
+            <h2 id="seo-guide-title" class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight m-0" style="font-size:1.05rem;font-weight:800;color:#0f172a;margin:0;" data-i18n-fr="Mode d'Emploi & Signification des Paramètres" data-i18n-en="How It Works & Input Parameter Guide" data-i18n-ar="طريقة الاستخدام وشرح المعطيات المطلوبة">Mode d'Emploi & Signification des Paramètres</h2>
+          </div>
+        </div>
+        <span class="text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full self-start sm:self-auto" style="font-size:0.74rem;font-weight:700;color:#065f46;background:#ecfdf5;border:1px solid #a7f3d0;padding:0.25rem 0.75rem;border-radius:9999px;" data-i18n-fr="Guide Scientifique & EPS" data-i18n-en="Sports Science & PE Guide" data-i18n-ar="دليل علمي وتربوي">Guide Scientifique & EPS</span>
+      </div>
+
+      <div class="space-y-2.5">
+        <h3 class="text-xs font-extrabold uppercase tracking-wider text-red-700 m-0" style="font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:#b91c1c;margin:0 0 0.5rem 0;" data-i18n-fr="1. Étapes d'utilisation du calculateur" data-i18n-en="1. Step-by-Step Instructions" data-i18n-ar="1. خطوات استخدام الحاسبة">1. Étapes d'utilisation du calculateur</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          
+          <div class="flex items-start gap-3.5 p-4 rounded-xl bg-slate-50/90 border border-slate-200/90 shadow-xs hover:border-red-200 transition-all" style="display:flex;align-items:flex-start;gap:0.85rem;padding:1rem;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;">
+            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:#f8fafc;color:#1e293b;border:1px solid #cbd5e1;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">1</span>
+            <p class="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed m-0" style="font-size:0.84rem;line-height:1.55;color:#334155;margin:0;" data-i18n-fr="Indiquez la VMA (km/h) de l'élève, du joueur ou du groupe homogène." data-i18n-en="Enter athlete or group MAS/VMA (km/h)." data-i18n-ar="أدخل سرعة VMA للتلميذ أو المجموعة (كم/س).">Indiquez la VMA (km/h) de l'élève, du joueur ou du groupe homogène.</p>
+          </div>
+          <div class="flex items-start gap-3.5 p-4 rounded-xl bg-slate-50/90 border border-slate-200/90 shadow-xs hover:border-red-200 transition-all" style="display:flex;align-items:flex-start;gap:0.85rem;padding:1rem;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;">
+            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:#f8fafc;color:#1e293b;border:1px solid #cbd5e1;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">2</span>
+            <p class="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed m-0" style="font-size:0.84rem;line-height:1.55;color:#334155;margin:0;" data-i18n-fr="Choisissez la durée de la fraction d'effort en secondes (ex : 10 s, 15 s ou 30 s) et le pourcentage de VMA visé (ex : 100 % à 115 % VMA)." data-i18n-en="Set work interval duration in seconds (10s, 15s, 30s) and target % MAS (100%–120%)." data-i18n-ar="حدد مدة الجهد بالثواني (15 أو 30 ثانية) ونسبة الشدة المستهدفة (% من VMA).">Choisissez la durée de la fraction d'effort en secondes (ex : 10 s, 15 s ou 30 s) et le pourcentage de VMA visé (ex : 100 % à 115 % VMA).</p>
+          </div>
+          <div class="flex items-start gap-3.5 p-4 rounded-xl bg-slate-50/90 border border-slate-200/90 shadow-xs hover:border-red-200 transition-all" style="display:flex;align-items:flex-start;gap:0.85rem;padding:1rem;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;">
+            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:#f8fafc;color:#1e293b;border:1px solid #cbd5e1;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">3</span>
+            <p class="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed m-0" style="font-size:0.84rem;line-height:1.55;color:#334155;margin:0;" data-i18n-fr="Indiquez la longueur maximale disponible sur votre terrain ou gymnase (ex : 20 m ou 40 m ; mettez 0 pour une piste d'athlétisme sans demi-tour)." data-i18n-en="Enter court shuttle length in meters (e.g., 20m or 40m; set 0 for a linear track)." data-i18n-ar="أدخل طول الملعب المتاح بالمتر (مثلاً 20م أو 40م؛ ضع 0 للمضمار المستقيم).">Indiquez la longueur maximale disponible sur votre terrain ou gymnase (ex : 20 m ou 40 m ; mettez 0 pour une piste d'athlétisme sans demi-tour).</p>
+          </div>
+          <div class="flex items-start gap-3.5 p-4 rounded-xl bg-slate-50/90 border border-slate-200/90 shadow-xs hover:border-red-200 transition-all" style="display:flex;align-items:flex-start;gap:0.85rem;padding:1rem;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;">
+            <span class="w-7 h-7 rounded-full text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs" style="width:28px;height:28px;border-radius:9999px;background:#f8fafc;color:#1e293b;border:1px solid #cbd5e1;font-weight:800;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">4</span>
+            <p class="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed m-0" style="font-size:0.84rem;line-height:1.55;color:#334155;margin:0;" data-i18n-fr="Cliquez sur Calculer pour obtenir la distance exacte où placer vos plots." data-i18n-en="Click Calculate to get linear and 180° COD-adjusted cone distances." data-i18n-ar="اضغط على زر الحساب لمعرفة مسافة وضع الأقماع بدقة.">Cliquez sur Calculer pour obtenir la distance exacte où placer vos plots.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-2.5 pt-2">
+        <h3 class="text-xs font-extrabold uppercase tracking-wider text-emerald-800 m-0" style="font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:#065f46;margin:0 0 0.5rem 0;" data-i18n-fr="2. Explication des informations demandées" data-i18n-en="2. Explanation of Requested Inputs" data-i18n-ar="2. شرح المعلومات والمعطيات المطلوبة">2. Explication des informations demandées</h3>
+        <div class="grid grid-cols-1 gap-2.5">
+          
+          <div class="flex items-start gap-3 p-3.5 rounded-xl bg-emerald-50/50 border border-emerald-200/80" style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.9rem 1rem;border-radius:12px;background:rgba(236,253,245,0.55);border:1px solid rgba(167,243,208,0.85);">
+            <span class="w-6 h-6 rounded-lg bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0 mt-0.5" style="width:24px;height:24px;border-radius:8px;background:#006233;color:#ffffff;font-size:0.72rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">✓</span>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed m-0" style="font-size:0.83rem;line-height:1.55;color:#1e293b;margin:0;" data-i18n-fr="VMA (km/h) &amp; Intensité (% VMA) : fixent la vitesse mécanique cible en mètres par seconde (m/s)." data-i18n-en="MAS (km/h) &amp; Intensity (%): set mechanical target speed (m/s)." data-i18n-ar="سرعة VMA ونسبة الشدة: تحددان السرعة بالمتر في الثانية.">VMA (km/h) &amp; Intensité (% VMA) : fixent la vitesse mécanique cible en mètres par seconde (m/s).</p>
+          </div>
+          <div class="flex items-start gap-3 p-3.5 rounded-xl bg-emerald-50/50 border border-emerald-200/80" style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.9rem 1rem;border-radius:12px;background:rgba(236,253,245,0.55);border:1px solid rgba(167,243,208,0.85);">
+            <span class="w-6 h-6 rounded-lg bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0 mt-0.5" style="width:24px;height:24px;border-radius:8px;background:#006233;color:#ffffff;font-size:0.72rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">✓</span>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed m-0" style="font-size:0.83rem;line-height:1.55;color:#1e293b;margin:0;" data-i18n-fr="Durée d'effort (s) : temps de course entre deux coups de sifflet." data-i18n-en="Work Duration (s): interval duration." data-i18n-ar="مدة الجهد: زمن الجري بين الصافرتين.">Durée d'effort (s) : temps de course entre deux coups de sifflet.</p>
+          </div>
+          <div class="flex items-start gap-3 p-3.5 rounded-xl bg-emerald-50/50 border border-emerald-200/80" style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.9rem 1rem;border-radius:12px;background:rgba(236,253,245,0.55);border:1px solid rgba(167,243,208,0.85);">
+            <span class="w-6 h-6 rounded-lg bg-emerald-700 text-white text-xs font-black flex items-center justify-center shrink-0 mt-0.5" style="width:24px;height:24px;border-radius:8px;background:#006233;color:#ffffff;font-size:0.72rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">✓</span>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed m-0" style="font-size:0.83rem;line-height:1.55;color:#1e293b;margin:0;" data-i18n-fr="Longueur Navette Terrain (m) : applique l'équation biomécanique de Martin Buchheit (~0,72 s perdue par demi-tour à 180°) pour corriger la distance de plots en sports collectifs et EPS." data-i18n-en="Shuttle Length (m): applies Buchheit's 180° change-of-direction time penalty (~0.72s per turn) for court sports and PE." data-i18n-ar="طول المكوك بالمتر: يطبق معادلة بوخيت لتعويض الوقت الضائع في الفرملة والدوران 180° (~0.72 ثانية لكل دوران).">Longueur Navette Terrain (m) : applique l'équation biomécanique de Martin Buchheit (~0,72 s perdue par demi-tour à 180°) pour corriger la distance de plots en sports collectifs et EPS.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 rounded-xl bg-amber-50/70 border border-amber-200/80 space-y-1.5" style="padding:1rem 1.15rem;border-radius:14px;background:#fffbeb;border:1px solid #fde68a;">
+        <h3 class="text-xs font-extrabold uppercase tracking-wider text-amber-900 m-0" style="font-size:0.76rem;font-weight:800;color:#78350f;margin:0 0 0.35rem 0;">💡 Pourquoi faut-il réduire la distance des plots lors d'un 15/15 en navette avec demi-tours (COD 180°) ?</h3>
+        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed m-0" style="font-size:0.83rem;line-height:1.55;color:#334155;margin:0;">Sur un terrain de handball, de basket ou une cour d'établissement scolaire, chaque demi-tour à 180° oblige à freiner puis relancer, ce qui coûte environ 0,72 seconde et un surplus d'énergie musculaire excentrique. Sans réduction de la distance des plots, l'élève est en surcharge lactique précoce.</p>
+      </div>
+
+      <div class="pt-3 border-t border-slate-100 flex flex-wrap items-center gap-1.5" style="padding-top:0.75rem;border-top:1px solid #f1f5f9;display:flex;flex-wrap:wrap;align-items:center;gap:0.4rem;">
+        <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mr-1" style="font-size:0.68rem;font-weight:700;text-transform:uppercase;color:#94a3b8;margin-right:0.35rem;" data-i18n-fr="Thématiques :" data-i18n-en="Topics:" data-i18n-ar="مواضيع ذات صلة:">Thématiques :</span>
+        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600 border border-slate-200" style="display:inline-flex;align-items:center;padding:0.22rem 0.65rem;border-radius:9999px;font-size:0.72rem;font-weight:600;background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;">calculateur intermittent 15/15 30/30</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600 border border-slate-200" style="display:inline-flex;align-items:center;padding:0.22rem 0.65rem;border-radius:9999px;font-size:0.72rem;font-weight:600;background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;">distance plots vma eps</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600 border border-slate-200" style="display:inline-flex;align-items:center;padding:0.22rem 0.65rem;border-radius:9999px;font-size:0.72rem;font-weight:600;background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;">navette cod 180 buchheit</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600 border border-slate-200" style="display:inline-flex;align-items:center;padding:0.22rem 0.65rem;border-radius:9999px;font-size:0.72rem;font-weight:600;background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;">entrainement fractionné sports collectifs</span>
+      </div>
+    </section>
+  
+    <!-- AVERTISSEMENT DE PRUDENCE PHYSIQUE & CONFORMITÉ SANTÉ -->
+    <div class="peps-medical-notice max-w-3xl mx-auto my-6 p-4 rounded-xl bg-slate-50 border border-slate-200 text-slate-600 text-xs leading-relaxed flex items-start gap-3 shadow-xs">
+      <span class="text-amber-500 text-base shrink-0">⚠️</span>
+      <div>
+        <strong class="text-slate-800">Avertissement de sécurité et de prudence sportive :</strong> Les calculs physiologiques fournis sont des estimations théoriques validées scientifiquement à des fins pédagogiques et d'entraînement. Ils ne remplacent pas un avis médical personnalisé. Avant d'entreprendre des efforts à haute intensité, assurez-vous d'une aptitude médicale complète et respectez des phases d'échauffement et d'hydratation progressives.
+      </div>
+    </div>
+
+  
+    <!-- FICHE SCIENTIFIQUE & PÉDAGOGIQUE OFFICIELLE (1075 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1075 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1075 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1075 MOTS MINIMUM) -->
+    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1075 MOTS MINIMUM) -->
+    <section class="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 mt-8" id="fiche-pedagogique-officielle" style="max-width:48rem;margin:2rem auto 0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:20px;padding:1.75rem;box-shadow:0 10px 28px -8px rgba(15,23,42,0.06);">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-1">
+            <span class="text-red-700 font-bold">Cluster 3A · Conditionnement Physique &amp; Sports Co</span>
+            <span aria-hidden="true">&middot;</span>
+            <span style="color:#006233;font-weight:700;">Rédigé par Abdelkhalek ELBOUDANI (Prof d'EPS au Maroc)</span>
+          </div>
+          <h2 class="text-lg font-extrabold text-slate-900 tracking-tight flex items-center gap-2 m-0">
+            <span style="font-size:1.15rem;">📖</span>
+            Générateur Intermittent HIIT &amp; Navette COD 180°
+          </h2>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md tabular-nums border border-emerald-200">
+            1075 mots (Guide Approfondi)
+          </span>
+          <button type="button" onclick="copierFichePedagogique()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors cursor-pointer border border-slate-200" title="Copier le guide complet conforme aux OP complet (1075 mots)">
+            <span id="btn-copy-ico">📋</span>
+            <span id="btn-copy-txt">Copier le guide complet</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ZONE 2 : INTERPRÉTATION DES RÉSULTATS & BARÈMES SCOLAIRES (DIRECTEMENT SOUS L'OUTIL) -->
+      <div class="space-y-3">
+        <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
+          <span style="color:#d97706;">💡</span>
+          Zone 2 : Interprétation Immédiate &amp; Barèmes Scolaires Marocains
+        </h3>
+        <p class="text-xs text-slate-700 leading-relaxed bg-amber-50/60 border border-amber-200/70 p-3.5 rounded-xl m-0">
+          En sports collectifs et en EPS de gymnase, chaque virage à 180° oblige le joueur à décélérer jusqu'à l'arrêt complet puis à réaccélérer. Omettre cette correction COD conduit inévitablement à un épuisement lactique précoce et à des risques de blessure.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1">
+          
+    <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+      <div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Format Court Linéaire (15&quot;/15&quot; Piste)</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">105–115% VMA</div>
+      </div>
+      <div class="text-[11px] text-slate-600 leading-normal">Fractions d’effort à haute intensité sans relance. Excellent pour développer le VO2 Max sans contrainte excentrique.</div>
+    </div>
+    <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+      <div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Format Court Navette 180° (15&quot;/15&quot; Terrain 20m)</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">95–100% VMA ajustée</div>
+      </div>
+      <div class="text-[11px] text-slate-600 leading-normal">Contrainte neuromusculaire maximale. Distance réduite de 4 à 8 mètres pour compenser les freinages.</div>
+    </div>
+    <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+      <div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Format Moyen (30&quot;/30&quot; Football / Rugby)</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">100–105% VMA</div>
+      </div>
+      <div class="text-[11px] text-slate-600 leading-normal">Sollicitation cardiorespiratoire soutenue avec cinétique de consommation d’oxygène élevée.</div>
+    </div>
+    <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+      <div>
+        <div class="text-[11px] font-bold uppercase tracking-tight text-slate-500 mb-0.5">Format Puissance Supramaximale (10&quot;/20&quot; Explosif)</div>
+        <div class="text-sm font-extrabold tabular-nums mb-1 text-slate-900">115–125% VMA ou %ASR</div>
+      </div>
+      <div class="text-[11px] text-slate-600 leading-normal">Recrutement massif des fibres rapides de type II, puissance alactique et PMA.</div>
+    </div>
+        </div>
+      </div>
+
+      <!-- ZONE 3 : TRAITÉ DIDACTIQUE & SITUATIONS DE TERRAIN EN EPS AU MAROC -->
+      <div class="space-y-3 pt-2 border-t border-slate-100">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
+            <span style="color:#006233;">🏃</span>
+            Zone 3 : Application Didactique EPS Maroc &amp; Gestion de Classe (1075 mots)
+          </h3>
+          <button type="button" onclick="toggleTexteIntegral()" id="btn-toggle-texte" class="text-xs font-bold text-[#991b1b] hover:text-[#7f1d1d] cursor-pointer">
+            Afficher le texte complet ▼
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          
+    <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
+      <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">1</span>
+      <p class="text-xs text-slate-700 leading-relaxed m-0">Entrez la VMA (en km/h) de l'élève ou du groupe homogène (ou la VIFT issue du test 30-15 de Martin Buchheit).</p>
+    </div>
+    <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
+      <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">2</span>
+      <p class="text-xs text-slate-700 leading-relaxed m-0">Définissez les paramètres de la séquence intermittente : durée de la fraction d'effort en secondes (ex. 10s, 15s ou 30s), temps de récupération (ex. 10s, 15s ou 30s) et pourcentage de VMA visé (ex. 100% à 120%).</p>
+    </div>
+    <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
+      <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">3</span>
+      <p class="text-xs text-slate-700 leading-relaxed m-0">Choisissez la configuration du terrain : Ligne droite continue ou Navette avec virages à 180° en indiquant la longueur de terrain disponible (ex. 20 m gymnase handball, 25 m basket, 40 m ou 0 m sur piste).</p>
+    </div>
+    <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start gap-3">
+      <span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-slate-900 font-bold text-xs flex items-center justify-center shrink-0">4</span>
+      <p class="text-xs text-slate-700 leading-relaxed m-0">Le générateur calcule instantanément la distance exacte en mètres à baliser entre vos plots, le nombre de demi-tours et la pénalité biomécanique déduite.</p>
+    </div>
+        </div>
+        
+        <div id="bloc-texte-integral" class="hidden p-5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 leading-relaxed whitespace-pre-line font-sans">
+          <div style="font-weight:700;color:#006233;margin-bottom:0.75rem;padding-bottom:0.4rem;border-bottom:1px solid #cbd5e1;">
+            Auteur : Abdelkhalek ELBOUDANI · Professeur d'Éducation Physique et Sportive (Maroc) · Conforme Orientations 2007-2009
+          </div>
+I. Introduction à l'Intermittent Court et Problématique Biomécanique du COD
+
+L'entraînement par intervalles à haute intensité, universellement désigné sous l'acronyme HIIT (High-Intensity Interval Training) ou travail intermittent en milieu francophone, s'est imposé comme la méthode la plus efficace pour stimuler la puissance aérobie maximale (PAM) et le VO2 Max, tant en préparation physique athlétique qu'en Éducation Physique et Sportive. Les formats courts de type 15s/15s, 30s/30s ou 10s/20s permettent aux athlètes de cumuler un temps de travail effectif à haute intensité cardiovasculaire bien supérieur à ce qu'un effort continu permettrait avant épuisement. Cependant, une problématique pratique majeure surgit dès que cet entraînement quitte la piste d'athlétisme pour être réalisé sur les installations réelles des sports collectifs (terrains de football, gymnases de handball, terrains de basket-ball ou cours d'école). Sur ces surfaces confinées, la course ne se fait plus en ligne droite : elle impose des allers-retours en navettes avec des changements de direction brutaux à 180° (qualifiés de COD, pour Change Of Direction). Or, chaque demi-tour oblige l'athlète à freiner activement, à bloquer son centre de gravité en régime musculaire excentrique puissant, puis à réaccélérer en régime concentrique. Si l'entraîneur calcule la distance à parcourir en appliquant bêtement la formule de la ligne droite, les élèves ou joueurs se retrouvent en surrégime lactique prématuré en quelques répétitions et échouent à terminer la séance.
+
+II. Guide d'Utilisation Étape par Étape
+
+Pour baliser vos plots d'intermittent avec une exactitude chirurgicale sur n'importe quel terrain :
+1. Évaluation et saisie de la VMA : Renseignez la Vitesse Maximale Aérobie de l'élève ou la moyenne d'un groupe homogène en kilomètres par heure (obtenue lors d'un test Demi-Cooper ou Luc-Léger). Si vous utilisez le test 30-15 Intermittent Fitness Test (30-15 IFT) de Martin Buchheit, vous pouvez entrer directement la VIFT.
+2. Paramétrage de la structure temporelle : Choisissez la durée de la fraction d'effort en secondes (ex. 15 s) et la durée de la récupération (ex. 15 s). Définissez l'intensité ciblée en pourcentage de VMA (par exemple 100%, 105% ou 110%).
+3. Choix de la configuration du terrain : Sélectionnez soit la piste linéaire continue (sans virage, longueur mise à 0), soit une navette délimitée par la taille de votre salle (ex. 20 m sur terrain de handball, 28 m sur terrain de basket, 40 m sur demi-terrain de football).
+4. Génération des repères de terrain : Le calculateur délivre instantanément la distance exacte en mètres de la piste linéaire, la distance corrigée avec pénalité COD, le nombre de demi-tours à 180° et le balisage concret (ex. deux allers-retours de 20 m plus 7,5 mètres d'amorce).
+
+III. Explication des Paramètres et Enjeux de Terrain
+
+La précision du paramétrage garantit la réussite de la séance :
+- VMA ou VIFT (km/h) : Vitesse étalon servant de base mécanique. La VIFT intègre déjà une composante d'accélération et de récupération intermittente.
+- Longueur de la navette (mètres) : Plus la navette est courte (ex. 15 m ou 20 m), plus le nombre de virages par fraction est élevé, et plus la pénalité kilométrique à déduire est importante.
+- Pourcentage d'intensité visé (% VMA) : En ligne droite, les intensités usuelles sur 15s/15s oscillent entre 105% et 115% de VMA. En navette avec virages 180°, il est fortement recommandé de calibrer entre 95% et 100% de VMA ajustée pour ne pas saturer prématurément le système neuromusculaire.
+
+IV. Relations Mathématiques et Équations de Martin Buchheit
+
+Le générateur applique la modélisation cinétique développée par Martin Buchheit :
+1. Calcul de la distance théorique linéaire (sans virage) :
+Vitesse en mètres par seconde (m/s) = [VMA (km/h) / 3,6] × (%VMA / 100).
+Distance Linéaire (mètres) = Vitesse (m/s) × Durée de l'effort (secondes).
+Exemple : Pour une VMA de 14,4 km/h (soit 4,0 m/s) à 100% sur 15 secondes d'effort :
+Distance linéaire = 4,0 × 15 = 60,0 mètres.
+2. Détermination du nombre de virages COD 180° :
+Sur une navette de longueur L mètres (par exemple L = 20 mètres) :
+Nombre de demi-tours complets N = Entier inférieur de (Distance linéaire / L).
+Pour 60 mètres sur navette de 20 m, le coureur fait l'aller (20m), le retour (20m) et l'aller (20m), soit exactement 2 demi-tours à 180°.
+3. Modélisation de la pénalité de virage :
+Chaque demi-tour à 180° induit une perte de temps mécanique d'environ 0,72 seconde due à la phase de décélération et de réaccélération. En distance équivalente, cela correspond à une soustraction métrique d'environ :
+Pénalité par virage (mètres) = Vitesse (m/s) × 0,72 seconde (soit environ 2 à 3 mètres selon la vitesse).
+Distance Cible Ajustée = Distance Linéaire − (Nombre de virages × Pénalité).
+Dans notre exemple : Distance ajustée = 60 m − (2 × 2,88 m) ≈ 54,2 mètres.
+L'élève doit donc parcourir 54,2 mètres au lieu de 60 mètres : deux allers-retours de 20 m (40 m) plus 14,2 mètres balisés par un plot intermédiaire.
+
+V. Grille d'Interprétation et Programmation par Niveaux
+
+L'individualisation par plots offre des perspectives didactiques remarquables :
+- Formats d'effort recommandés :
+  * 15s effort / 15s récupération : Le grand classique polyvalent. Deux à trois blocs de six à huit minutes entrecoupés de trois minutes de récupération passive.
+  * 30s effort / 30s récupération : Plus orienté sur la tolérance lactique et la résistance cardiovasculaire de moyenne durée. Idéal pour les sports comme le rugby et le football.
+  * 10s effort / 20s récupération : Format explosif permettant de monter à 115%-120% de VMA sans acidification excessive grâce au renouvellement rapide de la phosphocréatine.
+- Organisation pédagogique par couloirs homogènes :
+En classe ou en club, tracez des couloirs parallèles. Les élèves de VMA 12 km/h courent dans le couloir 1, ceux de VMA 14 km/h dans le couloir 2, et ceux de VMA 16 km/h dans le couloir 3. Le coup de sifflet est simultané pour tout le monde, mais chaque groupe possède son plot d'arrivée ajusté.
+
+VI. Sécurité Musculaire et Recommandations Pratiques
+
+L'entraînement en navette sollicite intensément la chaîne musculaire postérieure et les ischio-jambiers lors des phases de freinage excentrique :
+- Assurez-vous d'un échauffement spécifique préalable intégrant des accélérations progressives, des freinages contrôlés et du travail de proprioception des chevilles et des genoux.
+- Vérifiez l'adhérence du sol (éviter les surfaces glissantes ou poussiéreuses propices aux entorses lors des pivots).
+- Respectez une progression méthodique : commencez la saison par de l'intermittent en ligne droite avant d'introduire progressivement les navettes avec changements de direction à 180°.
+        </div>
+      </div>
+
+      <!-- ZONE 4 : FONDEMENTS PHYSIOLOGIQUES & RELATIONS MATHÉMATIQUES -->
+      <div class="space-y-3 pt-2 border-t border-slate-100">
+        <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5 m-0">
+          <span style="color:#c1272d;">📐</span>
+          Zone 4 : Fondements Physiologiques &amp; Relations Mathématiques
+        </h3>
+        <div class="p-4 bg-slate-900 text-white rounded-xl space-y-2 border border-slate-800 shadow-inner">
+          
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Distance théorique en ligne droite (Piste continue) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Distance (m) = [VMA (km/h) / 3,6] × (%VMA / 100) × Durée effort (sec)</code>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Vitesse de déplacement cible en mètres/seconde :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">V_cible (m/s) = (VMA / 3,6) × (%Intensité / 100)</code>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Pénalité biomécanique par virage COD 180° (Buchheit) :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Perte de temps ≈ 0,72 s par demi-tour (ou pénalité métabolique de 1,5 à 2,0 m)</code>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Distance cible ajustée avec navettes :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">D_ajustée (m) = D_linéaire − (Nombre de COD 180° × Pénalité_mètres)</code>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs py-1 border-b border-slate-800 last:border-0">
+      <span class="text-slate-400 font-medium">Décomposition du parcours sur le terrain :</span>
+      <code class="text-emerald-400 font-mono font-semibold tracking-wide tabular-nums bg-slate-800/80 px-2 py-0.5 rounded">Trajet = N allers-retours complets de L mètres + reliquat métrique r</code>
+    </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      function toggleTexteIntegral() {
+        var el = document.getElementById('bloc-texte-integral');
+        var btn = document.getElementById('btn-toggle-texte');
+        if (el && btn) {
+          if (el.classList.contains('hidden')) {
+            el.classList.remove('hidden');
+            btn.textContent = 'Masquer le texte complet ▲';
+          } else {
+            el.classList.add('hidden');
+            btn.textContent = 'Afficher le texte complet ▼';
+          }
+        }
+      }
+
+      function copierFichePedagogique() {
+        var texte = "I. Introduction à l'Intermittent Court et Problématique Biomécanique du COD\n\nL'entraînement par intervalles à haute intensité, universellement désigné sous l'acronyme HIIT (High-Intensity Interval Training) ou travail intermittent en milieu francophone, s'est imposé comme la méthode la plus efficace pour stimuler la puissance aérobie maximale (PAM) et le VO2 Max, tant en préparation physique athlétique qu'en Éducation Physique et Sportive. Les formats courts de type 15s/15s, 30s/30s ou 10s/20s permettent aux athlètes de cumuler un temps de travail effectif à haute intensité cardiovasculaire bien supérieur à ce qu'un effort continu permettrait avant épuisement. Cependant, une problématique pratique majeure surgit dès que cet entraînement quitte la piste d'athlétisme pour être réalisé sur les installations réelles des sports collectifs (terrains de football, gymnases de handball, terrains de basket-ball ou cours d'école). Sur ces surfaces confinées, la course ne se fait plus en ligne droite : elle impose des allers-retours en navettes avec des changements de direction brutaux à 180° (qualifiés de COD, pour Change Of Direction). Or, chaque demi-tour oblige l'athlète à freiner activement, à bloquer son centre de gravité en régime musculaire excentrique puissant, puis à réaccélérer en régime concentrique. Si l'entraîneur calcule la distance à parcourir en appliquant bêtement la formule de la ligne droite, les élèves ou joueurs se retrouvent en surrégime lactique prématuré en quelques répétitions et échouent à terminer la séance.\n\nII. Guide d'Utilisation Étape par Étape\n\nPour baliser vos plots d'intermittent avec une exactitude chirurgicale sur n'importe quel terrain :\n1. Évaluation et saisie de la VMA : Renseignez la Vitesse Maximale Aérobie de l'élève ou la moyenne d'un groupe homogène en kilomètres par heure (obtenue lors d'un test Demi-Cooper ou Luc-Léger). Si vous utilisez le test 30-15 Intermittent Fitness Test (30-15 IFT) de Martin Buchheit, vous pouvez entrer directement la VIFT.\n2. Paramétrage de la structure temporelle : Choisissez la durée de la fraction d'effort en secondes (ex. 15 s) et la durée de la récupération (ex. 15 s). Définissez l'intensité ciblée en pourcentage de VMA (par exemple 100%, 105% ou 110%).\n3. Choix de la configuration du terrain : Sélectionnez soit la piste linéaire continue (sans virage, longueur mise à 0), soit une navette délimitée par la taille de votre salle (ex. 20 m sur terrain de handball, 28 m sur terrain de basket, 40 m sur demi-terrain de football).\n4. Génération des repères de terrain : Le calculateur délivre instantanément la distance exacte en mètres de la piste linéaire, la distance corrigée avec pénalité COD, le nombre de demi-tours à 180° et le balisage concret (ex. deux allers-retours de 20 m plus 7,5 mètres d'amorce).\n\nIII. Explication des Paramètres et Enjeux de Terrain\n\nLa précision du paramétrage garantit la réussite de la séance :\n- VMA ou VIFT (km/h) : Vitesse étalon servant de base mécanique. La VIFT intègre déjà une composante d'accélération et de récupération intermittente.\n- Longueur de la navette (mètres) : Plus la navette est courte (ex. 15 m ou 20 m), plus le nombre de virages par fraction est élevé, et plus la pénalité kilométrique à déduire est importante.\n- Pourcentage d'intensité visé (% VMA) : En ligne droite, les intensités usuelles sur 15s/15s oscillent entre 105% et 115% de VMA. En navette avec virages 180°, il est fortement recommandé de calibrer entre 95% et 100% de VMA ajustée pour ne pas saturer prématurément le système neuromusculaire.\n\nIV. Relations Mathématiques et Équations de Martin Buchheit\n\nLe générateur applique la modélisation cinétique développée par Martin Buchheit :\n1. Calcul de la distance théorique linéaire (sans virage) :\nVitesse en mètres par seconde (m/s) = [VMA (km/h) / 3,6] × (%VMA / 100).\nDistance Linéaire (mètres) = Vitesse (m/s) × Durée de l'effort (secondes).\nExemple : Pour une VMA de 14,4 km/h (soit 4,0 m/s) à 100% sur 15 secondes d'effort :\nDistance linéaire = 4,0 × 15 = 60,0 mètres.\n2. Détermination du nombre de virages COD 180° :\nSur une navette de longueur L mètres (par exemple L = 20 mètres) :\nNombre de demi-tours complets N = Entier inférieur de (Distance linéaire / L).\nPour 60 mètres sur navette de 20 m, le coureur fait l'aller (20m), le retour (20m) et l'aller (20m), soit exactement 2 demi-tours à 180°.\n3. Modélisation de la pénalité de virage :\nChaque demi-tour à 180° induit une perte de temps mécanique d'environ 0,72 seconde due à la phase de décélération et de réaccélération. En distance équivalente, cela correspond à une soustraction métrique d'environ :\nPénalité par virage (mètres) = Vitesse (m/s) × 0,72 seconde (soit environ 2 à 3 mètres selon la vitesse).\nDistance Cible Ajustée = Distance Linéaire − (Nombre de virages × Pénalité).\nDans notre exemple : Distance ajustée = 60 m − (2 × 2,88 m) ≈ 54,2 mètres.\nL'élève doit donc parcourir 54,2 mètres au lieu de 60 mètres : deux allers-retours de 20 m (40 m) plus 14,2 mètres balisés par un plot intermédiaire.\n\nV. Grille d'Interprétation et Programmation par Niveaux\n\nL'individualisation par plots offre des perspectives didactiques remarquables :\n- Formats d'effort recommandés :\n  * 15s effort / 15s récupération : Le grand classique polyvalent. Deux à trois blocs de six à huit minutes entrecoupés de trois minutes de récupération passive.\n  * 30s effort / 30s récupération : Plus orienté sur la tolérance lactique et la résistance cardiovasculaire de moyenne durée. Idéal pour les sports comme le rugby et le football.\n  * 10s effort / 20s récupération : Format explosif permettant de monter à 115%-120% de VMA sans acidification excessive grâce au renouvellement rapide de la phosphocréatine.\n- Organisation pédagogique par couloirs homogènes :\nEn classe ou en club, tracez des couloirs parallèles. Les élèves de VMA 12 km/h courent dans le couloir 1, ceux de VMA 14 km/h dans le couloir 2, et ceux de VMA 16 km/h dans le couloir 3. Le coup de sifflet est simultané pour tout le monde, mais chaque groupe possède son plot d'arrivée ajusté.\n\nVI. Sécurité Musculaire et Recommandations Pratiques\n\nL'entraînement en navette sollicite intensément la chaîne musculaire postérieure et les ischio-jambiers lors des phases de freinage excentrique :\n- Assurez-vous d'un échauffement spécifique préalable intégrant des accélérations progressives, des freinages contrôlés et du travail de proprioception des chevilles et des genoux.\n- Vérifiez l'adhérence du sol (éviter les surfaces glissantes ou poussiéreuses propices aux entorses lors des pivots).\n- Respectez une progression méthodique : commencez la saison par de l'intermittent en ligne droite avant d'introduire progressivement les navettes avec changements de direction à 180°.";
+        navigator.clipboard.writeText(texte).then(function() {
+          var ico = document.getElementById('btn-copy-ico');
+          var txt = document.getElementById('btn-copy-txt');
+          if (ico && txt) {
+            ico.textContent = '✓';
+            txt.textContent = 'Guide copié (1075 mots) !';
+            setTimeout(function() {
+              ico.textContent = '📋';
+              txt.textContent = 'Copier le guide complet';
+            }, 2500);
+          }
+        });
+      }
+    </script>
+  
+  </main>
+
+  
+  <!-- PROFEPS_CALC_EMBED_START -->
+  <section id="peps-embed-backlink-box" aria-label="Intégrer ou citer ce calculateur" style="max-width:1024px;margin:2rem auto;padding:1.35rem 1.5rem;background:#ffffff;border:1px solid #cbd5e1;border-radius:18px;box-shadow:0 4px 14px rgba(15,23,42,0.04);">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem;margin-bottom:0.85rem;">
+      <div>
+        <span style="font-size:0.72rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:#065f46;background:#ecfdf5;padding:0.15rem 0.55rem;border-radius:6px;border:1px solid #a7f3d0;">🔗 Partage &amp; Référence Académique (100% Gratuit)</span>
+        <h2 style="font-size:1.05rem;font-weight:900;color:#0f172a;margin:0.25rem 0 0 0;">Intégrer ce Calculateur sur votre Site/Blog ou le Citer dans un Mémoire CRMEF / ENS</h2>
+      </div>
+    </div>
+    <p style="font-size:0.82rem;color:#475569;margin:0 0 1rem 0;line-height:1.5;">
+      Vous êtes formateur au CRMEF, enseignant d'EPS, étudiant en Licence d'Éducation (LE-EPS) ou responsable d'un club sportif ? Vous pouvez intégrer gratuitement cet outil interactif sur votre site web ou le citer dans votre recherche action.
+    </p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1rem;">
+      <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:0.9rem;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.45rem;">
+          <strong style="font-size:0.78rem;color:#0f172a;">💻 Code d'intégration HTML (Widget Blog / Site d'établissement)</strong>
+          <button type="button" onclick="navigator.clipboard.writeText(this.parentElement.nextElementSibling.value);this.textContent='✔ Copié !';var b=this;setTimeout(function(){b.textContent='📋 Copier le code';},2000);" style="padding:0.25rem 0.65rem;background:#0f172a;color:#ffffff;border:none;border-radius:8px;font-size:0.72rem;font-weight:700;cursor:pointer;">📋 Copier le code</button>
+        </div>
+        <textarea readonly rows="3" style="width:100%;font-family:monospace;font-size:0.72rem;color:#334155;background:#ffffff;border:1px solid #cbd5e1;border-radius:8px;padding:0.5rem;resize:none;">&lt;iframe src=&quot;https://profeps.ma/generateur-intermittent-hiit-cod.html&quot; width=&quot;100%&quot; height=&quot;620&quot; style=&quot;border:1px solid #cbd5e1;border-radius:16px;&quot; loading=&quot;lazy&quot; title=&quot;Générateur d'Intermittent HIIT (15/15, 30/30) &amp; Pénalité de Changement de Direction (COD 180°) - ProfEPS Maroc&quot;&gt;&lt;/iframe&gt;
+&lt;p style=&quot;font-size:12px;text-align:right;margin-top:4px;&quot;&gt;Outil propulsé par &lt;a href=&quot;https://profeps.ma/generateur-intermittent-hiit-cod.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;ProfEPS Maroc — Générateur d'Intermittent HIIT (15/15, 30/30) &amp; Pénalité de Changement de Direction (COD 180°)&lt;/a&gt;&lt;/p&gt;</textarea>
+      </div>
+      <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:0.9rem;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.45rem;">
+          <strong style="font-size:0.78rem;color:#0f172a;">🎓 Citation Bibliographique (Norme APA — Mémoire CRMEF / ENS)</strong>
+          <button type="button" onclick="navigator.clipboard.writeText(this.parentElement.nextElementSibling.value);this.textContent='✔ Copié !';var b=this;setTimeout(function(){b.textContent='📋 Copier la citation';},2000);" style="padding:0.25rem 0.65rem;background:#991b1b;color:#ffffff;border:none;border-radius:8px;font-size:0.72rem;font-weight:700;cursor:pointer;">📋 Copier la citation</button>
+        </div>
+        <textarea readonly rows="3" style="width:100%;font-family:system-ui,sans-serif;font-size:0.75rem;color:#334155;background:#ffffff;border:1px solid #cbd5e1;border-radius:8px;padding:0.5rem;resize:none;">ELBOUDANI, A. (2026). Générateur d'Intermittent HIIT (15/15, 30/30) & Pénalité de Changement de Direction (COD 180°). Portail Scientifique et Didactique ProfEPS Maroc (Conforme OP 2007/2009). Consulté sur https://profeps.ma/generateur-intermittent-hiit-cod.html</textarea>
+      </div>
+    </div>
+  </section>
+<!-- PROFEPS_CALC_EMBED_END -->
+  <!-- PROFEPS_RELATED_MESH_START -->
+  <aside class="peps-related-mesh" style="max-width:1024px;margin:2rem auto;padding:1.25rem 1.5rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;">
+    <h2 style="font-size:0.95rem;font-weight:800;color:#0f172a;margin:0 0 0.85rem 0;">🔗 Ressources &amp; Guides Associés (Calculateurs & Physiologie Sportive)</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.65rem;">
+        <a href="indice-endurance-peronnet-thibault-vma.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Indice d'Endurance Péronnet & Thibault : Calcul et Profil →</a>
+        <a href="vma-differencier-course-duree-eps.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Différencier la Course de Durée en EPS grâce à la VMA →</a>
+        <a href="article-anaerobic-speed-reserve-asr-mas.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Réserve de Vitesse Anaérobie (ASR) & VMA en EPS →</a>
+        <a href="article-mas-interval-training-hiit-prescriptions.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 HIIT & Entraînement Intermittent VMA en EPS →</a>
+    </div>
+  </aside>
+  <!-- PROFEPS_RELATED_MESH_END -->
+  <footer class="footer" id="profeps-unified-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-brand" style="display:flex !important;flex-direction:column !important;align-items:flex-start !important;">
+          <img src="/images/prof_eps.webp" width="150" height="46" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:46px !important;max-height:46px !important;width:auto !important;max-width:155px !important;object-fit:contain !important;align-self:flex-start !important;filter:none !important;border-radius:8px !important;margin:0 0 0.9rem 0 !important;display:block !important;">
+          <p data-i18n-fr="La plateforme de référence pour les professeurs d'EPS et candidats aux concours de l'enseignement au Maroc. Générateur pédagogique, calculateurs sportifs et préparation CRMEF." data-i18n-en="The reference platform for PE teachers and CRMEF candidates in Morocco. Educational generator, sports calculators &amp; official curriculum-aligned quizzes." data-i18n-ar="المنصة المرجعية لأساتذة التربية البدنية والمترشحين لمباريات التعليم بالمغرب. مولد وثائق تربوية، حاسبات رياضية واستعداد لمباراة التعليم.">La plateforme de référence pour les professeurs d'EPS et candidats aux concours de l'enseignement au Maroc. Générateur pédagogique, calculateurs sportifs et préparation CRMEF.</p>
+          <div class="footer-stats">
+            <div class="footer-stat-item">
+              <span class="footer-stat-num">16+</span>
+              <span class="footer-stat-lbl" data-i18n-fr="APS couvertes" data-i18n-en="Sports covered" data-i18n-ar="نشاط رياضي">APS couvertes</span>
+            </div>
+            <div class="footer-stat-item">
+              <span class="footer-stat-num">24</span>
+              <span class="footer-stat-lbl" data-i18n-fr="Silos Disciplines" data-i18n-en="Disciplines" data-i18n-ar="تخصصات ومواد">Silos Disciplines</span>
+            </div>
+            <div class="footer-stat-item">
+              <span class="footer-stat-num">100%</span>
+              <span class="footer-stat-lbl" data-i18n-fr="Gratuit" data-i18n-en="Free" data-i18n-ar="مجاني">Gratuit</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-col-title" data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</p>
+          <ul>
+            <li><a href="/" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a></li>
+            <li><a href="concours-crmef-hub.html" data-i18n-fr="Préparation CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparation CRMEF</a></li>
+            <li><a href="generateur.html" data-i18n-fr="Générateur PDF" data-i18n-en="PDF Generator" data-i18n-ar="مولد الوثائق PDF">Générateur PDF</a></li>
+            <li><a href="blog.html" data-i18n-fr="Articles &amp; Blog" data-i18n-en="Articles &amp; Blog" data-i18n-ar="المقالات والمدونة">Articles &amp; Blog</a></li>
+            <li><a href="bibliotheque-numerique-eps.html" data-i18n-fr="Bibliothèque EPS" data-i18n-en="PE Digital Library" data-i18n-ar="المكتبة الرقمية">Bibliothèque EPS</a></li>
+            <li><a href="a-propos.html" data-i18n-fr="À propos" data-i18n-en="About Us" data-i18n-ar="من نحن">À propos</a></li>
+            <li><a href="hub-aps-sports-eps-maroc.html" data-i18n-fr="Hub des Sports &amp; APS" data-i18n-en="Sports &amp; PE Hub" data-i18n-ar="بوابة الرياضات والأنشطة البدنية">Hub des Sports &amp; APS</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col" id="footer-col-crmef">
+          <p class="footer-col-title" data-i18n-fr="HUB CONCOURS CRMEF" data-i18n-en="CRMEF EXAM HUB" data-i18n-ar="بوابة مباراة التعليم">HUB CONCOURS CRMEF</p>
+          <ul class="footer-crmef-grid">
+            <li class="footer-crmef-hub-item"><a href="concours-crmef-hub.html" class="footer-hub-highlight" data-i18n-fr="★ Hub Concours CRMEF (Toutes Filières)" data-i18n-en="★ CRMEF Exam Hub (All Specialties)" data-i18n-ar="★ بوابة مباراة التعليم (جميع التخصصات)">★ Hub Concours CRMEF (Toutes Filières)</a></li>
+            <li><a href="qcm-sciences-education-crmef.html" data-i18n-fr="Tronc Commun (SE)" data-i18n-en="Education Sciences" data-i18n-ar="علوم التربية">Tronc Commun (SE)</a></li>
+            <li><a href="qcm-didactique-eps-maroc.html" data-i18n-fr="EPS (Sport)" data-i18n-en="PE &amp; Sport" data-i18n-ar="التربية البدنية">EPS (Sport)</a></li>
+            <li><a href="qcm-didactique-primaire-maroc.html" data-i18n-fr="Primaire (TaRL)" data-i18n-en="Primary (TaRL)" data-i18n-ar="التعليم الابتدائي">Primaire (TaRL)</a></li>
+            <li><a href="qcm-didactique-maths-maroc.html" data-i18n-fr="Mathématiques" data-i18n-en="Mathematics" data-i18n-ar="الرياضيات">Mathématiques</a></li>
+            <li><a href="qcm-didactique-physique-chimie-maroc.html" data-i18n-fr="Physique-Chimie" data-i18n-en="Physics &amp; Chemistry" data-i18n-ar="الفيزياء والكيمياء">Physique-Chimie</a></li>
+            <li><a href="qcm-didactique-svt-maroc.html" data-i18n-fr="SVT" data-i18n-en="Life &amp; Earth Sciences" data-i18n-ar="علوم الحياة والأرض">SVT</a></li>
+            <li><a href="qcm-didactique-francais-maroc.html" data-i18n-fr="Français" data-i18n-en="French" data-i18n-ar="اللغة الفرنسية">Français</a></li>
+            <li><a href="qcm-didactique-arabe-maroc.html" data-i18n-fr="Arabe" data-i18n-en="Arabic" data-i18n-ar="اللغة العربية">Arabe</a></li>
+            <li><a href="qcm-didactique-histoire-geographie-maroc.html" data-i18n-fr="Histoire-Géo" data-i18n-en="History &amp; Geography" data-i18n-ar="التاريخ والجغرافيا">Histoire-Géo</a></li>
+            <li><a href="qcm-didactique-philosophie-maroc.html" data-i18n-fr="Philosophie" data-i18n-en="Philosophy" data-i18n-ar="الفلسفة">Philosophie</a></li>
+            <li><a href="qcm-didactique-informatique-maroc.html" data-i18n-fr="Informatique" data-i18n-en="Computer Science" data-i18n-ar="الإعلاميات">Informatique</a></li>
+            <li><a href="qcm-didactique-anglais-maroc.html" data-i18n-fr="Anglais" data-i18n-en="English" data-i18n-ar="اللغة الإنجليزية">Anglais</a></li>
+            <li><a href="qcm-didactique-education-islamique-maroc.html" data-i18n-fr="Éduc. Islamique" data-i18n-en="Islamic Education" data-i18n-ar="التربية الإسلامية">Éduc. Islamique</a></li>
+            <li><a href="qcm-didactique-economie-gestion-maroc.html" data-i18n-fr="Éco-Gestion" data-i18n-en="Economics &amp; Mgmt" data-i18n-ar="الاقتصاد والتدبير">Éco-Gestion</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col" id="footer-col-calculators">
+          <p class="footer-col-title" data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</p>
+          <ul>
+            <li><a href="hub-outils-sport-performance.html" class="footer-hub-highlight" data-i18n-fr="★ Hub Tous les Calculateurs" data-i18n-en="★ All Calculators Hub" data-i18n-ar="★ بوابة جميع الحاسبات الرياضية">★ Hub Tous les Calculateurs</a></li>
+            <li><a href="calculateur-vma.html" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS (VMA) Calculator" data-i18n-ar="حاسبة السرعة VMA">Calculateur VMA</a></li>
+            <li><a href="calculateur-vdot-asr-endurance.html" data-i18n-fr="Calculateur VO2 Max &amp; VDOT" data-i18n-en="VO2 Max &amp; VDOT" data-i18n-ar="حاسبة VO2 Max و VDOT">Calculateur VO2 Max &amp; VDOT</a></li>
+            <li><a href="calculateur-asr-reserve-vitesse.html" data-i18n-fr="Réserve Anaérobie (ASR)" data-i18n-en="Speed Reserve (ASR)" data-i18n-ar="احتياطي السرعة ASR">Réserve Anaérobie (ASR)</a></li>
+            <li><a href="calculateur-frequence-cardiaque-karvonen.html" data-i18n-fr="Fréquence Cardiaque Karvonen" data-i18n-en="Heart Rate (Karvonen)" data-i18n-ar="نبضات القلب Karvonen">Fréquence Cardiaque Karvonen</a></li>
+            <li><a href="calculateur-charge-rpe-foster-acwr.html" data-i18n-fr="Charge RPE Foster &amp; ACWR" data-i18n-en="Foster RPE &amp; ACWR" data-i18n-ar="حمل التدريب RPE و ACWR">Charge RPE Foster &amp; ACWR</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-col-title" data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</p>
+          <ul>
+            <li><a href="mentions-legales.html" data-i18n-fr="Mentions légales" data-i18n-en="Legal Notice" data-i18n-ar="إشعار قانوني">Mentions légales</a></li>
+            <li><a href="politique-confidentialite.html" data-i18n-fr="Politique de confidentialité" data-i18n-en="Privacy Policy" data-i18n-ar="سياسة الخصوصية">Politique de confidentialité</a></li>
+            <li><a href="cgu.html" data-i18n-fr="Conditions d'utilisation" data-i18n-en="Terms of Use" data-i18n-ar="شروط الاستخدام">Conditions d'utilisation</a></li>
+            <li><a href="contact.html" data-i18n-fr="Nous contacter" data-i18n-en="Contact Us" data-i18n-ar="اتصل بنا">Nous contacter</a></li>
+            <li><a href="mailto:profepsma@gmail.com">✉️ profepsma@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span data-i18n-fr="© 2026 Prof EPS Maroc (profeps.ma). Tous droits réservés." data-i18n-en="© 2026 Prof EPS Morocco (profeps.ma). All rights reserved." data-i18n-ar="© 2026 أستاذ التربية البدنية المغرب (profeps.ma). جميع الحقوق محفوظة.">© 2026 Prof EPS Maroc (profeps.ma). Tous droits réservés.</span>
+        <span data-i18n-fr="Fait avec ❤️ pour les enseignants et candidats CRMEF au Maroc" data-i18n-en="Made with ❤️ for teachers &amp; candidates in Morocco" data-i18n-ar="صنع بـ ❤️ لأساتذة التربية البدنية والمترشحين بالمغرب">Fait avec ❤️ pour les enseignants et candidats CRMEF au Maroc</span>
+        <span style="display:block;width:100%;font-size:0.74rem;color:#94a3b8;margin-top:0.35rem;">Portail pédagogique indépendant conforme aux OP 2007 (Lycée), OP 2009 (Collège) et au Cadre Référentiel CNEE — Non affilié au MENPS.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script id="profeps-tool-engine-js">
+    var currentLang = 'fr';
+    var hasCalculated = false;
+
+    function setToolLang(lang) {
+      currentLang = lang;
+      var root = document.getElementById('html-root');
+      if (root) {
+        root.lang = lang;
+        root.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+      }
+      document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function(el) {
+        var val = el.getAttribute('data-i18n-' + lang);
+        if (val) el.textContent = val;
+      });
+      if (typeof applyToolTranslations === 'function') applyToolTranslations(lang);
+      if (hasCalculated && typeof computeTool === 'function') computeTool();
+    }
+
+    function triggerCalculation() {
+      hasCalculated = true;
+      var panel = document.getElementById('tool-results-panel');
+      if (panel) {
+        panel.classList.remove('hidden');
+        panel.classList.remove('peps-results-reveal');
+        void panel.offsetWidth;
+        panel.classList.add('peps-results-reveal');
+      }
+      if (typeof computeTool === 'function') computeTool();
+      if (panel && window.innerWidth < 768) {
+        setTimeout(function() {
+          panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 80);
+      }
+    }
+
+    function onInputUpdated() {
+      if (hasCalculated && typeof computeTool === 'function') {
+        computeTool();
+      }
+    }
+
+    function computeTool() {
+      var vma = parseFloat(document.getElementById('inp-vma').value) || 16;
+      var sec = parseFloat(document.getElementById('inp-sec').value) || 15;
+      var pct = parseFloat(document.getElementById('inp-pct').value) || 110;
+      var sh = parseFloat(document.getElementById('inp-shuttle').value) || 0;
+
+      var spdKmh = (vma * pct) / 100;
+      var vMs = spdKmh / 3.6;
+      var lin = Math.round(vMs * sec);
+      var turns = sh > 0 ? Math.max(0, Math.floor((lin - 1) / sh)) : 0;
+      var adj = sh > 0 ? Math.max(sh, Math.round(lin - turns * 0.72 * vMs)) : lin;
+
+      document.getElementById('out-lin').textContent = lin + ' m';
+      document.getElementById('out-cod').textContent = adj + ' m';
+      document.getElementById('out-spd').textContent = spdKmh.toFixed(1) + ' km/h';
+
+      if (currentLang === 'fr') {
+        document.getElementById('out-lin-meaning').textContent = 'En ligne droite continue sur ' + sec + ' s';
+        document.getElementById('out-cod-meaning').textContent = turns + ' demi-tour(s) à 180° (gain/perte : −' + (lin - adj) + ' m)';
+        document.getElementById('out-spd-meaning').textContent = 'Soit ' + vMs.toFixed(2) + ' m/s à ' + pct + '% VMA';
+      } else if (currentLang === 'en') {
+        document.getElementById('out-lin-meaning').textContent = 'Continuous straight line over ' + sec + 's';
+        document.getElementById('out-cod-meaning').textContent = turns + ' × 180° turn(s) (−' + (lin - adj) + ' m COD cost)';
+        document.getElementById('out-spd-meaning').textContent = vMs.toFixed(2) + ' m/s at ' + pct + '% MAS';
+      } else {
+        document.getElementById('out-lin-meaning').textContent = 'في خط مستقيم مستمر خلال ' + sec + ' ثانية';
+        document.getElementById('out-cod-meaning').textContent = turns + ' دوران 180° (خصم ' + (lin - adj) + ' م لتكلفة الدوران)';
+        document.getElementById('out-spd-meaning').textContent = vMs.toFixed(2) + ' م/ثانية عند ' + pct + '% VMA';
+      }
+
+      var box = document.getElementById('out-hiit-interp');
+      if (currentLang === 'fr') {
+        box.innerHTML = '<p><strong>📐 Modèle Biomécanique de Buchheit (COD 180°) :</strong> Chaque demi-tour à 180° impose une phase de freinage excentrique et une relance concentrique équivalant à ~0,72 seconde par changement de direction. Sur un terrain de <strong>' + (sh || 40) + ' m</strong>, l’élève ou joueur réalise <strong>' + turns + ' demi-tour(s)</strong> : placer le plot à <strong>' + adj + ' m</strong> génère exactement la même sollicitation cardiorespiratoire (VO2) que <strong>' + lin + ' m</strong> en ligne droite.</p><p><strong>🎯 Organisation EPS :</strong> Formez des couloirs par groupes de VMA (ex. 12, 14, 16, 18 km/h) avec un coup de sifflet toutes les <strong>' + sec + ' secondes</strong>.</p>';
+      } else if (currentLang === 'en') {
+        box.innerHTML = '<p><strong>📐 Buchheit 180° COD Model:</strong> Each 180° turn requires eccentric braking and concentric re-acceleration (~0.72s cost per turn). With <strong>' + turns + ' turn(s)</strong>, placing the target cone at <strong>' + adj + ' m</strong> elicits the exact same cardiorespiratory load as <strong>' + lin + ' m</strong> on a straight track.</p><p><strong>🎯 PE Class Setup:</strong> Group students by MAS lanes and use a whistle signal every <strong>' + sec + ' seconds</strong>.</p>';
+      } else {
+        box.innerHTML = '<p><strong>📐 النموذج البيوميكانيكي لتغيير الاتجاه (Buchheit 180°):</strong> كل دوران بزاوية 180° يستهلك طاقة إضافية للفرملة وإعادة الانطلاق (~0.72 ثانية لكل دوران). لذلك فإن قطع مسافة <strong>' + adj + ' م</strong> مع <strong>' + turns + ' دوران</strong> يعادل تماماً مجهود <strong>' + lin + ' م</strong> على مضمار مستقيم.</p><p><strong>🎯 التنظيم في حصة التربية البدنية:</strong> وزع التلاميذ في ممرات حسب مجموعات VMA مع صافرة كل <strong>' + sec + ' ثانية</strong>.</p>';
+      }
+    }
+  </script>
+
+<!-- BANDEAU DE CONSENTEMENT GOOGLE ADSENSE & RGPD (PROFEPS CMP) -->
+<div id="profeps-cmp-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#f8fafc;padding:18px 24px;border-top:1px solid #334155;z-index:999999;box-shadow:0 -10px 25px rgba(0,0,0,0.5);font-family:system-ui,-apple-system,sans-serif;">
+  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;">
+    <div style="flex:1 1 500px;font-size:13.5px;line-height:1.5;">
+      <strong style="color:#38bdf8;font-size:14.5px;">🍪 Respect de votre vie privée & Cookies</strong><br>
+      ProfEPS utilise des cookies essentiels au fonctionnement du site, ainsi que des cookies d'analyse d'audience et de personnalisation publicitaire Google AdSense pour financer nos outils pédagogiques gratuits. Vous pouvez accepter, refuser ou personnaliser vos préférences à tout moment. Consultez notre <a href="politique-confidentialite.html" style="color:#38bdf8;text-decoration:underline;">Politique de confidentialité</a>.
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+      <button onclick="window.ProfEPS_CMP.open()" type="button" style="padding:8px 14px;background:#1e293b;color:#cbd5e1;border:1px solid #475569;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Personnaliser</button>
+      <button onclick="window.ProfEPS_CMP.rejectAll()" type="button" style="padding:8px 14px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Continuer sans accepter</button>
+      <button onclick="window.ProfEPS_CMP.acceptAll()" type="button" style="padding:8px 18px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;">Tout accepter</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE PERSONNALISATION DES COOKIES -->
+<div id="profeps-cmp-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.8);backdrop-filter:blur(4px);z-index:1000000;align-items:center;justify-content:center;padding:16px;font-family:system-ui,-apple-system,sans-serif;">
+  <div style="background:#0f172a;border:1px solid #334155;border-radius:12px;max-width:560px;width:100%;padding:24px;color:#f8fafc;box-shadow:0 20px 40px rgba(0,0,0,0.6);max-height:90vh;overflow-y:auto;">
+    <h3 style="margin-top:0;font-size:18px;color:#38bdf8;">⚙️ Préférences de Confidentialité & Cookies</h3>
+    <p style="font-size:13px;color:#94a3b8;line-height:1.5;">Gérez ici vos préférences concernant le dépôt de cookies sur votre appareil. Les cookies techniques sont indispensables à la navigation.</p>
+    
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-weight:600;font-size:14px;">Cookies techniques essentiels</span>
+        <span style="font-size:12px;color:#10b981;font-weight:bold;">Toujours actif</span>
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Nécessaires au fonctionnement des calculateurs, de la sécurité et de la mémorisation de votre choix de consentement.</p>
+    </div>
+
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <label for="cmp-opt-analytics" style="font-weight:600;font-size:14px;cursor:pointer;">Cookies de mesure d'audience (Analytics)</label>
+        <input type="checkbox" id="cmp-opt-analytics" checked style="width:18px;height:18px;cursor:pointer;">
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Nous permettent de mesurer anonymement la fréquentation de nos pages et calculateurs EPS.</p>
+    </div>
+
+    <div style="margin:16px 0;padding:12px;background:#1e293b;border-radius:8px;border:1px solid #334155;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <label for="cmp-opt-ads" style="font-weight:600;font-size:14px;cursor:pointer;">Publicités personnalisées (Google AdSense)</label>
+        <input type="checkbox" id="cmp-opt-ads" checked style="width:18px;height:18px;cursor:pointer;">
+      </div>
+      <p style="font-size:12px;color:#94a3b8;margin:6px 0 0 0;">Permet à Google et ses partenaires d'afficher des annonces adaptées à vos centres d'intérêt afin de maintenir la gratuité de la plateforme.</p>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px;">
+      <button onclick="document.getElementById('profeps-cmp-modal').style.display='none'" type="button" style="padding:8px 14px;background:#334155;color:#f8fafc;border:none;border-radius:6px;font-size:13px;cursor:pointer;">Fermer</button>
+      <button onclick="window.ProfEPS_CMP.saveCustom()" type="button" style="padding:8px 18px;background:#0284c7;color:#ffffff;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;">Enregistrer mes préférences</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
