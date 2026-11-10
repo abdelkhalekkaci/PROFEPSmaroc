@@ -132,6 +132,10 @@ app.use(express.static(path.join(rootDir, 'public'), {
                 res.setHeader('Link', '<https://profeps.ma/orientations-pedagogiques-arabe-college-2009.html>; rel="canonical"');
             } else if (baseName === 'ARABE_OP_2007_18560008.pdf') {
                 res.setHeader('Link', '<https://profeps.ma/orientations-pedagogiques-arabe-lycee-2007.html>; rel="canonical"');
+            } else if (baseName === '28_7fc4e542.pdf') {
+                res.setHeader('Link', '<https://profeps.ma/orientations-pedagogiques-francais-college-2009.html>; rel="canonical"');
+            } else if (baseName === '43_5d2f40bc.pdf') {
+                res.setHeader('Link', '<https://profeps.ma/orientations-pedagogiques-francais-lycee-2007.html>; rel="canonical"');
             }
         }
     }
