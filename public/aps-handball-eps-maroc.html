@@ -69,7 +69,7 @@
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --primary: #2434A8; --primary-dark: #7f1d1d; --secondary: #0B7A99; --secondary-dark: #085E77;
+            --primary: #2434A8; --primary-dark: #2434A8; --secondary: #0B7A99; --secondary-dark: #085E77;
             --text-primary: #0f172a; --text-secondary: #334155; --text-muted: #64748b;
             --bg-primary: #ffffff; --bg-secondary: var(--paper); --border: #cbd5e1; --border-light: #e2e8f0;
             --shadow-sm: 0 1px 3px rgba(15,23,42,0.06); --shadow-md: 0 6px 20px rgba(15,23,42,0.08);
@@ -81,7 +81,7 @@
         a { text-decoration: none; color: inherit; }
 
         /* Hero & Intro */
-        .silo-hero { padding: 125px 1.5rem 2.25rem; background: linear-gradient(135deg, #fff8f8 0%, var(--paper) 52%, #f3faf6 100%); border-bottom: 1px solid var(--border-light); }
+        .silo-hero { padding: 125px 1.5rem 2.25rem; background: linear-gradient(135deg, var(--sky) 0%, var(--paper) 100%); border-bottom: 1px solid var(--border-light); }
         .silo-hero-inner { max-width: 1220px; margin: 0 auto; }
         .silo-breadcrumb { font-size: 0.84rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.65rem; display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
         .silo-breadcrumb a:hover { color: var(--primary); text-decoration: underline; }
@@ -119,7 +119,7 @@
         .school-tab strong { display: block; font-size: 0.92rem; color: var(--text-primary); font-weight: 900; }
         .school-tab span { display: block; font-size: 0.73rem; color: var(--text-muted); font-weight: 600; margin-top: 0.15rem; }
         .school-tab:hover { border-color: var(--primary); }
-        .school-tab.active { background: #fff1f2; border-color: var(--primary); box-shadow: var(--shadow-sm); }
+        .school-tab.active { background: var(--sky); border-color: var(--primary); box-shadow: var(--shadow-sm); }
         .school-tab.active strong { color: var(--primary); }
 
         /* 4 Practice Level Tabs (N1 -> N4) */
@@ -128,7 +128,7 @@
         .practice-tab strong { display: block; font-size: 0.85rem; color: var(--text-primary); font-weight: 800; }
         .practice-tab span { display: block; font-size: 0.74rem; color: var(--text-muted); margin-top: 0.15rem; line-height: 1.3; }
         .practice-tab:hover { border-color: var(--secondary); }
-        .practice-tab.active { background: #f0fdf4; border-color: var(--secondary); box-shadow: var(--shadow-sm); }
+        .practice-tab.active { background: var(--sky); border-color: var(--secondary); box-shadow: var(--shadow-sm); }
         .practice-tab.active strong { color: var(--secondary); }
 
         /* View Mode & Custom Meta Inputs */
@@ -140,13 +140,13 @@
         .custom-inputs-row input, .seance-select { width: 100%; padding: 0.5rem 0.65rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.82rem; font-family: inherit; background: #ffffff; color: var(--text-primary); }
 
         /* Download Action Bar (Word & PDF for Cycle + Fiches) */
-        .export-action-bar { padding: 1rem 1.5rem; background: #fff8f8; border-bottom: 1px solid #fecdd3; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.85rem; }
+        .export-action-bar { padding: 1rem 1.5rem; background: var(--sky); border-bottom: 1px solid var(--stone); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.85rem; }
         .export-btn-group { display: flex; flex-wrap: wrap; gap: 0.55rem; }
         .btn-export { cursor: pointer; border: none; padding: 0.62rem 1rem; border-radius: 8px; font-size: 0.82rem; font-weight: 800; display: inline-flex; align-items: center; gap: 0.45rem; transition: all 0.2s; }
         .btn-word-cycle { background: #1e40af; color: #ffffff; }
         .btn-word-cycle:hover { background: #1e3a8a; }
         .btn-pdf-cycle { background: #2434A8; color: #ffffff; }
-        .btn-pdf-cycle:hover { background: #7f1d1d; }
+        .btn-pdf-cycle:hover { background: #2434A8; }
         .btn-word-fiches { background: #0B7A99; color: #ffffff; }
         .btn-word-fiches:hover { background: #085E77; }
         .btn-pdf-fiches { background: #0f172a; color: #ffffff; }
@@ -203,8 +203,9 @@
             .practice-level-tabs { grid-template-columns: 1fr; }
         }
     </style>
-  <link rel="stylesheet" href="/assets/site.css?v=20261112">
+  <link rel="stylesheet" href="/assets/site.css?v=20261113">
   <script src="profeps-communaute.js" defer></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body class="tpl-sport ">
 <!-- PROFEPS_UNIFIED_NAVBAR_START -->
@@ -230,10 +231,38 @@
   </nav>
   <div class="peps-navbar atlas-header" id="pepsNavbar" role="navigation" aria-label="Navigation principale" data-current-file="aps-handball-eps-maroc.html">
     <div class="peps-nav-container">
-      <!-- Zone 1: Brand Wordmark -->
-      <a href="/" class="peps-nav-logo" aria-label="ProfEPS.ma - Accueil">
-        <span class="peps-nav-logo-mark" aria-hidden="true">PE</span>
-        <span class="peps-nav-logo-text">Prof<span>EPS</span>.ma</span>
+      <!-- Zone 1: Brand Crest & Wordmark (EPS + Éducation) -->
+      <a href="/" class="peps-nav-logo" aria-label="ProfEPS.ma - Éducation Physique et Sportive au Maroc">
+        <span class="peps-nav-logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" class="peps-logo-svg">
+            <defs>
+              <linearGradient id="hdrShieldGrad" x1="12" y1="8" x2="116" y2="120" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#3347D6"/>
+                <stop offset="55%" stop-color="#4A49EA"/>
+                <stop offset="100%" stop-color="#6D4AFF"/>
+              </linearGradient>
+              <linearGradient id="hdrAmberGrad" x1="22" y1="36" x2="104" y2="82" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#FFB300"/>
+                <stop offset="100%" stop-color="#F59E0B"/>
+              </linearGradient>
+            </defs>
+            <rect x="6" y="6" width="116" height="116" rx="30" fill="url(#hdrShieldGrad)"/>
+            <rect x="9" y="9" width="110" height="110" rx="27" stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="2"/>
+            <path d="M 22 78 C 36 46, 68 32, 104 38 C 80 46, 56 60, 42 82 Z" fill="url(#hdrAmberGrad)"/>
+            <circle cx="74" cy="27" r="9.2" fill="#FFB300" stroke="#FFFFFF" stroke-width="2.4"/>
+            <line x1="69" y1="41" x2="58" y2="63" stroke="#FFFFFF" stroke-width="10.4" stroke-linecap="round"/>
+            <path d="M 45 52 L 53 44 L 68 42 L 83 45 L 94 37" stroke="#FFFFFF" stroke-width="5.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 44 78 L 59 62 L 78 66 L 73 79" stroke="#FFFFFF" stroke-width="6.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 22 86 C 36 81, 52 84, 64 92 C 76 84, 92 81, 106 86 L 106 102 C 92 97, 76 100, 64 108 C 52 100, 36 97, 22 102 Z" fill="#C7D7FE"/>
+            <path d="M 26 80 C 39 75, 53 78, 64 86 C 75 78, 89 75, 102 80 L 102 95 C 89 90, 75 93, 64 101 C 53 93, 39 90, 26 95 Z" fill="#FFFFFF"/>
+            <line x1="64" y1="84" x2="64" y2="102" stroke="#3347D6" stroke-width="3" stroke-linecap="round"/>
+            <polygon points="61,98 64,108.5 67,98" fill="#FFB300"/>
+          </svg>
+        </span>
+        <span class="peps-nav-logo-lockup">
+          <span class="peps-nav-logo-text">Prof<span>EPS</span><em class="peps-logo-tld">.ma</em></span>
+          <span class="peps-nav-logo-sub">Éducation &amp; Sport</span>
+        </span>
       </a>
 
       <!-- Zone 2: 6 Plain HTML Navigation Links (Crawlable by Google) -->
@@ -392,8 +421,8 @@
         <div style="max-width:1220px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.5rem;">
             <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.35rem;">
                 <span style="font-size:0.72rem;font-weight:900;text-transform:uppercase;color:#475569;margin-right:0.25rem;">🏟️ 13 Studios APS :</span>
-                <a href="aps-handball-eps-maroc.html" style="padding:0.28rem 0.65rem;background:#991b1b;color:#ffffff;border-radius:999px;font-size:0.75rem;font-weight:800;text-decoration:none;box-shadow:0 2px 6px rgba(15,23,42,0.15);">🤾 Handball (Actif)</a>
-                <a href="aps-basketball-eps-maroc.html" style="padding:0.26rem 0.6rem;background:#f8fafc;border:1px solid #cbd5e1;color:#006233;border-radius:999px;font-size:0.74rem;font-weight:800;text-decoration:none;">🏀 Basket 5×5</a>
+                <a href="aps-handball-eps-maroc.html" style="padding:0.28rem 0.65rem;background:#3347D6;color:#ffffff;border-radius:999px;font-size:0.75rem;font-weight:800;text-decoration:none;box-shadow:0 2px 6px rgba(15,23,42,0.15);">🤾 Handball (Actif)</a>
+                <a href="aps-basketball-eps-maroc.html" style="padding:0.26rem 0.6rem;background:#f8fafc;border:1px solid #cbd5e1;color:#0B7A99;border-radius:999px;font-size:0.74rem;font-weight:800;text-decoration:none;">🏀 Basket 5×5</a>
                 <a href="aps-volleyball-eps-maroc.html" style="padding:0.26rem 0.6rem;background:#f8fafc;border:1px solid #cbd5e1;color:#1e40af;border-radius:999px;font-size:0.74rem;font-weight:800;text-decoration:none;">🏐 Volley-Ball</a>
                 <a href="aps-football-eps-maroc.html" style="padding:0.26rem 0.6rem;background:#f8fafc;border:1px solid #cbd5e1;color:#b45309;border-radius:999px;font-size:0.74rem;font-weight:800;text-decoration:none;">⚽ Foot & Futsal</a>
                 <a href="aps-rugby-scolaire-tag-eps-maroc.html" style="padding:0.26rem 0.6rem;background:#f8fafc;border:1px solid #cbd5e1;color:#15803d;border-radius:999px;font-size:0.74rem;font-weight:800;text-decoration:none;">🏉 Rugby & Tag</a>
@@ -415,7 +444,7 @@
             <nav class="silo-breadcrumb" aria-label="Fil d'Ariane">
                 <a href="/">Accueil</a> <span>›</span>
                 <a href="hub-aps-sports-eps-maroc.html">Portail des APS &amp; Sports</a> <span>›</span>
-                <span style="color:#991b1b;">Handball EPS Maroc (1AC à 2Bac)</span>
+                <span style="color:#3347D6;">Handball EPS Maroc (1AC à 2Bac)</span>
             </nav>
             <h1 class="silo-title">🤾 Handball en EPS au Maroc : ATD, Studio des Cycles &amp; Fiches (1AC à 2Bac) et Grilles d'Observation &amp; d'Évaluation (/20)</h1>
 
@@ -445,7 +474,7 @@
                 <button type="button" class="volet-tab-btn" id="tab-btn-articles" onclick="switchHandballVolet('articles')">📚 5. Articles &amp; Dossiers Handball (7)</button>
             </div>
             <div style="display:flex;gap:0.85rem;align-items:center;">
-                <a href="aps-basketball-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#006233;">🏀 Basket à 5</a>
+                <a href="aps-basketball-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#0B7A99;">🏀 Basket à 5</a>
                 <a href="aps-volleyball-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#1e40af;">🏐 Volley-Ball</a>
                 <a href="aps-football-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#b45309;">⚽ Foot/Futsal</a>
                 <a href="aps-gymnastique-sol-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#7c3aed;">🤸 Gym Sol</a>
@@ -454,7 +483,7 @@
                 <a href="aps-lancer-poids-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#475569;">🏋️ Poids</a>
                 <a href="aps-saut-longueur-triple-saut-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#b45309;">🦘 Longueur/TS</a>
                 <a href="aps-saut-hauteur-fosbury-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#1d4ed8;">🆙 Hauteur</a>
-                <a href="hub-aps-sports-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#991b1b;">← Toutes les APS</a>
+                <a href="hub-aps-sports-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#3347D6;">← Toutes les APS</a>
             </div>
         </div>
     </div>
@@ -471,7 +500,7 @@
                         <h2>⚡ Studio Professionnel Handball : Projets de Cycles &amp; Fiches de Séances (Visionnage A4 + Export Word &amp; PDF)</h2>
                         <p>Sélectionnez votre niveau scolaire (1AC à 2Bac) puis le niveau de pratique de vos élèves (Débutant à Élite) pour visualiser et télécharger le dossier complet.</p>
                     </div>
-                    <span id="studioCurrentBadge" style="background:#991b1b;color:#fff;padding:0.4rem 0.85rem;border-radius:8px;font-size:0.8rem;font-weight:800;white-space:nowrap;">1AC · Niveau 1 (Débutant)</span>
+                    <span id="studioCurrentBadge" style="background:#3347D6;color:#fff;padding:0.4rem 0.85rem;border-radius:8px;font-size:0.8rem;font-weight:800;white-space:nowrap;">1AC · Niveau 1 (Débutant)</span>
                 </div>
 
                 <div class="studio-controls">
@@ -591,7 +620,7 @@
             <div class="content-panel-card">
                 <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1rem;">
                     <div>
-                        <span style="font-size:0.78rem;font-weight:800;color:#006233;text-transform:uppercase;">Référentiel Didactique Officiel · Concours CRMEF, CAPEP &amp; Dossier Pédagogique</span>
+                        <span style="font-size:0.78rem;font-weight:800;color:#0B7A99;text-transform:uppercase;">Référentiel Didactique Officiel · Concours CRMEF, CAPEP &amp; Dossier Pédagogique</span>
                         <h2 style="border:none;margin:0.2rem 0 0;padding:0;">📐 Analyse et Traitement Didactique (ATD) du Handball en EPS</h2>
                     </div>
                     <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
@@ -614,7 +643,7 @@
                                 <li><strong>Coordonner les actions défensives :</strong> Passer de la poursuite individuelle du ballon au repli défensif et à la protection collective de l'axe central (zone des 6m-9m).</li>
                             </ul>
                         </div>
-                        <div class="atd-box" style="border-left-color:#991b1b;">
+                        <div class="atd-box" style="border-left-color:#3347D6;">
                             <h4>🌱 Enjeux de Formation pour l'Élève Marocain (OP 2007/2009)</h4>
                             <ul>
                                 <li><strong>Plan Moteur &amp; Psychomoteur :</strong> Coordination motrice (courir-recevoir-passer-tirer), dissociation segmentaire, adresse manuelle et vitesse de réaction.</li>
@@ -672,7 +701,7 @@
         <!-- ================================================================== -->
         <section id="volet-grilles" class="volet-panel" aria-label="Grilles d'Observation et d'Évaluation Handball">
             <div class="studio-shell">
-                <div class="studio-top-bar" style="background:#006233;">
+                <div class="studio-top-bar" style="background:#0B7A99;">
                     <div>
                         <h2>📊 Grilles Officielles d'Observation &amp; d'Évaluation Sommative Handball (/20)</h2>
                         <p>Conformes aux Notes ministérielles n° 143-09 (Collège OP 2009) et n° 142-10 (Lycée Qualifiant &amp; Bac OP 2007) — Prêtes à imprimer en A4 ou télécharger en Word.</p>
@@ -734,7 +763,7 @@
                             <li><strong>Avantage :</strong> 85% des élèves sont en activité motrice simultanée avec seulement 3 à 6 ballons.</li>
                         </ul>
                     </div>
-                    <div class="atd-box" style="border-left-color:#991b1b;">
+                    <div class="atd-box" style="border-left-color:#3347D6;">
                         <h4>Dispositif B : Le Tournoi Triangulaire Rotatif de 6 Minutes (Séances 1, 8, 9, 10)</h4>
                         <ul>
                             <li><strong>Répartition de la classe en 6 équipes homogènes de 6 ou 7 élèves (Équipes A, B, C, D, E, F) :</strong></li>
@@ -1084,7 +1113,7 @@
         return '<div class="seance-fiche-block">' +
           '<div class="seance-fiche-head"><span>FICHE DE PRÉPARATION DE SÉANCE — HANDBALL (' + currentSchool + ' · ' + pInfo.shortName + ')</span><span>Durée : 55 à 60 min</span></div>' +
           '<div style="padding:1rem;">' +
-          '<p style="margin-bottom:0.5rem;"><strong>📌 Titre de la Séance :</strong> <span style="color:#991b1b;font-weight:800;">' + s[0] + '</span></p>' +
+          '<p style="margin-bottom:0.5rem;"><strong>📌 Titre de la Séance :</strong> <span style="color:#3347D6;font-weight:800;">' + s[0] + '</span></p>' +
           '<p style="margin-bottom:0.75rem;"><strong>🎯 Objectif Opérationnel de la Séance :</strong> ' + s[1] + '</p>' +
           '<table class="a4-table" style="margin:0;"><thead><tr>' +
           '<th style="width:16%;">Phase &amp; Durée</th>' +
@@ -1264,7 +1293,7 @@
           '<tr><td><strong>2. Habiletés Motrices — Produit (Rendement &amp; Efficacité collective/individuelle)</strong></td><td><strong>06 Points</strong><br>(/12 pts moteurs)</td><td>• <strong>Efficacité individuelle (3 pts) :</strong> Ratio (Passes réussies + Tirs cadrés + Récupérations) / Balles jouées.<br>• <strong>Gain des rencontres &amp; Progression collective (3 pts) :</strong> Classement de l\'équipe et pourcentage d\'attaques arrivant en zone de marque.</td><td>• Ie &lt; 40% : 1 à 2 pts<br>• Ie 40-60% : 2,5 à 4 pts<br>• Ie 60-75% : 4,5 à 5 pts<br>• Ie &gt; 75% : 5,5 à 6 pts</td></tr>' +
           '<tr><td><strong>3. Connaissances Conceptuelles</strong></td><td><strong>03 Points</strong></td><td>• Connaissance des règles fondamentales du Handball IHF (marcher, double dribble, zone 6m, jet franc 9m, penalty 7m) et des principes d\'échauffement et de sécurité.</td><td>• 1 pt par réponse / règle maîtrisée en situation</td></tr>' +
           '<tr><td><strong>4. Connaissances Comportementales &amp; Rôles Sociaux</strong></td><td><strong>05 Points</strong></td><td>• Assiduité et tenue sportive (1,5 pt) · Fair-play et respect des décisions (1,5 pt) · Tenue efficace du rôle d\'arbitre-élève IHF et d\'observateur statistique (2 pts).</td><td>• Barème progressif de 0 à 5 points</td></tr>' +
-          '<tr><td colspan="3" style="text-align:right;font-weight:900;font-size:0.95rem;">NOTE SOMMATIVE TOTALE COLLÈGE (OP 2009 — NOTE 143-09) :</td><td style="font-weight:900;font-size:1rem;color:#991b1b;">......... / 20 Points</td></tr>' +
+          '<tr><td colspan="3" style="text-align:right;font-weight:900;font-size:0.95rem;">NOTE SOMMATIVE TOTALE COLLÈGE (OP 2009 — NOTE 143-09) :</td><td style="font-weight:900;font-size:1rem;color:#3347D6;">......... / 20 Points</td></tr>' +
           '</tbody></table>',
 
         "lycee": '<div class="a4-doc-title"><h3>GRILLE OFFICIELLE D\'ÉVALUATION SOMMATIVE HANDBALL — CYCLE QUALIFIANT &amp; BAC (/20)</h3><p>Conforme aux Orientations Pédagogiques 2007 &amp; à la Note Ministérielle n° 142-10 (Tronc Commun · 1ère Bac · 2ème Bac)</p></div>' +
@@ -1278,7 +1307,7 @@
           '<tr><td><strong>2. Habiletés Motrices — Produit (Efficacité Individuelle &amp; Collective)</strong></td><td><strong>07 Points</strong><br>(/14 pts moteurs)</td><td>• <strong>Indice d\'efficacité individuelle (4 pts) :</strong> Taux de réussite dans les duels, les passes décisives et les tirs cadrés/marqués.<br>• <strong>Performance collective (3 pts) :</strong> Résultat des matchs et réalisation du contrat tactique d\'équipe.</td><td>• Ie &lt; 45% : 2 à 3 pts<br>• Ie 45-65% : 3,5 à 5 pts<br>• Ie 65-80% : 5,5 à 6,25 pts<br>• Ie &gt; 80% : 6,5 à 7 pts</td></tr>' +
           '<tr><td><strong>3. Connaissances Conceptuelles</strong></td><td><strong>03 Points</strong></td><td>• Maîtrise du code d\'arbitrage IHF 2026 (18 gestes, échelle des sanctions, jeu passif), terminologie tactique (fixation, croisé, défense étagée) et physiologie de l\'effort.</td><td>• 0 à 3 points</td></tr>' +
           '<tr><td><strong>4. Connaissances Comportementales &amp; Rôles Sociaux</strong></td><td><strong>03 Points</strong></td><td>• Arbitrage officiel en duo (1,5 pt), engagement dans le projet collectif, respect de l\'éthique sportive et assiduité (1,5 pt).</td><td>• 0 à 3 points</td></tr>' +
-          '<tr><td colspan="3" style="text-align:right;font-weight:900;font-size:0.95rem;">NOTE SOMMATIVE TOTALE LYCÉE QUALIFIANT &amp; BAC (OP 2007 — NOTE 142-10) :</td><td style="font-weight:900;font-size:1rem;color:#991b1b;">......... / 20 Points</td></tr>' +
+          '<tr><td colspan="3" style="text-align:right;font-weight:900;font-size:0.95rem;">NOTE SOMMATIVE TOTALE LYCÉE QUALIFIANT &amp; BAC (OP 2007 — NOTE 142-10) :</td><td style="font-weight:900;font-size:1rem;color:#3347D6;">......... / 20 Points</td></tr>' +
           '</tbody></table>',
 
         "dispense": '<div class="a4-doc-title"><h3>GRILLE D\'ÉVALUATION ALTERNATIVE HANDBALL — ÉLÈVE DISPENSÉ DE PRATIQUE (/20)</h3><p>Évaluation par les Rôles Sociaux (Arbitrage IHF, Observation Statistique &amp; Dossier Théorique — OP 2007/2009)</p></div>' +
@@ -1290,7 +1319,7 @@
           '<tr><td><strong>1. Compétences Méthodologiques, Arbitrage IHF &amp; Observation Terrain</strong></td><td><strong>08 Points</strong></td><td>• Diriger un match scolaire en appliquant les coups de sifflet et les <strong>18 gestes officiels IHF</strong> (4 pts).<br>• Tenir la table de marque (chronométrage, score, exclusions 2 min) et remplir avec précision les fiches d\'observation statistique de ses camarades (4 pts).</td></tr>' +
           '<tr><td><strong>2. Connaissances Conceptuelles &amp; Règlement Handball</strong></td><td><strong>06 Points</strong></td><td>• Dossier écrit ou interrogation orale sur : le tracé et les dimensions du terrain (40×20m, 6m, 7m, 9m), les règles du joueur et du gardien, et les principes d\'échauffement et de sécurité en Handball.</td></tr>' +
           '<tr><td><strong>3. Connaissances Comportementales &amp; Assiduité</strong></td><td><strong>06 Points</strong></td><td>• Présence effective et ponctualité à toutes les séances du cycle (2 pts), aide à l\'installation du matériel et des plots (2 pts), sérieux et impartialité dans l\'arbitrage (2 pts).</td></tr>' +
-          '<tr><td colspan="2" style="text-align:right;font-weight:900;">NOTE FINALE ÉLÈVE DISPENSÉ :</td><td style="font-weight:900;color:#006233;">......... / 20 Points</td></tr>' +
+          '<tr><td colspan="2" style="text-align:right;font-weight:900;">NOTE FINALE ÉLÈVE DISPENSÉ :</td><td style="font-weight:900;color:#0B7A99;">......... / 20 Points</td></tr>' +
           '</tbody></table>'
       };
 
@@ -1324,17 +1353,17 @@
     </script>
 
 <!-- PROFEPS_EEAT_AUTHOR_START -->
-  <aside id="peps-eeat-author-card" aria-label="Auteur et vérification pédagogique" style="max-width:1024px;margin:1.75rem auto;padding:1.25rem 1.5rem;background:#ffffff;border:1px solid #e2e8f0;border-left:4px solid #c1272d;border-radius:16px;box-shadow:0 2px 10px rgba(15,23,42,0.04);">
+  <aside id="peps-eeat-author-card" aria-label="Auteur et vérification pédagogique" style="max-width:1024px;margin:1.75rem auto;padding:1.25rem 1.5rem;background:#ffffff;border:1px solid #e2e8f0;border-left:4px solid #3347D6;border-radius:16px;box-shadow:0 2px 10px rgba(15,23,42,0.04);">
     <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;">
       <div style="display:flex;align-items:center;gap:0.9rem;">
-        <a href="a-propos.html" style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#991b1b,#006233);color:#ffffff;font-weight:900;font-size:1.05rem;display:flex;align-items:center;justify-content:center;text-decoration:none;flex-shrink:0;">AE</a>
+        <a href="a-propos.html" style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#3347D6,#0B7A99);color:#ffffff;font-weight:900;font-size:1.05rem;display:flex;align-items:center;justify-content:center;text-decoration:none;flex-shrink:0;">AE</a>
         <div>
           <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem;">
-            <span style="font-size:0.72rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:#991b1b;background:#fef2f2;padding:0.15rem 0.55rem;border-radius:6px;border:1px solid #fecaca;">✔ Contenu Vérifié E-E-A-T</span>
+            <span style="font-size:0.72rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:#3347D6;background:var(--sky);padding:0.15rem 0.55rem;border-radius:6px;border:1px solid var(--stone);">✔ Contenu Vérifié E-E-A-T</span>
             <span style="font-size:0.75rem;color:#64748b;font-weight:600;">Révision pédagogique : <time datetime="2026-11">Novembre 2026</time></span>
           </div>
           <p style="margin:0.25rem 0 0 0;font-size:0.92rem;font-weight:800;color:#0f172a;">
-            Rédigé et validé par <a href="a-propos.html" style="color:#991b1b;text-decoration:underline;">Abdelkhalek ELBOUDANI</a> — Professeur d'EPS au Maroc &amp; Fondateur de ProfEPS
+            Rédigé et validé par <a href="a-propos.html" style="color:#3347D6;text-decoration:underline;">Abdelkhalek ELBOUDANI</a> — Professeur d'EPS au Maroc &amp; Fondateur de ProfEPS
           </p>
           <p style="margin:0.2rem 0 0 0;font-size:0.78rem;color:#475569;line-height:1.45;">
             <strong>Sources &amp; Référentiels :</strong> Lois du Jeu Fédérales 2025-2026 (IFAB, IHF, FIBA, FIVB, World Athletics, FIG, BWF, ITTF) & OP EPS Maroc (2007/2009).
@@ -1354,8 +1383,36 @@
         <!-- Col 1: Qui est derrière ProfEPS -->
         <div class="footer-brand" style="display:flex;flex-direction:column;align-items:flex-start;gap:0.75rem;">
           <a href="/" class="peps-nav-logo" style="color:#FFFFFF !important;">
-            <span class="peps-nav-logo-mark" aria-hidden="true">PE</span>
-            <span class="peps-nav-logo-text" style="color:#FFFFFF;">Prof<span style="color:#FFB300;">EPS</span>.ma</span>
+            <span class="peps-nav-logo-mark" aria-hidden="true">
+              <svg viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" class="peps-logo-svg">
+                <defs>
+                  <linearGradient id="ftrShieldGrad" x1="12" y1="8" x2="116" y2="120" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#3347D6"/>
+                    <stop offset="55%" stop-color="#4A49EA"/>
+                    <stop offset="100%" stop-color="#6D4AFF"/>
+                  </linearGradient>
+                  <linearGradient id="ftrAmberGrad" x1="22" y1="36" x2="104" y2="82" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#FFB300"/>
+                    <stop offset="100%" stop-color="#F59E0B"/>
+                  </linearGradient>
+                </defs>
+                <rect x="6" y="6" width="116" height="116" rx="30" fill="url(#ftrShieldGrad)"/>
+                <rect x="9" y="9" width="110" height="110" rx="27" stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="2"/>
+                <path d="M 22 78 C 36 46, 68 32, 104 38 C 80 46, 56 60, 42 82 Z" fill="url(#ftrAmberGrad)"/>
+                <circle cx="74" cy="27" r="9.2" fill="#FFB300" stroke="#FFFFFF" stroke-width="2.4"/>
+                <line x1="69" y1="41" x2="58" y2="63" stroke="#FFFFFF" stroke-width="10.4" stroke-linecap="round"/>
+                <path d="M 45 52 L 53 44 L 68 42 L 83 45 L 94 37" stroke="#FFFFFF" stroke-width="5.4" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M 44 78 L 59 62 L 78 66 L 73 79" stroke="#FFFFFF" stroke-width="6.2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M 22 86 C 36 81, 52 84, 64 92 C 76 84, 92 81, 106 86 L 106 102 C 92 97, 76 100, 64 108 C 52 100, 36 97, 22 102 Z" fill="#C7D7FE"/>
+                <path d="M 26 80 C 39 75, 53 78, 64 86 C 75 78, 89 75, 102 80 L 102 95 C 89 90, 75 93, 64 101 C 53 93, 39 90, 26 95 Z" fill="#FFFFFF"/>
+                <line x1="64" y1="84" x2="64" y2="102" stroke="#3347D6" stroke-width="3" stroke-linecap="round"/>
+                <polygon points="61,98 64,108.5 67,98" fill="#FFB300"/>
+              </svg>
+            </span>
+            <span class="peps-nav-logo-lockup">
+              <span class="peps-nav-logo-text" style="color:#FFFFFF;">Prof<span style="color:#FFB300;">EPS</span><em class="peps-logo-tld" style="background:rgba(255,179,0,0.18);color:#FFB300;">.ma</em></span>
+              <span class="peps-nav-logo-sub" style="color:#9AA6C4;">Éducation &amp; Sport</span>
+            </span>
           </a>
           <p style="font-size:0.9rem;color:#9AA6C4;line-height:1.6;margin:0;">
             Créé par <strong style="color:#E8ECFA;">Abdelkhalek ELBOUDANI</strong>, professeur d'EPS au Maroc. Tout pour préparer ta séance, télécharger les documents du ministère (OP 2007, 2009 et 2021) et réussir le concours CRMEF.

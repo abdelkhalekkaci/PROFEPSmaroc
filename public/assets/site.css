@@ -217,17 +217,20 @@ table, td, th, .tabular-nums, .kpi-val, .footer-stat-num {
   background: var(--surface) !important;
   border-bottom: 1px solid var(--stone) !important;
   box-shadow: var(--shadow-sm);
+  direction: ltr !important;
+  text-align: left !important;
   transition: background-color 0.18s ease, border-color 0.18s ease;
 }
 
 .peps-nav-container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0.65rem 1.25rem;
+  padding: 0.6rem 1.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  direction: ltr !important;
 }
 
 .peps-nav-logo {
@@ -238,28 +241,80 @@ table, td, th, .tabular-nums, .kpi-val, .footer-stat-num {
   color: var(--ink) !important;
   font-family: var(--font-display) !important;
   font-weight: 800;
-  font-size: 1.25rem;
+  font-size: 1.22rem;
   letter-spacing: -0.02em;
   flex-shrink: 0;
+  direction: ltr !important;
 }
 
 .peps-nav-logo-mark {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  background: var(--grad);
-  color: #FFFFFF;
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-display);
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(51, 71, 214, 0.25);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.peps-nav-logo:hover .peps-nav-logo-mark {
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 6px 16px rgba(51, 71, 214, 0.34);
+}
+
+.peps-logo-svg {
+  width: 42px;
+  height: 42px;
+  display: block;
+}
+
+.peps-nav-logo-lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.05;
+  gap: 0.12rem;
+}
+
+.peps-nav-logo-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.04rem;
+  font-size: 1.2rem;
   font-weight: 800;
-  font-size: 1.05rem;
-  box-shadow: 0 4px 12px rgba(51, 71, 214, 0.28);
+  color: var(--ink);
 }
 
 .peps-nav-logo-text span {
   color: var(--primary);
+}
+
+.peps-logo-tld {
+  font-style: normal;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.08rem 0.34rem;
+  margin-left: 0.18rem;
+  border-radius: 6px;
+  background: rgba(255, 179, 0, 0.22);
+  color: var(--ink);
+  letter-spacing: 0;
+}
+
+html[data-theme="dark"] .peps-logo-tld {
+  background: rgba(255, 179, 0, 0.2);
+  color: #FFB300;
+}
+
+.peps-nav-logo-sub {
+  font-family: var(--font-sans);
+  font-size: 0.64rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--slate);
 }
 
 .peps-nav-menu {
@@ -972,38 +1027,717 @@ html[data-theme="dark"] .atlas-chip-amber {
 }
 
 /* ==========================================================================
-   7. Five Page Templates & Dark Mode Harmonization Across Existing Pages
+   7. Page Templates, Text Alignment, CRMEF/QCM Components & Dark Mode
    ========================================================================== */
+
+/* 7.1 Sticky Navbar Offset Cleanup (Eliminates 80px-140px blank top gaps) */
+body {
+  padding-top: 0 !important;
+}
+
+header.vma-hero,
+.vma-hero,
+.hero-carousel,
+.op-hero {
+  margin-top: 0 !important;
+}
+
+header.article-header:not(.container .article-header),
+.faq-header,
+.article-hero {
+  padding-top: 3rem !important;
+  padding-bottom: 2.5rem !important;
+  margin-top: 0 !important;
+}
+
+section.pt-28,
+header.pt-28,
+main.pt-28 {
+  padding-top: 2.75rem !important;
+}
+
+body.tpl-tool .main-content,
+.main-content {
+  padding-top: 2rem !important;
+}
+
+/* 7.2 Text Alignment & Width Normalization (Fixes misaligned paragraphs & justified gaps) */
 body.tpl-article main p,
-body.tpl-article article p {
-  max-width: 65ch;
+body.tpl-article article p,
+.prose-editorial p,
+.article-content p,
+.qa-content p,
+.content p,
+.op-section p,
+.step-card p,
+.answer-box p,
+.callout-box p,
+.info-box p,
+.warning-box p,
+.success-box p,
+.faq-answer p {
+  max-width: 100% !important;
+  text-align: left !important;
 }
 
-/* Remap old red/green classes across inner pages to Modern Atlas Majorelle & Cyan */
-.peps-btn-red {
-  background: var(--primary-soft) !important;
-  border: 1px solid var(--stone) !important;
-  color: var(--ink) !important;
-}
-.peps-btn-green {
-  background: var(--cyan-soft) !important;
-  border: 1px solid var(--stone) !important;
-  color: var(--ink) !important;
-}
-
+/* Centered Hero & CTA Containers: keep headings, subtitles, and metadata centered together */
+header.article-header:not(.container .article-header),
+.article-header-content,
+.faq-header,
+.article-hero,
 .op-hero,
-header.vma-hero {
-  background: var(--grad) !important;
-  color: #FFFFFF !important;
-  border-bottom: 3px solid var(--accent) !important;
+.calculator-cta-box,
+.tool-banner,
+.cta-banner,
+.vma-banner,
+.page-header,
+.articles-header,
+.text-center {
+  text-align: center !important;
 }
-.op-hero h1,
-header.vma-hero h1 {
-  color: #FFFFFF !important;
-}
+
+header.article-header:not(.container .article-header) p,
+.article-header-content p,
+.faq-header p,
+.article-hero p,
 .op-hero p,
-header.vma-hero p {
-  color: #EAF0FF !important;
+.calculator-cta-box p,
+.tool-banner p,
+.cta-banner p,
+.vma-banner p,
+.page-header p,
+.articles-header p,
+.text-center p {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 72ch !important;
+}
+
+header.article-header:not(.container .article-header) .article-meta,
+.article-header-content .article-meta,
+.article-hero .article-meta {
+  justify-content: center !important;
+}
+
+/* English MAS Articles: .container .article-header is left-aligned with breadcrumb */
+.container .article-header {
+  text-align: left !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  background: transparent !important;
+  border-bottom: none !important;
+}
+
+.container .article-header .article-title,
+.container .article-header p {
+  text-align: left !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.container .article-header .article-meta {
+  justify-content: flex-start !important;
+}
+
+/* 7.3 RTL Arabic Pages (html[lang="ar"], html[dir="rtl"]) & Bilingual Blocks */
+#profeps-unified-footer,
+#profeps-unified-footer .footer-container,
+#profeps-unified-footer .footer-grid,
+#profeps-unified-footer .footer-bottom {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+html[lang="ar"] main p,
+html[lang="ar"] article p,
+html[lang="ar"] .article-content p,
+html[lang="ar"] .article-content li,
+html[lang="ar"] .article-content h2,
+html[lang="ar"] .article-content h3,
+html[lang="ar"] .article-content h4,
+html[lang="ar"] .faq-item,
+html[lang="ar"] .faq-item p,
+html[lang="ar"] .info-box p,
+html[lang="ar"] .warning-box p,
+html[lang="ar"] .success-box p,
+html[lang="ar"] .step-card p,
+html[dir="rtl"] main p,
+html[dir="rtl"] article p,
+html[dir="rtl"] .article-content p,
+html[dir="rtl"] .article-content li,
+html[dir="rtl"] .article-content h2,
+html[dir="rtl"] .article-content h3 {
+  text-align: right !important;
+  direction: rtl !important;
+  max-width: 100% !important;
+}
+
+html[lang="ar"] .article-hero p,
+html[lang="ar"] .article-hero h1,
+html[dir="rtl"] .article-hero p,
+html[dir="rtl"] .article-hero h1 {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.ar-col,
+.ar-block,
+.ar-callout,
+.ar-quote,
+.arabic-law-box,
+.hero-ar-title,
+.disc-ar,
+[dir="rtl"] {
+  direction: rtl !important;
+  text-align: right !important;
+  font-family: var(--font-ar) !important;
+}
+
+.hero-ar-title {
+  text-align: center !important;
+}
+
+/* 7.4 Unified Hero Surface & Contrast (Eliminates dark-on-dark hero text clash) */
+.op-hero,
+header.vma-hero,
+.vma-hero,
+header.article-header:not(.container .article-header),
+.faq-header,
+.article-hero,
+section.from-slate-900 {
+  background: linear-gradient(135deg, var(--sky) 0%, var(--paper) 100%) !important;
+  color: var(--ink) !important;
+  border-bottom: 1px solid var(--stone) !important;
+}
+
+.op-hero h1,
+header.vma-hero h1,
+.vma-hero h1,
+header.article-header h1,
+.faq-header h1,
+.article-hero h1,
+section.from-slate-900 h1 {
+  color: var(--ink) !important;
+}
+
+.op-hero p,
+header.vma-hero p,
+.vma-hero p,
+header.article-header p,
+.faq-header p,
+.article-hero p,
+section.from-slate-900 p {
+  color: var(--slate) !important;
+}
+
+/* Keep centered hero layout on calculator pages while preserving left-aligned max-w-5xl heroes */
+header.vma-hero:not(:has(.max-w-5xl)),
+.vma-hero:not(:has(.max-w-5xl)) {
+  text-align: center !important;
+}
+
+header.vma-hero:not(:has(.max-w-5xl)) p,
+.vma-hero:not(:has(.max-w-5xl)) p {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+header.vma-hero .max-w-5xl,
+header.vma-hero .max-w-5xl h1,
+header.vma-hero .max-w-5xl p,
+section.from-slate-900 .max-w-5xl,
+section.from-slate-900 .max-w-5xl h1,
+section.from-slate-900 .max-w-5xl p {
+  text-align: left !important;
+  margin-left: 0 !important;
+}
+
+/* 7.5 Buttons: Majorelle Primary & Outlined Secondary across Inner Pages */
+.peps-btn-didactique,
+.peps-btn-primary,
+.peps-btn-red,
+button.peps-cta-btn,
+.peps-cta-btn,
+#btn-calc-main,
+.btn-calc-main,
+.btn-calculator-action,
+.tc-cta-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.45rem !important;
+  background: var(--primary) !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  border: 1px solid var(--primary-deep) !important;
+  border-radius: 12px !important;
+  padding: 0.8rem 1.35rem !important;
+  font-family: var(--font-display) !important;
+  font-weight: 800 !important;
+  font-size: 0.9rem !important;
+  line-height: 1.3 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 14px rgba(51, 71, 214, 0.22) !important;
+  transition: background-color 0.16s ease, transform 0.16s ease, box-shadow 0.16s ease !important;
+}
+
+.peps-btn-didactique:hover,
+.peps-btn-primary:hover,
+.peps-btn-red:hover,
+button.peps-cta-btn:hover,
+.peps-cta-btn:hover,
+#btn-calc-main:hover,
+.btn-calc-main:hover,
+.btn-calculator-action:hover,
+.tc-cta-btn:hover {
+  background: var(--primary-deep) !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 8px 20px rgba(36, 52, 168, 0.3) !important;
+}
+
+.peps-btn-specialite,
+.peps-btn-slate,
+.peps-btn-green {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.45rem !important;
+  background: var(--surface) !important;
+  color: var(--primary) !important;
+  -webkit-text-fill-color: var(--primary) !important;
+  border: 2px solid var(--primary) !important;
+  border-radius: 12px !important;
+  padding: 0.78rem 1.3rem !important;
+  font-family: var(--font-display) !important;
+  font-weight: 800 !important;
+  font-size: 0.9rem !important;
+  line-height: 1.3 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: background-color 0.16s ease, color 0.16s ease, transform 0.16s ease !important;
+}
+
+.peps-btn-specialite:hover,
+.peps-btn-slate:hover,
+.peps-btn-green:hover {
+  background: var(--sky) !important;
+  color: var(--primary-deep) !important;
+  -webkit-text-fill-color: var(--primary-deep) !important;
+  border-color: var(--primary-deep) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* 7.6 Deep Enrichment Section (.peps-deep-enrichment — 48 pages) */
+.peps-deep-enrichment {
+  max-width: 960px !important;
+  margin: 2.5rem auto !important;
+  padding: 2rem 2.25rem !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--stone) !important;
+  border-left: 4px solid var(--primary) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-sm) !important;
+  color: var(--ink) !important;
+  text-align: left !important;
+}
+
+.peps-deep-enrichment h2 {
+  font-family: var(--font-display) !important;
+  font-size: 1.35rem !important;
+  font-weight: 800 !important;
+  color: var(--ink) !important;
+  margin: 0 0 1rem 0 !important;
+  line-height: 1.3 !important;
+}
+
+.peps-deep-enrichment h3 {
+  font-family: var(--font-display) !important;
+  font-size: 1.08rem !important;
+  font-weight: 700 !important;
+  color: var(--primary) !important;
+  margin: 1.5rem 0 0.6rem 0 !important;
+  line-height: 1.35 !important;
+}
+
+.peps-deep-enrichment p {
+  color: var(--slate) !important;
+  font-size: 0.95rem !important;
+  line-height: 1.7 !important;
+  margin: 0 0 0.9rem 0 !important;
+  max-width: 100% !important;
+  text-align: left !important;
+}
+
+.peps-deep-enrichment ul,
+.peps-deep-enrichment ol {
+  margin: 0.65rem 0 1.15rem 1.35rem !important;
+  padding: 0 !important;
+  color: var(--slate) !important;
+  font-size: 0.94rem !important;
+  line-height: 1.65 !important;
+}
+
+.peps-deep-enrichment li {
+  margin-bottom: 0.5rem !important;
+}
+
+.peps-deep-enrichment strong {
+  color: var(--ink) !important;
+}
+
+.peps-deep-enrichment code {
+  background: var(--sky) !important;
+  color: var(--primary) !important;
+  padding: 0.15rem 0.4rem !important;
+  border-radius: 6px !important;
+  font-size: 0.86em !important;
+}
+
+/* 7.7 CRMEF QCM Pages (.peps-crmef-*, .peps-u-*, .peps-qa-*, .peps-ref-* — 28 pages) */
+.peps-crmef-compact-header {
+  background: linear-gradient(135deg, var(--sky) 0%, var(--paper) 100%) !important;
+  border-bottom: 1px solid var(--stone) !important;
+  padding: 1.5rem 1.25rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.peps-crmef-compact-inner {
+  max-width: 1024px !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 1rem !important;
+}
+
+.peps-crmef-title-group {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.35rem !important;
+}
+
+.peps-crmef-badge-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+
+.peps-crmef-paper-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.3rem !important;
+  padding: 0.25rem 0.7rem !important;
+  border-radius: 999px !important;
+  background: var(--primary) !important;
+  color: #FFFFFF !important;
+  font-size: 0.74rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+}
+
+.peps-crmef-compact-h1 {
+  font-family: var(--font-display) !important;
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem) !important;
+  font-weight: 800 !important;
+  color: var(--ink) !important;
+  margin: 0 !important;
+  line-height: 1.2 !important;
+}
+
+.peps-crmef-header-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+
+.peps-crmef-pair-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.35rem !important;
+  padding: 0.55rem 1rem !important;
+  border-radius: 10px !important;
+  background: var(--primary) !important;
+  color: #FFFFFF !important;
+  font-size: 0.82rem !important;
+  font-weight: 800 !important;
+  text-decoration: none !important;
+  border: 1px solid var(--primary-deep) !important;
+  transition: background-color 0.15s ease, transform 0.15s ease !important;
+}
+
+.peps-crmef-pair-btn:hover {
+  background: var(--primary-deep) !important;
+  transform: translateY(-1px) !important;
+}
+
+.peps-crmef-hub-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.35rem !important;
+  padding: 0.55rem 0.95rem !important;
+  border-radius: 10px !important;
+  background: var(--surface) !important;
+  color: var(--ink) !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  border: 1px solid var(--stone) !important;
+  transition: border-color 0.15s ease, color 0.15s ease !important;
+}
+
+.peps-crmef-hub-btn:hover {
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+}
+
+.peps-crmef-unified-tabs {
+  max-width: 1024px !important;
+  margin: 1.25rem auto !important;
+  padding: 0.35rem !important;
+  background: var(--sky) !important;
+  border: 1px solid var(--stone) !important;
+  border-radius: 14px !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 0.35rem !important;
+}
+
+@media (max-width: 640px) {
+  .peps-crmef-unified-tabs {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.peps-u-tab {
+  padding: 0.7rem 1rem !important;
+  border-radius: 10px !important;
+  border: none !important;
+  background: transparent !important;
+  color: var(--slate) !important;
+  font-family: var(--font-display) !important;
+  font-size: 0.86rem !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+  text-align: center !important;
+  transition: all 0.16s ease !important;
+}
+
+.peps-u-tab:hover:not(.active) {
+  color: var(--primary) !important;
+  background: rgba(51, 71, 214, 0.06) !important;
+}
+
+.peps-u-tab.active {
+  background: var(--primary) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(51, 71, 214, 0.25) !important;
+}
+
+.peps-u-panel {
+  display: none !important;
+}
+
+.peps-u-panel.active {
+  display: block !important;
+}
+
+.peps-qa-toolbar {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 0.75rem !important;
+  margin-bottom: 1.25rem !important;
+  background: var(--surface) !important;
+  padding: 0.85rem 1.1rem !important;
+  border-radius: 14px !important;
+  border: 1px solid var(--stone) !important;
+}
+
+.peps-qa-search {
+  flex: 1 !important;
+  min-width: 240px !important;
+  padding: 0.65rem 1rem !important;
+  border-radius: 10px !important;
+  border: 1px solid var(--stone) !important;
+  background: var(--paper) !important;
+  color: var(--ink) !important;
+  font-size: 0.9rem !important;
+}
+
+#peps-qa-cards-list {
+  display: grid !important;
+  gap: 1rem !important;
+}
+
+.peps-qa-card {
+  background: var(--surface) !important;
+  border: 1px solid var(--stone) !important;
+  border-radius: 16px !important;
+  padding: 1.35rem 1.5rem !important;
+  box-shadow: var(--shadow-sm) !important;
+  text-align: left !important;
+}
+
+.peps-qa-meta {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  margin-bottom: 0.7rem !important;
+}
+
+.peps-qa-num {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0.2rem 0.6rem !important;
+  border-radius: 8px !important;
+  background: var(--primary) !important;
+  color: #FFFFFF !important;
+  font-size: 0.75rem !important;
+  font-weight: 800 !important;
+}
+
+.peps-qa-theme {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 0.2rem 0.7rem !important;
+  border-radius: 999px !important;
+  background: var(--sky) !important;
+  color: var(--primary) !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  border: 1px solid var(--stone) !important;
+}
+
+.peps-qa-q {
+  font-family: var(--font-display) !important;
+  font-size: 1.04rem !important;
+  font-weight: 800 !important;
+  color: var(--ink) !important;
+  margin: 0 0 0.75rem 0 !important;
+  line-height: 1.45 !important;
+}
+
+.peps-qa-ans {
+  padding: 0.7rem 1rem !important;
+  border-radius: 10px !important;
+  background: var(--cyan-soft) !important;
+  border-left: 4px solid var(--cyan) !important;
+  color: var(--ink) !important;
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 0.55rem !important;
+  line-height: 1.55 !important;
+}
+
+.peps-qa-exp {
+  padding: 0.7rem 1rem !important;
+  border-radius: 10px !important;
+  background: var(--sky) !important;
+  color: var(--slate) !important;
+  font-size: 0.88rem !important;
+  line-height: 1.6 !important;
+}
+
+.peps-ref-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  gap: 1.25rem !important;
+}
+
+.peps-ref-card {
+  background: var(--surface) !important;
+  border: 1px solid var(--stone) !important;
+  border-radius: 16px !important;
+  padding: 1.35rem 1.5rem !important;
+  box-shadow: var(--shadow-sm) !important;
+  text-align: left !important;
+}
+
+.peps-ref-head {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 0.75rem !important;
+  margin-bottom: 0.85rem !important;
+  padding-bottom: 0.65rem !important;
+  border-bottom: 1px solid var(--stone) !important;
+}
+
+.peps-ref-title {
+  font-family: var(--font-display) !important;
+  font-size: 1rem !important;
+  font-weight: 800 !important;
+  color: var(--ink) !important;
+  margin: 0 !important;
+}
+
+.peps-ref-weight {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0.24rem 0.65rem !important;
+  border-radius: 999px !important;
+  background: var(--accent) !important;
+  color: #0E1633 !important;
+  font-size: 0.76rem !important;
+  font-weight: 800 !important;
+}
+
+.peps-ref-list {
+  margin: 0 !important;
+  padding-left: 1.15rem !important;
+  color: var(--slate) !important;
+  font-size: 0.88rem !important;
+  line-height: 1.65 !important;
+  display: grid !important;
+  gap: 0.35rem !important;
+}
+
+/* 7.8 Shared Mesh, References, ATD Matrices & FAQ Accordion */
+.peps-related-mesh,
+#profeps-scientific-references,
+#profeps-atd-complete-matrices,
+#profeps-crmef-urgency-banner {
+  background: var(--surface) !important;
+  border-color: var(--stone) !important;
+  color: var(--ink) !important;
+}
+
+.peps-related-mesh h2,
+#profeps-scientific-references h2,
+#profeps-atd-complete-matrices h2,
+#profeps-crmef-urgency-banner h2 {
+  color: var(--ink) !important;
+}
+
+.peps-related-mesh a {
+  background: var(--paper) !important;
+  border-color: var(--stone) !important;
+  color: var(--ink) !important;
+}
+
+.peps-related-mesh a:hover {
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+}
+
+.faq-accordion {
+  display: grid;
+  gap: 0.85rem;
+  margin: 1.5rem 0;
 }
 
 .op-table thead th {
@@ -1011,7 +1745,22 @@ header.vma-hero p {
   color: #FFFFFF !important;
 }
 
-/* Dark mode surface harmonization for inner Tailwind / static pages */
+/* 7.9 Comprehensive Dark Mode Harmonization Across All Inner Templates */
+html[data-theme="dark"] {
+  --bg-primary: var(--paper);
+  --bg-secondary: var(--sky);
+  --bg-light: var(--paper);
+  --bg-card: var(--surface);
+  --text-primary: var(--ink);
+  --text-dark: var(--ink);
+  --text-secondary: var(--slate);
+  --text-muted: var(--slate);
+  --text-light: var(--slate);
+  --border: var(--stone);
+  --border-color: var(--stone);
+  --border-light: var(--stone);
+}
+
 html[data-theme="dark"] .bg-white,
 html[data-theme="dark"] .bg-slate-50,
 html[data-theme="dark"] .bg-slate-100,
@@ -1019,12 +1768,42 @@ html[data-theme="dark"] .maillage-box,
 html[data-theme="dark"] .info-panel,
 html[data-theme="dark"] .method-box,
 html[data-theme="dark"] .faq-item,
+html[data-theme="dark"] .faq-question,
+html[data-theme="dark"] .faq-answer,
 html[data-theme="dark"] .kpi-box,
 html[data-theme="dark"] .sub-card,
 html[data-theme="dark"] .fr-col,
 html[data-theme="dark"] .ar-col,
-html[data-theme="dark"] .op-table td {
+html[data-theme="dark"] .op-table td,
+html[data-theme="dark"] .article-content,
+html[data-theme="dark"] .qa-content,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .step-card,
+html[data-theme="dark"] .signal-card,
+html[data-theme="dark"] .related-card,
+html[data-theme="dark"] .qa-related,
+html[data-theme="dark"] .related,
+html[data-theme="dark"] .toc-nav,
+html[data-theme="dark"] .peps-sim-box,
+html[data-theme="dark"] .peps-kpi-card,
+html[data-theme="dark"] .tc-flagship-card,
+html[data-theme="dark"] .tc-domain-box,
+html[data-theme="dark"] .theme-card,
+html[data-theme="dark"] .table-responsive,
+html[data-theme="dark"] .custom-table td {
   background-color: var(--surface) !important;
+  color: var(--ink) !important;
+  border-color: var(--stone) !important;
+}
+
+html[data-theme="dark"] .signal-img-container,
+html[data-theme="dark"] .toc-grid a,
+html[data-theme="dark"] .answer-box,
+html[data-theme="dark"] .callout-box,
+html[data-theme="dark"] .info-box,
+html[data-theme="dark"] .info-box-green,
+html[data-theme="dark"] .info-box-yellow {
+  background: var(--sky) !important;
   color: var(--ink) !important;
   border-color: var(--stone) !important;
 }
@@ -1033,13 +1812,22 @@ html[data-theme="dark"] .text-slate-900,
 html[data-theme="dark"] .text-slate-800,
 html[data-theme="dark"] .text-slate-700,
 html[data-theme="dark"] .m-title,
-html[data-theme="dark"] .disc-title {
+html[data-theme="dark"] .disc-title,
+html[data-theme="dark"] .article-title,
+html[data-theme="dark"] .article-content h2,
+html[data-theme="dark"] .article-content h3,
+html[data-theme="dark"] .article-content h4,
+html[data-theme="dark"] .step-card h4,
+html[data-theme="dark"] .answer-box h4 {
   color: var(--ink) !important;
 }
 
 html[data-theme="dark"] .text-slate-600,
 html[data-theme="dark"] .text-slate-500,
-html[data-theme="dark"] .m-desc {
+html[data-theme="dark"] .m-desc,
+html[data-theme="dark"] .article-content p,
+html[data-theme="dark"] .article-content li,
+html[data-theme="dark"] .step-card p {
   color: var(--slate) !important;
 }
 

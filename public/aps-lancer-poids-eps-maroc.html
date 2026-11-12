@@ -106,7 +106,7 @@
             --primary-dark: #1e293b;
             --primary-light: #f1f5f9;
             --secondary: #2434A8;
-            --secondary-light: #fef2f2;
+            --secondary-light: var(--sky);
             --accent: #0B7A99;
             --text-primary: #0f172a;
             --text-secondary: #334155;
@@ -134,7 +134,7 @@
         /* HERO & INTRO */
         .silo-hero {
             padding: 124px 1.5rem 2.25rem;
-            background: linear-gradient(135deg, var(--paper) 0%, #ffffff 50%, #fff1f2 100%);
+            background: linear-gradient(135deg, var(--paper) 0%, #ffffff 50%, var(--sky) 100%);
             border-bottom: 1px solid var(--border);
         }
         .silo-hero-inner {
@@ -166,7 +166,7 @@
             gap: 0.5rem;
             padding: 0.38rem 0.9rem;
             background: var(--secondary-light);
-            border: 1px solid #fecaca;
+            border: 1px solid var(--stone);
             border-radius: 999px;
             font-size: 0.78rem;
             font-weight: 800;
@@ -408,7 +408,7 @@
         }
         .practice-pill:hover {
             border-color: var(--accent);
-            background: #f0fdf4;
+            background: var(--sky);
         }
         .practice-pill.active {
             background: var(--accent);
@@ -588,7 +588,7 @@
         }
         .a4-oti-box {
             border: 1.5px solid #0B7A99;
-            background: #f0fdf4;
+            background: var(--sky);
             padding: 0.65rem 0.85rem;
             border-radius: 6px;
             margin-bottom: 0.9rem;
@@ -607,7 +607,7 @@
         }
         .calc-widget-header {
             padding: 1.15rem 1.5rem;
-            background: linear-gradient(135deg, #7f1d1d 0%, #2434A8 55%, #0f172a 100%);
+            background: linear-gradient(135deg, #2434A8 0%, #2434A8 55%, #0f172a 100%);
             color: #ffffff;
             display: flex;
             flex-wrap: wrap;
@@ -627,14 +627,14 @@
             grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
             gap: 1rem;
             padding: 1.25rem 1.5rem;
-            background: #fef2f2;
-            border-bottom: 1px solid #fecaca;
+            background: var(--sky);
+            border-bottom: 1px solid var(--stone);
         }
         .calc-input-group label {
             display: block;
             font-size: 0.79rem;
             font-weight: 800;
-            color: #7f1d1d;
+            color: #2434A8;
             margin-bottom: 0.35rem;
             text-transform: uppercase;
         }
@@ -810,8 +810,9 @@
             .practice-pills { grid-template-columns: 1fr; }
         }
     </style>
-  <link rel="stylesheet" href="/assets/site.css?v=20261112">
+  <link rel="stylesheet" href="/assets/site.css?v=20261113">
   <script src="profeps-communaute.js" defer></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body class="tpl-sport ">
 <!-- PROFEPS_UNIFIED_NAVBAR_START -->
@@ -837,10 +838,38 @@
   </nav>
   <div class="peps-navbar atlas-header" id="pepsNavbar" role="navigation" aria-label="Navigation principale" data-current-file="aps-lancer-poids-eps-maroc.html">
     <div class="peps-nav-container">
-      <!-- Zone 1: Brand Wordmark -->
-      <a href="/" class="peps-nav-logo" aria-label="ProfEPS.ma - Accueil">
-        <span class="peps-nav-logo-mark" aria-hidden="true">PE</span>
-        <span class="peps-nav-logo-text">Prof<span>EPS</span>.ma</span>
+      <!-- Zone 1: Brand Crest & Wordmark (EPS + Éducation) -->
+      <a href="/" class="peps-nav-logo" aria-label="ProfEPS.ma - Éducation Physique et Sportive au Maroc">
+        <span class="peps-nav-logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" class="peps-logo-svg">
+            <defs>
+              <linearGradient id="hdrShieldGrad" x1="12" y1="8" x2="116" y2="120" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#3347D6"/>
+                <stop offset="55%" stop-color="#4A49EA"/>
+                <stop offset="100%" stop-color="#6D4AFF"/>
+              </linearGradient>
+              <linearGradient id="hdrAmberGrad" x1="22" y1="36" x2="104" y2="82" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#FFB300"/>
+                <stop offset="100%" stop-color="#F59E0B"/>
+              </linearGradient>
+            </defs>
+            <rect x="6" y="6" width="116" height="116" rx="30" fill="url(#hdrShieldGrad)"/>
+            <rect x="9" y="9" width="110" height="110" rx="27" stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="2"/>
+            <path d="M 22 78 C 36 46, 68 32, 104 38 C 80 46, 56 60, 42 82 Z" fill="url(#hdrAmberGrad)"/>
+            <circle cx="74" cy="27" r="9.2" fill="#FFB300" stroke="#FFFFFF" stroke-width="2.4"/>
+            <line x1="69" y1="41" x2="58" y2="63" stroke="#FFFFFF" stroke-width="10.4" stroke-linecap="round"/>
+            <path d="M 45 52 L 53 44 L 68 42 L 83 45 L 94 37" stroke="#FFFFFF" stroke-width="5.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 44 78 L 59 62 L 78 66 L 73 79" stroke="#FFFFFF" stroke-width="6.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 22 86 C 36 81, 52 84, 64 92 C 76 84, 92 81, 106 86 L 106 102 C 92 97, 76 100, 64 108 C 52 100, 36 97, 22 102 Z" fill="#C7D7FE"/>
+            <path d="M 26 80 C 39 75, 53 78, 64 86 C 75 78, 89 75, 102 80 L 102 95 C 89 90, 75 93, 64 101 C 53 93, 39 90, 26 95 Z" fill="#FFFFFF"/>
+            <line x1="64" y1="84" x2="64" y2="102" stroke="#3347D6" stroke-width="3" stroke-linecap="round"/>
+            <polygon points="61,98 64,108.5 67,98" fill="#FFB300"/>
+          </svg>
+        </span>
+        <span class="peps-nav-logo-lockup">
+          <span class="peps-nav-logo-text">Prof<span>EPS</span><em class="peps-logo-tld">.ma</em></span>
+          <span class="peps-nav-logo-sub">Éducation &amp; Sport</span>
+        </span>
       </a>
 
       <!-- Zone 2: 6 Plain HTML Navigation Links (Crawlable by Google) -->
@@ -999,8 +1028,8 @@
         <div style="max-width:1220px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.5rem;">
             <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.35rem;">
                 <span style="font-size:0.72rem;font-weight:900;text-transform:uppercase;color:#475569;margin-right:0.25rem;">🏟️ 13 Studios APS :</span>
-                <a href="aps-handball-eps-maroc.html" style="padding:0.26rem 0.6rem;background:#f8fafc;border:1px solid #cbd5e1;color:#991b1b;border-radius:999px;font-size:0.74rem;font-weight:800;text-decoration:none;">🤾 Handball</a>
-                <a href="aps-basketball-eps-maroc.html" style="padding:0.26rem 0.6rem;background:#f8fafc;border:1px solid #cbd5e1;color:#006233;border-radius:999px;font-size:0.74rem;font-weight:800;text-decoration:none;">🏀 Basket 5×5</a>
+                <a href="aps-handball-eps-maroc.html" style="padding:0.26rem 0.6rem;background:#f8fafc;border:1px solid #cbd5e1;color:#3347D6;border-radius:999px;font-size:0.74rem;font-weight:800;text-decoration:none;">🤾 Handball</a>
+                <a href="aps-basketball-eps-maroc.html" style="padding:0.26rem 0.6rem;background:#f8fafc;border:1px solid #cbd5e1;color:#0B7A99;border-radius:999px;font-size:0.74rem;font-weight:800;text-decoration:none;">🏀 Basket 5×5</a>
                 <a href="aps-volleyball-eps-maroc.html" style="padding:0.26rem 0.6rem;background:#f8fafc;border:1px solid #cbd5e1;color:#1e40af;border-radius:999px;font-size:0.74rem;font-weight:800;text-decoration:none;">🏐 Volley-Ball</a>
                 <a href="aps-football-eps-maroc.html" style="padding:0.26rem 0.6rem;background:#f8fafc;border:1px solid #cbd5e1;color:#b45309;border-radius:999px;font-size:0.74rem;font-weight:800;text-decoration:none;">⚽ Foot & Futsal</a>
                 <a href="aps-rugby-scolaire-tag-eps-maroc.html" style="padding:0.26rem 0.6rem;background:#f8fafc;border:1px solid #cbd5e1;color:#15803d;border-radius:999px;font-size:0.74rem;font-weight:800;text-decoration:none;">🏉 Rugby & Tag</a>
@@ -1107,8 +1136,8 @@
                 <a href="aps-gymnastique-sol-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#7c3aed;">🤸 Gym</a>
                 <a href="aps-football-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#b45309;">⚽ Foot</a>
                 <a href="aps-volleyball-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#1e40af;">🏐 Volley</a>
-                <a href="aps-basketball-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#006233;">🏀 Basket</a>
-                <a href="aps-handball-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#991b1b;">🤾 Hand</a>
+                <a href="aps-basketball-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#0B7A99;">🏀 Basket</a>
+                <a href="aps-handball-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#3347D6;">🤾 Hand</a>
                 <a href="aps-saut-longueur-triple-saut-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#b45309;">🦘 Longueur/TS</a>
                 <a href="aps-saut-hauteur-fosbury-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#1d4ed8;">🆙 Hauteur</a>
                 <a href="hub-aps-sports-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:var(--text-primary);">← Hub APS</a>
@@ -1231,10 +1260,10 @@
                 <div class="calc-widget-header">
                     <div>
                         <h2>🧮 Calculateur Interactif Balistique (Portée D, Vitesse v₀, Angle 	heta &amp; Hauteur h₀) + Tracé du Secteur 34,92°</h2>
-                        <p style="font-size:0.83rem;color:#fecaca;margin-top:0.2rem;">Simulez l'impact biomécanique de la vitesse d'éjection v₀, de l'angle d'envol 	heta et de la hauteur de lâcher h₀ sur la distance et la note Bac (/20), et calculez les cordes de tracé du secteur 34,92°.</p>
+                        <p style="font-size:0.83rem;color:var(--stone);margin-top:0.2rem;">Simulez l'impact biomécanique de la vitesse d'éjection v₀, de l'angle d'envol 	heta et de la hauteur de lâcher h₀ sur la distance et la note Bac (/20), et calculez les cordes de tracé du secteur 34,92°.</p>
                     </div>
                     <div style="display:flex;gap:0.5rem;">
-                        <button type="button" class="export-btn" style="background:#ffffff;color:#991b1b;" onclick="exportBalistiqueTable('word')">📥 Table Balistique &amp; Tracé (.DOC Word)</button>
+                        <button type="button" class="export-btn" style="background:#ffffff;color:#3347D6;" onclick="exportBalistiqueTable('word')">📥 Table Balistique &amp; Tracé (.DOC Word)</button>
                         <button type="button" class="export-btn" style="background:#0f172a;color:#ffffff;" onclick="exportBalistiqueTable('pdf')">🖨️ Imprimer / PDF A4</button>
                     </div>
                 </div>
@@ -1244,22 +1273,22 @@
                     <div class="calc-input-group">
                         <label for="calcV0">1. Vitesse d'éjection v₀ (en m/s)</label>
                         <input type="number" id="calcV0" value="9.6" min="5.0" max="15.0" step="0.1" oninput="updatePoidsCalculator()">
-                        <span style="font-size:0.72rem;color:#7f1d1d;font-weight:700;">Débutant : 6,5–7,5 m/s · Confirmé Bac : 8,5–10,5 m/s</span>
+                        <span style="font-size:0.72rem;color:#3347D6;font-weight:700;">Débutant : 6,5–7,5 m/s · Confirmé Bac : 8,5–10,5 m/s</span>
                     </div>
                     <div class="calc-input-group">
                         <label for="calcAngle">2. Angle d'envol 	heta (en degrés)</label>
                         <input type="number" id="calcAngle" value="40" min="20" max="60" step="1" oninput="updatePoidsCalculator()">
                         <div style="display:flex;gap:0.25rem;margin-top:0.35rem;flex-wrap:wrap;">
-                            <button type="button" style="padding:0.2rem 0.45rem;font-size:0.72rem;font-weight:800;border:1px solid #991b1b;border-radius:5px;background:#fff;cursor:pointer;" onclick="setPoidsAngle(28)">28° (Plat)</button>
-                            <button type="button" style="padding:0.2rem 0.45rem;font-size:0.72rem;font-weight:800;border:1px solid #991b1b;border-radius:5px;background:#fff;cursor:pointer;" onclick="setPoidsAngle(36)">36°</button>
-                            <button type="button" style="padding:0.2rem 0.45rem;font-size:0.72rem;font-weight:800;border:1px solid #006233;border-radius:5px;background:#f0fdf4;color:#006233;cursor:pointer;" onclick="setPoidsAngle(40)">40° (Optimal)</button>
-                            <button type="button" style="padding:0.2rem 0.45rem;font-size:0.72rem;font-weight:800;border:1px solid #991b1b;border-radius:5px;background:#fff;cursor:pointer;" onclick="setPoidsAngle(52)">52° (Cloche)</button>
+                            <button type="button" style="padding:0.2rem 0.45rem;font-size:0.72rem;font-weight:800;border:1px solid #3347D6;border-radius:5px;background:#fff;cursor:pointer;" onclick="setPoidsAngle(28)">28° (Plat)</button>
+                            <button type="button" style="padding:0.2rem 0.45rem;font-size:0.72rem;font-weight:800;border:1px solid #3347D6;border-radius:5px;background:#fff;cursor:pointer;" onclick="setPoidsAngle(36)">36°</button>
+                            <button type="button" style="padding:0.2rem 0.45rem;font-size:0.72rem;font-weight:800;border:1px solid #0B7A99;border-radius:5px;background:#f0fdf4;color:#0B7A99;cursor:pointer;" onclick="setPoidsAngle(40)">40° (Optimal)</button>
+                            <button type="button" style="padding:0.2rem 0.45rem;font-size:0.72rem;font-weight:800;border:1px solid #3347D6;border-radius:5px;background:#fff;cursor:pointer;" onclick="setPoidsAngle(52)">52° (Cloche)</button>
                         </div>
                     </div>
                     <div class="calc-input-group">
                         <label for="calcH0">3. Hauteur de lâcher h₀ (en m)</label>
                         <input type="number" id="calcH0" value="1.90" min="1.30" max="2.40" step="0.05" oninput="updatePoidsCalculator()">
-                        <span style="font-size:0.72rem;color:#7f1d1d;font-weight:700;">Hauteur main au lâcher (taille + extension bras)</span>
+                        <span style="font-size:0.72rem;color:#3347D6;font-weight:700;">Hauteur main au lâcher (taille + extension bras)</span>
                     </div>
                     <div class="calc-input-group">
                         <label for="calcCategory">4. Catégorie &amp; Barème EPS Maroc</label>
@@ -1302,7 +1331,7 @@
             <div class="content-panel-card">
                 <h2>🧭 Calculateurs Scientifiques Complémentaires sur ProfEPS.ma</h2>
                 <div class="articles-cards-grid">
-                    <article class="rel-card" style="border-color:#991b1b;border-width:2px;">
+                    <article class="rel-card" style="border-color:#3347D6;border-width:2px;">
                         <div>
                             <div class="rel-card-kicker">Hub Outils Sport · ProfEPS</div>
                             <h3>🧭 Hub de Tous les Calculateurs Sport &amp; Performance en EPS</h3>
@@ -1505,8 +1534,8 @@
                 <p>Le Lancer du Poids est <strong>l'activité à plus haut risque traumatique en EPS</strong> si le dispositif spatial et le commandement au sifflet ne sont pas verrouillés. Voici le protocole de sécurité impératif sur le terrain marocain et à l'oral du concours CRMEF :</p>
 
                 <div class="two-col-grid">
-                    <div class="info-callout" style="border-left-color:#dc2626;background:#fef2f2;">
-                        <strong style="color:#991b1b;display:block;margin-bottom:0.35rem;">🚨 Règle d'Or N°1 : Sens Unique de Tir &amp; Ligne de Sécurité à 4m en Arrière</strong>
+                    <div class="info-callout" style="border-left-color:#dc2626;background:var(--sky);">
+                        <strong style="color:#3347D6;display:block;margin-bottom:0.35rem;">🚨 Règle d'Or N°1 : Sens Unique de Tir &amp; Ligne de Sécurité à 4m en Arrière</strong>
                         <ul>
                             <li>Aménager <strong>3 à 4 cercles de lancer parallèles</strong> (espacés de 4 m latéralement) orientés dans <strong>exactement la MÊME direction de tir</strong> (jamais face à face !).</li>
                             <li>Tracer une <strong>ligne de sécurité blanche à 4 m EN ARRIÈRE des cercles</strong> : les 32 élèves en attente ou en observation se tiennent obligatoirement derrière cette ligne.</li>
@@ -1933,7 +1962,7 @@
                         '<td style="width:24%;"><strong>' + st.title.replace(/^Séance \d+ — /, '') + '</strong><br><span style="font-size:0.75rem;color:#475569;">' + st.theme + '</span></td>' +
                         '<td style="width:33%;">' + st.fondamentale + '</td>' +
                         '<td style="width:20%;">' + st.critRealisation + '</td>' +
-                        '<td style="width:16%;font-weight:700;color:#006233;">' + st.critReussite + '<br><button type="button" onclick="selectSessionNumber(' + st.num + ')" style="margin-top:0.35rem;padding:0.2rem 0.5rem;background:#991b1b;color:#fff;border:none;border-radius:5px;font-size:0.7rem;font-weight:800;cursor:pointer;">Voir Fiche S' + st.num + ' →</button></td>' +
+                        '<td style="width:16%;font-weight:700;color:#0B7A99;">' + st.critReussite + '<br><button type="button" onclick="selectSessionNumber(' + st.num + ')" style="margin-top:0.35rem;padding:0.2rem 0.5rem;background:#3347D6;color:#fff;border:none;border-radius:5px;font-size:0.7rem;font-weight:800;cursor:pointer;">Voir Fiche S' + st.num + ' →</button></td>' +
                         '</tr>';
                 }
 
@@ -1944,7 +1973,7 @@
                             '<span>' + s.op + '</span>' +
                         '</div>' +
                         '<div class="a4-doc-title">PROJET PRÉVISIONNEL DE CYCLE — LANCER DU POIDS (' + s.label.toUpperCase() + ')</div>' +
-                        '<div style="text-align:center;font-size:0.8rem;font-weight:800;color:#006233;">' + p.title + ' · Masses réglementaires : ' + s.masses + '</div>' +
+                        '<div style="text-align:center;font-size:0.8rem;font-weight:800;color:#0B7A99;">' + p.title + ' · Masses réglementaires : ' + s.masses + '</div>' +
                     '</div>' +
                     '<table class="a4-meta-table">' +
                         '<tr>' +
@@ -1984,7 +2013,7 @@
                             '<span>Fiche Pédagogique Officielle · ' + s.op + '</span>' +
                         '</div>' +
                         '<div class="a4-doc-title">FICHE DE PRÉPARATION DE SÉANCE N°' + sess.num + ' / 10 — LANCER DU POIDS</div>' +
-                        '<div style="text-align:center;font-size:0.82rem;font-weight:800;color:#006233;">' + s.label + ' · ' + p.title + '</div>' +
+                        '<div style="text-align:center;font-size:0.82rem;font-weight:800;color:#0B7A99;">' + s.label + ' · ' + p.title + '</div>' +
                     '</div>' +
                     '<table class="a4-meta-table">' +
                         '<tr>' +
@@ -2042,7 +2071,7 @@
                 'thead th { background: #0f172a; color: #ffffff; font-weight: bold; }' +
                 '.a4-header-banner { border: 2px solid #0f172a; padding: 10px; margin-bottom: 12px; background: var(--paper); text-align: center; }' +
                 '.a4-doc-title { font-size: 14pt; font-weight: bold; color: #2434A8; margin: 4px 0; }' +
-                '.a4-oti-box { border: 1.5px solid #0B7A99; background: #f0fdf4; padding: 8px 10px; margin-bottom: 12px; }' +
+                '.a4-oti-box { border: 1.5px solid #0B7A99; background: var(--sky); padding: 8px 10px; margin-bottom: 12px; }' +
                 'button { display: none !important; }' +
                 '@page { size: A4 landscape; margin: 12mm; }' +
                 '</style></head><body>' + htmlInner +
@@ -2165,11 +2194,11 @@
             if (kpiStrip) {
                 kpiStrip.innerHTML =
                     '<div class="calc-kpi-box">' +
-                        '<span class="kpi-val" style="color:#991b1b;">' + dist.toFixed(2).replace('.', ',') + ' m</span>' +
+                        '<span class="kpi-val" style="color:#3347D6;">' + dist.toFixed(2).replace('.', ',') + ' m</span>' +
                         '<span class="kpi-lbl">Portée Balistique Théorique (D)</span>' +
                     '</div>' +
                     '<div class="calc-kpi-box">' +
-                        '<span class="kpi-val" style="color:#006233;">' + optAngle.toFixed(1).replace('.', ',') + '°</span>' +
+                        '<span class="kpi-val" style="color:#0B7A99;">' + optAngle.toFixed(1).replace('.', ',') + '°</span>' +
                         '<span class="kpi-lbl">Angle Optimal Exact (Max = ' + maxDistAtOpt.toFixed(2).replace('.', ',') + ' m)</span>' +
                     '</div>' +
                     '<div class="calc-kpi-box">' +
@@ -2199,7 +2228,7 @@
                     '<td><strong>' + a + '°</strong> ' + (a < 33 ? '(Tir trop plat)' : (a === 40 ? '★ Zone Optimale (38°–41°)' : (a > 48 ? '(Tir en cloche)' : '(Correct)'))) + '</td>' +
                     '<td><strong>' + dCur.toFixed(2).replace('.', ',') + ' m</strong></td>' +
                     '<td>' + (dCur - maxDistAtOpt).toFixed(2).replace('.', ',') + ' m</td>' +
-                    '<td style="color:#006233;font-weight:800;">' + dPlus1.toFixed(2).replace('.', ',') + ' m (+' + (dPlus1 - dCur).toFixed(2).replace('.', ',') + ' m)</td>' +
+                    '<td style="color:#0B7A99;font-weight:800;">' + dPlus1.toFixed(2).replace('.', ',') + ' m (+' + (dPlus1 - dCur).toFixed(2).replace('.', ',') + ' m)</td>' +
                     '<td><strong>' + bNote.note20 + '</strong> (' + bNote.noteProd + ')</td>' +
                     '</tr>';
             }
@@ -2238,9 +2267,9 @@
                                 '<td><strong>Écartement (Corde = 0,6 × R) entre les 2 lignes blanches</strong></td>' +
                                 '<td><strong>3,00 m</strong></td>' +
                                 '<td><strong>4,80 m</strong></td>' +
-                                '<td style="background:#fef2f2;color:#991b1b;font-weight:900;">6,00 m</td>' +
+                                '<td style="background:var(--sky);color:#3347D6;font-weight:900;">6,00 m</td>' +
                                 '<td><strong>9,00 m</strong></td>' +
-                                '<td style="background:#f0fdf4;color:#006233;font-weight:900;">12,00 m</td>' +
+                                '<td style="background:#f0fdf4;color:#0B7A99;font-weight:900;">12,00 m</td>' +
                             '</tr>' +
                         '</tbody>' +
                     '</table>';
@@ -2317,9 +2346,9 @@
                     '<div class="a4-header-banner">' +
                         '<div class="a4-header-top"><span>Royaume du Maroc · MENPS · Collège (OP 2009)</span><span>Pondération Officielle : 12 pts Motricité + 3 pts Connaissances + 5 pts Attitudes = /20</span></div>' +
                         '<div class="a4-doc-title">GRILLE D\'ÉVALUATION SOMMATIVE COLLÈGE (1AC · 2AC · 3AC) — LANCER DU POIDS</div>' +
-                        '<div style="font-size:0.8rem;font-weight:800;color:#006233;">Masses officielles Collège : Filles = 3,0 kg (2 kg en 1AC) · Garçons = 4,0 kg (3 kg en 1AC/2AC)</div>' +
+                        '<div style="font-size:0.8rem;font-weight:800;color:#0B7A99;">Masses officielles Collège : Filles = 3,0 kg (2 kg en 1AC) · Garçons = 4,0 kg (3 kg en 1AC/2AC)</div>' +
                     '</div>' +
-                    '<h4 style="margin:0.4rem 0;color:#991b1b;font-size:0.9rem;">1. Barème de Performance Chiffrée — Note PRODUIT (/6 points) en Collège (Meilleur des 3 essais)</h4>' +
+                    '<h4 style="margin:0.4rem 0;color:#3347D6;font-size:0.9rem;">1. Barème de Performance Chiffrée — Note PRODUIT (/6 points) en Collège (Meilleur des 3 essais)</h4>' +
                     '<table class="a4-table">' +
                         '<thead>' +
                             '<tr>' +
@@ -2341,7 +2370,7 @@
                             '<tr><td><strong>1,0 / 6 pts (Insuffisant)</strong></td><td>&lt; 4,50 m</td><td>&lt; 3,40 m</td><td>&lt; 5,20 m</td><td>&lt; 4,00 m</td><td><strong>&lt; 5,80 m</strong></td><td><strong>&lt; 4,20 m</strong></td></tr>' +
                         '</tbody>' +
                     '</table>' +
-                    '<h4 style="margin:0.5rem 0 0.35rem;color:#006233;font-size:0.9rem;">2. Grille du PROCESSUS Moteur (/6 pts), des Connaissances (/3 pts) et des Attitudes/Sécurité (/5 pts)</h4>' +
+                    '<h4 style="margin:0.5rem 0 0.35rem;color:#0B7A99;font-size:0.9rem;">2. Grille du PROCESSUS Moteur (/6 pts), des Connaissances (/3 pts) et des Attitudes/Sécurité (/5 pts)</h4>' +
                     '<table class="a4-table">' +
                         '<thead>' +
                             '<tr>' +
@@ -2377,9 +2406,9 @@
                     '<div class="a4-header-banner">' +
                         '<div class="a4-header-top"><span>Royaume du Maroc · MENPS · Lycée Qualifiant &amp; Bac Sport (OP 2007)</span><span>Pondération Officielle : 14 pts Motricité (7 Produit + 7 Processus) + 3 pts Connaissances + 3 pts Comportement = /20</span></div>' +
                         '<div class="a4-doc-title">GRILLE SOMMATIVE LYCÉE (TC · 1BAC · 2BAC) &amp; BARÈME OFFICIEL BAC SPORT — LANCER DU POIDS</div>' +
-                        '<div style="font-size:0.8rem;font-weight:800;color:#991b1b;">Masses officielles Bac Maroc : Garçons = 5,000 kg (4 kg en TC) · Filles = 3,000 kg (ou 4,000 kg selon l\'AREF)</div>' +
+                        '<div style="font-size:0.8rem;font-weight:800;color:#3347D6;">Masses officielles Bac Maroc : Garçons = 5,000 kg (4 kg en TC) · Filles = 3,000 kg (ou 4,000 kg selon l\'AREF)</div>' +
                     '</div>' +
-                    '<h4 style="margin:0.4rem 0;color:#991b1b;font-size:0.9rem;">1. Barème Officiel Chiffré Lycée &amp; Bac Sport Maroc — Note PRODUIT (/7 pts en Cycle EPS ou /20 au Bac Libre)</h4>' +
+                    '<h4 style="margin:0.4rem 0;color:#3347D6;font-size:0.9rem;">1. Barème Officiel Chiffré Lycée &amp; Bac Sport Maroc — Note PRODUIT (/7 pts en Cycle EPS ou /20 au Bac Libre)</h4>' +
                     '<table class="a4-table">' +
                         '<thead>' +
                             '<tr>' +
@@ -2393,7 +2422,7 @@
                             '</tr>' +
                         '</thead>' +
                         '<tbody>' +
-                            '<tr><td><strong>20 / 20</strong></td><td><strong>7,0 / 7 pts</strong></td><td>≥ 11,00 m</td><td>≥ 10,80 m</td><td style="background:#fef2f2;font-weight:900;color:#991b1b;">≥ 11,50 m</td><td style="background:#f0fdf4;font-weight:900;color:#006233;">≥ 8,50 m</td><td>≥ 7,60 m</td></tr>' +
+                            '<tr><td><strong>20 / 20</strong></td><td><strong>7,0 / 7 pts</strong></td><td>≥ 11,00 m</td><td>≥ 10,80 m</td><td style="background:var(--sky);font-weight:900;color:#3347D6;">≥ 11,50 m</td><td style="background:#f0fdf4;font-weight:900;color:#0B7A99;">≥ 8,50 m</td><td>≥ 7,60 m</td></tr>' +
                             '<tr><td><strong>18 / 20</strong></td><td><strong>6,5 / 7 pts</strong></td><td>10,30 m</td><td>10,10 m</td><td><strong>10,80 m</strong></td><td><strong>7,90 m</strong></td><td>7,10 m</td></tr>' +
                             '<tr><td><strong>16 / 20</strong></td><td><strong>6,0 / 7 pts</strong></td><td>9,60 m</td><td>9,40 m</td><td><strong>10,10 m</strong></td><td><strong>7,30 m</strong></td><td>6,50 m</td></tr>' +
                             '<tr><td><strong>14 / 20</strong></td><td><strong>5,0 / 7 pts</strong></td><td>8,90 m</td><td>8,70 m</td><td><strong>9,40 m</strong></td><td><strong>6,70 m</strong></td><td>6,00 m</td></tr>' +
@@ -2403,7 +2432,7 @@
                             '<tr><td><strong>06 / 20</strong></td><td><strong>2,0 / 7 pts</strong></td><td>&lt; 6,80 m</td><td>&lt; 6,60 m</td><td><strong>&lt; 7,20 m</strong></td><td><strong>&lt; 4,80 m</strong></td><td>&lt; 4,30 m</td></tr>' +
                         '</tbody>' +
                     '</table>' +
-                    '<h4 style="margin:0.5rem 0 0.35rem;color:#006233;font-size:0.9rem;">2. Grille d\'Évaluation du PROCESSUS Moteur (/7 points) — Lycée &amp; 2ème Bac (OP 2007)</h4>' +
+                    '<h4 style="margin:0.5rem 0 0.35rem;color:#0B7A99;font-size:0.9rem;">2. Grille d\'Évaluation du PROCESSUS Moteur (/7 points) — Lycée &amp; 2ème Bac (OP 2007)</h4>' +
                     '<table class="a4-table">' +
                         '<thead>' +
                             '<tr>' +

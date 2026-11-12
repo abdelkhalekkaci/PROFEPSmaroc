@@ -102,7 +102,7 @@
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --primary: #dc2626;
+            --primary: #3347D6;
             --primary-dark: #2434A8;
             --secondary: #0B7A99;
             --secondary-dark: #085E77;
@@ -130,7 +130,7 @@
         /* HERO & INTRO */
         .silo-hero {
             padding: 125px 1.5rem 2.25rem;
-            background: linear-gradient(135deg, #fef2f2 0%, #ffffff 50%, #f0fdf4 100%);
+            background: linear-gradient(135deg, var(--sky) 0%, #ffffff 50%, var(--sky) 100%);
             border-bottom: 1px solid var(--slate-200);
         }
         .silo-hero-inner {
@@ -161,8 +161,8 @@
             align-items: center;
             gap: 0.5rem;
             padding: 0.35rem 0.9rem;
-            background: #fef2f2;
-            border: 1px solid #fecaca;
+            background: var(--sky);
+            border: 1px solid var(--stone);
             color: var(--primary);
             font-size: 0.78rem;
             font-weight: 800;
@@ -267,7 +267,7 @@
         .volet-tab-btn:hover {
             border-color: var(--primary);
             color: var(--primary);
-            background: #fef2f2;
+            background: var(--sky);
         }
         .volet-tab-btn.active {
             background: var(--primary);
@@ -347,7 +347,7 @@
             border-color: var(--primary);
         }
         .school-lvl-btn.active {
-            background: #fef2f2;
+            background: var(--sky);
             border-color: var(--primary);
             box-shadow: 0 2px 8px rgba(220,38,38,0.12);
         }
@@ -398,7 +398,7 @@
             border-color: var(--secondary);
         }
         .practice-btn.active {
-            background: #f0fdf4;
+            background: var(--sky);
             border-color: var(--secondary);
             box-shadow: 0 2px 8px rgba(0,98,51,0.12);
         }
@@ -474,17 +474,17 @@
         }
         .export-word-cycle:hover { background: #1e40af; color: #ffffff; }
         .export-pdf-cycle {
-            background: #fef2f2;
-            color: #dc2626;
-            border-color: #fecaca;
+            background: var(--sky);
+            color: #3347D6;
+            border-color: var(--stone);
         }
-        .export-pdf-cycle:hover { background: #dc2626; color: #ffffff; }
+        .export-pdf-cycle:hover { background: #3347D6; color: #ffffff; }
         .export-word-fiches {
             background: #ecfdf5;
-            color: #065f46;
-            border-color: #a7f3d0;
+            color: #085E77;
+            border-color: var(--stone);
         }
-        .export-word-fiches:hover { background: #065f46; color: #ffffff; }
+        .export-word-fiches:hover { background: #085E77; color: #ffffff; }
         .export-pdf-fiches {
             background: #0f172a;
             color: #ffffff;
@@ -600,7 +600,7 @@
             border: 1px solid #0f172a;
             padding: 0.8rem 1rem;
             margin-bottom: 1.15rem;
-            background: #fff1f2;
+            background: var(--sky);
         }
         .a4-pedago-box p {
             margin-bottom: 0.35rem;
@@ -749,8 +749,9 @@
             .a4-sheet { padding: 1.15rem; }
         }
     </style>
-  <link rel="stylesheet" href="/assets/site.css?v=20261112">
+  <link rel="stylesheet" href="/assets/site.css?v=20261113">
   <script src="profeps-communaute.js" defer></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body class="tpl-sport ">
 <!-- PROFEPS_UNIFIED_NAVBAR_START -->
@@ -776,10 +777,38 @@
   </nav>
   <div class="peps-navbar atlas-header" id="pepsNavbar" role="navigation" aria-label="Navigation principale" data-current-file="aps-course-vitesse-relais-eps-maroc.html">
     <div class="peps-nav-container">
-      <!-- Zone 1: Brand Wordmark -->
-      <a href="/" class="peps-nav-logo" aria-label="ProfEPS.ma - Accueil">
-        <span class="peps-nav-logo-mark" aria-hidden="true">PE</span>
-        <span class="peps-nav-logo-text">Prof<span>EPS</span>.ma</span>
+      <!-- Zone 1: Brand Crest & Wordmark (EPS + Éducation) -->
+      <a href="/" class="peps-nav-logo" aria-label="ProfEPS.ma - Éducation Physique et Sportive au Maroc">
+        <span class="peps-nav-logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" class="peps-logo-svg">
+            <defs>
+              <linearGradient id="hdrShieldGrad" x1="12" y1="8" x2="116" y2="120" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#3347D6"/>
+                <stop offset="55%" stop-color="#4A49EA"/>
+                <stop offset="100%" stop-color="#6D4AFF"/>
+              </linearGradient>
+              <linearGradient id="hdrAmberGrad" x1="22" y1="36" x2="104" y2="82" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#FFB300"/>
+                <stop offset="100%" stop-color="#F59E0B"/>
+              </linearGradient>
+            </defs>
+            <rect x="6" y="6" width="116" height="116" rx="30" fill="url(#hdrShieldGrad)"/>
+            <rect x="9" y="9" width="110" height="110" rx="27" stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="2"/>
+            <path d="M 22 78 C 36 46, 68 32, 104 38 C 80 46, 56 60, 42 82 Z" fill="url(#hdrAmberGrad)"/>
+            <circle cx="74" cy="27" r="9.2" fill="#FFB300" stroke="#FFFFFF" stroke-width="2.4"/>
+            <line x1="69" y1="41" x2="58" y2="63" stroke="#FFFFFF" stroke-width="10.4" stroke-linecap="round"/>
+            <path d="M 45 52 L 53 44 L 68 42 L 83 45 L 94 37" stroke="#FFFFFF" stroke-width="5.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 44 78 L 59 62 L 78 66 L 73 79" stroke="#FFFFFF" stroke-width="6.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 22 86 C 36 81, 52 84, 64 92 C 76 84, 92 81, 106 86 L 106 102 C 92 97, 76 100, 64 108 C 52 100, 36 97, 22 102 Z" fill="#C7D7FE"/>
+            <path d="M 26 80 C 39 75, 53 78, 64 86 C 75 78, 89 75, 102 80 L 102 95 C 89 90, 75 93, 64 101 C 53 93, 39 90, 26 95 Z" fill="#FFFFFF"/>
+            <line x1="64" y1="84" x2="64" y2="102" stroke="#3347D6" stroke-width="3" stroke-linecap="round"/>
+            <polygon points="61,98 64,108.5 67,98" fill="#FFB300"/>
+          </svg>
+        </span>
+        <span class="peps-nav-logo-lockup">
+          <span class="peps-nav-logo-text">Prof<span>EPS</span><em class="peps-logo-tld">.ma</em></span>
+          <span class="peps-nav-logo-sub">Éducation &amp; Sport</span>
+        </span>
       </a>
 
       <!-- Zone 2: 6 Plain HTML Navigation Links (Crawlable by Google) -->
@@ -938,8 +967,8 @@
         <div style="max-width:1220px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.5rem;">
             <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.35rem;">
                 <span style="font-size:0.72rem;font-weight:900;text-transform:uppercase;color:#475569;margin-right:0.25rem;">🏟️ 13 Studios APS :</span>
-                <a href="aps-handball-eps-maroc.html" style="padding:0.26rem 0.6rem;background:#f8fafc;border:1px solid #cbd5e1;color:#991b1b;border-radius:999px;font-size:0.74rem;font-weight:800;text-decoration:none;">🤾 Handball</a>
-                <a href="aps-basketball-eps-maroc.html" style="padding:0.26rem 0.6rem;background:#f8fafc;border:1px solid #cbd5e1;color:#006233;border-radius:999px;font-size:0.74rem;font-weight:800;text-decoration:none;">🏀 Basket 5×5</a>
+                <a href="aps-handball-eps-maroc.html" style="padding:0.26rem 0.6rem;background:#f8fafc;border:1px solid #cbd5e1;color:#3347D6;border-radius:999px;font-size:0.74rem;font-weight:800;text-decoration:none;">🤾 Handball</a>
+                <a href="aps-basketball-eps-maroc.html" style="padding:0.26rem 0.6rem;background:#f8fafc;border:1px solid #cbd5e1;color:#0B7A99;border-radius:999px;font-size:0.74rem;font-weight:800;text-decoration:none;">🏀 Basket 5×5</a>
                 <a href="aps-volleyball-eps-maroc.html" style="padding:0.26rem 0.6rem;background:#f8fafc;border:1px solid #cbd5e1;color:#1e40af;border-radius:999px;font-size:0.74rem;font-weight:800;text-decoration:none;">🏐 Volley-Ball</a>
                 <a href="aps-football-eps-maroc.html" style="padding:0.26rem 0.6rem;background:#f8fafc;border:1px solid #cbd5e1;color:#b45309;border-radius:999px;font-size:0.74rem;font-weight:800;text-decoration:none;">⚽ Foot & Futsal</a>
                 <a href="aps-rugby-scolaire-tag-eps-maroc.html" style="padding:0.26rem 0.6rem;background:#f8fafc;border:1px solid #cbd5e1;color:#15803d;border-radius:999px;font-size:0.74rem;font-weight:800;text-decoration:none;">🏉 Rugby & Tag</a>
@@ -1040,8 +1069,8 @@
                 <a href="aps-gymnastique-sol-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#7c3aed;">🤸 Gym Sol</a>
                 <a href="aps-football-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#b45309;">⚽ Foot/Futsal</a>
                 <a href="aps-volleyball-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#1e40af;">🏐 Volley</a>
-                <a href="aps-basketball-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#006233;">🏀 Basket</a>
-                <a href="aps-handball-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#991b1b;">🤾 Handball</a>
+                <a href="aps-basketball-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#0B7A99;">🏀 Basket</a>
+                <a href="aps-handball-eps-maroc.html" style="font-size:0.8rem;font-weight:800;color:#3347D6;">🤾 Handball</a>
                 <a href="aps-course-duree-demi-fond-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#0f766e;">🏃 Durée/VMA</a>
                 <a href="aps-lancer-poids-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#475569;">🏋️ Poids</a>
                 <a href="aps-saut-longueur-triple-saut-eps-maroc.html" style="font-size:0.78rem;font-weight:800;color:#b45309;">🦘 Longueur/TS</a>
@@ -1066,7 +1095,7 @@
                         <h2>⚡ Studio des Cycles &amp; Fiches Pédagogiques Course de Vitesse &amp; Relais (Visionneuse A4 Pro avant Téléchargement)</h2>
                         <p>Étape 1 : Choisissez le niveau scolaire (1AC à 2Bac) · Étape 2 : Choisissez le niveau de pratique (Débutant à Élite) · Étape 3 : Visionnez et téléchargez en Word (.doc) ou PDF.</p>
                     </div>
-                    <span style="background:rgba(255,255,255,0.14);padding:0.4rem 0.8rem;border-radius:8px;font-size:0.78rem;font-weight:800;color:#fecaca;">
+                    <span style="background:rgba(255,255,255,0.14);padding:0.4rem 0.8rem;border-radius:8px;font-size:0.78rem;font-weight:800;color:var(--stone);">
                         24 Projets de Cycles · 240 Fiches de Séance
                     </span>
                 </div>
@@ -1685,10 +1714,10 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div style="margin-top:0.85rem;border:1px solid #0f172a;padding:0.7rem;background:#fff1f2;font-size:0.82rem;display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;">
+                    <div style="margin-top:0.85rem;border:1px solid #0f172a;padding:0.7rem;background:var(--sky);font-size:0.82rem;display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;">
                         <div><strong>1. Somme des 4 Temps Individuels (S) :</strong><br>T_1 + T_2 + T_3 + T_4 =  <strong>............ secondes</strong></div>
                         <div><strong>2. Temps Officiel du Relais (T_{Relais}) :</strong><br>Chrono Équipe = <strong>............ secondes</strong></div>
-                        <div><strong>3. Indice de Gain de Relais (S - T_{Relais}) :</strong><br><strong style="font-size:1rem;color:#006233;">Gain = + ............ secondes</strong></div>
+                        <div><strong>3. Indice de Gain de Relais (S - T_{Relais}) :</strong><br><strong style="font-size:1rem;color:#0B7A99;">Gain = + ............ secondes</strong></div>
                     </div>
                 `
             },
@@ -1830,7 +1859,7 @@
                         <td style="font-weight:800;text-align:center;background:#f8fafc;">Séance ${s.num}</td>
                         <td><strong>${s.title}</strong><br><span style="color:#475569;font-size:0.78rem;"><strong>Objectif :</strong> ${s.obj}</span></td>
                         <td>${s.sitRef}</td>
-                        <td><strong>CR :</strong> ${s.cr}<br><strong style="color:#006233;">CS :</strong> ${s.cs}</td>
+                        <td><strong>CR :</strong> ${s.cr}<br><strong style="color:#0B7A99;">CS :</strong> ${s.cs}</td>
                     </tr>
                 `;
             });
@@ -1845,7 +1874,7 @@
                     <div class="a4-banner-center">
                         <div class="a4-doc-type">PROJET PRÉVISIONNEL DE CYCLE (10 SÉANCES)</div>
                         <div class="a4-doc-title">APS : COURSE DE VITESSE &amp; RELAIS · ${lvl.label}</div>
-                        <div style="font-size:0.76rem;font-weight:800;color:#006233;margin-top:0.2rem;">${prac.badge}</div>
+                        <div style="font-size:0.76rem;font-weight:800;color:#0B7A99;margin-top:0.2rem;">${prac.badge}</div>
                     </div>
                     <div class="a4-banner-right">
                         <strong>Référentiel Officiel :</strong><br>
@@ -1942,7 +1971,7 @@
                                         <td>
                                             <strong>Critères de Réalisation (Comment faire) :</strong><br>
                                             ${s.cr}<br><br>
-                                            <strong style="color:#006233;">Critères de Réussite (Indicateur chiffré) :</strong><br>
+                                            <strong style="color:#0B7A99;">Critères de Réussite (Indicateur chiffré) :</strong><br>
                                             ${s.cs}
                                         </td>
                                     </tr>
@@ -1974,7 +2003,7 @@
                     <div class="a4-banner-center">
                         <div class="a4-doc-type">CAHIER DES FICHES DE SÉANCES DÉTAILLÉES</div>
                         <div class="a4-doc-title">${lvl.label}</div>
-                        <div style="font-size:0.76rem;font-weight:800;color:#006233;margin-top:0.2rem;">${prac.badge}</div>
+                        <div style="font-size:0.76rem;font-weight:800;color:#0B7A99;margin-top:0.2rem;">${prac.badge}</div>
                     </div>
                     <div class="a4-banner-right">
                         <strong>Référentiel :</strong> ${lvl.ref}<br>
@@ -2013,7 +2042,7 @@
                     <div class="a4-banner-center">
                         <div class="a4-doc-type">DOCUMENT OFFICIEL D'OBSERVATION &amp; D'ÉVALUATION</div>
                         <div class="a4-doc-title">${g.title}</div>
-                        <div style="font-size:0.75rem;font-weight:700;color:#006233;margin-top:0.2rem;">${g.subtitle}</div>
+                        <div style="font-size:0.75rem;font-weight:700;color:#0B7A99;margin-top:0.2rem;">${g.subtitle}</div>
                     </div>
                     <div class="a4-banner-right">
                         <strong>OP 2009 &amp; OP 2007</strong><br>
@@ -2089,7 +2118,7 @@
                         th { background-color: #0f172a; color: #ffffff; border: 1px solid #0f172a; padding: 6px; font-size: 9.5pt; text-align: left; }
                         td { border: 1px solid #64748b; padding: 6px; font-size: 9.5pt; vertical-align: top; }
                         .a4-official-Banner { border: 2px solid #0f172a; padding: 10px; margin-bottom: 12px; background-color: var(--paper); }
-                        .a4-pedago-box { border: 1px solid #0f172a; padding: 8px; margin-bottom: 10px; background-color: #fff1f2; }
+                        .a4-pedago-box { border: 1px solid #0f172a; padding: 8px; margin-bottom: 10px; background-color: var(--sky); }
                         .fiche-block { border: 2px solid #0f172a; margin-bottom: 18px; page-break-inside: avoid; }
                         .fiche-header-bar { background-color: #0f172a; color: #ffffff; padding: 6px 10px; font-weight: bold; }
                     </style>
@@ -2135,7 +2164,7 @@
                         .a4-official-Banner { border: 2px solid #0f172a; padding: 8px 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; background: var(--paper) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
                         .a4-meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid #0f172a; margin-bottom: 10px; }
                         .a4-meta-cell { padding: 4px 6px; border-right: 1px solid #cbd5e1; font-size: 8.5pt; }
-                        .a4-pedago-box { border: 1px solid #0f172a; padding: 7px 10px; margin-bottom: 10px; background: #fff1f2 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-size: 8.8pt; }
+                        .a4-pedago-box { border: 1px solid #0f172a; padding: 7px 10px; margin-bottom: 10px; background: var(--sky) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-size: 8.8pt; }
                         .fiche-block { border: 2px solid #0f172a; margin-bottom: 14px; page-break-inside: avoid; }
                         .fiche-header-bar { background: #0f172a !important; color: #ffffff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 5px 10px; font-weight: bold; display: flex; justify-content: space-between; }
                     </style>

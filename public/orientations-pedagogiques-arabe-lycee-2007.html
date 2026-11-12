@@ -139,9 +139,9 @@
       --border-color: #cbd5e1;
       --border-soft: #e2e8f0;
       --accent-red: #2434A8;
-      --accent-red-light: #fef2f2;
+      --accent-red-light: var(--sky);
       --accent-green: #0B7A99;
-      --accent-green-light: #f0fdf4;
+      --accent-green-light: var(--sky);
       --accent-blue: #1d4ed8;
       --accent-blue-light: #eff6ff;
       --shadow-sm: 0 2px 10px rgba(15, 23, 42, 0.04);
@@ -162,7 +162,7 @@
 
     body {
       margin: 0 !important;
-      padding-top: 80px !important;
+      padding-top: 0;
       font-family: 'Plus Jakarta Sans', 'Inter', 'Cairo', system-ui, -apple-system, sans-serif !important;
       background-color: var(--bg-primary) !important;
       color: var(--text-primary) !important;
@@ -210,7 +210,7 @@
 
     /* Hero Banner Above The Fold */
     .hero-banner {
-      background: linear-gradient(135deg, #fff8f8 0%, #ffffff 52%, #f0fdf4 100%);
+      background: linear-gradient(135deg, var(--sky) 0%, var(--paper) 100%);
       border: 1px solid var(--border-color);
       border-top: 5px solid var(--accent-green);
       border-radius: var(--radius-lg);
@@ -251,7 +251,7 @@
     .badge-red {
       background: var(--accent-red-light);
       color: var(--accent-red);
-      border: 1px solid #fecaca;
+      border: 1px solid var(--stone);
     }
     .badge-blue {
       background: var(--accent-blue-light);
@@ -276,7 +276,7 @@
       margin: 0 0 16px 0;
       direction: rtl;
       text-align: right;
-      background: #f0fdf4;
+      background: var(--sky);
       border: 1px solid #bbf7d0;
       border-right: 4px solid var(--accent-green);
       padding: 10px 16px;
@@ -304,19 +304,19 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      background: linear-gradient(135deg, #0B7A99 0%, #047857 100%);
+      background: linear-gradient(135deg, #0B7A99 0%, #0B7A99 100%);
       color: #ffffff !important;
       font-weight: 800;
       font-size: 0.95rem;
       padding: 14px 24px;
       border-radius: 12px;
-      border: 1px solid #065f46;
+      border: 1px solid #085E77;
       box-shadow: 0 6px 18px rgba(0, 98, 51, 0.25);
       text-decoration: none !important;
       transition: all 0.2s ease;
     }
     .btn-primary-green:hover {
-      background: linear-gradient(135deg, #047857 0%, #085E77 100%);
+      background: linear-gradient(135deg, #0B7A99 0%, #085E77 100%);
       transform: translateY(-1px);
     }
 
@@ -325,19 +325,19 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      background: linear-gradient(135deg, #2434A8 0%, #b91c1c 100%);
+      background: linear-gradient(135deg, #2434A8 0%, #3347D6 100%);
       color: #ffffff !important;
       font-weight: 800;
       font-size: 0.88rem;
       padding: 13px 20px;
       border-radius: 12px;
-      border: 1px solid #7f1d1d;
+      border: 1px solid #2434A8;
       box-shadow: 0 4px 14px rgba(153, 27, 27, 0.22);
       text-decoration: none !important;
       transition: all 0.2s ease;
     }
     .btn-secondary-red:hover {
-      background: #7f1d1d;
+      background: #2434A8;
       transform: translateY(-1px);
     }
 
@@ -482,7 +482,7 @@
       font-family: 'Cairo', 'Tajawal', sans-serif;
       direction: rtl;
       text-align: right;
-      background: #f0fdf4;
+      background: var(--sky);
       border: 1px solid #bbf7d0;
       border-right: 4px solid var(--accent-green);
       padding: 18px 20px;
@@ -554,7 +554,7 @@
       transition: all 0.2s ease;
     }
     .silo-link-card:hover {
-      background: #fef2f2;
+      background: var(--sky);
       border-color: var(--accent-red);
       transform: translateY(-2px);
     }
@@ -598,7 +598,8 @@
     gtag("js", new Date());
     gtag("config", "G-TH0Z1SGNXH");
   </script>
-  <link rel="stylesheet" href="/assets/site.css?v=20261112">
+  <link rel="stylesheet" href="/assets/site.css?v=20261113">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body class="tpl-document ">
 <!-- PROFEPS_UNIFIED_NAVBAR_START -->
@@ -624,10 +625,38 @@
   </nav>
   <div class="peps-navbar atlas-header" id="pepsNavbar" role="navigation" aria-label="Navigation principale" data-current-file="orientations-pedagogiques-arabe-lycee-2007.html">
     <div class="peps-nav-container">
-      <!-- Zone 1: Brand Wordmark -->
-      <a href="/" class="peps-nav-logo" aria-label="ProfEPS.ma - Accueil">
-        <span class="peps-nav-logo-mark" aria-hidden="true">PE</span>
-        <span class="peps-nav-logo-text">Prof<span>EPS</span>.ma</span>
+      <!-- Zone 1: Brand Crest & Wordmark (EPS + Éducation) -->
+      <a href="/" class="peps-nav-logo" aria-label="ProfEPS.ma - Éducation Physique et Sportive au Maroc">
+        <span class="peps-nav-logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" class="peps-logo-svg">
+            <defs>
+              <linearGradient id="hdrShieldGrad" x1="12" y1="8" x2="116" y2="120" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#3347D6"/>
+                <stop offset="55%" stop-color="#4A49EA"/>
+                <stop offset="100%" stop-color="#6D4AFF"/>
+              </linearGradient>
+              <linearGradient id="hdrAmberGrad" x1="22" y1="36" x2="104" y2="82" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#FFB300"/>
+                <stop offset="100%" stop-color="#F59E0B"/>
+              </linearGradient>
+            </defs>
+            <rect x="6" y="6" width="116" height="116" rx="30" fill="url(#hdrShieldGrad)"/>
+            <rect x="9" y="9" width="110" height="110" rx="27" stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="2"/>
+            <path d="M 22 78 C 36 46, 68 32, 104 38 C 80 46, 56 60, 42 82 Z" fill="url(#hdrAmberGrad)"/>
+            <circle cx="74" cy="27" r="9.2" fill="#FFB300" stroke="#FFFFFF" stroke-width="2.4"/>
+            <line x1="69" y1="41" x2="58" y2="63" stroke="#FFFFFF" stroke-width="10.4" stroke-linecap="round"/>
+            <path d="M 45 52 L 53 44 L 68 42 L 83 45 L 94 37" stroke="#FFFFFF" stroke-width="5.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 44 78 L 59 62 L 78 66 L 73 79" stroke="#FFFFFF" stroke-width="6.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 22 86 C 36 81, 52 84, 64 92 C 76 84, 92 81, 106 86 L 106 102 C 92 97, 76 100, 64 108 C 52 100, 36 97, 22 102 Z" fill="#C7D7FE"/>
+            <path d="M 26 80 C 39 75, 53 78, 64 86 C 75 78, 89 75, 102 80 L 102 95 C 89 90, 75 93, 64 101 C 53 93, 39 90, 26 95 Z" fill="#FFFFFF"/>
+            <line x1="64" y1="84" x2="64" y2="102" stroke="#3347D6" stroke-width="3" stroke-linecap="round"/>
+            <polygon points="61,98 64,108.5 67,98" fill="#FFB300"/>
+          </svg>
+        </span>
+        <span class="peps-nav-logo-lockup">
+          <span class="peps-nav-logo-text">Prof<span>EPS</span><em class="peps-logo-tld">.ma</em></span>
+          <span class="peps-nav-logo-sub">Éducation &amp; Sport</span>
+        </span>
       </a>
 
       <!-- Zone 2: 6 Plain HTML Navigation Links (Crawlable by Google) -->
@@ -832,7 +861,7 @@
         <div>
           🏛️ <strong>Source :</strong> Ministère de l’Éducation nationale (Direction des Curricula, Rabat) · ✅ <strong>Vérifié le :</strong> <time datetime="2026-11-09">9 novembre 2026</time>
         </div>
-        <div style="font-weight:700;color:#006233;">
+        <div style="font-weight:700;color:#0B7A99;">
           100 % Gratuit · Sans inscription · Conforme au Cadre Référentiel CRMEF
         </div>
       </div>
@@ -858,7 +887,7 @@
         <div>
           <span class="badge-tag badge-green" style="margin-bottom:8px;">📗 Épreuve 2 · Spécialité Arabe</span>
           <h2 style="font-size:1.05rem;font-weight:900;margin:0 0 6px 0;color:#0f172a;">QCM Spécialité Langue &amp; Littérature Arabe</h2>
-          <p class="font-arabic" lang="ar" dir="rtl" style="font-size:0.86rem;font-weight:700;color:#006233;margin:0 0 6px 0;">تخصص اللغة العربية : البلاغة، العروض والقافية، الشعر الحديث، السرد والمناهج النقدية</p>
+          <p class="font-arabic" lang="ar" dir="rtl" style="font-size:0.86rem;font-weight:700;color:#0B7A99;margin:0 0 6px 0;">تخصص اللغة العربية : البلاغة، العروض والقافية، الشعر الحديث، السرد والمناهج النقدية</p>
           <p style="font-size:0.82rem;color:#475569;margin:0;">100 questions corrigées couvrant la rhétorique, la prosodie, les courants poétiques et les approches critiques du Bac.</p>
         </div>
         <a href="/qcm-specialite-arabe-maroc.html" class="peps-btn-specialite" style="width:100%;text-align:center;">
@@ -870,7 +899,7 @@
         <div>
           <span class="badge-tag badge-red" style="margin-bottom:8px;">🎓 Épreuve 3 · Tronc Commun (Toutes Filières)</span>
           <h2 style="font-size:1.05rem;font-weight:900;margin:0 0 6px 0;color:#0f172a;">QCM Sciences de l'Éducation &amp; Législation</h2>
-          <p class="font-arabic" lang="ar" dir="rtl" style="font-size:0.86rem;font-weight:700;color:#991b1b;margin:0 0 6px 0;">علوم التربية ومستجدات نظام التربية والتكوين (340 سؤالاً + 6 كتب PDF)</p>
+          <p class="font-arabic" lang="ar" dir="rtl" style="font-size:0.86rem;font-weight:700;color:#3347D6;margin:0 0 6px 0;">علوم التربية ومستجدات نظام التربية والتكوين (340 سؤالاً + 6 كتب PDF)</p>
           <p style="font-size:0.82rem;color:#475569;margin:0;">340 questions bilingues (FR/AR) + bibliothèque PDF de 69 pages corrigées et Statut 2024 (Décret 2.24.140).</p>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
@@ -893,9 +922,9 @@
         <a href="#fiche-identite" class="btn-outline-slate" style="padding:7px 13px;font-size:0.78rem;">1. Fiche d'identité</a>
         <a href="#resume-document" class="btn-outline-slate" style="padding:7px 13px;font-size:0.78rem;">2. Résumé original (FR/AR)</a>
         <a href="#points-cles" class="btn-outline-slate" style="padding:7px 13px;font-size:0.78rem;">3. À retenir (7 points)</a>
-        <a href="#article-analyse-complete" class="btn-outline-slate" style="padding:7px 13px;font-size:0.78rem;border-color:#006233;color:#006233 !important;background:#f0fdf4;">4. Programmes &amp; Tableaux (TC · 1Bac · 2Bac Lettres &amp; Sciences)</a>
+        <a href="#article-analyse-complete" class="btn-outline-slate" style="padding:7px 13px;font-size:0.78rem;border-color:#0B7A99;color:#0B7A99 !important;background:#f0fdf4;">4. Programmes &amp; Tableaux (TC · 1Bac · 2Bac Lettres &amp; Sciences)</a>
         <a href="#comment-utiliser" class="btn-outline-slate" style="padding:7px 13px;font-size:0.78rem;">5. Usages (Enseignant &amp; Concours CRMEF)</a>
-        <a href="#lecteur-pdf-integre" class="btn-outline-slate" style="padding:7px 13px;font-size:0.78rem;border-color:#006233;color:#006233 !important;background:#f0fdf4;">6. Lecteur PDF &amp; Téléchargement (en fin d'article)</a>
+        <a href="#lecteur-pdf-integre" class="btn-outline-slate" style="padding:7px 13px;font-size:0.78rem;border-color:#0B7A99;color:#0B7A99 !important;background:#f0fdf4;">6. Lecteur PDF &amp; Téléchargement (en fin d'article)</a>
         <a href="#pour-aller-plus-loin" class="btn-outline-slate" style="padding:7px 13px;font-size:0.78rem;">7. Pour aller plus loin</a>
         <a href="#faq-op-arabe-lycee" class="btn-outline-slate" style="padding:7px 13px;font-size:0.78rem;">8. FAQ</a>
       </div>
@@ -907,7 +936,7 @@
     <section id="fiche-identite" class="content-section">
       <div class="section-header-row">
         <h2>1. Fiche d’identité du document</h2>
-        <span lang="ar" dir="rtl" class="font-arabic" style="font-weight:800;color:#006233;font-size:1.05rem;">بطاقة تعريف الوثيقة الرسمية (التأهيلي 2007)</span>
+        <span lang="ar" dir="rtl" class="font-arabic" style="font-weight:800;color:#0B7A99;font-size:1.05rem;">بطاقة تعريف الوثيقة الرسمية (التأهيلي 2007)</span>
       </div>
 
       <div class="table-responsive">
@@ -964,7 +993,7 @@
     <section id="resume-document" class="content-section">
       <div class="section-header-row">
         <h2>2. Résumé du document</h2>
-        <span lang="ar" dir="rtl" class="font-arabic" style="font-weight:800;color:#006233;font-size:1.05rem;">ملخص تركيبي للوثيقة الرسمية</span>
+        <span lang="ar" dir="rtl" class="font-arabic" style="font-weight:800;color:#0B7A99;font-size:1.05rem;">ملخص تركيبي للوثيقة الرسمية</span>
       </div>
 
       <p style="margin:0 0 14px 0;color:#334155;">
@@ -975,7 +1004,7 @@
       </p>
 
       <div lang="ar" dir="rtl" class="ar-callout">
-        <strong style="display:block;font-size:1.05rem;color:#065f46;margin-bottom:6px;">📌 تقديم موجز لوثيقة التوجيهات التربوية والبرامج الخاصة بالتعليم الثانوي التأهيلي (نونبر 2007) :</strong>
+        <strong style="display:block;font-size:1.05rem;color:#0B7A99;margin-bottom:6px;">📌 تقديم موجز لوثيقة التوجيهات التربوية والبرامج الخاصة بالتعليم الثانوي التأهيلي (نونبر 2007) :</strong>
         تُمثّل وثيقة <strong>«التوجيهات التربوية والبرامج الخاصة بتدريس مادة اللغة العربية بسلك التعليم الثانوي التأهيلي (نونبر 2007)»</strong> (62 صفحة) الإطار المرجعي الرسمي لتدريس اللغة العربية بالجذوع المشتركة وسلك البكالوريا (السنة الأولى والسنة الثانية) في القطبين الأدبي والعلمي. وتتميز الوثيقة بالانتقال من نظام «الوحدة الدراسية» المعتمد في الإعدادي إلى <strong>نظام «الدورات والمجزوءات»</strong>، مع التمييز الوظيفي بين مسالك الآداب والعلوم الإنسانية (4 مكونات: النصوص، علوم اللغة، التعبير والإنشاء، درس المؤلفات) ومسالك العلوم والتكنولوجيات (3 مكونات دون درس المؤلفات).
       </div>
     </section>
@@ -986,7 +1015,7 @@
     <section id="points-cles" class="content-section">
       <div class="section-header-row">
         <h2>3. À retenir (7 points clés vérifiés dans le PDF de 62 pages)</h2>
-        <span lang="ar" dir="rtl" class="font-arabic" style="font-weight:800;color:#006233;font-size:1.05rem;">أهم المرتكزات الديداكتيكية (7 نقط أساسية)</span>
+        <span lang="ar" dir="rtl" class="font-arabic" style="font-weight:800;color:#0B7A99;font-size:1.05rem;">أهم المرتكزات الديداكتيكية (7 نقط أساسية)</span>
       </div>
 
       <ul class="points-list">
@@ -1047,7 +1076,7 @@
       </div>
 
       <!-- 4.1 TRONC COMMUN LETTRES & SCIENCES HUMAINES -->
-      <h3 style="font-size:1.15rem;font-weight:800;color:#006233;margin:18px 0 8px 0;">
+      <h3 style="font-size:1.15rem;font-weight:800;color:#0B7A99;margin:18px 0 8px 0;">
         4.1. Tronc Commun Lettres et Sciences Humaines (p. 11–25 · الجذع المشترك للآداب والعلوم الإنسانية)
       </h3>
       <p style="margin:0 0 12px 0;color:#334155;font-size:0.94rem;">
@@ -1107,7 +1136,7 @@
       </div>
 
       <!-- 4.2 TRONC COMMUN SCIENCES ET TECHNOLOGIES -->
-      <h3 style="font-size:1.15rem;font-weight:800;color:#006233;margin:26px 0 8px 0;">
+      <h3 style="font-size:1.15rem;font-weight:800;color:#0B7A99;margin:26px 0 8px 0;">
         4.2. Tronc Commun Sciences et Technologies (p. 26–29 · الجذع المشترك للعلوم والتكنولوجيات)
       </h3>
       <div class="table-responsive">
@@ -1138,7 +1167,7 @@
       </div>
 
       <!-- 4.3 1re ANNÉE BACCALAURÉAT LETTRES & SCIENCES HUMAINES -->
-      <h3 style="font-size:1.15rem;font-weight:800;color:#006233;margin:26px 0 8px 0;">
+      <h3 style="font-size:1.15rem;font-weight:800;color:#0B7A99;margin:26px 0 8px 0;">
         4.3. 1<sup>re</sup> Année Baccalauréat – Lettres et Sciences Humaines (p. 30–43 · السنة الأولى بكالوريا مسلك الآداب والعلوم الإنسانية)
       </h3>
       <div class="table-responsive">
@@ -1186,7 +1215,7 @@
       </div>
 
       <!-- 4.4 1re ANNÉE BACCALAURÉAT SCIENCES & TECHNOLOGIES (EXAMEN RÉGIONAL) -->
-      <h3 style="font-size:1.15rem;font-weight:800;color:#006233;margin:26px 0 8px 0;">
+      <h3 style="font-size:1.15rem;font-weight:800;color:#0B7A99;margin:26px 0 8px 0;">
         4.4. 1<sup>re</sup> Année Baccalauréat – Sciences et Technologies / Examen Régional (p. 44–47 · السنة الأولى بكالوريا مسالك العلوم والتكنولوجيات)
       </h3>
       <div class="table-responsive">
@@ -1235,7 +1264,7 @@
       </div>
 
       <!-- 4.5 2e ANNÉE BACCALAURÉAT LETTRES & SCIENCES HUMAINES (EXAMEN NATIONAL) -->
-      <h3 style="font-size:1.15rem;font-weight:800;color:#006233;margin:26px 0 8px 0;">
+      <h3 style="font-size:1.15rem;font-weight:800;color:#0B7A99;margin:26px 0 8px 0;">
         4.5. 2<sup>e</sup> Année Baccalauréat – Lettres et Sciences Humaines (p. 48–56 · السنة الثانية بكالوريا مسلكا الآداب والعلوم الإنسانية)
       </h3>
       <p style="margin:0 0 12px 0;color:#334155;font-size:0.94rem;">
@@ -1291,7 +1320,7 @@
       </div>
 
       <!-- 4.6 2e ANNÉE BACCALAURÉAT SCIENCES ET TECHNOLOGIES -->
-      <h3 style="font-size:1.15rem;font-weight:800;color:#006233;margin:26px 0 8px 0;">
+      <h3 style="font-size:1.15rem;font-weight:800;color:#0B7A99;margin:26px 0 8px 0;">
         4.6. 2<sup>e</sup> Année Baccalauréat – Sciences et Technologies (p. 57–62 · السنة الثانية بكالوريا مسالك العلوم والتكنولوجيات)
       </h3>
       <div class="table-responsive">
@@ -1334,11 +1363,11 @@
     <section id="comment-utiliser" class="content-section">
       <div class="section-header-row">
         <h2>5. Comment utiliser ce document</h2>
-        <span lang="ar" dir="rtl" class="font-arabic" style="font-weight:800;color:#006233;font-size:1.05rem;">كيفية استثمار التوجيهات التربوية للتأهيلي (2007)</span>
+        <span lang="ar" dir="rtl" class="font-arabic" style="font-weight:800;color:#0B7A99;font-size:1.05rem;">كيفية استثمار التوجيهات التربوية للتأهيلي (2007)</span>
       </div>
 
       <div class="dual-usage-grid">
-        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-top:4px solid #006233;border-radius:14px;padding:22px;">
+        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-top:4px solid #0B7A99;border-radius:14px;padding:22px;">
           <span class="badge-tag badge-green" style="margin-bottom:10px;">👨‍🏫 En tant qu’enseignant de Langue Arabe au Lycée</span>
           <h3 style="font-size:1.12rem;font-weight:900;color:#0f172a;margin:0 0 10px 0;">Planifier vos modules semestriels et vos séquences d’évaluation</h3>
           <ul style="margin:0;padding-left:18px;color:#334155;font-size:0.9rem;line-height:1.7;">
@@ -1348,7 +1377,7 @@
           </ul>
         </div>
 
-        <div style="background:#fef2f2;border:1px solid #fecaca;border-top:4px solid #991b1b;border-radius:14px;padding:22px;">
+        <div style="background:var(--sky);border:1px solid var(--stone);border-top:4px solid #3347D6;border-radius:14px;padding:22px;">
           <span class="badge-tag badge-red" style="margin-bottom:10px;">🎓 En tant que candidat au concours CRMEF</span>
           <h3 style="font-size:1.12rem;font-weight:900;color:#0f172a;margin:0 0 10px 0;">Ce qui tombe systématiquement à l’écrit et à l’oral</h3>
           <ul style="margin:0 0 14px 0;padding-left:18px;color:#334155;font-size:0.9rem;line-height:1.7;">
@@ -1367,7 +1396,7 @@
     <!-- ===================================================================
          LECTEUR PDF INTÉGRÉ & TÉLÉCHARGEMENT (EN FIN D'ARTICLE APRÈS LECTURE)
          =================================================================== -->
-    <section id="lecteur-pdf-integre" class="content-section" style="border:2px solid #006233;">
+    <section id="lecteur-pdf-integre" class="content-section" style="border:2px solid #0B7A99;">
       <div class="section-header-row">
         <div>
           <span class="badge-tag badge-green" style="margin-bottom:6px;">📄 Document Officiel Intégral · MEN Maroc (62 pages)</span>
@@ -1401,8 +1430,8 @@
     <!-- ===================================================================
          MAILLAGE DE FIN D'ARTICLE : PASSER AUX QCM DIDACTIQUE, SPÉCIALITÉ & SCIENCES DE L'ÉDUCATION
          =================================================================== -->
-    <section id="maillage-fin-article" class="content-section" style="background:linear-gradient(135deg,#fff8f8 0%,#ffffff 50%,#f0fdf4 100%);border:2px solid #991b1b;">
-      <div class="section-header-row" style="border-bottom-color:#fecaca;">
+    <section id="maillage-fin-article" class="content-section" style="background:linear-gradient(135deg,var(--sky) 0%,#ffffff 50%,#f0fdf4 100%);border:2px solid #3347D6;">
+      <div class="section-header-row" style="border-bottom-color:var(--stone);">
         <div>
           <span class="badge-tag badge-red" style="margin-bottom:6px;">🎯 Fin de lecture · Passez à la pratique (Concours CRMEF 2026)</span>
           <h2>Testez vos connaissances sur les Orientations Pédagogiques Arabe (2007 &amp; 2009)</h2>
@@ -1429,7 +1458,7 @@
           <div>
             <span class="badge-tag badge-green" style="margin-bottom:8px;">📗 Épreuve 2 · Spécialité Arabe (100 Q)</span>
             <h3 style="font-size:1.05rem;font-weight:900;margin:0 0 6px 0;color:#0f172a;">Simulateur QCM Spécialité Langue Arabe</h3>
-            <p class="font-arabic" lang="ar" dir="rtl" style="font-size:0.86rem;font-weight:700;color:#006233;margin:0 0 6px 0;">تخصص اللغة العربية : النحو والصرف، البلاغة، العروض والقافية، الشعر الحديث والمناهج النقدية</p>
+            <p class="font-arabic" lang="ar" dir="rtl" style="font-size:0.86rem;font-weight:700;color:#0B7A99;margin:0 0 6px 0;">تخصص اللغة العربية : النحو والصرف، البلاغة، العروض والقافية، الشعر الحديث والمناهج النقدية</p>
             <p style="font-size:0.82rem;color:#475569;margin:0;">100 QCM interactifs couvrant toutes les notions linguistiques, rhétoriques et littéraires du collège et du lycée.</p>
           </div>
           <a href="/qcm-specialite-arabe-maroc.html" class="peps-btn-specialite" style="width:100%;text-align:center;">
@@ -1441,7 +1470,7 @@
           <div>
             <span class="badge-tag badge-red" style="margin-bottom:8px;">🎓 Épreuve 3 · Sciences de l'Éducation (340 Q)</span>
             <h3 style="font-size:1.05rem;font-weight:900;margin:0 0 6px 0;color:#0f172a;">QCM Sciences de l'Éducation &amp; 6 Livres</h3>
-            <p class="font-arabic" lang="ar" dir="rtl" style="font-size:0.86rem;font-weight:700;color:#991b1b;margin:0 0 6px 0;">علوم التربية ومستجدات نظام التربية والتكوين (340 سؤالاً + 6 كتب)</p>
+            <p class="font-arabic" lang="ar" dir="rtl" style="font-size:0.86rem;font-weight:700;color:#3347D6;margin:0 0 6px 0;">علوم التربية ومستجدات نظام التربية والتكوين (340 سؤالاً + 6 كتب)</p>
             <p style="font-size:0.82rem;color:#475569;margin:0;">Piaget, Vygotski, Approche par Compétences (APC), Livre Blanc et Loi-Cadre 51-17.</p>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
@@ -1462,32 +1491,32 @@
     <section id="pour-aller-plus-loin" class="content-section">
       <div class="section-header-row">
         <h2>7. Pour aller plus loin (Cycle voisin, QCM &amp; Pédagogie)</h2>
-        <span lang="ar" dir="rtl" class="font-arabic" style="font-weight:800;color:#991b1b;font-size:1.05rem;">روابط وتمارين تفاعلية لمباراة التعليم</span>
+        <span lang="ar" dir="rtl" class="font-arabic" style="font-weight:800;color:#3347D6;font-size:1.05rem;">روابط وتمارين تفاعلية لمباراة التعليم</span>
       </div>
 
       <div class="silo-links-grid">
-        <a href="/orientations-pedagogiques-arabe-college-2009.html" class="silo-link-card" style="border-left-color:#006233;">
-          <span style="font-size:0.74rem;font-weight:800;color:#006233;text-transform:uppercase;">🇸🇦 Cycle Voisin · Collège (2009)</span>
+        <a href="/orientations-pedagogiques-arabe-college-2009.html" class="silo-link-card" style="border-left-color:#0B7A99;">
+          <span style="font-size:0.74rem;font-weight:800;color:#0B7A99;text-transform:uppercase;">🇸🇦 Cycle Voisin · Collège (2009)</span>
           <span>Orientations pédagogiques Arabe – Collège (2009) : Synthèse &amp; PDF (38 p.) →</span>
         </a>
         <a href="/qcm-didactique-arabe-maroc.html" class="silo-link-card" style="border-left-color:#1d4ed8;">
           <span style="font-size:0.74rem;font-weight:800;color:#1d4ed8;text-transform:uppercase;">📘 Simulateur CRMEF · Didactique</span>
           <span>QCM Didactique de la Langue Arabe (100 questions corrigées &amp; justifiées) →</span>
         </a>
-        <a href="/qcm-specialite-arabe-maroc.html" class="silo-link-card" style="border-left-color:#006233;">
-          <span style="font-size:0.74rem;font-weight:800;color:#006233;text-transform:uppercase;">📗 Simulateur CRMEF · Spécialité</span>
+        <a href="/qcm-specialite-arabe-maroc.html" class="silo-link-card" style="border-left-color:#0B7A99;">
+          <span style="font-size:0.74rem;font-weight:800;color:#0B7A99;text-transform:uppercase;">📗 Simulateur CRMEF · Spécialité</span>
           <span>QCM Spécialité Arabe : Grammaire, Rhétorique, Prosodie &amp; Critique →</span>
         </a>
-        <a href="/qcm-sciences-education-crmef.html" class="silo-link-card" style="border-left-color:#991b1b;">
-          <span style="font-size:0.74rem;font-weight:800;color:#991b1b;text-transform:uppercase;">🎓 Tronc Commun · 340 Questions</span>
+        <a href="/qcm-sciences-education-crmef.html" class="silo-link-card" style="border-left-color:#3347D6;">
+          <span style="font-size:0.74rem;font-weight:800;color:#3347D6;text-transform:uppercase;">🎓 Tronc Commun · 340 Questions</span>
           <span>QCM Sciences de l’Éducation (Bilingue FR/AR + Explications détaillées) →</span>
         </a>
         <a href="/orientations-pedagogiques-toutes-matieres.html" class="silo-link-card" style="border-left-color:#1d4ed8;">
           <span style="font-size:0.74rem;font-weight:800;color:#1d4ed8;text-transform:uppercase;">📚 Hub Officiel MEN</span>
           <span>Toutes les orientations pédagogiques par matière (Collège 2009 &amp; Lycée 2007) →</span>
         </a>
-        <a href="/article-approche-competences.html" class="silo-link-card" style="border-left-color:#991b1b;">
-          <span style="font-size:0.74rem;font-weight:800;color:#991b1b;text-transform:uppercase;">🧭 Fondements Pédagogiques</span>
+        <a href="/article-approche-competences.html" class="silo-link-card" style="border-left-color:#3347D6;">
+          <span style="font-size:0.74rem;font-weight:800;color:#3347D6;text-transform:uppercase;">🧭 Fondements Pédagogiques</span>
           <span>L’approche par compétences (APC) au Maroc : principes et mise en œuvre →</span>
         </a>
       </div>
@@ -1499,7 +1528,7 @@
     <section id="faq-op-arabe-lycee" class="content-section">
       <div class="section-header-row">
         <h2>8. Questions fréquentes</h2>
-        <span lang="ar" dir="rtl" class="font-arabic" style="font-weight:800;color:#006233;font-size:1.05rem;">أسئلة شائعة حول التوجيهات التربوية للتأهيلي (2007)</span>
+        <span lang="ar" dir="rtl" class="font-arabic" style="font-weight:800;color:#0B7A99;font-size:1.05rem;">أسئلة شائعة حول التوجيهات التربوية للتأهيلي (2007)</span>
       </div>
 
       <div style="display:flex;flex-direction:column;gap:12px;">
@@ -1544,7 +1573,7 @@
     <!-- ===================================================================
          SECTION 9 : SOURCE, VEILLE CONCOURS & CONTACT / NEWSLETTER
          =================================================================== -->
-    <section class="content-section" style="background:linear-gradient(135deg,#fff8f8 0%,#ffffff 50%,#f0fdf4 100%);border:2px solid #006233;">
+    <section class="content-section" style="background:linear-gradient(135deg,var(--sky) 0%,#ffffff 50%,#f0fdf4 100%);border:2px solid #0B7A99;">
       <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;">
         <div style="max-width:680px;">
           <span class="badge-tag badge-green" style="margin-bottom:8px;">✉️ Veille Officielle OP &amp; Alertes Concours CRMEF</span>
@@ -1552,7 +1581,7 @@
             Source officielle &amp; Contact Pédagogique ProfEPS
           </h2>
           <p style="margin:0;font-size:0.88rem;color:#334155;">
-            Source : <a href="https://www.men.gov.ma" rel="noopener" target="_blank" style="color:#006233;font-weight:800;text-decoration:underline;">Ministère de l’Éducation nationale (Direction des Curricula)</a> · Vérifié le <time datetime="2026-11-09">9 novembre 2026</time> par <a href="/a-propos.html" style="color:#991b1b;font-weight:800;text-decoration:underline;">Abdelkhalek ELBOUDANI</a>. Pour nous signaler un nouveau fascicule OP ou recevoir nos mises à jour QCM :
+            Source : <a href="https://www.men.gov.ma" rel="noopener" target="_blank" style="color:#0B7A99;font-weight:800;text-decoration:underline;">Ministère de l’Éducation nationale (Direction des Curricula)</a> · Vérifié le <time datetime="2026-11-09">9 novembre 2026</time> par <a href="/a-propos.html" style="color:#3347D6;font-weight:800;text-decoration:underline;">Abdelkhalek ELBOUDANI</a>. Pour nous signaler un nouveau fascicule OP ou recevoir nos mises à jour QCM :
           </p>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:10px;">
@@ -1567,18 +1596,18 @@
     </section>
 
     <!-- PROFEPS_CRMEF_URGENCY_MESH_START -->
-    <section id="profeps-crmef-urgency-banner" style="max-width:1180px;margin:1.75rem auto 0;padding:1.5rem;background:linear-gradient(135deg,#fff8f8 0%,#ffffff 50%,#f3faf6 100%);border:2px solid #991b1b;border-left:6px solid #991b1b;border-radius:18px;box-shadow:0 10px 28px -8px rgba(153,27,27,0.14);font-family:'Plus Jakarta Sans','Inter',system-ui,sans-serif;">
+    <section id="profeps-crmef-urgency-banner" style="max-width:1180px;margin:1.75rem auto 0;padding:1.5rem;background:linear-gradient(135deg, var(--sky) 0%, var(--surface) 100%);border:2px solid #3347D6;border-left:6px solid #3347D6;border-radius:18px;box-shadow:0 10px 28px -8px rgba(153,27,27,0.14);font-family:'Plus Jakarta Sans','Inter',system-ui,sans-serif;">
       <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1rem;border-bottom:1px solid #e2e8f0;padding-bottom:0.85rem;">
         <div>
-          <span style="display:inline-block;padding:0.25rem 0.75rem;background:#991b1b;color:#ffffff;font-size:0.72rem;font-weight:800;border-radius:999px;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.35rem;">🔥 Spécial Concours CRMEF 2026 · مباراة التعليم</span>
+          <span style="display:inline-block;padding:0.25rem 0.75rem;background:#3347D6;color:#ffffff;font-size:0.72rem;font-weight:800;border-radius:999px;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.35rem;">🔥 Spécial Concours CRMEF 2026 · مباراة التعليم</span>
           <h2 style="margin:0;font-size:1.25rem;font-weight:900;color:#0f172a;">Préparation Intensive Concours d'Enseignement CRMEF (Toutes Spécialités)</h2>
         </div>
-        <a href="/concours-crmef-hub.html" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.65rem 1.2rem;background:#006233;color:#ffffff !important;font-weight:800;font-size:0.85rem;border-radius:10px;text-decoration:none !important;">🏛️ Accéder au Hub des 15 Disciplines →</a>
+        <a href="/concours-crmef-hub.html" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.65rem 1.2rem;background:#0B7A99;color:#ffffff !important;font-weight:800;font-size:0.85rem;border-radius:10px;text-decoration:none !important;">🏛️ Accéder au Hub des 15 Disciplines →</a>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0.75rem;">
         <a href="/qcm-didactique-arabe-maroc.html" style="display:block;padding:0.8rem 1rem;background:#ffffff;border:1px solid #cbd5e1;border-left:4px solid #1d4ed8;border-radius:10px;text-decoration:none !important;color:#0f172a;font-weight:800;font-size:0.86rem;">📘 QCM Didactique Arabe (100 Q)</a>
-        <a href="/qcm-specialite-arabe-maroc.html" style="display:block;padding:0.8rem 1rem;background:#ffffff;border:1px solid #cbd5e1;border-left:4px solid #006233;border-radius:10px;text-decoration:none !important;color:#0f172a;font-weight:800;font-size:0.86rem;">📗 QCM Spécialité Arabe (100 Q)</a>
-        <a href="/qcm-sciences-education-crmef.html" style="display:block;padding:0.8rem 1rem;background:#ffffff;border:1px solid #cbd5e1;border-left:4px solid #991b1b;border-radius:10px;text-decoration:none !important;color:#0f172a;font-weight:800;font-size:0.86rem;">🎓 QCM Sciences de l'Éducation (340 Q)</a>
+        <a href="/qcm-specialite-arabe-maroc.html" style="display:block;padding:0.8rem 1rem;background:#ffffff;border:1px solid #cbd5e1;border-left:4px solid #0B7A99;border-radius:10px;text-decoration:none !important;color:#0f172a;font-weight:800;font-size:0.86rem;">📗 QCM Spécialité Arabe (100 Q)</a>
+        <a href="/qcm-sciences-education-crmef.html" style="display:block;padding:0.8rem 1rem;background:#ffffff;border:1px solid #cbd5e1;border-left:4px solid #3347D6;border-radius:10px;text-decoration:none !important;color:#0f172a;font-weight:800;font-size:0.86rem;">🎓 QCM Sciences de l'Éducation (340 Q)</a>
         <a href="/orientations-pedagogiques-arabe-college-2009.html" style="display:block;padding:0.8rem 1rem;background:#ffffff;border:1px solid #cbd5e1;border-left:4px solid #047857;border-radius:10px;text-decoration:none !important;color:#0f172a;font-weight:800;font-size:0.86rem;">🇸🇦 OP Arabe Collège 2009 (PDF)</a>
       </div>
     </section>
@@ -1594,8 +1623,36 @@
         <!-- Col 1: Qui est derrière ProfEPS -->
         <div class="footer-brand" style="display:flex;flex-direction:column;align-items:flex-start;gap:0.75rem;">
           <a href="/" class="peps-nav-logo" style="color:#FFFFFF !important;">
-            <span class="peps-nav-logo-mark" aria-hidden="true">PE</span>
-            <span class="peps-nav-logo-text" style="color:#FFFFFF;">Prof<span style="color:#FFB300;">EPS</span>.ma</span>
+            <span class="peps-nav-logo-mark" aria-hidden="true">
+              <svg viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" class="peps-logo-svg">
+                <defs>
+                  <linearGradient id="ftrShieldGrad" x1="12" y1="8" x2="116" y2="120" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#3347D6"/>
+                    <stop offset="55%" stop-color="#4A49EA"/>
+                    <stop offset="100%" stop-color="#6D4AFF"/>
+                  </linearGradient>
+                  <linearGradient id="ftrAmberGrad" x1="22" y1="36" x2="104" y2="82" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#FFB300"/>
+                    <stop offset="100%" stop-color="#F59E0B"/>
+                  </linearGradient>
+                </defs>
+                <rect x="6" y="6" width="116" height="116" rx="30" fill="url(#ftrShieldGrad)"/>
+                <rect x="9" y="9" width="110" height="110" rx="27" stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="2"/>
+                <path d="M 22 78 C 36 46, 68 32, 104 38 C 80 46, 56 60, 42 82 Z" fill="url(#ftrAmberGrad)"/>
+                <circle cx="74" cy="27" r="9.2" fill="#FFB300" stroke="#FFFFFF" stroke-width="2.4"/>
+                <line x1="69" y1="41" x2="58" y2="63" stroke="#FFFFFF" stroke-width="10.4" stroke-linecap="round"/>
+                <path d="M 45 52 L 53 44 L 68 42 L 83 45 L 94 37" stroke="#FFFFFF" stroke-width="5.4" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M 44 78 L 59 62 L 78 66 L 73 79" stroke="#FFFFFF" stroke-width="6.2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M 22 86 C 36 81, 52 84, 64 92 C 76 84, 92 81, 106 86 L 106 102 C 92 97, 76 100, 64 108 C 52 100, 36 97, 22 102 Z" fill="#C7D7FE"/>
+                <path d="M 26 80 C 39 75, 53 78, 64 86 C 75 78, 89 75, 102 80 L 102 95 C 89 90, 75 93, 64 101 C 53 93, 39 90, 26 95 Z" fill="#FFFFFF"/>
+                <line x1="64" y1="84" x2="64" y2="102" stroke="#3347D6" stroke-width="3" stroke-linecap="round"/>
+                <polygon points="61,98 64,108.5 67,98" fill="#FFB300"/>
+              </svg>
+            </span>
+            <span class="peps-nav-logo-lockup">
+              <span class="peps-nav-logo-text" style="color:#FFFFFF;">Prof<span style="color:#FFB300;">EPS</span><em class="peps-logo-tld" style="background:rgba(255,179,0,0.18);color:#FFB300;">.ma</em></span>
+              <span class="peps-nav-logo-sub" style="color:#9AA6C4;">Éducation &amp; Sport</span>
+            </span>
           </a>
           <p style="font-size:0.9rem;color:#9AA6C4;line-height:1.6;margin:0;">
             Créé par <strong style="color:#E8ECFA;">Abdelkhalek ELBOUDANI</strong>, professeur d'EPS au Maroc. Tout pour préparer ta séance, télécharger les documents du ministère (OP 2007, 2009 et 2021) et réussir le concours CRMEF.
