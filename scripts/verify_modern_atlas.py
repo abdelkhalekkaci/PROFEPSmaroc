@@ -22,6 +22,7 @@ missing_css = []
 missing_logo = []
 missing_favicon = []
 missing_toggle = []
+missing_footer_nav = []
 old_translator = []
 broken_gradients = []
 justify_remaining = []
@@ -45,6 +46,8 @@ for f in html_files:
         missing_favicon.append(f.name)
     if 'id="atlasThemeToggle"' not in html:
         missing_toggle.append(f.name)
+    if 'id="footer-col-navigation"' not in html:
+        missing_footer_nav.append(f.name)
     if 'id="pepsLangSwitcher"' in html:
         old_translator.append(f.name)
     if "100%) 52%" in html or "100%) 50%" in html:
@@ -70,6 +73,7 @@ print(f" - Missing /assets/site.css: {len(missing_css)} {missing_css[:5]}")
 print(f" - Missing new EPS+Education SVG logo (.peps-logo-svg): {len(missing_logo)} {missing_logo[:5]}")
 print(f" - Missing /favicon.svg link: {len(missing_favicon)} {missing_favicon[:5]}")
 print(f" - Missing #atlasThemeToggle: {len(missing_toggle)} {missing_toggle[:5]}")
+print(f" - Missing #footer-col-navigation: {len(missing_footer_nav)} {missing_footer_nav[:5]}")
 print(f" - Old #pepsLangSwitcher remaining: {len(old_translator)} {old_translator[:5]}")
 print(f" - Broken linear-gradient rules remaining: {len(broken_gradients)} {broken_gradients[:5]}")
 print(f" - text-align: justify remaining: {len(justify_remaining)} {justify_remaining[:5]}")
@@ -82,6 +86,7 @@ if (
     or missing_logo
     or missing_favicon
     or missing_toggle
+    or missing_footer_nav
     or old_translator
     or broken_gradients
     or justify_remaining
@@ -89,4 +94,4 @@ if (
     or broken_pdfs
 ):
     sys.exit(1)
-print("ALL MODERN ATLAS LOGO, FAVICON, ALIGNMENT & CSS CHECKS PASSED!")
+print("ALL MODERN ATLAS LOGO, FAVICON, FOOTER NAVIGATION, ALIGNMENT & CSS CHECKS PASSED!")

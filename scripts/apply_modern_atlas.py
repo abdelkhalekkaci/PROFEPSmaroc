@@ -179,6 +179,8 @@ def main():
                 count=1,
                 flags=re.S
             )
+        elif "</body>" in html and not ('http-equiv="refresh"' in html.lower() and len(html) < 2000):
+            html = html.replace("</body>", "\n" + FOOTER.strip() + "\n</body>", 1)
 
         # 3. Link /favicon.svg, /assets/site.css, and profeps-communaute.js in <head>
         if "/favicon.svg" not in html:
