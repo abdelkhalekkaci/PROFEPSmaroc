@@ -104,9 +104,9 @@
         :root {
             --primary: #0d9488;
             --primary-dark: #0f766e;
-            --secondary: #006233;
-            --secondary-dark: #064e3b;
-            --crimson: #991b1b;
+            --secondary: #0B7A99;
+            --secondary-dark: #085E77;
+            --crimson: #2434A8;
             --accent: #d97706;
             --slate-950: #020617;
             --slate-900: #0f172a;
@@ -116,7 +116,7 @@
             --slate-500: #64748b;
             --slate-200: #e2e8f0;
             --slate-100: #f1f5f9;
-            --slate-50: #f8fafc;
+            --slate-50: var(--paper);
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-display: 'Plus Jakarta Sans', var(--font-sans);
         }
@@ -420,7 +420,7 @@
         /* STEP 3 : DOCUMENT MODE SWITCH + EXPORT ACTION BAR */
         .studio-toolbar {
             padding: 1rem 1.5rem;
-            background: #f8fafc;
+            background: var(--paper);
             border-bottom: 1px solid var(--slate-200);
             display: flex;
             flex-wrap: wrap;
@@ -549,7 +549,7 @@
             grid-template-columns: 1fr auto 1fr;
             align-items: center;
             gap: 1rem;
-            background: #f8fafc;
+            background: var(--paper);
         }
         .a4-banner-left, .a4-banner-right {
             font-size: 0.75rem;
@@ -629,7 +629,7 @@
             color: #0f172a;
         }
         .a4-table tr:nth-child(even) td {
-            background: #f8fafc;
+            background: var(--paper);
         }
         .fiche-block {
             border: 2px solid #0f172a;
@@ -654,7 +654,7 @@
             grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
             gap: 1rem;
             padding: 1.25rem 1.5rem;
-            background: #f8fafc;
+            background: var(--paper);
             border-bottom: 1px solid var(--slate-200);
         }
         .calc-field label {
@@ -745,7 +745,7 @@
             margin: 1rem 0;
         }
         .info-callout {
-            background: #f8fafc;
+            background: var(--paper);
             border: 1px solid var(--slate-200);
             border-left: 4px solid var(--secondary);
             border-radius: 10px;
@@ -816,9 +816,23 @@
             .a4-sheet { padding: 1.15rem; }
         }
     </style>
+  <link rel="stylesheet" href="/assets/site.css?v=20261112">
+  <script src="profeps-communaute.js" defer></script>
 </head>
-<body>
+<body class="tpl-sport ">
 <!-- PROFEPS_UNIFIED_NAVBAR_START -->
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('profeps_theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+        if (theme === 'dark') document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
+      } catch (e) {}
+    })();
+  </script>
   <nav id="navbar" class="navbar navbar-decoy" style="display:none !important;visibility:hidden !important;opacity:0 !important;width:0 !important;height:0 !important;overflow:hidden !important;position:absolute !important;pointer-events:none !important;z-index:-9999 !important;" aria-hidden="true">
     <div class="nav-container">
       <div id="navMenu" class="nav-menu"></div>
@@ -827,50 +841,81 @@
       <div id="navBackdrop" class="nav-backdrop"></div>
     </div>
   </nav>
-  <div class="peps-navbar" id="pepsNavbar" role="navigation" aria-label="Navigation principale" data-current-file="aps-course-duree-demi-fond-eps-maroc.html">
+  <div class="peps-navbar atlas-header" id="pepsNavbar" role="navigation" aria-label="Navigation principale" data-current-file="aps-course-duree-demi-fond-eps-maroc.html">
     <div class="peps-nav-container">
-      <a href="/" class="peps-nav-logo" aria-label="Prof EPS Maroc - Accueil">
-        <img src="/images/prof_eps.webp" width="156" height="52" decoding="async" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:52px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;">
+      <!-- Zone 1: Brand Wordmark -->
+      <a href="/" class="peps-nav-logo" aria-label="ProfEPS.ma - Accueil">
+        <span class="peps-nav-logo-mark" aria-hidden="true">PE</span>
+        <span class="peps-nav-logo-text">Prof<span>EPS</span>.ma</span>
       </a>
+
+      <!-- Zone 2: 6 Plain HTML Navigation Links (Crawlable by Google) -->
       <div class="peps-nav-menu" id="pepsNavMenu">
-        <a href="/" class="peps-nav-link" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
-        <a href="generateur.html" class="peps-nav-link" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
+        <a href="/orientations-pedagogiques-toutes-matieres.html" class="peps-nav-link">Orientations pédagogiques</a>
+        <a href="/bibliotheque-numerique-eps.html" class="peps-nav-link">Sports &amp; cycles</a>
+        <a href="/generateur.html" class="peps-nav-link">Évaluation &amp; Fiches</a>
+        <a href="/concours-crmef-hub.html" class="peps-nav-link">Concours</a>
         <div class="peps-dropdown" id="pepsCalcDropdown">
-          <a href="hub-outils-sport-performance.html" class="peps-nav-link" id="pepsDropdownTrigger"><span id="pepsDropdownTriggerText" data-i18n-fr="Calculateurs Sport" data-i18n-en="Sports Calculators" data-i18n-ar="الحاسبات الرياضية">Calculateurs Sport</span><span class="peps-dropdown-caret">▾</span></a>
+          <a href="/hub-outils-sport-performance.html" class="peps-nav-link" id="pepsDropdownTrigger">
+            <span id="pepsDropdownTriggerText">Outils</span>
+            <span class="peps-dropdown-caret" aria-hidden="true">▾</span>
+          </a>
           <div class="peps-dropdown-menu" id="pepsDropdownMenu">
-            <a href="hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub" data-i18n-fr="🧭 Hub de Tous les Calculateurs Sport" data-i18n-en="🧭 All Sports Calculators Hub" data-i18n-ar="🧭 بوابة جميع الحاسبات الرياضية">🧭 Hub de Tous les Calculateurs Sport</a>
-            <a href="calculateur-vma.html" class="peps-dropdown-item" data-i18n-fr="⚡ Calculateur VMA & Allures" data-i18n-en="⚡ MAS (VMA) & Paces Calculator" data-i18n-ar="⚡ حاسبة السرعة الهوائية القصوى (VMA)">⚡ Calculateur VMA & Allures</a>
-            <a href="calculateur-vdot-asr-endurance.html" class="peps-dropdown-item" data-i18n-fr="🫁 Calculateur VO2 Max & VDOT" data-i18n-en="🫁 VO2 Max & VDOT Calculator" data-i18n-ar="🫁 حاسبة VO2 Max ومؤشر VDOT">🫁 Calculateur VO2 Max & VDOT</a>
-            <a href="calculateur-asr-reserve-vitesse.html" class="peps-dropdown-item" data-i18n-fr="🚀 Réserve de Vitesse Anaérobie (ASR)" data-i18n-en="🚀 Anaerobic Speed Reserve (ASR)" data-i18n-ar="🚀 احتياطي السرعة اللاهوائية (ASR)">🚀 Réserve de Vitesse Anaérobie (ASR)</a>
-            <a href="calculateur-indice-endurance.html" class="peps-dropdown-item" data-i18n-fr="📈 Indice d'Endurance (Péronnet)" data-i18n-en="📈 Endurance Index (Péronnet)" data-i18n-ar="📈 مؤشر التحمل (نموذج بيروني)">📈 Indice d'Endurance (Péronnet)</a>
-            <a href="calculateur-frequence-cardiaque-karvonen.html" class="peps-dropdown-item" data-i18n-fr="❤️ Fréquence Cardiaque (Karvonen)" data-i18n-en="❤️ Heart Rate Zones (Karvonen)" data-i18n-ar="❤️ نبضات القلب ومناطق التدريب (Karvonen)">❤️ Fréquence Cardiaque (Karvonen)</a>
-            <a href="calculateur-imc-sportif-masse-grasse.html" class="peps-dropdown-item" data-i18n-fr="⚖️ Calculateur IMC & Masse Grasse" data-i18n-en="⚖️ Athletic BMI & Body Fat %" data-i18n-ar="⚖️ حاسبة مؤشر كتلة الجسم ونسبة الدهون">⚖️ Calculateur IMC & Masse Grasse</a>
-            <a href="calculateur-chaleur-meteo-altitude.html" class="peps-dropdown-item" data-i18n-fr="☀️ Chaleur, Humidité & Altitude" data-i18n-en="☀️ Heat, Humidity & Altitude" data-i18n-ar="☀️ تأثير الحرارة والرطوبة والارتفاع">☀️ Chaleur, Humidité & Altitude</a>
-            <a href="calculateur-gap-pente-nutrition.html" class="peps-dropdown-item" data-i18n-fr="⛰️ Allure Pente (GAP) & Nutrition" data-i18n-en="⛰️ Grade Adjusted Pace & Nutrition" data-i18n-ar="⛰️ إيقاع المنحدرات (GAP) والتغذية">⛰️ Allure Pente (GAP) & Nutrition</a>
-            <a href="generateur-intermittent-hiit-cod.html" class="peps-dropdown-item" data-i18n-fr="🔄 Intermittent HIIT & COD 180°" data-i18n-en="🔄 HIIT Intermittent & 180° COD" data-i18n-ar="🔄 مولد التدريب المتقطع HIIT وتغيير الاتجاه">🔄 Intermittent HIIT & COD 180°</a>
-            <a href="calculateur-charge-rpe-foster-acwr.html" class="peps-dropdown-item" data-i18n-fr="🛡️ Charge RPE Foster & ACWR" data-i18n-en="🛡️ Foster sRPE Load & ACWR Ratio" data-i18n-ar="🛡️ حمل التدريب (RPE Foster) ونسبة ACWR">🛡️ Charge RPE Foster & ACWR</a>
+            <a href="/hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub">Tous les Calculateurs &amp; Outils</a>
+            <a href="/generateur.html" class="peps-dropdown-item">Générateur de Séances &amp; Cycles (Word/PDF)</a>
+            <a href="/calculateur-vma.html" class="peps-dropdown-item">Calculateur VMA &amp; Groupes d'Allures</a>
+            <a href="/calculateur-vdot-asr-endurance.html" class="peps-dropdown-item">Calculateur VO2 Max &amp; VDOT</a>
+            <a href="/calculateur-asr-reserve-vitesse.html" class="peps-dropdown-item">Réserve de Vitesse Anaérobie (ASR)</a>
+            <a href="/calculateur-indice-endurance.html" class="peps-dropdown-item">Indice d'Endurance (Péronnet)</a>
+            <a href="/calculateur-frequence-cardiaque-karvonen.html" class="peps-dropdown-item">Fréquence Cardiaque (Karvonen)</a>
+            <a href="/calculateur-imc-sportif-masse-grasse.html" class="peps-dropdown-item">IMC Sportif &amp; Masse Grasse</a>
+            <a href="/calculateur-chaleur-meteo-altitude.html" class="peps-dropdown-item">Chaleur, Humidité &amp; Altitude</a>
+            <a href="/calculateur-gap-pente-nutrition.html" class="peps-dropdown-item">Allure Pente (GAP) &amp; Hydratation</a>
+            <a href="/generateur-intermittent-hiit-cod.html" class="peps-dropdown-item">Intermittent HIIT &amp; COD 180°</a>
+            <a href="/calculateur-charge-rpe-foster-acwr.html" class="peps-dropdown-item">Charge RPE Foster &amp; Ratio ACWR</a>
           </div>
         </div>
-        <a href="concours-crmef-hub.html" class="peps-nav-link" data-i18n-fr="Préparation CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparation CRMEF</a>
-        <a href="blog.html" class="peps-nav-link active" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
+        <a href="/blog.html" class="peps-nav-link">Blog</a>
       </div>
+
+      <!-- Zone 3: Search Bar + Dark Mode Toggle (Replaces Language Translator) -->
       <div class="peps-nav-right">
-        <div dir="ltr" class="peps-lang-switch" aria-label="Sélecteur de langue">
-          <button type="button" class="peps-lang-btn active" id="peps-btn-lang-fr" data-lang="fr" onclick="window.profepsSetLang('fr')">FR</button>
-          <span class="peps-lang-sep">/</span>
-          <button type="button" class="peps-lang-btn" id="peps-btn-lang-en" data-lang="en" onclick="window.profepsSetLang('en')">EN</button>
-          <span class="peps-lang-sep">/</span>
-          <button type="button" class="peps-lang-btn" id="peps-btn-lang-ar" data-lang="ar" onclick="window.profepsSetLang('ar')">عربي</button>
+        <div class="atlas-nav-search" role="search">
+          <svg class="atlas-nav-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="search" id="atlasSearchInput" class="atlas-nav-search-input" placeholder="OP 2009, Handball, VMA…" aria-label="Rechercher une ressource EPS ou OP" autocomplete="off">
+          <div id="atlasSearchDropdown" class="atlas-search-dropdown" role="listbox" aria-label="Suggestions de recherche"></div>
         </div>
-        <button type="button" class="peps-nav-toggle" id="pepsNavToggle" aria-label="Menu">
+
+        <button type="button" class="atlas-theme-toggle" id="atlasThemeToggle" onclick="window.profepsToggleTheme && window.profepsToggleTheme()" aria-label="Basculer le mode sombre ou clair" title="Mode sombre / Mode clair">
+          <svg id="atlasThemeIconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg id="atlasThemeIconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <span class="atlas-theme-label" id="atlasThemeLabel">Mode nuit</span>
+        </button>
+
+        <button type="button" class="peps-nav-toggle" id="pepsNavToggle" aria-label="Ouvrir le menu">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
   </div>
+
 <script id="profeps-master-unifier-js">
 (function() {
-  // Stub silencieux au cas où un ancien script de page appelle encore window.supabase
   var dummyAuth = {
     getSession: function() { return Promise.resolve({ data: { session: null }, error: null }); },
     getUser: function() { return Promise.resolve({ data: { user: null }, error: null }); },
@@ -888,45 +933,50 @@
       };
     }
   };
-  window.supabase = { createClient: function() { return dummyClient; } };
-  window.supabaseClient = dummyClient;
+  window.supabase = window.supabase || { createClient: function() { return dummyClient; } };
+  window.supabaseClient = window.supabaseClient || dummyClient;
   window.ProfEPS = window.ProfEPS || { getSupabase: function() { return dummyClient; }, saveGeneration: function() { return Promise.resolve(); } };
+
+  function syncThemeUI(theme) {
+    var moon = document.getElementById('atlasThemeIconMoon');
+    var sun = document.getElementById('atlasThemeIconSun');
+    var label = document.getElementById('atlasThemeLabel');
+    if (theme === 'dark') {
+      if (moon) moon.style.display = 'none';
+      if (sun) sun.style.display = 'block';
+      if (label) label.textContent = 'Mode clair';
+    } else {
+      if (moon) moon.style.display = 'block';
+      if (sun) sun.style.display = 'none';
+      if (label) label.textContent = 'Mode nuit';
+    }
+  }
+
+  window.profepsToggleTheme = function() {
+    var current = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    if (next === 'dark') document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
+    try { localStorage.setItem('profeps_theme', next); } catch (e) {}
+    syncThemeUI(next);
+  };
+
+  syncThemeUI(document.documentElement.getAttribute('data-theme') || 'light');
 
   var dropdown = document.getElementById('pepsCalcDropdown');
   var dropdownMenu = document.getElementById('pepsDropdownMenu');
   var closeTimer = null;
-
   function openDropdown() {
-    if (closeTimer) {
-      clearTimeout(closeTimer);
-      closeTimer = null;
-    }
-    var dd = document.getElementById('pepsCalcDropdown');
-    var dm = document.getElementById('pepsDropdownMenu');
-    if (dd) dd.classList.add('open');
-    if (dm) {
-      dm.style.setProperty('opacity', '1', 'important');
-      dm.style.setProperty('visibility', 'visible', 'important');
-      dm.style.setProperty('pointer-events', 'auto', 'important');
-      dm.style.setProperty('transform', 'translateX(-50%) translateY(0)', 'important');
-    }
+    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+    if (dropdown) dropdown.classList.add('open');
   }
-
   function closeDropdownDelayed() {
     if (closeTimer) clearTimeout(closeTimer);
     closeTimer = setTimeout(function() {
-      var dd = document.getElementById('pepsCalcDropdown');
-      var dm = document.getElementById('pepsDropdownMenu');
-      if (dd) dd.classList.remove('open');
-      if (dm) {
-        dm.style.removeProperty('opacity');
-        dm.style.removeProperty('visibility');
-        dm.style.removeProperty('pointer-events');
-        dm.style.removeProperty('transform');
-      }
+      if (dropdown) dropdown.classList.remove('open');
     }, 180);
   }
-
   if (dropdown) {
     dropdown.addEventListener('mouseenter', openDropdown);
     dropdown.addEventListener('mouseleave', closeDropdownDelayed);
@@ -935,74 +985,6 @@
     dropdownMenu.addEventListener('mouseenter', openDropdown);
     dropdownMenu.addEventListener('mouseleave', closeDropdownDelayed);
   }
-
-  // Délégation globale en renfort pour garantir l'ouverture au survol sur 100 % des pages
-  document.addEventListener('mouseover', function(e) {
-    var t = e.target;
-    if (t && t.closest && (t.closest('#pepsCalcDropdown') || t.closest('#pepsDropdownMenu'))) {
-      openDropdown();
-    }
-  });
-  document.addEventListener('mouseout', function(e) {
-    var t = e.target;
-    if (t && t.closest && (t.closest('#pepsCalcDropdown') || t.closest('#pepsDropdownMenu'))) {
-      var rel = e.relatedTarget;
-      if (!rel || !rel.closest || (!rel.closest('#pepsCalcDropdown') && !rel.closest('#pepsDropdownMenu'))) {
-        closeDropdownDelayed();
-      }
-    }
-  });
-
-  // Supprimer tout ancien <nav class="navbar"> résiduel ET tout bouton traducteur en doublon dans le contenu
-  function cleanPageDuplicates() {
-    document.querySelectorAll('nav.navbar:not(.navbar-decoy), .navbar:not(.navbar-decoy)').forEach(function(oldNav) {
-      if (oldNav.id !== 'pepsNavbar') {
-        if (oldNav.parentNode) oldNav.parentNode.removeChild(oldNav);
-      }
-    });
-    document.querySelectorAll('.lang-switch:not(.peps-lang-switch), .in-page-lang-switch, #btn-lang-fr, #btn-lang-en, #btn-lang-ar, button[onclick*="setToolLang"], button[onclick*="changeLang"], button.lang-btn:not(.peps-lang-btn)').forEach(function(el) {
-      if (!el.closest || !el.closest('#pepsNavbar')) {
-        var wrapper = el.closest ? (el.closest('.lang-switch, .in-page-lang-switch, [aria-label="Language selection"], [title*="Traduction"]') || el) : el;
-        if (wrapper === el && el.parentNode && el.parentNode.tagName === 'DIV') {
-          var parentTxt = (el.parentNode.textContent || '').trim();
-          if (parentTxt.length <= 50 && (!el.parentNode.closest || !el.parentNode.closest('#pepsNavbar'))) {
-            wrapper = el.parentNode;
-          }
-        }
-        if (wrapper && wrapper.parentNode && (!wrapper.closest || !wrapper.closest('#pepsNavbar'))) {
-          wrapper.parentNode.removeChild(wrapper);
-        }
-      }
-    });
-  }
-  cleanPageDuplicates();
-  window.addEventListener('DOMContentLoaded', cleanPageDuplicates);
-  // Nettoyage unique à l'initialisation et au DOMContentLoaded (CLS = 0, zéro surcharge MutationObserver)
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      var dd = document.getElementById('pepsCalcDropdown');
-      var dm = document.getElementById('pepsDropdownMenu');
-      if (dd) dd.classList.remove('open');
-      if (dm) {
-        dm.style.removeProperty('opacity');
-        dm.style.removeProperty('visibility');
-        dm.style.removeProperty('pointer-events');
-        dm.style.removeProperty('transform');
-      }
-      var toggleBtn = document.getElementById('pepsNavToggle');
-      var navMenuEl = document.getElementById('pepsNavMenu');
-      if (toggleBtn && navMenuEl) {
-        toggleBtn.classList.remove('active');
-        navMenuEl.classList.remove('active');
-      }
-    }
-  });
-
-  window.addEventListener('scroll', function() {
-    var n = document.getElementById('pepsNavbar');
-    if (n) n.classList.toggle('scrolled', window.scrollY > 40);
-  });
 
   document.addEventListener('click', function(e) {
     var t = e.target;
@@ -1015,59 +997,6 @@
       }
     }
   });
-
-  var nativeLang = ((document.documentElement.getAttribute('lang') || 'fr').toLowerCase().slice(0, 2));
-  var nativeDir = document.documentElement.getAttribute('dir') || (nativeLang === 'ar' ? 'rtl' : 'ltr');
-
-  window.profepsSetLang = function(lang, isAutoInit) {
-    if (!isAutoInit) {
-      try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
-    }
-    ['fr', 'en', 'ar'].forEach(function(code) {
-      var btn = document.getElementById('peps-btn-lang-' + code);
-      if (btn) btn.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
-      document.querySelectorAll('.peps-lang-btn[data-lang="' + code + '"]').forEach(function(b) {
-        b.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
-      });
-    });
-    document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function(el) {
-      var val = el.getAttribute('data-i18n-' + lang);
-      if (val) el.textContent = val;
-    });
-    if (typeof window.setToolLang === 'function') window.setToolLang(lang);
-    if (typeof window.changeLang === 'function') window.changeLang(lang);
-    if (typeof window.setLanguage === 'function') window.setLanguage(lang);
-    var hasBodyI18n = (
-      typeof window.setToolLang === 'function' ||
-      typeof window.changeLang === 'function' ||
-      typeof window.setLanguage === 'function' ||
-      document.querySelector('main [data-i18n-ar], .hero [data-i18n-ar], .vma-hero [data-i18n-ar]') !== null
-    );
-    if (hasBodyI18n) {
-      document.documentElement.lang = lang;
-      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-    } else {
-      document.documentElement.lang = nativeLang;
-      document.documentElement.dir = nativeDir;
-    }
-  };
-
-  var saved = nativeLang === 'ar' ? 'ar' : 'fr';
-  try {
-    var storedLang = localStorage.getItem('profeps_lang');
-    if (nativeLang === 'ar') {
-      saved = 'ar';
-    } else if (storedLang) {
-      saved = storedLang;
-    }
-  } catch(e) {}
-  if (saved && (saved !== 'fr' || nativeLang === 'ar')) {
-    if (document.readyState === 'loading') {
-      window.addEventListener('DOMContentLoaded', function() { window.profepsSetLang(saved, true); });
-    } else {
-      window.profepsSetLang(saved, true);
-    }
-  }
 })();
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->
@@ -2457,7 +2386,7 @@
                         table { width: 100%; border-collapse: collapse; margin-top: 8px; margin-bottom: 12px; }
                         th { background-color: #0f172a; color: #ffffff; border: 1px solid #0f172a; padding: 6px; font-size: 9.5pt; text-align: left; }
                         td { border: 1px solid #64748b; padding: 6px; font-size: 9.5pt; vertical-align: top; }
-                        .a4-official-Banner { border: 2px solid #0f172a; padding: 10px; margin-bottom: 12px; background-color: #f8fafc; }
+                        .a4-official-Banner { border: 2px solid #0f172a; padding: 10px; margin-bottom: 12px; background-color: var(--paper); }
                         .a4-pedago-box { border: 1px solid #0f172a; padding: 8px; margin-bottom: 10px; background-color: #f0fdfa; }
                         .fiche-block { border: 2px solid #0f172a; margin-bottom: 18px; page-break-inside: avoid; }
                         .fiche-header-bar { background-color: #0f172a; color: #ffffff; padding: 6px 10px; font-weight: bold; }
@@ -2501,7 +2430,7 @@
                         table { width: 100%; border-collapse: collapse; margin-top: 6px; }
                         th { background: #0f172a !important; color: #ffffff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; border: 1px solid #0f172a; padding: 5px 6px; text-align: left; font-size: 9pt; }
                         td { border: 1px solid #64748b; padding: 5px 6px; vertical-align: top; font-size: 9pt; }
-                        .a4-official-Banner { border: 2px solid #0f172a; padding: 8px 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; background: #f8fafc !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+                        .a4-official-Banner { border: 2px solid #0f172a; padding: 8px 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; background: var(--paper) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
                         .a4-meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid #0f172a; margin-bottom: 10px; }
                         .a4-meta-cell { padding: 4px 6px; border-right: 1px solid #cbd5e1; font-size: 8.5pt; }
                         .a4-pedago-box { border: 1px solid #0f172a; padding: 7px 10px; margin-bottom: 10px; background: #f0fdfa !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-size: 8.8pt; }

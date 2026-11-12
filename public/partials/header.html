@@ -1,0 +1,180 @@
+<!-- PROFEPS_UNIFIED_NAVBAR_START -->
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('profeps_theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+        if (theme === 'dark') document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
+      } catch (e) {}
+    })();
+  </script>
+  <nav id="navbar" class="navbar navbar-decoy" style="display:none !important;visibility:hidden !important;opacity:0 !important;width:0 !important;height:0 !important;overflow:hidden !important;position:absolute !important;pointer-events:none !important;z-index:-9999 !important;" aria-hidden="true">
+    <div class="nav-container">
+      <div id="navMenu" class="nav-menu"></div>
+      <div id="navRightDecoy" class="nav-right"></div>
+      <button id="navToggle" class="nav-toggle" type="button"></button>
+      <div id="navBackdrop" class="nav-backdrop"></div>
+    </div>
+  </nav>
+  <div class="peps-navbar atlas-header" id="pepsNavbar" role="navigation" aria-label="Navigation principale" data-current-file="index.html">
+    <div class="peps-nav-container">
+      <!-- Zone 1: Brand Wordmark -->
+      <a href="/" class="peps-nav-logo" aria-label="ProfEPS.ma - Accueil">
+        <span class="peps-nav-logo-mark" aria-hidden="true">PE</span>
+        <span class="peps-nav-logo-text">Prof<span>EPS</span>.ma</span>
+      </a>
+
+      <!-- Zone 2: 6 Plain HTML Navigation Links (Crawlable by Google) -->
+      <div class="peps-nav-menu" id="pepsNavMenu">
+        <a href="/orientations-pedagogiques-toutes-matieres.html" class="peps-nav-link">Orientations pédagogiques</a>
+        <a href="/bibliotheque-numerique-eps.html" class="peps-nav-link">Sports &amp; cycles</a>
+        <a href="/generateur.html" class="peps-nav-link">Évaluation &amp; Fiches</a>
+        <a href="/concours-crmef-hub.html" class="peps-nav-link">Concours</a>
+        <div class="peps-dropdown" id="pepsCalcDropdown">
+          <a href="/hub-outils-sport-performance.html" class="peps-nav-link" id="pepsDropdownTrigger">
+            <span id="pepsDropdownTriggerText">Outils</span>
+            <span class="peps-dropdown-caret" aria-hidden="true">▾</span>
+          </a>
+          <div class="peps-dropdown-menu" id="pepsDropdownMenu">
+            <a href="/hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub">Tous les Calculateurs &amp; Outils</a>
+            <a href="/generateur.html" class="peps-dropdown-item">Générateur de Séances &amp; Cycles (Word/PDF)</a>
+            <a href="/calculateur-vma.html" class="peps-dropdown-item">Calculateur VMA &amp; Groupes d'Allures</a>
+            <a href="/calculateur-vdot-asr-endurance.html" class="peps-dropdown-item">Calculateur VO2 Max &amp; VDOT</a>
+            <a href="/calculateur-asr-reserve-vitesse.html" class="peps-dropdown-item">Réserve de Vitesse Anaérobie (ASR)</a>
+            <a href="/calculateur-indice-endurance.html" class="peps-dropdown-item">Indice d'Endurance (Péronnet)</a>
+            <a href="/calculateur-frequence-cardiaque-karvonen.html" class="peps-dropdown-item">Fréquence Cardiaque (Karvonen)</a>
+            <a href="/calculateur-imc-sportif-masse-grasse.html" class="peps-dropdown-item">IMC Sportif &amp; Masse Grasse</a>
+            <a href="/calculateur-chaleur-meteo-altitude.html" class="peps-dropdown-item">Chaleur, Humidité &amp; Altitude</a>
+            <a href="/calculateur-gap-pente-nutrition.html" class="peps-dropdown-item">Allure Pente (GAP) &amp; Hydratation</a>
+            <a href="/generateur-intermittent-hiit-cod.html" class="peps-dropdown-item">Intermittent HIIT &amp; COD 180°</a>
+            <a href="/calculateur-charge-rpe-foster-acwr.html" class="peps-dropdown-item">Charge RPE Foster &amp; Ratio ACWR</a>
+          </div>
+        </div>
+        <a href="/blog.html" class="peps-nav-link">Blog</a>
+      </div>
+
+      <!-- Zone 3: Search Bar + Dark Mode Toggle (Replaces Language Translator) -->
+      <div class="peps-nav-right">
+        <div class="atlas-nav-search" role="search">
+          <svg class="atlas-nav-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="search" id="atlasSearchInput" class="atlas-nav-search-input" placeholder="OP 2009, Handball, VMA…" aria-label="Rechercher une ressource EPS ou OP" autocomplete="off">
+          <div id="atlasSearchDropdown" class="atlas-search-dropdown" role="listbox" aria-label="Suggestions de recherche"></div>
+        </div>
+
+        <button type="button" class="atlas-theme-toggle" id="atlasThemeToggle" onclick="window.profepsToggleTheme && window.profepsToggleTheme()" aria-label="Basculer le mode sombre ou clair" title="Mode sombre / Mode clair">
+          <svg id="atlasThemeIconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg id="atlasThemeIconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <span class="atlas-theme-label" id="atlasThemeLabel">Mode nuit</span>
+        </button>
+
+        <button type="button" class="peps-nav-toggle" id="pepsNavToggle" aria-label="Ouvrir le menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+<script id="profeps-master-unifier-js">
+(function() {
+  var dummyAuth = {
+    getSession: function() { return Promise.resolve({ data: { session: null }, error: null }); },
+    getUser: function() { return Promise.resolve({ data: { user: null }, error: null }); },
+    onAuthStateChange: function() { return { data: { subscription: { unsubscribe: function() {} } } }; },
+    signOut: function() { return Promise.resolve({ error: null }); }
+  };
+  var dummyClient = {
+    auth: dummyAuth,
+    from: function() {
+      return {
+        select: function() { return Promise.resolve({ data: [], error: null }); },
+        insert: function() { return Promise.resolve({ data: null, error: null }); },
+        update: function() { return Promise.resolve({ data: null, error: null }); },
+        delete: function() { return Promise.resolve({ data: null, error: null }); }
+      };
+    }
+  };
+  window.supabase = window.supabase || { createClient: function() { return dummyClient; } };
+  window.supabaseClient = window.supabaseClient || dummyClient;
+  window.ProfEPS = window.ProfEPS || { getSupabase: function() { return dummyClient; }, saveGeneration: function() { return Promise.resolve(); } };
+
+  function syncThemeUI(theme) {
+    var moon = document.getElementById('atlasThemeIconMoon');
+    var sun = document.getElementById('atlasThemeIconSun');
+    var label = document.getElementById('atlasThemeLabel');
+    if (theme === 'dark') {
+      if (moon) moon.style.display = 'none';
+      if (sun) sun.style.display = 'block';
+      if (label) label.textContent = 'Mode clair';
+    } else {
+      if (moon) moon.style.display = 'block';
+      if (sun) sun.style.display = 'none';
+      if (label) label.textContent = 'Mode nuit';
+    }
+  }
+
+  window.profepsToggleTheme = function() {
+    var current = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    if (next === 'dark') document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
+    try { localStorage.setItem('profeps_theme', next); } catch (e) {}
+    syncThemeUI(next);
+  };
+
+  syncThemeUI(document.documentElement.getAttribute('data-theme') || 'light');
+
+  var dropdown = document.getElementById('pepsCalcDropdown');
+  var dropdownMenu = document.getElementById('pepsDropdownMenu');
+  var closeTimer = null;
+  function openDropdown() {
+    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+    if (dropdown) dropdown.classList.add('open');
+  }
+  function closeDropdownDelayed() {
+    if (closeTimer) clearTimeout(closeTimer);
+    closeTimer = setTimeout(function() {
+      if (dropdown) dropdown.classList.remove('open');
+    }, 180);
+  }
+  if (dropdown) {
+    dropdown.addEventListener('mouseenter', openDropdown);
+    dropdown.addEventListener('mouseleave', closeDropdownDelayed);
+  }
+  if (dropdownMenu) {
+    dropdownMenu.addEventListener('mouseenter', openDropdown);
+    dropdownMenu.addEventListener('mouseleave', closeDropdownDelayed);
+  }
+
+  document.addEventListener('click', function(e) {
+    var t = e.target;
+    if (t && t.closest && t.closest('#pepsNavToggle')) {
+      var toggleBtn = document.getElementById('pepsNavToggle');
+      var navMenuEl = document.getElementById('pepsNavMenu');
+      if (toggleBtn && navMenuEl) {
+        toggleBtn.classList.toggle('active');
+        navMenuEl.classList.toggle('active');
+      }
+    }
+  });
+})();
+</script>
+<!-- PROFEPS_UNIFIED_NAVBAR_END -->

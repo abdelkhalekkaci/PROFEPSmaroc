@@ -67,248 +67,187 @@
     gtag("config", "G-TH0Z1SGNXH");
   </script>
     <link rel="stylesheet" href="/css/profeps-unifier.min.css?v=20261101">
+  <link rel="stylesheet" href="/assets/site.css?v=20261112">
+  <script src="profeps-communaute.js" defer></script>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col text-right">
+<body class="tpl-concours bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col text-right">
 <!-- PROFEPS_UNIFIED_NAVBAR_START -->
-  <div class="peps-navbar" id="pepsNavbar" role="navigation" aria-label="Navigation principale" data-current-file="qcm-didactique-arabe-maroc.html">
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('profeps_theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+        if (theme === 'dark') document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
+      } catch (e) {}
+    })();
+  </script>
+  <nav id="navbar" class="navbar navbar-decoy" style="display:none !important;visibility:hidden !important;opacity:0 !important;width:0 !important;height:0 !important;overflow:hidden !important;position:absolute !important;pointer-events:none !important;z-index:-9999 !important;" aria-hidden="true">
+    <div class="nav-container">
+      <div id="navMenu" class="nav-menu"></div>
+      <div id="navRightDecoy" class="nav-right"></div>
+      <button id="navToggle" class="nav-toggle" type="button"></button>
+      <div id="navBackdrop" class="nav-backdrop"></div>
+    </div>
+  </nav>
+  <div class="peps-navbar atlas-header" id="pepsNavbar" role="navigation" aria-label="Navigation principale" data-current-file="qcm-didactique-arabe-maroc.html">
     <div class="peps-nav-container">
-      <a href="/" class="peps-nav-logo" aria-label="Prof EPS Maroc - Accueil">
-        <img src="/images/prof_eps.webp" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:48px !important;width:auto !important;max-width:160px !important;object-fit:contain !important;display:block !important;" width="156" height="52" decoding="async">
+      <!-- Zone 1: Brand Wordmark -->
+      <a href="/" class="peps-nav-logo" aria-label="ProfEPS.ma - Accueil">
+        <span class="peps-nav-logo-mark" aria-hidden="true">PE</span>
+        <span class="peps-nav-logo-text">Prof<span>EPS</span>.ma</span>
       </a>
+
+      <!-- Zone 2: 6 Plain HTML Navigation Links (Crawlable by Google) -->
       <div class="peps-nav-menu" id="pepsNavMenu">
-        <a href="/" class="peps-nav-link" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a>
-        <a href="generateur.html" class="peps-nav-link" data-i18n-fr="Générateur" data-i18n-en="Generator" data-i18n-ar="المولّد">Générateur</a>
+        <a href="/orientations-pedagogiques-toutes-matieres.html" class="peps-nav-link">Orientations pédagogiques</a>
+        <a href="/bibliotheque-numerique-eps.html" class="peps-nav-link">Sports &amp; cycles</a>
+        <a href="/generateur.html" class="peps-nav-link">Évaluation &amp; Fiches</a>
+        <a href="/concours-crmef-hub.html" class="peps-nav-link">Concours</a>
         <div class="peps-dropdown" id="pepsCalcDropdown">
-          <a href="hub-outils-sport-performance.html" class="peps-nav-link" id="pepsDropdownTrigger">
-            <span id="pepsDropdownTriggerText" data-i18n-fr="Calculateurs Sport" data-i18n-en="Sports Calculators" data-i18n-ar="الحاسبات الرياضية">Calculateurs Sport</span>
-            <span class="peps-dropdown-caret">▾</span>
+          <a href="/hub-outils-sport-performance.html" class="peps-nav-link" id="pepsDropdownTrigger">
+            <span id="pepsDropdownTriggerText">Outils</span>
+            <span class="peps-dropdown-caret" aria-hidden="true">▾</span>
           </a>
           <div class="peps-dropdown-menu" id="pepsDropdownMenu">
-            <a href="hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub" data-i18n-fr="🧭 Hub de Tous les Calculateurs Sport" data-i18n-en="🧭 All Sports Calculators Hub" data-i18n-ar="🧭 بوابة جميع الحاسبات الرياضية">🧭 Hub de Tous les Calculateurs Sport</a>
-            <a href="calculateur-vma.html" class="peps-dropdown-item" data-i18n-fr="⚡ Calculateur VMA & Allures" data-i18n-en="⚡ MAS (VMA) & Paces Calculator" data-i18n-ar="⚡ حاسبة السرعة الهوائية القصوى (VMA)">⚡ Calculateur VMA & Allures</a>
-            <a href="calculateur-vdot-asr-endurance.html" class="peps-dropdown-item" data-i18n-fr="🫁 Calculateur VO2 Max & VDOT" data-i18n-en="🫁 VO2 Max & VDOT Calculator" data-i18n-ar="🫁 حاسبة VO2 Max ومؤشر VDOT">🫁 Calculateur VO2 Max & VDOT</a>
-            <a href="calculateur-asr-reserve-vitesse.html" class="peps-dropdown-item" data-i18n-fr="🚀 Réserve de Vitesse Anaérobie (ASR)" data-i18n-en="🚀 Anaerobic Speed Reserve (ASR)" data-i18n-ar="🚀 احتياطي السرعة اللاهوائية (ASR)">🚀 Réserve de Vitesse Anaérobie (ASR)</a>
-            <a href="calculateur-indice-endurance.html" class="peps-dropdown-item" data-i18n-fr="📈 Indice d'Endurance (Péronnet)" data-i18n-en="📈 Endurance Index (Péronnet)" data-i18n-ar="📈 مؤشر التحمل (نموذج بيروني)">📈 Indice d'Endurance (Péronnet)</a>
-            <a href="calculateur-frequence-cardiaque-karvonen.html" class="peps-dropdown-item" data-i18n-fr="❤️ Fréquence Cardiaque (Karvonen)" data-i18n-en="❤️ Heart Rate Zones (Karvonen)" data-i18n-ar="❤️ نبضات القلب ومناطق التدريب (Karvonen)">❤️ Fréquence Cardiaque (Karvonen)</a>
-            <a href="calculateur-imc-sportif-masse-grasse.html" class="peps-dropdown-item" data-i18n-fr="⚖️ Calculateur IMC & Masse Grasse" data-i18n-en="⚖️ Athletic BMI & Body Fat %" data-i18n-ar="⚖️ حاسبة مؤشر كتلة الجسم ونسبة الدهون">⚖️ Calculateur IMC & Masse Grasse</a>
-            <a href="calculateur-chaleur-meteo-altitude.html" class="peps-dropdown-item" data-i18n-fr="☀️ Chaleur, Humidité & Altitude" data-i18n-en="☀️ Heat, Humidity & Altitude" data-i18n-ar="☀️ تأثير الحرارة والرطوبة والارتفاع">☀️ Chaleur, Humidité & Altitude</a>
-            <a href="calculateur-gap-pente-nutrition.html" class="peps-dropdown-item" data-i18n-fr="⛰️ Allure Pente (GAP) & Nutrition" data-i18n-en="⛰️ Grade Adjusted Pace & Nutrition" data-i18n-ar="⛰️ إيقاع المنحدرات (GAP) والتغذية">⛰️ Allure Pente (GAP) & Nutrition</a>
-            <a href="generateur-intermittent-hiit-cod.html" class="peps-dropdown-item" data-i18n-fr="🔄 Intermittent HIIT & COD 180°" data-i18n-en="🔄 HIIT Intermittent & 180° COD" data-i18n-ar="🔄 مولد التدريب المتقطع HIIT وتغيير الاتجاه">🔄 Intermittent HIIT & COD 180°</a>
-            <a href="calculateur-charge-rpe-foster-acwr.html" class="peps-dropdown-item" data-i18n-fr="🛡️ Charge RPE Foster & ACWR" data-i18n-en="🛡️ Foster sRPE Load & ACWR Ratio" data-i18n-ar="🛡️ حمل التدريب (RPE Foster) ونسبة ACWR">🛡️ Charge RPE Foster & ACWR</a>
+            <a href="/hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub">Tous les Calculateurs &amp; Outils</a>
+            <a href="/generateur.html" class="peps-dropdown-item">Générateur de Séances &amp; Cycles (Word/PDF)</a>
+            <a href="/calculateur-vma.html" class="peps-dropdown-item">Calculateur VMA &amp; Groupes d'Allures</a>
+            <a href="/calculateur-vdot-asr-endurance.html" class="peps-dropdown-item">Calculateur VO2 Max &amp; VDOT</a>
+            <a href="/calculateur-asr-reserve-vitesse.html" class="peps-dropdown-item">Réserve de Vitesse Anaérobie (ASR)</a>
+            <a href="/calculateur-indice-endurance.html" class="peps-dropdown-item">Indice d'Endurance (Péronnet)</a>
+            <a href="/calculateur-frequence-cardiaque-karvonen.html" class="peps-dropdown-item">Fréquence Cardiaque (Karvonen)</a>
+            <a href="/calculateur-imc-sportif-masse-grasse.html" class="peps-dropdown-item">IMC Sportif &amp; Masse Grasse</a>
+            <a href="/calculateur-chaleur-meteo-altitude.html" class="peps-dropdown-item">Chaleur, Humidité &amp; Altitude</a>
+            <a href="/calculateur-gap-pente-nutrition.html" class="peps-dropdown-item">Allure Pente (GAP) &amp; Hydratation</a>
+            <a href="/generateur-intermittent-hiit-cod.html" class="peps-dropdown-item">Intermittent HIIT &amp; COD 180°</a>
+            <a href="/calculateur-charge-rpe-foster-acwr.html" class="peps-dropdown-item">Charge RPE Foster &amp; Ratio ACWR</a>
           </div>
         </div>
-        <a href="concours-crmef-hub.html" class="peps-nav-link active" data-i18n-fr="Préparation CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparation CRMEF</a>
-        <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
+        <a href="/blog.html" class="peps-nav-link">Blog</a>
       </div>
+
+      <!-- Zone 3: Search Bar + Dark Mode Toggle (Replaces Language Translator) -->
       <div class="peps-nav-right">
-        <div dir="ltr" class="peps-lang-switch" aria-label="Sélecteur de langue">
-          <button type="button" class="peps-lang-btn active" id="peps-btn-lang-fr" data-lang="fr" onclick="window.profepsSetLang('fr')">FR</button>
-          <span class="peps-lang-sep">/</span>
-          <button type="button" class="peps-lang-btn" id="peps-btn-lang-en" data-lang="en" onclick="window.profepsSetLang('en')">EN</button>
-          <span class="peps-lang-sep">/</span>
-          <button type="button" class="peps-lang-btn" id="peps-btn-lang-ar" data-lang="ar" onclick="window.profepsSetLang('ar')">عربي</button>
+        <div class="atlas-nav-search" role="search">
+          <svg class="atlas-nav-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="search" id="atlasSearchInput" class="atlas-nav-search-input" placeholder="OP 2009, Handball, VMA…" aria-label="Rechercher une ressource EPS ou OP" autocomplete="off">
+          <div id="atlasSearchDropdown" class="atlas-search-dropdown" role="listbox" aria-label="Suggestions de recherche"></div>
         </div>
-        <button type="button" class="peps-nav-toggle" id="pepsNavToggle" aria-label="Menu Mobile">
+
+        <button type="button" class="atlas-theme-toggle" id="atlasThemeToggle" onclick="window.profepsToggleTheme && window.profepsToggleTheme()" aria-label="Basculer le mode sombre ou clair" title="Mode sombre / Mode clair">
+          <svg id="atlasThemeIconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg id="atlasThemeIconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <span class="atlas-theme-label" id="atlasThemeLabel">Mode nuit</span>
+        </button>
+
+        <button type="button" class="peps-nav-toggle" id="pepsNavToggle" aria-label="Ouvrir le menu">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
   </div>
-  <!-- ================= CRMEF DISCIPLINE STICKY SUBNAV ================= -->
-  <div class="peps-crmef-subnav" role="navigation" aria-label="Sous-navigation des Disciplines CRMEF">
-    <div class="peps-crmef-subnav-inner">
-      <div class="peps-crmef-pills-grid">
-        <a href="concours-crmef-hub.html" data-subnav-key="hub" class="peps-subnav-pill">🏛️ Hub National</a>
-        <a href="qcm-didactique-eps-maroc.html" data-subnav-key="eps" class="peps-subnav-pill peps-pill-eps">🏃 EPS</a>
-        <a href="qcm-sciences-education-crmef.html" data-subnav-key="se" class="peps-subnav-pill">📚 Tronc Commun</a>
-        <a href="qcm-didactique-primaire-maroc.html" data-subnav-key="primaire" class="peps-subnav-pill">🎒 Primaire</a>
-        <a href="qcm-didactique-maths-maroc.html" data-subnav-key="maths" class="peps-subnav-pill">📐 Maths</a>
-        <a href="qcm-didactique-physique-chimie-maroc.html" data-subnav-key="pc" class="peps-subnav-pill">⚛️ Physique-Chimie</a>
-        <a href="qcm-didactique-svt-maroc.html" data-subnav-key="svt" class="peps-subnav-pill">🌿 SVT</a>
-        <a href="qcm-didactique-francais-maroc.html" data-subnav-key="francais" class="peps-subnav-pill">🇫🇷 Français</a>
-        <a href="qcm-didactique-arabe-maroc.html" data-subnav-key="arabe" class="peps-subnav-pill active">🇲🇦 Arabe</a>
-        <a href="qcm-didactique-histoire-geographie-maroc.html" data-subnav-key="hg" class="peps-subnav-pill">🌍 Histoire-Géo</a>
-        <a href="qcm-didactique-philosophie-maroc.html" data-subnav-key="philo" class="peps-subnav-pill">💭 Philosophie</a>
-        <a href="qcm-didactique-informatique-maroc.html" data-subnav-key="info" class="peps-subnav-pill">💻 Informatique</a>
-        <a href="qcm-didactique-anglais-maroc.html" data-subnav-key="anglais" class="peps-subnav-pill">🇬🇧 Anglais</a>
-        <a href="qcm-didactique-education-islamique-maroc.html" data-subnav-key="islam" class="peps-subnav-pill">🕌 Éduc. Islamique</a>
-        <a href="qcm-didactique-economie-gestion-maroc.html" data-subnav-key="eco" class="peps-subnav-pill">📊 Éco-Gestion</a>
-      </div>
-      <div class="flex items-center justify-center gap-1.5 bg-slate-100/90 p-1 rounded-lg border border-slate-200/80 text-xs">
-        <a href="qcm-didactique-arabe-maroc.html" class="px-3 py-1 rounded-md font-black transition-all bg-[#991b1b] text-white shadow-2xs">
-          📘 Didactique
-        </a>
-        <a href="qcm-specialite-arabe-maroc.html" class="px-3 py-1 rounded-md font-black transition-all text-slate-600 hover:text-slate-900">
-          📗 Spécialité
-        </a>
-      </div>
-    </div>
-  </div>
+
 <script id="profeps-master-unifier-js">
 (function() {
-  function initPepsDropdown() {
-    var dropdown = document.getElementById('pepsCalcDropdown');
-    var dropdownMenu = document.getElementById('pepsDropdownMenu');
-    var closeTimeout = null;
+  var dummyAuth = {
+    getSession: function() { return Promise.resolve({ data: { session: null }, error: null }); },
+    getUser: function() { return Promise.resolve({ data: { user: null }, error: null }); },
+    onAuthStateChange: function() { return { data: { subscription: { unsubscribe: function() {} } } }; },
+    signOut: function() { return Promise.resolve({ error: null }); }
+  };
+  var dummyClient = {
+    auth: dummyAuth,
+    from: function() {
+      return {
+        select: function() { return Promise.resolve({ data: [], error: null }); },
+        insert: function() { return Promise.resolve({ data: null, error: null }); },
+        update: function() { return Promise.resolve({ data: null, error: null }); },
+        delete: function() { return Promise.resolve({ data: null, error: null }); }
+      };
+    }
+  };
+  window.supabase = window.supabase || { createClient: function() { return dummyClient; } };
+  window.supabaseClient = window.supabaseClient || dummyClient;
+  window.ProfEPS = window.ProfEPS || { getSupabase: function() { return dummyClient; }, saveGeneration: function() { return Promise.resolve(); } };
 
-    function openDropdown() {
-      if (closeTimeout) { clearTimeout(closeTimeout); closeTimeout = null; }
-      if (dropdown) dropdown.classList.add('open');
+  function syncThemeUI(theme) {
+    var moon = document.getElementById('atlasThemeIconMoon');
+    var sun = document.getElementById('atlasThemeIconSun');
+    var label = document.getElementById('atlasThemeLabel');
+    if (theme === 'dark') {
+      if (moon) moon.style.display = 'none';
+      if (sun) sun.style.display = 'block';
+      if (label) label.textContent = 'Mode clair';
+    } else {
+      if (moon) moon.style.display = 'block';
+      if (sun) sun.style.display = 'none';
+      if (label) label.textContent = 'Mode nuit';
     }
-    function closeDropdown() {
-      closeTimeout = setTimeout(function() {
-        if (dropdown) dropdown.classList.remove('open');
-      }, 150);
-    }
-
-    if (dropdown) {
-      dropdown.addEventListener('mouseenter', openDropdown);
-      dropdown.addEventListener('mouseleave', closeDropdown);
-    }
-    if (dropdownMenu) {
-      dropdownMenu.addEventListener('mouseenter', openDropdown);
-      dropdownMenu.addEventListener('mouseleave', closeDropdown);
-    }
-
-    // Support tactile & clic
-    var trigger = document.getElementById('pepsDropdownTrigger');
-    if (trigger) {
-      trigger.addEventListener('click', function(e) {
-        if (window.innerWidth <= 1024) {
-          e.preventDefault();
-          if (dropdown) dropdown.classList.toggle('open');
-        }
-      });
-    }
-
-    // Interaction fluide des pastilles de disciplines sur le Hub CRMEF
-    document.querySelectorAll('.peps-subnav-pill').forEach(function(pill) {
-      pill.addEventListener('click', function() {
-        var href = pill.getAttribute('href') || '';
-        if (href.charAt(0) === '#') {
-          document.querySelectorAll('.peps-subnav-pill').forEach(function(p) {
-            p.classList.remove('active');
-          });
-          pill.classList.add('active');
-          var searchInput = document.getElementById('specialty-search');
-          if (searchInput && searchInput.value) {
-            searchInput.value = '';
-            if (typeof window.filterSpecialties === 'function') window.filterSpecialties();
-          }
-        }
-      });
-    });
   }
 
-  // Hamburger mobile
-  var navToggle = document.getElementById('pepsNavToggle');
-  var navMenu = document.getElementById('pepsNavMenu');
-  if (navToggle && navMenu) {
-    navToggle.addEventListener('click', function() {
-      navToggle.classList.toggle('active');
-      navMenu.classList.toggle('active');
-      if (navMenu.classList.contains('active')) {
-        navMenu.style.display = 'flex';
-        navMenu.style.position = 'fixed';
-        navMenu.style.top = '80px';
-        navMenu.style.left = '0';
-        navMenu.style.right = '0';
-        navMenu.style.background = '#ffffff';
-        navMenu.style.flexDirection = 'column';
-        navMenu.style.padding = '1.5rem';
-        navMenu.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)';
-        navMenu.style.zIndex = '2147483005';
-      } else {
-        navMenu.style.display = '';
-      }
-    });
+  window.profepsToggleTheme = function() {
+    var current = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    if (next === 'dark') document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
+    try { localStorage.setItem('profeps_theme', next); } catch (e) {}
+    syncThemeUI(next);
+  };
+
+  syncThemeUI(document.documentElement.getAttribute('data-theme') || 'light');
+
+  var dropdown = document.getElementById('pepsCalcDropdown');
+  var dropdownMenu = document.getElementById('pepsDropdownMenu');
+  var closeTimer = null;
+  function openDropdown() {
+    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+    if (dropdown) dropdown.classList.add('open');
+  }
+  function closeDropdownDelayed() {
+    if (closeTimer) clearTimeout(closeTimer);
+    closeTimer = setTimeout(function() {
+      if (dropdown) dropdown.classList.remove('open');
+    }, 180);
+  }
+  if (dropdown) {
+    dropdown.addEventListener('mouseenter', openDropdown);
+    dropdown.addEventListener('mouseleave', closeDropdownDelayed);
+  }
+  if (dropdownMenu) {
+    dropdownMenu.addEventListener('mouseenter', openDropdown);
+    dropdownMenu.addEventListener('mouseleave', closeDropdownDelayed);
   }
 
-  // Scroll Navbar Effect
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      var dd = document.getElementById('pepsCalcDropdown');
-      var dm = document.getElementById('pepsDropdownMenu');
-      if (dd) dd.classList.remove('open');
-      if (dm) {
-        dm.style.removeProperty('opacity');
-        dm.style.removeProperty('visibility');
-        dm.style.removeProperty('pointer-events');
-        dm.style.removeProperty('transform');
-      }
+  document.addEventListener('click', function(e) {
+    var t = e.target;
+    if (t && t.closest && t.closest('#pepsNavToggle')) {
       var toggleBtn = document.getElementById('pepsNavToggle');
       var navMenuEl = document.getElementById('pepsNavMenu');
       if (toggleBtn && navMenuEl) {
-        toggleBtn.classList.remove('active');
-        navMenuEl.classList.remove('active');
+        toggleBtn.classList.toggle('active');
+        navMenuEl.classList.toggle('active');
       }
     }
   });
-
-  window.addEventListener('scroll', function() {
-    var nav = document.getElementById('pepsNavbar');
-    if (nav) {
-      if (window.scrollY > 30) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
-    }
-  });
-
-  // Sélecteur de langue universel
-  var nativeLang = ((document.documentElement.getAttribute('lang') || 'fr').toLowerCase().slice(0, 2));
-  var nativeDir = document.documentElement.getAttribute('dir') || (nativeLang === 'ar' ? 'rtl' : 'ltr');
-
-  window.profepsSetLang = function(lang, isAutoInit) {
-    if (!isAutoInit) {
-      try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
-    }
-    ['fr', 'en', 'ar'].forEach(function(code) {
-      var btn = document.getElementById('peps-btn-lang-' + code);
-      if (btn) btn.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
-      document.querySelectorAll('.peps-lang-btn[data-lang="' + code + '"]').forEach(function(b) {
-        b.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
-      });
-    });
-    document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function(el) {
-      var val = el.getAttribute('data-i18n-' + lang);
-      if (val) el.textContent = val;
-    });
-    if (typeof window.setToolLang === 'function') window.setToolLang(lang);
-    if (typeof window.changeLang === 'function') window.changeLang(lang);
-    if (typeof window.setLanguage === 'function') window.setLanguage(lang);
-    var hasBodyI18n = (
-      typeof window.setToolLang === 'function' ||
-      typeof window.changeLang === 'function' ||
-      typeof window.setLanguage === 'function' ||
-      document.querySelector('main [data-i18n-ar], .hero [data-i18n-ar], .vma-hero [data-i18n-ar]') !== null
-    );
-    if (hasBodyI18n) {
-      document.documentElement.lang = lang;
-      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-    } else {
-      document.documentElement.lang = nativeLang;
-      document.documentElement.dir = nativeDir;
-    }
-  };
-
-  var saved = nativeLang === 'ar' ? 'ar' : 'fr';
-  try {
-    var storedLang = localStorage.getItem('profeps_lang');
-    if (nativeLang === 'ar') {
-      saved = 'ar';
-    } else if (storedLang) {
-      saved = storedLang;
-    }
-  } catch(e) {}
-  if (saved && (saved !== 'fr' || nativeLang === 'ar')) {
-    if (document.readyState === 'loading') {
-      window.addEventListener('DOMContentLoaded', function() { window.profepsSetLang(saved, true); });
-    } else {
-      window.profepsSetLang(saved, true);
-    }
-  }
 })();
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->
@@ -1758,87 +1697,66 @@
   <footer class="footer" id="profeps-unified-footer">
     <div class="footer-container">
       <div class="footer-grid">
-        <div class="footer-brand">
-          <img src="/images/prof_eps.webp" width="150" height="46" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/images/prof_eps.png';" alt="Prof EPS Maroc" style="height:46px !important;max-height:46px !important;width:auto !important;max-width:155px !important;object-fit:contain !important;display:block !important;">
-          <p data-i18n-fr="La plateforme de référence pour les professeurs d'EPS et candidats aux concours de l'enseignement au Maroc. Générateur pédagogique, calculateurs sportifs et préparation CRMEF." data-i18n-en="The reference platform for PE teachers and CRMEF candidates in Morocco. Educational generator, sports calculators &amp; official curriculum-aligned quizzes." data-i18n-ar="المنصة المرجعية لأساتذة التربية البدنية والمترشحين لمباريات التعليم بالمغرب. مولد وثائق تربوية، حاسبات رياضية واستعداد لمباراة التعليم.">La plateforme de référence pour les professeurs d'EPS et candidats aux concours de l'enseignement au Maroc. Générateur pédagogique, calculateurs sportifs et préparation CRMEF.</p>
-          <div class="footer-stats">
-            <div class="footer-stat-item">
-              <span class="footer-stat-num">16+</span>
-              <span class="footer-stat-lbl" data-i18n-fr="APS couvertes" data-i18n-en="Sports covered" data-i18n-ar="نشاط رياضي">APS couvertes</span>
-            </div>
-            <div class="footer-stat-item">
-              <span class="footer-stat-num">24</span>
-              <span class="footer-stat-lbl" data-i18n-fr="Silos Disciplines" data-i18n-en="Disciplines" data-i18n-ar="تخصصات ومواد">Silos Disciplines</span>
-            </div>
-            <div class="footer-stat-item">
-              <span class="footer-stat-num">100%</span>
-              <span class="footer-stat-lbl" data-i18n-fr="Gratuit" data-i18n-en="Free" data-i18n-ar="مجاني">Gratuit</span>
-            </div>
+        <!-- Col 1: Qui est derrière ProfEPS -->
+        <div class="footer-brand" style="display:flex;flex-direction:column;align-items:flex-start;gap:0.75rem;">
+          <a href="/" class="peps-nav-logo" style="color:#FFFFFF !important;">
+            <span class="peps-nav-logo-mark" aria-hidden="true">PE</span>
+            <span class="peps-nav-logo-text" style="color:#FFFFFF;">Prof<span style="color:#FFB300;">EPS</span>.ma</span>
+          </a>
+          <p style="font-size:0.9rem;color:#9AA6C4;line-height:1.6;margin:0;">
+            Créé par <strong style="color:#E8ECFA;">Abdelkhalek ELBOUDANI</strong>, professeur d'EPS au Maroc. Tout pour préparer ta séance, télécharger les documents du ministère (OP 2007, 2009 et 2021) et réussir le concours CRMEF.
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.65rem;margin-top:0.25rem;">
+            <a href="/a-propos.html" style="font-size:0.84rem;font-weight:700;color:#FFB300 !important;text-decoration:none;">Qui est derrière ProfEPS ? →</a>
           </div>
         </div>
 
+        <!-- Col 2: Sports, Cycles & Outils -->
         <div class="footer-col">
-          <p class="footer-col-title" data-i18n-fr="NAVIGATION" data-i18n-en="NAVIGATION" data-i18n-ar="تصفح الموقع">NAVIGATION</p>
+          <p class="footer-col-title">Sports, Cycles &amp; Outils</p>
           <ul>
-            <li><a href="/" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a></li>
-            <li><a href="concours-crmef-hub.html" data-i18n-fr="Préparation CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparation CRMEF</a></li>
-            <li><a href="generateur.html" data-i18n-fr="Générateur PDF" data-i18n-en="PDF Generator" data-i18n-ar="مولد الوثائق PDF">Générateur PDF</a></li>
-            <li><a href="blog.html" data-i18n-fr="Articles &amp; Blog" data-i18n-en="Articles &amp; Blog" data-i18n-ar="المقالات والمدونة">Articles &amp; Blog</a></li>
-            <li><a href="bibliotheque-numerique-eps.html" data-i18n-fr="Bibliothèque EPS" data-i18n-en="PE Digital Library" data-i18n-ar="المكتبة الرقمية">Bibliothèque EPS</a></li>
-            <li><a href="a-propos.html" data-i18n-fr="À propos" data-i18n-en="About Us" data-i18n-ar="من نحن">À propos</a></li>
-            <li><a href="hub-aps-sports-eps-maroc.html" data-i18n-fr="Hub des Sports &amp; APS" data-i18n-en="Sports &amp; PE Hub" data-i18n-ar="بوابة الرياضات والأنشطة البدنية">Hub des Sports &amp; APS</a></li>
+            <li><a href="/generateur.html">Prépare ta séance (Générateur Word/PDF)</a></li>
+            <li><a href="/bibliotheque-numerique-eps.html">13 Sports : Cycles, Fiches &amp; Grilles</a></li>
+            <li><a href="/orientations-pedagogiques-eps-2007-2009.html">OP EPS 2009 (Collège) &amp; 2007 (Lycée)</a></li>
+            <li><a href="/calculateur-vma.html">Calculateur VMA &amp; Groupes de besoin</a></li>
+            <li><a href="/calculateur-frequence-cardiaque-karvonen.html">Fréquence Cardiaque (Karvonen)</a></li>
+            <li><a href="/calculateur-charge-rpe-foster-acwr.html">Charge RPE Foster &amp; ACWR</a></li>
+            <li><a href="/hub-outils-sport-performance.html">Tous les calculateurs sportifs</a></li>
           </ul>
         </div>
 
+        <!-- Col 3: Orientations Pédagogiques & Concours -->
         <div class="footer-col" id="footer-col-crmef">
-          <p class="footer-col-title" data-i18n-fr="HUB CONCOURS CRMEF" data-i18n-en="CRMEF EXAM HUB" data-i18n-ar="بوابة مباراة التعليم">HUB CONCOURS CRMEF</p>
-          <ul class="footer-crmef-grid">
-            <li class="footer-crmef-hub-item"><a href="concours-crmef-hub.html" class="footer-hub-highlight" data-i18n-fr="★ Hub Concours CRMEF (Toutes Filières)" data-i18n-en="★ CRMEF Exam Hub (All Specialties)" data-i18n-ar="★ بوابة مباراة التعليم (جميع التخصصات)">★ Hub Concours CRMEF (Toutes Filières)</a></li>
-            <li><a href="qcm-sciences-education-crmef.html" data-i18n-fr="Tronc Commun (SE)" data-i18n-en="Education Sciences" data-i18n-ar="علوم التربية">Tronc Commun (SE)</a></li>
-            <li><a href="qcm-didactique-eps-maroc.html" data-i18n-fr="EPS (Sport)" data-i18n-en="PE &amp; Sport" data-i18n-ar="التربية البدنية">EPS (Sport)</a></li>
-            <li><a href="qcm-didactique-primaire-maroc.html" data-i18n-fr="Primaire (TaRL)" data-i18n-en="Primary (TaRL)" data-i18n-ar="التعليم الابتدائي">Primaire (TaRL)</a></li>
-            <li><a href="qcm-didactique-maths-maroc.html" data-i18n-fr="Mathématiques" data-i18n-en="Mathematics" data-i18n-ar="الرياضيات">Mathématiques</a></li>
-            <li><a href="qcm-didactique-physique-chimie-maroc.html" data-i18n-fr="Physique-Chimie" data-i18n-en="Physics &amp; Chemistry" data-i18n-ar="الفيزياء والكيمياء">Physique-Chimie</a></li>
-            <li><a href="qcm-didactique-svt-maroc.html" data-i18n-fr="SVT" data-i18n-en="Life &amp; Earth Sciences" data-i18n-ar="علوم الحياة والأرض">SVT</a></li>
-            <li><a href="qcm-didactique-francais-maroc.html" data-i18n-fr="Français" data-i18n-en="French" data-i18n-ar="اللغة الفرنسية">Français</a></li>
-            <li><a href="qcm-didactique-arabe-maroc.html" data-i18n-fr="Arabe" data-i18n-en="Arabic" data-i18n-ar="اللغة العربية">Arabe</a></li>
-            <li><a href="qcm-didactique-histoire-geographie-maroc.html" data-i18n-fr="Histoire-Géo" data-i18n-en="History &amp; Geography" data-i18n-ar="التاريخ والجغرافيا">Histoire-Géo</a></li>
-            <li><a href="qcm-didactique-philosophie-maroc.html" data-i18n-fr="Philosophie" data-i18n-en="Philosophy" data-i18n-ar="الفلسفة">Philosophie</a></li>
-            <li><a href="qcm-didactique-informatique-maroc.html" data-i18n-fr="Informatique" data-i18n-en="Computer Science" data-i18n-ar="الإعلاميات">Informatique</a></li>
-            <li><a href="qcm-didactique-anglais-maroc.html" data-i18n-fr="Anglais" data-i18n-en="English" data-i18n-ar="اللغة الإنجليزية">Anglais</a></li>
-            <li><a href="qcm-didactique-education-islamique-maroc.html" data-i18n-fr="Éduc. Islamique" data-i18n-en="Islamic Education" data-i18n-ar="التربية الإسلامية">Éduc. Islamique</a></li>
-            <li><a href="qcm-didactique-economie-gestion-maroc.html" data-i18n-fr="Éco-Gestion" data-i18n-en="Economics &amp; Mgmt" data-i18n-ar="الاقتصاد والتدبير">Éco-Gestion</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col" id="footer-col-calculators">
-          <p class="footer-col-title" data-i18n-fr="CALCULATEURS SPORT" data-i18n-en="SPORTS CALCULATORS" data-i18n-ar="الحاسبات الرياضية">CALCULATEURS SPORT</p>
+          <p class="footer-col-title">OP &amp; Concours CRMEF</p>
           <ul>
-            <li><a href="hub-outils-sport-performance.html" class="footer-hub-highlight" data-i18n-fr="★ Hub Tous les Calculateurs" data-i18n-en="★ All Calculators Hub" data-i18n-ar="★ بوابة جميع الحاسبات الرياضية">★ Hub Tous les Calculateurs</a></li>
-            <li><a href="calculateur-vma.html" data-i18n-fr="Calculateur VMA" data-i18n-en="MAS (VMA) Calculator" data-i18n-ar="حاسبة السرعة VMA">Calculateur VMA</a></li>
-            <li><a href="calculateur-vdot-asr-endurance.html" data-i18n-fr="Calculateur VO2 Max &amp; VDOT" data-i18n-en="VO2 Max &amp; VDOT" data-i18n-ar="حاسبة VO2 Max و VDOT">Calculateur VO2 Max &amp; VDOT</a></li>
-            <li><a href="calculateur-asr-reserve-vitesse.html" data-i18n-fr="Réserve Anaérobie (ASR)" data-i18n-en="Speed Reserve (ASR)" data-i18n-ar="احتياطي السرعة ASR">Réserve Anaérobie (ASR)</a></li>
-            <li><a href="calculateur-frequence-cardiaque-karvonen.html" data-i18n-fr="Fréquence Cardiaque Karvonen" data-i18n-en="Heart Rate (Karvonen)" data-i18n-ar="نبضات القلب Karvonen">Fréquence Cardiaque Karvonen</a></li>
-            <li><a href="calculateur-charge-rpe-foster-acwr.html" data-i18n-fr="Charge RPE Foster &amp; ACWR" data-i18n-en="Foster RPE &amp; ACWR" data-i18n-ar="حمل التدريب RPE و ACWR">Charge RPE Foster &amp; ACWR</a></li>
+            <li><a href="/orientations-pedagogiques-toutes-matieres.html">Toutes les Orientations Pédagogiques (34 PDF)</a></li>
+            <li><a href="/orientations-pedagogiques-primaire-2021.html">Curriculum Enseignement Primaire 2021</a></li>
+            <li><a href="/concours-crmef-hub.html">Préparation Concours CRMEF (Toutes matières)</a></li>
+            <li><a href="/qcm-sciences-education-crmef.html">QCM Sciences de l'Éducation (340 questions)</a></li>
+            <li><a href="/qcm-didactique-eps-maroc.html">QCM Didactique &amp; Spécialité EPS</a></li>
+            <li><a href="/qcm-didactique-maths-maroc.html">QCM Mathématiques, PC &amp; SVT</a></li>
+            <li><a href="/qcm-didactique-arabe-maroc.html">QCM Arabe, Français &amp; Langues</a></li>
           </ul>
         </div>
 
+        <!-- Col 4: Journal, À propos & Légal -->
         <div class="footer-col">
-          <p class="footer-col-title" data-i18n-fr="LÉGAL &amp; CONTACT" data-i18n-en="LEGAL &amp; CONTACT" data-i18n-ar="قانوني واتصل بنا">LÉGAL &amp; CONTACT</p>
+          <p class="footer-col-title">Le Projet &amp; Contact</p>
           <ul>
-            <li><a href="mentions-legales.html" data-i18n-fr="Mentions légales" data-i18n-en="Legal Notice" data-i18n-ar="إشعار قانوني">Mentions légales</a></li>
-            <li><a href="politique-confidentialite.html" data-i18n-fr="Politique de confidentialité" data-i18n-en="Privacy Policy" data-i18n-ar="سياسة الخصوصية">Politique de confidentialité</a></li>
-            <li><a href="cgu.html" data-i18n-fr="Conditions d'utilisation" data-i18n-en="Terms of Use" data-i18n-ar="شروط الاستخدام">Conditions d'utilisation</a></li>
-            <li><a href="contact.html" data-i18n-fr="Nous contacter" data-i18n-en="Contact Us" data-i18n-ar="اتصل بنا">Nous contacter</a></li>
-            <li><a href="mailto:profepsma@gmail.com">✉️ profepsma@gmail.com</a></li>
+            <li><a href="/a-propos.html">Qui sommes-nous (Abdelkhalek ELBOUDANI)</a></li>
+            <li><a href="/blog.html">Journal &amp; Articles de terrain</a></li>
+            <li><a href="/contact.html">Nous écrire / Signaler une erreur</a></li>
+            <li><a href="mailto:profepsma@gmail.com">profepsma@gmail.com</a></li>
+            <li><a href="/mentions-legales.html">Mentions légales</a></li>
+            <li><a href="/politique-confidentialite.html">Politique de confidentialité</a></li>
+            <li><a href="/cgu.html">Conditions d'utilisation</a></li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <span data-i18n-fr="© 2026 Prof EPS Maroc (profeps.ma). Tous droits réservés." data-i18n-en="© 2026 Prof EPS Morocco (profeps.ma). All rights reserved." data-i18n-ar="© 2026 أستاذ التربية البدنية المغرب (profeps.ma). جميع الحقوق محفوظة.">© 2026 Prof EPS Maroc (profeps.ma). Tous droits réservés.</span>
-        <span data-i18n-fr="Fait avec ❤️ pour les enseignants et candidats CRMEF au Maroc" data-i18n-en="Made with ❤️ for teachers &amp; candidates in Morocco" data-i18n-ar="صنع بـ ❤️ لأساتذة التربية البدنية والمترشحين بالمغرب">Fait avec ❤️ pour les enseignants et candidats CRMEF au Maroc</span>
-        <span style="display:block;width:100%;font-size:0.74rem;color:#94a3b8;margin-top:0.35rem;">Portail pédagogique indépendant conforme aux OP 2007 (Lycée), OP 2009 (Collège) et au Cadre Référentiel CNEE — Non affilié au MENPS.</span>
+        <span>© 2026 ProfEPS.ma — Fondé sur les OP 2007 (Lycée), OP 2009 (Collège) et le Curriculum 2021.</span>
+        <span>Initiative pédagogique indépendante créée par un enseignant d'EPS au Maroc — Non affiliée au ministère.</span>
       </div>
     </div>
   </footer>
