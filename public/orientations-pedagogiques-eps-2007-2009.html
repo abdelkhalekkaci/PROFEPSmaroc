@@ -19,8 +19,8 @@
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://profeps.ma/orientations-pedagogiques-eps-2007-2009.html">
   <link rel="alternate" hreflang="fr-MA" href="https://profeps.ma/orientations-pedagogiques-eps-2007-2009.html">
-  <link rel="alternate" hreflang="ar-MA" href="https://profeps.ma/ar-orientations-pedagogiques-eps-maroc.html">
-    <link rel="alternate" hreflang="ar" href="https://profeps.ma/ar-orientations-pedagogiques-eps-maroc.html">
+  <link rel="alternate" hreflang="ar-MA" href="https://profeps.ma/ar-orientations-pedagogiques-eps-2007-2009.html">
+    <link rel="alternate" hreflang="ar" href="https://profeps.ma/ar-orientations-pedagogiques-eps-2007-2009.html">
     <link rel="alternate" hreflang="x-default" href="https://profeps.ma/orientations-pedagogiques-eps-2007-2009.html">
 
   <!-- OpenGraph & Twitter Cards -->
@@ -39,6 +39,7 @@
   </style>
 <script src="profeps-cmp.js" defer></script>
   <script src="profeps-communaute.js" defer></script>
+<link rel="stylesheet" href="/css/profeps-crmef-unifier.min.css?v=20261101">
 <link rel="stylesheet" href="/css/profeps-unifier.min.css?v=20261101">
 
 <style id="profeps-phase3-dark-to-soft-light">
@@ -205,6 +206,7 @@
           </div>
         </div>
         <a href="concours-crmef-hub.html" class="peps-nav-link" data-i18n-fr="Préparation CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparation CRMEF</a>
+        <a href="orientations-pedagogiques-toutes-matieres.html" class="peps-nav-link active" data-i18n-fr="Orientations Pédagogiques" data-i18n-en="Pedagogical Guidelines" data-i18n-ar="التوجيهات التربوية">Orientations Pédagogiques</a>
         <a href="blog.html" class="peps-nav-link" data-i18n-fr="Blog" data-i18n-en="Blog" data-i18n-ar="المدونة">Blog</a>
       </div>
       <div class="peps-nav-right">
@@ -221,65 +223,34 @@
       </div>
     </div>
   </div>
+
 <script id="profeps-master-unifier-js">
 (function() {
-  // Stub silencieux au cas où un ancien script de page appelle encore window.supabase
-  var dummyAuth = {
-    getSession: function() { return Promise.resolve({ data: { session: null }, error: null }); },
-    getUser: function() { return Promise.resolve({ data: { user: null }, error: null }); },
-    onAuthStateChange: function() { return { data: { subscription: { unsubscribe: function() {} } } }; },
-    signOut: function() { return Promise.resolve({ error: null }); }
-  };
-  var dummyClient = {
-    auth: dummyAuth,
-    from: function() {
-      return {
-        select: function() { return Promise.resolve({ data: [], error: null }); },
-        insert: function() { return Promise.resolve({ data: null, error: null }); },
-        update: function() { return Promise.resolve({ data: null, error: null }); },
-        delete: function() { return Promise.resolve({ data: null, error: null }); }
-      };
-    }
-  };
-  window.supabase = { createClient: function() { return dummyClient; } };
-  window.supabaseClient = dummyClient;
-  window.ProfEPS = window.ProfEPS || { getSupabase: function() { return dummyClient; }, saveGeneration: function() { return Promise.resolve(); } };
-
   var dropdown = document.getElementById('pepsCalcDropdown');
   var dropdownMenu = document.getElementById('pepsDropdownMenu');
   var closeTimer = null;
-
   function openDropdown() {
-    if (closeTimer) {
-      clearTimeout(closeTimer);
-      closeTimer = null;
-    }
-    var dd = document.getElementById('pepsCalcDropdown');
-    var dm = document.getElementById('pepsDropdownMenu');
-    if (dd) dd.classList.add('open');
-    if (dm) {
-      dm.style.setProperty('opacity', '1', 'important');
-      dm.style.setProperty('visibility', 'visible', 'important');
-      dm.style.setProperty('pointer-events', 'auto', 'important');
-      dm.style.setProperty('transform', 'translateX(-50%) translateY(0)', 'important');
+    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+    if (dropdown) dropdown.classList.add('open');
+    if (dropdownMenu) {
+      dropdownMenu.style.setProperty('opacity', '1', 'important');
+      dropdownMenu.style.setProperty('visibility', 'visible', 'important');
+      dropdownMenu.style.setProperty('pointer-events', 'auto', 'important');
+      dropdownMenu.style.setProperty('transform', 'translateX(-50%) translateY(0)', 'important');
     }
   }
-
   function closeDropdownDelayed() {
     if (closeTimer) clearTimeout(closeTimer);
     closeTimer = setTimeout(function() {
-      var dd = document.getElementById('pepsCalcDropdown');
-      var dm = document.getElementById('pepsDropdownMenu');
-      if (dd) dd.classList.remove('open');
-      if (dm) {
-        dm.style.removeProperty('opacity');
-        dm.style.removeProperty('visibility');
-        dm.style.removeProperty('pointer-events');
-        dm.style.removeProperty('transform');
+      if (dropdown) dropdown.classList.remove('open');
+      if (dropdownMenu) {
+        dropdownMenu.style.removeProperty('opacity');
+        dropdownMenu.style.removeProperty('visibility');
+        dropdownMenu.style.removeProperty('pointer-events');
+        dropdownMenu.style.removeProperty('transform');
       }
     }, 180);
   }
-
   if (dropdown) {
     dropdown.addEventListener('mouseenter', openDropdown);
     dropdown.addEventListener('mouseleave', closeDropdownDelayed);
@@ -288,75 +259,6 @@
     dropdownMenu.addEventListener('mouseenter', openDropdown);
     dropdownMenu.addEventListener('mouseleave', closeDropdownDelayed);
   }
-
-  // Délégation globale en renfort pour garantir l'ouverture au survol sur 100 % des pages
-  document.addEventListener('mouseover', function(e) {
-    var t = e.target;
-    if (t && t.closest && (t.closest('#pepsCalcDropdown') || t.closest('#pepsDropdownMenu'))) {
-      openDropdown();
-    }
-  });
-  document.addEventListener('mouseout', function(e) {
-    var t = e.target;
-    if (t && t.closest && (t.closest('#pepsCalcDropdown') || t.closest('#pepsDropdownMenu'))) {
-      var rel = e.relatedTarget;
-      if (!rel || !rel.closest || (!rel.closest('#pepsCalcDropdown') && !rel.closest('#pepsDropdownMenu'))) {
-        closeDropdownDelayed();
-      }
-    }
-  });
-
-  // Supprimer tout ancien <nav class="navbar"> résiduel ET tout bouton traducteur en doublon dans le contenu
-  function cleanPageDuplicates() {
-    document.querySelectorAll('nav.navbar:not(.navbar-decoy), .navbar:not(.navbar-decoy)').forEach(function(oldNav) {
-      if (oldNav.id !== 'pepsNavbar') {
-        if (oldNav.parentNode) oldNav.parentNode.removeChild(oldNav);
-      }
-    });
-    document.querySelectorAll('.lang-switch:not(.peps-lang-switch), .in-page-lang-switch, #btn-lang-fr, #btn-lang-en, #btn-lang-ar, button[onclick*="setToolLang"], button[onclick*="changeLang"], button.lang-btn:not(.peps-lang-btn)').forEach(function(el) {
-      if (!el.closest || !el.closest('#pepsNavbar')) {
-        var wrapper = el.closest ? (el.closest('.lang-switch, .in-page-lang-switch, [aria-label="Language selection"], [title*="Traduction"]') || el) : el;
-        if (wrapper === el && el.parentNode && el.parentNode.tagName === 'DIV') {
-          var parentTxt = (el.parentNode.textContent || '').trim();
-          if (parentTxt.length <= 50 && (!el.parentNode.closest || !el.parentNode.closest('#pepsNavbar'))) {
-            wrapper = el.parentNode;
-          }
-        }
-        if (wrapper && wrapper.parentNode && (!wrapper.closest || !wrapper.closest('#pepsNavbar'))) {
-          wrapper.parentNode.removeChild(wrapper);
-        }
-      }
-    });
-  }
-  cleanPageDuplicates();
-  window.addEventListener('DOMContentLoaded', cleanPageDuplicates);
-  // Nettoyage unique à l'initialisation et au DOMContentLoaded (CLS = 0, zéro surcharge MutationObserver)
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      var dd = document.getElementById('pepsCalcDropdown');
-      var dm = document.getElementById('pepsDropdownMenu');
-      if (dd) dd.classList.remove('open');
-      if (dm) {
-        dm.style.removeProperty('opacity');
-        dm.style.removeProperty('visibility');
-        dm.style.removeProperty('pointer-events');
-        dm.style.removeProperty('transform');
-      }
-      var toggleBtn = document.getElementById('pepsNavToggle');
-      var navMenuEl = document.getElementById('pepsNavMenu');
-      if (toggleBtn && navMenuEl) {
-        toggleBtn.classList.remove('active');
-        navMenuEl.classList.remove('active');
-      }
-    }
-  });
-
-  window.addEventListener('scroll', function() {
-    var n = document.getElementById('pepsNavbar');
-    if (n) n.classList.toggle('scrolled', window.scrollY > 40);
-  });
-
   document.addEventListener('click', function(e) {
     var t = e.target;
     if (t && t.closest && t.closest('#pepsNavToggle')) {
@@ -368,59 +270,17 @@
       }
     }
   });
-
-  var nativeLang = ((document.documentElement.getAttribute('lang') || 'fr').toLowerCase().slice(0, 2));
-  var nativeDir = document.documentElement.getAttribute('dir') || (nativeLang === 'ar' ? 'rtl' : 'ltr');
-
-  window.profepsSetLang = function(lang, isAutoInit) {
-    if (!isAutoInit) {
-      try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
-    }
+  window.profepsSetLang = function(lang) {
+    try { localStorage.setItem('profeps_lang', lang); } catch(e) {}
     ['fr', 'en', 'ar'].forEach(function(code) {
       var btn = document.getElementById('peps-btn-lang-' + code);
       if (btn) btn.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
-      document.querySelectorAll('.peps-lang-btn[data-lang="' + code + '"]').forEach(function(b) {
-        b.className = (code === lang) ? 'peps-lang-btn active' : 'peps-lang-btn';
-      });
     });
     document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function(el) {
       var val = el.getAttribute('data-i18n-' + lang);
       if (val) el.textContent = val;
     });
-    if (typeof window.setToolLang === 'function') window.setToolLang(lang);
-    if (typeof window.changeLang === 'function') window.changeLang(lang);
-    if (typeof window.setLanguage === 'function') window.setLanguage(lang);
-    var hasBodyI18n = (
-      typeof window.setToolLang === 'function' ||
-      typeof window.changeLang === 'function' ||
-      typeof window.setLanguage === 'function' ||
-      document.querySelector('main [data-i18n-ar], .hero [data-i18n-ar], .vma-hero [data-i18n-ar]') !== null
-    );
-    if (hasBodyI18n) {
-      document.documentElement.lang = lang;
-      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-    } else {
-      document.documentElement.lang = nativeLang;
-      document.documentElement.dir = nativeDir;
-    }
   };
-
-  var saved = nativeLang === 'ar' ? 'ar' : 'fr';
-  try {
-    var storedLang = localStorage.getItem('profeps_lang');
-    if (nativeLang === 'ar') {
-      saved = 'ar';
-    } else if (storedLang) {
-      saved = storedLang;
-    }
-  } catch(e) {}
-  if (saved && (saved !== 'fr' || nativeLang === 'ar')) {
-    if (document.readyState === 'loading') {
-      window.addEventListener('DOMContentLoaded', function() { window.profepsSetLang(saved, true); });
-    } else {
-      window.profepsSetLang(saved, true);
-    }
-  }
 })();
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->
@@ -453,7 +313,7 @@
     <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
       
       <!-- Carte OP Collège 2009 -->
-      <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-6 sm:p-7 flex flex-col justify-between hover:border-emerald-500/40 transition">
+      <div id="op-2009" class="bg-slate-900/70 border border-slate-800 rounded-2xl p-6 sm:p-7 flex flex-col justify-between hover:border-emerald-500/40 transition">
         <div class="space-y-4">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 text-xs font-bold uppercase tracking-wider">
             Cycle Collégial (1AC • 2AC • 3AC)
@@ -479,7 +339,7 @@
       </div>
 
       <!-- Carte OP Lycée 2007 -->
-      <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-6 sm:p-7 flex flex-col justify-between hover:border-sky-500/40 transition">
+      <div id="op-2007" class="bg-slate-900/70 border border-slate-800 rounded-2xl p-6 sm:p-7 flex flex-col justify-between hover:border-sky-500/40 transition">
         <div class="space-y-4">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-sky-500/10 text-sky-400 text-xs font-bold uppercase tracking-wider">
             Secondaire Qualifiant (TC • 1BAC • 2BAC)
@@ -850,11 +710,44 @@
           <ul>
             <li><a href="/" data-i18n-fr="Accueil" data-i18n-en="Home" data-i18n-ar="الرئيسية">Accueil</a></li>
             <li><a href="concours-crmef-hub.html" data-i18n-fr="Préparation CRMEF" data-i18n-en="CRMEF Preparation" data-i18n-ar="الاستعداد لمباراة التعليم">Préparation CRMEF</a></li>
+            <li><a href="orientations-pedagogiques-toutes-matieres.html">Orientations Pédagogiques (OP)</a></li>
+            <li><a href="orientations-pedagogiques-primaire-2021.html">Curriculum Enseignement Primaire 2021 (556p PDF)</a></li>
+            <li><a href="orientations-pedagogiques-sciences-ingenieur-lycee-2007.html">OP Sciences de l'Ingénieur STE/STM Lycée 2007 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-arts-appliques-lycee-2007.html">OP Arts Appliqués Lycée 2007 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-education-familiale-college-2009.html">OP Éducation Familiale Collège 2009 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-education-islamique-college-2009.html">OP Éducation Islamique Collège 2009 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-education-islamique-lycee-2007.html">OP Éducation Islamique Lycée 2007 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-economie-gestion-lycee-2007.html">OP Économie &amp; Gestion Lycée 2007 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-informatique-lycee-2007.html">OP Informatique Lycée 2007 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-technologie-industrielle-college-2009.html">OP Technologie Industrielle Collège 2009 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-education-plastique-college-2009.html">OP Éducation Plastique Collège 2009 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-education-musicale-college-2009.html">OP Éducation Musicale Collège 2009 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-philosophie-lycee-2007.html">OP Philosophie Lycée 2007 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-informatique-college-2009.html">OP Informatique Collège 2009 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-histoire-geographie-college-2009.html">OP Histoire-Géographie Collège 2009 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-histoire-geographie-lycee-2007.html">OP Histoire-Géographie Lycée 2007 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-svt-college-2009.html">OP SVT Collège 2009 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-svt-lycee-2007.html">OP SVT Lycée 2007 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-physique-chimie-college-2009.html">OP Physique-Chimie Collège 2009 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-physique-chimie-lycee-2007.html">OP Physique-Chimie Lycée 2007 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-mathematiques-college-2009.html">OP Mathématiques Collège 2009 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-mathematiques-lycee-2007.html">OP Mathématiques Lycée 2007 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-italien-college-2009.html">OP Italien Collège 2009 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-italien-lycee-2007.html">OP Italien Lycée 2007 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-allemand-college-2009.html">OP Allemand Collège 2009 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-allemand-lycee-2007.html">OP Allemand Lycée 2007 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-espagnol-college-2009.html">OP Espagnol Collège 2009 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-espagnol-lycee-2007.html">OP Espagnol Lycée 2007 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-anglais-college-2009.html">OP Anglais Collège 2009 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-anglais-lycee-2007.html">OP Anglais Lycée 2007 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-francais-college-2009.html">OP Français Collège 2009 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-francais-lycee-2007.html">OP Français Lycée 2007 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-arabe-college-2009.html">OP Arabe Collège 2009 (PDF)</a></li>
+            <li><a href="orientations-pedagogiques-arabe-lycee-2007.html">OP Arabe Lycée 2007 (PDF)</a></li>
             <li><a href="generateur.html" data-i18n-fr="Générateur PDF" data-i18n-en="PDF Generator" data-i18n-ar="مولد الوثائق PDF">Générateur PDF</a></li>
             <li><a href="blog.html" data-i18n-fr="Articles &amp; Blog" data-i18n-en="Articles &amp; Blog" data-i18n-ar="المقالات والمدونة">Articles &amp; Blog</a></li>
             <li><a href="bibliotheque-numerique-eps.html" data-i18n-fr="Bibliothèque EPS" data-i18n-en="PE Digital Library" data-i18n-ar="المكتبة الرقمية">Bibliothèque EPS</a></li>
             <li><a href="a-propos.html" data-i18n-fr="À propos" data-i18n-en="About Us" data-i18n-ar="من نحن">À propos</a></li>
-            <li><a href="hub-aps-sports-eps-maroc.html" data-i18n-fr="Hub des Sports &amp; APS" data-i18n-en="Sports &amp; PE Hub" data-i18n-ar="بوابة الرياضات والأنشطة البدنية">Hub des Sports &amp; APS</a></li>
           </ul>
         </div>
 
