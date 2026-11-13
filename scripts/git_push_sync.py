@@ -49,15 +49,18 @@ try:
             for f in os.listdir(sub):
                 if f.lower().endswith((".png", ".jpg", ".jpeg", ".webp")):
                     os.remove(os.path.join(sub, f))
-    # Copy scripts/, docs/, and src/
+    # Copy scripts/, api/, docs/, and src/
     subprocess.run(["cp", "-r", "scripts/.", f"{CLONE_DIR}/scripts/"], check=True)
+    if os.path.exists("api"):
+        os.makedirs(f"{CLONE_DIR}/api", exist_ok=True)
+        subprocess.run(["cp", "-r", "api/.", f"{CLONE_DIR}/api/"], check=True)
     if os.path.exists("docs"):
         os.makedirs(f"{CLONE_DIR}/docs", exist_ok=True)
         subprocess.run(["cp", "-r", "docs/.", f"{CLONE_DIR}/docs/"], check=True)
     if os.path.exists("src"):
         subprocess.run(["cp", "-r", "src/.", f"{CLONE_DIR}/src/"], check=True)
-    # Copy server.js, server.ts, and root configs
-    for cfg in ["server.js", "server.ts", "vercel.json", "package.json", "vite.config.ts", "tsconfig.json", "metadata.json"]:
+    # Copy server.js, server.ts, generateur.html, and root configs
+    for cfg in ["server.js", "server.ts", "generateur.html", "vercel.json", "package.json", "vite.config.ts", "tsconfig.json", "metadata.json"]:
         if os.path.exists(cfg):
             subprocess.run(["cp", cfg, f"{CLONE_DIR}/{cfg}"], check=True)
 

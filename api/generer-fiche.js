@@ -328,11 +328,12 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
         const schema1 = getSchema(aps, 1);
         const schema2 = getSchema(aps, 2);
 
-        // Couleurs site
-        const COLOR_PRIMARY = '#006233';
-        const COLOR_PRIMARY_LIGHT = '#e8f5e9';
-        const COLOR_SECONDARY = '#4a8b5c';
-        const COLOR_ACCENT = '#f5f5f5';
+        // Couleurs site & documents Modern Atlas (sans modifier le format A4)
+        const COLOR_PRIMARY = '#3347D6';       // Majorelle
+        const COLOR_PRIMARY_DEEP = '#2434A8';  // Majorelle Deep
+        const COLOR_PRIMARY_LIGHT = '#EAF0FF'; // Sky
+        const COLOR_SECONDARY = '#0B7A99';     // Cyan Deep
+        const COLOR_ACCENT = '#F8FAFC';
 
         const providerBadges = {
             gemini: '⚡ Généré via Google Gemini Flash',
@@ -342,14 +343,14 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
 
         // ==================== HTML DISPLAY (SITE WEB) ====================
         const htmlDisplay = `
-<div style="font-family:'Segoe UI',Arial,sans-serif;max-width:950px;margin:0 auto;line-height:1.5;">
+<div style="font-family:'Segoe UI',Arial,sans-serif;max-width:950px;margin:0 auto;line-height:1.5;color:#0E1633;">
     <!-- EN-TÊTE -->
-    <div style="background:${COLOR_PRIMARY};color:white;padding:20px 25px;border-radius:12px;margin-bottom:20px;box-shadow:0 4px 15px rgba(0,0,0,0.15);">
+    <div style="background:linear-gradient(135deg, ${COLOR_PRIMARY} 0%, #6D4AFF 100%);color:white;padding:20px 25px;border-radius:12px;margin-bottom:20px;box-shadow:0 4px 15px rgba(51,71,214,0.18);">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
-            <h1 style="margin:0;font-size:1.5rem;font-weight:700;">📋 Fiche de Séance - ${aps}</h1>
-            <span style="background:rgba(255,255,255,0.2);padding:4px 10px;border-radius:20px;font-size:0.75rem;">${providerBadges[providerUsed]}</span>
+            <h1 style="margin:0;font-size:1.5rem;font-weight:700;color:#fff;">📋 Fiche de Séance - ${aps}</h1>
+            <span style="background:rgba(255,255,255,0.2);padding:4px 10px;border-radius:20px;font-size:0.75rem;color:#fff;">${providerBadges[providerUsed]}</span>
         </div>
-        <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:0.9rem;opacity:0.95;">
+        <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:0.9rem;opacity:0.95;color:#fff;">
             <span><strong>📊 Niveau:</strong> ${niveau}</span>
             <span><strong>🔢 Séance:</strong> N°${numeroSeance || 1}</span>
             <span><strong>🏷️ Groupe:</strong> ${groupeAPS}</span>
@@ -358,16 +359,16 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
     </div>
 
     <!-- OBJECTIF DE LA SÉANCE -->
-    <div style="background:${COLOR_PRIMARY_LIGHT};border-left:5px solid ${COLOR_PRIMARY};padding:15px 20px;border-radius:0 12px 12px 0;margin-bottom:20px;box-shadow:0 2px 8px rgba(30,58,95,0.08);">
+    <div style="background:${COLOR_PRIMARY_LIGHT};border-left:5px solid ${COLOR_PRIMARY};padding:15px 20px;border-radius:0 12px 12px 0;margin-bottom:20px;box-shadow:0 2px 8px rgba(51,71,214,0.08);">
         <h2 style="color:${COLOR_PRIMARY};margin:0 0 5px 0;font-size:1rem;display:flex;align-items:center;gap:8px;">
             🎯 OBJECTIF DE LA SÉANCE
-            <span style="font-size:0.75rem;font-weight:normal;color:#666;font-style:italic;">(Ce que l'élève va APPRENDRE)</span>
+            <span style="font-size:0.75rem;font-weight:normal;color:#55607A;font-style:italic;">(Ce que l'élève va APPRENDRE)</span>
         </h2>
-        <p style="margin:0;font-size:1.1rem;font-weight:600;color:#333;">${objectif}</p>
+        <p style="margin:0;font-size:1.1rem;font-weight:600;color:#0E1633;">${objectif}</p>
     </div>
 
     <!-- PARTIE INTRODUCTIVE -->
-    <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:18px 22px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+    <div style="background:#fff;border:1px solid #E4E2DA;border-radius:12px;padding:18px 22px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
         <h2 style="color:${COLOR_PRIMARY};border-bottom:3px solid ${COLOR_PRIMARY};padding-bottom:8px;margin:0 0 15px 0;font-size:1rem;display:flex;align-items:center;gap:8px;">
             📌 PARTIE INTRODUCTIVE
             <span style="background:${COLOR_PRIMARY};color:white;padding:2px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">15 min</span>
@@ -375,7 +376,7 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
         <div style="background:${COLOR_PRIMARY_LIGHT};padding:10px 15px;border-radius:8px;border-left:4px solid ${COLOR_PRIMARY};margin-bottom:12px;">
             <strong style="color:${COLOR_PRIMARY};">🎯 But:</strong> <span style="font-weight:500;">Préparer le corps à l'effort</span>
         </div>
-        <div style="background:#f8f9fa;padding:12px 15px;border-radius:8px;font-size:0.9rem;line-height:1.7;">
+        <div style="background:#F8FAFC;padding:12px 15px;border-radius:8px;font-size:0.9rem;line-height:1.7;">
             <div style="margin-bottom:6px;">• <strong>Prise en main:</strong> Appel, vérification des tenues, présentation de l'objectif, consignes de sécurité</div>
             <div style="margin-bottom:6px;">• <strong>Échauffement général:</strong> Course lente, montées de genoux, talons-fesses, mobilisation articulaire</div>
             <div>• <strong>Échauffement spécifique:</strong> ${echaufSpec}</div>
@@ -383,7 +384,7 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
     </div>
 
     <!-- PARTIE FONDAMENTALE -->
-    <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:18px 22px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+    <div style="background:#fff;border:1px solid #E4E2DA;border-radius:12px;padding:18px 22px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
         <h2 style="color:${COLOR_PRIMARY};border-bottom:3px solid ${COLOR_PRIMARY};padding-bottom:8px;margin:0 0 15px 0;font-size:1rem;display:flex;align-items:center;gap:8px;">
             ⚡ PARTIE FONDAMENTALE
             <span style="background:${COLOR_PRIMARY};color:white;padding:2px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">30 min</span>
@@ -393,13 +394,13 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
         </div>
 
         <!-- SITUATION 1 -->
-        <div style="background:#f8f9fa;border-radius:10px;padding:15px 18px;margin-bottom:18px;border:1px solid #d0d0d0;">
+        <div style="background:#F8FAFC;border-radius:10px;padding:15px 18px;margin-bottom:18px;border:1px solid #E4E2DA;">
             <h3 style="color:${COLOR_PRIMARY};margin:0 0 12px 0;font-size:0.95rem;display:flex;align-items:center;gap:8px;">
                 <span style="background:${COLOR_PRIMARY};color:white;padding:3px 10px;border-radius:6px;font-size:0.7rem;font-weight:700;">${isTest ? 'SITUATION DE RÉFÉRENCE' : 'SIT 1'}</span>
                 ${s1Titre}
             </h3>
             <div style="background:white;padding:10px 15px;border-radius:8px;border-left:4px solid ${COLOR_PRIMARY};margin-bottom:12px;">
-                <strong style="color:${COLOR_PRIMARY};">🎯 But:</strong> <em style="color:#666;font-size:0.85rem;">(Ce que l'élève doit FAIRE)</em><br>
+                <strong style="color:${COLOR_PRIMARY};">🎯 But:</strong> <em style="color:#55607A;font-size:0.85rem;">(Ce que l'élève doit FAIRE)</em><br>
                 <span style="font-weight:600;font-size:1rem;">${s1But}</span>
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:0.85rem;">
@@ -412,7 +413,7 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
                     <div style="margin-left:10px;line-height:1.6;">${s1Consignes.split('\n').map(c => '<div>→ ' + c.replace(/^\d+\.\s*/, '').replace(/^-\s*/, '') + '</div>').join('')}</div>
                 </div>
             </div>
-            <div style="background:${COLOR_ACCENT};padding:8px 12px;border-radius:6px;margin-top:10px;font-size:0.85rem;">
+            <div style="background:${COLOR_PRIMARY_LIGHT};padding:8px 12px;border-radius:6px;margin-top:10px;font-size:0.85rem;">
                 <strong style="color:${COLOR_PRIMARY};">🔄 Variantes:</strong> ${s1Variantes.replace(/\n/g, ' | ')}
             </div>
             ${schema1 ? `
@@ -423,13 +424,13 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
         </div>
 
         ${!isTest ? `<!-- SITUATION 2 -->
-        <div style="background:#f8f9fa;border-radius:10px;padding:15px 18px;margin-bottom:18px;border:1px solid #d0d0d0;">
+        <div style="background:#F8FAFC;border-radius:10px;padding:15px 18px;margin-bottom:18px;border:1px solid #E4E2DA;">
             <h3 style="color:${COLOR_SECONDARY};margin:0 0 12px 0;font-size:0.95rem;display:flex;align-items:center;gap:8px;">
                 <span style="background:${COLOR_SECONDARY};color:white;padding:3px 10px;border-radius:6px;font-size:0.7rem;font-weight:700;">SIT 2</span>
                 ${s2Titre}
             </h3>
             <div style="background:white;padding:10px 15px;border-radius:8px;border-left:4px solid ${COLOR_SECONDARY};margin-bottom:12px;">
-                <strong style="color:${COLOR_SECONDARY};">🎯 But:</strong> <em style="color:#666;font-size:0.85rem;">(Ce que l'élève doit FAIRE)</em><br>
+                <strong style="color:${COLOR_SECONDARY};">🎯 But:</strong> <em style="color:#55607A;font-size:0.85rem;">(Ce que l'élève doit FAIRE)</em><br>
                 <span style="font-weight:600;font-size:1rem;">${s2But}</span>
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:0.85rem;">
@@ -442,7 +443,7 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
                     <div style="margin-left:10px;line-height:1.6;">${s2Consignes.split('\n').map(c => '<div>→ ' + c.replace(/^\d+\.\s*/, '').replace(/^-\s*/, '') + '</div>').join('')}</div>
                 </div>
             </div>
-            <div style="background:${COLOR_ACCENT};padding:8px 12px;border-radius:6px;margin-top:10px;font-size:0.85rem;">
+            <div style="background:${COLOR_PRIMARY_LIGHT};padding:8px 12px;border-radius:6px;margin-top:10px;font-size:0.85rem;">
                 <strong style="color:${COLOR_PRIMARY};">🔄 Variantes:</strong> ${s2Variantes.replace(/\n/g, ' | ')}
             </div>
             ${schema2 ? `
@@ -453,28 +454,28 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
         </div>
 
         <!-- SITUATION DE RÉFÉRENCE -->
-        <div style="background:${COLOR_ACCENT};border-radius:10px;padding:12px 18px;border:1px solid #d0d0d0;">
-            <h3 style="color:${COLOR_PRIMARY};margin:0 0 8px 0;font-size:0.9rem;">◆ SITUATION DE RÉFÉRENCE</h3>
-            <p style="margin:0;font-size:0.9rem;font-weight:500;">${sitRef}</p>
+        <div style="background:#FEF3C7;border-radius:10px;padding:12px 18px;border:1px solid #FDE68A;">
+            <h3 style="color:#B45309;margin:0 0 8px 0;font-size:0.9rem;">◆ SITUATION DE RÉFÉRENCE</h3>
+            <p style="margin:0;font-size:0.9rem;font-weight:500;color:#0E1633;">${sitRef}</p>
         </div>` : ''}
     </div>
 
     <!-- CRITÈRES -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:20px;">
-        <div style="background:${COLOR_ACCENT};border-radius:10px;padding:15px 18px;border:1px solid #d0d0d0;">
+        <div style="background:${COLOR_ACCENT};border-radius:10px;padding:15px 18px;border:1px solid #E4E2DA;">
             <h3 style="color:${COLOR_PRIMARY};margin:0 0 5px 0;font-size:0.9rem;">✅ Critères de RÉALISATION</h3>
-            <p style="font-size:0.75rem;color:#666;margin:0 0 10px 0;font-style:italic;">COMMENT bien faire (qualité du geste)</p>
+            <p style="font-size:0.75rem;color:#55607A;margin:0 0 10px 0;font-style:italic;">COMMENT bien faire (qualité du geste)</p>
             <div style="font-size:0.85rem;line-height:1.7;">${critReal.split('\n').map(c => '<div>✓ ' + c.replace(/^[•\-]\s*/, '') + '</div>').join('')}</div>
         </div>
-        <div style="background:${COLOR_ACCENT};border-radius:10px;padding:15px 18px;border:1px solid #d0d0d0;">
+        <div style="background:${COLOR_ACCENT};border-radius:10px;padding:15px 18px;border:1px solid #E4E2DA;">
             <h3 style="color:${COLOR_SECONDARY};margin:0 0 5px 0;font-size:0.9rem;">🎯 Critères de RÉUSSITE</h3>
-            <p style="font-size:0.75rem;color:#666;margin:0 0 10px 0;font-style:italic;">EST-CE RÉUSSI ? (mesurable, chiffré)</p>
+            <p style="font-size:0.75rem;color:#55607A;margin:0 0 10px 0;font-style:italic;">EST-CE RÉUSSI ? (mesurable, chiffré)</p>
             <div style="font-size:0.85rem;line-height:1.7;">${critReuss.split('\n').map(c => '<div>✓ ' + c.replace(/^[•\-]\s*/, '') + '</div>').join('')}</div>
         </div>
     </div>
 
     <!-- PARTIE FINALE -->
-    <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:18px 22px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+    <div style="background:#fff;border:1px solid #E4E2DA;border-radius:12px;padding:18px 22px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
         <h2 style="color:${COLOR_PRIMARY};border-bottom:3px solid ${COLOR_PRIMARY};padding-bottom:8px;margin:0 0 15px 0;font-size:1rem;display:flex;align-items:center;gap:8px;">
             🧘 PARTIE FINALE
             <span style="background:${COLOR_PRIMARY};color:white;padding:2px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">10 min</span>
@@ -482,7 +483,7 @@ CRITERES_REUSSITE: [4 critères MESURABLES avec CHIFFRES - pourcentages, nombres
         <div style="background:${COLOR_PRIMARY_LIGHT};padding:10px 15px;border-radius:8px;border-left:4px solid ${COLOR_PRIMARY};margin-bottom:12px;">
             <strong style="color:${COLOR_PRIMARY};">🎯 But:</strong> <span style="font-weight:500;">Retour au calme</span>
         </div>
-        <div style="background:#f8f9fa;padding:12px 15px;border-radius:8px;font-size:0.9rem;line-height:1.7;">
+        <div style="background:#F8FAFC;padding:12px 15px;border-radius:8px;font-size:0.9rem;line-height:1.7;">
             <div style="margin-bottom:6px;">• Marche lente avec respiration profonde (inspiration nasale, expiration buccale)</div>
             <div style="margin-bottom:6px;">• Étirements des groupes musculaires sollicités (quadriceps, ischio-jambiers, mollets, épaules)</div>
             <div>• Bilan de séance avec les élèves et rangement du matériel</div>
@@ -530,6 +531,7 @@ body {
     line-height: 1.2;
     margin: 0;
     padding: 0;
+    color: #0E1633;
 }
 table {
     width: 100%;
@@ -551,13 +553,14 @@ th, td {
     text-align: center;
     font-size: 11pt;
     font-weight: bold;
-    background: #1e3a5f;
+    background: ${COLOR_PRIMARY};
     color: #fff;
     padding: 6px;
     margin: 0;
 }
 .section-header {
-    background: #f0f0f0;
+    background: #EAF0FF;
+    color: #0E1633;
     font-weight: bold;
     font-size: 6.5pt;
     text-align: center;
@@ -565,13 +568,13 @@ th, td {
     padding: 4px 6px;
 }
 .obj-row {
-    background: #1e3a5f;
+    background: ${COLOR_PRIMARY_DEEP};
     color: #fff;
     font-weight: bold;
     font-size: 8pt;
 }
 .table-header {
-    background: #1e3a5f;
+    background: ${COLOR_PRIMARY};
     color: #fff;
     font-weight: bold;
     text-align: center;
@@ -581,7 +584,7 @@ th, td {
 .partie-cell {
     font-weight: bold;
     text-align: center;
-    background: #f5f5f5;
+    background: #F8FAFC;
     font-size: 8pt;
     writing-mode: vertical-rl;
     text-orientation: mixed;
@@ -598,12 +601,12 @@ th, td {
 }
 .sit-title {
     font-weight: bold;
-    color: #1e3a5f;
+    color: ${COLOR_PRIMARY};
     font-size: 7.5pt;
     margin-bottom: 2px;
 }
 .but-cell {
-    background: #f5f5f5;
+    background: #F8FAFC;
     font-size: 7pt;
     text-align: center;
     vertical-align: middle;
@@ -634,7 +637,7 @@ th, td {
 <td style="width:25%"><b>Professeur:</b> ${nomProf || '________________________'}</td>
 <td style="width:30%;text-align:center"><b>Établissement:</b> ${etablissement || '________________________'}</td>
 <td style="width:20%;text-align:center"><b>Classe:</b> ${classe || '__________'}</td>
-<td style="width:25%;text-align:right"><b>Année scolaire:</b> ${anneeScolaire || '2024-2025'}</td>
+<td style="width:25%;text-align:right"><b>Année scolaire:</b> ${anneeScolaire || '2025-2026'}</td>
 </tr>
 </table>
 
@@ -647,11 +650,11 @@ th, td {
 <td class="section-header" style="width:8%">Groupe APS</td>
 <td style="width:12%;font-size:7.5pt;text-align:center">${groupeAPS}</td>
 <td class="section-header" style="width:5%">APS</td>
-<td style="width:10%;font-size:8pt;text-align:center;font-weight:bold;color:#1e3a5f">${aps}</td>
+<td style="width:10%;font-size:8pt;text-align:center;font-weight:bold;color:${COLOR_PRIMARY}">${aps}</td>
 <td class="section-header" style="width:6%">Niveau</td>
 <td style="width:6%;font-size:7.5pt;text-align:center">${niveau}</td>
 <td class="section-header" style="width:6%">Séance</td>
-<td style="width:5%;font-size:9pt;text-align:center;font-weight:bold">${numeroSeance || 1}</td>
+<td style="width:5%;font-size:9pt;text-align:center;font-weight:bold;color:${COLOR_PRIMARY_DEEP}">${numeroSeance || 1}</td>
 </tr>
 <tr>
 <td class="section-header">OTI</td>
@@ -663,7 +666,7 @@ th, td {
 </tr>
 <tr>
 <td class="obj-row" style="text-align:center">OBJECTIF</td>
-<td colspan="7" style="background:#e8eef4;font-size:8pt;font-weight:bold;padding:5px">${objectif}</td>
+<td colspan="7" style="background:${COLOR_PRIMARY_LIGHT};color:#0E1633;font-size:8pt;font-weight:bold;padding:5px">${objectif}</td>
 </tr>
 </table>
 
@@ -698,14 +701,14 @@ ${isTest ? `<div class="sit-title">◆ SITUATION DE RÉFÉRENCE: ${s1Titre}</div
 <b>Consignes:</b> ${s1Consignes.replace(/\n/g, ' | ')}<br>
 <b>Variantes:</b> ${s1Variantes.replace(/\n/g, ' | ')}<br>
 
-${!isTest ? `<br><div class="sit-title" style="color:#1565c0">◆ SITUATION 2: ${s2Titre}</div>
+${!isTest ? `<br><div class="sit-title" style="color:${COLOR_SECONDARY}">◆ SITUATION 2: ${s2Titre}</div>
 <b>But:</b> ${s2But}<br>
 <b>Organisation:</b> ${s2Orga}<br>
 <b>Déroulement:</b> ${s2Deroul}<br>
 <b>Consignes:</b> ${s2Consignes.replace(/\n/g, ' | ')}<br>
 <b>Variantes:</b> ${s2Variantes.replace(/\n/g, ' | ')}<br><br>
 
-<div class="sit-title" style="color:#e65100">◆ SITUATION DE RÉFÉRENCE:</div>
+<div class="sit-title" style="color:#B45309">◆ SITUATION DE RÉFÉRENCE:</div>
 ${sitRef}` : ''}
 </td>
 <td class="but-cell" style="font-size:6.5pt;padding:4px">${butFonda}</td>
@@ -728,7 +731,7 @@ ${sitRef}` : ''}
 
 <div style="flex-grow: 1;"></div>
 
-<p style="text-align:center;font-size:6pt;color:#666;margin-top:15px;margin-bottom:10px;">
+<p style="text-align:center;font-size:6pt;color:#55607A;margin-top:15px;margin-bottom:10px;">
 Document conforme aux Orientations Pédagogiques ${isCollege ? '2009 (Collège)' : '2007 (Lycée)'} - Ministère de l'Éducation Nationale - Maroc
 </p>
 
