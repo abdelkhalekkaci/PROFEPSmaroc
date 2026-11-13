@@ -546,8 +546,16 @@ html[data-theme="dark"] .peps-logo-tld {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
   cursor: pointer;
+  padding: 0;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.peps-nav-toggle:hover,
+.peps-nav-toggle.active {
+  background: var(--sky);
+  border-color: var(--primary);
 }
 
 .peps-nav-toggle span {
@@ -556,54 +564,179 @@ html[data-theme="dark"] .peps-logo-tld {
   height: 2px;
   background: var(--ink);
   border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.15s ease;
+}
+
+.peps-nav-toggle.active span {
+  background: var(--primary);
+}
+
+.peps-nav-toggle.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.peps-nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.peps-nav-toggle.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.peps-dropdown-caret {
+  display: inline-block;
+  transition: transform 0.18s ease;
+}
+
+.peps-dropdown.open .peps-dropdown-caret {
+  transform: rotate(180deg);
+}
+
+.peps-nav-backdrop {
+  display: none;
 }
 
 @media (max-width: 1080px) {
-  .atlas-nav-search {
-    width: 165px;
+  .peps-nav-link {
+    padding: 0.45rem 0.6rem;
+    font-size: 0.88rem;
   }
   .atlas-theme-label {
     display: none;
   }
   .atlas-theme-toggle {
-    padding: 0 0.65rem;
+    width: 42px;
+    padding: 0;
   }
 }
 
 @media (max-width: 920px) {
+  body.peps-nav-open {
+    overflow: hidden;
+  }
+  .peps-nav-container {
+    padding: 0.55rem 1rem;
+    position: relative;
+    z-index: 1002;
+    background: var(--surface);
+  }
   .peps-nav-toggle {
     display: inline-flex;
   }
+  .peps-nav-backdrop {
+    position: fixed;
+    inset: 0;
+    top: 58px;
+    background: rgba(14, 22, 51, 0.42);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    display: block;
+  }
+  .peps-nav-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
   .peps-nav-menu {
     position: fixed;
-    top: 65px;
+    top: 59px;
     left: 0;
     right: 0;
-    background: var(--surface);
-    border-bottom: 1px solid var(--stone);
+    max-height: calc(100dvh - 59px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background: var(--surface) !important;
+    border-bottom: 2px solid var(--primary);
     box-shadow: var(--shadow-lg);
     flex-direction: column;
     align-items: stretch;
-    padding: 1rem 1.25rem;
+    padding: 0.85rem 1rem 1.25rem;
     gap: 0.35rem;
     display: none;
+    z-index: 1001;
   }
   .peps-nav-menu.active {
     display: flex;
   }
+  .peps-nav-link {
+    min-height: 46px;
+    padding: 0.7rem 0.95rem;
+    border-radius: 12px;
+    font-size: 0.96rem;
+    font-weight: 700;
+    justify-content: space-between;
+    border: 1px solid transparent;
+  }
+  .peps-nav-link.active {
+    background: var(--sky) !important;
+    color: var(--primary) !important;
+    border-color: var(--stone);
+  }
+  .peps-dropdown {
+    width: 100%;
+  }
   .peps-dropdown-menu {
     position: static;
-    transform: none;
+    transform: none !important;
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
     box-shadow: none;
-    border: none;
-    padding-left: 0.75rem;
+    border: 1px solid var(--stone) !important;
+    background: var(--paper) !important;
+    border-radius: 12px;
+    margin-top: 0.3rem;
+    padding: 0.45rem;
     display: none;
   }
   .peps-dropdown.open .peps-dropdown-menu {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .peps-dropdown-item {
+    min-height: 42px;
+    padding: 0.55rem 0.8rem;
+    font-size: 0.88rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .peps-nav-container {
+    padding: 0.5rem 0.85rem;
+    gap: 0.5rem;
+  }
+  .peps-nav-logo-mark,
+  .peps-logo-svg {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+  }
+  .peps-nav-logo-text {
+    font-size: 1.08rem;
+  }
+  .peps-nav-logo-sub {
+    font-size: 0.58rem;
+  }
+  .peps-nav-right {
+    gap: 0.45rem;
+  }
+  .atlas-theme-toggle,
+  .peps-nav-toggle {
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+  }
+  .peps-nav-menu {
+    top: 53px;
+    max-height: calc(100dvh - 53px);
+    padding: 0.75rem 0.85rem 1.15rem;
+  }
+  .peps-nav-backdrop {
+    top: 53px;
   }
 }
 

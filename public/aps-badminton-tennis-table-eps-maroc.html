@@ -1527,16 +1527,15 @@
       <div class="peps-nav-menu" id="pepsNavMenu">
         <a href="/orientations-pedagogiques-toutes-matieres.html" class="peps-nav-link">Orientations pédagogiques</a>
         <a href="/bibliotheque-numerique-eps.html" class="peps-nav-link">Sports &amp; cycles</a>
-        <a href="/generateur.html" class="peps-nav-link">Évaluation &amp; Fiches</a>
-        <a href="/concours-crmef-hub.html" class="peps-nav-link">Concours</a>
+        <a href="/generateur.html" class="peps-nav-link">Générateur</a>
+        <a href="/concours-crmef-hub.html" class="peps-nav-link">Concours Taalim</a>
         <div class="peps-dropdown" id="pepsCalcDropdown">
-          <a href="/hub-outils-sport-performance.html" class="peps-nav-link" id="pepsDropdownTrigger">
+          <a href="/hub-outils-sport-performance.html" class="peps-nav-link" id="pepsDropdownTrigger" aria-expanded="false" aria-haspopup="true">
             <span id="pepsDropdownTriggerText">Outils</span>
             <span class="peps-dropdown-caret" aria-hidden="true">▾</span>
           </a>
           <div class="peps-dropdown-menu" id="pepsDropdownMenu">
             <a href="/hub-outils-sport-performance.html" class="peps-dropdown-item peps-dropdown-hub">Tous les Calculateurs &amp; Outils</a>
-            <a href="/generateur.html" class="peps-dropdown-item">Générateur de Séances &amp; Cycles (Word/PDF)</a>
             <a href="/calculateur-vma.html" class="peps-dropdown-item">Calculateur VMA &amp; Groupes d'Allures</a>
             <a href="/calculateur-vdot-asr-endurance.html" class="peps-dropdown-item">Calculateur VO2 Max &amp; VDOT</a>
             <a href="/calculateur-asr-reserve-vitesse.html" class="peps-dropdown-item">Réserve de Vitesse Anaérobie (ASR)</a>
@@ -1552,17 +1551,8 @@
         <a href="/blog.html" class="peps-nav-link">Blog</a>
       </div>
 
-      <!-- Zone 3: Search Bar + Dark Mode Toggle (Replaces Language Translator) -->
+      <!-- Zone 3: Dark Mode Toggle & Mobile Menu Button -->
       <div class="peps-nav-right">
-        <div class="atlas-nav-search" role="search">
-          <svg class="atlas-nav-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input type="search" id="atlasSearchInput" class="atlas-nav-search-input" placeholder="OP 2009, Handball, VMA…" aria-label="Rechercher une ressource EPS ou OP" autocomplete="off">
-          <div id="atlasSearchDropdown" class="atlas-search-dropdown" role="listbox" aria-label="Suggestions de recherche"></div>
-        </div>
-
         <button type="button" class="atlas-theme-toggle" id="atlasThemeToggle" onclick="window.profepsToggleTheme && window.profepsToggleTheme()" aria-label="Basculer le mode sombre ou clair" title="Mode sombre / Mode clair">
           <svg id="atlasThemeIconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
@@ -1581,11 +1571,12 @@
           <span class="atlas-theme-label" id="atlasThemeLabel">Mode nuit</span>
         </button>
 
-        <button type="button" class="peps-nav-toggle" id="pepsNavToggle" aria-label="Ouvrir le menu">
+        <button type="button" class="peps-nav-toggle" id="pepsNavToggle" aria-label="Ouvrir le menu de navigation" aria-expanded="false" aria-controls="pepsNavMenu">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
+    <div class="peps-nav-backdrop" id="pepsNavBackdrop" aria-hidden="true"></div>
   </div>
 
 <script id="profeps-master-unifier-js">
@@ -1638,37 +1629,136 @@
 
   syncThemeUI(document.documentElement.getAttribute('data-theme') || 'light');
 
+  // Highlight active navigation link based on current URL or data-current-file
+  try {
+    var navRoot = document.getElementById('pepsNavbar');
+    var curFile = (navRoot && navRoot.getAttribute('data-current-file')) || (window.location.pathname.split('/').pop() || 'index.html');
+    var navLinks = document.querySelectorAll('#pepsNavMenu > a.peps-nav-link');
+    navLinks.forEach(function(link) {
+      var href = (link.getAttribute('href') || '').replace(/^\//, '');
+      if (
+        (href === curFile) ||
+        (href === 'orientations-pedagogiques-toutes-matieres.html' && curFile.indexOf('orientations-pedagogiques-') === 0) ||
+        (href === 'bibliotheque-numerique-eps.html' && /^(aps-|cycle-|hub-aps|fiche-|grille-|programmation-)/.test(curFile)) ||
+        (href === 'concours-crmef-hub.html' && /^(qcm-|concours)/.test(curFile)) ||
+        (href === 'blog.html' && curFile.indexOf('article-') === 0)
+      ) {
+        link.classList.add('active');
+      }
+    });
+    if (/^(calculateur-|generateur-intermittent|test-navette|bareme-|hub-outils-sport)/.test(curFile)) {
+      var trig = document.getElementById('pepsDropdownTrigger');
+      if (trig) trig.classList.add('active');
+    }
+  } catch (e) {}
+
   var dropdown = document.getElementById('pepsCalcDropdown');
+  var dropdownTrigger = document.getElementById('pepsDropdownTrigger');
   var dropdownMenu = document.getElementById('pepsDropdownMenu');
   var closeTimer = null;
+
+  function isMobileViewport() {
+    return window.matchMedia && window.matchMedia('(max-width: 920px)').matches;
+  }
+
   function openDropdown() {
     if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
-    if (dropdown) dropdown.classList.add('open');
+    if (dropdown) {
+      dropdown.classList.add('open');
+      if (dropdownTrigger) dropdownTrigger.setAttribute('aria-expanded', 'true');
+    }
   }
+
   function closeDropdownDelayed() {
     if (closeTimer) clearTimeout(closeTimer);
     closeTimer = setTimeout(function() {
-      if (dropdown) dropdown.classList.remove('open');
+      if (dropdown) {
+        dropdown.classList.remove('open');
+        if (dropdownTrigger) dropdownTrigger.setAttribute('aria-expanded', 'false');
+      }
     }, 180);
   }
+
   if (dropdown) {
-    dropdown.addEventListener('mouseenter', openDropdown);
-    dropdown.addEventListener('mouseleave', closeDropdownDelayed);
+    dropdown.addEventListener('mouseenter', function() {
+      if (!isMobileViewport()) openDropdown();
+    });
+    dropdown.addEventListener('mouseleave', function() {
+      if (!isMobileViewport()) closeDropdownDelayed();
+    });
   }
   if (dropdownMenu) {
-    dropdownMenu.addEventListener('mouseenter', openDropdown);
-    dropdownMenu.addEventListener('mouseleave', closeDropdownDelayed);
+    dropdownMenu.addEventListener('mouseenter', function() {
+      if (!isMobileViewport()) openDropdown();
+    });
+    dropdownMenu.addEventListener('mouseleave', function() {
+      if (!isMobileViewport()) closeDropdownDelayed();
+    });
+  }
+
+  if (dropdownTrigger && dropdown) {
+    dropdownTrigger.addEventListener('click', function(e) {
+      if (isMobileViewport()) {
+        e.preventDefault();
+        e.stopPropagation();
+        var isOpen = dropdown.classList.toggle('open');
+        dropdownTrigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      }
+    });
+  }
+
+  function closeMobileMenu() {
+    var toggleBtn = document.getElementById('pepsNavToggle');
+    var navMenuEl = document.getElementById('pepsNavMenu');
+    var backdropEl = document.getElementById('pepsNavBackdrop');
+    if (toggleBtn) {
+      toggleBtn.classList.remove('active');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+    }
+    if (navMenuEl) navMenuEl.classList.remove('active');
+    if (backdropEl) backdropEl.classList.remove('active');
+    document.body.classList.remove('peps-nav-open');
   }
 
   document.addEventListener('click', function(e) {
     var t = e.target;
-    if (t && t.closest && t.closest('#pepsNavToggle')) {
+    if (!t || !t.closest) return;
+
+    if (t.closest('#pepsNavToggle')) {
       var toggleBtn = document.getElementById('pepsNavToggle');
       var navMenuEl = document.getElementById('pepsNavMenu');
+      var backdropEl = document.getElementById('pepsNavBackdrop');
       if (toggleBtn && navMenuEl) {
-        toggleBtn.classList.toggle('active');
-        navMenuEl.classList.toggle('active');
+        var willOpen = !navMenuEl.classList.contains('active');
+        toggleBtn.classList.toggle('active', willOpen);
+        toggleBtn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+        navMenuEl.classList.toggle('active', willOpen);
+        if (backdropEl) backdropEl.classList.toggle('active', willOpen);
+        document.body.classList.toggle('peps-nav-open', willOpen);
       }
+      return;
+    }
+
+    if (t.closest('#pepsNavBackdrop')) {
+      closeMobileMenu();
+      return;
+    }
+
+    if (isMobileViewport() && t.closest('#pepsNavMenu a:not(#pepsDropdownTrigger)')) {
+      closeMobileMenu();
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeMobileMenu();
+      if (dropdown) dropdown.classList.remove('open');
+    }
+  });
+
+  window.addEventListener('resize', function() {
+    if (!isMobileViewport()) {
+      closeMobileMenu();
     }
   });
 })();
