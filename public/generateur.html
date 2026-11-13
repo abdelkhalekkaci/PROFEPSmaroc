@@ -33,7 +33,6 @@
 
     <!-- JSON-LD WebApplication & SoftwareApplication -->
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Générateur IA de Fiches EPS ProfEPS","url":"https://profeps.ma/generateur.html","description":"Générateur IA gratuit de fiches EPS, grilles d'évaluation et projets de cycle. Créez vos documents conformes aux orientations pédagogiques 2007-2009.","applicationCategory":"EducationalApplication","applicationSubCategory":"AI Tool","operatingSystem":"All modern web browsers","inLanguage":"fr-MA","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"MAD"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","bestRating":"5","worstRating":"1","ratingCount":"328"},"softwareRequirements":"Connexion Internet, JavaScript activé (Groq AI API)","browserRequirements":"Requires JavaScript. Requires HTML5.","publisher":{"@type":"Organization","name":"Prof EPS Maroc","url":"https://profeps.ma","logo":{"@type":"ImageObject","url":"https://profeps.ma/images/prof_eps.png"}}}</script>
-        <!-- Google Consent Mode v2 — defaults AVANT gtag -->
     <!-- Google tag (gtag.js) & Consent Mode v2 ProfEPS.ma -->
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -85,39 +84,42 @@
             --primary-dark: #2434A8;
             --secondary: #0B7A99;
             --secondary-dark: #085E77;
-            --text-primary: #1a1a2e;
-            --text-secondary: #4a4a68;
-            --text-light: #6b7280;
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8f9fa;
-            --bg-card: #ffffff;
-            --border: #e2e8f0;
-            --border-light: #f1f5f9;
-            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            --radius: 8px;
-            --radius-lg: 12px;
-            --radius-xl: 16px;
-            --radius-2xl: 24px;
+            --accent-amber: #FFB300;
+            --accent-amber-deep: #E09B00;
+            --violet: #6D4AFF;
+            --text-primary: var(--ink, #0E1633);
+            --text-secondary: var(--slate, #55607A);
+            --text-light: var(--slate, #55607A);
+            --bg-primary: var(--surface, #FFFFFF);
+            --bg-secondary: var(--paper, #FBFAF7);
+            --bg-card: var(--surface, #FFFFFF);
+            --border: var(--stone, #E4E2DA);
+            --border-light: var(--stone, #E4E2DA);
+            --shadow-sm: 0 2px 6px rgba(14, 22, 51, 0.05);
+            --shadow-md: 0 8px 24px -4px rgba(14, 22, 51, 0.08);
+            --shadow-lg: 0 14px 32px -6px rgba(14, 22, 51, 0.12);
+            --shadow-xl: 0 20px 36px -8px rgba(14, 22, 51, 0.16);
+            --radius: 10px;
+            --radius-lg: 14px;
+            --radius-xl: 18px;
+            --radius-2xl: 22px;
             --radius-full: 9999px;
             --spacing-xs: 0.25rem;
             --spacing-sm: 0.5rem;
             --spacing-md: 1rem;
             --spacing-lg: 1.5rem;
-            --spacing-xl: 2rem;
-            --spacing-2xl: 3rem;
-            --spacing-3xl: 4rem;
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-display: 'Plus Jakarta Sans', var(--font-sans);
-            --transition: all 0.3s ease;
+            --spacing-xl: 1.75rem;
+            --spacing-2xl: 2.5rem;
+            --spacing-3xl: 3.5rem;
+            --font-sans: var(--font-body, 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, sans-serif);
+            --font-display: 'Bricolage Grotesque', var(--font-sans);
+            --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         body {
             font-family: var(--font-sans);
-            background: var(--bg-secondary);
-            color: var(--text-primary);
+            background: var(--paper, #FBFAF7);
+            color: var(--ink, #0E1633);
             line-height: 1.6;
             overflow-x: hidden;
         }
@@ -127,23 +129,20 @@
             color: inherit;
             transition: var(--transition);
         }
-        /* Login Button */
-        /* User Menu */
+
         /* ========== LOADING OVERLAY ========== */
         .loading-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(248, 250, 252, 0.94);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            inset: 0;
+            background: rgba(11, 18, 38, 0.82);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             z-index: 9999;
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            padding: 1.5rem;
         }
 
         .loading-overlay.show {
@@ -151,73 +150,76 @@
         }
 
         .loading-spinner {
-            width: 56px;
-            height: 56px;
-            border: 4px solid var(--sky);
-            border-top-color: #2434A8;
+            width: 58px;
+            height: 58px;
+            border: 4px solid rgba(255, 255, 255, 0.18);
+            border-top-color: #FFB300;
+            border-right-color: #3347D6;
             border-radius: 50%;
-            animation: spin 0.9s linear infinite;
+            animation: spin 0.85s linear infinite;
         }
 
         @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
+            to { transform: rotate(360deg); }
         }
 
         .loading-text {
-            color: #0f172a;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-top: 20px;
+            color: #FFFFFF;
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-top: 18px;
+            text-align: center;
         }
 
         .loading-subtext {
-            color: #475569;
+            color: #9AA6C4;
             font-size: 0.95rem;
-            margin-top: 8px;
+            margin-top: 6px;
+            text-align: center;
         }
 
         .progress-container {
             width: 100%;
-            max-width: 320px;
-            margin-top: 24px;
+            max-width: 340px;
+            margin-top: 22px;
         }
 
         .progress-bar {
             width: 100%;
-            height: 8px;
-            background: #e2e8f0;
+            height: 9px;
+            background: rgba(255, 255, 255, 0.16);
             border-radius: var(--radius-full);
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #2434A8, #0B7A99);
+            background: linear-gradient(90deg, #3347D6 0%, #FFB300 100%);
             border-radius: var(--radius-full);
             transition: width 0.3s ease;
             width: 0%;
         }
 
         .progress-text {
-            color: #334155;
+            color: #FFB300;
             font-size: 0.9rem;
-            font-weight: 700;
+            font-weight: 800;
             text-align: center;
             margin-top: 8px;
+            font-variant-numeric: tabular-nums;
         }
 
         /* Toast Notifications */
         .error-toast,
         .success-toast {
             position: fixed;
-            top: 100px;
+            top: 90px;
             left: 50%;
             transform: translateX(-50%) translateY(-20px);
             z-index: 10000;
             opacity: 0;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
             pointer-events: none;
         }
 
@@ -231,151 +233,264 @@
         .success-toast-content {
             display: flex;
             align-items: center;
-            gap: var(--spacing-sm);
-            padding: var(--spacing-md) var(--spacing-xl);
-            border-radius: var(--radius-lg);
+            gap: 0.6rem;
+            padding: 0.85rem 1.5rem;
+            border-radius: 12px;
             box-shadow: var(--shadow-xl);
-            font-weight: 500;
+            font-weight: 700;
+            font-size: 0.92rem;
         }
 
         .error-toast-content {
-            background: #dc3545;
-            color: white;
+            background: #DC2626;
+            color: #FFFFFF;
         }
 
         .success-toast-content {
-            background: var(--secondary);
-            color: white;
+            background: #0E1633;
+            color: #FFFFFF;
+            border: 1.5px solid #FFB300;
         }
 
-        /* ========== MAIN CONTENT ========== */
+        /* ========== HERO & 3-STEP UX BANNER ========== */
         .main-content {
             padding-top: 0;
             min-height: calc(100vh - 200px);
         }
 
         .page-header {
+            max-width: 1420px;
+            margin: 0 auto;
+            padding: 1.75rem 1.5rem 1.25rem;
             text-align: center;
-            padding: var(--spacing-2xl) var(--spacing-xl) var(--spacing-xl);
+        }
+
+        .page-header-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.45rem;
         }
 
         .page-header h1 {
             font-family: var(--font-display);
-            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-size: clamp(1.75rem, 3.4vw, 2.55rem);
             font-weight: 800;
-            color: var(--text-primary);
-            margin-bottom: var(--spacing-sm);
+            color: var(--ink);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            text-wrap: balance;
         }
 
         .page-header h1 span {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, #3347D6 0%, #6D4AFF 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .page-header p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
+            color: var(--slate);
+            font-size: 1.02rem;
+            max-width: 68ch;
+            margin: 0 auto 1.15rem;
         }
 
-        /* ========== GENERATOR LAYOUT ========== */
+        /* 3-Step Simple UX Strip */
+        .ux-steps-strip {
+            display: inline-flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 0.65rem 1.25rem;
+            padding: 0.65rem 1.25rem;
+            background: var(--sky, #EAF0FF);
+            border: 1px solid var(--stone, #E4E2DA);
+            border-radius: 14px;
+            font-size: 0.86rem;
+            font-weight: 700;
+            color: var(--ink);
+        }
+
+        .ux-step-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .ux-step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #3347D6;
+            color: #FFFFFF;
+            font-size: 0.75rem;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .ux-step-item.highlight .ux-step-num {
+            background: #FFB300;
+            color: #0E1633;
+        }
+
+        .ux-step-sep {
+            color: var(--slate);
+            font-weight: 400;
+        }
+
+        /* ========== GENERATOR 2-COLUMN WORKSPACE ========== */
         .generator-container {
-            max-width: 1400px;
+            max-width: 1440px;
             margin: 0 auto;
-            padding: 0 var(--spacing-xl) var(--spacing-3xl);
+            padding: 0.5rem 1.5rem 3rem;
             display: grid;
-            grid-template-columns: 420px 1fr;
-            gap: var(--spacing-2xl);
+            grid-template-columns: 430px 1fr;
+            gap: 1.75rem;
             align-items: start;
         }
 
         /* ========== CARDS ========== */
         .card {
-            background: var(--bg-card);
-            border-radius: 20px;
-            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+            background: var(--surface, #FFFFFF);
+            border-radius: 18px;
+            box-shadow: var(--shadow-md);
             overflow: hidden;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--stone, #E4E2DA);
         }
 
-        .card::before {
-            content: '';
-            display: block;
-            height: 2px;
-            background: linear-gradient(90deg, var(--stone), var(--stone));
-        }
-
-        /* ========== TABS ========== */
+        /* ========== TABS (PROJET DE CYCLE FIRST BY DEFAULT) ========== */
         .tabs {
-            display: flex;
-            background: var(--bg-secondary);
+            display: grid;
+            grid-template-columns: 1.25fr 1fr 1fr;
+            background: var(--sky, #EAF0FF);
+            padding: 0.4rem;
+            gap: 0.35rem;
+            border-bottom: 1px solid var(--stone, #E4E2DA);
         }
 
         .tab {
-            flex: 1;
-            padding: var(--spacing-lg) var(--spacing-md);
+            padding: 0.7rem 0.5rem;
             text-align: center;
             cursor: pointer;
-            font-weight: 600;
-            color: var(--text-light);
-            background: none;
-            border: none;
+            font-weight: 700;
+            font-size: 0.84rem;
+            color: var(--slate, #55607A);
+            background: transparent;
+            border: 1.5px solid transparent;
+            border-radius: 12px;
             transition: var(--transition);
-            border-bottom: 3px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            position: relative;
         }
 
         .tab:hover {
-            background: rgba(193, 39, 45, 0.05);
+            background: rgba(51, 71, 214, 0.08);
             color: var(--primary);
         }
 
         .tab.active {
-            color: var(--primary);
-            background: var(--bg-card);
-            border-bottom-color: var(--primary);
+            color: #FFFFFF;
+            background: linear-gradient(135deg, #3347D6 0%, #6D4AFF 100%);
+            border-color: #2434A8;
+            box-shadow: 0 4px 12px rgba(51, 71, 214, 0.25);
         }
 
         .tab-icon {
-            display: block;
-            font-size: 1.5rem;
-            margin-bottom: 4px;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .tab-sub {
+            font-size: 0.68rem;
+            font-weight: 700;
+            opacity: 0.85;
+            white-space: nowrap;
+        }
+
+        .tab.active .tab-sub {
+            color: #FFB300;
+            opacity: 1;
+        }
+
+        .tab-pillar-badge {
+            display: inline-block;
+            font-size: 0.62rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            padding: 1px 6px;
+            border-radius: 4px;
+            background: #FFB300;
+            color: #0E1633;
+            margin-bottom: 2px;
         }
 
         /* ========== FORM ========== */
         .card-body {
-            padding: var(--spacing-xl);
+            padding: 1.5rem;
+        }
+
+        .mode-callout {
+            background: var(--sky, #EAF0FF);
+            border: 1px solid rgba(51, 71, 214, 0.22);
+            border-radius: 12px;
+            padding: 0.85rem 1rem;
+            margin-bottom: 1.25rem;
+            font-size: 0.85rem;
+            color: var(--ink);
+            line-height: 1.45;
+        }
+
+        .mode-callout strong {
+            color: var(--primary);
+            display: block;
+            margin-bottom: 2px;
+            font-size: 0.88rem;
         }
 
         .form-group {
-            margin-bottom: var(--spacing-lg);
+            margin-bottom: 1.1rem;
         }
 
         .form-label {
             display: flex;
             align-items: center;
-            gap: var(--spacing-xs);
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: var(--spacing-sm);
+            gap: 0.35rem;
+            font-size: 0.86rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 0.4rem;
         }
 
         .form-label .required {
-            color: var(--primary);
+            color: #DC2626;
         }
 
         .form-input,
         .form-select,
         .form-textarea {
             width: 100%;
-            padding: var(--spacing-md);
+            padding: 0.72rem 0.9rem;
             font-family: var(--font-sans);
-            font-size: 1rem;
-            color: var(--text-primary);
-            background: var(--bg-secondary);
-            border: 2px solid var(--border);
-            border-radius: var(--radius-lg);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--ink);
+            background: var(--paper, #FBFAF7);
+            border: 1.5px solid var(--stone, #E4E2DA);
+            border-radius: 11px;
             transition: var(--transition);
         }
 
@@ -384,29 +499,29 @@
         .form-textarea:focus {
             outline: none;
             border-color: var(--primary);
-            background: var(--bg-card);
-            box-shadow: 0 0 0 4px rgba(193, 39, 45, 0.1);
+            background: var(--surface, #FFFFFF);
+            box-shadow: 0 0 0 3px rgba(51, 71, 214, 0.16);
         }
 
         .form-textarea {
-            min-height: 100px;
+            min-height: 92px;
             resize: vertical;
         }
 
         .form-select {
             cursor: pointer;
             appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2355607A' stroke-width='2.2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 12px center;
-            background-size: 20px;
-            padding-right: 48px;
+            background-size: 18px;
+            padding-right: 40px;
         }
 
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-md);
+            gap: 0.85rem;
         }
 
         .conditional {
@@ -418,26 +533,33 @@
         }
 
         .info-box {
-            background: linear-gradient(135deg, rgba(193, 39, 45, 0.05), rgba(0, 98, 51, 0.05));
-            border-left: 4px solid var(--secondary);
-            padding: var(--spacing-md);
-            border-radius: 0 var(--radius) var(--radius) 0;
-            margin-bottom: var(--spacing-lg);
-            font-size: 0.875rem;
-            color: var(--text-secondary);
+            background: var(--sky, #EAF0FF);
+            border: 1px solid rgba(51, 71, 214, 0.22);
+            padding: 0.8rem 0.95rem;
+            border-radius: 11px;
+            margin-bottom: 1.1rem;
+            font-size: 0.83rem;
+            color: var(--ink);
+            line-height: 1.45;
+        }
+
+        .info-box strong {
+            color: var(--primary);
         }
 
         /* ========== OPTIONAL TOGGLE ========== */
         .optional-toggle {
             display: flex;
             align-items: center;
-            gap: var(--spacing-sm);
-            color: var(--text-secondary);
-            font-size: 0.875rem;
+            justify-content: space-between;
+            gap: 0.5rem;
+            color: var(--slate);
+            font-size: 0.84rem;
+            font-weight: 700;
             cursor: pointer;
-            padding: var(--spacing-md) 0;
-            border-top: 1px dashed var(--border);
-            margin-top: var(--spacing-md);
+            padding: 0.85rem 0 0.35rem;
+            border-top: 1px dashed var(--stone);
+            margin-top: 0.5rem;
         }
 
         .optional-toggle:hover {
@@ -445,8 +567,8 @@
         }
 
         .optional-toggle svg {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             transition: var(--transition);
         }
 
@@ -456,143 +578,188 @@
 
         .optional-content {
             display: none;
-            padding-top: var(--spacing-md);
+            padding-top: 0.75rem;
         }
 
         .optional-content.show {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-md);
+            gap: 0.75rem;
         }
 
-        /* ========== GENERATE BUTTON ========== */
+        /* ========== PRIMARY GENERATE BUTTON (MAJORELLE) ========== */
         .generate-btn {
             width: 100%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: var(--spacing-sm);
-            padding: 15px 22px;
+            gap: 0.55rem;
+            padding: 0.95rem 1.35rem;
+            font-family: var(--font-display);
             font-size: 1.02rem;
             font-weight: 800;
-            background: linear-gradient(135deg, var(--sky) 0%, var(--paper) 100%);
-            color: #2434A8;
-            border: 1.5px solid var(--stone);
-            border-radius: 14px;
+            background: linear-gradient(135deg, #3347D6 0%, #6D4AFF 100%);
+            color: #FFFFFF !important;
+            border: 1.5px solid #2434A8;
+            border-radius: 13px;
             cursor: pointer;
-            transition: all 0.22s ease;
-            box-shadow: 0 2px 6px rgba(153, 27, 27, 0.06);
-            margin-top: var(--spacing-lg);
+            transition: var(--transition);
+            box-shadow: 0 8px 20px -4px rgba(51, 71, 214, 0.4);
+            margin-top: 1.15rem;
         }
 
-        .generate-btn:hover {
-            transform: translateY(-1px);
-            background: linear-gradient(135deg, var(--sky) 0%, var(--sky) 100%);
-            border-color: var(--stone);
-            color: #2434A8;
-            box-shadow: 0 6px 16px -4px rgba(153, 27, 27, 0.14);
+        .generate-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #2434A8 0%, #5835EB 100%);
+            box-shadow: 0 12px 24px -4px rgba(51, 71, 214, 0.52);
         }
 
         .generate-btn:disabled {
-            background: #f1f5f9;
-            color: #94a3b8;
-            border-color: #e2e8f0;
+            background: var(--stone);
+            color: var(--slate) !important;
+            border-color: var(--stone);
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
         }
 
-        /* ========== PREVIEW CARD ========== */
+        /* ========== PREVIEW & MULTI-PAGE PDF READER CARD ========== */
         .preview-card {
             display: flex;
             flex-direction: column;
-            min-height: 600px;
+            min-height: 680px;
         }
 
         .preview-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: var(--spacing-lg) var(--spacing-xl);
-            border-bottom: 1px solid var(--border-light);
+            padding: 1.1rem 1.5rem;
+            border-bottom: 1px solid var(--stone);
+            background: var(--surface);
             flex-wrap: wrap;
-            gap: var(--spacing-sm);
+            gap: 0.75rem;
+        }
+
+        .preview-header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
         }
 
         .preview-header h2 {
             font-family: var(--font-display);
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-primary);
+            font-size: 1.12rem;
+            font-weight: 800;
+            color: var(--ink);
+            margin: 0;
         }
 
+        .preview-badge {
+            font-size: 0.74rem;
+            font-weight: 700;
+            color: var(--secondary);
+            background: var(--sky);
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+        }
+
+        /* ========== TWO SIDE-BY-SIDE DOWNLOAD BOXES ========== */
         .preview-actions {
             display: none;
-            flex-direction: column;
-            gap: var(--spacing-md);
-            width: 100%;
+            grid-template-columns: 1fr 1.25fr;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            background: var(--paper);
+            border-bottom: 1px solid var(--stone);
         }
 
         .preview-actions.show {
-            display: flex;
+            display: grid;
         }
 
-        /* ========== DOWNLOAD SECTIONS ========== */
+        .preview-actions.single-mode {
+            grid-template-columns: 1fr;
+        }
+
         .download-section {
-            background: var(--bg-secondary);
-            border-radius: var(--radius-lg);
-            padding: var(--spacing-md);
-            border: 1px solid var(--border-light);
+            background: var(--surface);
+            border-radius: 14px;
+            padding: 0.95rem 1.1rem;
+            border: 1.5px solid var(--stone);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 0.65rem;
+        }
+
+        .download-section-head {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
         }
 
         .download-section-title {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--text-secondary);
-            margin-bottom: var(--spacing-sm);
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: var(--ink);
             display: flex;
             align-items: center;
-            gap: var(--spacing-xs);
+            gap: 0.4rem;
         }
 
-        .download-section-title .icon {
-            font-size: 1rem;
+        .download-section-sub {
+            font-size: 0.76rem;
+            color: var(--slate);
         }
 
         .download-buttons {
             display: flex;
-            gap: var(--spacing-sm);
+            gap: 0.55rem;
             flex-wrap: wrap;
         }
 
+        /* Highlighted Complete Pack Box (Cycle + All Fiches) */
         .download-section.projet-complet {
-            background: linear-gradient(135deg, rgba(230, 81, 0, 0.08), rgba(191, 54, 12, 0.08));
-            border-color: rgba(230, 81, 0, 0.3);
+            background: linear-gradient(135deg, rgba(255, 179, 0, 0.14) 0%, rgba(51, 71, 214, 0.06) 100%);
+            border: 2px solid #FFB300;
+            box-shadow: 0 6px 18px -4px rgba(255, 179, 0, 0.22);
         }
 
         .download-section.projet-complet .download-section-title {
-            color: #bf360c;
+            color: var(--ink);
         }
 
-        /* ========== BUTTONS ========== */
+        .pack-star-tag {
+            font-size: 0.66rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            background: #FFB300;
+            color: #0E1633;
+            padding: 2px 7px;
+            border-radius: 5px;
+            margin-left: auto;
+        }
+
+        /* ========== EXPORT BUTTONS ========== */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: var(--spacing-sm);
-            padding: 10px 18px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            border-radius: 12px;
-            transition: all 0.2s ease;
+            gap: 0.45rem;
+            padding: 0.65rem 1rem;
+            font-weight: 800;
+            font-size: 0.84rem;
+            border-radius: 10px;
+            transition: var(--transition);
             cursor: pointer;
             border: 1.5px solid transparent;
             flex: 1;
-            min-width: 120px;
+            min-width: 115px;
             white-space: nowrap;
         }
 
-        .btn:hover {
+        .btn:hover:not(:disabled) {
             transform: translateY(-1px);
         }
 
@@ -600,66 +767,171 @@
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
-            box-shadow: none;
         }
 
+        /* Cycle / Document Simple Buttons */
         .btn-word {
-            background: linear-gradient(135deg, var(--paper) 0%, #f1f5f9 100%);
-            color: #1e293b;
-            border-color: #cbd5e1;
-            box-shadow: 0 2px 5px rgba(15, 23, 42, 0.05);
+            background: var(--surface);
+            color: var(--primary);
+            border-color: var(--primary);
         }
 
         .btn-word:hover:not(:disabled) {
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-            border-color: #94a3b8;
-            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+            background: var(--sky);
         }
 
         .btn-pdf {
-            background: linear-gradient(135deg, var(--sky) 0%, var(--paper) 100%);
-            color: #2434A8;
-            border-color: var(--stone);
-            box-shadow: 0 2px 5px rgba(153, 27, 27, 0.06);
+            background: #3347D6;
+            color: #FFFFFF;
+            border-color: #2434A8;
         }
 
         .btn-pdf:hover:not(:disabled) {
-            background: linear-gradient(135deg, var(--sky) 0%, var(--sky) 100%);
-            border-color: var(--stone);
-            box-shadow: 0 4px 12px rgba(153, 27, 27, 0.12);
+            background: #2434A8;
         }
 
+        /* Projet Complet (Cycle + Fiches) Buttons — Sunrise Amber */
         .btn-word-orange {
-            background: linear-gradient(135deg, var(--sky) 0%, #ecfdf5 100%);
-            color: #085E77;
-            border-color: var(--stone);
-            box-shadow: 0 2px 5px rgba(0, 98, 51, 0.06);
+            background: #FFB300;
+            color: #0E1633;
+            border-color: #E09B00;
+            box-shadow: 0 3px 10px rgba(255, 179, 0, 0.25);
         }
 
         .btn-word-orange:hover:not(:disabled) {
-            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-            border-color: #6ee7b7;
-            box-shadow: 0 4px 12px rgba(0, 98, 51, 0.12);
+            background: #FFA000;
+            color: #0E1633;
         }
 
         .btn-pdf-orange {
-            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-            color: #92400e;
-            border-color: #fde68a;
-            box-shadow: 0 2px 5px rgba(180, 83, 9, 0.06);
+            background: #0E1633;
+            color: #FFB300;
+            border-color: #0E1633;
+            box-shadow: 0 3px 10px rgba(14, 22, 51, 0.2);
         }
 
         .btn-pdf-orange:hover:not(:disabled) {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            border-color: #fcd34d;
-            box-shadow: 0 4px 12px rgba(180, 83, 9, 0.12);
+            background: #1E293B;
+            color: #FFD54F;
         }
 
+        /* ========== MULTI-PAGE PDF & A4 READER TOOLBAR ========== */
+        .pdf-reader-toolbar {
+            display: none;
+            flex-direction: column;
+            gap: 0.6rem;
+            background: #0E1633;
+            color: #E8ECFA;
+            padding: 0.75rem 1.25rem;
+            border-bottom: 1px solid #24304F;
+        }
+
+        .pdf-reader-toolbar.show {
+            display: flex;
+        }
+
+        .pdf-toolbar-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+        }
+
+        .pdf-nav-group {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .pdf-ctrl-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.35rem;
+            padding: 0.38rem 0.75rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            color: #FFFFFF;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .pdf-ctrl-btn:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #FFB300;
+        }
+
+        .pdf-ctrl-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .pdf-ctrl-btn.active {
+            background: #FFB300;
+            color: #0E1633;
+            border-color: #FFB300;
+            font-weight: 800;
+        }
+
+        .pdf-page-counter {
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: #FFB300;
+            padding: 0 0.4rem;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Quick Jump Pills Bar (Cycle | S1 | S2 | ... | S10) */
+        .pdf-pills-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            overflow-x: auto;
+            padding-bottom: 2px;
+            scrollbar-width: thin;
+        }
+
+        .pdf-page-pill {
+            padding: 0.32rem 0.68rem;
+            border-radius: 7px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            color: #CBD5E1;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: var(--transition);
+        }
+
+        .pdf-page-pill:hover {
+            background: rgba(255, 255, 255, 0.18);
+            color: #FFFFFF;
+        }
+
+        .pdf-page-pill.active {
+            background: #FFB300;
+            color: #0E1633;
+            border-color: #FFB300;
+            font-weight: 800;
+        }
+
+        /* ========== PDF READER STAGE & A4 SHEET CANVAS ========== */
         .preview-content {
             flex: 1;
-            padding: var(--spacing-xl);
+            padding: 1.5rem;
             overflow: auto;
-            background: var(--bg-secondary);
+            background: var(--paper);
+        }
+
+        .preview-content.pdf-stage-active {
+            background: #1E293B;
+            padding: 1.5rem 1.25rem;
         }
 
         .preview-empty {
@@ -668,269 +940,215 @@
             align-items: center;
             justify-content: center;
             height: 100%;
-            min-height: 400px;
-            color: var(--text-light);
+            min-height: 440px;
+            color: var(--slate);
             text-align: center;
+            padding: 2rem;
         }
 
         .preview-empty-icon {
-            font-size: 4rem;
-            opacity: 0.3;
-            margin-bottom: var(--spacing-lg);
+            width: 72px;
+            height: 72px;
+            border-radius: 20px;
+            background: var(--sky);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            margin-bottom: 1.1rem;
         }
 
         .preview-empty h3 {
-            font-size: 1.2rem;
-            color: var(--text-primary);
-            margin-bottom: var(--spacing-sm);
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: var(--ink);
+            margin-bottom: 0.45rem;
+        }
+
+        .preview-empty p {
+            max-width: 46ch;
+            font-size: 0.94rem;
+            color: var(--slate);
+        }
+
+        /* Realistic A4 Sheet inside the PDF Reader Stage */
+        .a4-pdf-sheet-wrapper {
+            max-width: 1020px;
+            margin: 0 auto 1.5rem;
+            transform-origin: top center;
+            transition: transform 0.2s ease;
+        }
+
+        .a4-pdf-sheet-Wrapper:last-child {
+            margin-bottom: 0;
+        }
+
+        .a4-pdf-sheet-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #CBD5E1;
+            font-size: 0.78rem;
+            font-weight: 700;
+            margin-bottom: 0.45rem;
+            padding: 0 0.25rem;
+        }
+
+        .a4-pdf-sheet-meta span.sheet-badge {
+            background: rgba(255, 179, 0, 0.2);
+            color: #FFB300;
+            border: 1px solid rgba(255, 179, 0, 0.4);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.72rem;
+        }
+
+        .a4-pdf-sheet {
+            background: #FFFFFF;
+            color: #0E1633;
+            border-radius: 8px;
+            padding: 1.5rem 1.75rem;
+            box-shadow: 0 16px 38px rgba(0, 0, 0, 0.35);
+            border: 1px solid #CBD5E1;
+            overflow-x: auto;
+        }
+
+        .a4-pdf-sheet table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 8px;
+            table-layout: fixed;
+        }
+
+        .a4-pdf-sheet th,
+        .a4-pdf-sheet td {
+            border: 1px solid #000;
+            padding: 5px 7px;
+            vertical-align: middle;
+            word-wrap: break-word;
+            color: #0E1633;
+        }
+
+        /* Native PDF Iframe Viewer */
+        .native-pdf-container {
+            display: none;
+            width: 100%;
+            height: 680px;
+            background: #0F172A;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #334155;
+        }
+
+        .native-pdf-container.show {
+            display: block;
+        }
+
+        .native-pdf-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #FFFFFF;
         }
 
         .preview-document {
-            background: var(--bg-card);
-            padding: var(--spacing-xl);
-            border-radius: var(--radius-xl);
+            background: #FFFFFF;
+            color: #0E1633;
+            padding: 1.5rem;
+            border-radius: 14px;
             box-shadow: var(--shadow-sm);
-            font-size: 1rem;
+            font-size: 0.95rem;
             line-height: 1.6;
         }
 
-        .preview-document table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: var(--spacing-md) 0;
-            font-size: 0.95rem;
-            display: block;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
+        /* ========== METHODOLOGICAL GUIDES (DARK MODE READY) ========== */
+        .gen-guide-section {
+            max-width: 1080px;
+            margin: 2.5rem auto;
+            padding: 2.25rem;
+            background: var(--surface, #FFFFFF);
+            border-radius: 18px;
+            border: 1px solid var(--stone, #E4E2DA);
+            line-height: 1.75;
+            color: var(--ink, #0E1633);
+            box-shadow: var(--shadow-sm);
         }
 
-        .preview-document th,
-        .preview-document td {
-            padding: var(--spacing-sm);
-            border: 1px solid var(--border);
-            text-align: left;
+        .gen-guide-section h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            margin-bottom: 0.9rem;
+            color: var(--primary, #3347D6);
         }
 
-        .preview-document th {
-            background: var(--bg-secondary);
-            font-weight: 600;
+        .gen-guide-section h3 {
+            font-family: var(--font-display);
+            font-size: 1.18rem;
+            margin-top: 1.4rem;
+            margin-bottom: 0.6rem;
+            color: var(--secondary, #0B7A99);
         }
 
-        /* ========== FOOTER ========== */
+        .gen-guide-section p,
+        .gen-guide-section li {
+            color: var(--ink, #0E1633);
+        }
 
         /* ========== RESPONSIVE ========== */
-        @media (max-width: 1200px) {
+        @media (max-width: 1180px) {
             .generator-container {
                 grid-template-columns: 1fr;
-                max-width: 900px;
+                max-width: 960px;
             }
-
             .preview-card {
-                min-height: 500px;
+                min-height: 520px;
             }
         }
 
-        @media (max-width: 968px) {
-            .nav-menu.active {
-                transform: translateY(0);
-                opacity: 1;
-                pointer-events: auto;
+        @media (max-width: 860px) {
+            .preview-actions {
+                grid-template-columns: 1fr;
             }
-
-            .preview-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: var(--spacing-md);
-            }
-
-            .download-buttons {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-                min-width: 0;
-                white-space: normal;
+            .ux-step-sep {
+                display: none;
             }
         }
 
         @media (max-width: 640px) {
-            .main-content {
-                padding-top: 0;
-            }
-
             .generator-container {
-                padding: 0 var(--spacing-sm) var(--spacing-xl);
+                padding: 0 0.75rem 2rem;
             }
-
             .form-row,
             .optional-content.show {
                 grid-template-columns: 1fr;
             }
-
-            .download-section {
-                padding: var(--spacing-sm);
+            .tabs {
+                grid-template-columns: 1fr 1fr 1fr;
             }
-
-            .download-section-title {
-                font-size: 0.75rem;
-            }
-
-            .btn {
-                font-size: 0.8rem;
-                padding: var(--spacing-sm) var(--spacing-md);
-                min-width: 0;
-                white-space: normal;
-            }
-
-            .generate-btn {
-                padding: var(--spacing-md);
-                font-size: 1rem;
-            }
-
-            .preview-document {
-                padding: var(--spacing-md);
-                font-size: 0.9rem;
-            }
-
-            .preview-document table {
-                font-size: 0.78rem;
-            }
-
-            .preview-document th,
-            .preview-document td {
-                padding: 5px 6px;
-                word-break: break-word;
-            }
-
-            .preview-card {
-                min-height: 400px;
-            }
-
-            .info-box {
-                font-size: 0.85rem;
-                padding: var(--spacing-sm);
-            }
-
             .tab {
-                padding: var(--spacing-md) var(--spacing-sm);
-                font-size: 0.8rem;
+                padding: 0.55rem 0.3rem;
+                font-size: 0.76rem;
             }
-
-            .tab-icon {
-                font-size: 1.2rem;
+            .tab-sub {
+                display: none;
+            }
+            .a4-pdf-sheet {
+                padding: 0.85rem;
             }
         }
-
-        @media (max-width: 480px) {
-            .page-header {
-                padding: var(--spacing-lg) var(--spacing-sm);
-            }
-
-            .page-header h1 {
-                font-size: 1.3rem;
-            }
-
-            .page-header p {
-                font-size: 0.85rem;
-            }
-
-            .card-body {
-                padding: var(--spacing-md) var(--spacing-sm);
-            }
-
-            .form-label {
-                font-size: 0.9rem;
-            }
-
-            .form-select,
-            .form-input,
-            .form-textarea {
-                font-size: 0.95rem;
-                padding: var(--spacing-sm);
-            }
-
-            .tab {
-                padding: var(--spacing-sm) 4px;
-                font-size: 0.7rem;
-            }
-
-            .tab-icon {
-                font-size: 1rem;
-                margin-bottom: 2px;
-            }
-
-            .generate-btn {
-                padding: var(--spacing-sm) var(--spacing-md);
-                font-size: 0.9rem;
-            }
-
-            .preview-document {
-                padding: var(--spacing-sm);
-                font-size: 0.82rem;
-            }
-
-            .preview-document table {
-                font-size: 0.72rem;
-            }
-
-            .preview-document th,
-            .preview-document td {
-                padding: 4px 5px;
-            }
-
-            .preview-content {
-                padding: var(--spacing-md);
-            }
-
-            .download-buttons {
-                gap: var(--spacing-sm);
-            }
-
-            .btn {
-                font-size: 0.75rem;
-                padding: var(--spacing-sm);
-            }
-        }
-           
-                /* ═══ FOOTER CANONIQUE ═══ */
-        .footer { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 3.5rem 2rem 0; }
-        .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; }
-        .footer-brand { display: flex; flex-direction: column; gap: 1rem; }
-        .footer-brand img { height: 48px; filter: brightness(0) invert(1); }
-        .footer-brand p { color: rgba(255,255,255,0.65); font-size: 0.875rem; line-height: 1.75; }
-        .footer-social { display: flex; gap: 0.625rem; margin-top: 0.25rem; }
-        .footer-social a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 50%; transition: all 0.3s ease; }
-        .footer-social a:hover { background: rgba(255,255,255,0.18); transform: translateY(-2px); }
-        .footer-social svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.8); }
-        .footer-col h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); margin-bottom: 1.125rem; }
-        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.625rem; }
-        .footer-col ul li a { color: rgba(255,255,255,0.7); font-size: 0.875rem; transition: color 0.2s ease; display: inline-flex; align-items: center; gap: 0.375rem; }
-        .footer-col ul li a:hover { color: white; }
-        .footer-col ul li a .dot { width: 4px; height: 4px; border-radius: 50%; background: #3347D6; flex-shrink: 0; opacity: 0; transition: opacity 0.2s ease; }
-        .footer-col ul li a:hover .dot { opacity: 1; }
-        .footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.5rem 0; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
-        .footer-copyright { color: rgba(255,255,255,0.35); font-size: 0.8125rem; }
-        .footer-tagline { color: rgba(255,255,255,0.35); font-size: 0.8125rem; font-style: italic; }
-        @media (max-width: 968px) { .footer-inner { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
-        @media (max-width: 640px) { .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; } .footer-brand { grid-column: 1 / -1; } .footer-bottom { flex-direction: column; text-align: center; } }
-        </style>
+    </style>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8253776880916865" crossorigin="anonymous"></script>
-  
-
-
-
-
-<script src="profeps-cmp.js" defer></script>
-<link rel="stylesheet" href="/css/profeps-unifier.min.css?v=20261101">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil ProfEPS Maroc","item":"https://profeps.ma/"},{"@type":"ListItem","position":2,"name":"Guides & Pédagogie EPS Maroc","item":"https://profeps.ma/blog.html"},{"@type":"ListItem","position":3,"name":"Générateur de Fiches de Séance EPS Gratuit | ProfEPS","item":"https://profeps.ma/generateur.html"}]}</script>
-  <link rel="stylesheet" href="/assets/site.css?v=20261113">
-  <script src="profeps-communaute.js" defer></script>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <script src="profeps-cmp.js" defer></script>
+    <link rel="stylesheet" href="/css/profeps-unifier.min.css?v=20261113">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil ProfEPS Maroc","item":"https://profeps.ma/"},{"@type":"ListItem","position":2,"name":"Guides & Pédagogie EPS Maroc","item":"https://profeps.ma/blog.html"},{"@type":"ListItem","position":3,"name":"Générateur de Fiches de Séance EPS Gratuit | ProfEPS","item":"https://profeps.ma/generateur.html"}]}</script>
+    <link rel="stylesheet" href="/assets/site.css?v=20261113">
+    <script src="profeps-communaute.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 
-<body class="tpl-tool ">
+<body class="tpl-tool">
 <!-- PROFEPS_UNIFIED_NAVBAR_START -->
   <script>
     (function() {
@@ -1139,14 +1357,12 @@
 })();
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->
-<!-- Unified Canonique ProfEPS Navbar (Blog & Homepage Style) -->
-    
-    
+
     <!-- LOADING OVERLAY -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-spinner"></div>
         <div class="loading-text" id="loadingText">⚡ Génération en cours...</div>
-        <div class="loading-subtext" id="loadingSubtext">Création de votre document personnalisé</div>
+        <div class="loading-subtext" id="loadingSubtext">Création de votre dossier pédagogique EPS</div>
         <div class="progress-container" id="progressContainer" style="display: none;">
             <div class="progress-bar" id="progressBar">
                 <div class="progress-fill" id="progressFill"></div>
@@ -1158,39 +1374,64 @@
     <!-- MAIN CONTENT -->
     <main class="main-content">
         <div class="page-header">
+            <div class="page-header-kicker">Prépare ta séance · Fondé sur les OP 2007 (Lycée) &amp; OP 2009 (Collège)</div>
             <h1>Générateur de <span>Fiches Pédagogiques EPS</span> — Maroc</h1>
-            <p>Créez vos fiches de séance, projets de cycle et grilles d'évaluation conformes aux Orientations Pédagogiques 2007-2009</p>
+            <p>Crée en quelques secondes ton Projet de Cycle accompagné de toutes ses fiches de séance, une fiche individuelle ou une grille d'évaluation (/20) prête à imprimer.</p>
+            <div class="ux-steps-strip" aria-label="Parcours en 3 étapes">
+                <span class="ux-step-item"><span class="ux-step-num">1</span> Choisis ton Niveau &amp; ton APS</span>
+                <span class="ux-step-sep" aria-hidden="true">→</span>
+                <span class="ux-step-item"><span class="ux-step-num">2</span> Feuilleton le Cycle &amp; les Fiches dans le Lecteur PDF</span>
+                <span class="ux-step-sep" aria-hidden="true">→</span>
+                <span class="ux-step-item highlight"><span class="ux-step-num">3</span> Télécharge le Cycle seul ou le Pack Complet (Word / PDF)</span>
+            </div>
         </div>
 
         <div class="generator-container">
-            <!-- FORMULAIRE -->
+            <!-- FORMULAIRE (COLONNE GAUCHE) -->
             <div class="card">
-                <div class="tabs">
-                    <button type="button" class="tab active" data-type="fiche"><span class="tab-icon">📋</span>Fiche</button>
-                    <button type="button" class="tab" data-type="projet"><span class="tab-icon">📊</span>Projet</button>
-                    <button type="button" class="tab" data-type="grille"><span class="tab-icon">📝</span>Grille</button>
+                <div class="tabs" role="tablist" aria-label="Type de document à générer">
+                    <!-- ONGLET 1 PAR DÉFAUT : PROJET DE CYCLE + FICHES -->
+                    <button type="button" class="tab active" data-type="projet" role="tab" aria-selected="true">
+                        <span class="tab-pillar-badge">★ Pilier</span>
+                        <span class="tab-icon">📊</span>
+                        <span>Projet de Cycle</span>
+                        <span class="tab-sub">+ Toutes les Fiches</span>
+                    </button>
+                    <!-- ONGLET 2 : FICHE DE SÉANCE -->
+                    <button type="button" class="tab" data-type="fiche" role="tab" aria-selected="false">
+                        <span class="tab-icon">📋</span>
+                        <span>Fiche Séance</span>
+                        <span class="tab-sub">1 séance ciblée</span>
+                    </button>
+                    <!-- ONGLET 3 : GRILLE -->
+                    <button type="button" class="tab" data-type="grille" role="tab" aria-selected="false">
+                        <span class="tab-icon">📝</span>
+                        <span>Grille EPS</span>
+                        <span class="tab-sub">Obs. &amp; Note /20</span>
+                    </button>
                 </div>
+
                 <div class="card-body">
                     <form id="form">
                         <div class="form-row">
                             <div class="form-group">
-                                <label class="form-label"><span>📊</span> Niveau scolaire <span class="required">*</span></label>
+                                <label class="form-label" for="niveau"><span>📊</span> Niveau scolaire <span class="required">*</span></label>
                                 <select class="form-select" id="niveau" required>
                                     <option value="">-- Sélectionner --</option>
                                     <optgroup label="🏫 Collège (OP 2009)">
-                                        <option value="1AC">1ère Année Collège</option>
-                                        <option value="2AC">2ème Année Collège</option>
-                                        <option value="3AC">3ème Année Collège</option>
+                                        <option value="1AC">1ère Année Collège (1AC)</option>
+                                        <option value="2AC">2ème Année Collège (2AC)</option>
+                                        <option value="3AC">3ème Année Collège (3AC)</option>
                                     </optgroup>
                                     <optgroup label="🎓 Lycée (OP 2007)">
-                                        <option value="TC">Tronc Commun</option>
-                                        <option value="1AB">1ère Année Bac</option>
-                                        <option value="2AB">2ème Année Bac</option>
+                                        <option value="TC">Tronc Commun (TC)</option>
+                                        <option value="1AB">1ère Année Bac (1BAC)</option>
+                                        <option value="2AB">2ème Année Bac (2BAC)</option>
                                     </optgroup>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label class="form-label"><span>⚽</span> APS <span class="required">*</span></label>
+                                <label class="form-label" for="aps"><span>⚽</span> Activité (APS) <span class="required">*</span></label>
                                 <select class="form-select" id="aps" required>
                                     <option value="">-- Sélectionner --</option>
                                     <optgroup label="🏆 Sports collectifs">
@@ -1221,16 +1462,42 @@
                             </div>
                         </div>
 
+                        <!-- PROJET Fields (VISIBLE PAR DÉFAUT) -->
+                        <div id="projetFields" class="conditional show">
+                            <div class="info-box">
+                                📌 <strong>Dossier complet automatique :</strong> Génère le <strong>Projet de Cycle (Page 1)</strong> + toutes les <strong>Fiches de Séance (S1 = Éval. diagnostique → Acquisition → Éval. terminale)</strong> consultables dans le lecteur PDF à droite.
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="niveauEleves"><span>🎚️</span> Niveau des élèves</label>
+                                    <select class="form-select" id="niveauEleves">
+                                        <option value="debutant">Débutant (Découverte)</option>
+                                        <option value="moyen" selected>Moyen (Standard)</option>
+                                        <option value="avance">Avancé (Consolidation)</option>
+                                        <option value="elite">Expert (Perfectionnement)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="nombreSeances"><span>📅</span> Nombre de séances</label>
+                                    <select class="form-select" id="nombreSeances">
+                                        <option value="8">8 séances (Cycle court)</option>
+                                        <option value="10" selected>10 séances (Standard)</option>
+                                        <option value="12">12 séances (Cycle complet)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- FICHE Fields -->
-                        <div id="ficheFields" class="conditional show">
+                        <div id="ficheFields" class="conditional">
                             <div class="form-group">
-                                <label class="form-label"><span>🎯</span> Objectif de la séance <span class="required">*</span></label>
+                                <label class="form-label" for="objectif"><span>🎯</span> Objectif de la séance <span class="required">*</span></label>
                                 <textarea class="form-textarea" id="objectif" placeholder="Ex: Améliorer la qualité de la passe en mouvement vers un partenaire démarqué"></textarea>
                             </div>
                             <div class="form-group">
-                                <label class="form-label"><span>🔢</span> N° de séance</label>
+                                <label class="form-label" for="numeroSeance"><span>🔢</span> N° de séance</label>
                                 <select class="form-select" id="numeroSeance">
-                                    <option value="1">Séance 1</option>
+                                    <option value="1">Séance 1 (Évaluation diagnostique)</option>
                                     <option value="2">Séance 2</option>
                                     <option value="3">Séance 3</option>
                                     <option value="4">Séance 4</option>
@@ -1241,92 +1508,75 @@
                                     <option value="9">Séance 9</option>
                                     <option value="10">Séance 10</option>
                                     <option value="11">Séance 11</option>
-                                    <option value="12">Séance 12</option>
+                                    <option value="12">Séance 12 (Évaluation terminale)</option>
                                 </select>
-                            </div>
-                        </div>
-
-                        <!-- PROJET Fields -->
-                        <div id="projetFields" class="conditional">
-                            <div class="info-box">📌 <strong>Structure automatique :</strong> S1 = Évaluation diagnostique | S2 = Acquisition | Dernière = Évaluation terminale</div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label class="form-label"><span>🎚️</span> Niveau des élèves</label>
-                                    <select class="form-select" id="niveauEleves">
-                                        <option value="debutant">🟢 Débutant</option>
-                                        <option value="moyen" selected>🟡 Moyen</option>
-                                        <option value="avance">🟠 Avancé</option>
-                                        <option value="elite">🔴 Élite</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label"><span>📅</span> Nombre de séances</label>
-                                    <select class="form-select" id="nombreSeances">
-                                        <option value="8">8 séances</option>
-                                        <option value="10" selected>10 séances</option>
-                                        <option value="12">12 séances</option>
-                                    </select>
-                                </div>
                             </div>
                         </div>
 
                         <!-- GRILLE Fields -->
                         <div id="grilleFields" class="conditional">
                             <div class="form-group">
-                                <label class="form-label"><span>📋</span> Type de grille</label>
+                                <label class="form-label" for="typeGrille"><span>📋</span> Type de grille (35 élèves — A4 Portrait)</label>
                                 <select class="form-select" id="typeGrille">
-                                    <option value="observation">👁️ Grille d'observation</option>
-                                    <option value="evaluation">📊 Grille d'évaluation</option>
+                                    <option value="observation">👁️ Grille d'observation (diagnostique)</option>
+                                    <option value="evaluation">📊 Grille d'évaluation sommative (/20)</option>
                                 </select>
                             </div>
                         </div>
 
                         <!-- OPTIONS SUPPLÉMENTAIRES -->
                         <div class="optional-toggle" id="optionalToggle">
+                            <span>⚙️ Personnaliser l'en-tête (Professeur, Établissement, Classe)</span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <polyline points="6 9 12 15 18 9"></polyline>
                             </svg>
-                            <span>Afficher les options supplémentaires</span>
                         </div>
                         <div class="optional-content" id="optionalContent">
                             <div class="form-group">
-                                <label class="form-label">👤 Nom du professeur</label>
+                                <label class="form-label" for="nomProf">👤 Nom du professeur</label>
                                 <input type="text" class="form-input" id="nomProf" placeholder="M. / Mme...">
                             </div>
                             <div class="form-group">
-                                <label class="form-label">🏫 Établissement</label>
+                                <label class="form-label" for="etablissement">🏫 Établissement</label>
                                 <input type="text" class="form-input" id="etablissement" placeholder="Lycée / Collège...">
                             </div>
                             <div class="form-group">
-                                <label class="form-label">📅 Année scolaire</label>
+                                <label class="form-label" for="anneeScolaire">📅 Année scolaire</label>
                                 <input type="text" class="form-input" id="anneeScolaire" value="2025-2026">
                             </div>
                             <div class="form-group">
-                                <label class="form-label">🏷️ Classe</label>
+                                <label class="form-label" for="classe">🏷️ Classe</label>
                                 <input type="text" class="form-input" id="classe" placeholder="Ex: 3AC 1">
                             </div>
                         </div>
 
                         <button type="submit" class="generate-btn" id="submitBtn">
-                            <span>🚀</span> Générer le document
+                            <span>🚀</span>
+                            <span id="submitBtnText">Générer le Projet de Cycle + Fiches</span>
                         </button>
                     </form>
                 </div>
             </div>
 
-            <!-- APERÇU -->
+            <!-- APERÇU & LECTEUR PDF MULTI-PAGES (COLONNE DROITE) -->
             <div class="card preview-card">
                 <div class="preview-header">
-                    <h2>📄 Aperçu du document</h2>
+                    <div class="preview-header-left">
+                        <h2>📄 Aperçu &amp; Lecteur PDF du Dossier</h2>
+                        <span class="preview-badge" id="previewFormatBadge">Format A4 Paysage Officiel</span>
+                    </div>
                 </div>
                 
-                <!-- ZONE DES BOUTONS DE TÉLÉCHARGEMENT -->
+                <!-- ZONE DES 2 BLOCS DE TÉLÉCHARGEMENT (PROJET SEUL vs PACK COMPLET CYCLE + FICHES) -->
                 <div class="preview-actions" id="previewActions">
-                    <!-- Section Document Simple (Fiche/Grille/Projet) -->
+                    <!-- Bloc 1 : Document Simple (Projet de Cycle seul / Fiche seule / Grille seule) -->
                     <div class="download-section" id="downloadSectionSimple">
-                        <div class="download-section-title">
-                            <span class="icon">📊</span>
-                            <span id="downloadSectionTitle">Projet de Cycle</span>
+                        <div class="download-section-head">
+                            <div class="download-section-title">
+                                <span class="icon">📊</span>
+                                <span id="downloadSectionTitle">Projet de Cycle seul (1 page)</span>
+                            </div>
+                            <span class="download-section-sub" id="downloadSectionSub">Tableau récapitulatif du cycle (OTI, OTC, progression)</span>
                         </div>
                         <div class="download-buttons">
                             <button type="button" class="btn btn-word" id="downloadWord">📥 Word</button>
@@ -1334,70 +1584,93 @@
                         </div>
                     </div>
                     
-                    <!-- Section Projet Complet (visible uniquement pour projets) -->
+                    <!-- Bloc 2 : Pack Projet Complet (Cycle + Toutes les fiches — Mis en valeur en Ambre) -->
                     <div class="download-section projet-complet" id="downloadSectionComplet" style="display: none;">
-                        <div class="download-section-title">
-                            <span class="icon">📦</span>
-                            <span>Projet Complet (Cycle + Toutes les fiches)</span>
+                        <div class="download-section-head">
+                            <div class="download-section-title">
+                                <span class="icon">📦</span>
+                                <span>Projet Complet (Cycle + Fiches)</span>
+                                <span class="pack-star-tag">★ Pack Complet</span>
+                            </div>
+                            <span class="download-section-sub" id="downloadCompletSub">Le Cycle + toutes les Fiches de séance réunies en 1 fichier</span>
                         </div>
                         <div class="download-buttons">
-                            <button type="button" class="btn btn-word-orange" id="downloadProjetCompletWord">📥 Word</button>
-                            <button type="button" class="btn btn-pdf-orange" id="downloadProjetCompletPDF">📄 PDF</button>
+                            <button type="button" class="btn btn-word-orange" id="downloadProjetCompletWord">📥 Word Complet</button>
+                            <button type="button" class="btn btn-pdf-orange" id="downloadProjetCompletPDF">📄 PDF Complet</button>
                         </div>
                     </div>
                 </div>
+
+                <!-- BARRE D'OUTILS DU LECTEUR PDF MULTI-PAGES (POUR PROJET DE CYCLE + FICHES) -->
+                <div class="pdf-reader-toolbar" id="pdfReaderToolbar">
+                    <div class="pdf-toolbar-top">
+                        <div class="pdf-nav-group">
+                            <button type="button" class="pdf-ctrl-btn" id="pdfPrevBtn" title="Page précédente">◀ Préc.</button>
+                            <span class="pdf-page-counter" id="pdfPageCounter">Page 1 / 11</span>
+                            <button type="button" class="pdf-ctrl-btn" id="pdfNextBtn" title="Page suivante">Suiv. ▶</button>
+                            <button type="button" class="pdf-ctrl-btn" id="pdfScrollAllBtn" title="Afficher toutes les pages en défilement continu">📜 Toutes les pages</button>
+                        </div>
+                        <div class="pdf-nav-group">
+                            <button type="button" class="pdf-ctrl-btn" id="pdfZoomOutBtn" title="Réduire le zoom">−</button>
+                            <span class="pdf-page-counter" id="pdfZoomLabel" style="color:#E8ECFA;">100%</span>
+                            <button type="button" class="pdf-ctrl-btn" id="pdfZoomInBtn" title="Agrandir le zoom">+</button>
+                            <button type="button" class="pdf-ctrl-btn" id="toggleNativePdfBtn" title="Afficher dans le lecteur PDF natif intégré">📄 Lecteur PDF intégré</button>
+                        </div>
+                    </div>
+                    <!-- Accès rapide : [📊 Cycle] [S1] [S2] [S3] ... [S10] -->
+                    <div class="pdf-pills-bar" id="pdfPillsBar" role="tablist" aria-label="Feuillets du dossier pédagogique"></div>
+                </div>
                 
+                <!-- ZONE D'AFFICHAGE DU LECTEUR -->
                 <div class="preview-content" id="previewContent">
                     <div class="preview-empty" id="previewEmpty">
-                        <div class="preview-empty-icon">📄</div>
-                        <h3>Aucun document généré</h3>
-                        <p>Remplissez le formulaire et cliquez sur "Générer" pour voir l'aperçu ici.</p>
+                        <div class="preview-empty-icon">📊</div>
+                        <h3>Prêt à générer ton Projet de Cycle + Fiches</h3>
+                        <p>Sélectionne ton <strong>Niveau scolaire</strong> et ton <strong>APS</strong> à gauche, puis clique sur <strong>« Générer le Projet de Cycle + Fiches »</strong> pour feuilleter le cycle et toutes ses fiches de séance ici.</p>
                     </div>
+                    <!-- Lecteur PDF Natif intégré (iframe Blob PDF) -->
+                    <div class="native-pdf-container" id="nativePdfContainer">
+                        <iframe id="nativePdfIframe" class="native-pdf-iframe" title="Lecteur PDF du Projet de Cycle et des Fiches de Séance"></iframe>
+                    </div>
+                    <!-- Visionneuse Feuillets A4 Paysage / Document -->
                     <div class="preview-document" id="previewDocument" style="display:none;"></div>
                 </div>
             </div>
         </div>
     
-        <section id="guide-methodologique-generateur" style="max-width:1000px; margin:3rem auto; padding:2.5rem; background:#ffffff; border-radius:16px; border:1px solid #e2e8f0; line-height:1.8; color:#1a1a2e;">
-            <h2 style="font-size:1.6rem; margin-bottom:1rem; color:#3347D6;">Guide Méthodologique : Concevoir ses Fiches Pédagogiques et Cycles d'EPS au Maroc (OP 2007 & 2009)</h2>
+        <section id="guide-methodologique-generateur" class="gen-guide-section">
+            <h2>Guide Méthodologique : Concevoir ses Fiches Pédagogiques et Cycles d'EPS au Maroc (OP 2007 &amp; 2009)</h2>
             <p>La préparation écrite de la leçon d'Éducation Physique et Sportive (EPS) constitue le pilier fondamental de la réussite pédagogique de l'enseignant au collège comme au lycée qualifiant. Au Maroc, toute planification didactique doit s'articuler rigoureusement autour des <strong>Orientations Pédagogiques officielles de 2009 pour le cycle collégial</strong> et des <strong>Orientations Pédagogiques de 2007 pour l'enseignement secondaire qualifiant</strong>. Notre générateur de fiches pédagogiques a été conçu par des enseignants et formateurs pour automatiser la mise en forme tout en respectant scrupuleusement l'Approche Par Compétences (APC) et les attentes des inspections pédagogiques du Ministère de l'Éducation Nationale, du Préscolaire et des Sports.</p>
-            <h3 style="font-size:1.25rem; margin-top:1.5rem; margin-bottom:0.75rem; color:#0B7A99;">1. De l'Objectif Terminal d'Intégration (OTI) à l'Objectif de Séance</h3>
+            <h3>1. De l'Objectif Terminal d'Intégration (OTI) à l'Objectif de Séance</h3>
             <p>Chaque niveau scolaire poursuit un Objectif Terminal d'Intégration (OTI) précis qui synthétise les acquis moteurs, cognitifs et socio-affectifs attendus en fin d'année scolaire. Lorsqu'un professeur d'EPS élabore un cycle de 10 à 12 séances dans une Activité Physique et Sportive (APS) telle que le basketball, le handball, le volleyball, le football, la gymnastique au sol, le badminton ou la course de durée, il décline cet OTI en Objectif Terminal de Cycle (OTC). À l'échelle de chaque leçon, l'objectif de séance doit cibler une transformation concrète et observable du comportement moteur de l'élève face à une situation-problème adaptée à son niveau initial diagnostiqué lors de la première séance d'observation.</p>
-            <h3 style="font-size:1.25rem; margin-top:1.5rem; margin-bottom:0.75rem; color:#0B7A99;">2. Structure Canonique d'une Fiche de Préparation EPS</h3>
+            <h3>2. Structure Canonique d'une Fiche de Préparation EPS</h3>
             <p>Pour répondre aux exigences méthodologiques des inspections régionales et des examens professionnels (concours d'accès aux CRMEF, examen de qualification professionnelle et examen d'aptitude professionnelle Kafa'a), une fiche de séance complète se divise en trois parties complémentaires :</p>
             <ul style="margin:1rem 0 1rem 1.5rem;">
                 <li><strong>La partie introductive et l'échauffement (15 à 20 minutes) :</strong> Prise en main administrative de la classe, appel des élèves, vérification des tenues sportives et des dispenses médicales, présentation claire de l'objectif du jour, suivie d'une mise en train cardio-pulmonaire progressive, d'une mobilisation articulaire dynamique et d'exercices spécifiques à l'APS enseignée pour prévenir tout risque de blessure musculaire ou tendineuse.</li>
                 <li><strong>La partie fondamentale (35 à 45 minutes) :</strong> Cœur de l'apprentissage moteur structuré autour d'une situation de référence ou de situations d'apprentissage évolutives. Chaque situation précise le but pour l'élève, l'aménagement matériel (dimensions du terrain, plots, coupelles, dossards, ballons), les consignes d'organisation, les critères de réalisation biomécaniques et tactiques (comment faire pour réussir) et les critères de réussite quantitatifs ou qualitatifs (par exemple réussir 4 tirs cadrés sur 6 tentatives), ainsi que les variables didactiques de simplification ou de complexification.</li>
                 <li><strong>La partie finale et le retour au calme (5 à 10 minutes) :</strong> Récupération active, relâchement respiratoire, rangement participatif du matériel pédagogique par les élèves et bilan verbal réflexif permettant de valider collectivement les apprentissages de la séance et d'annoncer la thématique de la leçon suivante.</li>
             </ul>
-            <h3 style="font-size:1.25rem; margin-top:1.5rem; margin-bottom:0.75rem; color:#0B7A99;">3. Différenciation Pédagogique et Gestion des Grands Effectifs</h3>
+            <h3>3. Différenciation Pédagogique et Gestion des Grands Effectifs</h3>
             <p>L'hétérogénéité des classes marocaines (effectifs souvent compris entre 34 et 42 élèves par classe) impose une gestion spatiale et temporelle rigoureuse sur les installations sportives scolaires. L'utilisation de groupes de besoin ou de niveau, combinée à la responsabilisation systématique des élèves dispensés dans des rôles sociaux d'observateurs, de chronométreurs, de statisticiens, de juges ou d'arbitres, garantit un temps d'engagement moteur effectif optimal et une inclusion totale. Les documents générés via notre plateforme intègrent directement ces dimensions méthodologiques afin de vous faire gagner un temps précieux dans la tenue de votre cahier journal et de votre dossier pédagogique officiel.</p>
         </section>
 </main>
 
-    <!-- FOOTER -->
-        
-  
-  
-  
-  
-  
-  <section class="peps-deep-enrichment" data-peps-unique-id="generateur.html">
+  <section class="peps-deep-enrichment gen-guide-section" data-peps-unique-id="generateur.html">
     <h2>Guide d'Ingénierie Pédagogique : Concevoir Vos Projets de Cycles et Fiches de Séances EPS sur Mesure</h2>
-    <p>Le générateur interactif de documents pédagogiques ProfEPS Maroc a été développé pour libérer l'enseignant d'Éducation Physique et Sportive des tâches répétitives de mise en page bureautique, tout en garantissant une conformité stricte aux canevas exigés par les inspecteurs pédagogiques des douze Académies Régionales d'Éducation et de Formation (AREF). En quelques clics, l'outil assemble l'architecture curriculaire officielle des Orientations Pédagogiques 2007 (cycle secondaire collégial) et 2009 (cycle secondaire qualifiant) avec vos paramètres de terrain.</p>
+    <p>Le générateur interactif de documents pédagogiques ProfEPS Maroc a été développé pour libérer l'enseignant d'Éducation Physique et Sportive des tâches répétitives de mise en page bureautique, tout en garantissant une conformité stricte aux canevas exigés par les inspecteurs pédagogiques des douze Académies Régionales d'Éducation et de Formation (AREF). En quelques clics, l'outil assemble l'architecture curriculaire officielle des Orientations Pédagogiques 2007 (cycle secondaire qualifiant) et 2009 (cycle secondaire collégial) avec vos paramètres de terrain.</p>
     <h3>Paramétrage en Cinq Étapes : Du Niveau Scolaire à l'Impression PDF A4</h3>
     <p>Pour produire un dossier pédagogique irréprochable, commencez par renseigner l'en-tête administratif (AREF, Direction Provinciale, nom de l'établissement, nom du professeur et année scolaire). Sélectionnez ensuite le niveau d'enseignement (1AC, 2AC, 3AC, Tronc Commun, 1ère Bac ou 2ème Bac) : le moteur didactique charge automatiquement l'Objectif Terminal d'Intégration (OTI) correspondant, le module semestriel et la compétence visée. Choisissez l'Activité Physique et Sportive support (basketball, handball, volleyball, football, course de vitesse, course en durée, course de haies, saut en longueur, triple saut, lancer de poids ou gymnastique au sol), puis ajustez l'effectif de votre classe et le matériel disponible.</p>
     <h3>Personnalisation des Variables Didactiques et Schémas de Terrain</h3>
     <p>Chaque fiche générée détaille les trois phases réglementaires de la séance (prise en main et échauffement spécifique de 10-15 min, situation fondamentale évolutive de 30-35 min avec but, conditions de réalisation, critères de réussite chiffrés, critères de réalisation biomécaniques et variables de simplification/complexification, puis retour au calme et bilan de 5-10 min). Vous pouvez modifier librement n'importe quel champ texte avant de lancer l'impression directe ou l'exportation PDF haute résolution prête à être insérée dans votre cahier journal.</p>
   </section>
   <!-- PROFEPS_RELATED_MESH_START -->
-  <aside class="peps-related-mesh" style="max-width:1024px;margin:2rem auto;padding:1.25rem 1.5rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;">
-    <h2 style="font-size:0.95rem;font-weight:800;color:#0f172a;margin:0 0 0.85rem 0;">🔗 Ressources &amp; Guides Associés (Guides & Pédagogie EPS Maroc)</h2>
+  <aside class="peps-related-mesh" style="max-width:1080px;margin:2rem auto;padding:1.25rem 1.5rem;background:var(--sky);border:1px solid var(--stone);border-radius:18px;">
+    <h2 style="font-size:0.95rem;font-weight:800;color:var(--ink);margin:0 0 0.85rem 0;">🔗 Ressources &amp; Guides Associés (Guides &amp; Pédagogie EPS Maroc)</h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.65rem;">
-        <a href="mentions-legales.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Mentions Légales | ProfEPS | ProfEPS Maroc →</a>
-        <a href="programme-eps-maroc.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Programme EPS Maroc : Horaires, Modules & MEN | ProfEPS →</a>
-        <a href="qa-difference-op-2007-2009.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Différences Clés : OP EPS 2007 vs OP EPS 2009 →</a>
-        <a href="qa-fiche-seance-eps.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Comment Remplir une Fiche de Séance EPS : Exemple →</a>
+        <a href="cycles-eps-maroc.html" style="display:block;padding:0.75rem 1rem;background:var(--surface);border:1px solid var(--stone);border-radius:12px;color:var(--ink);font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📊 Tous les Projets de Cycles EPS Maroc →</a>
+        <a href="programme-eps-maroc.html" style="display:block;padding:0.75rem 1rem;background:var(--surface);border:1px solid var(--stone);border-radius:12px;color:var(--ink);font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Programme EPS Maroc : Horaires, Modules &amp; MEN →</a>
+        <a href="qa-difference-op-2007-2009.html" style="display:block;padding:0.75rem 1rem;background:var(--surface);border:1px solid var(--stone);border-radius:12px;color:var(--ink);font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Différences Clés : OP EPS 2007 vs OP EPS 2009 →</a>
+        <a href="qa-fiche-seance-eps.html" style="display:block;padding:0.75rem 1rem;background:var(--surface);border:1px solid var(--stone);border-radius:12px;color:var(--ink);font-weight:700;font-size:0.85rem;text-decoration:none;transition:border-color 0.2s;">📄 Comment Remplir une Fiche de Séance EPS : Exemple →</a>
     </div>
   </aside>
   <!-- PROFEPS_RELATED_MESH_END -->
@@ -1516,45 +1789,24 @@
   </footer>
 
     <script>
-        // Variables globales
-        let currentType = 'fiche';
+        // =========================================================================
+        // ÉTAT DU GÉNÉRATEUR & DU LECTEUR PDF MULTI-PAGES
+        // =========================================================================
+        // Projet de Cycle + Fiches est le mode par défaut (pilier du site)
+        let currentType = 'projet';
         let currentHtml = '';
         let currentHtmlDisplay = '';
         let currentFilename = '';
         let projetCompletHtml = '';
         let projetCompletFilename = '';
 
-        // Navbar scroll (sécurisé)
-        const navbar = document.getElementById('navbar');
-        if (navbar) {
-            window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
-        }
-
-        // Mobile menu (sécurisé si les anciens éléments n'existent plus)
-        const navToggle = document.getElementById('navToggle');
-        const navMenu = document.getElementById('navMenu');
-        const navBackdrop = document.getElementById('navBackdrop');
-
-        function toggleMenu() {
-            if (navMenu) navMenu.classList.toggle('active');
-            if (navToggle) navToggle.classList.toggle('active');
-            if (navBackdrop) navBackdrop.classList.toggle('active');
-            if (navMenu) document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-        }
-
-        function closeMenu() {
-            if (navMenu) navMenu.classList.remove('active');
-            if (navToggle) navToggle.classList.remove('active');
-            if (navBackdrop) navBackdrop.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        if (navToggle) navToggle.addEventListener('click', (e) => { e.stopPropagation(); toggleMenu(); });
-        if (navBackdrop) navBackdrop.addEventListener('click', closeMenu);
-        if (navMenu && navToggle) {
-            document.addEventListener('click', (e) => { if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) closeMenu(); });
-            navMenu.querySelectorAll('.nav-link, .nav-cta').forEach(link => link.addEventListener('click', closeMenu));
-        }
+        // État du Lecteur PDF Multi-Pages (Cycle + Fiches S1..S12)
+        let currentPages = [];
+        let activePageIndex = 0;
+        let showAllPagesContinuous = false;
+        let currentZoom = 100;
+        let nativePdfMode = false;
+        let currentPdfBlobUrl = null;
 
         // Optional toggle
         const optionalToggle = document.getElementById('optionalToggle');
@@ -1566,91 +1818,276 @@
             });
         }
 
+        function updateSubmitButtonAndBadge() {
+            const btnText = document.getElementById('submitBtnText');
+            const formatBadge = document.getElementById('previewFormatBadge');
+            if (!btnText) return;
+            if (currentType === 'projet') {
+                btnText.textContent = 'Générer le Projet de Cycle + Fiches';
+                if (formatBadge) formatBadge.textContent = 'Lecteur PDF · Cycle + Fiches A4 Paysage';
+            } else if (currentType === 'fiche') {
+                btnText.textContent = 'Générer la Fiche de Séance';
+                if (formatBadge) formatBadge.textContent = 'Format A4 Paysage Officiel';
+            } else if (currentType === 'grille') {
+                btnText.textContent = 'Générer la Grille (35 élèves)';
+                if (formatBadge) formatBadge.textContent = 'Format A4 Portrait (35 élèves)';
+            }
+        }
+
+        function switchTab(type) {
+            currentType = type;
+            document.querySelectorAll('.tab').forEach(t => {
+                const isAct = t.dataset.type === currentType;
+                t.classList.toggle('active', isAct);
+                t.setAttribute('aria-selected', isAct ? 'true' : 'false');
+            });
+            document.querySelectorAll('.conditional').forEach(f => f.classList.remove('show'));
+            const fields = document.getElementById(currentType + 'Fields');
+            if (fields) fields.classList.add('show');
+            updateSubmitButtonAndBadge();
+            clearPreview();
+        }
+
         // Récupérer les données du localStorage (venant de la page d'accueil)
         function loadFormDataFromStorage() {
             const storedData = localStorage.getItem('profeps_formData');
             if (storedData) {
-                const formData = JSON.parse(storedData);
-                
-                // Supprimer les données pour éviter les répétitions
-                localStorage.removeItem('profeps_formData');
-                
-                // Pré-remplir les champs communs
-                if (formData.niveau) document.getElementById('niveau').value = formData.niveau;
-                if (formData.aps) document.getElementById('aps').value = formData.aps;
-                if (formData.nomProf) document.getElementById('nomProf').value = formData.nomProf;
-                if (formData.etablissement) document.getElementById('etablissement').value = formData.etablissement;
-                if (formData.anneeScolaire) document.getElementById('anneeScolaire').value = formData.anneeScolaire;
-                
-                // Changer l'onglet actif selon le type
-                if (formData.type) {
-                    currentType = formData.type;
-                    document.querySelectorAll('.tab').forEach(t => {
-                        t.classList.remove('active');
-                        if (t.dataset.type === currentType) {
-                            t.classList.add('active');
+                try {
+                    const formData = JSON.parse(storedData);
+                    localStorage.removeItem('profeps_formData');
+
+                    if (formData.niveau) document.getElementById('niveau').value = formData.niveau;
+                    if (formData.aps) document.getElementById('aps').value = formData.aps;
+                    if (formData.nomProf) document.getElementById('nomProf').value = formData.nomProf;
+                    if (formData.etablissement) document.getElementById('etablissement').value = formData.etablissement;
+                    if (formData.anneeScolaire) document.getElementById('anneeScolaire').value = formData.anneeScolaire;
+
+                    if (formData.type) {
+                        switchTab(formData.type);
+                        if (currentType === 'fiche') {
+                            if (formData.objectif) document.getElementById('objectif').value = formData.objectif;
+                            if (formData.numeroSeance) document.getElementById('numeroSeance').value = formData.numeroSeance;
+                        } else if (currentType === 'projet') {
+                            if (formData.niveauEleves) document.getElementById('niveauEleves').value = formData.niveauEleves;
+                            if (formData.nombreSeances) document.getElementById('nombreSeances').value = formData.nombreSeances;
+                        } else if (currentType === 'grille') {
+                            if (formData.typeGrille) document.getElementById('typeGrille').value = formData.typeGrille;
                         }
-                    });
-                    
-                    // Afficher les champs correspondants
-                    document.querySelectorAll('.conditional').forEach(f => f.classList.remove('show'));
-                    const fields = document.getElementById(currentType + 'Fields');
-                    if (fields) fields.classList.add('show');
-                    
-                    // Pré-remplir les champs spécifiques
-                    if (currentType === 'fiche') {
-                        if (formData.objectif) document.getElementById('objectif').value = formData.objectif;
-                        if (formData.numeroSeance) document.getElementById('numeroSeance').value = formData.numeroSeance;
-                    } else if (currentType === 'projet') {
-                        if (formData.niveauEleves) document.getElementById('niveauEleves').value = formData.niveauEleves;
-                        if (formData.nombreSeances) document.getElementById('nombreSeances').value = formData.nombreSeances;
-                    } else if (currentType === 'grille') {
-                        if (formData.typeGrille) document.getElementById('typeGrille').value = formData.typeGrille;
                     }
-                }
-                
-                // Si autoGenerate est activé, soumettre le formulaire
-                if (formData.autoGenerate) {
-                    setTimeout(() => {
-                        document.getElementById('form').dispatchEvent(new Event('submit'));
-                    }, 500);
-                }
+
+                    if (formData.autoGenerate) {
+                        setTimeout(() => {
+                            document.getElementById('form').dispatchEvent(new Event('submit'));
+                        }, 400);
+                    }
+                } catch (e) {}
             }
         }
-        
-        // Charger les données au démarrage
-        loadFormDataFromStorage();
 
-        // Tabs
+        // Onglets
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', () => {
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                currentType = tab.dataset.type;
-                document.querySelectorAll('.conditional').forEach(f => f.classList.remove('show'));
-                const fields = document.getElementById(currentType + 'Fields');
-                if (fields) fields.classList.add('show');
-                clearPreview();
+                switchTab(tab.dataset.type);
             });
+        });
+
+        loadFormDataFromStorage();
+        updateSubmitButtonAndBadge();
+
+        // =========================================================================
+        // RENDU DU LECTEUR PDF MULTI-PAGES (CYCLE + FICHES DE SÉANCE)
+        // =========================================================================
+        function renderMultiPageReader() {
+            const docContainer = document.getElementById('previewDocument');
+            const pillsBar = document.getElementById('pdfPillsBar');
+            const counterEl = document.getElementById('pdfPageCounter');
+            const prevBtn = document.getElementById('pdfPrevBtn');
+            const nextBtn = document.getElementById('pdfNextBtn');
+            const scrollAllBtn = document.getElementById('pdfScrollAllBtn');
+            const zoomLabel = document.getElementById('pdfZoomLabel');
+
+            if (!currentPages || currentPages.length === 0) return;
+
+            const total = currentPages.length;
+            if (activePageIndex < 0) activePageIndex = 0;
+            if (activePageIndex >= total) activePageIndex = total - 1;
+
+            if (counterEl) {
+                counterEl.textContent = showAllPagesContinuous
+                    ? `Toutes les pages (1 à ${total})`
+                    : `Page ${activePageIndex + 1} / ${total}`;
+            }
+            if (prevBtn) prevBtn.disabled = showAllPagesContinuous || activePageIndex === 0;
+            if (nextBtn) nextBtn.disabled = showAllPagesContinuous || activePageIndex === total - 1;
+            if (scrollAllBtn) scrollAllBtn.classList.toggle('active', showAllPagesContinuous);
+            if (zoomLabel) zoomLabel.textContent = `${currentZoom}%`;
+
+            // Construire la barre de boutons rapides [📊 Cycle] [S1] [S2] ...
+            if (pillsBar) {
+                pillsBar.innerHTML = currentPages.map((p, idx) => {
+                    const isAct = !showAllPagesContinuous && idx === activePageIndex;
+                    return `<button type="button" class="pdf-page-pill ${isAct ? 'active' : ''}" data-page-idx="${idx}" title="${p.title}">${p.shortLabel}</button>`;
+                }).join('');
+
+                pillsBar.querySelectorAll('.pdf-page-pill').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const idx = parseInt(btn.getAttribute('data-page-idx'), 10) || 0;
+                        showAllPagesContinuous = false;
+                        activePageIndex = idx;
+                        if (nativePdfMode) {
+                            exitNativePdfMode();
+                        }
+                        renderMultiPageReader();
+                    });
+                });
+            }
+
+            // Construire le(s) feuillet(s) A4 Paysage
+            const pagesToShow = showAllPagesContinuous ? currentPages : [currentPages[activePageIndex]];
+            const scaleStyle = currentZoom !== 100 ? `style="zoom:${currentZoom}%;"` : '';
+
+            docContainer.style.background = 'transparent';
+            docContainer.style.padding = '0';
+            docContainer.style.boxShadow = 'none';
+
+            docContainer.innerHTML = pagesToShow.map(p => `
+                <div class="a4-pdf-sheet-wrapper" ${scaleStyle}>
+                    <div class="a4-pdf-sheet-meta">
+                        <span>${p.title}</span>
+                        <span class="sheet-badge">Feuillet A4 Paysage (${p.pageNumber}/${total})</span>
+                    </div>
+                    <div class="a4-pdf-sheet">
+                        ${p.sheetHtml}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function exitNativePdfMode() {
+            nativePdfMode = false;
+            const nativeContainer = document.getElementById('nativePdfContainer');
+            const docContainer = document.getElementById('previewDocument');
+            const toggleBtn = document.getElementById('toggleNativePdfBtn');
+            if (nativeContainer) nativeContainer.classList.remove('show');
+            if (docContainer) docContainer.style.display = 'block';
+            if (toggleBtn) {
+                toggleBtn.classList.remove('active');
+                toggleBtn.textContent = '📄 Lecteur PDF intégré';
+            }
+        }
+
+        // Contrôles du Lecteur PDF
+        document.getElementById('pdfPrevBtn')?.addEventListener('click', () => {
+            if (activePageIndex > 0) {
+                exitNativePdfMode();
+                showAllPagesContinuous = false;
+                activePageIndex--;
+                renderMultiPageReader();
+            }
+        });
+
+        document.getElementById('pdfNextBtn')?.addEventListener('click', () => {
+            if (activePageIndex < currentPages.length - 1) {
+                exitNativePdfMode();
+                showAllPagesContinuous = false;
+                activePageIndex++;
+                renderMultiPageReader();
+            }
+        });
+
+        document.getElementById('pdfScrollAllBtn')?.addEventListener('click', () => {
+            exitNativePdfMode();
+            showAllPagesContinuous = !showAllPagesContinuous;
+            renderMultiPageReader();
+        });
+
+        document.getElementById('pdfZoomOutBtn')?.addEventListener('click', () => {
+            if (currentZoom > 70) {
+                currentZoom -= 10;
+                renderMultiPageReader();
+            }
+        });
+
+        document.getElementById('pdfZoomInBtn')?.addEventListener('click', () => {
+            if (currentZoom < 130) {
+                currentZoom += 10;
+                renderMultiPageReader();
+            }
+        });
+
+        document.getElementById('toggleNativePdfBtn')?.addEventListener('click', async () => {
+            const toggleBtn = document.getElementById('toggleNativePdfBtn');
+            const nativeContainer = document.getElementById('nativePdfContainer');
+            const nativeIframe = document.getElementById('nativePdfIframe');
+            const docContainer = document.getElementById('previewDocument');
+
+            if (nativePdfMode) {
+                exitNativePdfMode();
+                return;
+            }
+
+            const htmlToRender = projetCompletHtml || currentHtml;
+            if (!htmlToRender) return;
+
+            toggleBtn.disabled = true;
+            const prevText = toggleBtn.textContent;
+            toggleBtn.textContent = '⏳ Préparation du PDF...';
+
+            try {
+                if (!currentPdfBlobUrl) {
+                    showLoading('📄 Ouverture dans le Lecteur PDF...', 'Assemblage A4 Paysage du Projet de Cycle et des Fiches', true);
+                    updateProgress(35);
+                    const pdfBlob = await buildPDFBlob(htmlToRender, currentType === 'grille');
+                    updateProgress(100);
+                    currentPdfBlobUrl = URL.createObjectURL(pdfBlob);
+                }
+
+                nativeIframe.src = currentPdfBlobUrl;
+                docContainer.style.display = 'none';
+                nativeContainer.classList.add('show');
+                nativePdfMode = true;
+                toggleBtn.classList.add('active');
+                toggleBtn.textContent = '⚡ Vue Feuillets A4 Rapide';
+            } catch (err) {
+                showError('Erreur lors du rendu PDF intégré: ' + err.message);
+                toggleBtn.textContent = prevText;
+            } finally {
+                toggleBtn.disabled = false;
+                hideLoading();
+            }
         });
 
         function clearPreview() {
             document.getElementById('previewEmpty').style.display = 'flex';
-            document.getElementById('previewDocument').style.display = 'none';
-            document.getElementById('previewActions').classList.remove('show');
+            const docContainer = document.getElementById('previewDocument');
+            docContainer.style.display = 'none';
+            docContainer.style.background = '#FFFFFF';
+            docContainer.style.padding = '1.5rem';
+            document.getElementById('previewActions').classList.remove('show', 'single-mode');
             document.getElementById('downloadSectionComplet').style.display = 'none';
+            document.getElementById('pdfReaderToolbar').classList.remove('show');
+            document.getElementById('previewContent').classList.remove('pdf-stage-active');
+            exitNativePdfMode();
+            if (currentPdfBlobUrl) {
+                URL.revokeObjectURL(currentPdfBlobUrl);
+                currentPdfBlobUrl = null;
+            }
             currentHtml = '';
             currentHtmlDisplay = '';
             currentFilename = '';
             projetCompletHtml = '';
             projetCompletFilename = '';
+            currentPages = [];
+            activePageIndex = 0;
+            showAllPagesContinuous = false;
+            currentZoom = 100;
         }
 
         function showLoading(text, subtext, showProgress = false) {
             document.getElementById('loadingText').textContent = text || '⚡ Génération en cours...';
             document.getElementById('loadingSubtext').textContent = subtext || 'Création de votre document personnalisé';
             document.getElementById('loadingOverlay').classList.add('show');
-            
+
             const progressContainer = document.getElementById('progressContainer');
             if (showProgress) {
                 progressContainer.style.display = 'block';
@@ -1674,17 +2111,17 @@
         function validateForm() {
             const niveau = document.getElementById('niveau').value;
             const aps = document.getElementById('aps').value;
-            
+
             if (!niveau) {
                 showError('Veuillez sélectionner un niveau scolaire');
                 return false;
             }
-            
+
             if (!aps) {
                 showError('Veuillez sélectionner une activité sportive (APS)');
                 return false;
             }
-            
+
             if (currentType === 'fiche') {
                 const objectif = document.getElementById('objectif')?.value?.trim();
                 if (!objectif) {
@@ -1692,7 +2129,7 @@
                     return false;
                 }
             }
-            
+
             return true;
         }
 
@@ -1717,7 +2154,7 @@
             setTimeout(() => {
                 toast.classList.remove('show');
                 setTimeout(() => toast.remove(), 300);
-            }, 3000);
+            }, 3200);
         }
 
         function getEndpoint(type) {
@@ -1725,33 +2162,47 @@
                 case 'fiche': return '/api/generer-fiche';
                 case 'grille': return '/api/generer-grille';
                 case 'projet': return '/api/generer-projet';
-                default: return '/api/generer-fiche';
+                default: return '/api/generer-projet';
             }
         }
 
         function updateDownloadSectionTitle() {
             const titleEl = document.getElementById('downloadSectionTitle');
+            const subEl = document.getElementById('downloadSectionSub');
+            const completSubEl = document.getElementById('downloadCompletSub');
+            const nb = document.getElementById('nombreSeances')?.value || '10';
             switch (currentType) {
-                case 'fiche': titleEl.textContent = 'Fiche de Séance'; break;
-                case 'projet': titleEl.textContent = 'Projet de Cycle'; break;
-                case 'grille': titleEl.textContent = 'Grille d\'Évaluation'; break;
-                default: titleEl.textContent = 'Document';
+                case 'fiche':
+                    titleEl.textContent = 'Fiche de Séance (A4 Paysage)';
+                    if (subEl) subEl.textContent = 'Fiche complète prête à imprimer ou modifier';
+                    break;
+                case 'projet':
+                    titleEl.textContent = 'Projet de Cycle seul (1 page)';
+                    if (subEl) subEl.textContent = 'Tableau récapitulatif du cycle (OTI, OTC, progression)';
+                    if (completSubEl) completSubEl.textContent = `Page 1 (Cycle) + les ${nb} Fiches de séance réunies en 1 fichier`;
+                    break;
+                case 'grille':
+                    titleEl.textContent = "Grille d'Évaluation (35 élèves)";
+                    if (subEl) subEl.textContent = 'Format A4 Portrait prêt pour le terrain';
+                    break;
+                default:
+                    titleEl.textContent = 'Document';
             }
         }
 
-        // Form submit
+        // =========================================================================
+        // SOUMISSION DU FORMULAIRE
+        // =========================================================================
         document.getElementById('form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            console.log('Form submit triggered, currentType:', currentType);
-            if (!validateForm()) {
-                console.log('Validation failed');
-                return;
-            }
-            console.log('Validation passed, calling API...');
-            
+            if (!validateForm()) return;
+
             const btn = document.getElementById('submitBtn');
             btn.disabled = true;
-            showLoading();
+            showLoading(
+                currentType === 'projet' ? '📊 Génération du Projet de Cycle & de ses Fiches...' : '⚡ Génération en cours...',
+                currentType === 'projet' ? 'Assemblage du cycle et des fiches de séance dans le lecteur PDF' : 'Création de votre document personnalisé'
+            );
 
             try {
                 const formData = {
@@ -1779,25 +2230,54 @@
                 const data = await resp.json();
 
                 if (data.success) {
+                    if (currentPdfBlobUrl) {
+                        URL.revokeObjectURL(currentPdfBlobUrl);
+                        currentPdfBlobUrl = null;
+                    }
+                    exitNativePdfMode();
+
                     currentHtml = data.html;
                     currentHtmlDisplay = data.htmlDisplay || data.html;
                     currentFilename = data.filename;
 
                     document.getElementById('previewEmpty').style.display = 'none';
-                    document.getElementById('previewDocument').style.display = 'block';
-                    document.getElementById('previewDocument').innerHTML = currentHtmlDisplay;
-                    document.getElementById('previewActions').classList.add('show');
+                    const docContainer = document.getElementById('previewDocument');
+                    docContainer.style.display = 'block';
+
+                    const actionsEl = document.getElementById('previewActions');
+                    actionsEl.classList.add('show');
 
                     updateDownloadSectionTitle();
 
-                    // Afficher la section Projet Complet uniquement pour les projets
                     if (currentType === 'projet') {
-                        document.getElementById('downloadSectionComplet').style.display = 'block';
+                        // Pré-charger le Projet Complet (Cycle + toutes les Fiches) retourné directement
+                        projetCompletHtml = data.completHtml || '';
+                        projetCompletFilename = data.completFilename || currentFilename.replace('Projet_Cycle_', 'Projet_Complet_');
+                        currentPages = Array.isArray(data.pages) ? data.pages : [];
+                        activePageIndex = 0;
+                        showAllPagesContinuous = false;
+                        currentZoom = 100;
+
+                        actionsEl.classList.remove('single-mode');
+                        document.getElementById('downloadSectionComplet').style.display = 'flex';
+                        document.getElementById('pdfReaderToolbar').classList.add('show');
+                        document.getElementById('previewContent').classList.add('pdf-stage-active');
+
+                        if (currentPages.length > 0) {
+                            renderMultiPageReader();
+                        } else {
+                            docContainer.innerHTML = currentHtmlDisplay;
+                        }
                     } else {
+                        actionsEl.classList.add('single-mode');
                         document.getElementById('downloadSectionComplet').style.display = 'none';
+                        document.getElementById('pdfReaderToolbar').classList.remove('show');
+                        document.getElementById('previewContent').classList.remove('pdf-stage-active');
+                        docContainer.style.background = '#FFFFFF';
+                        docContainer.style.padding = '1.5rem';
+                        docContainer.innerHTML = currentHtmlDisplay;
                     }
 
-                    // Save to user history (silent, non-blocking)
                     if (typeof window.ProfEPS !== 'undefined' && typeof window.ProfEPS.saveGeneration === 'function') {
                         const typeLabels = { fiche: 'Fiche de Séance', grille: 'Grille', projet: 'Projet de Cycle' };
                         window.ProfEPS.saveGeneration(
@@ -1806,10 +2286,14 @@
                             formData.niveau,
                             (typeLabels[currentType] || 'Document') + ' — ' + formData.aps + ' ' + formData.niveau,
                             formData
-                        ).catch(err => console.log('Save generation error:', err));
+                        ).catch(() => {});
                     }
 
-                    showSuccess('Document généré avec succès !');
+                    showSuccess(
+                        currentType === 'projet'
+                            ? `Projet de Cycle + ${currentPages.length > 1 ? currentPages.length - 1 : formData.nombreSeances} Fiches prêts dans le lecteur !`
+                            : 'Document généré avec succès !'
+                    );
                 } else {
                     showError(data.error || 'Une erreur est survenue');
                 }
@@ -1821,9 +2305,12 @@
             }
         });
 
-        // Download Word (document simple)
+        // =========================================================================
+        // TÉLÉCHARGEMENTS WORD & PDF (PROJET SEUL vs PROJET COMPLET + FICHES)
+        // =========================================================================
+
+        // 1. Download Word (Projet de Cycle seul / Fiche / Grille)
         document.getElementById('downloadWord').addEventListener('click', () => {
-            console.log('downloadWord clicked, currentHtml:', !!currentHtml);
             if (!currentHtml) return;
             const blob = new Blob([currentHtml], { type: 'application/msword' });
             const url = URL.createObjectURL(blob);
@@ -1834,15 +2321,15 @@
             URL.revokeObjectURL(url);
         });
 
-        // Download PDF (document simple)
+        // 2. Download PDF (Projet de Cycle seul / Fiche / Grille)
         document.getElementById('downloadPDF').addEventListener('click', async () => {
             if (!currentHtml) return;
-            
+
             const btn = document.getElementById('downloadPDF');
             const originalText = btn.innerHTML;
             btn.innerHTML = '⏳...';
             btn.disabled = true;
-            
+
             try {
                 await generatePDF(currentHtml, currentFilename.replace('.doc', '.pdf'), currentType === 'grille');
             } catch (error) {
@@ -1853,24 +2340,30 @@
             }
         });
 
-        // Download Projet Complet Word
+        // 3. Download Projet Complet Word (Cycle + Toutes les Fiches)
         document.getElementById('downloadProjetCompletWord').addEventListener('click', async () => {
             const btn = document.getElementById('downloadProjetCompletWord');
             const originalText = btn.innerHTML;
             btn.disabled = true;
             btn.innerHTML = '⏳...';
-            
-            const nbSeances = parseInt(document.getElementById('nombreSeances')?.value || '10');
-            showLoading('📦 Génération du projet complet...', `Création de ${nbSeances} fiches de séance`, true);
+
+            const nbSeances = parseInt(document.getElementById('nombreSeances')?.value || '10', 10);
 
             try {
-                let progress = 0;
-                const progressInterval = setInterval(() => {
-                    progress += Math.random() * 10;
-                    if (progress > 90) progress = 90;
-                    updateProgress(progress);
-                }, 500);
+                // Si déjà préchargé lors de la génération du Projet de Cycle, téléchargement immédiat !
+                if (projetCompletHtml) {
+                    const blob = new Blob([projetCompletHtml], { type: 'application/msword' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = projetCompletFilename || `Projet_Complet_${nbSeances}seances.doc`;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                    showSuccess(`Pack Word Complet (Cycle + ${nbSeances} fiches) téléchargé !`);
+                    return;
+                }
 
+                showLoading('📦 Génération du projet complet...', `Création de ${nbSeances} fiches de séance`, true);
                 const formData = {
                     aps: document.getElementById('aps').value,
                     niveau: document.getElementById('niveau').value,
@@ -1886,16 +2379,11 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
                 });
-
-                clearInterval(progressInterval);
-                updateProgress(100);
-
                 const data = await resp.json();
 
                 if (data.success) {
                     projetCompletHtml = data.html;
                     projetCompletFilename = data.filename;
-                    
                     const blob = new Blob([data.html], { type: 'application/msword' });
                     const url = URL.createObjectURL(blob);
                     const a = document.createElement('a');
@@ -1903,7 +2391,6 @@
                     a.download = data.filename;
                     a.click();
                     URL.revokeObjectURL(url);
-                    
                     showSuccess(`Projet complet généré ! ${nbSeances} fiches créées.`);
                 } else {
                     showError(data.error || 'Erreur de génération');
@@ -1917,27 +2404,18 @@
             }
         });
 
-        // Download Projet Complet PDF
+        // 4. Download Projet Complet PDF (Cycle + Toutes les Fiches)
         document.getElementById('downloadProjetCompletPDF').addEventListener('click', async () => {
             const btn = document.getElementById('downloadProjetCompletPDF');
             const originalText = btn.innerHTML;
             btn.disabled = true;
             btn.innerHTML = '⏳...';
-            
-            const nbSeances = parseInt(document.getElementById('nombreSeances')?.value || '10');
-            
-            // Si on n'a pas encore généré le projet complet, le générer d'abord
+
+            const nbSeances = parseInt(document.getElementById('nombreSeances')?.value || '10', 10);
+
             if (!projetCompletHtml) {
                 showLoading('📦 Génération du projet complet...', `Création de ${nbSeances} fiches puis PDF`, true);
-                
                 try {
-                    let progress = 0;
-                    const progressInterval = setInterval(() => {
-                        progress += Math.random() * 8;
-                        if (progress > 70) progress = 70;
-                        updateProgress(progress);
-                    }, 500);
-
                     const formData = {
                         aps: document.getElementById('aps').value,
                         niveau: document.getElementById('niveau').value,
@@ -1953,13 +2431,9 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(formData)
                     });
+                    const data = await resp.json();
 
-                    clearInterval(progressInterval);
-
-                const data = await resp.json();
-                console.log('API response:', resp.status, data);
-
-                if (data.success) {
+                    if (data.success) {
                         projetCompletHtml = data.html;
                         projetCompletFilename = data.filename;
                     } else {
@@ -1973,16 +2447,18 @@
                     return;
                 }
             }
-            
-            // Maintenant générer le PDF
-            document.getElementById('loadingText').textContent = '📄 Conversion en PDF...';
-            document.getElementById('loadingSubtext').textContent = `Création de ${nbSeances + 1} pages`;
-            updateProgress(80);
-            
+
+            showLoading('📄 Conversion en PDF...', `Assemblage A4 Paysage de ${nbSeances + 1} pages`, true);
+            updateProgress(65);
+
             try {
-                await generatePDF(projetCompletHtml, projetCompletFilename.replace('.doc', '.pdf'), false);
+                await generatePDF(
+                    projetCompletHtml,
+                    (projetCompletFilename || `Projet_Complet_${nbSeances}seances.doc`).replace('.doc', '.pdf'),
+                    false
+                );
                 updateProgress(100);
-                showSuccess('PDF du projet complet généré !');
+                showSuccess('PDF du projet complet (Cycle + Fiches) téléchargé !');
             } catch (error) {
                 showError('Erreur PDF: ' + error.message);
             } finally {
@@ -1992,64 +2468,63 @@
             }
         });
 
-        // Fonction de génération PDF améliorée
-        async function generatePDF(htmlContent, filename, isPortrait = false) {
+        // =========================================================================
+        // MOTEUR DE RENDU PDF A4 PAYSAGE / PORTRAIT (SAUVEGARDE & BLOB LECTEUR)
+        // =========================================================================
+        async function buildPDFInstance(htmlContent, isPortrait = false) {
             const { jsPDF } = window.jspdf;
-            
-            // Nettoyer le HTML
+
             let cleanHtml = htmlContent
                 .replace(/xmlns:o="[^"]*"/g, '')
                 .replace(/xmlns:w="[^"]*"/g, '')
                 .replace(/<!--\[if[^\]]*\]>[\s\S]*?<!\[endif\]-->/g, '');
-            
-            // Dimensions A4
+
+            const bodyMatch = cleanHtml.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+            if (bodyMatch) {
+                cleanHtml = bodyMatch[1];
+            }
+
             const pxPerMm = 3.78;
             const pageWidth = isPortrait ? 210 * pxPerMm : 297 * pxPerMm;
             const pageHeight = isPortrait ? 297 * pxPerMm : 210 * pxPerMm;
-            
-            // Créer le PDF
+
             const pdf = new jsPDF({
                 orientation: isPortrait ? 'portrait' : 'landscape',
                 unit: 'mm',
                 format: 'a4'
             });
-            
-            // Détecter les pages via les balises de saut
+
             const pageBreakRegex = /<br[^>]*(?:page-break|mso-special-character)[^>]*>/gi;
             const pages = cleanHtml.split(pageBreakRegex).filter(p => p.trim().length > 100);
-            
-            // Si pas de pages détectées, utiliser tout le contenu
             const pagesToRender = pages.length > 1 ? pages : [cleanHtml];
-            
+
             for (let i = 0; i < pagesToRender.length; i++) {
                 if (i > 0) {
                     pdf.addPage('a4', isPortrait ? 'portrait' : 'landscape');
                 }
-                
-                // Créer iframe pour le rendu
+
                 const iframe = document.createElement('iframe');
-                iframe.style.cssText = `position:absolute;left:-9999px;width:${pageWidth}px;height:${pageHeight}px;border:none;`;
+                iframe.style.cssText = `position:fixed;left:-9999px;top:0;width:${pageWidth}px;height:${pageHeight}px;border:none;`;
                 document.body.appendChild(iframe);
-                
+
                 const iframeDoc = iframe.contentDocument;
                 const pageHtml = `<!DOCTYPE html>
 <html><head>
 <meta charset="UTF-8">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:Calibri,Arial,sans-serif;font-size:9pt;padding:15px;width:${pageWidth}px;height:${pageHeight}px;}
+body{font-family:Calibri,Arial,sans-serif;font-size:9pt;padding:15px;width:${pageWidth}px;height:${pageHeight}px;background:#ffffff;color:#0E1633;}
 table{width:100%;border-collapse:collapse;margin-bottom:6px;table-layout:fixed;}
 th,td{border:1px solid #000;padding:4px 6px;vertical-align:top;word-wrap:break-word;}
 </style>
-  
 </head><body>${pagesToRender[i]}</body></html>`;
-                
+
                 iframeDoc.open();
                 iframeDoc.write(pageHtml);
                 iframeDoc.close();
-                
-                await new Promise(r => setTimeout(r, 300));
-                
+
+                await new Promise(r => setTimeout(r, 180));
+
                 const canvas = await html2canvas(iframeDoc.body, {
                     scale: 2,
                     useCORS: true,
@@ -2057,22 +2532,52 @@ th,td{border:1px solid #000;padding:4px 6px;vertical-align:top;word-wrap:break-w
                     height: pageHeight,
                     backgroundColor: '#ffffff'
                 });
-                
+
                 const imgData = canvas.toDataURL('image/jpeg', 0.92);
                 pdf.addImage(imgData, 'JPEG', 0, 0, isPortrait ? 210 : 297, isPortrait ? 297 : 210);
-                
+
                 document.body.removeChild(iframe);
             }
-            
+
+            return pdf;
+        }
+
+        async function generatePDF(htmlContent, filename, isPortrait = false) {
+            const pdf = await buildPDFInstance(htmlContent, isPortrait);
             pdf.save(filename);
+        }
+
+        async function buildPDFBlob(htmlContent, isPortrait = false) {
+            const pdf = await buildPDFInstance(htmlContent, isPortrait);
+            return pdf.output('blob');
         }
     </script>
     
-    <!-- Supabase SDK -->
+    <!-- Auto-fill & URL prefill support -->
     <script>
-        // Auto-fill form fields from user profile
         (async function autoFillFromProfile() {
             try {
+                const params = new URLSearchParams(window.location.search);
+                if (params.has('prefill')) {
+                    try {
+                        const prefill = JSON.parse(decodeURIComponent(params.get('prefill')));
+                        if (prefill.typeDocument) {
+                            switchTab(prefill.typeDocument);
+                        }
+                        if (prefill.aps) { const el = document.getElementById('aps'); if (el) { el.value = prefill.aps; el.dispatchEvent(new Event('change')); } }
+                        if (prefill.niveau) { const el = document.getElementById('niveau'); if (el) { el.value = prefill.niveau; el.dispatchEvent(new Event('change')); } }
+                        if (prefill.objectif) { const el = document.getElementById('objectif'); if (el) el.value = prefill.objectif; }
+                        if (prefill.numeroSeance) { const el = document.getElementById('numeroSeance'); if (el) el.value = prefill.numeroSeance; }
+                        if (prefill.niveauEleves) { const el = document.getElementById('niveauEleves'); if (el) el.value = prefill.niveauEleves; }
+                        if (prefill.nombreSeances) { const el = document.getElementById('nombreSeances'); if (el) el.value = prefill.nombreSeances; }
+                        if (prefill.typeGrille) { const el = document.getElementById('typeGrille'); if (el) el.value = prefill.typeGrille; }
+                        if (prefill.classe) { const el = document.getElementById('classe'); if (el) el.value = prefill.classe; }
+                        if (prefill.nomProf) { const el = document.getElementById('nomProf'); if (el) el.value = prefill.nomProf; }
+                        if (prefill.etablissement) { const el = document.getElementById('etablissement'); if (el) el.value = prefill.etablissement; }
+                        if (prefill.anneeScolaire) { const el = document.getElementById('anneeScolaire'); if (el) el.value = prefill.anneeScolaire; }
+                    } catch (e) {}
+                }
+
                 const sb = ProfEPS.getSupabase();
                 const { data } = await sb.auth.getSession();
                 if (!data.session) return;
@@ -2088,45 +2593,15 @@ th,td{border:1px solid #000;padding:4px 6px;vertical-align:top;word-wrap:break-w
                 const nom = profile?.nom || meta.nom || meta.full_name || '';
                 const etab = profile?.etablissement || meta.etablissement || '';
 
-                // Only fill if user hasn't already typed something
                 const nomField = document.getElementById('nomProf');
                 const etabField = document.getElementById('etablissement');
 
                 if (nomField && !nomField.value) nomField.value = nom;
                 if (etabField && !etabField.value) etabField.value = etab;
-
-                // Check URL params for pre-fill from "Regénérer" or template
-                const params = new URLSearchParams(window.location.search);
-                if (params.has('prefill')) {
-                    try {
-                        const prefill = JSON.parse(decodeURIComponent(params.get('prefill')));
-                        if (prefill.aps) { const el = document.getElementById('aps'); if (el) { el.value = prefill.aps; el.dispatchEvent(new Event('change')); } }
-                        if (prefill.niveau) { const el = document.getElementById('niveau'); if (el) { el.value = prefill.niveau; el.dispatchEvent(new Event('change')); } }
-                        if (prefill.objectif) { const el = document.getElementById('objectif'); if (el) el.value = prefill.objectif; }
-                        if (prefill.numeroSeance) { const el = document.getElementById('numeroSeance'); if (el) el.value = prefill.numeroSeance; }
-                        if (prefill.niveauEleves) { const el = document.getElementById('niveauEleves'); if (el) el.value = prefill.niveauEleves; }
-                        if (prefill.nombreSeances) { const el = document.getElementById('nombreSeances'); if (el) el.value = prefill.nombreSeances; }
-                        if (prefill.typeGrille) { const el = document.getElementById('typeGrille'); if (el) el.value = prefill.typeGrille; }
-                        if (prefill.classe) { const el = document.getElementById('classe'); if (el) el.value = prefill.classe; }
-                        if (prefill.nomProf) { const el = document.getElementById('nomProf'); if (el) el.value = prefill.nomProf; }
-                        if (prefill.etablissement) { const el = document.getElementById('etablissement'); if (el) el.value = prefill.etablissement; }
-                        if (prefill.anneeScolaire) { const el = document.getElementById('anneeScolaire'); if (el) el.value = prefill.anneeScolaire; }
-                        // Switch to correct document type tab
-                        if (prefill.typeDocument) {
-                            const tabBtn = document.querySelector('[data-type="' + prefill.typeDocument + '"]');
-                            if (tabBtn) tabBtn.click();
-                        }
-                    } catch (e) { console.log('Prefill parse error:', e); }
-                }
-            } catch (e) {
-                console.log('Auto-fill failed:', e);
-            }
+            } catch (e) {}
         })();
     </script>
 
 </body>
 
 </html>
-
-
-
