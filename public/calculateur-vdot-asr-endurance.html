@@ -30,14 +30,14 @@
   margin-top: 0;
   padding: 2.5rem 1.25rem 2rem !important;
   background: linear-gradient(180deg, #ffffff 0%, var(--paper) 100%) !important;
-  border-bottom: 1px solid #e2e8f0 !important;
+  border-bottom: 1px solid var(--stone) !important;
   text-align: center !important;
   position: relative !important;
 }
 .hero-badge {
   display: inline-flex !important; align-items: center !important; gap: 0.45rem !important;
   background: var(--sky) !important;
-  color: #2434A8 !important;
+  color: var(--primary) !important;
   padding: 0.38rem 1rem !important; border-radius: 9999px !important;
   font-size: 0.75rem !important; font-weight: 800 !important; text-transform: uppercase !important;
   letter-spacing: 0.04em !important; margin-bottom: 0.8rem !important;
@@ -47,7 +47,7 @@
 .vma-hero h1 {
   font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
   font-size: clamp(1.55rem, 3vw, 2.2rem) !important;
-  font-weight: 800 !important; color: #0f172a !important; margin: 0 auto 0.65rem auto !important;
+  font-weight: 800 !important; color: var(--ink) !important; margin: 0 auto 0.65rem auto !important;
   max-width: 860px !important; line-height: 1.24 !important; letter-spacing: -0.02em !important;
   text-wrap: balance !important;
 }
@@ -98,7 +98,7 @@ main > div.max-w-3xl select {
   background-color: var(--paper) !important;
   padding: 0 0.9rem !important;
   font-size: 0.95rem !important;
-  color: #0f172a !important;
+  color: var(--ink) !important;
   font-variant-numeric: tabular-nums !important;
   transition: all 0.18s ease !important;
   margin-top: auto !important;
@@ -106,8 +106,8 @@ main > div.max-w-3xl select {
 main > div.max-w-3xl input[type="number"]:focus,
 main > div.max-w-3xl select:focus {
   outline: none !important;
-  border-color: #2434A8 !important;
-  background-color: #ffffff !important;
+  border-color: var(--primary) !important;
+  background-color: var(--surface) !important;
   box-shadow: 0 0 0 3px rgba(153, 27, 27, 0.10) !important;
 }
 #tool-results-panel .grid > div {
@@ -124,8 +124,8 @@ button.peps-cta-btn,
   margin-top: 0.65rem !important;
   background: linear-gradient(135deg, var(--sky) 0%, var(--paper) 100%) !important;
   background-color: var(--sky) !important;
-  color: #2434A8 !important;
-  -webkit-text-fill-color: #2434A8 !important;
+  color: var(--primary) !important;
+  -webkit-text-fill-color: var(--primary) !important;
   font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
   font-size: 0.98rem !important;
   font-weight: 800 !important;
@@ -146,7 +146,7 @@ button.peps-cta-btn,
 button.peps-cta-btn:hover,
 #btn-calc-main:hover {
   background: linear-gradient(135deg, var(--sky) 0%, var(--sky) 100%) !important;
-  border-color: #2434A8 !important;
+  border-color: var(--primary) !important;
   transform: translateY(-1px) !important;
   box-shadow: 0 8px 20px -5px rgba(153, 27, 27, 0.16) !important;
 }
@@ -512,6 +512,136 @@ button.peps-cta-btn:hover .peps-cta-arrow,
       closeMobileMenu();
     }
   });
+
+  // Real-time Dark Mode Contrast Guard & Persistence
+  (function() {
+    function parseRgb(str) {
+      if (!str) return null;
+      var m = str.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)(?:\s*,\s*([\d.]+))?\s*\)/i);
+      if (!m) return null;
+      return { r: +m[1], g: +m[2], b: +m[3], a: m[4] !== undefined ? +m[4] : 1 };
+    }
+    function relLum(rgb) {
+      var sRGB = [rgb.r / 255, rgb.g / 255, rgb.b / 255].map(function(c) {
+        return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+      });
+      return 0.2126 * sRGB[0] + 0.7152 * sRGB[1] + 0.0722 * sRGB[2];
+    }
+    function getEffectiveBg(el) {
+      var cur = el;
+      while (cur && cur !== document.documentElement) {
+        var bg = window.getComputedStyle(cur).backgroundColor;
+        var rgb = parseRgb(bg);
+        if (rgb && rgb.a > 0.15) return rgb;
+        cur = cur.parentElement;
+      }
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      return isDark ? { r: 11, g: 18, b: 38, a: 1 } : { r: 251, g: 250, b: 247, a: 1 };
+    }
+    window.profepsSyncDarkContrast = function() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (!isDark) {
+        document.querySelectorAll('[data-peps-dm-fixed]').forEach(function(el) {
+          var origColor = el.getAttribute('data-peps-orig-color');
+          var origBg = el.getAttribute('data-peps-orig-bg');
+          if (origColor !== null) {
+            if (origColor === '') el.style.removeProperty('color');
+            else el.style.color = origColor;
+          }
+          if (origBg !== null) {
+            if (origBg === '') el.style.removeProperty('background');
+            else el.style.background = origBg;
+          }
+          el.removeAttribute('data-peps-dm-fixed');
+        });
+        return;
+      }
+      var nodes = document.querySelectorAll('main *, header.silo-hero *, header.hub-hero *, header.vma-hero *, #profepsStickySubnav *');
+      for (var i = 0; i < nodes.length; i++) {
+        var el = nodes[i];
+        if (!el || !el.tagName) continue;
+        var tag = el.tagName;
+        if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'SVG' || tag === 'PATH' || tag === 'CIRCLE' || tag === 'LINE' || tag === 'RECT') continue;
+        var cs = window.getComputedStyle(el);
+        var fg = parseRgb(cs.color);
+        if (!fg) continue;
+        var bg = getEffectiveBg(el);
+        var fgL = relLum(fg);
+        var bgL = relLum(bg);
+        // Case 1: Light background inside Dark Mode (e.g. bgL > 0.65) -> convert card/box bg to Dark Surface unless it is an Amber button
+        var ownBg = parseRgb(cs.backgroundColor);
+        var isAmberBtn = ownBg && ownBg.r > 200 && ownBg.g > 140 && ownBg.b < 60;
+        if (ownBg && ownBg.a > 0.4 && relLum(ownBg) > 0.68 && !isAmberBtn) {
+          if (!el.hasAttribute('data-peps-dm-fixed')) {
+            el.setAttribute('data-peps-orig-bg', el.style.background || '');
+            el.setAttribute('data-peps-orig-color', el.style.color || '');
+            el.setAttribute('data-peps-dm-fixed', '1');
+          }
+          el.style.setProperty('background', '#131E3A', 'important');
+          el.style.setProperty('color', '#E8ECFA', 'important');
+          el.style.setProperty('border-color', '#263558', 'important');
+          bgL = 0.015;
+          fgL = 0.85;
+        }
+        // Case 2: Dark text on dark background (both fgL < 0.20 and bgL < 0.20)
+        if (fgL < 0.20 && bgL < 0.20) {
+          if (!el.hasAttribute('data-peps-dm-fixed')) {
+            el.setAttribute('data-peps-orig-color', el.style.color || '');
+            el.setAttribute('data-peps-orig-bg', el.style.background || '');
+            el.setAttribute('data-peps-dm-fixed', '1');
+          }
+          // Preserve semantic hue if blue/green/amber/red
+          if (fg.b > fg.r + 35 && fg.b > fg.g + 15) {
+            el.style.setProperty('color', '#93A8FF', 'important');
+          } else if (fg.g > fg.r + 25) {
+            el.style.setProperty('color', '#34D399', 'important');
+          } else if (fg.r > fg.b + 40 && fg.g > fg.b + 20) {
+            el.style.setProperty('color', '#FBBF24', 'important');
+          } else if (fg.r > fg.g + 40 && fg.r > fg.b + 40) {
+            el.style.setProperty('color', '#F87171', 'important');
+          } else {
+            el.style.setProperty('color', '#E8ECFA', 'important');
+          }
+        }
+        // Case 3: Light text on light background (both fgL > 0.65 and bgL > 0.65)
+        else if (fgL > 0.65 && bgL > 0.65 && !isAmberBtn) {
+          if (!el.hasAttribute('data-peps-dm-fixed')) {
+            el.setAttribute('data-peps-orig-color', el.style.color || '');
+            el.setAttribute('data-peps-orig-bg', el.style.background || '');
+            el.setAttribute('data-peps-dm-fixed', '1');
+          }
+          el.style.setProperty('color', '#0E1633', 'important');
+        }
+      }
+    };
+    try {
+      var saved = localStorage.getItem('profeps_theme');
+      if (saved === 'dark' || saved === 'light') {
+        document.documentElement.setAttribute('data-theme', saved);
+        if (saved === 'dark') document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
+        syncThemeUI(saved);
+      }
+    } catch (e) {}
+    var origToggle = window.profepsToggleTheme;
+    window.profepsToggleTheme = function() {
+      if (origToggle) origToggle();
+      window.profepsSyncDarkContrast();
+    };
+    window.addEventListener('DOMContentLoaded', function() {
+      window.profepsSyncDarkContrast();
+      if (typeof MutationObserver !== 'undefined' && document.body) {
+        var timer = null;
+        new MutationObserver(function() {
+          if (document.documentElement.getAttribute('data-theme') !== 'dark') return;
+          if (timer) clearTimeout(timer);
+          timer = setTimeout(window.profepsSyncDarkContrast, 80);
+        }).observe(document.body, { childList: true, subtree: true });
+      }
+    });
+    window.addEventListener('load', window.profepsSyncDarkContrast);
+  })();
+
 })();
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->

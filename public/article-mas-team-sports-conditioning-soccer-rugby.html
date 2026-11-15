@@ -81,7 +81,7 @@
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why shouldn't football and rugby players do steady-state track laps for conditioning?","acceptedAnswer":{"@type":"Answer","text":"Field sports consist of repeated high-intensity accelerations, decelerations, and changes of direction (COD). Long steady-state continuous running builds basic central cardiac volume but fails to stimulate peripheral neuromuscular recruitment, high-velocity running mechanics, or the rapid phosphocreatine (PCr) re-synthesis needed during high-speed transitions."}},{"@type":"Question","name":"What is the Change of Direction (COD) penalty when prescribing MAS shuttle runs?","acceptedAnswer":{"@type":"Answer","text":"Every 180-degree turn imposes a massive deceleration and re-acceleration energy cost equivalent to approximately 0.7 to 1.0 second or 4 to 6 meters of straight-line running. When prescribing shuttle intervals (e.g. 15s on / 15s off with a turn), coaches must reduce straight-line running distances by 15% to 20% to avoid overloading athletes into premature anaerobic fatigue."}},{"@type":"Question","name":"How does Eurofit grid training differ from Tabata drills in team sports?","acceptedAnswer":{"@type":"Answer","text":"Eurofit utilizes a 1:1 work-to-rest ratio (typically 15s running at 100-120% MAS, 15s rest), which allows sustained exposure to high VO2max velocities without severe blood lactate accumulation. Tabata utilizes a 2:1 ratio (20s supramaximal running at 120-130% MAS, 10s rest), which creates extreme metabolic stress, rapid cardiac drift, and high glycolytic demands suited for late pre-season peak conditioning."}},{"@type":"Question","name":"How often should MAS field conditioning be programmed during the in-season?","acceptedAnswer":{"@type":"Answer","text":"During in-season competition microcycles with one match per week (e.g. Saturday game), a single top-up MAS session on Matchday -4 (Tuesday) or Matchday -3 (Wednesday) lasting 10 to 15 minutes (1 to 2 sets of 6-8 reps) is optimal to maintain high-speed running capacity without residual neuromuscular fatigue."}},{"@type":"Question","name":"What is Anaerobic Speed Reserve (ASR) and why does it matter in team sports?","acceptedAnswer":{"@type":"Answer","text":"Anaerobic Speed Reserve (ASR) is the speed difference between an athlete's Maximal Aerobic Speed (MAS) and their absolute Maximal Sprint Speed (MSS). Two players can share the exact same MAS of 16 km/h, but one may sprint at 34 km/h while the other tops out at 29 km/h. Running at 120% MAS (19.2 km/h) represents 18% of the first player's reserve but over 40% of the second player's reserve, resulting in vastly different internal fatigue."}}]}</script>
 
     <style>
-        :root {
+        :root:not([data-theme="dark"]) {
             --primary: #1e3a8a;
             --primary-light: #3b82f6;
             --primary-dark: #1e293b;
@@ -542,7 +542,7 @@
 <link rel="stylesheet" href="/css/profeps-unifier.min.css?v=20261101">
 
 <style id="profeps-phase3-article-soft-palette">
-  :root {
+  :root:not([data-theme="dark"]) {
     --primary: #2434A8 !important;
     --primary-dark: #2434A8 !important;
     --secondary: #0B7A99 !important;
@@ -555,7 +555,7 @@
   .article-category, .category, .qa-category {
     background: var(--sky) !important;
     border: 1px solid var(--stone) !important;
-    color: #2434A8 !important;
+    color: var(--primary) !important;
   }
   .answer-box, .intro, .qa-answer {
     background: linear-gradient(135deg, var(--sky) 0%, var(--paper) 100%) !important;
@@ -604,7 +604,7 @@
   }
   .tool-banner span.bg-white\/20 {
     background: var(--sky) !important;
-    color: #2434A8 !important;
+    color: var(--primary) !important;
     border: 1px solid var(--stone) !important;
   }
   .tool-banner a.bg-white, .btn-calculator-action {
@@ -628,7 +628,7 @@
   .custom-table th, .table-custom th, table th {
     background: var(--sky) !important;
     color: var(--ink) !important;
-    border-bottom: 2px solid #cbd5e1 !important;
+    border-bottom: 2px solid var(--stone) !important;
   }
   .custom-table td, .table-custom td, table td {
     font-variant-numeric: tabular-nums !important;
@@ -930,6 +930,136 @@
       closeMobileMenu();
     }
   });
+
+  // Real-time Dark Mode Contrast Guard & Persistence
+  (function() {
+    function parseRgb(str) {
+      if (!str) return null;
+      var m = str.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)(?:\s*,\s*([\d.]+))?\s*\)/i);
+      if (!m) return null;
+      return { r: +m[1], g: +m[2], b: +m[3], a: m[4] !== undefined ? +m[4] : 1 };
+    }
+    function relLum(rgb) {
+      var sRGB = [rgb.r / 255, rgb.g / 255, rgb.b / 255].map(function(c) {
+        return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+      });
+      return 0.2126 * sRGB[0] + 0.7152 * sRGB[1] + 0.0722 * sRGB[2];
+    }
+    function getEffectiveBg(el) {
+      var cur = el;
+      while (cur && cur !== document.documentElement) {
+        var bg = window.getComputedStyle(cur).backgroundColor;
+        var rgb = parseRgb(bg);
+        if (rgb && rgb.a > 0.15) return rgb;
+        cur = cur.parentElement;
+      }
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      return isDark ? { r: 11, g: 18, b: 38, a: 1 } : { r: 251, g: 250, b: 247, a: 1 };
+    }
+    window.profepsSyncDarkContrast = function() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (!isDark) {
+        document.querySelectorAll('[data-peps-dm-fixed]').forEach(function(el) {
+          var origColor = el.getAttribute('data-peps-orig-color');
+          var origBg = el.getAttribute('data-peps-orig-bg');
+          if (origColor !== null) {
+            if (origColor === '') el.style.removeProperty('color');
+            else el.style.color = origColor;
+          }
+          if (origBg !== null) {
+            if (origBg === '') el.style.removeProperty('background');
+            else el.style.background = origBg;
+          }
+          el.removeAttribute('data-peps-dm-fixed');
+        });
+        return;
+      }
+      var nodes = document.querySelectorAll('main *, header.silo-hero *, header.hub-hero *, header.vma-hero *, #profepsStickySubnav *');
+      for (var i = 0; i < nodes.length; i++) {
+        var el = nodes[i];
+        if (!el || !el.tagName) continue;
+        var tag = el.tagName;
+        if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'SVG' || tag === 'PATH' || tag === 'CIRCLE' || tag === 'LINE' || tag === 'RECT') continue;
+        var cs = window.getComputedStyle(el);
+        var fg = parseRgb(cs.color);
+        if (!fg) continue;
+        var bg = getEffectiveBg(el);
+        var fgL = relLum(fg);
+        var bgL = relLum(bg);
+        // Case 1: Light background inside Dark Mode (e.g. bgL > 0.65) -> convert card/box bg to Dark Surface unless it is an Amber button
+        var ownBg = parseRgb(cs.backgroundColor);
+        var isAmberBtn = ownBg && ownBg.r > 200 && ownBg.g > 140 && ownBg.b < 60;
+        if (ownBg && ownBg.a > 0.4 && relLum(ownBg) > 0.68 && !isAmberBtn) {
+          if (!el.hasAttribute('data-peps-dm-fixed')) {
+            el.setAttribute('data-peps-orig-bg', el.style.background || '');
+            el.setAttribute('data-peps-orig-color', el.style.color || '');
+            el.setAttribute('data-peps-dm-fixed', '1');
+          }
+          el.style.setProperty('background', '#131E3A', 'important');
+          el.style.setProperty('color', '#E8ECFA', 'important');
+          el.style.setProperty('border-color', '#263558', 'important');
+          bgL = 0.015;
+          fgL = 0.85;
+        }
+        // Case 2: Dark text on dark background (both fgL < 0.20 and bgL < 0.20)
+        if (fgL < 0.20 && bgL < 0.20) {
+          if (!el.hasAttribute('data-peps-dm-fixed')) {
+            el.setAttribute('data-peps-orig-color', el.style.color || '');
+            el.setAttribute('data-peps-orig-bg', el.style.background || '');
+            el.setAttribute('data-peps-dm-fixed', '1');
+          }
+          // Preserve semantic hue if blue/green/amber/red
+          if (fg.b > fg.r + 35 && fg.b > fg.g + 15) {
+            el.style.setProperty('color', '#93A8FF', 'important');
+          } else if (fg.g > fg.r + 25) {
+            el.style.setProperty('color', '#34D399', 'important');
+          } else if (fg.r > fg.b + 40 && fg.g > fg.b + 20) {
+            el.style.setProperty('color', '#FBBF24', 'important');
+          } else if (fg.r > fg.g + 40 && fg.r > fg.b + 40) {
+            el.style.setProperty('color', '#F87171', 'important');
+          } else {
+            el.style.setProperty('color', '#E8ECFA', 'important');
+          }
+        }
+        // Case 3: Light text on light background (both fgL > 0.65 and bgL > 0.65)
+        else if (fgL > 0.65 && bgL > 0.65 && !isAmberBtn) {
+          if (!el.hasAttribute('data-peps-dm-fixed')) {
+            el.setAttribute('data-peps-orig-color', el.style.color || '');
+            el.setAttribute('data-peps-orig-bg', el.style.background || '');
+            el.setAttribute('data-peps-dm-fixed', '1');
+          }
+          el.style.setProperty('color', '#0E1633', 'important');
+        }
+      }
+    };
+    try {
+      var saved = localStorage.getItem('profeps_theme');
+      if (saved === 'dark' || saved === 'light') {
+        document.documentElement.setAttribute('data-theme', saved);
+        if (saved === 'dark') document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
+        syncThemeUI(saved);
+      }
+    } catch (e) {}
+    var origToggle = window.profepsToggleTheme;
+    window.profepsToggleTheme = function() {
+      if (origToggle) origToggle();
+      window.profepsSyncDarkContrast();
+    };
+    window.addEventListener('DOMContentLoaded', function() {
+      window.profepsSyncDarkContrast();
+      if (typeof MutationObserver !== 'undefined' && document.body) {
+        var timer = null;
+        new MutationObserver(function() {
+          if (document.documentElement.getAttribute('data-theme') !== 'dark') return;
+          if (timer) clearTimeout(timer);
+          timer = setTimeout(window.profepsSyncDarkContrast, 80);
+        }).observe(document.body, { childList: true, subtree: true });
+      }
+    });
+    window.addEventListener('load', window.profepsSyncDarkContrast);
+  })();
+
 })();
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->

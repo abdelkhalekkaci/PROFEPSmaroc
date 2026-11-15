@@ -29,7 +29,7 @@
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Comment construire un cycle de handball au collège (OP 2009)","description":"Plan de 10 séances progressives pour enseigner le handball en collège au Maroc, conforme aux Orientations Pédagogiques 2009.","totalTime":"PT9H10M","inLanguage":"fr-MA","step":[{"@type":"HowToStep","position":1,"name":"S1 — Évaluation diagnostique","text":"Match 5c5 observé par l'enseignant pour repérer le niveau initial de chaque élève (passe, tir, placement)."},{"@type":"HowToStep","position":2,"name":"S2 — Passe et réception","text":"Passes en triangle (3 joueurs) avec déplacement après la passe. Objectif : 8 passes consécutives sans perte de balle."},{"@type":"HowToStep","position":3,"name":"S3 — Dribble et progression","text":"Parcours dribble avec changement de direction puis passe à un partenaire. Réussir le parcours complet sans perte de balle."},{"@type":"HowToStep","position":4,"name":"S4 — Le tir en course","text":"Enchaînement réception - 3 pas - tir depuis les 9 mètres. Objectif : 4 tirs cadrés sur 6 tentatives."},{"@type":"HowToStep","position":5,"name":"S5 — Jeu en appui-soutien","text":"Situation 3c1 : progresser en passes vers le but, sans dribble. Réussir 3 actions collectives sur 5."},{"@type":"HowToStep","position":6,"name":"S6 — Le démarquage","text":"Jeu 3c2 : se déplacer pour se rendre disponible, passer au partenaire démarqué. Le non-porteur doit se déplacer dans un espace libre avant de recevoir."},{"@type":"HowToStep","position":7,"name":"S7 — Défense en zone","text":"Jeu 4c4 : les défenseurs restent dans leur zone, interdiction de suivre l'attaquant. Empêcher 3 attaques sur 5 de marquer."},{"@type":"HowToStep","position":8,"name":"S8 — Match 5c5 dirigé","text":"Match avec arrêts pédagogiques de l'enseignant (freeze) pour corriger la tactique. Appliquer la montée de balle en 3 passes maximum."},{"@type":"HowToStep","position":9,"name":"S9 — Match 5c5 autonome","text":"Match avec arbitre-élève, rotation des équipes, score géré par les élèves. Chaque joueur touche la balle au moins 2 fois par attaque."},{"@type":"HowToStep","position":10,"name":"S10 — Évaluation sommative","text":"Tournoi 5c5 évalué selon la grille : technique (8) + efficacité jeu (8) + rôle social (4)."}]}</script>
 
     <style>
-        :root { --primary: #3347D6; --secondary: #0B7A99; --bg: var(--paper); --text: #1a1a2e; --text-sec: #4a4a68; --border: #e5e7eb; }
+        :root:not([data-theme="dark"]) { --primary: #3347D6; --secondary: #0B7A99; --bg: var(--paper); --text: #1a1a2e; --text-sec: #4a4a68; --border: #e5e7eb; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
         a { color: var(--primary); text-decoration: none; }
@@ -126,7 +126,7 @@
 <link rel="stylesheet" href="/css/profeps-unifier.min.css?v=20261101">
 
 <style id="profeps-phase3-article-soft-palette">
-  :root {
+  :root:not([data-theme="dark"]) {
     --primary: #2434A8 !important;
     --primary-dark: #2434A8 !important;
     --secondary: #0B7A99 !important;
@@ -139,7 +139,7 @@
   .article-category, .category, .qa-category {
     background: var(--sky) !important;
     border: 1px solid var(--stone) !important;
-    color: #2434A8 !important;
+    color: var(--primary) !important;
   }
   .answer-box, .intro, .qa-answer {
     background: linear-gradient(135deg, var(--sky) 0%, var(--paper) 100%) !important;
@@ -188,7 +188,7 @@
   }
   .tool-banner span.bg-white\/20 {
     background: var(--sky) !important;
-    color: #2434A8 !important;
+    color: var(--primary) !important;
     border: 1px solid var(--stone) !important;
   }
   .tool-banner a.bg-white, .btn-calculator-action {
@@ -212,7 +212,7 @@
   .custom-table th, .table-custom th, table th {
     background: var(--sky) !important;
     color: var(--ink) !important;
-    border-bottom: 2px solid #cbd5e1 !important;
+    border-bottom: 2px solid var(--stone) !important;
   }
   .custom-table td, .table-custom td, table td {
     font-variant-numeric: tabular-nums !important;
@@ -553,6 +553,136 @@
       closeMobileMenu();
     }
   });
+
+  // Real-time Dark Mode Contrast Guard & Persistence
+  (function() {
+    function parseRgb(str) {
+      if (!str) return null;
+      var m = str.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)(?:\s*,\s*([\d.]+))?\s*\)/i);
+      if (!m) return null;
+      return { r: +m[1], g: +m[2], b: +m[3], a: m[4] !== undefined ? +m[4] : 1 };
+    }
+    function relLum(rgb) {
+      var sRGB = [rgb.r / 255, rgb.g / 255, rgb.b / 255].map(function(c) {
+        return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+      });
+      return 0.2126 * sRGB[0] + 0.7152 * sRGB[1] + 0.0722 * sRGB[2];
+    }
+    function getEffectiveBg(el) {
+      var cur = el;
+      while (cur && cur !== document.documentElement) {
+        var bg = window.getComputedStyle(cur).backgroundColor;
+        var rgb = parseRgb(bg);
+        if (rgb && rgb.a > 0.15) return rgb;
+        cur = cur.parentElement;
+      }
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      return isDark ? { r: 11, g: 18, b: 38, a: 1 } : { r: 251, g: 250, b: 247, a: 1 };
+    }
+    window.profepsSyncDarkContrast = function() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (!isDark) {
+        document.querySelectorAll('[data-peps-dm-fixed]').forEach(function(el) {
+          var origColor = el.getAttribute('data-peps-orig-color');
+          var origBg = el.getAttribute('data-peps-orig-bg');
+          if (origColor !== null) {
+            if (origColor === '') el.style.removeProperty('color');
+            else el.style.color = origColor;
+          }
+          if (origBg !== null) {
+            if (origBg === '') el.style.removeProperty('background');
+            else el.style.background = origBg;
+          }
+          el.removeAttribute('data-peps-dm-fixed');
+        });
+        return;
+      }
+      var nodes = document.querySelectorAll('main *, header.silo-hero *, header.hub-hero *, header.vma-hero *, #profepsStickySubnav *');
+      for (var i = 0; i < nodes.length; i++) {
+        var el = nodes[i];
+        if (!el || !el.tagName) continue;
+        var tag = el.tagName;
+        if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'SVG' || tag === 'PATH' || tag === 'CIRCLE' || tag === 'LINE' || tag === 'RECT') continue;
+        var cs = window.getComputedStyle(el);
+        var fg = parseRgb(cs.color);
+        if (!fg) continue;
+        var bg = getEffectiveBg(el);
+        var fgL = relLum(fg);
+        var bgL = relLum(bg);
+        // Case 1: Light background inside Dark Mode (e.g. bgL > 0.65) -> convert card/box bg to Dark Surface unless it is an Amber button
+        var ownBg = parseRgb(cs.backgroundColor);
+        var isAmberBtn = ownBg && ownBg.r > 200 && ownBg.g > 140 && ownBg.b < 60;
+        if (ownBg && ownBg.a > 0.4 && relLum(ownBg) > 0.68 && !isAmberBtn) {
+          if (!el.hasAttribute('data-peps-dm-fixed')) {
+            el.setAttribute('data-peps-orig-bg', el.style.background || '');
+            el.setAttribute('data-peps-orig-color', el.style.color || '');
+            el.setAttribute('data-peps-dm-fixed', '1');
+          }
+          el.style.setProperty('background', '#131E3A', 'important');
+          el.style.setProperty('color', '#E8ECFA', 'important');
+          el.style.setProperty('border-color', '#263558', 'important');
+          bgL = 0.015;
+          fgL = 0.85;
+        }
+        // Case 2: Dark text on dark background (both fgL < 0.20 and bgL < 0.20)
+        if (fgL < 0.20 && bgL < 0.20) {
+          if (!el.hasAttribute('data-peps-dm-fixed')) {
+            el.setAttribute('data-peps-orig-color', el.style.color || '');
+            el.setAttribute('data-peps-orig-bg', el.style.background || '');
+            el.setAttribute('data-peps-dm-fixed', '1');
+          }
+          // Preserve semantic hue if blue/green/amber/red
+          if (fg.b > fg.r + 35 && fg.b > fg.g + 15) {
+            el.style.setProperty('color', '#93A8FF', 'important');
+          } else if (fg.g > fg.r + 25) {
+            el.style.setProperty('color', '#34D399', 'important');
+          } else if (fg.r > fg.b + 40 && fg.g > fg.b + 20) {
+            el.style.setProperty('color', '#FBBF24', 'important');
+          } else if (fg.r > fg.g + 40 && fg.r > fg.b + 40) {
+            el.style.setProperty('color', '#F87171', 'important');
+          } else {
+            el.style.setProperty('color', '#E8ECFA', 'important');
+          }
+        }
+        // Case 3: Light text on light background (both fgL > 0.65 and bgL > 0.65)
+        else if (fgL > 0.65 && bgL > 0.65 && !isAmberBtn) {
+          if (!el.hasAttribute('data-peps-dm-fixed')) {
+            el.setAttribute('data-peps-orig-color', el.style.color || '');
+            el.setAttribute('data-peps-orig-bg', el.style.background || '');
+            el.setAttribute('data-peps-dm-fixed', '1');
+          }
+          el.style.setProperty('color', '#0E1633', 'important');
+        }
+      }
+    };
+    try {
+      var saved = localStorage.getItem('profeps_theme');
+      if (saved === 'dark' || saved === 'light') {
+        document.documentElement.setAttribute('data-theme', saved);
+        if (saved === 'dark') document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
+        syncThemeUI(saved);
+      }
+    } catch (e) {}
+    var origToggle = window.profepsToggleTheme;
+    window.profepsToggleTheme = function() {
+      if (origToggle) origToggle();
+      window.profepsSyncDarkContrast();
+    };
+    window.addEventListener('DOMContentLoaded', function() {
+      window.profepsSyncDarkContrast();
+      if (typeof MutationObserver !== 'undefined' && document.body) {
+        var timer = null;
+        new MutationObserver(function() {
+          if (document.documentElement.getAttribute('data-theme') !== 'dark') return;
+          if (timer) clearTimeout(timer);
+          timer = setTimeout(window.profepsSyncDarkContrast, 80);
+        }).observe(document.body, { childList: true, subtree: true });
+      }
+    });
+    window.addEventListener('load', window.profepsSyncDarkContrast);
+  })();
+
 })();
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->
