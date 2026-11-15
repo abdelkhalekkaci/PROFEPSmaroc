@@ -21,8 +21,21 @@ app.use((req, res, next) => {
     next();
 });
 
-// Middleware CORS & JSON Body Parser sécurisé (limite 64kb contre les abus de payload)
-app.use(cors());
+// Middleware CORS restreint aux domaines autorisés & JSON Body Parser sécurisé (limite 64kb contre les abus de payload)
+const allowedOrigins = [
+    'https://profeps.ma',
+    'https://www.profeps.ma',
+    'http://localhost:3000',
+    'http://127.0.0.1:3000'
+];
+app.use(cors({
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.run.app') || origin.endsWith('.vercel.app')) {
+            return callback(null, true);
+        }
+        return callback(new Error('Origine non autorisée par la politique CORS'));
+    }
+}));
 app.use(express.json({ limit: '64kb' }));
 app.use(express.urlencoded({ extended: true, limit: '64kb' }));
 
