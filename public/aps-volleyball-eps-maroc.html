@@ -556,7 +556,7 @@
 /* PROFEPS_UNIFIED_APS_STICKY_AND_STUDIO_STYLES_END */
 
     </style>
-  <link rel="stylesheet" href="/assets/site.css?v=20261113">
+  <link rel="stylesheet" href="/assets/site.css?v=20261117">
   <script src="profeps-communaute.js" defer></script>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
@@ -986,10 +986,11 @@
         <div class="volet-nav">
             <div class="volet-tabs" role="tablist" aria-label="Sections de la page">
                 <button type="button" class="volet-tab-btn active" id="tab-btn-studio" onclick="switchVolleyballVolet('studio')">⚡ 1. Studio Cycles &amp; Fiches (1AC → 2Bac)</button>
-                <button type="button" class="volet-tab-btn" id="tab-btn-atd" onclick="switchVolleyballVolet('atd')">📐 2. ATD Volley-Ball Complet</button>
-                <button type="button" class="volet-tab-btn" id="tab-btn-grilles" onclick="switchVolleyballVolet('grilles')">📊 3. Grilles d'Observation &amp; Évaluation (/20)</button>
-                <button type="button" class="volet-tab-btn" id="tab-btn-terrain" onclick="switchVolleyballVolet('terrain')">🏟️ 4. Terrain 40+ Élèves &amp; Arbitrage FIVB</button>
-                <button type="button" class="volet-tab-btn" id="tab-btn-articles" onclick="switchVolleyballVolet('articles')">📚 5. Articles &amp; Dossiers Volley (8)</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-calculateur" onclick="switchVolleyballVolet('calculateur')">⚖️ 2. Table de Marque &amp; Arbitre FIVB (Rotation P1–P6)</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-atd" onclick="switchVolleyballVolet('atd')">📐 3. ATD Volley-Ball Complet</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-grilles" onclick="switchVolleyballVolet('grilles')">📊 4. Grilles d'Observation &amp; Évaluation (/20)</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-terrain" onclick="switchVolleyballVolet('terrain')">🏟️ 5. Terrain 40+ Élèves &amp; Arbitrage FIVB</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-articles" onclick="switchVolleyballVolet('articles')">📚 6. Articles &amp; Dossiers Volley (8)</button>
             </div>
             <div class="profeps-sticky-row-aps" role="navigation" aria-label="Navigation rapide entre les 13 APS">
                 <span class="profeps-aps-row-label">🏟️ Autres APS :</span>
@@ -1162,7 +1163,123 @@
         </section>
 
         <!-- ================================================================== -->
-        <!-- VOLET 2 : ANALYSE ET TRAITEMENT DIDACTIQUE (ATD) DU VOLLEY-BALL    -->
+        <!-- VOLET 2 : TABLE DE MARQUE & ARBITRE INTERACTIF FIVB (ROTATION P1-P6)-->
+        <!-- ================================================================== -->
+        <section id="volet-calculateur" class="volet-panel" aria-label="Table de Marque et Arbitre Interactif FIVB Volley-Ball">
+            <div class="peps-ref-board-wrap">
+                <div class="peps-ref-board-header">
+                    <div>
+                        <span style="font-size:0.76rem;font-weight:800;color:var(--primary);text-transform:uppercase;letter-spacing:0.05em;">Outil Terrain Élève-Arbitre &amp; Table de Marque · Code FIVB 2026</span>
+                        <h2 class="peps-ref-board-title">⚖️ Table de Marque Interactive Volley-Ball &amp; Simulateur de Rotation FIVB (Postes P1 à P6)</h2>
+                        <p class="peps-ref-board-sub">Cliquez sur <strong>+1 Point</strong> après chaque échange : l'outil calcule automatiquement s'il y a <strong>continuité de service</strong> ou <strong>récupération du service (Side-Out) avec rotation automatique des 6 postes dans le sens horaire (P2 → P1 au service)</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="peps-ref-toolbar">
+                    <label>Format du Set :
+                        <select id="vbSetTarget" onchange="vbUpdateConfig()">
+                            <option value="15" selected>Set Scolaire EPS en 15 pts (2 pts d'écart)</option>
+                            <option value="25">Set Officiel FIVB en 25 pts (2 pts d'écart)</option>
+                            <option value="11">Set Rapide Tournoi en 11 pts (2 pts d'écart)</option>
+                        </select>
+                    </label>
+                    <label>Effectif sur Terrain :
+                        <select id="vbCourtMode" onchange="vbResetMatch()">
+                            <option value="6" selected>6×6 Officiel (Postes P1 à P6)</option>
+                            <option value="4">4×4 Scolaire Réduit (Postes P1 à P4)</option>
+                        </select>
+                    </label>
+                    <button type="button" class="peps-ref-btn" onclick="vbUndoLast()">↩️ Annuler dernier point</button>
+                    <button type="button" class="peps-ref-btn peps-ref-btn-cyan" onclick="vbNextSet()">⏭️ Nouveau Set</button>
+                    <button type="button" class="peps-ref-btn peps-ref-btn-danger" onclick="vbResetMatch()">🔄 Remettre à 0–0</button>
+                </div>
+
+                <div id="vbRefCallout" class="peps-ref-callout" role="status" aria-live="polite"></div>
+
+                <div class="peps-ref-grid-2">
+                    <!-- ÉQUIPE A -->
+                    <div class="peps-ref-team-box team-a">
+                        <div class="peps-ref-team-head">
+                            <div>
+                                <span id="vbServeBadgeA" style="display:inline-block;padding:0.2rem 0.55rem;border-radius:6px;font-size:0.74rem;font-weight:800;background:var(--primary);color:#fff;">🏐 AU SERVICE</span>
+                                <div class="peps-ref-team-name" id="vbLabelTeamA" style="margin-top:0.25rem;">Équipe A</div>
+                            </div>
+                            <div style="text-align:right;">
+                                <div style="font-size:0.75rem;font-weight:800;color:var(--slate);">Sets Gagnés : <strong id="vbSetsA" style="color:var(--primary);font-size:1rem;">0</strong></div>
+                                <div style="font-size:0.74rem;color:var(--slate);">Rotations (Side-Out) : <strong id="vbRotCountA">0</strong> · TM : <strong id="vbToA">0</strong>/2</div>
+                            </div>
+                        </div>
+
+                        <div class="peps-ref-score-big" id="vbScoreA">0</div>
+
+                        <div class="peps-ref-btn-row">
+                            <button type="button" class="peps-ref-btn peps-ref-btn-primary" onclick="vbAddPoint('A', 1)">+1 Point Équipe A</button>
+                            <button type="button" class="peps-ref-btn peps-ref-btn-amber" onclick="vbAddPoint('A', 3)" title="Point construit en 3 touches (Réception-Passe-Attaque)">+3 Pts (Bonus 3 Touches)</button>
+                            <button type="button" class="peps-ref-btn" onclick="vbAddTimeout('A')">⏱️ Temps Mort</button>
+                        </div>
+
+                        <div style="font-size:0.76rem;font-weight:800;color:var(--slate);text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;">
+                            <span>Disposition Terrain Équipe A (Filet en haut ↑)</span>
+                            <span>Sens horaire ↻</span>
+                        </div>
+                        <div id="vbCourtGridA" class="peps-vb-court-grid"></div>
+                    </div>
+
+                    <!-- ÉQUIPE B -->
+                    <div class="peps-ref-team-box team-b">
+                        <div class="peps-ref-team-head">
+                            <div>
+                                <span id="vbServeBadgeB" style="display:inline-block;padding:0.2rem 0.55rem;border-radius:6px;font-size:0.74rem;font-weight:800;background:#64748b;color:#fff;">🛡️ EN RÉCEPTION</span>
+                                <div class="peps-ref-team-name" id="vbLabelTeamB" style="margin-top:0.25rem;">Équipe B</div>
+                            </div>
+                            <div style="text-align:right;">
+                                <div style="font-size:0.75rem;font-weight:800;color:var(--slate);">Sets Gagnés : <strong id="vbSetsB" style="color:var(--cyan);font-size:1rem;">0</strong></div>
+                                <div style="font-size:0.74rem;color:var(--slate);">Rotations (Side-Out) : <strong id="vbRotCountB">0</strong> · TM : <strong id="vbToB">0</strong>/2</div>
+                            </div>
+                        </div>
+
+                        <div class="peps-ref-score-big" id="vbScoreB">0</div>
+
+                        <div class="peps-ref-btn-row">
+                            <button type="button" class="peps-ref-btn peps-ref-btn-cyan" onclick="vbAddPoint('B', 1)">+1 Point Équipe B</button>
+                            <button type="button" class="peps-ref-btn peps-ref-btn-amber" onclick="vbAddPoint('B', 3)" title="Point construit en 3 touches (Réception-Passe-Attaque)">+3 Pts (Bonus 3 Touches)</button>
+                            <button type="button" class="peps-ref-btn" onclick="vbAddTimeout('B')">⏱️ Temps Mort</button>
+                        </div>
+
+                        <div style="font-size:0.76rem;font-weight:800;color:var(--slate);text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;">
+                            <span>Disposition Terrain Équipe B (Filet en haut ↑)</span>
+                            <span>Sens horaire ↻</span>
+                        </div>
+                        <div id="vbCourtGridB" class="peps-vb-court-grid"></div>
+                    </div>
+                </div>
+
+                <!-- BARRE D'EXPORT & IMPRESSION PDF DU BILAN DE MATCH -->
+                <div class="peps-ref-export-bar">
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:0.65rem;flex:1 1 520px;">
+                        <label style="font-size:0.76rem;font-weight:800;color:var(--slate);">Nom Équipe A
+                            <input type="text" id="vbInputTeamA" value="Équipe A (Aigles)" oninput="vbRenderBoard()" style="width:100%;margin-top:0.2rem;padding:0.42rem 0.6rem;border-radius:7px;border:1px solid var(--stone);background:var(--surface);color:var(--ink);font-weight:700;">
+                        </label>
+                        <label style="font-size:0.76rem;font-weight:800;color:var(--slate);">Nom Équipe B
+                            <input type="text" id="vbInputTeamB" value="Équipe B (Lions)" oninput="vbRenderBoard()" style="width:100%;margin-top:0.2rem;padding:0.42rem 0.6rem;border-radius:7px;border:1px solid var(--stone);background:var(--surface);color:var(--ink);font-weight:700;">
+                        </label>
+                        <label style="font-size:0.76rem;font-weight:800;color:var(--slate);">Classe &amp; Niveau
+                            <input type="text" id="vbInputClass" value="2ème Bac / 3AC" style="width:100%;margin-top:0.2rem;padding:0.42rem 0.6rem;border-radius:7px;border:1px solid var(--stone);background:var(--surface);color:var(--ink);font-weight:700;">
+                        </label>
+                        <label style="font-size:0.76rem;font-weight:800;color:var(--slate);">Élèves-Arbitres &amp; Marqueur
+                            <input type="text" id="vbInputReferees" placeholder="Ex: Yassine (1er Arb.), Salma (Marqueur)" style="width:100%;margin-top:0.2rem;padding:0.42rem 0.6rem;border-radius:7px;border:1px solid var(--stone);background:var(--surface);color:var(--ink);font-weight:700;">
+                        </label>
+                    </div>
+                    <div style="display:flex;flex-wrap:wrap;gap:0.55rem;">
+                        <button type="button" class="peps-ref-btn peps-ref-btn-primary" onclick="vbExportMatchReport('pdf')">🖨️ Imprimer / Exporter Bilan (PDF A4)</button>
+                        <button type="button" class="peps-ref-btn" onclick="vbExportMatchReport('word')">📝 Bilan (.doc Word)</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 3 : ANALYSE ET TRAITEMENT DIDACTIQUE (ATD) DU VOLLEY-BALL    -->
         <!-- ================================================================== -->
         <section id="volet-atd" class="volet-panel" aria-label="Analyse et Traitement Didactique Volley-Ball">
             <div class="content-panel-card">
@@ -1949,6 +2066,289 @@
         if (container) container.innerHTML = VB_GRILLES_HTML[gKey] || '';
       }
 
+      /* ==================================================================
+         SIMULATEUR D'ARBITRAGE FIVB VOLLEY-BALL (ROTATION P1-P6 & SIDE-OUT)
+         ================================================================== */
+      var vbState = {
+        scoreA: 0,
+        scoreB: 0,
+        setsA: 0,
+        setsB: 0,
+        serving: 'A',
+        rotCountA: 0,
+        rotCountB: 0,
+        bonusCountA: 0,
+        bonusCountB: 0,
+        toA: 0,
+        toB: 0,
+        lineupA: ['Joueur A1', 'Joueur A2', 'Joueur A3', 'Joueur A4', 'Joueur A5', 'Joueur A6'],
+        lineupB: ['Joueur B1', 'Joueur B2', 'Joueur B3', 'Joueur B4', 'Joueur B5', 'Joueur B6'],
+        setHistory: [],
+        lastActionMsg: 'Début du set : Équipe A engage depuis le Poste 1 (zone arrière droite derrière la ligne de 9m).',
+        historyStack: []
+      };
+
+      function vbCloneState() {
+        return JSON.parse(JSON.stringify({
+          scoreA: vbState.scoreA,
+          scoreB: vbState.scoreB,
+          setsA: vbState.setsA,
+          setsB: vbState.setsB,
+          serving: vbState.serving,
+          rotCountA: vbState.rotCountA,
+          rotCountB: vbState.rotCountB,
+          bonusCountA: vbState.bonusCountA,
+          bonusCountB: vbState.bonusCountB,
+          toA: vbState.toA,
+          toB: vbState.toB,
+          lineupA: vbState.lineupA,
+          lineupB: vbState.lineupB,
+          setHistory: vbState.setHistory,
+          lastActionMsg: vbState.lastActionMsg
+        }));
+      }
+
+      function vbRotateClockwise(arr) {
+        // En Volley-Ball FIVB, la rotation se fait dans le sens horaire :
+        // Le joueur en P2 passe en P1 (Service), P1 -> P6, P6 -> P5, P5 -> P4, P4 -> P3, P3 -> P2.
+        // Donc nouvel indice 0 (P1) = ancien indice 1 (P2).
+        if (!arr || arr.length < 2) return arr;
+        var next = arr.slice(1);
+        next.push(arr[0]);
+        return next;
+      }
+
+      function vbUpdateConfig() {
+        vbRenderBoard();
+      }
+
+      function vbResetMatch() {
+        var mode = parseInt((document.getElementById('vbCourtMode') || {}).value || '6', 10);
+        vbState.scoreA = 0;
+        vbState.scoreB = 0;
+        vbState.setsA = 0;
+        vbState.setsB = 0;
+        vbState.serving = 'A';
+        vbState.rotCountA = 0;
+        vbState.rotCountB = 0;
+        vbState.bonusCountA = 0;
+        vbState.bonusCountB = 0;
+        vbState.toA = 0;
+        vbState.toB = 0;
+        vbState.lineupA = mode === 4 ? ['A1', 'A2', 'A3', 'A4'] : ['A1', 'A2', 'A3', 'A4', 'A5', 'A6'];
+        vbState.lineupB = mode === 4 ? ['B1', 'B2', 'B3', 'B4'] : ['B1', 'B2', 'B3', 'B4', 'B5', 'B6'];
+        vbState.setHistory = [];
+        vbState.historyStack = [];
+        vbState.lastActionMsg = 'Match réinitialisé (0–0). Équipe A engage au Poste 1 (' + vbState.lineupA[0] + ').';
+        vbRenderBoard();
+      }
+
+      function vbAddPoint(team, pts) {
+        vbState.historyStack.push(vbCloneState());
+        var teamNameA = (document.getElementById('vbInputTeamA') || {}).value || 'Équipe A';
+        var teamNameB = (document.getElementById('vbInputTeamB') || {}).value || 'Équipe B';
+        var winName = team === 'A' ? teamNameA : teamNameB;
+
+        if (team === 'A') {
+          vbState.scoreA += pts;
+          if (pts > 1) vbState.bonusCountA += 1;
+        } else {
+          vbState.scoreB += pts;
+          if (pts > 1) vbState.bonusCountB += 1;
+        }
+
+        if (vbState.serving === team) {
+          var srvPlayer = team === 'A' ? vbState.lineupA[0] : vbState.lineupB[0];
+          vbState.lastActionMsg = '✅ Point ' + winName + ' (+' + pts + ' pt) sur son propre service : AUCUNE ROTATION. ' + srvPlayer + ' (Poste 1) conserve le service.';
+        } else {
+          vbState.serving = team;
+          if (team === 'A') {
+            vbState.lineupA = vbRotateClockwise(vbState.lineupA);
+            vbState.rotCountA += 1;
+            vbState.lastActionMsg = '🔄 SIDE-OUT & ROTATION ' + winName + ' (+' + pts + ' pt) ! Récupération du service : tous les joueurs tournent d\'un poste dans le sens horaire. Nouveau serveur en Poste 1 : ' + vbState.lineupA[0] + '.';
+          } else {
+            vbState.lineupB = vbRotateClockwise(vbState.lineupB);
+            vbState.rotCountB += 1;
+            vbState.lastActionMsg = '🔄 SIDE-OUT & ROTATION ' + winName + ' (+' + pts + ' pt) ! Récupération du service : tous les joueurs tournent d\'un poste dans le sens horaire. Nouveau serveur en Poste 1 : ' + vbState.lineupB[0] + '.';
+          }
+        }
+        vbRenderBoard();
+      }
+
+      function vbAddTimeout(team) {
+        if (team === 'A' && vbState.toA < 2) {
+          vbState.historyStack.push(vbCloneState());
+          vbState.toA += 1;
+          vbState.lastActionMsg = '⏱️ Temps Mort réglementaire (30s) accordé à l\'Équipe A (' + vbState.toA + '/2 dans ce set).';
+          vbRenderBoard();
+        } else if (team === 'B' && vbState.toB < 2) {
+          vbState.historyStack.push(vbCloneState());
+          vbState.toB += 1;
+          vbState.lastActionMsg = '⏱️ Temps Mort réglementaire (30s) accordé à l\'Équipe B (' + vbState.toB + '/2 dans ce set).';
+          vbRenderBoard();
+        }
+      }
+
+      function vbUndoLast() {
+        if (!vbState.historyStack.length) return;
+        var prev = vbState.historyStack.pop();
+        Object.keys(prev).forEach(function(k) { vbState[k] = prev[k]; });
+        vbRenderBoard();
+      }
+
+      function vbNextSet() {
+        if (vbState.scoreA === 0 && vbState.scoreB === 0) return;
+        vbState.historyStack.push(vbCloneState());
+        if (vbState.scoreA > vbState.scoreB) vbState.setsA += 1;
+        else if (vbState.scoreB > vbState.scoreA) vbState.setsB += 1;
+        vbState.setHistory.push(vbState.scoreA + ' – ' + vbState.scoreB);
+        vbState.scoreA = 0;
+        vbState.scoreB = 0;
+        vbState.toA = 0;
+        vbState.toB = 0;
+        vbState.lastActionMsg = '⏭️ Nouveau Set engagé (Sets : ' + vbState.setsA + ' – ' + vbState.setsB + ').';
+        vbRenderBoard();
+      }
+
+      function vbBuildCourtHtml(lineup, isServingTeam) {
+        if (lineup.length === 4) {
+          // 4x4 : Avant (P4, P3, P2) + Arrière Serveur (P1)
+          var order4 = [
+            { pos: 'P4 (Avant G)', player: lineup[3], srv: false },
+            { pos: 'P3 (Passeur Av. C)', player: lineup[2], srv: false },
+            { pos: 'P2 (Avant D)', player: lineup[1], srv: false },
+            { pos: 'Zone Arrière', player: '—', srv: false },
+            { pos: 'P1 (Arrière / Service)', player: lineup[0], srv: isServingTeam },
+            { pos: 'Zone Arrière', player: '—', srv: false }
+          ];
+          return order4.map(function(c) {
+            return '<div class="peps-vb-pos-cell' + (c.srv ? ' is-server' : '') + '">' +
+              '<div style="font-size:0.68rem;color:var(--slate);font-weight:700;">' + c.pos + '</div>' +
+              '<div style="font-size:0.9rem;font-weight:900;margin-top:0.15rem;">' + c.player + (c.srv ? ' 🏐' : '') + '</div>' +
+            '</div>';
+          }).join('');
+        }
+        // 6x6 FIVB : Ligne avant (P4, P3, P2) en haut près du filet, Ligne arrière (P5, P6, P1) en bas
+        var cells = [
+          { pos: 'Poste 4 (Avant G)', player: lineup[3], srv: false },
+          { pos: 'Poste 3 (Avant C)', player: lineup[2], srv: false },
+          { pos: 'Poste 2 (Avant D)', player: lineup[1], srv: false },
+          { pos: 'Poste 5 (Arrière G)', player: lineup[4], srv: false },
+          { pos: 'Poste 6 (Arrière C)', player: lineup[5], srv: false },
+          { pos: 'Poste 1 (Service D)', player: lineup[0], srv: isServingTeam }
+        ];
+        return cells.map(function(c) {
+          return '<div class="peps-vb-pos-cell' + (c.srv ? ' is-server' : '') + '">' +
+            '<div style="font-size:0.68rem;color:var(--slate);font-weight:700;">' + c.pos + '</div>' +
+            '<div style="font-size:0.92rem;font-weight:900;margin-top:0.15rem;">' + c.player + (c.srv ? ' 🏐 SERVEUR' : '') + '</div>' +
+          '</div>';
+        }).join('');
+      }
+
+      function vbRenderBoard() {
+        var nameA = (document.getElementById('vbInputTeamA') || {}).value || 'Équipe A';
+        var nameB = (document.getElementById('vbInputTeamB') || {}).value || 'Équipe B';
+        var target = parseInt((document.getElementById('vbSetTarget') || {}).value || '15', 10);
+
+        var elLabelA = document.getElementById('vbLabelTeamA');
+        var elLabelB = document.getElementById('vbLabelTeamB');
+        if (elLabelA) elLabelA.textContent = nameA;
+        if (elLabelB) elLabelB.textContent = nameB;
+
+        var elScoreA = document.getElementById('vbScoreA');
+        var elScoreB = document.getElementById('vbScoreB');
+        if (elScoreA) elScoreA.textContent = vbState.scoreA;
+        if (elScoreB) elScoreB.textContent = vbState.scoreB;
+
+        var elSetsA = document.getElementById('vbSetsA');
+        var elSetsB = document.getElementById('vbSetsB');
+        if (elSetsA) elSetsA.textContent = vbState.setsA;
+        if (elSetsB) elSetsB.textContent = vbState.setsB;
+
+        var elRotA = document.getElementById('vbRotCountA');
+        var elRotB = document.getElementById('vbRotCountB');
+        if (elRotA) elRotA.textContent = vbState.rotCountA;
+        if (elRotB) elRotB.textContent = vbState.rotCountB;
+
+        var elToA = document.getElementById('vbToA');
+        var elToB = document.getElementById('vbToB');
+        if (elToA) elToA.textContent = vbState.toA;
+        if (elToB) elToB.textContent = vbState.toB;
+
+        var badgeA = document.getElementById('vbServeBadgeA');
+        var badgeB = document.getElementById('vbServeBadgeB');
+        if (badgeA && badgeB) {
+          if (vbState.serving === 'A') {
+            badgeA.textContent = '🏐 AU SERVICE (P1 : ' + vbState.lineupA[0] + ')';
+            badgeA.style.background = '#D97706';
+            badgeB.textContent = '🛡️ EN RÉCEPTION';
+            badgeB.style.background = '#475569';
+          } else {
+            badgeB.textContent = '🏐 AU SERVICE (P1 : ' + vbState.lineupB[0] + ')';
+            badgeB.style.background = '#D97706';
+            badgeA.textContent = '🛡️ EN RÉCEPTION';
+            badgeA.style.background = '#475569';
+          }
+        }
+
+        var gridA = document.getElementById('vbCourtGridA');
+        var gridB = document.getElementById('vbCourtGridB');
+        if (gridA) gridA.innerHTML = vbBuildCourtHtml(vbState.lineupA, vbState.serving === 'A');
+        if (gridB) gridB.innerHTML = vbBuildCourtHtml(vbState.lineupB, vbState.serving === 'B');
+
+        var statusAlert = '';
+        var diff = Math.abs(vbState.scoreA - vbState.scoreB);
+        if ((vbState.scoreA >= target || vbState.scoreB >= target) && diff >= 2) {
+          var winner = vbState.scoreA > vbState.scoreB ? nameA : nameB;
+          statusAlert = '<div style="margin-top:0.45rem;padding:0.45rem 0.75rem;border-radius:8px;background:#15803d;color:#fff;font-weight:800;">🏆 FIN DU SET (' + vbState.scoreA + ' – ' + vbState.scoreB + ') : Victoire de ' + winner + ' (2 points d\'écart respectés) ! Cliquez sur « Nouveau Set » ou imprimez le bilan.</div>';
+        } else if ((vbState.scoreA >= target - 1 || vbState.scoreB >= target - 1) && diff >= 1) {
+          var leader = vbState.scoreA > vbState.scoreB ? nameA : nameB;
+          statusAlert = '<div style="margin-top:0.45rem;padding:0.4rem 0.75rem;border-radius:8px;background:#b45309;color:#fff;font-weight:800;">🔥 BALLE DE SET pour ' + leader + ' ! (Rappel FIVB : 2 points d\'écart obligatoires).</div>';
+        }
+
+        var callout = document.getElementById('vbRefCallout');
+        if (callout) {
+          var srvTeamName = vbState.serving === 'A' ? nameA : nameB;
+          var srvPlayerName = vbState.serving === 'A' ? vbState.lineupA[0] : vbState.lineupB[0];
+          callout.innerHTML = '<div><strong>Décision Arbitrale en Direct :</strong> ' + vbState.lastActionMsg + '</div>' +
+            '<div style="margin-top:0.35rem;font-size:0.82rem;color:#38BDF8;">👉 <strong>Serveur officiel actuel :</strong> ' + srvPlayerName + ' (' + srvTeamName + ' — Poste 1, derrière la ligne de fond) · Sets terminés : ' + (vbState.setHistory.length ? vbState.setHistory.join(' | ') : 'Set 1 en cours') + '</div>' +
+            statusAlert;
+        }
+      }
+
+      function vbExportMatchReport(format) {
+        var nameA = (document.getElementById('vbInputTeamA') || {}).value || 'Équipe A';
+        var nameB = (document.getElementById('vbInputTeamB') || {}).value || 'Équipe B';
+        var cls = (document.getElementById('vbInputClass') || {}).value || 'Classe EPS';
+        var refs = (document.getElementById('vbInputReferees') || {}).value || 'Élèves-Arbitres Officiels';
+        var dateStr = new Date().toLocaleDateString('fr-MA');
+        var allSets = vbState.setHistory.concat([vbState.scoreA + ' – ' + vbState.scoreB]).join(' &nbsp;|&nbsp; ');
+
+        var reportHtml = '<table class="a4-header-table"><tr>' +
+          '<td style="width:36%;"><strong>ROYAUME DU MAROC</strong><br>Ministère de l\'Éducation Nationale, du Préscolaire et des Sports<br><strong>Matière :</strong> Éducation Physique et Sportive</td>' +
+          '<td style="width:28%;text-align:center;"><strong>FEUILLE DE MATCH OFFICIELLE FIVB</strong><br>APS : <strong>VOLLEY-BALL</strong><br>Date : ' + dateStr + '</td>' +
+          '<td style="width:36%;text-align:right;"><strong>Classe / Niveau :</strong> ' + cls + '<br><strong>Officiels / Arbitres :</strong> ' + refs + '</td>' +
+          '</tr></table>' +
+          '<div class="a4-doc-title"><h3>BILAN OFFICIEL DE LA RENCONTRE — VOLLEY-BALL (CODE FIVB)</h3><p>' + nameA + ' contre ' + nameB + '</p></div>' +
+          '<table class="a4-table"><thead><tr><th>Équipe</th><th>Score du Set Actuel</th><th>Sets Gagnés</th><th>Rotations (Side-Out)</th><th>Actions Bonus (3 Touches R-P-A)</th><th>Temps Morts</th><th>Ordre Actuel des Postes (P1 → P6)</th></tr></thead><tbody>' +
+          '<tr><td><strong>' + nameA + '</strong></td><td style="font-size:1.2rem;font-weight:900;">' + vbState.scoreA + ' pts</td><td>' + vbState.setsA + '</td><td>' + vbState.rotCountA + '</td><td>' + vbState.bonusCountA + '</td><td>' + vbState.toA + '/2</td><td>' + vbState.lineupA.join(' → ') + '</td></tr>' +
+          '<tr><td><strong>' + nameB + '</strong></td><td style="font-size:1.2rem;font-weight:900;">' + vbState.scoreB + ' pts</td><td>' + vbState.setsB + '</td><td>' + vbState.rotCountB + '</td><td>' + vbState.bonusCountB + '</td><td>' + vbState.toB + '/2</td><td>' + vbState.lineupB.join(' → ') + '</td></tr>' +
+          '</tbody></table>' +
+          '<p><strong>Détail des Sets disputés :</strong> ' + allSets + '</p>' +
+          '<p><strong>Dernière observation arbitrale :</strong> ' + vbState.lastActionMsg + '</p>' +
+          '<table style="width:100%;margin-top:1.5rem;border:none;font-size:0.85rem;"><tr>' +
+          '<td style="border:none;width:33%;"><strong>Signature 1er Arbitre &amp; Marqueur :</strong><br><br>........................................</td>' +
+          '<td style="border:none;width:33%;text-align:center;"><strong>Signature des Capitaines (A &amp; B) :</strong><br><br>........................................</td>' +
+          '<td style="border:none;width:33%;text-align:right;"><strong>Visa du Professeur d\'EPS :</strong><br><br>........................................</td>' +
+          '</tr></table>';
+
+        if (format === 'word') {
+          downloadHtmlAsWord(reportHtml, 'Feuille-Match-Volleyball-' + cls.replace(/\s+/g, '-') + '.doc');
+        } else {
+          openPrintWindow(reportHtml, 'Feuille de Match Volley-Ball — ' + nameA + ' vs ' + nameB);
+        }
+      }
+
       /* Initialisation au chargement + lecture paramètre URL ?level= */
       window.addEventListener('DOMContentLoaded', function() {
         try {
@@ -1960,13 +2360,15 @@
               b.classList.toggle('active', b.getAttribute('data-school') === lvl);
             });
           }
-          if (window.location.hash === '#volet-atd') switchVolleyballVolet('atd');
+          if (window.location.hash === '#volet-calculateur') switchVolleyballVolet('calculateur');
+          else if (window.location.hash === '#volet-atd') switchVolleyballVolet('atd');
           else if (window.location.hash === '#volet-grilles') switchVolleyballVolet('grilles');
           else if (window.location.hash === '#volet-terrain') switchVolleyballVolet('terrain');
           else if (window.location.hash === '#volet-articles') switchVolleyballVolet('articles');
         } catch(e) {}
         renderStudioPreview();
         selectVolleyballGrille('diag', document.querySelector('.practice-tab[data-grille="diag"]'));
+        vbResetMatch();
       });
     </script>
 
@@ -2072,11 +2474,11 @@
           <p class="footer-col-title">Navigation</p>
           <ul>
             <li><a href="/">Accueil ProfEPS.ma</a></li>
-            <li><a href="/orientations-pedagogiques-toutes-matieres.html" class="footer-hub-highlight">Toutes les OP (34 PDF)</a></li>
+            <li><a href="/orientations-pedagogiques-toutes-matieres.html">Toutes les OP (34 PDF)</a></li>
             <li><a href="/hub-aps-sports-eps-maroc.html">Hub des 13 Sports &amp; APS</a></li>
             <li><a href="/cycles-eps-maroc.html">Projets de Cycles EPS</a></li>
             <li><a href="/generateur.html">Générateur de Séances (Word/PDF)</a></li>
-            <li><a href="/concours-crmef-hub.html" class="footer-hub-highlight">Hub Concours CRMEF</a></li>
+            <li><a href="/concours-crmef-hub.html">Hub Concours CRMEF</a></li>
             <li><a href="/hub-outils-sport-performance.html">Hub Calculateurs Sport</a></li>
             <li><a href="/bibliotheque-numerique-eps.html">Grande Bibliothèque EPS</a></li>
             <li><a href="/blog.html">Blog &amp; Articles de terrain</a></li>
@@ -2088,8 +2490,8 @@
           <p class="footer-col-title">Sports &amp; Outils EPS</p>
           <ul>
             <li><a href="/orientations-pedagogiques-eps-2007-2009.html">OP EPS 2009 (Collège) &amp; 2007 (Lycée)</a></li>
-            <li><a href="/calculateur-vma.html" class="footer-hub-highlight">Calculateur VMA &amp; Groupes</a></li>
-            <li><a href="/calculateur-note-eps-maroc.html" class="footer-hub-highlight">Calculateur Notes EPS (/20)</a></li>
+            <li><a href="/calculateur-vma.html">Calculateur VMA &amp; Groupes</a></li>
+            <li><a href="/calculateur-note-eps-maroc.html">Calculateur Notes EPS (/20)</a></li>
             <li><a href="/evaluation-eps.html">Évaluation &amp; Barèmes EPS</a></li>
             <li><a href="/aps-course-duree-demi-fond-eps-maroc.html">Silo Course en Durée (1000m/600m)</a></li>
             <li><a href="/aps-gymnastique-sol-eps-maroc.html">Silo Gymnastique au Sol (A–E)</a></li>
@@ -2104,7 +2506,7 @@
           <ul>
             <li><a href="/qcm-sciences-education-crmef.html">QCM Sciences de l'Éducation (340 Q)</a></li>
             <li><a href="/qcm-didactique-eps-maroc.html">QCM Didactique &amp; Spécialité EPS</a></li>
-            <li><a href="/concours-inspection-orientation-administration-maroc.html" class="footer-hub-highlight">Inspection (CFIE), COPE &amp; Admin.</a></li>
+            <li><a href="/concours-inspection-orientation-administration-maroc.html">Inspection (CFIE), COPE &amp; Admin.</a></li>
             <li><a href="/qcm-150-questions-crmef-eps.html">Banque 150 QCM Concours EPS</a></li>
             <li><a href="/orientations-pedagogiques-primaire-2021.html">Curriculum Primaire 2021 &amp; QCM</a></li>
             <li><a href="/qcm-didactique-maths-maroc.html">QCM Mathématiques, PC &amp; SVT</a></li>
@@ -2248,6 +2650,9 @@
 </script>
 <!-- PROFEPS_STICKY_SYNC_SCRIPT_END -->
 
+  <!-- PROFEPS_FEEDBACK_SCRIPT_START -->
+  <script src="/assets/profeps-feedback.js" defer></script>
+  <!-- PROFEPS_FEEDBACK_SCRIPT_END -->
 </body>
 </html>
 

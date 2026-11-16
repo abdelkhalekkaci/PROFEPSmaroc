@@ -556,7 +556,7 @@
 /* PROFEPS_UNIFIED_APS_STICKY_AND_STUDIO_STYLES_END */
 
     </style>
-  <link rel="stylesheet" href="/assets/site.css?v=20261113">
+  <link rel="stylesheet" href="/assets/site.css?v=20261117">
   <script src="profeps-communaute.js" defer></script>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
@@ -986,10 +986,11 @@
         <div class="volet-nav">
             <div class="volet-tabs" role="tablist" aria-label="Sections de la page">
                 <button type="button" class="volet-tab-btn active" id="tab-btn-studio" onclick="switchBasketballVolet('studio')">⚡ 1. Studio Cycles &amp; Fiches (1AC → 2Bac)</button>
-                <button type="button" class="volet-tab-btn" id="tab-btn-atd" onclick="switchBasketballVolet('atd')">📐 2. ATD Basket-Ball Complet</button>
-                <button type="button" class="volet-tab-btn" id="tab-btn-grilles" onclick="switchBasketballVolet('grilles')">📊 3. Grilles d'Observation &amp; Évaluation (/20)</button>
-                <button type="button" class="volet-tab-btn" id="tab-btn-terrain" onclick="switchBasketballVolet('terrain')">🏟️ 4. Terrain 40+ Élèves &amp; Arbitrage FIBA</button>
-                <button type="button" class="volet-tab-btn" id="tab-btn-articles" onclick="switchBasketballVolet('articles')">📚 5. Articles &amp; Dossiers Basket (7)</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-calculateur" onclick="switchBasketballVolet('calculateur')">⚖️ 2. Table de Marque FIBA &amp; Chrono 24s</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-atd" onclick="switchBasketballVolet('atd')">📐 3. ATD Basket-Ball Complet</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-grilles" onclick="switchBasketballVolet('grilles')">📊 4. Grilles d'Observation &amp; Évaluation (/20)</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-terrain" onclick="switchBasketballVolet('terrain')">🏟️ 5. Terrain 40+ Élèves &amp; Arbitrage FIBA</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-articles" onclick="switchBasketballVolet('articles')">📚 6. Articles &amp; Dossiers Basket (7)</button>
             </div>
             <div class="profeps-sticky-row-aps" role="navigation" aria-label="Navigation rapide entre les 13 APS">
                 <span class="profeps-aps-row-label">🏟️ Autres APS :</span>
@@ -1162,7 +1163,156 @@
         </section>
 
         <!-- ================================================================== -->
-        <!-- VOLET 2 : ANALYSE ET TRAITEMENT DIDACTIQUE (ATD) DU BASKET-BALL    -->
+        <!-- VOLET 2 : TABLE DE MARQUE INTERACTIVE FIBA & CHRONO 24s / 14s      -->
+        <!-- ================================================================== -->
+        <section id="volet-calculateur" class="volet-panel" aria-label="Table de Marque et Arbitre Interactif FIBA Basket-Ball">
+            <div class="peps-ref-board-wrap">
+                <div class="peps-ref-board-header">
+                    <div>
+                        <span style="font-size:0.76rem;font-weight:800;color:var(--primary);text-transform:uppercase;letter-spacing:0.05em;">Outil Terrain Élève-Arbitre &amp; Table de Marque · Règlement Officiel FIBA 2026</span>
+                        <h2 class="peps-ref-board-title">⚖️ Table de Marque Interactive Basket-Ball FIBA (+1/+2/+3, Fautes d'Équipe &amp; Chrono 24s/14s)</h2>
+                        <p class="peps-ref-board-sub">Gérez le score en direct (<strong>+1 pt LF, +2 pts Intérieur, +3 pts Extérieur/Bonus</strong>), le <strong>cumul des 5 fautes d'équipe par période</strong> (alerte pénalité 2 LF), la <strong>flèche de possession alternée</strong> et le <strong>chronomètre des 24s / 14s</strong>.</p>
+                    </div>
+                </div>
+
+                <!-- BARRE CHRONOMÈTRE MATCH + CHRONO 24 SECONDES FIBA -->
+                <div class="peps-ref-clock-box">
+                    <div style="display:flex;align-items:center;gap:0.85rem;flex-wrap:wrap;">
+                        <div>
+                            <div style="font-size:0.7rem;font-weight:800;color:#94A3B8;text-transform:uppercase;">Chrono Période (<span id="bbPeriodLabel">Q1</span>)</div>
+                            <div class="peps-ref-clock-digits" id="bbGameClock">08:00</div>
+                        </div>
+                        <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">
+                            <button type="button" class="peps-ref-btn peps-ref-btn-primary" id="bbBtnStartPause" onclick="bbToggleClock()">▶️ Démarrer / Pause</button>
+                            <button type="button" class="peps-ref-btn" onclick="bbNextPeriod()">⏭️ Période Suivante (RAZ Fautes)</button>
+                            <select id="bbPeriodDuration" onchange="bbSetPeriodMinutes()" style="padding:0.4rem;border-radius:7px;background:#1E293B;color:#fff;border:1px solid #475569;font-weight:800;font-size:0.78rem;">
+                                <option value="6">Format Scolaire 6 min</option>
+                                <option value="8" selected>Format Scolaire 8 min</option>
+                                <option value="10">Format FIBA 10 min</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+                        <button type="button" class="peps-ref-btn" id="bbPossArrowBtn" onclick="bbTogglePossArrow()" title="Cliquer pour inverser la flèche de possession alternée" style="background:#1E293B;color:#F8FAFC !important;border-color:#475569;">
+                            🔄 Flèche Possession : <strong id="bbPossArrowText" style="color:#38BDF8;">⬅️ Équipe A</strong>
+                        </button>
+                    </div>
+
+                    <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+                        <div style="text-align:right;">
+                            <div style="font-size:0.7rem;font-weight:800;color:#FBBF24;text-transform:uppercase;">Possession FIBA</div>
+                            <div class="peps-ref-shotclock-digits" id="bbShotClock">24s</div>
+                        </div>
+                        <div style="display:flex;gap:0.4rem;">
+                            <button type="button" class="peps-ref-btn peps-ref-btn-amber" onclick="bbResetShotClock(24)">⏱️ 24s</button>
+                            <button type="button" class="peps-ref-btn peps-ref-btn-cyan" onclick="bbResetShotClock(14)" title="Rebond offensif après tir ayant touché l'anneau">⏱️ 14s (Rebond Off.)</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="peps-ref-toolbar" style="justify-content:space-between;">
+                    <div id="bbRefCallout" style="font-size:0.86rem;font-weight:700;color:var(--ink);">🏀 Prêt pour l'entre-deux initial. Utilisez les boutons +1 / +2 / +3 et +1 Faute ci-dessous.</div>
+                    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+                        <button type="button" class="peps-ref-btn" onclick="bbUndoLast()">↩️ Annuler dernière action</button>
+                        <button type="button" class="peps-ref-btn peps-ref-btn-danger" onclick="bbResetMatch()">🔄 Remettre Match à 0–0</button>
+                    </div>
+                </div>
+
+                <div class="peps-ref-grid-2">
+                    <!-- ÉQUIPE A -->
+                    <div class="peps-ref-team-box team-a">
+                        <div class="peps-ref-team-head">
+                            <div>
+                                <div class="peps-ref-team-name" id="bbLabelTeamA">Équipe A</div>
+                                <div style="font-size:0.75rem;color:var(--slate);" id="bbStatsBreakdownA">LF (1pt) : 0 · Intérieur (2pts) : 0 · Extérieur (3pts) : 0</div>
+                            </div>
+                            <div style="text-align:right;">
+                                <div style="font-size:0.75rem;font-weight:800;color:var(--slate);">Temps Morts : <strong id="bbToA">0</strong>/2</div>
+                            </div>
+                        </div>
+
+                        <div class="peps-ref-score-big" id="bbScoreA">0</div>
+
+                        <div class="peps-ref-btn-row">
+                            <button type="button" class="peps-ref-btn" onclick="bbAddPoints('A', 1)">+1 pt (LF)</button>
+                            <button type="button" class="peps-ref-btn peps-ref-btn-primary" onclick="bbAddPoints('A', 2)">+2 pts (Panier)</button>
+                            <button type="button" class="peps-ref-btn peps-ref-btn-amber" onclick="bbAddPoints('A', 3)">+3 pts (Bonus/6m75)</button>
+                        </div>
+
+                        <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;padding-top:0.5rem;border-top:1px dashed var(--stone);">
+                            <div>
+                                <div style="font-size:0.76rem;font-weight:800;color:var(--ink);">Fautes d'Équipe (<span id="bbFoulsCountA">0</span> / 5) :</div>
+                                <div class="peps-foul-dots" id="bbFoulDotsA" style="margin-top:0.25rem;"></div>
+                            </div>
+                            <div style="display:flex;gap:0.4rem;">
+                                <button type="button" class="peps-ref-btn peps-ref-btn-danger" onclick="bbAddFoul('A')">🚨 +1 Faute A</button>
+                                <button type="button" class="peps-ref-btn" onclick="bbAddTimeout('A')">⏱️ TM</button>
+                            </div>
+                        </div>
+                        <div id="bbFoulAlertA"></div>
+                    </div>
+
+                    <!-- ÉQUIPE B -->
+                    <div class="peps-ref-team-box team-b">
+                        <div class="peps-ref-team-head">
+                            <div>
+                                <div class="peps-ref-team-name" id="bbLabelTeamB">Équipe B</div>
+                                <div style="font-size:0.75rem;color:var(--slate);" id="bbStatsBreakdownB">LF (1pt) : 0 · Intérieur (2pts) : 0 · Extérieur (3pts) : 0</div>
+                            </div>
+                            <div style="text-align:right;">
+                                <div style="font-size:0.75rem;font-weight:800;color:var(--slate);">Temps Morts : <strong id="bbToB">0</strong>/2</div>
+                            </div>
+                        </div>
+
+                        <div class="peps-ref-score-big" id="bbScoreB">0</div>
+
+                        <div class="peps-ref-btn-row">
+                            <button type="button" class="peps-ref-btn" onclick="bbAddPoints('B', 1)">+1 pt (LF)</button>
+                            <button type="button" class="peps-ref-btn peps-ref-btn-cyan" onclick="bbAddPoints('B', 2)">+2 pts (Panier)</button>
+                            <button type="button" class="peps-ref-btn peps-ref-btn-amber" onclick="bbAddPoints('B', 3)">+3 pts (Bonus/6m75)</button>
+                        </div>
+
+                        <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;padding-top:0.5rem;border-top:1px dashed var(--stone);">
+                            <div>
+                                <div style="font-size:0.76rem;font-weight:800;color:var(--ink);">Fautes d'Équipe (<span id="bbFoulsCountB">0</span> / 5) :</div>
+                                <div class="peps-foul-dots" id="bbFoulDotsB" style="margin-top:0.25rem;"></div>
+                            </div>
+                            <div style="display:flex;gap:0.4rem;">
+                                <button type="button" class="peps-ref-btn peps-ref-btn-danger" onclick="bbAddFoul('B')">🚨 +1 Faute B</button>
+                                <button type="button" class="peps-ref-btn" onclick="bbAddTimeout('B')">⏱️ TM</button>
+                            </div>
+                        </div>
+                        <div id="bbFoulAlertB"></div>
+                    </div>
+                </div>
+
+                <!-- BARRE D'EXPORT & IMPRESSION PDF DU BILAN DE MATCH -->
+                <div class="peps-ref-export-bar">
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:0.65rem;flex:1 1 520px;">
+                        <label style="font-size:0.76rem;font-weight:800;color:var(--slate);">Nom Équipe A
+                            <input type="text" id="bbInputTeamA" value="Équipe A (Atlas)" oninput="bbRenderBoard()" style="width:100%;margin-top:0.2rem;padding:0.42rem 0.6rem;border-radius:7px;border:1px solid var(--stone);background:var(--surface);color:var(--ink);font-weight:700;">
+                        </label>
+                        <label style="font-size:0.76rem;font-weight:800;color:var(--slate);">Nom Équipe B
+                            <input type="text" id="bbInputTeamB" value="Équipe B (Espoirs)" oninput="bbRenderBoard()" style="width:100%;margin-top:0.2rem;padding:0.42rem 0.6rem;border-radius:7px;border:1px solid var(--stone);background:var(--surface);color:var(--ink);font-weight:700;">
+                        </label>
+                        <label style="font-size:0.76rem;font-weight:800;color:var(--slate);">Classe &amp; Niveau
+                            <input type="text" id="bbInputClass" value="2ème Bac / Tronc Commun" style="width:100%;margin-top:0.2rem;padding:0.42rem 0.6rem;border-radius:7px;border:1px solid var(--stone);background:var(--surface);color:var(--ink);font-weight:700;">
+                        </label>
+                        <label style="font-size:0.76rem;font-weight:800;color:var(--slate);">Élèves-Arbitres &amp; Table (Chrono 24s)
+                            <input type="text" id="bbInputReferees" placeholder="Ex: Mehdi (Arbitre), Aya (Chrono 24s)" style="width:100%;margin-top:0.2rem;padding:0.42rem 0.6rem;border-radius:7px;border:1px solid var(--stone);background:var(--surface);color:var(--ink);font-weight:700;">
+                        </label>
+                    </div>
+                    <div style="display:flex;flex-wrap:wrap;gap:0.55rem;">
+                        <button type="button" class="peps-ref-btn peps-ref-btn-primary" onclick="bbExportMatchReport('pdf')">🖨️ Imprimer / Exporter Bilan (PDF A4)</button>
+                        <button type="button" class="peps-ref-btn" onclick="bbExportMatchReport('word')">📝 Bilan (.doc Word)</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 3 : ANALYSE ET TRAITEMENT DIDACTIQUE (ATD) DU BASKET-BALL    -->
         <!-- ================================================================== -->
         <section id="volet-atd" class="volet-panel" aria-label="Analyse et Traitement Didactique Basket-Ball">
             <div class="content-panel-card">
@@ -1954,6 +2104,295 @@
         if (container) container.innerHTML = BB_GRILLES_HTML[gKey] || '';
       }
 
+      /* ==================================================================
+         SIMULATEUR TABLE DE MARQUE FIBA BASKET-BALL (+1/+2/+3, 5 FAUTES, 24S)
+         ================================================================== */
+      var bbState = {
+        scoreA: 0,
+        scoreB: 0,
+        lfA: 0, twoA: 0, threeA: 0,
+        lfB: 0, twoB: 0, threeB: 0,
+        foulsA: 0,
+        foulsB: 0,
+        totalFoulsA: 0,
+        totalFoulsB: 0,
+        toA: 0,
+        toB: 0,
+        period: 1,
+        periodScores: [],
+        possArrow: 'A',
+        gameSeconds: 480,
+        shotSeconds: 24,
+        running: false,
+        lastMsg: '🏀 Prêt pour l\'entre-deux initial.',
+        historyStack: []
+      };
+      var bbTimerInterval = null;
+
+      function bbCloneState() {
+        return JSON.parse(JSON.stringify({
+          scoreA: bbState.scoreA, scoreB: bbState.scoreB,
+          lfA: bbState.lfA, twoA: bbState.twoA, threeA: bbState.threeA,
+          lfB: bbState.lfB, twoB: bbState.twoB, threeB: bbState.threeB,
+          foulsA: bbState.foulsA, foulsB: bbState.foulsB,
+          totalFoulsA: bbState.totalFoulsA, totalFoulsB: bbState.totalFoulsB,
+          toA: bbState.toA, toB: bbState.toB,
+          period: bbState.period, periodScores: bbState.periodScores,
+          possArrow: bbState.possArrow,
+          lastMsg: bbState.lastMsg
+        }));
+      }
+
+      function bbFormatTime(sec) {
+        var m = Math.floor(sec / 60);
+        var s = sec % 60;
+        return (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
+      }
+
+      function bbToggleClock() {
+        bbState.running = !bbState.running;
+        if (bbState.running) {
+          if (!bbTimerInterval) {
+            bbTimerInterval = setInterval(function() {
+              if (!bbState.running) return;
+              if (bbState.gameSeconds > 0) bbState.gameSeconds -= 1;
+              if (bbState.shotSeconds > 0) bbState.shotSeconds -= 1;
+              if (bbState.shotSeconds === 0) {
+                bbState.running = false;
+                bbState.lastMsg = '🚨 VIOLATION DES 24 SECONDES ! Remise en jeu pour l\'équipe adverse.';
+              }
+              if (bbState.gameSeconds === 0) {
+                bbState.running = false;
+                bbState.lastMsg = '🔔 FIN DE LA PÉRIODE Q' + bbState.period + ' !';
+              }
+              bbRenderBoard();
+            }, 1000);
+          }
+        }
+        bbRenderBoard();
+      }
+
+      function bbSetPeriodMinutes() {
+        var mins = parseInt((document.getElementById('bbPeriodDuration') || {}).value || '8', 10);
+        bbState.running = false;
+        bbState.gameSeconds = mins * 60;
+        bbState.shotSeconds = 24;
+        bbRenderBoard();
+      }
+
+      function bbResetShotClock(val) {
+        bbState.shotSeconds = val;
+        bbState.lastMsg = '⏱️ Chronomètre des tirs réinitialisé à ' + val + ' secondes.';
+        bbRenderBoard();
+      }
+
+      function bbTogglePossArrow() {
+        bbState.possArrow = bbState.possArrow === 'A' ? 'B' : 'A';
+        var nameA = (document.getElementById('bbInputTeamA') || {}).value || 'Équipe A';
+        var nameB = (document.getElementById('bbInputTeamB') || {}).value || 'Équipe B';
+        bbState.lastMsg = '🔄 Flèche de possession alternée basculée vers : ' + (bbState.possArrow === 'A' ? nameA : nameB) + '.';
+        bbRenderBoard();
+      }
+
+      function bbAddPoints(team, pts) {
+        bbState.historyStack.push(bbCloneState());
+        var nameA = (document.getElementById('bbInputTeamA') || {}).value || 'Équipe A';
+        var nameB = (document.getElementById('bbInputTeamB') || {}).value || 'Équipe B';
+        var tName = team === 'A' ? nameA : nameB;
+        if (team === 'A') {
+          bbState.scoreA += pts;
+          if (pts === 1) bbState.lfA += 1;
+          else if (pts === 2) bbState.twoA += 1;
+          else bbState.threeA += 1;
+        } else {
+          bbState.scoreB += pts;
+          if (pts === 1) bbState.lfB += 1;
+          else if (pts === 2) bbState.twoB += 1;
+          else bbState.threeB += 1;
+        }
+        bbState.shotSeconds = 24;
+        bbState.lastMsg = '🏀 +' + pts + ' pt' + (pts > 1 ? 's' : '') + ' pour ' + tName + ' ! Nouvelle possession adverse (24s).';
+        bbRenderBoard();
+      }
+
+      function bbAddFoul(team) {
+        bbState.historyStack.push(bbCloneState());
+        var nameA = (document.getElementById('bbInputTeamA') || {}).value || 'Équipe A';
+        var nameB = (document.getElementById('bbInputTeamB') || {}).value || 'Équipe B';
+        if (team === 'A') {
+          bbState.foulsA += 1;
+          bbState.totalFoulsA += 1;
+          bbState.lastMsg = bbState.foulsA >= 5
+            ? '🚨 ' + bbState.foulsA + 'e FAUTE D\'ÉQUIPE pour ' + nameA + ' : PÉNALITÉ FIBA ! 2 Lancers Francs accordés à ' + nameB + '.'
+            : '⚠️ Faute d\'équipe sifflée contre ' + nameA + ' (' + bbState.foulsA + '/5 dans cette période).';
+        } else {
+          bbState.foulsB += 1;
+          bbState.totalFoulsB += 1;
+          bbState.lastMsg = bbState.foulsB >= 5
+            ? '🚨 ' + bbState.foulsB + 'e FAUTE D\'ÉQUIPE pour ' + nameB + ' : PÉNALITÉ FIBA ! 2 Lancers Francs accordés à ' + nameA + '.'
+            : '⚠️ Faute d\'équipe sifflée contre ' + nameB + ' (' + bbState.foulsB + '/5 dans cette période).';
+        }
+        bbRenderBoard();
+      }
+
+      function bbAddTimeout(team) {
+        bbState.historyStack.push(bbCloneState());
+        bbState.running = false;
+        if (team === 'A' && bbState.toA < 2) bbState.toA += 1;
+        if (team === 'B' && bbState.toB < 2) bbState.toB += 1;
+        bbState.lastMsg = '⏱️ Temps Mort accordé à l\'Équipe ' + team + ' (Chrono arrêté).';
+        bbRenderBoard();
+      }
+
+      function bbNextPeriod() {
+        bbState.historyStack.push(bbCloneState());
+        bbState.running = false;
+        bbState.periodScores.push('Q' + bbState.period + ': ' + bbState.scoreA + '–' + bbState.scoreB);
+        bbState.period = bbState.period < 4 ? bbState.period + 1 : 4;
+        bbState.foulsA = 0;
+        bbState.foulsB = 0;
+        var mins = parseInt((document.getElementById('bbPeriodDuration') || {}).value || '8', 10);
+        bbState.gameSeconds = mins * 60;
+        bbState.shotSeconds = 24;
+        bbState.lastMsg = '⏭️ Début de la période Q' + bbState.period + ' : Fautes d\'équipe remises à 0/5.';
+        bbRenderBoard();
+      }
+
+      function bbUndoLast() {
+        if (!bbState.historyStack.length) return;
+        var prev = bbState.historyStack.pop();
+        Object.keys(prev).forEach(function(k) { bbState[k] = prev[k]; });
+        bbRenderBoard();
+      }
+
+      function bbResetMatch() {
+        var mins = parseInt((document.getElementById('bbPeriodDuration') || {}).value || '8', 10);
+        bbState.running = false;
+        bbState.scoreA = 0; bbState.scoreB = 0;
+        bbState.lfA = 0; bbState.twoA = 0; bbState.threeA = 0;
+        bbState.lfB = 0; bbState.twoB = 0; bbState.threeB = 0;
+        bbState.foulsA = 0; bbState.foulsB = 0;
+        bbState.totalFoulsA = 0; bbState.totalFoulsB = 0;
+        bbState.toA = 0; bbState.toB = 0;
+        bbState.period = 1; bbState.periodScores = [];
+        bbState.possArrow = 'A';
+        bbState.gameSeconds = mins * 60;
+        bbState.shotSeconds = 24;
+        bbState.historyStack = [];
+        bbState.lastMsg = '🏀 Match réinitialisé (0–0). Prêt pour l\'entre-deux initial.';
+        bbRenderBoard();
+      }
+
+      function bbBuildFoulDots(foulCount) {
+        var html = '';
+        for (var i = 1; i <= 5; i++) {
+          var cls = 'peps-foul-dot';
+          if (i <= foulCount) cls += (i === 5 ? ' filled penalty' : ' filled');
+          html += '<span class="' + cls + '"></span>';
+        }
+        return html;
+      }
+
+      function bbRenderBoard() {
+        var nameA = (document.getElementById('bbInputTeamA') || {}).value || 'Équipe A';
+        var nameB = (document.getElementById('bbInputTeamB') || {}).value || 'Équipe B';
+
+        var lA = document.getElementById('bbLabelTeamA');
+        var lB = document.getElementById('bbLabelTeamB');
+        if (lA) lA.textContent = nameA;
+        if (lB) lB.textContent = nameB;
+
+        var sA = document.getElementById('bbScoreA');
+        var sB = document.getElementById('bbScoreB');
+        if (sA) sA.textContent = bbState.scoreA;
+        if (sB) sB.textContent = bbState.scoreB;
+
+        var stA = document.getElementById('bbStatsBreakdownA');
+        var stB = document.getElementById('bbStatsBreakdownB');
+        if (stA) stA.textContent = 'LF (1pt) : ' + bbState.lfA + ' · 2 pts : ' + bbState.twoA + ' · 3 pts : ' + bbState.threeA;
+        if (stB) stB.textContent = 'LF (1pt) : ' + bbState.lfB + ' · 2 pts : ' + bbState.twoB + ' · 3 pts : ' + bbState.threeB;
+
+        var fCA = document.getElementById('bbFoulsCountA');
+        var fCB = document.getElementById('bbFoulsCountB');
+        if (fCA) fCA.textContent = bbState.foulsA;
+        if (fCB) fCB.textContent = bbState.foulsB;
+
+        var dA = document.getElementById('bbFoulDotsA');
+        var dB = document.getElementById('bbFoulDotsB');
+        if (dA) dA.innerHTML = bbBuildFoulDots(bbState.foulsA);
+        if (dB) dB.innerHTML = bbBuildFoulDots(bbState.foulsB);
+
+        var alA = document.getElementById('bbFoulAlertA');
+        var alB = document.getElementById('bbFoulAlertB');
+        if (alA) {
+          alA.innerHTML = bbState.foulsA >= 5
+            ? '<div class="peps-ref-alert-danger">🚨 PÉNALITÉ FIBA (≥ 5 fautes) : Toute nouvelle faute défensive de ' + nameA + ' = 2 Lancers Francs pour ' + nameB + ' !</div>'
+            : (bbState.foulsA === 4 ? '<div class="peps-ref-alert-warn">⚠️ 4e faute atteinte : Prochaine faute d\'équipe = Pénalité 2 Lancers Francs.</div>' : '');
+        }
+        if (alB) {
+          alB.innerHTML = bbState.foulsB >= 5
+            ? '<div class="peps-ref-alert-danger">🚨 PÉNALITÉ FIBA (≥ 5 fautes) : Toute nouvelle faute défensive de ' + nameB + ' = 2 Lancers Francs pour ' + nameA + ' !</div>'
+            : (bbState.foulsB === 4 ? '<div class="peps-ref-alert-warn">⚠️ 4e faute atteinte : Prochaine faute d\'équipe = Pénalité 2 Lancers Francs.</div>' : '');
+        }
+
+        var toA = document.getElementById('bbToA');
+        var toB = document.getElementById('bbToB');
+        if (toA) toA.textContent = bbState.toA;
+        if (toB) toB.textContent = bbState.toB;
+
+        var pLbl = document.getElementById('bbPeriodLabel');
+        if (pLbl) pLbl.textContent = 'Q' + bbState.period;
+
+        var gClk = document.getElementById('bbGameClock');
+        if (gClk) gClk.textContent = bbFormatTime(bbState.gameSeconds);
+
+        var sClk = document.getElementById('bbShotClock');
+        if (sClk) {
+          sClk.textContent = bbState.shotSeconds + 's';
+          sClk.style.color = bbState.shotSeconds <= 5 ? '#EF4444' : '#FBBF24';
+        }
+
+        var btnSP = document.getElementById('bbBtnStartPause');
+        if (btnSP) btnSP.textContent = bbState.running ? '⏸️ Pause Chrono' : '▶️ Démarrer Chrono';
+
+        var arrowTxt = document.getElementById('bbPossArrowText');
+        if (arrowTxt) arrowTxt.textContent = bbState.possArrow === 'A' ? '⬅️ ' + nameA : nameB + ' ➡️';
+
+        var callout = document.getElementById('bbRefCallout');
+        if (callout) callout.textContent = bbState.lastMsg;
+      }
+
+      function bbExportMatchReport(format) {
+        var nameA = (document.getElementById('bbInputTeamA') || {}).value || 'Équipe A';
+        var nameB = (document.getElementById('bbInputTeamB') || {}).value || 'Équipe B';
+        var cls = (document.getElementById('bbInputClass') || {}).value || 'Classe EPS';
+        var refs = (document.getElementById('bbInputReferees') || {}).value || 'Élèves-Arbitres & Table';
+        var dateStr = new Date().toLocaleDateString('fr-MA');
+
+        var reportHtml = '<table class="a4-header-table"><tr>' +
+          '<td style="width:36%;"><strong>ROYAUME DU MAROC</strong><br>Ministère de l\'Éducation Nationale, du Préscolaire et des Sports<br><strong>Matière :</strong> Éducation Physique et Sportive</td>' +
+          '<td style="width:28%;text-align:center;"><strong>FEUILLE DE MARQUE OFFICIELLE FIBA</strong><br>APS : <strong>BASKET-BALL À 5</strong><br>Date : ' + dateStr + '</td>' +
+          '<td style="width:36%;text-align:right;"><strong>Classe / Niveau :</strong> ' + cls + '<br><strong>Arbitres &amp; Table 24s :</strong> ' + refs + '</td>' +
+          '</tr></table>' +
+          '<div class="a4-doc-title"><h3>BILAN OFFICIEL DE LA RENCONTRE — BASKET-BALL (CODE FIBA)</h3><p>' + nameA + ' contre ' + nameB + '</p></div>' +
+          '<table class="a4-table"><thead><tr><th>Équipe</th><th>Score Final</th><th>Lancers Francs (1 pt)</th><th>Paniers Intérieurs (2 pts)</th><th>Tirs à 3 pts / Bonus</th><th>Fautes Cumulées</th><th>Temps Morts</th></tr></thead><tbody>' +
+          '<tr><td><strong>' + nameA + '</strong></td><td style="font-size:1.2rem;font-weight:900;">' + bbState.scoreA + ' pts</td><td>' + bbState.lfA + '</td><td>' + bbState.twoA + '</td><td>' + bbState.threeA + '</td><td>' + bbState.totalFoulsA + ' (Période act.: ' + bbState.foulsA + '/5)</td><td>' + bbState.toA + '/2</td></tr>' +
+          '<tr><td><strong>' + nameB + '</strong></td><td style="font-size:1.2rem;font-weight:900;">' + bbState.scoreB + ' pts</td><td>' + bbState.lfB + '</td><td>' + bbState.twoB + '</td><td>' + bbState.threeB + '</td><td>' + bbState.totalFoulsB + ' (Période act.: ' + bbState.foulsB + '/5)</td><td>' + bbState.toB + '/2</td></tr>' +
+          '</tbody></table>' +
+          '<p><strong>Évolution par période :</strong> ' + (bbState.periodScores.concat(['Q' + bbState.period + ': ' + bbState.scoreA + '–' + bbState.scoreB]).join(' &nbsp;|&nbsp; ')) + '</p>' +
+          '<table style="width:100%;margin-top:1.5rem;border:none;font-size:0.85rem;"><tr>' +
+          '<td style="border:none;width:33%;"><strong>Signature Arbitres &amp; Opérateur 24s :</strong><br><br>........................................</td>' +
+          '<td style="border:none;width:33%;text-align:center;"><strong>Signature des Capitaines (A &amp; B) :</strong><br><br>........................................</td>' +
+          '<td style="border:none;width:33%;text-align:right;"><strong>Visa du Professeur d\'EPS :</strong><br><br>........................................</td>' +
+          '</tr></table>';
+
+        if (format === 'word') {
+          downloadHtmlAsWord(reportHtml, 'Feuille-Marque-Basketball-' + cls.replace(/\s+/g, '-') + '.doc');
+        } else {
+          openPrintWindow(reportHtml, 'Feuille de Marque Basket-Ball — ' + nameA + ' vs ' + nameB);
+        }
+      }
+
       /* Initialisation au chargement + lecture paramètre URL ?level= */
       window.addEventListener('DOMContentLoaded', function() {
         try {
@@ -1965,13 +2404,15 @@
               b.classList.toggle('active', b.getAttribute('data-school') === lvl);
             });
           }
-          if (window.location.hash === '#volet-atd') switchBasketballVolet('atd');
+          if (window.location.hash === '#volet-calculateur') switchBasketballVolet('calculateur');
+          else if (window.location.hash === '#volet-atd') switchBasketballVolet('atd');
           else if (window.location.hash === '#volet-grilles') switchBasketballVolet('grilles');
           else if (window.location.hash === '#volet-terrain') switchBasketballVolet('terrain');
           else if (window.location.hash === '#volet-articles') switchBasketballVolet('articles');
         } catch(e) {}
         renderStudioPreview();
         selectBasketballGrille('diag', document.querySelector('.practice-tab[data-grille="diag"]'));
+        bbResetMatch();
       });
     </script>
 
@@ -2077,11 +2518,11 @@
           <p class="footer-col-title">Navigation</p>
           <ul>
             <li><a href="/">Accueil ProfEPS.ma</a></li>
-            <li><a href="/orientations-pedagogiques-toutes-matieres.html" class="footer-hub-highlight">Toutes les OP (34 PDF)</a></li>
+            <li><a href="/orientations-pedagogiques-toutes-matieres.html">Toutes les OP (34 PDF)</a></li>
             <li><a href="/hub-aps-sports-eps-maroc.html">Hub des 13 Sports &amp; APS</a></li>
             <li><a href="/cycles-eps-maroc.html">Projets de Cycles EPS</a></li>
             <li><a href="/generateur.html">Générateur de Séances (Word/PDF)</a></li>
-            <li><a href="/concours-crmef-hub.html" class="footer-hub-highlight">Hub Concours CRMEF</a></li>
+            <li><a href="/concours-crmef-hub.html">Hub Concours CRMEF</a></li>
             <li><a href="/hub-outils-sport-performance.html">Hub Calculateurs Sport</a></li>
             <li><a href="/bibliotheque-numerique-eps.html">Grande Bibliothèque EPS</a></li>
             <li><a href="/blog.html">Blog &amp; Articles de terrain</a></li>
@@ -2093,8 +2534,8 @@
           <p class="footer-col-title">Sports &amp; Outils EPS</p>
           <ul>
             <li><a href="/orientations-pedagogiques-eps-2007-2009.html">OP EPS 2009 (Collège) &amp; 2007 (Lycée)</a></li>
-            <li><a href="/calculateur-vma.html" class="footer-hub-highlight">Calculateur VMA &amp; Groupes</a></li>
-            <li><a href="/calculateur-note-eps-maroc.html" class="footer-hub-highlight">Calculateur Notes EPS (/20)</a></li>
+            <li><a href="/calculateur-vma.html">Calculateur VMA &amp; Groupes</a></li>
+            <li><a href="/calculateur-note-eps-maroc.html">Calculateur Notes EPS (/20)</a></li>
             <li><a href="/evaluation-eps.html">Évaluation &amp; Barèmes EPS</a></li>
             <li><a href="/aps-course-duree-demi-fond-eps-maroc.html">Silo Course en Durée (1000m/600m)</a></li>
             <li><a href="/aps-gymnastique-sol-eps-maroc.html">Silo Gymnastique au Sol (A–E)</a></li>
@@ -2109,7 +2550,7 @@
           <ul>
             <li><a href="/qcm-sciences-education-crmef.html">QCM Sciences de l'Éducation (340 Q)</a></li>
             <li><a href="/qcm-didactique-eps-maroc.html">QCM Didactique &amp; Spécialité EPS</a></li>
-            <li><a href="/concours-inspection-orientation-administration-maroc.html" class="footer-hub-highlight">Inspection (CFIE), COPE &amp; Admin.</a></li>
+            <li><a href="/concours-inspection-orientation-administration-maroc.html">Inspection (CFIE), COPE &amp; Admin.</a></li>
             <li><a href="/qcm-150-questions-crmef-eps.html">Banque 150 QCM Concours EPS</a></li>
             <li><a href="/orientations-pedagogiques-primaire-2021.html">Curriculum Primaire 2021 &amp; QCM</a></li>
             <li><a href="/qcm-didactique-maths-maroc.html">QCM Mathématiques, PC &amp; SVT</a></li>
@@ -2253,6 +2694,9 @@
 </script>
 <!-- PROFEPS_STICKY_SYNC_SCRIPT_END -->
 
+  <!-- PROFEPS_FEEDBACK_SCRIPT_START -->
+  <script src="/assets/profeps-feedback.js" defer></script>
+  <!-- PROFEPS_FEEDBACK_SCRIPT_END -->
 </body>
 </html>
 

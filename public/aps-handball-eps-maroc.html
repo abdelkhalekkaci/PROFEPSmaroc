@@ -556,7 +556,7 @@
 /* PROFEPS_UNIFIED_APS_STICKY_AND_STUDIO_STYLES_END */
 
     </style>
-  <link rel="stylesheet" href="/assets/site.css?v=20261113">
+  <link rel="stylesheet" href="/assets/site.css?v=20261117">
   <script src="profeps-communaute.js" defer></script>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
@@ -986,10 +986,11 @@
         <div class="volet-nav">
             <div class="volet-tabs" role="tablist" aria-label="Sections de la page">
                 <button type="button" class="volet-tab-btn active" id="tab-btn-studio" onclick="switchHandballVolet('studio')">⚡ 1. Studio Cycles &amp; Fiches (1AC → 2Bac)</button>
-                <button type="button" class="volet-tab-btn" id="tab-btn-atd" onclick="switchHandballVolet('atd')">📐 2. ATD Handball Complet</button>
-                <button type="button" class="volet-tab-btn" id="tab-btn-grilles" onclick="switchHandballVolet('grilles')">📊 3. Grilles d'Observation &amp; Évaluation (/20)</button>
-                <button type="button" class="volet-tab-btn" id="tab-btn-terrain" onclick="switchHandballVolet('terrain')">🏟️ 4. Terrain 40+ Élèves &amp; Arbitrage IHF</button>
-                <button type="button" class="volet-tab-btn" id="tab-btn-articles" onclick="switchHandballVolet('articles')">📚 5. Articles &amp; Dossiers Handball (7)</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-calculateur" onclick="switchHandballVolet('calculateur')">⚖️ 2. Table de Marque IHF, 2 Min &amp; Jeu Passif</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-atd" onclick="switchHandballVolet('atd')">📐 3. ATD Handball Complet</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-grilles" onclick="switchHandballVolet('grilles')">📊 4. Grilles d'Observation &amp; Évaluation (/20)</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-terrain" onclick="switchHandballVolet('terrain')">🏟️ 5. Terrain 40+ Élèves &amp; Arbitrage IHF</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-articles" onclick="switchHandballVolet('articles')">📚 6. Articles &amp; Dossiers Handball (7)</button>
             </div>
             <div class="profeps-sticky-row-aps" role="navigation" aria-label="Navigation rapide entre les 13 APS">
                 <span class="profeps-aps-row-label">🏟️ Autres APS :</span>
@@ -1162,7 +1163,145 @@
         </section>
 
         <!-- ================================================================== -->
-        <!-- VOLET 2 : ANALYSE ET TRAITEMENT DIDACTIQUE (ATD) DU HANDBALL       -->
+        <!-- VOLET 2 : TABLE DE MARQUE IHF, EXCLUSIONS 2 MIN & JEU PASSIF       -->
+        <!-- ================================================================== -->
+        <section id="volet-calculateur" class="volet-panel" aria-label="Table de Marque et Arbitre Interactif IHF Handball">
+            <div class="peps-ref-board-wrap">
+                <div class="peps-ref-board-header">
+                    <div>
+                        <span style="font-size:0.76rem;font-weight:800;color:var(--primary);text-transform:uppercase;letter-spacing:0.05em;">Outil Terrain Élève-Arbitre &amp; Table de Marque · Code IHF 2026</span>
+                        <h2 class="peps-ref-board-title">⚖️ Table de Marque Interactive Handball IHF (Score, Exclusions 2 Min en Direct &amp; Jeu Passif)</h2>
+                        <p class="peps-ref-board-sub">Gérez le score, les <strong>exclusions temporaires de 2 minutes (ou 1 min EPS) avec compte à rebours individuel</strong>, les cartons (Jaune / Rouge) et le <strong>compteur officiel des 6 passes maximum après signal de Jeu Passif (bras levé)</strong>.</p>
+                    </div>
+                </div>
+
+                <!-- BARRE CHRONO MATCH + ASSISTANT JEU PASSIF (6 PASSES MAX) -->
+                <div class="peps-ref-clock-box">
+                    <div style="display:flex;align-items:center;gap:0.85rem;flex-wrap:wrap;">
+                        <div>
+                            <div style="font-size:0.7rem;font-weight:800;color:#94A3B8;text-transform:uppercase;">Chrono (<span id="hbHalfLabel">1re Mi-Temps</span>)</div>
+                            <div class="peps-ref-clock-digits" id="hbGameClock">10:00</div>
+                        </div>
+                        <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">
+                            <button type="button" class="peps-ref-btn peps-ref-btn-primary" id="hbBtnStartPause" onclick="hbToggleClock()">▶️ Démarrer / Pause</button>
+                            <button type="button" class="peps-ref-btn" onclick="hbNextHalf()">⏭️ 2e Mi-Temps</button>
+                            <select id="hbHalfDuration" onchange="hbSetHalfMinutes()" style="padding:0.4rem;border-radius:7px;background:#1E293B;color:#fff;border:1px solid #475569;font-weight:800;font-size:0.78rem;">
+                                <option value="8">Match EPS 8 min</option>
+                                <option value="10" selected>Match EPS 10 min</option>
+                                <option value="15">Match UNSS/ASS 15 min</option>
+                                <option value="30">Officiel IHF 30 min</option>
+                            </select>
+                            <select id="hbExclDuration" style="padding:0.4rem;border-radius:7px;background:#1E293B;color:#FBBF24;border:1px solid #475569;font-weight:800;font-size:0.78rem;">
+                                <option value="120" selected>Exclusion : 2 min (120s IHF)</option>
+                                <option value="60">Exclusion : 1 min (60s EPS court)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- ASSISTANT JEU PASSIF IHF (6 PASSES MAX) -->
+                    <div style="display:flex;align-items:center;gap:0.65rem;flex-wrap:wrap;background:#1E293B;padding:0.55rem 0.85rem;border-radius:10px;border:1px solid #475569;">
+                        <div>
+                            <div style="font-size:0.68rem;font-weight:800;color:#FBBF24;text-transform:uppercase;">✋ Signal Jeu Passif IHF (Max 6 Passes)</div>
+                            <div id="hbPassiveStatus" style="font-size:0.88rem;font-weight:900;color:#F8FAFC;">Bras baissé (Jeu normal)</div>
+                        </div>
+                        <button type="button" class="peps-ref-btn peps-ref-btn-amber" onclick="hbStartPassive()">✋ Lever Bras</button>
+                        <button type="button" class="peps-ref-btn peps-ref-btn-cyan" onclick="hbAddPassivePass()">+1 Passe</button>
+                        <button type="button" class="peps-ref-btn" onclick="hbClearPassive()">✅ Tir / Fin</button>
+                    </div>
+                </div>
+
+                <div class="peps-ref-toolbar" style="justify-content:space-between;">
+                    <div id="hbRefCallout" style="font-size:0.86rem;font-weight:700;color:var(--ink);">🤾 Prêt pour l'engagement au centre du terrain.</div>
+                    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+                        <button type="button" class="peps-ref-btn" onclick="hbUndoLast()">↩️ Annuler dernier but</button>
+                        <button type="button" class="peps-ref-btn peps-ref-btn-danger" onclick="hbResetMatch()">🔄 Remettre Match à 0–0</button>
+                    </div>
+                </div>
+
+                <div class="peps-ref-grid-2">
+                    <!-- ÉQUIPE A -->
+                    <div class="peps-ref-team-box team-a">
+                        <div class="peps-ref-team-head">
+                            <div>
+                                <div class="peps-ref-team-name" id="hbLabelTeamA">Équipe A</div>
+                                <div style="font-size:0.75rem;color:var(--slate);" id="hbSanctionsSummaryA">🟨 Jaunes : 0/3 · ⏱️ Exclusions 2' : 0 · 🟥 Rouges : 0</div>
+                            </div>
+                            <div style="text-align:right;">
+                                <span id="hbFieldPlayersA" style="display:inline-block;padding:0.2rem 0.55rem;border-radius:6px;font-size:0.74rem;font-weight:800;background:#10B981;color:#fff;">6 Joueurs de champ</span>
+                            </div>
+                        </div>
+
+                        <div class="peps-ref-score-big" id="hbScoreA">0</div>
+
+                        <div class="peps-ref-btn-row">
+                            <button type="button" class="peps-ref-btn peps-ref-btn-primary" onclick="hbAddGoal('A', 1)">⚽ +1 But Équipe A</button>
+                            <button type="button" class="peps-ref-btn peps-ref-btn-amber" onclick="hbAddGoal('A', 2)" title="But bonifié EPS (Contre-attaque ou tir en suspension aux 6m)">🚀 +2 Buts (Bonus Suspension/CA)</button>
+                        </div>
+
+                        <div style="display:flex;flex-wrap:wrap;gap:0.4rem;padding-top:0.5rem;border-top:1px dashed var(--stone);">
+                            <button type="button" class="peps-ref-btn" onclick="hbAddCard('A', 'yellow')">🟨 Carton Jaune</button>
+                            <button type="button" class="peps-ref-btn peps-ref-btn-danger" onclick="hbAddExclusion('A')">✌️ + Exclusion 2 min</button>
+                            <button type="button" class="peps-ref-btn" onclick="hbAddCard('A', 'red')">🟥 Carton Rouge</button>
+                        </div>
+
+                        <div id="hbExclusionsListA" style="display:grid;gap:0.4rem;"></div>
+                    </div>
+
+                    <!-- ÉQUIPE B -->
+                    <div class="peps-ref-team-box team-b">
+                        <div class="peps-ref-team-head">
+                            <div>
+                                <div class="peps-ref-team-name" id="hbLabelTeamB">Équipe B</div>
+                                <div style="font-size:0.75rem;color:var(--slate);" id="hbSanctionsSummaryB">🟨 Jaunes : 0/3 · ⏱️ Exclusions 2' : 0 · 🟥 Rouges : 0</div>
+                            </div>
+                            <div style="text-align:right;">
+                                <span id="hbFieldPlayersB" style="display:inline-block;padding:0.2rem 0.55rem;border-radius:6px;font-size:0.74rem;font-weight:800;background:#10B981;color:#fff;">6 Joueurs de champ</span>
+                            </div>
+                        </div>
+
+                        <div class="peps-ref-score-big" id="hbScoreB">0</div>
+
+                        <div class="peps-ref-btn-row">
+                            <button type="button" class="peps-ref-btn peps-ref-btn-cyan" onclick="hbAddGoal('B', 1)">⚽ +1 But Équipe B</button>
+                            <button type="button" class="peps-ref-btn peps-ref-btn-amber" onclick="hbAddGoal('B', 2)" title="But bonifié EPS (Contre-attaque ou tir en suspension aux 6m)">🚀 +2 Buts (Bonus Suspension/CA)</button>
+                        </div>
+
+                        <div style="display:flex;flex-wrap:wrap;gap:0.4rem;padding-top:0.5rem;border-top:1px dashed var(--stone);">
+                            <button type="button" class="peps-ref-btn" onclick="hbAddCard('B', 'yellow')">🟨 Carton Jaune</button>
+                            <button type="button" class="peps-ref-btn peps-ref-btn-danger" onclick="hbAddExclusion('B')">✌️ + Exclusion 2 min</button>
+                            <button type="button" class="peps-ref-btn" onclick="hbAddCard('B', 'red')">🟥 Carton Rouge</button>
+                        </div>
+
+                        <div id="hbExclusionsListB" style="display:grid;gap:0.4rem;"></div>
+                    </div>
+                </div>
+
+                <!-- BARRE D'EXPORT & IMPRESSION PDF DU BILAN DE MATCH -->
+                <div class="peps-ref-export-bar">
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:0.65rem;flex:1 1 520px;">
+                        <label style="font-size:0.76rem;font-weight:800;color:var(--slate);">Nom Équipe A
+                            <input type="text" id="hbInputTeamA" value="Équipe A (Faucons)" oninput="hbRenderBoard()" style="width:100%;margin-top:0.2rem;padding:0.42rem 0.6rem;border-radius:7px;border:1px solid var(--stone);background:var(--surface);color:var(--ink);font-weight:700;">
+                        </label>
+                        <label style="font-size:0.76rem;font-weight:800;color:var(--slate);">Nom Équipe B
+                            <input type="text" id="hbInputTeamB" value="Équipe B (Gazelles)" oninput="hbRenderBoard()" style="width:100%;margin-top:0.2rem;padding:0.42rem 0.6rem;border-radius:7px;border:1px solid var(--stone);background:var(--surface);color:var(--ink);font-weight:700;">
+                        </label>
+                        <label style="font-size:0.76rem;font-weight:800;color:var(--slate);">Classe &amp; Niveau
+                            <input type="text" id="hbInputClass" value="2ème Bac / 3AC" style="width:100%;margin-top:0.2rem;padding:0.42rem 0.6rem;border-radius:7px;border:1px solid var(--stone);background:var(--surface);color:var(--ink);font-weight:700;">
+                        </label>
+                        <label style="font-size:0.76rem;font-weight:800;color:var(--slate);">Binôme d'Arbitres &amp; Chronométreur
+                            <input type="text" id="hbInputReferees" placeholder="Ex: Hamza &amp; Anass (Arbitres IHF)" style="width:100%;margin-top:0.2rem;padding:0.42rem 0.6rem;border-radius:7px;border:1px solid var(--stone);background:var(--surface);color:var(--ink);font-weight:700;">
+                        </label>
+                    </div>
+                    <div style="display:flex;flex-wrap:wrap;gap:0.55rem;">
+                        <button type="button" class="peps-ref-btn peps-ref-btn-primary" onclick="hbExportMatchReport('pdf')">🖨️ Imprimer / Exporter Bilan (PDF A4)</button>
+                        <button type="button" class="peps-ref-btn" onclick="hbExportMatchReport('word')">📝 Bilan (.doc Word)</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 3 : ANALYSE ET TRAITEMENT DIDACTIQUE (ATD) DU HANDBALL       -->
         <!-- ================================================================== -->
         <section id="volet-atd" class="volet-panel" aria-label="Analyse et Traitement Didactique Handball">
             <div class="content-panel-card">
@@ -1899,6 +2038,304 @@
         if (container) container.innerHTML = HB_GRILLES_HTML[gKey] || '';
       }
 
+      /* ==================================================================
+         SIMULATEUR TABLE DE MARQUE HANDBALL IHF (SCORE, 2 MIN & JEU PASSIF)
+         ================================================================== */
+      var hbState = {
+        scoreA: 0,
+        scoreB: 0,
+        bonusGoalsA: 0,
+        bonusGoalsB: 0,
+        yellowA: 0, yellowB: 0,
+        redA: 0, redB: 0,
+        exclTotalA: 0, exclTotalB: 0,
+        exclusionsA: [],
+        exclusionsB: [],
+        half: 1,
+        halfTimeScore: '',
+        gameSeconds: 600,
+        running: false,
+        passiveActive: false,
+        passivePasses: 0,
+        lastMsg: '🤾 Prêt pour l\'engagement au centre du terrain.',
+        historyStack: []
+      };
+      var hbTimerInterval = null;
+
+      function hbFormatTime(sec) {
+        var m = Math.floor(sec / 60);
+        var s = sec % 60;
+        return (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
+      }
+
+      function hbToggleClock() {
+        hbState.running = !hbState.running;
+        if (hbState.running && !hbTimerInterval) {
+          hbTimerInterval = setInterval(function() {
+            if (!hbState.running) return;
+            if (hbState.gameSeconds > 0) hbState.gameSeconds -= 1;
+            hbState.exclusionsA.forEach(function(ex) {
+              if (ex.rem > 0) ex.rem -= 1;
+            });
+            hbState.exclusionsB.forEach(function(ex) {
+              if (ex.rem > 0) ex.rem -= 1;
+            });
+            if (hbState.gameSeconds === 0) {
+              hbState.running = false;
+              hbState.lastMsg = '🔔 FIN DE LA ' + (hbState.half === 1 ? '1re MI-TEMPS' : 'RENCONTRE') + ' !';
+            }
+            hbRenderBoard();
+          }, 1000);
+        }
+        hbRenderBoard();
+      }
+
+      function hbSetHalfMinutes() {
+        var mins = parseInt((document.getElementById('hbHalfDuration') || {}).value || '10', 10);
+        hbState.running = false;
+        hbState.gameSeconds = mins * 60;
+        hbRenderBoard();
+      }
+
+      function hbNextHalf() {
+        hbState.running = false;
+        hbState.halfTimeScore = hbState.scoreA + ' – ' + hbState.scoreB;
+        hbState.half = 2;
+        var mins = parseInt((document.getElementById('hbHalfDuration') || {}).value || '10', 10);
+        hbState.gameSeconds = mins * 60;
+        hbState.passiveActive = false;
+        hbState.passivePasses = 0;
+        hbState.lastMsg = '⏭️ Début de la 2e Mi-Temps (Score Mi-Temps : ' + hbState.halfTimeScore + ').';
+        hbRenderBoard();
+      }
+
+      function hbStartPassive() {
+        hbState.passiveActive = true;
+        hbState.passivePasses = 0;
+        hbState.lastMsg = '✋ BRAS LEVÉ DE L\'ARBITRE (Signal d\'avertissement de Jeu Passif IHF) : L\'équipe en attaque dispose de 6 passes maximum pour tirer au but !';
+        hbRenderBoard();
+      }
+
+      function hbAddPassivePass() {
+        if (!hbState.passiveActive) {
+          hbState.passiveActive = true;
+          hbState.passivePasses = 1;
+        } else {
+          hbState.passivePasses += 1;
+        }
+        if (hbState.passivePasses > 6) {
+          hbState.lastMsg = '🚨 JEUX PASSIF SIFFLÉ (> 6 passes sans tir) ! Coup franc accordé à la défense à l\'endroit du ballon.';
+        } else if (hbState.passivePasses === 6) {
+          hbState.lastMsg = '⚠️ 6e ET DERNIÈRE PASSE AUTORISÉE ! Le prochain joueur doit obligatoirement tirer au but.';
+        } else {
+          hbState.lastMsg = '✋ Jeu passif en cours : Passe ' + hbState.passivePasses + ' / 6.';
+        }
+        hbRenderBoard();
+      }
+
+      function hbClearPassive() {
+        hbState.passiveActive = false;
+        hbState.passivePasses = 0;
+        hbState.lastMsg = '✅ Fin de l\'alerte de jeu passif (Tir effectué ou changement de possession).';
+        hbRenderBoard();
+      }
+
+      function hbAddGoal(team, val) {
+        hbState.historyStack.push({
+          scoreA: hbState.scoreA, scoreB: hbState.scoreB,
+          bonusGoalsA: hbState.bonusGoalsA, bonusGoalsB: hbState.bonusGoalsB
+        });
+        var nameA = (document.getElementById('hbInputTeamA') || {}).value || 'Équipe A';
+        var nameB = (document.getElementById('hbInputTeamB') || {}).value || 'Équipe B';
+        if (team === 'A') {
+          hbState.scoreA += val;
+          if (val > 1) hbState.bonusGoalsA += 1;
+          hbState.lastMsg = '⚽ BUT pour ' + nameA + ' (+' + val + ') ! Engagement au centre pour ' + nameB + '.';
+        } else {
+          hbState.scoreB += val;
+          if (val > 1) hbState.bonusGoalsB += 1;
+          hbState.lastMsg = '⚽ BUT pour ' + nameB + ' (+' + val + ') ! Engagement au centre pour ' + nameA + '.';
+        }
+        hbState.passiveActive = false;
+        hbState.passivePasses = 0;
+        hbRenderBoard();
+      }
+
+      function hbAddCard(team, kind) {
+        var nameA = (document.getElementById('hbInputTeamA') || {}).value || 'Équipe A';
+        var nameB = (document.getElementById('hbInputTeamB') || {}).value || 'Équipe B';
+        var tName = team === 'A' ? nameA : nameB;
+        if (kind === 'yellow') {
+          if (team === 'A') hbState.yellowA += 1;
+          else hbState.yellowB += 1;
+          var count = team === 'A' ? hbState.yellowA : hbState.yellowB;
+          hbState.lastMsg = count > 3
+            ? '⚠️ Rappel IHF : Maximum 3 cartons jaunes par équipe atteint pour ' + tName + ' -> toute nouvelle sanction progressive doit être une Exclusion 2 min !'
+            : '🟨 Avertissement (Carton Jaune ' + count + '/3) adressé à ' + tName + '.';
+        } else {
+          if (team === 'A') hbState.redA += 1;
+          else hbState.redB += 1;
+          hbState.lastMsg = '🟥 DISQUALIFICATION (Carton Rouge) contre ' + tName + ' + Exclusion temporaire de 2 minutes pour l\'équipe !';
+          hbAddExclusion(team);
+          return;
+        }
+        hbRenderBoard();
+      }
+
+      function hbAddExclusion(team) {
+        var dur = parseInt((document.getElementById('hbExclDuration') || {}).value || '120', 10);
+        if (team === 'A') {
+          hbState.exclTotalA += 1;
+          hbState.exclusionsA.push({ id: hbState.exclTotalA, label: 'Joueur A#' + hbState.exclTotalA, rem: dur });
+          hbState.lastMsg = '✌️ Exclusion temporaire (' + (dur / 60) + ' min) contre l\'Équipe A ! Infériorité numérique en cours.';
+        } else {
+          hbState.exclTotalB += 1;
+          hbState.exclusionsB.push({ id: hbState.exclTotalB, label: 'Joueur B#' + hbState.exclTotalB, rem: dur });
+          hbState.lastMsg = '✌️ Exclusion temporaire (' + (dur / 60) + ' min) contre l\'Équipe B ! Infériorité numérique en cours.';
+        }
+        hbRenderBoard();
+      }
+
+      function hbDismissExclusion(team, idx) {
+        if (team === 'A') hbState.exclusionsA.splice(idx, 1);
+        else hbState.exclusionsB.splice(idx, 1);
+        hbRenderBoard();
+      }
+
+      function hbUndoLast() {
+        if (!hbState.historyStack.length) return;
+        var prev = hbState.historyStack.pop();
+        hbState.scoreA = prev.scoreA;
+        hbState.scoreB = prev.scoreB;
+        hbState.bonusGoalsA = prev.bonusGoalsA;
+        hbState.bonusGoalsB = prev.bonusGoalsB;
+        hbRenderBoard();
+      }
+
+      function hbResetMatch() {
+        var mins = parseInt((document.getElementById('hbHalfDuration') || {}).value || '10', 10);
+        hbState.running = false;
+        hbState.scoreA = 0; hbState.scoreB = 0;
+        hbState.bonusGoalsA = 0; hbState.bonusGoalsB = 0;
+        hbState.yellowA = 0; hbState.yellowB = 0;
+        hbState.redA = 0; hbState.redB = 0;
+        hbState.exclTotalA = 0; hbState.exclTotalB = 0;
+        hbState.exclusionsA = []; hbState.exclusionsB = [];
+        hbState.half = 1; hbState.halfTimeScore = '';
+        hbState.gameSeconds = mins * 60;
+        hbState.passiveActive = false; hbState.passivePasses = 0;
+        hbState.historyStack = [];
+        hbState.lastMsg = '🤾 Match réinitialisé (0–0). Prêt pour l\'engagement.';
+        hbRenderBoard();
+      }
+
+      function hbRenderExclusions(list, team) {
+        if (!list.length) return '';
+        return list.map(function(ex, idx) {
+          var done = ex.rem <= 0;
+          return '<div style="display:flex;align-items:center;justify-content:space-between;padding:0.45rem 0.7rem;border-radius:8px;background:' + (done ? 'rgba(16,185,129,0.18)' : 'rgba(220,38,38,0.15)') + ';border:1.5px solid ' + (done ? '#10B981' : '#EF4444') + ';font-size:0.8rem;font-weight:800;">' +
+            '<span>' + (done ? '✅ ' + ex.label + ' — Retour en jeu autorisé !' : '⏱️ ' + ex.label + ' exclu : ' + hbFormatTime(ex.rem)) + '</span>' +
+            '<button type="button" onclick="hbDismissExclusion(\'' + team + '\',' + idx + ')" style="padding:0.2rem 0.5rem;border-radius:6px;border:none;background:#0F172A;color:#fff;font-size:0.72rem;font-weight:800;cursor:pointer;">Retirer</button>' +
+          '</div>';
+        }).join('');
+      }
+
+      function hbRenderBoard() {
+        var nameA = (document.getElementById('hbInputTeamA') || {}).value || 'Équipe A';
+        var nameB = (document.getElementById('hbInputTeamB') || {}).value || 'Équipe B';
+
+        var lA = document.getElementById('hbLabelTeamA');
+        var lB = document.getElementById('hbLabelTeamB');
+        if (lA) lA.textContent = nameA;
+        if (lB) lB.textContent = nameB;
+
+        var sA = document.getElementById('hbScoreA');
+        var sB = document.getElementById('hbScoreB');
+        if (sA) sA.textContent = hbState.scoreA;
+        if (sB) sB.textContent = hbState.scoreB;
+
+        var sumA = document.getElementById('hbSanctionsSummaryA');
+        var sumB = document.getElementById('hbSanctionsSummaryB');
+        if (sumA) sumA.textContent = '🟨 Jaunes : ' + hbState.yellowA + '/3 · ✌️ Exclusions 2\' : ' + hbState.exclTotalA + ' · 🟥 Rouges : ' + hbState.redA;
+        if (sumB) sumB.textContent = '🟨 Jaunes : ' + hbState.yellowB + '/3 · ✌️ Exclusions 2\' : ' + hbState.exclTotalB + ' · 🟥 Rouges : ' + hbState.redB;
+
+        var activeExclA = hbState.exclusionsA.filter(function(e) { return e.rem > 0; }).length;
+        var activeExclB = hbState.exclusionsB.filter(function(e) { return e.rem > 0; }).length;
+        var fpA = document.getElementById('hbFieldPlayersA');
+        var fpB = document.getElementById('hbFieldPlayersB');
+        if (fpA) {
+          var pA = Math.max(3, 6 - activeExclA);
+          fpA.textContent = pA + ' Joueurs de champ' + (activeExclA ? ' (-' + activeExclA + ' exclu)' : '');
+          fpA.style.background = activeExclA > 0 ? '#DC2626' : '#10B981';
+        }
+        if (fpB) {
+          var pB = Math.max(3, 6 - activeExclB);
+          fpB.textContent = pB + ' Joueurs de champ' + (activeExclB ? ' (-' + activeExclB + ' exclu)' : '');
+          fpB.style.background = activeExclB > 0 ? '#DC2626' : '#10B981';
+        }
+
+        var exListA = document.getElementById('hbExclusionsListA');
+        var exListB = document.getElementById('hbExclusionsListB');
+        if (exListA) exListA.innerHTML = hbRenderExclusions(hbState.exclusionsA, 'A');
+        if (exListB) exListB.innerHTML = hbRenderExclusions(hbState.exclusionsB, 'B');
+
+        var gClk = document.getElementById('hbGameClock');
+        if (gClk) gClk.textContent = hbFormatTime(hbState.gameSeconds);
+
+        var hLbl = document.getElementById('hbHalfLabel');
+        if (hLbl) hLbl.textContent = hbState.half === 1 ? '1re Mi-Temps' : '2e Mi-Temps';
+
+        var btnSP = document.getElementById('hbBtnStartPause');
+        if (btnSP) btnSP.textContent = hbState.running ? '⏸️ Pause Chrono' : '▶️ Démarrer Chrono';
+
+        var pStat = document.getElementById('hbPassiveStatus');
+        if (pStat) {
+          if (!hbState.passiveActive) {
+            pStat.textContent = 'Bras baissé (Jeu normal)';
+            pStat.style.color = '#F8FAFC';
+          } else if (hbState.passivePasses > 6) {
+            pStat.textContent = '🚨 COUP FRANC (> 6 passes) !';
+            pStat.style.color = '#EF4444';
+          } else {
+            pStat.textContent = '✋ Bras levé : ' + hbState.passivePasses + ' / 6 passes';
+            pStat.style.color = '#FBBF24';
+          }
+        }
+
+        var callout = document.getElementById('hbRefCallout');
+        if (callout) callout.textContent = hbState.lastMsg;
+      }
+
+      function hbExportMatchReport(format) {
+        var nameA = (document.getElementById('hbInputTeamA') || {}).value || 'Équipe A';
+        var nameB = (document.getElementById('hbInputTeamB') || {}).value || 'Équipe B';
+        var cls = (document.getElementById('hbInputClass') || {}).value || 'Classe EPS';
+        var refs = (document.getElementById('hbInputReferees') || {}).value || 'Binôme d\'Arbitres IHF';
+        var dateStr = new Date().toLocaleDateString('fr-MA');
+
+        var reportHtml = '<table class="a4-header-table"><tr>' +
+          '<td style="width:36%;"><strong>ROYAUME DU MAROC</strong><br>Ministère de l\'Éducation Nationale, du Préscolaire et des Sports<br><strong>Matière :</strong> Éducation Physique et Sportive</td>' +
+          '<td style="width:28%;text-align:center;"><strong>FEUILLE DE MATCH OFFICIELLE IHF</strong><br>APS : <strong>HANDBALL (7×7)</strong><br>Date : ' + dateStr + '</td>' +
+          '<td style="width:36%;text-align:right;"><strong>Classe / Niveau :</strong> ' + cls + '<br><strong>Binôme d\'Arbitres :</strong> ' + refs + '</td>' +
+          '</tr></table>' +
+          '<div class="a4-doc-title"><h3>BILAN OFFICIEL DE LA RENCONTRE — HANDBALL (CODE IHF)</h3><p>' + nameA + ' contre ' + nameB + '</p></div>' +
+          '<table class="a4-table"><thead><tr><th>Équipe</th><th>Score Final</th><th>Score Mi-Temps</th><th>Buts Bonifiés (Suspension/CA)</th><th>Cartons Jaunes</th><th>Exclusions 2 Min</th><th>Cartons Rouges</th></tr></thead><tbody>' +
+          '<tr><td><strong>' + nameA + '</strong></td><td style="font-size:1.2rem;font-weight:900;">' + hbState.scoreA + ' buts</td><td>' + (hbState.halfTimeScore || '—') + '</td><td>' + hbState.bonusGoalsA + '</td><td>' + hbState.yellowA + '</td><td>' + hbState.exclTotalA + '</td><td>' + hbState.redA + '</td></tr>' +
+          '<tr><td><strong>' + nameB + '</strong></td><td style="font-size:1.2rem;font-weight:900;">' + hbState.scoreB + ' buts</td><td>' + (hbState.halfTimeScore || '—') + '</td><td>' + hbState.bonusGoalsB + '</td><td>' + hbState.yellowB + '</td><td>' + hbState.exclTotalB + '</td><td>' + hbState.redB + '</td></tr>' +
+          '</tbody></table>' +
+          '<table style="width:100%;margin-top:1.5rem;border:none;font-size:0.85rem;"><tr>' +
+          '<td style="border:none;width:33%;"><strong>Signature Binôme d\'Arbitres IHF :</strong><br><br>........................................</td>' +
+          '<td style="border:none;width:33%;text-align:center;"><strong>Signature des Capitaines (A &amp; B) :</strong><br><br>........................................</td>' +
+          '<td style="border:none;width:33%;text-align:right;"><strong>Visa du Professeur d\'EPS :</strong><br><br>........................................</td>' +
+          '</tr></table>';
+
+        if (format === 'word') {
+          downloadHtmlAsWord(reportHtml, 'Feuille-Match-Handball-' + cls.replace(/\s+/g, '-') + '.doc');
+        } else {
+          openPrintWindow(reportHtml, 'Feuille de Match Handball — ' + nameA + ' vs ' + nameB);
+        }
+      }
+
       /* Initialisation au chargement + lecture paramètre URL ?level= */
       window.addEventListener('DOMContentLoaded', function() {
         try {
@@ -1910,13 +2347,15 @@
               b.classList.toggle('active', b.getAttribute('data-school') === lvl);
             });
           }
-          if (window.location.hash === '#volet-atd') switchHandballVolet('atd');
+          if (window.location.hash === '#volet-calculateur') switchHandballVolet('calculateur');
+          else if (window.location.hash === '#volet-atd') switchHandballVolet('atd');
           else if (window.location.hash === '#volet-grilles') switchHandballVolet('grilles');
           else if (window.location.hash === '#volet-terrain') switchHandballVolet('terrain');
           else if (window.location.hash === '#volet-articles') switchHandballVolet('articles');
         } catch(e) {}
         renderStudioPreview();
         selectHandballGrille('diag', document.querySelector('.practice-tab[data-grille="diag"]'));
+        hbResetMatch();
       });
     </script>
 
@@ -2022,11 +2461,11 @@
           <p class="footer-col-title">Navigation</p>
           <ul>
             <li><a href="/">Accueil ProfEPS.ma</a></li>
-            <li><a href="/orientations-pedagogiques-toutes-matieres.html" class="footer-hub-highlight">Toutes les OP (34 PDF)</a></li>
+            <li><a href="/orientations-pedagogiques-toutes-matieres.html">Toutes les OP (34 PDF)</a></li>
             <li><a href="/hub-aps-sports-eps-maroc.html">Hub des 13 Sports &amp; APS</a></li>
             <li><a href="/cycles-eps-maroc.html">Projets de Cycles EPS</a></li>
             <li><a href="/generateur.html">Générateur de Séances (Word/PDF)</a></li>
-            <li><a href="/concours-crmef-hub.html" class="footer-hub-highlight">Hub Concours CRMEF</a></li>
+            <li><a href="/concours-crmef-hub.html">Hub Concours CRMEF</a></li>
             <li><a href="/hub-outils-sport-performance.html">Hub Calculateurs Sport</a></li>
             <li><a href="/bibliotheque-numerique-eps.html">Grande Bibliothèque EPS</a></li>
             <li><a href="/blog.html">Blog &amp; Articles de terrain</a></li>
@@ -2038,8 +2477,8 @@
           <p class="footer-col-title">Sports &amp; Outils EPS</p>
           <ul>
             <li><a href="/orientations-pedagogiques-eps-2007-2009.html">OP EPS 2009 (Collège) &amp; 2007 (Lycée)</a></li>
-            <li><a href="/calculateur-vma.html" class="footer-hub-highlight">Calculateur VMA &amp; Groupes</a></li>
-            <li><a href="/calculateur-note-eps-maroc.html" class="footer-hub-highlight">Calculateur Notes EPS (/20)</a></li>
+            <li><a href="/calculateur-vma.html">Calculateur VMA &amp; Groupes</a></li>
+            <li><a href="/calculateur-note-eps-maroc.html">Calculateur Notes EPS (/20)</a></li>
             <li><a href="/evaluation-eps.html">Évaluation &amp; Barèmes EPS</a></li>
             <li><a href="/aps-course-duree-demi-fond-eps-maroc.html">Silo Course en Durée (1000m/600m)</a></li>
             <li><a href="/aps-gymnastique-sol-eps-maroc.html">Silo Gymnastique au Sol (A–E)</a></li>
@@ -2054,7 +2493,7 @@
           <ul>
             <li><a href="/qcm-sciences-education-crmef.html">QCM Sciences de l'Éducation (340 Q)</a></li>
             <li><a href="/qcm-didactique-eps-maroc.html">QCM Didactique &amp; Spécialité EPS</a></li>
-            <li><a href="/concours-inspection-orientation-administration-maroc.html" class="footer-hub-highlight">Inspection (CFIE), COPE &amp; Admin.</a></li>
+            <li><a href="/concours-inspection-orientation-administration-maroc.html">Inspection (CFIE), COPE &amp; Admin.</a></li>
             <li><a href="/qcm-150-questions-crmef-eps.html">Banque 150 QCM Concours EPS</a></li>
             <li><a href="/orientations-pedagogiques-primaire-2021.html">Curriculum Primaire 2021 &amp; QCM</a></li>
             <li><a href="/qcm-didactique-maths-maroc.html">QCM Mathématiques, PC &amp; SVT</a></li>
@@ -2198,6 +2637,9 @@
 </script>
 <!-- PROFEPS_STICKY_SYNC_SCRIPT_END -->
 
+  <!-- PROFEPS_FEEDBACK_SCRIPT_START -->
+  <script src="/assets/profeps-feedback.js" defer></script>
+  <!-- PROFEPS_FEEDBACK_SCRIPT_END -->
 </body>
 </html>
 

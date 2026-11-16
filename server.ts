@@ -137,11 +137,19 @@ async function startServer() {
     const genererGrille = require('./api/generer-grille.js');
     const genererProjet = require('./api/generer-projet.js');
     const genererProjetComplet = require('./api/generer-projet-complet.js');
+    const feedbackHandler = require('./api/feedback.js');
 
     app.post('/api/generer-fiche', apiRateLimiter, genererFiche);
     app.post('/api/generer-grille', apiRateLimiter, genererGrille);
     app.post('/api/generer-projet', apiRateLimiter, genererProjet);
     app.post('/api/generer-projet-complet', apiRateLimiter, genererProjetComplet);
+
+    app.get('/api/feedback', apiRateLimiter, feedbackHandler);
+    app.post('/api/feedback', apiRateLimiter, feedbackHandler);
+    app.get('/api/testimonials', apiRateLimiter, feedbackHandler);
+    app.post('/api/testimonials', apiRateLimiter, feedbackHandler);
+    app.get('/api/comments', apiRateLimiter, feedbackHandler);
+    app.post('/api/comments', apiRateLimiter, feedbackHandler);
   } catch (err) {
     console.warn('Note: API routes could not be loaded via CJS bridge:', err);
   }
@@ -153,9 +161,9 @@ async function startServer() {
   // Servir les fichiers statiques de public/ directement (HTML, CSS, JS, images, PDF avec Link canonical)
   app.use(express.static(path.join(__dirname, 'public'), {
     setHeaders: (res, filePath) => {
-      if (/\.(css|js|png|jpg|jpeg|gif|svg|webp|ico|woff2?)$/i.test(filePath)) {
+      if (/\.(png|jpg|jpeg|gif|svg|webp|ico|woff2?)$/i.test(filePath)) {
         res.setHeader('Cache-Control', 'public, max-age=604800, stale-while-revalidate=86400');
-      } else if (/\.html$/i.test(filePath)) {
+      } else if (/\.(html|css|js)$/i.test(filePath)) {
         res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
       } else if (/\.pdf$/i.test(filePath)) {
         res.setHeader('Cache-Control', 'public, max-age=604800, stale-while-revalidate=86400');

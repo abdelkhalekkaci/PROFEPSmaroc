@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="/css/tailwind-precompiled.min.css?v=20261101">
-  <link rel="stylesheet" href="/assets/site.css?v=20261113">
+  <link rel="stylesheet" href="/assets/site.css?v=20261117">
   <script src="profeps-cmp.js" defer></script>
   <script src="profeps-communaute.js" defer></script>
 
@@ -223,6 +223,14 @@
       transform: translateY(-2px);
       border-color: var(--primary);
       box-shadow: var(--shadow-md);
+    }
+    .sport-bento-card.col-span-12 {
+      flex-direction: row !important;
+      flex-wrap: wrap !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      min-height: 0 !important;
+      height: auto !important;
     }
     .sport-links-bar {
       display: flex;
@@ -573,6 +581,136 @@
       closeMobileMenu();
     }
   });
+
+  // Real-time Dark Mode Contrast Guard & Persistence
+  (function() {
+    function parseRgb(str) {
+      if (!str) return null;
+      var m = str.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)(?:\s*,\s*([\d.]+))?\s*\)/i);
+      if (!m) return null;
+      return { r: +m[1], g: +m[2], b: +m[3], a: m[4] !== undefined ? +m[4] : 1 };
+    }
+    function relLum(rgb) {
+      var sRGB = [rgb.r / 255, rgb.g / 255, rgb.b / 255].map(function(c) {
+        return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+      });
+      return 0.2126 * sRGB[0] + 0.7152 * sRGB[1] + 0.0722 * sRGB[2];
+    }
+    function getEffectiveBg(el) {
+      var cur = el;
+      while (cur && cur !== document.documentElement) {
+        var bg = window.getComputedStyle(cur).backgroundColor;
+        var rgb = parseRgb(bg);
+        if (rgb && rgb.a > 0.15) return rgb;
+        cur = cur.parentElement;
+      }
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      return isDark ? { r: 11, g: 18, b: 38, a: 1 } : { r: 251, g: 250, b: 247, a: 1 };
+    }
+    window.profepsSyncDarkContrast = function() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (!isDark) {
+        document.querySelectorAll('[data-peps-dm-fixed]').forEach(function(el) {
+          var origColor = el.getAttribute('data-peps-orig-color');
+          var origBg = el.getAttribute('data-peps-orig-bg');
+          if (origColor !== null) {
+            if (origColor === '') el.style.removeProperty('color');
+            else el.style.color = origColor;
+          }
+          if (origBg !== null) {
+            if (origBg === '') el.style.removeProperty('background');
+            else el.style.background = origBg;
+          }
+          el.removeAttribute('data-peps-dm-fixed');
+        });
+        return;
+      }
+      var nodes = document.querySelectorAll('main *, header.silo-hero *, header.hub-hero *, header.vma-hero *, #profepsStickySubnav *');
+      for (var i = 0; i < nodes.length; i++) {
+        var el = nodes[i];
+        if (!el || !el.tagName) continue;
+        var tag = el.tagName;
+        if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'SVG' || tag === 'PATH' || tag === 'CIRCLE' || tag === 'LINE' || tag === 'RECT') continue;
+        var cs = window.getComputedStyle(el);
+        var fg = parseRgb(cs.color);
+        if (!fg) continue;
+        var bg = getEffectiveBg(el);
+        var fgL = relLum(fg);
+        var bgL = relLum(bg);
+        // Case 1: Light background inside Dark Mode (e.g. bgL > 0.65) -> convert card/box bg to Dark Surface unless it is an Amber button
+        var ownBg = parseRgb(cs.backgroundColor);
+        var isAmberBtn = ownBg && ownBg.r > 200 && ownBg.g > 140 && ownBg.b < 60;
+        if (ownBg && ownBg.a > 0.4 && relLum(ownBg) > 0.68 && !isAmberBtn) {
+          if (!el.hasAttribute('data-peps-dm-fixed')) {
+            el.setAttribute('data-peps-orig-bg', el.style.background || '');
+            el.setAttribute('data-peps-orig-color', el.style.color || '');
+            el.setAttribute('data-peps-dm-fixed', '1');
+          }
+          el.style.setProperty('background', '#131E3A', 'important');
+          el.style.setProperty('color', '#E8ECFA', 'important');
+          el.style.setProperty('border-color', '#263558', 'important');
+          bgL = 0.015;
+          fgL = 0.85;
+        }
+        // Case 2: Dark text on dark background (both fgL < 0.20 and bgL < 0.20)
+        if (fgL < 0.20 && bgL < 0.20) {
+          if (!el.hasAttribute('data-peps-dm-fixed')) {
+            el.setAttribute('data-peps-orig-color', el.style.color || '');
+            el.setAttribute('data-peps-orig-bg', el.style.background || '');
+            el.setAttribute('data-peps-dm-fixed', '1');
+          }
+          // Preserve semantic hue if blue/green/amber/red
+          if (fg.b > fg.r + 35 && fg.b > fg.g + 15) {
+            el.style.setProperty('color', '#93A8FF', 'important');
+          } else if (fg.g > fg.r + 25) {
+            el.style.setProperty('color', '#34D399', 'important');
+          } else if (fg.r > fg.b + 40 && fg.g > fg.b + 20) {
+            el.style.setProperty('color', '#FBBF24', 'important');
+          } else if (fg.r > fg.g + 40 && fg.r > fg.b + 40) {
+            el.style.setProperty('color', '#F87171', 'important');
+          } else {
+            el.style.setProperty('color', '#E8ECFA', 'important');
+          }
+        }
+        // Case 3: Light text on light background (both fgL > 0.65 and bgL > 0.65)
+        else if (fgL > 0.65 && bgL > 0.65 && !isAmberBtn) {
+          if (!el.hasAttribute('data-peps-dm-fixed')) {
+            el.setAttribute('data-peps-orig-color', el.style.color || '');
+            el.setAttribute('data-peps-orig-bg', el.style.background || '');
+            el.setAttribute('data-peps-dm-fixed', '1');
+          }
+          el.style.setProperty('color', '#0E1633', 'important');
+        }
+      }
+    };
+    try {
+      var saved = localStorage.getItem('profeps_theme');
+      if (saved === 'dark' || saved === 'light') {
+        document.documentElement.setAttribute('data-theme', saved);
+        if (saved === 'dark') document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
+        syncThemeUI(saved);
+      }
+    } catch (e) {}
+    var origToggle = window.profepsToggleTheme;
+    window.profepsToggleTheme = function() {
+      if (origToggle) origToggle();
+      window.profepsSyncDarkContrast();
+    };
+    window.addEventListener('DOMContentLoaded', function() {
+      window.profepsSyncDarkContrast();
+      if (typeof MutationObserver !== 'undefined' && document.body) {
+        var timer = null;
+        new MutationObserver(function() {
+          if (document.documentElement.getAttribute('data-theme') !== 'dark') return;
+          if (timer) clearTimeout(timer);
+          timer = setTimeout(window.profepsSyncDarkContrast, 80);
+        }).observe(document.body, { childList: true, subtree: true });
+      }
+    });
+    window.addEventListener('load', window.profepsSyncDarkContrast);
+  })();
+
 })();
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->
@@ -997,15 +1135,15 @@
           </article>
 
           <!-- 13. Rugby Scolaire & Tag (Full Width Banner Card) -->
-          <article class="sport-bento-card col-span-12" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;">
-            <div style="flex:1 1 420px;">
-              <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.3rem;">
+          <article class="sport-bento-card col-span-12" style="display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;min-height:0;height:auto;">
+            <div style="flex:1 1 320px;min-width:0;">
+              <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem;margin-bottom:0.3rem;">
                 <strong style="font-family:var(--font-display);font-size:1.08rem;">🏉 Rugby Scolaire, Tag Rugby &amp; Touch Rugby (1AC → 2BAC)</strong>
                 <span class="atlas-chip atlas-chip-college">Sans plaquage dangereux · 5 Règles d'Or</span>
               </div>
               <p style="margin:0;font-size:0.88rem;color:var(--slate);">Avancer en continuité (paradoxe cible avant / passe arrière), soutien axial, calculateur d'Indice de Gagne-Terrain (IGT), compteur 6 Tags et 4 grilles (/20).</p>
             </div>
-            <div class="sport-links-bar" style="margin-top:0;">
+            <div class="sport-links-bar" style="margin-top:0;padding-top:0;border-top:none;flex-wrap:wrap;flex-shrink:0;">
               <a href="/aps-rugby-scolaire-tag-eps-maroc.html#volet-studio">Studio 24 Cycles &amp; Fiches</a>
               <a href="/aps-rugby-scolaire-tag-eps-maroc.html#volet-calculateur-rugby">Calculateur IGT &amp; 6 Tags</a>
               <a href="/aps-rugby-scolaire-tag-eps-maroc.html#volet-grilles">Grilles /20</a>
@@ -1175,6 +1313,151 @@
     </section>
 
     <!-- =====================================================================
+         BLOCK 6B: TÉMOIGNAGES & AVIS DE LA COMMUNAUTÉ EPS (Cloud Firestore)
+         ===================================================================== -->
+    <section class="atlas-section peps-feedback-section" id="peps-home-testimonials">
+      <div class="atlas-container">
+        <div class="peps-fb-header">
+          <div>
+            <span class="atlas-hand-note">Retours d'expérience de la communauté EPS</span>
+            <h2 class="peps-fb-title">Témoignages des enseignants &amp; candidats CRMEF</h2>
+            <div id="pepsHomeAvgWrap" class="peps-fb-avg-wrap" style="display:flex;">
+              <span class="peps-stars-inline" aria-label="Note 5 sur 5">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </span>
+              <span class="peps-avg-num">4.8 / 5</span>
+              <span aria-hidden="true">·</span>
+              <span>Basé sur 6 avis d'enseignants</span>
+            </div>
+          </div>
+          <div class="peps-fb-header-actions">
+            <button type="button" id="pepsBtnToggleReviewForm" class="btn-atlas-primary peps-nowrap-btn">Rédiger un avis</button>
+          </div>
+        </div>
+        <div id="pepsHomeTestimonialsList" class="peps-fb-cards-grid">
+          <article class="peps-fb-card" data-fb-id="t_peps_community_01">
+            <div class="peps-fb-card-top">
+              <div>
+                <strong class="peps-fb-author">Youssef El Amrani</strong>
+                <div class="peps-fb-meta">Professeur d'EPS Lycée Qualifiant <span aria-hidden="true">·</span> AREF Rabat-Salé-Kénitra <span aria-hidden="true">·</span> 15 nov. 2026</div>
+              </div>
+              <span class="peps-stars-inline" aria-label="Note 5 sur 5">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </span>
+            </div>
+            <p class="peps-fb-body">Le générateur de projets de cycles et de fiches de séance A4 m'a fait gagner un temps précieux pour mon cahier journal. Les situations d'apprentissage et critères de réussite sont 100 % conformes aux OP 2007.</p>
+            <div class="peps-fb-card-foot">
+              <button type="button" class="peps-report-btn" data-report-type="testimonial" data-report-id="t_peps_community_01">Signaler</button>
+            </div>
+          </article>
+          <article class="peps-fb-card" data-fb-id="t_peps_community_02">
+            <div class="peps-fb-card-top">
+              <div>
+                <strong class="peps-fb-author">Salma Bennani</strong>
+                <div class="peps-fb-meta">Candidate admise au Concours CRMEF EPS <span aria-hidden="true">·</span> AREF Casablanca-Settat <span aria-hidden="true">·</span> 14 nov. 2026</div>
+              </div>
+              <span class="peps-stars-inline" aria-label="Note 5 sur 5">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </span>
+            </div>
+            <p class="peps-fb-body">J'ai préparé l'écrit et l'oral du concours CRMEF grâce aux QCM corrigés de Sciences de l'Éducation et de Didactique EPS. Les explications détaillées par article et les barèmes officiels sont d'une clarté remarquable.</p>
+            <div class="peps-fb-card-foot">
+              <button type="button" class="peps-report-btn" data-report-type="testimonial" data-report-id="t_peps_community_02">Signaler</button>
+            </div>
+          </article>
+          <article class="peps-fb-card" data-fb-id="t_peps_community_03">
+            <div class="peps-fb-card-top">
+              <div>
+                <strong class="peps-fb-author">Hicham Ouahbi</strong>
+                <div class="peps-fb-meta">Professeur d'EPS Collège <span aria-hidden="true">·</span> AREF Marrakech-Safi <span aria-hidden="true">·</span> 12 nov. 2026</div>
+              </div>
+              <span class="peps-stars-inline" aria-label="Note 5 sur 5">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </span>
+            </div>
+            <p class="peps-fb-body">Le calculateur VMA avec répartition automatique en groupes de niveau et les nouvelles tables de marque interactives (Volley, Basket, Hand, Foot, Badminton) sont devenus indispensables sur le terrain avec mes élèves observateurs.</p>
+            <div class="peps-fb-card-foot">
+              <button type="button" class="peps-report-btn" data-report-type="testimonial" data-report-id="t_peps_community_03">Signaler</button>
+            </div>
+          </article>
+          <article class="peps-fb-card" data-fb-id="t_peps_community_04">
+            <div class="peps-fb-card-top">
+              <div>
+                <strong class="peps-fb-author">Nadia Tazi</strong>
+                <div class="peps-fb-meta">Professeure d'EPS · Stagiaire Titularisation <span aria-hidden="true">·</span> AREF Fès-Meknès <span aria-hidden="true">·</span> 10 nov. 2026</div>
+              </div>
+              <span class="peps-stars-inline" aria-label="Note 5 sur 5">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </span>
+            </div>
+            <p class="peps-fb-body">Pour mon inspection de titularisation en Handball et Gymnastique, les grilles d'évaluation sur 20 (Produit / Processus / Connaissances) et les carnets de terrain m'ont permis de présenter un dossier irréprochable.</p>
+            <div class="peps-fb-card-foot">
+              <button type="button" class="peps-report-btn" data-report-type="testimonial" data-report-id="t_peps_community_04">Signaler</button>
+            </div>
+          </article>
+          <article class="peps-fb-card" data-fb-id="t_peps_community_05">
+            <div class="peps-fb-card-top">
+              <div>
+                <strong class="peps-fb-author">Karim Ait Brahim</strong>
+                <div class="peps-fb-meta">Professeur d'EPS Secondaire Collégial <span aria-hidden="true">·</span> AREF Souss-Massa <span aria-hidden="true">·</span> 8 nov. 2026</div>
+              </div>
+              <span class="peps-stars-inline" aria-label="Note 4 sur 5">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </span>
+            </div>
+            <p class="peps-fb-body">Très belle initiative marocaine ! Avoir toutes les Orientations Pédagogiques 2007 et 2009 regroupées au même endroit avec les barèmes athlétiques et les fiches Word modifiables facilite vraiment le travail quotidien.</p>
+            <div class="peps-fb-card-foot">
+              <button type="button" class="peps-report-btn" data-report-type="testimonial" data-report-id="t_peps_community_05">Signaler</button>
+            </div>
+          </article>
+          <article class="peps-fb-card" data-fb-id="t_peps_community_06">
+            <div class="peps-fb-card-top">
+              <div>
+                <strong class="peps-fb-author">Meryem Chraibi</strong>
+                <div class="peps-fb-meta">Professeure d'EPS Lycée <span aria-hidden="true">·</span> AREF Tanger-Tétouan-Al Hoceïma <span aria-hidden="true">·</span> 5 nov. 2026</div>
+              </div>
+              <span class="peps-stars-inline" aria-label="Note 5 sur 5">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#FFB300" stroke="#FFB300" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </span>
+            </div>
+            <p class="peps-fb-body">Les studios APS avec la rotation visuelle en Volleyball, le compteur 6 Tags en Rugby scolaire et l'export PDF des feuilles de match responsabilisent directement les élèves dispensés dans les rôles d'arbitrage.</p>
+            <div class="peps-fb-card-foot">
+              <button type="button" class="peps-report-btn" data-report-type="testimonial" data-report-id="t_peps_community_06">Signaler</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
          BLOCK 7: AUTEUR & DERNIERS DOSSIERS DE TERRAIN
          ===================================================================== -->
     <section class="atlas-section" id="communaute-et-journal">
@@ -1297,11 +1580,11 @@
           <p class="footer-col-title">Navigation</p>
           <ul>
             <li><a href="/">Accueil ProfEPS.ma</a></li>
-            <li><a href="/orientations-pedagogiques-toutes-matieres.html" class="footer-hub-highlight">Toutes les OP (34 PDF)</a></li>
+            <li><a href="/orientations-pedagogiques-toutes-matieres.html">Toutes les OP (34 PDF)</a></li>
             <li><a href="/hub-aps-sports-eps-maroc.html">Hub des 13 Sports &amp; APS</a></li>
             <li><a href="/cycles-eps-maroc.html">Projets de Cycles EPS</a></li>
             <li><a href="/generateur.html">Générateur de Séances (Word/PDF)</a></li>
-            <li><a href="/concours-crmef-hub.html" class="footer-hub-highlight">Hub Concours CRMEF</a></li>
+            <li><a href="/concours-crmef-hub.html">Hub Concours CRMEF</a></li>
             <li><a href="/hub-outils-sport-performance.html">Hub Calculateurs Sport</a></li>
             <li><a href="/bibliotheque-numerique-eps.html">Grande Bibliothèque EPS</a></li>
             <li><a href="/blog.html">Blog &amp; Articles de terrain</a></li>
@@ -1313,8 +1596,8 @@
           <p class="footer-col-title">Sports &amp; Outils EPS</p>
           <ul>
             <li><a href="/orientations-pedagogiques-eps-2007-2009.html">OP EPS 2009 (Collège) &amp; 2007 (Lycée)</a></li>
-            <li><a href="/calculateur-vma.html" class="footer-hub-highlight">Calculateur VMA &amp; Groupes</a></li>
-            <li><a href="/calculateur-note-eps-maroc.html" class="footer-hub-highlight">Calculateur Notes EPS (/20)</a></li>
+            <li><a href="/calculateur-vma.html">Calculateur VMA &amp; Groupes</a></li>
+            <li><a href="/calculateur-note-eps-maroc.html">Calculateur Notes EPS (/20)</a></li>
             <li><a href="/evaluation-eps.html">Évaluation &amp; Barèmes EPS</a></li>
             <li><a href="/aps-course-duree-demi-fond-eps-maroc.html">Silo Course en Durée (1000m/600m)</a></li>
             <li><a href="/aps-gymnastique-sol-eps-maroc.html">Silo Gymnastique au Sol (A–E)</a></li>
@@ -1329,7 +1612,7 @@
           <ul>
             <li><a href="/qcm-sciences-education-crmef.html">QCM Sciences de l'Éducation (340 Q)</a></li>
             <li><a href="/qcm-didactique-eps-maroc.html">QCM Didactique &amp; Spécialité EPS</a></li>
-            <li><a href="/concours-inspection-orientation-administration-maroc.html" class="footer-hub-highlight">Inspection (CFIE), COPE &amp; Admin.</a></li>
+            <li><a href="/concours-inspection-orientation-administration-maroc.html">Inspection (CFIE), COPE &amp; Admin.</a></li>
             <li><a href="/qcm-150-questions-crmef-eps.html">Banque 150 QCM Concours EPS</a></li>
             <li><a href="/orientations-pedagogiques-primaire-2021.html">Curriculum Primaire 2021 &amp; QCM</a></li>
             <li><a href="/qcm-didactique-maths-maroc.html">QCM Mathématiques, PC &amp; SVT</a></li>
@@ -1360,5 +1643,8 @@
       </div>
     </div>
   </footer>
+  <!-- PROFEPS_FEEDBACK_SCRIPT_START -->
+  <script src="/assets/profeps-feedback.js?v=20261117" defer></script>
+  <!-- PROFEPS_FEEDBACK_SCRIPT_END -->
 </body>
 </html>

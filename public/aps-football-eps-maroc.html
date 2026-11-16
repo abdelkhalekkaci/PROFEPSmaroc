@@ -556,7 +556,7 @@
 /* PROFEPS_UNIFIED_APS_STICKY_AND_STUDIO_STYLES_END */
 
     </style>
-  <link rel="stylesheet" href="/assets/site.css?v=20261113">
+  <link rel="stylesheet" href="/assets/site.css?v=20261117">
   <script src="profeps-communaute.js" defer></script>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
@@ -986,10 +986,11 @@
         <div class="volet-nav">
             <div class="volet-tabs" role="tablist" aria-label="Sections de la page">
                 <button type="button" class="volet-tab-btn active" id="tab-btn-studio" onclick="switchFootballVolet('studio')">⚡ 1. Studio Cycles &amp; Fiches (1AC → 2Bac)</button>
-                <button type="button" class="volet-tab-btn" id="tab-btn-atd" onclick="switchFootballVolet('atd')">📐 2. ATD Football &amp; Futsal Complet</button>
-                <button type="button" class="volet-tab-btn" id="tab-btn-grilles" onclick="switchFootballVolet('grilles')">📊 3. Grilles d'Observation &amp; Évaluation (/20)</button>
-                <button type="button" class="volet-tab-btn" id="tab-btn-terrain" onclick="switchFootballVolet('terrain')">🏟️ 4. Terrain 40+ Élèves &amp; Règles FIFA/IFAB</button>
-                <button type="button" class="volet-tab-btn" id="tab-btn-articles" onclick="switchFootballVolet('articles')">📚 5. Articles &amp; Dossiers Foot/Futsal (7)</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-calculateur" onclick="switchFootballVolet('calculateur')">⚖️ 2. Table de Marque Futsal, 5 Fautes &amp; TAB</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-atd" onclick="switchFootballVolet('atd')">📐 3. ATD Football &amp; Futsal Complet</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-grilles" onclick="switchFootballVolet('grilles')">📊 4. Grilles d'Observation &amp; Évaluation (/20)</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-terrain" onclick="switchFootballVolet('terrain')">🏟️ 5. Terrain 40+ Élèves &amp; Règles FIFA/IFAB</button>
+                <button type="button" class="volet-tab-btn" id="tab-btn-articles" onclick="switchFootballVolet('articles')">📚 6. Articles &amp; Dossiers Foot/Futsal (7)</button>
             </div>
             <div class="profeps-sticky-row-aps" role="navigation" aria-label="Navigation rapide entre les 13 APS">
                 <span class="profeps-aps-row-label">🏟️ Autres APS :</span>
@@ -1162,7 +1163,177 @@
         </section>
 
         <!-- ================================================================== -->
-        <!-- VOLET 2 : ANALYSE ET TRAITEMENT DIDACTIQUE (ATD) DU FOOTBALL/FUTSAL-->
+        <!-- VOLET 2 : TABLE DE MARQUE FUTSAL/FOOTBALL, 5 FAUTES & TIRS AU BUT  -->
+        <!-- ================================================================== -->
+        <section id="volet-calculateur" class="volet-panel" aria-label="Table de Marque et Arbitre Interactif Football et Futsal">
+            <div class="peps-ref-board-wrap">
+                <div class="peps-ref-board-header">
+                    <div>
+                        <span style="font-size:0.76rem;font-weight:800;color:var(--primary);text-transform:uppercase;letter-spacing:0.05em;">Outil Terrain Élève-Arbitre &amp; Table de Marque · Lois du Jeu FIFA Futsal / IFAB 2026</span>
+                        <h2 class="peps-ref-board-title">⚖️ Table de Marque Interactive Football &amp; Futsal (Score, Cumul 5 Fautes 10m, Chrono 4s &amp; Tirs au But)</h2>
+                        <p class="peps-ref-board-sub">Conçu pour le Futsal 5c5 et le Mini-Foot scolaire : suivez le score, le <strong>cumul des 5 fautes d'équipe par mi-temps (Jet Franc Direct à 10m sans mur dès la 6e faute)</strong>, le <strong>décompte des 4 secondes</strong> sur remise en jeu et la <strong>séance de Tirs au But (5 tireurs + mort subite)</strong>.</p>
+                    </div>
+                </div>
+
+                <!-- BARRE CHRONO MI-TEMPS + DÉCOMPTE 4 SECONDES FUTSAL -->
+                <div class="peps-ref-clock-box">
+                    <div style="display:flex;align-items:center;gap:0.85rem;flex-wrap:wrap;">
+                        <div>
+                            <div style="font-size:0.7rem;font-weight:800;color:#94A3B8;text-transform:uppercase;">Chrono (<span id="fbHalfLabel">1re Mi-Temps</span>)</div>
+                            <div class="peps-ref-clock-digits" id="fbGameClock">08:00</div>
+                        </div>
+                        <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">
+                            <button type="button" class="peps-ref-btn peps-ref-btn-primary" id="fbBtnStartPause" onclick="fbToggleClock()">▶️ Démarrer / Pause</button>
+                            <button type="button" class="peps-ref-btn" onclick="fbNextHalf()">⏭️ 2e Mi-Temps (RAZ Fautes)</button>
+                            <select id="fbHalfDuration" onchange="fbSetHalfMinutes()" style="padding:0.4rem;border-radius:7px;background:#1E293B;color:#fff;border:1px solid #475569;font-weight:800;font-size:0.78rem;">
+                                <option value="6">Match EPS 6 min</option>
+                                <option value="8" selected>Match EPS 8 min</option>
+                                <option value="10">Match EPS 10 min</option>
+                                <option value="20">Futsal FIFA 20 min</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- CHRONOMÈTRE RAPIDE 4 SECONDES (TOUCHE AU PIED / CORNER / GARDIEN) -->
+                    <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;background:#1E293B;padding:0.55rem 0.9rem;border-radius:10px;border:1px solid #475569;">
+                        <div>
+                            <div style="font-size:0.68rem;font-weight:800;color:#FBBF24;text-transform:uppercase;">⏱️ Règle Futsal des 4 Secondes</div>
+                            <div style="font-size:0.76rem;color:#CBD5E1;">Touche au pied · Corner · Relance Gardien</div>
+                        </div>
+                        <div class="peps-ref-shotclock-digits" id="fbFourSecDisplay" style="min-width:52px;text-align:center;">4s</div>
+                        <button type="button" class="peps-ref-btn peps-ref-btn-amber" onclick="fbStartFourSec()">▶️ Lancer 4s</button>
+                    </div>
+                </div>
+
+                <div class="peps-ref-toolbar" style="justify-content:space-between;">
+                    <div id="fbRefCallout" style="font-size:0.86rem;font-weight:700;color:var(--ink);">⚽ Prêt pour le coup d'envoi. Touche au pied et interdiction des tacles glissés en EPS.</div>
+                    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+                        <button type="button" class="peps-ref-btn" onclick="fbUndoLast()">↩️ Annuler dernier but</button>
+                        <button type="button" class="peps-ref-btn peps-ref-btn-danger" onclick="fbResetMatch()">🔄 Remettre Match à 0–0</button>
+                    </div>
+                </div>
+
+                <div class="peps-ref-grid-2">
+                    <!-- ÉQUIPE A -->
+                    <div class="peps-ref-team-box team-a">
+                        <div class="peps-ref-team-head">
+                            <div>
+                                <div class="peps-ref-team-name" id="fbLabelTeamA">Équipe A</div>
+                                <div style="font-size:0.75rem;color:var(--slate);" id="fbCardsSummaryA">🟨 Jaunes : 0 · 🟥 Rouges : 0 · TM : 0/1</div>
+                            </div>
+                            <div style="text-align:right;">
+                                <button type="button" class="peps-ref-btn" onclick="fbAddTimeout('A')" style="padding:0.3rem 0.6rem;font-size:0.74rem;">⏱️ Temps Mort (1/MT)</button>
+                            </div>
+                        </div>
+
+                        <div class="peps-ref-score-big" id="fbScoreA">0</div>
+
+                        <div class="peps-ref-btn-row">
+                            <button type="button" class="peps-ref-btn peps-ref-btn-primary" onclick="fbAddGoal('A', 1)">⚽ +1 But Équipe A</button>
+                            <button type="button" class="peps-ref-btn peps-ref-btn-amber" onclick="fbAddGoal('A', 2)" title="But bonifié EPS (après 4 passes collectives ou but marqué en 1 touche)">🌟 +2 Buts (Action Collective)</button>
+                        </div>
+
+                        <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;padding-top:0.5rem;border-top:1px dashed var(--stone);flex-wrap:wrap;">
+                            <div>
+                                <div style="font-size:0.76rem;font-weight:800;color:var(--ink);">Fautes Cumulées MT (<span id="fbFoulsCountA">0</span> / 5) :</div>
+                                <div class="peps-foul-dots" id="fbFoulDotsA" style="margin-top:0.25rem;"></div>
+                            </div>
+                            <div style="display:flex;gap:0.35rem;flex-wrap:wrap;">
+                                <button type="button" class="peps-ref-btn peps-ref-btn-danger" onclick="fbAddFoul('A')">🚨 +1 Faute</button>
+                                <button type="button" class="peps-ref-btn" onclick="fbAddCard('A', 'yellow')">🟨</button>
+                                <button type="button" class="peps-ref-btn" onclick="fbAddCard('A', 'red')">🟥</button>
+                            </div>
+                        </div>
+                        <div id="fbFoulAlertA"></div>
+                    </div>
+
+                    <!-- ÉQUIPE B -->
+                    <div class="peps-ref-team-box team-b">
+                        <div class="peps-ref-team-head">
+                            <div>
+                                <div class="peps-ref-team-name" id="fbLabelTeamB">Équipe B</div>
+                                <div style="font-size:0.75rem;color:var(--slate);" id="fbCardsSummaryB">🟨 Jaunes : 0 · 🟥 Rouges : 0 · TM : 0/1</div>
+                            </div>
+                            <div style="text-align:right;">
+                                <button type="button" class="peps-ref-btn" onclick="fbAddTimeout('B')" style="padding:0.3rem 0.6rem;font-size:0.74rem;">⏱️ Temps Mort (1/MT)</button>
+                            </div>
+                        </div>
+
+                        <div class="peps-ref-score-big" id="fbScoreB">0</div>
+
+                        <div class="peps-ref-btn-row">
+                            <button type="button" class="peps-ref-btn peps-ref-btn-cyan" onclick="fbAddGoal('B', 1)">⚽ +1 But Équipe B</button>
+                            <button type="button" class="peps-ref-btn peps-ref-btn-amber" onclick="fbAddGoal('B', 2)" title="But bonifié EPS (après 4 passes collectives ou but marqué en 1 touche)">🌟 +2 Buts (Action Collective)</button>
+                        </div>
+
+                        <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;padding-top:0.5rem;border-top:1px dashed var(--stone);flex-wrap:wrap;">
+                            <div>
+                                <div style="font-size:0.76rem;font-weight:800;color:var(--ink);">Fautes Cumulées MT (<span id="fbFoulsCountB">0</span> / 5) :</div>
+                                <div class="peps-foul-dots" id="fbFoulDotsB" style="margin-top:0.25rem;"></div>
+                            </div>
+                            <div style="display:flex;gap:0.35rem;flex-wrap:wrap;">
+                                <button type="button" class="peps-ref-btn peps-ref-btn-danger" onclick="fbAddFoul('B')">🚨 +1 Faute</button>
+                                <button type="button" class="peps-ref-btn" onclick="fbAddCard('B', 'yellow')">🟨</button>
+                                <button type="button" class="peps-ref-btn" onclick="fbAddCard('B', 'red')">🟥</button>
+                            </div>
+                        </div>
+                        <div id="fbFoulAlertB"></div>
+                    </div>
+                </div>
+
+                <!-- MODULE INTERACTIF : SÉANCE DE TIRS AU BUT (5 TIREURS + MORT SUBITE) -->
+                <div style="background:var(--paper);border:1px solid var(--stone);border-radius:14px;padding:1rem 1.15rem;margin-top:0.5rem;">
+                    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem;margin-bottom:0.75rem;">
+                        <div>
+                            <h3 style="margin:0;font-size:1rem;font-weight:800;color:var(--ink);">🥅 Séance de Tirs au But Interactive (5 Tireurs + Mort Subite)</h3>
+                            <p style="margin:0.15rem 0 0;font-size:0.8rem;color:var(--slate);">Cliquez sur chaque tir pour basculer entre <strong>Non tiré (•)</strong> → <strong>✅ But marqué</strong> → <strong>❌ Tir manqué/arrêté</strong>. L'outil détecte automatiquement la victoire mathématique ou la Mort Subite.</p>
+                        </div>
+                        <div style="display:flex;gap:0.45rem;align-items:center;">
+                            <button type="button" class="peps-ref-btn" onclick="fbAddShootoutRound()">➕ Ajouter Tireur (Mort Subite)</button>
+                            <button type="button" class="peps-ref-btn" onclick="fbResetShootout()">🔄 RAZ Tirs au But</button>
+                        </div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0.85rem;align-items:center;">
+                        <div style="display:flex;align-items:center;justify-content:space-between;gap:0.6rem;background:var(--surface);padding:0.65rem 0.85rem;border-radius:10px;border:1px solid var(--stone);">
+                            <strong id="fbTabTeamNameA" style="font-size:0.86rem;color:var(--ink);">Équipe A</strong>
+                            <div class="peps-tab-slots" id="fbTabSlotsA"></div>
+                            <strong id="fbTabTotalA" style="font-size:1.1rem;color:var(--primary);">0</strong>
+                        </div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;gap:0.6rem;background:var(--surface);padding:0.65rem 0.85rem;border-radius:10px;border:1px solid var(--stone);">
+                            <strong id="fbTabTeamNameB" style="font-size:0.86rem;color:var(--ink);">Équipe B</strong>
+                            <div class="peps-tab-slots" id="fbTabSlotsB"></div>
+                            <strong id="fbTabTotalB" style="font-size:1.1rem;color:var(--cyan);">0</strong>
+                        </div>
+                    </div>
+                    <div id="fbTabResultBanner" style="margin-top:0.65rem;font-size:0.84rem;font-weight:800;color:var(--primary);"></div>
+                </div>
+
+                <!-- BARRE D'EXPORT & IMPRESSION PDF DU BILAN DE MATCH -->
+                <div class="peps-ref-export-bar">
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:0.65rem;flex:1 1 520px;">
+                        <label style="font-size:0.76rem;font-weight:800;color:var(--slate);">Nom Équipe A
+                            <input type="text" id="fbInputTeamA" value="Équipe A (Lions de l'Atlas)" oninput="fbRenderBoard()" style="width:100%;margin-top:0.2rem;padding:0.42rem 0.6rem;border-radius:7px;border:1px solid var(--stone);background:var(--surface);color:var(--ink);font-weight:700;">
+                        </label>
+                        <label style="font-size:0.76rem;font-weight:800;color:var(--slate);">Nom Équipe B
+                            <input type="text" id="fbInputTeamB" value="Équipe B (Étoiles)" oninput="fbRenderBoard()" style="width:100%;margin-top:0.2rem;padding:0.42rem 0.6rem;border-radius:7px;border:1px solid var(--stone);background:var(--surface);color:var(--ink);font-weight:700;">
+                        </label>
+                        <label style="font-size:0.76rem;font-weight:800;color:var(--slate);">Classe &amp; Niveau
+                            <input type="text" id="fbInputClass" value="2ème Bac / 3AC" style="width:100%;margin-top:0.2rem;padding:0.42rem 0.6rem;border-radius:7px;border:1px solid var(--stone);background:var(--surface);color:var(--ink);font-weight:700;">
+                        </label>
+                        <label style="font-size:0.76rem;font-weight:800;color:var(--slate);">Élèves-Arbitres &amp; Chronométreur 4s
+                            <input type="text" id="fbInputReferees" placeholder="Ex: Omar (1er Arbitre), Sara (Table)" style="width:100%;margin-top:0.2rem;padding:0.42rem 0.6rem;border-radius:7px;border:1px solid var(--stone);background:var(--surface);color:var(--ink);font-weight:700;">
+                        </label>
+                    </div>
+                    <div style="display:flex;flex-wrap:wrap;gap:0.55rem;">
+                        <button type="button" class="peps-ref-btn peps-ref-btn-primary" onclick="fbExportMatchReport('pdf')">🖨️ Imprimer / Exporter Bilan (PDF A4)</button>
+                        <button type="button" class="peps-ref-btn" onclick="fbExportMatchReport('word')">📝 Bilan (.doc Word)</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VOLET 3 : ANALYSE ET TRAITEMENT DIDACTIQUE (ATD) DU FOOTBALL/FUTSAL-->
         <!-- ================================================================== -->
         <section id="volet-atd" class="volet-panel" aria-label="Analyse et Traitement Didactique Football et Futsal">
             <div class="content-panel-card">
@@ -1953,6 +2124,365 @@
         if (container) container.innerHTML = FB_GRILLES_HTML[gKey] || '';
       }
 
+      /* ==================================================================
+         SIMULATEUR TABLE DE MARQUE FUTSAL / FOOTBALL (5 FAUTES, 4S & TAB)
+         ================================================================== */
+      var fbState = {
+        scoreA: 0,
+        scoreB: 0,
+        bonusGoalsA: 0,
+        bonusGoalsB: 0,
+        foulsA: 0,
+        foulsB: 0,
+        totalFoulsA: 0,
+        totalFoulsB: 0,
+        yellowA: 0, yellowB: 0,
+        redA: 0, redB: 0,
+        toA: 0, toB: 0,
+        half: 1,
+        halfTimeScore: '',
+        gameSeconds: 480,
+        running: false,
+        fourSecRem: 4,
+        tabA: [0, 0, 0, 0, 0], // 0 = non tiré, 1 = but, -1 = manqué
+        tabB: [0, 0, 0, 0, 0],
+        lastMsg: '⚽ Prêt pour le coup d\'envoi. Touche au pied et interdiction des tacles glissés en EPS.',
+        historyStack: []
+      };
+      var fbTimerInterval = null;
+      var fbFourSecInterval = null;
+
+      function fbFormatTime(sec) {
+        var m = Math.floor(sec / 60);
+        var s = sec % 60;
+        return (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
+      }
+
+      function fbToggleClock() {
+        fbState.running = !fbState.running;
+        if (fbState.running && !fbTimerInterval) {
+          fbTimerInterval = setInterval(function() {
+            if (!fbState.running) return;
+            if (fbState.gameSeconds > 0) fbState.gameSeconds -= 1;
+            if (fbState.gameSeconds === 0) {
+              fbState.running = false;
+              fbState.lastMsg = '🔔 FIN DE LA ' + (fbState.half === 1 ? '1re MI-TEMPS' : 'RENCONTRE') + ' !';
+            }
+            fbRenderBoard();
+          }, 1000);
+        }
+        fbRenderBoard();
+      }
+
+      function fbSetHalfMinutes() {
+        var mins = parseInt((document.getElementById('fbHalfDuration') || {}).value || '8', 10);
+        fbState.running = false;
+        fbState.gameSeconds = mins * 60;
+        fbRenderBoard();
+      }
+
+      function fbNextHalf() {
+        fbState.running = false;
+        fbState.halfTimeScore = fbState.scoreA + ' – ' + fbState.scoreB;
+        fbState.half = 2;
+        fbState.foulsA = 0;
+        fbState.foulsB = 0;
+        fbState.toA = 0;
+        fbState.toB = 0;
+        var mins = parseInt((document.getElementById('fbHalfDuration') || {}).value || '8', 10);
+        fbState.gameSeconds = mins * 60;
+        fbState.lastMsg = '⏭️ Début de la 2e Mi-Temps : Les compteurs de fautes cumulées sont remis à 0/5.';
+        fbRenderBoard();
+      }
+
+      function fbStartFourSec() {
+        if (fbFourSecInterval) clearInterval(fbFourSecInterval);
+        fbState.fourSecRem = 4;
+        var el = document.getElementById('fbFourSecDisplay');
+        if (el) {
+          el.textContent = '4s';
+          el.style.color = '#FBBF24';
+        }
+        fbState.lastMsg = '⏱️ Décompte des 4 secondes lancé (Touche au pied / Corner / Relance gardien)...';
+        fbRenderBoard();
+        fbFourSecInterval = setInterval(function() {
+          fbState.fourSecRem -= 1;
+          var d = document.getElementById('fbFourSecDisplay');
+          if (fbState.fourSecRem <= 0) {
+            clearInterval(fbFourSecInterval);
+            fbFourSecInterval = null;
+            if (d) {
+              d.textContent = '0s!';
+              d.style.color = '#EF4444';
+            }
+            fbState.lastMsg = '🚨 VIOLATION DES 4 SECONDES ! Perte de balle : remise en jeu ou coup franc indirect pour l\'adversaire.';
+            fbRenderBoard();
+          } else if (d) {
+            d.textContent = fbState.fourSecRem + 's';
+          }
+        }, 1000);
+      }
+
+      function fbAddGoal(team, val) {
+        fbState.historyStack.push({
+          scoreA: fbState.scoreA, scoreB: fbState.scoreB,
+          bonusGoalsA: fbState.bonusGoalsA, bonusGoalsB: fbState.bonusGoalsB
+        });
+        var nameA = (document.getElementById('fbInputTeamA') || {}).value || 'Équipe A';
+        var nameB = (document.getElementById('fbInputTeamB') || {}).value || 'Équipe B';
+        if (team === 'A') {
+          fbState.scoreA += val;
+          if (val > 1) fbState.bonusGoalsA += 1;
+          fbState.lastMsg = '⚽ BUT pour ' + nameA + ' (+' + val + ') ! Coup d\'envoi au centre pour ' + nameB + '.';
+        } else {
+          fbState.scoreB += val;
+          if (val > 1) fbState.bonusGoalsB += 1;
+          fbState.lastMsg = '⚽ BUT pour ' + nameB + ' (+' + val + ') ! Coup d\'envoi au centre pour ' + nameA + '.';
+        }
+        fbRenderBoard();
+      }
+
+      function fbAddFoul(team) {
+        var nameA = (document.getElementById('fbInputTeamA') || {}).value || 'Équipe A';
+        var nameB = (document.getElementById('fbInputTeamB') || {}).value || 'Équipe B';
+        if (team === 'A') {
+          fbState.foulsA += 1;
+          fbState.totalFoulsA += 1;
+          fbState.lastMsg = fbState.foulsA >= 6
+            ? '🚨 ' + fbState.foulsA + 'e FAUTE CUMULÉE contre ' + nameA + ' : JET FRANC DIRECT À 10 MÈTRES SANS MUR pour ' + nameB + ' !'
+            : (fbState.foulsA === 5
+              ? '⚠️ 5e FAUTE CUMULÉE contre ' + nameA + ' ! Attention : toute nouvelle faute dans cette mi-temps donnera un Jet Franc Direct aux 10m sans mur.'
+              : '⚠️ Faute cumulée sifflée contre ' + nameA + ' (' + fbState.foulsA + '/5 dans cette mi-temps).');
+        } else {
+          fbState.foulsB += 1;
+          fbState.totalFoulsB += 1;
+          fbState.lastMsg = fbState.foulsB >= 6
+            ? '🚨 ' + fbState.foulsB + 'e FAUTE CUMULÉE contre ' + nameB + ' : JET FRANC DIRECT À 10 MÈTRES SANS MUR pour ' + nameA + ' !'
+            : (fbState.foulsB === 5
+              ? '⚠️ 5e FAUTE CUMULÉE contre ' + nameB + ' ! Attention : toute nouvelle faute dans cette mi-temps donnera un Jet Franc Direct aux 10m sans mur.'
+              : '⚠️ Faute cumulée sifflée contre ' + nameB + ' (' + fbState.foulsB + '/5 dans cette mi-temps).');
+        }
+        fbRenderBoard();
+      }
+
+      function fbAddCard(team, kind) {
+        if (team === 'A') {
+          if (kind === 'yellow') fbState.yellowA += 1;
+          else fbState.redA += 1;
+        } else {
+          if (kind === 'yellow') fbState.yellowB += 1;
+          else fbState.redB += 1;
+        }
+        fbState.lastMsg = (kind === 'yellow' ? '🟨 Carton Jaune (Avertissement)' : '🟥 Carton Rouge (Exclusion — En Futsal, remplacement possible après 2 min ou but encaissé)') + ' contre l\'Équipe ' + team + '.';
+        fbRenderBoard();
+      }
+
+      function fbAddTimeout(team) {
+        fbState.running = false;
+        if (team === 'A' && fbState.toA < 1) fbState.toA = 1;
+        if (team === 'B' && fbState.toB < 1) fbState.toB = 1;
+        fbState.lastMsg = '⏱️ Temps Mort Futsal (1 minute — 1 par mi-temps) accordé à l\'Équipe ' + team + '.';
+        fbRenderBoard();
+      }
+
+      function fbTogglePenaltySlot(team, idx) {
+        var arr = team === 'A' ? fbState.tabA : fbState.tabB;
+        // Cycle 0 (non tiré) -> 1 (But) -> -1 (Manqué) -> 0
+        if (arr[idx] === 0) arr[idx] = 1;
+        else if (arr[idx] === 1) arr[idx] = -1;
+        else arr[idx] = 0;
+        fbRenderBoard();
+      }
+
+      function fbAddShootoutRound() {
+        fbState.tabA.push(0);
+        fbState.tabB.push(0);
+        fbRenderBoard();
+      }
+
+      function fbResetShootout() {
+        fbState.tabA = [0, 0, 0, 0, 0];
+        fbState.tabB = [0, 0, 0, 0, 0];
+        fbRenderBoard();
+      }
+
+      function fbUndoLast() {
+        if (!fbState.historyStack.length) return;
+        var prev = fbState.historyStack.pop();
+        fbState.scoreA = prev.scoreA;
+        fbState.scoreB = prev.scoreB;
+        fbState.bonusGoalsA = prev.bonusGoalsA;
+        fbState.bonusGoalsB = prev.bonusGoalsB;
+        fbRenderBoard();
+      }
+
+      function fbResetMatch() {
+        var mins = parseInt((document.getElementById('fbHalfDuration') || {}).value || '8', 10);
+        fbState.running = false;
+        fbState.scoreA = 0; fbState.scoreB = 0;
+        fbState.bonusGoalsA = 0; fbState.bonusGoalsB = 0;
+        fbState.foulsA = 0; fbState.foulsB = 0;
+        fbState.totalFoulsA = 0; fbState.totalFoulsB = 0;
+        fbState.yellowA = 0; fbState.yellowB = 0;
+        fbState.redA = 0; fbState.redB = 0;
+        fbState.toA = 0; fbState.toB = 0;
+        fbState.half = 1; fbState.halfTimeScore = '';
+        fbState.gameSeconds = mins * 60;
+        fbState.tabA = [0, 0, 0, 0, 0];
+        fbState.tabB = [0, 0, 0, 0, 0];
+        fbState.historyStack = [];
+        fbState.lastMsg = '⚽ Match réinitialisé (0–0). Prêt pour le coup d\'envoi.';
+        fbRenderBoard();
+      }
+
+      function fbBuildFoulDots(foulCount) {
+        var html = '';
+        for (var i = 1; i <= 5; i++) {
+          var cls = 'peps-foul-dot';
+          if (i <= foulCount) cls += (i === 5 || foulCount >= 6 ? ' filled penalty' : ' filled');
+          html += '<span class="' + cls + '"></span>';
+        }
+        return html;
+      }
+
+      function fbBuildTabSlots(arr, team) {
+        return arr.map(function(v, idx) {
+          var cls = 'peps-tab-slot-btn';
+          var sym = (idx + 1);
+          if (v === 1) { cls += ' goal'; sym = '✅'; }
+          else if (v === -1) { cls += ' miss'; sym = '❌'; }
+          return '<button type="button" class="' + cls + '" onclick="fbTogglePenaltySlot(\'' + team + '\',' + idx + ')" title="Tir n°' + (idx + 1) + '">' + sym + '</button>';
+        }).join('');
+      }
+
+      function fbRenderBoard() {
+        var nameA = (document.getElementById('fbInputTeamA') || {}).value || 'Équipe A';
+        var nameB = (document.getElementById('fbInputTeamB') || {}).value || 'Équipe B';
+
+        var lA = document.getElementById('fbLabelTeamA');
+        var lB = document.getElementById('fbLabelTeamB');
+        if (lA) lA.textContent = nameA;
+        if (lB) lB.textContent = nameB;
+
+        var sA = document.getElementById('fbScoreA');
+        var sB = document.getElementById('fbScoreB');
+        if (sA) sA.textContent = fbState.scoreA;
+        if (sB) sB.textContent = fbState.scoreB;
+
+        var cA = document.getElementById('fbCardsSummaryA');
+        var cB = document.getElementById('fbCardsSummaryB');
+        if (cA) cA.textContent = '🟨 Jaunes : ' + fbState.yellowA + ' · 🟥 Rouges : ' + fbState.redA + ' · TM : ' + fbState.toA + '/1';
+        if (cB) cB.textContent = '🟨 Jaunes : ' + fbState.yellowB + ' · 🟥 Rouges : ' + fbState.redB + ' · TM : ' + fbState.toB + '/1';
+
+        var fCA = document.getElementById('fbFoulsCountA');
+        var fCB = document.getElementById('fbFoulsCountB');
+        if (fCA) fCA.textContent = fbState.foulsA;
+        if (fCB) fCB.textContent = fbState.foulsB;
+
+        var dA = document.getElementById('fbFoulDotsA');
+        var dB = document.getElementById('fbFoulDotsB');
+        if (dA) dA.innerHTML = fbBuildFoulDots(fbState.foulsA);
+        if (dB) dB.innerHTML = fbBuildFoulDots(fbState.foulsB);
+
+        var alA = document.getElementById('fbFoulAlertA');
+        var alB = document.getElementById('fbFoulAlertB');
+        if (alA) {
+          alA.innerHTML = fbState.foulsA >= 6
+            ? '<div class="peps-ref-alert-danger">🚨 6e+ FAUTE CUMULÉE : Jet Franc Direct à 10 mètres SANS MUR accordé à ' + nameB + ' !</div>'
+            : (fbState.foulsA === 5 ? '<div class="peps-ref-alert-warn">⚠️ 5 fautes atteintes : Toute nouvelle faute de ' + nameA + ' = Jet Franc Direct à 10m sans mur !</div>' : '');
+        }
+        if (alB) {
+          alB.innerHTML = fbState.foulsB >= 6
+            ? '<div class="peps-ref-alert-danger">🚨 6e+ FAUTE CUMULÉE : Jet Franc Direct à 10 mètres SANS MUR accordé à ' + nameA + ' !</div>'
+            : (fbState.foulsB === 5 ? '<div class="peps-ref-alert-warn">⚠️ 5 fautes atteintes : Toute nouvelle faute de ' + nameB + ' = Jet Franc Direct à 10m sans mur !</div>' : '');
+        }
+
+        var gClk = document.getElementById('fbGameClock');
+        if (gClk) gClk.textContent = fbFormatTime(fbState.gameSeconds);
+
+        var hLbl = document.getElementById('fbHalfLabel');
+        if (hLbl) hLbl.textContent = fbState.half === 1 ? '1re Mi-Temps' : '2e Mi-Temps';
+
+        var btnSP = document.getElementById('fbBtnStartPause');
+        if (btnSP) btnSP.textContent = fbState.running ? '⏸️ Pause Chrono' : '▶️ Démarrer Chrono';
+
+        var tNameA = document.getElementById('fbTabTeamNameA');
+        var tNameB = document.getElementById('fbTabTeamNameB');
+        if (tNameA) tNameA.textContent = nameA;
+        if (tNameB) tNameB.textContent = nameB;
+
+        var slotsA = document.getElementById('fbTabSlotsA');
+        var slotsB = document.getElementById('fbTabSlotsB');
+        if (slotsA) slotsA.innerHTML = fbBuildTabSlots(fbState.tabA, 'A');
+        if (slotsB) slotsB.innerHTML = fbBuildTabSlots(fbState.tabB, 'B');
+
+        var goalsTabA = fbState.tabA.filter(function(x) { return x === 1; }).length;
+        var goalsTabB = fbState.tabB.filter(function(x) { return x === 1; }).length;
+        var totA = document.getElementById('fbTabTotalA');
+        var totB = document.getElementById('fbTabTotalB');
+        if (totA) totA.textContent = goalsTabA;
+        if (totB) totB.textContent = goalsTabB;
+
+        var tabBanner = document.getElementById('fbTabResultBanner');
+        if (tabBanner) {
+          var takenA = fbState.tabA.filter(function(x) { return x !== 0; }).length;
+          var takenB = fbState.tabB.filter(function(x) { return x !== 0; }).length;
+          if (takenA === 0 && takenB === 0) {
+            tabBanner.textContent = '';
+          } else {
+            var remA = Math.max(0, 5 - takenA);
+            var remB = Math.max(0, 5 - takenB);
+            if (takenA <= 5 && takenB <= 5 && (goalsTabA > goalsTabB + remB || goalsTabB > goalsTabA + remA)) {
+              var winTab = goalsTabA > goalsTabB ? nameA : nameB;
+              tabBanner.textContent = '🏆 VICTOIRE AUX TIRS AU BUT DE ' + winTab + ' (' + goalsTabA + ' – ' + goalsTabB + ') !';
+            } else if (takenA >= 5 && takenB >= 5 && takenA === takenB && goalsTabA !== goalsTabB) {
+              var winSD = goalsTabA > goalsTabB ? nameA : nameB;
+              tabBanner.textContent = '🏆 VICTOIRE AUX TIRS AU BUT DE ' + winSD + ' (' + goalsTabA + ' – ' + goalsTabB + ') !';
+            } else if (takenA >= 5 && takenB >= 5 && goalsTabA === goalsTabB) {
+              tabBanner.textContent = '⚡ ÉGALITÉ (' + goalsTabA + ' – ' + goalsTabB + ') : Cliquez sur « + Ajouter Tireur (Mort Subite) » !';
+            } else {
+              tabBanner.textContent = '🥅 Série en cours : ' + nameA + ' (' + goalsTabA + '/' + takenA + ') — ' + nameB + ' (' + goalsTabB + '/' + takenB + ')';
+            }
+          }
+        }
+
+        var callout = document.getElementById('fbRefCallout');
+        if (callout) callout.textContent = fbState.lastMsg;
+      }
+
+      function fbExportMatchReport(format) {
+        var nameA = (document.getElementById('fbInputTeamA') || {}).value || 'Équipe A';
+        var nameB = (document.getElementById('fbInputTeamB') || {}).value || 'Équipe B';
+        var cls = (document.getElementById('fbInputClass') || {}).value || 'Classe EPS';
+        var refs = (document.getElementById('fbInputReferees') || {}).value || 'Arbitres FIFA/Futsal';
+        var dateStr = new Date().toLocaleDateString('fr-MA');
+        var goalsTabA = fbState.tabA.filter(function(x) { return x === 1; }).length;
+        var goalsTabB = fbState.tabB.filter(function(x) { return x === 1; }).length;
+        var tabUsed = fbState.tabA.some(function(x) { return x !== 0; }) || fbState.tabB.some(function(x) { return x !== 0; });
+
+        var reportHtml = '<table class="a4-header-table"><tr>' +
+          '<td style="width:36%;"><strong>ROYAUME DU MAROC</strong><br>Ministère de l\'Éducation Nationale, du Préscolaire et des Sports<br><strong>Matière :</strong> Éducation Physique et Sportive</td>' +
+          '<td style="width:28%;text-align:center;"><strong>FEUILLE DE MATCH OFFICIELLE FIFA / FUTSAL</strong><br>APS : <strong>FOOTBALL &amp; FUTSAL (5×5)</strong><br>Date : ' + dateStr + '</td>' +
+          '<td style="width:36%;text-align:right;"><strong>Classe / Niveau :</strong> ' + cls + '<br><strong>Arbitres &amp; Table :</strong> ' + refs + '</td>' +
+          '</tr></table>' +
+          '<div class="a4-doc-title"><h3>BILAN OFFICIEL DE LA RENCONTRE — FOOTBALL &amp; FUTSAL SCOLAIRE</h3><p>' + nameA + ' contre ' + nameB + '</p></div>' +
+          '<table class="a4-table"><thead><tr><th>Équipe</th><th>Score Final</th><th>Score Mi-Temps</th><th>Tirs au But (TAB)</th><th>Fautes Cumulées</th><th>Cartons Jaunes</th><th>Cartons Rouges</th></tr></thead><tbody>' +
+          '<tr><td><strong>' + nameA + '</strong></td><td style="font-size:1.2rem;font-weight:900;">' + fbState.scoreA + ' buts</td><td>' + (fbState.halfTimeScore || '—') + '</td><td>' + (tabUsed ? goalsTabA : '—') + '</td><td>' + fbState.totalFoulsA + ' (MT act.: ' + fbState.foulsA + '/5)</td><td>' + fbState.yellowA + '</td><td>' + fbState.redA + '</td></tr>' +
+          '<tr><td><strong>' + nameB + '</strong></td><td style="font-size:1.2rem;font-weight:900;">' + fbState.scoreB + ' buts</td><td>' + (fbState.halfTimeScore || '—') + '</td><td>' + (tabUsed ? goalsTabB : '—') + '</td><td>' + fbState.totalFoulsB + ' (MT act.: ' + fbState.foulsB + '/5)</td><td>' + fbState.yellowB + '</td><td>' + fbState.redB + '</td></tr>' +
+          '</tbody></table>' +
+          '<table style="width:100%;margin-top:1.5rem;border:none;font-size:0.85rem;"><tr>' +
+          '<td style="border:none;width:33%;"><strong>Signature Arbitres &amp; Chronométreur :</strong><br><br>........................................</td>' +
+          '<td style="border:none;width:33%;text-align:center;"><strong>Signature des Capitaines (A &amp; B) :</strong><br><br>........................................</td>' +
+          '<td style="border:none;width:33%;text-align:right;"><strong>Visa du Professeur d\'EPS :</strong><br><br>........................................</td>' +
+          '</tr></table>';
+
+        if (format === 'word') {
+          downloadHtmlAsWord(reportHtml, 'Feuille-Match-Football-Futsal-' + cls.replace(/\s+/g, '-') + '.doc');
+        } else {
+          openPrintWindow(reportHtml, 'Feuille de Match Football/Futsal — ' + nameA + ' vs ' + nameB);
+        }
+      }
+
       /* Initialisation au chargement + lecture paramètre URL ?level= */
       window.addEventListener('DOMContentLoaded', function() {
         try {
@@ -1964,13 +2494,15 @@
               b.classList.toggle('active', b.getAttribute('data-school') === lvl);
             });
           }
-          if (window.location.hash === '#volet-atd') switchFootballVolet('atd');
+          if (window.location.hash === '#volet-calculateur') switchFootballVolet('calculateur');
+          else if (window.location.hash === '#volet-atd') switchFootballVolet('atd');
           else if (window.location.hash === '#volet-grilles') switchFootballVolet('grilles');
           else if (window.location.hash === '#volet-terrain') switchFootballVolet('terrain');
           else if (window.location.hash === '#volet-articles') switchFootballVolet('articles');
         } catch(e) {}
         renderStudioPreview();
         selectFootballGrille('diag', document.querySelector('.practice-tab[data-grille="diag"]'));
+        fbResetMatch();
       });
     </script>
 
@@ -2076,11 +2608,11 @@
           <p class="footer-col-title">Navigation</p>
           <ul>
             <li><a href="/">Accueil ProfEPS.ma</a></li>
-            <li><a href="/orientations-pedagogiques-toutes-matieres.html" class="footer-hub-highlight">Toutes les OP (34 PDF)</a></li>
+            <li><a href="/orientations-pedagogiques-toutes-matieres.html">Toutes les OP (34 PDF)</a></li>
             <li><a href="/hub-aps-sports-eps-maroc.html">Hub des 13 Sports &amp; APS</a></li>
             <li><a href="/cycles-eps-maroc.html">Projets de Cycles EPS</a></li>
             <li><a href="/generateur.html">Générateur de Séances (Word/PDF)</a></li>
-            <li><a href="/concours-crmef-hub.html" class="footer-hub-highlight">Hub Concours CRMEF</a></li>
+            <li><a href="/concours-crmef-hub.html">Hub Concours CRMEF</a></li>
             <li><a href="/hub-outils-sport-performance.html">Hub Calculateurs Sport</a></li>
             <li><a href="/bibliotheque-numerique-eps.html">Grande Bibliothèque EPS</a></li>
             <li><a href="/blog.html">Blog &amp; Articles de terrain</a></li>
@@ -2092,8 +2624,8 @@
           <p class="footer-col-title">Sports &amp; Outils EPS</p>
           <ul>
             <li><a href="/orientations-pedagogiques-eps-2007-2009.html">OP EPS 2009 (Collège) &amp; 2007 (Lycée)</a></li>
-            <li><a href="/calculateur-vma.html" class="footer-hub-highlight">Calculateur VMA &amp; Groupes</a></li>
-            <li><a href="/calculateur-note-eps-maroc.html" class="footer-hub-highlight">Calculateur Notes EPS (/20)</a></li>
+            <li><a href="/calculateur-vma.html">Calculateur VMA &amp; Groupes</a></li>
+            <li><a href="/calculateur-note-eps-maroc.html">Calculateur Notes EPS (/20)</a></li>
             <li><a href="/evaluation-eps.html">Évaluation &amp; Barèmes EPS</a></li>
             <li><a href="/aps-course-duree-demi-fond-eps-maroc.html">Silo Course en Durée (1000m/600m)</a></li>
             <li><a href="/aps-gymnastique-sol-eps-maroc.html">Silo Gymnastique au Sol (A–E)</a></li>
@@ -2108,7 +2640,7 @@
           <ul>
             <li><a href="/qcm-sciences-education-crmef.html">QCM Sciences de l'Éducation (340 Q)</a></li>
             <li><a href="/qcm-didactique-eps-maroc.html">QCM Didactique &amp; Spécialité EPS</a></li>
-            <li><a href="/concours-inspection-orientation-administration-maroc.html" class="footer-hub-highlight">Inspection (CFIE), COPE &amp; Admin.</a></li>
+            <li><a href="/concours-inspection-orientation-administration-maroc.html">Inspection (CFIE), COPE &amp; Admin.</a></li>
             <li><a href="/qcm-150-questions-crmef-eps.html">Banque 150 QCM Concours EPS</a></li>
             <li><a href="/orientations-pedagogiques-primaire-2021.html">Curriculum Primaire 2021 &amp; QCM</a></li>
             <li><a href="/qcm-didactique-maths-maroc.html">QCM Mathématiques, PC &amp; SVT</a></li>
@@ -2252,6 +2784,9 @@
 </script>
 <!-- PROFEPS_STICKY_SYNC_SCRIPT_END -->
 
+  <!-- PROFEPS_FEEDBACK_SCRIPT_START -->
+  <script src="/assets/profeps-feedback.js" defer></script>
+  <!-- PROFEPS_FEEDBACK_SCRIPT_END -->
 </body>
 </html>
 

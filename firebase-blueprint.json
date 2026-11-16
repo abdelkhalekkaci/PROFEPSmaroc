@@ -1,0 +1,177 @@
+{
+  "entities": {
+    "Testimonial": {
+      "title": "Testimonial",
+      "description": "Verified teacher or CRMEF candidate review submitted on the homepage or after first document generation/download.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Author full name or first name",
+          "minLength": 2,
+          "maxLength": 60
+        },
+        "rating": {
+          "type": "integer",
+          "description": "Star rating from 1 to 5 (mandatory, never pre-selected)",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "comment": {
+          "type": "string",
+          "description": "Review text content without URLs or HTML",
+          "minLength": 10,
+          "maxLength": 800
+        },
+        "profession": {
+          "type": "string",
+          "description": "Optional role or status (e.g. Professeur EPS, Candidat CRMEF)",
+          "maxLength": 80
+        },
+        "city": {
+          "type": "string",
+          "description": "Optional city or AREF academy in Morocco",
+          "maxLength": 80
+        },
+        "source": {
+          "type": "string",
+          "description": "Origin of the submission",
+          "enum": ["homepage", "download_popup"]
+        },
+        "status": {
+          "type": "string",
+          "description": "Moderation status",
+          "enum": ["published", "hidden"]
+        },
+        "reportsCount": {
+          "type": "integer",
+          "description": "Number of community abuse reports"
+        },
+        "ipHash": {
+          "type": "string",
+          "description": "Salted SHA-256 hash of client IP for Law 09-08 privacy compliance",
+          "minLength": 64,
+          "maxLength": 64,
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "modKeyHash": {
+          "type": "string",
+          "description": "Optional SHA-256 verification hash for server-side admin moderation",
+          "maxLength": 64
+        },
+        "createdAtIso": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO-8601 creation timestamp string",
+          "minLength": 10,
+          "maxLength": 40
+        }
+      },
+      "required": [
+        "name",
+        "rating",
+        "comment",
+        "profession",
+        "city",
+        "source",
+        "status",
+        "reportsCount",
+        "ipHash",
+        "createdAtIso"
+      ]
+    },
+    "ArticleComment": {
+      "title": "ArticleComment",
+      "description": "Pedagogical comment or question posted at the bottom of one of the 154 blog articles.",
+      "type": "object",
+      "properties": {
+        "articleSlug": {
+          "type": "string",
+          "description": "HTML filename slug of the blog article",
+          "minLength": 5,
+          "maxLength": 160,
+          "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Comment author name",
+          "minLength": 2,
+          "maxLength": 60
+        },
+        "comment": {
+          "type": "string",
+          "description": "Comment text body without URLs or HTML",
+          "minLength": 5,
+          "maxLength": 800
+        },
+        "profession": {
+          "type": "string",
+          "description": "Optional role or status (e.g. Professeur EPS, Candidat CRMEF)",
+          "maxLength": 80
+        },
+        "city": {
+          "type": "string",
+          "description": "Optional city or AREF academy",
+          "maxLength": 80
+        },
+        "status": {
+          "type": "string",
+          "description": "Moderation status",
+          "enum": ["published", "hidden"]
+        },
+        "reportsCount": {
+          "type": "integer",
+          "description": "Number of community abuse reports"
+        },
+        "ipHash": {
+          "type": "string",
+          "description": "Salted SHA-256 hash of client IP for Law 09-08 privacy compliance",
+          "minLength": 64,
+          "maxLength": 64,
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "modKeyHash": {
+          "type": "string",
+          "description": "Optional SHA-256 verification hash for server-side admin moderation",
+          "maxLength": 64
+        },
+        "createdAtIso": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO-8601 creation timestamp string",
+          "minLength": 10,
+          "maxLength": 40
+        }
+      },
+      "required": [
+        "articleSlug",
+        "name",
+        "comment",
+        "profession",
+        "city",
+        "status",
+        "reportsCount",
+        "ipHash",
+        "createdAtIso"
+      ]
+    }
+  },
+  "firestore": {
+    "/testimonials/{testimonialId}": {
+      "schema": {
+        "$ref": "#/entities/Testimonial"
+      },
+      "description": "Public testimonials displayed on the homepage and submitted via homepage or first-download popup"
+    },
+    "/article_comments/{commentId}": {
+      "schema": {
+        "$ref": "#/entities/ArticleComment"
+      },
+      "description": "Pedagogical comments attached to the 154 blog articles"
+    },
+    "/admins/{adminId}": {
+      "schema": "Admin",
+      "description": "Trusted administrator UIDs"
+    }
+  }
+}

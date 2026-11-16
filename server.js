@@ -167,6 +167,7 @@ const genererFiche = require('./api/generer-fiche');
 const genererGrille = require('./api/generer-grille');
 const genererProjet = require('./api/generer-projet');
 const genererProjetComplet = require('./api/generer-projet-complet');
+const feedbackHandler = require('./api/feedback');
 
 // Endpoint de santé
 app.get('/api/health', (req, res) => {
@@ -184,6 +185,13 @@ app.post('/api/generer-fiche', apiRateLimiter, genererFiche);
 app.post('/api/generer-grille', apiRateLimiter, genererGrille);
 app.post('/api/generer-projet', apiRateLimiter, genererProjet);
 app.post('/api/generer-projet-complet', apiRateLimiter, genererProjetComplet);
+
+app.get('/api/feedback', apiRateLimiter, feedbackHandler);
+app.post('/api/feedback', apiRateLimiter, feedbackHandler);
+app.get('/api/testimonials', apiRateLimiter, feedbackHandler);
+app.post('/api/testimonials', apiRateLimiter, feedbackHandler);
+app.get('/api/comments', apiRateLimiter, feedbackHandler);
+app.post('/api/comments', apiRateLimiter, feedbackHandler);
 
 // Gestionnaire 404 propre pour les routes API inconnues
 app.all('/api/*', (req, res) => {
