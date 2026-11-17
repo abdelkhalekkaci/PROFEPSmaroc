@@ -1180,25 +1180,25 @@
                     <div style="display:flex;align-items:center;gap:0.85rem;flex-wrap:wrap;">
                         <div>
                             <div style="font-size:0.7rem;font-weight:800;color:#94A3B8;text-transform:uppercase;">Chrono (<span id="fbHalfLabel">1re Mi-Temps</span>)</div>
-                            <div class="peps-ref-clock-digits" id="fbGameClock">08:00</div>
+                            <div class="peps-ref-clock-digits" id="fbGameClock">20:00</div>
                         </div>
                         <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">
                             <button type="button" class="peps-ref-btn peps-ref-btn-primary" id="fbBtnStartPause" onclick="fbToggleClock()">▶️ Démarrer / Pause</button>
-                            <button type="button" class="peps-ref-btn" onclick="fbNextHalf()">⏭️ 2e Mi-Temps (RAZ Fautes)</button>
+                            <button type="button" class="peps-ref-btn" onclick="fbNextHalf()">⏭️ 2e Mi-Temps (RAZ Fautes &amp; TM)</button>
                             <select id="fbHalfDuration" onchange="fbSetHalfMinutes()" style="padding:0.4rem;border-radius:7px;background:#1E293B;color:#fff;border:1px solid #475569;font-weight:800;font-size:0.78rem;">
-                                <option value="6">Match EPS 6 min</option>
-                                <option value="8" selected>Match EPS 8 min</option>
-                                <option value="10">Match EPS 10 min</option>
-                                <option value="20">Futsal FIFA 20 min</option>
+                                <option value="20" selected>Futsal FIFA Officiel : 2 × 20 min</option>
+                                <option value="15">UNSS / ASS : 2 × 15 min</option>
+                                <option value="10">Cycle EPS : 2 × 10 min</option>
+                                <option value="8">Tournoi EPS : 2 × 8 min</option>
                             </select>
                         </div>
                     </div>
 
-                    <!-- CHRONOMÈTRE RAPIDE 4 SECONDES (TOUCHE AU PIED / CORNER / GARDIEN) -->
+                    <!-- CHRONOMÈTRE RAPIDE 4 SECONDES (TOUCHE AU PIED / CORNER / COUP FRANC / GARDIEN) -->
                     <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;background:#1E293B;padding:0.55rem 0.9rem;border-radius:10px;border:1px solid #475569;">
                         <div>
-                            <div style="font-size:0.68rem;font-weight:800;color:#FBBF24;text-transform:uppercase;">⏱️ Règle Futsal des 4 Secondes</div>
-                            <div style="font-size:0.76rem;color:#CBD5E1;">Touche au pied · Corner · Relance Gardien</div>
+                            <div style="font-size:0.68rem;font-weight:800;color:#FBBF24;text-transform:uppercase;">⏱️ Règle Futsal des 4 Secondes (Lois 12, 15, 16, 17)</div>
+                            <div style="font-size:0.76rem;color:#CBD5E1;">Touche au pied · Corner · Coup franc · Relance Gardien</div>
                         </div>
                         <div class="peps-ref-shotclock-digits" id="fbFourSecDisplay" style="min-width:52px;text-align:center;">4s</div>
                         <button type="button" class="peps-ref-btn peps-ref-btn-amber" onclick="fbStartFourSec()">▶️ Lancer 4s</button>
@@ -1206,10 +1206,10 @@
                 </div>
 
                 <div class="peps-ref-toolbar" style="justify-content:space-between;">
-                    <div id="fbRefCallout" style="font-size:0.86rem;font-weight:700;color:var(--ink);">⚽ Prêt pour le coup d'envoi. Touche au pied et interdiction des tacles glissés en EPS.</div>
+                    <div id="fbRefCallout" style="font-size:0.86rem;font-weight:700;color:var(--ink);">⚽ Prêt pour le coup d'envoi (Loi 10 FIFA/IFAB : chaque but marqué vaut strictement +1 but).</div>
                     <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
-                        <button type="button" class="peps-ref-btn" onclick="fbUndoLast()">↩️ Annuler dernier but</button>
-                        <button type="button" class="peps-ref-btn peps-ref-btn-danger" onclick="fbResetMatch()">🔄 Remettre Match à 0–0</button>
+                        <button type="button" class="peps-ref-btn" onclick="fbUndoLast()">↩️ Annuler dernière action</button>
+                        <button type="button" class="peps-ref-btn peps-ref-btn-danger" onclick="fbResetMatch()">🔄 Nouveau Match (0–0)</button>
                     </div>
                 </div>
 
@@ -1219,32 +1219,38 @@
                         <div class="peps-ref-team-head">
                             <div>
                                 <div class="peps-ref-team-name" id="fbLabelTeamA">Équipe A</div>
-                                <div style="font-size:0.75rem;color:var(--slate);" id="fbCardsSummaryA">🟨 Jaunes : 0 · 🟥 Rouges : 0 · TM : 0/1</div>
+                                <div style="font-size:0.74rem;color:var(--slate);" id="fbCardsSummaryA">🟨 Jaunes : 0 · 🟥 Rouges : 0 · 🎯 Pen/10m : 0/0 · TM : 0/1</div>
                             </div>
-                            <div style="text-align:right;">
-                                <button type="button" class="peps-ref-btn" onclick="fbAddTimeout('A')" style="padding:0.3rem 0.6rem;font-size:0.74rem;">⏱️ Temps Mort (1/MT)</button>
+                            <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:0.25rem;">
+                                <span id="fbActivePlayersA" style="display:inline-block;padding:0.2rem 0.55rem;border-radius:6px;font-size:0.74rem;font-weight:800;background:#10B981;color:#fff;">5 Joueurs sur terrain</span>
+                                <button type="button" class="peps-ref-btn" onclick="fbAddTimeout('A')" style="padding:0.24rem 0.55rem;font-size:0.72rem;">⏱️ Temps Mort (1/MT)</button>
                             </div>
                         </div>
 
                         <div class="peps-ref-score-big" id="fbScoreA">0</div>
 
+                        <!-- BOUTONS DE BUTS OFFICIELS FIFA FUTSAL / IFAB (+1 BUT UNIQUEMENT) -->
                         <div class="peps-ref-btn-row">
-                            <button type="button" class="peps-ref-btn peps-ref-btn-primary" onclick="fbAddGoal('A', 1)">⚽ +1 But Équipe A</button>
-                            <button type="button" class="peps-ref-btn peps-ref-btn-amber" onclick="fbAddGoal('A', 2)" title="But bonifié EPS (après 4 passes collectives ou but marqué en 1 touche)">🌟 +2 Buts (Action Collective)</button>
+                            <button type="button" class="peps-ref-btn peps-ref-btn-primary" onclick="fbAddGoal('A', 'regular')">⚽ +1 But (Action de jeu)</button>
+                            <button type="button" class="peps-ref-btn peps-ref-btn-amber" onclick="fbAddGoal('A', 'penalty')" title="Loi 13 & 14 FIFA Futsal : Penalty (6m) ou Jet Franc Direct à 10m transformé (+1 but)">🎯 +1 But (Penalty 6m / Jet 10m)</button>
+                            <button type="button" class="peps-ref-btn" onclick="fbAddMissedPenalty('A')" title="Penalty 6m ou Jet Franc Direct à 10m arrêté ou manqué">🧤 Pen/10m Manqué</button>
                         </div>
 
+                        <!-- CUMUL DES 5 FAUTES PAR MI-TEMPS & SANCTIONS DISCIPLINAIRES (N° JOUEUR) -->
                         <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;padding-top:0.5rem;border-top:1px dashed var(--stone);flex-wrap:wrap;">
                             <div>
                                 <div style="font-size:0.76rem;font-weight:800;color:var(--ink);">Fautes Cumulées MT (<span id="fbFoulsCountA">0</span> / 5) :</div>
                                 <div class="peps-foul-dots" id="fbFoulDotsA" style="margin-top:0.25rem;"></div>
                             </div>
-                            <div style="display:flex;gap:0.35rem;flex-wrap:wrap;">
-                                <button type="button" class="peps-ref-btn peps-ref-btn-danger" onclick="fbAddFoul('A')">🚨 +1 Faute</button>
-                                <button type="button" class="peps-ref-btn" onclick="fbAddCard('A', 'yellow')">🟨</button>
-                                <button type="button" class="peps-ref-btn" onclick="fbAddCard('A', 'red')">🟥</button>
+                            <div style="display:flex;align-items:center;gap:0.35rem;flex-wrap:wrap;">
+                                <button type="button" class="peps-ref-btn peps-ref-btn-danger" onclick="fbAddFoul('A')" title="Loi 13 FIFA Futsal : Faute directe cumulée (6e faute = Jet franc direct à 10m sans mur)">🚨 +1 Faute d'équipe</button>
+                                <input type="text" id="fbPlayerNumA" placeholder="N°" title="Numéro du joueur sanctionné" style="width:48px;padding:0.28rem 0.35rem;border-radius:6px;border:1px solid var(--stone);background:var(--surface);color:var(--ink);font-weight:900;text-align:center;font-size:0.8rem;">
+                                <button type="button" class="peps-ref-btn" onclick="fbAddCard('A', 'yellow')" title="Loi 12 : Carton Jaune (2e jaune au même N° = Carton Rouge automatique)">🟨</button>
+                                <button type="button" class="peps-ref-btn" onclick="fbAddCard('A', 'red')" title="Loi 3 & 12 FIFA Futsal : Carton Rouge = Expulsion définitive + 2 min à 4 joueurs (ou jusqu'à un but adverse)">🟥</button>
                             </div>
                         </div>
                         <div id="fbFoulAlertA"></div>
+                        <div id="fbRedTimerListA" style="display:grid;gap:0.35rem;margin-top:0.4rem;"></div>
                     </div>
 
                     <!-- ÉQUIPE B -->
@@ -1252,32 +1258,38 @@
                         <div class="peps-ref-team-head">
                             <div>
                                 <div class="peps-ref-team-name" id="fbLabelTeamB">Équipe B</div>
-                                <div style="font-size:0.75rem;color:var(--slate);" id="fbCardsSummaryB">🟨 Jaunes : 0 · 🟥 Rouges : 0 · TM : 0/1</div>
+                                <div style="font-size:0.74rem;color:var(--slate);" id="fbCardsSummaryB">🟨 Jaunes : 0 · 🟥 Rouges : 0 · 🎯 Pen/10m : 0/0 · TM : 0/1</div>
                             </div>
-                            <div style="text-align:right;">
-                                <button type="button" class="peps-ref-btn" onclick="fbAddTimeout('B')" style="padding:0.3rem 0.6rem;font-size:0.74rem;">⏱️ Temps Mort (1/MT)</button>
+                            <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:0.25rem;">
+                                <span id="fbActivePlayersB" style="display:inline-block;padding:0.2rem 0.55rem;border-radius:6px;font-size:0.74rem;font-weight:800;background:#10B981;color:#fff;">5 Joueurs sur terrain</span>
+                                <button type="button" class="peps-ref-btn" onclick="fbAddTimeout('B')" style="padding:0.24rem 0.55rem;font-size:0.72rem;">⏱️ Temps Mort (1/MT)</button>
                             </div>
                         </div>
 
                         <div class="peps-ref-score-big" id="fbScoreB">0</div>
 
+                        <!-- BOUTONS DE BUTS OFFICIELS FIFA FUTSAL / IFAB (+1 BUT UNIQUEMENT) -->
                         <div class="peps-ref-btn-row">
-                            <button type="button" class="peps-ref-btn peps-ref-btn-cyan" onclick="fbAddGoal('B', 1)">⚽ +1 But Équipe B</button>
-                            <button type="button" class="peps-ref-btn peps-ref-btn-amber" onclick="fbAddGoal('B', 2)" title="But bonifié EPS (après 4 passes collectives ou but marqué en 1 touche)">🌟 +2 Buts (Action Collective)</button>
+                            <button type="button" class="peps-ref-btn peps-ref-btn-cyan" onclick="fbAddGoal('B', 'regular')">⚽ +1 But (Action de jeu)</button>
+                            <button type="button" class="peps-ref-btn peps-ref-btn-amber" onclick="fbAddGoal('B', 'penalty')" title="Loi 13 & 14 FIFA Futsal : Penalty (6m) ou Jet Franc Direct à 10m transformé (+1 but)">🎯 +1 But (Penalty 6m / Jet 10m)</button>
+                            <button type="button" class="peps-ref-btn" onclick="fbAddMissedPenalty('B')" title="Penalty 6m ou Jet Franc Direct à 10m arrêté ou manqué">🧤 Pen/10m Manqué</button>
                         </div>
 
+                        <!-- CUMUL DES 5 FAUTES PAR MI-TEMPS & SANCTIONS DISCIPLINAIRES (N° JOUEUR) -->
                         <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;padding-top:0.5rem;border-top:1px dashed var(--stone);flex-wrap:wrap;">
                             <div>
                                 <div style="font-size:0.76rem;font-weight:800;color:var(--ink);">Fautes Cumulées MT (<span id="fbFoulsCountB">0</span> / 5) :</div>
                                 <div class="peps-foul-dots" id="fbFoulDotsB" style="margin-top:0.25rem;"></div>
                             </div>
-                            <div style="display:flex;gap:0.35rem;flex-wrap:wrap;">
-                                <button type="button" class="peps-ref-btn peps-ref-btn-danger" onclick="fbAddFoul('B')">🚨 +1 Faute</button>
-                                <button type="button" class="peps-ref-btn" onclick="fbAddCard('B', 'yellow')">🟨</button>
-                                <button type="button" class="peps-ref-btn" onclick="fbAddCard('B', 'red')">🟥</button>
+                            <div style="display:flex;align-items:center;gap:0.35rem;flex-wrap:wrap;">
+                                <button type="button" class="peps-ref-btn peps-ref-btn-danger" onclick="fbAddFoul('B')" title="Loi 13 FIFA Futsal : Faute directe cumulée (6e faute = Jet franc direct à 10m sans mur)">🚨 +1 Faute d'équipe</button>
+                                <input type="text" id="fbPlayerNumB" placeholder="N°" title="Numéro du joueur sanctionné" style="width:48px;padding:0.28rem 0.35rem;border-radius:6px;border:1px solid var(--stone);background:var(--surface);color:var(--ink);font-weight:900;text-align:center;font-size:0.8rem;">
+                                <button type="button" class="peps-ref-btn" onclick="fbAddCard('B', 'yellow')" title="Loi 12 : Carton Jaune (2e jaune au même N° = Carton Rouge automatique)">🟨</button>
+                                <button type="button" class="peps-ref-btn" onclick="fbAddCard('B', 'red')" title="Loi 3 & 12 FIFA Futsal : Carton Rouge = Expulsion définitive + 2 min à 4 joueurs (ou jusqu'à un but adverse)">🟥</button>
                             </div>
                         </div>
                         <div id="fbFoulAlertB"></div>
+                        <div id="fbRedTimerListB" style="display:grid;gap:0.35rem;margin-top:0.4rem;"></div>
                     </div>
                 </div>
 
@@ -2130,32 +2142,72 @@
       var fbState = {
         scoreA: 0,
         scoreB: 0,
-        bonusGoalsA: 0,
-        bonusGoalsB: 0,
+        penGoalsA: 0, penGoalsB: 0,
+        penAttA: 0, penAttB: 0,
         foulsA: 0,
         foulsB: 0,
         totalFoulsA: 0,
         totalFoulsB: 0,
         yellowA: 0, yellowB: 0,
         redA: 0, redB: 0,
+        redTimersA: [],
+        redTimersB: [],
+        playerCardsA: {},
+        playerCardsB: {},
         toA: 0, toB: 0,
         half: 1,
         halfTimeScore: '',
-        gameSeconds: 480,
+        gameSeconds: 1200,
         running: false,
         fourSecRem: 4,
         tabA: [0, 0, 0, 0, 0], // 0 = non tiré, 1 = but, -1 = manqué
         tabB: [0, 0, 0, 0, 0],
-        lastMsg: '⚽ Prêt pour le coup d\'envoi. Touche au pied et interdiction des tacles glissés en EPS.',
+        lastMsg: '⚽ Prêt pour le coup d\'envoi (Loi 10 FIFA/IFAB : chaque but marqué vaut 1 point).',
         historyStack: []
       };
       var fbTimerInterval = null;
       var fbFourSecInterval = null;
 
+      function fbCloneState() {
+        return JSON.parse(JSON.stringify({
+          scoreA: fbState.scoreA,
+          scoreB: fbState.scoreB,
+          penGoalsA: fbState.penGoalsA,
+          penGoalsB: fbState.penGoalsB,
+          penAttA: fbState.penAttA,
+          penAttB: fbState.penAttB,
+          foulsA: fbState.foulsA,
+          foulsB: fbState.foulsB,
+          totalFoulsA: fbState.totalFoulsA,
+          totalFoulsB: fbState.totalFoulsB,
+          yellowA: fbState.yellowA,
+          yellowB: fbState.yellowB,
+          redA: fbState.redA,
+          redB: fbState.redB,
+          redTimersA: fbState.redTimersA,
+          redTimersB: fbState.redTimersB,
+          playerCardsA: fbState.playerCardsA,
+          playerCardsB: fbState.playerCardsB,
+          toA: fbState.toA,
+          toB: fbState.toB,
+          half: fbState.half,
+          halfTimeScore: fbState.halfTimeScore,
+          lastMsg: fbState.lastMsg
+        }));
+      }
+
       function fbFormatTime(sec) {
         var m = Math.floor(sec / 60);
         var s = sec % 60;
         return (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
+      }
+
+      function fbGetPlayerInputLabel(team, fallbackIdx) {
+        var el = document.getElementById(team === 'A' ? 'fbPlayerNumA' : 'fbPlayerNumB');
+        var raw = el && el.value ? String(el.value).trim() : '';
+        if (el) el.value = '';
+        if (!raw) return 'Joueur ' + team + '#' + fallbackIdx;
+        return /^\d+$/.test(raw) ? ('N°' + raw) : raw;
       }
 
       function fbToggleClock() {
@@ -2164,9 +2216,15 @@
           fbTimerInterval = setInterval(function() {
             if (!fbState.running) return;
             if (fbState.gameSeconds > 0) fbState.gameSeconds -= 1;
+            fbState.redTimersA.forEach(function(rt) {
+              if (rt.rem > 0) rt.rem -= 1;
+            });
+            fbState.redTimersB.forEach(function(rt) {
+              if (rt.rem > 0) rt.rem -= 1;
+            });
             if (fbState.gameSeconds === 0) {
               fbState.running = false;
-              fbState.lastMsg = '🔔 FIN DE LA ' + (fbState.half === 1 ? '1re MI-TEMPS' : 'RENCONTRE') + ' !';
+              fbState.lastMsg = '🔔 FIN DE LA ' + (fbState.half === 1 ? '1re MI-TEMPS' : 'RENCONTRE RÉGLEMENTAIRE') + ' !';
             }
             fbRenderBoard();
           }, 1000);
@@ -2175,13 +2233,14 @@
       }
 
       function fbSetHalfMinutes() {
-        var mins = parseInt((document.getElementById('fbHalfDuration') || {}).value || '8', 10);
+        var mins = parseInt((document.getElementById('fbHalfDuration') || {}).value || '20', 10);
         fbState.running = false;
         fbState.gameSeconds = mins * 60;
         fbRenderBoard();
       }
 
       function fbNextHalf() {
+        fbState.historyStack.push(fbCloneState());
         fbState.running = false;
         fbState.halfTimeScore = fbState.scoreA + ' – ' + fbState.scoreB;
         fbState.half = 2;
@@ -2189,9 +2248,9 @@
         fbState.foulsB = 0;
         fbState.toA = 0;
         fbState.toB = 0;
-        var mins = parseInt((document.getElementById('fbHalfDuration') || {}).value || '8', 10);
+        var mins = parseInt((document.getElementById('fbHalfDuration') || {}).value || '20', 10);
         fbState.gameSeconds = mins * 60;
-        fbState.lastMsg = '⏭️ Début de la 2e Mi-Temps : Les compteurs de fautes cumulées sont remis à 0/5.';
+        fbState.lastMsg = '⏭️ Début de la 2e Mi-Temps (Score MT : ' + fbState.halfTimeScore + ') : Conformément à la Loi 13 FIFA Futsal, les compteurs de fautes cumulées sont remis à 0/5 et chaque équipe dispose d\'un nouveau Temps Mort (1/MT).';
         fbRenderBoard();
       }
 
@@ -2203,7 +2262,7 @@
           el.textContent = '4s';
           el.style.color = '#FBBF24';
         }
-        fbState.lastMsg = '⏱️ Décompte des 4 secondes lancé (Touche au pied / Corner / Relance gardien)...';
+        fbState.lastMsg = '⏱️ Décompte officiel des 4 secondes lancé (Touche au pied / Corner / Coup franc / Relance gardien)...';
         fbRenderBoard();
         fbFourSecInterval = setInterval(function() {
           fbState.fourSecRem -= 1;
@@ -2215,7 +2274,7 @@
               d.textContent = '0s!';
               d.style.color = '#EF4444';
             }
-            fbState.lastMsg = '🚨 VIOLATION DES 4 SECONDES ! Perte de balle : remise en jeu ou coup franc indirect pour l\'adversaire.';
+            fbState.lastMsg = '🚨 VIOLATION DES 4 SECONDES (Lois 12, 15, 16, 17 FIFA Futsal) ! Perte de possession : remise en jeu ou coup franc indirect accordé à l\'adversaire.';
             fbRenderBoard();
           } else if (d) {
             d.textContent = fbState.fourSecRem + 's';
@@ -2223,65 +2282,152 @@
         }, 1000);
       }
 
-      function fbAddGoal(team, val) {
-        fbState.historyStack.push({
-          scoreA: fbState.scoreA, scoreB: fbState.scoreB,
-          bonusGoalsA: fbState.bonusGoalsA, bonusGoalsB: fbState.bonusGoalsB
-        });
+      function fbAddGoal(team, kind) {
+        fbState.historyStack.push(fbCloneState());
         var nameA = (document.getElementById('fbInputTeamA') || {}).value || 'Équipe A';
         var nameB = (document.getElementById('fbInputTeamB') || {}).value || 'Équipe B';
+        var isPen = (kind === 'penalty');
+        var releasedNote = '';
+
         if (team === 'A') {
-          fbState.scoreA += val;
-          if (val > 1) fbState.bonusGoalsA += 1;
-          fbState.lastMsg = '⚽ BUT pour ' + nameA + ' (+' + val + ') ! Coup d\'envoi au centre pour ' + nameB + '.';
+          fbState.scoreA += 1;
+          if (isPen) {
+            fbState.penGoalsA += 1;
+            fbState.penAttA += 1;
+          }
+          // Loi 3 FIFA Futsal : Si l'équipe B est en infériorité numérique suite à un carton rouge et encaisse un but, elle complète son effectif
+          var activeRedB = fbState.redTimersB.findIndex(function(rt) { return rt.rem > 0; });
+          if (activeRedB !== -1) {
+            fbState.redTimersB[activeRedB].rem = 0;
+            releasedNote = ' ⚡ Loi 3 FIFA Futsal : ' + nameB + ' ayant encaissé un but en infériorité numérique, elle est autorisée à faire entrer immédiatement un 5e joueur remplaçant !';
+          }
+          hbOrFbMsgA();
         } else {
-          fbState.scoreB += val;
-          if (val > 1) fbState.bonusGoalsB += 1;
-          fbState.lastMsg = '⚽ BUT pour ' + nameB + ' (+' + val + ') ! Coup d\'envoi au centre pour ' + nameA + '.';
+          fbState.scoreB += 1;
+          if (isPen) {
+            fbState.penGoalsB += 1;
+            fbState.penAttB += 1;
+          }
+          var activeRedA = fbState.redTimersA.findIndex(function(rt) { return rt.rem > 0; });
+          if (activeRedA !== -1) {
+            fbState.redTimersA[activeRedA].rem = 0;
+            releasedNote = ' ⚡ Loi 3 FIFA Futsal : ' + nameA + ' ayant encaissé un but en infériorité numérique, elle est autorisée à faire entrer immédiatement un 5e joueur remplaçant !';
+          }
+          hbOrFbMsgB();
         }
+
+        function hbOrFbMsgA() {
+          fbState.lastMsg = (isPen
+            ? '🎯 BUT SUR PENALTY (6m) / JET FRANC 10M pour ' + nameA + ' (+1 but, Loi 10 & 14 FIFA) !'
+            : '⚽ BUT RÉGLEMENTAIRE pour ' + nameA + ' (+1 but, Loi 10 FIFA/IFAB) ! Coup d\'envoi au centre pour ' + nameB + '.') + releasedNote;
+        }
+        function hbOrFbMsgB() {
+          fbState.lastMsg = (isPen
+            ? '🎯 BUT SUR PENALTY (6m) / JET FRANC 10M pour ' + nameB + ' (+1 but, Loi 10 & 14 FIFA) !'
+            : '⚽ BUT RÉGLEMENTAIRE pour ' + nameB + ' (+1 but, Loi 10 FIFA/IFAB) ! Coup d\'envoi au centre pour ' + nameA + '.') + releasedNote;
+        }
+
+        fbRenderBoard();
+      }
+
+      function fbAddMissedPenalty(team) {
+        fbState.historyStack.push(fbCloneState());
+        var nameA = (document.getElementById('fbInputTeamA') || {}).value || 'Équipe A';
+        var nameB = (document.getElementById('fbInputTeamB') || {}).value || 'Équipe B';
+        var tName = team === 'A' ? nameA : nameB;
+        if (team === 'A') fbState.penAttA += 1;
+        else fbState.penAttB += 1;
+        fbState.lastMsg = '🧤 Penalty (6m) ou Jet Franc Direct à 10m arrêté/manqué pour ' + tName + ' (score inchangé).';
         fbRenderBoard();
       }
 
       function fbAddFoul(team) {
+        fbState.historyStack.push(fbCloneState());
         var nameA = (document.getElementById('fbInputTeamA') || {}).value || 'Équipe A';
         var nameB = (document.getElementById('fbInputTeamB') || {}).value || 'Équipe B';
         if (team === 'A') {
           fbState.foulsA += 1;
           fbState.totalFoulsA += 1;
           fbState.lastMsg = fbState.foulsA >= 6
-            ? '🚨 ' + fbState.foulsA + 'e FAUTE CUMULÉE contre ' + nameA + ' : JET FRANC DIRECT À 10 MÈTRES SANS MUR pour ' + nameB + ' !'
+            ? '🚨 ' + fbState.foulsA + 'e FAUTE CUMULÉE contre ' + nameA + ' (Loi 13 FIFA Futsal) : JET FRANC DIRECT À 10 MÈTRES SANS MUR pour ' + nameB + ' !'
             : (fbState.foulsA === 5
-              ? '⚠️ 5e FAUTE CUMULÉE contre ' + nameA + ' ! Attention : toute nouvelle faute dans cette mi-temps donnera un Jet Franc Direct aux 10m sans mur.'
-              : '⚠️ Faute cumulée sifflée contre ' + nameA + ' (' + fbState.foulsA + '/5 dans cette mi-temps).');
+              ? '⚠️ 5e FAUTE CUMULÉE contre ' + nameA + ' ! Attention : toute nouvelle faute directe dans cette mi-temps donnera un Jet Franc Direct aux 10m sans mur.'
+              : '⚠️ Faute directe cumulée sifflée contre ' + nameA + ' (' + fbState.foulsA + '/5 dans cette mi-temps).');
         } else {
           fbState.foulsB += 1;
           fbState.totalFoulsB += 1;
           fbState.lastMsg = fbState.foulsB >= 6
-            ? '🚨 ' + fbState.foulsB + 'e FAUTE CUMULÉE contre ' + nameB + ' : JET FRANC DIRECT À 10 MÈTRES SANS MUR pour ' + nameA + ' !'
+            ? '🚨 ' + fbState.foulsB + 'e FAUTE CUMULÉE contre ' + nameB + ' (Loi 13 FIFA Futsal) : JET FRANC DIRECT À 10 MÈTRES SANS MUR pour ' + nameA + ' !'
             : (fbState.foulsB === 5
-              ? '⚠️ 5e FAUTE CUMULÉE contre ' + nameB + ' ! Attention : toute nouvelle faute dans cette mi-temps donnera un Jet Franc Direct aux 10m sans mur.'
-              : '⚠️ Faute cumulée sifflée contre ' + nameB + ' (' + fbState.foulsB + '/5 dans cette mi-temps).');
+              ? '⚠️ 5e FAUTE CUMULÉE contre ' + nameB + ' ! Attention : toute nouvelle faute directe dans cette mi-temps donnera un Jet Franc Direct aux 10m sans mur.'
+              : '⚠️ Faute directe cumulée sifflée contre ' + nameB + ' (' + fbState.foulsB + '/5 dans cette mi-temps).');
         }
         fbRenderBoard();
       }
 
       function fbAddCard(team, kind) {
-        if (team === 'A') {
-          if (kind === 'yellow') fbState.yellowA += 1;
-          else fbState.redA += 1;
+        fbState.historyStack.push(fbCloneState());
+        var nameA = (document.getElementById('fbInputTeamA') || {}).value || 'Équipe A';
+        var nameB = (document.getElementById('fbInputTeamB') || {}).value || 'Équipe B';
+        var tName = team === 'A' ? nameA : nameB;
+        var cardsMap = team === 'A' ? fbState.playerCardsA : fbState.playerCardsB;
+        var nextIdx = (team === 'A' ? fbState.yellowA + fbState.redA : fbState.yellowB + fbState.redB) + 1;
+        var pLabel = fbGetPlayerInputLabel(team, nextIdx);
+        if (!cardsMap[pLabel]) cardsMap[pLabel] = { yellow: 0, red: 0 };
+
+        if (kind === 'yellow') {
+          cardsMap[pLabel].yellow += 1;
+          if (team === 'A') fbState.yellowA += 1;
+          else fbState.yellowB += 1;
+
+          if (cardsMap[pLabel].yellow >= 2 && !cardsMap[pLabel].red) {
+            // Loi 12 FIFA/IFAB : 2e Carton Jaune pour le même joueur = Carton Rouge automatique
+            cardsMap[pLabel].red = 1;
+            if (team === 'A') {
+              fbState.redA += 1;
+              fbState.redTimersA.push({ label: pLabel + ' (2e 🟨 ➔ 🟥)', rem: 120 });
+            } else {
+              fbState.redB += 1;
+              fbState.redTimersB.push({ label: pLabel + ' (2e 🟨 ➔ 🟥)', rem: 120 });
+            }
+            fbState.lastMsg = '🟨🟥 2e CARTON JAUNE = CARTON ROUGE (Loi 12 FIFA/IFAB) contre ' + pLabel + ' (' + tName + ') ! Expulsion définitive du joueur + infériorité numérique de 2 minutes pour ' + tName + ' (sauf si but encaissé avant).';
+          } else {
+            fbState.lastMsg = '🟨 Carton Jaune (Avertissement officiel — Loi 12) adressé à ' + pLabel + ' (' + tName + ').';
+          }
         } else {
-          if (kind === 'yellow') fbState.yellowB += 1;
-          else fbState.redB += 1;
+          cardsMap[pLabel].red = 1;
+          if (team === 'A') {
+            fbState.redA += 1;
+            fbState.redTimersA.push({ label: pLabel + ' (🟥 Direct)', rem: 120 });
+          } else {
+            fbState.redB += 1;
+            fbState.redTimersB.push({ label: pLabel + ' (🟥 Direct)', rem: 120 });
+          }
+          fbState.lastMsg = '🟥 CARTON ROUGE (Expulsion — Loi 3 & 12 FIFA Futsal) contre ' + pLabel + ' (' + tName + ') ! Le joueur est définitivement exclu et ' + tName + ' joue à 4 joueurs pendant 2 minutes (ou jusqu\'à ce que l\'adversaire marque un but).';
         }
-        fbState.lastMsg = (kind === 'yellow' ? '🟨 Carton Jaune (Avertissement)' : '🟥 Carton Rouge (Exclusion — En Futsal, remplacement possible après 2 min ou but encaissé)') + ' contre l\'Équipe ' + team + '.';
+        fbRenderBoard();
+      }
+
+      function fbDismissRedTimer(team, idx) {
+        if (team === 'A') fbState.redTimersA.splice(idx, 1);
+        else fbState.redTimersB.splice(idx, 1);
         fbRenderBoard();
       }
 
       function fbAddTimeout(team) {
+        var nameA = (document.getElementById('fbInputTeamA') || {}).value || 'Équipe A';
+        var nameB = (document.getElementById('fbInputTeamB') || {}).value || 'Équipe B';
+        var tName = team === 'A' ? nameA : nameB;
+        if ((team === 'A' && fbState.toA >= 1) || (team === 'B' && fbState.toB >= 1)) {
+          fbState.lastMsg = '⚠️ Loi 7 FIFA Futsal : ' + tName + ' a déjà utilisé son unique Temps Mort (1 minute) autorisé dans cette mi-temps.';
+          fbRenderBoard();
+          return;
+        }
+        fbState.historyStack.push(fbCloneState());
         fbState.running = false;
-        if (team === 'A' && fbState.toA < 1) fbState.toA = 1;
-        if (team === 'B' && fbState.toB < 1) fbState.toB = 1;
-        fbState.lastMsg = '⏱️ Temps Mort Futsal (1 minute — 1 par mi-temps) accordé à l\'Équipe ' + team + '.';
+        if (team === 'A') fbState.toA = 1;
+        if (team === 'B') fbState.toB = 1;
+        fbState.lastMsg = '⏱️ Temps Mort Réglementaire Futsal (1 minute — Loi 7 FIFA : 1 par mi-temps) accordé à ' + tName + '. Chronomètre arrêté.';
         fbRenderBoard();
       }
 
@@ -2309,29 +2455,29 @@
       function fbUndoLast() {
         if (!fbState.historyStack.length) return;
         var prev = fbState.historyStack.pop();
-        fbState.scoreA = prev.scoreA;
-        fbState.scoreB = prev.scoreB;
-        fbState.bonusGoalsA = prev.bonusGoalsA;
-        fbState.bonusGoalsB = prev.bonusGoalsB;
+        Object.keys(prev).forEach(function(k) { fbState[k] = prev[k]; });
         fbRenderBoard();
       }
 
       function fbResetMatch() {
-        var mins = parseInt((document.getElementById('fbHalfDuration') || {}).value || '8', 10);
+        var mins = parseInt((document.getElementById('fbHalfDuration') || {}).value || '20', 10);
         fbState.running = false;
         fbState.scoreA = 0; fbState.scoreB = 0;
-        fbState.bonusGoalsA = 0; fbState.bonusGoalsB = 0;
+        fbState.penGoalsA = 0; fbState.penGoalsB = 0;
+        fbState.penAttA = 0; fbState.penAttB = 0;
         fbState.foulsA = 0; fbState.foulsB = 0;
         fbState.totalFoulsA = 0; fbState.totalFoulsB = 0;
         fbState.yellowA = 0; fbState.yellowB = 0;
         fbState.redA = 0; fbState.redB = 0;
+        fbState.redTimersA = []; fbState.redTimersB = [];
+        fbState.playerCardsA = {}; fbState.playerCardsB = {};
         fbState.toA = 0; fbState.toB = 0;
         fbState.half = 1; fbState.halfTimeScore = '';
         fbState.gameSeconds = mins * 60;
         fbState.tabA = [0, 0, 0, 0, 0];
         fbState.tabB = [0, 0, 0, 0, 0];
         fbState.historyStack = [];
-        fbState.lastMsg = '⚽ Match réinitialisé (0–0). Prêt pour le coup d\'envoi.';
+        fbState.lastMsg = '⚽ Match réinitialisé (0–0). Prêt pour le coup d\'envoi (Loi 10 FIFA/IFAB : chaque but vaut 1 point).';
         fbRenderBoard();
       }
 
@@ -2343,6 +2489,17 @@
           html += '<span class="' + cls + '"></span>';
         }
         return html;
+      }
+
+      function fbRenderRedTimers(list, team) {
+        if (!list || !list.length) return '';
+        return list.map(function(rt, idx) {
+          var done = rt.rem <= 0;
+          return '<div style="display:flex;align-items:center;justify-content:space-between;padding:0.4rem 0.65rem;border-radius:8px;background:' + (done ? 'rgba(16,185,129,0.18)' : 'rgba(220,38,38,0.15)') + ';border:1.5px solid ' + (done ? '#10B981' : '#EF4444') + ';font-size:0.78rem;font-weight:800;">' +
+            '<span>' + (done ? '✅ ' + rt.label + ' — Infériorité 2\' terminée : un 5e joueur remplaçant peut entrer (Loi 3 Futsal) !' : '⏱️ Infériorité 2\' suite à ' + rt.label + ' : ' + fbFormatTime(rt.rem)) + '</span>' +
+            '<button type="button" onclick="fbDismissRedTimer(\'' + team + '\',' + idx + ')" style="padding:0.18rem 0.48rem;border-radius:6px;border:none;background:#0F172A;color:#fff;font-size:0.7rem;font-weight:800;cursor:pointer;">Retirer</button>' +
+          '</div>';
+        }).join('');
       }
 
       function fbBuildTabSlots(arr, team) {
@@ -2371,8 +2528,28 @@
 
         var cA = document.getElementById('fbCardsSummaryA');
         var cB = document.getElementById('fbCardsSummaryB');
-        if (cA) cA.textContent = '🟨 Jaunes : ' + fbState.yellowA + ' · 🟥 Rouges : ' + fbState.redA + ' · TM : ' + fbState.toA + '/1';
-        if (cB) cB.textContent = '🟨 Jaunes : ' + fbState.yellowB + ' · 🟥 Rouges : ' + fbState.redB + ' · TM : ' + fbState.toB + '/1';
+        if (cA) cA.textContent = '🟨 Jaunes : ' + fbState.yellowA + ' · 🟥 Rouges : ' + fbState.redA + ' · 🎯 Pen/10m : ' + fbState.penGoalsA + '/' + fbState.penAttA + ' · TM : ' + fbState.toA + '/1';
+        if (cB) cB.textContent = '🟨 Jaunes : ' + fbState.yellowB + ' · 🟥 Rouges : ' + fbState.redB + ' · 🎯 Pen/10m : ' + fbState.penGoalsB + '/' + fbState.penAttB + ' · TM : ' + fbState.toB + '/1';
+
+        var activeRedCountA = fbState.redTimersA.filter(function(r) { return r.rem > 0; }).length;
+        var activeRedCountB = fbState.redTimersB.filter(function(r) { return r.rem > 0; }).length;
+        var apA = document.getElementById('fbActivePlayersA');
+        var apB = document.getElementById('fbActivePlayersB');
+        if (apA) {
+          var pA = Math.max(3, 5 - activeRedCountA);
+          apA.textContent = pA + ' Joueurs sur terrain' + (activeRedCountA ? ' (-' + activeRedCountA + ' expulsé 2\')' : '');
+          apA.style.background = activeRedCountA > 0 ? '#DC2626' : '#10B981';
+        }
+        if (apB) {
+          var pB = Math.max(3, 5 - activeRedCountB);
+          apB.textContent = pB + ' Joueurs sur terrain' + (activeRedCountB ? ' (-' + activeRedCountB + ' expulsé 2\')' : '');
+          apB.style.background = activeRedCountB > 0 ? '#DC2626' : '#10B981';
+        }
+
+        var rtListA = document.getElementById('fbRedTimerListA');
+        var rtListB = document.getElementById('fbRedTimerListB');
+        if (rtListA) rtListA.innerHTML = fbRenderRedTimers(fbState.redTimersA, 'A');
+        if (rtListB) rtListB.innerHTML = fbRenderRedTimers(fbState.redTimersB, 'B');
 
         var fCA = document.getElementById('fbFoulsCountA');
         var fCB = document.getElementById('fbFoulsCountB');
@@ -2388,13 +2565,13 @@
         var alB = document.getElementById('fbFoulAlertB');
         if (alA) {
           alA.innerHTML = fbState.foulsA >= 6
-            ? '<div class="peps-ref-alert-danger">🚨 6e+ FAUTE CUMULÉE : Jet Franc Direct à 10 mètres SANS MUR accordé à ' + nameB + ' !</div>'
-            : (fbState.foulsA === 5 ? '<div class="peps-ref-alert-warn">⚠️ 5 fautes atteintes : Toute nouvelle faute de ' + nameA + ' = Jet Franc Direct à 10m sans mur !</div>' : '');
+            ? '<div class="peps-ref-alert-danger">🚨 ' + fbState.foulsA + 'e FAUTE CUMULÉE (Loi 13 FIFA) : Jet Franc Direct à 10 mètres SANS MUR accordé à ' + nameB + ' !</div>'
+            : (fbState.foulsA === 5 ? '<div class="peps-ref-alert-warn">⚠️ 5 fautes atteintes : Toute nouvelle faute directe de ' + nameA + ' dans cette mi-temps = Jet Franc Direct à 10m sans mur !</div>' : '');
         }
         if (alB) {
           alB.innerHTML = fbState.foulsB >= 6
-            ? '<div class="peps-ref-alert-danger">🚨 6e+ FAUTE CUMULÉE : Jet Franc Direct à 10 mètres SANS MUR accordé à ' + nameA + ' !</div>'
-            : (fbState.foulsB === 5 ? '<div class="peps-ref-alert-warn">⚠️ 5 fautes atteintes : Toute nouvelle faute de ' + nameB + ' = Jet Franc Direct à 10m sans mur !</div>' : '');
+            ? '<div class="peps-ref-alert-danger">🚨 ' + fbState.foulsB + 'e FAUTE CUMULÉE (Loi 13 FIFA) : Jet Franc Direct à 10 mètres SANS MUR accordé à ' + nameA + ' !</div>'
+            : (fbState.foulsB === 5 ? '<div class="peps-ref-alert-warn">⚠️ 5 fautes atteintes : Toute nouvelle faute directe de ' + nameB + ' dans cette mi-temps = Jet Franc Direct à 10m sans mur !</div>' : '');
         }
 
         var gClk = document.getElementById('fbGameClock');
@@ -2465,10 +2642,10 @@
           '<td style="width:28%;text-align:center;"><strong>FEUILLE DE MATCH OFFICIELLE FIFA / FUTSAL</strong><br>APS : <strong>FOOTBALL &amp; FUTSAL (5×5)</strong><br>Date : ' + dateStr + '</td>' +
           '<td style="width:36%;text-align:right;"><strong>Classe / Niveau :</strong> ' + cls + '<br><strong>Arbitres &amp; Table :</strong> ' + refs + '</td>' +
           '</tr></table>' +
-          '<div class="a4-doc-title"><h3>BILAN OFFICIEL DE LA RENCONTRE — FOOTBALL &amp; FUTSAL SCOLAIRE</h3><p>' + nameA + ' contre ' + nameB + '</p></div>' +
-          '<table class="a4-table"><thead><tr><th>Équipe</th><th>Score Final</th><th>Score Mi-Temps</th><th>Tirs au But (TAB)</th><th>Fautes Cumulées</th><th>Cartons Jaunes</th><th>Cartons Rouges</th></tr></thead><tbody>' +
-          '<tr><td><strong>' + nameA + '</strong></td><td style="font-size:1.2rem;font-weight:900;">' + fbState.scoreA + ' buts</td><td>' + (fbState.halfTimeScore || '—') + '</td><td>' + (tabUsed ? goalsTabA : '—') + '</td><td>' + fbState.totalFoulsA + ' (MT act.: ' + fbState.foulsA + '/5)</td><td>' + fbState.yellowA + '</td><td>' + fbState.redA + '</td></tr>' +
-          '<tr><td><strong>' + nameB + '</strong></td><td style="font-size:1.2rem;font-weight:900;">' + fbState.scoreB + ' buts</td><td>' + (fbState.halfTimeScore || '—') + '</td><td>' + (tabUsed ? goalsTabB : '—') + '</td><td>' + fbState.totalFoulsB + ' (MT act.: ' + fbState.foulsB + '/5)</td><td>' + fbState.yellowB + '</td><td>' + fbState.redB + '</td></tr>' +
+          '<div class="a4-doc-title"><h3>BILAN OFFICIEL DE LA RENCONTRE — FOOTBALL &amp; FUTSAL (LOIS DU JEU FIFA / IFAB)</h3><p>' + nameA + ' contre ' + nameB + '</p></div>' +
+          '<table class="a4-table"><thead><tr><th>Équipe</th><th>Score Final</th><th>Score Mi-Temps</th><th>Penalties 6m / Jets 10m</th><th>Tirs au But (TAB)</th><th>Fautes Cumulées</th><th>Cartons Jaunes (🟨)</th><th>Cartons Rouges (🟥)</th></tr></thead><tbody>' +
+          '<tr><td><strong>' + nameA + '</strong></td><td style="font-size:1.2rem;font-weight:900;">' + fbState.scoreA + ' buts</td><td>' + (fbState.halfTimeScore || '—') + '</td><td>' + fbState.penGoalsA + ' / ' + fbState.penAttA + '</td><td>' + (tabUsed ? goalsTabA : '—') + '</td><td>' + fbState.totalFoulsA + ' (MT act.: ' + fbState.foulsA + '/5)</td><td>' + fbState.yellowA + '</td><td>' + fbState.redA + '</td></tr>' +
+          '<tr><td><strong>' + nameB + '</strong></td><td style="font-size:1.2rem;font-weight:900;">' + fbState.scoreB + ' buts</td><td>' + (fbState.halfTimeScore || '—') + '</td><td>' + fbState.penGoalsB + ' / ' + fbState.penAttB + '</td><td>' + (tabUsed ? goalsTabB : '—') + '</td><td>' + fbState.totalFoulsB + ' (MT act.: ' + fbState.foulsB + '/5)</td><td>' + fbState.yellowB + '</td><td>' + fbState.redB + '</td></tr>' +
           '</tbody></table>' +
           '<table style="width:100%;margin-top:1.5rem;border:none;font-size:0.85rem;"><tr>' +
           '<td style="border:none;width:33%;"><strong>Signature Arbitres &amp; Chronométreur :</strong><br><br>........................................</td>' +
