@@ -230,20 +230,6 @@
     if (!existingSection && !targetAnchor) return;
 
     var section = existingSection || document.createElement('section');
-    var preservedCardsHtml = '';
-    var preservedAvgHtml = '';
-    var preservedAvgDisplay = 'none';
-    if (existingSection) {
-      var prevList = existingSection.querySelector('#pepsHomeTestimonialsList');
-      if (prevList && prevList.querySelector('.peps-fb-card')) {
-        preservedCardsHtml = prevList.innerHTML;
-      }
-      var prevAvg = existingSection.querySelector('#pepsHomeAvgWrap');
-      if (prevAvg && prevAvg.innerHTML.trim()) {
-        preservedAvgHtml = prevAvg.innerHTML;
-        preservedAvgDisplay = prevAvg.style.display || 'flex';
-      }
-    }
     section.className = 'atlas-section peps-feedback-section';
     section.id = 'peps-home-testimonials';
     section.setAttribute('data-peps-fb-mounted', '1');
@@ -253,17 +239,20 @@
           '<div>' +
             '<span class="atlas-hand-note">Retours d\'expérience de la communauté EPS</span>' +
             '<h2 class="peps-fb-title">Témoignages des enseignants &amp; candidats CRMEF</h2>' +
-            '<div id="pepsHomeAvgWrap" class="peps-fb-avg-wrap" style="display:' + preservedAvgDisplay + ';">' + preservedAvgHtml + '</div>' +
+            '<div id="pepsHomeAvgWrap" class="peps-fb-avg-wrap" style="display:none;"></div>' +
           '</div>' +
           '<div class="peps-fb-header-actions">' +
-            '<button type="button" id="pepsBtnToggleReviewForm" class="btn-atlas-primary peps-nowrap-btn">' +
+            '<button type="button" id="pepsBtnToggleReviewForm" class="btn-atlas-primary peps-nowrap-btn" style="display:none;">' +
               'Rédiger un avis' +
             '</button>' +
           '</div>' +
         '</div>' +
 
-        '<!-- Collapsible Review Form on Homepage -->' +
-        '<div id="pepsHomeReviewFormWrap" class="peps-fb-form-card" style="display:none;">' +
+        '<!-- Received Testimonials List (hidden when 0 reviews) -->' +
+        '<div id="pepsHomeTestimonialsList" class="peps-fb-cards-grid" style="display:none;margin-bottom:1.5rem;"></div>' +
+
+        '<!-- Review Form on Homepage (shown directly when 0 reviews exist, or toggled via Rédiger un avis) -->' +
+        '<div id="pepsHomeReviewFormWrap" class="peps-fb-form-card" style="display:block;">' +
           '<form id="pepsHomeReviewForm" novalidate>' +
             '<div class="peps-fb-form-head">' +
               '<h3 class="peps-fb-form-subtitle">Partager votre avis sur ProfEPS.ma</h3>' +
@@ -305,41 +294,19 @@
             '</div>' +
             '<div id="pepsHomeFormStatus" class="peps-fb-status" role="status" aria-live="polite"></div>' +
             '<div class="peps-fb-form-actions">' +
-              '<button type="button" id="pepsHomeCancelBtn" class="btn-atlas-secondary peps-nowrap-btn">Annuler</button>' +
+              '<button type="button" id="pepsHomeCancelBtn" class="btn-atlas-secondary peps-nowrap-btn" style="display:none;">Annuler</button>' +
               '<button type="submit" id="pepsHomeSubmitBtn" class="btn-atlas-primary peps-nowrap-btn">Publier mon avis</button>' +
             '</div>' +
           '</form>' +
-        '</div>' +
-
-        '<!-- Testimonials List or Empty State -->' +
-        '<div id="pepsHomeTestimonialsList" class="peps-fb-cards-grid">' +
-          (preservedCardsHtml ||
-            '<div class="peps-fb-empty-card">' +
-              '<p class="peps-fb-empty-title">Soyez le premier à donner votre avis sur ProfEPS.ma</p>' +
-              '<p class="peps-fb-empty-sub">Vous utilisez nos générateurs de cycles, fiches de séance A4 ou QCM CRMEF ? Partagez votre retour d\'expérience avec vos collègues d\'EPS au Maroc.</p>' +
-              '<button type="button" class="btn-atlas-secondary peps-nowrap-btn" id="pepsEmptyWriteBtn">Partager mon avis</button>' +
-            '</div>') +
-        '</div>' +
-
-        '<!-- Discreet Admin Moderation Footer -->' +
-        '<div class="peps-fb-mod-bar">' +
-          '<button type="button" id="pepsHomeAdminToggle" class="peps-mod-link">Modération Admin</button>' +
         '</div>' +
       '</div>';
 
     if (!existingSection && targetAnchor && targetAnchor.parentNode) {
       targetAnchor.parentNode.insertBefore(section, targetAnchor);
     }
-    var initialEmptyBtn = document.getElementById('pepsEmptyWriteBtn');
-    if (initialEmptyBtn) {
-      initialEmptyBtn.addEventListener('click', function () {
-        var tBtn = document.getElementById('pepsBtnToggleReviewForm');
-        if (tBtn) tBtn.click();
-      });
-    }
 
     var selectedRating = 0;
-    var formOpenedAt = 0;
+    var formOpenedAt = Date.now();
     var formWrap = document.getElementById('pepsHomeReviewFormWrap');
     var toggleBtn = document.getElementById('pepsBtnToggleReviewForm');
     var cancelBtn = document.getElementById('pepsHomeCancelBtn');
@@ -355,8 +322,11 @@
     }
 
     function closeHomeForm() {
-      formWrap.style.display = 'none';
-      toggleBtn.textContent = 'Rédiger un avis';
+      var listEl = document.getElementById('pepsHomeTestimonialsList');
+      if (listEl && listEl.querySelector('.peps-fb-card')) {
+        formWrap.style.display = 'none';
+        toggleBtn.textContent = 'Rédiger un avis';
+      }
     }
 
     toggleBtn.addEventListener('click', function () {
@@ -436,6 +406,7 @@
             }
             try { localStorage.setItem(FIRST_DOC_STORAGE_KEY, '1'); } catch (_e) {}
             formEl.reset();
+            if (charCount) charCount.textContent = '0 / 800';
             selectedRating = 0;
             resetStarPicker('pepsHomeStarPicker', 'pepsHomeStarHint');
             setStatusMessage(statusEl, 'success', 'Merci ! Votre avis a été publié avec succès.');
@@ -453,16 +424,15 @@
       }, waitBeforeSend);
     });
 
-    document.getElementById('pepsHomeAdminToggle').addEventListener('click', function () {
-      handleAdminToggle(loadHomepageTestimonials);
-    });
-
     loadHomepageTestimonials();
   }
 
   function loadHomepageTestimonials() {
     var listEl = document.getElementById('pepsHomeTestimonialsList');
     var avgWrap = document.getElementById('pepsHomeAvgWrap');
+    var formWrap = document.getElementById('pepsHomeReviewFormWrap');
+    var toggleBtn = document.getElementById('pepsBtnToggleReviewForm');
+    var cancelBtn = document.getElementById('pepsHomeCancelBtn');
     if (!listEl) return;
 
     fetch('/api/feedback?type=testimonials')
@@ -470,27 +440,15 @@
       .then(function (data) {
         var items = (data && Array.isArray(data.items)) ? data.items : [];
         if (items.length === 0) {
-          if (listEl.querySelector('.peps-fb-card')) {
-            wireReportAndDeleteButtons(listEl, loadHomepageTestimonials);
-            return;
-          }
           if (avgWrap) {
             avgWrap.style.display = 'none';
             avgWrap.innerHTML = '';
           }
-          listEl.innerHTML =
-            '<div class="peps-fb-empty-card">' +
-              '<p class="peps-fb-empty-title">Soyez le premier à donner votre avis sur ProfEPS.ma</p>' +
-              '<p class="peps-fb-empty-sub">Vous utilisez nos générateurs de cycles, fiches de séance A4 ou QCM CRMEF ? Partagez votre retour d\'expérience avec vos collègues d\'EPS au Maroc.</p>' +
-              '<button type="button" class="btn-atlas-secondary peps-nowrap-btn" id="pepsEmptyWriteBtn">Partager mon avis</button>' +
-            '</div>';
-          var emptyBtn = document.getElementById('pepsEmptyWriteBtn');
-          if (emptyBtn) {
-            emptyBtn.addEventListener('click', function () {
-              var toggleBtn = document.getElementById('pepsBtnToggleReviewForm');
-              if (toggleBtn) toggleBtn.click();
-            });
-          }
+          listEl.style.display = 'none';
+          listEl.innerHTML = '';
+          if (formWrap) formWrap.style.display = 'block';
+          if (toggleBtn) toggleBtn.style.display = 'none';
+          if (cancelBtn) cancelBtn.style.display = 'none';
           return;
         }
 
@@ -512,7 +470,6 @@
           }
         }
 
-        var adminPw = getAdminPassword();
         var html = '';
         for (var j = 0; j < items.length; j++) {
           var item = items[j];
@@ -536,22 +493,24 @@
               '<p class="peps-fb-body">' + escapeHtml(item.comment) + '</p>' +
               '<div class="peps-fb-card-foot">' +
                 '<button type="button" class="peps-report-btn" data-report-type="testimonial" data-report-id="' + escapeHtml(item.id) + '">Signaler</button>' +
-                (adminPw
-                  ? '<button type="button" class="peps-admin-del-btn" data-del-type="testimonial" data-del-id="' + escapeHtml(item.id) + '">Supprimer (Admin)</button>'
-                  : '') +
               '</div>' +
             '</article>';
         }
+        listEl.style.display = 'grid';
         listEl.innerHTML = html;
+        if (toggleBtn) {
+          toggleBtn.style.display = 'inline-flex';
+          toggleBtn.textContent = (formWrap && formWrap.style.display === 'block') ? 'Fermer le formulaire' : 'Rédiger un avis';
+        }
+        if (cancelBtn) cancelBtn.style.display = 'inline-flex';
         wireReportAndDeleteButtons(listEl, loadHomepageTestimonials);
       })
       .catch(function () {
-        if (!listEl.querySelector('.peps-fb-card')) {
-          listEl.innerHTML =
-            '<div class="peps-fb-empty-card">' +
-              '<p class="peps-fb-empty-title">Soyez le premier à donner votre avis sur ProfEPS.ma</p>' +
-            '</div>';
-        }
+        listEl.style.display = 'none';
+        listEl.innerHTML = '';
+        if (formWrap) formWrap.style.display = 'block';
+        if (toggleBtn) toggleBtn.style.display = 'none';
+        if (cancelBtn) cancelBtn.style.display = 'none';
       });
   }
 
@@ -581,8 +540,7 @@
           commentPlaceholder: 'اكتب تعليقك أو ملاحظتك التربوية هنا...',
           submitBtn: 'نشر التعليق',
           emptyText: 'لا توجد تعليقات بعد. كن أول من يشارك تعليقاً تربوياً حول هذا المقال.',
-          reportBtn: 'إبلاغ',
-          adminBtn: 'إدارة التعليقات'
+          reportBtn: 'إبلاغ'
         }
       : {
           kicker: 'Discussion & retour de terrain',
@@ -597,8 +555,7 @@
           commentPlaceholder: 'Rédigez votre commentaire ou question pédagogique...',
           submitBtn: 'Publier le commentaire',
           emptyText: 'Aucun commentaire pour le moment. Soyez le premier à réagir à cet article.',
-          reportBtn: 'Signaler',
-          adminBtn: 'Modération Admin'
+          reportBtn: 'Signaler'
         };
 
     var section = document.createElement('section');
@@ -648,10 +605,6 @@
         '</form>' +
 
         '<div id="pepsArticleCommentsList" class="peps-art-comments-list"></div>' +
-
-        '<div class="peps-fb-mod-bar">' +
-          '<button type="button" id="pepsArtAdminToggle" class="peps-mod-link">' + labels.adminBtn + '</button>' +
-        '</div>' +
       '</div>';
 
     anchor.parentNode.insertBefore(section, anchor);
@@ -680,7 +633,6 @@
             listEl.innerHTML = '<div class="peps-art-empty">' + labels.emptyText + '</div>';
             return;
           }
-          var adminPw = getAdminPassword();
           var html = '';
           for (var i = 0; i < items.length; i++) {
             var item = items[i];
@@ -703,9 +655,6 @@
                 '<p class="peps-fb-body">' + escapeHtml(item.comment) + '</p>' +
                 '<div class="peps-fb-card-foot">' +
                   '<button type="button" class="peps-report-btn" data-report-type="comment" data-report-id="' + escapeHtml(item.id) + '">' + labels.reportBtn + '</button>' +
-                  (adminPw
-                    ? '<button type="button" class="peps-admin-del-btn" data-del-type="comment" data-del-id="' + escapeHtml(item.id) + '">Supprimer (Admin)</button>'
-                    : '') +
                 '</div>' +
               '</article>';
           }
@@ -777,10 +726,6 @@
             setStatusMessage(statusEl, 'error', 'Erreur réseau. Veuillez réessayer.');
           });
       }, waitBeforeSend);
-    });
-
-    document.getElementById('pepsArtAdminToggle').addEventListener('click', function () {
-      handleAdminToggle(loadArticleComments);
     });
 
     loadArticleComments();
