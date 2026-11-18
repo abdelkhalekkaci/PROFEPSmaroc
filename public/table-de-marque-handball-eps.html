@@ -108,7 +108,50 @@
         body > *:not(#pepsPrintableReportArea) { display: none !important; }
         #pepsPrintableReportArea { display: block !important; }
       }
-    </style>
+    
+    #dedicatedScoreboardCard.is-gym-fullscreen {
+      position: fixed !important;
+      inset: 0 !important;
+      z-index: 99999 !important;
+      background: #0f172a !important;
+      overflow-y: auto !important;
+      padding: 0.85rem 1rem 2rem !important;
+      margin: 0 !important;
+      border-radius: 0 !important;
+    }
+    #dedicatedScoreboardCard.is-gym-fullscreen .peps-ref-board-wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    #gymFullscreenExitBar {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      background: #1e293b;
+      color: #f8fafc;
+      border: 2px solid #ef4444;
+      border-radius: 12px;
+      padding: 0.65rem 1rem;
+      margin: 0 auto 0.85rem auto;
+      max-width: 1400px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+    #dedicatedScoreboardCard.is-gym-fullscreen #gymFullscreenExitBar {
+      display: flex !important;
+    }
+    #dedicatedScoreboardCard.is-gym-fullscreen #btnToggleGymFullscreen {
+      display: none !important;
+    }
+    #dedicatedScoreboardCard:not(.is-gym-fullscreen) #btnExitGymFullscreenInline {
+      display: none !important;
+    }
+    #dedicatedScoreboardCard.is-gym-fullscreen #btnExitGymFullscreenInline {
+      display: inline-flex !important;
+    }
+  
+</style>
 </head>
 <body class="tpl-tool">
 <!-- PROFEPS_UNIFIED_NAVBAR_START -->
@@ -538,47 +581,29 @@
 </script>
 <!-- PROFEPS_UNIFIED_NAVBAR_END -->
 
-    <nav class="volets-sticky-bar" aria-label="Navigation entre les 6 Tables de Marque EPS">
-      <div class="volets-nav-inner" style="max-width:1240px;margin:0 auto;">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:0.6rem;flex-wrap:wrap;padding:0.15rem 0;">
-          <div style="display:flex;align-items:center;gap:0.4rem;overflow-x:auto;padding-bottom:0.15rem;">
-            <span style="font-size:0.72rem;font-weight:900;text-transform:uppercase;color:#64748b;margin-right:0.2rem;white-space:nowrap;">⏱️ Tables de Marque :</span>
-            <a href="/table-de-marque-volleyball-eps.html" style="padding:0.44rem 0.85rem;border-radius:8px;border:1.5px solid;font-size:0.81rem;font-weight:800;text-decoration:none;white-space:nowrap;background:#f8fafc;color:#0f172a;border-color:#cbd5e1;">🏐 Volley-Ball FIVB</a><a href="/table-de-marque-basketball-eps.html" style="padding:0.44rem 0.85rem;border-radius:8px;border:1.5px solid;font-size:0.81rem;font-weight:800;text-decoration:none;white-space:nowrap;background:#f8fafc;color:#0f172a;border-color:#cbd5e1;">🏀 Basket-Ball FIBA</a><a href="/table-de-marque-handball-eps.html" style="padding:0.44rem 0.85rem;border-radius:8px;border:1.5px solid;font-size:0.81rem;font-weight:800;text-decoration:none;white-space:nowrap;background:linear-gradient(135deg,#1e3a8a,#3347D6);color:#ffffff;border-color:#1e3a8a;box-shadow:0 3px 10px rgba(30,58,138,0.22);">🤾 Handball IHF</a><a href="/table-de-marque-futsal-football-eps.html" style="padding:0.44rem 0.85rem;border-radius:8px;border:1.5px solid;font-size:0.81rem;font-weight:800;text-decoration:none;white-space:nowrap;background:#f8fafc;color:#0f172a;border-color:#cbd5e1;">⚽ Futsal & Foot</a><a href="/table-de-marque-badminton-eps.html" style="padding:0.44rem 0.85rem;border-radius:8px;border:1.5px solid;font-size:0.81rem;font-weight:800;text-decoration:none;white-space:nowrap;background:#f8fafc;color:#0f172a;border-color:#cbd5e1;">🏸 Badminton & Ping</a><a href="/table-de-marque-rugby-scolaire-eps.html" style="padding:0.44rem 0.85rem;border-radius:8px;border:1.5px solid;font-size:0.81rem;font-weight:800;text-decoration:none;white-space:nowrap;background:#f8fafc;color:#0f172a;border-color:#cbd5e1;">🏉 Rugby & 6 Tags</a>
+    <main class="sb-main" style="padding-top:1.25rem;">
+  <section id="dedicatedScoreboardCard" aria-label="Table de Marque Interactive">
+    <div id="gymFullscreenExitBar" role="region" aria-label="Contrôle du mode plein écran">
+      <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">
+        <span style="background:#ef4444;color:#ffffff;font-size:0.74rem;font-weight:900;padding:0.25rem 0.6rem;border-radius:6px;text-transform:uppercase;letter-spacing:0.04em;">⛶ Mode Plein Écran Actif</span>
+        <span style="font-size:0.84rem;color:#cbd5e1;font-weight:600;">Appuyez sur la touche <kbd style="background:#0f172a;border:1px solid #475569;border-radius:4px;padding:0.1rem 0.4rem;font-family:monospace;color:#f8fafc;">Échap (Esc)</kbd> ou cliquez sur le bouton à droite pour quitter.</span>
+      </div>
+      <button type="button" onclick="exitScoreboardFullscreen()" style="padding:0.5rem 1.05rem;border-radius:8px;background:#ef4444;color:#ffffff;border:none;font-size:0.84rem;font-weight:900;cursor:pointer;display:inline-flex;align-items:center;gap:0.4rem;box-shadow:0 4px 12px rgba(239,68,68,0.35);">✕ Annuler le Plein Écran (Échap)</button>
+    </div>
+    <div class="peps-ref-board-wrap">
+      <div class="peps-ref-board-header">
+        <div style="width:100%;display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:0.85rem;">
+          <div style="flex:1 1 540px;">
+            <span style="font-size:0.76rem;font-weight:800;color:var(--primary);text-transform:uppercase;letter-spacing:0.05em;">🤾 Outil Terrain Officiel IHF 2026 · EPS Collège (OP 2009) &amp; Lycée (OP 2007)</span>
+            <h1 class="peps-ref-board-title" style="margin:0.25rem 0 0.35rem 0;font-size:clamp(1.25rem,2.4vw,1.65rem);">🤾 Table de Marque Interactive Handball IHF (Score, Exclusions 2 Min en Direct &amp; Jeu Passif)</h1>
+            <p class="peps-ref-board-sub" style="margin:0;">Gérez le score, les <strong>exclusions temporaires de 2 minutes (ou 1 min EPS) avec compte à rebours individuel</strong>, les cartons (Jaune / Rouge) et le <strong>compteur officiel des 6 passes maximum après signal de Jeu Passif (bras levé)</strong>.</p>
           </div>
-          <div style="display:flex;align-items:center;gap:0.45rem;flex-wrap:wrap;">
-            <a href="/aps-handball-eps-maroc.html" style="padding:0.4rem 0.78rem;border-radius:8px;background:#ecfdf5;border:1px solid #6ee7b7;color:#065f46;font-size:0.78rem;font-weight:800;text-decoration:none;white-space:nowrap;">📘 Silo Complet Handball →</a>
-            <a href="/reglement-handball-ihf-gestes-arbitrage-eps.html" style="padding:0.4rem 0.78rem;border-radius:8px;background:#eff6ff;border:1px solid #93c5fd;color:#1e40af;font-size:0.78rem;font-weight:800;text-decoration:none;white-space:nowrap;">⚖️ Règlement IHF & 18 Gestes</a>
-            <button type="button" id="btnToggleGymFullscreen" onclick="toggleScoreboardFullscreen()" style="padding:0.42rem 0.85rem;border-radius:8px;background:#0f172a;color:#ffffff;border:none;font-size:0.78rem;font-weight:800;cursor:pointer;white-space:nowrap;">⛶ Mode Plein Écran Gymnase / Terrain</button>
+          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
+            <button type="button" id="btnToggleGymFullscreen" onclick="toggleScoreboardFullscreen()" style="padding:0.6rem 1.1rem;border-radius:10px;background:#0f172a;color:#ffffff;border:2px solid #334155;font-size:0.84rem;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:0.45rem;box-shadow:0 4px 12px rgba(15,23,42,0.18);">⛶ Mode Plein Écran (Échap)</button>
+            <button type="button" id="btnExitGymFullscreenInline" onclick="exitScoreboardFullscreen()" style="padding:0.6rem 1.1rem;border-radius:10px;background:#ef4444;color:#ffffff;border:none;font-size:0.84rem;font-weight:800;cursor:pointer;display:none;align-items:center;gap:0.45rem;box-shadow:0 4px 12px rgba(239,68,68,0.3);">✕ Annuler Plein Écran (Échap)</button>
           </div>
         </div>
       </div>
-    </nav>
-    
-
-<header class="sb-hero">
-  <div class="sb-hero-inner">
-    <nav aria-label="Fil d'Ariane" style="font-size:0.78rem;font-weight:700;color:#64748b;margin-bottom:0.45rem;">
-      <a href="/" style="color:#3347D6;text-decoration:none;">Accueil</a> ›
-      <a href="/hub-aps-sports-eps-maroc.html" style="color:#3347D6;text-decoration:none;">Portail des 13 Sports</a> ›
-      <a href="/aps-handball-eps-maroc.html" style="color:#3347D6;text-decoration:none;">Silo Complet Handball</a> ›
-      <span style="color:#0f172a;">Table de Marque Officielle</span>
-    </nav>
-    <span class="sb-kicker">🤾 Outil Terrain Officiel IHF · EPS Collège (OP 2009) & Lycée (OP 2007)</span>
-    <h1 class="sb-title">Table de Marque Interactive Handball IHF (+1 But, Exclusions 2 Min & Jeu Passif)</h1>
-    <p class="sb-sub">Gérez vos rencontres de Handball en stricte conformité avec le code IHF : +1 but (jeu courant ou Jet de 7m), compte à rebours individuel des exclusions de 2 minutes par N° de joueur (plafond 3 jaunes/équipe, 3e exclusion = Carton Rouge auto) et compteur de passes sur Jeu Passif (bras levé).</p>
-  </div>
-</header>
-
-<main class="sb-main">
-  <section id="dedicatedScoreboardCard" aria-label="Table de Marque Interactive">
-    <div class="peps-ref-board-wrap">
-                <div class="peps-ref-board-header">
-                    <div>
-                        <span style="font-size:0.76rem;font-weight:800;color:var(--primary);text-transform:uppercase;letter-spacing:0.05em;">Outil Terrain Élève-Arbitre &amp; Table de Marque · Code IHF 2026</span>
-                        <h2 class="peps-ref-board-title">⚖️ Table de Marque Interactive Handball IHF (Score, Exclusions 2 Min en Direct &amp; Jeu Passif)</h2>
-                        <p class="peps-ref-board-sub">Gérez le score, les <strong>exclusions temporaires de 2 minutes (ou 1 min EPS) avec compte à rebours individuel</strong>, les cartons (Jaune / Rouge) et le <strong>compteur officiel des 6 passes maximum après signal de Jeu Passif (bras levé)</strong>.</p>
-                    </div>
-                </div>
 
                 <!-- BARRE CHRONO MATCH + ASSISTANT JEU PASSIF IHF -->
                 <div class="peps-ref-clock-box">
@@ -725,20 +750,6 @@
             </div>
   </section>
 
-  <!-- BANDEAU DE MAILLAGE RAPIDE VERS LE SILO DU SPORT, LE CALCULATEUR DE NOTES /20 ET LE GENERATEUR -->
-  <section style="background:linear-gradient(135deg,#eff6ff 0%,#f0fdf4 100%);border:2px solid #3347D6;border-radius:16px;padding:1.25rem 1.5rem;margin-top:1.5rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;">
-    <div>
-      <span style="font-size:0.74rem;font-weight:900;text-transform:uppercase;color:#3347D6;">🔗 Écosystème Complet du Sport (OP 2009 Collège &amp; OP 2007 Lycée)</span>
-      <h2 style="margin:0.2rem 0 0;font-size:1.12rem;font-weight:900;color:#0f172a;">Besoin des 24 Cycles, des 240 Fiches de Séance A4 ou du Calculateur de Notes (/20) ?</h2>
-    </div>
-    <div style="display:flex;flex-wrap:wrap;gap:0.6rem;">
-      <a href="/aps-handball-eps-maroc.html" style="padding:0.6rem 1.1rem;border-radius:10px;background:#3347D6;color:#ffffff;font-size:0.84rem;font-weight:800;text-decoration:none;">🏟️ Ouvrir le Silo Silo Complet Handball →</a>
-      <a href="/calculateur-note-eps-maroc.html" style="padding:0.6rem 1.1rem;border-radius:10px;background:#059669;color:#ffffff;font-size:0.84rem;font-weight:800;text-decoration:none;">📊 Calculateur Note EPS (/20) →</a>
-      <a href="/hub-outils-sport-performance.html" style="padding:0.6rem 1.1rem;border-radius:10px;background:#0f172a;color:#ffffff;font-size:0.84rem;font-weight:800;text-decoration:none;">🧰 Hub des Outils &amp; Tables →</a>
-    </div>
-  </section>
-
-  
   <article class="guide-card">
     <h2>📘 Guide Officiel du Secrétaire, du Chronométreur et de l'Arbitrage IHF en Handball Scolaire (EPS Maroc)</h2>
     <p>En Handball (Règlement Officiel de la Fédération Internationale de Handball — <strong>IHF 2025-2026</strong>), la table de marque est tenue conjointement par deux officiels complémentaires : le <strong>Secrétaire (Élève-Marqueur)</strong> et le <strong>Chronométreur</strong>. Contrairement au Basket-Ball où les paniers valent 1, 2 ou 3 points, la <strong>Règle 9 IHF</strong> stipule qu'au Handball <strong>chaque but validé (qu'il soit marqué dans le jeu courant, en contre-attaque, depuis l'aile ou sur Jet de 7 mètres) vaut strictement +1 but</strong>. L'enjeu majeur de la table de marque au Handball réside dans le suivi rigoureux de l'<strong>échelle des sanctions progressives par numéro de joueur</strong> (Avertissement Jaune → Exclusion temporaire de 2 minutes → Disqualification Rouge) et dans le décompte des passes lors du <strong>signal d'avertissement de Jeu Passif (bras levé)</strong>.</p>
@@ -866,6 +877,30 @@
               <p style="margin:0;font-size:0.9rem;color:#334155;line-height:1.65;">Selon la Règle 16:5 IHF, le temps restant de l'exclusion de 2 minutes se poursuit automatiquement dès le coup d'envoi de la 2e mi-temps. Notre table de marque conserve le décompte exact lors du passage en 2e période.</p>
             </div>
   </section>
+
+  <!-- MAILLAGE BAS DE GUIDE START -->
+  <section class="guide-card" aria-label="Maillage pédagogique et autres tables de marque EPS" style="background:linear-gradient(135deg,#f8fafc 0%,#eff6ff 100%);border:1.5px solid #cbd5e1;">
+    <span style="font-size:0.74rem;font-weight:900;text-transform:uppercase;color:#3347D6;letter-spacing:0.05em;">🔗 Maillage Pédagogique &amp; Outils Associés (OP 2009 Collège &amp; OP 2007 Lycée)</span>
+    <h2 style="margin:0.3rem 0 0.75rem 0;font-size:1.2rem;font-weight:900;color:#0f172a;">Ressources du Sport &amp; Autres Tables de Marque EPS</h2>
+    <p style="margin:0 0 1rem 0;font-size:0.9rem;color:#475569;">Accédez directement au silo complet de l'activité (24 projets de cycles et 240 fiches de séances A4), au barème officiel (/20) ou basculez vers une autre table de marque interactive :</p>
+    <div style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:1.15rem;">
+      <a href="/aps-handball-eps-maroc.html" style="padding:0.6rem 1.1rem;border-radius:10px;background:#3347D6;color:#ffffff;font-size:0.84rem;font-weight:800;text-decoration:none;">🤾 Silo Complet Handball (24 Cycles & 240 Fiches) →</a>
+      <a href="/reglement-handball-ihf-gestes-arbitrage-eps.html" style="padding:0.6rem 1.1rem;border-radius:10px;background:#0f172a;color:#ffffff;font-size:0.84rem;font-weight:800;text-decoration:none;">⚖️ Règlement Officiel Handball IHF →</a>
+      <a href="/calculateur-note-eps-maroc.html" style="padding:0.6rem 1.1rem;border-radius:10px;background:#059669;color:#ffffff;font-size:0.84rem;font-weight:800;text-decoration:none;">📊 Calculateur de Note EPS (/20) →</a>
+    </div>
+    <div style="border-top:1px solid #cbd5e1;padding-top:0.9rem;">
+      <div style="font-size:0.76rem;font-weight:900;text-transform:uppercase;color:#64748b;margin-bottom:0.55rem;">⏱️ Les 6 Tables de Marque Interactives EPS :</div>
+      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+          <a href="/table-de-marque-volleyball-eps.html" style="padding:0.5rem 0.9rem;border-radius:8px;border:1.5px solid #cbd5e1;font-size:0.82rem;font-weight:800;text-decoration:none;background:#ffffff;color:#0f172a;">🏐 Volley-Ball FIVB</a>
+          <a href="/table-de-marque-basketball-eps.html" style="padding:0.5rem 0.9rem;border-radius:8px;border:1.5px solid #cbd5e1;font-size:0.82rem;font-weight:800;text-decoration:none;background:#ffffff;color:#0f172a;">🏀 Basket-Ball FIBA</a>
+          <a href="/table-de-marque-handball-eps.html" style="padding:0.5rem 0.9rem;border-radius:8px;border:1.5px solid #1e3a8a;font-size:0.82rem;font-weight:800;text-decoration:none;background:#1e3a8a;color:#ffffff;">🤾 Handball IHF (Actuel)</a>
+          <a href="/table-de-marque-futsal-football-eps.html" style="padding:0.5rem 0.9rem;border-radius:8px;border:1.5px solid #cbd5e1;font-size:0.82rem;font-weight:800;text-decoration:none;background:#ffffff;color:#0f172a;">⚽ Futsal & Football</a>
+          <a href="/table-de-marque-badminton-eps.html" style="padding:0.5rem 0.9rem;border-radius:8px;border:1.5px solid #cbd5e1;font-size:0.82rem;font-weight:800;text-decoration:none;background:#ffffff;color:#0f172a;">🏸 Badminton & Ping-Pong</a>
+          <a href="/table-de-marque-rugby-scolaire-eps.html" style="padding:0.5rem 0.9rem;border-radius:8px;border:1.5px solid #cbd5e1;font-size:0.82rem;font-weight:800;text-decoration:none;background:#ffffff;color:#0f172a;">🏉 Rugby & 6 Tags</a>
+      </div>
+    </div>
+  </section>
+  <!-- MAILLAGE BAS DE GUIDE END -->
 </main>
 
 <script>
@@ -895,16 +930,43 @@
         window.print();
       }
 
-      function toggleScoreboardFullscreen() {
-        var wrap = document.getElementById('dedicatedScoreboardCard');
+      function syncScoreboardFullscreenUI(isFull) {
+        var wrap = document.getElementById(dedicatedScoreboardCard);
         if (!wrap) return;
-        wrap.classList.toggle('is-gym-fullscreen');
-        var btn = document.getElementById('btnToggleGymFullscreen');
-        if (btn) {
-          btn.innerHTML = wrap.classList.contains('is-gym-fullscreen')
-            ? '✕ Quitter le Mode Plein Écran Terrain'
-            : '⛶ Mode Plein Écran Gymnase / Terrain';
+        if (isFull) {
+          wrap.classList.add(is-gym-fullscreen);
+          document.body.style.overflow = hidden;
+        } else {
+          wrap.classList.remove(is-gym-fullscreen);
+          document.body.style.overflow = ;
         }
+      }
+
+      function toggleScoreboardFullscreen() {
+        var wrap = document.getElementById(dedicatedScoreboardCard);
+        if (!wrap) return;
+        var willBeFull = !wrap.classList.contains(is-gym-fullscreen);
+        syncScoreboardFullscreenUI(willBeFull);
+        if (!willBeFull && document.fullscreenElement && document.exitFullscreen) {
+          document.exitFullscreen().catch(function() {});
+        }
+      }
+
+      function exitScoreboardFullscreen() {
+        syncScoreboardFullscreenUI(false);
+        if (document.fullscreenElement && document.exitFullscreen) {
+          document.exitFullscreen().catch(function() {});
+        }
+      }
+
+      document.addEventListener(keydown, function(e) {
+        if (e.key === Escape || e.key === Esc || e.keyCode === 27) {
+          var wrap = document.getElementById(dedicatedScoreboardCard);
+          if (wrap && wrap.classList.contains(is-gym-fullscreen)) {
+            exitScoreboardFullscreen();
+          }
+        }
+      });
       }
 
 var hbState = {

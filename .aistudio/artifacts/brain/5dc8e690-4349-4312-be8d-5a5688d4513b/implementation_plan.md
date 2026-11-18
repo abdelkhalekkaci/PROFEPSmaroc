@@ -1,66 +1,92 @@
-# Plan d'Implémentation : 6 Pages Dédiées « Tables de Marque & Arbitrage EPS » (100% Conformes AdSense) + Maillage des Hubs
+# Refonte Éditoriale Marocaine, Illustrations SVG d'Arbitrage, Quotas ASS (65/20/5/10) & Redirections Anti-Redondance
 
-Ce plan détaille la création des **6 pages dédiées aux Tables de Marque et Simulateurs d'Arbitrage EPS** utilisables directement sur le terrain (smartphone, tablette, PC ou TNI en gymnase), accompagnées d'un **Guide Officiel de l'Élève-Marqueur, du Chronométreur et du Jeune Arbitre (1 200+ mots uniques par page)** pour garantir une conformité absolue avec **Google AdSense** (zéro *thin content*, zéro contenu dupliqué avec les pages APS), ainsi que leur intégration dans l'ensemble de l'architecture du site.
-
----
-
-## 1. Architecture des 6 Nouvelles Pages Dédiées (`/public/table-de-marque-*-eps.html`)
-
-Chaque page dédiée suit une structure ergonomique en **2 zones complémentaires** :
-- **Zone Haute (Au-dessus de la ligne de flottaison — Mode Terrain Direct)** :
-  - **Table de Marque Interactive & Simulateur d'Arbitrage Officiel** avec bouton **« ⛶ Mode Plein Écran Gymnase / Terrain »** (masquant l'en-tête pour maximiser la lisibilité des scores et chronomètres à distance).
-  - **Saisie des noms d'équipes / joueurs, classe (1AC à 2Bac) et officiels de table** (Nom de l'Élève-Marqueur, de l'Élève-Chronométreur et de l'Arbitre Principal) pour valoriser les rôles sociaux (OP 2009 Collège `/5 pts` & OP 2007 Lycée `/4 pts` ou `/3 pts`).
-  - **Export Officiel de la Feuille de Match A4** : téléchargement instantané en **Word (`.doc`)** et **Impression / PDF A4** incluant le détail des scores par période/set, l'historique horodaté des actions, les sanctions disciplinaires par N° de joueur et les signatures des élèves-officiels.
-- **Zone Basse (Dossier Pédagogique & Réglementaire de 1 200+ mots — 100% Unique & AdSense Ready)** :
-  - **Guide pas-à-pas de l'Élève-Marqueur et du Chronométreur en EPS** : comment tenir la feuille de marque officielle sans erreur, quand arrêter le chronomètre, comment communiquer avec l'arbitre central (coups de sifflet et gestes officiels).
-  - **Protocole de résolution des cas litigieux en EPS scolaire** (égalité en fin de temps réglementaire, rotation erronée, double faute, infériorité numérique, gestion de la table à 2 élèves dispensés ou en rotation d'équipe).
-  - **Grille d'évaluation des Rôles Sociaux (Connaissances Conceptuelles `/3 pts` & Comportementales `/3 à /5 pts`)** : barème clé en main permettant au professeur de noter l'élève-marqueur, le chronométreur et l'arbitre selon les Orientations Pédagogiques 2007 et 2009.
-  - **FAQ Réglementaire interactive (JSON-LD `FAQPage` + `WebApplication` + `BreadcrumbList`)**.
+Ce plan intègre vos précisions exactes sur la réglementation de l'Association Sportive Scolaire (ASS) au Maroc (**65 % ASS Établissement · 20 % Province · 5 % Région AREF · 10 % Fédération FRMSS**, et **Secrétaire Général + Trésorier obligatoirement professeurs d'EPS**), ainsi que les redirections anti-redondance, les schémas SVG d'arbitrage exportables en PDF, la correction des inversions OP 2007/2009 et le maillage interne complet.
 
 ---
 
-## 2. Spécifications Réglementaires Exactes des 6 Tables de Marque
+## User Review & Critical Decisions
 
-| # | URL de la Page Dédiée | Règles Officielles & Fonctionnalités de la Table de Marque | Contenu Pédagogique Unique (1 200+ mots) |
-| :--- | :--- | :--- | :--- |
-| **1** | `/table-de-marque-badminton-eps.html` | **BWF Badminton & ITTF Tennis de Table** : Indicateur automatique de zone de service (**Droite = score Pair / Gauche = score Impair**), set en **21 pts** avec **2 pts d'écart** (point décisif à **29–29 → 30e pt**), mode **Match Officiel** + **Ronde Italienne par équipe** (relais 5, 10, 15, 20 pts) + **Montante-Descendante**, journal des coups gagnants (Smash, Amorti, Dégagé, Faute filet/out). | Guide du juge de service et du marqueur en sports de raquettes, arbitrage de la hauteur de frappe sous la taille, gestion autonome des terrains en Montante-Descendante et barème OP des rôles d'officiels. |
-| **2** | `/table-de-marque-volleyball-eps.html` | **FIVB Volley-Ball** : Bouton **+1 pt uniquement** (aucun bouton +3 pts), passage **automatique au set suivant à 25 pts avec 2 pts d'écart** (15 pts au Tie-Break), **Match Gagné à 3 sets**, **édition directe du N° des 6 joueurs sur les cartes du terrain (P1 à P6)**, affichage en temps réel de la **rotation officielle sur le terrain à chaque service** (rotation horaire sur *Side-Out*). | Guide du marqueur FIVB en EPS : contrôle de la position des 6 joueurs au coup de sifflet du service, détection des fautes de rotation (chevauchement avant/arrière et gauche/droite), gestes de l'arbitre sur chaise et notation OP. |
-| **3** | `/table-de-marque-basketball-eps.html` | **FIBA Basket-Ball** : Actions **+1 pt (Lancer Franc)**, **+2 pts (Tir intérieur)**, **+3 pts (Tir derrière l'arc)**, chronomètre de match (4×10 min ou format EPS) + **chronomètre de possession 24s / remise à 14s** sur rebond offensif, cumul des **5 fautes d'équipe par quart-temps** avec alerte automatique **Bonus 2 Lancers Francs**, suivi des fautes personnelles par N° (5e faute = exclusion). | Répartition des rôles entre le **Marqueur** (feuille, fautes, temps morts) et l'**Opérateur des 24 secondes** en EPS, gestuelle officielle FIBA des fautes (numéro du joueur, type de faute, validation à 1, 2 ou 3 doigts) et barème OP. |
-| **4** | `/table-de-marque-handball-eps.html` | **IHF Handball** : **+1 But uniquement** (Jeu courant ou **Jet de 7m** — zéro action à 2 pts), **exclusions temporaires de 2 minutes** avec compte à rebours individuel par N° de joueur, **3e exclusion = Carton Rouge automatique**, plafond réglementaire de **3 Cartons Jaunes maximum par équipe**, compteur de **Jeu Passif (bras levé : 4 à 6 passes max)**, **Temps Morts d'Équipe (TTO)**. | Coordination **Secrétaire / Chronométreur** au Handball scolaire : gestion simultanée du chrono général et des prisons de 2 minutes, contrôle des changements dans la zone de 4,50 m, signalement du bras levé (jeu passif) et évaluation OP. |
-| **5** | `/table-de-marque-futsal-football-eps.html` | **FIFA Futsal & Football IFAB** : **+1 But uniquement** (Jeu courant ou **Penalty 6m / Jet franc à 10m** — zéro action à 2 pts), **cumul des 5 fautes d'équipe par mi-temps** (alerte automatique **6e faute = Jet Franc Direct à 10m sans mur**), **chrono des 4 secondes** (touche au pied, corner, coup franc, relance gardien), suivi par N° (**2e Jaune = Rouge** + **infériorité numérique Futsal de 2 min annulée automatiquement si l'adversaire marque un but**), module **Tirs au But (5 tireurs + Mort Subite)**. | Spécificités de la table de marque Futsal FIFA vs Football réduit en EPS : décompte à voix haute et au chrono des 4 secondes, affichage du panneau « 5 Fautes Cumulées » sur la table, règle du retour à 5 joueurs après un but encaissé en infériorité. |
-| **6** | `/table-de-marque-rugby-scolaire-eps.html` | **World Rugby Scolaire, Tag Rugby & Touch Rugby** : **Compteur interactif des 6 Tags / Touchés** avec alerte sonore et visuelle de **changement de possession au 6e Tag**, **Calculateur d'Indice de Gagne-Terrain (IGT)** en temps réel (franchissements de la ligne d'avantage, essais en zone centrale vs couloirs), décompte des **Essais (5 pts / 1 pt Tag)**, **Transformations (2 pts)**, **Pénalités (3 pts)** et **Essais de Bonus (franchissement collectif sans perte de balle)**. | Guide de l'arbitre-compteur de Tags et de l'observateur statistique (IGT) en Rugby Scolaire sans placage (Tag/Touch) et avec placage sécurisé (ceinture/jambes), gestuelle du « hors-jeu » et de l'« en-avant », et grille d'évaluation OP. |
+> [!IMPORTANT]
+> **Décisions confirmées et règles officielles marocaines intégrées :**
 
----
+1. **Réalité Juridique, Financière & Statutaire de l'ASS au Maroc (`article-association-sportive.html` & `article-projet-annuel-ass.html`)** :
+   - **Cadre légal** : Dahir n° 1-58-376 du 15 novembre 1958 réglementant le droit d'association (modifié et complété par la loi 75-00), Loi 30-09 relative à l'Éducation Physique et aux Sports, Statut-type des ASS et circulaires conjointes MENPS / FRMSS.
+   - **Répartition annuelle officielle des fonds de l'ASS (100 % des quotes-parts nettes d'ASS)** :
+     - **65 % pour l'Association Sportive Scolaire de l'établissement (ASS locale)** : équipement sportif et pédagogique, déplacements des équipes de l'établissement, tournois inter-classes et animation sportive interne.
+     - **20 % pour la Section Provinciale FRMSS (Direction Provinciale / Délégation)** : organisation des compétitions scolaires provinciales (Cross-country, Sports Collectifs, Athlétisme).
+     - **5 % pour la Section Régionale FRMSS (Académie Régionale — AREF)** : organisation des championnats scolaires régionaux et inter-provinciaux.
+     - **10 % pour la Fédération Royale Marocaine du Sport Scolaire (FRMSS Nationale)** : organisation des championnats nationaux scolaires et activités fédérales.
+   - **Composition officielle du Bureau Exécutif de l'ASS** :
+     - **Président de droit** : Le Chef d'établissement (Directeur du Collège ou Proviseur du Lycée).
+     - **Secrétaire Général & Trésorier Général** : **Doivent obligatoirement être des professeurs d'EPS de l'établissement** (élus parmi les enseignants d'EPS lors de l'assemblée générale ; dans les établissements comptant un seul professeur d'EPS ou un effectif réduit, le même professeur d'EPS assure ces responsabilités clés), avec **double signature** (Président Chef d'établissement + Trésorier Professeur d'EPS) pour la gestion du compte bancaire/CCP de l'ASS.
+     - **Membres / Assesseurs** : Tous les professeurs d'EPS de l'établissement (membres de droit), **les représentants élus des élèves** des différents niveaux scolaires, et le représentant de l'Association des Parents et Tuteurs d'Élèves (APTE).
 
-## 3. Plan de Maillage Interne & Intégration dans les Hubs
+2. **Zéro Redondance — Redirections SEO & Consolidation de Contenu** :
+   - `concours-eps-maroc.html` (doublon sans valeur ajoutée) $\rightarrow$ **Redirigé** vers **`article-concours.html`** (guide maître de préparation au concours EPS CRMEF, lié à `concours-crmef-hub.html`).
+   - `article-gestes-arbitres-volleyball.html` (1 169 impressions) & `article-arbitrage-volleyball.html` (95 impressions) $\rightarrow$ **Redirigés** vers **`reglement-volleyball-fivb-gestes-arbitrage-eps.html`**, enrichi avec les **Signaux Officiels FIVB illustrés en SVG + PDF imprimable**.
+   - `article-séance.html` & `article-seance.html` (85 impressions) $\rightarrow$ **Redirigés** vers **`article-structure-seance.html`**, enrichi avec la méthodologie complète et le modèle A4 téléchargeable.
 
-Conformément à vos choix, les 6 nouvelles pages dédiées seront reliées à **3 niveaux stratégiques** :
+3. **Illustrations SVG des Gestes d'Arbitrage + Export PDF Illustré (`article-gestes-arbitres-basketball.html` & `reglement-volleyball-fivb-gestes-arbitrage-eps.html`)** :
+   - Création de **schémas vectoriels SVG clairs, contrastés et légendés** illustrant chaque geste d'arbitre (FIBA Basketball & FIVB Volleyball) + bouton **« 🖨️ Télécharger / Imprimer la Planche PDF A4 avec Schémas SVG »**.
 
-1. **Dans chacune des 6 Pages APS correspondantes** :
-   - Pages cibles :
-     - `/public/aps-badminton-tennis-table-eps-maroc.html`
-     - `/public/aps-volleyball-eps-maroc.html`
-     - `/public/aps-basketball-eps-maroc.html`
-     - `/public/aps-handball-eps-maroc.html`
-     - `/public/aps-football-eps-maroc.html`
-     - `/public/aps-rugby-scolaire-tag-eps-maroc.html`
-   - Ajout d'un **bandeau d'action rapide en haut de la Table de Marque intégrée** (*« ⛶ Ouvrir la Table de Marque Officielle sur sa Page Dédiée (Mode Terrain Plein Écran + Guide de l'Élève-Marqueur) → »*) ainsi que d'un lien dans le sommaire rapide du sport.
-
-2. **Sur les Cartes du Portail des 13 Sports (`/public/hub-aps-sports-eps-maroc.html`)** :
-   - Sur les cartes de **Basket-Ball**, **Handball**, **Volley-Ball**, **Football / Futsal**, **Rugby Scolaire (Tag)** et **Badminton & Tennis de Table**, ajout d'un double bouton d'accès direct :
-     - Bouton principal : `📘 Ouvrir le Guide Complet →`
-     - Nouveau bouton terrain : `⏱️ Table de Marque Dédiée →` (pointant directement vers `/table-de-marque-*-eps.html`).
-
-3. **Dans le Hub des Calculateurs (`/public/hub-outils-sport-performance.html`) et le Menu `Outils ▾` de la Navbar** :
-   - Ajout d'une nouvelle section dédiée **« ⏱️ Les 6 Tables de Marque & Simulateurs d'Arbitrage Officiels EPS (Terrain & TNI) »** dans `/public/hub-outils-sport-performance.html` avec des cartes directes vers les 6 tables de marque.
-   - Ajout des liens rapides vers les Tables de Marque dans le menu déroulant `Outils ▾` de la barre de navigation principale et mise à jour de `/public/sitemap.xml` (passage de 247 à **253 URLs canoniques** 100% indexables).
+4. **Correction Globale des Inversions OP 2007 (Lycée) / OP 2009 (Collège)** :
+   - Rectification intégrale sur les 12 fichiers concernés afin que **OP Novembre 2007 = Lycée Qualifiant** et **OP Août 2009 = Collège** partout sur le site.
 
 ---
 
-## 4. Vérification Qualité, AdSense & Déploiement GitHub / Vercel
+## 1. Overview & Core Concept
 
-- **Audit Automatique des 253 Pages** :
-  - Vérification que chacune des 6 nouvelles pages dépasse **1 200 mots de contenu éditorial unique** (conformité AdSense *High Value Content*).
-  - Vérification de **0 lien brisé** sur l'ensemble du maillage interne.
-- **Synchronisation GitHub & Vercel** :
-  - Commit et push sur `https://github.com/abdelkhalekkaci/PROFEPSmaroc.git` (branche `main`) avec l'auteur certifié `abdelkhalekkaci <kaci.abdelkhalek.95@gmail.com>` pour déclencher automatiquement le déploiement Vercel.
+- **What It Does** : Consolide, corrige et enrichit les ~35 pages les plus populaires de ProfEPS.ma en supprimant toute redondance par des redirections propres, en injectant les données juridiques et budgétaires marocaines exactes (**ASS : 65 % Établissement / 20 % Province / 5 % Région AREF / 10 % FRMSS ; Trésorier et Secrétaire Général obligatoirement professeurs d'EPS** ; OP 2007/2009 ; Statut Unifié 2024), en illustrant les gestes d'arbitrage par des SVG nets exportables en PDF, et en harmonisant l'alignement UI et le maillage interne.
+- **Target Audience / Persona** : Professeurs d'EPS au Maroc (Secrétaires Généraux et Trésoriers d'ASS), candidats aux concours CRMEF et à l'Examen Professionnel (Échelle 11), inspecteurs pédagogiques et élèves-arbitres.
+- **Key Value** : Exactitude réglementaire marocaine à 100 %, simulateur automatique de répartition budgétaire ASS (`65% / 20% / 5% / 10%`), planches d'arbitrage illustrées en SVG téléchargeables en PDF, et maillage interne complet.
+
+---
+
+## 2. User Experience & Visual Design
+
+- **Alignement strict des sections et du texte (UI Design)** :
+  - **Grille et Conteneurs unifiés** : Conteneurs centrés et parfaitement alignés (`max-width: 1140px`), cartes de même hauteur (`align-items: stretch` en CSS Grid), espacements verticaux constants et bordures fines (`1px solid #CBD5E1`).
+  - **Alignement typographique** : Titres `text-wrap: balance` alignés à gauche, paragraphes au rythme vertical régulier (`line-height: 1.7`), et tableaux responsives à chiffres tabulaires (`font-variant-numeric: tabular-nums`) sans débordement.
+  - **Planches SVG d'Arbitrage** : Grille visuelle de cartes illustrées où chaque carte affiche en haut un **diagramme SVG clair (silhouettes vectorielles des bras/mains, ballon, doigts et flèches de mouvement)**, au centre le numéro et l'intitulé officiel du signal (FIBA / FIVB), et en bas l'explication réglementaire et la sanction.
+- **Impression / Export PDF Illustré & Word** :
+  - Feuille de style `@media print` et générateur d'impression dédiés incluant directement les **illustrations SVG vectorielles** dans le PDF A4 téléchargeable.
+
+---
+
+## 3. Key Product Decisions & Trade-Offs
+
+- **Decision 1 : Simulateur Interactif de Répartition du Budget ASS (65 % / 20 % / 5 % / 10 %) + Générateur de PV & Projet Annuel**
+  - *Chosen Approach* : Intégrer dans `article-association-sportive.html` et `article-projet-annuel-ass.html` un **Calculateur Officiel des Quotes-Parts ASS** (saisie du nombre d'élèves inscrits et du montant de cotisation $\rightarrow$ calcul instantané de la part **65 % ASS Établissement**, **20 % Section Provinciale**, **5 % Section Régionale AREF** et **10 % FRMSS Nationale**) avec export direct du tableau financier et du PV du Bureau Exécutif (Président Chef d'établissement + Secrétaire Général Prof EPS + Trésorier Prof EPS) en Word/PDF.
+  - *Why* : C'est l'outil concret que chaque professeur d'EPS (Trésorier / Secrétaire Général de l'ASS) cherche chaque début d'année scolaire au Maroc, et c'est une question récurrente à l'Examen Professionnel et au concours CRMEF.
+- **Decision 2 : Diagrammes SVG intégrés directement dans le DOM (Inline SVG)**
+  - *Chosen Approach* : Dessiner chaque geste d'arbitre en SVG vectoriel inline pour le Basket-Ball (FIBA) et le Volley-Ball (FIVB).
+  - *Why* : Rendu ultra-net sur tous les écrans, chargement instantané et impression PDF vectorielle parfaite.
+- **Decision 3 : Maillage Interne Contextuel Systématique**
+  - *Chosen Approach* : Relier chaque article à ses outils correspondants (**Hub CRMEF `/concours-crmef-hub.html`**, **6 Tables de Marque `/table-de-marque-*.html`**, **Générateur `/generateur.html`**, **OP `/orientations-pedagogiques-eps-2007-2009.html`**, **13 Silos APS `/aps-*.html`** et **Calculateurs `/calculateur-note-eps-maroc.html` & `/calculateur-vma.html`**).
+
+---
+
+## 4. Technical Architecture & Data Strategy *(Technical Reference)*
+
+- **Architecture & Component Diagram** :
+
+```
+┌──────────────────────────────────────────────────────────────────────────────┐
+│           CONSOLIDATION, REFONTE MAROCAINE & ILLUSTRATIONS SVG (GSC)         │
+└──────────────────────────────────────┬───────────────────────────────────────┘
+                                       │
+       ┌───────────────────────────────┼───────────────────────────────┐
+       ▼                               ▼                               ▼
+┌─────────────────────────────┐ ┌─────────────────────────────┐ ┌─────────────────────────────┐
+│ 1. REDIRECTIONS ANTI-DOUBLON│ │ 2. CONTENU MAROCAIN CERTIFIÉ│ │ 3. PLANCHES SVG & EXPORT PDF│
+│ • article-gestes-arbitres-  │ │ • Correction globale OP     │ │ • Gestes Basket FIBA :      │
+│   volleyball.html ──┐       │ │   2007 (Lycée) / OP 2009    │ │   Signaux SVG vectoriels    │
+│ • article-arbitrage-│       │ │   (Collège) sur 12 fichiers │ │   + Export PDF A4 illustré  │
+│   volleyball.html ──┼─►     │ │ • ASS Maroc : Dahir 1958,   │ │ • Gestes Volley FIVB :      │
+│   reglement-volleyball-fivb │ │   Loi 30-09, Quotas exacts  │ │   Signaux SVG vectoriels    │
+│ • article-séance.html ──►   │ │   65% ASS / 20% Province /  │ │   dans reglement-volleyball │
+│   article-structure-seance  │ │   5% Région / 10% FRMSS +   │ │   + Export PDF A4 illustré  │
+│ • concours-eps-maroc.html ─►│ │   Trésorier & SG = Profs EPS│ │ • Alignement UI Grid/Texte  │
+│   article-concours.html     │ │ • Examen Pro & CRMEF 2024   │ │   & Maillage interne dédié  │
+└─────────────────────────────┘ └─────────────────────────────┘ └─────────────────────────────┘
+```
