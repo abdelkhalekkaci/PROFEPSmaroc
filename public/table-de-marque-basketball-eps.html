@@ -903,43 +903,16 @@
         window.print();
       }
 
-      function syncScoreboardFullscreenUI(isFull) {
-        var wrap = document.getElementById(dedicatedScoreboardCard);
-        if (!wrap) return;
-        if (isFull) {
-          wrap.classList.add(is-gym-fullscreen);
-          document.body.style.overflow = hidden;
-        } else {
-          wrap.classList.remove(is-gym-fullscreen);
-          document.body.style.overflow = ;
-        }
-      }
-
       function toggleScoreboardFullscreen() {
-        var wrap = document.getElementById(dedicatedScoreboardCard);
+        var wrap = document.getElementById('dedicatedScoreboardCard');
         if (!wrap) return;
-        var willBeFull = !wrap.classList.contains(is-gym-fullscreen);
-        syncScoreboardFullscreenUI(willBeFull);
-        if (!willBeFull && document.fullscreenElement && document.exitFullscreen) {
-          document.exitFullscreen().catch(function() {});
+        wrap.classList.toggle('is-gym-fullscreen');
+        var btn = document.getElementById('btnToggleGymFullscreen');
+        if (btn) {
+          btn.innerHTML = wrap.classList.contains('is-gym-fullscreen')
+            ? '✕ Quitter le Mode Plein Écran Terrain'
+            : '⛶ Mode Plein Écran Gymnase / Terrain';
         }
-      }
-
-      function exitScoreboardFullscreen() {
-        syncScoreboardFullscreenUI(false);
-        if (document.fullscreenElement && document.exitFullscreen) {
-          document.exitFullscreen().catch(function() {});
-        }
-      }
-
-      document.addEventListener(keydown, function(e) {
-        if (e.key === Escape || e.key === Esc || e.keyCode === 27) {
-          var wrap = document.getElementById(dedicatedScoreboardCard);
-          if (wrap && wrap.classList.contains(is-gym-fullscreen)) {
-            exitScoreboardFullscreen();
-          }
-        }
-      });
       }
 
 var bbState = {
@@ -1229,6 +1202,55 @@ var bbState = {
       }
 window.addEventListener('DOMContentLoaded', function() { bbResetMatch(); });
 
+
+
+      function syncScoreboardFullscreenUI(isFull) {
+        var wrap = document.getElementById('dedicatedScoreboardCard');
+        if (!wrap) return;
+        var btnToggle = document.getElementById('btnToggleGymFullscreen');
+        var btnExitInline = document.getElementById('btnExitGymFullscreenInline');
+        if (isFull) {
+          wrap.classList.add('is-gym-fullscreen');
+          document.body.style.overflow = 'hidden';
+          if (btnToggle) btnToggle.style.display = 'none';
+          if (btnExitInline) btnExitInline.style.display = 'inline-flex';
+        } else {
+          wrap.classList.remove('is-gym-fullscreen');
+          document.body.style.overflow = '';
+          if (btnToggle) btnToggle.style.display = 'inline-flex';
+          if (btnExitInline) btnExitInline.style.display = 'none';
+        }
+      } else {
+          wrap.classList.remove('is-gym-fullscreen');
+          document.body.style.overflow = '';
+        }
+      }
+
+      function toggleScoreboardFullscreen() {
+        var wrap = document.getElementById('dedicatedScoreboardCard');
+        if (!wrap) return;
+        var willBeFull = !wrap.classList.contains('is-gym-fullscreen');
+        syncScoreboardFullscreenUI(willBeFull);
+        if (!willBeFull && document.fullscreenElement && document.exitFullscreen) {
+          document.exitFullscreen().catch(function() {});
+        }
+      }
+
+      function exitScoreboardFullscreen() {
+        syncScoreboardFullscreenUI(false);
+        if (document.fullscreenElement && document.exitFullscreen) {
+          document.exitFullscreen().catch(function() {});
+        }
+      }
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' || e.key === 'Esc' || e.keyCode === 27) {
+          var wrap = document.getElementById('dedicatedScoreboardCard');
+          if (wrap && wrap.classList.contains('is-gym-fullscreen')) {
+            exitScoreboardFullscreen();
+          }
+        }
+      });
 </script>
 
 <!-- PROFEPS_EEAT_AUTHOR_START -->

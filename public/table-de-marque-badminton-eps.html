@@ -905,43 +905,16 @@
         window.print();
       }
 
-      function syncScoreboardFullscreenUI(isFull) {
-        var wrap = document.getElementById(dedicatedScoreboardCard);
-        if (!wrap) return;
-        if (isFull) {
-          wrap.classList.add(is-gym-fullscreen);
-          document.body.style.overflow = hidden;
-        } else {
-          wrap.classList.remove(is-gym-fullscreen);
-          document.body.style.overflow = ;
-        }
-      }
-
       function toggleScoreboardFullscreen() {
-        var wrap = document.getElementById(dedicatedScoreboardCard);
+        var wrap = document.getElementById('dedicatedScoreboardCard');
         if (!wrap) return;
-        var willBeFull = !wrap.classList.contains(is-gym-fullscreen);
-        syncScoreboardFullscreenUI(willBeFull);
-        if (!willBeFull && document.fullscreenElement && document.exitFullscreen) {
-          document.exitFullscreen().catch(function() {});
+        wrap.classList.toggle('is-gym-fullscreen');
+        var btn = document.getElementById('btnToggleGymFullscreen');
+        if (btn) {
+          btn.innerHTML = wrap.classList.contains('is-gym-fullscreen')
+            ? '✕ Quitter le Mode Plein Écran Terrain'
+            : '⛶ Mode Plein Écran Gymnase / Terrain';
         }
-      }
-
-      function exitScoreboardFullscreen() {
-        syncScoreboardFullscreenUI(false);
-        if (document.fullscreenElement && document.exitFullscreen) {
-          document.exitFullscreen().catch(function() {});
-        }
-      }
-
-      document.addEventListener(keydown, function(e) {
-        if (e.key === Escape || e.key === Esc || e.keyCode === 27) {
-          var wrap = document.getElementById(dedicatedScoreboardCard);
-          if (wrap && wrap.classList.contains(is-gym-fullscreen)) {
-            exitScoreboardFullscreen();
-          }
-        }
-      });
       }
 
 
@@ -981,7 +954,7 @@
         if (mode === 'tt11') return { isTT: true, target: 11, maxCap: 99, setsToWin: 2, label: 'Tennis de Table ITTF (11 pts)' };
         if (mode === 'bad15') return { isTT: false, target: 15, maxCap: 21, setsToWin: 2, label: 'Badminton Scolaire EPS (15 pts)' };
         if (mode === 'bad11') return { isTT: false, target: 11, maxCap: 15, setsToWin: 2, label: 'Badminton Tournoi Rapide (11 pts)' };
-        return { isTT: false, target: 21, maxCap: 30, setsToWin: 2, label: 'Badminton Officiel BWF (21 pts, Point d'Or à 30)' };
+        return { isTT: false, target: 21, maxCap: 30, setsToWin: 2, label: 'Badminton Officiel BWF (21 pts, Point d\'Or à 30)' };
       }
 
       function badAddPoint(winner, pts) {
@@ -1007,7 +980,7 @@
           ? '🎯 FRAPPE GAGNANTE EN ZONE BONUS (+3 pts EPS) pour ' + winName + ' !'
           : '✅ Point réglementaire (+1 pt) remporté par ' + winName + '.';
 
-        // Vérification automatique de fin de set / manche (2 pts d'écart ou Point d'Or 30 en BWF)
+        // Vérification automatique de fin de set / manche (2 pts d\'écart ou Point d\'Or 30 en BWF)
         var diff = Math.abs(badState.scoreA - badState.scoreB);
         var setWon = ((badState.scoreA >= cfg.target || badState.scoreB >= cfg.target) && diff >= 2) ||
                      (!cfg.isTT && (badState.scoreA >= cfg.maxCap || badState.scoreB >= cfg.maxCap));
@@ -1106,7 +1079,7 @@
         var callout = document.getElementById('badRefCallout');
 
         if (!cfg.isTT) {
-          // Règle BWF : Celui qui gagne l'échange sert. Si son propre score est PAIR (0, 2, 4...) -> Carré DROIT. Si IMPAIR (1, 3, 5...) -> Carré GAUCHE.
+          // Règle BWF : Celui qui gagne l\'échange sert. Si son propre score est PAIR (0, 2, 4...) -> Carré DROIT. Si IMPAIR (1, 3, 5...) -> Carré GAUCHE.
           var srv = badState.serverBad;
           var srvScore = srv === 'A' ? badState.scoreA : badState.scoreB;
           var recScore = srv === 'A' ? badState.scoreB : badState.scoreA;
@@ -1149,7 +1122,7 @@
           }
 
           if (callout) {
-            callout.innerHTML = '<div><strong>📢 Annonce Officielle de l'Arbitre BWF :</strong> <span style="color:#FBBF24;font-weight:900;">« Service ' + srvName + ', ' + srvScore + ' à ' + recScore + ' ! »</span> — ' + badState.lastActionMsg + '</div>' +
+            callout.innerHTML = '<div><strong>📢 Annonce Officielle de l\'Arbitre BWF :</strong> <span style="color:#FBBF24;font-weight:900;">« Service ' + srvName + ', ' + srvScore + ' à ' + recScore + ' ! »</span> — ' + badState.lastActionMsg + '</div>' +
               '<div style="margin-top:0.35rem;font-size:0.82rem;color:#E2E8F0;">📍 <strong>Position de Service obligatoire (Règle 9 BWF) :</strong> <strong>' + srvName + '</strong> sert depuis son <strong style="color:#38BDF8;">' + sideLabel + '</strong> en diagonale vers le carré correspondant de ' + recName + ' (Frappe sous 1,15 m).</div>' +
               '<div style="margin-top:0.25rem;font-size:0.78rem;color:#38BDF8;">📊 <strong>Historique des Sets :</strong> ' + (badState.setHistory.length ? badState.setHistory.join(' &nbsp;|&nbsp; ') : 'Set 1 en cours') + '</div>';
           }
@@ -1176,10 +1149,10 @@
             badgeB.textContent = ttServer === 'B' ? ('🏓 AU SERVICE (' + remSrv + ' srv restant)') : '🛡️ EN RÉCEPTION';
             badgeB.style.background = ttServer === 'B' ? '#D97706' : '#475569';
           }
-          if (visA) visA.innerHTML = '<strong>🏓 Règle Service Simple ITTF (2.6) :</strong> Service libre sur toute la table (pas d'obligation de diagonale en simple). Lancer vertical ≥ 16 cm paume ouverte derrière la ligne de fond.';
+          if (visA) visA.innerHTML = '<strong>🏓 Règle Service Simple ITTF (2.6) :</strong> Service libre sur toute la table (pas d\'obligation de diagonale en simple). Lancer vertical ≥ 16 cm paume ouverte derrière la ligne de fond.';
           if (visB) visB.innerHTML = '<strong>🏓 Rotation 2 points (ITTF 2.13) :</strong> Le serveur change tous les 2 points inscrits (total = ' + totalPts + ' pts), et à chaque point à partir de 10–10.';
           if (callout) {
-            callout.innerHTML = '<div><strong>📢 Annonce Officielle de l'Arbitre ITTF :</strong> <span style="color:#FBBF24;font-weight:900;">« Service ' + ttSrvName + ', ' + ttSrvScore + ' à ' + ttRecScore + ' ! »</span> (' + remSrv + ' service(s) restant(s) avant changement).</div>' +
+            callout.innerHTML = '<div><strong>📢 Annonce Officielle de l\'Arbitre ITTF :</strong> <span style="color:#FBBF24;font-weight:900;">« Service ' + ttSrvName + ', ' + ttSrvScore + ' à ' + ttRecScore + ' ! »</span> (' + remSrv + ' service(s) restant(s) avant changement).</div>' +
               '<div style="margin-top:0.25rem;font-size:0.78rem;color:#38BDF8;">📊 <strong>Historique des Manches :</strong> ' + (badState.setHistory.length ? badState.setHistory.join(' &nbsp;|&nbsp; ') : 'Manche 1 en cours') + '</div>';
           }
         }
@@ -1195,8 +1168,8 @@
         var setsTxt = badState.setHistory.length ? badState.setHistory.join(' | ') : ('Set 1 : ' + badState.scoreA + '–' + badState.scoreB);
 
         var reportHtml = '<table class="a4-header-table"><tr>' +
-          '<td style="width:36%;"><strong>ROYAUME DU MAROC</strong><br>Ministère de l'Éducation Nationale, du Préscolaire et des Sports<br><strong>Matière :</strong> Éducation Physique et Sportive</td>' +
-          '<td style="width:28%;text-align:center;"><strong>FEUILLE D'ARBITRAGE OFFICIELLE BWF / ITTF</strong><br>APS : <strong>' + cfg.label + '</strong><br>Date : ' + dateStr + '</td>' +
+          '<td style="width:36%;"><strong>ROYAUME DU MAROC</strong><br>Ministère de l\'Éducation Nationale, du Préscolaire et des Sports<br><strong>Matière :</strong> Éducation Physique et Sportive</td>' +
+          '<td style="width:28%;text-align:center;"><strong>FEUILLE D\'ARBITRAGE OFFICIELLE BWF / ITTF</strong><br>APS : <strong>' + cfg.label + '</strong><br>Date : ' + dateStr + '</td>' +
           '<td style="width:36%;text-align:right;"><strong>Classe / Terrain :</strong> ' + cls + '<br><strong>Arbitre &amp; Marqueur :</strong> ' + refs + '</td>' +
           '</tr></table>' +
           '<div class="a4-doc-title"><h3>BILAN OFFICIEL DU DUEL — SPORTS DE RAQUETTES (BWF / ITTF)</h3><p>' + nameA + ' contre ' + nameB + '</p></div>' +
@@ -1205,9 +1178,9 @@
           '<tr><td><strong>' + nameB + '</strong></td><td style="font-size:1.2rem;font-weight:900;">' + badState.scoreB + ' pts</td><td><strong>' + badState.setsB + '</strong></td><td>' + badState.bonusHitsB + '</td><td>' + setsTxt + '</td></tr>' +
           '</tbody></table>' +
           '<table style="width:100%;margin-top:1.5rem;border:none;font-size:0.85rem;"><tr>' +
-          '<td style="border:none;width:33%;"><strong>Signature de l'Élève-Arbitre :</strong><br><br>........................................</td>' +
+          '<td style="border:none;width:33%;"><strong>Signature de l\'Élève-Arbitre :</strong><br><br>........................................</td>' +
           '<td style="border:none;width:33%;text-align:center;"><strong>Signature des 2 Joueurs (A &amp; B) :</strong><br><br>........................................</td>' +
-          '<td style="border:none;width:33%;text-align:right;"><strong>Visa du Professeur d'EPS :</strong><br><br>........................................</td>' +
+          '<td style="border:none;width:33%;text-align:right;"><strong>Visa du Professeur d\'EPS :</strong><br><br>........................................</td>' +
           '</tr></table>';
 
         if (format === 'word') {
@@ -1284,6 +1257,55 @@
         computeMontanteDescendante();
       });
 
+
+
+      function syncScoreboardFullscreenUI(isFull) {
+        var wrap = document.getElementById('dedicatedScoreboardCard');
+        if (!wrap) return;
+        var btnToggle = document.getElementById('btnToggleGymFullscreen');
+        var btnExitInline = document.getElementById('btnExitGymFullscreenInline');
+        if (isFull) {
+          wrap.classList.add('is-gym-fullscreen');
+          document.body.style.overflow = 'hidden';
+          if (btnToggle) btnToggle.style.display = 'none';
+          if (btnExitInline) btnExitInline.style.display = 'inline-flex';
+        } else {
+          wrap.classList.remove('is-gym-fullscreen');
+          document.body.style.overflow = '';
+          if (btnToggle) btnToggle.style.display = 'inline-flex';
+          if (btnExitInline) btnExitInline.style.display = 'none';
+        }
+      } else {
+          wrap.classList.remove('is-gym-fullscreen');
+          document.body.style.overflow = '';
+        }
+      }
+
+      function toggleScoreboardFullscreen() {
+        var wrap = document.getElementById('dedicatedScoreboardCard');
+        if (!wrap) return;
+        var willBeFull = !wrap.classList.contains('is-gym-fullscreen');
+        syncScoreboardFullscreenUI(willBeFull);
+        if (!willBeFull && document.fullscreenElement && document.exitFullscreen) {
+          document.exitFullscreen().catch(function() {});
+        }
+      }
+
+      function exitScoreboardFullscreen() {
+        syncScoreboardFullscreenUI(false);
+        if (document.fullscreenElement && document.exitFullscreen) {
+          document.exitFullscreen().catch(function() {});
+        }
+      }
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' || e.key === 'Esc' || e.keyCode === 27) {
+          var wrap = document.getElementById('dedicatedScoreboardCard');
+          if (wrap && wrap.classList.contains('is-gym-fullscreen')) {
+            exitScoreboardFullscreen();
+          }
+        }
+      });
 </script>
 
 <!-- PROFEPS_EEAT_AUTHOR_START -->

@@ -906,43 +906,16 @@
         window.print();
       }
 
-      function syncScoreboardFullscreenUI(isFull) {
-        var wrap = document.getElementById(dedicatedScoreboardCard);
-        if (!wrap) return;
-        if (isFull) {
-          wrap.classList.add(is-gym-fullscreen);
-          document.body.style.overflow = hidden;
-        } else {
-          wrap.classList.remove(is-gym-fullscreen);
-          document.body.style.overflow = ;
-        }
-      }
-
       function toggleScoreboardFullscreen() {
-        var wrap = document.getElementById(dedicatedScoreboardCard);
+        var wrap = document.getElementById('dedicatedScoreboardCard');
         if (!wrap) return;
-        var willBeFull = !wrap.classList.contains(is-gym-fullscreen);
-        syncScoreboardFullscreenUI(willBeFull);
-        if (!willBeFull && document.fullscreenElement && document.exitFullscreen) {
-          document.exitFullscreen().catch(function() {});
+        wrap.classList.toggle('is-gym-fullscreen');
+        var btn = document.getElementById('btnToggleGymFullscreen');
+        if (btn) {
+          btn.innerHTML = wrap.classList.contains('is-gym-fullscreen')
+            ? '✕ Quitter le Mode Plein Écran Terrain'
+            : '⛶ Mode Plein Écran Gymnase / Terrain';
         }
-      }
-
-      function exitScoreboardFullscreen() {
-        syncScoreboardFullscreenUI(false);
-        if (document.fullscreenElement && document.exitFullscreen) {
-          document.exitFullscreen().catch(function() {});
-        }
-      }
-
-      document.addEventListener(keydown, function(e) {
-        if (e.key === Escape || e.key === Esc || e.keyCode === 27) {
-          var wrap = document.getElementById(dedicatedScoreboardCard);
-          if (wrap && wrap.classList.contains(is-gym-fullscreen)) {
-            exitScoreboardFullscreen();
-          }
-        }
-      });
       }
 
 
@@ -998,7 +971,7 @@
             if (rgState.gameSeconds > 0) rgState.gameSeconds -= 1;
             if (rgState.gameSeconds === 0) {
               rgState.running = false;
-              rgState.lastMsg = '🔔 FIN DE LA ' + (rgState.half === 1 ? '1re MI-TEMPS' : 'RENCONTRE') + ' (en Rugby, le jeu continue jusqu'à ce que le ballon soit mort) !';
+              rgState.lastMsg = '🔔 FIN DE LA ' + (rgState.half === 1 ? '1re MI-TEMPS' : 'RENCONTRE') + ' (en Rugby, le jeu continue jusqu\'à ce que le ballon soit mort) !';
             }
             rgRenderBoard();
           }, 1000);
@@ -1053,7 +1026,7 @@
         rgState.tagCount += 1;
         if (rgState.tagCount >= 6) {
           rgState.turnovers6Tags += 1;
-          rgState.lastMsg = '🛑 6e TAG ATTEINT (6 / 6) — CHANGEMENT DE POSSESSION AUTOMATIQUE ! L'arbitre siffle « 6e Tag ! Ballon au sol, remise en jeu pour l'équipe adverse ! »';
+          rgState.lastMsg = '🛑 6e TAG ATTEINT (6 / 6) — CHANGEMENT DE POSSESSION AUTOMATIQUE ! L\'arbitre siffle « 6e Tag ! Ballon au sol, remise en jeu pour l\'équipe adverse ! »';
           rgState.tagCount = 0;
         } else {
           rgState.lastMsg = '📢 Arbitre : « TAG ' + rgState.tagCount + ' sur 6 ! » Le porteur dispose de 3 secondes (max 3 pas) pour passer en arrière ; toute la défense recule à 5 mètres.';
@@ -1165,7 +1138,7 @@
             ? "🔵 Niveau 3 (Confirmé) : Bonne avancée collective (" + igtPct + "%) ; travaillez encore le soutien axial rapide après le Tag."
             : (igtPct >= 35
               ? "🟠 Niveau 2 (Initié) : Avancée irrégulière (" + igtPct + "%) ; fixez mieux le défenseur avant de passer en arrière."
-              : "🔴 Niveau 1 (Débutant) : Trop de courses en reculant ou d'en-avants (" + igtPct + "%) ; utilisez les zones cliquets de 5m."));
+              : "🔴 Niveau 1 (Débutant) : Trop de courses en reculant ou d\'en-avants (" + igtPct + "%) ; utilisez les zones cliquets de 5m."));
 
         document.getElementById("calcRugbyOutput").innerHTML =
           '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.65rem;margin-bottom:0.65rem;">' +
@@ -1175,7 +1148,7 @@
               '<div style="font-size:0.75rem;color:var(--slate);">' + gainLine + ' franch. + ' + tries + ' essais / ' + poss + ' poss.</div>' +
             '</div>' +
             '<div style="background:var(--surface);border:1px solid var(--stone);border-radius:9px;padding:0.65rem;">' +
-              '<div style="font-size:0.72rem;font-weight:800;color:var(--slate);text-transform:uppercase;">Taux d'Essais Marqués</div>' +
+              '<div style="font-size:0.72rem;font-weight:800;color:var(--slate);text-transform:uppercase;">Taux d\'Essais Marqués</div>' +
               '<div style="font-size:1.25rem;font-weight:900;color:#1d4ed8;">' + tryConversionPct + ' %</div>' +
               '<div style="font-size:0.75rem;color:var(--slate);">' + passOk + ' passes AR · ' + tagsDef + ' tags/plaq.</div>' +
             '</div>' +
@@ -1196,7 +1169,7 @@
         var dateStr = new Date().toLocaleDateString('fr-MA');
 
         var reportHtml = '<table class="a4-header-table"><tr>' +
-          '<td style="width:36%;"><strong>ROYAUME DU MAROC</strong><br>Ministère de l'Éducation Nationale, du Préscolaire et des Sports<br><strong>Matière :</strong> Éducation Physique et Sportive</td>' +
+          '<td style="width:36%;"><strong>ROYAUME DU MAROC</strong><br>Ministère de l\'Éducation Nationale, du Préscolaire et des Sports<br><strong>Matière :</strong> Éducation Physique et Sportive</td>' +
           '<td style="width:28%;text-align:center;"><strong>FEUILLE DE MATCH OFFICIELLE WORLD RUGBY</strong><br>APS : <strong>RUGBY SCOLAIRE / TAG RUGBY</strong><br>Date : ' + dateStr + '</td>' +
           '<td style="width:36%;text-align:right;"><strong>Classe / Niveau :</strong> ' + cls + '<br><strong>Arbitre &amp; Observateur IGT :</strong> ' + refs + '</td>' +
           '</tr></table>' +
@@ -1209,7 +1182,7 @@
           '<table style="width:100%;margin-top:1.5rem;border:none;font-size:0.85rem;"><tr>' +
           '<td style="border:none;width:33%;"><strong>Signature Arbitre &amp; Observateur IGT :</strong><br><br>........................................</td>' +
           '<td style="border:none;width:33%;text-align:center;"><strong>Signature des Capitaines (A &amp; B) :</strong><br><br>........................................</td>' +
-          '<td style="border:none;width:33%;text-align:right;"><strong>Visa du Professeur d'EPS :</strong><br><br>........................................</td>' +
+          '<td style="border:none;width:33%;text-align:right;"><strong>Visa du Professeur d\'EPS :</strong><br><br>........................................</td>' +
           '</tr></table>';
 
         if (format === 'word') {
@@ -1224,6 +1197,55 @@
         computeRugbyCalculator();
       });
 
+
+
+      function syncScoreboardFullscreenUI(isFull) {
+        var wrap = document.getElementById('dedicatedScoreboardCard');
+        if (!wrap) return;
+        var btnToggle = document.getElementById('btnToggleGymFullscreen');
+        var btnExitInline = document.getElementById('btnExitGymFullscreenInline');
+        if (isFull) {
+          wrap.classList.add('is-gym-fullscreen');
+          document.body.style.overflow = 'hidden';
+          if (btnToggle) btnToggle.style.display = 'none';
+          if (btnExitInline) btnExitInline.style.display = 'inline-flex';
+        } else {
+          wrap.classList.remove('is-gym-fullscreen');
+          document.body.style.overflow = '';
+          if (btnToggle) btnToggle.style.display = 'inline-flex';
+          if (btnExitInline) btnExitInline.style.display = 'none';
+        }
+      } else {
+          wrap.classList.remove('is-gym-fullscreen');
+          document.body.style.overflow = '';
+        }
+      }
+
+      function toggleScoreboardFullscreen() {
+        var wrap = document.getElementById('dedicatedScoreboardCard');
+        if (!wrap) return;
+        var willBeFull = !wrap.classList.contains('is-gym-fullscreen');
+        syncScoreboardFullscreenUI(willBeFull);
+        if (!willBeFull && document.fullscreenElement && document.exitFullscreen) {
+          document.exitFullscreen().catch(function() {});
+        }
+      }
+
+      function exitScoreboardFullscreen() {
+        syncScoreboardFullscreenUI(false);
+        if (document.fullscreenElement && document.exitFullscreen) {
+          document.exitFullscreen().catch(function() {});
+        }
+      }
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' || e.key === 'Esc' || e.keyCode === 27) {
+          var wrap = document.getElementById('dedicatedScoreboardCard');
+          if (wrap && wrap.classList.contains('is-gym-fullscreen')) {
+            exitScoreboardFullscreen();
+          }
+        }
+      });
 </script>
 
 <!-- PROFEPS_EEAT_AUTHOR_START -->
