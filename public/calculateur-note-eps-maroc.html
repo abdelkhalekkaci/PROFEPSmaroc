@@ -1088,32 +1088,6 @@
       border-color: #FB7185;
       font-weight: 800;
     }
-    .status-cycle-btn {
-      padding: 3px 7px;
-      border-radius: 6px;
-      border: 1px solid #CBD5E1;
-      font-size: 0.69rem;
-      font-weight: 800;
-      cursor: pointer;
-      white-space: nowrap;
-      background: #FFFFFF;
-      color: #334155;
-    }
-    .status-cycle-btn.st-ok {
-      background: #DCFCE7;
-      color: #166534;
-      border-color: #86EFAC;
-    }
-    .status-cycle-btn.st-abs {
-      background: #FEF3C7;
-      color: #B45309;
-      border-color: #FCD34D;
-    }
-    .status-cycle-btn.st-disp {
-      background: #FFE4E6;
-      color: #9F1239;
-      border-color: #FDA4AF;
-    }
     .row-del-btn {
       border: 1px solid #FECACA;
       background: #FFFFFF;
@@ -1158,28 +1132,63 @@
     }
     .excel-map-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 1fr 1.35fr;
       gap: 0.75rem;
       margin: 0.9rem 0;
     }
+    .excel-advanced-details .excel-map-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
     @media (max-width: 680px) {
-      .excel-map-grid { grid-template-columns: 1fr; }
+      .excel-map-grid,
+      .excel-advanced-details .excel-map-grid { grid-template-columns: 1fr; }
+    }
+    .excel-preview-scroll {
+      max-height: 270px;
+      overflow-y: auto;
+      border: 1px solid #BFDBFE;
+      border-radius: 10px;
+      margin-top: 0.45rem;
     }
     .excel-preview-table {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.79rem;
-      margin-top: 0.5rem;
     }
     .excel-preview-table th, .excel-preview-table td {
-      border: 1px solid #DBEAFE;
-      padding: 0.42rem 0.6rem;
+      border-bottom: 1px solid #DBEAFE;
+      border-right: 1px solid #DBEAFE;
+      padding: 0.38rem 0.58rem;
       text-align: left;
     }
+    .excel-preview-table th:last-child, .excel-preview-table td:last-child {
+      border-right: none;
+    }
     .excel-preview-table th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
       background: #EFF6FF;
       font-weight: 800;
       color: #1E3A8A;
+    }
+    .modal-gender-pill {
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+    .modal-gender-pill.is-g {
+      background: #EFF6FF;
+      color: #1D4ED8;
+      border-color: #93C5FD;
+    }
+    .modal-gender-pill.is-f {
+      background: #FDF2F8;
+      color: #BE185D;
+      border-color: #F9A8D4;
     }
     .excel-advanced-details {
       margin-top: 0.75rem;
@@ -1398,6 +1407,19 @@
       background: #1E293B;
       color: #E2E8F0;
       border-color: #334155;
+    }
+    html[data-theme="dark"] .excel-preview-scroll {
+      border-color: #334155;
+    }
+    html[data-theme="dark"] .modal-gender-pill.is-g {
+      background: rgba(59, 130, 246, 0.22);
+      color: #93C5FD;
+      border-color: #3B82F6;
+    }
+    html[data-theme="dark"] .modal-gender-pill.is-f {
+      background: rgba(236, 72, 153, 0.22);
+      color: #F9A8D4;
+      border-color: #EC4899;
     }
     html[data-theme="dark"] .crit-choice-btn,
     html[data-theme="dark"] .q-chip,
@@ -2231,11 +2253,10 @@
         <div class="class-toolbar-sub">
           <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.55rem;">
             <input type="search" id="classSearchInput" class="class-search-input" placeholder="🔍 Rechercher un élève..." oninput="onClassFilterChange()">
-            <select id="classFilterSelect" class="class-filter-select" aria-label="Filtrer par genre ou statut" onchange="setClassFilter(this.value)">
+            <select id="classFilterSelect" class="class-filter-select" aria-label="Filtrer par genre" onchange="setClassFilter(this.value)">
               <option value="ALL" selected>Tous les élèves</option>
               <option value="G">Garçons (G)</option>
               <option value="F">Filles (F)</option>
-              <option value="INACTIVE">Absents / Dispensés</option>
             </select>
           </div>
           <span class="save-status-note" id="saveStatusNote">Sauvegarde auto active</span>
@@ -2244,7 +2265,7 @@
 
       <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-bottom:0.9rem;" id="classSummaryStatsBar">
         <div style="flex:1 1 170px;background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.65rem 0.9rem;">
-          <div style="font-size:0.72rem;font-weight:700;color:#475569;text-transform:uppercase;">Moyenne (Hors ABS/DISP)</div>
+          <div style="font-size:0.72rem;font-weight:700;color:#475569;text-transform:uppercase;">Moyenne de Classe</div>
           <div style="font-size:1.2rem;font-weight:800;color:#1E3A8A;font-variant-numeric:tabular-nums;" id="clsStatAvg">16.25 / 20</div>
         </div>
         <div style="flex:1 1 170px;background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.65rem 0.9rem;">
@@ -2256,8 +2277,8 @@
           <div style="font-size:1.2rem;font-weight:800;color:#2434A8;font-variant-numeric:tabular-nums;" id="clsStatPassRate">100% (5/5)</div>
         </div>
         <div style="flex:1 1 170px;background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.65rem 0.9rem;">
-          <div style="font-size:0.72rem;font-weight:700;color:#475569;text-transform:uppercase;">Présents / ABS / DISP</div>
-          <div style="font-size:1.05rem;font-weight:800;color:#1E3A8A;font-variant-numeric:tabular-nums;" id="clsStatStatusCounts">5 / 0 / 0</div>
+          <div style="font-size:0.72rem;font-weight:700;color:#475569;text-transform:uppercase;">Effectif (Garçons / Filles)</div>
+          <div style="font-size:1.05rem;font-weight:800;color:#1E3A8A;font-variant-numeric:tabular-nums;" id="clsStatStatusCounts">5 (3 G · 2 F)</div>
         </div>
       </div>
 
@@ -2265,7 +2286,7 @@
       <div class="class-export-card" id="classExportSection" aria-label="Exporter la grille de notes">
         <div class="class-export-info">
           <h3>Exporter &amp; Imprimer la Grille de Notes</h3>
-          <p>Téléchargez la feuille complète ou le tableau prêt pour Massar (inclut le nom de la classe, ABS/DISP et la note /20).</p>
+          <p>Téléchargez la feuille complète ou le tableau prêt pour Massar (inclut le nom de la classe, le genre et la note /20).</p>
         </div>
         <div class="class-btn-group">
           <button type="button" class="c-btn" onclick="exportClassGridExcel('classe')">📊 Excel (.xlsx)</button>
@@ -2517,8 +2538,8 @@
     <div class="excel-modal-dialog">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:0.75rem;margin-bottom:0.65rem;">
         <div>
-          <h3 id="excelModalTitle" style="margin:0;font-size:1.05rem;font-weight:800;">Importer une Classe (Excel / Massar / CSV)</h3>
-          <p id="excelModalSubtitle" style="margin:0.18rem 0 0;font-size:0.79rem;color:var(--ink-muted);">Vérifiez le nom de la classe, les noms des élèves et le genre (max 50 élèves).</p>
+          <h3 id="excelModalTitle" style="margin:0;font-size:1.05rem;font-weight:800;color:#1E3A8A;">Importer une Classe (Excel / Massar / CSV)</h3>
+          <p id="excelModalSubtitle" style="margin:0.18rem 0 0;font-size:0.79rem;color:var(--ink-muted);">Vérifiez le nom de la classe et la liste des élèves extraits (genre détecté d'après les prénoms).</p>
         </div>
         <button type="button" class="c-btn subtle" onclick="closeExcelMapModal()">✕ Fermer</button>
       </div>
@@ -2526,24 +2547,20 @@
       <div class="excel-map-grid">
         <div class="cfg-group">
           <label for="mapClassName">Nom de la classe</label>
-          <input type="text" id="mapClassName" class="cfg-input" placeholder="Ex: TCLSHF-1" oninput="refreshExcelPreview()">
+          <input type="text" id="mapClassName" class="cfg-input" placeholder="Ex: 1BACSEF-2" oninput="refreshExcelPreview()">
         </div>
         <div class="cfg-group">
           <label for="mapColNom">Colonne Noms des élèves *</label>
-          <select id="mapColNom" class="cfg-select" onchange="refreshExcelPreview()"></select>
-        </div>
-        <div class="cfg-group">
-          <label for="mapColSexe">Colonne Genre (G / F)</label>
-          <select id="mapColSexe" class="cfg-select" onchange="refreshExcelPreview()"></select>
+          <select id="mapColNom" class="cfg-select" onchange="resetExcelGenderOverrides(); refreshExcelPreview()"></select>
         </div>
       </div>
 
       <div id="excelMapAlert" style="font-size:0.79rem;font-weight:700;padding:0.55rem 0.78rem;border-radius:9px;background:#EFF6FF;border:1px solid #93C5FD;color:#1E3A8A;margin-bottom:0.6rem;"></div>
 
-      <div style="font-size:0.77rem;font-weight:700;color:var(--ink-muted);">Aperçu des 5 premiers élèves extraits :</div>
-      <div style="overflow-x:auto;">
+      <div id="excelPreviewLabel" style="font-size:0.77rem;font-weight:700;color:var(--ink-muted);">Tous les élèves extraits (cliquez sur G / F pour ajuster si besoin) :</div>
+      <div class="excel-preview-scroll">
         <table class="excel-preview-table">
-          <thead><tr><th style="width:42px;">N°</th><th>Nom &amp; Prénom</th><th style="width:120px;">Genre (G / F)</th></tr></thead>
+          <thead><tr><th style="width:44px;">N°</th><th>Nom &amp; Prénom</th><th style="width:125px;">Genre détecté</th></tr></thead>
           <tbody id="excelPreviewBody"></tbody>
         </table>
       </div>
@@ -4048,16 +4065,6 @@
       showToast(`Ligne supprimée : ${removed.nom}`);
     }
 
-    function cycleStudentStatus(rIdx) {
-      const st = classStudents[rIdx];
-      if (!st) return;
-      const order = ['OK', 'ABS', 'DISP'];
-      const cur = order.indexOf(st.status || 'OK');
-      st.status = order[(cur + 1) % order.length];
-      saveStateToStorage();
-      renderClassGridTable();
-    }
-
     function setClassFilter(mode) {
       currentClassFilter = mode || 'ALL';
       const sel = document.getElementById('classFilterSelect');
@@ -4176,7 +4183,6 @@
             <th rowspan="2" style="width:36px;">N°</th>
             <th rowspan="2" style="min-width:155px;">Nom &amp; Prénom</th>
             <th rowspan="2" style="width:46px;">Sexe</th>
-            <th rowspan="2" style="width:54px;">Statut</th>
             <th colspan="5" class="mega-hdr-indiv">1A. Capacité Individuelle (/${cfg.perfMax} pts)</th>
             <th colspan="5" class="mega-hdr-coll">1B. Capacité Collective (/${cfg.procMax} pts)</th>
             <th rowspan="2" style="width:66px;">2. Conc.<br><span style="color:#A7F3D0;">/${cfg.concepMax}</span></th>
@@ -4207,7 +4213,6 @@
             <th rowspan="2" style="width:36px;">N°</th>
             <th rowspan="2" style="min-width:155px;">Nom &amp; Prénom</th>
             <th rowspan="2" style="width:46px;">Sexe</th>
-            <th rowspan="2" style="width:54px;">Statut</th>
             <th rowspan="2" style="min-width:105px;">Perf. Brute<br><span style="color:#93C5FD;">(Unité : ${unitMeta.unit})</span></th>
             <th rowspan="2" style="width:74px;">1A. Note Perf<br><span style="color:#FCD34D;">/${cfg.perfMax} pts</span></th>
             <th colspan="4">1B. ${cfg.labelProc} — 4 Critères (<span style="color:#93C5FD;">/${cfg.procMax} pts</span>)</th>
@@ -4231,40 +4236,34 @@
       // Compute visible indices based on filter & search
       const visibleIndices = [];
       classStudents.forEach((st, idx) => {
-        const status = st.status || 'OK';
         if (currentClassFilter === 'G' && st.sexe !== 'G') return;
         if (currentClassFilter === 'F' && st.sexe !== 'F') return;
-        if (currentClassFilter === 'INACTIVE' && status === 'OK') return;
         if (currentClassSearch && !String(st.nom || '').toLowerCase().includes(currentClassSearch)) return;
         visibleIndices.push(idx);
       });
 
       if (visibleIndices.length === 0) {
-        const colSpanCount = cfg.isSpCo ? 18 : 15;
+        const colSpanCount = cfg.isSpCo ? 17 : 14;
         tbody.innerHTML = `<tr><td colspan="${colSpanCount}" style="padding:22px;color:#64748B;font-weight:600;">Aucun élève ne correspond au filtre actuel.</td></tr>`;
       } else {
         tbody.innerHTML = visibleIndices.map(rIdx => {
           const st = classStudents[rIdx];
+          st.status = 'OK';
           if (st.perfScore === null || st.perfScore === undefined || st.perfScore > cfg.perfMax) {
             st.perfScore = Math.max(0, cfg.perfMax - 1.0);
           }
           if (st.comp > cfg.compMax) st.comp = cfg.compMax;
-          const status = st.status || 'OK';
-          const isInactive = status !== 'OK';
           const scores = getStudentScores(st, cfg);
-
-          const statusClass = status === 'ABS' ? 'st-abs' : (status === 'DISP' ? 'st-disp' : 'st-ok');
-          const statusBadge = `<button type="button" class="status-cycle-btn ${statusClass}" onclick="cycleStudentStatus(${rIdx})" title="Cliquer pour basculer : OK → ABS → DISP">${status}</button>`;
 
           const procCells = critsProc.map((c, cIdx) => {
             const choice = (st.crits && st.crits[cIdx]) || 0;
             return `
               <td>
                 <div class="mini-chk-pair">
-                  <button type="button" class="mini-chk ${choice === 0 ? 'pos-on' : ''}" ${isInactive ? 'disabled' : ''} onclick="setClassStudentCrit(${rIdx}, ${cIdx}, 0)" title="${c.sous[0]} (+${procWeights[cIdx]} pt)">
+                  <button type="button" class="mini-chk ${choice === 0 ? 'pos-on' : ''}" onclick="setClassStudentCrit(${rIdx}, ${cIdx}, 0)" title="${c.sous[0]} (+${procWeights[cIdx]} pt)">
                     ${choice === 0 ? '✓ ' : ''}${c.sous[0]}
                   </button>
-                  <button type="button" class="mini-chk ${choice === 1 ? 'neg-on' : ''}" ${isInactive ? 'disabled' : ''} onclick="setClassStudentCrit(${rIdx}, ${cIdx}, 1)" title="${c.sous[1]} (+${negPts} pt)">
+                  <button type="button" class="mini-chk ${choice === 1 ? 'neg-on' : ''}" onclick="setClassStudentCrit(${rIdx}, ${cIdx}, 1)" title="${c.sous[1]} (+${negPts} pt)">
                     ${choice === 1 ? '✗ ' : ''}${c.sous[1]}
                   </button>
                 </div>
@@ -4279,10 +4278,10 @@
               return `
                 <td>
                   <div class="mini-chk-pair">
-                    <button type="button" class="mini-chk ${choice === 0 ? 'pos-on' : ''}" ${isInactive ? 'disabled' : ''} onclick="setClassStudentIndivCrit(${rIdx}, ${cIdx}, 0)" title="${c.sous[0]} (+${indWeights[cIdx]} pt)">
+                    <button type="button" class="mini-chk ${choice === 0 ? 'pos-on' : ''}" onclick="setClassStudentIndivCrit(${rIdx}, ${cIdx}, 0)" title="${c.sous[0]} (+${indWeights[cIdx]} pt)">
                       ${choice === 0 ? '✓ ' : ''}${c.sous[0]}
                     </button>
-                    <button type="button" class="mini-chk ${choice === 1 ? 'neg-on' : ''}" ${isInactive ? 'disabled' : ''} onclick="setClassStudentIndivCrit(${rIdx}, ${cIdx}, 1)" title="${c.sous[1]} (+${negPts} pt)">
+                    <button type="button" class="mini-chk ${choice === 1 ? 'neg-on' : ''}" onclick="setClassStudentIndivCrit(${rIdx}, ${cIdx}, 1)" title="${c.sous[1]} (+${negPts} pt)">
                       ${choice === 1 ? '✗ ' : ''}${c.sous[1]}
                     </button>
                   </div>
@@ -4292,46 +4291,43 @@
 
             middleHtml = `
               ${indivCells}
-              <td class="tabular-nums" style="font-weight:800;color:#1E40AF;background:#EFF6FF;">${isInactive ? '—' : scores.pIndiv.toFixed(2)}</td>
+              <td class="tabular-nums" style="font-weight:800;color:#1E40AF;background:#EFF6FF;">${scores.pIndiv.toFixed(2)}</td>
               ${procCells}
-              <td class="tabular-nums" style="font-weight:800;color:#065F46;background:#ECFDF5;">${isInactive ? '—' : scores.pProc.toFixed(2)}</td>
+              <td class="tabular-nums" style="font-weight:800;color:#065F46;background:#ECFDF5;">${scores.pProc.toFixed(2)}</td>
             `;
           } else {
             middleHtml = `
               <td>
                 <div class="unit-input-wrap">
-                  <input type="text" class="row-input-raw" value="${escapeHtml(st.rawPerf || '')}" placeholder="${unitMeta.placeholder}" ${isInactive ? 'disabled' : ''} onchange="onClassRawPerfChange(${rIdx}, this.value)" title="Saisir la performance (${unitMeta.stepHint || unitMeta.placeholder})">
+                  <input type="text" class="row-input-raw" value="${escapeHtml(st.rawPerf || '')}" placeholder="${unitMeta.placeholder}" onchange="onClassRawPerfChange(${rIdx}, this.value)" title="Saisir la performance (${unitMeta.stepHint || unitMeta.placeholder})">
                   <span class="perf-unit-tag">${unitMeta.unit}</span>
                 </div>
               </td>
               <td>
-                <input type="number" class="row-input-num tabular-nums" min="0" max="${cfg.perfMax}" step="0.25" value="${Number(st.perfScore).toFixed(2)}" ${isInactive ? 'disabled' : ''} onchange="updateClassStudentField(${rIdx}, 'perfScore', this.value)">
+                <input type="number" class="row-input-num tabular-nums" min="0" max="${cfg.perfMax}" step="0.25" value="${Number(st.perfScore).toFixed(2)}" onchange="updateClassStudentField(${rIdx}, 'perfScore', this.value)">
               </td>
               ${procCells}
-              <td class="tabular-nums" style="font-weight:800;color:#1E40AF;background:#EFF6FF;">${isInactive ? '—' : scores.pProc.toFixed(2)}</td>
+              <td class="tabular-nums" style="font-weight:800;color:#1E40AF;background:#EFF6FF;">${scores.pProc.toFixed(2)}</td>
             `;
           }
 
-          const totalCellHtml = isInactive
-            ? `<td style="font-weight:800;font-size:0.8rem;color:#9F1239;background:#FFE4E6;">${status}</td>`
-            : `<td class="tabular-nums" style="font-weight:800;font-size:0.88rem;color:#166534;background:#DCFCE7;">${scores.total.toFixed(2)} / 20</td>`;
+          const totalCellHtml = `<td class="tabular-nums" style="font-weight:800;font-size:0.88rem;color:#166534;background:#DCFCE7;">${scores.total.toFixed(2)} / 20</td>`;
 
           return `
-            <tr class="${isInactive ? 'row-inactive' : ''}">
+            <tr>
               <td class="tabular-nums"><strong>${rIdx + 1}</strong></td>
               <td style="text-align:left;">
                 <input type="text" class="row-input-name" value="${escapeHtml(st.nom)}" onchange="updateClassStudentField(${rIdx}, 'nom', this.value)">
               </td>
               <td>
-                <button type="button" class="mini-chk" style="font-weight:800;" onclick="toggleClassStudentSexe(${rIdx})" title="Basculer Garçon (G) / Fille (F)">${st.sexe}</button>
+                <button type="button" class="mini-chk" style="font-weight:800;color:${st.sexe === 'F' ? '#BE185D' : '#1D4ED8'};" onclick="toggleClassStudentSexe(${rIdx})" title="Basculer Garçon (G) / Fille (F)">${st.sexe}</button>
               </td>
-              <td>${statusBadge}</td>
               ${middleHtml}
               <td>
-                <input type="number" class="row-input-num tabular-nums" min="0" max="${cfg.concepMax}" step="0.25" value="${st.concep}" ${isInactive ? 'disabled' : ''} onchange="updateClassStudentField(${rIdx}, 'concep', this.value)">
+                <input type="number" class="row-input-num tabular-nums" min="0" max="${cfg.concepMax}" step="0.25" value="${st.concep}" onchange="updateClassStudentField(${rIdx}, 'concep', this.value)">
               </td>
               <td>
-                <input type="number" class="row-input-num tabular-nums" min="0" max="${cfg.compMax}" step="0.25" value="${st.comp}" ${isInactive ? 'disabled' : ''} onchange="updateClassStudentField(${rIdx}, 'comp', this.value)">
+                <input type="number" class="row-input-num tabular-nums" min="0" max="${cfg.compMax}" step="0.25" value="${st.comp}" onchange="updateClassStudentField(${rIdx}, 'comp', this.value)">
               </td>
               ${totalCellHtml}
               <td>
@@ -4342,13 +4338,14 @@
         }).join('');
       }
 
-      // Calculer les statistiques de la classe (en excluant ABS & DISP)
+      // Calculer les statistiques de la classe (effectif + G / F)
       const activeTotals = [];
-      let absCount = 0;
-      let dispCount = 0;
+      let boysCount = 0;
+      let girlsCount = 0;
       classStudents.forEach(st => {
-        if (st.status === 'ABS') { absCount++; return; }
-        if (st.status === 'DISP') { dispCount++; return; }
+        st.status = 'OK';
+        if (st.sexe === 'F') girlsCount++;
+        else boysCount++;
         const sc = getStudentScores(st, cfg);
         if (sc.total !== null) activeTotals.push(sc.total);
       });
@@ -4372,7 +4369,7 @@
         if (elMinMax) elMinMax.textContent = '-- / --';
         if (elPass) elPass.textContent = '0%';
       }
-      if (elStatus) elStatus.textContent = `${activeTotals.length} / ${absCount} / ${dispCount}`;
+      if (elStatus) elStatus.textContent = `${classStudents.length} (${boysCount} G · ${girlsCount} F)`;
     }
 
     // =========================================================================
@@ -4638,11 +4635,126 @@
       return { bestIdx, bestScore };
     }
 
+    // Distinction automatique du genre (G / F) à partir des prénoms marocains (Arabe & Français)
+    const FEMALE_AR_NAMES = new Set([
+      'هاجر','سلمى','فاطمه','مريم','خديجه','سكينه','كوثر','شيماء','زينب','ايه','صفاء','مروه',
+      'يسرى','نهى','ايمان','هدى','ساره','حفصه','نوره','اميمه','رقيه','عائشه','اسماء','بشرى',
+      'حنان','رجاء','حسناء','وفاء','سهام','سناء','ناديه','سميره','لطيفه','نوال','حياه','اكرام',
+      'غزلان','ابتسام','لبنى','ريم','ملاك','ندى','وصال','لمياء','دنيا','جيهان','فدوى','الهام',
+      'رشيده','كريمه','سعاد','نعيمه','منال','هبه','ياسمين','ايناس','رحاب','ضحى','تسنيم','جنات',
+      'رتاج','احلام','اشراق','رميساء','امينه','ليلى','جميله','زهره','عزيزه','نجاه','بهيجه','فتيحه',
+      'زهور','ربيعه','فوزيه','مليكه','مونيه','حليمه','سعيده','ثريا','اخلاص','دعاء','سندس','اروى',
+      'لينه','يارا','شروق','غيثه','فردوس','سميه','هند','امال','بثينه','صوفيا','كنزه','امنه',
+      'شامه','راضيه','كلثوم','توريه','حسنيه','نبيله','ماجده','مجيده','صابرين','اسراء','رانيا','مها',
+      'شهد','تقوى','ميساء','اريج','روان','ريماس','جوري','لجين','نوران','بسمله','رحمه','حبيبه',
+      'الزهراء','السعديه','البتول','نزهه','زكيه','عفاف','نجوى','اميره','سمر','سهيله','اماني','منيه',
+      'نسرين','وداد','انتصار','رحيمه','زليخه','خدوج','طامو','يطو','ميمونه','صباح','وئام','نهاد',
+      'عواطف','شذى','نرجس','يثرب','هديل','خلود','غفران','رحيق','تغريد','سلاف','رغد','نورا',
+      'منار','صفا','هاله','سلوى','فضيله','منى','ابتهال','راويه','نهيله','نور','سيرين','لينا',
+      'الاء','مروى','يسرا','اسمهان','سناء','شريفه','عزيزه','بديعه','طاهره','حكيمه','فائزه','فتاحه',
+      'زوبيده','السعديه','العاليه','امال','سميحه','نعيمه','بدره','سجى','ميعاد','وفا','مؤمنه','اميمه'
+    ]);
+
+    const MALE_AR_NAMES = new Set([
+      'محمد','احمد','يوسف','امين','عمر','علي','حسن','الحسن','لحسن','حسين','الحسين','لحسين',
+      'مصطفى','المصطفى','خالد','طارق','كريم','ابراهيم','اسماعيل','ياسين','ايوب','انس','سعد',
+      'حمزه','اسامه','زكرياء','زكريا','بلال','رضوان','سفيان','وليد','هشام','عادل','رشيد','سمير',
+      'نبيل','فؤاد','مراد','عصام','منير','توفيق','يونس','عثمان','الياس','المهدي','مهدي','ادم',
+      'ريان','عمران','معاذ','طه','طاها','بدر','اشرف','انور','ناصر','صلاح','كمال','جمال','فريد',
+      'سعيد','عزيز','مجيد','لطفي','العربي','بوشعيب','الجيلالي','المختار','محسن','حسام','وائل','يزيد',
+      'ادريس','نزار','سهيل','وسيم','اكرم','ايمن','حاتم','مازن','فهد','راشد','مروان','سلمان',
+      'سلطان','عماد','جواد','زهير','حميد','عبدو','طلحه','عباده','حذيفه','عكرمه','قتيبه','معاويه',
+      'عطيه','خليفه','جمعه','علاء','بهاء','ضياء','موسى','عيسى','يحيى','رضا','حليم','منصف',
+      'نورالدين','صلاح الدين','بدرالدين','شرف','شرف الدين','سيف','سيف الدين','زين العابدين',
+      'تقي الدين','نصر','نصرالدين','شكيب','ياسر','مبارك','امبارك','الشرقي','بوجمعه','بوزكري',
+      'بوعزه','سليمان','داود','هارون','لقمان','هيثم','صهيب','منتصر','ياسر','عزالدين','محمود',
+      'حاتم','ماهر','سامي','رامي','تامر','باسم','باسل','رائد','هادي','شادي','فادي','عمران'
+    ]);
+
+    const FEMALE_LATIN_NAMES = new Set([
+      'hajar','salma','fatima','meriem','meryem','mariam','maryam','khadija','soukaina','kaoutar',
+      'kawtar','kawtare','chaimae','chaima','chaymae','zineb','aya','safae','safa','marwa','maroua',
+      'yousra','youssra','imane','iman','houda','hoda','sara','sarah','hafsa','noura','oumaima',
+      'oumayma','rkia','aicha','asmae','asma','bouchra','hanane','hanan','rajae','raja','hasna',
+      'hasnae','wafaa','wafae','siham','sanae','sana','nadia','samira','latifa','nawal','hayat',
+      'ikram','ghizlane','ibtissam','loubna','rim','rime','malak','nada','wissal','lamiae','lamyae',
+      'dounia','jihane','fadwa','ilham','rachida','karima','souad','naima','manal','hiba','yasmine',
+      'yasmin','ines','inas','rihab','douha','doha','tasnim','tasnime','kenza','amina','leila',
+      'laila','layla','jamila','zohra','aziza','najat','bahija','fatiha','zhor','rabia','fawzia',
+      'malika','mounia','halima','saida','touria','nabila','majda','israa','israe','rania','maha',
+      'nisrine','nessrine','walae','alae','widad','ghita','rhita','firdaous','soumia','hind','amal',
+      'assia','sonia','sofia','nihal','manar','sabah','sabrine','basma','zakia','nezha','afaf',
+      'najwa','amira','samar','souhaila','souhayla','amani','habiba','rahma','zahra','fatimazahra',
+      'zoubida','soumaya','saadia','ouiam','wiam','kholoud','douae','salwa','saloua','houriya',
+      'fadila','souhir','mouna','merieme','ibtihal','raouia','nouhaila','nohaila','lina','sirine',
+      'cherifa','samiha','nora','badia','hakima','faiza'
+    ]);
+
+    const MALE_LATIN_NAMES = new Set([
+      'mohamed','mohammed','ahmed','youssef','amine','omar','ali','hassan','lahcen','houssam',
+      'hicham','adil','rachid','samir','nabil','fouad','mourad','issam','mounir','taoufik',
+      'youness','younes','othmane','othman','ilyas','ilyass','mehdi','adam','rayane','rayan',
+      'imrane','mouad','taha','badr','achraf','anouar','anwar','nasser','salah','kamal','jamal',
+      'farid','said','aziz','majid','lotfi','mustapha','larbi','bouchaib','jilali','mokhtar',
+      'mohcine','wael','yazid','driss','idriss','nizar','souhail','wassim','akram','aymen',
+      'ayman','hatim','mazen','fahd','marouane','marwan','salmane','imad','jaouad','jawad',
+      'zouhair','hamid','karim','tarek','tarik','ibrahim','ismail','yassine','ayoub','anas',
+      'anass','saad','hamza','oussama','zakaria','bilal','redouane','redwane','soufiane','walid',
+      'khalid','reda','abdellah','abdessamad','abdelaziz','abderrahmane','abdelali','abdelilah',
+      'abdelkader','abdelkrim','abdelhak','abdelmajid','abdennour','abdessalam','abderrazak',
+      'abdelghani','abdelwahab','abdelouahad','noureddine','salaheddine','badreddine','yasser',
+      'mbarek','moussa','aissa','yahya','moncef','chakib','soulimane','haytham','souhaib','azzeddine'
+    ]);
+
+    function inferGenderFromName(fullName) {
+      const cleaned = normalizeMatchStr(fullName);
+      if (!cleaned) return 'G';
+      const tokens = cleaned.split(/\s+/).filter(Boolean);
+      if (!tokens.length) return 'G';
+
+      // Préfixes composés masculins ("عبد الصمد", "عبد الله", "abdessamad", "abdel...") et composés "... الدين"
+      for (let i = 0; i < tokens.length - 1; i++) {
+        if (tokens[i] === 'عبد' || tokens[i] === 'abdel' || tokens[i] === 'abd') return 'G';
+        if (tokens[i + 1] === 'الدين') return 'G';
+      }
+      if (/^عبد.{2,}$/.test(tokens[tokens.length - 1]) || /^abde?[llrs]/.test(tokens[tokens.length - 1])) return 'G';
+
+      // Vérifier composé féminin connu ("فاطمه الزهراء", "هبه الله", "امنه الله")
+      const fullJoined = tokens.join(' ');
+      if (/(فاطمه الزهراء|هبه الله|امنه الله|ايه الله|نور الهدى)/.test(fullJoined)) return 'F';
+      if (/(فتح|نصر|حمد|فضل|عطاء|جاد|رزق|سعد|ضياء|خير|امان|حبيب|خليل|روح)\s+الله/.test(fullJoined)) return 'G';
+
+      const checkToken = (tok) => {
+        if (!tok) return null;
+        // Normaliser ى <-> ي en variante de recherche secondaire
+        const tokAlefM = tok.replace(/ي$/g, 'ى');
+        if (FEMALE_AR_NAMES.has(tok) || FEMALE_AR_NAMES.has(tokAlefM) || FEMALE_LATIN_NAMES.has(tok)) return 'F';
+        if (MALE_AR_NAMES.has(tok) || MALE_AR_NAMES.has(tokAlefM) || MALE_LATIN_NAMES.has(tok)) return 'G';
+        // Morphologie arabe féminine (prénoms finissant en ة -> هـ après normalisation), hors "الله" et prénoms masculins déjà traités
+        if (tok !== 'الله' && /[\u0600-\u06FF]{2,}ه$/.test(tok)) return 'F';
+        return null;
+      };
+
+      // En format Massar (NOM PRENOM), le prénom est en fin de chaîne
+      const lastRes = checkToken(tokens[tokens.length - 1]);
+      if (lastRes) return lastRes;
+
+      // Sinon vérifier le premier mot (format Prénom Nom) ou les mots intermédiaires
+      for (let i = 0; i < tokens.length - 1; i++) {
+        const r = checkToken(tokens[i]);
+        if (r) return r;
+      }
+
+      return 'G';
+    }
+
     function openExcelMapModal(sheetsMap, fileName) {
       excelImportState = {
         fileName: fileName || 'fichier.xlsx',
         sheetNames: Object.keys(sheetsMap),
-        sheets: sheetsMap
+        sheets: sheetsMap,
+        detectedColSexe: -1,
+        genderOverrides: {}
       };
 
       const selSheet = document.getElementById('mapColSheet');
@@ -4685,6 +4797,10 @@
       onExcelSheetOrHeaderChange();
     }
 
+    function resetExcelGenderOverrides() {
+      excelImportState.genderOverrides = {};
+    }
+
     function onExcelSheetOrHeaderChange() {
       const sheetName = document.getElementById('mapColSheet').value;
       const rows = excelImportState.sheets[sheetName] || [];
@@ -4697,6 +4813,7 @@
         return;
       }
 
+      resetExcelGenderOverrides();
       const hIdx = parseInt(headerSel.value || '0', 10);
       const headerRow = rows[hIdx] || [];
       const sampleRows = rows.slice(hIdx + 1, hIdx + 12);
@@ -4709,6 +4826,8 @@
       };
 
       const detected = detectExcelColumnsOnRow(headerRow, sampleRows);
+      excelImportState.detectedColSexe = detected.colSexe;
+
       const baseOpts = [];
       if (detected.colNom !== -1 && detected.colPrenom !== -1 && detected.colNom !== detected.colPrenom) {
         const pairVal = `__PAIR__:${detected.colNom}:${detected.colPrenom}`;
@@ -4719,35 +4838,26 @@
       }
 
       const selNom = document.getElementById('mapColNom');
-      const selSexe = document.getElementById('mapColSexe');
-
       selNom.innerHTML = baseOpts.join('');
-      selSexe.innerHTML = `<option value="-1">Non présent (G par défaut)</option>` + (() => {
-        const sx = [];
-        for (let c = 0; c < maxCols; c++) sx.push(`<option value="${c}">${escapeHtml(colLabel(c))}</option>`);
-        return sx.join('');
-      })();
-
       if (detected.colNom !== -1 && detected.colPrenom !== -1 && detected.colNom !== detected.colPrenom) {
         selNom.value = `__PAIR__:${detected.colNom}:${detected.colPrenom}`;
       } else {
         selNom.value = detected.colNom !== -1 ? String(detected.colNom) : '0';
       }
-      selSexe.value = detected.colSexe !== -1 ? String(detected.colSexe) : '-1';
 
       refreshExcelPreview();
     }
 
     function normalizeGenderValue(raw) {
       const v = normalizeMatchStr(raw);
-      if (!v) return 'G';
+      if (!v) return null;
       if (/^(f|fille|filles|feminin|female|girl|w|انثى|انثي|بنت|اناث|مؤنث)/.test(v) || v.includes('انثى') || v.includes('انثي') || v.includes('fille') || v.includes('feminin')) {
         return 'F';
       }
       if (/^(g|m|garcon|garcons|masculin|male|boy|ذكر|ولد|ذكور|مذكر)/.test(v) || v.includes('ذكر') || v.includes('garcon')) {
         return 'G';
       }
-      return 'G';
+      return null;
     }
 
     function extractStudentsFromExcelModal() {
@@ -4755,7 +4865,7 @@
       const rows = excelImportState.sheets[sheetName] || [];
       const hIdx = parseInt(document.getElementById('mapColHeaderRow').value || '0', 10);
       const colNomRaw = String(document.getElementById('mapColNom')?.value || '0');
-      const colSexe = parseInt(document.getElementById('mapColSexe')?.value || '-1', 10);
+      const colSexe = typeof excelImportState.detectedColSexe === 'number' ? excelImportState.detectedColSexe : -1;
 
       let colNom = 0;
       let colPrenom = -1;
@@ -4777,43 +4887,60 @@
         if (looksLikeMassarCodeOrNumber(fullName)) continue;
         if (/^(total|moyenne|somme|effectif|المجموع|المعدل|العدد)$/i.test(fullName)) continue;
 
-        const sexe = colSexe >= 0 ? normalizeGenderValue(row[colSexe]) : 'G';
-        list.push({ nom: fullName, sexe });
+        const idx = list.length;
+        const explicitSex = colSexe >= 0 ? normalizeGenderValue(row[colSexe]) : null;
+        const autoSex = explicitSex || inferGenderFromName(fullName);
+        const finalSex = (excelImportState.genderOverrides && excelImportState.genderOverrides[idx]) || autoSex;
+        list.push({ nom: fullName, sexe: finalSex });
       }
       return list;
+    }
+
+    function toggleExcelPreviewGender(idx) {
+      const list = extractStudentsFromExcelModal();
+      const item = list[idx];
+      if (!item) return;
+      if (!excelImportState.genderOverrides) excelImportState.genderOverrides = {};
+      excelImportState.genderOverrides[idx] = item.sexe === 'F' ? 'G' : 'F';
+      refreshExcelPreview();
     }
 
     function refreshExcelPreview() {
       const list = extractStudentsFromExcelModal();
       const mode = document.getElementById('mapImportMode')?.value || 'replace';
-      const colSexe = parseInt(document.getElementById('mapColSexe')?.value || '-1', 10);
       const classNameVal = String(document.getElementById('mapClassName')?.value || '').trim() || 'Classe 1';
       const alertEl = document.getElementById('excelMapAlert');
       const bodyEl = document.getElementById('excelPreviewBody');
+      const labelEl = document.getElementById('excelPreviewLabel');
 
       const existingCount = mode === 'append' ? classStudents.length : 0;
       const availableSlots = Math.max(0, MAX_CLASS_STUDENTS - existingCount);
       const willImport = Math.min(list.length, availableSlots);
+      const gCount = list.slice(0, willImport).filter(s => s.sexe === 'G').length;
+      const fCount = list.slice(0, willImport).filter(s => s.sexe === 'F').length;
 
-      let msg = `Classe « ${classNameVal} » · ${willImport} élève(s) prêt(s)`;
+      let msg = `Classe « ${classNameVal} » · ${willImport} élève(s) détecté(s) (${gCount} G · ${fCount} F)`;
       if (list.length > availableSlots) {
-        msg += ` (plafond ${MAX_CLASS_STUDENTS} sur ${list.length} détectés)`;
-      }
-      if (colSexe === -1) {
-        msg += ` · Colonne genre absente (G par défaut, modifiable dans la grille).`;
+        msg += ` · Plafond ${MAX_CLASS_STUDENTS} sur ${list.length}`;
       }
       if (alertEl) alertEl.textContent = msg;
+      if (labelEl) {
+        labelEl.textContent = `Liste complète des ${list.length} élève(s) détecté(s) — cliquez sur G / F pour ajuster si nécessaire :`;
+      }
 
-      const sample = list.slice(0, 5);
-      if (!sample.length) {
+      if (!list.length) {
         bodyEl.innerHTML = `<tr><td colspan="3" style="color:#E11D48;font-weight:700;">Aucun nom détecté. Ouvrez « Ajustement manuel » ci-dessous pour vérifier la ligne des titres.</td></tr>`;
         return;
       }
-      bodyEl.innerHTML = sample.map((s, idx) => `
+      bodyEl.innerHTML = list.map((s, idx) => `
         <tr>
           <td>${idx + 1}</td>
           <td style="font-weight:700;">${escapeHtml(s.nom)}</td>
-          <td><span style="font-weight:800;color:${s.sexe === 'F' ? '#BE185D' : '#1D4ED8'};">${s.sexe} (${s.sexe === 'F' ? 'Fille' : 'Garçon'})</span></td>
+          <td>
+            <button type="button" class="modal-gender-pill ${s.sexe === 'F' ? 'is-f' : 'is-g'}" onclick="toggleExcelPreviewGender(${idx})" title="Cliquer pour basculer Garçon / Fille">
+              ${s.sexe} (${s.sexe === 'F' ? 'Fille' : 'Garçon'})
+            </button>
+          </td>
         </tr>
       `).join('');
     }
@@ -4897,24 +5024,22 @@
       let aoaMain = [];
       if (kind === 'massar') {
         aoaMain.push([`CLASSE : ${clsLabel}`, `APS : ${currentAps}`, `NIVEAU : ${nivLabel}`]);
-        aoaMain.push(['N°', 'Nom & Prénom', 'Sexe', 'Statut', `Procédural (/${cfg.procTotal})`, `Conceptuel (/${cfg.concepMax})`, `Comportemental (/${cfg.compMax})`, 'Note Finale /20']);
+        aoaMain.push(['N°', 'Nom & Prénom', 'Sexe', `Procédural (/${cfg.procTotal})`, `Conceptuel (/${cfg.concepMax})`, `Comportemental (/${cfg.compMax})`, 'Note Finale /20']);
         classStudents.forEach((st, idx) => {
-          const isInactive = (st.status || 'OK') !== 'OK';
           const sc = getStudentScores(st, cfg);
           aoaMain.push([
             idx + 1,
             st.nom,
             st.sexe,
-            st.status || 'OK',
-            isInactive ? st.status : Number((sc.pIndiv + sc.pProc).toFixed(2)),
-            isInactive ? st.status : Number(sc.cVal.toFixed(2)),
-            isInactive ? st.status : Number(sc.bVal.toFixed(2)),
-            isInactive ? st.status : Number(sc.total.toFixed(2))
+            Number((sc.pIndiv + sc.pProc).toFixed(2)),
+            Number(sc.cVal.toFixed(2)),
+            Number(sc.bVal.toFixed(2)),
+            Number(sc.total.toFixed(2))
           ]);
         });
       } else if (cfg.isSpCo) {
         const hdr = [
-          'N°', 'Nom & Prénom', 'Sexe', 'Statut',
+          'N°', 'Nom & Prénom', 'Sexe',
           ...critsIndiv.map((c, i) => `Indiv - ${c.nom} (/${indWeights[i]})`),
           `Note Indiv (/${cfg.perfMax})`,
           ...critsProc.map((c, i) => `Coll - ${c.nom} (/${procWeights[i]})`),
@@ -4926,30 +5051,27 @@
         aoaMain.push([`GRILLE EPS — ${clsLabel} — ${currentAps.toUpperCase()} (${nivLabel}) — INDIVIDUEL + COLLECTIF`]);
         aoaMain.push(hdr);
         classStudents.forEach((st, idx) => {
-          const isInactive = (st.status || 'OK') !== 'OK';
           const sc = getStudentScores(st, cfg);
           const indCols = critsIndiv.map((c, i) => {
-            if (isInactive) return st.status;
             const ch = (st.critsIndiv && st.critsIndiv[i]) || 0;
             return `${c.sous[ch]} (${ch === 0 ? indWeights[i] : negPts})`;
           });
           const procCols = critsProc.map((c, i) => {
-            if (isInactive) return st.status;
             const ch = (st.crits && st.crits[i]) || 0;
             return `${c.sous[ch]} (${ch === 0 ? procWeights[i] : negPts})`;
           });
           aoaMain.push([
-            idx + 1, st.nom, st.sexe, st.status || 'OK',
-            ...indCols, isInactive ? st.status : Number(sc.pIndiv.toFixed(2)),
-            ...procCols, isInactive ? st.status : Number(sc.pProc.toFixed(2)),
-            isInactive ? st.status : Number(sc.cVal.toFixed(2)),
-            isInactive ? st.status : Number(sc.bVal.toFixed(2)),
-            isInactive ? st.status : Number(sc.total.toFixed(2))
+            idx + 1, st.nom, st.sexe,
+            ...indCols, Number(sc.pIndiv.toFixed(2)),
+            ...procCols, Number(sc.pProc.toFixed(2)),
+            Number(sc.cVal.toFixed(2)),
+            Number(sc.bVal.toFixed(2)),
+            Number(sc.total.toFixed(2))
           ]);
         });
       } else {
         const hdr = [
-          'N°', 'Nom & Prénom', 'Sexe', 'Statut',
+          'N°', 'Nom & Prénom', 'Sexe',
           `Perf. Brute (${unitMeta.unit})`,
           `1A. Note Perf (/${cfg.perfMax})`,
           ...critsProc.map((c, i) => `${c.nom} (/${procWeights[i]})`),
@@ -4961,22 +5083,20 @@
         aoaMain.push([`GRILLE EPS — ${clsLabel} — ${currentAps.toUpperCase()} (${nivLabel}) — PERFORMANCE & PROCESSUS`]);
         aoaMain.push(hdr);
         classStudents.forEach((st, idx) => {
-          const isInactive = (st.status || 'OK') !== 'OK';
           const sc = getStudentScores(st, cfg);
           const procCols = critsProc.map((c, i) => {
-            if (isInactive) return st.status;
             const ch = (st.crits && st.crits[i]) || 0;
             return `${c.sous[ch]} (${ch === 0 ? procWeights[i] : negPts})`;
           });
           aoaMain.push([
-            idx + 1, st.nom, st.sexe, st.status || 'OK',
-            isInactive ? st.status : (st.rawPerf ? `${st.rawPerf} ${unitMeta.unit}` : ''),
-            isInactive ? st.status : Number(sc.pIndiv.toFixed(2)),
+            idx + 1, st.nom, st.sexe,
+            st.rawPerf ? `${st.rawPerf} ${unitMeta.unit}` : '',
+            Number(sc.pIndiv.toFixed(2)),
             ...procCols,
-            isInactive ? st.status : Number(sc.pProc.toFixed(2)),
-            isInactive ? st.status : Number(sc.cVal.toFixed(2)),
-            isInactive ? st.status : Number(sc.bVal.toFixed(2)),
-            isInactive ? st.status : Number(sc.total.toFixed(2))
+            Number(sc.pProc.toFixed(2)),
+            Number(sc.cVal.toFixed(2)),
+            Number(sc.bVal.toFixed(2)),
+            Number(sc.total.toFixed(2))
           ]);
         });
       }
@@ -5012,15 +5132,14 @@
       let theadHtml = '';
       if (cfg.isSpCo) {
         theadHtml = `
-          <tr style="background:#1E293B;color:#FFFFFF;">
+          <tr style="background:#1E3A8A;color:#FFFFFF;">
             <th style="border:1px solid #333;padding:5px;">N°</th>
             <th style="border:1px solid #333;padding:5px;">Nom &amp; Prénom</th>
             <th style="border:1px solid #333;padding:5px;">Sexe</th>
-            <th style="border:1px solid #333;padding:5px;">Statut</th>
             ${critsIndiv.map((c, i) => `<th style="border:1px solid #333;padding:5px;">Indiv: ${c.nom} (/${indWeights[i]})</th>`).join('')}
-            <th style="border:1px solid #333;padding:5px;background:#334155;">Note Indiv (/${cfg.perfMax})</th>
+            <th style="border:1px solid #333;padding:5px;background:#1D4ED8;">Note Indiv (/${cfg.perfMax})</th>
             ${critsProc.map((c, i) => `<th style="border:1px solid #333;padding:5px;">Coll: ${c.nom} (/${procWeights[i]})</th>`).join('')}
-            <th style="border:1px solid #333;padding:5px;background:#334155;">Note Coll (/${cfg.procMax})</th>
+            <th style="border:1px solid #333;padding:5px;background:#065F46;">Note Coll (/${cfg.procMax})</th>
             <th style="border:1px solid #333;padding:5px;">2. Concep (/${cfg.concepMax})</th>
             <th style="border:1px solid #333;padding:5px;">3. Comport (/${cfg.compMax})</th>
             <th style="border:1px solid #333;padding:5px;background:#0F172A;">TOTAL /20</th>
@@ -5028,11 +5147,10 @@
         `;
       } else {
         theadHtml = `
-          <tr style="background:#1E293B;color:#FFFFFF;">
+          <tr style="background:#1E3A8A;color:#FFFFFF;">
             <th style="border:1px solid #333;padding:5px;">N°</th>
             <th style="border:1px solid #333;padding:5px;">Nom &amp; Prénom</th>
             <th style="border:1px solid #333;padding:5px;">Sexe</th>
-            <th style="border:1px solid #333;padding:5px;">Statut</th>
             <th style="border:1px solid #333;padding:5px;">Perf. Brute (${unitMeta.unit})</th>
             <th style="border:1px solid #333;padding:5px;">1A. Perf (/${cfg.perfMax})</th>
             ${critsProc.map((c, i) => `<th style="border:1px solid #333;padding:5px;">${c.nom} (/${procWeights[i]})</th>`).join('')}
@@ -5045,41 +5163,37 @@
       }
 
       const rowsHtml = classStudents.map((st, idx) => {
-        const isInactive = (st.status || 'OK') !== 'OK';
         const sc = getStudentScores(st, cfg);
 
         let middleTds = '';
         if (cfg.isSpCo) {
           const indTds = critsIndiv.map((c, i) => {
-            if (isInactive) return `<td style="border:1px solid #333;padding:4px;text-align:center;">—</td>`;
             const ch = (st.critsIndiv && st.critsIndiv[i]) || 0;
             const pts = ch === 0 ? indWeights[i] : negPts;
             return `<td style="border:1px solid #333;padding:4px;text-align:center;font-size:8.5pt;">[X] ${c.sous[ch]} (${pts})</td>`;
           }).join('');
           const procTds = critsProc.map((c, i) => {
-            if (isInactive) return `<td style="border:1px solid #333;padding:4px;text-align:center;">—</td>`;
             const ch = (st.crits && st.crits[i]) || 0;
             const pts = ch === 0 ? procWeights[i] : negPts;
             return `<td style="border:1px solid #333;padding:4px;text-align:center;font-size:8.5pt;">[X] ${c.sous[ch]} (${pts})</td>`;
           }).join('');
           middleTds = `
             ${indTds}
-            <td style="border:1px solid #333;padding:4px;text-align:center;font-weight:bold;">${isInactive ? st.status : sc.pIndiv.toFixed(2)}</td>
+            <td style="border:1px solid #333;padding:4px;text-align:center;font-weight:bold;">${sc.pIndiv.toFixed(2)}</td>
             ${procTds}
-            <td style="border:1px solid #333;padding:4px;text-align:center;font-weight:bold;">${isInactive ? st.status : sc.pProc.toFixed(2)}</td>
+            <td style="border:1px solid #333;padding:4px;text-align:center;font-weight:bold;">${sc.pProc.toFixed(2)}</td>
           `;
         } else {
           const procTds = critsProc.map((c, i) => {
-            if (isInactive) return `<td style="border:1px solid #333;padding:4px;text-align:center;">—</td>`;
             const ch = (st.crits && st.crits[i]) || 0;
             const pts = ch === 0 ? procWeights[i] : negPts;
             return `<td style="border:1px solid #333;padding:4px;text-align:center;font-size:8.5pt;">[X] ${c.sous[ch]} (${pts})</td>`;
           }).join('');
           middleTds = `
-            <td style="border:1px solid #333;padding:4px;text-align:center;">${isInactive ? '—' : (st.rawPerf ? escapeHtml(st.rawPerf) + ' ' + unitMeta.unit : '—')}</td>
-            <td style="border:1px solid #333;padding:4px;text-align:center;">${isInactive ? '—' : sc.pIndiv.toFixed(2)}</td>
+            <td style="border:1px solid #333;padding:4px;text-align:center;">${st.rawPerf ? escapeHtml(st.rawPerf) + ' ' + unitMeta.unit : '—'}</td>
+            <td style="border:1px solid #333;padding:4px;text-align:center;">${sc.pIndiv.toFixed(2)}</td>
             ${procTds}
-            <td style="border:1px solid #333;padding:4px;text-align:center;font-weight:bold;">${isInactive ? '—' : sc.pProc.toFixed(2)}</td>
+            <td style="border:1px solid #333;padding:4px;text-align:center;font-weight:bold;">${sc.pProc.toFixed(2)}</td>
           `;
         }
 
@@ -5088,11 +5202,10 @@
             <td style="border:1px solid #333;padding:4px;text-align:center;">${idx + 1}</td>
             <td style="border:1px solid #333;padding:4px;">${escapeHtml(st.nom)}</td>
             <td style="border:1px solid #333;padding:4px;text-align:center;">${st.sexe}</td>
-            <td style="border:1px solid #333;padding:4px;text-align:center;">${st.status || 'OK'}</td>
             ${middleTds}
-            <td style="border:1px solid #333;padding:4px;text-align:center;">${isInactive ? '—' : sc.cVal.toFixed(2)}</td>
-            <td style="border:1px solid #333;padding:4px;text-align:center;">${isInactive ? '—' : sc.bVal.toFixed(2)}</td>
-            <td style="border:1px solid #333;padding:4px;text-align:center;font-weight:bold;background:${isInactive ? '#F8FAFC' : '#F1F5F9'};">${isInactive ? st.status : sc.total.toFixed(2) + ' / 20'}</td>
+            <td style="border:1px solid #333;padding:4px;text-align:center;">${sc.cVal.toFixed(2)}</td>
+            <td style="border:1px solid #333;padding:4px;text-align:center;">${sc.bVal.toFixed(2)}</td>
+            <td style="border:1px solid #333;padding:4px;text-align:center;font-weight:bold;background:#DCFCE7;">${sc.total.toFixed(2)} / 20</td>
           </tr>
         `;
       }).join('');
@@ -5101,7 +5214,7 @@
         <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
         <head><meta charset="utf-8"><title>Grille EPS ${escapeHtml(clsLabel)} - ${escapeHtml(currentAps)}</title></head>
         <body style="font-family:Arial,sans-serif;font-size:10pt;">
-          <h2 style="text-align:center;color:#0F172A;margin-bottom:4px;">GRILLE D'ÉVALUATION EPS (/20) — ${escapeHtml(clsLabel)} — ${escapeHtml(currentAps.toUpperCase())} (${nivLabel})</h2>
+          <h2 style="text-align:center;color:#1E3A8A;margin-bottom:4px;">GRILLE D'ÉVALUATION EPS (/20) — ${escapeHtml(clsLabel)} — ${escapeHtml(currentAps.toUpperCase())} (${nivLabel})</h2>
           <p style="text-align:center;font-size:9pt;margin-top:0;">Orientations Pédagogiques Maroc · Procédural /${cfg.procTotal} (${cfg.labelPerf} /${cfg.perfMax} + ${cfg.labelProc} /${cfg.procMax}) · Conceptuel /${cfg.concepMax} · Comportemental /${cfg.compMax}</p>
           <table style="width:100%;border-collapse:collapse;">
             <thead>${theadHtml}</thead>
