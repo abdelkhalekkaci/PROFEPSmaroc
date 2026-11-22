@@ -249,7 +249,7 @@
     }
     .config-grid {
       display: grid;
-      grid-template-columns: 1.1fr 1.3fr 0.9fr 1.1fr;
+      grid-template-columns: 1fr 1.4fr 1.2fr;
       gap: 1rem;
       align-items: end;
     }
@@ -1031,6 +1031,30 @@
       white-space: nowrap;
       user-select: none;
     }
+    .row-sex-select {
+      padding: 3px 6px;
+      border-radius: 6px;
+      border: 1.5px solid #93C5FD;
+      font-size: 0.76rem;
+      font-weight: 800;
+      cursor: pointer;
+      background: #EFF6FF;
+      color: #1D4ED8;
+    }
+    .row-sex-select.is-f {
+      background: #FDF2F8;
+      border-color: #F9A8D4;
+      color: #BE185D;
+    }
+    .perf-bareme-mini {
+      font-size: 0.64rem;
+      font-weight: 700;
+      margin-top: 2px;
+      line-height: 1.15;
+      white-space: nowrap;
+    }
+    .perf-bareme-mini.is-g { color: #1D4ED8; }
+    .perf-bareme-mini.is-f { color: #BE185D; }
     .indiv-unit-box {
       display: flex;
       align-items: center;
@@ -1445,6 +1469,18 @@
       color: #E2E8F0;
       border-left-color: #334155;
     }
+    html[data-theme="dark"] .row-sex-select.is-g {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: #3B82F6;
+      color: #93C5FD;
+    }
+    html[data-theme="dark"] .row-sex-select.is-f {
+      background: rgba(236, 72, 153, 0.2);
+      border-color: #EC4899;
+      color: #F9A8D4;
+    }
+    html[data-theme="dark"] .perf-bareme-mini.is-g { color: #93C5FD; }
+    html[data-theme="dark"] .perf-bareme-mini.is-f { color: #F9A8D4; }
     html[data-theme="dark"] .mini-chk-pair {
       background: #1E293B;
       border-color: #334155;
@@ -1987,14 +2023,6 @@
               <option value="Tennis de table">🏓 Tennis de table</option>
             </optgroup>
           </select>
-        </div>
-
-        <div class="cfg-group">
-          <label>🚻 Catégorie / Barème Sexe</label>
-          <div class="sexe-toggle">
-            <button type="button" class="sexe-btn active" id="btnSexeG" onclick="setSexe('G')">👦 Garçons</button>
-            <button type="button" class="sexe-btn" id="btnSexeF" onclick="setSexe('F')">👧 Filles</button>
-          </div>
         </div>
 
         <div class="cfg-group">
@@ -2877,6 +2905,7 @@
     let currentMode = 'indiv';
     let currentNiveau = '2AB';
     let currentAps = 'Course de durée';
+    let lastConfiguredAps = 'Course de durée';
     let currentSexe = 'G';
     let currentCritMode = 'strict';
     let currentClassName = 'Classe 1';
@@ -3044,10 +3073,13 @@
     // 3. MISE À JOUR DE LA CONFIGURATION & DE L'INTERFACE
     // =========================================================================
     function setSexe(sexe) {
-      currentSexe = sexe;
-      document.getElementById('btnSexeG').classList.toggle('active', sexe === 'G');
-      document.getElementById('btnSexeF').classList.toggle('active', sexe === 'F');
-      onConfigChange();
+      currentSexe = (sexe === 'F') ? 'F' : 'G';
+      document.getElementById('btnSexeG')?.classList.toggle('active', currentSexe === 'G');
+      document.getElementById('btnSexeF')?.classList.toggle('active', currentSexe === 'F');
+      const cfg = getBaremeConfig(currentNiveau, currentAps);
+      renderVolet1APerformance(cfg);
+      recalculateIndivTotal();
+      saveStateToStorage();
     }
 
     function switchCalcMode(mode) {
@@ -3074,6 +3106,45 @@
       return map[niv] || niv;
     }
 
+    function getRowBaremeHint(aps, sexe, niveau, cfg) {
+      const gKey = (sexe === 'F') ? 'F' : 'G';
+      if (aps === 'Gymnastique') {
+        const gc = GYM_CONTRATS[niveau];
+        return `${gKey} · ${gc.contrat} (${gc.totalElements} élém.)`;
+      }
+      const sc = PERF_SCALES[aps];
+      if (!sc || !sc[gKey] || !sc[gKey][niveau]) return `Barème ${gKey}`;
+      const [bestVal] = sc[gKey][niveau];
+      if (aps === 'Course de durée') {
+        return `${gKey === 'G' ? '1000m G' : '600m F'} · ${cfg.perfMax}/${cfg.perfMax} ≤ ${formatSecToMinSec(bestVal)}`;
+      }
+      if (aps === 'Course de vitesse') {
+        return `${gKey === 'G' ? '80m G' : '60m F'} · ${cfg.perfMax}/${cfg.perfMax} ≤ ${bestVal.toFixed(1)}s`;
+      }
+      if (aps === 'Course de haies') {
+        return `${gKey === 'G' ? '80mH G' : '60mH F'} · ≤ ${bestVal.toFixed(1)}s`;
+      }
+      if (sc.unit === 'sec_sprint') {
+        return `Barème ${gKey} · ≤ ${bestVal.toFixed(1)}s`;
+      }
+      if (aps === 'Lancer de poids' && sc.poidsEngin) {
+        return `${gKey} (${sc.poidsEngin[gKey][niveau]}) · ≥ ${bestVal.toFixed(2)}m`;
+      }
+      return `Barème ${gKey} · ≥ ${bestVal.toFixed(2)}m`;
+    }
+
+    function getGenderPlaceholder(aps, sexe, niveau) {
+      const gKey = (sexe === 'F') ? 'F' : 'G';
+      if (aps === 'Gymnastique') return String(Math.max(1, (GYM_CONTRATS[niveau]?.totalElements || 5) - 1));
+      const sc = PERF_SCALES[aps];
+      if (!sc || !sc[gKey] || !sc[gKey][niveau]) return PERF_UNIT_META[aps]?.placeholder || '';
+      const [bestVal, minVal] = sc[gKey][niveau];
+      const mid = (bestVal + minVal) / 2;
+      if (aps === 'Course de durée') return formatSecToMinSec(mid);
+      if (sc.unit === 'sec_sprint') return mid.toFixed(1);
+      return mid.toFixed(2);
+    }
+
     function onConfigChange() {
       currentNiveau = document.getElementById('selNiveau').value;
       currentAps = document.getElementById('selAps').value;
@@ -3088,7 +3159,9 @@
         const sc = PERF_SCALES[currentAps];
         let extraPoids = '';
         if (currentAps === 'Lancer de poids' && sc.poidsEngin) {
-          extraPoids = ` — Engin officiel : ${sc.poidsEngin[currentSexe][currentNiveau]}`;
+          const pG = sc.poidsEngin.G[currentNiveau];
+          const pF = sc.poidsEngin.F[currentNiveau];
+          extraPoids = pG === pF ? ` — Engin : ${pG}` : ` — Engin : ${pG} (G) / ${pF} (F)`;
         }
         document.getElementById('srFamilleBadge').textContent = `Athlétisme · Produit (/${cfg.perfMax}) + Processus (/${cfg.procMax})${extraPoids}`;
         document.getElementById('srTitleText').textContent = sc.srTitle + extraPoids;
@@ -3112,13 +3185,29 @@
       document.getElementById('pillConcepMax').textContent = `/ ${cfg.concepMax} pts`;
       document.getElementById('pillCompMax').textContent = `/ ${cfg.compMax} pts`;
 
-      // 2. Recalculer perfScore des élèves selon le barème de la nouvelle APS si rawPerf valide
-      if (!cfg.isSpCo) {
-        classStudents.forEach(st => {
+      // 2. Sauvegarder/restaurer la Perf Brute par APS et recalculer perfScore selon le sexe de chaque élève
+      const apsChanged = lastConfiguredAps && lastConfiguredAps !== currentAps;
+      classStudents.forEach(st => {
+        if (!st.perfByAps || typeof st.perfByAps !== 'object') st.perfByAps = {};
+        if (apsChanged) {
+          st.perfByAps[lastConfiguredAps] = { rawPerf: st.rawPerf || '', perfScore: st.perfScore };
+          const savedForNew = st.perfByAps[currentAps];
+          if (savedForNew) {
+            st.rawPerf = savedForNew.rawPerf || '';
+            st.perfScore = savedForNew.perfScore || 0;
+          } else {
+            st.rawPerf = '';
+            st.perfScore = 0;
+          }
+        }
+        if (!cfg.isSpCo && st.rawPerf && String(st.rawPerf).trim() !== '') {
           const parsed = parseRawPerfToScore(currentAps, st.rawPerf, st.sexe, currentNiveau, cfg);
-          if (parsed && parsed.score !== null) st.perfScore = parsed.score;
-        });
-      }
+          if (parsed && parsed.score !== null) {
+            st.perfScore = parsed.score;
+          }
+        }
+      });
+      lastConfiguredAps = currentAps;
 
       // 3. Mettre à jour Volets 1A, 1B, Concep/Comp, Guide Dynamique, Liens, Totaux & Grille
       renderVolet1APerformance(cfg);
@@ -3149,6 +3238,15 @@
         const sc = PERF_SCALES[currentAps];
         const unitMeta = PERF_UNIT_META[currentAps] || { unit: 'm' };
         const [bestVal, minVal] = sc[currentSexe][currentNiveau];
+        const indivSexeHtml = `
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.75rem;">
+            <span style="font-size:0.78rem;font-weight:800;color:var(--ink-soft);">Barème de l'élève testé :</span>
+            <div class="sexe-toggle" style="width:auto;min-width:210px;">
+              <button type="button" class="sexe-btn ${currentSexe === 'G' ? 'active' : ''}" id="btnSexeG" onclick="setSexe('G')">👦 Garçon</button>
+              <button type="button" class="sexe-btn ${currentSexe === 'F' ? 'active' : ''}" id="btnSexeF" onclick="setSexe('F')">👧 Fille</button>
+            </div>
+          </div>
+        `;
 
         if (currentAps === 'Course de durée') {
           const distLabel = currentSexe === 'G' ? '1000 mètres (Garçons)' : '600 mètres (Filles)';
@@ -3156,7 +3254,7 @@
           const defaultSec = currentSexe === 'G' ? 20 : 15;
           document.getElementById('volet1ASub').textContent = `Épreuve officielle : ${distLabel} — Conversion automatique (${unitMeta.unit})`;
 
-          container.innerHTML = `
+          container.innerHTML = indivSexeHtml + `
             <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:1rem;align-items:end;background:var(--sky);border:1px solid var(--stone);border-radius:12px;padding:1rem;">
               <div>
                 <label style="font-size:0.8rem;font-weight:800;color:var(--ink);display:block;margin-bottom:0.4rem;">
@@ -3192,7 +3290,7 @@
             ? (currentSexe === 'G' ? '80m Garçons' : '60m Filles')
             : `${currentAps} (${currentSexe === 'G' ? 'Garçons' : 'Filles'})`;
           document.getElementById('volet1ASub').textContent = `Épreuve officielle : ${epLabel} — Temps en secondes (s)`;
-          container.innerHTML = `
+          container.innerHTML = indivSexeHtml + `
             <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:1rem;align-items:center;background:var(--sky);border:1px solid var(--stone);border-radius:12px;padding:1rem;">
               <div>
                 <label for="inpAthleVal" style="font-size:0.82rem;font-weight:800;color:var(--ink);display:block;margin-bottom:0.4rem;">
@@ -3213,7 +3311,7 @@
           const defaultMeters = ((bestVal + minVal) / 2).toFixed(2);
           const enginTxt = (currentAps === 'Lancer de poids' && sc.poidsEngin) ? ` (${sc.poidsEngin[currentSexe][currentNiveau]})` : '';
           document.getElementById('volet1ASub').textContent = `Épreuve officielle : ${currentAps}${enginTxt} — Distance mesurée en mètres (m)`;
-          container.innerHTML = `
+          container.innerHTML = indivSexeHtml + `
             <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:1rem;align-items:center;background:var(--sky);border:1px solid var(--stone);border-radius:12px;padding:1rem;">
               <div>
                 <label for="inpAthleVal" style="font-size:0.82rem;font-weight:800;color:var(--ink);display:block;margin-bottom:0.4rem;">
@@ -3808,20 +3906,23 @@
       const sexe = (st.sexe === 'F') ? 'F' : 'G';
       const crits = Array.isArray(st.crits) && st.crits.length === 4 ? st.crits.map(v => (v === 1 ? 1 : 0)) : [0, 0, 0, 0];
       const critsIndiv = Array.isArray(st.critsIndiv) && st.critsIndiv.length === 4 ? st.critsIndiv.map(v => (v === 1 ? 1 : 0)) : [0, 0, 0, 0];
+      const rawPerf = st.rawPerf !== undefined && st.rawPerf !== null ? String(st.rawPerf) : '';
       let perfScore = parseFloat(st.perfScore);
       if (isNaN(perfScore) || perfScore < 0 || perfScore > safeCfg.perfMax) {
-        perfScore = Math.max(0, safeCfg.perfMax - 1.0);
+        perfScore = rawPerf.trim() ? Math.max(0, safeCfg.perfMax - 1.0) : 0;
       }
       let concep = parseFloat(st.concep);
       if (isNaN(concep) || concep < 0 || concep > safeCfg.concepMax) concep = 2.5;
       let comp = parseFloat(st.comp);
       if (isNaN(comp) || comp < 0 || comp > safeCfg.compMax) comp = Math.max(0, safeCfg.compMax - 0.5);
+      const perfByAps = (st.perfByAps && typeof st.perfByAps === 'object') ? { ...st.perfByAps } : {};
       return {
         nom: String(st.nom || '').trim() || 'Élève',
         sexe,
         status,
-        rawPerf: st.rawPerf !== undefined && st.rawPerf !== null ? String(st.rawPerf) : '',
+        rawPerf,
         perfScore,
+        perfByAps,
         critsIndiv,
         crits,
         concep,
@@ -4047,7 +4148,7 @@
         sexe: 'G',
         status: 'OK',
         rawPerf: '',
-        perfScore: Math.max(0, cfg.perfMax - 1.5),
+        perfScore: 0,
         critsIndiv: [0, 0, 0, 0],
         crits: [0, 0, 0, 0],
         concep: 2.5,
@@ -4077,12 +4178,72 @@
       renderClassGridTable();
     }
 
+    function updateClassStatsOnly(cfg) {
+      const safeCfg = cfg || getBaremeConfig(currentNiveau, currentAps);
+      const activeTotals = [];
+      let boysCount = 0;
+      let girlsCount = 0;
+      classStudents.forEach(st => {
+        st.status = 'OK';
+        if (st.sexe === 'F') girlsCount++;
+        else boysCount++;
+        const sc = getStudentScores(st, safeCfg);
+        if (sc.total !== null) activeTotals.push(sc.total);
+      });
+
+      const elAvg = document.getElementById('clsStatAvg');
+      const elMinMax = document.getElementById('clsStatMinMax');
+      const elPass = document.getElementById('clsStatPassRate');
+      const elStatus = document.getElementById('clsStatStatusCounts');
+
+      if (activeTotals.length > 0) {
+        const avg = activeTotals.reduce((a, b) => a + b, 0) / activeTotals.length;
+        const minN = Math.min(...activeTotals);
+        const maxN = Math.max(...activeTotals);
+        const passCount = activeTotals.filter(n => n >= 10).length;
+        const passPct = Math.round((passCount / activeTotals.length) * 100);
+        if (elAvg) elAvg.textContent = `${avg.toFixed(2)} / 20`;
+        if (elMinMax) elMinMax.textContent = `${minN.toFixed(2)} — ${maxN.toFixed(2)}`;
+        if (elPass) elPass.textContent = `${passPct}% (${passCount}/${activeTotals.length})`;
+      } else {
+        if (elAvg) elAvg.textContent = '0.00 / 20';
+        if (elMinMax) elMinMax.textContent = '—';
+        if (elPass) elPass.textContent = '0% (0/0)';
+      }
+      if (elStatus) elStatus.textContent = `${classStudents.length} (${boysCount} G · ${girlsCount} F)`;
+    }
+
+    function onClassRawPerfLive(rIdx, inputEl) {
+      const st = classStudents[rIdx];
+      if (!st || !inputEl) return;
+      const cfg = getBaremeConfig(currentNiveau, currentAps);
+      const rawVal = String(inputEl.value || '').trim();
+      st.rawPerf = rawVal;
+      if (rawVal === '') {
+        st.perfScore = 0;
+      } else {
+        const res = parseRawPerfToScore(currentAps, rawVal, st.sexe, currentNiveau, cfg);
+        if (res && res.score !== null) {
+          st.perfScore = res.score;
+        }
+      }
+      const perfEl = document.getElementById(`rowPerfScore_${rIdx}`);
+      if (perfEl) perfEl.value = Number(st.perfScore).toFixed(2);
+      const sc = getStudentScores(st, cfg);
+      const totEl = document.getElementById(`rowTotalCell_${rIdx}`);
+      if (totEl) totEl.textContent = `${sc.total.toFixed(2)} / 20`;
+      updateClassStatsOnly(cfg);
+      saveStateToStorage();
+    }
+
     function onClassRawPerfChange(rIdx, rawVal) {
       const st = classStudents[rIdx];
       if (!st) return;
       const cfg = getBaremeConfig(currentNiveau, currentAps);
       st.rawPerf = String(rawVal || '').trim();
-      if (st.rawPerf !== '') {
+      if (st.rawPerf === '') {
+        st.perfScore = 0;
+      } else {
         const res = parseRawPerfToScore(currentAps, st.rawPerf, st.sexe, currentNiveau, cfg);
         if (res && res.score !== null) {
           st.perfScore = res.score;
@@ -4111,19 +4272,29 @@
       renderClassGridTable();
     }
 
-    function toggleClassStudentSexe(rIdx) {
+    function setClassStudentSexe(rIdx, newSexe) {
       const st = classStudents[rIdx];
       if (!st) return;
-      st.sexe = st.sexe === 'G' ? 'F' : 'G';
+      st.sexe = (newSexe === 'F') ? 'F' : 'G';
       const cfg = getBaremeConfig(currentNiveau, currentAps);
       if (!cfg.isSpCo && st.rawPerf && String(st.rawPerf).trim() !== '') {
         const res = parseRawPerfToScore(currentAps, st.rawPerf, st.sexe, currentNiveau, cfg);
         if (res && res.score !== null) {
           st.perfScore = res.score;
+          const sc = getStudentScores(st, cfg);
+          showToast(`${st.nom} (${st.sexe}) : barème ${st.sexe === 'F' ? 'Filles' : 'Garçons'} → Note Perf ${st.perfScore.toFixed(2)}/${cfg.perfMax} · Total ${sc.total.toFixed(2)}/20`);
         }
+      } else if (!cfg.isSpCo) {
+        showToast(`${st.nom} (${st.sexe}) : barème ${st.sexe === 'F' ? 'Filles' : 'Garçons'} activé.`);
       }
       saveStateToStorage();
       renderClassGridTable();
+    }
+
+    function toggleClassStudentSexe(rIdx) {
+      const st = classStudents[rIdx];
+      if (!st) return;
+      setClassStudentSexe(rIdx, st.sexe === 'G' ? 'F' : 'G');
     }
 
     function updateClassStudentField(rIdx, field, val) {
@@ -4182,7 +4353,7 @@
           <tr>
             <th rowspan="2" style="width:36px;">N°</th>
             <th rowspan="2" style="min-width:155px;">Nom &amp; Prénom</th>
-            <th rowspan="2" style="width:46px;">Sexe</th>
+            <th rowspan="2" style="width:54px;">Sexe</th>
             <th colspan="5" class="mega-hdr-indiv">1A. Capacité Individuelle (/${cfg.perfMax} pts)</th>
             <th colspan="5" class="mega-hdr-coll">1B. Capacité Collective (/${cfg.procMax} pts)</th>
             <th rowspan="2" style="width:66px;">2. Conc.<br><span style="color:#A7F3D0;">/${cfg.concepMax}</span></th>
@@ -4212,8 +4383,8 @@
           <tr>
             <th rowspan="2" style="width:36px;">N°</th>
             <th rowspan="2" style="min-width:155px;">Nom &amp; Prénom</th>
-            <th rowspan="2" style="width:46px;">Sexe</th>
-            <th rowspan="2" style="min-width:105px;">Perf. Brute<br><span style="color:#93C5FD;">(Unité : ${unitMeta.unit})</span></th>
+            <th rowspan="2" style="width:54px;">Sexe</th>
+            <th rowspan="2" style="min-width:130px;">Perf. Brute<br><span style="color:#93C5FD;">(Barème G/F · ${unitMeta.unit})</span></th>
             <th rowspan="2" style="width:74px;">1A. Note Perf<br><span style="color:#FCD34D;">/${cfg.perfMax} pts</span></th>
             <th colspan="4">1B. ${cfg.labelProc} — 4 Critères (<span style="color:#93C5FD;">/${cfg.procMax} pts</span>)</th>
             <th rowspan="2" style="width:68px;">Note<br>Proc.<br><span style="color:#93C5FD;">/${cfg.procMax}</span></th>
@@ -4249,8 +4420,8 @@
         tbody.innerHTML = visibleIndices.map(rIdx => {
           const st = classStudents[rIdx];
           st.status = 'OK';
-          if (st.perfScore === null || st.perfScore === undefined || st.perfScore > cfg.perfMax) {
-            st.perfScore = Math.max(0, cfg.perfMax - 1.0);
+          if (st.perfScore === null || st.perfScore === undefined || isNaN(st.perfScore) || st.perfScore > cfg.perfMax) {
+            st.perfScore = (st.rawPerf && String(st.rawPerf).trim()) ? Math.max(0, cfg.perfMax - 1.0) : 0;
           }
           if (st.comp > cfg.compMax) st.comp = cfg.compMax;
           const scores = getStudentScores(st, cfg);
@@ -4296,22 +4467,25 @@
               <td class="tabular-nums" style="font-weight:800;color:#065F46;background:#ECFDF5;">${scores.pProc.toFixed(2)}</td>
             `;
           } else {
+            const rowPh = getGenderPlaceholder(currentAps, st.sexe, currentNiveau);
+            const baremeHint = getRowBaremeHint(currentAps, st.sexe, currentNiveau, cfg);
             middleHtml = `
               <td>
                 <div class="unit-input-wrap">
-                  <input type="text" class="row-input-raw" value="${escapeHtml(st.rawPerf || '')}" placeholder="${unitMeta.placeholder}" onchange="onClassRawPerfChange(${rIdx}, this.value)" title="Saisir la performance (${unitMeta.stepHint || unitMeta.placeholder})">
+                  <input type="text" class="row-input-raw" value="${escapeHtml(st.rawPerf || '')}" placeholder="Ex: ${rowPh}" oninput="onClassRawPerfLive(${rIdx}, this)" onchange="onClassRawPerfChange(${rIdx}, this.value)" title="Barème ${st.sexe === 'F' ? 'Filles' : 'Garçons'} (${baremeHint})">
                   <span class="perf-unit-tag">${unitMeta.unit}</span>
                 </div>
+                <div class="perf-bareme-mini is-${st.sexe === 'F' ? 'f' : 'g'}">${baremeHint}</div>
               </td>
               <td>
-                <input type="number" class="row-input-num tabular-nums" min="0" max="${cfg.perfMax}" step="0.25" value="${Number(st.perfScore).toFixed(2)}" onchange="updateClassStudentField(${rIdx}, 'perfScore', this.value)">
+                <input type="number" id="rowPerfScore_${rIdx}" class="row-input-num tabular-nums" min="0" max="${cfg.perfMax}" step="0.25" value="${Number(st.perfScore).toFixed(2)}" onchange="updateClassStudentField(${rIdx}, 'perfScore', this.value)">
               </td>
               ${procCells}
               <td class="tabular-nums" style="font-weight:800;color:#1E40AF;background:#EFF6FF;">${scores.pProc.toFixed(2)}</td>
             `;
           }
 
-          const totalCellHtml = `<td class="tabular-nums" style="font-weight:800;font-size:0.88rem;color:#166534;background:#DCFCE7;">${scores.total.toFixed(2)} / 20</td>`;
+          const totalCellHtml = `<td id="rowTotalCell_${rIdx}" class="tabular-nums" style="font-weight:800;font-size:0.88rem;color:#166534;background:#DCFCE7;">${scores.total.toFixed(2)} / 20</td>`;
 
           return `
             <tr>
@@ -4320,7 +4494,10 @@
                 <input type="text" class="row-input-name" value="${escapeHtml(st.nom)}" onchange="updateClassStudentField(${rIdx}, 'nom', this.value)">
               </td>
               <td>
-                <button type="button" class="mini-chk" style="font-weight:800;color:${st.sexe === 'F' ? '#BE185D' : '#1D4ED8'};" onclick="toggleClassStudentSexe(${rIdx})" title="Basculer Garçon (G) / Fille (F)">${st.sexe}</button>
+                <select class="row-sex-select is-${st.sexe === 'F' ? 'f' : 'g'}" onchange="setClassStudentSexe(${rIdx}, this.value)" aria-label="Sexe de ${escapeHtml(st.nom)}" title="Changer le sexe recalcule automatiquement la note (barème G / F)">
+                  <option value="G" ${st.sexe === 'G' ? 'selected' : ''}>G</option>
+                  <option value="F" ${st.sexe === 'F' ? 'selected' : ''}>F</option>
+                </select>
               </td>
               ${middleHtml}
               <td>
@@ -4338,38 +4515,7 @@
         }).join('');
       }
 
-      // Calculer les statistiques de la classe (effectif + G / F)
-      const activeTotals = [];
-      let boysCount = 0;
-      let girlsCount = 0;
-      classStudents.forEach(st => {
-        st.status = 'OK';
-        if (st.sexe === 'F') girlsCount++;
-        else boysCount++;
-        const sc = getStudentScores(st, cfg);
-        if (sc.total !== null) activeTotals.push(sc.total);
-      });
-
-      const elAvg = document.getElementById('clsStatAvg');
-      const elMinMax = document.getElementById('clsStatMinMax');
-      const elPass = document.getElementById('clsStatPassRate');
-      const elStatus = document.getElementById('clsStatStatusCounts');
-
-      if (activeTotals.length > 0) {
-        const avg = activeTotals.reduce((a, b) => a + b, 0) / activeTotals.length;
-        const minN = Math.min(...activeTotals);
-        const maxN = Math.max(...activeTotals);
-        const passCnt = activeTotals.filter(t => t >= 10).length;
-        const passPct = Math.round((passCnt / activeTotals.length) * 100);
-        if (elAvg) elAvg.textContent = `${avg.toFixed(2)} / 20`;
-        if (elMinMax) elMinMax.textContent = `${minN.toFixed(2)} — ${maxN.toFixed(2)}`;
-        if (elPass) elPass.textContent = `${passPct}% (${passCnt}/${activeTotals.length})`;
-      } else {
-        if (elAvg) elAvg.textContent = '-- / 20';
-        if (elMinMax) elMinMax.textContent = '-- / --';
-        if (elPass) elPass.textContent = '0%';
-      }
-      if (elStatus) elStatus.textContent = `${classStudents.length} (${boysCount} G · ${girlsCount} F)`;
+      updateClassStatsOnly(cfg);
     }
 
     // =========================================================================
@@ -4968,7 +5114,7 @@
           sexe: item.sexe,
           status: 'OK',
           rawPerf: '',
-          perfScore: Math.max(0, cfg.perfMax - 1.5),
+          perfScore: 0,
           critsIndiv: [0, 0, 0, 0],
           crits: [0, 0, 0, 0],
           concep: 2.5,
@@ -5290,8 +5436,8 @@
         }
         if (pSexe === 'F' || pSexe === 'G') {
           currentSexe = pSexe;
-          document.getElementById('btnSexeG').classList.toggle('active', pSexe === 'G');
-          document.getElementById('btnSexeF').classList.toggle('active', pSexe === 'F');
+          document.getElementById('btnSexeG')?.classList.toggle('active', pSexe === 'G');
+          document.getElementById('btnSexeF')?.classList.toggle('active', pSexe === 'F');
         }
 
         onConfigChange();
