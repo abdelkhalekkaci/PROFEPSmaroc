@@ -188,6 +188,8 @@ async function startServer() {
           res.setHeader('Link', '<https://profeps.ma/orientations-pedagogiques-espagnol-college-2009.html>; rel="canonical"');
         } else if (baseName === '39_4b901c89.pdf') {
           res.setHeader('Link', '<https://profeps.ma/orientations-pedagogiques-espagnol-lycee-2007.html>; rel="canonical"');
+        } else if (filePath.includes('/pdf/legislation/') || filePath.includes('/pdf/sciences-education/')) {
+          res.setHeader('Link', '<https://profeps.ma/bibliotheque-sciences-education-crmef-pdf-maroc.html>; rel="canonical"');
         }
       }
     }

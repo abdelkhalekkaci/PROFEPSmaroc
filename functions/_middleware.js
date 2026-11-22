@@ -54,6 +54,10 @@ function getRedirectTarget(url) {
     return `${url.origin}/qa-coefficient-eps-bac-maroc.html`;
   }
 
+  if (rawPath === '/concours-eps-maroc.html') {
+    return `${url.origin}/article-concours.html`;
+  }
+
   if (
     rawPath === '/article-s%C3%A9ance.html' ||
     decodedPath === '/article-séance.html' ||
@@ -119,6 +123,11 @@ function checkApiRateLimit(request) {
 }
 
 function resolvePdfCanonical(pathname) {
+  const lowerPath = pathname.toLowerCase();
+  if (lowerPath.startsWith('/pdf/legislation/') || lowerPath.startsWith('/pdf/sciences-education/')) {
+    return 'https://profeps.ma/bibliotheque-sciences-education-crmef-pdf-maroc.html';
+  }
+
   const parts = pathname.split('/');
   const baseName = parts[parts.length - 1] || '';
   const lowerBase = baseName.toLowerCase();
@@ -163,13 +172,16 @@ function applyResponseHeaders(response, pathname) {
       const canonical = resolvePdfCanonical(pathname);
       if (canonical) {
         headers.set('Link', `<${canonical}>; rel="canonical"`);
+      } else if (pathname.toLowerCase().startsWith('/assets/aistudio/')) {
+        headers.set('X-Robots-Tag', 'noindex, nofollow');
       }
     } else if (pathname === '/' || /\.(html|css|js)$/i.test(pathname)) {
       headers.set('Cache-Control', 'public, max-age=0, must-revalidate');
     }
   }
 
-  return new Response(response.body, {
+  const hasEmptyBodyStatus = response.status === 204 || response.status === 304;
+  return new Response(hasEmptyBodyStatus ? null : response.body, {
     status: response.status,
     statusText: response.statusText,
     headers
@@ -215,6 +227,22 @@ export async function onRequest(context) {
           }
         }
       );
+    }
+  }
+
+  if (
+    (request.method === 'GET' || request.method === 'HEAD') &&
+    url.pathname !== '/index.html' &&
+    url.pathname.endsWith('.html') &&
+    !url.pathname.startsWith('/api/') &&
+    context.env &&
+    typeof context.env.ASSETS?.fetch === 'function'
+  ) {
+    const assetUrl = new URL(url.toString());
+    assetUrl.pathname = url.pathname.slice(0, -5) || '/';
+    const assetResponse = await context.env.ASSETS.fetch(new Request(assetUrl.toString(), request));
+    if (assetResponse && (assetResponse.status === 200 || assetResponse.status === 304)) {
+      return applyResponseHeaders(assetResponse, url.pathname);
     }
   }
 

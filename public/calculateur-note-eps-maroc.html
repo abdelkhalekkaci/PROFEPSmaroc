@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- ═══ SEO TITLE & META ═══ -->
-  <title>Calculateur Note EPS Maroc /20 &amp; Grille Processus (OP 2007</title>
-  <meta name="description" content="Calculez la note EPS sur 20 selon les OP 2007 (Lycée) et OP 2009 (Collège) : barèmes Performance (1000m/600m, vitesse, poids, saut, gym), grille Processus à.">
+  <title>Calculateur Note EPS Maroc /20 &amp; Grille de Classe 50 Élèves (OP 2007 &amp; 2009)</title>
+  <meta name="description" content="Calculez la note EPS (/20) selon les OP 2007 et OP 2009 : import/export Excel Massar jusqu'à 50 élèves, saisie de performance avec unité, double grille Individuel + Collectif (Sports Co) et guide dynamique des critères.">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <link rel="canonical" href="https://profeps.ma/calculateur-note-eps-maroc.html">
   <link rel="alternate" hreflang="fr-MA" href="https://profeps.ma/calculateur-note-eps-maroc.html">
@@ -17,13 +17,13 @@
   <!-- ═══ OPEN GRAPH & TWITTER ═══ -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="ProfEPS Maroc">
-  <meta property="og:title" content="Calculateur Note EPS Maroc /20 &amp; Grille Processus (OP 2007 &amp; 2009)">
-  <meta property="og:description" content="Convertissez les performances (Course en durée 1000m/600m, Vitesse 80m/60m, Poids, Longueur, Hauteur, Gym, Sports Co) et cochez les critères du processus pour calculer la note /20.">
+  <meta property="og:title" content="Calculateur Note EPS Maroc /20 &amp; Grille de Classe 50 Élèves (OP 2007 &amp; 2009)">
+  <meta property="og:description" content="Importez votre liste Excel Massar (jusqu'à 50 élèves), convertissez les performances avec unité, cochez les critères Individuel + Collectif et exportez vers Excel, Massar, Word ou PDF A4.">
   <meta property="og:url" content="https://profeps.ma/calculateur-note-eps-maroc.html">
   <meta property="og:image" content="https://profeps.ma/images/prof_eps.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Calculateur Note EPS Maroc /20 &amp; Grille Processus (OP 2007 &amp; 2009)">
-  <meta name="twitter:description" content="Barèmes officiels OP 2007/2009 par niveau (1AC à 2Bac), Situation de Référence, grille Processus à cases à cocher et export Word/PDF pour 35 élèves.">
+  <meta name="twitter:title" content="Calculateur Note EPS Maroc /20 &amp; Grille de Classe 50 Élèves (OP 2007 &amp; 2009)">
+  <meta name="twitter:description" content="Barèmes officiels OP 2007/2009 (1AC à 2Bac), import Excel Massar (50 élèves), double grille Individuel + Collectif et export Excel/Word/PDF.">
   <meta name="twitter:image" content="https://profeps.ma/images/prof_eps.png">
 
   <!-- ═══ SCHEMA.ORG JSON-LD ═══ -->
@@ -92,6 +92,7 @@
   <link rel="stylesheet" href="/css/tailwind-precompiled.min.css?v=20261101">
   <link rel="stylesheet" href="/css/profeps-unifier.min.css?v=20261101">
   <link rel="stylesheet" href="/assets/site.css?v=20261117">
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" defer></script>
   <script src="profeps-communaute.js" defer></script>
 
   <style>
@@ -169,23 +170,19 @@
       max-width: 820px;
       margin: 0 auto 1.25rem;
     }
-    .note-hero-pills {
+    .note-hero-meta {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 0.5rem;
-    }
-    .note-hero-pill {
-      background: var(--surface);
-      border: 1px solid var(--stone);
-      padding: 0.35rem 0.85rem;
-      border-radius: 999px;
-      font-size: 0.8rem;
+      align-items: center;
+      gap: 0.45rem 0.75rem;
+      font-size: 0.82rem;
       font-weight: 700;
       color: var(--ink-soft);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
+    }
+    .note-hero-meta-sep {
+      color: var(--ink-muted);
+      opacity: 0.6;
     }
 
     /* ═══ MAIN WRAPPER ═══ */
@@ -195,7 +192,7 @@
       padding: 1.75rem 1rem 3.5rem;
     }
 
-    /* ═══ MODE SWITCHER (INDIVIDUEL VS CLASSE 35 ÉLÈVES) ═══ */
+    /* ═══ MODE SWITCHER (INDIVIDUEL VS CLASSE 50 ÉLÈVES) ═══ */
     .mode-switcher {
       display: flex;
       justify-content: center;
@@ -764,7 +761,7 @@
       color: #92400E;
     }
 
-    /* ═══ MODE 2: GRILLE DE CLASSE 35 ÉLÈVES ═══ */
+    /* ═══ MODE 2: GRILLE DE CLASSE 50 ÉLÈVES ═══ */
     .class-grid-section {
       display: none;
     }
@@ -773,49 +770,125 @@
     }
     .class-toolbar {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.75rem;
+      flex-direction: column;
+      gap: 0.85rem;
       margin-bottom: 1rem;
-      padding: 1rem 1.25rem;
+      padding: 1.05rem 1.25rem;
       background: var(--surface);
       border: 1px solid var(--stone);
       border-radius: 14px;
     }
+    .class-toolbar-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .class-toolbar-sub {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid #E2E8F0;
+    }
     .class-btn-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 0.45rem;
+      align-items: center;
     }
     .c-btn {
-      padding: 0.55rem 0.95rem;
+      padding: 0.52rem 0.9rem;
       border-radius: 10px;
       border: 1px solid #CBD5E1;
       background: #FFFFFF;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 700;
       color: var(--ink);
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.38rem;
+      white-space: nowrap;
+      transition: background 0.15s, border-color 0.15s;
     }
-    .c-btn:hover { background: #F1F5F9; }
+    .c-btn:hover { background: #F1F5F9; border-color: #94A3B8; }
+    .c-btn:disabled { opacity: 0.45; cursor: not-allowed; }
     .c-btn.primary {
       background: #3347D6;
       color: #FFFFFF;
       border-color: #3347D6;
     }
+    .c-btn.primary:hover { background: #2434A8; }
+    .c-btn.excel {
+      background: #0F766E;
+      color: #FFFFFF;
+      border-color: #0F766E;
+    }
+    .c-btn.excel:hover { background: #115E59; }
     .c-btn.word {
       background: #1D4ED8;
       color: #FFFFFF;
       border-color: #1D4ED8;
     }
+    .c-btn.word:hover { background: #1E40AF; }
     .c-btn.pdf {
       background: #059669;
       color: #FFFFFF;
       border-color: #059669;
+    }
+    .c-btn.pdf:hover { background: #047857; }
+    .c-btn.danger-outline {
+      border-color: #FECDD3;
+      color: #BE123C;
+      background: #FFF1F2;
+    }
+    .c-btn.danger-outline:hover { background: #FFE4E6; }
+
+    .class-filter-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.22rem;
+      background: #F1F5F9;
+      border-radius: 10px;
+      flex-wrap: wrap;
+    }
+    .filter-tab-btn {
+      border: none;
+      background: transparent;
+      padding: 0.36rem 0.72rem;
+      border-radius: 8px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--ink-soft);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .filter-tab-btn.active {
+      background: #FFFFFF;
+      color: var(--primary-dark);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .class-search-input {
+      padding: 0.42rem 0.75rem;
+      border: 1px solid #CBD5E1;
+      border-radius: 9px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      min-width: 195px;
+      background: #FFFFFF;
+      color: var(--ink);
+    }
+    .save-status-note {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #059669;
+      white-space: nowrap;
     }
 
     .class-table-container {
@@ -828,50 +901,151 @@
     table.sheet-35-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.78rem;
+      font-size: 0.77rem;
+      font-variant-numeric: tabular-nums;
     }
     table.sheet-35-table th {
       background: #1E293B;
       color: #FFFFFF;
-      padding: 0.45rem 0.35rem;
+      padding: 0.48rem 0.38rem;
       border: 1px solid #334155;
       text-align: center;
       font-weight: 700;
       line-height: 1.25;
+      vertical-align: middle;
+    }
+    table.sheet-35-table th.mega-hdr-indiv {
+      background: #1E3A8A;
+      color: #FFFFFF;
+      border-color: #3B82F6;
+    }
+    table.sheet-35-table th.mega-hdr-coll {
+      background: #065F46;
+      color: #FFFFFF;
+      border-color: #10B981;
     }
     table.sheet-35-table th.sub-hdr {
       background: #334155;
-      font-size: 0.7rem;
+      font-size: 0.69rem;
       color: #E2E8F0;
     }
+    table.sheet-35-table th.sub-hdr-indiv {
+      background: #1E40AF;
+      font-size: 0.69rem;
+      color: #DBEAFE;
+    }
+    table.sheet-35-table th.sub-hdr-coll {
+      background: #047857;
+      font-size: 0.69rem;
+      color: #D1FAE5;
+    }
     table.sheet-35-table td {
-      padding: 0.3rem 0.35rem;
+      padding: 0.34rem 0.36rem;
       border: 1px solid #CBD5E1;
       text-align: center;
       vertical-align: middle;
+      font-variant-numeric: tabular-nums;
     }
     table.sheet-35-table tr:nth-child(even) {
       background: #F8FAFC;
     }
+    table.sheet-35-table tr.row-inactive {
+      opacity: 0.68;
+      background: #FEF2F2;
+    }
+    .sticky-col-num {
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      background: inherit;
+    }
+    table.sheet-35-table thead th.sticky-col-num {
+      z-index: 4;
+      background: #1E293B;
+    }
     .row-input-name {
       width: 100%;
-      min-width: 135px;
+      min-width: 145px;
       border: none;
       background: transparent;
       font-size: 0.8rem;
       font-weight: 600;
       color: var(--ink);
-      padding: 0.2rem;
+      padding: 0.22rem;
     }
     .row-input-num {
       width: 54px;
-      padding: 0.22rem 0.3rem;
+      padding: 0.24rem 0.28rem;
       border: 1px solid #CBD5E1;
       border-radius: 6px;
       text-align: center;
       font-weight: 700;
       font-size: 0.78rem;
+      font-variant-numeric: tabular-nums;
+      background: #FFFFFF;
+      color: var(--ink);
     }
+
+    /* ═══ INLINE UNIT-BADGED PERFORMANCE INPUT ═══ */
+    .unit-input-wrap {
+      display: inline-flex;
+      align-items: center;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 8px;
+      background: #FFFFFF;
+      overflow: hidden;
+    }
+    .unit-input-wrap:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(51, 71, 214, 0.14);
+    }
+    .unit-input-wrap input {
+      width: 66px;
+      border: none;
+      outline: none;
+      padding: 0.26rem 0.35rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-align: center;
+      color: var(--ink);
+      background: transparent;
+      font-variant-numeric: tabular-nums;
+    }
+    .perf-unit-tag {
+      padding: 0.26rem 0.42rem;
+      background: #EEF2FF;
+      color: #2434A8;
+      font-size: 0.69rem;
+      font-weight: 800;
+      border-left: 1px solid #CBD5E1;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .indiv-unit-box {
+      display: flex;
+      align-items: center;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 10px;
+      background: #FFFFFF;
+      overflow: hidden;
+    }
+    .indiv-unit-box input {
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      flex: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .indiv-unit-suffix {
+      padding: 0.65rem 0.9rem;
+      background: #EEF2FF;
+      color: var(--primary-dark);
+      font-size: 0.82rem;
+      font-weight: 800;
+      border-left: 1px solid #CBD5E1;
+      white-space: nowrap;
+    }
+
     .mini-chk-pair {
       display: inline-flex;
       gap: 2px;
@@ -888,6 +1062,7 @@
       font-weight: 700;
       color: #475569;
       cursor: pointer;
+      white-space: nowrap;
     }
     .mini-chk.pos-on {
       background: #059669;
@@ -897,14 +1072,330 @@
       background: #E11D48;
       color: #FFFFFF;
     }
+    .status-cycle-btn {
+      padding: 3px 7px;
+      border-radius: 6px;
+      border: 1px solid #CBD5E1;
+      font-size: 0.69rem;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .status-cycle-btn.st-ok {
+      background: #ECFDF5;
+      color: #065F46;
+      border-color: #A7F3D0;
+    }
+    .status-cycle-btn.st-abs {
+      background: #FEF3C7;
+      color: #92400E;
+      border-color: #FCD34D;
+    }
+    .status-cycle-btn.st-disp {
+      background: #FFE4E6;
+      color: #9F1239;
+      border-color: #FDA4AF;
+    }
+    .row-del-btn {
+      border: 1px solid #E2E8F0;
+      background: #FFFFFF;
+      color: #64748B;
+      border-radius: 6px;
+      padding: 3px 6px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .row-del-btn:hover {
+      background: #FFF1F2;
+      color: #E11D48;
+      border-color: #FDA4AF;
+    }
+
+    /* ═══ EXCEL IMPORT MAPPING MODAL ═══ */
+    .excel-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      z-index: 9990;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .excel-modal-backdrop.open {
+      display: flex;
+    }
+    .excel-modal-dialog {
+      width: 100%;
+      max-width: 720px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: #FFFFFF;
+      color: var(--ink);
+      border: 1px solid #CBD5E1;
+      border-radius: 18px;
+      padding: 1.4rem 1.5rem;
+      box-shadow: 0 24px 50px rgba(15, 23, 42, 0.35);
+    }
+    .excel-map-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin: 0.9rem 0;
+    }
+    @media (max-width: 680px) {
+      .excel-map-grid { grid-template-columns: 1fr; }
+    }
+    .excel-preview-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.78rem;
+      margin-top: 0.6rem;
+    }
+    .excel-preview-table th, .excel-preview-table td {
+      border: 1px solid #CBD5E1;
+      padding: 0.4rem 0.55rem;
+      text-align: left;
+    }
+    .excel-preview-table th {
+      background: #F1F5F9;
+      font-weight: 800;
+    }
+
+    /* ═══ DYNAMIC APS GUIDE & CRITERIA EXPLAINER ═══ */
+    .dynamic-guide-card {
+      margin-top: 2rem;
+    }
+    .guide-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.9rem;
+      margin: 1rem 0 1.4rem;
+    }
+    @media (max-width: 820px) {
+      .guide-steps-grid { grid-template-columns: 1fr; }
+    }
+    .guide-step-item {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 0.95rem 1.05rem;
+    }
+    .guide-step-num {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.25rem;
+      display: block;
+    }
+    .guide-step-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+    .guide-step-desc {
+      font-size: 0.81rem;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+    .guide-crit-section-title {
+      font-size: 0.96rem;
+      font-weight: 800;
+      color: var(--ink);
+      margin: 1.15rem 0 0.65rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid #E2E8F0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .guide-crit-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.85rem;
+    }
+    @media (max-width: 760px) {
+      .guide-crit-grid { grid-template-columns: 1fr; }
+    }
+    .guide-crit-card {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 0.95rem 1.05rem;
+    }
+    .guide-crit-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.45rem;
+    }
+    .guide-crit-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--ink);
+    }
+    .guide-crit-weight {
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .guide-crit-states {
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+      line-height: 1.48;
+      margin-bottom: 0.4rem;
+    }
+    .guide-crit-tip {
+      font-size: 0.77rem;
+      color: var(--secondary);
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    /* ═══ INLINE TOAST ═══ */
+    .peps-toast {
+      position: fixed;
+      bottom: 1.25rem;
+      right: 1.25rem;
+      z-index: 9995;
+      background: #141B2D;
+      color: #FFFFFF;
+      padding: 0.7rem 1.1rem;
+      border-radius: 12px;
+      font-size: 0.83rem;
+      font-weight: 700;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.3);
+      display: none;
+      max-width: 360px;
+    }
+    .peps-toast.show {
+      display: block;
+    }
+
+    /* ═══ DARK MODE EXPLICIT SURFACE & CONTRAST PARITY ═══ */
+    html[data-theme="dark"] {
+      --primary: #6366F1;
+      --primary-dark: #93A8FF;
+      --secondary: #38BDF8;
+      --surface: #131E3A;
+      --paper: #0B1224;
+      --sky: #1E293B;
+      --stone: #263558;
+      --ink: #E8ECFA;
+      --ink-soft: #CBD5E1;
+      --ink-muted: #94A3B8;
+    }
+    html[data-theme="dark"] .note-hero {
+      background: linear-gradient(180deg, #131E3A 0%, #0B1224 100%);
+      border-bottom-color: #263558;
+    }
+    html[data-theme="dark"] .note-hero-kicker,
+    html[data-theme="dark"] .sr-banner {
+      background: #172546;
+      border-color: #334155;
+      color: #E8ECFA;
+    }
+    html[data-theme="dark"] .sr-tag-aps,
+    html[data-theme="dark"] .bareme-split-box,
+    html[data-theme="dark"] .b-pill,
+    html[data-theme="dark"] .cfg-select,
+    html[data-theme="dark"] .cfg-input,
+    html[data-theme="dark"] .class-search-input,
+    html[data-theme="dark"] .row-input-num,
+    html[data-theme="dark"] .unit-input-wrap,
+    html[data-theme="dark"] .indiv-unit-box,
+    html[data-theme="dark"] .c-btn:not(.primary):not(.excel):not(.word):not(.pdf):not(.danger-outline),
+    html[data-theme="dark"] .excel-modal-dialog {
+      background: #0F172A;
+      color: #E8ECFA;
+      border-color: #334155;
+    }
+    html[data-theme="dark"] .b-pill.proc {
+      background: #1E293B;
+      border-color: #3B82F6;
+    }
+    html[data-theme="dark"] .sexe-toggle,
+    html[data-theme="dark"] .class-filter-group {
+      background: #0F172A;
+    }
+    html[data-theme="dark"] .sexe-btn.active,
+    html[data-theme="dark"] .filter-tab-btn.active {
+      background: #1E293B;
+      color: #93A8FF;
+    }
+    html[data-theme="dark"] .processus-table-wrap,
+    html[data-theme="dark"] .class-table-container {
+      background: #131E3A;
+      border-color: #334155;
+    }
+    html[data-theme="dark"] table.sheet-35-table td,
+    html[data-theme="dark"] table.proc-grid-table td,
+    html[data-theme="dark"] table.bareme-ref-table td,
+    html[data-theme="dark"] .excel-preview-table td {
+      border-color: #263558;
+      color: #E8ECFA;
+    }
+    html[data-theme="dark"] table.sheet-35-table tr:nth-child(even) {
+      background: #0F172A;
+    }
+    html[data-theme="dark"] table.bareme-ref-table th,
+    html[data-theme="dark"] .excel-preview-table th {
+      background: #1E293B;
+      color: #E2E8F0;
+      border-color: #334155;
+    }
+    html[data-theme="dark"] .crit-choice-btn,
+    html[data-theme="dark"] .q-chip,
+    html[data-theme="dark"] .guide-step-item,
+    html[data-theme="dark"] .guide-crit-card {
+      background: #0F172A;
+      border-color: #263558;
+      color: #E8ECFA;
+    }
+    html[data-theme="dark"] .crit-choice-btn.checked-pos {
+      background: rgba(5, 150, 105, 0.22);
+      border-color: #10B981;
+      color: #6EE7B7;
+    }
+    html[data-theme="dark"] .crit-choice-btn.checked-neg {
+      background: rgba(225, 29, 72, 0.22);
+      border-color: #F43F5E;
+      color: #FDA4AF;
+    }
+    html[data-theme="dark"] .perf-unit-tag,
+    html[data-theme="dark"] .indiv-unit-suffix {
+      background: #1E293B;
+      color: #93A8FF;
+      border-left-color: #334155;
+    }
+    html[data-theme="dark"] .mini-chk-pair {
+      background: #1E293B;
+    }
+    html[data-theme="dark"] .mini-chk:not(.pos-on):not(.neg-on) {
+      background: #0F172A;
+      color: #CBD5E1;
+    }
 
     @media print {
-      .peps-navbar, .note-hero, .mode-switcher, .config-card, .class-toolbar, .footer, .seo-guide-card {
+      @page { size: A4 landscape; margin: 10mm; }
+      .peps-navbar, .note-hero, .mode-switcher, .config-card, .class-toolbar,
+      .footer, .seo-guide-card, .dynamic-guide-card, .excel-modal-backdrop,
+      .peps-toast, .no-print-col {
         display: none !important;
       }
       .class-grid-section { display: block !important; }
       #indivModeSection { display: none !important; }
-      body { background: #FFFFFF; }
+      body { background: #FFFFFF !important; color: #0F172A !important; }
+      .class-table-container { border: 1px solid #000 !important; box-shadow: none !important; overflow: visible !important; }
+      table.sheet-35-table { font-size: 7pt !important; }
+      table.sheet-35-table th { background: #1E293B !important; color: #FFFFFF !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
   </style>
   <!-- Google AdSense -->
@@ -1341,14 +1832,17 @@
 
   <!-- ═══ HERO SECTION ═══ -->
   <header class="note-hero">
-    <div class="note-hero-kicker">📊 Barèmes Officiels OP 2009 (Collège) &amp; OP 2007 (Lycée) · Grille Processus du Générateur</div>
-    <h1>Calculateur de <span>Note EPS (/20) &amp; Grille Processus</span> — Maroc</h1>
-    <p>Sélectionnez votre <strong>Niveau (1AC à 2Bac)</strong> et votre <strong>APS</strong> : consultez la <strong>Situation de Référence (SR)</strong> officielle, convertissez la performance (ex. <strong>Course en durée : 1000m Garçons / 600m Filles</strong>), cochez les <strong>4 critères du Processus</strong> (modèle Générateur) et obtenez la note finale sur 20.</p>
-    <div class="note-hero-pills">
-      <span class="note-hero-pill">✅ Procédural 12 pts (6+6) · 13 pts (6+7) · 14 pts (7+7)</span>
-      <span class="note-hero-pill">🏃 Situations de Référence OP 2007 &amp; 2009</span>
-      <span class="note-hero-pill">☑️ Grille Processus à Cases à Cocher (1,5 pt / 2 pts)</span>
-      <span class="note-hero-pill">📥 Grille de Classe 35 Élèves (Word / PDF)</span>
+    <div class="note-hero-kicker">Barèmes Officiels OP 2009 (Collège) &amp; OP 2007 (Lycée)</div>
+    <h1>Calculateur de <span>Note EPS (/20) &amp; Grille de Classe</span> — Maroc</h1>
+    <p>Sélectionnez votre <strong>Niveau (1AC à 2Bac)</strong> et votre <strong>APS</strong> : convertissez la performance brute avec son unité, évaluez les sports collectifs sur la double grille <strong>Capacité Individuelle + Capacité Collective</strong> et gérez jusqu'à <strong>50 élèves</strong> via import/export Excel Massar.</p>
+    <div class="note-hero-meta">
+      <span>Procédural 12 / 13 / 14 pts</span>
+      <span class="note-hero-meta-sep" aria-hidden="true">·</span>
+      <span>Saisie brute avec unité (m, s, min'sec", élém.)</span>
+      <span class="note-hero-meta-sep" aria-hidden="true">·</span>
+      <span>Double Grille Sports Co (4 + 4 critères)</span>
+      <span class="note-hero-meta-sep" aria-hidden="true">·</span>
+      <span>Import / Export Massar (50 élèves max)</span>
     </div>
   </header>
 
@@ -1360,8 +1854,8 @@
         <span class="badge-count">Détail OP</span>
       </button>
       <button type="button" class="mode-btn" id="btnModeClasse" onclick="switchCalcMode('classe')">
-        <span>📋 Grille de Classe Interactive (35 Élèves)</span>
-        <span class="badge-count" id="classCountBadge">5 élèves</span>
+        <span>📋 Grille de Classe Interactive (Max 50 Élèves)</span>
+        <span class="badge-count" id="classCountBadge">5 / 50 élèves</span>
       </button>
     </div>
 
@@ -1394,7 +1888,7 @@
               <option value="Saut en longueur">🦘 Saut en longueur</option>
               <option value="Saut en hauteur">⬆️ Saut en hauteur</option>
               <option value="Course de haies">🚧 Course de haies</option>
-              <option value="Course de relais"> baton Course de relais</option>
+              <option value="Course de relais">🏃‍♂️ Course de relais</option>
             </optgroup>
             <optgroup label="🤸 Gymnastique (Contrats A, B, C, D, E)">
               <option value="Gymnastique">🤸 Gymnastique au sol</option>
@@ -1620,7 +2114,7 @@
             <div style="display:grid;grid-template-columns:1fr;gap:0.5rem;margin-bottom:0.9rem;">
               <input type="text" id="indivStudentName" class="cfg-input" placeholder="Nom &amp; prénom de l'élève (optionnel pour ajout à la liste)" style="background:rgba(255,255,255,0.95);font-size:0.85rem;">
               <button type="button" class="btn-add-to-class" onclick="addCurrentStudentToClassGrid()">
-                <span>➕ Ajouter cet élève à la Grille de Classe (35 élèves)</span>
+                <span>➕ Ajouter cet élève à la Grille de Classe (Max 50)</span>
               </button>
             </div>
 
@@ -1652,34 +2146,62 @@
     </div>
 
     <!-- ═══════════════════════════════════════════════════════════════════════
-         MODE 2 : GRILLE DE CLASSE INTERACTIVE (JUSQU'À 35 ÉLÈVES + EXPORT WORD/PDF)
+         MODE 2 : GRILLE DE CLASSE INTERACTIVE (JUSQU'À 50 ÉLÈVES + MASSAR + EXPORT)
          ═══════════════════════════════════════════════════════════════════════ -->
-    <section class="class-grid-section" id="classeModeSection" aria-label="Grille d'évaluation de classe 35 élèves">
+    <section class="class-grid-section" id="classeModeSection" aria-label="Grille d'évaluation de classe jusqu'à 50 élèves">
       <div class="class-toolbar">
-        <div>
-          <h2 style="font-size:1.05rem;font-weight:800;color:var(--ink);margin:0;">📋 Grille d'Évaluation Interactive — <span id="classTitleApsNiveau">Course de durée (2Bac)</span></h2>
-          <p style="font-size:0.8rem;color:var(--ink-soft);margin:0.15rem 0 0;">Cochez les cases des 4 critères du processus pour chaque élève : la note Processus et le Total /20 se calculent automatiquement.</p>
+        <div class="class-toolbar-top">
+          <div>
+            <h2 style="font-size:1.05rem;font-weight:800;color:var(--ink);margin:0;">Grille d'Évaluation Interactive (Max 50 élèves) — <span id="classTitleApsNiveau">Course de durée (2Bac)</span></h2>
+            <p id="classSubtitleHint" style="font-size:0.8rem;color:var(--ink-soft);margin:0.15rem 0 0;">Importez votre fichier Excel Massar, saisissez les performances avec leur unité ou cochez les critères Individuel + Collectif.</p>
+          </div>
+          <div class="class-btn-group">
+            <input type="file" id="excelImportInput" accept=".xlsx,.xls,.csv,.txt" style="display:none;" onchange="handleExcelFileSelect(event)">
+            <button type="button" class="c-btn primary" onclick="triggerExcelImport()">📥 Importer Excel (Massar)</button>
+            <button type="button" class="c-btn" id="btnAddRowClass" onclick="addBlankClassRow()">➕ +1 élève</button>
+            <button type="button" class="c-btn" id="btnFill50Rows" onclick="fill50ClassRows()">👥 Remplir 50 lignes</button>
+            <button type="button" class="c-btn excel" onclick="exportClassGridExcel('classe')">📊 Excel (.xlsx)</button>
+            <button type="button" class="c-btn excel" onclick="exportClassGridExcel('massar')">📑 Export Massar</button>
+            <button type="button" class="c-btn word" onclick="exportClassGridWord()">📥 Word (.doc)</button>
+            <button type="button" class="c-btn pdf" onclick="window.print()">🖨️ PDF A4</button>
+            <button type="button" class="c-btn danger-outline" id="btnResetClassData" onclick="confirmResetClassData()">🗑️ Réinitialiser</button>
+          </div>
         </div>
-        <div class="class-btn-group">
-          <button type="button" class="c-btn" onclick="addBlankClassRow()">➕ Ajouter 1 élève</button>
-          <button type="button" class="c-btn" onclick="fill35ClassRows()">👥 Générer 35 lignes (Format Classe)</button>
-          <button type="button" class="c-btn word" onclick="exportClassGridWord()">📥 Exporter Word (.doc)</button>
-          <button type="button" class="c-btn pdf" onclick="window.print()">🖨️ Imprimer / PDF A4</button>
+
+        <div class="class-toolbar-sub">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.55rem;">
+            <input type="search" id="classSearchInput" class="class-search-input" placeholder="🔍 Filtrer par nom d'élève..." oninput="onClassFilterChange()">
+            <div class="class-filter-group" role="group" aria-label="Filtrer la liste de classe">
+              <button type="button" class="filter-tab-btn active" data-filter="ALL" onclick="setClassFilter('ALL', this)">Tous</button>
+              <button type="button" class="filter-tab-btn" data-filter="G" onclick="setClassFilter('G', this)">Garçons</button>
+              <button type="button" class="filter-tab-btn" data-filter="F" onclick="setClassFilter('F', this)">Filles</button>
+              <button type="button" class="filter-tab-btn" data-filter="INACTIVE" onclick="setClassFilter('INACTIVE', this)">ABS / DISP</button>
+            </div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.45rem;">
+            <button type="button" class="c-btn" onclick="bulkFillConceptComp()" title="Appliquer 2,5 Conceptuel et note comportementale par défaut aux présents">⚡ Remplir Concep/Comport</button>
+            <button type="button" class="c-btn" onclick="bulkResetCriteriaPresent()" title="Tout cocher Maîtrisé sur les critères de la vue actuelle">✓ Tout cocher (Actifs)</button>
+            <span class="save-status-note" id="saveStatusNote">✓ Sauvegarde auto locale</span>
+          </div>
         </div>
       </div>
 
       <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-bottom:0.85rem;" id="classSummaryStatsBar">
-        <div style="flex:1 1 180px;background:#FFFFFF;border:1px solid #CBD5E1;border-radius:10px;padding:0.6rem 0.9rem;">
-          <div style="font-size:0.72rem;font-weight:700;color:var(--ink-muted);text-transform:uppercase;">Moyenne de Classe</div>
-          <div style="font-size:1.25rem;font-weight:900;color:#2434A8;" id="clsStatAvg">16.25 / 20</div>
+        <div style="flex:1 1 170px;background:var(--surface);border:1px solid var(--stone);border-radius:10px;padding:0.6rem 0.9rem;">
+          <div style="font-size:0.72rem;font-weight:700;color:var(--ink-muted);text-transform:uppercase;">Moyenne (Hors ABS/DISP)</div>
+          <div style="font-size:1.25rem;font-weight:900;color:var(--primary-dark);font-variant-numeric:tabular-nums;" id="clsStatAvg">16.25 / 20</div>
         </div>
-        <div style="flex:1 1 180px;background:#FFFFFF;border:1px solid #CBD5E1;border-radius:10px;padding:0.6rem 0.9rem;">
+        <div style="flex:1 1 170px;background:var(--surface);border:1px solid var(--stone);border-radius:10px;padding:0.6rem 0.9rem;">
           <div style="font-size:0.72rem;font-weight:700;color:var(--ink-muted);text-transform:uppercase;">Note Min / Note Max</div>
-          <div style="font-size:1.25rem;font-weight:900;color:#059669;" id="clsStatMinMax">13.00 — 19.75</div>
+          <div style="font-size:1.25rem;font-weight:900;color:#059669;font-variant-numeric:tabular-nums;" id="clsStatMinMax">13.00 — 19.75</div>
         </div>
-        <div style="flex:1 1 180px;background:#FFFFFF;border:1px solid #CBD5E1;border-radius:10px;padding:0.6rem 0.9rem;">
+        <div style="flex:1 1 170px;background:var(--surface);border:1px solid var(--stone);border-radius:10px;padding:0.6rem 0.9rem;">
           <div style="font-size:0.72rem;font-weight:700;color:var(--ink-muted);text-transform:uppercase;">Taux de Réussite (≥ 10/20)</div>
-          <div style="font-size:1.25rem;font-weight:900;color:#D97706;" id="clsStatPassRate">100% (5/5)</div>
+          <div style="font-size:1.25rem;font-weight:900;color:#D97706;font-variant-numeric:tabular-nums;" id="clsStatPassRate">100% (5/5)</div>
+        </div>
+        <div style="flex:1 1 170px;background:var(--surface);border:1px solid var(--stone);border-radius:10px;padding:0.6rem 0.9rem;">
+          <div style="font-size:0.72rem;font-weight:700;color:var(--ink-muted);text-transform:uppercase;">Effectif &amp; Statuts</div>
+          <div style="font-size:1rem;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;" id="clsStatStatusCounts">5/50 · 0 ABS · 0 DISP</div>
         </div>
       </div>
 
@@ -1690,6 +2212,9 @@
         </table>
       </div>
     </section>
+
+    <!-- ═══ GUIDE INTERACTIF DYNAMIQUE SELON L'APS SÉLECTIONNÉE ═══ -->
+    <section class="panel-card dynamic-guide-card" id="dynamicGuideSection" aria-live="polite" aria-label="Guide d'utilisation et explication des critères selon l'APS"></section>
 
     <!-- ═══ TABLEAU RÉCAPITULATIF OFFICIEL DES BARÈMES OP 2009 & OP 2007 ═══ -->
     <section class="panel-card seo-guide-card" style="margin-top:2.25rem;">
@@ -1917,109 +2442,253 @@
     </div>
   </footer>
 
+  <!-- ═══ MODALE DE MAPPAGE EXCEL / MASSAR ═══ -->
+  <div class="excel-modal-backdrop" id="excelMapModal" role="dialog" aria-modal="true" aria-labelledby="excelModalTitle">
+    <div class="excel-modal-dialog">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+        <div>
+          <h3 id="excelModalTitle" style="margin:0;font-size:1.08rem;font-weight:800;">Importer une Liste d'Élèves (Excel / Massar / CSV)</h3>
+          <p id="excelModalSubtitle" style="margin:0.2rem 0 0;font-size:0.8rem;color:var(--ink-soft);">Vérifiez ou associez manuellement les colonnes Nom, Prénom et Sexe (plafond 50 élèves).</p>
+        </div>
+        <button type="button" class="c-btn" onclick="closeExcelMapModal()">✕ Fermer</button>
+      </div>
+
+      <div class="excel-map-grid">
+        <div class="cfg-group">
+          <label for="mapColSheet">Feuille &amp; Ligne d'en-tête</label>
+          <select id="mapColSheet" class="cfg-select" onchange="onExcelSheetOrHeaderChange()"></select>
+        </div>
+        <div class="cfg-group">
+          <label for="mapColHeaderRow">Ligne contenant les titres</label>
+          <select id="mapColHeaderRow" class="cfg-select" onchange="onExcelSheetOrHeaderChange()"></select>
+        </div>
+        <div class="cfg-group">
+          <label for="mapImportMode">Mode d'importation</label>
+          <select id="mapImportMode" class="cfg-select" onchange="refreshExcelPreview()">
+            <option value="replace" selected>Remplacer la liste actuelle (max 50)</option>
+            <option value="append">Ajouter à la suite (jusqu'à 50)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="excel-map-grid">
+        <div class="cfg-group">
+          <label for="mapColNom">Colonne Nom / Nom complet *</label>
+          <select id="mapColNom" class="cfg-select" onchange="refreshExcelPreview()"></select>
+        </div>
+        <div class="cfg-group">
+          <label for="mapColPrenom">Colonne Prénom (optionnel)</label>
+          <select id="mapColPrenom" class="cfg-select" onchange="refreshExcelPreview()"></select>
+        </div>
+        <div class="cfg-group">
+          <label for="mapColSexe">Colonne Sexe / Genre (G / F)</label>
+          <select id="mapColSexe" class="cfg-select" onchange="refreshExcelPreview()"></select>
+        </div>
+      </div>
+
+      <div id="excelMapAlert" style="font-size:0.8rem;font-weight:700;padding:0.55rem 0.8rem;border-radius:10px;background:#EEF2FF;color:#2434A8;margin-bottom:0.65rem;"></div>
+
+      <div style="font-size:0.78rem;font-weight:800;color:var(--ink-soft);">Aperçu des 5 premiers élèves détectés :</div>
+      <div style="overflow-x:auto;">
+        <table class="excel-preview-table">
+          <thead><tr><th>N°</th><th>Nom &amp; Prénom extrait</th><th>Sexe normalisé</th></tr></thead>
+          <tbody id="excelPreviewBody"></tbody>
+        </table>
+      </div>
+
+      <div style="display:flex;justify-content:flex-end;gap:0.6rem;margin-top:1rem;">
+        <button type="button" class="c-btn" onclick="closeExcelMapModal()">Annuler</button>
+        <button type="button" class="c-btn primary" onclick="confirmExcelImportFromModal()">✅ Valider et Importer dans la Grille</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="peps-toast" id="pepsToast" role="status" aria-live="polite"></div>
+
   <script>
     // =========================================================================
     // 1. DONNÉES OFFICIELLES OP 2009 (COLLÈGE) & OP 2007 (LYCÉE)
     // =========================================================================
 
-    // Critères d'observation du Processus / Collectif (identiques au Générateur)
+    // Métadonnées unités brutes par APS (Athlétisme & Gymnastique)
+    const PERF_UNIT_META = {
+      'Course de durée': { unit: "min'sec\"", placeholder: "3'15\"", stepHint: "Ex: 3'15\" ou 3:15", type: 'time_minsec', guide: "Saisissez le temps au format minutes'secondes\" (ex. 3'18\" ou 3:18) ou en secondes totales (ex. 198). L'outil applique le barème 1000m pour les Garçons (G) et 600m pour les Filles (F)." },
+      'Course de vitesse': { unit: 's', placeholder: '10.6', stepHint: 'Ex: 10.6 s', type: 'sec', guide: "Saisissez le chrono en secondes avec dixième (ex. 10.6 s). Barème officiel calculé sur 80m Garçons ou 60m Filles." },
+      'Course de haies': { unit: 's', placeholder: '12.4', stepHint: 'Ex: 12.4 s', type: 'sec', guide: "Saisissez le temps chronométré en secondes sur le parcours réglementaire (80m Haies G / 60m Haies F)." },
+      'Course de relais': { unit: 's', placeholder: '31.5', stepHint: 'Ex: 31.5 s', type: 'sec', guide: "Saisissez le chrono de l'équipe ou du binôme en secondes (ex. 31.5 s)." },
+      'Lancer de poids': { unit: 'm', placeholder: '8.45', stepHint: 'Ex: 8.45 m', type: 'meters', guide: "Saisissez la distance du meilleur jet en mètres (ex. 8.45 m). Le calculateur applique l'engin et le barème G/F correspondant au niveau." },
+      'Saut en longueur': { unit: 'm', placeholder: '4.65', stepHint: 'Ex: 4.65 m', type: 'meters', guide: "Saisissez la distance mesurée en mètres (ex. 4.65 m ou 7.90 m) depuis la planche jusqu'à la trace la plus proche." },
+      'Saut en hauteur': { unit: 'm', placeholder: '1.35', stepHint: 'Ex: 1.35 m', type: 'meters', guide: "Saisissez la plus grande hauteur franchie en mètres (ex. 1.35 m)." },
+      'Gymnastique': { unit: 'élém.', placeholder: '6', stepHint: 'Ex: 6 élém.', type: 'elements', guide: "Saisissez le nombre d'éléments validés du contrat officiel (de 0 au total du contrat du niveau : 5, 6 ou 7 élém.)." }
+    };
+
+    // Critères d'observation du Processus (Athlétisme & Gymnastique) avec descripteurs pour le Guide Dynamique
     const CRITERES_OBS = {
       'Course de durée': [
-        { nom: 'Régularité', sous: ['Constante', 'Variable'] },
-        { nom: 'Allure', sous: ['Adaptée', 'Inadaptée'] },
-        { nom: 'Posture', sous: ['Correcte', 'Effondrée'] },
-        { nom: 'Finish', sous: ['Accéléré', 'Ralenti'] }
+        { nom: 'Régularité', sous: ['Constante', 'Variable'], descPos: 'Maintien d\'une vitesse stable d\'un tour à l\'autre (écart ≤ 3 sec/200m).', descNeg: 'Départ trop rapide suivi d\'une chute nette d\'allure ou d\'arrêts.', tip: 'Compter les temps de passage à chaque tour de piste ou plots sonores.' },
+        { nom: 'Allure', sous: ['Adaptée', 'Inadaptée'], descPos: 'Allure calibrée sur son pourcentage VMA sans marche ni rupture.', descNeg: 'Allure incohérente avec le projet annoncé ou alternance course/marche.', tip: 'Vérifier l\'écart entre l\'allure annoncée par l\'élève et l\'allure réelle.' },
+        { nom: 'Posture', sous: ['Correcte', 'Effondrée'], descPos: 'Buste redressé, regard loin devant, relâchement des épaules et bras actifs.', descNeg: 'Tête crispée, épaules basses, crispation des bras ou déséquilibre.', tip: 'Observer sur les derniers 200 mètres quand la fatigue apparaît.' },
+        { nom: 'Finish', sous: ['Accéléré', 'Ralenti'], descPos: 'Capacité à conserver ou accélérer l\'allure sur la dernière portion.', descNeg: 'Ralentissement marqué ou relâchement avant la ligne d\'arrivée.', tip: 'Repérer la relance d\'appuis sur les 100 derniers mètres.' }
       ],
       'Course de vitesse': [
-        { nom: 'Départ', sous: ['Réactif', 'Lent'] },
-        { nom: 'Accélération', sous: ['Progress.', 'Brutale'] },
-        { nom: 'Course', sous: ['Axée', 'Désaxée'] },
-        { nom: 'Finish', sous: ['Engagé', 'Relâché'] }
+        { nom: 'Départ', sous: ['Réactif', 'Lent'], descPos: 'Mise en action immédiate au signal avec poussée complète des deux jambes.', descNeg: 'Temps de réaction long ou redressement immédiat dès la sortie.', tip: 'Évaluer sur les 5 premiers mètres après le signal sonore.' },
+        { nom: 'Accélération', sous: ['Progress.', 'Brutale'], descPos: 'Redressement progressif du buste et augmentation fluide de l\'amplitude.', descNeg: 'Piétinement sur place ou cassure de rythme entre 10m et 30m.', tip: 'Vérifier la continuité des appuis en griffé actif.' },
+        { nom: 'Course', sous: ['Axée', 'Désaxée'], descPos: 'Trajectoire rectiligne dans le couloir, alignement pied-bassin-épaules.', descNeg: 'Oscillations latérales, bras croisant devant le tronc.', tip: 'Se placer face au couloir pour juger l\'alignement segmentaire.' },
+        { nom: 'Finish', sous: ['Engagé', 'Relâché'], descPos: 'Maintien de la vitesse maximale jusqu\'au franchissement de la ligne.', descNeg: 'Freinage ou redressement anticipé avant la ligne d\'arrivée.', tip: 'Placer un repère 5 mètres après la ligne d\'arrivée réelle.' }
       ],
       'Course de haies': [
-        { nom: 'Départ', sous: ['Réactif', 'Lent'] },
-        { nom: 'Rythme', sous: ['Régulier', 'Irrégulier'] },
-        { nom: 'Franchiss.', sous: ['Efficient', 'Ralentit'] },
-        { nom: 'Finish', sous: ['Engagé', 'Relâché'] }
+        { nom: 'Départ', sous: ['Réactif', 'Lent'], descPos: 'Départ dynamique et prise de vitesse rapide vers la première haie.', descNeg: 'Hésitation avant la 1ère haie ou déséquilibre au départ.', tip: 'Vérifier le nombre d\'appuis constant jusqu\'à la 1ère haie.' },
+        { nom: 'Rythme', sous: ['Régulier', 'Irrégulier'], descPos: 'Intervalle inter-haies constant (3 ou 4 appuis sans piétinement).', descNeg: 'Piétinement devant les haies, changement d\'appel désordonné.', tip: 'Observer la fluidité entre la haie 2 et la haie 4.' },
+        { nom: 'Franchiss.', sous: ['Efficient', 'Ralentit'], descPos: 'Attaque jambe tendue/fléchie rapide, retour actif au sol sans saut vertical.', descNeg: 'Saut trop haut au-dessus de la haie avec arrêt à la réception.', tip: 'L\'impulsion doit se faire loin de la haie, pas juste dessous.' },
+        { nom: 'Finish', sous: ['Engagé', 'Relâché'], descPos: 'Relance immédiate après la dernière haie jusqu\'à l\'arrivée.', descNeg: 'Relâchement après la dernière haie.', tip: 'Chronométrer l\'enchaînement complet jusqu\'à 10m après la dernière haie.' }
       ],
       'Course de relais': [
-        { nom: 'Départ', sous: ['Réactif', 'Lent'] },
-        { nom: 'Course', sous: ['Rapide', 'Lente'] },
-        { nom: 'Transmission', sous: ['Réussie', 'Ratée'] },
-        { nom: 'Zone', sous: ['Respectée', 'Faute'] }
+        { nom: 'Départ', sous: ['Réactif', 'Lent'], descPos: 'Le receveur démarre précisément au repère d\'entrée de marque.', descNeg: 'Départ trop tôt (freinage) ou trop tard (rattrapé par le porteur).', tip: 'Tester la marque d\'étalonnage avant l\'épreuve évaluée.' },
+        { nom: 'Course', sous: ['Rapide', 'Lente'], descPos: 'Maintien d\'une haute vitesse de sprint dans sa ligne d\'action.', descNeg: 'Ralentissement volontaire par peur de rater l\'échange.', tip: 'Observer le différentiel de vitesse lors de l\'approche.' },
+        { nom: 'Transmission', sous: ['Réussie', 'Ratée'], descPos: 'Témoin transmis en pleine course sans arrêt ni chute.', descNeg: 'Chute du témoin, blocage ou plusieurs tentatives d\'échange.', tip: 'Privilégier le signal vocal clair + main cible stable.' },
+        { nom: 'Zone', sous: ['Respectée', 'Faute'], descPos: 'Échange validé à l\'intérieur de la zone réglementaire des 20m.', descNeg: 'Transmission hors zone (avant ou après les plots limites).', tip: 'Placer des juges de ligne aux entrées et sorties de zone.' }
       ],
       'Lancer de poids': [
-        { nom: 'Position', sous: ['Dos aire', 'Face'] },
-        { nom: 'Tenue', sous: ['Au cou', 'Éloigné'] },
-        { nom: 'Poussée', sous: ['Complète', 'Partielle'] },
-        { nom: 'Équilibre', sous: ['Stable', 'Chute'] }
+        { nom: 'Position', sous: ['Dos aire', 'Face'], descPos: 'Placement initial dos à l\'aire, appuis fléchis et regard bas.', descNeg: 'Départ face au secteur sans armé ni mise en tension.', tip: 'Vérifier l\'orientation des épaules avant le sursaut.' },
+        { nom: 'Tenue', sous: ['Au cou', 'Éloigné'], descPos: 'Engin calé sous la mâchoire/coude haut jusqu\'à l\'expulsion.', descNeg: 'Engin décollé du cou ou coude tombant (faute de lancer).', tip: 'Rappeler la règle réglementaire : le poids ne passe jamais derrière l\'épaule.' },
+        { nom: 'Poussée', sous: ['Complète', 'Partielle'], descPos: 'Chaîne d\'action pieds-hanches-épaule-bras orientée vers l\'avant haut.', descNeg: 'Lancer uniquement du bras sans engagement du bassin.', tip: 'Observer le blocage du côté opposé lors du lâcher.' },
+        { nom: 'Équilibre', sous: ['Stable', 'Chute'], descPos: 'Reprise d\'appui contrôlée devant le butoir sans mordre le cercle.', descNeg: 'Sortie par l\'avant du cercle ou perte d\'équilibre.', tip: 'La sortie de l\'aire s\'effectue toujours par la moitié arrière.' }
       ],
       'Saut en longueur': [
-        { nom: 'Course', sous: ['Accélérée', 'Irrégulière'] },
-        { nom: 'Impulsion', sous: ['Sur planche', 'Mordu'] },
-        { nom: 'Envol', sous: ['Équilibré', 'Déséquil.'] },
-        { nom: 'Réception', sous: ['Stable', 'Chute'] }
+        { nom: 'Course', sous: ['Accélérée', 'Irrégulière'], descPos: 'Course étalonnée à vitesse croissante jusqu\'à la planche.', descNeg: 'Piétinement ou freinage marqué sur les 3 derniers appuis.', tip: 'Utiliser une marque de départ fiable (9 à 12 appuis).' },
+        { nom: 'Impulsion', sous: ['Sur planche', 'Mordu'], descPos: 'Pied d\'appel actif sur la planche (ou zone), élévation vers l\'avant-haut.', descNeg: 'Saut mordu devant la planche ou impulsion sans extension.', tip: 'Ne pas baisser la tête pour regarder la planche à la fin.' },
+        { nom: 'Envol', sous: ['Équilibré', 'Déséquil.'], descPos: 'Suspension haute avec maintien du tronc et ramener des jambes.', descNeg: 'Rotation vers l\'avant ou bras désordonnés en l\'air.', tip: 'Maintenir le genou libre haut à la sortie de planche.' },
+        { nom: 'Réception', sous: ['Stable', 'Chute'], descPos: 'Jambes projetées loin devant, flexion amortie vers l\'avant.', descNeg: 'Chute en arrière faisant perdre des centimètres à la mesure.', tip: 'Mesurer systématiquement à l\'empreinte arrière la plus proche.' }
       ],
       'Saut en hauteur': [
-        { nom: 'Course', sous: ['Courbe', 'Droite'] },
-        { nom: 'Impulsion', sous: ['Pied ext.', 'Autre'] },
-        { nom: 'Franchis.', sous: ['Dorsal', 'Autre'] },
-        { nom: 'Réception', sous: ['Dos', 'Danger'] }
+        { nom: 'Course', sous: ['Courbe', 'Droite'], descPos: 'Élan en J (ligne droite puis courbe) créant l\'inclinaison interne.', descNeg: 'Course perpendiculaire à la barre sans prise d\'inclinaison.', tip: 'Tracer des repères au sol pour matérialiser la courbe.' },
+        { nom: 'Impulsion', sous: ['Pied ext.', 'Autre'], descPos: 'Appel sur le pied extérieur à la barre, orienté verticalement.', descNeg: 'Appel sur le mauvais pied ou trop loin/près des poteaux.', tip: 'Le pied d\'appel doit rester parallèle au plan des poteaux.' },
+        { nom: 'Franchis.', sous: ['Dorsal', 'Autre'], descPos: 'Passage dorsal (Fosbury) avec élévation du bassin puis dégagement.', descNeg: 'Passage assis ou en ciseau bloquant la montée du bassin.', tip: 'Regarder vers l\'épaule extérieure pour provoquer la rotation dorsale.' },
+        { nom: 'Réception', sous: ['Dos', 'Danger'], descPos: 'Chute maîtrisée sur le haut du dos dans la zone centrale du tapis.', descNeg: 'Réception sur la nuque, les genoux ou en bord de tapis.', tip: 'Sécuriser impérativement le menton rentré vers la poitrine.' }
       ],
       'Gymnastique': [
-        { nom: 'Amplitude', sous: ['Suffisante', 'Insuffis.'] },
-        { nom: 'Tenue', sous: ['Gainé', 'Relâché'] },
-        { nom: 'Liaisons', sous: ['Fluides', 'Arrêts'] },
-        { nom: 'Réception', sous: ['Stabilisée', 'Déséquil.'] }
-      ],
-      'Handball': [
-        { nom: 'Passe', sous: ['Précise', 'Imprécise'] },
-        { nom: 'Réception', sous: ['Assurée', 'Manquée'] },
-        { nom: 'Tir', sous: ['Cadré', 'Hors'] },
-        { nom: 'Démarquage', sous: ['Efficace', 'Passif'] }
-      ],
-      'Basketball': [
-        { nom: 'Dribble', sous: ['Tête haute', 'Yeux balle'] },
-        { nom: 'Passe', sous: ['Précise', 'Interceptée'] },
-        { nom: 'Tir', sous: ['Réussi', 'Raté'] },
-        { nom: 'Démarquage', sous: ['Actif', 'Statique'] }
-      ],
-      'Football': [
-        { nom: 'Conduite', sous: ['Maîtrisée', 'Perdue'] },
-        { nom: 'Passe', sous: ['Précise', 'Imprécise'] },
-        { nom: 'Contrôle', sous: ['Orienté', 'Subi'] },
-        { nom: 'Placement', sous: ['Pertinent', 'Inadapté'] }
-      ],
-      'Volleyball': [
-        { nom: 'Manchette', sous: ['Bras tendus', 'Pliés'] },
-        { nom: 'Touche', sous: ['Haute', 'Basse'] },
-        { nom: 'Service', sous: ['Réussi', 'Faute'] },
-        { nom: 'Placement', sous: ['Anticipé', 'Retard'] }
-      ],
-      'Rugby': [
-        { nom: 'Passe', sous: ['Arrière', 'En-avant'] },
-        { nom: 'Plaquage', sous: ['Sécurisé', 'Dangereux'] },
-        { nom: 'Soutien', sous: ['Présent', 'Absent'] },
-        { nom: 'Continuité', sous: ['Rapide', 'Lente'] }
-      ],
-      'Basketball 3x3': [
-        { nom: 'Dribble', sous: ['Protection', 'Exposé'] },
-        { nom: 'Passe', sous: ['Précise', 'Interc.'] },
-        { nom: 'Écran', sous: ['Efficace', 'Inutile'] },
-        { nom: 'Sortie Arc', sous: ['Rapide', 'Lente'] }
-      ],
-      'Badminton': [
-        { nom: 'Dégagé', sous: ['Fond', 'Court'] },
-        { nom: 'Amorti', sous: ['Près filet', 'Long'] },
-        { nom: 'Service', sous: ['Réglem.', 'Faute'] },
-        { nom: 'Replacement', sous: ['Centre', 'Excentré'] }
-      ],
-      'Tennis de table': [
-        { nom: 'Coup droit', sous: ['Contrôlé', 'Aléatoire'] },
-        { nom: 'Revers', sous: ['Contrôlé', 'Aléatoire'] },
-        { nom: 'Service', sous: ['Varié', 'Prévisible'] },
-        { nom: 'Placement', sous: ['Équilibré', 'Instable'] }
+        { nom: 'Amplitude', sous: ['Suffisante', 'Insuffis.'], descPos: 'Éléments exécutés avec extension maximale et hauteur maîtrisée.', descNeg: 'Figures étriquées, jambes fléchies ou fermeture incomplète.', tip: 'Évaluer la netteté des formes (jambes tendues, pointes).' },
+        { nom: 'Tenue', sous: ['Gainé', 'Relâché'], descPos: 'Alignement corporel constant (gainage) durant renversements et appuis.', descNeg: 'Relâchement lombaire ou affaissement sur les bras.', tip: 'Vérifier la tenue durant au moins 2 secondes sur les équilibres.' },
+        { nom: 'Liaisons', sous: ['Fluides', 'Arrêts'], descPos: 'Enchaînement continu et rythmé avec éléments de liaison soignés.', descNeg: 'Pauses longues ou hésitations répétées entre les éléments.', tip: 'Valoriser l\'orientation spatiale sur le praticable.' },
+        { nom: 'Réception', sous: ['Stabilisée', 'Déséquil.'], descPos: 'Arrivées pilées pieds joints avec posture finale tenue.', descNeg: 'Déséquilibre arrière, pas de rattrapage ou chute.', tip: 'Exiger un salut de début et un salut final net.' }
       ]
+    };
+
+    // Double grille pour Sports Collectifs & Sports de Renvoi :
+    // 1A = Capacité Individuelle (4 critères) | 1B = Capacité Collective (4 critères)
+    const CRITERES_COLLECTIF = {
+      'Handball': {
+        indiv: [
+          { nom: 'Manipulation', sous: ['Contrôlée', 'Hésitante'], descPos: 'Dribble utile et protégé sans marché ni reprise de dribble.', descNeg: 'Regard fixé au sol, pertes de balle sous pression.', tip: 'Tester en duel 1 contre 1 ou montée de balle rapide.' },
+          { nom: 'Passe', sous: ['Précise', 'Imprécise'], descPos: 'Passes tendues ou à rebond ajustées à la course du partenaire.', descNeg: 'Passes trop hautes, derrière le partenaire ou téléphonées.', tip: 'Vérifier l\'armé du bras haut et la cible offerte.' },
+          { nom: 'Réception', sous: ['Assurée', 'Manquée'], descPos: 'Prise à deux mains en course avec enchaînement rapide vers l\'avant.', descNeg: 'Balle relâchée ou arrêt systématique après réception.', tip: 'Observer la disponibilité des mains vers le porteur.' },
+          { nom: 'Armé & Tir', sous: ['Cadré', 'Hors cadre'], descPos: 'Armé haut équilibré, tir cadré en exploitant l\'angle ouvert.', descNeg: 'Tir forcé sans angle ou hors du cadre du but.', tip: 'Valoriser la prise d\'impulsion hors zone des 6m.' }
+        ],
+        collectif: [
+          { nom: 'Démarquage', sous: ['Efficace', 'Passif'], descPos: 'Appels dynamiques dans les intervalles hors de l\'ombre défensive.', descNeg: 'Joueur caché derrière son défenseur ou statique.', tip: 'Encourager les courses d\'engagement entre deux défenseurs.' },
+          { nom: 'Continuité', sous: ['Fluide', 'Hachée'], descPos: 'Enchaînement rapide des passes pour faire progresser le ballon.', descNeg: 'Conservation excessive individuelle bloquant le jeu collectif.', tip: 'Observer la vitesse de transition vers le camp adverse.' },
+          { nom: 'Occupation', sous: ['Équilibrée', 'En grappe'], descPos: 'Étagement largeur/profondeur autour de la défense (couloirs).', descNeg: 'Attroupement autour du porteur réduisant les angles de passe.', tip: 'Matérialiser les 3 couloirs et les postes d\'ailiers.' },
+          { nom: 'Repli Déf.', sous: ['Organisé', 'Désorganisé'], descPos: 'Retour immédiat à la perte de balle et entraide face au porteur.', descNeg: 'Abandon défensif ou focalisation sur la balle sans couverture.', tip: 'Évaluer la vitesse de replacement sous la ligne de ballon.' }
+        ]
+      },
+      'Basketball': {
+        indiv: [
+          { nom: 'Dribble', sous: ['Tête haute', 'Yeux balle'], descPos: 'Dribble protégé main opposée avec lecture du jeu tête levée.', descNeg: 'Dribble du bout des yeux sur le ballon ou reprise fréquente.', tip: 'Observer la main faible et la protection par le corps.' },
+          { nom: 'Passe', sous: ['Précise', 'Interceptée'], descPos: 'Passe claquée/à rebond adaptée à la pression défensive.', descNeg: 'Passe en cloche prévisible ou mal dosée.', tip: 'Noter l\'enchaînement triple menace avant de passer.' },
+          { nom: 'Tir / Lay-up', sous: ['Équilibré', 'Forcé'], descPos: 'Double-pas maîtrisé ou tir équilibré sur appuis stables.', descNeg: 'Marcher sur départ ou tir précipité sous défense.', tip: 'Vérifier la trajectoire en cloche vers le carré de planche.' },
+          { nom: '1 contre 1', sous: ['Orienté', 'Statique'], descPos: 'Prise d\'intervalle franche en attaque et posture basse en défense.', descNeg: 'Absence de prise d\'initiative ou fautes de main inutiles.', tip: 'Observer les déplacements latéraux sans croiser les pieds.' }
+        ],
+        collectif: [
+          { nom: 'Passe-et-va', sous: ['Actif', 'Statique'], descPos: 'Enchaînement passe puis démarquage vers le panier ou l\'aile.', descNeg: 'Reste spectateur une fois le ballon lâché.', tip: 'Compter les coupes vers le panier après la passe.' },
+          { nom: 'Espacement', sous: ['Aéré', 'Regroupé'], descPos: 'Distances équilibrées (spacing) libérant la raquette pour pénétrer.', descNeg: 'Joueurs collés dans la raquette fermant les lignes de passe.', tip: 'Utiliser l\'arc à 3 points comme repère de répartition.' },
+          { nom: 'Transition', sous: ['Rapide', 'Tardive'], descPos: 'Relance rapide après rebond ou panier encaissé vers l\'avant.', descNeg: 'Attente prolongée ou perte de balle sur remise en jeu.', tip: 'Observer l\'ouverture de passe vers l\'avant-couloir.' },
+          { nom: 'Aide Déf.', sous: ['Cadrée', 'Dépassée'], descPos: 'Flottement côté opposé et communication défensive sur écran/coupe.', descNeg: 'Défense passive laissant l\'accès direct au cercle.', tip: 'Valoriser le placement ballon-joueur-panier.' }
+        ]
+      },
+      'Football': {
+        indiv: [
+          { nom: 'Conduite', sous: ['Maîtrisée', 'Perdue'], descPos: 'Conduite proche du pied avec prise d\'information régulière.', descNeg: 'Poussée de balle trop longue entraînant une perte directe.', tip: 'Tester la maîtrise sous faible opposition puis en match.' },
+          { nom: 'Contrôle', sous: ['Orienté', 'Subi'], descPos: 'Amorti orienté dans la direction de la prochaine action utile.', descNeg: 'Rebond incontrôlé obligeant à jouer vers l\'arrière.', tip: 'Valoriser la première touche vers l\'espace libre.' },
+          { nom: 'Passe', sous: ['Précise', 'Imprécise'], descPos: 'Passe intérieure/extérieure appuyée au sol dans la course.', descNeg: 'Dégagements aléatoires sans destinataire identifié.', tip: 'Vérifier l\'orientation du pied d\'appui.' },
+          { nom: 'Frappe / But', sous: ['Cadrée', 'Déviée'], descPos: 'Tir cadré avec prise d\'appui solide et équilibre du buste.', descNeg: 'Frappe déséquilibrée ou précipitée loin du cadre.', tip: 'Évaluer la qualité de finition dans la zone de marque.' }
+        ],
+        collectif: [
+          { nom: 'Appels', sous: ['Disponibles', 'Statiques'], descPos: 'Appels dans le dos ou en largeur offrant deux solutions au porteur.', descNeg: 'Attente immobile derrière l\'adversaire direct.', tip: 'Observer les appels croisés et décrochages.' },
+          { nom: 'Appui/Sout.', sous: ['Triangle', 'Isolé'], descPos: 'Constitution de triangles autour du porteur pour conserver/avancer.', descNeg: 'Porteur isolé contraint au dribble forcé.', tip: 'Vérifier la présence d\'un soutien arrière et d\'un appui avant.' },
+          { nom: 'Largeur', sous: ['Élargie', 'En bloc'], descPos: 'Utilisation des couloirs latéraux pour étirer le bloc adverse.', descNeg: 'Jeu exclusif dans l\'axe en grappe autour du ballon.', tip: 'Encourager les changements d\'aile.' },
+          { nom: 'Pressing', sous: ['Solidaire', 'En retard'], descPos: 'Coulissement collectif et fermeture de l\'axe à la perte de balle.', descNeg: 'Trous béants entre défense et milieu lors des transitions.', tip: 'Observer l\'alignement du bloc équipe à la perte.' }
+        ]
+      },
+      'Volleyball': {
+        indiv: [
+          { nom: 'Service', sous: ['Régulier', 'Faute'], descPos: 'Service réglementaire (cuillère/tennis) franchissant régulièrement.', descNeg: 'Multiples fautes directes au filet ou hors limites.', tip: 'Vérifier la constance de la zone visée.' },
+          { nom: 'Manchette', sous: ['Bras tendus', 'Pliés'], descPos: 'Plateforme verrouillée, flexion des jambes pour amortir vers le passeur.', descNeg: 'Mouvement des bras pliés renvoyant la balle au hasard.', tip: 'Observer le placement précoce sous la trajectoire.' },
+          { nom: 'Touche', sous: ['Haute précise', 'Basse/Tenue'], descPos: 'Contact simultané des doigts au-dessus du front avec trajectoire haute.', descNeg: 'Balle frappée paumes ouvertes ou portée (faute).', tip: 'Valoriser les passes hautes parallèles au filet pour l\'attaquant.' },
+          { nom: 'Attaque', sous: ['Dirigée', 'Aléatoire'], descPos: 'Renvoi ou smash placé dans un espace libre du terrain adverse.', descNeg: 'Frappe systématique dans le filet ou hors terrain.', tip: 'Observer le coup d\'œil vers le camp adverse avant le renvoi.' }
+        ],
+        collectif: [
+          { nom: '3 Touches', sous: ['Construite', 'Renvoi 1er'], descPos: 'Organisation Réception → Passe haute → Attaque dans l\'échange.', descNeg: 'Renvoi systématique dès la première touche par panique.', tip: 'Inciter à annoncer « J\'ai ! » puis « Passe ! ».' },
+          { nom: 'Placement', sous: ['Respecté', 'Désaxé'], descPos: 'Occupation logique des zones avant/arrière et rotation respectée.', descNeg: 'Regroupement au centre laissant les coins découverts.', tip: 'Vérifier le retour à son poste après le service.' },
+          { nom: 'Soutien', sous: ['En couverture', 'Spectateur'], descPos: 'Déplacement vers le partenaire en difficulté ou derrière l\'attaquant.', descNeg: 'Immobilité des partenaires pendant la réception d\'un coéquipier.', tip: 'Observer la vigilance à l\'arrière lors des attaques.' },
+          { nom: 'Communic.', sous: ['Annoncée', 'Silencieuse'], descPos: 'Prises d\'informations sonores claires évitant les collisions.', descNeg: 'Jeu muet entraînant hésitations et balles tombées à deux.', tip: 'Critère clé dès les niveaux collège (1AC–3AC).' }
+        ]
+      },
+      'Rugby': {
+        indiv: [
+          { nom: 'Passe', sous: ['En arrière', 'En-avant'], descPos: 'Passe tendue vers l\'arrière ou latérale dans la course du soutien.', descNeg: 'Passes vers l\'avant répétées ou à l\'arrêt.', tip: 'Rappeler le placement du soutien derrière la ligne du ballon.' },
+          { nom: 'Course', sous: ['Axe profond', 'Exposé'], descPos: 'Avancée franche ballon tenu à deux mains pour fixer l\'adversaire.', descNeg: 'Course latérale fuyant le défi ou ballon sous un seul bras.', tip: 'Fixer un défenseur avant de libérer la passe.' },
+          { nom: 'Défense', sous: ['Sécurisée', 'Faute/Haut'], descPos: 'Ceinturage/plaquage (ou arrachage tag) sous la ligne des épaules.', descNeg: 'Prise au cou dangereuse ou évitement du contact défensif.', tip: 'Intégrité physique prioritaire dans toute évaluation OP.' },
+          { nom: 'Libération', sous: ['Propre', 'Confuse'], descPos: 'Ballon présenté rapidement au soutien lors du toucher/sol.', descNeg: 'Conservation au sol pénalisée ou perte immédiate.', tip: 'Rechercher la continuité immédiate debout ou au sol.' }
+        ],
+        collectif: [
+          { nom: 'Soutien', sous: ['Présent', 'Isolé'], descPos: 'Partenaires en soutien intérieur/extérieur dans le sillage du porteur.', descNeg: 'Porteur rattrapé sans aucune solution de passe.', tip: 'Évaluer la réactivité des coureurs proches du ballon.' },
+          { nom: 'Continuité', sous: ['Rapide', 'Stoppée'], descPos: 'Enchaînement fluide des temps de jeu vers l\'en-but adverse.', descNeg: 'Jeu figé multipliant les regroupements stériles.', tip: 'Valoriser la passe après fixation.' },
+          { nom: 'Hors-jeu', sous: ['Alignée', 'Fautive'], descPos: 'Montée défensive alignée derrière le dernier pied du regroupement.', descNeg: 'Joueurs hors-jeu gênant la sortie de balle adverse.', tip: 'Matérialiser la ligne imaginaire de remise en jeu.' },
+          { nom: 'Largeur', sous: ['Écartée', 'Bouchon'], descPos: 'Alternance jeu dans l\'axe pour fixer puis écartement vers l\'aile.', descNeg: 'Entassement permanent dans une zone de 5 mètres.', tip: 'Observer le déploiement rapide après libération.' }
+        ]
+      },
+      'Basketball 3x3': {
+        indiv: [
+          { nom: 'Dribble', sous: ['Protégé', 'Exposé'], descPos: 'Dribble court et protégé permettant l\'attaque du cercle.', descNeg: 'Dribble haut intercepté sur demi-terrain.', tip: 'Exiger des appuis dynamiques sur espace réduit.' },
+          { nom: 'Passe', sous: ['Rapide', 'Téléphonée'], descPos: 'Passes vives en rythme dans la limite des 12 secondes.', descNeg: 'Passes lentes interceptées dans la raquette.', tip: 'Valoriser la passe-et-va immédiate.' },
+          { nom: 'Tir / Drive', sous: ['Sélectif', 'Précipité'], descPos: 'Choix pertinent entre tir à 2 pts (hors arc) et pénétration.', descNeg: 'Tirs forcés dès la 1ère seconde sans décalage.', tip: 'Tenir compte de la valorisation des tirs extérieurs (2 pts).' },
+          { nom: 'Défense 1c1', sous: ['Cadrée', 'Battue'], descPos: 'Contention efficace du porteur sans faute inutile.', descNeg: 'Battu systématiquement sur premier pas.', tip: 'Observer le travail au rebond défensif.' }
+        ],
+        collectif: [
+          { nom: 'Sortie Arc', sous: ['Rapide', 'Oubliée'], descPos: 'Sortie immédiate derrière la ligne à 2 pts après rebond/interception.', descNeg: 'Tir direct sans ressortir de l\'arc (faute de règle).', tip: 'Automatisme fondamental du 3x3.' },
+          { nom: 'Écrans', sous: ['Efficace', 'Inutile'], descPos: 'Pose d\'écran légal immobile suivie d\'un démarquage (Pick & Roll).', descNeg: 'Écran en mouvement ou absence totale d\'entraide.', tip: 'Observer la lecture du défenseur après l\'écran.' },
+          { nom: 'Enchaînem.', sous: ['12s maîtrisé', 'Statique'], descPos: 'Circulation continue respectant le chrono rapide de possession.', descNeg: 'Jeu figé dépassant le tempo offensif.', tip: 'Dynamique haute intensité requise.' },
+          { nom: 'Switch Déf.', sous: ['Coordonné', 'Passif'], descPos: 'Changement défensif communiqué sur les écrans porteur/non-porteur.', descNeg: 'Deux défenseurs sur le même attaquant laissant un shooteur seul.', tip: 'Communication vocale « Switch ! » indispensable.' }
+        ]
+      },
+      'Badminton': {
+        indiv: [
+          { nom: 'Service', sous: ['Précis', 'Faute'], descPos: 'Service réglementaire (sous la taille) varié court/long dans la diagonale.', descNeg: 'Fautes de service répétées ou volants trop hauts faciles à attaquer.', tip: 'Alterner service court rasant et service long fond de court.' },
+          { nom: 'Dégagé', sous: ['Long/Haut', 'Court'], descPos: 'Volant propulsé haut jusqu\'à la ligne de fond adverse.', descNeg: 'Renvoi mi-terrain offrant un smash immédiat.', tip: 'Vérifier l\'armé du coude et la prise raquette en relâchement.' },
+          { nom: 'Amorti', sous: ['Rasant', 'Haut/Long'], descPos: 'Volant touché en douceur retombant juste derrière la bande du filet.', descNeg: 'Amorti bloqué dans le filet ou trop profond.', tip: 'Observer la qualité d\'accélération-freinage au filet.' },
+          { nom: 'Déplacem.', sous: ['Dynamique', 'Tardif'], descPos: 'Fente avant équilibrée et reprise d\'appuis (saut d\'allègement).', descNeg: 'Courses désordonnées ou frappe hors d\'équilibre.', tip: 'Noter la jambe raquette devant sur l\'amorti.' }
+        ],
+        collectif: [
+          { nom: 'Replacem.', sous: ['Systémat.', 'Excentré'], descPos: 'Retour rapide vers le T central après chaque frappe.', descNeg: 'Reste bloqué dans un coin après avoir frappé.', tip: 'Base tactique du duel en Sports de Renvoi.' },
+          { nom: 'Variation', sous: ['Long-Court', 'Monotone'], descPos: 'Alternance volontaire zones avant et arrière pour déplacer l\'adversaire.', descNeg: 'Renvoi mécanique uniquement dans la zone de confort adverse.', tip: 'Compter les changements de profondeur dans l\'échange.' },
+          { nom: 'Zone libre', sous: ['Ciblée', 'Sur joueur'], descPos: 'Prise d\'information précoce visant l\'espace éloigné de l\'adversaire.', descNeg: 'Frappe systématique directement sur la raquette adverse.', tip: 'Valoriser le retard de placement provoqué chez l\'opposant.' },
+          { nom: 'Lucidité', sous: ['Maîtrisée', 'Précipitée'], descPos: 'Patience dans la construction de l\'échange et smash uniquement sur volant favorable.', descNeg: 'Précipitation sur volants bas entraînant des fautes directes.', tip: 'Construire le point avant de conclure.' }
+        ]
+      },
+      'Tennis de table': {
+        indiv: [
+          { nom: 'Service', sous: ['Réglem.', 'Faute'], descPos: 'Lancer vertical réglementaire (16 cm), rebond propre + adverse, effet varié.', descNeg: 'Service caché de la main ou fautes répétées dans le filet.', tip: 'Observer l\'ouverture/fermeture de raquette.' },
+          { nom: 'Coup droit', sous: ['Contrôlé', 'Aléatoire'], descPos: 'Passage fluide avant-bras/poignet avec trajectoire tendue sur table.', descNeg: 'Geste ample du bras bloqué causant des sorties de table.', tip: 'Valoriser la régularité sur 5 échanges consécutifs.' },
+          { nom: 'Revers', sous: ['Contrôlé', 'Aléatoire'], descPos: 'Contrôle actif face à la table évitant de tourner systématiquement.', descNeg: 'Revers subi en poussée haute ou faute directe fréquente.', tip: 'Position face à la table genoux fléchis.' },
+          { nom: 'Posture', sous: ['Équilibrée', 'Rigide'], descPos: 'Position d\'attente active à bonne distance de la table, jambes fléchies.', descNeg: 'Jambes tendues, collé à la table sans recul possible.', tip: 'Observer les petits pas latéraux d\'ajustement.' }
+        ],
+        collectif: [
+          { nom: 'Placement', sous: ['Varié', 'Centré'], descPos: 'Utilisation des angles (plein coup droit / plein revers / ventre).', descNeg: 'Renvoi permanent plein centre sans intention tactique.', tip: 'Observer la rupture de rythme gauche-droite.' },
+          { nom: 'Transition', sous: ['Adaptée', 'Subie'], descPos: 'Enchaînement bloc défensif puis contre-attaque sur balle haute.', descNeg: 'Subit la pression sans jamais reprendre l\'initiative.', tip: 'Évaluer la prise d\'initiative sur balle favorable.' },
+          { nom: 'Lecture', sous: ['Précoce', 'Tardive'], descPos: 'Anticipation de l\'effet (coupé/lifté) et inclinaison ajustée de raquette.', descNeg: 'Surpris systématiquement par le même effet.', tip: 'Repérer la réaction face au service adverse.' },
+          { nom: 'Régularité', sous: ['Maîtrisée', 'Faute directe'], descPos: 'Gestion du rapport risque/sécurité sur les échanges prolongés.', descNeg: 'Perte de points rapide par frappes forcées hors table.', tip: 'Mesurer la capacité à tenir l\'échange sous pression.' }
+        ]
+      }
     };
 
     // Liens Silos APS
@@ -2111,37 +2780,59 @@
       }
     };
 
+    const MAX_CLASS_STUDENTS = 50;
+    const STORAGE_KEY = 'profeps_calc_note_v2';
+
     // État global
     let currentMode = 'indiv';
     let currentNiveau = '2AB';
     let currentAps = 'Course de durée';
     let currentSexe = 'G';
     let currentCritMode = 'strict';
+    let currentClassFilter = 'ALL';
+    let currentClassSearch = '';
+    let resetConfirmPending = false;
+    let resetConfirmTimer = null;
 
-    // Sélections des 4 critères du Processus en mode Individuel (0 = Case 1 maîtrisé, 1 = Case 2 non maîtrisé)
+    // Critères en mode Individuel (0 = Maîtrisé, 1 = En cours)
+    // - indivCritIndivChoices : utilisé pour 1A Capacité Individuelle (Sports Co / Renvoi)
+    // - indivCritChoices : utilisé pour 1B Processus (Athlé/Gym) ou 1B Capacité Collective (Sports Co / Renvoi)
+    let indivCritIndivChoices = [0, 0, 0, 0];
     let indivCritChoices = [0, 0, 0, 0];
 
-    // Valeur actuelle de la note Performance (/6 ou /7)
     let currentPerfScore = 6.0;
     let currentProcScore = 7.0;
 
-    // Liste des élèves en mode Grille de Classe (jusqu'à 35 élèves)
+    // Liste des élèves en mode Grille de Classe (plafond 50 élèves)
     let classStudents = [
-      { nom: 'EL AMRANI Youssef', sexe: 'G', rawPerf: '3\'18"', perfScore: 6.5, crits: [0, 0, 0, 0], concep: 2.5, comp: 3.0 },
-      { nom: 'BENALI Salma', sexe: 'F', rawPerf: '2\'14"', perfScore: 6.0, crits: [0, 0, 0, 1], concep: 3.0, comp: 3.0 },
-      { nom: 'TAZI Mehdi', sexe: 'G', rawPerf: '3\'35"', perfScore: 5.0, crits: [0, 1, 0, 0], concep: 2.0, comp: 2.5 },
-      { nom: 'CHRAIBI Aya', sexe: 'F', rawPerf: '2\'28"', perfScore: 4.5, crits: [0, 0, 1, 1], concep: 2.5, comp: 3.0 },
-      { nom: 'IDRISSI Hamza', sexe: 'G', rawPerf: '3\'12"', perfScore: 6.75, crits: [0, 0, 0, 0], concep: 3.0, comp: 3.0 }
+      { nom: 'EL AMRANI Youssef', sexe: 'G', status: 'OK', rawPerf: '3\'18"', perfScore: 6.5, critsIndiv: [0, 0, 0, 0], crits: [0, 0, 0, 0], concep: 2.5, comp: 3.0 },
+      { nom: 'BENALI Salma', sexe: 'F', status: 'OK', rawPerf: '2\'14"', perfScore: 6.0, critsIndiv: [0, 0, 1, 0], crits: [0, 0, 0, 1], concep: 3.0, comp: 3.0 },
+      { nom: 'TAZI Mehdi', sexe: 'G', status: 'OK', rawPerf: '3\'35"', perfScore: 5.0, critsIndiv: [0, 1, 0, 0], crits: [0, 1, 0, 0], concep: 2.0, comp: 2.5 },
+      { nom: 'CHRAIBI Aya', sexe: 'F', status: 'OK', rawPerf: '2\'28"', perfScore: 4.5, critsIndiv: [0, 0, 1, 1], crits: [0, 0, 1, 1], concep: 2.5, comp: 3.0 },
+      { nom: 'IDRISSI Hamza', sexe: 'G', status: 'OK', rawPerf: '3\'12"', perfScore: 6.75, critsIndiv: [0, 0, 0, 0], crits: [0, 0, 0, 0], concep: 3.0, comp: 3.0 }
     ];
+
+    function showToast(msg) {
+      const el = document.getElementById('pepsToast');
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(el._t);
+      el._t = setTimeout(() => el.classList.remove('show'), 3200);
+    }
+
+    function escapeHtml(str) {
+      return String(str == null ? '' : str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
 
     // =========================================================================
     // 2. STRUCTURE OFFICIELLE DES NOTES PAR NIVEAU & FAMILLE D'APS
     // =========================================================================
-    // Règle stricte demandée par l'utilisateur :
-    // - Pas de 6,5 pts !
-    // - Procédural 12 pts (1AC, 2AC, 3AC, TC en Athlétisme) => 6 pts Perf + 6 pts Processus (+ 3 Concep + 5 Comp = 20)
-    // - Procédural 13 pts (1Bac Athlétisme ; 1AC, 2AC, 3AC, TC en Gym & Sports Co) => 6 pts Perf/Indiv + 7 pts Processus/Collectif (+ 3 Concep + 4 Comp = 20)
-    // - Procédural 14 pts (1Bac Gym & Sports Co ; 2Bac toutes APS) => 7 pts Perf/Indiv + 7 pts Processus/Collectif (+ 3 Concep + 3 Comp = 20)
     function getBaremeConfig(niveau, aps) {
       const isAthle = ['Course de durée', 'Course de vitesse', 'Course de haies', 'Course de relais', 'Lancer de poids', 'Saut en longueur', 'Saut en hauteur'].includes(aps);
       const isGym = aps === 'Gymnastique';
@@ -2162,7 +2853,6 @@
           procTotal = 14; perfMax = 7; procMax = 7; concepMax = 3; compMax = 3;
         }
       } else {
-        // Gymnastique & Sports Collectifs / Renvoi
         if (['1AC', '2AC', '3AC', 'TC'].includes(niveau)) {
           procTotal = 13; perfMax = 6; procMax = 7; concepMax = 3; compMax = 4;
         } else {
@@ -2170,9 +2860,7 @@
         }
       }
 
-      // Pondération des 4 critères du Processus / Collectif :
-      // - Sur 6 pts : [1.5, 1.5, 1.5, 1.5] = 6.0 pts
-      // - Sur 7 pts : [2.0, 2.0, 1.5, 1.5] = 7.0 pts
+      const critWeightsIndiv = perfMax === 6 ? [1.5, 1.5, 1.5, 1.5] : [2.0, 2.0, 1.5, 1.5];
       const critWeights = procMax === 6 ? [1.5, 1.5, 1.5, 1.5] : [2.0, 2.0, 1.5, 1.5];
 
       const labelPerf = isSpCo ? 'Capacité Individuelle' : (isGym ? 'Difficulté (Contrat)' : 'Performance (Produit)');
@@ -2187,10 +2875,71 @@
         procMax,
         concepMax,
         compMax,
+        critWeightsIndiv,
         critWeights,
         labelPerf,
         labelProc
       };
+    }
+
+    function getCritsForAps(aps, kind) {
+      if (CRITERES_COLLECTIF[aps]) {
+        return kind === 'indiv' ? CRITERES_COLLECTIF[aps].indiv : CRITERES_COLLECTIF[aps].collectif;
+      }
+      return CRITERES_OBS[aps] || CRITERES_OBS['Course de durée'];
+    }
+
+    // Conversion d'une performance brute (ex: "7.90", "3'15\"", "3:15", "10.6", "6") vers la note /6 ou /7 selon le sexe et le niveau
+    function parseRawPerfToScore(aps, rawStr, sexe, niveau, cfg) {
+      const cleaned = String(rawStr || '').trim().replace(',', '.');
+      if (!cleaned) return null;
+
+      if (aps === 'Gymnastique') {
+        const gc = GYM_CONTRATS[niveau];
+        const elems = parseFloat(cleaned);
+        if (isNaN(elems)) return null;
+        const ratio = Math.max(0, Math.min(1, elems / gc.totalElements));
+        return Math.round((ratio * cfg.perfMax) * 4) / 4;
+      }
+
+      const sc = PERF_SCALES[aps];
+      if (!sc) return null;
+      const gKey = (sexe === 'F') ? 'F' : 'G';
+      const [bestVal, minVal] = sc[gKey][niveau];
+      let val = null;
+
+      if (aps === 'Course de durée') {
+        // Accepte 3'15", 3:15, 3m15, 3.15 (si 2 décimales < 60), ou secondes directes >= 60
+        const mSecMatch = cleaned.match(/^(\d+)\s*[':mM]\s*(\d{1,2})"?$/);
+        if (mSecMatch) {
+          val = parseInt(mSecMatch[1], 10) * 60 + Math.min(59, parseInt(mSecMatch[2], 10));
+        } else if (/^\d+\s*\.\s*\d{2}$/.test(cleaned)) {
+          const parts = cleaned.split('.');
+          const mins = parseInt(parts[0], 10);
+          const secs = parseInt(parts[1], 10);
+          if (mins <= 15 && secs < 60) val = mins * 60 + secs;
+        }
+        if (val === null) {
+          const num = parseFloat(cleaned);
+          if (!isNaN(num)) {
+            val = num < 20 ? Math.round(num * 60) : num;
+          }
+        }
+      } else {
+        const num = parseFloat(cleaned);
+        if (!isNaN(num)) val = num;
+      }
+
+      if (val === null || isNaN(val)) return null;
+
+      let ratio = 0;
+      if (sc.unit === 'metres') {
+        ratio = (val - minVal) / (bestVal - minVal);
+      } else {
+        ratio = (minVal - val) / (minVal - bestVal);
+      }
+      ratio = Math.max(0, Math.min(1, ratio));
+      return Math.round((1 + ratio * (cfg.perfMax - 1)) * 4) / 4;
     }
 
     // =========================================================================
@@ -2212,6 +2961,7 @@
       if (mode === 'classe') {
         renderClassGridTable();
       }
+      saveStateToStorage();
     }
 
     function getNiveauFullName(niv) {
@@ -2251,9 +3001,9 @@
         document.getElementById('srTitleText').textContent = `Situation de Référence (SR) : Enchaînement gymnique (${gc.contrat})`;
         document.getElementById('srDescText').textContent = `Présenter devant les juges un enchaînement gymnique maîtrisé comprenant ${gc.detail} (Difficulté sur /${cfg.perfMax} pts + Exécution/Processus sur /${cfg.procMax} pts).`;
       } else {
-        document.getElementById('srFamilleBadge').textContent = `Sports Collectifs / Renvoi · Individuel (/${cfg.perfMax}) + Collectif (/${cfg.procMax})`;
+        document.getElementById('srFamilleBadge').textContent = `Sports Collectifs / Renvoi · Double Grille Individuel (/${cfg.perfMax}) + Collectif (/${cfg.procMax})`;
         document.getElementById('srTitleText').textContent = `Situation de Référence (SR) : Situation de match en ${currentAps} (OP Maroc)`;
-        document.getElementById('srDescText').textContent = `Évaluation en situation de référence (match à effectif réduit ou réglementaire) : Capacité Individuelle sur /${cfg.perfMax} pts + Capacité Collective (4 critères cochés) sur /${cfg.procMax} pts.`;
+        document.getElementById('srDescText').textContent = `Évaluation critériée en match : 4 critères de Capacité Individuelle (/${cfg.perfMax} pts) + 4 critères de Capacité Collective (/${cfg.procMax} pts).`;
       }
 
       document.getElementById('procTotalLabel').textContent = `Procédural : ${cfg.procTotal} pts (${cfg.perfMax} + ${cfg.procMax})`;
@@ -2264,25 +3014,27 @@
       document.getElementById('pillConcepMax').textContent = `/ ${cfg.concepMax} pts`;
       document.getElementById('pillCompMax').textContent = `/ ${cfg.compMax} pts`;
 
-      // 2. Mettre à jour le Volet 1A (Performance / Individuel / Difficulté Gym)
+      // 2. Recalculer perfScore des élèves selon le barème de la nouvelle APS si rawPerf valide
+      if (!cfg.isSpCo) {
+        classStudents.forEach(st => {
+          const parsed = parseRawPerfToScore(currentAps, st.rawPerf, st.sexe, currentNiveau, cfg);
+          if (parsed !== null) st.perfScore = parsed;
+        });
+      }
+
+      // 3. Mettre à jour Volets 1A, 1B, Concep/Comp, Guide Dynamique, Liens, Totaux & Grille
       renderVolet1APerformance(cfg);
-
-      // 3. Mettre à jour le Volet 1B (Grille Processus à cases à cocher)
       renderVolet1BProcessus(cfg);
-
-      // 4. Mettre à jour les puces Conceptuel (/3) et Comportemental (/5, /4 ou /3)
       renderConcepCompInputs(cfg);
-
-      // 5. Mettre à jour les liens du Maillage 360°
+      renderDynamicGuide(cfg);
       updateSeoBridgeLinks();
-
-      // 6. Recalculer le total et synchroniser la grille de classe
       recalculateIndivTotal();
       renderClassGridTable();
+      saveStateToStorage();
     }
 
     // =========================================================================
-    // 4. RENDU DU VOLET 1A : PERFORMANCE (PRODUIT) OU CONTRAT GYM OU INDIVIDUEL
+    // 4. RENDU DU VOLET 1A : PERFORMANCE / CONTRAT / GRILLE INDIVIDUELLE (4 CRITÈRES)
     // =========================================================================
     function formatSecToMinSec(totalSec) {
       const m = Math.floor(totalSec / 60);
@@ -2293,28 +3045,29 @@
     function renderVolet1APerformance(cfg) {
       const container = document.getElementById('perfInputContainer');
       const scaleWrap = document.getElementById('perfScaleTableWrap');
-      document.getElementById('volet1ATitle').textContent = `Note Procédurale — 1A. ${cfg.labelPerf}`;
 
       if (cfg.isAthle && PERF_SCALES[currentAps]) {
+        document.getElementById('volet1ATitle').textContent = `Note Procédurale — 1A. ${cfg.labelPerf}`;
         const sc = PERF_SCALES[currentAps];
+        const unitMeta = PERF_UNIT_META[currentAps] || { unit: 'm' };
         const [bestVal, minVal] = sc[currentSexe][currentNiveau];
 
         if (currentAps === 'Course de durée') {
           const distLabel = currentSexe === 'G' ? '1000 mètres (Garçons)' : '600 mètres (Filles)';
           const defaultMin = currentSexe === 'G' ? 3 : 2;
           const defaultSec = currentSexe === 'G' ? 20 : 15;
-          document.getElementById('volet1ASub').textContent = `Épreuve officielle : ${distLabel} — Conversion automatique selon le barème OP (${currentNiveau})`;
+          document.getElementById('volet1ASub').textContent = `Épreuve officielle : ${distLabel} — Conversion automatique (${unitMeta.unit})`;
 
           container.innerHTML = `
-            <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:1rem;align-items:end;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:1rem;">
+            <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:1rem;align-items:end;background:var(--sky);border:1px solid var(--stone);border-radius:12px;padding:1rem;">
               <div>
                 <label style="font-size:0.8rem;font-weight:800;color:var(--ink);display:block;margin-bottom:0.4rem;">
                   ⏱️ Temps réalisé sur <strong>${distLabel}</strong>
                 </label>
                 <div style="display:flex;align-items:center;gap:0.45rem;">
-                  <input type="number" id="inpDureeMin" class="cfg-input" min="1" max="10" value="${defaultMin}" oninput="computeAthlePerfScore()" style="width:85px;text-align:center;">
+                  <input type="number" id="inpDureeMin" class="cfg-input" min="1" max="10" value="${defaultMin}" oninput="computeAthlePerfScore()" style="width:82px;text-align:center;">
                   <span style="font-weight:800;">min</span>
-                  <input type="number" id="inpDureeSec" class="cfg-input" min="0" max="59" value="${defaultSec}" oninput="computeAthlePerfScore()" style="width:85px;text-align:center;">
+                  <input type="number" id="inpDureeSec" class="cfg-input" min="0" max="59" value="${defaultSec}" oninput="computeAthlePerfScore()" style="width:82px;text-align:center;">
                   <span style="font-weight:800;">sec</span>
                 </div>
                 <div style="font-size:0.75rem;color:var(--ink-muted);margin-top:0.35rem;">
@@ -2325,8 +3078,9 @@
                 <label for="inpVmaDirect" style="font-size:0.8rem;font-weight:800;color:var(--secondary);display:block;margin-bottom:0.4rem;">
                   ⚡ Ou convertir depuis la VMA (km/h)
                 </label>
-                <div style="display:flex;gap:0.4rem;">
-                  <input type="number" id="inpVmaDirect" class="cfg-input" min="7" max="22" step="0.5" placeholder="Ex: 14.5 km/h" oninput="convertVmaToDureeTime()">
+                <div class="indiv-unit-box">
+                  <input type="number" id="inpVmaDirect" class="cfg-input" min="7" max="22" step="0.5" placeholder="Ex: 14.5" oninput="convertVmaToDureeTime()">
+                  <span class="indiv-unit-suffix">km/h</span>
                 </div>
                 <div style="font-size:0.73rem;color:var(--ink-muted);margin-top:0.35rem;">
                   Estime le temps sur ${currentSexe === 'G' ? '1000m' : '600m'} à ~95% VMA.
@@ -2339,14 +3093,17 @@
           const epLabel = currentAps === 'Course de vitesse'
             ? (currentSexe === 'G' ? '80m Garçons' : '60m Filles')
             : `${currentAps} (${currentSexe === 'G' ? 'Garçons' : 'Filles'})`;
-          document.getElementById('volet1ASub').textContent = `Épreuve officielle : ${epLabel} — Temps en secondes (dixièmes)`;
+          document.getElementById('volet1ASub').textContent = `Épreuve officielle : ${epLabel} — Temps en secondes (s)`;
           container.innerHTML = `
-            <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:1rem;align-items:center;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:1rem;">
+            <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:1rem;align-items:center;background:var(--sky);border:1px solid var(--stone);border-radius:12px;padding:1rem;">
               <div>
                 <label for="inpAthleVal" style="font-size:0.82rem;font-weight:800;color:var(--ink);display:block;margin-bottom:0.4rem;">
-                  ⏱️ Temps chronométré en <strong>${epLabel}</strong> (secondes)
+                  ⏱️ Temps chronométré en <strong>${epLabel}</strong>
                 </label>
-                <input type="number" id="inpAthleVal" class="cfg-input" step="0.1" min="6" max="45" value="${defaultSprint}" oninput="computeAthlePerfScore()">
+                <div class="indiv-unit-box">
+                  <input type="number" id="inpAthleVal" class="cfg-input" step="0.1" min="6" max="45" value="${defaultSprint}" oninput="computeAthlePerfScore()">
+                  <span class="indiv-unit-suffix">s (secondes)</span>
+                </div>
               </div>
               <div style="font-size:0.8rem;color:var(--ink-soft);">
                 🎯 <strong>Seuil Note Max (${cfg.perfMax}/${cfg.perfMax})</strong> en ${currentNiveau} : <strong>≤ ${bestVal.toFixed(1)} s</strong><br>
@@ -2355,17 +3112,19 @@
             </div>
           `;
         } else {
-          // Mètres (Lancer de poids, Saut en longueur, Saut en hauteur)
           const defaultMeters = ((bestVal + minVal) / 2).toFixed(2);
           const enginTxt = (currentAps === 'Lancer de poids' && sc.poidsEngin) ? ` (${sc.poidsEngin[currentSexe][currentNiveau]})` : '';
-          document.getElementById('volet1ASub').textContent = `Épreuve officielle : ${currentAps}${enginTxt} — Performance mesurée en mètres`;
+          document.getElementById('volet1ASub').textContent = `Épreuve officielle : ${currentAps}${enginTxt} — Distance mesurée en mètres (m)`;
           container.innerHTML = `
-            <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:1rem;align-items:center;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:1rem;">
+            <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:1rem;align-items:center;background:var(--sky);border:1px solid var(--stone);border-radius:12px;padding:1rem;">
               <div>
                 <label for="inpAthleVal" style="font-size:0.82rem;font-weight:800;color:var(--ink);display:block;margin-bottom:0.4rem;">
-                  📏 Performance mesurée en <strong>${currentAps}${enginTxt}</strong> (mètres)
+                  📏 Performance mesurée en <strong>${currentAps}${enginTxt}</strong>
                 </label>
-                <input type="number" id="inpAthleVal" class="cfg-input" step="0.05" min="0.5" max="20" value="${defaultMeters}" oninput="computeAthlePerfScore()">
+                <div class="indiv-unit-box">
+                  <input type="number" id="inpAthleVal" class="cfg-input" step="0.05" min="0.5" max="20" value="${defaultMeters}" oninput="computeAthlePerfScore()">
+                  <span class="indiv-unit-suffix">m (mètres)</span>
+                </div>
               </div>
               <div style="font-size:0.8rem;color:var(--ink-soft);">
                 🎯 <strong>Seuil Note Max (${cfg.perfMax}/${cfg.perfMax})</strong> en ${currentNiveau} : <strong>≥ ${bestVal.toFixed(2)} m</strong><br>
@@ -2377,21 +3136,25 @@
 
         computeAthlePerfScore();
       } else if (cfg.isGym) {
+        document.getElementById('volet1ATitle').textContent = `Note Procédurale — 1A. ${cfg.labelPerf}`;
         const gc = GYM_CONTRATS[currentNiveau];
         document.getElementById('volet1ASub').textContent = `Contrat officiel ${currentNiveau} : ${gc.contrat} (${gc.detail}) sur /${cfg.perfMax} pts`;
         container.innerHTML = `
-          <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:1rem;">
+          <div style="background:var(--sky);border:1px solid var(--stone);border-radius:12px;padding:1rem;">
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.65rem;">
-              <span style="font-size:0.84rem;font-weight:800;color:var(--ink);">🤸 Nombre d'éléments gymniques du contrat (${gc.contrat}) validés par l'élève :</span>
-              <span style="font-size:0.78rem;font-weight:700;color:var(--primary-dark);">Contrat complet = ${gc.totalElements} éléments → ${cfg.perfMax} / ${cfg.perfMax} pts</span>
+              <span style="font-size:0.84rem;font-weight:800;color:var(--ink);">🤸 Nombre d'éléments gymniques du contrat (${gc.contrat}) validés :</span>
+              <span style="font-size:0.78rem;font-weight:700;color:var(--primary-dark);">Contrat complet = ${gc.totalElements} élém. → ${cfg.perfMax} / ${cfg.perfMax} pts</span>
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;align-items:center;">
               <div>
-                <label for="inpGymElements" style="font-size:0.78rem;font-weight:700;">Éléments réalisés sur ${gc.totalElements} :</label>
-                <input type="number" id="inpGymElements" class="cfg-input" min="0" max="${gc.totalElements}" step="0.5" value="${gc.totalElements - 1}" oninput="computeGymPerfScore()">
+                <label for="inpGymElements" style="font-size:0.78rem;font-weight:700;display:block;margin-bottom:0.25rem;">Éléments réalisés sur ${gc.totalElements} :</label>
+                <div class="indiv-unit-box">
+                  <input type="number" id="inpGymElements" class="cfg-input" min="0" max="${gc.totalElements}" step="0.5" value="${gc.totalElements - 1}" oninput="computeGymPerfScore()">
+                  <span class="indiv-unit-suffix">élém.</span>
+                </div>
               </div>
               <div>
-                <label for="inpDirectPerfScore" style="font-size:0.78rem;font-weight:700;">Ou ajuster la Note Difficulté (/${cfg.perfMax} pts) :</label>
+                <label for="inpDirectPerfScore" style="font-size:0.78rem;font-weight:700;display:block;margin-bottom:0.25rem;">Ou ajuster la Note Difficulté (/${cfg.perfMax} pts) :</label>
                 <input type="number" id="inpDirectPerfScore" class="cfg-input" min="0" max="${cfg.perfMax}" step="0.25" value="${cfg.perfMax - 1}" oninput="onDirectPerfScoreInput()">
               </div>
             </div>
@@ -2400,30 +3163,98 @@
         scaleWrap.innerHTML = '';
         computeGymPerfScore();
       } else {
-        // Sports Collectifs / Renvoi : Capacité Individuelle sur /6 ou /7 pts
-        document.getElementById('volet1ASub').textContent = `Évaluation de la capacité individuelle de l'élève dans le jeu (porteur / non-porteur de balle) sur /${cfg.perfMax} pts`;
-        const defaultIndiv = cfg.perfMax === 7 ? 5.5 : 5.0;
-        let chipsHtml = '';
-        for (let v = 2; v <= cfg.perfMax; v += 0.5) {
-          chipsHtml += `<button type="button" class="q-chip" onclick="setDirectPerfScore(${v})">${v.toFixed(1)}/${cfg.perfMax}</button>`;
-        }
+        // Sports Collectifs / Renvoi : 4 Critères Capacité Individuelle à cases à cocher
+        const critsIndiv = getCritsForAps(currentAps, 'indiv');
+        const weights = cfg.critWeightsIndiv;
+        const negPtsVal = currentCritMode === 'nuance' ? 0.5 : 0;
+
+        document.getElementById('volet1ATitle').textContent = `Note Procédurale — 1A. Grille Capacité Individuelle (Cases à cocher)`;
+        document.getElementById('volet1ASub').textContent = `4 critères individuels en ${currentAps} sur /${cfg.perfMax} pts`;
+
+        let sumIndiv = 0;
+        const theadCols = critsIndiv.map((c, idx) => `
+          <th style="background:#1E3A8A;border-color:#2563EB;">
+            <div>Critère ${idx + 1} : ${c.nom}</div>
+            <div style="font-size:0.7rem;color:#BFDBFE;font-weight:600;margin-top:2px;">Sur ${weights[idx].toFixed(1)} pt${weights[idx] > 1 ? 's' : ''}</div>
+          </th>
+        `).join('');
+
+        const posCols = critsIndiv.map((c, idx) => {
+          const isPos = indivCritIndivChoices[idx] === 0;
+          return `
+            <td>
+              <button type="button" class="crit-choice-btn ${isPos ? 'checked-pos' : ''}" onclick="toggleIndivPart1Crit(${idx}, 0)">
+                <span style="display:flex;align-items:center;gap:0.4rem;">
+                  <span class="crit-box-icon">${isPos ? '✓' : ''}</span>
+                  <span>${c.sous[0]}</span>
+                </span>
+                <span class="crit-pts-pill">+${weights[idx].toFixed(1)} pt</span>
+              </button>
+            </td>
+          `;
+        }).join('');
+
+        const negCols = critsIndiv.map((c, idx) => {
+          const isNeg = indivCritIndivChoices[idx] === 1;
+          return `
+            <td>
+              <button type="button" class="crit-choice-btn ${isNeg ? 'checked-neg' : ''}" onclick="toggleIndivPart1Crit(${idx}, 1)">
+                <span style="display:flex;align-items:center;gap:0.4rem;">
+                  <span class="crit-box-icon">${isNeg ? '✓' : ''}</span>
+                  <span>${c.sous[1]}</span>
+                </span>
+                <span class="crit-pts-pill">+${negPtsVal.toFixed(1)} pt</span>
+              </button>
+            </td>
+          `;
+        }).join('');
+
+        const ptsCols = critsIndiv.map((c, idx) => {
+          const pts = indivCritIndivChoices[idx] === 0 ? weights[idx] : negPtsVal;
+          sumIndiv += pts;
+          return `<td style="color:${indivCritIndivChoices[idx] === 0 ? '#059669' : '#E11D48'};"><strong>${pts.toFixed(2)}</strong> / ${weights[idx].toFixed(1)} pt</td>`;
+        }).join('');
+
+        currentPerfScore = Math.min(cfg.perfMax, sumIndiv);
+
         container.innerHTML = `
-          <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:1rem;">
-            <label for="inpDirectPerfScore" style="display:flex;justify-content:space-between;font-size:0.85rem;font-weight:800;color:var(--ink);margin-bottom:0.45rem;">
-              <span>⚽ Note Capacité Individuelle en ${currentAps}</span>
-              <span style="color:var(--primary-dark);">Max : ${cfg.perfMax},00 pts</span>
-            </label>
-            <input type="number" id="inpDirectPerfScore" class="cfg-input" min="0" max="${cfg.perfMax}" step="0.25" value="${defaultIndiv}" oninput="onDirectPerfScoreInput()">
-            <p style="font-size:0.76rem;color:var(--ink-muted);margin-top:0.35rem;">
-              Maîtrise technique individuelle des habiletés motrices en situation de référence (${currentAps}). La capacité collective (/${cfg.procMax} pts) est calculée ci-dessous via les 4 critères cochés.
-            </p>
-            <div class="quick-score-row">${chipsHtml}</div>
+          <div class="processus-table-wrap">
+            <table class="proc-grid-table" aria-label="Grille Capacité Individuelle par 4 critères">
+              <thead><tr>${theadCols}</tr></thead>
+              <tbody>
+                <tr>${posCols}</tr>
+                <tr>${negCols}</tr>
+                <tr style="font-weight:800;">${ptsCols}</tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-top:0.8rem;font-size:0.8rem;color:var(--ink-soft);">
+            <span>${cfg.perfMax === 6
+              ? 'Barème Capacité Individuelle sur <strong>6 pts</strong> : 4 critères × <strong>1,5 pt</strong> = 6 pts.'
+              : 'Barème Capacité Individuelle sur <strong>7 pts</strong> : Critères 1 &amp; 2 = <strong>2,0 pts</strong> · Critères 3 &amp; 4 = <strong>1,5 pt</strong> (Total 7 pts).'}</span>
+            <div style="display:flex;gap:0.4rem;">
+              <button type="button" class="q-chip" onclick="checkAllIndivPart1(0)">✓ Tout maîtrisé</button>
+              <button type="button" class="q-chip" onclick="checkAllIndivPart1(1)">✗ Tout en cours</button>
+            </div>
           </div>
         `;
         scaleWrap.innerHTML = '';
-        currentPerfScore = defaultIndiv;
         updatePerfBadge(cfg);
       }
+    }
+
+    function toggleIndivPart1Crit(critIdx, choiceIdx) {
+      indivCritIndivChoices[critIdx] = choiceIdx;
+      const cfg = getBaremeConfig(currentNiveau, currentAps);
+      renderVolet1APerformance(cfg);
+      recalculateIndivTotal();
+    }
+
+    function checkAllIndivPart1(choiceIdx) {
+      indivCritIndivChoices = [choiceIdx, choiceIdx, choiceIdx, choiceIdx];
+      const cfg = getBaremeConfig(currentNiveau, currentAps);
+      renderVolet1APerformance(cfg);
+      recalculateIndivTotal();
     }
 
     function convertVmaToDureeTime() {
@@ -2431,7 +3262,6 @@
       if (!vmaEl) return;
       const vma = parseFloat(vmaEl.value);
       if (!vma || vma < 6 || vma > 24) return;
-      // Vitesse moyenne sur 1000m G ou 600m F ≈ 95% de la VMA
       const distMeters = currentSexe === 'G' ? 1000 : 600;
       const speedMps = (vma * 0.95) / 3.6;
       const estSec = Math.round(distMeters / speedMps);
@@ -2459,13 +3289,10 @@
         val = parseFloat(document.getElementById('inpAthleVal')?.value || bestVal);
       }
 
-      // Interpolation linéaire sur l'échelle officielle [1.0 .. cfg.perfMax] arrondie au 0.25 pt
       let ratio = 0;
       if (sc.unit === 'metres') {
-        // Plus grand = meilleur
         ratio = (val - minVal) / (bestVal - minVal);
       } else {
-        // Plus petit (temps) = meilleur
         ratio = (minVal - val) / (minVal - bestVal);
       }
       ratio = Math.max(0, Math.min(1, ratio));
@@ -2481,7 +3308,6 @@
       const scaleWrap = document.getElementById('perfScaleTableWrap');
       if (!scaleWrap) return;
 
-      // Générer 6 paliers de barème (de cfg.perfMax jusqu'à 2 pts)
       const steps = [];
       for (let note = cfg.perfMax; note >= 2; note -= 1) {
         const r = (note - 1) / (cfg.perfMax - 1);
@@ -2506,7 +3332,7 @@
 
       scaleWrap.innerHTML = `
         <div style="font-size:0.75rem;font-weight:800;color:var(--ink-soft);margin-bottom:0.3rem;">
-          📊 Barème de conversion Performance (${currentAps} · ${currentNiveau} · ${currentSexe === 'G' ? 'Garçons' : 'Filles'}) :
+          Barème de conversion Performance (${currentAps} · ${currentNiveau} · ${currentSexe === 'G' ? 'Garçons' : 'Filles'}) :
         </div>
         <div style="overflow-x:auto;">
           <table class="bareme-ref-table" style="margin-top:0;">
@@ -2550,16 +3376,19 @@
     }
 
     // =========================================================================
-    // 5. RENDU DU VOLET 1B : GRILLE DU PROCESSUS À CASES À COCHER (CRITERES_OBS)
+    // 5. RENDU DU VOLET 1B : GRILLE DU PROCESSUS OU CAPACITÉ COLLECTIVE
     // =========================================================================
     function renderVolet1BProcessus(cfg) {
-      const crits = CRITERES_OBS[currentAps] || CRITERES_OBS['Course de durée'];
-      const weights = cfg.critWeights; // [1.5, 1.5, 1.5, 1.5] pour /6 ou [2.0, 2.0, 1.5, 1.5] pour /7
+      const crits = getCritsForAps(currentAps, 'collectif');
+      const weights = cfg.critWeights;
 
       document.getElementById('volet1BTitle').textContent = `Note Procédurale — 1B. Grille ${cfg.labelProc} (Cases à cocher)`;
+      document.getElementById('volet1BSub').textContent = cfg.isSpCo
+        ? `4 critères de Capacité Collective en ${currentAps} sur /${cfg.procMax} pts`
+        : `Cochez la case adéquate pour chacun des 4 critères du Processus`;
       document.getElementById('procWeightFormula').innerHTML = cfg.procMax === 6
-        ? `💡 Barème Processus sur <strong>6 pts</strong> : chacun des 4 critères maîtrisés vaut <strong>1,5 pt</strong> (4 × 1,5 = 6 pts).`
-        : `💡 Barème ${cfg.labelProc} sur <strong>7 pts</strong> : Critères 1 &amp; 2 = <strong>2,0 pts</strong> chacun · Critères 3 &amp; 4 = <strong>1,5 pt</strong> chacun (2 + 2 + 1,5 + 1,5 = 7 pts).`;
+        ? `Barème ${cfg.labelProc} sur <strong>6 pts</strong> : chacun des 4 critères maîtrisés vaut <strong>1,5 pt</strong> (4 × 1,5 = 6 pts).`
+        : `Barème ${cfg.labelProc} sur <strong>7 pts</strong> : Critères 1 &amp; 2 = <strong>2,0 pts</strong> chacun · Critères 3 &amp; 4 = <strong>1,5 pt</strong> chacun (Total = <strong>7 pts</strong>).`;
 
       const theadRow = document.getElementById('procTheadRow');
       const rowPos = document.getElementById('procTbodyRowPos');
@@ -2567,9 +3396,9 @@
       const rowPts = document.getElementById('procTbodyRowPts');
 
       theadRow.innerHTML = crits.map((c, idx) => `
-        <th>
+        <th style="${cfg.isSpCo ? 'background:#065F46;border-color:#059669;' : ''}">
           <div>Critère ${idx + 1} : ${c.nom}</div>
-          <div style="font-size:0.7rem;color:#93C5FD;font-weight:600;margin-top:2px;">Sur ${weights[idx].toFixed(1)} pt${weights[idx] > 1 ? 's' : ''}</div>
+          <div style="font-size:0.7rem;color:${cfg.isSpCo ? '#A7F3D0' : '#93C5FD'};font-weight:600;margin-top:2px;">Sur ${weights[idx].toFixed(1)} pt${weights[idx] > 1 ? 's' : ''}</div>
         </th>
       `).join('');
 
@@ -2606,7 +3435,6 @@
         `;
       }).join('');
 
-      // Calculer la somme du processus
       let sumProc = 0;
       const ptsCells = crits.map((c, idx) => {
         const pts = indivCritChoices[idx] === 0 ? weights[idx] : negPtsVal;
@@ -2619,11 +3447,125 @@
       document.getElementById('badgeScoreProc').textContent = `${currentProcScore.toFixed(2)} / ${cfg.procMax} pts`;
     }
 
+    // =========================================================================
+    // 5B. GUIDE INTERACTIF DYNAMIQUE SELON L'APS SÉLECTIONNÉE
+    // =========================================================================
+    function renderDynamicGuide(cfg) {
+      const container = document.getElementById('dynamicGuideSection');
+      if (!container) return;
+
+      const nivLabel = currentNiveau === '1AB' ? '1Bac' : (currentNiveau === '2AB' ? '2Bac' : currentNiveau);
+      const unitMeta = PERF_UNIT_META[currentAps];
+
+      const renderCritCards = (crits, weights) => crits.map((c, idx) => `
+        <article class="guide-crit-card">
+          <div class="guide-crit-head">
+            <div class="guide-crit-title">${idx + 1}. ${c.nom} (${c.sous[0]} / ${c.sous[1]})</div>
+            <div class="guide-crit-weight">${weights[idx].toFixed(1)} pt${weights[idx] > 1 ? 's' : ''}</div>
+          </div>
+          <div class="guide-crit-states">
+            <strong>✓ ${c.sous[0]} :</strong> ${c.descPos || ''}<br>
+            <strong>✗ ${c.sous[1]} :</strong> ${c.descNeg || ''}
+          </div>
+          <div class="guide-crit-tip">Repère terrain : ${c.tip || ''}</div>
+        </article>
+      `).join('');
+
+      let stepsHtml = '';
+      let criteriaBodyHtml = '';
+
+      if (cfg.isSpCo) {
+        const critsIndiv = getCritsForAps(currentAps, 'indiv');
+        const critsColl = getCritsForAps(currentAps, 'collectif');
+
+        stepsHtml = `
+          <div class="guide-steps-grid">
+            <div class="guide-step-item">
+              <span class="guide-step-num">ÉTAPE 01 · MÉGA-COLONNE 1A</span>
+              <div class="guide-step-title">Évaluer la Capacité Individuelle (/${cfg.perfMax} pts)</div>
+              <div class="guide-step-desc">En match de référence (${currentAps}), observez la maîtrise technique du joueur (porteur et défenseur sur l'homme) et cochez ses 4 critères individuels.</div>
+            </div>
+            <div class="guide-step-item">
+              <span class="guide-step-num">ÉTAPE 02 · MÉGA-COLONNE 1B</span>
+              <div class="guide-step-title">Évaluer la Capacité Collective (/${cfg.procMax} pts)</div>
+              <div class="guide-step-desc">Observez ensuite l'intégration dans l'équipe (appels, espacement, transitions, aide défensive) sur les 4 critères collectifs pour obtenir le sous-total Procédural /${cfg.procTotal}.</div>
+            </div>
+            <div class="guide-step-item">
+              <span class="guide-step-num">ÉTAPE 03 · CLASSE &amp; MASSAR</span>
+              <div class="guide-step-title">Compléter /20 et Exporter (50 élèves max)</div>
+              <div class="guide-step-desc">Importez votre feuille Excel Massar, ajustez les notes Conceptuelle (/3) et Comportementale (/${cfg.compMax}), marquez les ABS/DISP et exportez en Excel, Massar, Word ou PDF A4.</div>
+            </div>
+          </div>
+        `;
+
+        criteriaBodyHtml = `
+          <div class="guide-crit-section-title">
+            <span>1A. Les 4 Critères de la Capacité Individuelle — ${currentAps} (/${cfg.perfMax} pts)</span>
+            <span style="font-size:0.78rem;color:var(--primary-dark);">Pondération : [${cfg.critWeightsIndiv.join(' + ')}] pts</span>
+          </div>
+          <div class="guide-crit-grid">${renderCritCards(critsIndiv, cfg.critWeightsIndiv)}</div>
+
+          <div class="guide-crit-section-title" style="margin-top:1.5rem;">
+            <span>1B. Les 4 Critères de la Capacité Collective — ${currentAps} (/${cfg.procMax} pts)</span>
+            <span style="font-size:0.78rem;color:#059669;">Pondération : [${cfg.critWeights.join(' + ')}] pts</span>
+          </div>
+          <div class="guide-crit-grid">${renderCritCards(critsColl, cfg.critWeights)}</div>
+        `;
+      } else {
+        const critsProc = getCritsForAps(currentAps, 'collectif');
+        const perfGuideTxt = unitMeta ? unitMeta.guide : "Saisissez la performance mesurée avec son unité pour convertir automatiquement vers le barème OP.";
+
+        stepsHtml = `
+          <div class="guide-steps-grid">
+            <div class="guide-step-item">
+              <span class="guide-step-num">ÉTAPE 01 · PRODUIT (${unitMeta ? unitMeta.unit : 'pts'})</span>
+              <div class="guide-step-title">Saisir la Performance avec son Unité (/${cfg.perfMax} pts)</div>
+              <div class="guide-step-desc">${perfGuideTxt}</div>
+            </div>
+            <div class="guide-step-item">
+              <span class="guide-step-num">ÉTAPE 02 · PROCESSUS (4 CRITÈRES)</span>
+              <div class="guide-step-title">Cocher l'Exécution Technique (/${cfg.procMax} pts)</div>
+              <div class="guide-step-desc">Cochez les 4 critères techniques ci-dessus selon le mode choisi (${currentCritMode === 'nuance' ? '0,5 pt encouragement' : 'tout ou rien'}). Le total Procédural s'ajuste sur /${cfg.procTotal} pts.</div>
+            </div>
+            <div class="guide-step-item">
+              <span class="guide-step-num">ÉTAPE 03 · GRILLE 50 ÉLÈVES &amp; EXPORTS</span>
+              <div class="guide-step-title">Calcul automatique par Sexe (G / F)</div>
+              <div class="guide-step-desc">En Grille de Classe, la saisie de la performance brute (ex. ${unitMeta ? unitMeta.placeholder : '7.90'} ${unitMeta ? unitMeta.unit : ''}) applique automatiquement le barème Garçons ou Filles de chaque ligne avant l'export Excel/Massar.</div>
+            </div>
+          </div>
+        `;
+
+        criteriaBodyHtml = `
+          <div class="guide-crit-section-title">
+            <span>1B. Explication des 4 Critères du Processus — ${currentAps} (/${cfg.procMax} pts)</span>
+            <span style="font-size:0.78rem;color:var(--primary-dark);">Pondération : [${cfg.critWeights.join(' + ')}] pts · Conceptuel /${cfg.concepMax} · Comportemental /${cfg.compMax}</span>
+          </div>
+          <div class="guide-crit-grid">${renderCritCards(critsProc, cfg.critWeights)}</div>
+        `;
+      }
+
+      container.innerHTML = `
+        <div class="panel-head">
+          <div class="panel-head-left">
+            <div class="panel-num">?</div>
+            <div>
+              <h2 class="panel-title" style="margin:0;">Guide d'Utilisation &amp; Critères Détaillés — ${currentAps} (${nivLabel})</h2>
+              <div class="panel-sub">Contenu mis à jour automatiquement selon le sport et le niveau sélectionnés · Famille ${cfg.isSpCo ? 'Sports Collectifs / Renvoi (Double Grille 4+4)' : (cfg.isGym ? 'Gymnastique (Contrat + Processus)' : 'Athlétisme (Barème Chiffré + Processus)')}</div>
+            </div>
+          </div>
+        </div>
+        ${stepsHtml}
+        ${criteriaBodyHtml}
+      `;
+    }
+
+
     function toggleIndivCrit(critIdx, choiceIdx) {
       indivCritChoices[critIdx] = choiceIdx;
       const cfg = getBaremeConfig(currentNiveau, currentAps);
       renderVolet1BProcessus(cfg);
       recalculateIndivTotal();
+      saveStateToStorage();
     }
 
     function checkAllProcessus(choiceIdx) {
@@ -2631,6 +3573,7 @@
       const cfg = getBaremeConfig(currentNiveau, currentAps);
       renderVolet1BProcessus(cfg);
       recalculateIndivTotal();
+      saveStateToStorage();
     }
 
     // =========================================================================
@@ -2644,13 +3587,11 @@
         compInput.value = cfg.compMax;
       }
 
-      // Quick chips Conceptuel (/3)
       const concepChips = [1.0, 1.5, 2.0, 2.5, 3.0];
       document.getElementById('quickChipsConcep').innerHTML = concepChips.map(v =>
         `<button type="button" class="q-chip" onclick="setConcepVal(${v})">${v.toFixed(1)}/3</button>`
       ).join('');
 
-      // Quick chips Comportemental (/5, /4 ou /3)
       const compChips = [];
       for (let v = 1; v <= cfg.compMax; v += 1) {
         compChips.push(v);
@@ -2685,6 +3626,7 @@
 
       document.getElementById('badgeScoreConcepComp').textContent = `${(cVal + bVal).toFixed(2)} / ${cfg.concepMax + cfg.compMax} pts`;
       recalculateIndivTotal();
+      saveStateToStorage();
     }
 
     // =========================================================================
@@ -2703,7 +3645,7 @@
       document.getElementById('finalProcTotal').textContent = `${procSum.toFixed(2)} / ${cfg.procTotal}`;
       document.getElementById('finalProcSub').textContent = `${cfg.labelPerf.split(' ')[0]} ${currentPerfScore.toFixed(2)} + ${cfg.labelProc.split(' ')[0]} ${currentProcScore.toFixed(2)}`;
 
-      document.getElementById('bdLabelPerf').textContent = `1A. ${cfg.labelPerf}`;
+      document.getElementById('bdLabelPerf').textContent = `1A. ${cfg.labelPerf}${cfg.isSpCo ? ' (4 critères)' : ''}`;
       document.getElementById('bdValPerf').textContent = `${currentPerfScore.toFixed(2)} / ${cfg.perfMax}`;
       document.getElementById('bdLabelProc').textContent = `1B. ${cfg.labelProc} (4 critères)`;
       document.getElementById('bdValProc').textContent = `${currentProcScore.toFixed(2)} / ${cfg.procMax}`;
@@ -2712,7 +3654,6 @@
       document.getElementById('bdValComp').textContent = `${compVal.toFixed(2)} / ${cfg.compMax}`;
       document.getElementById('badgeScoreConcepComp').textContent = `${(concepVal + compVal).toFixed(2)} / ${cfg.concepMax + cfg.compMax} pts`;
 
-      // Appréciation pédagogique
       const appEl = document.getElementById('finalAppreciation');
       if (total20 >= 16) {
         appEl.textContent = 'Très Bien — Compétence Excellente';
@@ -2738,7 +3679,7 @@
     }
 
     // =========================================================================
-    // 8. MAILLAGE DYNAMIQUE 360° (GÉNÉRATEUR, VMA, SILO APS)
+    // 8. MAILLAGE DYNAMIQUE 360° & PERSISTANCE LOCALSTORAGE
     // =========================================================================
     function updateSeoBridgeLinks() {
       const encAps = encodeURIComponent(currentAps);
@@ -2763,10 +3704,174 @@
       }
     }
 
+    function normalizeStudentObj(st, cfg) {
+      const safeCfg = cfg || getBaremeConfig(currentNiveau, currentAps);
+      const status = (st.status === 'ABS' || st.status === 'DISP') ? st.status : 'OK';
+      const sexe = (st.sexe === 'F') ? 'F' : 'G';
+      const crits = Array.isArray(st.crits) && st.crits.length === 4 ? st.crits.map(v => (v === 1 ? 1 : 0)) : [0, 0, 0, 0];
+      const critsIndiv = Array.isArray(st.critsIndiv) && st.critsIndiv.length === 4 ? st.critsIndiv.map(v => (v === 1 ? 1 : 0)) : [0, 0, 0, 0];
+      let perfScore = parseFloat(st.perfScore);
+      if (isNaN(perfScore) || perfScore < 0 || perfScore > safeCfg.perfMax) {
+        perfScore = Math.max(0, safeCfg.perfMax - 1.0);
+      }
+      let concep = parseFloat(st.concep);
+      if (isNaN(concep) || concep < 0 || concep > safeCfg.concepMax) concep = 2.5;
+      let comp = parseFloat(st.comp);
+      if (isNaN(comp) || comp < 0 || comp > safeCfg.compMax) comp = Math.max(0, safeCfg.compMax - 0.5);
+      return {
+        nom: String(st.nom || '').trim() || 'Élève',
+        sexe,
+        status,
+        rawPerf: st.rawPerf !== undefined && st.rawPerf !== null ? String(st.rawPerf) : '',
+        perfScore,
+        critsIndiv,
+        crits,
+        concep,
+        comp
+      };
+    }
+
+    function getStudentScores(st, cfg) {
+      const negPts = currentCritMode === 'nuance' ? 0.5 : 0;
+      let pIndiv = 0;
+      let pProc = 0;
+
+      if (cfg.isSpCo) {
+        const indWeights = cfg.critWeightsIndiv || [1.5, 1.5, 1.5, 1.5];
+        (st.critsIndiv || [0, 0, 0, 0]).forEach((ch, idx) => {
+          pIndiv += (ch === 0 ? indWeights[idx] : negPts);
+        });
+      } else {
+        pIndiv = Math.max(0, Math.min(cfg.perfMax, parseFloat(st.perfScore) || 0));
+      }
+
+      const procWeights = cfg.critWeights || [1.5, 1.5, 1.5, 1.5];
+      (st.crits || [0, 0, 0, 0]).forEach((ch, idx) => {
+        pProc += (ch === 0 ? procWeights[idx] : negPts);
+      });
+
+      const cVal = Math.max(0, Math.min(cfg.concepMax, parseFloat(st.concep) || 0));
+      const bVal = Math.max(0, Math.min(cfg.compMax, parseFloat(st.comp) || 0));
+      const total = st.status === 'OK' ? Math.min(20, pIndiv + pProc + cVal + bVal) : null;
+
+      return { pIndiv, pProc, cVal, bVal, total };
+    }
+
+    function saveStateToStorage() {
+      try {
+        const payload = {
+          v: 2,
+          niveau: currentNiveau,
+          aps: currentAps,
+          sexe: currentSexe,
+          critMode: currentCritMode,
+          mode: currentMode,
+          indivCritIndivChoices,
+          indivCritChoices,
+          concepVal: document.getElementById('inpConceptuel')?.value || 2.5,
+          compVal: document.getElementById('inpComportemental')?.value || 3.5,
+          classStudents: classStudents.slice(0, MAX_CLASS_STUDENTS)
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+        const saveEl = document.getElementById('saveStatusNote');
+        if (saveEl) {
+          const now = new Date();
+          const hh = String(now.getHours()).padStart(2, '0');
+          const mm = String(now.getMinutes()).padStart(2, '0');
+          saveEl.textContent = `💾 Brouillon sauvegardé (${hh}:${mm})`;
+        }
+      } catch (e) { /* Ignore storage quota errors */ }
+    }
+
+    function loadStateFromStorage() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return false;
+        const data = JSON.parse(raw);
+        if (!data || typeof data !== 'object') return false;
+
+        if (data.niveau && document.getElementById('selNiveau')) {
+          document.getElementById('selNiveau').value = data.niveau;
+          currentNiveau = data.niveau;
+        }
+        if (data.aps && document.getElementById('selAps')) {
+          document.getElementById('selAps').value = data.aps;
+          currentAps = data.aps;
+        }
+        if (data.sexe === 'F' || data.sexe === 'G') {
+          currentSexe = data.sexe;
+          document.getElementById('btnSexeG')?.classList.toggle('active', currentSexe === 'G');
+          document.getElementById('btnSexeF')?.classList.toggle('active', currentSexe === 'F');
+        }
+        if (data.critMode === 'binaire' || data.critMode === 'nuance') {
+          currentCritMode = data.critMode;
+          document.getElementById('btnCritBinaire')?.classList.toggle('active', currentCritMode === 'binaire');
+          document.getElementById('btnCritNuance')?.classList.toggle('active', currentCritMode === 'nuance');
+        }
+        if (Array.isArray(data.indivCritIndivChoices) && data.indivCritIndivChoices.length === 4) {
+          indivCritIndivChoices = data.indivCritIndivChoices.map(v => (v === 1 ? 1 : 0));
+        }
+        if (Array.isArray(data.indivCritChoices) && data.indivCritChoices.length === 4) {
+          indivCritChoices = data.indivCritChoices.map(v => (v === 1 ? 1 : 0));
+        }
+        if (data.concepVal !== undefined && document.getElementById('inpConceptuel')) {
+          document.getElementById('inpConceptuel').value = data.concepVal;
+        }
+        if (data.compVal !== undefined && document.getElementById('inpComportemental')) {
+          document.getElementById('inpComportemental').value = data.compVal;
+        }
+        if (Array.isArray(data.classStudents) && data.classStudents.length > 0) {
+          const cfg = getBaremeConfig(currentNiveau, currentAps);
+          classStudents = data.classStudents.slice(0, MAX_CLASS_STUDENTS).map(s => normalizeStudentObj(s, cfg));
+        }
+        return data.mode || 'indiv';
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function confirmResetClassData() {
+      const btn = document.getElementById('btnResetClassData');
+      if (!resetConfirmPending) {
+        resetConfirmPending = true;
+        if (btn) btn.textContent = '⚠️ Confirmer réinitialisation';
+        clearTimeout(resetConfirmTimer);
+        resetConfirmTimer = setTimeout(() => {
+          resetConfirmPending = false;
+          if (btn) btn.textContent = '🗑️ Réinitialiser';
+        }, 4000);
+        return;
+      }
+      clearTimeout(resetConfirmTimer);
+      resetConfirmPending = false;
+      if (btn) btn.textContent = '🗑️ Réinitialiser';
+
+      const cfg = getBaremeConfig(currentNiveau, currentAps);
+      classStudents = [
+        normalizeStudentObj({ nom: 'Amine El Idrissi', sexe: 'G', status: 'OK', rawPerf: '', perfScore: cfg.perfMax - 0.5, critsIndiv: [0,0,0,0], crits: [0,0,0,0], concep: 2.5, comp: cfg.compMax - 0.5 }, cfg),
+        normalizeStudentObj({ nom: 'Salma Bennani', sexe: 'F', status: 'OK', rawPerf: '', perfScore: cfg.perfMax - 1.0, critsIndiv: [0,0,0,1], crits: [0,0,0,1], concep: 2.5, comp: cfg.compMax }, cfg),
+        normalizeStudentObj({ nom: 'Youssef Tazi', sexe: 'G', status: 'OK', rawPerf: '', perfScore: Math.max(1, cfg.perfMax - 2.0), critsIndiv: [0,1,0,1], crits: [0,1,0,1], concep: 2.0, comp: Math.max(1, cfg.compMax - 1.0) }, cfg),
+        normalizeStudentObj({ nom: 'Kenza Alaoui', sexe: 'F', status: 'OK', rawPerf: '', perfScore: cfg.perfMax, critsIndiv: [0,0,0,0], crits: [0,0,0,0], concep: 3.0, comp: cfg.compMax }, cfg),
+        normalizeStudentObj({ nom: 'Mehdi Chraibi', sexe: 'G', status: 'OK', rawPerf: '', perfScore: Math.max(1, cfg.perfMax - 1.5), critsIndiv: [0,0,1,1], crits: [0,0,1,0], concep: 2.0, comp: Math.max(1, cfg.compMax - 0.5) }, cfg)
+      ];
+      currentClassFilter = 'ALL';
+      currentClassSearch = '';
+      const searchEl = document.getElementById('classSearchInput');
+      if (searchEl) searchEl.value = '';
+      document.querySelectorAll('.filter-chip').forEach((el, idx) => el.classList.toggle('active', idx === 0));
+      saveStateToStorage();
+      renderClassGridTable();
+      showToast('Liste réinitialisée aux 5 élèves de démonstration.');
+    }
+
     // =========================================================================
-    // 9. MODE 2 : GRILLE DE CLASSE INTERACTIVE (35 ÉLÈVES)
+    // 9. MODE 2 : GRILLE DE CLASSE INTERACTIVE (MAX 50 ÉLÈVES)
     // =========================================================================
     function addCurrentStudentToClassGrid() {
+      if (classStudents.length >= MAX_CLASS_STUDENTS) {
+        showToast(`Limite maximale atteinte : ${MAX_CLASS_STUDENTS} élèves par classe.`);
+        return;
+      }
       const cfg = getBaremeConfig(currentNiveau, currentAps);
       const nameEl = document.getElementById('indivStudentName');
       const nom = (nameEl && nameEl.value.trim()) ? nameEl.value.trim() : `Élève ${classStudents.length + 1}`;
@@ -2774,252 +3879,1034 @@
       const compVal = Math.max(0, Math.min(cfg.compMax, parseFloat(document.getElementById('inpComportemental')?.value || 0)));
 
       let rawPerfStr = '';
-      if (currentAps === 'Course de durée') {
-        const m = document.getElementById('inpDureeMin')?.value || 3;
-        const s = document.getElementById('inpDureeSec')?.value || 20;
-        rawPerfStr = `${m}'${s < 10 ? '0' + s : s}"`;
-      } else if (document.getElementById('inpAthleVal')) {
-        rawPerfStr = document.getElementById('inpAthleVal').value;
-      } else {
-        rawPerfStr = currentPerfScore.toFixed(2);
+      if (!cfg.isSpCo) {
+        if (currentAps === 'Course de durée') {
+          const m = document.getElementById('inpDureeMin')?.value || 3;
+          const s = parseInt(document.getElementById('inpDureeSec')?.value || 20, 10);
+          rawPerfStr = `${m}'${s < 10 ? '0' + s : s}"`;
+        } else if (document.getElementById('inpAthleVal')) {
+          rawPerfStr = document.getElementById('inpAthleVal').value;
+        } else if (cfg.isGym) {
+          rawPerfStr = String(document.getElementById('selGymContrat')?.value || '');
+        }
       }
 
-      classStudents.push({
+      classStudents.push(normalizeStudentObj({
         nom,
         sexe: currentSexe,
+        status: 'OK',
         rawPerf: rawPerfStr,
         perfScore: currentPerfScore,
+        critsIndiv: [...indivCritIndivChoices],
         crits: [...indivCritChoices],
         concep: concepVal,
         comp: compVal
-      });
+      }, cfg));
 
       if (nameEl) nameEl.value = '';
-      document.getElementById('classCountBadge').textContent = `${classStudents.length} élèves`;
+      saveStateToStorage();
       switchCalcMode('classe');
+      showToast(`${nom} ajouté(e) à la grille (${classStudents.length}/${MAX_CLASS_STUDENTS}).`);
     }
 
     function addBlankClassRow() {
+      if (classStudents.length >= MAX_CLASS_STUDENTS) {
+        showToast(`Maximum atteint : ${MAX_CLASS_STUDENTS} élèves.`);
+        return;
+      }
       const cfg = getBaremeConfig(currentNiveau, currentAps);
-      classStudents.push({
+      classStudents.push(normalizeStudentObj({
         nom: `Élève ${classStudents.length + 1}`,
         sexe: 'G',
+        status: 'OK',
         rawPerf: '',
-        perfScore: cfg.perfMax - 1.5,
+        perfScore: Math.max(0, cfg.perfMax - 1.5),
+        critsIndiv: [0, 0, 0, 0],
         crits: [0, 0, 0, 0],
         concep: 2.5,
-        comp: cfg.compMax - 0.5
-      });
-      document.getElementById('classCountBadge').textContent = `${classStudents.length} élèves`;
+        comp: Math.max(0, cfg.compMax - 0.5)
+      }, cfg));
+      saveStateToStorage();
       renderClassGridTable();
     }
 
-    function fill35ClassRows() {
+    function fill50ClassRows() {
+      if (classStudents.length >= MAX_CLASS_STUDENTS) {
+        showToast(`La grille contient déjà ${MAX_CLASS_STUDENTS} élèves.`);
+        return;
+      }
       const cfg = getBaremeConfig(currentNiveau, currentAps);
-      while (classStudents.length < 35) {
-        classStudents.push({
+      while (classStudents.length < MAX_CLASS_STUDENTS) {
+        classStudents.push(normalizeStudentObj({
           nom: `Élève ${classStudents.length + 1}`,
           sexe: classStudents.length % 2 === 0 ? 'G' : 'F',
+          status: 'OK',
           rawPerf: '',
-          perfScore: cfg.perfMax - 1.5,
+          perfScore: Math.max(0, cfg.perfMax - 1.5),
+          critsIndiv: [0, 0, 0, 0],
           crits: [0, 0, 0, 0],
           concep: 2.5,
-          comp: cfg.compMax - 0.5
-        });
+          comp: Math.max(0, cfg.compMax - 0.5)
+        }, cfg));
       }
-      document.getElementById('classCountBadge').textContent = `${classStudents.length} élèves`;
+      saveStateToStorage();
+      renderClassGridTable();
+      showToast(`Grille complétée à ${MAX_CLASS_STUDENTS}/${MAX_CLASS_STUDENTS} élèves.`);
+    }
+
+    function deleteClassRow(rIdx) {
+      if (!classStudents[rIdx]) return;
+      const removed = classStudents.splice(rIdx, 1)[0];
+      saveStateToStorage();
+      renderClassGridTable();
+      showToast(`Ligne supprimée : ${removed.nom}`);
+    }
+
+    function cycleStudentStatus(rIdx) {
+      const st = classStudents[rIdx];
+      if (!st) return;
+      const order = ['OK', 'ABS', 'DISP'];
+      const cur = order.indexOf(st.status || 'OK');
+      st.status = order[(cur + 1) % order.length];
+      saveStateToStorage();
       renderClassGridTable();
     }
 
-    function renderClassGridTable() {
+    function setClassFilter(mode, btn) {
+      currentClassFilter = mode || 'ALL';
+      document.querySelectorAll('.filter-chip').forEach(el => el.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      renderClassGridTable();
+    }
+
+    function onClassFilterChange() {
+      currentClassSearch = (document.getElementById('classSearchInput')?.value || '').trim().toLowerCase();
+      renderClassGridTable();
+    }
+
+    function bulkFillConceptComp() {
       const cfg = getBaremeConfig(currentNiveau, currentAps);
-      const crits = CRITERES_OBS[currentAps] || CRITERES_OBS['Course de durée'];
-      const weights = cfg.critWeights;
-      const negPts = currentCritMode === 'nuance' ? 0.5 : 0;
-      const nivLabel = currentNiveau === '1AB' ? '1Bac' : (currentNiveau === '2AB' ? '2Bac' : currentNiveau);
-
-      document.getElementById('classTitleApsNiveau').textContent = `${currentAps} (${nivLabel}) — Procédural /${cfg.procTotal} (${cfg.perfMax} + ${cfg.procMax})`;
-      document.getElementById('classCountBadge').textContent = `${classStudents.length} élèves`;
-
-      const thead = document.getElementById('classSheetThead');
-      const tbody = document.getElementById('classSheetTbody');
-
-      thead.innerHTML = `
-        <tr>
-          <th rowspan="2" style="width:36px;">N°</th>
-          <th rowspan="2" style="min-width:150px;">Nom &amp; Prénom de l'Élève</th>
-          <th rowspan="2" style="width:48px;">Sexe</th>
-          <th rowspan="2" style="width:92px;">1A. ${cfg.labelPerf.split(' ')[0]}<br><span style="color:#FCD34D;">/${cfg.perfMax} pts</span></th>
-          <th colspan="4">1B. Grille ${cfg.labelProc} — 4 Critères à Cases à Cocher (<span style="color:#93C5FD;">/${cfg.procMax} pts</span>)</th>
-          <th rowspan="2" style="width:74px;">Note<br>Processus<br><span style="color:#93C5FD;">/${cfg.procMax}</span></th>
-          <th rowspan="2" style="width:74px;">2. Concep.<br><span style="color:#A7F3D0;">/${cfg.concepMax}</span></th>
-          <th rowspan="2" style="width:74px;">3. Comport.<br><span style="color:#A7F3D0;">/${cfg.compMax}</span></th>
-          <th rowspan="2" style="width:84px;background:#3347D6;">TOTAL<br>NOTE /20</th>
-        </tr>
-        <tr>
-          ${crits.map((c, idx) => `
-            <th class="sub-hdr">
-              <div>${c.nom} (${weights[idx]}pt)</div>
-              <div style="font-size:0.65rem;color:#CBD5E1;">[${c.sous[0]} | ${c.sous[1]}]</div>
-            </th>
-          `).join('')}
-        </tr>
-      `;
-
-      tbody.innerHTML = classStudents.map((st, rIdx) => {
-        if (st.perfScore === null || st.perfScore === undefined || st.perfScore > cfg.perfMax) {
-          st.perfScore = Math.min(cfg.perfMax, cfg.perfMax - 1.0);
+      const cVal = Math.max(0, Math.min(cfg.concepMax, parseFloat(document.getElementById('inpConceptuel')?.value || 2.5)));
+      const bVal = Math.max(0, Math.min(cfg.compMax, parseFloat(document.getElementById('inpComportemental')?.value || cfg.compMax)));
+      let count = 0;
+      classStudents.forEach(st => {
+        if ((st.status || 'OK') === 'OK') {
+          st.concep = cVal;
+          st.comp = bVal;
+          count++;
         }
-        if (st.comp > cfg.compMax) st.comp = cfg.compMax;
+      });
+      saveStateToStorage();
+      renderClassGridTable();
+      showToast(`Conceptuel (${cVal.toFixed(1)}) & Comportemental (${bVal.toFixed(1)}) appliqués à ${count} présents.`);
+    }
 
-        let procSum = 0;
-        const critCells = crits.map((c, cIdx) => {
-          const choice = st.crits[cIdx] || 0;
-          const pts = choice === 0 ? weights[cIdx] : negPts;
-          procSum += pts;
-          return `
-            <td>
-              <div class="mini-chk-pair">
-                <button type="button" class="mini-chk ${choice === 0 ? 'pos-on' : ''}" onclick="setClassStudentCrit(${rIdx}, ${cIdx}, 0)" title="${c.sous[0]} (+${weights[cIdx]} pt)">
-                  ${choice === 0 ? '✓ ' : ''}${c.sous[0]}
-                </button>
-                <button type="button" class="mini-chk ${choice === 1 ? 'neg-on' : ''}" onclick="setClassStudentCrit(${rIdx}, ${cIdx}, 1)" title="${c.sous[1]} (+${negPts} pt)">
-                  ${choice === 1 ? '✓ ' : ''}${c.sous[1]}
-                </button>
-              </div>
-            </td>
-          `;
-        }).join('');
+    function bulkResetCriteriaPresent() {
+      let count = 0;
+      classStudents.forEach(st => {
+        if ((st.status || 'OK') === 'OK') {
+          st.critsIndiv = [0, 0, 0, 0];
+          st.crits = [0, 0, 0, 0];
+          count++;
+        }
+      });
+      saveStateToStorage();
+      renderClassGridTable();
+      showToast(`Critères cochés "Maîtrisés" pour ${count} présents.`);
+    }
 
-        const totalRow = Math.min(20, (parseFloat(st.perfScore) || 0) + procSum + (parseFloat(st.concep) || 0) + (parseFloat(st.comp) || 0));
-
-        return `
-          <tr>
-            <td><strong>${rIdx + 1}</strong></td>
-            <td style="text-align:left;">
-              <input type="text" class="row-input-name" value="${st.nom}" onchange="updateClassStudentField(${rIdx}, 'nom', this.value)">
-            </td>
-            <td>
-              <button type="button" class="mini-chk" style="font-weight:800;" onclick="toggleClassStudentSexe(${rIdx})">${st.sexe}</button>
-            </td>
-            <td>
-              <input type="number" class="row-input-num" min="0" max="${cfg.perfMax}" step="0.25" value="${st.perfScore}" onchange="updateClassStudentField(${rIdx}, 'perfScore', this.value)">
-            </td>
-            ${critCells}
-            <td style="font-weight:800;color:#2434A8;background:#EEF2FF;">${procSum.toFixed(2)}</td>
-            <td>
-              <input type="number" class="row-input-num" min="0" max="${cfg.concepMax}" step="0.25" value="${st.concep}" onchange="updateClassStudentField(${rIdx}, 'concep', this.value)">
-            </td>
-            <td>
-              <input type="number" class="row-input-num" min="0" max="${cfg.compMax}" step="0.25" value="${st.comp}" onchange="updateClassStudentField(${rIdx}, 'comp', this.value)">
-            </td>
-            <td style="font-weight:800;font-size:0.9rem;color:#065F46;background:#ECFDF5;">${totalRow.toFixed(2)} / 20</td>
-          </tr>
-        `;
-      }).join('');
-
-      // Calculer les statistiques de la classe (Moyenne, Min, Max, Taux >= 10)
-      if (classStudents.length > 0) {
-        const totals = classStudents.map(st => {
-          let pSum = 0;
-          crits.forEach((c, cIdx) => {
-            pSum += ((st.crits[cIdx] || 0) === 0) ? weights[cIdx] : negPts;
-          });
-          return Math.min(20, (parseFloat(st.perfScore) || 0) + pSum + (parseFloat(st.concep) || 0) + (parseFloat(st.comp) || 0));
-        });
-        const avg = totals.reduce((a, b) => a + b, 0) / totals.length;
-        const minN = Math.min(...totals);
-        const maxN = Math.max(...totals);
-        const passCnt = totals.filter(t => t >= 10).length;
-        const passPct = Math.round((passCnt / totals.length) * 100);
-
-        const elAvg = document.getElementById('clsStatAvg');
-        const elMinMax = document.getElementById('clsStatMinMax');
-        const elPass = document.getElementById('clsStatPassRate');
-        if (elAvg) elAvg.textContent = `${avg.toFixed(2)} / 20`;
-        if (elMinMax) elMinMax.textContent = `${minN.toFixed(2)} — ${maxN.toFixed(2)}`;
-        if (elPass) elPass.textContent = `${passPct}% (${passCnt}/${totals.length})`;
+    function onClassRawPerfChange(rIdx, rawVal) {
+      const st = classStudents[rIdx];
+      if (!st) return;
+      const cfg = getBaremeConfig(currentNiveau, currentAps);
+      st.rawPerf = String(rawVal || '').trim();
+      if (st.rawPerf !== '') {
+        const res = parseRawPerfToScore(currentAps, st.rawPerf, st.sexe, currentNiveau, cfg);
+        if (res && res.score !== null) {
+          st.perfScore = res.score;
+          if (res.formatted) st.rawPerf = res.formatted;
+        } else {
+          showToast(`Format non reconnu (${PERF_UNIT_META[currentAps]?.stepHint || PERF_UNIT_META[currentAps]?.placeholder || ''}).`);
+        }
       }
+      saveStateToStorage();
+      renderClassGridTable();
+    }
+
+    function setClassStudentIndivCrit(rIdx, cIdx, val) {
+      if (!classStudents[rIdx]) return;
+      if (!Array.isArray(classStudents[rIdx].critsIndiv)) classStudents[rIdx].critsIndiv = [0, 0, 0, 0];
+      classStudents[rIdx].critsIndiv[cIdx] = val;
+      saveStateToStorage();
+      renderClassGridTable();
     }
 
     function setClassStudentCrit(rIdx, cIdx, val) {
       if (!classStudents[rIdx]) return;
+      if (!Array.isArray(classStudents[rIdx].crits)) classStudents[rIdx].crits = [0, 0, 0, 0];
       classStudents[rIdx].crits[cIdx] = val;
+      saveStateToStorage();
       renderClassGridTable();
     }
 
     function toggleClassStudentSexe(rIdx) {
-      if (!classStudents[rIdx]) return;
-      classStudents[rIdx].sexe = classStudents[rIdx].sexe === 'G' ? 'F' : 'G';
+      const st = classStudents[rIdx];
+      if (!st) return;
+      st.sexe = st.sexe === 'G' ? 'F' : 'G';
+      const cfg = getBaremeConfig(currentNiveau, currentAps);
+      if (!cfg.isSpCo && st.rawPerf && String(st.rawPerf).trim() !== '') {
+        const res = parseRawPerfToScore(currentAps, st.rawPerf, st.sexe, currentNiveau, cfg);
+        if (res && res.score !== null) {
+          st.perfScore = res.score;
+        }
+      }
+      saveStateToStorage();
       renderClassGridTable();
     }
 
     function updateClassStudentField(rIdx, field, val) {
-      if (!classStudents[rIdx]) return;
+      const st = classStudents[rIdx];
+      if (!st) return;
       const cfg = getBaremeConfig(currentNiveau, currentAps);
       if (field === 'nom') {
-        classStudents[rIdx].nom = val;
+        st.nom = String(val || '').trim() || `Élève ${rIdx + 1}`;
+        saveStateToStorage();
       } else {
-        let num = parseFloat(val) || 0;
+        let num = parseFloat(val);
+        if (isNaN(num)) num = 0;
         if (field === 'perfScore') num = Math.max(0, Math.min(cfg.perfMax, num));
         if (field === 'concep') num = Math.max(0, Math.min(cfg.concepMax, num));
         if (field === 'comp') num = Math.max(0, Math.min(cfg.compMax, num));
-        classStudents[rIdx][field] = num;
+        st[field] = num;
+        saveStateToStorage();
         renderClassGridTable();
       }
     }
 
+    function renderClassGridTable() {
+      const cfg = getBaremeConfig(currentNiveau, currentAps);
+      const nivLabel = currentNiveau === '1AB' ? '1Bac' : (currentNiveau === '2AB' ? '2Bac' : currentNiveau);
+      const unitMeta = PERF_UNIT_META[currentAps] || { unit: 'pts', placeholder: '0.00', example: '' };
+
+      // Update buttons & badges
+      document.getElementById('classCountBadge').textContent = `${classStudents.length} / ${MAX_CLASS_STUDENTS} élèves`;
+      const btnAdd = document.getElementById('btnAddRowClass');
+      const btnFill50 = document.getElementById('btnFill50Rows');
+      if (btnAdd) btnAdd.disabled = classStudents.length >= MAX_CLASS_STUDENTS;
+      if (btnFill50) btnFill50.disabled = classStudents.length >= MAX_CLASS_STUDENTS;
+
+      const titleEl = document.getElementById('classTitleApsNiveau');
+      const subEl = document.getElementById('classSubtitleHint');
+      if (cfg.isSpCo) {
+        if (titleEl) titleEl.textContent = `${currentAps} (${nivLabel}) — Double Grille Individuel /${cfg.perfMax} + Collectif /${cfg.procMax} (Total /${cfg.procTotal})`;
+        if (subEl) subEl.textContent = `2 Méga-Colonnes à cases à cocher : 1A. Capacité Individuelle (4 critères) & 1B. Capacité Collective (4 critères) + Conceptuel /${cfg.concepMax} + Comportemental /${cfg.compMax}`;
+      } else {
+        if (titleEl) titleEl.textContent = `${currentAps} (${nivLabel}) — Perf Brute (${unitMeta.unit}) + Processus /${cfg.procMax} (Total /${cfg.procTotal})`;
+        if (subEl) subEl.textContent = `Saisissez la performance avec son unité (${unitMeta.unit}, ${unitMeta.stepHint || unitMeta.placeholder}) : la note /${cfg.perfMax} s'adapte automatiquement au sexe (G/F) et au barème ${nivLabel}.`;
+      }
+
+      const critsIndiv = cfg.isSpCo ? getCritsForAps(currentAps, 'indiv') : [];
+      const critsProc = cfg.isSpCo ? getCritsForAps(currentAps, 'collectif') : getCritsForAps(currentAps, 'processus');
+      const indWeights = cfg.critWeightsIndiv || [1.5, 1.5, 1.5, 1.5];
+      const procWeights = cfg.critWeights || [1.5, 1.5, 1.5, 1.5];
+      const negPts = currentCritMode === 'nuance' ? 0.5 : 0;
+
+      const thead = document.getElementById('classSheetThead');
+      const tbody = document.getElementById('classSheetTbody');
+
+      if (cfg.isSpCo) {
+        thead.innerHTML = `
+          <tr>
+            <th rowspan="2" style="width:36px;">N°</th>
+            <th rowspan="2" style="min-width:155px;">Nom &amp; Prénom</th>
+            <th rowspan="2" style="width:46px;">Sexe</th>
+            <th rowspan="2" style="width:54px;">Statut</th>
+            <th colspan="5" class="mega-hdr-indiv">1A. CAPACITÉ INDIVIDUELLE (4 Critères · /${cfg.perfMax} pts)</th>
+            <th colspan="5" class="mega-hdr-coll">1B. CAPACITÉ COLLECTIVE (4 Critères · /${cfg.procMax} pts)</th>
+            <th rowspan="2" style="width:66px;">2. Conc.<br><span style="color:#A7F3D0;">/${cfg.concepMax}</span></th>
+            <th rowspan="2" style="width:66px;">3. Comp.<br><span style="color:#A7F3D0;">/${cfg.compMax}</span></th>
+            <th rowspan="2" style="width:82px;background:#3347D6;">TOTAL<br>NOTE /20</th>
+            <th rowspan="2" style="width:38px;">Suppr.</th>
+          </tr>
+          <tr>
+            ${critsIndiv.map((c, idx) => `
+              <th class="sub-hdr">
+                <div>${c.nom} (${indWeights[idx]}pt)</div>
+                <div style="font-size:0.63rem;color:#CBD5E1;">[${c.sous[0]} | ${c.sous[1]}]</div>
+              </th>
+            `).join('')}
+            <th class="sub-hdr" style="width:62px;background:#1E3A8A;">Note<br>Indiv /${cfg.perfMax}</th>
+            ${critsProc.map((c, idx) => `
+              <th class="sub-hdr">
+                <div>${c.nom} (${procWeights[idx]}pt)</div>
+                <div style="font-size:0.63rem;color:#CBD5E1;">[${c.sous[0]} | ${c.sous[1]}]</div>
+              </th>
+            `).join('')}
+            <th class="sub-hdr" style="width:62px;background:#0F5132;">Note<br>Coll /${cfg.procMax}</th>
+          </tr>
+        `;
+      } else {
+        thead.innerHTML = `
+          <tr>
+            <th rowspan="2" style="width:36px;">N°</th>
+            <th rowspan="2" style="min-width:155px;">Nom &amp; Prénom</th>
+            <th rowspan="2" style="width:46px;">Sexe</th>
+            <th rowspan="2" style="width:54px;">Statut</th>
+            <th rowspan="2" style="min-width:105px;">Perf. Brute<br><span style="color:#93C5FD;">(Unité : ${unitMeta.unit})</span></th>
+            <th rowspan="2" style="width:74px;">1A. Note Perf<br><span style="color:#FCD34D;">/${cfg.perfMax} pts</span></th>
+            <th colspan="4">1B. Grille ${cfg.labelProc} — 4 Critères à Cases à Cocher (<span style="color:#93C5FD;">/${cfg.procMax} pts</span>)</th>
+            <th rowspan="2" style="width:68px;">Note<br>Proc.<br><span style="color:#93C5FD;">/${cfg.procMax}</span></th>
+            <th rowspan="2" style="width:66px;">2. Conc.<br><span style="color:#A7F3D0;">/${cfg.concepMax}</span></th>
+            <th rowspan="2" style="width:66px;">3. Comp.<br><span style="color:#A7F3D0;">/${cfg.compMax}</span></th>
+            <th rowspan="2" style="width:82px;background:#3347D6;">TOTAL<br>NOTE /20</th>
+            <th rowspan="2" style="width:38px;">Suppr.</th>
+          </tr>
+          <tr>
+            ${critsProc.map((c, idx) => `
+              <th class="sub-hdr">
+                <div>${c.nom} (${procWeights[idx]}pt)</div>
+                <div style="font-size:0.64rem;color:#CBD5E1;">[${c.sous[0]} | ${c.sous[1]}]</div>
+              </th>
+            `).join('')}
+          </tr>
+        `;
+      }
+
+      // Compute visible indices based on filter & search
+      const visibleIndices = [];
+      classStudents.forEach((st, idx) => {
+        const status = st.status || 'OK';
+        if (currentClassFilter === 'G' && st.sexe !== 'G') return;
+        if (currentClassFilter === 'F' && st.sexe !== 'F') return;
+        if (currentClassFilter === 'INACTIVE' && status === 'OK') return;
+        if (currentClassSearch && !String(st.nom || '').toLowerCase().includes(currentClassSearch)) return;
+        visibleIndices.push(idx);
+      });
+
+      if (visibleIndices.length === 0) {
+        const colSpanCount = cfg.isSpCo ? 18 : 15;
+        tbody.innerHTML = `<tr><td colspan="${colSpanCount}" style="padding:22px;color:#64748B;font-weight:600;">Aucun élève ne correspond au filtre actuel. Cliquez sur « Tous » ou ajoutez un élève.</td></tr>`;
+      } else {
+        tbody.innerHTML = visibleIndices.map(rIdx => {
+          const st = classStudents[rIdx];
+          if (st.perfScore === null || st.perfScore === undefined || st.perfScore > cfg.perfMax) {
+            st.perfScore = Math.max(0, cfg.perfMax - 1.0);
+          }
+          if (st.comp > cfg.compMax) st.comp = cfg.compMax;
+          const status = st.status || 'OK';
+          const isInactive = status !== 'OK';
+          const scores = getStudentScores(st, cfg);
+
+          const statusClass = status === 'ABS' ? 'st-abs' : (status === 'DISP' ? 'st-disp' : 'st-ok');
+          const statusBadge = `<button type="button" class="status-cycle-btn ${statusClass}" onclick="cycleStudentStatus(${rIdx})" title="Cliquer pour basculer : OK → ABS → DISP">${status}</button>`;
+
+          const procCells = critsProc.map((c, cIdx) => {
+            const choice = (st.crits && st.crits[cIdx]) || 0;
+            const pts = choice === 0 ? procWeights[cIdx] : negPts;
+            return `
+              <td>
+                <div class="mini-chk-pair">
+                  <button type="button" class="mini-chk ${choice === 0 ? 'pos-on' : ''}" ${isInactive ? 'disabled' : ''} onclick="setClassStudentCrit(${rIdx}, ${cIdx}, 0)" title="${c.sous[0]} (+${procWeights[cIdx]} pt)">
+                    ${choice === 0 ? '✓ ' : ''}${c.sous[0]}
+                  </button>
+                  <button type="button" class="mini-chk ${choice === 1 ? 'neg-on' : ''}" ${isInactive ? 'disabled' : ''} onclick="setClassStudentCrit(${rIdx}, ${cIdx}, 1)" title="${c.sous[1]} (+${negPts} pt)">
+                    ${choice === 1 ? '✓ ' : ''}${c.sous[1]}
+                  </button>
+                </div>
+              </td>
+            `;
+          }).join('');
+
+          let middleHtml = '';
+          if (cfg.isSpCo) {
+            const indivCells = critsIndiv.map((c, cIdx) => {
+              const choice = (st.critsIndiv && st.critsIndiv[cIdx]) || 0;
+              const pts = choice === 0 ? indWeights[cIdx] : negPts;
+              return `
+                <td>
+                  <div class="mini-chk-pair">
+                    <button type="button" class="mini-chk ${choice === 0 ? 'pos-on' : ''}" ${isInactive ? 'disabled' : ''} onclick="setClassStudentIndivCrit(${rIdx}, ${cIdx}, 0)" title="${c.sous[0]} (+${indWeights[cIdx]} pt)">
+                      ${choice === 0 ? '✓ ' : ''}${c.sous[0]}
+                    </button>
+                    <button type="button" class="mini-chk ${choice === 1 ? 'neg-on' : ''}" ${isInactive ? 'disabled' : ''} onclick="setClassStudentIndivCrit(${rIdx}, ${cIdx}, 1)" title="${c.sous[1]} (+${negPts} pt)">
+                      ${choice === 1 ? '✓ ' : ''}${c.sous[1]}
+                    </button>
+                  </div>
+                </td>
+              `;
+            }).join('');
+
+            middleHtml = `
+              ${indivCells}
+              <td class="tabular-nums" style="font-weight:800;color:#1E40AF;background:#EFF6FF;">${isInactive ? '—' : scores.pIndiv.toFixed(2)}</td>
+              ${procCells}
+              <td class="tabular-nums" style="font-weight:800;color:#065F46;background:#ECFDF5;">${isInactive ? '—' : scores.pProc.toFixed(2)}</td>
+            `;
+          } else {
+            middleHtml = `
+              <td>
+                <div class="unit-input-wrap">
+                  <input type="text" class="row-input-raw" value="${escapeHtml(st.rawPerf || '')}" placeholder="${unitMeta.placeholder}" ${isInactive ? 'disabled' : ''} onchange="onClassRawPerfChange(${rIdx}, this.value)" title="Saisir la performance (${unitMeta.stepHint || unitMeta.placeholder})">
+                  <span class="perf-unit-tag">${unitMeta.unit}</span>
+                </div>
+              </td>
+              <td>
+                <input type="number" class="row-input-num tabular-nums" min="0" max="${cfg.perfMax}" step="0.25" value="${Number(st.perfScore).toFixed(2)}" ${isInactive ? 'disabled' : ''} onchange="updateClassStudentField(${rIdx}, 'perfScore', this.value)">
+              </td>
+              ${procCells}
+              <td class="tabular-nums" style="font-weight:800;color:#2434A8;background:#EEF2FF;">${isInactive ? '—' : scores.pProc.toFixed(2)}</td>
+            `;
+          }
+
+          const totalCellHtml = isInactive
+            ? `<td style="font-weight:800;font-size:0.8rem;color:#9F1239;background:#FFF1F2;">${status}</td>`
+            : `<td class="tabular-nums" style="font-weight:800;font-size:0.88rem;color:#065F46;background:#ECFDF5;">${scores.total.toFixed(2)} / 20</td>`;
+
+          return `
+            <tr class="${isInactive ? 'row-inactive' : ''}">
+              <td class="tabular-nums"><strong>${rIdx + 1}</strong></td>
+              <td style="text-align:left;">
+                <input type="text" class="row-input-name" value="${escapeHtml(st.nom)}" onchange="updateClassStudentField(${rIdx}, 'nom', this.value)">
+              </td>
+              <td>
+                <button type="button" class="mini-chk" style="font-weight:800;" onclick="toggleClassStudentSexe(${rIdx})" title="Basculer Garçon (G) / Fille (F)">${st.sexe}</button>
+              </td>
+              <td>${statusBadge}</td>
+              ${middleHtml}
+              <td>
+                <input type="number" class="row-input-num tabular-nums" min="0" max="${cfg.concepMax}" step="0.25" value="${st.concep}" ${isInactive ? 'disabled' : ''} onchange="updateClassStudentField(${rIdx}, 'concep', this.value)">
+              </td>
+              <td>
+                <input type="number" class="row-input-num tabular-nums" min="0" max="${cfg.compMax}" step="0.25" value="${st.comp}" ${isInactive ? 'disabled' : ''} onchange="updateClassStudentField(${rIdx}, 'comp', this.value)">
+              </td>
+              ${totalCellHtml}
+              <td>
+                <button type="button" class="row-del-btn" onclick="deleteClassRow(${rIdx})" title="Supprimer cette ligne">🗑️</button>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      // Calculer les statistiques de la classe (en excluant ABS & DISP)
+      const activeTotals = [];
+      let absCount = 0;
+      let dispCount = 0;
+      classStudents.forEach(st => {
+        if (st.status === 'ABS') { absCount++; return; }
+        if (st.status === 'DISP') { dispCount++; return; }
+        const sc = getStudentScores(st, cfg);
+        if (sc.total !== null) activeTotals.push(sc.total);
+      });
+
+      const elAvg = document.getElementById('clsStatAvg');
+      const elMinMax = document.getElementById('clsStatMinMax');
+      const elPass = document.getElementById('clsStatPassRate');
+      const elStatus = document.getElementById('clsStatStatusCounts');
+
+      if (activeTotals.length > 0) {
+        const avg = activeTotals.reduce((a, b) => a + b, 0) / activeTotals.length;
+        const minN = Math.min(...activeTotals);
+        const maxN = Math.max(...activeTotals);
+        const passCnt = activeTotals.filter(t => t >= 10).length;
+        const passPct = Math.round((passCnt / activeTotals.length) * 100);
+        if (elAvg) elAvg.textContent = `${avg.toFixed(2)} / 20`;
+        if (elMinMax) elMinMax.textContent = `${minN.toFixed(2)} — ${maxN.toFixed(2)}`;
+        if (elPass) elPass.textContent = `${passPct}% (${passCnt}/${activeTotals.length})`;
+      } else {
+        if (elAvg) elAvg.textContent = '-- / 20';
+        if (elMinMax) elMinMax.textContent = '-- / --';
+        if (elPass) elPass.textContent = '0%';
+      }
+      if (elStatus) elStatus.textContent = `${activeTotals.length} / ${absCount} / ${dispCount}`;
+    }
+
+    // =========================================================================
+    // 9B. IMPORT EXCEL / MASSAR / CSV (DÉTECTION AUTO + MODALE DE MAPPAGE)
+    // =========================================================================
+    let excelImportState = { fileName: '', sheetNames: [], sheets: {} };
+
+    function triggerExcelImport() {
+      const inp = document.getElementById('excelImportInput');
+      if (inp) {
+        inp.value = '';
+        inp.click();
+      }
+    }
+
+    function parseCsvTextToRows(text) {
+      const cleanText = String(text || '').replace(/^\uFEFF/, '');
+      const firstLines = cleanText.split(/\r?\n/).slice(0, 10).join('\n');
+      const countSemi = (firstLines.match(/;/g) || []).length;
+      const countTab = (firstLines.match(/\t/g) || []).length;
+      const countComma = (firstLines.match(/,/g) || []).length;
+      const delim = countTab >= countSemi && countTab >= countComma ? '\t' : (countSemi >= countComma ? ';' : ',');
+
+      const rows = [];
+      let row = [];
+      let cur = '';
+      let inQuotes = false;
+
+      for (let i = 0; i < cleanText.length; i++) {
+        const ch = cleanText[i];
+        const next = cleanText[i + 1];
+        if (inQuotes) {
+          if (ch === '"' && next === '"') { cur += '"'; i++; }
+          else if (ch === '"') { inQuotes = false; }
+          else { cur += ch; }
+        } else {
+          if (ch === '"') { inQuotes = true; }
+          else if (ch === delim) { row.push(cur.trim()); cur = ''; }
+          else if (ch === '\r' && next === '\n') { row.push(cur.trim()); rows.push(row); row = []; cur = ''; i++; }
+          else if (ch === '\n' || ch === '\r') { row.push(cur.trim()); rows.push(row); row = []; cur = ''; }
+          else { cur += ch; }
+        }
+      }
+      if (cur.length > 0 || row.length > 0) {
+        row.push(cur.trim());
+        rows.push(row);
+      }
+      return rows.filter(r => r.some(cell => String(cell).trim() !== ''));
+    }
+
+    function handleExcelFileSelect(event) {
+      const file = event?.target?.files?.[0];
+      if (!file) return;
+      const ext = (file.name.split('.').pop() || '').toLowerCase();
+
+      if (ext === 'csv' || ext === 'tsv' || ext === 'txt') {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const rows = parseCsvTextToRows(e.target.result);
+          if (!rows.length) {
+            showToast('Le fichier CSV semble vide.');
+            return;
+          }
+          openExcelMapModal({ 'Liste CSV': rows }, file.name);
+        };
+        reader.readAsText(file, 'UTF-8');
+        return;
+      }
+
+      if (typeof XLSX === 'undefined') {
+        showToast('Module Excel hors-ligne : importez un fichier .CSV ou rechargez la page.');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const data = new Uint8Array(e.target.result);
+          const wb = XLSX.read(data, { type: 'array' });
+          const sheets = {};
+          wb.SheetNames.forEach(name => {
+            const ws = wb.Sheets[name];
+            const aoa = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+            if (aoa && aoa.length > 0) sheets[name] = aoa;
+          });
+          if (!Object.keys(sheets).length) {
+            showToast('Aucune feuille exploitable détectée dans ce classeur.');
+            return;
+          }
+          openExcelMapModal(sheets, file.name);
+        } catch (err) {
+          showToast('Erreur de lecture du fichier Excel. Vérifiez le format.');
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    function normalizeMatchStr(raw) {
+      return String(raw || '')
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f\u064B-\u065F\u0670]/g, '')
+        .replace(/[أإآ]/g, 'ا')
+        .replace(/ة/g, 'ه')
+        .trim();
+    }
+
+    function detectExcelColumnsOnRow(headerRow) {
+      let colNom = -1;
+      let colPrenom = -1;
+      let colSexe = -1;
+
+      (headerRow || []).forEach((cell, idx) => {
+        const txt = normalizeMatchStr(cell);
+        if (!txt) return;
+
+        if (colSexe === -1 && /(sexe|genre|gender|\bsex\b|جنس|الجنس|النوع)/.test(txt)) {
+          colSexe = idx;
+          return;
+        }
+        if (colPrenom === -1 && /(prenom|first.?name|الاسم الشخصي)/.test(txt) && !/(nom et prenom|nom & prenom|nom complet)/.test(txt)) {
+          colPrenom = idx;
+          return;
+        }
+        if (colNom === -1 && /(nom complet|nom et prenom|nom & prenom|eleve|apprenant|etudiant|full.?name|student|اسم التلميذ|الاسم الكامل|التلميذ|المتعلم|النسب|الاسم|nom de|^\s*nom\s*$)/.test(txt)) {
+          colNom = idx;
+          return;
+        }
+        if (colNom === -1 && /\bnom\b/.test(txt) && !/prenom/.test(txt)) {
+          colNom = idx;
+        }
+      });
+
+      return { colNom, colPrenom, colSexe };
+    }
+
+    function findBestHeaderRowIdx(rows) {
+      let bestIdx = 0;
+      let bestScore = -1;
+      const limit = Math.min(25, rows.length);
+      for (let r = 0; r < limit; r++) {
+        const row = rows[r] || [];
+        const nonEmpty = row.filter(c => String(c || '').trim() !== '').length;
+        if (nonEmpty < 2) continue;
+
+        let score = 0;
+        const det = detectExcelColumnsOnRow(row);
+        if (det.colNom !== -1) score += 5;
+        if (det.colPrenom !== -1) score += 3;
+        if (det.colSexe !== -1) score += 4;
+        row.forEach(c => {
+          const t = normalizeMatchStr(c);
+          if (/(massar|cne|code|رقم|مسار|الرقم|n°|matricule)/.test(t)) score += 2;
+        });
+        if (score > bestScore) {
+          bestScore = score;
+          bestIdx = r;
+        }
+      }
+      return { bestIdx, bestScore };
+    }
+
+    function openExcelMapModal(sheetsMap, fileName) {
+      excelImportState = {
+        fileName: fileName || 'fichier.xlsx',
+        sheetNames: Object.keys(sheetsMap),
+        sheets: sheetsMap
+      };
+
+      const selSheet = document.getElementById('mapColSheet');
+      selSheet.innerHTML = excelImportState.sheetNames.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)} (${sheetsMap[s].length} lignes)</option>`).join('');
+
+      let bestSheet = excelImportState.sheetNames[0];
+      let highestScore = -1;
+      excelImportState.sheetNames.forEach(name => {
+        const info = findBestHeaderRowIdx(sheetsMap[name]);
+        if (info.bestScore > highestScore) {
+          highestScore = info.bestScore;
+          bestSheet = name;
+        }
+      });
+      selSheet.value = bestSheet;
+
+      populateHeaderRowsForSheet(bestSheet);
+      document.getElementById('excelMapModal').classList.add('open');
+    }
+
+    function populateHeaderRowsForSheet(sheetName) {
+      const rows = excelImportState.sheets[sheetName] || [];
+      const { bestIdx } = findBestHeaderRowIdx(rows);
+      const selHeader = document.getElementById('mapColHeaderRow');
+      const maxScan = Math.min(25, rows.length);
+      const opts = [];
+      for (let i = 0; i < maxScan; i++) {
+        const preview = (rows[i] || []).filter(c => String(c || '').trim() !== '').slice(0, 4).join(' | ');
+        opts.push(`<option value="${i}">Ligne ${i + 1}${preview ? ' — ' + escapeHtml(preview.slice(0, 42)) : ''}</option>`);
+      }
+      selHeader.innerHTML = opts.join('');
+      selHeader.value = String(bestIdx);
+      onExcelSheetOrHeaderChange();
+    }
+
+    function onExcelSheetOrHeaderChange() {
+      const sheetName = document.getElementById('mapColSheet').value;
+      const rows = excelImportState.sheets[sheetName] || [];
+      const headerSel = document.getElementById('mapColHeaderRow');
+      if (headerSel.dataset.lastSheet !== sheetName) {
+        headerSel.dataset.lastSheet = sheetName;
+        populateHeaderRowsForSheet(sheetName);
+        return;
+      }
+
+      const hIdx = parseInt(headerSel.value || '0', 10);
+      const headerRow = rows[hIdx] || [];
+      const maxCols = Math.max(headerRow.length, ...(rows.slice(hIdx, hIdx + 6).map(r => r.length)), 1);
+
+      const colLabel = (cIdx) => {
+        const letter = String.fromCharCode(65 + (cIdx % 26));
+        const hdr = String(headerRow[cIdx] || '').trim();
+        return `Col ${letter}${hdr ? ' — ' + hdr.slice(0, 28) : ''}`;
+      };
+
+      const baseOpts = [];
+      for (let c = 0; c < maxCols; c++) {
+        baseOpts.push(`<option value="${c}">${escapeHtml(colLabel(c))}</option>`);
+      }
+
+      const selNom = document.getElementById('mapColNom');
+      const selPrenom = document.getElementById('mapColPrenom');
+      const selSexe = document.getElementById('mapColSexe');
+
+      selNom.innerHTML = baseOpts.join('');
+      selPrenom.innerHTML = `<option value="-1">-- Aucune (Nom complet dans colonne Nom) --</option>` + baseOpts.join('');
+      selSexe.innerHTML = `<option value="-1">-- Aucune (Défaut : Garçon G) --</option>` + baseOpts.join('');
+
+      const detected = detectExcelColumnsOnRow(headerRow);
+      selNom.value = detected.colNom !== -1 ? String(detected.colNom) : '0';
+      selPrenom.value = detected.colPrenom !== -1 ? String(detected.colPrenom) : '-1';
+      selSexe.value = detected.colSexe !== -1 ? String(detected.colSexe) : '-1';
+
+      refreshExcelPreview();
+    }
+
+    function normalizeGenderValue(raw) {
+      const v = normalizeMatchStr(raw);
+      if (!v) return 'G';
+      if (/^(f|fille|filles|feminin|female|girl|w|انثى|انثي|بنت|اناث|مؤنث)/.test(v) || v.includes('انثى') || v.includes('fille') || v.includes('feminin')) {
+        return 'F';
+      }
+      if (/^(g|m|garcon|garcons|masculin|male|boy|ذكر|ولد|ذكور|مذكر)/.test(v) || v.includes('ذكر') || v.includes('garcon')) {
+        return 'G';
+      }
+      return 'G';
+    }
+
+    function extractStudentsFromExcelModal() {
+      const sheetName = document.getElementById('mapColSheet').value;
+      const rows = excelImportState.sheets[sheetName] || [];
+      const hIdx = parseInt(document.getElementById('mapColHeaderRow').value || '0', 10);
+      const colNom = parseInt(document.getElementById('mapColNom').value || '0', 10);
+      const colPrenom = parseInt(document.getElementById('mapColPrenom').value || '-1', 10);
+      const colSexe = parseInt(document.getElementById('mapColSexe').value || '-1', 10);
+
+      const list = [];
+      for (let r = hIdx + 1; r < rows.length; r++) {
+        const row = rows[r] || [];
+        const pNom = String(row[colNom] ?? '').trim();
+        const pPrenom = colPrenom >= 0 ? String(row[colPrenom] ?? '').trim() : '';
+        let fullName = pPrenom && pPrenom.toLowerCase() !== pNom.toLowerCase() ? `${pNom} ${pPrenom}`.trim() : pNom;
+        if (!fullName || fullName.length < 2) continue;
+        if (/^(total|moyenne|somme|effectif|المجموع|المعدل|العدد)$/i.test(fullName)) continue;
+
+        const sexe = colSexe >= 0 ? normalizeGenderValue(row[colSexe]) : 'G';
+        list.push({ nom: fullName, sexe });
+      }
+      return list;
+    }
+
+    function refreshExcelPreview() {
+      const list = extractStudentsFromExcelModal();
+      const mode = document.getElementById('mapImportMode').value;
+      const alertEl = document.getElementById('excelMapAlert');
+      const bodyEl = document.getElementById('excelPreviewBody');
+
+      const existingCount = mode === 'append' ? classStudents.length : 0;
+      const availableSlots = Math.max(0, MAX_CLASS_STUDENTS - existingCount);
+      const willImport = Math.min(list.length, availableSlots);
+
+      let msg = `${list.length} élève(s) détecté(s) dans « ${excelImportState.fileName} ». `;
+      if (list.length > availableSlots) {
+        msg += `Plafond ${MAX_CLASS_STUDENTS} élèves : seuls les ${willImport} premiers seront importés.`;
+      } else {
+        msg += `${willImport} élève(s) prêts à être importés.`;
+      }
+      alertEl.textContent = msg;
+
+      const sample = list.slice(0, 5);
+      if (!sample.length) {
+        bodyEl.innerHTML = `<tr><td colspan="3" style="color:#E11D48;font-weight:700;">Aucun nom détecté avec ces colonnes. Ajustez la ligne d'en-tête ou la colonne Nom.</td></tr>`;
+        return;
+      }
+      bodyEl.innerHTML = sample.map((s, idx) => `
+        <tr>
+          <td>${idx + 1}</td>
+          <td style="font-weight:700;">${escapeHtml(s.nom)}</td>
+          <td><span style="font-weight:800;color:${s.sexe === 'F' ? '#BE185D' : '#1D4ED8'};">${s.sexe} (${s.sexe === 'F' ? 'Fille' : 'Garçon'})</span></td>
+        </tr>
+      `).join('');
+    }
+
+    function confirmExcelImportFromModal() {
+      const extracted = extractStudentsFromExcelModal();
+      if (!extracted.length) {
+        showToast('Aucun élève détecté à importer. Vérifiez le mappage.');
+        return;
+      }
+      const mode = document.getElementById('mapImportMode').value;
+      const cfg = getBaremeConfig(currentNiveau, currentAps);
+
+      const baseList = mode === 'append' ? [...classStudents] : [];
+      const slotsLeft = MAX_CLASS_STUDENTS - baseList.length;
+      const toAdd = extracted.slice(0, Math.max(0, slotsLeft));
+
+      toAdd.forEach(item => {
+        baseList.push(normalizeStudentObj({
+          nom: item.nom,
+          sexe: item.sexe,
+          status: 'OK',
+          rawPerf: '',
+          perfScore: Math.max(0, cfg.perfMax - 1.5),
+          critsIndiv: [0, 0, 0, 0],
+          crits: [0, 0, 0, 0],
+          concep: 2.5,
+          comp: Math.max(0, cfg.compMax - 0.5)
+        }, cfg));
+      });
+
+      classStudents = baseList.slice(0, MAX_CLASS_STUDENTS);
+      saveStateToStorage();
+      closeExcelMapModal();
+      switchCalcMode('classe');
+      showToast(`✅ ${toAdd.length} élève(s) importé(s) (${classStudents.length}/${MAX_CLASS_STUDENTS}).`);
+    }
+
+    function closeExcelMapModal() {
+      const modal = document.getElementById('excelMapModal');
+      if (modal) modal.classList.remove('open');
+      const inp = document.getElementById('excelImportInput');
+      if (inp) inp.value = '';
+    }
+
+    // =========================================================================
+    // 9C. EXPORTS EXCEL (.XLSX), MASSAR (.XLSX) ET WORD (.DOC)
+    // =========================================================================
+    function downloadCsvFallback(filename, aoaRows) {
+      const csvLines = aoaRows.map(r => r.map(cell => {
+        const s = String(cell ?? '');
+        return /[;"\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+      }).join(';'));
+      const blob = new Blob(['\ufeff', csvLines.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function exportClassGridExcel(kind) {
+      const cfg = getBaremeConfig(currentNiveau, currentAps);
+      const nivLabel = currentNiveau === '1AB' ? '1Bac' : (currentNiveau === '2AB' ? '2Bac' : currentNiveau);
+      const unitMeta = PERF_UNIT_META[currentAps] || { unit: 'pts' };
+      const critsIndiv = cfg.isSpCo ? getCritsForAps(currentAps, 'indiv') : [];
+      const critsProc = cfg.isSpCo ? getCritsForAps(currentAps, 'collectif') : getCritsForAps(currentAps, 'processus');
+      const indWeights = cfg.critWeightsIndiv || [1.5, 1.5, 1.5, 1.5];
+      const procWeights = cfg.critWeights || [1.5, 1.5, 1.5, 1.5];
+      const negPts = currentCritMode === 'nuance' ? 0.5 : 0;
+
+      let aoaMain = [];
+      if (kind === 'massar') {
+        aoaMain.push(['N°', 'Nom & Prénom', 'Sexe', 'Statut', `Procédural (/${cfg.procTotal})`, `Conceptuel (/${cfg.concepMax})`, `Comportemental (/${cfg.compMax})`, 'Note Finale /20']);
+        classStudents.forEach((st, idx) => {
+          const isInactive = (st.status || 'OK') !== 'OK';
+          const sc = getStudentScores(st, cfg);
+          aoaMain.push([
+            idx + 1,
+            st.nom,
+            st.sexe,
+            st.status || 'OK',
+            isInactive ? st.status : Number((sc.pIndiv + sc.pProc).toFixed(2)),
+            isInactive ? st.status : Number(sc.cVal.toFixed(2)),
+            isInactive ? st.status : Number(sc.bVal.toFixed(2)),
+            isInactive ? st.status : Number(sc.total.toFixed(2))
+          ]);
+        });
+      } else if (cfg.isSpCo) {
+        const hdr = [
+          'N°', 'Nom & Prénom', 'Sexe', 'Statut',
+          ...critsIndiv.map((c, i) => `Indiv - ${c.nom} (/${indWeights[i]})`),
+          `Note Indiv (/${cfg.perfMax})`,
+          ...critsProc.map((c, i) => `Coll - ${c.nom} (/${procWeights[i]})`),
+          `Note Collectif (/${cfg.procMax})`,
+          `2. Conceptuel (/${cfg.concepMax})`,
+          `3. Comportemental (/${cfg.compMax})`,
+          'TOTAL /20'
+        ];
+        aoaMain.push([`GRILLE EPS (${currentAps.toUpperCase()} - ${nivLabel}) — DOUBLE GRILLE INDIVIDUEL + COLLECTIF`]);
+        aoaMain.push(hdr);
+        classStudents.forEach((st, idx) => {
+          const isInactive = (st.status || 'OK') !== 'OK';
+          const sc = getStudentScores(st, cfg);
+          const indCols = critsIndiv.map((c, i) => {
+            if (isInactive) return st.status;
+            const ch = (st.critsIndiv && st.critsIndiv[i]) || 0;
+            return `${c.sous[ch]} (${ch === 0 ? indWeights[i] : negPts})`;
+          });
+          const procCols = critsProc.map((c, i) => {
+            if (isInactive) return st.status;
+            const ch = (st.crits && st.crits[i]) || 0;
+            return `${c.sous[ch]} (${ch === 0 ? procWeights[i] : negPts})`;
+          });
+          aoaMain.push([
+            idx + 1, st.nom, st.sexe, st.status || 'OK',
+            ...indCols, isInactive ? st.status : Number(sc.pIndiv.toFixed(2)),
+            ...procCols, isInactive ? st.status : Number(sc.pProc.toFixed(2)),
+            isInactive ? st.status : Number(sc.cVal.toFixed(2)),
+            isInactive ? st.status : Number(sc.bVal.toFixed(2)),
+            isInactive ? st.status : Number(sc.total.toFixed(2))
+          ]);
+        });
+      } else {
+        const hdr = [
+          'N°', 'Nom & Prénom', 'Sexe', 'Statut',
+          `Perf. Brute (${unitMeta.unit})`,
+          `1A. Note Perf (/${cfg.perfMax})`,
+          ...critsProc.map((c, i) => `${c.nom} (/${procWeights[i]})`),
+          `1B. Processus (/${cfg.procMax})`,
+          `2. Conceptuel (/${cfg.concepMax})`,
+          `3. Comportemental (/${cfg.compMax})`,
+          'TOTAL /20'
+        ];
+        aoaMain.push([`GRILLE EPS (${currentAps.toUpperCase()} - ${nivLabel}) — PERFORMANCE & PROCESSUS`]);
+        aoaMain.push(hdr);
+        classStudents.forEach((st, idx) => {
+          const isInactive = (st.status || 'OK') !== 'OK';
+          const sc = getStudentScores(st, cfg);
+          const procCols = critsProc.map((c, i) => {
+            if (isInactive) return st.status;
+            const ch = (st.crits && st.crits[i]) || 0;
+            return `${c.sous[ch]} (${ch === 0 ? procWeights[i] : negPts})`;
+          });
+          aoaMain.push([
+            idx + 1, st.nom, st.sexe, st.status || 'OK',
+            isInactive ? st.status : (st.rawPerf ? `${st.rawPerf} ${unitMeta.unit}` : ''),
+            isInactive ? st.status : Number(sc.pIndiv.toFixed(2)),
+            ...procCols,
+            isInactive ? st.status : Number(sc.pProc.toFixed(2)),
+            isInactive ? st.status : Number(sc.cVal.toFixed(2)),
+            isInactive ? st.status : Number(sc.bVal.toFixed(2)),
+            isInactive ? st.status : Number(sc.total.toFixed(2))
+          ]);
+        });
+      }
+
+      const safeAps = currentAps.replace(/\s+/g, '_');
+      if (typeof XLSX === 'undefined') {
+        const csvName = kind === 'massar' ? `Export_Massar_EPS_${safeAps}_${nivLabel}.csv` : `Grille_Classe_EPS_${safeAps}_${nivLabel}.csv`;
+        downloadCsvFallback(csvName, aoaMain);
+        showToast('Export CSV généré (module XLSX indisponible hors-ligne).');
+        return;
+      }
+
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.aoa_to_sheet(aoaMain);
+      XLSX.utils.book_append_sheet(wb, ws, kind === 'massar' ? 'Import_Massar' : 'Grille_EPS');
+      const outName = kind === 'massar' ? `Export_Massar_EPS_${safeAps}_${nivLabel}.xlsx` : `Grille_Classe_EPS_${safeAps}_${nivLabel}.xlsx`;
+      XLSX.writeFile(wb, outName);
+      showToast(`Fichier ${outName} téléchargé.`);
+    }
+
     function exportClassGridWord() {
       const cfg = getBaremeConfig(currentNiveau, currentAps);
-      const crits = CRITERES_OBS[currentAps] || CRITERES_OBS['Course de durée'];
-      const weights = cfg.critWeights;
-      const negPts = currentCritMode === 'nuance' ? 0.5 : 0;
       const nivLabel = currentNiveau === '1AB' ? '1Bac' : (currentNiveau === '2AB' ? '2Bac' : currentNiveau);
+      const unitMeta = PERF_UNIT_META[currentAps] || { unit: 'pts' };
+      const critsIndiv = cfg.isSpCo ? getCritsForAps(currentAps, 'indiv') : [];
+      const critsProc = cfg.isSpCo ? getCritsForAps(currentAps, 'collectif') : getCritsForAps(currentAps, 'processus');
+      const indWeights = cfg.critWeightsIndiv || [1.5, 1.5, 1.5, 1.5];
+      const procWeights = cfg.critWeights || [1.5, 1.5, 1.5, 1.5];
+      const negPts = currentCritMode === 'nuance' ? 0.5 : 0;
 
-      let rowsHtml = classStudents.map((st, idx) => {
-        let procSum = 0;
-        const critTds = crits.map((c, cIdx) => {
-          const ch = st.crits[cIdx] || 0;
-          const pts = ch === 0 ? weights[cIdx] : negPts;
-          procSum += pts;
-          return `<td style="border:1px solid #333;padding:4px;text-align:center;font-size:9pt;">[X] ${c.sous[ch]} (${pts}pt)</td>`;
-        }).join('');
-        const tot = Math.min(20, (parseFloat(st.perfScore) || 0) + procSum + (parseFloat(st.concep) || 0) + (parseFloat(st.comp) || 0));
+      let theadHtml = '';
+      if (cfg.isSpCo) {
+        theadHtml = `
+          <tr style="background:#1E293B;color:#FFFFFF;">
+            <th style="border:1px solid #333;padding:5px;">N°</th>
+            <th style="border:1px solid #333;padding:5px;">Nom &amp; Prénom</th>
+            <th style="border:1px solid #333;padding:5px;">Sexe</th>
+            <th style="border:1px solid #333;padding:5px;">Statut</th>
+            ${critsIndiv.map((c, i) => `<th style="border:1px solid #333;padding:5px;background:#1E3A8A;">Indiv: ${c.nom} (/${indWeights[i]})</th>`).join('')}
+            <th style="border:1px solid #333;padding:5px;background:#1E3A8A;">Note Indiv (/${cfg.perfMax})</th>
+            ${critsProc.map((c, i) => `<th style="border:1px solid #333;padding:5px;background:#0F5132;">Coll: ${c.nom} (/${procWeights[i]})</th>`).join('')}
+            <th style="border:1px solid #333;padding:5px;background:#0F5132;">Note Coll (/${cfg.procMax})</th>
+            <th style="border:1px solid #333;padding:5px;">2. Concep (/${cfg.concepMax})</th>
+            <th style="border:1px solid #333;padding:5px;">3. Comport (/${cfg.compMax})</th>
+            <th style="border:1px solid #333;padding:5px;">TOTAL /20</th>
+          </tr>
+        `;
+      } else {
+        theadHtml = `
+          <tr style="background:#1E293B;color:#FFFFFF;">
+            <th style="border:1px solid #333;padding:5px;">N°</th>
+            <th style="border:1px solid #333;padding:5px;">Nom &amp; Prénom</th>
+            <th style="border:1px solid #333;padding:5px;">Sexe</th>
+            <th style="border:1px solid #333;padding:5px;">Statut</th>
+            <th style="border:1px solid #333;padding:5px;">Perf. Brute (${unitMeta.unit})</th>
+            <th style="border:1px solid #333;padding:5px;">1A. Perf (/${cfg.perfMax})</th>
+            ${critsProc.map((c, i) => `<th style="border:1px solid #333;padding:5px;">${c.nom} (/${procWeights[i]})</th>`).join('')}
+            <th style="border:1px solid #333;padding:5px;">1B. Processus (/${cfg.procMax})</th>
+            <th style="border:1px solid #333;padding:5px;">2. Concep. (/${cfg.concepMax})</th>
+            <th style="border:1px solid #333;padding:5px;">3. Comport. (/${cfg.compMax})</th>
+            <th style="border:1px solid #333;padding:5px;">TOTAL /20</th>
+          </tr>
+        `;
+      }
+
+      const rowsHtml = classStudents.map((st, idx) => {
+        const isInactive = (st.status || 'OK') !== 'OK';
+        const sc = getStudentScores(st, cfg);
+
+        let middleTds = '';
+        if (cfg.isSpCo) {
+          const indTds = critsIndiv.map((c, i) => {
+            if (isInactive) return `<td style="border:1px solid #333;padding:4px;text-align:center;">—</td>`;
+            const ch = (st.critsIndiv && st.critsIndiv[i]) || 0;
+            const pts = ch === 0 ? indWeights[i] : negPts;
+            return `<td style="border:1px solid #333;padding:4px;text-align:center;font-size:8.5pt;">[X] ${c.sous[ch]} (${pts})</td>`;
+          }).join('');
+          const procTds = critsProc.map((c, i) => {
+            if (isInactive) return `<td style="border:1px solid #333;padding:4px;text-align:center;">—</td>`;
+            const ch = (st.crits && st.crits[i]) || 0;
+            const pts = ch === 0 ? procWeights[i] : negPts;
+            return `<td style="border:1px solid #333;padding:4px;text-align:center;font-size:8.5pt;">[X] ${c.sous[ch]} (${pts})</td>`;
+          }).join('');
+          middleTds = `
+            ${indTds}
+            <td style="border:1px solid #333;padding:4px;text-align:center;font-weight:bold;">${isInactive ? st.status : sc.pIndiv.toFixed(2)}</td>
+            ${procTds}
+            <td style="border:1px solid #333;padding:4px;text-align:center;font-weight:bold;">${isInactive ? st.status : sc.pProc.toFixed(2)}</td>
+          `;
+        } else {
+          const procTds = critsProc.map((c, i) => {
+            if (isInactive) return `<td style="border:1px solid #333;padding:4px;text-align:center;">—</td>`;
+            const ch = (st.crits && st.crits[i]) || 0;
+            const pts = ch === 0 ? procWeights[i] : negPts;
+            return `<td style="border:1px solid #333;padding:4px;text-align:center;font-size:8.5pt;">[X] ${c.sous[ch]} (${pts})</td>`;
+          }).join('');
+          middleTds = `
+            <td style="border:1px solid #333;padding:4px;text-align:center;">${isInactive ? '—' : (st.rawPerf ? escapeHtml(st.rawPerf) + ' ' + unitMeta.unit : '—')}</td>
+            <td style="border:1px solid #333;padding:4px;text-align:center;">${isInactive ? '—' : sc.pIndiv.toFixed(2)}</td>
+            ${procTds}
+            <td style="border:1px solid #333;padding:4px;text-align:center;font-weight:bold;">${isInactive ? '—' : sc.pProc.toFixed(2)}</td>
+          `;
+        }
+
         return `
           <tr>
             <td style="border:1px solid #333;padding:4px;text-align:center;">${idx + 1}</td>
-            <td style="border:1px solid #333;padding:4px;">${st.nom}</td>
+            <td style="border:1px solid #333;padding:4px;">${escapeHtml(st.nom)}</td>
             <td style="border:1px solid #333;padding:4px;text-align:center;">${st.sexe}</td>
-            <td style="border:1px solid #333;padding:4px;text-align:center;">${Number(st.perfScore).toFixed(2)}</td>
-            ${critTds}
-            <td style="border:1px solid #333;padding:4px;text-align:center;font-weight:bold;">${procSum.toFixed(2)}</td>
-            <td style="border:1px solid #333;padding:4px;text-align:center;">${Number(st.concep).toFixed(2)}</td>
-            <td style="border:1px solid #333;padding:4px;text-align:center;">${Number(st.comp).toFixed(2)}</td>
-            <td style="border:1px solid #333;padding:4px;text-align:center;font-weight:bold;background:#EEF2FF;">${tot.toFixed(2)} / 20</td>
+            <td style="border:1px solid #333;padding:4px;text-align:center;">${st.status || 'OK'}</td>
+            ${middleTds}
+            <td style="border:1px solid #333;padding:4px;text-align:center;">${isInactive ? '—' : sc.cVal.toFixed(2)}</td>
+            <td style="border:1px solid #333;padding:4px;text-align:center;">${isInactive ? '—' : sc.bVal.toFixed(2)}</td>
+            <td style="border:1px solid #333;padding:4px;text-align:center;font-weight:bold;background:${isInactive ? '#FFF1F2' : '#EEF2FF'};">${isInactive ? st.status : sc.total.toFixed(2) + ' / 20'}</td>
           </tr>
         `;
       }).join('');
 
       const wordDoc = `
         <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
-        <head><meta charset="utf-8"><title>Grille Evaluation EPS ${currentAps} ${nivLabel}</title></head>
+        <head><meta charset="utf-8"><title>Grille Evaluation EPS ${escapeHtml(currentAps)} ${nivLabel}</title></head>
         <body style="font-family:Arial,sans-serif;font-size:10pt;">
-          <h2 style="text-align:center;color:#1E293B;margin-bottom:4px;">GRILLE D'ÉVALUATION SOMMATIVE EPS (/20) — ${currentAps.toUpperCase()} (${nivLabel})</h2>
+          <h2 style="text-align:center;color:#1E293B;margin-bottom:4px;">GRILLE D'ÉVALUATION SOMMATIVE EPS (/20) — ${escapeHtml(currentAps.toUpperCase())} (${nivLabel})</h2>
           <p style="text-align:center;font-size:9pt;margin-top:0;">Conforme aux Orientations Pédagogiques Maroc · Procédural /${cfg.procTotal} (${cfg.labelPerf} /${cfg.perfMax} + ${cfg.labelProc} /${cfg.procMax}) · Conceptuel /${cfg.concepMax} · Comportemental /${cfg.compMax}</p>
           <table style="width:100%;border-collapse:collapse;">
-            <thead>
-              <tr style="background:#1E293B;color:#FFFFFF;">
-                <th style="border:1px solid #333;padding:5px;">N°</th>
-                <th style="border:1px solid #333;padding:5px;">Nom &amp; Prénom</th>
-                <th style="border:1px solid #333;padding:5px;">Sexe</th>
-                <th style="border:1px solid #333;padding:5px;">1A. Perf (/${cfg.perfMax})</th>
-                ${crits.map((c, i) => `<th style="border:1px solid #333;padding:5px;">${c.nom} (/${weights[i]})</th>`).join('')}
-                <th style="border:1px solid #333;padding:5px;">1B. Processus (/${cfg.procMax})</th>
-                <th style="border:1px solid #333;padding:5px;">2. Concep. (/${cfg.concepMax})</th>
-                <th style="border:1px solid #333;padding:5px;">3. Comport. (/${cfg.compMax})</th>
-                <th style="border:1px solid #333;padding:5px;">TOTAL /20</th>
-              </tr>
-            </thead>
+            <thead>${theadHtml}</thead>
             <tbody>${rowsHtml}</tbody>
           </table>
         </body></html>
@@ -3037,10 +4924,12 @@
     }
 
     // =========================================================================
-    // 10. INITIALISATION & LECTURE DES PARAMÈTRES D'URL (?aps=...&niveau=...&vma=...)
+    // 10. INITIALISATION (LOCALSTORAGE + PARAMÈTRES URL)
     // =========================================================================
     (function initFromUrlParams() {
       try {
+        const savedMode = loadStateFromStorage();
+
         const params = new URLSearchParams(window.location.search);
         const pNiveau = params.get('niveau');
         const pAps = params.get('aps');
@@ -3100,9 +4989,17 @@
           document.getElementById('inpVmaDirect').value = pVma;
           convertVmaToDureeTime();
         }
-        if (pMode === 'classe') {
+        const targetMode = (pMode === 'classe' || pMode === 'indiv') ? pMode : (savedMode || 'indiv');
+        if (targetMode === 'classe') {
           switchCalcMode('classe');
         }
+
+        document.addEventListener('keydown', function(ev) {
+          if (ev.key === 'Escape') closeExcelMapModal();
+        });
+        document.getElementById('excelMapModal')?.addEventListener('click', function(ev) {
+          if (ev.target === this) closeExcelMapModal();
+        });
       } catch (e) {
         onConfigChange();
       }
