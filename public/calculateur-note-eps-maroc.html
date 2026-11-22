@@ -771,9 +771,9 @@
     .class-toolbar {
       display: flex;
       flex-direction: column;
-      gap: 0.85rem;
-      margin-bottom: 1rem;
-      padding: 1.05rem 1.25rem;
+      gap: 0.75rem;
+      margin-bottom: 0.9rem;
+      padding: 1rem 1.2rem;
       background: var(--surface);
       border: 1px solid var(--stone);
       border-radius: 14px;
@@ -790,8 +790,8 @@
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 0.75rem;
-      padding-top: 0.75rem;
+      gap: 0.65rem;
+      padding-top: 0.65rem;
       border-top: 1px solid #E2E8F0;
     }
     .class-btn-group {
@@ -801,8 +801,8 @@
       align-items: center;
     }
     .c-btn {
-      padding: 0.52rem 0.9rem;
-      border-radius: 10px;
+      padding: 0.5rem 0.9rem;
+      border-radius: 9px;
       border: 1px solid #CBD5E1;
       background: #FFFFFF;
       font-size: 0.8rem;
@@ -818,61 +818,52 @@
     .c-btn:hover { background: #F1F5F9; border-color: #94A3B8; }
     .c-btn:disabled { opacity: 0.45; cursor: not-allowed; }
     .c-btn.primary {
-      background: #3347D6;
+      background: #1E293B;
       color: #FFFFFF;
-      border-color: #3347D6;
+      border-color: #1E293B;
     }
-    .c-btn.primary:hover { background: #2434A8; }
-    .c-btn.excel {
-      background: #0F766E;
-      color: #FFFFFF;
-      border-color: #0F766E;
+    .c-btn.primary:hover { background: #0F172A; }
+    .c-btn.subtle {
+      background: transparent;
+      color: var(--ink-muted);
+      border-color: #E2E8F0;
     }
-    .c-btn.excel:hover { background: #115E59; }
-    .c-btn.word {
-      background: #1D4ED8;
-      color: #FFFFFF;
-      border-color: #1D4ED8;
+    .c-btn.subtle:hover { background: #F8FAFC; color: var(--ink); border-color: #CBD5E1; }
+    .c-btn.confirm-danger {
+      background: #FEF2F2;
+      color: #991B1B;
+      border-color: #FECACA;
     }
-    .c-btn.word:hover { background: #1E40AF; }
-    .c-btn.pdf {
-      background: #059669;
-      color: #FFFFFF;
-      border-color: #059669;
-    }
-    .c-btn.pdf:hover { background: #047857; }
-    .c-btn.danger-outline {
-      border-color: #FECDD3;
-      color: #BE123C;
-      background: #FFF1F2;
-    }
-    .c-btn.danger-outline:hover { background: #FFE4E6; }
 
-    .class-filter-group {
+    .class-name-pill {
       display: inline-flex;
       align-items: center;
-      gap: 0.25rem;
-      padding: 0.22rem;
+      gap: 0.35rem;
       background: #F1F5F9;
-      border-radius: 10px;
-      flex-wrap: wrap;
+      border: 1px solid #CBD5E1;
+      border-radius: 8px;
+      padding: 0.2rem 0.55rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--ink);
     }
-    .filter-tab-btn {
+    .class-name-inline-input {
       border: none;
       background: transparent;
-      padding: 0.36rem 0.72rem;
-      border-radius: 8px;
-      font-size: 0.76rem;
-      font-weight: 700;
-      color: var(--ink-soft);
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.15s;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--ink);
+      width: 115px;
+      outline: none;
     }
-    .filter-tab-btn.active {
+    .class-filter-select {
+      padding: 0.42rem 0.65rem;
+      border: 1px solid #CBD5E1;
+      border-radius: 9px;
+      font-size: 0.8rem;
+      font-weight: 600;
       background: #FFFFFF;
-      color: var(--primary-dark);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      color: var(--ink);
     }
     .class-search-input {
       padding: 0.42rem 0.75rem;
@@ -886,15 +877,40 @@
     }
     .save-status-note {
       font-size: 0.74rem;
-      font-weight: 700;
-      color: #059669;
+      font-weight: 600;
+      color: var(--ink-muted);
       white-space: nowrap;
+    }
+
+    /* Section Exports bien distincte sous le tableau */
+    .class-export-card {
+      margin-top: 1rem;
+      padding: 1.05rem 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--stone);
+      border-radius: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .class-export-info h3 {
+      margin: 0;
+      font-size: 0.94rem;
+      font-weight: 800;
+      color: var(--ink);
+    }
+    .class-export-info p {
+      margin: 0.18rem 0 0;
+      font-size: 0.78rem;
+      color: var(--ink-muted);
     }
 
     .class-table-container {
       overflow-x: auto;
       background: #FFFFFF;
-      border: 1.5px solid #94A3B8;
+      border: 1px solid #CBD5E1;
       border-radius: 12px;
       box-shadow: var(--shadow-sm);
     }
@@ -906,7 +922,7 @@
     }
     table.sheet-35-table th {
       background: #1E293B;
-      color: #FFFFFF;
+      color: #F8FAFC;
       padding: 0.48rem 0.38rem;
       border: 1px solid #334155;
       text-align: center;
@@ -915,33 +931,23 @@
       vertical-align: middle;
     }
     table.sheet-35-table th.mega-hdr-indiv {
-      background: #1E3A8A;
-      color: #FFFFFF;
-      border-color: #3B82F6;
+      background: #1E293B;
+      color: #F8FAFC;
+      border-bottom: 2px solid #93C5FD;
     }
     table.sheet-35-table th.mega-hdr-coll {
-      background: #065F46;
-      color: #FFFFFF;
-      border-color: #10B981;
+      background: #1E293B;
+      color: #F8FAFC;
+      border-bottom: 2px solid #94A3B8;
     }
     table.sheet-35-table th.sub-hdr {
       background: #334155;
       font-size: 0.69rem;
       color: #E2E8F0;
     }
-    table.sheet-35-table th.sub-hdr-indiv {
-      background: #1E40AF;
-      font-size: 0.69rem;
-      color: #DBEAFE;
-    }
-    table.sheet-35-table th.sub-hdr-coll {
-      background: #047857;
-      font-size: 0.69rem;
-      color: #D1FAE5;
-    }
     table.sheet-35-table td {
       padding: 0.34rem 0.36rem;
-      border: 1px solid #CBD5E1;
+      border: 1px solid #E2E8F0;
       text-align: center;
       vertical-align: middle;
       font-variant-numeric: tabular-nums;
@@ -950,8 +956,8 @@
       background: #F8FAFC;
     }
     table.sheet-35-table tr.row-inactive {
-      opacity: 0.68;
-      background: #FEF2F2;
+      opacity: 0.62;
+      background: #F1F5F9;
     }
     .sticky-col-num {
       position: sticky;
@@ -990,20 +996,20 @@
     .unit-input-wrap {
       display: inline-flex;
       align-items: center;
-      border: 1.5px solid #CBD5E1;
-      border-radius: 8px;
+      border: 1px solid #CBD5E1;
+      border-radius: 7px;
       background: #FFFFFF;
       overflow: hidden;
     }
     .unit-input-wrap:focus-within {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 2px rgba(51, 71, 214, 0.14);
+      border-color: #475569;
+      box-shadow: 0 0 0 2px rgba(71, 85, 105, 0.14);
     }
     .unit-input-wrap input {
-      width: 66px;
+      width: 64px;
       border: none;
       outline: none;
-      padding: 0.26rem 0.35rem;
+      padding: 0.25rem 0.32rem;
       font-size: 0.8rem;
       font-weight: 700;
       text-align: center;
@@ -1012,12 +1018,12 @@
       font-variant-numeric: tabular-nums;
     }
     .perf-unit-tag {
-      padding: 0.26rem 0.42rem;
-      background: #EEF2FF;
-      color: #2434A8;
+      padding: 0.25rem 0.42rem;
+      background: #F1F5F9;
+      color: #334155;
       font-size: 0.69rem;
-      font-weight: 800;
-      border-left: 1px solid #CBD5E1;
+      font-weight: 700;
+      border-left: 1px solid #E2E8F0;
       white-space: nowrap;
       user-select: none;
     }
@@ -1038,10 +1044,10 @@
     }
     .indiv-unit-suffix {
       padding: 0.65rem 0.9rem;
-      background: #EEF2FF;
-      color: var(--primary-dark);
+      background: #F1F5F9;
+      color: #1E293B;
       font-size: 0.82rem;
-      font-weight: 800;
+      font-weight: 700;
       border-left: 1px solid #CBD5E1;
       white-space: nowrap;
     }
@@ -1049,9 +1055,10 @@
     .mini-chk-pair {
       display: inline-flex;
       gap: 2px;
-      background: #E2E8F0;
+      background: #F1F5F9;
       padding: 2px;
       border-radius: 6px;
+      border: 1px solid #E2E8F0;
     }
     .mini-chk {
       border: none;
@@ -1059,42 +1066,46 @@
       padding: 2px 5px;
       border-radius: 4px;
       font-size: 0.68rem;
-      font-weight: 700;
-      color: #475569;
+      font-weight: 600;
+      color: #64748B;
       cursor: pointer;
       white-space: nowrap;
     }
     .mini-chk.pos-on {
-      background: #059669;
+      background: #1E293B;
       color: #FFFFFF;
+      font-weight: 700;
     }
     .mini-chk.neg-on {
-      background: #E11D48;
-      color: #FFFFFF;
+      background: #E2E8F0;
+      color: #1E293B;
+      font-weight: 700;
     }
     .status-cycle-btn {
       padding: 3px 7px;
       border-radius: 6px;
       border: 1px solid #CBD5E1;
       font-size: 0.69rem;
-      font-weight: 800;
+      font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
+      background: #FFFFFF;
+      color: #334155;
     }
     .status-cycle-btn.st-ok {
-      background: #ECFDF5;
-      color: #065F46;
-      border-color: #A7F3D0;
+      background: #F8FAFC;
+      color: #334155;
+      border-color: #CBD5E1;
     }
     .status-cycle-btn.st-abs {
-      background: #FEF3C7;
-      color: #92400E;
-      border-color: #FCD34D;
+      background: #FEF9C3;
+      color: #854D0E;
+      border-color: #FDE047;
     }
     .status-cycle-btn.st-disp {
-      background: #FFE4E6;
-      color: #9F1239;
-      border-color: #FDA4AF;
+      background: #F1F5F9;
+      color: #64748B;
+      border-color: #94A3B8;
     }
     .row-del-btn {
       border: 1px solid #E2E8F0;
@@ -1103,20 +1114,20 @@
       border-radius: 6px;
       padding: 3px 6px;
       font-size: 0.72rem;
-      font-weight: 800;
+      font-weight: 700;
       cursor: pointer;
     }
     .row-del-btn:hover {
-      background: #FFF1F2;
-      color: #E11D48;
-      border-color: #FDA4AF;
+      background: #F1F5F9;
+      color: #0F172A;
+      border-color: #94A3B8;
     }
 
-    /* ═══ EXCEL IMPORT MAPPING MODAL ═══ */
+    /* ═══ EXCEL IMPORT MODAL SIMPLIFIÉ ═══ */
     .excel-modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(15, 23, 42, 0.65);
+      background: rgba(15, 23, 42, 0.55);
       z-index: 9990;
       display: none;
       align-items: center;
@@ -1128,15 +1139,15 @@
     }
     .excel-modal-dialog {
       width: 100%;
-      max-width: 720px;
+      max-width: 660px;
       max-height: 90vh;
       overflow-y: auto;
       background: #FFFFFF;
       color: var(--ink);
       border: 1px solid #CBD5E1;
-      border-radius: 18px;
-      padding: 1.4rem 1.5rem;
-      box-shadow: 0 24px 50px rgba(15, 23, 42, 0.35);
+      border-radius: 16px;
+      padding: 1.35rem 1.45rem;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.25);
     }
     .excel-map-grid {
       display: grid;
@@ -1150,17 +1161,30 @@
     .excel-preview-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.78rem;
-      margin-top: 0.6rem;
+      font-size: 0.79rem;
+      margin-top: 0.5rem;
     }
     .excel-preview-table th, .excel-preview-table td {
-      border: 1px solid #CBD5E1;
-      padding: 0.4rem 0.55rem;
+      border: 1px solid #E2E8F0;
+      padding: 0.42rem 0.6rem;
       text-align: left;
     }
     .excel-preview-table th {
-      background: #F1F5F9;
-      font-weight: 800;
+      background: #F8FAFC;
+      font-weight: 700;
+      color: #334155;
+    }
+    .excel-advanced-details {
+      margin-top: 0.75rem;
+      border-top: 1px solid #E2E8F0;
+      padding-top: 0.6rem;
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+    }
+    .excel-advanced-details summary {
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
     }
 
     /* ═══ DYNAMIC APS GUIDE & CRITERIA EXPLAINER ═══ */
@@ -1254,7 +1278,7 @@
     }
     .guide-crit-tip {
       font-size: 0.77rem;
-      color: var(--secondary);
+      color: var(--ink-muted);
       font-weight: 600;
       line-height: 1.45;
     }
@@ -1308,30 +1332,36 @@
     html[data-theme="dark"] .cfg-select,
     html[data-theme="dark"] .cfg-input,
     html[data-theme="dark"] .class-search-input,
+    html[data-theme="dark"] .class-filter-select,
+    html[data-theme="dark"] .class-name-pill,
     html[data-theme="dark"] .row-input-num,
     html[data-theme="dark"] .unit-input-wrap,
     html[data-theme="dark"] .indiv-unit-box,
-    html[data-theme="dark"] .c-btn:not(.primary):not(.excel):not(.word):not(.pdf):not(.danger-outline),
+    html[data-theme="dark"] .c-btn:not(.primary):not(.confirm-danger),
     html[data-theme="dark"] .excel-modal-dialog {
       background: #0F172A;
       color: #E8ECFA;
       border-color: #334155;
     }
+    html[data-theme="dark"] .c-btn.primary {
+      background: #3347D6;
+      border-color: #3347D6;
+      color: #FFFFFF;
+    }
     html[data-theme="dark"] .b-pill.proc {
       background: #1E293B;
       border-color: #3B82F6;
     }
-    html[data-theme="dark"] .sexe-toggle,
-    html[data-theme="dark"] .class-filter-group {
+    html[data-theme="dark"] .sexe-toggle {
       background: #0F172A;
     }
-    html[data-theme="dark"] .sexe-btn.active,
-    html[data-theme="dark"] .filter-tab-btn.active {
+    html[data-theme="dark"] .sexe-btn.active {
       background: #1E293B;
       color: #93A8FF;
     }
     html[data-theme="dark"] .processus-table-wrap,
-    html[data-theme="dark"] .class-table-container {
+    html[data-theme="dark"] .class-table-container,
+    html[data-theme="dark"] .class-export-card {
       background: #131E3A;
       border-color: #334155;
     }
@@ -1360,34 +1390,43 @@
       color: #E8ECFA;
     }
     html[data-theme="dark"] .crit-choice-btn.checked-pos {
-      background: rgba(5, 150, 105, 0.22);
-      border-color: #10B981;
-      color: #6EE7B7;
+      background: rgba(51, 71, 214, 0.25);
+      border-color: #6366F1;
+      color: #E0E7FF;
     }
     html[data-theme="dark"] .crit-choice-btn.checked-neg {
-      background: rgba(225, 29, 72, 0.22);
-      border-color: #F43F5E;
-      color: #FDA4AF;
+      background: rgba(148, 163, 184, 0.14);
+      border-color: #475569;
+      color: #CBD5E1;
     }
     html[data-theme="dark"] .perf-unit-tag,
     html[data-theme="dark"] .indiv-unit-suffix {
       background: #1E293B;
-      color: #93A8FF;
+      color: #E2E8F0;
       border-left-color: #334155;
     }
     html[data-theme="dark"] .mini-chk-pair {
       background: #1E293B;
+      border-color: #334155;
     }
     html[data-theme="dark"] .mini-chk:not(.pos-on):not(.neg-on) {
       background: #0F172A;
       color: #CBD5E1;
     }
+    html[data-theme="dark"] .mini-chk.pos-on {
+      background: #3347D6;
+      color: #FFFFFF;
+    }
+    html[data-theme="dark"] .mini-chk.neg-on {
+      background: #334155;
+      color: #E2E8F0;
+    }
 
     @media print {
       @page { size: A4 landscape; margin: 10mm; }
       .peps-navbar, .note-hero, .mode-switcher, .config-card, .class-toolbar,
-      .footer, .seo-guide-card, .dynamic-guide-card, .excel-modal-backdrop,
-      .peps-toast, .no-print-col {
+      .class-export-card, .footer, .seo-guide-card, .dynamic-guide-card,
+      .excel-modal-backdrop, .peps-toast, .no-print-col {
         display: none !important;
       }
       .class-grid-section { display: block !important; }
@@ -2146,62 +2185,59 @@
     </div>
 
     <!-- ═══════════════════════════════════════════════════════════════════════
-         MODE 2 : GRILLE DE CLASSE INTERACTIVE (JUSQU'À 50 ÉLÈVES + MASSAR + EXPORT)
+         MODE 2 : GRILLE DE CLASSE INTERACTIVE (JUSQU'À 50 ÉLÈVES + EXPORT)
          ═══════════════════════════════════════════════════════════════════════ -->
     <section class="class-grid-section" id="classeModeSection" aria-label="Grille d'évaluation de classe jusqu'à 50 élèves">
       <div class="class-toolbar">
         <div class="class-toolbar-top">
           <div>
-            <h2 style="font-size:1.05rem;font-weight:800;color:var(--ink);margin:0;">Grille d'Évaluation Interactive (Max 50 élèves) — <span id="classTitleApsNiveau">Course de durée (2Bac)</span></h2>
-            <p id="classSubtitleHint" style="font-size:0.8rem;color:var(--ink-soft);margin:0.15rem 0 0;">Importez votre fichier Excel Massar, saisissez les performances avec leur unité ou cochez les critères Individuel + Collectif.</p>
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.55rem;">
+              <h2 style="font-size:1.04rem;font-weight:800;color:var(--ink);margin:0;">Grille d'Évaluation — <span id="classTitleApsNiveau">Course de durée (2Bac)</span></h2>
+              <label class="class-name-pill" title="Nom de la classe (repris dans vos exports)">
+                <span>Classe :</span>
+                <input type="text" id="classNameInput" class="class-name-inline-input" value="Classe 1" placeholder="Ex: TCLSHF-1" onchange="onClassNameChange(this.value)">
+              </label>
+            </div>
+            <p id="classSubtitleHint" style="font-size:0.79rem;color:var(--ink-muted);margin:0.2rem 0 0;">Importez votre liste Excel Massar ou ajoutez vos élèves manuellement (max 50).</p>
           </div>
           <div class="class-btn-group">
             <input type="file" id="excelImportInput" accept=".xlsx,.xls,.csv,.txt" style="display:none;" onchange="handleExcelFileSelect(event)">
             <button type="button" class="c-btn primary" onclick="triggerExcelImport()">📥 Importer Excel (Massar)</button>
-            <button type="button" class="c-btn" id="btnAddRowClass" onclick="addBlankClassRow()">➕ +1 élève</button>
-            <button type="button" class="c-btn" id="btnFill50Rows" onclick="fill50ClassRows()">👥 Remplir 50 lignes</button>
-            <button type="button" class="c-btn excel" onclick="exportClassGridExcel('classe')">📊 Excel (.xlsx)</button>
-            <button type="button" class="c-btn excel" onclick="exportClassGridExcel('massar')">📑 Export Massar</button>
-            <button type="button" class="c-btn word" onclick="exportClassGridWord()">📥 Word (.doc)</button>
-            <button type="button" class="c-btn pdf" onclick="window.print()">🖨️ PDF A4</button>
-            <button type="button" class="c-btn danger-outline" id="btnResetClassData" onclick="confirmResetClassData()">🗑️ Réinitialiser</button>
+            <button type="button" class="c-btn" id="btnAddRowClass" onclick="addBlankClassRow()">+ Ajouter un élève</button>
+            <button type="button" class="c-btn subtle" id="btnResetClassData" onclick="confirmResetClassData()">Réinitialiser</button>
           </div>
         </div>
 
         <div class="class-toolbar-sub">
           <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.55rem;">
-            <input type="search" id="classSearchInput" class="class-search-input" placeholder="🔍 Filtrer par nom d'élève..." oninput="onClassFilterChange()">
-            <div class="class-filter-group" role="group" aria-label="Filtrer la liste de classe">
-              <button type="button" class="filter-tab-btn active" data-filter="ALL" onclick="setClassFilter('ALL', this)">Tous</button>
-              <button type="button" class="filter-tab-btn" data-filter="G" onclick="setClassFilter('G', this)">Garçons</button>
-              <button type="button" class="filter-tab-btn" data-filter="F" onclick="setClassFilter('F', this)">Filles</button>
-              <button type="button" class="filter-tab-btn" data-filter="INACTIVE" onclick="setClassFilter('INACTIVE', this)">ABS / DISP</button>
-            </div>
+            <input type="search" id="classSearchInput" class="class-search-input" placeholder="🔍 Rechercher un élève..." oninput="onClassFilterChange()">
+            <select id="classFilterSelect" class="class-filter-select" aria-label="Filtrer par genre ou statut" onchange="setClassFilter(this.value)">
+              <option value="ALL" selected>Tous les élèves</option>
+              <option value="G">Garçons (G)</option>
+              <option value="F">Filles (F)</option>
+              <option value="INACTIVE">Absents / Dispensés</option>
+            </select>
           </div>
-          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.45rem;">
-            <button type="button" class="c-btn" onclick="bulkFillConceptComp()" title="Appliquer 2,5 Conceptuel et note comportementale par défaut aux présents">⚡ Remplir Concep/Comport</button>
-            <button type="button" class="c-btn" onclick="bulkResetCriteriaPresent()" title="Tout cocher Maîtrisé sur les critères de la vue actuelle">✓ Tout cocher (Actifs)</button>
-            <span class="save-status-note" id="saveStatusNote">✓ Sauvegarde auto locale</span>
-          </div>
+          <span class="save-status-note" id="saveStatusNote">Sauvegarde auto active</span>
         </div>
       </div>
 
       <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-bottom:0.85rem;" id="classSummaryStatsBar">
         <div style="flex:1 1 170px;background:var(--surface);border:1px solid var(--stone);border-radius:10px;padding:0.6rem 0.9rem;">
           <div style="font-size:0.72rem;font-weight:700;color:var(--ink-muted);text-transform:uppercase;">Moyenne (Hors ABS/DISP)</div>
-          <div style="font-size:1.25rem;font-weight:900;color:var(--primary-dark);font-variant-numeric:tabular-nums;" id="clsStatAvg">16.25 / 20</div>
+          <div style="font-size:1.2rem;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;" id="clsStatAvg">16.25 / 20</div>
         </div>
         <div style="flex:1 1 170px;background:var(--surface);border:1px solid var(--stone);border-radius:10px;padding:0.6rem 0.9rem;">
           <div style="font-size:0.72rem;font-weight:700;color:var(--ink-muted);text-transform:uppercase;">Note Min / Note Max</div>
-          <div style="font-size:1.25rem;font-weight:900;color:#059669;font-variant-numeric:tabular-nums;" id="clsStatMinMax">13.00 — 19.75</div>
+          <div style="font-size:1.2rem;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;" id="clsStatMinMax">13.00 — 19.75</div>
         </div>
         <div style="flex:1 1 170px;background:var(--surface);border:1px solid var(--stone);border-radius:10px;padding:0.6rem 0.9rem;">
           <div style="font-size:0.72rem;font-weight:700;color:var(--ink-muted);text-transform:uppercase;">Taux de Réussite (≥ 10/20)</div>
-          <div style="font-size:1.25rem;font-weight:900;color:#D97706;font-variant-numeric:tabular-nums;" id="clsStatPassRate">100% (5/5)</div>
+          <div style="font-size:1.2rem;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;" id="clsStatPassRate">100% (5/5)</div>
         </div>
         <div style="flex:1 1 170px;background:var(--surface);border:1px solid var(--stone);border-radius:10px;padding:0.6rem 0.9rem;">
-          <div style="font-size:0.72rem;font-weight:700;color:var(--ink-muted);text-transform:uppercase;">Effectif &amp; Statuts</div>
-          <div style="font-size:1rem;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;" id="clsStatStatusCounts">5/50 · 0 ABS · 0 DISP</div>
+          <div style="font-size:0.72rem;font-weight:700;color:var(--ink-muted);text-transform:uppercase;">Présents / ABS / DISP</div>
+          <div style="font-size:1.05rem;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;" id="clsStatStatusCounts">5 / 0 / 0</div>
         </div>
       </div>
 
@@ -2210,6 +2246,20 @@
           <thead id="classSheetThead"></thead>
           <tbody id="classSheetTbody"></tbody>
         </table>
+      </div>
+
+      <!-- SECTION EXPORTS & IMPRESSION BIEN DISTINGUÉE SOUS LE TABLEAU -->
+      <div class="class-export-card" id="classExportSection" aria-label="Exporter la grille de notes">
+        <div class="class-export-info">
+          <h3>Exporter &amp; Imprimer la Grille de Notes</h3>
+          <p>Téléchargez la feuille complète ou le tableau prêt pour Massar (inclut le nom de la classe, ABS/DISP et la note /20).</p>
+        </div>
+        <div class="class-btn-group">
+          <button type="button" class="c-btn" onclick="exportClassGridExcel('classe')">📊 Excel (.xlsx)</button>
+          <button type="button" class="c-btn" onclick="exportClassGridExcel('massar')">📑 Export Massar (.xlsx)</button>
+          <button type="button" class="c-btn" onclick="exportClassGridWord()">📝 Word (.doc)</button>
+          <button type="button" class="c-btn primary" onclick="window.print()">🖨️ Imprimer / PDF A4</button>
+        </div>
       </div>
     </section>
 
@@ -2442,63 +2492,66 @@
     </div>
   </footer>
 
-  <!-- ═══ MODALE DE MAPPAGE EXCEL / MASSAR ═══ -->
+  <!-- ═══ MODALE SIMPLIFIÉE IMPORT EXCEL / MASSAR ═══ -->
   <div class="excel-modal-backdrop" id="excelMapModal" role="dialog" aria-modal="true" aria-labelledby="excelModalTitle">
     <div class="excel-modal-dialog">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:0.75rem;margin-bottom:0.65rem;">
         <div>
-          <h3 id="excelModalTitle" style="margin:0;font-size:1.08rem;font-weight:800;">Importer une Liste d'Élèves (Excel / Massar / CSV)</h3>
-          <p id="excelModalSubtitle" style="margin:0.2rem 0 0;font-size:0.8rem;color:var(--ink-soft);">Vérifiez ou associez manuellement les colonnes Nom, Prénom et Sexe (plafond 50 élèves).</p>
+          <h3 id="excelModalTitle" style="margin:0;font-size:1.05rem;font-weight:800;">Importer une Classe (Excel / Massar / CSV)</h3>
+          <p id="excelModalSubtitle" style="margin:0.18rem 0 0;font-size:0.79rem;color:var(--ink-muted);">Vérifiez le nom de la classe, les noms des élèves et le genre (max 50 élèves).</p>
         </div>
-        <button type="button" class="c-btn" onclick="closeExcelMapModal()">✕ Fermer</button>
+        <button type="button" class="c-btn subtle" onclick="closeExcelMapModal()">✕ Fermer</button>
       </div>
 
       <div class="excel-map-grid">
         <div class="cfg-group">
-          <label for="mapColSheet">Feuille &amp; Ligne d'en-tête</label>
-          <select id="mapColSheet" class="cfg-select" onchange="onExcelSheetOrHeaderChange()"></select>
+          <label for="mapClassName">Nom de la classe</label>
+          <input type="text" id="mapClassName" class="cfg-input" placeholder="Ex: TCLSHF-1" oninput="refreshExcelPreview()">
         </div>
         <div class="cfg-group">
-          <label for="mapColHeaderRow">Ligne contenant les titres</label>
-          <select id="mapColHeaderRow" class="cfg-select" onchange="onExcelSheetOrHeaderChange()"></select>
-        </div>
-        <div class="cfg-group">
-          <label for="mapImportMode">Mode d'importation</label>
-          <select id="mapImportMode" class="cfg-select" onchange="refreshExcelPreview()">
-            <option value="replace" selected>Remplacer la liste actuelle (max 50)</option>
-            <option value="append">Ajouter à la suite (jusqu'à 50)</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="excel-map-grid">
-        <div class="cfg-group">
-          <label for="mapColNom">Colonne Nom / Nom complet *</label>
+          <label for="mapColNom">Colonne Noms des élèves *</label>
           <select id="mapColNom" class="cfg-select" onchange="refreshExcelPreview()"></select>
         </div>
         <div class="cfg-group">
-          <label for="mapColPrenom">Colonne Prénom (optionnel)</label>
-          <select id="mapColPrenom" class="cfg-select" onchange="refreshExcelPreview()"></select>
-        </div>
-        <div class="cfg-group">
-          <label for="mapColSexe">Colonne Sexe / Genre (G / F)</label>
+          <label for="mapColSexe">Colonne Genre (G / F)</label>
           <select id="mapColSexe" class="cfg-select" onchange="refreshExcelPreview()"></select>
         </div>
       </div>
 
-      <div id="excelMapAlert" style="font-size:0.8rem;font-weight:700;padding:0.55rem 0.8rem;border-radius:10px;background:#EEF2FF;color:#2434A8;margin-bottom:0.65rem;"></div>
+      <div id="excelMapAlert" style="font-size:0.79rem;font-weight:700;padding:0.5rem 0.75rem;border-radius:9px;background:#F8FAFC;border:1px solid #CBD5E1;color:var(--ink);margin-bottom:0.6rem;"></div>
 
-      <div style="font-size:0.78rem;font-weight:800;color:var(--ink-soft);">Aperçu des 5 premiers élèves détectés :</div>
+      <div style="font-size:0.77rem;font-weight:700;color:var(--ink-muted);">Aperçu des 5 premiers élèves extraits :</div>
       <div style="overflow-x:auto;">
         <table class="excel-preview-table">
-          <thead><tr><th>N°</th><th>Nom &amp; Prénom extrait</th><th>Sexe normalisé</th></tr></thead>
+          <thead><tr><th style="width:42px;">N°</th><th>Nom &amp; Prénom</th><th style="width:120px;">Genre (G / F)</th></tr></thead>
           <tbody id="excelPreviewBody"></tbody>
         </table>
       </div>
 
-      <div style="display:flex;justify-content:flex-end;gap:0.6rem;margin-top:1rem;">
+      <details class="excel-advanced-details">
+        <summary>Ajustement manuel (Feuille / Ligne des titres / Fusion)</summary>
+        <div class="excel-map-grid" style="margin-top:0.6rem;margin-bottom:0.2rem;">
+          <div class="cfg-group">
+            <label for="mapColSheet">Feuille</label>
+            <select id="mapColSheet" class="cfg-select" onchange="onExcelSheetOrHeaderChange()"></select>
+          </div>
+          <div class="cfg-group">
+            <label for="mapColHeaderRow">Ligne des titres</label>
+            <select id="mapColHeaderRow" class="cfg-select" onchange="onExcelSheetOrHeaderChange()"></select>
+          </div>
+          <div class="cfg-group">
+            <label for="mapImportMode">Action</label>
+            <select id="mapImportMode" class="cfg-select" onchange="refreshExcelPreview()">
+              <option value="replace" selected>Remplacer la liste</option>
+              <option value="append">Ajouter à la suite</option>
+            </select>
+          </div>
+        </div>
+      </details>
+
+      <div style="display:flex;justify-content:flex-end;gap:0.55rem;margin-top:1rem;">
         <button type="button" class="c-btn" onclick="closeExcelMapModal()">Annuler</button>
-        <button type="button" class="c-btn primary" onclick="confirmExcelImportFromModal()">✅ Valider et Importer dans la Grille</button>
+        <button type="button" class="c-btn primary" onclick="confirmExcelImportFromModal()">Importer dans la Grille</button>
       </div>
     </div>
   </div>
@@ -2789,6 +2842,7 @@
     let currentAps = 'Course de durée';
     let currentSexe = 'G';
     let currentCritMode = 'strict';
+    let currentClassName = 'Classe 1';
     let currentClassFilter = 'ALL';
     let currentClassSearch = '';
     let resetConfirmPending = false;
@@ -2889,9 +2943,9 @@
       return CRITERES_OBS[aps] || CRITERES_OBS['Course de durée'];
     }
 
-    // Conversion d'une performance brute (ex: "7.90", "3'15\"", "3:15", "10.6", "6") vers la note /6 ou /7 selon le sexe et le niveau
+    // Conversion d'une performance brute (ex: "7.90", "3'15\"", "3:15", "10.6", "6") vers { score, formatted }
     function parseRawPerfToScore(aps, rawStr, sexe, niveau, cfg) {
-      const cleaned = String(rawStr || '').trim().replace(',', '.');
+      const cleaned = String(rawStr || '').trim().replace(',', '.').replace(/\s*(m|s|sec|elem\.?|élém\.?)\s*$/i, '');
       if (!cleaned) return null;
 
       if (aps === 'Gymnastique') {
@@ -2899,7 +2953,10 @@
         const elems = parseFloat(cleaned);
         if (isNaN(elems)) return null;
         const ratio = Math.max(0, Math.min(1, elems / gc.totalElements));
-        return Math.round((ratio * cfg.perfMax) * 4) / 4;
+        return {
+          score: Math.round((ratio * cfg.perfMax) * 4) / 4,
+          formatted: String(Math.round(elems * 2) / 2)
+        };
       }
 
       const sc = PERF_SCALES[aps];
@@ -2909,7 +2966,7 @@
       let val = null;
 
       if (aps === 'Course de durée') {
-        // Accepte 3'15", 3:15, 3m15, 3.15 (si 2 décimales < 60), ou secondes directes >= 60
+        // Accepte 3'15", 3:15, 3m15, 3.15 (si 2 décimales < 60), ou secondes directes >= 20
         const mSecMatch = cleaned.match(/^(\d+)\s*[':mM]\s*(\d{1,2})"?$/);
         if (mSecMatch) {
           val = parseInt(mSecMatch[1], 10) * 60 + Math.min(59, parseInt(mSecMatch[2], 10));
@@ -2939,7 +2996,11 @@
         ratio = (minVal - val) / (minVal - bestVal);
       }
       ratio = Math.max(0, Math.min(1, ratio));
-      return Math.round((1 + ratio * (cfg.perfMax - 1)) * 4) / 4;
+      const score = Math.round((1 + ratio * (cfg.perfMax - 1)) * 4) / 4;
+      const formatted = aps === 'Course de durée'
+        ? formatSecToMinSec(val)
+        : (sc.unit === 'metres' ? val.toFixed(2) : val.toFixed(1));
+      return { score, formatted };
     }
 
     // =========================================================================
@@ -3018,7 +3079,7 @@
       if (!cfg.isSpCo) {
         classStudents.forEach(st => {
           const parsed = parseRawPerfToScore(currentAps, st.rawPerf, st.sexe, currentNiveau, cfg);
-          if (parsed !== null) st.perfScore = parsed;
+          if (parsed && parsed.score !== null) st.perfScore = parsed.score;
         });
       }
 
@@ -3757,6 +3818,13 @@
       return { pIndiv, pProc, cVal, bVal, total };
     }
 
+    function onClassNameChange(val) {
+      currentClassName = String(val || '').trim() || 'Classe 1';
+      const inp = document.getElementById('classNameInput');
+      if (inp && inp.value !== currentClassName) inp.value = currentClassName;
+      saveStateToStorage();
+    }
+
     function saveStateToStorage() {
       try {
         const payload = {
@@ -3766,6 +3834,7 @@
           sexe: currentSexe,
           critMode: currentCritMode,
           mode: currentMode,
+          className: currentClassName,
           indivCritIndivChoices,
           indivCritChoices,
           concepVal: document.getElementById('inpConceptuel')?.value || 2.5,
@@ -3778,7 +3847,7 @@
           const now = new Date();
           const hh = String(now.getHours()).padStart(2, '0');
           const mm = String(now.getMinutes()).padStart(2, '0');
-          saveEl.textContent = `💾 Brouillon sauvegardé (${hh}:${mm})`;
+          saveEl.textContent = `Sauvegardé (${hh}:${mm})`;
         }
       } catch (e) { /* Ignore storage quota errors */ }
     }
@@ -3803,10 +3872,17 @@
           document.getElementById('btnSexeG')?.classList.toggle('active', currentSexe === 'G');
           document.getElementById('btnSexeF')?.classList.toggle('active', currentSexe === 'F');
         }
-        if (data.critMode === 'binaire' || data.critMode === 'nuance') {
+        if (data.critMode === 'strict' || data.critMode === 'nuance') {
           currentCritMode = data.critMode;
-          document.getElementById('btnCritBinaire')?.classList.toggle('active', currentCritMode === 'binaire');
-          document.getElementById('btnCritNuance')?.classList.toggle('active', currentCritMode === 'nuance');
+          if (document.getElementById('selCritMode')) {
+            document.getElementById('selCritMode').value = currentCritMode;
+          }
+        }
+        if (data.className) {
+          currentClassName = String(data.className).trim() || 'Classe 1';
+          if (document.getElementById('classNameInput')) {
+            document.getElementById('classNameInput').value = currentClassName;
+          }
         }
         if (Array.isArray(data.indivCritIndivChoices) && data.indivCritIndivChoices.length === 4) {
           indivCritIndivChoices = data.indivCritIndivChoices.map(v => (v === 1 ? 1 : 0));
@@ -3834,19 +3910,32 @@
       const btn = document.getElementById('btnResetClassData');
       if (!resetConfirmPending) {
         resetConfirmPending = true;
-        if (btn) btn.textContent = '⚠️ Confirmer réinitialisation';
+        if (btn) {
+          btn.textContent = '⚠️ Confirmer';
+          btn.classList.add('confirm-danger');
+        }
         clearTimeout(resetConfirmTimer);
         resetConfirmTimer = setTimeout(() => {
           resetConfirmPending = false;
-          if (btn) btn.textContent = '🗑️ Réinitialiser';
+          if (btn) {
+            btn.textContent = 'Réinitialiser';
+            btn.classList.remove('confirm-danger');
+          }
         }, 4000);
         return;
       }
       clearTimeout(resetConfirmTimer);
       resetConfirmPending = false;
-      if (btn) btn.textContent = '🗑️ Réinitialiser';
+      if (btn) {
+        btn.textContent = 'Réinitialiser';
+        btn.classList.remove('confirm-danger');
+      }
 
       const cfg = getBaremeConfig(currentNiveau, currentAps);
+      currentClassName = 'Classe 1';
+      if (document.getElementById('classNameInput')) {
+        document.getElementById('classNameInput').value = currentClassName;
+      }
       classStudents = [
         normalizeStudentObj({ nom: 'Amine El Idrissi', sexe: 'G', status: 'OK', rawPerf: '', perfScore: cfg.perfMax - 0.5, critsIndiv: [0,0,0,0], crits: [0,0,0,0], concep: 2.5, comp: cfg.compMax - 0.5 }, cfg),
         normalizeStudentObj({ nom: 'Salma Bennani', sexe: 'F', status: 'OK', rawPerf: '', perfScore: cfg.perfMax - 1.0, critsIndiv: [0,0,0,1], crits: [0,0,0,1], concep: 2.5, comp: cfg.compMax }, cfg),
@@ -3858,7 +3947,8 @@
       currentClassSearch = '';
       const searchEl = document.getElementById('classSearchInput');
       if (searchEl) searchEl.value = '';
-      document.querySelectorAll('.filter-chip').forEach((el, idx) => el.classList.toggle('active', idx === 0));
+      const filterEl = document.getElementById('classFilterSelect');
+      if (filterEl) filterEl.value = 'ALL';
       saveStateToStorage();
       renderClassGridTable();
       showToast('Liste réinitialisée aux 5 élèves de démonstration.');
@@ -3887,7 +3977,7 @@
         } else if (document.getElementById('inpAthleVal')) {
           rawPerfStr = document.getElementById('inpAthleVal').value;
         } else if (cfg.isGym) {
-          rawPerfStr = String(document.getElementById('selGymContrat')?.value || '');
+          rawPerfStr = String(document.getElementById('inpGymElements')?.value || '');
         }
       }
 
@@ -3930,30 +4020,6 @@
       renderClassGridTable();
     }
 
-    function fill50ClassRows() {
-      if (classStudents.length >= MAX_CLASS_STUDENTS) {
-        showToast(`La grille contient déjà ${MAX_CLASS_STUDENTS} élèves.`);
-        return;
-      }
-      const cfg = getBaremeConfig(currentNiveau, currentAps);
-      while (classStudents.length < MAX_CLASS_STUDENTS) {
-        classStudents.push(normalizeStudentObj({
-          nom: `Élève ${classStudents.length + 1}`,
-          sexe: classStudents.length % 2 === 0 ? 'G' : 'F',
-          status: 'OK',
-          rawPerf: '',
-          perfScore: Math.max(0, cfg.perfMax - 1.5),
-          critsIndiv: [0, 0, 0, 0],
-          crits: [0, 0, 0, 0],
-          concep: 2.5,
-          comp: Math.max(0, cfg.compMax - 0.5)
-        }, cfg));
-      }
-      saveStateToStorage();
-      renderClassGridTable();
-      showToast(`Grille complétée à ${MAX_CLASS_STUDENTS}/${MAX_CLASS_STUDENTS} élèves.`);
-    }
-
     function deleteClassRow(rIdx) {
       if (!classStudents[rIdx]) return;
       const removed = classStudents.splice(rIdx, 1)[0];
@@ -3972,47 +4038,16 @@
       renderClassGridTable();
     }
 
-    function setClassFilter(mode, btn) {
+    function setClassFilter(mode) {
       currentClassFilter = mode || 'ALL';
-      document.querySelectorAll('.filter-chip').forEach(el => el.classList.remove('active'));
-      if (btn) btn.classList.add('active');
+      const sel = document.getElementById('classFilterSelect');
+      if (sel && sel.value !== currentClassFilter) sel.value = currentClassFilter;
       renderClassGridTable();
     }
 
     function onClassFilterChange() {
       currentClassSearch = (document.getElementById('classSearchInput')?.value || '').trim().toLowerCase();
       renderClassGridTable();
-    }
-
-    function bulkFillConceptComp() {
-      const cfg = getBaremeConfig(currentNiveau, currentAps);
-      const cVal = Math.max(0, Math.min(cfg.concepMax, parseFloat(document.getElementById('inpConceptuel')?.value || 2.5)));
-      const bVal = Math.max(0, Math.min(cfg.compMax, parseFloat(document.getElementById('inpComportemental')?.value || cfg.compMax)));
-      let count = 0;
-      classStudents.forEach(st => {
-        if ((st.status || 'OK') === 'OK') {
-          st.concep = cVal;
-          st.comp = bVal;
-          count++;
-        }
-      });
-      saveStateToStorage();
-      renderClassGridTable();
-      showToast(`Conceptuel (${cVal.toFixed(1)}) & Comportemental (${bVal.toFixed(1)}) appliqués à ${count} présents.`);
-    }
-
-    function bulkResetCriteriaPresent() {
-      let count = 0;
-      classStudents.forEach(st => {
-        if ((st.status || 'OK') === 'OK') {
-          st.critsIndiv = [0, 0, 0, 0];
-          st.crits = [0, 0, 0, 0];
-          count++;
-        }
-      });
-      saveStateToStorage();
-      renderClassGridTable();
-      showToast(`Critères cochés "Maîtrisés" pour ${count} présents.`);
     }
 
     function onClassRawPerfChange(rIdx, rawVal) {
@@ -4088,21 +4123,22 @@
       const nivLabel = currentNiveau === '1AB' ? '1Bac' : (currentNiveau === '2AB' ? '2Bac' : currentNiveau);
       const unitMeta = PERF_UNIT_META[currentAps] || { unit: 'pts', placeholder: '0.00', example: '' };
 
-      // Update buttons & badges
-      document.getElementById('classCountBadge').textContent = `${classStudents.length} / ${MAX_CLASS_STUDENTS} élèves`;
+      // Update badges, class name input & buttons
+      const countBadge = document.getElementById('classCountBadge');
+      if (countBadge) countBadge.textContent = `${classStudents.length} / ${MAX_CLASS_STUDENTS} élèves`;
+      const clsInp = document.getElementById('classNameInput');
+      if (clsInp && document.activeElement !== clsInp) clsInp.value = currentClassName || 'Classe 1';
       const btnAdd = document.getElementById('btnAddRowClass');
-      const btnFill50 = document.getElementById('btnFill50Rows');
       if (btnAdd) btnAdd.disabled = classStudents.length >= MAX_CLASS_STUDENTS;
-      if (btnFill50) btnFill50.disabled = classStudents.length >= MAX_CLASS_STUDENTS;
 
       const titleEl = document.getElementById('classTitleApsNiveau');
       const subEl = document.getElementById('classSubtitleHint');
       if (cfg.isSpCo) {
-        if (titleEl) titleEl.textContent = `${currentAps} (${nivLabel}) — Double Grille Individuel /${cfg.perfMax} + Collectif /${cfg.procMax} (Total /${cfg.procTotal})`;
-        if (subEl) subEl.textContent = `2 Méga-Colonnes à cases à cocher : 1A. Capacité Individuelle (4 critères) & 1B. Capacité Collective (4 critères) + Conceptuel /${cfg.concepMax} + Comportemental /${cfg.compMax}`;
+        if (titleEl) titleEl.textContent = `${currentAps} (${nivLabel})`;
+        if (subEl) subEl.textContent = `Double grille (Individuel /${cfg.perfMax} + Collectif /${cfg.procMax}) · Conceptuel /${cfg.concepMax} · Comportemental /${cfg.compMax} · ${classStudents.length}/${MAX_CLASS_STUDENTS} élèves`;
       } else {
-        if (titleEl) titleEl.textContent = `${currentAps} (${nivLabel}) — Perf Brute (${unitMeta.unit}) + Processus /${cfg.procMax} (Total /${cfg.procTotal})`;
-        if (subEl) subEl.textContent = `Saisissez la performance avec son unité (${unitMeta.unit}, ${unitMeta.stepHint || unitMeta.placeholder}) : la note /${cfg.perfMax} s'adapte automatiquement au sexe (G/F) et au barème ${nivLabel}.`;
+        if (titleEl) titleEl.textContent = `${currentAps} (${nivLabel})`;
+        if (subEl) subEl.textContent = `Perf. en ${unitMeta.unit} (${unitMeta.stepHint || unitMeta.placeholder}) · Conversion auto selon G/F et niveau · ${classStudents.length}/${MAX_CLASS_STUDENTS} élèves`;
       }
 
       const critsIndiv = cfg.isSpCo ? getCritsForAps(currentAps, 'indiv') : [];
@@ -4121,28 +4157,28 @@
             <th rowspan="2" style="min-width:155px;">Nom &amp; Prénom</th>
             <th rowspan="2" style="width:46px;">Sexe</th>
             <th rowspan="2" style="width:54px;">Statut</th>
-            <th colspan="5" class="mega-hdr-indiv">1A. CAPACITÉ INDIVIDUELLE (4 Critères · /${cfg.perfMax} pts)</th>
-            <th colspan="5" class="mega-hdr-coll">1B. CAPACITÉ COLLECTIVE (4 Critères · /${cfg.procMax} pts)</th>
-            <th rowspan="2" style="width:66px;">2. Conc.<br><span style="color:#A7F3D0;">/${cfg.concepMax}</span></th>
-            <th rowspan="2" style="width:66px;">3. Comp.<br><span style="color:#A7F3D0;">/${cfg.compMax}</span></th>
-            <th rowspan="2" style="width:82px;background:#3347D6;">TOTAL<br>NOTE /20</th>
+            <th colspan="5" class="mega-hdr-indiv">1A. Capacité Individuelle (/${cfg.perfMax} pts)</th>
+            <th colspan="5" class="mega-hdr-coll">1B. Capacité Collective (/${cfg.procMax} pts)</th>
+            <th rowspan="2" style="width:66px;">2. Conc.<br><span style="color:#CBD5E1;">/${cfg.concepMax}</span></th>
+            <th rowspan="2" style="width:66px;">3. Comp.<br><span style="color:#CBD5E1;">/${cfg.compMax}</span></th>
+            <th rowspan="2" style="width:82px;background:#0F172A;">TOTAL<br>NOTE /20</th>
             <th rowspan="2" style="width:38px;">Suppr.</th>
           </tr>
           <tr>
             ${critsIndiv.map((c, idx) => `
               <th class="sub-hdr">
                 <div>${c.nom} (${indWeights[idx]}pt)</div>
-                <div style="font-size:0.63rem;color:#CBD5E1;">[${c.sous[0]} | ${c.sous[1]}]</div>
+                <div style="font-size:0.63rem;color:#94A3B8;">[${c.sous[0]} | ${c.sous[1]}]</div>
               </th>
             `).join('')}
-            <th class="sub-hdr" style="width:62px;background:#1E3A8A;">Note<br>Indiv /${cfg.perfMax}</th>
+            <th class="sub-hdr" style="width:62px;background:#334155;">Note<br>Indiv /${cfg.perfMax}</th>
             ${critsProc.map((c, idx) => `
               <th class="sub-hdr">
                 <div>${c.nom} (${procWeights[idx]}pt)</div>
-                <div style="font-size:0.63rem;color:#CBD5E1;">[${c.sous[0]} | ${c.sous[1]}]</div>
+                <div style="font-size:0.63rem;color:#94A3B8;">[${c.sous[0]} | ${c.sous[1]}]</div>
               </th>
             `).join('')}
-            <th class="sub-hdr" style="width:62px;background:#0F5132;">Note<br>Coll /${cfg.procMax}</th>
+            <th class="sub-hdr" style="width:62px;background:#334155;">Note<br>Coll /${cfg.procMax}</th>
           </tr>
         `;
       } else {
@@ -4152,20 +4188,20 @@
             <th rowspan="2" style="min-width:155px;">Nom &amp; Prénom</th>
             <th rowspan="2" style="width:46px;">Sexe</th>
             <th rowspan="2" style="width:54px;">Statut</th>
-            <th rowspan="2" style="min-width:105px;">Perf. Brute<br><span style="color:#93C5FD;">(Unité : ${unitMeta.unit})</span></th>
-            <th rowspan="2" style="width:74px;">1A. Note Perf<br><span style="color:#FCD34D;">/${cfg.perfMax} pts</span></th>
-            <th colspan="4">1B. Grille ${cfg.labelProc} — 4 Critères à Cases à Cocher (<span style="color:#93C5FD;">/${cfg.procMax} pts</span>)</th>
-            <th rowspan="2" style="width:68px;">Note<br>Proc.<br><span style="color:#93C5FD;">/${cfg.procMax}</span></th>
-            <th rowspan="2" style="width:66px;">2. Conc.<br><span style="color:#A7F3D0;">/${cfg.concepMax}</span></th>
-            <th rowspan="2" style="width:66px;">3. Comp.<br><span style="color:#A7F3D0;">/${cfg.compMax}</span></th>
-            <th rowspan="2" style="width:82px;background:#3347D6;">TOTAL<br>NOTE /20</th>
+            <th rowspan="2" style="min-width:105px;">Perf. Brute<br><span style="color:#CBD5E1;">(Unité : ${unitMeta.unit})</span></th>
+            <th rowspan="2" style="width:74px;">1A. Note Perf<br><span style="color:#CBD5E1;">/${cfg.perfMax} pts</span></th>
+            <th colspan="4">1B. ${cfg.labelProc} — 4 Critères (<span style="color:#CBD5E1;">/${cfg.procMax} pts</span>)</th>
+            <th rowspan="2" style="width:68px;">Note<br>Proc.<br><span style="color:#CBD5E1;">/${cfg.procMax}</span></th>
+            <th rowspan="2" style="width:66px;">2. Conc.<br><span style="color:#CBD5E1;">/${cfg.concepMax}</span></th>
+            <th rowspan="2" style="width:66px;">3. Comp.<br><span style="color:#CBD5E1;">/${cfg.compMax}</span></th>
+            <th rowspan="2" style="width:82px;background:#0F172A;">TOTAL<br>NOTE /20</th>
             <th rowspan="2" style="width:38px;">Suppr.</th>
           </tr>
           <tr>
             ${critsProc.map((c, idx) => `
               <th class="sub-hdr">
                 <div>${c.nom} (${procWeights[idx]}pt)</div>
-                <div style="font-size:0.64rem;color:#CBD5E1;">[${c.sous[0]} | ${c.sous[1]}]</div>
+                <div style="font-size:0.64rem;color:#94A3B8;">[${c.sous[0]} | ${c.sous[1]}]</div>
               </th>
             `).join('')}
           </tr>
@@ -4185,7 +4221,7 @@
 
       if (visibleIndices.length === 0) {
         const colSpanCount = cfg.isSpCo ? 18 : 15;
-        tbody.innerHTML = `<tr><td colspan="${colSpanCount}" style="padding:22px;color:#64748B;font-weight:600;">Aucun élève ne correspond au filtre actuel. Cliquez sur « Tous » ou ajoutez un élève.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="${colSpanCount}" style="padding:22px;color:#64748B;font-weight:600;">Aucun élève ne correspond au filtre actuel.</td></tr>`;
       } else {
         tbody.innerHTML = visibleIndices.map(rIdx => {
           const st = classStudents[rIdx];
@@ -4202,7 +4238,6 @@
 
           const procCells = critsProc.map((c, cIdx) => {
             const choice = (st.crits && st.crits[cIdx]) || 0;
-            const pts = choice === 0 ? procWeights[cIdx] : negPts;
             return `
               <td>
                 <div class="mini-chk-pair">
@@ -4221,7 +4256,6 @@
           if (cfg.isSpCo) {
             const indivCells = critsIndiv.map((c, cIdx) => {
               const choice = (st.critsIndiv && st.critsIndiv[cIdx]) || 0;
-              const pts = choice === 0 ? indWeights[cIdx] : negPts;
               return `
                 <td>
                   <div class="mini-chk-pair">
@@ -4238,9 +4272,9 @@
 
             middleHtml = `
               ${indivCells}
-              <td class="tabular-nums" style="font-weight:800;color:#1E40AF;background:#EFF6FF;">${isInactive ? '—' : scores.pIndiv.toFixed(2)}</td>
+              <td class="tabular-nums" style="font-weight:800;color:#1E293B;background:#F8FAFC;">${isInactive ? '—' : scores.pIndiv.toFixed(2)}</td>
               ${procCells}
-              <td class="tabular-nums" style="font-weight:800;color:#065F46;background:#ECFDF5;">${isInactive ? '—' : scores.pProc.toFixed(2)}</td>
+              <td class="tabular-nums" style="font-weight:800;color:#1E293B;background:#F8FAFC;">${isInactive ? '—' : scores.pProc.toFixed(2)}</td>
             `;
           } else {
             middleHtml = `
@@ -4254,13 +4288,13 @@
                 <input type="number" class="row-input-num tabular-nums" min="0" max="${cfg.perfMax}" step="0.25" value="${Number(st.perfScore).toFixed(2)}" ${isInactive ? 'disabled' : ''} onchange="updateClassStudentField(${rIdx}, 'perfScore', this.value)">
               </td>
               ${procCells}
-              <td class="tabular-nums" style="font-weight:800;color:#2434A8;background:#EEF2FF;">${isInactive ? '—' : scores.pProc.toFixed(2)}</td>
+              <td class="tabular-nums" style="font-weight:800;color:#1E293B;background:#F8FAFC;">${isInactive ? '—' : scores.pProc.toFixed(2)}</td>
             `;
           }
 
           const totalCellHtml = isInactive
-            ? `<td style="font-weight:800;font-size:0.8rem;color:#9F1239;background:#FFF1F2;">${status}</td>`
-            : `<td class="tabular-nums" style="font-weight:800;font-size:0.88rem;color:#065F46;background:#ECFDF5;">${scores.total.toFixed(2)} / 20</td>`;
+            ? `<td style="font-weight:800;font-size:0.8rem;color:#64748B;background:#F8FAFC;">${status}</td>`
+            : `<td class="tabular-nums" style="font-weight:800;font-size:0.88rem;color:#0F172A;background:#F1F5F9;">${scores.total.toFixed(2)} / 20</td>`;
 
           return `
             <tr class="${isInactive ? 'row-inactive' : ''}">
@@ -4426,31 +4460,133 @@
         .trim();
     }
 
-    function detectExcelColumnsOnRow(headerRow) {
+    function looksLikeMassarCodeOrNumber(val) {
+      const s = String(val || '').trim();
+      if (!s) return true;
+      if (/^[A-Za-z]\d{6,}$/.test(s)) return true; // Ex: D140088091
+      if (/^\d+([.,/\-]\d+)*$/.test(s)) return true; // Chiffres ou dates
+      return false;
+    }
+
+    function extractClassNameFromSheet(rows, fileName) {
+      const scanLimit = Math.min(25, (rows || []).length);
+      for (let r = 0; r < scanLimit; r++) {
+        const row = rows[r] || [];
+        for (let c = 0; c < row.length; c++) {
+          const rawCell = String(row[c] || '').trim();
+          const normCell = normalizeMatchStr(rawCell);
+          if (!normCell) continue;
+
+          // Recherche "القسم : TCLSHF-1" ou "Classe : ..." dans la même cellule
+          if (/(قسم|الفوج|classe|section|groupe)/.test(normCell)) {
+            const inlineMatch = rawCell.match(/(?:القسم|الفوج|classe|section|groupe)\s*[:\-–]?\s*(.+)$/i);
+            if (inlineMatch && inlineMatch[1] && inlineMatch[1].trim().length >= 2 && inlineMatch[1].trim().length <= 28) {
+              const cand = inlineMatch[1].trim();
+              if (!/(القسم|classe|الوطنيه|المملكه|الاكاديميه|المديريه)/i.test(cand)) return cand;
+            }
+            // Sinon prendre la prochaine cellule non-vide sur la même ligne
+            for (let k = c + 1; k < Math.min(row.length, c + 5); k++) {
+              const nextVal = String(row[k] || '').trim();
+              if (nextVal && nextVal.length <= 28 && !/(الماده|ماده|matiere|prof|الاستاذ|السنه|20\d{2}\/20\d{2})/i.test(nextVal)) {
+                return nextVal;
+              }
+            }
+          }
+        }
+      }
+
+      // Fallback propre depuis le nom du fichier (ex: export_notesCC_TCLSHF-1_0026 (2).xlsx -> TCLSHF-1)
+      let base = String(fileName || '').replace(/\.[^.]+$/, '');
+      base = base
+        .replace(/^(export[_\-\s]*notes?cc[_\-\s]*|notes?cc[_\-\s]*|export[_\-\s]*|liste[_\-\s]*eleves?[_\-\s]*|liste[_\-\s]*|notes?[_\-\s]*)/i, '')
+        .replace(/\s*\(\d+\)\s*$/, '')
+        .replace(/[_\-\s]+\d{3,6}$/, '')
+        .trim();
+      return (base && base.length <= 32) ? base : (currentClassName || 'Classe 1');
+    }
+
+    function detectExcelColumnsOnRow(headerRow, sampleRows) {
+      const excludedHeaderRe = /(^|\b)(n°|num|numero|id|code|cne|massar|matricule|naissance|date|moyenne|note|total)(\b|$)|(رقم|الرقم|رمز|مسار|تاريخ|ازدياد|الازدياد|نقط|المعدل|المجموع)/;
       let colNom = -1;
       let colPrenom = -1;
       let colSexe = -1;
+      let bestNameScore = -999;
+
+      const isGoodNameSampleCol = (idx) => {
+        const samples = (sampleRows || []).map(r => String((r || [])[idx] ?? '').trim()).filter(Boolean);
+        if (!samples.length) return 0;
+        let alphaCount = 0;
+        let codeOrNumCount = 0;
+        samples.forEach(v => {
+          if (looksLikeMassarCodeOrNumber(v)) codeOrNumCount++;
+          else if (/[a-zA-Z\u0600-\u06FF]{2,}/.test(v)) alphaCount++;
+        });
+        if (codeOrNumCount >= samples.length * 0.5) return -100;
+        return alphaCount >= samples.length * 0.5 ? 25 : 0;
+      };
 
       (headerRow || []).forEach((cell, idx) => {
         const txt = normalizeMatchStr(cell);
         if (!txt) return;
 
-        if (colSexe === -1 && /(sexe|genre|gender|\bsex\b|جنس|الجنس|النوع)/.test(txt)) {
+        if (colSexe === -1 && /(sexe|genre|gender|\bsex\b|جنس|الجنس|النوع)/.test(txt) && !excludedHeaderRe.test(txt)) {
           colSexe = idx;
           return;
         }
+
+        if (excludedHeaderRe.test(txt)) return;
+
         if (colPrenom === -1 && /(prenom|first.?name|الاسم الشخصي)/.test(txt) && !/(nom et prenom|nom & prenom|nom complet)/.test(txt)) {
-          colPrenom = idx;
-          return;
+          if (isGoodNameSampleCol(idx) >= 0) {
+            colPrenom = idx;
+            return;
+          }
         }
-        if (colNom === -1 && /(nom complet|nom et prenom|nom & prenom|eleve|apprenant|etudiant|full.?name|student|اسم التلميذ|الاسم الكامل|التلميذ|المتعلم|النسب|الاسم|nom de|^\s*nom\s*$)/.test(txt)) {
-          colNom = idx;
-          return;
+
+        let nameHeaderScore = 0;
+        if (/(nom complet|nom et prenom|nom & prenom|اسم التلميذ|الاسم الكامل|الاسم و النسب|الاسم والنسب|full.?name)/.test(txt)) {
+          nameHeaderScore = 40;
+        } else if (/(eleve|apprenant|etudiant|التلميذ|المتعلم|النسب|الاسم|^\s*nom\s*$|\bnom\b)/.test(txt) && !/prenom/.test(txt)) {
+          nameHeaderScore = 25;
         }
-        if (colNom === -1 && /\bnom\b/.test(txt) && !/prenom/.test(txt)) {
-          colNom = idx;
+
+        if (nameHeaderScore > 0) {
+          const totalScore = nameHeaderScore + isGoodNameSampleCol(idx);
+          if (totalScore > bestNameScore && totalScore > 0) {
+            bestNameScore = totalScore;
+            colNom = idx;
+          }
         }
       });
+
+      // Fallback intelligent sur le contenu si aucun en-tête texte clair n'a été trouvé
+      if (colNom === -1 && sampleRows && sampleRows.length > 0) {
+        const colCount = Math.max(headerRow.length, ...sampleRows.map(r => (r || []).length));
+        for (let idx = 0; idx < colCount; idx++) {
+          const hdrTxt = normalizeMatchStr(headerRow[idx]);
+          if (excludedHeaderRe.test(hdrTxt)) continue;
+          const sc = isGoodNameSampleCol(idx);
+          if (sc > 0) {
+            colNom = idx;
+            break;
+          }
+        }
+      }
+
+      // Auto-détection du genre par valeurs d'échantillon si la colonne genre n'était pas titrée explicitement
+      if (colSexe === -1 && sampleRows && sampleRows.length > 0) {
+        const colCount = Math.max(headerRow.length, ...sampleRows.map(r => (r || []).length));
+        for (let idx = 0; idx < colCount; idx++) {
+          if (idx === colNom || idx === colPrenom) continue;
+          const samples = sampleRows.map(r => normalizeMatchStr((r || [])[idx])).filter(Boolean);
+          if (samples.length < 2) continue;
+          const genderHits = samples.filter(v => /^(f|g|m|fille|garcon|feminin|masculin|انثى|انثي|ذكر|بنت|ولد)$/.test(v)).length;
+          if (genderHits >= samples.length * 0.7) {
+            colSexe = idx;
+            break;
+          }
+        }
+      }
 
       return { colNom, colPrenom, colSexe };
     }
@@ -4465,13 +4601,14 @@
         if (nonEmpty < 2) continue;
 
         let score = 0;
-        const det = detectExcelColumnsOnRow(row);
-        if (det.colNom !== -1) score += 5;
+        const sampleRows = rows.slice(r + 1, r + 10);
+        const det = detectExcelColumnsOnRow(row, sampleRows);
+        if (det.colNom !== -1) score += 8;
         if (det.colPrenom !== -1) score += 3;
         if (det.colSexe !== -1) score += 4;
         row.forEach(c => {
           const t = normalizeMatchStr(c);
-          if (/(massar|cne|code|رقم|مسار|الرقم|n°|matricule)/.test(t)) score += 2;
+          if (/(massar|cne|رقم التلميذ|تاريخ الازدياد|n°|matricule)/.test(t)) score += 2;
         });
         if (score > bestScore) {
           bestScore = score;
@@ -4502,6 +4639,13 @@
       });
       selSheet.value = bestSheet;
 
+      const classInp = document.getElementById('mapClassName');
+      if (classInp) {
+        classInp.value = extractClassNameFromSheet(sheetsMap[bestSheet], excelImportState.fileName);
+      }
+
+      const headerSel = document.getElementById('mapColHeaderRow');
+      if (headerSel) headerSel.dataset.lastSheet = bestSheet;
       populateHeaderRowsForSheet(bestSheet);
       document.getElementById('excelMapModal').classList.add('open');
     }
@@ -4527,36 +4671,48 @@
       const headerSel = document.getElementById('mapColHeaderRow');
       if (headerSel.dataset.lastSheet !== sheetName) {
         headerSel.dataset.lastSheet = sheetName;
+        const classInp = document.getElementById('mapClassName');
+        if (classInp) classInp.value = extractClassNameFromSheet(rows, excelImportState.fileName);
         populateHeaderRowsForSheet(sheetName);
         return;
       }
 
       const hIdx = parseInt(headerSel.value || '0', 10);
       const headerRow = rows[hIdx] || [];
-      const maxCols = Math.max(headerRow.length, ...(rows.slice(hIdx, hIdx + 6).map(r => r.length)), 1);
+      const sampleRows = rows.slice(hIdx + 1, hIdx + 12);
+      const maxCols = Math.max(headerRow.length, ...sampleRows.map(r => (r || []).length), 1);
 
+      const colLetter = (cIdx) => String.fromCharCode(65 + (cIdx % 26));
       const colLabel = (cIdx) => {
-        const letter = String.fromCharCode(65 + (cIdx % 26));
         const hdr = String(headerRow[cIdx] || '').trim();
-        return `Col ${letter}${hdr ? ' — ' + hdr.slice(0, 28) : ''}`;
+        return `Col ${colLetter(cIdx)}${hdr ? ' — ' + hdr.slice(0, 28) : ''}`;
       };
 
+      const detected = detectExcelColumnsOnRow(headerRow, sampleRows);
       const baseOpts = [];
+      if (detected.colNom !== -1 && detected.colPrenom !== -1 && detected.colNom !== detected.colPrenom) {
+        const pairVal = `__PAIR__:${detected.colNom}:${detected.colPrenom}`;
+        baseOpts.push(`<option value="${pairVal}">Col ${colLetter(detected.colNom)} + Col ${colLetter(detected.colPrenom)} (Nom + Prénom combinés)</option>`);
+      }
       for (let c = 0; c < maxCols; c++) {
         baseOpts.push(`<option value="${c}">${escapeHtml(colLabel(c))}</option>`);
       }
 
       const selNom = document.getElementById('mapColNom');
-      const selPrenom = document.getElementById('mapColPrenom');
       const selSexe = document.getElementById('mapColSexe');
 
       selNom.innerHTML = baseOpts.join('');
-      selPrenom.innerHTML = `<option value="-1">-- Aucune (Nom complet dans colonne Nom) --</option>` + baseOpts.join('');
-      selSexe.innerHTML = `<option value="-1">-- Aucune (Défaut : Garçon G) --</option>` + baseOpts.join('');
+      selSexe.innerHTML = `<option value="-1">Non présent (G par défaut)</option>` + (() => {
+        const sx = [];
+        for (let c = 0; c < maxCols; c++) sx.push(`<option value="${c}">${escapeHtml(colLabel(c))}</option>`);
+        return sx.join('');
+      })();
 
-      const detected = detectExcelColumnsOnRow(headerRow);
-      selNom.value = detected.colNom !== -1 ? String(detected.colNom) : '0';
-      selPrenom.value = detected.colPrenom !== -1 ? String(detected.colPrenom) : '-1';
+      if (detected.colNom !== -1 && detected.colPrenom !== -1 && detected.colNom !== detected.colPrenom) {
+        selNom.value = `__PAIR__:${detected.colNom}:${detected.colPrenom}`;
+      } else {
+        selNom.value = detected.colNom !== -1 ? String(detected.colNom) : '0';
+      }
       selSexe.value = detected.colSexe !== -1 ? String(detected.colSexe) : '-1';
 
       refreshExcelPreview();
@@ -4565,7 +4721,7 @@
     function normalizeGenderValue(raw) {
       const v = normalizeMatchStr(raw);
       if (!v) return 'G';
-      if (/^(f|fille|filles|feminin|female|girl|w|انثى|انثي|بنت|اناث|مؤنث)/.test(v) || v.includes('انثى') || v.includes('fille') || v.includes('feminin')) {
+      if (/^(f|fille|filles|feminin|female|girl|w|انثى|انثي|بنت|اناث|مؤنث)/.test(v) || v.includes('انثى') || v.includes('انثي') || v.includes('fille') || v.includes('feminin')) {
         return 'F';
       }
       if (/^(g|m|garcon|garcons|masculin|male|boy|ذكر|ولد|ذكور|مذكر)/.test(v) || v.includes('ذكر') || v.includes('garcon')) {
@@ -4578,17 +4734,27 @@
       const sheetName = document.getElementById('mapColSheet').value;
       const rows = excelImportState.sheets[sheetName] || [];
       const hIdx = parseInt(document.getElementById('mapColHeaderRow').value || '0', 10);
-      const colNom = parseInt(document.getElementById('mapColNom').value || '0', 10);
-      const colPrenom = parseInt(document.getElementById('mapColPrenom').value || '-1', 10);
-      const colSexe = parseInt(document.getElementById('mapColSexe').value || '-1', 10);
+      const colNomRaw = String(document.getElementById('mapColNom')?.value || '0');
+      const colSexe = parseInt(document.getElementById('mapColSexe')?.value || '-1', 10);
+
+      let colNom = 0;
+      let colPrenom = -1;
+      if (colNomRaw.startsWith('__PAIR__:')) {
+        const parts = colNomRaw.split(':');
+        colNom = parseInt(parts[1] || '0', 10);
+        colPrenom = parseInt(parts[2] || '-1', 10);
+      } else {
+        colNom = parseInt(colNomRaw, 10) || 0;
+      }
 
       const list = [];
       for (let r = hIdx + 1; r < rows.length; r++) {
         const row = rows[r] || [];
         const pNom = String(row[colNom] ?? '').trim();
         const pPrenom = colPrenom >= 0 ? String(row[colPrenom] ?? '').trim() : '';
-        let fullName = pPrenom && pPrenom.toLowerCase() !== pNom.toLowerCase() ? `${pNom} ${pPrenom}`.trim() : pNom;
+        const fullName = pPrenom && pPrenom.toLowerCase() !== pNom.toLowerCase() ? `${pNom} ${pPrenom}`.trim() : pNom;
         if (!fullName || fullName.length < 2) continue;
+        if (looksLikeMassarCodeOrNumber(fullName)) continue;
         if (/^(total|moyenne|somme|effectif|المجموع|المعدل|العدد)$/i.test(fullName)) continue;
 
         const sexe = colSexe >= 0 ? normalizeGenderValue(row[colSexe]) : 'G';
@@ -4599,7 +4765,9 @@
 
     function refreshExcelPreview() {
       const list = extractStudentsFromExcelModal();
-      const mode = document.getElementById('mapImportMode').value;
+      const mode = document.getElementById('mapImportMode')?.value || 'replace';
+      const colSexe = parseInt(document.getElementById('mapColSexe')?.value || '-1', 10);
+      const classNameVal = String(document.getElementById('mapClassName')?.value || '').trim() || 'Classe 1';
       const alertEl = document.getElementById('excelMapAlert');
       const bodyEl = document.getElementById('excelPreviewBody');
 
@@ -4607,24 +4775,25 @@
       const availableSlots = Math.max(0, MAX_CLASS_STUDENTS - existingCount);
       const willImport = Math.min(list.length, availableSlots);
 
-      let msg = `${list.length} élève(s) détecté(s) dans « ${excelImportState.fileName} ». `;
+      let msg = `Classe « ${classNameVal} » · ${willImport} élève(s) prêt(s)`;
       if (list.length > availableSlots) {
-        msg += `Plafond ${MAX_CLASS_STUDENTS} élèves : seuls les ${willImport} premiers seront importés.`;
-      } else {
-        msg += `${willImport} élève(s) prêts à être importés.`;
+        msg += ` (plafond ${MAX_CLASS_STUDENTS} sur ${list.length} détectés)`;
       }
-      alertEl.textContent = msg;
+      if (colSexe === -1) {
+        msg += ` · Colonne genre absente (G par défaut, modifiable dans la grille).`;
+      }
+      if (alertEl) alertEl.textContent = msg;
 
       const sample = list.slice(0, 5);
       if (!sample.length) {
-        bodyEl.innerHTML = `<tr><td colspan="3" style="color:#E11D48;font-weight:700;">Aucun nom détecté avec ces colonnes. Ajustez la ligne d'en-tête ou la colonne Nom.</td></tr>`;
+        bodyEl.innerHTML = `<tr><td colspan="3" style="color:#64748B;font-weight:700;">Aucun nom détecté. Ouvrez « Ajustement manuel » ci-dessous pour vérifier la ligne des titres.</td></tr>`;
         return;
       }
       bodyEl.innerHTML = sample.map((s, idx) => `
         <tr>
           <td>${idx + 1}</td>
           <td style="font-weight:700;">${escapeHtml(s.nom)}</td>
-          <td><span style="font-weight:800;color:${s.sexe === 'F' ? '#BE185D' : '#1D4ED8'};">${s.sexe} (${s.sexe === 'F' ? 'Fille' : 'Garçon'})</span></td>
+          <td><span style="font-weight:700;color:#0F172A;">${s.sexe} (${s.sexe === 'F' ? 'Fille' : 'Garçon'})</span></td>
         </tr>
       `).join('');
     }
@@ -4632,11 +4801,15 @@
     function confirmExcelImportFromModal() {
       const extracted = extractStudentsFromExcelModal();
       if (!extracted.length) {
-        showToast('Aucun élève détecté à importer. Vérifiez le mappage.');
+        showToast('Aucun élève détecté à importer. Vérifiez la colonne Noms.');
         return;
       }
-      const mode = document.getElementById('mapImportMode').value;
+      const mode = document.getElementById('mapImportMode')?.value || 'replace';
       const cfg = getBaremeConfig(currentNiveau, currentAps);
+      const modalClassName = String(document.getElementById('mapClassName')?.value || '').trim();
+      if (modalClassName) {
+        currentClassName = modalClassName;
+      }
 
       const baseList = mode === 'append' ? [...classStudents] : [];
       const slotsLeft = MAX_CLASS_STUDENTS - baseList.length;
@@ -4660,7 +4833,7 @@
       saveStateToStorage();
       closeExcelMapModal();
       switchCalcMode('classe');
-      showToast(`✅ ${toAdd.length} élève(s) importé(s) (${classStudents.length}/${MAX_CLASS_STUDENTS}).`);
+      showToast(`${toAdd.length} élève(s) importés dans « ${currentClassName} ».`);
     }
 
     function closeExcelMapModal() {
@@ -4692,6 +4865,8 @@
     function exportClassGridExcel(kind) {
       const cfg = getBaremeConfig(currentNiveau, currentAps);
       const nivLabel = currentNiveau === '1AB' ? '1Bac' : (currentNiveau === '2AB' ? '2Bac' : currentNiveau);
+      const clsLabel = currentClassName || 'Classe 1';
+      const safeCls = clsLabel.replace(/[^a-zA-Z0-9\u0600-\u06FF_-]+/g, '_');
       const unitMeta = PERF_UNIT_META[currentAps] || { unit: 'pts' };
       const critsIndiv = cfg.isSpCo ? getCritsForAps(currentAps, 'indiv') : [];
       const critsProc = cfg.isSpCo ? getCritsForAps(currentAps, 'collectif') : getCritsForAps(currentAps, 'processus');
@@ -4701,6 +4876,7 @@
 
       let aoaMain = [];
       if (kind === 'massar') {
+        aoaMain.push([`CLASSE : ${clsLabel}`, `APS : ${currentAps}`, `NIVEAU : ${nivLabel}`]);
         aoaMain.push(['N°', 'Nom & Prénom', 'Sexe', 'Statut', `Procédural (/${cfg.procTotal})`, `Conceptuel (/${cfg.concepMax})`, `Comportemental (/${cfg.compMax})`, 'Note Finale /20']);
         classStudents.forEach((st, idx) => {
           const isInactive = (st.status || 'OK') !== 'OK';
@@ -4727,7 +4903,7 @@
           `3. Comportemental (/${cfg.compMax})`,
           'TOTAL /20'
         ];
-        aoaMain.push([`GRILLE EPS (${currentAps.toUpperCase()} - ${nivLabel}) — DOUBLE GRILLE INDIVIDUEL + COLLECTIF`]);
+        aoaMain.push([`GRILLE EPS — ${clsLabel} — ${currentAps.toUpperCase()} (${nivLabel}) — INDIVIDUEL + COLLECTIF`]);
         aoaMain.push(hdr);
         classStudents.forEach((st, idx) => {
           const isInactive = (st.status || 'OK') !== 'OK';
@@ -4762,7 +4938,7 @@
           `3. Comportemental (/${cfg.compMax})`,
           'TOTAL /20'
         ];
-        aoaMain.push([`GRILLE EPS (${currentAps.toUpperCase()} - ${nivLabel}) — PERFORMANCE & PROCESSUS`]);
+        aoaMain.push([`GRILLE EPS — ${clsLabel} — ${currentAps.toUpperCase()} (${nivLabel}) — PERFORMANCE & PROCESSUS`]);
         aoaMain.push(hdr);
         classStudents.forEach((st, idx) => {
           const isInactive = (st.status || 'OK') !== 'OK';
@@ -4787,7 +4963,7 @@
 
       const safeAps = currentAps.replace(/\s+/g, '_');
       if (typeof XLSX === 'undefined') {
-        const csvName = kind === 'massar' ? `Export_Massar_EPS_${safeAps}_${nivLabel}.csv` : `Grille_Classe_EPS_${safeAps}_${nivLabel}.csv`;
+        const csvName = kind === 'massar' ? `Export_Massar_${safeCls}_${safeAps}.csv` : `Grille_EPS_${safeCls}_${safeAps}.csv`;
         downloadCsvFallback(csvName, aoaMain);
         showToast('Export CSV généré (module XLSX indisponible hors-ligne).');
         return;
@@ -4796,7 +4972,7 @@
       const wb = XLSX.utils.book_new();
       const ws = XLSX.utils.aoa_to_sheet(aoaMain);
       XLSX.utils.book_append_sheet(wb, ws, kind === 'massar' ? 'Import_Massar' : 'Grille_EPS');
-      const outName = kind === 'massar' ? `Export_Massar_EPS_${safeAps}_${nivLabel}.xlsx` : `Grille_Classe_EPS_${safeAps}_${nivLabel}.xlsx`;
+      const outName = kind === 'massar' ? `Export_Massar_${safeCls}_${safeAps}.xlsx` : `Grille_EPS_${safeCls}_${safeAps}.xlsx`;
       XLSX.writeFile(wb, outName);
       showToast(`Fichier ${outName} téléchargé.`);
     }
@@ -4804,6 +4980,8 @@
     function exportClassGridWord() {
       const cfg = getBaremeConfig(currentNiveau, currentAps);
       const nivLabel = currentNiveau === '1AB' ? '1Bac' : (currentNiveau === '2AB' ? '2Bac' : currentNiveau);
+      const clsLabel = currentClassName || 'Classe 1';
+      const safeCls = clsLabel.replace(/[^a-zA-Z0-9\u0600-\u06FF_-]+/g, '_');
       const unitMeta = PERF_UNIT_META[currentAps] || { unit: 'pts' };
       const critsIndiv = cfg.isSpCo ? getCritsForAps(currentAps, 'indiv') : [];
       const critsProc = cfg.isSpCo ? getCritsForAps(currentAps, 'collectif') : getCritsForAps(currentAps, 'processus');
@@ -4819,13 +4997,13 @@
             <th style="border:1px solid #333;padding:5px;">Nom &amp; Prénom</th>
             <th style="border:1px solid #333;padding:5px;">Sexe</th>
             <th style="border:1px solid #333;padding:5px;">Statut</th>
-            ${critsIndiv.map((c, i) => `<th style="border:1px solid #333;padding:5px;background:#1E3A8A;">Indiv: ${c.nom} (/${indWeights[i]})</th>`).join('')}
-            <th style="border:1px solid #333;padding:5px;background:#1E3A8A;">Note Indiv (/${cfg.perfMax})</th>
-            ${critsProc.map((c, i) => `<th style="border:1px solid #333;padding:5px;background:#0F5132;">Coll: ${c.nom} (/${procWeights[i]})</th>`).join('')}
-            <th style="border:1px solid #333;padding:5px;background:#0F5132;">Note Coll (/${cfg.procMax})</th>
+            ${critsIndiv.map((c, i) => `<th style="border:1px solid #333;padding:5px;">Indiv: ${c.nom} (/${indWeights[i]})</th>`).join('')}
+            <th style="border:1px solid #333;padding:5px;background:#334155;">Note Indiv (/${cfg.perfMax})</th>
+            ${critsProc.map((c, i) => `<th style="border:1px solid #333;padding:5px;">Coll: ${c.nom} (/${procWeights[i]})</th>`).join('')}
+            <th style="border:1px solid #333;padding:5px;background:#334155;">Note Coll (/${cfg.procMax})</th>
             <th style="border:1px solid #333;padding:5px;">2. Concep (/${cfg.concepMax})</th>
             <th style="border:1px solid #333;padding:5px;">3. Comport (/${cfg.compMax})</th>
-            <th style="border:1px solid #333;padding:5px;">TOTAL /20</th>
+            <th style="border:1px solid #333;padding:5px;background:#0F172A;">TOTAL /20</th>
           </tr>
         `;
       } else {
@@ -4841,7 +5019,7 @@
             <th style="border:1px solid #333;padding:5px;">1B. Processus (/${cfg.procMax})</th>
             <th style="border:1px solid #333;padding:5px;">2. Concep. (/${cfg.concepMax})</th>
             <th style="border:1px solid #333;padding:5px;">3. Comport. (/${cfg.compMax})</th>
-            <th style="border:1px solid #333;padding:5px;">TOTAL /20</th>
+            <th style="border:1px solid #333;padding:5px;background:#0F172A;">TOTAL /20</th>
           </tr>
         `;
       }
@@ -4894,17 +5072,17 @@
             ${middleTds}
             <td style="border:1px solid #333;padding:4px;text-align:center;">${isInactive ? '—' : sc.cVal.toFixed(2)}</td>
             <td style="border:1px solid #333;padding:4px;text-align:center;">${isInactive ? '—' : sc.bVal.toFixed(2)}</td>
-            <td style="border:1px solid #333;padding:4px;text-align:center;font-weight:bold;background:${isInactive ? '#FFF1F2' : '#EEF2FF'};">${isInactive ? st.status : sc.total.toFixed(2) + ' / 20'}</td>
+            <td style="border:1px solid #333;padding:4px;text-align:center;font-weight:bold;background:${isInactive ? '#F8FAFC' : '#F1F5F9'};">${isInactive ? st.status : sc.total.toFixed(2) + ' / 20'}</td>
           </tr>
         `;
       }).join('');
 
       const wordDoc = `
         <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
-        <head><meta charset="utf-8"><title>Grille Evaluation EPS ${escapeHtml(currentAps)} ${nivLabel}</title></head>
+        <head><meta charset="utf-8"><title>Grille EPS ${escapeHtml(clsLabel)} - ${escapeHtml(currentAps)}</title></head>
         <body style="font-family:Arial,sans-serif;font-size:10pt;">
-          <h2 style="text-align:center;color:#1E293B;margin-bottom:4px;">GRILLE D'ÉVALUATION SOMMATIVE EPS (/20) — ${escapeHtml(currentAps.toUpperCase())} (${nivLabel})</h2>
-          <p style="text-align:center;font-size:9pt;margin-top:0;">Conforme aux Orientations Pédagogiques Maroc · Procédural /${cfg.procTotal} (${cfg.labelPerf} /${cfg.perfMax} + ${cfg.labelProc} /${cfg.procMax}) · Conceptuel /${cfg.concepMax} · Comportemental /${cfg.compMax}</p>
+          <h2 style="text-align:center;color:#0F172A;margin-bottom:4px;">GRILLE D'ÉVALUATION EPS (/20) — ${escapeHtml(clsLabel)} — ${escapeHtml(currentAps.toUpperCase())} (${nivLabel})</h2>
+          <p style="text-align:center;font-size:9pt;margin-top:0;">Orientations Pédagogiques Maroc · Procédural /${cfg.procTotal} (${cfg.labelPerf} /${cfg.perfMax} + ${cfg.labelProc} /${cfg.procMax}) · Conceptuel /${cfg.concepMax} · Comportemental /${cfg.compMax}</p>
           <table style="width:100%;border-collapse:collapse;">
             <thead>${theadHtml}</thead>
             <tbody>${rowsHtml}</tbody>
@@ -4916,7 +5094,7 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `Grille_Notes_EPS_${currentAps.replace(/\s+/g, '_')}_${nivLabel}.doc`;
+      a.download = `Grille_Notes_EPS_${safeCls}_${currentAps.replace(/\s+/g, '_')}.doc`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
