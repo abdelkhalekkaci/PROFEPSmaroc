@@ -1137,6 +1137,169 @@
                 padding: 0.85rem;
             }
         }
+        /* ========== CUSTOMIZE GRILLE CRITERIA PANEL ========== */
+        .grille-row-presets {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            margin-top: 0.45rem;
+        }
+        .grille-preset-btn {
+            padding: 0.28rem 0.65rem;
+            font-size: 0.76rem;
+            font-weight: 700;
+            border-radius: 8px;
+            border: 1.5px solid var(--stone, #E4E2DA);
+            background: var(--paper, #FBFAF7);
+            color: var(--ink, #0E1633);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .grille-preset-btn.active,
+        .grille-preset-btn:hover {
+            border-color: var(--primary);
+            background: var(--sky, #EAF0FF);
+            color: var(--primary);
+        }
+        .grille-crit-panel {
+            background: var(--paper, #FBFAF7);
+            border: 1.5px solid var(--stone, #E4E2DA);
+            border-radius: 12px;
+            padding: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        .grille-crit-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.65rem;
+        }
+        .grille-crit-title {
+            font-size: 0.84rem;
+            font-weight: 800;
+            color: var(--ink, #0E1633);
+        }
+        .grille-crit-actions {
+            display: flex;
+            gap: 0.35rem;
+            flex-wrap: wrap;
+        }
+        .grille-mini-btn {
+            padding: 0.28rem 0.6rem;
+            font-size: 0.74rem;
+            font-weight: 700;
+            border-radius: 8px;
+            border: 1px solid rgba(51, 71, 214, 0.28);
+            background: var(--surface, #FFFFFF);
+            color: var(--primary, #3347D6);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .grille-mini-btn:hover {
+            background: var(--primary, #3347D6);
+            color: #FFFFFF;
+        }
+        .grille-mini-btn.secondary {
+            border-color: rgba(11, 122, 153, 0.35);
+            color: #0B7A99;
+        }
+        .grille-mini-btn.secondary:hover {
+            background: #0B7A99;
+            color: #FFFFFF;
+        }
+        .grille-mini-btn.reset {
+            border-color: var(--stone, #E4E2DA);
+            color: var(--slate, #55607A);
+        }
+        .grille-mini-btn.reset:hover {
+            background: #E2E8F0;
+            color: #0E1633;
+        }
+        .grille-crit-group-lbl {
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin: 0.5rem 0 0.35rem;
+            color: var(--primary, #3347D6);
+        }
+        .grille-crit-group-lbl.coll {
+            color: #0B7A99;
+        }
+        .grille-crit-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+        .grille-crit-item {
+            display: grid;
+            grid-template-columns: 1.25fr 1fr 1fr auto;
+            gap: 0.4rem;
+            align-items: center;
+            background: var(--surface, #FFFFFF);
+            border: 1px solid var(--stone, #E4E2DA);
+            border-radius: 9px;
+            padding: 0.4rem 0.5rem;
+        }
+        .grille-crit-item input {
+            width: 100%;
+            min-width: 0;
+            padding: 0.34rem 0.5rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--ink, #0E1633);
+            background: var(--paper, #FBFAF7);
+            border: 1px solid var(--stone, #E4E2DA);
+            border-radius: 7px;
+        }
+        .grille-crit-item input:focus {
+            outline: none;
+            border-color: var(--primary, #3347D6);
+            background: var(--surface, #FFFFFF);
+        }
+        .grille-crit-del {
+            width: 26px;
+            height: 26px;
+            border-radius: 7px;
+            border: 1px solid #FECACA;
+            background: #FEF2F2;
+            color: #DC2626;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+        .grille-crit-del:hover:not(:disabled) {
+            background: #DC2626;
+            color: #FFFFFF;
+        }
+        .grille-crit-del:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+        .grille-obs-opt {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            margin-top: 0.55rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--slate, #55607A);
+            cursor: pointer;
+        }
+        @media (max-width: 640px) {
+            .grille-crit-item {
+                grid-template-columns: 1fr 1fr;
+            }
+            .grille-crit-item input:first-child {
+                grid-column: 1 / -1;
+            }
+        }
     </style>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8253776880916865" crossorigin="anonymous"></script>
@@ -1733,12 +1896,37 @@
 
                         <!-- GRILLE Fields -->
                         <div id="grilleFields" class="conditional">
-                            <div class="form-group">
-                                <label class="form-label" for="typeGrille"><span>📋</span> Type de grille (35 élèves — A4 Portrait)</label>
-                                <select class="form-select" id="typeGrille">
-                                    <option value="observation">👁️ Grille d'observation (diagnostique)</option>
-                                    <option value="evaluation">📊 Grille d'évaluation sommative (/20)</option>
-                                </select>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="typeGrille"><span>📋</span> Type de grille (A4 Portrait)</label>
+                                    <select class="form-select" id="typeGrille">
+                                        <option value="observation">👁️ Grille d'observation (N° + Noms + Critères)</option>
+                                        <option value="evaluation">📊 Grille d'évaluation sommative (/20)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="grilleNbEleves"><span>👥</span> Nombre d'élèves (lignes)</label>
+                                    <input type="number" class="form-input" id="grilleNbEleves" min="1" max="60" value="35">
+                                    <div class="grille-row-presets" aria-label="Effectifs rapides">
+                                        <button type="button" class="grille-preset-btn" data-rows="20">20</button>
+                                        <button type="button" class="grille-preset-btn" data-rows="30">30</button>
+                                        <button type="button" class="grille-preset-btn active" data-rows="35">35</button>
+                                        <button type="button" class="grille-preset-btn" data-rows="40">40</button>
+                                        <button type="button" class="grille-preset-btn" data-rows="45">45</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grille-crit-panel" id="grilleCritPanel">
+                                <div class="grille-crit-header">
+                                    <span class="grille-crit-title">🎨 Critères de la grille (modifiables — alignés Calculateur)</span>
+                                    <div class="grille-crit-actions" id="grilleCritActions"></div>
+                                </div>
+                                <div id="grilleCritListContainer"></div>
+                                <label class="grille-obs-opt" id="grilleObsColOptWrap">
+                                    <input type="checkbox" id="grilleIncludeObsCol">
+                                    <span>Ajouter une colonne libre « Observations » en fin de grille</span>
+                                </label>
                             </div>
                         </div>
 
@@ -2070,6 +2258,299 @@
             });
         }
 
+        // Critères alignés au Calculateur de Notes (/public/calculateur-note-eps-maroc.html)
+        const GRILLE_CRIT_OBS_DEFAULT = {
+            'Course de durée': [
+                { nom: 'Régularité', sous: ['Constante', 'Variable'] },
+                { nom: 'Allure', sous: ['Adaptée', 'Inadaptée'] },
+                { nom: 'Posture', sous: ['Correcte', 'Effondrée'] },
+                { nom: 'Finish', sous: ['Accéléré', 'Ralenti'] }
+            ],
+            'Course de vitesse': [
+                { nom: 'Départ', sous: ['Réactif', 'Lent'] },
+                { nom: 'Accélération', sous: ['Progress.', 'Brutale'] },
+                { nom: 'Course', sous: ['Axée', 'Désaxée'] },
+                { nom: 'Finish', sous: ['Engagé', 'Relâché'] }
+            ],
+            'Course de haies': [
+                { nom: 'Départ', sous: ['Réactif', 'Lent'] },
+                { nom: 'Rythme', sous: ['Régulier', 'Irrégulier'] },
+                { nom: 'Franchiss.', sous: ['Efficient', 'Ralentit'] },
+                { nom: 'Finish', sous: ['Engagé', 'Relâché'] }
+            ],
+            'Course de relais': [
+                { nom: 'Départ', sous: ['Réactif', 'Lent'] },
+                { nom: 'Course', sous: ['Rapide', 'Lente'] },
+                { nom: 'Transmission', sous: ['Réussie', 'Ratée'] },
+                { nom: 'Zone', sous: ['Respectée', 'Faute'] }
+            ],
+            'Lancer de poids': [
+                { nom: 'Position', sous: ['Dos aire', 'Face'] },
+                { nom: 'Tenue', sous: ['Au cou', 'Éloigné'] },
+                { nom: 'Poussée', sous: ['Complète', 'Partielle'] },
+                { nom: 'Équilibre', sous: ['Stable', 'Chute'] }
+            ],
+            'Saut en longueur': [
+                { nom: 'Course', sous: ['Accélérée', 'Irrégulière'] },
+                { nom: 'Impulsion', sous: ['Sur planche', 'Mordu'] },
+                { nom: 'Envol', sous: ['Équilibré', 'Déséquil.'] },
+                { nom: 'Réception', sous: ['Stable', 'Chute'] }
+            ],
+            'Saut en hauteur': [
+                { nom: 'Course', sous: ['Courbe', 'Droite'] },
+                { nom: 'Impulsion', sous: ['Pied ext.', 'Autre'] },
+                { nom: 'Franchis.', sous: ['Dorsal', 'Autre'] },
+                { nom: 'Réception', sous: ['Dos', 'Danger'] }
+            ],
+            'Gymnastique': [
+                { nom: 'Amplitude', sous: ['Suffisante', 'Insuffis.'] },
+                { nom: 'Tenue', sous: ['Gainé', 'Relâché'] },
+                { nom: 'Liaisons', sous: ['Fluides', 'Arrêts'] },
+                { nom: 'Réception', sous: ['Stabilisée', 'Déséquil.'] }
+            ]
+        };
+
+        const GRILLE_CRIT_COLLECTIF_DEFAULT = {
+            'Handball': {
+                indiv: [
+                    { nom: 'Manipulation', sous: ['Contrôlée', 'Hésitante'] },
+                    { nom: 'Passe', sous: ['Précise', 'Imprécise'] },
+                    { nom: 'Réception', sous: ['Assurée', 'Manquée'] },
+                    { nom: 'Armé & Tir', sous: ['Cadré', 'Hors cadre'] }
+                ],
+                collectif: [
+                    { nom: 'Démarquage', sous: ['Efficace', 'Passif'] },
+                    { nom: 'Continuité', sous: ['Fluide', 'Hachée'] },
+                    { nom: 'Occupation', sous: ['Équilibrée', 'En grappe'] },
+                    { nom: 'Repli Déf.', sous: ['Organisé', 'Désorganisé'] }
+                ]
+            },
+            'Basketball': {
+                indiv: [
+                    { nom: 'Dribble', sous: ['Tête haute', 'Yeux balle'] },
+                    { nom: 'Passe', sous: ['Précise', 'Interceptée'] },
+                    { nom: 'Tir / Lay-up', sous: ['Équilibré', 'Forcé'] },
+                    { nom: 'Démarquage', sous: ['Actif', 'Statique'] }
+                ],
+                collectif: [
+                    { nom: 'Espacement', sous: ['Aéré', 'Regroupé'] },
+                    { nom: 'Transition', sous: ['Rapide', 'Tardive'] },
+                    { nom: 'Aide Déf.', sous: ['Cadrée', 'Dépassée'] }
+                ]
+            },
+            'Football': {
+                indiv: [
+                    { nom: 'Conduite', sous: ['Maîtrisée', 'Perdue'] },
+                    { nom: 'Contrôle', sous: ['Orienté', 'Subi'] },
+                    { nom: 'Passe', sous: ['Précise', 'Imprécise'] },
+                    { nom: 'Frappe / But', sous: ['Cadrée', 'Déviée'] }
+                ],
+                collectif: [
+                    { nom: 'Appels', sous: ['Disponibles', 'Statiques'] },
+                    { nom: 'Appui/Sout.', sous: ['Triangle', 'Isolé'] },
+                    { nom: 'Largeur', sous: ['Élargie', 'En bloc'] },
+                    { nom: 'Pressing', sous: ['Solidaire', 'En retard'] }
+                ]
+            },
+            'Volleyball': {
+                indiv: [
+                    { nom: 'Service', sous: ['Régulier', 'Faute'] },
+                    { nom: 'Manchette', sous: ['Bras tendus', 'Pliés'] },
+                    { nom: 'Touche', sous: ['Haute précise', 'Basse/Tenue'] },
+                    { nom: 'Attaque', sous: ['Dirigée', 'Aléatoire'] }
+                ],
+                collectif: [
+                    { nom: '3 Touches', sous: ['Construite', 'Renvoi 1er'] },
+                    { nom: 'Placement', sous: ['Respecté', 'Désaxé'] },
+                    { nom: 'Soutien', sous: ['En couverture', 'Spectateur'] },
+                    { nom: 'Communic.', sous: ['Annoncée', 'Silencieuse'] }
+                ]
+            },
+            'Rugby': {
+                indiv: [
+                    { nom: 'Passe', sous: ['En arrière', 'En-avant'] },
+                    { nom: 'Course', sous: ['Axe profond', 'Exposé'] },
+                    { nom: 'Défense', sous: ['Sécurisée', 'Faute/Haut'] },
+                    { nom: 'Libération', sous: ['Propre', 'Confuse'] }
+                ],
+                collectif: [
+                    { nom: 'Soutien', sous: ['Présent', 'Isolé'] },
+                    { nom: 'Continuité', sous: ['Rapide', 'Stoppée'] },
+                    { nom: 'Hors-jeu', sous: ['Alignée', 'Fautive'] },
+                    { nom: 'Largeur', sous: ['Écartée', 'Bouchon'] }
+                ]
+            },
+            'Basketball 3x3': {
+                indiv: [
+                    { nom: 'Dribble', sous: ['Protégé', 'Exposé'] },
+                    { nom: 'Passe', sous: ['Rapide', 'Téléphonée'] },
+                    { nom: 'Tir / Drive', sous: ['Sélectif', 'Précipité'] },
+                    { nom: 'Défense 1c1', sous: ['Cadrée', 'Battue'] }
+                ],
+                collectif: [
+                    { nom: 'Sortie Arc', sous: ['Rapide', 'Oubliée'] },
+                    { nom: 'Écrans', sous: ['Efficace', 'Inutile'] },
+                    { nom: 'Enchaînem.', sous: ['12s maîtrisé', 'Statique'] },
+                    { nom: 'Switch Déf.', sous: ['Coordonné', 'Passif'] }
+                ]
+            },
+            'Badminton': {
+                indiv: [
+                    { nom: 'Service', sous: ['Précis', 'Faute'] },
+                    { nom: 'Dégagé', sous: ['Long/Haut', 'Court'] },
+                    { nom: 'Amorti', sous: ['Rasant', 'Haut/Long'] },
+                    { nom: 'Déplacem.', sous: ['Dynamique', 'Tardif'] }
+                ],
+                collectif: [
+                    { nom: 'Replacem.', sous: ['Systémat.', 'Excentré'] },
+                    { nom: 'Variation', sous: ['Long-Court', 'Monotone'] },
+                    { nom: 'Zone libre', sous: ['Ciblée', 'Sur joueur'] },
+                    { nom: 'Lucidité', sous: ['Maîtrisée', 'Précipitée'] }
+                ]
+            },
+            'Tennis de table': {
+                indiv: [
+                    { nom: 'Service', sous: ['Réglem.', 'Faute'] },
+                    { nom: 'Coup droit', sous: ['Contrôlé', 'Aléatoire'] },
+                    { nom: 'Revers', sous: ['Contrôlé', 'Aléatoire'] },
+                    { nom: 'Posture', sous: ['Équilibrée', 'Rigide'] }
+                ],
+                collectif: [
+                    { nom: 'Placement', sous: ['Varié', 'Centré'] },
+                    { nom: 'Transition', sous: ['Adaptée', 'Subie'] },
+                    { nom: 'Lecture', sous: ['Précoce', 'Tardive'] },
+                    { nom: 'Régularité', sous: ['Maîtrisée', 'Faute directe'] }
+                ]
+            }
+        };
+
+        let grilleCustomCriteres = [];
+        let grilleLastAps = '';
+
+        function getGrilleDefaultCriteresForAps(aps) {
+            if (GRILLE_CRIT_COLLECTIF_DEFAULT[aps]) {
+                return [
+                    ...GRILLE_CRIT_COLLECTIF_DEFAULT[aps].indiv.map(c => ({ nom: c.nom, sous: [...c.sous], groupe: 'indiv' })),
+                    ...GRILLE_CRIT_COLLECTIF_DEFAULT[aps].collectif.map(c => ({ nom: c.nom, sous: [...c.sous], groupe: 'collectif' }))
+                ];
+            }
+            const list = GRILLE_CRIT_OBS_DEFAULT[aps] || GRILLE_CRIT_OBS_DEFAULT['Handball'];
+            return list.map(c => ({ nom: c.nom, sous: [...c.sous], groupe: 'processus' }));
+        }
+
+        function escapeGrilleHtml(str) {
+            return String(str == null ? '' : str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function syncGrilleCriteriaForAps(forceReset = false) {
+            const aps = document.getElementById('aps')?.value || 'Handball';
+            if (forceReset || aps !== grilleLastAps || grilleCustomCriteres.length === 0) {
+                grilleCustomCriteres = getGrilleDefaultCriteresForAps(aps);
+                grilleLastAps = aps;
+            }
+            renderGrilleCriteriaPanel();
+        }
+
+        function renderGrilleCriteriaPanel() {
+            const aps = document.getElementById('aps')?.value || 'Handball';
+            const typeGrille = document.getElementById('typeGrille')?.value || 'observation';
+            const obsWrap = document.getElementById('grilleObsColOptWrap');
+            if (obsWrap) obsWrap.style.display = typeGrille === 'observation' ? 'flex' : 'none';
+
+            const actionsEl = document.getElementById('grilleCritActions');
+            const listEl = document.getElementById('grilleCritListContainer');
+            if (!actionsEl || !listEl) return;
+
+            const isDual = Boolean(GRILLE_CRIT_COLLECTIF_DEFAULT[aps]) ||
+                (grilleCustomCriteres.some(c => c.groupe === 'indiv') && grilleCustomCriteres.some(c => c.groupe === 'collectif'));
+
+            if (isDual) {
+                actionsEl.innerHTML = `
+                    <button type="button" class="grille-mini-btn" id="btnAddCritIndiv">+ Indiv.</button>
+                    <button type="button" class="grille-mini-btn secondary" id="btnAddCritColl">+ Collectif</button>
+                    <button type="button" class="grille-mini-btn reset" id="btnResetGrilleCrits">↺ Défaut</button>
+                `;
+            } else {
+                actionsEl.innerHTML = `
+                    <button type="button" class="grille-mini-btn" id="btnAddCritSingle">+ Critère</button>
+                    <button type="button" class="grille-mini-btn reset" id="btnResetGrilleCrits">↺ Défaut</button>
+                `;
+            }
+
+            const renderRow = (c, idx) => `
+                <div class="grille-crit-item" data-cidx="${idx}">
+                    <input type="text" value="${escapeGrilleHtml(c.nom)}" data-field="nom" placeholder="Nom du critère" maxlength="42" aria-label="Nom du critère">
+                    <input type="text" value="${escapeGrilleHtml(c.sous[0] || '')}" data-field="pos" placeholder="Indicateur +" maxlength="28" aria-label="Sous-critère positif">
+                    <input type="text" value="${escapeGrilleHtml(c.sous[1] || '')}" data-field="neg" placeholder="Indicateur −" maxlength="28" aria-label="Sous-critère négatif">
+                    <button type="button" class="grille-crit-del" data-del="${idx}" title="Supprimer ce critère" ${grilleCustomCriteres.length <= 1 ? 'disabled' : ''}>×</button>
+                </div>
+            `;
+
+            if (isDual) {
+                const indivItems = grilleCustomCriteres.map((c, idx) => ({ c, idx })).filter(x => x.c.groupe === 'indiv');
+                const collItems = grilleCustomCriteres.map((c, idx) => ({ c, idx })).filter(x => x.c.groupe === 'collectif');
+                const otherItems = grilleCustomCriteres.map((c, idx) => ({ c, idx })).filter(x => x.c.groupe !== 'indiv' && x.c.groupe !== 'collectif');
+                listEl.innerHTML = `
+                    ${indivItems.length ? `<div class="grille-crit-group-lbl">Capacité Individuelle</div><div class="grille-crit-list">${indivItems.map(x => renderRow(x.c, x.idx)).join('')}</div>` : ''}
+                    ${collItems.length ? `<div class="grille-crit-group-lbl coll">Capacité Collective</div><div class="grille-crit-list">${collItems.map(x => renderRow(x.c, x.idx)).join('')}</div>` : ''}
+                    ${otherItems.length ? `<div class="grille-crit-group-lbl">Autres critères</div><div class="grille-crit-list">${otherItems.map(x => renderRow(x.c, x.idx)).join('')}</div>` : ''}
+                `;
+            } else {
+                listEl.innerHTML = `<div class="grille-crit-list">${grilleCustomCriteres.map((c, idx) => renderRow(c, idx)).join('')}</div>`;
+            }
+
+            listEl.querySelectorAll('input').forEach(inp => {
+                inp.addEventListener('input', () => {
+                    const row = inp.closest('.grille-crit-item');
+                    const idx = parseInt(row?.dataset.cidx, 10);
+                    if (!Number.isFinite(idx) || !grilleCustomCriteres[idx]) return;
+                    const f = inp.dataset.field;
+                    if (f === 'nom') grilleCustomCriteres[idx].nom = inp.value;
+                    else if (f === 'pos') grilleCustomCriteres[idx].sous[0] = inp.value;
+                    else if (f === 'neg') grilleCustomCriteres[idx].sous[1] = inp.value;
+                });
+            });
+
+            listEl.querySelectorAll('.grille-crit-del').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if (grilleCustomCriteres.length <= 1) return;
+                    const idx = parseInt(btn.dataset.del, 10);
+                    if (Number.isFinite(idx)) {
+                        grilleCustomCriteres.splice(idx, 1);
+                        renderGrilleCriteriaPanel();
+                    }
+                });
+            });
+
+            document.getElementById('btnAddCritIndiv')?.addEventListener('click', () => {
+                if (grilleCustomCriteres.length >= 14) return showError('Maximum 14 critères par grille A4');
+                grilleCustomCriteres.push({ nom: 'Nouveau critère', sous: ['Acquis', 'En cours'], groupe: 'indiv' });
+                renderGrilleCriteriaPanel();
+            });
+            document.getElementById('btnAddCritColl')?.addEventListener('click', () => {
+                if (grilleCustomCriteres.length >= 14) return showError('Maximum 14 critères par grille A4');
+                grilleCustomCriteres.push({ nom: 'Nouveau critère', sous: ['Acquis', 'En cours'], groupe: 'collectif' });
+                renderGrilleCriteriaPanel();
+            });
+            document.getElementById('btnAddCritSingle')?.addEventListener('click', () => {
+                if (grilleCustomCriteres.length >= 14) return showError('Maximum 14 critères par grille A4');
+                grilleCustomCriteres.push({ nom: 'Nouveau critère', sous: ['Acquis', 'En cours'], groupe: 'processus' });
+                renderGrilleCriteriaPanel();
+            });
+            document.getElementById('btnResetGrilleCrits')?.addEventListener('click', () => {
+                syncGrilleCriteriaForAps(true);
+            });
+        }
+
+        function getGrilleNbEleves() {
+            const val = parseInt(document.getElementById('grilleNbEleves')?.value || '35', 10);
+            return Number.isFinite(val) ? Math.max(1, Math.min(60, val)) : 35;
+        }
+
         function updateSubmitButtonAndBadge() {
             const btnText = document.getElementById('submitBtnText');
             const formatBadge = document.getElementById('previewFormatBadge');
@@ -2081,8 +2562,9 @@
                 btnText.textContent = 'Générer la Fiche de Séance';
                 if (formatBadge) formatBadge.textContent = 'Format A4 Paysage Officiel';
             } else if (currentType === 'grille') {
-                btnText.textContent = 'Générer la Grille (35 élèves)';
-                if (formatBadge) formatBadge.textContent = 'Format A4 Portrait (35 élèves)';
+                const nb = getGrilleNbEleves();
+                btnText.textContent = `Générer la Grille (${nb} élèves)`;
+                if (formatBadge) formatBadge.textContent = `Format A4 Portrait (${nb} élèves)`;
             }
         }
 
@@ -2096,9 +2578,36 @@
             document.querySelectorAll('.conditional').forEach(f => f.classList.remove('show'));
             const fields = document.getElementById(currentType + 'Fields');
             if (fields) fields.classList.add('show');
+            if (currentType === 'grille') {
+                syncGrilleCriteriaForAps(false);
+            }
             updateSubmitButtonAndBadge();
             clearPreview();
         }
+
+        document.getElementById('aps')?.addEventListener('change', () => {
+            syncGrilleCriteriaForAps(true);
+        });
+        document.getElementById('typeGrille')?.addEventListener('change', () => {
+            renderGrilleCriteriaPanel();
+            updateDownloadSectionTitle();
+        });
+        document.getElementById('grilleNbEleves')?.addEventListener('input', () => {
+            const nb = getGrilleNbEleves();
+            document.querySelectorAll('.grille-preset-btn').forEach(b => {
+                b.classList.toggle('active', parseInt(b.dataset.rows, 10) === nb);
+            });
+            updateSubmitButtonAndBadge();
+        });
+        document.querySelectorAll('.grille-preset-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const rows = parseInt(btn.dataset.rows, 10) || 35;
+                const inp = document.getElementById('grilleNbEleves');
+                if (inp) inp.value = rows;
+                document.querySelectorAll('.grille-preset-btn').forEach(b => b.classList.toggle('active', b === btn));
+                updateSubmitButtonAndBadge();
+            });
+        });
 
         // Récupérer les données du localStorage (venant de la page d'accueil)
         function loadFormDataFromStorage() {
@@ -2433,10 +2942,15 @@
                     if (subEl) subEl.textContent = 'Tableau récapitulatif du cycle (OTI, OTC, progression)';
                     if (completSubEl) completSubEl.textContent = `Page 1 (Cycle) + les ${nb} Fiches de séance réunies en 1 fichier`;
                     break;
-                case 'grille':
-                    titleEl.textContent = "Grille d'Évaluation (35 élèves)";
+                case 'grille': {
+                    const nbEl = getGrilleNbEleves();
+                    const tg = document.getElementById('typeGrille')?.value || 'observation';
+                    titleEl.textContent = tg === 'observation'
+                        ? `Grille d'Observation (${nbEl} élèves)`
+                        : `Grille d'Évaluation (${nbEl} élèves)`;
                     if (subEl) subEl.textContent = 'Format A4 Portrait prêt pour le terrain';
                     break;
+                }
                 default:
                     titleEl.textContent = 'Document';
             }
@@ -2466,6 +2980,13 @@
                     niveauEleves: document.getElementById('niveauEleves')?.value || 'moyen',
                     nombreSeances: document.getElementById('nombreSeances')?.value || '10',
                     typeGrille: document.getElementById('typeGrille')?.value || 'observation',
+                    nbEleves: getGrilleNbEleves(),
+                    includeObsCol: Boolean(document.getElementById('grilleIncludeObsCol')?.checked),
+                    customCriteres: currentType === 'grille' ? grilleCustomCriteres.map(c => ({
+                        nom: String(c.nom || '').trim() || 'Critère',
+                        sous: [String(c.sous[0] || '').trim() || 'Acquis', String(c.sous[1] || '').trim() || 'En cours'],
+                        groupe: c.groupe || 'processus'
+                    })) : undefined,
                     classe: document.getElementById('classe')?.value || '',
                     nomProf: document.getElementById('nomProf')?.value || '',
                     etablissement: document.getElementById('etablissement')?.value || '',
@@ -2828,7 +3349,10 @@ th,td{border:1px solid #000;padding:4px 6px;vertical-align:top;word-wrap:break-w
                     switchTab(qTab);
                     if (qTab === 'grille') {
                         const tg = document.getElementById('typeGrille');
-                        if (tg) tg.value = 'evaluation';
+                        const qTypeGrille = params.get('typeGrille');
+                        if (tg && (qTypeGrille === 'observation' || qTypeGrille === 'evaluation')) {
+                            tg.value = qTypeGrille;
+                        }
                     }
                 }
                 const qNiveau = params.get('niveau');
@@ -2871,6 +3395,7 @@ th,td{border:1px solid #000;padding:4px 6px;vertical-align:top;word-wrap:break-w
                         for (let i = 0; i < elAps.options.length; i++) {
                             if (elAps.options[i].value.toLowerCase() === mappedAps.toLowerCase()) {
                                 elAps.value = elAps.options[i].value;
+                                syncGrilleCriteriaForAps(true);
                                 break;
                             }
                         }
@@ -2890,7 +3415,7 @@ th,td{border:1px solid #000;padding:4px 6px;vertical-align:top;word-wrap:break-w
                         if (prefill.numeroSeance) { const el = document.getElementById('numeroSeance'); if (el) el.value = prefill.numeroSeance; }
                         if (prefill.niveauEleves) { const el = document.getElementById('niveauEleves'); if (el) el.value = prefill.niveauEleves; }
                         if (prefill.nombreSeances) { const el = document.getElementById('nombreSeances'); if (el) el.value = prefill.nombreSeances; }
-                        if (prefill.typeGrille) { const el = document.getElementById('typeGrille'); if (el) el.value = prefill.typeGrille; }
+                        if (prefill.typeGrille) { const el = document.getElementById('typeGrille'); if (el) { el.value = prefill.typeGrille; renderGrilleCriteriaPanel(); } }
                         if (prefill.classe) { const el = document.getElementById('classe'); if (el) el.value = prefill.classe; }
                         if (prefill.nomProf) { const el = document.getElementById('nomProf'); if (el) el.value = prefill.nomProf; }
                         if (prefill.etablissement) { const el = document.getElementById('etablissement'); if (el) el.value = prefill.etablissement; }

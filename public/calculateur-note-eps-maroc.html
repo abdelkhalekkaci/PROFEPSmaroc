@@ -61,7 +61,7 @@
             "name": "Comment est répartie la note sur 20 en EPS au Maroc selon les OP 2007 et 2009 ?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "La note sur 20 est divisée en trois composantes : la note procédurale (conduite motrice), la note conceptuelle (connaissances sur 3 points) et la note comportementale (savoir-être). En Athlétisme de 1AC à TC, la note procédurale est sur 12 points (6 pts Performance + 6 pts Processus) et le comportemental sur 5 pts. En 1Bac Athlétisme ainsi que de 1AC à TC en Gymnastique et Sports Collectifs, la note procédurale est sur 13 points (6 pts Performance + 7 pts Processus, ou 6 pts Individuel + 7 pts Collectif en Sports Co) et le comportemental sur 4 pts. En 1Bac Gym/Sports Co et en 2Bac toutes APS, la note procédurale est sur 14 points (7 pts Performance/Individuel + 7 pts Processus/Collectif) et le comportemental sur 3 pts."
+              "text": "La note sur 20 est divisée en trois composantes : la note procédurale (conduite motrice), la note conceptuelle (connaissances sur 3 points) et la note comportementale (savoir-être). En Athlétisme de 1AC à TC, la note procédurale est sur 12 points (6 pts Performance + 6 pts Processus) et le comportemental sur 5 pts. En 1Bac Athlétisme ainsi que de 1AC à TC en Gymnastique et Sports Collectifs, la note procédurale est sur 13 points (6 pts Performance + 7 pts Processus, ou 6 pts Individuel + 7 pts Collectif en Sports Co) et le comportemental sur 4 pts. En 1Bac Gym/Sports Co et en 2Bac toutes APS, la note procédurale est sur 14 points (7 pts Perf/Diff. + 7 pts Processus en Athlé/Gym, 7+7 en 1Bac Sports Co, et 6 pts Individuel + 8 pts Collectif en 2Bac Sports Co) et le comportemental sur 3 pts."
             }
           },
           {
@@ -1128,6 +1128,213 @@
       border-color: #F87171;
     }
 
+    /* ═══ BOUTONS INLINE CRITÈRES + BARÈME AJUSTABLE + AJOUT PRÈS DU TABLEAU ═══ */
+    .hdr-crit-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    .hdr-crit-actions {
+      display: inline-flex;
+      gap: 2px;
+      margin-left: 2px;
+    }
+    .hdr-crit-btn {
+      border: 1px solid rgba(255,255,255,0.32);
+      background: rgba(255,255,255,0.12);
+      color: #FFFFFF;
+      border-radius: 4px;
+      width: 18px;
+      height: 18px;
+      font-size: 0.65rem;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+    }
+    .hdr-crit-btn:hover { background: rgba(255,255,255,0.28); }
+    .hdr-crit-btn.del:hover { background: #E11D48; border-color: #FDA4AF; }
+    .hdr-add-crit-btn {
+      border: 1px solid rgba(255,255,255,0.45);
+      background: rgba(255,255,255,0.16);
+      color: #FFFFFF;
+      border-radius: 5px;
+      padding: 1px 6px;
+      font-size: 0.66rem;
+      font-weight: 800;
+      cursor: pointer;
+      margin-left: 6px;
+    }
+    .hdr-add-crit-btn:hover { background: rgba(255,255,255,0.3); }
+
+    .custom-bareme-drawer {
+      margin-top: 0.85rem;
+      padding: 0.9rem 1rem;
+      background: #EFF6FF;
+      border: 1.5px solid #93C5FD;
+      border-radius: 12px;
+    }
+    .custom-bareme-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 0.6rem;
+      margin-top: 0.65rem;
+    }
+    .custom-bareme-item {
+      background: #FFFFFF;
+      border: 1px solid #BFDBFE;
+      border-radius: 9px;
+      padding: 0.5rem 0.65rem;
+    }
+    .custom-bareme-item label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #1E3A8A;
+      margin-bottom: 0.25rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .custom-bareme-item input {
+      width: 100%;
+      border: 1px solid #93C5FD;
+      border-radius: 6px;
+      padding: 0.3rem 0.45rem;
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #0F172A;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .crit-atelier-panel {
+      margin: 0 0 0.9rem 0;
+      padding: 1rem 1.15rem;
+      background: #FFFFFF;
+      border: 1.5px solid #93C5FD;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(36, 52, 168, 0.06);
+    }
+    .crit-atelier-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 0.65rem;
+      margin-top: 0.65rem;
+    }
+    .crit-atelier-card {
+      background: #F8FAFC;
+      border: 1px solid #CBD5E1;
+      border-radius: 10px;
+      padding: 0.65rem 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.38rem;
+    }
+    .crit-atelier-card input {
+      width: 100%;
+      border: 1px solid #CBD5E1;
+      border-radius: 6px;
+      padding: 0.3rem 0.48rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #0F172A;
+      background: #FFFFFF;
+    }
+
+    .table-quick-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+      padding: 0.65rem 0.9rem;
+      background: #F8FAFC;
+      border-bottom: 1.5px solid #BFDBFE;
+    }
+    .table-footer-add-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.65rem;
+      padding: 0.7rem 0.95rem;
+      background: #EFF6FF;
+      border-top: 1.5px solid #BFDBFE;
+    }
+
+    .export-choice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.7rem;
+      margin-top: 0.85rem;
+    }
+    .export-choice-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 600px) {
+      .export-choice-grid, .export-choice-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .export-choice-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.2rem;
+      padding: 0.82rem 0.95rem;
+      border: 1.5px solid #BFDBFE;
+      border-radius: 12px;
+      background: #F8FAFC;
+      color: #0F172A;
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.15s, background 0.15s, transform 0.12s;
+    }
+    .export-choice-btn:hover {
+      background: #EFF6FF;
+      border-color: #2563EB;
+      transform: translateY(-1px);
+    }
+    .export-choice-btn.primary {
+      background: linear-gradient(135deg, #2434A8, #3347D6);
+      border-color: #2434A8;
+      color: #FFFFFF;
+    }
+    .export-choice-btn.primary small { color: #DBEAFE; }
+    .export-choice-btn strong { font-size: 0.88rem; font-weight: 800; }
+    .export-choice-btn small { font-size: 0.74rem; color: #475569; font-weight: 600; }
+
+    .brute-opt-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 0.4rem;
+    }
+    .brute-radio-card {
+      flex: 1 1 200px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 0.78rem;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 10px;
+      background: #F8FAFC;
+      cursor: pointer;
+      font-size: 0.81rem;
+      font-weight: 700;
+      color: #0F172A;
+    }
+    .brute-radio-card.selected {
+      background: #EFF6FF;
+      border-color: #2563EB;
+      color: #1E3A8A;
+    }
+    .brute-print-sheet {
+      display: none;
+    }
+
     /* ═══ EXCEL IMPORT MODAL SIMPLIFIÉ ═══ */
     .excel-modal-backdrop {
       position: fixed;
@@ -1499,12 +1706,45 @@
       color: #FDA4AF;
       border-color: #FB7185;
     }
+    html[data-theme="dark"] .custom-bareme-drawer,
+    html[data-theme="dark"] .crit-atelier-panel,
+    html[data-theme="dark"] .table-quick-bar,
+    html[data-theme="dark"] .table-footer-add-bar {
+      background: #131E3A;
+      border-color: #263558;
+      color: #E8ECFA;
+    }
+    html[data-theme="dark"] .custom-bareme-item,
+    html[data-theme="dark"] .crit-atelier-card,
+    html[data-theme="dark"] .export-choice-btn,
+    html[data-theme="dark"] .brute-radio-card {
+      background: #0F172A;
+      border-color: #334155;
+      color: #E8ECFA;
+    }
+    html[data-theme="dark"] .custom-bareme-item label { color: #93C5FD; }
+    html[data-theme="dark"] .custom-bareme-item input,
+    html[data-theme="dark"] .crit-atelier-card input,
+    html[data-theme="dark"] #inpCustomNegPts {
+      background: #1E293B;
+      border-color: #475569;
+      color: #F8FAFC;
+    }
+    html[data-theme="dark"] .export-choice-btn.primary,
+    html[data-theme="dark"] .brute-radio-card.selected,
+    html[data-theme="dark"] .brute-radio-card.active {
+      background: #1E293B;
+      border-color: #60A5FA;
+      color: #E8ECFA;
+    }
 
     @media print {
       @page { size: A4 landscape; margin: 10mm; }
       .peps-navbar, .note-hero, .mode-switcher, .config-card, .class-toolbar,
       .class-export-card, .footer, .seo-guide-card, .dynamic-guide-card,
-      .excel-modal-backdrop, .peps-toast, .no-print-col {
+      .excel-modal-backdrop, .peps-toast, .no-print-col,
+      .crit-atelier-panel, .custom-bareme-drawer, .table-quick-bar,
+      .table-footer-add-bar, .hdr-crit-actions, .hdr-add-crit-btn, #classSummaryStatsBar {
         display: none !important;
       }
       .class-grid-section { display: block !important; }
@@ -1513,6 +1753,12 @@
       .class-table-container { border: 1px solid #000 !important; box-shadow: none !important; overflow: visible !important; }
       table.sheet-35-table { font-size: 7pt !important; }
       table.sheet-35-table th { background: #1E293B !important; color: #FFFFFF !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      body.print-brute-mode #printableClassTableWrap { display: none !important; }
+      body.print-brute-mode #brutePrintSheet { display: block !important; }
+      body.print-brute-mode #brutePrintSheet table { width: 100%; border-collapse: collapse; font-size: 8pt; }
+      body.print-brute-mode #brutePrintSheet th,
+      body.print-brute-mode #brutePrintSheet td { border: 1px solid #000; padding: 3px 4px; text-align: center; }
+      body.print-brute-mode #brutePrintSheet th { background: #1E3A8A !important; color: #FFFFFF !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
   </style>
   <!-- Google AdSense -->
@@ -1964,15 +2210,15 @@
   </header>
 
   <main class="note-main">
-    <!-- ═══ SWITCHER DE MODE ═══ -->
+    <!-- ═══ SWITCHER DE MODE : CLASSE (PRINCIPAL) & ÉLÈVE (SECONDAIRE) ═══ -->
     <div class="mode-switcher" role="tablist" aria-label="Mode du calculateur de notes EPS">
-      <button type="button" class="mode-btn active" id="btnModeIndiv" onclick="switchCalcMode('indiv')">
-        <span>👤 Calculateur Élève &amp; Grille Processus</span>
-        <span class="badge-count">Détail OP</span>
+      <button type="button" class="mode-btn active" id="btnModeClasse" onclick="switchCalcMode('classe')">
+        <span>📋 Classe</span>
+        <span class="badge-count" id="classCountBadge">1 / 50 élèves</span>
       </button>
-      <button type="button" class="mode-btn" id="btnModeClasse" onclick="switchCalcMode('classe')">
-        <span>📋 Grille de Classe Interactive (Max 50 Élèves)</span>
-        <span class="badge-count" id="classCountBadge">5 / 50 élèves</span>
+      <button type="button" class="mode-btn" id="btnModeIndiv" onclick="switchCalcMode('indiv')">
+        <span>👤 Élève</span>
+        <span class="badge-count">Détail OP</span>
       </button>
     </div>
 
@@ -2026,13 +2272,20 @@
         </div>
 
         <div class="cfg-group">
-          <label for="selCritMode">⚖️ Barème Cases Processus</label>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
+            <label for="selCritMode" style="margin:0;">⚖️ Barème</label>
+            <button type="button" class="q-chip" id="btnToggleBaremeDrawer" onclick="toggleBaremeDrawer()" title="Ajuster les points de chaque critère" style="padding:0.15rem 0.5rem;font-size:0.71rem;">⚙️ Ajuster pts</button>
+          </div>
           <select id="selCritMode" class="cfg-select" onchange="onConfigChange()">
             <option value="strict" selected>Case 1 = Points max (1,5 ou 2 pts) | Case 2 = 0 pt</option>
             <option value="nuance">Case 1 = Points max | Case 2 = Encouragement (0,5 pt)</option>
+            <option value="custom">⚙️ Personnaliser (ajuster les points)...</option>
           </select>
         </div>
       </div>
+
+      <!-- TIROIR AJUSTEMENT DU BARÈME EN POINTS -->
+      <div id="customBaremeDrawer" class="custom-bareme-drawer" style="display:none;"></div>
 
       <!-- BANNIÈRE DYNAMIQUE : SITUATION DE RÉFÉRENCE & DISTRIBUTION OP -->
       <div class="sr-banner" id="srBanner">
@@ -2073,9 +2326,9 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════════════
-         MODE 1 : CALCULATEUR ÉLÈVE INDIVIDUEL + GRILLE PROCESSUS DÉTAILLÉE
+         MODE SECONDAIRE : ÉLÈVE (CALCULATEUR DÉTAILLÉ + GRILLE PROCESSUS)
          ═══════════════════════════════════════════════════════════════════════ -->
-    <div id="indivModeSection">
+    <div id="indivModeSection" style="display:none;">
       <div class="calc-workspace">
         <!-- COLONNE GAUCHE : LES 3 COMPOSANTES (PROCÉDURAL = PERF + PROCESSUS, CONCEPTUEL, COMPORTEMENTAL) -->
         <div>
@@ -2255,25 +2508,25 @@
     </div>
 
     <!-- ═══════════════════════════════════════════════════════════════════════
-         MODE 2 : GRILLE DE CLASSE INTERACTIVE (JUSQU'À 50 ÉLÈVES + EXPORT)
+         MODE PRINCIPAL : CLASSE (GRILLE INTERACTIVE JUSQU'À 50 ÉLÈVES + EXPORTS)
          ═══════════════════════════════════════════════════════════════════════ -->
-    <section class="class-grid-section" id="classeModeSection" aria-label="Grille d'évaluation de classe jusqu'à 50 élèves">
+    <section class="class-grid-section active" id="classeModeSection" aria-label="Grille d'évaluation de classe jusqu'à 50 élèves">
       <div class="class-toolbar">
         <div class="class-toolbar-top">
           <div>
             <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.55rem;">
-              <h2 style="font-size:1.04rem;font-weight:800;color:var(--ink);margin:0;">Grille d'Évaluation — <span id="classTitleApsNiveau">Course de durée (2Bac)</span></h2>
+              <h2 style="font-size:1.04rem;font-weight:800;color:var(--ink);margin:0;">Grille Classe — <span id="classTitleApsNiveau">Course de durée (2Bac)</span></h2>
               <label class="class-name-pill" title="Nom de la classe (repris dans vos exports)">
                 <span>Classe :</span>
                 <input type="text" id="classNameInput" class="class-name-inline-input" value="Classe 1" placeholder="Ex: TCLSHF-1" onchange="onClassNameChange(this.value)">
               </label>
             </div>
-            <p id="classSubtitleHint" style="font-size:0.79rem;color:var(--ink-muted);margin:0.2rem 0 0;">Importez votre liste Excel Massar ou ajoutez vos élèves manuellement (max 50).</p>
+            <p id="classSubtitleHint" style="font-size:0.79rem;color:var(--ink-muted);margin:0.2rem 0 0;">Importez votre liste Excel Massar ou saisissez vos élèves directement dans le tableau.</p>
           </div>
           <div class="class-btn-group">
             <input type="file" id="excelImportInput" accept=".xlsx,.xls,.csv,.txt" style="display:none;" onchange="handleExcelFileSelect(event)">
             <button type="button" class="c-btn primary" onclick="triggerExcelImport()">📥 Importer Excel (Massar)</button>
-            <button type="button" class="c-btn" id="btnAddRowClass" onclick="addBlankClassRow()">+ Ajouter un élève</button>
+            <button type="button" class="c-btn" id="btnToggleCritAtelier" onclick="toggleCritAtelierPanel()">✎ Critères &amp; Poids</button>
             <button type="button" class="c-btn subtle" id="btnResetClassData" onclick="confirmResetClassData()">Réinitialiser</button>
           </div>
         </div>
@@ -2291,45 +2544,62 @@
         </div>
       </div>
 
+      <!-- ATELIER PERSONNALISATION DES CRITÈRES -->
+      <div id="critAtelierPanel" class="crit-atelier-panel" style="display:none;"></div>
+
       <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-bottom:0.9rem;" id="classSummaryStatsBar">
         <div style="flex:1 1 170px;background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.65rem 0.9rem;">
           <div style="font-size:0.72rem;font-weight:700;color:#475569;text-transform:uppercase;">Moyenne de Classe</div>
-          <div style="font-size:1.2rem;font-weight:800;color:#1E3A8A;font-variant-numeric:tabular-nums;" id="clsStatAvg">16.25 / 20</div>
+          <div style="font-size:1.2rem;font-weight:800;color:#1E3A8A;font-variant-numeric:tabular-nums;" id="clsStatAvg">0.00 / 20</div>
         </div>
         <div style="flex:1 1 170px;background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.65rem 0.9rem;">
           <div style="font-size:0.72rem;font-weight:700;color:#475569;text-transform:uppercase;">Note Min / Note Max</div>
-          <div style="font-size:1.2rem;font-weight:800;color:#1D4ED8;font-variant-numeric:tabular-nums;" id="clsStatMinMax">13.00 — 19.75</div>
+          <div style="font-size:1.2rem;font-weight:800;color:#1D4ED8;font-variant-numeric:tabular-nums;" id="clsStatMinMax">—</div>
         </div>
         <div style="flex:1 1 170px;background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.65rem 0.9rem;">
           <div style="font-size:0.72rem;font-weight:700;color:#475569;text-transform:uppercase;">Taux de Réussite (≥ 10/20)</div>
-          <div style="font-size:1.2rem;font-weight:800;color:#2434A8;font-variant-numeric:tabular-nums;" id="clsStatPassRate">100% (5/5)</div>
+          <div style="font-size:1.2rem;font-weight:800;color:#2434A8;font-variant-numeric:tabular-nums;" id="clsStatPassRate">0% (0/1)</div>
         </div>
         <div style="flex:1 1 170px;background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.65rem 0.9rem;">
           <div style="font-size:0.72rem;font-weight:700;color:#475569;text-transform:uppercase;">Effectif (Garçons / Filles)</div>
-          <div style="font-size:1.05rem;font-weight:800;color:#1E3A8A;font-variant-numeric:tabular-nums;" id="clsStatStatusCounts">5 (3 G · 2 F)</div>
+          <div style="font-size:1.05rem;font-weight:800;color:#1E3A8A;font-variant-numeric:tabular-nums;" id="clsStatStatusCounts">1 (1 G · 0 F)</div>
         </div>
       </div>
 
-      <!-- SECTION EXPORTS & IMPRESSION AU-DESSUS DE LA GRILLE -->
-      <div class="class-export-card" id="classExportSection" aria-label="Exporter la grille de notes">
+      <!-- SECTION EXPORTS EN 2 BOUTONS SÉPARÉS AU-DESSUS DE LA GRILLE -->
+      <div class="class-export-card" id="classExportSection" aria-label="Télécharger la grille">
         <div class="class-export-info">
-          <h3>Exporter &amp; Imprimer la Grille de Notes</h3>
-          <p>Téléchargez la feuille complète ou le tableau prêt pour Massar (inclut le nom de la classe, le genre et la note /20).</p>
+          <h3>Télécharger la Grille (Complétée ou Brute)</h3>
+          <p>Choisissez entre la <strong>grille avec les notes saisies</strong> ou une <strong>grille brute vierge</strong> prête à imprimer.</p>
         </div>
         <div class="class-btn-group">
-          <button type="button" class="c-btn" onclick="exportClassGridExcel('classe')">📊 Excel (.xlsx)</button>
-          <button type="button" class="c-btn" onclick="exportClassGridExcel('massar')">📑 Export Massar (.xlsx)</button>
-          <button type="button" class="c-btn" onclick="exportClassGridWord()">📝 Word (.doc)</button>
-          <button type="button" class="c-btn primary" onclick="window.print()">🖨️ Imprimer / PDF A4</button>
+          <button type="button" class="c-btn primary" onclick="openCompletedExportModal()">📥 Télécharger Grille Complétée</button>
+          <button type="button" class="c-btn" onclick="openBruteExportModal()">📋 Télécharger Grille Brute</button>
         </div>
       </div>
 
       <div class="class-table-container" id="printableClassTableWrap">
+        <div class="table-quick-bar">
+          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
+            <button type="button" class="c-btn primary" id="btnAddRowClassTop" onclick="addBlankClassRow()">➕ Ajouter un élève</button>
+            <span style="font-size:0.75rem;color:#475569;font-weight:600;">Cliquez sur <strong>✎</strong> ou <strong>×</strong> dans l'en-tête pour modifier/supprimer un critère.</span>
+          </div>
+          <span style="font-size:0.74rem;font-weight:700;color:#1E40AF;" id="tableRowCountLabel">1 / 50 élèves</span>
+        </div>
+
         <table class="sheet-35-table" id="classSheetTable">
           <thead id="classSheetThead"></thead>
           <tbody id="classSheetTbody"></tbody>
         </table>
+
+        <div class="table-footer-add-bar">
+          <button type="button" class="c-btn primary" id="btnAddRowClass" onclick="addBlankClassRow()">➕ Ajouter un élève</button>
+          <span style="font-size:0.75rem;color:#1E3A8A;font-weight:600;">Astuce : appuyez sur <strong>Entrée</strong> dans un nom pour ajouter directement l'élève suivant.</span>
+        </div>
       </div>
+
+      <!-- CONTENEUR D'IMPRESSION GRILLE BRUTE (A4) -->
+      <div id="brutePrintSheet" class="brute-print-sheet"></div>
     </section>
 
     <!-- ═══ GUIDE INTERACTIF DYNAMIQUE SELON L'APS SÉLECTIONNÉE ═══ -->
@@ -2389,7 +2659,7 @@
               <td><strong>2ème Année Bac (2Bac)</strong> (Lycée OP 2007)</td>
               <td><strong>14 pts</strong> (7 pts Perf + 7 pts Processus)</td>
               <td><strong>14 pts</strong> (7 pts Diff. + 7 pts Processus)</td>
-              <td><strong>14 pts</strong> (7 pts Individuel + 7 pts Collectif)</td>
+              <td><strong>14 pts</strong> (6 pts Individuel + 8 pts Collectif)</td>
               <td><strong>3 pts</strong></td>
               <td><strong>3 pts</strong> (Toutes APS)</td>
               <td><strong>20 / 20</strong></td>
@@ -2621,6 +2891,131 @@
     </div>
   </div>
 
+  <!-- ═══ MODALE 1 : TÉLÉCHARGER GRILLE COMPLÉTÉE (FORMAT UNIQUEMENT) ═══ -->
+  <div class="excel-modal-backdrop" id="exportCompletedModal" role="dialog" aria-modal="true" aria-labelledby="exportCompletedTitle">
+    <div class="excel-modal-dialog" style="max-width:520px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:0.75rem;">
+        <div>
+          <h3 id="exportCompletedTitle" style="margin:0;font-size:1.05rem;font-weight:800;color:#1E3A8A;">📥 Télécharger la Grille Complétée</h3>
+          <p style="margin:0.18rem 0 0;font-size:0.79rem;color:var(--ink-muted);">Choisissez le format souhaité pour exporter les notes calculées (/20).</p>
+        </div>
+        <button type="button" class="c-btn subtle" onclick="closeCompletedExportModal()">✕ Fermer</button>
+      </div>
+      <div class="export-choice-grid">
+        <button type="button" class="export-choice-btn primary" onclick="runCompletedExport('classe')">
+          <strong>📊 Excel Complet (.xlsx)</strong>
+          <small>Grille complète : critères, barème et note /20</small>
+        </button>
+        <button type="button" class="export-choice-btn" onclick="runCompletedExport('massar')">
+          <strong>📑 Export Massar (.xlsx)</strong>
+          <small>Colonnes Procédural, Conceptuel, Comportemental &amp; /20</small>
+        </button>
+        <button type="button" class="export-choice-btn" onclick="runCompletedExport('word')">
+          <strong>📝 Document Word (.doc)</strong>
+          <small>Feuille officielle mise en forme pour modification</small>
+        </button>
+        <button type="button" class="export-choice-btn" onclick="runCompletedExport('pdf')">
+          <strong>🖨️ PDF / Impression A4</strong>
+          <small>Imprimer ou enregistrer au format PDF paysage</small>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ MODALE 2 : TÉLÉCHARGER GRILLE BRUTE (NOMS, NB LIGNES, FORMAT) ═══ -->
+  <div class="excel-modal-backdrop" id="exportBruteModal" role="dialog" aria-modal="true" aria-labelledby="exportBruteTitle">
+    <div class="excel-modal-dialog" style="max-width:560px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:0.75rem;">
+        <div>
+          <h3 id="exportBruteTitle" style="margin:0;font-size:1.05rem;font-weight:800;color:#1E3A8A;">📋 Télécharger une Grille Brute (Vierge)</h3>
+          <p style="margin:0.18rem 0 0;font-size:0.79rem;color:var(--ink-muted);">Grille vierge sans notes avec vos critères actuels, prête pour le terrain.</p>
+        </div>
+        <button type="button" class="c-btn subtle" onclick="closeBruteExportModal()">✕ Fermer</button>
+      </div>
+
+      <div style="margin-top:0.95rem;">
+        <div style="font-size:0.8rem;font-weight:800;color:#1E3A8A;">1. Contenu des noms d'élèves :</div>
+        <div class="brute-opt-row">
+          <label class="brute-radio-card" id="lblBruteNamesWithout">
+            <input type="radio" name="bruteNamesMode" value="without" onchange="refreshBruteModalUi(true)">
+            <span>📄 Sans noms (lignes vides numérotées)</span>
+          </label>
+          <label class="brute-radio-card" id="lblBruteNamesWith">
+            <input type="radio" name="bruteNamesMode" value="with" onchange="refreshBruteModalUi(true)">
+            <span id="txtBruteNamesWith">👥 Avec noms actuels / Excel</span>
+          </label>
+        </div>
+      </div>
+
+      <div style="margin-top:0.9rem;">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:0.5rem;">
+          <label for="inpBruteRowCount" style="font-size:0.8rem;font-weight:800;color:#1E3A8A;">2. Nombre de lignes élèves :</label>
+          <div style="display:flex;gap:0.3rem;flex-wrap:wrap;">
+            <button type="button" class="q-chip" onclick="setBruteRowPreset(20)">20</button>
+            <button type="button" class="q-chip" onclick="setBruteRowPreset(30)">30</button>
+            <button type="button" class="q-chip" onclick="setBruteRowPreset(35)">35</button>
+            <button type="button" class="q-chip" onclick="setBruteRowPreset(40)">40</button>
+            <button type="button" class="q-chip" onclick="setBruteRowPreset(50)">50</button>
+          </div>
+        </div>
+        <input type="number" id="inpBruteRowCount" class="cfg-input" min="1" max="60" value="35" style="margin-top:0.35rem;font-variant-numeric:tabular-nums;">
+        <div id="bruteNamesHint" style="font-size:0.74rem;color:#475569;margin-top:0.25rem;"></div>
+      </div>
+
+      <div style="margin-top:0.95rem;">
+        <div style="font-size:0.8rem;font-weight:800;color:#1E3A8A;">3. Choisissez le format à télécharger :</div>
+        <div class="export-choice-grid cols-3">
+          <button type="button" class="export-choice-btn primary" onclick="exportBruteGrid('pdf')">
+            <strong>🖨️ PDF / A4</strong>
+            <small>Imprimer ou sauver en PDF</small>
+          </button>
+          <button type="button" class="export-choice-btn" onclick="exportBruteGrid('word')">
+            <strong>📝 Word (.doc)</strong>
+            <small>Modifiable sous Word</small>
+          </button>
+          <button type="button" class="export-choice-btn" onclick="exportBruteGrid('excel')">
+            <strong>📊 Excel (.xlsx)</strong>
+            <small>Feuille tableur vierge</small>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ MODALE 3 : MODIFIER OU AJOUTER UN CRITÈRE ═══ -->
+  <div class="excel-modal-backdrop" id="editSingleCritModal" role="dialog" aria-modal="true" aria-labelledby="editCritModalTitle">
+    <div class="excel-modal-dialog" style="max-width:460px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:0.75rem;">
+        <h3 id="editCritModalTitle" style="margin:0;font-size:1.02rem;font-weight:800;color:#1E3A8A;">✎ Modifier le critère</h3>
+        <button type="button" class="c-btn subtle" onclick="closeEditSingleCritModal()">✕ Fermer</button>
+      </div>
+      <div style="display:grid;gap:0.7rem;margin-top:0.85rem;">
+        <div class="cfg-group">
+          <label for="inpEditCritNom">Nom du critère *</label>
+          <input type="text" id="inpEditCritNom" class="cfg-input" maxlength="28" placeholder="Ex: Démarquage">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;">
+          <div class="cfg-group">
+            <label for="inpEditCritPos" style="color:#166534;">Libellé Vert (Acquis)</label>
+            <input type="text" id="inpEditCritPos" class="cfg-input" maxlength="22" placeholder="Ex: Actif">
+          </div>
+          <div class="cfg-group">
+            <label for="inpEditCritNeg" style="color:#9F1239;">Libellé Rouge (En cours)</label>
+            <input type="text" id="inpEditCritNeg" class="cfg-input" maxlength="22" placeholder="Ex: Statique">
+          </div>
+        </div>
+        <div class="cfg-group">
+          <label for="inpEditCritWeight">Points du critère (Barème)</label>
+          <input type="number" id="inpEditCritWeight" class="cfg-input" min="0" max="10" step="0.25" value="1.5">
+        </div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;gap:0.5rem;margin-top:1rem;">
+        <button type="button" class="c-btn" onclick="closeEditSingleCritModal()">Annuler</button>
+        <button type="button" class="c-btn primary" onclick="saveSingleCritModal()">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+
   <div class="peps-toast" id="pepsToast" role="status" aria-live="polite"></div>
 
   <script>
@@ -2637,7 +3032,7 @@
       'Lancer de poids': { unit: 'm', placeholder: '8.45', stepHint: 'Ex: 8.45 m', type: 'meters', guide: "Saisissez la distance du meilleur jet en mètres (ex. 8.45 m). Le calculateur applique l'engin et le barème G/F correspondant au niveau." },
       'Saut en longueur': { unit: 'm', placeholder: '4.65', stepHint: 'Ex: 4.65 m', type: 'meters', guide: "Saisissez la distance mesurée en mètres (ex. 4.65 m ou 7.90 m) depuis la planche jusqu'à la trace la plus proche." },
       'Saut en hauteur': { unit: 'm', placeholder: '1.35', stepHint: 'Ex: 1.35 m', type: 'meters', guide: "Saisissez la plus grande hauteur franchie en mètres (ex. 1.35 m)." },
-      'Gymnastique': { unit: 'élém.', placeholder: '6', stepHint: 'Ex: 6 élém.', type: 'elements', guide: "Saisissez le nombre d'éléments validés du contrat officiel (de 0 au total du contrat du niveau : 5, 6 ou 7 élém.)." }
+      'Gymnastique': { unit: 'élém.', placeholder: '6', stepHint: 'Ex: 6 élém.', type: 'elements', guide: "Saisissez le nombre d'éléments validés du contrat officiel (de 0 au total du contrat du niveau : 5, 6, 7 ou 8 élém.)." }
     };
 
     // Critères d'observation du Processus (Athlétisme & Gymnastique) avec descripteurs pour le Guide Dynamique
@@ -2714,10 +3109,9 @@
           { nom: 'Dribble', sous: ['Tête haute', 'Yeux balle'], descPos: 'Dribble protégé main opposée avec lecture du jeu tête levée.', descNeg: 'Dribble du bout des yeux sur le ballon ou reprise fréquente.', tip: 'Observer la main faible et la protection par le corps.' },
           { nom: 'Passe', sous: ['Précise', 'Interceptée'], descPos: 'Passe claquée/à rebond adaptée à la pression défensive.', descNeg: 'Passe en cloche prévisible ou mal dosée.', tip: 'Noter l\'enchaînement triple menace avant de passer.' },
           { nom: 'Tir / Lay-up', sous: ['Équilibré', 'Forcé'], descPos: 'Double-pas maîtrisé ou tir équilibré sur appuis stables.', descNeg: 'Marcher sur départ ou tir précipité sous défense.', tip: 'Vérifier la trajectoire en cloche vers le carré de planche.' },
-          { nom: '1 contre 1', sous: ['Orienté', 'Statique'], descPos: 'Prise d\'intervalle franche en attaque et posture basse en défense.', descNeg: 'Absence de prise d\'initiative ou fautes de main inutiles.', tip: 'Observer les déplacements latéraux sans croiser les pieds.' }
+          { nom: 'Démarquage', sous: ['Actif', 'Statique'], descPos: 'Appels vifs dans les espaces libres et changements de rythme pour recevoir.', descNeg: 'Joueur caché derrière son défenseur ou statique après la passe.', tip: 'Observer la prise de position et l\'appel de balle main cible.' }
         ],
         collectif: [
-          { nom: 'Passe-et-va', sous: ['Actif', 'Statique'], descPos: 'Enchaînement passe puis démarquage vers le panier ou l\'aile.', descNeg: 'Reste spectateur une fois le ballon lâché.', tip: 'Compter les coupes vers le panier après la passe.' },
           { nom: 'Espacement', sous: ['Aéré', 'Regroupé'], descPos: 'Distances équilibrées (spacing) libérant la raquette pour pénétrer.', descNeg: 'Joueurs collés dans la raquette fermant les lignes de passe.', tip: 'Utiliser l\'arc à 3 points comme repère de répartition.' },
           { nom: 'Transition', sous: ['Rapide', 'Tardive'], descPos: 'Relance rapide après rebond ou panier encaissé vers l\'avant.', descNeg: 'Attente prolongée ou perte de balle sur remise en jeu.', tip: 'Observer l\'ouverture de passe vers l\'avant-couloir.' },
           { nom: 'Aide Déf.', sous: ['Cadrée', 'Dépassée'], descPos: 'Flottement côté opposé et communication défensive sur écran/coupe.', descNeg: 'Défense passive laissant l\'accès direct au cercle.', tip: 'Valoriser le placement ballon-joueur-panier.' }
@@ -2831,12 +3225,12 @@
 
     // Contrats Gymnastique par niveau (OP 2009 & OP 2007)
     const GYM_CONTRATS = {
-      '1AC': { contrat: '3A + 2B + 0C', totalElements: 5, detail: '3 éléments A + 2 éléments B' },
+      '1AC': { contrat: '3A + 2B',      totalElements: 5, detail: '3 éléments A + 2 éléments B' },
       '2AC': { contrat: '3A + 2B + 1C', totalElements: 6, detail: '3 éléments A + 2 éléments B + 1 élément C' },
       '3AC': { contrat: '2A + 4B + 1C', totalElements: 7, detail: '2 éléments A + 4 éléments B + 1 élément C' },
-      'TC':  { contrat: '2A + 3B + 2C', totalElements: 7, detail: '2 éléments A + 3 éléments B + 2 éléments C' },
-      '1AB': { contrat: '2B + 3C + 2D', totalElements: 7, detail: '2 éléments B + 3 éléments C + 2 éléments D' },
-      '2AB': { contrat: '2C + 3D + 2E', totalElements: 7, detail: '2 éléments C + 3 éléments D + 2 éléments E' }
+      'TC':  { contrat: '4A + 2B',      totalElements: 6, detail: '4 éléments A + 2 éléments B' },
+      '1AB': { contrat: '4A + 2B + 1C', totalElements: 7, detail: '4 éléments A + 2 éléments B + 1 élément C' },
+      '2AB': { contrat: '3A + 3B + 2C', totalElements: 8, detail: '3 éléments A + 3 éléments B + 2 éléments C' }
     };
 
     // Barèmes Performance par APS, Niveau et Sexe (seuils pour la note Max de Performance /6 ou /7)
@@ -2846,16 +3240,16 @@
         unit: 'sec_duree',
         srTitle: 'Situation de Référence (SR) : Courir 1000m (Garçons) / 600m (Filles)',
         srDesc: 'Courir 1000m (Garçons) ou 600m (Filles) en maintenant une allure régulière adaptée à sa VMA, avec un écart minimal entre les passages aux tours.',
-        // [temps_pour_note_max_sec, temps_pour_note_min_sec] (plus le temps est bas, meilleure est la note)
-        G: { '1AC': [245, 340], '2AC': [232, 325], '3AC': [218, 310], 'TC': [210, 295], '1AB': [200, 285], '2AB': [190, 275] }, // 1000m Garçons (ex. 2Bac : 3'10"=190s -> 7/7)
-        F: { '1AC': [165, 240], '2AC': [156, 230], '3AC': [148, 220], 'TC': [142, 212], '1AB': [135, 205], '2AB': [128, 198] }  // 600m Filles (ex. 2Bac : 2'08"=128s -> 7/7)
+        // [temps_pour_note_max_sec, temps_pour_note_min_1pt_sec] (plus le temps est bas, meilleure est la note)
+        G: { '1AC': [245, 340], '2AC': [230, 325], '3AC': [215, 310], 'TC': [200, 295], '1AB': [188, 285], '2AB': [175, 275] }, // 1000m Garçons (2Bac : 2'55"=175s -> 7/7)
+        F: { '1AC': [165, 240], '2AC': [154, 230], '3AC': [144, 220], 'TC': [134, 212], '1AB': [125, 205], '2AB': [116, 198] }  // 600m Filles (2Bac : 1'56"=116s -> 7/7)
       },
       'Course de vitesse': {
         unit: 'sec_sprint',
         srTitle: 'Situation de Référence (SR) : Courir 80m (Garçons) / 60m (Filles) au signal',
         srDesc: 'Réaliser la meilleure performance chronométrique sur 80m (Garçons) ou 60m (Filles) à partir d\'un départ commandé (À vos marques, Prêt, Partez).',
-        G: { '1AC': [11.8, 15.0], '2AC': [11.4, 14.5], '3AC': [10.9, 14.0], 'TC': [10.6, 13.6], '1AB': [10.3, 13.2], '2AB': [10.0, 12.8] }, // 80m Garçons
-        F: { '1AC': [10.2, 13.2], '2AC': [9.9, 12.8],  '3AC': [9.6, 12.5],  'TC': [9.4, 12.2],  '1AB': [9.1, 11.9],  '2AB': [8.9, 11.6] }   // 60m Filles
+        G: { '1AC': [11.8, 15.0], '2AC': [11.4, 14.6], '3AC': [10.9, 14.2], 'TC': [10.5, 13.8], '1AB': [10.1, 13.4], '2AB': [9.8, 13.1] }, // 80m Garçons (2Bac : <=9.8s -> 7/7)
+        F: { '1AC': [10.2, 13.2], '2AC': [9.9, 12.9],  '3AC': [9.6, 12.6],  'TC': [9.3, 12.2],  '1AB': [9.0, 11.9],  '2AB': [8.7, 11.6] }   // 60m Filles (2Bac : <=8.7s -> 7/7)
       },
       'Course de haies': {
         unit: 'sec_sprint',
@@ -2866,7 +3260,7 @@
       },
       'Course de relais': {
         unit: 'sec_sprint',
-        srTitle: 'Situation de Référence (SR) : Relais 4×50m (Collège) / 4×60m ou Duo 2×60m (Lycée)',
+        srTitle: 'Situation de Référence (SR) : Relais 4×50m (Collège) / 4×60m (Lycée)',
         srDesc: 'Transmettre le témoin en mouvement à pleine vitesse à l\'intérieur de la zone réglementaire de 20m sans chute ni ralentissement.',
         G: { '1AC': [28.5, 35.0], '2AC': [27.5, 34.0], '3AC': [26.5, 33.0], 'TC': [30.5, 37.5], '1AB': [29.5, 36.5], '2AB': [28.5, 35.5] },
         F: { '1AC': [31.5, 38.5], '2AC': [30.5, 37.5], '3AC': [29.5, 36.5], 'TC': [34.0, 41.0], '1AB': [33.0, 40.0], '2AB': [32.0, 39.0] }
@@ -2877,17 +3271,17 @@
         srDesc: 'Réaliser le meilleur jet sur 3 essais mesurés depuis le butoir après déplacement en translation dans le cercle de 2,135m.',
         poidsEngin: {
           G: { '1AC': '3 kg', '2AC': '3 kg', '3AC': '4 kg', 'TC': '4 kg', '1AB': '5 kg', '2AB': '5 kg' },
-          F: { '1AC': '3 kg', '2AC': '3 kg', '3AC': '3 kg', 'TC': '3 kg', '1AB': '3 kg', '2AB': '4 kg' }
+          F: { '1AC': '3 kg', '2AC': '3 kg', '3AC': '3 kg', 'TC': '3 kg', '1AB': '3 kg', '2AB': '3 kg' }
         },
-        G: { '1AC': [7.50, 4.00], '2AC': [8.50, 4.50], '3AC': [9.20, 5.00], 'TC': [10.00, 5.50], '1AB': [10.20, 5.80], '2AB': [10.80, 6.20] },
-        F: { '1AC': [5.80, 3.00], '2AC': [6.40, 3.40], '3AC': [7.00, 3.80], 'TC': [7.50, 4.10],  '1AB': [8.00, 4.40],  '2AB': [7.80, 4.20] }
+        G: { '1AC': [7.50, 4.00], '2AC': [8.50, 4.50], '3AC': [9.20, 5.00], 'TC': [10.00, 5.50], '1AB': [10.60, 5.80], '2AB': [11.50, 6.20] },
+        F: { '1AC': [5.80, 3.00], '2AC': [6.40, 3.40], '3AC': [7.00, 3.80], 'TC': [7.50, 4.10],  '1AB': [8.00, 4.40],  '2AB': [8.50, 4.70] }
       },
       'Saut en longueur': {
         unit: 'metres',
         srTitle: 'Situation de Référence (SR) : Saut en longueur avec course d\'élan étalonnée (9 à 12 appuis)',
         srDesc: 'Réaliser la meilleure performance sur 3 essais avec course d\'élan progressive, impulsion dynamique sur la planche d\'appel et réception équilibrée dans la fosse.',
-        G: { '1AC': [3.80, 2.30], '2AC': [4.20, 2.60], '3AC': [4.60, 2.90], 'TC': [4.90, 3.20], '1AB': [5.20, 3.40], '2AB': [5.50, 3.60] },
-        F: { '1AC': [3.00, 1.80], '2AC': [3.30, 2.00], '3AC': [3.60, 2.20], 'TC': [3.80, 2.40], '1AB': [4.00, 2.60], '2AB': [4.20, 2.80] }
+        G: { '1AC': [3.80, 2.30], '2AC': [4.20, 2.60], '3AC': [4.60, 2.90], 'TC': [4.90, 3.15], '1AB': [5.15, 3.35], '2AB': [5.40, 3.55] },
+        F: { '1AC': [3.00, 1.80], '2AC': [3.30, 2.00], '3AC': [3.60, 2.20], 'TC': [3.80, 2.35], '1AB': [3.95, 2.48], '2AB': [4.10, 2.60] }
       },
       'Saut en hauteur': {
         unit: 'metres',
@@ -2899,10 +3293,10 @@
     };
 
     const MAX_CLASS_STUDENTS = 50;
-    const STORAGE_KEY = 'profeps_calc_note_v2';
+    const STORAGE_KEY = 'profeps_calc_note_v3';
 
-    // État global
-    let currentMode = 'indiv';
+    // État global (Mode Grille de Classe par défaut avec 1 seule ligne vide)
+    let currentMode = 'classe';
     let currentNiveau = '2AB';
     let currentAps = 'Course de durée';
     let lastConfiguredAps = 'Course de durée';
@@ -2911,25 +3305,27 @@
     let currentClassName = 'Classe 1';
     let currentClassFilter = 'ALL';
     let currentClassSearch = '';
+    let hasImportedExcelNames = false;
     let resetConfirmPending = false;
     let resetConfirmTimer = null;
 
-    // Critères en mode Individuel (0 = Maîtrisé, 1 = En cours)
-    // - indivCritIndivChoices : utilisé pour 1A Capacité Individuelle (Sports Co / Renvoi)
-    // - indivCritChoices : utilisé pour 1B Processus (Athlé/Gym) ou 1B Capacité Collective (Sports Co / Renvoi)
+    // Personnalisation barème & critères par niveau::aps
+    let customBaremeConfig = {};
+    let customCriteriaMap = {};
+    let baremeDrawerOpen = false;
+    let critAtelierOpen = false;
+    let editingCritCtx = null;
+
+    // Critères en mode Élève (0 = Maîtrisé, 1 = En cours)
     let indivCritIndivChoices = [0, 0, 0, 0];
     let indivCritChoices = [0, 0, 0, 0];
 
     let currentPerfScore = 6.0;
     let currentProcScore = 7.0;
 
-    // Liste des élèves en mode Grille de Classe (plafond 50 élèves)
+    // Liste des élèves en mode Grille de Classe (1 seule ligne par défaut)
     let classStudents = [
-      { nom: 'EL AMRANI Youssef', sexe: 'G', status: 'OK', rawPerf: '3\'18"', perfScore: 6.5, critsIndiv: [0, 0, 0, 0], crits: [0, 0, 0, 0], concep: 2.5, comp: 3.0 },
-      { nom: 'BENALI Salma', sexe: 'F', status: 'OK', rawPerf: '2\'14"', perfScore: 6.0, critsIndiv: [0, 0, 1, 0], crits: [0, 0, 0, 1], concep: 3.0, comp: 3.0 },
-      { nom: 'TAZI Mehdi', sexe: 'G', status: 'OK', rawPerf: '3\'35"', perfScore: 5.0, critsIndiv: [0, 1, 0, 0], crits: [0, 1, 0, 0], concep: 2.0, comp: 2.5 },
-      { nom: 'CHRAIBI Aya', sexe: 'F', status: 'OK', rawPerf: '2\'28"', perfScore: 4.5, critsIndiv: [0, 0, 1, 1], crits: [0, 0, 1, 1], concep: 2.5, comp: 3.0 },
-      { nom: 'IDRISSI Hamza', sexe: 'G', status: 'OK', rawPerf: '3\'12"', perfScore: 6.75, critsIndiv: [0, 0, 0, 0], crits: [0, 0, 0, 0], concep: 3.0, comp: 3.0 }
+      { nom: 'Élève', sexe: 'G', status: 'OK', rawPerf: '', perfScore: 0, critsIndiv: [0, 0, 0, 0], crits: [0, 0, 0, 0], concep: 0, comp: 0 }
     ];
 
     function showToast(msg) {
@@ -2950,6 +3346,56 @@
         .replace(/'/g, '&#39;');
     }
 
+    function roundQuarter(n) {
+      return Math.round((Number(n) || 0) * 4) / 4;
+    }
+
+    function distributeWeightsEvenly(count, totalMax) {
+      const n = Math.max(1, count || 1);
+      const totalHalves = Math.max(0, Math.round((Number(totalMax) || 0) * 2));
+      const base = Math.floor(totalHalves / n);
+      const rem = totalHalves % n;
+      return Array.from({ length: n }, (_, i) => (base + (i < rem ? 1 : 0)) / 2);
+    }
+
+    function cloneCritList(list) {
+      return (Array.isArray(list) ? list : []).map(c => ({
+        nom: String(c.nom || 'Critère'),
+        sous: Array.isArray(c.sous) && c.sous.length >= 2 ? [String(c.sous[0]), String(c.sous[1])] : ['Acquis', 'En cours'],
+        descPos: c.descPos || '',
+        descNeg: c.descNeg || '',
+        tip: c.tip || ''
+      }));
+    }
+
+    function getCustomKey(niveau, aps) {
+      return `${niveau || currentNiveau}::${aps || currentAps}`;
+    }
+
+    function getDefaultCritsForAps(aps, kind) {
+      if (CRITERES_COLLECTIF[aps]) {
+        return cloneCritList(kind === 'indiv' ? CRITERES_COLLECTIF[aps].indiv : CRITERES_COLLECTIF[aps].collectif);
+      }
+      return cloneCritList(CRITERES_OBS[aps] || CRITERES_OBS['Course de durée']);
+    }
+
+    function getCritsForAps(aps, kind, niveau) {
+      const key = getCustomKey(niveau || currentNiveau, aps);
+      const custom = customCriteriaMap[key];
+      const normKind = kind === 'indiv' ? 'indiv' : 'proc';
+      if (custom && Array.isArray(custom[normKind]) && custom[normKind].length > 0) {
+        return cloneCritList(custom[normKind]);
+      }
+      return getDefaultCritsForAps(aps, kind);
+    }
+
+    function alignWeightsArray(savedArr, count, fallbackTotal) {
+      if (Array.isArray(savedArr) && savedArr.length === count) {
+        return savedArr.map(v => Math.max(0, roundQuarter(v)));
+      }
+      return distributeWeightsEvenly(count, fallbackTotal);
+    }
+
     // =========================================================================
     // 2. STRUCTURE OFFICIELLE DES NOTES PAR NIVEAU & FAMILLE D'APS
     // =========================================================================
@@ -2958,30 +3404,55 @@
       const isGym = aps === 'Gymnastique';
       const isSpCo = !isAthle && !isGym;
 
-      let procTotal = 14;
-      let perfMax = 7;
-      let procMax = 7;
+      let officialProcTotal = 14;
+      let officialPerfMax = 7;
+      let officialProcMax = 7;
       let concepMax = 3;
       let compMax = 3;
 
       if (isAthle) {
         if (['1AC', '2AC', '3AC', 'TC'].includes(niveau)) {
-          procTotal = 12; perfMax = 6; procMax = 6; concepMax = 3; compMax = 5;
+          officialProcTotal = 12; officialPerfMax = 6; officialProcMax = 6; concepMax = 3; compMax = 5;
         } else if (niveau === '1AB') {
-          procTotal = 13; perfMax = 6; procMax = 7; concepMax = 3; compMax = 4;
+          officialProcTotal = 13; officialPerfMax = 6; officialProcMax = 7; concepMax = 3; compMax = 4;
         } else {
-          procTotal = 14; perfMax = 7; procMax = 7; concepMax = 3; compMax = 3;
+          officialProcTotal = 14; officialPerfMax = 7; officialProcMax = 7; concepMax = 3; compMax = 3;
+        }
+      } else if (isSpCo) {
+        if (['1AC', '2AC', '3AC', 'TC'].includes(niveau)) {
+          officialProcTotal = 13; officialPerfMax = 6; officialProcMax = 7; concepMax = 3; compMax = 4;
+        } else if (niveau === '1AB') {
+          officialProcTotal = 14; officialPerfMax = 7; officialProcMax = 7; concepMax = 3; compMax = 3;
+        } else {
+          officialProcTotal = 14; officialPerfMax = 6; officialProcMax = 8; concepMax = 3; compMax = 3;
         }
       } else {
         if (['1AC', '2AC', '3AC', 'TC'].includes(niveau)) {
-          procTotal = 13; perfMax = 6; procMax = 7; concepMax = 3; compMax = 4;
+          officialProcTotal = 13; officialPerfMax = 6; officialProcMax = 7; concepMax = 3; compMax = 4;
         } else {
-          procTotal = 14; perfMax = 7; procMax = 7; concepMax = 3; compMax = 3;
+          officialProcTotal = 14; officialPerfMax = 7; officialProcMax = 7; concepMax = 3; compMax = 3;
         }
       }
 
-      const critWeightsIndiv = perfMax === 6 ? [1.5, 1.5, 1.5, 1.5] : [2.0, 2.0, 1.5, 1.5];
-      const critWeights = procMax === 6 ? [1.5, 1.5, 1.5, 1.5] : [2.0, 2.0, 1.5, 1.5];
+      const critsIndiv = isSpCo ? getCritsForAps(aps, 'indiv', niveau) : [];
+      const critsProc = isSpCo ? getCritsForAps(aps, 'collectif', niveau) : getCritsForAps(aps, 'processus', niveau);
+      const key = getCustomKey(niveau, aps);
+      const customBareme = customBaremeConfig[key];
+
+      const critWeightsIndiv = isSpCo
+        ? alignWeightsArray(customBareme && customBareme.indWeights, critsIndiv.length, officialPerfMax)
+        : [];
+      const critWeights = alignWeightsArray(customBareme && customBareme.procWeights, critsProc.length, officialProcMax);
+
+      const perfMax = isSpCo
+        ? roundQuarter(critWeightsIndiv.reduce((a, b) => a + b, 0))
+        : officialPerfMax;
+      const procMax = roundQuarter(critWeights.reduce((a, b) => a + b, 0));
+      const procTotal = roundQuarter(perfMax + procMax);
+
+      let negPts = 0;
+      if (currentCritMode === 'nuance') negPts = 0.5;
+      else if (currentCritMode === 'custom') negPts = Math.max(0, roundQuarter((customBareme && customBareme.negPts) || 0));
 
       const labelPerf = isSpCo ? 'Capacité Individuelle' : (isGym ? 'Difficulté (Contrat)' : 'Performance (Produit)');
       const labelProc = isSpCo ? 'Capacité Collective' : 'Processus (Exécution)';
@@ -2990,6 +3461,9 @@
         isAthle,
         isGym,
         isSpCo,
+        officialPerfMax,
+        officialProcMax,
+        officialProcTotal,
         procTotal,
         perfMax,
         procMax,
@@ -2997,16 +3471,12 @@
         compMax,
         critWeightsIndiv,
         critWeights,
+        negPts,
+        isCustomBareme: Boolean(customBareme),
+        isCustomCrits: Boolean(customCriteriaMap[key]),
         labelPerf,
         labelProc
       };
-    }
-
-    function getCritsForAps(aps, kind) {
-      if (CRITERES_COLLECTIF[aps]) {
-        return kind === 'indiv' ? CRITERES_COLLECTIF[aps].indiv : CRITERES_COLLECTIF[aps].collectif;
-      }
-      return CRITERES_OBS[aps] || CRITERES_OBS['Course de durée'];
     }
 
     // Conversion d'une performance brute (ex: "7.90", "3'15\"", "3:15", "10.6", "6") vers { score, formatted }
@@ -3055,18 +3525,20 @@
 
       if (val === null || isNaN(val)) return null;
 
-      let ratio = 0;
-      if (sc.unit === 'metres') {
-        ratio = (val - minVal) / (bestVal - minVal);
-      } else {
-        ratio = (minVal - val) / (minVal - bestVal);
-      }
-      ratio = Math.max(0, Math.min(1, ratio));
-      const score = Math.round((1 + ratio * (cfg.perfMax - 1)) * 4) / 4;
+      const score = computeAthleScoreFromVal(val, bestVal, minVal, sc.unit === 'metres', cfg.perfMax);
       const formatted = aps === 'Course de durée'
         ? formatSecToMinSec(val)
         : (sc.unit === 'metres' ? val.toFixed(2) : val.toFixed(1));
       return { score, formatted };
+    }
+
+    function computeAthleScoreFromVal(val, bestVal, minVal, isMeters, perfMax) {
+      const span = isMeters ? (bestVal - minVal) : (minVal - bestVal);
+      const ratio = span > 0
+        ? (isMeters ? (val - minVal) / span : (minVal - val) / span)
+        : 0;
+      const raw = Math.max(0, Math.min(perfMax, 1 + ratio * (perfMax - 1)));
+      return Math.round(raw * 4) / 4;
     }
 
     // =========================================================================
@@ -3145,12 +3617,168 @@
       return mid.toFixed(2);
     }
 
-    function onConfigChange() {
+    function toggleBaremeDrawer(forceState) {
+      baremeDrawerOpen = typeof forceState === 'boolean' ? forceState : !baremeDrawerOpen;
+      const drawer = document.getElementById('customBaremeDrawer');
+      const btn = document.getElementById('btnToggleBaremeDrawer');
+      if (drawer) drawer.style.display = baremeDrawerOpen ? 'block' : 'none';
+      if (btn) btn.textContent = baremeDrawerOpen ? '✕ Fermer pts' : '⚙️ Ajuster pts';
+      if (baremeDrawerOpen) {
+        renderCustomBaremeDrawer(getBaremeConfig(currentNiveau, currentAps));
+      }
+    }
+
+    function ensureCustomBaremeEntry(niveau, aps) {
+      const key = getCustomKey(niveau, aps);
+      const cfg = getBaremeConfig(niveau, aps);
+      if (!customBaremeConfig[key]) {
+        customBaremeConfig[key] = {
+          indWeights: cfg.isSpCo ? [...cfg.critWeightsIndiv] : [],
+          procWeights: [...cfg.critWeights],
+          negPts: cfg.negPts
+        };
+      }
+      return customBaremeConfig[key];
+    }
+
+    function onCustomWeightInput(kind, idx, val) {
+      const num = Math.max(0, Math.min(12, roundQuarter(parseFloat(val) || 0)));
+      const entry = ensureCustomBaremeEntry(currentNiveau, currentAps);
+      if (kind === 'indiv') {
+        entry.indWeights[idx] = num;
+      } else {
+        entry.procWeights[idx] = num;
+      }
+      const sel = document.getElementById('selCritMode');
+      if (sel && sel.value !== 'custom') {
+        sel.value = 'custom';
+        currentCritMode = 'custom';
+      }
+      onConfigChange(true);
+    }
+
+    function onCustomNegPtsInput(val) {
+      const num = Math.max(0, Math.min(5, roundQuarter(parseFloat(val) || 0)));
+      const entry = ensureCustomBaremeEntry(currentNiveau, currentAps);
+      entry.negPts = num;
+      const sel = document.getElementById('selCritMode');
+      if (sel && sel.value !== 'custom') {
+        sel.value = 'custom';
+        currentCritMode = 'custom';
+      }
+      onConfigChange(true);
+    }
+
+    function autoBalanceCustomBareme() {
+      const cfg = getBaremeConfig(currentNiveau, currentAps);
+      const critsIndiv = cfg.isSpCo ? getCritsForAps(currentAps, 'indiv') : [];
+      const critsProc = cfg.isSpCo ? getCritsForAps(currentAps, 'collectif') : getCritsForAps(currentAps, 'processus');
+      const key = getCustomKey(currentNiveau, currentAps);
+      customBaremeConfig[key] = {
+        indWeights: cfg.isSpCo ? distributeWeightsEvenly(critsIndiv.length, cfg.officialPerfMax) : [],
+        procWeights: distributeWeightsEvenly(critsProc.length, cfg.officialProcMax),
+        negPts: currentCritMode === 'nuance' ? 0.5 : (customBaremeConfig[key]?.negPts || 0)
+      };
+      onConfigChange(true);
+      showToast(`Points rééquilibrés sur les totaux OP (${cfg.officialPerfMax} + ${cfg.officialProcMax}).`);
+    }
+
+    function resetOfficialBareme() {
+      const key = getCustomKey(currentNiveau, currentAps);
+      delete customBaremeConfig[key];
+      const sel = document.getElementById('selCritMode');
+      if (sel && sel.value === 'custom') {
+        sel.value = 'strict';
+        currentCritMode = 'strict';
+      }
+      onConfigChange(true);
+      showToast('Barème officiel OP rétabli pour cette APS.');
+    }
+
+    function renderCustomBaremeDrawer(cfgParam) {
+      const drawer = document.getElementById('customBaremeDrawer');
+      if (!drawer || !baremeDrawerOpen) return;
+      const cfg = cfgParam || getBaremeConfig(currentNiveau, currentAps);
+      const critsIndiv = cfg.isSpCo ? getCritsForAps(currentAps, 'indiv') : [];
+      const critsProc = cfg.isSpCo ? getCritsForAps(currentAps, 'collectif') : getCritsForAps(currentAps, 'processus');
+
+      const indivItemsHtml = cfg.isSpCo ? `
+        <div style="margin-top:0.65rem;">
+          <div style="font-size:0.76rem;font-weight:800;color:#1E3A8A;">1A. Capacité Individuelle — Total : ${cfg.perfMax} pts (OP : ${cfg.officialPerfMax} pts)</div>
+          <div class="custom-bareme-grid">
+            ${critsIndiv.map((c, idx) => `
+              <div class="custom-bareme-item">
+                <label title="${escapeHtml(c.nom)}">${idx + 1}. ${escapeHtml(c.nom)}</label>
+                <input type="number" min="0" max="12" step="0.25" value="${cfg.critWeightsIndiv[idx]}" onchange="onCustomWeightInput('indiv', ${idx}, this.value)">
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      ` : '';
+
+      const procItemsHtml = `
+        <div style="margin-top:0.65rem;">
+          <div style="font-size:0.76rem;font-weight:800;color:#065F46;">1B. ${escapeHtml(cfg.labelProc)} — Total : ${cfg.procMax} pts (OP : ${cfg.officialProcMax} pts)</div>
+          <div class="custom-bareme-grid">
+            ${critsProc.map((c, idx) => `
+              <div class="custom-bareme-item">
+                <label title="${escapeHtml(c.nom)}">${idx + 1}. ${escapeHtml(c.nom)}</label>
+                <input type="number" min="0" max="12" step="0.25" value="${cfg.critWeights[idx]}" onchange="onCustomWeightInput('proc', ${idx}, this.value)">
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+
+      const negPtsDisabled = currentCritMode !== 'custom';
+      drawer.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">
+          <div>
+            <strong style="font-size:0.86rem;color:#1E3A8A;">⚙️ Ajuster les points du Barème — ${escapeHtml(currentAps)} (${escapeHtml(currentNiveau === '1AB' ? '1Bac' : (currentNiveau === '2AB' ? '2Bac' : currentNiveau))})</strong>
+            <div style="font-size:0.75rem;color:#475569;">Modifiez les points par critère (pas de 0,25 pt). Le total Procédural (${cfg.procTotal} pts) se met à jour en direct.</div>
+          </div>
+          <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">
+            <button type="button" class="q-chip" onclick="autoBalanceCustomBareme()">⚖️ Équilibrer OP</button>
+            <button type="button" class="q-chip" onclick="resetOfficialBareme()">↺ Barème officiel</button>
+            <button type="button" class="q-chip" onclick="toggleBaremeDrawer(false)">✕ Fermer</button>
+          </div>
+        </div>
+        ${indivItemsHtml}
+        ${procItemsHtml}
+        <div style="margin-top:0.75rem;padding-top:0.65rem;border-top:1px dashed #93C5FD;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.6rem;">
+          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
+            <label for="inpCustomNegPts" style="font-size:0.78rem;font-weight:800;color:#1E3A8A;">Points Case 2 (En cours / Non acquis) :</label>
+            <input type="number" id="inpCustomNegPts" min="0" max="5" step="0.25" value="${cfg.negPts}" onchange="onCustomNegPtsInput(this.value)" style="width:76px;border:1px solid #93C5FD;border-radius:6px;padding:0.26rem 0.45rem;font-weight:800;font-size:0.82rem;">
+            <span style="font-size:0.74rem;color:#475569;">${negPtsDisabled ? '(Modifier active le mode Personnalisé)' : '(Mode Personnalisé actif)'}</span>
+          </div>
+          <div style="font-size:0.78rem;font-weight:800;color:#1E3A8A;">
+            Total Procédural actuel : ${cfg.procTotal} / ${cfg.officialProcTotal} pts OP
+          </div>
+        </div>
+      `;
+    }
+
+    function onConfigChange(keepDrawerState) {
+      const prevMode = currentCritMode;
       currentNiveau = document.getElementById('selNiveau').value;
       currentAps = document.getElementById('selAps').value;
       currentCritMode = document.getElementById('selCritMode').value;
 
+      if (!keepDrawerState && currentCritMode === 'custom' && prevMode !== 'custom') {
+        baremeDrawerOpen = true;
+        const drawer = document.getElementById('customBaremeDrawer');
+        const btn = document.getElementById('btnToggleBaremeDrawer');
+        if (drawer) drawer.style.display = 'block';
+        if (btn) btn.textContent = '✕ Fermer pts';
+      }
+
       const cfg = getBaremeConfig(currentNiveau, currentAps);
+      const critsIndiv = cfg.isSpCo ? getCritsForAps(currentAps, 'indiv') : [];
+      const critsProc = cfg.isSpCo ? getCritsForAps(currentAps, 'collectif') : getCritsForAps(currentAps, 'processus');
+
+      // Ajuster la taille des choix individuels Mode Élève
+      indivCritIndivChoices = Array.from({ length: Math.max(1, critsIndiv.length) }, (_, i) => (indivCritIndivChoices[i] === 1 ? 1 : 0));
+      indivCritChoices = Array.from({ length: Math.max(1, critsProc.length) }, (_, i) => (indivCritChoices[i] === 1 ? 1 : 0));
 
       // 1. Mettre à jour la bannière Situation de Référence & Barème
       document.getElementById('srOpBadge').textContent = getNiveauFullName(currentNiveau);
@@ -3174,7 +3802,7 @@
       } else {
         document.getElementById('srFamilleBadge').textContent = `Sports Collectifs / Renvoi · Double Grille Individuel (/${cfg.perfMax}) + Collectif (/${cfg.procMax})`;
         document.getElementById('srTitleText').textContent = `Situation de Référence (SR) : Situation de match en ${currentAps} (OP Maroc)`;
-        document.getElementById('srDescText').textContent = `Évaluation critériée en match : 4 critères de Capacité Individuelle (/${cfg.perfMax} pts) + 4 critères de Capacité Collective (/${cfg.procMax} pts).`;
+        document.getElementById('srDescText').textContent = `Évaluation critériée en match : ${critsIndiv.length} critères de Capacité Individuelle (/${cfg.perfMax} pts) + ${critsProc.length} critères de Capacité Collective (/${cfg.procMax} pts).`;
       }
 
       document.getElementById('procTotalLabel').textContent = `Procédural : ${cfg.procTotal} pts (${cfg.perfMax} + ${cfg.procMax})`;
@@ -3185,7 +3813,7 @@
       document.getElementById('pillConcepMax').textContent = `/ ${cfg.concepMax} pts`;
       document.getElementById('pillCompMax').textContent = `/ ${cfg.compMax} pts`;
 
-      // 2. Sauvegarder/restaurer la Perf Brute par APS et recalculer perfScore selon le sexe de chaque élève
+      // 2. Sauvegarder/restaurer la Perf Brute par APS et aligner critsIndiv/crits sur le nb réel de critères
       const apsChanged = lastConfiguredAps && lastConfiguredAps !== currentAps;
       classStudents.forEach(st => {
         if (!st.perfByAps || typeof st.perfByAps !== 'object') st.perfByAps = {};
@@ -3200,6 +3828,8 @@
             st.perfScore = 0;
           }
         }
+        st.critsIndiv = Array.from({ length: Math.max(1, critsIndiv.length || 4) }, (_, i) => (Array.isArray(st.critsIndiv) && st.critsIndiv[i] === 1 ? 1 : 0));
+        st.crits = Array.from({ length: Math.max(1, critsProc.length) }, (_, i) => (Array.isArray(st.crits) && st.crits[i] === 1 ? 1 : 0));
         if (!cfg.isSpCo && st.rawPerf && String(st.rawPerf).trim() !== '') {
           const parsed = parseRawPerfToScore(currentAps, st.rawPerf, st.sexe, currentNiveau, cfg);
           if (parsed && parsed.score !== null) {
@@ -3209,7 +3839,9 @@
       });
       lastConfiguredAps = currentAps;
 
-      // 3. Mettre à jour Volets 1A, 1B, Concep/Comp, Guide Dynamique, Liens, Totaux & Grille
+      // 3. Mettre à jour Volets 1A, 1B, Concep/Comp, Tiroirs, Guide Dynamique, Liens, Totaux & Grille
+      renderCustomBaremeDrawer(cfg);
+      if (typeof renderCritAtelierPanel === 'function') renderCritAtelierPanel(cfg);
       renderVolet1APerformance(cfg);
       renderVolet1BProcessus(cfg);
       renderConcepCompInputs(cfg);
@@ -3359,19 +3991,19 @@
         scaleWrap.innerHTML = '';
         computeGymPerfScore();
       } else {
-        // Sports Collectifs / Renvoi : 4 Critères Capacité Individuelle à cases à cocher
+        // Sports Collectifs / Renvoi : N Critères Capacité Individuelle à cases à cocher
         const critsIndiv = getCritsForAps(currentAps, 'indiv');
         const weights = cfg.critWeightsIndiv;
-        const negPtsVal = currentCritMode === 'nuance' ? 0.5 : 0;
+        const negPtsVal = cfg.negPts || 0;
 
         document.getElementById('volet1ATitle').textContent = `Note Procédurale — 1A. Grille Capacité Individuelle (Cases à cocher)`;
-        document.getElementById('volet1ASub').textContent = `4 critères individuels en ${currentAps} sur /${cfg.perfMax} pts`;
+        document.getElementById('volet1ASub').textContent = `${critsIndiv.length} critères individuels en ${currentAps} sur /${cfg.perfMax} pts`;
 
         let sumIndiv = 0;
         const theadCols = critsIndiv.map((c, idx) => `
           <th style="background:#1E3A8A;border-color:#2563EB;">
-            <div>Critère ${idx + 1} : ${c.nom}</div>
-            <div style="font-size:0.7rem;color:#BFDBFE;font-weight:600;margin-top:2px;">Sur ${weights[idx].toFixed(1)} pt${weights[idx] > 1 ? 's' : ''}</div>
+            <div>Critère ${idx + 1} : ${escapeHtml(c.nom)}</div>
+            <div style="font-size:0.7rem;color:#BFDBFE;font-weight:600;margin-top:2px;">Sur ${weights[idx].toFixed(2).replace(/\.00$/, '')} pt${weights[idx] > 1 ? 's' : ''}</div>
           </th>
         `).join('');
 
@@ -3382,9 +4014,9 @@
               <button type="button" class="crit-choice-btn ${isPos ? 'checked-pos' : ''}" onclick="toggleIndivPart1Crit(${idx}, 0)">
                 <span style="display:flex;align-items:center;gap:0.4rem;">
                   <span class="crit-box-icon">${isPos ? '✓' : ''}</span>
-                  <span>${c.sous[0]}</span>
+                  <span>${escapeHtml(c.sous[0])}</span>
                 </span>
-                <span class="crit-pts-pill">+${weights[idx].toFixed(1)} pt</span>
+                <span class="crit-pts-pill">+${weights[idx].toFixed(2).replace(/\.00$/, '')} pt</span>
               </button>
             </td>
           `;
@@ -3397,9 +4029,9 @@
               <button type="button" class="crit-choice-btn ${isNeg ? 'checked-neg' : ''}" onclick="toggleIndivPart1Crit(${idx}, 1)">
                 <span style="display:flex;align-items:center;gap:0.4rem;">
                   <span class="crit-box-icon">${isNeg ? '✓' : ''}</span>
-                  <span>${c.sous[1]}</span>
+                  <span>${escapeHtml(c.sous[1])}</span>
                 </span>
-                <span class="crit-pts-pill">+${negPtsVal.toFixed(1)} pt</span>
+                <span class="crit-pts-pill">+${negPtsVal.toFixed(2).replace(/\.00$/, '')} pt</span>
               </button>
             </td>
           `;
@@ -3408,14 +4040,14 @@
         const ptsCols = critsIndiv.map((c, idx) => {
           const pts = indivCritIndivChoices[idx] === 0 ? weights[idx] : negPtsVal;
           sumIndiv += pts;
-          return `<td style="color:${indivCritIndivChoices[idx] === 0 ? '#059669' : '#E11D48'};"><strong>${pts.toFixed(2)}</strong> / ${weights[idx].toFixed(1)} pt</td>`;
+          return `<td style="color:${indivCritIndivChoices[idx] === 0 ? '#059669' : '#E11D48'};"><strong>${pts.toFixed(2)}</strong> / ${weights[idx].toFixed(2).replace(/\.00$/, '')} pt</td>`;
         }).join('');
 
-        currentPerfScore = Math.min(cfg.perfMax, sumIndiv);
+        currentPerfScore = roundQuarter(sumIndiv);
 
         container.innerHTML = `
           <div class="processus-table-wrap">
-            <table class="proc-grid-table" aria-label="Grille Capacité Individuelle par 4 critères">
+            <table class="proc-grid-table" aria-label="Grille Capacité Individuelle par ${critsIndiv.length} critères">
               <thead><tr>${theadCols}</tr></thead>
               <tbody>
                 <tr>${posCols}</tr>
@@ -3425,9 +4057,7 @@
             </table>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-top:0.8rem;font-size:0.8rem;color:var(--ink-soft);">
-            <span>${cfg.perfMax === 6
-              ? 'Barème Capacité Individuelle sur <strong>6 pts</strong> : 4 critères × <strong>1,5 pt</strong> = 6 pts.'
-              : 'Barème Capacité Individuelle sur <strong>7 pts</strong> : Critères 1 &amp; 2 = <strong>2,0 pts</strong> · Critères 3 &amp; 4 = <strong>1,5 pt</strong> (Total 7 pts).'}</span>
+            <span>Barème Capacité Individuelle sur <strong>${cfg.perfMax} pts</strong> : ${critsIndiv.length} critères [${weights.map(w => w.toFixed(2).replace(/\.00$/, '')).join(' + ')}] pts${negPtsVal > 0 ? ` · Case 2 = +${negPtsVal} pt` : ''}.</span>
             <div style="display:flex;gap:0.4rem;">
               <button type="button" class="q-chip" onclick="checkAllIndivPart1(0)">✓ Tout maîtrisé</button>
               <button type="button" class="q-chip" onclick="checkAllIndivPart1(1)">✗ Tout en cours</button>
@@ -3444,13 +4074,16 @@
       const cfg = getBaremeConfig(currentNiveau, currentAps);
       renderVolet1APerformance(cfg);
       recalculateIndivTotal();
+      saveStateToStorage();
     }
 
     function checkAllIndivPart1(choiceIdx) {
-      indivCritIndivChoices = [choiceIdx, choiceIdx, choiceIdx, choiceIdx];
+      const len = getCritsForAps(currentAps, 'indiv').length;
+      indivCritIndivChoices = Array(Math.max(1, len)).fill(choiceIdx);
       const cfg = getBaremeConfig(currentNiveau, currentAps);
       renderVolet1APerformance(cfg);
       recalculateIndivTotal();
+      saveStateToStorage();
     }
 
     function convertVmaToDureeTime() {
@@ -3485,15 +4118,7 @@
         val = parseFloat(document.getElementById('inpAthleVal')?.value || bestVal);
       }
 
-      let ratio = 0;
-      if (sc.unit === 'metres') {
-        ratio = (val - minVal) / (bestVal - minVal);
-      } else {
-        ratio = (minVal - val) / (minVal - bestVal);
-      }
-      ratio = Math.max(0, Math.min(1, ratio));
-      const rawScore = 1 + ratio * (cfg.perfMax - 1);
-      currentPerfScore = Math.round(rawScore * 4) / 4;
+      currentPerfScore = computeAthleScoreFromVal(val, bestVal, minVal, sc.unit === 'metres', cfg.perfMax);
 
       updatePerfBadge(cfg);
       renderAthleScaleTable(cfg, sc, bestVal, minVal);
@@ -3505,7 +4130,7 @@
       if (!scaleWrap) return;
 
       const steps = [];
-      for (let note = cfg.perfMax; note >= 2; note -= 1) {
+      for (let note = cfg.perfMax; note >= 1; note -= 1) {
         const r = (note - 1) / (cfg.perfMax - 1);
         let perfThreshold = 0;
         if (sc.unit === 'metres') {
@@ -3575,16 +4200,15 @@
     // 5. RENDU DU VOLET 1B : GRILLE DU PROCESSUS OU CAPACITÉ COLLECTIVE
     // =========================================================================
     function renderVolet1BProcessus(cfg) {
-      const crits = getCritsForAps(currentAps, 'collectif');
+      const crits = cfg.isSpCo ? getCritsForAps(currentAps, 'collectif') : getCritsForAps(currentAps, 'processus');
       const weights = cfg.critWeights;
+      const negPtsVal = cfg.negPts || 0;
 
       document.getElementById('volet1BTitle').textContent = `Note Procédurale — 1B. Grille ${cfg.labelProc} (Cases à cocher)`;
       document.getElementById('volet1BSub').textContent = cfg.isSpCo
-        ? `4 critères de Capacité Collective en ${currentAps} sur /${cfg.procMax} pts`
-        : `Cochez la case adéquate pour chacun des 4 critères du Processus`;
-      document.getElementById('procWeightFormula').innerHTML = cfg.procMax === 6
-        ? `Barème ${cfg.labelProc} sur <strong>6 pts</strong> : chacun des 4 critères maîtrisés vaut <strong>1,5 pt</strong> (4 × 1,5 = 6 pts).`
-        : `Barème ${cfg.labelProc} sur <strong>7 pts</strong> : Critères 1 &amp; 2 = <strong>2,0 pts</strong> chacun · Critères 3 &amp; 4 = <strong>1,5 pt</strong> chacun (Total = <strong>7 pts</strong>).`;
+        ? `${crits.length} critères de Capacité Collective en ${currentAps} sur /${cfg.procMax} pts`
+        : `Cochez la case adéquate pour chacun des ${crits.length} critères du Processus`;
+      document.getElementById('procWeightFormula').innerHTML = `Pondération ${escapeHtml(cfg.labelProc)} sur <strong>${cfg.procMax} pts</strong> : ${crits.length} critères [${weights.map(w => w.toFixed(2).replace(/\.00$/, '')).join(' + ')}] pts${negPtsVal > 0 ? ` · Case 2 = +${negPtsVal} pt` : ''}.`;
 
       const theadRow = document.getElementById('procTheadRow');
       const rowPos = document.getElementById('procTbodyRowPos');
@@ -3593,20 +4217,20 @@
 
       theadRow.innerHTML = crits.map((c, idx) => `
         <th style="${cfg.isSpCo ? 'background:#065F46;border-color:#059669;' : ''}">
-          <div>Critère ${idx + 1} : ${c.nom}</div>
-          <div style="font-size:0.7rem;color:${cfg.isSpCo ? '#A7F3D0' : '#93C5FD'};font-weight:600;margin-top:2px;">Sur ${weights[idx].toFixed(1)} pt${weights[idx] > 1 ? 's' : ''}</div>
+          <div>Critère ${idx + 1} : ${escapeHtml(c.nom)}</div>
+          <div style="font-size:0.7rem;color:${cfg.isSpCo ? '#A7F3D0' : '#93C5FD'};font-weight:600;margin-top:2px;">Sur ${weights[idx].toFixed(2).replace(/\.00$/, '')} pt${weights[idx] > 1 ? 's' : ''}</div>
         </th>
       `).join('');
 
       rowPos.innerHTML = crits.map((c, idx) => {
         const isPos = indivCritChoices[idx] === 0;
-        const ptsText = `+${weights[idx].toFixed(1)} pt`;
+        const ptsText = `+${weights[idx].toFixed(2).replace(/\.00$/, '')} pt`;
         return `
           <td>
             <button type="button" class="crit-choice-btn ${isPos ? 'checked-pos' : ''}" onclick="toggleIndivCrit(${idx}, 0)">
               <span style="display:flex;align-items:center;gap:0.4rem;">
                 <span class="crit-box-icon">${isPos ? '✓' : ''}</span>
-                <span>${c.sous[0]}</span>
+                <span>${escapeHtml(c.sous[0])}</span>
               </span>
               <span class="crit-pts-pill">${ptsText}</span>
             </button>
@@ -3614,16 +4238,15 @@
         `;
       }).join('');
 
-      const negPtsVal = currentCritMode === 'nuance' ? 0.5 : 0;
       rowNeg.innerHTML = crits.map((c, idx) => {
         const isNeg = indivCritChoices[idx] === 1;
-        const ptsText = `+${negPtsVal.toFixed(1)} pt`;
+        const ptsText = `+${negPtsVal.toFixed(2).replace(/\.00$/, '')} pt`;
         return `
           <td>
             <button type="button" class="crit-choice-btn ${isNeg ? 'checked-neg' : ''}" onclick="toggleIndivCrit(${idx}, 1)">
               <span style="display:flex;align-items:center;gap:0.4rem;">
                 <span class="crit-box-icon">${isNeg ? '✓' : ''}</span>
-                <span>${c.sous[1]}</span>
+                <span>${escapeHtml(c.sous[1])}</span>
               </span>
               <span class="crit-pts-pill">${ptsText}</span>
             </button>
@@ -3635,11 +4258,11 @@
       const ptsCells = crits.map((c, idx) => {
         const pts = indivCritChoices[idx] === 0 ? weights[idx] : negPtsVal;
         sumProc += pts;
-        return `<td style="color:${indivCritChoices[idx] === 0 ? '#059669' : '#E11D48'};"><strong>${pts.toFixed(2)}</strong> / ${weights[idx].toFixed(1)} pt</td>`;
+        return `<td style="color:${indivCritChoices[idx] === 0 ? '#059669' : '#E11D48'};"><strong>${pts.toFixed(2)}</strong> / ${weights[idx].toFixed(2).replace(/\.00$/, '')} pt</td>`;
       }).join('');
 
       rowPts.innerHTML = ptsCells;
-      currentProcScore = Math.min(cfg.procMax, sumProc);
+      currentProcScore = roundQuarter(sumProc);
       document.getElementById('badgeScoreProc').textContent = `${currentProcScore.toFixed(2)} / ${cfg.procMax} pts`;
     }
 
@@ -3656,84 +4279,87 @@
       const renderCritCards = (crits, weights) => crits.map((c, idx) => `
         <article class="guide-crit-card">
           <div class="guide-crit-head">
-            <div class="guide-crit-title">${idx + 1}. ${c.nom} (${c.sous[0]} / ${c.sous[1]})</div>
-            <div class="guide-crit-weight">${weights[idx].toFixed(1)} pt${weights[idx] > 1 ? 's' : ''}</div>
+            <div class="guide-crit-title">${idx + 1}. ${escapeHtml(c.nom)} (${escapeHtml(c.sous[0])} / ${escapeHtml(c.sous[1])})</div>
+            <div class="guide-crit-weight">${weights[idx].toFixed(2).replace(/\.00$/, '')} pt${weights[idx] > 1 ? 's' : ''}</div>
           </div>
           <div class="guide-crit-states">
-            <strong>✓ ${c.sous[0]} :</strong> ${c.descPos || ''}<br>
-            <strong>✗ ${c.sous[1]} :</strong> ${c.descNeg || ''}
+            <strong>✓ ${escapeHtml(c.sous[0])} :</strong> ${escapeHtml(c.descPos || 'Critère acquis et observé en situation.')}<br>
+            <strong>✗ ${escapeHtml(c.sous[1])} :</strong> ${escapeHtml(c.descNeg || 'Critère en cours d\'acquisition.')}
           </div>
-          <div class="guide-crit-tip">Repère terrain : ${c.tip || ''}</div>
+          <div class="guide-crit-tip">Repère terrain : ${escapeHtml(c.tip || 'Observation directe en situation de référence.')}</div>
         </article>
       `).join('');
 
       let stepsHtml = '';
       let criteriaBodyHtml = '';
+      let famSub = '';
 
       if (cfg.isSpCo) {
         const critsIndiv = getCritsForAps(currentAps, 'indiv');
         const critsColl = getCritsForAps(currentAps, 'collectif');
+        famSub = `Sports Collectifs / Renvoi (Double Grille ${critsIndiv.length}+${critsColl.length})`;
 
         stepsHtml = `
           <div class="guide-steps-grid">
             <div class="guide-step-item">
               <span class="guide-step-num">ÉTAPE 01 · MÉGA-COLONNE 1A</span>
               <div class="guide-step-title">Évaluer la Capacité Individuelle (/${cfg.perfMax} pts)</div>
-              <div class="guide-step-desc">En match de référence (${currentAps}), observez la maîtrise technique du joueur (porteur et défenseur sur l'homme) et cochez ses 4 critères individuels.</div>
+              <div class="guide-step-desc">En match de référence (${escapeHtml(currentAps)}), observez la maîtrise technique du joueur et cochez ses ${critsIndiv.length} critères individuels.</div>
             </div>
             <div class="guide-step-item">
               <span class="guide-step-num">ÉTAPE 02 · MÉGA-COLONNE 1B</span>
               <div class="guide-step-title">Évaluer la Capacité Collective (/${cfg.procMax} pts)</div>
-              <div class="guide-step-desc">Observez ensuite l'intégration dans l'équipe (appels, espacement, transitions, aide défensive) sur les 4 critères collectifs pour obtenir le sous-total Procédural /${cfg.procTotal}.</div>
+              <div class="guide-step-desc">Observez ensuite l'intégration dans l'équipe sur les ${critsColl.length} critères collectifs pour obtenir le sous-total Procédural /${cfg.procTotal}.</div>
             </div>
             <div class="guide-step-item">
               <span class="guide-step-num">ÉTAPE 03 · CLASSE &amp; MASSAR</span>
               <div class="guide-step-title">Compléter /20 et Exporter (50 élèves max)</div>
-              <div class="guide-step-desc">Importez votre feuille Excel Massar, ajustez les notes Conceptuelle (/3) et Comportementale (/${cfg.compMax}), marquez les ABS/DISP et exportez en Excel, Massar, Word ou PDF A4.</div>
+              <div class="guide-step-desc">Importez votre feuille Excel Massar, ajustez les notes Conceptuelle (/3) et Comportementale (/${cfg.compMax}), puis exportez la grille complétée ou brute.</div>
             </div>
           </div>
         `;
 
         criteriaBodyHtml = `
           <div class="guide-crit-section-title">
-            <span>1A. Les 4 Critères de la Capacité Individuelle — ${currentAps} (/${cfg.perfMax} pts)</span>
+            <span>1A. Les ${critsIndiv.length} Critères de la Capacité Individuelle — ${escapeHtml(currentAps)} (/${cfg.perfMax} pts)</span>
             <span style="font-size:0.78rem;color:var(--primary-dark);">Pondération : [${cfg.critWeightsIndiv.join(' + ')}] pts</span>
           </div>
           <div class="guide-crit-grid">${renderCritCards(critsIndiv, cfg.critWeightsIndiv)}</div>
 
           <div class="guide-crit-section-title" style="margin-top:1.5rem;">
-            <span>1B. Les 4 Critères de la Capacité Collective — ${currentAps} (/${cfg.procMax} pts)</span>
+            <span>1B. Les ${critsColl.length} Critères de la Capacité Collective — ${escapeHtml(currentAps)} (/${cfg.procMax} pts)</span>
             <span style="font-size:0.78rem;color:#059669;">Pondération : [${cfg.critWeights.join(' + ')}] pts</span>
           </div>
           <div class="guide-crit-grid">${renderCritCards(critsColl, cfg.critWeights)}</div>
         `;
       } else {
-        const critsProc = getCritsForAps(currentAps, 'collectif');
+        const critsProc = getCritsForAps(currentAps, 'processus');
         const perfGuideTxt = unitMeta ? unitMeta.guide : "Saisissez la performance mesurée avec son unité pour convertir automatiquement vers le barème OP.";
+        famSub = cfg.isGym ? 'Gymnastique (Contrat + Processus)' : 'Athlétisme (Barème Chiffré + Processus)';
 
         stepsHtml = `
           <div class="guide-steps-grid">
             <div class="guide-step-item">
-              <span class="guide-step-num">ÉTAPE 01 · PRODUIT (${unitMeta ? unitMeta.unit : 'pts'})</span>
+              <span class="guide-step-num">ÉTAPE 01 · PRODUIT (${unitMeta ? escapeHtml(unitMeta.unit) : 'pts'})</span>
               <div class="guide-step-title">Saisir la Performance avec son Unité (/${cfg.perfMax} pts)</div>
-              <div class="guide-step-desc">${perfGuideTxt}</div>
+              <div class="guide-step-desc">${escapeHtml(perfGuideTxt)}</div>
             </div>
             <div class="guide-step-item">
-              <span class="guide-step-num">ÉTAPE 02 · PROCESSUS (4 CRITÈRES)</span>
+              <span class="guide-step-num">ÉTAPE 02 · PROCESSUS (${critsProc.length} CRITÈRES)</span>
               <div class="guide-step-title">Cocher l'Exécution Technique (/${cfg.procMax} pts)</div>
-              <div class="guide-step-desc">Cochez les 4 critères techniques ci-dessus selon le mode choisi (${currentCritMode === 'nuance' ? '0,5 pt encouragement' : 'tout ou rien'}). Le total Procédural s'ajuste sur /${cfg.procTotal} pts.</div>
+              <div class="guide-step-desc">Cochez les ${critsProc.length} critères techniques selon le barème choisi (${cfg.negPts > 0 ? `+${cfg.negPts} pt encouragement` : 'tout ou rien'}). Le total Procédural s'ajuste sur /${cfg.procTotal} pts.</div>
             </div>
             <div class="guide-step-item">
               <span class="guide-step-num">ÉTAPE 03 · GRILLE 50 ÉLÈVES &amp; EXPORTS</span>
               <div class="guide-step-title">Calcul automatique par Sexe (G / F)</div>
-              <div class="guide-step-desc">En Grille de Classe, la saisie de la performance brute (ex. ${unitMeta ? unitMeta.placeholder : '7.90'} ${unitMeta ? unitMeta.unit : ''}) applique automatiquement le barème Garçons ou Filles de chaque ligne avant l'export Excel/Massar.</div>
+              <div class="guide-step-desc">En Grille de Classe, la saisie de la performance brute (ex. ${unitMeta ? escapeHtml(unitMeta.placeholder) : '7.90'} ${unitMeta ? escapeHtml(unitMeta.unit) : ''}) applique automatiquement le barème Garçons ou Filles de chaque ligne avant l'export.</div>
             </div>
           </div>
         `;
 
         criteriaBodyHtml = `
           <div class="guide-crit-section-title">
-            <span>1B. Explication des 4 Critères du Processus — ${currentAps} (/${cfg.procMax} pts)</span>
+            <span>1B. Explication des ${critsProc.length} Critères du Processus — ${escapeHtml(currentAps)} (/${cfg.procMax} pts)</span>
             <span style="font-size:0.78rem;color:var(--primary-dark);">Pondération : [${cfg.critWeights.join(' + ')}] pts · Conceptuel /${cfg.concepMax} · Comportemental /${cfg.compMax}</span>
           </div>
           <div class="guide-crit-grid">${renderCritCards(critsProc, cfg.critWeights)}</div>
@@ -3745,8 +4371,8 @@
           <div class="panel-head-left">
             <div class="panel-num">?</div>
             <div>
-              <h2 class="panel-title" style="margin:0;">Guide d'Utilisation &amp; Critères Détaillés — ${currentAps} (${nivLabel})</h2>
-              <div class="panel-sub">Contenu mis à jour automatiquement selon le sport et le niveau sélectionnés · Famille ${cfg.isSpCo ? 'Sports Collectifs / Renvoi (Double Grille 4+4)' : (cfg.isGym ? 'Gymnastique (Contrat + Processus)' : 'Athlétisme (Barème Chiffré + Processus)')}</div>
+              <h2 class="panel-title" style="margin:0;">Guide d'Utilisation &amp; Critères Détaillés — ${escapeHtml(currentAps)} (${nivLabel})</h2>
+              <div class="panel-sub">Contenu mis à jour automatiquement selon le sport et le niveau sélectionnés · Famille ${famSub}</div>
             </div>
           </div>
         </div>
@@ -3765,8 +4391,9 @@
     }
 
     function checkAllProcessus(choiceIdx) {
-      indivCritChoices = [choiceIdx, choiceIdx, choiceIdx, choiceIdx];
       const cfg = getBaremeConfig(currentNiveau, currentAps);
+      const len = (cfg.isSpCo ? getCritsForAps(currentAps, 'collectif') : getCritsForAps(currentAps, 'processus')).length;
+      indivCritChoices = Array(Math.max(1, len)).fill(choiceIdx);
       renderVolet1BProcessus(cfg);
       recalculateIndivTotal();
       saveStateToStorage();
@@ -3830,6 +4457,8 @@
     // =========================================================================
     function recalculateIndivTotal() {
       const cfg = getBaremeConfig(currentNiveau, currentAps);
+      const critsIndiv = cfg.isSpCo ? getCritsForAps(currentAps, 'indiv') : [];
+      const critsProc = cfg.isSpCo ? getCritsForAps(currentAps, 'collectif') : getCritsForAps(currentAps, 'processus');
       const concepVal = Math.max(0, Math.min(cfg.concepMax, parseFloat(document.getElementById('inpConceptuel')?.value || 0)));
       const compVal = Math.max(0, Math.min(cfg.compMax, parseFloat(document.getElementById('inpComportemental')?.value || 0)));
 
@@ -3841,9 +4470,9 @@
       document.getElementById('finalProcTotal').textContent = `${procSum.toFixed(2)} / ${cfg.procTotal}`;
       document.getElementById('finalProcSub').textContent = `${cfg.labelPerf.split(' ')[0]} ${currentPerfScore.toFixed(2)} + ${cfg.labelProc.split(' ')[0]} ${currentProcScore.toFixed(2)}`;
 
-      document.getElementById('bdLabelPerf').textContent = `1A. ${cfg.labelPerf}${cfg.isSpCo ? ' (4 critères)' : ''}`;
+      document.getElementById('bdLabelPerf').textContent = `1A. ${cfg.labelPerf}${cfg.isSpCo ? ` (${critsIndiv.length} critères)` : ''}`;
       document.getElementById('bdValPerf').textContent = `${currentPerfScore.toFixed(2)} / ${cfg.perfMax}`;
-      document.getElementById('bdLabelProc').textContent = `1B. ${cfg.labelProc} (4 critères)`;
+      document.getElementById('bdLabelProc').textContent = `1B. ${cfg.labelProc} (${critsProc.length} critères)`;
       document.getElementById('bdValProc').textContent = `${currentProcScore.toFixed(2)} / ${cfg.procMax}`;
       document.getElementById('bdValProcSum').textContent = `${procSum.toFixed(2)} / ${cfg.procTotal}`;
       document.getElementById('bdValConcep').textContent = `${concepVal.toFixed(2)} / ${cfg.concepMax}`;
@@ -3902,19 +4531,21 @@
 
     function normalizeStudentObj(st, cfg) {
       const safeCfg = cfg || getBaremeConfig(currentNiveau, currentAps);
+      const critsIndivLen = safeCfg.isSpCo ? getCritsForAps(currentAps, 'indiv').length : 4;
+      const critsProcLen = (safeCfg.isSpCo ? getCritsForAps(currentAps, 'collectif') : getCritsForAps(currentAps, 'processus')).length;
       const status = (st.status === 'ABS' || st.status === 'DISP') ? st.status : 'OK';
       const sexe = (st.sexe === 'F') ? 'F' : 'G';
-      const crits = Array.isArray(st.crits) && st.crits.length === 4 ? st.crits.map(v => (v === 1 ? 1 : 0)) : [0, 0, 0, 0];
-      const critsIndiv = Array.isArray(st.critsIndiv) && st.critsIndiv.length === 4 ? st.critsIndiv.map(v => (v === 1 ? 1 : 0)) : [0, 0, 0, 0];
+      const crits = Array.from({ length: Math.max(1, critsProcLen) }, (_, i) => (Array.isArray(st.crits) && st.crits[i] === 1 ? 1 : 0));
+      const critsIndiv = Array.from({ length: Math.max(1, critsIndivLen) }, (_, i) => (Array.isArray(st.critsIndiv) && st.critsIndiv[i] === 1 ? 1 : 0));
       const rawPerf = st.rawPerf !== undefined && st.rawPerf !== null ? String(st.rawPerf) : '';
       let perfScore = parseFloat(st.perfScore);
       if (isNaN(perfScore) || perfScore < 0 || perfScore > safeCfg.perfMax) {
         perfScore = rawPerf.trim() ? Math.max(0, safeCfg.perfMax - 1.0) : 0;
       }
       let concep = parseFloat(st.concep);
-      if (isNaN(concep) || concep < 0 || concep > safeCfg.concepMax) concep = 2.5;
+      if (isNaN(concep) || concep < 0 || concep > safeCfg.concepMax) concep = 0;
       let comp = parseFloat(st.comp);
-      if (isNaN(comp) || comp < 0 || comp > safeCfg.compMax) comp = Math.max(0, safeCfg.compMax - 0.5);
+      if (isNaN(comp) || comp < 0 || comp > safeCfg.compMax) comp = 0;
       const perfByAps = (st.perfByAps && typeof st.perfByAps === 'object') ? { ...st.perfByAps } : {};
       return {
         nom: String(st.nom || '').trim() || 'Élève',
@@ -3931,22 +4562,24 @@
     }
 
     function getStudentScores(st, cfg) {
-      const negPts = currentCritMode === 'nuance' ? 0.5 : 0;
+      const negPts = cfg.negPts || 0;
       let pIndiv = 0;
       let pProc = 0;
 
       if (cfg.isSpCo) {
-        const indWeights = cfg.critWeightsIndiv || [1.5, 1.5, 1.5, 1.5];
-        (st.critsIndiv || [0, 0, 0, 0]).forEach((ch, idx) => {
-          pIndiv += (ch === 0 ? indWeights[idx] : negPts);
+        const indWeights = cfg.critWeightsIndiv || [];
+        indWeights.forEach((w, idx) => {
+          const ch = (st.critsIndiv && st.critsIndiv[idx] === 1) ? 1 : 0;
+          pIndiv += (ch === 0 ? w : negPts);
         });
       } else {
         pIndiv = Math.max(0, Math.min(cfg.perfMax, parseFloat(st.perfScore) || 0));
       }
 
-      const procWeights = cfg.critWeights || [1.5, 1.5, 1.5, 1.5];
-      (st.crits || [0, 0, 0, 0]).forEach((ch, idx) => {
-        pProc += (ch === 0 ? procWeights[idx] : negPts);
+      const procWeights = cfg.critWeights || [];
+      procWeights.forEach((w, idx) => {
+        const ch = (st.crits && st.crits[idx] === 1) ? 1 : 0;
+        pProc += (ch === 0 ? w : negPts);
       });
 
       const cVal = Math.max(0, Math.min(cfg.concepMax, parseFloat(st.concep) || 0));
@@ -3966,13 +4599,16 @@
     function saveStateToStorage() {
       try {
         const payload = {
-          v: 2,
+          v: 3,
           niveau: currentNiveau,
           aps: currentAps,
           sexe: currentSexe,
           critMode: currentCritMode,
           mode: currentMode,
           className: currentClassName,
+          hasImportedExcelNames,
+          customBaremeConfig,
+          customCriteriaMap,
           indivCritIndivChoices,
           indivCritChoices,
           concepVal: document.getElementById('inpConceptuel')?.value || 2.5,
@@ -3997,6 +4633,14 @@
         const data = JSON.parse(raw);
         if (!data || typeof data !== 'object') return false;
 
+        if (data.customBaremeConfig && typeof data.customBaremeConfig === 'object') {
+          customBaremeConfig = data.customBaremeConfig;
+        }
+        if (data.customCriteriaMap && typeof data.customCriteriaMap === 'object') {
+          customCriteriaMap = data.customCriteriaMap;
+        }
+        hasImportedExcelNames = Boolean(data.hasImportedExcelNames);
+
         if (data.niveau && document.getElementById('selNiveau')) {
           document.getElementById('selNiveau').value = data.niveau;
           currentNiveau = data.niveau;
@@ -4010,7 +4654,7 @@
           document.getElementById('btnSexeG')?.classList.toggle('active', currentSexe === 'G');
           document.getElementById('btnSexeF')?.classList.toggle('active', currentSexe === 'F');
         }
-        if (data.critMode === 'strict' || data.critMode === 'nuance') {
+        if (data.critMode === 'strict' || data.critMode === 'nuance' || data.critMode === 'custom') {
           currentCritMode = data.critMode;
           if (document.getElementById('selCritMode')) {
             document.getElementById('selCritMode').value = currentCritMode;
@@ -4022,10 +4666,10 @@
             document.getElementById('classNameInput').value = currentClassName;
           }
         }
-        if (Array.isArray(data.indivCritIndivChoices) && data.indivCritIndivChoices.length === 4) {
+        if (Array.isArray(data.indivCritIndivChoices) && data.indivCritIndivChoices.length >= 1) {
           indivCritIndivChoices = data.indivCritIndivChoices.map(v => (v === 1 ? 1 : 0));
         }
-        if (Array.isArray(data.indivCritChoices) && data.indivCritChoices.length === 4) {
+        if (Array.isArray(data.indivCritChoices) && data.indivCritChoices.length >= 1) {
           indivCritChoices = data.indivCritChoices.map(v => (v === 1 ? 1 : 0));
         }
         if (data.concepVal !== undefined && document.getElementById('inpConceptuel')) {
@@ -4038,7 +4682,7 @@
           const cfg = getBaremeConfig(currentNiveau, currentAps);
           classStudents = data.classStudents.slice(0, MAX_CLASS_STUDENTS).map(s => normalizeStudentObj(s, cfg));
         }
-        return data.mode || 'indiv';
+        return data.mode || 'classe';
       } catch (e) {
         return false;
       }
@@ -4071,15 +4715,20 @@
 
       const cfg = getBaremeConfig(currentNiveau, currentAps);
       currentClassName = 'Classe 1';
+      hasImportedExcelNames = false;
       if (document.getElementById('classNameInput')) {
         document.getElementById('classNameInput').value = currentClassName;
       }
       classStudents = [
-        normalizeStudentObj({ nom: 'Amine El Idrissi', sexe: 'G', status: 'OK', rawPerf: '', perfScore: cfg.perfMax - 0.5, critsIndiv: [0,0,0,0], crits: [0,0,0,0], concep: 2.5, comp: cfg.compMax - 0.5 }, cfg),
-        normalizeStudentObj({ nom: 'Salma Bennani', sexe: 'F', status: 'OK', rawPerf: '', perfScore: cfg.perfMax - 1.0, critsIndiv: [0,0,0,1], crits: [0,0,0,1], concep: 2.5, comp: cfg.compMax }, cfg),
-        normalizeStudentObj({ nom: 'Youssef Tazi', sexe: 'G', status: 'OK', rawPerf: '', perfScore: Math.max(1, cfg.perfMax - 2.0), critsIndiv: [0,1,0,1], crits: [0,1,0,1], concep: 2.0, comp: Math.max(1, cfg.compMax - 1.0) }, cfg),
-        normalizeStudentObj({ nom: 'Kenza Alaoui', sexe: 'F', status: 'OK', rawPerf: '', perfScore: cfg.perfMax, critsIndiv: [0,0,0,0], crits: [0,0,0,0], concep: 3.0, comp: cfg.compMax }, cfg),
-        normalizeStudentObj({ nom: 'Mehdi Chraibi', sexe: 'G', status: 'OK', rawPerf: '', perfScore: Math.max(1, cfg.perfMax - 1.5), critsIndiv: [0,0,1,1], crits: [0,0,1,0], concep: 2.0, comp: Math.max(1, cfg.compMax - 0.5) }, cfg)
+        normalizeStudentObj({
+          nom: 'Élève',
+          sexe: 'G',
+          status: 'OK',
+          rawPerf: '',
+          perfScore: 0,
+          concep: 0,
+          comp: 0
+        }, cfg)
       ];
       currentClassFilter = 'ALL';
       currentClassSearch = '';
@@ -4089,7 +4738,204 @@
       if (filterEl) filterEl.value = 'ALL';
       saveStateToStorage();
       renderClassGridTable();
-      showToast('Liste réinitialisée aux 5 élèves de démonstration.');
+      showToast('Grille réinitialisée avec 1 ligne par défaut.');
+    }
+
+    // =========================================================================
+    // 8B. ATELIER PERSONNALISATION DES CRITÈRES (AJOUTER / MODIFIER / SUPPRIMER)
+    // =========================================================================
+    function toggleCritAtelierPanel(forceState) {
+      critAtelierOpen = typeof forceState === 'boolean' ? forceState : !critAtelierOpen;
+      const panel = document.getElementById('critAtelierPanel');
+      const btn = document.getElementById('btnToggleCritAtelier');
+      if (panel) panel.style.display = critAtelierOpen ? 'block' : 'none';
+      if (btn) btn.textContent = critAtelierOpen ? '✕ Fermer Critères' : '✎ Critères & Poids';
+      if (critAtelierOpen) {
+        renderCritAtelierPanel(getBaremeConfig(currentNiveau, currentAps));
+      }
+    }
+
+    function ensureCustomCriteriaEntry(niveau, aps) {
+      const cfg = getBaremeConfig(niveau, aps);
+      const key = getCustomKey(niveau, aps);
+      if (!customCriteriaMap[key]) {
+        customCriteriaMap[key] = {
+          indiv: cfg.isSpCo ? getCritsForAps(aps, 'indiv', niveau) : [],
+          proc: getCritsForAps(aps, cfg.isSpCo ? 'collectif' : 'processus', niveau)
+        };
+      }
+      return customCriteriaMap[key];
+    }
+
+    function renderCritAtelierPanel(cfgParam) {
+      const panel = document.getElementById('critAtelierPanel');
+      if (!panel || !critAtelierOpen) return;
+      const cfg = cfgParam || getBaremeConfig(currentNiveau, currentAps);
+      const critsIndiv = cfg.isSpCo ? getCritsForAps(currentAps, 'indiv') : [];
+      const critsProc = cfg.isSpCo ? getCritsForAps(currentAps, 'collectif') : getCritsForAps(currentAps, 'processus');
+
+      const renderBlock = (kind, title, crits, weights, accent) => `
+        <div style="margin-top:0.75rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.4rem;">
+            <strong style="font-size:0.8rem;color:${accent};">${title} (${crits.length} critère${crits.length > 1 ? 's' : ''} · ${kind === 'indiv' ? cfg.perfMax : cfg.procMax} pts)</strong>
+            <button type="button" class="q-chip" onclick="openAddCritModal('${kind}')">➕ Ajouter un critère</button>
+          </div>
+          <div class="crit-atelier-grid">
+            ${crits.map((c, idx) => `
+              <div class="crit-atelier-card">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:0.35rem;">
+                  <strong style="font-size:0.82rem;color:var(--ink);">${idx + 1}. ${escapeHtml(c.nom)}</strong>
+                  <span style="font-size:0.73rem;font-weight:800;color:${accent};">${weights[idx]} pt${weights[idx] > 1 ? 's' : ''}</span>
+                </div>
+                <div style="font-size:0.73rem;color:#475569;">✓ ${escapeHtml(c.sous[0])} &nbsp;|&nbsp; ✗ ${escapeHtml(c.sous[1])}</div>
+                <div style="display:flex;gap:0.35rem;margin-top:0.2rem;">
+                  <button type="button" class="q-chip" onclick="openEditSingleCritModal('${kind}', ${idx})">✎ Modifier</button>
+                  ${crits.length > 1 ? `<button type="button" class="q-chip" style="color:#BE123C;border-color:#FDA4AF;" onclick="deleteSingleCriterion('${kind}', ${idx})">🗑️ Suppr.</button>` : ''}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+
+      panel.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">
+          <div>
+            <strong style="font-size:0.9rem;color:#1E3A8A;">✎ Personnaliser les Critères — ${escapeHtml(currentAps)}</strong>
+            <div style="font-size:0.76rem;color:#475569;">Ajoutez, renommez ou supprimez des critères. Tous les tableaux et exports s'adaptent instantanément.</div>
+          </div>
+          <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">
+            <button type="button" class="q-chip" onclick="resetOfficialCriteria()">↺ Critères officiels</button>
+            <button type="button" class="q-chip" onclick="toggleCritAtelierPanel(false)">✕ Fermer</button>
+          </div>
+        </div>
+        ${cfg.isSpCo ? renderBlock('indiv', '1A. Capacité Individuelle', critsIndiv, cfg.critWeightsIndiv, '#1E40AF') : ''}
+        ${renderBlock('proc', `1B. ${escapeHtml(cfg.labelProc)}`, critsProc, cfg.critWeights, '#065F46')}
+      `;
+    }
+
+    function openEditSingleCritModal(kind, idx) {
+      const cfg = getBaremeConfig(currentNiveau, currentAps);
+      const list = kind === 'indiv'
+        ? getCritsForAps(currentAps, 'indiv')
+        : getCritsForAps(currentAps, cfg.isSpCo ? 'collectif' : 'processus');
+      const weights = kind === 'indiv' ? cfg.critWeightsIndiv : cfg.critWeights;
+      const item = list[idx];
+      if (!item) return;
+
+      editingCritCtx = { mode: 'edit', kind, idx };
+      document.getElementById('editCritModalTitle').textContent = `✎ Modifier Critère ${idx + 1}`;
+      document.getElementById('inpEditCritNom').value = item.nom || '';
+      document.getElementById('inpEditCritPos').value = (item.sous && item.sous[0]) || 'Acquis';
+      document.getElementById('inpEditCritNeg').value = (item.sous && item.sous[1]) || 'En cours';
+      document.getElementById('inpEditCritWeight').value = weights[idx] !== undefined ? weights[idx] : 1.5;
+      document.getElementById('editSingleCritModal').classList.add('open');
+      setTimeout(() => document.getElementById('inpEditCritNom')?.focus(), 40);
+    }
+
+    function openAddCritModal(kind) {
+      editingCritCtx = { mode: 'add', kind: kind === 'indiv' ? 'indiv' : 'proc', idx: -1 };
+      document.getElementById('editCritModalTitle').textContent = kind === 'indiv' ? '➕ Ajouter un Critère Individuel' : '➕ Ajouter un Critère';
+      document.getElementById('inpEditCritNom').value = '';
+      document.getElementById('inpEditCritPos').value = 'Acquis';
+      document.getElementById('inpEditCritNeg').value = 'En cours';
+      document.getElementById('inpEditCritWeight').value = '1.5';
+      document.getElementById('editSingleCritModal').classList.add('open');
+      setTimeout(() => document.getElementById('inpEditCritNom')?.focus(), 40);
+    }
+
+    function closeEditSingleCritModal() {
+      editingCritCtx = null;
+      document.getElementById('editSingleCritModal')?.classList.remove('open');
+    }
+
+    function saveSingleCritModal() {
+      if (!editingCritCtx) return;
+      const nom = String(document.getElementById('inpEditCritNom')?.value || '').trim();
+      const pos = String(document.getElementById('inpEditCritPos')?.value || '').trim() || 'Acquis';
+      const neg = String(document.getElementById('inpEditCritNeg')?.value || '').trim() || 'En cours';
+      const weight = Math.max(0, Math.min(12, roundQuarter(parseFloat(document.getElementById('inpEditCritWeight')?.value || 1.5) || 0)));
+      if (!nom) {
+        showToast('Veuillez saisir le nom du critère.');
+        return;
+      }
+
+      const kind = editingCritCtx.kind;
+      const entry = ensureCustomCriteriaEntry(currentNiveau, currentAps);
+      const baremeEntry = ensureCustomBaremeEntry(currentNiveau, currentAps);
+      const arr = kind === 'indiv' ? entry.indiv : entry.proc;
+      const wArr = kind === 'indiv' ? baremeEntry.indWeights : baremeEntry.procWeights;
+
+      if (editingCritCtx.mode === 'add') {
+        arr.push({
+          nom,
+          sous: [pos, neg],
+          descPos: `Critère « ${nom} » maîtrisé (${pos}).`,
+          descNeg: `Critère « ${nom} » en cours d'acquisition (${neg}).`,
+          tip: 'Critère personnalisé ajouté par l\'enseignant.'
+        });
+        wArr.push(weight);
+        if (kind === 'indiv') indivCritIndivChoices.push(0);
+        else indivCritChoices.push(0);
+        classStudents.forEach(st => {
+          if (kind === 'indiv') st.critsIndiv.push(0);
+          else st.crits.push(0);
+        });
+        showToast(`Critère « ${nom} » ajouté.`);
+      } else {
+        const idx = editingCritCtx.idx;
+        if (arr[idx]) {
+          arr[idx].nom = nom;
+          arr[idx].sous = [pos, neg];
+          wArr[idx] = weight;
+          showToast(`Critère « ${nom} » mis à jour.`);
+        }
+      }
+
+      closeEditSingleCritModal();
+      onConfigChange(true);
+    }
+
+    function deleteSingleCriterion(kind, idx) {
+      const entry = ensureCustomCriteriaEntry(currentNiveau, currentAps);
+      const baremeEntry = ensureCustomBaremeEntry(currentNiveau, currentAps);
+      const arr = kind === 'indiv' ? entry.indiv : entry.proc;
+      const wArr = kind === 'indiv' ? baremeEntry.indWeights : baremeEntry.procWeights;
+
+      if (arr.length <= 1) {
+        showToast('Au moins 1 critère doit rester dans cette grille.');
+        return;
+      }
+      const removed = arr.splice(idx, 1)[0];
+      if (idx < wArr.length) wArr.splice(idx, 1);
+
+      if (kind === 'indiv') {
+        if (idx < indivCritIndivChoices.length) indivCritIndivChoices.splice(idx, 1);
+        classStudents.forEach(st => {
+          if (Array.isArray(st.critsIndiv) && idx < st.critsIndiv.length) st.critsIndiv.splice(idx, 1);
+        });
+      } else {
+        if (idx < indivCritChoices.length) indivCritChoices.splice(idx, 1);
+        classStudents.forEach(st => {
+          if (Array.isArray(st.crits) && idx < st.crits.length) st.crits.splice(idx, 1);
+        });
+      }
+
+      onConfigChange(true);
+      showToast(`Critère supprimé : ${removed?.nom || ''}`);
+    }
+
+    function resetOfficialCriteria() {
+      const key = getCustomKey(currentNiveau, currentAps);
+      delete customCriteriaMap[key];
+      delete customBaremeConfig[key];
+      if (currentCritMode === 'custom') {
+        currentCritMode = 'strict';
+        const sel = document.getElementById('selCritMode');
+        if (sel) sel.value = 'strict';
+      }
+      onConfigChange(true);
+      showToast('Critères et barème officiels rétablis pour cette APS.');
     }
 
     // =========================================================================
@@ -4137,7 +4983,7 @@
       showToast(`${nom} ajouté(e) à la grille (${classStudents.length}/${MAX_CLASS_STUDENTS}).`);
     }
 
-    function addBlankClassRow() {
+    function addBlankClassRow(focusNew) {
       if (classStudents.length >= MAX_CLASS_STUDENTS) {
         showToast(`Maximum atteint : ${MAX_CLASS_STUDENTS} élèves.`);
         return;
@@ -4149,13 +4995,19 @@
         status: 'OK',
         rawPerf: '',
         perfScore: 0,
-        critsIndiv: [0, 0, 0, 0],
-        crits: [0, 0, 0, 0],
-        concep: 2.5,
-        comp: Math.max(0, cfg.compMax - 0.5)
+        concep: 0,
+        comp: 0
       }, cfg));
       saveStateToStorage();
       renderClassGridTable();
+      if (focusNew) {
+        const inputs = document.querySelectorAll('#classSheetTbody .row-input-name');
+        const lastInp = inputs[inputs.length - 1];
+        if (lastInp) {
+          lastInp.focus();
+          lastInp.select();
+        }
+      }
     }
 
     function deleteClassRow(rIdx) {
@@ -4258,7 +5110,10 @@
 
     function setClassStudentIndivCrit(rIdx, cIdx, val) {
       if (!classStudents[rIdx]) return;
-      if (!Array.isArray(classStudents[rIdx].critsIndiv)) classStudents[rIdx].critsIndiv = [0, 0, 0, 0];
+      const len = getCritsForAps(currentAps, 'indiv').length;
+      if (!Array.isArray(classStudents[rIdx].critsIndiv) || classStudents[rIdx].critsIndiv.length < len) {
+        classStudents[rIdx].critsIndiv = Array.from({ length: len }, (_, i) => (classStudents[rIdx].critsIndiv?.[i] === 1 ? 1 : 0));
+      }
       classStudents[rIdx].critsIndiv[cIdx] = val;
       saveStateToStorage();
       renderClassGridTable();
@@ -4266,10 +5121,28 @@
 
     function setClassStudentCrit(rIdx, cIdx, val) {
       if (!classStudents[rIdx]) return;
-      if (!Array.isArray(classStudents[rIdx].crits)) classStudents[rIdx].crits = [0, 0, 0, 0];
+      const cfg = getBaremeConfig(currentNiveau, currentAps);
+      const len = (cfg.isSpCo ? getCritsForAps(currentAps, 'collectif') : getCritsForAps(currentAps, 'processus')).length;
+      if (!Array.isArray(classStudents[rIdx].crits) || classStudents[rIdx].crits.length < len) {
+        classStudents[rIdx].crits = Array.from({ length: len }, (_, i) => (classStudents[rIdx].crits?.[i] === 1 ? 1 : 0));
+      }
       classStudents[rIdx].crits[cIdx] = val;
       saveStateToStorage();
       renderClassGridTable();
+    }
+
+    function onClassNameInputKeyDown(ev, rIdx) {
+      if (ev.key !== 'Enter') return;
+      ev.preventDefault();
+      updateClassStudentField(rIdx, 'nom', ev.target.value);
+      const allInputs = Array.from(document.querySelectorAll('#classSheetTbody .row-input-name'));
+      const curPos = allInputs.indexOf(ev.target);
+      if (curPos >= 0 && curPos + 1 < allInputs.length) {
+        allInputs[curPos + 1].focus();
+        allInputs[curPos + 1].select();
+      } else {
+        addBlankClassRow(true);
+      }
     }
 
     function setClassStudentSexe(rIdx, newSexe) {
@@ -4324,26 +5197,30 @@
       // Update badges, class name input & buttons
       const countBadge = document.getElementById('classCountBadge');
       if (countBadge) countBadge.textContent = `${classStudents.length} / ${MAX_CLASS_STUDENTS} élèves`;
+      const rowCountLbl = document.getElementById('tableRowCountLabel');
+      if (rowCountLbl) rowCountLbl.textContent = `${classStudents.length} / ${MAX_CLASS_STUDENTS} élève${classStudents.length > 1 ? 's' : ''}`;
       const clsInp = document.getElementById('classNameInput');
       if (clsInp && document.activeElement !== clsInp) clsInp.value = currentClassName || 'Classe 1';
       const btnAdd = document.getElementById('btnAddRowClass');
       if (btnAdd) btnAdd.disabled = classStudents.length >= MAX_CLASS_STUDENTS;
+      const btnAddTop = document.getElementById('btnAddRowClassTop');
+      if (btnAddTop) btnAddTop.disabled = classStudents.length >= MAX_CLASS_STUDENTS;
 
       const titleEl = document.getElementById('classTitleApsNiveau');
       const subEl = document.getElementById('classSubtitleHint');
       if (cfg.isSpCo) {
         if (titleEl) titleEl.textContent = `${currentAps} (${nivLabel})`;
-        if (subEl) subEl.textContent = `Double grille (Individuel /${cfg.perfMax} + Collectif /${cfg.procMax}) · Conceptuel /${cfg.concepMax} · Comportemental /${cfg.compMax} · ${classStudents.length}/${MAX_CLASS_STUDENTS} élèves`;
+        if (subEl) subEl.textContent = `Double grille (Individuel /${cfg.perfMax} + Collectif /${cfg.procMax}) · Conceptuel /${cfg.concepMax} · Comportemental /${cfg.compMax} · ${classStudents.length}/${MAX_CLASS_STUDENTS} élève${classStudents.length > 1 ? 's' : ''}`;
       } else {
         if (titleEl) titleEl.textContent = `${currentAps} (${nivLabel})`;
-        if (subEl) subEl.textContent = `Perf. en ${unitMeta.unit} (${unitMeta.stepHint || unitMeta.placeholder}) · Conversion auto selon G/F et niveau · ${classStudents.length}/${MAX_CLASS_STUDENTS} élèves`;
+        if (subEl) subEl.textContent = `Perf. en ${unitMeta.unit} (${unitMeta.stepHint || unitMeta.placeholder}) · Conversion auto selon G/F et niveau · ${classStudents.length}/${MAX_CLASS_STUDENTS} élève${classStudents.length > 1 ? 's' : ''}`;
       }
 
       const critsIndiv = cfg.isSpCo ? getCritsForAps(currentAps, 'indiv') : [];
       const critsProc = cfg.isSpCo ? getCritsForAps(currentAps, 'collectif') : getCritsForAps(currentAps, 'processus');
-      const indWeights = cfg.critWeightsIndiv || [1.5, 1.5, 1.5, 1.5];
-      const procWeights = cfg.critWeights || [1.5, 1.5, 1.5, 1.5];
-      const negPts = currentCritMode === 'nuance' ? 0.5 : 0;
+      const indWeights = cfg.critWeightsIndiv || [];
+      const procWeights = cfg.critWeights || [];
+      const negPts = cfg.negPts || 0;
 
       const thead = document.getElementById('classSheetThead');
       const tbody = document.getElementById('classSheetTbody');
@@ -4354,25 +5231,43 @@
             <th rowspan="2" style="width:36px;">N°</th>
             <th rowspan="2" style="min-width:155px;">Nom &amp; Prénom</th>
             <th rowspan="2" style="width:54px;">Sexe</th>
-            <th colspan="5" class="mega-hdr-indiv">1A. Capacité Individuelle (/${cfg.perfMax} pts)</th>
-            <th colspan="5" class="mega-hdr-coll">1B. Capacité Collective (/${cfg.procMax} pts)</th>
+            <th colspan="${critsIndiv.length + 1}" class="mega-hdr-indiv">
+              1A. Capacité Individuelle (/${cfg.perfMax} pts)
+              <button type="button" class="hdr-add-crit-btn" onclick="openAddCritModal('indiv')" title="Ajouter un critère individuel">+ Critère</button>
+            </th>
+            <th colspan="${critsProc.length + 1}" class="mega-hdr-coll">
+              1B. Capacité Collective (/${cfg.procMax} pts)
+              <button type="button" class="hdr-add-crit-btn" onclick="openAddCritModal('proc')" title="Ajouter un critère collectif">+ Critère</button>
+            </th>
             <th rowspan="2" style="width:66px;">2. Conc.<br><span style="color:#A7F3D0;">/${cfg.concepMax}</span></th>
             <th rowspan="2" style="width:66px;">3. Comp.<br><span style="color:#A7F3D0;">/${cfg.compMax}</span></th>
             <th rowspan="2" style="width:82px;background:#3347D6;">TOTAL<br>NOTE /20</th>
-            <th rowspan="2" style="width:38px;">Suppr.</th>
+            <th rowspan="2" class="no-print-col" style="width:38px;">Suppr.</th>
           </tr>
           <tr>
             ${critsIndiv.map((c, idx) => `
               <th class="sub-hdr">
-                <div>${c.nom} (${indWeights[idx]}pt)</div>
-                <div style="font-size:0.63rem;color:#93C5FD;">[${c.sous[0]} | ${c.sous[1]}]</div>
+                <div class="hdr-crit-top">
+                  <span>${escapeHtml(c.nom)} (${indWeights[idx]}pt)</span>
+                  <span class="hdr-crit-actions">
+                    <button type="button" class="hdr-crit-btn" onclick="openEditSingleCritModal('indiv', ${idx})" title="Modifier ce critère">✎</button>
+                    ${critsIndiv.length > 1 ? `<button type="button" class="hdr-crit-btn del" onclick="deleteSingleCriterion('indiv', ${idx})" title="Supprimer ce critère">×</button>` : ''}
+                  </span>
+                </div>
+                <div style="font-size:0.63rem;color:#93C5FD;">[${escapeHtml(c.sous[0])} | ${escapeHtml(c.sous[1])}]</div>
               </th>
             `).join('')}
             <th class="sub-hdr" style="width:62px;background:#1E3A8A;">Note<br>Indiv /${cfg.perfMax}</th>
             ${critsProc.map((c, idx) => `
               <th class="sub-hdr">
-                <div>${c.nom} (${procWeights[idx]}pt)</div>
-                <div style="font-size:0.63rem;color:#6EE7B7;">[${c.sous[0]} | ${c.sous[1]}]</div>
+                <div class="hdr-crit-top">
+                  <span>${escapeHtml(c.nom)} (${procWeights[idx]}pt)</span>
+                  <span class="hdr-crit-actions">
+                    <button type="button" class="hdr-crit-btn" onclick="openEditSingleCritModal('proc', ${idx})" title="Modifier ce critère">✎</button>
+                    ${critsProc.length > 1 ? `<button type="button" class="hdr-crit-btn del" onclick="deleteSingleCriterion('proc', ${idx})" title="Supprimer ce critère">×</button>` : ''}
+                  </span>
+                </div>
+                <div style="font-size:0.63rem;color:#6EE7B7;">[${escapeHtml(c.sous[0])} | ${escapeHtml(c.sous[1])}]</div>
               </th>
             `).join('')}
             <th class="sub-hdr" style="width:62px;background:#065F46;">Note<br>Coll /${cfg.procMax}</th>
@@ -4384,20 +5279,29 @@
             <th rowspan="2" style="width:36px;">N°</th>
             <th rowspan="2" style="min-width:155px;">Nom &amp; Prénom</th>
             <th rowspan="2" style="width:54px;">Sexe</th>
-            <th rowspan="2" style="min-width:130px;">Perf. Brute<br><span style="color:#93C5FD;">(Barème G/F · ${unitMeta.unit})</span></th>
+            <th rowspan="2" style="min-width:130px;">Perf. Brute<br><span style="color:#93C5FD;">(Barème G/F · ${escapeHtml(unitMeta.unit)})</span></th>
             <th rowspan="2" style="width:74px;">1A. Note Perf<br><span style="color:#FCD34D;">/${cfg.perfMax} pts</span></th>
-            <th colspan="4">1B. ${cfg.labelProc} — 4 Critères (<span style="color:#93C5FD;">/${cfg.procMax} pts</span>)</th>
+            <th colspan="${critsProc.length}">
+              1B. ${escapeHtml(cfg.labelProc)} — ${critsProc.length} Critère${critsProc.length > 1 ? 's' : ''} (<span style="color:#93C5FD;">/${cfg.procMax} pts</span>)
+              <button type="button" class="hdr-add-crit-btn" onclick="openAddCritModal('proc')" title="Ajouter un critère">+ Critère</button>
+            </th>
             <th rowspan="2" style="width:68px;">Note<br>Proc.<br><span style="color:#93C5FD;">/${cfg.procMax}</span></th>
             <th rowspan="2" style="width:66px;">2. Conc.<br><span style="color:#A7F3D0;">/${cfg.concepMax}</span></th>
             <th rowspan="2" style="width:66px;">3. Comp.<br><span style="color:#A7F3D0;">/${cfg.compMax}</span></th>
             <th rowspan="2" style="width:82px;background:#3347D6;">TOTAL<br>NOTE /20</th>
-            <th rowspan="2" style="width:38px;">Suppr.</th>
+            <th rowspan="2" class="no-print-col" style="width:38px;">Suppr.</th>
           </tr>
           <tr>
             ${critsProc.map((c, idx) => `
               <th class="sub-hdr">
-                <div>${c.nom} (${procWeights[idx]}pt)</div>
-                <div style="font-size:0.64rem;color:#CBD5E1;">[${c.sous[0]} | ${c.sous[1]}]</div>
+                <div class="hdr-crit-top">
+                  <span>${escapeHtml(c.nom)} (${procWeights[idx]}pt)</span>
+                  <span class="hdr-crit-actions">
+                    <button type="button" class="hdr-crit-btn" onclick="openEditSingleCritModal('proc', ${idx})" title="Modifier ce critère">✎</button>
+                    ${critsProc.length > 1 ? `<button type="button" class="hdr-crit-btn del" onclick="deleteSingleCriterion('proc', ${idx})" title="Supprimer ce critère">×</button>` : ''}
+                  </span>
+                </div>
+                <div style="font-size:0.64rem;color:#CBD5E1;">[${escapeHtml(c.sous[0])} | ${escapeHtml(c.sous[1])}]</div>
               </th>
             `).join('')}
           </tr>
@@ -4414,7 +5318,7 @@
       });
 
       if (visibleIndices.length === 0) {
-        const colSpanCount = cfg.isSpCo ? 17 : 14;
+        const colSpanCount = cfg.isSpCo ? (9 + critsIndiv.length + critsProc.length) : (10 + critsProc.length);
         tbody.innerHTML = `<tr><td colspan="${colSpanCount}" style="padding:22px;color:#64748B;font-weight:600;">Aucun élève ne correspond au filtre actuel.</td></tr>`;
       } else {
         tbody.innerHTML = visibleIndices.map(rIdx => {
@@ -4431,11 +5335,11 @@
             return `
               <td>
                 <div class="mini-chk-pair">
-                  <button type="button" class="mini-chk ${choice === 0 ? 'pos-on' : ''}" onclick="setClassStudentCrit(${rIdx}, ${cIdx}, 0)" title="${c.sous[0]} (+${procWeights[cIdx]} pt)">
-                    ${choice === 0 ? '✓ ' : ''}${c.sous[0]}
+                  <button type="button" class="mini-chk ${choice === 0 ? 'pos-on' : ''}" onclick="setClassStudentCrit(${rIdx}, ${cIdx}, 0)" title="${escapeHtml(c.sous[0])} (+${procWeights[cIdx]} pt)">
+                    ${choice === 0 ? '✓ ' : ''}${escapeHtml(c.sous[0])}
                   </button>
-                  <button type="button" class="mini-chk ${choice === 1 ? 'neg-on' : ''}" onclick="setClassStudentCrit(${rIdx}, ${cIdx}, 1)" title="${c.sous[1]} (+${negPts} pt)">
-                    ${choice === 1 ? '✗ ' : ''}${c.sous[1]}
+                  <button type="button" class="mini-chk ${choice === 1 ? 'neg-on' : ''}" onclick="setClassStudentCrit(${rIdx}, ${cIdx}, 1)" title="${escapeHtml(c.sous[1])} (+${negPts} pt)">
+                    ${choice === 1 ? '✗ ' : ''}${escapeHtml(c.sous[1])}
                   </button>
                 </div>
               </td>
@@ -4449,11 +5353,11 @@
               return `
                 <td>
                   <div class="mini-chk-pair">
-                    <button type="button" class="mini-chk ${choice === 0 ? 'pos-on' : ''}" onclick="setClassStudentIndivCrit(${rIdx}, ${cIdx}, 0)" title="${c.sous[0]} (+${indWeights[cIdx]} pt)">
-                      ${choice === 0 ? '✓ ' : ''}${c.sous[0]}
+                    <button type="button" class="mini-chk ${choice === 0 ? 'pos-on' : ''}" onclick="setClassStudentIndivCrit(${rIdx}, ${cIdx}, 0)" title="${escapeHtml(c.sous[0])} (+${indWeights[cIdx]} pt)">
+                      ${choice === 0 ? '✓ ' : ''}${escapeHtml(c.sous[0])}
                     </button>
-                    <button type="button" class="mini-chk ${choice === 1 ? 'neg-on' : ''}" onclick="setClassStudentIndivCrit(${rIdx}, ${cIdx}, 1)" title="${c.sous[1]} (+${negPts} pt)">
-                      ${choice === 1 ? '✗ ' : ''}${c.sous[1]}
+                    <button type="button" class="mini-chk ${choice === 1 ? 'neg-on' : ''}" onclick="setClassStudentIndivCrit(${rIdx}, ${cIdx}, 1)" title="${escapeHtml(c.sous[1])} (+${negPts} pt)">
+                      ${choice === 1 ? '✗ ' : ''}${escapeHtml(c.sous[1])}
                     </button>
                   </div>
                 </td>
@@ -4472,10 +5376,10 @@
             middleHtml = `
               <td>
                 <div class="unit-input-wrap">
-                  <input type="text" class="row-input-raw" value="${escapeHtml(st.rawPerf || '')}" placeholder="Ex: ${rowPh}" oninput="onClassRawPerfLive(${rIdx}, this)" onchange="onClassRawPerfChange(${rIdx}, this.value)" title="Barème ${st.sexe === 'F' ? 'Filles' : 'Garçons'} (${baremeHint})">
-                  <span class="perf-unit-tag">${unitMeta.unit}</span>
+                  <input type="text" class="row-input-raw" value="${escapeHtml(st.rawPerf || '')}" placeholder="Ex: ${rowPh}" oninput="onClassRawPerfLive(${rIdx}, this)" onchange="onClassRawPerfChange(${rIdx}, this.value)" title="Barème ${st.sexe === 'F' ? 'Filles' : 'Garçons'} (${escapeHtml(baremeHint)})">
+                  <span class="perf-unit-tag">${escapeHtml(unitMeta.unit)}</span>
                 </div>
-                <div class="perf-bareme-mini is-${st.sexe === 'F' ? 'f' : 'g'}">${baremeHint}</div>
+                <div class="perf-bareme-mini is-${st.sexe === 'F' ? 'f' : 'g'}">${escapeHtml(baremeHint)}</div>
               </td>
               <td>
                 <input type="number" id="rowPerfScore_${rIdx}" class="row-input-num tabular-nums" min="0" max="${cfg.perfMax}" step="0.25" value="${Number(st.perfScore).toFixed(2)}" onchange="updateClassStudentField(${rIdx}, 'perfScore', this.value)">
@@ -4491,7 +5395,7 @@
             <tr>
               <td class="tabular-nums"><strong>${rIdx + 1}</strong></td>
               <td style="text-align:left;">
-                <input type="text" class="row-input-name" value="${escapeHtml(st.nom)}" onchange="updateClassStudentField(${rIdx}, 'nom', this.value)">
+                <input type="text" class="row-input-name" value="${escapeHtml(st.nom)}" onkeydown="onClassNameInputKeyDown(event, ${rIdx})" onchange="updateClassStudentField(${rIdx}, 'nom', this.value)">
               </td>
               <td>
                 <select class="row-sex-select is-${st.sexe === 'F' ? 'f' : 'g'}" onchange="setClassStudentSexe(${rIdx}, this.value)" aria-label="Sexe de ${escapeHtml(st.nom)}" title="Changer le sexe recalcule automatiquement la note (barème G / F)">
@@ -4507,7 +5411,7 @@
                 <input type="number" class="row-input-num tabular-nums" min="0" max="${cfg.compMax}" step="0.25" value="${st.comp}" onchange="updateClassStudentField(${rIdx}, 'comp', this.value)">
               </td>
               ${totalCellHtml}
-              <td>
+              <td class="no-print-col">
                 <button type="button" class="row-del-btn" onclick="deleteClassRow(${rIdx})" title="Supprimer cette ligne">🗑️</button>
               </td>
             </tr>
@@ -5115,13 +6019,12 @@
           status: 'OK',
           rawPerf: '',
           perfScore: 0,
-          critsIndiv: [0, 0, 0, 0],
-          crits: [0, 0, 0, 0],
-          concep: 2.5,
-          comp: Math.max(0, cfg.compMax - 0.5)
+          concep: 0,
+          comp: 0
         }, cfg));
       });
 
+      hasImportedExcelNames = true;
       classStudents = baseList.slice(0, MAX_CLASS_STUDENTS);
       saveStateToStorage();
       closeExcelMapModal();
@@ -5163,9 +6066,9 @@
       const unitMeta = PERF_UNIT_META[currentAps] || { unit: 'pts' };
       const critsIndiv = cfg.isSpCo ? getCritsForAps(currentAps, 'indiv') : [];
       const critsProc = cfg.isSpCo ? getCritsForAps(currentAps, 'collectif') : getCritsForAps(currentAps, 'processus');
-      const indWeights = cfg.critWeightsIndiv || [1.5, 1.5, 1.5, 1.5];
-      const procWeights = cfg.critWeights || [1.5, 1.5, 1.5, 1.5];
-      const negPts = currentCritMode === 'nuance' ? 0.5 : 0;
+      const indWeights = cfg.critWeightsIndiv || [];
+      const procWeights = cfg.critWeights || [];
+      const negPts = cfg.negPts || 0;
 
       let aoaMain = [];
       if (kind === 'massar') {
@@ -5271,9 +6174,9 @@
       const unitMeta = PERF_UNIT_META[currentAps] || { unit: 'pts' };
       const critsIndiv = cfg.isSpCo ? getCritsForAps(currentAps, 'indiv') : [];
       const critsProc = cfg.isSpCo ? getCritsForAps(currentAps, 'collectif') : getCritsForAps(currentAps, 'processus');
-      const indWeights = cfg.critWeightsIndiv || [1.5, 1.5, 1.5, 1.5];
-      const procWeights = cfg.critWeights || [1.5, 1.5, 1.5, 1.5];
-      const negPts = currentCritMode === 'nuance' ? 0.5 : 0;
+      const indWeights = cfg.critWeightsIndiv || [];
+      const procWeights = cfg.critWeights || [];
+      const negPts = cfg.negPts || 0;
 
       let theadHtml = '';
       if (cfg.isSpCo) {
@@ -5282,9 +6185,9 @@
             <th style="border:1px solid #333;padding:5px;">N°</th>
             <th style="border:1px solid #333;padding:5px;">Nom &amp; Prénom</th>
             <th style="border:1px solid #333;padding:5px;">Sexe</th>
-            ${critsIndiv.map((c, i) => `<th style="border:1px solid #333;padding:5px;">Indiv: ${c.nom} (/${indWeights[i]})</th>`).join('')}
+            ${critsIndiv.map((c, i) => `<th style="border:1px solid #333;padding:5px;">Indiv: ${escapeHtml(c.nom)} (/${indWeights[i]})</th>`).join('')}
             <th style="border:1px solid #333;padding:5px;background:#1D4ED8;">Note Indiv (/${cfg.perfMax})</th>
-            ${critsProc.map((c, i) => `<th style="border:1px solid #333;padding:5px;">Coll: ${c.nom} (/${procWeights[i]})</th>`).join('')}
+            ${critsProc.map((c, i) => `<th style="border:1px solid #333;padding:5px;">Coll: ${escapeHtml(c.nom)} (/${procWeights[i]})</th>`).join('')}
             <th style="border:1px solid #333;padding:5px;background:#065F46;">Note Coll (/${cfg.procMax})</th>
             <th style="border:1px solid #333;padding:5px;">2. Concep (/${cfg.concepMax})</th>
             <th style="border:1px solid #333;padding:5px;">3. Comport (/${cfg.compMax})</th>
@@ -5297,9 +6200,9 @@
             <th style="border:1px solid #333;padding:5px;">N°</th>
             <th style="border:1px solid #333;padding:5px;">Nom &amp; Prénom</th>
             <th style="border:1px solid #333;padding:5px;">Sexe</th>
-            <th style="border:1px solid #333;padding:5px;">Perf. Brute (${unitMeta.unit})</th>
+            <th style="border:1px solid #333;padding:5px;">Perf. Brute (${escapeHtml(unitMeta.unit)})</th>
             <th style="border:1px solid #333;padding:5px;">1A. Perf (/${cfg.perfMax})</th>
-            ${critsProc.map((c, i) => `<th style="border:1px solid #333;padding:5px;">${c.nom} (/${procWeights[i]})</th>`).join('')}
+            ${critsProc.map((c, i) => `<th style="border:1px solid #333;padding:5px;">${escapeHtml(c.nom)} (/${procWeights[i]})</th>`).join('')}
             <th style="border:1px solid #333;padding:5px;">1B. Processus (/${cfg.procMax})</th>
             <th style="border:1px solid #333;padding:5px;">2. Concep. (/${cfg.concepMax})</th>
             <th style="border:1px solid #333;padding:5px;">3. Comport. (/${cfg.compMax})</th>
@@ -5316,12 +6219,12 @@
           const indTds = critsIndiv.map((c, i) => {
             const ch = (st.critsIndiv && st.critsIndiv[i]) || 0;
             const pts = ch === 0 ? indWeights[i] : negPts;
-            return `<td style="border:1px solid #333;padding:4px;text-align:center;font-size:8.5pt;">[X] ${c.sous[ch]} (${pts})</td>`;
+            return `<td style="border:1px solid #333;padding:4px;text-align:center;font-size:8.5pt;">[X] ${escapeHtml(c.sous[ch])} (${pts})</td>`;
           }).join('');
           const procTds = critsProc.map((c, i) => {
             const ch = (st.crits && st.crits[i]) || 0;
             const pts = ch === 0 ? procWeights[i] : negPts;
-            return `<td style="border:1px solid #333;padding:4px;text-align:center;font-size:8.5pt;">[X] ${c.sous[ch]} (${pts})</td>`;
+            return `<td style="border:1px solid #333;padding:4px;text-align:center;font-size:8.5pt;">[X] ${escapeHtml(c.sous[ch])} (${pts})</td>`;
           }).join('');
           middleTds = `
             ${indTds}
@@ -5333,10 +6236,10 @@
           const procTds = critsProc.map((c, i) => {
             const ch = (st.crits && st.crits[i]) || 0;
             const pts = ch === 0 ? procWeights[i] : negPts;
-            return `<td style="border:1px solid #333;padding:4px;text-align:center;font-size:8.5pt;">[X] ${c.sous[ch]} (${pts})</td>`;
+            return `<td style="border:1px solid #333;padding:4px;text-align:center;font-size:8.5pt;">[X] ${escapeHtml(c.sous[ch])} (${pts})</td>`;
           }).join('');
           middleTds = `
-            <td style="border:1px solid #333;padding:4px;text-align:center;">${st.rawPerf ? escapeHtml(st.rawPerf) + ' ' + unitMeta.unit : '—'}</td>
+            <td style="border:1px solid #333;padding:4px;text-align:center;">${st.rawPerf ? escapeHtml(st.rawPerf) + ' ' + escapeHtml(unitMeta.unit) : '—'}</td>
             <td style="border:1px solid #333;padding:4px;text-align:center;">${sc.pIndiv.toFixed(2)}</td>
             ${procTds}
             <td style="border:1px solid #333;padding:4px;text-align:center;font-weight:bold;">${sc.pProc.toFixed(2)}</td>
@@ -5347,7 +6250,7 @@
           <tr>
             <td style="border:1px solid #333;padding:4px;text-align:center;">${idx + 1}</td>
             <td style="border:1px solid #333;padding:4px;">${escapeHtml(st.nom)}</td>
-            <td style="border:1px solid #333;padding:4px;text-align:center;">${st.sexe}</td>
+            <td style="border:1px solid #333;padding:4px;text-align:center;">${escapeHtml(st.sexe)}</td>
             ${middleTds}
             <td style="border:1px solid #333;padding:4px;text-align:center;">${sc.cVal.toFixed(2)}</td>
             <td style="border:1px solid #333;padding:4px;text-align:center;">${sc.bVal.toFixed(2)}</td>
@@ -5361,7 +6264,7 @@
         <head><meta charset="utf-8"><title>Grille EPS ${escapeHtml(clsLabel)} - ${escapeHtml(currentAps)}</title></head>
         <body style="font-family:Arial,sans-serif;font-size:10pt;">
           <h2 style="text-align:center;color:#1E3A8A;margin-bottom:4px;">GRILLE D'ÉVALUATION EPS (/20) — ${escapeHtml(clsLabel)} — ${escapeHtml(currentAps.toUpperCase())} (${nivLabel})</h2>
-          <p style="text-align:center;font-size:9pt;margin-top:0;">Orientations Pédagogiques Maroc · Procédural /${cfg.procTotal} (${cfg.labelPerf} /${cfg.perfMax} + ${cfg.labelProc} /${cfg.procMax}) · Conceptuel /${cfg.concepMax} · Comportemental /${cfg.compMax}</p>
+          <p style="text-align:center;font-size:9pt;margin-top:0;">Orientations Pédagogiques Maroc · Procédural /${cfg.procTotal} (${escapeHtml(cfg.labelPerf)} /${cfg.perfMax} + ${escapeHtml(cfg.labelProc)} /${cfg.procMax}) · Conceptuel /${cfg.concepMax} · Comportemental /${cfg.compMax}</p>
           <table style="width:100%;border-collapse:collapse;">
             <thead>${theadHtml}</thead>
             <tbody>${rowsHtml}</tbody>
@@ -5378,6 +6281,286 @@
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
+    }
+
+    // =========================================================================
+    // 9D. MODALES EXPORTS : GRILLE COMPLÉTÉE & GRILLE BRUTE (VIERGE TERRAIN)
+    // =========================================================================
+    function openCompletedExportModal() {
+      document.body.classList.remove('print-brute-mode');
+      document.getElementById('exportCompletedModal')?.classList.add('open');
+    }
+
+    function closeCompletedExportModal() {
+      document.getElementById('exportCompletedModal')?.classList.remove('open');
+    }
+
+    function runCompletedExport(type) {
+      closeCompletedExportModal();
+      if (type === 'classe' || type === 'massar') {
+        exportClassGridExcel(type);
+      } else if (type === 'word') {
+        exportClassGridWord();
+      } else if (type === 'pdf') {
+        document.body.classList.remove('print-brute-mode');
+        setTimeout(() => window.print(), 60);
+      }
+    }
+
+    function openBruteExportModal() {
+      const hasNamedList = hasImportedExcelNames || classStudents.length > 1 || (classStudents[0] && classStudents[0].nom && classStudents[0].nom !== 'Élève');
+      const radios = document.querySelectorAll('input[name="bruteNamesMode"]');
+      const defaultChoice = hasNamedList ? 'with' : 'without';
+      radios.forEach(r => { r.checked = (r.value === defaultChoice); });
+
+      const rowInp = document.getElementById('inpBruteRowCount');
+      if (rowInp) {
+        rowInp.value = defaultChoice === 'with' ? Math.max(1, classStudents.length) : 35;
+      }
+      refreshBruteModalUi(false);
+      document.getElementById('exportBruteModal')?.classList.add('open');
+    }
+
+    function closeBruteExportModal() {
+      document.getElementById('exportBruteModal')?.classList.remove('open');
+    }
+
+    function setBruteRowPreset(n) {
+      const rowInp = document.getElementById('inpBruteRowCount');
+      if (rowInp) rowInp.value = n;
+      refreshBruteModalUi(false);
+    }
+
+    function refreshBruteModalUi(isRadioToggle) {
+      const mode = document.querySelector('input[name="bruteNamesMode"]:checked')?.value || 'without';
+      const lblWithout = document.getElementById('lblBruteNamesWithout');
+      const lblWith = document.getElementById('lblBruteNamesWith');
+      const txtWith = document.getElementById('txtBruteNamesWith');
+      const hintEl = document.getElementById('bruteNamesHint');
+      const rowInp = document.getElementById('inpBruteRowCount');
+
+      if (lblWithout) lblWithout.classList.toggle('selected', mode === 'without');
+      if (lblWith) lblWith.classList.toggle('selected', mode === 'with');
+      if (txtWith) {
+        txtWith.textContent = `👥 Avec noms (${classStudents.length} élève${classStudents.length > 1 ? 's' : ''})`;
+      }
+      if (isRadioToggle && rowInp) {
+        rowInp.value = mode === 'with' ? Math.max(1, classStudents.length) : 35;
+      }
+      if (hintEl) {
+        hintEl.textContent = mode === 'with'
+          ? (hasImportedExcelNames
+              ? `Reprend les ${classStudents.length} nom(s) importés d'Excel (cases & notes vierges).`
+              : `Reprend les ${classStudents.length} nom(s) saisis dans le tableau (cases & notes vierges).`)
+          : 'Génère des lignes numérotées vierges (N° 1 à N), prêtes pour l\'appel terrain.';
+      }
+    }
+
+    function buildBruteRowsSpec() {
+      const mode = document.querySelector('input[name="bruteNamesMode"]:checked')?.value || 'without';
+      const rowCount = Math.max(1, Math.min(60, parseInt(document.getElementById('inpBruteRowCount')?.value || '35', 10) || 35));
+      const rows = [];
+      for (let i = 0; i < rowCount; i++) {
+        const src = (mode === 'with' && classStudents[i]) ? classStudents[i] : null;
+        rows.push({
+          num: i + 1,
+          nom: src ? (src.nom || '') : '',
+          sexe: src ? (src.sexe || '') : ''
+        });
+      }
+      return { mode, rowCount, rows };
+    }
+
+    function exportBruteGrid(format) {
+      const cfg = getBaremeConfig(currentNiveau, currentAps);
+      const nivLabel = currentNiveau === '1AB' ? '1Bac' : (currentNiveau === '2AB' ? '2Bac' : currentNiveau);
+      const clsLabel = currentClassName || 'Classe 1';
+      const safeCls = clsLabel.replace(/[^a-zA-Z0-9\u0600-\u06FF_-]+/g, '_');
+      const safeAps = currentAps.replace(/\s+/g, '_');
+      const unitMeta = PERF_UNIT_META[currentAps] || { unit: 'pts' };
+      const critsIndiv = cfg.isSpCo ? getCritsForAps(currentAps, 'indiv') : [];
+      const critsProc = cfg.isSpCo ? getCritsForAps(currentAps, 'collectif') : getCritsForAps(currentAps, 'processus');
+      const indWeights = cfg.critWeightsIndiv || [];
+      const procWeights = cfg.critWeights || [];
+      const spec = buildBruteRowsSpec();
+
+      closeBruteExportModal();
+
+      if (format === 'excel') {
+        const aoa = [];
+        if (cfg.isSpCo) {
+          aoa.push([`GRILLE BRUTE EPS — ${clsLabel} — ${currentAps.toUpperCase()} (${nivLabel}) — ${spec.rowCount} ÉLÈVES`]);
+          aoa.push([
+            'N°', 'Nom & Prénom', 'Sexe',
+            ...critsIndiv.map((c, i) => `Indiv: ${c.nom} (/${indWeights[i]}) [${c.sous[0]} / ${c.sous[1]}]`),
+            `Note Indiv (/${cfg.perfMax})`,
+            ...critsProc.map((c, i) => `Coll: ${c.nom} (/${procWeights[i]}) [${c.sous[0]} / ${c.sous[1]}]`),
+            `Note Coll (/${cfg.procMax})`,
+            `2. Conceptuel (/${cfg.concepMax})`,
+            `3. Comportemental (/${cfg.compMax})`,
+            'TOTAL /20'
+          ]);
+          spec.rows.forEach(r => {
+            aoa.push([
+              r.num, r.nom, r.sexe,
+              ...critsIndiv.map(() => ''),
+              '',
+              ...critsProc.map(() => ''),
+              '', '', '', ''
+            ]);
+          });
+        } else {
+          aoa.push([`GRILLE BRUTE EPS — ${clsLabel} — ${currentAps.toUpperCase()} (${nivLabel}) — ${spec.rowCount} ÉLÈVES`]);
+          aoa.push([
+            'N°', 'Nom & Prénom', 'Sexe',
+            `Perf. Brute (${unitMeta.unit})`,
+            `1A. Perf (/${cfg.perfMax})`,
+            ...critsProc.map((c, i) => `${c.nom} (/${procWeights[i]}) [${c.sous[0]} / ${c.sous[1]}]`),
+            `1B. Processus (/${cfg.procMax})`,
+            `2. Conceptuel (/${cfg.concepMax})`,
+            `3. Comportemental (/${cfg.compMax})`,
+            'TOTAL /20'
+          ]);
+          spec.rows.forEach(r => {
+            aoa.push([
+              r.num, r.nom, r.sexe,
+              '', '',
+              ...critsProc.map(() => ''),
+              '', '', '', ''
+            ]);
+          });
+        }
+        if (typeof XLSX === 'undefined') {
+          downloadCsvFallback(`Grille_Brute_EPS_${safeCls}_${safeAps}.csv`, aoa);
+          showToast('Grille brute CSV générée.');
+          return;
+        }
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.aoa_to_sheet(aoa);
+        XLSX.utils.book_append_sheet(wb, ws, 'Grille_Brute');
+        XLSX.writeFile(wb, `Grille_Brute_EPS_${safeCls}_${safeAps}.xlsx`);
+        showToast(`Grille brute Excel (${spec.rowCount} lignes) téléchargée.`);
+        return;
+      }
+
+      // Construction HTML commune pour Word (.doc) et PDF/A4 (#brutePrintSheet)
+      let theadHtml = '';
+      if (cfg.isSpCo) {
+        theadHtml = `
+          <tr style="background:#1E3A8A;color:#FFFFFF;">
+            <th style="border:1px solid #333;padding:4px;width:28px;">N°</th>
+            <th style="border:1px solid #333;padding:4px;min-width:130px;">Nom &amp; Prénom</th>
+            <th style="border:1px solid #333;padding:4px;width:32px;">Sexe</th>
+            ${critsIndiv.map((c, i) => `<th style="border:1px solid #333;padding:4px;">${escapeHtml(c.nom)}<br><small>/${indWeights[i]} [${escapeHtml(c.sous[0])}|${escapeHtml(c.sous[1])}]</small></th>`).join('')}
+            <th style="border:1px solid #333;padding:4px;background:#1D4ED8;width:44px;">Indiv<br>/${cfg.perfMax}</th>
+            ${critsProc.map((c, i) => `<th style="border:1px solid #333;padding:4px;">${escapeHtml(c.nom)}<br><small>/${procWeights[i]} [${escapeHtml(c.sous[0])}|${escapeHtml(c.sous[1])}]</small></th>`).join('')}
+            <th style="border:1px solid #333;padding:4px;background:#065F46;width:44px;">Coll<br>/${cfg.procMax}</th>
+            <th style="border:1px solid #333;padding:4px;width:42px;">Conc.<br>/${cfg.concepMax}</th>
+            <th style="border:1px solid #333;padding:4px;width:42px;">Comp.<br>/${cfg.compMax}</th>
+            <th style="border:1px solid #333;padding:4px;background:#0F172A;width:48px;">Note<br>/20</th>
+          </tr>
+        `;
+      } else {
+        theadHtml = `
+          <tr style="background:#1E3A8A;color:#FFFFFF;">
+            <th style="border:1px solid #333;padding:4px;width:28px;">N°</th>
+            <th style="border:1px solid #333;padding:4px;min-width:130px;">Nom &amp; Prénom</th>
+            <th style="border:1px solid #333;padding:4px;width:32px;">Sexe</th>
+            <th style="border:1px solid #333;padding:4px;width:58px;">Perf.<br>(${escapeHtml(unitMeta.unit)})</th>
+            <th style="border:1px solid #333;padding:4px;width:42px;">1A.<br>/${cfg.perfMax}</th>
+            ${critsProc.map((c, i) => `<th style="border:1px solid #333;padding:4px;">${escapeHtml(c.nom)}<br><small>/${procWeights[i]} [${escapeHtml(c.sous[0])}|${escapeHtml(c.sous[1])}]</small></th>`).join('')}
+            <th style="border:1px solid #333;padding:4px;width:42px;">1B.<br>/${cfg.procMax}</th>
+            <th style="border:1px solid #333;padding:4px;width:42px;">Conc.<br>/${cfg.concepMax}</th>
+            <th style="border:1px solid #333;padding:4px;">Comp.<br>/${cfg.compMax}</th>
+            <th style="border:1px solid #333;padding:4px;background:#0F172A;width:48px;">Note<br>/20</th>
+          </tr>
+        `;
+      }
+
+      const rowsHtml = spec.rows.map(r => {
+        const critBlankBox = c => `☐ ${escapeHtml(c.sous[0])} &nbsp; ☐ ${escapeHtml(c.sous[1])}`;
+        let midHtml = '';
+        if (cfg.isSpCo) {
+          midHtml = `
+            ${critsIndiv.map(c => `<td style="border:1px solid #333;padding:4px;text-align:center;font-size:7.5pt;white-space:nowrap;">${critBlankBox(c)}</td>`).join('')}
+            <td style="border:1px solid #333;padding:4px;"></td>
+            ${critsProc.map(c => `<td style="border:1px solid #333;padding:4px;text-align:center;font-size:7.5pt;white-space:nowrap;">${critBlankBox(c)}</td>`).join('')}
+            <td style="border:1px solid #333;padding:4px;"></td>
+          `;
+        } else {
+          midHtml = `
+            <td style="border:1px solid #333;padding:4px;"></td>
+            <td style="border:1px solid #333;padding:4px;"></td>
+            ${critsProc.map(c => `<td style="border:1px solid #333;padding:4px;text-align:center;font-size:7.5pt;white-space:nowrap;">${critBlankBox(c)}</td>`).join('')}
+            <td style="border:1px solid #333;padding:4px;"></td>
+          `;
+        }
+        return `
+          <tr style="height:22px;">
+            <td style="border:1px solid #333;padding:4px;text-align:center;">${r.num}</td>
+            <td style="border:1px solid #333;padding:4px;text-align:left;font-weight:${r.nom ? 'bold' : 'normal'};">${escapeHtml(r.nom)}</td>
+            <td style="border:1px solid #333;padding:4px;text-align:center;">${escapeHtml(r.sexe)}</td>
+            ${midHtml}
+            <td style="border:1px solid #333;padding:4px;"></td>
+            <td style="border:1px solid #333;padding:4px;"></td>
+            <td style="border:1px solid #333;padding:4px;"></td>
+          </tr>
+        `;
+      }).join('');
+
+      if (format === 'word') {
+        const wordDoc = `
+          <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+          <head><meta charset="utf-8"><title>Grille Brute EPS ${escapeHtml(clsLabel)}</title></head>
+          <body style="font-family:Arial,sans-serif;font-size:9.5pt;">
+            <h2 style="text-align:center;color:#1E3A8A;margin-bottom:4px;">GRILLE BRUTE D'ÉVALUATION EPS — ${escapeHtml(clsLabel)} — ${escapeHtml(currentAps.toUpperCase())} (${nivLabel})</h2>
+            <p style="text-align:center;font-size:8.5pt;margin-top:0;">Procédural /${cfg.procTotal} (${escapeHtml(cfg.labelPerf)} /${cfg.perfMax} + ${escapeHtml(cfg.labelProc)} /${cfg.procMax}) · Conceptuel /${cfg.concepMax} · Comportemental /${cfg.compMax} · ${spec.rowCount} lignes</p>
+            <table style="width:100%;border-collapse:collapse;">
+              <thead>${theadHtml}</thead>
+              <tbody>${rowsHtml}</tbody>
+            </table>
+          </body></html>
+        `;
+        const blob = new Blob(['\ufeff', wordDoc], { type: 'application/msword' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Grille_Brute_EPS_${safeCls}_${safeAps}.doc`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast(`Grille brute Word (${spec.rowCount} lignes) téléchargée.`);
+        return;
+      }
+
+      // Format PDF / A4 via #brutePrintSheet
+      const printEl = document.getElementById('brutePrintSheet');
+      if (printEl) {
+        printEl.innerHTML = `
+          <div style="margin-bottom:8px;display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #1E3A8A;padding-bottom:6px;">
+            <div>
+              <h2 style="margin:0;font-size:13pt;color:#1E3A8A;">GRILLE BRUTE EPS — ${escapeHtml(clsLabel)} · ${escapeHtml(currentAps.toUpperCase())} (${nivLabel})</h2>
+              <div style="font-size:8.5pt;color:#334155;">Procédural /${cfg.procTotal} (${escapeHtml(cfg.labelPerf)} /${cfg.perfMax} + ${escapeHtml(cfg.labelProc)} /${cfg.procMax}) · Conceptuel /${cfg.concepMax} · Comportemental /${cfg.compMax}</div>
+            </div>
+            <div style="font-size:8.5pt;font-weight:bold;color:#1E3A8A;">Effectif : ${spec.rowCount} lignes</div>
+          </div>
+          <table>
+            <thead>${theadHtml}</thead>
+            <tbody>${rowsHtml}</tbody>
+          </table>
+        `;
+      }
+      document.body.classList.add('print-brute-mode');
+      const cleanupBrutePrint = () => {
+        document.body.classList.remove('print-brute-mode');
+        window.removeEventListener('afterprint', cleanupBrutePrint);
+      };
+      window.addEventListener('afterprint', cleanupBrutePrint);
+      setTimeout(() => {
+        window.print();
+        setTimeout(cleanupBrutePrint, 1200);
+      }, 60);
     }
 
     // =========================================================================
@@ -5440,25 +6623,41 @@
           document.getElementById('btnSexeF')?.classList.toggle('active', pSexe === 'F');
         }
 
-        onConfigChange();
+        onConfigChange(true);
 
         if (pVma && document.getElementById('inpVmaDirect')) {
           document.getElementById('inpVmaDirect').value = pVma;
           convertVmaToDureeTime();
         }
-        const targetMode = (pMode === 'classe' || pMode === 'indiv') ? pMode : (savedMode || 'indiv');
-        if (targetMode === 'classe') {
-          switchCalcMode('classe');
-        }
+        const targetMode = (pMode === 'classe' || pMode === 'indiv') ? pMode : (savedMode || 'classe');
+        switchCalcMode(targetMode);
 
         document.addEventListener('keydown', function(ev) {
-          if (ev.key === 'Escape') closeExcelMapModal();
+          if (ev.key === 'Escape') {
+            closeExcelMapModal();
+            closeCompletedExportModal();
+            closeBruteExportModal();
+            closeEditSingleCritModal();
+          }
         });
-        document.getElementById('excelMapModal')?.addEventListener('click', function(ev) {
-          if (ev.target === this) closeExcelMapModal();
+        ['excelMapModal', 'exportCompletedModal', 'exportBruteModal', 'editSingleCritModal'].forEach(id => {
+          document.getElementById(id)?.addEventListener('click', function(ev) {
+            if (ev.target !== this) return;
+            if (id === 'excelMapModal') closeExcelMapModal();
+            if (id === 'exportCompletedModal') closeCompletedExportModal();
+            if (id === 'exportBruteModal') closeBruteExportModal();
+            if (id === 'editSingleCritModal') closeEditSingleCritModal();
+          });
+        });
+        document.getElementById('inpEditCritNom')?.addEventListener('keydown', function(ev) {
+          if (ev.key === 'Enter') {
+            ev.preventDefault();
+            saveSingleCritModal();
+          }
         });
       } catch (e) {
-        onConfigChange();
+        onConfigChange(true);
+        switchCalcMode('classe');
       }
     })();
   </script>

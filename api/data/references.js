@@ -194,22 +194,136 @@ const getGroupeAPS = (aps) => {
 };
 
 const CRITERES_OBS = {
-    'Handball': { criteres: [{ nom: 'Passe', sous: ['Précise', 'Imprécise'] }, { nom: 'Réception', sous: ['Assurée', 'Manquée'] }, { nom: 'Tir', sous: ['Cadré', 'Hors'] }, { nom: 'Démarquage', sous: ['Efficace', 'Passif'] }] },
-    'Football': { criteres: [{ nom: 'Conduite', sous: ['Maîtrisée', 'Perdue'] }, { nom: 'Passe', sous: ['Précise', 'Imprécise'] }, { nom: 'Contrôle', sous: ['Orienté', 'Subi'] }, { nom: 'Placement', sous: ['Pertinent', 'Inadapté'] }] },
-    'Basketball': { criteres: [{ nom: 'Dribble', sous: ['Tête haute', 'Yeux balle'] }, { nom: 'Passe', sous: ['Précise', 'Interceptée'] }, { nom: 'Tir', sous: ['Réussi', 'Raté'] }, { nom: 'Démarquage', sous: ['Actif', 'Statique'] }] },
-    'Volleyball': { criteres: [{ nom: 'Manchette', sous: ['Bras tendus', 'Pliés'] }, { nom: 'Touche', sous: ['Haute', 'Basse'] }, { nom: 'Service', sous: ['Réussi', 'Faute'] }, { nom: 'Placement', sous: ['Anticipé', 'Retard'] }] },
+    'Handball': { criteres: [{ nom: 'Manipulation', sous: ['Contrôlée', 'Hésitante'] }, { nom: 'Passe', sous: ['Précise', 'Imprécise'] }, { nom: 'Réception', sous: ['Assurée', 'Manquée'] }, { nom: 'Armé & Tir', sous: ['Cadré', 'Hors cadre'] }] },
+    'Football': { criteres: [{ nom: 'Conduite', sous: ['Maîtrisée', 'Perdue'] }, { nom: 'Contrôle', sous: ['Orienté', 'Subi'] }, { nom: 'Passe', sous: ['Précise', 'Imprécise'] }, { nom: 'Frappe / But', sous: ['Cadrée', 'Déviée'] }] },
+    'Basketball': { criteres: [{ nom: 'Dribble', sous: ['Tête haute', 'Yeux balle'] }, { nom: 'Passe', sous: ['Précise', 'Interceptée'] }, { nom: 'Tir / Lay-up', sous: ['Équilibré', 'Forcé'] }, { nom: 'Démarquage', sous: ['Actif', 'Statique'] }] },
+    'Volleyball': { criteres: [{ nom: 'Service', sous: ['Régulier', 'Faute'] }, { nom: 'Manchette', sous: ['Bras tendus', 'Pliés'] }, { nom: 'Touche', sous: ['Haute précise', 'Basse/Tenue'] }, { nom: 'Attaque', sous: ['Dirigée', 'Aléatoire'] }] },
     'Course de vitesse': { criteres: [{ nom: 'Départ', sous: ['Réactif', 'Lent'] }, { nom: 'Accélération', sous: ['Progress.', 'Brutale'] }, { nom: 'Course', sous: ['Axée', 'Désaxée'] }, { nom: 'Finish', sous: ['Engagé', 'Relâché'] }] },
-    'Course de haies': { criteres: [{ nom: 'Départ', sous: ['Réactif', 'Lent'] }, { nom: 'Rythme', sous: ['Régulier', 'Irrégulier'] }, { nom: 'Franchiss.', sous: ['Efficient', 'Ralentit'] }, { nom: 'Finish', sous: ['Engagé', 'Relâché'] }, { nom: 'Performance', sous: ['temps téel', 'temps Théorique'] }] },
-    'Course de relais': { criteres: [{ nom: 'Départ', sous: ['Réactif', 'Lent'] }, { nom: 'Course', sous: ['Rapide', 'Lente'] }, { nom: 'Transmission', sous: ['Réussie', 'Ratée'] }, { nom: 'Zone', sous: ['Respectée', 'Faute'] }, { nom: 'Performance', sous: ['temps téel', 'temps Théorique'] }] },
-    'Saut en longueur': { criteres: [{ nom: 'Course', sous: ['Accélérée', 'Irrégulière'] }, { nom: 'Impulsion', sous: ['sur', 'avant', 'mordu'] }, { nom: 'Envol', sous: ['Équilibré', 'Déséquil.'] }, { nom: 'Réception', sous: ['Stable', 'Chute'] }] },
+    'Course de haies': { criteres: [{ nom: 'Départ', sous: ['Réactif', 'Lent'] }, { nom: 'Rythme', sous: ['Régulier', 'Irrégulier'] }, { nom: 'Franchiss.', sous: ['Efficient', 'Ralentit'] }, { nom: 'Finish', sous: ['Engagé', 'Relâché'] }] },
+    'Course de relais': { criteres: [{ nom: 'Départ', sous: ['Réactif', 'Lent'] }, { nom: 'Course', sous: ['Rapide', 'Lente'] }, { nom: 'Transmission', sous: ['Réussie', 'Ratée'] }, { nom: 'Zone', sous: ['Respectée', 'Faute'] }] },
+    'Saut en longueur': { criteres: [{ nom: 'Course', sous: ['Accélérée', 'Irrégulière'] }, { nom: 'Impulsion', sous: ['Sur planche', 'Mordu'] }, { nom: 'Envol', sous: ['Équilibré', 'Déséquil.'] }, { nom: 'Réception', sous: ['Stable', 'Chute'] }] },
     'Saut en hauteur': { criteres: [{ nom: 'Course', sous: ['Courbe', 'Droite'] }, { nom: 'Impulsion', sous: ['Pied ext.', 'Autre'] }, { nom: 'Franchis.', sous: ['Dorsal', 'Autre'] }, { nom: 'Réception', sous: ['Dos', 'Danger'] }] },
     'Course de durée': { criteres: [{ nom: 'Régularité', sous: ['Constante', 'Variable'] }, { nom: 'Allure', sous: ['Adaptée', 'Inadaptée'] }, { nom: 'Posture', sous: ['Correcte', 'Effondrée'] }, { nom: 'Finish', sous: ['Accéléré', 'Ralenti'] }] },
     'Lancer de poids': { criteres: [{ nom: 'Position', sous: ['Dos aire', 'Face'] }, { nom: 'Tenue', sous: ['Au cou', 'Éloigné'] }, { nom: 'Poussée', sous: ['Complète', 'Partielle'] }, { nom: 'Équilibre', sous: ['Stable', 'Chute'] }] },
     'Gymnastique': { criteres: [{ nom: 'Amplitude', sous: ['Suffisante', 'Insuffis.'] }, { nom: 'Tenue', sous: ['Gainé', 'Relâché'] }, { nom: 'Liaisons', sous: ['Fluides', 'Arrêts'] }, { nom: 'Réception', sous: ['Stabilisée', 'Déséquil.'] }] },
-    'Tennis de table': { criteres: [{ nom: 'Coup droit', sous: ['Contrôlé', 'Aléatoire'] }, { nom: 'Revers', sous: ['Contrôlé', 'Aléatoire'] }, { nom: 'Service', sous: ['Varié', 'Prévisible'] }, { nom: 'Placement', sous: ['Équilibré', 'Instable'] }] },
-    'Badminton': { criteres: [{ nom: 'Dégagé', sous: ['Fond', 'Court'] }, { nom: 'Amorti', sous: ['Près filet', 'Long'] }, { nom: 'Service', sous: ['Réglem.', 'Faute'] }, { nom: 'Replacement', sous: ['Centre', 'Excentré'] }] },
-    'Basketball 3x3': { criteres: [{ nom: 'Dribble', sous: ['Protection', 'Exposé'] }, { nom: 'Passe', sous: ['Précise', 'Interc.'] }, { nom: 'Ecran', sous: ['Efficace', 'Inutile'] }, { nom: 'Sortie Arc', sous: ['Rapide', 'Lente'] }] },
-    'Rugby': { criteres: [{ nom: 'Passe', sous: ['Arrière', 'En-avant'] }, { nom: 'Plaquage', sous: ['Sécurisé', 'Dangereux'] }, { nom: 'Soutien', sous: ['Présent', 'Absent'] }, { nom: 'Continuité', sous: ['Rapide', 'Lente'] }] }
+    'Tennis de table': { criteres: [{ nom: 'Service', sous: ['Réglem.', 'Faute'] }, { nom: 'Coup droit', sous: ['Contrôlé', 'Aléatoire'] }, { nom: 'Revers', sous: ['Contrôlé', 'Aléatoire'] }, { nom: 'Posture', sous: ['Équilibrée', 'Rigide'] }] },
+    'Badminton': { criteres: [{ nom: 'Service', sous: ['Précis', 'Faute'] }, { nom: 'Dégagé', sous: ['Long/Haut', 'Court'] }, { nom: 'Amorti', sous: ['Rasant', 'Haut/Long'] }, { nom: 'Déplacem.', sous: ['Dynamique', 'Tardif'] }] },
+    'Basketball 3x3': { criteres: [{ nom: 'Dribble', sous: ['Protégé', 'Exposé'] }, { nom: 'Passe', sous: ['Rapide', 'Téléphonée'] }, { nom: 'Tir / Drive', sous: ['Sélectif', 'Précipité'] }, { nom: 'Défense 1c1', sous: ['Cadrée', 'Battue'] }] },
+    'Rugby': { criteres: [{ nom: 'Passe', sous: ['En arrière', 'En-avant'] }, { nom: 'Course', sous: ['Axe profond', 'Exposé'] }, { nom: 'Défense', sous: ['Sécurisée', 'Faute/Haut'] }, { nom: 'Libération', sous: ['Propre', 'Confuse'] }] }
+};
+
+const CRITERES_COLLECTIF = {
+    'Handball': {
+        indiv: [
+            { nom: 'Manipulation', sous: ['Contrôlée', 'Hésitante'] },
+            { nom: 'Passe', sous: ['Précise', 'Imprécise'] },
+            { nom: 'Réception', sous: ['Assurée', 'Manquée'] },
+            { nom: 'Armé & Tir', sous: ['Cadré', 'Hors cadre'] }
+        ],
+        collectif: [
+            { nom: 'Démarquage', sous: ['Efficace', 'Passif'] },
+            { nom: 'Continuité', sous: ['Fluide', 'Hachée'] },
+            { nom: 'Occupation', sous: ['Équilibrée', 'En grappe'] },
+            { nom: 'Repli Déf.', sous: ['Organisé', 'Désorganisé'] }
+        ]
+    },
+    'Basketball': {
+        indiv: [
+            { nom: 'Dribble', sous: ['Tête haute', 'Yeux balle'] },
+            { nom: 'Passe', sous: ['Précise', 'Interceptée'] },
+            { nom: 'Tir / Lay-up', sous: ['Équilibré', 'Forcé'] },
+            { nom: 'Démarquage', sous: ['Actif', 'Statique'] }
+        ],
+        collectif: [
+            { nom: 'Espacement', sous: ['Aéré', 'Regroupé'] },
+            { nom: 'Transition', sous: ['Rapide', 'Tardive'] },
+            { nom: 'Aide Déf.', sous: ['Cadrée', 'Dépassée'] }
+        ]
+    },
+    'Football': {
+        indiv: [
+            { nom: 'Conduite', sous: ['Maîtrisée', 'Perdue'] },
+            { nom: 'Contrôle', sous: ['Orienté', 'Subi'] },
+            { nom: 'Passe', sous: ['Précise', 'Imprécise'] },
+            { nom: 'Frappe / But', sous: ['Cadrée', 'Déviée'] }
+        ],
+        collectif: [
+            { nom: 'Appels', sous: ['Disponibles', 'Statiques'] },
+            { nom: 'Appui/Sout.', sous: ['Triangle', 'Isolé'] },
+            { nom: 'Largeur', sous: ['Élargie', 'En bloc'] },
+            { nom: 'Pressing', sous: ['Solidaire', 'En retard'] }
+        ]
+    },
+    'Volleyball': {
+        indiv: [
+            { nom: 'Service', sous: ['Régulier', 'Faute'] },
+            { nom: 'Manchette', sous: ['Bras tendus', 'Pliés'] },
+            { nom: 'Touche', sous: ['Haute précise', 'Basse/Tenue'] },
+            { nom: 'Attaque', sous: ['Dirigée', 'Aléatoire'] }
+        ],
+        collectif: [
+            { nom: '3 Touches', sous: ['Construite', 'Renvoi 1er'] },
+            { nom: 'Placement', sous: ['Respecté', 'Désaxé'] },
+            { nom: 'Soutien', sous: ['En couverture', 'Spectateur'] },
+            { nom: 'Communic.', sous: ['Annoncée', 'Silencieuse'] }
+        ]
+    },
+    'Rugby': {
+        indiv: [
+            { nom: 'Passe', sous: ['En arrière', 'En-avant'] },
+            { nom: 'Course', sous: ['Axe profond', 'Exposé'] },
+            { nom: 'Défense', sous: ['Sécurisée', 'Faute/Haut'] },
+            { nom: 'Libération', sous: ['Propre', 'Confuse'] }
+        ],
+        collectif: [
+            { nom: 'Soutien', sous: ['Présent', 'Isolé'] },
+            { nom: 'Continuité', sous: ['Rapide', 'Stoppée'] },
+            { nom: 'Hors-jeu', sous: ['Alignée', 'Fautive'] },
+            { nom: 'Largeur', sous: ['Écartée', 'Bouchon'] }
+        ]
+    },
+    'Basketball 3x3': {
+        indiv: [
+            { nom: 'Dribble', sous: ['Protégé', 'Exposé'] },
+            { nom: 'Passe', sous: ['Rapide', 'Téléphonée'] },
+            { nom: 'Tir / Drive', sous: ['Sélectif', 'Précipité'] },
+            { nom: 'Défense 1c1', sous: ['Cadrée', 'Battue'] }
+        ],
+        collectif: [
+            { nom: 'Sortie Arc', sous: ['Rapide', 'Oubliée'] },
+            { nom: 'Écrans', sous: ['Efficace', 'Inutile'] },
+            { nom: 'Enchaînem.', sous: ['12s maîtrisé', 'Statique'] },
+            { nom: 'Switch Déf.', sous: ['Coordonné', 'Passif'] }
+        ]
+    },
+    'Badminton': {
+        indiv: [
+            { nom: 'Service', sous: ['Précis', 'Faute'] },
+            { nom: 'Dégagé', sous: ['Long/Haut', 'Court'] },
+            { nom: 'Amorti', sous: ['Rasant', 'Haut/Long'] },
+            { nom: 'Déplacem.', sous: ['Dynamique', 'Tardif'] }
+        ],
+        collectif: [
+            { nom: 'Replacem.', sous: ['Systémat.', 'Excentré'] },
+            { nom: 'Variation', sous: ['Long-Court', 'Monotone'] },
+            { nom: 'Zone libre', sous: ['Ciblée', 'Sur joueur'] },
+            { nom: 'Lucidité', sous: ['Maîtrisée', 'Précipitée'] }
+        ]
+    },
+    'Tennis de table': {
+        indiv: [
+            { nom: 'Service', sous: ['Réglem.', 'Faute'] },
+            { nom: 'Coup droit', sous: ['Contrôlé', 'Aléatoire'] },
+            { nom: 'Revers', sous: ['Contrôlé', 'Aléatoire'] },
+            { nom: 'Posture', sous: ['Équilibrée', 'Rigide'] }
+        ],
+        collectif: [
+            { nom: 'Placement', sous: ['Varié', 'Centré'] },
+            { nom: 'Transition', sous: ['Adaptée', 'Subie'] },
+            { nom: 'Lecture', sous: ['Précoce', 'Tardive'] },
+            { nom: 'Régularité', sous: ['Maîtrisée', 'Faute directe'] }
+        ]
+    }
 };
 
 const FALLBACKS = {
@@ -1474,6 +1588,7 @@ module.exports = {
     getSituationReference,
     getGroupeAPS,
     CRITERES_OBS,
+    CRITERES_COLLECTIF,
     FALLBACKS,
     SCHEMAS,
     getSchema,
