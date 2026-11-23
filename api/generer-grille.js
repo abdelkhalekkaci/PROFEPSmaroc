@@ -8,7 +8,7 @@
 //   Équipe/Process. | Concept. | Comport. | FINALE)
 // ============================================================================
 
-const { CRITERES_OBS, CRITERES_COLLECTIF, getGroupeAPS } = require('./data/references.js');
+const { CRITERES_OBS, CRITERES_COLLECTIF, GYM_CONTRATS_OP, getGymCriteresObs, getGroupeAPS } = require('./data/references.js');
 
 function escapeHtml(str) {
     return String(str == null ? '' : str)
@@ -19,7 +19,14 @@ function escapeHtml(str) {
         .replace(/'/g, '&#39;');
 }
 
-function buildDefaultCriteres(aps) {
+function buildDefaultCriteres(aps, niveau) {
+    if (aps === 'Gymnastique' && typeof getGymCriteresObs === 'function') {
+        return getGymCriteresObs(niveau).map(c => ({
+            nom: c.nom,
+            sous: Array.isArray(c.sous) && c.sous.length >= 2 ? [c.sous[0], c.sous[1]] : ['Acquis', 'En cours'],
+            groupe: 'processus'
+        }));
+    }
     if (CRITERES_COLLECTIF && CRITERES_COLLECTIF[aps]) {
         const indiv = (CRITERES_COLLECTIF[aps].indiv || []).map(c => ({
             nom: c.nom,
@@ -89,13 +96,17 @@ module.exports = async (req, res) => {
         const titre = isObs ? "Grille d'Observation" : "Grille d'Évaluation";
         const groupeAPS = getGroupeAPS(aps);
 
-        const defaultCriteres = buildDefaultCriteres(aps);
+        const defaultCriteres = buildDefaultCriteres(aps, niveau);
         const criteres = sanitizeCustomCriteres(body.customCriteres, defaultCriteres);
 
         const hasDualGroups = criteres.some(c => c.groupe === 'indiv') && criteres.some(c => c.groupe === 'collectif');
         const isDuelsRenvoi = ['Badminton', 'Tennis de table'].includes(aps);
         const sportsCollectifs = ['Handball', 'Football', 'Basketball', 'Basketball 3x3', 'Rugby', 'Volleyball'];
         const isSportCollectif = sportsCollectifs.includes(aps);
+        const isGym = aps === 'Gymnastique';
+        const normNiv = String(niveau || '').toUpperCase() === '1BAC' ? '1AB' : (String(niveau || '').toUpperCase() === '2BAC' ? '2AB' : String(niveau || '').toUpperCase());
+        const gymOp = (isGym && GYM_CONTRATS_OP && GYM_CONTRATS_OP[normNiv]) ? GYM_CONTRATS_OP[normNiv] : null;
+        const gymCompMax = gymOp ? (gymOp.compExig !== undefined ? (gymOp.compExig + gymOp.compQual) : 2) : 2;
 
         // Couleurs Modern Atlas
         const COLOR_PRIMARY = '#3347D6';       // Majorelle principal
@@ -165,26 +176,35 @@ module.exports = async (req, res) => {
         });
 
         const headerRowspan = hasDualGroups ? 3 : 2;
-        const extraColsCount = !isObs ? 5 : (includeObsCol ? 1 : 0);
+        const noteColsCount = isGym ? 6 : 5;
+        const extraColsCount = !isObs ? noteColsCount : (includeObsCol ? 1 : 0);
 
         if (!isObs) {
-            // GRILLE ÉVALUATION: 5 colonnes NOTE
+            // GRILLE ÉVALUATION: 5 colonnes NOTE (6 pour Gymnastique Annexe 4)
             const noteTargetRow = hasDualGroups ? 'headGroupRow' : 'headMain';
-            const noteTopHtml = `<th rowspan="${hasDualGroups ? 2 : 1}" colspan="5" style="background:${COLOR_ACCENT};color:#fff;font-size:7.5pt;text-align:center;padding:4px;border:1px solid #000;font-weight:bold;">NOTE</th>`;
+            const noteTopHtml = `<th rowspan="${hasDualGroups ? 2 : 1}" colspan="${noteColsCount}" style="background:${COLOR_ACCENT};color:#fff;font-size:7.5pt;text-align:center;padding:4px;border:1px solid #000;font-weight:bold;">NOTE${gymOp ? ` (${escapeHtml(gymOp.contrat)})` : ''}</th>`;
             if (noteTargetRow === 'headGroupRow') {
                 headGroupRow += noteTopHtml;
             } else {
                 headMain += noteTopHtml;
             }
-            if (isSportCollectif) {
+            if (isGym && gymOp) {
+                headSub += `<td style="background:#F8FAFC;font-size:5.3pt;text-align:center;padding:3px 2px;border:1px solid #000;font-weight:600;width:4%;">Diff.<br>/${gymOp.diffMax}</td>`;
+                headSub += `<td style="background:#F8FAFC;font-size:5.3pt;text-align:center;padding:3px 2px;border:1px solid #000;font-weight:600;width:4%;">Comp.<br>/${gymCompMax}</td>`;
+                headSub += `<td style="background:#F8FAFC;font-size:5.3pt;text-align:center;padding:3px 2px;border:1px solid #000;font-weight:600;width:4%;">Exéc.<br>/${gymOp.execMax}</td>`;
+                headSub += `<td style="background:#F8FAFC;font-size:5.3pt;text-align:center;padding:3px 2px;border:1px solid #000;font-weight:600;width:4%;">Conc.<br>/${gymOp.concep}</td>`;
+                headSub += `<td style="background:#F8FAFC;font-size:5.3pt;text-align:center;padding:3px 2px;border:1px solid #000;font-weight:600;width:4%;">Comp.<br>/${gymOp.comp}</td>`;
+            } else if (isSportCollectif) {
                 headSub += `<td style="background:#F8FAFC;font-size:5.5pt;text-align:center;padding:3px 2px;border:1px solid #000;font-weight:600;width:4.5%;">Individ.</td>`;
                 headSub += `<td style="background:#F8FAFC;font-size:5.5pt;text-align:center;padding:3px 2px;border:1px solid #000;font-weight:600;width:4.5%;">Équipe</td>`;
+                headSub += `<td style="background:#F8FAFC;font-size:5.5pt;text-align:center;padding:3px 2px;border:1px solid #000;font-weight:600;width:4.5%;">Concept.</td>`;
+                headSub += `<td style="background:#F8FAFC;font-size:5.5pt;text-align:center;padding:3px 2px;border:1px solid #000;font-weight:600;width:4.5%;">Comport.</td>`;
             } else {
                 headSub += `<td style="background:#F8FAFC;font-size:5.5pt;text-align:center;padding:3px 2px;border:1px solid #000;font-weight:600;width:4.5%;">Produit</td>`;
                 headSub += `<td style="background:#F8FAFC;font-size:5.5pt;text-align:center;padding:3px 2px;border:1px solid #000;font-weight:600;width:4.5%;">Process.</td>`;
+                headSub += `<td style="background:#F8FAFC;font-size:5.5pt;text-align:center;padding:3px 2px;border:1px solid #000;font-weight:600;width:4.5%;">Concept.</td>`;
+                headSub += `<td style="background:#F8FAFC;font-size:5.5pt;text-align:center;padding:3px 2px;border:1px solid #000;font-weight:600;width:4.5%;">Comport.</td>`;
             }
-            headSub += `<td style="background:#F8FAFC;font-size:5.5pt;text-align:center;padding:3px 2px;border:1px solid #000;font-weight:600;width:4.5%;">Concept.</td>`;
-            headSub += `<td style="background:#F8FAFC;font-size:5.5pt;text-align:center;padding:3px 2px;border:1px solid #000;font-weight:600;width:4.5%;">Comport.</td>`;
             headSub += `<td style="background:${COLOR_PRIMARY_LIGHT};color:#0E1633;font-size:6.2pt;text-align:center;padding:3px 2px;border:1px solid #000;font-weight:bold;width:5%;">FINALE</td>`;
         } else if (includeObsCol) {
             const obsTh = `<th rowspan="${headerRowspan}" style="background:${COLOR_ACCENT};color:#fff;font-size:6.5pt;width:13%;border:1px solid #000;text-align:center;font-weight:bold;">Observations</th>`;
@@ -283,7 +303,7 @@ module.exports = async (req, res) => {
             ${!isObs ? `
                 <div style="background:#F8FAFC;border:1px solid #E4E2DA;border-radius:8px;padding:8px 12px;min-width:180px;">
                     <strong style="color:${COLOR_ACCENT};font-size:0.86rem;">NOTE</strong><br>
-                    <span style="font-size:0.76rem;color:#55607A;">${isSportCollectif ? 'Individ. | Équipe | Concept. | Comport. | FINALE' : 'Produit | Process. | Concept. | Comport. | FINALE'}</span>
+                    <span style="font-size:0.76rem;color:#55607A;">${(isGym && gymOp) ? `Diff.(/${gymOp.diffMax}) | Comp.(/${gymCompMax}) | Exéc.(/${gymOp.execMax}) | Concept.(/${gymOp.concep}) | Comport.(/${gymOp.comp}) | FINALE` : (isSportCollectif ? 'Individ. | Équipe | Concept. | Comport. | FINALE' : 'Produit | Process. | Concept. | Comport. | FINALE')}</span>
                 </div>
             ` : (includeObsCol ? `
                 <div style="background:#F8FAFC;border:1px solid #E4E2DA;border-radius:8px;padding:8px 12px;">
@@ -307,13 +327,17 @@ module.exports = async (req, res) => {
             <div style="margin-top:12px;padding:10px 14px;background:#F8FAFC;border-radius:8px;border-left:4px solid ${COLOR_PRIMARY};">
                 <strong style="color:${COLOR_PRIMARY};">📌 Signification des notes:</strong><br>
                 <div style="font-size:0.83rem;margin-top:6px;line-height:1.6;">
-                    ${isSportCollectif ? `
+                    ${(isGym && gymOp) ? `
+                    <span style="display:inline-block;background:${COLOR_PRIMARY_LIGHT};padding:2px 8px;border-radius:4px;margin:2px;"><b>Difficultés (/${gymOp.diffMax})</b></span> = Contrat ${escapeHtml(gymOp.detail)} (rempl. inf. = 0,25 pt)<br>
+                    <span style="display:inline-block;background:${COLOR_PRIMARY_LIGHT};padding:2px 8px;border-radius:4px;margin:2px;"><b>Composition (/${gymCompMax})</b></span> = ${gymOp.compExig !== undefined ? `Exigences 3 fam. (${gymOp.compExig}) + Qualité d'enchaîn. (${gymOp.compQual})` : `4 fam. (${gymOp.compFam}) + Série (${gymOp.compSerie} : G 2 acrob. / F 3 chorég.)`}<br>
+                    <span style="display:inline-block;background:${COLOR_PRIMARY_LIGHT};padding:2px 8px;border-radius:4px;margin:2px;"><b>Exécution (/${gymOp.execMax})</b></span> = Analytique (-0,1/-0,2/-0,3/-0,5) ou Globale (1/1, 3/4, 1/2, 1/4, 0) → Procédural /${gymOp.procTotal}
+                    ` : (isSportCollectif ? `
                     <span style="display:inline-block;background:${COLOR_PRIMARY_LIGHT};padding:2px 8px;border-radius:4px;margin:2px;"><b>Individuel</b></span> = Performance personnelle (technique, maîtrise)<br>
                     <span style="display:inline-block;background:${COLOR_PRIMARY_LIGHT};padding:2px 8px;border-radius:4px;margin:2px;"><b>Équipe</b></span> = Contribution collective (coopération, organisation)
                     ` : `
                     <span style="display:inline-block;background:${COLOR_PRIMARY_LIGHT};padding:2px 8px;border-radius:4px;margin:2px;"><b>Produit</b></span> = Résultat atteint (performance mesurée)<br>
                     <span style="display:inline-block;background:${COLOR_PRIMARY_LIGHT};padding:2px 8px;border-radius:4px;margin:2px;"><b>Processus</b></span> = Démarche suivie (technique, organisation)
-                    `}<br>
+                    `)}<br>
                     <span style="display:inline-block;background:${COLOR_PRIMARY_LIGHT};padding:2px 8px;border-radius:4px;margin:2px;"><b>Conceptuelle</b></span> = Connaissances réglementaires et tactiques<br>
                     <span style="display:inline-block;background:${COLOR_PRIMARY_LIGHT};padding:2px 8px;border-radius:4px;margin:2px;"><b>Comportementale</b></span> = Savoir-être (engagement, fair-play, coopération)<br>
                     <span style="display:inline-block;background:#FEF3C7;padding:2px 8px;border-radius:4px;margin:2px;"><b>FINALE</b></span> = Note globale /20 conforme aux OP 2007/2009
@@ -441,9 +465,11 @@ ${rows}
 <b>Légende:</b><br>
 ${isObs
     ? '<span style="background:#EAF0FF;padding:1px 6px;">✓</span> Critère maîtrisé &nbsp;&nbsp; <span style="background:#FEF3C7;padding:1px 6px;">○</span> En cours &nbsp;&nbsp; <span style="background:#FEE2E2;padding:1px 6px;">✗</span> Non maîtrisé'
-    : isSportCollectif
-        ? '<b>Individ.</b> = Performance personnelle &nbsp;·&nbsp; <b>Équipe</b> = Contribution collective<br><b>Concept.</b> = Connaissances &nbsp;·&nbsp; <b>Comport.</b> = Savoir-être &nbsp;·&nbsp; <b>FINALE</b> = Note /20'
-        : '<b>Produit</b> = Résultat (performance) &nbsp;·&nbsp; <b>Process.</b> = Démarche technique<br><b>Concept.</b> = Connaissances &nbsp;·&nbsp; <b>Comport.</b> = Savoir-être &nbsp;·&nbsp; <b>FINALE</b> = Note /20'}
+    : (isGym && gymOp)
+        ? `<b>Diff. (/${gymOp.diffMax})</b> = ${escapeHtml(gymOp.detail)} &nbsp;·&nbsp; <b>Comp. (/${gymCompMax})</b> = ${gymOp.compExig !== undefined ? `3 fam. (${gymOp.compExig}) + Enchaîn. (${gymOp.compQual})` : `4 fam. (${gymOp.compFam}) + Série (${gymOp.compSerie})`} &nbsp;·&nbsp; <b>Exéc. (/${gymOp.execMax})</b> = -0,1/-0,2/-0,3/-0,5 ou globale<br><b>Conc. (/${gymOp.concep})</b> &nbsp;·&nbsp; <b>Comp. (/${gymOp.comp})</b> &nbsp;·&nbsp; <b>FINALE</b> = Note /20`
+        : isSportCollectif
+            ? '<b>Individ.</b> = Performance personnelle &nbsp;·&nbsp; <b>Équipe</b> = Contribution collective<br><b>Concept.</b> = Connaissances &nbsp;·&nbsp; <b>Comport.</b> = Savoir-être &nbsp;·&nbsp; <b>FINALE</b> = Note /20'
+            : '<b>Produit</b> = Résultat (performance) &nbsp;·&nbsp; <b>Process.</b> = Démarche technique<br><b>Concept.</b> = Connaissances &nbsp;·&nbsp; <b>Comport.</b> = Savoir-être &nbsp;·&nbsp; <b>FINALE</b> = Note /20'}
 </td>
 <td style="border:none;text-align:right;font-size:8.5pt;vertical-align:bottom;">
 <b>Signature du professeur:</b><br><br>

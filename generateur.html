@@ -2286,7 +2286,7 @@
             ],
             'Saut en longueur': [
                 { nom: 'Course', sous: ['Accélérée', 'Irrégulière'] },
-                { nom: 'Impulsion', sous: ['Sur planche', 'Mordu'] },
+                { nom: 'Impulsion', sous: ['Sur la planche', 'Avant la planche'] },
                 { nom: 'Envol', sous: ['Équilibré', 'Déséquil.'] },
                 { nom: 'Réception', sous: ['Stable', 'Chute'] }
             ],
@@ -2297,12 +2297,34 @@
                 { nom: 'Réception', sous: ['Dos', 'Danger'] }
             ],
             'Gymnastique': [
-                { nom: 'Amplitude', sous: ['Suffisante', 'Insuffis.'] },
-                { nom: 'Tenue', sous: ['Gainé', 'Relâché'] },
-                { nom: 'Liaisons', sous: ['Fluides', 'Arrêts'] },
-                { nom: 'Réception', sous: ['Stabilisée', 'Déséquil.'] }
+                { nom: 'Exigences (3 fam.)', sous: ['3 fam. respectées', '< 3 fam.'] },
+                { nom: 'Agencement & Rythme', sous: ['Fluide / Logique', 'Haché / Arrêts'] },
+                { nom: 'Amplitude & Aisance', sous: ['Ample / Gainé', 'Étriqué / Crisp.'] },
+                { nom: 'Exécution', sous: ['Maîtrisée', 'Fautes / Chute'] }
             ]
         };
+
+        function getGymGrilleCritsObs(niveau) {
+            const n = String(niveau || '').trim();
+            if (n === 'TC' || n === '1AB' || n === '2AB' || n === '1Bac' || n === '2Bac') {
+                const is2B = n === '2AB' || n === '2Bac';
+                const is1B = n === '1AB' || n === '1Bac';
+                const contrat = is2B ? '2C+3D+2E' : (is1B ? '2B+3C+2D' : '2A+3B+2C');
+                return [
+                    { nom: `Difficultés (${contrat})`, sous: ['Contrat validé', 'Incomplet'] },
+                    { nom: 'Composition (4 fam.)', sous: ['4 fam. variées', '< 4 fam.'] },
+                    { nom: 'Série (G:2 Acrob/F:3 Chor)', sous: ['Série enchaînée', 'Absente'] },
+                    { nom: 'Exécution', sous: ['Fluide / Gainée', 'Fautes / Chute'] }
+                ];
+            }
+            const contrat = n === '3AC' ? '2A+4B+1C' : (n === '2AC' ? '3A+2B+1C' : '3A+2B+0C');
+            return [
+                { nom: `Difficultés (${contrat})`, sous: ['Contrat validé', 'Incomplet'] },
+                { nom: 'Exigences (3 fam.)', sous: ['3 fam. respectées', '< 3 fam.'] },
+                { nom: 'Qualité enchaînement', sous: ['Agencé / Ample', 'Arrêts / Crisp.'] },
+                { nom: 'Exécution', sous: ['Maîtrisée', 'Fautes / Chute'] }
+            ];
+        }
 
         const GRILLE_CRIT_COLLECTIF_DEFAULT = {
             'Handball': {
@@ -2420,13 +2442,17 @@
 
         let grilleCustomCriteres = [];
         let grilleLastAps = '';
+        let grilleLastNiveau = '';
 
-        function getGrilleDefaultCriteresForAps(aps) {
+        function getGrilleDefaultCriteresForAps(aps, niveau) {
             if (GRILLE_CRIT_COLLECTIF_DEFAULT[aps]) {
                 return [
                     ...GRILLE_CRIT_COLLECTIF_DEFAULT[aps].indiv.map(c => ({ nom: c.nom, sous: [...c.sous], groupe: 'indiv' })),
                     ...GRILLE_CRIT_COLLECTIF_DEFAULT[aps].collectif.map(c => ({ nom: c.nom, sous: [...c.sous], groupe: 'collectif' }))
                 ];
+            }
+            if (aps === 'Gymnastique') {
+                return getGymGrilleCritsObs(niveau).map(c => ({ nom: c.nom, sous: [...c.sous], groupe: 'processus' }));
             }
             const list = GRILLE_CRIT_OBS_DEFAULT[aps] || GRILLE_CRIT_OBS_DEFAULT['Handball'];
             return list.map(c => ({ nom: c.nom, sous: [...c.sous], groupe: 'processus' }));
@@ -2442,9 +2468,11 @@
 
         function syncGrilleCriteriaForAps(forceReset = false) {
             const aps = document.getElementById('aps')?.value || 'Handball';
-            if (forceReset || aps !== grilleLastAps || grilleCustomCriteres.length === 0) {
-                grilleCustomCriteres = getGrilleDefaultCriteresForAps(aps);
+            const niveau = document.getElementById('niveau')?.value || '1AC';
+            if (forceReset || aps !== grilleLastAps || (aps === 'Gymnastique' && niveau !== grilleLastNiveau) || grilleCustomCriteres.length === 0) {
+                grilleCustomCriteres = getGrilleDefaultCriteresForAps(aps, niveau);
                 grilleLastAps = aps;
+                grilleLastNiveau = niveau;
             }
             renderGrilleCriteriaPanel();
         }
@@ -2581,6 +2609,10 @@
 
         document.getElementById('aps')?.addEventListener('change', () => {
             syncGrilleCriteriaForAps(true);
+        });
+        document.getElementById('niveau')?.addEventListener('change', () => {
+            const aps = document.getElementById('aps')?.value || '';
+            if (aps === 'Gymnastique') syncGrilleCriteriaForAps(true);
         });
         document.getElementById('typeGrille')?.addEventListener('change', () => {
             renderGrilleCriteriaPanel();

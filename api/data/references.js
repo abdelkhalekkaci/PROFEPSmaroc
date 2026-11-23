@@ -180,7 +180,7 @@ const getSituationReference = (aps, isCollege) => {
         'Saut en hauteur': 'Concours à barres montantes (intervalles de 5cm) avec 3 essais maximum par hauteur, technique fosbury-flop',
         'Lancer de poids': isCollege ? 'Concours de 3 essais mesurés avec poids de 3kg (filles) ou 4kg (garçons), technique en translation' : 'Concours de 3 essais mesurés avec poids de 3kg (filles) ou 4kg (garçons), la meilleure performance est retenue',
         'Course de durée': 'Courir 1000m G / 600m F pour mesurer le temps de passage et observer la gestion de l\'effort',
-        'Gymnastique': 'Présentation d\'un enchaînement au sol de 1 minute minimum comprenant les éléments imposés du niveau, évalué selon amplitude, tenue et liaisons'
+        'Gymnastique': 'Présentation devant le groupe classe et le jury d\'un enchaînement au sol conforme au contrat OP du niveau (Difficultés + Composition + Exécution)'
     };
     return situations[aps] || 'Situation adaptée au niveau des élèves';
 };
@@ -201,16 +201,48 @@ const CRITERES_OBS = {
     'Course de vitesse': { criteres: [{ nom: 'Départ', sous: ['Réactif', 'Lent'] }, { nom: 'Accélération', sous: ['Progress.', 'Brutale'] }, { nom: 'Course', sous: ['Axée', 'Désaxée'] }, { nom: 'Finish', sous: ['Engagé', 'Relâché'] }] },
     'Course de haies': { criteres: [{ nom: 'Départ', sous: ['Réactif', 'Lent'] }, { nom: 'Rythme', sous: ['Régulier', 'Irrégulier'] }, { nom: 'Franchiss.', sous: ['Efficient', 'Ralentit'] }, { nom: 'Finish', sous: ['Engagé', 'Relâché'] }] },
     'Course de relais': { criteres: [{ nom: 'Départ', sous: ['Réactif', 'Lent'] }, { nom: 'Course', sous: ['Rapide', 'Lente'] }, { nom: 'Transmission', sous: ['Réussie', 'Ratée'] }, { nom: 'Zone', sous: ['Respectée', 'Faute'] }] },
-    'Saut en longueur': { criteres: [{ nom: 'Course', sous: ['Accélérée', 'Irrégulière'] }, { nom: 'Impulsion', sous: ['Sur planche', 'Mordu'] }, { nom: 'Envol', sous: ['Équilibré', 'Déséquil.'] }, { nom: 'Réception', sous: ['Stable', 'Chute'] }] },
+    'Saut en longueur': { criteres: [{ nom: 'Course', sous: ['Accélérée', 'Irrégulière'] }, { nom: 'Impulsion', sous: ['Sur la planche', 'Avant la planche'] }, { nom: 'Envol', sous: ['Équilibré', 'Déséquil.'] }, { nom: 'Réception', sous: ['Stable', 'Chute'] }] },
     'Saut en hauteur': { criteres: [{ nom: 'Course', sous: ['Courbe', 'Droite'] }, { nom: 'Impulsion', sous: ['Pied ext.', 'Autre'] }, { nom: 'Franchis.', sous: ['Dorsal', 'Autre'] }, { nom: 'Réception', sous: ['Dos', 'Danger'] }] },
     'Course de durée': { criteres: [{ nom: 'Régularité', sous: ['Constante', 'Variable'] }, { nom: 'Allure', sous: ['Adaptée', 'Inadaptée'] }, { nom: 'Posture', sous: ['Correcte', 'Effondrée'] }, { nom: 'Finish', sous: ['Accéléré', 'Ralenti'] }] },
     'Lancer de poids': { criteres: [{ nom: 'Position', sous: ['Dos aire', 'Face'] }, { nom: 'Tenue', sous: ['Au cou', 'Éloigné'] }, { nom: 'Poussée', sous: ['Complète', 'Partielle'] }, { nom: 'Équilibre', sous: ['Stable', 'Chute'] }] },
-    'Gymnastique': { criteres: [{ nom: 'Amplitude', sous: ['Suffisante', 'Insuffis.'] }, { nom: 'Tenue', sous: ['Gainé', 'Relâché'] }, { nom: 'Liaisons', sous: ['Fluides', 'Arrêts'] }, { nom: 'Réception', sous: ['Stabilisée', 'Déséquil.'] }] },
+    'Gymnastique': { criteres: [{ nom: 'Difficultés (Contrat)', sous: ['Contrat validé', 'Partiel (0.25)'] }, { nom: 'Composition (Fam.)', sous: ['Familles validées', 'Manquante'] }, { nom: 'Enchaînement / Série', sous: ['Fluide / Enchaînée', 'Arrêts / Absente'] }, { nom: 'Exécution', sous: ['Maîtrisée', 'Fautes / Chute'] }] },
     'Tennis de table': { criteres: [{ nom: 'Service', sous: ['Réglem.', 'Faute'] }, { nom: 'Coup droit', sous: ['Contrôlé', 'Aléatoire'] }, { nom: 'Revers', sous: ['Contrôlé', 'Aléatoire'] }, { nom: 'Posture', sous: ['Équilibrée', 'Rigide'] }] },
     'Badminton': { criteres: [{ nom: 'Service', sous: ['Précis', 'Faute'] }, { nom: 'Dégagé', sous: ['Long/Haut', 'Court'] }, { nom: 'Amorti', sous: ['Rasant', 'Haut/Long'] }, { nom: 'Déplacem.', sous: ['Dynamique', 'Tardif'] }] },
     'Basketball 3x3': { criteres: [{ nom: 'Dribble', sous: ['Protégé', 'Exposé'] }, { nom: 'Passe', sous: ['Rapide', 'Téléphonée'] }, { nom: 'Tir / Drive', sous: ['Sélectif', 'Précipité'] }, { nom: 'Défense 1c1', sous: ['Cadrée', 'Battue'] }] },
     'Rugby': { criteres: [{ nom: 'Passe', sous: ['En arrière', 'En-avant'] }, { nom: 'Course', sous: ['Axe profond', 'Exposé'] }, { nom: 'Défense', sous: ['Sécurisée', 'Faute/Haut'] }, { nom: 'Libération', sous: ['Propre', 'Confuse'] }] }
 };
+
+const GYM_CONTRATS_OP = {
+    '1AC': { contrat: '3A + 2B', detail: '3A 2B 0C (5 élém.)', diffMax: 6, compExig: 1.5, compQual: 4.5, execMax: 2, procTotal: 14, concep: 3, comp: 3 },
+    '2AC': { contrat: '3A + 2B + 1C', detail: '3A 2B 1C (6 élém.)', diffMax: 6, compExig: 1.5, compQual: 3.5, execMax: 2, procTotal: 13, concep: 3, comp: 4 },
+    '3AC': { contrat: '2A + 4B + 1C', detail: '2A 4B 1C (7 élém.)', diffMax: 6, compExig: 1.5, compQual: 2.5, execMax: 2, procTotal: 12, concep: 3, comp: 5 },
+    'TC':  { contrat: '2A + 3B + 2C', detail: '2A 3B 2C (7 élém.)', diffMax: 7, compFam: 1.6, compSerie: 0.4, execMax: 3, procTotal: 12, concep: 3, comp: 5 },
+    '1AB': { contrat: '2B + 3C + 2D', detail: '2B 3C 2D (7 élém.)', diffMax: 7, compFam: 1.6, compSerie: 0.4, execMax: 4, procTotal: 13, concep: 3, comp: 4 },
+    '2AB': { contrat: '2C + 3D + 2E', detail: '2C 3D 2E (7 élém.)', diffMax: 7, compFam: 1.6, compSerie: 0.4, execMax: 5, procTotal: 14, concep: 3, comp: 3 }
+};
+
+function getGymCriteresObs(niveau) {
+    const n = String(niveau || '').toUpperCase();
+    const norm = n === '1BAC' ? '1AB' : (n === '2BAC' ? '2AB' : n);
+    const gc = GYM_CONTRATS_OP[norm];
+    if (norm === '1AC' || norm === '2AC' || norm === '3AC') {
+        return [
+            { nom: `Difficultés (${gc.contrat})`, sous: ['Contrat validé', 'Partiel (0.25)'] },
+            { nom: 'Exigences (3 fam.)', sous: ['3 familles (1.5)', 'Incomplet'] },
+            { nom: "Qualité d'enchaîn.", sous: ['Fluide / Rythmé', 'Arrêts / Étriqué'] },
+            { nom: 'Exécution (/2)', sous: ['Maîtrisée', 'Déductions'] }
+        ];
+    }
+    if (norm === 'TC' || norm === '1AB' || norm === '2AB') {
+        return [
+            { nom: `Difficultés (${gc.contrat})`, sous: ['Contrat validé', 'Partiel (0.25)'] },
+            { nom: '4 Familles diff.', sous: ['4 fam. (1.6)', 'Manquante'] },
+            { nom: 'Série G:2Acrob/F:3Chor', sous: ['Enchaînée (0.4)', 'Absente'] },
+            { nom: `Exécution (/${gc.execMax})`, sous: ['Maîtrisée', 'Fautes / Chute'] }
+        ];
+    }
+    return CRITERES_OBS['Gymnastique'].criteres;
+}
 
 const CRITERES_COLLECTIF = {
     'Handball': {
@@ -1589,6 +1621,8 @@ module.exports = {
     getGroupeAPS,
     CRITERES_OBS,
     CRITERES_COLLECTIF,
+    GYM_CONTRATS_OP,
+    getGymCriteresObs,
     FALLBACKS,
     SCHEMAS,
     getSchema,

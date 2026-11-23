@@ -185,32 +185,32 @@
       opacity: 0.6;
     }
 
-    /* ═══ MAIN WRAPPER ═══ */
+    /* ═══ MAIN WRAPPER (PLEINE LARGEUR) ═══ */
     .note-main {
-      max-width: 1260px;
+      max-width: 100%;
       margin: 0 auto;
-      padding: 1.75rem 1rem 3.5rem;
+      padding: 1.1rem 1.35rem 3.5rem;
     }
 
-    /* ═══ MODE SWITCHER (INDIVIDUEL VS CLASSE 50 ÉLÈVES) ═══ */
+    /* ═══ MODE SWITCHER (CLASSE VS ÉLÈVE) ═══ */
     .mode-switcher {
       display: flex;
       justify-content: center;
       gap: 0.65rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.1rem;
       flex-wrap: wrap;
     }
     .mode-btn {
       display: inline-flex;
       align-items: center;
       gap: 0.55rem;
-      padding: 0.8rem 1.35rem;
+      padding: 0.72rem 1.25rem;
       border-radius: 14px;
       border: 1.5px solid var(--stone);
       background: var(--surface);
       color: var(--ink-soft);
       font-weight: 800;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       cursor: pointer;
       transition: all 0.18s ease;
       box-shadow: var(--shadow-sm);
@@ -238,25 +238,25 @@
       color: var(--primary);
     }
 
-    /* ═══ TOP CONFIG BAR (NIVEAU, APS, SEXE) ═══ */
+    /* ═══ SECTION 1 : CONFIG UNIQUE (NIVEAU, APS, BARÈME, CRITÈRES, IMPORT EXCEL) ═══ */
     .config-card {
       background: var(--surface);
       border: 1px solid var(--stone);
       border-radius: var(--radius-lg);
-      padding: 1.35rem 1.5rem;
+      padding: 1rem 1.25rem;
       box-shadow: var(--shadow-sm);
-      margin-bottom: 1.35rem;
+      margin-bottom: 0.95rem;
     }
     .config-grid {
       display: grid;
-      grid-template-columns: 1fr 1.4fr 1.2fr;
-      gap: 1rem;
+      grid-template-columns: 0.9fr 1.35fr 1.15fr auto auto;
+      gap: 0.75rem;
       align-items: end;
     }
-    @media (max-width: 960px) {
+    @media (max-width: 1120px) {
       .config-grid { grid-template-columns: 1fr 1fr; }
     }
-    @media (max-width: 560px) {
+    @media (max-width: 580px) {
       .config-grid { grid-template-columns: 1fr; }
     }
     .cfg-group label {
@@ -309,16 +309,41 @@
       box-shadow: 0 1px 4px rgba(0,0,0,0.08);
     }
 
+    /* ═══ SECTION 2 : DASHBOARD 2 COLONNES (OPTIONS CLASSE VS STATS + SR + EXPORTS) ═══ */
+    .classe-dashboard-grid {
+      display: grid;
+      grid-template-columns: 0.88fr 1.42fr;
+      gap: 0.95rem;
+      margin-bottom: 0.95rem;
+      align-items: stretch;
+    }
+    @media (max-width: 1060px) {
+      .classe-dashboard-grid { grid-template-columns: 1fr; }
+    }
+    .classe-dash-right {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      padding: 0.95rem 1.1rem;
+      background: var(--surface);
+      border: 1.5px solid #BFDBFE;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(36, 52, 168, 0.06);
+    }
+    @media (max-width: 640px) {
+      #classSummaryStatsBar { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+    }
+
     /* ═══ SITUATION DE RÉFÉRENCE & BARÈME OFFICIEL BANNER ═══ */
     .sr-banner {
-      margin-top: 1.15rem;
-      padding: 1.05rem 1.25rem;
+      margin-top: 0;
+      padding: 0.8rem 0.95rem;
       background: linear-gradient(135deg, #EEF2FF 0%, #F8FAFC 100%);
       border: 1.5px solid #C7D2FE;
-      border-radius: 14px;
+      border-radius: 12px;
       display: grid;
-      grid-template-columns: 1.35fr 1fr;
-      gap: 1.15rem;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 0.85rem;
       align-items: center;
     }
     @media (max-width: 860px) {
@@ -884,29 +909,28 @@
       white-space: nowrap;
     }
 
-    /* Section Exports bien distinguée AU-DESSUS de la grille (thème Bleu ProfEPS) */
+    /* Section Exports compacte intégrée dans la colonne droite */
     .class-export-card {
-      margin: 0 0 0.9rem 0;
-      padding: 0.95rem 1.2rem;
+      margin: 0;
+      padding: 0.68rem 0.9rem;
       background: linear-gradient(135deg, #EFF6FF 0%, #F8FAFC 100%);
       border: 1.5px solid #93C5FD;
-      border-radius: 14px;
+      border-radius: 11px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 0.85rem;
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.08);
+      gap: 0.65rem;
     }
     .class-export-info h3 {
       margin: 0;
-      font-size: 0.95rem;
+      font-size: 0.86rem;
       font-weight: 800;
       color: #1E3A8A;
     }
     .class-export-info p {
-      margin: 0.18rem 0 0;
-      font-size: 0.78rem;
+      margin: 0.1rem 0 0;
+      font-size: 0.74rem;
       color: #334155;
     }
 
@@ -920,17 +944,19 @@
     table.sheet-35-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.77rem;
+      font-size: 0.72rem;
       font-variant-numeric: tabular-nums;
+      table-layout: auto;
     }
     table.sheet-35-table th {
       background: #1E3A8A;
       color: #FFFFFF;
-      padding: 0.48rem 0.38rem;
+      padding: 0.34rem 0.22rem;
       border: 1px solid #2563EB;
       text-align: center;
       font-weight: 700;
-      line-height: 1.25;
+      font-size: 0.7rem;
+      line-height: 1.18;
       vertical-align: middle;
     }
     table.sheet-35-table th.mega-hdr-indiv {
@@ -945,12 +971,12 @@
     }
     table.sheet-35-table th.sub-hdr {
       background: #1E293B;
-      font-size: 0.69rem;
+      font-size: 0.67rem;
       color: #E2E8F0;
       border-color: #334155;
     }
     table.sheet-35-table td {
-      padding: 0.34rem 0.36rem;
+      padding: 0.26rem 0.22rem;
       border: 1px solid #E2E8F0;
       text-align: center;
       vertical-align: middle;
@@ -975,22 +1001,22 @@
     }
     .row-input-name {
       width: 100%;
-      min-width: 145px;
+      min-width: 105px;
       border: none;
       background: transparent;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 600;
       color: var(--ink);
-      padding: 0.22rem;
+      padding: 0.16rem 0.18rem;
     }
     .row-input-num {
-      width: 54px;
-      padding: 0.24rem 0.28rem;
+      width: 44px;
+      padding: 0.18rem 0.18rem;
       border: 1px solid #BFDBFE;
       border-radius: 6px;
       text-align: center;
       font-weight: 700;
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       font-variant-numeric: tabular-nums;
       background: #FFFFFF;
       color: var(--ink);
@@ -1010,11 +1036,11 @@
       box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.16);
     }
     .unit-input-wrap input {
-      width: 64px;
+      width: 48px;
       border: none;
       outline: none;
-      padding: 0.25rem 0.32rem;
-      font-size: 0.8rem;
+      padding: 0.18rem 0.22rem;
+      font-size: 0.74rem;
       font-weight: 700;
       text-align: center;
       color: var(--ink);
@@ -1022,20 +1048,20 @@
       font-variant-numeric: tabular-nums;
     }
     .perf-unit-tag {
-      padding: 0.25rem 0.42rem;
+      padding: 0.18rem 0.3rem;
       background: #EFF6FF;
       color: #1E40AF;
-      font-size: 0.69rem;
+      font-size: 0.64rem;
       font-weight: 800;
       border-left: 1px solid #BFDBFE;
       white-space: nowrap;
       user-select: none;
     }
     .row-sex-select {
-      padding: 3px 6px;
+      padding: 2px 4px;
       border-radius: 6px;
       border: 1.5px solid #93C5FD;
-      font-size: 0.76rem;
+      font-size: 0.72rem;
       font-weight: 800;
       cursor: pointer;
       background: #EFF6FF;
@@ -1047,10 +1073,10 @@
       color: #BE185D;
     }
     .perf-bareme-mini {
-      font-size: 0.64rem;
+      font-size: 0.62rem;
       font-weight: 700;
       margin-top: 2px;
-      line-height: 1.15;
+      line-height: 1.1;
       white-space: nowrap;
     }
     .perf-bareme-mini.is-g { color: #1D4ED8; }
@@ -1080,25 +1106,32 @@
       white-space: nowrap;
     }
 
-    /* Critères sur la grille : VERT (Acquis/Maîtrisé) & ROUGE (En cours/Non acquis) */
+    /* Critères sur la grille (empilés verticalement pour tenir sans scroll horizontal) */
     .mini-chk-pair {
-      display: inline-flex;
+      display: flex;
+      flex-direction: column;
       gap: 2px;
       background: #F1F5F9;
       padding: 2px;
       border-radius: 6px;
       border: 1px solid #CBD5E1;
+      width: 100%;
     }
     .mini-chk {
+      width: 100%;
+      text-align: left;
       border: 1px solid transparent;
       background: #FFFFFF;
-      padding: 2px 5px;
+      padding: 2px 4px;
       border-radius: 4px;
-      font-size: 0.68rem;
+      font-size: 0.64rem;
       font-weight: 600;
+      line-height: 1.15;
       color: #64748B;
       cursor: pointer;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .mini-chk.pos-on {
       background: #DCFCE7;
@@ -1709,7 +1742,8 @@
     html[data-theme="dark"] .custom-bareme-drawer,
     html[data-theme="dark"] .crit-atelier-panel,
     html[data-theme="dark"] .table-quick-bar,
-    html[data-theme="dark"] .table-footer-add-bar {
+    html[data-theme="dark"] .table-footer-add-bar,
+    html[data-theme="dark"] .classe-dash-right {
       background: #131E3A;
       border-color: #263558;
       color: #E8ECFA;
@@ -1740,8 +1774,8 @@
 
     @media print {
       @page { size: A4 landscape; margin: 10mm; }
-      .peps-navbar, .note-hero, .mode-switcher, .config-card, .class-toolbar,
-      .class-export-card, .footer, .seo-guide-card, .dynamic-guide-card,
+      .peps-navbar, .note-hero, .mode-switcher, .config-card, .classe-dashboard-grid, .class-toolbar,
+      .classe-dash-right, .class-export-card, .footer, .seo-guide-card, .dynamic-guide-card,
       .excel-modal-backdrop, .peps-toast, .no-print-col,
       .crit-atelier-panel, .custom-bareme-drawer, .table-quick-bar,
       .table-footer-add-bar, .hdr-crit-actions, .hdr-add-crit-btn, #classSummaryStatsBar {
@@ -2222,7 +2256,7 @@
       </button>
     </div>
 
-    <!-- ═══ BARRE DE CONFIGURATION (NIVEAU, APS, SEXE, RÈGLE CRITÈRES) ═══ -->
+    <!-- ═══ SECTION 1 : NIVEAU, APS, BARÈME, CRITÈRES & IMPORT EXCEL ═══ -->
     <section class="config-card" aria-label="Paramètres officiels OP 2007 et 2009">
       <div class="config-grid">
         <div class="cfg-group">
@@ -2277,52 +2311,29 @@
             <button type="button" class="q-chip" id="btnToggleBaremeDrawer" onclick="toggleBaremeDrawer()" title="Ajuster les points de chaque critère" style="padding:0.15rem 0.5rem;font-size:0.71rem;">⚙️ Ajuster pts</button>
           </div>
           <select id="selCritMode" class="cfg-select" onchange="onConfigChange()">
-            <option value="strict" selected>Case 1 = Points max (1,5 ou 2 pts) | Case 2 = 0 pt</option>
-            <option value="nuance">Case 1 = Points max | Case 2 = Encouragement (0,5 pt)</option>
+            <option value="strict" selected>Case 1 = Points max | Case 2 = 0 pt</option>
+            <option value="nuance">Case 1 = Points max | Case 2 = 0,5 pt</option>
             <option value="custom">⚙️ Personnaliser (ajuster les points)...</option>
           </select>
+        </div>
+
+        <div class="cfg-group">
+          <label for="btnToggleCritAtelier">✎ Critères</label>
+          <button type="button" class="c-btn" id="btnToggleCritAtelier" onclick="toggleCritAtelierPanel()" style="height:41px;">✎ Critères &amp; Poids</button>
+        </div>
+
+        <div class="cfg-group">
+          <label for="btnTriggerExcelImport">📥 Import Excel</label>
+          <input type="file" id="excelImportInput" accept=".xlsx,.xls,.csv,.txt" style="display:none;" onchange="handleExcelFileSelect(event)">
+          <button type="button" class="c-btn primary" id="btnTriggerExcelImport" onclick="triggerExcelImport()" style="height:41px;">📥 Importer Excel (Massar)</button>
         </div>
       </div>
 
       <!-- TIROIR AJUSTEMENT DU BARÈME EN POINTS -->
       <div id="customBaremeDrawer" class="custom-bareme-drawer" style="display:none;"></div>
 
-      <!-- BANNIÈRE DYNAMIQUE : SITUATION DE RÉFÉRENCE & DISTRIBUTION OP -->
-      <div class="sr-banner" id="srBanner">
-        <div>
-          <div class="sr-badge-row">
-            <span class="sr-tag-op" id="srOpBadge">OP 2007 — 2ème Année Bac (2Bac)</span>
-            <span class="sr-tag-aps" id="srFamilleBadge">Athlétisme · Épreuve Chronométrée &amp; Processus</span>
-          </div>
-          <div class="sr-title" id="srTitleText">Situation de Référence (SR) : Courir 1000m (Garçons) / 600m (Filles)</div>
-          <div class="sr-desc" id="srDescText">Réaliser la meilleure performance possible sur une distance de 1000m (Garçons) ou 600m (Filles) en maintenant une allure régulière adaptée à sa VMA, sans arrêt ni marche.</div>
-        </div>
-
-        <div class="bareme-split-box">
-          <div class="bareme-split-head">
-            <span>Répartition Officielle sur /20</span>
-            <strong id="procTotalLabel">Procédural : 14 pts (7 + 7)</strong>
-          </div>
-          <div class="bareme-pills-grid">
-            <div class="b-pill proc">
-              <span class="b-pill-lbl" id="pillPerfLabel">1A. Performance</span>
-              <span class="b-pill-val" id="pillPerfMax">/ 7 pts</span>
-            </div>
-            <div class="b-pill proc">
-              <span class="b-pill-lbl" id="pillProcLabel">1B. Processus</span>
-              <span class="b-pill-val" id="pillProcMax">/ 7 pts</span>
-            </div>
-            <div class="b-pill">
-              <span class="b-pill-lbl">2. Conceptuel</span>
-              <span class="b-pill-val" id="pillConcepMax">/ 3 pts</span>
-            </div>
-            <div class="b-pill">
-              <span class="b-pill-lbl">3. Comportement</span>
-              <span class="b-pill-val" id="pillCompMax">/ 3 pts</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- ATELIER PERSONNALISATION DES CRITÈRES -->
+      <div id="critAtelierPanel" class="crit-atelier-panel" style="display:none;margin-top:0.85rem;margin-bottom:0;"></div>
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════════════
@@ -2511,79 +2522,112 @@
          MODE PRINCIPAL : CLASSE (GRILLE INTERACTIVE JUSQU'À 50 ÉLÈVES + EXPORTS)
          ═══════════════════════════════════════════════════════════════════════ -->
     <section class="class-grid-section active" id="classeModeSection" aria-label="Grille d'évaluation de classe jusqu'à 50 élèves">
-      <div class="class-toolbar">
-        <div class="class-toolbar-top">
+      <!-- SECTION 2 EN 2 COLONNES : GAUCHE (NOM CLASSE & OPTIONS) | DROITE (STATS + SR + BARÈME /20 + EXPORTS) -->
+      <div class="classe-dashboard-grid">
+        <!-- COLONNE GAUCHE : NOM DE LA CLASSE, RECHERCHE & FILTRES -->
+        <div class="class-toolbar" style="margin-bottom:0;justify-content:space-between;">
           <div>
-            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.55rem;">
-              <h2 style="font-size:1.04rem;font-weight:800;color:var(--ink);margin:0;">Grille Classe — <span id="classTitleApsNiveau">Course de durée (2Bac)</span></h2>
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.55rem;margin-bottom:0.35rem;">
+              <h2 style="font-size:1.02rem;font-weight:800;color:var(--ink);margin:0;">Grille Classe — <span id="classTitleApsNiveau">Course de durée (2Bac)</span></h2>
               <label class="class-name-pill" title="Nom de la classe (repris dans vos exports)">
                 <span>Classe :</span>
                 <input type="text" id="classNameInput" class="class-name-inline-input" value="Classe 1" placeholder="Ex: TCLSHF-1" onchange="onClassNameChange(this.value)">
               </label>
             </div>
-            <p id="classSubtitleHint" style="font-size:0.79rem;color:var(--ink-muted);margin:0.2rem 0 0;">Importez votre liste Excel Massar ou saisissez vos élèves directement dans le tableau.</p>
+            <p id="classSubtitleHint" style="font-size:0.78rem;color:var(--ink-muted);margin:0;">Importez votre liste Excel Massar ou saisissez vos élèves directement dans le tableau.</p>
           </div>
-          <div class="class-btn-group">
-            <input type="file" id="excelImportInput" accept=".xlsx,.xls,.csv,.txt" style="display:none;" onchange="handleExcelFileSelect(event)">
-            <button type="button" class="c-btn primary" onclick="triggerExcelImport()">📥 Importer Excel (Massar)</button>
-            <button type="button" class="c-btn" id="btnToggleCritAtelier" onclick="toggleCritAtelierPanel()">✎ Critères &amp; Poids</button>
-            <button type="button" class="c-btn subtle" id="btnResetClassData" onclick="confirmResetClassData()">Réinitialiser</button>
+
+          <div class="class-toolbar-sub">
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem;">
+              <input type="search" id="classSearchInput" class="class-search-input" placeholder="🔍 Rechercher un élève..." oninput="onClassFilterChange()">
+              <select id="classFilterSelect" class="class-filter-select" aria-label="Filtrer par genre" onchange="setClassFilter(this.value)">
+                <option value="ALL" selected>Tous les élèves</option>
+                <option value="G">Garçons (G)</option>
+                <option value="F">Filles (F)</option>
+              </select>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
+              <button type="button" class="c-btn subtle" id="btnResetClassData" onclick="confirmResetClassData()">Réinitialiser</button>
+              <span class="save-status-note" id="saveStatusNote">Sauvegarde auto active</span>
+            </div>
           </div>
         </div>
 
-        <div class="class-toolbar-sub">
-          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.55rem;">
-            <input type="search" id="classSearchInput" class="class-search-input" placeholder="🔍 Rechercher un élève..." oninput="onClassFilterChange()">
-            <select id="classFilterSelect" class="class-filter-select" aria-label="Filtrer par genre" onchange="setClassFilter(this.value)">
-              <option value="ALL" selected>Tous les élèves</option>
-              <option value="G">Garçons (G)</option>
-              <option value="F">Filles (F)</option>
-            </select>
+        <!-- COLONNE DROITE : STATS CLASSE + SITUATION DE RÉFÉRENCE + BARÈME /20 + BOUTONS EXPORTS -->
+        <div class="classe-dash-right">
+          <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0.55rem;" id="classSummaryStatsBar">
+            <div style="background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.5rem 0.65rem;">
+              <div style="font-size:0.67rem;font-weight:700;color:#475569;text-transform:uppercase;">Moyenne Classe</div>
+              <div style="font-size:1.05rem;font-weight:800;color:#1E3A8A;font-variant-numeric:tabular-nums;" id="clsStatAvg">0.00 / 20</div>
+            </div>
+            <div style="background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.5rem 0.65rem;">
+              <div style="font-size:0.67rem;font-weight:700;color:#475569;text-transform:uppercase;">Min / Max</div>
+              <div style="font-size:1.05rem;font-weight:800;color:#1D4ED8;font-variant-numeric:tabular-nums;" id="clsStatMinMax">—</div>
+            </div>
+            <div style="background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.5rem 0.65rem;">
+              <div style="font-size:0.67rem;font-weight:700;color:#475569;text-transform:uppercase;">Réussite (≥ 10)</div>
+              <div style="font-size:1.05rem;font-weight:800;color:#2434A8;font-variant-numeric:tabular-nums;" id="clsStatPassRate">0% (0/1)</div>
+            </div>
+            <div style="background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.5rem 0.65rem;">
+              <div style="font-size:0.67rem;font-weight:700;color:#475569;text-transform:uppercase;">Effectif (G / F)</div>
+              <div style="font-size:0.96rem;font-weight:800;color:#1E3A8A;font-variant-numeric:tabular-nums;" id="clsStatStatusCounts">1 (1 G · 0 F)</div>
+            </div>
           </div>
-          <span class="save-status-note" id="saveStatusNote">Sauvegarde auto active</span>
-        </div>
-      </div>
 
-      <!-- ATELIER PERSONNALISATION DES CRITÈRES -->
-      <div id="critAtelierPanel" class="crit-atelier-panel" style="display:none;"></div>
+          <!-- SITUATION DE RÉFÉRENCE & BARÈME SUR /20 -->
+          <div class="sr-banner" id="srBanner">
+            <div>
+              <div class="sr-badge-row">
+                <span class="sr-tag-op" id="srOpBadge">OP 2007 — 2ème Année Bac (2Bac)</span>
+                <span class="sr-tag-aps" id="srFamilleBadge">Athlétisme · Produit &amp; Processus</span>
+              </div>
+              <div class="sr-title" id="srTitleText" style="font-size:0.88rem;">Situation de Référence (SR) : Courir 1000m (Garçons) / 600m (Filles)</div>
+              <div class="sr-desc" id="srDescText" style="font-size:0.78rem;line-height:1.38;">Réaliser la meilleure performance possible sur une distance de 1000m (Garçons) ou 600m (Filles) en maintenant une allure régulière adaptée à sa VMA.</div>
+            </div>
 
-      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-bottom:0.9rem;" id="classSummaryStatsBar">
-        <div style="flex:1 1 170px;background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.65rem 0.9rem;">
-          <div style="font-size:0.72rem;font-weight:700;color:#475569;text-transform:uppercase;">Moyenne de Classe</div>
-          <div style="font-size:1.2rem;font-weight:800;color:#1E3A8A;font-variant-numeric:tabular-nums;" id="clsStatAvg">0.00 / 20</div>
-        </div>
-        <div style="flex:1 1 170px;background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.65rem 0.9rem;">
-          <div style="font-size:0.72rem;font-weight:700;color:#475569;text-transform:uppercase;">Note Min / Note Max</div>
-          <div style="font-size:1.2rem;font-weight:800;color:#1D4ED8;font-variant-numeric:tabular-nums;" id="clsStatMinMax">—</div>
-        </div>
-        <div style="flex:1 1 170px;background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.65rem 0.9rem;">
-          <div style="font-size:0.72rem;font-weight:700;color:#475569;text-transform:uppercase;">Taux de Réussite (≥ 10/20)</div>
-          <div style="font-size:1.2rem;font-weight:800;color:#2434A8;font-variant-numeric:tabular-nums;" id="clsStatPassRate">0% (0/1)</div>
-        </div>
-        <div style="flex:1 1 170px;background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.65rem 0.9rem;">
-          <div style="font-size:0.72rem;font-weight:700;color:#475569;text-transform:uppercase;">Effectif (Garçons / Filles)</div>
-          <div style="font-size:1.05rem;font-weight:800;color:#1E3A8A;font-variant-numeric:tabular-nums;" id="clsStatStatusCounts">1 (1 G · 0 F)</div>
-        </div>
-      </div>
+            <div class="bareme-split-box" style="padding:0.6rem 0.75rem;">
+              <div class="bareme-split-head">
+                <span>Barème Officiel /20</span>
+                <strong id="procTotalLabel">Procédural : 14 pts (7 + 7)</strong>
+              </div>
+              <div class="bareme-pills-grid">
+                <div class="b-pill proc">
+                  <span class="b-pill-lbl" id="pillPerfLabel">1A. Performance</span>
+                  <span class="b-pill-val" id="pillPerfMax">/ 7 pts</span>
+                </div>
+                <div class="b-pill proc">
+                  <span class="b-pill-lbl" id="pillProcLabel">1B. Processus</span>
+                  <span class="b-pill-val" id="pillProcMax">/ 7 pts</span>
+                </div>
+                <div class="b-pill">
+                  <span class="b-pill-lbl">2. Conceptuel</span>
+                  <span class="b-pill-val" id="pillConcepMax">/ 3 pts</span>
+                </div>
+                <div class="b-pill">
+                  <span class="b-pill-lbl">3. Comportement</span>
+                  <span class="b-pill-val" id="pillCompMax">/ 3 pts</span>
+                </div>
+              </div>
+            </div>
+          </div>
 
-      <!-- SECTION EXPORTS EN 2 BOUTONS SÉPARÉS AU-DESSUS DE LA GRILLE -->
-      <div class="class-export-card" id="classExportSection" aria-label="Télécharger la grille">
-        <div class="class-export-info">
-          <h3>Télécharger la Grille (Complétée ou Brute)</h3>
-          <p>Choisissez entre la <strong>grille avec les notes saisies</strong> ou une <strong>grille brute vierge</strong> prête à imprimer.</p>
-        </div>
-        <div class="class-btn-group">
-          <button type="button" class="c-btn primary" onclick="openCompletedExportModal()">📥 Télécharger Grille Complétée</button>
-          <button type="button" class="c-btn" onclick="openBruteExportModal()">📋 Télécharger Grille Brute</button>
+          <!-- BOUTONS EXPORTS DANS LA CASE DE DROITE -->
+          <div class="class-export-card" id="classExportSection" aria-label="Télécharger la grille">
+            <div class="class-export-info">
+              <h3>Exporter / Télécharger la Grille</h3>
+              <p>Grille complétée avec les notes ou grille brute vierge à imprimer.</p>
+            </div>
+            <div class="class-btn-group">
+              <button type="button" class="c-btn primary" onclick="openCompletedExportModal()">📥 Télécharger Grille Complétée</button>
+              <button type="button" class="c-btn" onclick="openBruteExportModal()">📋 Télécharger Grille Brute</button>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="class-table-container" id="printableClassTableWrap">
         <div class="table-quick-bar">
-          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
-            <button type="button" class="c-btn primary" id="btnAddRowClassTop" onclick="addBlankClassRow()">➕ Ajouter un élève</button>
-            <span style="font-size:0.75rem;color:#475569;font-weight:600;">Cliquez sur <strong>✎</strong> ou <strong>×</strong> dans l'en-tête pour modifier/supprimer un critère.</span>
-          </div>
+          <span style="font-size:0.75rem;color:#475569;font-weight:600;">Cliquez sur <strong>✎</strong> ou <strong>×</strong> dans l'en-tête pour modifier/supprimer un critère.</span>
           <span style="font-size:0.74rem;font-weight:700;color:#1E40AF;" id="tableRowCountLabel">1 / 50 élèves</span>
         </div>
 
@@ -2629,37 +2673,55 @@
           </thead>
           <tbody>
             <tr>
-              <td><strong>1AC, 2AC, 3AC</strong> (Collège OP 2009)</td>
-              <td><strong>12 pts</strong> (6 pts Perf + 6 pts Processus)</td>
-              <td><strong>13 pts</strong> (6 pts Diff. + 7 pts Processus)</td>
-              <td><strong>13 pts</strong> (6 pts Individuel + 7 pts Collectif)</td>
+              <td><strong>1ère Année Collège (1AC)</strong> (OP 2009)</td>
+              <td><strong>12 pts</strong> (6 Perf + 6 Processus)</td>
+              <td><strong>14 pts</strong> (6 Diff. 3A+2B + 6 Comp. + 2 Exéc.)</td>
+              <td><strong>13 pts</strong> (6 Individuel + 7 Collectif)</td>
               <td><strong>3 pts</strong></td>
-              <td><strong>5 pts</strong> (Athlé) / <strong>4 pts</strong> (Gym &amp; Sp. Co)</td>
+              <td><strong>5</strong> (Athlé) / <strong>3</strong> (Gym) / <strong>4</strong> (Sp. Co)</td>
+              <td><strong>20 / 20</strong></td>
+            </tr>
+            <tr>
+              <td><strong>2ème Année Collège (2AC)</strong> (OP 2009)</td>
+              <td><strong>12 pts</strong> (6 Perf + 6 Processus)</td>
+              <td><strong>13 pts</strong> (6 Diff. 3A+2B+1C + 5 Comp. + 2 Exéc.)</td>
+              <td><strong>13 pts</strong> (6 Individuel + 7 Collectif)</td>
+              <td><strong>3 pts</strong></td>
+              <td><strong>5</strong> (Athlé) / <strong>4</strong> (Gym &amp; Sp. Co)</td>
+              <td><strong>20 / 20</strong></td>
+            </tr>
+            <tr>
+              <td><strong>3ème Année Collège (3AC)</strong> (OP 2009)</td>
+              <td><strong>12 pts</strong> (6 Perf + 6 Processus)</td>
+              <td><strong>12 pts</strong> (6 Diff. 2A+4B+1C + 4 Comp. + 2 Exéc.)</td>
+              <td><strong>13 pts</strong> (6 Individuel + 7 Collectif)</td>
+              <td><strong>3 pts</strong></td>
+              <td><strong>5</strong> (Athlé &amp; Gym) / <strong>4</strong> (Sp. Co)</td>
               <td><strong>20 / 20</strong></td>
             </tr>
             <tr>
               <td><strong>Tronc Commun (TC)</strong> (Lycée OP 2007)</td>
-              <td><strong>12 pts</strong> (6 pts Perf + 6 pts Processus)</td>
-              <td><strong>13 pts</strong> (6 pts Diff. + 7 pts Processus)</td>
-              <td><strong>13 pts</strong> (6 pts Individuel + 7 pts Collectif)</td>
+              <td><strong>12 pts</strong> (6 Perf + 6 Processus)</td>
+              <td><strong>12 pts</strong> (7 Diff. 2A+3B+2C + 2 Comp. + 3 Exéc.)</td>
+              <td><strong>13 pts</strong> (6 Individuel + 7 Collectif)</td>
               <td><strong>3 pts</strong></td>
-              <td><strong>5 pts</strong> (Athlé) / <strong>4 pts</strong> (Gym &amp; Sp. Co)</td>
+              <td><strong>5</strong> (Athlé &amp; Gym) / <strong>4</strong> (Sp. Co)</td>
               <td><strong>20 / 20</strong></td>
             </tr>
             <tr>
               <td><strong>1ère Année Bac (1Bac)</strong> (Lycée OP 2007)</td>
-              <td><strong>13 pts</strong> (6 pts Perf + 7 pts Processus)</td>
-              <td><strong>14 pts</strong> (7 pts Diff. + 7 pts Processus)</td>
-              <td><strong>14 pts</strong> (7 pts Individuel + 7 pts Collectif)</td>
+              <td><strong>13 pts</strong> (6 Perf + 7 Processus)</td>
+              <td><strong>13 pts</strong> (7 Diff. 2B+3C+2D + 2 Comp. + 4 Exéc.)</td>
+              <td><strong>14 pts</strong> (7 Individuel + 7 Collectif)</td>
               <td><strong>3 pts</strong></td>
-              <td><strong>4 pts</strong> (Athlé) / <strong>3 pts</strong> (Gym &amp; Sp. Co)</td>
+              <td><strong>4</strong> (Athlé &amp; Gym) / <strong>3</strong> (Sp. Co)</td>
               <td><strong>20 / 20</strong></td>
             </tr>
             <tr>
               <td><strong>2ème Année Bac (2Bac)</strong> (Lycée OP 2007)</td>
-              <td><strong>14 pts</strong> (7 pts Perf + 7 pts Processus)</td>
-              <td><strong>14 pts</strong> (7 pts Diff. + 7 pts Processus)</td>
-              <td><strong>14 pts</strong> (6 pts Individuel + 8 pts Collectif)</td>
+              <td><strong>14 pts</strong> (7 Perf + 7 Processus)</td>
+              <td><strong>14 pts</strong> (7 Diff. 2C+3D+2E + 2 Comp. + 5 Exéc.)</td>
+              <td><strong>14 pts</strong> (6 Individuel + 8 Collectif)</td>
               <td><strong>3 pts</strong></td>
               <td><strong>3 pts</strong> (Toutes APS)</td>
               <td><strong>20 / 20</strong></td>
@@ -3006,7 +3068,7 @@
         </div>
         <div class="cfg-group">
           <label for="inpEditCritWeight">Points du critère (Barème)</label>
-          <input type="number" id="inpEditCritWeight" class="cfg-input" min="0" max="10" step="0.25" value="1.5">
+          <input type="number" id="inpEditCritWeight" class="cfg-input" min="0" max="10" step="0.05" value="1.5">
         </div>
       </div>
       <div style="display:flex;justify-content:flex-end;gap:0.5rem;margin-top:1rem;">
@@ -3069,7 +3131,7 @@
       ],
       'Saut en longueur': [
         { nom: 'Course', sous: ['Accélérée', 'Irrégulière'], descPos: 'Course étalonnée à vitesse croissante jusqu\'à la planche.', descNeg: 'Piétinement ou freinage marqué sur les 3 derniers appuis.', tip: 'Utiliser une marque de départ fiable (9 à 12 appuis).' },
-        { nom: 'Impulsion', sous: ['Sur planche', 'Mordu'], descPos: 'Pied d\'appel actif sur la planche (ou zone), élévation vers l\'avant-haut.', descNeg: 'Saut mordu devant la planche ou impulsion sans extension.', tip: 'Ne pas baisser la tête pour regarder la planche à la fin.' },
+        { nom: 'Impulsion', sous: ['Sur la planche', 'Avant la planche'], descPos: 'Pied d\'appel posé exactement sur la planche d\'appel avec élévation vers l\'avant-haut.', descNeg: 'Impulsion déclenchée avant la planche (perte de distance) ou pied mal ajusté.', tip: 'Ne pas baisser la tête pour regarder la planche sur les derniers appuis.' },
         { nom: 'Envol', sous: ['Équilibré', 'Déséquil.'], descPos: 'Suspension haute avec maintien du tronc et ramener des jambes.', descNeg: 'Rotation vers l\'avant ou bras désordonnés en l\'air.', tip: 'Maintenir le genou libre haut à la sortie de planche.' },
         { nom: 'Réception', sous: ['Stable', 'Chute'], descPos: 'Jambes projetées loin devant, flexion amortie vers l\'avant.', descNeg: 'Chute en arrière faisant perdre des centimètres à la mesure.', tip: 'Mesurer systématiquement à l\'empreinte arrière la plus proche.' }
       ],
@@ -3080,12 +3142,28 @@
         { nom: 'Réception', sous: ['Dos', 'Danger'], descPos: 'Chute maîtrisée sur le haut du dos dans la zone centrale du tapis.', descNeg: 'Réception sur la nuque, les genoux ou en bord de tapis.', tip: 'Sécuriser impérativement le menton rentré vers la poitrine.' }
       ],
       'Gymnastique': [
-        { nom: 'Amplitude', sous: ['Suffisante', 'Insuffis.'], descPos: 'Éléments exécutés avec extension maximale et hauteur maîtrisée.', descNeg: 'Figures étriquées, jambes fléchies ou fermeture incomplète.', tip: 'Évaluer la netteté des formes (jambes tendues, pointes).' },
-        { nom: 'Tenue', sous: ['Gainé', 'Relâché'], descPos: 'Alignement corporel constant (gainage) durant renversements et appuis.', descNeg: 'Relâchement lombaire ou affaissement sur les bras.', tip: 'Vérifier la tenue durant au moins 2 secondes sur les équilibres.' },
-        { nom: 'Liaisons', sous: ['Fluides', 'Arrêts'], descPos: 'Enchaînement continu et rythmé avec éléments de liaison soignés.', descNeg: 'Pauses longues ou hésitations répétées entre les éléments.', tip: 'Valoriser l\'orientation spatiale sur le praticable.' },
-        { nom: 'Réception', sous: ['Stabilisée', 'Déséquil.'], descPos: 'Arrivées pilées pieds joints avec posture finale tenue.', descNeg: 'Déséquilibre arrière, pas de rattrapage ou chute.', tip: 'Exiger un salut de début et un salut final net.' }
+        { nom: '4 Familles diff.', sous: ['4 fam.', '< 4 fam.'], descPos: '4 familles différentes choisies parmi les 8 du tableau des difficultés (4 × 0,40 = 1,60 pt).', descNeg: 'Moins de 4 familles différentes présentées (0,40 pt par famille).', tip: 'OP 2007 Annexe 4 Lycée : Exigences de composition = 1,60 pt.' },
+        { nom: 'Série (Acrob/Chor)', sous: ['Validée', 'Absente'], descPos: 'Garçons : série de 2 acrobaties enchaînées ; Filles : série de 3 mouvements chorégraphiques enchaînés (0,40 pt).', descNeg: 'Série spécifique incomplète ou non enchaînée.', tip: 'Max Composition Lycée OP 2007 = 2,00 pts (1,60 + 0,40).' },
+        { nom: 'Exécution', sous: ['Maîtrisée', 'Fautes'], descPos: 'Appréciation analytique (-0,1/-0,2/-0,3/chute -0,5) ou globale (1/1 à 0) sur la note max d\'exécution.', descNeg: 'Fautes de tenue, arrêts ou chutes déduits de la note d\'exécution (/3 TC, /4 1Bac, /5 2Bac).', tip: 'Cumul des déductions retranché de la note maximale d\'exécution.' }
       ]
     };
+
+    function getGymCritsForNiveau(niveau) {
+      if (['1AC', '2AC', '3AC'].includes(niveau)) {
+        return [
+          { nom: 'Exigences (3 fam.)', sous: ['3 fam.', '< 3 fam.'], descPos: 'Choisir 3 familles différentes parmi les 8 du tableau des difficultés (3 × 0,50 = 1,50 pt).', descNeg: 'Moins de 3 familles différentes présentées (0,50 pt par famille présentée).', tip: 'OP 2009 Collège Annexe 4 : Composition (a) Exigences spécifiques = 1,50 pt.' },
+          { nom: 'Agenc. & Rythme', sous: ['Fluide', 'Haché'], descPos: 'Enchaînement continu dans une suite logique et harmonieuse, sans hésitation ni arrêt.', descNeg: 'Pauses longues, rupture de rythme ou liaisons absentes entre les éléments.', tip: 'OP 2009 Collège Annexe 4 : Qualité d\'enchaînement (/4,50 1AC · /3,50 2AC · /2,50 3AC).' },
+          { nom: 'Amplit. & Aisance', sous: ['Ample', 'Crispé'], descPos: 'Extension segmentaire nette, tenue gainée et aisance corporelle sur le praticable.', descNeg: 'Figures étriquées, jambes fléchies ou manque d\'aisance et d\'orientation.', tip: 'Complète la note Qualité d\'enchaînement avec Agencement & Rythme.' },
+          { nom: 'Exécution', sous: ['Maîtrisée', 'Fautes'], descPos: 'Appréciation analytique (-0,1/-0,2/-0,3/chute -0,5) ou globale (1/1, 3/4, 1/2, 1/4, 0) sur 2 pts.', descNeg: 'Fautes d\'exécution ou chutes retranchées de la note maximale (2,00 pts).', tip: 'OP 2009 Collège Annexe 4 : Note maximale d\'Exécution = 2 pts.' }
+        ];
+      }
+      const execMax = niveau === 'TC' ? 3 : (niveau === '1AB' ? 4 : 5);
+      return [
+        { nom: '4 Familles diff.', sous: ['4 fam.', '< 4 fam.'], descPos: 'Choisir 4 familles différentes parmi les 8 du tableau des difficultés (4 × 0,40 = 1,60 pt).', descNeg: 'Moins de 4 familles différentes présentées (0,40 pt par famille).', tip: 'OP 2007 Lycée Annexe 4 : Exigences de composition = 1,60 pt.' },
+        { nom: 'Série (Acrob/Chor)', sous: ['Validée', 'Absente'], descPos: 'Garçons : 2 acrobaties enchaînées (ex. rondade-flip/roue-rondade) ; Filles : 3 mouvements chorégraphiques enchaînés (0,40 pt).', descNeg: 'Série acrobatique (G) ou chorégraphique (F) absente ou incomplète.', tip: 'Max Composition Lycée OP 2007 = 2,00 pts (1,60 + 0,40).' },
+        { nom: 'Exécution', sous: ['Maîtrisée', 'Fautes'], descPos: `Appréciation analytique (-0,1/-0,2/-0,3/chute -0,5) ou globale (1/1 à 0) sur ${execMax} pts.`, descNeg: `Fautes d'exécution ou chutes déduites du maximum (${execMax} pts).`, tip: `OP 2007 Lycée Annexe 4 : Exécution = ${execMax} pts en ${niveau === '1AB' ? '1Bac' : (niveau === '2AB' ? '2Bac' : 'TC')}.` }
+      ];
+    }
 
     // Double grille pour Sports Collectifs & Sports de Renvoi :
     // 1A = Capacité Individuelle (4 critères) | 1B = Capacité Collective (4 critères)
@@ -3223,14 +3301,14 @@
       'Tennis de table': '/aps-badminton-tennis-table-eps-maroc.html'
     };
 
-    // Contrats Gymnastique par niveau (OP 2009 & OP 2007)
+    // Contrats Gymnastique officiels Annexe 4 (OP 2009 Collège & OP 2007 Lycée)
     const GYM_CONTRATS = {
-      '1AC': { contrat: '3A + 2B',      totalElements: 5, detail: '3 éléments A + 2 éléments B' },
-      '2AC': { contrat: '3A + 2B + 1C', totalElements: 6, detail: '3 éléments A + 2 éléments B + 1 élément C' },
-      '3AC': { contrat: '2A + 4B + 1C', totalElements: 7, detail: '2 éléments A + 4 éléments B + 1 élément C' },
-      'TC':  { contrat: '4A + 2B',      totalElements: 6, detail: '4 éléments A + 2 éléments B' },
-      '1AB': { contrat: '4A + 2B + 1C', totalElements: 7, detail: '4 éléments A + 2 éléments B + 1 élément C' },
-      '2AB': { contrat: '3A + 3B + 2C', totalElements: 8, detail: '3 éléments A + 3 éléments B + 2 éléments C' }
+      '1AC': { contrat: '3A + 2B + 0C', totalElements: 5, detail: '3 élém. A + 2 élém. B (3×1 + 2×1,5 = 6 pts)', diffMax: 6, compMax: 3, execMax: 2, procTotal: 14, procWeights: [1.5, 2.25, 2.25, 2] },
+      '2AC': { contrat: '3A + 2B + 1C', totalElements: 6, detail: '3 élém. A + 2 élém. B + 1 élém. C (3×0,75 + 2×1 + 1×1,75 = 6 pts)', diffMax: 6, compMax: 4, execMax: 2, procTotal: 13, procWeights: [1.5, 1.75, 1.75, 2] },
+      '3AC': { contrat: '2A + 4B + 1C', totalElements: 7, detail: '2 élém. A + 4 élém. B + 1 élém. C (2×0,5 + 4×0,75 + 1×2 = 6 pts)', diffMax: 6, compMax: 5, execMax: 2, procTotal: 12, procWeights: [1.5, 1.25, 1.25, 2] },
+      'TC':  { contrat: '2A + 3B + 2C', totalElements: 7, detail: '2 élém. A + 3 élém. B + 2 élém. C (2×0,5 + 3×1 + 2×1,5 = 7 pts)', diffMax: 7, compMax: 5, execMax: 3, procTotal: 12, procWeights: [1.6, 0.4, 3] },
+      '1AB': { contrat: '2B + 3C + 2D', totalElements: 7, detail: '2 élém. B + 3 élém. C + 2 élém. D (2×0,5 + 3×1 + 2×1,5 = 7 pts)', diffMax: 7, compMax: 4, execMax: 4, procTotal: 13, procWeights: [1.6, 0.4, 4] },
+      '2AB': { contrat: '2C + 3D + 2E', totalElements: 7, detail: '2 élém. C + 3 élém. D + 2 élém. E (2×0,5 + 3×1 + 2×1,5 = 7 pts)', diffMax: 7, compMax: 3, execMax: 5, procTotal: 14, procWeights: [1.6, 0.4, 5] }
     };
 
     // Barèmes Performance par APS, Niveau et Sexe (seuils pour la note Max de Performance /6 ou /7)
@@ -3350,6 +3428,10 @@
       return Math.round((Number(n) || 0) * 4) / 4;
     }
 
+    function roundScore100(n) {
+      return Math.round((Number(n) || 0) * 100) / 100;
+    }
+
     function distributeWeightsEvenly(count, totalMax) {
       const n = Math.max(1, count || 1);
       const totalHalves = Math.max(0, Math.round((Number(totalMax) || 0) * 2));
@@ -3372,26 +3454,33 @@
       return `${niveau || currentNiveau}::${aps || currentAps}`;
     }
 
-    function getDefaultCritsForAps(aps, kind) {
+    function getDefaultCritsForAps(aps, kind, niveau) {
       if (CRITERES_COLLECTIF[aps]) {
         return cloneCritList(kind === 'indiv' ? CRITERES_COLLECTIF[aps].indiv : CRITERES_COLLECTIF[aps].collectif);
+      }
+      if (aps === 'Gymnastique') {
+        return cloneCritList(getGymCritsForNiveau(niveau || currentNiveau));
       }
       return cloneCritList(CRITERES_OBS[aps] || CRITERES_OBS['Course de durée']);
     }
 
     function getCritsForAps(aps, kind, niveau) {
-      const key = getCustomKey(niveau || currentNiveau, aps);
+      const niv = niveau || currentNiveau;
+      const key = getCustomKey(niv, aps);
       const custom = customCriteriaMap[key];
       const normKind = kind === 'indiv' ? 'indiv' : 'proc';
       if (custom && Array.isArray(custom[normKind]) && custom[normKind].length > 0) {
         return cloneCritList(custom[normKind]);
       }
-      return getDefaultCritsForAps(aps, kind);
+      return getDefaultCritsForAps(aps, kind, niv);
     }
 
-    function alignWeightsArray(savedArr, count, fallbackTotal) {
+    function alignWeightsArray(savedArr, count, fallbackTotal, defaultWeights) {
       if (Array.isArray(savedArr) && savedArr.length === count) {
-        return savedArr.map(v => Math.max(0, roundQuarter(v)));
+        return savedArr.map(v => Math.max(0, roundScore100(v)));
+      }
+      if (Array.isArray(defaultWeights) && defaultWeights.length === count) {
+        return defaultWeights.map(v => Math.max(0, roundScore100(v)));
       }
       return distributeWeightsEvenly(count, fallbackTotal);
     }
@@ -3409,6 +3498,7 @@
       let officialProcMax = 7;
       let concepMax = 3;
       let compMax = 3;
+      let gymDefaultProcWeights = null;
 
       if (isAthle) {
         if (['1AC', '2AC', '3AC', 'TC'].includes(niveau)) {
@@ -3427,11 +3517,13 @@
           officialProcTotal = 14; officialPerfMax = 6; officialProcMax = 8; concepMax = 3; compMax = 3;
         }
       } else {
-        if (['1AC', '2AC', '3AC', 'TC'].includes(niveau)) {
-          officialProcTotal = 13; officialPerfMax = 6; officialProcMax = 7; concepMax = 3; compMax = 4;
-        } else {
-          officialProcTotal = 14; officialPerfMax = 7; officialProcMax = 7; concepMax = 3; compMax = 3;
-        }
+        const gc = GYM_CONTRATS[niveau] || GYM_CONTRATS['2AB'];
+        officialPerfMax = gc.diffMax;
+        officialProcTotal = gc.procTotal;
+        officialProcMax = roundScore100(gc.procTotal - gc.diffMax);
+        concepMax = 3;
+        compMax = gc.compMax;
+        gymDefaultProcWeights = gc.procWeights;
       }
 
       const critsIndiv = isSpCo ? getCritsForAps(aps, 'indiv', niveau) : [];
@@ -3442,20 +3534,25 @@
       const critWeightsIndiv = isSpCo
         ? alignWeightsArray(customBareme && customBareme.indWeights, critsIndiv.length, officialPerfMax)
         : [];
-      const critWeights = alignWeightsArray(customBareme && customBareme.procWeights, critsProc.length, officialProcMax);
+      const critWeights = alignWeightsArray(
+        customBareme && customBareme.procWeights,
+        critsProc.length,
+        officialProcMax,
+        isGym ? gymDefaultProcWeights : null
+      );
 
       const perfMax = isSpCo
-        ? roundQuarter(critWeightsIndiv.reduce((a, b) => a + b, 0))
+        ? roundScore100(critWeightsIndiv.reduce((a, b) => a + b, 0))
         : officialPerfMax;
-      const procMax = roundQuarter(critWeights.reduce((a, b) => a + b, 0));
-      const procTotal = roundQuarter(perfMax + procMax);
+      const procMax = roundScore100(critWeights.reduce((a, b) => a + b, 0));
+      const procTotal = roundScore100(perfMax + procMax);
 
       let negPts = 0;
       if (currentCritMode === 'nuance') negPts = 0.5;
-      else if (currentCritMode === 'custom') negPts = Math.max(0, roundQuarter((customBareme && customBareme.negPts) || 0));
+      else if (currentCritMode === 'custom') negPts = Math.max(0, roundScore100((customBareme && customBareme.negPts) || 0));
 
-      const labelPerf = isSpCo ? 'Capacité Individuelle' : (isGym ? 'Difficulté (Contrat)' : 'Performance (Produit)');
-      const labelProc = isSpCo ? 'Capacité Collective' : 'Processus (Exécution)';
+      const labelPerf = isSpCo ? 'Capacité Individuelle' : (isGym ? 'Difficultés (Contrat OP)' : 'Performance (Produit)');
+      const labelProc = isSpCo ? 'Capacité Collective' : (isGym ? 'Composition & Exécution' : 'Processus (Exécution)');
 
       return {
         isAthle,
@@ -3642,7 +3739,7 @@
     }
 
     function onCustomWeightInput(kind, idx, val) {
-      const num = Math.max(0, Math.min(12, roundQuarter(parseFloat(val) || 0)));
+      const num = Math.max(0, Math.min(12, roundScore100(parseFloat(val) || 0)));
       const entry = ensureCustomBaremeEntry(currentNiveau, currentAps);
       if (kind === 'indiv') {
         entry.indWeights[idx] = num;
@@ -3658,7 +3755,7 @@
     }
 
     function onCustomNegPtsInput(val) {
-      const num = Math.max(0, Math.min(5, roundQuarter(parseFloat(val) || 0)));
+      const num = Math.max(0, Math.min(5, roundScore100(parseFloat(val) || 0)));
       const entry = ensureCustomBaremeEntry(currentNiveau, currentAps);
       entry.negPts = num;
       const sel = document.getElementById('selCritMode');
@@ -3674,9 +3771,12 @@
       const critsIndiv = cfg.isSpCo ? getCritsForAps(currentAps, 'indiv') : [];
       const critsProc = cfg.isSpCo ? getCritsForAps(currentAps, 'collectif') : getCritsForAps(currentAps, 'processus');
       const key = getCustomKey(currentNiveau, currentAps);
+      const gcGym = cfg.isGym ? GYM_CONTRATS[currentNiveau] : null;
       customBaremeConfig[key] = {
         indWeights: cfg.isSpCo ? distributeWeightsEvenly(critsIndiv.length, cfg.officialPerfMax) : [],
-        procWeights: distributeWeightsEvenly(critsProc.length, cfg.officialProcMax),
+        procWeights: (gcGym && critsProc.length === gcGym.procWeights.length)
+          ? [...gcGym.procWeights]
+          : distributeWeightsEvenly(critsProc.length, cfg.officialProcMax),
         negPts: currentCritMode === 'nuance' ? 0.5 : (customBaremeConfig[key]?.negPts || 0)
       };
       onConfigChange(true);
@@ -3709,7 +3809,7 @@
             ${critsIndiv.map((c, idx) => `
               <div class="custom-bareme-item">
                 <label title="${escapeHtml(c.nom)}">${idx + 1}. ${escapeHtml(c.nom)}</label>
-                <input type="number" min="0" max="12" step="0.25" value="${cfg.critWeightsIndiv[idx]}" onchange="onCustomWeightInput('indiv', ${idx}, this.value)">
+                <input type="number" min="0" max="12" step="0.05" value="${cfg.critWeightsIndiv[idx]}" onchange="onCustomWeightInput('indiv', ${idx}, this.value)">
               </div>
             `).join('')}
           </div>
@@ -3723,7 +3823,7 @@
             ${critsProc.map((c, idx) => `
               <div class="custom-bareme-item">
                 <label title="${escapeHtml(c.nom)}">${idx + 1}. ${escapeHtml(c.nom)}</label>
-                <input type="number" min="0" max="12" step="0.25" value="${cfg.critWeights[idx]}" onchange="onCustomWeightInput('proc', ${idx}, this.value)">
+                <input type="number" min="0" max="12" step="0.05" value="${cfg.critWeights[idx]}" onchange="onCustomWeightInput('proc', ${idx}, this.value)">
               </div>
             `).join('')}
           </div>
@@ -3735,7 +3835,7 @@
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">
           <div>
             <strong style="font-size:0.86rem;color:#1E3A8A;">⚙️ Ajuster les points du Barème — ${escapeHtml(currentAps)} (${escapeHtml(currentNiveau === '1AB' ? '1Bac' : (currentNiveau === '2AB' ? '2Bac' : currentNiveau))})</strong>
-            <div style="font-size:0.75rem;color:#475569;">Modifiez les points par critère (pas de 0,25 pt). Le total Procédural (${cfg.procTotal} pts) se met à jour en direct.</div>
+            <div style="font-size:0.75rem;color:#475569;">Modifiez les points par critère (pas de 0,05 / 0,25 pt). Le total Procédural (${cfg.procTotal} pts) se met à jour en direct.</div>
           </div>
           <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">
             <button type="button" class="q-chip" onclick="autoBalanceCustomBareme()">⚖️ Équilibrer OP</button>
@@ -3748,7 +3848,7 @@
         <div style="margin-top:0.75rem;padding-top:0.65rem;border-top:1px dashed #93C5FD;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.6rem;">
           <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
             <label for="inpCustomNegPts" style="font-size:0.78rem;font-weight:800;color:#1E3A8A;">Points Case 2 (En cours / Non acquis) :</label>
-            <input type="number" id="inpCustomNegPts" min="0" max="5" step="0.25" value="${cfg.negPts}" onchange="onCustomNegPtsInput(this.value)" style="width:76px;border:1px solid #93C5FD;border-radius:6px;padding:0.26rem 0.45rem;font-weight:800;font-size:0.82rem;">
+            <input type="number" id="inpCustomNegPts" min="0" max="5" step="0.05" value="${cfg.negPts}" onchange="onCustomNegPtsInput(this.value)" style="width:76px;border:1px solid #93C5FD;border-radius:6px;padding:0.26rem 0.45rem;font-weight:800;font-size:0.82rem;">
             <span style="font-size:0.74rem;color:#475569;">${negPtsDisabled ? '(Modifier active le mode Personnalisé)' : '(Mode Personnalisé actif)'}</span>
           </div>
           <div style="font-size:0.78rem;font-weight:800;color:#1E3A8A;">
@@ -3796,9 +3896,9 @@
         document.getElementById('srDescText').textContent = sc.srDesc;
       } else if (cfg.isGym) {
         const gc = GYM_CONTRATS[currentNiveau];
-        document.getElementById('srFamilleBadge').textContent = `Gymnastique au Sol · Contrat ${gc.contrat}`;
+        document.getElementById('srFamilleBadge').textContent = `Gymnastique au Sol · Annexe 4 (${gc.contrat})`;
         document.getElementById('srTitleText').textContent = `Situation de Référence (SR) : Enchaînement gymnique (${gc.contrat})`;
-        document.getElementById('srDescText').textContent = `Présenter devant les juges un enchaînement gymnique maîtrisé comprenant ${gc.detail} (Difficulté sur /${cfg.perfMax} pts + Exécution/Processus sur /${cfg.procMax} pts).`;
+        document.getElementById('srDescText').textContent = `${gc.detail}. Remplacement inf. partiel = 0,25 pt. ${['1AC', '2AC', '3AC'].includes(currentNiveau) ? `Composition : 3 fam. (1,50) + Qualité d'enchaînement (${roundScore100(cfg.procMax - 2 - 1.50)}) + Exécution (${gc.execMax} pts).` : `Composition : 4 fam. (1,60) + Série G: 2 acrob / F: 3 chorég (0,40) + Exécution (${gc.execMax} pts).`}`;
       } else {
         document.getElementById('srFamilleBadge').textContent = `Sports Collectifs / Renvoi · Double Grille Individuel (/${cfg.perfMax}) + Collectif (/${cfg.procMax})`;
         document.getElementById('srTitleText').textContent = `Situation de Référence (SR) : Situation de match en ${currentAps} (OP Maroc)`;
@@ -3966,12 +4066,18 @@
       } else if (cfg.isGym) {
         document.getElementById('volet1ATitle').textContent = `Note Procédurale — 1A. ${cfg.labelPerf}`;
         const gc = GYM_CONTRATS[currentNiveau];
-        document.getElementById('volet1ASub').textContent = `Contrat officiel ${currentNiveau} : ${gc.contrat} (${gc.detail}) sur /${cfg.perfMax} pts`;
+        const isCollegeGym = ['1AC', '2AC', '3AC'].includes(currentNiveau);
+        document.getElementById('volet1ASub').textContent = `Contrat officiel Annexe 4 (${currentNiveau}) : ${gc.detail}`;
         container.innerHTML = `
           <div style="background:var(--sky);border:1px solid var(--stone);border-radius:12px;padding:1rem;">
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.65rem;">
-              <span style="font-size:0.84rem;font-weight:800;color:var(--ink);">🤸 Nombre d'éléments gymniques du contrat (${gc.contrat}) validés :</span>
+              <span style="font-size:0.84rem;font-weight:800;color:var(--ink);">🤸 Contrat officiel ${gc.contrat} (Annexe 4) :</span>
               <span style="font-size:0.78rem;font-weight:700;color:var(--primary-dark);">Contrat complet = ${gc.totalElements} élém. → ${cfg.perfMax} / ${cfg.perfMax} pts</span>
+            </div>
+            <div style="font-size:0.76rem;color:var(--ink-soft);margin-bottom:0.65rem;line-height:1.4;">
+              • Remplacement d'une difficulté manquante par une inférieure = <strong>0,25 pt</strong> (une supérieure peut remplacer une inférieure).<br>
+              • ${isCollegeGym ? 'Composition : 3 familles (1,50 pt) + Qualité d\'enchaînement + Exécution (/2).' : `Composition : 4 familles × 0,40 (1,60 pt) + Série (G : 2 acrob. / F : 3 chorég. = 0,40 pt) + Exécution (/${gc.execMax}).`}<br>
+              • Exécution : analytique (-0,1 / -0,2 / -0,3 / chute -0,5) ou globale (1/1, 3/4, 1/2, 1/4, 0).
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;align-items:center;">
               <div>
@@ -3982,8 +4088,8 @@
                 </div>
               </div>
               <div>
-                <label for="inpDirectPerfScore" style="font-size:0.78rem;font-weight:700;display:block;margin-bottom:0.25rem;">Ou ajuster la Note Difficulté (/${cfg.perfMax} pts) :</label>
-                <input type="number" id="inpDirectPerfScore" class="cfg-input" min="0" max="${cfg.perfMax}" step="0.25" value="${cfg.perfMax - 1}" oninput="onDirectPerfScoreInput()">
+                <label for="inpDirectPerfScore" style="font-size:0.78rem;font-weight:700;display:block;margin-bottom:0.25rem;">Ou ajuster la Note Difficultés (/${cfg.perfMax} pts) :</label>
+                <input type="number" id="inpDirectPerfScore" class="cfg-input" min="0" max="${cfg.perfMax}" step="0.05" value="${cfg.perfMax - 1}" oninput="onDirectPerfScoreInput()">
               </div>
             </div>
           </div>
@@ -4262,7 +4368,7 @@
       }).join('');
 
       rowPts.innerHTML = ptsCells;
-      currentProcScore = roundQuarter(sumProc);
+      currentProcScore = roundScore100(sumProc);
       document.getElementById('badgeScoreProc').textContent = `${currentProcScore.toFixed(2)} / ${cfg.procMax} pts`;
     }
 
@@ -4854,7 +4960,7 @@
       const nom = String(document.getElementById('inpEditCritNom')?.value || '').trim();
       const pos = String(document.getElementById('inpEditCritPos')?.value || '').trim() || 'Acquis';
       const neg = String(document.getElementById('inpEditCritNeg')?.value || '').trim() || 'En cours';
-      const weight = Math.max(0, Math.min(12, roundQuarter(parseFloat(document.getElementById('inpEditCritWeight')?.value || 1.5) || 0)));
+      const weight = Math.max(0, Math.min(12, roundScore100(parseFloat(document.getElementById('inpEditCritWeight')?.value || 1.5) || 0)));
       if (!nom) {
         showToast('Veuillez saisir le nom du critère.');
         return;
@@ -5203,8 +5309,6 @@
       if (clsInp && document.activeElement !== clsInp) clsInp.value = currentClassName || 'Classe 1';
       const btnAdd = document.getElementById('btnAddRowClass');
       if (btnAdd) btnAdd.disabled = classStudents.length >= MAX_CLASS_STUDENTS;
-      const btnAddTop = document.getElementById('btnAddRowClassTop');
-      if (btnAddTop) btnAddTop.disabled = classStudents.length >= MAX_CLASS_STUDENTS;
 
       const titleEl = document.getElementById('classTitleApsNiveau');
       const subEl = document.getElementById('classSubtitleHint');
@@ -5228,9 +5332,9 @@
       if (cfg.isSpCo) {
         thead.innerHTML = `
           <tr>
-            <th rowspan="2" style="width:36px;">N°</th>
-            <th rowspan="2" style="min-width:155px;">Nom &amp; Prénom</th>
-            <th rowspan="2" style="width:54px;">Sexe</th>
+            <th rowspan="2" style="width:28px;">N°</th>
+            <th rowspan="2" style="min-width:110px;">Nom &amp; Prénom</th>
+            <th rowspan="2" style="width:42px;">Sexe</th>
             <th colspan="${critsIndiv.length + 1}" class="mega-hdr-indiv">
               1A. Capacité Individuelle (/${cfg.perfMax} pts)
               <button type="button" class="hdr-add-crit-btn" onclick="openAddCritModal('indiv')" title="Ajouter un critère individuel">+ Critère</button>
@@ -5239,69 +5343,66 @@
               1B. Capacité Collective (/${cfg.procMax} pts)
               <button type="button" class="hdr-add-crit-btn" onclick="openAddCritModal('proc')" title="Ajouter un critère collectif">+ Critère</button>
             </th>
-            <th rowspan="2" style="width:66px;">2. Conc.<br><span style="color:#A7F3D0;">/${cfg.concepMax}</span></th>
-            <th rowspan="2" style="width:66px;">3. Comp.<br><span style="color:#A7F3D0;">/${cfg.compMax}</span></th>
-            <th rowspan="2" style="width:82px;background:#3347D6;">TOTAL<br>NOTE /20</th>
-            <th rowspan="2" class="no-print-col" style="width:38px;">Suppr.</th>
+            <th rowspan="2" style="width:50px;">Conc.<br><span style="color:#A7F3D0;">/${cfg.concepMax}</span></th>
+            <th rowspan="2" style="width:50px;">Comp.<br><span style="color:#A7F3D0;">/${cfg.compMax}</span></th>
+            <th rowspan="2" style="width:66px;background:#3347D6;">TOTAL<br>/20</th>
+            <th rowspan="2" class="no-print-col" style="width:32px;">×</th>
           </tr>
           <tr>
             ${critsIndiv.map((c, idx) => `
               <th class="sub-hdr">
                 <div class="hdr-crit-top">
-                  <span>${escapeHtml(c.nom)} (${indWeights[idx]}pt)</span>
+                  <span>${escapeHtml(c.nom)} (${indWeights[idx]})</span>
                   <span class="hdr-crit-actions">
                     <button type="button" class="hdr-crit-btn" onclick="openEditSingleCritModal('indiv', ${idx})" title="Modifier ce critère">✎</button>
                     ${critsIndiv.length > 1 ? `<button type="button" class="hdr-crit-btn del" onclick="deleteSingleCriterion('indiv', ${idx})" title="Supprimer ce critère">×</button>` : ''}
                   </span>
                 </div>
-                <div style="font-size:0.63rem;color:#93C5FD;">[${escapeHtml(c.sous[0])} | ${escapeHtml(c.sous[1])}]</div>
               </th>
             `).join('')}
-            <th class="sub-hdr" style="width:62px;background:#1E3A8A;">Note<br>Indiv /${cfg.perfMax}</th>
+            <th class="sub-hdr" style="width:48px;background:#1E3A8A;">Indiv<br>/${cfg.perfMax}</th>
             ${critsProc.map((c, idx) => `
               <th class="sub-hdr">
                 <div class="hdr-crit-top">
-                  <span>${escapeHtml(c.nom)} (${procWeights[idx]}pt)</span>
+                  <span>${escapeHtml(c.nom)} (${procWeights[idx]})</span>
                   <span class="hdr-crit-actions">
                     <button type="button" class="hdr-crit-btn" onclick="openEditSingleCritModal('proc', ${idx})" title="Modifier ce critère">✎</button>
                     ${critsProc.length > 1 ? `<button type="button" class="hdr-crit-btn del" onclick="deleteSingleCriterion('proc', ${idx})" title="Supprimer ce critère">×</button>` : ''}
                   </span>
                 </div>
-                <div style="font-size:0.63rem;color:#6EE7B7;">[${escapeHtml(c.sous[0])} | ${escapeHtml(c.sous[1])}]</div>
               </th>
             `).join('')}
-            <th class="sub-hdr" style="width:62px;background:#065F46;">Note<br>Coll /${cfg.procMax}</th>
+            <th class="sub-hdr" style="width:48px;background:#065F46;">Coll<br>/${cfg.procMax}</th>
           </tr>
         `;
       } else {
         thead.innerHTML = `
           <tr>
-            <th rowspan="2" style="width:36px;">N°</th>
-            <th rowspan="2" style="min-width:155px;">Nom &amp; Prénom</th>
-            <th rowspan="2" style="width:54px;">Sexe</th>
-            <th rowspan="2" style="min-width:130px;">Perf. Brute<br><span style="color:#93C5FD;">(Barème G/F · ${escapeHtml(unitMeta.unit)})</span></th>
-            <th rowspan="2" style="width:74px;">1A. Note Perf<br><span style="color:#FCD34D;">/${cfg.perfMax} pts</span></th>
+            <th rowspan="2" style="width:28px;">N°</th>
+            <th rowspan="2" style="min-width:112px;">Nom &amp; Prénom</th>
+            <th rowspan="2" style="width:42px;">Sexe</th>
+            <th rowspan="2" style="min-width:98px;">Perf. Brute<br><span style="color:#93C5FD;">(G/F · ${escapeHtml(unitMeta.unit)})</span></th>
+            <th rowspan="2" style="width:58px;">1A. Perf<br><span style="color:#FCD34D;">/${cfg.perfMax}</span></th>
             <th colspan="${critsProc.length}">
               1B. ${escapeHtml(cfg.labelProc)} — ${critsProc.length} Critère${critsProc.length > 1 ? 's' : ''} (<span style="color:#93C5FD;">/${cfg.procMax} pts</span>)
               <button type="button" class="hdr-add-crit-btn" onclick="openAddCritModal('proc')" title="Ajouter un critère">+ Critère</button>
             </th>
-            <th rowspan="2" style="width:68px;">Note<br>Proc.<br><span style="color:#93C5FD;">/${cfg.procMax}</span></th>
-            <th rowspan="2" style="width:66px;">2. Conc.<br><span style="color:#A7F3D0;">/${cfg.concepMax}</span></th>
-            <th rowspan="2" style="width:66px;">3. Comp.<br><span style="color:#A7F3D0;">/${cfg.compMax}</span></th>
-            <th rowspan="2" style="width:82px;background:#3347D6;">TOTAL<br>NOTE /20</th>
-            <th rowspan="2" class="no-print-col" style="width:38px;">Suppr.</th>
+            <th rowspan="2" style="width:52px;">Proc.<br><span style="color:#93C5FD;">/${cfg.procMax}</span></th>
+            <th rowspan="2" style="width:50px;">Conc.<br><span style="color:#A7F3D0;">/${cfg.concepMax}</span></th>
+            <th rowspan="2" style="width:50px;">Comp.<br><span style="color:#A7F3D0;">/${cfg.compMax}</span></th>
+            <th rowspan="2" style="width:66px;background:#3347D6;">TOTAL<br>/20</th>
+            <th rowspan="2" class="no-print-col" style="width:32px;">×</th>
           </tr>
           <tr>
             ${critsProc.map((c, idx) => `
               <th class="sub-hdr">
                 <div class="hdr-crit-top">
-                  <span>${escapeHtml(c.nom)} (${procWeights[idx]}pt)</span>
+                  <span>${escapeHtml(c.nom)} (${procWeights[idx]})</span>
                   <span class="hdr-crit-actions">
                     <button type="button" class="hdr-crit-btn" onclick="openEditSingleCritModal('proc', ${idx})" title="Modifier ce critère">✎</button>
                     ${critsProc.length > 1 ? `<button type="button" class="hdr-crit-btn del" onclick="deleteSingleCriterion('proc', ${idx})" title="Supprimer ce critère">×</button>` : ''}
                   </span>
                 </div>
-                <div style="font-size:0.64rem;color:#CBD5E1;">[${escapeHtml(c.sous[0])} | ${escapeHtml(c.sous[1])}]</div>
               </th>
             `).join('')}
           </tr>
@@ -5382,7 +5483,7 @@
                 <div class="perf-bareme-mini is-${st.sexe === 'F' ? 'f' : 'g'}">${escapeHtml(baremeHint)}</div>
               </td>
               <td>
-                <input type="number" id="rowPerfScore_${rIdx}" class="row-input-num tabular-nums" min="0" max="${cfg.perfMax}" step="0.25" value="${Number(st.perfScore).toFixed(2)}" onchange="updateClassStudentField(${rIdx}, 'perfScore', this.value)">
+                <input type="number" id="rowPerfScore_${rIdx}" class="row-input-num tabular-nums" min="0" max="${cfg.perfMax}" step="0.05" value="${Number(st.perfScore).toFixed(2)}" onchange="updateClassStudentField(${rIdx}, 'perfScore', this.value)">
               </td>
               ${procCells}
               <td class="tabular-nums" style="font-weight:800;color:#1E40AF;background:#EFF6FF;">${scores.pProc.toFixed(2)}</td>
