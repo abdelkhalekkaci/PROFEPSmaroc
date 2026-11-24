@@ -238,42 +238,118 @@
       color: var(--primary);
     }
 
-    /* ═══ SECTION 1 : CONFIG UNIQUE (NIVEAU, APS, BARÈME, CRITÈRES, IMPORT EXCEL) ═══ */
-    .config-card {
-      background: var(--surface);
-      border: 1px solid var(--stone);
-      border-radius: var(--radius-lg);
-      padding: 1rem 1.25rem;
-      box-shadow: var(--shadow-sm);
-      margin-bottom: 0.95rem;
-    }
-    .config-grid {
+    /* ═══ WORKSPACE TOP : 2 COLONNES ÉQUILIBRÉES (GAUCHE INFOS/STATS/EXPORTS | DROITE CONFIG/PERSONNALISATION) ═══ */
+    .workspace-top-grid {
       display: grid;
-      grid-template-columns: 0.9fr 1.35fr 1.15fr auto auto;
+      grid-template-columns: 1.04fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      align-items: stretch;
+    }
+    @media (max-width: 1080px) {
+      .workspace-top-grid { grid-template-columns: 1fr; }
+    }
+    .dash-panel {
+      background: var(--surface);
+      border: 1.5px solid #CBD5E1;
+      border-radius: 16px;
+      padding: 1rem 1.15rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      min-width: 0;
+    }
+    .dash-panel-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding-bottom: 0.65rem;
+      border-bottom: 1px solid #E2E8F0;
+    }
+    .dash-panel-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--ink);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .dash-panel-sub {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+    .dash-config-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 0.75rem;
       align-items: end;
     }
-    @media (max-width: 1120px) {
-      .config-grid { grid-template-columns: 1fr 1fr; }
+    @media (max-width: 600px) {
+      .dash-config-fields { grid-template-columns: 1fr; }
     }
-    @media (max-width: 580px) {
-      .config-grid { grid-template-columns: 1fr; }
+    .note-main.is-indiv-mode .classe-only-el {
+      display: none !important;
+    }
+    .note-main.is-indiv-mode .cfg-group-bareme {
+      grid-column: 1 / -1;
+    }
+    .dash-action-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.55rem;
+    }
+    .dash-action-row .c-btn {
+      min-height: 40px;
+    }
+    .dash-action-reset {
+      margin-left: auto;
+    }
+    @media (max-width: 600px) {
+      .dash-action-reset { margin-left: 0; }
+    }
+    .dash-filter-zone {
+      margin-top: auto;
+      padding-top: 0.75rem;
+      border-top: 1px solid #E2E8F0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.48rem;
+    }
+    .dash-filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.55rem;
+    }
+    .dash-filter-row .class-search-input {
+      flex: 1 1 200px;
+      min-height: 38px;
+    }
+    .dash-filter-row .class-filter-select {
+      min-height: 38px;
     }
     .cfg-group label {
       display: block;
-      font-size: 0.8rem;
+      font-size: 0.74rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       color: var(--ink-soft);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.35rem;
     }
     .cfg-select, .cfg-input {
       width: 100%;
-      padding: 0.65rem 0.85rem;
+      min-height: 41px;
+      padding: 0.55rem 0.8rem;
       border: 1.5px solid #CBD5E1;
       border-radius: 10px;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       font-weight: 600;
       color: var(--ink);
       background: #FFFFFF;
@@ -308,28 +384,6 @@
       color: var(--primary-dark);
       box-shadow: 0 1px 4px rgba(0,0,0,0.08);
     }
-
-    /* ═══ SECTION 2 : DASHBOARD 2 COLONNES (OPTIONS CLASSE VS STATS + SR + EXPORTS) ═══ */
-    .classe-dashboard-grid {
-      display: grid;
-      grid-template-columns: 0.88fr 1.42fr;
-      gap: 0.95rem;
-      margin-bottom: 0.95rem;
-      align-items: stretch;
-    }
-    @media (max-width: 1060px) {
-      .classe-dashboard-grid { grid-template-columns: 1fr; }
-    }
-    .classe-dash-right {
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-      padding: 0.95rem 1.1rem;
-      background: var(--surface);
-      border: 1.5px solid #BFDBFE;
-      border-radius: 14px;
-      box-shadow: 0 4px 14px rgba(36, 52, 168, 0.06);
-    }
     @media (max-width: 640px) {
       #classSummaryStatsBar { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
     }
@@ -337,31 +391,27 @@
     /* ═══ SITUATION DE RÉFÉRENCE & BARÈME OFFICIEL BANNER ═══ */
     .sr-banner {
       margin-top: 0;
-      padding: 0.8rem 0.95rem;
+      padding: 0.85rem 0.95rem;
       background: linear-gradient(135deg, #EEF2FF 0%, #F8FAFC 100%);
       border: 1.5px solid #C7D2FE;
       border-radius: 12px;
-      display: grid;
-      grid-template-columns: 1.15fr 1fr;
-      gap: 0.85rem;
-      align-items: center;
-    }
-    @media (max-width: 860px) {
-      .sr-banner { grid-template-columns: 1fr; }
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
     }
     .sr-badge-row {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       gap: 0.45rem;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.35rem;
     }
     .sr-tag-op {
       background: #3347D6;
       color: #FFFFFF;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 800;
-      padding: 0.2rem 0.6rem;
+      padding: 0.2rem 0.55rem;
       border-radius: 6px;
       text-transform: uppercase;
       letter-spacing: 0.04em;
@@ -370,45 +420,47 @@
       background: #FFFFFF;
       color: #1E293B;
       border: 1px solid #CBD5E1;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
-      padding: 0.2rem 0.6rem;
+      padding: 0.2rem 0.55rem;
       border-radius: 6px;
     }
     .sr-title {
-      font-size: 0.96rem;
+      font-size: 0.9rem;
       font-weight: 800;
       color: var(--ink);
       margin-bottom: 0.2rem;
     }
     .sr-desc {
-      font-size: 0.85rem;
+      font-size: 0.79rem;
       color: var(--ink-soft);
-      line-height: 1.48;
+      line-height: 1.42;
     }
     .bareme-split-box {
       background: #FFFFFF;
       border: 1px solid #CBD5E1;
-      border-radius: 12px;
-      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      padding: 0.65rem 0.8rem;
     }
     .bareme-split-head {
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       color: var(--primary-dark);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.45rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 0.35rem;
     }
     .bareme-pills-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 0.4rem;
+      gap: 0.45rem;
     }
-    @media (max-width: 480px) {
+    @media (max-width: 520px) {
       .bareme-pills-grid { grid-template-columns: repeat(2, 1fr); }
     }
     .b-pill {
@@ -432,9 +484,10 @@
       text-overflow: ellipsis;
     }
     .b-pill-val {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 800;
       color: var(--ink);
+      font-variant-numeric: tabular-nums;
     }
     .b-pill.proc .b-pill-val {
       color: var(--primary-dark);
@@ -909,13 +962,13 @@
       white-space: nowrap;
     }
 
-    /* Section Exports compacte intégrée dans la colonne droite */
+    /* Section Exports compacte intégrée dans la colonne gauche */
     .class-export-card {
-      margin: 0;
-      padding: 0.68rem 0.9rem;
+      margin: auto 0 0 0;
+      padding: 0.72rem 0.9rem;
       background: linear-gradient(135deg, #EFF6FF 0%, #F8FAFC 100%);
       border: 1.5px solid #93C5FD;
-      border-radius: 11px;
+      border-radius: 12px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -924,13 +977,13 @@
     }
     .class-export-info h3 {
       margin: 0;
-      font-size: 0.86rem;
+      font-size: 0.85rem;
       font-weight: 800;
       color: #1E3A8A;
     }
     .class-export-info p {
       margin: 0.1rem 0 0;
-      font-size: 0.74rem;
+      font-size: 0.73rem;
       color: #334155;
     }
 
@@ -1743,10 +1796,14 @@
     html[data-theme="dark"] .crit-atelier-panel,
     html[data-theme="dark"] .table-quick-bar,
     html[data-theme="dark"] .table-footer-add-bar,
-    html[data-theme="dark"] .classe-dash-right {
+    html[data-theme="dark"] .dash-panel {
       background: #131E3A;
       border-color: #263558;
       color: #E8ECFA;
+    }
+    html[data-theme="dark"] .dash-panel-head,
+    html[data-theme="dark"] .dash-filter-zone {
+      border-color: #263558;
     }
     html[data-theme="dark"] .custom-bareme-item,
     html[data-theme="dark"] .crit-atelier-card,
@@ -1774,8 +1831,8 @@
 
     @media print {
       @page { size: A4 landscape; margin: 10mm; }
-      .peps-navbar, .note-hero, .mode-switcher, .config-card, .classe-dashboard-grid, .class-toolbar,
-      .classe-dash-right, .class-export-card, .footer, .seo-guide-card, .dynamic-guide-card,
+      .peps-navbar, .note-hero, .mode-switcher, .workspace-top-grid, .dash-panel,
+      .class-export-card, .footer, .seo-guide-card, .dynamic-guide-card,
       .excel-modal-backdrop, .peps-toast, .no-print-col,
       .crit-atelier-panel, .custom-bareme-drawer, .table-quick-bar,
       .table-footer-add-bar, .hdr-crit-actions, .hdr-add-crit-btn, #classSummaryStatsBar {
@@ -2256,85 +2313,189 @@
       </button>
     </div>
 
-    <!-- ═══ SECTION 1 : NIVEAU, APS, BARÈME, CRITÈRES & IMPORT EXCEL ═══ -->
-    <section class="config-card" aria-label="Paramètres officiels OP 2007 et 2009">
-      <div class="config-grid">
-        <div class="cfg-group">
-          <label for="selNiveau">🎓 Niveau Scolaire (OP 2009 / OP 2007)</label>
-          <select id="selNiveau" class="cfg-select" onchange="onConfigChange()">
-            <optgroup label="🏫 Cycle Collégial (OP 2009)">
-              <option value="1AC">1ère Année Collège (1AC)</option>
-              <option value="2AC">2ème Année Collège (2AC)</option>
-              <option value="3AC">3ème Année Collège (3AC)</option>
-            </optgroup>
-            <optgroup label="🎓 Cycle Secondaire Qualifiant (OP 2007)">
-              <option value="TC">Tronc Commun (TC)</option>
-              <option value="1AB">1ère Année Bac (1Bac)</option>
-              <option value="2AB" selected>2ème Année Bac (2Bac)</option>
-            </optgroup>
-          </select>
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         TABLEAU DE BORD UNIFIÉ EN 2 COLONNES :
+         GAUCHE : INFOS, STATS, SITUATION DE RÉFÉRENCE, BARÈME /20 & EXPORTS
+         DROITE : PERSONNALISATION (NIVEAU, APS, BARÈME, CRITÈRES, EXCEL & CLASSE)
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <section class="workspace-top-grid" aria-label="Tableau de bord, statistiques et personnalisation de la grille">
+      <!-- COLONNE GAUCHE : INFOS, STATS, SITUATION DE RÉFÉRENCE, BARÈME /20 & EXPORTS -->
+      <div class="dash-panel dash-info-col">
+        <div class="dash-panel-head">
+          <h2 class="dash-panel-title">📊 Infos, Statistiques &amp; Exports</h2>
+          <span class="sr-tag-op" id="srOpBadge">OP 2007 — 2ème Année Bac (2Bac)</span>
         </div>
 
-        <div class="cfg-group">
-          <label for="selAps">⚽ Activité Physique et Sportive (APS)</label>
-          <select id="selAps" class="cfg-select" onchange="onConfigChange()">
-            <optgroup label="🏃 Athlétisme (Barèmes Chiffrés OP)">
-              <option value="Course de durée" selected>⏱️ Course en durée / Course de durée (1000m G / 600m F)</option>
-              <option value="Course de vitesse">🏃 Course de vitesse (80m G / 60m F)</option>
-              <option value="Lancer de poids">💪 Lancer de poids (3kg / 4kg / 5kg)</option>
-              <option value="Saut en longueur">🦘 Saut en longueur</option>
-              <option value="Saut en hauteur">⬆️ Saut en hauteur</option>
-              <option value="Course de haies">🚧 Course de haies</option>
-              <option value="Course de relais">🏃‍♂️ Course de relais</option>
-            </optgroup>
-            <optgroup label="🤸 Gymnastique (Contrats A, B, C, D, E)">
-              <option value="Gymnastique">🤸 Gymnastique au sol</option>
-            </optgroup>
-            <optgroup label="🏆 Sports Collectifs (Individuel + Collectif)">
-              <option value="Handball">🤾 Handball</option>
-              <option value="Basketball">🏀 Basketball</option>
-              <option value="Football">⚽ Football</option>
-              <option value="Volleyball">🏐 Volleyball</option>
-              <option value="Rugby">🏉 Rugby</option>
-              <option value="Basketball 3x3">🏀 Basketball 3x3</option>
-            </optgroup>
-            <optgroup label="🏸 Sports de Renvoi">
-              <option value="Badminton">🏸 Badminton</option>
-              <option value="Tennis de table">🏓 Tennis de table</option>
-            </optgroup>
-          </select>
-        </div>
-
-        <div class="cfg-group">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
-            <label for="selCritMode" style="margin:0;">⚖️ Barème</label>
-            <button type="button" class="q-chip" id="btnToggleBaremeDrawer" onclick="toggleBaremeDrawer()" title="Ajuster les points de chaque critère" style="padding:0.15rem 0.5rem;font-size:0.71rem;">⚙️ Ajuster pts</button>
+        <!-- STATISTIQUES DE LA CLASSE (MODE CLASSE) -->
+        <div class="classe-only-el" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0.55rem;" id="classSummaryStatsBar">
+          <div style="background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.5rem 0.65rem;">
+            <div style="font-size:0.67rem;font-weight:700;color:#475569;text-transform:uppercase;">Moyenne Classe</div>
+            <div style="font-size:1.05rem;font-weight:800;color:#1E3A8A;font-variant-numeric:tabular-nums;" id="clsStatAvg">0.00 / 20</div>
           </div>
-          <select id="selCritMode" class="cfg-select" onchange="onConfigChange()">
-            <option value="strict" selected>Case 1 = Points max | Case 2 = 0 pt</option>
-            <option value="nuance">Case 1 = Points max | Case 2 = 0,5 pt</option>
-            <option value="custom">⚙️ Personnaliser (ajuster les points)...</option>
-          </select>
+          <div style="background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.5rem 0.65rem;">
+            <div style="font-size:0.67rem;font-weight:700;color:#475569;text-transform:uppercase;">Min / Max</div>
+            <div style="font-size:1.05rem;font-weight:800;color:#1D4ED8;font-variant-numeric:tabular-nums;" id="clsStatMinMax">—</div>
+          </div>
+          <div style="background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.5rem 0.65rem;">
+            <div style="font-size:0.67rem;font-weight:700;color:#475569;text-transform:uppercase;">Réussite (≥ 10)</div>
+            <div style="font-size:1.05rem;font-weight:800;color:#2434A8;font-variant-numeric:tabular-nums;" id="clsStatPassRate">0% (0/1)</div>
+          </div>
+          <div style="background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.5rem 0.65rem;">
+            <div style="font-size:0.67rem;font-weight:700;color:#475569;text-transform:uppercase;">Effectif (G / F)</div>
+            <div style="font-size:0.96rem;font-weight:800;color:#1E3A8A;font-variant-numeric:tabular-nums;" id="clsStatStatusCounts">1 (1 G · 0 F)</div>
+          </div>
         </div>
 
-        <div class="cfg-group">
-          <label for="btnToggleCritAtelier">✎ Critères</label>
-          <button type="button" class="c-btn" id="btnToggleCritAtelier" onclick="toggleCritAtelierPanel()" style="height:41px;">✎ Critères &amp; Poids</button>
+        <!-- SITUATION DE RÉFÉRENCE & BARÈME OFFICIEL /20 -->
+        <div class="sr-banner" id="srBanner">
+          <div>
+            <div class="sr-badge-row">
+              <span class="sr-tag-aps" id="srFamilleBadge">Athlétisme · Produit &amp; Processus</span>
+            </div>
+            <div class="sr-title" id="srTitleText">Situation de Référence (SR) : Courir 1000m (Garçons) / 600m (Filles)</div>
+            <div class="sr-desc" id="srDescText">Réaliser la meilleure performance possible sur une distance de 1000m (Garçons) ou 600m (Filles) en maintenant une allure régulière adaptée à sa VMA.</div>
+          </div>
+
+          <div class="bareme-split-box">
+            <div class="bareme-split-head">
+              <span>Barème Officiel /20</span>
+              <strong id="procTotalLabel">Procédural : 14 pts (7 + 7)</strong>
+            </div>
+            <div class="bareme-pills-grid">
+              <div class="b-pill proc">
+                <span class="b-pill-lbl" id="pillPerfLabel">1A. Performance</span>
+                <span class="b-pill-val" id="pillPerfMax">/ 7 pts</span>
+              </div>
+              <div class="b-pill proc">
+                <span class="b-pill-lbl" id="pillProcLabel">1B. Processus</span>
+                <span class="b-pill-val" id="pillProcMax">/ 7 pts</span>
+              </div>
+              <div class="b-pill">
+                <span class="b-pill-lbl">2. Conceptuel</span>
+                <span class="b-pill-val" id="pillConcepMax">/ 3 pts</span>
+              </div>
+              <div class="b-pill">
+                <span class="b-pill-lbl">3. Comportement</span>
+                <span class="b-pill-val" id="pillCompMax">/ 3 pts</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="cfg-group">
-          <label for="btnTriggerExcelImport">📥 Import Excel</label>
-          <input type="file" id="excelImportInput" accept=".xlsx,.xls,.csv,.txt" style="display:none;" onchange="handleExcelFileSelect(event)">
-          <button type="button" class="c-btn primary" id="btnTriggerExcelImport" onclick="triggerExcelImport()" style="height:41px;">📥 Importer Excel (Massar)</button>
+        <!-- BOUTONS EXPORTS (MODE CLASSE) -->
+        <div class="class-export-card classe-only-el" id="classExportSection" aria-label="Télécharger la grille">
+          <div class="class-export-info">
+            <h3>Exporter / Télécharger la Grille</h3>
+            <p>Grille complétée avec les notes ou grille brute vierge à imprimer.</p>
+          </div>
+          <div class="class-btn-group">
+            <button type="button" class="c-btn primary" onclick="openCompletedExportModal()">📥 Télécharger Grille Complétée</button>
+            <button type="button" class="c-btn" onclick="openBruteExportModal()">📋 Télécharger Grille Brute</button>
+          </div>
         </div>
       </div>
 
-      <!-- TIROIR AJUSTEMENT DU BARÈME EN POINTS -->
-      <div id="customBaremeDrawer" class="custom-bareme-drawer" style="display:none;"></div>
+      <!-- COLONNE DROITE : PERSONNALISATION DE LA GRILLE (NIVEAU, APS, BARÈME, CRITÈRES, EXCEL & FILTRES) -->
+      <div class="dash-panel dash-config-col">
+        <div class="dash-panel-head">
+          <div>
+            <h2 class="dash-panel-title">⚙️ Personnaliser la Grille</h2>
+            <div class="dash-panel-sub"><span id="classTitleApsNiveau">Course de durée (2Bac)</span></div>
+          </div>
+          <span class="save-status-note classe-only-el" id="saveStatusNote">Sauvegarde auto active</span>
+        </div>
 
-      <!-- ATELIER PERSONNALISATION DES CRITÈRES -->
-      <div id="critAtelierPanel" class="crit-atelier-panel" style="display:none;margin-top:0.85rem;margin-bottom:0;"></div>
+        <div class="dash-config-fields">
+          <div class="cfg-group">
+            <label for="selNiveau">🎓 Niveau Scolaire (OP 2009 / 2007)</label>
+            <select id="selNiveau" class="cfg-select" onchange="onConfigChange()">
+              <optgroup label="🏫 Cycle Collégial (OP 2009)">
+                <option value="1AC">1ère Année Collège (1AC)</option>
+                <option value="2AC">2ème Année Collège (2AC)</option>
+                <option value="3AC">3ème Année Collège (3AC)</option>
+              </optgroup>
+              <optgroup label="🎓 Cycle Secondaire Qualifiant (OP 2007)">
+                <option value="TC">Tronc Commun (TC)</option>
+                <option value="1AB">1ère Année Bac (1Bac)</option>
+                <option value="2AB" selected>2ème Année Bac (2Bac)</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div class="cfg-group">
+            <label for="selAps">⚽ Activité Physique (APS)</label>
+            <select id="selAps" class="cfg-select" onchange="onConfigChange()">
+              <optgroup label="🏃 Athlétisme (Barèmes Chiffrés OP)">
+                <option value="Course de durée" selected>⏱️ Course en durée / Course de durée (1000m G / 600m F)</option>
+                <option value="Course de vitesse">🏃 Course de vitesse (80m G / 60m F)</option>
+                <option value="Lancer de poids">💪 Lancer de poids (3kg / 4kg / 5kg)</option>
+                <option value="Saut en longueur">🦘 Saut en longueur</option>
+                <option value="Saut en hauteur">⬆️ Saut en hauteur</option>
+                <option value="Course de haies">🚧 Course de haies</option>
+                <option value="Course de relais">🏃‍♂️ Course de relais</option>
+              </optgroup>
+              <optgroup label="🤸 Gymnastique (Contrats A, B, C, D, E)">
+                <option value="Gymnastique">🤸 Gymnastique au sol</option>
+              </optgroup>
+              <optgroup label="🏆 Sports Collectifs (Individuel + Collectif)">
+                <option value="Handball">🤾 Handball</option>
+                <option value="Basketball">🏀 Basketball</option>
+                <option value="Football">⚽ Football</option>
+                <option value="Volleyball">🏐 Volleyball</option>
+                <option value="Rugby">🏉 Rugby</option>
+                <option value="Basketball 3x3">🏀 Basketball 3x3</option>
+              </optgroup>
+              <optgroup label="🏸 Sports de Renvoi">
+                <option value="Badminton">🏸 Badminton</option>
+                <option value="Tennis de table">🏓 Tennis de table</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div class="cfg-group cfg-group-bareme">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;margin-bottom:0.35rem;">
+              <label for="selCritMode" style="margin:0;">⚖️ Barème Critères</label>
+              <button type="button" class="q-chip" id="btnToggleBaremeDrawer" onclick="toggleBaremeDrawer()" title="Ajuster les points de chaque critère" style="padding:0.15rem 0.5rem;font-size:0.7rem;">⚙️ Ajuster pts</button>
+            </div>
+            <select id="selCritMode" class="cfg-select" onchange="onConfigChange()">
+              <option value="strict" selected>Case 1 = Points max | Case 2 = 0 pt</option>
+              <option value="nuance">Case 1 = Points max | Case 2 = 0,5 pt</option>
+              <option value="custom">⚙️ Personnaliser (ajuster les points)...</option>
+            </select>
+          </div>
+
+          <div class="cfg-group classe-only-el">
+            <label for="classNameInput">🏷️ Nom de la Classe</label>
+            <input type="text" id="classNameInput" class="cfg-input" value="Classe 1" placeholder="Ex: TCLSHF-1" onchange="onClassNameChange(this.value)">
+          </div>
+        </div>
+
+        <!-- BOUTONS D'ACTION : CRITÈRES, IMPORT EXCEL & RÉINITIALISER -->
+        <div class="dash-action-row">
+          <button type="button" class="c-btn" id="btnToggleCritAtelier" onclick="toggleCritAtelierPanel()">✎ Critères &amp; Poids</button>
+          <input type="file" id="excelImportInput" accept=".xlsx,.xls,.csv,.txt" style="display:none;" onchange="handleExcelFileSelect(event)">
+          <button type="button" class="c-btn primary classe-only-el" id="btnTriggerExcelImport" onclick="triggerExcelImport()">📥 Importer Excel (Massar)</button>
+          <button type="button" class="c-btn subtle classe-only-el dash-action-reset" id="btnResetClassData" onclick="confirmResetClassData()">Réinitialiser</button>
+        </div>
+
+        <!-- RECHERCHE & FILTRE CLASSE -->
+        <div class="dash-filter-zone classe-only-el">
+          <div class="dash-filter-row">
+            <input type="search" id="classSearchInput" class="class-search-input" placeholder="🔍 Rechercher un élève..." oninput="onClassFilterChange()">
+            <select id="classFilterSelect" class="class-filter-select" aria-label="Filtrer par genre" onchange="setClassFilter(this.value)">
+              <option value="ALL" selected>Tous les élèves</option>
+              <option value="G">Garçons (G)</option>
+              <option value="F">Filles (F)</option>
+            </select>
+          </div>
+          <p id="classSubtitleHint" style="font-size:0.75rem;color:var(--ink-muted);margin:0;">Importez votre liste Excel Massar ou saisissez vos élèves directement dans le tableau ci-dessous.</p>
+        </div>
+      </div>
     </section>
+
+    <!-- TIROIRS DÉPLIABLES PLEINE LARGEUR (AJUSTEMENT BARÈME & CRITÈRES) -->
+    <div id="customBaremeDrawer" class="custom-bareme-drawer" style="display:none;margin-top:0;margin-bottom:0.95rem;"></div>
+    <div id="critAtelierPanel" class="crit-atelier-panel" style="display:none;margin-bottom:0.95rem;"></div>
 
     <!-- ═══════════════════════════════════════════════════════════════════════
          MODE SECONDAIRE : ÉLÈVE (CALCULATEUR DÉTAILLÉ + GRILLE PROCESSUS)
@@ -2522,109 +2683,6 @@
          MODE PRINCIPAL : CLASSE (GRILLE INTERACTIVE JUSQU'À 50 ÉLÈVES + EXPORTS)
          ═══════════════════════════════════════════════════════════════════════ -->
     <section class="class-grid-section active" id="classeModeSection" aria-label="Grille d'évaluation de classe jusqu'à 50 élèves">
-      <!-- SECTION 2 EN 2 COLONNES : GAUCHE (NOM CLASSE & OPTIONS) | DROITE (STATS + SR + BARÈME /20 + EXPORTS) -->
-      <div class="classe-dashboard-grid">
-        <!-- COLONNE GAUCHE : NOM DE LA CLASSE, RECHERCHE & FILTRES -->
-        <div class="class-toolbar" style="margin-bottom:0;justify-content:space-between;">
-          <div>
-            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.55rem;margin-bottom:0.35rem;">
-              <h2 style="font-size:1.02rem;font-weight:800;color:var(--ink);margin:0;">Grille Classe — <span id="classTitleApsNiveau">Course de durée (2Bac)</span></h2>
-              <label class="class-name-pill" title="Nom de la classe (repris dans vos exports)">
-                <span>Classe :</span>
-                <input type="text" id="classNameInput" class="class-name-inline-input" value="Classe 1" placeholder="Ex: TCLSHF-1" onchange="onClassNameChange(this.value)">
-              </label>
-            </div>
-            <p id="classSubtitleHint" style="font-size:0.78rem;color:var(--ink-muted);margin:0;">Importez votre liste Excel Massar ou saisissez vos élèves directement dans le tableau.</p>
-          </div>
-
-          <div class="class-toolbar-sub">
-            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem;">
-              <input type="search" id="classSearchInput" class="class-search-input" placeholder="🔍 Rechercher un élève..." oninput="onClassFilterChange()">
-              <select id="classFilterSelect" class="class-filter-select" aria-label="Filtrer par genre" onchange="setClassFilter(this.value)">
-                <option value="ALL" selected>Tous les élèves</option>
-                <option value="G">Garçons (G)</option>
-                <option value="F">Filles (F)</option>
-              </select>
-            </div>
-            <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
-              <button type="button" class="c-btn subtle" id="btnResetClassData" onclick="confirmResetClassData()">Réinitialiser</button>
-              <span class="save-status-note" id="saveStatusNote">Sauvegarde auto active</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- COLONNE DROITE : STATS CLASSE + SITUATION DE RÉFÉRENCE + BARÈME /20 + BOUTONS EXPORTS -->
-        <div class="classe-dash-right">
-          <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0.55rem;" id="classSummaryStatsBar">
-            <div style="background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.5rem 0.65rem;">
-              <div style="font-size:0.67rem;font-weight:700;color:#475569;text-transform:uppercase;">Moyenne Classe</div>
-              <div style="font-size:1.05rem;font-weight:800;color:#1E3A8A;font-variant-numeric:tabular-nums;" id="clsStatAvg">0.00 / 20</div>
-            </div>
-            <div style="background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.5rem 0.65rem;">
-              <div style="font-size:0.67rem;font-weight:700;color:#475569;text-transform:uppercase;">Min / Max</div>
-              <div style="font-size:1.05rem;font-weight:800;color:#1D4ED8;font-variant-numeric:tabular-nums;" id="clsStatMinMax">—</div>
-            </div>
-            <div style="background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.5rem 0.65rem;">
-              <div style="font-size:0.67rem;font-weight:700;color:#475569;text-transform:uppercase;">Réussite (≥ 10)</div>
-              <div style="font-size:1.05rem;font-weight:800;color:#2434A8;font-variant-numeric:tabular-nums;" id="clsStatPassRate">0% (0/1)</div>
-            </div>
-            <div style="background:var(--surface);border:1.5px solid #BFDBFE;border-radius:10px;padding:0.5rem 0.65rem;">
-              <div style="font-size:0.67rem;font-weight:700;color:#475569;text-transform:uppercase;">Effectif (G / F)</div>
-              <div style="font-size:0.96rem;font-weight:800;color:#1E3A8A;font-variant-numeric:tabular-nums;" id="clsStatStatusCounts">1 (1 G · 0 F)</div>
-            </div>
-          </div>
-
-          <!-- SITUATION DE RÉFÉRENCE & BARÈME SUR /20 -->
-          <div class="sr-banner" id="srBanner">
-            <div>
-              <div class="sr-badge-row">
-                <span class="sr-tag-op" id="srOpBadge">OP 2007 — 2ème Année Bac (2Bac)</span>
-                <span class="sr-tag-aps" id="srFamilleBadge">Athlétisme · Produit &amp; Processus</span>
-              </div>
-              <div class="sr-title" id="srTitleText" style="font-size:0.88rem;">Situation de Référence (SR) : Courir 1000m (Garçons) / 600m (Filles)</div>
-              <div class="sr-desc" id="srDescText" style="font-size:0.78rem;line-height:1.38;">Réaliser la meilleure performance possible sur une distance de 1000m (Garçons) ou 600m (Filles) en maintenant une allure régulière adaptée à sa VMA.</div>
-            </div>
-
-            <div class="bareme-split-box" style="padding:0.6rem 0.75rem;">
-              <div class="bareme-split-head">
-                <span>Barème Officiel /20</span>
-                <strong id="procTotalLabel">Procédural : 14 pts (7 + 7)</strong>
-              </div>
-              <div class="bareme-pills-grid">
-                <div class="b-pill proc">
-                  <span class="b-pill-lbl" id="pillPerfLabel">1A. Performance</span>
-                  <span class="b-pill-val" id="pillPerfMax">/ 7 pts</span>
-                </div>
-                <div class="b-pill proc">
-                  <span class="b-pill-lbl" id="pillProcLabel">1B. Processus</span>
-                  <span class="b-pill-val" id="pillProcMax">/ 7 pts</span>
-                </div>
-                <div class="b-pill">
-                  <span class="b-pill-lbl">2. Conceptuel</span>
-                  <span class="b-pill-val" id="pillConcepMax">/ 3 pts</span>
-                </div>
-                <div class="b-pill">
-                  <span class="b-pill-lbl">3. Comportement</span>
-                  <span class="b-pill-val" id="pillCompMax">/ 3 pts</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- BOUTONS EXPORTS DANS LA CASE DE DROITE -->
-          <div class="class-export-card" id="classExportSection" aria-label="Télécharger la grille">
-            <div class="class-export-info">
-              <h3>Exporter / Télécharger la Grille</h3>
-              <p>Grille complétée avec les notes ou grille brute vierge à imprimer.</p>
-            </div>
-            <div class="class-btn-group">
-              <button type="button" class="c-btn primary" onclick="openCompletedExportModal()">📥 Télécharger Grille Complétée</button>
-              <button type="button" class="c-btn" onclick="openBruteExportModal()">📋 Télécharger Grille Brute</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div class="class-table-container" id="printableClassTableWrap">
         <div class="table-quick-bar">
           <span style="font-size:0.75rem;color:#475569;font-weight:600;">Cliquez sur <strong>✎</strong> ou <strong>×</strong> dans l'en-tête pour modifier/supprimer un critère.</span>
@@ -3653,6 +3711,7 @@
 
     function switchCalcMode(mode) {
       currentMode = mode;
+      document.querySelector('.note-main')?.classList.toggle('is-indiv-mode', mode === 'indiv');
       document.getElementById('btnModeIndiv').classList.toggle('active', mode === 'indiv');
       document.getElementById('btnModeClasse').classList.toggle('active', mode === 'classe');
       document.getElementById('indivModeSection').style.display = mode === 'indiv' ? 'block' : 'none';
