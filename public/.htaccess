@@ -8,12 +8,26 @@
   RewriteRule ^programme-eps\.html$ /programme-eps-maroc.html [R=301,L]
   RewriteRule ^cycles-eps\.html$ /cycles-eps-maroc.html [R=301,L]
   RewriteRule ^securite\.html$ /securite-eps.html [R=301,L]
+  RewriteRule ^concours-eps-maroc\.html$ /article-concours.html [R=301,L]
+  RewriteRule ^article-gestes-arbitres-volleyball\.html$ /reglement-volleyball-fivb-gestes-arbitrage-eps.html [R=301,L]
+  RewriteRule ^article-arbitrage-volleyball\.html$ /reglement-volleyball-fivb-gestes-arbitrage-eps.html [R=301,L]
+  RewriteRule ^article-seance\.html$ /article-structure-seance.html [R=301,L]
+  RewriteRule ^article-s(?:é|%C3%A9)ance\.html$ /article-structure-seance.html [R=301,L]
   RewriteCond %{HTTPS} off
   RewriteCond %{HTTP_HOST} ^(?:www\.)?profeps\.ma$ [NC]
   RewriteRule ^(.*)$ https://profeps.ma/$1 [R=301,L]
 </IfModule>
 <IfModule mod_headers.c>
   Header always unset X-Robots-Tag
+  <FilesMatch "^(cours-complet-legislation-scolaire-maroc-ens-fes-dr-najjari|module-fadeep-legislation-scolaire-organisation-administrative-maroc|guide-legislation-scolaire-ethique-profession-men-maroc|recueil-qcm-sciences-education-crmef-corriges-maroc)\.pdf$">
+    Header set Link "<https://profeps.ma/bibliotheque-sciences-education-crmef-pdf-maroc.html>; rel=\"canonical\""
+  </FilesMatch>
+  <FilesMatch "^decret-2-10-628-loi-30-09-eps-sport-scolaire-maroc-bo-5997\.pdf$">
+    Header set Link "<https://profeps.ma/deplacement-sport-scolaire-ass-frmss-ordre-mission-eps.html>; rel=\"canonical\""
+  </FilesMatch>
+  <FilesMatch "^statut-particulier-menps-decret-2-24-140-bo-7277\.pdf$">
+    Header set Link "<https://profeps.ma/ar-otour-hayat-tadris-darajat-ostad-mobarraz-statut-2024.html>; rel=\"canonical\""
+  </FilesMatch>
 </IfModule>
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json image/svg+xml
