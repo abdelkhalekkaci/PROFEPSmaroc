@@ -43,6 +43,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <!-- ═══ TAILWIND CSS CDN ═══ -->
     <link rel="stylesheet" href="/css/tailwind-precompiled.min.css?v=20261101">
@@ -136,8 +137,9 @@
         [data-tool-dir="rtl"] .vma-banner-vo2 { text-align: left; }
         [data-tool-dir="rtl"] table.custom-table tr.selected-row { border-left: none; border-right: 4px solid #0284c7; }
 
-        /* ═══ APPLICATION CONTAINER ═══ */
-        .calc-container { max-width: 1120px; margin: 0 auto; padding: 2rem 1rem 3.5rem; }
+        /* ═══ APPLICATION CONTAINER (UNIFIÉ 1200 PX) ═══ */
+        .calc-container, .peps-aligned-stack { max-width: 1200px; width: 100%; margin: 0 auto; padding: 2rem 1rem 2.5rem; }
+        .peps-aligned-stack { padding-top: 0; padding-bottom: 3rem; }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem; }
         @media (max-width: 868px) { .form-grid { grid-template-columns: 1fr; } }
         .card { background: white; border-radius: var(--radius-lg); border: 1px solid var(--border); box-shadow: var(--shadow-sm); padding: 1.4rem; }
@@ -212,34 +214,173 @@
         .table-card-training { border-top: 3px solid #2434A8 !important; }
         .table-card-matrix { border-top: 3px solid #059669 !important; }
         .table-card-paliers { border-top: 3px solid #0B7A99 !important; }
-        .table-header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+        .table-header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem; }
+        .table-actions-wrap { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
         .table-responsive { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-md); }
-        table.custom-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; text-align: left; font-variant-numeric: tabular-nums; }
-        table.custom-table th { background: var(--paper); padding: 0.65rem 0.75rem; font-weight: 700; color: #475569; border-bottom: 1px solid var(--border); white-space: nowrap; }
-        table.custom-table td { padding: 0.58rem 0.75rem; border-bottom: 1px solid var(--border-light); color: #1e293b; white-space: nowrap; }
+        table.custom-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; text-align: left; font-variant-numeric: tabular-nums; }
+        table.custom-table th { background: var(--paper); padding: 0.62rem 0.6rem; font-weight: 700; font-size: 0.78rem; line-height: 1.3; color: #334155; border-bottom: 1px solid var(--border); white-space: normal; }
+        table.custom-table td { padding: 0.54rem 0.6rem; border-bottom: 1px solid var(--border-light); color: #1e293b; white-space: nowrap; }
         table.custom-table tr:hover { background: var(--paper); }
         table.custom-table tr.selected-row { background: #eff6ff !important; font-weight: 700; border-left: 4px solid #0284c7; }
         .zone-pill { display: inline-block; padding: 0.18rem 0.5rem; border-radius: 4px; font-size: 0.72rem; font-weight: 700; }
         .badge-lap { color: #16a34a !important; font-weight: 700; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
         .badge-dist { color: #4338ca !important; font-weight: 700; }
         .badge-trs { background: #f1f5f9; padding: 3px 8px; border-radius: 6px; font-size: 0.8rem; color: #334155; font-weight: 600; }
-        .btn-print { background: var(--paper); color: #1e293b; border: 1px solid #cbd5e1; padding: 7px 14px; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s ease; }
-        .btn-print:hover { background: #f1f5f9; border-color: #94a3b8; transform: translateY(-1px); }
+        .btn-pdf-dl {
+            background: #2434A8;
+            color: #ffffff !important;
+            border: 1px solid #1e2b8f;
+            padding: 0.48rem 0.9rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+            min-height: 36px;
+            transition: transform 0.16s ease, background 0.16s ease, box-shadow 0.16s ease;
+        }
+        .btn-pdf-dl:hover { background: #1d2b92; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(36, 52, 168, 0.22); }
+        .btn-pdf-dl:focus-visible { outline: 2px solid #3347D6; outline-offset: 2px; }
 
-        /* ═══ GUIDE DIDACTIQUE & FAQ SEO ═══ */
-        .seo-guide-section { margin-top: 3rem; background: white; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-sm); }
-        .seo-guide-section h2 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; }
-        .seo-guide-section p { color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.25rem; }
-        .seo-faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.5rem; }
+        /* ═══ SCHÉMA DE PISTE INTERACTIF & CHRONOS TOUR PAR TOUR ═══ */
+        .track-card { border-top: 3px solid #D97706 !important; }
+        .track-controls-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+            padding: 0.85rem 1rem;
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 1.15rem;
+        }
+        .track-chip-row { display: flex; align-items: center; flex-wrap: wrap; gap: 0.4rem; }
+        .track-chip-label { font-size: 0.78rem; font-weight: 700; color: #334155; margin-right: 0.25rem; white-space: nowrap; }
+        .track-chip-btn {
+            background: #ffffff;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            padding: 0.34rem 0.7rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+            min-height: 34px;
+            font-variant-numeric: tabular-nums;
+            transition: all 0.16s ease;
+        }
+        .track-chip-btn:hover { border-color: #3347D6; color: #2434A8; background: #eef2ff; }
+        .track-chip-btn.active { background: #2434A8; color: #ffffff; border-color: #2434A8; font-weight: 700; }
+        .track-chip-btn.pct-chip.active { background: #059669; border-color: #059669; color: #ffffff; }
+        .track-stage-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 1.15rem; align-items: stretch; }
+        @media (max-width: 960px) { .track-stage-grid { grid-template-columns: 1fr; } }
+        .track-svg-panel {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 0.65rem;
+        }
+        .track-svg-wrap { width: 100%; display: flex; align-items: center; justify-content: center; }
+        .track-svg-wrap svg { width: 100%; height: auto; max-height: 330px; display: block; }
+        .track-checkpoints-strip {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.45rem;
+            font-variant-numeric: tabular-nums;
+        }
+        @media (max-width: 560px) { .track-checkpoints-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        .track-cp-item {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.45rem 0.6rem;
+            text-align: center;
+        }
+        .track-cp-tag { font-size: 0.7rem; font-weight: 700; color: #64748b; }
+        .track-cp-dist { font-size: 0.82rem; font-weight: 800; color: #0f172a; margin-top: 0.1rem; }
+        .track-cp-time { font-size: 0.82rem; font-weight: 700; color: #2434A8; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+        .track-laps-panel {
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+        }
+        .track-laps-panel-head {
+            padding: 0.65rem 0.85rem;
+            background: #f8fafc;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #0f172a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .track-laps-scroll { max-height: 340px; overflow-y: auto; }
+        .track-laps-scroll table.custom-table th { position: sticky; top: 0; z-index: 2; background: #f1f5f9; }
+        .track-lap-partial { background: #f0fdf4 !important; font-weight: 700; }
+
+        /* ═══ GUIDE DIDACTIQUE, TABLES STATIQUES & BAS DE PAGE ALIGNÉS 1200PX ═══ */
+        .seo-guide-section { margin-top: 2.25rem; background: white; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem; box-shadow: var(--shadow-sm); }
+        .seo-guide-section h2 { font-family: var(--font-display); font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; }
+        .seo-guide-section > p { color: var(--text-secondary); line-height: 1.65; margin-bottom: 1.25rem; }
+        .seo-faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.15rem; margin-top: 1.25rem; }
         @media (max-width: 768px) { .seo-faq-grid { grid-template-columns: 1fr; } }
-        .faq-item { background: var(--paper); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 1.25rem; }
-        .faq-item h3 { font-size: 0.98rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; }
-        .faq-item p { font-size: 0.875rem; color: #475569; line-height: 1.6; margin: 0; }
+        .faq-item { background: var(--paper); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 1.15rem; }
+        .faq-item h3 { font-size: 0.96rem; font-weight: 700; color: var(--primary); margin-bottom: 0.45rem; }
+        .faq-item p { font-size: 0.87rem; color: #475569; line-height: 1.6; margin: 0; }
+        .static-ref-block { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; }
+        .static-ref-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+        .static-ref-head h3 { font-size: 1.1rem; font-weight: 800; color: #0f172a; margin: 0 0 0.3rem 0; line-height: 1.35; }
+        .static-ref-head p { font-size: 0.86rem; color: #475569; margin: 0; line-height: 1.55; max-width: 920px; }
+
+        .fiche-zone2-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.75rem; padding-top: 0.25rem; }
+        @media (max-width: 1024px) { .fiche-zone2-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (max-width: 600px) { .fiche-zone2-grid { grid-template-columns: 1fr; } }
+        .peps-mesh-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.7rem; }
+        @media (max-width: 960px) { .peps-mesh-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (max-width: 560px) { .peps-mesh-grid { grid-template-columns: 1fr; } }
+
+        [data-theme="dark"] .track-controls-bar,
+        [data-theme="dark"] .track-svg-panel,
+        [data-theme="dark"] .track-cp-item,
+        [data-theme="dark"] .track-laps-panel-head { background: #131E3A; border-color: #263558; color: #E8ECFA; }
+        [data-theme="dark"] .track-chip-btn { background: #0f172a; border-color: #334155; color: #E2E8F0; }
+        [data-theme="dark"] .track-chip-btn.active { background: #3347D6; border-color: #4f63e8; color: #ffffff; }
+        [data-theme="dark"] .track-cp-dist { color: #f8fafc; }
+        [data-theme="dark"] .track-cp-time { color: #93A8FF; }
+        [data-theme="dark"] .track-laps-panel { background: #0f172a; border-color: #263558; }
 
         @media print {
-            .navbar, .vma-hero, .form-grid, .btn-calc-main, .seo-guide-section, .footer, .btn-print, .peps-lang-bar, #pepsNavbar, #peps-embed-backlink-box, .peps-related-mesh, #profeps-crmef-urgency-banner { display: none !important; }
+            .navbar, .vma-hero, .form-grid, .btn-calc-main, .footer, .btn-pdf-dl, .peps-lang-bar, #pepsNavbar, .peps-aligned-stack, #profeps-crmef-urgency-banner, #fiche-pedagogique-officielle { display: none !important; }
+            body:not(.printing-single-table) .seo-guide-section { display: none !important; }
+            body.printing-single-table * { visibility: hidden !important; }
+            body.printing-single-table .pdf-print-target,
+            body.printing-single-table .pdf-print-target * { visibility: visible !important; }
+            body.printing-single-table .pdf-print-target { display: block !important; position: absolute !important; left: 0 !important; top: 0 !important; width: 100% !important; border: none !important; box-shadow: none !important; background: #ffffff !important; }
+            body.printing-single-table .pdf-print-target .table-responsive,
+            body.printing-single-table .pdf-print-target .track-laps-scroll { overflow: visible !important; max-height: none !important; }
+            body.printing-single-table .pdf-print-target table { display: table !important; width: 100% !important; }
+            body.printing-single-table .pdf-print-target thead { display: table-header-group !important; }
+            body.printing-single-table .pdf-print-target tbody { display: table-row-group !important; }
+            body.printing-single-table .pdf-print-target tr { display: table-row !important; }
+            body.printing-single-table .pdf-print-target th,
+            body.printing-single-table .pdf-print-target td { display: table-cell !important; }
             #results-wrapper { display: block !important; margin: 0; }
-            body { background: white; color: black; font-size: 10.5pt; }
+            body { background: white; color: black; font-size: 10pt; }
             .card, .table-card { border: 1px solid #000; box-shadow: none; break-inside: avoid; }
         }
     </style>
@@ -1021,8 +1162,139 @@
                 </div>
             </div>
 
+            <!-- 2b. SCHÉMA DE PISTE INTERACTIF & CHRONOS TOUR PAR TOUR -->
+            <div class="table-card track-card" id="cardTrackVisualizer">
+                <div class="table-header-flex">
+                    <div>
+                        <h3 style="font-size:1.05rem; font-weight:700; color:#0f172a;" data-i18n="trackVizTitle">🏟️ Schéma de Piste de Course &amp; Chronos Tour par Tour</h3>
+                        <p style="font-size:0.8rem; color:var(--text-light); margin-top:0.15rem;" data-i18n="trackVizSubtitle">
+                            Visualisez les balises de passage (25%, 50%, 75%, 100%) et les temps de chaque tour selon la distance, le seuil % VMA et le groupe de VMA choisi.
+                        </p>
+                    </div>
+                    <div class="table-actions-wrap">
+                        <button type="button" class="btn-pdf-dl" onclick="exportTableToPdf('cardTrackVisualizer', 'chronos-piste-tour-par-tour')">
+                            <span data-i18n="btnDownloadPdf">📄 Télécharger PDF</span>
+                        </button>
+                        <span style="font-size:0.78rem; font-weight:700; background:#fffbeb; border:1px solid #fde68a; padding:0.35rem 0.75rem; border-radius:6px; color:#92400e;" id="resTrackVizBadge">
+                            Piste : 250m · 13.5 km/h · 90%
+                        </span>
+                    </div>
+                </div>
+
+                <div class="track-controls-bar">
+                    <div class="track-chip-row">
+                        <span class="track-chip-label" data-i18n="lblTrackGroup">Groupe de VMA :</span>
+                        <div id="trackGroupButtons" style="display:flex;flex-wrap:wrap;gap:0.35rem;"></div>
+                    </div>
+                    <div class="track-chip-row">
+                        <span class="track-chip-label" data-i18n="lblTrackPct">Seuil % VMA :</span>
+                        <div id="trackPctButtons" style="display:flex;flex-wrap:wrap;gap:0.35rem;"></div>
+                    </div>
+                </div>
+
+                <div class="track-stage-grid">
+                    <div class="track-svg-panel">
+                        <div class="track-svg-wrap">
+                            <svg id="vmaTrackSvg" viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schéma interactif de piste de course VMA">
+                                <!-- Outer stadium surface -->
+                                <rect x="8" y="8" width="664" height="324" rx="22" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1.5"/>
+                                <!-- Running track outer & inner terracotta ring -->
+                                <rect x="44" y="38" width="592" height="264" rx="132" fill="#c2410c" stroke="#9a3412" stroke-width="2"/>
+                                <!-- Middle lane dashes -->
+                                <rect x="66" y="60" width="548" height="220" rx="110" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.5" stroke-dasharray="8 6"/>
+                                <!-- Inner green infield -->
+                                <rect x="88" y="82" width="504" height="176" rx="88" fill="#ecfdf5" stroke="#ffffff" stroke-width="2.5"/>
+                                <rect x="95" y="89" width="490" height="162" rx="81" fill="none" stroke="#a7f3d0" stroke-width="1" stroke-dasharray="4 4"/>
+
+                                <!-- Direction arrows (counter-clockwise) -->
+                                <path d="M 275 49 L 255 49 M 263 43 L 253 49 L 263 55" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M 405 291 L 425 291 M 417 285 L 427 291 L 417 297" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+
+                                <!-- Start / Finish Line at Top Center (0% / 100%) -->
+                                <line x1="340" y1="38" x2="340" y2="82" stroke="#ffffff" stroke-width="5"/>
+                                <line x1="340" y1="38" x2="340" y2="82" stroke="#059669" stroke-width="2.5" stroke-dasharray="4 4"/>
+                                <circle cx="340" cy="60" r="8" fill="#059669" stroke="#ffffff" stroke-width="2"/>
+                                <rect x="266" y="10" width="148" height="32" rx="7" fill="#065f46" stroke="#ffffff" stroke-width="1.5"/>
+                                <text id="svgCp100Dist" x="340" y="23" text-anchor="middle" fill="#ffffff" font-size="10.5" font-weight="800" font-family="Inter, sans-serif">0 / 250 m (Tour)</text>
+                                <text id="svgCp100Time" x="340" y="36" text-anchor="middle" fill="#a7f3d0" font-size="10.5" font-weight="700" font-family="monospace">1m 14s</text>
+
+                                <!-- Checkpoint 25% (Left Apex) -->
+                                <line x1="44" y1="170" x2="88" y2="170" stroke="#fef3c7" stroke-width="2.5" stroke-dasharray="3 3"/>
+                                <circle cx="66" cy="170" r="7.5" fill="#d97706" stroke="#ffffff" stroke-width="2"/>
+                                <rect x="14" y="182" width="108" height="32" rx="7" fill="#ffffff" stroke="#d97706" stroke-width="1.5"/>
+                                <text id="svgCp25Dist" x="68" y="195" text-anchor="middle" fill="#0f172a" font-size="10" font-weight="800" font-family="Inter, sans-serif">25% · 63 m</text>
+                                <text id="svgCp25Time" x="68" y="208" text-anchor="middle" fill="#b45309" font-size="10.5" font-weight="700" font-family="monospace">18.5s</text>
+
+                                <!-- Checkpoint 50% (Bottom Center) -->
+                                <line x1="340" y1="258" x2="340" y2="302" stroke="#dbeafe" stroke-width="2.5" stroke-dasharray="3 3"/>
+                                <circle cx="340" cy="280" r="7.5" fill="#2434A8" stroke="#ffffff" stroke-width="2"/>
+                                <rect x="275" y="294" width="130" height="32" rx="7" fill="#ffffff" stroke="#2434A8" stroke-width="1.5"/>
+                                <text id="svgCp50Dist" x="340" y="307" text-anchor="middle" fill="#0f172a" font-size="10" font-weight="800" font-family="Inter, sans-serif">50% · 125 m</text>
+                                <text id="svgCp50Time" x="340" y="320" text-anchor="middle" fill="#2434A8" font-size="10.5" font-weight="700" font-family="monospace">37.0s</text>
+
+                                <!-- Checkpoint 75% (Right Apex) -->
+                                <line x1="592" y1="170" x2="636" y2="170" stroke="#cffafe" stroke-width="2.5" stroke-dasharray="3 3"/>
+                                <circle cx="614" cy="170" r="7.5" fill="#0B7A99" stroke="#ffffff" stroke-width="2"/>
+                                <rect x="558" y="182" width="108" height="32" rx="7" fill="#ffffff" stroke="#0B7A99" stroke-width="1.5"/>
+                                <text id="svgCp75Dist" x="612" y="195" text-anchor="middle" fill="#0f172a" font-size="10" font-weight="800" font-family="Inter, sans-serif">75% · 188 m</text>
+                                <text id="svgCp75Time" x="612" y="208" text-anchor="middle" fill="#085E77" font-size="10.5" font-weight="700" font-family="monospace">55.6s</text>
+
+                                <!-- Center Infield Readout -->
+                                <text id="svgInfieldTitle" x="340" y="138" text-anchor="middle" fill="#065f46" font-size="12" font-weight="700" font-family="Inter, sans-serif">Piste 250 m · Groupe 13.5 km/h (90% VMA)</text>
+                                <text id="svgInfieldSpeed" x="340" y="172" text-anchor="middle" fill="#0f172a" font-size="23" font-weight="800" font-family="Plus Jakarta Sans, Inter, sans-serif">12.2 km/h · 1m 14s / tour</text>
+                                <text id="svgInfieldTotal" x="340" y="198" text-anchor="middle" fill="#334155" font-size="11.5" font-weight="600" font-family="Inter, sans-serif">Allure 4:56 /km · 12 min : 2 430 m (9 tours + 180 m)</text>
+                                <text id="svgInfieldHint" x="340" y="222" text-anchor="middle" fill="#059669" font-size="11" font-weight="700" font-family="Inter, sans-serif">Départ · Sens anti-horaire · 4 balises de passage</text>
+                            </svg>
+                        </div>
+
+                        <div class="track-checkpoints-strip">
+                            <div class="track-cp-item">
+                                <div class="track-cp-tag" data-i18n="cpTag25">Plot 25%</div>
+                                <div class="track-cp-dist" id="cpDist25">63 m</div>
+                                <div class="track-cp-time" id="cpTime25">18.5s</div>
+                            </div>
+                            <div class="track-cp-item">
+                                <div class="track-cp-tag" data-i18n="cpTag50">Mi-tour 50%</div>
+                                <div class="track-cp-dist" id="cpDist50">125 m</div>
+                                <div class="track-cp-time" id="cpTime50">37.0s</div>
+                            </div>
+                            <div class="track-cp-item">
+                                <div class="track-cp-tag" data-i18n="cpTag75">Plot 75%</div>
+                                <div class="track-cp-dist" id="cpDist75">188 m</div>
+                                <div class="track-cp-time" id="cpTime75">55.6s</div>
+                            </div>
+                            <div class="track-cp-item">
+                                <div class="track-cp-tag" data-i18n="cpTag100">Tour 100%</div>
+                                <div class="track-cp-dist" id="cpDist100">250 m</div>
+                                <div class="track-cp-time" id="cpTime100">1:14</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="track-laps-panel">
+                        <div class="track-laps-panel-head">
+                            <span data-i18n="trackLapsHeading">⏱️ Chronos Tour par Tour</span>
+                            <span id="trackLapsSummaryBadge" style="color:#2434A8;font-variant-numeric:tabular-nums;">9 tours + 180 m</span>
+                        </div>
+                        <div class="track-laps-scroll">
+                            <table class="custom-table" id="tableTrackLaps">
+                                <thead>
+                                    <tr>
+                                        <th data-i18n="thLapNum">Tour</th>
+                                        <th data-i18n="thLapDistCum">Dist. Cumulée</th>
+                                        <th data-i18n="thLapSplit">Temps / Tour</th>
+                                        <th data-i18n="thLapCumTime">Chrono Cumulé</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyTrackLaps"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- TABLEAU 1 : ENTRAÎNEMENT & ALLURES -->
-            <div class="table-card table-card-training">
+            <div class="table-card table-card-training" id="cardTrainingTable">
                 <div class="table-header-flex">
                     <div>
                         <h3 style="font-size:1.05rem; font-weight:700; color:#0f172a;" data-i18n="tableTitle">🏃 Tableau d'Entraînement &amp; Temps de Passage</h3>
@@ -1030,9 +1302,9 @@
                             Repères de 50% à 130% VMA pour calibrer vos séances d'endurance, seuil et fractionné.
                         </p>
                     </div>
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                        <button type="button" class="btn-print" onclick="window.print()">
-                            <span data-i18n="btnPrint">🖨️ Imprimer la grille</span>
+                    <div class="table-actions-wrap">
+                        <button type="button" class="btn-pdf-dl" onclick="exportTableToPdf('cardTrainingTable', 'tableau-entrainement-vma')">
+                            <span data-i18n="btnDownloadPdf">📄 Télécharger PDF</span>
                         </button>
                         <span style="font-size:0.78rem; font-weight:700; background:#f1f5f9; padding:0.35rem 0.75rem; border-radius:6px; color:#475569;" id="resTableBadge">
                             Piste : 250m · Durée : 12 min
@@ -1068,9 +1340,9 @@
                             Temps de passage exacts de 60% à 120% de votre VMA sur toutes les distances classiques d'entraînement et de compétition.
                         </p>
                     </div>
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                        <button type="button" class="btn-print" onclick="window.print()">
-                            <span data-i18n="btnPrintMatrix">🖨️ Imprimer le tableau</span>
+                    <div class="table-actions-wrap">
+                        <button type="button" class="btn-pdf-dl" onclick="exportTableToPdf('cardMatrixPct', 'matrice-pourcentage-vma-distances')">
+                            <span data-i18n="btnDownloadPdf">📄 Télécharger PDF</span>
                         </button>
                         <span style="font-size:0.78rem; font-weight:700; background:#ecfdf5; border:1px solid #a7f3d0; padding:0.35rem 0.75rem; border-radius:6px; color:#065f46;" id="resMatrixBadge">
                             VMA : 13.5 km/h
@@ -1109,9 +1381,9 @@
                             Vitesses officielles, nombre d'aller-retours 20m par palier et repères étalonnés sur votre piste et durée.
                         </p>
                     </div>
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                        <button type="button" class="btn-print" onclick="window.print()">
-                            <span data-i18n="btnPrintPaliers">🖨️ Imprimer les 21 Paliers</span>
+                    <div class="table-actions-wrap">
+                        <button type="button" class="btn-pdf-dl" onclick="exportTableToPdf('cardPaliersRecap', 'tableau-paliers-luc-leger-vameval')">
+                            <span data-i18n="btnDownloadPdf">📄 Télécharger PDF</span>
                         </button>
                         <span style="font-size:0.78rem; font-weight:700; background:#f0f9ff; border:1px solid #bae6fd; padding:0.35rem 0.75rem; border-radius:6px; color:#0369a1;" id="resPaliersBadge">
                             Piste : 250m · Durée : 12 min · Allure : 90% VMA
@@ -1177,11 +1449,18 @@
             </div>
 
             <!-- TABLEAU A : TEST NAVETTE LUC LÉGER COMPLET (PALIERS 1 À 21 & ALLER-RETOURS 20M) -->
-            <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid #e2e8f0;">
-                <h3 style="font-size:1.15rem;font-weight:800;color:#0f172a;margin-bottom:0.5rem;" data-i18n="staticLucHeading">🏃 Tableau Complet Test Navette Luc Léger (Paliers 1 à 21 · Aller-Retours 20m)</h3>
-                <p style="font-size:0.88rem;color:#475569;margin-bottom:0.9rem;" data-i18n="staticLucDesc">
-                    Référentiel complet du test navette de Luc Léger (20 mètres / <em>20m Beep Test</em>) indiquant pour chaque palier (1 à 21) la vitesse officielle, la durée cumulée, le nombre d'aller-retours sur 20m, le cumul des navettes et la distance totale parcourue.
-                </p>
+            <div class="static-ref-block" id="cardStaticLuc">
+                <div class="static-ref-head">
+                    <div>
+                        <h3 data-i18n="staticLucHeading">🏃 Tableau Complet Test Navette Luc Léger (Paliers 1 à 21 · Aller-Retours 20m)</h3>
+                        <p data-i18n="staticLucDesc">
+                            Référentiel complet du test navette de Luc Léger (20 mètres / <em>20m Beep Test</em>) indiquant pour chaque palier (1 à 21) la vitesse officielle, la durée cumulée, le nombre d'aller-retours sur 20m, le cumul des navettes et la distance totale parcourue.
+                        </p>
+                    </div>
+                    <button type="button" class="btn-pdf-dl" onclick="exportTableToPdf('cardStaticLuc', 'tableau-luc-leger-20m-paliers-1-21')">
+                        <span data-i18n="btnDownloadPdf">📄 Télécharger PDF</span>
+                    </button>
+                </div>
                 <div class="table-responsive">
                     <table class="custom-table">
                         <thead>
@@ -1222,12 +1501,73 @@
                 </div>
             </div>
 
-            <!-- TABLEAU B : REPERES POURCENTAGE VMA x TEMPS x DISTANCES -->
-            <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid #e2e8f0;">
-                <h3 style="font-size:1.15rem;font-weight:800;color:#0f172a;margin-bottom:0.5rem;" data-i18n="staticMatrixHeading">⏱️ Tableau Pourcentage VMA × Temps × Distances (VMA 10 à 20 km/h)</h3>
-                <p style="font-size:0.88rem;color:#475569;margin-bottom:0.9rem;" data-i18n="staticMatrixDesc">
-                    Temps de passage théoriques sur piste (200m, 400m, 1000m, 1500m) à <strong>100% VMA</strong>, et projection de référence sur <strong>5 km (90% VMA)</strong> et <strong>10 km (85% VMA)</strong>. Utilisez le calculateur ci-dessus pour générer votre propre matrice complète de 60% à 120%.
-                </p>
+            <!-- TABLEAU B : TEST VAMEVAL COMPLET (PALIERS 1 À 22 · PLOTS 20M) -->
+            <div class="static-ref-block" id="cardStaticVameval">
+                <div class="static-ref-head">
+                    <div>
+                        <h3 data-i18n="staticVamevalHeading">🔄 Tableau Complet Test VAMEVAL (Paliers 1 à 22 · Piste Balisée tous les 20 m)</h3>
+                        <p data-i18n="staticVamevalDesc">
+                            Protocole progressif continu sur piste avec plots espacés de 20 mètres (+0,5 km/h chaque minute de 8,5 à 19,0 km/h) : temps exact entre deux plots, distance par palier, cumul et VO₂max estimée.
+                        </p>
+                    </div>
+                    <button type="button" class="btn-pdf-dl" onclick="exportTableToPdf('cardStaticVameval', 'tableau-vameval-paliers-1-22')">
+                        <span data-i18n="btnDownloadPdf">📄 Télécharger PDF</span>
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Palier</th>
+                                <th>Durée cumulée</th>
+                                <th>Vitesse VMA</th>
+                                <th>Temps / plot (20 m)</th>
+                                <th>Distance palier (1 min)</th>
+                                <th>Distance cumulée</th>
+                                <th>VO₂max estimée</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Palier 1</strong></td><td>1 min</td><td>8,5 km/h</td><td>8,47 s</td><td>142 m</td><td>142 m</td><td>29,8 ml/kg/min</td></tr>
+                            <tr><td><strong>Palier 2</strong></td><td>2 min</td><td>9,0 km/h</td><td>8,00 s</td><td>150 m</td><td>292 m</td><td>31,5 ml/kg/min</td></tr>
+                            <tr><td><strong>Palier 3</strong></td><td>3 min</td><td>9,5 km/h</td><td>7,58 s</td><td>158 m</td><td>450 m</td><td>33,3 ml/kg/min</td></tr>
+                            <tr><td><strong>Palier 4</strong></td><td>4 min</td><td>10,0 km/h</td><td>7,20 s</td><td>167 m</td><td>617 m</td><td>35,0 ml/kg/min</td></tr>
+                            <tr><td><strong>Palier 5</strong></td><td>5 min</td><td>10,5 km/h</td><td>6,86 s</td><td>175 m</td><td>792 m</td><td>36,8 ml/kg/min</td></tr>
+                            <tr><td><strong>Palier 6</strong></td><td>6 min</td><td>11,0 km/h</td><td>6,55 s</td><td>183 m</td><td>975 m</td><td>38,5 ml/kg/min</td></tr>
+                            <tr><td><strong>Palier 7</strong></td><td>7 min</td><td>11,5 km/h</td><td>6,26 s</td><td>192 m</td><td>1 167 m</td><td>40,3 ml/kg/min</td></tr>
+                            <tr><td><strong>Palier 8</strong></td><td>8 min</td><td>12,0 km/h</td><td>6,00 s</td><td>200 m</td><td>1 367 m</td><td>42,0 ml/kg/min</td></tr>
+                            <tr><td><strong>Palier 9</strong></td><td>9 min</td><td>12,5 km/h</td><td>5,76 s</td><td>208 m</td><td>1 575 m</td><td>43,8 ml/kg/min</td></tr>
+                            <tr><td><strong>Palier 10</strong></td><td>10 min</td><td>13,0 km/h</td><td>5,54 s</td><td>217 m</td><td>1 792 m</td><td>45,5 ml/kg/min</td></tr>
+                            <tr><td><strong>Palier 11</strong></td><td>11 min</td><td>13,5 km/h</td><td>5,33 s</td><td>225 m</td><td>2 017 m</td><td>47,3 ml/kg/min</td></tr>
+                            <tr><td><strong>Palier 12</strong></td><td>12 min</td><td>14,0 km/h</td><td>5,14 s</td><td>233 m</td><td>2 250 m</td><td>49,0 ml/kg/min</td></tr>
+                            <tr><td><strong>Palier 13</strong></td><td>13 min</td><td>14,5 km/h</td><td>4,97 s</td><td>242 m</td><td>2 492 m</td><td>50,8 ml/kg/min</td></tr>
+                            <tr><td><strong>Palier 14</strong></td><td>14 min</td><td>15,0 km/h</td><td>4,80 s</td><td>250 m</td><td>2 742 m</td><td>52,5 ml/kg/min</td></tr>
+                            <tr><td><strong>Palier 15</strong></td><td>15 min</td><td>15,5 km/h</td><td>4,65 s</td><td>258 m</td><td>3 000 m</td><td>54,3 ml/kg/min</td></tr>
+                            <tr><td><strong>Palier 16</strong></td><td>16 min</td><td>16,0 km/h</td><td>4,50 s</td><td>267 m</td><td>3 267 m</td><td>56,0 ml/kg/min</td></tr>
+                            <tr><td><strong>Palier 17</strong></td><td>17 min</td><td>16,5 km/h</td><td>4,36 s</td><td>275 m</td><td>3 542 m</td><td>57,8 ml/kg/min</td></tr>
+                            <tr><td><strong>Palier 18</strong></td><td>18 min</td><td>17,0 km/h</td><td>4,24 s</td><td>283 m</td><td>3 825 m</td><td>59,5 ml/kg/min</td></tr>
+                            <tr><td><strong>Palier 19</strong></td><td>19 min</td><td>17,5 km/h</td><td>4,11 s</td><td>292 m</td><td>4 117 m</td><td>61,3 ml/kg/min</td></tr>
+                            <tr><td><strong>Palier 20</strong></td><td>20 min</td><td>18,0 km/h</td><td>4,00 s</td><td>300 m</td><td>4 417 m</td><td>63,0 ml/kg/min</td></tr>
+                            <tr><td><strong>Palier 21</strong></td><td>21 min</td><td>18,5 km/h</td><td>3,89 s</td><td>308 m</td><td>4 725 m</td><td>64,8 ml/kg/min</td></tr>
+                            <tr><td><strong>Palier 22</strong></td><td>22 min</td><td>19,0 km/h</td><td>3,79 s</td><td>317 m</td><td>5 042 m</td><td>66,5 ml/kg/min</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TABLEAU C : REPERES POURCENTAGE VMA x TEMPS x DISTANCES -->
+            <div class="static-ref-block" id="cardStaticMatrix">
+                <div class="static-ref-head">
+                    <div>
+                        <h3 data-i18n="staticMatrixHeading">⏱️ Tableau Pourcentage VMA × Temps × Distances (VMA 10 à 20 km/h)</h3>
+                        <p data-i18n="staticMatrixDesc">
+                            Temps de passage théoriques sur piste (200m, 400m, 1000m, 1500m) à <strong>100% VMA</strong>, et projection de référence sur <strong>5 km (90% VMA)</strong> et <strong>10 km (85% VMA)</strong>. Utilisez le calculateur ci-dessus pour générer votre propre matrice complète de 60% à 120%.
+                        </p>
+                    </div>
+                    <button type="button" class="btn-pdf-dl" onclick="exportTableToPdf('cardStaticMatrix', 'tableau-pourcentage-vma-10-20-kmh')">
+                        <span data-i18n="btnDownloadPdf">📄 Télécharger PDF</span>
+                    </button>
+                </div>
                 <div class="table-responsive">
                     <table class="custom-table">
                         <thead>
@@ -1244,33 +1584,86 @@
                         </thead>
                         <tbody>
                             <tr><td><strong>10,0 km/h</strong></td><td>6:00 /km</td><td>1:12</td><td>2:24</td><td>6:00</td><td>9:00</td><td>33:20</td><td>1h 10:35</td></tr>
+                            <tr><td><strong>11,0 km/h</strong></td><td>5:27 /km</td><td>1:05</td><td>2:11</td><td>5:27</td><td>8:11</td><td>30:18</td><td>1h 04:10</td></tr>
                             <tr><td><strong>12,0 km/h</strong></td><td>5:00 /km</td><td>1:00</td><td>2:00</td><td>5:00</td><td>7:30</td><td>27:47</td><td>58:49</td></tr>
+                            <tr><td><strong>13,0 km/h</strong></td><td>4:37 /km</td><td>0:55</td><td>1:51</td><td>4:37</td><td>6:55</td><td>25:38</td><td>54:18</td></tr>
                             <tr><td><strong>14,0 km/h</strong></td><td>4:17 /km</td><td>0:51</td><td>1:43</td><td>4:17</td><td>6:26</td><td>23:49</td><td>50:25</td></tr>
+                            <tr><td><strong>15,0 km/h</strong></td><td>4:00 /km</td><td>0:48</td><td>1:36</td><td>4:00</td><td>6:00</td><td>22:13</td><td>47:04</td></tr>
                             <tr><td><strong>16,0 km/h</strong></td><td>3:45 /km</td><td>0:45</td><td>1:30</td><td>3:45</td><td>5:38</td><td>20:50</td><td>44:07</td></tr>
+                            <tr><td><strong>17,0 km/h</strong></td><td>3:32 /km</td><td>0:42</td><td>1:25</td><td>3:32</td><td>5:18</td><td>19:36</td><td>41:31</td></tr>
                             <tr><td><strong>18,0 km/h</strong></td><td>3:20 /km</td><td>0:40</td><td>1:20</td><td>3:20</td><td>5:00</td><td>18:31</td><td>39:13</td></tr>
+                            <tr><td><strong>19,0 km/h</strong></td><td>3:09 /km</td><td>0:38</td><td>1:16</td><td>3:09</td><td>4:44</td><td>17:33</td><td>37:09</td></tr>
                             <tr><td><strong>20,0 km/h</strong></td><td>3:00 /km</td><td>0:36</td><td>1:12</td><td>3:00</td><td>4:30</td><td>16:40</td><td>35:18</td></tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- TABLEAU C : CORRESPONDANCE OFFICIELLE DEMI-COOPER (6 MIN) -> VMA -> 1000M G / 600M F (OP 2007/2009) -->
-            <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid #e2e8f0;">
-                <h3 style="font-size:1.15rem;font-weight:800;color:#0f172a;margin-bottom:0.5rem;">📊 Tableau de Correspondance : Test Demi-Cooper (6 min) → VMA → Situation de Référence Course en Durée (1000m Garçons / 600m Filles)</h3>
-                <p style="font-size:0.88rem;color:#475569;margin-bottom:0.9rem;">
-                    En EPS au Maroc (<strong>OP 2009 Collège</strong> et <strong>OP 2007 Lycée</strong>), le test diagnostique de VMA (Demi-Cooper 6 min ou Navette Luc Léger) lors de la Séance 1 permet de constituer des groupes d'allures homogènes (A, B, C, D) pour préparer la <strong>Situation de Référence finale : courir 1000m (Garçons) ou 600m (Filles)</strong>.
-                </p>
+            <!-- TABLEAU D : TEST DE COOPER (12 MINUTES) -->
+            <div class="static-ref-block" id="cardStaticCooper12">
+                <div class="static-ref-head">
+                    <div>
+                        <h3 data-i18n="staticCooper12Heading">⏱️ Tableau de Correspondance Test de Cooper (12 Minutes · Distance → VO₂max → VMA)</h3>
+                        <p data-i18n="staticCooper12Desc">
+                            Conversion officielle selon la formule de Kenneth H. Cooper : <strong>VO₂max = (Distance − 504,9) / 44,73</strong> et estimation directe de la VMA correspondante.
+                        </p>
+                    </div>
+                    <button type="button" class="btn-pdf-dl" onclick="exportTableToPdf('cardStaticCooper12', 'tableau-cooper-12-minutes-vma-vo2max')">
+                        <span data-i18n="btnDownloadPdf">📄 Télécharger PDF</span>
+                    </button>
+                </div>
                 <div class="table-responsive">
                     <table class="custom-table">
                         <thead>
                             <tr>
-                                <th>Distance Demi-Cooper (6 min)</th>
+                                <th>Distance en 12 min</th>
+                                <th>Vitesse moyenne (12')</th>
+                                <th>VO₂max Cooper</th>
+                                <th>VMA estimée</th>
+                                <th>Allure 100% VMA</th>
+                                <th>Niveau aérobie</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>1 600 m</strong></td><td>8,0 km/h</td><td>24,5 ml/kg/min</td><td><strong>7,0 km/h</strong></td><td>8:34 /km</td><td>Débutant / Reprise</td></tr>
+                            <tr><td><strong>1 800 m</strong></td><td>9,0 km/h</td><td>29,0 ml/kg/min</td><td><strong>8,3 km/h</strong></td><td>7:14 /km</td><td>Faible à modéré</td></tr>
+                            <tr><td><strong>2 000 m</strong></td><td>10,0 km/h</td><td>33,4 ml/kg/min</td><td><strong>9,5 km/h</strong></td><td>6:19 /km</td><td>Moyen scolaire</td></tr>
+                            <tr><td><strong>2 200 m</strong></td><td>11,0 km/h</td><td>37,9 ml/kg/min</td><td><strong>10,8 km/h</strong></td><td>5:33 /km</td><td>Bon niveau EPS</td></tr>
+                            <tr><td><strong>2 400 m</strong></td><td>12,0 km/h</td><td>42,4 ml/kg/min</td><td><strong>12,1 km/h</strong></td><td>4:58 /km</td><td>Régulier / Actif</td></tr>
+                            <tr><td><strong>2 600 m</strong></td><td>13,0 km/h</td><td>46,8 ml/kg/min</td><td><strong>13,4 km/h</strong></td><td>4:29 /km</td><td>Confirmé</td></tr>
+                            <tr><td><strong>2 800 m</strong></td><td>14,0 km/h</td><td>51,3 ml/kg/min</td><td><strong>14,7 km/h</strong></td><td>4:05 /km</td><td>Avancé</td></tr>
+                            <tr><td><strong>3 000 m</strong></td><td>15,0 km/h</td><td>55,8 ml/kg/min</td><td><strong>15,9 km/h</strong></td><td>3:46 /km</td><td>Très bon coureur</td></tr>
+                            <tr><td><strong>3 200 m</strong></td><td>16,0 km/h</td><td>60,3 ml/kg/min</td><td><strong>17,2 km/h</strong></td><td>3:29 /km</td><td>Compétiteur régional</td></tr>
+                            <tr><td><strong>3 400 m</strong></td><td>17,0 km/h</td><td>64,7 ml/kg/min</td><td><strong>18,5 km/h</strong></td><td>3:15 /km</td><td>Haut niveau</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TABLEAU E : CORRESPONDANCE OFFICIELLE DEMI-COOPER (6 MIN) -> VMA -> 1000M G / 600M F (OP 2007/2009) -->
+            <div class="static-ref-block" id="cardStaticDemiCooper">
+                <div class="static-ref-head">
+                    <div>
+                        <h3 data-i18n="staticDemiHeading">📊 Tableau de Correspondance : Test Demi-Cooper (6 min) → VMA → Situation de Référence (1000m G / 600m F · OP 2007/2009)</h3>
+                        <p data-i18n="staticDemiDesc">
+                            En EPS au Maroc (<strong>OP 2009 Collège</strong> et <strong>OP 2007 Lycée</strong>), le test diagnostique de VMA (Demi-Cooper 6 min ou Navette Luc Léger) lors de la Séance 1 permet de constituer des groupes d'allures homogènes (A, B, C, D) pour préparer la <strong>Situation de Référence finale : courir 1000m (Garçons) ou 600m (Filles)</strong>.
+                        </p>
+                    </div>
+                    <button type="button" class="btn-pdf-dl" onclick="exportTableToPdf('cardStaticDemiCooper', 'tableau-demi-cooper-op-2007-2009')">
+                        <span data-i18n="btnDownloadPdf">📄 Télécharger PDF</span>
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Distance 6 min</th>
                                 <th>VMA (km/h)</th>
                                 <th>VO₂max Estimée</th>
-                                <th>Temps Tour 250m (100% VMA)</th>
-                                <th>Objectif 1000m Garçons (~95% VMA)</th>
-                                <th>Objectif 600m Filles (~95% VMA)</th>
-                                <th>Action Évaluation OP</th>
+                                <th>Tour 250m (100%)</th>
+                                <th>1000m Garçons (~95%)</th>
+                                <th>600m Filles (~95%)</th>
+                                <th>Évaluation OP</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -1291,35 +1684,32 @@
             </div>
         </section>
 
-        <!-- AVERTISSEMENT DE PRUDENCE PHYSIQUE & CONFORMITÉ SANTÉ -->
-        <div class="max-w-3xl mx-auto my-6 p-4 rounded-xl bg-slate-50 border border-slate-200 text-slate-600 text-xs leading-relaxed flex items-start gap-3 shadow-sm">
+        <!-- AVERTISSEMENT DE PRUDENCE PHYSIQUE & CONFORMITÉ SANTÉ (ALIGNÉ 1200 PX) -->
+        <div class="my-6 p-4 rounded-xl bg-slate-50 border border-slate-200 text-slate-600 text-xs leading-relaxed flex items-start gap-3 shadow-sm" style="width:100%;">
           <span class="text-amber-500 text-base shrink-0">⚠️</span>
           <div>
             <strong class="text-slate-800">Avertissement de sécurité et de prudence sportive :</strong> Les calculs physiologiques fournis sont des estimations théoriques validées scientifiquement à des fins pédagogiques et d'entraînement. Ils ne remplacent pas un avis médical personnalisé. Avant d'entreprendre des efforts à haute intensité, assurez-vous d'une aptitude médicale complète et respectez des phases d'échauffement et d'hydratation progressives.
           </div>
         </div>
 
-        <!-- FICHE SCIENTIFIQUE & PÉDAGOGIQUE OFFICIELLE (1254 MOTS MINIMUM) -->
-        <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1254 MOTS MINIMUM) -->
-    <!-- FICHE SCIENTIFIQUE & PEDAGOGIQUE OFFICIELLE (1254 MOTS MINIMUM) -->
-    <section class="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 mt-8" id="fiche-pedagogique-officielle" style="max-width:48rem;margin:2rem auto 0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:20px;padding:1.75rem;box-shadow:0 10px 28px -8px rgba(15,23,42,0.06);">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+        <!-- FICHE SCIENTIFIQUE & PÉDAGOGIQUE OFFICIELLE (ALIGNÉE 1200 PX) -->
+    <section class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 mt-6" id="fiche-pedagogique-officielle" style="width:100%;margin:1.75rem 0 0 0;background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;padding:1.75rem;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4">
         <div>
-          <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-1">
+          <div class="flex flex-wrap items-center gap-2 text-xs font-semibold text-slate-500 mb-1">
             <span class="text-red-700 font-bold">Physiologie Aérobie · VMA &amp; Paces</span>
             <span aria-hidden="true">&middot;</span>
-            <span style="color:#0B7A99;font-weight:700;">Rédigé par Abdelkhalek ELBOUDANI (Prof d'EPS au Maroc)</span>
+            <span style="color:#0B7A99;font-weight:700;">Abdelkhalek ELBOUDANI (Prof d'EPS)</span>
+            <span aria-hidden="true">&middot;</span>
+            <span class="tabular-nums text-slate-600">1254 mots (Guide Approfondi)</span>
           </div>
           <h2 class="text-lg font-extrabold text-slate-900 tracking-tight flex items-center gap-2 m-0">
             <span style="font-size:1.15rem;">📖</span>
             Calculateur de VMA &amp; Allures de Course
           </h2>
         </div>
-        <div class="flex items-center gap-2">
-          <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md tabular-nums border border-emerald-200">
-            1254 mots (Guide Approfondi)
-          </span>
-          <button type="button" onclick="copierFichePedagogique()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors cursor-pointer border border-slate-200" title="Copier le guide complet conforme aux OP complet (1254 mots)">
+        <div class="flex items-center gap-2 shrink-0">
+          <button type="button" onclick="copierFichePedagogique()" class="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors cursor-pointer border border-slate-200 whitespace-nowrap shrink-0" title="Copier le guide complet conforme aux OP (1254 mots)">
             <span id="btn-copy-ico">📋</span>
             <span id="btn-copy-txt">Copier le guide complet</span>
           </button>
@@ -1336,7 +1726,7 @@
           La VMA est la vitesse de course à laquelle la consommation d'oxygène atteint son maximum absolu (VO2 Max). Elle constitue le pilier fondamental de la programmation athlétique et didactique en EPS.
         </p>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1">
+        <div class="fiche-zone2-grid">
           
     <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
       <div>
@@ -1523,63 +1913,62 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
 
     <!-- ═══ FOOTER ═══ -->
     
+  <div class="peps-aligned-stack">
   <!-- PROFEPS_CALC_EMBED_START -->
-  <section id="peps-embed-backlink-box" aria-label="Intégrer ou citer ce calculateur" style="max-width:1024px;margin:2rem auto;padding:1.35rem 1.5rem;background:#ffffff;border:1px solid #cbd5e1;border-radius:18px;box-shadow:0 4px 14px rgba(15,23,42,0.04);">
-    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem;margin-bottom:0.85rem;">
-      <div>
-        <span style="font-size:0.72rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:#0B7A99;background:#ecfdf5;padding:0.15rem 0.55rem;border-radius:6px;border:1px solid var(--stone);">🔗 Partage &amp; Référence Académique (100% Gratuit)</span>
-        <h2 style="font-size:1.05rem;font-weight:900;color:#0f172a;margin:0.25rem 0 0 0;">Intégrer ce Calculateur sur votre Site/Blog ou le Citer dans un Mémoire CRMEF / ENS</h2>
-      </div>
+  <section id="peps-embed-backlink-box" aria-label="Intégrer ou citer ce calculateur" style="width:100%;margin:0 0 1.75rem 0;padding:1.4rem 1.5rem;background:#ffffff;border:1px solid #cbd5e1;border-radius:16px;box-shadow:0 1px 3px rgba(15,23,42,0.05);">
+    <div style="margin-bottom:0.75rem;">
+      <div style="font-size:0.75rem;font-weight:700;color:#0B7A99;margin-bottom:0.25rem;">🔗 Partage &amp; Référence Académique · 100% Gratuit</div>
+      <h2 style="font-size:1.08rem;font-weight:800;color:#0f172a;margin:0;">Intégrer ce Calculateur sur votre Site/Blog ou le Citer dans un Mémoire CRMEF / ENS</h2>
     </div>
-    <p style="font-size:0.82rem;color:#475569;margin:0 0 1rem 0;line-height:1.5;">
+    <p style="font-size:0.84rem;color:#475569;margin:0 0 1rem 0;line-height:1.55;">
       Vous êtes formateur au CRMEF, enseignant d'EPS, étudiant en Licence d'Éducation (LE-EPS) ou responsable d'un club sportif ? Vous pouvez intégrer gratuitement cet outil interactif sur votre site web ou le citer dans votre recherche action.
     </p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1rem;">
-      <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:0.9rem;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.45rem;">
-          <strong style="font-size:0.78rem;color:#0f172a;">💻 Code d'intégration HTML (Widget Blog / Site d'établissement)</strong>
-          <button type="button" onclick="navigator.clipboard.writeText(this.parentElement.nextElementSibling.value);this.textContent='✔ Copié !';var b=this;setTimeout(function(){b.textContent='📋 Copier le code';},2000);" style="padding:0.25rem 0.65rem;background:#0f172a;color:#ffffff;border:none;border-radius:8px;font-size:0.72rem;font-weight:700;cursor:pointer;">📋 Copier le code</button>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem;">
+      <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:0.75rem;margin-bottom:0.55rem;">
+          <strong style="font-size:0.8rem;color:#0f172a;line-height:1.35;">💻 Code d'intégration HTML (Widget Blog / Site d'établissement)</strong>
+          <button type="button" onclick="navigator.clipboard.writeText(this.parentElement.nextElementSibling.value);this.textContent='✔ Copié !';var b=this;setTimeout(function(){b.textContent='📋 Copier le code';},2000);" style="padding:0.4rem 0.8rem;background:#0f172a;color:#ffffff;border:none;border-radius:8px;font-size:0.75rem;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;">📋 Copier le code</button>
         </div>
-        <textarea readonly rows="3" style="width:100%;font-family:monospace;font-size:0.72rem;color:#334155;background:#ffffff;border:1px solid #cbd5e1;border-radius:8px;padding:0.5rem;resize:none;">&lt;iframe src=&quot;https://profeps.ma/widget-vma.html&quot; width=&quot;100%&quot; height=&quot;620&quot; style=&quot;border:1px solid #cbd5e1;border-radius:16px;&quot; loading=&quot;lazy&quot; title=&quot;Calculateur VMA (Léger-Boucher, Luc Léger, VAMEVAL, Demi-Cooper) &amp; Allures EPS - ProfEPS Maroc&quot;&gt;&lt;/iframe&gt;
+        <textarea readonly rows="3" style="width:100%;font-family:monospace;font-size:0.72rem;color:#334155;background:#ffffff;border:1px solid #cbd5e1;border-radius:8px;padding:0.55rem;resize:none;">&lt;iframe src=&quot;https://profeps.ma/widget-vma.html&quot; width=&quot;100%&quot; height=&quot;620&quot; style=&quot;border:1px solid #cbd5e1;border-radius:16px;&quot; loading=&quot;lazy&quot; title=&quot;Calculateur VMA (Léger-Boucher, Luc Léger, VAMEVAL, Demi-Cooper) &amp; Allures EPS - ProfEPS Maroc&quot;&gt;&lt;/iframe&gt;
 &lt;p style=&quot;font-size:12px;text-align:right;margin-top:4px;&quot;&gt;Outil propulsé par &lt;a href=&quot;https://profeps.ma/calculateur-vma.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;ProfEPS Maroc — Calculateur VMA (Léger-Boucher, Luc Léger, VAMEVAL, Demi-Cooper) &amp; Allures EPS&lt;/a&gt;&lt;/p&gt;</textarea>
       </div>
-      <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:0.9rem;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.45rem;">
-          <strong style="font-size:0.78rem;color:#0f172a;">🎓 Citation Bibliographique (Norme APA — Mémoire CRMEF / ENS)</strong>
-          <button type="button" onclick="navigator.clipboard.writeText(this.parentElement.nextElementSibling.value);this.textContent='✔ Copié !';var b=this;setTimeout(function(){b.textContent='📋 Copier la citation';},2000);" style="padding:0.25rem 0.65rem;background:#3347D6;color:#ffffff;border:none;border-radius:8px;font-size:0.72rem;font-weight:700;cursor:pointer;">📋 Copier la citation</button>
+      <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:0.75rem;margin-bottom:0.55rem;">
+          <strong style="font-size:0.8rem;color:#0f172a;line-height:1.35;">🎓 Citation Bibliographique (Norme APA — Mémoire CRMEF / ENS)</strong>
+          <button type="button" onclick="navigator.clipboard.writeText(this.parentElement.nextElementSibling.value);this.textContent='✔ Copié !';var b=this;setTimeout(function(){b.textContent='📋 Copier la citation';},2000);" style="padding:0.4rem 0.8rem;background:#3347D6;color:#ffffff;border:none;border-radius:8px;font-size:0.75rem;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;">📋 Copier la citation</button>
         </div>
-        <textarea readonly rows="3" style="width:100%;font-family:system-ui,sans-serif;font-size:0.75rem;color:#334155;background:#ffffff;border:1px solid #cbd5e1;border-radius:8px;padding:0.5rem;resize:none;">ELBOUDANI, A. (2026). Calculateur VMA (Léger-Boucher, Luc Léger, VAMEVAL, Demi-Cooper) & Allures EPS. Portail Scientifique et Didactique ProfEPS Maroc (Conforme OP 2007/2009). Consulté sur https://profeps.ma/calculateur-vma.html</textarea>
+        <textarea readonly rows="3" style="width:100%;font-family:system-ui,sans-serif;font-size:0.75rem;color:#334155;background:#ffffff;border:1px solid #cbd5e1;border-radius:8px;padding:0.55rem;resize:none;">ELBOUDANI, A. (2026). Calculateur VMA (Léger-Boucher, Luc Léger, VAMEVAL, Demi-Cooper) & Allures EPS. Portail Scientifique et Didactique ProfEPS Maroc (Conforme OP 2007/2009). Consulté sur https://profeps.ma/calculateur-vma.html</textarea>
       </div>
     </div>
   </section>
 <!-- PROFEPS_CALC_EMBED_END -->
   <!-- PROFEPS_RELATED_MESH_START -->
-  <aside class="peps-related-mesh" style="max-width:1024px;margin:2rem auto;padding:1.25rem 1.5rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;">
-    <h2 style="font-size:0.95rem;font-weight:800;color:#0f172a;margin:0 0 0.85rem 0;">🔗 Outils &amp; Guides Associés (VMA, VO₂max, HIIT &amp; Tests EPS)</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.65rem;">
-        <a href="calculateur-vdot-asr-endurance.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #cbd5e1;border-radius:12px;color:#0B7A99;font-weight:800;font-size:0.85rem;text-decoration:none;">🫁 Calculateur VO₂max, VDOT &amp; Normes par Âge →</a>
-        <a href="generateur-intermittent-hiit-cod.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;">⚡ Générateur Intermittent 30/30, 15/15 &amp; HIIT →</a>
-        <a href="article-test-demi-cooper-vma.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;">⏱️ Test Demi-Cooper (6 min) : Protocole &amp; Barème →</a>
-        <a href="article-test-vameval-vma.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;">🔄 Test VAMEVAL : Tableau Paliers &amp; Protocole 20m →</a>
-        <a href="article-test-cooper-12-minutes.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;">🏃 Test de Cooper (12 min) : Formules &amp; Barèmes →</a>
-        <a href="article-calcul-allures-vma.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;">📊 Tableau des Allures VMA (80% à 120%) &amp; Splits →</a>
-        <a href="article-convert-beep-test-to-mas.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;">🇬🇧 Convert 20m Beep Test to MAS &amp; VO₂max Chart →</a>
-        <a href="article-what-is-maximal-aerobic-speed-mas.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.85rem;text-decoration:none;">🇬🇧 What Is Maximal Aerobic Speed (MAS)? Full Guide →</a>
+  <aside class="peps-related-mesh" style="width:100%;margin:0 0 1.75rem 0;padding:1.35rem 1.5rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;">
+    <h2 style="font-size:0.98rem;font-weight:800;color:#0f172a;margin:0 0 0.9rem 0;">🔗 Outils &amp; Guides Associés (VMA, VO₂max, HIIT &amp; Tests EPS)</h2>
+    <div class="peps-mesh-grid">
+        <a href="calculateur-vdot-asr-endurance.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #cbd5e1;border-radius:12px;color:#0B7A99;font-weight:800;font-size:0.84rem;text-decoration:none;line-height:1.4;">🫁 Calculateur VO₂max, VDOT &amp; Normes par Âge →</a>
+        <a href="generateur-intermittent-hiit-cod.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.84rem;text-decoration:none;line-height:1.4;">⚡ Générateur Intermittent 30/30, 15/15 &amp; HIIT →</a>
+        <a href="article-test-demi-cooper-vma.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.84rem;text-decoration:none;line-height:1.4;">⏱️ Test Demi-Cooper (6 min) : Protocole &amp; Barème →</a>
+        <a href="article-test-vameval-vma.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.84rem;text-decoration:none;line-height:1.4;">🔄 Test VAMEVAL : Tableau Paliers &amp; Protocole 20m →</a>
+        <a href="article-test-cooper-12-minutes.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.84rem;text-decoration:none;line-height:1.4;">🏃 Test de Cooper (12 min) : Formules &amp; Barèmes →</a>
+        <a href="article-calcul-allures-vma.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.84rem;text-decoration:none;line-height:1.4;">📊 Tableau des Allures VMA (80% à 120%) &amp; Splits →</a>
+        <a href="article-convert-beep-test-to-mas.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.84rem;text-decoration:none;line-height:1.4;">🇬🇧 Convert 20m Beep Test to MAS &amp; VO₂max Chart →</a>
+        <a href="article-what-is-maximal-aerobic-speed-mas.html" style="display:block;padding:0.75rem 1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-weight:700;font-size:0.84rem;text-decoration:none;line-height:1.4;">🇬🇧 What Is Maximal Aerobic Speed (MAS)? Full Guide →</a>
     </div>
   </aside>
   <!-- PROFEPS_RELATED_MESH_END -->
   
 <!-- PROFEPS_CRMEF_URGENCY_MESH_START -->
-<section id="profeps-crmef-urgency-banner" style="max-width:1200px;margin:1.75rem auto;padding:1.5rem;background:linear-gradient(135deg, var(--sky) 0%, var(--surface) 100%);border:2px solid #3347D6;border-left:6px solid #3347D6;border-radius:18px;box-shadow:0 10px 28px -8px rgba(153,27,27,0.14);font-family:'Plus Jakarta Sans','Inter',system-ui,sans-serif;">
+<section id="profeps-crmef-urgency-banner" style="width:100%;margin:0;padding:1.5rem;background:linear-gradient(135deg, var(--sky) 0%, var(--surface) 100%);border:1.5px solid #cbd5e1;border-top:3px solid #3347D6;border-radius:16px;box-shadow:0 4px 14px rgba(15,23,42,0.05);font-family:'Plus Jakarta Sans','Inter',system-ui,sans-serif;">
   <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1rem;border-bottom:1px solid #e2e8f0;padding-bottom:0.85rem;">
     <div>
-      <span style="display:inline-block;padding:0.25rem 0.75rem;background:#3347D6;color:#ffffff;font-size:0.72rem;font-weight:800;border-radius:999px;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.35rem;">🔥 Spécial Concours CRMEF 2026 · مباراة التعليم</span>
-      <h2 style="margin:0;font-size:1.25rem;font-weight:900;color:#0f172a;">Révision Express Concours d'Enseignement CRMEF : 29 Simulateurs QCM &amp; Guides Officiels</h2>
+      <div style="font-size:0.75rem;font-weight:700;color:#2434A8;margin-bottom:0.25rem;">🔥 Spécial Concours CRMEF 2026 · مباراة التعليم</div>
+      <h2 style="margin:0;font-size:1.2rem;font-weight:800;color:#0f172a;">Révision Express Concours d'Enseignement CRMEF : 29 Simulateurs QCM &amp; Guides Officiels</h2>
       <p style="margin:0.25rem 0 0;font-size:0.85rem;color:#334155;">Accès direct aux banques de QCM corrigés (Sciences de l'Éducation, Didactique &amp; Spécialité — Toutes les 13 filières) et aux 10 guides scientifiques EPS.</p>
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:0.6rem;">
-      <a href="concours-crmef-hub.html" style="padding:0.65rem 1.15rem;background:#3347D6;color:#ffffff;font-weight:800;font-size:0.82rem;border-radius:10px;text-decoration:none;box-shadow:0 4px 12px rgba(153,27,27,0.25);">🎓 Ouvrir le Hub Concours CRMEF</a>
-      <a href="qcm-150-questions-crmef-eps.html" style="padding:0.65rem 1.15rem;background:#0B7A99;color:#ffffff;font-weight:800;font-size:0.82rem;border-radius:10px;text-decoration:none;box-shadow:0 4px 12px rgba(0,98,51,0.22);">⚡ 150 QCM Concours EPS</a>
+      <a href="concours-crmef-hub.html" style="padding:0.65rem 1.1rem;background:#3347D6;color:#ffffff;font-weight:800;font-size:0.82rem;border-radius:10px;text-decoration:none;white-space:nowrap;">🎓 Ouvrir le Hub Concours CRMEF</a>
+      <a href="qcm-150-questions-crmef-eps.html" style="padding:0.65rem 1.1rem;background:#0B7A99;color:#ffffff;font-weight:800;font-size:0.82rem;border-radius:10px;text-decoration:none;white-space:nowrap;">⚡ 150 QCM Concours EPS</a>
     </div>
   </div>
 
@@ -1636,6 +2025,7 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
   </div>
 </section>
 <!-- PROFEPS_CRMEF_URGENCY_MESH_END -->
+  </div>
 <footer class="footer" id="profeps-unified-footer">
     <div class="footer-container">
       <div class="footer-grid">
@@ -1871,8 +2261,36 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
                 faqA6: "VMA (français) et MAS (<em>Maximal Aerobic Speed</em> en anglais) désignent la même vitesse en km/h. La relation de Léger et Mercier relie les deux : <strong>VO₂max (ml/kg/min) ≈ VMA (km/h) × 3,5</strong>.",
                 staticLucHeading: "🏃 Tableau Complet Test Navette Luc Léger (Paliers 1 à 21 · Aller-Retours 20m)",
                 staticLucDesc: "Référentiel complet du test navette de Luc Léger (20 mètres / 20m Beep Test) indiquant pour chaque palier (1 à 21) la vitesse officielle, la durée cumulée, le nombre d'aller-retours sur 20m, le cumul des navettes et la distance totale parcourue.",
+                staticVamevalHeading: "🔄 Tableau Complet Test VAMEVAL (Paliers 1 à 22 · Piste Balisée tous les 20 m)",
+                staticVamevalDesc: "Protocole progressif continu sur piste avec plots espacés de 20 mètres (+0,5 km/h chaque minute de 8,5 à 19,0 km/h) : temps exact entre deux plots, distance par palier, cumul et VO₂max estimée.",
                 staticMatrixHeading: "⏱️ Tableau Pourcentage VMA × Temps × Distances (VMA 10 à 20 km/h)",
-                staticMatrixDesc: "Temps de passage théoriques sur piste (200m, 400m, 1000m, 1500m) à <strong>100% VMA</strong>, et projection de référence sur <strong>5 km (90% VMA)</strong> et <strong>10 km (85% VMA)</strong>.",
+                staticMatrixDesc: "Temps de passage théoriques sur piste (200m, 400m, 1000m, 1500m) à <strong>100% VMA</strong>, et projection de référence sur <strong>5 km (90% VMA)</strong> et <strong>10 km (85% VMA)</strong>. Utilisez le calculateur ci-dessus pour générer votre propre matrice complète de 60% à 120%.",
+                staticCooper12Heading: "⏱️ Tableau de Correspondance Test de Cooper (12 Minutes · Distance → VO₂max → VMA)",
+                staticCooper12Desc: "Conversion officielle selon la formule de Kenneth H. Cooper : <strong>VO₂max = (Distance − 504,9) / 44,73</strong> et estimation directe de la VMA correspondante.",
+                staticDemiHeading: "📊 Tableau de Correspondance : Test Demi-Cooper (6 min) → VMA → Situation de Référence (1000m G / 600m F · OP 2007/2009)",
+                staticDemiDesc: "En EPS au Maroc (<strong>OP 2009 Collège</strong> et <strong>OP 2007 Lycée</strong>), le test diagnostique de VMA (Demi-Cooper 6 min ou Navette Luc Léger) lors de la Séance 1 permet de constituer des groupes d'allures homogènes (A, B, C, D) pour préparer la <strong>Situation de Référence finale : courir 1000m (Garçons) ou 600m (Filles)</strong>.",
+                btnDownloadPdf: "📄 Télécharger PDF",
+                trackVizTitle: "🏟️ Schéma de Piste de Course &amp; Chronos Tour par Tour",
+                trackVizSubtitle: "Visualisez les balises de passage (25%, 50%, 75%, 100%) et les temps de chaque tour selon la distance, le seuil % VMA et le groupe de VMA choisi.",
+                lblTrackGroup: "Groupe de VMA :",
+                lblTrackPct: "Seuil % VMA :",
+                cpTag25: "Plot 25%",
+                cpTag50: "Mi-tour 50%",
+                cpTag75: "Plot 75%",
+                cpTag100: "Tour 100%",
+                trackLapsHeading: "⏱️ Chronos Tour par Tour",
+                thLapNum: "Tour",
+                thLapDistCum: "Dist. Cumulée",
+                thLapSplit: "Temps / Tour",
+                thLapCumTime: "Chrono Cumulé",
+                trackGroupMyVma: "Ma VMA",
+                trackGroupWord: "Groupe",
+                lapWordSingular: "Tour",
+                svgStartFinishTag: "Tour",
+                svgInfieldHintTxt: "Départ · Sens anti-horaire · 4 balises de passage",
+                svgAllureWord: "Allure",
+                svgFinishFrac: "Fraction finale",
+                lapsCapNote: "Affichage limité aux 120 premiers tours",
                 errInvalid: "Veuillez saisir une distance, un palier ou un chrono valide.",
                 stagePrefix: "Palier",
                 studentTag: "Profil",
@@ -1880,7 +2298,7 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
                 cumulLabel: "cumul",
                 lapsUnit: "tours",
                 lapsShort: "trs",
-                trackOf: "Piste de",
+                trackOf: "Piste",
                 summaryLbl: "Bilan",
                 atPct: "à",
                 intensityOptions: [
@@ -2002,8 +2420,36 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
                 faqA6: "By Léger &amp; Mercier's equation: <strong>VO₂max (ml/kg/min) ≈ MAS (km/h) × 3.5</strong>.",
                 staticLucHeading: "🏃 Full 20m Beep Test / Luc Léger Reference Table (Levels 1–21 & Shuttles)",
                 staticLucDesc: "Complete 20-meter Multi-Stage Fitness Test table listing stage speed, cumulative time, shuttles per stage, cumulative shuttles, total distance, and estimated VO₂max.",
+                staticVamevalHeading: "🔄 Complete VAMEVAL Track Test Table (Stages 1–22 · 20m Cones)",
+                staticVamevalDesc: "Continuous progressive track protocol with cones every 20 meters (+0.5 km/h per minute from 8.5 to 19.0 km/h): split per 20m cone, stage distance, cumulative distance, and estimated VO₂max.",
                 staticMatrixHeading: "⏱️ % MAS × Time × Distance Reference Table (10–20 km/h)",
                 staticMatrixDesc: "Reference split times at <strong>100% MAS</strong> (200m–1500m) plus projected <strong>5K (90% MAS)</strong> and <strong>10K (85% MAS)</strong> finish times.",
+                staticCooper12Heading: "⏱️ Cooper 12-Minute Run Reference Table (Distance → VO₂max → MAS)",
+                staticCooper12Desc: "Official conversion via Kenneth H. Cooper's formula: <strong>VO₂max = (Distance − 504.9) / 44.73</strong> and corresponding Maximal Aerobic Speed.",
+                staticDemiHeading: "📊 Half-Cooper (6 min) → MAS → PE Benchmark Distances (1000m Boys / 600m Girls)",
+                staticDemiDesc: "Standard PE aerobic diagnostic correspondence from 6-minute distance to MAS, VO₂max, 250m track lap split, and 1000m / 600m pacing benchmarks.",
+                btnDownloadPdf: "📄 Download PDF",
+                trackVizTitle: "🏟️ Interactive Running Track Diagram &amp; Lap-by-Lap Splits",
+                trackVizSubtitle: "Inspect quarter-lap checkpoints (25%, 50%, 75%, 100%) and every lap split time for your track distance, % MAS threshold, and MAS group.",
+                lblTrackGroup: "MAS Group:",
+                lblTrackPct: "% MAS Threshold:",
+                cpTag25: "25% Mark",
+                cpTag50: "Half-Lap 50%",
+                cpTag75: "75% Mark",
+                cpTag100: "Full Lap 100%",
+                trackLapsHeading: "⏱️ Lap-by-Lap Split Times",
+                thLapNum: "Lap",
+                thLapDistCum: "Cumul. Dist.",
+                thLapSplit: "Lap Split",
+                thLapCumTime: "Cumul. Time",
+                trackGroupMyVma: "My MAS",
+                trackGroupWord: "Group",
+                lapWordSingular: "Lap",
+                svgStartFinishTag: "Lap",
+                svgInfieldHintTxt: "Start · Counter-clockwise · 4 split checkpoints",
+                svgAllureWord: "Pace",
+                svgFinishFrac: "Final fraction",
+                lapsCapNote: "Display capped at first 120 laps",
                 errInvalid: "Please enter a valid distance, stage, or finish time.",
                 stagePrefix: "Level",
                 studentTag: "You",
@@ -2133,8 +2579,36 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
                 faqA6: "اختر اختبارك واضغط على زر الحساب للحصول فوراً على مصفوفة الأزمنة لكل مسافة من 100م حتى 10كم.",
                 staticLucHeading: "🏃 الجدول الكامل لاختبار المكوك لوك ليجي (المراحل 1 إلى 21 · 20م)",
                 staticLucDesc: "المرجع الكامل لاختبار لوك ليجي 20 متراً متضمناً سرعة كل مرحلة والزمن التراكمي وعدد مرات الذهاب والإياب والمسافة الكلية.",
+                staticVamevalHeading: "🔄 الجدول الكامل لاختبار فاميفال VAMEVAL (المراحل 1 إلى 22 · أقماع 20م)",
+                staticVamevalDesc: "بروتوكول متدرج مستمر على مضمار مجهز بأقماع كل 20 متراً (+0.5 كم/س كل دقيقة من 8.5 إلى 19.0 كم/س) مع أزمنة المرور والمسافة و VO₂max.",
                 staticMatrixHeading: "⏱️ جدول مرجعي للنسب المئوية من VMA × المسافات (10 إلى 20 كم/س)",
                 staticMatrixDesc: "أزمنة المرور المرجعية عند <strong>100% VMA</strong> (200م–1500م) والتوقيت المتوقع لـ <strong>5كم (90%)</strong> و<strong>10كم (85%)</strong>.",
+                staticCooper12Heading: "⏱️ جدول مطابقة اختبار كوبر (12 دقيقة · المسافة ← VO₂max ← VMA)",
+                staticCooper12Desc: "التحويل الرسمي وفق معادلة كوبر: <strong>VO₂max = (المسافة − 504.9) / 44.73</strong> وحساب السرعة الهوائية القصوى المقابلة.",
+                staticDemiHeading: "📊 جدول المطابقة الرسمي: نصف كوبر (6 د) ← VMA ← الوضعية المرجعية (1000م ذكور / 600م إناث)",
+                staticDemiDesc: "مرجع التربية البدنية لتكوين مجموعات السرعة المتجانسة من اختبار نصف كوبر وإسقاطها على دورة المضمار 250م ومسافة 1000م / 600م.",
+                btnDownloadPdf: "📄 تحميل PDF",
+                trackVizTitle: "🏟️ مخطط مضمار الجري التفاعلي وأزمنة كل دورة",
+                trackVizSubtitle: "عاين نقاط العبور (25%، 50%، 75%، 100%) وتوقيت كل دورة حسب مسافة المضمار، نسبة VMA ومجموعة السرعة المختارة.",
+                lblTrackGroup: "مجموعة VMA :",
+                lblTrackPct: "عتبة % VMA :",
+                cpTag25: "نقطة 25%",
+                cpTag50: "نصف دورة 50%",
+                cpTag75: "نقطة 75%",
+                cpTag100: "دورة 100%",
+                trackLapsHeading: "⏱️ أزمنة الدورات بالتفصيل",
+                thLapNum: "الدورة",
+                thLapDistCum: "المسافة التراكمية",
+                thLapSplit: "زمن الدورة",
+                thLapCumTime: "الزمن التراكمي",
+                trackGroupMyVma: "قيمتي VMA",
+                trackGroupWord: "مجموعة",
+                lapWordSingular: "دورة",
+                svgStartFinishTag: "دورة",
+                svgInfieldHintTxt: "الانطلاق · عكس عقارب الساعة · 4 نقاط عبور",
+                svgAllureWord: "الإيقاع",
+                svgFinishFrac: "الجزء المتبقي",
+                lapsCapNote: "يتم عرض أول 120 دورة فقط",
                 errInvalid: "يرجى إدخال قيمة صحيحة للمسافة أو المرحلة أو التوقيت.",
                 stagePrefix: "المرحلة",
                 studentTag: "النتيجة",
@@ -2276,7 +2750,7 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
 
             var resultsWrapper = document.getElementById("results-wrapper");
             if (resultsWrapper && resultsWrapper.style.display === "block") {
-                performCalculation(true);
+                performCalculation(true, true);
             }
         }
         window.switchLanguage = switchLanguage;
@@ -2376,7 +2850,168 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
             btnTrigger.addEventListener("click", function() { performCalculation(false); });
         }
 
-        function performCalculation(skipScroll) {
+        let activeComputedVma = 13.5;
+        let activeTrackDist = 250;
+        let activeDurationMin = 12;
+        let activeTargetPct = 90;
+        let trackPreviewVma = 13.5;
+        let trackPreviewPct = 90;
+
+        function formatLapClock(secTotal) {
+            if (!isFinite(secTotal) || secTotal <= 0) return "--";
+            if (secTotal < 60) return secTotal.toFixed(1) + "s";
+            var rounded = Math.round(secTotal);
+            var h = Math.floor(rounded / 3600);
+            var m = Math.floor((rounded % 3600) / 60);
+            var s = rounded % 60;
+            if (h > 0) return h + "h " + (m < 10 ? "0" : "") + m + "m " + (s < 10 ? "0" : "") + s + "s";
+            return m + "m " + (s < 10 ? "0" : "") + s + "s";
+        }
+
+        function renderTrackVisualizer(vmaGroup, pct, trackDist, durationMin) {
+            var t = i18n[currentLang] || i18n.fr;
+            var numLocale = (currentLang === 'en') ? 'en-US' : 'fr-FR';
+            var safeVma = Math.max(4, Math.min(30, parseFloat(vmaGroup) || activeComputedVma || 13.5));
+            var safePct = Math.max(40, Math.min(140, parseFloat(pct) || activeTargetPct || 90));
+            var safeDist = Math.max(20, parseFloat(trackDist) || activeTrackDist || 250);
+            var safeDur = Math.max(0.5, parseFloat(durationMin) || activeDurationMin || 12);
+
+            trackPreviewVma = safeVma;
+            trackPreviewPct = safePct;
+
+            var speedKmh = safeVma * (safePct / 100);
+            var speedMs = speedKmh / 3.6;
+            var lapSec = safeDist / speedMs;
+            var paceSec = 3600 / speedKmh;
+            var paceMin = Math.floor(paceSec / 60);
+            var paceRest = Math.round(paceSec % 60);
+            if (paceRest === 60) { paceMin += 1; paceRest = 0; }
+            var paceFmt = paceMin + ":" + (paceRest < 10 ? "0" : "") + paceRest + " /km";
+
+            var totalDistM = Math.round(speedMs * safeDur * 60);
+            var fullLaps = Math.floor(totalDistM / safeDist);
+            var remM = Math.round(totalDistM % safeDist);
+
+            // Badge header
+            var vizBadge = document.getElementById("resTrackVizBadge");
+            if (vizBadge) {
+                vizBadge.textContent = t.trackOf + " " + safeDist + "m · " + safeVma.toFixed(1) + " km/h · " + Math.round(safePct) + "% VMA";
+            }
+
+            // VMA Group switcher chips (Ma VMA + 10..18 km/h)
+            var groupWrap = document.getElementById("trackGroupButtons");
+            if (groupWrap) {
+                groupWrap.innerHTML = "";
+                var isMineSelected = Math.abs(safeVma - activeComputedVma) < 0.05;
+                var mkGroupBtn = function(label, val, active) {
+                    var b = document.createElement("button");
+                    b.type = "button";
+                    b.className = "track-chip-btn" + (active ? " active" : "");
+                    b.textContent = label;
+                    b.addEventListener("click", function() {
+                        renderTrackVisualizer(val, trackPreviewPct, activeTrackDist, activeDurationMin);
+                    });
+                    groupWrap.appendChild(b);
+                };
+                mkGroupBtn(t.trackGroupMyVma + " (" + activeComputedVma.toFixed(1) + ")", Number(activeComputedVma.toFixed(1)), isMineSelected);
+                [10, 11, 12, 13, 14, 15, 16, 17, 18].forEach(function(g) {
+                    var active = !isMineSelected && Math.abs(safeVma - g) < 0.05;
+                    mkGroupBtn(g + " km/h", g, active);
+                });
+            }
+
+            // % VMA switcher chips
+            var pctWrap = document.getElementById("trackPctButtons");
+            if (pctWrap) {
+                pctWrap.innerHTML = "";
+                var pctPresets = [70, 80, 85, 90, 95, 100, 105, 110];
+                var roundedUserPct = Math.round(activeTargetPct);
+                if (pctPresets.indexOf(roundedUserPct) === -1 && roundedUserPct >= 40 && roundedUserPct <= 140) {
+                    pctPresets.push(roundedUserPct);
+                    pctPresets.sort(function(a, b) { return a - b; });
+                }
+                pctPresets.forEach(function(pVal) {
+                    var btn = document.createElement("button");
+                    btn.type = "button";
+                    btn.className = "track-chip-btn pct-chip" + (Math.abs(safePct - pVal) < 0.5 ? " active" : "");
+                    btn.textContent = pVal + "%";
+                    btn.addEventListener("click", function() {
+                        renderTrackVisualizer(trackPreviewVma, pVal, activeTrackDist, activeDurationMin);
+                    });
+                    pctWrap.appendChild(btn);
+                });
+            }
+
+            // Quarter-lap checkpoints
+            var d25 = Math.round(safeDist * 0.25);
+            var d50 = Math.round(safeDist * 0.50);
+            var d75 = Math.round(safeDist * 0.75);
+            var d100 = Math.round(safeDist);
+            var t25 = formatSplitTime(lapSec * 0.25);
+            var t50 = formatSplitTime(lapSec * 0.50);
+            var t75 = formatSplitTime(lapSec * 0.75);
+            var t100 = formatLapClock(lapSec);
+
+            var setTxt = function(id, txt) { var el = document.getElementById(id); if (el) el.textContent = txt; };
+            setTxt("svgCp100Dist", "0 / " + d100 + " m (" + t.svgStartFinishTag + ")");
+            setTxt("svgCp100Time", t100);
+            setTxt("svgCp25Dist", "25% · " + d25 + " m");
+            setTxt("svgCp25Time", t25);
+            setTxt("svgCp50Dist", "50% · " + d50 + " m");
+            setTxt("svgCp50Time", t50);
+            setTxt("svgCp75Dist", "75% · " + d75 + " m");
+            setTxt("svgCp75Time", t75);
+
+            var summaryStr = fullLaps + " " + t.lapsUnit + (remM > 0 ? " + " + remM + " m" : "");
+            setTxt("svgInfieldTitle", t.trackOf + " " + safeDist + " m · " + t.trackGroupWord + " " + safeVma.toFixed(1) + " km/h (" + Math.round(safePct) + "% VMA)");
+            setTxt("svgInfieldSpeed", speedKmh.toFixed(1) + " km/h · " + t100 + " / " + t.lapWordSingular.toLowerCase());
+            setTxt("svgInfieldTotal", t.svgAllureWord + " " + paceFmt + " · " + safeDur + " min : " + totalDistM.toLocaleString(numLocale) + " m (" + summaryStr + ")");
+            setTxt("svgInfieldHint", t.svgInfieldHintTxt);
+
+            setTxt("cpDist25", d25 + " m");
+            setTxt("cpTime25", t25);
+            setTxt("cpDist50", d50 + " m");
+            setTxt("cpTime50", t50);
+            setTxt("cpDist75", d75 + " m");
+            setTxt("cpTime75", t75);
+            setTxt("cpDist100", d100 + " m");
+            setTxt("cpTime100", formatSplitTime(lapSec));
+            setTxt("trackLapsSummaryBadge", summaryStr);
+
+            // Lap-by-lap splits table
+            var tbodyLaps = document.getElementById("tbodyTrackLaps");
+            if (tbodyLaps) {
+                tbodyLaps.innerHTML = "";
+                var maxRows = Math.min(fullLaps, 120);
+                for (var lapIdx = 1; lapIdx <= maxRows; lapIdx++) {
+                    var trL = document.createElement("tr");
+                    var cumDist = Math.round(lapIdx * safeDist);
+                    var cumSec = lapIdx * lapSec;
+                    trL.innerHTML = '<td><strong>' + t.lapWordSingular + ' ' + lapIdx + '</strong></td>' +
+                        '<td>' + cumDist.toLocaleString(numLocale) + ' m</td>' +
+                        '<td><span class="badge-lap">' + t100 + '</span></td>' +
+                        '<td><strong>' + formatSplitTime(cumSec) + '</strong></td>';
+                    tbodyLaps.appendChild(trL);
+                }
+                if (fullLaps < 120 && remM >= 1) {
+                    var fracSec = remM / speedMs;
+                    var totalEffortSec = safeDur * 60;
+                    var trF = document.createElement("tr");
+                    trF.className = "track-lap-partial";
+                    trF.innerHTML = '<td><strong>' + t.svgFinishFrac + ' (+' + remM + ' m)</strong></td>' +
+                        '<td>' + totalDistM.toLocaleString(numLocale) + ' m</td>' +
+                        '<td><span class="badge-lap">' + formatLapClock(fracSec) + '</span></td>' +
+                        '<td><strong>' + formatSplitTime(totalEffortSec) + '</strong></td>';
+                    tbodyLaps.appendChild(trF);
+                } else if (fullLaps > 120) {
+                    var trCap = document.createElement("tr");
+                    trCap.innerHTML = '<td colspan="4" style="text-align:center;color:#64748b;font-size:0.78rem;">' + t.lapsCapNote + '</td>';
+                    tbodyLaps.appendChild(trCap);
+                }
+            }
+        }
+
+        function performCalculation(skipScroll, preserveTrackPreview) {
             setToolError("");
             var t = i18n[currentLang] || i18n.fr;
             var vma = 0;
@@ -2612,10 +3247,374 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
                 }
             }
 
+            activeComputedVma = vma;
+            activeTrackDist = trackDist;
+            activeDurationMin = durationMin;
+            activeTargetPct = targetIntensity;
+            if (!preserveTrackPreview) {
+                trackPreviewVma = vma;
+                trackPreviewPct = targetIntensity;
+            }
+            renderTrackVisualizer(trackPreviewVma, trackPreviewPct, activeTrackDist, activeDurationMin);
+
             if (!skipScroll) {
                 resultsWrapper.scrollIntoView({ behavior: "smooth", block: "start" });
             }
         }
+
+        function cleanPdfString(str) {
+            return String(str || "")
+                .replace(/[\u{1F000}-\u{1FAFF}\u2600-\u27BF\uFE0F]/gu, "")
+                .replace(/[’‘]/g, "'")
+                .replace(/[“”]/g, '"')
+                .replace(/×/g, "x")
+                .replace(/→/g, "->")
+                .replace(/←/g, "<-")
+                .replace(/≈/g, "~")
+                .replace(/≥/g, ">=")
+                .replace(/≤/g, "<=")
+                .replace(/[−—–]/g, "-")
+                .replace(/₂/g, "2")
+                .replace(/·/g, "|")
+                .replace(/÷/g, "/")
+                .replace(/\s+/g, " ")
+                .trim();
+        }
+
+        function triggerPrintFallback(cardEl) {
+            if (!cardEl) return;
+            cardEl.classList.add("pdf-print-target");
+            document.body.classList.add("printing-single-table");
+            var cleanup = function() {
+                document.body.classList.remove("printing-single-table");
+                cardEl.classList.remove("pdf-print-target");
+                window.removeEventListener("afterprint", cleanup);
+            };
+            window.addEventListener("afterprint", cleanup);
+            window.print();
+            setTimeout(cleanup, 1600);
+        }
+
+        function exportArabicCanvasPdf(JsPdfCtor, filenameSlug, title, subtitle, extraLine, headers, rows) {
+            var isLandscape = headers.length >= 7;
+            var pageW = isLandscape ? 1684 : 1190;
+            var pageH = isLandscape ? 1190 : 1684;
+            var margin = 56;
+            var usableW = pageW - margin * 2;
+            var colW = usableW / headers.length;
+            var rowH = 38;
+            var headRowH = 44;
+
+            var doc = new JsPdfCtor({
+                orientation: isLandscape ? "l" : "p",
+                unit: "pt",
+                format: "a4"
+            });
+            var pdfW = doc.internal.pageSize.getWidth();
+            var pdfH = doc.internal.pageSize.getHeight();
+
+            var startRow = 0;
+            var pageIndex = 0;
+            while (startRow < rows.length || pageIndex === 0) {
+                var canvas = document.createElement("canvas");
+                canvas.width = pageW;
+                canvas.height = pageH;
+                var ctx = canvas.getContext("2d");
+                ctx.fillStyle = "#ffffff";
+                ctx.fillRect(0, 0, pageW, pageH);
+
+                // Top header strip
+                ctx.fillStyle = "#2434A8";
+                ctx.fillRect(0, 0, pageW, 18);
+
+                ctx.direction = "rtl";
+                ctx.textAlign = "right";
+                ctx.fillStyle = "#0f172a";
+                ctx.font = "bold 28px Tahoma, Arial, sans-serif";
+                ctx.fillText(title, pageW - margin, 68, usableW);
+
+                var y = 100;
+                if (subtitle) {
+                    ctx.fillStyle = "#475569";
+                    ctx.font = "18px Tahoma, Arial, sans-serif";
+                    ctx.fillText(subtitle, pageW - margin, y, usableW);
+                    y += 28;
+                }
+                if (extraLine && pageIndex === 0) {
+                    ctx.fillStyle = "#065f46";
+                    ctx.font = "bold 17px Tahoma, Arial, sans-serif";
+                    ctx.fillText(extraLine, pageW - margin, y, usableW);
+                    y += 30;
+                }
+                y += 8;
+
+                // Table header (RTL columns right-to-left)
+                ctx.fillStyle = "#2434A8";
+                ctx.fillRect(margin, y, usableW, headRowH);
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 16px Tahoma, Arial, sans-serif";
+                for (var c = 0; c < headers.length; c++) {
+                    var cellRightX = pageW - margin - c * colW - 10;
+                    ctx.fillText(headers[c], cellRightX, y + 27, colW - 18);
+                }
+                y += headRowH;
+
+                while (startRow < rows.length && (y + rowH) < (pageH - 70)) {
+                    var row = rows[startRow];
+                    ctx.fillStyle = (startRow % 2 === 1) ? "#f8fafc" : "#ffffff";
+                    ctx.fillRect(margin, y, usableW, rowH);
+                    ctx.strokeStyle = "#e2e8f0";
+                    ctx.lineWidth = 1;
+                    ctx.strokeRect(margin, y, usableW, rowH);
+
+                    ctx.fillStyle = "#1e293b";
+                    ctx.font = "15px Tahoma, Arial, sans-serif";
+                    for (var c2 = 0; c2 < headers.length; c2++) {
+                        var txt = (row[c2] !== undefined) ? String(row[c2]) : "";
+                        var cRightX = pageW - margin - c2 * colW - 10;
+                        ctx.fillText(txt, cRightX, y + 24, colW - 18);
+                    }
+                    y += rowH;
+                    startRow++;
+                }
+
+                // Footer
+                ctx.direction = "ltr";
+                ctx.textAlign = "left";
+                ctx.fillStyle = "#64748b";
+                ctx.font = "15px Tahoma, Arial, sans-serif";
+                ctx.fillText("ProfEPS.ma - VMA Calculator", margin, pageH - 26);
+                ctx.textAlign = "right";
+                ctx.fillText("Page " + (pageIndex + 1), pageW - margin, pageH - 26);
+
+                if (pageIndex > 0) doc.addPage();
+                doc.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdfW, pdfH);
+                pageIndex++;
+                if (startRow >= rows.length) break;
+            }
+
+            doc.save((filenameSlug || "tableau-vma") + ".pdf");
+        }
+
+        window.exportTableToPdf = function(cardId, filenameSlug) {
+            var card = document.getElementById(cardId);
+            if (!card) return;
+            var table = card.querySelector("table");
+            if (!table) {
+                triggerPrintFallback(card);
+                return;
+            }
+
+            var h3 = card.querySelector("h3");
+            var descP = card.querySelector(".table-header-flex p, .static-ref-head p");
+            var badgeEl = card.querySelector("#resTrackVizBadge, #resTableBadge, #resMatrixBadge, #resPaliersBadge");
+
+            var rawTitle = h3 ? h3.textContent.trim() : "Tableau VMA";
+            var rawSubtitle = "";
+            if (badgeEl && badgeEl.textContent.trim()) {
+                rawSubtitle = badgeEl.textContent.trim();
+            } else if (descP && descP.textContent.trim()) {
+                rawSubtitle = descP.textContent.trim();
+            }
+
+            var extraLine = "";
+            if (cardId === "cardTrackVisualizer") {
+                var cp1 = document.getElementById("cpDist25");
+                var cp1t = document.getElementById("cpTime25");
+                var cp2 = document.getElementById("cpDist50");
+                var cp2t = document.getElementById("cpTime50");
+                var cp3 = document.getElementById("cpDist75");
+                var cp3t = document.getElementById("cpTime75");
+                var cp4 = document.getElementById("cpDist100");
+                var cp4t = document.getElementById("cpTime100");
+                if (cp1 && cp1t && cp4 && cp4t) {
+                    extraLine = "25%: " + cp1.textContent + " (" + cp1t.textContent + ")  |  " +
+                                "50%: " + (cp2 ? cp2.textContent : "") + " (" + (cp2t ? cp2t.textContent : "") + ")  |  " +
+                                "75%: " + (cp3 ? cp3.textContent : "") + " (" + (cp3t ? cp3t.textContent : "") + ")  |  " +
+                                "100%: " + cp4.textContent + " (" + cp4t.textContent + ")";
+                }
+            }
+
+            var headers = Array.from(table.querySelectorAll("thead th")).map(function(th) {
+                return th.textContent.replace(/\s+/g, " ").trim();
+            });
+            var rows = Array.from(table.querySelectorAll("tbody tr")).map(function(tr) {
+                return Array.from(tr.querySelectorAll("td")).map(function(td) {
+                    return td.textContent.replace(/\s+/g, " ").trim();
+                });
+            }).filter(function(r) { return r.length > 0; });
+
+            if (!window.jspdf || !window.jspdf.jsPDF) {
+                triggerPrintFallback(card);
+                return;
+            }
+
+            var JsPdfCtor = window.jspdf.jsPDF;
+            var combinedSample = rawTitle + " " + rawSubtitle + " " + headers.join(" ") + " " + (rows[0] ? rows[0].join(" ") : "");
+            if (currentLang === "ar" || /[\u0600-\u06FF]/.test(combinedSample)) {
+                exportArabicCanvasPdf(
+                    JsPdfCtor,
+                    filenameSlug,
+                    rawTitle.replace(/[\u{1F000}-\u{1FAFF}\u2600-\u27BF\uFE0F]/gu, "").trim(),
+                    rawSubtitle.replace(/[\u{1F000}-\u{1FAFF}\u2600-\u27BF\uFE0F]/gu, "").trim(),
+                    extraLine,
+                    headers,
+                    rows
+                );
+                return;
+            }
+
+            var title = cleanPdfString(rawTitle);
+            var subtitle = cleanPdfString(rawSubtitle);
+            var cleanHeaders = headers.map(cleanPdfString);
+            var cleanRows = rows.map(function(r) { return r.map(cleanPdfString); });
+
+            var isLandscape = cleanHeaders.length >= 7;
+            var doc = new JsPdfCtor({
+                orientation: isLandscape ? "l" : "p",
+                unit: "mm",
+                format: "a4"
+            });
+
+            var pageW = doc.internal.pageSize.getWidth();
+            var pageH = doc.internal.pageSize.getHeight();
+            var margin = 12;
+            var usableW = pageW - margin * 2;
+
+            // Compute proportional column widths from max text length
+            var colWeights = cleanHeaders.map(function(h, idx) {
+                var maxLen = h.length;
+                for (var r = 0; r < Math.min(cleanRows.length, 25); r++) {
+                    var cell = cleanRows[r][idx] || "";
+                    if (cell.length > maxLen) maxLen = cell.length;
+                }
+                return Math.max(8, Math.min(34, maxLen + 3));
+            });
+            var weightSum = colWeights.reduce(function(acc, v) { return acc + v; }, 0);
+            var colWidths = colWeights.map(function(w) { return (w / weightSum) * usableW; });
+
+            var drawDocHeader = function(isFirstPage) {
+                doc.setFillColor(36, 52, 168);
+                doc.rect(0, 0, pageW, 5, "F");
+
+                doc.setFont("helvetica", "bold");
+                doc.setFontSize(isFirstPage ? 13 : 10.5);
+                doc.setTextColor(15, 23, 42);
+                var titleLines = doc.splitTextToSize(title, usableW - 36);
+                doc.text(titleLines, margin, 13);
+
+                doc.setFont("helvetica", "bold");
+                doc.setFontSize(9);
+                doc.setTextColor(36, 52, 168);
+                doc.text("ProfEPS.ma", pageW - margin, 13, { align: "right" });
+
+                var curY = 13 + titleLines.length * 5.2;
+                if (isFirstPage && subtitle) {
+                    doc.setFont("helvetica", "normal");
+                    doc.setFontSize(8.5);
+                    doc.setTextColor(71, 85, 105);
+                    var subLines = doc.splitTextToSize(subtitle, usableW);
+                    doc.text(subLines.slice(0, 2), margin, curY);
+                    curY += Math.min(subLines.length, 2) * 4.2 + 1;
+                }
+                if (isFirstPage && extraLine) {
+                    doc.setFillColor(236, 253, 245);
+                    doc.setDrawColor(167, 243, 208);
+                    doc.rect(margin, curY, usableW, 7.5, "FD");
+                    doc.setFont("helvetica", "bold");
+                    doc.setFontSize(8);
+                    doc.setTextColor(6, 95, 70);
+                    doc.text(cleanPdfString(extraLine), margin + 2.5, curY + 5);
+                    curY += 10;
+                }
+                return curY + 2;
+            };
+
+            var drawTableHeader = function(yPos) {
+                var headFontSize = cleanHeaders.length >= 9 ? 7.5 : 8.2;
+                doc.setFont("helvetica", "bold");
+                doc.setFontSize(headFontSize);
+
+                var wrappedCols = cleanHeaders.map(function(h, idx) {
+                    return doc.splitTextToSize(h, Math.max(8, colWidths[idx] - 3));
+                });
+                var maxLines = wrappedCols.reduce(function(m, arr) { return Math.max(m, arr.length); }, 1);
+                var hHeight = Math.max(8, maxLines * 3.8 + 4);
+
+                doc.setFillColor(36, 52, 168);
+                doc.rect(margin, yPos, usableW, hHeight, "F");
+                doc.setTextColor(255, 255, 255);
+
+                var xCursor = margin;
+                for (var c = 0; c < wrappedCols.length; c++) {
+                    doc.text(wrappedCols[c], xCursor + 1.5, yPos + 4.5);
+                    xCursor += colWidths[c];
+                }
+                return yPos + hHeight;
+            };
+
+            var y = drawDocHeader(true);
+            y = drawTableHeader(y);
+
+            var bodyFontSize = cleanHeaders.length >= 9 ? 7.6 : 8.2;
+            for (var rIdx = 0; rIdx < cleanRows.length; rIdx++) {
+                var row = cleanRows[rIdx];
+                var isSpanRow = (row.length === 1 && cleanHeaders.length > 1);
+                doc.setFont("helvetica", isSpanRow ? "italic" : "normal");
+                doc.setFontSize(bodyFontSize);
+
+                var cellTexts = isSpanRow
+                    ? [doc.splitTextToSize(row[0], usableW - 4)]
+                    : cleanHeaders.map(function(_, idx) {
+                        var txt = (row[idx] !== undefined) ? row[idx] : "";
+                        return doc.splitTextToSize(txt, Math.max(8, colWidths[idx] - 3));
+                    });
+                var rLines = cellTexts.reduce(function(m, arr) { return Math.max(m, arr.length); }, 1);
+                var rHeight = Math.max(6.8, rLines * 3.7 + 3.2);
+
+                if (y + rHeight > pageH - 14) {
+                    doc.addPage();
+                    y = drawDocHeader(false);
+                    y = drawTableHeader(y);
+                    doc.setFont("helvetica", isSpanRow ? "italic" : "normal");
+                    doc.setFontSize(bodyFontSize);
+                }
+
+                if (rIdx % 2 === 1) {
+                    doc.setFillColor(248, 250, 252);
+                    doc.rect(margin, y, usableW, rHeight, "F");
+                }
+                doc.setDrawColor(226, 232, 240);
+                doc.setLineWidth(0.2);
+                doc.rect(margin, y, usableW, rHeight, "S");
+
+                if (isSpanRow) {
+                    doc.setTextColor(100, 116, 139);
+                    doc.text(cellTexts[0], margin + 2, y + 4.5);
+                } else {
+                    var xC = margin;
+                    for (var cIdx = 0; cIdx < cellTexts.length; cIdx++) {
+                        doc.setTextColor(cIdx === 0 ? 15 : 30, cIdx === 0 ? 23 : 41, cIdx === 0 ? 42 : 59);
+                        doc.setFont("helvetica", cIdx === 0 ? "bold" : "normal");
+                        doc.text(cellTexts[cIdx], xC + 1.5, y + 4.4);
+                        xC += colWidths[cIdx];
+                    }
+                }
+                y += rHeight;
+            }
+
+            var totalPages = doc.getNumberOfPages();
+            for (var pNum = 1; pNum <= totalPages; pNum++) {
+                doc.setPage(pNum);
+                doc.setFont("helvetica", "normal");
+                doc.setFontSize(8);
+                doc.setTextColor(100, 116, 139);
+                doc.text("ProfEPS.ma | Calculateur VMA & Tableaux de Correspondance", margin, pageH - 6);
+                doc.text("Page " + pNum + " / " + totalPages, pageW - margin, pageH - 6, { align: "right" });
+            }
+
+            doc.save((filenameSlug || "tableau-vma") + ".pdf");
+        };
 
         // Initialisation et lecture des paramètres URL (résultats toujours cachés au chargement)
         (function initCalculatorPage() {
