@@ -93,6 +93,7 @@
   <link rel="stylesheet" href="/css/profeps-unifier.min.css?v=20261101">
   <link rel="stylesheet" href="/assets/site.css?v=20261117">
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" defer></script>
   <script src="profeps-communaute.js" defer></script>
 
   <style>
@@ -306,33 +307,34 @@
     }
     .dash-action-row .c-btn {
       min-height: 40px;
+      flex: 1 1 180px;
+      justify-content: center;
     }
-    .dash-action-reset {
-      margin-left: auto;
-    }
-    @media (max-width: 600px) {
-      .dash-action-reset { margin-left: 0; }
-    }
-    .dash-filter-zone {
-      margin-top: auto;
-      padding-top: 0.75rem;
-      border-top: 1px solid #E2E8F0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.48rem;
-    }
-    .dash-filter-row {
-      display: flex;
-      flex-wrap: wrap;
+    .btn-reset-grid {
+      background: #FFF1F2 !important;
+      color: #B91C1C !important;
+      border: 1.5px solid #FCA5A5 !important;
+      font-weight: 800 !important;
+      padding: 0.38rem 0.82rem !important;
+      min-height: 34px !important;
+      border-radius: 8px !important;
+      font-size: 0.78rem !important;
+      display: inline-flex;
       align-items: center;
-      gap: 0.55rem;
+      gap: 0.35rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s, border-color 0.15s, transform 0.12s;
     }
-    .dash-filter-row .class-search-input {
-      flex: 1 1 200px;
-      min-height: 38px;
+    .btn-reset-grid:hover {
+      background: #FFE4E6 !important;
+      border-color: #F43F5E !important;
+      color: #9F1239 !important;
     }
-    .dash-filter-row .class-filter-select {
-      min-height: 38px;
+    .btn-reset-grid.confirm-danger {
+      background: #E11D48 !important;
+      border-color: #BE123C !important;
+      color: #FFFFFF !important;
     }
     .cfg-group label {
       display: block;
@@ -962,9 +964,9 @@
       white-space: nowrap;
     }
 
-    /* Section Exports compacte intégrée dans la colonne gauche */
+    /* Section Exports compacte placée sous Importer Excel (colonne droite) */
     .class-export-card {
-      margin: auto 0 0 0;
+      margin: 0.15rem 0 0 0;
       padding: 0.72rem 0.9rem;
       background: linear-gradient(135deg, #EFF6FF 0%, #F8FAFC 100%);
       border: 1.5px solid #93C5FD;
@@ -1829,8 +1831,22 @@
       color: #E8ECFA;
     }
 
+    html[data-theme="dark"] .btn-reset-grid {
+      background: rgba(244, 63, 94, 0.18) !important;
+      border-color: #FB7185 !important;
+      color: #FDA4AF !important;
+    }
+    html[data-theme="dark"] .btn-reset-grid:hover {
+      background: rgba(244, 63, 94, 0.3) !important;
+      color: #FFFFFF !important;
+    }
+    html[data-theme="dark"] .btn-reset-grid.confirm-danger {
+      background: #E11D48 !important;
+      color: #FFFFFF !important;
+    }
+
     @media print {
-      @page { size: A4 landscape; margin: 10mm; }
+      @page { size: A4 landscape; margin: 6mm; }
       .peps-navbar, .note-hero, .mode-switcher, .workspace-top-grid, .dash-panel,
       .class-export-card, .footer, .seo-guide-card, .dynamic-guide-card,
       .excel-modal-backdrop, .peps-toast, .no-print-col,
@@ -1838,18 +1854,41 @@
       .table-footer-add-bar, .hdr-crit-actions, .hdr-add-crit-btn, #classSummaryStatsBar {
         display: none !important;
       }
-      .class-grid-section { display: block !important; }
+      .class-grid-section { display: block !important; margin: 0 !important; padding: 0 !important; }
       #indivModeSection { display: none !important; }
-      body { background: #FFFFFF !important; color: #0F172A !important; }
+      html, body { background: #FFFFFF !important; color: #0F172A !important; margin: 0 !important; padding: 0 !important; }
+      .note-main { padding: 0 !important; margin: 0 !important; max-width: 100% !important; width: 100% !important; }
       .class-table-container { border: 1px solid #000 !important; box-shadow: none !important; overflow: visible !important; }
       table.sheet-35-table { font-size: 7pt !important; }
       table.sheet-35-table th { background: #1E293B !important; color: #FFFFFF !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       body.print-brute-mode #printableClassTableWrap { display: none !important; }
-      body.print-brute-mode #brutePrintSheet { display: block !important; }
-      body.print-brute-mode #brutePrintSheet table { width: 100%; border-collapse: collapse; font-size: 8pt; }
+      body.print-brute-mode #brutePrintSheet {
+        display: block !important;
+        width: 100% !important;
+      }
+      body.print-brute-mode #brutePrintSheet table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        table-layout: auto !important;
+      }
+      body.print-brute-mode #brutePrintSheet tr {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
       body.print-brute-mode #brutePrintSheet th,
-      body.print-brute-mode #brutePrintSheet td { border: 1px solid #000; padding: 3px 4px; text-align: center; }
-      body.print-brute-mode #brutePrintSheet th { background: #1E3A8A !important; color: #FFFFFF !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      body.print-brute-mode #brutePrintSheet td {
+        border: 1px solid #1E293B !important;
+        text-align: center;
+        vertical-align: middle;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      body.print-brute-mode #brutePrintSheet th {
+        background: #1E3A8A !important;
+        color: #FFFFFF !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
     }
   </style>
   <!-- Google AdSense -->
@@ -2322,7 +2361,7 @@
       <!-- COLONNE GAUCHE : INFOS, STATS, SITUATION DE RÉFÉRENCE, BARÈME /20 & EXPORTS -->
       <div class="dash-panel dash-info-col">
         <div class="dash-panel-head">
-          <h2 class="dash-panel-title">📊 Infos, Statistiques &amp; Exports</h2>
+          <h2 class="dash-panel-title">📊 Infos &amp; Statistiques</h2>
           <span class="sr-tag-op" id="srOpBadge">OP 2007 — 2ème Année Bac (2Bac)</span>
         </div>
 
@@ -2379,18 +2418,6 @@
                 <span class="b-pill-val" id="pillCompMax">/ 3 pts</span>
               </div>
             </div>
-          </div>
-        </div>
-
-        <!-- BOUTONS EXPORTS (MODE CLASSE) -->
-        <div class="class-export-card classe-only-el" id="classExportSection" aria-label="Télécharger la grille">
-          <div class="class-export-info">
-            <h3>Exporter / Télécharger la Grille</h3>
-            <p>Grille complétée avec les notes ou grille brute vierge à imprimer.</p>
-          </div>
-          <div class="class-btn-group">
-            <button type="button" class="c-btn primary" onclick="openCompletedExportModal()">📥 Télécharger Grille Complétée</button>
-            <button type="button" class="c-btn" onclick="openBruteExportModal()">📋 Télécharger Grille Brute</button>
           </div>
         </div>
       </div>
@@ -2470,26 +2497,25 @@
           </div>
         </div>
 
-        <!-- BOUTONS D'ACTION : CRITÈRES, IMPORT EXCEL & RÉINITIALISER -->
+        <!-- BOUTONS D'ACTION : CRITÈRES & IMPORT EXCEL -->
         <div class="dash-action-row">
           <button type="button" class="c-btn" id="btnToggleCritAtelier" onclick="toggleCritAtelierPanel()">✎ Critères &amp; Poids</button>
           <input type="file" id="excelImportInput" accept=".xlsx,.xls,.csv,.txt" style="display:none;" onchange="handleExcelFileSelect(event)">
           <button type="button" class="c-btn primary classe-only-el" id="btnTriggerExcelImport" onclick="triggerExcelImport()">📥 Importer Excel (Massar)</button>
-          <button type="button" class="c-btn subtle classe-only-el dash-action-reset" id="btnResetClassData" onclick="confirmResetClassData()">Réinitialiser</button>
         </div>
 
-        <!-- RECHERCHE & FILTRE CLASSE -->
-        <div class="dash-filter-zone classe-only-el">
-          <div class="dash-filter-row">
-            <input type="search" id="classSearchInput" class="class-search-input" placeholder="🔍 Rechercher un élève..." oninput="onClassFilterChange()">
-            <select id="classFilterSelect" class="class-filter-select" aria-label="Filtrer par genre" onchange="setClassFilter(this.value)">
-              <option value="ALL" selected>Tous les élèves</option>
-              <option value="G">Garçons (G)</option>
-              <option value="F">Filles (F)</option>
-            </select>
+        <!-- SECTION EXPORTER SOUS IMPORT EXCEL (MODE CLASSE) -->
+        <div class="class-export-card classe-only-el" id="classExportSection" aria-label="Télécharger la grille">
+          <div class="class-export-info">
+            <h3>Exporter / Télécharger la Grille</h3>
+            <p>Grille complétée avec les notes ou grille brute vierge à imprimer (A4 Paysage).</p>
           </div>
-          <p id="classSubtitleHint" style="font-size:0.75rem;color:var(--ink-muted);margin:0;">Importez votre liste Excel Massar ou saisissez vos élèves directement dans le tableau ci-dessous.</p>
+          <div class="class-btn-group">
+            <button type="button" class="c-btn primary" onclick="openCompletedExportModal()">📥 Télécharger Grille Complétée</button>
+            <button type="button" class="c-btn" onclick="openBruteExportModal()">📋 Télécharger Grille Brute</button>
+          </div>
         </div>
+        <p id="classSubtitleHint" class="classe-only-el" style="font-size:0.75rem;color:var(--ink-muted);margin:0;">Importez votre liste Excel Massar ou saisissez vos élèves directement dans le tableau ci-dessous.</p>
       </div>
     </section>
 
@@ -2686,7 +2712,10 @@
       <div class="class-table-container" id="printableClassTableWrap">
         <div class="table-quick-bar">
           <span style="font-size:0.75rem;color:#475569;font-weight:600;">Cliquez sur <strong>✎</strong> ou <strong>×</strong> dans l'en-tête pour modifier/supprimer un critère.</span>
-          <span style="font-size:0.74rem;font-weight:700;color:#1E40AF;" id="tableRowCountLabel">1 / 50 élèves</span>
+          <div style="display:flex;align-items:center;gap:0.65rem;flex-wrap:wrap;">
+            <span style="font-size:0.74rem;font-weight:700;color:#1E40AF;" id="tableRowCountLabel">1 / 50 élèves</span>
+            <button type="button" class="btn-reset-grid" id="btnResetClassData" onclick="confirmResetClassData()">↺ Réinitialiser</button>
+          </div>
         </div>
 
         <table class="sheet-35-table" id="classSheetTable">
@@ -3439,8 +3468,6 @@
     let currentSexe = 'G';
     let currentCritMode = 'strict';
     let currentClassName = 'Classe 1';
-    let currentClassFilter = 'ALL';
-    let currentClassSearch = '';
     let hasImportedExcelNames = false;
     let resetConfirmPending = false;
     let resetConfirmTimer = null;
@@ -4865,7 +4892,7 @@
         resetConfirmTimer = setTimeout(() => {
           resetConfirmPending = false;
           if (btn) {
-            btn.textContent = 'Réinitialiser';
+            btn.textContent = '↺ Réinitialiser';
             btn.classList.remove('confirm-danger');
           }
         }, 4000);
@@ -4874,7 +4901,7 @@
       clearTimeout(resetConfirmTimer);
       resetConfirmPending = false;
       if (btn) {
-        btn.textContent = 'Réinitialiser';
+        btn.textContent = '↺ Réinitialiser';
         btn.classList.remove('confirm-danger');
       }
 
@@ -4895,12 +4922,6 @@
           comp: 0
         }, cfg)
       ];
-      currentClassFilter = 'ALL';
-      currentClassSearch = '';
-      const searchEl = document.getElementById('classSearchInput');
-      if (searchEl) searchEl.value = '';
-      const filterEl = document.getElementById('classFilterSelect');
-      if (filterEl) filterEl.value = 'ALL';
       saveStateToStorage();
       renderClassGridTable();
       showToast('Grille réinitialisée avec 1 ligne par défaut.');
@@ -5183,18 +5204,6 @@
       showToast(`Ligne supprimée : ${removed.nom}`);
     }
 
-    function setClassFilter(mode) {
-      currentClassFilter = mode || 'ALL';
-      const sel = document.getElementById('classFilterSelect');
-      if (sel && sel.value !== currentClassFilter) sel.value = currentClassFilter;
-      renderClassGridTable();
-    }
-
-    function onClassFilterChange() {
-      currentClassSearch = (document.getElementById('classSearchInput')?.value || '').trim().toLowerCase();
-      renderClassGridTable();
-    }
-
     function updateClassStatsOnly(cfg) {
       const safeCfg = cfg || getBaremeConfig(currentNiveau, currentAps);
       const activeTotals = [];
@@ -5468,18 +5477,12 @@
         `;
       }
 
-      // Compute visible indices based on filter & search
-      const visibleIndices = [];
-      classStudents.forEach((st, idx) => {
-        if (currentClassFilter === 'G' && st.sexe !== 'G') return;
-        if (currentClassFilter === 'F' && st.sexe !== 'F') return;
-        if (currentClassSearch && !String(st.nom || '').toLowerCase().includes(currentClassSearch)) return;
-        visibleIndices.push(idx);
-      });
+      // Afficher tous les élèves de la grille
+      const visibleIndices = classStudents.map((_, idx) => idx);
 
       if (visibleIndices.length === 0) {
         const colSpanCount = cfg.isSpCo ? (9 + critsIndiv.length + critsProc.length) : (10 + critsProc.length);
-        tbody.innerHTML = `<tr><td colspan="${colSpanCount}" style="padding:22px;color:#64748B;font-weight:600;">Aucun élève ne correspond au filtre actuel.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="${colSpanCount}" style="padding:22px;color:#64748B;font-weight:600;">Aucun élève dans la grille. Cliquez sur « Ajouter un élève ».</td></tr>`;
       } else {
         tbody.innerHTML = visibleIndices.map(rIdx => {
           const st = classStudents[rIdx];
@@ -6218,6 +6221,68 @@
       URL.revokeObjectURL(url);
     }
 
+    function getA4PrintMetrics(rowCount, colCount) {
+      const safeRows = Math.max(1, rowCount || 1);
+      const safeCols = Math.max(6, colCount || 10);
+      // Hauteur imprimable A4 paysage (~748px à 96dpi) moins en-tête titre & thead (~80px) = ~620px sûrs pour éviter tout saut de page
+      const maxBodyPx = 620;
+      const rowHeightPx = Math.max(9.8, Math.min(22, Math.floor((maxBodyPx / safeRows) * 10) / 10));
+      let bodyPt = safeRows > 42 ? 5.9 : (safeRows > 34 ? 6.4 : (safeRows > 25 ? 7.0 : 7.6));
+      let hdrPt = safeRows > 42 ? 5.8 : (safeRows > 34 ? 6.2 : 6.8);
+      if (safeCols >= 13) {
+        bodyPt = Math.min(bodyPt, safeRows > 36 ? 5.6 : 6.2);
+        hdrPt = Math.min(hdrPt, 5.8);
+      }
+      const padV = safeRows > 38 ? 0.5 : (safeRows > 28 ? 1.2 : 2.2);
+      const padH = safeCols >= 13 ? 1.5 : 2.5;
+      return { rowHeightPx, bodyPt, hdrPt, padV, padH };
+    }
+
+    async function saveWorkbookA4Landscape(wb, ws, outName, rowCount, colCount) {
+      ws['!margins'] = { left: 0.25, right: 0.25, top: 0.28, bottom: 0.28, header: 0.12, footer: 0.12 };
+      const compactHpt = Math.max(10.5, Math.min(18, Math.floor(485 / Math.max(1, rowCount || 1))));
+      const rowsMeta = [{ hpt: 20 }, { hpt: 22 }];
+      for (let i = 0; i < (rowCount || 0); i++) {
+        rowsMeta.push({ hpt: compactHpt });
+      }
+      ws['!rows'] = rowsMeta;
+
+      if (window.JSZip && typeof XLSX !== 'undefined') {
+        try {
+          const rawBuf = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+          const zip = await window.JSZip.loadAsync(rawBuf);
+          const sheetFile = zip.file('xl/worksheets/sheet1.xml');
+          if (sheetFile) {
+            let xml = await sheetFile.async('string');
+            // Injecter <sheetPr><pageSetUpPr fitToPage="1"/></sheetPr> au début de <worksheet> (ordre ECMA-376)
+            xml = xml.replace(/<sheetPr\b[^>]*\/>|<sheetPr\b[^>]*>[\s\S]*?<\/sheetPr>/i, '');
+            xml = xml.replace(/(<worksheet\b[^>]*>)/i, '$1<sheetPr><pageSetUpPr fitToPage="1"/></sheetPr>');
+            // Injecter <pageSetup paperSize="9" orientation="landscape" fitToWidth="1" fitToHeight="1"/> juste après <pageMargins .../>
+            xml = xml.replace(/<pageSetup\b[^>]*\/>|<pageSetup\b[^>]*>[\s\S]*?<\/pageSetup>/i, '');
+            if (/<pageMargins\b[^>]*\/>/i.test(xml)) {
+              xml = xml.replace(/(<pageMargins\b[^>]*\/>)/i, '$1<pageSetup paperSize="9" orientation="landscape" fitToWidth="1" fitToHeight="1"/>');
+            } else {
+              xml = xml.replace(/<\/worksheet>/i, '<pageSetup paperSize="9" orientation="landscape" fitToWidth="1" fitToHeight="1"/></worksheet>');
+            }
+            zip.file('xl/worksheets/sheet1.xml', xml);
+            const blob = await zip.generateAsync({ type: 'blob', mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = outName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            return;
+          }
+        } catch (err) {
+          // Fallback standard SheetJS ci-dessous
+        }
+      }
+      XLSX.writeFile(wb, outName);
+    }
+
     function exportClassGridExcel(kind) {
       const cfg = getBaremeConfig(currentNiveau, currentAps);
       const nivLabel = currentNiveau === '1AB' ? '1Bac' : (currentNiveau === '2AB' ? '2Bac' : currentNiveau);
@@ -6231,9 +6296,11 @@
       const negPts = cfg.negPts || 0;
 
       let aoaMain = [];
+      let colWidths = [];
       if (kind === 'massar') {
         aoaMain.push([`CLASSE : ${clsLabel}`, `APS : ${currentAps}`, `NIVEAU : ${nivLabel}`]);
         aoaMain.push(['N°', 'Nom & Prénom', 'Sexe', `Procédural (/${cfg.procTotal})`, `Conceptuel (/${cfg.concepMax})`, `Comportemental (/${cfg.compMax})`, 'Note Finale /20']);
+        colWidths = [{ wch: 4 }, { wch: 24 }, { wch: 6 }, { wch: 15 }, { wch: 15 }, { wch: 17 }, { wch: 14 }];
         classStudents.forEach((st, idx) => {
           const sc = getStudentScores(st, cfg);
           aoaMain.push([
@@ -6256,6 +6323,12 @@
           `2. Conceptuel (/${cfg.concepMax})`,
           `3. Comportemental (/${cfg.compMax})`,
           'TOTAL /20'
+        ];
+        colWidths = [
+          { wch: 4 }, { wch: 20 }, { wch: 5 },
+          ...critsIndiv.map(() => ({ wch: 14 })), { wch: 10 },
+          ...critsProc.map(() => ({ wch: 14 })), { wch: 10 },
+          { wch: 10 }, { wch: 10 }, { wch: 10 }
         ];
         aoaMain.push([`GRILLE EPS — ${clsLabel} — ${currentAps.toUpperCase()} (${nivLabel}) — INDIVIDUEL + COLLECTIF`]);
         aoaMain.push(hdr);
@@ -6289,6 +6362,11 @@
           `3. Comportemental (/${cfg.compMax})`,
           'TOTAL /20'
         ];
+        colWidths = [
+          { wch: 4 }, { wch: 21 }, { wch: 5 }, { wch: 12 }, { wch: 10 },
+          ...critsProc.map(() => ({ wch: 14 })),
+          { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 }
+        ];
         aoaMain.push([`GRILLE EPS — ${clsLabel} — ${currentAps.toUpperCase()} (${nivLabel}) — PERFORMANCE & PROCESSUS`]);
         aoaMain.push(hdr);
         classStudents.forEach((st, idx) => {
@@ -6320,115 +6398,149 @@
 
       const wb = XLSX.utils.book_new();
       const ws = XLSX.utils.aoa_to_sheet(aoaMain);
+      ws['!cols'] = colWidths;
+      if (kind !== 'massar' && aoaMain[1] && aoaMain[1].length > 1) {
+        ws['!merges'] = [{ s: { r: 0, c: 0 }, e: { r: 0, c: aoaMain[1].length - 1 } }];
+      }
       XLSX.utils.book_append_sheet(wb, ws, kind === 'massar' ? 'Import_Massar' : 'Grille_EPS');
       const outName = kind === 'massar' ? `Export_Massar_${safeCls}_${safeAps}.xlsx` : `Grille_EPS_${safeCls}_${safeAps}.xlsx`;
-      XLSX.writeFile(wb, outName);
-      showToast(`Fichier ${outName} téléchargé.`);
+      saveWorkbookA4Landscape(wb, ws, outName, classStudents.length, colWidths.length).then(() => {
+        showToast(`Fichier ${outName} (1 page A4 Paysage) téléchargé.`);
+      });
     }
 
-    function exportClassGridWord() {
+    function buildCompletedGridHtmlParts() {
       const cfg = getBaremeConfig(currentNiveau, currentAps);
-      const nivLabel = currentNiveau === '1AB' ? '1Bac' : (currentNiveau === '2AB' ? '2Bac' : currentNiveau);
-      const clsLabel = currentClassName || 'Classe 1';
-      const safeCls = clsLabel.replace(/[^a-zA-Z0-9\u0600-\u06FF_-]+/g, '_');
       const unitMeta = PERF_UNIT_META[currentAps] || { unit: 'pts' };
       const critsIndiv = cfg.isSpCo ? getCritsForAps(currentAps, 'indiv') : [];
       const critsProc = cfg.isSpCo ? getCritsForAps(currentAps, 'collectif') : getCritsForAps(currentAps, 'processus');
       const indWeights = cfg.critWeightsIndiv || [];
       const procWeights = cfg.critWeights || [];
       const negPts = cfg.negPts || 0;
+      const totalCols = cfg.isSpCo ? (8 + critsIndiv.length + critsProc.length) : (9 + critsProc.length);
+      const metrics = getA4PrintMetrics(classStudents.length, totalCols);
 
+      const thStyle = `border:1px solid #1E293B;padding:${metrics.padV}px ${metrics.padH}px;font-size:${metrics.hdrPt}pt;line-height:1.1;`;
       let theadHtml = '';
       if (cfg.isSpCo) {
         theadHtml = `
           <tr style="background:#1E3A8A;color:#FFFFFF;">
-            <th style="border:1px solid #333;padding:5px;">N°</th>
-            <th style="border:1px solid #333;padding:5px;">Nom &amp; Prénom</th>
-            <th style="border:1px solid #333;padding:5px;">Sexe</th>
-            ${critsIndiv.map((c, i) => `<th style="border:1px solid #333;padding:5px;">Indiv: ${escapeHtml(c.nom)} (/${indWeights[i]})</th>`).join('')}
-            <th style="border:1px solid #333;padding:5px;background:#1D4ED8;">Note Indiv (/${cfg.perfMax})</th>
-            ${critsProc.map((c, i) => `<th style="border:1px solid #333;padding:5px;">Coll: ${escapeHtml(c.nom)} (/${procWeights[i]})</th>`).join('')}
-            <th style="border:1px solid #333;padding:5px;background:#065F46;">Note Coll (/${cfg.procMax})</th>
-            <th style="border:1px solid #333;padding:5px;">2. Concep (/${cfg.concepMax})</th>
-            <th style="border:1px solid #333;padding:5px;">3. Comport (/${cfg.compMax})</th>
-            <th style="border:1px solid #333;padding:5px;background:#0F172A;">TOTAL /20</th>
+            <th style="${thStyle}width:22px;">N°</th>
+            <th style="${thStyle}min-width:95px;text-align:left;">Nom &amp; Prénom</th>
+            <th style="${thStyle}width:26px;">Sexe</th>
+            ${critsIndiv.map((c, i) => `<th style="${thStyle}">Ind: ${escapeHtml(c.nom)}<br><small>/${indWeights[i]}</small></th>`).join('')}
+            <th style="${thStyle}background:#1D4ED8;width:36px;">Indiv<br>/${cfg.perfMax}</th>
+            ${critsProc.map((c, i) => `<th style="${thStyle}">Col: ${escapeHtml(c.nom)}<br><small>/${procWeights[i]}</small></th>`).join('')}
+            <th style="${thStyle}background:#065F46;width:36px;">Coll<br>/${cfg.procMax}</th>
+            <th style="${thStyle}width:34px;">Conc.<br>/${cfg.concepMax}</th>
+            <th style="${thStyle}width:34px;">Comp.<br>/${cfg.compMax}</th>
+            <th style="${thStyle}background:#0F172A;width:44px;">TOTAL<br>/20</th>
           </tr>
         `;
       } else {
         theadHtml = `
           <tr style="background:#1E3A8A;color:#FFFFFF;">
-            <th style="border:1px solid #333;padding:5px;">N°</th>
-            <th style="border:1px solid #333;padding:5px;">Nom &amp; Prénom</th>
-            <th style="border:1px solid #333;padding:5px;">Sexe</th>
-            <th style="border:1px solid #333;padding:5px;">Perf. Brute (${escapeHtml(unitMeta.unit)})</th>
-            <th style="border:1px solid #333;padding:5px;">1A. Perf (/${cfg.perfMax})</th>
-            ${critsProc.map((c, i) => `<th style="border:1px solid #333;padding:5px;">${escapeHtml(c.nom)} (/${procWeights[i]})</th>`).join('')}
-            <th style="border:1px solid #333;padding:5px;">1B. Processus (/${cfg.procMax})</th>
-            <th style="border:1px solid #333;padding:5px;">2. Concep. (/${cfg.concepMax})</th>
-            <th style="border:1px solid #333;padding:5px;">3. Comport. (/${cfg.compMax})</th>
-            <th style="border:1px solid #333;padding:5px;background:#0F172A;">TOTAL /20</th>
+            <th style="${thStyle}width:22px;">N°</th>
+            <th style="${thStyle}min-width:100px;text-align:left;">Nom &amp; Prénom</th>
+            <th style="${thStyle}width:26px;">Sexe</th>
+            <th style="${thStyle}width:48px;">Perf.<br>(${escapeHtml(unitMeta.unit)})</th>
+            <th style="${thStyle}width:36px;">1A.<br>/${cfg.perfMax}</th>
+            ${critsProc.map((c, i) => `<th style="${thStyle}">${escapeHtml(c.nom)}<br><small>/${procWeights[i]}</small></th>`).join('')}
+            <th style="${thStyle}width:36px;">1B.<br>/${cfg.procMax}</th>
+            <th style="${thStyle}width:34px;">Conc.<br>/${cfg.concepMax}</th>
+            <th style="${thStyle}width:34px;">Comp.<br>/${cfg.compMax}</th>
+            <th style="${thStyle}background:#0F172A;width:44px;">TOTAL<br>/20</th>
           </tr>
         `;
       }
 
+      const tdStyle = `border:1px solid #334155;padding:${metrics.padV}px ${metrics.padH}px;text-align:center;font-size:${metrics.bodyPt}pt;line-height:1.08;`;
       const rowsHtml = classStudents.map((st, idx) => {
         const sc = getStudentScores(st, cfg);
-
         let middleTds = '';
         if (cfg.isSpCo) {
           const indTds = critsIndiv.map((c, i) => {
             const ch = (st.critsIndiv && st.critsIndiv[i]) || 0;
             const pts = ch === 0 ? indWeights[i] : negPts;
-            return `<td style="border:1px solid #333;padding:4px;text-align:center;font-size:8.5pt;">[X] ${escapeHtml(c.sous[ch])} (${pts})</td>`;
+            return `<td style="${tdStyle}">${ch === 0 ? '✓' : '✗'} ${escapeHtml(c.sous[ch])} (${pts})</td>`;
           }).join('');
           const procTds = critsProc.map((c, i) => {
             const ch = (st.crits && st.crits[i]) || 0;
             const pts = ch === 0 ? procWeights[i] : negPts;
-            return `<td style="border:1px solid #333;padding:4px;text-align:center;font-size:8.5pt;">[X] ${escapeHtml(c.sous[ch])} (${pts})</td>`;
+            return `<td style="${tdStyle}">${ch === 0 ? '✓' : '✗'} ${escapeHtml(c.sous[ch])} (${pts})</td>`;
           }).join('');
           middleTds = `
             ${indTds}
-            <td style="border:1px solid #333;padding:4px;text-align:center;font-weight:bold;">${sc.pIndiv.toFixed(2)}</td>
+            <td style="${tdStyle}font-weight:bold;">${sc.pIndiv.toFixed(2)}</td>
             ${procTds}
-            <td style="border:1px solid #333;padding:4px;text-align:center;font-weight:bold;">${sc.pProc.toFixed(2)}</td>
+            <td style="${tdStyle}font-weight:bold;">${sc.pProc.toFixed(2)}</td>
           `;
         } else {
           const procTds = critsProc.map((c, i) => {
             const ch = (st.crits && st.crits[i]) || 0;
             const pts = ch === 0 ? procWeights[i] : negPts;
-            return `<td style="border:1px solid #333;padding:4px;text-align:center;font-size:8.5pt;">[X] ${escapeHtml(c.sous[ch])} (${pts})</td>`;
+            return `<td style="${tdStyle}">${ch === 0 ? '✓' : '✗'} ${escapeHtml(c.sous[ch])} (${pts})</td>`;
           }).join('');
           middleTds = `
-            <td style="border:1px solid #333;padding:4px;text-align:center;">${st.rawPerf ? escapeHtml(st.rawPerf) + ' ' + escapeHtml(unitMeta.unit) : '—'}</td>
-            <td style="border:1px solid #333;padding:4px;text-align:center;">${sc.pIndiv.toFixed(2)}</td>
+            <td style="${tdStyle}">${st.rawPerf ? escapeHtml(st.rawPerf) + ' ' + escapeHtml(unitMeta.unit) : '—'}</td>
+            <td style="${tdStyle}">${sc.pIndiv.toFixed(2)}</td>
             ${procTds}
-            <td style="border:1px solid #333;padding:4px;text-align:center;font-weight:bold;">${sc.pProc.toFixed(2)}</td>
+            <td style="${tdStyle}font-weight:bold;">${sc.pProc.toFixed(2)}</td>
           `;
         }
 
         return `
-          <tr>
-            <td style="border:1px solid #333;padding:4px;text-align:center;">${idx + 1}</td>
-            <td style="border:1px solid #333;padding:4px;">${escapeHtml(st.nom)}</td>
-            <td style="border:1px solid #333;padding:4px;text-align:center;">${escapeHtml(st.sexe)}</td>
+          <tr style="height:${metrics.rowHeightPx}px;">
+            <td style="${tdStyle}">${idx + 1}</td>
+            <td style="${tdStyle}text-align:left;font-weight:bold;">${escapeHtml(st.nom)}</td>
+            <td style="${tdStyle}">${escapeHtml(st.sexe)}</td>
             ${middleTds}
-            <td style="border:1px solid #333;padding:4px;text-align:center;">${sc.cVal.toFixed(2)}</td>
-            <td style="border:1px solid #333;padding:4px;text-align:center;">${sc.bVal.toFixed(2)}</td>
-            <td style="border:1px solid #333;padding:4px;text-align:center;font-weight:bold;background:#DCFCE7;">${sc.total.toFixed(2)} / 20</td>
+            <td style="${tdStyle}">${sc.cVal.toFixed(2)}</td>
+            <td style="${tdStyle}">${sc.bVal.toFixed(2)}</td>
+            <td style="${tdStyle}font-weight:bold;background:#DCFCE7;">${sc.total.toFixed(2)}</td>
           </tr>
         `;
       }).join('');
 
+      return { cfg, metrics, theadHtml, rowsHtml };
+    }
+
+    function exportClassGridWord() {
+      const nivLabel = currentNiveau === '1AB' ? '1Bac' : (currentNiveau === '2AB' ? '2Bac' : currentNiveau);
+      const clsLabel = currentClassName || 'Classe 1';
+      const safeCls = clsLabel.replace(/[^a-zA-Z0-9\u0600-\u06FF_-]+/g, '_');
+      const { cfg, metrics, theadHtml, rowsHtml } = buildCompletedGridHtmlParts();
+
       const wordDoc = `
         <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
-        <head><meta charset="utf-8"><title>Grille EPS ${escapeHtml(clsLabel)} - ${escapeHtml(currentAps)}</title></head>
-        <body style="font-family:Arial,sans-serif;font-size:10pt;">
-          <h2 style="text-align:center;color:#1E3A8A;margin-bottom:4px;">GRILLE D'ÉVALUATION EPS (/20) — ${escapeHtml(clsLabel)} — ${escapeHtml(currentAps.toUpperCase())} (${nivLabel})</h2>
-          <p style="text-align:center;font-size:9pt;margin-top:0;">Orientations Pédagogiques Maroc · Procédural /${cfg.procTotal} (${escapeHtml(cfg.labelPerf)} /${cfg.perfMax} + ${escapeHtml(cfg.labelProc)} /${cfg.procMax}) · Conceptuel /${cfg.concepMax} · Comportemental /${cfg.compMax}</p>
-          <table style="width:100%;border-collapse:collapse;">
-            <thead>${theadHtml}</thead>
-            <tbody>${rowsHtml}</tbody>
-          </table>
+        <head>
+          <meta charset="utf-8">
+          <title>Grille EPS ${escapeHtml(clsLabel)} - ${escapeHtml(currentAps)}</title>
+          <!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]-->
+          <style>
+            @page Section1 {
+              size: 29.7cm 21.0cm;
+              mso-page-orientation: landscape;
+              margin: 0.6cm 0.65cm 0.6cm 0.65cm;
+              mso-header-margin: 0.25cm;
+              mso-footer-margin: 0.25cm;
+              mso-paper-source: 0;
+            }
+            div.Section1 { page: Section1; }
+            body { font-family: Arial, sans-serif; font-size: ${metrics.bodyPt}pt; margin: 0; }
+            table { width: 100%; border-collapse: collapse; }
+            tr { page-break-inside: avoid; }
+          </style>
+        </head>
+        <body>
+          <div class="Section1">
+            <h2 style="text-align:center;color:#1E3A8A;margin:0 0 2px 0;font-size:11pt;">GRILLE D'ÉVALUATION EPS (/20) — ${escapeHtml(clsLabel)} — ${escapeHtml(currentAps.toUpperCase())} (${nivLabel})</h2>
+            <p style="text-align:center;font-size:7.5pt;margin:0 0 5px 0;color:#334155;">OP Maroc · Procédural /${cfg.procTotal} (${escapeHtml(cfg.labelPerf)} /${cfg.perfMax} + ${escapeHtml(cfg.labelProc)} /${cfg.procMax}) · Conceptuel /${cfg.concepMax} · Comportemental /${cfg.compMax} · ${classStudents.length} élèves</p>
+            <table>
+              <thead>${theadHtml}</thead>
+              <tbody>${rowsHtml}</tbody>
+            </table>
+          </div>
         </body></html>
       `;
 
@@ -6441,6 +6553,7 @@
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
+      showToast('Grille complétée Word (1 page A4 Paysage) téléchargée.');
     }
 
     // =========================================================================
@@ -6462,8 +6575,35 @@
       } else if (type === 'word') {
         exportClassGridWord();
       } else if (type === 'pdf') {
-        document.body.classList.remove('print-brute-mode');
-        setTimeout(() => window.print(), 60);
+        const nivLabel = currentNiveau === '1AB' ? '1Bac' : (currentNiveau === '2AB' ? '2Bac' : currentNiveau);
+        const clsLabel = currentClassName || 'Classe 1';
+        const { cfg, theadHtml, rowsHtml } = buildCompletedGridHtmlParts();
+        const printEl = document.getElementById('brutePrintSheet');
+        if (printEl) {
+          printEl.innerHTML = `
+            <div style="margin-bottom:5px;display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #1E3A8A;padding-bottom:4px;">
+              <div>
+                <h2 style="margin:0;font-size:11.5pt;color:#1E3A8A;">GRILLE D'ÉVALUATION EPS (/20) — ${escapeHtml(clsLabel)} · ${escapeHtml(currentAps.toUpperCase())} (${nivLabel})</h2>
+                <div style="font-size:7.5pt;color:#334155;">Procédural /${cfg.procTotal} (${escapeHtml(cfg.labelPerf)} /${cfg.perfMax} + ${escapeHtml(cfg.labelProc)} /${cfg.procMax}) · Conceptuel /${cfg.concepMax} · Comportemental /${cfg.compMax}</div>
+              </div>
+              <div style="font-size:7.8pt;font-weight:bold;color:#1E3A8A;">Effectif : ${classStudents.length} élève${classStudents.length > 1 ? 's' : ''}</div>
+            </div>
+            <table>
+              <thead>${theadHtml}</thead>
+              <tbody>${rowsHtml}</tbody>
+            </table>
+          `;
+        }
+        document.body.classList.add('print-brute-mode');
+        const cleanupCompletedPrint = () => {
+          document.body.classList.remove('print-brute-mode');
+          window.removeEventListener('afterprint', cleanupCompletedPrint);
+        };
+        window.addEventListener('afterprint', cleanupCompletedPrint);
+        setTimeout(() => {
+          window.print();
+          setTimeout(cleanupCompletedPrint, 1200);
+        }, 60);
       }
     }
 
@@ -6548,6 +6688,7 @@
 
       if (format === 'excel') {
         const aoa = [];
+        let colWidths = [];
         if (cfg.isSpCo) {
           aoa.push([`GRILLE BRUTE EPS — ${clsLabel} — ${currentAps.toUpperCase()} (${nivLabel}) — ${spec.rowCount} ÉLÈVES`]);
           aoa.push([
@@ -6560,6 +6701,12 @@
             `3. Comportemental (/${cfg.compMax})`,
             'TOTAL /20'
           ]);
+          colWidths = [
+            { wch: 4 }, { wch: 20 }, { wch: 5 },
+            ...critsIndiv.map(() => ({ wch: 15 })), { wch: 9 },
+            ...critsProc.map(() => ({ wch: 15 })), { wch: 9 },
+            { wch: 9 }, { wch: 9 }, { wch: 9 }
+          ];
           spec.rows.forEach(r => {
             aoa.push([
               r.num, r.nom, r.sexe,
@@ -6581,6 +6728,11 @@
             `3. Comportemental (/${cfg.compMax})`,
             'TOTAL /20'
           ]);
+          colWidths = [
+            { wch: 4 }, { wch: 21 }, { wch: 5 }, { wch: 11 }, { wch: 9 },
+            ...critsProc.map(() => ({ wch: 15 })),
+            { wch: 9 }, { wch: 9 }, { wch: 9 }, { wch: 9 }
+          ];
           spec.rows.forEach(r => {
             aoa.push([
               r.num, r.nom, r.sexe,
@@ -6597,73 +6749,85 @@
         }
         const wb = XLSX.utils.book_new();
         const ws = XLSX.utils.aoa_to_sheet(aoa);
+        ws['!cols'] = colWidths;
+        if (aoa[1] && aoa[1].length > 1) {
+          ws['!merges'] = [{ s: { r: 0, c: 0 }, e: { r: 0, c: aoa[1].length - 1 } }];
+        }
         XLSX.utils.book_append_sheet(wb, ws, 'Grille_Brute');
-        XLSX.writeFile(wb, `Grille_Brute_EPS_${safeCls}_${safeAps}.xlsx`);
-        showToast(`Grille brute Excel (${spec.rowCount} lignes) téléchargée.`);
+        const outBruteName = `Grille_Brute_EPS_${safeCls}_${safeAps}.xlsx`;
+        saveWorkbookA4Landscape(wb, ws, outBruteName, spec.rowCount, colWidths.length).then(() => {
+          showToast(`Grille brute Excel (${spec.rowCount} lignes · 1 page A4 Paysage) téléchargée.`);
+        });
         return;
       }
 
-      // Construction HTML commune pour Word (.doc) et PDF/A4 (#brutePrintSheet)
+      const totalCols = cfg.isSpCo ? (8 + critsIndiv.length + critsProc.length) : (9 + critsProc.length);
+      const metrics = getA4PrintMetrics(spec.rowCount, totalCols);
+      const thStyle = `border:1px solid #1E293B;padding:${metrics.padV}px ${metrics.padH}px;font-size:${metrics.hdrPt}pt;line-height:1.1;`;
+      const tdStyle = `border:1px solid #334155;padding:${metrics.padV}px ${metrics.padH}px;text-align:center;font-size:${metrics.bodyPt}pt;line-height:1.06;`;
+      const chkFontPt = Math.max(5.3, metrics.bodyPt - 0.6);
+
+      // Construction HTML commune 1 page A4 Paysage pour Word (.doc) et PDF/A4 (#brutePrintSheet)
       let theadHtml = '';
       if (cfg.isSpCo) {
         theadHtml = `
           <tr style="background:#1E3A8A;color:#FFFFFF;">
-            <th style="border:1px solid #333;padding:4px;width:28px;">N°</th>
-            <th style="border:1px solid #333;padding:4px;min-width:130px;">Nom &amp; Prénom</th>
-            <th style="border:1px solid #333;padding:4px;width:32px;">Sexe</th>
-            ${critsIndiv.map((c, i) => `<th style="border:1px solid #333;padding:4px;">${escapeHtml(c.nom)}<br><small>/${indWeights[i]} [${escapeHtml(c.sous[0])}|${escapeHtml(c.sous[1])}]</small></th>`).join('')}
-            <th style="border:1px solid #333;padding:4px;background:#1D4ED8;width:44px;">Indiv<br>/${cfg.perfMax}</th>
-            ${critsProc.map((c, i) => `<th style="border:1px solid #333;padding:4px;">${escapeHtml(c.nom)}<br><small>/${procWeights[i]} [${escapeHtml(c.sous[0])}|${escapeHtml(c.sous[1])}]</small></th>`).join('')}
-            <th style="border:1px solid #333;padding:4px;background:#065F46;width:44px;">Coll<br>/${cfg.procMax}</th>
-            <th style="border:1px solid #333;padding:4px;width:42px;">Conc.<br>/${cfg.concepMax}</th>
-            <th style="border:1px solid #333;padding:4px;width:42px;">Comp.<br>/${cfg.compMax}</th>
-            <th style="border:1px solid #333;padding:4px;background:#0F172A;width:48px;">Note<br>/20</th>
+            <th style="${thStyle}width:22px;">N°</th>
+            <th style="${thStyle}min-width:95px;text-align:left;">Nom &amp; Prénom</th>
+            <th style="${thStyle}width:26px;">Sexe</th>
+            ${critsIndiv.map((c, i) => `<th style="${thStyle}">${escapeHtml(c.nom)}<br><small>/${indWeights[i]}</small></th>`).join('')}
+            <th style="${thStyle}background:#1D4ED8;width:34px;">Indiv<br>/${cfg.perfMax}</th>
+            ${critsProc.map((c, i) => `<th style="${thStyle}">${escapeHtml(c.nom)}<br><small>/${procWeights[i]}</small></th>`).join('')}
+            <th style="${thStyle}background:#065F46;width:34px;">Coll<br>/${cfg.procMax}</th>
+            <th style="${thStyle}width:32px;">Conc.<br>/${cfg.concepMax}</th>
+            <th style="${thStyle}width:32px;">Comp.<br>/${cfg.compMax}</th>
+            <th style="${thStyle}background:#0F172A;width:38px;">Note<br>/20</th>
           </tr>
         `;
       } else {
         theadHtml = `
           <tr style="background:#1E3A8A;color:#FFFFFF;">
-            <th style="border:1px solid #333;padding:4px;width:28px;">N°</th>
-            <th style="border:1px solid #333;padding:4px;min-width:130px;">Nom &amp; Prénom</th>
-            <th style="border:1px solid #333;padding:4px;width:32px;">Sexe</th>
-            <th style="border:1px solid #333;padding:4px;width:58px;">Perf.<br>(${escapeHtml(unitMeta.unit)})</th>
-            <th style="border:1px solid #333;padding:4px;width:42px;">1A.<br>/${cfg.perfMax}</th>
-            ${critsProc.map((c, i) => `<th style="border:1px solid #333;padding:4px;">${escapeHtml(c.nom)}<br><small>/${procWeights[i]} [${escapeHtml(c.sous[0])}|${escapeHtml(c.sous[1])}]</small></th>`).join('')}
-            <th style="border:1px solid #333;padding:4px;width:42px;">1B.<br>/${cfg.procMax}</th>
-            <th style="border:1px solid #333;padding:4px;width:42px;">Conc.<br>/${cfg.concepMax}</th>
-            <th style="border:1px solid #333;padding:4px;">Comp.<br>/${cfg.compMax}</th>
-            <th style="border:1px solid #333;padding:4px;background:#0F172A;width:48px;">Note<br>/20</th>
+            <th style="${thStyle}width:22px;">N°</th>
+            <th style="${thStyle}min-width:100px;text-align:left;">Nom &amp; Prénom</th>
+            <th style="${thStyle}width:26px;">Sexe</th>
+            <th style="${thStyle}width:44px;">Perf.<br>(${escapeHtml(unitMeta.unit)})</th>
+            <th style="${thStyle}width:34px;">1A.<br>/${cfg.perfMax}</th>
+            ${critsProc.map((c, i) => `<th style="${thStyle}">${escapeHtml(c.nom)}<br><small>/${procWeights[i]}</small></th>`).join('')}
+            <th style="${thStyle}width:34px;">1B.<br>/${cfg.procMax}</th>
+            <th style="${thStyle}width:32px;">Conc.<br>/${cfg.concepMax}</th>
+            <th style="${thStyle}width:32px;">Comp.<br>/${cfg.compMax}</th>
+            <th style="${thStyle}background:#0F172A;width:38px;">Note<br>/20</th>
           </tr>
         `;
       }
 
       const rowsHtml = spec.rows.map(r => {
-        const critBlankBox = c => `☐ ${escapeHtml(c.sous[0])} &nbsp; ☐ ${escapeHtml(c.sous[1])}`;
+        const critBlankBox = c => `☐ ${escapeHtml(c.sous[0])} / ☐ ${escapeHtml(c.sous[1])}`;
         let midHtml = '';
         if (cfg.isSpCo) {
           midHtml = `
-            ${critsIndiv.map(c => `<td style="border:1px solid #333;padding:4px;text-align:center;font-size:7.5pt;white-space:nowrap;">${critBlankBox(c)}</td>`).join('')}
-            <td style="border:1px solid #333;padding:4px;"></td>
-            ${critsProc.map(c => `<td style="border:1px solid #333;padding:4px;text-align:center;font-size:7.5pt;white-space:nowrap;">${critBlankBox(c)}</td>`).join('')}
-            <td style="border:1px solid #333;padding:4px;"></td>
+            ${critsIndiv.map(c => `<td style="${tdStyle}font-size:${chkFontPt}pt;">${critBlankBox(c)}</td>`).join('')}
+            <td style="${tdStyle}"></td>
+            ${critsProc.map(c => `<td style="${tdStyle}font-size:${chkFontPt}pt;">${critBlankBox(c)}</td>`).join('')}
+            <td style="${tdStyle}"></td>
           `;
         } else {
           midHtml = `
-            <td style="border:1px solid #333;padding:4px;"></td>
-            <td style="border:1px solid #333;padding:4px;"></td>
-            ${critsProc.map(c => `<td style="border:1px solid #333;padding:4px;text-align:center;font-size:7.5pt;white-space:nowrap;">${critBlankBox(c)}</td>`).join('')}
-            <td style="border:1px solid #333;padding:4px;"></td>
+            <td style="${tdStyle}"></td>
+            <td style="${tdStyle}"></td>
+            ${critsProc.map(c => `<td style="${tdStyle}font-size:${chkFontPt}pt;">${critBlankBox(c)}</td>`).join('')}
+            <td style="${tdStyle}"></td>
           `;
         }
         return `
-          <tr style="height:22px;">
-            <td style="border:1px solid #333;padding:4px;text-align:center;">${r.num}</td>
-            <td style="border:1px solid #333;padding:4px;text-align:left;font-weight:${r.nom ? 'bold' : 'normal'};">${escapeHtml(r.nom)}</td>
-            <td style="border:1px solid #333;padding:4px;text-align:center;">${escapeHtml(r.sexe)}</td>
+          <tr style="height:${metrics.rowHeightPx}px;">
+            <td style="${tdStyle}">${r.num}</td>
+            <td style="${tdStyle}text-align:left;font-weight:${r.nom ? 'bold' : 'normal'};">${escapeHtml(r.nom)}</td>
+            <td style="${tdStyle}">${escapeHtml(r.sexe)}</td>
             ${midHtml}
-            <td style="border:1px solid #333;padding:4px;"></td>
-            <td style="border:1px solid #333;padding:4px;"></td>
-            <td style="border:1px solid #333;padding:4px;"></td>
+            <td style="${tdStyle}"></td>
+            <td style="${tdStyle}"></td>
+            <td style="${tdStyle}"></td>
           </tr>
         `;
       }).join('');
@@ -6671,14 +6835,34 @@
       if (format === 'word') {
         const wordDoc = `
           <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
-          <head><meta charset="utf-8"><title>Grille Brute EPS ${escapeHtml(clsLabel)}</title></head>
-          <body style="font-family:Arial,sans-serif;font-size:9.5pt;">
-            <h2 style="text-align:center;color:#1E3A8A;margin-bottom:4px;">GRILLE BRUTE D'ÉVALUATION EPS — ${escapeHtml(clsLabel)} — ${escapeHtml(currentAps.toUpperCase())} (${nivLabel})</h2>
-            <p style="text-align:center;font-size:8.5pt;margin-top:0;">Procédural /${cfg.procTotal} (${escapeHtml(cfg.labelPerf)} /${cfg.perfMax} + ${escapeHtml(cfg.labelProc)} /${cfg.procMax}) · Conceptuel /${cfg.concepMax} · Comportemental /${cfg.compMax} · ${spec.rowCount} lignes</p>
-            <table style="width:100%;border-collapse:collapse;">
-              <thead>${theadHtml}</thead>
-              <tbody>${rowsHtml}</tbody>
-            </table>
+          <head>
+            <meta charset="utf-8">
+            <title>Grille Brute EPS ${escapeHtml(clsLabel)}</title>
+            <!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]-->
+            <style>
+              @page Section1 {
+                size: 29.7cm 21.0cm;
+                mso-page-orientation: landscape;
+                margin: 0.6cm 0.65cm 0.6cm 0.65cm;
+                mso-header-margin: 0.25cm;
+                mso-footer-margin: 0.25cm;
+                mso-paper-source: 0;
+              }
+              div.Section1 { page: Section1; }
+              body { font-family: Arial, sans-serif; font-size: ${metrics.bodyPt}pt; margin: 0; }
+              table { width: 100%; border-collapse: collapse; }
+              tr { page-break-inside: avoid; }
+            </style>
+          </head>
+          <body>
+            <div class="Section1">
+              <h2 style="text-align:center;color:#1E3A8A;margin:0 0 2px 0;font-size:11pt;">GRILLE BRUTE D'ÉVALUATION EPS — ${escapeHtml(clsLabel)} — ${escapeHtml(currentAps.toUpperCase())} (${nivLabel})</h2>
+              <p style="text-align:center;font-size:7.5pt;margin:0 0 5px 0;color:#334155;">Procédural /${cfg.procTotal} (${escapeHtml(cfg.labelPerf)} /${cfg.perfMax} + ${escapeHtml(cfg.labelProc)} /${cfg.procMax}) · Conceptuel /${cfg.concepMax} · Comportemental /${cfg.compMax} · ${spec.rowCount} lignes</p>
+              <table>
+                <thead>${theadHtml}</thead>
+                <tbody>${rowsHtml}</tbody>
+              </table>
+            </div>
           </body></html>
         `;
         const blob = new Blob(['\ufeff', wordDoc], { type: 'application/msword' });
@@ -6690,20 +6874,20 @@
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-        showToast(`Grille brute Word (${spec.rowCount} lignes) téléchargée.`);
+        showToast(`Grille brute Word (${spec.rowCount} lignes · 1 page A4 Paysage) téléchargée.`);
         return;
       }
 
-      // Format PDF / A4 via #brutePrintSheet
+      // Format PDF / A4 via #brutePrintSheet (1 page A4 Paysage)
       const printEl = document.getElementById('brutePrintSheet');
       if (printEl) {
         printEl.innerHTML = `
-          <div style="margin-bottom:8px;display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #1E3A8A;padding-bottom:6px;">
+          <div style="margin-bottom:5px;display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #1E3A8A;padding-bottom:4px;">
             <div>
-              <h2 style="margin:0;font-size:13pt;color:#1E3A8A;">GRILLE BRUTE EPS — ${escapeHtml(clsLabel)} · ${escapeHtml(currentAps.toUpperCase())} (${nivLabel})</h2>
-              <div style="font-size:8.5pt;color:#334155;">Procédural /${cfg.procTotal} (${escapeHtml(cfg.labelPerf)} /${cfg.perfMax} + ${escapeHtml(cfg.labelProc)} /${cfg.procMax}) · Conceptuel /${cfg.concepMax} · Comportemental /${cfg.compMax}</div>
+              <h2 style="margin:0;font-size:11.5pt;color:#1E3A8A;">GRILLE BRUTE EPS — ${escapeHtml(clsLabel)} · ${escapeHtml(currentAps.toUpperCase())} (${nivLabel})</h2>
+              <div style="font-size:7.5pt;color:#334155;">Procédural /${cfg.procTotal} (${escapeHtml(cfg.labelPerf)} /${cfg.perfMax} + ${escapeHtml(cfg.labelProc)} /${cfg.procMax}) · Conceptuel /${cfg.concepMax} · Comportemental /${cfg.compMax}</div>
             </div>
-            <div style="font-size:8.5pt;font-weight:bold;color:#1E3A8A;">Effectif : ${spec.rowCount} lignes</div>
+            <div style="font-size:7.8pt;font-weight:bold;color:#1E3A8A;">Effectif : ${spec.rowCount} lignes</div>
           </div>
           <table>
             <thead>${theadHtml}</thead>
