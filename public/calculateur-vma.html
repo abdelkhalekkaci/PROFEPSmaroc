@@ -1293,6 +1293,32 @@
                 </div>
             </div>
 
+            <!-- 2c. TABLEAU PAR PALIER (1 À 21) : TEMPS POUR CHAQUE TOUR & DISTANCE PARCOURUE SELON LES DONNÉES SAISIES -->
+            <div class="table-card" id="cardPaliersTrackLaps" style="border-top: 3px solid #4f46e5 !important;">
+                <div class="table-header-flex">
+                    <div>
+                        <h3 style="font-size:1.05rem; font-weight:700; color:#312e81;" data-i18n="paliersLapsTitle">🏟️ Tableau par Palier (1 à 21) : Temps par Tour &amp; Distance Parcourue</h3>
+                        <p style="font-size:0.8rem; color:var(--text-light); margin-top:0.15rem;" data-i18n="paliersLapsSubtitle">
+                            Temps de passage cumulés à chaque tour (T1, T2…) et distance totale parcourue pour chaque palier en respectant votre piste, votre durée et le % VMA choisi.
+                        </p>
+                    </div>
+                    <div class="table-actions-wrap">
+                        <button type="button" class="btn-pdf-dl" onclick="exportTableToPdf('cardPaliersTrackLaps', 'tableau-paliers-temps-par-tour-distance')">
+                            <span data-i18n="btnDownloadPdf">📄 Télécharger PDF</span>
+                        </button>
+                        <span style="font-size:0.78rem; font-weight:700; background:#eef2ff; border:1px solid #c7d2fe; padding:0.35rem 0.75rem; border-radius:6px; color:#3730a3;" id="resPaliersLapsBadge">
+                            Piste : 250m · Durée : 12 min · 90% VMA
+                        </span>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="custom-table" id="tablePaliersTrackLaps">
+                        <thead id="theadPaliersTrackLaps"></thead>
+                        <tbody id="tbodyPaliersTrackLaps"></tbody>
+                    </table>
+                </div>
+            </div>
+
             <!-- TABLEAU 1 : ENTRAÎNEMENT & ALLURES -->
             <div class="table-card table-card-training" id="cardTrainingTable">
                 <div class="table-header-flex">
@@ -2291,6 +2317,12 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
                 svgAllureWord: "Allure",
                 svgFinishFrac: "Fraction finale",
                 lapsCapNote: "Affichage limité aux 120 premiers tours",
+                paliersLapsTitle: "🏟️ Tableau par Palier (1 à 21) : Temps par Tour &amp; Distance Parcourue",
+                paliersLapsSubtitle: "Temps de passage cumulés à chaque tour (T1, T2…) et distance totale parcourue pour chaque palier en respectant votre piste, votre durée et le % VMA choisi.",
+                thStageShort: "Palier",
+                lapShortPrefix: "T",
+                lapsUnitCap: "Tours",
+                myVmaRowLabel: "Ma VMA",
                 errInvalid: "Veuillez saisir une distance, un palier ou un chrono valide.",
                 stagePrefix: "Palier",
                 studentTag: "Profil",
@@ -2450,6 +2482,12 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
                 svgAllureWord: "Pace",
                 svgFinishFrac: "Final fraction",
                 lapsCapNote: "Display capped at first 120 laps",
+                paliersLapsTitle: "🏟️ Stage-by-Stage Table (1–21): Lap Split Times &amp; Distance Covered",
+                paliersLapsSubtitle: "Cumulative split time at each lap (L1, L2…) and total distance covered per stage matching your track length, duration &amp; % MAS.",
+                thStageShort: "Stage",
+                lapShortPrefix: "L",
+                lapsUnitCap: "Laps",
+                myVmaRowLabel: "My MAS",
                 errInvalid: "Please enter a valid distance, stage, or finish time.",
                 stagePrefix: "Level",
                 studentTag: "You",
@@ -2609,6 +2647,12 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
                 svgAllureWord: "الإيقاع",
                 svgFinishFrac: "الجزء المتبقي",
                 lapsCapNote: "يتم عرض أول 120 دورة فقط",
+                paliersLapsTitle: "🏟️ جدول المراحل (1 إلى 21): أزمنة كل دورة والمسافة المقطوعة",
+                paliersLapsSubtitle: "توقيت المرور التراكمي عند كل دورة (د1، د2…) والمسافة الكلية المقطوعة لكل مرحلة وفق طول المضمار والمدة ونسبة VMA المدخلة.",
+                thStageShort: "المرحلة",
+                lapShortPrefix: "د",
+                lapsUnitCap: "الدورات",
+                myVmaRowLabel: "قيمتي",
                 errInvalid: "يرجى إدخال قيمة صحيحة للمسافة أو المرحلة أو التوقيت.",
                 stagePrefix: "المرحلة",
                 studentTag: "النتيجة",
@@ -3009,6 +3053,95 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
                     tbodyLaps.appendChild(trCap);
                 }
             }
+
+            renderPaliersTrackLapsTable(activeComputedVma, safePct, safeDist, safeDur);
+        }
+
+        function renderPaliersTrackLapsTable(vmaUser, pct, trackDist, durationMin) {
+            var theadEl = document.getElementById("theadPaliersTrackLaps");
+            var tbodyEl = document.getElementById("tbodyPaliersTrackLaps");
+            if (!theadEl || !tbodyEl) return;
+
+            var t = i18n[currentLang] || i18n.fr;
+            var numLocale = (currentLang === 'en') ? 'en-US' : 'fr-FR';
+            var durSec = durationMin * 60;
+
+            var maxPossibleVma = Math.max(18.5, vmaUser || 13.5);
+            var maxSpeedMs = (maxPossibleVma * (pct / 100)) / 3.6;
+            var maxTotalDist = Math.round(maxSpeedMs * durSec);
+            var maxFullLaps = Math.floor(maxTotalDist / trackDist);
+            var shownLapCols = Math.min(Math.max(1, maxFullLaps), 14);
+
+            var badgeEl = document.getElementById("resPaliersLapsBadge");
+            if (badgeEl) {
+                badgeEl.textContent = t.trackOf + " : " + trackDist + "m · " + durationMin + " min · " + Math.round(pct) + "% VMA" + (maxFullLaps > 14 ? " (T1–T14)" : "");
+            }
+
+            var headHtml = '<tr>' +
+                '<th>' + t.thStageShort + '</th>' +
+                '<th>' + t.thStageVma + '</th>' +
+                '<th>' + t.thLapSplit + '</th>';
+            for (var colIdx = 1; colIdx <= shownLapCols; colIdx++) {
+                headHtml += '<th>' + t.lapShortPrefix + colIdx + '</th>';
+            }
+            headHtml += '<th>Dist. (' + durationMin + ' min)</th>' +
+                '<th>' + t.lapsUnitCap + '</th>' +
+                '</tr>';
+            theadEl.innerHTML = headHtml;
+
+            var rowsSpec = [];
+            var nearestPalier = Math.round((vmaUser - 8.0) / 0.5);
+            var nearestPalierVma = 8.0 + Math.min(21, Math.max(1, nearestPalier)) * 0.5;
+            var needsPinnedCustom = vmaUser > 0 && (vmaUser < 8.25 || vmaUser > 18.75 || Math.abs(vmaUser - nearestPalierVma) >= 0.16);
+
+            if (needsPinnedCustom) {
+                rowsSpec.push({ label: t.myVmaRowLabel, vma: vmaUser, isUser: true, badge: t.studentTag });
+            }
+            for (var p = 1; p <= 21; p++) {
+                var pVma = 8.0 + (p * 0.5);
+                var isMatch = !needsPinnedCustom && Math.abs(pVma - vmaUser) < 0.26;
+                rowsSpec.push({
+                    label: t.stagePrefix + ' ' + p,
+                    vma: pVma,
+                    isUser: isMatch,
+                    badge: isMatch ? t.studentTag : ''
+                });
+            }
+
+            tbodyEl.innerHTML = "";
+            rowsSpec.forEach(function(item) {
+                var rSpeedKmh = item.vma * (pct / 100);
+                var rSpeedMs = rSpeedKmh / 3.6;
+                var rLapSec = trackDist / rSpeedMs;
+                var rTotalDist = Math.round(rSpeedMs * durSec);
+                var rFullLaps = Math.floor(rTotalDist / trackDist);
+                var rRemM = Math.round(rTotalDist % trackDist);
+
+                var tr = document.createElement("tr");
+                if (item.isUser) tr.className = "selected-row";
+
+                var badgeHtml = item.badge
+                    ? ' <span style="font-size:0.68rem;background:#4f46e5;color:#fff;padding:2px 5px;border-radius:4px;">' + item.badge + '</span>'
+                    : '';
+
+                var rowCells = '<td><strong>' + item.label + '</strong>' + badgeHtml + '</td>' +
+                    '<td><span class="zone-pill" style="background:#eef2ff;color:#3730a3;">' + item.vma.toFixed(1) + ' km/h</span></td>' +
+                    '<td><span class="badge-lap">' + formatLapClock(rLapSec) + '</span></td>';
+
+                for (var k = 1; k <= shownLapCols; k++) {
+                    if (k <= rFullLaps) {
+                        rowCells += '<td style="font-family:monospace;font-size:0.78rem;">' + formatSplitTime(k * rLapSec) + '</td>';
+                    } else {
+                        rowCells += '<td style="color:#cbd5e1;text-align:center;">-</td>';
+                    }
+                }
+
+                rowCells += '<td><span class="badge-dist">' + rTotalDist.toLocaleString(numLocale) + ' m</span></td>' +
+                    '<td><span class="badge-trs">' + rFullLaps + ' ' + t.lapsShort + (rRemM > 0 ? ' +' + rRemM + 'm' : '') + '</span></td>';
+
+                tr.innerHTML = rowCells;
+                tbodyEl.appendChild(tr);
+            });
         }
 
         function performCalculation(skipScroll, preserveTrackPreview) {
@@ -3531,12 +3664,12 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
             };
 
             var drawTableHeader = function(yPos) {
-                var headFontSize = cleanHeaders.length >= 9 ? 7.5 : 8.2;
+                var headFontSize = cleanHeaders.length >= 13 ? 6.4 : (cleanHeaders.length >= 9 ? 7.4 : 8.2);
                 doc.setFont("helvetica", "bold");
                 doc.setFontSize(headFontSize);
 
                 var wrappedCols = cleanHeaders.map(function(h, idx) {
-                    return doc.splitTextToSize(h, Math.max(8, colWidths[idx] - 3));
+                    return doc.splitTextToSize(h, Math.max(6, colWidths[idx] - 2));
                 });
                 var maxLines = wrappedCols.reduce(function(m, arr) { return Math.max(m, arr.length); }, 1);
                 var hHeight = Math.max(8, maxLines * 3.8 + 4);
@@ -3547,7 +3680,7 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
 
                 var xCursor = margin;
                 for (var c = 0; c < wrappedCols.length; c++) {
-                    doc.text(wrappedCols[c], xCursor + 1.5, yPos + 4.5);
+                    doc.text(wrappedCols[c], xCursor + 1.0, yPos + 4.5);
                     xCursor += colWidths[c];
                 }
                 return yPos + hHeight;
@@ -3556,7 +3689,7 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
             var y = drawDocHeader(true);
             y = drawTableHeader(y);
 
-            var bodyFontSize = cleanHeaders.length >= 9 ? 7.6 : 8.2;
+            var bodyFontSize = cleanHeaders.length >= 13 ? 6.5 : (cleanHeaders.length >= 9 ? 7.5 : 8.2);
             for (var rIdx = 0; rIdx < cleanRows.length; rIdx++) {
                 var row = cleanRows[rIdx];
                 var isSpanRow = (row.length === 1 && cleanHeaders.length > 1);
@@ -3567,7 +3700,7 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
                     ? [doc.splitTextToSize(row[0], usableW - 4)]
                     : cleanHeaders.map(function(_, idx) {
                         var txt = (row[idx] !== undefined) ? row[idx] : "";
-                        return doc.splitTextToSize(txt, Math.max(8, colWidths[idx] - 3));
+                        return doc.splitTextToSize(txt, Math.max(6, colWidths[idx] - 2));
                     });
                 var rLines = cellTexts.reduce(function(m, arr) { return Math.max(m, arr.length); }, 1);
                 var rHeight = Math.max(6.8, rLines * 3.7 + 3.2);
@@ -3596,7 +3729,7 @@ Dans le cadre scolaire de l'EPS et de la préparation physique athlétique, l'us
                     for (var cIdx = 0; cIdx < cellTexts.length; cIdx++) {
                         doc.setTextColor(cIdx === 0 ? 15 : 30, cIdx === 0 ? 23 : 41, cIdx === 0 ? 42 : 59);
                         doc.setFont("helvetica", cIdx === 0 ? "bold" : "normal");
-                        doc.text(cellTexts[cIdx], xC + 1.5, y + 4.4);
+                        doc.text(cellTexts[cIdx], xC + 1.0, y + 4.4);
                         xC += colWidths[cIdx];
                     }
                 }
