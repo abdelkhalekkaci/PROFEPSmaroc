@@ -97,6 +97,10 @@ html[data-theme="light"] {
     --shadow-lg: 0 20px 42px -10px rgba(0, 0, 0, 0.65);
     --border-strong: #33446E;
     --accent-border: #33446E;
+    --amber: #FBBF24;
+    --status-success: #34D399;
+    --status-error: #F87171;
+    --peps-green-dark: #38BDF8;
   }
 }
 
@@ -125,6 +129,10 @@ html.dark {
   --shadow-lg: 0 20px 42px -10px rgba(0, 0, 0, 0.65);
   --border-strong: #33446E;
   --accent-border: #33446E;
+  --amber: #FBBF24;
+  --status-success: #34D399;
+  --status-error: #F87171;
+  --peps-green-dark: #38BDF8;
 }
 
 /* ==========================================================================
@@ -872,6 +880,74 @@ html[data-theme="dark"] .atlas-chip-amber {
   color: #FDE68A;
 }
 
+/* Aliases used on OP 2007/2009 cards */
+.chip-college,
+.chip-lycee,
+.chip-format {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+.chip-college {
+  background: var(--cyan-soft);
+  color: var(--cyan);
+  border: 1px solid rgba(11, 122, 153, 0.25);
+}
+.chip-lycee {
+  background: var(--violet-soft);
+  color: var(--violet);
+  border: 1px solid rgba(109, 74, 255, 0.25);
+}
+.chip-format {
+  background: var(--accent-soft);
+  color: #92400E;
+  border: 1px solid rgba(255, 179, 0, 0.4);
+}
+html[data-theme="dark"] .chip-format {
+  color: #FDE68A;
+}
+.atlas-download-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  color: #92400E;
+  font-weight: 800;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 179, 0, 0.4);
+}
+html[data-theme="dark"] .atlas-download-icon {
+  color: #FDE68A;
+}
+.atlas-download-meta {
+  flex: 1;
+  min-width: 180px;
+}
+.atlas-download-title {
+  font-weight: 800;
+  font-size: 0.94rem;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.atlas-download-sub {
+  font-size: 0.78rem;
+  color: var(--slate);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.2rem;
+}
+
 /* Bento Card */
 .atlas-bento-card,
 .peps-card,
@@ -1377,7 +1453,11 @@ header.vma-hero h1,
 header.article-header h1,
 .faq-header h1,
 .article-hero h1,
-section.from-slate-900 h1 {
+section.from-slate-900 h1,
+section.from-slate-900 h2,
+section.from-slate-900 h3,
+section.from-slate-900 h4,
+section.from-slate-900 .text-white:not(.bg-emerald-600):not(.bg-sky-600):not(.bg-indigo-600):not(.bg-blue-600):not(.bg-rose-600):not([style*="linear-gradient"]):not([style*="var(--grad)"]) {
   color: var(--ink) !important;
 }
 
@@ -1387,8 +1467,101 @@ header.vma-hero p,
 header.article-header p,
 .faq-header p,
 .article-hero p,
-section.from-slate-900 p {
+section.from-slate-900 p,
+section.from-slate-900 .text-slate-100,
+section.from-slate-900 .text-slate-200,
+section.from-slate-900 .text-slate-300,
+section.from-slate-900 .text-slate-400 {
   color: var(--slate) !important;
+}
+
+section.from-slate-900 strong.text-slate-200,
+section.from-slate-900 span.text-slate-200 {
+  color: var(--ink) !important;
+}
+
+section.from-slate-900 .bg-slate-950\/70,
+section.from-slate-900 .bg-slate-950\/80,
+section.from-slate-900 .bg-slate-900\/80,
+section.from-slate-900 .bg-slate-900\/70,
+section.from-slate-900 .bg-white\/10 {
+  background: var(--surface) !important;
+  border-color: var(--stone) !important;
+  color: var(--ink) !important;
+}
+
+section.from-slate-900 .bg-slate-800 {
+  background: var(--sky) !important;
+  border-color: var(--stone) !important;
+  color: var(--ink) !important;
+}
+section.from-slate-900 .bg-slate-800:hover {
+  background: var(--primary-soft) !important;
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+}
+section.from-slate-900 .border-slate-800,
+section.from-slate-900 .border-slate-800\/80,
+section.from-slate-900 .border-slate-700 {
+  border-color: var(--stone) !important;
+}
+
+:root:not([data-theme="dark"]):not(.dark) section.from-slate-900 .text-emerald-300,
+:root:not([data-theme="dark"]):not(.dark) section.from-slate-900 .text-emerald-400 {
+  color: #065F46 !important;
+}
+:root:not([data-theme="dark"]):not(.dark) section.from-slate-900 .text-sky-300,
+:root:not([data-theme="dark"]):not(.dark) section.from-slate-900 .text-sky-400,
+:root:not([data-theme="dark"]):not(.dark) section.from-slate-900 .text-cyan-300 {
+  color: #0369A1 !important;
+}
+:root:not([data-theme="dark"]):not(.dark) section.from-slate-900 .text-amber-300,
+:root:not([data-theme="dark"]):not(.dark) section.from-slate-900 .text-amber-400 {
+  color: #92400E !important;
+}
+:root:not([data-theme="dark"]):not(.dark) section.from-slate-900 .text-rose-300,
+:root:not([data-theme="dark"]):not(.dark) section.from-slate-900 .text-red-400 {
+  color: #B91C1C !important;
+}
+:root:not([data-theme="dark"]):not(.dark) section.from-slate-900 .text-fuchsia-300 {
+  color: #86198F !important;
+}
+:root:not([data-theme="dark"]):not(.dark) section.from-slate-900 .text-indigo-300 {
+  color: #3730A3 !important;
+}
+:root:not([data-theme="dark"]):not(.dark) section.from-slate-900 .bg-emerald-500\/10,
+:root:not([data-theme="dark"]):not(.dark) section.from-slate-900 .bg-emerald-500\/20 {
+  background: rgba(11, 122, 153, 0.1) !important;
+  border-color: rgba(11, 122, 153, 0.3) !important;
+}
+
+html[data-theme="dark"] section.from-slate-900 .bg-slate-800 {
+  background: #19274A !important;
+  border-color: #384C7A !important;
+  color: #E8ECFA !important;
+}
+html[data-theme="dark"] section.from-slate-900 .text-emerald-300,
+html[data-theme="dark"] section.from-slate-900 .text-emerald-400 {
+  color: #6EE7B7 !important;
+}
+html[data-theme="dark"] section.from-slate-900 .text-sky-300,
+html[data-theme="dark"] section.from-slate-900 .text-sky-400,
+html[data-theme="dark"] section.from-slate-900 .text-cyan-300 {
+  color: #7DD3FC !important;
+}
+html[data-theme="dark"] section.from-slate-900 .text-amber-300,
+html[data-theme="dark"] section.from-slate-900 .text-amber-400 {
+  color: #FCD34D !important;
+}
+html[data-theme="dark"] section.from-slate-900 .text-rose-300,
+html[data-theme="dark"] section.from-slate-900 .text-red-400 {
+  color: #FDA4AF !important;
+}
+html[data-theme="dark"] section.from-slate-900 .text-fuchsia-300 {
+  color: #F0ABFC !important;
+}
+html[data-theme="dark"] section.from-slate-900 .text-indigo-300 {
+  color: #A5B4FC !important;
 }
 
 /* Keep centered hero layout on calculator pages while preserving left-aligned max-w-5xl heroes */
@@ -2587,7 +2760,13 @@ html[data-theme="dark"] [style*="linear-gradient"][style*="#f8fafc"],
 html[data-theme="dark"] [style*="linear-gradient"][style*="#ffffff"],
 html[data-theme="dark"] [style*="linear-gradient"][style*="#f0fdf4"],
 html[data-theme="dark"] [style*="linear-gradient"][style*="#eff6ff"],
-html[data-theme="dark"] [style*="linear-gradient"][style*="#fffdf9"] {
+html[data-theme="dark"] [style*="linear-gradient"][style*="#fffdf9"],
+html[data-theme="dark"] [style*="linear-gradient"][style*="#fff7ed"],
+html[data-theme="dark"] [style*="linear-gradient"][style*="#f0f9ff"],
+html[data-theme="dark"] [style*="linear-gradient"][style*="#eef2ff"],
+html[data-theme="dark"] [style*="linear-gradient"][style*="#fffbeb"],
+html[data-theme="dark"] [style*="linear-gradient"][style*="#fef2f2"],
+html[data-theme="dark"] [style*="linear-gradient"][style*="#f5f3ff"] {
   background: linear-gradient(135deg, #162244 0%, #131E3A 100%) !important;
   color: var(--ink) !important;
   border-color: var(--stone) !important;
@@ -2752,12 +2931,67 @@ html[data-theme="dark"] .bg-rose-100 {
   border-color: rgba(248, 113, 113, 0.38) !important;
 }
 
+html[data-theme="dark"] .bg-fuchsia-50,
+html[data-theme="dark"] .bg-fuchsia-50\/50,
+html[data-theme="dark"] .bg-fuchsia-50\/60,
+html[data-theme="dark"] .bg-fuchsia-50\/70,
+html[data-theme="dark"] .bg-fuchsia-100,
+html[data-theme="dark"] .bg-pink-50,
+html[data-theme="dark"] .bg-pink-50\/40,
+html[data-theme="dark"] .bg-pink-100,
 html[data-theme="dark"] .bg-purple-50,
 html[data-theme="dark"] .bg-purple-50\/40,
 html[data-theme="dark"] .bg-purple-50\/50,
 html[data-theme="dark"] .bg-purple-100 {
   background-color: rgba(167, 139, 250, 0.16) !important;
   border-color: rgba(167, 139, 250, 0.38) !important;
+}
+
+html[data-theme="dark"] .bg-blue-50\/30,
+html[data-theme="dark"] .hover\:bg-blue-50\/30:hover,
+html[data-theme="dark"] .hover\:bg-blue-100:hover {
+  background-color: rgba(143, 160, 255, 0.16) !important;
+  border-color: rgba(143, 160, 255, 0.35) !important;
+}
+
+html[data-theme="dark"] .bg-emerald-50\/20,
+html[data-theme="dark"] .bg-emerald-50\/30,
+html[data-theme="dark"] .bg-emerald-50\/80,
+html[data-theme="dark"] .bg-green-100,
+html[data-theme="dark"] .hover\:bg-emerald-50\/30:hover,
+html[data-theme="dark"] .hover\:bg-emerald-100:hover {
+  background-color: rgba(16, 185, 129, 0.16) !important;
+  border-color: rgba(52, 211, 153, 0.38) !important;
+}
+
+html[data-theme="dark"] .bg-amber-50\/80,
+html[data-theme="dark"] .bg-orange-50\/80,
+html[data-theme="dark"] .hover\:bg-amber-100:hover {
+  background-color: rgba(255, 179, 0, 0.16) !important;
+  border-color: rgba(251, 191, 36, 0.38) !important;
+}
+
+html[data-theme="dark"] .bg-red-50\/30,
+html[data-theme="dark"] .bg-red-50\/80,
+html[data-theme="dark"] .bg-rose-50\/20,
+html[data-theme="dark"] .bg-rose-50\/60,
+html[data-theme="dark"] .hover\:bg-red-50\/30:hover,
+html[data-theme="dark"] .hover\:bg-rose-50:hover,
+html[data-theme="dark"] .hover\:bg-rose-100:hover {
+  background-color: rgba(239, 68, 68, 0.16) !important;
+  border-color: rgba(248, 113, 113, 0.38) !important;
+}
+
+html[data-theme="dark"] .hover\:bg-fuchsia-50:hover,
+html[data-theme="dark"] .hover\:bg-fuchsia-100:hover {
+  background-color: rgba(217, 70, 239, 0.18) !important;
+  border-color: rgba(232, 121, 249, 0.38) !important;
+}
+
+html[data-theme="dark"] .hover\:bg-slate-100:hover,
+html[data-theme="dark"] .hover\:bg-slate-200:hover {
+  background-color: #1E2F5A !important;
+  border-color: #384C7A !important;
 }
 
 /* Tailwind Dark Text Utilities -> High-Contrast Luminous Text in Dark Mode */
@@ -2767,8 +3001,23 @@ html[data-theme="dark"] .text-indigo-950,
 html[data-theme="dark"] .text-emerald-950,
 html[data-theme="dark"] .text-amber-950,
 html[data-theme="dark"] .text-rose-950,
-html[data-theme="dark"] .text-purple-950 {
+html[data-theme="dark"] .text-purple-950,
+html[data-theme="dark"] .text-fuchsia-950,
+html[data-theme="dark"] .text-red-950,
+html[data-theme="dark"] .text-orange-950 {
   color: #F8FAFC !important;
+}
+
+/* Keep dark ink inside bright Amber/Yellow badges & buttons in Dark Mode */
+html[data-theme="dark"] .bg-amber-300,
+html[data-theme="dark"] .bg-amber-400,
+html[data-theme="dark"] .bg-yellow-300,
+html[data-theme="dark"] .bg-yellow-400,
+html[data-theme="dark"] .bg-amber-300 *,
+html[data-theme="dark"] .bg-amber-400 *,
+html[data-theme="dark"] .bg-yellow-300 *,
+html[data-theme="dark"] .bg-yellow-400 * {
+  color: #0E1633 !important;
 }
 
 html[data-theme="dark"] .text-blue-700,
@@ -2782,19 +3031,26 @@ html[data-theme="dark"] .text-indigo-900 {
 
 html[data-theme="dark"] .text-sky-700,
 html[data-theme="dark"] .text-sky-800,
+html[data-theme="dark"] .text-sky-900,
 html[data-theme="dark"] .text-cyan-700,
 html[data-theme="dark"] .text-cyan-800,
+html[data-theme="dark"] .text-cyan-900,
 html[data-theme="dark"] .text-teal-700,
-html[data-theme="dark"] .text-teal-800 {
+html[data-theme="dark"] .text-teal-800,
+html[data-theme="dark"] .text-teal-900 {
   color: #38BDF8 !important;
 }
 
 html[data-theme="dark"] .text-emerald-700,
 html[data-theme="dark"] .text-emerald-800,
-html[data-theme="dark"] .text-emerald-900 {
+html[data-theme="dark"] .text-emerald-900,
+html[data-theme="dark"] .text-green-700,
+html[data-theme="dark"] .text-green-800,
+html[data-theme="dark"] .text-green-900 {
   color: #34D399 !important;
 }
 
+html[data-theme="dark"] .text-amber-600,
 html[data-theme="dark"] .text-amber-700,
 html[data-theme="dark"] .text-amber-800,
 html[data-theme="dark"] .text-amber-900 {
@@ -2814,8 +3070,15 @@ html[data-theme="dark"] .text-rose-900 {
 
 html[data-theme="dark"] .text-purple-700,
 html[data-theme="dark"] .text-purple-800,
-html[data-theme="dark"] .text-purple-900 {
-  color: #C4B5FD !important;
+html[data-theme="dark"] .text-purple-900,
+html[data-theme="dark"] .text-fuchsia-600,
+html[data-theme="dark"] .text-fuchsia-700,
+html[data-theme="dark"] .text-fuchsia-800,
+html[data-theme="dark"] .text-fuchsia-900,
+html[data-theme="dark"] .text-pink-700,
+html[data-theme="dark"] .text-pink-800,
+html[data-theme="dark"] .text-pink-900 {
+  color: #E879F9 !important;
 }
 
 html[data-theme="dark"] .border-slate-100,
@@ -2826,6 +3089,67 @@ html[data-theme="dark"] .border-gray-100,
 html[data-theme="dark"] .border-gray-200,
 html[data-theme="dark"] .border-gray-300 {
   border-color: #263558 !important;
+}
+
+/* Shared Injected Sections & Inline Pill Links in Dark Mode */
+html[data-theme="dark"] #peps-op-complete-mesh,
+html[data-theme="dark"] #peps-statut2024-aps-mesh,
+html[data-theme="dark"] #peps-apsa-pillar-mesh,
+html[data-theme="dark"] #peps-rules-qa-mesh,
+html[data-theme="dark"] #profeps-human-field-experience,
+html[data-theme="dark"] #peps-embed-backlink-box,
+html[data-theme="dark"] #peps-eeat-author-card,
+html[data-theme="dark"] #peps-static-150-qa {
+  background: var(--surface) !important;
+  border-color: var(--stone) !important;
+  color: var(--ink) !important;
+}
+
+html[data-theme="dark"] #peps-op-complete-mesh h2,
+html[data-theme="dark"] #peps-statut2024-aps-mesh h2,
+html[data-theme="dark"] #peps-apsa-pillar-mesh h2,
+html[data-theme="dark"] #peps-rules-qa-mesh h2,
+html[data-theme="dark"] #profeps-human-field-experience h2,
+html[data-theme="dark"] #peps-embed-backlink-box h2,
+html[data-theme="dark"] #peps-eeat-author-card strong {
+  color: var(--ink) !important;
+}
+
+html[data-theme="dark"] #peps-op-complete-mesh a[style*="background:#fff"],
+html[data-theme="dark"] #peps-statut2024-aps-mesh a[style*="background:#fff"],
+html[data-theme="dark"] #peps-apsa-pillar-mesh a[style*="background:#fff"],
+html[data-theme="dark"] #peps-rules-qa-mesh a[style*="background:#fff"],
+html[data-theme="dark"] #profeps-crmef-urgency-banner a[style*="background:#fff"],
+html[data-theme="dark"] #profeps-crmef-urgency-banner a[style*="background:#ecfdf5"] {
+  background: var(--surface-elevated) !important;
+  border-color: var(--border-strong) !important;
+  color: var(--ink) !important;
+}
+
+html[data-theme="dark"] [style*="background:#fff\""],
+html[data-theme="dark"] [style*="background:#f8f9fa"],
+html[data-theme="dark"] [style*="background:#f0fdfa"] {
+  background: var(--surface-elevated) !important;
+  color: var(--ink) !important;
+  border-color: var(--stone) !important;
+}
+
+html[data-theme="dark"] .divide-slate-200 > :not([hidden]) ~ :not([hidden]),
+html[data-theme="dark"] [style*="border:1px solid #e2e8f0"],
+html[data-theme="dark"] [style*="border:1.5px solid #cbd5e1"],
+html[data-theme="dark"] [style*="border-top:1px dashed #cbd5e1"],
+html[data-theme="dark"] [style*="border:1px solid #bfdbfe"],
+html[data-theme="dark"] [style*="border:1px solid #bbf7d0"] {
+  border-color: var(--stone) !important;
+}
+
+html[data-theme="dark"] .bg-emerald-600,
+html[data-theme="dark"] .bg-sky-600,
+html[data-theme="dark"] .bg-indigo-600,
+html[data-theme="dark"] .bg-blue-600,
+html[data-theme="dark"] .bg-rose-600,
+html[data-theme="dark"] .bg-fuchsia-600 {
+  color: #FFFFFF !important;
 }
 
 /* ==========================================================================
@@ -3605,6 +3929,152 @@ html[data-theme="dark"] .peps-admin-del-btn {
   align-items: flex-end;
   justify-content: space-between;
   gap: 0.85rem;
+}
+
+/* ==========================================================================
+   7.14 Global Section & Card Alignment Across All Pages (Unified 1140px / 1100px Column)
+   Ensures hero headers, <main>, deep-enrichment, meshes, and community blocks share identical edges
+   ========================================================================== */
+header.vma-hero > .max-w-5xl,
+header.vma-hero > .max-w-4xl,
+section.from-slate-900 > .max-w-5xl,
+section.from-slate-900 > .max-w-4xl,
+section.from-fuchsia-900 > .max-w-7xl,
+section.from-rose-950 > .max-w-7xl,
+.silo-hero-inner,
+.hub-hero-inner,
+.op-hero-inner,
+header.op-svt-hero > .op-svt-container,
+header.op-hg-hero > .op-hg-container,
+header.article-header > .article-header-content,
+.sb-hero-inner,
+section.hero,
+section.qa-hero,
+body:not(.tpl-tool) main.max-w-4xl,
+body:not(.tpl-tool) main.max-w-5xl,
+body:not(.tpl-tool) main.max-w-7xl,
+main.silo-main,
+main.page-shell,
+div.page-shell,
+div.page-wrap,
+.reg2026-wrap,
+main.reg2026-article,
+main.op-svt-container,
+main.op-container,
+main.op-hg-container,
+main.article-container,
+article.article-container,
+main#main-content > article.article-content,
+main.container,
+main.qa-content,
+main.content,
+main.peps-editorial-shell,
+main.article-shell,
+main.wrap-container,
+main.faq-container,
+main.hub-container,
+main.calc-container,
+main.sb-main,
+main.main-content > .container,
+.peps-aligned-stack,
+.peps-crmef-compact-inner,
+.peps-crmef-unified-tabs,
+.atlas-community-section,
+.peps-article-comments-wrap {
+  max-width: 1140px !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+  box-sizing: border-box !important;
+}
+
+/* Keep tpl-tool main calculators (note-main full width, other tools 1140px) aligned cleanly */
+body.tpl-tool main.max-w-5xl,
+body.tpl-tool main.max-w-7xl {
+  max-width: 1140px !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+  box-sizing: border-box !important;
+}
+
+/* Wrapper sections whose inner child carries the visible card */
+body > section[style*="max-width:1140px"],
+body > section[style*="max-width:1180px"],
+body > section[aria-label*="règlement"],
+body > section[aria-label*="règles"],
+body > section[aria-label*="Nouveautés"] {
+  max-width: 1140px !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+  box-sizing: border-box !important;
+}
+
+/* Card-bearing sibling sections directly under <body> or #main-content align flush with inner cards (1100px) */
+body > .peps-deep-enrichment,
+main#main-content > .peps-deep-enrichment,
+body > .peps-related-mesh,
+body > #peps-op-complete-mesh,
+body > #peps-statut2024-aps-mesh,
+body > #peps-apsa-pillar-mesh,
+body > #peps-rules-qa-mesh,
+body > #profeps-crmef-urgency-banner,
+body > #profeps-human-field-experience,
+body > #profeps-atd-complete-matrices,
+body > #peps-embed-backlink-box,
+body > #peps-eeat-author-card,
+body > #peps-static-150-qa,
+body > section[style*="max-width:920px"],
+main#main-content > section[style*="max-width:920px"],
+main#main-content > div[style*="max-width:900px"] {
+  width: calc(100% - 2.5rem) !important;
+  max-width: 1100px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+/* Inside .peps-aligned-stack or container mains, child sections fill 100% of parent width */
+.peps-aligned-stack > .peps-related-mesh,
+.peps-aligned-stack > #peps-embed-backlink-box,
+.peps-aligned-stack > #profeps-crmef-urgency-banner,
+main:not(#main-content) .peps-deep-enrichment,
+main .peps-related-mesh,
+main #peps-op-complete-mesh,
+main #peps-statut2024-aps-mesh,
+main #peps-apsa-pillar-mesh,
+main #peps-rules-qa-mesh,
+main #profeps-crmef-urgency-banner,
+main #profeps-human-field-experience,
+main #profeps-atd-complete-matrices,
+main #peps-embed-backlink-box,
+main #peps-eeat-author-card {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Equal-height side-by-side cards inside grids */
+body:not(.tpl-tool) main .grid,
+.peps-related-mesh .grid,
+.peps-mesh-grid,
+.crmef-trio-maillage,
+.peps-ref-grid,
+.silo-links-grid {
+  align-items: stretch;
+}
+body:not(.tpl-tool) main .grid > a,
+.peps-related-mesh > div > a {
+  height: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
