@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="/css/tailwind-precompiled.min.css?v=20261101">
-  <link rel="stylesheet" href="/assets/site.css?v=20261117">
+  <link rel="stylesheet" href="/assets/site.css?v=20261127">
   <script src="profeps-cmp.js" defer></script>
   <script src="profeps-communaute.js" defer></script>
 
@@ -1327,7 +1327,27 @@
             <button type="button" id="pepsBtnToggleReviewForm" class="btn-atlas-primary peps-nowrap-btn" style="display:none;">Rédiger un avis</button>
           </div>
         </div>
-        <div id="pepsHomeTestimonialsList" class="peps-fb-cards-grid" style="display:none;margin-bottom:1.5rem;"></div>
+        <div id="pepsHomeTestimonialsSliderWrap" class="peps-fb-slider-wrap" style="display:none;" role="region" aria-roledescription="carrousel" aria-label="Témoignages des enseignants">
+          <div class="peps-fb-slider-viewport">
+            <div id="pepsHomeTestimonialsList" class="peps-fb-slider-track" aria-live="polite"></div>
+          </div>
+          <div id="pepsSliderControls" class="peps-fb-slider-controls">
+            <div class="peps-fb-slider-nav-group">
+              <button type="button" id="pepsSliderPrevBtn" class="peps-slider-arrow-btn" aria-label="Avis précédents">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              </button>
+              <button type="button" id="pepsSliderNextBtn" class="peps-slider-arrow-btn" aria-label="Avis suivants">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+              <button type="button" id="pepsSliderPauseBtn" class="peps-slider-pause-btn" aria-pressed="false" aria-label="Mettre en pause le défilement automatique">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg>
+                <span>Pause</span>
+              </button>
+            </div>
+            <div id="pepsSliderDots" class="peps-fb-slider-dots" role="tablist" aria-label="Pages de témoignages"></div>
+            <div id="pepsSliderCounter" class="peps-fb-slider-counter"></div>
+          </div>
+        </div>
         <div id="pepsHomeReviewFormWrap" class="peps-fb-form-card" style="display:block;">
           <form id="pepsHomeReviewForm" novalidate>
             <div class="peps-fb-form-head">
@@ -1372,7 +1392,6 @@
             </div>
             <div id="pepsHomeFormStatus" class="peps-fb-status" role="status" aria-live="polite"></div>
             <div class="peps-fb-form-actions">
-              <button type="button" id="pepsHomeCancelBtn" class="btn-atlas-secondary peps-nowrap-btn" style="display:none;">Annuler</button>
               <button type="submit" id="pepsHomeSubmitBtn" class="btn-atlas-primary peps-nowrap-btn">Publier mon avis</button>
             </div>
           </form>
@@ -1567,7 +1586,7 @@
     </div>
   </footer>
   <!-- PROFEPS_FEEDBACK_SCRIPT_START -->
-  <script src="/assets/profeps-feedback.js?v=20261118" defer></script>
+  <script src="/assets/profeps-feedback.js?v=20261127" defer></script>
   <!-- PROFEPS_FEEDBACK_SCRIPT_END -->
 </body>
 </html>

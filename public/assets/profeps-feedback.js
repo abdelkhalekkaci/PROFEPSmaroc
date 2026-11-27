@@ -226,6 +226,367 @@
   // =========================================================================
   // 1. HOMEPAGE TESTIMONIALS SECTION (ONLY ON index.html)
   // =========================================================================
+  var homeSliderState = {
+    items: [],
+    page: 0,
+    perPage: 3,
+    totalPages: 1,
+    timer: null,
+    userPaused: false,
+    hovered: false,
+    focusedWithin: false,
+    expandedCount: 0,
+    eventsWired: false
+  };
+
+  function getTestimonialsPerPage() {
+    var w = window.innerWidth || document.documentElement.clientWidth || 1200;
+    if (w >= 1024) return 3;
+    if (w >= 640) return 2;
+    return 1;
+  }
+
+  function isSliderAutoBlocked() {
+    return (
+      homeSliderState.userPaused ||
+      homeSliderState.hovered ||
+      homeSliderState.focusedWithin ||
+      homeSliderState.expandedCount > 0 ||
+      document.hidden ||
+      homeSliderState.totalPages <= 1
+    );
+  }
+
+  function updatePauseButtonUi() {
+    var pauseBtn = document.getElementById('pepsSliderPauseBtn');
+    if (!pauseBtn) return;
+    if (homeSliderState.userPaused) {
+      pauseBtn.classList.add('is-paused');
+      pauseBtn.setAttribute('aria-pressed', 'true');
+      pauseBtn.setAttribute('aria-label', 'Reprendre le défilement automatique');
+      pauseBtn.innerHTML =
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="6 4 20 12 6 20 6 4"></polygon></svg>' +
+        '<span>Reprendre</span>';
+    } else {
+      pauseBtn.classList.remove('is-paused');
+      pauseBtn.setAttribute('aria-pressed', 'false');
+      pauseBtn.setAttribute('aria-label', 'Mettre en pause le défilement automatique');
+      pauseBtn.innerHTML =
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg>' +
+        '<span>Pause</span>';
+    }
+  }
+
+  function syncSliderAutoPlay() {
+    if (homeSliderState.timer) {
+      clearInterval(homeSliderState.timer);
+      homeSliderState.timer = null;
+    }
+    updatePauseButtonUi();
+    if (!isSliderAutoBlocked()) {
+      homeSliderState.timer = setInterval(function () {
+        goToTestimonialsSlide(homeSliderState.page + 1, true);
+      }, 6000);
+    }
+  }
+
+  function collapseAllExpandedCards() {
+    var trackEl = document.getElementById('pepsHomeTestimonialsList');
+    if (!trackEl) return;
+    var btns = trackEl.querySelectorAll('.peps-read-more-btn[aria-expanded="true"]');
+    for (var i = 0; i < btns.length; i++) {
+      var btn = btns[i];
+      var wrap = btn.parentNode;
+      var bodyEl = wrap ? wrap.querySelector('.peps-fb-body') : null;
+      if (bodyEl) bodyEl.classList.add('is-clamped');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.textContent = 'Lire la suite';
+    }
+    homeSliderState.expandedCount = 0;
+  }
+
+  function measureTestimonialReadMoreButtons() {
+    var trackEl = document.getElementById('pepsHomeTestimonialsList');
+    if (!trackEl) return;
+    var wraps = trackEl.querySelectorAll('.peps-fb-body-wrap');
+    for (var i = 0; i < wraps.length; i++) {
+      var wrap = wraps[i];
+      var bodyEl = wrap.querySelector('.peps-fb-body');
+      var btn = wrap.querySelector('.peps-read-more-btn');
+      if (!bodyEl || !btn) continue;
+      if (btn.getAttribute('aria-expanded') === 'true') {
+        btn.hidden = false;
+        continue;
+      }
+      bodyEl.classList.add('is-clamped');
+      var isTruncated = bodyEl.scrollHeight > bodyEl.clientHeight + 2;
+      btn.hidden = !isTruncated;
+    }
+  }
+
+  function goToTestimonialsSlide(targetPage, collapseExpanded) {
+    var trackEl = document.getElementById('pepsHomeTestimonialsList');
+    if (!trackEl || homeSliderState.totalPages <= 0) return;
+
+    if (collapseExpanded) {
+      collapseAllExpandedCards();
+    }
+
+    var total = homeSliderState.totalPages;
+    var nextPage = ((targetPage % total) + total) % total;
+    homeSliderState.page = nextPage;
+    trackEl.style.transform = 'translateX(-' + (nextPage * 100) + '%)';
+
+    var dotsWrap = document.getElementById('pepsSliderDots');
+    if (dotsWrap) {
+      var dots = dotsWrap.querySelectorAll('.peps-slider-dot');
+      for (var i = 0; i < dots.length; i++) {
+        var active = i === nextPage;
+        dots[i].classList.toggle('active', active);
+        if (active) dots[i].setAttribute('aria-current', 'true');
+        else dots[i].removeAttribute('aria-current');
+      }
+    }
+
+    var counterEl = document.getElementById('pepsSliderCounter');
+    if (counterEl && homeSliderState.items.length > 0) {
+      var start = nextPage * homeSliderState.perPage + 1;
+      var end = Math.min(homeSliderState.items.length, start + homeSliderState.perPage - 1);
+      counterEl.textContent = start + '–' + end + ' sur ' + homeSliderState.items.length + ' avis';
+    }
+
+    syncSliderAutoPlay();
+  }
+
+  function renderTestimonialsSlider(preserveFirstIndex) {
+    var sliderWrap = document.getElementById('pepsHomeTestimonialsSliderWrap');
+    var trackEl = document.getElementById('pepsHomeTestimonialsList');
+    var controlsEl = document.getElementById('pepsSliderControls');
+    var dotsWrap = document.getElementById('pepsSliderDots');
+    if (!sliderWrap || !trackEl) return;
+
+    var items = homeSliderState.items;
+    if (!items || items.length === 0) {
+      sliderWrap.style.display = 'none';
+      trackEl.innerHTML = '';
+      if (homeSliderState.timer) {
+        clearInterval(homeSliderState.timer);
+        homeSliderState.timer = null;
+      }
+      return;
+    }
+
+    var perPage = getTestimonialsPerPage();
+    var totalPages = Math.max(1, Math.ceil(items.length / perPage));
+    homeSliderState.perPage = perPage;
+    homeSliderState.totalPages = totalPages;
+    homeSliderState.expandedCount = 0;
+
+    if (typeof preserveFirstIndex === 'number' && preserveFirstIndex >= 0) {
+      homeSliderState.page = Math.min(totalPages - 1, Math.floor(preserveFirstIndex / perPage));
+    } else {
+      homeSliderState.page = Math.min(totalPages - 1, Math.max(0, homeSliderState.page));
+    }
+
+    var pagesHtml = '';
+    for (var p = 0; p < totalPages; p++) {
+      var sliceStart = p * perPage;
+      var sliceEnd = Math.min(items.length, sliceStart + perPage);
+      pagesHtml += '<div class="peps-fb-slide-page" role="group" aria-roledescription="slide" aria-label="Groupe ' + (p + 1) + ' sur ' + totalPages + '">';
+      for (var j = sliceStart; j < sliceEnd; j++) {
+        var item = items[j];
+        var metaParts = [];
+        if (item.profession) metaParts.push('<span dir="auto">' + escapeHtml(item.profession) + '</span>');
+        if (item.city) metaParts.push('<span dir="auto">' + escapeHtml(item.city) + '</span>');
+        var dateStr = formatDateHuman(item.createdAtIso, false);
+        if (dateStr) metaParts.push('<span dir="ltr">' + escapeHtml(dateStr) + '</span>');
+
+        pagesHtml +=
+          '<article class="peps-fb-card" data-fb-id="' + escapeHtml(item.id) + '">' +
+            '<div class="peps-fb-card-top">' +
+              '<div>' +
+                '<strong class="peps-fb-author" dir="auto">' + escapeHtml(item.name) + '</strong>' +
+                (metaParts.length > 0
+                  ? '<div class="peps-fb-meta">' + metaParts.join(' <span aria-hidden="true">·</span> ') + '</div>'
+                  : '') +
+              '</div>' +
+              renderStarsSvg(Number(item.rating) || 5) +
+            '</div>' +
+            '<div class="peps-fb-body-wrap">' +
+              '<p class="peps-fb-body is-clamped" dir="auto">' + escapeHtml(item.comment) + '</p>' +
+              '<button type="button" class="peps-read-more-btn" aria-expanded="false" hidden>Lire la suite</button>' +
+            '</div>' +
+            '<div class="peps-fb-card-foot">' +
+              '<button type="button" class="peps-report-btn" data-report-type="testimonial" data-report-id="' + escapeHtml(item.id) + '">Signaler</button>' +
+            '</div>' +
+          '</article>';
+      }
+      pagesHtml += '</div>';
+    }
+
+    sliderWrap.style.display = 'block';
+    trackEl.innerHTML = pagesHtml;
+
+    var readMoreBtns = trackEl.querySelectorAll('.peps-read-more-btn');
+    for (var b = 0; b < readMoreBtns.length; b++) {
+      (function (btn) {
+        btn.addEventListener('click', function () {
+          var wrap = btn.parentNode;
+          var bodyEl = wrap ? wrap.querySelector('.peps-fb-body') : null;
+          if (!bodyEl) return;
+          var willExpand = btn.getAttribute('aria-expanded') !== 'true';
+          if (willExpand) {
+            bodyEl.classList.remove('is-clamped');
+            btn.setAttribute('aria-expanded', 'true');
+            btn.textContent = 'Réduire';
+          } else {
+            bodyEl.classList.add('is-clamped');
+            btn.setAttribute('aria-expanded', 'false');
+            btn.textContent = 'Lire la suite';
+          }
+          homeSliderState.expandedCount = trackEl.querySelectorAll('.peps-read-more-btn[aria-expanded="true"]').length;
+          syncSliderAutoPlay();
+        });
+      })(readMoreBtns[b]);
+    }
+
+    if (controlsEl) {
+      controlsEl.style.display = totalPages > 1 ? 'flex' : 'none';
+    }
+
+    if (dotsWrap) {
+      var dotsHtml = '';
+      if (totalPages > 1) {
+        for (var d = 0; d < totalPages; d++) {
+          dotsHtml +=
+            '<button type="button" class="peps-slider-dot' +
+            (d === homeSliderState.page ? ' active' : '') +
+            '" data-slide-page="' + d + '" aria-label="Afficher le groupe ' + (d + 1) + ' sur ' + totalPages + '"' +
+            (d === homeSliderState.page ? ' aria-current="true"' : '') +
+            '></button>';
+        }
+      }
+      dotsWrap.innerHTML = dotsHtml;
+      var dotBtns = dotsWrap.querySelectorAll('.peps-slider-dot');
+      for (var k = 0; k < dotBtns.length; k++) {
+        (function (dotBtn) {
+          dotBtn.addEventListener('click', function () {
+            var idx = Number(dotBtn.getAttribute('data-slide-page')) || 0;
+            goToTestimonialsSlide(idx, true);
+          });
+        })(dotBtns[k]);
+      }
+    }
+
+    wireReportAndDeleteButtons(trackEl, function () {
+      loadHomepageTestimonials(false);
+    });
+    goToTestimonialsSlide(homeSliderState.page, false);
+
+    if (typeof window.requestAnimationFrame === 'function') {
+      window.requestAnimationFrame(measureTestimonialReadMoreButtons);
+    } else {
+      measureTestimonialReadMoreButtons();
+    }
+  }
+
+  function wireTestimonialsSliderEvents() {
+    if (homeSliderState.eventsWired) return;
+    var sliderWrap = document.getElementById('pepsHomeTestimonialsSliderWrap');
+    if (!sliderWrap) return;
+    homeSliderState.eventsWired = true;
+
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      homeSliderState.userPaused = true;
+    }
+
+    var prevBtn = document.getElementById('pepsSliderPrevBtn');
+    var nextBtn = document.getElementById('pepsSliderNextBtn');
+    var pauseBtn = document.getElementById('pepsSliderPauseBtn');
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function () {
+        goToTestimonialsSlide(homeSliderState.page - 1, true);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function () {
+        goToTestimonialsSlide(homeSliderState.page + 1, true);
+      });
+    }
+    if (pauseBtn) {
+      pauseBtn.addEventListener('click', function () {
+        homeSliderState.userPaused = !homeSliderState.userPaused;
+        syncSliderAutoPlay();
+      });
+    }
+
+    sliderWrap.addEventListener('mouseenter', function () {
+      homeSliderState.hovered = true;
+      syncSliderAutoPlay();
+    });
+    sliderWrap.addEventListener('mouseleave', function () {
+      homeSliderState.hovered = false;
+      syncSliderAutoPlay();
+    });
+    sliderWrap.addEventListener('focusin', function () {
+      homeSliderState.focusedWithin = true;
+      syncSliderAutoPlay();
+    });
+    sliderWrap.addEventListener('focusout', function (e) {
+      if (!e.relatedTarget || !sliderWrap.contains(e.relatedTarget)) {
+        homeSliderState.focusedWithin = false;
+        syncSliderAutoPlay();
+      }
+    });
+
+    sliderWrap.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goToTestimonialsSlide(homeSliderState.page - 1, true);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        goToTestimonialsSlide(homeSliderState.page + 1, true);
+      }
+    });
+
+    var touchStartX = 0;
+    var touchStartY = 0;
+    sliderWrap.addEventListener('touchstart', function (e) {
+      if (!e.touches || !e.touches[0]) return;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    sliderWrap.addEventListener('touchend', function (e) {
+      if (!e.changedTouches || !e.changedTouches[0] || homeSliderState.totalPages <= 1) return;
+      var dx = e.changedTouches[0].clientX - touchStartX;
+      var dy = e.changedTouches[0].clientY - touchStartY;
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+        if (dx < 0) goToTestimonialsSlide(homeSliderState.page + 1, true);
+        else goToTestimonialsSlide(homeSliderState.page - 1, true);
+      }
+    }, { passive: true });
+
+    document.addEventListener('visibilitychange', function () {
+      syncSliderAutoPlay();
+    });
+
+    var resizeTimer = null;
+    window.addEventListener('resize', function () {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        if (!homeSliderState.items || homeSliderState.items.length === 0) return;
+        var nextPerPage = getTestimonialsPerPage();
+        if (nextPerPage !== homeSliderState.perPage) {
+          var firstIdx = homeSliderState.page * homeSliderState.perPage;
+          renderTestimonialsSlider(firstIdx);
+        } else {
+          measureTestimonialReadMoreButtons();
+        }
+      }, 150);
+    });
+  }
+
   function mountHomepageTestimonials() {
     var existingSection = document.getElementById('peps-home-testimonials');
     if (existingSection && existingSection.getAttribute('data-peps-fb-mounted') === '1') return;
@@ -252,10 +613,30 @@
           '</div>' +
         '</div>' +
 
-        '<!-- Received Testimonials List (hidden when 0 reviews) -->' +
-        '<div id="pepsHomeTestimonialsList" class="peps-fb-cards-grid" style="display:none;margin-bottom:1.5rem;"></div>' +
+        '<!-- Testimonials Carousel (3 visible on desktop, 2 on tablet, 1 on mobile) -->' +
+        '<div id="pepsHomeTestimonialsSliderWrap" class="peps-fb-slider-wrap" style="display:none;" role="region" aria-roledescription="carrousel" aria-label="Témoignages des enseignants">' +
+          '<div class="peps-fb-slider-viewport">' +
+            '<div id="pepsHomeTestimonialsList" class="peps-fb-slider-track" aria-live="polite"></div>' +
+          '</div>' +
+          '<div id="pepsSliderControls" class="peps-fb-slider-controls">' +
+            '<div class="peps-fb-slider-nav-group">' +
+              '<button type="button" id="pepsSliderPrevBtn" class="peps-slider-arrow-btn" aria-label="Avis précédents">' +
+                '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>' +
+              '</button>' +
+              '<button type="button" id="pepsSliderNextBtn" class="peps-slider-arrow-btn" aria-label="Avis suivants">' +
+                '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>' +
+              '</button>' +
+              '<button type="button" id="pepsSliderPauseBtn" class="peps-slider-pause-btn" aria-pressed="false" aria-label="Mettre en pause le défilement automatique">' +
+                '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg>' +
+                '<span>Pause</span>' +
+              '</button>' +
+            '</div>' +
+            '<div id="pepsSliderDots" class="peps-fb-slider-dots" role="tablist" aria-label="Pages de témoignages"></div>' +
+            '<div id="pepsSliderCounter" class="peps-fb-slider-counter"></div>' +
+          '</div>' +
+        '</div>' +
 
-        '<!-- Review Form on Homepage (shown directly when 0 reviews exist, or toggled via Rédiger un avis) -->' +
+        '<!-- Permanent Review Form Below Slider -->' +
         '<div id="pepsHomeReviewFormWrap" class="peps-fb-form-card" style="display:block;">' +
           '<form id="pepsHomeReviewForm" novalidate>' +
             '<div class="peps-fb-form-head">' +
@@ -298,7 +679,6 @@
             '</div>' +
             '<div id="pepsHomeFormStatus" class="peps-fb-status" role="status" aria-live="polite"></div>' +
             '<div class="peps-fb-form-actions">' +
-              '<button type="button" id="pepsHomeCancelBtn" class="btn-atlas-secondary peps-nowrap-btn" style="display:none;">Annuler</button>' +
               '<button type="submit" id="pepsHomeSubmitBtn" class="btn-atlas-primary peps-nowrap-btn">Publier mon avis</button>' +
             '</div>' +
           '</form>' +
@@ -312,33 +692,20 @@
     var selectedRating = 0;
     var formOpenedAt = Date.now();
     var formWrap = document.getElementById('pepsHomeReviewFormWrap');
-    var toggleBtn = document.getElementById('pepsBtnToggleReviewForm');
-    var cancelBtn = document.getElementById('pepsHomeCancelBtn');
+    var jumpBtn = document.getElementById('pepsBtnToggleReviewForm');
     var commentInput = document.getElementById('pepsHomeComment');
     var charCount = document.getElementById('pepsHomeCharCount');
 
-    function openHomeForm() {
-      if (!formOpenedAt) formOpenedAt = Date.now();
-      formWrap.style.display = 'block';
-      toggleBtn.textContent = 'Fermer le formulaire';
-      var nameEl = document.getElementById('pepsHomeName');
-      if (nameEl) nameEl.focus();
+    if (jumpBtn && formWrap) {
+      jumpBtn.addEventListener('click', function () {
+        formWrap.style.display = 'block';
+        formWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(function () {
+          var nameEl = document.getElementById('pepsHomeName');
+          if (nameEl) nameEl.focus({ preventScroll: true });
+        }, 350);
+      });
     }
-
-    function closeHomeForm() {
-      var listEl = document.getElementById('pepsHomeTestimonialsList');
-      if (listEl && listEl.querySelector('.peps-fb-card')) {
-        formWrap.style.display = 'none';
-        toggleBtn.textContent = 'Rédiger un avis';
-      }
-    }
-
-    toggleBtn.addEventListener('click', function () {
-      if (formWrap.style.display === 'none') openHomeForm();
-      else closeHomeForm();
-    });
-
-    cancelBtn.addEventListener('click', closeHomeForm);
 
     if (commentInput && charCount) {
       commentInput.addEventListener('input', function () {
@@ -414,11 +781,10 @@
             selectedRating = 0;
             resetStarPicker('pepsHomeStarPicker', 'pepsHomeStarHint');
             setStatusMessage(statusEl, 'success', 'Merci ! Votre avis a été publié avec succès.');
-            loadHomepageTestimonials();
+            loadHomepageTestimonials(true);
             setTimeout(function () {
-              closeHomeForm();
               setStatusMessage(statusEl, '', '');
-            }, 1800);
+            }, 3500);
           })
           .catch(function () {
             submitBtn.disabled = false;
@@ -428,31 +794,39 @@
       }, waitBeforeSend);
     });
 
-    loadHomepageTestimonials();
+    wireTestimonialsSliderEvents();
+    loadHomepageTestimonials(true);
   }
 
-  function loadHomepageTestimonials() {
-    var listEl = document.getElementById('pepsHomeTestimonialsList');
+  function loadHomepageTestimonials(resetToFirstPage) {
+    var sliderWrap = document.getElementById('pepsHomeTestimonialsSliderWrap');
+    var trackEl = document.getElementById('pepsHomeTestimonialsList');
     var avgWrap = document.getElementById('pepsHomeAvgWrap');
     var formWrap = document.getElementById('pepsHomeReviewFormWrap');
-    var toggleBtn = document.getElementById('pepsBtnToggleReviewForm');
-    var cancelBtn = document.getElementById('pepsHomeCancelBtn');
-    if (!listEl) return;
+    var jumpBtn = document.getElementById('pepsBtnToggleReviewForm');
+    if (!trackEl) return;
 
     fetch('/api/feedback?type=testimonials')
       .then(function (r) { return r.json(); })
       .then(function (data) {
         var items = (data && Array.isArray(data.items)) ? data.items : [];
+        homeSliderState.items = items;
+        if (resetToFirstPage) homeSliderState.page = 0;
+
+        if (formWrap) formWrap.style.display = 'block';
+
         if (items.length === 0) {
           if (avgWrap) {
             avgWrap.style.display = 'none';
             avgWrap.innerHTML = '';
           }
-          listEl.style.display = 'none';
-          listEl.innerHTML = '';
-          if (formWrap) formWrap.style.display = 'block';
-          if (toggleBtn) toggleBtn.style.display = 'none';
-          if (cancelBtn) cancelBtn.style.display = 'none';
+          if (sliderWrap) sliderWrap.style.display = 'none';
+          trackEl.innerHTML = '';
+          if (jumpBtn) jumpBtn.style.display = 'none';
+          if (homeSliderState.timer) {
+            clearInterval(homeSliderState.timer);
+            homeSliderState.timer = null;
+          }
           return;
         }
 
@@ -474,47 +848,18 @@
           }
         }
 
-        var html = '';
-        for (var j = 0; j < items.length; j++) {
-          var item = items[j];
-          var metaParts = [];
-          if (item.profession) metaParts.push(escapeHtml(item.profession));
-          if (item.city) metaParts.push(escapeHtml(item.city));
-          var dateStr = formatDateHuman(item.createdAtIso, false);
-          if (dateStr) metaParts.push(dateStr);
-
-          html +=
-            '<article class="peps-fb-card" data-fb-id="' + escapeHtml(item.id) + '">' +
-              '<div class="peps-fb-card-top">' +
-                '<div>' +
-                  '<strong class="peps-fb-author">' + escapeHtml(item.name) + '</strong>' +
-                  (metaParts.length > 0
-                    ? '<div class="peps-fb-meta">' + metaParts.join(' <span aria-hidden="true">·</span> ') + '</div>'
-                    : '') +
-                '</div>' +
-                renderStarsSvg(Number(item.rating) || 5) +
-              '</div>' +
-              '<p class="peps-fb-body">' + escapeHtml(item.comment) + '</p>' +
-              '<div class="peps-fb-card-foot">' +
-                '<button type="button" class="peps-report-btn" data-report-type="testimonial" data-report-id="' + escapeHtml(item.id) + '">Signaler</button>' +
-              '</div>' +
-            '</article>';
+        if (jumpBtn) {
+          jumpBtn.style.display = 'inline-flex';
+          jumpBtn.textContent = 'Rédiger un avis';
         }
-        listEl.style.display = 'grid';
-        listEl.innerHTML = html;
-        if (toggleBtn) {
-          toggleBtn.style.display = 'inline-flex';
-          toggleBtn.textContent = (formWrap && formWrap.style.display === 'block') ? 'Fermer le formulaire' : 'Rédiger un avis';
-        }
-        if (cancelBtn) cancelBtn.style.display = 'inline-flex';
-        wireReportAndDeleteButtons(listEl, loadHomepageTestimonials);
+        renderTestimonialsSlider();
       })
       .catch(function () {
-        listEl.style.display = 'none';
-        listEl.innerHTML = '';
+        homeSliderState.items = [];
+        if (sliderWrap) sliderWrap.style.display = 'none';
+        trackEl.innerHTML = '';
         if (formWrap) formWrap.style.display = 'block';
-        if (toggleBtn) toggleBtn.style.display = 'none';
-        if (cancelBtn) cancelBtn.style.display = 'none';
+        if (jumpBtn) jumpBtn.style.display = 'none';
       });
   }
 
